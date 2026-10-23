@@ -72,7 +72,58 @@ namespace FantasyCards.SmokeTests
             { AssertArtCrops(); AssertHandNames(savedBattle); });
             Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var after, out error), Is.True, error);
             Assert.That(after, Is.EqualTo(before), "Gallery, selection, resizing, and captures must not alter battle state or RNG.");
+
+            SmokeUi.Click("지형 전개");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
+                5, "Terrain presentation must release the input lock.");
+            SmokeUi.Click("별길의 정찰자"); yield return null;
+            var targetLane = GameObject.Find("Lane 0 0");
+            Assert.That(targetLane, Is.Not.Null, "The actual first friendly battlefield lane must exist.");
+            var place = targetLane.GetComponent<Button>();
+            Assert.That(place.IsActive() && place.IsInteractable(), Is.True);
+            place.onClick.Invoke(); // The same lane callback used by real pointer placement.
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
+                5, "Unit presentation must release the input lock.");
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var placed, out error), Is.True, error);
+            var placedBattle = JsonUtility.FromJson<BattleState>(placed);
+            Assert.That(placedBattle.players[0].AtLane(0)?.definitionId, Is.EqualTo("dawn_scout"));
+            Assert.That(placedBattle.players[0].hand.Count, Is.EqualTo(savedBattle.players[0].hand.Count - 2));
+            Assert.That(placedBattle.players[0].dawn, Is.EqualTo(0));
+            Assert.That(placedBattle.randomState, Is.EqualTo(savedBattle.randomState), "Terrain and unit deployment must not consume coin RNG.");
+            foreach (var viewport in new[] { new Vector2Int(693, 390), new Vector2Int(844, 390), new Vector2Int(1280, 720), new Vector2Int(1920, 1080) })
+            {
+                yield return SmokeUi.Capture("FantasyCards", "15-unit-lane-" + viewport.x + "x" + viewport.y, viewport.x, viewport.y, () =>
+                { AssertLaneUnitLabels(placedBattle); AssertHandNames(placedBattle); AssertArtCrops(); });
+            }
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var placedAfter, out error), Is.True, error);
+            Assert.That(placedAfter, Is.EqualTo(placed), "Unit layout and capture must not change the saved battle state.");
             LogAssert.NoUnexpectedReceived();
+        }
+        static void AssertLaneUnitLabels(BattleState savedBattle)
+        {
+            for (int owner = 0; owner < savedBattle.players.Count; owner++)
+            foreach (var unit in savedBattle.players[owner].units)
+            {
+                var lane = GameObject.Find("Lane " + owner + " " + unit.lane);
+                Assert.That(lane, Is.Not.Null);
+                var definition = CardCatalog.Get(unit.definitionId);
+                var labels = lane.GetComponentsInChildren<TMP_Text>();
+                var expected = new[] { definition.name, "공격 " + (definition.attack + unit.bonusPower) + "  생명 " + (definition.health - unit.damage),
+                    unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : null };
+                foreach (var value in expected.Where(value => value != null))
+                {
+                    var matches = labels.Where(text => text.text == value).ToArray();
+                    Assert.That(matches.Length, Is.EqualTo(1), "Actual battlefield lane must contain " + value);
+                    AssertReadableLabel(matches[0]);
+                }
+                // Check the extra coin badge whenever the small two-line layout is active.
+                var canvas = lane.GetComponentInParent<Canvas>().rootCanvas;
+                if (canvas.pixelRect.height < 600)
+                {
+                    var coin = labels.SingleOrDefault(text => text.text == "코인 " + (savedBattle.rules.baseCoins + unit.extraCoins));
+                    Assert.That(coin, Is.Not.Null); AssertReadableLabel(coin);
+                }
+            }
         }
         static void AssertHandNames(BattleState savedBattle)
         {

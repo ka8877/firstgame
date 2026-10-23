@@ -225,16 +225,34 @@ namespace FantasyCards.Presentation
                 int lane = i; var unit = s.players[owner].AtLane(i); float left = start + i * span / s.rules.unitLanes, right = left + span / s.rules.unitLanes - .012f;
                 bool target = IsLegalLane(owner, lane);
                 var panel = Panel(root, left, bottom, right, top, new Color(.025f, .045f, .075f, target ? .88f : .65f));
+                panel.gameObject.name = "Lane " + owner + " " + lane;
                 Frame(panel, target ? gold : new Color(.40f, .48f, .58f, .55f), target ? 2 : 1);
                 if (unit == null) Text(panel, "전장 " + (i + 1) + "  /  " + (target ? "여기에 배치" : "비어 있음"), .05f, .14f, .95f, .86f, Compact ? 24 : 22, target ? gold : new Color(.55f, .62f, .70f), TextAlignmentOptions.Center);
                 else
                 {
-                    var d = CardCatalog.Get(unit.definitionId); Artwork(panel, d, .01f, .015f, .99f, .985f);
-                    Gradient(panel, .3f, 0, 1, 1, Color.clear, new Color(.014f, .025f, .045f, .98f), true);
-                    Panel(panel, .47f, 0, 1, 1, new Color(.014f, .025f, .045f, .75f));
-                    Text(panel, d.name, .5f, .66f, .97f, .95f, Compact ? 25 : 23, ivory);
-                    Text(panel, "공격 " + (d.attack + unit.bonusPower) + "  생명 " + (d.health - unit.damage), .5f, .37f, .97f, .67f, Compact ? 24 : 21, gold);
-                    Text(panel, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor + " · 코인 " + (s.rules.baseCoins + unit.extraCoins), .5f, .07f, .97f, .36f, Compact ? 23 : 19, unit.exhausted ? Color.gray : teal);
+                    var d = CardCatalog.Get(unit.definitionId);
+                    string stats = "공격 " + (d.attack + unit.bonusPower) + "  생명 " + (d.health - unit.damage);
+                    if (Compact && canvas.pixelRect.height < 600)
+                    {
+                        // A 51px lane fits two full Korean text lines; three short rows clip TMP glyphs.
+                        Artwork(panel, d, .01f, .015f, .295f, .985f);
+                        Panel(panel, .295f, 0, 1, 1, new Color(.014f, .025f, .045f, .96f));
+                        Text(panel, d.name, .31f, .51f, .745f, .98f, 25, ivory);
+                        Text(panel, "코인 " + (s.rules.baseCoins + unit.extraCoins), .765f, .51f, .985f, .98f, 23, teal);
+                        Text(panel, stats, .31f, .02f, .985f, .49f, 24, gold);
+                        var badge = Panel(panel, .01f, .02f, .295f, .47f, new Color(.014f, .025f, .045f, .92f));
+                        Text(badge, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor,
+                            .025f, .05f, .975f, .95f, 23, unit.exhausted ? Color.gray : teal, TextAlignmentOptions.Center);
+                    }
+                    else
+                    {
+                        Artwork(panel, d, .01f, .015f, .99f, .985f);
+                        Gradient(panel, .3f, 0, 1, 1, Color.clear, new Color(.014f, .025f, .045f, .98f), true);
+                        Panel(panel, .47f, 0, 1, 1, new Color(.014f, .025f, .045f, .75f));
+                        Text(panel, d.name, .5f, .66f, .97f, .95f, Compact ? 25 : 23, ivory);
+                        Text(panel, stats, .5f, .37f, .97f, .67f, Compact ? 24 : 21, gold);
+                        Text(panel, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor + " · 코인 " + (s.rules.baseCoins + unit.extraCoins), .5f, .07f, .97f, .36f, Compact ? 23 : 19, unit.exhausted ? Color.gray : teal);
+                    }
                 }
                 panel.GetComponent<Image>().raycastTarget = true;
                 var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, lane));
