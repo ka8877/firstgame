@@ -1,6 +1,10 @@
 {
-  "createdUtc": "2026-10-23T15:04:21.056923+00:00",
+  "createdUtc": "2026-10-23T17:12:01.354912+00:00",
   "publishReady": true,
+  "gameRevisions": {
+    "FantasyCards": "expanded-demo-2026-10-23",
+    "PathOfDawn": "painted-dawn-2026-10-24"
+  },
   "browserProfiles": [
     "Desktop720",
     "Mobile844"
@@ -12,10 +16,16 @@
     ],
     "PathOfDawn": [
       "Desktop720",
-      "Desktop1080",
       "Mobile844"
     ]
   },
+  "browserReportRootsByGame": {
+    "FantasyCards": "Artifacts/Validation/VisualWeb",
+    "PathOfDawn": "Artifacts/Validation/PaintedDawn"
+  },
+  "reusedBrowserEvidence": [
+    "FantasyCards"
+  ],
   "incompleteBrowserRuns": [
     {
       "game": "FantasyCards",
@@ -23,7 +33,7 @@
       "reason": "Full automated run incomplete due to software-rendered input/OCR diagnostics; not a passed run."
     }
   ],
-  "sourceCommit": "5f29ad15ec5984bbc665c1e98d402d0fecf67d45",
+  "sourceCommit": "e0ab91d56d0ae6f12e68be89b57d698862df50dc",
   "sourceDirty": false,
   "files": {
     ".firstgame-web-output": "d87525b91eb75076f285d575a2a24c1299d213a815f95b7ffa6addb065c174c3",
@@ -38,17 +48,17 @@
     "games/fantasy-cards/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
     "games/fantasy-cards/ThirdParty/Music-NOTICE.txt": "9a60786f643e4cbdab2bc1f8eb2e44fc245171b59a11af12be4ea9486de64184",
     "games/fantasy-cards/index.html": "153da2afaab7041f9ff2c40d995d3fb7ed70027fd6540362e3b6b43703a3acb8",
-    "games/path-of-dawn/Build/0333c84843b9bde2c2e805786da049ae.framework.js.unityweb": "58ecb9344b51010530c3cd269d93e6928b8200abf56c6cfe8ab01834a0daf54c",
-    "games/path-of-dawn/Build/13221efb40bfbba26ec422fb59586ed5.loader.js": "df18a1cacd5a5ef86ed702599393d7d768bce7471fdc5575873861a882aa251f",
-    "games/path-of-dawn/Build/33c01bd494bb043e6c52e30b02b91c18.wasm.unityweb": "f419becf40d50e92d557d44a512af3cb0d8d71b0e8b41804f3c5b3e7732df81e",
-    "games/path-of-dawn/Build/7b324058d4412ea2c88a5c91fff0530a.data.unityweb": "17db26df1c97f269df5afbf9cf3335423c27d08faf6f8334b6f439797bbf955a",
+    "games/path-of-dawn/Build/2524e7e5793903c4f01bbf10996a2290.wasm.unityweb": "6e8c103adbdc0dc5bec9d112c34bbebf629c5bfb4a361d6fd1b76ce11f0dd87c",
+    "games/path-of-dawn/Build/2bb8132ff8acbfa36d9e197d94daa3c4.framework.js.unityweb": "72d61b52cb910c9ff9af0c76fa17b491b4cef1d1e409eb0b725092503df364df",
+    "games/path-of-dawn/Build/ed3b77eb51834ca4660087e38feaab83.loader.js": "689d7de682211d3de99304c3177d2176891693bdc24b8bcac32b97ce2130b783",
+    "games/path-of-dawn/Build/f2dfa180b2f3f7857180f06921d796da.data.unityweb": "a1d8944fa45c85d264346b33c4abf2e90bd4fc33eeaaf883191ca2f74bb71917",
     "games/path-of-dawn/ThirdParty/FirstGameKorean-OFL.txt": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
     "games/path-of-dawn/ThirdParty/Ink-LICENCE.md": "ccdb47efceb80452798d5d0d14ab26a11c5edb6267bcd90a4035912937675a29",
     "games/path-of-dawn/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
     "games/path-of-dawn/ThirdParty/Music-NOTICE.txt": "9a60786f643e4cbdab2bc1f8eb2e44fc245171b59a11af12be4ea9486de64184",
     "games/path-of-dawn/ThirdParty/Voice-NOTICE.txt": "fab163eb8f9f6a3a6b4289743b6183f4c0aa427ae67cbd10659a9669e6255cf3",
-    "games/path-of-dawn/index.html": "40a11cc6bc1b3cb9f20fe6c334017328ef095df51de297cb9affdfb09034cbe7",
-    "index.html": "6d5783d7cb032b6c19d90c19aab81da5bc536e96adc18ed7ddad196310c8e896",
+    "games/path-of-dawn/index.html": "ffe64af4dd81c0a49946475beef47d55697b41f9342a0cdd59f995909d561866",
+    "index.html": "e04c60cd60079eed7a73b8534a710dd2ce5192de8cb10f9ae862d9e9b24e10b2",
     "site.css": "0db62e51c8c98f814848719084d979b834c3afd9fcb977f30a2bafbec2305e57"
   }
 }
