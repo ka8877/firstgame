@@ -1,0 +1,50 @@
+{
+  "revision": "painted-dawn-2026-10-24",
+  "tool": "OpenAI image_gen.imagegen",
+  "purpose": "Original complete gameplay stage paintings for the PathOfDawn illustrated 2.5D revision.",
+  "modelVersion": null,
+  "seed": null,
+  "productionMethod": "Each background generated as a new image with a written prompt. Original PNG bytes copied without raster edits, compositing, filtering, or resizing.",
+  "style": "Original luminous hand-painted anime adventure: warm sandstone, turquoise lake, detailed natural foliage, pale gold light and quiet traversable ground.",
+  "assets": [
+    {
+      "id": "shore",
+      "prompt": "Create a beautiful premium hand-painted anime adventure game background, a complete playable Galilee lakeshore courtyard scene with absolutely NO characters or people. Landscape 16:9, largest available resolution. Original polished Japanese-animation fantasy environment art: luminous turquoise lake, warm ivory sandstone, olive green foliage, pale gold sunlight, restrained rose and lavender flowers, sophisticated colored outlines and painterly cel shading, intricate natural material detail, atmospheric depth, elegant and inviting. NOT photorealistic, NOT 3D rendered, NOT low-poly, no geometric oval tree canopies. Camera is a fixed slightly elevated three-quarter front view looking across a courtyard toward the lake, about 25 degrees down, with a low distant horizon around the top third. This is a gameplay stage, not a skyline illustration: the LOWER SIXTY PERCENT is a broad continuous softly textured sandy-and-pale-limestone walkable courtyard. Keep the central area from x=36% to x=78%, y=43% to y=91% spacious, lightly detailed, unobstructed, free of tall props or deep shadows, so full-body character sprites can stand and walk there. A winding pale flagstone path curves from bottom center into the middle courtyard. A small charming ancient Galilee sandstone home occupies the LEFT EDGE and left middle, with carved simple arched doorway, warm plaster, timber awning, terracotta jars and flowering vines; the doorway remains visible and approachable from the central path. Graceful genuinely leafy olive trees and dense small wildflowers frame the far left and upper corners, their shapes natural and finely drawn. The upper right and right middle open to sparkling turquoise water, a tiny moored fishing boat and distant sunlit lakeside village, layered blue-green hills and soft pearly clouds. A low curved stone shoreline lip borders the right far edge of the courtyard, not across the walking area. Add subtle foreground flowers and grasses only in bottom far corners to create cinematic depth without obscuring the playable ground. Warm high morning sunlight from upper left, gentle cool lavender shadows, clear tonal organization, cohesive exquisite anime background painting. No people, no silhouettes, no animals, no text, no letters, no logo, no UI, no frame, no watermark. The result should feel like an expensive finished illustration and a coherent place where a gentle story takes place.",
+      "source": "/workspace/generated_images/exec-d48bddd4-db35-4725-9c73-25ecf26abdd2.png",
+      "destination": "Games/PathOfDawn/Assets/Resources/Art/Painted/shore.png",
+      "transparentBackground": false,
+      "review": "Directly viewed generated original: coherent courtyard, detailed natural trees and flowers, visible sandstone home left, clear central walking area, lake/village/hills right. No visible people, text, UI, watermark, or primitive oval foliage. Proposed actor feet around image y52–71% are on continuous ground.",
+      "status": "generated-and-directly-reviewed",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 3528163,
+      "sha256": "6fc1568bef2cbd64136633f94f174b8c0654d080a121ffefb06c338227e92720",
+      "sourceSha256": "6fc1568bef2cbd64136633f94f174b8c0654d080a121ffefb06c338227e92720",
+      "originalBytesPreserved": true
+    },
+    {
+      "id": "room",
+      "prompt": "Create an exquisite finished hand-painted anime adventure game interior background, the welcoming sandstone room of a modest ancient Galilee lakeside home. Absolutely NO people or characters. Landscape 16:9, largest available resolution. Cohesive premium Japanese-animation fantasy environment painting: warm honey-ivory stone and plaster, turquoise lake light, muted teal textiles, natural olive-green plants, restrained rose and lavender flowers, refined colored outlines, painterly cel shading, intricate believable hand-crafted materials, atmospheric bounced light. NOT photorealistic, NOT a 3D render, NOT faceted or low-poly. Fixed slightly elevated three-quarter front camera, around 25 degrees down, looking across a spacious room. Design this as an actual gameplay stage with the LOWER SIXTY PERCENT an unobstructed continuous pale limestone floor; the wall/floor junction is around y=40%. Keep the middle x=30–79%, y=42–94% completely free of tall furniture, pots, baskets, rails or other obstacles, so illustrated full-body characters can stand and walk there. A beautiful flat low-contrast handwoven rug in faded ivory, teal and terracotta runs across part of the foreground, lying entirely flat with elegant small motifs, no writing. Along the upper LEFT wall only: a low carved wood bench with soft linen cushions, tidy baskets of bread, earthen water jars, a small lamp niche, a shelf of ceramics, hanging bundles of herbs and flowering greenery. Simple graceful warm sandstone arches and limewashed walls have carefully drawn soft wear. At the upper RIGHT, a large open arched doorway or window reveals the bright turquoise lake, distant blue-green hills, white clouds and flowering vines outside; warm sunlight spills diagonally across the empty floor without harsh black shadow. Dark honey-brown timber ceiling beams frame only the top edge. A few pale curtains hang gently at the arch and a small ceramic vase with wildflowers rests near the far left wall. The room feels airy, peaceful, beautiful, intimately lived-in and generous, not a dungeon or empty box. Rich handcrafted detail concentrated in the margins and upper half, clean quiet ground in the center. High quality polished storybook/anime background with realistic spatial coherence and stylized soft brushwork. No people, no silhouettes, no animals, no text, letters, inscriptions, logos, UI, border, or watermark.",
+      "source": "/workspace/generated_images/exec-f7ccb57a-1429-4189-b67a-e8b0e9ccde60.png",
+      "destination": "Games/PathOfDawn/Assets/Resources/Art/Painted/room.png",
+      "transparentBackground": false,
+      "review": "Directly viewed generated original: consistent warm stone and turquoise lake palette, open central floor, detailed bread/ceramics/lamps at margins, flat patterned rug foreground, daylight arch right. No visible people, text, UI, watermark, or hard low-poly shapes.",
+      "status": "generated-and-directly-reviewed",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 3021784,
+      "sha256": "52656c4b8ce9d0381a2895ff79751925b40cf68e3d15345d01e4621f8fa07c9e",
+      "sourceSha256": "52656c4b8ce9d0381a2895ff79751925b40cf68e3d15345d01e4621f8fa07c9e",
+      "originalBytesPreserved": true
+    }
+  ],
+  "limitations": [
+    "Direct image inspection is not a Unity composition or interaction test.",
+    "These are painted backgrounds for a 2.5D view, not navigable full 3D environments or historical reconstructions.",
+    "Tool does not disclose an exact model version or reproducible seed.",
+    "Generated art is a proposed development asset, not a user-approved final illustration."
+  ],
+  "recordedUtc": "2026-10-23T16:18:07.740754+00:00"
+}

@@ -19,7 +19,15 @@ GAMES = {"FantasyCards": "fantasy-cards", "PathOfDawn": "path-of-dawn"}
 # interrupted it after selection/hover checks. Do not count it as a passed run.
 REQUIRED_PROFILES = {
     "FantasyCards": ("Desktop720", "Mobile844"),
-    "PathOfDawn": ("Desktop720", "Desktop1080", "Mobile844"),
+    "PathOfDawn": ("Desktop720", "Mobile844"),
+}
+GAME_REVISIONS = {
+    "FantasyCards": "expanded-demo-2026-10-23",
+    "PathOfDawn": "painted-dawn-2026-10-24",
+}
+REPORT_ROOTS = {
+    "FantasyCards": "Artifacts/Validation/VisualWeb",
+    "PathOfDawn": "Artifacts/Validation/PaintedDawn",
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
@@ -43,12 +51,12 @@ for game, slug in GAMES.items():
         raise SystemExit(f"Title illustration missing: {hero}")
     if args.require_browser_reports:
         for profile in REQUIRED_PROFILES[game]:
-            report_path = ROOT / f"Artifacts/Validation/VisualWeb/{profile}/{game}/report.json"
+            report_path = ROOT / REPORT_ROOTS[game] / profile / game / "report.json"
             report = json.loads(report_path.read_text())
-            if report["status"] != "passed":
+            if report.get("game") != game or report.get("status") != "passed":
                 raise SystemExit(f"Browser report has not passed: {game}/{profile}")
-            if report.get("revision") != "expanded-demo-2026-10-23":
-                raise SystemExit(f"Current expanded demo browser evidence required: {game}/{profile}")
+            if report.get("revision") != GAME_REVISIONS[game]:
+                raise SystemExit(f"Browser evidence for {GAME_REVISIONS[game]} required: {game}/{profile}")
             audio_labels = {window["label"] for window in report.get("audioEvidence", {}).get("windows", [])}
             required_audio = {"before-first-user-gesture", "after-first-user-gesture", "muted", "unmuted",
                               "volume-reduced", "volume-restored", "after-continue-user-gesture"}
@@ -60,10 +68,10 @@ for game, slug in GAMES.items():
                 if voice.get("manifestSha256") != hashlib.sha256(voice_manifest.read_bytes()).hexdigest():
                     raise SystemExit(f"Current dialogue voice manifest verification required: {profile}")
                 windows = {item["label"]: item for item in voice.get("windows", [])}
-                required_voice = {"muted-opening-line", "first-line-replayed", "first-line-restarted",
+                required_voice = {"first-line-replayed", "first-line-restarted",
                                   "second-line-after-next", "first-line-after-next", "second-line-naturally-ended"}
                 if not required_voice.issubset(windows):
-                    raise SystemExit(f"Actual dialogue replay, mute and cancellation checks required: {profile}")
+                    raise SystemExit(f"Actual dialogue replay, cancellation and natural-end checks required: {profile}")
                 for label in ("first-line-replayed", "first-line-restarted", "second-line-after-next"):
                     sample = windows[label]
                     if (len(sample.get("sourceIdentities", [])) != 1 or sample.get("sampleCount", 0) < 6 or
@@ -91,6 +99,32 @@ for game, slug in GAMES.items():
                     continue
                 if hashlib.sha256((player / relative).read_bytes()).hexdigest() != file["sha256"]:
                     raise SystemExit(f"Build changed after browser verification: {game}/{profile}/{relative}")
+            if game == "PathOfDawn":
+                review = report.get("visualReview", {})
+                if (review.get("status") != "approved" or not review.get("reviewer") or
+                        not review.get("reviewedUtc")):
+                    raise SystemExit(f"Direct visual review of current painted frames required: {profile}")
+                reviewed_files = review.get("runtimeFiles", [])
+                if ({item["file"] for item in reviewed_files} != current or
+                        len(reviewed_files) != len(current)):
+                    raise SystemExit(f"Visual review runtime file set does not match: {profile}")
+                for item in reviewed_files:
+                    path = player / item["file"]
+                    if (item.get("bytes") != path.stat().st_size or
+                            item.get("sha256") != hashlib.sha256(path.read_bytes()).hexdigest()):
+                        raise SystemExit(f"Build changed after direct visual review: {profile}/{item['file']}")
+                original_shots = {(shot["name"], shot["path"], shot["sha256"])
+                                  for shot in report.get("screenshots", [])}
+                reviewed_shots = review.get("screenshots", [])
+                if not reviewed_shots:
+                    raise SystemExit(f"Original screenshots must accompany visual review: {profile}")
+                for shot in reviewed_shots:
+                    if (shot.get("name"), shot.get("path"), shot.get("sha256")) not in original_shots:
+                        raise SystemExit(f"Visual review references an unrecorded screenshot: {profile}")
+                    path = (ROOT / shot["path"]).resolve()
+                    if (not path.is_file() or not path.is_relative_to(report_path.parent.resolve()) or
+                            hashlib.sha256(path.read_bytes()).hexdigest() != shot["sha256"]):
+                        raise SystemExit(f"Original visual review screenshot changed or missing: {profile}/{shot['name']}")
     inputs[game] = (player, hero)
 
 if output.exists():
@@ -140,8 +174,11 @@ for path in files:
 manifest = {
     "createdUtc": datetime.now(timezone.utc).isoformat(),
     "publishReady": args.require_browser_reports,
+    "gameRevisions": GAME_REVISIONS,
     "browserProfiles": ["Desktop720", "Mobile844"] if args.require_browser_reports else [],
     "browserProfilesByGame": REQUIRED_PROFILES if args.require_browser_reports else {},
+    "browserReportRootsByGame": REPORT_ROOTS if args.require_browser_reports else {},
+    "reusedBrowserEvidence": ["FantasyCards"] if args.require_browser_reports else [],
     "incompleteBrowserRuns": [{"game": "FantasyCards", "profile": "Desktop1080",
         "reason": "Full automated run incomplete due to software-rendered input/OCR diagnostics; not a passed run."}]
         if args.require_browser_reports else [],

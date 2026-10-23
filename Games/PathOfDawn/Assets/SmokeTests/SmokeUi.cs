@@ -124,6 +124,7 @@ namespace PathOfDawn.SmokeTests
             var oldDistances = canvases.Select(c => c.planeDistance).ToArray();
             var oldTarget = camera.targetTexture;
             var oldAspect = camera.aspect;
+            var oldCullingMask = camera.cullingMask;
             var oldActive = RenderTexture.active;
             var target = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
             Texture2D pixels = null;
@@ -132,13 +133,23 @@ namespace PathOfDawn.SmokeTests
                 target.Create();
                 camera.targetTexture = target;
                 camera.aspect = (float)width / height;
+                // The illustrated runtime uses Overlay UI and intentionally culls the
+                // hidden collision world. Camera-mode capture must include the UI layer.
+                camera.cullingMask |= 1 << 5;
                 foreach (var canvas in canvases)
                 {
                     canvas.renderMode = RenderMode.ScreenSpaceCamera;
                     canvas.worldCamera = camera;
-                    canvas.planeDistance = camera.nearClipPlane + .001f;
+                    // Keep TMP's generated geometry comfortably inside the frustum;
+                    // placing the canvas directly on the near plane can clip text.
+                    canvas.planeDistance = camera.nearClipPlane + .5f;
                 }
-                yield return null; // Allow CanvasScaler and Cinemachine to observe capture dimensions.
+                // Let the actual composition, actor fades, CanvasScaler and camera
+                // settle at the capture dimensions before sampling rendered pixels.
+                yield return new WaitForSecondsRealtime(1f);
+                Canvas.ForceUpdateCanvases();
+                foreach (var text in UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None))
+                    if (text.gameObject.activeInHierarchy) text.ForceMeshUpdate(false, true);
                 Canvas.ForceUpdateCanvases();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
                 Assert.That(UnityEngine.Rendering.RenderPipeline.SupportsRenderRequest(camera, request), Is.True,
@@ -166,6 +177,7 @@ namespace PathOfDawn.SmokeTests
                 RenderTexture.active = oldActive;
                 camera.targetTexture = oldTarget;
                 camera.aspect = oldAspect;
+                camera.cullingMask = oldCullingMask;
                 for (var i = 0; i < canvases.Length; i++)
                 {
                     if (canvases[i] == null) continue;

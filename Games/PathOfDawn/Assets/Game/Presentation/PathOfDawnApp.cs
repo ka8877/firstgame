@@ -12,7 +12,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Playables;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
@@ -26,7 +25,6 @@ namespace PathOfDawn.Presentation
         public TMP_FontAsset KoreanFont;
         public StoryChapter Chapter;
         const string SaveSlot = "path-of-dawn", SaveGame = "path-of-dawn", PortableVersion = "portable-1";
-        static readonly Color SkyColor = new Color(.60f,.78f,.88f);
         readonly Dictionary<string, Transform> actors = new Dictionary<string, Transform>();
         NarrativeSession session;
         NarrativeSaveSlot saves;
@@ -45,9 +43,8 @@ namespace PathOfDawn.Presentation
         BgmPlayer music;
         DialogueVoicePlayer voice;
         AudioSource musicSource;
-        DawnLocomotion travelerMotion;
-        VolumeProfile worldColorProfile;
-        Material runtimeSky;
+        DawnIllustratedStage illustratedStage;
+        GameObject explorationHints;
         InputActionMap input;
         InputAction move, mouseLook, stickLook, interact, menu, memories;
         bool inGame, modal, inIntro, busy;
@@ -80,16 +77,6 @@ namespace PathOfDawn.Presentation
         void OnDestroy()
         {
             input?.Dispose();
-            if (worldColorProfile != null)
-            {
-                foreach (var effect in worldColorProfile.components) Destroy(effect);
-                Destroy(worldColorProfile);
-            }
-            if (runtimeSky != null)
-            {
-                if (RenderSettings.skybox == runtimeSky) RenderSettings.skybox = null;
-                Destroy(runtimeSky);
-            }
         }
         void Start()
         {
@@ -115,7 +102,10 @@ namespace PathOfDawn.Presentation
             if (Chapter != null && (Chapter.contentVersion != NarrativeSession.ContentVersion || Chapter.stableId != "galilee_dawn"))
                 throw new InvalidOperationException("StoryChapter 메타데이터와 실행 콘텐츠 버전이 다릅니다.");
             compiledStory = ink.storyJson; activeSaveSlot = PlayerPrefs.GetString("POD.activeSlot", SaveSlot);
-            CreateSaveSlot(); BuildWorld(); BuildCameras(); BuildAudio(); ShowTitle();
+            CreateSaveSlot(); BuildWorld(); BuildCameras();
+            illustratedStage = gameObject.AddComponent<DawnIllustratedStage>();
+            illustratedStage.Initialize(canvas, actors);
+            BuildAudio(); ShowTitle();
         }
         void CreateSaveSlot() => saves = new NarrativeSaveSlot(new SharedStorage(activeSaveSlot), new UnityCodec());
         void Update()
@@ -124,6 +114,7 @@ namespace PathOfDawn.Presentation
             if (music != null && ((Pointer.current != null && Pointer.current.press.wasPressedThisFrame) ||
                 (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) ||
                 (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))) music.NotifyUserGesture();
+            if (explorationHints != null) explorationHints.SetActive(inGame && !modal && !inIntro);
             if (touchControls != null) touchControls.SetActive(inGame && !modal && !inIntro && TouchInterface);
             if (inGame && !inIntro && menu.WasPressedThisFrame()) { if (modal) CloseModal(); else ShowSettings(); }
             if (inGame && !modal && !inIntro && memories.WasPressedThisFrame()) ShowMemories();
@@ -133,10 +124,9 @@ namespace PathOfDawn.Presentation
             Vector2 look = stickLook.ReadValue<Vector2>() * (100 * Time.deltaTime);
             if (Mouse.current != null && Mouse.current.rightButton.isPressed) look += mouseLook.ReadValue<Vector2>() * .10f;
             if (touchLook != null && touchLook.isActiveAndEnabled) look += touchLook.ConsumeLook() * .10f;
-            yaw += look.x; pitch = Mathf.Clamp(pitch - look.y, -5, 38);
-            pivot.rotation = Quaternion.Euler(pitch, yaw, 0);
+            illustratedStage.SetLook(look);
             var movement = Vector2.ClampMagnitude(move.ReadValue<Vector2>() + (touchMove != null && touchMove.isActiveAndEnabled ? touchMove.Value : Vector2.zero), 1);
-            Vector3 direction = Quaternion.Euler(0, yaw, 0) * new Vector3(movement.x, 0, movement.y);
+            Vector3 direction = new Vector3(movement.x, 0, movement.y);
             if (direction.sqrMagnitude > 1) direction.Normalize();
             var actor = actors["traveler"];
             float turnAllowance = 1;
@@ -152,13 +142,14 @@ namespace PathOfDawn.Presentation
                 (wantedVelocity.sqrMagnitude > planarVelocity.sqrMagnitude ? 7.5f : 11f) * Time.deltaTime);
             if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
             verticalSpeed += Physics.gravity.y * Time.deltaTime;
-            Vector3 previousPosition = actor.position;
             controller.Move((planarVelocity + Vector3.up * verticalSpeed) * Time.deltaTime);
-            // Bounded authored slice; collision walls prevent leaving through geometry gaps.
-            var p = actor.position; p.x = Mathf.Clamp(p.x, -11, 4.2f); p.z = Mathf.Clamp(p.z, -9, 9);
+            // Keep physical movement inside the visible painted floor in each scene.
+            bool shoreFloor = session.World.pointId == "shore";
+            var p = actor.position;
+            p.x = Mathf.Clamp(p.x, shoreFloor ? -8.2f : -11, shoreFloor ? 4.2f : 2.3f);
+            p.z = Mathf.Clamp(p.z, shoreFloor ? -8.7f : -9, 9);
             if (p.y < -2) p = new Vector3(0, .15f, -5);
             if (p != actor.position) { controller.enabled = false; actor.position = p; controller.enabled = true; }
-            travelerMotion?.ObserveMovement(actor.position - previousPosition, Time.deltaTime);
             pivot.position = Vector3.SmoothDamp(pivot.position, actor.position + Vector3.up * 1.1f,
                 ref cameraFollowVelocity, .10f, Mathf.Infinity, Time.deltaTime);
             UpdatePrompt(); if (interact.WasPressedThisFrame()) Interact();
@@ -173,7 +164,6 @@ namespace PathOfDawn.Presentation
         void StopLocomotion()
         {
             planarVelocity = Vector3.zero;
-            travelerMotion?.StopImmediately();
         }
         void OnApplicationPause(bool paused) { if (paused && inGame && session != null) Save(); }
         void OnApplicationQuit() { if (inGame && session != null) Save(); }
@@ -191,7 +181,7 @@ namespace PathOfDawn.Presentation
             if (hud != null) { hud.gameObject.SetActive(false); Destroy(hud.gameObject); }
             ClearScreen(); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(false);
             // Title artwork is its own composition. No stale Cinemachine blend or live actors behind it.
-            worldRoot.SetActive(false); mainCamera.cullingMask = 1 << 5; mainCamera.backgroundColor = DawnUi.Ink; mainCamera.clearFlags = CameraClearFlags.SolidColor;
+            worldRoot.SetActive(false); illustratedStage.SetVisible(false); mainCamera.cullingMask = 0; mainCamera.backgroundColor = DawnUi.Ink; mainCamera.clearFlags = CameraClearFlags.SolidColor;
             ui.Fill(screen, "Title background", DawnUi.Ink);
             ui.Art(screen, "Art/title-hero", 0, 0, 1920, 1080);
             var gradient = ui.Box(screen, "Title readability", 0, 0, 1380, 1080).gameObject.AddComponent<DawnGradient>(); gradient.raycastTarget = false; gradient.SetAllDirty();
@@ -243,7 +233,7 @@ namespace PathOfDawn.Presentation
         void BuildHud()
         {
             if (hud != null) { hud.gameObject.SetActive(false); Destroy(hud.gameObject); }
-            hud = ui.Fill(canvas,"HUD"); hud.SetAsFirstSibling();
+            hud = ui.Fill(canvas,"HUD"); hud.SetAsFirstSibling(); illustratedStage.EnsureBehindHud();
             BuildTouchControls();
             var top = ui.Card(hud,"Top",32,28,1856,128,DawnUi.Ink);
             ui.Box(top,"Chapter accent",13,35,3,58,DawnUi.Gold);
@@ -251,7 +241,8 @@ namespace PathOfDawn.Presentation
             ui.Button(top,"기억 / 회귀 [M]",1080,19,300,90,ShowMemories);
             ui.Button(top,"저장",1398,19,156,90,() => { if (Save()) Notify("여정을 저장했습니다."); });
             ui.Button(top,"설정 [Esc]",1572,19,260,90,ShowSettings);
-            var interaction = ui.Card(hud,"Interaction backdrop",380,916,1150,110,DawnUi.Ink);
+            var hints = ui.Fill(hud, "Exploration hints"); explorationHints = hints.gameObject;
+            var interaction = ui.Card(hints,"Interaction backdrop",380,916,1150,110,DawnUi.Ink);
             interaction.GetComponent<Image>().raycastTarget = false;
             prompt = ui.Text(interaction,"",28,16,1094,82,30); prompt.alignment = TextAlignmentOptions.MidlineLeft;
             notificationBackdrop = ui.Card(hud,"Notification backdrop",380,800,1150,100,DawnUi.Ink);
@@ -260,15 +251,15 @@ namespace PathOfDawn.Presentation
             notificationBackdrop.gameObject.SetActive(false);
             if (TouchInterface)
             {
-                var guideBackdrop = ui.Card(hud,"Touch guide backdrop",370,1030,1450,50,DawnUi.Ink);
+                var guideBackdrop = ui.Card(hints,"Touch guide backdrop",370,1030,1450,50,DawnUi.Ink);
                 guideBackdrop.GetComponent<Image>().raycastTarget = false;
-                ui.Text(hud,"왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기",380,1012,1430,66,34).alignment = TextAlignmentOptions.BottomLeft;
+                ui.Text(hints,"왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기",380,1012,1430,66,34).alignment = TextAlignmentOptions.BottomLeft;
             }
             else
             {
-                var guideBackdrop = ui.Card(hud,"Desktop guide backdrop",370,1030,1450,50,DawnUi.Ink);
+                var guideBackdrop = ui.Card(hints,"Desktop guide backdrop",370,1030,1450,50,DawnUi.Ink);
                 guideBackdrop.GetComponent<Image>().raycastTarget = false;
-                ui.Text(hud,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
+                ui.Text(hints,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 풍경 둘러보기   ·   E: 대화·조사",380,1038,1430,40,20);
             }
             RefreshObjective();
         }
@@ -292,7 +283,7 @@ namespace PathOfDawn.Presentation
         void RefreshObjective()
         {
             if (objective == null || session == null) return;
-            string goal = session.World.pointId == "shore" ? "예수님 곁으로 다가가 대화하세요." : session.World.pointId == "room" ? "왼쪽 석조 방에서 미리암과 이야기하세요." : "발견한 길을 돌아보고 다른 선택을 시도하세요.";
+            string goal = session.World.pointId == "shore" ? "예수님 곁으로 다가가 대화하세요." : session.World.pointId == "room" ? "미리암에게 다가가 이야기하세요." : "발견한 길을 돌아보고 다른 선택을 시도하세요.";
             objective.text = "갈릴리 · 소지품 " + session.World.inventory.Count + " · 미리암의 신뢰 " + session.Trust + "\n" + goal;
         }
         void UpdatePrompt()
@@ -327,7 +318,8 @@ namespace PathOfDawn.Presentation
         {
             ClearScreen();
             ui.Fill(screen, "Dialogue input shield", new Color(0,0,0,0));
-            var panel = ui.Card(screen,"Dialogue",60,570,1800,470,DawnUi.Ink);
+            bool reading = lineIndex < activeLines.Count;
+            var panel = ui.Card(screen,"Dialogue",reading ? 100 : 60,reading ? 660 : 570,reading ? 1720 : 1800,reading ? 380 : 470,new Color(.035f,.065f,.11f,.94f));
             if (lineIndex < activeLines.Count)
             {
                 string fullLine = activeLines[lineIndex], line = fullLine, speaker = "여행자의 기록", portrait = "traveler";
@@ -335,19 +327,19 @@ namespace PathOfDawn.Presentation
                 if (line.StartsWith("미리암: ", StringComparison.Ordinal)) { speaker = "미리암"; portrait = "miriam"; accent = DawnUi.Teal; line = line.Substring(5); }
                 else if (line.StartsWith("예수님: ", StringComparison.Ordinal)) { speaker = "예수님"; portrait = "jesus"; accent = new Color(1,.68f,.46f); line = line.Substring(5); }
                 else if (line.StartsWith("당신: ", StringComparison.Ordinal)) { speaker = "여행자"; line = line.Substring(4); }
-                ui.Card(panel,"Portrait field",18,18,318,434,new Color(.08f+accent.r*.065f,.12f+accent.g*.08f,.20f+accent.b*.08f,1));
-                ui.Art(panel,"Art/portrait-"+portrait,22,20,310,430,false);
-                ui.Box(panel,"Speaker accent",370,38,5,64,accent);
-                ui.Text(panel,speaker,397,29,650,80,33,accent);
-                ui.Text(panel,session.World.pointId == "shore" ? "갈릴리 · 호숫가" : "갈릴리 · 석조 방",1190,40,550,65,23,new Color(.7f,.8f,.83f));
-                ui.Text(panel,line,378,128,1370,222,35);
+                illustratedStage.SetSpeaker(portrait);
+                ui.Box(panel,"Speaker accent",42,24,4,42,accent);
+                ui.Text(panel,speaker,64,14,700,58,30,accent);
+                ui.Text(panel,illustratedStage.CurrentScene == "shore" ? "갈릴리 · 호숫가" : "갈릴리 · 석조 방",1130,24,530,45,22,new Color(.76f,.83f,.83f));
+                ui.Rule(panel,44,77,1630,new Color(.98f,.85f,.58f,.35f));
+                ui.Text(panel,line,44,96,1632,160,34);
                 dialogueAdvance = () => { lineIndex++; RenderDialogue(); };
-                ui.Primary(panel,lineIndex+1 < activeLines.Count ? "다음 대사 [E]" : session.Choices.Count > 0 ? "선택하기 [E]" : "계속 [E]",1300,355,450,90,() => dialogueAdvance?.Invoke());
-                ui.Text(panel,(lineIndex+1).ToString("00")+"  /  "+activeLines.Count.ToString("00"),385,384,250,50,24,new Color(.7f,.8f,.83f));
+                ui.Primary(panel,lineIndex+1 < activeLines.Count ? "다음 대사 [E]" : session.Choices.Count > 0 ? "선택하기 [E]" : "계속 [E]",1230,278,440,80,() => dialogueAdvance?.Invoke());
+                ui.Text(panel,(lineIndex+1).ToString("00")+"  /  "+activeLines.Count.ToString("00"),44,294,240,48,23,new Color(.7f,.8f,.83f));
                 if (voice != null && voice.PlayLine(fullLine))
                 {
-                    ui.Text(panel,"대사 음성",660,383,260,50,23,DawnUi.Teal);
-                    ui.Button(panel,"다시 듣기",960,355,300,90,() => voice.Replay(),!voice.Muted);
+                    ui.Text(panel,"대사 음성",310,294,260,48,23,DawnUi.Teal);
+                    ui.Button(panel,"다시 듣기",920,278,280,80,() => voice.Replay(),!voice.Muted);
                 }
                 return;
             }
@@ -485,13 +477,19 @@ namespace PathOfDawn.Presentation
             controller.enabled=true; verticalSpeed=0; StopLocomotion(); cameraFollowVelocity=Vector3.zero;
             pivot.position=actors["traveler"].position+Vector3.up*1.1f;
             sharedBasket.SetActive(session.World.basketShared); shelterRug.SetActive(session.World.shelterPrepared); connectionMarker.SetActive(session.World.peopleConnected);
+            string scene = session.World.pointId == "ending"
+                ? (session.World.shelterPrepared ? "room" : "shore") : session.World.pointId;
+            illustratedStage.SetScene(scene);
+            actors["jesus"].GetComponent<CapsuleCollider>().enabled = scene == "shore";
+            illustratedStage.SetWorldFlags(session.World.basketShared, session.World.shelterPrepared, session.World.peopleConnected);
+            illustratedStage.ResetLook();
             playCamera.PreviousStateIsValid=false; dialogueCamera.PreviousStateIsValid=false;
         }
-        void RevealWorld() { worldRoot.SetActive(true); mainCamera.cullingMask = -1; mainCamera.backgroundColor = SkyColor; mainCamera.clearFlags = RenderSettings.skybox != null ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor; }
-        void SwitchToPlay() { RevealWorld(); introCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); }
+        void RevealWorld() { worldRoot.SetActive(true); mainCamera.cullingMask = 0; mainCamera.backgroundColor = DawnUi.Ink; mainCamera.clearFlags = CameraClearFlags.SolidColor; illustratedStage.SetVisible(true); }
+        void SwitchToPlay() { RevealWorld(); illustratedStage.SetMode(DawnIllustratedStage.ViewMode.Exploration); introCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); }
         void SwitchToDialogue()
         {
-            RevealWorld();
+            RevealWorld(); illustratedStage.SetMode(DawnIllustratedStage.ViewMode.Dialogue);
             introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); dialogueCamera.gameObject.SetActive(true);
             Transform target=actors[session.World.pointId=="shore"?"jesus":"miriam"];
             var traveler=actors["traveler"];
@@ -513,95 +511,51 @@ namespace PathOfDawn.Presentation
         }
         IEnumerator PlayIntro()
         {
-            RevealWorld();
-            inIntro=true; modal=true; playCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(true);
+            RevealWorld(); illustratedStage.SetMode(DawnIllustratedStage.ViewMode.Intro);
+            inIntro=true; modal=true; if(hud!=null) hud.gameObject.SetActive(false); playCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(true);
             ClearScreen(); ui.Box(screen,"LetterboxTop",0,0,1920,120,Color.black); ui.Box(screen,"LetterboxBottom",0,950,1920,130,Color.black);
             ui.Text(screen,"갈릴리 호숫가 · 낯선 새벽",200,975,1520,65,33);
             director.Play(); ambience.Play();
             while(director.state==PlayState.Playing) yield return null;
-            inIntro=false; ShowDialogue(session.Lines);
+            inIntro=false; if(hud!=null) hud.gameObject.SetActive(true); ShowDialogue(session.Lines);
         }
         void BuildWorld()
         {
-            worldRoot=new GameObject("Galilee Dawn");
-            // Unity's imported FBX coordinates are hut (+4,+3), water -X, doorway +Z.
-            // Normalize this environment once: hut (-4,-3), water +X, doorway -Z.
-            // Character FBXs already face +Z and intentionally keep their own convention.
-            if(EnvironmentPrefab!=null) Instantiate(EnvironmentPrefab,Vector3.zero,Quaternion.Euler(0,180,0),worldRoot.transform);
-            else { Primitive("Temporary shore",PrimitiveType.Cube,new Vector3(0,-.12f,0),new Vector3(24,.2f,22),new Color(.65f,.58f,.39f));
-                Primitive("Temporary lake",PrimitiveType.Cube,new Vector3(13,-.08f,2),new Vector3(16,.1f,28),new Color(.23f,.48f,.53f));
-                Primitive("Temporary stone back",PrimitiveType.Cube,new Vector3(-4,1.1f,-1.3f),new Vector3(5,2.2f,.4f),new Color(.64f,.59f,.46f)); }
-            // Separate collision shell so replacement FBXs need no runtime mesh colliders.
-            ColliderBox("Walkable ground",new Vector3(0,-.2f,0),new Vector3(24,.3f,22));
-            ColliderBox("Room back",new Vector3(-4,1.1f,-1.3f),new Vector3(5,2.2f,.42f));
-            ColliderBox("Room west",new Vector3(-6.4f,1.1f,-3),new Vector3(.44f,2.2f,3.4f));
-            ColliderBox("Room east",new Vector3(-1.6f,1.1f,-3),new Vector3(.44f,2.2f,3.4f));
-            ColliderBox("Room doorway west",new Vector3(-5.7f,1.1f,-4.7f),new Vector3(1.4f,2.2f,.45f));
-            ColliderBox("Room doorway east",new Vector3(-2.3f,1.1f,-4.7f),new Vector3(1.4f,2.2f,.45f));
-            CreateActor("traveler",TravelerPrefab,new Vector3(0,.1f,-5),new Color(.25f,.37f,.42f));
-            CreateActor("jesus",JesusPrefab,new Vector3(0,.1f,0),new Color(.9f,.81f,.65f));
-            CreateActor("miriam",MiriamPrefab,new Vector3(-2,.1f,1),new Color(.52f,.35f,.28f));
-            controller=actors["traveler"].gameObject.AddComponent<CharacterController>(); controller.height=1.8f; controller.radius=.28f; controller.center=Vector3.up*.9f; controller.stepOffset=.3f;
-            Primitive("Basket to examine",PrimitiveType.Cylinder,new Vector3(-2,.25f,-2),new Vector3(.6f,.25f,.6f),new Color(.5f,.3f,.13f));
-            sharedBasket=Primitive("Shared basket",PrimitiveType.Cylinder,new Vector3(.6f,.25f,1),new Vector3(.7f,.25f,.7f),new Color(.77f,.55f,.23f));
-            shelterRug=Primitive("Shelter rug",PrimitiveType.Cube,new Vector3(-4,.04f,-3.6f),new Vector3(2,.035f,1.4f),new Color(.56f,.27f,.20f));
-            connectionMarker=Primitive("Gathered water jars",PrimitiveType.Cylinder,new Vector3(-1,.3f,0),new Vector3(.42f,.3f,.42f),new Color(.64f,.43f,.22f));
-            sharedBasket.SetActive(false); shelterRug.SetActive(false); connectionMarker.SetActive(false);
-            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.SetParent(worldRoot.transform);
-            sun.transform.rotation=Quaternion.Euler(38,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional;
-            light.color=new Color(1,.94f,.84f); light.intensity=1.15f; light.shadows=LightShadows.Soft;
-            light.shadowStrength=.62f; light.shadowBias=.035f; light.shadowNormalBias=.25f;
-            RenderSettings.ambientLight=new Color(.68f,.75f,.86f); RenderSettings.fog=true;
-            RenderSettings.fogMode=FogMode.ExponentialSquared; RenderSettings.fogColor=new Color(.67f,.80f,.88f); RenderSettings.fogDensity=.018f;
-            var skyTemplate=Resources.Load<Material>("Art/DawnSky");
-            if (skyTemplate != null)
-            {
-                runtimeSky=new Material(skyTemplate) { name="Galilee painted dawn sky" };
-                RenderSettings.skybox=runtimeSky;
-                var paintedSky=Resources.Load<Texture2D>("Art/galilee-painted-sky");
-                if (paintedSky != null)
-                {
-                    RenderSettings.skybox.SetTexture("_PaintedSky",paintedSky);
-                    RenderSettings.skybox.SetFloat("_PaintedBlend",.88f);
-                }
-            }
-            var grade=new GameObject("Storybook color",typeof(Volume)); grade.transform.SetParent(worldRoot.transform);
-            var global=grade.GetComponent<Volume>(); global.isGlobal=true; global.priority=1;
-            worldColorProfile=ScriptableObject.CreateInstance<VolumeProfile>(); global.sharedProfile=worldColorProfile;
-            var colors=worldColorProfile.Add<ColorAdjustments>(); colors.postExposure.Override(.05f);
-            colors.contrast.Override(5); colors.saturation.Override(4); colors.colorFilter.Override(new Color(1,.99f,.97f));
-            var vignette=worldColorProfile.Add<Vignette>(); vignette.intensity.Override(.12f); vignette.smoothness.Override(.65f);
+            // The painted stage owns visible art. The compact 3D shell only owns
+            // movement/contact, so no obsolete mesh appears behind dialogue.
+            worldRoot = new GameObject("Galilee interaction world");
+            ColliderBox("Walkable ground", new Vector3(0,-.2f,0), new Vector3(24,.3f,22));
+            CreateActor("traveler", new Vector3(0,.1f,-5));
+            CreateActor("jesus", new Vector3(0,.1f,0));
+            CreateActor("miriam", new Vector3(-2,.1f,1));
+            controller = actors["traveler"].gameObject.AddComponent<CharacterController>();
+            controller.height=1.8f; controller.radius=.28f; controller.center=Vector3.up*.9f; controller.stepOffset=.3f;
+            sharedBasket = new GameObject("Shared basket state");
+            shelterRug = new GameObject("Shelter rug state");
+            connectionMarker = new GameObject("Gathered water jars state");
+            foreach (var marker in new[] { sharedBasket, shelterRug, connectionMarker })
+            { marker.transform.SetParent(worldRoot.transform); marker.SetActive(false); }
+            RenderSettings.skybox = null; RenderSettings.fog = false;
         }
-        void CreateActor(string id,GameObject prefab,Vector3 position,Color color)
+        void CreateActor(string id, Vector3 position)
         {
-            var root=new GameObject(id); root.layer=2; root.transform.SetParent(worldRoot.transform); root.transform.position=position; actors[id]=root.transform;
-            if(prefab!=null)
+            var root = new GameObject(id); root.layer=2; root.transform.SetParent(worldRoot.transform);
+            root.transform.position=position; actors[id]=root.transform;
+            if (id != "traveler")
             {
-                // Each actor owns exactly one imported visual; no primitive body is added underneath it.
-                var model=Instantiate(prefab,root.transform); model.name=id+" · Character visual";
-                model.transform.SetLocalPositionAndRotation(Vector3.zero,Quaternion.identity);
-                foreach(var child in model.GetComponentsInChildren<Transform>(true)) child.gameObject.layer=2;
-                var motion=root.AddComponent<DawnLocomotion>(); motion.Initialize(model.GetComponentInChildren<Animator>());
-                if (id=="traveler") travelerMotion=motion;
+                var collider=root.AddComponent<CapsuleCollider>(); collider.height=1.8f;
+                collider.radius=.3f; collider.center=Vector3.up*.9f;
             }
-            else { var proxy=Primitive("Temporary "+id,PrimitiveType.Capsule,position+Vector3.up*.9f,new Vector3(.65f,.9f,.65f),color); proxy.transform.SetParent(root.transform,true); Destroy(proxy.GetComponent<Collider>()); }
-            if (id != "traveler") { var collider=root.AddComponent<CapsuleCollider>(); collider.height=1.8f; collider.radius=.3f; collider.center=Vector3.up*.9f; }
-        }
-        GameObject Primitive(string name,PrimitiveType type,Vector3 position,Vector3 scale,Color color)
-        {
-            var go=GameObject.CreatePrimitive(type); go.name=name; go.transform.SetParent(worldRoot.transform); go.transform.position=position; go.transform.localScale=scale;
-            var shader=Shader.Find("PathOfDawn/Cel Lit") ?? Shader.Find("Universal Render Pipeline/Lit");
-            var material=new Material(shader); material.color=color; go.GetComponent<Renderer>().sharedMaterial=material; return go;
         }
         void ColliderBox(string name,Vector3 position,Vector3 size)
         { var box=new GameObject(name,typeof(BoxCollider)); box.transform.SetParent(worldRoot.transform); box.transform.position=position; box.GetComponent<BoxCollider>().size=size; }
         void BuildCameras()
         {
             mainCamera=Camera.main; if(mainCamera==null) { var go=new GameObject("Main Camera",typeof(Camera),typeof(AudioListener)); go.tag="MainCamera"; mainCamera=go.GetComponent<Camera>(); }
-            mainCamera.backgroundColor=SkyColor; mainCamera.clearFlags=RenderSettings.skybox != null ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
+            mainCamera.backgroundColor=DawnUi.Ink; mainCamera.clearFlags=CameraClearFlags.SolidColor; mainCamera.cullingMask=0;
             mainCamera.nearClipPlane=.08f; mainCamera.farClipPlane=160; mainCamera.allowMSAA=true;
             var cameraData=mainCamera.GetUniversalAdditionalCameraData();
-            cameraData.renderPostProcessing=true; cameraData.antialiasing=AntialiasingMode.FastApproximateAntialiasing;
+            cameraData.renderPostProcessing=false; cameraData.antialiasing=AntialiasingMode.FastApproximateAntialiasing;
             cameraData.antialiasingQuality=AntialiasingQuality.High; cameraData.stopNaN=true; cameraData.dithering=true;
             var brain=mainCamera.GetComponent<CinemachineBrain>() ?? mainCamera.gameObject.AddComponent<CinemachineBrain>();
             brain.DefaultBlend=new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut,.4f);

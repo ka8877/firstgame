@@ -94,12 +94,12 @@ namespace PathOfDawn.SmokeTests
             Assert.That(backend.Read(Slot), Is.EqualTo(originalBytes));
 
             SmokeUi.Click("설정 [Esc]"); yield return null;
-            var field = UnityEngine.Object.FindFirstObjectByType<TMP_InputField>();
-            Assert.That(field, Is.Not.Null);
+            ReadVisibleTransferField();
             GUIUtility.systemCopyBuffer = "clipboard-must-not-be-replaced";
             SmokeUi.Click("저장 내보내기"); yield return null;
-            Assert.That(field.text, Does.StartWith("저장하지 못했습니다: "));
-            Assert.That(field.text, Does.Contain(Fault));
+            var displayedFailure = ReadVisibleTransferField();
+            Assert.That(displayedFailure, Does.StartWith("저장하지 못했습니다: "));
+            Assert.That(displayedFailure, Does.Contain(Fault));
             Assert.That(GUIUtility.systemCopyBuffer, Is.EqualTo("clipboard-must-not-be-replaced"));
             Assert.That(SmokeUi.HasText("저장 JSON을 표시했습니다."), Is.False);
             Assert.That(backend.Read(Slot), Is.EqualTo(originalBytes), "Export failure must not change saved checkpoint A.");
@@ -107,15 +107,16 @@ namespace PathOfDawn.SmokeTests
             SmokeUi.Click("저장하고 타이틀로"); yield return null;
             Assert.That(SmokeUi.HasText("설정과 여정 보관"), Is.True);
             Assert.That(SmokeUi.FindButton("새 게임"), Is.Null, "Do not leave current B after a failed save.");
-            Assert.That(field.text, Does.Contain(Fault));
+            Assert.That(ReadVisibleTransferField(), Does.Contain(Fault));
             Assert.That(backend.Read(Slot), Is.EqualTo(originalBytes));
 
             // Recover storage and retry through the same UI. The exported payload must now be B.
             backend.FailWrites = false;
             SmokeUi.Click("저장 내보내기"); yield return null;
-            Assert.That(field.text, Is.EqualTo(backend.Read(Slot)));
+            var exported = ReadVisibleTransferField();
+            Assert.That(exported, Is.EqualTo(backend.Read(Slot)));
             Assert.That(backend.Read(Slot), Is.Not.EqualTo(originalBytes));
-            var envelope = JsonUtility.FromJson<PortableSave>(field.text);
+            var envelope = JsonUtility.FromJson<PortableSave>(exported);
             var currentB = JsonUtility.FromJson<NarrativeSave>(envelope.payload);
             Assert.That(currentB.world.pointId, Is.EqualTo("ending"));
             Assert.That(currentB.world.shelterPrepared, Is.True);
@@ -123,6 +124,17 @@ namespace PathOfDawn.SmokeTests
             SmokeUi.Click("저장하고 타이틀로"); yield return null;
             yield return SmokeUi.WaitForVisibleKorean("새벽의 길");
             LogAssert.NoUnexpectedReceived();
+        }
+
+        static string ReadVisibleTransferField()
+        {
+            // Inspect the currently displayed settings after each callback, rather than
+            // holding a Unity component reference across UI teardown/rebuild frames.
+            var fields = UnityEngine.Object.FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None)
+                .Where(field => field.gameObject.activeInHierarchy).ToArray();
+            Assert.That(fields.Length, Is.EqualTo(1), "Exactly one visible save-transfer field is required. " + SmokeUi.VisibleUi());
+            Assert.That(fields[0].text, Is.Not.Null);
+            return fields[0].text;
         }
 
         static IEnumerator DrainDialogue()

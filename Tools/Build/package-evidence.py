@@ -17,15 +17,22 @@ selected = [
     root / "Docs/Audio.md",
     root / "Docs/Voice.md",
     root / "Docs/FantasyCardsRules.md",
+    root / "Docs/PathOfDawnValidation.md",
+    root / "Docs/PaintedDawn.md",
     root / "Docs/VisualValidation.md",
     root / "Docs/WebPlaytest.md",
     root / "Docs/Environment.md",
     root / "Docs/Illustration.md",
+    root / "Docs/AssetRegister.md",
+    root / "Docs/painted-dawn-browser-validation.md",
+    root / "Docs/ValidationHistory/2026-10-24-before-painted-dawn.md",
+    root / "Docs/ValidationHistory/2026-10-24-before-painted-dawn-visual.md",
     root / "Tools/Art/ToonDawn.md",
     root / "Tools/Environment/validation.json",
     root / "Tools/Environment/validation-2026-10-20.json",
     root / "Tools/Environment/validation-2026-10-23-art-edition.json",
     root / "Tools/Environment/validation-2026-10-23-subculture-bgm.json",
+    root / "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
     root / "Docs/ValidationHistory/2026-10-23-art-edition.md",
     root / "Docs/ValidationHistory/2026-10-23-subculture-bgm.md",
     root / "Tools/Art/AssetManifest.json",
@@ -35,6 +42,10 @@ selected = [
     root / "Tools/Art/Illustration/generation-manifest.json",
     root / "Tools/Art/Illustration/galilee-painted-sky.json",
     root / "Tools/Art/Illustration/verification.json",
+    root / "Tools/Art/Painted/characters-generation.json",
+    root / "Tools/Art/Painted/backgrounds-generation.json",
+    root / "Tools/Validation/painted-dawn-layouts.json",
+    root / "Games/PathOfDawn/Assets/Resources/Art/Painted/layout.json",
     root / "Tools/Audio/production.json",
     root / "Tools/Audio/verification.json",
     root / "Tools/Audio/MUSIC-NOTICE.txt",
@@ -60,17 +71,24 @@ selected = [
     artifacts / "Validation/GitHub/source-clone.json",
     artifacts / "Validation/VisualWeb/control-mode-regression-diagnostic.json",
     artifacts / "Validation/VisualWeb/control-mode-regression-before-fix.png",
+    artifacts / "WebPlaytest/build-manifest.json",
 ]
 selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("expanded-demo-*.json")))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("painted-dawn-*.json")))
+for pattern in ("*.json", "*.md"):
+    selected.extend(sorted((root / "Tools/Art/Painted").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
 # Collect compact reports and captures, never raw Blender/Unity logs or voice files.
-for directory in ("ExpandedDemo", "Demo"):
+for directory in ("ExpandedDemo", "Demo", "PaintedDawn"):
     for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx"):
         selected.extend(sorted((artifacts / "Validation" / directory).rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/ExpandedDemo").glob("*-reference.txt")))
+for profile in ("Desktop720", "Mobile844"):
+    selected.append(artifacts / "Validation/PaintedDawn" / profile / "PathOfDawn/report.json")
+selected.extend(sorted((artifacts / "Validation/PaintedDawn").rglob("*.txt")))
 # Preserve earlier recorded outcomes alongside the current demo, including failures.
 for pattern in ("*.png", "*.png.txt", "*.xml", "*.trx", "*.json", "*.md"):
     selected.extend(sorted((artifacts / "ValidationHistory").rglob(pattern)))
@@ -95,7 +113,8 @@ for game in ("FantasyCards", "PathOfDawn"):
             selected.append(original_report)
     for pattern in ("*.png", "*.txt"):
         selected.extend(sorted(report_dir.glob(pattern)))
-    # The dated baseline remains available; these are the current visual-refresh checks.
+    # Expanded-demo evidence remains available for unchanged FantasyCards and as
+    # the PathOfDawn baseline. Current PathOfDawn reports live in PaintedDawn.
     for profile in ("Desktop720", "Desktop1080", "Mobile844"):
         current = artifacts / "Validation/VisualWeb" / profile / game
         selected.append(current / "report.json")

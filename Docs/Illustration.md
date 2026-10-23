@@ -1,4 +1,4 @@
-# 두 게임의 원화와 카드 체험판 개정
+# 두 게임의 원화
 
 ## 카드 — 선명한 만화 셀 애니메이션 방향
 
@@ -59,17 +59,19 @@
 
 ## 서사 그림과 보존 범위
 
-`PathOfDawn`의 타이틀과 예수님·미리암·여행자 초상 네 장은 직전 `anime-subculture-2` 원본을 그대로 유지한다. 이번 서사 인게임 모델·움직임·환경 변경은 별도 제작 범위이며 이 문서가 검증하지 않는다. 예수님의 시각 표현은 창작 해석이며 역사적 외형을 확정하는 자료가 아니다.
+`painted-dawn-2026-10-24`는 사용자 요청에 따라 `PathOfDawn` 인게임을 회화풍 전체 장면과 전신 만화 인물의 2.5D로 구성한다. `Art/Painted`의 새 PNG 일곱 개는 호숫가·석조 방 배경, 예수님·미리암·여행자 전신, 양발을 바닥에 둔 여행자 뒷모습 정지 원화와 4×2 보행 atlas다. 배경은 사람·문자·UI 없이 새로 생성했고 인물은 이 프로젝트의 기존 초상을 참고해 전신으로 다시 제작했다. 실제 크기·UV·가져오기·게임 상태와의 연결은 [PaintedDawn.md](PaintedDawn.md)에 모았다. 예수님의 시각 표현은 창작 해석이며 역사적 외형을 확정하는 자료가 아니다.
 
-## 원본·검수·출처
+새 그림도 `OpenAI image_gen.imagegen`의 결과 PNG를 바이트 그대로 복사했다. 프롬프트·참조·해시·파일 검수는 [배경 생성 기록](../Tools/Art/Painted/backgrounds-generation.json)과 [인물 생성 기록](../Tools/Art/Painted/characters-generation.json)을 따른다. 원본 그림의 직접 검수·PNG 분석과 실제 Unity 합성·걷기·공개 브라우저 검수는 구분한다. 타이틀과 예수님·미리암·여행자 초상 네 장은 직전 `anime-subculture-2` 원본을 UI 자산으로 보존한다. 이전 3D·`galilee-painted-sky`는 제작 이력이며 현재 인게임 표현의 근거로 인용하지 않는다.
+
+## 카드 확장판 원본·검수·출처
 
 모든 새 그림은 `OpenAI image_gen.imagegen`으로 생성했다. 첫 리더 초상 네 장은 일부 머리끝·활·망토가 캔버스 끝에 닿아, 같은 도구의 이미지 편집으로 투명 여백을 확보하고 구도를 재생성했다. 이 초기 원본과 편집 지시문도 manifest에 보존한다. 최종 생성 PNG는 바이트 그대로 복사했으며 Python 등의 도구로 확대·재색칠·합성·필터 처리하지 않았다. 도구는 정확한 모델 버전·seed를 제공하지 않으므로 동일 픽셀 재현을 주장하지 않는다. 생성 지시문·참조·원본 경로·SHA-256은 [generation-manifest.json](../Tools/Art/Illustration/generation-manifest.json), 실제 파일 검사는 [verification.json](../Tools/Art/Illustration/verification.json)에 있다. 이전 개정 manifest·검증·설명은 [보존 기록](../Tools/Art/Illustration/history/demo-expansion-baseline)에 남겼다.
 
 새 원본을 직접 열어 만화 얼굴 표현·카드 주제와 분할·손과 장비·리더 투명 여백·타이틀 메뉴 공간을 확인했다. PNG 디코딩·실제 크기·알파·바이트 일치·기존 GUID 유지를 검사했다. 실제 작은 UI 가독성, 플레이어 메모리/성능과 게임 실행은 별도의 Unity/Web 검수이며 사용자 최종 스타일 승인으로 표시하지 않는다. 생성 원본은 `/workspace/generated_images`에 남기고 실행 시에는 `Assets/Resources/Art` 파일만 사용한다.
 
-## 현재 자산 해시
+## 카드·기존 타이틀과 초상 자산 해시
 
-같은 파일명은 게임별 Resources 폴더로 구분하며 정확한 전체 경로는 manifest에 있다.
+같은 파일명은 게임별 Resources 폴더로 구분하며 정확한 전체 경로는 manifest에 있다. 새 `Art/Painted` 일곱 그림의 해시는 위의 별도 생성 기록을 따른다. 아래 이전 자산의 수치와 해시는 보존한다.
 
 | 파일 | 실제 크기·모드 | SHA-256 |
 |---|---|---|

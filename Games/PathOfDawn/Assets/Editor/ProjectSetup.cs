@@ -19,6 +19,12 @@ namespace FirstGame.Editor
     {
         [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
         [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
+        [Serializable] sealed class PaintedLayout { public PaintedRegion[] characters; public PaintedRegion[] walkFrames; }
+        [Serializable] sealed class PaintedRegion
+        {
+            public string id;
+            public float x, y, width, height, footX = .5f, footY;
+        }
         const string Game = "PathOfDawn";
         const string AppType = "PathOfDawn.Presentation.PathOfDawnApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
@@ -41,7 +47,7 @@ namespace FirstGame.Editor
             initializing = true;
             try
             {
-                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Models", "Assets/Resources/Art", "Assets/Resources/Content" })
+                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Art", "Assets/Resources/Art/Painted", "Assets/Resources/Content", "Assets/Art/Archive/LegacyModels" })
                     Directory.CreateDirectory(folder);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
                 EditorSettings.serializationMode = SerializationMode.ForceText;
@@ -59,7 +65,8 @@ namespace FirstGame.Editor
                 QualitySettings.vSyncCount = 0;
                 var font = CreateFont();
                 PrepareIllustrations();
-                CreateModels();
+                PreparePaintedStage();
+                ArchiveLegacyRuntimeModels();
                 CreateContent();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
                     : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -68,16 +75,18 @@ namespace FirstGame.Editor
                 if (app == null) app = new GameObject(Game + " Bootstrap").AddComponent(type);
                 SetField(app, "KoreanFont", font);
                 SetField(app, "Chapter", AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/Resources/Content/Galilee.asset"));
-                SetField(app, "EnvironmentPrefab", Resources.Load<GameObject>("Models/GalileeShore"));
-                SetField(app, "JesusPrefab", Resources.Load<GameObject>("Models/JesusProxy"));
-                SetField(app, "TravelerPrefab", Resources.Load<GameObject>("Models/TravelerProxy"));
-                SetField(app, "MiriamPrefab", Resources.Load<GameObject>("Models/MiriamProxy"));
+                // The illustrated stage owns the visible scene. Keep the old serialized
+                // fields compatible, but never package or recreate the retired meshes.
+                SetField(app, "EnvironmentPrefab", null);
+                SetField(app, "JesusPrefab", null);
+                SetField(app, "TravelerPrefab", null);
+                SetField(app, "MiriamPrefab", null);
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene, ScenePath);
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
                 AssetDatabase.SaveAssets();
                 Validate();
-                File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:first-slice:1\n");
+                File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:painted-galilee:1\n");
                 Debug.Log("FIRSTGAME_SETUP_OK " + Game);
             }
             finally { initializing = false; }
@@ -306,10 +315,118 @@ namespace FirstGame.Editor
             }
         }
 
+        static void ArchiveLegacyRuntimeModels()
+        {
+            foreach (string name in new[] { "GalileeShore", "JesusProxy", "TravelerProxy", "MiriamProxy" })
+            {
+                string source = "Assets/Resources/Models/" + name + ".prefab";
+                string destination = "Assets/Art/Archive/LegacyModels/" + name + ".prefab";
+                if (AssetDatabase.LoadAssetAtPath<GameObject>(source) == null) continue;
+                if (File.Exists(destination))
+                    throw new InvalidOperationException("Legacy archive already exists; original was preserved: " + destination);
+                string error = AssetDatabase.MoveAsset(source, destination);
+                if (!string.IsNullOrEmpty(error)) throw new InvalidOperationException(error);
+            }
+        }
+
+        static void PreparePaintedStage()
+        {
+            const string directory = "Assets/Resources/Art/Painted/";
+            foreach (string name in new[] { "shore", "room", "jesus", "miriam", "traveler", "traveler-back", "traveler-walk" })
+            {
+                string path = directory + name + ".png";
+                var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+                if (importer == null) throw new InvalidOperationException("Missing painted stage artwork: " + path);
+                bool cutout = name != "shore" && name != "room";
+                importer.textureType = TextureImporterType.Default;
+                importer.sRGBTexture = true; importer.mipmapEnabled = false;
+                importer.alphaSource = TextureImporterAlphaSource.FromInput;
+                importer.alphaIsTransparency = cutout;
+                importer.wrapMode = TextureWrapMode.Clamp; importer.filterMode = FilterMode.Bilinear;
+                importer.npotScale = TextureImporterNPOTScale.None;
+                importer.maxTextureSize = 4096;
+                importer.textureCompression = TextureImporterCompression.Uncompressed;
+                importer.isReadable = false;
+                // Do not inherit older platform overrides that blur the newly drawn faces.
+                importer.ClearPlatformTextureSettings("Standalone");
+                importer.ClearPlatformTextureSettings("WebGL");
+                importer.SaveAndReimport();
+            }
+            var layout = new PaintedLayout
+            {
+                characters = new[] { "jesus", "miriam", "traveler", "traveler-back" }
+                    .Select(name => MeasurePaintedRegion(directory + name + ".png", name)).ToArray(),
+                walkFrames = MeasureWalkFrames(directory + "traveler-walk.png")
+            };
+            string layoutPath = directory + "layout.json";
+            File.WriteAllText(layoutPath, JsonUtility.ToJson(layout, true) + "\n");
+            AssetDatabase.ImportAsset(layoutPath, ImportAssetOptions.ForceSynchronousImport);
+        }
+
+        static PaintedRegion MeasurePaintedRegion(string path, string id)
+        {
+            var pixels = DecodePaintedSource(path);
+            try { return MeasureAlphaBounds(pixels, new RectInt(0, 0, pixels.width, pixels.height), id); }
+            finally { UnityEngine.Object.DestroyImmediate(pixels); }
+        }
+
+        static PaintedRegion[] MeasureWalkFrames(string path)
+        {
+            var pixels = DecodePaintedSource(path);
+            try
+            {
+                var frames = new PaintedRegion[8];
+                for (int row = 0; row < 2; ++row)
+                    for (int column = 0; column < 4; ++column)
+                    {
+                        // Authoring order is top/front first, then bottom/rear.
+                        // Texture pixel coordinates and normalized UVs start at bottom-left.
+                        int x0 = column * pixels.width / 4, x1 = (column + 1) * pixels.width / 4;
+                        int y0 = (1 - row) * pixels.height / 2, y1 = (2 - row) * pixels.height / 2;
+                        frames[row * 4 + column] = MeasureAlphaBounds(pixels,
+                            new RectInt(x0, y0, x1 - x0, y1 - y0), null);
+                    }
+                return frames;
+            }
+            finally { UnityEngine.Object.DestroyImmediate(pixels); }
+        }
+
+        static Texture2D DecodePaintedSource(string path)
+        {
+            var pixels = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            pixels.name = Path.GetFileNameWithoutExtension(path);
+            if (pixels.LoadImage(File.ReadAllBytes(path), false)) return pixels;
+            UnityEngine.Object.DestroyImmediate(pixels);
+            throw new InvalidOperationException("Cannot decode painted source: " + path);
+        }
+
+        static PaintedRegion MeasureAlphaBounds(Texture2D source, RectInt cell, string id)
+        {
+            // Measure only: original PNG pixels are never cropped, recolored or overwritten.
+            var pixels = source.GetPixels32();
+            int left = cell.xMax, bottom = cell.yMax, right = cell.xMin - 1, top = cell.yMin - 1;
+            int opaque = 0;
+            for (int y = cell.yMin; y < cell.yMax; ++y)
+                for (int x = cell.xMin; x < cell.xMax; ++x)
+                    if (pixels[y * source.width + x].a > 16)
+                    {
+                        left = Math.Min(left, x); right = Math.Max(right, x);
+                        bottom = Math.Min(bottom, y); top = Math.Max(top, y); ++opaque;
+                    }
+            if (opaque < cell.width * cell.height * .015f)
+                throw new InvalidOperationException("Empty illustrated character/frame: " + source.name + "/" + id);
+            if (opaque > cell.width * cell.height * .98f)
+                throw new InvalidOperationException("Illustrated character/frame must have a transparent background: " + id);
+            left = Math.Max(cell.xMin, left - 2); right = Math.Min(cell.xMax - 1, right + 2);
+            bottom = Math.Max(cell.yMin, bottom - 2); top = Math.Min(cell.yMax - 1, top + 2);
+            return new PaintedRegion { id = id, x = (float)left / source.width, y = (float)bottom / source.height,
+                width = (float)(right - left + 1) / source.width, height = (float)(top - bottom + 1) / source.height };
+        }
+
         static void SetField(Component component, string fieldName, UnityEngine.Object value)
         {
             var field = component.GetType().GetField(fieldName);
-            if (field != null && value != null) field.SetValue(component, value);
+            if (field != null) field.SetValue(component, value);
             EditorUtility.SetDirty(component);
         }
 
@@ -344,12 +461,25 @@ namespace FirstGame.Editor
             if (Resources.Load<TMP_FontAsset>("Fonts/Korean") == null) throw new InvalidOperationException("Missing Korean font.");
             if (!(GraphicsSettings.defaultRenderPipeline is UniversalRenderPipelineAsset)) throw new InvalidOperationException("URP is not active.");
             if (!File.Exists(ScenePath)) throw new InvalidOperationException("Missing boot scene.");
+            var app = UnityEngine.Object.FindFirstObjectByType(Type.GetType(AppType, true));
+            if (app == null) throw new InvalidOperationException("Missing PathOfDawn app in the boot scene.");
+            foreach (string field in new[] { "EnvironmentPrefab", "JesusPrefab", "TravelerPrefab", "MiriamPrefab" })
+                if (app.GetType().GetField(field)?.GetValue(app) is UnityEngine.Object reference && reference != null)
+                    throw new InvalidOperationException("Retired 3D prefab is still included by the boot scene: " + field);
             foreach (var go in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())
                 foreach (var transform in go.GetComponentsInChildren<Transform>(true))
                     if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(transform.gameObject) != 0)
                         throw new InvalidOperationException("Missing script on " + transform.name);
             var chapter = Resources.Load<PathOfDawn.Authoring.StoryChapter>("Content/Galilee");
             if (chapter == null || chapter.story == null || !chapter.story.isCompiled) throw new InvalidOperationException("Story chapter is missing or invalid.");
+            foreach (string name in new[] { "shore", "room", "jesus", "miriam", "traveler", "traveler-back", "traveler-walk" })
+                if (Resources.Load<Texture2D>("Art/Painted/" + name) == null)
+                    throw new InvalidOperationException("Missing imported painted stage asset: " + name);
+            var layoutAsset = Resources.Load<TextAsset>("Art/Painted/layout");
+            var layout = layoutAsset == null ? null : JsonUtility.FromJson<PaintedLayout>(layoutAsset.text);
+            if (layout == null || layout.characters == null || layout.characters.Length != 4 ||
+                layout.walkFrames == null || layout.walkFrames.Length != 8)
+                throw new InvalidOperationException("Painted stage requires four character cutout bounds and eight authored walk frames.");
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);
         }
     }
