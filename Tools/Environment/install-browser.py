@@ -18,10 +18,21 @@ import sys
 import tempfile
 
 
-COMMIT = "87416418657359cb625c412a48b6e1d6d41c29bd"
-DATA_HASHES = {
-    "kor": "6b85e11d9bbf07863b97b3523b1b112844c43e713df8b66418a081fd1060b3b2",
-    "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+MODELS = {
+    "fast": {
+        "commit": "87416418657359cb625c412a48b6e1d6d41c29bd",
+        "hashes": {
+            "kor": "6b85e11d9bbf07863b97b3523b1b112844c43e713df8b66418a081fd1060b3b2",
+            "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+        },
+    },
+    "best": {
+        "commit": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+        "hashes": {
+            "kor": "f888d4038348a0c3d25151e7f452bda0d74ca275b18cab146798bcbb94084fff",
+            "eng": "8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba",
+        },
+    },
 }
 VERIFIED_VERSIONS = {
     "Python": "3.12.14", "Chromium": "154.0.8037.57", "Tesseract": "5.5.0",
@@ -38,9 +49,10 @@ def sha256(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def prepare_data(directory, language):
+def prepare_data(directory, language, model_name):
+    model = MODELS[model_name]
     target = directory / f"{language}.traineddata"
-    expected = DATA_HASHES[language]
+    expected = model["hashes"][language]
     if target.exists():
         if sha256(target) != expected:
             raise RuntimeError(f"Unexpected SHA256 for {target}; preserve/review it before repair.")
@@ -55,7 +67,7 @@ def prepare_data(directory, language):
         subprocess.run([
             "curl", "--fail", "--silent", "--show-error", "--location", "--retry", "2",
             "--proto", "=https", "--proto-redir", "=https", "--tlsv1.2", "--max-time", "90",
-            f"https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/{COMMIT}/{language}.traineddata",
+            f"https://raw.githubusercontent.com/tesseract-ocr/tessdata_{model_name}/{model['commit']}/{language}.traineddata",
             "--output", str(temporary),
         ], check=True, capture_output=True, timeout=300)
         if sha256(temporary) != expected:
@@ -69,10 +81,16 @@ def prepare_data(directory, language):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     tools_root = Path(os.environ.get("FIRSTGAME_TOOLS_ROOT", "/workspace/tools"))
+    parser.add_argument("--model", choices=list(MODELS), default="best",
+                        help="best is required for the revised visual smoke; fast preserves the earlier model.")
     parser.add_argument("--tessdata", type=Path,
-                        default=Path(os.environ.get("FIRSTGAME_TESSDATA", str(tools_root / "tesseract"))))
+                        help="Overrides FIRSTGAME_TESSDATA and the model-specific default directory.")
     parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
     args = parser.parse_args()
+    if args.tessdata is None:
+        folder = "tesseract-best" if args.model == "best" else "tesseract"
+        args.tessdata = Path(os.environ.get("FIRSTGAME_TESSDATA", str(tools_root / folder)))
+    model = MODELS[args.model]
     versions = {"Python": sys.version.split()[0]}
     for label, distribution, module in [
         ("Playwright", "playwright", "playwright.sync_api"), ("Pillow", "Pillow", "PIL.Image")
@@ -96,10 +114,10 @@ def main():
         versions[label] = match.group(0)
         binaries[label] = binary
 
-    data = {language: prepare_data(args.tessdata, language) for language in DATA_HASHES}
+    data = {language: prepare_data(args.tessdata, language, args.model) for language in model["hashes"]}
     listed = run([binaries["Tesseract"], "--tessdata-dir", str(args.tessdata), "--list-langs"],
                  text=True).stdout.splitlines()
-    if not set(DATA_HASHES).issubset({line.strip() for line in listed}):
+    if not set(model["hashes"]).issubset({line.strip() for line in listed}):
         raise RuntimeError("Tesseract did not list both kor and eng after verification.")
     # Load both models without opening a browser or consuming a Unity project lock.
     pixels = io.BytesIO()
@@ -107,11 +125,18 @@ def main():
     run([binaries["Tesseract"], "stdin", "stdout", "--tessdata-dir", str(args.tessdata),
          "-l", "kor+eng", "--psm", "6"], input=pixels.getvalue(),
         env={**os.environ, "OMP_THREAD_LIMIT": "1"})
+    provenance = {"source": f"tesseract-ocr/tessdata_{args.model}", "commit": model["commit"],
+        "downloads": [{"language": language,
+                       "url": f"https://raw.githubusercontent.com/tesseract-ocr/tessdata_{args.model}/{model['commit']}/{language}.traineddata",
+                       "bytes": (args.tessdata / f"{language}.traineddata").stat().st_size,
+                       "sha256": expected} for language, expected in model["hashes"].items()],
+        "verification": "Pinned SHA256; downloads use HTTPS with certificate verification."}
+    (args.tessdata / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
     print(json.dumps({
         "browserPrerequisitesReady": True, "versions": versions,
         "matchesVerifiedVersions": versions == VERIFIED_VERSIONS,
         "binaries": binaries, "tessdataDirectory": str(args.tessdata.resolve()),
-        "tessdataCommit": COMMIT, "tessdata": data,
+        "tessdataModel": args.model, "tessdataCommit": model["commit"], "tessdata": data,
         "ocrModelsLoaded": ["kor", "eng"], "browserLaunched": False,
     }, indent=2))
 

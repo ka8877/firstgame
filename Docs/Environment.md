@@ -157,20 +157,31 @@ WebGL 검증에 사용한 도구는 다음 베이스 이미지에 이미 포함�
 | Tesseract | 5.5.0 | `/usr/bin/tesseract`, `5.5.0-1+b1` |
 | 시스템 영어 OCR 데이터 | 4.1.0 | `tesseract-ocr-eng`, `1:4.1.0-2` |
 
-`install.sh`는 [install-browser.py](../Tools/Environment/install-browser.py)를 호출한다. 이 경량 헬퍼는 실행 파일 버전, Python 모듈 import, 한국어·영어 모델의 해시와 실제 OCR 모델 로드를 검사한다. 시스템/Python 패키지를 변경하거나 브라우저·프로필을 열지 않는다. 기본 데이터 경로는 `/workspace/tools/tesseract`이며 `FIRSTGAME_TOOLS_ROOT`, `FIRSTGAME_TESSDATA` 또는 `--tessdata`로 바꿀 수 있다.
+`install.sh`는 [install-browser.py](../Tools/Environment/install-browser.py)를 호출한다. 이 경량 헬퍼는 실행 파일 버전, Python 모듈 import, 한국어·영어 모델의 해시와 실제 OCR 모델 로드를 검사한다. 시스템/Python 패키지를 변경하거나 브라우저·프로필을 열지 않는다. 새 비주얼 검증에는 기본 `best` 모델과 `/workspace/tools/tesseract-best` 경로를 사용한다. `FIRSTGAME_TOOLS_ROOT`, `FIRSTGAME_TESSDATA` 또는 `--tessdata`로 경로를 바꿀 수 있다. 기존 fast 모델은 `--model fast`와 기본 `/workspace/tools/tesseract` 경로로 보존한다.
 
 ```bash
 python3 Tools/Environment/install-browser.py
 ```
 
-없는 데이터만 공식 [tesseract-ocr/tessdata_fast 커밋 87416418657359cb625c412a48b6e1d6d41c29bd](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd)에서 검증된 HTTPS로 받아 다음 SHA256을 대조한 후 설치한다. 기존 파일의 해시가 다르면 덮어쓰지 않고 실패한다. 최초 수동 다운로드한 한국어 파일과 시스템에서 복사한 영어 파일도 이 공식 커밋의 파일과 정확히 일치했다.
+없는 데이터만 공식 저장소의 고정 커밋에서 검증된 HTTPS로 받아 SHA256을 대조한 후 설치한다. 기존 파일의 해시가 다르면 덮어쓰지 않고 실패한다. 모델별 원본 URL·byte 수·해시는 데이터 폴더의 `provenance.json`에도 기록한다.
+
+현재 기본 모델은 [tesseract-ocr/tessdata_best 커밋 e12c65a915945e4c28e237a9b52bc4a8f39a0cec](https://github.com/tesseract-ocr/tessdata_best/tree/e12c65a915945e4c28e237a9b52bc4a8f39a0cec)이다.
+
+| 파일 | SHA256 |
+| --- | --- |
+| `kor.traineddata` | `f888d4038348a0c3d25151e7f452bda0d74ca275b18cab146798bcbb94084fff` |
+| `eng.traineddata` | `8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba` |
+
+2026-10-23 실제 새 빈 경로에서 best 모델 설치와 재사용을 각각 실행해 두 번 모두 **exit 0**을 확인했다. 첫 실행은 두 파일 `installed`, 두 번째는 `reused`였고 기준 버전 일치·두 언어 모델 로드도 통과했다. 현재 공용 경로에서도 `reused`와 **exit 0**을 확인했다. 근거는 `/workspace/tools/downloads/browser-prerequisites-best-{first,second,current}.json`이다. 새 원화 타이틀에서 기존 fast OCR이 ‘빛’을 ‘빚’으로 오독한 원본 실패는 보존하며, 새 검사는 제목 영역을 좁혀 best 모델과 필요한 OCR 전처리를 사용한다. 원본 캡처와 원시/전처리 OCR을 분리해 기록하고 기대 문구의 철자를 바꾸지 않는다.
+
+기존 [tesseract-ocr/tessdata_fast 커밋 87416418657359cb625c412a48b6e1d6d41c29bd](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd)의 검증 기록은 다음과 같다. 최초 수동 다운로드한 한국어 파일과 시스템에서 복사한 영어 파일도 이 공식 커밋의 파일과 정확히 일치했다.
 
 | 파일 | SHA256 |
 | --- | --- |
 | `kor.traineddata` | `6b85e11d9bbf07863b97b3523b1b112844c43e713df8b66418a081fd1060b3b2` |
 | `eng.traineddata` | `7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2` |
 
-새 빈 경로에서 헬퍼를 두 번 실행했다. 첫 실행은 두 파일 모두 `installed`, 두 번째는 모두 `reused`였으며 두 실행 모두 **exit 0**, `browserPrerequisitesReady:true`, `matchesVerifiedVersions:true`, `ocrModelsLoaded:[kor,eng]`였다. 실제 공용 데이터 경로에서도 변경 없이 `reused`와 **exit 0**을 확인했다. 결과는 `/workspace/tools/downloads/browser-prerequisites-{first,second,current}.json`에 있다. 브라우저를 띄우지 않는 이 검사 결과는 실제 WebGL 조작 검증과 구분한다.
+기존 fast 모델도 새 빈 경로에서 헬퍼를 두 번 실행했다. 첫 실행은 두 파일 모두 `installed`, 두 번째는 모두 `reused`였으며 두 실행 모두 **exit 0**, `browserPrerequisitesReady:true`, `matchesVerifiedVersions:true`, `ocrModelsLoaded:[kor,eng]`였다. 실제 공용 데이터 경로에서도 변경 없이 `reused`와 **exit 0**을 확인했다. 결과는 `/workspace/tools/downloads/browser-prerequisites-{first,second,current}.json`에 있다. 브라우저를 띄우지 않는 이 검사 결과는 실제 WebGL 조작 검증과 구분한다.
 
 다른 베이스 이미지에서 패키지가 없으면 실행 중인 검증을 끝낸 뒤 아래 복구 명령을 필요한 항목에만 사용한다. Debian 시스템 패키지 명령은 적절한 설치 권한으로 실행하며 저장소 서명 검증을 유지한다. 현재 이미지에서는 이 복구 설치를 실행하지 않았다.
 
@@ -188,7 +199,7 @@ python3 Tools/Environment/install-browser.py
 카드게임은 기본 headless SwiftShader 경로로 최종 통과했다.
 
 ```bash
-python3 Tools/Validation/web-smoke.py --game FantasyCards --tessdata /workspace/tools/tesseract
+python3 Tools/Validation/web-smoke.py --game FantasyCards --tessdata /workspace/tools/tesseract-best
 ```
 
 서사게임은 SwiftShader에서 캡처 시간 초과가 발생했지만 당시 Unity ready·JS 응답·WebGL 컨텍스트는 유지됐다. 빈 WebGL2 캔버스에서 확인한 X11/ANGLE/Mesa 경로로 같은 빌드를 다시 실행해 최종 저장·이어하기 검사를 통과했다.
@@ -197,7 +208,7 @@ python3 Tools/Validation/web-smoke.py --game FantasyCards --tessdata /workspace/
 bash Tools/Environment/start-display.sh
 source Tools/Environment/activate-display.sh
 python3 Tools/Validation/web-smoke.py --game PathOfDawn --renderer x11-mesa \
-  --interaction-resolution 1280x720 --tessdata /workspace/tools/tesseract
+  --interaction-resolution 1280x720 --tessdata /workspace/tools/tesseract-best
 ```
 
 관측 렌더러는 `ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)`다. 서사 조작은 720p, 타이틀과 저장 화면 캡처는 실제 720p·1080p에서 검사한다. 실패 원본은 `report-before-capture-fallback.json`, 최종 결과는 게임별 `report.json`에 있다. 소프트웨어 렌더러의 지원되지 않는 내부 셰이더 진단을 보존하며, 이 기능 검사를 실제 GPU의 화질·성능 보장으로 해석하지 않는다. 체크는 자체 브라우저·HTTP 서버를 시작하고 종료한다.

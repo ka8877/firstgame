@@ -25,7 +25,7 @@ import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
-from PIL import Image, ImageChops, ImageStat
+from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -47,8 +47,8 @@ def validate_layout(game, definition):
                   if game == "FantasyCards" else
                   {"titleNew", "titleContinue", "dialogueAdvance", "save", "settings", "settingsTitle",
                    "joystickCenter", "joystickForward", "touchInteract", "cameraStart", "cameraEnd"})
-    region_keys = ({"terrain", "resource", "inspectorName", "status", "friendlyLanes"} if game == "FantasyCards" else
-                   {"dialogueAdvance", "prompt", "notification", "cameraWorld"})
+    region_keys = ({"title", "terrain", "resource", "inspectorName", "status", "friendlyLanes"} if game == "FantasyCards" else
+                   {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton"})
     variants = {"desktop", "compact"} if "compactBelowCanvasWidth" in definition else {"desktop"}
     for name in variants:
         layout = definition["variants"][name]
@@ -63,6 +63,16 @@ def validate_layout(game, definition):
             left, top, right, bottom = layout["regions"][key]
             if not (0 <= left < right <= 1 and 0 <= top < bottom <= 1):
                 raise ValueError(f"OCR region outside canvas: {game}/{name}/{key}")
+        if "regionsAboveHeight" in layout:
+            overrides = layout["regionsAboveHeight"]
+            if overrides["height"] <= 0 or not set(overrides["regions"]).issubset(region_keys):
+                raise ValueError(f"Invalid height-dependent regions: {game}/{name}")
+            for key, (left, top, right, bottom) in overrides["regions"].items():
+                if not (0 <= left < right <= 1 and 0 <= top < bottom <= 1):
+                    raise ValueError(f"Height-dependent region outside canvas: {game}/{name}/{key}")
+        for key, (left, top, right, bottom) in layout.get("mobileRegions", {}).items():
+            if key not in region_keys or not (0 <= left < right <= 1 and 0 <= top < bottom <= 1):
+                raise ValueError(f"Mobile region outside canvas: {game}/{name}/{key}")
 
 def build_fingerprint(directory):
     entries = []
@@ -117,6 +127,14 @@ def pixel_difference(left, right):
         if a.size != b.size:
             raise AssertionError("Camera comparison frames have different dimensions")
         return sum(ImageStat.Stat(ImageChops.difference(a.convert("RGB"), b.convert("RGB"))).mean) / 3
+
+def gold_surface_fraction(pixels):
+    """Measure the authored gold touch-control surfaces in their fixed screen regions."""
+    with Image.open(io.BytesIO(pixels)) as image:
+        data = image.convert("RGB").tobytes()
+    matches = sum(r >= 210 and 140 <= g <= 230 and 60 <= b <= 160 and r-g >= 20 and g-b >= 30
+                  for r, g, b in zip(data[::3], data[1::3], data[2::3]))
+    return matches / (len(data) / 3)
 
 def classify_network_failures(report):
     """Keep every event, distinguishing only proved successful Unity cache revalidation."""
@@ -208,6 +226,10 @@ class Smoke:
         self.report["buildFingerprint"] = build_fingerprint(args.build_root / game / "Web")
         self.report["layoutConfiguration"] = {"file": str(args.layouts),
             "sha256": hashlib.sha256(args.layouts.read_bytes()).hexdigest(), "game": self.layouts}
+        if args.tessdata:
+            provenance = Path(args.tessdata) / "provenance.json"
+            self.report["ocrModel"] = {"directory": str(args.tessdata),
+                "provenance": json.loads(provenance.read_text()) if provenance.is_file() else None}
         page.on("console", lambda m: self.report["console"].append({"type": m.type, "text": m.text,
             "elapsedMs": round((time.monotonic()-self.started)*1000,1), "navigation": self.navigation_index}))
         page.on("pageerror", lambda e: self.report["pageErrors"].append(str(e)))
@@ -267,7 +289,13 @@ class Smoke:
         self.click(*layout["points"][key], label, reference=layout.get("coordinates") == "reference")
 
     def region(self, key):
-        return tuple(self.layout()["regions"][key])
+        layout = self.layout()
+        if self.args.profile == "mobile-landscape" and key in layout.get("mobileRegions", {}):
+            return tuple(layout["mobileRegions"][key])
+        overrides = layout.get("regionsAboveHeight", {})
+        if self.canvas_geometry["height"] >= overrides.get("height", float("inf")):
+            return tuple(overrides["regions"].get(key, layout["regions"][key]))
+        return tuple(layout["regions"][key])
 
     def check(self, condition, name, evidence=None):
         self.report["checks"].append({"name": name, "passed": bool(condition), "evidence": evidence,
@@ -296,7 +324,16 @@ class Smoke:
             self.last_full_frame = pixels
         return pixels
 
-    def text(self, pixels, psm=11):
+    def text(self, pixels, psm=11, enhance=False):
+        if enhance:
+            # OCR-only preprocessing of the same captured pixels. Raw screenshots
+            # remain unchanged; no spelling substitution or relaxed text matching.
+            source = ImageOps.invert(Image.open(io.BytesIO(pixels)).convert("L"))
+            source = source.resize((round(source.width * 2.5), round(source.height * 2.5)))
+            source = source.filter(ImageFilter.MinFilter(3))
+            encoded = io.BytesIO()
+            source.save(encoded, format="PNG")
+            pixels = encoded.getvalue()
         command = ["tesseract", "stdin", "stdout", "-l", "kor+eng", "--psm", str(psm)]
         if self.args.tessdata:
             command += ["--tessdata-dir", str(self.args.tessdata)]
@@ -331,8 +368,20 @@ class Smoke:
         while time.monotonic() < deadline:
             self.page.wait_for_timeout(600)
             pixels = self.capture(region)
-            last = self.text(pixels, psm=psm)
+            raw = self.text(pixels, psm=psm)
+            last, enhanced = raw, False
+            if not any(compact(value) in compact(last) for value in expected) and region is not None:
+                last = self.text(pixels, psm=psm, enhance=True)
+                enhanced = True
             if any(compact(value) in compact(last) for value in expected):
+                index = len(self.report.setdefault("ocrConfirmations", [])) + 1
+                filename = f"ocr-confirmation-{index:03}.png"
+                (self.output / filename).write_bytes(pixels)
+                self.report["ocrConfirmations"].append({"expected": expected, "region": region, "psm": psm,
+                    "rawText": raw, "confirmedText": last, "rawPixels": filename,
+                    "rawPixelSha256": hashlib.sha256(pixels).hexdigest(),
+                    "preprocessing": "grayscale, invert, 2.5x resize, 3px minimum filter" if enhanced else "none"})
+                self.persist()
                 return last
             (self.output / "pending-ocr.png").write_bytes(pixels)
             (self.output / "pending-ocr.txt").write_text(last, encoding="utf-8")
@@ -435,6 +484,36 @@ class Smoke:
         prompt = self.wait_text("미리암에게 말 걸기", region=self.region("prompt"), psm=7)
         self.check(True, "Camera-only touch gestures preserved the restored NPC interaction prompt", prompt)
 
+    def dawn_control_mode(self, label, prompt_text):
+        """Confirm both the intended input guidance and the actual rendered pad/button branch."""
+        mobile = self.args.profile == "mobile-landscape"
+        guide = self.wait_text("왼쪽 패드로 걷기" if mobile else "WASD",
+                               region=self.region("inputGuide"), psm=7)
+        controls = {}
+        for key in ("movementThumb", "touchButton"):
+            pixels = self.capture(self.region(key))
+            filename = f"{label}-control-{key}.png"
+            (self.output / filename).write_bytes(pixels)
+            controls[key] = {"region": list(self.region(key)), "rawPixels": filename,
+                             "sha256": hashlib.sha256(pixels).hexdigest(),
+                             "goldSurfaceFraction": gold_surface_fraction(pixels)}
+        evidence = {"profile": self.args.profile, "visibleGuide": guide, "visiblePrompt": prompt_text,
+                    "controls": controls,
+                    "pixelRule": "R>=210, 140<=G<=230, 60<=B<=160, R-G>=20, G-B>=30 inside authored control surfaces"}
+        self.report.setdefault("controlModeEvidence", []).append(evidence)
+        if mobile:
+            self.check(controls["movementThumb"]["goldSurfaceFraction"] > .75 and
+                       controls["touchButton"]["goldSurfaceFraction"] > .70,
+                       label + ": mobile visibly renders the movement thumb and touch interaction button", evidence)
+            self.check("WASD" not in guide and "E" not in prompt_text,
+                       label + ": mobile shows touch guidance without a keyboard interaction prompt", evidence)
+        else:
+            self.check("E" in guide and "E" in prompt_text,
+                       label + ": desktop visibly shows WASD guidance and the E interaction shortcut", evidence)
+            self.check(controls["movementThumb"]["goldSurfaceFraction"] < .10 and
+                       controls["touchButton"]["goldSurfaceFraction"] < .10,
+                       label + ": desktop omits both rendered touchscreen controls", evidence)
+
     def verify_public_delivery(self, game_url):
         entries = runtime_entries(self.report["buildFingerprint"])
         self.check(any(e["file"] == "index.html" for e in entries) and any(e["file"].startswith("Build/") for e in entries),
@@ -487,7 +566,7 @@ class Smoke:
         self.check(bool(configuration.get("dataUrl")), "Exact Unity config data URL recorded", configuration)
         self.refresh_geometry()
         ready_ms = self.page.evaluate("performance.now()")
-        self.wait_text(TITLES[self.game])
+        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
         title_ms = self.page.evaluate("performance.now()")
         self.report["loadingTimings"].append({"navigation": "reload" if reload else "fresh context",
             "loaderReadyAfterNavigationMs": round(ready_ms, 1),
@@ -559,7 +638,7 @@ class Smoke:
         self.resolutions("battle-saved")
         self.interaction_viewport()
         self.click_control("title", "타이틀")
-        self.wait_text(TITLES[self.game])
+        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
         self.page.wait_for_timeout(1800)  # Let PlayerPrefs' asynchronous IndexedDB write settle.
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
@@ -605,6 +684,7 @@ class Smoke:
         prompt_region = self.region("prompt")
         before_prompt = self.wait_text("시계 살펴보기", region=prompt_region, psm=7)
         self.check(True, "Opening dialogue closed and exploration-only interaction prompt appeared", before_prompt)
+        self.dawn_control_mode("new-game", before_prompt)
         self.snapshot("exploration-before-input")
         # A fixed wall-clock hold can under-move at low software-renderer frame
         # rates because Unity caps simulation delta. Bound real key-held pulses and
@@ -650,7 +730,7 @@ class Smoke:
         self.click_control("settings", "설정")
         self.wait_text("설정과 여정 보관")
         self.click_control("settingsTitle", "저장하고 타이틀로")
-        self.wait_text(TITLES[self.game])
+        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
         self.page.wait_for_timeout(1800)
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
@@ -659,6 +739,7 @@ class Smoke:
         self.dawn_opening("continued")
         continued_prompt = self.wait_text("미리암에게 말 걸기", region=prompt_region, psm=7)
         self.check(True, "Continue restored the walked-to NPC position after a full browser reload", continued_prompt)
+        self.dawn_control_mode("continued", continued_prompt)
         continued = self.snapshot("journey-continued")
         self.check("소지품" in compact(continued["ocr"]), "Reloaded page continued persisted journey through a real canvas click")
         self.report["storageAfterReload"] = browser_storage(self.page)

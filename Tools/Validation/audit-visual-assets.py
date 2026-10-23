@@ -140,6 +140,11 @@ def main():
     report["status"] = "passed" if (all(p["passed"] for p in projects) and manifest["passed"] and
                                            all(s["identical"] for s in shared.values())) else "failed"
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    if args.output.exists():
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        archived = args.output.with_name(args.output.stem + ".previous-" + stamp + args.output.suffix)
+        args.output.rename(archived)
+        report["previousReportArchive"] = str(archived)
     temporary = args.output.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     temporary.replace(args.output)

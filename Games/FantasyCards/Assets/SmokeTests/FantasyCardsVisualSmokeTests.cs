@@ -50,6 +50,7 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
                 5, "Battle Timeline must release the input lock.");
             Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var before, out var error), Is.True, error);
+            var savedBattle = JsonUtility.FromJson<BattleState>(before);
             SmokeUi.Click("새벽의 정원"); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "11-battle-mobile", 844, 390, () =>
             {
@@ -57,28 +58,65 @@ namespace FantasyCards.SmokeTests
                 Assert.That(SmokeUi.HasText("내 지형"), Is.True);
                 Assert.That(SmokeUi.HasText("여명 0"), Is.True);
                 AssertArtCrops();
-                AssertReadableLabel("새벽의 정원");
+                AssertHandNames(savedBattle);
                 AssertReadableLabel("지형 전개");
             });
             yield return SmokeUi.Capture("FantasyCards", "13-battle-phone-letterbox", 693, 390, () =>
             {
                 AssertTouchButtons("저장", "타이틀", "확대 보기", "지형 전개", "공격 단계", "전투 기록");
-                AssertReadableLabel("새벽의 정원"); AssertReadableLabel("지형 전개");
+                AssertHandNames(savedBattle); AssertReadableLabel("지형 전개");
             });
-            yield return SmokeUi.Capture("FantasyCards", "12-battle-720", 1280, 720, AssertArtCrops);
+            yield return SmokeUi.Capture("FantasyCards", "12-battle-720", 1280, 720, () =>
+            { AssertArtCrops(); AssertHandNames(savedBattle); });
+            yield return SmokeUi.Capture("FantasyCards", "14-battle-1080-hand-names", 1920, 1080, () =>
+            { AssertArtCrops(); AssertHandNames(savedBattle); });
             Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var after, out error), Is.True, error);
             Assert.That(after, Is.EqualTo(before), "Gallery, selection, resizing, and captures must not alter battle state or RNG.");
             LogAssert.NoUnexpectedReceived();
+        }
+        static void AssertHandNames(BattleState savedBattle)
+        {
+            var cards = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+                .Where(button => button.gameObject.activeInHierarchy && button.gameObject.name.StartsWith("Card ", StringComparison.Ordinal)).ToArray();
+            Assert.That(cards.Length, Is.EqualTo(savedBattle.players[0].hand.Count), "Every saved hand card must have its own visible card UI.");
+            foreach (var group in savedBattle.players[0].hand.GroupBy(card => card.definitionId))
+            {
+                var definition = CardCatalog.Get(group.Key);
+                var matches = cards.Where(button => button.gameObject.name == "Card " + definition.id).ToArray();
+                Assert.That(matches.Length, Is.EqualTo(group.Count()), definition.name + " hand instances");
+                foreach (var button in matches)
+                {
+                    // Scope to the actual hand card; an inspector with the same label must not satisfy this check.
+                    var labels = button.GetComponentsInChildren<TMP_Text>().Where(text => text.text == definition.name).ToArray();
+                    Assert.That(labels.Length, Is.EqualTo(1), definition.name + " hand name label");
+                    AssertReadableLabel(labels[0]);
+                }
+            }
         }
         static void AssertReadableLabel(string label)
         {
             var text = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
                 .First(t => t.gameObject.activeInHierarchy && t.text == label);
+            AssertReadableLabel(text);
+        }
+        static void AssertReadableLabel(TMP_Text text)
+        {
             text.ForceMeshUpdate();
-            Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Count(c => c.isVisible),
-                Is.EqualTo(label.Count(c => !char.IsWhiteSpace(c))), label + " must render without ellipsis or hidden characters.");
+            var glyphs = text.textInfo.characterInfo.Take(text.textInfo.characterCount).Where(character => character.isVisible).ToArray();
+            var rendered = new string(glyphs.Select(character => character.character).ToArray());
+            Assert.That(rendered, Is.EqualTo(new string(text.text.Where(character => !char.IsWhiteSpace(character)).ToArray())),
+                text.text + " must render every glyph without ellipsis or hidden characters.");
+            Assert.That(text.isTextTruncated, Is.False, text.text + " must not be truncated.");
+            var bounds = text.rectTransform.rect;
+            foreach (var glyph in glyphs)
+            {
+                Assert.That(glyph.bottomLeft.x, Is.GreaterThanOrEqualTo(bounds.xMin - .5f), text.text + " left glyph edge");
+                Assert.That(glyph.topRight.x, Is.LessThanOrEqualTo(bounds.xMax + .5f), text.text + " right glyph edge");
+                Assert.That(glyph.bottomLeft.y, Is.GreaterThanOrEqualTo(bounds.yMin - .5f), text.text + " bottom glyph edge");
+                Assert.That(glyph.topRight.y, Is.LessThanOrEqualTo(bounds.yMax + .5f), text.text + " top glyph edge");
+            }
             var canvas = text.GetComponentInParent<Canvas>().rootCanvas;
-            Assert.That(text.fontSize * canvas.scaleFactor, Is.GreaterThanOrEqualTo(11.9f), label + " must remain readable on the small canvas.");
+            Assert.That(text.fontSize * canvas.scaleFactor, Is.GreaterThanOrEqualTo(11.9f), text.text + " must remain readable on the canvas.");
         }
         static void AssertGradientMeshes()
         {

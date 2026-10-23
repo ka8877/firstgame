@@ -402,8 +402,9 @@ namespace FantasyCards.Presentation
             var panel = Panel(parent, x0, y0, x1, y1, ink); panel.gameObject.name = "Card " + d.id;
             Artwork(panel, d, .012f, .01f, .988f, .99f);
             Gradient(panel, .012f, .01f, .988f, .48f, new Color(.01f, .02f, .04f, 1), new Color(.01f, .02f, .04f, 0));
-            Panel(panel, .015f, .01f, .985f, small ? .44f : .275f, new Color(.015f, .025f, .045f, .82f));
-            Text(panel, d.name, .065f, small ? .22f : .158f, .94f, small ? .435f : .27f, Compact ? 30 : 29, ivory);
+            Panel(panel, .015f, .01f, .985f, small ? .44f : .345f, new Color(.015f, .025f, .045f, .82f));
+            // Reserve a complete TMP line plus ascender/descender space at 720p as well as 1080p.
+            Text(panel, d.name, .065f, small ? .22f : .158f, .94f, small ? .435f : .338f, Compact ? 30 : 29, ivory);
             Text(panel, CardCatalog.KindName(d.kind) + (d.kind == CardKind.Unit ? "  /  공격 " + d.attack + "  HP " + d.health : "  /  " + CardCatalog.ElementName(d.element)), .065f, .025f, .94f, small ? .22f : .155f, Compact ? 24 : 22, accent);
             var cost = Panel(panel, .045f, small ? .73f : .795f, .24f, .965f, new Color(.02f, .04f, .065f, .94f));
             Text(cost, d.cost.ToString(), .04f, .04f, .96f, .96f, 34, accent, TextAlignmentOptions.Center); Frame(cost, new Color(accent.r, accent.g, accent.b, .75f), 1);

@@ -207,10 +207,13 @@ namespace PathOfDawn.Presentation
             notificationBackdrop.GetComponent<Image>().raycastTarget = false;
             notification = ui.Text(notificationBackdrop,"",28,12,1094,80,27,DawnUi.Gold);
             notificationBackdrop.gameObject.SetActive(false);
-            ui.Text(hud,TouchInterface ? "왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기" : "WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
+            if (TouchInterface)
+                ui.Text(hud,"왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기",380,1012,1430,66,34).alignment = TextAlignmentOptions.BottomLeft;
+            else
+                ui.Text(hud,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
             RefreshObjective();
         }
-        bool TouchInterface => Application.isMobilePlatform || Touchscreen.current != null;
+        bool TouchInterface => DawnPlatformInput.UseTouchControls;
         void BuildTouchControls()
         {
             var controls = ui.Fill(hud, "Touch controls"); touchControls = controls.gameObject;
@@ -222,7 +225,7 @@ namespace PathOfDawn.Presentation
             var thumb = ui.Card(pad, "Movement thumb", 0, 0, 78, 78, new Color(.98f,.78f,.43f,.88f));
             thumb.anchorMin = thumb.anchorMax = thumb.pivot = new Vector2(.5f,.5f); thumb.anchoredPosition = Vector2.zero;
             thumb.GetComponent<Image>().raycastTarget = false; touchMove.thumb = thumb;
-            ui.Text(controls,"이동",142,1008,160,48,24,DawnUi.Paper);
+            ui.Text(controls,"이동",142,1000,160,74,36,DawnUi.Paper).alignment = TextAlignmentOptions.BottomLeft;
             ui.Primary(controls,"대화 · 조사",1570,875,270,120,() => { if(inGame && !modal && !inIntro && !busy) Interact(); });
             touchControls.SetActive(false);
         }

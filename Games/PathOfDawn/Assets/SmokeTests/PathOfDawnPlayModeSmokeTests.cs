@@ -5,6 +5,7 @@ using FirstGame.Shared;
 using NUnit.Framework;
 using PathOfDawn.Core;
 using PathOfDawn.Presentation;
+using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -102,6 +103,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(ReadSave().world.pointId, Is.EqualTo("shore"));
             yield return WalkForwardWithKeyboard();
             yield return SmokeUi.Capture("PathOfDawn", "02-shore-gameplay");
+            yield return CaptureSmallTouchLayout();
 
             MoveTravelerNear("jesus");
             yield return null;
@@ -183,6 +185,43 @@ namespace PathOfDawn.SmokeTests
             Assert.That(continued.world.shelterPrepared && !continued.world.basketShared, Is.True);
             SmokeUi.AssertNoMissingScripts();
             LogAssert.NoUnexpectedReceived();
+        }
+
+        static IEnumerator CaptureSmallTouchLayout()
+        {
+            var touch = InputSystem.AddDevice<Touchscreen>();
+            try
+            {
+                // Rebuild through real settings callbacks, preserving the 110% preference.
+                SmokeUi.Click("설정 [Esc]"); yield return null;
+                SmokeUi.Click("작게"); yield return null;
+                SmokeUi.Click("크게"); yield return null;
+                SmokeUi.Click("돌아가기"); yield return null;
+                yield return SmokeUi.Capture("PathOfDawn", "08-touch-layout-693x390", 693, 390, () =>
+                {
+                    foreach (var label in new[] { "왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기", "이동" })
+                    {
+                        var text = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                            .Single(t => t.gameObject.activeInHierarchy && t.text == label);
+                        text.ForceMeshUpdate();
+                        Assert.That(text.textInfo.characterCount, Is.GreaterThan(0),
+                            "Missing touch text: " + label + " font=" + text.fontSize +
+                            " rect=" + text.rectTransform.rect + " preferred=" + text.GetPreferredValues(label));
+                        SmokeUi.AssertVisibleKorean(label);
+                        Assert.That(text.isTextOverflowing, Is.False, "Small touch label overflows: " + label);
+                        Assert.That(text.textInfo.lineCount, Is.EqualTo(1), "Touch controls should use one line: " + label);
+                    }
+                    Assert.That(SmokeUi.FindButton("대화 · 조사"), Is.Not.Null);
+                });
+            }
+            finally
+            {
+                if (touch.added) InputSystem.RemoveDevice(touch);
+            }
+            SmokeUi.Click("설정 [Esc]"); yield return null;
+            SmokeUi.Click("작게"); yield return null;
+            SmokeUi.Click("크게"); yield return null;
+            SmokeUi.Click("돌아가기"); yield return null;
         }
 
         static IEnumerator DrainDialogueLines()

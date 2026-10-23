@@ -1,315 +1,149 @@
 {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
+  "recordedUtc": "2026-10-23T06:43:38.968026+00:00",
+  "baselineRecord": "Tools/Environment/validation-2026-10-20.json",
   "editorVersion": "6000.3.26f1",
   "editorRevision": "de8167e7440c",
-  "editorVersionCheck": "passed",
-  "editorMissingSharedLibraries": [],
   "editorModules": {
     "windows-mono": "Installed",
     "webgl": "Installed"
   },
   "cliVersion": "1.0.0-beta.13",
-  "codexUnityPlugin": {
-    "version": "0.1.8-beta",
-    "installed": true,
-    "enabled": true
-  },
   "dotnetSdk": "8.0.426",
   "blender": "4.3.2",
-  "auth": {
-    "loggedIn": true,
-    "sessionState": "fresh",
-    "mode": "oauth"
-  },
-  "license": {
-    "active": true,
-    "statusExitCode": 0,
-    "type": "Unity Personal",
-    "activatedAfterExplicitUserEligibilityAndTermsAcknowledgment": true,
-    "activationProductCount": 2
-  },
-  "unityBatchSmoke": {
-    "executed": true,
-    "exitCode": 0,
-    "project": "/workspace/tools/unity-smoke",
-    "engineVersion": "6000.3.26f1",
-    "scriptCompilationSeconds": 18.631958,
-    "message": "Batchmode quit successfully invoked",
-    "log": "/workspace/tools/downloads/unity-smoke-after-personal.log",
-    "previousUnlicensedExitCode": 198,
-    "previousLicenseBlockerResolved": true,
-    "warnings": [
-      "No physical audio output device; ALSA/FMOD initialization warning"
-    ]
-  },
-  "pipeline": {
-    "version": "0.8.0-exp.1",
-    "installedInBothProjectManifests": true,
-    "liveConnectionVerified": true,
-    "verifiedProject": "Games/FantasyCards",
-    "pathOfDawnLiveConnection": "not separately verified",
-    "editorStatus": {
-      "status": "ready",
-      "compiling": false,
-      "domainReloadInProgress": false,
-      "playMode": "stopped",
-      "projectPath": "/workspace/firstgame/Games/FantasyCards",
-      "unityVersion": "6000.3.26f1"
+  "currentRuntime": {
+    "auth": {
+      "loggedIn": false,
+      "sessionState": "none",
+      "mode": "none",
+      "credentialSource": "none"
     },
-    "readOnlyEvalResult": "6000.3.26f1",
-    "diagnosticEditorClosed": true,
-    "diagnosticEditorExitCode": 0,
-    "evidence": "Artifacts/Environment/pipeline-fantasycards.json"
-  },
-  "reusableInstallScript": {
-    "executed": true,
-    "exitCode": 0,
-    "dependencyInstallation": "passed",
+    "authStatusExitCode": 3,
+    "authReady": false,
+    "authBlocker": "No current Unity CLI login; account-dependent commands may require sign-in",
+    "license": {
+      "active": true,
+      "signedIn": true,
+      "authMode": "oauth"
+    },
+    "licenseStatusExitCode": 0,
+    "licenseReady": true,
+    "runtimeEditorReady": true,
     "runtimeReady": true,
-    "runtimeDiagnosticLicenseExitCode": 0,
     "runtimeBlocker": null,
-    "unexpectedDiagnosticFailures": "not suppressed"
+    "diagnosticErrors": []
   },
-  "unityPlayMode": {
-    "status": "passed",
+  "nativeTests": {
     "FantasyCards": {
-      "nativeTotal": 18,
-      "uiFixtures": 3
+      "result": "Passed",
+      "total": "19",
+      "passed": "19",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 06:22:13Z",
+      "end-time": "2026-10-23 06:22:18Z"
     },
     "PathOfDawn": {
-      "nativeTotal": 10,
-      "uiFixtures": 2
-    },
-    "evidence": "Artifacts/TestResults/<Game>/EditMode.xml"
+      "result": "Passed",
+      "total": "10",
+      "passed": "10",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 06:37:06Z",
+      "end-time": "2026-10-23 06:37:07Z"
+    }
   },
-  "windowsBuild": {
-    "status": "succeeded",
-    "FantasyCardsBytes": 107000802,
-    "PathOfDawnBytes": 104432299,
-    "playerExecution": "not run on this Linux machine",
-    "evidence": "Artifacts/Builds/<Game>/Windows/BuildEvidence.txt"
+  "externalCore": {
+    "passed": 53,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
   },
-  "webBuild": {
-    "status": "succeeded",
-    "FantasyCardsBytes": 22845614,
-    "PathOfDawnBytes": 19033850,
-    "commandExitCodes": {
-      "FantasyCards": 0,
-      "PathOfDawn": 0
-    },
-    "editorUrpRestoration": "verified for both final Web builds",
-    "browserValidation": "passed for both final builds",
-    "evidence": "Artifacts/Builds/<Game>/Web/BuildEvidence.txt",
-    "PathOfDawnContrastFixBuild": "succeeded; native 10/10, Windows and Web exit 0"
-  },
-  "display": {
-    "xvfb": "21.1.16",
-    "display": ":99",
-    "resolution": [
-      1920,
-      1080
-    ],
-    "renderer": "llvmpipe LLVM19.1.7",
-    "mesa": "25.0.7",
-    "OpenGL": "4.5",
-    "hardwareAcceleration": false,
-    "screenCaptureTest": "passed; empty display only",
-    "installerRepeatability": "passed",
-    "packageTrust": "Debian InRelease signatures via sqv + Packages.xz SHA256 + per-deb SHA256"
-  },
-  "buildPreflight": {
-    "availableDiskGiBApprox": 13,
-    "logicalCpus": 5,
-    "availableMemoryGiBApprox": 31,
-    "windowsMono64Variations": [
-      "development",
-      "nondevelopment"
-    ],
-    "emscripten": "3.1.39-git",
-    "emscriptenVersionCommandExitCode": 0,
-    "bundledNode": "15.14.0",
-    "binaryenWasmOpt": "112",
-    "llvmClangMissingSharedLibraries": [],
-    "note": "Standalone emcc needs an EM_CONFIG pointing at bundled LLVM, Binaryen, and Node; Unity build tooling normally supplies this. Preflight is not a game build.",
-    "cgroupCpuBudget": 4,
-    "cgroupMemoryGiB": 32
-  },
-  "resourceRecovery": {
-    "verifiedOrphanShutdownHelpersTerminated": 28,
-    "signal": "SIGTERM via pidfd",
-    "remainingConfirmedHelpers": 0,
-    "activeBuildTreesProtected": true,
-    "rawCommandLineOrCredentialsPrinted": false,
-    "memoryBeforeBytes": 30607515648,
-    "memoryAfterBytes": 28788334592,
-    "pidsBefore": 1031,
-    "pidsAfter": 551,
-    "defaultSandboxNewCommandAfterCleanup": "passed",
-    "oomKillCount": 0,
-    "note": "Concurrent builds affect observed memory delta; recovery does not prove a sole causal explanation."
-  },
-  "browserPrerequisites": {
-    "browserPrerequisitesReady": true,
-    "versions": {
-      "Python": "3.12.14",
-      "Playwright": "1.62.0",
-      "Pillow": "12.3.0",
-      "Chromium": "154.0.8037.57",
-      "Tesseract": "5.5.0"
-    },
-    "matchesVerifiedVersions": true,
-    "tessdataCommit": "87416418657359cb625c412a48b6e1d6d41c29bd",
-    "ocrModelsLoaded": [
-      "kor",
-      "eng"
-    ],
-    "browserLaunched": false,
-    "freshAndRepeatInstallExitCodes": [
-      0,
-      0
-    ]
-  },
-  "browserValidation": {
-    "status": "passed",
-    "scope": "actual pointer/keyboard, Korean UI, 720p/1080p render, save/page reload/continue, IndexedDB markers",
-    "games": {
-      "FantasyCards": {
-        "checks": 21,
-        "report": "Artifacts/Validation/WebSmoke/FantasyCards/report.json",
-        "renderer": {
-          "available": true,
-          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
-          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
-        },
-        "loadingTimings": [
-          {
-            "navigation": "fresh context",
-            "loaderReadyAfterNavigationMs": 4003.8,
-            "titleOcrConfirmedAfterNavigationMs": 10314.5,
-            "note": "Includes loopback transfer, software WebGL startup and polling. Title timing also includes screenshot/OCR."
-          },
-          {
-            "navigation": "reload",
-            "loaderReadyAfterNavigationMs": 10470.1,
-            "titleOcrConfirmedAfterNavigationMs": 18181.5,
-            "note": "Includes loopback transfer, software WebGL startup and polling. Title timing also includes screenshot/OCR."
-          }
-        ],
-        "buildFiles": [
-          {
-            "file": "Build/Web.data.unityweb",
-            "bytes": 9673135,
-            "modifiedUtc": "2026-10-19T17:18:03.929687+00:00",
-            "sha256": "843cb6b0aeba98147f2726a8cfe218e879e03706f3efd434d0d65d0f5891e868"
-          },
-          {
-            "file": "Build/Web.framework.js.unityweb",
-            "bytes": 89553,
-            "modifiedUtc": "2026-10-19T17:24:19.890708+00:00",
-            "sha256": "703658a777b0ca3ec1d16dacfed644abeaee4b5aa2da5ed71840918a8f08414d"
-          },
-          {
-            "file": "Build/Web.loader.js",
-            "bytes": 47867,
-            "modifiedUtc": "2026-10-19T17:24:28.117823+00:00",
-            "sha256": "d42a370c13d50fa604f264227b051382c65241516519d94613d45515dccb7736"
-          },
-          {
-            "file": "Build/Web.wasm.unityweb",
-            "bytes": 13030574,
-            "modifiedUtc": "2026-10-19T17:24:28.098643+00:00",
-            "sha256": "f3066fe9de14fa6801dd3fcf55ed8d936517924235d8dc33fe7ed8e78ecce8b7"
-          },
-          {
-            "file": "BuildEvidence.txt",
-            "bytes": 117,
-            "modifiedUtc": "2026-10-19T17:24:34.425702+00:00",
-            "sha256": "3f22e6443d4e60290ba26517d581c724103c7ba2e9963ca25fb683a7af7fdf89"
-          },
-          {
-            "file": "index.html",
-            "bytes": 4485,
-            "modifiedUtc": "2026-10-19T16:53:49.317702+00:00",
-            "sha256": "29bf54dc6864b335b4f3568cf0738410b5f77b94893464cd2e5c2476f0b4d836"
-          }
-        ],
-        "saveMarkers": [
-          "firstgame.save.fantasy-battle",
-          "firstgame.save.fantasy-battle.backup"
-        ]
-      },
-      "PathOfDawn": {
-        "checks": 23,
-        "report": "Artifacts/Validation/WebSmoke/PathOfDawn/report.json",
-        "renderer": {
-          "available": true,
-          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
-          "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)"
-        },
-        "loadingTimings": [
-          {
-            "navigation": "fresh context",
-            "loaderReadyAfterNavigationMs": 4270.9,
-            "titleOcrConfirmedAfterNavigationMs": 9141.3,
-            "note": "Includes loopback transfer, software WebGL startup and polling. Title timing also includes screenshot/OCR."
-          },
-          {
-            "navigation": "reload",
-            "loaderReadyAfterNavigationMs": 3497.4,
-            "titleOcrConfirmedAfterNavigationMs": 8301.9,
-            "note": "Includes loopback transfer, software WebGL startup and polling. Title timing also includes screenshot/OCR."
-          }
-        ],
-        "buildFiles": [
-          {
-            "file": "Build/Web.data.unityweb",
-            "bytes": 5609014,
-            "modifiedUtc": "2026-10-19T17:56:35.175359+00:00",
-            "sha256": "a7b77f2f885335b39b9950355c235e4eee37ff680a4328f66f982134d65d29a0"
-          },
-          {
-            "file": "Build/Web.framework.js.unityweb",
-            "bytes": 89555,
-            "modifiedUtc": "2026-10-19T18:02:05.572710+00:00",
-            "sha256": "b6c2e8899ed69d96710baa229d3b336b161c7a487561d7edf5ea127486e52e52"
-          },
-          {
-            "file": "Build/Web.loader.js",
-            "bytes": 47867,
-            "modifiedUtc": "2026-10-19T18:02:17.548568+00:00",
-            "sha256": "96a5d8d3371ef1b1b8d9fd5692ba973ff52bf606d5d1611bccb5f6affbfd64f1"
-          },
-          {
-            "file": "Build/Web.wasm.unityweb",
-            "bytes": 13282939,
-            "modifiedUtc": "2026-10-19T18:02:17.504614+00:00",
-            "sha256": "23adc76bbe94e604a9f2b6c656259e7b88d77c22ab6fb1913a6092010d6b35b8"
-          },
-          {
-            "file": "BuildEvidence.txt",
-            "bytes": 117,
-            "modifiedUtc": "2026-10-19T18:02:23.108315+00:00",
-            "sha256": "9d23b312dab4845b291b282e3fb1ee84354d06b44ab8d6936258b2314e2988e7"
-          },
-          {
-            "file": "index.html",
-            "bytes": 4475,
-            "modifiedUtc": "2026-10-19T17:29:15.904353+00:00",
-            "sha256": "e110aba2c846831d4473f677dc146a632cace560e729bccdff6d12305e7e6ad8"
-          }
-        ],
-        "saveMarkers": [
-          "firstgame.save.path-of-dawn",
-          "firstgame.save.path-of-dawn.backup"
-        ]
+  "builds": {
+    "FantasyCards/Windows": {
+      "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "125886962",
+        "Duration": "00:00:11.1532210",
+        "Errors": "0",
+        "Warnings": "1"
       }
     },
-    "limitations": [
-      "Software GPU; target performance not measured",
-      "Internal shader support diagnostics remain in console.log",
-      "Exact data-URL cache revalidation transport abort retained and classified with loader/log evidence",
-      "PathOfDawn SwiftShader capture timeout retained; final X11/Mesa run passed",
-      "Full browser restart, full manual battle and Web-to-Windows save transfer not run"
-    ]
+    "FantasyCards/Web": {
+      "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7134",
+        "Duration": "00:03:43.7808100",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 40962235,
+      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
+    },
+    "PathOfDawn/Windows": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "147063467",
+        "Duration": "00:00:11.7089400",
+        "Errors": "0",
+        "Warnings": "1"
+      }
+    },
+    "PathOfDawn/Web": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7124",
+        "Duration": "00:03:27.9825840",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 37647180,
+      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
+    }
+  },
+  "web": {
+    "Desktop720/FantasyCards": {
+      "status": "failed",
+      "checks": 8,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
+    },
+    "Desktop720/PathOfDawn": {
+      "status": "passed",
+      "checks": 26,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
+    }
+  },
+  "publicWeb": {},
+  "cloudStartConfiguration": {
+    "status": "draft saved and reread confirmed identical",
+    "revision": 10,
+    "requiresPublish": true,
+    "freshTaskRestorationVerified": false
+  },
+  "limitations": [
+    "Software GPU only; no target PC or handset performance measurement.",
+    "Actual Windows player, Android/iPhone and Safari have not been run.",
+    "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
+    "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
+  ],
+  "assetAudit": {
+    "status": "passed",
+    "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
+    "metaCounts": {
+      "FantasyCards": 146,
+      "PathOfDawn": 256
+    }
   }
 }

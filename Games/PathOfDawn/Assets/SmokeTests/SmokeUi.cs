@@ -112,11 +112,10 @@ namespace PathOfDawn.SmokeTests
             Assert.That(text.textInfo.characterCount, Is.GreaterThan(0), "TMP did not build text geometry.");
             Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Any(c => c.isVisible), Is.True);
         }
-        public static IEnumerator Capture(string game, string name)
+        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action validateLayout = null)
         {
             // Native URP camera render. Batch mode does not service WaitForEndOfFrame reliably.
             // Overlay canvases temporarily use the same camera so real uGUI/TMP is in the PNG.
-            const int width = 1920, height = 1080;
             var camera = Camera.main;
             Assert.That(camera, Is.Not.Null, "Cannot capture without the actual scene camera.");
             var canvases = UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None)
@@ -160,6 +159,7 @@ namespace PathOfDawn.SmokeTests
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +
                     "\nScene " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().path +
                     "\nGraphics " + SystemInfo.graphicsDeviceName + "\nOverlay UI included through temporary camera canvas mode.\n");
+                validateLayout?.Invoke();
             }
             finally
             {

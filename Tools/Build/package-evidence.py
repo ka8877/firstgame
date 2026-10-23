@@ -24,11 +24,16 @@ selected = [
     root / "Tools/Art/toon-verification.json",
     root / "Tools/Art/Illustration/verification.json",
     artifacts / "Environment/pipeline-fantasycards.json",
+    artifacts / "Environment/browser-prerequisites-best.json",
     artifacts / "TestResults/Core/core-tests.trx",
     artifacts / "Validation/WebSmoke/summary.json",
     artifacts / "Validation/WebRendererProbeFinal.json",
     artifacts / "Validation/VisualAssets/final-audit.json",
+    artifacts / "Validation/VisualAssets/preparation-audit.json",
     artifacts / "Validation/Portal/portal-preview.json",
+    artifacts / "Validation/GitHub/source-clone.json",
+    artifacts / "Validation/VisualWeb/control-mode-regression-diagnostic.json",
+    artifacts / "Validation/VisualWeb/control-mode-regression-before-fix.png",
 ]
 selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
@@ -53,6 +58,9 @@ for game in ("FantasyCards", "PathOfDawn"):
         selected.append(current / "report.json")
         for pattern in ("*.png", "*.txt"):
             selected.extend(sorted(current.glob(pattern)))
+        for previous in current.parent.glob(game + ".previous-*"):
+            for pattern in ("*.json", "*.png", "*.txt"):
+                selected.extend(sorted(previous.rglob(pattern)))
 
 # Public deployment checks are produced only after Pages has actually served the build.
 public = artifacts / "Validation/PublicWeb"
