@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compile the unmodified official Cinemachine runtime APIs used by the games.
+       Unused Splines integration and the URP-specific extension are outside this check. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>9.0</LangVersion>
+    <NuGetLockFilePath>$(BaseIntermediateOutputPath)packages.lock.json</NuGetLockFilePath>
+    <DefineConstants>UNITY_6000_3;UNITY_6000_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2022_3_OR_NEWER;ENABLE_INPUT_SYSTEM;CINEMACHINE_UNITY_6000_0_11F1_OR_NEWER;CINEMACHINE_PHYSICS;CINEMACHINE_PHYSICS_2D;CINEMACHINE_UGUI;CINEMACHINE_TIMELINE;CINEMACHINE_UNITY_INPUTSYSTEM;CINEMACHINE_UNITY_ANIMATION;CINEMACHINE_UIELEMENTS</DefineConstants>
+    <TemplateAssemblies>$(UnityEditorData)/Resources/PackageManager/ProjectTemplates/libcache/com.unity.template.3d-cross-platform-17.0.14/ScriptAssemblies</TemplateAssemblies>
+    <OutputPath>../../Artifacts/ReferenceCompile/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(UnityEditorData)/Managed/UnityEngine/UnityEngine.*.dll" />
+    <Reference Include="$(TemplateAssemblies)/UnityEngine.UI.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.InputSystem.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Timeline.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Mathematics.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Collections.dll" />
+    <Compile Include="$(CinemachinePackage)/Runtime/**/*.cs" Exclude="$(CinemachinePackage)/Runtime/**/*Spline*.cs;$(CinemachinePackage)/Runtime/Deprecated/CinemachineDollyCart.cs;$(CinemachinePackage)/Runtime/Deprecated/CinemachineTrackedDolly.cs" />
+    <Compile Include="$(CinemachinePackage)/Runtime/Core/SplineHelpers.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,259 @@
+using System;
+using System.Collections;
+using System.Linq;
+using FirstGame.Shared;
+using NUnit.Framework;
+using PathOfDawn.Core;
+using PathOfDawn.Presentation;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.TestTools;
+using UnityEngine.Playables;
+
+namespace PathOfDawn.SmokeTests
+{
+    // Editor-only test discovery; the fixture explicitly runs the scene in PlayMode.
+    public sealed class PathOfDawnPlayModeSmokeTests
+    {
+        IDisposable storageScope;
+        Keyboard keyboard;
+        InputSettings originalInputSettings, fixtureInputSettings;
+        bool hadSlot, hadScale, hadVolume, preferencesCaptured;
+        string originalSlot;
+        float originalScale, originalVolume, originalListenerVolume;
+
+        [UnitySetUp]
+        public IEnumerator EnterGame()
+        {
+            EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            yield return new EnterPlayMode();
+            storageScope = PersistentSaves.UseBackendForTesting(new MemorySaveBackend());
+            hadSlot = PlayerPrefs.HasKey("POD.activeSlot"); originalSlot = PlayerPrefs.GetString("POD.activeSlot", "");
+            hadScale = PlayerPrefs.HasKey("POD.textScale"); originalScale = PlayerPrefs.GetFloat("POD.textScale", 1);
+            hadVolume = PlayerPrefs.HasKey("POD.volume"); originalVolume = PlayerPrefs.GetFloat("POD.volume", .65f);
+            originalListenerVolume = AudioListener.volume; preferencesCaptured = true;
+            // A known slot/settings baseline, while preserving every original key for teardown.
+            PlayerPrefs.DeleteKey("POD.activeSlot"); PlayerPrefs.SetFloat("POD.textScale", 1); PlayerPrefs.SetFloat("POD.volume", .65f);
+            // Batch editor has no focused GameView. Use a disposable settings clone so queued
+            // test keyboard events reach runtime actions without changing the project asset.
+            originalInputSettings = InputSystem.settings;
+            fixtureInputSettings = UnityEngine.Object.Instantiate(originalInputSettings);
+            fixtureInputSettings.hideFlags = HideFlags.HideAndDontSave;
+            fixtureInputSettings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+            fixtureInputSettings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+            InputSystem.settings = fixtureInputSettings;
+            keyboard = InputSystem.AddDevice<Keyboard>();
+            yield return SmokeUi.LoadBoot();
+        }
+
+        [UnityTearDown]
+        public IEnumerator LeaveGame()
+        {
+            // Stop scene scripts before returning either storage or preferences to the user.
+            yield return SmokeUi.UnloadBoot();
+            if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
+            keyboard = null;
+            if (originalInputSettings != null) InputSystem.settings = originalInputSettings;
+            if (fixtureInputSettings != null) UnityEngine.Object.Destroy(fixtureInputSettings);
+            originalInputSettings = fixtureInputSettings = null;
+            storageScope?.Dispose(); storageScope = null;
+            if (preferencesCaptured)
+            {
+                if (hadSlot) PlayerPrefs.SetString("POD.activeSlot", originalSlot); else PlayerPrefs.DeleteKey("POD.activeSlot");
+                if (hadScale) PlayerPrefs.SetFloat("POD.textScale", originalScale); else PlayerPrefs.DeleteKey("POD.textScale");
+                if (hadVolume) PlayerPrefs.SetFloat("POD.volume", originalVolume); else PlayerPrefs.DeleteKey("POD.volume");
+                PlayerPrefs.Save(); AudioListener.volume = originalListenerVolume; preferencesCaptured = false;
+            }
+            if (Application.isPlaying) yield return new ExitPlayMode();
+        }
+
+        [UnityTest]
+        public IEnumerator RealDialogueRewindAlternateOutcomeAndContinuePreserveMemories()
+        {
+            var app = UnityEngine.Object.FindFirstObjectByType<PathOfDawnApp>();
+            Assert.That(app, Is.Not.Null);
+            Assert.That(app.EnvironmentPrefab, Is.Not.Null, "Generated environment is not connected.");
+            Assert.That(app.JesusPrefab, Is.Not.Null);
+            Assert.That(app.TravelerPrefab, Is.Not.Null);
+            Assert.That(app.MiriamPrefab, Is.Not.Null);
+            yield return SmokeUi.WaitForVisibleKorean("새벽의 길");
+            SmokeUi.AssertNoMissingScripts();
+            yield return SmokeUi.Capture("PathOfDawn", "01-title");
+            Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False);
+
+            SmokeUi.Click("설정 · 저장 가져오기"); yield return null;
+            SmokeUi.Click("크게"); yield return null;
+            Assert.That(PlayerPrefs.GetFloat("POD.textScale"), Is.EqualTo(1.1f).Within(.001f));
+            SmokeUi.Click("줄이기"); yield return null;
+            Assert.That(PlayerPrefs.GetFloat("POD.volume"), Is.EqualTo(.55f).Within(.001f));
+            SmokeUi.Click("타이틀로"); yield return null;
+            SmokeUi.Click("새 게임");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("다음 대사 [E]") != null,
+                30, "The six-second introduction did not reach dialogue within the software-rendering budget.", () =>
+                {
+                    var intro = app.GetComponent<PlayableDirector>();
+                    return (intro == null ? "No PlayableDirector" :
+                        "Timeline state=" + intro.state + " time=" + intro.time + " duration=" + intro.duration) +
+                        " | Time.time=" + Time.time + " realTime=" + Time.realtimeSinceStartup + " delta=" + Time.deltaTime;
+                });
+            yield return DrainDialogueLines();
+            Assert.That(ReadSave().world.pointId, Is.EqualTo("shore"));
+            yield return WalkForwardWithKeyboard();
+            yield return SmokeUi.Capture("PathOfDawn", "02-shore-gameplay");
+
+            MoveTravelerNear("jesus");
+            yield return null;
+            yield return PressInteract();
+            yield return WaitForConversation();
+            yield return DrainDialogueLines();
+            SmokeUi.Click("미리암을 도와 빵과 물을 나른다."); yield return null;
+            yield return DrainDialogueLines();
+            var afterHelp = ReadSave();
+            Assert.That(afterHelp.world.waterCarried, Is.True);
+            Assert.That(afterHelp.world.inventory, Does.Contain("bread_miriam"));
+            Assert.That(afterHelp.world.pointId, Is.EqualTo("room"));
+            Assert.That(SmokeUi.HasText("신뢰 2"), Is.True);
+
+            MoveTravelerNear("miriam");
+            yield return null;
+            yield return PressInteract();
+            yield return WaitForConversation();
+            yield return DrainDialogueLines();
+            SmokeUi.Click("바구니를 가지고 나가 함께 나눌 준비를 한다."); yield return null;
+            yield return DrainDialogueLines();
+            yield return SmokeUi.WaitForVisibleKorean("나눔의 목격자");
+            yield return SmokeUi.Capture("PathOfDawn", "03-witness");
+            var witness = ReadSave();
+            Assert.That(witness.world.basketShared, Is.True);
+            Assert.That(witness.world.inventory, Does.Not.Contain("bread_miriam"));
+            Assert.That(witness.meta.routes, Is.EquivalentTo(new[] { "witness" }));
+            Assert.That(witness.checkpoints.Count, Is.EqualTo(2));
+            Assert.That(GameObject.Find("Galilee Dawn").transform.Find("Shared basket").gameObject.activeSelf, Is.True);
+            Assert.That(SmokeUi.HasText("신뢰 3"), Is.True);
+
+            SmokeUi.Click("기억을 품고 과거로"); yield return null;
+            SmokeUi.Click("두 번째 선택 전 · 석조 방으로 회귀"); yield return null;
+            var rewound = ReadSave();
+            Assert.That(rewound.world.pointId, Is.EqualTo("room"));
+            Assert.That(rewound.world.inventory, Does.Contain("bread_miriam"), "Checkpoint must restore inventory, not only dialogue.");
+            Assert.That(rewound.world.basketShared, Is.False);
+            Assert.That(rewound.meta.routes, Is.EquivalentTo(new[] { "witness" }), "Discovered route must survive rewind.");
+            Assert.That(SmokeUi.HasText("신뢰 2"), Is.True, "The Ink-owned relationship must roll back with the checkpoint.");
+            Assert.That(GameObject.Find("Galilee Dawn").transform.Find("Shared basket").gameObject.activeSelf, Is.False);
+            yield return DrainDialogueLines();
+            SmokeUi.Click("석조 방을 쉼터로 준비하고 돌아갈 이들을 기다린다."); yield return null;
+            yield return DrainDialogueLines();
+            yield return SmokeUi.WaitForVisibleKorean("문턱의 등불");
+            yield return SmokeUi.Capture("PathOfDawn", "04-shelter");
+            var shelter = ReadSave();
+            Assert.That(shelter.world.shelterPrepared, Is.True);
+            Assert.That(shelter.world.basketShared, Is.False, "The abandoned witness branch leaked into the shelter branch.");
+            Assert.That(shelter.world.peopleConnected, Is.False);
+            Assert.That(shelter.world.inventory, Does.Contain("bread_miriam"));
+            Assert.That(shelter.meta.routes, Is.EquivalentTo(new[] { "witness", "shelter" }));
+            Assert.That(GameObject.Find("Galilee Dawn").transform.Find("Shelter rug").gameObject.activeSelf, Is.True);
+
+            SmokeUi.Click("저장하고 타이틀로"); yield return null;
+            yield return SmokeUi.WaitForVisibleKorean("새벽의 길");
+            yield return SmokeUi.Capture("PathOfDawn", "06-returned-title");
+            var snapshotBeforeReload = ReadSave();
+            var sourceStory = Resources.Load<Ink.UnityIntegration.InkFile>("Story/galilee");
+            Assert.That(sourceStory, Is.Not.Null);
+            Assert.DoesNotThrow(() => new NarrativeSession(sourceStory.storyJson).ValidateSave(snapshotBeforeReload),
+                "The actual JsonUtility save payload must validate before the fresh app reads it.");
+            var oldAppId = UnityEngine.Object.FindFirstObjectByType<PathOfDawnApp>().GetInstanceID();
+            yield return SmokeUi.LoadBoot(); // A fresh app instance must read the same isolated stored slot.
+            Assert.That(UnityEngine.Object.FindFirstObjectByType<PathOfDawnApp>().GetInstanceID(), Is.Not.EqualTo(oldAppId),
+                "The continuation smoke must destroy and recreate the actual scene app.");
+            SmokeUi.Click("이어하기"); yield return null;
+            yield return SmokeUi.Capture("PathOfDawn", "07-continuing-state");
+            yield return DrainDialogueLines();
+            yield return SmokeUi.WaitForVisibleKorean("문턱의 등불");
+            yield return SmokeUi.Capture("PathOfDawn", "05-continued-shelter");
+            Assert.That(GameObject.Find("Galilee Dawn").transform.Find("Shelter rug").gameObject.activeSelf, Is.True);
+            Assert.That(GameObject.Find("Galilee Dawn").transform.Find("Shared basket").gameObject.activeSelf, Is.False);
+            SmokeUi.Click("저장하고 타이틀로"); yield return null;
+            var continued = ReadSave();
+            Assert.That(continued.randomState, Is.EqualTo(shelter.randomState));
+            Assert.That(continued.world.inventory, Is.EquivalentTo(shelter.world.inventory));
+            Assert.That(continued.meta.routes, Is.EquivalentTo(shelter.meta.routes));
+            Assert.That(continued.meta.choiceHistory, Is.EqualTo(shelter.meta.choiceHistory), "Loading must not apply choices twice.");
+            Assert.That(continued.world.shelterPrepared && !continued.world.basketShared, Is.True);
+            SmokeUi.AssertNoMissingScripts();
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        static IEnumerator DrainDialogueLines()
+        {
+            // Follow the actual generated dialogue buttons, one UI transition per frame.
+            for (var i = 0; i < 60; i++)
+            {
+                var label = new[] { "다음 대사 [E]", "선택하기 [E]", "계속 [E]" }
+                    .FirstOrDefault(candidate => SmokeUi.FindButton(candidate) != null);
+                if (label == null) yield break;
+                SmokeUi.Click(label);
+                yield return null;
+            }
+            Assert.Fail("Dialogue did not settle at a choice, movement, or outcome within 60 lines.");
+        }
+        static void MoveTravelerNear(string actorName)
+        {
+            var traveler = GameObject.Find("traveler"); var actor = GameObject.Find(actorName);
+            Assert.That(traveler, Is.Not.Null); Assert.That(actor, Is.Not.Null);
+            var controller = traveler.GetComponent<CharacterController>();
+            controller.enabled = false;
+            traveler.transform.position = actor.transform.position + Vector3.back * 1.35f;
+            controller.enabled = true;
+            Physics.SyncTransforms();
+        }
+        IEnumerator WalkForwardWithKeyboard()
+        {
+            var traveler = GameObject.Find("traveler");
+            Assert.That(traveler, Is.Not.Null);
+            var origin = traveler.transform.position;
+            try
+            {
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.W));
+                yield return SmokeUi.WaitUntil(() => traveler.transform.position.z - origin.z > .3f,
+                    3, "Holding W did not move the actual CharacterController forward.", () =>
+                        "Start=" + origin + " Current=" + traveler.transform.position + " keyboardEnabled=" + keyboard.enabled);
+            }
+            finally
+            {
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+            }
+            yield return null;
+            Assert.That(traveler.transform.position.z - origin.z, Is.GreaterThan(.3f));
+        }
+        IEnumerator WaitForConversation()
+        {
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("다음 대사 [E]") != null || SmokeUi.FindButton("선택하기 [E]") != null,
+                3, "Virtual E input did not open the nearby NPC conversation.", () =>
+                {
+                    var traveler = GameObject.Find("traveler"); var jesus = GameObject.Find("jesus"); var miriam = GameObject.Find("miriam");
+                    return "Traveler=" + (traveler == null ? "missing" : traveler.transform.position.ToString()) +
+                        " Jesus=" + (jesus == null ? "missing" : jesus.transform.position.ToString()) +
+                        " Miriam=" + (miriam == null ? "missing" : miriam.transform.position.ToString()) +
+                        " keyboardEnabled=" + (keyboard != null && keyboard.enabled) + " focused=" + Application.isFocused +
+                        " | " + SmokeUi.VisibleUi();
+                });
+        }
+        IEnumerator PressInteract()
+        {
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.E));
+            yield return null;
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+            yield return null;
+        }
+        static NarrativeSave ReadSave()
+        {
+            var slot = PlayerPrefs.GetString("POD.activeSlot", "path-of-dawn");
+            Assert.That(PersistentSaves.TryLoad(slot, "path-of-dawn", 1, "portable-1", out var payload, out var error), Is.True, error);
+            var save = JsonUtility.FromJson<NarrativeSave>(payload);
+            Assert.That(save, Is.Not.Null);
+            return save;
+        }
+    }
+}

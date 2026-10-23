@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Supplemental API check only. Unity must still import, compile and run each project.
+       Engine DLLs must come from the verified Unity 6000.3.26f1 installation.
+       Template package DLLs are official Unity artifacts, not freshly resolved game packages. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>9.0</LangVersion>
+    <NuGetLockFilePath>$(BaseIntermediateOutputPath)packages.lock.json</NuGetLockFilePath>
+    <DefineConstants>UNITY_EDITOR;UNITY_6000_3;UNITY_6000_3_OR_NEWER;UNITY_6000_0_OR_NEWER;UNITY_2023_2_OR_NEWER;UNITY_2022_3_OR_NEWER;ENABLE_INPUT_SYSTEM</DefineConstants>
+    <TemplateAssemblies>$(UnityEditorData)/Resources/PackageManager/ProjectTemplates/libcache/com.unity.template.3d-cross-platform-17.0.14/ScriptAssemblies</TemplateAssemblies>
+    <OutputPath>../../Artifacts/ReferenceCompile/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="CinemachineReferenceCompile.csproj" />
+    <Reference Include="$(UnityEditorData)/Managed/UnityEngine/UnityEngine.*.dll" />
+    <Reference Include="$(TemplateAssemblies)/UnityEngine.UI.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.TextMeshPro.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.InputSystem.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Timeline.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Mathematics.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.Collections.dll" />
+    <Compile Include="../../Games/FantasyCards/Assets/Game/Core/*.cs" />
+    <Compile Include="../../Games/FantasyCards/Assets/Game/Data/*.cs" />
+    <Compile Include="../../Games/FantasyCards/Assets/Game/Presentation/*.cs" />
+    <Compile Include="../../Games/FantasyCards/Assets/Shared/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Assets/Game/Core/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Assets/Game/Authoring/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Assets/Game/Presentation/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/InkLibs/InkRuntime/**/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/Runtime/*.cs" />
+  </ItemGroup>
+  <Target Name="CheckReferenceLocations" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(UnityEditorData)/Managed/UnityEngine.dll')" Text="Pass -p:UnityEditorData=/path/to/Unity/Editor/Data from Unity 6000.3.26f1." />
+    <Error Condition="!Exists('$(TemplateAssemblies)/Unity.InputSystem.dll')" Text="Official Unity template reference assemblies are missing." />
+    <Error Condition="!Exists('$(CinemachinePackage)/Runtime/Unity.Cinemachine.asmdef')" Text="Pass -p:CinemachinePackage=/path/to/official/cinemachine/package." />
+  </Target>
+</Project>

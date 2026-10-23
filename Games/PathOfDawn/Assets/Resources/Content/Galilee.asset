@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4b107a13e5592c9f2d92595003289d, type: 3}
+  m_Name: Galilee
+  m_EditorClassIdentifier: PathOfDawn.Authoring::PathOfDawn.Authoring.StoryChapter
+  stableId: galilee_dawn
+  contentVersion: galilee-0.1.0
+  story: {fileID: 6231892579173505729, guid: d0143ffd5e015ff89a4240602a85967d, type: 3}
+  checkpointIds:
+  - shore_before_choice
+  - room_before_choice
+  sources:
+  - routeId: witness
+    biblicalBaseline: 1
+    sourceReferences: "\uB9C8\uAC00\uBCF5\uC74C 6:30\u201344; \uC694\uD55C\uBCF5\uC74C
+      6:1\u201313"
+    fictionalElements: "\uC5EC\uD589\uC790, \uBBF8\uB9AC\uC554, \uC11D\uC870 \uBC29,
+      \uBAA8\uB4E0 \uC9C1\uC811 \uB300\uC0AC\uB294 \uCC3D\uC791 \uC5F0\uACB0 \uC7A5\uBA74.
+      \uC624\uBCD1\uC774\uC5B4\uB97C \uBAA9\uACA9\uD558\uAE30 \uC804 \uB098\uB214\uC744
+      \uC900\uBE44\uD558\uB294 \uBB38\uD131\uAE4C\uC9C0\uB9CC \uB2E4\uB8EC\uB2E4."
+  - routeId: shelter
+    biblicalBaseline: 0
+    sourceReferences: "\uC131\uACBD \uC11C\uC220\uC758 \uB300\uCCB4 \uACB0\uB9D0\uC774
+      \uC544\uB2CC \uAC00\uC0C1 \uBD84\uAE30"
+    fictionalElements: "\uC5EC\uD589\uC790\uAC00 \uC791\uC740 \uC11D\uC870 \uC27C\uD130\uC5D0
+      \uBA38\uBB34\uB294 \uCC3D\uC791 \uC0AC\uAC74"
+  - routeId: reconcile
+    biblicalBaseline: 0
+    sourceReferences: "\uC131\uACBD \uC11C\uC220\uC758 \uB300\uCCB4 \uACB0\uB9D0\uC774
+      \uC544\uB2CC \uAC00\uC0C1 \uBD84\uAE30"
+    fictionalElements: "\uAD70\uC911\uC758 \uC0AC\uC815\uC744 \uC11C\uB85C \uC5F0\uACB0\uD558\uB294
+      \uCC3D\uC791 \uC0AC\uAC74; \uAE30\uC5B5\uC73C\uB85C \uC5F4\uB9AC\uB294 \uCD94\uAC00
+      \uC120\uD0DD"

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>{{{ PRODUCT_NAME }}}</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #080d14; }
+    body { display: grid; place-items: center; }
+    #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: #0b121e; }
+    #unity-canvas { display: block; width: 100%; height: 100%; outline: none; }
+    #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: #0b121e; }
+    #unity-loading-bar h1 { margin: 0; color: #e7cb88; font-weight: 500; font-size: clamp(20px, 3vw, 40px); }
+    #unity-loading-bar p { margin: 0; color: #c9d7df; }
+    progress { width: min(340px, 70vw); height: 8px; accent-color: #d6b86f; margin: auto; }
+    #unity-warning { position: absolute; top: 14px; left: 5%; right: 5%; z-index: 3; display: grid; gap: 8px; }
+    #unity-warning:empty { display: none; }
+    .warning { padding: 12px 18px; background: #443720; color: #fff0cb; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+    .warning.error { background: #4f202b; color: #fff; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main id="unity-container" aria-label="{{{ PRODUCT_NAME }}}">
+    <canvas id="unity-canvas" width="{{{ WIDTH }}}" height="{{{ HEIGHT }}}" tabindex="0" aria-label="{{{ PRODUCT_NAME }}} 게임 화면" data-unity-state="loading"></canvas>
+    <div id="unity-loading-bar" role="status" aria-live="polite">
+      <h1>{{{ PRODUCT_NAME }}}</h1>
+      <p id="loading-label">이야기를 준비하고 있습니다…</p>
+      <progress id="unity-progress" max="1" value="0" aria-label="게임 불러오기"></progress>
+    </div>
+    <div id="unity-warning" role="alert" aria-live="assertive"></div>
+  </main>
+  <script>
+    // Loader variables and createUnityInstance API follow Unity 6000.3's official Default template.
+    // CSS fits the authored 16:9 composition to the viewport; Unity resizes the render target itself.
+    var canvas = document.querySelector("#unity-canvas");
+    var loading = document.querySelector("#unity-loading-bar");
+    var warningBanner = document.querySelector("#unity-warning");
+    function unityShowBanner(message, type) {
+      var entry = document.createElement("div");
+      entry.className = "warning" + (type === "error" ? " error" : "");
+      entry.textContent = String(message);
+      warningBanner.appendChild(entry);
+      if (type === "error") {
+        canvas.dataset.unityState = "error";
+        loading.hidden = true;
+      } else {
+        window.setTimeout(function () { entry.remove(); }, 7000);
+      }
+    }
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+    var config = {
+      arguments: [],
+      dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+      frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_THREADS
+      workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
+#endif
+#if USE_WASM
+      codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+      symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+      productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+      productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+      showBanner: unityShowBanner,
+      matchWebGLToCanvasSize: true,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+    };
+#if BACKGROUND_FILENAME
+    canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
+#endif
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onerror = function () {
+      unityShowBanner("게임 파일을 불러오지 못했습니다. 연결을 확인한 뒤 페이지를 다시 열어 주세요.", "error");
+    };
+    script.onload = function () {
+      createUnityInstance(canvas, config, function (progress) {
+        document.querySelector("#unity-progress").value = progress;
+        document.querySelector("#loading-label").textContent = "이야기를 준비하고 있습니다… " + Math.round(progress * 100) + "%";
+      }).then(function () {
+        loading.hidden = true;
+        if (canvas.dataset.unityState !== "error") canvas.dataset.unityState = "ready";
+        canvas.focus();
+      }).catch(function (message) {
+        unityShowBanner("게임을 시작하지 못했습니다.\n" + String(message), "error");
+      });
+    };
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
+

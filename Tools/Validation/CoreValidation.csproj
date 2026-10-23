@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <Compile Include="../../Games/FantasyCards/Assets/Game/Core/*.cs" />
+    <Compile Include="../../Games/FantasyCards/Assets/Game/Tests/BattleEngineTests.cs" />
+    <Compile Include="../../Games/FantasyCards/Assets/Shared/SafeSaveService.cs" />
+    <Compile Include="../../Games/PathOfDawn/Assets/Game/Core/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Assets/Game/Tests/EditMode/NarrativeTests.cs" />
+    <Compile Include="../../Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/InkLibs/InkCompiler/**/*.cs" />
+    <Compile Include="../../Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/InkLibs/InkRuntime/**/*.cs" />
+    <Compile Include="Tests/*.cs" />
+  </ItemGroup>
+</Project>

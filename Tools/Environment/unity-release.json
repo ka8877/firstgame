@@ -1,0 +1,70 @@
+{
+  "version": "6000.3.26f1",
+  "revision": "de8167e7440c",
+  "stream": "LTS",
+  "releaseDate": "2026-10-08T13:38:24.193Z",
+  "releaseApi": "https://services.api.unity.com/unity/editor/release/v1/releases?limit=5&version=6000.3",
+  "editor": {
+    "url": "https://download.unity3d.com/download_unity/de8167e7440c/LinuxEditorInstaller/Unity-6000.3.26f1.tar.xz",
+    "type": "TAR_XZ",
+    "platform": "LINUX",
+    "architecture": "X86_64",
+    "downloadSize": {
+      "value": 4540380840,
+      "unit": "BYTE"
+    },
+    "installedSize": {
+      "value": 8735027200,
+      "unit": "BYTE"
+    },
+    "integrity": "md5-gLl10RMEp8oDp+pqQBEkbQ=="
+  },
+  "modules": [
+    {
+      "id": "webgl",
+      "slug": "6000.3.26f1-linux-x86_64-webgl",
+      "name": "Web Build Support",
+      "description": "Allows building your Unity projects for the Web platform",
+      "category": "PLATFORM",
+      "url": "https://download.unity3d.com/download_unity/de8167e7440c/LinuxEditorTargetInstaller/UnitySetup-WebGL-Support-for-Editor-6000.3.26f1.tar.xz",
+      "type": "TAR_XZ",
+      "downloadSize": {
+        "value": 1282125904,
+        "unit": "BYTE"
+      },
+      "installedSize": {
+        "value": 5830758400,
+        "unit": "BYTE"
+      },
+      "required": false,
+      "hidden": false,
+      "preSelected": false,
+      "integrity": "md5-UWJUZil/ktSzSPLSeT/jyw==",
+      "subModules": [],
+      "destination": "{UNITY_PATH}/Editor/Data/PlaybackEngines/WebGLSupport"
+    },
+    {
+      "id": "windows-mono",
+      "slug": "6000.3.26f1-linux-x86_64-windows-mono",
+      "name": "Windows Build Support (Mono)",
+      "description": "Allows building your Unity projects for the Windows-Mono platform",
+      "category": "PLATFORM",
+      "url": "https://download.unity3d.com/download_unity/de8167e7440c/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-6000.3.26f1.pkg",
+      "type": "PKG",
+      "downloadSize": {
+        "value": 384604969,
+        "unit": "BYTE"
+      },
+      "installedSize": {
+        "value": 769209938,
+        "unit": "BYTE"
+      },
+      "required": false,
+      "hidden": false,
+      "preSelected": false,
+      "integrity": "md5-F6U/39PNp8q+9OzSz8zE4A==",
+      "subModules": [],
+      "destination": "{UNITY_PATH}/Editor/Data/PlaybackEngines/WindowsStandaloneSupport"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+name: Deterministic core and saves
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.426
+      - name: Test actual C# game rules, Ink and portable saves
+        run: bash Tools/Validation/run-core-tests.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-test-results
+          path: Artifacts/TestResults/Core/*.trx

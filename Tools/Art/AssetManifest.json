@@ -1,0 +1,237 @@
+{
+  "generator": "Tools/Art/generate_proxies.py",
+  "blender": "4.3.2",
+  "status": "TEMPORARY ORIGINAL PROXIES; not approved final art",
+  "license": "Created specifically for this repository; no third-party source assets",
+  "units": "meters",
+  "export_axes": {
+    "forward": "-Z",
+    "up": "Y"
+  },
+  "assets": [
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/GalileeShore.fbx",
+      "purpose": "Shore approximately 24 x 19m; land y~0; raw Unity FBX hut (+4,0,+3), water x<-4.7, doorway +Z. PathOfDawn rotates environment Y=180: hut (-4,0,-3), water x>4.7, doorway -Z. Add colliders separately.",
+      "meshes": 257,
+      "vertices": 6032,
+      "triangles": 11042,
+      "rigged": false,
+      "materials": [
+        "POD_ChalkHighlights",
+        "POD_GalileeTeal",
+        "POD_OakHighlights",
+        "POD_OliveFoliage",
+        "POD_OliveSunlit",
+        "POD_OliveWood",
+        "POD_ReedOchre",
+        "POD_RopeAndLeather",
+        "POD_ShoreFoam",
+        "POD_StoneShadow",
+        "POD_SunlitLimestone",
+        "POD_Terracotta",
+        "POD_UnbleachedLinen",
+        "POD_WarmStone"
+      ],
+      "bytes": 956668
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/JesusProxy.fbx",
+      "purpose": "1.78m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
+      "meshes": 24,
+      "vertices": 748,
+      "triangles": 1400,
+      "rigged": true,
+      "materials": [
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_EarthRedMantle",
+        "POD_RopeAndLeather",
+        "POD_SkinHighlights",
+        "POD_UnbleachedLinen",
+        "POD_WarmOliveSkin"
+      ],
+      "bytes": 438940
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/TravelerProxy.fbx",
+      "purpose": "1.74m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
+      "meshes": 22,
+      "vertices": 664,
+      "triangles": 1240,
+      "rigged": true,
+      "materials": [
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_IndigoLinen",
+        "POD_RopeAndLeather",
+        "POD_SkinHighlights",
+        "POD_UnbleachedLinen",
+        "POD_WarmOliveSkin"
+      ],
+      "bytes": 408268
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/MiriamProxy.fbx",
+      "purpose": "1.68m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
+      "meshes": 23,
+      "vertices": 688,
+      "triangles": 1284,
+      "rigged": true,
+      "materials": [
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_IndigoLinen",
+        "POD_RopeAndLeather",
+        "POD_SkinHighlights",
+        "POD_UnbleachedLinen",
+        "POD_WarmOliveSkin"
+      ],
+      "bytes": 422204
+    },
+    {
+      "path": "Games/FantasyCards/Assets/Art/Generated/StarfallArena.fbx",
+      "purpose": "16.4m circular battle dais; top at Unity y=0.15; runtime slot cards should sit y>=0.25; stage decoration does not contain game rules",
+      "meshes": 110,
+      "vertices": 1808,
+      "triangles": 3168,
+      "rigged": false,
+      "materials": [
+        "FC_AntiqueGold",
+        "FC_MidnightSlate",
+        "FC_MoonlitSlate",
+        "FC_StarlightCrystal",
+        "FC_TwilightMoss"
+      ],
+      "bytes": 373132
+    }
+  ],
+  "render_notice": "Blender source art preview only. Not a Unity screenshot and not evidence of gameplay.",
+  "material_colors": {
+    "POD_SunlitLimestone": [
+      0.6600000262260437,
+      0.47999998927116394,
+      0.2800000011920929
+    ],
+    "POD_WarmStone": [
+      0.5799999833106995,
+      0.46000000834465027,
+      0.3199999928474426
+    ],
+    "POD_ChalkHighlights": [
+      0.7400000095367432,
+      0.6399999856948853,
+      0.46000000834465027
+    ],
+    "POD_StoneShadow": [
+      0.38999998569488525,
+      0.3100000023841858,
+      0.2199999988079071
+    ],
+    "POD_GalileeTeal": [
+      0.11999999731779099,
+      0.38999998569488525,
+      0.4300000071525574
+    ],
+    "POD_ShoreFoam": [
+      0.550000011920929,
+      0.7400000095367432,
+      0.6800000071525574
+    ],
+    "POD_OliveWood": [
+      0.3199999928474426,
+      0.20000000298023224,
+      0.10999999940395355
+    ],
+    "POD_OakHighlights": [
+      0.49000000953674316,
+      0.3100000023841858,
+      0.15000000596046448
+    ],
+    "POD_OliveFoliage": [
+      0.2800000011920929,
+      0.36000001430511475,
+      0.1899999976158142
+    ],
+    "POD_OliveSunlit": [
+      0.4000000059604645,
+      0.46000000834465027,
+      0.25
+    ],
+    "POD_ReedOchre": [
+      0.5299999713897705,
+      0.4699999988079071,
+      0.23000000417232513
+    ],
+    "POD_Terracotta": [
+      0.6100000143051147,
+      0.27000001072883606,
+      0.15000000596046448
+    ],
+    "POD_UnbleachedLinen": [
+      0.8500000238418579,
+      0.7599999904632568,
+      0.5799999833106995
+    ],
+    "POD_EarthRedMantle": [
+      0.5299999713897705,
+      0.23999999463558197,
+      0.17000000178813934
+    ],
+    "POD_IndigoLinen": [
+      0.1899999976158142,
+      0.3199999928474426,
+      0.4000000059604645
+    ],
+    "POD_RopeAndLeather": [
+      0.30000001192092896,
+      0.2199999988079071,
+      0.14000000059604645
+    ],
+    "POD_WarmOliveSkin": [
+      0.5600000023841858,
+      0.36000001430511475,
+      0.23000000417232513
+    ],
+    "POD_SkinHighlights": [
+      0.6399999856948853,
+      0.4300000071525574,
+      0.28999999165534973
+    ],
+    "POD_DarkBrownHair": [
+      0.11999999731779099,
+      0.07500000298023224,
+      0.05000000074505806
+    ],
+    "POD_DarkEyes": [
+      0.07000000029802322,
+      0.054999999701976776,
+      0.03999999910593033
+    ],
+    "FC_MidnightSlate": [
+      0.09000000357627869,
+      0.12999999523162842,
+      0.23000000417232513
+    ],
+    "FC_MoonlitSlate": [
+      0.1899999976158142,
+      0.25,
+      0.38999998569488525
+    ],
+    "FC_AntiqueGold": [
+      0.6100000143051147,
+      0.41999998688697815,
+      0.17000000178813934
+    ],
+    "FC_StarlightCrystal": [
+      0.23999999463558197,
+      0.6399999856948853,
+      0.8600000143051147
+    ],
+    "FC_TwilightMoss": [
+      0.20000000298023224,
+      0.30000001192092896,
+      0.25
+    ]
+  },
+  "unity_environment_transform": "Native Unity FBX import: raw hut (+4,0,+3), water x<-4.7, doorway +Z. PathOfDawn applies environment Y=180 degrees: hut (-4,0,-3), water x>4.7, doorway -Z. Characters remain separate with +Z front."
+}

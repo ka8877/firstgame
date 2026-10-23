@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compile one independent project's editor helpers at a time against real Unity DLLs.
+       This does not execute them and cannot validate asset imports or native Editor behavior. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>9.0</LangVersion>
+    <DefineConstants>UNITY_EDITOR;UNITY_6000_3;UNITY_6000_3_OR_NEWER;UNITY_6000_0_OR_NEWER</DefineConstants>
+    <GameProject Condition="'$(GameProject)' == ''">FantasyCards</GameProject>
+    <AssemblyName>$(GameProject).EditorReferenceCompile</AssemblyName>
+    <NuGetLockFilePath>$(BaseIntermediateOutputPath)packages.lock.json</NuGetLockFilePath>
+    <TemplateAssemblies>$(UnityEditorData)/Resources/PackageManager/ProjectTemplates/libcache/com.unity.template.3d-cross-platform-17.0.14/ScriptAssemblies</TemplateAssemblies>
+    <OutputPath>../../Artifacts/ReferenceCompile/$(GameProject)/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="UnityReferenceCompile.csproj" />
+    <Reference Include="$(UnityEditorData)/Managed/UnityEngine/UnityEngine.*.dll" />
+    <Reference Include="$(UnityEditorData)/Managed/UnityEngine/UnityEditor.*.dll" />
+    <Reference Include="$(TemplateAssemblies)/UnityEngine.UI.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.InputSystem.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.TextMeshPro.dll" />
+    <Reference Include="$(TemplateAssemblies)/UnityEngine.TestRunner.dll" />
+    <Reference Include="$(TemplateAssemblies)/UnityEditor.TestRunner.dll" />
+    <Reference Include="$(UnityEditorData)/Resources/PackageManager/BuiltInPackages/com.unity.ext.nunit/net40/unity-custom/nunit.framework.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.RenderPipelines.Core.Runtime.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.RenderPipelines.Core.Runtime.Shared.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.RenderPipelines.Universal.Runtime.dll" />
+    <Reference Include="$(TemplateAssemblies)/Unity.RenderPipelines.Universal.Config.Runtime.dll" />
+    <Compile Include="../../Games/$(GameProject)/Assets/Editor/*.cs" />
+    <Compile Include="../../Games/$(GameProject)/Assets/SmokeTests/*.cs" />
+  </ItemGroup>
+</Project>
