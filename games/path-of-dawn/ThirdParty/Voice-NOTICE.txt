@@ -1,0 +1,42 @@
+FIRSTGAME — OPENING VOICE NOTICE
+
+The first 20 lines of PathOfDawn use offline AI-generated Korean narration.
+One generic KR narrator is used throughout this preview. These recordings are
+not a human cast performance, a voice clone, or an imitation of a named actor.
+The Korean story and dialogue are original project writing.
+
+Synthesis: MeloTTS Korean, MyShell.ai, MIT.
+Code revision: 209145371cff8fc3bd60d7be902ea69cbdb7965a
+Model revision: 0207e5adfc90129a51b6b03d89be6d84360ed323
+Model card: https://huggingface.co/myshell-ai/MeloTTS-Korean
+Source: https://github.com/myshell-ai/MeloTTS
+The model card explicitly marks the Korean model MIT and permits commercial
+and non-commercial use. No speech model weights or synthesis service client
+are included in the game. Playback uses only the generated Ogg recordings.
+
+Development-only language feature model: kykim/bert-kor-base.
+Author repository: https://github.com/kiyoungkim1/LMkor (Apache-2.0).
+This model is an offline synthesis dependency and is not distributed in the
+player. Reproduction details and all model hashes are in Tools/Voice.
+
+MeloTTS license follows:
+
+Copyright (c) 2024 MyShell.ai
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
