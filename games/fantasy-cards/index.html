@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>FantasyCards</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: #080d14; }
+    body { display: grid; place-items: center; }
+    #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: #0b121e; }
+    #unity-canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; -webkit-user-select: none; user-select: none; }
+    #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: #0b121e; }
+    #unity-loading-bar h1 { margin: 0; color: #e7cb88; font-weight: 500; font-size: clamp(20px, 3vw, 40px); }
+    #unity-loading-bar p { margin: 0; color: #c9d7df; }
+    progress { width: min(340px, 70vw); height: 8px; accent-color: #d6b86f; margin: auto; }
+    #unity-warning { position: absolute; top: 14px; left: 5%; right: 5%; z-index: 3; display: grid; gap: 8px; }
+    #unity-warning:empty { display: none; }
+    .warning { padding: 12px 18px; background: #443720; color: #fff0cb; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+    .warning.error { background: #4f202b; color: #fff; }
+    #orientation-guide { display: none; position: fixed; inset: 0; z-index: 10; padding: max(28px, env(safe-area-inset-top)) 28px; background: #0b121ef2; color: #f4eedf; text-align: center; align-content: center; justify-items: center; gap: 20px; }
+    #orientation-guide h2 { margin: 0; font-size: 28px; font-weight: 500; }
+    #orientation-guide p { max-width: 30ch; line-height: 1.8; color: #b9c6ca; margin: 0; }
+    #orientation-guide button { min-height: 48px; border: 1px solid #bba36e; border-radius: 4px; background: #e5d2a5; color: #142027; padding: 12px 24px; font: inherit; cursor: pointer; }
+    #orientation-guide .secondary { background: transparent; color: #e5d2a5; border-color: #58606a; }
+    @media (pointer: coarse) and (orientation: portrait) { #orientation-guide:not([hidden]) { display: grid; } }
+    @supports (height: 100dvh) { #unity-container { width: min(100vw, 177.777778dvh); height: min(100dvh, 56.25vw); } }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main id="unity-container" aria-label="FantasyCards">
+    <canvas id="unity-canvas" width="1280" height="720" tabindex="0" aria-label="FantasyCards 게임 화면" data-unity-state="loading"></canvas>
+    <div id="unity-loading-bar" role="status" aria-live="polite">
+      <h1>FantasyCards</h1>
+      <p id="loading-label">이야기를 준비하고 있습니다…</p>
+      <progress id="unity-progress" max="1" value="0" aria-label="게임 불러오기"></progress>
+    </div>
+    <div id="unity-warning" role="alert" aria-live="assertive"></div>
+  </main>
+  <aside id="orientation-guide" aria-label="모바일 화면 안내">
+    <span aria-hidden="true" style="font-size:48px">↻</span>
+    <h2>가로로 펼쳐지는 이야기</h2>
+    <p>휴대폰을 가로로 돌리면 그림과 대사를 더 크게 볼 수 있습니다.</p>
+    <button id="landscape-start" type="button">전체화면으로 시작</button>
+    <button id="portrait-start" class="secondary" type="button">현재 화면에서 시작</button>
+  </aside>
+  <script>
+    // Loader variables and createUnityInstance API follow Unity 6000.3's official Default template.
+    // CSS fits the authored 16:9 composition to the viewport; Unity resizes the render target itself.
+    var canvas = document.querySelector("#unity-canvas");
+    var loading = document.querySelector("#unity-loading-bar");
+    var warningBanner = document.querySelector("#unity-warning");
+    function unityShowBanner(message, type) {
+      var entry = document.createElement("div");
+      entry.className = "warning" + (type === "error" ? " error" : "");
+      entry.textContent = String(message);
+      warningBanner.appendChild(entry);
+      if (type === "error") {
+        canvas.dataset.unityState = "error";
+        loading.hidden = true;
+      } else {
+        window.setTimeout(function () { entry.remove(); }, 7000);
+      }
+    }
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/9ecc9f0b0dde21364dc731e29ce22853.loader.js";
+    var config = {
+      arguments: [],
+      dataUrl: buildUrl + "/7db166e7c087ae070dc8123fa20c7b14.data.unityweb",
+      frameworkUrl: buildUrl + "/a14b578328799a19daf0ecab022aaa28.framework.js.unityweb",
+      codeUrl: buildUrl + "/f4153036be918f1447abeacc18bca107.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "FirstGame",
+      productName: "FantasyCards",
+      productVersion: "0.1.0",
+      showBanner: unityShowBanner,
+      matchWebGLToCanvasSize: true,
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, window.matchMedia("(pointer: coarse)").matches ? 1.25 : 2)
+    };
+    // This stable page path preserves browser save storage when build file hashes change.
+    // Expose only the actual public asset URL for smoke checks; no game state is exposed.
+    canvas.dataset.dataUrl = new URL(config.dataUrl, window.location.href).href;
+    var orientationGuide = document.querySelector("#orientation-guide");
+    document.querySelector("#portrait-start").addEventListener("click", function () {
+      orientationGuide.hidden = true;
+      canvas.focus();
+    });
+    document.querySelector("#landscape-start").addEventListener("click", async function () {
+      orientationGuide.hidden = true;
+      try {
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+        if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape");
+      } catch (_) { /* Unsupported on some mobile browsers; physical rotation remains available. */ }
+      canvas.focus();
+    });
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onerror = function () {
+      unityShowBanner("게임 파일을 불러오지 못했습니다. 연결을 확인한 뒤 페이지를 다시 열어 주세요.", "error");
+    };
+    script.onload = function () {
+      createUnityInstance(canvas, config, function (progress) {
+        document.querySelector("#unity-progress").value = progress;
+        document.querySelector("#loading-label").textContent = "이야기를 준비하고 있습니다… " + Math.round(progress * 100) + "%";
+      }).then(function () {
+        loading.hidden = true;
+        if (canvas.dataset.unityState !== "error") canvas.dataset.unityState = "ready";
+        canvas.focus();
+      }).catch(function (message) {
+        unityShowBanner("게임을 시작하지 못했습니다.\n" + String(message), "error");
+      });
+    };
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
+
