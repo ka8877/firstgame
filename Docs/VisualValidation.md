@@ -1,13 +1,15 @@
 # 확장 체험판 Web 검증
 
-`expanded-demo-2026-10-23`의 최종 로컬 필수 5종 검증을 완료했다. **카드 PC 720/모바일은 57/62개, 새벽의 길 PC 720/1080/모바일은 63/63/68개 검사를 통과했다. 카드 PC 1080 전체 자동 실행은 불완료이며 통과로 표시하지 않는다. 공개 URL의 새 버전 검증은 아직 완료하지 않았다.** 이전 아트·BGM판의 6종 로컬/2종 공개 통과는 [이전 보고서](ValidationHistory/2026-10-23-subculture-bgm.md)에 보존했으며 이번 플레이어의 통과 근거로 사용하지 않는다.
+`expanded-demo-2026-10-23`의 최종 로컬 필수 5종과 공개 모바일 2종 검증을 완료했다. **카드 PC 720/모바일은 57/62개, 새벽의 길 PC 720/1080/모바일은 63/63/68개 검사를 통과했다. 카드 PC 1080 전체 자동 실행은 불완료이며 통과로 표시하지 않는다. 공개 URL에서는 카드 69개·서사 74개 검사를 통과했다.** 이전 아트·BGM판의 6종 로컬/2종 공개 통과는 [이전 보고서](ValidationHistory/2026-10-23-subculture-bgm.md)에 보존했으며 이번 플레이어의 통과 근거로 사용하지 않는다.
 
-| 게임 | PC 1280×720 | PC 1920×1080 | 모바일 844×390 |
-| --- | --- | --- | --- |
-| 별빛의 서약 | 57 통과 | 불완료: 아래 실패/중단 기록 참조 | 62 통과 |
-| 새벽의 길 | 63 통과 | 63 통과 | 68 통과 |
+| 게임 | 로컬 PC 1280×720 | 로컬 PC 1920×1080 | 로컬 모바일 | 공개 모바일 |
+| --- | --- | --- | --- | --- |
+| 별빛의 서약 | 57 통과 | 불완료: 아래 실패/중단 기록 참조 | 62 통과 | 69 통과 |
+| 새벽의 길 | 63 통과 | 63 통과 | 68 통과 | 74 통과 |
 
-통과한 모든 profile에서 BGM 7개 창을 확인했고 서사 3종은 각각 음성 6개 창을 확인했다. [최종 로컬 근거](../Artifacts/Validation/VisualWeb/final-expanded-review.json)는 다섯 보고서·원본 오디오 SHA와 현재 빌드의 실제 런타임 5파일 bytes/SHA가 일치함을 기록한다. 카드 런타임은 83,385,556 bytes, 서사는 51,779,171 bytes다. [직접 원본 화면 검토](../Artifacts/Validation/VisualWeb/expanded-reviewed-frames.json)와 [이전 실패/시도 목록](../Artifacts/Validation/VisualWeb/expanded-attempt-history.json)을 별도로 보존했다.
+로컬의 통과한 모든 profile에서 BGM 7개 창을 확인했고 서사 3종은 각각 음성 6개 창을 확인했다. [최종 로컬 근거](../Artifacts/Validation/VisualWeb/final-expanded-review.json)는 다섯 보고서·원본 오디오 SHA와 현재 빌드의 실제 런타임 5파일 bytes/SHA가 일치함을 기록한다. 카드 런타임은 83,385,556 bytes, 서사는 51,779,171 bytes다. [직접 원본 화면 검토](../Artifacts/Validation/VisualWeb/expanded-reviewed-frames.json)와 [이전 실패/시도 목록](../Artifacts/Validation/VisualWeb/expanded-attempt-history.json)을 별도로 보존했다.
+
+[현재 공개 URL](https://ka8877.github.io/firstgame/)의 두 모바일 전체 흐름은 각각 BGM 7개 창을, 서사는 추가 음성 6개 창을 통과했다. 공개 5파일씩의 HTTP 200·bytes·SHA-256이 로컬 최종 런타임과 정확히 일치하며 TLS 검증을 유지했다. [최종 공개 근거](../Artifacts/Validation/PublicWeb/final-expanded-review.json)에 두 보고서·원본 오디오·직접 검토 화면 4장과 포털 보고서 SHA를 묶었다. 배포 소스는 `5f29ad15ec5984bbc665c1e98d402d0fecf67d45`다. 공개 두 실행에서 OCR pause는 발생하지 않았다. 카드의 검사 수 차이는 실제 난수 손패에서 읽은 카드 수와 공개 파일 검사가 추가된 결과다.
 
 검증 도구 자체의 오프라인 검사 **26/26**, Python 문법 검사, WebAudio 관찰 JavaScript 구문 검사도 통과했다. 기존 16개 검사를 보존하고 음성 관측의 오인·자연 종료·재생 중단/재시작·예약 정지·공유 출력 경로 사례 8개와 새 UI 좌표 계약 검사 2개를 추가했다. 이 검사는 제품 실행·음질·아트 검수를 대신하지 않는다.
 

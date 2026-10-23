@@ -43,7 +43,7 @@
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
   "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T15:03:03.034359+00:00",
+  "recordedUtc": "2026-10-23T15:17:54.924578+00:00",
   "revision": "expanded-demo-2026-10-23",
   "baselineRecord": "Tools/Environment/validation-2026-10-23-subculture-bgm.json",
   "nativeTests": {
@@ -172,7 +172,24 @@
       "voiceWindows": 6
     }
   },
-  "publicWeb": {},
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 69,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json",
+      "sha256": "14b08da3d43004ee293802c236a5bf370b0b8b21481f96e0768e0cec99406a8a",
+      "audioWindows": 7,
+      "voiceWindows": 0
+    },
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 74,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json",
+      "sha256": "db1cedec4a1ce4ef4ede869116769e19d72996fdd234e849e23a73b15a07454b",
+      "audioWindows": 7,
+      "voiceWindows": 6
+    }
+  },
   "externalCore": {
     "passed": 79,
     "failed": 0,
@@ -236,6 +253,12 @@
     "encounters": 3,
     "battleSchema": 2,
     "contentVersion": "starlight-0.2.0"
+  },
+  "deployment": {
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/39975205547",
+    "sourceCommit": "5f29ad15ec5984bbc665c1e98d402d0fecf67d45",
+    "verifiedPublicFiles": 23
   },
   "github": {
     "implementationCommit": "f544b3af62b6d8e6b69add0a3897df61d7aa57e7",
