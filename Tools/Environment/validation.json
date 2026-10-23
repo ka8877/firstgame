@@ -42,30 +42,32 @@
     "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
+  "date": "2026-10-23",
+  "recordedUtc": "2026-10-23T15:03:03.034359+00:00",
   "revision": "expanded-demo-2026-10-23",
-  "recordedUtc": "2026-10-23T13:30:17.461603+00:00",
-  "status": "browser-validation-in-progress",
   "baselineRecord": "Tools/Environment/validation-2026-10-23-subculture-bgm.json",
-  "externalCore": {
-    "passed": 79,
-    "failed": 0,
-    "skipped": 0,
-    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
-  },
   "nativeTests": {
     "FantasyCards": {
       "result": "Passed",
       "total": "26",
       "passed": "26",
       "failed": "0",
-      "skipped": "0"
+      "skipped": "0",
+      "start-time": "2026-10-23 13:21:54Z",
+      "end-time": "2026-10-23 13:22:00Z",
+      "sha256": "a7e4d1255d6f97c9433f8cd3a8e3bf9d207ceeebeda83b6b4b98e3e5b0406eed",
+      "evidence": "Artifacts/TestResults/FantasyCards/EditMode.xml"
     },
     "PathOfDawn": {
       "result": "Passed",
       "total": "10",
       "passed": "10",
       "failed": "0",
-      "skipped": "0"
+      "skipped": "0",
+      "start-time": "2026-10-23 13:06:09Z",
+      "end-time": "2026-10-23 13:06:10Z",
+      "sha256": "eafe2e38eb289b690d3a94030aeb6ebdf709909c02663a63bca07c64ad2cf6dc",
+      "evidence": "Artifacts/TestResults/PathOfDawn/EditMode.xml"
     }
   },
   "builds": {
@@ -79,7 +81,8 @@
         "Duration": "00:00:16.5340760",
         "Errors": "0",
         "Warnings": "1"
-      }
+      },
+      "sha256": "3ef2f5681ea15f2ee9b86555cb6363e30a330691bb4c01677e63732b75f7ca1e"
     },
     "FantasyCards/Web": {
       "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
@@ -92,7 +95,10 @@
         "Errors": "0",
         "Warnings": "4"
       },
-      "actualPlayerBytes": 83385556
+      "sha256": "7e8a5e9cd338d6f6e66ed28d720c744f61a32bf6e4bd6ab6a3d51d1236d51ce1",
+      "actualPlayerBytes": 83385556,
+      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json",
+      "filesEvidenceSha256": "f34a162967b270c3a89e34a047dd778412527e293c459ce5df89e7659a86c278"
     },
     "PathOfDawn/Windows": {
       "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
@@ -104,7 +110,8 @@
         "Duration": "00:00:17.3817490",
         "Errors": "0",
         "Warnings": "1"
-      }
+      },
+      "sha256": "4d0ea5879afa27ed25996a9cbe0c8361a21df4cc51beeaa20e03d02d19505132"
     },
     "PathOfDawn/Web": {
       "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
@@ -117,37 +124,135 @@
         "Errors": "0",
         "Warnings": "4"
       },
-      "actualPlayerBytes": 51779171
+      "sha256": "981248367a2c8e8ec0098137361f1c9a7c8c3ba35613abef9abe96f4f2aaaffe",
+      "actualPlayerBytes": 51779171,
+      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json",
+      "filesEvidenceSha256": "bb08e46c4cdce419247326be3101d4b0e7459774eca7b58cbf948504028d5e53"
     }
   },
   "web": {
     "Desktop720/FantasyCards": {
-      "status": "failed",
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
-    },
-    "Desktop1080/FantasyCards": {
-      "status": "pending",
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json"
+      "status": "passed",
+      "checks": 57,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json",
+      "sha256": "d74f869eadf353420cf355d7e0368e9d1b8a3a83b510162b0dbae17a6916f5d3",
+      "audioWindows": 7,
+      "voiceWindows": 0
     },
     "Mobile844/FantasyCards": {
-      "status": "pending",
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json"
+      "status": "passed",
+      "checks": 62,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json",
+      "sha256": "f9b7788be29513405e42755d4fa251cfd3fab04b42e0cf1d39efe5821788d789",
+      "audioWindows": 7,
+      "voiceWindows": 0
     },
     "Desktop720/PathOfDawn": {
       "status": "passed",
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
+      "checks": 63,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json",
+      "sha256": "6ca2bd2bf07899c7bc25bc450af7af1c4fdc38acf6cd590ffc45c43eda3a2765",
+      "audioWindows": 7,
+      "voiceWindows": 6
     },
     "Desktop1080/PathOfDawn": {
-      "status": "running",
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json"
+      "status": "passed",
+      "checks": 63,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json",
+      "sha256": "64666ba52da9a519612ab47857879e1bb5a8840e9901d9797785ce775dff70c1",
+      "audioWindows": 7,
+      "voiceWindows": 6
     },
     "Mobile844/PathOfDawn": {
-      "status": "pending",
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
+      "status": "passed",
+      "checks": 68,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json",
+      "sha256": "796d403bcdd3541e2b0f0e83f64f79cc634062bc031ff2d27e1d0e45714bf0e4",
+      "audioWindows": 7,
+      "voiceWindows": 6
     }
   },
-  "deployment": {
-    "status": "previous-public-version-until-new-verification-completes",
-    "url": "https://ka8877.github.io/firstgame/"
+  "publicWeb": {},
+  "externalCore": {
+    "passed": 79,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx",
+    "sha256": "44b683865ed6426f65aae5cde9beb23558d846649ce70e10c2b8ca0e6fccf8d3"
+  },
+  "incompleteBrowserRuns": [
+    {
+      "game": "FantasyCards",
+      "profile": "Desktop1080",
+      "status": "incomplete",
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json",
+      "sha256": "a879d797207f4a38cb2c79ac9bbb10d5f0bf69b09840d7cde5a3965b25755a67",
+      "reason": "Full automated run interrupted by software-rendered input/OCR diagnostics; earlier partial successes do not establish a full pass."
+    }
+  ],
+  "assetAudit": {
+    "status": "passed",
+    "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
+    "metaCounts": {
+      "FantasyCards": 188,
+      "PathOfDawn": 310
+    }
+  },
+  "voice": {
+    "status": "passed",
+    "offlineEvidence": "Tools/Voice/verification.json",
+    "lineCount": 20,
+    "sha256": "814d1f66bb2c0a8a213d2fa95415dad2512de2515980fcee5b87385d82a55c30",
+    "decodedSeconds": 168.23072562358277,
+    "bytes": 1543350,
+    "asrCharacterErrorRate": 0.04073033707865169,
+    "limitation": "Independent ASR and output signal tests do not establish human listening or acting quality."
+  },
+  "music": {
+    "status": "passed",
+    "fileEvidence": "Tools/Audio/verification.json",
+    "sha256": "ea6a8c74ff95f9ef68dc4f3e18e5a2f1002c16ab44e2dcd42ae46b47d4a556d5",
+    "browserEvidence": "Seven actual UI/PCM observation windows per current browser report."
+  },
+  "art": {
+    "illustration": {
+      "evidence": "Tools/Art/Illustration/verification.json",
+      "sha256": "9bb0b38fa98c2eb50a460133614e58f5b71c9cf7bb10b0e001c2ae95e7760f27"
+    },
+    "toonFbx": {
+      "evidence": "Tools/Art/toon-verification.json",
+      "sha256": "39e5960339907f0db39f6e2243158dc230ef435125e0fdbac04f15a20747d632"
+    },
+    "paintedSky": {
+      "evidence": "Tools/Art/Illustration/galilee-painted-sky.json",
+      "sha256": "16e480800891eed8435c614232b7038616ef46d5156b1b9d5622be400b02b132"
+    }
+  },
+  "demoContent": {
+    "cards": 40,
+    "leaders": 4,
+    "starterDecks": 4,
+    "cardsPerDeck": 24,
+    "encounters": 3,
+    "battleSchema": 2,
+    "contentVersion": "starlight-0.2.0"
+  },
+  "github": {
+    "implementationCommit": "f544b3af62b6d8e6b69add0a3897df61d7aa57e7",
+    "sourceEvidence": "Artifacts/Validation/GitHub/expanded-demo-public-source.json",
+    "sourceMethod": "Public HTTP exact-commit source tarball versus local Git tree/blob identities; public media LFS payload SHA-256 and byte counts. Not git clone verification.",
+    "gitClonePerformed": false,
+    "sourceBlobCount": 1431,
+    "lfsCount": 67,
+    "lfsBytes": 122763151,
+    "coreWorkflow": {
+      "observedUtc": "2026-10-23T13:55:00.051318+00:00",
+      "status": "completed",
+      "conclusion": "success",
+      "commit": "f544b3af62b6d8e6b69add0a3897df61d7aa57e7",
+      "runUrl": "https://github.com/ka8877/firstgame/actions/runs/39961795176",
+      "method": "Ordinary public GitHub API HTTP read with existing proxy and TLS; no authentication configuration changed.",
+      "limit": "Run conclusion observed; hosted TRX/log artifact not downloaded."
+    }
   }
 }

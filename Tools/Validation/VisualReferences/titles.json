@@ -131,6 +131,168 @@
       "sourceScreenshot": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/title-1920x1080.png",
       "sourceScreenshotSha256": "af8f4811de7da8929bd4008c24908cac8777bbfac2b3c71b05ad478037a021f8",
       "note": "Exact raw decoded RGB equality; not an OCR pass and not a visual approval of unrelated frames."
+    },
+    {
+      "game": "FantasyCards",
+      "revision": "expanded-demo-2026-10-23",
+      "expectedVisibleText": "별빛의 서약",
+      "canvasSize": [
+        1920,
+        1080
+      ],
+      "region": [
+        0.046875,
+        0.19444444444444445,
+        0.31,
+        0.2986111111111111
+      ],
+      "image": "FantasyCards-title-1920-expanded-demo.png",
+      "decodedPixelSha256": "14b7c3caa98b9ecc96a59781ae94472f898c52885224fc06a15c89e88d92e003",
+      "runtimeFiles": [
+        {
+          "file": "Build/26a89112e672173d7787490aca23732e.loader.js",
+          "bytes": 47867,
+          "sha256": "f6c08ba66b079da4b29f47eb7e2afa05c91394e79fae20fa0eeb90f6dc18dd42"
+        },
+        {
+          "file": "Build/5a069a97bdc30db74bb570be649053cb.data.unityweb",
+          "bytes": 70183523,
+          "sha256": "9367b0d44dc876bd2375dc58daec23760b1a3a4a8f31b5d886333934b0f76aaf"
+        },
+        {
+          "file": "Build/a024b4fa116d20e3d82d4eb4029b15ae.framework.js.unityweb",
+          "bytes": 89599,
+          "sha256": "3a135593de338c3c6b65481807791925c75328cd70d668a0072e45a1339e8731"
+        },
+        {
+          "file": "Build/b63378aad19fa5bace411c7918ca1ca8.wasm.unityweb",
+          "bytes": 13057224,
+          "sha256": "963ed05978de152062b21f0152afcb649c961b99731a9541a164f066762be8e4"
+        },
+        {
+          "file": "index.html",
+          "bytes": 7343,
+          "sha256": "153da2afaab7041f9ff2c40d995d3fb7ed70027fd6540362e3b6b43703a3acb8"
+        }
+      ],
+      "reviewedUtc": "2026-10-23T14:09:02.418551+00:00",
+      "review": "Validation and independent review_smoke agents directly inspected the unmodified current-build full browser frame and complete title crop, including the ㅊ in 빛 and final 약. The same complete crop is decoded-RGB-identical in the passed Desktop720 run’s 1920 title frame and the Desktop1080 failure frame. All previous references and their original PNG files remain unchanged.",
+      "reviewers": [
+        "demo_web_validation",
+        "demo_web_validation/review_smoke"
+      ],
+      "sourceScreenshot": "Artifacts/Validation/VisualWeb/expanded-title-1920-before-reference.png",
+      "sourceScreenshotSha256": "d4d3f8533df4c893036a996523b70794badcf42e5b309ad3370e80741bc8be77",
+      "additionalMatchingScreenshot": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/title-1920x1080.png",
+      "additionalMatchingScreenshotSha256": "d4d3f8533df4c893036a996523b70794badcf42e5b309ad3370e80741bc8be77",
+      "note": "Exact raw decoded RGB equality with all five current runtime hashes, canvas and full ROI; not an OCR pass, no spelling substitution, and no approval of unrelated frames."
+    },
+    {
+      "game": "FantasyCards",
+      "revision": "expanded-demo-2026-10-23",
+      "expectedVisibleText": "별빛의 서약",
+      "canvasSize": [
+        693.328125,
+        390
+      ],
+      "region": [
+        0.04,
+        0.18,
+        0.28,
+        0.32
+      ],
+      "image": "FantasyCards-title-mobile-expanded-demo.png",
+      "decodedPixelSha256": "6c385bd32e0defabddaf26c635f9e8f68d3db35ff1ebaaf204e6f5c983d47ed4",
+      "runtimeFiles": [
+        {
+          "file": "Build/26a89112e672173d7787490aca23732e.loader.js",
+          "bytes": 47867,
+          "sha256": "f6c08ba66b079da4b29f47eb7e2afa05c91394e79fae20fa0eeb90f6dc18dd42"
+        },
+        {
+          "file": "Build/5a069a97bdc30db74bb570be649053cb.data.unityweb",
+          "bytes": 70183523,
+          "sha256": "9367b0d44dc876bd2375dc58daec23760b1a3a4a8f31b5d886333934b0f76aaf"
+        },
+        {
+          "file": "Build/a024b4fa116d20e3d82d4eb4029b15ae.framework.js.unityweb",
+          "bytes": 89599,
+          "sha256": "3a135593de338c3c6b65481807791925c75328cd70d668a0072e45a1339e8731"
+        },
+        {
+          "file": "Build/b63378aad19fa5bace411c7918ca1ca8.wasm.unityweb",
+          "bytes": 13057224,
+          "sha256": "963ed05978de152062b21f0152afcb649c961b99731a9541a164f066762be8e4"
+        },
+        {
+          "file": "index.html",
+          "bytes": 7343,
+          "sha256": "153da2afaab7041f9ff2c40d995d3fb7ed70027fd6540362e3b6b43703a3acb8"
+        }
+      ],
+      "reviewedUtc": "2026-10-23T14:52:30.766953+00:00",
+      "review": "Two validation agents independently inspected the original mobile canvas and complete title crop and confirmed 별빛의 서약, including the ㅊ in 빛 and the final 약. Exact decoded RGB equality is bound to this precise canvas, ROI and all five frozen runtime files. No spelling substitution or raw OCR pass.",
+      "reviewers": [
+        "demo_web_validation",
+        "demo_web_validation/review_smoke"
+      ],
+      "sourceScreenshot": "Artifacts/Validation/VisualWeb/expanded-title-mobile-before-reference.png",
+      "sourceScreenshotSha256": "3df34cf00cdcdb9e61b576536ff11fb34df1b968bbf88e87cd446c8bc6ab55a5",
+      "note": "Original mobile OCR failure is archived unchanged; no unrelated frame approval."
+    },
+    {
+      "game": "FantasyCards",
+      "revision": "expanded-demo-2026-10-23",
+      "purpose": "Static complete mobile encounter-title region only",
+      "expectedVisibleText": "꽃바람의 초대 | 달호수의 시험 | 별빛의 서약",
+      "canvasSize": [
+        693.328125,
+        390
+      ],
+      "region": [
+        0.035,
+        0.53,
+        0.965,
+        0.745
+      ],
+      "image": "FantasyCards-encounters-mobile-expanded-demo.png",
+      "decodedPixelSha256": "4d62c3d3727c1c831b6ecba8d29ef6f485c972c4c05d69e0dfaa640d604e5025",
+      "runtimeFiles": [
+        {
+          "file": "Build/26a89112e672173d7787490aca23732e.loader.js",
+          "bytes": 47867,
+          "sha256": "f6c08ba66b079da4b29f47eb7e2afa05c91394e79fae20fa0eeb90f6dc18dd42"
+        },
+        {
+          "file": "Build/5a069a97bdc30db74bb570be649053cb.data.unityweb",
+          "bytes": 70183523,
+          "sha256": "9367b0d44dc876bd2375dc58daec23760b1a3a4a8f31b5d886333934b0f76aaf"
+        },
+        {
+          "file": "Build/a024b4fa116d20e3d82d4eb4029b15ae.framework.js.unityweb",
+          "bytes": 89599,
+          "sha256": "3a135593de338c3c6b65481807791925c75328cd70d668a0072e45a1339e8731"
+        },
+        {
+          "file": "Build/b63378aad19fa5bace411c7918ca1ca8.wasm.unityweb",
+          "bytes": 13057224,
+          "sha256": "963ed05978de152062b21f0152afcb649c961b99731a9541a164f066762be8e4"
+        },
+        {
+          "file": "index.html",
+          "bytes": 7343,
+          "sha256": "153da2afaab7041f9ff2c40d995d3fb7ed70027fd6540362e3b6b43703a3acb8"
+        }
+      ],
+      "reviewedUtc": "2026-10-23T14:58:01.127356+00:00",
+      "review": "Root and two validation agents directly inspected all three complete original encounter titles. The third label is 별빛의 서약; OCR confuses 빛/빚. This is an exact pixel match, not an OCR pass or spelling substitution.",
+      "reviewers": [
+        "root",
+        "demo_web_validation",
+        "demo_web_validation/review_smoke"
+      ],
+      "sourceScreenshot": "Artifacts/Validation/VisualWeb/expanded-encounters-mobile-before-reference.png",
+      "sourceScreenshotSha256": "4caa2af73fd024255c5f0e5edec83e7fc82f7f27ad37e92023b15f23f5beb0e8"
     }
   ]
 }

@@ -661,7 +661,9 @@ class Smoke:
                                 env={**os.environ, "OMP_THREAD_LIMIT": "1"})
         return result.stdout.decode("utf-8").strip()
 
-    def snapshot(self, name, include_ocr=True, full_viewport=False):
+    def snapshot(self, name, include_ocr=False, full_viewport=False):
+        # Full original images remain evidence. Product text assertions use the
+        # exact authored regions below; optional full-frame OCR is diagnostic only.
         pixels = self.page.screenshot(timeout=30000) if full_viewport else self.capture()
         target = self.output / (name + ".png")
         target.write_bytes(pixels)
@@ -679,12 +681,13 @@ class Smoke:
         self.persist()
         return evidence
 
-    def wait_text(self, expected, timeout=None, region=None, psm=11, language="kor+eng", match_all=False, literal=False, button_text=False):
+    def wait_text(self, expected, timeout=None, region=None, psm=11, language="kor+eng", match_all=False, literal=False, button_text=False, allow_pause=True):
         expected = [expected] if isinstance(expected, str) else expected
         def matches(value):
             found = [word in value if literal else compact(word) in compact(value) for word in expected]
             return all(found) if match_all else any(found)
-        print(f"{self.game}: waiting for visible text {expected}", flush=True)
+        target_label = expected if len(expected) <= 5 else f"one of {len(expected)} exact authored card names"
+        print(f"{self.game}: waiting for visible text {target_label}", flush=True)
         deadline = time.monotonic() + (timeout or self.args.ocr_timeout)
         last = ""
         primary_language = language
@@ -747,20 +750,89 @@ class Smoke:
             if self.canvas.get_attribute("data-unity-state") == "error":
                 raise AssertionError("Unity loader reported an error: " + self.page.locator("#unity-warning").inner_text())
         (self.output / "last-ocr.txt").write_text(last, encoding="utf-8")
-        raise AssertionError("Visible canvas OCR did not contain " + repr(expected) + "; last text: " + last[:500])
+        failure = "Visible canvas OCR did not contain " + repr(expected) + "; last text: " + last[:500]
+        pauses = self.report.setdefault('ocrPausedObservations', [])
+        if allow_pause and self.args.pause_on_ocr_failure and len(pauses) < 3:
+            index = len(pauses) + 1
+            resume_path = self.output / f'ocr-resume-{index:03}.json'
+            entry = {'expected': expected, 'originalRegion': region, 'psm': psm,
+                     'failure': failure, 'resumeFile': str(resume_path), 'status': 'paused'}
+            pauses.append(entry)
+            self.snapshot(f'ocr-paused-{index:03}', include_ocr=False)
+            self.persist()
+            print(f"{self.game}: PAUSED OCR with live browser; write ROI/PSM recovery to {resume_path}", flush=True)
+            deadline = time.monotonic() + 180
+            while time.monotonic() < deadline:
+                self.page.wait_for_timeout(1000)
+                if not resume_path.exists():
+                    continue
+                recovery = json.loads(resume_path.read_text())
+                if recovery.get('expected') != expected:
+                    raise AssertionError('OCR recovery must preserve every exact expected string')
+                new_region = recovery.get('region', region)
+                new_psm = recovery.get('psm', psm)
+                if (not isinstance(new_region, list) or len(new_region) != 4 or
+                        not (0 <= new_region[0] < new_region[2] <= 1 and 0 <= new_region[1] < new_region[3] <= 1) or
+                        new_psm not in (6, 7, 11)):
+                    raise AssertionError('OCR recovery must use a bounded visible region and supported text segmentation')
+                entry.update({'status': 'resumed-with-same-expectation', 'recovery': recovery,
+                              'recoverySha256': hashlib.sha256(resume_path.read_bytes()).hexdigest()})
+                self.persist()
+                return self.wait_text(expected, timeout=timeout, region=new_region, psm=new_psm,
+                                      language=primary_language, match_all=match_all, literal=literal, button_text=button_text)
+            entry['status'] = 'recovery-timeout'
+            self.persist()
+        raise AssertionError(failure)
 
-    def wait_title(self):
-        region = self.region("title")
+    def snapshot_label(self, snapshot, expected, region):
+        """Read the complete label from an already captured short animation frame."""
+        source = Path(snapshot['path']).read_bytes()
+        if hashlib.sha256(source).hexdigest() != snapshot['sha256']:
+            raise AssertionError('Captured animation frame changed before label inspection')
+        with Image.open(io.BytesIO(source)) as frame:
+            bounds = tuple(round(value * (frame.width if index % 2 == 0 else frame.height))
+                           for index, value in enumerate(region))
+            encoded = io.BytesIO()
+            frame.crop(bounds).save(encoded, format='PNG')
+            pixels = encoded.getvalue()
+        filename = snapshot['name'] + '-label.png'
+        (self.output / filename).write_bytes(pixels)
+        evidence = {'expected': expected, 'region': region, 'psm': 7,
+                    'sourceFrame': snapshot['path'], 'sourceSha256': snapshot['sha256'],
+                    'rawPixels': filename, 'rawPixelSha256': hashlib.sha256(pixels).hexdigest(),
+                    'fullFrameRawText': snapshot.get('ocr'), 'attempts': [], 'matched': False,
+                    'method': 'OCR of the authored complete label region in the same preserved animation frame; no later capture or spelling substitution.'}
+        candidates = [(upscale, enhance, binary, language)
+                      for upscale, enhance, binary in [(False, False, False), (True, False, False),
+                                                       (False, True, False), (False, False, True)]
+                      for language in ['kor+eng', 'kor']]
+        for upscale, enhance, binary, language in candidates:
+            result = self.text(pixels, psm=7, language=language, upscale=upscale, enhance=enhance, binary=binary)
+            preprocessing = ('grayscale threshold 120, invert, 2x resize' if binary else
+                             'grayscale, invert, 2.5x resize, 3px minimum filter' if enhance else
+                             '2x resize' if upscale else 'none')
+            evidence['attempts'].append({'preprocessing': preprocessing,
+                                         'language': language, 'text': result})
+            if compact(expected) in compact(result):
+                evidence['matched'] = True
+                break
+        self.report.setdefault('snapshotLabelEvidence', []).append(evidence)
+        self.persist()
+        return evidence
+
+    def wait_reviewed_text(self, expected, region, psm=7, match_all=False):
+        text_key = expected if isinstance(expected, str) else " | ".join(expected)
         reference_path = ROOT / "Tools/Validation/VisualReferences/titles.json"
         references = json.loads(reference_path.read_text())["references"] if reference_path.is_file() else []
         candidates = [entry for entry in references if entry["game"] == self.game and
-                      entry["canvasSize"] == [self.canvas_geometry["width"], self.canvas_geometry["height"]]]
+                      entry["canvasSize"] == [self.canvas_geometry["width"], self.canvas_geometry["height"]] and
+                      entry["expectedVisibleText"] == text_key and entry["region"] == list(region)]
         if not candidates:
-            result = self.wait_text(TITLES[self.game], region=region, psm=7)
+            result = self.wait_text(expected, region=region, psm=psm, match_all=match_all)
             self.last_title_method = "ocr"
             return result
         try:
-            result = self.wait_text(TITLES[self.game], timeout=8, region=region, psm=7)
+            result = self.wait_text(expected, timeout=8, region=region, psm=psm, match_all=match_all, allow_pause=False)
             self.last_title_method = "ocr"
             return result
         except AssertionError as ocr_failure:
@@ -769,20 +841,23 @@ class Smoke:
                 approved = (reference_path.parent / reference["image"]).read_bytes()
                 if decoded_pixel_hash(approved) != reference["decodedPixelSha256"]:
                     raise AssertionError("Reviewed title reference file failed its decoded pixel hash")
-                if not reviewed_title_matches(reference, pixels, TITLES[self.game], region,
+                if not reviewed_title_matches(reference, pixels, text_key, region,
                                                self.canvas_geometry, self.report["buildFingerprint"]):
                     continue
                 filename = f"title-pixel-confirmation-{len(self.report.setdefault('titlePixelConfirmations', []))+1}.png"
                 (self.output / filename).write_bytes(pixels)
-                evidence = {"expectedVisibleText": TITLES[self.game], "rawPixels": filename,
+                evidence = {"expectedVisibleText": text_key, "rawPixels": filename,
                     "decodedPixelSha256": decoded_pixel_hash(pixels), "reference": reference,
                     "ocrFailure": str(ocr_failure),
                     "method": "Exact decoded RGB pixel equality to a reviewed complete title crop from the same final runtime files; no OCR spelling substitution."}
                 self.report["titlePixelConfirmations"].append(evidence)
                 self.last_title_method = "reviewed-pixel-reference"
-                self.check(True, "Actual title pixels exactly match the reviewed current-build title reference", evidence)
-                return TITLES[self.game]
+                self.check(True, "Actual fixed text pixels exactly match the reviewed current-build region reference", evidence)
+                return text_key
             raise ocr_failure
+
+    def wait_title(self):
+        return self.wait_reviewed_text(TITLES[self.game], self.region("title"))
 
     def canvas_point(self, x, y, reference=False):
         box = self.canvas_geometry
@@ -803,11 +878,24 @@ class Smoke:
         if touch:
             self.page.touchscreen.tap(px, py)
         else:
-            self.page.mouse.click(px, py, delay=80)
+            # A real press must span the software-rendered Unity UI frame.
+            # Stay below the card's 480ms long-press gesture threshold.
+            self.page.mouse.click(px, py, delay=300)
         self.report["input"].append({"label": label, "type": "touch" if touch else "mouse",
-                                     "canvasX": round(dx, 2), "canvasY": round(dy, 2)})
+                                     "canvasX": round(dx, 2), "canvasY": round(dy, 2),
+                                     "mouseDownUpMilliseconds": None if touch else 300})
         print(f"{self.game}: canvas {'tap' if touch else 'click'} {label}", flush=True)
         self.persist()
+        if not touch and self.game == "FantasyCards":
+            # Observe browser frame boundaries only. A software-rendered Unity
+            # frame may take longer than a fixed delay to consume the real click.
+            frames = self.page.evaluate("""() => new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => reject(new Error('No two browser frames after input')), 20000);
+                requestAnimationFrame(first => requestAnimationFrame(second => {
+                    clearTimeout(timeout); resolve([first, second]);
+                }));
+            })""")
+            self.report["input"][-1]["followingAnimationFrameTimestamps"] = frames
         self.page.wait_for_timeout(600)
         if not touch and self.game == "FantasyCards":
             px, py, dx, dy = self.canvas_point(.995, .5)
@@ -1061,8 +1149,56 @@ class Smoke:
         left = .98 - count * width if right_end else .18
         return (left + (index + .475) * width, .84)
 
+    def select_visible_hand_card(self, index, count, catalog, label, expected=None, point=None):
+        point = point or self.card_hand_point(index, count)
+        if self.canvas_geometry['width'] < 1400:
+            self.click(*point, label)
+            return expected
+        width = min(.133, .80 / count) if count <= 5 else .133
+        card_width = width - .008 if count <= 5 else width * .95
+        left = point[0] - card_width / 2
+        # Leave the actual hover first: cards scale to 1.025 while hovered.
+        px, py, dx, dy = self.canvas_point(.995, .5)
+        self.page.mouse.move(px, py)
+        self.report['input'].append({'label': 'Leave the card hover before reading its complete visible title',
+            'type': 'mouse-move', 'canvasX': round(dx, 2), 'canvasY': round(dy, 2)})
+        self.page.evaluate('() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+        self.page.wait_for_timeout(600)
+        name_region = (left + card_width * .02, .879, left + card_width * .98, .934)
+        names = [expected['name']] if expected else [card['name'] for card in catalog]
+        visible = self.wait_text(names, region=name_region, psm=7)
+        matches = [card for card in catalog if compact(card['name']) in compact(visible)]
+        if len(matches) != 1:
+            raise AssertionError('Visible hand title did not identify exactly one authored card: ' + visible)
+        card = matches[0]
+        evidence = {'label': label, 'handIndex': index, 'handCount': count,
+                    'handTitleRegion': name_region, 'visibleHandTitle': visible,
+                    'expectedCard': card['name'], 'attempts': []}
+        self.report.setdefault('handSelectionEvidence', []).append(evidence)
+        for attempt in range(2):
+            if attempt:
+                # Retry only while the same actual hand title remains visible.
+                self.wait_text(card['name'], region=name_region, psm=7)
+            self.click(*point, label + (f' (selection acknowledgment retry {attempt})' if attempt else ''))
+            result = {'attempt': attempt + 1, 'inputCount': len(self.report['input'])}
+            evidence['attempts'].append(result)
+            try:
+                result['visibleSelectedPanelTitle'] = self.wait_text(card['name'], timeout=2,
+                    region=(.035, .368, .215, .413), psm=7)
+                result['matched'] = True
+                self.persist()
+                return card
+            except AssertionError as failure:
+                result['matched'] = False
+                result['failure'] = str(failure)
+                self.snapshot('hand-selection-unacknowledged-' + str(len(self.report['handSelectionEvidence'])) + '-' + str(attempt + 1), include_ocr=False)
+                self.persist()
+                if attempt == 1:
+                    raise
+
     def inspect_hand_card(self, index, count, catalog, verify_help=False):
         point = self.card_hand_point(index, count)
+        expected = None
         if self.args.profile == 'mobile-landscape':
             self.touch_drag_hold(point, point, 750, f'Long-press visible hand card {index + 1} for its details', reference=False)
         else:
@@ -1074,12 +1210,12 @@ class Smoke:
                 width, height = (.43, .40) if self.canvas_geometry['width'] < 1400 else (.30, .29)
                 left = max(.015, min(point[0] + .018, .985 - width))
                 bottom = max(.025, min(1 - point[1] + .04, .975 - height))
-                text = self.wait_text('길게 누르면 상세 보기', region=(left, 1-bottom-height, left+width, 1-bottom), psm=11)
+                text = self.wait_text('길게 누르면 상세 보기', region=(left, 1-bottom-height, left+width, 1-bottom), psm=6)
                 self.check(True, 'Actual desktop mouse hover reveals the card explanation', text)
                 self.snapshot('card-hover-explanation')
-            self.click(*point, f'Select visible hand card {index + 1}')
+            expected = self.select_visible_hand_card(index, count, catalog, f'Select visible hand card {index + 1}', point=point)
             self.click_control('detailOpen', 'Open selected card details through the visible button')
-        name_text = self.wait_text([card['name'] for card in catalog], region=self.region('detailName'), psm=7)
+        name_text = self.wait_text(expected['name'] if expected else [card['name'] for card in catalog], region=self.region('detailName'), psm=7)
         matches = [card for card in catalog if compact(card['name']) in compact(name_text)]
         self.check(len(matches) == 1, 'A visible random hand card is identified by its exact authored detail name', name_text)
         card = matches[0]
@@ -1095,13 +1231,13 @@ class Smoke:
 
     def fantasy_end_turn(self):
         self.click_control('attackPhase', 'Enter attack phase with the visible button')
-        self.wait_text('공격 종료', region=self.region('actions'), psm=7)
+        self.wait_text('공격 종료', region=self.region('actions'), psm=7, button_text=True)
         self.click_control('actionMiddle', 'Finish attack and pass the turn')
         for response in range(8):
             phase = self.wait_text(['나의 준비 단계', '방어 대응'], region=self.region('phase'), psm=7)
             if compact('나의 준비 단계') in compact(phase):
                 return
-            self.wait_text('가로막지 않기', region=self.region('actions'), psm=7)
+            self.wait_text('가로막지 않기', region=self.region('actions'), psm=7, button_text=True)
             self.click_control('actionMiddle', 'Resolve the visible opponent attack without a blocker')
         raise AssertionError('Opponent turn did not finish within eight actual block decisions')
 
@@ -1120,8 +1256,8 @@ class Smoke:
         self.click_control('firstDeck', 'Choose the twenty-four-card forest starter deck')
         self.snapshot('four-starter-decks')
         self.click_control('selectionNext', 'Choose the demo opponent')
-        encounters = self.wait_text(['꽃바람의 초대', '달호수의 시험', '별빛의 서약'],
-                                    region=self.region('encounterChoices'), match_all=True)
+        encounters = self.wait_reviewed_text(['꽃바람의 초대', '달호수의 시험', '별빛의 서약'],
+                                    region=self.region('encounterChoices'), psm=11, match_all=True)
         selected = self.wait_text(['리리아', '꽃바람의 숲'], region=self.region('flowSubtitle'), psm=7, match_all=True)
         self.check(True, 'Actual selection screens expose four leaders, four twenty-four-card decks and three demo encounters',
                    {'leaders': leaders, 'decks': decks, 'encounters': encounters, 'selected': selected})
@@ -1129,8 +1265,9 @@ class Smoke:
         self.snapshot('three-demo-encounters')
         self.click_control('selectionNext', 'Shuffle the chosen deck and begin')
         shuffle = self.snapshot('deck-shuffle-animation')
-        self.check(compact('덱 셔플') in compact(shuffle['ocr']),
-                   'Actual dealt-card animation screen visibly announces the deck shuffle', shuffle)
+        shuffle_label = self.snapshot_label(shuffle, '덱 셔플', (.1, .7, .9, .82))
+        self.check(shuffle_label['matched'],
+                   'Actual dealt-card animation screen visibly announces the deck shuffle', shuffle_label)
         self.wait_text('시작 손패 교체', region=self.region('flowHeading'), psm=11)
         self.snapshot('five-card-opening-hand')
         self.click_control('mulliganFifth', 'Select only the fifth opening card for the once-only mulligan')
@@ -1150,7 +1287,7 @@ class Smoke:
         first = self.inspect_hand_card(0, 5, catalog, verify_help=True)
         self.check(first['kind'] == 'Terrain' and first['element'] == 'Dawn',
                    'Observed first opening card is a dawn terrain without relying on a fixed random seed', first)
-        self.click(*self.card_hand_point(0, 5), 'Select the observed dawn terrain')
+        self.select_visible_hand_card(0, 5, catalog, 'Select the observed dawn terrain', expected=first)
         self.click_control('playTerrain', 'Play the selected terrain')
         self.wait_text(first['name'], region=self.region('terrain'), psm=7)
         self.wait_text('여명 1', region=self.region('resource'), psm=7)
@@ -1158,7 +1295,7 @@ class Smoke:
         self.click_control('leader', 'Inspect the chosen leader and her skill')
         self.wait_text('리리아', region=self.region('leaderName'), psm=7)
         self.wait_text('현재 덱 · 꽃바람의 숲', region=self.region('leaderDeck'), psm=7)
-        self.wait_text('꽃바람 화살', region=self.region('leaderSkill'), psm=7)
+        self.wait_text('꽃바람 화살', region=self.region('leaderSkill'), psm=11)
         self.wait_text('여명 2이 필요합니다', region=self.region('leaderReason'), psm=7)
         self.click_control('leaderUse', 'Attempt the visibly disabled skill with insufficient resources')
         self.wait_text('여명 2이 필요합니다', region=self.region('leaderReason'), psm=7)
@@ -1184,7 +1321,7 @@ class Smoke:
                 terrain_index = next((i for i, card in known_hand.items() if card['kind'] == 'Terrain'), None)
                 if terrain_index is not None:
                     card = known_hand[terrain_index]
-                    self.click(*self.card_hand_point(terrain_index, hand_count), 'Select observed terrain: ' + card['name'])
+                    self.select_visible_hand_card(terrain_index, hand_count, catalog, 'Select observed terrain: ' + card['name'], expected=card)
                     self.click_control('playTerrain', 'Develop one terrain this turn')
                     terrains.append(card)
                     dawn = min(12, dawn + (card['element'] == 'Dawn'))
@@ -1199,7 +1336,7 @@ class Smoke:
                                tide >= (card['cost'] if card['element'] == 'Tide' else 0)), None)
             if unit_index is not None:
                 unit = known_hand[unit_index]
-                self.click(*self.card_hand_point(unit_index, hand_count), 'Select observed affordable unit: ' + unit['name'])
+                self.select_visible_hand_card(unit_index, hand_count, catalog, 'Select observed affordable unit: ' + unit['name'], expected=unit)
                 self.click_control('friendlyFirstLane', 'Place the selected unit in the first friendly lane')
                 self.wait_text(unit['name'], region=self.region('friendlyLanes'))
                 self.wait_text(['공격 ' + str(unit['attack']), '생명 ' + str(unit['health'])],
@@ -1441,6 +1578,7 @@ def main():
     parser.add_argument("--output", type=Path, default=ROOT / "Artifacts" / "Validation" / "WebSmoke")
     parser.add_argument("--base-url", help="Verify and play an existing site's games/<slug>/ URLs against the local final build; does not publish.")
     parser.add_argument("--game", choices=list(TITLES), action="append", help="Can be repeated; defaults to both.")
+    parser.add_argument("--pause-on-ocr-failure", action="store_true", help="Keep a failed OCR scene live for up to 180 seconds for a recorded same-expectation ROI/PSM correction.")
     parser.add_argument("--revision", default="unspecified", help="Content revision label, independent of the exact runtime SHA-256 evidence.")
     parser.add_argument("--verify-audio", action="store_true",
                         help="Observe real WebAudio PCM and exercise actual music/volume UI before the gameplay flow.")

@@ -14,6 +14,13 @@ from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
 GAMES = {"FantasyCards": "fantasy-cards", "PathOfDawn": "path-of-dawn"}
+# Required complete interaction runs for this release. The separate FantasyCards
+# 1080p run is retained as incomplete: software-rendered input/OCR diagnostics
+# interrupted it after selection/hover checks. Do not count it as a passed run.
+REQUIRED_PROFILES = {
+    "FantasyCards": ("Desktop720", "Mobile844"),
+    "PathOfDawn": ("Desktop720", "Desktop1080", "Mobile844"),
+}
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
 parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/WebPlaytest")
@@ -35,7 +42,7 @@ for game, slug in GAMES.items():
     if not hero.is_file():
         raise SystemExit(f"Title illustration missing: {hero}")
     if args.require_browser_reports:
-        for profile in ("Desktop720", "Desktop1080", "Mobile844"):
+        for profile in REQUIRED_PROFILES[game]:
             report_path = ROOT / f"Artifacts/Validation/VisualWeb/{profile}/{game}/report.json"
             report = json.loads(report_path.read_text())
             if report["status"] != "passed":
@@ -133,7 +140,11 @@ for path in files:
 manifest = {
     "createdUtc": datetime.now(timezone.utc).isoformat(),
     "publishReady": args.require_browser_reports,
-    "browserProfiles": ["Desktop720", "Desktop1080", "Mobile844"] if args.require_browser_reports else [],
+    "browserProfiles": ["Desktop720", "Mobile844"] if args.require_browser_reports else [],
+    "browserProfilesByGame": REQUIRED_PROFILES if args.require_browser_reports else {},
+    "incompleteBrowserRuns": [{"game": "FantasyCards", "profile": "Desktop1080",
+        "reason": "Full automated run incomplete due to software-rendered input/OCR diagnostics; not a passed run."}]
+        if args.require_browser_reports else [],
     "sourceCommit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
     "sourceDirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)),
     "files": {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files},

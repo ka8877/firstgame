@@ -64,6 +64,7 @@ selected = [
 selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("expanded-demo-*.json")))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
 # Collect compact reports and captures, never raw Blender/Unity logs or voice files.
 for directory in ("ExpandedDemo", "Demo"):

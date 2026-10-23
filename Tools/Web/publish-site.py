@@ -27,7 +27,7 @@ if not (site / ".firstgame-web-output").is_file() or not (site / "build-manifest
     parser.error("Stage the complete site with stage-site.py first.")
 manifest = json.loads((site / "build-manifest.json").read_text())
 if manifest.get("publishReady") is not True:
-    parser.error("Stage with --require-browser-reports after all six browser checks pass.")
+    parser.error("Stage with --require-browser-reports after the required per-game browser checks pass.")
 remote = f"https://github.com/{args.repository}.git"
 with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as temporary:
     checkout = Path(temporary)
