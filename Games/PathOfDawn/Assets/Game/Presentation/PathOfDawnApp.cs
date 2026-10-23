@@ -24,11 +24,14 @@ namespace PathOfDawn.Presentation
         public TMP_FontAsset KoreanFont;
         public StoryChapter Chapter;
         const string SaveSlot = "path-of-dawn", SaveGame = "path-of-dawn", PortableVersion = "portable-1";
+        static readonly Color SkyColor = new Color(.60f,.78f,.88f);
         readonly Dictionary<string, Transform> actors = new Dictionary<string, Transform>();
         NarrativeSession session;
         NarrativeSaveSlot saves;
         DawnUi ui;
         RectTransform canvas, screen, hud, notificationBackdrop;
+        GameObject touchControls;
+        DawnPointerPad touchMove, touchLook;
         TextMeshProUGUI prompt, objective, notification;
         GameObject worldRoot, sharedBasket, shelterRug, connectionMarker;
         CharacterController controller;
@@ -73,10 +76,14 @@ namespace PathOfDawn.Presentation
             if (uiInput == null) uiInput = EventSystem.current.gameObject.AddComponent<InputSystemUIInputModule>();
             uiInput.AssignDefaultActions();
             var go = new GameObject("Path of Dawn UI", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-            canvas = go.GetComponent<RectTransform>(); go.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            go.layer = 5;
+            var canvasRoot = go.GetComponent<RectTransform>(); go.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
             var scaler = go.GetComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920, 1080); scaler.matchWidthOrHeight = .5f;
+            scaler.referenceResolution = new Vector2(1920, 1080); scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             ui = new DawnUi { Font = KoreanFont != null ? KoreanFont : Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset, TextScale = textScale };
+            // A centered 16:9 frame remains completely visible on wide phones and small windows.
+            canvas = ui.Box(canvasRoot, "Design frame", 0, 0, 1920, 1080);
+            canvas.anchorMin = canvas.anchorMax = canvas.pivot = new Vector2(.5f, .5f); canvas.anchoredPosition = Vector2.zero;
             if (Chapter == null) Chapter = Resources.Load<StoryChapter>("Content/Galilee");
             var ink = Chapter != null && Chapter.story != null ? Chapter.story : Resources.Load<InkFile>("Story/galilee");
             if (ink == null || !ink.isCompiled)
@@ -92,6 +99,7 @@ namespace PathOfDawn.Presentation
         void Update()
         {
             if (compiledStory == null) return;
+            if (touchControls != null) touchControls.SetActive(inGame && !modal && !inIntro && TouchInterface);
             if (inGame && !inIntro && menu.WasPressedThisFrame()) { if (modal) CloseModal(); else ShowSettings(); }
             if (inGame && !modal && !inIntro && memories.WasPressedThisFrame()) ShowMemories();
             if (modal && !inIntro && dialogueAdvance != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
@@ -99,9 +107,11 @@ namespace PathOfDawn.Presentation
             if (!inGame || modal || inIntro || busy) return;
             Vector2 look = stickLook.ReadValue<Vector2>() * (100 * Time.deltaTime);
             if (Mouse.current != null && Mouse.current.rightButton.isPressed) look += mouseLook.ReadValue<Vector2>() * .10f;
+            if (touchLook != null && touchLook.isActiveAndEnabled) look += touchLook.ConsumeLook() * .10f;
             yaw += look.x; pitch = Mathf.Clamp(pitch - look.y, -8, 42);
             pivot.rotation = Quaternion.Euler(pitch, yaw, 0);
-            var movement = move.ReadValue<Vector2>(); Vector3 direction = Quaternion.Euler(0, yaw, 0) * new Vector3(movement.x, 0, movement.y);
+            var movement = Vector2.ClampMagnitude(move.ReadValue<Vector2>() + (touchMove != null && touchMove.isActiveAndEnabled ? touchMove.Value : Vector2.zero), 1);
+            Vector3 direction = Quaternion.Euler(0, yaw, 0) * new Vector3(movement.x, 0, movement.y);
             if (direction.sqrMagnitude > 1) direction.Normalize();
             if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
             verticalSpeed += Physics.gravity.y * Time.deltaTime;
@@ -120,25 +130,37 @@ namespace PathOfDawn.Presentation
         void ClearScreen()
         {
             dialogueAdvance = null;
-            if (screen != null) Destroy(screen.gameObject);
+            if (screen != null) { screen.gameObject.SetActive(false); Destroy(screen.gameObject); }
             screen = ui.Fill(canvas, "Screen");
+            touchMove?.ResetInput(); touchLook?.ResetInput();
         }
         void ShowTitle()
         {
-            CancelPresentation(); inGame = false; modal = true; if (hud != null) Destroy(hud.gameObject);
-            ClearScreen(); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(true); playCamera.gameObject.SetActive(false);
-            introCamera.transform.SetPositionAndRotation(new Vector3(6, 3, -8), Quaternion.LookRotation(new Vector3(-5, -1.5f, 8)));
-            var panel = ui.Box(screen, "Title", 80, 90, 700, 900, DawnUi.Ink);
-            ui.Text(panel, "PATH OF DAWN", 54, 50, 590, 55, 24, DawnUi.Gold);
-            // CJK line metrics need more than the nominal point size, especially at 130%.
-            ui.Text(panel, "새벽의 길", 50, 108, 600, 150, 64);
-            ui.Text(panel, "갈릴리, 처음 건네는 손길", 54, 265, 600, 65, 26);
-            ui.Text(panel, "낯선 시대의 여행자가 되어\n한 번의 선택과 다시 찾은 시간을 따라가세요.", 54, 340, 590, 135, 22);
-            ui.Button(panel, "새 게임", 54, 480, 590, 70, NewGame);
-            ui.Button(panel, "이어하기", 54, 566, 590, 70, ContinueGame, saves.Exists);
-            ui.Button(panel, "설정 · 저장 가져오기", 54, 652, 590, 70, ShowSettings);
-            ui.Text(panel, "첫 구간 개발판 · 대사는 창작입니다.\n임시 인물·공간이며 교체 예정입니다.", 54, 755, 590, 125, 20, new Color(.7f,.75f,.73f));
-            ui.Text(screen, message, 830, 870, 950, 140, 26);
+            CancelPresentation(); inGame = false; modal = true;
+            if (hud != null) { hud.gameObject.SetActive(false); Destroy(hud.gameObject); }
+            ClearScreen(); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(false);
+            // Title artwork is its own composition. No stale Cinemachine blend or live actors behind it.
+            worldRoot.SetActive(false); mainCamera.cullingMask = 1 << 5; mainCamera.backgroundColor = DawnUi.Ink;
+            ui.Fill(screen, "Title background", DawnUi.Ink);
+            ui.Art(screen, "Art/title-hero", 0, 0, 1920, 1080);
+            var gradient = ui.Box(screen, "Title readability", 0, 0, 1380, 1080).gameObject.AddComponent<DawnGradient>(); gradient.raycastTarget = false; gradient.SetAllDirty();
+            var lower = ui.Box(screen, "Title lower shade", 0, 860, 1920, 220).gameObject.AddComponent<DawnGradient>();
+            lower.vertical = true; lower.left = new Color(.03f,.07f,.12f,.85f); lower.raycastTarget = false; lower.SetAllDirty();
+            var panel = ui.Box(screen, "Title", 100, 80, 690, 960);
+            ui.Box(panel, "Dawn rule", 4, 35, 76, 4, DawnUi.Gold);
+            ui.Text(panel, "PATH OF DAWN", 102, 14, 520, 65, 25, DawnUi.Gold).characterSpacing = 5;
+            ui.Text(panel, "새벽의 길", 0, 120, 680, 190, 84);
+            ui.Text(panel, "갈릴리, 처음 건네는 손길", 6, 318, 650, 85, 30, DawnUi.Gold);
+            ui.Text(panel, "낯선 시대에 닿은 당신.\n한 번의 선택이 누군가의 아침이 됩니다.", 6, 418, 660, 145, 27);
+            ui.Primary(panel, "새 게임", 6, 588, 590, 100, NewGame);
+            ui.Button(panel, "이어하기", 6, 708, 590, 96, ContinueGame, saves.Exists);
+            ui.Button(panel, "설정 · 저장 가져오기", 6, 822, 590, 96, ShowSettings);
+            ui.Text(screen, "첫 번째 이야기  /  갈릴리의 아침", 1190, 960, 640, 70, 27, DawnUi.Paper);
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                var notice = ui.Card(screen, "Title notice", 850, 790, 970, 145);
+                ui.Text(notice, message, 28, 18, 914, 110, 25, DawnUi.Gold);
+            }
             ambience.Play();
         }
         void NewGame()
@@ -156,33 +178,53 @@ namespace PathOfDawn.Presentation
         }
         void StartNew()
         {
-            session = new NarrativeSession(compiledStory); ApplyWorld(); inGame = true; modal = false;
+            session = new NarrativeSession(compiledStory); ApplyWorld(); yaw = 0; pitch = 12; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
             ClearScreen(); BuildHud(); Save(); StartCoroutine(PlayIntro());
         }
         void ContinueGame()
         {
             var candidate = new NarrativeSession(compiledStory);
             if (!saves.LoadInto(candidate, out var error)) { message = "이어하기 실패 — 원본 보존\n" + error; ShowTitle(); return; }
-            CancelPresentation(); session = candidate; ApplyWorld(); inGame = true; modal = false;
+            CancelPresentation(); session = candidate; ApplyWorld(); yaw = actors["traveler"].eulerAngles.y; pitch = 12; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
             ClearScreen(); BuildHud(); SwitchToPlay();
             if (session.Lines.Count > 0 || session.Choices.Count > 0) ShowDialogue(session.Lines);
         }
         void BuildHud()
         {
-            if (hud != null) Destroy(hud.gameObject); hud = ui.Fill(canvas,"HUD"); hud.SetAsFirstSibling();
-            var top = ui.Box(hud,"Top",24,24,1872,114,DawnUi.Ink);
-            objective = ui.Text(top,"",25,7,1060,100,23);
-            ui.Button(top,"기억 / 회귀 [M]",1110,26,255,62,ShowMemories);
-            ui.Button(top,"저장",1380,26,145,62,() => { if (Save()) Notify("여정을 저장했습니다."); });
-            ui.Button(top,"설정 [Esc]",1540,26,305,62,ShowSettings);
-            ui.Box(hud,"Interaction backdrop",24,885,1872,180,new Color(.08f,.13f,.15f,.82f));
-            prompt = ui.Text(hud,"",50,902,1300,100,28);
-            notificationBackdrop = ui.Box(hud,"Notification backdrop",24,810,1552,90,DawnUi.Ink);
-            notificationBackdrop.GetComponent<UnityEngine.UI.Image>().raycastTarget = false;
+            if (hud != null) { hud.gameObject.SetActive(false); Destroy(hud.gameObject); }
+            hud = ui.Fill(canvas,"HUD"); hud.SetAsFirstSibling();
+            BuildTouchControls();
+            var top = ui.Card(hud,"Top",32,28,1856,128,DawnUi.Ink);
+            ui.Box(top,"Chapter accent",0,22,5,84,DawnUi.Gold);
+            objective = ui.Text(top,"",28,12,1020,112,27);
+            ui.Button(top,"기억 / 회귀 [M]",1080,19,300,90,ShowMemories);
+            ui.Button(top,"저장",1398,19,156,90,() => { if (Save()) Notify("여정을 저장했습니다."); });
+            ui.Button(top,"설정 [Esc]",1572,19,260,90,ShowSettings);
+            var interaction = ui.Card(hud,"Interaction backdrop",380,916,1150,110,DawnUi.Ink);
+            interaction.GetComponent<Image>().raycastTarget = false;
+            prompt = ui.Text(interaction,"",28,16,1094,82,30); prompt.alignment = TextAlignmentOptions.MidlineLeft;
+            notificationBackdrop = ui.Card(hud,"Notification backdrop",380,800,1150,100,DawnUi.Ink);
+            notificationBackdrop.GetComponent<Image>().raycastTarget = false;
+            notification = ui.Text(notificationBackdrop,"",28,12,1094,80,27,DawnUi.Gold);
             notificationBackdrop.gameObject.SetActive(false);
-            notification = ui.Text(hud,"",50,825,1500,70,25,DawnUi.Gold);
-            ui.Text(hud,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",50,1015,1810,50,18);
+            ui.Text(hud,TouchInterface ? "왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기" : "WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
             RefreshObjective();
+        }
+        bool TouchInterface => Application.isMobilePlatform || Touchscreen.current != null;
+        void BuildTouchControls()
+        {
+            var controls = ui.Fill(hud, "Touch controls"); touchControls = controls.gameObject;
+            var look = ui.Box(controls, "Drag to look", 1000, 180, 860, 590, new Color(0, 0, 0, .001f));
+            touchLook = look.gameObject.AddComponent<DawnPointerPad>();
+            var pad = ui.Card(controls, "Movement pad", 80, 770, 230, 230, new Color(.055f,.105f,.16f,.65f));
+            pad.pivot = new Vector2(.5f,.5f); pad.anchoredPosition = new Vector2(195,-885);
+            touchMove = pad.gameObject.AddComponent<DawnPointerPad>(); touchMove.joystick = true;
+            var thumb = ui.Card(pad, "Movement thumb", 0, 0, 78, 78, new Color(.98f,.78f,.43f,.88f));
+            thumb.anchorMin = thumb.anchorMax = thumb.pivot = new Vector2(.5f,.5f); thumb.anchoredPosition = Vector2.zero;
+            thumb.GetComponent<Image>().raycastTarget = false; touchMove.thumb = thumb;
+            ui.Text(controls,"이동",142,1008,160,48,24,DawnUi.Paper);
+            ui.Primary(controls,"대화 · 조사",1570,875,270,120,() => { if(inGame && !modal && !inIntro && !busy) Interact(); });
+            touchControls.SetActive(false);
         }
         void RefreshObjective()
         {
@@ -194,11 +236,12 @@ namespace PathOfDawn.Presentation
         {
             if (prompt == null) return;
             var p = actors["traveler"].position;
-            if (session.World.pointId == "shore" && Vector3.Distance(p,actors["jesus"].position)<3) prompt.text = "[E] 예수님과 미리암에게 말 걸기";
-            else if (session.World.pointId == "room" && Vector3.Distance(p,actors["miriam"].position)<2.8f) prompt.text = "[E] 미리암과 바구니에 관해 이야기하기";
-            else if (Vector3.Distance(p,new Vector3(-2,0,-2))<2) prompt.text = "[E] 호숫가 바구니 조사";
-            else if (Vector3.Distance(p,new Vector3(-5,0,-2))<2.3f) prompt.text = "[E] 돌벽의 등불 자리 조사";
-            else prompt.text = "[E] 멈춘 시계 살펴보기";
+            string key = TouchInterface ? "" : "[E] ";
+            if (session.World.pointId == "shore" && Vector3.Distance(p,actors["jesus"].position)<3) prompt.text = key + "예수님과 미리암에게 말 걸기";
+            else if (session.World.pointId == "room" && Vector3.Distance(p,actors["miriam"].position)<2.8f) prompt.text = key + "미리암과 바구니에 관해 이야기하기";
+            else if (Vector3.Distance(p,new Vector3(-2,0,-2))<2) prompt.text = key + "호숫가 바구니 조사";
+            else if (Vector3.Distance(p,new Vector3(-5,0,-2))<2.3f) prompt.text = key + "돌벽의 등불 자리 조사";
+            else prompt.text = key + "멈춘 시계 살펴보기";
         }
         void Interact()
         {
@@ -219,22 +262,34 @@ namespace PathOfDawn.Presentation
         }
         void RenderDialogue()
         {
-            ClearScreen(); var panel = ui.Box(screen,"Dialogue",115,600,1690,430,DawnUi.Ink);
-            ui.Text(panel,"새벽의 길  ·  " + (session.World.pointId == "shore" ? "호숫가" : "석조 방"),38,22,1550,50,22,DawnUi.Gold);
+            ClearScreen();
+            ui.Fill(screen, "Dialogue input shield", new Color(0,0,0,0));
+            var panel = ui.Card(screen,"Dialogue",60,570,1800,470,DawnUi.Ink);
             if (lineIndex < activeLines.Count)
             {
-                ui.Text(panel,activeLines[lineIndex],38,92,1600,210,31);
+                string line = activeLines[lineIndex], speaker = "여행자의 기록", portrait = "traveler";
+                Color accent = DawnUi.Gold;
+                if (line.StartsWith("미리암: ", StringComparison.Ordinal)) { speaker = "미리암"; portrait = "miriam"; accent = DawnUi.Teal; line = line.Substring(5); }
+                else if (line.StartsWith("예수님: ", StringComparison.Ordinal)) { speaker = "예수님"; portrait = "jesus"; accent = new Color(1,.68f,.46f); line = line.Substring(5); }
+                else if (line.StartsWith("당신: ", StringComparison.Ordinal)) { speaker = "여행자"; line = line.Substring(4); }
+                ui.Card(panel,"Portrait field",18,18,318,434,new Color(accent.r*.20f,accent.g*.20f,accent.b*.25f,1));
+                ui.Art(panel,"Art/portrait-"+portrait,22,20,310,430,false);
+                ui.Box(panel,"Speaker accent",370,38,5,64,accent);
+                ui.Text(panel,speaker,397,29,650,80,33,accent);
+                ui.Text(panel,session.World.pointId == "shore" ? "갈릴리 · 호숫가" : "갈릴리 · 석조 방",1190,40,550,65,23,new Color(.7f,.8f,.83f));
+                ui.Text(panel,line,378,128,1370,222,35);
                 dialogueAdvance = () => { lineIndex++; RenderDialogue(); };
-                ui.Button(panel,lineIndex+1 < activeLines.Count ? "다음 대사 [E]" : session.Choices.Count > 0 ? "선택하기 [E]" : "계속 [E]",1250,330,400,64,() => dialogueAdvance?.Invoke());
-                ui.Text(panel,(lineIndex+1)+" / "+activeLines.Count,40,345,200,40,20);
+                ui.Primary(panel,lineIndex+1 < activeLines.Count ? "다음 대사 [E]" : session.Choices.Count > 0 ? "선택하기 [E]" : "계속 [E]",1300,355,450,90,() => dialogueAdvance?.Invoke());
+                ui.Text(panel,(lineIndex+1).ToString("00")+"  /  "+activeLines.Count.ToString("00"),385,384,250,50,24,new Color(.7f,.8f,.83f));
                 return;
             }
             if (session.Choices.Count > 0)
             {
-                ui.Text(panel,"어떤 손길을 건네시겠습니까?",38,76,1550,65,30);
+                ui.Box(panel,"Choice accent",35,32,6,64,DawnUi.Gold);
+                ui.Text(panel,"어떤 손길을 건네시겠습니까?",65,25,1650,85,34,DawnUi.Gold);
                 for (int i = 0; i < session.Choices.Count; ++i)
                 {
-                    int choiceIndex = i; ui.Button(panel,session.Choices[i].text,38,153+i*82,1600,72,() => MakeChoice(choiceIndex));
+                    int choiceIndex = i; ui.Button(panel,session.Choices[i].text,38,130+i*106,1724,94,() => MakeChoice(choiceIndex));
                 }
             }
             else if (session.World.pointId == "ending") ShowEnding();
@@ -248,7 +303,9 @@ namespace PathOfDawn.Presentation
         }
         void ShowEnding()
         {
-            modal = true; ClearScreen(); var p = ui.Box(screen,"Outcome",340,210,1240,700,DawnUi.Ink);
+            modal = true; ClearScreen(); ui.Fill(screen,"Outcome veil",new Color(.02f,.06f,.1f,.5f));
+            var p = ui.Card(screen,"Outcome",340,210,1240,730,DawnUi.Ink);
+            ui.Box(p,"Outcome accent",50,25,96,4,DawnUi.Gold);
             string title = session.Route == "witness" ? "나눔의 목격자" : session.Route == "shelter" ? "문턱의 등불" : "이어진 발걸음";
             ui.Text(p,"발견한 길  " + session.Meta.routes.Count + " / 3",50,45,1140,55,25,DawnUi.Gold);
             ui.Text(p,title,50,126,1140,130,56);
@@ -259,17 +316,18 @@ namespace PathOfDawn.Presentation
                 if (source != null) note = (source.biblicalBaseline ? "기준 루트의 문턱 · " : "가상 루트 · ") + source.sourceReferences + "\n" + source.fictionalElements;
             }
             ui.Text(p,note,50,265,1130,165,29);
-            ui.Button(p,"기억을 품고 과거로",50,460,540,80,ShowMemories);
-            var outcomeStatus = ui.Text(p,"첫 구간을 마쳤습니다. 다른 선택으로 세 가지 길을 발견할 수 있습니다.",50,590,1140,65,24);
-            ui.Button(p,"저장하고 타이틀로",640,460,540,80,() => {
+            ui.Primary(p,"기억을 품고 과거로",50,460,540,100,ShowMemories);
+            var outcomeStatus = ui.Text(p,"첫 구간을 마쳤습니다. 다른 선택으로 세 가지 길을 발견할 수 있습니다.",50,596,1140,95,25);
+            ui.Button(p,"저장하고 타이틀로",640,460,540,100,() => {
                 if (!Save()) { outcomeStatus.text = message; return; }
-                ShowTitle();
+                Notify(""); ShowTitle();
             });
         }
         void ShowMemories()
         {
             if (!inGame || session == null || inIntro) return; modal = true; ClearScreen();
-            var p = ui.Box(screen,"Memories",110,170,1700,810,DawnUi.Ink);
+            ui.Fill(screen,"Memories veil",new Color(.02f,.06f,.1f,.5f));
+            var p = ui.Card(screen,"Memories",110,170,1700,810,DawnUi.Ink);
             ui.Text(p,"기억의 지도",45,32,1550,110,48); ui.Text(p,"세계는 돌아가도, 당신이 발견한 기억은 남습니다.",45,150,1560,70,27,DawnUi.Gold);
             string routes = ""; foreach (var id in session.Meta.routes) routes += "● " + (id=="witness"?"나눔의 목격자":id=="shelter"?"문턱의 등불":"이어진 발걸음")+"\n";
             ui.Text(p,"발견한 길  "+session.Meta.routes.Count+" / 3\n"+routes+"\n발견한 단서  "+session.Meta.discoveries.Count+" / 3",45,230,690,280,28);
@@ -278,9 +336,9 @@ namespace PathOfDawn.Presentation
             ui.Text(p,recent.Length==0?"아직 선택하지 않았습니다.":recent,810,300,820,310,23);
             for(int i=0;i<session.Checkpoints.Count;++i)
             {
-                string id=session.Checkpoints[i].id; ui.Button(p,id=="shore_before_choice"?"첫 선택 전 · 호숫가로 회귀":"두 번째 선택 전 · 석조 방으로 회귀",45,530+i*85,690,72,()=>Rewind(id));
+                string id=session.Checkpoints[i].id; ui.Button(p,id=="shore_before_choice"?"첫 선택 전 · 호숫가로 회귀":"두 번째 선택 전 · 석조 방으로 회귀",45,530+i*100,690,90,()=>Rewind(id));
             }
-            ui.Button(p,"돌아가기",1240,700,390,70,CloseModal);
+            ui.Button(p,"돌아가기",1240,690,390,90,CloseModal);
         }
         void Rewind(string id)
         {
@@ -288,31 +346,34 @@ namespace PathOfDawn.Presentation
         }
         void ShowSettings()
         {
-            if (inIntro) return; modal = true; ClearScreen(); var p = ui.Box(screen,"Settings",300,110,1320,900,DawnUi.Ink);
+            if (inIntro) return; modal = true; ClearScreen();
+            ui.Fill(screen,"Settings veil",new Color(.02f,.06f,.1f,.75f));
+            var p = ui.Card(screen,"Settings",250,70,1420,960,DawnUi.Ink);
             ui.Text(p,"설정과 여정 보관",48,34,1220,105,44);
             ui.Text(p,"한국어 자막 크기  "+Mathf.RoundToInt(textScale*100)+"%",48,145,660,65,28);
-            ui.Button(p,"작게",760,140,210,65,()=>ChangeText(-.1f)); ui.Button(p,"크게",1000,140,260,65,()=>ChangeText(.1f));
-            ui.Text(p,"전체 음량  "+Mathf.RoundToInt(volume*100)+"%",48,232,660,65,28);
-            ui.Button(p,"줄이기",760,230,210,65,()=>ChangeVolume(-.1f)); ui.Button(p,"높이기",1000,230,260,65,()=>ChangeVolume(.1f));
-            ui.Text(p,"저장 옮기기 · 웹에서 내보낸 JSON을 PC에서 그대로 가져올 수 있습니다.",48,330,1210,75,23);
-            var field=ui.Input(p,48,415,1210,220);
-            ui.Button(p,"저장 내보내기",48,660,360,65,()=> {
+            ui.Button(p,"작게",860,135,210,90,()=>ChangeText(-.1f)); ui.Button(p,"크게",1090,135,270,90,()=>ChangeText(.1f));
+            ui.Text(p,"전체 음량  "+Mathf.RoundToInt(volume*100)+"%",48,255,660,65,28);
+            ui.Button(p,"줄이기",860,245,210,90,()=>ChangeVolume(-.1f)); ui.Button(p,"높이기",1090,245,270,90,()=>ChangeVolume(.1f));
+            ui.Text(p,"저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.",48,365,1320,70,26);
+            var field=ui.Input(p,48,450,1320,195);
+            ui.Button(p,"저장 내보내기",48,670,420,95,()=> {
                 if(inGame && !Save()) { field.text=message; return; }
                 if(PersistentSaves.TryExport(activeSaveSlot,out var portable,out var error)) { field.text=portable; GUIUtility.systemCopyBuffer=portable; Notify("저장 JSON을 표시했습니다. 전체 선택 후 복사할 수 있습니다."); }
                 else { field.text=error; }
             });
-            ui.Button(p,"JSON 가져오기",438,660,360,65,()=> {
+            ui.Button(p,"JSON 가져오기",488,670,420,95,()=> {
                 string importSlot = SaveSlot + "-import-" + DateTime.UtcNow.Ticks;
                 bool valid(string payload) { try { sessionCheck(payload); return true; } catch { return false; } }
                 if(PersistentSaves.TryImport(importSlot,SaveGame,1,PortableVersion,field.text,valid,out var error))
                 { activeSaveSlot=importSlot; PlayerPrefs.SetString("POD.activeSlot",activeSaveSlot); PlayerPrefs.Save(); CreateSaveSlot(); ContinueGame(); }
                 else field.text="가져오기 실패 — 기존 여정은 보존했습니다.\n"+error;
             });
-            ui.Button(p,inGame?"저장하고 타이틀로":"타이틀로",48,760,560,75,()=> {
+            ui.Button(p,inGame?"저장하고 타이틀로":"타이틀로",48,810,630,100,()=> {
                 if(inGame && !Save()) { field.text=message; return; }
-                ShowTitle();
+                Notify(""); ShowTitle();
             });
-            ui.Button(p,"돌아가기",650,760,610,75,()=> { if(inGame) CloseModal(); else ShowTitle(); });
+            ui.Button(p,"돌아가기",710,810,650,100,()=> { if(inGame) CloseModal(); else ShowTitle(); });
+            ui.Text(p,"첫 구간 개발판 · 대사와 여행자·미리암은 창작입니다.",48,916,1320,40,18,new Color(.63f,.73f,.77f));
         }
         void sessionCheck(string payload) { var test = new NarrativeSession(compiledStory); test.ValidateSave(JsonUtility.FromJson<NarrativeSave>(payload)); }
         void ChangeText(float delta) { textScale=Mathf.Clamp(textScale+delta,.9f,1.3f); ui.TextScale=textScale; PlayerPrefs.SetFloat("POD.textScale",textScale); PlayerPrefs.Save(); if(inGame) BuildHud(); ShowSettings(); }
@@ -347,9 +408,11 @@ namespace PathOfDawn.Presentation
             sharedBasket.SetActive(session.World.basketShared); shelterRug.SetActive(session.World.shelterPrepared); connectionMarker.SetActive(session.World.peopleConnected);
             playCamera.PreviousStateIsValid=false; dialogueCamera.PreviousStateIsValid=false;
         }
-        void SwitchToPlay() { introCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); }
+        void RevealWorld() { worldRoot.SetActive(true); mainCamera.cullingMask = -1; mainCamera.backgroundColor = SkyColor; }
+        void SwitchToPlay() { RevealWorld(); introCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); }
         void SwitchToDialogue()
         {
+            RevealWorld();
             introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); dialogueCamera.gameObject.SetActive(true);
             Transform target=actors[session.World.pointId=="shore"?"jesus":"miriam"];
             var focus=target.position+Vector3.up*1.25f;
@@ -366,6 +429,7 @@ namespace PathOfDawn.Presentation
         }
         IEnumerator PlayIntro()
         {
+            RevealWorld();
             inIntro=true; modal=true; playCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(true);
             ClearScreen(); ui.Box(screen,"LetterboxTop",0,0,1920,120,Color.black); ui.Box(screen,"LetterboxBottom",0,950,1920,130,Color.black);
             ui.Text(screen,"갈릴리 호숫가 · 낯선 새벽",200,975,1520,65,33);
@@ -399,28 +463,36 @@ namespace PathOfDawn.Presentation
             shelterRug=Primitive("Shelter rug",PrimitiveType.Cube,new Vector3(-4,.04f,-3.6f),new Vector3(2,.035f,1.4f),new Color(.56f,.27f,.20f));
             connectionMarker=Primitive("Gathered water jars",PrimitiveType.Cylinder,new Vector3(-1,.3f,0),new Vector3(.42f,.3f,.42f),new Color(.64f,.43f,.22f));
             sharedBasket.SetActive(false); shelterRug.SetActive(false); connectionMarker.SetActive(false);
-            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.rotation=Quaternion.Euler(32,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional; light.color=new Color(1,.84f,.63f); light.intensity=1.6f; light.shadows=LightShadows.Soft;
-            RenderSettings.ambientLight=new Color(.43f,.5f,.53f); RenderSettings.fog=true; RenderSettings.fogColor=new Color(.65f,.73f,.7f); RenderSettings.fogDensity=.012f;
+            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.rotation=Quaternion.Euler(32,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional; light.color=new Color(1,.91f,.75f); light.intensity=1.6f; light.shadows=LightShadows.Soft;
+            RenderSettings.ambientLight=new Color(.43f,.5f,.63f); RenderSettings.fog=true; RenderSettings.fogColor=new Color(.72f,.84f,.87f); RenderSettings.fogDensity=.009f;
         }
         void CreateActor(string id,GameObject prefab,Vector3 position,Color color)
         {
             var root=new GameObject(id); root.layer=2; root.transform.SetParent(worldRoot.transform); root.transform.position=position; actors[id]=root.transform;
-            if(prefab!=null) { var model=Instantiate(prefab,root.transform); model.name=id+" · Temporary Blender proxy"; }
+            if(prefab!=null)
+            {
+                // Each actor owns exactly one imported visual; no primitive body is added underneath it.
+                var model=Instantiate(prefab,root.transform); model.name=id+" · Character visual";
+                model.transform.SetLocalPositionAndRotation(Vector3.zero,Quaternion.identity);
+                foreach(var child in model.GetComponentsInChildren<Transform>(true)) child.gameObject.layer=2;
+            }
             else { var proxy=Primitive("Temporary "+id,PrimitiveType.Capsule,position+Vector3.up*.9f,new Vector3(.65f,.9f,.65f),color); proxy.transform.SetParent(root.transform,true); Destroy(proxy.GetComponent<Collider>()); }
             if (id != "traveler") { var collider=root.AddComponent<CapsuleCollider>(); collider.height=1.8f; collider.radius=.3f; collider.center=Vector3.up*.9f; }
         }
         GameObject Primitive(string name,PrimitiveType type,Vector3 position,Vector3 scale,Color color)
         {
             var go=GameObject.CreatePrimitive(type); go.name=name; go.transform.SetParent(worldRoot.transform); go.transform.position=position; go.transform.localScale=scale;
-            var material=new Material(Shader.Find("Universal Render Pipeline/Lit")); material.color=color; go.GetComponent<Renderer>().sharedMaterial=material; return go;
+            var shader=Shader.Find("PathOfDawn/Cel Lit") ?? Shader.Find("Universal Render Pipeline/Lit");
+            var material=new Material(shader); material.color=color; go.GetComponent<Renderer>().sharedMaterial=material; return go;
         }
         void ColliderBox(string name,Vector3 position,Vector3 size)
         { var box=new GameObject(name,typeof(BoxCollider)); box.transform.SetParent(worldRoot.transform); box.transform.position=position; box.GetComponent<BoxCollider>().size=size; }
         void BuildCameras()
         {
             mainCamera=Camera.main; if(mainCamera==null) { var go=new GameObject("Main Camera",typeof(Camera),typeof(AudioListener)); go.tag="MainCamera"; mainCamera=go.GetComponent<Camera>(); }
-            mainCamera.backgroundColor=new Color(.68f,.76f,.77f); mainCamera.clearFlags=CameraClearFlags.SolidColor;
-            if(mainCamera.GetComponent<CinemachineBrain>()==null) mainCamera.gameObject.AddComponent<CinemachineBrain>();
+            mainCamera.backgroundColor=SkyColor; mainCamera.clearFlags=CameraClearFlags.SolidColor;
+            var brain=mainCamera.GetComponent<CinemachineBrain>() ?? mainCamera.gameObject.AddComponent<CinemachineBrain>();
+            brain.DefaultBlend=new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut,.25f);
             pivot=new GameObject("Third person target").transform; pivot.position=actors["traveler"].position+Vector3.up*1.45f;
             playCamera=new GameObject("Play Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); playCamera.Follow=pivot; playCamera.LookAt=pivot; playCamera.Priority=10; playCamera.Lens.FieldOfView=48;
             var follow=playCamera.gameObject.AddComponent<CinemachineFollow>(); follow.FollowOffset=new Vector3(0,1,-5);

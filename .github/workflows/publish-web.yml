@@ -1,0 +1,57 @@
+name: Publish web playtest
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get verified public build files
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: public
+          lfs: false
+          persist-credentials: false
+      - name: Check complete site and reject LFS pointers
+        shell: bash
+        run: |
+          test -f public/index.html
+          test -f public/build-manifest.json
+          test -f public/games/fantasy-cards/index.html
+          test -f public/games/path-of-dawn/index.html
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('public')
+          manifest = json.loads((root / 'build-manifest.json').read_text())
+          assert manifest.get('publishReady') is True, 'Browser verification is required'
+          for relative, digest in manifest['files'].items():
+              if relative == '.firstgame-web-output':
+                  continue
+              data = (root / relative).read_bytes()
+              assert not data.startswith(b'version https://git-lfs.github.com/spec/v1'), relative
+              assert hashlib.sha256(data).hexdigest() == digest, relative
+          PY
+      - name: Configure existing Pages site
+        uses: actions/configure-pages@v5
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

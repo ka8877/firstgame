@@ -1,93 +1,15 @@
 {
-  "generator": "Tools/Art/generate_proxies.py",
+  "generator": "Tools/Art/generate_toon_dawn.py",
   "blender": "4.3.2",
-  "status": "TEMPORARY ORIGINAL PROXIES; not approved final art",
+  "status": "Original stylized revision; authored procedural meshes, review candidate, not approved final character art",
   "license": "Created specifically for this repository; no third-party source assets",
   "units": "meters",
   "export_axes": {
     "forward": "-Z",
     "up": "Y"
   },
+  "unity_environment_transform": "Native Unity FBX import: raw hut (+4,0,+3), water x<-4.7, doorway +Z. PathOfDawn applies environment Y=180 degrees: hut (-4,0,-3), water x>4.7, doorway -Z. Characters remain separate with +Z front.",
   "assets": [
-    {
-      "path": "Games/PathOfDawn/Assets/Art/Generated/GalileeShore.fbx",
-      "purpose": "Shore approximately 24 x 19m; land y~0; raw Unity FBX hut (+4,0,+3), water x<-4.7, doorway +Z. PathOfDawn rotates environment Y=180: hut (-4,0,-3), water x>4.7, doorway -Z. Add colliders separately.",
-      "meshes": 257,
-      "vertices": 6032,
-      "triangles": 11042,
-      "rigged": false,
-      "materials": [
-        "POD_ChalkHighlights",
-        "POD_GalileeTeal",
-        "POD_OakHighlights",
-        "POD_OliveFoliage",
-        "POD_OliveSunlit",
-        "POD_OliveWood",
-        "POD_ReedOchre",
-        "POD_RopeAndLeather",
-        "POD_ShoreFoam",
-        "POD_StoneShadow",
-        "POD_SunlitLimestone",
-        "POD_Terracotta",
-        "POD_UnbleachedLinen",
-        "POD_WarmStone"
-      ],
-      "bytes": 956668
-    },
-    {
-      "path": "Games/PathOfDawn/Assets/Art/Generated/JesusProxy.fbx",
-      "purpose": "1.78m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
-      "meshes": 24,
-      "vertices": 748,
-      "triangles": 1400,
-      "rigged": true,
-      "materials": [
-        "POD_DarkBrownHair",
-        "POD_DarkEyes",
-        "POD_EarthRedMantle",
-        "POD_RopeAndLeather",
-        "POD_SkinHighlights",
-        "POD_UnbleachedLinen",
-        "POD_WarmOliveSkin"
-      ],
-      "bytes": 438940
-    },
-    {
-      "path": "Games/PathOfDawn/Assets/Art/Generated/TravelerProxy.fbx",
-      "purpose": "1.74m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
-      "meshes": 22,
-      "vertices": 664,
-      "triangles": 1240,
-      "rigged": true,
-      "materials": [
-        "POD_DarkBrownHair",
-        "POD_DarkEyes",
-        "POD_IndigoLinen",
-        "POD_RopeAndLeather",
-        "POD_SkinHighlights",
-        "POD_UnbleachedLinen",
-        "POD_WarmOliveSkin"
-      ],
-      "bytes": 408268
-    },
-    {
-      "path": "Games/PathOfDawn/Assets/Art/Generated/MiriamProxy.fbx",
-      "purpose": "1.68m humanoid, foot pivot; placeholder rig BasicIdle, not final anatomical likeness",
-      "meshes": 23,
-      "vertices": 688,
-      "triangles": 1284,
-      "rigged": true,
-      "materials": [
-        "POD_DarkBrownHair",
-        "POD_DarkEyes",
-        "POD_IndigoLinen",
-        "POD_RopeAndLeather",
-        "POD_SkinHighlights",
-        "POD_UnbleachedLinen",
-        "POD_WarmOliveSkin"
-      ],
-      "bytes": 422204
-    },
     {
       "path": "Games/FantasyCards/Assets/Art/Generated/StarfallArena.fbx",
       "purpose": "16.4m circular battle dais; top at Unity y=0.15; runtime slot cards should sit y>=0.25; stage decoration does not contain game rules",
@@ -103,109 +25,207 @@
         "FC_TwilightMoss"
       ],
       "bytes": 373132
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/JesusProxy.fbx",
+      "purpose": "Original stylized adult 1.80m; sculpted facial planes, almond eyes, tailored garment, Generic BasicIdle; not approved final character art",
+      "meshes": 1,
+      "vertices": 34158,
+      "triangles": 67624,
+      "rigged": true,
+      "materials": [
+        "POD_ChestnutHairLight",
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_EarAndLidWarmth",
+        "POD_EarthRedMantle",
+        "POD_EyeIvory",
+        "POD_HazelIris",
+        "POD_LinenFoldShadow",
+        "POD_MutedRoseLips",
+        "POD_RopeAndLeather",
+        "POD_SkinHighlights",
+        "POD_UnbleachedLinen"
+      ],
+      "bytes": 1841100
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/MiriamProxy.fbx",
+      "purpose": "Original stylized adult 1.70m; sculpted facial planes, almond eyes, tailored garment, Generic BasicIdle; not approved final character art",
+      "meshes": 1,
+      "vertices": 33710,
+      "triangles": 66814,
+      "rigged": true,
+      "materials": [
+        "POD_ChestnutHairLight",
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_EarAndLidWarmth",
+        "POD_EyeIvory",
+        "POD_HazelIris",
+        "POD_IndigoLinen",
+        "POD_MiriamCheekWarmth",
+        "POD_MiriamOliveSkin",
+        "POD_MutedRoseLips",
+        "POD_RopeAndLeather",
+        "POD_UnbleachedLinen",
+        "POD_WovenOchreTrim"
+      ],
+      "bytes": 1814876
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/TravelerProxy.fbx",
+      "purpose": "Original stylized adult 1.76m; sculpted facial planes, almond eyes, tailored garment, Generic BasicIdle; not approved final character art",
+      "meshes": 1,
+      "vertices": 26843,
+      "triangles": 53080,
+      "rigged": true,
+      "materials": [
+        "POD_ChestnutHairLight",
+        "POD_DarkBrownHair",
+        "POD_DarkEyes",
+        "POD_EarAndLidWarmth",
+        "POD_EyeIvory",
+        "POD_HazelIris",
+        "POD_IndigoLinen",
+        "POD_LinenFoldShadow",
+        "POD_MutedRoseLips",
+        "POD_OakHighlights",
+        "POD_RopeAndLeather",
+        "POD_SkinHighlights",
+        "POD_WovenOchreTrim"
+      ],
+      "bytes": 1443180
+    },
+    {
+      "path": "Games/PathOfDawn/Assets/Art/Generated/GalileeShore.fbx",
+      "purpose": "Refined original Galilee shore, unchanged runtime anchors; raw Unity hut (+4,+3), environment Y180 => hut(-4,-3), door-Z, water+X.",
+      "meshes": 9,
+      "vertices": 118169,
+      "triangles": 215908,
+      "rigged": false,
+      "materials": [
+        "POD_ChalkHighlights",
+        "POD_GalileeTeal",
+        "POD_LinenFoldShadow",
+        "POD_OakHighlights",
+        "POD_OliveFoliage",
+        "POD_OliveLeafSilver",
+        "POD_OliveSunlit",
+        "POD_OliveWood",
+        "POD_RopeAndLeather",
+        "POD_SageGroundcover",
+        "POD_ShoreFoam",
+        "POD_SunlitLimestone",
+        "POD_Terracotta",
+        "POD_UnbleachedLinen",
+        "POD_WarmStone",
+        "POD_WovenOchreTrim"
+      ],
+      "bytes": 4767436
     }
   ],
-  "render_notice": "Blender source art preview only. Not a Unity screenshot and not evidence of gameplay.",
+  "revision": "toon-dawn-01",
   "material_colors": {
     "POD_SunlitLimestone": [
-      0.6600000262260437,
-      0.47999998927116394,
-      0.2800000011920929
+      0.7099999785423279,
+      0.5600000023841858,
+      0.3400000035762787
     ],
     "POD_WarmStone": [
-      0.5799999833106995,
-      0.46000000834465027,
-      0.3199999928474426
+      0.6800000071525574,
+      0.550000011920929,
+      0.4000000059604645
     ],
     "POD_ChalkHighlights": [
-      0.7400000095367432,
-      0.6399999856948853,
-      0.46000000834465027
+      0.8500000238418579,
+      0.7300000190734863,
+      0.5299999713897705
     ],
     "POD_StoneShadow": [
+      0.46000000834465027,
       0.38999998569488525,
-      0.3100000023841858,
-      0.2199999988079071
+      0.3100000023841858
     ],
     "POD_GalileeTeal": [
-      0.11999999731779099,
-      0.38999998569488525,
-      0.4300000071525574
+      0.10000000149011612,
+      0.4699999988079071,
+      0.5299999713897705
     ],
     "POD_ShoreFoam": [
-      0.550000011920929,
-      0.7400000095367432,
-      0.6800000071525574
+      0.5899999737739563,
+      0.8500000238418579,
+      0.800000011920929
     ],
     "POD_OliveWood": [
-      0.3199999928474426,
-      0.20000000298023224,
-      0.10999999940395355
+      0.23000000417232513,
+      0.13500000536441803,
+      0.07500000298023224
     ],
     "POD_OakHighlights": [
-      0.49000000953674316,
-      0.3100000023841858,
-      0.15000000596046448
+      0.46000000834465027,
+      0.26499998569488525,
+      0.11500000208616257
     ],
     "POD_OliveFoliage": [
-      0.2800000011920929,
-      0.36000001430511475,
-      0.1899999976158142
+      0.1899999976158142,
+      0.3199999928474426,
+      0.14000000059604645
     ],
     "POD_OliveSunlit": [
-      0.4000000059604645,
-      0.46000000834465027,
-      0.25
+      0.4399999976158142,
+      0.550000011920929,
+      0.23999999463558197
     ],
     "POD_ReedOchre": [
-      0.5299999713897705,
-      0.4699999988079071,
+      0.5799999833106995,
+      0.5600000023841858,
       0.23000000417232513
     ],
     "POD_Terracotta": [
-      0.6100000143051147,
-      0.27000001072883606,
-      0.15000000596046448
+      0.6800000071525574,
+      0.28999999165534973,
+      0.1599999964237213
     ],
     "POD_UnbleachedLinen": [
-      0.8500000238418579,
-      0.7599999904632568,
-      0.5799999833106995
+      0.949999988079071,
+      0.8799999952316284,
+      0.699999988079071
     ],
     "POD_EarthRedMantle": [
-      0.5299999713897705,
-      0.23999999463558197,
-      0.17000000178813934
+      0.6299999952316284,
+      0.14499999582767487,
+      0.0949999988079071
     ],
     "POD_IndigoLinen": [
-      0.1899999976158142,
+      0.07500000298023224,
       0.3199999928474426,
       0.4000000059604645
     ],
     "POD_RopeAndLeather": [
-      0.30000001192092896,
-      0.2199999988079071,
-      0.14000000059604645
+      0.23999999463558197,
+      0.125,
+      0.05999999865889549
     ],
     "POD_WarmOliveSkin": [
-      0.5600000023841858,
-      0.36000001430511475,
-      0.23000000417232513
+      0.6399999856948853,
+      0.36500000953674316,
+      0.2150000035762787
     ],
     "POD_SkinHighlights": [
-      0.6399999856948853,
-      0.4300000071525574,
+      0.7300000190734863,
+      0.44999998807907104,
       0.28999999165534973
     ],
     "POD_DarkBrownHair": [
-      0.11999999731779099,
-      0.07500000298023224,
-      0.05000000074505806
+      0.06499999761581421,
+      0.03200000151991844,
+      0.01899999938905239
     ],
     "POD_DarkEyes": [
-      0.07000000029802322,
-      0.054999999701976776,
-      0.03999999910593033
+      0.012000000104308128,
+      0.013000000268220901,
+      0.013000000268220901
     ],
     "FC_MidnightSlate": [
       0.09000000357627869,
@@ -217,10 +237,10 @@
       0.25,
       0.38999998569488525
     ],
-    "FC_AntiqueGold": [
-      0.6100000143051147,
-      0.41999998688697815,
-      0.17000000178813934
+    "POD_WovenOchreTrim": [
+      0.7599999904632568,
+      0.47999998927116394,
+      0.1599999964237213
     ],
     "FC_StarlightCrystal": [
       0.23999999463558197,
@@ -231,7 +251,83 @@
       0.20000000298023224,
       0.30000001192092896,
       0.25
+    ],
+    "POD_LinenFoldShadow": [
+      0.7200000286102295,
+      0.6100000143051147,
+      0.4300000071525574
+    ],
+    "POD_IndigoFoldShadow": [
+      0.03999999910593033,
+      0.1899999976158142,
+      0.25
+    ],
+    "POD_MantleFoldShadow": [
+      0.38999998569488525,
+      0.06499999761581421,
+      0.04500000178813934
+    ],
+    "POD_EyeIvory": [
+      0.9800000190734863,
+      0.9399999976158142,
+      0.8399999737739563
+    ],
+    "POD_HazelIris": [
+      0.20999999344348907,
+      0.125,
+      0.04500000178813934
+    ],
+    "POD_MutedRoseLips": [
+      0.4300000071525574,
+      0.1599999964237213,
+      0.11999999731779099
+    ],
+    "POD_EarAndLidWarmth": [
+      0.5299999713897705,
+      0.25,
+      0.1599999964237213
+    ],
+    "POD_MiriamOliveSkin": [
+      0.7900000214576721,
+      0.5299999713897705,
+      0.36000001430511475
+    ],
+    "POD_MiriamCheekWarmth": [
+      0.7300000190734863,
+      0.3700000047683716,
+      0.27000001072883606
+    ],
+    "POD_ChestnutHairLight": [
+      0.11999999731779099,
+      0.052000001072883606,
+      0.026000000536441803
+    ],
+    "POD_OliveLeafSilver": [
+      0.41999998688697815,
+      0.550000011920929,
+      0.36000001430511475
+    ],
+    "POD_SageGroundcover": [
+      0.3100000023841858,
+      0.4300000071525574,
+      0.23000000417232513
+    ],
+    "POD_WildflowerCream": [
+      0.9599999785423279,
+      0.8299999833106995,
+      0.5
+    ],
+    "FC_AntiqueGold": [
+      0.61,
+      0.42,
+      0.17
     ]
   },
-  "unity_environment_transform": "Native Unity FBX import: raw hut (+4,0,+3), water x<-4.7, doorway +Z. PathOfDawn applies environment Y=180 degrees: hut (-4,0,-3), water x>4.7, doorway -Z. Characters remain separate with +Z front."
+  "render_notice": "Actual Blender source render, not Unity gameplay. Unity toon shading is configured separately.",
+  "known_limits": [
+    "Procedural authored topology, not scan or approved likeness",
+    "Generic BasicIdle only; no authored walk cycle, finger rig or facial animation",
+    "No UV textures/normal maps yet; deliberate multi-material stylized surfaces",
+    "Character eye/lip/hair details and continuous garments are real geometry; Unity material import must preserve all POD_* material slots"
+  ]
 }

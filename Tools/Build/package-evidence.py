@@ -9,21 +9,34 @@ root = Path(__file__).resolve().parents[2]
 artifacts = root / "Artifacts"
 selected = [
     root / "Docs/Validation.md",
+    root / "Docs/ValidationHistory/2026-10-20.md",
     root / "Docs/PlaytestGuide.md",
     root / "Docs/UnitySmokeTests.md",
     root / "Docs/CoreValidation.md",
     root / "Docs/ArtDirection.md",
+    root / "Docs/VisualValidation.md",
+    root / "Docs/WebPlaytest.md",
+    root / "Docs/Illustration.md",
+    root / "Tools/Art/ToonDawn.md",
     root / "Tools/Environment/validation.json",
+    root / "Tools/Environment/validation-2026-10-20.json",
     root / "Tools/Art/verification.json",
+    root / "Tools/Art/toon-verification.json",
+    root / "Tools/Art/Illustration/verification.json",
     artifacts / "Environment/pipeline-fantasycards.json",
     artifacts / "TestResults/Core/core-tests.trx",
     artifacts / "Validation/WebSmoke/summary.json",
     artifacts / "Validation/WebRendererProbeFinal.json",
+    artifacts / "Validation/VisualAssets/final-audit.json",
+    artifacts / "Validation/Portal/portal-preview.json",
 ]
+selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
+selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 for game in ("FantasyCards", "PathOfDawn"):
     selected.append(artifacts / f"TestResults/{game}/EditMode.xml")
     for target in ("Windows", "Web"):
         selected.append(artifacts / f"Builds/{game}/{target}/BuildEvidence.txt")
+    selected.append(artifacts / f"Builds/{game}/Web/OutputFiles.json")
     selected.extend(sorted((artifacts / "Screenshots" / game).glob("*.png*")))
     report_dir = artifacts / "Validation/WebSmoke" / game
     selected.append(report_dir / "report.json")
@@ -34,6 +47,18 @@ for game in ("FantasyCards", "PathOfDawn"):
             selected.append(original_report)
     for pattern in ("*.png", "*.txt"):
         selected.extend(sorted(report_dir.glob(pattern)))
+    # The dated baseline remains available; these are the current visual-refresh checks.
+    for profile in ("Desktop720", "Desktop1080", "Mobile844"):
+        current = artifacts / "Validation/VisualWeb" / profile / game
+        selected.append(current / "report.json")
+        for pattern in ("*.png", "*.txt"):
+            selected.extend(sorted(current.glob(pattern)))
+
+# Public deployment checks are produced only after Pages has actually served the build.
+public = artifacts / "Validation/PublicWeb"
+if public.is_dir():
+    for pattern in ("*.json", "*.png", "*.txt"):
+        selected.extend(sorted(public.rglob(pattern)))
 
 missing = [str(path.relative_to(root)) for path in selected if not path.is_file()]
 if missing:

@@ -33,6 +33,8 @@ namespace FirstGame.Editor
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
                 PlayerSettings.WebGL.decompressionFallback = true;
                 PlayerSettings.WebGL.dataCaching = true;
+                // Content-addressed files prevent mixed cached versions after a web update.
+                PlayerSettings.WebGL.nameFilesAsHashes = true;
                 PlayerSettings.WebGL.template = "PROJECT:FirstGame";
                 var root = Environment.GetEnvironmentVariable("FIRSTGAME_BUILD_ROOT");
                 if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");

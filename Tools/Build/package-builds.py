@@ -19,11 +19,12 @@ for game in ("FantasyCards", "PathOfDawn"):
                   "Python이 있으면 이 폴더에서 python -m http.server 8000 --bind 127.0.0.1 로 로컬 서버를 시작할 수 있습니다.\n")
         controls = ("마우스: 카드 선택·배치·공격·방어. 화면의 저장/이어하기와 저장 내보내기/가져오기를 사용합니다.\n"
                     if game == "FantasyCards" else
-                    "WASD/화살표: 이동. 오른쪽 마우스: 시점. E: 대화/조사. M: 기억/회귀. Esc: 설정.\n")
+                    "WASD/화살표: 이동. 오른쪽 마우스: 시점. E: 대화/조사. M: 기억/회귀. Esc: 설정.\n"
+                    "휴대폰 가로 화면: 왼쪽 이동 패드, 오른쪽 시점 드래그, 화면의 대화/기억/설정 버튼.\n")
         (player / "README.txt").write_text(
             f"{game} · 첫 플레이 구간\nUnity 6000.3.26f1\n\n" + launch + controls +
             "첫 플레이 순서와 서사 분기 안내는 함께 포함한 PlaytestGuide.md를 확인하세요.\n" +
-            "\n현재 3D 모델·음향은 임시 에셋이며 최종 비주얼과 성능 목표는 별도 검수가 필요합니다.\n"
+            "\n새 원화와 카툰 표현을 적용한 개발판입니다. 3D 표정·걷기·음향과 실제 기기 성능은 후속 검수가 필요합니다.\n"
             "BuildEvidence.txt는 빌드 결과이며 실제 플랫폼 조작·성능 검증 결과와는 다릅니다.\n",
             encoding="utf-8")
         (player / "PlaytestGuide.md").write_bytes((root / "Docs" / "PlaytestGuide.md").read_bytes())

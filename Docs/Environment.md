@@ -1,6 +1,6 @@
 # 개발 환경과 재현 기록
 
-기준일: 2026-10-20, 한국 시간. 이 문서는 실제 설치와 실행 결과를 기록한다. 게임 기능 테스트 결과는 별도 검증 기록을 따른다.
+기준일: 2026-10-23, Asia/Seoul. 최초 설치 기록은 2026-10-20이며 로그인·라이선스와 배치 에디터 실행을 2026-10-23에 재확인했다. 게임 기능 테스트 결과는 별도 검증 기록을 따른다.
 
 ## 고정한 도구
 
@@ -56,7 +56,7 @@ source Tools/Environment/activate-shell.sh
 
 스크립트의 실제 반복 실행으로 이미 설치된 모듈은 다시 설치하지 않는 것을 검증했다. 의존성 설치·검증은 **exit 0**으로 완료했다. Personal 활성화 후 별도 런타임 진단도 **exit 0**, `runtimeReady:true`를 확인했다. 새 스냅샷에서 로그인·라이선스가 없더라도 설치를 실패로 취급하지 않지만, 예상하지 못한 명령 실패나 JSON·상태 형식 오류는 설치를 실패시킨다. 설치 성공이 에디터 실행 준비 완료를 의미하지는 않는다. `activate-shell.sh`를 source한 뒤 `dotnet --version`과 `unity --version`도 실제 확인했다.
 
-에디터를 실행하기 전에 `python3 Tools/Environment/check-runtime.py`를 실행한다. 이 기본 검사는 라이선스가 없으면 `exit 4`로 실패하며, 유효한 라이선스가 있을 때만 통과한다. 의존성 설치 스크립트만 `--allow-missing-license`를 사용해 이미 확인된 외부 런타임 전제 조건을 진단으로 남긴다. 계정 식별 정보나 인증 값은 출력하지 않는다.
+에디터를 실행하기 전에 `python3 Tools/Environment/check-runtime.py`를 실행한다. `authReady`는 CLI 계정 세션, `licenseReady`와 `runtimeEditorReady`는 에디터 라이선스 준비 상태이며 기존 `runtimeReady` 필드는 같은 라이선스 상태를 계속 제공한다. 정상적인 CLI 미로그인(`auth status`의 `exit 3`, `loggedIn:false`)은 유효한 에디터 라이선스를 막지 않는다. 라이선스가 없으면 기본 검사는 `exit 4`로 실패한다. 의존성 설치 스크립트만 `--allow-missing-license`를 사용해 이 상태를 진단으로 남긴다. 예상하지 못한 명령·JSON·상태 형식 오류는 계속 `exit 6`이며 계정 식별 정보나 인증 값은 출력하지 않는다.
 
 공식 플러그인 설치 명령:
 
@@ -68,12 +68,14 @@ codex plugin list
 
 플러그인은 실제 설치되었다. 목록 명령의 별도 원격 전체 카탈로그에서 451 경고가 나왔지만, 로컬 `unity@unity-agent-plugin`의 설치·활성 상태는 확인했다. 이 세션이 이미 로드한 도구 목록과 다음 세션에서 발견할 플러그인 스킬은 구분한다.
 
-Unity 로그인은 사용자가 브라우저에서 완료했고, CLI에서 `loggedIn: true`, `sessionState: fresh`, `mode: oauth`, `credentialSource: keyring`을 확인했다. 비밀번호나 토큰을 저장소에 복사하지 않았다. 로그인은 에디터 라이선스 활성화와 별개다.
+최초 Unity 로그인은 사용자가 브라우저에서 완료했고 당시 CLI의 `loggedIn:true`, `sessionState:fresh`를 확인했다. 2026-10-23에는 CLI 세션이 없는 `authReady:false` 상태였지만 기존 Personal 라이선스가 유효해 `licenseReady:true`, `runtimeEditorReady:true`, `runtimeReady:true`였고, 실제 배치 에디터도 **exit 0**으로 종료했다. 이번 작업에는 사용자 재로그인이나 약관 재동의가 필요하지 않았다. 계정 의존 명령을 실제로 수행해야 하고 세션이 없을 때만 공식 로그인 흐름을 사용한다. 비밀번호·토큰은 채팅이나 저장소에 복사하지 않는다.
+
+일반 샌드박스의 `auth status`는 보호된 로컬 인증 저장소 때문에 `LOCAL_STORE_UNWRITABLE`/`exit 6`을 반환했다. 승인된 권한 실행에서는 정형 미로그인 상태를 읽었고, 수정한 진단기 전체가 **exit 0**이었다. 저장소 접근 오류를 로그인·라이선스 만료로 단정하거나 저장소 권한을 느슨하게 바꾸지 않는다. 진단기는 이런 오류 코드를 비밀 값 없이 보여 주며 라이선스 결과도 별도로 기록한다.
 
 ```bash
 unity auth status --json
 unity license status --json
-# 로그인 세션이 만료되었을 때만:
+# 계정 의존 작업에 로그인이 실제로 필요하고 세션이 없을 때만:
 unity auth login
 ```
 
@@ -83,7 +85,8 @@ unity auth login
 
 - `Unity -version`: **6000.3.26f1**, 성공.
 - `ldd Unity`: 누락된 공유 라이브러리 없음.
-- `python3 Tools/Environment/check-runtime.py`: 로그인·라이선스 유효, **exit 0**, `runtimeReady:true`.
+- `python3 Tools/Environment/check-runtime.py`: 최초에는 로그인·라이선스 모두 유효. 2026-10-23 재검증은 CLI 미로그인과 유효한 라이선스를 구분해 **exit 0**, `authReady:false`, `licenseReady:true`, `runtimeEditorReady:true`, 기존 `runtimeReady:true`를 확인했다.
+- 2026-10-23 기존 `/workspace/tools/unity-smoke`의 실제 `-batchmode -nographics -quit` 실행: **exit 0**, 정상 종료 로그 확인. 라이선스·스크립트 컴파일 오류 없음. `start-display.sh`도 **exit 0**으로 `:99`/Mesa llvmpipe/OpenGL 4.5를 확인했다.
 - Personal 활성화 후 `Unity -batchmode -nographics -quit -createProject /workspace/tools/unity-smoke`: **exit 0**. 정확한 엔진 버전의 프로젝트 파일 생성, 스크립트 컴파일 약 18.63초, `Batchmode quit successfully invoked` 확인.
 - 초기 라이선스 미활성 상태의 **exit 198**은 Personal 활성화 후 재검증으로 해결되었다.
 - `unity pipeline install`: 두 프로젝트 manifest에 **0.8.0-exp.1** 추가 성공.
@@ -92,7 +95,7 @@ unity auth login
 - 읽기 전용 진단 후 `unity close`로 점검 에디터를 정상 종료했다. 프로세스 **exit 0**, 해당 프로젝트의 `UnityLockfile` 해제 확인. 앱·씬·importer 설정은 이 진단에서 변경하지 않았다.
 - 클라우드에 물리 오디오 출력 장치가 없어 ALSA/FMOD 출력 장치 초기화 경고가 발생했다. 기본 프로젝트 생성은 성공했으며 실제 음향 청취 검증은 별도다.
 
-최종 에디터 성공 로그는 `/workspace/tools/downloads/unity-smoke-after-personal.log`, 설치 로그는 `unity-install.log`에 있다. 초기 실패 로그는 `unity-smoke.log`, `unity-smoke-after-login.log`로 구분한다. 로그인 URL·계정 기록은 저장소에 넣지 않는다. 이 기본 프로젝트 생성 성공은 게임 프로젝트의 Play Mode나 Windows·웹 빌드 성공을 대신하지 않으며, 해당 결과는 각각의 실행 기록을 따른다.
+최초 활성화 후 성공 로그는 `/workspace/tools/downloads/unity-smoke-after-personal.log`, 2026-10-23 재확인 로그는 `unity-smoke-session-renewal.log`, 안전한 상태 요약은 `runtime-session-renewal-status.json`이다. 설치 로그는 `unity-install.log`, 초기 실패 로그는 `unity-smoke.log`, `unity-smoke-after-login.log`로 구분한다. 로그인 URL·계정 기록은 저장소에 넣지 않는다. 이 기본 프로젝트 실행 성공은 게임 프로젝트의 Play Mode나 Windows·웹 빌드 성공을 대신하지 않으며, 해당 결과는 각각의 실행 기록을 따른다.
 
 라이브 Pipeline의 상태·버전 eval·atlas 형식 진단은 계정·토큰 정보를 제거한 `Artifacts/Environment/pipeline-fantasycards.json`에 기록했다. atlas 진단은 수정 전의 TextureCube/Cubemap 상태를 기록하며, 해당 콘텐츠 수정 이후의 결과는 게임 검증 기록에서 구분한다.
 

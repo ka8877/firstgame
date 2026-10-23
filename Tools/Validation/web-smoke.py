@@ -2,7 +2,8 @@
 """Exercise the built Unity WebGL players through real browser input.
 
 Requires Chromium, Python Playwright, Pillow and Tesseract with kor+eng data.
-Uses a fresh browser context and a loopback-only HTTP server; never publishes.
+Uses a fresh browser context and a loopback HTTP server or an explicitly supplied
+existing deployment; never publishes.
 Reports screenshots/OCR, console and HTTP errors, canvas dimensions, and browser
 storage metadata. Does not call Unity methods or alter the page's canvas/CSS.
 This smoke test supplements native PlayMode tests; it does not certify gameplay.
@@ -14,7 +15,6 @@ import hashlib
 import http.server
 import io
 import json
-import math
 import os
 from pathlib import Path
 import re
@@ -22,12 +22,15 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.parse
+import urllib.request
 from datetime import datetime, timezone
-from PIL import Image, ImageStat
+from PIL import Image, ImageChops, ImageStat
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 TITLES = {"FantasyCards": "별빛의 서약", "PathOfDawn": "새벽의 길"}
+SLUGS = {"FantasyCards": "fantasy-cards", "PathOfDawn": "path-of-dawn"}
 
 class LocalHandler(http.server.SimpleHTTPRequestHandler):
     extensions_map = {**http.server.SimpleHTTPRequestHandler.extensions_map,
@@ -38,6 +41,28 @@ class LocalHandler(http.server.SimpleHTTPRequestHandler):
 
 def compact(text):
     return re.sub(r"[^0-9A-Za-z가-힣]", "", text)
+
+def validate_layout(game, definition):
+    point_keys = ({"titleNew", "titleContinue", "firstHand", "playTerrain", "save", "title", "scoutHand", "friendlyFirstLane"}
+                  if game == "FantasyCards" else
+                  {"titleNew", "titleContinue", "dialogueAdvance", "save", "settings", "settingsTitle",
+                   "joystickCenter", "joystickForward", "touchInteract", "cameraStart", "cameraEnd"})
+    region_keys = ({"terrain", "resource", "inspectorName", "status", "friendlyLanes"} if game == "FantasyCards" else
+                   {"dialogueAdvance", "prompt", "notification", "cameraWorld"})
+    variants = {"desktop", "compact"} if "compactBelowCanvasWidth" in definition else {"desktop"}
+    for name in variants:
+        layout = definition["variants"][name]
+        if not point_keys.issubset(layout["points"]) or not region_keys.issubset(layout["regions"]):
+            raise ValueError(f"Incomplete final layout coordinates: {game}/{name}")
+        reference = layout.get("coordinates") == "reference"
+        for key in point_keys:
+            x, y = layout["points"][key]
+            if not (0 <= x <= (1920 if reference else 1) and 0 <= y <= (1080 if reference else 1)):
+                raise ValueError(f"Pointer target outside authored frame: {game}/{name}/{key}")
+        for key in region_keys:
+            left, top, right, bottom = layout["regions"][key]
+            if not (0 <= left < right <= 1 and 0 <= top < bottom <= 1):
+                raise ValueError(f"OCR region outside canvas: {game}/{name}/{key}")
 
 def build_fingerprint(directory):
     entries = []
@@ -56,17 +81,63 @@ def build_fingerprint(directory):
     return {"directory": str(directory), "files": entries,
             "buildEvidence": evidence.read_text() if evidence.is_file() else None}
 
+def runtime_entries(fingerprint):
+    """The same published runtime scope as Tools/Web/stage-site.py; docs are separate."""
+    entries = []
+    for entry in fingerprint["files"]:
+        path = Path(entry["file"])
+        if path.as_posix() != "index.html" and path.parts[0] not in ("Build", "StreamingAssets", "TemplateData"):
+            continue
+        if any("DoNotShip" in part or "DontShip" in part for part in path.parts):
+            continue
+        if path.suffix.lower() in (".log", ".map", ".pdb", ".mdb"):
+            continue
+        entries.append(entry)
+    return entries
+
+def public_game_url(base_url, game):
+    parsed = urllib.parse.urlsplit(base_url)
+    if parsed.scheme not in ("http", "https") or not parsed.netloc or parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise ValueError("--base-url must be an HTTP(S) site root without credentials, query or fragment")
+    return urllib.parse.urljoin(base_url.rstrip("/") + "/", "games/" + SLUGS[game] + "/")
+
+def archive_previous_run(output):
+    """Never overwrite an earlier pass, failure or incomplete set of screenshots."""
+    if not output.exists() or not any(output.iterdir()):
+        output.mkdir(parents=True, exist_ok=True)
+        return None
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    archived = output.with_name(output.name + ".previous-" + stamp)
+    output.rename(archived)
+    output.mkdir(parents=True)
+    return archived
+
+def pixel_difference(left, right):
+    with Image.open(io.BytesIO(left)) as a, Image.open(io.BytesIO(right)) as b:
+        if a.size != b.size:
+            raise AssertionError("Camera comparison frames have different dimensions")
+        return sum(ImageStat.Stat(ImageChops.difference(a.convert("RGB"), b.convert("RGB"))).mean) / 3
+
 def classify_network_failures(report):
     """Keep every event, distinguishing only proved successful Unity cache revalidation."""
-    restored = any(c.get("passed") and ("survived full browser reload" in c["name"] or
-                   "Continue restored the walked-to NPC position" in c["name"]) for c in report["checks"])
-    ready = any(c.get("passed") and c["name"] == "Unity createUnityInstance resolved after reload"
-                for c in report["checks"])
     expected, unexpected = [], []
     for failure in report["failedRequests"]:
+        navigation = failure.get("navigation", 0)
+        configurations = [c for c in report.get("unityConfigurations", [])
+                          if c.get("navigation") == navigation]
+        exact_data_url = any(c.get("dataUrl") == failure["url"] for c in configurations)
+        restored = any(c.get("passed") and c.get("navigation") == navigation and
+                       ("survived full browser reload" in c["name"] or
+                        "Continue restored the walked-to NPC position" in c["name"])
+                       for c in report["checks"])
+        ready = any(c.get("passed") and c.get("navigation") == navigation and
+                    c["name"] == "Unity createUnityInstance resolved after reload"
+                    for c in report["checks"])
         marker = "'" + failure["url"] + "' successfully revalidated and served from the browser cache"
-        cache_logs = [m["text"] for m in report["console"] if marker in m["text"]]
-        if (failure["error"] == "net::ERR_ABORTED" and failure["url"].endswith(".data.unityweb")
+        cache_logs = [m["text"] for m in report["console"]
+                      if m.get("navigation") == navigation and marker in m["text"]]
+        if (navigation > 0 and failure["error"] == "net::ERR_ABORTED"
+                and failure.get("method") == "GET" and exact_data_url
                 and cache_logs and restored and ready):
             expected.append({"request": failure, "cacheEvidence": cache_logs,
                 "reason": "The exact data URL was successfully revalidated and read from UnityCache, and the loaded game restored persisted state. This exact shipped-loader log is emitted by its HTTP 304 branch. The transport abort remains recorded."})
@@ -126,13 +197,17 @@ class Smoke:
         self.last_full_frame = None
         self.started = time.monotonic()
         self.navigation_index = 0
+        self.layouts = json.loads(args.layouts.read_text(encoding="utf-8"))["games"][game]
         self.report = {"game": game, "status": "running", "screenshots": [], "checks": [],
                        "console": [], "pageErrors": [], "failedRequests": [], "httpErrors": [],
-                       "input": [], "loadingTimings": [], "networkResponses": [],
+                       "input": [], "loadingTimings": [], "networkResponses": [], "unityConfigurations": [],
+                       "profile": args.profile,
                        "rendering": ("Chromium X11/Mesa llvmpipe software WebGL" if args.renderer == "x11-mesa" else
                                      "Chromium headless SwiftShader software WebGL") +
                                     "; timings are local smoke evidence, not target-device benchmarks"}
         self.report["buildFingerprint"] = build_fingerprint(args.build_root / game / "Web")
+        self.report["layoutConfiguration"] = {"file": str(args.layouts),
+            "sha256": hashlib.sha256(args.layouts.read_bytes()).hexdigest(), "game": self.layouts}
         page.on("console", lambda m: self.report["console"].append({"type": m.type, "text": m.text,
             "elapsedMs": round((time.monotonic()-self.started)*1000,1), "navigation": self.navigation_index}))
         page.on("pageerror", lambda e: self.report["pageErrors"].append(str(e)))
@@ -171,18 +246,32 @@ class Smoke:
         desired = {"width": width, "height": height}
         if self.page.viewport_size != desired:
             self.page.set_viewport_size(desired)
-            self.page.wait_for_function("""size => {
+            self.page.wait_for_function("""() => {
                 const c=document.querySelector('#unity-canvas');
-                return c && c.width===size.width && c.height===size.height;
-            }""", arg=desired, timeout=20000)
+                if (!c) return false;
+                const r=c.getBoundingClientRect();
+                return r.width>0 && r.height>0 && Math.abs(c.width-r.width)<=1 && Math.abs(c.height-r.height)<=1;
+            }""", timeout=20000)
         self.refresh_geometry()
 
     def interaction_viewport(self):
         width, height = map(int, self.args.interaction_resolution.split("x"))
         self.resize(width, height)
 
+    def layout(self):
+        variant = "compact" if self.canvas_geometry["width"] < self.layouts.get("compactBelowCanvasWidth", -1) else "desktop"
+        return self.layouts["variants"][variant]
+
+    def click_control(self, key, label):
+        layout = self.layout()
+        self.click(*layout["points"][key], label, reference=layout.get("coordinates") == "reference")
+
+    def region(self, key):
+        return tuple(self.layout()["regions"][key])
+
     def check(self, condition, name, evidence=None):
-        self.report["checks"].append({"name": name, "passed": bool(condition), "evidence": evidence})
+        self.report["checks"].append({"name": name, "passed": bool(condition), "evidence": evidence,
+                                      "navigation": self.navigation_index})
         print(f"{self.game}: {'PASS' if condition else 'FAIL'} {name}", flush=True)
         self.persist()
         if not condition:
@@ -216,8 +305,8 @@ class Smoke:
                                 env={**os.environ, "OMP_THREAD_LIMIT": "1"})
         return result.stdout.decode("utf-8").strip()
 
-    def snapshot(self, name, include_ocr=True):
-        pixels = self.capture()
+    def snapshot(self, name, include_ocr=True, full_viewport=False):
+        pixels = self.page.screenshot(timeout=30000) if full_viewport else self.capture()
         target = self.output / (name + ".png")
         target.write_bytes(pixels)
         img = Image.open(io.BytesIO(pixels)).convert("RGB")
@@ -225,7 +314,8 @@ class Smoke:
         evidence = {"name": name, "path": str(target), "size": list(img.size),
                     "sha256": hashlib.sha256(pixels).hexdigest(),
                     "channelStddev": [round(v, 3) for v in stat.stddev],
-                    "canvas": dict(self.canvas_geometry)}
+                    "canvas": dict(self.canvas_geometry), "viewport": self.page.viewport_size,
+                    "captureKind": "browser-viewport" if full_viewport else "unity-canvas"}
         if include_ocr:
             evidence["ocr"] = self.text(pixels)
             (self.output / (name + ".txt")).write_text(evidence["ocr"], encoding="utf-8")
@@ -251,19 +341,125 @@ class Smoke:
         (self.output / "last-ocr.txt").write_text(last, encoding="utf-8")
         raise AssertionError("Visible canvas OCR did not contain " + repr(expected) + "; last text: " + last[:500])
 
-    def click(self, x, y, label, reference=False):
+    def canvas_point(self, x, y, reference=False):
         box = self.canvas_geometry
         if reference:
-            # PathOfDawn uses top-left pixel positions on a CanvasScaler matching width/height equally.
-            scale = math.sqrt((box["width"] / 1920) * (box["height"] / 1080))
-            dx, dy = x * scale, y * scale
+            # The authored 1920x1080 UI frame is aspect-fitted and centered.
+            scale = min(box["width"] / 1920, box["height"] / 1080)
+            dx = (box["width"] - 1920 * scale) / 2 + x * scale
+            dy = (box["height"] - 1080 * scale) / 2 + y * scale
         else:
             dx, dy = x * box["width"], y * box["height"]
-        self.page.mouse.click(box["x"] + dx, box["y"] + dy, delay=80)
-        self.report["input"].append({"label": label, "canvasX": round(dx, 2), "canvasY": round(dy, 2)})
-        print(f"{self.game}: canvas click {label}", flush=True)
+        if not (0 <= dx <= box["width"] and 0 <= dy <= box["height"]):
+            raise AssertionError("Requested pointer target falls outside the visible canvas: " + str((x, y)))
+        return box["x"] + dx, box["y"] + dy, dx, dy
+
+    def click(self, x, y, label, reference=False):
+        px, py, dx, dy = self.canvas_point(x, y, reference)
+        touch = self.args.profile == "mobile-landscape"
+        if touch:
+            self.page.touchscreen.tap(px, py)
+        else:
+            self.page.mouse.click(px, py, delay=80)
+        self.report["input"].append({"label": label, "type": "touch" if touch else "mouse",
+                                     "canvasX": round(dx, 2), "canvasY": round(dy, 2)})
+        print(f"{self.game}: canvas {'tap' if touch else 'click'} {label}", flush=True)
         self.persist()
         self.page.wait_for_timeout(600)
+
+    def touch_drag_hold(self, start, end, held_ms, label, reference=True):
+        """Dispatch actual browser touch input; never invoke Unity or DOM event handlers."""
+        if self.args.profile != "mobile-landscape":
+            raise AssertionError("Touch gestures require the touch-enabled mobile context")
+        sx, sy, sdx, sdy = self.canvas_point(*start, reference=reference)
+        ex, ey, edx, edy = self.canvas_point(*end, reference=reference)
+        session = self.page.context.new_cdp_session(self.page)
+        events = []
+        def dispatch(kind, x=None, y=None):
+            points = [] if x is None else [{"x": x, "y": y, "id": 1, "radiusX": 8, "radiusY": 8, "force": 1}]
+            session.send("Input.dispatchTouchEvent", {"type": kind, "touchPoints": points})
+            events.append(kind)
+        try:
+            dispatch("touchStart", sx, sy)
+            for step in range(1, 6):
+                dispatch("touchMove", sx + (ex-sx)*step/5, sy + (ey-sy)*step/5)
+                self.page.wait_for_timeout(20)
+            self.page.wait_for_timeout(held_ms)
+        finally:
+            try:
+                dispatch("touchEnd")
+            finally:
+                session.detach()
+        self.report["input"].append({"label": label, "type": "touch-drag-hold",
+            "startCanvas": [round(sdx, 2), round(sdy, 2)], "endCanvas": [round(edx, 2), round(edy, 2)],
+            "heldMilliseconds": held_ms, "events": events})
+        self.persist()
+
+    def touch_camera(self):
+        """Observe a reversible camera change against the scene's own idle pixel noise."""
+        layout = self.layout()
+        region = self.region("cameraWorld")
+        frames = {}
+        def frame(name):
+            pixels = self.capture(region)
+            filename = "touch-camera-" + name + ".png"
+            (self.output / filename).write_bytes(pixels)
+            frames[name] = {"file": filename, "sha256": hashlib.sha256(pixels).hexdigest()}
+            return pixels
+        self.page.wait_for_timeout(900)
+        baseline_a = frame("idle-a")
+        self.page.wait_for_timeout(900)
+        baseline_b = frame("idle-b")
+        self.touch_drag_hold(layout["points"]["cameraStart"], layout["points"]["cameraEnd"], 1000,
+                             "Look right with actual camera-pad touch drag", reference=True)
+        self.page.wait_for_timeout(900)
+        turned = frame("turned")
+        self.snapshot("mobile-camera-turned", include_ocr=False)
+        self.touch_drag_hold(layout["points"]["cameraEnd"], layout["points"]["cameraStart"], 1000,
+                             "Return camera with opposite touch drag", reference=True)
+        self.page.wait_for_timeout(900)
+        returned = frame("returned")
+        self.snapshot("mobile-camera-returned", include_ocr=False)
+        noise = pixel_difference(baseline_a, baseline_b)
+        changed = pixel_difference(baseline_b, turned)
+        restored = pixel_difference(baseline_b, returned)
+        evidence = {"region": list(region), "frames": frames,
+                    "idleMeanAbsoluteRgbDifference": noise, "turnedMeanAbsoluteRgbDifference": changed,
+                    "returnedMeanAbsoluteRgbDifference": restored,
+                    "limit": "Visible reversible view change; does not read Unity camera pose or certify all camera/multitouch behavior."}
+        self.report["touchCameraEvidence"] = evidence
+        self.check(changed > max(4, noise * 4 + 1),
+                   "Actual camera touch drag changed the world view beyond measured idle animation", evidence)
+        self.check(restored < max(noise * 3 + 2, changed * .65),
+                   "Opposite camera touch drag returned closer to the original view", evidence)
+        prompt = self.wait_text("미리암에게 말 걸기", region=self.region("prompt"), psm=7)
+        self.check(True, "Camera-only touch gestures preserved the restored NPC interaction prompt", prompt)
+
+    def verify_public_delivery(self, game_url):
+        entries = runtime_entries(self.report["buildFingerprint"])
+        self.check(any(e["file"] == "index.html" for e in entries) and any(e["file"].startswith("Build/") for e in entries),
+                   "Local final build contains runtime files for public comparison")
+        self.report["publicDelivery"] = {"gameUrl": game_url, "files": [], "status": "running"}
+        for entry in entries:
+            url = urllib.parse.urljoin(game_url, urllib.parse.quote(entry["file"], safe="/"))
+            request = urllib.request.Request(url, headers={"Accept-Encoding": "identity",
+                "User-Agent": "FirstGame-public-build-verification"})
+            hasher, length = hashlib.sha256(), 0
+            with urllib.request.urlopen(request, timeout=self.args.timeout) as response:
+                encoding = response.headers.get("Content-Encoding", "identity").lower()
+                if encoding not in ("", "identity"):
+                    raise AssertionError("Cannot compare exact bytes: server ignored Accept-Encoding: identity for " + url)
+                for block in iter(lambda: response.read(1024 * 1024), b""):
+                    hasher.update(block)
+                    length += len(block)
+                record = {"file": entry["file"], "url": url, "resolvedUrl": response.geturl(),
+                          "httpStatus": response.status, "bytes": length, "sha256": hasher.hexdigest(),
+                          "expectedBytes": entry["bytes"], "expectedSha256": entry["sha256"]}
+            record["passed"] = record["httpStatus"] == 200 and length == entry["bytes"] and record["sha256"] == entry["sha256"]
+            self.report["publicDelivery"]["files"].append(record)
+            self.check(record["passed"], "Public runtime file matches the exact final local build: " + entry["file"], record)
+        self.report["publicDelivery"]["status"] = "passed"
+        self.persist()
 
     def loaded(self, reload=False):
         if reload:
@@ -275,6 +471,20 @@ class Smoke:
         }""", timeout=self.args.timeout * 1000)
         self.check(self.canvas.get_attribute("data-unity-state") == "ready",
                    "Unity createUnityInstance resolved" + (" after reload" if reload else ""))
+        configuration = self.page.evaluate("""() => {
+            if (typeof config !== 'object' || !config || typeof config.dataUrl !== 'string')
+                throw new Error('The actual Unity loader config.dataUrl is not readable');
+            const urls = {};
+            for (const key of ['dataUrl','frameworkUrl','codeUrl'])
+                if (typeof config[key] === 'string') urls[key] = new URL(config[key], location.href).href;
+            const exposed = document.querySelector('#unity-canvas').dataset.dataUrl;
+            if (exposed && exposed !== urls.dataUrl)
+                throw new Error('Canvas data URL differs from the actual loader config');
+            return {...urls, documentUrl: location.href, canvasDataUrl: exposed || null};
+        }""")
+        configuration["navigation"] = self.navigation_index
+        self.report["unityConfigurations"].append(configuration)
+        self.check(bool(configuration.get("dataUrl")), "Exact Unity config data URL recorded", configuration)
         self.refresh_geometry()
         ready_ms = self.page.evaluate("performance.now()")
         self.wait_text(TITLES[self.game])
@@ -290,46 +500,71 @@ class Smoke:
             return {available: true, version: gl.getParameter(gl.VERSION),
                 renderer: ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)};
         }""")
+        self.report["browserInputCapabilities"] = self.page.evaluate("""() => ({
+            userAgent: navigator.userAgent, maxTouchPoints: navigator.maxTouchPoints,
+            coarsePointer: matchMedia('(pointer: coarse)').matches,
+            devicePixelRatio: window.devicePixelRatio, viewport: {width:innerWidth,height:innerHeight}
+        })""")
+        if self.args.profile == "mobile-landscape":
+            capabilities = self.report["browserInputCapabilities"]
+            self.check(capabilities["maxTouchPoints"] > 0 and capabilities["coarsePointer"],
+                       "Mobile context exposes actual browser touch capability", capabilities)
         self.check(True, "Korean title visibly rendered" + (" after reload" if reload else ""), TITLES[self.game])
 
     def resolutions(self, prefix):
-        for width, height in [(1280, 720), (1920, 1080)]:
+        resolutions = [(844, 390)] if self.args.profile == "mobile-landscape" else [(1280, 720), (1920, 1080)]
+        for width, height in resolutions:
             self.resize(width, height)
             shot = self.snapshot(f"{prefix}-{width}x{height}")
-            self.check(shot["size"] == [width, height],
-                       f"Actual canvas fills {width}x{height} viewport", shot["canvas"])
+            if self.args.profile == "mobile-landscape":
+                box = shot["canvas"]
+                scale = min(width / 16, height / 9)
+                self.check(abs(box["width"] - 16*scale) <= 1 and abs(box["height"] - 9*scale) <= 1 and
+                           box["x"] >= -1 and box["y"] >= -1 and box["x"]+box["width"] <= width+1 and
+                           box["y"]+box["height"] <= height+1,
+                           f"Actual 16:9 canvas fits fully inside {width}x{height} mobile viewport", box)
+                self.check(all(abs(a-b) <= 1 for a,b in zip(shot["size"], [box["width"],box["height"]])),
+                           "Mobile screenshot contains the complete visible canvas", shot["size"])
+                viewport_shot = self.snapshot(f"{prefix}-mobile-viewport-{width}x{height}",
+                                              include_ocr=False, full_viewport=True)
+                self.check(viewport_shot["size"] == [width, height],
+                           "Actual mobile browser viewport screenshot has the requested dimensions", viewport_shot["size"])
+            else:
+                self.check(shot["size"] == [width, height],
+                           f"Actual canvas fills {width}x{height} viewport", shot["canvas"])
             self.check(min(shot["channelStddev"]) > 8, "Canvas contains nonblank rendered pixels", shot["channelStddev"])
 
     def fantasy(self):
-        self.click(.1665, .6175, "새로운 결투")
-        self.wait_text("전투 기록")
+        self.click_control("titleNew", "새로운 결투")
+        terrain_region = self.region("terrain")
+        resource_region = self.region("resource")
+        # The revised desktop record heading is English and compact records are
+        # behind a button. The always-visible empty terrain is a battle-only state.
+        self.wait_text("전개되지", region=terrain_region, psm=7)
         self.page.wait_for_timeout(2500)  # The two-second opening Timeline releases input.
         self.check(True, "Real new-game canvas click opened battle")
         self.snapshot("battle-before-selection")
-        terrain_region = (.245, .418, .82, .455)
-        resource_region = (.245, .638, .825, .695)
         self.wait_text("전개되지", region=terrain_region, psm=7)
         # Seed 731029 + the authored five-card opening hand puts dawn_court first.
-        # DrawCard uses width .113, left .2175, gap .007: center (.2705, .84).
-        self.click(.2705, .84, "First hand card: 새벽의 정원")
-        self.wait_text("새벽의 정원", region=(.025, .326, .22, .385), psm=7)
-        self.click(.075, .63, "지형 전개")
+        self.click_control("firstHand", "First hand card: 새벽의 정원")
+        self.wait_text("새벽의 정원", region=self.region("inspectorName"), psm=7)
+        self.click_control("playTerrain", "지형 전개")
         terrain_text = self.wait_text("새벽의 정원", region=terrain_region, psm=7)
         resource_text = self.wait_text("여명 1", region=resource_region, psm=7)
         self.check(True, "Real card selection and terrain-play button added 새벽의 정원 and granted dawn resource",
                    {"terrainText": terrain_text, "resourceText": resource_text})
-        self.click(.81, .0545, "저장")
-        self.wait_text("난수 상태를 저장")
+        self.click_control("save", "저장")
+        self.wait_text("난수 상태를 저장", region=self.region("status"), psm=7)
         self.check(True, "In-game save reported success")
         self.resolutions("battle-saved")
         self.interaction_viewport()
-        self.click(.9175, .0545, "타이틀")
+        self.click_control("title", "타이틀")
         self.wait_text(TITLES[self.game])
         self.page.wait_for_timeout(1800)  # Let PlayerPrefs' asynchronous IndexedDB write settle.
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
-        self.click(.3575, .6175, "이어하기")
-        self.wait_text("저장한 전투와 다음 코인 상태를 복원")
+        self.click_control("titleContinue", "이어하기")
+        self.wait_text("저장한 전투와 다음 코인 상태를 복원", region=self.region("status"), psm=7)
         self.check(True, "Reloaded page continued persisted battle through a real canvas click")
         terrain_text = self.wait_text("새벽의 정원", region=terrain_region, psm=7)
         resource_text = self.wait_text("여명 1", region=resource_region, psm=7)
@@ -337,24 +572,37 @@ class Smoke:
                    {"terrainText": terrain_text, "resourceText": resource_text})
         self.snapshot("battle-continued")
         self.report["storageAfterReload"] = browser_storage(self.page)
+        # Extend the already-proved save/reload flow with one real unit play so
+        # the refreshed battlefield artwork is captured in an occupied lane.
+        self.click_control("scoutHand", "Remaining fourth hand card: 별길의 정찰자")
+        self.click_control("friendlyFirstLane", "Summon the selected scout in the first friendly lane")
+        unit_text = self.wait_text("별길의 정찰자", region=self.region("friendlyLanes"), psm=11)
+        spent_text = self.wait_text("여명 0", region=resource_region, psm=7)
+        self.check(True, "Actual post-reload unit placement occupied a friendly lane and spent the restored dawn resource",
+                   {"friendlyLaneText": unit_text, "resourceText": spent_text})
+        self.snapshot("battle-unit-played")
 
     def dawn_opening(self, label):
         # The current Ink opening contains nine lines. Verify each rendered advance
         # control before clicking; the objective HUD alone is also visible behind dialogue.
-        dialogue_button = (.71, .86, .92, .923)
+        dialogue_button = self.region("dialogueAdvance")
         for index in range(9):
             expected = "다음 대사" if index < 8 else "계속"
             visible = self.wait_text(expected, region=dialogue_button, psm=7)
             if index == 0:
                 self.snapshot(label + "-opening-dialogue")
-            self.click(1565, 962, f"{label} opening line {index + 1}: {expected}", reference=True)
+            if index == 2:
+                # This authored line is Miriam's first speech; retain the actual
+                # portrait/speaker-color frame without replacing the flow assertions.
+                self.snapshot(label + "-miriam-dialogue")
+            self.click_control("dialogueAdvance", f"{label} opening line {index + 1}: {expected}")
             self.report["input"][-1]["visibleControlBeforeClick"] = visible
         self.check(True, label + ": advanced all nine authored opening lines using their visible canvas buttons")
 
     def dawn(self):
-        self.click(429, 605, "새 게임", reference=True)
+        self.click_control("titleNew", "새 게임")
         self.dawn_opening("new-game")
-        prompt_region = (.02, .832, .7, .929)
+        prompt_region = self.region("prompt")
         before_prompt = self.wait_text("시계 살펴보기", region=prompt_region, psm=7)
         self.check(True, "Opening dialogue closed and exploration-only interaction prompt appeared", before_prompt)
         self.snapshot("exploration-before-input")
@@ -365,13 +613,19 @@ class Smoke:
         movement_prompts = []
         for pulse in range(8):
             held_ms = 1400 if pulse == 0 else 1000
-            self.page.keyboard.down("w")
-            try:
-                self.page.wait_for_timeout(held_ms)
-            finally:
-                self.page.keyboard.up("w")
-            self.report["input"].append({"label": f"Walk forward with W, pulse {pulse + 1}",
-                                         "heldMilliseconds": held_ms})
+            if self.args.profile == "mobile-landscape":
+                layout = self.layout()
+                self.touch_drag_hold(layout["points"]["joystickCenter"], layout["points"]["joystickForward"],
+                    held_ms, f"Walk forward with virtual joystick, pulse {pulse + 1}",
+                    reference=layout.get("coordinates") == "reference")
+            else:
+                self.page.keyboard.down("w")
+                try:
+                    self.page.wait_for_timeout(held_ms)
+                finally:
+                    self.page.keyboard.up("w")
+                self.report["input"].append({"label": f"Walk forward with W, pulse {pulse + 1}",
+                                             "type": "keyboard", "heldMilliseconds": held_ms})
             self.page.wait_for_timeout(250)
             prompt_pixels = self.capture(prompt_region)
             near_prompt = self.text(prompt_pixels, psm=7)
@@ -383,23 +637,24 @@ class Smoke:
             if compact("미리암에게 말 걸기") in compact(near_prompt):
                 break
         else:
-            raise AssertionError("Bounded real W input did not reach the NPC prompt: " + near_prompt)
-        self.check(True, "Real keyboard movement entered the NPC interaction radius",
+            raise AssertionError("Bounded real movement input did not reach the NPC prompt: " + near_prompt)
+        self.check(True, "Real " + ("touch joystick" if self.args.profile == "mobile-landscape" else "keyboard") +
+                   " movement entered the NPC interaction radius",
                    {"beforePrompt": before_prompt, "afterPrompt": near_prompt})
-        self.click(1476, 81, "저장", reference=True)
+        self.click_control("save", "저장")
         save_notice = self.wait_text("여정을 저장했습니다",
-                                     region=(.022, .755, .807, .832), psm=7)
+                                     region=self.region("notification"), psm=7)
         self.check(True, "In-game save reported success", save_notice)
         self.resolutions("journey-saved")
         self.interaction_viewport()
-        self.click(1716, 81, "설정", reference=True)
+        self.click_control("settings", "설정")
         self.wait_text("설정과 여정 보관")
-        self.click(628, 907, "저장하고 타이틀로", reference=True)
+        self.click_control("settingsTitle", "저장하고 타이틀로")
         self.wait_text(TITLES[self.game])
         self.page.wait_for_timeout(1800)
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
-        self.click(429, 691, "이어하기", reference=True)
+        self.click_control("titleContinue", "이어하기")
         # Current save data retains displayed opening lines; Continue reopens that dialogue.
         self.dawn_opening("continued")
         continued_prompt = self.wait_text("미리암에게 말 걸기", region=prompt_region, psm=7)
@@ -407,10 +662,21 @@ class Smoke:
         continued = self.snapshot("journey-continued")
         self.check("소지품" in compact(continued["ocr"]), "Reloaded page continued persisted journey through a real canvas click")
         self.report["storageAfterReload"] = browser_storage(self.page)
+        if self.args.profile == "mobile-landscape":
+            self.touch_camera()
+            self.click_control("touchInteract", "Touch interaction near the restored NPC")
+        else:
+            self.page.keyboard.press("e")
+            self.report["input"].append({"label": "Interact with restored NPC using E", "type": "keyboard"})
+        interaction_text = self.wait_text("다음 대사", region=self.region("dialogueAdvance"), psm=7)
+        self.check(True, "Real interaction input opened NPC dialogue after restored position", interaction_text)
+        self.snapshot("npc-dialogue-after-continue")
 
     def run(self, url):
         print(f"{self.game}: loading built Unity player", flush=True)
         try:
+            if self.args.base_url:
+                self.verify_public_delivery(url)
             self.page.goto(url, wait_until="domcontentloaded", timeout=self.args.timeout * 1000)
             self.loaded()
             self.resolutions("title")
@@ -430,6 +696,8 @@ class Smoke:
         except Exception as exc:
             self.report["status"] = "failed"
             self.report["failure"] = str(exc)
+            if self.report.get("publicDelivery", {}).get("status") == "running":
+                self.report["publicDelivery"]["status"] = "failed"
             self.persist()
             # A screenshot/compositor timeout does not by itself prove a game crash.
             # Query read-only DOM/WebGL liveness separately through CDP with a deadline.
@@ -465,19 +733,39 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts" / "Builds")
     parser.add_argument("--output", type=Path, default=ROOT / "Artifacts" / "Validation" / "WebSmoke")
+    parser.add_argument("--base-url", help="Verify and play an existing site's games/<slug>/ URLs against the local final build; does not publish.")
     parser.add_argument("--game", choices=list(TITLES), action="append", help="Can be repeated; defaults to both.")
     parser.add_argument("--renderer", choices=["swiftshader", "x11-mesa"], default="swiftshader",
                         help="x11-mesa requires sourcing Tools/Environment/activate-display.sh and an active Xvfb display.")
     parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
     parser.add_argument("--tessdata", type=Path, default=os.environ.get("FIRSTGAME_TESSDATA"))
+    parser.add_argument("--layouts", type=Path, default=ROOT / "Tools/Validation/web-smoke-layouts.json")
     parser.add_argument("--timeout", type=int, default=180, help="Maximum seconds per Unity startup wait.")
     parser.add_argument("--ocr-timeout", type=int, default=45,
                         help="Maximum seconds per semantic OCR assertion after startup.")
-    parser.add_argument("--interaction-resolution", choices=["1280x720", "1920x1080"], default="1920x1080",
-                        help="Viewport used for the first interactions; both resolutions are still captured.")
+    parser.add_argument("--profile", choices=["desktop", "mobile-landscape"], default="desktop",
+                        help="Mobile uses Android UA, touch input and an 844x390 viewport; this is browser emulation, not device performance.")
+    parser.add_argument("--interaction-resolution", choices=["1280x720", "1920x1080", "844x390"],
+                        help="Desktop captures both PC sizes and uses this size for input; mobile uses 844x390.")
     args = parser.parse_args()
+    if args.interaction_resolution is None:
+        args.interaction_resolution = "844x390" if args.profile == "mobile-landscape" else "1920x1080"
+    if (args.profile == "mobile-landscape") != (args.interaction_resolution == "844x390"):
+        parser.error("Use 844x390 for mobile-landscape and 1280x720 or 1920x1080 for desktop.")
     games = args.game or list(TITLES)
+    layouts = json.loads(args.layouts.read_text(encoding="utf-8"))
     for game in games:
+        if args.base_url:
+            try:
+                public_game_url(args.base_url, game)
+            except ValueError as error:
+                parser.error(str(error))
+        if not layouts["games"][game].get("ready"):
+            parser.error(f"Final layout coordinates are not ready for {game}: {args.layouts}")
+        try:
+            validate_layout(game, layouts["games"][game])
+        except (KeyError, TypeError, ValueError) as error:
+            parser.error(str(error))
         if not (args.build_root / game / "Web" / "index.html").is_file():
             parser.error(f"Built player does not exist: {args.build_root / game / 'Web' / 'index.html'}")
     languages = ["tesseract", "--list-langs"]
@@ -487,10 +775,15 @@ def main():
     if not {"kor", "eng"}.issubset(set(found)):
         parser.error("Tesseract needs kor and eng data; supply --tessdata or FIRSTGAME_TESSDATA.")
     args.output.mkdir(parents=True, exist_ok=True)
-    handler = functools.partial(LocalHandler, directory=str(args.build_root.resolve()))
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
-    thread.start()
+    summary_path = args.output / "summary.json"
+    if summary_path.exists():
+        summary_path.rename(args.output / ("summary.previous-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + ".json"))
+    server = None
+    if not args.base_url:
+        handler = functools.partial(LocalHandler, directory=str(args.build_root.resolve()))
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
     reports = []
     try:
         with sync_playwright() as playwright:
@@ -505,23 +798,35 @@ def main():
                     args=["--no-sandbox", "--disable-dev-shm-usage", *renderer_args])
                 try:
                     out = args.output / game
-                    out.mkdir(parents=True, exist_ok=True)
-                    context = browser.new_context(viewport={"width": 1280, "height": 720}, device_scale_factor=1)
+                    previous_run = archive_previous_run(out)
+                    mobile = args.profile == "mobile-landscape"
+                    context_options = {"viewport": {"width": 844, "height": 390} if mobile else {"width": 1280, "height": 720},
+                                       "device_scale_factor": 1, "has_touch": mobile, "is_mobile": mobile}
+                    if mobile:
+                        context_options["user_agent"] = ("Mozilla/5.0 (Linux; Android 14; Mobile Browser Smoke) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36")
+                    context = browser.new_context(**context_options)
                     try:
                         page = context.new_page()
-                        reports.append(Smoke(page, game, out, args).run(
-                            f"http://127.0.0.1:{server.server_port}/{game}/Web/"))
+                        smoke = Smoke(page, game, out, args)
+                        if previous_run:
+                            smoke.report["previousRunArchive"] = str(previous_run)
+                        url = public_game_url(args.base_url, game) if args.base_url else f"http://127.0.0.1:{server.server_port}/{game}/Web/"
+                        reports.append(smoke.run(url))
                     finally:
                         context.close()
                 finally:
                     browser.close()
     finally:
-        server.shutdown()
-        server.server_close()
+        if server is not None:
+            server.shutdown()
+            server.server_close()
     result = {"createdUtc": datetime.now(timezone.utc).isoformat(),
+              "profile": args.profile, "interactionResolution": args.interaction_resolution, "baseUrl": args.base_url,
               "status": "passed" if all(r["status"] == "passed" for r in reports) else "failed",
               "limits": ["Software WebGL results do not establish target-device performance.",
-                         "Exercises title/new game, one terrain play, brief story keyboard input, manual save/reload/continue; not full campaigns.",
+                         "The mobile profile emulates an Android touch browser at DPR 1; it is not physical mobile hardware.",
+                         "Exercises title/new game, one terrain play and unit placement, story movement/interaction, mobile camera gestures, manual save/reload/continue; not full campaigns.",
                          "Native PlayMode tests separately cover state restoration and selected battle/story flows."],
               "games": reports}
     (args.output / "summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

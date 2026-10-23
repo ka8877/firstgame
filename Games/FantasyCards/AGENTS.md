@@ -9,7 +9,7 @@ Unity **6000.3.26f1** / C# / URP / uGUI+TMP / Input System **1.20.1** / Cinemach
 - `Assets/Game/Presentation`: UI/전장/효과/입력. 코어 `BattleEvent`를 재생하며 효과 중 중복 입력을 막는다.
 - `Assets/Game/Tests`: 중요한 규칙/저장 결정론 EditMode 테스트.
 - `Assets/Resources/Data`: 카드 16종과 RuleSet. stable ID를 유지하고 수치 변경 시 콘텐츠 버전을 검토한다.
-- `Assets/Resources/Art`: 분리된 카드 일러스트. 현재 atlas는 승인 전 후보.
+- `Assets/Resources/Art`: 2×2 카드 원화 atlas 네 장(각 1254×1254)과 타이틀 영웅 원화. 구 4×4 원본은 `Assets/Art/Archive`에 보존하며 Player에 중복 포함하지 않는다.
 - `Assets/Art/Generated`: Blender 전장 초안. 캡슐 말과 합성 차임은 임시 에셋이다.
 - `Assets/Editor`, 씬, 공용 저장/빌드와 메타는 루트 담당과 협의하여 수정한다. 같은 씬/프리팹 동시 편집 금지.
 

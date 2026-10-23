@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Materialize checked-in bootstrap scripts/scenes and missing deterministic .meta IDs.
 
-Never overwrite an existing scene or meta. Unity imports/generates engine-owned assets
+Never overwrite an existing scene, project-specific setup script, or meta. Unity imports/generates engine-owned assets
 (fonts, renderers, prefabs, authoring data) through ProjectSetup, not guessed YAML.
 """
 from pathlib import Path
@@ -105,10 +105,18 @@ def materialize():
                       if game == "FantasyCards" else '            var chapter = Resources.Load<PathOfDawn.Authoring.StoryChapter>("Content/Galilee");\n            if (chapter == null || chapter.story == null || !chapter.story.isCompiled) throw new InvalidOperationException("Story chapter is missing or invalid.");')
         replacements = {"__GAME__": game, "__APP_TYPE__": app_type, "__APP_ASSEMBLY__": game + ".Presentation", "__CREATE_CONTENT__": content, "__VALIDATE_CONTENT__": validation}
         for name in ["ProjectSetup.cs", "BuildCommands.cs"]:
+            # Each game's art import/setup evolves independently after bootstrap.
+            if name == "ProjectSetup.cs" and (editor / name).exists():
+                continue
             data = (ROOT / "Tools/Build" / (name + ".template")).read_text()
             for key, value in replacements.items():
                 data = data.replace(key, value)
             (editor / name).write_text(data, encoding="utf-8")
+        web_template = ROOT / "Tools/Web/unity-template.html"
+        if web_template.exists():
+            template_dir = project / "Assets/WebGLTemplates/FirstGame"
+            template_dir.mkdir(parents=True, exist_ok=True)
+            (template_dir / "index.html").write_text(web_template.read_text(), encoding="utf-8")
         refs = ["Unity.RenderPipelines.Core.Runtime", "Unity.RenderPipelines.Universal.Runtime", "Unity.TextMeshPro", "Unity.ugui", game + ".Core", game + ".Presentation"]
         refs += ["FantasyCards.Data"] if game == "FantasyCards" else ["Ink", "Ink-Libraries", "PathOfDawn.Authoring"]
         (editor / (game + ".Editor.asmdef")).write_text(json.dumps({"name": game + ".Editor", "references": refs, "includePlatforms": ["Editor"]}, indent=2) + "\n")

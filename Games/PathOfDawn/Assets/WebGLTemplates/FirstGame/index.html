@@ -8,10 +8,10 @@
   <style>
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
     * { box-sizing: border-box; }
-    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #080d14; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: #080d14; }
     body { display: grid; place-items: center; }
     #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: #0b121e; }
-    #unity-canvas { display: block; width: 100%; height: 100%; outline: none; }
+    #unity-canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; -webkit-user-select: none; user-select: none; }
     #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: #0b121e; }
     #unity-loading-bar h1 { margin: 0; color: #e7cb88; font-weight: 500; font-size: clamp(20px, 3vw, 40px); }
     #unity-loading-bar p { margin: 0; color: #c9d7df; }
@@ -20,6 +20,13 @@
     #unity-warning:empty { display: none; }
     .warning { padding: 12px 18px; background: #443720; color: #fff0cb; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
     .warning.error { background: #4f202b; color: #fff; }
+    #orientation-guide { display: none; position: fixed; inset: 0; z-index: 10; padding: max(28px, env(safe-area-inset-top)) 28px; background: #0b121ef2; color: #f4eedf; text-align: center; align-content: center; justify-items: center; gap: 20px; }
+    #orientation-guide h2 { margin: 0; font-size: 28px; font-weight: 500; }
+    #orientation-guide p { max-width: 30ch; line-height: 1.8; color: #b9c6ca; margin: 0; }
+    #orientation-guide button { min-height: 48px; border: 1px solid #bba36e; border-radius: 4px; background: #e5d2a5; color: #142027; padding: 12px 24px; font: inherit; cursor: pointer; }
+    #orientation-guide .secondary { background: transparent; color: #e5d2a5; border-color: #58606a; }
+    @media (pointer: coarse) and (orientation: portrait) { #orientation-guide:not([hidden]) { display: grid; } }
+    @supports (height: 100dvh) { #unity-container { width: min(100vw, 177.777778dvh); height: min(100dvh, 56.25vw); } }
     [hidden] { display: none !important; }
   </style>
 </head>
@@ -33,6 +40,13 @@
     </div>
     <div id="unity-warning" role="alert" aria-live="assertive"></div>
   </main>
+  <aside id="orientation-guide" aria-label="모바일 화면 안내">
+    <span aria-hidden="true" style="font-size:48px">↻</span>
+    <h2>가로로 펼쳐지는 이야기</h2>
+    <p>휴대폰을 가로로 돌리면 그림과 대사를 더 크게 볼 수 있습니다.</p>
+    <button id="landscape-start" type="button">전체화면으로 시작</button>
+    <button id="portrait-start" class="secondary" type="button">현재 화면에서 시작</button>
+  </aside>
   <script>
     // Loader variables and createUnityInstance API follow Unity 6000.3's official Default template.
     // CSS fits the authored 16:9 composition to the viewport; Unity resizes the render target itself.
@@ -72,11 +86,27 @@
       productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
       showBanner: unityShowBanner,
       matchWebGLToCanvasSize: true,
-      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, window.matchMedia("(pointer: coarse)").matches ? 1.25 : 2)
     };
 #if BACKGROUND_FILENAME
     canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
 #endif
+    // This stable page path preserves browser save storage when build file hashes change.
+    // Expose only the actual public asset URL for smoke checks; no game state is exposed.
+    canvas.dataset.dataUrl = new URL(config.dataUrl, window.location.href).href;
+    var orientationGuide = document.querySelector("#orientation-guide");
+    document.querySelector("#portrait-start").addEventListener("click", function () {
+      orientationGuide.hidden = true;
+      canvas.focus();
+    });
+    document.querySelector("#landscape-start").addEventListener("click", async function () {
+      orientationGuide.hidden = true;
+      try {
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+        if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape");
+      } catch (_) { /* Unsupported on some mobile browsers; physical rotation remains available. */ }
+      canvas.focus();
+    });
     var script = document.createElement("script");
     script.src = loaderUrl;
     script.onerror = function () {

@@ -13,8 +13,7 @@ using TMPro;
 
 namespace FirstGame.Editor
 {
-    // Generated per independent project by Tools/Build/materialize.py.
-    // All game rules and authored content live outside this bootstrap.
+    // PathOfDawn's authored presentation bootstrap. Keep this visual setup when refreshing build helpers.
     [InitializeOnLoad]
     public static class ProjectSetup
     {
@@ -40,7 +39,7 @@ namespace FirstGame.Editor
             initializing = true;
             try
             {
-                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Models", "Assets/Resources/Data/Cards", "Assets/Resources/Content" })
+                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Models", "Assets/Resources/Art", "Assets/Resources/Content" })
                     Directory.CreateDirectory(folder);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
                 EditorSettings.serializationMode = SerializationMode.ForceText;
@@ -57,6 +56,7 @@ namespace FirstGame.Editor
                 QualitySettings.renderPipeline = desktop;
                 QualitySettings.vSyncCount = 0;
                 var font = CreateFont();
+                PrepareIllustrations();
                 CreateModels();
                 CreateContent();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
@@ -65,19 +65,11 @@ namespace FirstGame.Editor
                 var app = UnityEngine.Object.FindFirstObjectByType(type) as Component;
                 if (app == null) app = new GameObject(Game + " Bootstrap").AddComponent(type);
                 SetField(app, "KoreanFont", font);
-                if (Game == "PathOfDawn")
-                {
-                    SetField(app, "Chapter", AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/Resources/Content/Galilee.asset"));
-                    SetField(app, "EnvironmentPrefab", Resources.Load<GameObject>("Models/GalileeShore"));
-                    SetField(app, "JesusPrefab", Resources.Load<GameObject>("Models/JesusProxy"));
-                    SetField(app, "TravelerPrefab", Resources.Load<GameObject>("Models/TravelerProxy"));
-                    SetField(app, "MiriamPrefab", Resources.Load<GameObject>("Models/MiriamProxy"));
-                }
-                else if (GameObject.Find("StarfallArena") == null)
-                {
-                    var prefab = Resources.Load<GameObject>("Models/StarfallArena");
-                    if (prefab != null) { var arena = (GameObject)PrefabUtility.InstantiatePrefab(prefab); arena.name = "StarfallArena"; }
-                }
+                SetField(app, "Chapter", AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/Resources/Content/Galilee.asset"));
+                SetField(app, "EnvironmentPrefab", Resources.Load<GameObject>("Models/GalileeShore"));
+                SetField(app, "JesusPrefab", Resources.Load<GameObject>("Models/JesusProxy"));
+                SetField(app, "TravelerPrefab", Resources.Load<GameObject>("Models/TravelerProxy"));
+                SetField(app, "MiriamPrefab", Resources.Load<GameObject>("Models/MiriamProxy"));
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene, ScenePath);
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
@@ -142,12 +134,13 @@ namespace FirstGame.Editor
         {
             string folder = "Assets/Art/Generated";
             if (!Directory.Exists(folder)) throw new InvalidOperationException("Generated Blender models are missing.");
-            foreach (var modelPath in Directory.GetFiles(folder, "*.fbx"))
+            var toon = Shader.Find("PathOfDawn/Cel Lit");
+            if (toon == null) throw new InvalidOperationException("PathOfDawn cel shader is missing.");
+            foreach (var modelPath in Directory.GetFiles(folder, "*.fbx").OrderBy(p => p, StringComparer.Ordinal))
             {
                 string path = modelPath.Replace('\\', '/');
                 string name = Path.GetFileNameWithoutExtension(path);
                 string prefabPath = "Assets/Resources/Models/" + name + ".prefab";
-                if (File.Exists(prefabPath)) continue;
                 bool character = name.EndsWith("Proxy", StringComparison.Ordinal);
                 var importer = (ModelImporter)AssetImporter.GetAtPath(path);
                 importer.importAnimation = character;
@@ -168,14 +161,18 @@ namespace FirstGame.Editor
                             string safe = string.Concat(materialName.Select(c => char.IsLetterOrDigit(c) || c == '-' || c == '_' ? c : '_'));
                             string materialPath = "Assets/Settings/Materials/" + safe + ".mat";
                             var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
-                            if (material == null)
-                            {
-                                material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-                                material.name = materialName;
-                                material.color = old != null && old.HasProperty("_Color") ? old.color : new Color(.65f, .60f, .48f);
-                                if (material.HasProperty("_Smoothness")) material.SetFloat("_Smoothness", .18f);
-                                AssetDatabase.CreateAsset(material, materialPath);
-                            }
+                            bool create = material == null;
+                            if (create) material = new Material(toon); else material.shader = toon;
+                            material.name = materialName;
+                            material.SetColor("_BaseColor", old != null && old.HasProperty("_BaseColor") ? old.GetColor("_BaseColor") : old != null && old.HasProperty("_Color") ? old.GetColor("_Color") : new Color(.65f, .60f, .48f));
+                            material.SetColor("_ShadeColor", character ? new Color(.56f,.59f,.73f) : new Color(.61f,.66f,.76f));
+                            material.SetColor("_RimColor", new Color(1,.85f,.57f));
+                            material.SetFloat("_ShadeThreshold", .28f); material.SetFloat("_LightThreshold", .68f);
+                            material.SetFloat("_BandSoftness", .018f);
+                            material.SetFloat("_RimStrength", character ? .13f : .035f);
+                            material.SetFloat("_InkStrength", character ? .4f : .12f);
+                            material.enableInstancing = true;
+                            if (create) AssetDatabase.CreateAsset(material, materialPath); else EditorUtility.SetDirty(material);
                             materials[i] = material;
                         }
                         renderer.sharedMaterials = materials;
@@ -185,16 +182,47 @@ namespace FirstGame.Editor
                         var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
                         var clips = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
                         if (clips.Length == 0) throw new InvalidOperationException("Missing Blender idle take: " + name);
-                        var clip = UnityEngine.Object.Instantiate(clips.FirstOrDefault(c => c.name.Contains("Idle")) ?? clips[0]);
+                        var sourceClip = clips.FirstOrDefault(c => c.name.Contains("Idle")) ?? clips[0];
+                        string clipPath = "Assets/Settings/" + name + "Idle.anim";
+                        var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(clipPath);
+                        if (clip == null) { clip = UnityEngine.Object.Instantiate(sourceClip); AssetDatabase.CreateAsset(clip, clipPath); }
+                        else EditorUtility.CopySerialized(sourceClip, clip);
                         clip.name = name + " Idle";
                         var settings = AnimationUtility.GetAnimationClipSettings(clip); settings.loopTime = true; AnimationUtility.SetAnimationClipSettings(clip, settings);
-                        AssetDatabase.CreateAsset(clip, "Assets/Settings/" + name + "Idle.anim");
-                        var controller = AnimatorController.CreateAnimatorControllerAtPath("Assets/Settings/" + name + "Idle.controller");
-                        controller.AddMotion(clip); animator.runtimeAnimatorController = controller; animator.applyRootMotion = false;
+                        EditorUtility.SetDirty(clip);
+                        string controllerPath = "Assets/Settings/" + name + "Idle.controller";
+                        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath);
+                        if (controller == null) controller = AnimatorController.CreateAnimatorControllerAtPath(controllerPath);
+                        var states = controller.layers[0].stateMachine.states;
+                        if (states.Length == 0) controller.AddMotion(clip);
+                        else states[0].state.motion = clip;
+                        EditorUtility.SetDirty(controller);
+                        animator.runtimeAnimatorController = controller; animator.applyRootMotion = false;
+                        // The revised source is one skinned body per actor. A stale proxy must never survive regeneration.
+                        if (go.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length != 1 || go.GetComponentsInChildren<MeshRenderer>(true).Length != 0)
+                            throw new InvalidOperationException("Expected one skinned character visual without a duplicate static body: " + name);
                     }
                     PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
                 }
                 finally { UnityEngine.Object.DestroyImmediate(go); }
+            }
+        }
+
+        static void PrepareIllustrations()
+        {
+            foreach (string resource in new[] { "title-hero", "portrait-jesus", "portrait-miriam", "portrait-traveler" })
+            {
+                string path = "Assets/Resources/Art/" + resource + ".png";
+                var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+                if (importer == null) throw new InvalidOperationException("Missing authored illustration: " + path);
+                importer.textureType = TextureImporterType.Default;
+                importer.sRGBTexture = true; importer.mipmapEnabled = false;
+                importer.alphaIsTransparency = resource.StartsWith("portrait", StringComparison.Ordinal);
+                importer.wrapMode = TextureWrapMode.Clamp; importer.filterMode = FilterMode.Bilinear;
+                importer.npotScale = TextureImporterNPOTScale.None;
+                importer.maxTextureSize = resource == "title-hero" ? 2048 : 1024;
+                importer.textureCompression = TextureImporterCompression.CompressedHQ;
+                importer.SaveAndReimport();
             }
         }
 

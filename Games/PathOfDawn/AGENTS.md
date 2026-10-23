@@ -9,7 +9,8 @@
 - `Assets/Game/Authoring`: `StoryChapter` ScriptableObject 제작용 출처와 콘텐츠 버전. 런타임 상태를 이 에셋에 기록하지 않는다.
 - `Assets/Game/Presentation`: `PathOfDawnApp`, uGUI/TMP, Input System, Cinemachine, Timeline. 안정적인 상태 변경은 Core를 통해 수행한다.
 - `Assets/Game/Tests/EditMode`: 실제 Ink 원문을 컴파일하는 회귀·분기·저장 테스트.
-- `Assets/Art/Generated`: Blender로 만든 임시 모델. 원본과 제작 기록은 루트 `Tools/Art`에서 관리한다.
+- `Assets/Art/Generated`: Blender로 만든 스타일화된 모델. 원본과 제작 기록은 루트 `Tools/Art`에서 관리한다. 각 인물은 단일 SkinnedMeshRenderer이며 별도 정적 몸체를 겹치지 않는다.
+- `Assets/Resources/Art`: 타이틀 원화와 예수님·미리암·여행자 초상. UI는 원문 화자 접두사로 초상을 고르며 Ink 진행 변수를 변경하지 않는다.
 - 공통 저장·빌드·프로필·폰트 생성은 `Assets/Shared`, `Assets/Editor` 및 루트 `Tools`가 담당한다.
 
 Unity **6000.3.26f1** (`de8167e7440c`), URP **17.3.0**, Input System **1.20.1**, Cinemachine **3.1.7**, Timeline **1.8.13**, uGUI/TMP **2.0.0**, Test Framework **1.6.0**, 공식 Ink Unity Integration **2.0.0**. 실제 패키지 고정의 기준은 `Packages/manifest.json`이다.
@@ -30,6 +31,8 @@ Unity **6000.3.26f1** (`de8167e7440c`), URP **17.3.0**, Input System **1.20.1**,
 
 ## 아트와 다음 완료 조건
 
-현재 GalileeShore/JesusProxy/TravelerProxy/MiriamProxy 및 단순 소품, 절차적 효과음은 **임시**다. 사람 모델에는 간단한 Generic 리그와 대기 동작만 있다. 걷기·입 모양·자연스러운 눈동자·손짓·천/머리카락·최종 얼굴 표현은 미완성이다. 승인된 기존 예수님 원화는 제공되지 않았으므로 승인된 원화와의 일치나 최종 회화풍 반실사 완성을 주장하지 않는다.
+2026-10-23 개정은 새 인물 원화, 스타일화된 GalileeShore/JesusProxy/TravelerProxy/MiriamProxy, URP 셀 셰이딩을 사용한다. 파일명은 기존 참조 안정성을 위해 유지한다. 새 원화·모델은 검토용 창작 에셋이며 사용자 승인을 받은 최종 아트로 표현하지 않는다. Generic 리그와 대기 동작이 있고, 걷기·입 모양·자연스러운 눈동자·손짓·천/머리카락은 미완성이다. 단순 소품과 절차적 효과음은 여전히 개발용이다.
+
+`Assets/Editor/ProjectSetup.cs`는 이제 POD 전용 시각 제작 설정을 포함한다. 공용 템플릿으로 덮어쓰지 않는다. 준비 명령은 원화 가져오기 설정과 새 FBX를 반영하고, 기존 재질/프리팹 GUID를 보존하면서 `PathOfDawn/Cel Lit` 셰이더를 적용한다. URP의 명암 밴드·rim·그림자와 중복 몸체 여부는 실제 캡처로 검수한다. 모바일 가로 모드의 터치 패드/카메라 드래그/상호작용은 PC 키보드 입력과 함께 유지한다.
 
 native와 Web의 확인 범위는 `Docs/Validation.md`를 기준으로 한다. 다음 작업은 Windows 실기 및 전체 플레이 검수, 문틀과 카메라 충돌 점검, 90–130% 자막 가독성, 웹 저장 내보내기→PC 가져오기, 성능 캡처, 읽기 속도에 따른 5–10분 분량 확인, 캐릭터와 단일 공간의 시각적 개선이다. 자세한 체크리스트는 `Docs/PathOfDawnValidation.md`를 따른다. 클라우드 작업은 이미 격리되어 있으므로 사용자가 명시하지 않으면 Git worktree를 새로 만들지 않는다.

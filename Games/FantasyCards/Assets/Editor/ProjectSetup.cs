@@ -207,21 +207,9 @@ namespace FirstGame.Editor
 
         static void CreateContent()
         {
-            const string atlasPath = "Assets/Resources/Art/card-atlas.png";
-            var atlasImporter = AssetImporter.GetAtPath(atlasPath) as TextureImporter;
-            if (atlasImporter == null) throw new InvalidOperationException("Card illustration texture importer is missing.");
-            if (atlasImporter.textureShape != TextureImporterShape.Texture2D || atlasImporter.textureType != TextureImporterType.Default)
-            {
-                atlasImporter.textureShape = TextureImporterShape.Texture2D;
-                atlasImporter.textureType = TextureImporterType.Default;
-                atlasImporter.mipmapEnabled = false;
-                atlasImporter.npotScale = TextureImporterNPOTScale.None;
-                atlasImporter.sRGBTexture = true;
-                atlasImporter.wrapMode = TextureWrapMode.Clamp;
-                atlasImporter.SaveAndReimport();
-            }
-            var atlas = AssetDatabase.LoadAssetAtPath<Texture2D>(atlasPath);
-            if (atlas == null) throw new InvalidOperationException("Card illustrations must import as a 2D texture.");
+            var pages = new[] { "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics" }
+                .Select(name => ImportIllustration("Assets/Resources/Art/" + name + ".png")).ToArray();
+            ImportIllustration("Assets/Resources/Art/title-hero.png");
             foreach (var definition in FantasyCards.Core.CardCatalog.All)
             {
                 string path = "Assets/Resources/Data/Cards/" + definition.id + ".asset";
@@ -235,17 +223,44 @@ namespace FirstGame.Editor
                     asset.effect = definition.effect; asset.magnitude = definition.magnitude;
                     AssetDatabase.CreateAsset(asset, path);
                 }
-                if (asset.illustration == null)
+                int index = Array.IndexOf(FantasyCards.Core.CardCatalog.All, definition);
+                var atlas = pages[index / 4]; int cell = index % 4;
+                float sizeX = atlas.width / 2f, sizeY = atlas.height / 2f;
+                var rect = new Rect(cell % 2 * sizeX, (1 - cell / 2) * sizeY, sizeX, sizeY);
+                if (asset.illustration == null || asset.illustration.texture != atlas || asset.illustration.rect != rect)
                 {
-                    int index = Array.IndexOf(FantasyCards.Core.CardCatalog.All, definition);
-                    float sizeX = atlas.width / 4f, sizeY = atlas.height / 4f;
-                    var sprite = Sprite.Create(atlas, new Rect(index % 4 * sizeX, (3 - index / 4) * sizeY, sizeX, sizeY), new Vector2(.5f,.5f));
-                    sprite.name = definition.id + " Illustration"; AssetDatabase.AddObjectToAsset(sprite, asset); asset.illustration = sprite;
+                    var previous = asset.illustration;
+                    var sprite = Sprite.Create(atlas, rect, new Vector2(.5f, .5f));
+                    sprite.name = definition.id + " Illustration";
+                    AssetDatabase.AddObjectToAsset(sprite, asset); asset.illustration = sprite;
+                    if (previous != null && AssetDatabase.GetAssetPath(previous) == path)
+                        UnityEngine.Object.DestroyImmediate(previous, true);
                 }
                 EditorUtility.SetDirty(asset);
             }
             if (!File.Exists("Assets/Resources/Data/Rules.asset"))
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<FantasyCards.Data.RuleSetAsset>(), "Assets/Resources/Data/Rules.asset");
+        }
+
+        static Texture2D ImportIllustration(string path)
+        {
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer == null) throw new InvalidOperationException("Illustration importer is missing: " + path);
+            bool changed = importer.textureShape != TextureImporterShape.Texture2D || importer.textureType != TextureImporterType.Default
+                || importer.mipmapEnabled || importer.npotScale != TextureImporterNPOTScale.None || !importer.sRGBTexture
+                || importer.wrapMode != TextureWrapMode.Clamp || importer.maxTextureSize < 2048 || importer.textureCompression != TextureImporterCompression.Uncompressed;
+            if (changed)
+            {
+                importer.textureShape = TextureImporterShape.Texture2D;
+                importer.textureType = TextureImporterType.Default;
+                importer.mipmapEnabled = false; importer.npotScale = TextureImporterNPOTScale.None;
+                importer.sRGBTexture = true; importer.wrapMode = TextureWrapMode.Clamp;
+                importer.maxTextureSize = 2048; importer.textureCompression = TextureImporterCompression.Uncompressed;
+                importer.SaveAndReimport();
+            }
+            var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+            if (texture == null) throw new InvalidOperationException("Illustration must import as a 2D texture: " + path);
+            return texture;
         }
 
         [MenuItem("FirstGame/Validate First Slice")]
@@ -260,7 +275,18 @@ namespace FirstGame.Editor
                         throw new InvalidOperationException("Missing script on " + transform.name);
             var cards = Resources.LoadAll<FantasyCards.Data.CardAsset>("Data/Cards");
             if (cards.Length != 16 || cards.Any(card => card.illustration == null)) throw new InvalidOperationException("Expected sixteen card assets with connected illustrations.");
-            if (Resources.Load<Texture2D>("Art/card-atlas") == null) throw new InvalidOperationException("Card atlas is not a runtime 2D texture.");
+            var pages = new[] { "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics" };
+            for (int i = 0; i < FantasyCards.Core.CardCatalog.All.Length; i++)
+            {
+                var definition = FantasyCards.Core.CardCatalog.All[i];
+                var card = cards.Single(c => c.stableId == definition.id);
+                var texture = Resources.Load<Texture2D>("Art/" + pages[i / 4]);
+                if (texture == null || card.illustration.texture != texture)
+                    throw new InvalidOperationException("Card illustration is not connected to its atlas page: " + definition.id);
+                var expected = new Rect(i % 2 * texture.width / 2f, (1 - i % 4 / 2) * texture.height / 2f, texture.width / 2f, texture.height / 2f);
+                if (card.illustration.rect != expected) throw new InvalidOperationException("Incorrect atlas cell: " + definition.id);
+            }
+            if (Resources.Load<Texture2D>("Art/title-hero") == null) throw new InvalidOperationException("Title illustration is missing.");
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);
         }
     }

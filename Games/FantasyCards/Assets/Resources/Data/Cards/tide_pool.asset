@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!213 &-6336779538576820959
+--- !u!213 &-2157898319158572019
 Sprite:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,10 @@ Sprite:
   m_Name: tide_pool Illustration
   m_Rect:
     serializedVersion: 2
-    x: 940.5
-    y: 940.5
-    width: 313.5
-    height: 313.5
+    x: 627
+    y: 0
+    width: 627
+    height: 627
   m_Offset: {x: 0, y: 0}
   m_Border: {x: 0, y: 0, z: 0, w: 0}
   m_PixelsToUnits: 100
@@ -21,12 +21,12 @@ Sprite:
   m_IsPolygon: 0
   m_PackingTag: 
   m_RenderDataKey:
-    9291776acd4a70ab4aae7953cb813516: -6336779538576820959
+    9291776acd4a70ab4aae7953cb813516: -2157898319158572019
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:
     serializedVersion: 3
-    texture: {fileID: 2800000, guid: dbce8b0805605bebad600072217f2fcd, type: 3}
+    texture: {fileID: 2800000, guid: 14171b7ecfd26011ab6c1634dad1ea52, type: 3}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -102,22 +102,22 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: ec51c8bf9a99c93f000000009a99c93fec51c8bf000000009a99c93f9a99c93f00000000ec51c8bfec51c8bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: d7a348c0d7a3484000000000d7a34840d7a348c000000000d7a34840d7a3484000000000d7a348c0d7a348c0000000000000000000000000000000000000000000000000000000000000000000000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 940.5
-      y: 940.5
-      width: 314
-      height: 314
+      x: 627
+      y: 0
+      width: 627
+      height: 627
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 100, y: 1097, z: 100, w: 1097}
+    uvTransform: {x: 100, y: 940.5, z: 100, w: 313.5}
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
-    texture: {fileID: 2800000, guid: dbce8b0805605bebad600072217f2fcd, type: 3}
+    texture: {fileID: 2800000, guid: 14171b7ecfd26011ab6c1634dad1ea52, type: 3}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -193,18 +193,18 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: ec51c8bf9a99c93f000000009a99c93fec51c8bf000000009a99c93f9a99c93f00000000ec51c8bfec51c8bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: d7a348c0d7a3484000000000d7a34840d7a348c000000000d7a34840d7a3484000000000d7a348c0d7a348c0000000000000000000000000000000000000000000000000000000000000000000000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
-      x: 940.5
-      y: 940.5
-      width: 314
-      height: 314
+      x: 627
+      y: 0
+      width: 627
+      height: 627
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 100, y: 1097, z: 100, w: 1097}
+    uvTransform: {x: 100, y: 940.5, z: 100, w: 313.5}
     downscaleMultiplier: 1
   m_PhysicsShape: []
   m_Bones: []
@@ -234,4 +234,4 @@ MonoBehaviour:
   coinBonus: 1
   effect: 0
   magnitude: 0
-  illustration: {fileID: -6336779538576820959}
+  illustration: {fileID: -2157898319158572019}

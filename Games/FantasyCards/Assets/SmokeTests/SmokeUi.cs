@@ -87,11 +87,10 @@ namespace FantasyCards.SmokeTests
             Assert.That(text.textInfo.characterCount, Is.GreaterThan(0), "TMP did not build text geometry.");
             Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Any(c => c.isVisible), Is.True);
         }
-        public static IEnumerator Capture(string game, string name)
+        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action inspect = null)
         {
             // Native URP camera render. Batch mode does not service WaitForEndOfFrame reliably.
             // Overlay canvases temporarily use the same camera so real uGUI/TMP is in the PNG.
-            const int width = 1920, height = 1080;
             var camera = Camera.main;
             Assert.That(camera, Is.Not.Null, "Cannot capture without the actual scene camera.");
             var canvases = UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None)
@@ -114,8 +113,10 @@ namespace FantasyCards.SmokeTests
                     canvas.worldCamera = camera;
                     canvas.planeDistance = camera.nearClipPlane + .001f;
                 }
-                yield return null; // Allow CanvasScaler and Cinemachine to observe capture dimensions.
+                yield return null; // Allow CanvasScaler, responsive UI, and Cinemachine to observe capture dimensions.
+                yield return null;
                 Canvas.ForceUpdateCanvases();
+                inspect?.Invoke();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
                 Assert.That(UnityEngine.Rendering.RenderPipeline.SupportsRenderRequest(camera, request), Is.True,
                     "The active render pipeline does not support native StandardRequest capture.");

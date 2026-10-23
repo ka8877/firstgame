@@ -2,13 +2,16 @@
 """Report Unity runtime prerequisites without printing account or credential data.
 
 Default exit 4 means the expected external license prerequisite is missing.
-The dependency installer may accept this state with --allow-missing-license;
-unexpected command, schema, or JSON failures always remain failures.
+The dependency installer may accept this state with --allow-missing-license.
+A valid Editor license does not require a current CLI account session. CLI auth
+exit 3 with a well-formed loggedIn:false result is an expected signed-out state;
+unexpected command, schema, or JSON failures still exit 6.
 """
 import argparse
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -17,9 +20,13 @@ parser.add_argument("--allow-missing-license", action="store_true")
 args = parser.parse_args()
 cli = Path(os.environ.get("FIRSTGAME_TOOLS_ROOT", "/workspace/tools")) / "unity-cli/bin/unity"
 
-def query(command, required_bool, allowed_missing_exit=None):
-    process = subprocess.run([str(cli), command, "status", "--format", "json"],
-                             text=True, capture_output=True, timeout=90)
+def query(command, required_bool, allowed_missing_exit):
+    try:
+        process = subprocess.run([str(cli), command, "status", "--format", "json", "--no-log-proxy"],
+                                 text=True, capture_output=True, timeout=90)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return None, None, {"command": command, "code": type(error).__name__}
+    result = None
     try:
         result = json.loads(process.stdout)
         data = result["data"]
@@ -32,27 +39,43 @@ def query(command, required_bool, allowed_missing_exit=None):
                             and data[required_bool] is False)
         if process.returncode != 0 and not expected_missing:
             raise ValueError("unexpected command exit")
-        return data, process.returncode
+        return data, process.returncode, None
     except (ValueError, KeyError, TypeError):
-        # Raw output can contain an account identity or an auth URL. Keep it private.
-        raise RuntimeError(f"Unity {command} status failed validation (exit {process.returncode})") from None
+        # Preserve only enum-shaped error codes; messages may contain identities/URLs.
+        codes = []
+        if isinstance(result, dict) and isinstance(result.get("errors"), list):
+            for error in result["errors"]:
+                code = error.get("code") if isinstance(error, dict) else None
+                if isinstance(code, str) and re.fullmatch(r"[A-Z][A-Z0-9_]{0,63}", code):
+                    codes.append(code)
+        return None, process.returncode, {
+            "command": command, "exitCode": process.returncode,
+            "code": "STATUS_VALIDATION_FAILED", "cliErrorCodes": codes,
+        }
 
-try:
-    auth, auth_exit = query("auth", "loggedIn")
-    license_status, license_exit = query("license", "active", allowed_missing_exit=4)
-except (RuntimeError, OSError, subprocess.TimeoutExpired) as error:
-    print(f"Unity runtime diagnostic failed: {error}", file=sys.stderr)
-    raise SystemExit(6)
+auth, auth_exit, auth_error = query("auth", "loggedIn", allowed_missing_exit=3)
+license_status, license_exit, license_error = query("license", "active", allowed_missing_exit=4)
+errors = [error for error in [auth_error, license_error] if error]
+auth_ready = auth["loggedIn"] if auth is not None else None
+ready = license_status["active"] if license_status is not None else None
 
-ready = license_status["active"]
 print(json.dumps({
-    "auth": {key: auth.get(key) for key in ["loggedIn", "sessionState", "mode", "credentialSource"]},
+    "auth": {key: auth.get(key) for key in ["loggedIn", "sessionState", "mode", "credentialSource"]} if auth is not None else None,
     "authStatusExitCode": auth_exit,
-    "license": {key: license_status.get(key) for key in ["active", "signedIn", "authMode"]},
+    "authReady": auth_ready,
+    "authBlocker": "No current Unity CLI login; account-dependent commands may require sign-in" if auth_ready is False else None,
+    "license": {key: license_status.get(key) for key in ["active", "signedIn", "authMode"]} if license_status is not None else None,
     "licenseStatusExitCode": license_exit,
+    "licenseReady": ready,
+    "runtimeEditorReady": ready,
+    # Keep the existing installer/report field, whose meaning is Editor licensing.
     "runtimeReady": ready,
-    "runtimeBlocker": None if ready else "No active Unity Editor license",
+    "runtimeBlocker": "No active Unity Editor license" if ready is False else None,
+    "diagnosticErrors": errors,
 }, indent=2))
+if errors:
+    print("Unity runtime diagnostic failed; see redacted diagnosticErrors above.", file=sys.stderr)
+    raise SystemExit(6)
 if not ready:
     print("Runtime prerequisite missing: activate an eligible Unity Editor license before Editor tests or builds.", file=sys.stderr)
     raise SystemExit(0 if args.allow_missing_license else 4)
