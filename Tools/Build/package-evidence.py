@@ -25,6 +25,7 @@ selected = [
     root / "Tools/Art/Illustration/verification.json",
     artifacts / "Environment/pipeline-fantasycards.json",
     artifacts / "Environment/browser-prerequisites-best.json",
+    artifacts / "Environment/managed-runtime.json",
     artifacts / "TestResults/Core/core-tests.trx",
     artifacts / "Validation/WebSmoke/summary.json",
     artifacts / "Validation/WebRendererProbeFinal.json",
@@ -37,6 +38,10 @@ selected = [
 ]
 selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
+selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
+selected.extend(sorted((artifacts / "Validation/VisualAssets").glob("*.previous-*.json")))
+selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.json")))
+selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.png")))
 for game in ("FantasyCards", "PathOfDawn"):
     selected.append(artifacts / f"TestResults/{game}/EditMode.xml")
     for target in ("Windows", "Web"):

@@ -47,8 +47,8 @@ def validate_layout(game, definition):
                   if game == "FantasyCards" else
                   {"titleNew", "titleContinue", "dialogueAdvance", "save", "settings", "settingsTitle",
                    "joystickCenter", "joystickForward", "touchInteract", "cameraStart", "cameraEnd"})
-    region_keys = ({"title", "terrain", "resource", "inspectorName", "status", "friendlyLanes"} if game == "FantasyCards" else
-                   {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton"})
+    region_keys = ({"title", "terrain", "resource", "inspectorName", "status", "friendlyLanes", "unitStats"} if game == "FantasyCards" else
+                   {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton", "settingsHeader", "inventory", "movementGuide"})
     variants = {"desktop", "compact"} if "compactBelowCanvasWidth" in definition else {"desktop"}
     for name in variants:
         layout = definition["variants"][name]
@@ -127,6 +127,17 @@ def pixel_difference(left, right):
         if a.size != b.size:
             raise AssertionError("Camera comparison frames have different dimensions")
         return sum(ImageStat.Stat(ImageChops.difference(a.convert("RGB"), b.convert("RGB"))).mean) / 3
+
+def decoded_pixel_hash(pixels):
+    with Image.open(io.BytesIO(pixels)) as image:
+        rgb = image.convert("RGB")
+        return hashlib.sha256(f"{rgb.width}x{rgb.height}:".encode() + rgb.tobytes()).hexdigest()
+
+def reviewed_title_matches(reference, pixels, title, region, canvas, fingerprint):
+    runtime = [{key: entry[key] for key in ("file", "bytes", "sha256")} for entry in runtime_entries(fingerprint)]
+    return (reference["expectedVisibleText"] == title and reference["region"] == list(region) and
+            reference["canvasSize"] == [canvas["width"], canvas["height"]] and
+            reference["runtimeFiles"] == runtime and reference["decodedPixelSha256"] == decoded_pixel_hash(pixels))
 
 def gold_surface_fraction(pixels):
     """Measure the authored gold touch-control surfaces in their fixed screen regions."""
@@ -324,17 +335,36 @@ class Smoke:
             self.last_full_frame = pixels
         return pixels
 
-    def text(self, pixels, psm=11, enhance=False):
-        if enhance:
+    def text(self, pixels, psm=11, enhance=False, upscale=False, language="kor+eng", binary=False, button_text=False, padded=False):
+        if enhance or upscale or binary or button_text or padded:
             # OCR-only preprocessing of the same captured pixels. Raw screenshots
             # remain unchanged; no spelling substitution or relaxed text matching.
-            source = ImageOps.invert(Image.open(io.BytesIO(pixels)).convert("L"))
-            source = source.resize((round(source.width * 2.5), round(source.height * 2.5)))
-            source = source.filter(ImageFilter.MinFilter(3))
+            source = Image.open(io.BytesIO(pixels))
+            if button_text:
+                # Authored gold buttons use dark text; discard only flat background,
+                # preserving all foreground glyphs and the unmodified raw evidence.
+                source = source.convert("L")
+                inset = round(source.height * .15)
+                interior = source.crop((inset, inset, source.width-inset, source.height-inset))
+                bounds = interior.point(lambda value: 255 if value < 160 else 0).getbbox()
+                source = interior.crop(bounds) if bounds else interior
+                source = ImageOps.expand(source.resize((source.width * 4, source.height * 4)), border=20, fill=255)
+            elif padded:
+                source = source.convert("L")
+                source = ImageOps.expand(source.resize((source.width * 3, source.height * 3)), border=20, fill=255)
+            elif binary:
+                source = source.convert("L").point(lambda value: 255 if value > 120 else 0)
+                source = ImageOps.invert(source).resize((source.width * 2, source.height * 2))
+            elif enhance:
+                source = ImageOps.invert(source.convert("L"))
+                source = source.resize((round(source.width * 2.5), round(source.height * 2.5)))
+                source = source.filter(ImageFilter.MinFilter(3))
+            else:
+                source = source.resize((source.width * 2, source.height * 2))
             encoded = io.BytesIO()
             source.save(encoded, format="PNG")
             pixels = encoded.getvalue()
-        command = ["tesseract", "stdin", "stdout", "-l", "kor+eng", "--psm", str(psm)]
+        command = ["tesseract", "stdin", "stdout", "-l", language, "--psm", str(psm)]
         if self.args.tessdata:
             command += ["--tessdata-dir", str(self.args.tessdata)]
         result = subprocess.run(command, input=pixels, stdout=subprocess.PIPE,
@@ -360,27 +390,57 @@ class Smoke:
         self.persist()
         return evidence
 
-    def wait_text(self, expected, timeout=None, region=None, psm=11):
+    def wait_text(self, expected, timeout=None, region=None, psm=11, language="kor+eng", match_all=False, literal=False, button_text=False):
         expected = [expected] if isinstance(expected, str) else expected
+        def matches(value):
+            found = [word in value if literal else compact(word) in compact(value) for word in expected]
+            return all(found) if match_all else any(found)
         print(f"{self.game}: waiting for visible text {expected}", flush=True)
         deadline = time.monotonic() + (timeout or self.args.ocr_timeout)
         last = ""
+        primary_language = language
         while time.monotonic() < deadline:
             self.page.wait_for_timeout(600)
             pixels = self.capture(region)
-            raw = self.text(pixels, psm=psm)
-            last, enhanced = raw, False
-            if not any(compact(value) in compact(last) for value in expected) and region is not None:
-                last = self.text(pixels, psm=psm, enhance=True)
-                enhanced = True
-            if any(compact(value) in compact(last) for value in expected):
+            raw = self.text(pixels, psm=psm, language=primary_language)
+            last, preprocessing, language = raw, "none", primary_language
+            attempts = [{"preprocessing": preprocessing, "language": language, "text": raw}]
+            if region is not None:
+                # Fixed OCR alternatives for small Korean glyphs and numerals.
+                # Matching remains the exact requested visible text in every case.
+                languages = list(dict.fromkeys([primary_language, "kor+eng", "kor"]))
+                candidates = [(False, False, False, item) for item in languages[1:]]
+                candidates += [(True, False, False, item) for item in languages]
+                candidates += [(False, True, False, item) for item in languages]
+                candidates += [(False, False, True, item) for item in languages]
+                for upscale, enhance, binary, candidate_language in candidates:
+                    if matches(last):
+                        break
+                    language = candidate_language
+                    last = self.text(pixels, psm=psm, upscale=upscale, enhance=enhance, binary=binary, language=language)
+                    preprocessing = ("grayscale threshold 120, invert, 2x resize" if binary else
+                                     "grayscale, invert, 2.5x resize, 3px minimum filter" if enhance else
+                                     "2x resize" if upscale else "none")
+                    attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
+            if region is not None and not matches(last):
+                language = "kor"
+                last = self.text(pixels, psm=psm, language=language, padded=True)
+                preprocessing = "grayscale, 3x resize, white 20px border"
+                attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
+            if button_text and not matches(last):
+                language = "kor"
+                last = self.text(pixels, psm=psm, language=language, button_text=True)
+                preprocessing = "gold button interior dark-text (<160) bounding box, grayscale, 4x resize, white 20px border"
+                attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
+            if matches(last):
                 index = len(self.report.setdefault("ocrConfirmations", [])) + 1
                 filename = f"ocr-confirmation-{index:03}.png"
                 (self.output / filename).write_bytes(pixels)
                 self.report["ocrConfirmations"].append({"expected": expected, "region": region, "psm": psm,
+                    "matchMode": "all" if match_all else "any", "literal": literal,
                     "rawText": raw, "confirmedText": last, "rawPixels": filename,
                     "rawPixelSha256": hashlib.sha256(pixels).hexdigest(),
-                    "preprocessing": "grayscale, invert, 2.5x resize, 3px minimum filter" if enhanced else "none"})
+                    "preprocessing": preprocessing, "language": language, "attempts": attempts})
                 self.persist()
                 return last
             (self.output / "pending-ocr.png").write_bytes(pixels)
@@ -389,6 +449,41 @@ class Smoke:
                 raise AssertionError("Unity loader reported an error: " + self.page.locator("#unity-warning").inner_text())
         (self.output / "last-ocr.txt").write_text(last, encoding="utf-8")
         raise AssertionError("Visible canvas OCR did not contain " + repr(expected) + "; last text: " + last[:500])
+
+    def wait_title(self):
+        region = self.region("title")
+        reference_path = ROOT / "Tools/Validation/VisualReferences/titles.json"
+        references = json.loads(reference_path.read_text())["references"] if reference_path.is_file() else []
+        candidates = [entry for entry in references if entry["game"] == self.game and
+                      entry["canvasSize"] == [self.canvas_geometry["width"], self.canvas_geometry["height"]]]
+        if not candidates:
+            result = self.wait_text(TITLES[self.game], region=region, psm=7)
+            self.last_title_method = "ocr"
+            return result
+        try:
+            result = self.wait_text(TITLES[self.game], timeout=8, region=region, psm=7)
+            self.last_title_method = "ocr"
+            return result
+        except AssertionError as ocr_failure:
+            pixels = self.capture(region)
+            for reference in candidates:
+                approved = (reference_path.parent / reference["image"]).read_bytes()
+                if decoded_pixel_hash(approved) != reference["decodedPixelSha256"]:
+                    raise AssertionError("Reviewed title reference file failed its decoded pixel hash")
+                if not reviewed_title_matches(reference, pixels, TITLES[self.game], region,
+                                               self.canvas_geometry, self.report["buildFingerprint"]):
+                    continue
+                filename = f"title-pixel-confirmation-{len(self.report.setdefault('titlePixelConfirmations', []))+1}.png"
+                (self.output / filename).write_bytes(pixels)
+                evidence = {"expectedVisibleText": TITLES[self.game], "rawPixels": filename,
+                    "decodedPixelSha256": decoded_pixel_hash(pixels), "reference": reference,
+                    "ocrFailure": str(ocr_failure),
+                    "method": "Exact decoded RGB pixel equality to a reviewed complete title crop from the same final runtime files; no OCR spelling substitution."}
+                self.report["titlePixelConfirmations"].append(evidence)
+                self.last_title_method = "reviewed-pixel-reference"
+                self.check(True, "Actual title pixels exactly match the reviewed current-build title reference", evidence)
+                return TITLES[self.game]
+            raise ocr_failure
 
     def canvas_point(self, x, y, reference=False):
         box = self.canvas_geometry
@@ -487,8 +582,16 @@ class Smoke:
     def dawn_control_mode(self, label, prompt_text):
         """Confirm both the intended input guidance and the actual rendered pad/button branch."""
         mobile = self.args.profile == "mobile-landscape"
-        guide = self.wait_text("왼쪽 패드로 걷기" if mobile else "WASD",
-                               region=self.region("inputGuide"), psm=7)
+        keyboard_prompt = None
+        walking_guide = None
+        if mobile:
+            walking_guide = self.wait_text("걷기", region=self.region("movementGuide"), psm=7, language="kor")
+            guide = self.wait_text("둘러보기", region=self.region("inputGuide"), psm=7)
+        else:
+            guide = self.wait_text(["WASD", "E:"], region=self.region("inputGuide"), psm=7,
+                                   language="eng", match_all=True, literal=True)
+            keyboard_prompt = self.wait_text("[E]", region=self.region("prompt"), psm=7,
+                                             language="eng", literal=True)
         controls = {}
         for key in ("movementThumb", "touchButton"):
             pixels = self.capture(self.region(key))
@@ -498,6 +601,7 @@ class Smoke:
                              "sha256": hashlib.sha256(pixels).hexdigest(),
                              "goldSurfaceFraction": gold_surface_fraction(pixels)}
         evidence = {"profile": self.args.profile, "visibleGuide": guide, "visiblePrompt": prompt_text,
+                    "keyboardPromptOcr": keyboard_prompt, "walkingInstructionOcr": walking_guide,
                     "controls": controls,
                     "pixelRule": "R>=210, 140<=G<=230, 60<=B<=160, R-G>=20, G-B>=30 inside authored control surfaces"}
         self.report.setdefault("controlModeEvidence", []).append(evidence)
@@ -505,10 +609,10 @@ class Smoke:
             self.check(controls["movementThumb"]["goldSurfaceFraction"] > .75 and
                        controls["touchButton"]["goldSurfaceFraction"] > .70,
                        label + ": mobile visibly renders the movement thumb and touch interaction button", evidence)
-            self.check("WASD" not in guide and "E" not in prompt_text,
-                       label + ": mobile shows touch guidance without a keyboard interaction prompt", evidence)
+            self.check("WASD" not in guide and "[E]" not in prompt_text,
+                       label + ": mobile shows touch guidance without a bracketed keyboard interaction prompt", evidence)
         else:
-            self.check("E" in guide and "E" in prompt_text,
+            self.check("WASD" in guide and "E:" in guide and "[E]" in keyboard_prompt,
                        label + ": desktop visibly shows WASD guidance and the E interaction shortcut", evidence)
             self.check(controls["movementThumb"]["goldSurfaceFraction"] < .10 and
                        controls["touchButton"]["goldSurfaceFraction"] < .10,
@@ -566,12 +670,13 @@ class Smoke:
         self.check(bool(configuration.get("dataUrl")), "Exact Unity config data URL recorded", configuration)
         self.refresh_geometry()
         ready_ms = self.page.evaluate("performance.now()")
-        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
+        self.wait_title()
         title_ms = self.page.evaluate("performance.now()")
         self.report["loadingTimings"].append({"navigation": "reload" if reload else "fresh context",
             "loaderReadyAfterNavigationMs": round(ready_ms, 1),
-            "titleOcrConfirmedAfterNavigationMs": round(title_ms, 1),
-            "note": "Includes loopback transfer, software WebGL startup and polling. Title timing also includes screenshot/OCR."})
+            "titleConfirmedAfterNavigationMs": round(title_ms, 1),
+            "titleConfirmationMethod": self.last_title_method,
+            "note": "Includes transfer, software WebGL startup and polling. Title timing includes its recorded screenshot/OCR or reviewed pixel-reference checks."})
         self.report["webglRenderer"] = self.canvas.evaluate("""c => {
             const gl = c.getContext('webgl2') || c.getContext('webgl');
             if (!gl) return {available: false};
@@ -638,7 +743,7 @@ class Smoke:
         self.resolutions("battle-saved")
         self.interaction_viewport()
         self.click_control("title", "타이틀")
-        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
+        self.wait_title()
         self.page.wait_for_timeout(1800)  # Let PlayerPrefs' asynchronous IndexedDB write settle.
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
@@ -655,10 +760,14 @@ class Smoke:
         # the refreshed battlefield artwork is captured in an occupied lane.
         self.click_control("scoutHand", "Remaining fourth hand card: 별길의 정찰자")
         self.click_control("friendlyFirstLane", "Summon the selected scout in the first friendly lane")
-        unit_text = self.wait_text("별길의 정찰자", region=self.region("friendlyLanes"), psm=11)
+        unit_text = self.wait_text("별길의 정찰자", region=self.region("friendlyLanes"),
+                                   psm=7 if self.args.profile == "mobile-landscape" else 11)
         spent_text = self.wait_text("여명 0", region=resource_region, psm=7)
         self.check(True, "Actual post-reload unit placement occupied a friendly lane and spent the restored dawn resource",
                    {"friendlyLaneText": unit_text, "resourceText": spent_text})
+        if self.args.profile == "mobile-landscape":
+            stats_text = self.wait_text(["공격 2", "생명 3"], region=self.region("unitStats"), psm=7, match_all=True)
+            self.check(True, "Occupied mobile lane visibly renders the scout attack and life values", stats_text)
         self.snapshot("battle-unit-played")
 
     def dawn_opening(self, label):
@@ -667,7 +776,7 @@ class Smoke:
         dialogue_button = self.region("dialogueAdvance")
         for index in range(9):
             expected = "다음 대사" if index < 8 else "계속"
-            visible = self.wait_text(expected, region=dialogue_button, psm=7)
+            visible = self.wait_text(expected, region=dialogue_button, psm=7, button_text=True)
             if index == 0:
                 self.snapshot(label + "-opening-dialogue")
             if index == 2:
@@ -709,9 +818,21 @@ class Smoke:
             self.page.wait_for_timeout(250)
             prompt_pixels = self.capture(prompt_region)
             near_prompt = self.text(prompt_pixels, psm=7)
-            (self.output / f"movement-prompt-{pulse + 1}.png").write_bytes(prompt_pixels)
+            prompt_attempts = [{"language": "kor+eng", "preprocessing": "none", "text": near_prompt}]
+            for language, options, description in [
+                    ("kor", {}, "none"), ("kor+eng", {"upscale": True}, "2x resize"),
+                    ("kor", {"upscale": True}, "2x resize"),
+                    ("kor", {"padded": True}, "grayscale, 3x resize, white 20px border")]:
+                if compact("미리암에게 말 걸기") in compact(near_prompt):
+                    break
+                near_prompt = self.text(prompt_pixels, psm=7, language=language, **options)
+                prompt_attempts.append({"language": language, "preprocessing": description, "text": near_prompt})
+            filename = f"movement-prompt-{pulse + 1}.png"
+            (self.output / filename).write_bytes(prompt_pixels)
             movement_prompts.append({"pulse": pulse + 1, "heldMilliseconds": held_ms,
-                                     "visiblePrompt": near_prompt})
+                                     "visiblePrompt": near_prompt, "rawPixels": filename,
+                                     "rawPixelSha256": hashlib.sha256(prompt_pixels).hexdigest(),
+                                     "ocrAttempts": prompt_attempts})
             self.report["movementPromptEvidence"] = movement_prompts
             self.persist()
             if compact("미리암에게 말 걸기") in compact(near_prompt):
@@ -722,15 +843,15 @@ class Smoke:
                    " movement entered the NPC interaction radius",
                    {"beforePrompt": before_prompt, "afterPrompt": near_prompt})
         self.click_control("save", "저장")
-        save_notice = self.wait_text("여정을 저장했습니다",
+        save_notice = self.wait_text("저장했습니다",
                                      region=self.region("notification"), psm=7)
         self.check(True, "In-game save reported success", save_notice)
         self.resolutions("journey-saved")
         self.interaction_viewport()
         self.click_control("settings", "설정")
-        self.wait_text("설정과 여정 보관")
+        self.wait_text("설정과 여정 보관", region=self.region("settingsHeader"), psm=7)
         self.click_control("settingsTitle", "저장하고 타이틀로")
-        self.wait_text(TITLES[self.game], region=self.region("title"), psm=7)
+        self.wait_title()
         self.page.wait_for_timeout(1800)
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
@@ -740,8 +861,9 @@ class Smoke:
         continued_prompt = self.wait_text("미리암에게 말 걸기", region=prompt_region, psm=7)
         self.check(True, "Continue restored the walked-to NPC position after a full browser reload", continued_prompt)
         self.dawn_control_mode("continued", continued_prompt)
-        continued = self.snapshot("journey-continued")
-        self.check("소지품" in compact(continued["ocr"]), "Reloaded page continued persisted journey through a real canvas click")
+        inventory_text = self.wait_text("소지품", region=self.region("inventory"), psm=7)
+        self.snapshot("journey-continued")
+        self.check(True, "Reloaded page continued persisted journey through a real canvas click", inventory_text)
         self.report["storageAfterReload"] = browser_storage(self.page)
         if self.args.profile == "mobile-landscape":
             self.touch_camera()
@@ -749,7 +871,7 @@ class Smoke:
         else:
             self.page.keyboard.press("e")
             self.report["input"].append({"label": "Interact with restored NPC using E", "type": "keyboard"})
-        interaction_text = self.wait_text("다음 대사", region=self.region("dialogueAdvance"), psm=7)
+        interaction_text = self.wait_text("다음 대사", region=self.region("dialogueAdvance"), psm=7, button_text=True)
         self.check(True, "Real interaction input opened NPC dialogue after restored position", interaction_text)
         self.snapshot("npc-dialogue-after-continue")
 

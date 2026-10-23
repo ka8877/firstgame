@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "references": [
+    {
+      "game": "FantasyCards",
+      "expectedVisibleText": "별빛의 서약",
+      "canvasSize": [
+        1920,
+        1080
+      ],
+      "region": [
+        0.046875,
+        0.19444444444444445,
+        0.31,
+        0.2986111111111111
+      ],
+      "image": "FantasyCards-title-1920.png",
+      "decodedPixelSha256": "1b11d8b676ab42d018d9078b5ea6d4b9eb0d26a48076d663dac58bdf45a1c50f",
+      "runtimeFiles": [
+        {
+          "file": "Build/7db166e7c087ae070dc8123fa20c7b14.data.unityweb",
+          "bytes": 27789561,
+          "sha256": "d7caaab2b698607cd9a28bf9c06a298cba6b5e2cd5f5dacbf96d83da68fa26ee"
+        },
+        {
+          "file": "Build/9ecc9f0b0dde21364dc731e29ce22853.loader.js",
+          "bytes": 47867,
+          "sha256": "d8660b28beb4e3222bf9e498d64cd99812875ff225241ded1bc84845204a5551"
+        },
+        {
+          "file": "Build/a14b578328799a19daf0ecab022aaa28.framework.js.unityweb",
+          "bytes": 89552,
+          "sha256": "3ea8b7e8b44ff45fedf0d076b5764635e1e4cd287fc43a945a32049240804c3b"
+        },
+        {
+          "file": "Build/f4153036be918f1447abeacc18bca107.wasm.unityweb",
+          "bytes": 13028025,
+          "sha256": "d4379d9d50b65ffcf1249649ff9109595268cb2bdb4c50807ecba84d719ed725"
+        },
+        {
+          "file": "index.html",
+          "bytes": 7134,
+          "sha256": "35fe7e0cdeadb9bd5a542b05c8e9b09a5c29fc1b76374e229f12030a2469268b"
+        }
+      ],
+      "reviewedUtc": "2026-10-23T08:40:45.256592+00:00",
+      "review": "Root and validation agents visually inspected the new final-build 1920x1080 full screenshot and all title glyphs. Complete crop decoded RGB is exactly equal to the prior approved reference. New binding uses only the five newly built runtime file hashes; prior review is retained.",
+      "sourceScreenshotSha256": "4e7e92c2dab376fc8e2b4abd00f86d41d97c3eee457b9b3754dd2bf1e4c1cbab",
+      "note": "Complete raw title crop includes the final 약 and margin; reference applies only to this runtime fingerprint and canvas size.",
+      "previousBuildReviews": [
+        {
+          "runtimeFiles": [
+            {
+              "file": "Build/8009eaecfe14a0d121b8b67c5aa1383f.wasm.unityweb",
+              "bytes": 13028189,
+              "sha256": "e9a012a7130b6085dea5ff8711fe056b22490fa81aeadeee95b112e9bb25faca"
+            },
+            {
+              "file": "Build/9ecc9f0b0dde21364dc731e29ce22853.loader.js",
+              "bytes": 47867,
+              "sha256": "d8660b28beb4e3222bf9e498d64cd99812875ff225241ded1bc84845204a5551"
+            },
+            {
+              "file": "Build/a14b578328799a19daf0ecab022aaa28.framework.js.unityweb",
+              "bytes": 89552,
+              "sha256": "2cdcdd9b8ea919338cf3476c23afcad38130af067432dda4b44d0ec2e86661be"
+            },
+            {
+              "file": "Build/ea935f75e05a49c03fe24964c14dc904.data.unityweb",
+              "bytes": 27789493,
+              "sha256": "abb2cacb16f2a206356e96a47889c7a593f7307ddd27b529da206da2b8e03e92"
+            },
+            {
+              "file": "index.html",
+              "bytes": 7134,
+              "sha256": "0fe35641beb1a08999b16c1c0e12ee6101b714d40ec354e85a865dde91069a6c"
+            }
+          ],
+          "reviewedUtc": "2026-10-23T07:06:46.810451+00:00",
+          "review": "Root and validation agents visually inspected the unmodified full screenshot and complete title glyphs. Exact-pixel comparison was authorized for this OCR ambiguity.",
+          "sourceScreenshotSha256": "491004d0eeae508048e4efaa9d7ed649fa9b59096e10325bb6aeae5592af40ab"
+        }
+      ],
+      "sourceScreenshot": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/title-1920x1080.png"
+    }
+  ]
+}

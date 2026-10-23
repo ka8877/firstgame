@@ -1,6 +1,8 @@
 name: Deterministic core and saves
 on:
   push:
+    branches-ignore:
+      - gh-pages
   pull_request:
 permissions:
   contents: read

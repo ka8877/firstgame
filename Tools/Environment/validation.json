@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T06:43:38.968026+00:00",
+  "recordedUtc": "2026-10-23T08:45:39.187129+00:00",
   "baselineRecord": "Tools/Environment/validation-2026-10-20.json",
   "editorVersion": "6000.3.26f1",
   "editorRevision": "de8167e7440c",
@@ -40,8 +40,8 @@
       "passed": "19",
       "failed": "0",
       "skipped": "0",
-      "start-time": "2026-10-23 06:22:13Z",
-      "end-time": "2026-10-23 06:22:18Z"
+      "start-time": "2026-10-23 07:39:12Z",
+      "end-time": "2026-10-23 07:39:18Z"
     },
     "PathOfDawn": {
       "result": "Passed",
@@ -66,8 +66,8 @@
         "Engine": "6000.3.26f1",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "125886962",
-        "Duration": "00:00:11.1532210",
+        "Bytes": "125887474",
+        "Duration": "00:00:11.5529760",
         "Errors": "0",
         "Warnings": "1"
       }
@@ -79,11 +79,11 @@
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "7134",
-        "Duration": "00:03:43.7808100",
+        "Duration": "00:03:12.5297600",
         "Errors": "0",
         "Warnings": "4"
       },
-      "actualPlayerBytes": 40962235,
+      "actualPlayerBytes": 40962139,
       "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
     },
     "PathOfDawn/Windows": {
@@ -115,14 +115,34 @@
   },
   "web": {
     "Desktop720/FantasyCards": {
-      "status": "failed",
-      "checks": 8,
+      "status": "passed",
+      "checks": 24,
       "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
+    },
+    "Desktop1080/FantasyCards": {
+      "status": "passed",
+      "checks": 26,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json"
+    },
+    "Mobile844/FantasyCards": {
+      "status": "passed",
+      "checks": 27,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json"
     },
     "Desktop720/PathOfDawn": {
       "status": "passed",
-      "checks": 26,
+      "checks": 30,
       "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
+    },
+    "Desktop1080/PathOfDawn": {
+      "status": "passed",
+      "checks": 30,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json"
+    },
+    "Mobile844/PathOfDawn": {
+      "status": "passed",
+      "checks": 35,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
     }
   },
   "publicWeb": {},
@@ -143,7 +163,7 @@
     "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
     "metaCounts": {
       "FantasyCards": 146,
-      "PathOfDawn": 256
+      "PathOfDawn": 254
     }
   }
 }

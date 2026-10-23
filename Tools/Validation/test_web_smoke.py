@@ -1,9 +1,12 @@
 """Offline cache, public URL and evidence-history checks; never launch a browser."""
 import copy
 import importlib.util
+import io
+import json
 from pathlib import Path
 import tempfile
 import unittest
+from PIL import Image
 
 spec = importlib.util.spec_from_file_location("web_smoke", Path(__file__).with_name("web-smoke.py"))
 web_smoke = importlib.util.module_from_spec(spec)
@@ -107,6 +110,44 @@ class PublicDeliveryAndHistoryTests(unittest.TestCase):
             self.assertTrue(output.is_dir())
             self.assertEqual(list(output.iterdir()), [])
             self.assertIsNone(web_smoke.archive_previous_run(output))
+
+
+class ReviewedTitlePixelTests(unittest.TestCase):
+    def setUp(self):
+        directory = Path(__file__).parent / "VisualReferences"
+        self.reference = json.loads((directory / "titles.json").read_text())["references"][0]
+        self.pixels = (directory / self.reference["image"]).read_bytes()
+        self.fingerprint = {"files": copy.deepcopy(self.reference["runtimeFiles"])}
+        self.canvas = dict(zip(("width", "height"), self.reference["canvasSize"]))
+
+    def match(self, pixels=None, fingerprint=None, canvas=None, region=None):
+        return web_smoke.reviewed_title_matches(self.reference, pixels or self.pixels,
+            "별빛의 서약", region or self.reference["region"], canvas or self.canvas,
+            fingerprint or self.fingerprint)
+
+    def test_reviewed_actual_pixels_match_despite_png_encoding_changes(self):
+        self.assertTrue(self.match())
+        with Image.open(io.BytesIO(self.pixels)) as image:
+            encoded = io.BytesIO()
+            image.save(encoded, format="PNG", compress_level=0)
+        self.assertNotEqual(self.pixels, encoded.getvalue())
+        self.assertTrue(self.match(pixels=encoded.getvalue()))
+
+    def test_even_one_changed_pixel_rejects_the_reference(self):
+        with Image.open(io.BytesIO(self.pixels)) as source:
+            image = source.convert("RGB")
+            r, g, b = image.getpixel((0, 0))
+            image.putpixel((0, 0), ((r+1) % 256, g, b))
+            changed = io.BytesIO()
+            image.save(changed, format="PNG")
+        self.assertFalse(self.match(pixels=changed.getvalue()))
+
+    def test_other_runtime_or_canvas_or_crop_cannot_reuse_the_reference(self):
+        changed = copy.deepcopy(self.fingerprint)
+        changed["files"][0]["sha256"] = "0" * 64
+        self.assertFalse(self.match(fingerprint=changed))
+        self.assertFalse(self.match(canvas={"width": 1280, "height": 720}))
+        self.assertFalse(self.match(region=[.04, .18, .31, .32]))
 
 
 if __name__ == "__main__":
