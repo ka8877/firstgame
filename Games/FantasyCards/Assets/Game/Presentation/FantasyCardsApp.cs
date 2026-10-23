@@ -20,22 +20,23 @@ namespace FantasyCards.Presentation
     public sealed class FantasyCardsApp : MonoBehaviour
     {
         private const string Slot = "fantasy-battle", GameId = "starlight-oath";
-        private readonly Color ink = new Color(.025f, .045f, .085f, .95f);
-        private readonly Color gold = new Color(.88f, .71f, .39f);
-        private readonly Color teal = new Color(.30f, .73f, .78f);
+        private readonly Color ink = new Color(.055f, .065f, .135f, .93f);
+        private readonly Color gold = new Color(.94f, .80f, .52f);
+        private readonly Color teal = new Color(.49f, .86f, .88f);
         private readonly List<string> customDeck = CardCatalog.DefaultDeck();
         private readonly Dictionary<string, Sprite> authoredIllustrations = new Dictionary<string, Sprite>();
         private BattleEngine engine;
         private RectTransform root;
         private Canvas canvas;
         private TMP_FontAsset font;
-        private Texture2D titleArt;
+        private Texture2D titleArt, battleArt;
+        private BgmPlayer music;
         private Action redraw;
         private Vector2 lastViewport;
         private int collectionPage;
         private bool Compact => canvas != null && (canvas.pixelRect.width < 1400 || canvas.pixelRect.width / Mathf.Max(1, canvas.pixelRect.height) > 1.95f);
-        private readonly Color ivory = new Color(.96f, .93f, .84f);
-        private readonly Color slate = new Color(.075f, .115f, .17f, .96f);
+        private readonly Color ivory = new Color(.99f, .96f, .89f);
+        private readonly Color slate = new Color(.16f, .18f, .30f, .94f);
         private int selectedCard = -1, selectedAttacker = -1;
         private string inspectedId = "dawn_scout", message = "지형을 전개하고, 서약을 지킬 동료를 불러오세요.";
         private string saveError = "";
@@ -58,6 +59,8 @@ namespace FantasyCards.Presentation
             var ruleAsset = Resources.Load<RuleSetAsset>("Data/Rules"); authoredRules = ruleAsset != null ? ruleAsset.CreateRuntimeRules() : new RuleSet();
             font = Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset;
             titleArt = Resources.Load<Texture2D>("Art/title-hero");
+            battleArt = Resources.Load<Texture2D>("Art/battle-background");
+            music = BgmPlayer.Attach(gameObject, "Audio/starlight-overture", "FC.music", .6f);
             var c = new GameObject("Starlight UI", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvas = c.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 10;
             var scaler = c.GetComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1920, 1080); scaler.matchWidthOrHeight = .5f;
@@ -69,6 +72,9 @@ namespace FantasyCards.Presentation
         }
         private void Update()
         {
+            if (music != null && ((Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
+                (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame) ||
+                (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame))) music.NotifyUserGesture();
             if (canvas != null && !locked && redraw != null && Vector2.Distance(lastViewport, canvas.pixelRect.size) > 1)
             { lastViewport = canvas.pixelRect.size; redraw(); }
             if (!locked && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -105,7 +111,36 @@ namespace FantasyCards.Presentation
                 Text(root, "16 ORIGINAL CARDS", .735f, .13f, .96f, .175f, 20, gold, TextAlignmentOptions.MidlineRight);
                 Text(root, "나만의 서약을 펼치다", .66f, .075f, .96f, .13f, 30, ivory, TextAlignmentOptions.MidlineRight);
             }
-            Text(root, StatusMessage(), .058f, .018f, .96f, .073f, 19, new Color(.70f, .76f, .82f));
+            Text(root, StatusMessage(), .058f, .018f, .96f, .073f, 19, new Color(.78f, .81f, .91f));
+            Button(root, "음악", .84f, .84f, .965f, .965f, () => ShowMusicSettings(ShowTitle), slate, 24);
+        }
+        private void ShowMusicSettings(Action back)
+        {
+            redraw = () => ShowMusicSettings(back); Clear(); Backdrop(true);
+            var panel = Panel(root, .13f, .15f, .87f, .85f, ink); Frame(panel, new Color(gold.r, gold.g, gold.b, .7f), 1.5f);
+            Text(panel, "별빛의 선율", .07f, .74f, .93f, .92f, 43, ivory, TextAlignmentOptions.Center);
+            Text(panel, "관현악과 함께 펼치는 서약", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
+            Button(panel, music != null && music.Muted ? "음악 켜기" : "음악 끄기", .12f, .40f, .46f, .59f,
+                () => { if (music != null) music.SetMuted(!music.Muted); ShowMusicSettings(back); }, slate, 26);
+            Text(panel, "음량 " + Mathf.RoundToInt((music != null ? music.Volume : .6f) * 100) + "%", .49f, .43f, .88f, .57f, 28, ivory, TextAlignmentOptions.Center);
+            Button(panel, "음량 -", .12f, .19f, .46f, .38f,
+                () => { music?.SetVolume(Mathf.Max(0, music.Volume - .15f)); ShowMusicSettings(back); }, slate, 25);
+            Button(panel, "음량 +", .53f, .19f, .87f, .38f,
+                () => { music?.SetVolume(Mathf.Min(1, music.Volume + .15f)); ShowMusicSettings(back); }, slate, 25);
+            Button(root, "돌아가기", .36f, .025f, .64f, .14f, back, gold, 26);
+        }
+        private void Backdrop(bool calm)
+        {
+            Texture2D art = battleArt != null ? battleArt : titleArt;
+            if (art != null) ImageFrame(root, art, new Rect(0, 0, 1, 1), 0, 0, 1, 1, new Vector2(.5f, .53f));
+            Panel(root, 0, 0, 1, 1, new Color(.045f, .055f, .13f, calm ? .86f : .26f));
+            Ornament(root, new Color(.89f, .86f, 1f, calm ? .24f : .44f));
+        }
+        private void Ornament(Transform parent, Color color, bool card = false)
+        {
+            var go = new GameObject("Starlight filigree", typeof(RectTransform), typeof(UiConstellation));
+            var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, 0, 0, 1, 1);
+            var ornament = go.GetComponent<UiConstellation>(); ornament.color = color; ornament.CardCorners = card; ornament.raycastTarget = false; ornament.SetAllDirty();
         }
         private void StartBattle(uint seed)
         {
@@ -142,23 +177,28 @@ namespace FantasyCards.Presentation
         {
             battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld();
             var s = engine.State; var p = s.players[0]; var enemy = s.players[1]; bool compact = Compact;
+            Backdrop(false);
             Gradient(root, 0, 0, 1, .43f, new Color(.012f, .023f, .043f, .99f), Color.clear);
             Gradient(root, 0, .69f, 1, 1, Color.clear, new Color(.012f, .023f, .043f, .96f));
             Panel(root, .02f, compact ? .879f : .925f, .98f, .995f, ink);
             Text(root, "별빛의 서약", .035f, compact ? .93f : .936f, .25f, .986f, compact ? 29 : 31, gold);
-            Text(root, s.turn + "턴 · " + (s.activePlayer == 0 ? "나의 " : "상대의 ") + PhaseName(s.phase), .275f, compact ? .93f : .936f, .735f, .986f, compact ? 26 : 27, ivory);
+            Text(root, s.turn + "턴 · " + (s.activePlayer == 0 ? "나의 " : "상대의 ") + PhaseName(s.phase), .275f, compact ? .93f : .936f, .655f, .986f, compact ? 26 : 27, ivory);
+            Button(root, "음악", .665f, compact ? .876f : .938f, .742f, .991f, () => ShowMusicSettings(ShowBattle), slate, 23, !locked);
             Button(root, "저장", .755f, compact ? .876f : .938f, .855f, .991f, () => { if (Save()) message = "전투와 난수 상태를 저장했습니다."; ShowBattle(); }, slate, 23, !locked);
             Button(root, "타이틀", .868f, compact ? .876f : .938f, .974f, .991f, () => LeaveBattle(ShowTitle), slate, 23, !locked);
-            Text(root, StatusMessage(), .035f, compact ? .883f : .885f, compact ? .738f : .975f, compact ? .929f : .922f, compact ? 24 : 20, ivory);
+            Text(root, StatusMessage(), .035f, compact ? .883f : .885f, compact ? .65f : .975f, compact ? .929f : .922f, compact ? 24 : 20, ivory);
             float enemyBottom = compact ? .762f : .813f, enemyTop = compact ? .874f : .875f;
-            Button(root, "달의 수호자   생명 " + enemy.health + " / " + s.rules.startingHealth, compact ? .025f : .325f, enemyBottom, compact ? .56f : .745f, enemyTop, () => Attack(-1), new Color(.14f, .15f, .23f, .95f), 27,
+            Button(root, "달의 수호자   생명 " + enemy.health + " / " + s.rules.startingHealth, compact ? .025f : .325f, enemyBottom, compact ? .56f : .745f, enemyTop, () => Attack(-1), new Color(.22f, .19f, .35f, .90f), 27,
                 !locked && s.activePlayer == 0 && s.phase == BattlePhase.AttackDeclaration && selectedAttacker >= 0);
+            Panel(root, compact ? .572f : .245f, compact ? .763f : .778f, compact ? .982f : .795f, compact ? .873f : .813f, new Color(.035f, .045f, .10f, .96f));
             Text(root, "지형 " + enemy.terrain.Count + "  여명 " + enemy.dawn + " / 조류 " + enemy.tide + "  손패 " + enemy.hand.Count + "  덱 " + enemy.deck.Count,
                 compact ? .58f : .25f, compact ? .77f : .78f, compact ? .975f : .79f, compact ? .868f : .81f, compact ? 23 : 20, new Color(.68f, .80f, .88f), compact ? TextAlignmentOptions.Center : TextAlignmentOptions.MidlineLeft);
             DrawLanes(1, compact ? .62f : .585f, compact ? .752f : .772f);
             DrawLanes(0, compact ? .445f : .365f, compact ? .575f : .55f);
+            Panel(root, compact ? .017f : .245f, compact ? .574f : .55f, compact ? .983f : .795f, compact ? .621f : .584f, new Color(.035f, .045f, .10f, .96f));
             Text(root, "내 지형  " + (p.terrain.Count == 0 ? "아직 전개되지 않음" : string.Join(" · ", p.terrain.Select(c => CardCatalog.Get(c.definitionId).name))),
                 compact ? .025f : .25f, compact ? .575f : .552f, compact ? .975f : .79f, compact ? .62f : .581f, compact ? 23 : 18, new Color(.86f, .84f, .73f));
+            Panel(root, compact ? .017f : .245f, compact ? .273f : .322f, .983f, compact ? .324f : .363f, new Color(.035f, .045f, .10f, .96f));
             Text(root, "나의 생명 " + p.health + " / " + s.rules.startingHealth + "     여명 " + p.dawn + "  ·  조류 " + p.tide + "     덱 " + p.deck.Count,
                 compact ? .025f : .25f, compact ? .275f : .326f, .975f, compact ? .323f : .36f, compact ? 24 : 25, gold);
             if (compact)
@@ -212,7 +252,7 @@ namespace FantasyCards.Presentation
         }
         private void ShowBattleLog()
         {
-            redraw = ShowBattleLog; Clear(); Panel(root, .05f, .06f, .95f, .94f, ink);
+            redraw = ShowBattleLog; Clear(); Backdrop(true); Panel(root, .05f, .06f, .95f, .94f, ink);
             Text(root, "전투 기록", .09f, .79f, .85f, .9f, 40, gold);
             Text(root, string.Join("\n", engine.State.events.Skip(Math.Max(0, engine.State.events.Count - 10)).Select(e => e.text)), .09f, .24f, .91f, .78f, 24, ivory, TextAlignmentOptions.TopLeft);
             Button(root, "돌아가기", .64f, .085f, .91f, .22f, ShowBattle, gold, 27);
@@ -224,10 +264,10 @@ namespace FantasyCards.Presentation
             {
                 int lane = i; var unit = s.players[owner].AtLane(i); float left = start + i * span / s.rules.unitLanes, right = left + span / s.rules.unitLanes - .012f;
                 bool target = IsLegalLane(owner, lane);
-                var panel = Panel(root, left, bottom, right, top, new Color(.025f, .045f, .075f, target ? .88f : .65f));
+                var panel = Panel(root, left, bottom, right, top, new Color(.12f, .16f, .28f, target ? .94f : .88f));
                 panel.gameObject.name = "Lane " + owner + " " + lane;
-                Frame(panel, target ? gold : new Color(.40f, .48f, .58f, .55f), target ? 2 : 1);
-                if (unit == null) Text(panel, "전장 " + (i + 1) + "  /  " + (target ? "여기에 배치" : "비어 있음"), .05f, .14f, .95f, .86f, Compact ? 24 : 22, target ? gold : new Color(.55f, .62f, .70f), TextAlignmentOptions.Center);
+                panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
+                if (unit == null) Text(panel, "전장 " + (i + 1) + "  /  " + (target ? "여기에 배치" : "비어 있음"), .05f, .14f, .95f, .86f, Compact ? 24 : 22, target ? gold : new Color(.73f, .77f, .88f), TextAlignmentOptions.Center);
                 else
                 {
                     var d = CardCatalog.Get(unit.definitionId);
@@ -254,6 +294,7 @@ namespace FantasyCards.Presentation
                         Text(panel, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor + " · 코인 " + (s.rules.baseCoins + unit.extraCoins), .5f, .07f, .97f, .36f, Compact ? 23 : 19, unit.exhausted ? Color.gray : teal);
                     }
                 }
+                Frame(panel, target ? gold : new Color(.67f, .70f, .88f, .45f), target ? 2.5f : 1.2f);
                 panel.GetComponent<Image>().raycastTarget = true;
                 var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, lane));
                 if (unit != null && unit.instanceId == selectedAttacker) Frame(panel, ivory, 3);
@@ -345,7 +386,7 @@ namespace FantasyCards.Presentation
         private void ShowCollection(bool edit)
         {
             battleScreen = false; redraw = () => ShowCollection(edit); Clear();
-            Panel(root, 0, 0, 1, 1, ink); bool compact = Compact;
+            Backdrop(true); bool compact = Compact;
             Text(root, edit ? "나의 서약 · 덱 구성" : "별빛의 기록 · 카드 도감", .04f, .89f, .78f, .98f, 42, ivory);
             Text(root, edit ? customDeck.Count + " / 24장 · 지형 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Terrain) + " · 유닛 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Unit) + " · 카드당 최대 4장" : "여명과 조류 / 지형 4종 · 유닛 6종 · 마법 3종 · 장비 3종", .04f, .815f, .79f, .88f, 24, gold);
             Button(root, "타이틀", .83f, compact ? .85f : .90f, .96f, .98f, ShowTitle, slate, 25);
@@ -373,7 +414,9 @@ namespace FantasyCards.Presentation
         }
         private void ShowDetail(CardDefinition d, Action back)
         {
-            redraw = () => ShowDetail(d, back); Clear(); Panel(root, 0, 0, 1, 1, ink);
+            redraw = () => ShowDetail(d, back); Clear(); Backdrop(true);
+            var portraitFrame = Panel(root, .02f, .047f, .53f, .953f, new Color(.74f, .73f, .92f, .22f));
+            Frame(portraitFrame, new Color(gold.r, gold.g, gold.b, .65f), 1.5f);
             Artwork(root, d, .025f, .055f, .525f, .945f); // Near-square at 16:9; crop preserves proportions on wider screens.
             Gradient(root, .39f, .055f, .545f, .945f, Color.clear, ink, true);
             Text(root, CardCatalog.ElementName(d.element) + " / " + CardCatalog.KindName(d.kind), .565f, .79f, .95f, .88f, 28, gold);
@@ -385,7 +428,7 @@ namespace FantasyCards.Presentation
         }
         private void ShowTransfer()
         {
-            battleScreen = false; redraw = null; Clear(); Panel(root, .06f, .06f, .94f, .94f, ink);
+            battleScreen = false; redraw = null; Clear(); Backdrop(true); Panel(root, .06f, .06f, .94f, .94f, ink);
             Text(root, "전투 저장 옮기기", .09f, .82f, .85f, .90f, 42, gold);
             Text(root, "웹에서 내보낸 저장 문자열을 PC에서도 가져올 수 있습니다.\n아래 내용을 파일로 보관하거나, 다른 기기에서 복사해 붙여넣으세요.", .09f, .69f, .89f, .81f, 26, Color.white);
             var area = Panel(root, .09f, .30f, .91f, .66f, new Color(.08f, .12f, .18f));
@@ -417,7 +460,11 @@ namespace FantasyCards.Presentation
         {
             Color accent = d.element == Element.Dawn ? gold : teal;
             bool small = Compact && canvas.pixelRect.height < 600;
+            var shadow = Panel(parent, x0 - .002f, y0 - .005f, x1 + .002f, y1 - .002f, new Color(.015f, .02f, .07f, .45f));
+            shadow.gameObject.name = "Card soft shadow"; shadow.GetComponent<UiRoundedImage>().Radius = small ? 20 : 27;
             var panel = Panel(parent, x0, y0, x1, y1, ink); panel.gameObject.name = "Card " + d.id;
+            panel.GetComponent<UiRoundedImage>().Radius = small ? 18 : 24;
+            panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
             Artwork(panel, d, .012f, .01f, .988f, .99f);
             Gradient(panel, .012f, .01f, .988f, .48f, new Color(.01f, .02f, .04f, 1), new Color(.01f, .02f, .04f, 0));
             Panel(panel, .015f, .01f, .985f, small ? .44f : .345f, new Color(.015f, .025f, .045f, .82f));
@@ -426,7 +473,8 @@ namespace FantasyCards.Presentation
             Text(panel, CardCatalog.KindName(d.kind) + (d.kind == CardKind.Unit ? "  /  공격 " + d.attack + "  HP " + d.health : "  /  " + CardCatalog.ElementName(d.element)), .065f, .025f, .94f, small ? .22f : .155f, Compact ? 24 : 22, accent);
             var cost = Panel(panel, .045f, small ? .73f : .795f, .24f, .965f, new Color(.02f, .04f, .065f, .94f));
             Text(cost, d.cost.ToString(), .04f, .04f, .96f, .96f, 34, accent, TextAlignmentOptions.Center); Frame(cost, new Color(accent.r, accent.g, accent.b, .75f), 1);
-            Frame(panel, selected ? ivory : accent, selected ? 3 : 1);
+            Frame(panel, selected ? ivory : new Color(accent.r, accent.g, accent.b, .85f), selected ? 3 : 1.5f);
+            Ornament(panel, new Color(accent.r, accent.g, accent.b, .9f), true);
             panel.GetComponent<Image>().raycastTarget = true;
             var button = panel.gameObject.AddComponent<Button>(); button.interactable = interactable; button.onClick.AddListener(() => onClick());
             panel.gameObject.AddComponent<UiCardHover>();
@@ -438,12 +486,20 @@ namespace FantasyCards.Presentation
             if (sprite != null)
             {
                 var rect = sprite.rect; var texture = sprite.texture;
-                ImageFrame(parent, texture, new Rect((rect.x + .5f) / texture.width, (rect.y + .5f) / texture.height, (rect.width - 1) / texture.width, (rect.height - 1) / texture.height), x0, y0, x1, y1, new Vector2(.5f, .66f));
+                ImageFrame(parent, texture, new Rect((rect.x + .5f) / texture.width, (rect.y + .5f) / texture.height, (rect.width - 1) / texture.width, (rect.height - 1) / texture.height), x0, y0, x1, y1, new Vector2(.5f, .66f), true);
             }
             else Panel(parent, x0, y0, x1, y1, slate);
         }
-        private void ImageFrame(Transform parent, Texture texture, Rect uv, float x0, float y0, float x1, float y1, Vector2 focus)
+        private void ImageFrame(Transform parent, Texture texture, Rect uv, float x0, float y0, float x1, float y1, Vector2 focus, bool rounded = false)
         {
+            if (rounded)
+            {
+                var clip = Panel(parent, x0, y0, x1, y1, Color.white);
+                clip.gameObject.name = "Rounded artwork window";
+                var shape = clip.GetComponent<UiRoundedImage>(); shape.TopTint = shape.BottomTint = Color.white; shape.Radius = 20;
+                clip.gameObject.AddComponent<Mask>().showMaskGraphic = false;
+                parent = clip; x0 = y0 = 0; x1 = y1 = 1;
+            }
             var go = new GameObject("Illustration", typeof(RectTransform), typeof(RawImage));
             var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
             var image = go.GetComponent<RawImage>(); image.texture = texture; image.raycastTarget = false;
@@ -457,11 +513,20 @@ namespace FantasyCards.Presentation
         }
         private void Frame(RectTransform rect, Color color, float pixels)
         {
-            var outline = rect.GetComponent<Outline>() ?? rect.gameObject.AddComponent<Outline>(); outline.effectColor = color; outline.effectDistance = new Vector2(pixels, -pixels);
+            var existing = rect.Find("Fine rounded frame");
+            var frame = existing != null ? (RectTransform)existing : new GameObject("Fine rounded frame", typeof(RectTransform), typeof(UiRoundedImage)).GetComponent<RectTransform>();
+            if (existing == null) { frame.SetParent(rect, false); Anchor(frame, 0, 0, 1, 1); }
+            frame.SetAsLastSibling();
+            var shape = frame.GetComponent<UiRoundedImage>(); shape.Fill = false; shape.raycastTarget = false;
+            shape.Radius = rect.GetComponent<UiRoundedImage>()?.Radius ?? 20f; shape.BorderColor = color; shape.BorderWidth = pixels; shape.SetAllDirty();
         }
         private RectTransform Panel(Transform parent, float x0, float y0, float x1, float y1, Color color)
         {
-            var go = new GameObject("Panel", typeof(RectTransform), typeof(Image)); var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1); var image = go.GetComponent<Image>(); image.color = color; image.raycastTarget = false; return rt;
+            var go = new GameObject("Panel", typeof(RectTransform), typeof(UiRoundedImage));
+            var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
+            var image = go.GetComponent<UiRoundedImage>(); image.color = color; image.raycastTarget = false;
+            image.Radius = x0 == 0 && y0 == 0 && x1 == 1 && y1 == 1 ? 0 : 20;
+            return rt;
         }
         private TMP_Text Text(Transform parent, string value, float x0, float y0, float x1, float y1, float size, Color color, TextAlignmentOptions alignment = TextAlignmentOptions.MidlineLeft)
         {
@@ -475,8 +540,11 @@ namespace FantasyCards.Presentation
         {
             var panel = Panel(parent, x0, y0, x1, y1, color); panel.gameObject.name = "Button " + label; panel.GetComponent<Image>().raycastTarget = true;
             var b = panel.gameObject.AddComponent<Button>(); b.interactable = enabled; var colors = b.colors; colors.highlightedColor = new Color(1.13f, 1.13f, 1.13f); colors.disabledColor = new Color(.48f, .48f, .48f); colors.pressedColor = new Color(.76f, .80f, .86f); b.colors = colors;
-            Frame(panel, new Color(gold.r, gold.g, gold.b, color == gold ? .85f : .28f), 1);
-            b.onClick.AddListener(() => action()); Text(panel, label, .035f, .07f, .965f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
+            var shadow = panel.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.015f, .02f, .06f, .24f); shadow.effectDistance = new Vector2(0, -3);
+            Frame(panel, new Color(gold.r, gold.g, gold.b, color == gold ? .85f : .35f), 1.25f);
+            b.onClick.AddListener(() => { music?.NotifyUserGesture(); action(); });
+            panel.gameObject.AddComponent<UiCardHover>().HoverScale = 1.012f;
+            Text(panel, label, .035f, .07f, .965f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
         }
         private static void Anchor(RectTransform r, float x0, float y0, float x1, float y1) { r.anchorMin = new Vector2(x0, y0); r.anchorMax = new Vector2(x1, y1); r.offsetMin = r.offsetMax = Vector2.zero; }
         private static string PhaseName(BattlePhase phase) { switch (phase) { case BattlePhase.Main: return "준비 단계"; case BattlePhase.AttackDeclaration: return "공격 선언"; case BattlePhase.BlockResponse: return "방어 대응"; default: return "결투 종료"; } }

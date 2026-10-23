@@ -32,8 +32,28 @@ namespace FantasyCards.SmokeTests
         }
         [UnityTest] public IEnumerator IllustratedGalleryDetailAndCompactBattleKeepUsableControls()
         {
+            var music = UnityEngine.Object.FindObjectsByType<BgmPlayer>(FindObjectsSortMode.None)
+                .Where(player => player.gameObject.activeInHierarchy).ToArray();
+            Assert.That(music.Length, Is.EqualTo(1), "The actual game must own exactly one background soundtrack player.");
+            var soundtrack = Resources.Load<AudioClip>("Audio/starlight-overture");
+            Assert.That(soundtrack, Is.Not.Null, "The shipped soundtrack must import as an AudioClip.");
+            Assert.That(music[0].Clip, Is.SameAs(soundtrack));
+            Assert.That(soundtrack.length, Is.InRange(90f, 120f));
+            Assert.That(soundtrack.channels, Is.EqualTo(2));
+            var musicSources = music[0].GetComponents<AudioSource>().Where(source => source.clip == soundtrack).ToArray();
+            Assert.That(musicSources.Length, Is.EqualTo(1), "Screen changes must not layer duplicate BGM sources.");
+            Assert.That(musicSources[0].loop, Is.True);
+            // This checks actual player wiring/import, not audible browser or physical speaker output.
             yield return SmokeUi.Capture("FantasyCards", "06-title-mobile", 844, 390,
-                () => { AssertTouchButtons("새로운 결투", "이어하기", "카드 도감", "덱 구성 · 24장", "저장 내보내기 / 가져오기"); AssertGradientMeshes(); });
+                () => { AssertTouchButtons("새로운 결투", "이어하기", "카드 도감", "덱 구성 · 24장", "저장 내보내기 / 가져오기", "음악"); AssertGradientMeshes(); });
+            SmokeUi.Click("음악"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "16-music-settings-693x390", 693, 390, () =>
+            {
+                AssertTouchButtons(music[0].Muted ? "음악 켜기" : "음악 끄기", "음량 -", "음량 +", "돌아가기");
+                AssertReadableLabel("별빛의 선율");
+                AssertReadableLabel("음량 " + Mathf.RoundToInt(music[0].Volume * 100) + "%");
+            });
+            SmokeUi.Click("돌아가기"); yield return null;
             SmokeUi.Click("카드 도감"); yield return null;
             SmokeUi.Click("다음"); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "07-hero-gallery", 1920, 1080, AssertArtCrops);
@@ -54,7 +74,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("새벽의 정원"); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "11-battle-mobile", 844, 390, () =>
             {
-                AssertTouchButtons("저장", "타이틀", "확대 보기", "지형 전개", "공격 단계", "전투 기록");
+                AssertTouchButtons("저장", "타이틀", "확대 보기", "지형 전개", "공격 단계", "전투 기록", "음악");
                 Assert.That(SmokeUi.HasText("내 지형"), Is.True);
                 Assert.That(SmokeUi.HasText("여명 0"), Is.True);
                 AssertArtCrops();
@@ -63,7 +83,7 @@ namespace FantasyCards.SmokeTests
             });
             yield return SmokeUi.Capture("FantasyCards", "13-battle-phone-letterbox", 693, 390, () =>
             {
-                AssertTouchButtons("저장", "타이틀", "확대 보기", "지형 전개", "공격 단계", "전투 기록");
+                AssertTouchButtons("저장", "타이틀", "확대 보기", "지형 전개", "공격 단계", "전투 기록", "음악");
                 AssertHandNames(savedBattle); AssertReadableLabel("지형 전개");
             });
             yield return SmokeUi.Capture("FantasyCards", "12-battle-720", 1280, 720, () =>
@@ -198,11 +218,35 @@ namespace FantasyCards.SmokeTests
                 Assert.That(maximum.y, Is.LessThanOrEqualTo(canvas.pixelRect.height + 1));
             }
         }
+        static void AssertRoundedCards()
+        {
+            var cards = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+                .Where(button => button.gameObject.activeInHierarchy && button.gameObject.name.StartsWith("Card ", StringComparison.Ordinal));
+            foreach (var card in cards)
+            {
+                var shape = card.GetComponent<UiRoundedImage>();
+                Assert.That(shape, Is.Not.Null, "Cards use a curved silhouette, not a rectangular frame over square art.");
+                var mesh = shape.canvasRenderer.GetMesh();
+                Assert.That(mesh, Is.Not.Null); Assert.That(mesh.vertexCount, Is.GreaterThan(16));
+                var rect = shape.rectTransform.rect;
+                var corner = new Vector2(rect.xMin, rect.yMin);
+                Assert.That(mesh.vertices.All(vertex => Vector2.Distance(new Vector2(vertex.x, vertex.y), corner) > 1), Is.True,
+                    "The rendered card geometry must leave the square corner outside its curved silhouette.");
+                Assert.That(card.GetComponent<Mask>()?.enabled, Is.True, "Artwork and labels must clip to the card silhouette.");
+                var frame = card.transform.Find("Fine rounded frame")?.GetComponent<UiRoundedImage>();
+                Assert.That(frame, Is.Not.Null); Assert.That(frame.canvasRenderer.GetMesh()?.vertexCount, Is.GreaterThan(16));
+            }
+        }
         static void AssertArtCrops()
         {
+            AssertRoundedCards();
+            var backdrop = Resources.Load<Texture2D>("Art/battle-background");
+            Assert.That(backdrop, Is.Not.Null, "The illustrated fantasy battlefield must be included in the player.");
             var crops = UnityEngine.Object.FindObjectsByType<IllustrationCrop>(FindObjectsSortMode.None)
                 .Where(c => c.gameObject.activeInHierarchy).ToArray();
             Assert.That(crops.Length, Is.GreaterThan(0));
+            Assert.That(crops.Any(crop => crop.GetComponent<RawImage>().texture == backdrop), Is.True,
+                "The illustrated battlefield must be visible in the current screen, not merely loaded as an unused asset.");
             foreach (var crop in crops)
             {
                 var image = crop.GetComponent<RawImage>(); var source = crop.SourceUv; var uv = image.uvRect;

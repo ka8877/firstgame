@@ -18,6 +18,7 @@ import json
 import os
 from pathlib import Path
 import re
+import statistics
 import subprocess
 import sys
 import threading
@@ -50,6 +51,8 @@ def validate_layout(game, definition):
     region_keys = ({"title", "terrain", "resource", "inspectorName", "status", "friendlyLanes", "unitStats"} if game == "FantasyCards" else
                    {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton", "settingsHeader", "inventory", "movementGuide"})
     variants = {"desktop", "compact"} if "compactBelowCanvasWidth" in definition else {"desktop"}
+    if definition.get("audioValidation", {}).get("ready"):
+        point_keys |= {"audioOpen", "audioMute", "audioDown", "audioUp", "audioClose"}
     for name in variants:
         layout = definition["variants"][name]
         if not point_keys.issubset(layout["points"]) or not region_keys.issubset(layout["regions"]):
@@ -147,6 +150,63 @@ def gold_surface_fraction(pixels):
                   for r, g, b in zip(data[::3], data[1::3], data[2::3]))
     return matches / (len(data) / 3)
 
+def music_audio_summary(snapshots):
+    """Find the real long looping stereo buffer's output route, not ambient/SFX.
+
+    The browser observer records only native WebAudio objects and connections.
+    A running context alone, an unstarted buffer, or PCM from another source is
+    insufficient. Keep every raw snapshot beside this derived summary.
+    """
+    frames, errors = [], []
+    for snapshot in snapshots:
+        errors.extend(snapshot.get("errors", []))
+        for context in snapshot["contexts"]:
+            def reachable_from(node):
+                reachable, pending = {node}, [node]
+                while pending:
+                    current = pending.pop()
+                    for source, target, _, _ in context["connections"]:
+                        if source == current and target not in reachable:
+                            reachable.add(target)
+                            pending.append(target)
+                return reachable
+            buffers = [b for b in context["buffers"] if b["loop"] and b["duration"] >= 30 and
+                       b["channels"] == 2 and b.get("startedAtContextTime") is not None and
+                       b.get("stoppedAtContextTime") is None]
+            for buffer in buffers:
+                reachable = reachable_from(buffer["nodeId"])
+                output_nodes = {source for source, target, _, _ in context["connections"]
+                                if source in reachable and target == context["destinationNodeId"]}
+                routes = [r for r in context["destinationRoutes"] if r["sourceNodeId"] in output_nodes]
+                channels = [channel for route in routes for channel in route["channels"]]
+                if not channels:
+                    continue
+                gains = [g["value"] for g in context["gains"] if g["nodeId"] in output_nodes]
+                shared = [other["nodeId"] for other in context["buffers"] if other["nodeId"] != buffer["nodeId"] and
+                          other.get("startedAtContextTime") is not None and other.get("stoppedAtContextTime") is None and
+                          output_nodes.intersection(reachable_from(other["nodeId"]))]
+                frames.append({"wallTimeMs": snapshot["wallTimeMs"], "contextId": context["id"],
+                    "contextState": context["state"], "contextTime": context["currentTime"],
+                    "bufferNodeId": buffer["nodeId"], "buffer": buffer,
+                    "destinationOutputNodes": sorted(output_nodes), "destinationGains": gains,
+                    "sharedWithOtherBufferNodeIds": shared,
+                    "rms": (sum(c["rms"] ** 2 for c in channels) / len(channels)) ** .5,
+                    "peak": max(c["peak"] for c in channels),
+                    "nonfiniteSamples": sum(c["nonfinite"] for c in channels)})
+    identities = sorted({(f["contextId"], f["bufferNodeId"]) for f in frames})
+    rms_values = [f["rms"] for f in frames]
+    gains = [value for f in frames for value in f["destinationGains"]]
+    return {"frames": frames, "observerErrors": sorted(set(errors)),
+            "sourceIdentities": [list(identity) for identity in identities],
+            "sampleCount": len(frames), "medianRms": statistics.median(rms_values) if rms_values else 0,
+            "maximumRms": max(rms_values, default=0),
+            "audibleSampleFraction": sum(value > 1e-5 for value in rms_values) / len(rms_values) if rms_values else 0,
+            "medianDestinationGain": statistics.median(gains) if gains else None,
+            "contextAdvancedSeconds": frames[-1]["contextTime"] - frames[0]["contextTime"] if frames and len(identities) == 1 else 0,
+            "allContextsRunning": bool(frames) and all(f["contextState"] == "running" for f in frames),
+            "isolatedMusicRoute": bool(frames) and not any(f["sharedWithOtherBufferNodeIds"] for f in frames),
+            "nonfiniteSamples": sum(f["nonfiniteSamples"] for f in frames)}
+
 def classify_network_failures(report):
     """Keep every event, distinguishing only proved successful Unity cache revalidation."""
     expected, unexpected = [], []
@@ -230,7 +290,7 @@ class Smoke:
         self.report = {"game": game, "status": "running", "screenshots": [], "checks": [],
                        "console": [], "pageErrors": [], "failedRequests": [], "httpErrors": [],
                        "input": [], "loadingTimings": [], "networkResponses": [], "unityConfigurations": [],
-                       "profile": args.profile,
+                       "profile": args.profile, "revision": args.revision,
                        "rendering": ("Chromium X11/Mesa llvmpipe software WebGL" if args.renderer == "x11-mesa" else
                                      "Chromium headless SwiftShader software WebGL") +
                                     "; timings are local smoke evidence, not target-device benchmarks"}
@@ -249,6 +309,21 @@ class Smoke:
             "elapsedMs": round((time.monotonic()-self.started)*1000,1)}))
         page.on("response", self.response)
         page.on("dialog", lambda d: (self.report["pageErrors"].append("Browser dialog: " + d.message), d.dismiss()))
+        self.audio_cdp = None
+        if args.verify_audio:
+            observer = ROOT / "Tools/Validation/webaudio-observer.js"
+            page.add_init_script(path=str(observer))
+            self.report["audioEvidence"] = {"observer": str(observer.relative_to(ROOT)),
+                "observerSha256": hashlib.sha256(observer.read_bytes()).hexdigest(),
+                "method": "Passive stereo analyser branches beside actual native WebAudio destination connections; actual canvas UI controls all playback, mute and volume.",
+                "limits": "PCM at the browser's output route proves a non-silent signal, not physical speakers, listener preference or target-device performance.",
+                "browserDefaultMuteAudioFlagRemoved": True, "cdpEvents": [], "windows": []}
+            self.audio_cdp = page.context.new_cdp_session(page)
+            for event in ("contextCreated", "contextChanged", "contextWillBeDestroyed"):
+                self.audio_cdp.on("WebAudio." + event,
+                    lambda data, kind=event: self.report["audioEvidence"]["cdpEvents"].append(
+                        {"event": kind, "navigation": self.navigation_index, "data": data}))
+            self.audio_cdp.send("WebAudio.enable")
 
     def response(self, response):
         entry = {"url": response.url, "status": response.status, "method": response.request.method,
@@ -256,6 +331,87 @@ class Smoke:
         self.report["networkResponses"].append(entry)
         if response.status >= 400:
             self.report["httpErrors"].append(entry)
+
+    def observe_audio(self, label, milliseconds=1800):
+        snapshots = self.page.evaluate("""milliseconds => {
+            if (!window.__firstGameAudioEvidence) throw new Error('Passive WebAudio observer is missing');
+            return window.__firstGameAudioEvidence.sampleWindow(milliseconds);
+        }""", milliseconds)
+        summary = music_audio_summary(snapshots)
+        filename = f"audio-{self.navigation_index}-{label}.json"
+        target = self.output / filename
+        target.write_text(json.dumps({"label": label, "navigation": self.navigation_index,
+            "snapshots": snapshots, "summary": summary}, ensure_ascii=False, indent=2), encoding="utf-8")
+        evidence = {key: value for key, value in summary.items() if key != "frames"}
+        evidence.update({"label": label, "navigation": self.navigation_index,
+                         "rawEvidence": filename, "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
+        self.report["audioEvidence"]["windows"].append(evidence)
+        self.persist()
+        self.check(not evidence["observerErrors"] and not evidence["nonfiniteSamples"],
+                   "Audio observation is valid: " + label, evidence)
+        return evidence
+
+    def require_music_output(self, evidence, label):
+        self.check(len(evidence["sourceIdentities"]) == 1 and evidence["sampleCount"] >= 6 and
+                   evidence["isolatedMusicRoute"] and
+                   evidence["allContextsRunning"] and evidence["contextAdvancedSeconds"] >= 1 and
+                   evidence["audibleSampleFraction"] >= .5 and evidence["medianRms"] > 1e-5,
+                   label + ": sustained non-silent PCM comes from the started looping stereo music buffer", evidence)
+
+    def audio_controls(self):
+        """Exercise visible title/settings controls, without touching Unity state."""
+        before = self.observe_audio("before-first-user-gesture", milliseconds=600)
+        self.check(not before["sourceIdentities"], "BGM has not started before the first real user gesture", before)
+        self.click_control("audioOpen", "Open music settings with the first real user gesture")
+        self.page.wait_for_timeout(1000)  # The shipped BGM fade lasts 0.45 seconds.
+        active = self.observe_audio("after-first-user-gesture")
+        self.require_music_output(active, "First actual pointer input")
+        self.snapshot("music-settings-playing")
+        self.click_control("audioMute", "Mute background music through the visible music button")
+        self.page.wait_for_timeout(500)
+        muted = self.observe_audio("muted")
+        self.check(muted["sourceIdentities"] == active["sourceIdentities"] and
+                   muted["isolatedMusicRoute"] and
+                   muted["allContextsRunning"] and muted["contextAdvancedSeconds"] >= 1 and
+                   muted["medianDestinationGain"] is not None and abs(muted["medianDestinationGain"]) < 1e-7 and
+                   muted["maximumRms"] < 1e-6,
+                   "Actual music mute silences its output route while the same loop and audio clock continue", muted)
+        self.snapshot("music-settings-muted")
+        self.click_control("audioMute", "Restore background music through the visible music button")
+        self.page.wait_for_timeout(500)
+        unmuted = self.observe_audio("unmuted")
+        self.require_music_output(unmuted, "Actual music unmute")
+        self.check(unmuted["sourceIdentities"] == active["sourceIdentities"],
+                   "Unmute preserves the music source rather than restarting the soundtrack", unmuted)
+        volume = self.layouts["audioValidation"]
+        for index in range(volume["decreaseClicks"]):
+            self.click_control("audioDown", f"Lower music/master volume through UI, step {index + 1}")
+        reduced = self.observe_audio("volume-reduced")
+        self.require_music_output(reduced, "Reduced volume")
+        initial_gain, reduced_gain = unmuted["medianDestinationGain"], reduced["medianDestinationGain"]
+        expected_ratio = volume["reducedVolume"] / volume["initialVolume"]
+        self.check(initial_gain is not None and initial_gain > 0 and reduced_gain is not None and
+                   abs(reduced_gain / initial_gain - expected_ratio) < .035,
+                   "Visible volume buttons change the real music output gain by the configured amount",
+                   {"initialGain": initial_gain, "reducedGain": reduced_gain, "expectedRatio": expected_ratio,
+                    "reducedPcm": reduced})
+        self.snapshot("music-settings-volume-reduced")
+        for index in range(volume["decreaseClicks"]):
+            self.click_control("audioUp", f"Restore original music/master volume through UI, step {index + 1}")
+        restored = self.observe_audio("volume-restored")
+        self.require_music_output(restored, "Restored volume")
+        self.check(restored["medianDestinationGain"] is not None and
+                   abs(restored["medianDestinationGain"] / initial_gain - 1) < .035,
+                   "Volume UI restores the original music output gain", restored)
+        self.click_control("audioClose", "Return from music settings to the title")
+        self.wait_title()
+
+    def audio_after_reload(self):
+        if not self.args.verify_audio:
+            return
+        self.page.wait_for_timeout(800)
+        restored = self.observe_audio("after-continue-user-gesture")
+        self.require_music_output(restored, "Real Continue input after full page reload")
 
     def persist(self):
         # Keep completed evidence even if the exec transport or browser disappears.
@@ -748,6 +904,7 @@ class Smoke:
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
         self.click_control("titleContinue", "이어하기")
+        self.audio_after_reload()
         self.wait_text("저장한 전투와 다음 코인 상태를 복원", region=self.region("status"), psm=7)
         self.check(True, "Reloaded page continued persisted battle through a real canvas click")
         terrain_text = self.wait_text("새벽의 정원", region=terrain_region, psm=7)
@@ -856,6 +1013,7 @@ class Smoke:
         self.report["storageBeforeReload"] = browser_storage(self.page)
         self.loaded(reload=True)
         self.click_control("titleContinue", "이어하기")
+        self.audio_after_reload()
         # Current save data retains displayed opening lines; Continue reopens that dialogue.
         self.dawn_opening("continued")
         continued_prompt = self.wait_text("미리암에게 말 걸기", region=prompt_region, psm=7)
@@ -886,6 +1044,8 @@ class Smoke:
             width, height = [int(value) for value in self.args.interaction_resolution.split("x")]
             self.resize(width, height)
             self.report["interactionViewport"] = {"width": width, "height": height}
+            if self.args.verify_audio:
+                self.audio_controls()
             print(f"{self.game}: real canvas input, save, reload, continue", flush=True)
             (self.fantasy if self.game == "FantasyCards" else self.dawn)()
             errors = [m["text"] for m in self.report["console"] if m["type"] == "error"]
@@ -938,6 +1098,9 @@ def main():
     parser.add_argument("--output", type=Path, default=ROOT / "Artifacts" / "Validation" / "WebSmoke")
     parser.add_argument("--base-url", help="Verify and play an existing site's games/<slug>/ URLs against the local final build; does not publish.")
     parser.add_argument("--game", choices=list(TITLES), action="append", help="Can be repeated; defaults to both.")
+    parser.add_argument("--revision", default="unspecified", help="Content revision label, independent of the exact runtime SHA-256 evidence.")
+    parser.add_argument("--verify-audio", action="store_true",
+                        help="Observe real WebAudio PCM and exercise actual music/volume UI before the gameplay flow.")
     parser.add_argument("--renderer", choices=["swiftshader", "x11-mesa"], default="swiftshader",
                         help="x11-mesa requires sourcing Tools/Environment/activate-display.sh and an active Xvfb display.")
     parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
@@ -967,6 +1130,13 @@ def main():
             parser.error(f"Final layout coordinates are not ready for {game}: {args.layouts}")
         try:
             validate_layout(game, layouts["games"][game])
+            if args.verify_audio:
+                definition = layouts["games"][game]
+                if not definition.get("audioValidation", {}).get("ready"):
+                    raise ValueError("Final audio UI coordinates are not ready")
+                for layout in definition["variants"].values():
+                    if not {"audioOpen", "audioMute", "audioDown", "audioUp", "audioClose"}.issubset(layout["points"]):
+                        raise ValueError("Audio UI points are incomplete")
         except (KeyError, TypeError, ValueError) as error:
             parser.error(str(error))
         if not (args.build_root / game / "Web" / "index.html").is_file():
@@ -998,6 +1168,7 @@ def main():
                                  ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"])
                 browser = playwright.chromium.launch(executable_path=args.chromium,
                     headless=args.renderer != "x11-mesa",
+                    ignore_default_args=["--mute-audio"] if args.verify_audio else None,
                     args=["--no-sandbox", "--disable-dev-shm-usage", *renderer_args])
                 try:
                     out = args.output / game
@@ -1025,6 +1196,7 @@ def main():
             server.shutdown()
             server.server_close()
     result = {"createdUtc": datetime.now(timezone.utc).isoformat(),
+              "revision": args.revision, "audioVerificationRequested": args.verify_audio,
               "profile": args.profile, "interactionResolution": args.interaction_resolution, "baseUrl": args.base_url,
               "status": "passed" if all(r["status"] == "passed" for r in reports) else "failed",
               "limits": ["Software WebGL results do not establish target-device performance.",

@@ -80,6 +80,19 @@ namespace PathOfDawn.SmokeTests
             Assert.That(app.TravelerPrefab, Is.Not.Null);
             Assert.That(app.MiriamPrefab, Is.Not.Null);
             yield return SmokeUi.WaitForVisibleKorean("새벽의 길");
+            var music = app.GetComponent<BgmPlayer>();
+            Assert.That(music, Is.Not.Null, "The actual app must own its background music player.");
+            var soundtrack = Resources.Load<AudioClip>("Audio/dawn-on-galilee");
+            Assert.That(soundtrack, Is.Not.Null, "The shipped soundtrack must import as an AudioClip.");
+            Assert.That(music.Clip, Is.SameAs(soundtrack));
+            yield return SmokeUi.WaitUntil(() => soundtrack.loadState == AudioDataLoadState.Loaded,
+                10, "The actual Galilee soundtrack did not load.");
+            Assert.That(soundtrack.length, Is.InRange(90f, 120f));
+            Assert.That(soundtrack.channels, Is.EqualTo(2));
+            var musicSources = UnityEngine.Object.FindObjectsByType<AudioSource>(FindObjectsSortMode.None)
+                .Where(source => source.gameObject.activeInHierarchy && source.clip == soundtrack).ToArray();
+            Assert.That(musicSources.Length, Is.EqualTo(1), "The soundtrack must not be doubled by duplicate sources.");
+            Assert.That(musicSources[0].loop, Is.True);
             SmokeUi.AssertNoMissingScripts();
             yield return SmokeUi.Capture("PathOfDawn", "01-title");
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False);
@@ -89,6 +102,8 @@ namespace PathOfDawn.SmokeTests
             Assert.That(PlayerPrefs.GetFloat("POD.textScale"), Is.EqualTo(1.1f).Within(.001f));
             SmokeUi.Click("줄이기"); yield return null;
             Assert.That(PlayerPrefs.GetFloat("POD.volume"), Is.EqualTo(.55f).Within(.001f));
+            yield return SmokeUi.Capture("PathOfDawn", "09-settings-music-1920x1080", 1920, 1080, AssertMusicSettingsLayout);
+            yield return SmokeUi.Capture("PathOfDawn", "10-settings-music-693x390", 693, 390, AssertMusicSettingsLayout);
             SmokeUi.Click("타이틀로"); yield return null;
             SmokeUi.Click("새 게임");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("다음 대사 [E]") != null,
@@ -185,6 +200,42 @@ namespace PathOfDawn.SmokeTests
             Assert.That(continued.world.shelterPrepared && !continued.world.basketShared, Is.True);
             SmokeUi.AssertNoMissingScripts();
             LogAssert.NoUnexpectedReceived();
+        }
+
+        static void AssertMusicSettingsLayout()
+        {
+            var texts = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                .Where(text => text.gameObject.activeInHierarchy).ToArray();
+            var track = texts.Single(text => text.text == "배경 음악 · 갈릴리의 새벽");
+            var toggle = texts.Single(text => text.text == "배경 음악 켜기" || text.text == "배경 음악 끄기");
+            var storage = texts.Single(text => text.text == "저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.");
+            var panel = track.rectTransform.parent;
+            Rect GlyphBounds(TMP_Text text)
+            {
+                text.ForceMeshUpdate();
+                SmokeUi.AssertVisibleKorean(text.text);
+                Assert.That(text.isTextOverflowing, Is.False, "Settings text overflow: " + text.text);
+                Assert.That(text.textInfo.characterCount, Is.EqualTo(text.text.Length), "Settings text was truncated: " + text.text);
+                var min = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+                var max = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+                foreach (var character in text.textInfo.characterInfo.Take(text.textInfo.characterCount))
+                {
+                    if (char.IsWhiteSpace(character.character)) continue;
+                    Assert.That(character.isVisible, Is.True, "Hidden settings glyph: " + character.character);
+                    foreach (var corner in new[] { character.bottomLeft, character.topLeft, character.topRight, character.bottomRight })
+                    {
+                        Vector2 position = panel.InverseTransformPoint(text.rectTransform.TransformPoint(corner));
+                        min = Vector2.Min(min, position); max = Vector2.Max(max, position);
+                    }
+                }
+                return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+            }
+            var trackBounds = GlyphBounds(track);
+            var toggleBounds = GlyphBounds(toggle);
+            var storageBounds = GlyphBounds(storage);
+            Assert.That(trackBounds.Overlaps(toggleBounds), Is.False, "Track name overlaps the music button.");
+            Assert.That(trackBounds.Overlaps(storageBounds) || toggleBounds.Overlaps(storageBounds), Is.False,
+                "Music controls overlap the save-transfer heading.");
         }
 
         static IEnumerator CaptureSmallTouchLayout()

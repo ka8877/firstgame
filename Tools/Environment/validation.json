@@ -1,7 +1,4 @@
 {
-  "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T09:02:49.028880+00:00",
-  "baselineRecord": "Tools/Environment/validation-2026-10-20.json",
   "editorVersion": "6000.3.26f1",
   "editorRevision": "de8167e7440c",
   "editorModules": {
@@ -33,130 +30,6 @@
     "runtimeBlocker": null,
     "diagnosticErrors": []
   },
-  "nativeTests": {
-    "FantasyCards": {
-      "result": "Passed",
-      "total": "19",
-      "passed": "19",
-      "failed": "0",
-      "skipped": "0",
-      "start-time": "2026-10-23 07:39:12Z",
-      "end-time": "2026-10-23 07:39:18Z"
-    },
-    "PathOfDawn": {
-      "result": "Passed",
-      "total": "10",
-      "passed": "10",
-      "failed": "0",
-      "skipped": "0",
-      "start-time": "2026-10-23 06:37:06Z",
-      "end-time": "2026-10-23 06:37:07Z"
-    }
-  },
-  "externalCore": {
-    "passed": 53,
-    "failed": 0,
-    "skipped": 0,
-    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
-  },
-  "builds": {
-    "FantasyCards/Windows": {
-      "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "StandaloneWindows64",
-        "Result": "Succeeded",
-        "Bytes": "125887474",
-        "Duration": "00:00:11.5529760",
-        "Errors": "0",
-        "Warnings": "1"
-      }
-    },
-    "FantasyCards/Web": {
-      "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "WebGL",
-        "Result": "Succeeded",
-        "Bytes": "7134",
-        "Duration": "00:03:12.5297600",
-        "Errors": "0",
-        "Warnings": "4"
-      },
-      "actualPlayerBytes": 40962139,
-      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
-    },
-    "PathOfDawn/Windows": {
-      "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "StandaloneWindows64",
-        "Result": "Succeeded",
-        "Bytes": "147063467",
-        "Duration": "00:00:11.7089400",
-        "Errors": "0",
-        "Warnings": "1"
-      }
-    },
-    "PathOfDawn/Web": {
-      "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "WebGL",
-        "Result": "Succeeded",
-        "Bytes": "7124",
-        "Duration": "00:03:27.9825840",
-        "Errors": "0",
-        "Warnings": "4"
-      },
-      "actualPlayerBytes": 37647180,
-      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
-    }
-  },
-  "web": {
-    "Desktop720/FantasyCards": {
-      "status": "passed",
-      "checks": 24,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
-    },
-    "Desktop1080/FantasyCards": {
-      "status": "passed",
-      "checks": 26,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json"
-    },
-    "Mobile844/FantasyCards": {
-      "status": "passed",
-      "checks": 27,
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json"
-    },
-    "Desktop720/PathOfDawn": {
-      "status": "passed",
-      "checks": 30,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
-    },
-    "Desktop1080/PathOfDawn": {
-      "status": "passed",
-      "checks": 30,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json"
-    },
-    "Mobile844/PathOfDawn": {
-      "status": "passed",
-      "checks": 35,
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
-    }
-  },
-  "publicWeb": {
-    "FantasyCards": {
-      "status": "passed",
-      "checks": 33,
-      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json"
-    },
-    "PathOfDawn": {
-      "status": "passed",
-      "checks": 41,
-      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json"
-    }
-  },
   "cloudStartConfiguration": {
     "status": "draft saved and reread confirmed identical",
     "revision": 10,
@@ -169,12 +42,140 @@
     "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
+  "date": "2026-10-23",
+  "recordedUtc": "2026-10-23T10:49:27.382929+00:00",
+  "revision": "subculture-bgm-2026-10-23",
+  "baselineRecord": "Tools/Environment/validation-2026-10-23-art-edition.json",
+  "nativeTests": {
+    "FantasyCards": {
+      "result": "Passed",
+      "total": "19",
+      "passed": "19",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 09:48:28Z",
+      "end-time": "2026-10-23 09:48:35Z"
+    },
+    "PathOfDawn": {
+      "result": "Passed",
+      "total": "10",
+      "passed": "10",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 10:31:21Z",
+      "end-time": "2026-10-23 10:31:22Z"
+    }
+  },
+  "builds": {
+    "FantasyCards/Windows": {
+      "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "131588914",
+        "Duration": "00:00:24.0788180",
+        "Errors": "0",
+        "Warnings": "1"
+      }
+    },
+    "FantasyCards/Web": {
+      "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7343",
+        "Duration": "00:03:43.0260240",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 46954646,
+      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
+    },
+    "PathOfDawn/Windows": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "160613611",
+        "Duration": "00:00:10.2695250",
+        "Errors": "0",
+        "Warnings": "1"
+      }
+    },
+    "PathOfDawn/Web": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7333",
+        "Duration": "00:03:13.0637440",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 45593857,
+      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
+    }
+  },
+  "web": {
+    "Desktop720/FantasyCards": {
+      "status": "passed",
+      "checks": 41,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json",
+      "audioWindows": 7
+    },
+    "Desktop1080/FantasyCards": {
+      "status": "passed",
+      "checks": 44,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json",
+      "audioWindows": 7
+    },
+    "Mobile844/FantasyCards": {
+      "status": "passed",
+      "checks": 44,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json",
+      "audioWindows": 7
+    },
+    "Desktop720/PathOfDawn": {
+      "status": "passed",
+      "checks": 47,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json",
+      "audioWindows": 7
+    },
+    "Desktop1080/PathOfDawn": {
+      "status": "passed",
+      "checks": 47,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json",
+      "audioWindows": 7
+    },
+    "Mobile844/PathOfDawn": {
+      "status": "passed",
+      "checks": 52,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json",
+      "audioWindows": 7
+    }
+  },
+  "publicWeb": {},
+  "externalCore": {
+    "passed": 53,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
+  },
   "assetAudit": {
     "status": "passed",
     "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
     "metaCounts": {
-      "FantasyCards": 146,
-      "PathOfDawn": 254
+      "FantasyCards": 152,
+      "PathOfDawn": 273
     }
+  },
+  "music": {
+    "status": "passed",
+    "fileEvidence": "Tools/Audio/verification.json",
+    "browserEvidence": "Seven real UI/PCM observation windows in each current browser report; no physical speaker listening claim."
   }
 }

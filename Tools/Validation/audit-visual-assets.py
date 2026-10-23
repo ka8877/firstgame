@@ -129,7 +129,7 @@ def main():
     projects = [audit_project(game, args.editor_data) for game in ("FantasyCards", "PathOfDawn")]
     manifest = audit_manifest(ROOT / "Tools/Art/AssetManifest.json")
     shared = {}
-    for filename in ("PersistentSaves.cs", "SafeSaveService.cs"):
+    for filename in ("PersistentSaves.cs", "SafeSaveService.cs", "BgmPlayer.cs"):
         left = ROOT / "Games/FantasyCards/Assets/Shared" / filename
         right = ROOT / "Games/PathOfDawn/Assets/Shared" / filename
         shared[filename] = {"identical": left.read_bytes() == right.read_bytes(), "sha256": digest(left)}

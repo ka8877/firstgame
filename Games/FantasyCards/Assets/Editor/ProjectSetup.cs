@@ -210,6 +210,7 @@ namespace FirstGame.Editor
             var pages = new[] { "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics" }
                 .Select(name => ImportIllustration("Assets/Resources/Art/" + name + ".png")).ToArray();
             ImportIllustration("Assets/Resources/Art/title-hero.png");
+            ImportIllustration("Assets/Resources/Art/battle-background.png");
             foreach (var definition in FantasyCards.Core.CardCatalog.All)
             {
                 string path = "Assets/Resources/Data/Cards/" + definition.id + ".asset";

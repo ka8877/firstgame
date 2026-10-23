@@ -1,14 +1,20 @@
 {
+  "status": "passed",
   "generatedDateUtc": "2026-10-23",
-  "assetCount": 9,
+  "styleRevision": "anime-subculture-2",
+  "assetCount": 10,
   "fileChecks": [
     "PNG decoded",
-    "actual dimensions/mode recorded",
-    "SHA-256 recorded",
-    "copied byte-for-byte from imagegen original",
-    "three portraits contain actual transparency"
+    "actual dimensions and mode recorded",
+    "original and destination SHA-256 match",
+    "copied byte-for-byte with no image editing/resampling",
+    "three portraits have actual transparency",
+    "four 2x2 atlases retain 627x627 cells and existing mapping",
+    "nine existing TextureImporter GUIDs preserved",
+    "new background TextureImporter uses 2D, clamp, no mipmaps and no NPOT scaling"
   ],
-  "visualInspection": "All nine original imagegen outputs viewed. Card quadrant themes, character faces/hands, equipment silhouettes, title composition and portrait cutout reviewed. Runtime UI review belongs to each game validation.",
+  "visualInspection": "All ten original imagegen outputs viewed. Distinct anime eyes and simplified facial forms, four card quadrants and subjects, character hands/equipment, coherent new title identities, complete portrait cutouts, calm arena center and title menu space reviewed. This is asset review, not user approval or Unity runtime validation.",
+  "previousRevision": "Tools/Art/Illustration/history/2026-10-23-painterly-generation-manifest.json",
   "assets": [
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-02-heroes.png",
@@ -17,7 +23,19 @@
         1254
       ],
       "mode": "RGB",
-      "sha256": "77530e2e9f16ff7d0af842395f916696d553daf5ed3505b8e1b9fac087ffb275"
+      "bytes": 3675264,
+      "sha256": "dfd80219052f540c74a43e99a71b99876136f1b944f8299a1c39cb82c79d9297",
+      "guid": "02b59f94e26f0b964b9b9a429fb8fb17",
+      "existingGuidPreserved": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
     },
     {
       "file": "Games/PathOfDawn/Assets/Resources/Art/title-hero.png",
@@ -26,7 +44,10 @@
         941
       ],
       "mode": "RGB",
-      "sha256": "b13c9f9b9db8712fe70ff261703797ab92224f1a4690b7a8cfbf11b1459a4e20"
+      "bytes": 2961214,
+      "sha256": "ae3211daf556aa3e89e862955001fd5b636ea753519f7c796ab8b60bc0db1332",
+      "guid": "6c02b816735ac6e57a4028f9ad2143cc",
+      "existingGuidPreserved": true
     },
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-01-terrain.png",
@@ -35,16 +56,31 @@
         1254
       ],
       "mode": "RGB",
-      "sha256": "9567ed13c91621d318729f3b186b04c63d1e4371bfeca9a1c136505124a899dc"
+      "bytes": 3508191,
+      "sha256": "876869076751058a68e894e5b58202ee7f5e723f46f14cab60c43d06f33861ef",
+      "guid": "14171b7ecfd26011ab6c1634dad1ea52",
+      "existingGuidPreserved": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
     },
     {
-      "file": "Games/FantasyCards/Assets/Resources/Art/cards-03-magic.png",
+      "file": "Games/FantasyCards/Assets/Resources/Art/battle-background.png",
       "size": [
-        1254,
-        1254
+        1672,
+        941
       ],
       "mode": "RGB",
-      "sha256": "c0722672c31d1f27bba04115ae4d85123c315d2d9464a60439a9bfd18bf3e032"
+      "bytes": 2831042,
+      "sha256": "3583aa7588db9a046609abb467a8e148b62fa4b946e5d998b81513bee853e93c",
+      "guid": "aabc280db5eb4bf1b8f6aecfc02efc97",
+      "existingGuidPreserved": false
     },
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-04-relics.png",
@@ -53,34 +89,19 @@
         1254
       ],
       "mode": "RGB",
-      "sha256": "155bea5f288d442950450d3d9f10c00a415ceb7d6fee00de5d42e6aaa637f45a"
-    },
-    {
-      "file": "Games/FantasyCards/Assets/Resources/Art/title-hero.png",
-      "size": [
-        1672,
-        940
-      ],
-      "mode": "RGB",
-      "sha256": "29e52b9cf731759ef429c23487fc81960dc632ca476de01a9ea6952cbbab903b"
-    },
-    {
-      "file": "Games/PathOfDawn/Assets/Resources/Art/portrait-jesus.png",
-      "size": [
-        1122,
-        1402
-      ],
-      "mode": "RGBA",
-      "sha256": "54ecd1b00d53a370682c2e4ea9f3e44e06433e757c78e20c7912c6b64dd07d4d"
-    },
-    {
-      "file": "Games/PathOfDawn/Assets/Resources/Art/portrait-miriam.png",
-      "size": [
-        1122,
-        1402
-      ],
-      "mode": "RGBA",
-      "sha256": "55b4b845e92b6858a4978c98df614beec30489c8197cfa2ae2db102b03b1455e"
+      "bytes": 3564532,
+      "sha256": "408aab16493e907633821938855f7d42f36bb0e3aa296a9e87800ef641fc9204",
+      "guid": "9941f6dedf7512a65ae119febc7c4ca8",
+      "existingGuidPreserved": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
     },
     {
       "file": "Games/PathOfDawn/Assets/Resources/Art/portrait-traveler.png",
@@ -89,7 +110,88 @@
         1402
       ],
       "mode": "RGBA",
-      "sha256": "33e6afbee59f52ce26fb39b1bd10f672bd865a1d1980bfbbbbbe438fc59e21c8"
+      "bytes": 2172428,
+      "sha256": "a3060066eacb6de44eaacc4c5fc211f88b5c13f0afadf6a0ef6cea3922416b96",
+      "guid": "07f24778199d4199895450bede882a74",
+      "existingGuidPreserved": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 550437,
+        "partiallyTransparentPixels": 1022413,
+        "opaquePixels": 194
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/title-hero.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "bytes": 3438417,
+      "sha256": "5a318d92ef86108c9b37a9746d46de048644160e0cf18b6b5b4d318f2cb3e70e",
+      "guid": "6d1ca9f1763e46f789eb7681048d134b",
+      "existingGuidPreserved": true
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-03-magic.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3940358,
+      "sha256": "bf219be30ee09b7804154167c867dede7aba6d828ac0f07d1956bcde0e1e5f84",
+      "guid": "5befc12fe5763fc1da91ef57864b398f",
+      "existingGuidPreserved": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/portrait-jesus.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 1767080,
+      "sha256": "ba7b76ecfa1bc7321ec6b7758d46c005f6f6d9f54d5a962ca01c935598751996",
+      "guid": "f88ef2b6ea7fc274887b6a69e2fc4bbf",
+      "existingGuidPreserved": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 639644,
+        "partiallyTransparentPixels": 933117,
+        "opaquePixels": 283
+      }
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/portrait-miriam.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 1933185,
+      "sha256": "dc2b7b1e12ac485bbc18a40d9365a8418d393fe1a21f3059201b851017be4f71",
+      "guid": "74b2bcfe7902a7fc784d3cc6e0ba3513",
+      "existingGuidPreserved": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 736656,
+        "partiallyTransparentPixels": 836196,
+        "opaquePixels": 192
+      }
     }
   ]
 }

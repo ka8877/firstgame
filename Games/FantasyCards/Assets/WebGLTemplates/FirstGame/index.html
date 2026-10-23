@@ -10,9 +10,9 @@
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: #080d14; }
     body { display: grid; place-items: center; }
-    #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: #0b121e; }
+    #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: radial-gradient(ellipse at 50% 20%, #353859, #11182b 70%); }
     #unity-canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; -webkit-user-select: none; user-select: none; }
-    #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: #0b121e; }
+    #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: radial-gradient(ellipse at 50% 20%, #353859, #11182b 70%); }
     #unity-loading-bar h1 { margin: 0; color: #e7cb88; font-weight: 500; font-size: clamp(20px, 3vw, 40px); }
     #unity-loading-bar p { margin: 0; color: #c9d7df; }
     progress { width: min(340px, 70vw); height: 8px; accent-color: #d6b86f; margin: auto; }
@@ -23,7 +23,7 @@
     #orientation-guide { display: none; position: fixed; inset: 0; z-index: 10; padding: max(28px, env(safe-area-inset-top)) 28px; background: #0b121ef2; color: #f4eedf; text-align: center; align-content: center; justify-items: center; gap: 20px; }
     #orientation-guide h2 { margin: 0; font-size: 28px; font-weight: 500; }
     #orientation-guide p { max-width: 30ch; line-height: 1.8; color: #b9c6ca; margin: 0; }
-    #orientation-guide button { min-height: 48px; border: 1px solid #bba36e; border-radius: 4px; background: #e5d2a5; color: #142027; padding: 12px 24px; font: inherit; cursor: pointer; }
+    #orientation-guide button { min-height: 48px; border: 1px solid #bba36e; border-radius: 24px; background: #e5d2a5; color: #142027; padding: 12px 24px; font: inherit; cursor: pointer; }
     #orientation-guide .secondary { background: transparent; color: #e5d2a5; border-color: #58606a; }
     @media (pointer: coarse) and (orientation: portrait) { #orientation-guide:not([hidden]) { display: grid; } }
     @supports (height: 100dvh) { #unity-container { width: min(100vw, 177.777778dvh); height: min(100dvh, 56.25vw); } }
@@ -37,6 +37,7 @@
       <h1>{{{ PRODUCT_NAME }}}</h1>
       <p id="loading-label">이야기를 준비하고 있습니다…</p>
       <progress id="unity-progress" max="1" value="0" aria-label="게임 불러오기"></progress>
+      <p style="font-size:12px;opacity:.75">시작 화면을 누르면 배경음악이 함께합니다.</p>
     </div>
     <div id="unity-warning" role="alert" aria-live="assertive"></div>
   </main>

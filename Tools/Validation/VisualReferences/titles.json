@@ -82,6 +82,55 @@
         }
       ],
       "sourceScreenshot": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/title-1920x1080.png"
+    },
+    {
+      "game": "FantasyCards",
+      "revision": "subculture-bgm-2026-10-23",
+      "expectedVisibleText": "별빛의 서약",
+      "canvasSize": [
+        1920,
+        1080
+      ],
+      "region": [
+        0.046875,
+        0.19444444444444445,
+        0.31,
+        0.2986111111111111
+      ],
+      "image": "FantasyCards-title-1920-subculture.png",
+      "decodedPixelSha256": "b4eede1ac1510e725fa0f53bc30e558ce14f0ec83242f1e109c898a5edb9114a",
+      "runtimeFiles": [
+        {
+          "file": "Build/0b2969a7b5d2b4e8bebd269d7ef89955.framework.js.unityweb",
+          "bytes": 89587,
+          "sha256": "206c59430e80739666b78a53fe875c31c07c47a230103cf41239b6d8c5ea1fa3"
+        },
+        {
+          "file": "Build/22bd65fe10c8ce07e7260d5c791ceead.loader.js",
+          "bytes": 47867,
+          "sha256": "e52a761b526fb7631fd397e0692738990eb087b6c12e695e23eef54a094d92e1"
+        },
+        {
+          "file": "Build/a4c1cd3813bd1d88e377c56361cc9b24.wasm.unityweb",
+          "bytes": 13036827,
+          "sha256": "190ba613836e6c1e0f050fb8b110b460fb5ee1ec6c301b66a3b9aa243143c163"
+        },
+        {
+          "file": "Build/cb69cec13d5e47f2781f0094527f65d3.data.unityweb",
+          "bytes": 33773022,
+          "sha256": "9a7ffe8c21ea1787b241bc28c9981bca590da65cedb71dad9ef96e463f697327"
+        },
+        {
+          "file": "index.html",
+          "bytes": 7343,
+          "sha256": "182b63f22a654611b607537fbc4d9c91411da91627f0be92cb8e8209ab40b0f3"
+        }
+      ],
+      "reviewedUtc": "2026-10-23T10:10:34.405896+00:00",
+      "review": "Root and validation agents independently opened the actual new Web 1920x1080 screenshot and confirmed every title glyph, including the complete final 약. This subculture-art reference is bound only to these newly tested runtime files. The prior artwork reference and its original PNG remain unchanged.",
+      "sourceScreenshot": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/title-1920x1080.png",
+      "sourceScreenshotSha256": "af8f4811de7da8929bd4008c24908cac8777bbfac2b3c71b05ad478037a021f8",
+      "note": "Exact raw decoded RGB equality; not an OCR pass and not a visual approval of unrelated frames."
     }
   ]
 }

@@ -8,9 +8,9 @@ Shader "PathOfDawn/Cel Lit"
         _InkColor("Silhouette ink", Color) = (.12,.17,.25,1)
         _ShadeThreshold("Shadow band", Range(0,1)) = .28
         _LightThreshold("Light band", Range(0,1)) = .68
-        _BandSoftness("Band antialiasing", Range(.001,.1)) = .018
+        _BandSoftness("Band antialiasing", Range(.001,.25)) = .10
         _RimStrength("Rim strength", Range(0,.5)) = .16
-        _InkStrength("Silhouette ink strength", Range(0,1)) = .4
+        _InkStrength("Silhouette ink strength", Range(0,1)) = .16
     }
     SubShader
     {
@@ -79,17 +79,17 @@ Shader "PathOfDawn/Cel Lit"
                 half3 normal = normalize(input.normalWS);
                 half3 view = GetWorldSpaceNormalizeViewDir(input.positionWS);
                 Light sun = GetMainLight(TransformWorldToShadowCoord(input.positionWS));
-                half light = saturate(dot(normal, sun.direction)) * sun.shadowAttenuation;
-                // Three deliberate value bands, with only a narrow edge for stable antialiasing.
+                half light = saturate(dot(normal, sun.direction)*.5+.5) * lerp(.62,1,sun.shadowAttenuation);
+                // Soft cel transitions retain drawn value grouping across continuous curved surfaces.
                 half middle = smoothstep(_ShadeThreshold-_BandSoftness, _ShadeThreshold+_BandSoftness, light);
                 half bright = smoothstep(_LightThreshold-_BandSoftness, _LightThreshold+_BandSoftness, light);
-                half3 tone = lerp(_ShadeColor.rgb, half3(.83,.85,.9), middle);
-                tone = lerp(tone, half3(1.08,1.04,.96), bright);
+                half3 tone = lerp(_ShadeColor.rgb, half3(.91,.93,.98), middle);
+                tone = lerp(tone, half3(1.10,1.07,1.0), bright);
                 half3 color = _BaseColor.rgb * tone * lerp(half3(1,1,1), sun.color, .14);
                 half edge = 1-saturate(dot(normal,view));
-                half rim = smoothstep(.73,.78,edge) * middle * _RimStrength;
+                half rim = smoothstep(.62,.9,edge) * middle * _RimStrength;
                 color += _RimColor.rgb * rim;
-                color = lerp(color, _InkColor.rgb, smoothstep(.95,.99,edge) * _InkStrength);
+                color = lerp(color, _InkColor.rgb, smoothstep(.985,.999,edge) * _InkStrength);
                 return half4(MixFog(color,input.fog),1);
             }
             ENDHLSL

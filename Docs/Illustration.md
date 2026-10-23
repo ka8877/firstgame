@@ -1,30 +1,33 @@
-# 두 게임의 생성 일러스트
+# 두 게임의 애니메이션풍 원화
 
-2026-10-23 비주얼 개선 작업에서 OpenAI `image_gen.imagegen`으로 새 원화 PNG 9개를 제작했다. 실제 게임 리소스에 저장한 파일이며, 외부 이미지 검색이나 외부 작가의 작품·기존 게임 캐릭터를 참조하지 않았다. 첫 두 이미지를 텍스트로 생성한 뒤, 같은 작업에서 생성한 원화를 스타일·인물 참조로 사용해 나머지를 제작했다. 모든 인물은 성인으로 지정했다. 예수님은 갈릴리 배경을 위한 창작 시각 해석이며 역사적 외형을 확정하는 자료가 아니다.
+## 현재 방향 — 2026-10-23 두 번째 아트 개정
 
-생성 결과 원본을 바이트 단위로 그대로 복사했다. 수동 합성·확대·필터링·재색칠을 하지 않았으며, 카드 분할과 화면 비율 조정은 Unity의 Sprite rect / UI 표시 영역에서 처리한다. 원화 생성 도구는 개별 모델 버전과 시드를 제공하지 않았다. 같은 지시문을 재사용해도 동일 픽셀을 보장하지 않는다.
+사용자가 실제 체험판의 서양 반실사 얼굴과 각진 화면을 지적하고 현대 서브컬처·애니메이션풍을 요청했다. 이번 개정은 이전 원화를 색 보정한 것이 아니라 **새 PNG 원본 10개**를 `OpenAI image_gen.imagegen`으로 다시 제작해 교체했다. 큰 눈, 단순화된 코와 입, 매끈한 셀 채색, 부드러운 머리카락·의복, 화려한 판타지 장식으로 방향을 통일했다. 기존 게임의 실제 캐릭터·의상·이미지나 특정 작가의 작품은 참조하지 않았다.
 
-## 현재 사용 자산
+카드게임은 등나무 꽃·별빛 궁전·아이보리와 금색·청록과 은색이 어우러진 밝은 판타지다. 서사게임은 푸른 호수와 꽃, 부드러운 크림색 석조 공간을 배경으로 따뜻하고 서정적인 애니메이션 모험 분위기를 택했다. 인물은 모두 성인으로 지정했다. 예수님은 창작 시각 해석이며 역사적 외형을 확정하는 자료가 아니다.
+
+처음 카드 영웅 atlas와 서사 타이틀을 텍스트로 생성한 뒤 **그 새 원화만** 후속 이미지의 스타일·인물 참조로 사용했다. 이전 반실사 이미지를 새 이미지의 참조로 섞지 않았다. 생성 도구는 정확한 모델 버전·seed를 제공하지 않으므로 같은 지시문으로 동일 픽셀을 재현할 수 있다고 주장하지 않는다.
+
+## 실제 자산과 연결
 
 | 게임 | Resources 경로 | 실제 PNG | 용도 |
-| --- | --- | --- | --- |
-| FantasyCards | `Art/cards-01-terrain` | 1254×1254 RGB | 카드 0–3: 지형 4종 |
-| FantasyCards | `Art/cards-02-heroes` | 1254×1254 RGB | 카드 4–7: 성인 영웅 4종 |
-| FantasyCards | `Art/cards-03-magic` | 1254×1254 RGB | 카드 8–11: 기록자·해룡·치유·물결 화살 |
-| FantasyCards | `Art/cards-04-relics` | 1254×1254 RGB | 카드 12–15: 서약·검·갑옷·목걸이 |
-| FantasyCards | `Art/title-hero` | 1672×940 RGB | 타이틀 / 웹 소개 대표 원화 |
-| PathOfDawn | `Art/title-hero` | 1672×941 RGB | 타이틀 / 웹 소개 대표 원화 |
-| PathOfDawn | `Art/portrait-jesus` | 1122×1402 RGBA | 예수님 대화 초상화 |
-| PathOfDawn | `Art/portrait-miriam` | 1122×1402 RGBA | 미리암 대화 초상화 |
-| PathOfDawn | `Art/portrait-traveler` | 1122×1402 RGBA | 여행자 대화 초상화 |
+|---|---|---|---|
+| FantasyCards | `Art/cards-01-terrain` | 1254×1254 RGB | 지형 4종 |
+| FantasyCards | `Art/cards-02-heroes` | 1254×1254 RGB | 성인 영웅 4종 |
+| FantasyCards | `Art/cards-03-magic` | 1254×1254 RGB | 기록자·해룡·치유·물결 화살 |
+| FantasyCards | `Art/cards-04-relics` | 1254×1254 RGB | 서약·검·갑옷·목걸이 |
+| FantasyCards | `Art/title-hero` | 1672×941 RGB | 타이틀과 웹 소개 원화 |
+| FantasyCards | `Art/battle-background` | 1672×941 RGB | 꽃과 구름 궁전의 전장 배경 |
+| PathOfDawn | `Art/title-hero` | 1672×941 RGB | 타이틀과 웹 소개 원화 |
+| PathOfDawn | `Art/portrait-jesus` | 1122×1402 RGBA | 예수님 대화 초상 |
+| PathOfDawn | `Art/portrait-miriam` | 1122×1402 RGBA | 미리암 대화 초상 |
+| PathOfDawn | `Art/portrait-traveler` | 1122×1402 RGBA | 여행자 대화 초상 |
 
-두 타이틀은 16:9에 가까운 원본 비율이며, 이미지 왼쪽 약 36–38%에 메뉴를 놓고 주인공은 중앙~오른쪽에 배치하도록 구성했다. POD 초상화는 4:5에 가까운 비율이며 실제 알파 범위는 0–255다. 투명 영역과 머리카락의 부드러운 경계가 포함된다. 인물 본체의 알파는 대부분 252–253 수준이며 임의로 불투명화하지 않았다.
+생성 원본을 **바이트 그대로 복사**했다. 별도 확대·재색칠·합성·필터 처리는 하지 않았다. 타이틀의 왼쪽 약 36–38%는 메뉴 공간이며, 전장 배경은 중앙을 차분한 청록으로 두고 장식을 가장자리에 모았다. 실제 게임의 카드 프레임·글자·수치는 UI에서 별도로 렌더링하므로 생성 그림에 넣지 않았다.
 
-카드 아틀라스는 2×2 네 장, 각 1254×1254이며 **개별 카드 실제 해상도는 627×627**이다. 2048 이상을 요청했지만 도구가 반환한 네이티브 크기는 1254였고, 노출된 도구 API에는 크기 지정 필드가 없었다. 따라서 1024px 카드라고 표시하지 않는다. 기존 4×4 단일 아틀라스의 약 313px 카드보다 각 축 두 배, 카드당 픽셀 수 네 배다.
+기존 9개 PNG의 `.meta` GUID를 유지했고 새 전장 배경에만 새 GUID를 부여했다. 2D·clamp·NPOT 크기 보존·mipmap 없음 설정을 확인했다. 세 초상은 도구의 `transparent_background:true`로 생성했으며 실제 알파 채널과 완전 투명 영역이 있다. 원본 알파를 임의로 불투명하게 바꾸지 않았다.
 
-## 카드 연결
-
-각 아틀라스에서 화면 기준 왼쪽 위 → 오른쪽 위 → 왼쪽 아래 → 오른쪽 아래 순서다. 2×2의 Unity 정규화 UV는 `Rect((cell % 2) * .5f, (1 - cell / 2) * .5f, .5f, .5f)`이며, Sprite 픽셀 rect는 각 축 627 단위다. 소스 이미지를 잘라 별도 PNG를 만들지 않는다.
+네 카드 atlas는 정확한 2×2 구성으로 **각 셀의 원본 해상도는 627×627**이다. 생성 도구의 노출 API에는 크기 필드가 없고 실제 출력은 1254×1254였으므로 1024px 카드라고 표시하지 않는다. 기존 콘텐츠 ID와 셀 순서는 유지한다. Unity의 정규화 UV는 `Rect((cell % 2) * .5f, (1 - cell / 2) * .5f, .5f, .5f)`이며 소스 PNG를 별도 셀 이미지로 잘라 저장하지 않는다.
 
 | 전역 인덱스 | 카드 ID | 이름 | 파일 / 셀 |
 | --- | --- | --- | --- |
@@ -45,26 +48,25 @@
 | 14 | `tide_mail` | 물결 갑옷 | `cards-04-relics` / 2 |
 | 15 | `tide_charm` | 달의 표식 | `cards-04-relics` / 3 |
 
-새벽 진영에는 상아·황금·붉은 망토·따뜻한 빛, 물결 진영에는 남색·청록·은색·달빛을 적용했다. 정찰자·수호자·요정의 타이틀 외형은 카드 원화를 참조해 유지했다. POD 예수님은 아이보리와 테라코타, 미리암은 청록과 크림색 스카프, 여행자는 남색과 모래색 망토로 구분했다.
+## 검수와 출처 기록
 
-## 검수와 재사용
+새 원본 10개를 모두 직접 열어 애니메이션 얼굴 표현, 카드별 주제와 구획, 손·의상·장비, 인물 간 디자인 일관성, 제목의 여백, 초상 투명 배경과 잘림, 전장 중앙의 조용한 구도를 확인했다. PNG 디코딩, 크기·모드, 원본과 복사본의 바이트 일치, SHA-256, 기존 GUID 유지, 2×2 atlas와 실제 알파를 검사했다. 실제 Unity UI·3D와의 조화, 작은 화면 가독성과 플레이어 빌드는 별도 런타임 검수다. 자산 자체의 검수를 사용자 최종 스타일 승인으로 표현하지 않는다.
 
-생성된 9개 이미지를 모두 직접 열어 카드 주제/구획, 얼굴과 손의 형태, 주요 피사체의 잘림, 의상, 제목 UI를 위한 구도, 투명 인물 배경을 확인했다. 파일 디코딩, 실제 크기, RGB/RGBA, 알파 범위, 원본과 복사본의 바이트 동일성, SHA-256도 확인했다. 각 게임의 실제 UI 연결·빌드·화면 검증은 게임별 검증 보고서에서 별도로 확인한다. 이 문서는 이미지 생성·전달 사실과 자산 자체의 검수를 기록하며 사용자 최종 스타일 승인을 받았다는 뜻은 아니다.
+정확한 생성 지시문·참조·원본 경로·해시는 [generation-manifest.json](../Tools/Art/Illustration/generation-manifest.json), 파일 검사 결과는 [verification.json](../Tools/Art/Illustration/verification.json)에 있다. `/workspace/generated_images`의 원본은 출처 추적용이며 런타임에는 `Assets/Resources/Art` 파일만 필요하다. 게임 실행 중 생성 API나 외부 이미지 요청을 하지 않는다.
 
-전체 실제 지시문, 생성 참조, 원본 로컬 경로, 크기, 알파 통계와 해시는 [`generation-manifest.json`](../Tools/Art/Illustration/generation-manifest.json)에 있다. `/workspace/generated_images`의 원본 경로는 생성 출처 추적용이며 배포 런타임에 필요하지 않다. 실행에는 `Assets/Resources/Art` 내부 PNG만 사용한다. 생성 API나 네트워크 접근은 게임 실행에 필요하지 않다.
+이전 반실사 개정의 원본은 Git 커밋 `15324ad`까지의 이력에 보존되며 설명·생성 manifest·검사 결과는 [history](../Tools/Art/Illustration/history)에 따로 보관했다. 구형 PNG를 Resources에 중복 보관하지 않는다. 첫 4×4 atlas의 이전 생성 기록은 [legacy-generation-2026-10-20.md](../Tools/Art/Illustration/legacy-generation-2026-10-20.md)에 남아 있다.
 
-첫 프로토타입의 `card-atlas.png` 4×4 이미지는 기존 자산으로 남아 있다. 그 생성 지시문과 출처 기록은 [`legacy-generation-2026-10-20.md`](../Tools/Art/Illustration/legacy-generation-2026-10-20.md)에 보존했다. 새 2×2 네 장과 혼동하지 않는다.
-
-## SHA-256
+## 현재 파일 SHA-256
 
 | 자산 | SHA-256 |
-| --- | --- |
-| `Games/FantasyCards/Assets/Resources/Art/cards-02-heroes.png` | `77530e2e9f16ff7d0af842395f916696d553daf5ed3505b8e1b9fac087ffb275` |
-| `Games/PathOfDawn/Assets/Resources/Art/title-hero.png` | `b13c9f9b9db8712fe70ff261703797ab92224f1a4690b7a8cfbf11b1459a4e20` |
-| `Games/FantasyCards/Assets/Resources/Art/cards-01-terrain.png` | `9567ed13c91621d318729f3b186b04c63d1e4371bfeca9a1c136505124a899dc` |
-| `Games/FantasyCards/Assets/Resources/Art/cards-03-magic.png` | `c0722672c31d1f27bba04115ae4d85123c315d2d9464a60439a9bfd18bf3e032` |
-| `Games/FantasyCards/Assets/Resources/Art/cards-04-relics.png` | `155bea5f288d442950450d3d9f10c00a415ceb7d6fee00de5d42e6aaa637f45a` |
-| `Games/FantasyCards/Assets/Resources/Art/title-hero.png` | `29e52b9cf731759ef429c23487fc81960dc632ca476de01a9ea6952cbbab903b` |
-| `Games/PathOfDawn/Assets/Resources/Art/portrait-jesus.png` | `54ecd1b00d53a370682c2e4ea9f3e44e06433e757c78e20c7912c6b64dd07d4d` |
-| `Games/PathOfDawn/Assets/Resources/Art/portrait-miriam.png` | `55b4b845e92b6858a4978c98df614beec30489c8197cfa2ae2db102b03b1455e` |
-| `Games/PathOfDawn/Assets/Resources/Art/portrait-traveler.png` | `33e6afbee59f52ce26fb39b1bd10f672bd865a1d1980bfbbbbbe438fc59e21c8` |
+|---|---|
+| `Games/FantasyCards/Assets/Resources/Art/battle-background.png` | `3583aa7588db9a046609abb467a8e148b62fa4b946e5d998b81513bee853e93c` |
+| `Games/FantasyCards/Assets/Resources/Art/cards-01-terrain.png` | `876869076751058a68e894e5b58202ee7f5e723f46f14cab60c43d06f33861ef` |
+| `Games/FantasyCards/Assets/Resources/Art/cards-02-heroes.png` | `dfd80219052f540c74a43e99a71b99876136f1b944f8299a1c39cb82c79d9297` |
+| `Games/FantasyCards/Assets/Resources/Art/cards-03-magic.png` | `bf219be30ee09b7804154167c867dede7aba6d828ac0f07d1956bcde0e1e5f84` |
+| `Games/FantasyCards/Assets/Resources/Art/cards-04-relics.png` | `408aab16493e907633821938855f7d42f36bb0e3aa296a9e87800ef641fc9204` |
+| `Games/FantasyCards/Assets/Resources/Art/title-hero.png` | `5a318d92ef86108c9b37a9746d46de048644160e0cf18b6b5b4d318f2cb3e70e` |
+| `Games/PathOfDawn/Assets/Resources/Art/portrait-jesus.png` | `ba7b76ecfa1bc7321ec6b7758d46c005f6f6d9f54d5a962ca01c935598751996` |
+| `Games/PathOfDawn/Assets/Resources/Art/portrait-miriam.png` | `dc2b7b1e12ac485bbc18a40d9365a8418d393fe1a21f3059201b851017be4f71` |
+| `Games/PathOfDawn/Assets/Resources/Art/portrait-traveler.png` | `a3060066eacb6de44eaacc4c5fc211f88b5c13f0afadf6a0ef6cea3922416b96` |
+| `Games/PathOfDawn/Assets/Resources/Art/title-hero.png` | `ae3211daf556aa3e89e862955001fd5b636ea753519f7c796ab8b60bc0db1332` |

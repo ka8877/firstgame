@@ -1,0 +1,39 @@
+FIRSTGAME ORIGINAL SOUNDTRACKS
+
+Starlight Overture / 별빛의 서곡
+Dawn on Galilee / 갈릴리의 새벽
+
+Original musical compositions and arrangements created for FirstGame with
+AI-assisted development. Their scores are in Tools/Audio/Scores and can be
+re-rendered with Tools/Audio/compose-soundtracks.py. No existing MIDI, melody,
+commercial game score or recorded performance was used as a source.
+
+The performances use the FluidR3 GM orchestral instrument samples, rendered
+offline through FluidSynth. The SoundFont is a build tool and is not shipped
+inside the game. Music samples are covered by the following MIT permission.
+FluidSynth's software license does not change the license of its audio output.
+
+FluidR3 sample source:
+https://deb.debian.org/debian/pool/main/f/fluid-soundfont/
+Package: fluid-soundfont-gm 3.1-6
+Copyright: 2000-2002, 2008 Frank Wen
+           2008 Toby Smithe
+License: MIT
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to
+do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

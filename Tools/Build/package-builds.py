@@ -24,7 +24,9 @@ for game in ("FantasyCards", "PathOfDawn"):
         (player / "README.txt").write_text(
             f"{game} · 첫 플레이 구간\nUnity 6000.3.26f1\n\n" + launch + controls +
             "첫 플레이 순서와 서사 분기 안내는 함께 포함한 PlaytestGuide.md를 확인하세요.\n" +
-            "\n새 원화와 카툰 표현을 적용한 개발판입니다. 3D 표정·걷기·음향과 실제 기기 성능은 후속 검수가 필요합니다.\n"
+            "\n애니메이션풍 원화·둥근 UI·배경 음악을 적용한 개발판입니다. 웹 음악은 첫 클릭/터치 뒤 시작합니다.\n"
+            "카드게임은 음악 버튼, 새벽의 길은 설정에서 음악 켜기/끄기와 음량을 조절하세요.\n"
+            "3D 표정·걷기, 실제 기기의 음향·성능은 후속 검수가 필요합니다.\n"
             "BuildEvidence.txt는 빌드 결과이며 실제 플랫폼 조작·성능 검증 결과와는 다릅니다.\n",
             encoding="utf-8")
         (player / "PlaytestGuide.md").write_bytes((root / "Docs" / "PlaytestGuide.md").read_bytes())
@@ -36,6 +38,8 @@ for game in ("FantasyCards", "PathOfDawn"):
             (project / "Assets/Resources/Fonts/OFL.txt").read_bytes())
         (notices / "LiberationSans-OFL.txt").write_bytes(
             (project / "Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt").read_bytes())
+        (notices / "Music-NOTICE.txt").write_bytes(
+            (root / "Tools/Audio/MUSIC-NOTICE.txt").read_bytes())
         if game == "PathOfDawn":
             (notices / "Ink-LICENCE.md").write_bytes(
                 (project / "Packages/com.inkle.ink-unity-integration/LICENCE.md").read_bytes())

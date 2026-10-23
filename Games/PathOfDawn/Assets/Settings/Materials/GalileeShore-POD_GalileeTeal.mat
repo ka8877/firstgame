@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GalileeShore-POD_GalileeTeal
-  m_Shader: {fileID: 4800000, guid: 7a1504d6832398a2088e0ae3d2598e4e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3cea913c61c448ca8954f4b538c5e90a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -85,7 +85,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _BandSoftness: 0.018
+    - _BandSoftness: 0.1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -101,15 +101,15 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _InkStrength: 0.12
-    - _LightThreshold: 0.68
+    - _InkStrength: 0.025
+    - _LightThreshold: 0.78
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimStrength: 0.035
-    - _ShadeThreshold: 0.28
+    - _RimStrength: 0.025
+    - _ShadeThreshold: 0.48
     - _Smoothness: 0.18
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -122,10 +122,12 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.11999995, g: 0.38999996, b: 0.42999998, a: 1}
     - _Color: {r: 0.11999992, g: 0.38999993, b: 0.42999992, a: 1}
+    - _DeepColor: {r: 0.09999997, g: 0.35999998, b: 0.6, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.74, g: 0.96, b: 0.95, a: 1}
     - _InkColor: {r: 0.11999995, g: 0.16999996, b: 0.24999997, a: 1}
-    - _RimColor: {r: 1, g: 0.85, b: 0.57, a: 1}
-    - _ShadeColor: {r: 0.61, g: 0.66, b: 0.76, a: 1}
+    - _RimColor: {r: 1, g: 0.94, b: 0.76, a: 1}
+    - _ShadeColor: {r: 0.72, g: 0.79, b: 0.86, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

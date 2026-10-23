@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-23",
+  "recordedUtc": "2026-10-23T09:02:49.028880+00:00",
+  "baselineRecord": "Tools/Environment/validation-2026-10-20.json",
+  "editorVersion": "6000.3.26f1",
+  "editorRevision": "de8167e7440c",
+  "editorModules": {
+    "windows-mono": "Installed",
+    "webgl": "Installed"
+  },
+  "cliVersion": "1.0.0-beta.13",
+  "dotnetSdk": "8.0.426",
+  "blender": "4.3.2",
+  "currentRuntime": {
+    "auth": {
+      "loggedIn": false,
+      "sessionState": "none",
+      "mode": "none",
+      "credentialSource": "none"
+    },
+    "authStatusExitCode": 3,
+    "authReady": false,
+    "authBlocker": "No current Unity CLI login; account-dependent commands may require sign-in",
+    "license": {
+      "active": true,
+      "signedIn": true,
+      "authMode": "oauth"
+    },
+    "licenseStatusExitCode": 0,
+    "licenseReady": true,
+    "runtimeEditorReady": true,
+    "runtimeReady": true,
+    "runtimeBlocker": null,
+    "diagnosticErrors": []
+  },
+  "nativeTests": {
+    "FantasyCards": {
+      "result": "Passed",
+      "total": "19",
+      "passed": "19",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 07:39:12Z",
+      "end-time": "2026-10-23 07:39:18Z"
+    },
+    "PathOfDawn": {
+      "result": "Passed",
+      "total": "10",
+      "passed": "10",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-23 06:37:06Z",
+      "end-time": "2026-10-23 06:37:07Z"
+    }
+  },
+  "externalCore": {
+    "passed": 53,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
+  },
+  "builds": {
+    "FantasyCards/Windows": {
+      "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "125887474",
+        "Duration": "00:00:11.5529760",
+        "Errors": "0",
+        "Warnings": "1"
+      }
+    },
+    "FantasyCards/Web": {
+      "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7134",
+        "Duration": "00:03:12.5297600",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 40962139,
+      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
+    },
+    "PathOfDawn/Windows": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "147063467",
+        "Duration": "00:00:11.7089400",
+        "Errors": "0",
+        "Warnings": "1"
+      }
+    },
+    "PathOfDawn/Web": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7124",
+        "Duration": "00:03:27.9825840",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "actualPlayerBytes": 37647180,
+      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
+    }
+  },
+  "web": {
+    "Desktop720/FantasyCards": {
+      "status": "passed",
+      "checks": 24,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
+    },
+    "Desktop1080/FantasyCards": {
+      "status": "passed",
+      "checks": 26,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json"
+    },
+    "Mobile844/FantasyCards": {
+      "status": "passed",
+      "checks": 27,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json"
+    },
+    "Desktop720/PathOfDawn": {
+      "status": "passed",
+      "checks": 30,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
+    },
+    "Desktop1080/PathOfDawn": {
+      "status": "passed",
+      "checks": 30,
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json"
+    },
+    "Mobile844/PathOfDawn": {
+      "status": "passed",
+      "checks": 35,
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
+    }
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 33,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json"
+    },
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 41,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json"
+    }
+  },
+  "cloudStartConfiguration": {
+    "status": "draft saved and reread confirmed identical",
+    "revision": 10,
+    "requiresPublish": true,
+    "freshTaskRestorationVerified": false
+  },
+  "limitations": [
+    "Software GPU only; no target PC or handset performance measurement.",
+    "Actual Windows player, Android/iPhone and Safari have not been run.",
+    "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
+    "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
+  ],
+  "assetAudit": {
+    "status": "passed",
+    "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
+    "metaCounts": {
+      "FantasyCards": 146,
+      "PathOfDawn": 254
+    }
+  }
+}

@@ -13,6 +13,60 @@ web_smoke = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(web_smoke)
 
 
+class AudioObservationTests(unittest.TestCase):
+    """Adversarial evidence-classification cases; these are not audio playback tests."""
+    def frames(self):
+        music = {"nodeId": 10, "duration": 103, "channels": 2, "loop": True,
+                 "startedAtContextTime": 1, "stoppedAtContextTime": None}
+        ambience = {"nodeId": 30, "duration": 4, "channels": 1, "loop": True,
+                    "startedAtContextTime": 1, "stoppedAtContextTime": None}
+        channel = lambda rms: {"samples": 2048, "rms": rms, "peak": rms * 2, "nonfinite": 0}
+        context = {"id": 1, "state": "running", "currentTime": 2, "buffers": [music, ambience],
+                   "destinationNodeId": 99, "connections": [[10, 20, 0, 0], [20, 99, 0, 0],
+                                                             [30, 40, 0, 0], [40, 99, 0, 0]],
+                   "gains": [{"nodeId": 20, "value": 0}, {"nodeId": 40, "value": .1}],
+                   "destinationRoutes": [{"sourceNodeId": 20, "channels": [channel(0), channel(0)]},
+                                         {"sourceNodeId": 40, "channels": [channel(.2), channel(.2)]}]}
+        frames = [{"wallTimeMs": 2000, "errors": [], "contexts": [context]},
+                  {"wallTimeMs": 4000, "errors": [], "contexts": [copy.deepcopy(context)]}]
+        frames[-1]["contexts"][0]["currentTime"] = 4
+        return frames
+
+    def test_running_ambient_output_cannot_count_as_audible_muted_music(self):
+        evidence = web_smoke.music_audio_summary(self.frames())
+        self.assertEqual(evidence["contextAdvancedSeconds"], 2)
+        self.assertTrue(evidence["allContextsRunning"])
+        self.assertTrue(evidence["isolatedMusicRoute"])
+        self.assertEqual(evidence["audibleSampleFraction"], 0)
+        self.assertEqual(evidence["maximumRms"], 0)
+        self.assertEqual(evidence["medianDestinationGain"], 0)
+        self.assertEqual(evidence["sourceIdentities"], [[1, 10]])
+
+    def test_unstarted_stopped_or_disconnected_music_cannot_supply_playback_evidence(self):
+        for mutation in ("unstarted", "stopped", "disconnected"):
+            with self.subTest(mutation=mutation):
+                frames = self.frames()
+                for frame in frames:
+                    context = frame["contexts"][0]
+                    if mutation == "disconnected":
+                        context["connections"] = [edge for edge in context["connections"] if edge[0] != 10]
+                    else:
+                        key = "startedAtContextTime" if mutation == "unstarted" else "stoppedAtContextTime"
+                        context["buffers"][0][key] = None if mutation == "unstarted" else 1.5
+                evidence = web_smoke.music_audio_summary(frames)
+                self.assertEqual(evidence["sourceIdentities"], [])
+                self.assertEqual(evidence["sampleCount"], 0)
+                self.assertFalse(evidence["allContextsRunning"])
+
+    def test_shared_ambient_music_mixer_is_not_claimed_as_an_isolated_bgm_route(self):
+        frames = self.frames()
+        for frame in frames:
+            frame["contexts"][0]["connections"].append([30, 20, 0, 0])
+        evidence = web_smoke.music_audio_summary(frames)
+        self.assertFalse(evidence["isolatedMusicRoute"])
+        self.assertEqual(evidence["frames"][0]["sharedWithOtherBufferNodeIds"], [30])
+
+
 class CacheRevalidationTests(unittest.TestCase):
     def setUp(self):
         url = "http://127.0.0.1:8123/FantasyCards/Web/Build/6e3f87a7bf44.unityweb"

@@ -40,6 +40,11 @@ for game, slug in GAMES.items():
             report = json.loads(report_path.read_text())
             if report["status"] != "passed":
                 raise SystemExit(f"Browser report has not passed: {game}/{profile}")
+            audio_labels = {window["label"] for window in report.get("audioEvidence", {}).get("windows", [])}
+            required_audio = {"before-first-user-gesture", "after-first-user-gesture", "muted", "unmuted",
+                              "volume-reduced", "volume-restored", "after-continue-user-gesture"}
+            if not required_audio.issubset(audio_labels):
+                raise SystemExit(f"Actual browser music verification required: {game}/{profile}")
             expected_profile = "mobile-landscape" if profile == "Mobile844" else "desktop"
             expected_size = {"Desktop720": (1280, 720), "Desktop1080": (1920, 1080), "Mobile844": (844, 390)}[profile]
             viewport = report.get("interactionViewport", {})
@@ -95,6 +100,7 @@ for game, slug in GAMES.items():
     project = ROOT / "Games" / game
     shutil.copyfile(project / "Assets/Resources/Fonts/OFL.txt", notices / "FirstGameKorean-OFL.txt")
     shutil.copyfile(project / "Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt", notices / "LiberationSans-OFL.txt")
+    shutil.copyfile(ROOT / "Tools/Audio/MUSIC-NOTICE.txt", notices / "Music-NOTICE.txt")
     if game == "PathOfDawn":
         shutil.copyfile(project / "Packages/com.inkle.ink-unity-integration/LICENCE.md", notices / "Ink-LICENCE.md")
     shutil.copyfile(hero, output / "art" / f"{slug}.png")

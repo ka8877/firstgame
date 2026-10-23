@@ -40,6 +40,7 @@ namespace PathOfDawn.Presentation
         CinemachineCamera playCamera, dialogueCamera, introCamera;
         PlayableDirector director;
         AudioSource ambience, cue;
+        BgmPlayer music;
         InputActionMap input;
         InputAction move, mouseLook, stickLook, interact, menu, memories;
         bool inGame, modal, inIntro, busy;
@@ -99,6 +100,9 @@ namespace PathOfDawn.Presentation
         void Update()
         {
             if (compiledStory == null) return;
+            if (music != null && ((Pointer.current != null && Pointer.current.press.wasPressedThisFrame) ||
+                (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) ||
+                (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame))) music.NotifyUserGesture();
             if (touchControls != null) touchControls.SetActive(inGame && !modal && !inIntro && TouchInterface);
             if (inGame && !inIntro && menu.WasPressedThisFrame()) { if (modal) CloseModal(); else ShowSettings(); }
             if (inGame && !modal && !inIntro && memories.WasPressedThisFrame()) ShowMemories();
@@ -140,14 +144,14 @@ namespace PathOfDawn.Presentation
             if (hud != null) { hud.gameObject.SetActive(false); Destroy(hud.gameObject); }
             ClearScreen(); dialogueCamera.gameObject.SetActive(false); introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(false);
             // Title artwork is its own composition. No stale Cinemachine blend or live actors behind it.
-            worldRoot.SetActive(false); mainCamera.cullingMask = 1 << 5; mainCamera.backgroundColor = DawnUi.Ink;
+            worldRoot.SetActive(false); mainCamera.cullingMask = 1 << 5; mainCamera.backgroundColor = DawnUi.Ink; mainCamera.clearFlags = CameraClearFlags.SolidColor;
             ui.Fill(screen, "Title background", DawnUi.Ink);
             ui.Art(screen, "Art/title-hero", 0, 0, 1920, 1080);
             var gradient = ui.Box(screen, "Title readability", 0, 0, 1380, 1080).gameObject.AddComponent<DawnGradient>(); gradient.raycastTarget = false; gradient.SetAllDirty();
             var lower = ui.Box(screen, "Title lower shade", 0, 860, 1920, 220).gameObject.AddComponent<DawnGradient>();
             lower.vertical = true; lower.left = new Color(.03f,.07f,.12f,.85f); lower.raycastTarget = false; lower.SetAllDirty();
             var panel = ui.Box(screen, "Title", 100, 80, 690, 960);
-            ui.Box(panel, "Dawn rule", 4, 35, 76, 4, DawnUi.Gold);
+            ui.Rule(panel, 4, 35, 76, DawnUi.Gold);
             ui.Text(panel, "PATH OF DAWN", 102, 14, 520, 65, 25, DawnUi.Gold).characterSpacing = 5;
             ui.Text(panel, "새벽의 길", 0, 120, 680, 190, 84);
             ui.Text(panel, "갈릴리, 처음 건네는 손길", 6, 318, 650, 85, 30, DawnUi.Gold);
@@ -167,7 +171,7 @@ namespace PathOfDawn.Presentation
         {
             if (saves.Exists && !saves.WriteBlocked)
             {
-                ClearScreen(); var panel = ui.Box(screen,"New Game",410,250,1100,560,DawnUi.Ink);
+                ClearScreen(); var panel = ui.Card(screen,"New Game",410,250,1100,560,DawnUi.Ink);
                 ui.Text(panel,"새 여정은 별도 슬롯에 저장됩니다.",45,45,1010,80,36);
                 ui.Text(panel,"기존 이어하기 데이터는 보존합니다. 새 여정을 시작하면 이 기기의 이어하기가 새 슬롯을 가리킵니다.",45,145,1010,130,27);
                 ui.Button(panel,"새 여정 시작",45,330,480,80,() => { activeSaveSlot = SaveSlot + "-" + DateTime.UtcNow.Ticks; PlayerPrefs.SetString("POD.activeSlot",activeSaveSlot); PlayerPrefs.Save(); CreateSaveSlot(); StartNew(); });
@@ -195,7 +199,7 @@ namespace PathOfDawn.Presentation
             hud = ui.Fill(canvas,"HUD"); hud.SetAsFirstSibling();
             BuildTouchControls();
             var top = ui.Card(hud,"Top",32,28,1856,128,DawnUi.Ink);
-            ui.Box(top,"Chapter accent",0,22,5,84,DawnUi.Gold);
+            ui.Box(top,"Chapter accent",13,35,3,58,DawnUi.Gold);
             objective = ui.Text(top,"",28,12,1020,112,27);
             ui.Button(top,"기억 / 회귀 [M]",1080,19,300,90,ShowMemories);
             ui.Button(top,"저장",1398,19,156,90,() => { if (Save()) Notify("여정을 저장했습니다."); });
@@ -208,7 +212,11 @@ namespace PathOfDawn.Presentation
             notification = ui.Text(notificationBackdrop,"",28,12,1094,80,27,DawnUi.Gold);
             notificationBackdrop.gameObject.SetActive(false);
             if (TouchInterface)
+            {
+                var guideBackdrop = ui.Card(hud,"Touch guide backdrop",370,1030,1450,50,DawnUi.Ink);
+                guideBackdrop.GetComponent<Image>().raycastTarget = false;
                 ui.Text(hud,"왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기",380,1012,1430,66,34).alignment = TextAlignmentOptions.BottomLeft;
+            }
             else
                 ui.Text(hud,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
             RefreshObjective();
@@ -220,6 +228,7 @@ namespace PathOfDawn.Presentation
             var look = ui.Box(controls, "Drag to look", 1000, 180, 860, 590, new Color(0, 0, 0, .001f));
             touchLook = look.gameObject.AddComponent<DawnPointerPad>();
             var pad = ui.Card(controls, "Movement pad", 80, 770, 230, 230, new Color(.055f,.105f,.16f,.65f));
+            ui.Round(pad, 115);
             pad.pivot = new Vector2(.5f,.5f); pad.anchoredPosition = new Vector2(195,-885);
             touchMove = pad.gameObject.AddComponent<DawnPointerPad>(); touchMove.joystick = true;
             var thumb = ui.Card(pad, "Movement thumb", 0, 0, 78, 78, new Color(.98f,.78f,.43f,.88f));
@@ -275,7 +284,7 @@ namespace PathOfDawn.Presentation
                 if (line.StartsWith("미리암: ", StringComparison.Ordinal)) { speaker = "미리암"; portrait = "miriam"; accent = DawnUi.Teal; line = line.Substring(5); }
                 else if (line.StartsWith("예수님: ", StringComparison.Ordinal)) { speaker = "예수님"; portrait = "jesus"; accent = new Color(1,.68f,.46f); line = line.Substring(5); }
                 else if (line.StartsWith("당신: ", StringComparison.Ordinal)) { speaker = "여행자"; line = line.Substring(4); }
-                ui.Card(panel,"Portrait field",18,18,318,434,new Color(accent.r*.20f,accent.g*.20f,accent.b*.25f,1));
+                ui.Card(panel,"Portrait field",18,18,318,434,new Color(.08f+accent.r*.065f,.12f+accent.g*.08f,.20f+accent.b*.08f,1));
                 ui.Art(panel,"Art/portrait-"+portrait,22,20,310,430,false);
                 ui.Box(panel,"Speaker accent",370,38,5,64,accent);
                 ui.Text(panel,speaker,397,29,650,80,33,accent);
@@ -308,7 +317,7 @@ namespace PathOfDawn.Presentation
         {
             modal = true; ClearScreen(); ui.Fill(screen,"Outcome veil",new Color(.02f,.06f,.1f,.5f));
             var p = ui.Card(screen,"Outcome",340,210,1240,730,DawnUi.Ink);
-            ui.Box(p,"Outcome accent",50,25,96,4,DawnUi.Gold);
+            ui.Rule(p,50,25,96,DawnUi.Gold);
             string title = session.Route == "witness" ? "나눔의 목격자" : session.Route == "shelter" ? "문턱의 등불" : "이어진 발걸음";
             ui.Text(p,"발견한 길  " + session.Meta.routes.Count + " / 3",50,45,1140,55,25,DawnUi.Gold);
             ui.Text(p,title,50,126,1140,130,56);
@@ -357,8 +366,13 @@ namespace PathOfDawn.Presentation
             ui.Button(p,"작게",860,135,210,90,()=>ChangeText(-.1f)); ui.Button(p,"크게",1090,135,270,90,()=>ChangeText(.1f));
             ui.Text(p,"전체 음량  "+Mathf.RoundToInt(volume*100)+"%",48,255,660,65,28);
             ui.Button(p,"줄이기",860,245,210,90,()=>ChangeVolume(-.1f)); ui.Button(p,"높이기",1090,245,270,90,()=>ChangeVolume(.1f));
-            ui.Text(p,"저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.",48,365,1320,70,26);
-            var field=ui.Input(p,48,450,1320,195);
+            ui.Text(p,"배경 음악 · 갈릴리의 새벽",48,345,780,60,26,DawnUi.Teal);
+            ui.Button(p,music != null && music.Muted ? "배경 음악 켜기" : "배경 음악 끄기",860,335,500,76,()=> {
+                if(music != null) music.SetMuted(!music.Muted);
+                ShowSettings();
+            });
+            ui.Text(p,"저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.",48,412,1320,50,26);
+            var field=ui.Input(p,48,465,1320,180);
             ui.Button(p,"저장 내보내기",48,670,420,95,()=> {
                 if(inGame && !Save()) { field.text=message; return; }
                 if(PersistentSaves.TryExport(activeSaveSlot,out var portable,out var error)) { field.text=portable; GUIUtility.systemCopyBuffer=portable; Notify("저장 JSON을 표시했습니다. 전체 선택 후 복사할 수 있습니다."); }
@@ -411,7 +425,7 @@ namespace PathOfDawn.Presentation
             sharedBasket.SetActive(session.World.basketShared); shelterRug.SetActive(session.World.shelterPrepared); connectionMarker.SetActive(session.World.peopleConnected);
             playCamera.PreviousStateIsValid=false; dialogueCamera.PreviousStateIsValid=false;
         }
-        void RevealWorld() { worldRoot.SetActive(true); mainCamera.cullingMask = -1; mainCamera.backgroundColor = SkyColor; }
+        void RevealWorld() { worldRoot.SetActive(true); mainCamera.cullingMask = -1; mainCamera.backgroundColor = SkyColor; mainCamera.clearFlags = RenderSettings.skybox != null ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor; }
         void SwitchToPlay() { RevealWorld(); introCamera.gameObject.SetActive(false); dialogueCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); }
         void SwitchToDialogue()
         {
@@ -466,8 +480,9 @@ namespace PathOfDawn.Presentation
             shelterRug=Primitive("Shelter rug",PrimitiveType.Cube,new Vector3(-4,.04f,-3.6f),new Vector3(2,.035f,1.4f),new Color(.56f,.27f,.20f));
             connectionMarker=Primitive("Gathered water jars",PrimitiveType.Cylinder,new Vector3(-1,.3f,0),new Vector3(.42f,.3f,.42f),new Color(.64f,.43f,.22f));
             sharedBasket.SetActive(false); shelterRug.SetActive(false); connectionMarker.SetActive(false);
-            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.rotation=Quaternion.Euler(32,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional; light.color=new Color(1,.91f,.75f); light.intensity=1.6f; light.shadows=LightShadows.Soft;
-            RenderSettings.ambientLight=new Color(.43f,.5f,.63f); RenderSettings.fog=true; RenderSettings.fogColor=new Color(.72f,.84f,.87f); RenderSettings.fogDensity=.009f;
+            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.rotation=Quaternion.Euler(42,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional; light.color=new Color(1,.94f,.83f); light.intensity=1.3f; light.shadows=LightShadows.Soft;
+            RenderSettings.ambientLight=new Color(.64f,.72f,.83f); RenderSettings.fog=true; RenderSettings.fogColor=new Color(.72f,.85f,.91f); RenderSettings.fogDensity=.006f;
+            RenderSettings.skybox=Resources.Load<Material>("Art/DawnSky");
         }
         void CreateActor(string id,GameObject prefab,Vector3 position,Color color)
         {
@@ -493,7 +508,7 @@ namespace PathOfDawn.Presentation
         void BuildCameras()
         {
             mainCamera=Camera.main; if(mainCamera==null) { var go=new GameObject("Main Camera",typeof(Camera),typeof(AudioListener)); go.tag="MainCamera"; mainCamera=go.GetComponent<Camera>(); }
-            mainCamera.backgroundColor=SkyColor; mainCamera.clearFlags=CameraClearFlags.SolidColor;
+            mainCamera.backgroundColor=SkyColor; mainCamera.clearFlags=RenderSettings.skybox != null ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
             var brain=mainCamera.GetComponent<CinemachineBrain>() ?? mainCamera.gameObject.AddComponent<CinemachineBrain>();
             brain.DefaultBlend=new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut,.25f);
             pivot=new GameObject("Third person target").transform; pivot.position=actors["traveler"].position+Vector3.up*1.45f;
@@ -515,13 +530,15 @@ namespace PathOfDawn.Presentation
         }
         void BuildAudio()
         {
-            ambience=gameObject.AddComponent<AudioSource>(); ambience.loop=true; ambience.volume=.15f; ambience.playOnAwake=false;
+            ambience=gameObject.AddComponent<AudioSource>(); ambience.loop=true; ambience.volume=.03f; ambience.playOnAwake=false;
             const int rate=22050, seconds=4; var samples=new float[rate*seconds]; uint noise=12345;
             for(int i=0;i<samples.Length;i++) { noise=noise*1664525+1013904223; float n=((noise>>8)/(float)0xFFFFFF)*2-1; float wave=.45f+.4f*Mathf.Sin(i/(float)rate*Mathf.PI*.5f); samples[i]=n*.11f*wave; }
             ambience.clip=AudioClip.Create("Procedural shoreline placeholder",samples.Length,1,rate,false); ambience.clip.SetData(samples,0);
             cue=gameObject.AddComponent<AudioSource>(); cue.playOnAwake=false; cue.volume=.15f;
             var tone=new float[rate/3]; for(int i=0;i<tone.Length;i++) tone[i]=Mathf.Sin(2*Mathf.PI*440*i/rate)*Mathf.Exp(-12*i/(float)rate)*.2f;
             cue.clip=AudioClip.Create("Choice acknowledgement placeholder",tone.Length,1,rate,false); cue.clip.SetData(tone,0);
+            music=BgmPlayer.Attach(gameObject,"Audio/dawn-on-galilee","POD.music",.65f);
+            ui.BeforeInteraction=()=>music?.NotifyUserGesture();
         }
         void PlayCue() { cue.Stop(); cue.Play(); }
         sealed class UnityCodec : ISnapshotCodec

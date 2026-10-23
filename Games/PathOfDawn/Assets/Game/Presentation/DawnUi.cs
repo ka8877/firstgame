@@ -10,10 +10,11 @@ namespace PathOfDawn.Presentation
     {
         public TMP_FontAsset Font;
         public float TextScale = 1;
-        public static readonly Color Ink = new Color(.055f, .105f, .16f, .97f);
-        public static readonly Color Paper = new Color(.98f, .95f, .87f);
+        public Action BeforeInteraction;
+        public static readonly Color Ink = new Color(.075f, .115f, .20f, .95f);
+        public static readonly Color Paper = new Color(.99f, .97f, .91f);
         public static readonly Color Gold = new Color(.98f, .78f, .43f);
-        public static readonly Color Teal = new Color(.30f, .75f, .72f);
+        public static readonly Color Teal = new Color(.42f, .84f, .79f);
         static Sprite rounded;
 
         static Sprite Rounded
@@ -26,12 +27,12 @@ namespace PathOfDawn.Presentation
                 var pixels = new Color[size * size];
                 for (int y = 0; y < size; y++) for (int x = 0; x < size; x++)
                 {
-                    float dx = Mathf.Max(0, Mathf.Abs(x - 31.5f) - 15.5f);
-                    float dy = Mathf.Max(0, Mathf.Abs(y - 31.5f) - 15.5f);
-                    pixels[y * size + x] = new Color(1, 1, 1, Mathf.Clamp01(16 - Mathf.Sqrt(dx * dx + dy * dy)));
+                    float dx = Mathf.Max(0, Mathf.Abs(x - 31.5f) - 9.5f);
+                    float dy = Mathf.Max(0, Mathf.Abs(y - 31.5f) - 9.5f);
+                    pixels[y * size + x] = new Color(1, 1, 1, Mathf.Clamp01(22 - Mathf.Sqrt(dx * dx + dy * dy)));
                 }
                 texture.SetPixels(pixels); texture.Apply(false, true);
-                rounded = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(.5f, .5f), 100, 0, SpriteMeshType.FullRect, new Vector4(18, 18, 18, 18));
+                rounded = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(.5f, .5f), 100, 0, SpriteMeshType.FullRect, new Vector4(24, 24, 24, 24));
                 rounded.hideFlags = HideFlags.HideAndDontSave;
                 return rounded;
             }
@@ -51,7 +52,31 @@ namespace PathOfDawn.Presentation
         {
             var r = Box(parent, name, x, y, w, h, color ?? Ink);
             var image = r.GetComponent<Image>(); image.sprite = Rounded; image.type = Image.Type.Sliced;
+            float radius = Mathf.Min(30, h * .35f);
+            image.pixelsPerUnitMultiplier = 22 / radius;
+            var shadow = r.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.025f,.045f,.10f,.23f);
+            shadow.effectDistance = new Vector2(0, -5); shadow.useGraphicAlpha = true;
+            var trim = Fill(r, "Woven light edge").gameObject.AddComponent<DawnFrame>();
+            trim.radius = radius; trim.color = new Color(.98f,.85f,.58f,.45f); trim.raycastTarget = false;
             return r;
+        }
+        public void Round(RectTransform panel, float radius)
+        {
+            var image = panel.GetComponent<Image>();
+            if (image != null) image.pixelsPerUnitMultiplier = 22 / Mathf.Max(1, radius);
+            var trim = panel.GetComponentInChildren<DawnFrame>();
+            if (trim != null) { trim.radius = radius; trim.SetVerticesDirty(); }
+        }
+        public void Rule(Transform parent, float x, float y, float width, Color color)
+        {
+            var line = Box(parent, "Fine woven rule", x + 10, y + 4, width - 20, 1.5f, color);
+            line.GetComponent<Image>().raycastTarget = false;
+            foreach (float end in new[] { x, x + width - 7 })
+            {
+                var gem = Box(parent, "Dawn diamond", end, y, 7, 7, color);
+                gem.pivot = new Vector2(.5f, .5f); gem.localRotation = Quaternion.Euler(0, 0, 45);
+                gem.GetComponent<Image>().raycastTarget = false;
+            }
         }
         public RawImage Art(Transform parent, string resource, float x, float y, float w, float h, bool cover = true)
         {
@@ -81,22 +106,23 @@ namespace PathOfDawn.Presentation
         }
         public Button Button(Transform parent, string label, float x, float y, float w, float h, UnityAction action, bool enabled = true)
         {
-            var r = Card(parent, label, x, y, w, h, new Color(.13f, .23f, .29f, .99f)); var button = r.gameObject.AddComponent<Button>();
+            var r = Card(parent, label, x, y, w, h, new Color(.16f, .25f, .34f, .97f)); var button = r.gameObject.AddComponent<Button>();
             button.targetGraphic = r.GetComponent<Image>(); var colors = button.colors;
-            colors.highlightedColor = new Color(.8f, .96f, 1); colors.pressedColor = new Color(.62f,.8f,.86f); colors.disabledColor = new Color(.55f,.62f,.66f,.68f); button.colors = colors;
+            colors.highlightedColor = new Color(.89f, .98f, 1); colors.pressedColor = new Color(.70f,.87f,.94f); colors.disabledColor = new Color(.55f,.62f,.70f,.68f); button.colors = colors;
             var text = Text(r, label, 24, 5, w - 48, h - 10, 28); text.alignment = TextAlignmentOptions.MidlineLeft;
-            button.onClick.AddListener(action); button.interactable = enabled; return button;
+            button.onClick.AddListener(() => { BeforeInteraction?.Invoke(); action?.Invoke(); }); button.interactable = enabled; return button;
         }
         public Button Primary(Transform parent, string label, float x, float y, float w, float h, UnityAction action)
         {
             var button = Button(parent, label, x, y, w, h, action);
             button.GetComponent<Image>().color = Gold;
             button.GetComponentInChildren<TextMeshProUGUI>().color = Ink;
+            var trim = button.GetComponentInChildren<DawnFrame>(); trim.color = new Color(1,.94f,.76f,.85f); trim.sheen = .075f;
             return button;
         }
         public TMP_InputField Input(Transform parent, float x, float y, float w, float h)
         {
-            var r = Box(parent, "PortableSave", x, y, w, h, new Color(.05f,.08f,.09f));
+            var r = Card(parent, "PortableSave", x, y, w, h, new Color(.05f,.085f,.14f));
             var field = r.gameObject.AddComponent<TMP_InputField>(); var area = Box(r, "TextArea", 16, 12, w-32, h-24); area.gameObject.AddComponent<RectMask2D>();
             var text = Text(area, "", 0, 0, w-32, h-24, 19); text.overflowMode = TextOverflowModes.Overflow;
             field.textViewport = area; field.textComponent = text; field.lineType = TMP_InputField.LineType.MultiLineNewline; field.characterLimit = 2000000;

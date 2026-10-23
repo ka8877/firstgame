@@ -14,6 +14,7 @@ selected = [
     root / "Docs/UnitySmokeTests.md",
     root / "Docs/CoreValidation.md",
     root / "Docs/ArtDirection.md",
+    root / "Docs/Audio.md",
     root / "Docs/VisualValidation.md",
     root / "Docs/WebPlaytest.md",
     root / "Docs/Environment.md",
@@ -21,9 +22,14 @@ selected = [
     root / "Tools/Art/ToonDawn.md",
     root / "Tools/Environment/validation.json",
     root / "Tools/Environment/validation-2026-10-20.json",
+    root / "Tools/Environment/validation-2026-10-23-art-edition.json",
+    root / "Docs/ValidationHistory/2026-10-23-art-edition.md",
     root / "Tools/Art/verification.json",
     root / "Tools/Art/toon-verification.json",
     root / "Tools/Art/Illustration/verification.json",
+    root / "Tools/Audio/production.json",
+    root / "Tools/Audio/verification.json",
+    root / "Tools/Audio/MUSIC-NOTICE.txt",
     artifacts / "Environment/pipeline-fantasycards.json",
     artifacts / "Environment/browser-prerequisites-best.json",
     artifacts / "Environment/managed-runtime.json",
@@ -40,11 +46,15 @@ selected = [
 selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
+selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
+for pattern in ("*.png", "*.png.txt", "*.xml"):
+    selected.extend(sorted((artifacts / "ValidationHistory").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/VisualAssets").glob("*.previous-*.json")))
 selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.json")))
 selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.png")))
 for game in ("FantasyCards", "PathOfDawn"):
     selected.append(artifacts / f"TestResults/{game}/EditMode.xml")
+    selected.extend(sorted((artifacts / "TestResults" / game).glob("*.xml")))
     for target in ("Windows", "Web"):
         selected.append(artifacts / f"Builds/{game}/{target}/BuildEvidence.txt")
     selected.append(artifacts / f"Builds/{game}/Web/OutputFiles.json")
@@ -62,7 +72,7 @@ for game in ("FantasyCards", "PathOfDawn"):
     for profile in ("Desktop720", "Desktop1080", "Mobile844"):
         current = artifacts / "Validation/VisualWeb" / profile / game
         selected.append(current / "report.json")
-        for pattern in ("*.png", "*.txt"):
+        for pattern in ("*.json", "*.png", "*.txt"):
             selected.extend(sorted(current.glob(pattern)))
         for previous in current.parent.glob(game + ".previous-*"):
             for pattern in ("*.json", "*.png", "*.txt"):

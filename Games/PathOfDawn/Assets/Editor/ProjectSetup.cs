@@ -136,6 +136,17 @@ namespace FirstGame.Editor
             if (!Directory.Exists(folder)) throw new InvalidOperationException("Generated Blender models are missing.");
             var toon = Shader.Find("PathOfDawn/Cel Lit");
             if (toon == null) throw new InvalidOperationException("PathOfDawn cel shader is missing.");
+            var skyShader = Shader.Find("PathOfDawn/Storybook Sky");
+            var waterShader = Shader.Find("PathOfDawn/Storybook Water");
+            if (skyShader == null || waterShader == null) throw new InvalidOperationException("Storybook sky/water shaders are missing.");
+            const string skyPath = "Assets/Resources/Art/DawnSky.mat";
+            var sky = AssetDatabase.LoadAssetAtPath<Material>(skyPath);
+            if (sky == null) { sky = new Material(skyShader); AssetDatabase.CreateAsset(sky, skyPath); }
+            else sky.shader = skyShader;
+            sky.SetColor("_Zenith", new Color(.26f,.55f,.86f));
+            sky.SetColor("_Horizon", new Color(.79f,.91f,.96f));
+            sky.SetColor("_CloudColor", new Color(1,.98f,.90f));
+            EditorUtility.SetDirty(sky);
             foreach (var modelPath in Directory.GetFiles(folder, "*.fbx").OrderBy(p => p, StringComparer.Ordinal))
             {
                 string path = modelPath.Replace('\\', '/');
@@ -144,6 +155,11 @@ namespace FirstGame.Editor
                 bool character = name.EndsWith("Proxy", StringComparison.Ordinal);
                 var importer = (ModelImporter)AssetImporter.GetAtPath(path);
                 importer.importAnimation = character;
+                // Preserve the authored smooth surface normals; never rebuild low-angle hard seams.
+                importer.importNormals = ModelImporterNormals.Import;
+                // Smooth characters exceed 65k vertices. A forced UInt16 import splits
+                // them into several renderers and breaks the single skinned-body contract.
+                importer.indexFormat = ModelImporterIndexFormat.UInt32;
                 if (character) { importer.animationType = ModelImporterAnimationType.Generic; importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel; }
                 importer.SaveAndReimport();
                 var model = AssetDatabase.LoadAssetAtPath<GameObject>(path);
@@ -162,20 +178,32 @@ namespace FirstGame.Editor
                             string materialPath = "Assets/Settings/Materials/" + safe + ".mat";
                             var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
                             bool create = material == null;
-                            if (create) material = new Material(toon); else material.shader = toon;
+                            var selectedShader = IsGalileeWaterMaterial(materialName) ? waterShader : toon;
+                            if (create) material = new Material(selectedShader); else material.shader = selectedShader;
                             material.name = materialName;
                             material.SetColor("_BaseColor", old != null && old.HasProperty("_BaseColor") ? old.GetColor("_BaseColor") : old != null && old.HasProperty("_Color") ? old.GetColor("_Color") : new Color(.65f, .60f, .48f));
-                            material.SetColor("_ShadeColor", character ? new Color(.56f,.59f,.73f) : new Color(.61f,.66f,.76f));
-                            material.SetColor("_RimColor", new Color(1,.85f,.57f));
-                            material.SetFloat("_ShadeThreshold", .28f); material.SetFloat("_LightThreshold", .68f);
-                            material.SetFloat("_BandSoftness", .018f);
-                            material.SetFloat("_RimStrength", character ? .13f : .035f);
-                            material.SetFloat("_InkStrength", character ? .4f : .12f);
+                            if (selectedShader == toon)
+                            {
+                                material.SetColor("_ShadeColor", character ? new Color(.70f,.73f,.85f) : new Color(.72f,.79f,.86f));
+                                material.SetColor("_RimColor", new Color(1,.94f,.76f));
+                                material.SetFloat("_ShadeThreshold", .48f); material.SetFloat("_LightThreshold", .78f);
+                                material.SetFloat("_BandSoftness", .10f);
+                                material.SetFloat("_RimStrength", character ? .11f : .025f);
+                                material.SetFloat("_InkStrength", character ? .16f : .025f);
+                            }
                             material.enableInstancing = true;
                             if (create) AssetDatabase.CreateAsset(material, materialPath); else EditorUtility.SetDirty(material);
                             materials[i] = material;
                         }
                         renderer.sharedMaterials = materials;
+                    }
+                    if (name == "GalileeShore")
+                    {
+                        var waterMaterials = go.GetComponentsInChildren<Renderer>(true)
+                            .SelectMany(r => r.sharedMaterials)
+                            .Where(m => m != null && IsGalileeWaterMaterial(m.name)).ToArray();
+                        if (waterMaterials.Length == 0 || waterMaterials.Any(m => m.shader != waterShader))
+                            throw new InvalidOperationException("Galilee shore requires the authored lake material with the Storybook Water shader.");
                     }
                     if (character)
                     {
@@ -206,6 +234,14 @@ namespace FirstGame.Editor
                 }
                 finally { UnityEngine.Object.DestroyImmediate(go); }
             }
+        }
+
+        static bool IsGalileeWaterMaterial(string materialName)
+        {
+            // Unity may prefix imported material names with the FBX name.
+            const string sourceName = "POD_GalileeTeal";
+            return string.Equals(materialName, sourceName, StringComparison.Ordinal)
+                || materialName.EndsWith("-" + sourceName, StringComparison.Ordinal);
         }
 
         static void PrepareIllustrations()
