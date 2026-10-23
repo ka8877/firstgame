@@ -230,3 +230,17 @@ python3 Tools/Validation/web-smoke.py --game PathOfDawn --renderer x11-mesa \
 - [공식 Graphics 6000.3 소스](https://github.com/Unity-Technologies/Graphics/tree/6000.3/staging)
 - [공식 uGUI 6000.3 소스](https://github.com/Unity-Technologies/uGUI/tree/6000.3)
 - [Microsoft .NET 8 릴리스 메타데이터](https://builds.dotnet.microsoft.com/dotnet/release-metadata/8.0/releases.json)
+
+### 공개 HTTPS와 Chromium NSS
+
+2026-10-23 공개 Pages 검사에서 `urllib`의 HTTPS 인증서 검증과 최종 파일 SHA 비교는 성공했지만, 제한된 실행 범위의 Chromium은 `ERR_CERT_AUTHORITY_INVALID`를 보고했다. 공식 `/usr/local/share/ca-certificates/environment-proxy-ca.crt`는 사용자 NSS의 `OpenAI-nebula-dns`와 같은 SHA-256 fingerprint로 이미 `C,,` 신뢰 상태였다. 공식 CA 등록 명령은 동일 인증서를 중복 추가하지 않았으며, 임의 CA를 추가하거나 NSS DB를 삭제하지 않았다.
+
+```sh
+openssl x509 -in /usr/local/share/ca-certificates/environment-proxy-ca.crt -noout -subject -fingerprint -sha256
+certutil -L -d sql:/home/agent/.pki/nssdb
+certutil -L -d sql:/home/agent/.pki/nssdb -n OpenAI-nebula-dns -a | openssl x509 -noout -fingerprint -sha256
+# CA가 실제로 없는 새 환경에서만, 해당 환경이 제공한 공식 CA를 등록:
+certutil -A -d sql:/home/agent/.pki/nssdb -n OpenAI-environment-proxy -t 'C,,' -i /usr/local/share/ca-certificates/environment-proxy-ca.crt
+```
+
+같은 Playwright HTTPS preflight를 Codex `exec_command`의 `sandbox_permissions: require_escalated`로 실행하자 HTTP 200과 정상 페이지 제목을 확인했다. 공개 게임 검사도 승인된 같은 실행 범위를 사용해 기존 NSS 저장소 접근을 허용했다. `HOME`, proxy 변수, TLS 검증 옵션을 변경하지 않았고 `ignore_https_errors`나 인증서 오류 무시 플래그도 사용하지 않았다. 이 비교는 이 클라우드 환경의 실행 범위/NSS 접근 차이에 대한 기록이며 공개 사이트의 인증서 결함으로 분류하지 않는다. 초기 브라우저 실패 보고서는 `Artifacts/Validation/PublicWeb`의 이전 실행 폴더에 보존했다. 인증서 원문은 저장소에 넣지 않는다.

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T08:45:39.187129+00:00",
+  "recordedUtc": "2026-10-23T09:02:49.028880+00:00",
   "baselineRecord": "Tools/Environment/validation-2026-10-20.json",
   "editorVersion": "6000.3.26f1",
   "editorRevision": "de8167e7440c",
@@ -145,7 +145,18 @@
       "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
     }
   },
-  "publicWeb": {},
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 33,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json"
+    },
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 41,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json"
+    }
+  },
   "cloudStartConfiguration": {
     "status": "draft saved and reread confirmed identical",
     "revision": 10,

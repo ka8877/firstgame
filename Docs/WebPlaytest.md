@@ -2,6 +2,10 @@
 
 PC 및 모바일 브라우저에 동일한 URL을 배포하고, 개발 중에는 그 주소의 파일을 갱신한다. 정식 Windows 설치판은 별도로 만든다. 모바일은 가로 화면을 기준으로 터치 입력을 제공하며 실제 휴대폰의 성능과 브라우저 호환성은 별도 확인한다.
 
+**게시된 체험판: [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)**
+
+공개 랜딩의 PC·모바일 화면, 배포 파일 전체의 SHA-256 일치, 두 게임의 공개 모바일 터치·저장·새로고침·이어하기를 확인했다. 상세 결과는 [검증 기록](Validation.md)과 `Artifacts/Validation/PublicWeb`에 있다.
+
 ## 배포 구조
 
 - `main`: 편집 가능한 두 Unity 프로젝트·원화·문서. 저장소의 공개 여부는 배포 스크립트가 변경하지 않는다.
@@ -16,7 +20,7 @@ PC 및 모바일 브라우저에 동일한 URL을 배포하고, 개발 중에는
 
 저장소 소유자가 [Settings → Pages](https://github.com/ka8877/firstgame/settings/pages)에서 **Build and deployment → Source → GitHub Actions**를 선택한다. 비공개 저장소의 Pages는 GitHub 계정 요금제에 따라 제공되지 않을 수 있다. 업그레이드나 소스 공개 전환을 자동으로 수행하지 않는다. 사용할 수 없다면 웹 빌드만 담는 별도 공개 저장소나 사용자가 이미 이용하는 정적 호스팅으로 같은 폴더를 배포할 수 있다.
 
-Pages가 활성화되면 [Publish web playtest](https://github.com/ka8877/firstgame/actions/workflows/publish-web.yml)에서 **Run workflow**를 실행한다. 예상 기본 주소는 `https://ka8877.github.io/firstgame/`이지만, 배포 성공 및 실제 HTTP/게임 실행을 확인하기 전에는 작동하는 주소로 보고하지 않는다.
+Pages가 활성화되면 [Publish web playtest](https://github.com/ka8877/firstgame/actions/workflows/publish-web.yml)에서 **Run workflow**를 실행한다. 현재 주소는 `https://ka8877.github.io/firstgame/`이다. 이후 배포도 Actions 성공에 더해 실제 공개 파일과 게임 실행을 확인한다.
 
 ## 이후 업데이트
 

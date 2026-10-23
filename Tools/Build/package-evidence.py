@@ -16,6 +16,7 @@ selected = [
     root / "Docs/ArtDirection.md",
     root / "Docs/VisualValidation.md",
     root / "Docs/WebPlaytest.md",
+    root / "Docs/Environment.md",
     root / "Docs/Illustration.md",
     root / "Tools/Art/ToonDawn.md",
     root / "Tools/Environment/validation.json",

@@ -1,13 +1,13 @@
 # 새 비주얼과 모바일 웹 검증
 
-2026-10-23 최종 로컬 Web 빌드의 실제 브라우저 검사 **6종이 모두 통과**했다. 카드 게임은 Chromium/SwiftShader, 서사 게임은 Chromium X11/Mesa llvmpipe에서 실행했다. 각 보고서의 파일 SHA-256을 현재 최종 빌드와 다시 대조해 모두 일치함을 확인했다. 전체 빌드·배포 상태는 [Validation.md](Validation.md)를 따른다.
+2026-10-23 최종 로컬 Web 빌드의 실제 브라우저 검사 **6종과 공개 URL 모바일 2종이 모두 통과**했다. 카드 게임은 Chromium/SwiftShader, 서사 게임은 Chromium X11/Mesa llvmpipe에서 실행했다. 각 보고서의 파일 SHA-256을 현재 최종 빌드와 다시 대조해 모두 일치함을 확인했다. 전체 빌드·배포 상태는 [Validation.md](Validation.md)를 따른다.
 
 | 실제 조작 환경 | FantasyCards | PathOfDawn |
 |---|---:|---:|
 | 데스크톱 1280×720 | 24/24 통과 | 30/30 통과 |
 | 데스크톱 1920×1080 | 26/26 통과 | 30/30 통과 |
 | 모바일 가로 844×390 | 27/27 통과 | 35/35 통과 |
-| 공개 URL 모바일 가로 | 배포 완료 후 실행 예정 | 배포 완료 후 실행 예정 |
+| 공개 URL 모바일 가로 | 33/33 통과 | 41/41 통과 |
 
 카드 최종 런타임은 HTML+Build 5파일 **40,962,139 bytes**, 서사는 5파일 **37,647,180 bytes**다. 로컬 보고서는 `Artifacts/Validation/VisualWeb/{Desktop720,Desktop1080,Mobile844}/{Game}/report.json`에 있다. 원본 화면·실제 입력·OCR·콘솔·네트워크·저장 근거를 함께 보존했다. 최종 실행에서 미처리 JavaScript 오류, console 오류, HTTP 오류, 설명되지 않은 요청 실패는 없었다. 검사 후 브라우저와 Unity 프로세스가 종료됐음을 확인했다.
 
@@ -44,7 +44,7 @@ loader의 실제 `config.dataUrl`을 navigation마다 기록한다. 해시 파�
 
 ## 공개 확인과 재현
 
-공개 배포 뒤 `--base-url https://ka8877.github.io/firstgame/`로 두 게임의 모바일 흐름을 다시 실행한다. 플레이 전 공개 `index.html`, `Build/`, `StreamingAssets/`, `TemplateData/` 런타임 파일을 받아 최종 로컬 bytes/SHA-256과 일치하는지 검사한다. 도구 자체는 배포나 서버 파일 수정을 하지 않는다. 결과는 `Artifacts/Validation/PublicWeb/Mobile844/{Game}/report.json`에 기록한다. 공개 PC 플레이를 따로 수행하지 않으면 그 범위는 파일 동일성과 링크 확인으로 제한한다.
+실제 공개 주소 [https://ka8877.github.io/firstgame/](https://ka8877.github.io/firstgame/)에서 두 게임의 모바일 흐름을 다시 실행해 카드 **33/33**, 서사 **41/41**이 통과했다. 각 게임의 실제 공개 HTML+Build 5파일을 HTTPS로 받아 최종 로컬 bytes/SHA-256과 모두 일치함을 확인했다. 실제 터치·저장·전체 reload·이어하기를 반복했고, 서사는 조이스틱·카메라 드래그/복귀·NPC 대화도 확인했다. 공개 원본 화면을 직접 검수했고 script/console/HTTP/예상하지 못한 요청 오류가 없었다. 결과는 `Artifacts/Validation/PublicWeb/Mobile844/{Game}/report.json`에 있다. 도구 자체는 배포나 서버 파일 수정을 하지 않았다. 공개 PC 게임 플레이는 별도 실행하지 않았으므로 그 범위는 파일 동일성과 랜딩/링크 확인으로 제한한다. 초기 클라우드 Chromium 인증서 오류와 정상 NSS 접근으로 해결한 비교는 [환경 기록](Environment.md#공개-https와-chromium-nss)에 남겼으며 TLS 검증을 끄지 않았다.
 
 ```sh
 python3 -m unittest discover -s Tools/Validation -p 'test_web_smoke.py'
