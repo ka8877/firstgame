@@ -12,6 +12,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Playables;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 
@@ -41,10 +43,16 @@ namespace PathOfDawn.Presentation
         PlayableDirector director;
         AudioSource ambience, cue;
         BgmPlayer music;
+        DialogueVoicePlayer voice;
+        AudioSource musicSource;
+        DawnLocomotion travelerMotion;
+        VolumeProfile worldColorProfile;
+        Material runtimeSky;
         InputActionMap input;
         InputAction move, mouseLook, stickLook, interact, menu, memories;
         bool inGame, modal, inIntro, busy;
-        float yaw, pitch = 15, verticalSpeed, textScale = 1, volume = .65f;
+        float yaw, pitch = 9, verticalSpeed, textScale = 1, volume = .65f, musicDuck = 1;
+        Vector3 planarVelocity, cameraFollowVelocity;
         int lineIndex;
         int lastChoiceFrame = -1;
         List<string> activeLines;
@@ -68,8 +76,21 @@ namespace PathOfDawn.Presentation
             memories = input.AddAction("Memories", InputActionType.Button, "<Keyboard>/m"); memories.AddBinding("<Gamepad>/select");
         }
         void OnEnable() => input?.Enable();
-        void OnDisable() { input?.Disable(); }
-        void OnDestroy() { input?.Dispose(); }
+        void OnDisable() { input?.Disable(); voice?.Clear(); StopLocomotion(); }
+        void OnDestroy()
+        {
+            input?.Dispose();
+            if (worldColorProfile != null)
+            {
+                foreach (var effect in worldColorProfile.components) Destroy(effect);
+                Destroy(worldColorProfile);
+            }
+            if (runtimeSky != null)
+            {
+                if (RenderSettings.skybox == runtimeSky) RenderSettings.skybox = null;
+                Destroy(runtimeSky);
+            }
+        }
         void Start()
         {
             if (EventSystem.current == null) new GameObject("EventSystem", typeof(EventSystem));
@@ -108,31 +129,57 @@ namespace PathOfDawn.Presentation
             if (inGame && !modal && !inIntro && memories.WasPressedThisFrame()) ShowMemories();
             if (modal && !inIntro && dialogueAdvance != null && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
             { dialogueAdvance(); return; }
-            if (!inGame || modal || inIntro || busy) return;
+            if (!inGame || modal || inIntro || busy) { StopLocomotion(); return; }
             Vector2 look = stickLook.ReadValue<Vector2>() * (100 * Time.deltaTime);
             if (Mouse.current != null && Mouse.current.rightButton.isPressed) look += mouseLook.ReadValue<Vector2>() * .10f;
             if (touchLook != null && touchLook.isActiveAndEnabled) look += touchLook.ConsumeLook() * .10f;
-            yaw += look.x; pitch = Mathf.Clamp(pitch - look.y, -8, 42);
+            yaw += look.x; pitch = Mathf.Clamp(pitch - look.y, -5, 38);
             pivot.rotation = Quaternion.Euler(pitch, yaw, 0);
             var movement = Vector2.ClampMagnitude(move.ReadValue<Vector2>() + (touchMove != null && touchMove.isActiveAndEnabled ? touchMove.Value : Vector2.zero), 1);
             Vector3 direction = Quaternion.Euler(0, yaw, 0) * new Vector3(movement.x, 0, movement.y);
             if (direction.sqrMagnitude > 1) direction.Normalize();
+            var actor = actors["traveler"];
+            float turnAllowance = 1;
+            if (direction.sqrMagnitude > .0001f)
+            {
+                var facing = Quaternion.LookRotation(direction);
+                actor.rotation = Quaternion.RotateTowards(actor.rotation, facing, 440 * Time.deltaTime);
+                // Let the hips turn before a sharp reverse step instead of skating sideways.
+                turnAllowance = Mathf.InverseLerp(-.15f, .85f, Vector3.Dot(actor.forward, direction.normalized));
+            }
+            var wantedVelocity = direction * (DawnLocomotion.WalkingSpeed * turnAllowance);
+            planarVelocity = Vector3.MoveTowards(planarVelocity, wantedVelocity,
+                (wantedVelocity.sqrMagnitude > planarVelocity.sqrMagnitude ? 7.5f : 11f) * Time.deltaTime);
             if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
             verticalSpeed += Physics.gravity.y * Time.deltaTime;
-            controller.Move((direction * 2.3f + Vector3.up * verticalSpeed) * Time.deltaTime);
-            var actor = actors["traveler"];
-            if (direction.sqrMagnitude > .01f) actor.rotation = Quaternion.Slerp(actor.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 10);
+            Vector3 previousPosition = actor.position;
+            controller.Move((planarVelocity + Vector3.up * verticalSpeed) * Time.deltaTime);
             // Bounded authored slice; collision walls prevent leaving through geometry gaps.
             var p = actor.position; p.x = Mathf.Clamp(p.x, -11, 4.2f); p.z = Mathf.Clamp(p.z, -9, 9);
             if (p.y < -2) p = new Vector3(0, .15f, -5);
             if (p != actor.position) { controller.enabled = false; actor.position = p; controller.enabled = true; }
-            pivot.position = actor.position + Vector3.up * 1.45f;
+            travelerMotion?.ObserveMovement(actor.position - previousPosition, Time.deltaTime);
+            pivot.position = Vector3.SmoothDamp(pivot.position, actor.position + Vector3.up * 1.1f,
+                ref cameraFollowVelocity, .10f, Mathf.Infinity, Time.deltaTime);
             UpdatePrompt(); if (interact.WasPressedThisFrame()) Interact();
+        }
+        void LateUpdate()
+        {
+            // BgmPlayer owns saved volume/fade. Duck only the current frame's output, never preferences.
+            float target = voice != null && voice.IsPlaying ? .30f : 1;
+            musicDuck = Mathf.MoveTowards(musicDuck, target, Time.unscaledDeltaTime / (target < musicDuck ? .12f : .42f));
+            if (musicSource != null) musicSource.volume *= musicDuck;
+        }
+        void StopLocomotion()
+        {
+            planarVelocity = Vector3.zero;
+            travelerMotion?.StopImmediately();
         }
         void OnApplicationPause(bool paused) { if (paused && inGame && session != null) Save(); }
         void OnApplicationQuit() { if (inGame && session != null) Save(); }
         void ClearScreen()
         {
+            voice?.Clear();
             dialogueAdvance = null;
             if (screen != null) { screen.gameObject.SetActive(false); Destroy(screen.gameObject); }
             screen = ui.Fill(canvas, "Screen");
@@ -182,14 +229,14 @@ namespace PathOfDawn.Presentation
         }
         void StartNew()
         {
-            session = new NarrativeSession(compiledStory); ApplyWorld(); yaw = 0; pitch = 12; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
+            session = new NarrativeSession(compiledStory); ApplyWorld(); yaw = 0; pitch = 9; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
             ClearScreen(); BuildHud(); Save(); StartCoroutine(PlayIntro());
         }
         void ContinueGame()
         {
             var candidate = new NarrativeSession(compiledStory);
             if (!saves.LoadInto(candidate, out var error)) { message = "이어하기 실패 — 원본 보존\n" + error; ShowTitle(); return; }
-            CancelPresentation(); session = candidate; ApplyWorld(); yaw = actors["traveler"].eulerAngles.y; pitch = 12; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
+            CancelPresentation(); session = candidate; ApplyWorld(); yaw = actors["traveler"].eulerAngles.y; pitch = 9; pivot.rotation = Quaternion.Euler(pitch, yaw, 0); inGame = true; modal = false;
             ClearScreen(); BuildHud(); SwitchToPlay();
             if (session.Lines.Count > 0 || session.Choices.Count > 0) ShowDialogue(session.Lines);
         }
@@ -218,7 +265,11 @@ namespace PathOfDawn.Presentation
                 ui.Text(hud,"왼쪽 패드로 걷기 · 오른쪽 빈 화면을 밀어 둘러보기",380,1012,1430,66,34).alignment = TextAlignmentOptions.BottomLeft;
             }
             else
+            {
+                var guideBackdrop = ui.Card(hud,"Desktop guide backdrop",370,1030,1450,50,DawnUi.Ink);
+                guideBackdrop.GetComponent<Image>().raycastTarget = false;
                 ui.Text(hud,"WASD / 방향키: 걷기   ·   마우스 오른쪽 드래그: 카메라   ·   E: 대화·조사",380,1038,1430,40,20);
+            }
             RefreshObjective();
         }
         bool TouchInterface => DawnPlatformInput.UseTouchControls;
@@ -270,7 +321,7 @@ namespace PathOfDawn.Presentation
         }
         void ShowDialogue(IReadOnlyList<string> lines)
         {
-            activeLines = new List<string>(lines); lineIndex = 0; modal = true; SwitchToDialogue(); RenderDialogue();
+            StopLocomotion(); activeLines = new List<string>(lines); lineIndex = 0; modal = true; SwitchToDialogue(); RenderDialogue();
         }
         void RenderDialogue()
         {
@@ -279,7 +330,7 @@ namespace PathOfDawn.Presentation
             var panel = ui.Card(screen,"Dialogue",60,570,1800,470,DawnUi.Ink);
             if (lineIndex < activeLines.Count)
             {
-                string line = activeLines[lineIndex], speaker = "여행자의 기록", portrait = "traveler";
+                string fullLine = activeLines[lineIndex], line = fullLine, speaker = "여행자의 기록", portrait = "traveler";
                 Color accent = DawnUi.Gold;
                 if (line.StartsWith("미리암: ", StringComparison.Ordinal)) { speaker = "미리암"; portrait = "miriam"; accent = DawnUi.Teal; line = line.Substring(5); }
                 else if (line.StartsWith("예수님: ", StringComparison.Ordinal)) { speaker = "예수님"; portrait = "jesus"; accent = new Color(1,.68f,.46f); line = line.Substring(5); }
@@ -293,6 +344,11 @@ namespace PathOfDawn.Presentation
                 dialogueAdvance = () => { lineIndex++; RenderDialogue(); };
                 ui.Primary(panel,lineIndex+1 < activeLines.Count ? "다음 대사 [E]" : session.Choices.Count > 0 ? "선택하기 [E]" : "계속 [E]",1300,355,450,90,() => dialogueAdvance?.Invoke());
                 ui.Text(panel,(lineIndex+1).ToString("00")+"  /  "+activeLines.Count.ToString("00"),385,384,250,50,24,new Color(.7f,.8f,.83f));
+                if (voice != null && voice.PlayLine(fullLine))
+                {
+                    ui.Text(panel,"대사 음성",660,383,260,50,23,DawnUi.Teal);
+                    ui.Button(panel,"다시 듣기",960,355,300,90,() => voice.Replay(),!voice.Muted);
+                }
                 return;
             }
             if (session.Choices.Count > 0)
@@ -371,14 +427,19 @@ namespace PathOfDawn.Presentation
                 if(music != null) music.SetMuted(!music.Muted);
                 ShowSettings();
             });
-            ui.Text(p,"저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.",48,412,1320,50,26);
-            var field=ui.Input(p,48,465,1320,180);
-            ui.Button(p,"저장 내보내기",48,670,420,95,()=> {
+            ui.Text(p,"초반 대사 음성",48,428,780,60,26,DawnUi.Teal);
+            ui.Button(p,voice != null && voice.Muted ? "대사 음성 켜기" : "대사 음성 끄기",860,418,500,76,()=> {
+                if (voice != null) voice.SetMuted(!voice.Muted);
+                ShowSettings();
+            });
+            ui.Text(p,"저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.",48,507,1320,50,26);
+            var field=ui.Input(p,48,565,1320,125);
+            ui.Button(p,"저장 내보내기",48,710,420,80,()=> {
                 if(inGame && !Save()) { field.text=message; return; }
                 if(PersistentSaves.TryExport(activeSaveSlot,out var portable,out var error)) { field.text=portable; GUIUtility.systemCopyBuffer=portable; Notify("저장 JSON을 표시했습니다. 전체 선택 후 복사할 수 있습니다."); }
                 else { field.text=error; }
             });
-            ui.Button(p,"JSON 가져오기",488,670,420,95,()=> {
+            ui.Button(p,"JSON 가져오기",488,710,420,80,()=> {
                 string importSlot = SaveSlot + "-import-" + DateTime.UtcNow.Ticks;
                 bool valid(string payload) { try { sessionCheck(payload); return true; } catch { return false; } }
                 if(PersistentSaves.TryImport(importSlot,SaveGame,1,PortableVersion,field.text,valid,out var error))
@@ -421,7 +482,8 @@ namespace PathOfDawn.Presentation
         {
             controller.enabled=false;
             foreach(var p in session.World.actors) if(actors.TryGetValue(p.id,out var actor)) actor.SetPositionAndRotation(new Vector3(p.x,p.y,p.z),Quaternion.Euler(0,p.yaw,0));
-            controller.enabled=true; verticalSpeed=0; pivot.position=actors["traveler"].position+Vector3.up*1.45f;
+            controller.enabled=true; verticalSpeed=0; StopLocomotion(); cameraFollowVelocity=Vector3.zero;
+            pivot.position=actors["traveler"].position+Vector3.up*1.1f;
             sharedBasket.SetActive(session.World.basketShared); shelterRug.SetActive(session.World.shelterPrepared); connectionMarker.SetActive(session.World.peopleConnected);
             playCamera.PreviousStateIsValid=false; dialogueCamera.PreviousStateIsValid=false;
         }
@@ -432,14 +494,19 @@ namespace PathOfDawn.Presentation
             RevealWorld();
             introCamera.gameObject.SetActive(false); playCamera.gameObject.SetActive(true); dialogueCamera.gameObject.SetActive(true);
             Transform target=actors[session.World.pointId=="shore"?"jesus":"miriam"];
-            var focus=target.position+Vector3.up*1.25f;
-            dialogueCamera.transform.position=focus+(session.World.pointId=="shore" ? new Vector3(1.8f,.35f,-3.2f) : new Vector3(.9f,.25f,-1.5f));
+            var traveler=actors["traveler"];
+            var toward=target.position-traveler.position; toward.y=0;
+            if (toward.sqrMagnitude>.01f) traveler.rotation=Quaternion.LookRotation(toward);
+            // A longer conversation lens and eye-level framing complement the drawn portrait.
+            var focus=target.position+Vector3.up*1.32f;
+            dialogueCamera.transform.position=focus+(session.World.pointId=="shore" ? new Vector3(1.35f,.15f,-3.8f) : new Vector3(.7f,.18f,-2.3f));
             dialogueCamera.transform.LookAt(focus);
         }
         void CancelPresentation()
         {
             // Stop ALL time-dependent presentation before replacing world/Ink state.
             StopAllCoroutines(); if(director!=null) director.Stop();
+            StopLocomotion(); voice?.Clear();
             if(ambience!=null) ambience.Stop(); if(cue!=null) cue.Stop();
             foreach(var source in worldRoot.GetComponentsInChildren<AudioSource>(true)) source.Stop();
             inIntro=false; busy=false;
@@ -480,9 +547,30 @@ namespace PathOfDawn.Presentation
             shelterRug=Primitive("Shelter rug",PrimitiveType.Cube,new Vector3(-4,.04f,-3.6f),new Vector3(2,.035f,1.4f),new Color(.56f,.27f,.20f));
             connectionMarker=Primitive("Gathered water jars",PrimitiveType.Cylinder,new Vector3(-1,.3f,0),new Vector3(.42f,.3f,.42f),new Color(.64f,.43f,.22f));
             sharedBasket.SetActive(false); shelterRug.SetActive(false); connectionMarker.SetActive(false);
-            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.rotation=Quaternion.Euler(42,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional; light.color=new Color(1,.94f,.83f); light.intensity=1.3f; light.shadows=LightShadows.Soft;
-            RenderSettings.ambientLight=new Color(.64f,.72f,.83f); RenderSettings.fog=true; RenderSettings.fogColor=new Color(.72f,.85f,.91f); RenderSettings.fogDensity=.006f;
-            RenderSettings.skybox=Resources.Load<Material>("Art/DawnSky");
+            var sun=new GameObject("Warm dawn sunlight",typeof(Light)); sun.transform.SetParent(worldRoot.transform);
+            sun.transform.rotation=Quaternion.Euler(38,-35,0); var light=sun.GetComponent<Light>(); light.type=LightType.Directional;
+            light.color=new Color(1,.94f,.84f); light.intensity=1.15f; light.shadows=LightShadows.Soft;
+            light.shadowStrength=.62f; light.shadowBias=.035f; light.shadowNormalBias=.25f;
+            RenderSettings.ambientLight=new Color(.68f,.75f,.86f); RenderSettings.fog=true;
+            RenderSettings.fogMode=FogMode.ExponentialSquared; RenderSettings.fogColor=new Color(.67f,.80f,.88f); RenderSettings.fogDensity=.018f;
+            var skyTemplate=Resources.Load<Material>("Art/DawnSky");
+            if (skyTemplate != null)
+            {
+                runtimeSky=new Material(skyTemplate) { name="Galilee painted dawn sky" };
+                RenderSettings.skybox=runtimeSky;
+                var paintedSky=Resources.Load<Texture2D>("Art/galilee-painted-sky");
+                if (paintedSky != null)
+                {
+                    RenderSettings.skybox.SetTexture("_PaintedSky",paintedSky);
+                    RenderSettings.skybox.SetFloat("_PaintedBlend",.88f);
+                }
+            }
+            var grade=new GameObject("Storybook color",typeof(Volume)); grade.transform.SetParent(worldRoot.transform);
+            var global=grade.GetComponent<Volume>(); global.isGlobal=true; global.priority=1;
+            worldColorProfile=ScriptableObject.CreateInstance<VolumeProfile>(); global.sharedProfile=worldColorProfile;
+            var colors=worldColorProfile.Add<ColorAdjustments>(); colors.postExposure.Override(.05f);
+            colors.contrast.Override(5); colors.saturation.Override(4); colors.colorFilter.Override(new Color(1,.99f,.97f));
+            var vignette=worldColorProfile.Add<Vignette>(); vignette.intensity.Override(.12f); vignette.smoothness.Override(.65f);
         }
         void CreateActor(string id,GameObject prefab,Vector3 position,Color color)
         {
@@ -493,6 +581,8 @@ namespace PathOfDawn.Presentation
                 var model=Instantiate(prefab,root.transform); model.name=id+" · Character visual";
                 model.transform.SetLocalPositionAndRotation(Vector3.zero,Quaternion.identity);
                 foreach(var child in model.GetComponentsInChildren<Transform>(true)) child.gameObject.layer=2;
+                var motion=root.AddComponent<DawnLocomotion>(); motion.Initialize(model.GetComponentInChildren<Animator>());
+                if (id=="traveler") travelerMotion=motion;
             }
             else { var proxy=Primitive("Temporary "+id,PrimitiveType.Capsule,position+Vector3.up*.9f,new Vector3(.65f,.9f,.65f),color); proxy.transform.SetParent(root.transform,true); Destroy(proxy.GetComponent<Collider>()); }
             if (id != "traveler") { var collider=root.AddComponent<CapsuleCollider>(); collider.height=1.8f; collider.radius=.3f; collider.center=Vector3.up*.9f; }
@@ -509,18 +599,22 @@ namespace PathOfDawn.Presentation
         {
             mainCamera=Camera.main; if(mainCamera==null) { var go=new GameObject("Main Camera",typeof(Camera),typeof(AudioListener)); go.tag="MainCamera"; mainCamera=go.GetComponent<Camera>(); }
             mainCamera.backgroundColor=SkyColor; mainCamera.clearFlags=RenderSettings.skybox != null ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
+            mainCamera.nearClipPlane=.08f; mainCamera.farClipPlane=160; mainCamera.allowMSAA=true;
+            var cameraData=mainCamera.GetUniversalAdditionalCameraData();
+            cameraData.renderPostProcessing=true; cameraData.antialiasing=AntialiasingMode.FastApproximateAntialiasing;
+            cameraData.antialiasingQuality=AntialiasingQuality.High; cameraData.stopNaN=true; cameraData.dithering=true;
             var brain=mainCamera.GetComponent<CinemachineBrain>() ?? mainCamera.gameObject.AddComponent<CinemachineBrain>();
-            brain.DefaultBlend=new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut,.25f);
-            pivot=new GameObject("Third person target").transform; pivot.position=actors["traveler"].position+Vector3.up*1.45f;
-            playCamera=new GameObject("Play Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); playCamera.Follow=pivot; playCamera.LookAt=pivot; playCamera.Priority=10; playCamera.Lens.FieldOfView=48;
-            var follow=playCamera.gameObject.AddComponent<CinemachineFollow>(); follow.FollowOffset=new Vector3(0,1,-5);
+            brain.DefaultBlend=new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut,.4f);
+            pivot=new GameObject("Third person target").transform; pivot.position=actors["traveler"].position+Vector3.up*1.1f;
+            playCamera=new GameObject("Play Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); playCamera.Follow=pivot; playCamera.LookAt=pivot; playCamera.Priority=10; playCamera.Lens.FieldOfView=42;
+            var follow=playCamera.gameObject.AddComponent<CinemachineFollow>(); follow.FollowOffset=new Vector3(.35f,.85f,-5.8f);
             follow.TrackerSettings.BindingMode=Unity.Cinemachine.TargetTracking.BindingMode.LockToTarget;
             playCamera.gameObject.AddComponent<CinemachineRotationComposer>();
             var obstacles = playCamera.gameObject.AddComponent<CinemachineDeoccluder>();
             obstacles.CollideAgainst = 1;
             obstacles.AvoidObstacles = new CinemachineDeoccluder.ObstacleAvoidance { Enabled=true, CameraRadius=.22f,
                 MaximumEffort=4, Damping=.2f, DampingWhenOccluded=.1f, Strategy=CinemachineDeoccluder.ObstacleAvoidance.ResolutionStrategy.PullCameraForward };
-            dialogueCamera=new GameObject("Conversation Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); dialogueCamera.Priority=20; dialogueCamera.Lens.FieldOfView=43;
+            dialogueCamera=new GameObject("Conversation Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); dialogueCamera.Priority=20; dialogueCamera.Lens.FieldOfView=36;
             introCamera=new GameObject("Timeline Camera",typeof(CinemachineCamera)).GetComponent<CinemachineCamera>(); introCamera.Priority=30; introCamera.Lens.FieldOfView=48;
             director=gameObject.AddComponent<PlayableDirector>(); director.playOnAwake=false; director.extrapolationMode=DirectorWrapMode.None;
             var timeline=ScriptableObject.CreateInstance<TimelineAsset>(); timeline.name="Galilee dawn opening";
@@ -538,6 +632,8 @@ namespace PathOfDawn.Presentation
             var tone=new float[rate/3]; for(int i=0;i<tone.Length;i++) tone[i]=Mathf.Sin(2*Mathf.PI*440*i/rate)*Mathf.Exp(-12*i/(float)rate)*.2f;
             cue.clip=AudioClip.Create("Choice acknowledgement placeholder",tone.Length,1,rate,false); cue.clip.SetData(tone,0);
             music=BgmPlayer.Attach(gameObject,"Audio/dawn-on-galilee","POD.music",.65f);
+            foreach (var source in GetComponents<AudioSource>()) if(source.clip==music.Clip) musicSource=source;
+            voice=DialogueVoicePlayer.Attach(gameObject);
             ui.BeforeInteraction=()=>music?.NotifyUserGesture();
         }
         void PlayCue() { cue.Stop(); cue.Play(); }

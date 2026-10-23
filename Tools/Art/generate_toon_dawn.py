@@ -13,7 +13,7 @@ previous = json.loads((OUT/'AssetManifest.json').read_text())
 MANIFEST['assets'] = [a for a in previous['assets'] if '/FantasyCards/' in a['path']]
 MANIFEST['generator'] = 'Tools/Art/generate_toon_dawn.py'
 MANIFEST['status'] = 'Original stylized revision; authored procedural meshes, review candidate, not approved final character art'
-MANIFEST['revision'] = 'storybook-dawn-02'
+MANIFEST['revision'] = 'storybook-dawn-03-walk'
 random.seed(231023)
 
 palette = {
@@ -34,7 +34,7 @@ palette = {
  'blue':('POD_IndigoLinen',(.16,.42,.55)),
  'belt':('POD_RopeAndLeather',(.24,.125,.06)),
  'skin':('POD_WarmOliveSkin',(.64,.365,.215)),
- 'skinlight':('POD_SkinHighlights',(.87,.61,.43)),
+ 'skinlight':('POD_SkinHighlights',(.94,.72,.54)),
  'hair':('POD_DarkBrownHair',(.095,.041,.023)),
  'eyes':('POD_DarkEyes',(.012,.013,.013)),
  'gold':('POD_WovenOchreTrim',(.76,.48,.16)),
@@ -42,7 +42,7 @@ palette = {
  'blueshadow':('POD_IndigoFoldShadow',(.04,.19,.25)),
  'redshadow':('POD_MantleFoldShadow',(.39,.065,.045)),
  'eyewhite':('POD_EyeIvory',(.98,.94,.84)),
- 'iris':('POD_HazelIris',(.40,.23,.075)),
+ 'iris':('POD_HazelIris',(.26,.13,.045)),
  'lip':('POD_MutedRoseLips',(.51,.25,.21)),
  'innerskin':('POD_EarAndLidWarmth',(.53,.25,.16)),
  'miriamskin':('POD_MiriamOliveSkin',(.93,.72,.55)),
@@ -55,7 +55,10 @@ palette = {
  'lavender':('POD_LavenderBlossoms',(.66,.48,.83)),
  'rose':('POD_RoseBlossoms',(.98,.57,.64)),
  'meadow':('POD_MeadowVelvet',(.51,.65,.31)),
- 'distant':('POD_HazyGreenHills',(.49,.68,.58)),
+ 'path':('POD_SoftPathDust',(.83,.75,.51)),
+ 'pathedge':('POD_PathMeadowTransition',(.65,.70,.40)),
+ 'plaster':('POD_ShelterCreamPlaster',(.94,.89,.72)),
+ 'plastershade':('POD_ShelterPlasterShade',(.83,.79,.63)),
 }
 for key,(name,color) in palette.items():
     if key in M and M[key].name==name:
@@ -163,6 +166,89 @@ def join_objects(objects,name):
     bpy.context.view_layer.objects.active=objects[0];bpy.ops.object.join();obj=bpy.context.object;obj.name=name
     return obj
 
+def author_locomotion(arm,scene,name):
+    """Bake a planted-foot walk with actual knee/ankle articulation.
+
+    Every phase is authored in the sagittal plane with a two-link analytic leg
+    solve. Runtime moves the actor; these clips never translate the root bone.
+    A 0.65 m step over a 0.45 s stance matches the 1.45 m/s controller speed.
+    """
+    scene.render.fps=30;scene.frame_start=1;scene.frame_end=121
+    arm.animation_data_create()
+    def reset_pose():
+        for pb in arm.pose.bones:
+            pb.rotation_mode='XYZ';pb.rotation_euler=(0,0,0);pb.location=(0,0,0);pb.scale=(1,1,1)
+    def key_pose(frame):
+        for pb in arm.pose.bones:
+            pb.keyframe_insert(data_path='rotation_euler',frame=frame)
+            pb.keyframe_insert(data_path='location',frame=frame)
+    idle=bpy.data.actions.new(name+'_BasicIdle');arm.animation_data.action=idle
+    for frame,amount in [(1,0),(31,1),(61,0),(91,-1),(121,0)]:
+        reset_pose()
+        for n,rot in [('Spine',(.008*amount,0,.007*amount)),('Head',(.008*amount,0,-.012*amount)),('UpperArm_L',(.007*amount,.006*amount,.008*amount)),('UpperArm_R',(-.007*amount,-.006*amount,-.008*amount))]:
+            arm.pose.bones[n].rotation_euler=rot
+        key_pose(frame)
+    walk=bpy.data.actions.new(name+'_Walk');arm.animation_data.action=walk
+    for frame in range(1,29):
+        reset_pose();t=(frame-1)/27
+        # Lowest hip at double support; a gentle vertical arc as weight passes
+        # over the supporting leg, without moving the actor root or its collider.
+        drop=-.080+.030*math.sin(t*math.tau)**2
+        pelvis=arm.pose.bones['Pelvis']
+        pelvis.location=pelvis.bone.matrix_local.to_3x3().inverted()@Vector((0,0,drop))
+        arm.pose.bones['Spine'].rotation_euler=(.025,0,.035*math.sin(t*math.tau))
+        arm.pose.bones['Head'].rotation_euler=(-.018,0,-.025*math.sin(t*math.tau))
+        for side in (-1,1):
+            suffix='L' if side>0 else 'R';phase=(t+(0 if side>0 else .5))%1
+            if phase<.5:
+                fy=-.325+1.30*phase;fz=.10;foot_pitch=0
+            else:
+                swing=(phase-.5)*2
+                fy=.325*math.cos(math.pi*swing)
+                fz=.10+.115*math.sin(math.pi*swing)
+                foot_pitch=-.12*math.sin(math.pi*swing)
+            # Coordinates are (forward-Y, up-Z); the bend always points toward
+            # the toes (-Y). Segment lengths are the actual two 0.40 m bones.
+            hip=Vector((0,.90+drop));ankle=Vector((fy,fz));delta=ankle-hip
+            distance=min(.799,max(.1,delta.length));direction=delta.normalized()
+            perpendicular=Vector((direction.y,-direction.x))
+            knee=(hip+ankle)*.5+perpendicular*math.sqrt(max(0,.4*.4-distance*distance*.25))
+            thigh=math.atan2(knee.x-hip.x,-(knee.y-hip.y))
+            shin=math.atan2(ankle.x-knee.x,-(ankle.y-knee.y))
+            arm.pose.bones['Leg_'+suffix].rotation_euler.x=thigh
+            arm.pose.bones['Shin_'+suffix].rotation_euler.x=shin-thigh
+            arm.pose.bones['Foot_'+suffix].rotation_euler.x=foot_pitch-shin
+            arm.pose.bones['UpperArm_'+suffix].rotation_euler.x=-.28*math.cos(phase*math.tau)
+            arm.pose.bones['UpperArm_'+suffix].rotation_euler.z=-side*.035
+            arm.pose.bones['Forearm_'+suffix].rotation_euler.x=-.07-.045*max(0,math.sin(phase*math.tau))
+        key_pose(frame)
+    for channel in walk.fcurves:
+        for key in channel.keyframe_points:key.interpolation='LINEAR'
+    arm.animation_data.action=idle;reset_pose();scene.frame_set(1)
+    return idle,walk
+
+def export_character(path,arm,body,idle,walk,height):
+    """Export only this actor's two NLA takes, never other actors' actions."""
+    arm.animation_data.action=None
+    for action in (idle,walk):
+        track=arm.animation_data.nla_tracks.new();track.name=action.name
+        strip=track.strips.new(action.name,1,action);strip.name=action.name
+        strip.action_frame_start=action.frame_range[0];strip.action_frame_end=action.frame_range[1]
+        strip.extrapolation='NOTHING';strip.blend_type='REPLACE'
+    bpy.ops.object.select_all(action='DESELECT')
+    arm.select_set(True);body.select_set(True);bpy.context.view_layer.objects.active=arm
+    bpy.ops.export_scene.fbx(filepath=str(path),use_selection=True,object_types={'MESH','ARMATURE'},
+        apply_unit_scale=True,apply_scale_options='FBX_SCALE_UNITS',axis_forward='-Z',axis_up='Y',
+        add_leaf_bones=False,bake_anim=True,bake_anim_use_all_actions=False,bake_anim_use_nla_strips=True,
+        bake_anim_force_startend_keying=True,mesh_smooth_type='FACE',path_mode='AUTO')
+    for track in arm.animation_data.nla_tracks:track.mute=True
+    arm.animation_data.action=idle
+    MANIFEST['assets'].append({'path':str(path.relative_to(ROOT)),
+        'purpose':f'Original anime adult {height:.2f} m, continuous garment, 14-bone rig, planted-foot walk and idle; development art',
+        'meshes':1,'vertices':len(body.data.vertices),'triangles':sum(len(p.vertices)-2 for p in body.data.polygons),
+        'rigged':True,'bones':14,'clips':{'BasicIdle':4.0,'Walk':.9},'walk_speed_m_per_s':1.45,
+        'materials':sorted({m.name for m in body.data.materials if m}),'bytes':path.stat().st_size})
+
 def character(name,height,kind):
     # FBX's single baked take uses the scene name; preserve the established clip.
     scene=new_scene(name+'_BasicIdle')
@@ -179,7 +265,7 @@ def character(name,height,kind):
     elif kind=='miriam':
         rings=[(.13,.27,.16,.155,.045),(.19,.265,.155,.15,.045),(.50,.23,.145,.14,.05),(.80,.195,.13,.12,.04),(1.02,.135,.092,.09,.015),(1.08,.14,.095,.09,.01),(1.20,.165,.12,.10,.008),(1.34,.169,.11,.09,.004),(1.43,.15,.075,.07,0),(1.47,.097,.065,.06,0),(1.49,.058,.045,.045,0)]
     else:
-        rings=[(.67,.23,.135,.135,.025),(.72,.225,.13,.13,.02),(.87,.195,.12,.12,.02),(1.03,.16,.105,.1,.01),(1.09,.165,.11,.1,.01),(1.24,.195,.12,.105,.006),(1.40,.17,.10,.09,0),(1.46,.11,.075,.07,0),(1.49,.06,.05,.05,0)]
+        rings=[(.67,.24,.175,.155,.025),(.72,.235,.17,.15,.02),(.87,.205,.15,.135,.02),(1.03,.16,.105,.1,.01),(1.09,.165,.11,.1,.01),(1.24,.195,.12,.105,.006),(1.40,.17,.10,.09,0),(1.46,.11,.075,.07,0),(1.49,.06,.05,.05,0)]
     # Hermite interpolation in height makes neck-to-shoulder slopes continuous;
     # extra triangles alone cannot repair a box-shaped source silhouette.
     tailored=[]
@@ -224,7 +310,7 @@ def character(name,height,kind):
         part(uv(name+'_Ear',(side*.090,0,1.627),(.011,.009,.025),skinmat))
         part(uv(name+'_EarConcha',(side*.096,-.007,1.627),(.0045,.002,.013),'innerskin'))
         # Almond eyes: a convex surface with independently modeled lid contours.
-        cx=side*.037;cz=1.663;w=.031 if kind=='miriam' else .029;h=.012 if kind=='miriam' else .0105
+        cx=side*.038;cz=1.657;w=.032 if kind=='miriam' else .030;h=.015 if kind=='miriam' else .0135
         face_y=lambda x:-.080*math.sqrt(max(.05,1-(x/.095)**2))-.002
         rows=[]
         for j in range(9):
@@ -237,15 +323,16 @@ def character(name,height,kind):
             rows.append(row)
         part(patch(name+'_EyeWhite',rows,'eyewhite'))
         eyey=face_y(cx)-.003
-        iris=part(uv(name+'_Iris',(cx,eyey-.0008,cz),(.012,.0018,.010),'iris',32,12));iris.rotation_euler.z=side*.36
-        pupil=part(uv(name+'_Pupil',(cx,eyey-.0024,cz+.0002),(.0045,.0011,.0065),'eyes',24,12));pupil.rotation_euler.z=side*.36
-        part(uv(name+'_EyeGlint',(cx-.0031,eyey-.0040,cz+.0045),(.0022,.0006,.0022),'eyewhite',12,8))
+        iris=part(uv(name+'_Iris',(cx,eyey-.0008,cz),(.015,.0018,.0135),'iris',32,12));iris.rotation_euler.z=side*.36
+        pupil=part(uv(name+'_Pupil',(cx,eyey-.0024,cz+.0002),(.008,.0011,.010),'eyes',24,12));pupil.rotation_euler.z=side*.36
+        part(uv(name+'_EyeGlint',(cx-.0040,eyey-.0040,cz+.006),(.0031,.0006,.0031),'eyewhite',12,8))
+        part(uv(name+'_EyeGlintSmall',(cx+.004,eyey-.0040,cz-.004),(.0012,.0005,.0012),'eyewhite',10,6))
         upper=[];lower=[]
         for i in range(9):
             u=-1+i/4;x=cx+u*w;shape=max(0,1-u*u)**.58;y=face_y(x)-.0005
             upper.append((x,y-.001,cz+h*shape+side*u*.003));lower.append((x,y,cz-h*shape+side*u*.003))
-        part(curve(name+'_UpperLid',upper,.0017 if kind=='miriam' else .0012,'hair'))
-        part(curve(name+'_LowerLid',lower,.0010,'innerskin'))
+        part(curve(name+'_UpperLid',upper,.0020 if kind=='miriam' else .0016,'hair'))
+        part(curve(name+'_LowerLid',lower,.0006,'innerskin'))
         brow=[(cx-w*.94,face_y(cx-w*.94),cz+.021),(cx,face_y(cx),cz+.027),(cx+w*.94,face_y(cx+w*.94),cz+.021)]
         part(tube(name+'_Brow',brow,[.0013,.0027,.0008],'hair',8,.55))
         if kind=='miriam':
@@ -254,8 +341,8 @@ def character(name,height,kind):
     # Restrained lip contour; separate highlights make the expression readable in cel light.
     mouthz=1.585 if kind=='miriam' else 1.578;mw=.019 if kind=='miriam' else .022
     part(curve(name+'_MouthLine',[(-mw,-.075,mouthz+.004),(-mw*.4,-.083,mouthz),(0,-.085,mouthz-.001),(mw*.4,-.083,mouthz),(mw,-.075,mouthz+.004)],.0008,'lip'))
-    part(tube(name+'_UpperLip',[(-mw,-.075,mouthz+.004),(-mw*.3,-.084,mouthz+.003),(0,-.085,mouthz+.001),(mw*.3,-.084,mouthz+.003),(mw,-.075,mouthz+.004)],[.0005,.0017,.0015,.0017,.0005],'lip',8,.45))
-    part(tube(name+'_LowerLip',[(-mw*.8,-.078,mouthz+.001),(0,-.085,mouthz-.003),(mw*.8,-.078,mouthz+.001)],[.0005,.0017,.0005],'miriamblush' if kind=='miriam' else 'innerskin',8,.45))
+    # One graphic mouth contour reads as ink; sculpted lipstick-like lips made
+    # the previous face look like a realistic doll at the gameplay camera.
     # Scalp follows the cranial silhouette, with a shaped hairline and flowing locks.
     scalp=[]
     for j in range(15):
@@ -271,15 +358,20 @@ def character(name,height,kind):
     for side in (-1,1):
         for i in range(3):
             points=[(side*(.008+i*.013),.004,1.779-i*.002),(side*(.035+i*.015),-.053+i*.012,1.760),(side*(.065+i*.012),-.075+i*.014,1.728),(side*(.090+i*.003),-.036+i*.018,1.675-i*.008)]
-            part(tube(name+'_SweptHairLock',points,[.012,.019,.016,.002],'hairshine' if i==1 else 'hair',12,.40))
+            part(tube(name+'_SweptHairLock',points,[.014,.023,.020,.0007],'hairshine' if i==1 else 'hair',14,.22))
         if kind=='jesus':
             for i in range(5):
                 x=side*(.087+i*.004);y=-.005+i*.022
                 points=[(side*.075,y,1.73),(x,y+.002,1.66),(x+side*.008,y+.01,1.59),(x-side*.006,y+.002,1.52),(x+side*.008,y-.006,1.475)]
-                part(tube(name+'_ShoulderLengthHair',points,[.009,.014,.017,.013,.001],'hairshine' if i==3 else 'hair',12,.6))
+                part(tube(name+'_ShoulderLengthHair',points,[.010,.017,.020,.015,.0006],'hairshine' if i==3 else 'hair',14,.30))
         elif kind=='traveler':
             for i in range(3):
-                part(tube(name+'_ShortTempleHair',[(side*.078,.015+i*.023,1.73),(side*.096,.01+i*.023,1.68),(side*.09,.008+i*.023,1.625)],[.014,.018,.002],'hair',10,.55))
+                part(tube(name+'_ShortTempleHair',[(side*.078,.015+i*.023,1.73),(side*.096,.01+i*.023,1.68),(side*.09,.008+i*.023,1.625)],[.016,.021,.0007],'hair',12,.28))
+    if kind=='traveler':
+        # Deliberate asymmetrical swept bangs replace the round helmet outline.
+        for i in range(4):
+            x=-.059+i*.032
+            part(tube(name+'_GraphicFringe',[(x*.45,-.040,1.765),(x,-.079,1.738),(x+.018,-.086,1.700-i*.004)],[.018,.022,.0005],'hairshine' if i==2 else 'hair',14,.18))
     if kind=='jesus':
         beardrows=[]
         for j in range(9):
@@ -330,13 +422,15 @@ def character(name,height,kind):
         part(tube(name+'_Thumb_'+suf,[(side*.307,-.027,.991),(side*.296,-.038,.976),(side*.296,-.05,.958)],[.010,.009,.006],skinmat,10),'Forearm_'+suf)
         # Calves/trousers are only visible below hem; feet are a sculpted elongated form.
         if kind=='traveler':
-            part(loft(name+'_LinenTrouser_'+suf,[(.14,.059,.060,.053,.02),(.22,.061,.061,.057,.03),(.46,.070,.070,.065,.02),(.72,.075,.075,.07,.01),(.86,.077,.077,.07,0)],'creamshadow',32,8,center=(side*.102,0)),'Leg_'+suf)
-        part(tube(name+'_Ankle_'+suf,[(side*.10,0,.10),(side*.10,0,.24)],[.038,.043],skinmat,20),'Leg_'+suf)
-        part(uv(name+'_Foot_'+suf,(side*.10,-.042,.076),(.045,.100,.041),skinmat,24,12),'Leg_'+suf)
-        sole=bevelbox(name+'_SandalSole_'+suf,(side*.10,-.043,.017),(.105,.23,.034),'belt',.016);part(sole,'Leg_'+suf)
+            trouser=loft(name+'_LinenTrouser_'+suf,[(.14,.055,.057,.051,.012),(.23,.058,.060,.055,.02),(.36,.062,.065,.061,.012),(.45,.066,.068,.064,.006),(.50,.066,.068,.064,0),(.55,.068,.07,.065,.004),(.65,.073,.073,.068,.006),(.77,.077,.076,.070,.01),(.86,.079,.078,.071,0)],'creamshadow',32,8,center=(side*.102,0))
+            upper=lambda p:max(0,min(1,(p.z-.43)/.15))
+            pieces.append(skin_weights(trouser,{'Leg_'+suf:upper,'Shin_'+suf:lambda p:1-upper(p)}))
+        part(tube(name+'_Ankle_'+suf,[(side*.10,0,.10),(side*.10,0,.24)],[.034,.040],skinmat,20),'Shin_'+suf)
+        part(uv(name+'_Foot_'+suf,(side*.10,-.042,.068),(.042,.094,.034),skinmat,24,12),'Foot_'+suf)
+        sole=bevelbox(name+'_SandalSole_'+suf,(side*.10,-.043,.014),(.097,.215,.028),'belt',.013);part(sole,'Foot_'+suf)
         for yy in (-.098,-.038):
             points=[(side*.10-.044,yy,.048),(side*.10-.032,yy,.089),(side*.10,yy,.109),(side*.10+.032,yy,.089),(side*.10+.044,yy,.048)]
-            part(tube(name+'_SandalStrap_'+suf,points,[.007]*5,'belt',8,.4),'Leg_'+suf)
+            part(tube(name+'_SandalStrap_'+suf,points,[.006]*5,'belt',8,.4),'Foot_'+suf)
     # A fine voxel union provides a genuinely continuous sewn shoulder surface.
     # Exact Boolean was rejected after its coplanar/self-intersection edge cases
     # removed Miriam's garment in the actual preview. Reweight the final surface.
@@ -350,9 +444,21 @@ def character(name,height,kind):
     smooth(garment);garment.vertex_groups.clear();pieces.append(garment)
     armw=lambda p:max(0,min(1,(abs(p.x)-.17)/.085)) if p.z>.99 else 0
     fore=lambda p:max(0,min(1,(1.26-p.z)/.11))
-    skin_weights(garment,{'Spine':lambda p:(1-armw(p))*blend(p),'Pelvis':lambda p:(1-armw(p))*(1-blend(p)),
+    skirtw=lambda p:max(0,min(.38,(.92-p.z)*.55)) if kind!='traveler' else max(0,min(.82,(1.02-p.z)*2.5))
+    skin_weights(garment,{'Spine':lambda p:(1-armw(p))*blend(p),'Pelvis':lambda p:(1-armw(p))*(1-blend(p))*(1-skirtw(p)),
+        'Leg_L':lambda p:skirtw(p)*max(0,min(1,(p.x+.10)/.20)), 'Leg_R':lambda p:skirtw(p)*(1-max(0,min(1,(p.x+.10)/.20))),
         'UpperArm_L':lambda p:armw(p)*(1-fore(p)) if p.x>0 else 0,'Forearm_L':lambda p:armw(p)*fore(p) if p.x>0 else 0,
         'UpperArm_R':lambda p:armw(p)*(1-fore(p)) if p.x<0 else 0,'Forearm_R':lambda p:armw(p)*fore(p) if p.x<0 else 0})
+    for hem in [piece for piece in pieces if '_WovenHem' in piece.name]:
+        hem.vertex_groups.clear()
+        skin_weights(hem,{'Pelvis':lambda p:1-skirtw(p),
+            'Leg_L':lambda p:skirtw(p)*max(0,min(1,(p.x+.10)/.20)),
+            'Leg_R':lambda p:skirtw(p)*(1-max(0,min(1,(p.x+.10)/.20)))})
+    # A shallow open collar and fine sewn edging break the unshaped toy-shirt
+    # silhouette without adding floating rectangular costume slabs.
+    opening=mesh(name+'_OpenLinenCollar',[(-.052,-.085,1.475),(.052,-.085,1.475),(0,-.116,1.365)],[(0,2,1)],skinmat)
+    part(opening,'Spine')
+    part(curve(name+'_FoldedCollarEdge',[(-.056,-.087,1.476),(-.030,-.108,1.420),(0,-.119,1.364),(.030,-.108,1.420),(.056,-.087,1.476)],.0045,'creamshadow' if kind=='jesus' else 'gold'),'Spine')
     # Woven waist sash, narrow leather belt and tied end.
     waist=.166 if kind!='miriam' else .141
     part(loft(name+'_WaistSash',[(1.015,waist+.005,.111,.108,.01),(1.07,waist+.006,.113,.109,.01)],'gold' if kind=='miriam' else 'belt',64,14),'Pelvis')
@@ -404,16 +510,29 @@ def character(name,height,kind):
             for vertex in piece.data.vertices:
                 if any(g.group==group.index and g.weight>.99 for g in vertex.groups):
                     world=piece.matrix_world@vertex.co
-                    world.x*=1.13
-                    world.z=1.51+(world.z-1.51)*1.075
+                    world.x*=1.19
+                    world.z=1.51+(world.z-1.51)*1.105
                     vertex.co=piece.matrix_world.inverted()@world
+        else:
+            # Narrow the mannequin-like upper torso/arm span together. Applying
+            # it to every sewn/accessory surface avoids floating cuffs or straps.
+            for vertex in piece.data.vertices:
+                world=piece.matrix_world@vertex.co
+                factor=1-.06*max(0,min(1,(world.z-1.02)/.18))
+                world.x*=factor
+                vertex.co=piece.matrix_world.inverted()@world
     # Keep the established generic animation contract and weight transition at shoulders/waist.
     bpy.ops.object.armature_add();arm=bpy.context.object;arm.name=name+'_Rig';bpy.ops.object.mode_set(mode='EDIT')
     root=arm.data.edit_bones[0];root.name='Root';root.head=(0,0,0);root.tail=(0,0,.3)
     def bone(n,h,t,parent):b=arm.data.edit_bones.new(n);b.head=h;b.tail=t;b.parent=arm.data.edit_bones[parent]
     bone('Pelvis',(0,0,.85),(0,0,1.05),'Root');bone('Spine',(0,0,1.05),(0,0,1.48),'Pelvis');bone('Head',(0,0,1.48),(0,0,1.77),'Spine')
     for side in (-1,1):
-        s='L' if side>0 else 'R';bone('UpperArm_'+s,(side*.19,0,1.43),(side*.285,-.003,1.205),'Spine');bone('Forearm_'+s,(side*.285,-.003,1.205),(side*.332,-.029,.965),'UpperArm_'+s);bone('Leg_'+s,(side*.10,0,.90),(side*.10,0,.10),'Pelvis')
+        s='L' if side>0 else 'R'
+        bone('UpperArm_'+s,(side*.19*.94,0,1.43),(side*.285*.94,-.003,1.205),'Spine')
+        bone('Forearm_'+s,(side*.285*.94,-.003,1.205),(side*.332,-.029,.965),'UpperArm_'+s)
+        bone('Leg_'+s,(side*.10,0,.90),(side*.10,0,.50),'Pelvis')
+        bone('Shin_'+s,(side*.10,0,.50),(side*.10,0,.10),'Leg_'+s)
+        bone('Foot_'+s,(side*.10,0,.10),(side*.10,-.14,.065),'Shin_'+s)
     bpy.ops.object.mode_set(mode='OBJECT')
     body=join_objects(pieces,name+'_ToonSkinnedMesh')
     # Joining beveled accessories can import their custom loop-normal layer into
@@ -424,12 +543,9 @@ def character(name,height,kind):
     smooth(body)
     mod=body.modifiers.new('SmoothCharacterSkin','ARMATURE');mod.object=arm;body.parent=arm
     h=height/1.79;arm.scale=(h,h,h)
-    scene.render.fps=30;scene.frame_start=1;scene.frame_end=121
-    for frame,amount in [(1,0),(31,1),(61,0),(91,-1),(121,0)]:
-        for n,rot in [('Spine',(.004*amount,0,.004*amount)),('Head',(.008*amount,0,-.018*amount)),('UpperArm_L',(0,.006*amount,.007*amount)),('UpperArm_R',(0,-.006*amount,-.007*amount))]:
-            pb=arm.pose.bones[n];pb.rotation_mode='XYZ';pb.rotation_euler=rot;pb.keyframe_insert(data_path='rotation_euler',frame=frame)
-    arm.animation_data.action.name=name+'_BasicIdle';scene.frame_set(1)
-    export(POD/(name+'.fbx'),[arm,body],f'Original anime storybook adult {height:.2f}m; enlarged expressive eyes, smoothed tailored silhouette, Generic BasicIdle; not approved final character art',True)
+    idle,walk=author_locomotion(arm,scene,name)
+    export_character(POD/(name+'.fbx'),arm,body,idle,walk,height)
+    scene.frame_set(1)
     return scene,[arm,body]
 
 def lathe(name,profile,mat,n=40):
@@ -437,8 +553,13 @@ def lathe(name,profile,mat,n=40):
 
 def improved_hut():
     cx,cy=-4,-3
-    # Fine mortar joints and staggered masonry replace oversized toy blocks.
-    for row in range(7):
+    # Continuous lime plaster over a low stone foundation gives the shelter a
+    # cohesive hand-built silhouette. The old wall was a wall of toy blocks.
+    bevelbox('Hut_PlasteredRear',(cx,cy+1.68,1.27),(5.06,.38,2.20),'plaster',.09)
+    for side in (-1,1):
+        bevelbox('Hut_PlasteredSide',(cx+side*2.4,cy,1.27),(.38,3.74,2.20),'plastershade' if side<0 else 'plaster',.09)
+        bevelbox('Hut_PlasteredFront',(cx+side*1.82,cy-1.70,1.27),(1.42,.38,2.20),'plaster',.09)
+    for row in range(2):
         z=.17+row*.30
         for col in range(10):
             x=cx-2.18+col*.485+(row%2)*.05
@@ -450,7 +571,12 @@ def improved_hut():
         for side in (-1,1):
             for col in range(3):
                 bevelbox('Hut_FrontStone',(cx+side*(1.34+col*.48),cy-1.70,z),(.464,.36,.286),random.choice(['stone','stone_light']),.045)
-    bevelbox('Hut_DoorLintel',(cx,cy-1.70,2.21),(2.32,.45,.24),'stone_light',.075)
+    bevelbox('Hut_DoorLintel',(cx,cy-1.70,2.21),(2.32,.45,.24),'plaster',.11)
+    # Soft masonry reveals and a shallow rounded frame keep the familiar door
+    # position while removing the boxy contrast at the character's eye height.
+    for side in (-1,1):
+        tube('Hut_DoorReveal',[(cx+side*1.095,cy-1.92,.12),(cx+side*1.095,cy-1.92,1.65),(cx+side*.98,cy-1.92,2.08)],[.045,.045,.06],'stone_light',16)
+    curve('Hut_DoorArchTrim',[(cx-1.01,cy-1.93,2.06),(cx-.7,cy-1.95,2.28),(cx,cy-1.96,2.34),(cx+.7,cy-1.95,2.28),(cx+1.01,cy-1.93,2.06)],.045,'stone_light')
     for i in range(7):
         bevelbox('Hut_RoofTimber',(cx-2.3+i*.76,cy,2.40),(.12,4.04,.16),'wood',.025)
     for i in range(24):
@@ -584,8 +710,22 @@ def improved_boat(x,y,angle):
 
 def environment():
     scene=new_scene('Galilee_ToonEnvironment')
-    land=cone('Shore_Land',(0,0,-.20),12,11.8,.42,'sand',64);land.scale=(1,.78,1)
-    for v in land.data.vertices:v.co.x=min(v.co.x,4.7)
+    land=cone('Shore_Land',(0,0,-.20),12,11.8,.42,'meadow',96);land.scale=(1,.78,1)
+    for v in land.data.vertices:v.co.x=min(v.co.x,4.7+.13*math.sin(v.co.y*.5))
+    # Layered irregular path borders replace a bare brown disk. The centre stays
+    # flat for the existing controller/collision anchors; colour does the work.
+    for width,z,mat in [(1.95,.017,'pathedge'),(1.66,.021,'path'),(1.47,.024,'sand')]:
+        rows=[]
+        for j in range(41):
+            y=-9.1+j*.37;cx=-.3+.36*math.sin(y*.36)
+            w=width*(1+.07*math.sin(j*.79))
+            rows.append([(cx-w,y,z),(cx,y,z+.001),(cx+w,y,z)])
+        patch('Walkway_PainterlyMainPath',rows,mat)
+    branch=[]
+    for j in range(22):
+        t=j/21;x=-.2-4.0*t;y=-3.3-1.8*t
+        branch.append([(x,y-.60,.028),(x,y,.029),(x,y+.60,.028)])
+    patch('Walkway_ShelterSidePath',branch,'path')
     bevelbox('Galilee_Water',(14,0,-.055),(19,32,.06),'water',.015)
     for i in range(30):
         yy=-9+i*.61;xx=4.67+.10*math.sin(i*.8)
@@ -603,9 +743,8 @@ def environment():
             grass_tuft(x+math.cos(a)*sx*r,y+math.sin(a)*sy*r,random.uniform(.7,1.3))
         for k in range(5):
             a=k*2.4;flower_bed(x+math.cos(a)*sx*.65,y+math.sin(a)*sy*.6,random.uniform(.7,1))
-    # Low, rounded distant hills close the bare horizon without changing walkable anchors.
-    for x,y,sx,sy,h in [(-14,5,5,5,3.2),(-11,12,7,4,3.8),(-2,14,7,4,2.8),(9,18,9,4,3.0)]:
-        foliage_cloud('DistantHills',(x,y,-.18),(sx,sy,h),'distant',x)
+    # The painted panorama owns the distant shoreline. Ellipsoid hill meshes
+    # looked detached above the lake in the real Unity camera and are omitted.
     improved_hut()
     for x,y in [(-6.25,-4.9),(-1.75,-4.9),(-6.3,-1.1)]:
         flower_bed(x,y,1.25)
@@ -678,9 +817,10 @@ for (_,objects),loc in zip(chars,[(-.34,0,0),(0,0,0),(.34,0,0)]):copy_character(
 studio(portrait,(.1,-8,2.35),(0,0,1.60),1.2)
 portrait.render.resolution_x=1800;portrait.render.resolution_y=1000
 MANIFEST['material_colors']={mat.name:list(mat.diffuse_color)[:3] for mat in bpy.data.materials if mat.name.startswith(('POD_','FC_'))}
+(POD/'ToonPalette.json').write_text(json.dumps({'materials':[{'name':name,'r':color[0],'g':color[1],'b':color[2]} for name,color in MANIFEST['material_colors'].items() if name.startswith('POD_')]},indent=2)+'\n')
 MANIFEST['render_notice']='Actual Blender source render, not Unity gameplay. Unity toon shading is configured separately.'
-MANIFEST['geometry_notes']=['Final character custom split normals cleared after joining accessories; regular smooth vertex normals exported.','Skin weights renormalized after threshold pruning.','Shoulder and sleeve loft silhouette lowered; Hermite neck/shoulder interpolation.','Rounded canopy volumes, meadow/wildflowers, smooth stone edges and distant hills; existing gameplay anchors retained.']
-MANIFEST['known_limits']=['Original procedural anime storybook geometry, not scan or approved likeness','Generic BasicIdle only; no authored walk cycle, finger rig or facial animation','No UV textures/normal maps yet; deliberate multi-material stylized surfaces','Character eye/lip/hair details and continuous garments are real geometry; Unity material import must preserve all POD_* material slots']
+MANIFEST['geometry_notes']=['One continuous skinned garment and body visual per actor; smooth normals and normalized skin weights.','Fourteen bones including articulated shins and feet; separate 4 s BasicIdle and 0.9 s Walk takes.','Analytic planted-foot walk, 0.65 m step over 0.45 s stance, intended controller speed 1.45 m/s.','Larger graphic eyes, flatter tapered hair locks, narrow upper silhouette and sewn open collars.','Continuous plaster shelter, low stone foundation, meadow and irregular layered path; no far hill geometry, leaving the painted panorama visible.','ToonPalette.json is the authoritative colour source, avoiding stale external FBX material colours in Unity.']
+MANIFEST['known_limits']=['Original procedural anime storybook geometry, not scan or approved likeness','Authored walk/idle only; no finger rig, lip sync, facial expressions or cloth simulation','No UV textures/normal maps yet; deliberate multi-material stylized surfaces','Blender source renders are not Unity gameplay; player rendering and locomotion must be verified independently']
 (OUT/'AssetManifest.json').write_text(json.dumps(MANIFEST,ensure_ascii=False,indent=2)+'\n')
 (OUT/'ToonDawnManifest.json').write_text(json.dumps(MANIFEST,ensure_ascii=False,indent=2)+'\n')
 bpy.context.window.scene=lineup

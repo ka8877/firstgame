@@ -28,11 +28,17 @@
     },
     {
       "path": "Games/PathOfDawn/Assets/Art/Generated/JesusProxy.fbx",
-      "purpose": "Original anime storybook adult 1.80m; enlarged expressive eyes, smoothed tailored silhouette, Generic BasicIdle; not approved final character art",
+      "purpose": "Original anime adult 1.80 m, continuous garment, 14-bone rig, planted-foot walk and idle; development art",
       "meshes": 1,
-      "vertices": 87310,
-      "triangles": 173936,
+      "vertices": 87873,
+      "triangles": 175041,
       "rigged": true,
+      "bones": 14,
+      "clips": {
+        "BasicIdle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_speed_m_per_s": 1.45,
       "materials": [
         "POD_ChestnutHairLight",
         "POD_DarkBrownHair",
@@ -48,15 +54,21 @@
         "POD_SoftChestnutBeard",
         "POD_UnbleachedLinen"
       ],
-      "bytes": 4186124
+      "bytes": 4567036
     },
     {
       "path": "Games/PathOfDawn/Assets/Art/Generated/MiriamProxy.fbx",
-      "purpose": "Original anime storybook adult 1.70m; enlarged expressive eyes, smoothed tailored silhouette, Generic BasicIdle; not approved final character art",
+      "purpose": "Original anime adult 1.70 m, continuous garment, 14-bone rig, planted-foot walk and idle; development art",
       "meshes": 1,
-      "vertices": 87419,
-      "triangles": 174240,
+      "vertices": 87688,
+      "triangles": 174757,
       "rigged": true,
+      "bones": 14,
+      "clips": {
+        "BasicIdle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_speed_m_per_s": 1.45,
       "materials": [
         "POD_ChestnutHairLight",
         "POD_DarkBrownHair",
@@ -65,22 +77,27 @@
         "POD_EyeIvory",
         "POD_HazelIris",
         "POD_IndigoLinen",
-        "POD_MiriamCheekWarmth",
         "POD_MiriamOliveSkin",
         "POD_MutedRoseLips",
         "POD_RopeAndLeather",
         "POD_UnbleachedLinen",
         "POD_WovenOchreTrim"
       ],
-      "bytes": 4154940
+      "bytes": 4538364
     },
     {
       "path": "Games/PathOfDawn/Assets/Art/Generated/TravelerProxy.fbx",
-      "purpose": "Original anime storybook adult 1.76m; enlarged expressive eyes, smoothed tailored silhouette, Generic BasicIdle; not approved final character art",
+      "purpose": "Original anime adult 1.76 m, continuous garment, 14-bone rig, planted-foot walk and idle; development art",
       "meshes": 1,
-      "vertices": 60259,
-      "triangles": 119920,
+      "vertices": 63906,
+      "triangles": 127177,
       "rigged": true,
+      "bones": 14,
+      "clips": {
+        "BasicIdle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_speed_m_per_s": 1.45,
       "materials": [
         "POD_ChestnutHairLight",
         "POD_DarkBrownHair",
@@ -96,19 +113,18 @@
         "POD_SkinHighlights",
         "POD_WovenOchreTrim"
       ],
-      "bytes": 2941532
+      "bytes": 3323660
     },
     {
       "path": "Games/PathOfDawn/Assets/Art/Generated/GalileeShore.fbx",
       "purpose": "Refined original Galilee shore, unchanged runtime anchors; raw Unity hut (+4,+3), environment Y180 => hut(-4,-3), door-Z, water+X.",
       "meshes": 9,
-      "vertices": 213163,
-      "triangles": 405908,
+      "vertices": 181574,
+      "triangles": 342996,
       "rigged": false,
       "materials": [
         "POD_ChalkHighlights",
         "POD_GalileeTeal",
-        "POD_HazyGreenHills",
         "POD_LavenderBlossoms",
         "POD_LinenFoldShadow",
         "POD_MeadowVelvet",
@@ -117,10 +133,14 @@
         "POD_OliveLeafSilver",
         "POD_OliveSunlit",
         "POD_OliveWood",
+        "POD_PathMeadowTransition",
         "POD_RopeAndLeather",
         "POD_RoseBlossoms",
         "POD_SageGroundcover",
+        "POD_ShelterCreamPlaster",
+        "POD_ShelterPlasterShade",
         "POD_ShoreFoam",
+        "POD_SoftPathDust",
         "POD_SunlitLimestone",
         "POD_Terracotta",
         "POD_UnbleachedLinen",
@@ -128,10 +148,10 @@
         "POD_WildflowerCream",
         "POD_WovenOchreTrim"
       ],
-      "bytes": 7570412
+      "bytes": 6441308
     }
   ],
-  "revision": "storybook-dawn-02",
+  "revision": "storybook-dawn-03-walk",
   "material_colors": {
     "FC_AntiqueGold": [
       0.6100000143051147,
@@ -199,14 +219,9 @@
       0.7300000190734863
     ],
     "POD_HazelIris": [
-      0.4000000059604645,
-      0.23000000417232513,
-      0.07500000298023224
-    ],
-    "POD_HazyGreenHills": [
-      0.49000000953674316,
-      0.6800000071525574,
-      0.5799999833106995
+      0.25999999046325684,
+      0.12999999523162842,
+      0.04500000178813934
     ],
     "POD_IndigoFoldShadow": [
       0.03999999910593033,
@@ -278,6 +293,11 @@
       0.13500000536441803,
       0.07500000298023224
     ],
+    "POD_PathMeadowTransition": [
+      0.6499999761581421,
+      0.699999988079071,
+      0.4000000059604645
+    ],
     "POD_ReedOchre": [
       0.5799999833106995,
       0.5600000023841858,
@@ -298,20 +318,35 @@
       0.5899999737739563,
       0.30000001192092896
     ],
+    "POD_ShelterCreamPlaster": [
+      0.9399999976158142,
+      0.8899999856948853,
+      0.7200000286102295
+    ],
+    "POD_ShelterPlasterShade": [
+      0.8299999833106995,
+      0.7900000214576721,
+      0.6299999952316284
+    ],
     "POD_ShoreFoam": [
       0.5899999737739563,
       0.8500000238418579,
       0.800000011920929
     ],
     "POD_SkinHighlights": [
-      0.8700000047683716,
-      0.6100000143051147,
-      0.4300000071525574
+      0.9399999976158142,
+      0.7200000286102295,
+      0.5400000214576721
     ],
     "POD_SoftChestnutBeard": [
       0.17000000178813934,
       0.07500000298023224,
       0.03799999877810478
+    ],
+    "POD_SoftPathDust": [
+      0.8299999833106995,
+      0.75,
+      0.5099999904632568
     ],
     "POD_StoneShadow": [
       0.46000000834465027,
@@ -355,16 +390,18 @@
     ]
   },
   "render_notice": "Actual Blender source render, not Unity gameplay. Unity toon shading is configured separately.",
+  "geometry_notes": [
+    "One continuous skinned garment and body visual per actor; smooth normals and normalized skin weights.",
+    "Fourteen bones including articulated shins and feet; separate 4 s BasicIdle and 0.9 s Walk takes.",
+    "Analytic planted-foot walk, 0.65 m step over 0.45 s stance, intended controller speed 1.45 m/s.",
+    "Larger graphic eyes, flatter tapered hair locks, narrow upper silhouette and sewn open collars.",
+    "Continuous plaster shelter, low stone foundation, meadow and irregular layered path; no far hill geometry, leaving the painted panorama visible.",
+    "ToonPalette.json is the authoritative colour source, avoiding stale external FBX material colours in Unity."
+  ],
   "known_limits": [
     "Original procedural anime storybook geometry, not scan or approved likeness",
-    "Generic BasicIdle only; no authored walk cycle, finger rig or facial animation",
+    "Authored walk/idle only; no finger rig, lip sync, facial expressions or cloth simulation",
     "No UV textures/normal maps yet; deliberate multi-material stylized surfaces",
-    "Character eye/lip/hair details and continuous garments are real geometry; Unity material import must preserve all POD_* material slots"
-  ],
-  "geometry_notes": [
-    "Final character custom split normals cleared after joining accessories; regular smooth vertex normals exported.",
-    "Skin weights renormalized after threshold pruning.",
-    "Shoulder and sleeve loft silhouette lowered; Hermite neck/shoulder interpolation.",
-    "Rounded canopy volumes, meadow/wildflowers, smooth stone edges and distant hills; existing gameplay anchors retained."
+    "Blender source renders are not Unity gameplay; player rendering and locomotion must be verified independently"
   ]
 }

@@ -18,8 +18,9 @@ namespace FantasyCards.SmokeTests
 {
     public sealed class FantasyCardsSaveFailureSmokeTests
     {
-        const string Slot = "fantasy-battle";
+        const string Slot = "fantasy-battle-demo-v2";
         IDisposable storageScope;
+        IDisposable preferenceScope;
         FailingSaveBackend backend;
         Keyboard keyboard;
         InputSettings originalInputSettings, fixtureInputSettings;
@@ -46,6 +47,7 @@ namespace FantasyCards.SmokeTests
             yield return new EnterPlayMode();
             backend = new FailingSaveBackend();
             storageScope = PersistentSaves.UseBackendForTesting(backend);
+            preferenceScope = SmokeUi.PreserveDemoPreferences();
             originalInputSettings = InputSystem.settings;
             fixtureInputSettings = UnityEngine.Object.Instantiate(originalInputSettings);
             fixtureInputSettings.hideFlags = HideFlags.HideAndDontSave;
@@ -60,6 +62,7 @@ namespace FantasyCards.SmokeTests
         public IEnumerator LeaveGame()
         {
             yield return SmokeUi.UnloadBoot();
+            preferenceScope?.Dispose(); preferenceScope = null;
             if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
             keyboard = null;
             if (originalInputSettings != null) InputSystem.settings = originalInputSettings;
@@ -72,9 +75,7 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator FailedTitleAndEscapeKeepLiveProgressUntilSaveRetrySucceeds()
         {
-            SmokeUi.Click("새로운 결투");
-            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
-                5, "Battle Timeline did not release the UI input lock.");
+            yield return SmokeUi.StartDemoBattle();
             var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
             var liveEngine = ReadEngine(app);
             var savedA = JsonUtility.ToJson(liveEngine.State);

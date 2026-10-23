@@ -67,6 +67,125 @@ class AudioObservationTests(unittest.TestCase):
         self.assertEqual(evidence["frames"][0]["sharedWithOtherBufferNodeIds"], [30])
 
 
+class DialogueAudioObservationTests(unittest.TestCase):
+    def frames(self):
+        frames = AudioObservationTests().frames()
+        for frame in frames:
+            context = frame['contexts'][0]
+            context['buffers'][1].update({'duration': 7.193696, 'loop': False,
+                'sampleRate': 44100, 'playbackRate': 1, 'startArguments': [0], 'endedAtContextTime': None})
+        return frames
+
+    def summary(self, frames):
+        return web_smoke.voice_audio_summary(frames, {'id': 'opening-01', 'durationSeconds': 7.2})
+
+    def test_authored_mono_nonloop_source_requires_its_own_audible_route(self):
+        result = self.summary(self.frames())
+        self.assertEqual(result['sourceIdentities'], [[1, 30]])
+        self.assertTrue(result['isolatedVoiceRoute'])
+        self.assertTrue(result['allContextsRunning'])
+        self.assertEqual(result['audibleSampleFraction'], 1)
+        self.assertEqual(len(result['lifecycle']), 1)
+
+    def test_loop_stereo_wrong_duration_and_other_route_pcm_cannot_count_as_voice(self):
+        for mutation in ('loop', 'stereo', 'duration', 'disconnected', 'muted'):
+            with self.subTest(mutation=mutation):
+                frames = self.frames()
+                for frame in frames:
+                    context = frame['contexts'][0]
+                    voice = context['buffers'][1]
+                    if mutation == 'loop': voice['loop'] = True
+                    elif mutation == 'stereo': voice['channels'] = 2
+                    elif mutation == 'duration': voice['duration'] = 2
+                    elif mutation == 'disconnected':
+                        context['connections'] = [edge for edge in context['connections'] if edge[0] != 30]
+                    else:
+                        for channel in context['destinationRoutes'][1]['channels']: channel['rms'] = 0
+                result = self.summary(frames)
+                self.assertEqual(result['maximumRms'], 0)
+                self.assertEqual(result['audibleSampleFraction'], 0)
+
+    def test_naturally_finished_or_stopped_voice_retains_lifecycle_but_not_active_output(self):
+        for mutation in ('natural', 'event', 'stopped', 'unstarted'):
+            with self.subTest(mutation=mutation):
+                frames = self.frames()
+                for frame in frames:
+                    context = frame['contexts'][0]
+                    if mutation == 'natural': context['currentTime'] = 10
+                    elif mutation == 'event': context['buffers'][1]['endedAtContextTime'] = 1.8
+                    elif mutation == 'stopped': context['buffers'][1]['stoppedAtContextTime'] = 1.8
+                    else: context['buffers'][1]['startedAtContextTime'] = None
+                result = self.summary(frames)
+                self.assertFalse(result['sourceIdentities'])
+                self.assertEqual(len(result['lifecycle']), 1)
+
+    def test_shared_music_output_is_not_claimed_as_isolated_dialogue(self):
+        frames = self.frames()
+        for frame in frames: frame['contexts'][0]['connections'].append([10, 40, 0, 0])
+        self.assertFalse(self.summary(frames)['isolatedVoiceRoute'])
+
+    def test_replay_records_old_stop_and_new_buffer_without_conflating_identities(self):
+        frames = self.frames()
+        for frame in frames:
+            context = frame['contexts'][0]
+            old = context['buffers'][1]
+            new = copy.deepcopy(old)
+            old['stoppedAtContextTime'] = 1.5
+            new['nodeId'] = 31
+            context['buffers'].append(new)
+            context['connections'].append([31, 40, 0, 0])
+        result = self.summary(frames)
+        self.assertEqual(result['sourceIdentities'], [[1, 31]])
+        self.assertEqual({entry['nodeId'] for entry in result['lifecycle']}, {30, 31})
+        self.assertTrue(result['isolatedVoiceRoute'])
+
+    def test_future_scheduled_and_elapsed_offset_sources_are_not_live(self):
+        buffer = self.frames()[0]['contexts'][0]['buffers'][1]
+        buffer['startArguments'] = [5]
+        self.assertFalse(web_smoke.active_audio_buffer(buffer, 4))
+        self.assertTrue(web_smoke.active_audio_buffer(buffer, 6))
+        buffer['startArguments'] = [0, 6, .5]
+        self.assertTrue(web_smoke.active_audio_buffer(buffer, 1.2))
+        self.assertFalse(web_smoke.active_audio_buffer(buffer, 1.6))
+
+    def test_future_stop_is_still_a_live_and_shared_source_until_its_scheduled_time(self):
+        frames = self.frames()
+        for frame in frames:
+            context = frame['contexts'][0]
+            voice = context['buffers'][1]
+            voice.update({'stopCalledAtContextTime': 1.5, 'stoppedAtContextTime': 6, 'stopArguments': [6]})
+            context['connections'].append([30, 20, 0, 0])
+            self.assertTrue(web_smoke.active_audio_buffer(voice, 5))
+            self.assertFalse(web_smoke.active_audio_buffer(voice, 6))
+        self.assertEqual(self.summary(frames)['sourceIdentities'], [[1, 30]])
+        self.assertFalse(web_smoke.music_audio_summary(frames)['isolatedMusicRoute'])
+
+    def test_retained_completed_voice_does_not_make_bgm_route_appear_shared(self):
+        frames = self.frames()
+        for frame in frames:
+            context = frame['contexts'][0]
+            context['buffers'][1]['endedAtContextTime'] = 1.8
+            context['connections'].append([30, 20, 0, 0])
+        self.assertTrue(web_smoke.music_audio_summary(frames)['isolatedMusicRoute'])
+
+
+class ExpandedLayoutTests(unittest.TestCase):
+    def test_all_expanded_profile_contracts_validate(self):
+        definitions = json.loads(Path(__file__).with_name('web-smoke-layouts.json').read_text())['games']
+        for game, definition in definitions.items():
+            with self.subTest(game=game): web_smoke.validate_layout(game, definition)
+
+    def test_missing_or_out_of_frame_voice_control_is_rejected(self):
+        definition = json.loads(Path(__file__).with_name('web-smoke-layouts.json').read_text())['games']['PathOfDawn']
+        for invalid in ('missing', 'outside'):
+            with self.subTest(invalid=invalid):
+                changed = copy.deepcopy(definition)
+                points = changed['variants']['desktop']['points']
+                if invalid == 'missing': del points['voiceReplay']
+                else: points['voiceReplay'] = [1921, 970]
+                with self.assertRaises(ValueError): web_smoke.validate_layout('PathOfDawn', changed)
+
+
 class CacheRevalidationTests(unittest.TestCase):
     def setUp(self):
         url = "http://127.0.0.1:8123/FantasyCards/Web/Build/6e3f87a7bf44.unityweb"

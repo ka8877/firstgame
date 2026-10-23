@@ -9,6 +9,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using TMPro;
 
 namespace FantasyCards.SmokeTests
@@ -66,10 +68,13 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.Capture("FantasyCards", "10-deck-mobile", 844, 390,
                 () => AssertTouchButtons("+", "-", "기본 덱 복원", "덱 저장", "이전", "다음", "타이틀"));
             SmokeUi.Click("타이틀"); yield return null;
-            SmokeUi.Click("새로운 결투");
+            // Keep this fixed-seed visual regression independent from the real selectable demo flow below.
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            typeof(FantasyCardsApp).GetMethod("StartBattle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .Invoke(app, new object[] { 731029u });
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
                 5, "Battle Timeline must release the input lock.");
-            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var before, out var error), Is.True, error);
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version, out var before, out var error), Is.True, error);
             var savedBattle = JsonUtility.FromJson<BattleState>(before);
             SmokeUi.Click("새벽의 정원"); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "11-battle-mobile", 844, 390, () =>
@@ -90,7 +95,7 @@ namespace FantasyCards.SmokeTests
             { AssertArtCrops(); AssertHandNames(savedBattle); });
             yield return SmokeUi.Capture("FantasyCards", "14-battle-1080-hand-names", 1920, 1080, () =>
             { AssertArtCrops(); AssertHandNames(savedBattle); });
-            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var after, out error), Is.True, error);
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version, out var after, out error), Is.True, error);
             Assert.That(after, Is.EqualTo(before), "Gallery, selection, resizing, and captures must not alter battle state or RNG.");
 
             SmokeUi.Click("지형 전개");
@@ -104,7 +109,7 @@ namespace FantasyCards.SmokeTests
             place.onClick.Invoke(); // The same lane callback used by real pointer placement.
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable,
                 5, "Unit presentation must release the input lock.");
-            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var placed, out error), Is.True, error);
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version, out var placed, out error), Is.True, error);
             var placedBattle = JsonUtility.FromJson<BattleState>(placed);
             Assert.That(placedBattle.players[0].AtLane(0)?.definitionId, Is.EqualTo("dawn_scout"));
             Assert.That(placedBattle.players[0].hand.Count, Is.EqualTo(savedBattle.players[0].hand.Count - 2));
@@ -115,9 +120,95 @@ namespace FantasyCards.SmokeTests
                 yield return SmokeUi.Capture("FantasyCards", "15-unit-lane-" + viewport.x + "x" + viewport.y, viewport.x, viewport.y, () =>
                 { AssertLaneUnitLabels(placedBattle); AssertHandNames(placedBattle); AssertArtCrops(); });
             }
-            Assert.That(PersistentSaves.TryLoad("fantasy-battle", "starlight-oath", 1, CardCatalog.Version, out var placedAfter, out error), Is.True, error);
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version, out var placedAfter, out error), Is.True, error);
             Assert.That(placedAfter, Is.EqualTo(placed), "Unit layout and capture must not change the saved battle state.");
             LogAssert.NoUnexpectedReceived();
+        }
+
+        [UnityTest] public IEnumerator SelectableLeadersDecksAndOpeningHandUseActualUiCallbacks()
+        {
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(40));
+            Assert.That(DemoCatalog.Leaders.Length, Is.EqualTo(4));
+            Assert.That(DemoCatalog.StarterDecks.Length, Is.EqualTo(4));
+            SmokeUi.Click("새로운 결투"); yield return null;
+            foreach (var leader in DemoCatalog.Leaders) Assert.That(GameObject.Find("Leader " + leader.id), Is.Not.Null);
+            ClickObject("Leader kael"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "17-leader-selection-693x390", 693, 390, () =>
+            {
+                AssertTouchButtons("타이틀", "기본 덱 선택");
+                foreach (var leader in DemoCatalog.Leaders) AssertReadableLabel(leader.name);
+            });
+            SmokeUi.Click("기본 덱 선택"); yield return null;
+            ClickObject("Starter deck knights"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "18-four-starter-decks-693x390", 693, 390, () =>
+            {
+                AssertTouchButtons("리더 선택", "내 편집 덱 사용", "상대 선택");
+                foreach (var deck in DemoCatalog.StarterDecks) AssertReadableLabel(deck.name);
+            });
+            SmokeUi.Click("상대 선택"); yield return null;
+            ClickObject("Encounter 1"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "19-three-duels-693x390", 693, 390, () =>
+            {
+                AssertTouchButtons("덱 선택", "플레이 안내", "덱을 섞고 시작");
+                foreach (var encounter in DemoCatalog.Encounters) AssertReadableLabel(encounter.name);
+            });
+            SmokeUi.Click("덱을 섞고 시작");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null, 5, "Real deck shuffle must lead to the opening hand.");
+            var initial = ReadDemoBattle();
+            Assert.That(initial.players[0].leaderId, Is.EqualTo("kael"));
+            Assert.That(initial.players[0].deckId, Is.EqualTo("knights"));
+            Assert.That(initial.encounterIndex, Is.EqualTo(1));
+            Assert.That(initial.openingHandOpen, Is.True);
+            ClickObject("Card " + initial.players[0].hand[0].definitionId); yield return null;
+            Assert.That(ReadDemoBattle().randomState, Is.EqualTo(initial.randomState), "Selecting replacement cards is UI-only.");
+            yield return SmokeUi.Capture("FantasyCards", "20-opening-hand-693x390", 693, 390, () =>
+            { AssertTouchButtons("선택 해제", "선택한 1장 교체"); AssertHandNames(initial); });
+            SmokeUi.Click("선택한 1장 교체");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("저장") != null && SmokeUi.FindButton("저장").interactable, 5, "The new hand must enter the actual battle.");
+            var started = ReadDemoBattle();
+            Assert.That(started.openingHandOpen, Is.False);
+            Assert.That(started.players[0].mulliganUsed, Is.True);
+            Assert.That(started.players[0].hand.Count, Is.EqualTo(initial.rules.openingHand));
+            Assert.That(started.randomState, Is.Not.EqualTo(initial.randomState));
+            ClickObject("Player leader kael"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "21-leader-skill-693x390", 693, 390, () =>
+            {
+                AssertTouchButtons("돌아가기", "리더 기술 사용");
+                AssertReadableLabel(DemoCatalog.GetLeader("kael").skillName);
+                Assert.That(SmokeUi.FindButton("리더 기술 사용").interactable, Is.False, "The real zero-resource opening cannot use a skill.");
+            });
+            SmokeUi.Click("돌아가기"); yield return null;
+            var card = started.players[0].hand[0];
+            var handObject = GameObject.Find("Card " + card.definitionId);
+            var pointer = new ExtendedPointerEventData(EventSystem.current) { pointerId = 42, pointerType = UIPointerType.MouseOrPen, position = new Vector2(300, 60) };
+            ExecuteEvents.Execute(handObject, pointer, ExecuteEvents.pointerEnterHandler);
+            yield return null;
+            Assert.That(GameObject.Find("Hover explanation"), Is.Not.Null, "Input System mouse pointer IDs can be positive and must show explanations.");
+            yield return SmokeUi.Capture("FantasyCards", "22-card-hover-693x390", 693, 390, () =>
+            {
+                ExecuteEvents.Execute(GameObject.Find("Card " + card.definitionId), pointer, ExecuteEvents.pointerEnterHandler);
+                Canvas.ForceUpdateCanvases();
+                var popup = GameObject.Find("Hover explanation"); Assert.That(popup, Is.Not.Null);
+                foreach (var label in popup.GetComponentsInChildren<TMP_Text>()) AssertReadableLabel(label);
+            });
+            ExecuteEvents.Execute(GameObject.Find("Card " + card.definitionId), pointer, ExecuteEvents.pointerExitHandler); yield return null;
+            Assert.That(GameObject.Find("Hover explanation"), Is.Null);
+            Assert.That(JsonUtility.ToJson(ReadDemoBattle()), Is.EqualTo(JsonUtility.ToJson(started)), "Tooltip and leader inspection must not alter state or RNG.");
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        static BattleState ReadDemoBattle()
+        {
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version, out var payload, out var error), Is.True, error);
+            return JsonUtility.FromJson<BattleState>(payload);
+        }
+
+        static void ClickObject(string name)
+        {
+            var obj = GameObject.Find(name); Assert.That(obj, Is.Not.Null, name);
+            var button = obj.GetComponent<Button>(); Assert.That(button, Is.Not.Null, name);
+            Assert.That(button.IsActive() && button.IsInteractable(), Is.True, name);
+            button.onClick.Invoke();
         }
         static void AssertLaneUnitLabels(BattleState savedBattle)
         {
@@ -242,6 +333,28 @@ namespace FantasyCards.SmokeTests
             AssertRoundedCards();
             var backdrop = Resources.Load<Texture2D>("Art/battle-background");
             Assert.That(backdrop, Is.Not.Null, "The illustrated fantasy battlefield must be included in the player.");
+            var illustrations = Resources.LoadAll<FantasyCards.Data.CardAsset>("Data/Cards").Select(card => card.illustration).ToArray();
+            Assert.That(illustrations.Length, Is.EqualTo(40), "All forty authored card illustrations must be connected.");
+            Assert.That(illustrations.All(sprite => sprite != null), Is.True);
+            var atlases = illustrations.Select(sprite => sprite.texture).Distinct().ToArray();
+            Assert.That(atlases.Length, Is.EqualTo(10), "Forty cards use ten distinct two-by-two atlases.");
+            foreach (var sprite in illustrations)
+            {
+                Assert.That(sprite.texture.width, Is.GreaterThanOrEqualTo(1254), "Card atlas resolution must retain 627px cells.");
+                Assert.That(sprite.texture.height, Is.GreaterThanOrEqualTo(1254));
+                Assert.That(sprite.rect.width, Is.GreaterThanOrEqualTo(627));
+                Assert.That(sprite.rect.height, Is.GreaterThanOrEqualTo(627));
+                Assert.That(sprite.rect.width * 2, Is.EqualTo(sprite.texture.width));
+                Assert.That(sprite.rect.height * 2, Is.EqualTo(sprite.texture.height));
+            }
+            var portraits = DemoCatalog.Leaders.Select(leader => Resources.Load<Texture2D>("Art/portrait-" + leader.id)).ToArray();
+            foreach (var portrait in portraits)
+            {
+                Assert.That(portrait, Is.Not.Null, "Each leader must use its authored full portrait.");
+                Assert.That(portrait.width, Is.GreaterThanOrEqualTo(1000));
+                Assert.That(portrait.height, Is.GreaterThanOrEqualTo(1250));
+                Assert.That((float)portrait.width / portrait.height, Is.EqualTo(.8f).Within(.002f), "Leader portraits have a four-by-five source, not a card atlas cell.");
+            }
             var crops = UnityEngine.Object.FindObjectsByType<IllustrationCrop>(FindObjectsSortMode.None)
                 .Where(c => c.gameObject.activeInHierarchy).ToArray();
             Assert.That(crops.Length, Is.GreaterThan(0));
@@ -251,7 +364,23 @@ namespace FantasyCards.SmokeTests
             {
                 var image = crop.GetComponent<RawImage>(); var source = crop.SourceUv; var uv = image.uvRect;
                 Assert.That(image.texture, Is.Not.Null);
-                Assert.That(image.texture.width, Is.GreaterThanOrEqualTo(1254), "New illustration atlas must be connected.");
+                if (atlases.Contains(image.texture))
+                {
+                    // Artwork uses the authored 627px cell, inset by half a pixel on each edge.
+                    Assert.That(illustrations.Any(sprite => sprite.texture == image.texture &&
+                        Mathf.Abs(source.x * image.texture.width - (sprite.rect.x + .5f)) < .01f &&
+                        Mathf.Abs(source.y * image.texture.height - (sprite.rect.y + .5f)) < .01f &&
+                        Mathf.Abs(source.width * image.texture.width - (sprite.rect.width - 1)) < .01f &&
+                        Mathf.Abs(source.height * image.texture.height - (sprite.rect.height - 1)) < .01f), Is.True,
+                        "Each card crop must stay in one complete authored atlas cell, with the sampling inset.");
+                }
+                else
+                {
+                    Assert.That(image.texture == backdrop || portraits.Contains(image.texture), Is.True,
+                        "Non-atlas artwork must be the battlefield or a connected leader portrait.");
+                    Assert.That(source, Is.EqualTo(new Rect(0, 0, 1, 1)), "Portraits and backdrops use their whole source image.");
+                    if (image.texture == backdrop) Assert.That(image.texture.width, Is.GreaterThanOrEqualTo(1254));
+                }
                 Assert.That(uv.xMin, Is.GreaterThanOrEqualTo(source.xMin - .00001f));
                 Assert.That(uv.yMin, Is.GreaterThanOrEqualTo(source.yMin - .00001f));
                 Assert.That(uv.xMax, Is.LessThanOrEqualTo(source.xMax + .00001f));

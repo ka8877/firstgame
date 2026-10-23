@@ -1,20 +1,19 @@
 {
   "status": "passed",
   "generatedDateUtc": "2026-10-23",
-  "styleRevision": "anime-subculture-2",
-  "assetCount": 10,
+  "styleRevision": "anime-cel-demo-3",
+  "assetCount": 20,
+  "newGeneratedAssetCount": 15,
   "fileChecks": [
-    "PNG decoded",
-    "actual dimensions and mode recorded",
-    "original and destination SHA-256 match",
-    "copied byte-for-byte with no image editing/resampling",
-    "three portraits have actual transparency",
-    "four 2x2 atlases retain 627x627 cells and existing mapping",
-    "nine existing TextureImporter GUIDs preserved",
-    "new background TextureImporter uses 2D, clamp, no mipmaps and no NPOT scaling"
+    "All PNGs decoded; dimensions/mode/SHA-256 recorded",
+    "15 final imagegen outputs copied byte-for-byte without filesystem pixel edits",
+    "10 square 2x2 atlases map to 40 stable CardCatalog indices",
+    "Four new leader portraits contain actual transparency; initial and margin-edit generation steps retained",
+    "Five replaced FC TextureImporter GUIDs retained; new resources have distinct GUIDs",
+    "Existing PathOfDawn illustrations and FC battle background preserved"
   ],
-  "visualInspection": "All ten original imagegen outputs viewed. Distinct anime eyes and simplified facial forms, four card quadrants and subjects, character hands/equipment, coherent new title identities, complete portrait cutouts, calm arena center and title menu space reviewed. This is asset review, not user approval or Unity runtime validation.",
-  "previousRevision": "Tools/Art/Illustration/history/2026-10-23-painterly-generation-manifest.json",
+  "visualInspection": "All 15 final imagegen outputs viewed: clean anime linework, two/three-tone cel faces, distinct card subjects and 2x2 boundaries, natural hands, complete leader head/hand/weapon cutouts and title negative space checked. This is asset review, not user approval or Unity runtime validation.",
+  "previousRevision": "Tools/Art/Illustration/history/demo-expansion-baseline/generation-manifest.json",
   "assets": [
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-02-heroes.png",
@@ -23,9 +22,11 @@
         1254
       ],
       "mode": "RGB",
-      "bytes": 3675264,
-      "sha256": "dfd80219052f540c74a43e99a71b99876136f1b944f8299a1c39cb82c79d9297",
+      "bytes": 3367526,
+      "sha256": "b986ae7fd06fec876920451381559ff4739e2fe2ea980633b027a440a170109b",
       "guid": "02b59f94e26f0b964b9b9a429fb8fb17",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
       "existingGuidPreserved": true,
       "atlas": {
         "columns": 2,
@@ -47,7 +48,8 @@
       "bytes": 2961214,
       "sha256": "ae3211daf556aa3e89e862955001fd5b636ea753519f7c796ab8b60bc0db1332",
       "guid": "6c02b816735ac6e57a4028f9ad2143cc",
-      "existingGuidPreserved": true
+      "styleRevision": "anime-subculture-2",
+      "newInThisRevision": false
     },
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-01-terrain.png",
@@ -56,9 +58,11 @@
         1254
       ],
       "mode": "RGB",
-      "bytes": 3508191,
-      "sha256": "876869076751058a68e894e5b58202ee7f5e723f46f14cab60c43d06f33861ef",
+      "bytes": 3562084,
+      "sha256": "f3f662c2289d470f73f9a8dfc72d79e3929a874a3085c335e5494473aeecd6d9",
       "guid": "14171b7ecfd26011ab6c1634dad1ea52",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
       "existingGuidPreserved": true,
       "atlas": {
         "columns": 2,
@@ -80,7 +84,8 @@
       "bytes": 2831042,
       "sha256": "3583aa7588db9a046609abb467a8e148b62fa4b946e5d998b81513bee853e93c",
       "guid": "aabc280db5eb4bf1b8f6aecfc02efc97",
-      "existingGuidPreserved": false
+      "styleRevision": "anime-subculture-2",
+      "newInThisRevision": false
     },
     {
       "file": "Games/FantasyCards/Assets/Resources/Art/cards-04-relics.png",
@@ -89,9 +94,11 @@
         1254
       ],
       "mode": "RGB",
-      "bytes": 3564532,
-      "sha256": "408aab16493e907633821938855f7d42f36bb0e3aa296a9e87800ef641fc9204",
+      "bytes": 3081280,
+      "sha256": "0a6fa18a9a5af943bb95225278025ca7ed832584a656eb8c47ae1731701c19da",
       "guid": "9941f6dedf7512a65ae119febc7c4ca8",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
       "existingGuidPreserved": true,
       "atlas": {
         "columns": 2,
@@ -113,7 +120,8 @@
       "bytes": 2172428,
       "sha256": "a3060066eacb6de44eaacc4c5fc211f88b5c13f0afadf6a0ef6cea3922416b96",
       "guid": "07f24778199d4199895450bede882a74",
-      "existingGuidPreserved": true,
+      "styleRevision": "anime-subculture-2",
+      "newInThisRevision": false,
       "alpha": {
         "min": 0,
         "max": 255,
@@ -129,9 +137,11 @@
         941
       ],
       "mode": "RGB",
-      "bytes": 3438417,
-      "sha256": "5a318d92ef86108c9b37a9746d46de048644160e0cf18b6b5b4d318f2cb3e70e",
+      "bytes": 3441544,
+      "sha256": "a7bd0e550ed8e8d652a31f87721d8162f38d694eae4be9e01dad785adabedd5c",
       "guid": "6d1ca9f1763e46f789eb7681048d134b",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
       "existingGuidPreserved": true
     },
     {
@@ -141,9 +151,11 @@
         1254
       ],
       "mode": "RGB",
-      "bytes": 3940358,
-      "sha256": "bf219be30ee09b7804154167c867dede7aba6d828ac0f07d1956bcde0e1e5f84",
+      "bytes": 3657132,
+      "sha256": "a8f4f1efc65f55e5694fa79aacab5a3f6f2d76214f291823f95ffef8be3f3b02",
       "guid": "5befc12fe5763fc1da91ef57864b398f",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
       "existingGuidPreserved": true,
       "atlas": {
         "columns": 2,
@@ -165,7 +177,8 @@
       "bytes": 1767080,
       "sha256": "ba7b76ecfa1bc7321ec6b7758d46c005f6f6d9f54d5a962ca01c935598751996",
       "guid": "f88ef2b6ea7fc274887b6a69e2fc4bbf",
-      "existingGuidPreserved": true,
+      "styleRevision": "anime-subculture-2",
+      "newInThisRevision": false,
       "alpha": {
         "min": 0,
         "max": 255,
@@ -184,13 +197,226 @@
       "bytes": 1933185,
       "sha256": "dc2b7b1e12ac485bbc18a40d9365a8418d393fe1a21f3059201b851017be4f71",
       "guid": "74b2bcfe7902a7fc784d3cc6e0ba3513",
-      "existingGuidPreserved": true,
+      "styleRevision": "anime-subculture-2",
+      "newInThisRevision": false,
       "alpha": {
         "min": 0,
         "max": 255,
         "fullyTransparentPixels": 736656,
         "partiallyTransparentPixels": 836196,
         "opaquePixels": 192
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-05-sanctuaries.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3814123,
+      "sha256": "25ad6de263218e497ab12eb21da4910b6e091a310cdf0cc52cbc8f3ae923efa4",
+      "guid": "0a24df8e67a75e0fad359c63e7d25ab1",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-06-forest.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3525908,
+      "sha256": "560b5ed7ce6843e2e7b9dc9c53e853b13e4fc3342658857f2410011b11ab29e5",
+      "guid": "ae6c7375f57e50afbf6c41473cb6167e",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-07-tides.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3851572,
+      "sha256": "446763bc4d3c0b28d6f96f80ccab1a1063194e83bfbc97d65e8011c824cfd555",
+      "guid": "6ed55289d8ea51228b4164eec796da85",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-08-celestial.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3643362,
+      "sha256": "b81b9c0fd7e393000cdafdb80024144809f680f4fe18819e9fd6189c61daf931",
+      "guid": "9aba6f6453aa598da9fafa52410f2369",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-09-spells.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3675758,
+      "sha256": "b2ec9333e9f4fa889e9b4c0cf51481c305f08e9df97b226e76e84106c547f44d",
+      "guid": "466e57e3de2153cfbe3b8332390f799b",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/cards-10-armaments.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "bytes": 3253076,
+      "sha256": "472fed28db3adcf244710cebfe88006aca33c6ce21c22ceb7cd4259c327be7b6",
+      "guid": "d47cb65ab6b75214890bca77fde7c993",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "atlas": {
+        "columns": 2,
+        "rows": 2,
+        "cellPixels": [
+          627,
+          627
+        ],
+        "order": "top-left, top-right, bottom-left, bottom-right"
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/portrait-lyria.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 2337589,
+      "sha256": "87ccf6e7128ebec8b2033fc9e4c6c495e52a6970038d7213accda5c7bf85800d",
+      "guid": "b592aa4d505c504f8bfee542f059800e",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 620625,
+        "partiallyTransparentPixels": 950872,
+        "opaquePixels": 1547
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/portrait-kael.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 1857344,
+      "sha256": "9594c1b98a5374c80af0cb1426bb22ef67877dbdc3c58ea4e25e8b2fab61e920",
+      "guid": "fa8c6448510a5701b51952ffb5afc8da",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 687011,
+        "partiallyTransparentPixels": 884743,
+        "opaquePixels": 1290
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/portrait-serin.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 2539593,
+      "sha256": "273c821a097c345119ac5efa17218b45ff9e2c920d1c7265d84ac687c182bb8a",
+      "guid": "cfc648280a0e525d80bd358eb0bc0fc5",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 454648,
+        "partiallyTransparentPixels": 1117123,
+        "opaquePixels": 1273
+      }
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Resources/Art/portrait-noa.png",
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "bytes": 2259170,
+      "sha256": "4b24f09a4c553f43dcfb09df3eccdf6de8450f2e358044dbc17af8b720a73e00",
+      "guid": "73992c53b271532db18f53dfc905f073",
+      "styleRevision": "anime-cel-demo-3",
+      "newInThisRevision": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "fullyTransparentPixels": 609070,
+        "partiallyTransparentPixels": 962603,
+        "opaquePixels": 1371
       }
     }
   ]

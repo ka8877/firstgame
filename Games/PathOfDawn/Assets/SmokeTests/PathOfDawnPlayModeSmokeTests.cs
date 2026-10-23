@@ -21,7 +21,8 @@ namespace PathOfDawn.SmokeTests
         IDisposable storageScope;
         Keyboard keyboard;
         InputSettings originalInputSettings, fixtureInputSettings;
-        bool hadSlot, hadScale, hadVolume, preferencesCaptured;
+        bool hadSlot, hadScale, hadVolume, hadVoiceMute, preferencesCaptured;
+        int originalVoiceMute;
         string originalSlot;
         float originalScale, originalVolume, originalListenerVolume;
 
@@ -34,9 +35,11 @@ namespace PathOfDawn.SmokeTests
             hadSlot = PlayerPrefs.HasKey("POD.activeSlot"); originalSlot = PlayerPrefs.GetString("POD.activeSlot", "");
             hadScale = PlayerPrefs.HasKey("POD.textScale"); originalScale = PlayerPrefs.GetFloat("POD.textScale", 1);
             hadVolume = PlayerPrefs.HasKey("POD.volume"); originalVolume = PlayerPrefs.GetFloat("POD.volume", .65f);
+            hadVoiceMute = PlayerPrefs.HasKey("POD.voice.muted"); originalVoiceMute = PlayerPrefs.GetInt("POD.voice.muted", 0);
             originalListenerVolume = AudioListener.volume; preferencesCaptured = true;
             // A known slot/settings baseline, while preserving every original key for teardown.
             PlayerPrefs.DeleteKey("POD.activeSlot"); PlayerPrefs.SetFloat("POD.textScale", 1); PlayerPrefs.SetFloat("POD.volume", .65f);
+            PlayerPrefs.SetInt("POD.voice.muted", 0);
             // Batch editor has no focused GameView. Use a disposable settings clone so queued
             // test keyboard events reach runtime actions without changing the project asset.
             originalInputSettings = InputSystem.settings;
@@ -65,6 +68,7 @@ namespace PathOfDawn.SmokeTests
                 if (hadSlot) PlayerPrefs.SetString("POD.activeSlot", originalSlot); else PlayerPrefs.DeleteKey("POD.activeSlot");
                 if (hadScale) PlayerPrefs.SetFloat("POD.textScale", originalScale); else PlayerPrefs.DeleteKey("POD.textScale");
                 if (hadVolume) PlayerPrefs.SetFloat("POD.volume", originalVolume); else PlayerPrefs.DeleteKey("POD.volume");
+                if (hadVoiceMute) PlayerPrefs.SetInt("POD.voice.muted", originalVoiceMute); else PlayerPrefs.DeleteKey("POD.voice.muted");
                 PlayerPrefs.Save(); AudioListener.volume = originalListenerVolume; preferencesCaptured = false;
             }
             if (Application.isPlaying) yield return new ExitPlayMode();
@@ -93,6 +97,15 @@ namespace PathOfDawn.SmokeTests
                 .Where(source => source.gameObject.activeInHierarchy && source.clip == soundtrack).ToArray();
             Assert.That(musicSources.Length, Is.EqualTo(1), "The soundtrack must not be doubled by duplicate sources.");
             Assert.That(musicSources[0].loop, Is.True);
+            var voice = app.GetComponent<DialogueVoicePlayer>();
+            Assert.That(voice, Is.Not.Null, "The actual app must own the opening narration player.");
+            Assert.That(voice.SupportedLineCount, Is.GreaterThanOrEqualTo(9), "The complete opening must have offline voice entries.");
+            foreach (var actor in new[] { "traveler", "jesus", "miriam" })
+            {
+                var motion = Resources.FindObjectsOfTypeAll<DawnLocomotion>().Single(m => m.gameObject.name == actor);
+                Assert.That(motion.HasLocomotionController, Is.True, actor + " needs the authored idle/walk blend controller.");
+                Assert.That(motion.CharacterAnimator.applyRootMotion, Is.False, "World movement must have one owner.");
+            }
             SmokeUi.AssertNoMissingScripts();
             yield return SmokeUi.Capture("PathOfDawn", "01-title");
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False);
@@ -104,6 +117,10 @@ namespace PathOfDawn.SmokeTests
             Assert.That(PlayerPrefs.GetFloat("POD.volume"), Is.EqualTo(.55f).Within(.001f));
             yield return SmokeUi.Capture("PathOfDawn", "09-settings-music-1920x1080", 1920, 1080, AssertMusicSettingsLayout);
             yield return SmokeUi.Capture("PathOfDawn", "10-settings-music-693x390", 693, 390, AssertMusicSettingsLayout);
+            SmokeUi.Click("대사 음성 끄기"); yield return null;
+            Assert.That(voice.Muted, Is.True);
+            SmokeUi.Click("대사 음성 켜기"); yield return null;
+            Assert.That(voice.Muted, Is.False);
             SmokeUi.Click("타이틀로"); yield return null;
             SmokeUi.Click("새 게임");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("다음 대사 [E]") != null,
@@ -114,7 +131,17 @@ namespace PathOfDawn.SmokeTests
                         "Timeline state=" + intro.state + " time=" + intro.time + " duration=" + intro.duration) +
                         " | Time.time=" + Time.time + " realTime=" + Time.realtimeSinceStartup + " delta=" + Time.deltaTime;
                 });
+            Assert.That(voice.HasCurrentLine, Is.True, "The displayed opening line must select its exact offline voice.");
+            Assert.That(voice.CurrentLineText, Is.EqualTo(new NarrativeSession(Resources.Load<Ink.UnityIntegration.InkFile>("Story/galilee").storyJson).Lines[0]));
+            var openingClip = voice.CurrentClip;
+            yield return SmokeUi.WaitUntil(() => openingClip.loadState == AudioDataLoadState.Loaded,
+                10, "The actual opening voice clip did not decode.");
+            Assert.That(openingClip.length, Is.GreaterThan(.5f));
+            SmokeUi.Click("다시 듣기"); yield return null;
+            Assert.That(voice.CurrentClip, Is.SameAs(openingClip), "Replay must keep the displayed line.");
+            yield return SmokeUi.Capture("PathOfDawn", "11-opening-voiced-dialogue");
             yield return DrainDialogueLines();
+            Assert.That(voice.HasCurrentLine, Is.False, "Leaving dialogue must clear the voice and queued playback.");
             Assert.That(ReadSave().world.pointId, Is.EqualTo("shore"));
             yield return WalkForwardWithKeyboard();
             yield return SmokeUi.Capture("PathOfDawn", "02-shore-gameplay");
@@ -209,6 +236,8 @@ namespace PathOfDawn.SmokeTests
             var track = texts.Single(text => text.text == "배경 음악 · 갈릴리의 새벽");
             var toggle = texts.Single(text => text.text == "배경 음악 켜기" || text.text == "배경 음악 끄기");
             var storage = texts.Single(text => text.text == "저장 옮기기 · 다른 기기에서도 같은 여정을 이어갈 수 있습니다.");
+            var voice = texts.Single(text => text.text == "초반 대사 음성");
+            var voiceToggle = texts.Single(text => text.text == "대사 음성 켜기" || text.text == "대사 음성 끄기");
             var panel = track.rectTransform.parent;
             Rect GlyphBounds(TMP_Text text)
             {
@@ -233,9 +262,15 @@ namespace PathOfDawn.SmokeTests
             var trackBounds = GlyphBounds(track);
             var toggleBounds = GlyphBounds(toggle);
             var storageBounds = GlyphBounds(storage);
+            var voiceBounds = GlyphBounds(voice);
+            var voiceToggleBounds = GlyphBounds(voiceToggle);
             Assert.That(trackBounds.Overlaps(toggleBounds), Is.False, "Track name overlaps the music button.");
             Assert.That(trackBounds.Overlaps(storageBounds) || toggleBounds.Overlaps(storageBounds), Is.False,
                 "Music controls overlap the save-transfer heading.");
+            Assert.That(voiceBounds.Overlaps(voiceToggleBounds), Is.False, "Voice label overlaps its setting.");
+            Assert.That(voiceBounds.Overlaps(storageBounds) || voiceToggleBounds.Overlaps(storageBounds) ||
+                voiceBounds.Overlaps(trackBounds) || voiceToggleBounds.Overlaps(toggleBounds), Is.False,
+                "Voice controls overlap other settings rows.");
         }
 
         static IEnumerator CaptureSmallTouchLayout()
@@ -303,12 +338,28 @@ namespace PathOfDawn.SmokeTests
             var traveler = GameObject.Find("traveler");
             Assert.That(traveler, Is.Not.Null);
             var origin = traveler.transform.position;
+            var motion = traveler.GetComponent<DawnLocomotion>();
+            Assert.That(motion, Is.Not.Null);
+            var visual = traveler.GetComponentInChildren<SkinnedMeshRenderer>();
+            Assert.That(visual, Is.Not.Null);
+            var shin = visual.bones.Single(b => b.name == "Shin_L");
+            var idleShin = shin.localRotation;
             try
             {
                 InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.W));
+                // The cloud software renderer can advance few game frames per wall-clock
+                // second during builds. Keep movement/pose thresholds, not a hardware FPS gate.
                 yield return SmokeUi.WaitUntil(() => traveler.transform.position.z - origin.z > .3f,
-                    3, "Holding W did not move the actual CharacterController forward.", () =>
+                    8, "Holding W did not move the actual CharacterController forward.", () =>
                         "Start=" + origin + " Current=" + traveler.transform.position + " keyboardEnabled=" + keyboard.enabled);
+                Assert.That(motion.NormalizedSpeed, Is.GreaterThan(.4f), "Actual displacement must drive walk animation.");
+                yield return SmokeUi.WaitUntil(() => Quaternion.Angle(idleShin, shin.localRotation) > 1f,
+                    8, "The authored knee must move while the real CharacterController walks.");
+                yield return SmokeUi.Capture("PathOfDawn", "12-walking-animation-a");
+                var firstStride = shin.localRotation;
+                yield return SmokeUi.WaitUntil(() => Quaternion.Angle(firstStride, shin.localRotation) > 3f,
+                    8, "The walking pose must progress through the authored stride, not stay in one bent pose.");
+                yield return SmokeUi.Capture("PathOfDawn", "13-walking-animation-b");
             }
             finally
             {
@@ -316,6 +367,12 @@ namespace PathOfDawn.SmokeTests
             }
             yield return null;
             Assert.That(traveler.transform.position.z - origin.z, Is.GreaterThan(.3f));
+            yield return SmokeUi.WaitUntil(() => motion.NormalizedSpeed < .02f,
+                8, "Releasing movement must return the character to idle without sliding.");
+            var stopped = traveler.transform.position;
+            yield return new WaitForSeconds(.2f);
+            Assert.That(Vector2.Distance(new Vector2(stopped.x, stopped.z), new Vector2(traveler.transform.position.x, traveler.transform.position.z)),
+                Is.LessThan(.025f), "The stationary character drifted after braking.");
         }
         IEnumerator WaitForConversation()
         {

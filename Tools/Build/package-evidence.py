@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Archive an explicit allowlist of validation evidence, excluding raw tool logs."""
+"""Archive allowlisted evidence, excluding raw logs, models and audio sources."""
 import hashlib
 import json
 from pathlib import Path
@@ -15,6 +15,8 @@ selected = [
     root / "Docs/CoreValidation.md",
     root / "Docs/ArtDirection.md",
     root / "Docs/Audio.md",
+    root / "Docs/Voice.md",
+    root / "Docs/FantasyCardsRules.md",
     root / "Docs/VisualValidation.md",
     root / "Docs/WebPlaytest.md",
     root / "Docs/Environment.md",
@@ -23,13 +25,29 @@ selected = [
     root / "Tools/Environment/validation.json",
     root / "Tools/Environment/validation-2026-10-20.json",
     root / "Tools/Environment/validation-2026-10-23-art-edition.json",
+    root / "Tools/Environment/validation-2026-10-23-subculture-bgm.json",
     root / "Docs/ValidationHistory/2026-10-23-art-edition.md",
+    root / "Docs/ValidationHistory/2026-10-23-subculture-bgm.md",
+    root / "Tools/Art/AssetManifest.json",
+    root / "Tools/Art/ToonDawnManifest.json",
     root / "Tools/Art/verification.json",
     root / "Tools/Art/toon-verification.json",
+    root / "Tools/Art/Illustration/generation-manifest.json",
+    root / "Tools/Art/Illustration/galilee-painted-sky.json",
     root / "Tools/Art/Illustration/verification.json",
     root / "Tools/Audio/production.json",
     root / "Tools/Audio/verification.json",
     root / "Tools/Audio/MUSIC-NOTICE.txt",
+    root / "Tools/Voice/production.json",
+    root / "Tools/Voice/verification.json",
+    root / "Tools/Voice/models.json",
+    root / "Tools/Voice/asr-model.json",
+    root / "Tools/Voice/license-sources.json",
+    root / "Tools/Voice/VOICE-NOTICE.txt",
+    root / "Tools/Voice/Licenses/MeloTTS-MIT.txt",
+    root / "Tools/Voice/Licenses/MeloTTS-Korean-model-card.md",
+    root / "Tools/Voice/Licenses/LMkor-Apache-2.0.txt",
+    root / "Games/PathOfDawn/Assets/Resources/Voice/opening-voice.json",
     artifacts / "Environment/pipeline-fantasycards.json",
     artifacts / "Environment/browser-prerequisites-best.json",
     artifacts / "Environment/managed-runtime.json",
@@ -47,8 +65,16 @@ selected.extend(sorted((root / "Tools/Art/Previews").glob("ToonDawn_*.png")))
 selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
-for pattern in ("*.png", "*.png.txt", "*.xml"):
+# Collect compact reports and captures, never raw Blender/Unity logs or voice files.
+for directory in ("ExpandedDemo", "Demo"):
+    for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx"):
+        selected.extend(sorted((artifacts / "Validation" / directory).rglob(pattern)))
+selected.extend(sorted((artifacts / "Validation/ExpandedDemo").glob("*-reference.txt")))
+# Preserve earlier recorded outcomes alongside the current demo, including failures.
+for pattern in ("*.png", "*.png.txt", "*.xml", "*.trx", "*.json", "*.md"):
     selected.extend(sorted((artifacts / "ValidationHistory").rglob(pattern)))
+for pattern in ("*.json", "*.md"):
+    selected.extend(sorted((root / "Tools/Art/Illustration/history").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/VisualAssets").glob("*.previous-*.json")))
 selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.json")))
 selected.extend(sorted((root / "Tools/Validation/VisualReferences").glob("*.png")))

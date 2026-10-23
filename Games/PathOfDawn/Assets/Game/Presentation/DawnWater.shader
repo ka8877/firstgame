@@ -26,15 +26,19 @@ Shader "PathOfDawn/Storybook Water"
             half4 frag(V i):SV_Target
             {
                 float2 p=i.world.xz;float t=_Time.y;
-                half depth=saturate((p.x-4.7)/14);
+                half depth=saturate((p.x-4.7)/20);
                 half3 col=lerp(_BaseColor.rgb,_DeepColor.rgb,depth*.75);
-                float bands=sin(p.y*3.8+p.x*.7+t*.48)+.38*sin(p.y*7.6-p.x*.5-t*.33);
-                float ripples=smoothstep(1.12,1.33,bands)*(.4+.6*pow(saturate(sin(p.x*1.8+p.y*.17)),3));
-                col=lerp(col,_FoamColor.rgb,ripples*.26);
+                float bands=sin(p.y*3.2+p.x*.37+t*.36)+.38*sin(p.y*6.1-p.x*.4-t*.27);
+                float edgeWidth=max(fwidth(bands)*1.2,.07);
+                float ripples=smoothstep(1.16-edgeWidth,1.31+edgeWidth,bands)*(.4+.6*pow(saturate(sin(p.x*1.8+p.y*.17)),3));
+                col=lerp(col,_FoamColor.rgb,ripples*.23);
                 float shoreline=(1-smoothstep(.05,.55,p.x-4.7))*smoothstep(.1,.5,sin(p.y*2.3+t*.6));
                 col=lerp(col,_FoamColor.rgb,shoreline*.55);
                 float3 view=GetWorldSpaceNormalizeViewDir(i.world);
-                col=lerp(col,half3(.73,.88,.96),pow(1-saturate(view.y),4)*.5);
+                col=lerp(col,half3(.69,.84,.96),pow(1-saturate(view.y),3)*.48);
+                float glimmer=pow(saturate(sin(p.y*12.8-p.x*3.1+t*.25)),24)*
+                    pow(saturate(sin(p.x*4.7+p.y*.19)),10);
+                col+=half3(1,.88,.61)*glimmer*.035;
                 return half4(MixFog(col,i.fog),1);
             }
             ENDHLSL

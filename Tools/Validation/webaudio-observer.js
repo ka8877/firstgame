@@ -90,7 +90,11 @@
     guard(() => {
       contextRecord(this.context).nodes.add(this);
       sourceEvents.set(this, {startedAtContextTime: this.context.currentTime,
-        startArguments: args, stoppedAtContextTime: null});
+        startArguments: args, stoppedAtContextTime: null, endedAtContextTime: null});
+      this.addEventListener("ended", () => guard(() => {
+        const event = sourceEvents.get(this);
+        if (event) event.endedAtContextTime = this.context.currentTime;
+      }), {once: true});
     });
     return result;
   };
@@ -98,7 +102,12 @@
     const result = stop.apply(this, args);
     guard(() => {
       const event = sourceEvents.get(this);
-      if (event) event.stoppedAtContextTime = this.context.currentTime;
+      if (event) {
+        event.stopCalledAtContextTime = this.context.currentTime;
+        event.stopArguments = args;
+        event.stoppedAtContextTime = Math.max(this.context.currentTime,
+          args.length && args[0] !== undefined ? Number(args[0]) : 0);
+      }
     });
     return result;
   };
@@ -139,7 +148,7 @@
     })};
   }
   Object.defineProperty(window, "__firstGameAudioEvidence", {value: Object.freeze({
-    version: 1,
+    version: 2,
     snapshot,
     async sampleWindow(milliseconds = 1800, interval = 150) {
       if (!(milliseconds > 0 && milliseconds <= 10000 && interval >= 50 && interval <= milliseconds))

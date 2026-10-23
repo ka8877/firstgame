@@ -44,12 +44,16 @@ def compact(text):
     return re.sub(r"[^0-9A-Za-z가-힣]", "", text)
 
 def validate_layout(game, definition):
-    point_keys = ({"titleNew", "titleContinue", "firstHand", "playTerrain", "save", "title", "scoutHand", "friendlyFirstLane"}
+    point_keys = ({"titleNew", "titleContinue", "playTerrain", "save", "title", "friendlyFirstLane", "selectionNext",
+                   "firstLeader", "firstDeck", "firstEncounter", "mulliganFifth", "mulliganConfirm", "leader",
+                   "leaderUse", "leaderBack", "detailBack", "detailOpen", "attackPhase", "actionMiddle"}
                   if game == "FantasyCards" else
                   {"titleNew", "titleContinue", "dialogueAdvance", "save", "settings", "settingsTitle",
-                   "joystickCenter", "joystickForward", "touchInteract", "cameraStart", "cameraEnd"})
-    region_keys = ({"title", "terrain", "resource", "inspectorName", "status", "friendlyLanes", "unitStats"} if game == "FantasyCards" else
-                   {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton", "settingsHeader", "inventory", "movementGuide"})
+                   "joystickCenter", "joystickForward", "touchInteract", "cameraStart", "cameraEnd", "voiceReplay", "voiceMute", "newJourneyConfirm"})
+    region_keys = ({"title", "terrain", "resource", "status", "friendlyLanes", "unitStats", "flowHeading", "flowSubtitle",
+                    "leaderChoices", "deckChoices", "encounterChoices", "selectionFooter", "detailName", "detailKind",
+                    "detailStats", "leaderName", "leaderReason", "leaderSkill", "leaderDeck", "actions", "phase"} if game == "FantasyCards" else
+                   {"title", "dialogueAdvance", "prompt", "notification", "cameraWorld", "inputGuide", "movementThumb", "touchButton", "settingsHeader", "inventory", "movementGuide", "voiceReplay", "voiceSetting", "newJourneyNotice"})
     variants = {"desktop", "compact"} if "compactBelowCanvasWidth" in definition else {"desktop"}
     if definition.get("audioValidation", {}).get("ready"):
         point_keys |= {"audioOpen", "audioMute", "audioDown", "audioUp", "audioClose"}
@@ -150,6 +154,74 @@ def gold_surface_fraction(pixels):
                   for r, g, b in zip(data[::3], data[1::3], data[2::3]))
     return matches / (len(data) / 3)
 
+def active_audio_buffer(buffer, context_time):
+    """A retained, naturally completed source is not ongoing audio evidence."""
+    if (buffer.get("startedAtContextTime") is None or buffer.get("endedAtContextTime") is not None or
+            (buffer.get("stoppedAtContextTime") is not None and context_time >= buffer["stoppedAtContextTime"])):
+        return False
+    arguments = buffer.get("startArguments", [])
+    start = max(buffer["startedAtContextTime"], arguments[0] if arguments else 0)
+    if context_time < start:
+        return False
+    if buffer.get("loop"):
+        return True
+    offset = arguments[1] if len(arguments) > 1 else 0
+    duration = min(buffer["duration"] - offset, arguments[2]) if len(arguments) > 2 else buffer["duration"] - offset
+    return context_time < start + duration / max(buffer.get("playbackRate", 1), .001)
+
+def audio_reachable(context, node):
+    reachable, pending = {node}, [node]
+    while pending:
+        current = pending.pop()
+        for source, target, _, _ in context["connections"]:
+            if source == current and target not in reachable:
+                reachable.add(target)
+                pending.append(target)
+    return reachable
+
+def voice_audio_summary(snapshots, expected_line):
+    """Match authored duration/mono/nonloop and prove a separate native PCM route.
+
+    Duration matching identifies a candidate, not speech semantics. The exact
+    dialogue, manifest and shipped runtime hashes are recorded separately.
+    """
+    frames, lifecycle, errors = [], {}, []
+    for snapshot in snapshots:
+        errors.extend(snapshot.get("errors", []))
+        for context in snapshot["contexts"]:
+            for buffer in context["buffers"]:
+                if (buffer["loop"] or buffer["channels"] != 1 or
+                        abs(buffer["duration"] - expected_line["durationSeconds"]) > .15):
+                    continue
+                identity = (context["id"], buffer["nodeId"])
+                lifecycle[identity] = dict(buffer, contextId=context["id"], observedContextTime=context["currentTime"])
+                if not active_audio_buffer(buffer, context["currentTime"]):
+                    continue
+                reachable = audio_reachable(context, buffer["nodeId"])
+                outputs = {source for source, target, _, _ in context["connections"]
+                           if source in reachable and target == context["destinationNodeId"]}
+                channels = [channel for route in context["destinationRoutes"] if route["sourceNodeId"] in outputs
+                            for channel in route["channels"]]
+                if not channels:
+                    continue
+                shared = [other["nodeId"] for other in context["buffers"]
+                          if other["nodeId"] != buffer["nodeId"] and active_audio_buffer(other, context["currentTime"])
+                          and outputs.intersection(audio_reachable(context, other["nodeId"]))]
+                frames.append({"wallTimeMs": snapshot["wallTimeMs"], "contextId": context["id"],
+                    "contextState": context["state"], "contextTime": context["currentTime"],
+                    "bufferNodeId": buffer["nodeId"], "buffer": buffer,
+                    "sharedWithOtherBufferNodeIds": shared,
+                    "rms": (sum(channel["rms"] ** 2 for channel in channels) / len(channels)) ** .5,
+                    "nonfiniteSamples": sum(channel["nonfinite"] for channel in channels)})
+    rms = [frame["rms"] for frame in frames]
+    return {"expectedLine": expected_line, "frames": frames, "lifecycle": list(lifecycle.values()),
+        "sourceIdentities": [list(value) for value in sorted({(f["contextId"], f["bufferNodeId"]) for f in frames})],
+        "sampleCount": len(frames), "maximumRms": max(rms, default=0),
+        "audibleSampleFraction": sum(value > 1e-5 for value in rms) / len(rms) if rms else 0,
+        "isolatedVoiceRoute": bool(frames) and not any(f["sharedWithOtherBufferNodeIds"] for f in frames),
+        "allContextsRunning": bool(frames) and all(f["contextState"] == "running" for f in frames),
+        "observerErrors": sorted(set(errors)), "nonfiniteSamples": sum(f["nonfiniteSamples"] for f in frames)}
+
 def music_audio_summary(snapshots):
     """Find the real long looping stereo buffer's output route, not ambient/SFX.
 
@@ -162,17 +234,9 @@ def music_audio_summary(snapshots):
         errors.extend(snapshot.get("errors", []))
         for context in snapshot["contexts"]:
             def reachable_from(node):
-                reachable, pending = {node}, [node]
-                while pending:
-                    current = pending.pop()
-                    for source, target, _, _ in context["connections"]:
-                        if source == current and target not in reachable:
-                            reachable.add(target)
-                            pending.append(target)
-                return reachable
+                return audio_reachable(context, node)
             buffers = [b for b in context["buffers"] if b["loop"] and b["duration"] >= 30 and
-                       b["channels"] == 2 and b.get("startedAtContextTime") is not None and
-                       b.get("stoppedAtContextTime") is None]
+                       b["channels"] == 2 and active_audio_buffer(b, context["currentTime"])]
             for buffer in buffers:
                 reachable = reachable_from(buffer["nodeId"])
                 output_nodes = {source for source, target, _, _ in context["connections"]
@@ -183,7 +247,7 @@ def music_audio_summary(snapshots):
                     continue
                 gains = [g["value"] for g in context["gains"] if g["nodeId"] in output_nodes]
                 shared = [other["nodeId"] for other in context["buffers"] if other["nodeId"] != buffer["nodeId"] and
-                          other.get("startedAtContextTime") is not None and other.get("stoppedAtContextTime") is None and
+                          active_audio_buffer(other, context["currentTime"]) and
                           output_nodes.intersection(reachable_from(other["nodeId"]))]
                 frames.append({"wallTimeMs": snapshot["wallTimeMs"], "contextId": context["id"],
                     "contextState": context["state"], "contextTime": context["currentTime"],
@@ -332,7 +396,7 @@ class Smoke:
         if response.status >= 400:
             self.report["httpErrors"].append(entry)
 
-    def observe_audio(self, label, milliseconds=1800):
+    def observe_audio(self, label, milliseconds=3000):
         snapshots = self.page.evaluate("""milliseconds => {
             if (!window.__firstGameAudioEvidence) throw new Error('Passive WebAudio observer is missing');
             return window.__firstGameAudioEvidence.sampleWindow(milliseconds);
@@ -403,8 +467,77 @@ class Smoke:
         self.check(restored["medianDestinationGain"] is not None and
                    abs(restored["medianDestinationGain"] / initial_gain - 1) < .035,
                    "Volume UI restores the original music output gain", restored)
+        if self.game == "PathOfDawn":
+            self.click_control("voiceMute", "Disable opening dialogue voice through the visible setting")
+            self.wait_text("대사 음성 켜기", region=self.region("voiceSetting"), psm=7)
         self.click_control("audioClose", "Return from music settings to the title")
         self.wait_title()
+
+    def observe_voice(self, label, line_id, milliseconds=3000):
+        manifest_path = ROOT / "Games/PathOfDawn/Assets/Resources/Voice/opening-voice.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        line = next(line for line in manifest["lines"] if line["id"] == line_id)
+        snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", milliseconds)
+        voice, music = voice_audio_summary(snapshots, line), music_audio_summary(snapshots)
+        filename = f"voice-{self.navigation_index}-{label}.json"
+        target = self.output / filename
+        target.write_text(json.dumps({"label": label, "snapshots": snapshots,
+            "voiceSummary": voice, "musicSummary": music}, ensure_ascii=False, indent=2), encoding="utf-8")
+        evidence = {key: value for key, value in voice.items() if key != "frames"}
+        evidence.update({"label": label, "navigation": self.navigation_index, "rawEvidence": filename,
+            "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+            "music": {key: value for key, value in music.items() if key != "frames"}})
+        record = self.report.setdefault("voiceEvidence", {"manifest": str(manifest_path.relative_to(ROOT)),
+            "manifestSha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(), "windows": [],
+            "limits": "Mono non-loop buffer duration and its isolated PCM output matched to the visibly selected authored line; this does not certify spoken words or physical speaker playback."})
+        record["windows"].append(evidence)
+        self.persist()
+        self.check(not voice["observerErrors"] and not voice["nonfiniteSamples"],
+                   "Dialogue audio observation is valid: " + label, evidence)
+        return evidence
+
+    def require_voice_output(self, evidence, label):
+        self.check(len(evidence["sourceIdentities"]) == 1 and evidence["sampleCount"] >= 6 and
+                   evidence["allContextsRunning"] and evidence["isolatedVoiceRoute"] and
+                   evidence["audibleSampleFraction"] >= .5 and evidence["maximumRms"] > 1e-5,
+                   label + ": actual non-loop mono dialogue emits isolated PCM", evidence)
+
+    def dawn_voice(self):
+        self.wait_text("다시 듣기", region=self.region("voiceReplay"), psm=7)
+        self.snapshot("voiced-opening-dialogue")
+        self.click_control("voiceReplay", "Replay the first voiced opening line")
+        first = self.observe_voice("first-line-replayed", "opening-01")
+        self.require_voice_output(first, "First opening line")
+        self.click_control("voiceReplay", "Replay again while the first opening line is still sounding")
+        replayed = self.observe_voice("first-line-restarted", "opening-01")
+        self.require_voice_output(replayed, "Visible replay button")
+        old_nodes = {identity[1] for identity in first["sourceIdentities"]}
+        stopped = [node for node in replayed["lifecycle"] if node["nodeId"] in old_nodes and
+                   node.get("stoppedAtContextTime") is not None and
+                   node["stoppedAtContextTime"] <= node["observedContextTime"]]
+        self.check(replayed["sourceIdentities"] != first["sourceIdentities"] and len(stopped) == len(old_nodes),
+                   "Replay stops the old native source and starts a new source for the same line", replayed)
+        self.click_control("dialogueAdvance", "Advance from the first voiced line before its natural end")
+        second = self.observe_voice("second-line-after-next", "opening-02")
+        self.require_voice_output(second, "Second opening line")
+        previous = self.observe_voice("first-line-after-next", "opening-01", milliseconds=450)
+        latest_nodes = {identity[1] for identity in replayed["sourceIdentities"]}
+        self.check(not previous["sourceIdentities"] and all(any(node["nodeId"] == identity and
+                   node.get("stoppedAtContextTime") is not None and node["stoppedAtContextTime"] <= node["observedContextTime"]
+                   for node in previous["lifecycle"]) for identity in latest_nodes),
+                   "Next dialogue button cancels the preceding voice instead of overlapping it", previous)
+        baseline = next(window["medianDestinationGain"] for window in self.report["audioEvidence"]["windows"]
+                        if window["label"] == "volume-restored")
+        self.check(second["music"]["medianDestinationGain"] is not None and
+                   abs(second["music"]["medianDestinationGain"] / baseline - .30) < .035,
+                   "BGM output gain ducks to thirty percent during actual dialogue playback", second["music"])
+        self.page.wait_for_timeout(round(second["expectedLine"]["durationSeconds"] * 1000) + 600)
+        ended = self.observe_voice("second-line-naturally-ended", "opening-02")
+        self.check(not ended["sourceIdentities"] and any(node.get("endedAtContextTime") is not None
+                   for node in ended["lifecycle"]), "Non-loop opening dialogue completes naturally", ended)
+        self.check(ended["music"]["medianDestinationGain"] is not None and
+                   abs(ended["music"]["medianDestinationGain"] / baseline - 1) < .035,
+                   "BGM output gain returns after dialogue finishes", ended["music"])
 
     def audio_after_reload(self):
         if not self.args.verify_audio:
@@ -561,6 +694,14 @@ class Smoke:
             raw = self.text(pixels, psm=psm, language=primary_language)
             last, preprocessing, language = raw, "none", primary_language
             attempts = [{"preprocessing": preprocessing, "language": language, "text": raw}]
+            if button_text and not matches(last):
+                # The actual gold-button glyph crop is an existing fallback.
+                # Try it before generic filters once the raw OCR has failed;
+                # this reuses the raw capture, ROI and exact spelling criterion.
+                language = "kor"
+                last = self.text(pixels, psm=psm, language=language, button_text=True)
+                preprocessing = "gold button interior dark-text (<160) bounding box, grayscale, 4x resize, white 20px border"
+                attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
             if region is not None:
                 # Fixed OCR alternatives for small Korean glyphs and numerals.
                 # Matching remains the exact requested visible text in every case.
@@ -583,11 +724,6 @@ class Smoke:
                 last = self.text(pixels, psm=psm, language=language, padded=True)
                 preprocessing = "grayscale, 3x resize, white 20px border"
                 attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
-            if button_text and not matches(last):
-                language = "kor"
-                last = self.text(pixels, psm=psm, language=language, button_text=True)
-                preprocessing = "gold button interior dark-text (<160) bounding box, grayscale, 4x resize, white 20px border"
-                attempts.append({"preprocessing": preprocessing, "language": language, "text": last})
             if matches(last):
                 index = len(self.report.setdefault("ocrConfirmations", [])) + 1
                 filename = f"ocr-confirmation-{index:03}.png"
@@ -599,6 +735,13 @@ class Smoke:
                     "preprocessing": preprocessing, "language": language, "attempts": attempts})
                 self.persist()
                 return last
+            index = len(self.report.setdefault("ocrUnmatchedObservations", [])) + 1
+            filename = f"ocr-unmatched-{index:03}.png"
+            (self.output / filename).write_bytes(pixels)
+            self.report["ocrUnmatchedObservations"].append({"expected": expected, "region": region,
+                "psm": psm, "rawPixels": filename, "rawPixelSha256": hashlib.sha256(pixels).hexdigest(),
+                "attempts": attempts})
+            self.persist()
             (self.output / "pending-ocr.png").write_bytes(pixels)
             (self.output / "pending-ocr.txt").write_text(last, encoding="utf-8")
             if self.canvas.get_attribute("data-unity-state") == "error":
@@ -666,6 +809,11 @@ class Smoke:
         print(f"{self.game}: canvas {'tap' if touch else 'click'} {label}", flush=True)
         self.persist()
         self.page.wait_for_timeout(600)
+        if not touch and self.game == "FantasyCards":
+            px, py, dx, dy = self.canvas_point(.995, .5)
+            self.page.mouse.move(px, py)
+            self.report["input"].append({"label": "Move off the clicked control so its hover help closes",
+                "type": "mouse-move", "canvasX": round(dx, 2), "canvasY": round(dy, 2)})
 
     def touch_drag_hold(self, start, end, held_ms, label, reference=True):
         """Dispatch actual browser touch input; never invoke Unity or DOM event handlers."""
@@ -874,64 +1022,240 @@ class Smoke:
                            f"Actual canvas fills {width}x{height} viewport", shot["canvas"])
             self.check(min(shot["channelStddev"]) > 8, "Canvas contains nonblank rendered pixels", shot["channelStddev"])
 
-    def fantasy(self):
-        self.click_control("titleNew", "새로운 결투")
-        terrain_region = self.region("terrain")
-        resource_region = self.region("resource")
-        # The revised desktop record heading is English and compact records are
-        # behind a button. The always-visible empty terrain is a battle-only state.
-        self.wait_text("전개되지", region=terrain_region, psm=7)
-        self.page.wait_for_timeout(2500)  # The two-second opening Timeline releases input.
-        self.check(True, "Real new-game canvas click opened battle")
-        self.snapshot("battle-before-selection")
-        self.wait_text("전개되지", region=terrain_region, psm=7)
-        # Seed 731029 + the authored five-card opening hand puts dawn_court first.
-        self.click_control("firstHand", "First hand card: 새벽의 정원")
-        self.wait_text("새벽의 정원", region=self.region("inspectorName"), psm=7)
-        self.click_control("playTerrain", "지형 전개")
-        terrain_text = self.wait_text("새벽의 정원", region=terrain_region, psm=7)
-        resource_text = self.wait_text("여명 1", region=resource_region, psm=7)
-        self.check(True, "Real card selection and terrain-play button added 새벽의 정원 and granted dawn resource",
-                   {"terrainText": terrain_text, "resourceText": resource_text})
-        self.click_control("save", "저장")
-        self.wait_text("난수 상태를 저장", region=self.region("status"), psm=7)
-        self.check(True, "In-game save reported success")
-        self.resolutions("battle-saved")
-        self.interaction_viewport()
-        self.click_control("title", "타이틀")
-        self.wait_title()
-        self.page.wait_for_timeout(1800)  # Let PlayerPrefs' asynchronous IndexedDB write settle.
-        self.report["storageBeforeReload"] = browser_storage(self.page)
-        self.loaded(reload=True)
-        self.click_control("titleContinue", "이어하기")
-        self.audio_after_reload()
-        self.wait_text("저장한 전투와 다음 코인 상태를 복원", region=self.region("status"), psm=7)
-        self.check(True, "Reloaded page continued persisted battle through a real canvas click")
-        terrain_text = self.wait_text("새벽의 정원", region=terrain_region, psm=7)
-        resource_text = self.wait_text("여명 1", region=resource_region, psm=7)
-        self.check(True, "Played terrain and gained dawn resource survived full browser reload and Continue",
-                   {"terrainText": terrain_text, "resourceText": resource_text})
-        self.snapshot("battle-continued")
-        self.report["storageAfterReload"] = browser_storage(self.page)
-        # Extend the already-proved save/reload flow with one real unit play so
-        # the refreshed battlefield artwork is captured in an occupied lane.
-        self.click_control("scoutHand", "Remaining fourth hand card: 별길의 정찰자")
-        self.click_control("friendlyFirstLane", "Summon the selected scout in the first friendly lane")
-        unit_text = self.wait_text("별길의 정찰자", region=self.region("friendlyLanes"),
-                                   psm=7 if self.args.profile == "mobile-landscape" else 11)
-        spent_text = self.wait_text("여명 0", region=resource_region, psm=7)
-        self.check(True, "Actual post-reload unit placement occupied a friendly lane and spent the restored dawn resource",
-                   {"friendlyLaneText": unit_text, "resourceText": spent_text})
-        if self.args.profile == "mobile-landscape":
-            stats_text = self.wait_text(["공격 2", "생명 3"], region=self.region("unitStats"), psm=7, match_all=True)
-            self.check(True, "Occupied mobile lane visibly renders the scout attack and life values", stats_text)
-        self.snapshot("battle-unit-played")
+    def fantasy_catalog(self):
+        path = ROOT / 'Games/FantasyCards/Assets/Game/Core/CardCatalog.cs'
+        pattern = r'new CardDefinition\("([^\"]+)", "([^\"]+)", "([^\"]+)", CardKind\.(\w+), Element\.(\w+), (\d+)(?:, (\d+), (\d+), (\d+))?'
+        cards = [{"id": m[0], "name": m[1], "text": m[2], "kind": m[3], "element": m[4],
+                  "cost": int(m[5]), "attack": int(m[6] or 0), "health": int(m[7] or 0)}
+                 for m in re.findall(pattern, path.read_text())]
+        self.report['authoredCardDefinitions'] = {"file": str(path.relative_to(ROOT)),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "count": len(cards),
+            "use": "Match visible card-detail names and printed costs; never reads live Unity state."}
+        if len(cards) != 40:
+            raise AssertionError('Expanded authored card catalogue must contain exactly forty definitions')
+        return cards
 
-    def dawn_opening(self, label):
+    def card_hand_point(self, index, count):
+        compact_layout = self.canvas_geometry['width'] < 1400
+        width = .16 if compact_layout else .133
+        if count <= 5:
+            width = min(width, .80 / count)
+            return (.58 - count * width / 2 + (index + .5) * width - .004, .84)
+        # Real swipes reach a clamped scroll endpoint. Neither normalizedPosition
+        # nor any Unity object is queried or changed by this harness.
+        right_end = index >= 5
+        start, end = ((.94, .78), (.23, .78)) if right_end else ((.23, .78), (.94, .78))
+        for drag in range(2):
+            if self.args.profile == 'mobile-landscape':
+                self.touch_drag_hold(start, end, 30, 'Scroll hand to ' + ('last' if right_end else 'first') + ' cards', reference=False)
+            else:
+                sx, sy, _, _ = self.canvas_point(*start)
+                ex, ey, _, _ = self.canvas_point(*end)
+                self.page.mouse.move(sx, sy)
+                self.page.mouse.down()
+                self.page.mouse.move(ex, ey, steps=12)
+                self.page.mouse.up()
+                self.report['input'].append({'label': 'Drag the visible hand scroll view to its endpoint',
+                    'type': 'mouse-drag', 'startNormalized': start, 'endNormalized': end})
+            self.page.wait_for_timeout(300)
+        left = .98 - count * width if right_end else .18
+        return (left + (index + .475) * width, .84)
+
+    def inspect_hand_card(self, index, count, catalog, verify_help=False):
+        point = self.card_hand_point(index, count)
+        if self.args.profile == 'mobile-landscape':
+            self.touch_drag_hold(point, point, 750, f'Long-press visible hand card {index + 1} for its details', reference=False)
+        else:
+            if verify_help:
+                px, py, _, _ = self.canvas_point(*point)
+                self.page.mouse.move(px, py)
+                self.report['input'].append({'type': 'mouse-hover', 'label': 'Read card rules by hovering the hand card',
+                                            'normalized': point})
+                width, height = (.43, .40) if self.canvas_geometry['width'] < 1400 else (.30, .29)
+                left = max(.015, min(point[0] + .018, .985 - width))
+                bottom = max(.025, min(1 - point[1] + .04, .975 - height))
+                text = self.wait_text('길게 누르면 상세 보기', region=(left, 1-bottom-height, left+width, 1-bottom), psm=11)
+                self.check(True, 'Actual desktop mouse hover reveals the card explanation', text)
+                self.snapshot('card-hover-explanation')
+            self.click(*point, f'Select visible hand card {index + 1}')
+            self.click_control('detailOpen', 'Open selected card details through the visible button')
+        name_text = self.wait_text([card['name'] for card in catalog], region=self.region('detailName'), psm=7)
+        matches = [card for card in catalog if compact(card['name']) in compact(name_text)]
+        self.check(len(matches) == 1, 'A visible random hand card is identified by its exact authored detail name', name_text)
+        card = matches[0]
+        kind = {'Terrain': '지형', 'Unit': '유닛', 'Spell': '마법', 'Equipment': '장비'}[card['kind']]
+        self.wait_text(kind, region=self.region('detailKind'), psm=7)
+        self.wait_text('비용 ' + str(card['cost']), region=self.region('detailStats'), psm=11)
+        if verify_help:
+            self.snapshot('card-detail-help')
+            self.check(True, 'Actual ' + ('touch long-press' if self.args.profile == 'mobile-landscape' else 'detail button') +
+                       ' opens readable card type, cost and rules', card)
+        self.click_control('detailBack', 'Return from actual card details to the battle')
+        return card
+
+    def fantasy_end_turn(self):
+        self.click_control('attackPhase', 'Enter attack phase with the visible button')
+        self.wait_text('공격 종료', region=self.region('actions'), psm=7)
+        self.click_control('actionMiddle', 'Finish attack and pass the turn')
+        for response in range(8):
+            phase = self.wait_text(['나의 준비 단계', '방어 대응'], region=self.region('phase'), psm=7)
+            if compact('나의 준비 단계') in compact(phase):
+                return
+            self.wait_text('가로막지 않기', region=self.region('actions'), psm=7)
+            self.click_control('actionMiddle', 'Resolve the visible opponent attack without a blocker')
+        raise AssertionError('Opponent turn did not finish within eight actual block decisions')
+
+    def fantasy(self):
+        catalog = self.fantasy_catalog()
+        self.click_control('titleNew', '새로운 결투')
+        self.wait_text('당신의 서약자는 누구인가요', region=self.region('flowHeading'), psm=11)
+        leaders = self.wait_text(['리리아', '카엘', '세린', '노아'], region=self.region('leaderChoices'), match_all=True)
+        self.click_control('firstLeader', 'Choose Lyria, the forest archer')
+        self.snapshot('four-leader-selection')
+        self.click_control('selectionNext', 'Choose a starter deck')
+        self.wait_text('첫 결투를 함께할 덱', region=self.region('flowHeading'), psm=11)
+        decks = self.wait_text(['꽃바람의 숲', '백화 기사단', '달호수의 노래', '별술사의 서고'],
+                              region=self.region('deckChoices'), match_all=True)
+        self.wait_text('24장', region=self.region('flowSubtitle'), psm=7)
+        self.click_control('firstDeck', 'Choose the twenty-four-card forest starter deck')
+        self.snapshot('four-starter-decks')
+        self.click_control('selectionNext', 'Choose the demo opponent')
+        encounters = self.wait_text(['꽃바람의 초대', '달호수의 시험', '별빛의 서약'],
+                                    region=self.region('encounterChoices'), match_all=True)
+        selected = self.wait_text(['리리아', '꽃바람의 숲'], region=self.region('flowSubtitle'), psm=7, match_all=True)
+        self.check(True, 'Actual selection screens expose four leaders, four twenty-four-card decks and three demo encounters',
+                   {'leaders': leaders, 'decks': decks, 'encounters': encounters, 'selected': selected})
+        self.click_control('firstEncounter', 'Choose the first demo encounter')
+        self.snapshot('three-demo-encounters')
+        self.click_control('selectionNext', 'Shuffle the chosen deck and begin')
+        shuffle = self.snapshot('deck-shuffle-animation')
+        self.check(compact('덱 셔플') in compact(shuffle['ocr']),
+                   'Actual dealt-card animation screen visibly announces the deck shuffle', shuffle)
+        self.wait_text('시작 손패 교체', region=self.region('flowHeading'), psm=11)
+        self.snapshot('five-card-opening-hand')
+        self.click_control('mulliganFifth', 'Select only the fifth opening card for the once-only mulligan')
+        self.wait_text('선택한 1장 교체', region=self.region('selectionFooter'), psm=7)
+        self.click_control('mulliganConfirm', 'Confirm one opening-card replacement and reshuffle')
+        self.wait_text('전개되지', region=self.region('terrain'), psm=7)
+        self.page.wait_for_timeout(1600)
+        if self.canvas_geometry['width'] < 1400:
+            self.click(.8875, .6185, 'Read the actual battle log after the one-card mulligan')
+            mulligan = self.wait_text('시작 손패 1장을 교체하고 남은 덱을 섞었습니다',
+                                     region=(.09, .22, .91, .76), psm=11)
+            self.click(.775, .8475, 'Return from the battle log')
+        else:
+            mulligan = self.wait_text('시작 손패 1장을 교체하고 남은 덱을 섞었습니다',
+                                     region=(.825, .182, .965, .61), psm=11)
+        self.check(True, 'Battle records confirm one opening-card replacement and reshuffling after the visible selection', mulligan)
+        first = self.inspect_hand_card(0, 5, catalog, verify_help=True)
+        self.check(first['kind'] == 'Terrain' and first['element'] == 'Dawn',
+                   'Observed first opening card is a dawn terrain without relying on a fixed random seed', first)
+        self.click(*self.card_hand_point(0, 5), 'Select the observed dawn terrain')
+        self.click_control('playTerrain', 'Play the selected terrain')
+        self.wait_text(first['name'], region=self.region('terrain'), psm=7)
+        self.wait_text('여명 1', region=self.region('resource'), psm=7)
+        self.check(True, 'Real terrain selection produces the visible terrain and one dawn resource', first)
+        self.click_control('leader', 'Inspect the chosen leader and her skill')
+        self.wait_text('리리아', region=self.region('leaderName'), psm=7)
+        self.wait_text('현재 덱 · 꽃바람의 숲', region=self.region('leaderDeck'), psm=7)
+        self.wait_text('꽃바람 화살', region=self.region('leaderSkill'), psm=7)
+        self.wait_text('여명 2이 필요합니다', region=self.region('leaderReason'), psm=7)
+        self.click_control('leaderUse', 'Attempt the visibly disabled skill with insufficient resources')
+        self.wait_text('여명 2이 필요합니다', region=self.region('leaderReason'), psm=7)
+        self.check(True, 'A leader skill requiring two resources remains disabled with one resource')
+        self.click_control('leaderBack', 'Return to battle')
+        hand_count, dawn, tide = 4, 1, 0
+        terrains = [first]
+        known_hand = {}
+        unit = None
+        for turn_index in range(8):
+            terrain_used = turn_index == 0
+            if turn_index:
+                self.fantasy_end_turn()
+                hand_count = min(9, hand_count + 1)
+                dawn = min(12, dawn + sum(card['element'] == 'Dawn' for card in terrains))
+                tide = min(12, tide + sum(card['element'] == 'Tide' for card in terrains))
+            # Read exact names from the actual random hand, rather than assuming
+            # the old seed's scout or using internal state to choose a card.
+            for index in range(hand_count):
+                if index not in known_hand:
+                    known_hand[index] = self.inspect_hand_card(index, hand_count, catalog)
+            if not terrain_used and len(terrains) < 6:
+                terrain_index = next((i for i, card in known_hand.items() if card['kind'] == 'Terrain'), None)
+                if terrain_index is not None:
+                    card = known_hand[terrain_index]
+                    self.click(*self.card_hand_point(terrain_index, hand_count), 'Select observed terrain: ' + card['name'])
+                    self.click_control('playTerrain', 'Develop one terrain this turn')
+                    terrains.append(card)
+                    dawn = min(12, dawn + (card['element'] == 'Dawn'))
+                    tide = min(12, tide + (card['element'] == 'Tide'))
+                    self.wait_text(card['name'], region=self.region('terrain'), psm=7)
+                    self.wait_text(['여명 ' + str(dawn), '조류 ' + str(tide)],
+                                   region=self.region('resource'), psm=7, match_all=True)
+                    hand_count -= 1
+                    known_hand = {(i if i < terrain_index else i-1): value for i, value in known_hand.items() if i != terrain_index}
+            unit_index = next((i for i, card in known_hand.items() if card['kind'] == 'Unit' and
+                               dawn >= 2 + (card['cost'] if card['element'] == 'Dawn' else 0) and
+                               tide >= (card['cost'] if card['element'] == 'Tide' else 0)), None)
+            if unit_index is not None:
+                unit = known_hand[unit_index]
+                self.click(*self.card_hand_point(unit_index, hand_count), 'Select observed affordable unit: ' + unit['name'])
+                self.click_control('friendlyFirstLane', 'Place the selected unit in the first friendly lane')
+                self.wait_text(unit['name'], region=self.region('friendlyLanes'))
+                self.wait_text(['공격 ' + str(unit['attack']), '생명 ' + str(unit['health'])],
+                               region=self.region('unitStats'), psm=7 if self.args.profile == 'mobile-landscape' else 11, match_all=True)
+                dawn -= unit['cost'] if unit['element'] == 'Dawn' else 0
+                tide -= unit['cost'] if unit['element'] == 'Tide' else 0
+                self.check(True, 'Actual random-hand unit placement displays its authored name, attack and life', unit)
+                break
+        self.check(unit is not None, 'Bounded real turns provide an affordable unit and two leader-skill resources')
+        self.wait_text(['여명 ' + str(dawn), '조류 ' + str(tide)], region=self.region('resource'), psm=7, match_all=True)
+        self.click_control('leader', 'Open the selected leader skill after collecting two resources')
+        self.wait_text('기술을 사용할 수 있습니다', region=self.region('leaderReason'), psm=7)
+        self.click_control('leaderUse', 'Use Lyria’s two-resource leader skill')
+        dawn -= 2
+        self.wait_text(['여명 ' + str(dawn), '조류 ' + str(tide)], region=self.region('resource'), psm=7, match_all=True)
+        self.click_control('leader', 'Inspect the same leader skill again in the same turn')
+        self.wait_text('이번 턴에는 이미 리더 기술을 사용했습니다', region=self.region('leaderReason'), psm=7)
+        self.click_control('leaderUse', 'Attempt the visibly disabled second skill use')
+        self.wait_text('이번 턴에는 이미 리더 기술을 사용했습니다', region=self.region('leaderReason'), psm=7)
+        self.check(True, 'Actual leader skill spends two resources and rejects a second use in the same turn')
+        self.snapshot('leader-skill-used-this-turn')
+        self.click_control('leaderBack', 'Return to the played battle')
+        self.click_control('save', '저장')
+        self.wait_text('난수 상태를 저장', region=self.region('status'), psm=7)
+        self.check(True, 'In-game save reported success')
+        self.resolutions('battle-saved')
+        self.interaction_viewport()
+        self.click_control('title', '타이틀')
+        self.wait_title()
+        self.page.wait_for_timeout(1800)
+        self.report['storageBeforeReload'] = browser_storage(self.page)
+        self.loaded(reload=True)
+        self.click_control('titleContinue', '이어하기')
+        self.audio_after_reload()
+        self.wait_text('저장한 전투와 다음 코인 상태를 복원', region=self.region('status'), psm=7)
+        self.wait_text(first['name'], region=self.region('terrain'), psm=7)
+        self.wait_text(['여명 ' + str(dawn), '조류 ' + str(tide)], region=self.region('resource'), psm=7, match_all=True)
+        self.wait_text(unit['name'], region=self.region('friendlyLanes'))
+        self.check(True, 'Played terrain, unit and spent resources survived full browser reload and Continue')
+        self.snapshot('battle-continued')
+        self.click_control('leader', 'Inspect the restored chosen leader and used skill')
+        self.wait_text('리리아', region=self.region('leaderName'), psm=7)
+        self.wait_text('현재 덱 · 꽃바람의 숲', region=self.region('leaderDeck'), psm=7)
+        self.wait_text('이번 턴에는 이미 리더 기술을 사용했습니다', region=self.region('leaderReason'), psm=7)
+        self.check(True, 'Selected leader, starter deck and same-turn skill restriction survive the real saved-game reload')
+        self.click_control('leaderBack', 'Return to the restored battle')
+        self.report['storageAfterReload'] = browser_storage(self.page)
+        self.check(any('fantasy-battle-demo-v2' in key for key in self.report['storageAfterReload']['saveMarkers']),
+                   'Browser persistence contains the expanded-demo battle slot', self.report['storageAfterReload']['saveMarkers'])
+        self.snapshot('battle-unit-played')
+
+    def dawn_opening(self, label, first_index=0):
         # The current Ink opening contains nine lines. Verify each rendered advance
         # control before clicking; the objective HUD alone is also visible behind dialogue.
         dialogue_button = self.region("dialogueAdvance")
-        for index in range(9):
+        for index in range(first_index, 9):
             expected = "다음 대사" if index < 8 else "계속"
             visible = self.wait_text(expected, region=dialogue_button, psm=7, button_text=True)
             if index == 0:
@@ -946,7 +1270,26 @@ class Smoke:
 
     def dawn(self):
         self.click_control("titleNew", "새 게임")
-        self.dawn_opening("new-game")
+        if self.args.verify_audio:
+            self.wait_text("다음 대사", region=self.region("dialogueAdvance"), psm=7, button_text=True)
+            muted = self.observe_voice("muted-opening-line", "opening-01")
+            self.check(not muted["sourceIdentities"] and muted["maximumRms"] < 1e-6 and
+                       not any(node.get("startedAtContextTime") is not None for node in muted["lifecycle"]),
+                       "Visible voice mute prevents the opening dialogue source from playing", muted)
+            self.dawn_opening("voice-muted-new-game")
+            self.click_control("settings", "Open exploration settings to enable dialogue voice")
+            self.wait_text("대사 음성 켜기", region=self.region("voiceSetting"), psm=7)
+            self.click_control("voiceMute", "Enable opening dialogue voice through its visible setting")
+            self.wait_text("대사 음성 끄기", region=self.region("voiceSetting"), psm=7)
+            self.click_control("settingsTitle", "Return to title after enabling dialogue voice")
+            self.wait_title()
+            self.click_control("titleNew", "Start a new voiced opening using the actual title button")
+            self.wait_text("새 여정은 별도 슬롯에 저장됩니다", region=self.region("newJourneyNotice"), psm=7)
+            self.click_control("newJourneyConfirm", "Confirm the new journey through the visible separate-save-slot notice")
+            self.dawn_voice()
+            self.dawn_opening("new-game", first_index=1)
+        else:
+            self.dawn_opening("new-game")
         prompt_region = self.region("prompt")
         before_prompt = self.wait_text("시계 살펴보기", region=prompt_region, psm=7)
         self.check(True, "Opening dialogue closed and exploration-only interaction prompt appeared", before_prompt)
@@ -957,7 +1300,7 @@ class Smoke:
         # stop on the actual exploration prompt; never read or change actor state.
         near_prompt = ""
         movement_prompts = []
-        for pulse in range(8):
+        for pulse in range(14):
             held_ms = 1400 if pulse == 0 else 1000
             if self.args.profile == "mobile-landscape":
                 layout = self.layout()

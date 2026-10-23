@@ -1,51 +1,22 @@
 {
   "blender": "4.3.2",
-  "scope": "Actual FBX reimport, character mesh ownership, rig, normalized skin weights and object/foot pivots. Not Unity gameplay.",
+  "scope": "Actual FBX reimport, mesh ownership, 14-bone rig, normalized skin weights, idle/walk takes, planted stance and root/foot pivots. Not Unity gameplay.",
   "assets": [
     {
       "asset": "JesusProxy",
+      "fbx_sha256": "17efd1ad661d201f96d7bee26c892bda4274a05f4aff0eef56c2bd413d752b89",
       "meshes": 1,
       "bounds_blender_xyz_m": [
-        -0.38436,
-        -0.15888,
-        0.0,
-        0.38436,
-        0.17396,
-        1.8201
-      ],
-      "material_count": 13,
-      "static_body_duplicates": 0,
-      "bones": 10,
-      "root_object_location": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "root_bone_head": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "foot_clearance_m": 0.0,
-      "max_skin_weight_sum_error": 4.470348358154297e-08,
-      "idle_action": "JesusProxy_Rig|JesusProxy_BasicIdle",
-      "vertices": 87310,
-      "status": "pass"
-    },
-    {
-      "asset": "MiriamProxy",
-      "meshes": 1,
-      "bounds_blender_xyz_m": [
-        -0.36301,
-        -0.16047,
+        -0.38398,
+        -0.15788,
         -0.0,
-        0.36301,
-        0.15552,
-        1.72301
+        0.38398,
+        0.17396,
+        1.83038
       ],
       "material_count": 13,
       "static_body_duplicates": 0,
-      "bones": 10,
+      "bones": 14,
       "root_object_location": [
         0.0,
         0.0,
@@ -57,25 +28,152 @@
         0.0
       ],
       "foot_clearance_m": -0.0,
-      "max_skin_weight_sum_error": 4.237517714500427e-08,
-      "idle_action": "MiriamProxy_Rig|MiriamProxy_BasicIdle",
-      "vertices": 87419,
+      "max_skin_weight_sum_error": 4.470348358154297e-08,
+      "idle_action": "JesusProxy_Rig|JesusProxy_BasicIdle",
+      "walk_action": "JesusProxy_Rig|JesusProxy_Walk",
+      "clip_seconds": {
+        "Idle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_samples": [
+        {
+          "phase": 0,
+          "left_ankle": [
+            0.10056,
+            -0.32682,
+            0.10056
+          ],
+          "right_ankle": [
+            -0.10056,
+            0.32682,
+            0.10056
+          ]
+        },
+        {
+          "phase": 0.125,
+          "left_ankle": [
+            0.10056,
+            -0.16344,
+            0.10018
+          ],
+          "right_ankle": [
+            -0.10056,
+            0.22948,
+            0.18089
+          ]
+        },
+        {
+          "phase": 0.25,
+          "left_ankle": [
+            0.10056,
+            -1e-05,
+            0.10027
+          ],
+          "right_ankle": [
+            -0.10056,
+            -0.00012,
+            0.21477
+          ]
+        },
+        {
+          "phase": 0.375,
+          "left_ankle": [
+            0.10056,
+            0.16342,
+            0.10037
+          ],
+          "right_ankle": [
+            -0.10056,
+            -0.23031,
+            0.18169
+          ]
+        },
+        {
+          "phase": 0.5,
+          "left_ankle": [
+            0.10056,
+            0.31369,
+            0.10715
+          ],
+          "right_ankle": [
+            -0.10056,
+            -0.31369,
+            0.10715
+          ]
+        },
+        {
+          "phase": 0.625,
+          "left_ankle": [
+            0.10056,
+            0.23031,
+            0.18169
+          ],
+          "right_ankle": [
+            -0.10056,
+            -0.16342,
+            0.10037
+          ]
+        },
+        {
+          "phase": 0.75,
+          "left_ankle": [
+            0.10056,
+            0.00012,
+            0.21477
+          ],
+          "right_ankle": [
+            -0.10056,
+            -0.0,
+            0.10027
+          ]
+        },
+        {
+          "phase": 0.875,
+          "left_ankle": [
+            0.10056,
+            -0.22948,
+            0.18089
+          ],
+          "right_ankle": [
+            -0.10056,
+            0.16344,
+            0.10018
+          ]
+        },
+        {
+          "phase": 1,
+          "left_ankle": [
+            0.10056,
+            -0.32682,
+            0.10056
+          ],
+          "right_ankle": [
+            -0.10056,
+            0.32682,
+            0.10056
+          ]
+        }
+      ],
+      "stance_height_range_m": 0.006979502737522125,
+      "blender_importer_added_pelvis_connection_removed_for_curve_evaluation": true,
+      "vertices": 87873,
       "status": "pass"
     },
     {
-      "asset": "TravelerProxy",
+      "asset": "MiriamProxy",
+      "fbx_sha256": "a7f0934f2d47e68a2a7b0cd207fc66a695359c36d198b32ca0e88f315f405b2b",
       "meshes": 1,
       "bounds_blender_xyz_m": [
-        -0.37582,
-        -0.15535,
-        0.0,
-        0.37582,
-        0.14208,
-        1.77965
+        -0.36265,
+        -0.16047,
+        -0.0,
+        0.36265,
+        0.15552,
+        1.73107
       ],
-      "material_count": 13,
+      "material_count": 12,
       "static_body_duplicates": 0,
-      "bones": 10,
+      "bones": 14,
       "root_object_location": [
         0.0,
         0.0,
@@ -86,24 +184,309 @@
         0.0,
         0.0
       ],
-      "foot_clearance_m": 0.0,
-      "max_skin_weight_sum_error": 4.0046870708465576e-08,
+      "foot_clearance_m": -0.0,
+      "max_skin_weight_sum_error": 4.6566128730773926e-08,
+      "idle_action": "MiriamProxy_Rig|MiriamProxy_BasicIdle",
+      "walk_action": "MiriamProxy_Rig|MiriamProxy_Walk",
+      "clip_seconds": {
+        "Idle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_samples": [
+        {
+          "phase": 0,
+          "left_ankle": [
+            0.09497,
+            -0.30866,
+            0.09497
+          ],
+          "right_ankle": [
+            -0.09497,
+            0.30866,
+            0.09497
+          ]
+        },
+        {
+          "phase": 0.125,
+          "left_ankle": [
+            0.09497,
+            -0.15436,
+            0.09461
+          ],
+          "right_ankle": [
+            -0.09497,
+            0.21673,
+            0.17084
+          ]
+        },
+        {
+          "phase": 0.25,
+          "left_ankle": [
+            0.09497,
+            -1e-05,
+            0.0947
+          ],
+          "right_ankle": [
+            -0.09497,
+            -0.00011,
+            0.20284
+          ]
+        },
+        {
+          "phase": 0.375,
+          "left_ankle": [
+            0.09497,
+            0.15434,
+            0.09479
+          ],
+          "right_ankle": [
+            -0.09497,
+            -0.21752,
+            0.1716
+          ]
+        },
+        {
+          "phase": 0.5,
+          "left_ankle": [
+            0.09497,
+            0.29626,
+            0.1012
+          ],
+          "right_ankle": [
+            -0.09497,
+            -0.29626,
+            0.1012
+          ]
+        },
+        {
+          "phase": 0.625,
+          "left_ankle": [
+            0.09497,
+            0.21752,
+            0.1716
+          ],
+          "right_ankle": [
+            -0.09497,
+            -0.15434,
+            0.09479
+          ]
+        },
+        {
+          "phase": 0.75,
+          "left_ankle": [
+            0.09497,
+            0.00011,
+            0.20284
+          ],
+          "right_ankle": [
+            -0.09497,
+            -0.0,
+            0.0947
+          ]
+        },
+        {
+          "phase": 0.875,
+          "left_ankle": [
+            0.09497,
+            -0.21673,
+            0.17084
+          ],
+          "right_ankle": [
+            -0.09497,
+            0.15436,
+            0.09461
+          ]
+        },
+        {
+          "phase": 1,
+          "left_ankle": [
+            0.09497,
+            -0.30866,
+            0.09497
+          ],
+          "right_ankle": [
+            -0.09497,
+            0.30866,
+            0.09497
+          ]
+        }
+      ],
+      "stance_height_range_m": 0.0065917521715164185,
+      "blender_importer_added_pelvis_connection_removed_for_curve_evaluation": true,
+      "vertices": 87688,
+      "status": "pass"
+    },
+    {
+      "asset": "TravelerProxy",
+      "fbx_sha256": "54cd9c902dd748776da462c7aed5d16dd1a1dfe0c2180dcc6a8aa9cd2878fcf9",
+      "meshes": 1,
+      "bounds_blender_xyz_m": [
+        -0.37545,
+        -0.17819,
+        -0.0,
+        0.37545,
+        0.15806,
+        1.78971
+      ],
+      "material_count": 13,
+      "static_body_duplicates": 0,
+      "bones": 14,
+      "root_object_location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "root_bone_head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "foot_clearance_m": -0.0,
+      "max_skin_weight_sum_error": 4.470348358154297e-08,
       "idle_action": "TravelerProxy_Rig|TravelerProxy_BasicIdle",
-      "vertices": 60259,
+      "walk_action": "TravelerProxy_Rig|TravelerProxy_Walk",
+      "clip_seconds": {
+        "Idle": 4.0,
+        "Walk": 0.9
+      },
+      "walk_samples": [
+        {
+          "phase": 0,
+          "left_ankle": [
+            0.09832,
+            -0.31955,
+            0.09832
+          ],
+          "right_ankle": [
+            -0.09832,
+            0.31955,
+            0.09832
+          ]
+        },
+        {
+          "phase": 0.125,
+          "left_ankle": [
+            0.09832,
+            -0.15981,
+            0.09795
+          ],
+          "right_ankle": [
+            -0.09832,
+            0.22438,
+            0.17687
+          ]
+        },
+        {
+          "phase": 0.25,
+          "left_ankle": [
+            0.09832,
+            -1e-05,
+            0.09804
+          ],
+          "right_ankle": [
+            -0.09832,
+            -0.00012,
+            0.21
+          ]
+        },
+        {
+          "phase": 0.375,
+          "left_ankle": [
+            0.09832,
+            0.15978,
+            0.09814
+          ],
+          "right_ankle": [
+            -0.09832,
+            -0.22519,
+            0.17766
+          ]
+        },
+        {
+          "phase": 0.5,
+          "left_ankle": [
+            0.09832,
+            0.30672,
+            0.10477
+          ],
+          "right_ankle": [
+            -0.09832,
+            -0.30672,
+            0.10477
+          ]
+        },
+        {
+          "phase": 0.625,
+          "left_ankle": [
+            0.09832,
+            0.2252,
+            0.17766
+          ],
+          "right_ankle": [
+            -0.09832,
+            -0.15979,
+            0.09814
+          ]
+        },
+        {
+          "phase": 0.75,
+          "left_ankle": [
+            0.09832,
+            0.00011,
+            0.21
+          ],
+          "right_ankle": [
+            -0.09832,
+            -0.0,
+            0.09804
+          ]
+        },
+        {
+          "phase": 0.875,
+          "left_ankle": [
+            0.09832,
+            -0.22438,
+            0.17687
+          ],
+          "right_ankle": [
+            -0.09832,
+            0.15981,
+            0.09795
+          ]
+        },
+        {
+          "phase": 1,
+          "left_ankle": [
+            0.09832,
+            -0.31955,
+            0.09832
+          ],
+          "right_ankle": [
+            -0.09832,
+            0.31955,
+            0.09832
+          ]
+        }
+      ],
+      "stance_height_range_m": 0.00682453066110611,
+      "blender_importer_added_pelvis_connection_removed_for_curve_evaluation": true,
+      "vertices": 63906,
       "status": "pass"
     },
     {
       "asset": "GalileeShore",
+      "fbx_sha256": "d4b891cb5b5a81bc29ed7ed58ca6f30c1f059eb2e1ed056674641b0f3bb3f7c0",
       "meshes": 9,
       "bounds_blender_xyz_m": [
-        -19.25532,
+        -12.0,
         -16.0,
-        -3.98,
+        -0.41,
         23.5,
-        21.84076,
+        16.0,
         4.396
       ],
-      "material_count": 21,
+      "material_count": 24,
+      "obsolete_hill_geometry_absent": true,
       "status": "pass"
     }
   ],

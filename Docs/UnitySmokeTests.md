@@ -1,5 +1,7 @@
 # 실제 Unity 장면 연동 스모크 테스트
 
+> **현재 체험판 범위 (2026-10-23):** 카드 40종·리더/기술 4종·기본 덱 4종·세 결투의 선택→셔플→시작 손패 교체, hover/상세, 새 저장 슬롯과 편집 덱 보존을 검사한다. 서사는 14본 Generic Idle/Walk의 실제 이동 연동·회화풍 하늘과 초반 한국어 음성 20줄의 문장 매칭·재생/중단/다시 듣기를 검사한다. 아래 날짜별 수치와 캡처 설명은 당시 실행의 역사적 기록이며 새 코드의 통과 근거가 아니다. 최신 실행 수·실제 파일·한계는 [Validation.md](Validation.md)를 따른다. 네이티브 오디오 상태·파형 검사와 사람의 발음/연기 청취, 씬 보행 검사와 전체 충돌 경로 검수는 구분한다.
+
 이 테스트는 `Assets/Scenes/Boot.unity`와 제작된 폰트·모델 프리팹·콘텐츠를 실제로 불러온다. 실행 전 각 프로젝트에서 `FirstGame.Editor.ProjectSetup.Ensure`를 완료해야 한다. 폴백만 보이면 통과하지 않도록 카드 전장의 연결과 서사 캐릭터/환경 참조를 검사한다.
 
 테스트 어셈블리는 제품 빌드에 포함하지 않는 **Editor 전용**이다. 따라서 Test Runner에서는 **EditMode**로 검색하지만, `UnitySetUp`이 공식 `EnterPlayMode` 지시로 실제 PlayMode에 들어간 후 모든 UI 검증을 실행한다. `Application.isPlaying`도 검사한다. 설치된 Test Framework 1.6.0의 실제 API 소스에서 `EnterPlayMode`, `ExitPlayMode`, `UnitySetUp`, `UnityTearDown` 사용을 확인했다.
@@ -42,7 +44,7 @@ Unity -batchmode -projectPath /workspace/firstgame/Games/PathOfDawn -runTests -t
 
 ## 의도적인 한계
 
-버튼은 실제 씬에서 `Button`을 찾아 활성·상호작용 가능 여부를 확인한 뒤 공개 `onClick` 콜백을 호출한다. 비공개 게임 메서드를 반사 호출하거나 게임 상태를 직접 바꾸지 않는다. NPC 상호작용은 가상 Keyboard의 E 입력을 Input System으로 전달한다. 최초 대화 전 W를 실제로 눌러 CharacterController가 전방 0.3m 이상 움직이는지 실시간 3초 제한으로 확인하고 반드시 키를 뗀다. NPC까지의 전체 이동 경로 검증은 별도이며, 그 이후에는 CharacterController를 안전히 비활성화하고 NPC 근처로 위치를 옮긴다.
+버튼은 실제 씬에서 `Button`을 찾아 활성·상호작용 가능 여부를 확인한 뒤 공개 `onClick` 콜백을 호출한다. 비공개 게임 메서드를 반사 호출하거나 게임 상태를 직접 바꾸지 않는다. NPC 상호작용은 가상 Keyboard의 E 입력을 Input System으로 전달한다. 최초 대화 전 W를 실제로 눌러 CharacterController가 전방 0.3m 이상 움직이는지 실시간 8초 제한으로 확인하고 반드시 키를 뗀다. NPC까지의 전체 이동 경로 검증은 별도이며, 그 이후에는 CharacterController를 안전히 비활성화하고 NPC 근처로 위치를 옮긴다.
 
 카드 결과 테스트는 생명·승자·단계를 강제로 지정하지 않고 실제 core 전투로 얻은 종료 상태를 저장한다. 그 뒤 실제 결과 UI와 재도전 연결을 검증하므로, 전투 전체를 UI 포인터로 진행한 검사와는 범위가 다르다. 서사 smoke는 나눔과 쉼터 두 경로를 실행하며 세 번째 화해 경로는 별도 core 테스트에서 확인한다.
 

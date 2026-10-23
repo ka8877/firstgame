@@ -17,6 +17,8 @@ namespace FirstGame.Editor
     [InitializeOnLoad]
     public static class ProjectSetup
     {
+        [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
+        [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
         const string Game = "PathOfDawn";
         const string AppType = "PathOfDawn.Presentation.PathOfDawnApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
@@ -51,7 +53,7 @@ namespace FirstGame.Editor
                 PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
                 PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.WebGL, ScriptingImplementation.IL2CPP);
                 var desktop = CreatePipeline("Desktop", 1f, 2048, 40f, true);
-                CreatePipeline("Web", .8f, 1024, 20f, false);
+                CreatePipeline("Web", 1f, 1024, 24f, false);
                 GraphicsSettings.defaultRenderPipeline = desktop;
                 QualitySettings.renderPipeline = desktop;
                 QualitySettings.vSyncCount = 0;
@@ -85,11 +87,21 @@ namespace FirstGame.Editor
         {
             string path = "Assets/Settings/" + name + "URP.asset";
             var asset = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(path);
-            if (asset != null) return asset;
-            var renderer = ScriptableObject.CreateInstance<UniversalRendererData>();
-            AssetDatabase.CreateAsset(renderer, "Assets/Settings/" + name + "Renderer.asset");
-            asset = UniversalRenderPipelineAsset.Create(renderer);
-            asset.name = name + "URP"; asset.renderScale = scale; asset.msaaSampleCount = 2;
+            bool create = asset == null;
+            if (create)
+            {
+                string rendererPath = "Assets/Settings/" + name + "Renderer.asset";
+                var renderer = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(rendererPath);
+                if (renderer == null)
+                {
+                    renderer = ScriptableObject.CreateInstance<UniversalRendererData>();
+                    AssetDatabase.CreateAsset(renderer, rendererPath);
+                }
+                asset = UniversalRenderPipelineAsset.Create(renderer);
+            }
+            // Apply the current visual policy to existing projects as well.
+            // Returning early left published Web players at 0.8 scale and 2x AA.
+            asset.name = name + "URP"; asset.renderScale = scale; asset.msaaSampleCount = 4;
             asset.supportsHDR = hdr; asset.shadowDistance = distance;
             asset.mainLightShadowmapResolution = shadow; asset.shadowCascadeCount = hdr ? 2 : 1;
             // URP17.3 exposes this setting read-only in its public runtime API.
@@ -97,7 +109,7 @@ namespace FirstGame.Editor
             var serializedPipeline = new SerializedObject(asset);
             serializedPipeline.FindProperty("m_SoftShadowsSupported").boolValue = hdr;
             serializedPipeline.ApplyModifiedPropertiesWithoutUndo();
-            AssetDatabase.CreateAsset(asset, path);
+            if (create) AssetDatabase.CreateAsset(asset, path); else EditorUtility.SetDirty(asset);
             return asset;
         }
 
@@ -139,6 +151,8 @@ namespace FirstGame.Editor
             var skyShader = Shader.Find("PathOfDawn/Storybook Sky");
             var waterShader = Shader.Find("PathOfDawn/Storybook Water");
             if (skyShader == null || waterShader == null) throw new InvalidOperationException("Storybook sky/water shaders are missing.");
+            var palette = JsonUtility.FromJson<ModelPalette>(File.ReadAllText(folder + "/ToonPalette.json"));
+            var sourceColors = palette.materials.ToDictionary(c => c.name, c => new Color(c.r, c.g, c.b), StringComparer.Ordinal);
             const string skyPath = "Assets/Resources/Art/DawnSky.mat";
             var sky = AssetDatabase.LoadAssetAtPath<Material>(skyPath);
             if (sky == null) { sky = new Material(skyShader); AssetDatabase.CreateAsset(sky, skyPath); }
@@ -181,7 +195,11 @@ namespace FirstGame.Editor
                             var selectedShader = IsGalileeWaterMaterial(materialName) ? waterShader : toon;
                             if (create) material = new Material(selectedShader); else material.shader = selectedShader;
                             material.name = materialName;
-                            material.SetColor("_BaseColor", old != null && old.HasProperty("_BaseColor") ? old.GetColor("_BaseColor") : old != null && old.HasProperty("_Color") ? old.GetColor("_Color") : new Color(.65f, .60f, .48f));
+                            int paletteStart = materialName.IndexOf("POD_", StringComparison.Ordinal);
+                            string paletteName = paletteStart >= 0 ? materialName.Substring(paletteStart) : materialName;
+                            // Unity's external FBX materials retain their old colours on
+                            // reimport. Use the generator's authoritative authored palette.
+                            material.SetColor("_BaseColor", sourceColors.TryGetValue(paletteName, out var authoredColor) ? authoredColor : old != null && old.HasProperty("_BaseColor") ? old.GetColor("_BaseColor") : old != null && old.HasProperty("_Color") ? old.GetColor("_Color") : new Color(.65f, .60f, .48f));
                             if (selectedShader == toon)
                             {
                                 material.SetColor("_ShadeColor", character ? new Color(.70f,.73f,.85f) : new Color(.72f,.79f,.86f));
@@ -209,31 +227,57 @@ namespace FirstGame.Editor
                     {
                         var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
                         var clips = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
-                        if (clips.Length == 0) throw new InvalidOperationException("Missing Blender idle take: " + name);
-                        var sourceClip = clips.FirstOrDefault(c => c.name.Contains("Idle")) ?? clips[0];
-                        string clipPath = "Assets/Settings/" + name + "Idle.anim";
-                        var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(clipPath);
-                        if (clip == null) { clip = UnityEngine.Object.Instantiate(sourceClip); AssetDatabase.CreateAsset(clip, clipPath); }
-                        else EditorUtility.CopySerialized(sourceClip, clip);
-                        clip.name = name + " Idle";
-                        var settings = AnimationUtility.GetAnimationClipSettings(clip); settings.loopTime = true; AnimationUtility.SetAnimationClipSettings(clip, settings);
-                        EditorUtility.SetDirty(clip);
+                        var idleSource = clips.FirstOrDefault(c => c.name.Contains("Idle"));
+                        var walkSource = clips.FirstOrDefault(c => c.name.Contains("Walk"));
+                        if (idleSource == null || walkSource == null)
+                            throw new InvalidOperationException("Missing authored Blender Idle/Walk take: " + name);
+                        var idle = CopyLoopClip(idleSource, "Assets/Settings/" + name + "Idle.anim", name + " Idle");
+                        var walk = CopyLoopClip(walkSource, "Assets/Settings/" + name + "Walk.anim", name + " Walk");
+                        if (walk.length < .85f || walk.length > .95f)
+                            throw new InvalidOperationException("The authored walk must be a 0.9 second loop: " + name);
                         string controllerPath = "Assets/Settings/" + name + "Idle.controller";
                         var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath);
                         if (controller == null) controller = AnimatorController.CreateAnimatorControllerAtPath(controllerPath);
                         var states = controller.layers[0].stateMachine.states;
-                        if (states.Length == 0) controller.AddMotion(clip);
-                        else states[0].state.motion = clip;
+                        if (!controller.parameters.Any(p => p.name == "Speed")) controller.AddParameter("Speed", AnimatorControllerParameterType.Float);
+                        var state = states.Length == 0 ? controller.layers[0].stateMachine.AddState("Locomotion") : states[0].state;
+                        var tree = state.motion as BlendTree;
+                        if (tree == null)
+                        {
+                            tree = new BlendTree { name = name + " Locomotion" };
+                            AssetDatabase.AddObjectToAsset(tree, controller);
+                        }
+                        tree.blendType = BlendTreeType.Simple1D; tree.blendParameter = "Speed"; tree.useAutomaticThresholds = false;
+                        tree.children = new[] { new ChildMotion { motion = idle, threshold = 0, timeScale = 1 }, new ChildMotion { motion = walk, threshold = 1, timeScale = 1 } };
+                        state.name = "Locomotion"; state.motion = tree; state.writeDefaultValues = true;
+                        controller.layers[0].stateMachine.defaultState = state;
+                        EditorUtility.SetDirty(tree);
                         EditorUtility.SetDirty(controller);
                         animator.runtimeAnimatorController = controller; animator.applyRootMotion = false;
                         // The revised source is one skinned body per actor. A stale proxy must never survive regeneration.
                         if (go.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length != 1 || go.GetComponentsInChildren<MeshRenderer>(true).Length != 0)
                             throw new InvalidOperationException("Expected one skinned character visual without a duplicate static body: " + name);
+                        foreach (string joint in new[] { "Shin_L", "Shin_R", "Foot_L", "Foot_R" })
+                            if (!go.GetComponentsInChildren<Transform>(true).Any(t => t.name == joint))
+                                throw new InvalidOperationException("Missing articulated walk joint " + joint + ": " + name);
                     }
                     PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
                 }
                 finally { UnityEngine.Object.DestroyImmediate(go); }
             }
+        }
+
+        static AnimationClip CopyLoopClip(AnimationClip source, string path, string name)
+        {
+            var clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
+            if (clip == null) { clip = UnityEngine.Object.Instantiate(source); AssetDatabase.CreateAsset(clip, path); }
+            else EditorUtility.CopySerialized(source, clip);
+            clip.name = name;
+            var settings = AnimationUtility.GetAnimationClipSettings(clip);
+            settings.loopTime = true;
+            AnimationUtility.SetAnimationClipSettings(clip, settings);
+            EditorUtility.SetDirty(clip);
+            return clip;
         }
 
         static bool IsGalileeWaterMaterial(string materialName)

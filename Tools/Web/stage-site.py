@@ -40,11 +40,29 @@ for game, slug in GAMES.items():
             report = json.loads(report_path.read_text())
             if report["status"] != "passed":
                 raise SystemExit(f"Browser report has not passed: {game}/{profile}")
+            if report.get("revision") != "expanded-demo-2026-10-23":
+                raise SystemExit(f"Current expanded demo browser evidence required: {game}/{profile}")
             audio_labels = {window["label"] for window in report.get("audioEvidence", {}).get("windows", [])}
             required_audio = {"before-first-user-gesture", "after-first-user-gesture", "muted", "unmuted",
                               "volume-reduced", "volume-restored", "after-continue-user-gesture"}
             if not required_audio.issubset(audio_labels):
                 raise SystemExit(f"Actual browser music verification required: {game}/{profile}")
+            if game == "PathOfDawn":
+                voice = report.get("voiceEvidence", {})
+                voice_manifest = ROOT / "Games/PathOfDawn/Assets/Resources/Voice/opening-voice.json"
+                if voice.get("manifestSha256") != hashlib.sha256(voice_manifest.read_bytes()).hexdigest():
+                    raise SystemExit(f"Current dialogue voice manifest verification required: {profile}")
+                windows = {item["label"]: item for item in voice.get("windows", [])}
+                required_voice = {"muted-opening-line", "first-line-replayed", "first-line-restarted",
+                                  "second-line-after-next", "first-line-after-next", "second-line-naturally-ended"}
+                if not required_voice.issubset(windows):
+                    raise SystemExit(f"Actual dialogue replay, mute and cancellation checks required: {profile}")
+                for label in ("first-line-replayed", "first-line-restarted", "second-line-after-next"):
+                    sample = windows[label]
+                    if (len(sample.get("sourceIdentities", [])) != 1 or sample.get("sampleCount", 0) < 6 or
+                            sample.get("audibleSampleFraction", 0) < .5 or not sample.get("isolatedVoiceRoute") or
+                            not sample.get("allContextsRunning")):
+                        raise SystemExit(f"Decoded dialogue output evidence missing: {profile}/{label}")
             expected_profile = "mobile-landscape" if profile == "Mobile844" else "desktop"
             expected_size = {"Desktop720": (1280, 720), "Desktop1080": (1920, 1080), "Mobile844": (844, 390)}[profile]
             viewport = report.get("interactionViewport", {})
@@ -103,6 +121,7 @@ for game, slug in GAMES.items():
     shutil.copyfile(ROOT / "Tools/Audio/MUSIC-NOTICE.txt", notices / "Music-NOTICE.txt")
     if game == "PathOfDawn":
         shutil.copyfile(project / "Packages/com.inkle.ink-unity-integration/LICENCE.md", notices / "Ink-LICENCE.md")
+        shutil.copyfile(ROOT / "Tools/Voice/VOICE-NOTICE.txt", notices / "Voice-NOTICE.txt")
     shutil.copyfile(hero, output / "art" / f"{slug}.png")
 
 files = sorted(p for p in output.rglob("*") if p.is_file())

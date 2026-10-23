@@ -9,11 +9,11 @@ namespace FantasyCards.Tests
     {
         [Test] public void CatalogAndDeckHaveSeparateCounts()
         {
-            Assert.AreEqual(16, CardCatalog.All.Length);
-            Assert.AreEqual(4, CardCatalog.All.Count(x => x.kind == CardKind.Terrain));
-            Assert.AreEqual(6, CardCatalog.All.Count(x => x.kind == CardKind.Unit));
-            Assert.AreEqual(3, CardCatalog.All.Count(x => x.kind == CardKind.Spell));
-            Assert.AreEqual(3, CardCatalog.All.Count(x => x.kind == CardKind.Equipment));
+            Assert.AreEqual(40, CardCatalog.All.Length);
+            Assert.AreEqual(8, CardCatalog.All.Count(x => x.kind == CardKind.Terrain));
+            Assert.AreEqual(16, CardCatalog.All.Count(x => x.kind == CardKind.Unit));
+            Assert.AreEqual(9, CardCatalog.All.Count(x => x.kind == CardKind.Spell));
+            Assert.AreEqual(7, CardCatalog.All.Count(x => x.kind == CardKind.Equipment));
             Assert.AreEqual(24, CardCatalog.DefaultDeck().Count);
         }
         [Test] public void TerrainProducesResourceAndCanOnlyBePlayedOnce()
@@ -64,6 +64,37 @@ namespace FantasyCards.Tests
             BattleEngine.Validate(restored.State);
         }
 #if UNITY_EDITOR
+        [TestCase("forest", "lyria")] [TestCase("knights", "kael")]
+        [TestCase("tides", "serin")] [TestCase("stars", "noa")]
+        public void UnityJsonPreservesSelectedLeaderDeckMulliganAndSkillUse(string deckId, string leaderId)
+        {
+            var source = DemoCatalog.CreateBattle(91, deckId, leaderId, 2);
+            Assert.That(source.Mulligan(0, source.State.players[0].hand.Take(2).Select(c => c.instanceId).ToArray(), out var error), Is.True, error);
+            var p = source.State.players[0]; p.dawn = p.tide = 6;
+            if (leaderId == "kael") InstallUnit(source, 0, "dawn_guard");
+            if (leaderId == "serin") p.health = 12;
+            Assert.That(source.UseLeaderSkill(0, out error), Is.True, error);
+            var json = UnityEngine.JsonUtility.ToJson(source.State);
+            var restored = new BattleEngine(UnityEngine.JsonUtility.FromJson<BattleState>(json));
+            Assert.That(UnityEngine.JsonUtility.ToJson(restored.State), Is.EqualTo(json));
+            Assert.That(restored.State.players[0].leaderId, Is.EqualTo(leaderId));
+            Assert.That(restored.State.players[0].deckId, Is.EqualTo(deckId));
+            Assert.That(restored.State.players[0].mulliganUsed, Is.True);
+            Assert.That(restored.State.players[0].leaderSkillUses, Is.EqualTo(1));
+            Assert.That(restored.UseLeaderSkill(0, out _), Is.False);
+            Assert.That(restored.Mulligan(0, new int[0], out _), Is.False);
+            Assert.That(UnityEngine.JsonUtility.ToJson(restored.State), Is.EqualTo(json));
+            int actions = 0;
+            while (source.State.phase != BattlePhase.Complete && actions++ < 2000)
+            {
+                int actor = source.State.phase == BattlePhase.BlockResponse ? 1 - source.State.activePlayer : source.State.activePlayer;
+                Assert.That(BattleAi.Step(source, actor, out error), Is.True, error);
+                Assert.That(BattleAi.Step(restored, actor, out error), Is.True, error);
+                BattleEngine.Validate(restored.State);
+                Assert.That(UnityEngine.JsonUtility.ToJson(restored.State), Is.EqualTo(UnityEngine.JsonUtility.ToJson(source.State)));
+            }
+            Assert.That(source.State.phase, Is.EqualTo(BattlePhase.Complete));
+        }
         // This must run in Unity: System.Text.Json in the external harness cannot
         // establish JsonUtility's behavior for the actual nested save payload.
         [TestCase(1u)] [TestCase(44u)] [TestCase(188u)]

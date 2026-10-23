@@ -1,26 +1,34 @@
-# 새벽의 길: 애니메이션풍 캐릭터·물가 조형 개정
+# 새벽의 길: 캐릭터·환경·걷기 제작
 
-`generate_toon_dawn.py`는 이 저장소를 위해 직접 작성한 Blender 메시 생성기다. 외부 모델이나 텍스처를 가져오지 않았다. 최신 캐릭터 3종과 갈릴리 환경은 기존 FBX 파일을 교체하며 Unity `.meta`는 수정하지 않는다. 첫 프록시 생성기인 `generate_proxies.py`의 공통 함수를 재사용하지만 해당 파일 전체를 실행하지는 않는다. **현재 새벽의 길 모델을 재생성할 때는 아래 새 명령을 사용한다.** 예전 생성기를 단독 실행하면 구형 프록시로 돌아간다.
+`generate_toon_dawn.py`는 이 저장소를 위해 작성한 Blender 메시·애니메이션 생성기다. 외부 모델·모션을 복사하지 않는다. 기존 FBX 네 개의 경로와 Unity GUID를 유지한다. 예전 `generate_proxies.py` 전체를 실행하면 구형 프록시로 돌아가므로 새벽의 길 재생성에는 아래 명령을 사용한다.
 
 ```sh
 blender --background --threads 4 --python Tools/Art/generate_toon_dawn.py -- --root . --render
-blender --background --threads 4 --python Tools/Art/verify_proxies.py -- --root .
-blender --background --threads 4 --python Tools/Art/verify_toon_dawn.py -- --root .
+blender --background --threads 2 --python Tools/Art/verify_proxies.py -- --root .
+blender --background --threads 2 --python Tools/Art/verify_toon_dawn.py -- --root .
+blender --background --threads 4 --python Tools/Art/render_toon_walk.py -- --root .
 ```
 
-`storybook-dawn-02`는 따뜻하고 청량한 갈릴리 애니메이션 판타지 방향이다. 인물과 풍경을 함께 바꾸되, 기존 위치·충돌·상호작용 계약은 유지한다.
+현재 개정 `storybook-dawn-03-walk`는 더 큰 홍채·간결한 입선·얇게 흐르는 머리카락과 좁힌 어깨 실루엣을 사용한다. 목·어깨·소매는 연속 표면이며 열린 칼라와 가는 봉제선을 추가했다. 몸통에 정적 몸체를 겹치지 않고 각 인물은 SkinnedMeshRenderer 한 개를 유지한다. 매끄러운 정점 법선과 정규화 가중치를 사용하며 Unity 인덱스는 UInt32다. 이는 상용 대작과 같은 최종 캐릭터 품질이나 사용자 승인을 뜻하지 않는다.
 
-실제 조형 변경:
+환경은 블록을 전면에 쌓은 집에서 낮은 석조 기초·연속 회벽·둥근 문틀이 있는 작은 쉼터로 바꿨다. 맨 갈색 땅 대신 초지와 곡선 흙길을 구성했다. 실제 Unity 카메라에서 원경 언덕이 호수 위에 떠 있는 타원으로 보이는 문제를 확인하여 해당 재질 면을 제거했다. 원경은 별도 회화풍 파노라마가 맡는다. 물·나무·꽃밭과 기존 길·문·NPC 좌표 계약은 유지한다. 환경은 논리 그룹별 9개 메시다.
 
-- 성인 체형과 구별되는 얼굴·복장 실루엣. 얼굴과 연결된 머리 장식을 함께 넓혀 애니메이션 비율을 조정하고, 콧날 돌출은 줄였다. 넓고 낮은 아몬드형 눈과 눈꺼풀·홍채·동공·작은 반짝임을 별도 형상으로 구성했다. 짧은 수염의 뾰족한 볼 경계를 둥근 턱 곡선으로 바꿨다.
-- 곡선 보간과 연속 프레임을 적용한 머리카락, 얼굴 곡면에 밀착한 수염. 원형 머리 덩어리와 빗살 같은 수염 막대를 제거했다.
-- 목·어깨 단면을 Hermite 곡선으로 보간하고 소매 시작점과 반경을 낮춰 솟은 어깨를 완화했다. 몸통·소매를 7mm voxel 표면으로 연결하고 완화·감면·한 단계 subdivision을 적용했다. 가중치는 작은 값을 제거한 뒤 합계 1로 정규화한다. 각 캐릭터는 SkinnedMesh 1개이며 static duplicate는 없다. 액세서리 병합 때 섞인 custom split normals는 제거한 뒤 매끄러운 정점을 사용한다. FBX는 FACE smoothing, Unity는 Import Normals로 그 표면을 유지한다. Unity 모델 인덱스는 UInt32를 명시한다. 기존 UInt16 설정은 65,535개가 넘는 정점을 여러 renderer로 나눠 단일 몸체 검증에서 실패했으므로 유지할 수 없다.
-- 올리브 나무는 가는 가지 중심에서 넓고 둥근 수관 덩어리와 보조 잎으로 바뀌었다. 돌과 석조 모서리를 둥글게 다듬고, 풀과 꽃이 섞인 일곱 초지와 먼 언덕을 추가했다. 꽃은 각 화단 단위로 합쳐 생성 비용을 줄인다. 석조 줄눈·곡면 선체·항아리·어망도 유지하며 환경은 논리 그룹별 9개 메시로 병합한다.
-- Unity에는 부드러운 3단계 셀 명암, 얇은 가장자리 색, 구름이 흐르는 하늘과 해안·물결 색이 움직이는 물 셰이더를 적용한다. 물은 불투명 색·프레넬 효과이며 실제 반사/굴절 시뮬레이션은 아니다.
-- 모델의 이름, FBX 경로, 10본 Generic 리그와 4초 `BasicIdle`, 환경의 원본 좌표 및 런타임 Y180 회전 계약을 유지한다. 새 `POD_*` 재질 기본색은 `ToonDawnManifest.json`과 공용 `AssetManifest.json`에 기록한다.
+## 리그와 애니메이션 계약
 
-편집 원본은 `Source/ToonDawnCharactersAndShore.blend`, 실제 Blender 렌더는 `Previews/ToonDawn_CharacterLineup.png`, `ToonDawn_FaceDetail.png`, `ToonDawn_GalileeShore.png`다. 이 렌더는 Unity 실행 화면이 아니며 Unity 셀 셰이더와 조명은 게임의 실제 캡처로 별도 검수한다. 첫 프록시 원본과 미리보기는 비교 자료로 남긴다.
+기존 Root/Pelvis/Spine/Head, 좌우 UpperArm/Forearm/Leg에 **Shin_L/R 및 Foot_L/R**을 추가한 **14본 Generic 리그**다. 바지·종아리·샌들과 발의 가중치를 실제 관절에 나눴다. 여행자의 튜닉 앞면과 금색 밑단도 다리 움직임을 따라가게 하여 걷기 중 허벅지가 의상 밖으로 관통하던 문제를 고쳤다. 무릎은 2절 링크 해석해로 굽히며 지지 구간의 발을 평평하게 놓고 회수 구간에는 발을 들어 옮긴다. 팔 스윙, 상체 반대 회전과 작은 골반 상하 이동도 같은 클립에 기록한다.
 
-Blender 4.3.2의 실제 FBX 재가져오기는 공통 자산 5/5, 새 계약 4/4 통과했다. `toon-verification.json`은 캐릭터별 SkinnedMesh 1개/static duplicate 0개, Root 원점, 발바닥 높이 0, 좌우 중심, 가중치 합계, 10본 리그와 기존 `BasicIdle` take 이름을 확인한다. 최종 삼각형 수는 예수님 173,936, 미리암 174,240, 여행자 119,920, 환경 405,908이다. 세 인물 합계는 468,096이며 전경 모두가 보일 때 환경과 합쳐 874,004다. 각 FBX의 `.meta`는 변경하지 않았다. 이번 생성·렌더·계약 검증 로그와 중간 실패 증거는 커밋 대상이 아닌 `Artifacts/Validation/Subculture/Blender/`에 보관한다. 자동 계약 결과는 `toon-verification.json`과 `verification.json`에 기록한다. 삼각형 수만으로 모바일 성능을 보장하지 않으며 WebGL 실행 흐름과 실기기 성능은 별도 검증이 필요하다.
+- `BasicIdle`: 30fps, 1–121프레임, **4초** 반복.
+- `Walk`: 30fps, 1–28프레임, **0.9초** 반복. 한 걸음 0.65m/지지 0.45초로 **1.45m/s** 이동에 맞춘다.
+- 두 take는 해당 인물의 NLA strip만 FBX에 내보낸다. 다른 인물의 action은 포함하지 않는다.
+- Root는 원점에 고정한다. 실제 월드 이동·회전·충돌은 게임 controller가 맡으며 Animator의 `applyRootMotion=false`다.
+- `ProjectSetup`이 원본 take를 `*Idle.anim`, `*Walk.anim`으로 갱신하고 기존 controller GUID를 유지하며 float **Speed 0–1**의 1D BlendTree를 만든다.
 
-현재 결과는 절차적 조형을 애니메이션풍으로 다듬은 개발용 개정이다. 생성 원화와 같은 완성도의 3D, 최종 초상 승인, 정밀한 역사적 외모 재현을 주장하지 않는다. 수작업 리토폴로지/UV·텍스처, 표정·입모양·시선 리그, 걷기·상호작용 애니메이션, 헤어·직물의 더 자연스러운 형태, 플랫폼별 LOD와 실측은 후속 작업이다. `BasicIdle`은 유지했지만 새 걷기 클립은 아직 만들지 않았다.
+`verify_toon_dawn.py`는 실제 FBX를 새로 가져와 리그·두 take 길이·발 가중치·루프·발 들기·전후 보폭·지지 높이·Root 이동 부재를 검사한다. Blender의 FBX importer는 Root의 유일한 자식 위치로 tail을 추측해 Pelvis에 원본에 없던 `connected` 제약을 붙인다. 이 제약은 파일에 있는 골반 translation 곡선을 억제한다. 체커는 그 importer 제약만 해제한 뒤 **내보낸 곡선을 그대로** 평가하고 조치 사실을 JSON에 기록한다. 키나 FBX 바이트를 고치거나 기대 보행 조건을 생략하지 않는다. Unity의 실제 Generic 애니메이션 평가는 native/Web 검사와 구분한다.
+
+## Unity 재생 준비
+
+`ToonPalette.json`은 생성기의 실제 POD 재질 RGB를 담는다. Unity의 외부 FBX 재질은 reimport 뒤 이전 색을 유지할 수 있으므로 `ProjectSetup`은 이 파일을 기준으로 셀 재질 색을 갱신한다. Web와 Desktop 기존 URP 자산에도 **renderScale 1.0 / 4x MSAA**를 적용한다. 새 셰이더·카메라·이동 표현과 실제 플레이 캡처는 게임 구현 및 `Docs/Validation.md`에서 확인한다.
+
+편집 원본은 `Source/ToonDawnCharactersAndShore.blend`, Blender 렌더는 `Previews/ToonDawn_CharacterLineup.png`, `ToonDawn_FaceDetail.png`, `ToonDawn_GalileeShore.png`, `ToonDawn_WalkCycle.png`다. 걷기 프리뷰는 실제 클립의 네 위상을 배치한 Blender 렌더이며 Unity 화면을 대신하지 않는다. 이전 원본·미리보기·체커 실패는 `Artifacts/ValidationHistory/before-demo-walk-2026-10-23` 및 `Artifacts/Validation/Demo/Blender`에 보존한다.
+
+삼각형은 예수님 175,041, 미리암 174,757, 여행자 127,177, 환경 342,996개다. 숫자는 `ToonDawnManifest.json`의 실제 내보내기 집계다. 표정·입 모양·시선·손가락·천/머리카락 물리와 LOD, UV 기반 수작업 페인팅은 아직 별도 제작 범위다. 해상도와 삼각형 수만으로 실기 모바일 성능을 주장하지 않는다.

@@ -42,28 +42,30 @@
     "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
-  "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T10:59:06.153565+00:00",
-  "revision": "subculture-bgm-2026-10-23",
-  "baselineRecord": "Tools/Environment/validation-2026-10-23-art-edition.json",
+  "revision": "expanded-demo-2026-10-23",
+  "recordedUtc": "2026-10-23T13:30:17.461603+00:00",
+  "status": "browser-validation-in-progress",
+  "baselineRecord": "Tools/Environment/validation-2026-10-23-subculture-bgm.json",
+  "externalCore": {
+    "passed": 79,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
+  },
   "nativeTests": {
     "FantasyCards": {
       "result": "Passed",
-      "total": "19",
-      "passed": "19",
+      "total": "26",
+      "passed": "26",
       "failed": "0",
-      "skipped": "0",
-      "start-time": "2026-10-23 09:48:28Z",
-      "end-time": "2026-10-23 09:48:35Z"
+      "skipped": "0"
     },
     "PathOfDawn": {
       "result": "Passed",
       "total": "10",
       "passed": "10",
       "failed": "0",
-      "skipped": "0",
-      "start-time": "2026-10-23 10:31:21Z",
-      "end-time": "2026-10-23 10:31:22Z"
+      "skipped": "0"
     }
   },
   "builds": {
@@ -73,8 +75,8 @@
         "Engine": "6000.3.26f1",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "131588914",
-        "Duration": "00:00:24.0788180",
+        "Bytes": "185135330",
+        "Duration": "00:00:16.5340760",
         "Errors": "0",
         "Warnings": "1"
       }
@@ -86,12 +88,11 @@
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "7343",
-        "Duration": "00:03:43.0260240",
+        "Duration": "00:04:04.2656090",
         "Errors": "0",
         "Warnings": "4"
       },
-      "actualPlayerBytes": 46954646,
-      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json"
+      "actualPlayerBytes": 83385556
     },
     "PathOfDawn/Windows": {
       "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
@@ -99,8 +100,8 @@
         "Engine": "6000.3.26f1",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "160613611",
-        "Duration": "00:00:10.2695250",
+        "Bytes": "165917563",
+        "Duration": "00:00:17.3817490",
         "Errors": "0",
         "Warnings": "1"
       }
@@ -112,115 +113,41 @@
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "7333",
-        "Duration": "00:03:13.0637440",
+        "Duration": "00:03:21.5735430",
         "Errors": "0",
         "Warnings": "4"
       },
-      "actualPlayerBytes": 45593857,
-      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
+      "actualPlayerBytes": 51779171
     }
   },
   "web": {
     "Desktop720/FantasyCards": {
-      "status": "passed",
-      "checks": 41,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json",
-      "audioWindows": 7
+      "status": "failed",
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json"
     },
     "Desktop1080/FantasyCards": {
-      "status": "passed",
-      "checks": 44,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json",
-      "audioWindows": 7
+      "status": "pending",
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json"
     },
     "Mobile844/FantasyCards": {
-      "status": "passed",
-      "checks": 44,
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json",
-      "audioWindows": 7
+      "status": "pending",
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json"
     },
     "Desktop720/PathOfDawn": {
       "status": "passed",
-      "checks": 47,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json",
-      "audioWindows": 7
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop720/PathOfDawn/report.json"
     },
     "Desktop1080/PathOfDawn": {
-      "status": "passed",
-      "checks": 47,
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json",
-      "audioWindows": 7
+      "status": "running",
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/PathOfDawn/report.json"
     },
     "Mobile844/PathOfDawn": {
-      "status": "passed",
-      "checks": 52,
-      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json",
-      "audioWindows": 7
+      "status": "pending",
+      "evidence": "Artifacts/Validation/VisualWeb/Mobile844/PathOfDawn/report.json"
     }
-  },
-  "publicWeb": {
-    "FantasyCards": {
-      "status": "passed",
-      "checks": 50,
-      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json",
-      "audioWindows": 7
-    },
-    "PathOfDawn": {
-      "status": "passed",
-      "checks": 58,
-      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json",
-      "audioWindows": 7
-    }
-  },
-  "externalCore": {
-    "passed": 53,
-    "failed": 0,
-    "skipped": 0,
-    "evidence": "Artifacts/TestResults/Core/core-tests.trx"
-  },
-  "assetAudit": {
-    "status": "passed",
-    "evidence": "Artifacts/Validation/VisualAssets/final-audit.json",
-    "metaCounts": {
-      "FantasyCards": 152,
-      "PathOfDawn": 273
-    }
-  },
-  "music": {
-    "status": "passed",
-    "fileEvidence": "Tools/Audio/verification.json",
-    "browserEvidence": "Seven real UI/PCM observation windows in each current browser report; no physical speaker listening claim."
   },
   "deployment": {
-    "url": "https://ka8877.github.io/firstgame/",
-    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/39941977525",
-    "sourceCommit": "087e03ec3d28d91203fa6a806ff6781af146451b",
-    "verifiedPublicFiles": 22
-  },
-  "github": {
-    "sourceCommit": "087e03ec3d28d91203fa6a806ff6781af146451b",
-    "freshClone": {
-      "status": "passed",
-      "trackedFileCount": 1261,
-      "lfsAssetCount": 35,
-      "lfsBytes": 87580610,
-      "cleanTrackedWorktree": true
-    },
-    "cloneEvidence": "Artifacts/Validation/GitHub/source-clone.json",
-    "runs": [
-      {
-        "databaseId": 39941877683,
-        "url": "https://github.com/ka8877/firstgame/actions/runs/39941877683",
-        "conclusion": "success",
-        "headSha": "087e03ec3d28d91203fa6a806ff6781af146451b"
-      },
-      {
-        "databaseId": 39941977525,
-        "url": "https://github.com/ka8877/firstgame/actions/runs/39941977525",
-        "conclusion": "success",
-        "headSha": "087e03ec3d28d91203fa6a806ff6781af146451b"
-      }
-    ],
-    "runsEvidence": "Artifacts/Validation/Subculture/github-runs.json"
+    "status": "previous-public-version-until-new-verification-completes",
+    "url": "https://ka8877.github.io/firstgame/"
   }
 }

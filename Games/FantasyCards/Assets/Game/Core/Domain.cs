@@ -5,7 +5,8 @@ namespace FantasyCards.Core
 {
     public enum Element { Dawn, Tide }
     public enum CardKind { Terrain, Unit, Spell, Equipment }
-    public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin }
+    public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin, Draw, Resource, Sweep }
+    public enum LeaderSkill { QuickShot, Rally, Restoration, Insight }
     public enum BattlePhase { Main, AttackDeclaration, BlockResponse, Complete }
     public enum CoinResolutionOrder { AttackerFirst, DefenderFirst }
     public enum DamageResolutionOrder { Simultaneous, AttackerFirst }
@@ -82,6 +83,11 @@ namespace FantasyCards.Core
 
     [Serializable] public sealed class PlayerState
     {
+        public string leaderId = "lyria";
+        public string deckId = "custom";
+        public int lastLeaderSkillTurn;
+        public int leaderSkillUses;
+        public bool mulliganUsed;
         public int health;
         public int dawn;
         public int tide;
@@ -113,7 +119,7 @@ namespace FantasyCards.Core
 
     [Serializable] public sealed class BattleState
     {
-        public int schemaVersion = 1;
+        public int schemaVersion = 2;
         public string contentVersion = CardCatalog.Version;
         public RuleSet rules = new RuleSet();
         public uint randomState;
@@ -124,6 +130,8 @@ namespace FantasyCards.Core
         public int winner = -1;
         public int pendingAttackerId = -1;
         public int pendingTargetLane = -1;
+        public int encounterIndex = -1;
+        public bool openingHandOpen = true;
         public List<PlayerState> players = new List<PlayerState>();
         public List<BattleEvent> events = new List<BattleEvent>();
         public BattleState Copy()

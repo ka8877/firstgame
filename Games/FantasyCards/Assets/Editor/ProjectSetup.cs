@@ -21,6 +21,11 @@ namespace FirstGame.Editor
         const string Game = "FantasyCards";
         const string AppType = "FantasyCards.Presentation.FantasyCardsApp, FantasyCards.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
+        static readonly string[] CardPages = {
+            "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics",
+            "cards-05-sanctuaries", "cards-06-forest", "cards-07-tides", "cards-08-celestial",
+            "cards-09-spells", "cards-10-armaments"
+        };
         static bool initializing;
         static ProjectSetup()
         {
@@ -123,16 +128,17 @@ namespace FirstGame.Editor
                 AssetDatabase.CreateAsset(font, path);
                 AssetDatabase.AddObjectToAsset(font.material, font);
                 foreach (var texture in font.atlasTextures) AssetDatabase.AddObjectToAsset(texture, font);
-                string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→①②③";
-                foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
-                    if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
-                string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
-                if (!font.TryAddCharacters(characters, out string missing))
-                    Debug.LogWarning("Font does not contain these optional source symbols: " + missing);
-                foreach (var texture in font.atlasTextures)
-                    if (!AssetDatabase.Contains(texture)) AssetDatabase.AddObjectToAsset(texture, font);
-                EditorUtility.SetDirty(font);
             }
+            // New card and leader names need glyphs even when the font asset already exists.
+            string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→①②③④";
+            foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
+                if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
+            string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
+            if (!font.TryAddCharacters(characters, out string missing))
+                Debug.LogWarning("Font does not contain these optional source symbols: " + missing);
+            foreach (var texture in font.atlasTextures)
+                if (!AssetDatabase.Contains(texture)) AssetDatabase.AddObjectToAsset(texture, font);
+            EditorUtility.SetDirty(font);
             TMP_Settings.defaultFontAsset = font;
             EditorUtility.SetDirty(TMP_Settings.instance);
             return font;
@@ -207,10 +213,12 @@ namespace FirstGame.Editor
 
         static void CreateContent()
         {
-            var pages = new[] { "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics" }
+            var pages = CardPages
                 .Select(name => ImportIllustration("Assets/Resources/Art/" + name + ".png")).ToArray();
             ImportIllustration("Assets/Resources/Art/title-hero.png");
             ImportIllustration("Assets/Resources/Art/battle-background.png");
+            foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)
+                ImportIllustration("Assets/Resources/Art/portrait-" + leader.id + ".png");
             foreach (var definition in FantasyCards.Core.CardCatalog.All)
             {
                 string path = "Assets/Resources/Data/Cards/" + definition.id + ".asset";
@@ -218,12 +226,12 @@ namespace FirstGame.Editor
                 if (asset == null)
                 {
                     asset = ScriptableObject.CreateInstance<FantasyCards.Data.CardAsset>();
-                    asset.stableId = definition.id; asset.displayName = definition.name; asset.description = definition.text;
-                    asset.kind = definition.kind; asset.element = definition.element; asset.cost = definition.cost;
-                    asset.power = definition.attack; asset.health = definition.health; asset.coinBonus = definition.coinBonus;
-                    asset.effect = definition.effect; asset.magnitude = definition.magnitude;
                     AssetDatabase.CreateAsset(asset, path);
                 }
+                asset.stableId = definition.id; asset.displayName = definition.name; asset.description = definition.text;
+                asset.kind = definition.kind; asset.element = definition.element; asset.cost = definition.cost;
+                asset.power = definition.attack; asset.health = definition.health; asset.coinBonus = definition.coinBonus;
+                asset.effect = definition.effect; asset.magnitude = definition.magnitude;
                 int index = Array.IndexOf(FantasyCards.Core.CardCatalog.All, definition);
                 var atlas = pages[index / 4]; int cell = index % 4;
                 float sizeX = atlas.width / 2f, sizeY = atlas.height / 2f;
@@ -275,12 +283,18 @@ namespace FirstGame.Editor
                     if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(transform.gameObject) != 0)
                         throw new InvalidOperationException("Missing script on " + transform.name);
             var cards = Resources.LoadAll<FantasyCards.Data.CardAsset>("Data/Cards");
-            if (cards.Length != 16 || cards.Any(card => card.illustration == null)) throw new InvalidOperationException("Expected sixteen card assets with connected illustrations.");
-            var pages = new[] { "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics" };
+            if (cards.Length != FantasyCards.Core.CardCatalog.All.Length || cards.Any(card => card.illustration == null))
+                throw new InvalidOperationException("Each demo card must have its own authored asset and connected illustration.");
+            var pages = CardPages;
             for (int i = 0; i < FantasyCards.Core.CardCatalog.All.Length; i++)
             {
                 var definition = FantasyCards.Core.CardCatalog.All[i];
                 var card = cards.Single(c => c.stableId == definition.id);
+                if (card.displayName != definition.name || card.description != definition.text || card.kind != definition.kind
+                    || card.element != definition.element || card.cost != definition.cost || card.power != definition.attack
+                    || card.health != definition.health || card.coinBonus != definition.coinBonus
+                    || card.effect != definition.effect || card.magnitude != definition.magnitude)
+                    throw new InvalidOperationException("Card authoring data differs from current content: " + definition.id);
                 var texture = Resources.Load<Texture2D>("Art/" + pages[i / 4]);
                 if (texture == null || card.illustration.texture != texture)
                     throw new InvalidOperationException("Card illustration is not connected to its atlas page: " + definition.id);
@@ -288,6 +302,11 @@ namespace FirstGame.Editor
                 if (card.illustration.rect != expected) throw new InvalidOperationException("Incorrect atlas cell: " + definition.id);
             }
             if (Resources.Load<Texture2D>("Art/title-hero") == null) throw new InvalidOperationException("Title illustration is missing.");
+            foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)
+                if (Resources.Load<Texture2D>("Art/portrait-" + leader.id) == null)
+                    throw new InvalidOperationException("Leader portrait is missing: " + leader.id);
+            foreach (var deck in FantasyCards.Core.DemoCatalog.StarterDecks)
+                FantasyCards.Core.DemoCatalog.ValidatePlayableDeck(deck.cards);
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);
         }
     }

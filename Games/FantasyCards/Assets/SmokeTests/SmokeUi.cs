@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FantasyCards.Core;
 using FirstGame.Shared;
 using NUnit.Framework;
 using TMPro;
@@ -23,6 +24,25 @@ namespace FantasyCards.SmokeTests
     internal static class SmokeUi
     {
         public const string BootPath = "Assets/Scenes/Boot.unity";
+        public static IDisposable PreserveDemoPreferences() => new DemoPreferenceScope();
+        sealed class DemoPreferenceScope : IDisposable
+        {
+            readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck" };
+            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2" };
+            readonly Dictionary<string, string> strings = new Dictionary<string, string>();
+            readonly Dictionary<string, int> ints = new Dictionary<string, int>();
+            public DemoPreferenceScope()
+            {
+                foreach (string key in stringKeys) if (PlayerPrefs.HasKey(key)) strings[key] = PlayerPrefs.GetString(key);
+                foreach (string key in intKeys) if (PlayerPrefs.HasKey(key)) ints[key] = PlayerPrefs.GetInt(key);
+            }
+            public void Dispose()
+            {
+                foreach (string key in stringKeys) { if (strings.TryGetValue(key, out var value)) PlayerPrefs.SetString(key, value); else PlayerPrefs.DeleteKey(key); }
+                foreach (string key in intKeys) { if (ints.TryGetValue(key, out var value)) PlayerPrefs.SetInt(key, value); else PlayerPrefs.DeleteKey(key); }
+                PlayerPrefs.Save();
+            }
+        }
         public static Button FindButton(string label) => UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
             .FirstOrDefault(b => b.gameObject.activeInHierarchy && b.GetComponentsInChildren<TMP_Text>()
                 .Any(t => t.text == label));
@@ -42,6 +62,40 @@ namespace FantasyCards.SmokeTests
             while (!predicate() && Time.realtimeSinceStartup < deadline) yield return null;
             Assert.That(predicate(), Is.True, failure);
         }
+        public static IEnumerator StartDemoBattle(string leaderId = "lyria", string deckId = "forest", int encounterIndex = 0)
+        {
+            Click("새로운 결투");
+            yield return null;
+            Assert.That(VisibleNamedButtons("Leader "), Is.EqualTo(4), "New game must offer all four leaders.");
+            Click(DemoCatalog.GetLeader(leaderId).name);
+            yield return null;
+            Click("기본 덱 선택");
+            yield return null;
+            Assert.That(VisibleNamedButtons("Starter deck "), Is.EqualTo(4), "New game must offer all four starter decks.");
+            Click(DemoCatalog.GetDeck(deckId).name);
+            yield return null;
+            Click("상대 선택");
+            yield return null;
+            Assert.That(VisibleNamedButtons("Encounter "), Is.EqualTo(3), "The demo must offer three encounters.");
+            Click(DemoCatalog.GetEncounter(encounterIndex).name);
+            yield return null;
+            yield return StartPreparedBattle();
+        }
+        public static IEnumerator StartPreparedBattle()
+        {
+            // Use the currently selected encounter. Result-flow tests rely on this not
+            // overriding the choice that the actual next/retry callback just made.
+            Click("덱을 섞고 시작");
+            yield return WaitUntil(() => FindButton("이대로 시작") != null && FindButton("이대로 시작").interactable,
+                8, "The visible shuffle did not reach opening-hand selection.");
+            AssertVisibleKorean("시작 손패 교체");
+            Click("이대로 시작");
+            yield return WaitUntil(() => FindButton("저장") != null && FindButton("저장").interactable,
+                8, "Opening-hand confirmation and the battle Timeline did not release input.");
+            Assert.That(FindButton("이대로 시작"), Is.Null, "Opening-hand selection must close after confirmation.");
+        }
+        static int VisibleNamedButtons(string prefix) => UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+            .Count(button => button.gameObject.activeInHierarchy && button.gameObject.name.StartsWith(prefix, StringComparison.Ordinal));
         public static IEnumerator LoadBoot()
         {
             // Explicitly unload first so continue tests always deserialize into a fresh app instance.
