@@ -1,6 +1,6 @@
 # 두 독립 Unity 게임
 
-`Games/FantasyCards`(별빛의 서약)와 `Games/PathOfDawn`(새벽의 길)은 독립 실행·배포하는 Unity 프로젝트다. 요청 전문은 `Docs/Brief.md`, 검증 결과는 `Docs/Validation.md`를 읽는다. 현재 범위는 첫 전투 및 선택 두 번/결말 세 가지의 서사 구간이다. 2026-10-23 실제 플레이 피드백을 반영해 서양 반실사 원화를 현대 애니메이션·서브컬처풍으로 교체하고, 둥근 카드·UI와 부드러운 스토리북 3D, 게임별 오리지널 BGM을 추가한다. 최신 시각 방향은 `Docs/ArtDirection.md`, 음악은 `Docs/Audio.md`, 웹 배포는 `Docs/WebPlaytest.md`를 따른다. 개발 중 비주얼을 최종 품질이나 사용자 승인으로 보고하지 않는다.
+`Games/FantasyCards`(별빛의 서약)와 `Games/PathOfDawn`(새벽의 길)은 독립 실행·배포하는 Unity 프로젝트다. 요청 전문은 `Docs/Brief.md`, 검증 결과는 `Docs/Validation.md`를 읽는다. 현재 범위는 첫 전투 및 선택 두 번/결말 세 가지의 서사 구간이다. 2026-10-23 실제 플레이 피드백을 반영해 서양 반실사 원화를 현대 애니메이션·서브컬처풍으로 교체하고, 둥근 카드·UI와 부드러운 스토리북 3D, 게임별 오리지널 BGM을 추가했다. 최신 시각 방향은 `Docs/ArtDirection.md`, 음악은 `Docs/Audio.md`, 웹 배포는 `Docs/WebPlaytest.md`를 따른다. 개발 중 비주얼을 최종 품질이나 사용자 승인으로 보고하지 않는다.
 
 ## 작업과 소유권
 - `Games/*/Assets/Game/Core`: 엔진과 화면에서 독립된 규칙/현재 상태. 실행 상태는 ScriptableObject에 저장하지 않는다.

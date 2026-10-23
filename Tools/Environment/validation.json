@@ -43,7 +43,7 @@
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
   "date": "2026-10-23",
-  "recordedUtc": "2026-10-23T10:49:27.382929+00:00",
+  "recordedUtc": "2026-10-23T10:59:06.153565+00:00",
   "revision": "subculture-bgm-2026-10-23",
   "baselineRecord": "Tools/Environment/validation-2026-10-23-art-edition.json",
   "nativeTests": {
@@ -158,7 +158,20 @@
       "audioWindows": 7
     }
   },
-  "publicWeb": {},
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 50,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json",
+      "audioWindows": 7
+    },
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 58,
+      "evidence": "Artifacts/Validation/PublicWeb/Mobile844/PathOfDawn/report.json",
+      "audioWindows": 7
+    }
+  },
   "externalCore": {
     "passed": 53,
     "failed": 0,
@@ -177,5 +190,37 @@
     "status": "passed",
     "fileEvidence": "Tools/Audio/verification.json",
     "browserEvidence": "Seven real UI/PCM observation windows in each current browser report; no physical speaker listening claim."
+  },
+  "deployment": {
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/39941977525",
+    "sourceCommit": "087e03ec3d28d91203fa6a806ff6781af146451b",
+    "verifiedPublicFiles": 22
+  },
+  "github": {
+    "sourceCommit": "087e03ec3d28d91203fa6a806ff6781af146451b",
+    "freshClone": {
+      "status": "passed",
+      "trackedFileCount": 1261,
+      "lfsAssetCount": 35,
+      "lfsBytes": 87580610,
+      "cleanTrackedWorktree": true
+    },
+    "cloneEvidence": "Artifacts/Validation/GitHub/source-clone.json",
+    "runs": [
+      {
+        "databaseId": 39941877683,
+        "url": "https://github.com/ka8877/firstgame/actions/runs/39941877683",
+        "conclusion": "success",
+        "headSha": "087e03ec3d28d91203fa6a806ff6781af146451b"
+      },
+      {
+        "databaseId": 39941977525,
+        "url": "https://github.com/ka8877/firstgame/actions/runs/39941977525",
+        "conclusion": "success",
+        "headSha": "087e03ec3d28d91203fa6a806ff6781af146451b"
+      }
+    ],
+    "runsEvidence": "Artifacts/Validation/Subculture/github-runs.json"
   }
 }

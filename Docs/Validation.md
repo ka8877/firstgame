@@ -42,12 +42,15 @@ native 캡처는 `Artifacts/Screenshots/{FantasyCards,PathOfDawn}`, Blender 렌�
 | PC 1280×720 | 41개 통과 | 47개 통과 |
 | PC 1920×1080 | 44개 통과 | 47개 통과 |
 | 모바일 가로 844×390 | 44개 통과 | 52개 통과 |
+| 공개 URL 모바일 가로 | 50개 통과 | 58개 통과 |
 
 수치는 각 실행의 assertion 수이며 고유 기능 수가 아니다. 실제 포인터/키보드/터치로 카드 지형 전개·유닛 배치, 서사 이동·대화·시점 회전, 저장·reload·이어하기를 검사했다. 보고서의 `revision=subculture-bgm-2026-10-23`와 모든 런타임 파일 SHA-256으로 직전 결과와 구분한다. 이전 보고서와 실패는 `.previous-<UTC>`에 보존한다. 자세한 원본·OCR·네트워크 처리는 [VisualValidation.md](VisualValidation.md)를 따른다.
 
-**체험 URL: https://ka8877.github.io/firstgame/**. 새 빌드의 로컬 검증을 마쳤다. 이번 개정의 공개 배포와 공개 URL 재검사는 아직 완료하지 않았다.
+**체험 URL: https://ka8877.github.io/firstgame/**. [GitHub Pages 배포](https://github.com/ka8877/firstgame/actions/runs/39941977525) 성공 후 공개 파일 22개의 HTTP 응답·SHA-256과 랜딩 페이지 1440px·390px를 확인했다. 두 게임의 공개 모바일 조작·저장·음악 검사도 통과했다.
 
 `stage-site.py --require-browser-reports`는 6회 통과·화면 크기·파일 집합·SHA-256과 일곱 음악 구간 근거가 있는지 대조한다. `main`은 소스, `gh-pages`는 일반 Git의 실제 웹 파일만 관리한다. 배포에는 소스·자격 증명·원문 도구 로그를 포함하지 않는다.
+
+게임 소스 커밋 `087e03e`의 [GitHub 자동 테스트](https://github.com/ka8877/firstgame/actions/runs/39941877683)도 통과했다. 별도 새 HTTPS 클론에서 추적 파일 1,261개와 LFS 35개(87,580,610 bytes)의 실제 내용을 Git 기록과 대조했고 미복원 포인터가 없었다. 두 음원과 새 원화·배경·모델을 포함한다. 이 검사는 소스 복원 확인이며 새 클라우드의 Unity 가져오기 검사는 아니다. 뒤의 문서 결과 갱신 커밋은 배포된 게임 런타임을 바꾸지 않는다.
 
 ## 환경과 범위
 
