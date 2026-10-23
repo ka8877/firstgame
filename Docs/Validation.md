@@ -26,6 +26,6 @@ Web은 HTML만 포함하는 Unity summary 대신 실제 런타임 파일 합계�
 
 ## 배포와 한계
 
-체험 URL: **https://ka8877.github.io/firstgame/**. 새 공개 배포는 아직 진행 전이며, 현재 URL은 이전 버전이다.
+체험 URL: **https://ka8877.github.io/firstgame/**. [Pages 배포](https://github.com/ka8877/firstgame/actions/runs/39993200200) 후 공개 URL 모바일 61개 검사 및 공개 파일 23개의 HTTP·SHA-256 일치를 확인했다.
 
 근거는 `Tools/Environment/validation.json`, `Artifacts/Validation/PaintedDawn`, `Artifacts/Screenshots/PathOfDawn`에 있다. 이전 자료와 실패는 삭제하지 않았다. 새 플레이어 ZIP 네 개(카드 런타임 재사용), 실제 LFS 원화를 포함한 소스 ZIP, 검증 근거 ZIP은 최종 문서로 다시 묶는다. 실제 Windows 실행·실물 휴대폰·Safari·물리 오디오 청취·대상 기기 성능은 검증하지 않았다. 모바일 검사는 Chromium 터치 에뮬레이션이며 1080p 전체 브라우저 조작은 이번에 별도 실행하지 않았다. Native에는1920×1080/693×390 캡처와 글자 크기 검사가 있다.

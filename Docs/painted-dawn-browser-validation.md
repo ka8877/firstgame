@@ -83,3 +83,20 @@ An earlier diagnostic desktop run is archived with its failed classifier result
 and `needs-fix` visual review. It is not release evidence. These results do not
 certify physical mobile performance, human listening quality or user artistic
 approval. Public URL verification is recorded separately after deployment.
+
+## Recorded public mobile result
+
+The deployed [PathOfDawn player](https://ka8877.github.io/firstgame/games/path-of-dawn/)
+passed **61/61 checks** at the 844×390 mobile profile. The five public runtime
+files matched the final local build byte-for-byte before browser input. Actual
+touch movement, scenery drag, both choices, witness ending, room save/reload,
+seven BGM windows and five voice windows passed with normal TLS verification.
+Sixteen original public-browser frames received a separate direct visual review.
+
+Evidence is frozen in
+`Artifacts/Validation/PaintedDawn/PublicMobile844/PathOfDawn/report.json`.
+The same small replay-label OCR region needed one recorded exact-text live
+correction; there were no gameplay-state substitutions or new runtime changes.
+The local reports above were not modified by public verification. FantasyCards
+was not replayed; its unchanged runtime and earlier evidence remain explicitly
+separate.

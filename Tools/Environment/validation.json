@@ -43,7 +43,7 @@
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
   "date": "2026-10-24",
-  "recordedUtc": "2026-10-23T17:10:11.267175+00:00",
+  "recordedUtc": "2026-10-23T17:20:48.730003+00:00",
   "revision": "painted-dawn-2026-10-24",
   "dateTimezone": "Asia/Seoul",
   "baselineRecord": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
@@ -51,6 +51,7 @@
     "FantasyCards": "expanded-demo-2026-10-23",
     "PathOfDawn": "painted-dawn-2026-10-24"
   },
+  "environmentMetadataBaseline": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
   "reusedUnchangedEvidence": {
     "FantasyCards": {
       "baseline": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
@@ -214,9 +215,22 @@
       "PathOfDawn": 321
     }
   },
-  "publicWeb": {},
+  "publicWeb": {
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 61,
+      "evidence": "Artifacts/Validation/PaintedDawn/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "fe644c8bfd1321c363ee5b1a62e3e0dd3482cc0337bb5a5f2558d24c8bfc808c",
+      "audioWindows": 7,
+      "voiceWindows": 5,
+      "visualReview": "approved"
+    }
+  },
   "publication": {
-    "status": "pending",
-    "url": "https://ka8877.github.io/firstgame/"
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/39993200200",
+    "sourceCommit": "e0ab91d56d0ae6f12e68be89b57d698862df50dc",
+    "verifiedFiles": 23
   }
 }
