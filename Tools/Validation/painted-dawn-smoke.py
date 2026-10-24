@@ -31,7 +31,7 @@ GAME = "PathOfDawn"
 class PaintedSmoke(BASE.Smoke):
     def __init__(self, page, output, args):
         super().__init__(page, GAME, output, args)
-        self.report["suite"] = "painted-dawn-smoke-v1"
+        self.report["suite"] = "painted-dawn-smoke-v2-motion"
         self.report["harness"] = {"file": str(Path(__file__).relative_to(ROOT)),
             "sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "sharedHarnessSha256": hashlib.sha256(Path(BASE.__file__).read_bytes()).hexdigest()}
@@ -172,8 +172,10 @@ class PaintedSmoke(BASE.Smoke):
         if mobile:
             points = self.layout()["points"]
             sx, sy, _, _ = self.canvas_point(*points["joystickCenter"], reference=True)
-            target = "joystickForward" if direction == "w" else "joystickLeft"
+            target = "joystickForward" if direction in ("w", "s") else "joystickLeft"
             ex, ey, _, _ = self.canvas_point(*points[target], reference=True)
+            if direction in ("s", "d"):
+                ex, ey = 2 * sx - ex, 2 * sy - ey
             cdp = self.page.context.new_cdp_session(self.page)
             cdp.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"x":sx,"y":sy,"id":1}]})
             for step in range(1, 6):
@@ -264,6 +266,21 @@ class PaintedSmoke(BASE.Smoke):
             "limit":"Visual change includes ambient animation; direct screenshot review and native stage tests assess scenery parallax."}
         self.check(difference > .2, "Actual scenery gesture produces changed visible pixels", self.report["parallaxEvidence"])
 
+    def motion_controls(self):
+        started = time.monotonic()
+        self.snapshot("motion-idle-before")
+        for direction, label in (("a", "left"), ("d", "right"), ("s", "toward"), ("w", "away")):
+            self.movement(direction, 600, "motion-response-" + label)
+            self.snapshot("motion-stop-" + label)
+        self.page.wait_for_timeout(450)
+        self.snapshot("motion-idle-after")
+        self.report["motionSequence"] = {"input": "touch joystick" if self.args.profile == "mobile-landscape" else "keyboard",
+            "directions": ["left", "right", "toward", "away"],
+            "videoFromSeconds": round(started - self.args.video_clock, 3),
+            "videoDurationSeconds": round(time.monotonic() - started, 3),
+            "scope": "Actual inputs and original frames; response latency and brake distance are measured by the native movement tests, not inferred from changed pixels."}
+        self.persist()
+
     def dawn(self):
         self.click_control("titleNew", "Start the painted journey")
         self.snapshot("intro-arrival")
@@ -277,6 +294,7 @@ class PaintedSmoke(BASE.Smoke):
         self.check(True, "Opening closes into real shore exploration", before)
         self.page.wait_for_timeout(1100)
         self.snapshot("shore-three-characters")
+        self.motion_controls()
         self.walk_to("미리암에게 말 걸기", "w", "shore-walk", capture_frames=True)
         self.snapshot("shore-after-walking")
         self.parallax()
@@ -290,6 +308,12 @@ class PaintedSmoke(BASE.Smoke):
         self.advance_lines("room-arrival", 7, captures={0:"room-miriam-dialogue",4:"room-jesus-focus"})
         self.page.wait_for_timeout(1100)
         self.snapshot("room-exploration")
+        # The room preserves the shore position. Its NPC stands closer to the
+        # camera and to the left: approach in both axes with real input. A-only
+        # movement misses her after the faster shore walk; keep the same prompt
+        # assertion and record the approach, without changing world/save state.
+        self.movement("s", 750, "room-approach-toward")
+        self.snapshot("room-approach-toward")
         restored_prompt = self.walk_to("바구니에 관해", "a", "room-walk")
         self.click_control("save", "Save the walked-to room state")
         self.wait_text("저장했습니다", region=self.region("notification"), psm=7)
@@ -328,7 +352,8 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True, help="New profile directory; previous runs are archived.")
     parser.add_argument("--base-url")
-    parser.add_argument("--revision", default="painted-dawn-2026-10-24")
+    parser.add_argument("--motion-video", action="store_true", help="Record an unmodified browser video for movement review.")
+    parser.add_argument("--revision", default="fluid-dawn-2026-10-24")
     parser.add_argument("--renderer", choices=["x11-mesa", "swiftshader"], default="x11-mesa")
     parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
     parser.add_argument("--tessdata", type=Path, default=os.environ.get("FIRSTGAME_TESSDATA"))
@@ -368,6 +393,10 @@ def main():
                 options = {"viewport":{"width":width,"height":height},"device_scale_factor":1,"has_touch":mobile,"is_mobile":mobile}
                 if mobile:
                     options["user_agent"] = "Mozilla/5.0 (Linux; Android 14; Mobile Browser Smoke) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+                if args.motion_video:
+                    options["record_video_dir"] = str(out / "video")
+                    options["record_video_size"] = {"width":width,"height":height}
+                args.video_clock = time.monotonic()
                 context = browser.new_context(**options)
                 try:
                     smoke = PaintedSmoke(context.new_page(), out, args)

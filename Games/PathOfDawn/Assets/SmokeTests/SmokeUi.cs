@@ -112,7 +112,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(text.textInfo.characterCount, Is.GreaterThan(0), "TMP did not build text geometry.");
             Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Any(c => c.isVisible), Is.True);
         }
-        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action validateLayout = null)
+        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action validateLayout = null, float settleSeconds = 1f)
         {
             // Native URP camera render. Batch mode does not service WaitForEndOfFrame reliably.
             // Overlay canvases temporarily use the same camera so real uGUI/TMP is in the PNG.
@@ -146,7 +146,7 @@ namespace PathOfDawn.SmokeTests
                 }
                 // Let the actual composition, actor fades, CanvasScaler and camera
                 // settle at the capture dimensions before sampling rendered pixels.
-                yield return new WaitForSecondsRealtime(1f);
+                yield return new WaitForSecondsRealtime(settleSeconds);
                 Canvas.ForceUpdateCanvases();
                 foreach (var text in UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None))
                     if (text.gameObject.activeInHierarchy) text.ForceMeshUpdate(false, true);

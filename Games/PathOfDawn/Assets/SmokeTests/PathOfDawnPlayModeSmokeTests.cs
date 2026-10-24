@@ -464,12 +464,22 @@ namespace PathOfDawn.SmokeTests
         {
             var traveler = GameObject.Find("traveler");
             Assert.That(traveler, Is.Not.Null);
+            // Walk in the clear right-hand lane. The faster forward movement now
+            // reaches the shore NPC during a one-second screenshot settle.
+            // Use actual input to leave that collision path before observing gait.
+            try
+            {
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.D));
+                yield return SmokeUi.WaitUntil(() => traveler.transform.position.x > 2.1f, 8, "Could not reach the clear walking lane.");
+            }
+            finally { InputSystem.QueueStateEvent(keyboard, new KeyboardState()); }
+            yield return new WaitForSeconds(.15f);
             var origin = traveler.transform.position;
             var stage = UnityEngine.Object.FindFirstObjectByType<PathOfDawnApp>().GetComponent<DawnIllustratedStage>();
             var visual = stage.ActorVisual("traveler");
             var originOnStage = stage.ActorStagePosition("traveler");
             var originalHeight = visual.rect.height * visual.localScale.y;
-            Assert.That(stage.TravelerWalkFrame, Is.EqualTo(-1));
+            yield return SmokeUi.WaitUntil(() => !stage.TravelerIsMoving && stage.TravelerWalkFrame == -1, 5, "The lane-change input did not settle before the forward gait check.");
             try
             {
                 InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.W));
@@ -486,11 +496,11 @@ namespace PathOfDawn.SmokeTests
                     "The displayed traveler must follow the CharacterController's world position.");
                 Assert.That(visual.rect.height * visual.localScale.y, Is.LessThan(originalHeight),
                     "Walking deeper into the painted scene must reduce the traveler's perspective scale.");
-                yield return SmokeUi.Capture("PathOfDawn", "12-walking-animation-a");
+                yield return SmokeUi.Capture("PathOfDawn", "12-walking-animation-a", settleSeconds: .08f);
                 var firstStride = stage.TravelerWalkFrame;
                 yield return SmokeUi.WaitUntil(() => stage.TravelerWalkFrame >= 0 && stage.TravelerWalkFrame != firstStride,
                     8, "The walking illustration must advance through different authored stride frames.");
-                yield return SmokeUi.Capture("PathOfDawn", "13-walking-animation-b");
+                yield return SmokeUi.Capture("PathOfDawn", "13-walking-animation-b", settleSeconds: .08f);
             }
             finally
             {
@@ -508,6 +518,24 @@ namespace PathOfDawn.SmokeTests
             yield return new WaitForSeconds(.2f);
             Assert.That(Vector2.Distance(new Vector2(stopped.x, stopped.z), new Vector2(traveler.transform.position.x, traveler.transform.position.z)),
                 Is.LessThan(.025f), "The stationary character drifted after braking.");
+            // Real action bindings must use the new motor as well as its unit tests.
+            var turnStart = traveler.transform.position;
+            try
+            {
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.A));
+                yield return SmokeUi.WaitUntil(() => traveler.transform.position.x < turnStart.x - .15f,
+                    5, "Left input did not respond from the previous forward-facing idle.");
+                var reversal = traveler.transform.position;
+                InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.D));
+                yield return SmokeUi.WaitUntil(() => traveler.transform.position.x > reversal.x + .15f,
+                    5, "Opposite input did not reverse the actual controller.");
+                Assert.That(visual.localScale.x, Is.EqualTo(1), "Turning must blend poses without flattening the cutout.");
+                Assert.That(visual.anchoredPosition, Is.EqualTo(Vector2.zero), "Breathing must not lift the entire character off the floor.");
+                Assert.That(visual.GetComponent<DawnLivingImage>(), Is.Not.Null);
+                yield return SmokeUi.Capture("PathOfDawn", "18-responsive-direction-change", 1280, 720, settleSeconds: .08f);
+            }
+            finally { InputSystem.QueueStateEvent(keyboard, new KeyboardState()); }
+            yield return SmokeUi.WaitUntil(() => !stage.TravelerIsMoving, 5, "Direction-change release did not stop.");
         }
         IEnumerator WaitForConversation()
         {

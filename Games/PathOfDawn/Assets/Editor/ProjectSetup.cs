@@ -419,8 +419,22 @@ namespace FirstGame.Editor
                 throw new InvalidOperationException("Illustrated character/frame must have a transparent background: " + id);
             left = Math.Max(cell.xMin, left - 2); right = Math.Min(cell.xMax - 1, right + 2);
             bottom = Math.Max(cell.yMin, bottom - 2); top = Math.Min(cell.yMax - 1, top + 2);
+            float anchor = .5f;
+            if (source.name.StartsWith("traveler", StringComparison.Ordinal))
+            {
+                // A billowing cloak changes the full alpha bounding-box centre.
+                // Align every pose by its head axis so bodies do not jump sideways.
+                double weightedX = 0, weight = 0;
+                for (int y = bottom + (int)((top - bottom) * .80f); y <= bottom + (int)((top - bottom) * .96f); ++y)
+                    for (int x = left; x <= right; ++x)
+                    {
+                        float alpha = pixels[y * source.width + x].a / 255f;
+                        weightedX += (x + .5f) * alpha; weight += alpha;
+                    }
+                if (weight > 0) anchor = Mathf.Clamp01(((float)(weightedX / weight) - left) / (right - left + 1));
+            }
             return new PaintedRegion { id = id, x = (float)left / source.width, y = (float)bottom / source.height,
-                width = (float)(right - left + 1) / source.width, height = (float)(top - bottom + 1) / source.height };
+                width = (float)(right - left + 1) / source.width, height = (float)(top - bottom + 1) / source.height, footX = anchor };
         }
 
         static void SetField(Component component, string fieldName, UnityEngine.Object value)

@@ -65,3 +65,7 @@ blender --background --python Tools/Art/verify_proxies.py -- --root .
 ## 남은 제작
 
 최종 원화와 역사/문화 검토, 그림 보행의 자세 연결·발 접지, 표정·손짓·대화 반응·립싱크, 장면별 가림과 깊이감, 전투·환경 효과음, 음성의 사람 청취 및 실제 PC/웹·휴대폰 실측이 남아 있다. 3D 제작을 후속으로 재개한다면 얼굴·손 토폴로지, UV·스키닝·천·머리카락·LOD 등도 별도 작업이다. 현재 그림·보행·BGM·초반 음성의 존재를 최종 품질 작업의 완료로 해석하지 않는다.
+
+## 새벽의 길 움직임 데이터
+
+`traveler-motion.bytes`는 기존 여행자 원화와 보행 atlas를 읽어 계산한 양방향 수치 대응장이다. 새 그림이나 외부 캐릭터를 포함하지 않는다. 재현 도구는 `Tools/Art/Painted/build-motion-fields.py`, 원화/UV/출력 해시와 데이터 형식은 `Tools/Art/Painted/motion-fields.json`에 기록한다. 생성 도구의 OpenCV·NumPy·Pillow는 클라우드 제작 의존성이며 게임 플레이어에 그 라이브러리를 포함하지 않는다. 일곱 PNG 원본 바이트는 그래픽 개편판과 같다.

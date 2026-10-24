@@ -31,7 +31,7 @@ namespace PathOfDawn.Presentation
             public string id;
             public Transform actor;
             public RectTransform group, imageRect, shadowRect, marker;
-            public RawImage image;
+            public DawnLivingImage image;
             public Image shadow;
             public CanvasGroup visibility;
             public Texture2D idle;
@@ -40,7 +40,7 @@ namespace PathOfDawn.Presentation
             public Vector2 screenPosition;
             public float height, alpha = 1, clock, phase;
             public bool initialized, rear;
-            public float facing = 1;
+            public float facing = 1, movementBlend, lean;
         }
         sealed class Mote
         {
@@ -57,7 +57,8 @@ namespace PathOfDawn.Presentation
         RectTransform stage, painting, castRoot, ambienceRoot;
         RawImage background, oldBackground;
         CanvasGroup stageVisibility;
-        Texture2D shore, room, walkAtlas, rearIdle;
+        Texture2D shore, room, walkAtlas, rearIdle, motionFields;
+        Shader livingShader;
         ArtLayout layout;
         Sprite softLight;
         Texture2D softLightTexture;
@@ -86,6 +87,8 @@ namespace PathOfDawn.Presentation
         {
             if (stage != null) throw new InvalidOperationException("The illustrated stage is already initialized.");
             if (designFrame == null || actors == null) throw new ArgumentNullException();
+            motionFields = DawnLivingImage.LoadMotionFields();
+            livingShader = Resources.Load<Shader>("Art/Painted/DawnLivingSprite");
             shore = Resources.Load<Texture2D>("Art/Painted/shore");
             room = Resources.Load<Texture2D>("Art/Painted/room");
             walkAtlas = Resources.Load<Texture2D>("Art/Painted/traveler-walk");
@@ -114,7 +117,7 @@ namespace PathOfDawn.Presentation
             foreach (string id in new[] { "jesus", "miriam", "traveler" })
                 if (actors.TryGetValue(id, out var actor)) BuildActor(id, actor);
             BuildAmbience();
-            IsReady = shore != null && room != null && walkAtlas != null && rearIdle != null && cast.Count == 3;
+            IsReady = livingShader != null && livingShader.isSupported && shore != null && room != null && walkAtlas != null && rearIdle != null && cast.Count == 3;
             foreach (var actor in cast.Values) IsReady &= actor.idle != null;
             if (!IsReady) Debug.LogError("Painted Galilee requires both paintings, three character cutouts, traveler-back rear idle and the traveler walk atlas.");
             EnsureBehindHud();
@@ -227,16 +230,17 @@ namespace PathOfDawn.Presentation
             displacement.y = 0;
             art.previous = position;
             float actualSpeed = displacement.magnitude / Mathf.Max(.0001f, Time.deltaTime);
-            bool walking = art.id == "traveler" && mode == ViewMode.Exploration && actualSpeed > .08f && displacement.magnitude < .8f;
+            bool discontinuity = displacement.magnitude > Mathf.Max(.8f, DawnMovement.Speed * DawnMovement.DepthScale * Time.deltaTime * 1.5f);
+            bool walking = art.id == "traveler" && mode == ViewMode.Exploration && actualSpeed > .08f && !discontinuity;
             if (art.id == "traveler")
             {
                 TravelerIsMoving = walking;
-                TravelerNormalizedSpeed = walking ? Mathf.Clamp01(actualSpeed / DawnLocomotion.WalkingSpeed) : 0;
+                TravelerNormalizedSpeed = walking ? Mathf.Clamp01(new Vector2(displacement.x, displacement.z / DawnMovement.DepthScale).magnitude / Mathf.Max(.0001f, Time.deltaTime) / DawnMovement.Speed) : 0;
                 if (walking)
                 {
-                    art.clock += displacement.magnitude / 1.30f;
+                    art.clock += new Vector2(displacement.x, displacement.z / DawnMovement.DepthScale).magnitude / 1.8f;
                     if (Mathf.Abs(displacement.z) > Mathf.Abs(displacement.x) * .45f) art.rear = displacement.z > 0;
-                    if (Mathf.Abs(displacement.x) > .001f) art.facing = Mathf.Sign(displacement.x);
+                    if (Mathf.Abs(displacement.x) > Mathf.Abs(displacement.z) * .18f && Mathf.Abs(displacement.x) > .001f) art.facing = Mathf.Sign(displacement.x);
                     TravelerWalkFrame = Mathf.FloorToInt(art.clock * 4) % 4;
                 }
                 else TravelerWalkFrame = -1;
@@ -256,9 +260,7 @@ namespace PathOfDawn.Presentation
                     if (rearIdle != null) { texture = rearIdle; frame = CharacterFrame("traveler-back"); }
                 }
             }
-            art.image.texture = texture;
-            art.image.uvRect = frame.Uv;
-            art.imageRect.pivot = new Vector2(frame.footX, frame.footY);
+            bool snapPose = !art.initialized || discontinuity;
 
             Vector2 foot = Project(position);
             float perspective = Mathf.Lerp(1.22f, .78f, Mathf.InverseLerp(220, 650, foot.y));
@@ -313,14 +315,19 @@ namespace PathOfDawn.Presentation
             art.alpha = Mathf.Lerp(art.alpha, targetAlpha, ease);
             art.visibility.alpha = art.alpha;
             art.group.anchoredPosition = art.screenPosition - new Vector2(960, 540);
-            float ratio = texture != null ? texture.width * frame.width / Mathf.Max(1, texture.height * frame.height) : .45f;
-            art.imageRect.sizeDelta = new Vector2(art.height * ratio, art.height);
-            float breath = Mathf.Sin(Time.unscaledTime * 1.55f + art.phase);
-            float step = walking ? Mathf.Sin(art.clock * Mathf.PI * 8) : 0;
-            art.imageRect.anchoredPosition = new Vector2(0, walking ? Mathf.Abs(step) * 2.7f : breath * .65f);
             float facing = art.id == "traveler" && dialogueBlend < .5f ? art.facing : 1;
-            art.imageRect.localScale = new Vector3(facing, 1 + (walking ? 0 : breath * .0012f), 1);
-            art.imageRect.localRotation = Quaternion.Euler(0, 0, walking ? step * .45f : breath * .08f);
+            int poseIndex = art.id != "traveler" ? -1 : texture == walkAtlas ? 2 + (art.rear ? 4 : 0) + TravelerWalkFrame : texture == rearIdle ? 1 : 0;
+            art.image.ShowPose(texture, frame, facing, snapPose, dt, poseIndex);
+            art.image.SetHeight(art.height);
+            art.movementBlend = Mathf.Lerp(art.movementBlend, walking ? TravelerNormalizedSpeed : 0, 1 - Mathf.Exp(-dt * 14));
+            float desiredLean = walking ? Mathf.Clamp(displacement.x / Mathf.Max(.0001f, Time.deltaTime) / DawnMovement.Speed, -1, 1) : 0;
+            art.lean = Mathf.Lerp(art.lean, desiredLean, 1 - Mathf.Exp(-dt * 12));
+            art.image.Animate(Time.unscaledTime * 1.55f + art.phase, art.clock, art.movementBlend, art.lean);
+            // Only torso/cloth vertices move. The whole cutout no longer bobs
+            // above the floor or snaps to a negative transform scale on turns.
+            art.imageRect.anchoredPosition = Vector2.zero;
+            art.imageRect.localScale = Vector3.one;
+            art.imageRect.localRotation = Quaternion.identity;
             art.shadowRect.sizeDelta = new Vector2(art.height * .34f, art.height * .055f);
             art.shadow.color = new Color(.15f, .10f, .055f, Mathf.Lerp(.28f, .18f, dialogueBlend));
             bool isTarget = art.id == (scene == "shore" ? "jesus" : "miriam");
@@ -357,8 +364,8 @@ namespace PathOfDawn.Presentation
             shadow.raycastTarget = false;
             var imageRect = Rect(group, "Painted full-body character", Vector2.zero, new Vector2(180, 420));
             imageRect.pivot = new Vector2(.5f, 0);
-            var image = imageRect.gameObject.AddComponent<RawImage>();
-            image.raycastTarget = false;
+            var image = imageRect.gameObject.AddComponent<DawnLivingImage>();
+            image.Initialize(livingShader, motionFields);
             var texture = Resources.Load<Texture2D>("Art/Painted/" + id);
             image.texture = texture;
             var marker = Rect(group, "Conversation marker", new Vector2(0, 450), new Vector2(180, 65));
@@ -484,6 +491,7 @@ namespace PathOfDawn.Presentation
             if (stage != null) Destroy(stage.gameObject);
             if (softLight != null) Destroy(softLight);
             if (softLightTexture != null) Destroy(softLightTexture);
+            if (motionFields != null) Destroy(motionFields);
         }
     }
 }

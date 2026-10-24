@@ -218,11 +218,17 @@
               0.937037037037037,
               0.9427083333333334,
               0.9981481481481481
+            ],
+            "voiceReplay": [
+              0.54,
+              0.883,
+              0.615,
+              0.93
             ]
           }
         }
       },
-      "sourceConfirmation": "2026-10-24 painted stage: parent confirmed dialogue panel (100,660,1720,380), replay (1020,938,280,80), advance (1330,938,440,80); existing title/HUD/settings/choices retained.",
+      "sourceConfirmation": "2026-10-24 painted stage: parent confirmed dialogue panel (100,660,1720,380), replay (1020,938,280,80), advance (1330,938,440,80); existing title/HUD/settings/choices retained. Motion revision retains all buttons; mobile replay text ROI uses the exact visible label region already verified on the previous original frame, excluding its outline.",
       "audioValidation": {
         "ready": true,
         "initialVolume": 0.65,

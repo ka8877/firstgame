@@ -23,11 +23,11 @@ REQUIRED_PROFILES = {
 }
 GAME_REVISIONS = {
     "FantasyCards": "expanded-demo-2026-10-23",
-    "PathOfDawn": "painted-dawn-2026-10-24",
+    "PathOfDawn": "fluid-dawn-2026-10-24",
 }
 REPORT_ROOTS = {
     "FantasyCards": "Artifacts/Validation/VisualWeb",
-    "PathOfDawn": "Artifacts/Validation/PaintedDawn",
+    "PathOfDawn": "Artifacts/Validation/MotionDawn",
 }
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
@@ -100,6 +100,9 @@ for game, slug in GAMES.items():
                 if hashlib.sha256((player / relative).read_bytes()).hexdigest() != file["sha256"]:
                     raise SystemExit(f"Build changed after browser verification: {game}/{profile}/{relative}")
             if game == "PathOfDawn":
+                sequence = report.get("motionSequence", {})
+                if sequence.get("directions") != ["left", "right", "toward", "away"]:
+                    raise SystemExit(f"Current real-input motion sequence required: {profile}")
                 review = report.get("visualReview", {})
                 if (review.get("status") != "approved" or not review.get("reviewer") or
                         not review.get("reviewedUtc")):

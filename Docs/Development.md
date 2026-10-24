@@ -69,3 +69,5 @@ Web 플레이어는 `file://`로 열지 않고 HTTP 서버에서 실행한다. �
 두 대상 빌드가 모두 성공한 뒤 `python3 Tools/Build/package-builds.py`를 실행하면 게임별 Windows/Web ZIP과 SHA-256 목록을 `Artifacts`에 만든다. 각 플레이어 ZIP에는 첫 플레이 안내와 검증 기록도 포함한다. `python3 Tools/Build/export-source.py`는 캐시·빌드 결과를 제외하고 실제 LFS 에셋을 포함한 Unity 소스 ZIP을 만든다. 저장소에 인증 파일을 넣지 않는다. 플랫폼 빌드와 원본 소스 ZIP은 서로 다른 산출물이다.
 
 해당 개정의 native 테스트와 필수 로컬 브라우저 검증 결과 파일이 준비되면 `python3 Tools/Build/package-evidence.py`로 테스트 XML/TRX, 실제 화면, 빌드 결과, 검증 문서의 묶음을 만든다. 명시한 파일만 포함하며 원시 CLI 로그와 인증 정보는 수집하지 않는다. 결과 파일이 있다는 이유로 검사를 통과했다고 판단하지 않고 각 보고서의 실제 결과를 확인한다.
+
+움직임 보정은 [DawnMotion.md](DawnMotion.md)를 따른다. 일반 클론·Unity 빌드는 커밋된 `traveler-motion.bytes`를 사용한다. 원화/UV 변경 때만 ProjectSetup 실행 후 별도의 Python 가상 환경에 고정된 OpenCV/NumPy/Pillow를 설치하고 `Tools/Art/Painted/build-motion-fields.py`를 실행해 수치 대응장과 해시 기록을 재생성한다. 생성은 이미지 원본을 수정하지 않는다.

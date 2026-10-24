@@ -1,0 +1,37 @@
+{
+  "purpose": "Numerical bidirectional pose correspondence for runtime interpolation, not replacement artwork",
+  "sources": {
+    "Games/PathOfDawn/Assets/Resources/Art/Painted/traveler.png": "8ec01197b8462ce38f227f447c29fd0fa7e92d6f8db4562a3f1a6e97a3861cb0",
+    "Games/PathOfDawn/Assets/Resources/Art/Painted/traveler-back.png": "a53882f60c3cb9da5957d1836bb08b2b031242ee09241d7a98b0df18cfa7a1bc",
+    "Games/PathOfDawn/Assets/Resources/Art/Painted/traveler-walk.png": "e3583d8ac3c9a2f49db57c2c59a6da89fcef95d99ed4efca0f8ccf382b79ed58"
+  },
+  "layoutSha256": "cc6bfef5348a129aaf3a1594912c5919ca5a6d4031f542ab0814d54106b2606a",
+  "poses": [
+    "traveler",
+    "traveler-back",
+    "walk-0",
+    "walk-1",
+    "walk-2",
+    "walk-3",
+    "walk-4",
+    "walk-5",
+    "walk-6",
+    "walk-7"
+  ],
+  "directedPairs": 40,
+  "dimensions": [
+    640,
+    960
+  ],
+  "format": "DWM1 + uint32 width,height + little-endian RGBAHalf",
+  "channels": "forward x,y; backward x,y, in character-height units; bottom-up rows",
+  "algorithm": "OpenCV DIS medium, Gaussian sigma1.2, area grid sampling; displacement limited to0.09height",
+  "dependencies": {
+    "opencv": "4.13.0",
+    "numpy": "2.4.2"
+  },
+  "artworkPixelsRewritten": false,
+  "output": "Games/PathOfDawn/Assets/Resources/Art/Painted/traveler-motion.bytes",
+  "bytes": 4915212,
+  "sha256": "65ee3a04b96497c576aa98ac7b73c8b105971fa810192d9734aceb32ca2cbf7e"
+}

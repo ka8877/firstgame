@@ -19,6 +19,10 @@ selected = [
     root / "Docs/FantasyCardsRules.md",
     root / "Docs/PathOfDawnValidation.md",
     root / "Docs/PaintedDawn.md",
+    root / "Docs/DawnMotion.md",
+    root / "Docs/ValidationHistory/2026-10-24-before-fluid-dawn-Validation.md",
+    root / "Docs/ValidationHistory/2026-10-24-before-fluid-dawn-VisualValidation.md",
+    root / "Tools/Environment/validation-2026-10-24-before-fluid-dawn.json",
     root / "Docs/VisualValidation.md",
     root / "Docs/WebPlaytest.md",
     root / "Docs/Environment.md",
@@ -78,11 +82,12 @@ selected.extend(sorted((artifacts / "Validation/Portal").glob("*.png")))
 selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("expanded-demo-*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("painted-dawn-*.json")))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("fluid-dawn-*.json")))
 for pattern in ("*.json", "*.md"):
     selected.extend(sorted((root / "Tools/Art/Painted").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
 # Collect compact reports and captures, never raw Blender/Unity logs or voice files.
-for directory in ("ExpandedDemo", "Demo", "PaintedDawn"):
+for directory in ("ExpandedDemo", "Demo", "PaintedDawn", "MotionDawn"):
     for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx"):
         selected.extend(sorted((artifacts / "Validation" / directory).rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/ExpandedDemo").glob("*-reference.txt")))

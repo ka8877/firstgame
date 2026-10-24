@@ -49,7 +49,9 @@ namespace PathOfDawn.Presentation
         InputAction move, mouseLook, stickLook, interact, menu, memories;
         bool inGame, modal, inIntro, busy;
         float yaw, pitch = 9, verticalSpeed, textScale = 1, volume = .65f, musicDuck = 1;
-        Vector3 planarVelocity, cameraFollowVelocity;
+        readonly DawnMovement movementMotor = new DawnMovement();
+        Vector3 cameraFollowVelocity;
+        bool waitForNeutralInput;
         int lineIndex;
         int lastChoiceFrame = -1;
         List<string> activeLines;
@@ -126,28 +128,24 @@ namespace PathOfDawn.Presentation
             if (touchLook != null && touchLook.isActiveAndEnabled) look += touchLook.ConsumeLook() * .10f;
             illustratedStage.SetLook(look);
             var movement = Vector2.ClampMagnitude(move.ReadValue<Vector2>() + (touchMove != null && touchMove.isActiveAndEnabled ? touchMove.Value : Vector2.zero), 1);
-            Vector3 direction = new Vector3(movement.x, 0, movement.y);
-            if (direction.sqrMagnitude > 1) direction.Normalize();
-            var actor = actors["traveler"];
-            float turnAllowance = 1;
-            if (direction.sqrMagnitude > .0001f)
+            if (waitForNeutralInput)
             {
-                var facing = Quaternion.LookRotation(direction);
-                actor.rotation = Quaternion.RotateTowards(actor.rotation, facing, 440 * Time.deltaTime);
-                // Let the hips turn before a sharp reverse step instead of skating sideways.
-                turnAllowance = Mathf.InverseLerp(-.15f, .85f, Vector3.Dot(actor.forward, direction.normalized));
+                if (movement.sqrMagnitude < .0001f) waitForNeutralInput = false;
+                movement = Vector2.zero;
             }
-            var wantedVelocity = direction * (DawnLocomotion.WalkingSpeed * turnAllowance);
-            planarVelocity = Vector3.MoveTowards(planarVelocity, wantedVelocity,
-                (wantedVelocity.sqrMagnitude > planarVelocity.sqrMagnitude ? 7.5f : 11f) * Time.deltaTime);
+            var actor = actors["traveler"];
+            Vector3 travel = movementMotor.Step(movement, Time.deltaTime);
+            Vector3 direction = new Vector3(movement.x, 0, movement.y);
+            if (direction.sqrMagnitude > .0001f)
+                actor.rotation = Quaternion.RotateTowards(actor.rotation, Quaternion.LookRotation(direction), 900 * Time.deltaTime);
             if (controller.isGrounded && verticalSpeed < 0) verticalSpeed = -2;
             verticalSpeed += Physics.gravity.y * Time.deltaTime;
-            controller.Move((planarVelocity + Vector3.up * verticalSpeed) * Time.deltaTime);
+            controller.Move(travel + Vector3.up * (verticalSpeed * Time.deltaTime));
             // Keep physical movement inside the visible painted floor in each scene.
             bool shoreFloor = session.World.pointId == "shore";
             var p = actor.position;
             p.x = Mathf.Clamp(p.x, shoreFloor ? -8.2f : -11, shoreFloor ? 4.2f : 2.3f);
-            p.z = Mathf.Clamp(p.z, shoreFloor ? -8.7f : -9, 9);
+            p.z = Mathf.Clamp(p.z, shoreFloor ? -8.7f : -9, shoreFloor ? 1.2f : 1.5f);
             if (p.y < -2) p = new Vector3(0, .15f, -5);
             if (p != actor.position) { controller.enabled = false; actor.position = p; controller.enabled = true; }
             pivot.position = Vector3.SmoothDamp(pivot.position, actor.position + Vector3.up * 1.1f,
@@ -163,9 +161,20 @@ namespace PathOfDawn.Presentation
         }
         void StopLocomotion()
         {
-            planarVelocity = Vector3.zero;
+            movementMotor.Reset();
         }
-        void OnApplicationPause(bool paused) { if (paused && inGame && session != null) Save(); }
+        void OnApplicationFocus(bool focused)
+        {
+            if (focused) return;
+            StopLocomotion(); touchMove?.ResetInput(); touchLook?.ResetInput();
+            waitForNeutralInput = true;
+        }
+        void OnApplicationPause(bool paused)
+        {
+            if (!paused) return;
+            OnApplicationFocus(false);
+            if (inGame && session != null) Save();
+        }
         void OnApplicationQuit() { if (inGame && session != null) Save(); }
         void ClearScreen()
         {

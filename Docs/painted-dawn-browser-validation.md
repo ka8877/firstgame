@@ -1,6 +1,6 @@
 # Painted Dawn browser validation
 
-The `painted-dawn-2026-10-24` revision changes PathOfDawn only. Run
+The current `fluid-dawn-2026-10-24` revision changes PathOfDawn movement only. Current results are in `Docs/Validation.md`; recorded tables below are the previous painted release. Run
 `Tools/Validation/painted-dawn-smoke.py` against its final Web build, sequentially
 at desktop 1280×720 and Android browser emulation 844×390. The latter is not a
 physical mobile device or a performance benchmark. Source the existing display
@@ -8,8 +8,8 @@ activation script before using `--renderer x11-mesa`.
 
 ```bash
 source Tools/Environment/activate-display.sh
-python Tools/Validation/painted-dawn-smoke.py --profile desktop --output Artifacts/Validation/PaintedDawn/Desktop720 --pause-on-ocr-failure
-python Tools/Validation/painted-dawn-smoke.py --profile mobile-landscape --output Artifacts/Validation/PaintedDawn/Mobile844 --pause-on-ocr-failure
+python Tools/Validation/painted-dawn-smoke.py --profile desktop --output Artifacts/Validation/MotionDawn/Desktop720 --pause-on-ocr-failure
+python Tools/Validation/painted-dawn-smoke.py --profile mobile-landscape --output Artifacts/Validation/MotionDawn/Mobile844 --pause-on-ocr-failure
 ```
 
 Supply `--tessdata` or `FIRSTGAME_TESSDATA` when Korean OCR models are outside
@@ -52,7 +52,7 @@ those reports are reused evidence, not newly executed tests. Its previous
 1080-profile incompleteness remains visible. New PathOfDawn evidence must match
 the painted revision's actual final files and cannot reuse the older 3D frames.
 
-## Recorded local results — 2026-10-24 revision
+## Historical local results — painted-dawn-2026-10-24
 
 | Profile | Functional checks | Directly reviewed original frames | Result |
 | --- | ---: | ---: | --- |
@@ -84,7 +84,7 @@ and `needs-fix` visual review. It is not release evidence. These results do not
 certify physical mobile performance, human listening quality or user artistic
 approval. Public URL verification is recorded separately after deployment.
 
-## Recorded public mobile result
+## Historical public mobile result — painted-dawn-2026-10-24
 
 The deployed [PathOfDawn player](https://ka8877.github.io/firstgame/games/path-of-dawn/)
 passed **61/61 checks** at the 844×390 mobile profile. The five public runtime
@@ -100,3 +100,7 @@ correction; there were no gameplay-state substitutions or new runtime changes.
 The local reports above were not modified by public verification. FantasyCards
 was not replayed; its unchanged runtime and earlier evidence remain explicitly
 separate.
+
+The current suite also performs real left/right/toward/away inputs and records stopped poses. `--motion-video` records the unmodified browser; its movement interval is stored in `motionSequence`. Native tests measure response/stop distance across frame rates. Changed pixels alone do not prove smoother animation.
+
+Video recording additionally needs Playwright FFmpeg. In this cloud, install with `PLAYWRIGHT_BROWSERS_PATH=/workspace/tools/playwright python3 -m playwright install ffmpeg` and retain that command-scoped variable for the video run. The system Chromium remains the renderer.
