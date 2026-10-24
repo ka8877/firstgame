@@ -2,7 +2,7 @@
 
 개정은 `fluid-dawn-2026-10-24`다. 원화7장은 그대로 유지하며 새 pose 보간·접지·방향 전환과 조작감을 확인한다. [직전 그래픽판](ValidationHistory/2026-10-24-before-fluid-dawn-VisualValidation.md)의 근거는 따로 보존한다.
 
-로컬: **Desktop720: 53개 / Mobile844: 55개**. 새 공개 배포는 아직 진행 전이며, 현재 URL은 이전 버전이다.
+로컬: **Desktop720: 53개 / Mobile844: 55개**. [Pages 배포](https://github.com/ka8877/firstgame/actions/runs/40058545139) 후 공개 URL 모바일 61개 검사 및 공개 파일 23개의 HTTP·SHA-256 일치를 확인했다.
 
 실제 키보드/터치로 좌우·전후 이동과 정지, NPC 접근, 두 선택과 결말, 저장/전체 reload/이어하기를 실행한다. BGM7구간·음성5구간을 출력 신호로 확인한다. 각 보고서의 `visualReview`는 해당 런타임 SHA와 원본 PNG를 직접 검토한 기록이다. 이는 최종 아트 승인이나 실물 기기 성능 인증이 아니다.
 

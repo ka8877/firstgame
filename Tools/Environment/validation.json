@@ -28,13 +28,15 @@
     "runtimeEditorReady": true,
     "runtimeReady": true,
     "runtimeBlocker": null,
-    "diagnosticErrors": []
+    "diagnosticErrors": [],
+    "evidenceScope": "Historical baseline snapshot; authentication was not revalidated for this movement release. Current editor execution is evidenced separately by the successful native tests and Windows/Web builds."
   },
   "cloudStartConfiguration": {
     "status": "draft saved and reread confirmed identical",
     "revision": 10,
     "requiresPublish": true,
-    "freshTaskRestorationVerified": false
+    "freshTaskRestorationVerified": false,
+    "evidenceScope": "Historical setup draft snapshot; this release does not publish or change cloud environment configuration."
   },
   "limitations": [
     "Software GPU only; no target PC or handset performance measurement.",
@@ -43,7 +45,7 @@
     "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
   ],
   "date": "2026-10-24",
-  "recordedUtc": "2026-10-24T03:28:12.638073+00:00",
+  "recordedUtc": "2026-10-24T03:35:14.132767+00:00",
   "revision": "fluid-dawn-2026-10-24",
   "dateTimezone": "Asia/Seoul",
   "baselineRecord": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
@@ -228,9 +230,22 @@
       "PathOfDawn": 326
     }
   },
-  "publicWeb": {},
+  "publicWeb": {
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 61,
+      "evidence": "Artifacts/Validation/MotionDawn/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "b221bab795b171c68b9ae027b6c04e69aff126f20f23c0126095a7a69efb46e8",
+      "audioWindows": 7,
+      "voiceWindows": 5,
+      "visualReview": "approved"
+    }
+  },
   "publication": {
-    "status": "pending",
-    "url": "https://ka8877.github.io/firstgame/"
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40058545139",
+    "sourceCommit": "92bfbc71c8dd1f5dd74af17714750753e0110d1f",
+    "verifiedFiles": 23
   }
 }

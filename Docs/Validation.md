@@ -16,6 +16,6 @@ Web은 실제 런타임 파일의 합계이며 `OutputFiles.json`에 SHA-256을 
 
 처음 native 검사는 셰이더 예약어 충돌과 반전 가속률의 프레임 경계 의존성을 발견했다. 제품을 수정하고 동일 기준을 재검사했다. 더 빠른 이동으로 기존 보행 캡처가 NPC에 막히는 문제는 실제 키보드로 빈 통로에 접근해 검사하도록 고쳤다. 이동 시작/해제의 LateUpdate를 기다리며 같은 정지 기준을 유지한다. 통과 후 화면에서 뒤쪽 벽 위로 걷는 범위를 발견해 실제 바닥에 맞춰 제한하고 다시 검사했다. 이전 실패와 원본은 `Artifacts/ValidationHistory/2026-10-24-fluid-*`에 보존한다. 첫 PC 웹 실행에서는 빨라진 호숫가 이동 이후 석조 방의 NPC를 왼쪽 이동만으로 찾지 못했다. 실제 방 화면의 앞쪽·왼쪽 위치에 맞춰 두 축으로 접근하도록 입력 시나리오를 수정하고 같은 상호작용 문구를 재확인했다. 실패한 실행은 `MotionDawn/Desktop720/PathOfDawn.previous-*`에 보존하며 통과 근거로 재사용하지 않는다.
 
-체험 URL: **https://ka8877.github.io/firstgame/**. 새 공개 배포는 아직 진행 전이며, 현재 URL은 이전 버전이다.
+체험 URL: **https://ka8877.github.io/firstgame/**. [Pages 배포](https://github.com/ka8877/firstgame/actions/runs/40058545139) 후 공개 URL 모바일 61개 검사 및 공개 파일 23개의 HTTP·SHA-256 일치를 확인했다.
 
 움직임은 같은 앞뒤 각4개 원화의 대응 위치를 보간하고 상체·옷을 작게 움직이는 2.5D 방식이다. 신규 다방향 골격 캐릭터나 사용자 미적 승인을 의미하지 않는다. 원본 캡처의 직접 검토와 기능 자동 검사를 구분하며, 최종 근거는 `Tools/Environment/validation.json` 및 `Artifacts/Validation/MotionDawn`에 있다.
