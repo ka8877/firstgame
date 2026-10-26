@@ -1,0 +1,180 @@
+{
+  "revision": "gospel-remaster-2026-10-26",
+  "source": "Quaternius Universal Base Characters + Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "resource": "Art/Gospel3D/YoungJesus",
+      "heightMeters": 1.45,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 14565,
+      "triangles": 28250,
+      "meshes": 8,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "YoungJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "YoungJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "YoungJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "YoungJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "YoungJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "YoungJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "YoungJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 3970188,
+      "materialSlots": 10
+    },
+    {
+      "name": "AdultJesus",
+      "resource": "Art/Gospel3D/AdultJesus",
+      "heightMeters": 1.78,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 15459,
+      "triangles": 29876,
+      "meshes": 10,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "AdultJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "AdultJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "AdultJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "AdultJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "AdultJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "AdultJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "AdultJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 4152380,
+      "materialSlots": 12
+    }
+  ],
+  "renderKind": "Blender art review, not Unity gameplay"
+}

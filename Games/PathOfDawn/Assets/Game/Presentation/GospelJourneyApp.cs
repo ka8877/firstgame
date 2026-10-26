@@ -28,7 +28,7 @@ namespace PathOfDawn.Presentation
         Button interactionButton;
         Button jumpButton, actionButton, runButton;
         BgmPlayer music;
-        bool inGame, modal;
+        bool inGame, modal, statusVisible;
         float noticeUntil, autosaveTimer;
         string activeSlot = GospelJourney.SaveSlot, message = "";
         const string ActiveSlotPreference = "GOSPEL.activeSlot";
@@ -43,7 +43,7 @@ namespace PathOfDawn.Presentation
             var canvas=new GameObject("Gospel journey UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));canvas.layer=5;
             canvas.GetComponent<Canvas>().renderMode=RenderMode.ScreenSpaceOverlay;
             var scaler=canvas.GetComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new Vector2(1280,720);scaler.screenMatchMode=CanvasScaler.ScreenMatchMode.Expand;
-            ui=new DawnUi{Font=KoreanFont!=null?KoreanFont:Resources.Load<TMP_FontAsset>("Fonts/Korean")};
+            ui=new DawnUi{Font=KoreanFont!=null?KoreanFont:Resources.Load<TMP_FontAsset>("Fonts/Korean"),ModernStyle=true,DisplayFont=Resources.Load<TMP_FontAsset>("Fonts/Display")};
             frame=ui.Box(canvas.transform,"Gospel design frame",0,0,1280,720);frame.anchorMin=frame.anchorMax=frame.pivot=new Vector2(.5f,.5f);frame.anchoredPosition=Vector2.zero;
             activeSlot=PlayerPrefs.GetString(ActiveSlotPreference,GospelJourney.SaveSlot);
             World=gameObject.AddComponent<GospelTempleWorld>();World.Build();
@@ -56,6 +56,8 @@ namespace PathOfDawn.Presentation
             if((Pointer.current!=null&&Pointer.current.press.wasPressedThisFrame)||(Keyboard.current!=null&&Keyboard.current.anyKey.wasPressedThisFrame))music.NotifyUserGesture();
             if(noticeRoot!=null)noticeRoot.SetActive(Time.unscaledTime<noticeUntil);
             if(!inGame)return;
+            if(Keyboard.current!=null&&Keyboard.current.iKey.wasPressedThisFrame&&Journey.Phase==GospelPhase.Exploring)
+            {if(statusVisible)ResumeJourney();else if(!modal)ShowStatus();}
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(modal&&Journey.Phase!=GospelPhase.Prologue&&Journey.Phase!=GospelPhase.Reading)ResumeJourney();else if(!modal)ShowSettings();}
             if(!modal&&Journey.Phase==GospelPhase.Exploring)
             {
@@ -64,8 +66,8 @@ namespace PathOfDawn.Presentation
                 float meters=Vector3.Distance(Player.transform.position,World.LandmarkPosition(Journey.CurrentObjective.Id));
                 bool nearby=meters<InteractionRadius;
                 if(distance!=null)distance.text=nearby?"말씀을 읽을 수 있습니다":Mathf.CeilToInt(meters)+" m · 빛나는 표식으로";
-                if(prompt!=null)prompt.text=nearby?"E · "+Journey.CurrentObjective.Title:
-                    Player.Actions.IsInTrainingArea?"자유 연습 구역 · F 동작 연습 · 성경 본문 외 조작":"WASD 이동 · Shift 달리기 · Space 점프 · E 대화";
+                if(prompt!=null)prompt.text=nearby?(TouchInterface?"대화 버튼 · ":"E · ")+Journey.CurrentObjective.Title:
+                    Player.Actions.IsInTrainingArea?"자유 연습 구역 · F 동작 연습 · 성경 본문 외 조작":TouchInterface?"왼쪽 이동 · 오른쪽 회전 · + / - 줌":"WASD 이동 · Shift 달리기 · Space 점프 · 휠 줌 · I 상태";
                 if(interactionButton!=null)interactionButton.interactable=nearby;
                 if(jumpButton!=null)jumpButton.interactable=Player.CanJump;
                 if(actionButton!=null)actionButton.interactable=Player.CanPerformAction;
@@ -76,35 +78,45 @@ namespace PathOfDawn.Presentation
         }
         void ClearScreen()
         {
+            statusVisible=false;
             if(screen!=null){screen.gameObject.SetActive(false);Destroy(screen.gameObject);}screen=ui.Fill(frame,"Gospel screen");
+            screen.gameObject.AddComponent<CanvasGroup>();
+            screen.gameObject.AddComponent<GospelUiMotion>();
             Player?.StopInput();if(touchRoot!=null)touchRoot.SetActive(false);if(movePad!=null)movePad.ResetInput();if(lookPad!=null)lookPad.ResetInput();
             if(runButton!=null)runButton.GetComponentInChildren<TextMeshProUGUI>().text="달리기 OFF";
         }
         TextMeshProUGUI Text(Transform parent,string text,float x,float y,float w,float h,float size=24,Color? color=null)
-        {var t=ui.Text(parent,text,x,y,w,h,size,color);t.overflowMode=TextOverflowModes.Overflow;return t;}
+        {size=Mathf.Max(23,size);var t=ui.Text(parent,text,x,y,w,h,size,color);t.overflowMode=TextOverflowModes.Overflow;if(size>=30&&ui.DisplayFont!=null)t.font=ui.DisplayFont;t.characterSpacing=-.25f;t.lineSpacing=3;return t;}
         Button Button(Transform parent,string label,float x,float y,float w,float h,UnityEngine.Events.UnityAction action,bool enabled=true)
-        {var b=ui.Button(parent,label,x,y,w,h,action,enabled);b.GetComponentInChildren<TextMeshProUGUI>().fontSize=24;return b;}
+        {var b=ui.Button(parent,label,x,y,w,h,action,enabled);var t=b.GetComponentInChildren<TextMeshProUGUI>();t.fontSize=23;t.enableAutoSizing=true;t.fontSizeMin=23;t.fontSizeMax=23;t.textWrappingMode=TextWrappingModes.NoWrap;t.rectTransform.anchoredPosition=new Vector2(12,-5);t.rectTransform.sizeDelta=new Vector2(w-24,h-10);return b;}
         Button Primary(Transform parent,string label,float x,float y,float w,float h,UnityEngine.Events.UnityAction action)
-        {var b=ui.Primary(parent,label,x,y,w,h,action);b.GetComponentInChildren<TextMeshProUGUI>().fontSize=24;return b;}
+        {var b=ui.Primary(parent,label,x,y,w,h,action);b.GetComponentInChildren<TextMeshProUGUI>().fontSize=23;return b;}
         void Heading(string eyebrow,string title,string subtitle)
         {
-            Text(screen,eyebrow,44,30,1160,42,22,DawnUi.Gold).characterSpacing=3;
-            Text(screen,title,44,80,1170,78,48);
-            if(!string.IsNullOrEmpty(subtitle))Text(screen,subtitle,48,160,1150,90,24);
+            var shade=ui.Fill(screen,"Menu backdrop",new Color(.035f,.055f,.065f,.89f));shade.SetAsFirstSibling();
+            var tag=Text(screen,eyebrow,48,32,1160,34,19,DawnUi.ModernGold);tag.characterSpacing=3;
+            Text(screen,title,44,86,1170,65,45);
+            if(!string.IsNullOrEmpty(subtitle))Text(screen,subtitle,48,169,1150,78,23,new Color(.72f,.78f,.77f));
         }
         void ShowTitle()
         {
             inGame=false;modal=true;if(hud!=null){Destroy(hud.gameObject);hud=null;}if(touchRoot!=null)Destroy(touchRoot);
             World.SetOverview(false);ClearScreen();
-            var veil=ui.Box(screen,"Title veil",0,0,720,720,new Color(.045f,.075f,.105f,.90f));
-            Text(veil,"THE GOSPEL JOURNEY",48,52,620,40,22,DawnUi.Gold).characterSpacing=3;
-            Text(veil,"말씀을 따라\n예수님의 길",44,124,650,162,60);
-            Text(veil,"탄생에서 부활과 승천까지,\n복음서의 기록을 따라 걷는 여정",48,309,620,86,27);
-            Primary(veil,"새 여정",48,430,576,64,StartNew);
-            Button(veil,"이어하기",48,508,280,62,ContinueGame,PersistentSaves.Exists(activeSlot));
-            Button(veil,"장 선택",344,508,280,62,ShowChapters);
-            Button(veil,"설정",48,584,280,62,ShowSettings);
-            Text(veil,"첫 여정 · 베들레헴의 탄생 / 성전의 소년",48,665,620,36,20,DawnUi.Gold);
+            var veil=ui.Box(screen,"Title veil",0,0,650,720,new Color(.045f,.07f,.085f,.94f));
+            var seam=ui.Box(veil,"Title accent",48,62,44,3,DawnUi.ModernGold);seam.GetComponent<Image>().raycastTarget=false;
+            var eyebrow=Text(veil,"THE GOSPEL JOURNEY",48,86,540,34,19,DawnUi.ModernGold);eyebrow.characterSpacing=4;
+            Text(veil,"말씀을 따라",44,166,554,58,38,DawnUi.ModernPaper);
+            var title=Text(veil,"예수님의 길",42,220,570,94,66,DawnUi.ModernPaper);title.fontStyle=FontStyles.Bold;
+            Text(veil,"복음서의 기록을 따라 걷는 여정.\n열두 살 예수님과 함께 성전의 뜰로.",48,328,548,68,24,new Color(.72f,.78f,.77f));
+            Primary(veil,"새 여정",48,410,500,72,StartNew);
+            Button(veil,"이어하기",48,500,242,62,ContinueGame,PersistentSaves.Exists(activeSlot));
+            Button(veil,"장 선택",306,500,242,62,ShowChapters);
+            Button(veil,"성경 기록",48,578,242,58,ShowJournal);
+            Button(veil,"설정",306,578,242,58,ShowSettings);
+            Text(veil,"첫 여정  ·  탄생의 말씀 / 성전의 소년",48,670,550,32,19,DawnUi.ModernGold);
+            var sceneLabel=ui.Card(screen,"Title location",848,600,384,78,new Color(.075f,.105f,.12f,.80f));
+            Text(sceneLabel,"JERUSALEM",20,10,344,24,17,DawnUi.ModernGold).characterSpacing=4;
+            Text(sceneLabel,"예루살렘 · 성전의 뜰",20,35,344,30,24,DawnUi.ModernPaper);
             if(!string.IsNullOrEmpty(message))Toast(message);
         }
         public void StartNew()
@@ -130,6 +142,7 @@ namespace PathOfDawn.Presentation
             if(Journey==null)return false;
             var pose=Player.transform.position;Journey.SetPlayerPose(pose.x,pose.y,pose.z,Player.transform.eulerAngles.y);
             bool saved=PersistentSaves.TrySave(activeSlot,GospelJourney.GameId,GospelJourney.SchemaVersion,GospelJourney.ContentVersion,JsonUtility.ToJson(Journey.CaptureSave()),out var error);
+            if(saved)PlayerPrefs.Save();
             if(showNotice||!saved)Toast(saved?"현재 위치와 읽은 말씀을 저장했습니다.":"저장하지 못했습니다. "+error);
             return saved;
         }
@@ -144,31 +157,41 @@ namespace PathOfDawn.Presentation
         void BuildHud()
         {
             if(hud!=null)Destroy(hud.gameObject);hud=ui.Fill(frame,"Gospel exploration HUD");
-            var top=ui.Box(hud,"Objective panel",24,20,740,118,new Color(.045f,.075f,.10f,.88f));
-            Text(top,"02  성전의 소년  ·  누가복음 2:41–52",20,12,690,30,20,DawnUi.Gold);
-            objective=Text(top,Journey.CurrentObjective?.Title??"첫 여정 완료",20,45,690,38,28);
-            distance=Text(top,"",20,87,690,28,20);
-            Button(hud,"성경 기록",790,24,148,54,ShowJournal);Button(hud,"저장",950,24,136,54,()=>Save());Button(hud,"설정",1098,24,158,54,ShowSettings);
-            var scripture=ui.Box(hud,"Pinned Scripture",240,572,800,120,new Color(.045f,.075f,.10f,.88f));
-            pinned=Text(scripture,Journey.CurrentReading.Reference+" · 개역한글",18,10,760,30,20,DawnUi.Gold);
-            Text(scripture,FirstVerseLine(Journey.CurrentReading.Text),18,43,760,69,23);
-            prompt=Text(hud,"",242,526,800,38,21,DawnUi.Gold);
+            var identity=ui.Card(hud,"Character identity",24,24,330,78,new Color(.075f,.105f,.12f,.86f));
+            var avatar=ui.Art(identity,"Art/GospelRemaster/portraits",8,5,68,68,false);if(avatar!=null)avatar.uvRect=PortraitUv("jesus");
+            Text(identity,"예수님",92,9,212,31,25,DawnUi.ModernPaper);
+            Text(identity,"열두 살 · 성전의 소년",92,42,218,27,19,DawnUi.ModernGold);
+            var top=ui.Card(hud,"Objective panel",24,118,386,114,new Color(.075f,.105f,.12f,.86f));
+            Text(top,"현재 여정",18,10,340,27,19,DawnUi.ModernGold);
+            objective=Text(top,Journey.CurrentObjective?.Title??"첫 여정 완료",18,40,350,34,25);
+            distance=Text(top,"",18,79,350,27,20,new Color(.72f,.78f,.77f));
+            Button(hud,"상태",760,24,110,48,ShowStatus);
+            Button(hud,"성경 기록",882,24,132,48,ShowJournal);
+            Button(hud,"저장",1026,24,100,48,()=>Save());
+            Button(hud,"설정",1138,24,118,48,ShowSettings);
+            var scripture=ui.Card(hud,"Pinned Scripture",242,594,796,98,new Color(.075f,.105f,.12f,.88f));
+            pinned=Text(scripture,Journey.CurrentReading.Reference+" · 개역한글 · 발췌",18,9,760,27,19,DawnUi.ModernGold);
+            var excerpt=Text(scripture,FirstVerseLine(Journey.CurrentReading.Text),18,39,760,51,23);excerpt.overflowMode=TextOverflowModes.Ellipsis;excerpt.maxVisibleLines=2;
+            prompt=Text(hud,"",242,550,796,34,21,DawnUi.ModernPaper);
             interactionButton=Button(hud,"대화 · E",1060,604,196,64,Interact,false);
             jumpButton=Button(hud,"점프 · Space",1060,530,196,58,()=>Player.JumpPressed());
             actionButton=Button(hud,"동작 연습 · F",1060,456,196,58,()=>{
                 if(!Player.TryAction())Toast("뜰 남서쪽의 자유 연습 구역에서 사용할 수 있습니다.");
             },false);
+            Button(hud,"+",1184,222,72,56,()=>Player.ZoomBy(-.65f));
+            Button(hud,"-",1184,286,72,56,()=>Player.ZoomBy(.65f));
+            Text(hud,"줌",1184,190,72,28,19,DawnUi.ModernPaper).alignment=TextAlignmentOptions.Center;
             BuildTouch();
         }
         static string FirstVerseLine(string text){int newline=text.IndexOf('\n');return newline<0?text:text.Substring(0,newline);}
         void BuildTouch()
         {
             if(touchRoot!=null)Destroy(touchRoot);touchRoot=ui.Fill(frame,"Gospel touch controls").gameObject;
-            var look=ui.Box(touchRoot.transform,"Camera drag",680,150,570,290);look.gameObject.AddComponent<Image>().color=new Color(0,0,0,.001f);lookPad=look.gameObject.AddComponent<DawnPointerPad>();
+            var look=ui.Box(touchRoot.transform,"Camera drag",440,250,720,190);look.gameObject.AddComponent<Image>().color=new Color(0,0,0,.001f);lookPad=look.gameObject.AddComponent<DawnPointerPad>();
             var pad=ui.Card(touchRoot.transform,"Move pad",32,472,180,180,new Color(.09f,.15f,.18f,.70f));
             pad.pivot=new Vector2(.5f,.5f);pad.anchoredPosition=new Vector2(122,-562);movePad=pad.gameObject.AddComponent<DawnPointerPad>();movePad.joystick=true;movePad.radius=67;
-            var thumb=ui.Card(pad,"Move thumb",0,0,72,72,DawnUi.Gold);thumb.anchorMin=thumb.anchorMax=thumb.pivot=new Vector2(.5f,.5f);thumb.anchoredPosition=Vector2.zero;thumb.GetComponent<Image>().raycastTarget=false;movePad.thumb=thumb;
-            Text(pad,"이동",-30,100,80,38,20,DawnUi.Gold).raycastTarget=false;
+            var thumb=ui.Card(pad,"Move thumb",0,0,72,72,DawnUi.ModernGold);thumb.anchorMin=thumb.anchorMax=thumb.pivot=new Vector2(.5f,.5f);thumb.anchoredPosition=Vector2.zero;thumb.GetComponent<Image>().raycastTarget=false;movePad.thumb=thumb;
+            Text(pad,"이동",-30,100,80,38,20,DawnUi.ModernGold).raycastTarget=false;
             runButton=Button(touchRoot.transform,"달리기 OFF",32,386,180,64,()=>{
                 Player.TouchRun=!Player.TouchRun;
                 runButton.GetComponentInChildren<TextMeshProUGUI>().text=Player.TouchRun?"달리기 ON":"달리기 OFF";
@@ -187,35 +210,36 @@ namespace PathOfDawn.Presentation
         {
             modal=true;Player.InputEnabled=false;if(hud!=null)hud.gameObject.SetActive(false);ClearScreen();
             if(birth)World.SetOverview(true);
-            var reading=Journey.CurrentReading;
-            var turn=Journey.CurrentDialogue;
-            ui.Card(screen,"Conversation heading shade",24,14,1232,122,new Color(.04f,.07f,.10f,.92f));
-            Text(screen,birth?"01  BETHLEHEM · "+Journey.ProgressText:"02  JERUSALEM · "+Journey.ProgressText,40,26,1190,35,22,DawnUi.Gold).characterSpacing=2;
-            Text(screen,reading.Title,36,70,1190,62,42);
-            var dialogue=ui.Card(screen,"NPC conversation",36,150,1208,288,new Color(.055f,.09f,.12f,.97f));
+            var reading=Journey.CurrentReading;var turn=Journey.CurrentDialogue;
+            ui.Card(screen,"Conversation heading shade",24,14,1232,122,new Color(.045f,.075f,.085f,.90f));
+            var eyebrow=Text(screen,birth?"01  BETHLEHEM · "+Journey.ProgressText:"02  JERUSALEM · "+Journey.ProgressText,42,28,1180,30,20,DawnUi.ModernGold);eyebrow.characterSpacing=2;
+            Text(screen,reading.Title,40,71,1190,57,38,DawnUi.ModernPaper);
+            var dialogue=ui.Card(screen,"NPC conversation",36,150,1208,288,new Color(.97f,.96f,.92f,.98f));
+            ui.Card(dialogue,"Portrait ground",12,12,264,264,new Color(.85f,.87f,.81f,.55f));
             var portrait=ui.Art(dialogue,"Art/GospelRemaster/portraits",16,15,258,258,false);
             if(portrait!=null)portrait.uvRect=PortraitUv(turn.PortraitKey);
-            Text(dialogue,turn.Speaker,294,20,854,43,30,DawnUi.Gold);
-            Text(dialogue,turn.Label+"  ·  "+(Journey.DialogueIndex+1)+" / "+Journey.DialogueCount,294,69,854,32,20,DawnUi.Teal);
-            ScrollText(dialogue,"대화",turn.Text,294,118,870,144,27);
-            var card=ui.Card(screen,"Scripture reading",36,456,1208,228,new Color(.055f,.09f,.12f,.97f));
-            Text(card,reading.Reference+"  /  "+reading.Translation,26,12,1148,38,25,DawnUi.Gold);
-            Text(card,"성경 본문 · 스크롤",925,18,245,30,19,DawnUi.Teal);
-            ScrollText(card,"성경 본문",reading.Text,26,58,1148,96,24);
+            Text(dialogue,turn.Speaker,300,22,850,43,32,DawnUi.ModernInk);
+            Text(dialogue,turn.Label+"  ·  "+(Journey.DialogueIndex+1)+" / "+Journey.DialogueCount,300,76,850,32,20,new Color(.22f,.43f,.42f));
+            var rule=ui.Box(dialogue,"Conversation divider",300,118,858,1,new Color(.20f,.36f,.34f,.16f));rule.GetComponent<Image>().raycastTarget=false;
+            ScrollText(dialogue,"대화",turn.Text,300,137,866,132,27,DawnUi.ModernInk);
+            var card=ui.Card(screen,"Scripture reading",36,456,1208,228,new Color(.075f,.105f,.12f,.97f));
+            Text(card,reading.Reference+"  /  "+reading.Translation,26,12,1148,38,25,DawnUi.ModernGold);
+            Text(card,"성경 본문 · 스크롤",925,18,245,30,19,DawnUi.ModernTeal);
+            ScrollText(card,"성경 본문",reading.Text,26,58,1148,96,24,DawnUi.ModernPaper);
             bool more=Journey.DialogueIndex+1<Journey.DialogueCount;
             var label=more?"다음 대화":birth?(Journey.ProloguePage<GospelCatalog.PrologueReadings.Count-1?"다음 구절":"성전으로"):"말씀을 따라 걷기";
             Primary(card,label,826,166,350,48,AdvanceReading);
-            Text(card,GospelCatalog.Attribution,26,176,760,32,20,DawnUi.Gold);
+            Text(card,GospelCatalog.Attribution,26,176,760,32,20,new Color(.68f,.74f,.72f));
         }
         static Rect PortraitUv(string key)
         {
             switch(key){case "mary":return new Rect(.5f,.5f,.5f,.5f);case "joseph":return new Rect(0,0,.5f,.5f);
                 case "jesus":return new Rect(0,.5f,.5f,.5f);default:return new Rect(.5f,0,.5f,.5f);}
         }
-        void ScrollText(Transform parent,string name,string value,float x,float y,float w,float h,float size)
+        void ScrollText(Transform parent,string name,string value,float x,float y,float w,float h,float size,Color? color=null)
         {
             var viewport=ui.Box(parent,name,x,y,w,h);viewport.gameObject.AddComponent<Image>().color=new Color(0,0,0,.002f);viewport.gameObject.AddComponent<RectMask2D>();
-            var content=ui.Box(viewport,"본문",0,0,w,h);var text=Text(content,value,0,0,w,h,size);
+            var content=ui.Box(viewport,"본문",0,0,w,h);var text=Text(content,value,0,0,w,h,size,color);
             text.rectTransform.anchorMin=new Vector2(0,1);text.rectTransform.anchorMax=new Vector2(1,1);text.rectTransform.offsetMin=new Vector2(0,-Mathf.Max(h,text.GetPreferredValues(value,w,10000).y+8));text.rectTransform.offsetMax=Vector2.zero;
             content.sizeDelta=new Vector2(w,Mathf.Max(h,text.GetPreferredValues(value,w,10000).y+8));
             var scroll=viewport.gameObject.AddComponent<ScrollRect>();scroll.viewport=viewport;scroll.content=content;scroll.horizontal=false;scroll.vertical=true;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.scrollSensitivity=24;
@@ -269,25 +293,69 @@ namespace PathOfDawn.Presentation
             modal=true;Player.InputEnabled=false;ClearScreen();if(hud!=null)hud.gameObject.SetActive(false);World.SetCurrentLandmark(null);
             Heading("THE FIRST JOURNEY","나사렛으로","누가복음 2:51–52 · 첫 여정을 마쳤습니다.");
             var panel=ui.Card(screen,"First journey completed",48,270,1184,290);
-            Text(panel,"예수는 그 지혜와 그 키가 자라가며\n하나님과 사람에게 더 사랑스러워 가시더라",30,28,1124,114,34,DawnUi.Gold);
+            Text(panel,"예수는 그 지혜와 그 키가 자라가며\n하나님과 사람에게 더 사랑스러워 가시더라",30,28,1124,114,34,DawnUi.ModernGold);
             Text(panel,"읽은 말씀은 기록에 남았습니다. 다음 여정에서는 세례와 공생애의 시작을 이어갑니다.",30,172,1124,74,24);
             Button(screen,"성경 기록",48,622,280,64,ShowJournal);Button(screen,"장 선택",348,622,280,64,ShowChapters);Button(screen,"저장",648,622,280,64,()=>Save());Button(screen,"처음 화면",948,622,280,64,()=>{Save(false);ShowTitle();});
+        }
+        void ShowStatus()
+        {
+            if(Journey==null)return;
+            modal=true;Player.InputEnabled=false;ClearScreen();statusVisible=true;
+            if(hud!=null)hud.gameObject.SetActive(false);
+            ui.Fill(screen,"Status backdrop",new Color(.025f,.045f,.055f,.78f));
+            var panel=ui.Card(screen,"Character status",80,80,1120,580,DawnUi.ModernPanel);
+            var portraitGround=ui.Card(panel,"Status portrait",24,24,310,508,new Color(.84f,.86f,.80f));
+            var portrait=ui.Art(portraitGround,"Art/GospelRemaster/portraits",0,54,310,350,false);if(portrait!=null)portrait.uvRect=PortraitUv("jesus");
+            Text(portraitGround,"성전의 소년",24,434,262,36,26,DawnUi.ModernInk);
+            Text(portraitGround,"누가복음 2:41–52",24,474,262,28,20,new Color(.25f,.39f,.38f));
+            Text(panel,"인물 상태",374,28,680,42,31,DawnUi.ModernGold);
+            Text(panel,"예수님",370,92,680,66,48,DawnUi.ModernPaper);
+            Text(panel,"열두 살 · 예루살렘",374,166,680,38,25,new Color(.73f,.79f,.77f));
+            var line=ui.Box(panel,"Status divider",374,218,680,1,new Color(.84f,.88f,.83f,.18f));line.GetComponent<Image>().raycastTarget=false;
+            Text(panel,"현재 여정",374,240,310,28,20,DawnUi.ModernGold);
+            Text(panel,Journey.CurrentObjective?.Title??"첫 여정 완료",374,276,680,44,29);
+            Text(panel,"현재 본문",374,344,310,28,20,DawnUi.ModernGold);
+            Text(panel,Journey.CurrentReading.Reference+" · "+Journey.CurrentReading.Translation,374,381,680,40,26);
+            Text(panel,"읽은 말씀  "+Journey.CollectedReadings.Count+"개",374,443,680,36,24,new Color(.73f,.79f,.77f));
+            Button(screen,"저장",750,590,208,58,()=>Save());
+            Primary(screen,"돌아가기",980,590,200,58,ResumeJourney);
+        }
+        Slider SliderControl(Transform parent,string name,float x,float y,float width,float value,UnityEngine.Events.UnityAction<float> changed)
+        {
+            var holder=ui.Box(parent,name,x,y,width,42);var slider=holder.gameObject.AddComponent<Slider>();
+            var background=ui.Card(holder,"Slider track",0,18,width,6,new Color(.36f,.43f,.43f,.5f));
+            var fillArea=ui.Box(holder,"Slider fill area",10,18,width-20,6);
+            var fill=ui.Box(fillArea,"Slider fill",0,0,width-20,6,DawnUi.ModernGold);fill.anchorMin=Vector2.zero;fill.anchorMax=Vector2.one;fill.offsetMin=fill.offsetMax=Vector2.zero;
+            var handleArea=ui.Box(holder,"Slider handle area",10,0,width-20,42);
+            var handle=ui.Card(handleArea,"Slider handle",0,0,24,24,DawnUi.ModernPaper);handle.anchorMin=handle.anchorMax=handle.pivot=new Vector2(.5f,.5f);handle.anchoredPosition=Vector2.zero;
+            slider.fillRect=fill;slider.handleRect=handle;slider.targetGraphic=handle.GetComponent<Image>();slider.direction=Slider.Direction.LeftToRight;slider.minValue=0;slider.maxValue=1;slider.value=value;
+            slider.onValueChanged.AddListener(changed);return slider;
         }
         void ShowSettings()
         {
             modal=true;if(Player!=null)Player.InputEnabled=false;ClearScreen();if(hud!=null)hud.gameObject.SetActive(false);
-            Heading("SETTINGS","설정","WASD 이동 · Shift 달리기 · Space 점프 · F 동작 연습 · E 대화 · Esc 설정");
-            var panel=ui.Card(screen,"Journey settings",48,270,1184,290);
-            Button(panel,music.Muted?"음악 켜기":"음악 끄기",26,24,350,58,()=>{music.SetMuted(!music.Muted);ShowSettings();});
-            Button(panel,"음량 -",400,24,260,58,()=>{music.SetVolume(music.Volume-.1f);ShowSettings();});Button(panel,"음량 +",682,24,260,58,()=>{music.SetVolume(music.Volume+.1f);ShowSettings();});
-            Text(panel,"음량 "+Mathf.RoundToInt(music.Volume*100)+"%",970,32,180,42,24,DawnUi.Gold);
-            Text(panel,"성경전서 개역한글판 · 대한성서공회. 인물의 이동과 성전 공간은 기록을 따라 읽기 위한 재현입니다.\n진행 상황은 현재 브라우저·기기에 저장됩니다.",26,118,1132,118,24);
-            Button(screen,"돌아가기",48,624,370,64,()=>{if(inGame)ResumeJourney();else ShowTitle();});
-            if(inGame)Button(screen,"처음 화면",862,624,370,64,()=>{Save(false);ShowTitle();});
+            Heading("PREFERENCES","설정","WASD 이동 · Shift 달리기 · Space 점프 · E 대화 · I 상태 · 휠 줌");
+            var audio=ui.Card(screen,"Journey settings",48,270,578,320);
+            Text(audio,"오디오",24,21,520,46,31,DawnUi.ModernPaper);
+            Button(audio,music.Muted?"음악 켜기":"음악 끄기",26,82,210,56,()=>{music.SetMuted(!music.Muted);ShowSettings();});
+            Button(audio,"음량 -",254,82,130,56,()=>{music.SetVolume(music.Volume-.1f);ShowSettings();});
+            Button(audio,"음량 +",400,82,152,56,()=>{music.SetVolume(music.Volume+.1f);ShowSettings();});
+            var volumeLabel=Text(audio,"음량 "+Mathf.RoundToInt(music.Volume*100)+"%",26,216,520,35,24,DawnUi.ModernGold);
+            SliderControl(audio,"Music volume",26,158,526,music.Volume,v=>{music.SetVolume(v);volumeLabel.text="음량 "+Mathf.RoundToInt(v*100)+"%";});
+            Text(audio,"진행 상황은 현재 브라우저·기기에 저장됩니다.",26,268,526,32,20,new Color(.70f,.77f,.75f));
+            var camera=ui.Card(screen,"Camera settings",646,270,586,320);
+            Text(camera,"카메라",24,21,530,46,31);
+            Text(camera,"휠로 줌 · 오른쪽 마우스 버튼으로 회전",24,82,538,52,23,new Color(.70f,.77f,.75f));
+            var zoomLabel=Text(camera,"거리 "+Player.CameraDistance.ToString("0.0")+"m",24,211,530,32,24,DawnUi.ModernGold);
+            Slider zoom=null;zoom=SliderControl(camera,"Camera distance",24,158,538,Player.CameraZoom01,v=>{Player.SetCameraZoom01(v);zoomLabel.text="거리 "+Player.CameraDistance.ToString("0.0")+"m";});
+            Button(camera,"가까이",24,254,258,48,()=>{Player.ZoomBy(-.65f);zoom.SetValueWithoutNotify(Player.CameraZoom01);zoomLabel.text="거리 "+Player.CameraDistance.ToString("0.0")+"m";});
+            Button(camera,"멀리",300,254,262,48,()=>{Player.ZoomBy(.65f);zoom.SetValueWithoutNotify(Player.CameraZoom01);zoomLabel.text="거리 "+Player.CameraDistance.ToString("0.0")+"m";});
+            Button(screen,"돌아가기",48,624,370,64,()=>{PlayerPrefs.Save();if(inGame)ResumeJourney();else ShowTitle();});
+            if(inGame)Button(screen,"처음 화면",862,624,370,64,()=>{Save(false);PlayerPrefs.Save();ShowTitle();});
         }
         void Toast(string value)
         {
-            if(notice==null){var box=ui.Card(frame,"Gospel notice",250,148,780,88,new Color(.06f,.11f,.15f,.97f));box.GetComponent<Image>().raycastTarget=false;noticeRoot=box.gameObject;notice=Text(box,"",18,12,744,64,22,DawnUi.Gold);}
+            if(notice==null){var box=ui.Card(frame,"Gospel notice",250,148,780,88,new Color(.06f,.11f,.15f,.97f));box.GetComponent<Image>().raycastTarget=false;noticeRoot=box.gameObject;notice=Text(box,"",18,12,744,64,22,DawnUi.ModernGold);}
             notice.text=value;noticeRoot.SetActive(true);noticeUntil=Time.unscaledTime+5;
         }
         void OnApplicationPause(bool paused){if(paused&&inGame)Save(false);}

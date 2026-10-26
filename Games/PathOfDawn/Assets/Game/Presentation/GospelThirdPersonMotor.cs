@@ -19,6 +19,9 @@ namespace PathOfDawn.Presentation
         public CharacterController Controller { get; private set; }
         public Vector3 PlanarVelocity => planarVelocity;
         public float CameraYaw => yaw;
+        public const float MinimumCameraDistance = 1.8f, MaximumCameraDistance = 8f;
+        public float CameraDistance => cameraDistance;
+        public float CameraZoom01 => Mathf.InverseLerp(MinimumCameraDistance, MaximumCameraDistance, cameraDistance);
         public float MeasuredSpeed { get; private set; }
         public bool IsGrounded { get; private set; }
         public bool CanJump => CanJumpAt(Time.time);
@@ -30,7 +33,7 @@ namespace PathOfDawn.Presentation
         InputActionMap inputs;
         InputAction move, look, orbit, run, jump, action;
         Vector3 planarVelocity, accelerationVelocity, cameraVelocity;
-        float gravityVelocity, yaw, pitch = 24, cameraDistance = 5.8f, facingVelocity;
+        float gravityVelocity, yaw, pitch = 22, cameraDistance = 4.6f, smoothedCameraDistance = 4.6f, zoomVelocity, facingVelocity;
         float lastGroundedTime = -100, jumpBufferedUntil = -1, jumpStartedTime = -100, cameraTargetHeight;
         int jumpRequestedFrame = -100;
         bool neutralRequired, hadGroundContact;
@@ -42,6 +45,8 @@ namespace PathOfDawn.Presentation
         public void Initialize(Camera camera, Animator animator)
         {
             view = camera; Animator = animator;
+            SetCameraDistance(PlayerPrefs.GetFloat("GOSPEL.cameraDistance", 4.6f));
+            smoothedCameraDistance = cameraDistance;
             Controller = GetComponent<CharacterController>();
             Controller.height = 1.42f; Controller.center = Vector3.up * .73f;
             Controller.radius = .23f; Controller.stepOffset = .28f; Controller.slopeLimit = 47;
@@ -78,10 +83,14 @@ namespace PathOfDawn.Presentation
             if (InputEnabled)
             {
                 Vector2 delta = TouchLook;
-                if (orbit.IsPressed()) delta += look.ReadValue<Vector2>() * .13f;
+                bool pointerBlocked = Mouse.current != null && (orbit.IsPressed() || Mouse.current.scroll.ReadValue().sqrMagnitude > 0) && PointerOverCameraBlockingUi();
+                if (orbit.IsPressed() && !pointerBlocked) delta += look.ReadValue<Vector2>() * .13f;
                 if (Gamepad.current != null) delta += Gamepad.current.rightStick.ReadValue() * (100 * dt);
                 yaw += delta.x; pitch = Mathf.Clamp(pitch - delta.y,12,55);
-                if (Mouse.current != null) cameraDistance = Mathf.Clamp(cameraDistance - Mouse.current.scroll.ReadValue().y * .002f,2.2f,8);
+                if (Mouse.current != null && !pointerBlocked)
+                    // Input System 1.20 uses normalized +/-1 ticks on every
+                    // platform; the legacy pixel/120-scale multiplier is tiny.
+                    SetCameraDistance(cameraDistance - Mouse.current.scroll.ReadValue().y * .65f);
                 if (jump.WasPressedThisFrame()) JumpPressed();
                 bool pointerAction = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame &&
                     (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject()) &&
@@ -168,6 +177,30 @@ namespace PathOfDawn.Presentation
         }
         public bool TryAction() => Actions != null && Actions.TryAction();
         public void ToggleTouchRun() => TouchRun = !TouchRun;
+        public void SetCameraDistance(float meters)
+        {
+            if (float.IsNaN(meters) || float.IsInfinity(meters)) return;
+            cameraDistance = Mathf.Clamp(meters, MinimumCameraDistance, MaximumCameraDistance);
+            PlayerPrefs.SetFloat("GOSPEL.cameraDistance", cameraDistance);
+        }
+        public void SetCameraZoom01(float value) => SetCameraDistance(Mathf.Lerp(MinimumCameraDistance, MaximumCameraDistance, Mathf.Clamp01(value)));
+        public void ZoomBy(float meters) => SetCameraDistance(cameraDistance + meters);
+        bool PointerOverCameraBlockingUi()
+        {
+            if (EventSystem.current == null || Mouse.current == null) return false;
+            var data = new PointerEventData(EventSystem.current) { position = Mouse.current.position.ReadValue() };
+            var hits = new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(data, hits);
+            foreach (var hit in hits)
+            {
+                // The mobile camera drag surface is world input, whereas its
+                // neighbouring joystick, menus and scroll views own the wheel.
+                var pad = hit.gameObject.GetComponentInParent<DawnPointerPad>();
+                if (pad != null && !pad.joystick) continue;
+                return true;
+            }
+            return false;
+        }
 
         void LateUpdate()
         {
@@ -176,8 +209,9 @@ namespace PathOfDawn.Presentation
             cameraTargetHeight = Mathf.Lerp(cameraTargetHeight,transform.position.y + 1.12f,1 - Mathf.Exp(-(IsGrounded ? 14 : 7) * dt));
             Vector3 target = new Vector3(transform.position.x,cameraTargetHeight,transform.position.z);
             Vector3 direction = Quaternion.Euler(pitch,yaw,0) * Vector3.back;
-            float distance = cameraDistance;
-            if (Physics.SphereCast(target,.22f,direction,out var hit,cameraDistance,~(1 << 8),QueryTriggerInteraction.Ignore)) distance = Mathf.Max(1.2f,hit.distance-.18f);
+            smoothedCameraDistance = Mathf.SmoothDamp(smoothedCameraDistance,cameraDistance,ref zoomVelocity,.14f,Mathf.Infinity,dt);
+            float distance = smoothedCameraDistance;
+            if (Physics.SphereCast(target,.22f,direction,out var hit,distance,~(1 << 8),QueryTriggerInteraction.Ignore)) distance = Mathf.Max(1.2f,hit.distance-.18f);
             Vector3 desired = target + direction * distance;
             view.transform.position = Vector3.SmoothDamp(view.transform.position,desired,ref cameraVelocity,.11f,Mathf.Infinity,dt);
             // Resolve a newly encountered wall immediately, then ease back to the normal distance.
@@ -201,6 +235,7 @@ namespace PathOfDawn.Presentation
         {
             if (view == null) return;
             Vector3 target = transform.position + Vector3.up * 1.12f; cameraTargetHeight = target.y;
+            smoothedCameraDistance = cameraDistance; zoomVelocity = 0;
             view.transform.position = target + Quaternion.Euler(pitch,yaw,0) * Vector3.back * cameraDistance;
             view.transform.LookAt(target); cameraVelocity = Vector3.zero;
         }

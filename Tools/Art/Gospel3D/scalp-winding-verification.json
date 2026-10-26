@@ -1,0 +1,164 @@
+{
+  "revision": "gospel-modern-2026-10-26",
+  "status": "passed",
+  "cause": "Descending scalp rings used upward-loft winding. Inward scalp normals were invisible with Unity backface culling; Blender previews had been double-sided.",
+  "scope": "Scalp face orientation and tiny crown pole closure only; vertex positions, bone weights, rig, clips, face and clothing preserved.",
+  "actors": [
+    {
+      "actor": "YoungJesus",
+      "sourceCapNormalsBefore": {
+        "inward": 1836,
+        "outward": 4,
+        "faces": 1840
+      },
+      "sourceCapNormalsAfter": {
+        "inward": 4,
+        "outward": 1836,
+        "faces": 1840
+      },
+      "poleClosureFaces": 1,
+      "positionsAndWeightsUnchanged": true,
+      "positionsAndWeightsSha256": "8f8f85e47124f06bc658fcd411a4f56ba2a2cb9037bd16f915868f50225f6d7a",
+      "sha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4"
+    },
+    {
+      "actor": "AdultJesus",
+      "sourceCapNormalsBefore": {
+        "inward": 1838,
+        "outward": 2,
+        "faces": 1840
+      },
+      "sourceCapNormalsAfter": {
+        "inward": 2,
+        "outward": 1838,
+        "faces": 1840
+      },
+      "poleClosureFaces": 1,
+      "positionsAndWeightsUnchanged": true,
+      "positionsAndWeightsSha256": "36a72b0706b1dff53b22eb4d4950c566ebcc319476323bfd793335c2b32ec554",
+      "sha256": "0cc152e5d59dcb1b4aa608b9eb7137c9cf3a534f54431b43ea9967873ea21a55"
+    },
+    {
+      "actor": "Mary",
+      "sourceCapNormalsBefore": {
+        "inward": 1838,
+        "outward": 2,
+        "faces": 1840
+      },
+      "sourceCapNormalsAfter": {
+        "inward": 2,
+        "outward": 1838,
+        "faces": 1840
+      },
+      "poleClosureFaces": 1,
+      "positionsAndWeightsUnchanged": true,
+      "positionsAndWeightsSha256": "d07dd2c505cfdf24ea3973ec91382a2a799ecbc14b9a0cbd7dd948856ad8f55b",
+      "sha256": "c32cc9bbf9266885c61935d4cdc3bec0656e6499742428b2fea0fc40930960b5"
+    }
+  ],
+  "reimport": {
+    "status": "passed",
+    "scope": "Actual newly exported FBX import; positive outward crown normals; opaque backface-culling-enabled material renders from high rear/top. Not a Unity capture.",
+    "actors": [
+      {
+        "actor": "YoungJesus",
+        "rig": "GospelRig",
+        "bones": 65,
+        "clips": [
+          "Idle",
+          "JumpAir",
+          "JumpLand",
+          "JumpStart",
+          "Practice",
+          "Run",
+          "Walk"
+        ],
+        "capFaces": 1841,
+        "outward": 1834,
+        "inward": 7,
+        "sha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4"
+      },
+      {
+        "actor": "AdultJesus",
+        "rig": "GospelRig",
+        "bones": 65,
+        "clips": [
+          "Idle",
+          "JumpAir",
+          "JumpLand",
+          "JumpStart",
+          "Practice",
+          "Run",
+          "Walk"
+        ],
+        "capFaces": 1841,
+        "outward": 1839,
+        "inward": 2,
+        "sha256": "0cc152e5d59dcb1b4aa608b9eb7137c9cf3a534f54431b43ea9967873ea21a55"
+      },
+      {
+        "actor": "Mary",
+        "rig": "GospelRig",
+        "bones": 65,
+        "clips": [
+          "Idle",
+          "JumpAir",
+          "JumpLand",
+          "JumpStart",
+          "Practice",
+          "Run",
+          "Walk"
+        ],
+        "capFaces": 1841,
+        "outward": 1837,
+        "inward": 4,
+        "sha256": "c32cc9bbf9266885c61935d4cdc3bec0656e6499742428b2fea0fc40930960b5"
+      }
+    ],
+    "images": [
+      {
+        "path": "Tools/Art/Gospel3D/Previews/ScalpFix/YoungJesus-rear-fbx.png",
+        "sha256": "b9dfa1a516ffa1799d438c3183406dad238c1b1377a97660dbc701629cc5f2d2",
+        "sourceFbxSha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4",
+        "opaqueHairBackfaceCulling": true,
+        "view": "rear-fbx"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/ScalpFix/YoungJesus-top-fbx.png",
+        "sha256": "217e79f13011c9a856d1f2cb9eb26e67d67d2e09e43675a4f6c1b2304d290e70",
+        "sourceFbxSha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4",
+        "opaqueHairBackfaceCulling": true,
+        "view": "top-fbx"
+      }
+    ]
+  },
+  "visualReview": {
+    "status": "reviewed",
+    "reviewer": "modern_gospel_actor - directly viewed both unedited actual-FBX renders",
+    "reviewedUtc": "2026-10-26T16:25:27.245845+00:00",
+    "images": [
+      {
+        "path": "Tools/Art/Gospel3D/Previews/ScalpFix/YoungJesus-rear-fbx.png",
+        "sha256": "b9dfa1a516ffa1799d438c3183406dad238c1b1377a97660dbc701629cc5f2d2",
+        "sourceFbxSha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4",
+        "opaqueHairBackfaceCulling": true,
+        "view": "rear-fbx"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/ScalpFix/YoungJesus-top-fbx.png",
+        "sha256": "217e79f13011c9a856d1f2cb9eb26e67d67d2e09e43675a4f6c1b2304d290e70",
+        "sourceFbxSha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4",
+        "opaqueHairBackfaceCulling": true,
+        "view": "top-fbx"
+      }
+    ],
+    "observed": [
+      "High rear view with HairCap backface culling enabled: crown fully covered by opaque brown hair, with no skin-coloured oval.",
+      "Top view with HairCap backface culling enabled: continuous opaque crown and closed tiny polar boundary.",
+      "Both views use actual newly exported FBX reimports, not the double-sided source Blend preview. Face/body/robe coordinates and all skin weights are unchanged by the fix."
+    ],
+    "limits": [
+      "These art renders do not replace actual rebuilt Unity/browser confirmation."
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "status": "diagnosed-source-only",
+  "measuredUtc": "2026-10-26T07:13:09.414085+00:00",
+  "source": {
+    "path": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx",
+    "sha256": "dd90067bf9d0d9604ee3ff752205f8ed901e35c5fade2580fc808f71596257b6"
+  },
+  "method": "Read-only final FBX import in Blender4.3, evaluate Idle at 1/20/40/60/76. Forward is armatureWorld*HeadPose*inverse(HeadRest)*(0,-1,0).",
+  "coordinateSystem": "Blender Z-up; source face -Y, FBX export axis_forward=-Z axis_up=Y maps face to FBX +Z. Actual Unity import handedness must be measured separately.",
+  "idleFrame1": {
+    "eyesMinusHeadMeters": [
+      -0.00718537,
+      -0.08975308,
+      0.0635699
+    ],
+    "beltKnotMinusPelvisMeters": [
+      -0.06392051,
+      -0.18696436,
+      -0.04760087
+    ],
+    "HeadLocalQuaternionWXYZ": [
+      0.99237394,
+      0.07725407,
+      0.09591117,
+      0.00518854
+    ]
+  },
+  "headPitchUpDegrees": [
+    {
+      "frame": 1,
+      "value": -13.909
+    },
+    {
+      "frame": 20,
+      "value": -11.628
+    },
+    {
+      "frame": 40,
+      "value": -13.563
+    },
+    {
+      "frame": 60,
+      "value": -12.256
+    },
+    {
+      "frame": 76,
+      "value": -14.221
+    }
+  ],
+  "sourceConclusion": "No source 180-degree head reversal. Head faces forward and downward around12\u201314degrees. Gameplay camera24degrees above actor adds a large elevated view angle relative to the eye-level Blender preview.",
+  "pending": "Actual Unity imported prefab root rotation/scale and deformed eye-to-head horizontal forward/camera dot measurements. No asset change authorized by this diagnostic."
+}

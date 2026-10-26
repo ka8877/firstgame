@@ -24,6 +24,8 @@ namespace PathOfDawn.SmokeTests
         Keyboard keyboard;
         InputSettings previousInputs, fixtureInputs;
         bool hadActiveSlot;
+        bool hadCameraDistance;
+        float originalCameraDistance;
         string originalActiveSlot;
         GospelJourneyApp App => UnityEngine.Object.FindFirstObjectByType<GospelJourneyApp>();
 
@@ -37,12 +39,16 @@ namespace PathOfDawn.SmokeTests
             storageScope = PersistentSaves.UseBackendForTesting(backend);
             hadActiveSlot = PlayerPrefs.HasKey("GOSPEL.activeSlot");
             originalActiveSlot = PlayerPrefs.GetString("GOSPEL.activeSlot", "");
+            hadCameraDistance = PlayerPrefs.HasKey("GOSPEL.cameraDistance");
+            originalCameraDistance = PlayerPrefs.GetFloat("GOSPEL.cameraDistance",4.6f);
             PlayerPrefs.DeleteKey("GOSPEL.activeSlot");
+            PlayerPrefs.DeleteKey("GOSPEL.cameraDistance");
             previousInputs = InputSystem.settings;
             fixtureInputs = UnityEngine.Object.Instantiate(previousInputs);
             fixtureInputs.hideFlags = HideFlags.HideAndDontSave;
             fixtureInputs.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             fixtureInputs.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+            fixtureInputs.scrollDeltaBehavior = InputSettings.ScrollDeltaBehavior.UniformAcrossAllPlatforms;
             InputSystem.settings = fixtureInputs;
             keyboard = InputSystem.AddDevice<Keyboard>();
             yield return SmokeUi.LoadBoot();
@@ -59,6 +65,8 @@ namespace PathOfDawn.SmokeTests
             storageScope?.Dispose(); storageScope = null;
             if (hadActiveSlot) PlayerPrefs.SetString("GOSPEL.activeSlot", originalActiveSlot);
             else PlayerPrefs.DeleteKey("GOSPEL.activeSlot");
+            if (hadCameraDistance) PlayerPrefs.SetFloat("GOSPEL.cameraDistance",originalCameraDistance);
+            else PlayerPrefs.DeleteKey("GOSPEL.cameraDistance");
             PlayerPrefs.Save();
             if (Application.isPlaying) yield return new ExitPlayMode();
         }
@@ -145,7 +153,8 @@ namespace PathOfDawn.SmokeTests
             try
             {
                 float initialDistance = Vector3.Distance(App.World.View.transform.position, motor.transform.position);
-                InputSystem.QueueStateEvent(pointer, new MouseState { buttons = 2, delta = new Vector2(1380, 90), scroll = new Vector2(0, 2200) });
+                float initialZoom = motor.CameraDistance;
+                InputSystem.QueueStateEvent(pointer, new MouseState { buttons = 2, delta = new Vector2(1380, 90), scroll = Vector2.up });
                 yield return null;
                 yield return new WaitForSecondsRealtime(.15f);
                 InputSystem.QueueStateEvent(pointer, new MouseState());
@@ -154,8 +163,42 @@ namespace PathOfDawn.SmokeTests
                     "Real right-button pointer input must orbit to the protagonist's front.");
                 Assert.That(Vector3.Distance(App.World.View.transform.position, motor.transform.position), Is.LessThan(initialDistance),
                     "Real wheel input must bring the camera closer to the articulated character.");
+                Assert.That(initialZoom-motor.CameraDistance,Is.InRange(.5f,.8f),
+                    "One normalized wheel tick must produce a perceptible camera change, not a legacy pixel-scale movement.");
                 yield return SmokeUi.Capture("PathOfDawn", "gospel-03b-protagonist-front", 1280, 720);
                 CaptureCharacterPose(motor);
+                InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.down});yield return null;
+                InputSystem.QueueStateEvent(pointer,new MouseState());yield return null;
+                Assert.That(motor.CameraDistance,Is.EqualTo(initialZoom).Within(.01f),
+                    "A normalized opposite tick must zoom back out by the same usable distance.");
+                motor.SetCameraDistance(GospelThirdPersonMotor.MinimumCameraDistance);
+                InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.up});yield return null;
+                InputSystem.QueueStateEvent(pointer,new MouseState());yield return null;
+                Assert.That(motor.CameraDistance,Is.EqualTo(GospelThirdPersonMotor.MinimumCameraDistance).Within(.001f));
+                motor.SetCameraDistance(GospelThirdPersonMotor.MaximumCameraDistance);
+                InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.down});yield return null;
+                InputSystem.QueueStateEvent(pointer,new MouseState());yield return null;
+                Assert.That(motor.CameraDistance,Is.EqualTo(GospelThirdPersonMotor.MaximumCameraDistance).Within(.001f));
+                motor.SetCameraDistance(initialZoom-.65f);
+                Assert.That(motor.CameraDistance,Is.InRange(GospelThirdPersonMotor.MinimumCameraDistance,GospelThirdPersonMotor.MaximumCameraDistance));
+                var objectiveBeforeStatus=App.Journey.CurrentObjective.Id;
+                SmokeUi.Click("상태");yield return null;
+                Assert.That(App.IsModal,Is.True);
+                Assert.That(motor.InputEnabled,Is.False);
+                Assert.That(SmokeUi.HasText("열두 살 · 예루살렘"),Is.True);
+                float distanceBeforeModalWheel=motor.CameraDistance;
+                InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.up});
+                yield return new WaitForSecondsRealtime(.15f);
+                Assert.That(motor.CameraDistance,Is.EqualTo(distanceBeforeModalWheel).Within(.001f),
+                    "Reading and status modals must own pointer input instead of zooming the world behind them.");
+                InputSystem.QueueStateEvent(pointer,new MouseState());
+                yield return SmokeUi.Capture("PathOfDawn","gospel-modern-character-status",1280,720);
+                SmokeUi.Click("돌아가기");yield return null;
+                SmokeUi.Click("-");yield return null;
+                Assert.That(motor.CameraDistance,Is.GreaterThan(distanceBeforeModalWheel),"The visible zoom-out button must change camera distance.");
+                SmokeUi.Click("+");yield return null;
+                Assert.That(motor.CameraDistance,Is.EqualTo(distanceBeforeModalWheel).Within(.001f));
+                Assert.That(App.Journey.CurrentObjective.Id,Is.EqualTo(objectiveBeforeStatus),"Camera and status controls must not advance Scripture progress.");
             }
             finally { InputSystem.RemoveDevice(pointer); }
             yield return SmokeUi.Capture("PathOfDawn", "gospel-04-temple-mobile", 844, 390);

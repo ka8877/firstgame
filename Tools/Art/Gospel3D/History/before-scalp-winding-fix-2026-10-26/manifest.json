@@ -1,0 +1,275 @@
+{
+  "revision": "gospel-modern-2026-10-26",
+  "source": "Quaternius Universal Base Characters + Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "resource": "Art/Gospel3D/YoungJesus",
+      "heightMeters": 1.45,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 49937,
+      "triangles": 97950,
+      "meshes": 10,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "YoungJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "YoungJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "YoungJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "YoungJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "YoungJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "YoungJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "YoungJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 6276428,
+      "materialSlots": 10,
+      "sha256": "4ec692510d375379452485184e6730e857bbe6e04e9b460604196ac6d29b2798",
+      "youthCuffCoverage": "Extended .058m and blended to source forearm skin weights",
+      "looseLinen": true,
+      "youthFace": "Shorter, rounder lower face; neutral thinner eyebrows"
+    },
+    {
+      "name": "AdultJesus",
+      "resource": "Art/Gospel3D/AdultJesus",
+      "heightMeters": 1.78,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 50583,
+      "triangles": 99084,
+      "meshes": 10,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "AdultJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "AdultJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "AdultJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "AdultJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "AdultJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "AdultJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "AdultJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 6385676,
+      "materialSlots": 12,
+      "sha256": "24c9ad27698569f3f06237e457914d579bbba487d10cd5ce657e1ac5e07c1603",
+      "looseLinen": true
+    },
+    {
+      "name": "Mary",
+      "resource": "Art/Gospel3D/Mary",
+      "heightMeters": 1.62,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 55107,
+      "triangles": 108286,
+      "meshes": 11,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "AdultJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "AdultJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "AdultJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "AdultJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "AdultJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "AdultJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "AdultJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 6563196,
+      "materialSlots": 12,
+      "depiction": "Original veiled adult adaptation, not a historical portrait",
+      "sha256": "0970b90cae6d944eba6959da63bbb1e7b6ca62eb5d88a1b49e87c0f02b6bcfd5",
+      "looseLinen": true
+    }
+  ],
+  "renderKind": "Blender art review, not Unity gameplay"
+}

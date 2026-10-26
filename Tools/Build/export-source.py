@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Package both Unity project sources with actual LFS working files, not pointers."""
 from pathlib import Path
+from modern_release_dispatch import dispatch
+dispatch(Path(__file__).resolve().parents[2], 'source')
 import json
 import os
 import zipfile

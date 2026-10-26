@@ -3,6 +3,8 @@
 import hashlib
 import json
 from pathlib import Path
+from modern_release_dispatch import dispatch
+dispatch(Path(__file__).resolve().parents[2], 'players')
 import zipfile
 
 root = Path(__file__).resolve().parents[2]

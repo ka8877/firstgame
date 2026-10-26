@@ -89,9 +89,9 @@ def staged_manifest(stage):
     manifest = json.loads(path.read_text())
     require(manifest.get("publishReady") is True and manifest.get("sourceDirty") is False,
             "The staged release must be browser-verified and identify a clean source commit")
-    require(manifest.get("gameRevisions") == {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+    require(manifest.get("gameRevisions") == {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
             and manifest.get("contentVersions") == {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"},
-            "The public portal check requires the current remaster stage")
+            "The public portal check requires the current modern stage")
     require(re.fullmatch(r"[0-9a-f]{40}", manifest.get("sourceCommit", "")), "Invalid staged sourceCommit")
     files = manifest.get("files", {})
     require(isinstance(files, dict) and files and "index.html" in files and "site.css" in files,
@@ -228,7 +228,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-url", default=DEFAULT_URL)
     parser.add_argument("--stage", type=Path, default=ROOT / "Artifacts/WebPlaytest")
-    parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/Validation/Remaster/PublicPortal")
+    parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/Validation/Modern/PublicPortal")
     parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
     parser.add_argument("--timeout", type=int, default=180)

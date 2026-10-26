@@ -130,7 +130,7 @@
         for (const [output, probe] of outputs) destinationRoutes.push({sourceNodeId: nodeId(source),
           output, channels: readChannels(probe.analysers)});
       }
-      const buffers = [], gains = [];
+      const buffers = [], gains = [], media = [];
       for (const node of record.nodes) {
         if (node instanceof AudioBufferSourceNode && node.buffer) {
           buffers.push({nodeId: nodeId(node), duration: node.buffer.duration,
@@ -139,12 +139,19 @@
             ...(sourceEvents.get(node) || {})});
         }
         if (node instanceof GainNode) gains.push({nodeId: nodeId(node), value: node.gain.value});
+        if (typeof MediaElementAudioSourceNode !== 'undefined' && node instanceof MediaElementAudioSourceNode) {
+          const element = node.mediaElement;
+          media.push({nodeId: nodeId(node), currentSrc: element.currentSrc,
+            currentTime: element.currentTime, duration: Number.isFinite(element.duration) ? element.duration : null,
+            paused: element.paused, ended: element.ended, loop: element.loop,
+            muted: element.muted, volume: element.volume, readyState: element.readyState});
+        }
       }
       return {id: record.id, state: context.state, currentTime: context.currentTime,
         sampleRate: context.sampleRate, destinationChannels: context.destination.channelCount,
         destinationNodeId: nodeId(context.destination),
         destinationConnections: [...record.destinationEdges.values()].reduce((n, values) => n + values.size, 0),
-        destinationRoutes, buffers, gains, connections: [...record.connections.values()]};
+        destinationRoutes, buffers, media, gains, connections: [...record.connections.values()]};
     })};
   }
   Object.defineProperty(window, "__firstGameAudioEvidence", {value: Object.freeze({

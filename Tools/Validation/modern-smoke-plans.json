@@ -1,0 +1,582 @@
+{
+  "FantasyCards": {
+    "revision": "fm-modern-2026-10-26",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "lobby",
+      "collection",
+      "card-detail",
+      "battle",
+      "music-settings",
+      "saved-battle",
+      "continued-battle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 창작 판타지 원화와 현대적인 판타지마스터즈 타이틀, 선명한 한글·시작/이어하기 버튼이 보인다. 원작 UI 스크린샷이나 체크무늬가 배경을 대신하지 않고 제목·인물·버튼이 겹치지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "title-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.7225
+        ],
+        "label": "게임 시작"
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "실제 AI 연습방 3개와 카드 도감·덱 편집·161종 안내가 보인다. 현대적인 패널과 글꼴이 읽히고 가짜 온라인 사용자가 없다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.41,
+          0.09
+        ],
+        "label": "카드 도감"
+      },
+      {
+        "type": "checkpoint",
+        "name": "collection",
+        "expected": "161종 카드 안내와 원작 카드 4장, 검색·정렬·필터가 읽힌다. 인쇄 그림은 유지되고 카드 이름·코스트·등급이 가려지지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.146,
+          0.57
+        ],
+        "label": "첫 카드 상세"
+      },
+      {
+        "type": "checkpoint",
+        "name": "card-detail",
+        "expected": "선택한 원작 카드 그림과 정확한 이름·등급·소울·능력 설명이 보인다. 현대적인 상세 패널의 글자가 잘리거나 배경과 섞이지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "카드 상세 돌아가기"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9,
+          0.071
+        ],
+        "label": "대기실"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.415,
+          0.298
+        ],
+        "label": "첫 AI 연습방"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1675,
+          0.7575
+        ],
+        "label": "덱 선택"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2625,
+          0.405
+        ],
+        "label": "첫 기본 덱"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.83,
+          0.9225
+        ],
+        "label": "대전실로"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6825,
+          0.7575
+        ],
+        "label": "대전 시작",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7925,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "battle",
+        "expected": "양측 5전열과 실제 손패·LP·소울·덱 수가 보인다. 모든 속성 이름과 숫자·카드 능력치·조작 버튼이 영역 안에서 읽히며 원작 그림이 유지된다."
+      },
+      {
+        "type": "audio",
+        "label": "battle-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "기록 / 메뉴"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.32
+        ],
+        "label": "음악 설정"
+      },
+      {
+        "type": "checkpoint",
+        "name": "music-settings",
+        "expected": "음악 켜기/끄기와 음량 조절이 읽히고 로컬 연주곡임을 안내한다. 외부 광고 플레이어나 SoundCloud 임베드가 재생되지 않는다."
+      },
+      {
+        "type": "dom_click",
+        "selector": "#fm-music-toggle",
+        "label": "음악 끄기",
+        "settleMs": 700
+      },
+      {
+        "type": "music_state",
+        "label": "음소거 연동",
+        "muted": true,
+        "volume": 0.6
+      },
+      {
+        "type": "audio",
+        "label": "muted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3446,
+          0.5035
+        ],
+        "label": "Unity에서 음악 켜기",
+        "settleMs": 1000
+      },
+      {
+        "type": "music_state",
+        "label": "음악 켜기 연동",
+        "muted": false,
+        "volume": 0.6
+      },
+      {
+        "type": "audio",
+        "label": "unmuted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9175
+        ],
+        "label": "음악 설정 돌아가기"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33,
+          0.51
+        ],
+        "label": "전장 저장"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.725
+        ],
+        "label": "전장으로 돌아가기"
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-battle",
+        "expected": "실제 저장 후 전장으로 돌아왔다. 손패·LP·소울·덱 수와 현재 단계를 이어하기 비교 기준으로 관찰한다."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.435,
+          0.7225
+        ],
+        "label": "타이틀 이어하기",
+        "settleMs": 1500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-battle",
+        "expected": "전체 새로고침 후 이어하기가 saved-battle 원본과 같은 손패·LP·소울·덱 수·단계를 복원했다."
+      },
+      {
+        "type": "audio",
+        "label": "continued-instrumental"
+      }
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-modern-2026-10-26",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "temple-idle",
+      "zoom-close",
+      "status",
+      "jump-air",
+      "gate-reading",
+      "saved-temple",
+      "continued-temple"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 글꼴과 간결한 현대적 UI, 예수님의 길 제목·새 여정·이어하기·설정이 실제 3D 장면 위에서 읽힌다."
+      },
+      {
+        "type": "audio",
+        "label": "before-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33359375,
+          0.8430555555555556
+        ],
+        "label": "설정 첫 사용자 입력",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "after-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13984375,
+          0.5277777777777778
+        ],
+        "label": "음악 끄기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "muted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13984375,
+          0.5277777777777778
+        ],
+        "label": "음악 켜기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "unmuted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.18203125,
+          0.9111111111111111
+        ],
+        "label": "설정 돌아가기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2328125,
+          0.6194444444444445
+        ],
+        "label": "새 여정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "성전으로",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-idle",
+        "expected": "실제 스키닝된 소년 예수님이 성전 뜰에 있다. 새 긴 머리와 크림색 옷·짙은 망토가 보이고, 작은 HUD가 공간과 인물을 가리지 않는다. 첫 목표·현재 성경 참조가 읽힌다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.55,
+          0.43
+        ],
+        "deltaY": -360,
+        "label": "마우스 휠 줌인",
+        "profile": "desktop",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.3472222222222222
+        ],
+        "label": "화면 + 줌인",
+        "profile": "mobile-landscape",
+        "repeat": 3,
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "zoom-close",
+        "expected": "temple-idle보다 카메라가 가까워져 같은 실제 3D 인물의 머리·의상·피부가 더 크게 보인다. 그림 교체가 아니라 같은 공간의 원근 변화이며 가까운 카메라에서도 몸 안을 뚫고 들어가지 않는다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.55,
+          0.43
+        ],
+        "deltaY": 360,
+        "label": "마우스 휠 줌아웃",
+        "profile": "desktop",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.4361111111111111
+        ],
+        "label": "화면 - 줌아웃",
+        "profile": "mobile-landscape",
+        "repeat": 3,
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.63671875,
+          0.06666666666666667
+        ],
+        "label": "상태창",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "status",
+        "expected": "현대적인 상태창에 소년 예수님의 이름·12세·예루살렘·현재 목표·성경 참조·읽은 말씀 수가 읽히고 저장/돌아가기 버튼이 보인다. 근거 없는 전투 HP/레벨이나 미구현 장 진행을 보여주지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.84375,
+          0.8597222222222223
+        ],
+        "label": "상태창 닫기",
+        "settleMs": 1800
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Space"
+        ],
+        "ms": 0,
+        "settleMs": 0,
+        "profile": "desktop",
+        "label": "실제 Space 점프",
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9047,
+          0.7764
+        ],
+        "label": "화면 점프",
+        "profile": "mobile-landscape",
+        "settleMs": 0,
+        "captureCompositorBurst": true
+      },
+      {
+        "type": "checkpoint",
+        "name": "jump-air",
+        "expected": "실제 점프 입력으로 주인공 발이 바닥과 떨어진 공중 프레임이며 그림자와 분리되어 보인다. 관절 인물과 새 옷이 유지된다."
+      },
+      {
+        "type": "wait",
+        "ms": 1500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 1600,
+        "profile": "desktop",
+        "label": "첫 표식으로 이동"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 1600,
+        "profile": "mobile-landscape",
+        "label": "첫 표식으로 터치 이동"
+      },
+      {
+        "type": "key",
+        "key": "e",
+        "label": "첫 표식 대화",
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9047,
+          0.8833
+        ],
+        "label": "첫 표식 터치 대화",
+        "profile": "mobile-landscape",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "gate-reading",
+        "expected": "실제 표식 근접 상호작용으로 요셉 초상화와 대화 1/2, 관련 누가복음 2:41–43 본문·출처가 아래에 보인다. 현대적 대화 UI와 한글이 읽히고 해설/성경 인용이 구분된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 대화",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "말씀을 따라 걷기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.840625,
+          0.06666666666666667
+        ],
+        "label": "현재 위치 저장",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-temple",
+        "expected": "실제 저장 안내와 현재 인물 위치·다음 목표·성경 참조를 이어하기 비교 기준으로 기록한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.93515625,
+          0.06666666666666667
+        ],
+        "label": "설정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81796875,
+          0.9111111111111111
+        ],
+        "label": "처음 화면",
+        "settleMs": 1800
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13203125,
+          0.7375
+        ],
+        "label": "이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-temple",
+        "expected": "전체 새로고침 뒤 이어하기가 saved-temple과 같은 인물 위치·실제 다음 목표·관련 성경 참조를 복원했다. 새 인물·HUD·카메라 조작이 유지된다."
+      },
+      {
+        "type": "audio",
+        "label": "after-continue-gesture"
+      }
+    ]
+  }
+}

@@ -52,10 +52,12 @@ namespace PathOfDawn.Presentation
             // backlight. It follows the view and affects only the protagonist layer.
             var fillObject=new GameObject("Protagonist portrait fill",typeof(Light));
             fillObject.transform.SetParent(cam.transform,false);fillObject.transform.localPosition=new Vector3(0,-.20f,.65f);
-            var fill=fillObject.GetComponent<Light>();fill.type=LightType.Point;fill.color=new Color(1,.95f,.87f);
-            fill.intensity=2.8f;fill.range=8;fill.shadows=LightShadows.None;fill.cullingMask=1<<8;
+            var fill=fillObject.GetComponent<Light>();fill.type=LightType.Point;fill.color=new Color(1,.98f,.95f);
+            // Close zoom brings the camera light nearer the face. Keep the fill
+            // gentle so skin and cloth retain their authored colour and detail.
+            fill.intensity=.55f;fill.range=6;fill.shadows=LightShadows.None;fill.cullingMask=1<<8;
             courtyard=new GameObject("Temple courtyard · physical scene").transform;courtyard.SetParent(transform,false);
-            BuildLandscape();BuildCourtyard();BuildTemple();BuildColonnades();BuildGarden();CombineArchitecture();BuildManger();
+            BuildLandscape();BuildCourtyard();BuildTemple();BuildColonnades();BuildGarden();BuildCourtyardDetails();CombineArchitecture();BuildManger();
             var playerRoot=new GameObject("Jesus · playable protagonist");playerRoot.transform.SetParent(courtyard,false);playerRoot.layer=8;
             var body=CreatePerson(playerRoot.transform,"Young Jesus",Vector3.zero,1);
             foreach(var node in body.GetComponentsInChildren<Transform>(true))node.gameObject.layer=8;
@@ -103,18 +105,18 @@ namespace PathOfDawn.Presentation
         }
         void ConfigureLighting()
         {
-            RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=new Color(.67f,.74f,.83f);
-            RenderSettings.ambientEquatorColor=new Color(.57f,.53f,.43f);RenderSettings.ambientGroundColor=new Color(.25f,.25f,.23f);
-            RenderSettings.fog=true;RenderSettings.fogColor=new Color(.72f,.73f,.65f);RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogDensity=.0068f;
+            RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=new Color(.72f,.79f,.88f);
+            RenderSettings.ambientEquatorColor=new Color(.64f,.61f,.54f);RenderSettings.ambientGroundColor=new Color(.31f,.32f,.30f);
+            RenderSettings.fog=true;RenderSettings.fogColor=new Color(.77f,.80f,.79f);RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogDensity=.0068f;
             var lightObject=new GameObject("Afternoon sun",typeof(Light));lightObject.transform.SetParent(transform,false);
-            sun=lightObject.GetComponent<Light>();sun.type=LightType.Directional;sun.color=new Color(1,.87f,.65f);sun.intensity=2.0f;sun.shadows=LightShadows.Soft;
+            sun=lightObject.GetComponent<Light>();sun.type=LightType.Directional;sun.color=new Color(1,.94f,.85f);sun.intensity=1.65f;sun.shadows=LightShadows.Soft;
             sun.shadowBias=.045f;sun.shadowNormalBias=.28f;lightObject.transform.rotation=Quaternion.Euler(38,-32,0);RenderSettings.sun=sun;
             var skyShader=Shader.Find("Skybox/Procedural");
             if(skyShader!=null){var sky=new Material(skyShader);sky.SetFloat("_SunSize",.025f);sky.SetFloat("_AtmosphereThickness",.75f);sky.SetColor("_SkyTint",new Color(.46f,.57f,.66f));sky.SetColor("_GroundColor",new Color(.58f,.51f,.38f));RenderSettings.skybox=sky;ownedMaterials.Add(sky);}
             var volumeObject=new GameObject("Warm daylight grade",typeof(Volume));volumeObject.transform.SetParent(transform,false);
             var volume=volumeObject.GetComponent<Volume>();volume.isGlobal=true;var profile=ScriptableObject.CreateInstance<VolumeProfile>();ownedProfile=profile;volume.profile=profile;
             var tone=profile.Add<Tonemapping>();tone.mode.Override(TonemappingMode.ACES);
-            var adjustment=profile.Add<ColorAdjustments>();adjustment.postExposure.Override(.05f);adjustment.contrast.Override(7);adjustment.saturation.Override(-4);
+            var adjustment=profile.Add<ColorAdjustments>();adjustment.postExposure.Override(-.06f);adjustment.contrast.Override(5);adjustment.saturation.Override(-2);
             var bloom=profile.Add<Bloom>();bloom.intensity.Override(.12f);bloom.threshold.Override(1.1f);
         }
         void BuildLandscape()
@@ -204,6 +206,29 @@ namespace PathOfDawn.Presentation
             {var roller=Primitive("Scroll roller",PrimitiveType.Cylinder,courtyard,new Vector3(x,.74f,1.65f),new Vector3(.09f,.32f,.09f),wood,false);roller.transform.rotation=Quaternion.Euler(90,0,0);}
             for(int i=0;i<5;i++)Primitive("Ink marks on scroll",PrimitiveType.Cube,courtyard,new Vector3(-5,.72f,1.47f+i*.075f),new Vector3(.65f,.006f,.012f),darkStone,false);
         }
+        void BuildCourtyardDetails()
+        {
+            // Quiet, modelled details break up the broad wall surfaces. They are
+            // an illustrative setting, not an archaeological reconstruction.
+            foreach(int side in new[]{-1,1})foreach(float z in new[]{-8f,-2f,4f})
+            {
+                float x=side*14.60f;
+                Primitive("Carved portico panel",PrimitiveType.Cube,courtyard,new Vector3(x,1.55f,z),new Vector3(.08f,1.44f,1.26f),darkStone,false);
+                foreach(float y in new[]{.79f,2.31f})Primitive("Panel limestone lintel",PrimitiveType.Cube,courtyard,new Vector3(x-side*.05f,y,z),new Vector3(.14f,.11f,1.53f),paleStone,false);
+                foreach(float edge in new[]{-.71f,.71f})Primitive("Panel limestone jamb",PrimitiveType.Cube,courtyard,new Vector3(x-side*.05f,1.55f,z+edge),new Vector3(.14f,1.62f,.11f),paleStone,false);
+                for(int bar=0;bar<5;bar++)Primitive("Cedar lattice",PrimitiveType.Cube,courtyard,new Vector3(x-side*.07f,1.55f,z-.47f+bar*.235f),new Vector3(.05f,1.28f,.034f),wood,false);
+                for(int bar=0;bar<3;bar++)Primitive("Cedar lattice crossbar",PrimitiveType.Cube,courtyard,new Vector3(x-side*.09f,1.08f+bar*.47f,z),new Vector3(.04f,.034f,1.08f),wood,false);
+            }
+            foreach(int side in new[]{-1,1})
+            {
+                // Layered thresholds and bronze door edges give the entrance a
+                // readable silhouette even with the new close camera distance.
+                Primitive("Sanctuary doorway stone frame",PrimitiveType.Cube,courtyard,new Vector3(side*2.33f,3.65f,10.77f),new Vector3(.30f,5.90f,.38f),paleStone,false);
+                Primitive("Sanctuary bronze door edge",PrimitiveType.Cube,courtyard,new Vector3(side*1.58f,3.5f,10.76f),new Vector3(.055f,5.10f,.055f),gold,false);
+                foreach(float y in new[]{1.5f,3.5f,5.5f})Primitive("Cedar door raised panel",PrimitiveType.Cube,courtyard,new Vector3(side*.83f,y,10.73f),new Vector3(1.23f,1.40f,.075f),wood,false);
+            }
+            Primitive("Sanctuary lintel moulding",PrimitiveType.Cube,courtyard,new Vector3(0,6.64f,10.70f),new Vector3(5.10f,.24f,.48f),paleStone,false);
+        }
         void OliveTree(Vector3 p)
         {
             var trunk=Primitive("Olive trunk",PrimitiveType.Cylinder,courtyard,p+Vector3.up*1.1f,new Vector3(.28f,1.12f,.28f),wood,false);trunk.transform.rotation=Quaternion.Euler(4,15,-8);
@@ -256,10 +281,10 @@ namespace PathOfDawn.Presentation
             var lamp=lampGo.GetComponent<Light>();lamp.type=LightType.Point;lamp.color=new Color(1,.61f,.27f);lamp.intensity=12;lamp.range=11;
             manger.gameObject.SetActive(false);
         }
-        GameObject CreatePerson(Transform parent,string name,Vector3 position,float scale)
+        GameObject CreatePerson(Transform parent,string name,Vector3 position,float scale,string resource=HeroResource)
         {
-            var model=Resources.Load<GameObject>(HeroResource);
-            if(model==null)throw new InvalidOperationException("Required skinned youth model is missing: "+HeroResource);
+            var model=Resources.Load<GameObject>(resource);
+            if(model==null)throw new InvalidOperationException("Required skinned character model is missing: "+resource);
             var body=Instantiate(model,parent);body.name=name;body.transform.localPosition=position;body.transform.localRotation=Quaternion.identity;body.transform.localScale=Vector3.one*scale;
             // FBX import may prefix embedded material IDs with the model name.
             // Resolve the authored Gospel key explicitly instead of displaying
@@ -285,7 +310,10 @@ namespace PathOfDawn.Presentation
         void CreateNpc(string name,Vector3 position,float yaw,float scale,Color robeColor)
         {
             var actor=new GameObject(name);actor.transform.SetParent(courtyard,false);actor.transform.localPosition=position;actor.transform.localRotation=Quaternion.Euler(0,yaw,0);
-            var body=CreatePerson(actor.transform,name+" model",Vector3.zero,scale);
+            // Adults use an adult body, rather than enlarged copies of the boy.
+            // Mary has her own veiled silhouette and facial proportions.
+            string resource=name=="Mary"?"Art/Gospel3D/Mary":"Art/Gospel3D/AdultJesus";
+            var body=CreatePerson(actor.transform,name+" model",Vector3.zero,scale*.84f,resource);
             var animator=body.GetComponentInChildren<Animator>();if(animator==null)animator=body.AddComponent<Animator>();animator.runtimeAnimatorController=Resources.Load<RuntimeAnimatorController>(AnimatorResource);animator.applyRootMotion=false;
             foreach(var renderer in body.GetComponentsInChildren<Renderer>())
             {
@@ -324,7 +352,36 @@ namespace PathOfDawn.Presentation
         GameObject Primitive(string name,PrimitiveType kind,Transform parent,Vector3 p,Vector3 scale,Material mat,bool collide)
         {
             var go=GameObject.CreatePrimitive(kind);go.name=name;go.transform.SetParent(parent,false);go.transform.localPosition=p;go.transform.localScale=scale;go.GetComponent<Renderer>().sharedMaterial=mat;
+            // Small bevels catch daylight on cut stone and timber. Collision
+            // remains the original simple box; the walkable layout is unchanged.
+            if(kind==PrimitiveType.Cube&&Mathf.Min(scale.x,scale.y,scale.z)>.12f)
+            {
+                go.GetComponent<MeshFilter>().sharedMesh=SoftBox(scale);
+                go.transform.localScale=Vector3.one;
+                var box=go.GetComponent<BoxCollider>();if(box!=null)box.size=scale;
+            }
             if(!collide)Destroy(go.GetComponent<Collider>());return go;
+        }
+        Mesh SoftBox(Vector3 size)
+        {
+            Vector3 half=size*.5f;float radius=Mathf.Min(.055f,Mathf.Min(size.x,Mathf.Min(size.y,size.z))*.13f);
+            var vertices=new List<Vector3>(96);var normals=new List<Vector3>(96);var uv=new List<Vector2>(96);var triangles=new List<int>(324);
+            foreach(var face in new[]{Vector3.right,Vector3.left,Vector3.up,Vector3.down,Vector3.forward,Vector3.back})
+            {
+                Vector3 u=Mathf.Abs(face.y)>.5f?Vector3.right:Vector3.up,v=Vector3.Cross(face,u);
+                float hu=Vector3.Dot(half,new Vector3(Mathf.Abs(u.x),Mathf.Abs(u.y),Mathf.Abs(u.z)));
+                float hv=Vector3.Dot(half,new Vector3(Mathf.Abs(v.x),Mathf.Abs(v.y),Mathf.Abs(v.z)));
+                float hn=Vector3.Dot(half,new Vector3(Mathf.Abs(face.x),Mathf.Abs(face.y),Mathf.Abs(face.z)));
+                float[] xs={-hu,-hu+radius,hu-radius,hu},ys={-hv,-hv+radius,hv-radius,hv};int start=vertices.Count;
+                for(int y=0;y<4;y++)for(int x=0;x<4;x++)
+                {
+                    Vector3 point=face*hn+u*xs[x]+v*ys[y];
+                    Vector3 inner=new Vector3(Mathf.Clamp(point.x,-half.x+radius,half.x-radius),Mathf.Clamp(point.y,-half.y+radius,half.y-radius),Mathf.Clamp(point.z,-half.z+radius,half.z-radius));
+                    Vector3 normal=(point-inner).normalized;vertices.Add(inner+normal*radius);normals.Add(normal);uv.Add(new Vector2((xs[x]+hu)/(hu*2),(ys[y]+hv)/(hv*2)));
+                }
+                for(int y=0;y<3;y++)for(int x=0;x<3;x++){int a=start+y*4+x;triangles.AddRange(new[]{a,a+1,a+5,a,a+5,a+4});}
+            }
+            var mesh=new Mesh{name="Light-catching stone edges"};mesh.SetVertices(vertices);mesh.SetNormals(normals);mesh.SetUVs(0,uv);mesh.SetTriangles(triangles,0);mesh.RecalculateTangents();mesh.RecalculateBounds();ownedMeshes.Add(mesh);return mesh;
         }
         void Cylinder(string name,Transform parent,Vector3 p,float radius,float height,Material mat,bool collide)=>Primitive(name,PrimitiveType.Cylinder,parent,p,new Vector3(radius*2,height*.5f,radius*2),mat,collide);
         void Column(Vector3 p,float height,float radius,Transform parent)

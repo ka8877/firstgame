@@ -5,7 +5,7 @@ mergeInto(LibraryManager.library, {
       if (window.FirstGameOriginalMusic) window.FirstGameOriginalMusic.receive(message);
       else (window.__fmOriginalMusicMessages || (window.__fmOriginalMusicMessages = [])).push(message);
     } catch (error) {
-      console.warn("Original music player message could not be delivered.");
+      console.warn("Background music settings could not be delivered.");
     }
   },
   FMOriginalMusic_GetMuted: function () {

@@ -19,9 +19,9 @@ REQUIRED_PROFILES = {
     "FantasyCards": ("Desktop720", "Mobile844"),
     "PathOfDawn": ("Desktop720", "Mobile844"),
 }
-GAME_REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+GAME_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 CONTENT_VERSIONS = {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
-REPORT_ROOTS = {game: "Artifacts/Validation/Remaster" for game in GAMES}
+REPORT_ROOTS = {game: "Artifacts/Validation/Modern" for game in GAMES}
 
 
 def runtime_file(relative):
@@ -32,7 +32,7 @@ def validate_report(report_path, game, profile, player):
     report = json.loads(report_path.read_text())
     if (report.get("game") != game or report.get("status") != "passed"
             or report.get("revision") != GAME_REVISIONS[game]
-            or report.get("suite") != "remaster-real-input-v1"):
+            or report.get("suite") != "modern-real-input-v1"):
         raise SystemExit(f"Current passed browser report required: {game}/{profile}")
     if not report.get("checks") or not all(c.get("passed") is True for c in report["checks"]):
         raise SystemExit(f"Every game interaction check must pass: {game}/{profile}")
@@ -138,6 +138,7 @@ for game, slug in GAMES.items():
     project = ROOT / "Games" / game
     shutil.copyfile(project / "Assets/Resources/Fonts/OFL.txt", notices / "FirstGameKorean-OFL.txt")
     shutil.copyfile(project / "Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt", notices / "LiberationSans-OFL.txt")
+    shutil.copyfile(project / "Assets/Resources/Fonts/Pretendard-OFL.txt", notices / "Pretendard-OFL.txt")
     shutil.copyfile(ROOT / "Tools/Audio/MUSIC-NOTICE.txt", notices / "Music-NOTICE.txt")
     if game == "PathOfDawn":
         shutil.copyfile(project / "Packages/com.inkle.ink-unity-integration/LICENCE.md", notices / "Ink-LICENCE.md")

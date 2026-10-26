@@ -10,6 +10,8 @@ import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
+from modern_release_dispatch import dispatch
+dispatch(Path(__file__).resolve().parents[2], 'verify')
 import re
 import stat
 import sys

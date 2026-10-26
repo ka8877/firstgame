@@ -44,7 +44,13 @@ namespace FantasyCards.SmokeTests
         public IEnumerator RemasterTitleLocalRoomsDeckChoiceShuffleAndContinueUseLiveCallbacks()
         {
             Assert.That(UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>(), Is.Not.Null);
-            SmokeUi.AssertVisibleKorean("판타지마스터즈");
+            var listeners = UnityEngine.Object.FindObjectsByType<AudioListener>(FindObjectsSortMode.None)
+                .Where(listener => listener.isActiveAndEnabled).ToArray();
+            Assert.That(listeners.Length, Is.EqualTo(1), "Native bundled music requires exactly one active output AudioListener.");
+            var title = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                .FirstOrDefault(text => text.gameObject.activeInHierarchy && string.Concat(text.text.Where(character => !char.IsWhiteSpace(character))) == "판타지마스터즈");
+            Assert.That(title, Is.Not.Null, "The modern title must retain the complete Korean game name across its designed line break.");
+            SmokeUi.AssertVisibleKorean(title.text);
             Assert.That(SmokeUi.FindButton("게임 시작"), Is.Not.Null);
             Assert.That(SmokeUi.FindButton("새로운 결투"), Is.Null, "The retired anime-avatar entry must not remain the primary flow.");
             Assert.That(ActiveButtons("Leader ").Length, Is.Zero);
@@ -67,7 +73,7 @@ namespace FantasyCards.SmokeTests
             }
             ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke();
             yield return null;
-            Assert.That(SmokeUi.FindButton("START"), Is.Not.Null);
+            Assert.That(SmokeUi.FindButton("대전 시작"), Is.Not.Null);
             SmokeUi.Click("덱 선택"); yield return null;
             Assert.That(ActiveButtons("Starter deck ").Length, Is.EqualTo(4));
             SmokeUi.Click(DemoCatalog.GetDeck("forest").name); yield return null;
@@ -75,14 +81,26 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("대전실로"); yield return null;
             Assert.That(SmokeUi.HasText(DemoCatalog.GetDeck("forest").name), Is.True);
             Assert.That(SmokeUi.HasText("컴퓨터"), Is.True);
-            yield return SmokeUi.Capture("FantasyCards", "remaster-04-local-game-room", 844, 390);
-            SmokeUi.Click("START");
+            yield return SmokeUi.Capture("FantasyCards", "remaster-04-local-game-room", 844, 390, () =>
+            {
+                var compactBrand = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                    .Single(text => text.gameObject.activeInHierarchy && text.gameObject.name == "Client brand");
+                compactBrand.ForceMeshUpdate();
+                Assert.That(compactBrand.text, Is.EqualTo("FM"), "The narrow rail uses an intentional complete abbreviation.");
+                Assert.That(compactBrand.isTextTruncated, Is.False);
+            });
+            SmokeUi.Click("대전 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable,
-                15, "The actual room START callback must shuffle and deal an opening hand.");
+                15, "The actual room start callback must shuffle and deal an opening hand.");
             var engine = SmokeUi.ReadEngine();
             Assert.That(engine.State.players[0].hand.Count, Is.EqualTo(6));
             uint beforeRng = engine.State.randomState;
-            SmokeUi.Click("전체 손패 교체"); yield return null;
+            SmokeUi.Click("전체 손패 교체");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("전체 손패 교체") != null &&
+                SmokeUi.FindButton("이대로 시작") != null, 5, "The actual mulligan callback must redraw the opening controls.");
+            Assert.That(SmokeUi.ReadEngine(), Is.SameAs(engine), "Mulligan must keep the actual battle engine.");
+            Assert.That(engine.State, Is.Not.Null, "Mulligan must retain its live state.");
+            Assert.That(engine.State.players[0].hand, Is.Not.Null, "Mulligan must retain its live hand.");
             Assert.That(engine.State.players[0].hand.Count, Is.EqualTo(6));
             Assert.That(engine.State.randomState, Is.Not.EqualTo(beforeRng), "Whole-hand replacement must run the core shuffle.");
             Assert.That(SmokeUi.FindButton("전체 손패 교체").interactable, Is.False);
@@ -204,7 +222,7 @@ namespace FantasyCards.SmokeTests
                 () =>
                 {
                     foreach (Element element in Enum.GetValues(typeof(Element))) AssertMobileLabel(CardCatalog.ElementName(element));
-                    AssertMobileLabel("싱글플레이 · 일곱 속성 · " + CardCatalog.All.Length + "종 카드");
+                    AssertMobileLabel("싱글플레이  ·  " + CardCatalog.All.Length + "종 카드  ·  네 개의 시작 덱");
                     AssertMobileLabel("게임 시작");
                     AssertMobileLabel("카드 도감");
                 }, RebuildAtActualMobileSize);
@@ -213,7 +231,7 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.Capture("FantasyCards", "remaster-12-collection-616x346", 616, 346,
                 () =>
                 {
-                    foreach (string label in new[] { "CARD COLLECTION · 카드 도감", "검색", "원본 순서", "모든 카드", "속성 · 전체", "종류 · 전체", "소울 · 전체", "등급 · 전체", "이전", "다음", "대기실" })
+                    foreach (string label in new[] { "카드 도감", "검색", "원본 순서", "모든 카드", "속성 · 전체", "종류 · 전체", "소울 · 전체", "등급 · 전체", "이전", "다음", "대기실" })
                         AssertMobileLabel(label);
                     AssertMobileLabel("AP / DP / HP");
                     var legend = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
@@ -247,7 +265,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("돌아가기"); yield return null;
             SmokeUi.Click("대기실"); yield return null;
             ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke(); yield return null;
-            SmokeUi.Click("START");
+            SmokeUi.Click("대전 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable, 15, "The room must reach its real opening hand.");
             UseLegalStressHand();
             yield return SmokeUi.Capture("FantasyCards", "remaster-15-long-coins-opening-616x346", 616, 346,
@@ -304,7 +322,7 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.Capture("FantasyCards", "remaster-14-menu-616x346", 616, 346,
                 () =>
                 {
-                    foreach (string label in new[] { "GAME OPTION", "전투 기록", "음악", "저장", "대기실", "돌아가기" }) AssertMobileLabel(label);
+                    foreach (string label in new[] { "전투 메뉴", "전투 기록", "음악", "저장", "대기실", "돌아가기" }) AssertMobileLabel(label);
                 }, RebuildAtActualMobileSize);
             LogAssert.NoUnexpectedReceived();
         }

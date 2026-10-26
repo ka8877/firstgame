@@ -29,10 +29,10 @@ if not (site / ".firstgame-web-output").is_file() or not (site / "build-manifest
 manifest = json.loads((site / "build-manifest.json").read_text())
 if manifest.get("publishReady") is not True:
     parser.error("Stage with --require-browser-reports after the required per-game browser checks pass.")
-if (manifest.get("gameRevisions") != {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+if (manifest.get("gameRevisions") != {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
         or manifest.get("contentVersions") != {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
         or manifest.get("sourceDirty") is not False):
-    parser.error("A current remaster stage from a clean source commit is required.")
+    parser.error("A current modern stage from a clean source commit is required.")
 current = {str(p.relative_to(site)): p for p in site.rglob("*")
            if p.is_file() and p.name not in {".firstgame-web-output", "build-manifest.json"}}
 if set(current) != set(manifest.get("files", {})):

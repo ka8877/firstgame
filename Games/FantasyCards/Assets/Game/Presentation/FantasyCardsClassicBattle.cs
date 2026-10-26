@@ -14,10 +14,10 @@ namespace FantasyCards.Presentation
             battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("battle");
             var state = engine.State; var player = state.players[0]; var enemy = state.players[1];
             Backdrop(false);
-            var field = Panel(root, .025f, .362f, .805f, .928f, new Color(.035f, .075f, .044f));
-            Frame(field, new Color(.43f, .42f, .25f), 2); Ornament(field, new Color(.56f, .58f, .36f, .55f));
+            var field = Panel(root, .025f, .362f, .805f, .928f, new Color(.055f, .095f, .13f, .94f));
+            Frame(field, new Color(.48f, .66f, .74f, .45f), 2); Ornament(field, new Color(.55f, .76f, .82f, .35f));
             DrawLanes(1, .665f, .925f); DrawLanes(0, .382f, .600f);
-            var messagePanel = Panel(root, .025f, .604f, .805f, .663f, new Color(.035f, .029f, .015f, .96f));
+            var messagePanel = Panel(root, .025f, .604f, .805f, .663f, new Color(.06f, .10f, .15f, .96f));
             ReadableText(messagePanel, locked ? "전투 판정 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", StatusMessage());
             var opponent = Panel(root, .025f, .930f, .805f, .995f, ink);
@@ -82,20 +82,20 @@ namespace FantasyCards.Presentation
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);
                 float left = start + lane * span / state.rules.unitLanes, right = left + span / state.rules.unitLanes - .008f;
                 bool target = IsLegalLane(owner, lane);
-                var panel = Panel(root, left, bottom, right, top, new Color(.032f, .065f, .043f, .92f));
+                var panel = Panel(root, left, bottom, right, top, new Color(.065f, .115f, .15f, .92f));
                 panel.gameObject.name = "Lane " + owner + " " + lane;
                 panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
                 if (unit != null)
                 {
                     var card = CardCatalog.Get(unit.definitionId);
                     Artwork(panel, card, .02f, .23f, .98f, .76f);
-                    Panel(panel, .015f, .775f, .985f, .985f, new Color(.075f, .055f, .025f));
-                    Panel(panel, .015f, .015f, .985f, .215f, new Color(.025f, .025f, .015f));
+                    Panel(panel, .015f, .775f, .985f, .985f, new Color(.09f, .145f, .19f));
+                    Panel(panel, .015f, .015f, .985f, .215f, new Color(.045f, .075f, .11f));
                     ReadableText(panel, card.name, .04f, .785f, .96f, .98f, 23, ivory);
                     string[] values = { "AP " + CardCatalog.UnitAttack(unit), "DP " + CardCatalog.UnitDefense(unit), "HP " + CardCatalog.UnitHealth(unit) };
                     for (int stat = 0; stat < values.Length; stat++)
                         ReadableText(panel, values[stat], stat / 3f + .025f, .02f, (stat + 1) / 3f - .025f, .21f, 20, stat == 2 ? teal : gold, TextAlignmentOptions.Center);
-                    Ornament(panel, new Color(.53f, .42f, .24f), true);
+                    Ornament(panel, new Color(.55f, .73f, .80f, .40f), true);
                     Frame(panel, target ? ivory : RarityColor(card.rarity), target ? 3 : 1.5f);
                     BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                 }

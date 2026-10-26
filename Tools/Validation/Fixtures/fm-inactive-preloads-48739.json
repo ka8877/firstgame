@@ -1,0 +1,467 @@
+{
+  "provenance": {
+    "sourceReportAtCapture": "Artifacts/Validation/Modern/Desktop720/FantasyCards/report.json",
+    "sourceReportSha256": "4b9473ec847224c5ee10b6fdf484e107e6f0be8c043f528500ccf2cece7aaefc",
+    "sourceReportStatus": "failed",
+    "sourceTimelineAtCapture": "Artifacts/Validation/Modern/Desktop720/FantasyCards/local-media-0.json",
+    "sourceTimelineSha256": "b8a14a661f5d9a5c53ce02715bd3b5a130caacd5643b25a4e995d8d56b0eb4b3",
+    "scope": "Verbatim failure events, nearby passive observations and actual later title PCM metadata from failed48739. Regression of classification only; the original report remains failed and untouched."
+  },
+  "game": "FantasyCards",
+  "revision": "fm-modern-2026-10-26",
+  "suite": "modern-real-input-v1",
+  "game_url": "http://127.0.0.1:39301/FantasyCards/Web/",
+  "runtime_files": [
+    {
+      "file": "Build/04a79b1d375d3c78a627757558392ba0.loader.js",
+      "bytes": 47867,
+      "modifiedUtc": "2026-10-26T15:05:52.085811+00:00",
+      "sha256": "15ca062d0fceb6a2d31d4889d818dfb35978dfc7ee445a79334a4c76403d6b69"
+    },
+    {
+      "file": "Build/06eaea5bed65f38dc5e8208d1162d027.data.unityweb",
+      "bytes": 60345258,
+      "modifiedUtc": "2026-10-26T15:09:02.446689+00:00",
+      "sha256": "1e1a3716e52989f20b76ddba85996b4a3d68a6bc35982267754c3ded0d6da433"
+    },
+    {
+      "file": "Build/4dd50a5eae211ec6e5eeea1325c97430.wasm.unityweb",
+      "bytes": 13096199,
+      "modifiedUtc": "2026-10-26T15:13:34.302903+00:00",
+      "sha256": "23d356e2b9a4f595bdadecbd995ff1cedb5fbc4a329b3fd5ce3d4578dc96cae7"
+    },
+    {
+      "file": "Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
+      "bytes": 89864,
+      "modifiedUtc": "2026-10-26T15:13:28.354376+00:00",
+      "sha256": "d7908b03514ee1d330edf72bc047202cf689e8f4d186335dc123b8049ba3b626"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+      "bytes": 2568,
+      "modifiedUtc": "2026-10-26T15:05:49.251437+00:00",
+      "sha256": "672b8250b34543686f55aa14a6fb159e97eaed349fe4fc84cceb539ed8b919b0"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.mp3",
+      "bytes": 1318243,
+      "modifiedUtc": "2026-10-26T15:05:49.212930+00:00",
+      "sha256": "bd0b6eeef15b932f38b8b17c7efcc3924b87a66b0e27a3af2ab23f88d9273418"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.ogg",
+      "bytes": 1140306,
+      "modifiedUtc": "2026-10-26T15:05:49.261917+00:00",
+      "sha256": "09c35ffa207fe68a9550493b0c66a2fbd2cedbd8ea00bd563e2d6ccde662c075"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.mp3",
+      "bytes": 1848501,
+      "modifiedUtc": "2026-10-26T15:05:49.221956+00:00",
+      "sha256": "1924a9b930c902052cc37ceade83385ca500db861c689d0b59cd6136bac86884"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.ogg",
+      "bytes": 1554304,
+      "modifiedUtc": "2026-10-26T15:05:49.238057+00:00",
+      "sha256": "a4f3a78c4783215d214f1c932673c92906cc8bb66224df8c6c36cab6bd2753be"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.mp3",
+      "bytes": 1726836,
+      "modifiedUtc": "2026-10-26T15:05:49.239598+00:00",
+      "sha256": "04b694ce07c07a7078c8ad4a02e1744e910be2f262de14891a9002188b027644"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "bytes": 1506271,
+      "modifiedUtc": "2026-10-26T15:05:49.245918+00:00",
+      "sha256": "6d41504bfb7560358db6a09c7fe2e2701f3699c741d55adce3721d10dfb78610"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/manifest.json",
+      "bytes": 1326,
+      "modifiedUtc": "2026-10-26T15:05:49.249323+00:00",
+      "sha256": "a5327dff508bcfbd38cfc6a7b0b3e3a7bb773a9dfc2bde6dd02e514349eaa539"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.mp3",
+      "bytes": 1551295,
+      "modifiedUtc": "2026-10-26T15:05:49.249785+00:00",
+      "sha256": "bceb27c38e0a844726bfa2875f1827371f959c814b625d47e4afc6a89aa72e4e"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.ogg",
+      "bytes": 1326223,
+      "modifiedUtc": "2026-10-26T15:05:49.250556+00:00",
+      "sha256": "ebe993881721cde73fdb645531bf8d9265ce11679f4d273dbc9f92dc1e7a48fe"
+    },
+    {
+      "file": "index.html",
+      "bytes": 20871,
+      "modifiedUtc": "2026-10-26T15:13:34.776523+00:00",
+      "sha256": "f0beeb50bbb8ae1446e362382fa361657f81906d1ef6271879574da8f8a96c9f"
+    }
+  ],
+  "failures": [
+    {
+      "url": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793029751488.6638,
+      "navigation": 0
+    },
+    {
+      "url": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793029751488.8572,
+      "navigation": 0
+    },
+    {
+      "url": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793029751488.96,
+      "navigation": 0
+    }
+  ],
+  "observations": [
+    {
+      "epochMs": 1793029750971,
+      "atMs": 16292,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6000000238418579,
+        "hasMutedPreference": true,
+        "hasVolumePreference": true,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 15.400635,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 15.400635,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793029751219,
+      "atMs": 16540.100000023842,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6000000238418579,
+        "hasMutedPreference": true,
+        "hasVolumePreference": true,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 15.650249,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 15.650249,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793029751470,
+      "atMs": 16791.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6000000238418579,
+        "hasMutedPreference": true,
+        "hasVolumePreference": true,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 15.899864,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 15.899864,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793029751730,
+      "atMs": 17051.20000001788,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6000000238418579,
+        "hasMutedPreference": true,
+        "hasVolumePreference": true,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 16.152381,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 16.152381,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793029751969,
+      "atMs": 17290,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6000000238418579,
+        "hasMutedPreference": true,
+        "hasVolumePreference": true,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 16.400516,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 16.400516,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    }
+  ],
+  "windows": [
+    {
+      "observerErrors": [],
+      "sourceIdentities": [
+        [
+          1,
+          3
+        ]
+      ],
+      "sampleCount": 16,
+      "medianRms": 0.06152988012972915,
+      "maximumRms": 0.07654300551262441,
+      "audibleSampleFraction": 1.0,
+      "allContextsRunning": true,
+      "isolatedMusicRoute": true,
+      "sourceUrls": [
+        "http://127.0.0.1:39301/FantasyCards/Web/StreamingAssets/Audio/ModernCard/title.ogg"
+      ],
+      "mediaProgressSeconds": 2.2697509999999994,
+      "nonfiniteSamples": 0,
+      "label": "title-instrumental",
+      "rawEvidence": "audio-0-title-instrumental.json",
+      "sha256": "b650fd46d51f2ce5557ba4c8a8528286ed24eb3cc2c443b245f5ad038f207482",
+      "navigation": 0,
+      "startedEpochMs": 1793029770040.4006,
+      "finishedEpochMs": 1793029772400.1758
+    }
+  ]
+}

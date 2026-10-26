@@ -1,0 +1,121 @@
+{
+  "revision": "gospel-modern-2026-10-26",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "exportedRigNode": "GospelRig",
+      "meshes": 10,
+      "vertices": 49937,
+      "triangles": 97950,
+      "bones": 65,
+      "bytes": 6276428,
+      "sha256": "4ec692510d375379452485184e6730e857bbe6e04e9b460604196ac6d29b2798",
+      "continuousShoulderTopology": true,
+      "mantleContact": "One continuous front/shoulder/back surface; interpolated source shoulder and spine/pelvis weights",
+      "youthCuffCoverage": "Extended .058m and blended to source forearm skin weights",
+      "looseLinen": true,
+      "youthFace": "Shorter, rounder lower face; neutral thinner eyebrows"
+    },
+    {
+      "name": "AdultJesus",
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "exportedRigNode": "GospelRig",
+      "meshes": 10,
+      "vertices": 50583,
+      "triangles": 99084,
+      "bones": 65,
+      "bytes": 6385676,
+      "sha256": "24c9ad27698569f3f06237e457914d579bbba487d10cd5ce657e1ac5e07c1603",
+      "continuousShoulderTopology": true,
+      "mantleContact": "One continuous front/shoulder/back surface; interpolated source shoulder and spine/pelvis weights",
+      "looseLinen": true
+    },
+    {
+      "name": "Mary",
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "exportedRigNode": "GospelRig",
+      "meshes": 11,
+      "vertices": 55107,
+      "triangles": 108286,
+      "bones": 65,
+      "bytes": 6563196,
+      "sha256": "0970b90cae6d944eba6959da63bbb1e7b6ca62eb5d88a1b49e87c0f02b6bcfd5",
+      "continuousShoulderTopology": true,
+      "mantleContact": "One continuous front/shoulder/back surface; interpolated source shoulder and spine/pelvis weights",
+      "looseLinen": true
+    }
+  ],
+  "scope": "Original tailoring/hair adaptation of preserved CC0 anatomy and animation. Artistic interpretation, not a historical portrait.",
+  "renderKind": "Blender shaded art review; Unity gameplay validation is separate.",
+  "status": "ready-for-unity-validation",
+  "visualReview": {
+    "status": "reviewed",
+    "reviewer": "modern_gospel_actor - direct inspection of every listed original Blender render",
+    "reviewedUtc": "2026-10-26T15:27:19.315633+00:00",
+    "images": [
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/AdultJesus-front.png",
+        "sha256": "f4b0d903ec95afd7e7017d0bab2cb59f2a2a0619963bf29181f8fa8966f4d9d5"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/Mary-front.png",
+        "sha256": "8357c6d95dfee2aec00710b7b40982615a69a09182e5f03570b2df57255939fc"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/YoungJesus-JumpAir.png",
+        "sha256": "7b868ee66f5eef7c1780f77d0838d5ec981c3d8e9871b4b927f74c8bee0e691e"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/YoungJesus-Run.png",
+        "sha256": "d1e04c99062b57baf1707f61b6dd731f4ee4920da6810da1fc24f6dd4dd65cae"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/YoungJesus-Walk.png",
+        "sha256": "2dd2909755561a0c4780665f2e65833d417913eb91879d4ce49f61ebce6a6335"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/YoungJesus-face.png",
+        "sha256": "91f2cf08876e18b9b2ca926ff1a897afaf44a98bf21c20c4e647e87811c2013f"
+      },
+      {
+        "path": "Tools/Art/Gospel3D/Previews/Modern/YoungJesus-front.png",
+        "sha256": "399887b08592c3a0eabe91ac9917a24a22893122ecb92bfc3f9ef03566eebf83"
+      }
+    ],
+    "observations": [
+      "Young hero has centre-parted flowing locks, a shorter rounded lower face, softer eyebrows and a clean ivory woven tunic with blue drape.",
+      "Idle, Walk, Run and JumpAir were directly inspected: shoulder and elbow coverage remain closed; the mantle is a single connected front/shoulder/back surface. Torso lean creates a visible cloth compression fold, not a disconnected seam.",
+      "Adult actor has separate adult proportions, beard and crimson drape. Mary has a distinct adult silhouette, full ivory veil, blue drape and longer robe.",
+      "The original source, prior models and earlier art evidence remain preserved in History/before-modern-2026-10-26; unused intermediate render angles were archived separately."
+    ],
+    "limits": [
+      "Artistic depictions, not historically verified facial likenesses.",
+      "Blender reviews do not establish Unity binding/performance, physical-device execution, or user aesthetic approval."
+    ]
+  }
+}

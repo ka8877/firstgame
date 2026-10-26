@@ -191,6 +191,26 @@ namespace FirstGame.Editor
                 EditorUtility.SetDirty(material);
             }
             importer.SaveAndReimport();
+            foreach (string actor in new[] { "AdultJesus", "Mary" })
+            {
+                string actorPath = folder + "/" + actor + ".fbx";
+                if (!File.Exists(actorPath)) throw new InvalidOperationException("Missing distinct adult character: " + actorPath);
+                var actorImporter = AssetImporter.GetAtPath(actorPath) as ModelImporter;
+                if (actorImporter == null) throw new InvalidOperationException("Cannot import adult character: " + actorPath);
+                actorImporter.animationType = ModelImporterAnimationType.Generic;
+                actorImporter.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+                actorImporter.optimizeGameObjects = false;
+                actorImporter.importAnimation = true;
+                actorImporter.importNormals = ModelImporterNormals.Import;
+                actorImporter.importCameras = false; actorImporter.importLights = false;
+                actorImporter.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+                foreach (var entry in palette.materials)
+                {
+                    var material = AssetDatabase.LoadAssetAtPath<Material>(folder + "/" + entry.name + ".mat");
+                    if (material != null) actorImporter.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), entry.name), material);
+                }
+                actorImporter.SaveAndReimport();
+            }
             var animations = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
             AnimationClip FindClip(string name)
             {
@@ -314,30 +334,76 @@ namespace FirstGame.Editor
 
         static TMP_FontAsset CreateFont()
         {
-            const string path = "Assets/Resources/Fonts/Korean.asset";
+            // Source-derived prefill keeps current UI, cards and Scripture available offline.
+            // Dynamic atlases cover later content without shipping every Hangul syllable as pixels.
+            string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→←↑↓①②③④●○−–…+/%";
+            foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
+                if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
+            string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
+            var regular = EnsureModernFont("Korean", "Pretendard-Regular.otf", characters);
+            var display = EnsureModernFont("Display", "Pretendard-SemiBold.otf", characters);
+            // Existing bold labels use an actual designed weight instead of expanding an SDF.
+            regular.fontWeightTable[6].regularTypeface = display;
+            regular.fontWeightTable[7].regularTypeface = display;
+            regular.normalStyle = regular.boldStyle = display.normalStyle = display.boldStyle = 0;
+            foreach (var face in new[] { regular, display })
+            {
+                if (face.material.HasProperty("_WeightNormal")) face.material.SetFloat("_WeightNormal", 0);
+                if (face.material.HasProperty("_WeightBold")) face.material.SetFloat("_WeightBold", 0);
+                EditorUtility.SetDirty(face.material);
+            }
+            EditorUtility.SetDirty(regular); EditorUtility.SetDirty(display);
+            TMP_Settings.defaultFontAsset = regular;
+            EditorUtility.SetDirty(TMP_Settings.instance);
+            return regular;
+        }
+
+        static TMP_FontAsset EnsureModernFont(string name, string sourceFile, string characters)
+        {
+            string path = "Assets/Resources/Fonts/" + name + ".asset";
+            var source = AssetDatabase.LoadAssetAtPath<Font>("Assets/Resources/Fonts/" + sourceFile);
+            if (source == null) throw new InvalidOperationException("Modern Korean source font is missing: " + sourceFile);
             var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
             if (font == null)
             {
-                var source = AssetDatabase.LoadAssetAtPath<Font>("Assets/Resources/Fonts/FirstGameKorean.otf");
-                if (source == null) throw new InvalidOperationException("Korean source font is missing.");
                 font = TMP_FontAsset.CreateFontAsset(source, 48, 6, GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic, true);
-                if (font == null) throw new InvalidOperationException("TMP font generation failed.");
-                font.name = "Korean"; font.isMultiAtlasTexturesEnabled = true;
+                if (font == null) throw new InvalidOperationException("TMP font generation failed: " + sourceFile);
+                font.name = name;
                 AssetDatabase.CreateAsset(font, path);
                 AssetDatabase.AddObjectToAsset(font.material, font);
                 foreach (var texture in font.atlasTextures) AssetDatabase.AddObjectToAsset(texture, font);
             }
-            string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→①②③●○−–";
-            foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
-                if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
-            string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
+            else if (font.sourceFontFile != source)
+            {
+                // Preserve Korean.asset's GUID, material and atlas subasset identities.
+                // TMP's source setter is internal in the pinned Unity 6000.3 package;
+                // its Editor setter updates both the live Font and persistent source GUID.
+                var sourceProperty = typeof(TMP_FontAsset).GetProperty("SourceFont_EditorRef",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (sourceProperty == null) throw new InvalidOperationException("TMP source-font migration API changed.");
+                var metrics = TMP_FontAsset.CreateFontAsset(source, 48, 6, GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic, true);
+                if (metrics == null) throw new InvalidOperationException("Cannot load modern font metrics: " + sourceFile);
+                try
+                {
+                    sourceProperty.SetValue(font, source);
+                    font.atlasPopulationMode = AtlasPopulationMode.Dynamic;
+                    font.faceInfo = metrics.faceInfo;
+                    font.ClearFontAssetData(true);
+                }
+                finally
+                {
+                    foreach (var texture in metrics.atlasTextures) UnityEngine.Object.DestroyImmediate(texture);
+                    UnityEngine.Object.DestroyImmediate(metrics.material);
+                    UnityEngine.Object.DestroyImmediate(metrics);
+                }
+            }
+            font.name = name;
+            font.isMultiAtlasTexturesEnabled = true;
             if (!font.TryAddCharacters(characters, out string missing))
                 Debug.LogWarning("Font does not contain these optional source symbols: " + missing);
             foreach (var texture in font.atlasTextures)
                 if (!AssetDatabase.Contains(texture)) AssetDatabase.AddObjectToAsset(texture, font);
             EditorUtility.SetDirty(font);
-            TMP_Settings.defaultFontAsset = font;
-            EditorUtility.SetDirty(TMP_Settings.instance);
             return font;
         }
 

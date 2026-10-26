@@ -1,0 +1,43 @@
+{
+  "revision": "gospel-remaster-2026-10-26",
+  "scope": "Compare deformed original editable mesh against joined production mesh at authored Idle/Walk/Run sample frames; nearest surface vertex distance.",
+  "status": "passed",
+  "samples": [
+    {
+      "pose": "YoungJesus_Idle",
+      "beforeVertices": 14565,
+      "afterVertices": 14565,
+      "maxSurfaceDriftMeters": 2.401516780992097e-07
+    },
+    {
+      "pose": "YoungJesus_Walk",
+      "beforeVertices": 14565,
+      "afterVertices": 14565,
+      "maxSurfaceDriftMeters": 2.425733214295178e-07
+    },
+    {
+      "pose": "YoungJesus_Run",
+      "beforeVertices": 14565,
+      "afterVertices": 14565,
+      "maxSurfaceDriftMeters": 2.4978896817628993e-07
+    },
+    {
+      "pose": "AdultJesus_Idle",
+      "beforeVertices": 15459,
+      "afterVertices": 15459,
+      "maxSurfaceDriftMeters": 5.972094641037984e-08
+    },
+    {
+      "pose": "AdultJesus_Walk",
+      "beforeVertices": 15459,
+      "afterVertices": 15459,
+      "maxSurfaceDriftMeters": 3.4142850324769825e-08
+    },
+    {
+      "pose": "AdultJesus_Run",
+      "beforeVertices": 15459,
+      "afterVertices": 15459,
+      "maxSurfaceDriftMeters": 1.1920928955078125e-07
+    }
+  ]
+}

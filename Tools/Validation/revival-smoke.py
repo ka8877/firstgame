@@ -19,6 +19,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import statistics
 import sys
 import threading
 import time
@@ -33,8 +34,12 @@ SPEC.loader.exec_module(BASE)
 ERROR_SPEC = importlib.util.spec_from_file_location("fm_provider_errors", Path(__file__).with_name("fm-provider-errors.py"))
 PROVIDER_ERRORS = importlib.util.module_from_spec(ERROR_SPEC)
 ERROR_SPEC.loader.exec_module(PROVIDER_ERRORS)
+LOCAL_ERROR_SPEC = importlib.util.spec_from_file_location("fm_local_media_errors", Path(__file__).with_name("fm-local-media-errors.py"))
+LOCAL_ERRORS = importlib.util.module_from_spec(LOCAL_ERROR_SPEC)
+LOCAL_ERROR_SPEC.loader.exec_module(LOCAL_ERRORS)
 ROOT = Path(__file__).resolve().parents[2]
 REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 REQUIRED_CHECKPOINTS = {
     "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
     "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
@@ -74,13 +79,58 @@ def runtime_files(folder):
     return BASE.runtime_entries(BASE.build_fingerprint(folder))
 
 
+def media_audio_summary(snapshots):
+    """Observe the real local HTML media source through its unchanged WebAudio route."""
+    frames, errors = [], []
+    for snapshot in snapshots:
+        errors.extend(snapshot.get("errors", []))
+        for context in snapshot["contexts"]:
+            sources = [source for source in context.get("media", []) if not source["paused"]
+                       and not source["ended"] and source["loop"] and (source["duration"] or 0) >= 30]
+            for source in sources:
+                reachable = BASE.audio_reachable(context, source["nodeId"])
+                outputs = {a for a, b, _, _ in context["connections"]
+                           if a in reachable and b == context["destinationNodeId"]}
+                routes = [route for route in context["destinationRoutes"] if route["sourceNodeId"] in outputs]
+                channels = [channel for route in routes for channel in route["channels"]]
+                if not channels:
+                    continue
+                shared = [other["nodeId"] for other in sources if other is not source and
+                          outputs.intersection(BASE.audio_reachable(context, other["nodeId"]))]
+                shared += [other["nodeId"] for other in context["buffers"] if
+                           BASE.active_audio_buffer(other, context["currentTime"]) and
+                           outputs.intersection(BASE.audio_reachable(context, other["nodeId"]))]
+                frames.append({"wallTimeMs": snapshot["wallTimeMs"], "contextId": context["id"],
+                    "contextState": context["state"], "sourceNodeId": source["nodeId"], "source": source,
+                    "sharedWithOtherSourceNodeIds": shared,
+                    "rms": (sum(c["rms"] ** 2 for c in channels) / len(channels)) ** .5,
+                    "nonfiniteSamples": sum(c["nonfinite"] for c in channels)})
+    values = [frame["rms"] for frame in frames]
+    identities = sorted({(frame["contextId"], frame["sourceNodeId"]) for frame in frames})
+    return {"frames": frames, "observerErrors": sorted(set(errors)),
+        "sourceIdentities": [list(identity) for identity in identities], "sampleCount": len(frames),
+        "medianRms": statistics.median(values) if values else 0, "maximumRms": max(values, default=0),
+        "audibleSampleFraction": sum(value > 1e-5 for value in values) / len(values) if values else 0,
+        "allContextsRunning": bool(frames) and all(frame["contextState"] == "running" for frame in frames),
+        "isolatedMusicRoute": bool(frames) and not any(frame["sharedWithOtherSourceNodeIds"] for frame in frames),
+        "sourceUrls": sorted({frame["source"]["currentSrc"] for frame in frames}),
+        "mediaProgressSeconds": sum((b["source"]["currentTime"] - a["source"]["currentTime"]) % b["source"]["duration"]
+            for a, b in zip(frames, frames[1:])) if frames and len(identities) == 1 else 0,
+        "nonfiniteSamples": sum(frame["nonfiniteSamples"] for frame in frames)}
+
+
 class JourneySmoke:
     def __init__(self, page, args, plan, output):
         self.page, self.args, self.plan, self.output = page, args, plan, output
         self.navigation, self.started = 0, time.monotonic()
         self.capture_keys = []
-        self.report = {"game": args.game, "revision": REVISIONS[args.game], "status": "running",
-            "suite": "remaster-real-input-v1", "startedUtc": now(), "profile": args.profile,
+        self.pending_compositor_frames = []
+        self.modern = plan.get("suite") == "modern-real-input-v1"
+        # Attach while the page is still idle, before any short transient input.
+        # A late CDP attach can consume an entire jump on a software renderer.
+        self.raw_capture_session = page.context.new_cdp_session(page) if self.modern and args.game == "PathOfDawn" else None
+        self.report = {"game": args.game, "revision": plan.get("revision", REVISIONS[args.game]), "status": "running",
+            "suite": plan.get("suite", "remaster-real-input-v1"), "startedUtc": now(), "profile": args.profile,
             "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
             "console": [], "pageErrors": [], "failedRequests": [], "networkResponses": [], "httpErrors": [],
             "unityConfigurations": [], "checkpoints": [], "audioEvidence": {"windows": []},
@@ -95,15 +145,21 @@ class JourneySmoke:
         observer = ROOT / "Tools/Validation/webaudio-observer.js"
         page.add_init_script(path=str(observer))
         self.report["audioEvidence"].update(observer=str(observer.relative_to(ROOT)), observerSha256=digest(observer))
-        if args.game == "FantasyCards":
+        if args.game == "FantasyCards" and not self.modern:
             music_observer = ROOT / "Tools/Validation/fm-music-observer.js"
             page.add_init_script(path=str(music_observer))
             self.report["audioEvidence"]["providerObserver"] = {"file": str(music_observer.relative_to(ROOT)), "sha256": digest(music_observer)}
+        if args.game == "FantasyCards" and self.modern:
+            local_observer = ROOT / "Tools/Validation/fm-local-media-observer.js"
+            page.add_init_script(path=str(local_observer))
+            self.report["audioEvidence"]["localMediaObserver"] = {"file": str(local_observer.relative_to(ROOT)), "sha256": digest(local_observer)}
+            self.report["harness"]["localMediaClassifier"] = {"file": str(Path(LOCAL_ERRORS.__file__).relative_to(ROOT)), "sha256": digest(LOCAL_ERRORS.__file__)}
         page.on("console", lambda message: self.report["console"].append({"type": message.type,
             "text": message.text, "location": message.location, "navigation": self.navigation}))
         page.on("pageerror", lambda error: self.report["pageErrors"].append({"message": str(error), "stack": getattr(error, "stack", "")}))
         page.on("requestfailed", lambda request: self.report["failedRequests"].append({"url": request.url,
-            "error": request.failure, "method": request.method, "navigation": self.navigation}))
+            "error": request.failure, "method": request.method, "resourceType": request.resource_type,
+            "observedEpochMs": time.time() * 1000, "navigation": self.navigation}))
         page.on("response", self.response)
         page.on("dialog", lambda dialog: (self.report["pageErrors"].append(dialog.message), dialog.dismiss()))
         self.persist()
@@ -132,6 +188,7 @@ class JourneySmoke:
 
     def loaded(self, reload=False):
         if reload:
+            self.local_media_timeline()
             self.navigation += 1
             self.page.reload(wait_until="domcontentloaded")
         self.page.wait_for_function("""() => {
@@ -173,13 +230,14 @@ class JourneySmoke:
             # CDP reads original compositor pixels without font/layout waits.
             box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
                        if shot["name"] == "temple-idle")
-            session = self.page.context.new_cdp_session(self.page)
+            session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
             try:
                 capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
                     "captureBeyondViewport": False, "clip": {**box, "scale": 1}})
                 path.write_bytes(base64.b64decode(capture["data"]))
             finally:
-                session.detach()
+                if session is not self.raw_capture_session:
+                    session.detach()
                 for key in reversed(self.capture_keys):
                     self.page.keyboard.up(key)
                 if self.capture_keys:
@@ -305,7 +363,52 @@ class JourneySmoke:
                                    **evidence})
         self.persist()
 
+    def compositor_input(self, action):
+        """Capture every actual compositor PNG before real input; reviewer selects pixels."""
+        session = self.raw_capture_session
+        if session is None or self.pending_compositor_frames:
+            raise ValueError("Compositor capture needs the modern Gospel session and no pending burst")
+        box = self.page.locator("#unity-canvas").bounding_box()
+        raw = []
+        def frame(event):
+            raw.append({"data": event["data"], "metadata": event["metadata"], "receivedUtc": now()})
+            session.send("Page.screencastFrameAck", {"sessionId": event["sessionId"]})
+        session.on("Page.screencastFrame", frame)
+        burst = {"startedUtc": now(), "input": action, "navigation": self.navigation,
+                 "method": "Page.startScreencast PNG everyNthFrame=1 before ordinary input; immediate frame ACK; all frames retained without editing."}
+        session.send("Page.startScreencast", {"format": "png", "maxWidth": self.page.viewport_size["width"],
+                     "maxHeight": self.page.viewport_size["height"], "everyNthFrame": 1})
+        try:
+            self.input({k:v for k,v in action.items() if k != "captureCompositorBurst"})
+            self.page.wait_for_timeout(2600)
+        finally:
+            session.send("Page.stopScreencast")
+            session.remove_listener("Page.screencastFrame", frame)
+            for key in reversed(self.capture_keys):
+                self.page.keyboard.up(key)
+            self.capture_keys = []
+        burst["endedUtc"] = now()
+        shots = []
+        for index, original in enumerate(raw):
+            name = "jump-air-compositor-" + str(len(self.report.get("compositorBursts", []))) + "-" + str(index).zfill(3)
+            path = self.output / (name + ".png")
+            path.write_bytes(base64.b64decode(original.pop("data")))
+            with Image.open(path) as pixels:
+                shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
+                    "size": list(pixels.size), "channelStddev": ImageStat.Stat(pixels.convert("RGB")).stddev,
+                    "canvas": box, "navigation": self.navigation,
+                    "captureKind": "original-full-viewport-compositor-screencast-png", **original}
+            shots.append(shot)
+        self.check(bool(shots), "Before-input compositor burst has actual original PNG frames", {"frames":len(shots)})
+        burst["frames"] = shots
+        self.report.setdefault("compositorBursts", []).append(burst)
+        self.report["screenshots"].extend(shots)
+        self.pending_compositor_frames = shots
+        self.persist()
+
     def input(self, action):
+        if action.get("captureCompositorBurst"):
+            return self.compositor_input(action)
         if "repeat" in action:
             repetitions = action["repeat"]
             if not isinstance(repetitions, int) or not 1 <= repetitions <= 80:
@@ -325,14 +428,20 @@ class JourneySmoke:
             self.page.keyboard.press(action["key"])
         elif kind == "text":
             self.page.keyboard.type(action["text"], delay=60)
+        elif kind == "wait":
+            self.page.wait_for_timeout(action["ms"])
         elif kind == "dom_click":
             self.page.locator(action["selector"]).click()
+        elif kind == "wheel":
+            self.page.mouse.move(*self.point(*action["point"]))
+            self.page.mouse.wheel(action.get("deltaX", 0), action["deltaY"])
         elif kind == "hold":
             keys = action["keys"]
             for key in keys:
                 self.page.keyboard.down(key)
             try:
-                self.page.wait_for_timeout(action["ms"])
+                if action["ms"] > 0:
+                    self.page.wait_for_timeout(action["ms"])
             except BaseException:
                 for key in reversed(keys):
                     self.page.keyboard.up(key)
@@ -356,8 +465,11 @@ class JourneySmoke:
                 session.detach()
         else:
             raise ValueError("Unsupported real input action: " + kind)
+        if action.get("renderFrameBeforeCapture"):
+            record["naturalAnimationFrameAtMs"] = self.page.evaluate("() => new Promise(resolve => requestAnimationFrame(time => resolve(time)))")
         self.report["input"].append(record)
-        self.page.wait_for_timeout(action.get("settleMs", 450))
+        if action.get("settleMs", 450) > 0:
+            self.page.wait_for_timeout(action.get("settleMs", 450))
         if kind == "click" and self.args.profile != "mobile-landscape":
             # Keep the release over the button until Unity has consumed it.
             self.page.mouse.move(*self.point(.005, .005))
@@ -378,10 +490,15 @@ class JourneySmoke:
         attempt = 0
         while True:
             name = step["name"] + ("-adjusted-" + str(attempt) if attempt else "")
-            shot = self.screenshot(name)
+            candidates = self.pending_compositor_frames if step["name"] == "jump-air" else []
+            self.pending_compositor_frames = []
+            shot = candidates[0] if candidates else self.screenshot(name)
             resume = self.output / (name + ".review.json")
             entry = {"name": name, "expected": step["expected"], "original": shot,
                      "reviewFile": str(resume.relative_to(ROOT)), "status": "pending", "navigation": self.navigation}
+            if candidates:
+                entry["candidateOriginals"] = candidates
+                entry["selectionMethod"] = "Reviewer directly inspects all unedited original compositor frames and selects exact frameSha256; no inferred airborne state."
             self.report["checkpoints"].append(entry)
             self.report["pendingReview"] = entry
             self.persist()
@@ -399,6 +516,11 @@ class JourneySmoke:
                 attempt += 1
                 self.persist()
                 continue
+            if candidates:
+                selected = next((frame for frame in candidates if frame["sha256"] == decision.get("frameSha256")), None)
+                if selected:
+                    shot = selected
+                    entry["original"] = shot
             valid = (decision.get("status") == "approved" and decision.get("frameSha256") == shot["sha256"]
                      and decision.get("reviewer") and decision.get("reviewedUtc") and decision.get("observed")
                      and decision.get("expected") == step["expected"])
@@ -408,12 +530,28 @@ class JourneySmoke:
             return
 
     def audio(self, label):
-        snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 2200)
-        summary = BASE.music_audio_summary(snapshots)
+        started_epoch_ms = time.time() * 1000
+        # The software renderer can delay main-thread timer snapshots. Keep the
+        # six-sample PCM predicate and observe longer instead of lowering it.
+        window_ms = 8000 if self.modern and self.args.game == "PathOfDawn" and label not in ("before-first-gesture", "muted") else 2200
+        snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
+        local_media = self.modern and self.args.game == "FantasyCards"
+        summary = media_audio_summary(snapshots) if local_media else BASE.music_audio_summary(snapshots)
+        acquisition_windows = [window_ms]
+        # Keep every sample and every predicate. A busy software renderer can
+        # produce fewer than six observations in eight seconds; extend passive
+        # acquisition, bounded to 24 requested seconds, rather than infer sound.
+        if self.modern and self.args.game == "PathOfDawn" and label not in ("before-first-gesture", "muted"):
+            while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
+                snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
+                acquisition_windows.append(4000)
+                summary = BASE.music_audio_summary(snapshots)
         path = self.output / ("audio-" + str(self.navigation) + "-" + label + ".json")
-        path.write_text(json.dumps({"label": label, "snapshots": snapshots, "summary": summary}, indent=2) + "\n")
+        path.write_text(json.dumps({"label": label, "requestedWindowMs": sum(acquisition_windows),
+            "acquisitionWindowsMs": acquisition_windows, "snapshots": snapshots, "summary": summary}, indent=2) + "\n")
         evidence = {k: v for k, v in summary.items() if k != "frames"}
-        evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation)
+        evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
+                        startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
         self.report["audioEvidence"]["windows"].append(evidence)
         self.check(not evidence["observerErrors"] and evidence["nonfiniteSamples"] == 0,
                    "Passive audio observer captured valid PCM: " + label, evidence)
@@ -426,6 +564,10 @@ class JourneySmoke:
                        and evidence["isolatedMusicRoute"] and len(evidence["sourceIdentities"]) == 1
                        and evidence["audibleSampleFraction"] >= .5 and evidence["medianRms"] > 1e-5,
                        "Actual looping BGM is audible after user input: " + label, evidence)
+            if local_media:
+                self.check(evidence["mediaProgressSeconds"] > .5 and evidence["sourceUrls"]
+                           and all("/StreamingAssets/Audio/ModernCard/" in url for url in evidence["sourceUrls"]),
+                           "Audible BGM comes from advancing bundled instrumental media: " + label, evidence)
 
     def public_bytes(self, url):
         files = []
@@ -445,12 +587,44 @@ class JourneySmoke:
                        "Public runtime matches the final local build: " + expected["file"], actual)
         self.report["publicDelivery"] = {"status": "passed", "files": files, "gameUrl": url}
 
+    def local_media_timeline(self):
+        if not(self.modern and self.args.game == "FantasyCards"):
+            return []
+        raw = self.page.evaluate("() => window.__firstGameLocalMediaEvidence?.snapshot() || null")
+        if raw is not None:
+            raw["navigation"] = self.navigation
+            for row in raw["observations"]:
+                row["navigation"] = self.navigation
+            path = self.output / ("local-media-" + str(self.navigation) + ".json")
+            path.write_text(json.dumps(raw, ensure_ascii=False, indent=2) + "\n")
+            refs = self.report["audioEvidence"].setdefault("localMediaTimelines", [])
+            refs[:] = [item for item in refs if item["navigation"] != self.navigation]
+            refs.append({"navigation": self.navigation, "rawEvidence": path.name, "sha256": digest(path)})
+            self.persist()
+        observations = []
+        for item in self.report["audioEvidence"].get("localMediaTimelines", []):
+            observations.extend(json.loads((self.output / item["rawEvidence"]).read_text())["observations"])
+        return observations
+
     def network_check(self):
-        expected, unexpected, external = [], [], []
+        expected, unexpected, external, local_cancellations, preload_cancellations = [], [], [], [], []
+        observations = self.local_media_timeline()
         for failed in self.report["failedRequests"]:
             nav, url = failed["navigation"], failed["url"]
             if self.music_service(url):
                 external.append(failed)
+                continue
+            local = LOCAL_ERRORS.inactive_local_media_cancellation(self.args.game, self.report["revision"], self.report["suite"],
+                failed, self.game_url, self.report["buildFingerprint"]["files"], observations,
+                self.report["audioEvidence"]["windows"])
+            if local:
+                local_cancellations.append(local)
+                continue
+            preload = LOCAL_ERRORS.inactive_local_media_preload_cancellation(self.args.game, self.report["revision"], self.report["suite"],
+                failed, self.game_url, self.report["buildFingerprint"]["files"], observations,
+                self.report["audioEvidence"]["windows"])
+            if preload:
+                preload_cancellations.append(preload)
                 continue
             exact = any(c.get("navigation") == nav and c.get("dataUrl") == url for c in self.report["unityConfigurations"])
             http304 = any(r["navigation"] == nav and r["url"] == url and r["status"] == 304 for r in self.report["networkResponses"])
@@ -460,22 +634,30 @@ class JourneySmoke:
                            for c in self.report["checkpoints"])
             (expected if nav > 0 and failed["method"] == "GET" and failed["error"] == "net::ERR_ABORTED"
              and exact and http304 and cached and restored else unexpected).append(failed)
-        diagnostic = {"verifiedUnityCacheRevalidationAborts": expected, "unexpectedFailures": unexpected,
+        diagnostic = {"verifiedUnityCacheRevalidationAborts": expected, "verifiedInactiveLocalMediaCancellations": local_cancellations,
+                      "verifiedInactiveLocalPreloadCancellations": preload_cancellations, "unexpectedFailures": unexpected,
                       "externalMusicServiceFailures": external}
         self.report["networkDiagnostic"] = diagnostic
-        self.check(not unexpected, "No unexpected failed requests; raw cache aborts retained", diagnostic)
+        self.check(not unexpected, "No unexpected failed requests; exact proved cache/local-media cancellations retained", diagnostic)
 
     def music_service(self, url):
         host = urllib.parse.urlsplit(url).hostname or ""
-        return self.args.game == "FantasyCards" and any(host == domain or host.endswith("." + domain)
+        return not self.modern and self.args.game == "FantasyCards" and any(host == domain or host.endswith("." + domain)
             for domain in ("soundcloud.com", "sndcdn.com"))
 
     def run(self, url):
+        self.game_url = url
         try:
             if self.args.base_url:
                 self.public_bytes(url)
             self.page.goto(url, wait_until="domcontentloaded", timeout=self.args.timeout * 1000)
-            if self.args.game == "FantasyCards": self.first_original_music_gesture()
+            if self.args.game == "FantasyCards":
+                if self.modern:
+                    self.page.locator("#fm-loading-start").wait_for(state="visible", timeout=self.args.timeout * 1000)
+                    self.page.locator("#fm-loading-start").click()
+                    self.report["input"].append({"type": "DOM-button-click", "selector": "#fm-loading-start", "atUtc": now()})
+                else:
+                    self.first_original_music_gesture()
             self.loaded()
             for step in self.plan["steps"]:
                 if step.get("profile") and step["profile"] != self.args.profile:
@@ -485,7 +667,7 @@ class JourneySmoke:
                 elif kind == "audio": self.audio(step["label"])
                 elif kind == "provider_audio": self.provider_audio(step)
                 elif kind == "provider_ready": self.provider_ready()
-                elif kind == "provider_state": self.provider_state(step)
+                elif kind in ("provider_state", "music_state"): self.provider_state(step)
                 elif kind == "reload": self.loaded(reload=True)
                 elif kind == "wait": self.page.wait_for_timeout(step["ms"])
                 else: self.input(step)
@@ -500,6 +682,12 @@ class JourneySmoke:
             self.check(not [m for m in self.report["console"] if m["type"] == "error" and m not in external_errors],
                        "No game-runtime browser console errors")
             self.network_check()
+            if self.modern and self.args.game == "FantasyCards":
+                external = [entry for entry in self.report["networkResponses"]
+                            if any((urllib.parse.urlsplit(entry["url"]).hostname or "").endswith(host)
+                                   for host in ("soundcloud.com", "sndcdn.com"))]
+                self.check(not external and self.page.locator('iframe[src*="soundcloud"]').count() == 0,
+                           "Normal play has no external music widget, stream or spoken provider announcement", external)
             reviews = [c for c in self.report["checkpoints"] if c["status"] == "approved"]
             self.report["visualReview"] = {"status": "approved", "reviewer": "; ".join(sorted({c["review"]["reviewer"] for c in reviews})),
                 "reviewedUtc": now(), "runtimeFiles": self.report["buildFingerprint"]["files"],
@@ -544,7 +732,11 @@ def main():
     plans = json.loads(args.plan.read_text())
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
-    if not REQUIRED_CHECKPOINTS[args.game].issubset(checkpoints):
+    modern = plan.get("suite") == "modern-real-input-v1"
+    if modern and plan.get("revision") != MODERN_REVISIONS[args.game]:
+        parser.error("The modern plan revision differs from the current modern build")
+    required = set(plan.get("requiredCheckpoints", [])) if modern else REQUIRED_CHECKPOINTS[args.game]
+    if not required or not required.issubset(checkpoints):
         parser.error("The authored plan lacks required current-game checkpoints")
     output = args.output / args.game
     previous = BASE.archive_previous_run(output)

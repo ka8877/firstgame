@@ -55,19 +55,19 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 
 | 게임 | 현재 실행·제작 기준 |
 |---|---|
-| FantasyCards | `FantasyCardsApp`의 remaster 타이틀·로비·대전실·전장. `Resources/Art/Revival`의 원작 GIF 무손실 디코딩 PNG, 원작 카드 161종과 기존 Core |
+| FantasyCards | `FantasyCardsApp`의 modern 타이틀·로비·대전실·전장. 새 `Resources/Art/ModernRemaster` 원화와 기존 원작 카드 161종·Core, Pretendard, 로컬 연주곡 |
 | PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·이동/점프/착지/선택 연습 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
 
 일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 새 3D 인물의 재생성과 import 계약은 [Gospel3DArt](Gospel3DArt.md)를 따른다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
-원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 카드 Web은 SOUND-I 공식 SoundCloud 임베드와 장면 브리지를 사용하므로 해당 서비스에 접속할 수 있어야 한다. 플레이어 재생 버튼·음량·장면별 곡 전환을 실제 브라우저에서 확인한다. 네이티브에서는 외부 공식 플레이어 없이 이전 창작곡을 원작곡으로 대체하지 않는다.
+원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 현재 카드 Web/Windows는 네 개의 로컬 창작 연주곡을 포함한다. 외부 SoundCloud 임베드·SDK는 일반 플레이에서 사용하지 않는다. 실제 첫 입력·음소거·음량·장면별 전환을 출력과 함께 확인한다. 원작 공식 트랙은 조사 이력의 링크이며 새 창작곡을 원작곡으로 표시하지 않는다.
 
 예수님의 길은 로컬 BGM을 사용하고 브라우저 첫 입력 후 시작한다. 이전 20줄의 창작 대사 음성을 새 성경 본문에 자동 연결하지 않는다. 읽는 구절과 문맥 요약은 분리하며 `성경전서 개역한글판 · 대한성서공회`를 표시한다.
 
 ## 입력·저장
 
 - 카드: 마우스·터치로 방과 덱을 선택한다. 손패와 전열, 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작한다.
-- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠로 거리 조절, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작 버튼이다.
+- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠/화면 버튼/설정 슬라이더로 1.8–8m 줌, I 상태창, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작·줌·상태 버튼이다.
 - 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
 - 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.
 - Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 `저장 옮기기`는 무결성·버전·실제 상태를 검증한 뒤 가져온다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.
@@ -75,7 +75,7 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 
 ## 빌드·배포·산출물
 
-Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGame` WebGL 템플릿은 화면 비율·로딩·오류를 표시한다. 한국어 글꼴과 3D/카드 에셋은 로컬에 포함하고, 카드 원작곡만 공식 외부 플레이어에 연결한다. 실행 중 생성형 AI API는 요구하지 않는다.
+Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGame` WebGL 템플릿은 화면 비율·로딩·오류를 표시한다. 한국어 글꼴과 3D/카드 에셋은 로컬에 포함하고, 두 게임의 연주곡을 모두 번들에 포함한다. 실행 중 생성형 AI API는 요구하지 않는다.
 
 프로젝트별 품질 설정은 `ProjectSetup`과 생성된 URP 에셋이 기준이다. 카드의 Web renderScale은 0.8, 새 성경 여정의 Web은 1.0이며 실제 기기의 성능을 별도로 측정해야 한다. Windows 1080p60은 목표이고 클라우드 llvmpipe의 결과를 실물 기기 성능으로 주장하지 않는다. Blender 미리보기와 실제 Unity·웹 캡처를 구분한다.
 
@@ -90,3 +90,5 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 `unity-task.sh <Game> edit-tests`는 순수 규칙 테스트 네임스페이스를, `play-tests`는 새 `FantasyCardsRevivalSmokeTests` 또는 `GospelJourneySmokeTests` UI 경로를 선택합니다. 이전 아바타/관찰자 진입점의 UI fixture는 보존된 제작 이력이며 현재 Boot 검증으로 실행하지 않습니다. 새 규칙·저장 전체는 `run-core-tests.sh`로 함께 검사합니다.
 
 정적 CardAsset 의미 검증(`Tools/Validation/verify-card-authoring.py`)은 PyYAML을 사용한다. 현재 클라우드 검증 버전은 PyYAML 6.0.3이며, Unity를 실행하거나 생성 에셋을 다시 쓰지 않고 전체 필드와 그림 참조를 검사한다.
+
+현재 디자인판은 `Tools/Validation/modern-smoke-plans.json`과 `modern-public-plans.json`으로 실제 입력/원본 화면/로컬 음악 출력을 검사한다. `summarize-modern-release.py`로 현재 근거를 정리하며 이전 Remaster의 외부 음악/이전 모델 고정 검사를 현재 결과로 쓰지 않는다.

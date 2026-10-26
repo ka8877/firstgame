@@ -1,5 +1,5 @@
 {
-  "revision": "gospel-remaster-2026-10-26",
+  "revision": "gospel-modern-2026-10-26",
   "source": "Quaternius Universal Base Characters + Universal Animation Library Standard",
   "license": "CC0-1.0",
   "actors": [
@@ -10,9 +10,9 @@
       "forward": "Unity +Z",
       "rig": "Generic",
       "bones": 65,
-      "vertices": 14565,
-      "triangles": 28250,
-      "meshes": 8,
+      "vertices": 49937,
+      "triangles": 98028,
+      "meshes": 10,
       "clips": [
         {
           "name": "Idle",
@@ -86,8 +86,12 @@
           "loop": false
         }
       ],
-      "bytes": 3970188,
-      "materialSlots": 10
+      "bytes": 6277036,
+      "materialSlots": 10,
+      "sha256": "52de9d36ecf387140e8f8f87c7e50b448069deb10c9321f4066eb9365b9ddfe4",
+      "youthCuffCoverage": "Extended .058m and blended to source forearm skin weights",
+      "looseLinen": true,
+      "youthFace": "Shorter, rounder lower face; neutral thinner eyebrows"
     },
     {
       "name": "AdultJesus",
@@ -96,8 +100,8 @@
       "forward": "Unity +Z",
       "rig": "Generic",
       "bones": 65,
-      "vertices": 15459,
-      "triangles": 29876,
+      "vertices": 50583,
+      "triangles": 99162,
       "meshes": 10,
       "clips": [
         {
@@ -172,8 +176,99 @@
           "loop": false
         }
       ],
-      "bytes": 4152380,
-      "materialSlots": 12
+      "bytes": 6385660,
+      "materialSlots": 12,
+      "sha256": "0cc152e5d59dcb1b4aa608b9eb7137c9cf3a534f54431b43ea9967873ea21a55",
+      "looseLinen": true
+    },
+    {
+      "name": "Mary",
+      "resource": "Art/Gospel3D/Mary",
+      "heightMeters": 1.62,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 55107,
+      "triangles": 108364,
+      "meshes": 11,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "AdultJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "AdultJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "AdultJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "AdultJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "AdultJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "AdultJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "AdultJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
+        }
+      ],
+      "bytes": 6563804,
+      "materialSlots": 12,
+      "depiction": "Original veiled adult adaptation, not a historical portrait",
+      "sha256": "c32cc9bbf9266885c61935d4cdc3bec0656e6499742428b2fea0fc40930960b5",
+      "looseLinen": true
     }
   ],
   "renderKind": "Blender art review, not Unity gameplay"

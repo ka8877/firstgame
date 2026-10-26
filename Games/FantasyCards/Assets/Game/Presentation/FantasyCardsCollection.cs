@@ -39,7 +39,7 @@ namespace FantasyCards.Presentation
             bool small = canvas.pixelRect.height < 600;
             var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + CollectionPageSize - 1) / CollectionPageSize);
             collectionPage = Mathf.Clamp(collectionPage, 0, pages - 1);
-            Text(root, edit ? "DECK EDITOR · 덱 편집" : "CARD COLLECTION · 카드 도감", .035f, .913f, .81f, .988f, 38, ivory);
+            Text(root, edit ? "덱 편집" : "카드 도감", .035f, .913f, .81f, .988f, 38, ivory);
             string totals = edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · " + DeckKindCounts(customDeck)
                 : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종" + (small ? "" : " · 그림과 적용 수치 확인");
             ReadableText(root, totals, .04f, .849f, small ? .64f : .81f, .913f, 23, gold);
@@ -108,12 +108,12 @@ namespace FantasyCards.Presentation
 
         private void CollectionSearchField(bool edit)
         {
-            var area = Panel(root, .035f, .761f, .533f, .837f, new Color(.025f, .029f, .022f));
-            area.gameObject.name = "Card search input"; area.GetComponent<Image>().raycastTarget = true; Frame(area, new Color(.51f, .42f, .25f), 1);
+            var area = Panel(root, .035f, .761f, .533f, .837f, new Color(.065f, .105f, .15f));
+            area.gameObject.name = "Card search input"; area.GetComponent<Image>().raycastTarget = true; Frame(area, new Color(.55f, .72f, .80f, .40f), 1);
             var input = area.gameObject.AddComponent<TMP_InputField>();
             var viewport = Panel(area, .025f, .08f, .975f, .92f, Color.clear); viewport.gameObject.AddComponent<RectMask2D>();
             var label = Text(viewport, "", 0, 0, 1, 1, 25, ivory); label.enableAutoSizing = false;
-            var placeholder = Text(viewport, "카드 이름 · 효과 검색", 0, 0, 1, 1, 24, new Color(.58f, .57f, .47f));
+            var placeholder = Text(viewport, "카드 이름 · 효과 검색", 0, 0, 1, 1, 24, new Color(.60f, .72f, .80f));
             input.textViewport = viewport; input.textComponent = label; input.placeholder = placeholder;
             input.lineType = TMP_InputField.LineType.SingleLine; input.characterLimit = 64; input.SetTextWithoutNotify(collectionSearchDraft);
             input.onValueChanged.AddListener(value => collectionSearchDraft = value);

@@ -9,12 +9,19 @@ namespace PathOfDawn.Presentation
     internal sealed class DawnUi
     {
         public TMP_FontAsset Font;
+        public TMP_FontAsset DisplayFont;
         public float TextScale = 1;
+        public bool ModernStyle;
         public Action BeforeInteraction;
         public static readonly Color Ink = new Color(.075f, .115f, .20f, .95f);
         public static readonly Color Paper = new Color(.99f, .97f, .91f);
         public static readonly Color Gold = new Color(.98f, .78f, .43f);
         public static readonly Color Teal = new Color(.42f, .84f, .79f);
+        public static readonly Color ModernInk = new Color(.10f,.15f,.17f);
+        public static readonly Color ModernPaper = new Color(.97f,.96f,.92f);
+        public static readonly Color ModernGold = new Color(.89f,.80f,.61f);
+        public static readonly Color ModernTeal = new Color(.37f,.69f,.65f);
+        public static readonly Color ModernPanel = new Color(.075f,.105f,.12f,.94f);
         static Sprite rounded;
 
         static Sprite Rounded
@@ -50,14 +57,15 @@ namespace PathOfDawn.Presentation
         }
         public RectTransform Card(Transform parent, string name, float x, float y, float w, float h, Color? color = null)
         {
-            var r = Box(parent, name, x, y, w, h, color ?? Ink);
+            var r = Box(parent, name, x, y, w, h, color ?? (ModernStyle ? ModernPanel : Ink));
             var image = r.GetComponent<Image>(); image.sprite = Rounded; image.type = Image.Type.Sliced;
-            float radius = Mathf.Min(30, h * .35f);
+            float radius = Mathf.Min(ModernStyle ? 14 : 30, h * .35f);
             image.pixelsPerUnitMultiplier = 22 / radius;
             var shadow = r.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.025f,.045f,.10f,.23f);
-            shadow.effectDistance = new Vector2(0, -5); shadow.useGraphicAlpha = true;
+            shadow.effectDistance = new Vector2(0, ModernStyle ? -3 : -5); shadow.useGraphicAlpha = true;
             var trim = Fill(r, "Woven light edge").gameObject.AddComponent<DawnFrame>();
             trim.radius = radius; trim.color = new Color(.98f,.85f,.58f,.45f); trim.raycastTarget = false;
+            if (ModernStyle) { trim.color = new Color(.88f,.91f,.87f,.18f); trim.thickness = 1; trim.sheen = .018f; }
             return r;
         }
         public void Round(RectTransform panel, float radius)
@@ -106,18 +114,19 @@ namespace PathOfDawn.Presentation
         }
         public Button Button(Transform parent, string label, float x, float y, float w, float h, UnityAction action, bool enabled = true)
         {
-            var r = Card(parent, label, x, y, w, h, new Color(.16f, .25f, .34f, .97f)); var button = r.gameObject.AddComponent<Button>();
+            var r = Card(parent, label, x, y, w, h, ModernStyle ? new Color(.14f,.20f,.22f,.95f) : new Color(.16f, .25f, .34f, .97f)); var button = r.gameObject.AddComponent<Button>();
             button.targetGraphic = r.GetComponent<Image>(); var colors = button.colors;
             colors.highlightedColor = new Color(.89f, .98f, 1); colors.pressedColor = new Color(.70f,.87f,.94f); colors.disabledColor = new Color(.55f,.62f,.70f,.68f); button.colors = colors;
             var text = Text(r, label, 24, 5, w - 48, h - 10, 28); text.alignment = TextAlignmentOptions.MidlineLeft;
+            if (ModernStyle) { text.font = DisplayFont != null ? DisplayFont : Font; text.fontSize = 21 * TextScale; text.characterSpacing = -.25f; colors.fadeDuration = .12f; button.colors = colors; r.gameObject.AddComponent<GospelButtonFeedback>(); }
             button.onClick.AddListener(() => { BeforeInteraction?.Invoke(); action?.Invoke(); }); button.interactable = enabled; return button;
         }
         public Button Primary(Transform parent, string label, float x, float y, float w, float h, UnityAction action)
         {
             var button = Button(parent, label, x, y, w, h, action);
-            button.GetComponent<Image>().color = Gold;
-            button.GetComponentInChildren<TextMeshProUGUI>().color = Ink;
-            var trim = button.GetComponentInChildren<DawnFrame>(); trim.color = new Color(1,.94f,.76f,.85f); trim.sheen = .075f;
+            button.GetComponent<Image>().color = ModernStyle ? ModernPaper : Gold;
+            button.GetComponentInChildren<TextMeshProUGUI>().color = ModernStyle ? ModernInk : Ink;
+            var trim = button.GetComponentInChildren<DawnFrame>(); trim.color = new Color(1,.94f,.76f,ModernStyle ? .25f : .85f); trim.sheen = ModernStyle ? .025f : .075f;
             return button;
         }
         public TMP_InputField Input(Transform parent, float x, float y, float w, float h)
