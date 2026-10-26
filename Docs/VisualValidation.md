@@ -2,7 +2,7 @@
 
 기록: 2026-10-26 Asia/Seoul. 두 개편판의 정확한 실행 파일과 원본 캡처를 직접 검토한 결과다. 사용자 미적 승인이나 실물 기기 성능 측정이 아니다.
 
-새 개편판의 공개 URL 검증은 대기 중이다. 아래 로컬 통과를 공개 배포 통과로 표시하지 않는다.
+[공개 테스트](https://ka8877.github.io/firstgame/) · [Pages 실행](https://github.com/ka8877/firstgame/actions/runs/40290452908) · 공개 파일 29개 SHA-256 일치 · 배포 원본 `829d82dde18e4dc160172050334650eb22f8dcc8`.
 
 이전 그림/아바타 진입 화면의 승인을 이번3D/클라이언트 개편에 재사용하지 않았다. 아래 링크는 이번 실행이 저장한 원본이며 편집·합성한 홍보 장면이 아니다. FM 음악은 공식 외부 플레이어, Gospel은 게임 BGM의 관찰 범위를 구분한다.
 
@@ -101,3 +101,51 @@
 - [gate-reading](../Artifacts/Validation/Revival/Mobile844/PathOfDawn/gate-reading.png) · SHA-256 `0bdeb712c88345e55f7692f3199da67f404a49f4f593fca6522f9723128030ad`
 - [saved-temple](../Artifacts/Validation/Revival/Mobile844/PathOfDawn/saved-temple.png) · SHA-256 `a5275bbf8a316a54abce2ebff39257d94ea995014eb04ea295cc969126f4b7cf`
 - [continued-temple](../Artifacts/Validation/Revival/Mobile844/PathOfDawn/continued-temple.png) · SHA-256 `b1b3e8d06c4df37fe4b1832de82ba7b0d1085b0ce5a0a01409082b38563223fb`
+
+### PublicMobile844/FantasyCards
+
+`Artifacts/Validation/Revival/PublicMobile844/FantasyCards/report.json` · 직접 검토 2026-10-26T08:24:00.455332+00:00.
+
+- 실제 공개 HTTPS 게임 주소에서 받은 원본이다. Fantasy Masters 원작 웹 로고·판타지마스터즈 제목·원작 엘프 인물·빛/물/불/숲/금속/대지/암흑7문양과 게임 시작·이어하기·카드 도감·음악 설정 버튼이 표시된다. 이전 창작 아바타 선택 화면이 아니다. 공개5개런타임 파일 바이트와SHA가 최종로컬빌드와 모두 일치한 뒤 이 화면을 확인했다.
+- 공개 URL에서 실제 게임 시작 터치로 로비가 열렸다. 숲과 빛/물과 암흑/불과 금속 세 AI 대전방, 우측 덱 선택·카드 도감·덱 편집과 SYSTEM의 컴퓨터 상대 안내가 읽힌다. 다른 이용자 접속수나 채팅을 꾸미지 않은 로컬 연습방이다. 공개Login원곡은공식provider트랙ID234910360과실제진행시간0→1673ms가관찰됐다.
+- 공개 주소에서 방과 덱 선택을 실제 터치하여 네 기본 덱 선택 화면이 열렸다. 숲과 빛/불과 금속/물과 암흑/대지와 빛의 네 타일과 상단50장 기본덱 안내, 하단 대전실로 버튼이 읽힌다. 각 덱의 매우 작은 구성수량 미니라인은 이 모바일 축소에서는 표시되지 않으며 필수 네 덱 선택과50장 안내를 확인했다.
+- 공개 URL에서 실제 선택 후 연습 대전실01로 돌아왔다. 나와 컴퓨터의 두 PLAYER행은 모두 숲과 빛·생명의 전열을 표시한다. 승리조건DECK0·TOTAL CARD50과 START/덱 선택/게임 방법 버튼이 읽히고 가짜 온라인 매칭은 표시하지 않는다.
+- 공개 게임의 START 실제 터치 후 시작 손패 확인에 퓨리울프/리틀엔젤/브리루탄/리틀엔젤/창공/겨울잠 6장이 표시된다. 브리루탄 이름과Lv7·SP/8·1·8수치도 원본에서 확인했고 정적 카드 목록의 철자와 대조했다. 전체 손패 교체 및 이대로 시작 버튼과 다시6장을 뽑는 안내가 읽힌다.
+- 공개 게임의 실제 전체교체 뒤 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 6장으로 손패가 바뀌었다. 교체 전 퓨리울프/리틀엔젤/브리루탄/리틀엔젤/창공/겨울잠과 다른 순서·카드이며 전체교체 사용안내 및 비활성 교체 버튼, 활성 이대로 시작 버튼이 표시된다.
+- 실제 공개 모바일 전장에 상대와 나의01~05 다섯 칸씩 총10전열, 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 6장손패가 표시된다. 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비, 우측 Ready/기록·메뉴를 읽었다. 자원·상태띠는 표시되며 손패일부 능력치에는 축소에 따른 줄임표가 있다.
+- 공개 게임의 실제 기록/메뉴→저장→돌아가기 터치 뒤 전장과 다음 코인 상태를 저장했습니다 안내가 표시된다. 현재 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 손패6장, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비·빈10전열이다. 이 원본 값을 전체reload뒤 원본과 대조한다.
+- 공개 HTTPS 페이지 전체 새로고침 후 실제 이어하기 터치로 저장한 전투와 다음 코인 상태를 복원했습니다 안내를 읽었다. 저장전 원본과 같은 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜6손패, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비·빈10전열을 두 원본으로 직접 대조했다.
+
+- [title](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/title.png) · SHA-256 `d332390ff9c3cc38294b15164513b89de80243cbe5ebc8bbdce7f416020d55d2`
+- [lobby](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/lobby.png) · SHA-256 `65ac08856747370474bd63bd6f9eaf151bc64f9ad0e11360ef644089aa9c3ddf`
+- [deck-selection](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/deck-selection.png) · SHA-256 `75e9bb7aaf9f2dc0c1e1bd6756a44e4ca278abba99e07f84d0edf8d257f9b5d2`
+- [room](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/room.png) · SHA-256 `7142d1dc8298206fb5c1a615d7902cd1e25300e2f3881d5209e57c0801e50d8e`
+- [opening-drawn](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/opening-drawn.png) · SHA-256 `760346ea6eeb4672a7245ea4e9484dc2ca0019c6d3ec123ccd99da8f0bdb2d96`
+- [opening](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/opening.png) · SHA-256 `fa7277d67360799047f6f1e80c6df9e91cc0ca2a7577e1f865a0bae837905dae`
+- [battle](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/battle.png) · SHA-256 `41528b2a6a9bfda2cda0e0a48bd8277e72adc676760e4e248e6c1184994c5018`
+- [saved-battle](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/saved-battle.png) · SHA-256 `4fcef5d48f4c7bbdef35281dc8765da139c7d723b2750c6c17ad76e4ff463276`
+- [continued-battle](../Artifacts/Validation/Revival/PublicMobile844/FantasyCards/continued-battle.png) · SHA-256 `3579ba9f7fe73a666c9e8584745e0bb44a9f0bf3708c1dc9360a489c6a3358fa`
+
+### PublicMobile844/PathOfDawn
+
+`Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/report.json` · 직접 검토 2026-10-26T08:33:45.738677+00:00.
+
+- 실제공개URL의새원본694×390에서 말씀을따라예수님의길/탄생에서부활과승천까지 문구와 새여정·비활성이어하기·장선택·설정 버튼이온전히보인다. 뒤의3D성전/기둥/분수/정원/인물이최종로컬판과같으며이전회화형관찰자화면이아니다.
+- 공개주소첫탄생원본을직접확인했다. 베들레헴의탄생/탄생1/3,누가복음2:6–7·개역한글과6·7절본문,별도호적여정설명,대한성서공회출처와다음구절버튼이온전히보인다. 실제공개터치입력으로이장면에진입했으며본문과설명이구분된다.
+- 공개모바일두번째탄생본문 큰기쁨의소식/탄생2/3과 누가복음2:10–11·개역한글,10·11절전체가보인다. 목자들관련안내/대한성서공회출처/다음구절버튼이본문과구분되며가상선택지로바뀌지않는다.
+- 공개모바일세번째탄생원본에 마음에간직한말씀/탄생3/3,누가복음2:19–20·개역한글과19·20절을확인했다. 마지막글자라인감김은있지만본문누락은없다. 이후성장연결설명/대한성서공회출처와성전으로버튼이모두보인다.
+- 공개3D성전에서소년발약(350,268),바닥링약(347,178)의초기배치를확인했다. 성전으로들어가기/4m안내,누가복음2:41–43·41절고정표시/비활성읽기버튼과실제터치이동패드가보인다. 기둥·분수·NPC·타일·그림자가최종로컬판처럼표시되며작은금색바닥조작힌트는낮은대비라는기존비차단관찰을유지한다.
+- 추가3초실제터치유지후 소년앞바닥링과분수·NPC의투영관계가초기와달라졌고거리안내는말씀을읽을수있습니다로바뀌었다. 읽기·E버튼이진한활성색이다. 초기4m/이전3m원본과대조해실제공개터치이동과도달을확인했다.
+- 공개근처표식에서실제읽기버튼터치로 유월절의예루살렘/누가복음2:41–43·개역한글 화면이열렸다.41·42·43절전체와별도요약/대한성서공회출처/말씀을따라걷기버튼이읽히고 이동패드·탐색HUD는숨겨져있다. 이전관찰자대화나회귀서사는표시되지않는다.
+- 공개본문확인후 다음목표선생들가운데/10m와 누가복음2:46–47·46절이표시된다. 현재위치와읽은말씀을저장했습니다 안내가명확하다. 소년발약(349,268),분수중심약(348,130),타일·왼쪽선생들과터치패드배치를공개이어하기대조기준으로기록했다.
+- 공개전체페이지새로고침navigation1뒤실제이어하기로 저장한말씀과위치에서이어갑니다 안내를확인했다. 공개saved-temple과동일한 선생들가운데/10m/누가복음2:46–47·46절 및 소년발·분수·타일·선생들·패드상대배치가복구되었다. Idle관절자세차이만있고이전관찰자서사로돌아가지않았다.
+
+- [title](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/title.png) · SHA-256 `4b73168ccaac6a1108e3865b37fab4eed47b4f13a0822851c8e1e49f3fbe6053`
+- [birth-1](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-1.png) · SHA-256 `f8226699520a8d9646d61df99b38ddadd8e8462876fbd2f40a0b78e267c3e532`
+- [birth-2](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-2.png) · SHA-256 `51abffeccd3fade60bc43a8ef4e77a55711be6620f72de138b3b522843018b17`
+- [birth-3](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-3.png) · SHA-256 `814993883a2611124a4b14b779b282bf6cc747a8728614c86179141154e7eac8`
+- [temple-idle](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/temple-idle.png) · SHA-256 `be3dc28166e44ce7e073925887a231a02f310be2ffdd12fec7571e8893755418`
+- [temple-walked-adjusted-1](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/temple-walked-adjusted-1.png) · SHA-256 `71c25bb13f3563b9c8fa7eaf56c013c5b8978bca0716272564835c6d93c438c9`
+- [gate-reading](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/gate-reading.png) · SHA-256 `cb61d6a4e8fd9550f7a98b3cb61f340b6ecd5292ca069a9614cd315db3544f4f`
+- [saved-temple](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/saved-temple.png) · SHA-256 `35824a4df91acdbaa02d06ff2071fc94b23feb008573e02c38a258a26b22f6c6`
+- [continued-temple](../Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/continued-temple.png) · SHA-256 `a28afb8eb1f3670a4ac03dda3496646c7b3a4e81c0150c05d94f226c3c395c81`
