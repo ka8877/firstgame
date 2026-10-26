@@ -65,6 +65,8 @@ namespace PathOfDawn.Presentation
             if(animator.runtimeAnimatorController==null)throw new InvalidOperationException("Missing youth locomotion AnimatorController.");
             playerRoot.AddComponent<CharacterController>();Player=playerRoot.AddComponent<GospelThirdPersonMotor>();Player.Initialize(View,animator);
             Player.SetPose(new Vector3(0,.08f,-9),0);
+            Player.Actions.ConfigureTrainingArea(new Vector3(-8,0,-8),3);
+            Torus("Optional practice area · outside Scripture progression",courtyard,new Vector3(-8,.06f,-8),2.8f,.025f,gold,64);
             CreateNpc("Teacher reading",new Vector3(-5.8f,0,2.4f),120,1.15f,new Color(.58f,.48f,.32f));
             CreateNpc("Teacher listening",new Vector3(-4.4f,0,2.7f),210,1.1f,new Color(.65f,.57f,.42f));
             CreateNpc("Mary",new Vector3(4.6f,0,3.2f),210,1.06f,new Color(.35f,.48f,.55f));
@@ -209,8 +211,26 @@ namespace PathOfDawn.Presentation
             {
                 float angle=i*2.4f;var end=p+new Vector3(Mathf.Sin(angle)*(.7f+i*.06f),2.3f+(i%3)*.3f,Mathf.Cos(angle)*(.7f+i*.06f));
                 Beam("Olive branch",p+Vector3.up*1.5f,end,.10f,wood,courtyard);
-                var crown=Primitive("Olive leaf crown",PrimitiveType.Sphere,courtyard,end,new Vector3(1.25f,.80f,1.15f),i%2==0?leaf:foliageLight,false);crown.transform.rotation=Quaternion.Euler(i*13,i*41,15);oliveCrowns.Add(crown.transform);oliveRest.Add(crown.transform.localRotation);
+                var crown=OliveSpray(end,i%2==0?leaf:foliageLight);
+                crown.rotation=Quaternion.Euler(i*13,i*41,15);oliveCrowns.Add(crown);oliveRest.Add(crown.localRotation);
             }
+        }
+        Transform OliveSpray(Vector3 position,Material material)
+        {
+            // Small curved, double-sided leaves give the canopy depth and open sky gaps.
+            var vertices=new List<Vector3>();var normals=new List<Vector3>();var triangles=new List<int>();
+            for(int i=0;i<160;i++)
+            {
+                var center=new Vector3((float)random.NextDouble()-.5f,((float)random.NextDouble()-.5f)*.65f,(float)random.NextDouble()-.5f);
+                var rotation=Quaternion.Euler((float)random.NextDouble()*150,(float)random.NextDouble()*360,(float)random.NextDouble()*90);
+                float length=.16f+(float)random.NextDouble()*.13f,width=length*.22f;int start=vertices.Count;
+                foreach(var p in new[]{new Vector3(0,0,-length*.5f),new Vector3(-width,0,0),new Vector3(0,.025f,0),new Vector3(width,0,0),new Vector3(0,0,length*.5f)})
+                { vertices.Add(center+rotation*p);normals.Add(rotation*Vector3.up); }
+                foreach(int index in new[]{0,1,2,0,2,3,1,4,2,2,4,3,2,1,0,3,2,0,2,4,1,3,4,2})triangles.Add(start+index);
+            }
+            var mesh=new Mesh{name="Olive leaf spray"};mesh.SetVertices(vertices);mesh.SetNormals(normals);mesh.SetTriangles(triangles,0);mesh.RecalculateBounds();ownedMeshes.Add(mesh);
+            var go=new GameObject("Olive leaves",typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(courtyard,false);go.transform.position=position;
+            go.GetComponent<MeshFilter>().sharedMesh=mesh;go.GetComponent<MeshRenderer>().sharedMaterial=material;return go.transform;
         }
         void Fountain()
         {

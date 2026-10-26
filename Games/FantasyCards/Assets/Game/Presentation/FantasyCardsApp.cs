@@ -29,7 +29,6 @@ namespace FantasyCards.Presentation
         private RectTransform root;
         private Canvas canvas;
         private TMP_FontAsset font;
-        private Texture2D titleArt, battleArt;
         private BgmPlayer music;
         private Action redraw;
         private Vector2 lastViewport;
@@ -44,6 +43,8 @@ namespace FantasyCards.Presentation
         private AudioSource audioSource;
         private AudioClip coinSound, playSound;
         private TMP_Text effectLabel;
+        private TMP_Text musicToggleLabel, musicVolumeLabel;
+        private float nextMusicSettingsRefresh;
         private GameObject effectObject;
         private RectTransform effectCoin;
         private string screenRoute;
@@ -60,8 +61,6 @@ namespace FantasyCards.Presentation
             foreach (var asset in authored) if (asset.illustration != null) authoredIllustrations[asset.stableId] = asset.illustration;
             var ruleAsset = Resources.Load<RuleSetAsset>("Data/Rules"); authoredRules = ruleAsset != null ? ruleAsset.CreateRuntimeRules() : new RuleSet();
             font = Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset;
-            titleArt = Resources.Load<Texture2D>("Art/Revival/login-02");
-            battleArt = null;
             // Original music is supplied by the official public player bridge.
             // Never substitute the former Starlight soundtrack for the original.
             music = null; InitializeOriginalMusic();
@@ -77,6 +76,12 @@ namespace FantasyCards.Presentation
         }
         private void Update()
         {
+            if (musicVolumeLabel != null && Time.unscaledTime >= nextMusicSettingsRefresh)
+            {
+                nextMusicSettingsRefresh = Time.unscaledTime + .2f;
+                musicVolumeLabel.text = "음량 " + Mathf.RoundToInt(FmOriginalMusic.Volume * 100) + "%";
+                if (musicToggleLabel != null) musicToggleLabel.text = FmOriginalMusic.Muted ? "음악 켜기" : "음악 끄기";
+            }
             if (music != null && ((Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
                 (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame) ||
                 (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame))) music.NotifyUserGesture();
@@ -90,6 +95,7 @@ namespace FantasyCards.Presentation
         private void Clear()
         {
             HideTooltip();
+            musicToggleLabel = musicVolumeLabel = null;
             foreach (Transform child in root) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
             effectLabel = null; effectObject = null; effectCoin = null;
             string route = redraw?.Method.Name ?? "Transition";
@@ -108,6 +114,8 @@ namespace FantasyCards.Presentation
         }
         private void ShowMusicSettings(Action back)
         {
+            originalMusicMuted = FmOriginalMusic.Muted;
+            originalMusicVolume = FmOriginalMusic.Volume;
             redraw = () => ShowMusicSettings(back); Clear(); Backdrop(true);
             var panel = Panel(root, .13f, .15f, .87f, .85f, ink); Frame(panel, gold, 1.5f);
             Text(panel, "판타지마스터즈 음악", .07f, .74f, .93f, .92f, 43, ivory, TextAlignmentOptions.Center);
@@ -116,13 +124,14 @@ namespace FantasyCards.Presentation
 #else
             Text(panel, "웹 버전에서 원작 SOUND-I 테마를 들을 수 있습니다.", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
 #endif
-            Button(panel, originalMusicMuted ? "음악 켜기" : "음악 끄기", .12f, .40f, .46f, .59f,
-                () => { originalMusicMuted = !originalMusicMuted; PlayerPrefs.SetInt("FC.originalMusic.muted", originalMusicMuted ? 1 : 0); FmOriginalMusic.SetMuted(originalMusicMuted); ShowMusicSettings(back); }, slate, 26);
-            Text(panel, "음량 " + Mathf.RoundToInt(originalMusicVolume * 100) + "%", .49f, .43f, .88f, .57f, 28, ivory, TextAlignmentOptions.Center);
+            var toggle = Button(panel, originalMusicMuted ? "음악 켜기" : "음악 끄기", .12f, .40f, .46f, .59f,
+                () => { FmOriginalMusic.SetMuted(!FmOriginalMusic.Muted); ShowMusicSettings(back); }, slate, 26);
+            musicToggleLabel = toggle.GetComponentInChildren<TMP_Text>();
+            musicVolumeLabel = Text(panel, "음량 " + Mathf.RoundToInt(originalMusicVolume * 100) + "%", .49f, .43f, .88f, .57f, 28, ivory, TextAlignmentOptions.Center);
             Button(panel, "음량 -", .12f, .19f, .46f, .38f,
-                () => { SetOriginalVolume(originalMusicVolume - .15f); ShowMusicSettings(back); }, slate, 25);
+                () => { SetOriginalVolume(FmOriginalMusic.Volume - .15f); ShowMusicSettings(back); }, slate, 25);
             Button(panel, "음량 +", .53f, .19f, .87f, .38f,
-                () => { SetOriginalVolume(originalMusicVolume + .15f); ShowMusicSettings(back); }, slate, 25);
+                () => { SetOriginalVolume(FmOriginalMusic.Volume + .15f); ShowMusicSettings(back); }, slate, 25);
             Button(root, "돌아가기", .36f, .025f, .64f, .14f, back, gold, 26);
         }
         private void Backdrop(bool calm)
@@ -262,9 +271,11 @@ namespace FantasyCards.Presentation
         {
             try { DemoCatalog.ValidatePlayableDeck(deck); return true; } catch { return false; }
         }
-        private void SaveDeck()
+        private bool SaveDeck()
         {
-            if (!PersistentSaves.TrySave(DeckSlot, GameId, 1, CardCatalog.Version, JsonUtility.ToJson(new DeckSave { cards = customDeck }), out string error)) message = "덱 저장 실패: " + error; else message = "편집한 덱을 저장했습니다.";
+            if (!PersistentSaves.TrySave(DeckSlot, GameId, 1, CardCatalog.Version, JsonUtility.ToJson(new DeckSave { cards = customDeck }), out string error))
+            { message = "덱 저장 실패: " + error; return false; }
+            message = "편집한 덱을 저장했습니다."; return true;
         }
         private void LoadDeck()
         {
@@ -283,8 +294,9 @@ namespace FantasyCards.Presentation
                 var original = Resources.Load<Texture2D>(d.artResource);
                 if (original != null)
                 {
-                    // The source card is preserved. Only its common illustration window is sampled by the UI.
-                    ImageFrame(parent, original, new Rect(.13f, .36f, .805f, .56f), x0, y0, x1, y1, new Vector2(.5f, .64f), true);
+                    // Keep the entire illustration window visible. Fit it instead
+                    // of cropping heads or stretching its original proportions.
+                    FittedImage(parent, original, new Rect(.13f, .36f, .805f, .56f), x0, y0, x1, y1, "Original card illustration");
                     return;
                 }
             }
@@ -318,6 +330,28 @@ namespace FantasyCards.Presentation
             var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
             var gradient = go.GetComponent<UiGradient>(); gradient.StartColor = start; gradient.EndColor = end; gradient.Horizontal = horizontal; gradient.raycastTarget = false; gradient.SetAllDirty();
         }
+        private void FittedImage(Transform parent, Texture texture, Rect uv, float x0, float y0, float x1, float y1, string name)
+        {
+            var bounds = new GameObject(name + " bounds", typeof(RectTransform)).GetComponent<RectTransform>();
+            bounds.SetParent(parent, false); Anchor(bounds, x0, y0, x1, y1);
+            var image = new GameObject(name, typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
+            image.transform.SetParent(bounds, false); Anchor((RectTransform)image.transform, 0, 0, 1, 1);
+            image.texture = texture; image.uvRect = uv; image.raycastTarget = false;
+            var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+            fit.aspectRatio = texture.width * uv.width / (texture.height * uv.height);
+        }
+        private void ElementIcon(Transform parent, Element element, float x0, float y0, float x1, float y1)
+        {
+            var icon = new GameObject(CardCatalog.ElementName(element) + " emblem", typeof(RectTransform), typeof(UiElementGlyph)).GetComponent<UiElementGlyph>();
+            icon.transform.SetParent(parent, false); Anchor((RectTransform)icon.transform, x0, y0, x1, y1);
+            icon.ElementIndex = (int)element; icon.color = ElementColor(element); icon.raycastTarget = false; icon.SetAllDirty();
+        }
+        private TMP_Text ReadableText(Transform parent, string value, float x0, float y0, float x1, float y1, float size, Color tint, TextAlignmentOptions alignment = TextAlignmentOptions.MidlineLeft)
+        {
+            var label = Text(parent, value, x0, y0, x1, y1, size, tint, alignment);
+            label.overflowMode = TextOverflowModes.Overflow;
+            return label;
+        }
         private void Frame(RectTransform rect, Color color, float pixels)
         {
             var existing = rect.Find("Fine rounded frame");
@@ -341,7 +375,7 @@ namespace FantasyCards.Presentation
             float scale = Mathf.Sqrt(Mathf.Max(1, canvas.pixelRect.width) / 1920f * Mathf.Max(1, canvas.pixelRect.height) / 1080f);
             bool small = Compact && canvas.pixelRect.height < 600;
             if (small) size = Mathf.Max(size, 13f / scale);
-            var text = go.GetComponent<TextMeshProUGUI>(); text.font = font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Ellipsis; return text;
+            var text = go.GetComponent<TextMeshProUGUI>(); text.font = font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Truncate; return text;
         }
         private Button Button(Transform parent, string label, float x0, float y0, float x1, float y1, Action action, Color color, float size = 22, bool enabled = true)
         {

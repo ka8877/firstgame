@@ -14,16 +14,13 @@ namespace FantasyCards.Presentation
     {
         private bool originalMusicMuted;
         private float originalMusicVolume;
-        private Texture2D clientSkin, roomSkin;
 
         private void InitializeOriginalMusic()
         {
-            originalMusicMuted = PlayerPrefs.GetInt("FC.originalMusic.muted", 0) != 0;
-            originalMusicVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("FC.originalMusic.volume", .6f));
+            originalMusicMuted = FmOriginalMusic.Muted;
+            originalMusicVolume = FmOriginalMusic.Volume;
             FmOriginalMusic.SetMuted(originalMusicMuted);
             FmOriginalMusic.SetVolume(originalMusicVolume);
-            clientSkin = Resources.Load<Texture2D>("Art/Revival/interface-lobby");
-            roomSkin = Resources.Load<Texture2D>("Art/Revival/interface-room");
         }
 
         private void RevivalBackdrop(bool calm)
@@ -32,16 +29,11 @@ namespace FantasyCards.Presentation
             Gradient(root, 0, 0, 1, 1, new Color(.11f, .085f, .045f), new Color(.018f, .024f, .019f));
             var field = Panel(root, .018f, .025f, .985f, .98f, calm ? new Color(.075f, .052f, .030f) : new Color(.035f, .075f, .047f));
             Ornament(field, new Color(.46f, .37f, .21f, .46f));
-            // Only unannotated decorative edge pixels are sampled. Guide numbers,
-            // room names, old chat messages and controls are never background UI.
-            if (clientSkin != null)
-            {
-                SkinFragment(root, clientSkin, new Rect(3, 7, 17, 300), .002f, .015f, .024f, .985f);
-                SkinFragment(root, clientSkin, new Rect(3, 7, 17, 300), .976f, .015f, .998f, .985f);
-                SkinFragment(root, clientSkin, new Rect(23, 2, 414, 15), .022f, .975f, .978f, .999f);
-                SkinFragment(root, clientSkin, new Rect(25, 425, 413, 13), .022f, .001f, .978f, .025f);
-            }
+            // The original frame hierarchy is redrawn in geometry, rather than
+            // magnifying a narrow low resolution strip from an old screenshot.
             Frame(field, new Color(.54f, .42f, .23f), 1.5f);
+            var border = Panel(root, .006f, .009f, .994f, .993f, Color.clear);
+            Ornament(border, new Color(.66f, .51f, .29f));
         }
 
         private void SkinFragment(Transform parent, Texture2D source, Rect pixelsFromTop, float x0, float y0, float x1, float y1)
@@ -63,11 +55,19 @@ namespace FantasyCards.Presentation
                 image.transform.SetParent(holder, false); Anchor((RectTransform)image.transform, 0, 0, 1, 1); image.texture = logo; image.raycastTarget = false;
                 var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = (float)logo.width / logo.height;
             }
-            else if (Resources.Load<Texture2D>("Art/Revival/login-01") != null)
-                SkinFragment(parent, Resources.Load<Texture2D>("Art/Revival/login-01"), new Rect(0, 58, 170, 64), x0, y0, x1, y1);
-            else if (clientSkin != null)
-                SkinFragment(parent, clientSkin, new Rect(462, 10, 104, 42), x0, y0, x1, y1);
-            else Text(parent, "FANTASY\nMASTERS", x0, y0, x1, y1, 32, gold, TextAlignmentOptions.Center);
+            else
+            {
+                // The archived GIF wordmark has a baked checker field. Keep the
+                // original title readable instead of enlarging that banner.
+                var title = Text(parent, "Fantasy Masters", x0, Mathf.Lerp(y0, y1, .28f), x1, y1, 50, ivory, TextAlignmentOptions.Center);
+                title.fontStyle = FontStyles.Bold | FontStyles.Italic;
+                title.textWrappingMode = TextWrappingModes.NoWrap;
+                title.characterSpacing = 1.5f;
+                // The same wordmark appears in the narrow client rail and wide title.
+                // Allow the rail to fit the complete name instead of clipping it.
+                title.fontSizeMin = 14; title.fontSizeMax = 50;
+                Text(parent, "F A N T A S Y   M A S T E R S", x0, y0, x1, Mathf.Lerp(y0, y1, .27f), 13, gold, TextAlignmentOptions.Center);
+            }
         }
 
         private void ClientRail(Action back, string heading = "SINGLE PLAY")
@@ -75,9 +75,9 @@ namespace FantasyCards.Presentation
             var rail = Panel(root, .812f, .035f, .972f, .958f, new Color(.035f, .030f, .019f));
             Frame(rail, gold, 2); Ornament(rail, new Color(.56f, .43f, .24f));
             ClientBrand(rail, .035f, .865f, .965f, .985f);
-            var emblem = Panel(rail, .15f, .68f, .85f, .85f, new Color(.095f, .047f, .13f));
+            var emblem = Panel(rail, .15f, .68f, .85f, .85f, new Color(.10f, .076f, .035f));
             emblem.GetComponent<UiRoundedImage>().Radius = 1000; Frame(emblem, gold, 2);
-            Text(emblem, "FM", .1f, .1f, .9f, .9f, 47, new Color(.91f, .79f, 1), TextAlignmentOptions.Center);
+            Text(emblem, "FM", .1f, .1f, .9f, .9f, 47, gold, TextAlignmentOptions.Center);
             Text(rail, heading, .04f, .60f, .96f, .68f, 21, gold, TextAlignmentOptions.Center);
             Text(rail, "나의 덱\n" + (useCustomDeck ? "편집 덱" : DeckShortName(selectedDeckId)), .045f, .43f, .955f, .59f, 24, ivory, TextAlignmentOptions.Center);
             Button(rail, "덱 선택", .06f, .335f, .94f, .425f, ShowDeckSelection, slate, 23);
@@ -90,7 +90,7 @@ namespace FantasyCards.Presentation
         {
             battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login"); RevivalBackdrop(true);
             var top = Panel(root, .065f, .74f, .665f, .945f, new Color(.025f, .022f, .015f, .86f));
-            Ornament(top, gold); ClientBrand(top, .24f, .12f, .76f, .91f);
+            Ornament(top, gold); ClientBrand(top, .08f, .10f, .92f, .90f);
             OriginalLoginCharacter();
             Text(root, "판타지마스터즈", .065f, .65f, .665f, .76f, 51, ivory, TextAlignmentOptions.Center);
             Text(root, "FANTASY MASTERS", .065f, .595f, .665f, .66f, 25, gold, TextAlignmentOptions.Center);
@@ -99,14 +99,15 @@ namespace FantasyCards.Presentation
             {
                 float x = .075f + i * .083f;
                 var seal = Panel(root, x, .445f, x + .073f, .575f, new Color(.04f, .035f, .023f));
-                seal.GetComponent<UiRoundedImage>().Radius = 1000; Frame(seal, ElementColor(elements[i]), 2);
-                Text(seal, CardCatalog.ElementName(elements[i]), .02f, .08f, .98f, .92f, 28, ElementColor(elements[i]), TextAlignmentOptions.Center);
+                Frame(seal, new Color(.42f, .34f, .20f), 1);
+                ElementIcon(seal, elements[i], .25f, .39f, .75f, .91f);
+                Text(seal, CardCatalog.ElementName(elements[i]), .04f, .02f, .96f, .39f, 23, ElementColor(elements[i]), TextAlignmentOptions.Center);
             }
             Button(root, "게임 시작", .23f, .27f, .50f, .39f, ShowLobby, gold, 31);
             Button(root, "이어하기", .23f, .14f, .50f, .25f, Continue, slate, 27, PersistentSaves.Exists(Slot));
             Button(root, "카드 도감", .065f, .02f, .265f, .115f, () => ShowCollection(false), slate, 25);
             Button(root, "음악 설정", .465f, .02f, .665f, .115f, () => ShowMusicSettings(ShowTitle), slate, 25);
-            Text(root, "싱글플레이 · 일곱 속성의 대전", .065f, .405f, .665f, .445f, 22, gold, TextAlignmentOptions.Center);
+            Text(root, "싱글플레이 · 일곱 속성 · " + CardCatalog.All.Length + "종 카드", .065f, .405f, .665f, .445f, 22, gold, TextAlignmentOptions.Center);
         }
 
         private void ShowLobby()
@@ -130,7 +131,7 @@ namespace FantasyCards.Presentation
             }
             var system = Panel(root, .055f, .085f, .775f, .315f, new Color(.025f, .022f, .016f)); Frame(system, gold, 1.5f);
             Text(system, "SYSTEM", .025f, .72f, .97f, .97f, 21, gold);
-            Text(system, "판타지마스터즈에 오신 것을 환영합니다.\n연습방을 선택하고 덱을 준비하세요. 모든 대전은 컴퓨터 상대와 진행됩니다.", .025f, .15f, .97f, .73f, 25, ivory, TextAlignmentOptions.TopLeft);
+            Text(system, "판타지마스터즈에 오신 것을 환영합니다.\n일곱 속성 · " + CardCatalog.All.Length + "종 카드. 연습방을 선택하고 50장 덱을 준비하세요.\n모든 대전은 컴퓨터 상대와 진행됩니다.", .025f, .10f, .97f, .73f, 24, ivory, TextAlignmentOptions.TopLeft);
             Button(root, "이어하기", .055f, .005f, .265f, .08f, Continue, slate, 23, PersistentSaves.Exists(Slot));
             Button(root, "저장 옮기기", .275f, .005f, .485f, .08f, ShowTransfer, slate, 23);
             Button(root, "음악", .565f, .005f, .775f, .08f, () => ShowMusicSettings(ShowLobby), slate, 23);
@@ -194,7 +195,7 @@ namespace FantasyCards.Presentation
         }
         private void SetOriginalVolume(float value)
         {
-            originalMusicVolume = Mathf.Clamp01(value); PlayerPrefs.SetFloat("FC.originalMusic.volume", originalMusicVolume);
+            originalMusicVolume = Mathf.Clamp01(value);
             FmOriginalMusic.SetVolume(originalMusicVolume);
         }
 
@@ -232,18 +233,28 @@ namespace FantasyCards.Presentation
 
         private void DrawPrintedCard(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
         {
-            var panel = Panel(parent, x0, y0, x1, y1, new Color(.075f, .045f, .025f)); panel.gameObject.name = "Card " + card.id;
-            PrintedImage(panel, card, .02f, .02f, .98f, .98f);
-            var top = Panel(panel, .02f, battleScreen ? .75f : .80f, .98f, .985f, new Color(.075f, .035f, .012f, .96f));
-            Text(top, card.name, .035f, .01f, .965f, .99f, 24, ivory);
-            var stats = Panel(panel, .02f, .015f, .98f, battleScreen ? .255f : .205f, new Color(.035f, .025f, .014f, .97f));
-            string summary = card.kind == CardKind.Unit ? "AP" + card.attack + " DP" + card.defense + " HP" + card.health : CardCatalog.KindName(card.kind) + " · " + CardCatalog.ElementName(card.element);
-            Text(stats, summary, .025f, .01f, .975f, .99f, 20, ElementColor(card.element), TextAlignmentOptions.Center);
+            var panel = Panel(parent, x0, y0, x1, y1, new Color(.062f, .049f, .030f)); panel.gameObject.name = "Card " + card.id;
+            Gradient(panel, .025f, .35f, .975f, .78f, new Color(.11f, .10f, .065f), new Color(.022f, .029f, .023f));
+            Artwork(panel, card, .035f, .36f, .965f, .775f);
+            var heading = Panel(panel, .025f, .79f, .975f, .975f, new Color(.10f, .072f, .033f));
+            ElementIcon(heading, card.element, .015f, .16f, .16f, .84f);
+            ReadableText(heading, card.name, .17f, .08f, .975f, .94f, battleScreen ? 22 : 26, ivory);
+            var cost = Panel(panel, .025f, .222f, .975f, .345f, new Color(.034f, .029f, .019f));
+            string costText = card.kind == CardKind.Terrain ? "LP " + card.landPointCost + " · 생산 " + card.producedColored + "/총 " + card.producedGeneric
+                : "Lv " + card.level + " · " + CardCatalog.ElementName(card.element) + " " + card.coloredCost + "/총 " + card.cost;
+            ReadableText(cost, costText, .03f, .02f, .97f, .98f, battleScreen ? 17 : 21, gold, TextAlignmentOptions.Center);
+            var stats = Panel(panel, .025f, .025f, .975f, .215f, new Color(.021f, .023f, .017f));
+            if (card.kind == CardKind.Unit || card.kind == CardKind.Equipment)
             {
-                var badge = Panel(panel, .02f, battleScreen ? .53f : .68f, .98f, battleScreen ? .745f : .795f, new Color(.035f, .025f, .014f, .95f));
-                Text(badge, "Lv" + card.level + "  " + card.coloredCost + "+" + card.genericCost + "  " + CardCatalog.RarityCode(card.rarity), .025f, .01f, .975f, .99f, 20, RarityColor(card.rarity), TextAlignmentOptions.Center);
+                string[] names = { "AP", "DP", "HP" };
+                string[] values = { card.attack + CardCatalog.CoinText(card.attackCoin), card.defense + CardCatalog.CoinText(card.defenseCoin), card.health + CardCatalog.CoinText(card.healthCoin) };
+                for (int i = 0; i < 3; i++)
+                    ReadableText(stats, names[i] + "\n" + values[i], i / 3f + .01f, .02f, (i + 1) / 3f - .01f, .98f, battleScreen ? 17 : 20, i == 2 ? teal : ivory, TextAlignmentOptions.Center);
             }
-            Frame(panel, selected ? new Color(1f, .89f, .48f) : RarityColor(card.rarity), selected ? 3 : 1.3f);
+            else ReadableText(stats, CardCatalog.KindName(card.kind) + "  ·  " + CardCatalog.RarityName(card.rarity), .025f, .02f, .975f, .98f, battleScreen ? 18 : 21, RarityColor(card.rarity), TextAlignmentOptions.Center);
+            Ornament(panel, selected ? new Color(1f, .88f, .44f) : new Color(.62f, .48f, .26f), true);
+            Frame(panel, selected ? new Color(1f, .89f, .48f) : new Color(.48f, .38f, .22f), selected ? 3 : 1.2f);
+            if (selected) Text(panel, "선택", .69f, .69f, .95f, .775f, 17, gold, TextAlignmentOptions.MidlineRight);
             panel.GetComponent<Image>().raycastTarget = true;
             var button = panel.gameObject.AddComponent<Button>(); button.interactable = interactable; button.targetGraphic = panel.GetComponent<Image>(); button.onClick.AddListener(() => onClick());
             BindCardHelp(panel.gameObject, card, () => ShowDetail(card, redraw));
@@ -254,35 +265,43 @@ namespace FantasyCards.Presentation
         {
             var player = engine.State.players[0]; var enemy = engine.State.players[1];
             var rail = Panel(root, .817f, .025f, .979f, .977f, new Color(.025f, .023f, .016f)); Frame(rail, gold, 2); Ornament(rail, gold);
-            ClientBrand(rail, .03f, .89f, .97f, .985f);
+            ClientBrand(rail, .04f, .91f, .96f, .984f);
+            var phase = Panel(rail, .04f, .837f, .96f, .905f, new Color(.13f, .105f, .055f));
+            ReadableText(phase, engine.State.turn + "턴 · " + (locked ? "공방 판정 중" : engine.PreparingPlayer == 1 ? "상대 준비 중" : PhaseName(engine.State.phase)), .02f, .06f, .98f, .94f, 23, gold, TextAlignmentOptions.Center);
+            var lp = Panel(rail, .04f, .758f, .485f, .828f, new Color(.07f, .09f, .065f)); Frame(lp, new Color(.36f, .43f, .29f), 1);
+            ReadableText(lp, "LP  " + player.levelPoints, .04f, .02f, .96f, .98f, 25, teal, TextAlignmentOptions.Center);
+            var total = Panel(rail, .515f, .758f, .96f, .828f, new Color(.12f, .09f, .04f)); Frame(total, new Color(.49f, .37f, .18f), 1);
+            ReadableText(total, "총소울 " + player.genericSoul, .04f, .02f, .96f, .98f, 23, gold, TextAlignmentOptions.Center);
+            BindTooltip(lp.gameObject, "레벨 포인트", "지형을 전개할 때 사용합니다. 현재 LP " + player.levelPoints);
+            BindTooltip(total.gameObject, "총소울", "카드 사용과 유닛 유지에 필요한 총소울입니다. 색 소울 조건도 함께 충족해야 합니다.");
             var elements = Enum.GetValues(typeof(Element)).Cast<Element>().ToArray();
             for (int i = 0; i < elements.Length; i++)
             {
-                int col = i % 3, row = i / 3;
-                float x = .035f + col * .32f, y = .797f - row * .073f;
-                var orb = Panel(rail, x, y, x + .29f, y + .067f, new Color(.08f, .065f, .04f));
-                orb.GetComponent<UiRoundedImage>().Radius = 1000; Frame(orb, ElementColor(elements[i]), 1);
-                Text(orb, CardCatalog.ElementName(elements[i]).Substring(0, 1) + player.Resource(elements[i]), .01f, .01f, .99f, .99f, 20, ElementColor(elements[i]), TextAlignmentOptions.Center);
+                int col = i % 2, row = i / 2;
+                float x = .04f + col * .47f, y = .692f - row * .059f;
+                var orb = Panel(rail, x, y, x + .445f, y + .052f, new Color(.065f, .058f, .036f));
+                ElementIcon(orb, elements[i], .025f, .14f, .23f, .86f);
+                ReadableText(orb, CardCatalog.ElementName(elements[i]), .26f, .06f, .68f, .94f, 20, ElementColor(elements[i]));
+                ReadableText(orb, player.Resource(elements[i]).ToString(), .68f, .05f, .96f, .95f, 25, ivory, TextAlignmentOptions.MidlineRight);
                 BindTooltip(orb.gameObject, CardCatalog.ElementName(elements[i]) + " 소울", "현재 사용할 수 있는 색 소울 " + player.Resource(elements[i]));
             }
-            Text(rail, "LP " + player.levelPoints + "  총소울 " + player.genericSoul, .025f, .56f, .975f, .64f, 23, gold, TextAlignmentOptions.Center);
-            Text(rail, engine.State.turn + "턴 · " + PhaseName(engine.State.phase), .025f, .50f, .975f, .56f, 23, ivory, TextAlignmentOptions.Center);
-            var decks = Panel(rail, .04f, .35f, .96f, .49f, new Color(.14f, .12f, .075f)); Frame(decks, gold, 1);
-            Text(decks, "상대 덱  " + enemy.deck.Count + "\n나의 덱  " + player.deck.Count, .04f, .02f, .96f, .98f, 28, ivory, TextAlignmentOptions.Center);
-            Button(rail, "기록 / 메뉴", .04f, .27f, .96f, .34f, ShowRevivalBattleMenu, slate, 21, !locked);
+            ReadableText(rail, "지형 " + player.terrain.Count + " / " + engine.State.rules.terrainLimit, .525f, .515f, .955f, .568f, 19, teal, TextAlignmentOptions.Center);
+            var decks = Panel(rail, .04f, .365f, .96f, .507f, new Color(.085f, .073f, .043f)); Frame(decks, new Color(.43f, .35f, .20f), 1);
+            ReadableText(decks, "상대 덱  " + enemy.deck.Count + "장\n나의 덱  " + player.deck.Count + "장", .06f, .04f, .94f, .96f, 27, ivory, TextAlignmentOptions.Center);
+            Button(rail, "기록 / 메뉴", .04f, .286f, .96f, .354f, ShowRevivalBattleMenu, slate, 21, !locked);
             var selected = player.hand.Find(card => card.instanceId == selectedCard);
             var definition = selected == null ? null : CardCatalog.Get(selected.definitionId);
             bool myPreparation = engine.IsPreparing(0);
             string action = definition != null && definition.kind == CardKind.Terrain ? "지형 전개" : definition != null && definition.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(definition) ? "마법 예약" : "카드 상세";
-            Button(rail, action, .04f, .18f, .96f, .26f, () => { if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, 23, !locked && myPreparation);
+            Button(rail, action, .04f, .207f, .96f, .275f, () => { if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, 22, !locked && myPreparation);
             bool canShuffle = engine.CanShuffleHand(0, out string shuffleReason);
-            var shuffle = Button(rail, "Shuffle", .04f, .09f, .96f, .17f, () =>
+            var shuffle = Button(rail, "손패 셔플", .04f, .128f, .96f, .196f, () =>
             {
                 if (!engine.ShuffleHand(0, out message)) { ShowBattle(); return; }
                 selectedCard = -1; Save(); locked = true; StartCoroutine(ShuffleAndDeal(false));
-            }, slate, 23, !locked && canShuffle);
+            }, slate, 22, !locked && canShuffle);
             BindTooltip(shuffle.gameObject, "손패 셔플", canShuffle ? "손패를 덱에 돌려놓고 6장을 다시 뽑습니다." : shuffleReason);
-            Button(rail, "Ready", .04f, .005f, .96f, .085f, EndTurn, gold, 27, !locked && myPreparation);
+            Button(rail, "준비 완료", .04f, .035f, .96f, .116f, EndTurn, gold, 27, !locked && myPreparation);
         }
 
         private void ShowRevivalBattleMenu()

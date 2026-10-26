@@ -11,26 +11,42 @@ namespace FantasyCards.Presentation
     public sealed partial class FantasyCardsApp
     {
         private int collectionElement = -1, collectionKind = -1, collectionCost = -1, collectionRarity = -1;
+        private int collectionSort;
+        private bool collectionDeckOnly;
+        private string collectionSearch = "", collectionSearchDraft = "";
+        private const int CollectionPageSize = 4;
 
         private CardDefinition[] FilteredCards()
         {
-            return CardCatalog.All.Where(card =>
+            var cards = CardCatalog.All.Where(card =>
                 (collectionElement < 0 || (int)card.element == collectionElement) &&
                 (collectionKind < 0 || (int)card.kind == collectionKind) &&
                 (collectionRarity < 0 || (int)card.rarity == collectionRarity) &&
-                (collectionCost < 0 || (collectionCost == 8 ? card.cost >= 8 : card.cost == collectionCost)))
-                .ToArray();
+                (collectionCost < 0 || (collectionCost == 8 ? card.cost >= 8 : card.cost == collectionCost)) &&
+                (!collectionDeckOnly || customDeck.Contains(card.id)) &&
+                (string.IsNullOrWhiteSpace(collectionSearch) ||
+                    card.name.IndexOf(collectionSearch, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    (card.text ?? "").IndexOf(collectionSearch, StringComparison.OrdinalIgnoreCase) >= 0));
+            if (collectionSort == 1) cards = cards.OrderBy(card => card.cost).ThenBy(card => card.level).ThenBy(card => card.name);
+            else if (collectionSort == 2) cards = cards.OrderBy(card => card.level).ThenBy(card => card.cost).ThenBy(card => card.name);
+            else if (collectionSort == 3) cards = cards.OrderBy(card => card.name, StringComparer.Ordinal);
+            return cards.ToArray();
         }
 
         private void ShowCollection(bool edit)
         {
             battleScreen = false; redraw = () => ShowCollection(edit); Clear(); FmOriginalMusic.SetScene("deck"); Backdrop(true);
-            var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + 3) / 4);
+            var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + CollectionPageSize - 1) / CollectionPageSize);
             collectionPage = Mathf.Clamp(collectionPage, 0, pages - 1);
-            Text(root, edit ? "DECK EDITOR · 덱 편집" : "CARD LIST · 카드 도감", .035f, .90f, .79f, .99f, 40, ivory);
-            Text(root, edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · 지형 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Terrain) + " · 유닛 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Unit)
-                : "전체 " + CardCatalog.All.Length + "종 · 조건에 맞는 카드 " + cards.Length + "종", .04f, .835f, .80f, .90f, 23, gold);
-            Button(root, "타이틀", .835f, .874f, .965f, .988f, ShowTitle, slate, 24);
+            Text(root, edit ? "DECK EDITOR · 덱 편집" : "CARD COLLECTION · 카드 도감", .035f, .913f, .81f, .988f, 38, ivory);
+            string totals = edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · " + DeckKindCounts(customDeck)
+                : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종 · 그림과 적용 수치 확인";
+            ReadableText(root, totals, .04f, .849f, .81f, .913f, 23, gold);
+            Button(root, "대기실", .835f, .876f, .965f, .982f, ShowLobby, slate, 24);
+            CollectionSearchField(edit);
+            string[] orderNames = { "원본 순서", "소울 순", "레벨 순", "이름 순" };
+            Button(root, orderNames[collectionSort], .66f, .761f, .805f, .837f, () => { collectionSort = (collectionSort + 1) % orderNames.Length; collectionPage = 0; ShowCollection(edit); }, slate, 21);
+            Button(root, collectionDeckOnly ? "내 덱 카드만" : "모든 카드", .817f, .761f, .965f, .837f, () => { collectionDeckOnly = !collectionDeckOnly; collectionPage = 0; ShowCollection(edit); }, collectionDeckOnly ? teal : slate, 21);
             string[] filters = {
                 "속성 · " + (collectionElement < 0 ? "전체" : CardCatalog.ElementName((Element)collectionElement)),
                 "종류 · " + (collectionKind < 0 ? "전체" : CardCatalog.KindName((CardKind)collectionKind)),
@@ -39,47 +55,75 @@ namespace FantasyCards.Presentation
             for (int i = 0; i < filters.Length; i++)
             {
                 int filter = i; float x = .035f + i * .236f;
-                Button(root, filters[i], x, .712f, x + .222f, .826f, () => ShowCollectionFilter(filter, edit), slate, 23);
+                Button(root, filters[i], x, .666f, x + .222f, .748f, () => ShowCollectionFilter(filter, edit), slate, 23);
             }
             if (cards.Length == 0)
             {
                 Text(root, "이 조건에 맞는 카드가 없습니다.", .1f, .42f, .9f, .58f, 34, ivory, TextAlignmentOptions.Center);
-                Button(root, "필터 초기화", .35f, .29f, .65f, .405f, () => { ResetCollectionFilters(); ShowCollection(edit); }, gold, 25);
+                Button(root, "검색 / 필터 초기화", .30f, .29f, .70f, .405f, () => { ResetCollectionFilters(); ShowCollection(edit); }, gold, 25);
             }
-            for (int i = 0; i < 4 && collectionPage * 4 + i < cards.Length; i++)
+            for (int i = 0; i < CollectionPageSize && collectionPage * CollectionPageSize + i < cards.Length; i++)
             {
-                var card = cards[collectionPage * 4 + i]; float left = .04f + i * .237f, right = left + .212f;
-                DrawCard(root, card, left, edit ? .285f : .225f, right, .695f, false,
+                var card = cards[collectionPage * CollectionPageSize + i]; float left = .035f + i * .237f, right = left + .222f;
+                DrawCard(root, card, left, edit ? .245f : .207f, right, .650f, false,
                     () => ShowDetail(card, () => ShowCollection(edit)), true);
-                var cardRoot = root.Find("Card " + card.id);
-                if (cardRoot != null) cardRoot.gameObject.AddComponent<UiPanelEntrance>().Delay = i * .025f;
+                int count = customDeck.Count(id => id == card.id);
                 if (edit)
                 {
-                    int count = customDeck.Count(id => id == card.id);
-                    Button(root, "-", left, .162f, left + .067f, .276f, () => { customDeck.Remove(card.id); ShowCollection(true); }, slate, 32, count > 0);
-                    Text(root, count + "장", left + .07f, .17f, right - .07f, .27f, 25, ivory, TextAlignmentOptions.Center);
-                    Button(root, "+", right - .067f, .162f, right, .276f,
-                        () => { if (customDeck.Count < authoredRules.deckSize && customDeck.Count(id => id == card.id) < card.deckLimit) customDeck.Add(card.id); ShowCollection(true); }, slate, 32,
+                    Button(root, "-", left, .151f, left + .065f, .234f, () => { customDeck.Remove(card.id); ShowCollection(true); }, slate, 30, count > 0);
+                    ReadableText(root, count + " / " + card.deckLimit + "장", left + .067f, .154f, right - .067f, .232f, 22, count > 0 ? gold : ivory, TextAlignmentOptions.Center);
+                    Button(root, "+", right - .065f, .151f, right, .234f,
+                        () => { if (customDeck.Count < authoredRules.deckSize && customDeck.Count(id => id == card.id) < card.deckLimit) customDeck.Add(card.id); ShowCollection(true); }, slate, 30,
                         customDeck.Count < authoredRules.deckSize && count < card.deckLimit);
                 }
-                else Text(root, CardCatalog.RarityName(card.rarity) + " · " + CardCatalog.ElementName(card.element), left, .135f, right, .215f, 23, RarityColor(card.rarity), TextAlignmentOptions.Center);
+                else ReadableText(root, CardCatalog.RarityName(card.rarity) + " · 내 덱 " + count + "/" + card.deckLimit + "장", left, .135f, right, .20f, 21, RarityColor(card.rarity), TextAlignmentOptions.Center);
             }
             if (edit)
             {
-                Button(root, "덱 분석", .035f, .015f, .205f, .135f, () => ShowDeckAnalysis(() => ShowCollection(true)), slate, 24);
-                Button(root, "기본 덱 복원", .215f, .015f, .405f, .135f,
-                    () => { customDeck.Clear(); customDeck.AddRange(DemoCatalog.GetDeck(selectedDeckId).CopyCards()); ShowCollection(true); }, slate, 23);
-                Button(root, "덱 저장", .415f, .015f, .56f, .135f, () => { SaveDeck(); ShowTitle(); }, gold, 24, ValidDeck(customDeck));
+                Button(root, "덱 분석", .035f, .018f, .175f, .125f, () => ShowDeckAnalysis(() => ShowCollection(true)), slate, 23);
+                Button(root, "기본 덱 복원", .185f, .018f, .365f, .125f,
+                    () => { customDeck.Clear(); customDeck.AddRange(DemoCatalog.GetDeck(selectedDeckId).CopyCards()); ShowCollection(true); }, slate, 22);
+                Button(root, "덱 저장", .375f, .018f, .52f, .125f, () => { if (SaveDeck()) ShowLobby(); else ShowDeckSaveError(); }, gold, 23, ValidDeck(customDeck));
             }
-            else Button(root, "필터 초기화", .035f, .015f, .285f, .135f, () => { ResetCollectionFilters(); ShowCollection(false); }, slate, 24);
-            Button(root, "이전", .60f, .015f, .725f, .135f, () => { collectionPage--; ShowCollection(edit); }, slate, 24, collectionPage > 0);
-            Text(root, (collectionPage + 1) + " / " + pages, .735f, .02f, .815f, .13f, 25, gold, TextAlignmentOptions.Center);
-            Button(root, "다음", .83f, .015f, .965f, .135f, () => { collectionPage++; ShowCollection(edit); }, slate, 24, collectionPage + 1 < pages);
+            else Button(root, "검색 / 필터 초기화", .035f, .018f, .355f, .125f, () => { ResetCollectionFilters(); ShowCollection(false); }, slate, 23);
+            Button(root, "이전", .56f, .018f, .68f, .125f, () => { collectionPage--; ShowCollection(edit); }, slate, 23, collectionPage > 0);
+            ReadableText(root, (collectionPage + 1) + " / " + pages, .689f, .025f, .826f, .12f, 24, gold, TextAlignmentOptions.Center);
+            Button(root, "다음", .835f, .018f, .965f, .125f, () => { collectionPage++; ShowCollection(edit); }, slate, 23, collectionPage + 1 < pages);
+        }
+
+        private static string DeckKindCounts(System.Collections.Generic.IEnumerable<string> ids)
+        {
+            var cards = ids.Select(CardCatalog.Get).ToArray();
+            return string.Join(" · ", Enum.GetValues(typeof(CardKind)).Cast<CardKind>().Select(kind => CardCatalog.KindName(kind) + " " + cards.Count(card => card.kind == kind)));
+        }
+
+        private void ShowDeckSaveError()
+        {
+            redraw = ShowDeckSaveError; Clear(); Backdrop(true);
+            ReadableText(root, message, .10f, .37f, .90f, .67f, 30, ivory, TextAlignmentOptions.Center);
+            Button(root, "덱 편집으로", .33f, .15f, .67f, .30f, () => ShowCollection(true), gold, 26);
+        }
+
+        private void CollectionSearchField(bool edit)
+        {
+            var area = Panel(root, .035f, .761f, .533f, .837f, new Color(.025f, .029f, .022f));
+            area.gameObject.name = "Card search input"; area.GetComponent<Image>().raycastTarget = true; Frame(area, new Color(.51f, .42f, .25f), 1);
+            var input = area.gameObject.AddComponent<TMP_InputField>();
+            var viewport = Panel(area, .025f, .08f, .975f, .92f, Color.clear); viewport.gameObject.AddComponent<RectMask2D>();
+            var label = Text(viewport, "", 0, 0, 1, 1, 25, ivory); label.enableAutoSizing = false;
+            var placeholder = Text(viewport, "카드 이름 · 효과 검색", 0, 0, 1, 1, 24, new Color(.58f, .57f, .47f));
+            input.textViewport = viewport; input.textComponent = label; input.placeholder = placeholder;
+            input.lineType = TMP_InputField.LineType.SingleLine; input.characterLimit = 64; input.SetTextWithoutNotify(collectionSearchDraft);
+            input.onValueChanged.AddListener(value => collectionSearchDraft = value);
+            void Search() { collectionSearch = collectionSearchDraft.Trim(); collectionPage = 0; ShowCollection(edit); }
+            input.onSubmit.AddListener(_ => Search());
+            Button(root, "검색", .545f, .761f, .648f, .837f, Search, gold, 23);
         }
 
         private void ResetCollectionFilters()
         {
-            collectionElement = collectionKind = collectionCost = collectionRarity = -1; collectionPage = 0;
+            collectionElement = collectionKind = collectionCost = collectionRarity = -1; collectionPage = collectionSort = 0;
+            collectionDeckOnly = false; collectionSearch = collectionSearchDraft = "";
         }
 
         private void ShowCollectionFilter(int filter, bool edit)
@@ -131,14 +175,14 @@ namespace FantasyCards.Presentation
         private void ShowDetail(CardDefinition card, Action back)
         {
             redraw = () => ShowDetail(card, back); Clear(); Backdrop(true);
-            var portraitFrame = Panel(root, .025f, .06f, .515f, .945f, new Color(.32f, .29f, .50f, .36f));
+            var portraitFrame = Panel(root, .025f, .06f, .515f, .945f, new Color(.045f, .041f, .025f));
             Frame(portraitFrame, RarityColor(card.rarity), 2);
-            Artwork(root, card, .033f, .075f, .507f, .93f);
-            Gradient(root, .40f, .075f, .535f, .93f, Color.clear, ink, true);
+            PrintedImage(portraitFrame, card, .025f, .025f, .975f, .975f);
+            Ornament(portraitFrame, new Color(.64f, .49f, .26f));
             Text(root, CardCatalog.RarityName(card.rarity) + "  /  " + CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · " + card.deckLimit + "장까지", .55f, .82f, .965f, .94f, 26, RarityColor(card.rarity));
-            Text(root, card.name, .545f, .68f, .965f, .825f, Compact ? 47 : 57, ivory);
-            Text(root, "Lv " + card.level + "   ·   " + CardCatalog.CostText(card), .55f, .565f, .96f, .675f, 27, gold);
-            Text(root, DetailedCardStats(card), .55f, .42f, .96f, .56f, 25, teal, TextAlignmentOptions.TopLeft);
+            ReadableText(root, card.name, .545f, .68f, .965f, .825f, Compact ? 43 : 53, ivory);
+            ReadableText(root, "Lv " + card.level + "\n" + CardCatalog.CostText(card), .55f, .565f, .96f, .675f, 27, gold);
+            ReadableText(root, DetailedCardStats(card), .55f, .42f, .96f, .56f, 25, teal, TextAlignmentOptions.TopLeft);
             ScrollableCardText(card.text, .55f, .23f, .96f, .415f);
             Button(root, "돌아가기", .55f, .065f, .79f, .195f, back, gold, 27);
             if (OriginalCardTexture(card) != null)
@@ -147,7 +191,7 @@ namespace FantasyCards.Presentation
 
         private void ScrollableCardText(string value, float x0, float y0, float x1, float y1)
         {
-            var viewport = Panel(root, x0, y0, x1, y1, new Color(.025f, .035f, .075f, .46f));
+            var viewport = Panel(root, x0, y0, x1, y1, new Color(.025f, .029f, .020f, .80f));
             viewport.gameObject.name = "Card rules scroll"; viewport.GetComponent<Image>().raycastTarget = true;
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Card rules content", typeof(RectTransform)).GetComponent<RectTransform>();
@@ -163,7 +207,7 @@ namespace FantasyCards.Presentation
 
         private static string DetailedCardStats(CardDefinition card)
         {
-            if (card.kind == CardKind.Unit) return CardCatalog.StatsText(card) + "\n코인 연산은 각 능력치에 따로 적용됩니다.";
+            if (card.kind == CardKind.Unit || card.kind == CardKind.Equipment) return CardCatalog.StatsText(card) + "\n코인 연산은 각 능력치에 따로 적용됩니다.";
             if (card.kind == CardKind.Terrain) return "지형 LP " + card.landPointCost + " · 생산 " + CardCatalog.ElementName(card.element) + " " + card.producedColored + " / 총소울 " + card.producedGeneric;
             return CardCatalog.KindName(card.kind) + " · 레벨과 소울을 확인하고 대상에 적용하세요.";
         }
@@ -176,18 +220,18 @@ namespace FantasyCards.Presentation
         private void ShowOriginalCard(CardDefinition card, Action back)
         {
             redraw = () => ShowOriginalCard(card, back); Clear(); Backdrop(true);
-            Text(root, card.name + " · 원본 카드", .05f, .88f, .95f, .98f, 36, ivory, TextAlignmentOptions.Center);
+            Text(root, card.name + " · 원본 카드", .05f, .92f, .95f, .99f, 32, ivory, TextAlignmentOptions.Center);
             var texture = OriginalCardTexture(card);
             if (texture != null)
             {
-                var holder = Panel(root, .025f, .23f, .975f, .86f, Color.clear);
+                var holder = Panel(root, .025f, .13f, .975f, .915f, Color.clear);
                 var image = new GameObject("Original card image", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
                 var rect = (RectTransform)image.transform; rect.SetParent(holder, false); Anchor(rect, 0, 0, 1, 1);
                 image.texture = texture; image.raycastTarget = false;
                 var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = (float)texture.width / texture.height;
             }
-            Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .15f, .95f, .22f, 22, gold, TextAlignmentOptions.Center);
-            Button(root, "능력 설명", .35f, .025f, .65f, .145f, () => ShowDetail(card, back), gold, 26);
+            Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .081f, .95f, .125f, 20, gold, TextAlignmentOptions.Center);
+            Button(root, "능력 설명", .35f, .005f, .65f, .078f, () => ShowDetail(card, back), gold, 25);
         }
 
         private static Color ElementColor(Element element)

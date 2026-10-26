@@ -1,0 +1,546 @@
+{
+  "checkedDate": "2026-10-26",
+  "auditType": "Independent read-only original-source compatibility review; runtime and Unity import are separate checks.",
+  "source": {
+    "path": "Artifacts/Validation/FmExpansion/Research/database/original-candidates.json",
+    "sha256": "9a1f6aa000e9091b6421e5c33712b5904602e82cc7e6d6b1840bd05fdaec5f3d",
+    "candidateCount": 237,
+    "provenance": "Preserved FM Lunatic public fan database fields and public original image URLs. These are not a first-party server dump or a recovered original client."
+  },
+  "preservedBaseline": {
+    "path": "Tools/Data/ClassicCards/selection.json at HEAD",
+    "sha256": "a1408a821c53c8b7e5e8211c95772f83043355176db7519ab014124bd8f5c348",
+    "count": 96
+  },
+  "addedSourceIds": [
+    "2042820005",
+    "2042920014",
+    "2050820010",
+    "2052120072",
+    "2071120083",
+    "2071120114",
+    "2071120119",
+    "2071120122",
+    "2071120123",
+    "2082420163",
+    "2082420169",
+    "2082420179",
+    "2102220217",
+    "3010820275",
+    "3010820280",
+    "3032120398",
+    "3032820430",
+    "3062720568",
+    "3092620743",
+    "2050320056",
+    "2051720065",
+    "2062120088",
+    "2071120125",
+    "2071120126",
+    "2071120131",
+    "2071120132",
+    "2082420188",
+    "3021520366",
+    "3050220494",
+    "3080120616",
+    "3082920669",
+    "3092620744",
+    "2042920031",
+    "2051320049",
+    "2052320077",
+    "2060620102",
+    "2060620103",
+    "2060720105",
+    "2071120137",
+    "2071120141",
+    "2082420201",
+    "3092620724",
+    "3102420780",
+    "2042920039",
+    "2042920050",
+    "2052220078",
+    "2052520053",
+    "2060820104",
+    "2062120094",
+    "2062120095",
+    "2071120149",
+    "3032120417",
+    "3032120421",
+    "3062720598",
+    "3092620735",
+    "3092620748",
+    "6090622556",
+    "3020820354",
+    "3052320543",
+    "3053020555",
+    "3092620742",
+    "3112820837",
+    "4031921039",
+    "2042940004",
+    "2042930028"
+  ],
+  "added": {
+    "count": 65,
+    "categoryCounts": {
+      "Unit": 63,
+      "Spell": 1,
+      "Equipment": 1
+    },
+    "elementCounts": {
+      "Darkness": 12,
+      "Fire": 10,
+      "Tide": 11,
+      "Forest": 9,
+      "Metal": 3,
+      "Earth": 14,
+      "Dawn": 6
+    },
+    "costCounts": {
+      "1": 6,
+      "2": 9,
+      "3": 13,
+      "4": 11,
+      "5": 12,
+      "6": 9,
+      "7": 5
+    },
+    "rarityCounts": {
+      "Free": 41,
+      "Common": 4,
+      "Uncommon": 16,
+      "Special": 4
+    },
+    "byElement": {
+      "Darkness": {
+        "count": 12,
+        "categoryCounts": {
+          "Unit": 11,
+          "Equipment": 1
+        },
+        "costCounts": {
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 1,
+          "7": 1
+        },
+        "rarityCounts": {
+          "Free": 8,
+          "Uncommon": 3,
+          "Special": 1
+        }
+      },
+      "Fire": {
+        "count": 10,
+        "categoryCounts": {
+          "Unit": 10
+        },
+        "costCounts": {
+          "1": 1,
+          "2": 1,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 1,
+          "7": 1
+        },
+        "rarityCounts": {
+          "Free": 7,
+          "Uncommon": 2,
+          "Special": 1
+        }
+      },
+      "Tide": {
+        "count": 11,
+        "categoryCounts": {
+          "Unit": 11
+        },
+        "costCounts": {
+          "1": 1,
+          "2": 1,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 1
+        },
+        "rarityCounts": {
+          "Free": 7,
+          "Common": 1,
+          "Uncommon": 2,
+          "Special": 1
+        }
+      },
+      "Forest": {
+        "count": 9,
+        "categoryCounts": {
+          "Unit": 9
+        },
+        "costCounts": {
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 1,
+          "6": 2
+        },
+        "rarityCounts": {
+          "Free": 7,
+          "Uncommon": 2
+        }
+      },
+      "Metal": {
+        "count": 3,
+        "categoryCounts": {
+          "Unit": 3
+        },
+        "costCounts": {
+          "3": 2,
+          "5": 1
+        },
+        "rarityCounts": {
+          "Free": 2,
+          "Uncommon": 1
+        }
+      },
+      "Earth": {
+        "count": 14,
+        "categoryCounts": {
+          "Unit": 13,
+          "Spell": 1
+        },
+        "costCounts": {
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2
+        },
+        "rarityCounts": {
+          "Free": 8,
+          "Common": 2,
+          "Uncommon": 3,
+          "Special": 1
+        }
+      },
+      "Dawn": {
+        "count": 6,
+        "categoryCounts": {
+          "Unit": 6
+        },
+        "costCounts": {
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 2,
+          "6": 1
+        },
+        "rarityCounts": {
+          "Free": 2,
+          "Common": 1,
+          "Uncommon": 3
+        }
+      }
+    }
+  },
+  "expanded": {
+    "count": 161,
+    "categoryCounts": {
+      "Terrain": 14,
+      "Unit": 119,
+      "Spell": 15,
+      "Equipment": 13
+    },
+    "elementCounts": {
+      "Darkness": 25,
+      "Fire": 22,
+      "Tide": 25,
+      "Forest": 23,
+      "Metal": 19,
+      "Earth": 29,
+      "Dawn": 18
+    },
+    "costCounts": {
+      "0": 14,
+      "1": 29,
+      "2": 27,
+      "3": 23,
+      "4": 20,
+      "5": 19,
+      "6": 18,
+      "7": 11
+    },
+    "rarityCounts": {
+      "Free": 108,
+      "Common": 16,
+      "Uncommon": 27,
+      "Rare": 1,
+      "Special": 9
+    },
+    "byElement": {
+      "Darkness": {
+        "count": 25,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 19,
+          "Spell": 2,
+          "Equipment": 2
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 5,
+          "2": 3,
+          "3": 4,
+          "4": 4,
+          "5": 3,
+          "6": 2,
+          "7": 2
+        },
+        "rarityCounts": {
+          "Free": 17,
+          "Common": 1,
+          "Uncommon": 5,
+          "Special": 2
+        }
+      },
+      "Fire": {
+        "count": 22,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 18,
+          "Spell": 2
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "rarityCounts": {
+          "Free": 15,
+          "Uncommon": 4,
+          "Rare": 1,
+          "Special": 2
+        }
+      },
+      "Tide": {
+        "count": 25,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 19,
+          "Spell": 2,
+          "Equipment": 2
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 5,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 4,
+          "7": 2
+        },
+        "rarityCounts": {
+          "Free": 17,
+          "Common": 2,
+          "Uncommon": 5,
+          "Special": 1
+        }
+      },
+      "Forest": {
+        "count": 23,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 17,
+          "Spell": 2,
+          "Equipment": 2
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 4,
+          "2": 5,
+          "3": 3,
+          "4": 3,
+          "5": 2,
+          "6": 3,
+          "7": 1
+        },
+        "rarityCounts": {
+          "Free": 18,
+          "Common": 1,
+          "Uncommon": 3,
+          "Special": 1
+        }
+      },
+      "Metal": {
+        "count": 19,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 11,
+          "Spell": 2,
+          "Equipment": 4
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 2,
+          "5": 2,
+          "6": 1
+        },
+        "rarityCounts": {
+          "Free": 15,
+          "Common": 2,
+          "Uncommon": 2
+        }
+      },
+      "Earth": {
+        "count": 29,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 21,
+          "Spell": 3,
+          "Equipment": 3
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 6,
+          "2": 6,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "rarityCounts": {
+          "Free": 20,
+          "Common": 4,
+          "Uncommon": 3,
+          "Special": 2
+        }
+      },
+      "Dawn": {
+        "count": 18,
+        "categoryCounts": {
+          "Terrain": 2,
+          "Unit": 14,
+          "Spell": 2
+        },
+        "costCounts": {
+          "0": 2,
+          "1": 2,
+          "2": 3,
+          "3": 3,
+          "4": 2,
+          "5": 3,
+          "6": 2,
+          "7": 1
+        },
+        "rarityCounts": {
+          "Free": 6,
+          "Common": 6,
+          "Uncommon": 5,
+          "Special": 1
+        }
+      }
+    }
+  },
+  "checks": [
+    {
+      "check": "All 65 new source IDs are unique and absent from the preserved 96-card selection",
+      "passed": true
+    },
+    {
+      "check": "All new rows have supported element, rarity, four-copy deck limit, and capability mask",
+      "passed": true
+    },
+    {
+      "check": "All soul costs contain only the card element and generic soul code81",
+      "passed": true
+    },
+    {
+      "check": "Every added unit has no special skills and no stat locks",
+      "passed": true
+    },
+    {
+      "check": "All AP/DP/HP coin tokens, counts and operators are accepted by the catalog generator",
+      "passed": true
+    },
+    {
+      "check": "박쥐날개 is a beast-only stat item with AP unchanged, DP−1 and HP+3",
+      "passed": true
+    },
+    {
+      "check": "거인의힘 exactly grants ally gear-capable units AP+2 with one-combat duration and Any play window",
+      "passed": true
+    },
+    {
+      "check": "모르토카토템 AP=3C4 preserves Set rather than Add semantics",
+      "passed": true
+    },
+    {
+      "check": "Expanded 161-card catalog has distinct original names and art URLs",
+      "passed": true
+    },
+    {
+      "check": "All 119 original units have distinct complete gameplay stat/coin signatures",
+      "passed": true
+    }
+  ],
+  "semanticObservations": [
+    {
+      "sourceId": "2042940004",
+      "name": "박쥐날개",
+      "mapping": {
+        "requiredTrait": "beast",
+        "attackDelta": 0,
+        "defenseDelta": -1,
+        "healthDelta": 3
+      },
+      "sourceStatTypes": {
+        "ATK": 1,
+        "DEF": 32,
+        "HP": 31
+      }
+    },
+    {
+      "sourceId": "2042930028",
+      "name": "거인의힘",
+      "sourceRuleExcerpt": "아군 장비능력 AP+2",
+      "mapping": {
+        "kind": "statOperations",
+        "side": "ally",
+        "range": "all",
+        "requiredTrait": "gear",
+        "stat": "ap",
+        "delta": 2
+      },
+      "duration": 1,
+      "durationType": 1,
+      "turnType": 1
+    },
+    {
+      "sourceId": "3102420780",
+      "name": "모르토카토템",
+      "mapping": {
+        "attackCoinOperation": "Set",
+        "attackCoinCount": 4,
+        "attackCoinMultiplier": 3
+      }
+    }
+  ],
+  "limits": [
+    "This report verifies source selection compatibility and declared mappings; generator regeneration, art byte/pixel verification, and runtime execution must be recorded independently.",
+    "No additional land cards are introduced; existing LP, soul production, upkeep, save IDs and preset decks retain their existing definitions.",
+    "No new special-skill, stat-lock, or manual-targeting semantics are assumed."
+  ]
+}

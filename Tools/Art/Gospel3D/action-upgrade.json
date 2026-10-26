@@ -1,0 +1,56 @@
+{
+  "revision": "gospel-remaster-2026-10-26",
+  "source": "Quaternius Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "practiceSource": "Interact; nonviolent reaching gesture, upper body only at runtime; optional practice area only",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "before": {
+        "meshes": 38,
+        "vertices": 14565,
+        "triangles": 28250,
+        "materialSlots": 40
+      },
+      "after": {
+        "meshes": 8,
+        "vertices": 14565,
+        "triangles": 28250,
+        "materialSlots": 10
+      },
+      "bones": 65,
+      "retainedEyesRenderer": "Eyes",
+      "clips": [
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "sha256": "0ae0d9c739e4f0b502f858f357b13a47bf84a71966a1845ce056e77d51924fe7"
+    },
+    {
+      "name": "AdultJesus",
+      "before": {
+        "meshes": 40,
+        "vertices": 15459,
+        "triangles": 29876,
+        "materialSlots": 42
+      },
+      "after": {
+        "meshes": 10,
+        "vertices": 15459,
+        "triangles": 29876,
+        "materialSlots": 12
+      },
+      "bones": 65,
+      "retainedEyesRenderer": "Eyes.001",
+      "clips": [
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "sha256": "7fad39182320cbb1be4c98a67665ec3505b250cd35ea70c89eb1e8dac2a6b7c7"
+    }
+  ]
+}

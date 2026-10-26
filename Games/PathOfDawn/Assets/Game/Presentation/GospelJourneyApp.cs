@@ -26,6 +26,7 @@ namespace PathOfDawn.Presentation
         DawnPointerPad movePad, lookPad;
         GameObject touchRoot, noticeRoot;
         Button interactionButton;
+        Button jumpButton, actionButton, runButton;
         BgmPlayer music;
         bool inGame, modal;
         float noticeUntil, autosaveTimer;
@@ -63,8 +64,11 @@ namespace PathOfDawn.Presentation
                 float meters=Vector3.Distance(Player.transform.position,World.LandmarkPosition(Journey.CurrentObjective.Id));
                 bool nearby=meters<InteractionRadius;
                 if(distance!=null)distance.text=nearby?"말씀을 읽을 수 있습니다":Mathf.CeilToInt(meters)+" m · 빛나는 표식으로";
-                if(prompt!=null)prompt.text=nearby?"E · "+Journey.CurrentObjective.Title:"WASD 이동   Shift 달리기   우클릭 시점   E 읽기";
+                if(prompt!=null)prompt.text=nearby?"E · "+Journey.CurrentObjective.Title:
+                    Player.Actions.IsInTrainingArea?"자유 연습 구역 · F 동작 연습 · 성경 본문 외 조작":"WASD 이동 · Shift 달리기 · Space 점프 · E 대화";
                 if(interactionButton!=null)interactionButton.interactable=nearby;
+                if(jumpButton!=null)jumpButton.interactable=Player.CanJump;
+                if(actionButton!=null)actionButton.interactable=Player.CanPerformAction;
                 if(nearby&&Keyboard.current!=null&&Keyboard.current.eKey.wasPressedThisFrame)Interact();
                 autosaveTimer+=Time.deltaTime;if(autosaveTimer>18){Save(false);autosaveTimer=0;}
             }
@@ -74,6 +78,7 @@ namespace PathOfDawn.Presentation
         {
             if(screen!=null){screen.gameObject.SetActive(false);Destroy(screen.gameObject);}screen=ui.Fill(frame,"Gospel screen");
             Player?.StopInput();if(touchRoot!=null)touchRoot.SetActive(false);if(movePad!=null)movePad.ResetInput();if(lookPad!=null)lookPad.ResetInput();
+            if(runButton!=null)runButton.GetComponentInChildren<TextMeshProUGUI>().text="달리기 OFF";
         }
         TextMeshProUGUI Text(Transform parent,string text,float x,float y,float w,float h,float size=24,Color? color=null)
         {var t=ui.Text(parent,text,x,y,w,h,size,color);t.overflowMode=TextOverflowModes.Overflow;return t;}
@@ -148,7 +153,11 @@ namespace PathOfDawn.Presentation
             pinned=Text(scripture,Journey.CurrentReading.Reference+" · 개역한글",18,10,760,30,20,DawnUi.Gold);
             Text(scripture,FirstVerseLine(Journey.CurrentReading.Text),18,43,760,69,23);
             prompt=Text(hud,"",242,526,800,38,21,DawnUi.Gold);
-            interactionButton=Button(hud,"읽기 · E",1060,604,196,64,Interact,false);
+            interactionButton=Button(hud,"대화 · E",1060,604,196,64,Interact,false);
+            jumpButton=Button(hud,"점프 · Space",1060,530,196,58,()=>Player.JumpPressed());
+            actionButton=Button(hud,"동작 연습 · F",1060,456,196,58,()=>{
+                if(!Player.TryAction())Toast("뜰 남서쪽의 자유 연습 구역에서 사용할 수 있습니다.");
+            },false);
             BuildTouch();
         }
         static string FirstVerseLine(string text){int newline=text.IndexOf('\n');return newline<0?text:text.Substring(0,newline);}
@@ -160,6 +169,10 @@ namespace PathOfDawn.Presentation
             pad.pivot=new Vector2(.5f,.5f);pad.anchoredPosition=new Vector2(122,-562);movePad=pad.gameObject.AddComponent<DawnPointerPad>();movePad.joystick=true;movePad.radius=67;
             var thumb=ui.Card(pad,"Move thumb",0,0,72,72,DawnUi.Gold);thumb.anchorMin=thumb.anchorMax=thumb.pivot=new Vector2(.5f,.5f);thumb.anchoredPosition=Vector2.zero;thumb.GetComponent<Image>().raycastTarget=false;movePad.thumb=thumb;
             Text(pad,"이동",-30,100,80,38,20,DawnUi.Gold).raycastTarget=false;
+            runButton=Button(touchRoot.transform,"달리기 OFF",32,386,180,64,()=>{
+                Player.TouchRun=!Player.TouchRun;
+                runButton.GetComponentInChildren<TextMeshProUGUI>().text=Player.TouchRun?"달리기 ON":"달리기 OFF";
+            });
             touchRoot.SetActive(TouchInterface);
         }
         void ResumeJourney()
@@ -175,14 +188,29 @@ namespace PathOfDawn.Presentation
             modal=true;Player.InputEnabled=false;if(hud!=null)hud.gameObject.SetActive(false);ClearScreen();
             if(birth)World.SetOverview(true);
             var reading=Journey.CurrentReading;
-            Heading(birth?"01  BETHLEHEM · "+Journey.ProgressText:"02  JERUSALEM · "+Journey.ProgressText,reading.Title,"");
-            var card=ui.Card(screen,"Scripture reading",36,224,1208,456,new Color(.055f,.09f,.12f,.96f));
-            Text(card,reading.Reference+"  /  "+reading.Translation,26,18,1148,42,28,DawnUi.Gold);
-            ScrollText(card,"성경 본문",reading.Text,26,76,1148,224,25);
-            Text(card,reading.Context,26,316,1148,76,22);
-            var label=birth?(Journey.ProloguePage<GospelCatalog.PrologueReadings.Count-1?"다음 구절":"성전으로"):"말씀을 따라 걷기";
-            Primary(card,label,826,394,350,48,AdvanceReading);
-            Text(card,GospelCatalog.Attribution,26,403,760,32,20,DawnUi.Gold);
+            var turn=Journey.CurrentDialogue;
+            ui.Card(screen,"Conversation heading shade",24,14,1232,122,new Color(.04f,.07f,.10f,.92f));
+            Text(screen,birth?"01  BETHLEHEM · "+Journey.ProgressText:"02  JERUSALEM · "+Journey.ProgressText,40,26,1190,35,22,DawnUi.Gold).characterSpacing=2;
+            Text(screen,reading.Title,36,70,1190,62,42);
+            var dialogue=ui.Card(screen,"NPC conversation",36,150,1208,288,new Color(.055f,.09f,.12f,.97f));
+            var portrait=ui.Art(dialogue,"Art/GospelRemaster/portraits",16,15,258,258,false);
+            if(portrait!=null)portrait.uvRect=PortraitUv(turn.PortraitKey);
+            Text(dialogue,turn.Speaker,294,20,854,43,30,DawnUi.Gold);
+            Text(dialogue,turn.Label+"  ·  "+(Journey.DialogueIndex+1)+" / "+Journey.DialogueCount,294,69,854,32,20,DawnUi.Teal);
+            ScrollText(dialogue,"대화",turn.Text,294,118,870,144,27);
+            var card=ui.Card(screen,"Scripture reading",36,456,1208,228,new Color(.055f,.09f,.12f,.97f));
+            Text(card,reading.Reference+"  /  "+reading.Translation,26,12,1148,38,25,DawnUi.Gold);
+            Text(card,"성경 본문 · 스크롤",925,18,245,30,19,DawnUi.Teal);
+            ScrollText(card,"성경 본문",reading.Text,26,58,1148,96,24);
+            bool more=Journey.DialogueIndex+1<Journey.DialogueCount;
+            var label=more?"다음 대화":birth?(Journey.ProloguePage<GospelCatalog.PrologueReadings.Count-1?"다음 구절":"성전으로"):"말씀을 따라 걷기";
+            Primary(card,label,826,166,350,48,AdvanceReading);
+            Text(card,GospelCatalog.Attribution,26,176,760,32,20,DawnUi.Gold);
+        }
+        static Rect PortraitUv(string key)
+        {
+            switch(key){case "mary":return new Rect(.5f,.5f,.5f,.5f);case "joseph":return new Rect(0,0,.5f,.5f);
+                case "jesus":return new Rect(0,.5f,.5f,.5f);default:return new Rect(.5f,0,.5f,.5f);}
         }
         void ScrollText(Transform parent,string name,string value,float x,float y,float w,float h,float size)
         {
@@ -194,7 +222,7 @@ namespace PathOfDawn.Presentation
         }
         public void AdvanceReading()
         {
-            if(!Journey.AdvanceReading())return;Save(false);RenderJourney();
+            if(!Journey.AdvanceDialogue())return;Save(false);RenderJourney();
         }
         public void Interact()
         {
@@ -248,10 +276,10 @@ namespace PathOfDawn.Presentation
         void ShowSettings()
         {
             modal=true;if(Player!=null)Player.InputEnabled=false;ClearScreen();if(hud!=null)hud.gameObject.SetActive(false);
-            Heading("SETTINGS","설정","WASD / 방향키 이동 · Shift 달리기 · 우클릭 시점 · E 읽기 · Esc 설정");
+            Heading("SETTINGS","설정","WASD 이동 · Shift 달리기 · Space 점프 · F 동작 연습 · E 대화 · Esc 설정");
             var panel=ui.Card(screen,"Journey settings",48,270,1184,290);
             Button(panel,music.Muted?"음악 켜기":"음악 끄기",26,24,350,58,()=>{music.SetMuted(!music.Muted);ShowSettings();});
-            Button(panel,"음량 −",400,24,260,58,()=>{music.SetVolume(music.Volume-.1f);ShowSettings();});Button(panel,"음량 +",682,24,260,58,()=>{music.SetVolume(music.Volume+.1f);ShowSettings();});
+            Button(panel,"음량 -",400,24,260,58,()=>{music.SetVolume(music.Volume-.1f);ShowSettings();});Button(panel,"음량 +",682,24,260,58,()=>{music.SetVolume(music.Volume+.1f);ShowSettings();});
             Text(panel,"음량 "+Mathf.RoundToInt(music.Volume*100)+"%",970,32,180,42,24,DawnUi.Gold);
             Text(panel,"성경전서 개역한글판 · 대한성서공회. 인물의 이동과 성전 공간은 기록을 따라 읽기 위한 재현입니다.\n진행 상황은 현재 브라우저·기기에 저장됩니다.",26,118,1132,118,24);
             Button(screen,"돌아가기",48,624,370,64,()=>{if(inGame)ResumeJourney();else ShowTitle();});

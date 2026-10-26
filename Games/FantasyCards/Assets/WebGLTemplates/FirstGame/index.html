@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>{{{ PRODUCT_NAME }}}</title>
   <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://w.soundcloud.com">
+  <link rel="preconnect" href="https://api-v2.soundcloud.com">
+  <link rel="preconnect" href="https://cf-media.sndcdn.com">
   <style>
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
     * { box-sizing: border-box; }
@@ -31,7 +34,8 @@
     #fm-music button { border: 1px solid #8d754b; border-radius: 3px; padding: 6px 10px; background: #383025; }
     #fm-music details { position: relative; }
     #fm-music iframe { position: absolute; bottom: 32px; right: 0; width: min(350px, 92vw); height: 166px; border: 1px solid #8d754b; background: #eee; z-index: 8; }
-    #fm-music details:not([open]) iframe { visibility: hidden; }
+    #fm-music details:not([open]) iframe, #fm-music iframe:not(.fm-current-player) { visibility: hidden; pointer-events: none; }
+    #fm-loading-start { margin: auto; padding: 12px 24px; border: 1px solid #bba36e; border-radius: 6px; background: #e5d2a5; color: #142027; font: inherit; cursor: pointer; }
     #fm-music a { color: #d2be8d; }
     @media (max-width: 600px) { #fm-music { gap: 6px; font-size: 10px; padding: 3px; } #fm-music-credit { display: none; } }
     @supports (height: 100dvh) { #unity-container { width: min(100vw, calc(177.777778dvh - 78.222222px)); height: min(calc(100dvh - 44px), 56.25vw); } }
@@ -43,110 +47,310 @@
     <canvas id="unity-canvas" width="{{{ WIDTH }}}" height="{{{ HEIGHT }}}" tabindex="0" aria-label="{{{ PRODUCT_NAME }}} 게임 화면" data-unity-state="loading"></canvas>
     <div id="unity-loading-bar" role="status" aria-live="polite">
       <h1>{{{ PRODUCT_NAME }}}</h1>
-      <p id="loading-label">이야기를 준비하고 있습니다…</p>
+      <p id="loading-label">판타지마스터즈를 준비하고 있습니다…</p>
       <progress id="unity-progress" max="1" value="0" aria-label="게임 불러오기"></progress>
-      <p style="font-size:12px;opacity:.75">아래 원작 BGM 버튼으로 SOUND-I의 공식 음악을 들을 수 있습니다.</p>
+      <button id="fm-loading-start" type="button">시작 · 원작 BGM 듣기</button>
+      <p style="font-size:12px;opacity:.75">첫 화면 조작으로 SOUND-I의 공식 음악을 시작합니다.</p>
     </div>
     <div id="unity-warning" role="alert" aria-live="assertive"></div>
   </main>
   <footer id="fm-music" aria-label="판타지마스터즈 원작 음악">
-    <button id="fm-music-toggle" type="button">원작 BGM 켜기</button>
+    <button id="fm-music-toggle" type="button">원작 BGM 시작</button>
     <span id="fm-music-status" role="status">로그인 · SOUND-I</span>
     <details id="fm-player-panel"><summary>공식 플레이어</summary>
-      <iframe id="fm-original-player" title="SOUND-I 판타지마스터즈 공식 음악" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910360&amp;auto_play=false&amp;show_artwork=false&amp;visual=false"></iframe>
+      <iframe id="fm-original-player" class="fm-current-player" title="SOUND-I 판타지마스터즈 공식 음악 · 로그인" allow="autoplay" loading="eager" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910360&amp;auto_play=false&amp;single_active=false&amp;show_artwork=false&amp;visual=false"></iframe>
+      <iframe id="fm-original-player-lobby" title="SOUND-I 판타지마스터즈 공식 음악 · 로비" allow="autoplay" loading="eager" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910359&amp;auto_play=false&amp;single_active=false&amp;show_artwork=false&amp;visual=false"></iframe>
+      <iframe id="fm-original-player-deck" title="SOUND-I 판타지마스터즈 공식 음악 · 덱 편집" allow="autoplay" loading="eager" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910362&amp;auto_play=false&amp;single_active=false&amp;show_artwork=false&amp;visual=false"></iframe>
+      <iframe id="fm-original-player-battle" title="SOUND-I 판타지마스터즈 공식 음악 · 게임 1" allow="autoplay" loading="eager" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910353&amp;auto_play=false&amp;single_active=false&amp;show_artwork=false&amp;visual=false"></iframe>
     </details>
     <a id="fm-music-credit" href="https://soundcloud.com/sound-i2/sets/eomgh4mkqbec" target="_blank" rel="noopener noreferrer">SOUND-I 원곡</a>
   </footer>
-  <script>
+  <script id="fm-original-music-controller">
     (function () {
       "use strict";
+      // Keep each official embed alive. Scene changes never reload a track or
+      // fetch/repackage the composer's audio outside the hosted player.
       var tracks = {
-        login: { id: 234910360, label: "로그인" },
-        lobby: { id: 234910359, label: "로비" },
-        deck: { id: 234910362, label: "덱 편집" },
-        battle: { id: 234910353, label: "게임 1" }
+        login: { id: 234910360, label: "로그인", frameId: "fm-original-player" },
+        lobby: { id: 234910359, label: "로비", frameId: "fm-original-player-lobby" },
+        deck: { id: 234910362, label: "덱 편집", frameId: "fm-original-player-deck" },
+        battle: { id: 234910353, label: "게임 1", frameId: "fm-original-player-battle" }
       };
-      var frame = document.getElementById("fm-original-player");
       var button = document.getElementById("fm-music-toggle");
       var status = document.getElementById("fm-music-status");
-      var widget = null, ready = false, wanted = false, muted = false, volume = 60;
-      var scene = "login", loadedScene = "login", trackGeneration = 0;
-      function label(suffix) {
+      var panel = document.getElementById("fm-player-panel");
+      var scene = "login", active = null, generation = 0;
+      var muted = false, volume = .6, hasMutedPreference = false, hasVolumePreference = false;
+      var requestAt = performance.now();
+      function readPreference(key) {
+        try { return window.localStorage.getItem("FC.originalMusic." + key); } catch (_) { return null; }
+      }
+      function savePreference(key, value) {
+        try { window.localStorage.setItem("FC.originalMusic." + key, String(value)); } catch (_) { /* Private storage can be unavailable. */ }
+      }
+      var storedMuted = readPreference("muted"), storedVolume = readPreference("volume");
+      if (storedMuted !== null) { muted = storedMuted === "1"; hasMutedPreference = true; }
+      if (storedVolume !== null && Number.isFinite(Number(storedVolume))) {
+        volume = Math.max(0, Math.min(1, Number(storedVolume))); hasVolumePreference = true;
+      }
+      Object.keys(tracks).forEach(function (key) {
+        var player = tracks[key];
+        player.scene = key;
+        player.frame = document.getElementById(player.frameId);
+        player.widget = null;
+        player.ready = false;
+        player.playing = false;
+        player.pending = false;
+        player.warming = false;
+        player.warmed = false;
+        player.playEpoch = 0;
+        player.playEventAt = 0;
+      });
+      function render() {
+        var suffix = muted ? "SOUND-I 음소거" : active && active.playing
+          ? (active === tracks[scene] ? "SOUND-I 재생 중" : "SOUND-I 전환 중")
+          : tracks[scene].ready ? "화면을 조작하면 음악 재생" : "공식 플레이어 준비 중";
         status.textContent = tracks[scene].label + " · " + suffix;
-        button.textContent = wanted && !muted ? "원작 BGM 끄기" : "원작 BGM 켜기";
+        button.textContent = muted ? "원작 BGM 켜기" : active && active.playing ? "원작 BGM 끄기" : "원작 BGM 시작";
+        button.setAttribute("aria-pressed", String(!muted));
+        status.dataset.muted = String(muted);
+        status.dataset.volume = String(volume);
       }
-      function apply() {
-        if (!ready) return;
-        widget.setVolume(muted ? 0 : volume);
-        if (wanted && !muted) widget.play(); else widget.pause();
-      }
-      function loadScene() {
-        if (!ready || loadedScene === scene) { apply(); return; }
-        loadedScene = scene;
-        var generation = ++trackGeneration;
-        label("SOUND-I 불러오는 중");
-        widget.load("https://api.soundcloud.com/tracks/" + tracks[scene].id, {
-          auto_play: false, show_artwork: false, visual: false,
-          callback: function () { if (generation === trackGeneration) apply(); }
+      function markRequest() {
+        requestAt = performance.now();
+        status.dataset.requestedScene = scene;
+        status.dataset.requestedTrackId = String(tracks[scene].id);
+        status.dataset.requestedAtMs = String(requestAt);
+        Object.keys(tracks).forEach(function (key) {
+          var selected = key === scene;
+          tracks[key].frame.classList.toggle("fm-current-player", selected);
+          tracks[key].frame.setAttribute("aria-hidden", String(!selected));
+          tracks[key].frame.tabIndex = selected ? 0 : -1;
         });
+      }
+      function pausePlayer(player, rewind) {
+        // Do not wait for asynchronous PAUSE to clear this flag: immediate
+        // reentry must send play(), including a warm-up pause still in flight.
+        player.playing = false;
+        player.pending = false;
+        ++player.playEpoch;
+        player.widget.setVolume(0);
+        player.widget.pause();
+        if (rewind) player.widget.seekTo(0);
+      }
+      function stopWarmup(player) {
+        player.warmed = true;
+        player.warming = false;
+        if (player === active || (!muted && player === tracks[scene])) return;
+        pausePlayer(player, true);
+      }
+      function confirmPlaying(player, version) {
+        var epoch = player.playEpoch;
+        player.widget.getCurrentSound(function (sound) {
+          // A late reply from an earlier scene/player must never become audible
+          // or rewrite the actual source/progress reported to QA.
+          if (version !== generation || epoch !== player.playEpoch || !player.playing || muted || player !== tracks[scene]) return;
+          if (!sound || String(sound.id) !== String(player.id)) {
+            pausePlayer(player, false);
+            status.dataset.playback = active && active.playing ? "playing" : "error";
+            status.textContent = tracks[scene].label + " · 공식 플레이어에서 곡 확인";
+            panel.open = true;
+            return;
+          }
+          var previous = active;
+          active = player;
+          player.warming = false;
+          player.warmed = true;
+          player.widget.setVolume(volume * 100);
+          if (previous && previous !== player) {
+            pausePlayer(previous, false);
+          }
+          // These identity fields come only from the actual widget response.
+          status.dataset.trackId = String(sound.id);
+          status.dataset.trackTitle = String(sound.title || "");
+          status.dataset.publisher = sound.user ? String(sound.user.username || "") : "";
+          status.dataset.playback = "playing";
+          delete status.dataset.positionMs;
+          status.dataset.playEventAtMs = String(player.playEventAt);
+          status.dataset.playAtMs = String(performance.now());
+          status.dataset.latencyMs = String(Math.max(0, performance.now() - requestAt));
+          player.widget.getPosition(function (position) {
+            if (version === generation && active === player && player.playing && epoch === player.playEpoch) {
+              status.dataset.positionMs = String(Math.round(position || 0));
+            }
+          });
+          render();
+        });
+      }
+      function requestTarget(retry) {
+        var player = tracks[scene];
+        if (muted || !player.ready) { render(); return; }
+        if (player.playing) {
+          if (active === player) player.widget.setVolume(volume * 100);
+          else confirmPlaying(player, generation);
+        } else if (!player.pending || retry) {
+          // An initial audible attempt obeys browser autoplay policy. During a
+          // handover the incoming player stays silent until its actual PLAY.
+          player.widget.setVolume(active ? 0 : volume * 100);
+          player.pending = true;
+          player.widget.play();
+        }
+        render();
+      }
+      function warmPlayers(retry) {
+        Object.keys(tracks).forEach(function (key) {
+          var player = tracks[key];
+          if (!player.ready || player.warmed || player === active || (!muted && player === tracks[scene])) return;
+          if (player.playing || (player.pending && !retry)) return;
+          player.warming = true;
+          player.pending = true;
+          player.widget.setVolume(0);
+          player.widget.play();
+        });
+      }
+      function setMuted(value) {
+        muted = value === true;
+        hasMutedPreference = true;
+        savePreference("muted", muted ? 1 : 0);
+        if (muted) {
+          ++generation;
+          Object.keys(tracks).forEach(function (key) {
+            var player = tracks[key];
+            if (!player.ready) return;
+            pausePlayer(player, false);
+          });
+          active = null;
+          status.dataset.playback = "paused";
+        } else requestTarget(true);
+        render();
+      }
+      function setVolume(value) {
+        if (!Number.isFinite(value)) return;
+        volume = Math.max(0, Math.min(1, value));
+        hasVolumePreference = true;
+        savePreference("volume", volume);
+        if (active && active.ready) active.widget.setVolume(muted ? 0 : volume * 100);
+        else if (!muted && tracks[scene].ready && !tracks[scene].warming) tracks[scene].widget.setVolume(volume * 100);
+        render();
+      }
+      function setScene(value) {
+        if (!tracks[value] || scene === value) { requestTarget(false); return; }
+        scene = value;
+        ++generation;
+        markRequest();
+        Object.keys(tracks).forEach(function (key) {
+          var player = tracks[key];
+          if (player.ready && player.playing && player !== active && player !== tracks[scene] && !player.warming) pausePlayer(player, false);
+        });
+        // Keep the outgoing track until the incoming official player confirms
+        // PLAY. A rapid second scene change invalidates every prior callback.
+        requestTarget(false);
+        warmPlayers(false);
       }
       window.FirstGameOriginalMusic = {
         receive: function (message) {
-          if (!message || !tracks[message.scene]) return;
-          scene = message.scene;
-          muted = message.muted === true;
-          if (Number.isFinite(message.volume)) volume = Math.max(0, Math.min(100, message.volume * 100));
-          label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
-          loadScene();
+          if (!message) return;
+          // A scene notification carries no authority to reset footer settings.
+          if (!message.change || message.change === "muted") {
+            if (typeof message.muted === "boolean") setMuted(message.muted);
+          }
+          if (!message.change || message.change === "volume") setVolume(message.volume);
+          if (!message.change || message.change === "scene") setScene(message.scene);
+        },
+        getState: function () {
+          return { muted: muted, volume: volume, hasMutedPreference: hasMutedPreference, hasVolumePreference: hasVolumePreference };
+        },
+        getDiagnostics: function () {
+          return Object.keys(tracks).map(function (key) {
+            var player = tracks[key];
+            return { scene: key, ready: player.ready, warmed: player.warmed, playing: player.playing, active: player === active };
+          });
         }
       };
+      (window.__fmOriginalMusicMessages || []).forEach(window.FirstGameOriginalMusic.receive);
+      window.__fmOriginalMusicMessages = [];
       button.addEventListener("click", function () {
-        wanted = !wanted || muted; muted = false;
-        label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
-        apply();
-        if (!ready) document.getElementById("fm-player-panel").open = true;
+        if (muted || !active || !active.playing) {
+          setMuted(false); warmPlayers(true);
+        } else setMuted(true);
       });
-      var firstGameGesture = false;
-      function startFromGameGesture(event) {
-        if (firstGameGesture || event.target !== document.getElementById("unity-canvas")) return;
-        firstGameGesture = true; wanted = true;
-        label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
-        apply();
+      function startFromPageGesture(event) {
+        if (!event.isTrusted) return;
+        // The toggle's own click handler has an explicit start/mute action.
+        if (event.target && event.target.closest && event.target.closest("#fm-music-toggle")) return;
+        requestTarget(true);
+        warmPlayers(true);
       }
-      document.addEventListener("pointerdown", startFromGameGesture, true);
-      document.addEventListener("keydown", startFromGameGesture, true);
+      // Listen across the whole page, including loading/orientation buttons.
+      // Touch browsers may activate on pointerup rather than pointerdown.
+      ["pointerdown", "pointerup", "touchend", "keydown"].forEach(function (type) {
+        document.addEventListener(type, startFromPageGesture, true);
+      });
+      document.getElementById("fm-loading-start").addEventListener("click", function () {
+        requestTarget(true); warmPlayers(true);
+        this.textContent = "게임을 불러오는 동안 음악을 준비합니다…";
+      });
+      status.dataset.playback = "loading";
+      markRequest();
+      render();
       var api = document.createElement("script");
       api.src = "https://w.soundcloud.com/player/api.js";
-      api.onerror = function () { label("연결 확인 · 공식 플레이어에서 재생"); };
+      api.onerror = function () {
+        status.dataset.playback = "error";
+        status.textContent = tracks[scene].label + " · 연결 확인 · 공식 플레이어에서 재생";
+        panel.open = true;
+      };
       api.onload = function () {
-        widget = SC.Widget(frame);
-        widget.bind(SC.Widget.Events.READY, function () {
-          ready = true; label("SOUND-I"); loadScene();
-        });
-        widget.bind(SC.Widget.Events.PLAY, function () {
-          wanted = true;
-          label("SOUND-I 재생 중");
-          status.dataset.playback = "playing";
-          widget.getCurrentSound(function (sound) {
-            if (!sound || !sound.id) return;
-            status.dataset.trackId = String(sound.id);
-            status.dataset.trackTitle = String(sound.title || "");
-            status.dataset.publisher = sound.user ? String(sound.user.username || "") : "";
+        Object.keys(tracks).forEach(function (key) {
+          var player = tracks[key];
+          player.widget = SC.Widget(player.frame);
+          player.widget.bind(SC.Widget.Events.READY, function () {
+            player.ready = true;
+            requestTarget(false);
+            warmPlayers(false);
           });
-        });
-        widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
-          status.dataset.positionMs = String(Math.round(event.currentPosition || 0));
-        });
-        widget.bind(SC.Widget.Events.PAUSE, function () {
-          status.dataset.playback = "paused";
-          label(wanted && !muted ? "공식 플레이어에서 재생" : "SOUND-I 일시 정지");
-        });
-        widget.bind(SC.Widget.Events.FINISH, function () {
-          if (wanted && !muted) { widget.seekTo(0); widget.play(); }
-        });
-        if (SC.Widget.Events.ERROR) widget.bind(SC.Widget.Events.ERROR, function () {
-          label("공식 플레이어에서 재생");
-          document.getElementById("fm-player-panel").open = true;
+          player.widget.bind(SC.Widget.Events.PLAY, function () {
+            player.playing = true;
+            player.pending = false;
+            ++player.playEpoch;
+            player.playEventAt = performance.now();
+            if (!muted && player === tracks[scene]) confirmPlaying(player, generation);
+            else if (player !== active) {
+              player.widget.setVolume(0);
+              // A delayed PLAY from a cancelled request must stop, while a
+              // deliberate silent warm-up may finish its first real progress.
+              if (!player.warming) pausePlayer(player, false);
+            }
+          });
+          player.widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
+            if (player.warming && event.currentPosition > 0) stopWarmup(player);
+            if (active === player && player.playing) status.dataset.positionMs = String(Math.round(event.currentPosition || 0));
+          });
+          player.widget.bind(SC.Widget.Events.PAUSE, function () {
+            player.playing = false;
+            player.pending = false;
+            ++player.playEpoch;
+            if (active === player) {
+              active = null;
+              status.dataset.playback = "paused";
+              render();
+            }
+          });
+          player.widget.bind(SC.Widget.Events.FINISH, function () {
+            player.playing = false;
+            player.pending = false;
+            ++player.playEpoch;
+            if (!muted && (player === active || player === tracks[scene])) {
+              player.widget.seekTo(0); player.widget.play();
+            } else if (player.warming) stopWarmup(player);
+          });
+          if (SC.Widget.Events.ERROR) player.widget.bind(SC.Widget.Events.ERROR, function () {
+            player.pending = false;
+            if (player !== tracks[scene]) return;
+            status.textContent = tracks[scene].label + " · 연결 확인 · 공식 플레이어에서 재생";
+            if (!active) status.dataset.playback = "error";
+            panel.open = true;
+          });
         });
       };
       document.body.appendChild(api);
@@ -227,7 +431,7 @@
     script.onload = function () {
       createUnityInstance(canvas, config, function (progress) {
         document.querySelector("#unity-progress").value = progress;
-        document.querySelector("#loading-label").textContent = "이야기를 준비하고 있습니다… " + Math.round(progress * 100) + "%";
+        document.querySelector("#loading-label").textContent = "판타지마스터즈를 준비하고 있습니다… " + Math.round(progress * 100) + "%";
       }).then(function () {
         loading.hidden = true;
         if (canvas.dataset.unityState !== "error") canvas.dataset.unityState = "ready";

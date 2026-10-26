@@ -74,3 +74,9 @@ blender --background --python Tools/Art/verify_proxies.py -- --root .
 ## 새벽의 길 움직임 데이터
 
 `traveler-motion.bytes`는 기존 여행자 원화와 보행 atlas를 읽어 계산한 양방향 수치 대응장이다. 새 그림이나 외부 캐릭터를 포함하지 않는다. 재현 도구는 `Tools/Art/Painted/build-motion-fields.py`, 원화/UV/출력 해시와 데이터 형식은 `Tools/Art/Painted/motion-fields.json`에 기록한다. 생성 도구의 OpenCV·NumPy·Pillow는 클라우드 제작 의존성이며 게임 플레이어에 그 라이브러리를 포함하지 않는다. 일곱 PNG 원본 바이트는 그래픽 개편판과 같다.
+
+## 2026-10-26 리마스터 추가
+
+- 원작 카드161종의 원본·변환·이전96종 보존 검증은 `Docs/CardRemaster.md` 및 `Tools/Data/ClassicCards/remaster-verification.json`. 원작 리소스를 새 창작/허가 자산으로 표시하지 않는다.
+- 예수님·마리아·요셉·선생 대화 초상화는 이번에 생성한 창작 재현이다. 원본 atlas와 해시는 `Tools/Art/GospelRemaster/manifest.json`. UI UV로 영역을 선택하며 원본 PNG는 변경하지 않는다.
+- 기존 CC0 인물의 관절 동작 추가와 mesh 결합은 `Tools/Art/Gospel3D/action-upgrade.json`; 기존 기하·보행 보존 검증은 같은 폴더의 `mesh-preservation-verification.json`.

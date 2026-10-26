@@ -220,7 +220,7 @@ def main() -> None:
     if args.selection.resolve() != selection_file.resolve() or args.candidates.resolve() != selection_file.resolve():
         selection_file.write_text(json.dumps(selection_evidence, ensure_ascii=False, indent=2) + "\n")
     manifest = {
-        "revision": "fm-classic-2026-10-26",
+        "revision": "fm-remaster-2026-10-26",
         "recordedUtc": datetime.now(timezone.utc).isoformat(),
         "dateTimezone": "Asia/Seoul",
         "count": len(records),

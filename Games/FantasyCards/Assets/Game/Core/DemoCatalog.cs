@@ -60,7 +60,7 @@ namespace FantasyCards.Core
         };
         static StarterDeckDefinition Pair(string id, string name, string text, string leader, Element first, Element second)
         {
-            var pool = CardCatalog.All.Where(c => c.element == first || c.element == second).ToArray();
+            var pool = ClassicCardData.StarterCardIds.Select(CardCatalog.Get).Where(c => c.element == first || c.element == second).ToArray();
             var cards = new List<string>();
             foreach (var terrain in pool.Where(c => c.kind == CardKind.Terrain)) for (int i = 0; i < 4; i++) cards.Add(terrain.id);
             var units = pool.Where(c => c.kind == CardKind.Unit).OrderBy(c => c.level).ThenBy(c => c.id).ToArray();

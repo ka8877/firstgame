@@ -340,3 +340,8 @@ def ensure_texture2d_metadata():
 
 ensure_texture2d_metadata()
 print('GOSPEL_ACTORS_READY',json.dumps(manifest),flush=True)
+
+# The remaster adds the CC0 takeoff/air/landing/reaching takes to the same
+# corrected meshes, then combines identical-material skin parts for runtime.
+import runpy
+runpy.run_path(str(ROOT/'Tools/Art/Gospel3D/augment-actions.py'),init_globals={'GOSPEL_ROOT':str(ROOT),'GOSPEL_BLEND_ALREADY_OPEN':True})

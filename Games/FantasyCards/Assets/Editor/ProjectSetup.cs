@@ -221,10 +221,10 @@ namespace FirstGame.Editor
                     if (!string.IsNullOrEmpty(error)) throw new InvalidOperationException(error);
                 }
             }
-            ImportIllustration("Assets/Resources/Art/title-hero.png");
-            ImportIllustration("Assets/Resources/Art/battle-background.png");
-            foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)
-                ImportIllustration("Assets/Resources/Art/portrait-" + leader.id + ".png");
+            // The former creative atlases/avatars remain in Art/Archive, outside
+            // Resources. Only the original login character is in the current UI.
+            foreach (string tile in new[] { "02", "04", "06", "08" })
+                ImportIllustration("Assets/Resources/Art/Revival/login-" + tile + ".png");
             foreach (var definition in FantasyCards.Core.CardCatalog.All)
             {
                 string path = "Assets/Resources/Data/Cards/" + definition.id + ".asset";
@@ -307,10 +307,11 @@ namespace FirstGame.Editor
                 if (card.illustration.rect != new Rect(0, 0, texture.width, texture.height))
                     throw new InvalidOperationException("Original card image bounds changed: " + definition.id);
             }
-            if (Resources.Load<Texture2D>("Art/title-hero") == null) throw new InvalidOperationException("Title illustration is missing.");
-            foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)
-                if (Resources.Load<Texture2D>("Art/portrait-" + leader.id) == null)
-                    throw new InvalidOperationException("Leader portrait is missing: " + leader.id);
+            foreach (string tile in new[] { "02", "04", "06", "08" })
+                if (Resources.Load<Texture2D>("Art/Revival/login-" + tile) == null)
+                    throw new InvalidOperationException("Original login character tile is missing: " + tile);
+            if (Resources.Load<Texture2D>("Art/ClassicCards/Decor/card-back") == null)
+                throw new InvalidOperationException("Original card back is missing.");
             foreach (var deck in FantasyCards.Core.DemoCatalog.StarterDecks)
                 FantasyCards.Core.DemoCatalog.ValidatePlayableDeck(deck.cards);
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);

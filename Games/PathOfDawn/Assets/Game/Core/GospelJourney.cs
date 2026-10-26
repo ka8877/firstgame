@@ -13,13 +13,15 @@ namespace PathOfDawn.Core
         public string contentVersion;
         public GospelPhase phase;
         public int prologuePage, objectiveIndex;
+        // Optional in schema 1: older saves resume at the first turn of the open reading.
+        public int dialoguePage;
         public List<string> collectedReadings = new List<string>();
         public float playerX, playerY, playerZ, playerYaw;
 
         public GospelSave Copy() => new GospelSave
         {
             schemaVersion = schemaVersion, contentVersion = contentVersion, phase = phase,
-            prologuePage = prologuePage, objectiveIndex = objectiveIndex,
+            prologuePage = prologuePage, objectiveIndex = objectiveIndex, dialoguePage = dialoguePage,
             collectedReadings = collectedReadings == null ? null : new List<string>(collectedReadings),
             playerX = playerX, playerY = playerY, playerZ = playerZ, playerYaw = playerYaw
         };
@@ -40,6 +42,9 @@ namespace PathOfDawn.Core
         public GospelPhase Phase => state.phase;
         public int ProloguePage => state.prologuePage;
         public int ObjectiveIndex => state.objectiveIndex;
+        public int DialogueIndex => state.dialoguePage;
+        public int DialogueCount => GospelConversations.ForReading(CurrentReading.Id).Count;
+        public GospelDialogueTurn CurrentDialogue => GospelConversations.ForReading(CurrentReading.Id)[state.dialoguePage];
         public bool IsComplete => Phase == GospelPhase.Completed;
         public float PlayerX => state.playerX;
         public float PlayerY => state.playerY;
@@ -60,17 +65,26 @@ namespace PathOfDawn.Core
 
         public bool IsEpisodeUnlocked(string id) => id == "birth" || (id == "temple" && Phase != GospelPhase.Prologue);
 
+        public bool AdvanceDialogue()
+        {
+            if (Phase != GospelPhase.Prologue && Phase != GospelPhase.Reading) return false;
+            if (state.dialoguePage + 1 < DialogueCount) { state.dialoguePage++; return true; }
+            return AdvanceReading();
+        }
+
         /// <summary>Acknowledges the displayed Scripture reading; never invents a narrative branch.</summary>
         public bool AdvanceReading()
         {
             if (Phase == GospelPhase.Prologue)
             {
+                state.dialoguePage = 0;
                 state.collectedReadings.Add(CurrentReading.Id);
                 state.prologuePage++;
                 if (state.prologuePage == GospelCatalog.PrologueReadings.Count) state.phase = GospelPhase.Exploring;
                 return true;
             }
             if (Phase != GospelPhase.Reading) return false;
+            state.dialoguePage = 0;
             state.collectedReadings.Add(CurrentReading.Id);
             state.objectiveIndex++;
             state.phase = state.objectiveIndex == GospelCatalog.Objectives.Count
@@ -92,6 +106,7 @@ namespace PathOfDawn.Core
                 return false;
             }
             state.phase = GospelPhase.Reading;
+            state.dialoguePage = 0;
             message = CurrentReading.Reference;
             return true;
         }
@@ -125,6 +140,12 @@ namespace PathOfDawn.Core
                 || (atEnd && save.objectiveIndex != GospelCatalog.Objectives.Count)
                 || (!atEnd && !atPrologue && save.objectiveIndex >= GospelCatalog.Objectives.Count))
                 throw new ArgumentException("저장된 장면과 목표가 일치하지 않습니다.");
+            string openReading = atPrologue ? GospelCatalog.PrologueReadings[save.prologuePage].Id
+                : GospelCatalog.Objectives[Math.Min(save.objectiveIndex, GospelCatalog.Objectives.Count - 1)].ReadingId;
+            bool readingOpen = atPrologue || save.phase == GospelPhase.Reading;
+            if (save.dialoguePage < 0 || (readingOpen && save.dialoguePage >= GospelConversations.ForReading(openReading).Count)
+                || (!readingOpen && save.dialoguePage != 0))
+                throw new ArgumentException("저장된 대화 위치가 유효하지 않습니다.");
             var expected = new List<string>();
             for (int i = 0; i < save.prologuePage; i++) expected.Add(GospelCatalog.PrologueReadings[i].Id);
             for (int i = 0; i < save.objectiveIndex; i++) expected.Add(GospelCatalog.Objectives[i].ReadingId);

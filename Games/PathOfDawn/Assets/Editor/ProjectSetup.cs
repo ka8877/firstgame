@@ -67,6 +67,7 @@ namespace FirstGame.Editor
                 QualitySettings.vSyncCount = 0;
                 var font = CreateFont();
                 PrepareGospelCharacter();
+                PrepareGospelPortraits();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
                     : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
                 foreach (var legacy in UnityEngine.Object.FindObjectsByType<PathOfDawn.Presentation.PathOfDawnApp>(FindObjectsInactive.Include, FindObjectsSortMode.None))
@@ -86,6 +87,23 @@ namespace FirstGame.Editor
             finally { initializing = false; }
         }
 
+        static void PrepareGospelPortraits()
+        {
+            const string path = "Assets/Resources/Art/GospelRemaster/portraits.png";
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer == null) throw new InvalidOperationException("Missing Gospel dialogue portraits.");
+            importer.textureType = TextureImporterType.Default;
+            importer.textureShape = TextureImporterShape.Texture2D;
+            importer.sRGBTexture = true; importer.mipmapEnabled = false;
+            importer.alphaSource = TextureImporterAlphaSource.FromInput;
+            importer.alphaIsTransparency = true;
+            importer.wrapMode = TextureWrapMode.Clamp; importer.filterMode = FilterMode.Bilinear;
+            importer.npotScale = TextureImporterNPOTScale.None; importer.maxTextureSize = 2048;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.ClearPlatformTextureSettings("Standalone"); importer.ClearPlatformTextureSettings("WebGL");
+            importer.SaveAndReimport();
+        }
+
         static void PrepareGospelCharacter()
         {
             const string folder = "Assets/Resources/Art/Gospel3D";
@@ -103,7 +121,8 @@ namespace FirstGame.Editor
             var clips = importer.defaultClipAnimations;
             foreach (var clip in clips)
             {
-                clip.loopTime = true; clip.loopPose = true;
+                bool loop = new[] { "Idle", "Walk", "Run", "JumpAir" }.Any(name => clip.name == name || clip.name.EndsWith("|" + name) || clip.name.EndsWith("_" + name));
+                clip.loopTime = loop; clip.loopPose = loop;
                 clip.keepOriginalOrientation = true; clip.keepOriginalPositionY = true; clip.keepOriginalPositionXZ = true;
                 clip.lockRootRotation = true; clip.lockRootHeightY = true; clip.lockRootPositionXZ = true;
             }
@@ -191,7 +210,76 @@ namespace FirstGame.Editor
             tree.blendType = BlendTreeType.Simple1D; tree.blendParameter = "Speed"; tree.useAutomaticThresholds = false;
             tree.children = new[] { new ChildMotion { motion = FindClip("Idle"), threshold = 0, timeScale = 1 }, new ChildMotion { motion = FindClip("Walk"), threshold = 1.75f, timeScale = 1 }, new ChildMotion { motion = FindClip("Run"), threshold = 3.7f, timeScale = 1 } };
             state.motion = tree; machine.defaultState = state; state.writeDefaultValues = true;
+            PrepareGospelActions(controller, machine, state, FindClip, path, folder);
             EditorUtility.SetDirty(tree); EditorUtility.SetDirty(controller); AssetDatabase.SaveAssets();
+        }
+
+        static void PrepareGospelActions(AnimatorController controller, AnimatorStateMachine machine, AnimatorState locomotion, Func<string,AnimationClip> clip, string modelPath, string folder)
+        {
+            void Parameter(string name, AnimatorControllerParameterType type)
+            { if (!controller.parameters.Any(p => p.name == name)) controller.AddParameter(name,type); }
+            Parameter("Grounded",AnimatorControllerParameterType.Bool);
+            // Uncontrolled courtyard NPCs share this controller and stand on the floor.
+            // A false default otherwise leaves them in the airborne pose forever.
+            var parameters = controller.parameters;
+            foreach(var parameter in parameters) if(parameter.name == "Grounded") parameter.defaultBool = true;
+            controller.parameters = parameters;
+            Parameter("VerticalSpeed",AnimatorControllerParameterType.Float);
+            Parameter("Jump",AnimatorControllerParameterType.Trigger);
+            Parameter("Land",AnimatorControllerParameterType.Trigger);
+            Parameter("Practice",AnimatorControllerParameterType.Trigger);
+            // Rebuilding these transitions is intentional: Ensure remains repeatable without duplicate exits.
+            foreach (var item in machine.states)
+                foreach (var transition in item.state.transitions) item.state.RemoveTransition(transition);
+            AnimatorState State(string name, string motion, float speed)
+            {
+                var result = machine.states.Select(item => item.state).FirstOrDefault(item => item.name == name) ?? machine.AddState(name);
+                result.motion = clip(motion); result.speed = speed; result.writeDefaultValues = true; return result;
+            }
+            AnimatorStateTransition Transition(AnimatorState from, AnimatorState to, float duration)
+            {
+                var result = from.AddTransition(to); result.hasExitTime = false; result.hasFixedDuration = true;
+                result.duration = duration; result.interruptionSource = TransitionInterruptionSource.Destination; return result;
+            }
+            var takeoff = State("Jump takeoff","JumpStart",3.8f);
+            var airborne = State("Jump airborne","JumpAir",1);
+            var landing = State("Jump landing","JumpLand",4.6f);
+            Transition(locomotion,takeoff,.065f).AddCondition(AnimatorConditionMode.If,0,"Jump");
+            Transition(locomotion,airborne,.12f).AddCondition(AnimatorConditionMode.IfNot,0,"Grounded");
+            var launch = Transition(takeoff,airborne,.08f); launch.hasExitTime = true; launch.exitTime = .86f;
+            Transition(takeoff,landing,.065f).AddCondition(AnimatorConditionMode.If,0,"Grounded");
+            Transition(airborne,landing,.055f).AddCondition(AnimatorConditionMode.If,0,"Grounded");
+            var settle = Transition(landing,locomotion,.12f); settle.hasExitTime = true; settle.exitTime = .68f;
+            Transition(landing,takeoff,.05f).AddCondition(AnimatorConditionMode.If,0,"Jump");
+            Transition(landing,airborne,.08f).AddCondition(AnimatorConditionMode.IfNot,0,"Grounded");
+
+            string maskPath = folder + "/GospelPracticeUpperBody.mask";
+            var mask = AssetDatabase.LoadAssetAtPath<AvatarMask>(maskPath);
+            if (mask == null) { mask = new AvatarMask { name = "Gospel practice upper body" }; AssetDatabase.CreateAsset(mask,maskPath); }
+            var model = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
+            var transforms = model.GetComponentsInChildren<Transform>(true);
+            mask.transformCount = transforms.Length;
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                string path = AnimationUtility.CalculateTransformPath(transforms[i],model.transform);
+                mask.SetTransformPath(i,path);
+                mask.SetTransformActive(i,path.Split('/').Contains("spine_01"));
+            }
+            for (int i = 0; i < (int)AvatarMaskBodyPart.LastBodyPart; i++) mask.SetHumanoidBodyPartActive((AvatarMaskBodyPart)i,false);
+            int layerIndex = Array.FindIndex(controller.layers,item => item.name == "Optional practice");
+            if (layerIndex < 0) { controller.AddLayer("Optional practice"); layerIndex = controller.layers.Length - 1; }
+            var layers = controller.layers; var layer = layers[layerIndex];
+            layer.avatarMask = mask; layer.defaultWeight = 0; layer.blendingMode = AnimatorLayerBlendingMode.Override;
+            var actionMachine = layer.stateMachine;
+            var ready = actionMachine.states.Select(item => item.state).FirstOrDefault(item => item.name == "Practice ready") ?? actionMachine.AddState("Practice ready");
+            var practice = actionMachine.states.Select(item => item.state).FirstOrDefault(item => item.name == "Practice gesture") ?? actionMachine.AddState("Practice gesture");
+            foreach (var item in actionMachine.states) foreach (var transition in item.state.transitions) item.state.RemoveTransition(transition);
+            ready.motion = null; ready.writeDefaultValues = false; actionMachine.defaultState = ready;
+            practice.motion = clip("Practice"); practice.speed = 1.5f; practice.writeDefaultValues = false;
+            var perform = ready.AddTransition(practice); perform.hasExitTime = false; perform.hasFixedDuration = true; perform.duration = .12f; perform.AddCondition(AnimatorConditionMode.If,0,"Practice");
+            var recover = practice.AddTransition(ready); recover.hasExitTime = true; recover.exitTime = .92f; recover.hasFixedDuration = true; recover.duration = .1f;
+            layers[layerIndex] = layer; controller.layers = layers;
+            EditorUtility.SetDirty(mask); EditorUtility.SetDirty(actionMachine);
         }
 
         static UniversalRenderPipelineAsset CreatePipeline(string name, float scale, int shadow, float distance, bool hdr)
@@ -588,8 +676,11 @@ namespace FirstGame.Editor
             var hero = Resources.Load<GameObject>(PathOfDawn.Presentation.GospelTempleWorld.HeroResource);
             if (hero == null || !hero.GetComponentsInChildren<SkinnedMeshRenderer>(true).Any(r => r.sharedMesh != null && r.bones.Length >= 12))
                 throw new InvalidOperationException("The Gospel protagonist requires a genuine skinned character and skeleton.");
-            if (Resources.Load<RuntimeAnimatorController>(PathOfDawn.Presentation.GospelTempleWorld.AnimatorResource) == null)
-                throw new InvalidOperationException("Missing Gospel idle/walk/run animation controller.");
+            var heroController = Resources.Load<RuntimeAnimatorController>(PathOfDawn.Presentation.GospelTempleWorld.AnimatorResource);
+            if (heroController == null) throw new InvalidOperationException("Missing Gospel movement/action animation controller.");
+            foreach (string expected in new[] { "Idle", "Walk", "Run", "JumpStart", "JumpAir", "JumpLand", "Practice" })
+                if (!heroController.animationClips.Any(clip => clip.name == expected || clip.name.EndsWith("|" + expected) || clip.name.EndsWith("_" + expected)))
+                    throw new InvalidOperationException("Missing Gospel joint animation: " + expected);
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);
         }
     }

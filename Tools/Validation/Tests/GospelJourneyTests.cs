@@ -184,6 +184,73 @@ namespace FirstGame.Validation
         }
 
         [Test]
+        public void ConversationsResumeMidTurnWithoutAwardingUnreadScripture()
+        {
+            var journey = AtTemple(); journey.TryInteract("temple-gate", out _); journey.AdvanceReading();
+            journey.TryInteract("teachers", out _);
+            int count = journey.CollectedReadings.Count;
+            Assert.That(journey.DialogueCount, Is.GreaterThan(1));
+            Assert.That(journey.AdvanceDialogue(), Is.True);
+            var json = FieldJson.Encode(journey.CaptureSave());
+            var restored = GospelJourney.FromSave(FieldJson.Decode<GospelSave>(json));
+            Assert.That(restored.DialogueIndex, Is.EqualTo(1));
+            Assert.That(restored.CurrentDialogue.Text, Is.EqualTo(journey.CurrentDialogue.Text));
+            Assert.That(restored.CollectedReadings.Count, Is.EqualTo(count));
+            while (restored.Phase == GospelPhase.Reading) restored.AdvanceDialogue();
+            Assert.That(restored.ObjectiveIndex, Is.EqualTo(2));
+            Assert.That(restored.CollectedReadings.Count, Is.EqualTo(count + 1));
+            Assert.That(restored.DialogueIndex, Is.Zero);
+            Assert.That(restored.AdvanceDialogue(), Is.False);
+        }
+
+        [Test]
+        public void LegacySchemaOneWithoutDialogueFieldRestartsOnlyTheOpenConversation()
+        {
+            var journey = AtTemple(); journey.TryInteract("temple-gate", out _);
+            string json = FieldJson.Encode(journey.CaptureSave());
+            // A pre-remaster schema1 save has no cursor property.
+            json = json.Replace("\"dialoguePage\":0,", "").Replace(",\"dialoguePage\":0", "");
+            Assert.That(json, Does.Not.Contain("dialoguePage"));
+            var restored = GospelJourney.FromSave(FieldJson.Decode<GospelSave>(json));
+            Assert.That(restored.Phase, Is.EqualTo(GospelPhase.Reading));
+            Assert.That(restored.ObjectiveIndex, Is.Zero);
+            Assert.That(restored.DialogueIndex, Is.Zero);
+            Assert.That(restored.CollectedReadings.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void InvalidConversationCursorCannotChangeLiveProgress()
+        {
+            var journey = AtTemple(); journey.TryInteract("temple-gate", out _);
+            var before = FieldJson.Encode(journey.CaptureSave());
+            foreach (int cursor in new[] { -1, journey.DialogueCount, int.MaxValue })
+            {
+                var invalid = journey.CaptureSave(); invalid.dialoguePage = cursor;
+                Assert.Throws<ArgumentException>(() => journey.RestoreSave(invalid));
+            }
+            journey.AdvanceReading();
+            var walking = journey.CaptureSave(); walking.dialoguePage = 1;
+            Assert.Throws<ArgumentException>(() => journey.RestoreSave(walking));
+        }
+
+        [Test]
+        public void EveryQuotedDialogueIsAnExactSubstringOfItsVerifiedPassage()
+        {
+            foreach (var reading in GospelCatalog.Readings)
+            foreach (var turn in GospelConversations.ForReading(reading.Id))
+            {
+                Assert.That(turn.Text, Is.Not.Empty);
+                Assert.That(turn.PortraitKey, Is.AnyOf("jesus", "mary", "joseph", "teacher"));
+                if (turn.IsVerbatim) Assert.That(reading.Text, Does.Contain(turn.Text));
+                else Assert.That(turn.Label, Does.Contain("본문 요약"));
+                if (turn.Speaker == "예수님") Assert.That(turn.IsVerbatim, Is.True, "Do not invent Jesus's recorded speech.");
+            }
+            var speech = GospelConversations.ForReading("temple-parents").Single(t => t.Speaker == "예수님");
+            Assert.That(speech.Text, Is.EqualTo("어찌하여 나를 찾으셨나이까 내가 내 아버지 집에 있어야 될 줄을 알지 못하셨나이까"));
+            Assert.Throws<ArgumentException>(() => GospelConversations.ForReading("unwritten-scene"));
+        }
+
+        [Test]
         public void GospelPortableSlotDoesNotOverwriteOrSilentlyAcceptThePreviousNarrativeGame()
         {
             var backend = new MemorySlots(); var service = FieldJson.Service(backend);

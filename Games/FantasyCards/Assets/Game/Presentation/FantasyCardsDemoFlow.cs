@@ -253,7 +253,8 @@ namespace FantasyCards.Presentation
         private void BindCardHelp(GameObject target, CardDefinition card, Action detail)
         {
             BindTooltip(target, card.name + " · " + CardCatalog.RarityName(card.rarity),
-                "Lv " + card.level + " · " + CardCatalog.CostText(card) + "\n" + DetailedCardStats(card) + "\n" + card.text + "\n길게 누르면 상세 보기");
+                CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · Lv " + card.level + "\n" + CardCatalog.CostText(card) + "\n" +
+                (card.kind == CardKind.Unit || card.kind == CardKind.Equipment ? CardCatalog.StatsText(card) + "\n" : "") + card.text + "\n길게 누르면 원본과 상세 보기");
             target.GetComponent<UiCardHover>().LongPress = detail;
         }
 
@@ -270,14 +271,21 @@ namespace FantasyCards.Presentation
         private void ShowTooltip(string title, string body, Vector2 position)
         {
             HideTooltip();
-            float width = Compact ? .43f : .30f, height = Compact ? .40f : .29f;
+            float width = Compact ? .47f : .34f;
+            // Size the popup from the actual text instead of silently ellipsizing
+            // the last stat or rule when the catalog contains longer abilities.
+            var measure = Text(root, body, 0, 0, width, 1, 23, ivory, TextAlignmentOptions.TopLeft);
+            measure.enableAutoSizing = false;
+            float textHeight = measure.GetPreferredValues(body, root.rect.width * width * .89f, float.PositiveInfinity).y;
+            measure.gameObject.SetActive(false); Destroy(measure.gameObject);
+            float height = Mathf.Clamp((textHeight + 90) / root.rect.height, .30f, .70f);
             float x = Mathf.Clamp(position.x / Mathf.Max(1, canvas.pixelRect.width) + .018f, .015f, .985f - width);
             float y = position.y / Mathf.Max(1, canvas.pixelRect.height);
             y = Mathf.Clamp(y > .55f ? y - height - .035f : y + .04f, .025f, .975f - height);
-            tooltip = Panel(root, x, y, x + width, y + height, new Color(.025f, .035f, .075f, .99f));
+            tooltip = Panel(root, x, y, x + width, y + height, new Color(.035f, .030f, .019f, .99f));
             tooltip.gameObject.name = "Hover explanation"; Frame(tooltip, gold, 1.5f);
-            Text(tooltip, title, .055f, .75f, .945f, .96f, 27, gold);
-            Text(tooltip, body, .055f, .045f, .945f, .74f, 23, ivory, TextAlignmentOptions.TopLeft);
+            ReadableText(tooltip, title, .055f, .80f, .945f, .96f, 27, gold);
+            ReadableText(tooltip, body, .055f, .045f, .945f, .79f, 23, ivory, TextAlignmentOptions.TopLeft);
             tooltip.SetAsLastSibling();
         }
 

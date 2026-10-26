@@ -1,14 +1,14 @@
-# 판타지마스터즈 재구성
+# 판타지마스터즈 리마스터
 
-현재 화면 개정은 `fm-revival-2026-10-26`이며 규칙 콘텐츠는 `fm-classic-0.1.0`이다. 사용자는 이전 창작 아바타/별빛 표현을 교체하고 원작의 시작·대기실·전장부터 싱글플레이로 재구성하도록 명시했다. 이 요청이 이전의 창작 아바타·타이틀·배경을 현재 화면에 유지한다는 지침보다 우선한다. 현재 계약은 `../../Docs/FmRevival.md`, 원작 참조는 `../../Docs/Research/FmRevivalSources.md`, 규칙은 `../../Docs/FantasyCardsRules.md`를 따른다.
+현재 화면 개정은 `fm-remaster-2026-10-26`이며 규칙 콘텐츠/저장 호환은 `fm-classic-0.1.0`을 유지한다. 사용자는 원작 아트·스타일·규칙을 유지하면서 선명도·조작·정보 표시와 실제 카드 수를 늘리는 리마스터를 명시했다. 기존 `fm-revival-2026-10-26` 재구성은 이력이며, 현재 화면의 계약은 `../../Docs/FmRemasterUI.md`다. 원작 참조는 `../../Docs/Research/FmRevivalSources.md`, 규칙은 `../../Docs/FantasyCardsRules.md`를 따른다. 원작 인물과 인쇄 카드 원본을 유지하고 원화의 낮은 원본 해상도를 가짜 HD 복원으로 소개하지 않는다.
 
 ## 소유권과 구현
 
-- `Assets/Game/Core`: Unity에 독립된 규칙/실행 상태. 96종(지형14/유닛56/마법14/장비12), 7속성, 현재 포함5등급, 50장4덱, 6손패, 5전열, LP·색소울·총소울, 양측 준비와 자동 공방이다. RNG는 Core만 소비한다.
-- `Assets/Game/Presentation`: `FantasyCardsRevival`이 타이틀→로컬 대기실→대전실→덱→시작 손패를 구성한다. 실제 원작 웹 인물·공식 안내의 스킨 장식으로 표시하고, 예전 창작 아바타는 활성 흐름에 두지 않는다. 5열×2전열/우측소울·덱/6손패 구성을 사용한다. 버튼·상세·셔플·저장과 실제 Core 판정이 연결되어야 한다.
+- `Assets/Game/Core`: Unity에 독립된 규칙/실행 상태. 161종(기존96종의 ID·수치·원본 보존), 7속성, 현재 포함5등급, 50장4덱, 6손패, 5전열, LP·색소울·총소울, 양측 준비와 자동 공방이다. RNG는 Core만 소비한다.
+- `Assets/Game/Presentation`: `FantasyCardsRevival`이 타이틀→로컬 대기실→대전실→덱→시작 손패를 구성한다. 실제 원작 웹 인물을 유지하고, 금속·황동 테두리/속성 기호를 해상도 독립 UI 도형으로 그리며, 예전 창작 아바타는 활성 흐름에 두지 않는다. 5열×2전열/우측소울·덱/6손패 구성을 사용한다. 버튼·상세·셔플·저장과 실제 Core 판정이 연결되어야 한다.
 - `FmOriginalMusic`, `Plugins/WebGL`, WebGL template: 원 제작사 공식 공개 플레이어 연결. 창작곡을 원작 BGM으로 대체하지 않는다. 원곡 소스와 실제 출력 검증은 구분한다.
-- `Assets/Resources/Art/Revival`: 공식2005 안내와 웹로그인 GIF의 전체 무손실 PNG 디코딩본. 원본과 출처·픽셀·해시를 `Tools/Research/FmRevival`에 보존한다. 번호·옛채팅이 포함된 스샷 전체를 배경 UI로 쓰지 않는다. 장식 UV와 원작 웹 인물 타일을 실제 UI에서 배치한다.
-- `Assets/Resources/Art/ClassicCards`: 원작96종/뒷면. `Docs/ClassicCardArt.md`의 출처와 픽셀 검증을 유지한다. 원래 인쇄 수치와 현재 DB/진행 중 수치를 구분해 표시한다.
+- `Assets/Resources/Art/Revival`: 공식2005 안내와 웹로그인 GIF의 전체 무손실 PNG 디코딩본. 원본과 출처·픽셀·해시를 `Tools/Research/FmRevival`에 보존한다. 번호·옛채팅이 포함된 스샷 전체를 배경 UI로 쓰지 않는다. 원작 웹 인물 타일은 실제 UI에서 배치한다. 낮은 해상도의 스크린샷 가장자리나 체크무늬 로고 배너를 확대해 새 프레임으로 쓰지 않는다.
+- `Assets/Resources/Art/ClassicCards`: 원작161종/뒷면(기존96종 보존). `Docs/ClassicCardArt.md`의 출처와 픽셀 검증을 유지한다. 원래 인쇄 수치와 현재 DB/진행 중 수치를 구분해 표시한다. 도감의 검색·필터·정렬·페이지·덱 수량은 실제 CardCatalog에 연결하며 카드 수를 고정하지 않는다. 전체 원본은 상세 화면에서 종횡비를 유지해 표시한다.
 - `Assets/Game/Data`: 전체 `CardDefinition`을 보존하는 제작용 CardAsset/RuleSetAsset. 실행 상태를 ScriptableObject에 기록하지 않는다.
 - `Assets/Game/Tests`: 규칙·저장 결정론. 새 화면의 실제 동작은 해당 개정 smoke/browser 결과로 검사한다. 이전 아바타 화면의 통과 결과를 새 화면 결과로 대신하지 않는다.
 - `Assets/Editor`, 씬, 공통 저장/빌드와 메타는 루트 담당과 협의한다. 같은 씬/프리팹을 동시에 편집하지 않는다.

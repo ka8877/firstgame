@@ -63,14 +63,68 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(96));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,14},{CardKind.Unit,56},{CardKind.Spell,14},{CardKind.Equipment,12} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(161));
+            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,14},{CardKind.Unit,119},{CardKind.Spell,15},{CardKind.Equipment,13} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
-            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.EqualTo(8)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(2)); }
+            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(11)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(2)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }
             var deathKnight = CardCatalog.Get(ClassicFixtures.Id("듀라한"));
             Assert.That(new[] { deathKnight.level,deathKnight.coloredCost,deathKnight.genericCost,deathKnight.cost }, Is.EqualTo(new[] {4,2,2,4}));
             Assert.That(CardCatalog.All.Where(c=>c.kind==CardKind.Unit).Select(c=>c.level).Distinct(), Is.EquivalentTo(Enumerable.Range(1,7)));
+        }
+        [Test] public void NewOriginalEquipmentKeepsSignedStatsAndBeastRequirement()
+        {
+            var e=ClassicFixtures.Battle();ClassicFixtures.Souls(e,0);
+            var gear=ClassicFixtures.Unit(e,0,"농민",0);var beast=ClassicFixtures.Unit(e,0,"레드스콜피온",1);
+            int defense=CardCatalog.UnitDefense(beast),health=CardCatalog.MaximumHealth(beast);
+            var item=ClassicFixtures.Hand(e,0,"박쥐날개");
+            Assert.False(e.Play(0,item.instanceId,0,out _));
+            Assert.True(e.Play(0,item.instanceId,1,out var error),error);
+            Assert.That(CardCatalog.UnitDefense(beast),Is.EqualTo(Math.Max(0,defense-1)));
+            Assert.That(CardCatalog.MaximumHealth(beast),Is.EqualTo(health+3));
+            Assert.That(gear.equipment,Is.Empty);BattleEngine.Validate(e.State);
+        }
+        [Test] public void NewOriginalGearSpellFiltersCapabilitiesAndResetsAfterBattle()
+        {
+            var e=ClassicFixtures.Battle(rules:new RuleSet{baseCoins=0});ClassicFixtures.Souls(e,0);
+            var gear=ClassicFixtures.Unit(e,0,"농민",0);var beast=ClassicFixtures.Unit(e,0,"레드스콜피온",1);
+            int gearAttack=CardCatalog.UnitAttack(gear),beastAttack=CardCatalog.UnitAttack(beast);
+            var spell=ClassicFixtures.Hand(e,0,"거인의힘");
+            Assert.True(e.Play(0,spell.instanceId,-1,out var error),error);ClassicFixtures.Resolve(e);
+            var powers=e.State.events.Where(ev=>ev.kind=="power").Select(ev=>ev.text).ToArray();
+            Assert.That(powers.Any(text=>text.StartsWith("농민")&&text.Contains("AP "+(gearAttack+2))),Is.True);
+            Assert.That(powers.Any(text=>text.StartsWith("레드스콜피온")&&text.Contains("AP "+beastAttack)),Is.True);
+            Assert.That(CardCatalog.UnitAttack(gear),Is.EqualTo(gearAttack));
+            Assert.That(CardCatalog.UnitAttack(beast),Is.EqualTo(beastAttack));BattleEngine.Validate(e.State);
+        }
+        [Test] public void NewOriginalSetCoinUsesFourSharedTossesAndRestoresDeterministically()
+        {
+            var a=ClassicFixtures.Battle(103);ClassicFixtures.Unit(a,0,"모르토카토템",0);
+            var card=CardCatalog.Get(ClassicFixtures.Id("모르토카토템"));
+            Assert.That(card.attackCoin.operation,Is.EqualTo(CoinOperation.Set));
+            Assert.That(new[]{card.attack,card.attackCoin.count,card.attackCoin.multiplier},Is.EqualTo(new[]{0,4,3}));
+            uint expected=a.State.randomState;int heads=0;
+            for(int i=0;i<4;i++)heads+=StableRandom.Range(ref expected,2);
+            var b=new BattleEngine(a.State.Copy());ClassicFixtures.Resolve(a);ClassicFixtures.Resolve(b);
+            Assert.That(a.State.randomState,Is.EqualTo(expected));
+            Assert.That(a.State.events.Count(ev=>ev.kind=="coin"),Is.EqualTo(4));
+            Assert.That(a.State.events.Single(ev=>ev.kind=="power").text,Does.Contain("AP "+(3*heads)));
+            Assert.That(b.State.events.Select(ev=>ev.sequence+":"+ev.kind+":"+ev.text),Is.EqualTo(a.State.events.Select(ev=>ev.sequence+":"+ev.kind+":"+ev.text)));
+        }
+        [TestCase("forest","967e29107e2cbdff9f32a8bc24a9ebd85e861dc165124922440e42fa98fa2a47")]
+        [TestCase("knights","78d36dc32881c1c4f78064fccb2edf4b75a5be363523ac1ac200ce672ff6dd8b")]
+        [TestCase("tides","2357372f3b4bc02016b23f0b6f232520c1ea06ee79c620a67e32f962f124ff67")]
+        [TestCase("stars","6b254e330dd56dd78eac38711a5ef18d99f99712a4bba8cab3bf9ab2e6f42029")]
+        public void CatalogExpansionPreservesEveryPresetCardAndItsOrder(string deckId,string expected)
+        {
+            using(var sha=System.Security.Cryptography.SHA256.Create())
+            {
+                var cards=DemoCatalog.GetDeck(deckId).cards;
+                DemoCatalog.ValidatePlayableDeck(cards);
+                string actual=BitConverter.ToString(sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(string.Join(",",cards)))).Replace("-","").ToLowerInvariant();
+                Assert.That(actual,Is.EqualTo(expected));
+            }
+            Assert.That(CardCatalog.Version,Is.EqualTo("fm-classic-0.1.0"));
         }
         [Test] public void RoundStartsWithSixRealRandomCardsBothLpAndNoLeaderSkill()
         {

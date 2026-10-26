@@ -18,8 +18,7 @@ namespace FantasyCards.Presentation
             Frame(field, new Color(.43f, .42f, .25f), 2); Ornament(field, new Color(.56f, .58f, .36f, .55f));
             DrawLanes(1, .665f, .925f); DrawLanes(0, .382f, .600f);
             var messagePanel = Panel(root, .025f, .604f, .805f, .663f, new Color(.035f, .029f, .015f, .96f));
-            var status = Text(messagePanel, locked ? "전투 판정 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
-            status.textWrappingMode = TextWrappingModes.NoWrap;
+            ReadableText(messagePanel, locked ? "전투 판정 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", StatusMessage());
             var opponent = Panel(root, .025f, .930f, .805f, .995f, ink);
             var opponentText = Text(opponent, "상대 · 덱 " + enemy.deck.Count + "장 · 손패 " + enemy.hand.Count, .012f, .02f, .53f, .98f, 22, ivory);
@@ -27,10 +26,8 @@ namespace FantasyCards.Presentation
             DrawTerrainPips(opponent, enemy, .55f, .07f, .985f, .93f);
             BindTooltip(opponent.gameObject, "상대 지형", TerrainSummary(enemy));
             var resources = Panel(root, .025f, .309f, .805f, .377f, ink);
-            string resourceText = Compact ? "나 · 덱 " + player.deck.Count + "장 · 손패 " + player.hand.Count + " · LP " + player.levelPoints + " · 지형 " + player.terrain.Count + "/" + state.rules.terrainLimit
-                : "나 · 덱 " + player.deck.Count + "장  손패 " + player.hand.Count + "  LP " + player.levelPoints + "  " + SoulSummary(player) + "  지형 " + player.terrain.Count + "/" + state.rules.terrainLimit;
-            var resourceLabel = Text(resources, resourceText, .012f, .02f, .988f, .98f, 21, gold);
-            resourceLabel.textWrappingMode = TextWrappingModes.NoWrap;
+            string resourceText = "내 손패 " + player.hand.Count + "장 · 지형 " + player.terrain.Count + "/" + state.rules.terrainLimit + "  |  카드 선택 → 빛나는 칸 · 길게 누르면 상세";
+            ReadableText(resources, resourceText, .012f, .02f, .988f, .98f, 21, gold);
             BindTooltip(resources.gameObject, "내 소울과 레벨 포인트", "LP로 지형을 전개합니다. 색소울과 총소울로 카드를 사용합니다.\n" + TerrainSummary(player));
             DrawRevivalBattleRail(); DrawScrollableHand();
             if (state.phase == BattlePhase.Complete) ShowResult();
@@ -90,12 +87,14 @@ namespace FantasyCards.Presentation
                 if (unit != null)
                 {
                     var card = CardCatalog.Get(unit.definitionId);
-                    PrintedImage(panel, card, .015f, .02f, .985f, .98f);
-                    Panel(panel, 0, .70f, 1, 1, new Color(.025f, .025f, .015f, .94f));
-                    Panel(panel, 0, 0, 1, .30f, new Color(.025f, .025f, .015f, .96f));
-                    Text(panel, card.name, .035f, .71f, .965f, .99f, 24, ivory);
-                    Text(panel, "AP " + CardCatalog.UnitAttack(unit) + "  DP " + CardCatalog.UnitDefense(unit) + "  HP " + CardCatalog.UnitHealth(unit),
-                        .025f, .01f, .975f, .30f, 22, gold);
+                    Artwork(panel, card, .02f, .23f, .98f, .76f);
+                    Panel(panel, .015f, .775f, .985f, .985f, new Color(.075f, .055f, .025f));
+                    Panel(panel, .015f, .015f, .985f, .215f, new Color(.025f, .025f, .015f));
+                    ReadableText(panel, card.name, .04f, .785f, .96f, .98f, 23, ivory);
+                    string[] values = { "AP " + CardCatalog.UnitAttack(unit), "DP " + CardCatalog.UnitDefense(unit), "HP " + CardCatalog.UnitHealth(unit) };
+                    for (int stat = 0; stat < values.Length; stat++)
+                        ReadableText(panel, values[stat], stat / 3f + .025f, .02f, (stat + 1) / 3f - .025f, .21f, 20, stat == 2 ? teal : gold, TextAlignmentOptions.Center);
+                    Ornament(panel, new Color(.53f, .42f, .24f), true);
                     Frame(panel, target ? ivory : RarityColor(card.rarity), target ? 3 : 1.5f);
                     BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                 }

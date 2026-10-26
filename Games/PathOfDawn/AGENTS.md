@@ -13,3 +13,5 @@
 - 이전 서사 음성20줄은 새 성경 본문에 일치하지 않으므로 자동 재생하지 않는다. 배경 음악의 사용자 제스처·음량 설정은 공통 BgmPlayer를 따른다. Shared 변경은 두 프로젝트 동기화가 필요하다.
 
 Unity6000.3.26f1/URP/InputSystem/uGUI/TMP를 유지한다. 공통 빌드·검증 명령은 `Docs/Development.md`를 따른다. 현재 UI 검사는 `GospelJourneySmokeTests`이며 이전 관찰자/회귀 smoke 결과는 역사적 근거다. 모든 통과 주장은 실제 실행·캡처·해시·관찰에 근거해야 한다. Unity/브라우저 동시 실행을 피하고 병렬 에이전트와 파일 소유권을 지킨다. 사용자가 요청하지 않은 Git worktree를 만들지 않는다.
+
+현재 개정은 `gospel-remaster-2026-10-26`이며 `Docs/GospelRemaster.md`를 따른다. 실제 seven-clip 관절 애니메이션과 점프/달리기/연습구역 동작, 대화 atlas 및 한 턴씩 저장하는 GospelConversations를 유지한다. 직접 인용은 검증 본문에서 추출하고 대화 아래 본문을 표시한다. 자유 연습 동작은 성경 사건/전투 피해에 영향을 주지 않는다.

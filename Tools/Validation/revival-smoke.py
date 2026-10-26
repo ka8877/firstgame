@@ -30,10 +30,11 @@ SPEC = importlib.util.spec_from_file_location("revival_web_helpers", Path(__file
 BASE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BASE)
 ROOT = Path(__file__).resolve().parents[2]
-REVISIONS = {"FantasyCards": "fm-revival-2026-10-26", "PathOfDawn": "gospel-journey-2026-10-26"}
+REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
 REQUIRED_CHECKPOINTS = {
-    "FantasyCards": {"title", "lobby", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
-    "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple"},
+    "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
+    "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
+                   "npc-teacher-dialogue", "npc-mary-dialogue", "npc-jesus-dialogue", "jump-air"},
 }
 
 
@@ -74,7 +75,7 @@ class JourneySmoke:
         self.page, self.args, self.plan, self.output = page, args, plan, output
         self.navigation, self.started = 0, time.monotonic()
         self.report = {"game": args.game, "revision": REVISIONS[args.game], "status": "running",
-            "suite": "revival-real-input-v1", "startedUtc": now(), "profile": args.profile,
+            "suite": "remaster-real-input-v1", "startedUtc": now(), "profile": args.profile,
             "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
             "console": [], "pageErrors": [], "failedRequests": [], "networkResponses": [], "httpErrors": [],
             "unityConfigurations": [], "checkpoints": [], "audioEvidence": {"windows": []},
@@ -88,6 +89,10 @@ class JourneySmoke:
         observer = ROOT / "Tools/Validation/webaudio-observer.js"
         page.add_init_script(path=str(observer))
         self.report["audioEvidence"].update(observer=str(observer.relative_to(ROOT)), observerSha256=digest(observer))
+        if args.game == "FantasyCards":
+            music_observer = ROOT / "Tools/Validation/fm-music-observer.js"
+            page.add_init_script(path=str(music_observer))
+            self.report["audioEvidence"]["providerObserver"] = {"file": str(music_observer.relative_to(ROOT)), "sha256": digest(music_observer)}
         page.on("console", lambda message: self.report["console"].append({"type": message.type,
             "text": message.text, "location": message.location, "navigation": self.navigation}))
         page.on("pageerror", lambda error: self.report["pageErrors"].append({"message": str(error), "stack": getattr(error, "stack", "")}))
@@ -156,7 +161,13 @@ class JourneySmoke:
 
     def screenshot(self, name):
         path = self.output / (name + ".png")
-        self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
+        if name.startswith("jump-air"):
+            # Locator screenshots wait for two stable layout frames. On a slow
+            # software GPU that can span an entire real-time jump. Capture the
+            # original canvas pixels directly without delaying the game clock.
+            self.page.screenshot(path=str(path), clip=self.page.locator("#unity-canvas").bounding_box(), timeout=30000)
+        else:
+            self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
         with Image.open(path) as pixels:
             stat = ImageStat.Stat(pixels.convert("RGB"))
             shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
@@ -180,19 +191,44 @@ class JourneySmoke:
                 self.report["input"].append({"type": "DOM-button-click", "selector": "#fm-music-toggle", "atUtc": now()})
             self.page.wait_for_function("""track => {
               const s=document.querySelector('#fm-music-status');
-              return s && s.dataset.playback==='playing' && s.dataset.trackId===track;
+              return s && s.dataset.playback==='playing' && s.dataset.trackId===track && s.dataset.positionMs!==undefined;
             }""", arg=str(step["trackId"]), timeout=self.args.provider_timeout * 1000)
             for _ in range(5):
                 evidence["observations"].append(self.page.locator("#fm-music-status").evaluate("""e => ({
                   text:e.textContent,playback:e.dataset.playback,trackId:e.dataset.trackId,
-                  positionMs:Number(e.dataset.positionMs||0),title:e.dataset.trackTitle,publisher:e.dataset.publisher,
+                  positionMs:e.dataset.positionMs===undefined ? null : Number(e.dataset.positionMs),title:e.dataset.trackTitle,publisher:e.dataset.publisher,
                   observedAt:performance.now()})"""))
                 self.page.wait_for_timeout(700)
             rows = evidence["observations"]
             valid = (all(row["playback"] == "playing" and row["trackId"] == str(step["trackId"]) for row in rows)
-                     and rows[-1]["positionMs"] > rows[0]["positionMs"] + 500)
+                     and all(row["positionMs"] is not None for row in rows)
+                     and sum(max(0, b["positionMs"]-a["positionMs"]) for a,b in zip(rows,rows[1:])) > 500)
             if not valid:
                 raise AssertionError("Expected original track did not show advancing official playback position")
+            direct = self.page.evaluate("""() => new Promise(resolve => {
+              const diagnostics=window.FirstGameOriginalMusic?.getDiagnostics() || [];
+              const active=diagnostics.find(player=>player.active && player.playing);
+              if (!active || !window.SC) { resolve({error:'No actual active official widget',diagnostics}); return; }
+              const id='fm-original-player'+(active.scene==='login'?'':'-'+active.scene);
+              const widget=SC.Widget(document.getElementById(id));
+              const timer=setTimeout(()=>resolve({error:'Official widget source query timed out',diagnostics}),4000);
+              widget.getCurrentSound(sound=>widget.getPosition(position=>{
+                clearTimeout(timer); resolve({actualScene:active.scene,actualSoundId:sound?.id,
+                  actualTitle:sound?.title,actualPublisher:sound?.user?.username,actualPositionMs:position,diagnostics});
+              }));
+            })""")
+            evidence["directOfficialWidget"] = direct
+            if str(direct.get("actualSoundId")) != str(step["trackId"]):
+                raise AssertionError("Direct getCurrentSound did not verify the footer's actual original track")
+            timeline = self.page.evaluate("() => window.__fmOriginalMusicEvidence || null")
+            evidence["passiveTimeline"] = timeline
+            matching = [row for row in (timeline or {}).get("handovers", [])
+                        if row.get("actualTrackId") == str(step["trackId"])
+                        and (not step.get("scene") or row.get("requestedScene") == step["scene"])]
+            if matching:
+                evidence["latency"] = matching[-1]
+            else:
+                raise AssertionError("No passive actual-player handover timing was captured")
             evidence["status"] = "verified-provider-playback"
         except Exception as error:
             evidence["error"] = str(error)
@@ -213,7 +249,50 @@ class JourneySmoke:
                                         "label": "Close the actual provider panel", "atUtc": now()})
         self.persist()
 
+    def provider_ready(self):
+        """Wait for actual progress-based warm-up, without issuing player commands."""
+        evidence = {"navigation": self.navigation, "startedUtc": now(), "status": "unverified-external-service"}
+        try:
+            self.page.wait_for_function("""() => {
+              const players=window.FirstGameOriginalMusic?.getDiagnostics() || [];
+              return players.length===4 && players.every(player=>player.ready && player.warmed);
+            }""", timeout=self.args.provider_timeout * 1000)
+            evidence["status"] = "prepared-four-official-players"
+        except Exception as error:
+            evidence["error"] = str(error)
+        evidence["players"] = self.page.evaluate("() => window.FirstGameOriginalMusic?.getDiagnostics() || []")
+        self.report["audioEvidence"].setdefault("providerPreparation", []).append(evidence)
+        if evidence["status"] == "prepared-four-official-players" or self.args.require_provider_audio:
+            self.check(evidence["status"] == "prepared-four-official-players", "All official scene players advanced and prewarmed", evidence)
+        self.persist()
+
+    def first_original_music_gesture(self):
+        evidence = {"navigation": self.navigation, "attemptedUtc": now()}
+        loading_start = self.page.locator("#fm-loading-start")
+        if loading_start.is_visible():
+            loading_start.click()
+            evidence.update(action="loading-start-button", selector="#fm-loading-start")
+        else:
+            playing = self.page.evaluate("() => !!window.FirstGameOriginalMusic?.getDiagnostics().some(p=>p.active && p.playing)")
+            if playing:
+                evidence["action"] = "page-load-autoplay-already-confirmed"
+            else:
+                self.page.locator("#fm-music-toggle").click()
+                evidence.update(action="visible-footer-start-button", selector="#fm-music-toggle")
+        evidence["timeline"] = self.page.evaluate("() => window.__fmOriginalMusicEvidence || null")
+        self.report["audioEvidence"].setdefault("initialMusicActions", []).append(evidence)
+        self.report["input"].append({"type": "DOM-button-click" if evidence.get("selector") else "observation",
+                                   **evidence})
+        self.persist()
+
     def input(self, action):
+        if "repeat" in action:
+            repetitions = action["repeat"]
+            if not isinstance(repetitions, int) or not 1 <= repetitions <= 80:
+                raise ValueError("Real input repetition must be between 1 and 80")
+            for index in range(repetitions):
+                self.input({**{key: value for key,value in action.items() if key != "repeat"}, "repetition": index+1})
+            return
         kind = action["type"]
         record = {**action, "navigation": self.navigation, "atUtc": now()}
         if kind == "click":
@@ -224,6 +303,10 @@ class JourneySmoke:
                 self.page.mouse.click(px, py, delay=180)
         elif kind == "key":
             self.page.keyboard.press(action["key"])
+        elif kind == "text":
+            self.page.keyboard.type(action["text"], delay=60)
+        elif kind == "dom_click":
+            self.page.locator(action["selector"]).click()
         elif kind == "hold":
             keys = action["keys"]
             for key in keys:
@@ -251,6 +334,17 @@ class JourneySmoke:
             # Keep the release over the button until Unity has consumed it.
             self.page.mouse.move(*self.point(.005, .005))
         self.persist()
+
+    def provider_state(self, step):
+        self.page.wait_for_function("""expected => {
+          const state=window.FirstGameOriginalMusic?.getState();
+          return state && state.muted===expected.muted && Math.abs(state.volume-expected.volume)<.01;
+        }""", arg={"muted": step["muted"], "volume": step["volume"]}, timeout=5000)
+        evidence = self.page.evaluate("""() => ({state:window.FirstGameOriginalMusic.getState(),
+          footer:{...document.querySelector('#fm-music-status').dataset},
+          players:window.FirstGameOriginalMusic.getDiagnostics()})""")
+        self.check(evidence["state"]["muted"] == step["muted"] and abs(evidence["state"]["volume"]-step["volume"]) < .01,
+                   "Footer and Unity music action share the same setting: " + step["label"], evidence)
 
     def checkpoint(self, step):
         attempt = 0
@@ -353,6 +447,7 @@ class JourneySmoke:
             if self.args.base_url:
                 self.public_bytes(url)
             self.page.goto(url, wait_until="domcontentloaded", timeout=self.args.timeout * 1000)
+            if self.args.game == "FantasyCards": self.first_original_music_gesture()
             self.loaded()
             for step in self.plan["steps"]:
                 if step.get("profile") and step["profile"] != self.args.profile:
@@ -361,6 +456,8 @@ class JourneySmoke:
                 if kind == "checkpoint": self.checkpoint(step)
                 elif kind == "audio": self.audio(step["label"])
                 elif kind == "provider_audio": self.provider_audio(step)
+                elif kind == "provider_ready": self.provider_ready()
+                elif kind == "provider_state": self.provider_state(step)
                 elif kind == "reload": self.loaded(reload=True)
                 elif kind == "wait": self.page.wait_for_timeout(step["ms"])
                 else: self.input(step)

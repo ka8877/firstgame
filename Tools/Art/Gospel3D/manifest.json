@@ -1,5 +1,5 @@
 {
-  "revision": "gospel-3d-2026-10-26",
+  "revision": "gospel-remaster-2026-10-26",
   "source": "Quaternius Universal Base Characters + Universal Animation Library Standard",
   "license": "CC0-1.0",
   "actors": [
@@ -12,7 +12,7 @@
       "bones": 65,
       "vertices": 14565,
       "triangles": 28250,
-      "meshes": 38,
+      "meshes": 8,
       "clips": [
         {
           "name": "Idle",
@@ -40,9 +40,54 @@
             29.0
           ],
           "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "YoungJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "YoungJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "YoungJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "YoungJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
         }
       ],
-      "bytes": 4458572
+      "bytes": 3970188,
+      "materialSlots": 10
     },
     {
       "name": "AdultJesus",
@@ -53,7 +98,7 @@
       "bones": 65,
       "vertices": 15459,
       "triangles": 29876,
-      "meshes": 40,
+      "meshes": 10,
       "clips": [
         {
           "name": "Idle",
@@ -81,9 +126,54 @@
             29.0
           ],
           "seconds": 0.9333333333333333
+        },
+        {
+          "name": "JumpStart",
+          "source": "Jump_Start",
+          "retargetedAction": "AdultJesus_JumpStart",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333,
+          "loop": false
+        },
+        {
+          "name": "JumpAir",
+          "source": "Jump_Loop",
+          "retargetedAction": "AdultJesus_JumpAir",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5,
+          "loop": true
+        },
+        {
+          "name": "JumpLand",
+          "source": "Jump_Land",
+          "retargetedAction": "AdultJesus_JumpLand",
+          "frames": [
+            1.0,
+            39.0
+          ],
+          "seconds": 1.2666666666666666,
+          "loop": false
+        },
+        {
+          "name": "Practice",
+          "source": "Interact",
+          "retargetedAction": "AdultJesus_Practice",
+          "frames": [
+            1.0,
+            61.0
+          ],
+          "seconds": 2.0,
+          "loop": false
         }
       ],
-      "bytes": 4635708
+      "bytes": 4152380,
+      "materialSlots": 12
     }
   ],
   "renderKind": "Blender art review, not Unity gameplay"

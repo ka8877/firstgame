@@ -11,7 +11,10 @@ Quaternius — Universal Animation Library, Standard FREE edition.
 https://quaternius.com/packs/universalanimationlibrary.html
 https://quaternius.itch.io/universal-animation-library
 License: CC0 1.0 Universal. Original notice: Source/Animation-License.txt.
-Selected source takes: Idle_Loop, Walk_Loop, Jog_Fwd_Loop.
+Selected source takes: Idle_Loop, Walk_Loop, Jog_Fwd_Loop,
+Jump_Start, Jump_Loop, Jump_Land, Interact.
+Interact is presented as a nonviolent reaching/hand movement in the optional
+practice area. It is not an attack against a story character or a Bible event.
 
 This project adapts the game-ready base to clothed youth/adult story characters:
 linen tunic, woven cuffs/belt, sandals, adult mantle, youth proportions,
@@ -21,6 +24,11 @@ continuous skinned mesh with modeled eyes/hands/feet, not primitive proxy parts.
 Only the selected CC0 Standard files are used; no paid/source/pro editions.
 
 Tools/Art/Gospel3D/build-actors.py reproduces the adaptation and FBX export.
+Tools/Art/Gospel3D/augment-actions.py adds the four action takes to the preserved
+production actors and combines matching-material skinned parts. It retains all
+65 bones, modeled vertices/triangles, skinning, and the named Eyes renderer.
+Tools/Art/Gospel3D/verify-actions.py reimports both exported FBXs and samples
+all seven takes. Its report covers Blender assets, not Unity gameplay.
 Resources/Art/Gospel3D/material-spec.json defines the URP material inputs.
 Generated Blender review images are art previews, not Unity gameplay evidence.
 Unity animation, contact and runtime rendering require separate validation.
