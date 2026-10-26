@@ -202,10 +202,25 @@ def browser_report(path, game, profile, runtime, classic=True):
                 f"Review screenshot not in original report: {path}")
         require(file_path(shot["path"]).is_relative_to(file_path(path).parent), f"Screenshot outside report: {path}")
         checked_hash(shot["path"], shot["sha256"])
+    assessments = {}
+    for name in ("reassessment", "identityReassessment"):
+        if not report.get(name):
+            continue
+        assessment = report[name]
+        artifact = assessment.get("artifact", {})
+        checked_hash(artifact.get("path", ""), artifact.get("sha256"))
+        require(read_json(artifact["path"]).get("status") == "passed",
+                f"Reassessment did not pass: {path}/{name}")
+        originals = assessment.get("originalArtifacts", [])
+        require(originals, f"Reassessment must retain its original evidence: {path}/{name}")
+        for original in originals:
+            checked_hash(original.get("path", ""), original.get("sha256"))
+        assessments[name] = assessment
     return {"status": "passed", "checks": len(checks), **reference(path), "audioWindows": len(windows),
             "voiceWindows": len(report.get("voiceEvidence", {}).get("windows", [])), "visualReview": "approved",
             "reviewedScreenshots": review["screenshots"], "reviewedUtc": review["reviewedUtc"],
-            "visualFindings": review.get("findings", review.get("notes", "")),
+            "visualFindings": review.get("findings", review.get("notes", review.get("observations", ""))),
+            "executionStatus": report.get("executionStatus", report["status"]), "assessments": assessments,
             "classicEvidence": sorted(report.get("classicEvidence", {}))}
 
 
@@ -366,6 +381,15 @@ def markdown(record):
     public = record.get("publicWeb", {}).get("FantasyCards")
     if public:
         checks += f"\n| PublicMobile844 | {public['checks']} / {public['checks']} | BGM {public['audioWindows']}구간 | `{public['evidence']}` |"
+    all_reports = {**web, **({"PublicMobile844": public} if public else {})}
+    assessment_notes = []
+    for name, entry in all_reports.items():
+        for kind, assessment in entry.get("assessments", {}).items():
+            explanation = ("최초 실행의 마지막 네트워크 분류 실패는 같은 URL의 HTTP304·UnityCache 성공·실제 저장 복구를 근거로 재평가했다. 원본 실패 상태를 보존하며 재실행으로 표시하지 않는다."
+                           if kind == "reassessment" else
+                           "일부 카드명 OCR의 한 글자 부분 매칭 오류를 원본 화면 직접 확인으로 보완했다. 원래 인식값과 실행 기록을 보존하고, 정확한 이름·손패 대조는 별도 시각 확인 근거를 따른다.")
+            assessment_notes.append(f"{name}: {explanation} 근거: `{assessment['artifact']['path']}`.")
+    assessment_text = "\n\n".join(assessment_notes)
     history_count = len(record["classicBrowserHistory"])
     validation = f"""# 검증 결과
 
@@ -386,6 +410,8 @@ def markdown(record):
 {checks}
 
 Desktop720은 Chromium 1280×720, Mobile844는 터치 에뮬레이션 844×390이다. 보고서의 7개 `classicEvidence`, 현재 Web 실행 파일 SHA-256, 원본 캡처 직접 검토를 모두 확인했다. 원작 그림·필터·덱 선택·셔플·준비·자동전투·저장/새로고침을 실제 입력으로 검사했다.
+
+{assessment_text}
 
 ## 빌드
 
@@ -417,6 +443,8 @@ Web의 Unity 보고 바이트는 HTML 크기일 수 있다. 실제 카드 Web �
 {publication}
 
 ## 현재 카드판
+
+{assessment_text}
 
 """
     all_reports = dict(web)

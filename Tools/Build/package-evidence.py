@@ -104,6 +104,9 @@ selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
 for directory in ("ExpandedDemo", "Demo", "PaintedDawn", "MotionDawn", "FmExpansion", "ClassicCards"):
     for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx", "*-BuildEvidence.txt"):
         selected.extend(sorted((artifacts / "Validation" / directory).rglob(pattern)))
+# Reassessments cite the exact executed harness/classifier, not the later fix.
+for pattern in ("executed-harness.py", "original-shared-classifier.py"):
+    selected.extend(sorted((artifacts / "Validation/ClassicCards").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/ExpandedDemo").glob("*-reference.txt")))
 for profile in ("Desktop720", "Mobile844"):
     selected.append(artifacts / "Validation/PaintedDawn" / profile / "PathOfDawn/report.json")

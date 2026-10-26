@@ -2,7 +2,7 @@
 
 기록: 2026-10-26 Asia/Seoul · 카드 `fm-classic-2026-10-26` / 콘텐츠 `fm-classic-0.1.0`. 이 문서는 `Tools/Validation/summarize-classic-release.py`가 현재 근거의 통과 상태와 SHA-256을 확인한 뒤 생성했다.
 
-현재 카드판의 공개 배포 검증은 대기 중이다. 로컬 통과를 공개 URL 통과로 표시하지 않는다.
+[공개 테스트](https://ka8877.github.io/firstgame/) — [Pages 실행](https://github.com/ka8877/firstgame/actions/runs/40273009201), 원본 커밋 `2fa47159abc04281d5e6e202a0cca60562e64f6e`, 공개 파일 25개 SHA-256 일치.
 
 ## 새 카드판 검증
 
@@ -15,9 +15,16 @@
 | 브라우저 | 검사 통과 | 오디오 | 근거 |
 |---|---:|---|---|
 | Desktop720 | 91 / 91 | BGM 7구간 | `Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/report.json` |
-| Mobile844 | 109 / 109 | BGM 7구간 | `Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/report.json` |
+| Mobile844 | 110 / 110 | BGM 7구간 | `Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/report.json` |
+| PublicMobile844 | 86 / 86 | BGM 7구간 | `Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/report.json` |
 
 Desktop720은 Chromium 1280×720, Mobile844는 터치 에뮬레이션 844×390이다. 보고서의 7개 `classicEvidence`, 현재 Web 실행 파일 SHA-256, 원본 캡처 직접 검토를 모두 확인했다. 원작 그림·필터·덱 선택·셔플·준비·자동전투·저장/새로고침을 실제 입력으로 검사했다.
+
+Desktop720: 최초 실행의 마지막 네트워크 분류 실패는 같은 URL의 HTTP304·UnityCache 성공·실제 저장 복구를 근거로 재평가했다. 원본 실패 상태를 보존하며 재실행으로 표시하지 않는다. 근거: `Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/network-reassessment.json`.
+
+Mobile844: 일부 카드명 OCR의 한 글자 부분 매칭 오류를 원본 화면 직접 확인으로 보완했다. 원래 인식값과 실행 기록을 보존하고, 정확한 이름·손패 대조는 별도 시각 확인 근거를 따른다. 근거: `Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/identity-reassessment.json`.
+
+PublicMobile844: 일부 카드명 OCR의 한 글자 부분 매칭 오류를 원본 화면 직접 확인으로 보완했다. 원래 인식값과 실행 기록을 보존하고, 정확한 이름·손패 대조는 별도 시각 확인 근거를 따른다. 근거: `Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/identity-reassessment.json`.
 
 ## 빌드
 

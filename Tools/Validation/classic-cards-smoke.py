@@ -33,6 +33,12 @@ ROOT, GAME = BASE.ROOT, "FantasyCards"
 BASE.TITLES[GAME] = "판타지마스터즈"
 
 
+def authored_name_matches(name, visible):
+    """A one-syllable authored name must not match part of a longer name."""
+    return re.search(r"(?<![가-힣])" + re.escape(BASE.compact(name)) + r"(?![가-힣])",
+        BASE.compact(visible)) is not None
+
+
 class ClassicSmoke(BASE.Smoke):
     def __init__(self, page, output, args):
         super().__init__(page, GAME, output, args)
@@ -78,11 +84,15 @@ class ClassicSmoke(BASE.Smoke):
         return super().wait_title()
 
     def wait_text(self, expected, timeout=None, region=None, psm=11, language="kor+eng", match_all=False,
-                  literal=False, button_text=False, allow_pause=True):
+                  literal=False, button_text=False, allow_pause=True, whole_name=False):
         self.last_observation_method="ocr"
         try:
-            return super().wait_text(expected,timeout=timeout,region=region,psm=psm,language=language,
+            visible=super().wait_text(expected,timeout=timeout,region=region,psm=psm,language=language,
                 match_all=match_all,literal=literal,button_text=button_text,allow_pause=False)
+            expected_list=[expected] if isinstance(expected,str) else list(expected)
+            if whole_name and not any(authored_name_matches(name,visible) for name in expected_list):
+                raise AssertionError(f"OCR contains no complete authored card name; partial syllable matches rejected: {visible!r}")
+            return visible
         except AssertionError as failure:
             if not allow_pause or not self.args.pause_on_ocr_failure: raise
             expected_list=[expected] if isinstance(expected,str) else list(expected)
@@ -90,7 +100,7 @@ class ClassicSmoke(BASE.Smoke):
             frame=self.snapshot(f"direct-review-pause-{index:03}")
             resume=self.output/f"direct-review-resume-{index:03}.json"
             entry={"status":"paused","expected":expected_list,"region":region,"psm":psm,
-                "ocrFailure":str(failure),"frame":frame,"resumeFile":str(resume),
+                "ocrFailure":str(failure),"frame":frame,"resumeFile":str(resume),"wholeName":whole_name,
                 "allowedRecovery":"Same expected labels with a corrected ROI, or explicit direct review of this exact original frame."}
             self.report["directReviewPauses"].append(entry);self.persist()
             print(f"{GAME}: PAUSED for same-label ROI or explicit original-frame visual confirmation at {resume}",flush=True)
@@ -103,7 +113,8 @@ class ClassicSmoke(BASE.Smoke):
                     raise AssertionError("Direct review must retain the exact original expected labels")
                 if recovery.get("mode")=="visual-confirmation":
                     confirmed=recovery.get("confirmedText","")
-                    found=[word in confirmed if literal else BASE.compact(word) in BASE.compact(confirmed) for word in expected_list]
+                    found=[authored_name_matches(word,confirmed) if whole_name else
+                        (word in confirmed if literal else BASE.compact(word) in BASE.compact(confirmed)) for word in expected_list]
                     if (recovery.get("reviewedFrameSha256")!=frame["sha256"] or not recovery.get("reviewer") or
                             not recovery.get("reviewedUtc") or not (all(found) if match_all else any(found))):
                         raise AssertionError("Visual confirmation requires the exact original frame hash, reviewer, date and observed labels")
@@ -119,7 +130,7 @@ class ClassicSmoke(BASE.Smoke):
                     raise AssertionError("OCR recovery requires a bounded visible ROI and supported segmentation")
                 entry.update({"status":"resumed-with-same-expectation","recovery":recovery});self.persist()
                 return self.wait_text(expected_list,timeout=timeout,region=corrected,psm=new_psm,language=language,
-                    match_all=match_all,literal=literal,button_text=button_text)
+                    match_all=match_all,literal=literal,button_text=button_text,whole_name=whole_name)
             entry["status"]="recovery-timeout";self.persist()
             raise failure
 
@@ -183,8 +194,8 @@ class ClassicSmoke(BASE.Smoke):
         self.wait_title()
 
     def card_name(self, region):
-        visible = self.wait_text(self.names, region=region, psm=7)
-        name = next((name for name in self.names if BASE.compact(name) in BASE.compact(visible)), None)
+        visible = self.wait_text(self.names, region=region, psm=7, whole_name=True)
+        name = next((name for name in self.names if authored_name_matches(name,visible)), None)
         self.check(name is not None, "Visible original card name matches the static catalog",
                    {"name":name,"observedText":visible,"method":self.last_observation_method})
         return name
@@ -440,7 +451,7 @@ class ClassicSmoke(BASE.Smoke):
                     # Its small over-art lane caption remains in the original
                     # screenshot, while the large detail proves exact identity.
                     self.click(.116+target*.19,.6025,"Inspect the unit actually placed on the board")
-                    self.wait_text(name,region=self.region("detailName"),psm=7)
+                    self.wait_text(name,region=self.region("detailName"),psm=7,whole_name=True)
                     self.snapshot(f"preparation-{turn_index}-placed-unit-detail-{len(played)+1}")
                     self.click_control("detailBack","Return from the placed unit's actual detail")
                 played.append({"name":name,"kind":"terrain" if kind==1 else "unit","lane":target,"before":state,"after":after})

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-26",
-  "recordedUtc": "2026-10-26T05:11:47.393468+00:00",
+  "recordedUtc": "2026-10-26T05:30:29.590193+00:00",
   "dateTimezone": "Asia/Seoul",
   "revision": "fm-classic-2026-10-26",
   "contentVersion": "fm-classic-0.1.0",
@@ -9,7 +9,7 @@
     "PathOfDawn": "fluid-dawn-2026-10-24"
   },
   "baselineRecord": "Tools/Environment/validation-2026-10-26-before-classic.json",
-  "sourceCommitAtSummary": "87dba2a038858c099896eeb90791917255d33981",
+  "sourceCommitAtSummary": "2fa47159abc04281d5e6e202a0cca60562e64f6e",
   "sourceDirtyAtSummary": true,
   "externalCore": {
     "passed": 73,
@@ -157,7 +157,99 @@
         }
       ],
       "reviewedUtc": "2026-10-26T04:52:33.980156+00:00",
-      "visualFindings": "",
+      "visualFindings": [
+        {
+          "screenshots": [
+            "title-1280x720"
+          ],
+          "finding": "The Korean title and main actions are readable against the darkened illustration. New duel, continue, card collection, 50-card deck construction, save export/import, and music controls are within the canvas without blocking overlap or clipped labels."
+        },
+        {
+          "screenshots": [
+            "collection-96-original-cards",
+            "filter-filterElement-3",
+            "filter-filterRarity-3",
+            "filter-filterCost-0",
+            "filter-filterCost-7"
+          ],
+          "finding": "The collection visibly states 96 total cards. Directly viewed filter frames show forest 14, rare 1, soul 0 with 14, and soul 7 with 6 matching cards. Four-column card presentation keeps names, level/cost badges, rarity, and type/stat text readable. The forest frame visibly includes 요정의숲, 꽃밭, 스웜, and 라비원숭이; the rare frame shows 메테오. Pagination and filter controls remain on screen."
+        },
+        {
+          "screenshots": [
+            "original-card-explanation",
+            "original-card-full-print"
+          ],
+          "finding": "The 묘지 detail displays a large original art area and separately drawn readable Korean rules: Lv 0, LP 1, 암흑 1 / 총소울 1 생산. The full-print frame displays the entire printed card, including border, title, printed text area, and the 1 marker. The UI also visibly warns that printed information and current database values may differ. The small source image is visibly pixelated/soft when enlarged; its fine print is less clear than the separately rendered UI."
+        },
+        {
+          "screenshots": [
+            "four-cosmetic-avatars",
+            "four-fifty-card-starter-decks",
+            "three-encounter-choices"
+          ],
+          "finding": "Four avatar choices and their names 리리아, 카엘, 세린, 노아 are visible. The avatar screen states that classic rules do not use unique avatar skills. The starter screen shows all four choices together, each labelled 50장 · 지형 16 · 유닛 24, with 숲과 빛 · 생명의 전열 highlighted. Three encounter panels and their navigation controls are visible. Descriptions fit without observed text truncation."
+        },
+        {
+          "screenshots": [
+            "preparation-3-placed-unit-detail-2"
+          ],
+          "finding": "The actual placed-unit detail visibly identifies 킬러메뚜기, 프리 / 숲 / 유닛 / 4장까지, Lv 1, 숲 1, 총소울 1, 유지 0, and AP 2+2C1 DP 0 HP 2+C1. The coin-per-stat explanation and no-special-skill description are readable; return and original-card controls are visible."
+        },
+        {
+          "screenshots": [
+            "classic-battle-after-automatic-rounds"
+          ],
+          "finding": "The board shows turn 4, opponent attack / player defense preparation. The player front row contains 킬러메뚜기 with AP 2 DP 0 HP 2; the opponent has 리틀엔젤 with AP 2 DP 1 HP 2 plus a face-down reserved spell. The player resource row visibly reads deck 40, hand 6, LP 1, 빛 1 · 숲 2 · 총소울 3, 지형 3/10. Ready, detail, save, music, and title controls are readable and within the frame."
+        },
+        {
+          "screenshots": [
+            "automatic-combat-3-record"
+          ],
+          "finding": "The visible combat log reads 실프 · C1 뒷면, 실프 최종 AP 1 / DP 0 / HP 2, 킬러메뚜기 → 실프 피해 4 · 반격 없음, and 실프 전장 이탈. Further lines show resource upkeep and the opponent placing 창공 and 리틀엔젤 and reserving a spell. The log and return control are readable without observed clipping."
+        },
+        {
+          "screenshots": [
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "Saved and restored captures visibly retain turn 4, the same player 킬러메뚜기 and opponent 리틀엔젤 plus reserved spell, and matching player deck 40 / hand 6 / LP 1 / terrain 3/10. Both show the same scrolled hand sequence 꽃밭, 템플솔져, 요정의숲, 세르셜가드, 요정의숲. The status line changes from a successful save message to a successful battle-and-next-coin-state restore message. This is direct visible correspondence; the message itself is not an independent proof of hidden RNG state."
+        },
+        {
+          "screenshots": [
+            "classic-battle-after-automatic-rounds",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The hand is a horizontal scroll strip showing five cards at a time at this viewport; the visible scrollbar and changed scroll position explain why all six cards are not simultaneously visible. The card names and stat lines in the visible portion are not cut off. No blocking text clipping, empty render, broken glyphs, or unintended overlay obstruction was observed in the reviewed frames."
+        }
+      ],
+      "executionStatus": "failed",
+      "assessments": {
+        "reassessment": {
+          "type": "post-run-network-evidence-reassessment",
+          "assessedUtc": "2026-10-26T05:00:16.146342+00:00",
+          "noRerun": true,
+          "artifact": {
+            "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/network-reassessment.json",
+            "bytes": 16318,
+            "sha256": "65301f74b045d622df1624d696e6aeeeac88f821ac18dc78940045cb53675a7f"
+          },
+          "originalArtifacts": [
+            {
+              "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/Reassessment/original-report.json",
+              "bytes": 554490,
+              "sha256": "c8028ab716fa93fcd5d16461ab9c09ad4a40eed5346faef8d206edf532ce9aa8"
+            },
+            {
+              "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/Reassessment/original-summary.json",
+              "bytes": 635410,
+              "sha256": "c9b9ef5fedcf8ced4106f5eed7f24cdee3975f5ff0e2c7d27d455497eb39d26d"
+            }
+          ],
+          "originalExecutionStatus": "failed",
+          "statusBasis": "Only the documented network-classification error was recomputed from original evidence; the original failure is retained."
+        }
+      },
       "classicEvidence": [
         "collection_filters",
         "combat",
@@ -170,9 +262,9 @@
     },
     "Mobile844": {
       "status": "passed",
-      "checks": 109,
+      "checks": 110,
       "evidence": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/report.json",
-      "sha256": "accf25f96f1b5f6414307a957c1efdac0e6cf001dede78d9625f11ecbd675dd6",
+      "sha256": "a9131cc00259cb46db8dc1cc6c1e951608a07932c8c2bb1a83e4c6e9c94e615a",
       "audioWindows": 7,
       "voiceWindows": 0,
       "visualReview": "approved",
@@ -279,7 +371,110 @@
         }
       ],
       "reviewedUtc": "2026-10-26T05:09:34.220017+00:00",
-      "visualFindings": "",
+      "visualFindings": [
+        {
+          "screenshots": [
+            "title-full-viewport",
+            "title-844x390"
+          ],
+          "finding": "The full viewport shows a centered 16:9 game canvas inside the 844 by 390 landscape viewport, with dark side margins of about 75 pixels. The canvas capture is 694 by 390. The title and main Korean actions are within the canvas and readable; no visible browser/canvas crop removes the navigation controls."
+        },
+        {
+          "screenshots": [
+            "collection-96-original-cards",
+            "filter-filterElement-3",
+            "filter-filterRarity-3",
+            "filter-filterCost-0",
+            "filter-filterCost-7"
+          ],
+          "finding": "The collection count visibly reads 96 total / 96 matching, with four displayed card columns. Directly reviewed filter frames visibly show forest 14, rare 1, soul 0 with 14, and soul 7 with 6. Names, cost and rarity badges, basic stat/type lines, pagination, and reset controls remain distinct. The rare frame shows 메테오 and the forest frame includes 요정의숲, 꽃밭, 스웜, and 라비원숭이."
+        },
+        {
+          "screenshots": [
+            "original-card-full-print",
+            "original-card-explanation"
+          ],
+          "finding": "The full printed 묘지 card is visible with its outer border, artwork, printed text area, and 1 marker, together with the printed/current-database discrepancy notice and ability-description button. The separate detail shows 묘지, Lv 0, LP 1, 암흑 1 / 총소울 1 생산 and a wrapped terrain explanation. The original raster print and its fine text are small and soft; the separate UI values are substantially clearer."
+        },
+        {
+          "screenshots": [
+            "four-fifty-card-starter-decks"
+          ],
+          "finding": "All four starter choices fit in a two-by-two layout, each visibly labelled 50장 · 지형 16 · 유닛 24. 숲과 빛 · 생명의 전열 is highlighted. Description wrapping stays inside the panels, and avatar/deck navigation plus opponent selection remain visible."
+        },
+        {
+          "screenshots": [
+            "opening-before-shuffle",
+            "opening-after-shuffle"
+          ],
+          "finding": "Both opening-hand screens display six complete cards at once and show a visibly different card order after replacement. The after frame contains 창공, 발탄, 허수아비, 요정의숲, 세르셜가드, 요정의숲; the status states that the whole-hand replacement was used. Start and replacement controls remain visible."
+        },
+        {
+          "screenshots": [
+            "classic-first-preparation"
+          ],
+          "finding": "The first battle shows turn 1 / player attack preparation and five empty lanes on each side. The own resource row visibly reads deck 44, hand 6, LP 1, colored souls 0, total souls 0, terrain 0/10. Ready, card-detail, save, music, title, battle-log, and hand-shuffle controls remain visible. The board/resource labels are compact at this canvas size."
+        },
+        {
+          "screenshots": [
+            "preparation-6-placed-unit-detail-1",
+            "preparation-6-play-1"
+          ],
+          "finding": "The actual placed-unit detail visibly identifies 스웜, 프리 / 숲 / 유닛 / 4장까지, Lv 1, 숲 1, 총소울 1, 유지 0, AP 2+C3 DP 0 HP 2. The coin-per-stat and no-special-skill text wraps within the detail panel. The played board shows 스웜 in the first player lane with AP 2 DP 0 HP 2 during turn 6 defense preparation; the player resource row shows deck 36, hand 5, LP 1, terrain 5/10. The opponent visibly has 퓨리울프, 실프, another 퓨리울프, and 리틀엔젤 in four lanes."
+        },
+        {
+          "screenshots": [
+            "automatic-combat-4-record",
+            "automatic-combat-6-record"
+          ],
+          "finding": "The compact combat text remains readable. Combat 4 visibly records 퓨리울프 · C1 뒷면, final AP 7 / DP 0 / HP 4, and direct attack level 3 causing 나 덱 -3. Combat 6 visibly records back-face coin outcomes for 실프, 퓨리울프, and 리틀엔젤, together with direct deck losses of -1, -3, and -1, then upkeep and the next preparation. These viewed frames prove visible back-face/direct-damage entries; they do not show both coin faces or every earlier log line."
+        },
+        {
+          "screenshots": [
+            "classic-battle-after-automatic-rounds",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The final board and saved/restored pair visibly show turn 7 / player attack preparation, empty player lanes, and the same four opponent units. The player resource row matches at deck 30, hand 6, LP 2, 빛 2 · 숲 3 · 총소울 5, terrain 5/10. The same visible scrolled hand contains 허수아비, 세르셜가드, 홀리레인, 신의은총, 꽃밭. Save and restore status messages are both legible; the latter states that the saved battle and next coin state were restored. This is visible correspondence, not independent verification of hidden RNG state."
+        },
+        {
+          "screenshots": [
+            "classic-first-preparation",
+            "preparation-6-play-1",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The battle hand uses a horizontal scroll strip with five visible cards at a time and a visible scrollbar; all six cards are not simultaneously shown on the board. Visible card names/stat lines remain inside their cards. No blocking text clipping, broken glyphs, blank rendering, or unintended overlap was observed in the reviewed frames."
+        }
+      ],
+      "executionStatus": "passed",
+      "assessments": {
+        "identityReassessment": {
+          "artifact": {
+            "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/identity-reassessment.json",
+            "sha256": "af91eaaccf63d74ad637678ef75485911da9f7aac51b6e8f6b2cff9df239146e"
+          },
+          "originalArtifacts": [
+            {
+              "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/IdentityReassessment/original-report.json",
+              "sha256": "accf25f96f1b5f6414307a957c1efdac0e6cf001dede78d9625f11ecbd675dd6"
+            },
+            {
+              "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/IdentityReassessment/original-summary.json",
+              "sha256": "cde8dc68b29d2cf91fad13a3b931ef586cab08da80f81a4905e53a91ddfd578f"
+            }
+          ],
+          "noRerun": true,
+          "method": "direct-visual-correction",
+          "status": "passed",
+          "observations": [
+            "1 automatic card-name observations incorrectly matched 라; original screenshots directly confirm 라비원숭이.",
+            "Actual whole-hand replacement still changes the corrected six-card sequence.",
+            "Saved/restored six-card identities contain no affected match and remain equal."
+          ],
+          "scope": "The partial automatic OCR name matches are superseded by explicit original-frame identity confirmations; all raw observations are preserved."
+        }
+      },
       "classicEvidence": [
         "collection_filters",
         "combat",
@@ -581,8 +776,271 @@
     "Equipment limit of two is an implementation choice; shared-coin prefix interpretation is partly inferred."
   ],
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "reason": "Local evidence passed; --pages-run and fresh public browser/portal evidence are required."
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40273009201",
+    "sourceCommit": "2fa47159abc04281d5e6e202a0cca60562e64f6e",
+    "verifiedFiles": 25,
+    "manifest": {
+      "evidence": "Artifacts/WebPlaytest/build-manifest.json",
+      "sha256": "54643bd9354fba59aa8639de40b287afd8e3db63a97a011c556111ec62fbec03"
+    },
+    "portal": {
+      "evidence": "Artifacts/Validation/PublicWeb/Portal/report.json",
+      "sha256": "7b52ce15546b2a3556ce46993eda3c9d38a3fa811cc73e077a46cd5114c56f06"
+    },
+    "checkedUtc": "2026-10-26T05:14:41.717419+00:00",
+    "scope": "Public bytes, landing viewports and current card mobile interaction; Dawn gameplay evidence reused unchanged."
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 86,
+      "evidence": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/report.json",
+      "sha256": "142bfb514583e7ced5b76f957907e82c824a027213baafdc52218919e4199574",
+      "audioWindows": 7,
+      "voiceWindows": 0,
+      "visualReview": "approved",
+      "reviewedScreenshots": [
+        {
+          "name": "title-full-viewport",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/title-full-viewport.png",
+          "sha256": "852ed7804f403b30a5a5c3c5d2a0d35e23e340655f91c04bc7f169a0351f1cb2"
+        },
+        {
+          "name": "title-844x390",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/title-844x390.png",
+          "sha256": "e8a4152bd1c4622ba20ed97da8c23168204f5af17db315dbf2c9366b96fa0530"
+        },
+        {
+          "name": "collection-96-original-cards",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/collection-96-original-cards.png",
+          "sha256": "5adb162c78ad3964e6e48c7900b0af7a537efb8a9bf61ec7222012526aef4fbb"
+        },
+        {
+          "name": "filter-filterElement-3",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterElement-3.png",
+          "sha256": "2fafdf4de03fbe3f75c2c3fd010e750cdf9ed69cd84e5a3ad33b4d5e78a24d67"
+        },
+        {
+          "name": "filter-filterRarity-3",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterRarity-3.png",
+          "sha256": "dee9a5d0ff6945eccad54debdb06815143d103f89b1466f9209e0b0563ccc6b4"
+        },
+        {
+          "name": "original-card-explanation",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/original-card-explanation.png",
+          "sha256": "92ffd55c4a70a713e25c76e5d48b950deed6a7a9c408cf81b0eef53f249cc8e9"
+        },
+        {
+          "name": "filter-filterCost-0",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterCost-0.png",
+          "sha256": "02c60823c5ac15bae5e5dea395f39010384e04a14a44b0274330f54d30a0e609"
+        },
+        {
+          "name": "filter-filterCost-7",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterCost-7.png",
+          "sha256": "e778282a163fdfa43153365ed9faa103e8d4f55fa226f23e41fe907c9000ce53"
+        },
+        {
+          "name": "original-card-full-print",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/original-card-full-print.png",
+          "sha256": "af0dcd95995e32406f9ccc86657e65c1db28586316f71be5e435e8b3c0ac37cf"
+        },
+        {
+          "name": "four-fifty-card-starter-decks",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/four-fifty-card-starter-decks.png",
+          "sha256": "d1fde7d96b530d850fc2ae40db5a589531da8061ec7b50a4333764553399c5a8"
+        },
+        {
+          "name": "opening-before-shuffle",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/opening-before-shuffle.png",
+          "sha256": "4b00b7076269482baecedc34284ce1662310da2345980c44490f9dbe32603fe3"
+        },
+        {
+          "name": "opening-after-shuffle",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/opening-after-shuffle.png",
+          "sha256": "e47668e7cae10ad72e63a651b6925a695f9322b1262e695ea49af7bb4c92260f"
+        },
+        {
+          "name": "classic-first-preparation",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-first-preparation.png",
+          "sha256": "0b083d0e78278a27a6bb3b95cfa4ddde447ed54512caf40dd230c32fb6ad6db1"
+        },
+        {
+          "name": "preparation-2-placed-unit-detail-2",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-placed-unit-detail-2.png",
+          "sha256": "8ab7d547c49f37dfc2c61152a22217425a39358f6c7e099c2e954cecd8156d37"
+        },
+        {
+          "name": "preparation-2-play-2",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-play-2.png",
+          "sha256": "8dcae28782c53314650bee19fa2e52a734c4088dd4b21f068c84bf0ee66f40c9"
+        },
+        {
+          "name": "preparation-1-play-1",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-1-play-1.png",
+          "sha256": "fe235d0e7bdae84d97bbba9531c370f12ccd3fef1606c8101f9b57955ffcf232"
+        },
+        {
+          "name": "preparation-2-play-1",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-play-1.png",
+          "sha256": "5ad3b3fae747847e0490984e0d2d25dacaf9d28c3b37b2c194f382a5e3767427"
+        },
+        {
+          "name": "automatic-combat-2-record",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/automatic-combat-2-record.png",
+          "sha256": "b466ce44b9022fb4ed5f8c831a97de924546aa9ccbe76849e1a2363d484dd751"
+        },
+        {
+          "name": "classic-battle-after-automatic-rounds",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-battle-after-automatic-rounds.png",
+          "sha256": "fa886d05113518258f65542c31ab0b672e0dc63d18363e13f934f8f5c601d112"
+        },
+        {
+          "name": "classic-saved-battle",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-saved-battle.png",
+          "sha256": "42daa1960984f267a4ded3b24e184fbd23a0c57d16bd2f66b977b7e582f7f0a5"
+        },
+        {
+          "name": "classic-restored-battle",
+          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-restored-battle.png",
+          "sha256": "0eacc5f0f047444ebbe4633676d61436b0431ef1937ea4b6c5034cc46c9c2b66"
+        }
+      ],
+      "reviewedUtc": "2026-10-26T05:28:26.664406+00:00",
+      "visualFindings": [
+        {
+          "screenshots": [
+            "title-full-viewport",
+            "title-844x390"
+          ],
+          "finding": "The public title fills a centered 16:9 game canvas in the 844 by 390 viewport, with dark side margins of about 75 pixels. Korean main actions, music, save transfer, and title labels remain within the canvas without blocking clipping."
+        },
+        {
+          "screenshots": [
+            "collection-96-original-cards",
+            "filter-filterElement-3",
+            "filter-filterRarity-3",
+            "filter-filterCost-0",
+            "filter-filterCost-7"
+          ],
+          "finding": "The collection visibly shows 96 total / 96 matching cards, and the reviewed filter frames show forest 14, rare 1, soul 0 with 14, and soul 7 with 6. Four-column names, badges, types/basic stats, pagination, and reset controls remain legible. The forest frame visibly includes 라비원숭이; the rare frame shows 메테오."
+        },
+        {
+          "screenshots": [
+            "original-card-explanation",
+            "original-card-full-print"
+          ],
+          "finding": "The 묘지 full print fits entirely with border, artwork, printed information area and 1 marker. Its fine print is small and soft at this viewport. The separate detail clearly shows 묘지, Lv 0, LP 1, 암흑 1 / 총소울 1 생산 and wrapped terrain rules, with return and original-card controls on screen."
+        },
+        {
+          "screenshots": [
+            "four-fifty-card-starter-decks"
+          ],
+          "finding": "All four starters fit in a two-by-two layout, each labelled 50장 · 지형 16 · 유닛 24, with 숲과 빛 · 생명의 전열 highlighted. Descriptions wrap inside their panels and navigation remains visible."
+        },
+        {
+          "screenshots": [
+            "opening-before-shuffle",
+            "opening-after-shuffle"
+          ],
+          "finding": "Each opening frame displays all six cards. Directly observed before order: 리틀엔젤, 퓨리울프, 창공, 골드드래곤, 성당내부, 라비원숭이. Directly observed after order: 발탄, 라비원숭이, 퓨리울프, 성당내부, 허수아비, 꽃밭. The raw report incorrectly identifies the before sixth and after second card as 라. Both actual cards visibly read 라비원숭이, Lv 2, 1+1, AP 3 DP 0 HP 3. This is direct visual correction, not an OCR success claim."
+        },
+        {
+          "screenshots": [
+            "classic-first-preparation",
+            "preparation-1-play-1"
+          ],
+          "finding": "The first board visibly shows player deck 44 / hand 6 / LP 1 / terrain 0/10; after the actual terrain play it shows deck 44 / hand 5 / LP 0 / terrain 1/10. Player lanes remain empty. The hand visibly includes 라비원숭이 with its full name and AP 3 DP 0 HP 3. Compact resource text, detail/ready controls, and horizontal hand scrollbar remain inside the canvas."
+        },
+        {
+          "screenshots": [
+            "preparation-2-play-1",
+            "preparation-2-play-2",
+            "preparation-2-placed-unit-detail-2"
+          ],
+          "finding": "Before the unit play, all five visible player hand cards are 발탄, 라비원숭이, 퓨리울프, 허수아비, 허수아비, with deck 43 / hand 5 / LP 0 / terrain 2/10. After play, 라비원숭이 occupies the first player lane with AP 3 DP 0 HP 3 and hand count 4. Its actual detail clearly reads 라비원숭이, 프리 / 숲 / 유닛 / 4장까지, Lv 2, 숲 1, 총소울 2, 유지 1, AP 3+C4 DP 0 HP 3. The raw 라 identity is inconsistent with the original displayed card; the real name and values are independently visible."
+        },
+        {
+          "screenshots": [
+            "automatic-combat-2-record"
+          ],
+          "finding": "The actual combat record visibly reads 라비원숭이 최종 AP 3 / DP 0 / HP 3, 킬러메뚜기 → 라비원숭이 피해 4 · 반격 없음, and 라비원숭이 전장 이탈. Further lines show 라비원숭이 C1, C2, C3, C4 뒷면, final AP 3 / DP 0 / HP 3, and direct attack level 2 causing 나 덱 -2. The log and return button are readable, with no observed truncation of these displayed lines."
+        },
+        {
+          "screenshots": [
+            "classic-battle-after-automatic-rounds",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The final/saved/restored boards show turn 3 / player attack preparation, empty player lanes, and opponent 킬러메뚜기 and 라비원숭이. Saved and restored resources match at player deck 39 / hand 6 / LP 1 / 빛 1 · 숲 1 · 총소울 2 / terrain 2/10. The right-scrolled saved/restored hand visibly matches as 퓨리울프, 허수아비, 허수아비, 꽃밭, 스웜; the earlier left-scrolled final board visibly includes first card 발탄. Save and restore status messages are legible."
+        },
+        {
+          "screenshots": [
+            "ocr-confirmation-064",
+            "ocr-confirmation-073",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The existing unprocessed raw card-name region from first-card inspection before saving (064) and after reload (073) was directly opened; both visibly read 발탄 and have identical SHA-256. Together with the five visible names in saved/restored boards and their hand count 6, the directly observed six-card order is 발탄, 퓨리울프, 허수아비, 허수아비, 꽃밭, 스웜 on both sides. The two small PNGs are original region observations, not full canvas screenshots."
+        },
+        {
+          "screenshots": [
+            "classic-first-preparation",
+            "preparation-2-play-1",
+            "preparation-2-play-2",
+            "classic-saved-battle",
+            "classic-restored-battle"
+          ],
+          "finding": "The battle hand is a horizontal scroll strip; five of six cards are visible in a single six-card board capture. Visible card names and stat lines remain inside their cards. No blocking text clipping, broken glyphs, blank render, or unintended overlap was observed. The text remains compact at the native 694 by 390 canvas capture size."
+        }
+      ],
+      "executionStatus": "passed",
+      "assessments": {
+        "identityReassessment": {
+          "artifact": {
+            "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/identity-reassessment.json",
+            "sha256": "5a7ca82d383289bbabad2cbd3519abc82aef6a30b584ec0343d0796af24788e6"
+          },
+          "originalArtifacts": [
+            {
+              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/original-report.json",
+              "sha256": "db9e10ffc2f7441a42e4236d39b7c6d65f1c320d1ace09f09e74aae84bfbf4f1"
+            },
+            {
+              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/original-summary.json",
+              "sha256": "4b76f675e99f1507979555f80e73fd0c731f55f081959a932504d7fe18390397"
+            },
+            {
+              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/executed-harness.py",
+              "sha256": "1e4979c881caf538976b21350eb7794810ad163b76b2e4afd52428bc3cc43643"
+            }
+          ],
+          "noRerun": true,
+          "method": "direct-visual-correction",
+          "status": "passed",
+          "observations": [
+            "4 automatic card-name observations incorrectly matched 라; original screenshots directly confirm 라비원숭이.",
+            "Actual whole-hand replacement still changes the corrected six-card sequence.",
+            "Saved/restored six-card identities contain no affected match and remain equal."
+          ],
+          "scope": "The partial automatic OCR name matches are superseded by explicit original-frame identity confirmations; all raw observations are preserved."
+        }
+      },
+      "classicEvidence": [
+        "collection_filters",
+        "combat",
+        "original_card",
+        "preparation",
+        "save_reload",
+        "shuffle",
+        "starter_deck"
+      ]
+    },
+    "Portal": {
+      "evidence": "Artifacts/Validation/PublicWeb/Portal/report.json",
+      "sha256": "7b52ce15546b2a3556ce46993eda3c9d38a3fa811cc73e077a46cd5114c56f06"
+    }
   }
 }

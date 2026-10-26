@@ -48,4 +48,8 @@ python3 Tools/Validation/classic-cards-smoke.py \
 
 PC 완주 실행은 마지막 공통 네트워크 분류기에서만 실패했다. 같은 data URL의 HTTP 304, 정확한 UnityCache 성공 로그, Unity 로드 완료와 실제 저장 복구가 모두 기록됐지만, 기존 분류기가 복구 검사 이름의 옛 영어 표현에 의존했다. 실행 원본을 `Desktop720/FantasyCards/Reassessment/`에 SHA-256과 함께 불변 보존하고, `network-reassessment.json`에서 분류만 재평가했다. 최종 PC 보고서는 `status: passed`, `executionStatus: failed`를 함께 유지하며 재실행을 주장하지 않는다. 새 `classic-network-evidence.py`는 안정적인 검사 ID와 같은 navigation의 정확한 URL·304·캐시 성공·실제 복구 수치 일치를 요구한다.
 
-검증 보고서는 `Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/report.json`과 `Mobile844/FantasyCards/report.json`이다. 초기 OCR/배경 가림/숫자 인식 진단 실패는 `previous-*` 폴더에 보존했다. 공개 URL의 `PublicMobile844` 검증은 Pages 배포 후 별도로 진행하며 이 로컬 결과로 대신하지 않는다.
+공개 URL의 `PublicMobile844`도 첫 실행에서 완료했다. 공개 응답 런타임 5개가 최종 로컬 파일과 정확히 일치했고, 실제 터치로 도감·원본 그림·스타터·셔플·지형과 유닛 배치·두 번의 준비 및 자동 공방·저장 후 전체 reload/이어하기·7개 음악 구간을 확인했다. 공개 저장과 복귀의 덱39/손패6/LP1/지형2 및 여섯 손패 카드명이 일치했다. 공개 원본 시각 검토는 이 공개 실행의 프레임을 별도로 직접 확인한다.
+
+카드명 자동 식별의 한계도 명시적으로 보완했다. 원래 부분문자열 매칭은 `라비원승이`라는 OCR 결과를 실제 다른 카드명 `라`로 잘못 인식했다. 로컬 모바일 시작 손패 1건과 공개 관찰 4건은 원본 화면의 `라비원숭이`를 직접 확인하고 `identity-reassessment.json`에 원본 SHA-256·검토자·시각·정확한 이름 및 보완된 손패 배열을 연결했다. 원래 OCR·체크·배열은 변경하지 않았으며, 해당 자동 이름 판정이 잘못됐음을 기록한다. 저장/복귀 손패에는 이 오매칭이 없었다. 이후 실행용 도구는 완전한 한글 이름 경계를 요구하며, 수정 전 공개 실행 도구도 별도 보존했다. 수정 도구로 브라우저를 다시 실행했다고 주장하지 않는다.
+
+검증 보고서는 `Artifacts/Validation/ClassicCards/{Desktop720,Mobile844,PublicMobile844}/FantasyCards/report.json`이다. 초기 OCR/배경 가림/숫자 인식 진단 실패는 `previous-*` 폴더에 보존했다. PC 네트워크 분류와 모바일 카드명 재평가는 불변 원본을 각각 별도로 보존하고 최종 보고서에서 명시적으로 연결한다.
