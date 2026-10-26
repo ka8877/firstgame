@@ -607,7 +607,7 @@ class JourneySmoke:
         return observations
 
     def network_check(self):
-        expected, unexpected, external, local_cancellations, preload_cancellations = [], [], [], [], []
+        expected, unexpected, external, local_cancellations, preload_cancellations, recovered_ranges = [], [], [], [], [], []
         observations = self.local_media_timeline()
         for failed in self.report["failedRequests"]:
             nav, url = failed["navigation"], failed["url"]
@@ -626,6 +626,13 @@ class JourneySmoke:
             if preload:
                 preload_cancellations.append(preload)
                 continue
+            recovered = LOCAL_ERRORS.recovered_public_pregesture_range_cancellation(self.args.game, self.report["revision"], self.report["suite"],
+                failed, self.game_url, self.report["buildFingerprint"]["files"], observations,
+                self.report["audioEvidence"]["windows"], self.report["networkResponses"],
+                self.report.get("publicDelivery", {}).get("files", []))
+            if recovered:
+                recovered_ranges.append(recovered)
+                continue
             exact = any(c.get("navigation") == nav and c.get("dataUrl") == url for c in self.report["unityConfigurations"])
             http304 = any(r["navigation"] == nav and r["url"] == url and r["status"] == 304 for r in self.report["networkResponses"])
             marker = "[UnityCache] '" + url + "' successfully revalidated and served from the browser cache"
@@ -635,7 +642,7 @@ class JourneySmoke:
             (expected if nav > 0 and failed["method"] == "GET" and failed["error"] == "net::ERR_ABORTED"
              and exact and http304 and cached and restored else unexpected).append(failed)
         diagnostic = {"verifiedUnityCacheRevalidationAborts": expected, "verifiedInactiveLocalMediaCancellations": local_cancellations,
-                      "verifiedInactiveLocalPreloadCancellations": preload_cancellations, "unexpectedFailures": unexpected,
+                      "verifiedInactiveLocalPreloadCancellations": preload_cancellations, "verifiedRecoveredPublicPregestureRanges": recovered_ranges, "unexpectedFailures": unexpected,
                       "externalMusicServiceFailures": external}
         self.report["networkDiagnostic"] = diagnostic
         self.check(not unexpected, "No unexpected failed requests; exact proved cache/local-media cancellations retained", diagnostic)

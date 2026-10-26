@@ -85,4 +85,35 @@ class ActualInactivePreloadTests(unittest.TestCase):
         self.assertIsNone(m.inactive_local_media_preload_cancellation(**args))
 
 
+class ActualPublicPregestureTests(unittest.TestCase):
+    def setUp(self):self.raw=json.loads(Path(__file__).with_name('Fixtures').joinpath('fm-public-pregesture-ranges.json').read_text())
+    def args(self,failure):return {k:self.raw[k] for k in ('game','revision','suite','game_url','runtime_files','observations','windows','responses','delivered')}|{'failure':failure}
+    def test_actual_three_initial_ranges_recover_without_rewriting_failed_report(self):
+        self.assertEqual(self.raw['provenance']['sourceReportStatus'],'failed')
+        for failure in self.raw['failures']:self.assertIsNotNone(m.recovered_public_pregesture_range_cancellation(**self.args(failure)))
+    def test_active_unlocked_unknown_or_unverified_media_stays_failure(self):
+        for key,value in [('unlocked',True),('contextState','running'),('actualSource',self.raw['failures'][0]['url'])]:
+            a=copy.deepcopy(self.args(self.raw['failures'][0]));a['observations'][0]['state'][key]=value;self.assertIsNone(m.recovered_public_pregesture_range_cancellation(**a))
+        for update in [{'resourceType':'fetch'},{'error':'net::ERR_CONNECTION_RESET'},{'url':'https://evil.invalid/title.ogg'}]:
+            a=copy.deepcopy(self.args(self.raw['failures'][0]));a['failure'].update(update);self.assertIsNone(m.recovered_public_pregesture_range_cancellation(**a))
+        for key in ('delivered','responses','windows'):
+            a=copy.deepcopy(self.args(self.raw['failures'][0]));a[key]=[];self.assertIsNone(m.recovered_public_pregesture_range_cancellation(**a))
+
+
+class ActualPublicRecoveredRanges(unittest.TestCase):
+    def setUp(self):self.raw=json.loads(Path(__file__).with_name('Fixtures').joinpath('fm-public-recovered-ranges.json').read_text())
+    def args(self,failure):return {k:self.raw[k] for k in ('game','revision','suite','game_url','runtime_files','observations','windows','responses','delivered')}|{'failure':failure}
+    def test_five_actual_ranges_have_specific_decode_or_continuous_playback_proof(self):
+        self.assertEqual(len(self.raw['failures']),5)
+        for failure in self.raw['failures']:self.assertIsNotNone(m.recovered_public_range_cancellation(**self.args(failure)))
+    def test_paused_active_cancellation_unknown_bytes_or_missing_pcm_stays_failure(self):
+        a=copy.deepcopy(self.args(self.raw['failures'][-1]));
+        for row in a['observations']:
+            for p in row['players']:
+                if p['source']==a['failure']['url']:p['paused']=True
+        self.assertIsNone(m.recovered_public_range_cancellation(**a))
+        for key in ('delivered','responses','windows'):
+            a=copy.deepcopy(self.args(self.raw['failures'][-1]));a[key]=[];self.assertIsNone(m.recovered_public_range_cancellation(**a))
+
+
 if __name__=='__main__':unittest.main()

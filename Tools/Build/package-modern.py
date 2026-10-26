@@ -67,7 +67,7 @@ def evidence_files():
         for p in sorted((ART/f'TestResults/{game}').glob('PlayModeUI.xml')):result[str(p.relative_to(ROOT))]=p
         for target in ('Windows','Web'):
             p=ART/f'Builds/{game}/{target}/BuildEvidence.txt';result[str(p.relative_to(ROOT))]=p
-    for rel in ['Artifacts/TestResults/Core/core-tests.trx','Tools/Environment/validation.json','Docs/ModernValidation.md','Docs/ModernTypography.md','Docs/AudioModernization.md','Tools/Validation/modern-smoke-plans.json','Tools/Validation/modern-public-plans.json','Tools/Validation/summarize-modern-release.py','Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js','Tools/Validation/fm-local-media-observer.js','Tools/Validation/fm-local-media-errors.py','Tools/Validation/test-fm-local-media-errors.py','Tools/Build/package-modern.py']:
+    for rel in ['Artifacts/TestResults/Core/core-tests.trx','Tools/Environment/validation.json','Docs/ModernValidation.md','Docs/ModernTypography.md','Docs/AudioModernization.md','Tools/Validation/modern-smoke-plans.json','Tools/Validation/modern-public-plans.json','Tools/Validation/summarize-modern-release.py','Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js','Tools/Validation/fm-local-media-observer.js','Tools/Validation/fm-local-media-errors.py','Tools/Validation/test-fm-local-media-errors.py','Tools/Validation/Fixtures/fm-inactive-preloads-48739.json','Tools/Validation/Fixtures/fm-public-pregesture-ranges.json','Tools/Validation/Fixtures/fm-public-recovered-ranges.json','Tools/Validation/adjudicate-fm-public-ranges.py','Tools/Build/package-modern.py']:
         p=ROOT/rel
         if p.is_file():result[rel]=p
     return result

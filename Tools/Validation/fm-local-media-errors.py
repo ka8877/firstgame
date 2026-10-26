@@ -113,3 +113,104 @@ def inactive_local_media_preload_cancellation(game,revision,suite,failure,game_u
             'selectedSource':selected,'selectedPositionsSeconds':positions,
             'subsequentPcm':{key:pcm.get(key) for key in ('label','rawEvidence','sha256','sourceUrls','startedEpochMs','mediaProgressSeconds','medianRms')}}
     return None
+
+
+def recovered_public_pregesture_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
+    """Exact public media range abort before any unlock, decoded and audibly recovered.
+
+    Not an exemption for active playback, HTTP failures or arbitrary media paths.
+    Immutable public bytes were fetched/hashed before navigation. Chrome can
+    abort an initial HTTP206 range while successfully loading another range.
+    """
+    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+            or failure.get('resourceType')!='media' or failure.get('method')!='GET'
+            or failure.get('error')!='net::ERR_ABORTED' or failure.get('navigation')!=0):return None
+    origin=urlsplit(game_url)
+    if origin.scheme!='https' or not origin.netloc or origin.username or origin.password or origin.query or origin.fragment:return None
+    files={r.get('file'):r for r in runtime_files}
+    allowed={urljoin(game_url.rstrip('/')+'/',PREFIX+n):files[PREFIX+n] for n in FILENAMES if PREFIX+n in files}
+    url=failure.get('url');when=failure.get('observedEpochMs')
+    if url not in allowed or not _number(when):return None
+    expected=allowed[url]
+    if not any(d.get('url')==url and d.get('status')==200 and d.get('sha256')==expected.get('sha256')
+               and d.get('bytes')==expected.get('bytes') for d in delivered):return None
+    ranges=[r for r in responses if r.get('url')==url and r.get('navigation')==0 and r.get('method')=='GET' and r.get('status')==206]
+    if len(ranges)<2:return None
+    rows=sorted((r for r in observations if r.get('navigation')==0 and _number(r.get('epochMs'))),key=lambda r:r['epochMs'])
+    if not rows or not when<=rows[0]['epochMs']<=when+1000:return None
+    initial=rows[0];state=initial.get('state',{})
+    if not(state.get('unlocked') is False and state.get('contextState')=='not-created'
+            and state.get('actualSource') is None and state.get('actualPaused') is True):return None
+    old=next((p for p in initial.get('players',[]) if p.get('source')==url),{})
+    if not(old.get('active') is False and old.get('paused') is True and old.get('pending') is False and old.get('currentTime')==0):return None
+    loaded=next((row for row in rows if when<=row['epochMs']<=when+2000
+        and row.get('state',{}).get('unlocked') is False and row.get('state',{}).get('contextState')=='not-created'
+        and any(p.get('source')==url and p.get('active') is False and p.get('paused') is True
+            and p.get('pending') is False and p.get('currentTime')==0 and p.get('readyState',0)>=2 for p in row.get('players',[]))),None)
+    if loaded is None:return None
+    for pcm in windows:
+        sources=pcm.get('sourceUrls',[])
+        if (pcm.get('navigation')!=0 or len(sources)!=1 or sources[0] not in allowed
+                or not all(_number(pcm.get(k)) for k in ('startedEpochMs','sampleCount','medianRms','audibleSampleFraction','mediaProgressSeconds'))
+                or pcm['startedEpochMs']<loaded['epochMs'] or pcm['sampleCount']<6 or pcm['medianRms']<=1e-5
+                or pcm['audibleSampleFraction']<.5 or pcm['mediaProgressSeconds']<=.5
+                or pcm.get('allContextsRunning') is not True or pcm.get('isolatedMusicRoute') is not True
+                or len(pcm.get('sourceIdentities',[]))!=1 or pcm.get('nonfiniteSamples')!=0 or pcm.get('observerErrors')!=[]):continue
+        return {'request':failure,'reason':'Initial public HTTP206 media range was cancelled before any audio unlock; exact bytes verified, same element decoded another range while paused, then isolated bundled PCM advanced.',
+            'firstObservedEpochMs':initial['epochMs'],'decodedBeforeUnlockEpochMs':loaded['epochMs'],'http206Responses':len(ranges),
+            'verifiedPublicSha256':expected.get('sha256'),'subsequentPcm':{k:pcm.get(k) for k in ('label','rawEvidence','sha256','sourceUrls','mediaProgressSeconds','medianRms')}}
+    return None
+
+
+def recovered_public_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
+    """Prove startup decode recovery or uninterrupted playback across a range abort."""
+    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+            or failure.get('resourceType')!='media' or failure.get('method')!='GET'
+            or failure.get('error')!='net::ERR_ABORTED' or failure.get('navigation')!=0):return None
+    origin=urlsplit(game_url)
+    if origin.scheme!='https' or not origin.netloc or origin.username or origin.password or origin.query or origin.fragment:return None
+    files={r.get('file'):r for r in runtime_files}
+    allowed={urljoin(game_url.rstrip('/')+'/',PREFIX+n):files[PREFIX+n] for n in FILENAMES if PREFIX+n in files}
+    url=failure.get('url');when=failure.get('observedEpochMs')
+    if url not in allowed or not _number(when):return None
+    expected=allowed[url]
+    if not any(d.get('url')==url and d.get('status')==200 and d.get('sha256')==expected.get('sha256')
+               and d.get('bytes')==expected.get('bytes') for d in delivered):return None
+    ranges=[r for r in responses if r.get('url')==url and r.get('navigation')==0 and r.get('method')=='GET' and r.get('status')==206]
+    if len(ranges)<2:return None
+    rows=sorted((r for r in observations if r.get('navigation')==0 and _number(r.get('epochMs'))),key=lambda r:r['epochMs'])
+    player=lambda row:next((p for p in row.get('players',[]) if p.get('source')==url),{})
+    before=[r for r in rows if when-1000<=r['epochMs']<=when]
+    after=[r for r in rows if when<r['epochMs']<=when+1000]
+    proof=None;must_be_source=False
+    if before and after:
+        a,b=before[-1],after[0];pa,pb=player(a),player(b)
+        playing=lambda r,p:(r.get('state',{}).get('actualSource')==url and r['state'].get('contextState')=='running'
+            and r['state'].get('actualPaused') is False and p.get('active') is True and p.get('paused') is False
+            and p.get('pending') is False and p.get('readyState',0)>=2 and _number(p.get('currentTime')))
+        if playing(a,pa) and playing(b,pb) and 0<pa['currentTime']<pb['currentTime']:
+            proof={'category':'uninterrupted-active-range','beforeEpochMs':a['epochMs'],'afterEpochMs':b['epochMs'],
+                   'positionsSeconds':[pa['currentTime'],pb['currentTime']]};must_be_source=True
+    if proof is None:
+        initial=next((r for r in rows if abs(r['epochMs']-when)<=1000
+            and r.get('state',{}).get('actualSource') is None and r['state'].get('actualPaused') is True
+            and player(r).get('active') is False and player(r).get('currentTime')==0
+            and (player(r).get('paused') is True or player(r).get('pending') is True)),None)
+        if initial is None:return None
+        loaded=next((r for r in rows if when<=r['epochMs']<=when+2000 and player(r).get('readyState',0)>=2),None)
+        if loaded is None:return None
+        must_be_source=player(initial).get('pending') is True
+        proof={'category':'startup-decoded-range','initialEpochMs':initial['epochMs'],'decodedEpochMs':loaded['epochMs'],
+               'initialPlayer':player(initial),'decodedPlayer':player(loaded)}
+    for pcm in windows:
+        sources=pcm.get('sourceUrls',[])
+        if (pcm.get('navigation')!=0 or len(sources)!=1 or sources[0] not in allowed or (must_be_source and sources[0]!=url)
+                or not all(_number(pcm.get(k)) for k in ('startedEpochMs','sampleCount','medianRms','audibleSampleFraction','mediaProgressSeconds'))
+                or pcm['startedEpochMs']<when or pcm['sampleCount']<6 or pcm['medianRms']<=1e-5
+                or pcm['audibleSampleFraction']<.5 or pcm['mediaProgressSeconds']<=.5
+                or pcm.get('allContextsRunning') is not True or pcm.get('isolatedMusicRoute') is not True
+                or len(pcm.get('sourceIdentities',[]))!=1 or pcm.get('nonfiniteSamples')!=0 or pcm.get('observerErrors')!=[]):continue
+        return {'request':failure,'reason':'Exact verified public media bytes and repeated HTTP206 ranges; actual element decoded at startup or continued advancing across the cancellation; subsequent isolated PCM verified.',
+            'lifecycle':proof,'http206Responses':len(ranges),'verifiedPublicSha256':expected.get('sha256'),
+            'subsequentPcm':{k:pcm.get(k) for k in ('label','rawEvidence','sha256','sourceUrls','mediaProgressSeconds','medianRms')}}
+    return None

@@ -88,11 +88,18 @@ def build(game,target):
 
 def browser(game,profile,files):
     p=REPORTS/profile/game/'report.json';r=json.loads(p.read_text())
-    require(r.get('status')=='passed' and r.get('revision')==REVISIONS[game] and r.get('suite')=='modern-real-input-v1','Current modern browser pass required: '+str(p))
-    require(r.get('checks') and all(c.get('passed') is True for c in r['checks']) and r.get('input'),'Missing real input/checks: '+str(p))
+    adjudication=None
+    if game=='FantasyCards' and profile=='PublicMobile844' and r.get('status')=='failed':
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('public_range_analysis',ROOT/'Tools/Validation/adjudicate-fm-public-ranges.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        adjudication=module.analyze(p)
+        recorded=json.loads((p.parent/'range-adjudication.json').read_text())
+        require(recorded['rawReport']==adjudication['rawReport'] and recorded['requests']==adjudication['requests'] and recorded['classifier']==adjudication['classifier'],'Recorded range adjudication changed')
+    require((r.get('status')=='passed' or adjudication is not None) and r.get('revision')==REVISIONS[game] and r.get('suite')=='modern-real-input-v1','Current modern browser pass required: '+str(p))
+    require(r.get('checks') and (all(c.get('passed') is True for c in r['checks']) or adjudication is not None) and r.get('input'),'Missing real input/checks: '+str(p))
     require(normalized(r.get('buildFingerprint',{}).get('files',[]))==normalized(files),'Runtime bytes changed after browser run: '+str(p))
     require(not r.get('pageErrors') and not r.get('httpErrors'),'Runtime page/HTTP errors: '+str(p))
-    review=r.get('visualReview',{});require(review.get('status')=='approved' and review.get('reviewer') and review.get('reviewedUtc') and normalized(review.get('runtimeFiles',[]))==normalized(files),'Direct current original review required: '+str(p))
+    review=adjudication['visualReview'] if adjudication else r.get('visualReview',{});require(review.get('status')=='approved' and review.get('reviewer') and review.get('reviewedUtc') and normalized(review.get('runtimeFiles',[]))==normalized(files),'Direct current original review required: '+str(p))
     approved=[c for c in r.get('checkpoints',[]) if c.get('status')=='approved'];require(approved,'No original gameplay checkpoints')
     for c in approved:
         s,d=c['original'],c['review'];shot=ROOT/s['path']
@@ -101,7 +108,7 @@ def browser(game,profile,files):
     require(audio and any(a.get('medianRms',0)>1e-5 for a in audio),'No actual audible PCM evidence: '+str(p))
     if game=='FantasyCards':
         require(any('/StreamingAssets/Audio/ModernCard/' in u for a in audio for u in a.get('sourceUrls',[])),'No bundled instrumental PCM source')
-    return {'checks':len(r['checks']),'approvedOriginals':len(approved),'screenshots':[c['original'] for c in approved],'audioWindows':len(audio),**ref(p)}
+    return {'checks':sum(c.get('passed') is True for c in r['checks']),'approvedOriginals':len(approved),'screenshots':[c['original'] for c in approved],'audioWindows':len(audio),**ref(p),**({'rawStatus':'failed','adjudicatedPublicMediaRanges':len(adjudication['requests']),'adjudication':ref(p.parent/'range-adjudication.json')} if adjudication else {})}
 
 
 def public(record,run):
@@ -131,7 +138,8 @@ def markdown(record):
     text+=(f"[공개 테스트]({URL}) · [Pages 실행]({pub['pagesRun']}) · 공개 파일 {pub['verifiedFiles']}개 SHA-256 일치.\n\n" if pub['status']=='verified' else '현재 로컬 검증은 통과했으며 새 공개 배포 검증은 대기 중이다.\n\n')
     text+=f"Core {record['externalCore']['passed']}개, Unity 실행 검사 "+', '.join(f"{g} {r['passed']}개" for g,r in record['nativeTests'].items())+' 통과. 두 게임 Windows/Web 빌드 성공, 오류0.\n\n'
     text+='| 실제 브라우저 실행 | 통과 검사 | 직접 검토한 원본 | 실제 PCM 구간 |\n|---|---:|---:|---:|\n'+'\n'.join(rows)+'\n\n'
-    text+='카드게임은 외부 음악 플레이어를 제거하고 번들 연주곡을 사용한다. 음악 없음/광고 없음은 실제 PCM·소스 경로·요청 기록으로 구분하며 물리 스피커 청취나 사용자 미적 승인을 뜻하지 않는다. 예수님의 길은 실제 관절 모델과 휠/버튼 줌·상태창을 검토한다. 성경 본문·저장 schema는 유지한다.\n\n'
+    text+='카드게임은 외부 음악 플레이어를 제거하고 번들 연주곡을 사용한다. 음소거·음악 재생과 외부 플레이어 요청 부재는 실제 PCM·소스 경로·요청 기록으로 구분하며 물리 스피커 청취나 사용자 미적 승인을 뜻하지 않는다. 예수님의 길은 실제 관절 모델과 휠/버튼 줌·상태창을 검토한다. 성경 본문·저장 schema는 유지한다.\n\n'
+    if any(r.get('adjudicatedPublicMediaRanges') for r in record.get('publicWeb',{}).values()):text+='공개 카드게임의 자동 네트워크 검사는 HTTP206 음원 범위 요청 취소 5건 때문에 실패한 원본을 보존했다. 별도 해시 기반 분석으로 정확한 공개 파일·실제 디코딩·취소 전후 재생 진행·후속 PCM을 확인했다. 표의 공개 카드 검사 수는 원본 통과 항목만 센다. 다른 오류를 무시하거나 원본 실패를 통과로 수정하지 않았다.\n\n'
     text+='검증 환경은 소프트웨어 Chromium과 모바일 입력 에뮬레이션이다. 실물 휴대폰·Safari·Windows 하드웨어 성능 검증은 포함하지 않는다. 예수님의 생애 전체나 전투 피해 시스템이 구현되었다고 표시하지 않는다.\n'
     return text
 

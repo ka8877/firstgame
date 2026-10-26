@@ -1,0 +1,2363 @@
+{
+  "game": "FantasyCards",
+  "revision": "fm-modern-2026-10-26",
+  "suite": "modern-real-input-v1",
+  "game_url": "https://ka8877.github.io/firstgame/games/fantasy-cards/",
+  "runtime_files": [
+    {
+      "file": "Build/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb",
+      "bytes": 13096250,
+      "modifiedUtc": "2026-10-26T16:36:25.652350+00:00",
+      "sha256": "a32ea1f19bd34debd005ade5af7ac2f34645680b01d0ca4f65fb566c31810290"
+    },
+    {
+      "file": "Build/601d0d75fddf977777a628fbc2673813.data.unityweb",
+      "bytes": 60342330,
+      "modifiedUtc": "2026-10-26T16:33:17.417559+00:00",
+      "sha256": "7c9873afc2079b6650e5716edd69e3fe17b4405b83a3f466f9bb8de36e2de5e5"
+    },
+    {
+      "file": "Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
+      "bytes": 89864,
+      "modifiedUtc": "2026-10-26T16:36:19.566786+00:00",
+      "sha256": "9b5afcd0011cd673bdaedc11ffac15bc303ece9c50efe573bdca8c9785dcf89a"
+    },
+    {
+      "file": "Build/974ceec12c8f8ba527df14e8c8e4459b.loader.js",
+      "bytes": 47867,
+      "modifiedUtc": "2026-10-26T16:32:53.226462+00:00",
+      "sha256": "680bb806514430eccba38498c5755baed1f2d2609b8faea4847a008a725596f8"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+      "bytes": 2568,
+      "modifiedUtc": "2026-10-26T16:32:43.620890+00:00",
+      "sha256": "672b8250b34543686f55aa14a6fb159e97eaed349fe4fc84cceb539ed8b919b0"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.mp3",
+      "bytes": 1318243,
+      "modifiedUtc": "2026-10-26T16:32:43.628384+00:00",
+      "sha256": "bd0b6eeef15b932f38b8b17c7efcc3924b87a66b0e27a3af2ab23f88d9273418"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.ogg",
+      "bytes": 1140306,
+      "modifiedUtc": "2026-10-26T16:32:43.627541+00:00",
+      "sha256": "09c35ffa207fe68a9550493b0c66a2fbd2cedbd8ea00bd563e2d6ccde662c075"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.mp3",
+      "bytes": 1848501,
+      "modifiedUtc": "2026-10-26T16:32:43.628384+00:00",
+      "sha256": "1924a9b930c902052cc37ceade83385ca500db861c689d0b59cd6136bac86884"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.ogg",
+      "bytes": 1554304,
+      "modifiedUtc": "2026-10-26T16:32:43.625113+00:00",
+      "sha256": "a4f3a78c4783215d214f1c932673c92906cc8bb66224df8c6c36cab6bd2753be"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.mp3",
+      "bytes": 1726836,
+      "modifiedUtc": "2026-10-26T16:32:43.623467+00:00",
+      "sha256": "04b694ce07c07a7078c8ad4a02e1744e910be2f262de14891a9002188b027644"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "bytes": 1506271,
+      "modifiedUtc": "2026-10-26T16:32:43.622433+00:00",
+      "sha256": "6d41504bfb7560358db6a09c7fe2e2701f3699c741d55adce3721d10dfb78610"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/manifest.json",
+      "bytes": 1326,
+      "modifiedUtc": "2026-10-26T16:32:43.622203+00:00",
+      "sha256": "a5327dff508bcfbd38cfc6a7b0b3e3a7bb773a9dfc2bde6dd02e514349eaa539"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.mp3",
+      "bytes": 1551295,
+      "modifiedUtc": "2026-10-26T16:32:43.621219+00:00",
+      "sha256": "bceb27c38e0a844726bfa2875f1827371f959c814b625d47e4afc6a89aa72e4e"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.ogg",
+      "bytes": 1326223,
+      "modifiedUtc": "2026-10-26T16:32:43.625113+00:00",
+      "sha256": "ebe993881721cde73fdb645531bf8d9265ce11679f4d273dbc9f92dc1e7a48fe"
+    },
+    {
+      "file": "index.html",
+      "bytes": 20871,
+      "modifiedUtc": "2026-10-26T16:36:26.194518+00:00",
+      "sha256": "83f26b6d086578a5cf259a45d9601d9aafb6b73be25472fe2313a802f2825819"
+    }
+  ],
+  "failures": [
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793039853780.9292,
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793039853885.5408,
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793039853885.8274,
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793039853886.0989,
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "error": "net::ERR_ABORTED",
+      "method": "GET",
+      "resourceType": "media",
+      "observedEpochMs": 1793039858936.9836,
+      "navigation": 0
+    }
+  ],
+  "observations": [
+    {
+      "epochMs": 1793039853876,
+      "atMs": 408.40000000596046,
+      "reason": "media-play:fm-local-audio-title",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039853903,
+      "atMs": 435.09999999403954,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039853929,
+      "atMs": 461.5,
+      "reason": "media-loadeddata:fm-local-audio-deck",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039853964,
+      "atMs": 496,
+      "reason": "media-loadeddata:fm-local-audio-battle",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039853985,
+      "atMs": 517.3000000119209,
+      "reason": "media-loadeddata:fm-local-audio-title",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039853985,
+      "atMs": 517.3000000119209,
+      "reason": "media-playing:fm-local-audio-title",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": null,
+        "actualPosition": null,
+        "actualPaused": true,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0,
+          "paused": false,
+          "pending": true,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 0,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039854012,
+      "atMs": 544.0999999940395,
+      "reason": "media-loadeddata:fm-local-audio-lobby",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 0.020317,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0.020317,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039854152,
+      "atMs": 684.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 0.159637,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0.159637,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039854403,
+      "atMs": 934.5999999940395,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 0.415444,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0.415444,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039854652,
+      "atMs": 1184.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 0.667839,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0.667839,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039854902,
+      "atMs": 1434.5999999940395,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 0.91747,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 0.91747,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039855154,
+      "atMs": 1685.7000000178814,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 1.167853,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 1.167853,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039855405,
+      "atMs": 1937.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 1.41932,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 1.41932,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039855652,
+      "atMs": 2184.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 1.666292,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 1.666292,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039855941,
+      "atMs": 2472.9000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 1.950476,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 1.950476,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039856154,
+      "atMs": 2686,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 2.166791,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 2.166791,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039856652,
+      "atMs": 3184.5999999940395,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 2.667709,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 2.667709,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039856902,
+      "atMs": 3434.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 2.91719,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 2.91719,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039857152,
+      "atMs": 3684.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 3.166796,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 3.166796,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039857402,
+      "atMs": 3934.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 3.416434,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 3.416434,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039857652,
+      "atMs": 4184.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 3.666088,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 3.666088,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039857902,
+      "atMs": 4434.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 3.915637,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 3.915637,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039858152,
+      "atMs": 4684.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 4.165302,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 4.165302,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039858785,
+      "atMs": 5317.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 4.797823,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 4.797823,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039858902,
+      "atMs": 5434.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 4.91695,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 4.91695,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039859152,
+      "atMs": 5684.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 5.166676,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 5.166676,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039859402,
+      "atMs": 5934.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 5.4162,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 5.4162,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039859652,
+      "atMs": 6184.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 5.665912,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 5.665912,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039859902,
+      "atMs": 6434.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 5.915535,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 5.915535,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039860152,
+      "atMs": 6684.5,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 6.165176,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 6.165176,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039860402,
+      "atMs": 6934.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 6.417658,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 6.417658,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    },
+    {
+      "epochMs": 1793039860652,
+      "atMs": 7184.4000000059605,
+      "reason": "sample",
+      "state": {
+        "scene": "login",
+        "muted": false,
+        "volume": 0.6,
+        "hasMutedPreference": false,
+        "hasVolumePreference": false,
+        "unlocked": true,
+        "sourceKind": "bundled-instrumental",
+        "actualSource": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+        "actualPosition": 6.667286,
+        "actualPaused": false,
+        "contextState": "running"
+      },
+      "players": [
+        {
+          "scene": "login",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+          "currentTime": 6.667286,
+          "paused": false,
+          "pending": false,
+          "readyState": 4,
+          "active": true,
+          "contextState": "running"
+        },
+        {
+          "scene": "lobby",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "deck",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        },
+        {
+          "scene": "battle",
+          "source": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "currentTime": 0,
+          "paused": true,
+          "pending": false,
+          "readyState": 4,
+          "active": false,
+          "contextState": "running"
+        }
+      ],
+      "navigation": 0
+    }
+  ],
+  "windows": [
+    {
+      "observerErrors": [],
+      "sourceIdentities": [
+        [
+          1,
+          3
+        ]
+      ],
+      "sampleCount": 16,
+      "medianRms": 0.05932156381223778,
+      "maximumRms": 0.08009931300942862,
+      "audibleSampleFraction": 1.0,
+      "allContextsRunning": true,
+      "isolatedMusicRoute": true,
+      "sourceUrls": [
+        "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg"
+      ],
+      "mediaProgressSeconds": 2.2573639999999857,
+      "nonfiniteSamples": 0,
+      "label": "title-instrumental",
+      "rawEvidence": "audio-0-title-instrumental.json",
+      "sha256": "c9fe8a1e5662975d97715b0a11e6299d8be7566657d44ddb6d06b74b23b94042",
+      "navigation": 0,
+      "startedEpochMs": 1793040001151.2449,
+      "finishedEpochMs": 1793040003480.1538
+    },
+    {
+      "observerErrors": [],
+      "sourceIdentities": [
+        [
+          1,
+          5
+        ]
+      ],
+      "sampleCount": 16,
+      "medianRms": 0.04011889027400207,
+      "maximumRms": 0.04721788563749866,
+      "audibleSampleFraction": 1.0,
+      "allContextsRunning": true,
+      "isolatedMusicRoute": true,
+      "sourceUrls": [
+        "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg"
+      ],
+      "mediaProgressSeconds": 2.270339,
+      "nonfiniteSamples": 0,
+      "label": "public-lobby-instrumental",
+      "rawEvidence": "audio-0-public-lobby-instrumental.json",
+      "sha256": "3b0b9904e3293342158fe24b3cffed0d3f8a920f2a72b747e192623da18b5eb7",
+      "navigation": 0,
+      "startedEpochMs": 1793040045670.065,
+      "finishedEpochMs": 1793040047987.1968
+    }
+  ],
+  "responses": [
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/974ceec12c8f8ba527df14e8c8e4459b.loader.js",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "blob:https://ka8877.github.io/7f7b65c6-cb2b-44b7-9e3a-2de0697ae2ee",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "blob:https://ka8877.github.io/ceab2bc2-86fd-46c1-8c38-22c900b70e12",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/601d0d75fddf977777a628fbc2673813.data.unityweb",
+      "status": 200,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    },
+    {
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "status": 206,
+      "method": "GET",
+      "navigation": 0
+    }
+  ],
+  "delivered": [
+    {
+      "file": "Build/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb",
+      "status": 200,
+      "bytes": 13096250,
+      "sha256": "a32ea1f19bd34debd005ade5af7ac2f34645680b01d0ca4f65fb566c31810290"
+    },
+    {
+      "file": "Build/601d0d75fddf977777a628fbc2673813.data.unityweb",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/601d0d75fddf977777a628fbc2673813.data.unityweb",
+      "status": 200,
+      "bytes": 60342330,
+      "sha256": "7c9873afc2079b6650e5716edd69e3fe17b4405b83a3f466f9bb8de36e2de5e5"
+    },
+    {
+      "file": "Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
+      "status": 200,
+      "bytes": 89864,
+      "sha256": "9b5afcd0011cd673bdaedc11ffac15bc303ece9c50efe573bdca8c9785dcf89a"
+    },
+    {
+      "file": "Build/974ceec12c8f8ba527df14e8c8e4459b.loader.js",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/Build/974ceec12c8f8ba527df14e8c8e4459b.loader.js",
+      "status": 200,
+      "bytes": 47867,
+      "sha256": "680bb806514430eccba38498c5755baed1f2d2609b8faea4847a008a725596f8"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+      "status": 200,
+      "bytes": 2568,
+      "sha256": "672b8250b34543686f55aa14a6fb159e97eaed349fe4fc84cceb539ed8b919b0"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.mp3",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.mp3",
+      "status": 200,
+      "bytes": 1318243,
+      "sha256": "bd0b6eeef15b932f38b8b17c7efcc3924b87a66b0e27a3af2ab23f88d9273418"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/battle.ogg",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg",
+      "status": 200,
+      "bytes": 1140306,
+      "sha256": "09c35ffa207fe68a9550493b0c66a2fbd2cedbd8ea00bd563e2d6ccde662c075"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.mp3",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.mp3",
+      "status": 200,
+      "bytes": 1848501,
+      "sha256": "1924a9b930c902052cc37ceade83385ca500db861c689d0b59cd6136bac86884"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/deck.ogg",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg",
+      "status": 200,
+      "bytes": 1554304,
+      "sha256": "a4f3a78c4783215d214f1c932673c92906cc8bb66224df8c6c36cab6bd2753be"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.mp3",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.mp3",
+      "status": 200,
+      "bytes": 1726836,
+      "sha256": "04b694ce07c07a7078c8ad4a02e1744e910be2f262de14891a9002188b027644"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg",
+      "status": 200,
+      "bytes": 1506271,
+      "sha256": "6d41504bfb7560358db6a09c7fe2e2701f3699c741d55adce3721d10dfb78610"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/manifest.json",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/manifest.json",
+      "status": 200,
+      "bytes": 1326,
+      "sha256": "a5327dff508bcfbd38cfc6a7b0b3e3a7bb773a9dfc2bde6dd02e514349eaa539"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.mp3",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.mp3",
+      "status": 200,
+      "bytes": 1551295,
+      "sha256": "bceb27c38e0a844726bfa2875f1827371f959c814b625d47e4afc6a89aa72e4e"
+    },
+    {
+      "file": "StreamingAssets/Audio/ModernCard/title.ogg",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg",
+      "status": 200,
+      "bytes": 1326223,
+      "sha256": "ebe993881721cde73fdb645531bf8d9265ce11679f4d273dbc9f92dc1e7a48fe"
+    },
+    {
+      "file": "index.html",
+      "url": "https://ka8877.github.io/firstgame/games/fantasy-cards/index.html",
+      "status": 200,
+      "bytes": 20871,
+      "sha256": "83f26b6d086578a5cf259a45d9601d9aafb6b73be25472fe2313a802f2825819"
+    }
+  ],
+  "provenance": {
+    "sourceReportStatus": "failed",
+    "sourceReportSha256": "4f99b8fa194f31b8d051406fb005e41d96443f3ae823dd988d49168a547888e5"
+  }
+}
