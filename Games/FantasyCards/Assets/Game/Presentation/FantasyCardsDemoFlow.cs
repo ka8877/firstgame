@@ -126,14 +126,16 @@ namespace FantasyCards.Presentation
         private void ShowOpeningHand()
         {
             battleScreen = false; redraw = ShowOpeningHand; Clear(); Backdrop(true);
+            bool small = canvas.pixelRect.height < 600;
             Text(root, "시작 손패 확인", .04f, .85f, .96f, .97f, 44, ivory);
-            Text(root, "전체 손패를 한 번 다시 섞을 수 있습니다. 마음에 들면 그대로 시작하세요.", .04f, .76f, .96f, .85f, 25, gold);
+            Text(root, "전체 손패를 한 번 다시 섞을 수 있습니다. 마음에 들면 그대로 시작하세요.", .04f, small ? .79f : .76f, .96f, .85f, 25, gold);
+            if (small) Text(root, "카드 수치 순서  AP / DP / HP", .04f, .725f, .96f, .785f, 22, teal, TextAlignmentOptions.Center);
             var hand = engine.State.players[0].hand;
             float width = Mathf.Min(.18f, .93f / Mathf.Max(1, hand.Count)), left = .5f - hand.Count * width / 2;
             for (int i = 0; i < hand.Count; i++)
             {
                 var instance = hand[i]; var card = CardCatalog.Get(instance.definitionId);
-                DrawCard(root, card, left + i * width, .27f, left + (i + 1) * width - .008f, .745f,
+                DrawCard(root, card, left + i * width, .27f, left + (i + 1) * width - .008f, small ? .715f : .745f,
                     false, () => ShowDetail(card, ShowOpeningHand), true);
             }
             bool canReplace = engine.CanMulligan(0, out string reason);
@@ -171,7 +173,8 @@ namespace FantasyCards.Presentation
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Hand content", typeof(RectTransform)).GetComponent<RectTransform>();
             content.SetParent(viewport, false); content.pivot = new Vector2(0, .5f);
-            Anchor(content, 0, 0, Mathf.Max(1, hand.Count / 6f), 1);
+            int visibleCards = canvas.pixelRect.height < 600 && canvas.pixelRect.width < 900 ? 5 : 6;
+            Anchor(content, 0, 0, Mathf.Max(1, hand.Count / (float)visibleCards), 1);
             for (int i = 0; i < hand.Count; i++)
             {
                 var card = hand[i]; var definition = CardCatalog.Get(card.definitionId); int id = card.instanceId;

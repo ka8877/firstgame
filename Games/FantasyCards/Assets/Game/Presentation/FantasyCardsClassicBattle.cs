@@ -27,6 +27,7 @@ namespace FantasyCards.Presentation
             BindTooltip(opponent.gameObject, "상대 지형", TerrainSummary(enemy));
             var resources = Panel(root, .025f, .309f, .805f, .377f, ink);
             string resourceText = "내 손패 " + player.hand.Count + "장 · 지형 " + player.terrain.Count + "/" + state.rules.terrainLimit + "  |  카드 선택 → 빛나는 칸 · 길게 누르면 상세";
+            if (canvas.pixelRect.height < 600) resourceText = "손패 " + player.hand.Count + "장 · AP/DP/HP · 선택→전열 · 길게 눌러 상세";
             ReadableText(resources, resourceText, .012f, .02f, .988f, .98f, 21, gold);
             BindTooltip(resources.gameObject, "내 소울과 레벨 포인트", "LP로 지형을 전개합니다. 색소울과 총소울로 카드를 사용합니다.\n" + TerrainSummary(player));
             DrawRevivalBattleRail(); DrawScrollableHand();

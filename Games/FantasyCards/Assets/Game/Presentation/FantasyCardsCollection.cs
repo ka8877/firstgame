@@ -36,12 +36,14 @@ namespace FantasyCards.Presentation
         private void ShowCollection(bool edit)
         {
             battleScreen = false; redraw = () => ShowCollection(edit); Clear(); FmOriginalMusic.SetScene("deck"); Backdrop(true);
+            bool small = canvas.pixelRect.height < 600;
             var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + CollectionPageSize - 1) / CollectionPageSize);
             collectionPage = Mathf.Clamp(collectionPage, 0, pages - 1);
             Text(root, edit ? "DECK EDITOR · 덱 편집" : "CARD COLLECTION · 카드 도감", .035f, .913f, .81f, .988f, 38, ivory);
             string totals = edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · " + DeckKindCounts(customDeck)
-                : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종 · 그림과 적용 수치 확인";
-            ReadableText(root, totals, .04f, .849f, .81f, .913f, 23, gold);
+                : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종" + (small ? "" : " · 그림과 적용 수치 확인");
+            ReadableText(root, totals, .04f, .849f, small ? .64f : .81f, .913f, 23, gold);
+            if (small) Text(root, "AP / DP / HP", .665f, .849f, .815f, .913f, 21, teal, TextAlignmentOptions.Center);
             Button(root, "대기실", .835f, .876f, .965f, .982f, ShowLobby, slate, 24);
             CollectionSearchField(edit);
             string[] orderNames = { "원본 순서", "소울 순", "레벨 순", "이름 순" };

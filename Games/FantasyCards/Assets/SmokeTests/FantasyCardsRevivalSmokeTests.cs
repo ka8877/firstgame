@@ -215,6 +215,25 @@ namespace FantasyCards.SmokeTests
                 {
                     foreach (string label in new[] { "CARD COLLECTION · 카드 도감", "검색", "원본 순서", "모든 카드", "속성 · 전체", "종류 · 전체", "소울 · 전체", "등급 · 전체", "이전", "다음", "대기실" })
                         AssertMobileLabel(label);
+                    AssertMobileLabel("AP / DP / HP");
+                    var legend = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                        .Single(value => value.gameObject.activeInHierarchy && value.text == "AP / DP / HP");
+                    var canvas = legend.GetComponentInParent<Canvas>().rootCanvas;
+                    var legendBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, legend.rectTransform);
+                    var backBounds = RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, SmokeUi.FindButton("대기실").transform);
+                    Assert.That(legendBounds.Intersects(backBounds), Is.False, "The mobile AP/DP/HP legend must not overlap the Back button.");
+                    var checkedCards = new System.Collections.Generic.HashSet<string>();
+                    int mobilePages = 0;
+                    do
+                    {
+                        Assert.That(++mobilePages, Is.LessThanOrEqualTo(CardCatalog.All.Length), "The mobile catalog must reach its final page.");
+                        Canvas.ForceUpdateCanvases();
+                        AssertMobileMiniCards();
+                        foreach (var card in VisibleCards()) checkedCards.Add(card.id);
+                        if (!SmokeUi.FindButton("다음").interactable) break;
+                        SmokeUi.Click("다음");
+                    } while (checkedCards.Count <= CardCatalog.All.Length);
+                    Assert.That(checkedCards, Is.EquivalentTo(CardCatalog.All.Select(card => card.id)), "Every real catalog name, cost and stat must fit the mobile collection cards.");
                 }, RebuildAtActualMobileSize);
             ActiveButtons("Card ").First().onClick.Invoke(); yield return null;
             SmokeUi.Click("원본 카드"); yield return null;
@@ -230,8 +249,57 @@ namespace FantasyCards.SmokeTests
             ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke(); yield return null;
             SmokeUi.Click("START");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable, 15, "The room must reach its real opening hand.");
+            UseLegalStressHand();
+            yield return SmokeUi.Capture("FantasyCards", "remaster-15-long-coins-opening-616x346", 616, 346,
+                () =>
+                {
+                    Assert.That(ActiveButtons("Card ").Length, Is.EqualTo(6));
+                    AssertMobileLabel("카드 수치 순서  AP / DP / HP");
+                    AssertMobileMiniCards();
+                }, RebuildAtActualMobileSize);
             SmokeUi.Click("이대로 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("준비 완료") != null && SmokeUi.FindButton("준비 완료").interactable, 15, "The confirmed hand must reach the real battle.");
+            yield return SmokeUi.Capture("FantasyCards", "remaster-16-long-coins-hand-616x346", 616, 346,
+                () =>
+                {
+                    Assert.That(ActiveButtons("Card ").Length, Is.EqualTo(6));
+                    AssertMobileMiniCards();
+                    var hand = UnityEngine.Object.FindObjectsByType<ScrollRect>(FindObjectsSortMode.None)
+                        .Single(value => value.gameObject.activeInHierarchy && value.gameObject.name == "Scrollable hand");
+                    Assert.That(hand.content.rect.width, Is.GreaterThan(hand.viewport.rect.width), "The sixth mobile hand card must remain reachable by horizontal scrolling.");
+                    hand.horizontalNormalizedPosition = 1;
+                    Canvas.ForceUpdateCanvases();
+                    AssertMobileMiniCards();
+                }, RebuildAtActualMobileSize);
+            var ordinaryState = SmokeUi.ReadEngine().State.Copy();
+            var railApp = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            var lockedField = typeof(FantasyCardsApp).GetField("locked", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            bool ordinaryLocked = (bool)lockedField.GetValue(railApp);
+            try
+            {
+                SetLegalResourceStressState();
+                yield return SmokeUi.Capture("FantasyCards", "remaster-17-resource-rail-616x346", 616, 346,
+                    () =>
+                    {
+                        AssertMobileResourceRail();
+                        var engine = SmokeUi.ReadEngine();
+                        engine.State.activePlayer = 1;
+                        BattleEngine.Validate(engine.State);
+                        RebuildAtActualMobileSize(); AssertMobileResourceRail();
+                        lockedField.SetValue(railApp, true);
+                        RebuildAtActualMobileSize(); AssertMobileResourceRail();
+                    }, RebuildAtActualMobileSize);
+            }
+            finally
+            {
+                if (railApp != null)
+                {
+                    railApp.StopAllCoroutines();
+                    typeof(FantasyCardsApp).GetField("engine", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(railApp, new BattleEngine(ordinaryState));
+                    lockedField.SetValue(railApp, ordinaryLocked);
+                    typeof(FantasyCardsApp).GetMethod("ShowBattle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(railApp, null);
+                }
+            }
             SmokeUi.Click("기록 / 메뉴"); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "remaster-14-menu-616x346", 616, 346,
                 () =>
@@ -260,6 +328,12 @@ namespace FantasyCards.SmokeTests
         {
             var text = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
                 .Single(value => value.gameObject.activeInHierarchy && value.text == label);
+            AssertMobileLabel(text);
+        }
+
+        static void AssertMobileLabel(TMP_Text text)
+        {
+            string label = text.text;
             text.ForceMeshUpdate();
             var glyphs = text.textInfo.characterInfo.Take(text.textInfo.characterCount).Where(value => value.isVisible).ToArray();
             Assert.That(new string(glyphs.Select(value => value.character).ToArray()),
@@ -271,11 +345,119 @@ namespace FantasyCards.SmokeTests
             var bounds = text.rectTransform.rect;
             foreach (var glyph in glyphs)
             {
+                Assert.That(glyph.pointSize * canvas.scaleFactor, Is.GreaterThanOrEqualTo(11.9f), label + " actual glyph size");
                 Assert.That(glyph.bottomLeft.y, Is.GreaterThanOrEqualTo(bounds.yMin - fringe), label + " lower glyph edge");
                 Assert.That(glyph.topRight.y, Is.LessThanOrEqualTo(bounds.yMax + fringe), label + " upper glyph edge");
                 Assert.That(glyph.bottomLeft.x, Is.GreaterThanOrEqualTo(bounds.xMin - fringe), label + " left glyph edge");
                 Assert.That(glyph.topRight.x, Is.LessThanOrEqualTo(bounds.xMax + fringe), label + " right glyph edge");
             }
+        }
+
+        static void AssertMobileMiniCards()
+        {
+            foreach (var button in ActiveButtons("Card "))
+            {
+                var card = CardCatalog.Get(button.gameObject.name.Substring("Card ".Length));
+                var labels = button.GetComponentsInChildren<TMP_Text>().Where(value => value.gameObject.name.StartsWith("Mini ", StringComparison.Ordinal)).ToArray();
+                Assert.That(labels.Single(value => value.gameObject.name == "Mini name").text, Is.EqualTo(card.name));
+                foreach (var label in labels)
+                {
+                    AssertMobileLabel(label);
+                    Assert.That(label.textInfo.lineCount, Is.EqualTo(1), card.name + " must keep each cost or stat value on one line.");
+                    var cardRect = (RectTransform)button.transform;
+                    float fringe = 1 / label.GetComponentInParent<Canvas>().rootCanvas.scaleFactor;
+                    foreach (var glyph in label.textInfo.characterInfo.Take(label.textInfo.characterCount).Where(value => value.isVisible))
+                    {
+                        var bottom = cardRect.InverseTransformPoint(label.rectTransform.TransformPoint(glyph.bottomLeft));
+                        var top = cardRect.InverseTransformPoint(label.rectTransform.TransformPoint(glyph.topRight));
+                        Assert.That(bottom.y, Is.GreaterThanOrEqualTo(cardRect.rect.yMin - fringe), card.name + " text must stay above the bottom card border.");
+                        Assert.That(top.y, Is.LessThanOrEqualTo(cardRect.rect.yMax + fringe), card.name + " text must stay below the top card border.");
+                    }
+                }
+                if (card.kind == CardKind.Unit || card.kind == CardKind.Equipment)
+                {
+                    Assert.That(labels.Single(value => value.gameObject.name == "Mini AP").text, Is.EqualTo(card.attack + CardCatalog.CoinText(card.attackCoin)));
+                    Assert.That(labels.Single(value => value.gameObject.name == "Mini DP").text, Is.EqualTo(card.defense + CardCatalog.CoinText(card.defenseCoin)));
+                    Assert.That(labels.Single(value => value.gameObject.name == "Mini HP").text, Is.EqualTo(card.health + CardCatalog.CoinText(card.healthCoin)));
+                }
+            }
+        }
+
+        static void SetLegalResourceStressState()
+        {
+            var engine = SmokeUi.ReadEngine(); var state = engine.State; var player = state.players[0];
+            state.turn = 59; player.levelPoints = 50; player.genericSoul = 50;
+            foreach (Element element in Enum.GetValues(typeof(Element))) player.SetResource(element, 50);
+            while (player.terrain.Count < state.rules.terrainLimit)
+            {
+                var terrain = player.deck.First(card => CardCatalog.Get(card.definitionId).kind == CardKind.Terrain);
+                player.deck.Remove(terrain); player.terrain.Add(terrain);
+            }
+            BattleEngine.Validate(state);
+        }
+
+        static void AssertMobileResourceRail()
+        {
+            var labels = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                .Where(value => value.gameObject.activeInHierarchy && value.gameObject.name.StartsWith("Rail ", StringComparison.Ordinal)).ToArray();
+            Assert.That(labels, Is.Not.Empty);
+            foreach (var label in labels)
+            {
+                AssertMobileLabel(label);
+                Assert.That(label.textInfo.lineCount, Is.EqualTo(1), label.gameObject.name + " must remain on one line.");
+            }
+            foreach (Element element in Enum.GetValues(typeof(Element)))
+            {
+                Assert.That(labels.Single(value => value.gameObject.name == "Rail soul name " + element).text, Is.EqualTo(CardCatalog.ElementName(element)));
+                Assert.That(labels.Single(value => value.gameObject.name == "Rail soul value " + element).text, Is.EqualTo("50"));
+            }
+            Assert.That(labels.Single(value => value.gameObject.name == "Rail LP").text, Is.EqualTo("LP50"));
+            Assert.That(labels.Single(value => value.gameObject.name == "Rail total soul").text, Is.EqualTo("총소울50"));
+            Assert.That(labels.Single(value => value.gameObject.name == "Rail terrain").text, Is.EqualTo("지형10/10"));
+            var canvas = labels[0].GetComponentInParent<Canvas>().rootCanvas;
+            var rail = GameObject.Find("Battle resource rail").GetComponent<RectTransform>();
+            foreach (var label in labels)
+            {
+                var inside = RectTransformUtility.CalculateRelativeRectTransformBounds(rail, label.rectTransform);
+                Assert.That(inside.min.y, Is.GreaterThanOrEqualTo(rail.rect.yMin), label.gameObject.name + " must stay inside the rail bottom.");
+                Assert.That(inside.max.y, Is.LessThanOrEqualTo(rail.rect.yMax), label.gameObject.name + " must stay inside the rail top.");
+                Assert.That(inside.min.x, Is.GreaterThanOrEqualTo(rail.rect.xMin), label.gameObject.name + " must stay inside the rail left.");
+                Assert.That(inside.max.x, Is.LessThanOrEqualTo(rail.rect.xMax), label.gameObject.name + " must stay inside the rail right.");
+            }
+            var bounds = labels.Select(label => RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, label.rectTransform)).ToArray();
+            for (int i = 0; i < bounds.Length; i++)
+                for (int j = i + 1; j < bounds.Length; j++)
+                    Assert.That(bounds[i].Intersects(bounds[j]), Is.False, labels[i].gameObject.name + " and " + labels[j].gameObject.name + " must not overlap.");
+        }
+
+        static void UseLegalStressHand()
+        {
+            var all = CardCatalog.All;
+            int StatLength(CardDefinition card) => new[] { card.attack + CardCatalog.CoinText(card.attackCoin), card.defense + CardCatalog.CoinText(card.defenseCoin), card.health + CardCatalog.CoinText(card.healthCoin) }.Max(value => value.Length);
+            var stress = new[] { all.Single(card => card.name == "포그자이언트"), all.Single(card => card.name == "레전드비스트"), all.First(card => card.kind == CardKind.Terrain && card.element == Element.Darkness), all.OrderByDescending(card => card.cost).First(), all.OrderByDescending(card => card.coloredCost).First() }
+                .Concat(all.OrderByDescending(StatLength)).GroupBy(card => card.id).Select(group => group.First()).Take(6).ToArray();
+            Assert.That(stress.Max(StatLength), Is.GreaterThanOrEqualTo(5), "The fixture must include the longest real coin expression class.");
+            var deck = all.Where(card => card.kind == CardKind.Terrain).GroupBy(card => card.element).Select(group => group.First().id)
+                .Concat(stress.Select(card => card.id)).Concat(all.Select(card => card.id)).Distinct().Take(50).ToList();
+            DemoCatalog.ValidatePlayableDeck(deck);
+            var engine = new BattleEngine(79, SmokeUi.ReadEngine().State.rules, deck);
+            var player = engine.State.players[0];
+            for (int i = 0; i < stress.Length; i++)
+            {
+                int inHand = player.hand.FindIndex(card => card.definitionId == stress[i].id);
+                var previous = player.hand[i];
+                if (inHand >= 0) { player.hand[i] = player.hand[inHand]; player.hand[inHand] = previous; }
+                else
+                {
+                    int inDeck = player.deck.FindIndex(card => card.definitionId == stress[i].id);
+                    Assert.That(inDeck, Is.GreaterThanOrEqualTo(0));
+                    player.hand[i] = player.deck[inDeck]; player.deck[inDeck] = previous;
+                }
+            }
+            BattleEngine.Validate(engine.State);
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            typeof(FantasyCardsApp).GetField("engine", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(app, engine);
+            typeof(FantasyCardsApp).GetMethod("ShowOpeningHand", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(app, null);
         }
 
         [Serializable] sealed class DeckPayload { public string[] cards; }

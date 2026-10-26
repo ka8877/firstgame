@@ -3,6 +3,7 @@
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -70,9 +71,10 @@ assert set(media) == {card["sourceId"] for card in cards}
 assert all(media[c["sourceId"]]["imageUrl"] == c["imageUrl"] for c in cards)
 core = ROOT / "Games/FantasyCards/Assets/Game/Core/ClassicCardData.cs"
 before = core.read_bytes()
-subprocess.run([sys.executable, str(DATA / "generate-catalog.py")], cwd=ROOT, check=True,
-               stdout=subprocess.DEVNULL)
-assert core.read_bytes() == before, "Generated catalog was stale"
+spec = importlib.util.spec_from_file_location("card_authoring", ROOT / "Tools/Validation/verify-card-authoring.py")
+authoring = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(authoring)
+assert authoring.reproduced_catalog(ROOT) == before, "Generated catalog was stale"
 assert 'Version = "' + baseline["contentVersion"] + '"' in (
     ROOT / "Games/FantasyCards/Assets/Game/Core/CardCatalog.cs").read_text()
 subprocess.run([sys.executable, str(ROOT / "Tools/Art/ClassicCards/verify-media.py")],
