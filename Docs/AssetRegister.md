@@ -1,5 +1,10 @@
 # 자산 출처와 교체 장부
 
+## 2026-10-26 판타지마스터즈 카드 개정
+
+현재 카드96종과 뒷면1장은 공개 원작 카드 이미지다. `Tools/Art/ClassicCards/Originals`에 원본 WebP, `Resources/Art/ClassicCards`에 픽셀이 같은 Unity용 PNG를 보관한다. 출처·변환·해시는 [ClassicCardArt.md](ClassicCardArt.md)와 매니페스트를 따른다. 원본의 낮은 해상도를 고해상도 재제작으로 소개하지 않는다. 기존40종 atlas는 제작 이력으로 보존하며 네 창작 아바타와 배경은 현재에도 사용한다. 새 카드 BGM은 [ClassicAudio.md](ClassicAudio.md)의 독자적 오케스트라 곡이다. 아래 과거 카드 제작 기록과 현재 원작 이미지의 출처를 구분한다.
+
+
 ## 2026-10-24 새벽의 길 일러스트 2.5D 개정
 
 사용자가 얼굴·인물·배경을 크게 개선하고 필요하면 3D 이외의 방법을 사용하도록 요청해 `painted-dawn-2026-10-24`를 제작한다. 현재 인게임은 새 `Resources/Art/Painted` PNG 일곱 개를 사용한다. `shore`·`room`은 인물 없는 1672×941 전체 장면, `jesus`·`miriam`·`traveler`는 1024×1536 투명 전신, `traveler-back`은 같은 크기의 양발을 바닥에 둔 뒷모습 정지 원화, `traveler-walk`는 1448×1086의 4×2 투명 보행 atlas다. 그림·크기·UV·가져오기 계약은 [PaintedDawn.md](PaintedDawn.md)에 모았다.

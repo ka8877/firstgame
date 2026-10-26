@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FantasyCards.Core;
+using FantasyCards.Data;
+using FantasyCards.Presentation;
 using FirstGame.Shared;
 using NUnit.Framework;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -24,6 +27,7 @@ namespace FantasyCards.SmokeTests
     internal static class SmokeUi
     {
         public const string BootPath = "Assets/Scenes/Boot.unity";
+        public const string BattleSlot = "fantasy-battle-classic-v3", DeckSlot = "fantasy-deck-classic-v3", GameId = "starlight-oath";
         public static IDisposable PreserveDemoPreferences() => new DemoPreferenceScope();
         sealed class DemoPreferenceScope : IDisposable
         {
@@ -51,7 +55,9 @@ namespace FantasyCards.SmokeTests
         public static void Click(string label)
         {
             var button = FindButton(label);
-            Assert.That(button, Is.Not.Null, "Visible UI button missing: " + label);
+            Assert.That(button, Is.Not.Null, "Visible UI button missing: " + label + ". Active labels: " +
+                string.Join(" | ", UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                    .Where(text => text.gameObject.activeInHierarchy).Select(text => text.text).Take(30)));
             Assert.That(button.IsActive() && button.IsInteractable(), Is.True, "UI button disabled: " + label);
             // Exercise the real UI callback; pointer hit-testing is a separate manual acceptance check.
             button.onClick.Invoke();
@@ -88,7 +94,7 @@ namespace FantasyCards.SmokeTests
             Click("덱을 섞고 시작");
             yield return WaitUntil(() => FindButton("이대로 시작") != null && FindButton("이대로 시작").interactable,
                 8, "The visible shuffle did not reach opening-hand selection.");
-            AssertVisibleKorean("시작 손패 교체");
+            AssertVisibleKorean("시작 손패 확인");
             Click("이대로 시작");
             yield return WaitUntil(() => FindButton("저장") != null && FindButton("저장").interactable,
                 8, "Opening-hand confirmation and the battle Timeline did not release input.");
@@ -96,6 +102,71 @@ namespace FantasyCards.SmokeTests
         }
         static int VisibleNamedButtons(string prefix) => UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
             .Count(button => button.gameObject.activeInHierarchy && button.gameObject.name.StartsWith(prefix, StringComparison.Ordinal));
+        public static BattleEngine ReadEngine()
+        {
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            Assert.That(app, Is.Not.Null);
+            var field = typeof(FantasyCardsApp).GetField("engine", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            var engine = field?.GetValue(app) as BattleEngine;
+            Assert.That(engine, Is.Not.Null);
+            return engine;
+        }
+        public static void TraceUiState(string point)
+        {
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            var callback = app == null ? null : typeof(FantasyCardsApp)
+                .GetField("redraw", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(app) as Action;
+            string keyboards = string.Join(";", InputSystem.devices.OfType<Keyboard>().Select(keyboard =>
+                "id=" + keyboard.deviceId + ",current=" + (keyboard == Keyboard.current) +
+                ",pressed=" + keyboard.escapeKey.isPressed + ",pressedThisFrame=" + keyboard.escapeKey.wasPressedThisFrame));
+            TestContext.Out.WriteLine("UI_STATE " + point + " frame=" + Time.frameCount + " app=" +
+                (app == null ? "none" : app.GetInstanceID().ToString()) + " redraw=" + callback?.Method.Name + " keyboards=" + keyboards);
+        }
+        public static BattleState ReadSavedBattle()
+        {
+            Assert.That(PersistentSaves.TryLoad(BattleSlot, GameId, 1, CardCatalog.Version, out var payload, out var error), Is.True, error);
+            var state = JsonUtility.FromJson<BattleState>(payload);
+            BattleEngine.Validate(state);
+            return state;
+        }
+        public static IEnumerator StartPlayableBattle(bool requireUnit = false)
+        {
+            // A deterministic *legal* opening isolates persistence/layout checks
+            // from the deliberately unguaranteed classic opening hand. The
+            // separate selection/shuffle test exercises the public New flow.
+            var rules = Resources.Load<RuleSetAsset>("Data/Rules").CreateRuntimeRules();
+            uint selected = 0;
+            for (uint seed = 1; seed <= 512 && selected == 0; seed++)
+            {
+                var candidate = new BattleEngine(seed, rules, playerDeck: CardCatalog.DefaultDeck());
+                Assert.That(candidate.ConfirmOpeningHand(0, out var reason), Is.True, reason);
+                foreach (var terrain in candidate.State.players[0].hand.Where(card => CardCatalog.Get(card.definitionId).kind == CardKind.Terrain))
+                {
+                    var trial = new BattleEngine(candidate.State.Copy());
+                    if (!trial.Play(0, terrain.instanceId, -1, out _)) continue;
+                    if (!requireUnit || trial.State.players[0].hand.Any(card => CardCatalog.Get(card.definitionId).kind == CardKind.Unit && trial.CanPlay(0, card.instanceId, 0, out _)))
+                    { selected = seed; break; }
+                }
+            }
+            Assert.That(selected, Is.Not.Zero, "Find an ordinary shuffled opening with a legal terrain" + (requireUnit ? " and affordable unit." : "."));
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            typeof(FantasyCardsApp).GetMethod("StartBattle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .Invoke(app, new object[] { selected });
+            yield return WaitUntil(() => FindButton("저장") != null && FindButton("저장").interactable, 8, "The real battle entry must release its Timeline lock.");
+            Assert.That(ReadEngine().State.randomState, Is.EqualTo(ReadSavedBattle().randomState));
+            TestContext.Out.WriteLine("CLASSIC_LEGAL_OPENING seed=" + selected + " requireUnit=" + requireUnit);
+        }
+        public static CardInstance TerrainForUnit()
+        {
+            var engine = ReadEngine();
+            foreach (var card in engine.State.players[0].hand.Where(card => CardCatalog.Get(card.definitionId).kind == CardKind.Terrain))
+            {
+                var trial = new BattleEngine(engine.State.Copy());
+                if (trial.Play(0, card.instanceId, -1, out _) && trial.State.players[0].hand.Any(unit =>
+                    CardCatalog.Get(unit.definitionId).kind == CardKind.Unit && trial.CanPlay(0, unit.instanceId, 0, out _))) return card;
+            }
+            Assert.Fail("The selected legal opening must support a terrain and unit deployment."); return null;
+        }
         public static IEnumerator LoadBoot()
         {
             // Explicitly unload first so continue tests always deserialize into a fresh app instance.
@@ -141,8 +212,9 @@ namespace FantasyCards.SmokeTests
             Assert.That(text.textInfo.characterCount, Is.GreaterThan(0), "TMP did not build text geometry.");
             Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Any(c => c.isVisible), Is.True);
         }
-        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action inspect = null)
+        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action inspect = null, Action beforeCapture = null)
         {
+            yield return new WaitForSecondsRealtime(.35f); // Let authored panel entrance/hover easing settle.
             // Native URP camera render. Batch mode does not service WaitForEndOfFrame reliably.
             // Overlay canvases temporarily use the same camera so real uGUI/TMP is in the PNG.
             var camera = Camera.main;
@@ -169,8 +241,9 @@ namespace FantasyCards.SmokeTests
                 }
                 yield return null; // Allow CanvasScaler, responsive UI, and Cinemachine to observe capture dimensions.
                 yield return null;
+                yield return new WaitForSecondsRealtime(.35f); // A responsive redraw can start its own card entrance animation.
+                beforeCapture?.Invoke();
                 Canvas.ForceUpdateCanvases();
-                inspect?.Invoke();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
                 Assert.That(UnityEngine.Rendering.RenderPipeline.SupportsRenderRequest(camera, request), Is.True,
                     "The active render pipeline does not support native StandardRequest capture.");
@@ -190,6 +263,8 @@ namespace FantasyCards.SmokeTests
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +
                     "\nScene " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().path +
                     "\nGraphics " + SystemInfo.graphicsDeviceName + "\nOverlay UI included through temporary camera canvas mode.\n");
+                // Preserve the actual failing image before a layout assertion throws.
+                inspect?.Invoke();
             }
             finally
             {

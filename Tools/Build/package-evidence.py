@@ -17,6 +17,18 @@ selected = [
     root / "Docs/Audio.md",
     root / "Docs/Voice.md",
     root / "Docs/FantasyCardsRules.md",
+    root / "Docs/FantasyMastersClassic.md",
+    root / "Docs/ClassicCardArt.md",
+    root / "Docs/ClassicAudio.md",
+    root / "Docs/Research/FantasyMastersRulesSources.md",
+    root / "Docs/Research/FantasyMastersDatabaseSources.md",
+    root / "Docs/classic-cards-browser-validation.md",
+    root / "Docs/ValidationHistory/2026-10-26-before-classic-Validation.md",
+    root / "Docs/ValidationHistory/2026-10-26-before-classic-VisualValidation.md",
+    root / "Tools/Environment/validation-2026-10-26-before-classic.json",
+    root / "Tools/Data/ClassicCards/selection.json",
+    root / "Tools/Art/ClassicCards/SOURCE-NOTICE.txt",
+    root / "Tools/Audio/classic-verification.json",
     root / "Docs/PathOfDawnValidation.md",
     root / "Docs/PaintedDawn.md",
     root / "Docs/DawnMotion.md",
@@ -83,12 +95,14 @@ selected.extend(sorted((artifacts / "Validation/VisualWeb").glob("*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("expanded-demo-*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("painted-dawn-*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("fluid-dawn-*.json")))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("fm-classic-*.json")))
+selected.extend(sorted((root / "Tools/Art/ClassicCards").glob("*.json")))
 for pattern in ("*.json", "*.md"):
     selected.extend(sorted((root / "Tools/Art/Painted").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))
 # Collect compact reports and captures, never raw Blender/Unity logs or voice files.
-for directory in ("ExpandedDemo", "Demo", "PaintedDawn", "MotionDawn"):
-    for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx"):
+for directory in ("ExpandedDemo", "Demo", "PaintedDawn", "MotionDawn", "FmExpansion", "ClassicCards"):
+    for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx", "*-BuildEvidence.txt"):
         selected.extend(sorted((artifacts / "Validation" / directory).rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/ExpandedDemo").glob("*-reference.txt")))
 for profile in ("Desktop720", "Mobile844"):

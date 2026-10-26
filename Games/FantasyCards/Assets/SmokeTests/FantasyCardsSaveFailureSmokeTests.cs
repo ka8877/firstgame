@@ -18,7 +18,7 @@ namespace FantasyCards.SmokeTests
 {
     public sealed class FantasyCardsSaveFailureSmokeTests
     {
-        const string Slot = "fantasy-battle-demo-v2";
+        const string Slot = "fantasy-battle-classic-v3";
         IDisposable storageScope;
         IDisposable preferenceScope;
         FailingSaveBackend backend;
@@ -75,13 +75,13 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator FailedTitleAndEscapeKeepLiveProgressUntilSaveRetrySucceeds()
         {
-            yield return SmokeUi.StartDemoBattle();
+            yield return SmokeUi.StartPlayableBattle();
             var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
             var liveEngine = ReadEngine(app);
             var savedA = JsonUtility.ToJson(liveEngine.State);
             Assert.That(ReadSavedPayload(), Is.EqualTo(savedA));
             var rawA = backend.Read(Slot);
-            var terrain = liveEngine.State.players[0].hand.First(c => CardCatalog.Get(c.definitionId).kind == CardKind.Terrain);
+            var terrain = liveEngine.State.players[0].hand.First(c => CardCatalog.Get(c.definitionId).kind == CardKind.Terrain && liveEngine.CanPlay(0, c.instanceId, -1, out _));
             var definition = CardCatalog.Get(terrain.definitionId);
 
             // Make real UI progress while persistence fails; never force a core state mutation.
@@ -125,7 +125,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("이어하기");
             yield return null;
             Assert.That(JsonUtility.ToJson(ReadEngine(app).State), Is.EqualTo(liveB));
-            Assert.That(SmokeUi.HasText("내 지형  " + definition.name), Is.True);
+            Assert.That(SmokeUi.HasText("지형 1/" + liveEngine.State.rules.terrainLimit), Is.True);
             LogAssert.NoUnexpectedReceived();
         }
 
@@ -137,7 +137,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(SmokeUi.FindButton("저장"), Is.Not.Null, "A failed exit must leave the battle screen available for retry.");
             Assert.That(SmokeUi.FindButton("이어하기"), Is.Null, "Do not offer stale Continue while B is unsaved.");
             Assert.That(SmokeUi.HasText("저장 실패:"), Is.True);
-            Assert.That(SmokeUi.HasText("내 지형  " + terrainName), Is.True);
+            Assert.That(SmokeUi.HasText("지형 1/" + engine.State.rules.terrainLimit), Is.True);
         }
 
         static BattleEngine ReadEngine(FantasyCardsApp app)

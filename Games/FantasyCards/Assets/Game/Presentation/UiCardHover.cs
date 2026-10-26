@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 namespace FantasyCards.Presentation
 {
-    public sealed class UiCardHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerMoveHandler
+    public sealed class UiCardHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerMoveHandler, ICancelHandler
     {
         public float HoverScale = 1.025f;
+        public float HoverLift;
         public Action<Vector2> Enter;
         public Action Leave;
         public Action LongPress;
         bool hovered, pressing, longPressed;
+        RectTransform rect;
+        float lift;
         float pressedAt;
         Vector2 pressedPosition;
         Button button;
-        void Awake() => button = GetComponent<Button>();
+        void Awake()
+        {
+            button = GetComponent<Button>(); rect = transform as RectTransform;
+        }
+        public void OnCancel(BaseEventData data) { hovered = pressing = false; Leave?.Invoke(); }
         static bool IsTouch(PointerEventData data) => data is ExtendedPointerEventData extended
             ? extended.pointerType == UIPointerType.Touch : data.pointerId >= 0;
         public void OnPointerEnter(PointerEventData data)
@@ -43,7 +50,12 @@ namespace FantasyCards.Presentation
         {
             if (pressing && Vector2.Distance(pressedPosition, data.position) > 12) pressing = false;
         }
-        void OnDisable() { hovered = pressing = false; transform.localScale = Vector3.one; Leave?.Invoke(); }
+        void OnDisable()
+        {
+            hovered = pressing = false; transform.localScale = Vector3.one;
+            if (rect != null && lift != 0) rect.anchoredPosition -= Vector2.up * lift;
+            lift = 0; Leave?.Invoke();
+        }
         void Update()
         {
             if (pressing && !longPressed && Time.unscaledTime - pressedAt >= .48f)
@@ -51,7 +63,14 @@ namespace FantasyCards.Presentation
                 longPressed = true; pressing = false; LongPress?.Invoke();
             }
             float target = hovered && button != null && button.IsInteractable() ? HoverScale : 1;
-            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * target, 1 - Mathf.Exp(-18 * Time.unscaledDeltaTime));
+            float ease = 1 - Mathf.Exp(-18 * Time.unscaledDeltaTime);
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * target, ease);
+            var entrance = GetComponent<UiPanelEntrance>();
+            if (rect != null && HoverLift != 0 && (entrance == null || !entrance.enabled))
+            {
+                float next = Mathf.Lerp(lift, target > 1 ? HoverLift : 0, ease);
+                rect.anchoredPosition += Vector2.up * (next - lift); lift = next;
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace FantasyCards.SmokeTests
     // This verifies the result/continue/retry flow, not every battle pointer interaction.
     public sealed class FantasyCardsResultFlowSmokeTests
     {
-        const string Slot = "fantasy-battle-demo-v2";
+        const string Slot = "fantasy-battle-classic-v3";
         IDisposable storageScope;
         IDisposable preferenceScope;
         MemorySaveBackend backend;
@@ -104,7 +104,9 @@ namespace FantasyCards.SmokeTests
                     Assert.That(player.hand.Count, Is.EqualTo(fresh.rules.openingHand));
                     Assert.That(player.deck.Count, Is.EqualTo(fresh.rules.deckSize - fresh.rules.openingHand));
                     Assert.That(player.discard, Is.Empty);
-                    Assert.That(player.dawn + player.tide, Is.Zero);
+                    Assert.That(Enum.GetValues(typeof(Element)).Cast<Element>().Sum(player.Resource), Is.Zero);
+                    Assert.That(player.genericSoul, Is.Zero);
+                    Assert.That(player.levelPoints, Is.EqualTo(1));
                     Assert.That(player.leaderSkillUses, Is.Zero);
                     Assert.That(player.lastLeaderSkillTurn, Is.Zero);
                     Assert.That(player.deck.Concat(player.hand).Select(card => card.definitionId).OrderBy(id => id),
@@ -112,9 +114,9 @@ namespace FantasyCards.SmokeTests
                 }
                 Assert.That(fresh.randomState, Is.Not.Zero, "New matches select a fresh seed and keep their shuffled RNG state.");
                 Assert.That(fresh.openingHandOpen, Is.False);
-                Assert.That(fresh.players[0].mulliganUsed, Is.True);
+                Assert.That(fresh.players[0].mulliganUsed, Is.False, "Keeping the first hand does not perform a replacement shuffle.");
                 Assert.That(fresh.events.Count(e => e.kind == "shuffle"), Is.EqualTo(2));
-                Assert.That(fresh.events.Single(e => e.kind == "mulligan").amount, Is.Zero, "The actual keep-hand callback must confirm the new opening hand.");
+                Assert.That(fresh.events.Single(e => e.kind == "hand-confirm").amount, Is.EqualTo(fresh.rules.openingHand), "The actual keep-hand callback must confirm all six cards.");
                 Assert.That(fresh.events.Any(e => e.kind == "result" || e.kind == "leader" || e.kind == "play"), Is.False);
                 BattleEngine.Validate(fresh);
                 Assert.That(SmokeUi.FindButton("다시 도전"), Is.Null);
@@ -139,7 +141,7 @@ namespace FantasyCards.SmokeTests
                 int actions = 0;
                 while (engine.State.phase != BattlePhase.Complete && actions++ < 2000)
                 {
-                    int actor = engine.State.phase == BattlePhase.BlockResponse ? 1 - engine.State.activePlayer : engine.State.activePlayer;
+                    int actor = engine.PreparingPlayer;
                     Assert.That(BattleAi.Step(engine, actor, out var reason), Is.True, reason);
                 }
                 Assert.That(engine.State.phase, Is.EqualTo(BattlePhase.Complete), "Seed " + seed + " exceeded 2000 legal actions.");

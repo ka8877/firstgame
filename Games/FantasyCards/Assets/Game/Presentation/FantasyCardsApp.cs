@@ -19,7 +19,7 @@ namespace FantasyCards.Presentation
 {
     public sealed partial class FantasyCardsApp : MonoBehaviour
     {
-        private const string Slot = "fantasy-battle-demo-v2", DeckSlot = "fantasy-deck-demo-v2", GameId = "starlight-oath";
+        private const string Slot = "fantasy-battle-classic-v3", DeckSlot = "fantasy-deck-classic-v3", GameId = "starlight-oath";
         private readonly Color ink = new Color(.055f, .065f, .135f, .93f);
         private readonly Color gold = new Color(.94f, .80f, .52f);
         private readonly Color teal = new Color(.49f, .86f, .88f);
@@ -45,6 +45,8 @@ namespace FantasyCards.Presentation
         private AudioClip coinSound, playSound;
         private TMP_Text effectLabel;
         private GameObject effectObject;
+        private RectTransform effectCoin;
+        private string screenRoute;
         private RuleSet authoredRules;
         private CinemachineCamera battleCamera;
         private PlayableDirector revealDirector;
@@ -68,6 +70,7 @@ namespace FantasyCards.Presentation
             if (FindFirstObjectByType<EventSystem>() == null) new GameObject("UI Input", typeof(EventSystem), typeof(InputSystemUIInputModule));
             audioSource = gameObject.AddComponent<AudioSource>(); audioSource.playOnAwake = false; audioSource.volume = .24f;
             coinSound = MakeTone(960f, .13f); playSound = MakeTone(260f, .15f);
+            inspectedId = CardCatalog.All.First(card => card.kind == CardKind.Unit).id;
             SetupWorld(); LoadDeck(); LoadDemoSelection(); ShowTitle();
         }
         private void Update()
@@ -86,7 +89,15 @@ namespace FantasyCards.Presentation
         {
             HideTooltip();
             foreach (Transform child in root) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
-            effectLabel = null; effectObject = null;
+            effectLabel = null; effectObject = null; effectCoin = null;
+            string route = redraw?.Method.Name ?? "Transition";
+            if (screenRoute != route)
+            {
+                screenRoute = route;
+                var fade = root.GetComponent<UiCanvasFade>();
+                if (fade == null) fade = root.gameObject.AddComponent<UiCanvasFade>();
+                fade.Begin();
+            }
             lastViewport = canvas.pixelRect.size;
         }
         private void ShowTitle()
@@ -96,10 +107,10 @@ namespace FantasyCards.Presentation
             Gradient(root, 0, 0, .83f, 1, new Color(.014f, .025f, .047f, .99f), new Color(.014f, .025f, .047f, 0), true);
             Gradient(root, 0, 0, 1, .45f, new Color(.014f, .025f, .047f, .97f), Color.clear);
             bool compact = Compact;
-            Text(root, "STARLIGHT OATH  /  THE FIRST CHAPTER", .055f, .84f, .57f, .91f, compact ? 24 : 21, gold);
-            Text(root, "별빛의 서약", .05f, .665f, .61f, .83f, compact ? 80 : 96, ivory);
+            Text(root, "FANTASY MASTERS  /  UNOFFICIAL CLASSIC PLAYTEST", .055f, .84f, .57f, .91f, compact ? 24 : 21, gold);
+            Text(root, "판타지마스터즈", .05f, .665f, .61f, .83f, compact ? 80 : 96, ivory);
             Panel(root, .058f, .638f, .13f, .641f, gold);
-            Text(root, "여명과 조류, 두 세계의 첫 결투", .057f, .57f, .62f, .63f, compact ? 28 : 27, new Color(.84f, .87f, .88f));
+            Text(root, "개인용 규칙 재현 · 비공식 체험판", .057f, .57f, .62f, .63f, compact ? 28 : 27, new Color(.84f, .87f, .88f));
             float top = compact ? .54f : .52f, bottom = compact ? .405f : .425f;
             Button(root, "새로운 결투", .058f, bottom, .275f, top, ShowLeaderSelection, gold, 28);
             Button(root, "이어하기", .287f, bottom, .49f, top, Continue, slate, 27, PersistentSaves.Exists(Slot));
@@ -109,8 +120,8 @@ namespace FantasyCards.Presentation
             Button(root, "저장 내보내기 / 가져오기", .058f, compact ? .095f : .225f, .49f, compact ? .23f : .303f, ShowTransfer, slate, 23);
             if (!compact)
             {
-                Text(root, CardCatalog.All.Length + " CARDS  /  4 LEADERS", .735f, .13f, .96f, .175f, 20, gold, TextAlignmentOptions.MidlineRight);
-                Text(root, "나만의 서약을 펼치다", .66f, .075f, .96f, .13f, 30, ivory, TextAlignmentOptions.MidlineRight);
+                Text(root, CardCatalog.All.Length + " CARDS  /  7 ELEMENTS", .735f, .13f, .96f, .175f, 20, gold, TextAlignmentOptions.MidlineRight);
+                Text(root, "일곱 속성으로 펼치는 결투", .66f, .075f, .96f, .13f, 30, ivory, TextAlignmentOptions.MidlineRight);
             }
             Text(root, StatusMessage(), .058f, .018f, .96f, .073f, 19, new Color(.78f, .81f, .91f));
             Button(root, "음악", .84f, .84f, .965f, .965f, () => ShowMusicSettings(ShowTitle), slate, 24);
@@ -120,7 +131,7 @@ namespace FantasyCards.Presentation
             redraw = () => ShowMusicSettings(back); Clear(); Backdrop(true);
             var panel = Panel(root, .13f, .15f, .87f, .85f, ink); Frame(panel, new Color(gold.r, gold.g, gold.b, .7f), 1.5f);
             Text(panel, "별빛의 선율", .07f, .74f, .93f, .92f, 43, ivory, TextAlignmentOptions.Center);
-            Text(panel, "관현악과 함께 펼치는 서약", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
+            Text(panel, "별빛의 회상 · 현악과 하프의 테마", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
             Button(panel, music != null && music.Muted ? "음악 켜기" : "음악 끄기", .12f, .40f, .46f, .59f,
                 () => { if (music != null) music.SetMuted(!music.Muted); ShowMusicSettings(back); }, slate, 26);
             Text(panel, "음량 " + Mathf.RoundToInt((music != null ? music.Volume : .6f) * 100) + "%", .49f, .43f, .88f, .57f, 28, ivory, TextAlignmentOptions.Center);
@@ -145,10 +156,10 @@ namespace FantasyCards.Presentation
         }
         private void StartBattle(uint seed)
         {
-            if (!ValidDeck(customDeck)) { message = "24장, 지형 4장 이상, 유닛 6장 이상으로 덱을 구성하세요."; ShowCollection(true); return; }
+            if (!ValidDeck(customDeck)) { message = "50장 덱과 속성별 지형 구성을 확인하세요."; ShowCollection(true); return; }
             engine = new BattleEngine(seed, authoredRules, playerDeck: CardCatalog.DefaultDeck()); selectedCard = selectedAttacker = -1;
-            engine.Mulligan(0, Array.Empty<int>(), out _);
-            message = "지형 선택 → 지형 전개  /  유닛 선택 → 빈 아군 칸  /  공격 단계 → 공격자 → 대상";
+            engine.ConfirmOpeningHand(0, out _);
+            message = "지형과 유닛을 준비하고 준비 완료를 누르세요. 전열 순서대로 자동 전투합니다.";
             Save(); locked = true; ShowBattle(); StartCoroutine(RevealBattle());
         }
         private IEnumerator RevealBattle()
@@ -175,170 +186,6 @@ namespace FantasyCards.Presentation
             if (Save()) next(); else ShowBattle();
         }
         private string StatusMessage() { return string.IsNullOrEmpty(saveError) ? message : message + " · " + saveError; }
-        private void ShowBattle()
-        {
-            battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld();
-            var s = engine.State; var p = s.players[0]; var enemy = s.players[1]; bool compact = Compact;
-            Backdrop(false);
-            Gradient(root, 0, 0, 1, .43f, new Color(.012f, .023f, .043f, .99f), Color.clear);
-            Gradient(root, 0, .69f, 1, 1, Color.clear, new Color(.012f, .023f, .043f, .96f));
-            Panel(root, .02f, compact ? .879f : .925f, .98f, .995f, ink);
-            Text(root, "별빛의 서약", .035f, compact ? .93f : .936f, .25f, .986f, compact ? 29 : 31, gold);
-            var phaseText = Text(root, s.turn + "턴 · " + (s.activePlayer == 0 ? "나의 " : "상대의 ") + PhaseName(s.phase), .275f, compact ? .93f : .936f, .655f, .986f, compact ? 26 : 27, ivory);
-            BindTooltip(phaseText.gameObject, "준비 → 공격 → 방어 대응", "준비 단계에 지형·유닛·마법·장비와 리더 기술을 사용합니다. 공격 단계에서는 공격할 유닛을 고르고 상대가 가로막을 기회를 얻습니다.");
-            Button(root, "음악", .665f, compact ? .876f : .938f, .742f, .991f, () => ShowMusicSettings(ShowBattle), slate, 23, !locked);
-            Button(root, "저장", .755f, compact ? .876f : .938f, .855f, .991f, () => { if (Save()) message = "전투와 난수 상태를 저장했습니다."; ShowBattle(); }, slate, 23, !locked);
-            Button(root, "타이틀", .868f, compact ? .876f : .938f, .974f, .991f, () => LeaveBattle(ShowTitle), slate, 23, !locked);
-            Text(root, StatusMessage(), .035f, compact ? .883f : .885f, compact ? .65f : .975f, compact ? .929f : .922f, compact ? 24 : 20, ivory);
-            float enemyBottom = compact ? .762f : .813f, enemyTop = compact ? .874f : .875f;
-            Button(root, DemoCatalog.GetLeader(enemy.leaderId).name + "   생명 " + enemy.health + " / " + s.rules.startingHealth, compact ? .10f : .36f, enemyBottom, compact ? .56f : .745f, enemyTop, () => Attack(-1), new Color(.22f, .19f, .35f, .90f), 27,
-                !locked && s.activePlayer == 0 && s.phase == BattlePhase.AttackDeclaration && selectedAttacker >= 0);
-            DrawEnemyPortrait(compact ? .025f : .315f, enemyBottom, compact ? .098f : .359f, enemyTop);
-            Panel(root, compact ? .572f : .245f, compact ? .763f : .778f, compact ? .982f : .795f, compact ? .873f : .813f, new Color(.035f, .045f, .10f, .96f));
-            var enemyResources = Text(root, "지형 " + enemy.terrain.Count + "  여명 " + enemy.dawn + " / 조류 " + enemy.tide + "  손패 " + enemy.hand.Count + "  덱 " + enemy.deck.Count,
-                compact ? .58f : .25f, compact ? .77f : .78f, compact ? .975f : .79f, compact ? .868f : .81f, compact ? 23 : 20, new Color(.68f, .80f, .88f), compact ? TextAlignmentOptions.Center : TextAlignmentOptions.MidlineLeft);
-            BindTooltip(enemyResources.gameObject, "상대의 자원과 카드", "공개된 지형과 자원, 남은 카드 수입니다. 상대 손패 내용과 덱 순서는 공개되지 않습니다.");
-            DrawLanes(1, compact ? .62f : .585f, compact ? .752f : .772f);
-            DrawLanes(0, compact ? .445f : .365f, compact ? .575f : .55f);
-            Panel(root, compact ? .017f : .245f, compact ? .574f : .55f, compact ? .983f : .795f, compact ? .621f : .584f, new Color(.035f, .045f, .10f, .96f));
-            var terrainText = Text(root, "내 지형  " + (p.terrain.Count == 0 ? "아직 전개되지 않음" : string.Join(" · ", p.terrain.Select(c => CardCatalog.Get(c.definitionId).name))),
-                compact ? .025f : .25f, compact ? .575f : .552f, compact ? .975f : .79f, compact ? .62f : .581f, compact ? 23 : 18, new Color(.86f, .84f, .73f));
-            BindTooltip(terrainText.gameObject, "지형과 자원 생산", "지형은 턴당 " + s.rules.terrainPerTurn + "장, 최대 " + s.rules.terrainLimit + "장입니다. 전개할 때와 내 턴 시작에 자원 1을 만듭니다. 지형은 사용해도 사라지지 않습니다.");
-            Panel(root, compact ? .017f : .245f, compact ? .273f : .322f, .983f, compact ? .324f : .363f, new Color(.035f, .045f, .10f, .96f));
-            var playerResources = Text(root, "나의 생명 " + p.health + " / " + s.rules.startingHealth + "     여명 " + p.dawn + "  ·  조류 " + p.tide + "     덱 " + p.deck.Count,
-                compact ? .025f : .25f, compact ? .275f : .326f, .975f, compact ? .323f : .36f, compact ? 24 : 25, gold);
-            BindTooltip(playerResources.gameObject, "리더 생명 · 속성 자원 · 덱", "생명이 0이 되면 패배합니다. 카드와 기술은 같은 속성의 자원을 사용합니다. 남은 자원은 최대 " + s.rules.maximumResource + "까지 유지됩니다. 빈 덱에서 뽑으면 점점 커지는 탈진 피해를 받습니다.");
-            if (compact)
-            {
-                Button(root, "확대 보기", .025f, .325f, .20f, .438f, () => ShowDetail(CardCatalog.Get(inspectedId), ShowBattle), slate, 23, !locked);
-                DrawActions(.215f, .325f, .785f, .438f);
-                Button(root, "전투 기록", .80f, .325f, .975f, .438f, ShowBattleLog, slate, 23, !locked);
-            }
-            else
-            {
-                Panel(root, .02f, .365f, .23f, .875f, ink); DrawInspector();
-                Panel(root, .81f, .365f, .98f, .875f, ink);
-                Text(root, "BATTLE RECORD", .825f, .829f, .965f, .861f, 16, gold);
-                Text(root, string.Join("\n\n", s.events.Skip(Math.Max(0, s.events.Count - 7)).Select(e => e.text)), .825f, .39f, .965f, .818f, 18, new Color(.75f, .80f, .85f), TextAlignmentOptions.TopLeft);
-            }
-            DrawPlayerLeader();
-            int count = p.hand.Count; float width = Mathf.Min(compact ? .16f : .133f, .80f / Mathf.Max(1, count)); float left = .58f - count * width / 2f;
-            if (count > 5) DrawScrollableHand();
-            else for (int i = 0; i < count; i++)
-            {
-                var card = p.hand[i]; int id = card.instanceId; var d = CardCatalog.Get(card.definitionId);
-                DrawCard(root, d, left + i * width, .022f, left + (i + 1) * width - .008f, compact ? .273f : .308f, id == selectedCard,
-                    () => SelectHandCard(id, d), !locked);
-            }
-            if (s.phase == BattlePhase.Complete) ShowResult();
-        }
-        private void DrawInspector()
-        {
-            var d = CardCatalog.Get(inspectedId);
-            Artwork(root, d, .032f, .638f, .218f, .859f);
-            Text(root, d.name, .035f, .587f, .215f, .632f, 28, ivory);
-            Text(root, CardCatalog.ElementName(d.element) + " " + d.cost + " · " + CardCatalog.KindName(d.kind), .035f, .55f, .215f, .587f, 21, gold);
-            Text(root, d.text, .035f, .485f, .215f, .55f, 20, new Color(.78f, .83f, .88f), TextAlignmentOptions.TopLeft);
-            Button(root, "확대 보기", .035f, .43f, .215f, .479f, () => ShowDetail(d, ShowBattle), slate, 21, !locked);
-            DrawActions(.035f, .374f, .215f, .421f);
-        }
-        private void DrawActions(float x0, float y0, float x1, float y1)
-        {
-            var s = engine.State;
-            if (s.phase == BattlePhase.BlockResponse && s.activePlayer == 1)
-            { Button(root, "가로막지 않기", x0, y0, x1, y1, () => Act(() => engine.ResolveBlock(0, -1, out message)), gold, 23, !locked); return; }
-            if (s.phase == BattlePhase.Main && s.activePlayer == 0)
-            {
-                var card = s.players[0].hand.Find(c => c.instanceId == selectedCard); float middle = (x0 + x1) / 2;
-                if (card != null && CardCatalog.Get(card.definitionId).kind == CardKind.Terrain)
-                    Button(root, "지형 전개", x0, y0, middle - .004f, y1, () => Play(0), gold, 23, !locked);
-                else if (card != null && CardCatalog.Get(card.definitionId).kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(CardCatalog.Get(card.definitionId)))
-                    Button(root, "카드 사용", x0, y0, middle - .004f, y1, () => Play(-1), gold, 23, !locked);
-                else Button(root, "턴 종료", x0, y0, middle - .004f, y1, EndTurn, slate, 23, !locked);
-                Button(root, "공격 단계", middle + .004f, y0, x1, y1, () => Act(() => engine.BeginCombat(0, out message)), gold, 23, !locked);
-            }
-            else if (s.phase == BattlePhase.AttackDeclaration && s.activePlayer == 0)
-                Button(root, "공격 종료 · 턴 넘기기", x0, y0, x1, y1, EndTurn, gold, 23, !locked);
-            else Text(root, s.phase == BattlePhase.Complete ? "결투 종료" : "상대의 판단을 기다리는 중", x0, y0, x1, y1, 23, teal, TextAlignmentOptions.Center);
-        }
-        private void ShowBattleLog()
-        {
-            redraw = ShowBattleLog; Clear(); Backdrop(true); Panel(root, .05f, .06f, .95f, .94f, ink);
-            Text(root, "전투 기록", .09f, .79f, .85f, .9f, 40, gold);
-            Text(root, string.Join("\n", engine.State.events.Skip(Math.Max(0, engine.State.events.Count - 10)).Select(e => e.text)), .09f, .24f, .91f, .78f, 24, ivory, TextAlignmentOptions.TopLeft);
-            Button(root, "돌아가기", .64f, .085f, .91f, .22f, ShowBattle, gold, 27);
-        }
-        private void DrawLanes(int owner, float bottom, float top)
-        {
-            var s = engine.State; float start = Compact ? .025f : .25f, span = Compact ? .96f : .55f;
-            for (int i = 0; i < s.rules.unitLanes; i++)
-            {
-                int lane = i; var unit = s.players[owner].AtLane(i); float left = start + i * span / s.rules.unitLanes, right = left + span / s.rules.unitLanes - .012f;
-                bool target = IsLegalLane(owner, lane);
-                var panel = Panel(root, left, bottom, right, top, new Color(.12f, .16f, .28f, target ? .94f : .88f));
-                panel.gameObject.name = "Lane " + owner + " " + lane;
-                panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
-                if (unit == null) Text(panel, "전장 " + (i + 1) + "  /  " + (target ? "여기에 배치" : "비어 있음"), .05f, .14f, .95f, .86f, Compact ? 24 : 22, target ? gold : new Color(.73f, .77f, .88f), TextAlignmentOptions.Center);
-                else
-                {
-                    var d = CardCatalog.Get(unit.definitionId);
-                    string stats = "공격 " + (d.attack + unit.bonusPower) + "  생명 " + (d.health - unit.damage);
-                    if (Compact && canvas.pixelRect.height < 600)
-                    {
-                        // A 51px lane fits two full Korean text lines; three short rows clip TMP glyphs.
-                        Artwork(panel, d, .01f, .015f, .295f, .985f);
-                        Panel(panel, .295f, 0, 1, 1, new Color(.014f, .025f, .045f, .96f));
-                        Text(panel, d.name, .31f, .51f, .745f, .98f, 25, ivory);
-                        Text(panel, "코인 " + (s.rules.baseCoins + unit.extraCoins), .765f, .51f, .985f, .98f, 23, teal);
-                        Text(panel, stats, .31f, .02f, .985f, .49f, 24, gold);
-                        var badge = Panel(panel, .01f, .02f, .295f, .47f, new Color(.014f, .025f, .045f, .92f));
-                        Text(badge, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor,
-                            .025f, .05f, .975f, .95f, 23, unit.exhausted ? Color.gray : teal, TextAlignmentOptions.Center);
-                    }
-                    else
-                    {
-                        Artwork(panel, d, .01f, .015f, .99f, .985f);
-                        Gradient(panel, .3f, 0, 1, 1, Color.clear, new Color(.014f, .025f, .045f, .98f), true);
-                        Panel(panel, .47f, 0, 1, 1, new Color(.014f, .025f, .045f, .75f));
-                        Text(panel, d.name, .5f, .66f, .97f, .95f, Compact ? 25 : 23, ivory);
-                        Text(panel, stats, .5f, .37f, .97f, .67f, Compact ? 24 : 21, gold);
-                        Text(panel, unit.summoningSick ? "소환 대기" : unit.exhausted ? "행동 완료" : "방어 " + unit.armor + " · 코인 " + (s.rules.baseCoins + unit.extraCoins), .5f, .07f, .97f, .36f, Compact ? 23 : 19, unit.exhausted ? Color.gray : teal);
-                    }
-                }
-                Frame(panel, target ? gold : new Color(.67f, .70f, .88f, .45f), target ? 2.5f : 1.2f);
-                panel.GetComponent<Image>().raycastTarget = true;
-                var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, lane));
-                if (unit != null) BindCardHelp(panel.gameObject, CardCatalog.Get(unit.definitionId), () => ShowDetail(CardCatalog.Get(unit.definitionId), ShowBattle));
-                if (unit != null && unit.instanceId == selectedAttacker) Frame(panel, ivory, 3);
-            }
-        }
-        private bool IsLegalLane(int owner, int lane)
-        {
-            if (locked) return false; var s = engine.State; var u = s.players[owner].AtLane(lane);
-            if (s.phase == BattlePhase.BlockResponse) return s.activePlayer == 1 && owner == 0 && u != null && !u.exhausted && !u.summoningSick;
-            if (s.activePlayer != 0) return false;
-            if (s.phase == BattlePhase.AttackDeclaration) return owner == 0 ? u != null && !u.exhausted && !u.summoningSick : selectedAttacker >= 0 && u != null;
-            var c = s.players[0].hand.Find(x => x.instanceId == selectedCard); if (c == null) return false;
-            var d = CardCatalog.Get(c.definitionId); bool enemyTarget = d.effect == Effect.Damage;
-            return d.kind != CardKind.Terrain && owner == (enemyTarget ? 1 : 0) && engine.CanPlay(0, selectedCard, lane, out _);
-        }
-        private void LaneClick(int owner, int lane)
-        {
-            if (locked) return; var s = engine.State; var u = s.players[owner].AtLane(lane);
-            if (u != null) inspectedId = u.definitionId;
-            if (!IsLegalLane(owner, lane)) { message = "선택한 카드와 현재 단계에 맞는 빛나는 전장 칸을 선택하세요."; ShowBattle(); return; }
-            if (s.phase == BattlePhase.BlockResponse) { Act(() => engine.ResolveBlock(0, u.instanceId, out message)); return; }
-            if (s.phase == BattlePhase.AttackDeclaration)
-            {
-                if (owner == 0) { selectedAttacker = u.instanceId; selectedCard = -1; message = "공격할 상대 유닛 또는 위쪽 상대 생명 표시를 선택하세요. 상대가 가로막을 수 있습니다."; ShowBattle(); }
-                else Attack(lane);
-                return;
-            }
-            Play(lane);
-        }
-        private void Play(int lane) { int id = selectedCard; Act(() => engine.Play(0, id, lane, out message)); }
-        private void Attack(int targetLane) { int id = selectedAttacker; Act(() => engine.DeclareAttack(0, id, targetLane, out message)); }
-        private void EndTurn() { Act(() => engine.EndTurn(0, out message)); }
         private void Act(Func<bool> action)
         {
             if (locked) return; int start = engine.State.events.Count;
@@ -347,16 +194,30 @@ namespace FantasyCards.Presentation
         }
         private IEnumerator AnimateAndContinue(int start)
         {
-            locked = true; ShowBattle(); var events = engine.State.events.Skip(start).ToArray();
-            foreach (var e in events)
+            locked = true; ShowBattle();
+            var recorded = engine.State.events.Skip(start)
+                .Where(item => item.kind == "coin" || item.kind == "damage" || item.kind == "play" || item.kind == "spell" || item.kind == "upkeep").ToArray();
+            // Keep a long clash responsive. Every core event remains in the battle
+            // record; the animation highlights its opening and final outcomes.
+            var highlights = recorded.Length <= 18 ? recorded : recorded.Take(9).Concat(recorded.Skip(recorded.Length - 9)).ToArray();
+            float duration = Mathf.Clamp(3f / Mathf.Max(1, highlights.Length), .16f, .48f);
+            foreach (var item in highlights)
             {
-                if (e.kind != "coin" && e.kind != "damage" && e.kind != "play" && e.kind != "declare") continue;
-                ShowEffect(e.text, e.kind == "coin" ? gold : teal);
-                if (audioSource != null) audioSource.PlayOneShot(e.kind == "coin" ? coinSound : playSound);
-                float duration = e.kind == "coin" ? .55f : .3f;
+                bool coin = item.kind == "coin";
+                ShowEffect(item.text, coin ? gold : teal, coin, item.amount);
+                if (audioSource != null) audioSource.PlayOneShot(coin ? coinSound : playSound, coin ? .7f : .65f);
+                var rect = effectObject != null ? effectObject.GetComponent<RectTransform>() : null;
+                var opacity = effectObject != null ? effectObject.AddComponent<CanvasGroup>() : null;
                 for (float t = 0; t < duration; t += Time.unscaledDeltaTime)
                 {
-                    if (effectLabel != null) effectLabel.transform.localScale = Vector3.one * (1f + .04f * Mathf.Sin(t / duration * Mathf.PI));
+                    float progress = Mathf.Clamp01(t / duration), ease = 1 - Mathf.Pow(1 - progress, 3);
+                    if (rect != null) rect.anchoredPosition = Vector2.up * Mathf.Lerp(-9, 0, ease);
+                    if (opacity != null) opacity.alpha = Mathf.Clamp01(progress * 6) * Mathf.Clamp01((1 - progress) * 7);
+                    if (effectCoin != null)
+                    {
+                        float flip = Mathf.Abs(Mathf.Cos(progress * Mathf.PI * 3));
+                        effectCoin.localScale = new Vector3(Mathf.Lerp(.12f, 1, progress < .78f ? flip : Mathf.SmoothStep(0, 1, (progress - .78f) / .22f)), 1, 1);
+                    }
                     yield return null;
                 }
             }
@@ -365,81 +226,40 @@ namespace FantasyCards.Presentation
         private void PumpAi()
         {
             if (locked || !battleScreen || engine.State.phase == BattlePhase.Complete) return;
-            var s = engine.State; bool aiAction = s.phase == BattlePhase.BlockResponse ? s.activePlayer == 0 : s.activePlayer == 1;
+            var s = engine.State; bool aiAction = engine.PreparingPlayer == 1;
             if (!aiAction) return;
             int start = s.events.Count; if (BattleAi.Step(engine, 1, out message)) { Save(); StartCoroutine(AnimateAndContinue(start)); }
         }
-        private string Hint()
-        {
-            var s = engine.State;
-            if (s.phase == BattlePhase.BlockResponse && s.activePlayer == 1) return "방어 대응: 준비된 아군을 선택해 가로막거나 ‘가로막지 않기’를 선택하세요.";
-            if (s.activePlayer == 1) return DemoCatalog.GetLeader(s.players[1].leaderId).name + "의 차례입니다.";
-            if (s.phase == BattlePhase.AttackDeclaration) return "공격할 아군 → 적 유닛 또는 적 서약자를 선택하세요. 공격하지 않은 유닛은 다음 상대 턴에 방어할 수 있습니다.";
-            return "지형은 턴당 한 장. 자원은 남아 다음 턴에 이어집니다. 준비를 마치면 공격 단계로 이동하세요.";
-        }
-        private void ShowEffect(string text, Color color)
+        private void ShowEffect(string text, Color color, bool coin = false, int result = 0)
         {
             if (effectObject != null) Destroy(effectObject);
-            var panel = Panel(root, .27f, .45f, .79f, .60f, new Color(.025f, .04f, .075f, .98f)); effectObject = panel.gameObject;
-            effectLabel = Text(panel, text, .04f, .10f, .96f, .90f, 32, color, TextAlignmentOptions.Center);
+            effectCoin = null;
+            var panel = Panel(root, .245f, .43f, .755f, .61f, new Color(.025f, .035f, .075f, .985f)); effectObject = panel.gameObject;
+            Frame(panel, new Color(color.r, color.g, color.b, .8f), 1.7f);
+            if (coin)
+            {
+                var holder = Panel(panel, .025f, .13f, .155f, .87f, Color.clear);
+                effectCoin = Panel(holder, 0, 0, 1, 1, result > 0 ? gold : new Color(.46f, .54f, .67f));
+                effectCoin.GetComponent<UiRoundedImage>().Radius = 1000;
+                var fit = effectCoin.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = 1;
+                Text(effectCoin, result > 0 ? "앞" : "뒤", .02f, .02f, .98f, .98f, 25, ink, TextAlignmentOptions.Center);
+                Frame(effectCoin, ivory, 2);
+            }
+            effectLabel = Text(panel, text, coin ? .18f : .04f, .09f, .96f, .91f, 28, color, TextAlignmentOptions.Center);
         }
         private void ShowResult()
         {
             var s = engine.State;
             var shade = Panel(root, 0, 0, 1, 1, new Color(.01f, .02f, .04f, .73f)); shade.GetComponent<Image>().raycastTarget = true;
             var panel = Panel(root, Compact ? .10f : .275f, Compact ? .16f : .30f, Compact ? .90f : .79f, Compact ? .84f : .77f, new Color(.025f, .045f, .085f, .99f));
-            Frame(panel, gold, 1);
+            Frame(panel, gold, 1); panel.gameObject.AddComponent<UiPanelEntrance>();
             string result = s.winner == 0 ? "서약을 지켰습니다" : s.winner == 1 ? "별빛은 다시 떠오릅니다" : "두 서약이 균형을 이루었습니다";
             Text(panel, result, .06f, .66f, .94f, .87f, 42, gold, TextAlignmentOptions.Center);
             Text(panel, (s.winner == 0 ? "승리" : s.winner == 1 ? "패배" : "무승부") + " · " + s.turn + "턴\n지형과 유닛의 균형, 방어에 남길 동료를 다시 생각해 보세요.", .08f, .38f, .92f, .64f, 24, Color.white, TextAlignmentOptions.Center);
             if (s.winner == 0) RecordDemoVictory();
             Button(panel, s.winner == 0 && s.encounterIndex >= 0 && s.encounterIndex < DemoCatalog.Encounters.Length - 1 ? "다음 결투" : "다시 도전", .09f, .10f, .48f, .28f,
                 () => { RestoreDemoSelection(); if (s.winner == 0) selectedEncounter = Mathf.Min(DemoCatalog.Encounters.Length - 1, s.encounterIndex + 1); ShowEncounterSelection(); }, gold, 24, !locked);
-            Button(panel, "리더 · 덱 바꾸기", .53f, .10f, .91f, .28f, () => LeaveBattle(ShowLeaderSelection), teal, 24, !locked);
-        }
-        private void ShowCollection(bool edit)
-        {
-            battleScreen = false; redraw = () => ShowCollection(edit); Clear();
-            Backdrop(true); bool compact = Compact;
-            Text(root, edit ? "나의 서약 · 덱 구성" : "별빛의 기록 · 카드 도감", .04f, .89f, .78f, .98f, 42, ivory);
-            Text(root, edit ? customDeck.Count + " / 24장 · 지형 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Terrain) + " · 유닛 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Unit) + " · 카드당 최대 4장" : "총 " + CardCatalog.All.Length + "종 / 지형 · 유닛 · 마법 · 장비", .04f, .815f, .79f, .88f, 24, gold);
-            Button(root, "타이틀", .83f, compact ? .85f : .90f, .96f, .98f, ShowTitle, slate, 25);
-            for (int i = 0; i < 4; i++)
-            {
-                if (collectionPage * 4 + i >= CardCatalog.All.Length) break;
-                var d = CardCatalog.All[collectionPage * 4 + i]; float left = .045f + i * .238f, right = left + .211f;
-                DrawCard(root, d, left, compact ? .275f : .235f, right, compact ? .785f : .795f, false, () => ShowDetail(d, () => ShowCollection(edit)), true);
-                if (edit)
-                {
-                    Button(root, "-", left, .135f, left + .065f, compact ? .255f : .215f, () => { customDeck.Remove(d.id); ShowCollection(true); }, slate, 34);
-                    Text(root, customDeck.Count(id => id == d.id) + "장", left + .069f, .135f, right - .069f, compact ? .255f : .215f, 28, ivory, TextAlignmentOptions.Center);
-                    Button(root, "+", right - .065f, .135f, right, compact ? .255f : .215f, () => { if (customDeck.Count < 30 && customDeck.Count(id => id == d.id) < 4) customDeck.Add(d.id); ShowCollection(true); }, slate, 34);
-                }
-                else Text(root, "0" + (collectionPage * 4 + i + 1) + "  /  " + CardCatalog.ElementName(d.element), left, .15f, right, .215f, 22, gold, TextAlignmentOptions.Center);
-            }
-            if (edit)
-            {
-                Button(root, "기본 덱 복원", .04f, .012f, .24f, .128f, () => { customDeck.Clear(); customDeck.AddRange(DemoCatalog.GetDeck(selectedDeckId).CopyCards()); ShowCollection(true); }, slate, 23);
-                Button(root, "덱 저장", .255f, .012f, .455f, .128f, () => { SaveDeck(); ShowTitle(); }, gold, 25, ValidDeck(customDeck));
-            }
-            else Text(root, "카드를 선택해 원화와 능력을 확인하세요.", .045f, .015f, .53f, .125f, 23, new Color(.69f, .76f, .83f));
-            Button(root, "이전", .59f, .012f, .72f, .128f, () => { collectionPage--; ShowCollection(edit); }, slate, 25, collectionPage > 0);
-            Text(root, (collectionPage + 1) + " / " + ((CardCatalog.All.Length + 3) / 4), .73f, .015f, .81f, .125f, 26, gold, TextAlignmentOptions.Center);
-            Button(root, "다음", .825f, .012f, .955f, .128f, () => { collectionPage++; ShowCollection(edit); }, slate, 25, (collectionPage + 1) * 4 < CardCatalog.All.Length);
-        }
-        private void ShowDetail(CardDefinition d, Action back)
-        {
-            redraw = () => ShowDetail(d, back); Clear(); Backdrop(true);
-            var portraitFrame = Panel(root, .02f, .047f, .53f, .953f, new Color(.74f, .73f, .92f, .22f));
-            Frame(portraitFrame, new Color(gold.r, gold.g, gold.b, .65f), 1.5f);
-            Artwork(root, d, .025f, .055f, .525f, .945f); // Near-square at 16:9; crop preserves proportions on wider screens.
-            Gradient(root, .39f, .055f, .545f, .945f, Color.clear, ink, true);
-            Text(root, CardCatalog.ElementName(d.element) + " / " + CardCatalog.KindName(d.kind), .565f, .79f, .95f, .88f, 28, gold);
-            Text(root, d.name, .56f, .64f, .965f, .80f, Compact ? 51 : 59, ivory);
-            Panel(root, .565f, .615f, .66f, .619f, gold);
-            Text(root, "비용 " + d.cost + (d.kind == CardKind.Unit ? "     공격 " + d.attack + "     생명 " + d.health + "\n기본 코인 " + (1 + (d.effect == Effect.Coin ? d.magnitude : 0)) + " / 앞면마다 공격 +" + d.coinBonus : ""), .565f, .45f, .95f, .60f, 28, gold);
-            Text(root, d.text + "\n\n" + (d.kind == CardKind.Unit ? "소환한 턴에는 공격하거나 가로막을 수 없습니다. 다음 자신의 턴에 준비됩니다." : d.kind == CardKind.Terrain ? "지형은 전장에 남습니다. 다음 자신의 턴마다 자원을 추가합니다. 남은 자원은 최대 12까지 유지됩니다." : d.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(d) ? "대상을 고르지 않는 마법입니다. 준비 단계에서 선택한 뒤 ‘카드 사용’을 누르면 발동합니다." : "준비 단계에서 선택한 유닛에게 적용합니다. 장비는 유닛당 2개까지 장착할 수 있습니다."), .565f, .225f, .95f, .445f, 25, new Color(.80f, .84f, .88f), TextAlignmentOptions.TopLeft);
-            Button(root, "돌아가기", .565f, .065f, .87f, .195f, back, gold, 28);
+            Button(panel, "아바타 · 덱 바꾸기", .53f, .10f, .91f, .28f, () => LeaveBattle(ShowLeaderSelection), teal, 24, !locked);
         }
         private void ShowTransfer()
         {
@@ -471,31 +291,62 @@ namespace FantasyCards.Presentation
             if (!PersistentSaves.TryLoad(DeckSlot, GameId, 1, CardCatalog.Version, out string payload, out string error)) { message = "기존 덱 저장을 보존했습니다: " + error; return; }
             try { var deck = JsonUtility.FromJson<DeckSave>(payload); if (!ValidDeck(deck.cards)) throw new ArgumentException("덱 구성이 잘못되었습니다."); customDeck.Clear(); customDeck.AddRange(deck.cards); } catch (Exception e) { message = "기존 덱 저장을 보존했습니다: " + e.Message; }
         }
-        private void DrawCard(Transform parent, CardDefinition d, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
+        private void DrawCard(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
         {
-            Color accent = d.element == Element.Dawn ? gold : teal;
+            Color element = ElementColor(card.element), rarity = RarityColor(card.rarity);
             bool small = Compact && canvas.pixelRect.height < 600;
-            var shadow = Panel(parent, x0 - .002f, y0 - .005f, x1 + .002f, y1 - .002f, new Color(.015f, .02f, .07f, .45f));
-            shadow.gameObject.name = "Card soft shadow"; shadow.GetComponent<UiRoundedImage>().Radius = small ? 20 : 27;
-            var panel = Panel(parent, x0, y0, x1, y1, ink); panel.gameObject.name = "Card " + d.id;
-            panel.GetComponent<UiRoundedImage>().Radius = small ? 18 : 24;
+            var shadow = Panel(parent, x0 - .001f, y0 - .004f, x1 + .001f, y1 - .002f, new Color(.006f, .01f, .035f, .55f));
+            shadow.gameObject.name = "Card soft shadow"; shadow.GetComponent<UiRoundedImage>().Radius = small ? 15 : 22;
+            var panel = Panel(parent, x0, y0, x1, y1, ink); panel.gameObject.name = "Card " + card.id;
+            panel.GetComponent<UiRoundedImage>().Radius = small ? 14 : 20;
             panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
-            Artwork(panel, d, .012f, .01f, .988f, .99f);
-            Gradient(panel, .012f, .01f, .988f, .48f, new Color(.01f, .02f, .04f, 1), new Color(.01f, .02f, .04f, 0));
-            Panel(panel, .015f, .01f, .985f, small ? .44f : .345f, new Color(.015f, .025f, .045f, .82f));
-            // Reserve a complete TMP line plus ascender/descender space at 720p as well as 1080p.
-            Text(panel, d.name, .065f, small ? .22f : .158f, .94f, small ? .435f : .338f, Compact ? 30 : 29, ivory);
-            Text(panel, CardCatalog.KindName(d.kind) + (d.kind == CardKind.Unit ? "  /  공격 " + d.attack + "  HP " + d.health : "  /  " + CardCatalog.ElementName(d.element)), .065f, .025f, .94f, small ? .22f : .155f, Compact ? 24 : 22, accent);
-            var cost = Panel(panel, .045f, small ? .73f : .795f, .24f, .965f, new Color(.02f, .04f, .065f, .94f));
-            Text(cost, d.cost.ToString(), .04f, .04f, .96f, .96f, 34, accent, TextAlignmentOptions.Center); Frame(cost, new Color(accent.r, accent.g, accent.b, .75f), 1);
-            Frame(panel, selected ? ivory : new Color(accent.r, accent.g, accent.b, .85f), selected ? 3 : 1.5f);
-            Ornament(panel, new Color(accent.r, accent.g, accent.b, .9f), true);
+            Artwork(panel, card, .015f, .015f, .985f, .985f);
+            Gradient(panel, .01f, .01f, .99f, .58f, new Color(.012f, .018f, .045f, 1), Color.clear);
+            Panel(panel, .015f, .01f, .985f, small ? .43f : .34f, new Color(.015f, .02f, .045f, .85f));
+            Text(panel, card.name, .06f, small ? .22f : .16f, .94f, small ? .43f : .335f, Compact ? 29 : 28, ivory);
+            string stats = card.kind == CardKind.Unit ? "AP " + card.attack + "  DP " + card.defense + "  HP " + card.health : CardCatalog.KindName(card.kind) + " · " + CardCatalog.ElementName(card.element);
+            Text(panel, stats, .06f, .025f, .94f, small ? .22f : .155f, Compact ? 23 : 21, element);
+            if (small && battleScreen)
+            {
+                // The short mobile hand needs a full line of glyph height. Splitting
+                // its old corner pill vertically left both labels below that height.
+                var badge = Panel(panel, .035f, .72f, .965f, .975f, new Color(.015f, .025f, .055f, .96f));
+                badge.gameObject.name = "Hand level soul rarity";
+                Text(badge, "Lv " + card.level, .015f, .02f, .36f, .98f, 24, ivory, TextAlignmentOptions.Center);
+                Text(badge, card.coloredCost + "+" + card.genericCost, .36f, .02f, .77f, .98f, 23, element, TextAlignmentOptions.Center);
+                Text(badge, CardCatalog.RarityCode(card.rarity), .78f, .02f, .985f, .98f, 24, rarity, TextAlignmentOptions.Center);
+                Frame(badge, new Color(rarity.r, rarity.g, rarity.b, .7f), 1);
+            }
+            else
+            {
+                var cost = Panel(panel, .04f, small ? .65f : .73f, .37f, .96f, new Color(.015f, .025f, .055f, .95f));
+                Text(cost, "Lv " + card.level, .04f, .48f, .96f, .97f, 24, ivory, TextAlignmentOptions.Center);
+                Text(cost, card.coloredCost + "+" + card.genericCost, .04f, .025f, .96f, .49f, 23, element, TextAlignmentOptions.Center);
+                Frame(cost, element, 1.2f);
+                var grade = Panel(panel, .60f, small ? .76f : .84f, .96f, .96f, new Color(.015f, .025f, .055f, .94f));
+                Text(grade, CardCatalog.RarityCode(card.rarity), .02f, .03f, .98f, .97f, 24, rarity, TextAlignmentOptions.Center);
+                Frame(grade, new Color(rarity.r, rarity.g, rarity.b, .65f), 1);
+            }
+            Frame(panel, selected ? ivory : rarity, selected ? 3.2f : 1.6f);
+            Ornament(panel, new Color(rarity.r, rarity.g, rarity.b, .8f), true);
             panel.GetComponent<Image>().raycastTarget = true;
-            var button = panel.gameObject.AddComponent<Button>(); button.interactable = interactable; button.onClick.AddListener(() => onClick());
-            BindCardHelp(panel.gameObject, d, () => ShowDetail(d, redraw));
+            var button = panel.gameObject.AddComponent<Button>(); button.interactable = interactable; button.targetGraphic = panel.GetComponent<Image>();
+            button.onClick.AddListener(() => onClick());
+            BindCardHelp(panel.gameObject, card, () => ShowDetail(card, redraw));
+            var hover = panel.GetComponent<UiCardHover>(); hover.HoverScale = 1.035f; hover.HoverLift = 5;
         }
         private void Artwork(Transform parent, CardDefinition d, float x0, float y0, float x1, float y1)
         {
+            if (!string.IsNullOrEmpty(d.artResource) && d.artResource.StartsWith("Art/ClassicCards/", StringComparison.Ordinal))
+            {
+                var original = Resources.Load<Texture2D>(d.artResource);
+                if (original != null)
+                {
+                    // The source card is preserved. Only its common illustration window is sampled by the UI.
+                    ImageFrame(parent, original, new Rect(.13f, .36f, .805f, .56f), x0, y0, x1, y1, new Vector2(.5f, .64f), true);
+                    return;
+                }
+            }
             authoredIllustrations.TryGetValue(d.id, out var sprite);
             sprite = sprite != null ? sprite : Resources.Load<Sprite>(d.artResource);
             if (sprite != null)
@@ -564,7 +415,7 @@ namespace FantasyCards.Presentation
             return b;
         }
         private static void Anchor(RectTransform r, float x0, float y0, float x1, float y1) { r.anchorMin = new Vector2(x0, y0); r.anchorMax = new Vector2(x1, y1); r.offsetMin = r.offsetMax = Vector2.zero; }
-        private static string PhaseName(BattlePhase phase) { switch (phase) { case BattlePhase.Main: return "준비 단계"; case BattlePhase.AttackDeclaration: return "공격 선언"; case BattlePhase.BlockResponse: return "방어 대응"; default: return "결투 종료"; } }
+        private static string PhaseName(BattlePhase phase) { switch (phase) { case BattlePhase.Main: return "공격 준비"; case BattlePhase.DefensePreparation: return "방어 준비"; default: return "결투 종료"; } }
         private void SetupWorld()
         {
             var camera = Camera.main;

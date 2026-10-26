@@ -9,6 +9,13 @@ production=json.loads((ROOT/'Tools/Audio/production.json').read_text())
 report={'status':'passed','checkedUtc':datetime.now(timezone.utc).isoformat(),'scope':'Shipping Ogg decode, musical duration, channel/signal/headroom and loop-edge measurements. Browser interaction and device listening are separate.','generatorSha256':hashlib.sha256((ROOT/'Tools/Audio/compose-soundtracks.py').read_bytes()).hexdigest(),'soundfontSha256':production['soundfontSha256'],'tracks':[]}
 for track in production['tracks']:
  p=ROOT/track['file']
+ generator=ROOT/track.get('generator','Tools/Audio/compose-soundtracks.py')
+ generator_sha=hashlib.sha256(generator.read_bytes()).hexdigest()
+ if 'generatorSha256' in track: assert generator_sha==track['generatorSha256']
+ if 'renderer' in track: assert hashlib.sha256((ROOT/track['renderer']).read_bytes()).hexdigest()==track['rendererSha256']
+ score=ROOT/'Tools/Audio/Scores'/('starlight-overture' if track['game']=='FantasyCards' else 'dawn-on-galilee')
+ assert hashlib.sha256(score.with_suffix('.mid').read_bytes()).hexdigest()==track['midiSha256']
+ if 'scoreJsonSha256' in track: assert hashlib.sha256(score.with_suffix('.json').read_bytes()).hexdigest()==track['scoreJsonSha256']
  meta=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-of','json',str(p)]))['streams'][0]
  data=subprocess.check_output(['ffmpeg','-v','error','-i',str(p),'-f','f32le','-acodec','pcm_f32le','-ar','44100','-ac','2','-'])
  samples=np.frombuffer(data,dtype='<f4').reshape(-1,2)
@@ -20,7 +27,7 @@ for track in production['tracks']:
  assert 90<=duration<=120 and abs(duration-track['seconds'])<.03
  assert np.isfinite(samples).all() and 0.1<peak<.95 and rms>.025
  assert min(windows)>.001 and begin>.001 and end>.001 and seam<.01
- r={'file':track['file'],'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'codec':meta['codec_name'],'sampleRate':44100,'channels':2,'decodedDurationSeconds':round(duration,6),'decodedPeakDbFS':round(20*np.log10(peak),3),'decodedRmsDbFS':round(20*np.log10(rms),3),'minimum100msRmsDbFS':round(20*np.log10(min(windows)),3),'first50msRmsDbFS':round(20*np.log10(begin),3),'last50msRmsDbFS':round(20*np.log10(end),3),'edgeSampleStep':round(seam,8),'clippedSamples':int(np.count_nonzero(np.abs(samples)>=1))}
+ r={'file':track['file'],'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'generator':str(generator.relative_to(ROOT)),'generatorSha256':generator_sha,'codec':meta['codec_name'],'sampleRate':44100,'channels':2,'decodedDurationSeconds':round(duration,6),'decodedPeakDbFS':round(20*np.log10(peak),3),'decodedRmsDbFS':round(20*np.log10(rms),3),'minimum100msRmsDbFS':round(20*np.log10(min(windows)),3),'first50msRmsDbFS':round(20*np.log10(begin),3),'last50msRmsDbFS':round(20*np.log10(end),3),'edgeSampleStep':round(seam,8),'clippedSamples':int(np.count_nonzero(np.abs(samples)>=1))}
  assert r['sha256']==track['sha256']
  report['tracks'].append(r)
 (ROOT/'Tools/Audio/verification.json').write_text(json.dumps(report,indent=2)+'\n')

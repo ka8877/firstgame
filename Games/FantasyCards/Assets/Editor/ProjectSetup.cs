@@ -21,11 +21,6 @@ namespace FirstGame.Editor
         const string Game = "FantasyCards";
         const string AppType = "FantasyCards.Presentation.FantasyCardsApp, FantasyCards.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
-        static readonly string[] CardPages = {
-            "cards-01-terrain", "cards-02-heroes", "cards-03-magic", "cards-04-relics",
-            "cards-05-sanctuaries", "cards-06-forest", "cards-07-tides", "cards-08-celestial",
-            "cards-09-spells", "cards-10-armaments"
-        };
         static bool initializing;
         static ProjectSetup()
         {
@@ -213,8 +208,19 @@ namespace FirstGame.Editor
 
         static void CreateContent()
         {
-            var pages = CardPages
-                .Select(name => ImportIllustration("Assets/Resources/Art/" + name + ".png")).ToArray();
+            const string archive = "Assets/Art/Archive/LegacyCardData";
+            Directory.CreateDirectory(archive);
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            var ids = new HashSet<string>(FantasyCards.Core.CardCatalog.All.Select(card => card.id));
+            foreach (string previousPath in Directory.GetFiles("Assets/Resources/Data/Cards", "*.asset"))
+            {
+                var previous = AssetDatabase.LoadAssetAtPath<FantasyCards.Data.CardAsset>(previousPath);
+                if (previous != null && !ids.Contains(previous.stableId))
+                {
+                    string error = AssetDatabase.MoveAsset(previousPath, archive + "/" + Path.GetFileName(previousPath));
+                    if (!string.IsNullOrEmpty(error)) throw new InvalidOperationException(error);
+                }
+            }
             ImportIllustration("Assets/Resources/Art/title-hero.png");
             ImportIllustration("Assets/Resources/Art/battle-background.png");
             foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)
@@ -228,18 +234,13 @@ namespace FirstGame.Editor
                     asset = ScriptableObject.CreateInstance<FantasyCards.Data.CardAsset>();
                     AssetDatabase.CreateAsset(asset, path);
                 }
-                asset.stableId = definition.id; asset.displayName = definition.name; asset.description = definition.text;
-                asset.kind = definition.kind; asset.element = definition.element; asset.cost = definition.cost;
-                asset.power = definition.attack; asset.health = definition.health; asset.coinBonus = definition.coinBonus;
-                asset.effect = definition.effect; asset.magnitude = definition.magnitude;
-                int index = Array.IndexOf(FantasyCards.Core.CardCatalog.All, definition);
-                var atlas = pages[index / 4]; int cell = index % 4;
-                float sizeX = atlas.width / 2f, sizeY = atlas.height / 2f;
-                var rect = new Rect(cell % 2 * sizeX, (1 - cell / 2) * sizeY, sizeX, sizeY);
-                if (asset.illustration == null || asset.illustration.texture != atlas || asset.illustration.rect != rect)
+                asset.SetDefinition(definition);
+                var texture = ImportIllustration("Assets/Resources/" + definition.artResource + ".png");
+                var rect = new Rect(0, 0, texture.width, texture.height);
+                if (asset.illustration == null || asset.illustration.texture != texture || asset.illustration.rect != rect)
                 {
                     var previous = asset.illustration;
-                    var sprite = Sprite.Create(atlas, rect, new Vector2(.5f, .5f));
+                    var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f));
                     sprite.name = definition.id + " Illustration";
                     AssetDatabase.AddObjectToAsset(sprite, asset); asset.illustration = sprite;
                     if (previous != null && AssetDatabase.GetAssetPath(previous) == path)
@@ -249,6 +250,15 @@ namespace FirstGame.Editor
             }
             if (!File.Exists("Assets/Resources/Data/Rules.asset"))
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<FantasyCards.Data.RuleSetAsset>(), "Assets/Resources/Data/Rules.asset");
+            var rules = AssetDatabase.LoadAssetAtPath<FantasyCards.Data.RuleSetAsset>("Assets/Resources/Data/Rules.asset");
+            if (rules.contentVersion != FantasyCards.Core.CardCatalog.Version)
+            {
+                if (!File.Exists(archive + "/Rules-before-classic.asset"))
+                    AssetDatabase.CopyAsset("Assets/Resources/Data/Rules.asset", archive + "/Rules-before-classic.asset");
+                rules.rules = new FantasyCards.Core.RuleSet();
+                rules.contentVersion = FantasyCards.Core.CardCatalog.Version;
+                EditorUtility.SetDirty(rules);
+            }
         }
 
         static Texture2D ImportIllustration(string path)
@@ -285,21 +295,17 @@ namespace FirstGame.Editor
             var cards = Resources.LoadAll<FantasyCards.Data.CardAsset>("Data/Cards");
             if (cards.Length != FantasyCards.Core.CardCatalog.All.Length || cards.Any(card => card.illustration == null))
                 throw new InvalidOperationException("Each demo card must have its own authored asset and connected illustration.");
-            var pages = CardPages;
             for (int i = 0; i < FantasyCards.Core.CardCatalog.All.Length; i++)
             {
                 var definition = FantasyCards.Core.CardCatalog.All[i];
                 var card = cards.Single(c => c.stableId == definition.id);
-                if (card.displayName != definition.name || card.description != definition.text || card.kind != definition.kind
-                    || card.element != definition.element || card.cost != definition.cost || card.power != definition.attack
-                    || card.health != definition.health || card.coinBonus != definition.coinBonus
-                    || card.effect != definition.effect || card.magnitude != definition.magnitude)
+                if (JsonUtility.ToJson(card.ToDefinition()) != JsonUtility.ToJson(definition))
                     throw new InvalidOperationException("Card authoring data differs from current content: " + definition.id);
-                var texture = Resources.Load<Texture2D>("Art/" + pages[i / 4]);
+                var texture = Resources.Load<Texture2D>(definition.artResource);
                 if (texture == null || card.illustration.texture != texture)
-                    throw new InvalidOperationException("Card illustration is not connected to its atlas page: " + definition.id);
-                var expected = new Rect(i % 2 * texture.width / 2f, (1 - i % 4 / 2) * texture.height / 2f, texture.width / 2f, texture.height / 2f);
-                if (card.illustration.rect != expected) throw new InvalidOperationException("Incorrect atlas cell: " + definition.id);
+                    throw new InvalidOperationException("Original card image is not connected: " + definition.id);
+                if (card.illustration.rect != new Rect(0, 0, texture.width, texture.height))
+                    throw new InvalidOperationException("Original card image bounds changed: " + definition.id);
             }
             if (Resources.Load<Texture2D>("Art/title-hero") == null) throw new InvalidOperationException("Title illustration is missing.");
             foreach (var leader in FantasyCards.Core.DemoCatalog.Leaders)

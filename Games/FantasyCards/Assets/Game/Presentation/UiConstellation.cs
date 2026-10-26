@@ -4,6 +4,7 @@ using UnityEngine.UI;
 namespace FantasyCards.Presentation
 {
     // Small authored vector ornaments; no texture or gameplay randomness is involved.
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class UiConstellation : MaskableGraphic
     {
         public bool CardCorners;

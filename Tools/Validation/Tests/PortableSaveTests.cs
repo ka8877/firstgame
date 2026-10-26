@@ -159,9 +159,9 @@ namespace FirstGame.Validation
         {
             var source = new BattleEngine(seed);
             int steps = 0;
-            while (source.State.phase != BattlePhase.BlockResponse && steps++ < 300)
-                Assert.That(BattleAi.Step(source, source.State.activePlayer, out var error), Is.True, error);
-            Assert.That(source.State.phase, Is.EqualTo(BattlePhase.BlockResponse));
+            while (source.State.phase != BattlePhase.DefensePreparation && steps++ < 300)
+                Assert.That(BattleAi.Step(source, source.PreparingPlayer, out var error), Is.True, error);
+            Assert.That(source.State.phase, Is.EqualTo(BattlePhase.DefensePreparation));
             var path = Path.Combine(Path.GetTempPath(), "firstgame-card-roundtrip-" + Guid.NewGuid().ToString("N"));
             try
             {
@@ -172,7 +172,7 @@ namespace FirstGame.Validation
                 Assert.That(FieldJson.Encode(restored.State), Is.EqualTo(FieldJson.Encode(source.State)));
                 while (source.State.phase != BattlePhase.Complete && steps++ < 2000)
                 {
-                    int actor = source.State.phase == BattlePhase.BlockResponse ? 1 - source.State.activePlayer : source.State.activePlayer;
+                    int actor = source.PreparingPlayer;
                     Assert.That(BattleAi.Step(source, actor, out error), Is.True, error);
                     Assert.That(BattleAi.Step(restored, actor, out error), Is.True, error);
                     BattleEngine.Validate(restored.State);

@@ -14,19 +14,18 @@ from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
 GAMES = {"FantasyCards": "fantasy-cards", "PathOfDawn": "path-of-dawn"}
-# Required complete interaction runs for this release. The separate FantasyCards
-# 1080p run is retained as incomplete: software-rendered input/OCR diagnostics
-# interrupted it after selection/hover checks. Do not count it as a passed run.
+# Required interaction runs. PathOfDawn retains its byte-identical, previously
+# verified player; the classic card player requires fresh evidence.
 REQUIRED_PROFILES = {
     "FantasyCards": ("Desktop720", "Mobile844"),
     "PathOfDawn": ("Desktop720", "Mobile844"),
 }
 GAME_REVISIONS = {
-    "FantasyCards": "expanded-demo-2026-10-23",
+    "FantasyCards": "fm-classic-2026-10-26",
     "PathOfDawn": "fluid-dawn-2026-10-24",
 }
 REPORT_ROOTS = {
-    "FantasyCards": "Artifacts/Validation/VisualWeb",
+    "FantasyCards": "Artifacts/Validation/ClassicCards",
     "PathOfDawn": "Artifacts/Validation/MotionDawn",
 }
 parser = argparse.ArgumentParser(description=__doc__)
@@ -55,8 +54,15 @@ for game, slug in GAMES.items():
             report = json.loads(report_path.read_text())
             if report.get("game") != game or report.get("status") != "passed":
                 raise SystemExit(f"Browser report has not passed: {game}/{profile}")
+            if not report.get("checks") or not all(check.get("passed") for check in report["checks"]):
+                raise SystemExit(f"Every recorded browser check must pass: {game}/{profile}")
             if report.get("revision") != GAME_REVISIONS[game]:
                 raise SystemExit(f"Browser evidence for {GAME_REVISIONS[game]} required: {game}/{profile}")
+            if game == "FantasyCards":
+                required = {"collection_filters", "original_card", "starter_deck", "shuffle", "preparation", "combat", "save_reload"}
+                classic = report.get("classicEvidence", {})
+                if not all(classic.get(key) for key in required):
+                    raise SystemExit(f"Current classic card interactions required: {profile}")
             audio_labels = {window["label"] for window in report.get("audioEvidence", {}).get("windows", [])}
             required_audio = {"before-first-user-gesture", "after-first-user-gesture", "muted", "unmuted",
                               "volume-reduced", "volume-restored", "after-continue-user-gesture"}
@@ -103,6 +109,7 @@ for game, slug in GAMES.items():
                 sequence = report.get("motionSequence", {})
                 if sequence.get("directions") != ["left", "right", "toward", "away"]:
                     raise SystemExit(f"Current real-input motion sequence required: {profile}")
+            if game in ("FantasyCards", "PathOfDawn"):
                 review = report.get("visualReview", {})
                 if (review.get("status") != "approved" or not review.get("reviewer") or
                         not review.get("reviewedUtc")):
@@ -166,9 +173,11 @@ for game, slug in GAMES.items():
     if game == "PathOfDawn":
         shutil.copyfile(project / "Packages/com.inkle.ink-unity-integration/LICENCE.md", notices / "Ink-LICENCE.md")
         shutil.copyfile(ROOT / "Tools/Voice/VOICE-NOTICE.txt", notices / "Voice-NOTICE.txt")
+    else:
+        shutil.copyfile(ROOT / "Tools/Art/ClassicCards/SOURCE-NOTICE.txt", notices / "ClassicCards-SOURCE-NOTICE.txt")
     shutil.copyfile(hero, output / "art" / f"{slug}.png")
 
-files = sorted(p for p in output.rglob("*") if p.is_file())
+files = sorted(p for p in output.rglob("*") if p.is_file() and p.name != ".firstgame-web-output")
 for path in files:
     if path.stat().st_size >= 100_000_000:
         raise SystemExit(f"File exceeds the GitHub file limit: {path.relative_to(output)}")
@@ -181,9 +190,10 @@ manifest = {
     "browserProfiles": ["Desktop720", "Mobile844"] if args.require_browser_reports else [],
     "browserProfilesByGame": REQUIRED_PROFILES if args.require_browser_reports else {},
     "browserReportRootsByGame": REPORT_ROOTS if args.require_browser_reports else {},
-    "reusedBrowserEvidence": ["FantasyCards"] if args.require_browser_reports else [],
+    "reusedBrowserEvidence": ["PathOfDawn"] if args.require_browser_reports else [],
     "incompleteBrowserRuns": [{"game": "FantasyCards", "profile": "Desktop1080",
-        "reason": "Full automated run incomplete due to software-rendered input/OCR diagnostics; not a passed run."}]
+        "revision": "expanded-demo-2026-10-23", "historical": True,
+        "reason": "Previous release's full automated run was incomplete; retained as history, not current evidence."}]
         if args.require_browser_reports else [],
     "sourceCommit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
     "sourceDirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)),

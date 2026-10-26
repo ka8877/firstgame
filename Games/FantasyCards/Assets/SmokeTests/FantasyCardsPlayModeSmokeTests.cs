@@ -47,15 +47,15 @@ namespace FantasyCards.SmokeTests
         {
             Assert.That(UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>(), Is.Not.Null);
             Assert.That(GameObject.Find("StarfallArena"), Is.Not.Null, "The generated arena must be connected to Boot.");
-            SmokeUi.AssertVisibleKorean("별빛의 서약");
+            SmokeUi.AssertVisibleKorean("판타지마스터즈");
             SmokeUi.AssertNoMissingScripts();
             yield return SmokeUi.Capture("FantasyCards", "01-title");
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False);
 
-            yield return SmokeUi.StartDemoBattle();
+            yield return SmokeUi.StartPlayableBattle();
             var initial = ReadBattle();
             Assert.That(initial.players[0].hand.Count, Is.GreaterThan(0));
-            var terrain = initial.players[0].hand.First(c => CardCatalog.Get(c.definitionId).kind == CardKind.Terrain);
+            var terrain = initial.players[0].hand.First(c => CardCatalog.Get(c.definitionId).kind == CardKind.Terrain && SmokeUi.ReadEngine().CanPlay(0, c.instanceId, -1, out _));
             var definition = CardCatalog.Get(terrain.definitionId);
             SmokeUi.Click(definition.name);
             yield return null;
@@ -68,20 +68,22 @@ namespace FantasyCards.SmokeTests
             Assert.That(played.players[0].hand.Count, Is.EqualTo(initial.players[0].hand.Count - 1));
             Assert.That(played.players[0].terrain.Count, Is.EqualTo(initial.players[0].terrain.Count + 1));
             Assert.That(played.players[0].terrain.Last().definitionId, Is.EqualTo(definition.id));
-            Assert.That(played.players[0].Resource(definition.element), Is.EqualTo(initial.players[0].Resource(definition.element) + 1));
+            Assert.That(played.players[0].Resource(definition.element), Is.EqualTo(initial.players[0].Resource(definition.element) + definition.producedColored));
+            Assert.That(played.players[0].genericSoul, Is.EqualTo(initial.players[0].genericSoul + definition.producedGeneric));
+            Assert.That(played.players[0].levelPoints, Is.EqualTo(initial.players[0].levelPoints - definition.landPointCost));
             Assert.That(played.randomState, Is.EqualTo(initial.randomState), "Visual/terrain actions must not consume coin RNG.");
-            Assert.That(SmokeUi.HasText("내 지형  " + definition.name), Is.True, "The visible board did not show the terrain.");
+            Assert.That(SmokeUi.HasText("지형 " + played.players[0].terrain.Count + "/" + played.rules.terrainLimit), Is.True, "The visible board did not show the terrain.");
             var payloadBeforeReload = JsonUtility.ToJson(played);
             yield return SmokeUi.Capture("FantasyCards", "02-terrain-battle");
 
             SmokeUi.Click("타이틀");
             yield return null;
-            SmokeUi.AssertVisibleKorean("별빛의 서약");
+            SmokeUi.AssertVisibleKorean("판타지마스터즈");
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.True);
             yield return SmokeUi.LoadBoot(); // Destroy the app; do not continue using its original in-memory engine.
             SmokeUi.Click("이어하기");
             yield return null;
-            Assert.That(SmokeUi.HasText("내 지형  " + definition.name), Is.True);
+            Assert.That(SmokeUi.HasText("지형 " + played.players[0].terrain.Count + "/" + played.rules.terrainLimit), Is.True);
             SmokeUi.Click("저장"); // Serialize the recreated engine, proving the UI restored live state.
             yield return null;
             Assert.That(JsonUtility.ToJson(ReadBattle()), Is.EqualTo(payloadBeforeReload));
@@ -91,25 +93,52 @@ namespace FantasyCards.SmokeTests
         }
 
         [UnityTest]
+        public IEnumerator UnreadableCurrentSaveReportsFailureAndPreservesOriginalBytes()
+        {
+            // Exercise both a damaged transport envelope and a valid envelope
+            // containing a battle schema this build cannot resume.
+            var incompatible = new BattleEngine(812).State.Copy();
+            incompatible.schemaVersion = 2;
+            Assert.That(PersistentSaves.TrySave(SmokeUi.BattleSlot, SmokeUi.GameId, 1, CardCatalog.Version,
+                JsonUtility.ToJson(incompatible), out var error), Is.True, error);
+            string incompatibleEnvelope = backend.Read(SmokeUi.BattleSlot);
+            for (int example = 0; example < 2; example++)
+            {
+                backend.WriteAtomic(SmokeUi.BattleSlot, example == 0 ? "{incomplete-save-envelope" : incompatibleEnvelope);
+                string original = backend.Read(SmokeUi.BattleSlot);
+                yield return SmokeUi.LoadBoot();
+                Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.True);
+                SmokeUi.Click("이어하기"); yield return null;
+                Assert.That(SmokeUi.HasText("불러오기 실패:"), Is.True, "A failed restore must explain why the saved battle was not resumed.");
+                Assert.That(SmokeUi.FindButton("새로운 결투"), Is.Not.Null);
+                Assert.That(SmokeUi.FindButton("준비 완료"), Is.Null, "Invalid bytes must never become a playable replacement state.");
+                Assert.That(backend.Read(SmokeUi.BattleSlot), Is.EqualTo(original));
+                yield return SmokeUi.LoadBoot();
+                Assert.That(backend.Read(SmokeUi.BattleSlot), Is.EqualTo(original), "A scene reload must also retain the recoverable original file.");
+            }
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        [UnityTest]
         public IEnumerator NewDemoBattlePreservesPreviousVersionSlotByteForByte()
         {
-            const string oldSlot = "fantasy-battle", oldVersion = "starlight-0.1.0";
+            const string oldSlot = "fantasy-battle-demo-v2", oldVersion = "starlight-0.2.0";
             var oldBattle = new BattleEngine(812).State.Copy();
-            oldBattle.schemaVersion = 1; oldBattle.contentVersion = oldVersion;
+            oldBattle.schemaVersion = 2; oldBattle.contentVersion = oldVersion;
             Assert.That(PersistentSaves.TrySave(oldSlot, "starlight-oath", 1, oldVersion,
                 JsonUtility.ToJson(oldBattle), out var error), Is.True, error);
             string oldBytes = backend.Read(oldSlot);
             yield return SmokeUi.LoadBoot();
-            Assert.That(SmokeUi.HasText("이전 체험판 저장은 보관했습니다"), Is.True);
+            Assert.That(SmokeUi.HasText("이전 체험판 저장은 그대로 보관했습니다"), Is.True);
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False, "An old-version slot must not be offered as the new demo save.");
 
             yield return SmokeUi.StartDemoBattle("lyria", "forest", 0);
             SmokeUi.Click("저장");
             yield return null;
             Assert.That(backend.Read(oldSlot), Is.EqualTo(oldBytes), "Starting the new demo must leave the previous save byte-for-byte intact.");
-            Assert.That(backend.Exists("fantasy-battle-demo-v2"), Is.True);
+            Assert.That(backend.Exists("fantasy-battle-classic-v3"), Is.True);
             var fresh = ReadBattle();
-            Assert.That(fresh.schemaVersion, Is.EqualTo(2));
+            Assert.That(fresh.schemaVersion, Is.EqualTo(3));
             Assert.That(fresh.contentVersion, Is.EqualTo(CardCatalog.Version));
             Assert.That(fresh.players[0].leaderId, Is.EqualTo("lyria"));
             Assert.That(fresh.players[0].deckId, Is.EqualTo("forest"));
@@ -124,7 +153,7 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator ContinuingCustomBattlePreservesNewerEditorDeckForTheNextDuel()
         {
-            const string deckSlot = "fantasy-deck-demo-v2";
+            const string deckSlot = "fantasy-deck-classic-v3";
             var deckA = DemoCatalog.GetDeck("forest").cards;
             var deckB = DemoCatalog.GetDeck("tides").cards;
             Assert.That(deckA.OrderBy(id => id), Is.Not.EqualTo(deckB.OrderBy(id => id)));
@@ -181,9 +210,9 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click(DemoCatalog.GetLeader("lyria").name); yield return null;
             SmokeUi.Click("기본 덱 선택"); yield return null;
             SmokeUi.Click(DemoCatalog.GetDeck(starterId).name); yield return null;
-            SmokeUi.Click("리더 선택"); yield return null;
+            SmokeUi.Click("아바타"); yield return null;
             SmokeUi.Click("타이틀"); yield return null;
-            SmokeUi.Click("덱 구성 · 24장"); yield return null;
+            SmokeUi.Click("덱 구성 · 50장"); yield return null;
             SmokeUi.Click("기본 덱 복원"); yield return null;
             SmokeUi.Click("덱 저장"); yield return null;
         }
@@ -194,7 +223,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click(DemoCatalog.GetLeader("lyria").name); yield return null;
             SmokeUi.Click("기본 덱 선택"); yield return null;
             SmokeUi.Click(DemoCatalog.GetDeck(starterId).name); yield return null;
-            SmokeUi.Click("내 편집 덱 사용"); yield return null;
+            SmokeUi.Click("내 편집 덱"); yield return null;
             Assert.That(SmokeUi.FindButton("편집 덱 선택됨"), Is.Not.Null);
             SmokeUi.Click("상대 선택"); yield return null;
             SmokeUi.Click(DemoCatalog.GetEncounter(0).name); yield return null;
@@ -214,7 +243,7 @@ namespace FantasyCards.SmokeTests
         [Serializable] sealed class EditorDeckPayload { public List<string> cards = new List<string>(); }
         static List<string> ReadEditorDeck()
         {
-            Assert.That(PersistentSaves.TryLoad("fantasy-deck-demo-v2", "starlight-oath", 1, CardCatalog.Version,
+            Assert.That(PersistentSaves.TryLoad("fantasy-deck-classic-v3", "starlight-oath", 1, CardCatalog.Version,
                 out var payload, out var error), Is.True, error);
             var deck = JsonUtility.FromJson<EditorDeckPayload>(payload);
             Assert.That(deck, Is.Not.Null);
@@ -224,7 +253,7 @@ namespace FantasyCards.SmokeTests
 
         static BattleState ReadBattle()
         {
-            Assert.That(PersistentSaves.TryLoad("fantasy-battle-demo-v2", "starlight-oath", 1, CardCatalog.Version,
+            Assert.That(PersistentSaves.TryLoad("fantasy-battle-classic-v3", "starlight-oath", 1, CardCatalog.Version,
                 out var payload, out var error), Is.True, error);
             var state = JsonUtility.FromJson<BattleState>(payload);
             Assert.That(state, Is.Not.Null);

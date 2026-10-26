@@ -6,18 +6,27 @@
     {
       "game": "FantasyCards",
       "file": "Games/FantasyCards/Assets/Resources/Audio/starlight-overture.ogg",
-      "title": "starlight-overture",
-      "seconds": 102.857143,
-      "tempo": 112,
-      "bars": 48,
-      "noteCount": 1420,
-      "bytes": 1872938,
-      "sha256": "efe51c1b8f2ed09c7ae007219f230b97c37433c7b4f6066c1340dbb53cbe3a31",
-      "midiSha256": "5ab2a118e8007993d54b2ca9ca430727a7fc42e570f054ef3ca8ec9755d4732b",
-      "peakDbFS": -4.506,
-      "rmsDbFS": -19.969,
-      "loopMethod": "Second complete musical cycle retains ambience tails; dominant-to-tonic cadence, no added silence, 3ms endpoint ramps.",
-      "preview": "/tmp/firstgame-music/starlight-overture-preview.ogg"
+      "title": "recollections-of-starlight",
+      "displayTitle": "별빛의 회상 / Recollections of Starlight",
+      "revision": "fm-classic-2026-10-26",
+      "seconds": 109.090907,
+      "tempo": 88,
+      "bars": 40,
+      "noteCount": 876,
+      "bytes": 1990779,
+      "sha256": "6153a23211c3e9d321dc2316d24cf59af1ca3cac88aaa7be0380513aac1945cd",
+      "midiSha256": "8442ea24ea8a64bc21e30ae8a9804bff0a9b694095fcb70a404efff76b94408b",
+      "scoreJsonSha256": "72d979f1088692752cf10b661baaa52ce74a7a4463f567166a06c4baabe08718",
+      "generator": "Tools/Audio/compose-classic.py",
+      "generatorSha256": "23f082b812ce62926014d01fac975c08e5d1426428b51f5289376ea1acf75cd1",
+      "renderer": "Tools/Audio/compose-soundtracks.py",
+      "rendererSha256": "6c33c0cc4076d3a12f1c25ebe682e9ab8d5331205b091b426ec7c7755d7d759b",
+      "peakDbFS": -5.788,
+      "rmsDbFS": -21.401,
+      "loopMethod": "Second complete cycle retains ambience tails; B7-to-E-minor cadence, no added silence, 3ms endpoint ramps.",
+      "normalization": "55Hz high pass; -19 LUFS target, -1.5dB true-peak ceiling, LRA10 target",
+      "preview": "/tmp/firstgame-classic-music/recollections-of-starlight-preview.ogg",
+      "originalGameAudioUsed": false
     },
     {
       "game": "PathOfDawn",
@@ -35,5 +44,6 @@
       "loopMethod": "Second complete musical cycle retains ambience tails; dominant-to-tonic cadence, no added silence, 3ms endpoint ramps.",
       "preview": "/tmp/firstgame-music/dawn-on-galilee-preview.ogg"
     }
-  ]
+  ],
+  "classicRevision": "fm-classic-2026-10-26"
 }

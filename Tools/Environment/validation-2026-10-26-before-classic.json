@@ -1,0 +1,251 @@
+{
+  "editorVersion": "6000.3.26f1",
+  "editorRevision": "de8167e7440c",
+  "editorModules": {
+    "windows-mono": "Installed",
+    "webgl": "Installed"
+  },
+  "cliVersion": "1.0.0-beta.13",
+  "dotnetSdk": "8.0.426",
+  "blender": "4.3.2",
+  "currentRuntime": {
+    "auth": {
+      "loggedIn": false,
+      "sessionState": "none",
+      "mode": "none",
+      "credentialSource": "none"
+    },
+    "authStatusExitCode": 3,
+    "authReady": false,
+    "authBlocker": "No current Unity CLI login; account-dependent commands may require sign-in",
+    "license": {
+      "active": true,
+      "signedIn": true,
+      "authMode": "oauth"
+    },
+    "licenseStatusExitCode": 0,
+    "licenseReady": true,
+    "runtimeEditorReady": true,
+    "runtimeReady": true,
+    "runtimeBlocker": null,
+    "diagnosticErrors": [],
+    "evidenceScope": "Historical baseline snapshot; authentication was not revalidated for this movement release. Current editor execution is evidenced separately by the successful native tests and Windows/Web builds."
+  },
+  "cloudStartConfiguration": {
+    "status": "draft saved and reread confirmed identical",
+    "revision": 10,
+    "requiresPublish": true,
+    "freshTaskRestorationVerified": false,
+    "evidenceScope": "Historical setup draft snapshot; this release does not publish or change cloud environment configuration."
+  },
+  "limitations": [
+    "Software GPU only; no target PC or handset performance measurement.",
+    "Actual Windows player, Android/iPhone and Safari have not been run.",
+    "Full browser-process restart and Web-to-Windows save transfer remain unverified.",
+    "Old Pipeline live-connection evidence is dated 2026-10-20, not a current connection claim."
+  ],
+  "date": "2026-10-24",
+  "recordedUtc": "2026-10-24T03:35:14.132767+00:00",
+  "revision": "fluid-dawn-2026-10-24",
+  "dateTimezone": "Asia/Seoul",
+  "baselineRecord": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
+  "gameRevisions": {
+    "FantasyCards": "expanded-demo-2026-10-23",
+    "PathOfDawn": "fluid-dawn-2026-10-24"
+  },
+  "environmentMetadataBaseline": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
+  "previousRelease": "Tools/Environment/validation-2026-10-24-before-fluid-dawn.json",
+  "motionData": {
+    "evidence": "Tools/Art/Painted/motion-fields.json",
+    "sha256": "f624864148cec403e41cafdcd13be11b0356c2b8f5a218271e2606671a7e028c",
+    "originalPngBytesUnchanged": true
+  },
+  "reusedUnchangedEvidence": {
+    "FantasyCards": {
+      "baseline": "Tools/Environment/validation-2026-10-24-before-painted-dawn.json",
+      "native": {
+        "result": "Passed",
+        "total": "26",
+        "passed": "26",
+        "failed": "0",
+        "skipped": "0",
+        "start-time": "2026-10-23 13:21:54Z",
+        "end-time": "2026-10-23 13:22:00Z",
+        "sha256": "a7e4d1255d6f97c9433f8cd3a8e3bf9d207ceeebeda83b6b4b98e3e5b0406eed",
+        "evidence": "Artifacts/TestResults/FantasyCards/EditMode.xml"
+      },
+      "builds": {
+        "FantasyCards/Windows": {
+          "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+          "unityReport": {
+            "Engine": "6000.3.26f1",
+            "Target": "StandaloneWindows64",
+            "Result": "Succeeded",
+            "Bytes": "185135330",
+            "Duration": "00:00:16.5340760",
+            "Errors": "0",
+            "Warnings": "1"
+          },
+          "sha256": "3ef2f5681ea15f2ee9b86555cb6363e30a330691bb4c01677e63732b75f7ca1e"
+        },
+        "FantasyCards/Web": {
+          "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+          "unityReport": {
+            "Engine": "6000.3.26f1",
+            "Target": "WebGL",
+            "Result": "Succeeded",
+            "Bytes": "7343",
+            "Duration": "00:04:04.2656090",
+            "Errors": "0",
+            "Warnings": "4"
+          },
+          "sha256": "7e8a5e9cd338d6f6e66ed28d720c744f61a32bf6e4bd6ab6a3d51d1236d51ce1",
+          "actualPlayerBytes": 83385556,
+          "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json",
+          "filesEvidenceSha256": "f34a162967b270c3a89e34a047dd778412527e293c459ce5df89e7659a86c278"
+        }
+      },
+      "web": {
+        "Desktop720/FantasyCards": {
+          "status": "passed",
+          "checks": 57,
+          "evidence": "Artifacts/Validation/VisualWeb/Desktop720/FantasyCards/report.json",
+          "sha256": "d74f869eadf353420cf355d7e0368e9d1b8a3a83b510162b0dbae17a6916f5d3",
+          "audioWindows": 7,
+          "voiceWindows": 0
+        },
+        "Mobile844/FantasyCards": {
+          "status": "passed",
+          "checks": 62,
+          "evidence": "Artifacts/Validation/VisualWeb/Mobile844/FantasyCards/report.json",
+          "sha256": "f9b7788be29513405e42755d4fa251cfd3fab04b42e0cf1d39efe5821788d789",
+          "audioWindows": 7,
+          "voiceWindows": 0
+        }
+      },
+      "publicWeb": {
+        "status": "passed",
+        "checks": 69,
+        "evidence": "Artifacts/Validation/PublicWeb/Mobile844/FantasyCards/report.json",
+        "sha256": "14b08da3d43004ee293802c236a5bf370b0b8b21481f96e0768e0cec99406a8a",
+        "audioWindows": 7,
+        "voiceWindows": 0
+      }
+    },
+    "externalCore": {
+      "passed": 79,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "Artifacts/TestResults/Core/core-tests.trx",
+      "sha256": "44b683865ed6426f65aae5cde9beb23558d846649ce70e10c2b8ca0e6fccf8d3"
+    },
+    "reason": "FantasyCards, narrative Core and Shared sources are unchanged from b95b885f. Runtime file hashes are checked again by stage-site.py."
+  },
+  "nativeTests": {
+    "PathOfDawn": {
+      "result": "Passed",
+      "total": "17",
+      "passed": "17",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-24 03:04:12Z",
+      "end-time": "2026-10-24 03:04:13Z",
+      "evidence": "Artifacts/TestResults/PathOfDawn/EditMode.xml",
+      "sha256": "c5a7f85e00eee909493b1c2365791b3afdbfa54b8c9802052489634ff7cfe2b4"
+    }
+  },
+  "builds": {
+    "PathOfDawn/Windows": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "172592107",
+        "Duration": "00:00:11.7920330",
+        "Errors": "0",
+        "Warnings": "1"
+      },
+      "sha256": "562b0e263d4a4ca1b958160485d843a75f9e4fbcd93ffc2c5edf43ddc868b92a"
+    },
+    "PathOfDawn/Web": {
+      "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+      "unityReport": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7333",
+        "Duration": "00:03:38.9144070",
+        "Errors": "0",
+        "Warnings": "4"
+      },
+      "sha256": "d40806f0033d7e51ab2f3b07838eb5ebf414b33a7c3e5c5b1dd492f3e7bd75cb",
+      "actualPlayerBytes": 58605048,
+      "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
+    }
+  },
+  "web": {
+    "Desktop720": {
+      "status": "passed",
+      "checks": 53,
+      "evidence": "Artifacts/Validation/MotionDawn/Desktop720/PathOfDawn/report.json",
+      "sha256": "e414d95ef47e39adebe2b4039ee35789a18e445597750910f3d23a9f60448dea",
+      "audioWindows": 7,
+      "voiceWindows": 5,
+      "visualReview": "approved"
+    },
+    "Mobile844": {
+      "status": "passed",
+      "checks": 55,
+      "evidence": "Artifacts/Validation/MotionDawn/Mobile844/PathOfDawn/report.json",
+      "sha256": "2b0561d0d78fb9947dfb2464ad0ba30f0f9805016d288d83e925e10f40812c8a",
+      "audioWindows": 7,
+      "voiceWindows": 5,
+      "visualReview": "approved"
+    }
+  },
+  "incompleteBrowserRuns": [
+    {
+      "game": "FantasyCards",
+      "profile": "Desktop1080",
+      "status": "incomplete",
+      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json",
+      "sha256": "a879d797207f4a38cb2c79ac9bbb10d5f0bf69b09840d7cde5a3965b25755a67",
+      "reason": "Full automated run interrupted by software-rendered input/OCR diagnostics; earlier partial successes do not establish a full pass."
+    }
+  ],
+  "motionBrowserHistory": [
+    {
+      "report": "Artifacts/Validation/MotionDawn/Desktop720/PathOfDawn.previous-20261024T032045694471Z/report.json",
+      "status": "failed",
+      "reason": "Preserved original browser attempt; see its checks and failure detail."
+    }
+  ],
+  "assetAudit": {
+    "status": "passed",
+    "evidence": "Artifacts/Validation/MotionDawn/asset-audit.json",
+    "sha256": "8d9a5d9f9c9fa76e69496d04fbb0988ed8a58779a015eedd792d4d16c26be93f",
+    "metaCounts": {
+      "FantasyCards": 188,
+      "PathOfDawn": 326
+    }
+  },
+  "publicWeb": {
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 61,
+      "evidence": "Artifacts/Validation/MotionDawn/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "b221bab795b171c68b9ae027b6c04e69aff126f20f23c0126095a7a69efb46e8",
+      "audioWindows": 7,
+      "voiceWindows": 5,
+      "visualReview": "approved"
+    }
+  },
+  "publication": {
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40058545139",
+    "sourceCommit": "92bfbc71c8dd1f5dd74af17714750753e0110d1f",
+    "verifiedFiles": 23
+  }
+}

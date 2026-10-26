@@ -48,7 +48,8 @@ namespace FirstGame.Editor
                 File.WriteAllText(Path.Combine(output, "BuildEvidence.txt"),
                     "Engine: " + Application.unityVersion + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
-                    "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");
+                    "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings +
+                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }

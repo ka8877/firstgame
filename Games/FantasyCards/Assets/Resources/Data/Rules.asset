@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: Rules
   m_EditorClassIdentifier: FantasyCards.Data::FantasyCards.Data.RuleSetAsset
   rules:
-    deckSize: 24
-    startingHealth: 18
-    openingHand: 5
-    handLimit: 9
-    unitLanes: 3
-    terrainLimit: 6
-    terrainPerTurn: 1
-    maximumResource: 12
+    deckSize: 50
+    startingHealth: 50
+    openingHand: 6
+    handLimit: 6
+    unitLanes: 5
+    terrainLimit: 10
+    terrainPerTurn: 10
+    maximumResource: 50
     maximumTurns: 60
-    guaranteeOpeningElements: 1
+    guaranteeOpeningElements: 0
     defenderStrikesBack: 1
-    baseCoins: 1
+    baseCoins: -1
     coinOrder: 0
-    damageOrder: 0
+    damageOrder: 1
+    victoryRule: 0
+  contentVersion: fm-classic-0.1.0

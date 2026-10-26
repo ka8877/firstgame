@@ -7,6 +7,7 @@ namespace FantasyCards.Data
     public sealed class RuleSetAsset : ScriptableObject
     {
         public RuleSet rules = new RuleSet();
+        public string contentVersion;
         public RuleSet CreateRuntimeRules() { rules.Validate(); return rules.Copy(); }
     }
 }

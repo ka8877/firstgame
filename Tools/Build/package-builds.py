@@ -17,9 +17,10 @@ for game in ("FantasyCards", "PathOfDawn"):
                   if target == "Windows" else
                   "폴더 전체를 HTTP 웹 서버에 올리고 index.html을 여세요. 파일을 직접 여는 file:// 실행은 지원하지 않습니다.\n"
                   "Python이 있으면 이 폴더에서 python -m http.server 8000 --bind 127.0.0.1 로 로컬 서버를 시작할 수 있습니다.\n")
-        controls = ("캐릭터·기본 덱·체험전을 선택하고, 덱을 섞은 뒤 시작 손패를 교체할 수 있습니다.\n"
-                    "마우스: 카드 선택·배치·공격·방어. 카드와 기능에 마우스를 올리면 설명을 확인합니다.\n"
-                    "리더 초상에서 기술을 사용합니다. 화면의 저장/이어하기와 저장 내보내기/가져오기를 사용합니다.\n"
+        controls = ("아바타·50장 기본 덱·체험전을 선택합니다. 도감에서 속성·종류·비용·등급으로 카드를 찾습니다.\n"
+                    "지형은 LP로, 유닛·마법·장비는 색 소울과 총소울로 전개합니다. 각 준비에서 카드 사용 전 전체 손패를 한 번 셔플할 수 있습니다.\n"
+                    "5칸 전열에 카드를 놓고 준비 완료를 누르세요. 양측 준비 뒤 배치 순서대로 전투하며 직접 공격은 레벨만큼 덱을 소각합니다.\n"
+                    "카드에 마우스를 올리거나 상세 보기를 누르면 능력·등급·원본 카드를 확인합니다. 저장/이어하기와 저장 내보내기/가져오기를 제공합니다.\n"
                     if game == "FantasyCards" else
                     "WASD/화살표: 이동. 오른쪽 마우스: 풍경 둘러보기. E: 대화/조사. M: 기억/회귀. Esc: 설정.\n"
                     "휴대폰 가로 화면: 왼쪽 이동 패드, 오른쪽 풍경 드래그, 화면의 대화/기억/설정 버튼.\n")
@@ -48,6 +49,10 @@ for game in ("FantasyCards", "PathOfDawn"):
                 (project / "Packages/com.inkle.ink-unity-integration/LICENCE.md").read_bytes())
             (notices / "Voice-NOTICE.txt").write_bytes(
                 (root / "Tools/Voice/VOICE-NOTICE.txt").read_bytes())
+        else:
+            (notices / "ClassicCards-SOURCE-NOTICE.txt").write_bytes(
+                (root / "Tools/Art/ClassicCards/SOURCE-NOTICE.txt").read_bytes())
+            (player / "ClassicRules.md").write_bytes((root / "Docs/FantasyMastersClassic.md").read_bytes())
         files = sorted(path for path in player.rglob("*") if path.is_file()
                        and not any(part.endswith("_DoNotShip") or
                                    part.endswith("_BackUpThisFolder_ButDontShipItWithYourGame")

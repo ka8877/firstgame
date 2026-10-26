@@ -49,7 +49,7 @@ bash Tools/Build/unity-task.sh PathOfDawn web
 
 ## 입력과 저장
 
-- 별빛의 서약: 카드를 클릭해 선택 → 지형 전개 또는 전장 칸 → 공격 단계에서 공격자와 대상 → 방어 단계에서 방어 유닛 또는 가로막지 않기. 상세 보기, 덱 구성, 저장/이어하기, 재도전은 화면 버튼으로 진행한다.
+- 판타지마스터즈 체험판: 아바타·50장 덱·상대 선택 → 6장 손패 확인/전체 셔플 → 지형·유닛·마법 배치 → 공격 준비 완료 → 상대 방어 준비와 자동 공방 → 자신의 방어 준비. 상세 보기, 덱 구성, 저장/이어하기, 재도전은 화면 버튼으로 진행한다.
 - 새벽의 길: WASD/화살표로 화면 기준 이동, 오른쪽 마우스 드래그로 제한된 장면 이동, E 대화·조사·다음 대사, M 기억·회귀, Esc 설정. 모바일 왼쪽 패드와 오른쪽 장면 드래그도 같은 원칙을 따른다. 게임패드 입력도 바인딩돼 있으며 실제 검증 여부는 별도 기록한다.
 - Windows 저장: `Application.persistentDataPath/Saves`. UTF-8 JSON envelope와 SHA-256, 버전, 안정 콘텐츠 ID를 사용하고 이전 파일은 `.backup`에 보존한다.
 - Web 저장: Unity PlayerPrefs/IndexedDB. 브라우저 origin마다 별도 저장이고 브라우저 데이터 삭제 시 사라질 수 있으므로 내보내기를 제공한다.
@@ -64,7 +64,7 @@ Windows는 URP renderScale 1.0, HDR, shadow2048/40m; Web은 renderScale0.8, LDR,
 
 Windows 1080p60은 목표이며 실제 Windows 하드웨어에서 측정해야 한다. Linux의 llvmpipe는 소프트웨어 렌더러이므로 실제 성능 목표의 근거로 사용하지 않는다. Blender 렌더와 Unity 실행 캡처는 별도 분류한다.
 
-Web 플레이어는 `file://`로 열지 않고 HTTP 서버에서 실행한다. 포함된 `FirstGame` WebGL 템플릿은 16:9 화면을 창 크기에 맞추고 실제 로딩 진행과 오류를 표시한다. 내부 브라우저 검증은 `python3 Tools/Validation/web-smoke.py --tessdata /workspace/tools/tesseract-best`로 실행하며, 브라우저·한글 OCR 도구가 설치된 이 클라우드에서 사용한다. 검증 스크립트가 임시 로컬 서버를 시작하고 종료한다.
+Web 플레이어는 `file://`로 열지 않고 HTTP 서버에서 실행한다. 포함된 `FirstGame` WebGL 템플릿은 16:9 화면을 창 크기에 맞추고 실제 로딩 진행과 오류를 표시한다. 카드 최신 브라우저 검증은 [classic-cards-browser-validation.md](classic-cards-browser-validation.md)의 전용 도구로, 서사 검증은 `Tools/Validation/web-smoke.py`와 움직임 검증 도구로 실행하며, 브라우저·한글 OCR 도구가 설치된 이 클라우드에서 사용한다. 검증 스크립트가 임시 로컬 서버를 시작하고 종료한다.
 
 두 대상 빌드가 모두 성공한 뒤 `python3 Tools/Build/package-builds.py`를 실행하면 게임별 Windows/Web ZIP과 SHA-256 목록을 `Artifacts`에 만든다. 각 플레이어 ZIP에는 첫 플레이 안내와 검증 기록도 포함한다. `python3 Tools/Build/export-source.py`는 캐시·빌드 결과를 제외하고 실제 LFS 에셋을 포함한 Unity 소스 ZIP을 만든다. 저장소에 인증 파일을 넣지 않는다. 플랫폼 빌드와 원본 소스 ZIP은 서로 다른 산출물이다.
 

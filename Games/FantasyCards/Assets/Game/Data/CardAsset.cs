@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace FantasyCards.Data
 {
-    [CreateAssetMenu(menuName = "별빛의 서약/카드 제작 데이터")]
+    [CreateAssetMenu(menuName = "판마 체험/카드 제작 데이터")]
     public sealed class CardAsset : ScriptableObject
     {
+        // The complete classic definition is serialized together, including each
+        // AP/DP/HP coin expression and its original database provenance.
+        public CardDefinition classicDefinition;
         public string stableId;
         public string displayName;
         [TextArea] public string description;
@@ -18,6 +21,20 @@ namespace FantasyCards.Data
         public Effect effect;
         [Min(0)] public int magnitude;
         public Sprite illustration;
-        public CardDefinition ToDefinition() { return new CardDefinition(stableId, displayName, description, kind, element, cost, power, health, coinBonus, effect, magnitude); }
+        public void SetDefinition(CardDefinition definition)
+        {
+            classicDefinition = Copy(definition);
+            stableId = definition.id; displayName = definition.name; description = definition.text;
+            kind = definition.kind; element = definition.element; cost = definition.cost;
+            power = definition.attack; health = definition.health; coinBonus = definition.coinBonus;
+            effect = definition.effect; magnitude = definition.magnitude;
+        }
+        public CardDefinition ToDefinition()
+        {
+            return classicDefinition != null && !string.IsNullOrEmpty(classicDefinition.id)
+                ? Copy(classicDefinition)
+                : new CardDefinition(stableId, displayName, description, kind, element, cost, power, health, coinBonus, effect, magnitude);
+        }
+        static CardDefinition Copy(CardDefinition definition) => JsonUtility.FromJson<CardDefinition>(JsonUtility.ToJson(definition));
     }
 }
