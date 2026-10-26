@@ -2,7 +2,7 @@
 
 기록: 2026-10-26 Asia/Seoul. 카드 `fm-remaster-2026-10-26`, 성경 여정 `gospel-remaster-2026-10-26`. 현재 원본 근거의 통과 상태·파일 SHA-256을 확인한 뒤 생성했다.
 
-새 개편판의 공개 URL 검증은 대기 중이다. 아래 로컬 통과를 공개 배포 통과로 표시하지 않는다.
+[공개 테스트](https://ka8877.github.io/firstgame/) · [Pages 실행](https://github.com/ka8877/firstgame/actions/runs/40335119623) · 공개 파일 29개 SHA-256 일치 · 배포 원본 `bc6763d007e012f359f81b9e0fd449a53cc888be`.
 
 ## 현재 실행 구간
 
@@ -22,6 +22,8 @@
 | Desktop720/PathOfDawn | 45 / 45 | 13 | PCM 관찰 5구간 |
 | Mobile844/FantasyCards | 62 / 62 | 20 | 공식 공급자 재생 확인 |
 | Mobile844/PathOfDawn | 47 / 47 | 13 | PCM 관찰 5구간 |
+| PublicMobile844/FantasyCards | 67 / 67 | 20 | 공식 공급자 재생 확인 |
+| PublicMobile844/PathOfDawn | 53 / 53 | 13 | PCM 관찰 5구간 |
 
 Desktop720은 Chromium1280×720, Mobile844는 터치 에뮬레이션844×390이다. 원본 캡처의 명시적 직접 검토가 게임 상태 확인을 보완하며 canvas 로드만으로 통과시키지 않는다. FM의 공식 플레이어 재생 상태·실제 track ID·진행 시간을 검증한 경우에만 공급자 재생 확인으로 표시한다. 외부 서비스 오류가 있으면 그대로 미확인으로 남긴다. Gospel PCM 관찰과 공급자 재생 확인 모두 물리 스피커 청취를 대신하지 않는다.
 

@@ -26,7 +26,7 @@ for game in ("FantasyCards", "PathOfDawn"):
                   if target == "Windows" else
                   "폴더 전체를 HTTP 웹 서버에 올리고 index.html을 여세요. 파일을 직접 여는 file:// 실행은 지원하지 않습니다.\n"
                   "Python이 있으면 이 폴더에서 python -m http.server 8000 --bind 127.0.0.1 로 로컬 서버를 시작할 수 있습니다.\n")
-        controls = ("게임 시작 → 연습방 → 덱 선택 → START. 50장 덱과 6장 손패, 오른쪽 Shuffle/Ready를 사용합니다.\n"
+        controls = ("게임 시작 → 연습방 → 덱 선택 → START. 50장 덱과 6장 손패, 오른쪽 손패 셔플/준비 완료를 사용합니다.\n"
                     "기록 / 메뉴에서 저장하며 대기실의 저장 옮기기로 다른 기기에 전송할 수 있습니다.\n"
                     "웹 원작 음악은 SOUND-I 공식 플레이어에서 인터넷으로 재생합니다. PC 빌드에 다른 곡을 원곡으로 넣지 않았습니다.\n"
                     if game == "FantasyCards" else
