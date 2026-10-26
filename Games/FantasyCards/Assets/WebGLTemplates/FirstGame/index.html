@@ -9,8 +9,8 @@
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; background: #080d14; }
-    body { display: grid; place-items: center; }
-    #unity-container { position: relative; width: min(100vw, 177.777778vh); height: min(100vh, 56.25vw); background: radial-gradient(ellipse at 50% 20%, #353859, #11182b 70%); }
+    body { display: grid; grid-template-rows: 1fr 44px; place-items: center; }
+    #unity-container { position: relative; width: min(100vw, calc(177.777778vh - 78.222222px)); height: min(calc(100vh - 44px), 56.25vw); background: #181712; }
     #unity-canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; -webkit-user-select: none; user-select: none; }
     #unity-loading-bar { position: absolute; inset: 0; display: grid; place-content: center; gap: 20px; padding: 24px; text-align: center; background: radial-gradient(ellipse at 50% 20%, #353859, #11182b 70%); }
     #unity-loading-bar h1 { margin: 0; color: #e7cb88; font-weight: 500; font-size: clamp(20px, 3vw, 40px); }
@@ -26,7 +26,15 @@
     #orientation-guide button { min-height: 48px; border: 1px solid #bba36e; border-radius: 24px; background: #e5d2a5; color: #142027; padding: 12px 24px; font: inherit; cursor: pointer; }
     #orientation-guide .secondary { background: transparent; color: #e5d2a5; border-color: #58606a; }
     @media (pointer: coarse) and (orientation: portrait) { #orientation-guide:not([hidden]) { display: grid; } }
-    @supports (height: 100dvh) { #unity-container { width: min(100vw, 177.777778dvh); height: min(100dvh, 56.25vw); } }
+    #fm-music { width: 100%; height: 44px; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 12px; color: #dbca9b; background: #171612; border-top: 1px solid #776144; font-size: 12px; }
+    #fm-music button, #fm-music summary { cursor: pointer; font: inherit; color: inherit; }
+    #fm-music button { border: 1px solid #8d754b; border-radius: 3px; padding: 6px 10px; background: #383025; }
+    #fm-music details { position: relative; }
+    #fm-music iframe { position: absolute; bottom: 32px; right: 0; width: min(350px, 92vw); height: 166px; border: 1px solid #8d754b; background: #eee; z-index: 8; }
+    #fm-music details:not([open]) iframe { visibility: hidden; }
+    #fm-music a { color: #d2be8d; }
+    @media (max-width: 600px) { #fm-music { gap: 6px; font-size: 10px; padding: 3px; } #fm-music-credit { display: none; } }
+    @supports (height: 100dvh) { #unity-container { width: min(100vw, calc(177.777778dvh - 78.222222px)); height: min(calc(100dvh - 44px), 56.25vw); } }
     [hidden] { display: none !important; }
   </style>
 </head>
@@ -37,10 +45,113 @@
       <h1>{{{ PRODUCT_NAME }}}</h1>
       <p id="loading-label">이야기를 준비하고 있습니다…</p>
       <progress id="unity-progress" max="1" value="0" aria-label="게임 불러오기"></progress>
-      <p style="font-size:12px;opacity:.75">시작 화면을 누르면 배경음악이 함께합니다.</p>
+      <p style="font-size:12px;opacity:.75">아래 원작 BGM 버튼으로 SOUND-I의 공식 음악을 들을 수 있습니다.</p>
     </div>
     <div id="unity-warning" role="alert" aria-live="assertive"></div>
   </main>
+  <footer id="fm-music" aria-label="판타지마스터즈 원작 음악">
+    <button id="fm-music-toggle" type="button">원작 BGM 켜기</button>
+    <span id="fm-music-status" role="status">로그인 · SOUND-I</span>
+    <details id="fm-player-panel"><summary>공식 플레이어</summary>
+      <iframe id="fm-original-player" title="SOUND-I 판타지마스터즈 공식 음악" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F234910360&amp;auto_play=false&amp;show_artwork=false&amp;visual=false"></iframe>
+    </details>
+    <a id="fm-music-credit" href="https://soundcloud.com/sound-i2/sets/eomgh4mkqbec" target="_blank" rel="noopener noreferrer">SOUND-I 원곡</a>
+  </footer>
+  <script>
+    (function () {
+      "use strict";
+      var tracks = {
+        login: { id: 234910360, label: "로그인" },
+        lobby: { id: 234910359, label: "로비" },
+        deck: { id: 234910362, label: "덱 편집" },
+        battle: { id: 234910353, label: "게임 1" }
+      };
+      var frame = document.getElementById("fm-original-player");
+      var button = document.getElementById("fm-music-toggle");
+      var status = document.getElementById("fm-music-status");
+      var widget = null, ready = false, wanted = false, muted = false, volume = 60;
+      var scene = "login", loadedScene = "login", trackGeneration = 0;
+      function label(suffix) {
+        status.textContent = tracks[scene].label + " · " + suffix;
+        button.textContent = wanted && !muted ? "원작 BGM 끄기" : "원작 BGM 켜기";
+      }
+      function apply() {
+        if (!ready) return;
+        widget.setVolume(muted ? 0 : volume);
+        if (wanted && !muted) widget.play(); else widget.pause();
+      }
+      function loadScene() {
+        if (!ready || loadedScene === scene) { apply(); return; }
+        loadedScene = scene;
+        var generation = ++trackGeneration;
+        label("SOUND-I 불러오는 중");
+        widget.load("https://api.soundcloud.com/tracks/" + tracks[scene].id, {
+          auto_play: false, show_artwork: false, visual: false,
+          callback: function () { if (generation === trackGeneration) apply(); }
+        });
+      }
+      window.FirstGameOriginalMusic = {
+        receive: function (message) {
+          if (!message || !tracks[message.scene]) return;
+          scene = message.scene;
+          muted = message.muted === true;
+          if (Number.isFinite(message.volume)) volume = Math.max(0, Math.min(100, message.volume * 100));
+          label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
+          loadScene();
+        }
+      };
+      button.addEventListener("click", function () {
+        wanted = !wanted || muted; muted = false;
+        label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
+        apply();
+        if (!ready) document.getElementById("fm-player-panel").open = true;
+      });
+      var firstGameGesture = false;
+      function startFromGameGesture(event) {
+        if (firstGameGesture || event.target !== document.getElementById("unity-canvas")) return;
+        firstGameGesture = true; wanted = true;
+        label(ready ? "SOUND-I" : "공식 플레이어 준비 중");
+        apply();
+      }
+      document.addEventListener("pointerdown", startFromGameGesture, true);
+      document.addEventListener("keydown", startFromGameGesture, true);
+      var api = document.createElement("script");
+      api.src = "https://w.soundcloud.com/player/api.js";
+      api.onerror = function () { label("연결 확인 · 공식 플레이어에서 재생"); };
+      api.onload = function () {
+        widget = SC.Widget(frame);
+        widget.bind(SC.Widget.Events.READY, function () {
+          ready = true; label("SOUND-I"); loadScene();
+        });
+        widget.bind(SC.Widget.Events.PLAY, function () {
+          wanted = true;
+          label("SOUND-I 재생 중");
+          status.dataset.playback = "playing";
+          widget.getCurrentSound(function (sound) {
+            if (!sound || !sound.id) return;
+            status.dataset.trackId = String(sound.id);
+            status.dataset.trackTitle = String(sound.title || "");
+            status.dataset.publisher = sound.user ? String(sound.user.username || "") : "";
+          });
+        });
+        widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
+          status.dataset.positionMs = String(Math.round(event.currentPosition || 0));
+        });
+        widget.bind(SC.Widget.Events.PAUSE, function () {
+          status.dataset.playback = "paused";
+          label(wanted && !muted ? "공식 플레이어에서 재생" : "SOUND-I 일시 정지");
+        });
+        widget.bind(SC.Widget.Events.FINISH, function () {
+          if (wanted && !muted) { widget.seekTo(0); widget.play(); }
+        });
+        if (SC.Widget.Events.ERROR) widget.bind(SC.Widget.Events.ERROR, function () {
+          label("공식 플레이어에서 재생");
+          document.getElementById("fm-player-panel").open = true;
+        });
+      };
+      document.body.appendChild(api);
+    }());
+  </script>
   <aside id="orientation-guide" aria-label="모바일 화면 안내">
     <span aria-hidden="true" style="font-size:48px">↻</span>
     <h2>가로로 펼쳐지는 이야기</h2>

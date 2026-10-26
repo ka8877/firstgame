@@ -20,10 +20,15 @@ case "$task" in
   edit-tests|play-tests)
     platform=EditMode
     name=EditMode
-    filter=()
+    filter=(-testFilter "$game.Tests")
     # These editor-only smoke fixtures explicitly enter/exit real PlayMode and
     # operate the UI while keeping save injection out of shipped players.
-    if [[ "$task" == play-tests ]]; then name=PlayModeUI; filter=(-testFilter "$game.SmokeTests"); fi
+    if [[ "$task" == play-tests ]]; then
+      name=PlayModeUI
+      fixture=FantasyCardsRevivalSmokeTests
+      if [[ "$game" == PathOfDawn ]]; then fixture=GospelJourneySmokeTests; fi
+      filter=(-testFilter "$game.SmokeTests.$fixture")
+    fi
     if [[ "$(uname -s)" == Linux && -z "${DISPLAY:-}" ]]; then
       bash "$repository_root/Tools/Environment/start-display.sh"
       source "$repository_root/Tools/Environment/activate-display.sh"

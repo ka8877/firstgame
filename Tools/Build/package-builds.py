@@ -17,21 +17,19 @@ for game in ("FantasyCards", "PathOfDawn"):
                   if target == "Windows" else
                   "폴더 전체를 HTTP 웹 서버에 올리고 index.html을 여세요. 파일을 직접 여는 file:// 실행은 지원하지 않습니다.\n"
                   "Python이 있으면 이 폴더에서 python -m http.server 8000 --bind 127.0.0.1 로 로컬 서버를 시작할 수 있습니다.\n")
-        controls = ("아바타·50장 기본 덱·체험전을 선택합니다. 도감에서 속성·종류·비용·등급으로 카드를 찾습니다.\n"
-                    "지형은 LP로, 유닛·마법·장비는 색 소울과 총소울로 전개합니다. 각 준비에서 카드 사용 전 전체 손패를 한 번 셔플할 수 있습니다.\n"
-                    "5칸 전열에 카드를 놓고 준비 완료를 누르세요. 양측 준비 뒤 배치 순서대로 전투하며 직접 공격은 레벨만큼 덱을 소각합니다.\n"
-                    "카드에 마우스를 올리거나 상세 보기를 누르면 능력·등급·원본 카드를 확인합니다. 저장/이어하기와 저장 내보내기/가져오기를 제공합니다.\n"
+        controls = ("게임 시작 → 연습방 → 덱 선택 → START. 50장 덱과 6장 손패, 오른쪽 Shuffle/Ready를 사용합니다.\n"
+                    "기록 / 메뉴에서 저장하며 대기실의 저장 옮기기로 다른 기기에 전송할 수 있습니다.\n"
+                    "웹 원작 음악은 SOUND-I 공식 플레이어에서 인터넷으로 재생합니다. PC 빌드에 다른 곡을 원곡으로 넣지 않았습니다.\n"
                     if game == "FantasyCards" else
-                    "WASD/화살표: 이동. 오른쪽 마우스: 풍경 둘러보기. E: 대화/조사. M: 기억/회귀. Esc: 설정.\n"
-                    "휴대폰 가로 화면: 왼쪽 이동 패드, 오른쪽 풍경 드래그, 화면의 대화/기억/설정 버튼.\n")
+                    "탄생의 말씀 세 페이지를 읽고 소년 예수님으로 성전 구간을 탐색합니다.\n"
+                    "WASD/화살표 이동, Shift 달리기, 오른쪽 마우스 드래그 카메라, 휠 확대, E 읽기.\n"
+                    "휴대폰 가로 화면에서는 왼쪽 이동 패드와 오른쪽 카메라 패드, 읽기 버튼을 사용합니다.\n"
+                    "성경 기록과 저장/이어하기를 제공합니다. 나머지 생애 장은 준비 중입니다.\n"
+                    "진행은 현재 기기에 저장됩니다. 이전 관찰자 이야기와 별도의 새 여정입니다.\n")
         (player / "README.txt").write_text(
-            f"{game} · 첫 플레이 구간\nUnity 6000.3.26f1\n\n" + launch + controls +
-            "첫 플레이 순서와 서사 분기 안내는 함께 포함한 PlaytestGuide.md를 확인하세요.\n" +
-            "\n애니메이션풍 원화·둥근 UI·배경 음악을 적용한 개발판입니다. 웹 음악은 첫 클릭/터치 뒤 시작합니다.\n"
-            "카드게임은 음악 버튼, 새벽의 길은 설정에서 음악 켜기/끄기와 음량을 조절하세요.\n"
-            "새벽의 길 초반 대사에는 한국어 합성 음성이 포함됩니다. 음성은 설정에서 끄거나 대화 중 다시 들을 수 있습니다.\n"
-            "실제 기기의 음향·성능은 별도 실기 검수 범위입니다.\n"
-            "BuildEvidence.txt는 빌드 결과이며 실제 플랫폼 조작·성능 검증 결과와는 다릅니다.\n",
+            f"{game} · 새 첫 구간\nUnity 6000.3.26f1\n\n" + launch + controls +
+            "\n자세한 플레이 순서와 현재 범위는 PlaytestGuide.md를 확인하세요.\n"
+            "Validation.md는 실제 실행한 검증과 아직 확인하지 않은 기기를 구분합니다.\n",
             encoding="utf-8")
         (player / "PlaytestGuide.md").write_bytes((root / "Docs" / "PlaytestGuide.md").read_bytes())
         (player / "Validation.md").write_bytes((root / "Docs" / "Validation.md").read_bytes())
@@ -45,11 +43,17 @@ for game in ("FantasyCards", "PathOfDawn"):
         (notices / "Music-NOTICE.txt").write_bytes(
             (root / "Tools/Audio/MUSIC-NOTICE.txt").read_bytes())
         if game == "PathOfDawn":
+            (notices / "Scripture-NOTICE.txt").write_bytes((root / "Tools/Data/Gospel/SCRIPTURE-NOTICE.txt").read_bytes())
+            (notices / "Gospel3D-SOURCE-NOTICE.txt").write_bytes((root / "Tools/Art/Gospel3D/SOURCE-NOTICE.txt").read_bytes())
+            (notices / "TempleMaterials-NOTICE.txt").write_bytes((root / "Tools/Art/GospelTemple/LICENSE-NOTICE.txt").read_bytes())
+            (player / "GospelJourney.md").write_bytes((root / "Docs/GospelJourney.md").read_bytes())
             (notices / "Ink-LICENCE.md").write_bytes(
                 (project / "Packages/com.inkle.ink-unity-integration/LICENCE.md").read_bytes())
             (notices / "Voice-NOTICE.txt").write_bytes(
                 (root / "Tools/Voice/VOICE-NOTICE.txt").read_bytes())
         else:
+            (notices / "Revival-SOURCE-NOTICE.txt").write_bytes((root / "Tools/Research/FmRevival/SOURCE-NOTICE.txt").read_bytes())
+            (player / "FmRevival.md").write_bytes((root / "Docs/FmRevival.md").read_bytes())
             (notices / "ClassicCards-SOURCE-NOTICE.txt").write_bytes(
                 (root / "Tools/Art/ClassicCards/SOURCE-NOTICE.txt").read_bytes())
             (player / "ClassicRules.md").write_bytes((root / "Docs/FantasyMastersClassic.md").read_bytes())

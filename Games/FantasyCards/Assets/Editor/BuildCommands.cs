@@ -49,7 +49,7 @@ namespace FirstGame.Editor
                     "Engine: " + Application.unityVersion + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings +
-                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\n");
+                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\nRevision: fm-revival-2026-10-26\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }

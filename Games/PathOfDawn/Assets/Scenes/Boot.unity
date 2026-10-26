@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1000
+--- !u!1 &1659129155
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1001}
-  - component: {fileID: 1002}
+  - component: {fileID: 1659129157}
+  - component: {fileID: 1659129156}
   m_Layer: 0
   m_Name: PathOfDawn Bootstrap
   m_TagString: Untagged
@@ -136,13 +136,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1001
+--- !u!114 &1659129156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659129155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3bbc1f721b4584afea3467a14abfa2, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: PathOfDawn.Presentation::PathOfDawn.Presentation.GospelJourneyApp
+  KoreanFont: {fileID: 11400000, guid: e85340edc59d29de7936817aa3485f02, type: 2}
+--- !u!4 &1659129157
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000}
+  m_GameObject: {fileID: 1659129155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -151,26 +164,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a1bfe4222f5df09c74bdfcccae6908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnvironmentPrefab: {fileID: 0}
-  JesusPrefab: {fileID: 0}
-  TravelerPrefab: {fileID: 0}
-  MiriamPrefab: {fileID: 0}
-  KoreanFont: {fileID: 11400000, guid: e85340edc59d29de7936817aa3485f02, type: 2}
-  Chapter: {fileID: 11400000, guid: 45ab473e2d88e718f8a971ffdb913f6d, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1001}
+  - {fileID: 1659129157}

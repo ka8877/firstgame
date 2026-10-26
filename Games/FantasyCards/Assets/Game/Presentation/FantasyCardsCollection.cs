@@ -24,10 +24,10 @@ namespace FantasyCards.Presentation
 
         private void ShowCollection(bool edit)
         {
-            battleScreen = false; redraw = () => ShowCollection(edit); Clear(); Backdrop(true);
+            battleScreen = false; redraw = () => ShowCollection(edit); Clear(); FmOriginalMusic.SetScene("deck"); Backdrop(true);
             var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + 3) / 4);
             collectionPage = Mathf.Clamp(collectionPage, 0, pages - 1);
-            Text(root, edit ? "나의 서약 · 덱 구성" : "카드 도감 · 모든 속성의 기록", .035f, .90f, .79f, .99f, 40, ivory);
+            Text(root, edit ? "DECK EDITOR · 덱 편집" : "CARD LIST · 카드 도감", .035f, .90f, .79f, .99f, 40, ivory);
             Text(root, edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · 지형 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Terrain) + " · 유닛 " + customDeck.Count(id => CardCatalog.Get(id).kind == CardKind.Unit)
                 : "전체 " + CardCatalog.All.Length + "종 · 조건에 맞는 카드 " + cards.Length + "종", .04f, .835f, .80f, .90f, 23, gold);
             Button(root, "타이틀", .835f, .874f, .965f, .988f, ShowTitle, slate, 24);

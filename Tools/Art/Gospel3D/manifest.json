@@ -1,0 +1,90 @@
+{
+  "revision": "gospel-3d-2026-10-26",
+  "source": "Quaternius Universal Base Characters + Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "resource": "Art/Gospel3D/YoungJesus",
+      "heightMeters": 1.45,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 14565,
+      "triangles": 28250,
+      "meshes": 38,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "YoungJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "YoungJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "YoungJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        }
+      ],
+      "bytes": 4458572
+    },
+    {
+      "name": "AdultJesus",
+      "resource": "Art/Gospel3D/AdultJesus",
+      "heightMeters": 1.78,
+      "forward": "Unity +Z",
+      "rig": "Generic",
+      "bones": 65,
+      "vertices": 15459,
+      "triangles": 29876,
+      "meshes": 40,
+      "clips": [
+        {
+          "name": "Idle",
+          "source": "AdultJesus_Idle",
+          "frames": [
+            1.0,
+            76.0
+          ],
+          "seconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "source": "AdultJesus_Walk",
+          "frames": [
+            1.0,
+            41.0
+          ],
+          "seconds": 1.3333333333333333
+        },
+        {
+          "name": "Run",
+          "source": "AdultJesus_Run",
+          "frames": [
+            1.0,
+            29.0
+          ],
+          "seconds": 0.9333333333333333
+        }
+      ],
+      "bytes": 4635708
+    }
+  ],
+  "renderKind": "Blender art review, not Unity gameplay"
+}

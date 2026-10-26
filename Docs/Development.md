@@ -1,73 +1,90 @@
 # 개발과 실행
 
+현재 진입 경로는 판타지마스터즈의 `fm-revival-2026-10-26` 화면과 예수님의 길 `GospelJourneyApp`이다. 카드의 규칙 콘텐츠는 `fm-classic-0.1.0`, 새 성경 여정은 `gospel-0.1.0`이다. 설계는 [FmRevival](FmRevival.md)·[GospelJourney](GospelJourney.md)·[GospelChronology](GospelChronology.md), 실제 실행 결과는 [Validation](Validation.md)을 따른다.
+
 ## 고정 도구
 
-- Unity 6000.3.26f1 (de8167e7440c), C#.
-- URP 17.3.0, uGUI 2.0.0(TMP 포함), Input System 1.20.1, Cinemachine 3.1.7, Timeline 1.8.13.
-- Unity Test Framework 1.6.0. PathOfDawn의 공식 Ink Unity Integration 2.0.0은 tag commit `a0b734d906a6224050af7c4f39392fd9ba5988fe`의 패키지를 변경 없이 임베드.
-- 선택적 연결: Unity CLI 1.0.0-beta.13, 공식 Codex unity 플러그인 0.1.8-beta, Pipeline 0.8.0-exp.1. CLI/Pipeline 실패 시 지원하는 에디터 메뉴와 배치 실행을 사용한다.
-- Blender 4.3.2, 엔진 독립 테스트용 .NET SDK 8.0.426.
+- Unity **6000.3.26f1 (de8167e7440c)**, C#.
+- URP 17.3.0, uGUI/TMP 2.0.0, Input System 1.20.1, Cinemachine 3.1.7, Timeline 1.8.13, Unity Test Framework 1.6.0. 프로젝트별 `Packages/manifest.json`과 잠금 파일이 실제 기준이다.
+- Blender 4.3.2, 엔진 독립 검증용 .NET SDK 8.0.426.
+- PathOfDawn에 보존된 공식 Ink Unity Integration 2.0.0은 이전 관찰자 서사와 회귀 검사에 사용한다. 현재 성경 여정은 `GospelCatalog`·`GospelJourney`를 사용한다.
+- 선택적 공식 Unity CLI 1.0.0-beta.13과 Pipeline 0.8.0-exp.1이 실패하면 지원하는 에디터 메뉴·배치 빌드를 사용한다.
 
-## Windows 개발 PC
+## 집·회사 개발 PC에서 열기
 
-1. Git과 Git LFS를 설치하고 저장소를 받는다. 이미 클론했으면 저장소 안에서 `git lfs install --local`, `git lfs pull`, `git lfs checkout`을 실행한다. 모델·원화가 작은 텍스트 포인터로 남아 있으면 Unity를 열기 전에 이 명령으로 실제 파일을 받는다.
-2. Unity Hub에서 정확한 에디터 버전과 Windows/WebGL 모듈을 설치하고 본인 계정의 적합한 라이선스를 활성화한다.
-3. Hub의 Add project로 `Games/FantasyCards`, `Games/PathOfDawn`을 각각 등록한다.
-4. 패키지 가져오기가 끝나면 `FirstGame > Prepare First Slice`를 실행한다. 최초 실행 시 자동 초기화도 등록되어 있다. 이 단계가 한국어 TMP atlas, URP renderer, 게임별 표현 자산과 카드/서사 ScriptableObject를 준비한다. 새벽의 길은 그림 가져오기·보행 UV와 이전 모델 프리팹 보존을 포함한다. 생성한 에셋과 `.meta`를 함께 커밋한다.
-5. `Assets/Scenes/Boot.unity`에서 Play. 원본 `.ink`는 공식 v2 importer가 `InkFile`로 가져온다. TextAsset JSON 경로를 별도 추측해 만들지 않는다.
-6. `FirstGame > Validate First Slice`, Test Runner의 EditMode 및 UI smoke 테스트를 실행한다.
-7. `FirstGame > Build Windows` / `Build Web`은 각각 `Artifacts/Builds/<Game>/Windows|Web`에 결과를 쓴다. Windows/WebGL Build Profile은 `Assets/Settings/Build Profiles`에 포함돼 있다. 아래 공식 CLI 명령으로 다시 생성할 수 있다. 위 메뉴와 배치 스크립트가 플랫폼별 URP 품질 설정을 적용한다.
+1. Git과 Git LFS를 설치하고 `ka8877/firstgame`을 클론한다. 기존 클론은 변경 사항을 먼저 보존한 뒤 최신 소스를 받는다. `git lfs install --local`, `git lfs pull`, `git lfs checkout`으로 그림·FBX·글꼴·음원의 실제 파일을 받는다. 작은 LFS 포인터 파일을 모델로 가져오지 않는다.
+2. Unity Hub에 정확한 에디터 버전과 Windows/WebGL 모듈을 설치하고 본인 계정의 적합한 라이선스를 활성화한다. 계정·라이선스 파일을 저장소에 넣지 않는다.
+3. Hub에서 `Games/FantasyCards`, `Games/PathOfDawn`을 각각 추가한다. 서로 다른 두 Unity 프로젝트다.
+4. 패키지 import 후 각 프로젝트의 `FirstGame > Prepare First Slice`를 실행한다. 새벽의 길의 기존 클론에서도 이 명령을 실행해야 이전 관찰자 Boot가 새 `GospelJourneyApp`으로 전환되고 3D 인물·재질·Idle/Walk/Run 컨트롤러와 글꼴을 준비한다.
+5. `Assets/Scenes/Boot.unity`에서 Play한다. 카드는 `게임 시작 → 연습방 → 대전실 → 덱 선택 → START`, 예수님의 길은 `새 여정 → 탄생 말씀 세 페이지 → 성전 탐색`으로 확인한다.
+6. `FirstGame > Validate First Slice`와 현재 규칙·저장·UI 테스트를 수행한다. 생성한 씬·설정·에셋은 `.meta`와 함께 관리하며 `Library`, `Temp`, `Logs`, 빌드 출력은 커밋하지 않는다.
+7. `FirstGame > Build Windows` / `Build Web`으로 게임별 플레이어를 만든다. 출력은 `Artifacts/Builds/<Game>/Windows|Web`이며 빌드 성공과 실제 플레이 검증은 구분한다.
 
-## 현재 Linux 클라우드
+집과 회사에서 소스를 주고받을 때는 작업을 커밋·푸시한 뒤 다른 PC에서 최신 소스와 LFS 파일을 받는다. GitHub 소스 동기화와 게임 안의 진행 저장 동기화는 별도다. 진행 저장 전송 범위는 [첫 플레이 안내](PlaytestGuide.md#저장과-다른-기기에서-플레이)를 따른다.
+
+## Linux 클라우드 명령
+
+아래 명령은 의존 순서대로 실행한다. Unity나 실제 브라우저 검증을 동시에 여러 개 실행하지 않는다.
 
 ```bash
 cd /workspace/firstgame
 source Tools/Environment/activate-shell.sh
-# 새 환경에서 필요한 경우. 인증 상태 출력은 자격 증명 값을 포함하지 않는다.
+# 새 환경에 도구가 없을 때만 설치한다.
 bash Tools/Environment/install.sh
 bash Tools/Validation/run-core-tests.sh
+python3 Tools/Data/Gospel/verify-readings.py
 
 bash Tools/Build/unity-task.sh FantasyCards prepare
 bash Tools/Build/unity-task.sh PathOfDawn prepare
 bash Tools/Build/unity-task.sh FantasyCards edit-tests
 bash Tools/Build/unity-task.sh PathOfDawn edit-tests
-# UI smoke fixtures enter actual PlayMode from the Editor test runner.
 bash Tools/Build/unity-task.sh FantasyCards play-tests
 bash Tools/Build/unity-task.sh PathOfDawn play-tests
 
-bash Tools/Build/unity-task.sh FantasyCards profiles
-bash Tools/Build/unity-task.sh PathOfDawn profiles
 bash Tools/Build/unity-task.sh FantasyCards windows
 bash Tools/Build/unity-task.sh FantasyCards web
 bash Tools/Build/unity-task.sh PathOfDawn windows
 bash Tools/Build/unity-task.sh PathOfDawn web
 ```
 
-`UNITY_EDITOR`로 다른 운영체제의 정확한 에디터 실행 파일을 지정할 수 있다. 공식 CLI의 프로필 생성은 `unity build <project> --create-profile StandaloneWindows64`와 `--create-profile WebGL`이며, 생성 후 `--list-profiles`로 확인한다. 생성하지 못한 프로필을 이미 존재한다고 보고하지 않는다.
+UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어간다. 이전 관찰자 서사·저장 회귀 테스트가 통과한 것을 새 Gospel Boot와 이동 검사로 대신하지 않는다. 성경 검사는 독립된 공식 본문 스냅샷과 C#의 직접 인용을 비교하며 화면·애니메이션의 통과를 뜻하지 않는다. 현재 개정의 네이티브·브라우저 명령과 결과는 최종 검증 기록을 따른다. `classic-cards-smoke.py`·기존 움직임 검증 도구의 이전 UI 좌표와 흐름을 새 시작 화면에 그대로 적용하지 않는다.
 
-각 클라우드 작업은 이미 격리되어 있으므로 기존 체크아웃을 사용한다. 사용자가 명시적으로 요청하지 않으면 Git worktree를 만들지 않는다. 스냅샷에는 파일과 설치 도구가 남지만 에디터·Xvfb·서버 프로세스와 계정/라이선스 세션이 유지된다고 가정하지 않는다.
+다른 운영체제의 정확한 실행 파일은 `UNITY_EDITOR`로 지정한다. 공식 CLI Build Profile을 재생성할 때는 `bash Tools/Build/unity-task.sh <Game> profiles`를 사용하고 실제 생성 여부를 확인한다. 각 작업은 이미 격리된 기존 체크아웃에서 수행하며, 사용자 요청 없이 별도 worktree를 만들지 않는다. 스냅샷의 파일·도구가 남아 있어도 에디터·Xvfb·서버 프로세스와 로그인 세션이 유지된다고 가정하지 않는다.
 
-## 입력과 저장
+## 현재 표현·콘텐츠 경로
 
-- 판타지마스터즈 체험판: 아바타·50장 덱·상대 선택 → 6장 손패 확인/전체 셔플 → 지형·유닛·마법 배치 → 공격 준비 완료 → 상대 방어 준비와 자동 공방 → 자신의 방어 준비. 상세 보기, 덱 구성, 저장/이어하기, 재도전은 화면 버튼으로 진행한다.
-- 새벽의 길: WASD/화살표로 화면 기준 이동, 오른쪽 마우스 드래그로 제한된 장면 이동, E 대화·조사·다음 대사, M 기억·회귀, Esc 설정. 모바일 왼쪽 패드와 오른쪽 장면 드래그도 같은 원칙을 따른다. 게임패드 입력도 바인딩돼 있으며 실제 검증 여부는 별도 기록한다.
-- Windows 저장: `Application.persistentDataPath/Saves`. UTF-8 JSON envelope와 SHA-256, 버전, 안정 콘텐츠 ID를 사용하고 이전 파일은 `.backup`에 보존한다.
-- Web 저장: Unity PlayerPrefs/IndexedDB. 브라우저 origin마다 별도 저장이고 브라우저 데이터 삭제 시 사라질 수 있으므로 내보내기를 제공한다.
-- 게임 내 저장 내보내기/가져오기에서 같은 portable JSON을 Web→Windows로 전송한다. 가져오기는 게임 ID/버전/무결성 및 실제 게임 상태를 검증한 뒤 저장을 바꾼다. 손상되거나 미래 버전인 저장은 자동 초기화하지 않는다.
-- 저장 데이터에는 자격 증명을 포함하지 않는다. 불러오기 실패 원본은 유지하고 명시적 가져오기를 통해 복구한다.
+| 게임 | 현재 실행·제작 기준 |
+|---|---|
+| FantasyCards | `FantasyCardsApp`의 revival 타이틀·로비·대전실·전장. `Resources/Art/Revival`의 원작 GIF 무손실 디코딩 PNG, 원작 카드 96종과 기존 Core |
+| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·Idle/Walk/Run 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
 
-## 품질과 산출물
+일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 새 3D 인물의 재생성과 import 계약은 [Gospel3DArt](Gospel3DArt.md)를 따른다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
-새벽의 길의 현재 시각 경로는 [PaintedDawn.md](PaintedDawn.md)다. `ProjectSetup`은 `Resources/Art/Painted`의 일곱 PNG를 원본 크기·sRGB·무압축·mipmap 없이 가져오고, 입력 알파와 GUID를 보존한다. 투명 경계와 발 위치를 측정한 `layout.json`(전신 영역 4개·보행 프레임 8개)으로 원화를 읽으며 원본 PNG 픽셀은 수정하지 않는다. 이전 3D 프리팹은 `Art/Archive/LegacyModels`에 보존하고 Boot의 모델 필드에서 분리한다. 원화 생성 기록과 이전 FBX 제작 이력을 현재 Unity 화면 검증으로 대신하지 않는다.
+원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 카드 Web은 SOUND-I 공식 SoundCloud 임베드와 장면 브리지를 사용하므로 해당 서비스에 접속할 수 있어야 한다. 플레이어 재생 버튼·음량·장면별 곡 전환을 실제 브라우저에서 확인한다. 네이티브에서는 외부 공식 플레이어 없이 이전 창작곡을 원작곡으로 대체하지 않는다.
 
-Windows는 URP renderScale 1.0, HDR, shadow2048/40m; Web은 renderScale0.8, LDR, shadow1024/20m, texture mip limit1로 별도 빌드한다. Web은 gzip+decompression fallback, 단일 스레드 기본을 사용한다. 핵심 에셋과 한국어 글꼴은 로컬 포함이며 게임 중 생성형 AI API를 호출하지 않는다. 현재 개발 자산·음향과 향후 교체 사양은 ArtDirection을 따른다.
+예수님의 길은 로컬 BGM을 사용하고 브라우저 첫 입력 후 시작한다. 이전 20줄의 창작 대사 음성을 새 성경 본문에 자동 연결하지 않는다. 읽는 구절과 문맥 요약은 분리하며 `성경전서 개역한글판 · 대한성서공회`를 표시한다.
 
-Windows 1080p60은 목표이며 실제 Windows 하드웨어에서 측정해야 한다. Linux의 llvmpipe는 소프트웨어 렌더러이므로 실제 성능 목표의 근거로 사용하지 않는다. Blender 렌더와 Unity 실행 캡처는 별도 분류한다.
+## 입력·저장
 
-Web 플레이어는 `file://`로 열지 않고 HTTP 서버에서 실행한다. 포함된 `FirstGame` WebGL 템플릿은 16:9 화면을 창 크기에 맞추고 실제 로딩 진행과 오류를 표시한다. 카드 최신 브라우저 검증은 [classic-cards-browser-validation.md](classic-cards-browser-validation.md)의 전용 도구로, 서사 검증은 `Tools/Validation/web-smoke.py`와 움직임 검증 도구로 실행하며, 브라우저·한글 OCR 도구가 설치된 이 클라우드에서 사용한다. 검증 스크립트가 임시 로컬 서버를 시작하고 종료한다.
+- 카드: 마우스·터치로 방과 덱을 선택한다. 손패와 전열, 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작한다.
+- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, 우클릭 드래그로 회전, 휠로 거리 조절, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기 버튼이다.
+- 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
+- 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.
+- Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 `저장 옮기기`는 무결성·버전·실제 상태를 검증한 뒤 가져온다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.
+- 손상·미지원 저장의 원본을 지우거나 새 게임으로 조용히 해석하지 않는다. 읽기 중 상태·현재 목표·읽은 말씀·유효한 인물 위치를 함께 복원한다.
 
-두 대상 빌드가 모두 성공한 뒤 `python3 Tools/Build/package-builds.py`를 실행하면 게임별 Windows/Web ZIP과 SHA-256 목록을 `Artifacts`에 만든다. 각 플레이어 ZIP에는 첫 플레이 안내와 검증 기록도 포함한다. `python3 Tools/Build/export-source.py`는 캐시·빌드 결과를 제외하고 실제 LFS 에셋을 포함한 Unity 소스 ZIP을 만든다. 저장소에 인증 파일을 넣지 않는다. 플랫폼 빌드와 원본 소스 ZIP은 서로 다른 산출물이다.
+## 빌드·배포·산출물
 
-해당 개정의 native 테스트와 필수 로컬 브라우저 검증 결과 파일이 준비되면 `python3 Tools/Build/package-evidence.py`로 테스트 XML/TRX, 실제 화면, 빌드 결과, 검증 문서의 묶음을 만든다. 명시한 파일만 포함하며 원시 CLI 로그와 인증 정보는 수집하지 않는다. 결과 파일이 있다는 이유로 검사를 통과했다고 판단하지 않고 각 보고서의 실제 결과를 확인한다.
+Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGame` WebGL 템플릿은 화면 비율·로딩·오류를 표시한다. 한국어 글꼴과 3D/카드 에셋은 로컬에 포함하고, 카드 원작곡만 공식 외부 플레이어에 연결한다. 실행 중 생성형 AI API는 요구하지 않는다.
 
-움직임 보정은 [DawnMotion.md](DawnMotion.md)를 따른다. 일반 클론·Unity 빌드는 커밋된 `traveler-motion.bytes`를 사용한다. 원화/UV 변경 때만 ProjectSetup 실행 후 별도의 Python 가상 환경에 고정된 OpenCV/NumPy/Pillow를 설치하고 `Tools/Art/Painted/build-motion-fields.py`를 실행해 수치 대응장과 해시 기록을 재생성한다. 생성은 이미지 원본을 수정하지 않는다.
+프로젝트별 품질 설정은 `ProjectSetup`과 생성된 URP 에셋이 기준이다. 카드의 Web renderScale은 0.8, 새 성경 여정의 Web은 1.0이며 실제 기기의 성능을 별도로 측정해야 한다. Windows 1080p60은 목표이고 클라우드 llvmpipe의 결과를 실물 기기 성능으로 주장하지 않는다. Blender 미리보기와 실제 Unity·웹 캡처를 구분한다.
+
+두 게임의 필요한 빌드·검증이 끝나면 `python3 Tools/Build/package-builds.py`로 Windows/Web ZIP, `python3 Tools/Build/export-source.py`로 실제 LFS 에셋을 포함한 소스 ZIP, `python3 Tools/Build/package-evidence.py`로 허용된 검증 자료를 묶는다. `python3 Tools/Build/verify-deliverables.py`로 현재 파일·ZIP·무결성을 확인한다. 각 도구가 요구하는 최신 개정의 근거가 있어야 하며 이전 보고서를 새 통과로 세지 않는다. 웹 배포는 [WebPlaytest](WebPlaytest.md)를 따른다.
+
+## 이전 판의 제작 이력
+
+[PaintedDawn](PaintedDawn.md)·[DawnMotion](DawnMotion.md)의 회화풍 배경·보행 atlas·motion field, [PathOfDawnDesign](PathOfDawnDesign.md)의 여행자·가상 선택·회귀, [Voice](Voice.md)의 창작 대사 20줄은 보존한 이전 판의 문서다. 현재 Boot나 기본 재생성 절차는 아니다. `generate_proxies.py`, 이전 ToonDawn 생성기와 `Painted/build-motion-fields.py`를 새 Gospel 인물·장면의 생성기로 실행하지 않는다. 원본·GUID·기존 저장은 보존한다.
+
+## 현재 검사 진입점
+
+`unity-task.sh <Game> edit-tests`는 순수 규칙 테스트 네임스페이스를, `play-tests`는 새 `FantasyCardsRevivalSmokeTests` 또는 `GospelJourneySmokeTests` UI 경로를 선택합니다. 이전 아바타/관찰자 진입점의 UI fixture는 보존된 제작 이력이며 현재 Boot 검증으로 실행하지 않습니다. 새 규칙·저장 전체는 `run-core-tests.sh`로 함께 검사합니다.

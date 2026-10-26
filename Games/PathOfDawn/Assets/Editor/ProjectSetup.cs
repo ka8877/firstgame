@@ -18,6 +18,8 @@ namespace FirstGame.Editor
     public static class ProjectSetup
     {
         [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
+        [Serializable] sealed class GospelMaterialPalette { public GospelMaterialSpec[] materials; }
+        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap; public float smoothness; public bool doubleSided; }
         [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
         [Serializable] sealed class PaintedLayout { public PaintedRegion[] characters; public PaintedRegion[] walkFrames; }
         [Serializable] sealed class PaintedRegion
@@ -26,7 +28,7 @@ namespace FirstGame.Editor
             public float x, y, width, height, footX = .5f, footY;
         }
         const string Game = "PathOfDawn";
-        const string AppType = "PathOfDawn.Presentation.PathOfDawnApp, PathOfDawn.Presentation";
+        const string AppType = "PathOfDawn.Presentation.GospelJourneyApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool initializing;
         static ProjectSetup()
@@ -47,7 +49,7 @@ namespace FirstGame.Editor
             initializing = true;
             try
             {
-                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Art", "Assets/Resources/Art/Painted", "Assets/Resources/Content", "Assets/Art/Archive/LegacyModels" })
+                foreach (var folder in new[] { "Assets/Scenes", "Assets/Settings", "Assets/Settings/Materials", "Assets/Resources/Fonts", "Assets/Resources/Art", "Assets/Resources/Art/Painted", "Assets/Resources/Content", "Assets/Art/Archive/LegacyModels", "Assets/Resources/Art/Gospel3D" })
                     Directory.CreateDirectory(folder);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
                 EditorSettings.serializationMode = SerializationMode.ForceText;
@@ -64,32 +66,132 @@ namespace FirstGame.Editor
                 QualitySettings.renderPipeline = desktop;
                 QualitySettings.vSyncCount = 0;
                 var font = CreateFont();
-                PrepareIllustrations();
-                PreparePaintedStage();
-                ArchiveLegacyRuntimeModels();
-                CreateContent();
+                PrepareGospelCharacter();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
                     : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+                foreach (var legacy in UnityEngine.Object.FindObjectsByType<PathOfDawn.Presentation.PathOfDawnApp>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                    UnityEngine.Object.DestroyImmediate(legacy.gameObject);
                 var type = Type.GetType(AppType, true);
                 var app = UnityEngine.Object.FindFirstObjectByType(type) as Component;
                 if (app == null) app = new GameObject(Game + " Bootstrap").AddComponent(type);
                 SetField(app, "KoreanFont", font);
-                SetField(app, "Chapter", AssetDatabase.LoadAssetAtPath<ScriptableObject>("Assets/Resources/Content/Galilee.asset"));
-                // The illustrated stage owns the visible scene. Keep the old serialized
-                // fields compatible, but never package or recreate the retired meshes.
-                SetField(app, "EnvironmentPrefab", null);
-                SetField(app, "JesusPrefab", null);
-                SetField(app, "TravelerPrefab", null);
-                SetField(app, "MiriamPrefab", null);
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene, ScenePath);
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
                 AssetDatabase.SaveAssets();
                 Validate();
-                File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:painted-galilee:1\n");
+                File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:gospel-journey:1\n");
                 Debug.Log("FIRSTGAME_SETUP_OK " + Game);
             }
             finally { initializing = false; }
+        }
+
+        static void PrepareGospelCharacter()
+        {
+            const string folder = "Assets/Resources/Art/Gospel3D";
+            const string path = folder + "/YoungJesus.fbx";
+            if (!File.Exists(path)) throw new InvalidOperationException("YoungJesus.fbx is required; no primitive-character fallback is shipped.");
+            var importer = AssetImporter.GetAtPath(path) as ModelImporter;
+            if (importer == null) throw new InvalidOperationException("Cannot import the Gospel protagonist.");
+            importer.animationType = ModelImporterAnimationType.Generic;
+            importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+            importer.importAnimation = true;
+            importer.optimizeGameObjects = false;
+            importer.importNormals = ModelImporterNormals.Import;
+            importer.importCameras = false; importer.importLights = false;
+            importer.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+            var clips = importer.defaultClipAnimations;
+            foreach (var clip in clips)
+            {
+                clip.loopTime = true; clip.loopPose = true;
+                clip.keepOriginalOrientation = true; clip.keepOriginalPositionY = true; clip.keepOriginalPositionXZ = true;
+                clip.lockRootRotation = true; clip.lockRootHeightY = true; clip.lockRootPositionXZ = true;
+            }
+            if (clips.Length > 0) importer.clipAnimations = clips;
+            string specificationPath = folder + "/material-spec.json";
+            if (!File.Exists(specificationPath)) throw new InvalidOperationException("The character material specification is missing.");
+            var palette = JsonUtility.FromJson<GospelMaterialPalette>(File.ReadAllText(specificationPath));
+            if (palette == null || palette.materials == null || palette.materials.Length == 0)
+                throw new InvalidOperationException("The character material specification is empty.");
+            foreach (var entry in palette.materials)
+            {
+                if (string.IsNullOrWhiteSpace(entry.name) || entry.baseColor == null || entry.baseColor.Length != 4)
+                    throw new InvalidOperationException("Invalid character material specification.");
+                string materialPath = folder + "/" + entry.name + ".mat";
+                var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+                if (material == null) { material = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(material, materialPath); }
+                material.name = entry.name; material.shader = Shader.Find("Universal Render Pipeline/Lit");
+                material.SetColor("_BaseColor", new Color(entry.baseColor[0], entry.baseColor[1], entry.baseColor[2], entry.baseColor[3]));
+                material.SetFloat("_Smoothness", Mathf.Clamp01(entry.smoothness));
+                material.SetFloat("_Cull", (float)(entry.doubleSided ? CullMode.Off : CullMode.Back));
+                material.SetTexture("_BaseMap", null);
+                if (!string.IsNullOrEmpty(entry.baseMap))
+                {
+                    string texturePath = folder + "/" + entry.baseMap;
+                    var textureImporter = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+                    if (textureImporter != null) { textureImporter.textureShape = TextureImporterShape.Texture2D; textureImporter.sRGBTexture = true; textureImporter.maxTextureSize = 2048; textureImporter.mipmapEnabled = true; textureImporter.SaveAndReimport(); }
+                    var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+                    if (texture == null) throw new InvalidOperationException("Missing character texture " + texturePath);
+                    material.SetTexture("_BaseMap", texture);
+                }
+                importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), entry.name), material);
+                EditorUtility.SetDirty(material);
+            }
+            // Exported FBX IDs can include a model-name prefix even when the
+            // authored material name in the specification has no prefix.
+            foreach (var embedded in AssetDatabase.LoadAllAssetsAtPath(path).OfType<Material>())
+            {
+                int start = embedded.name.IndexOf("Gospel_", StringComparison.Ordinal);
+                if (start < 0) continue;
+                string key = embedded.name.Substring(start);
+                var material = AssetDatabase.LoadAssetAtPath<Material>(folder + "/" + key + ".mat");
+                if (material != null) importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), embedded.name), material);
+            }
+            string templeFolder = folder + "/TempleMaterials";
+            if (Directory.Exists(templeFolder)) foreach (string texturePath in Directory.GetFiles(templeFolder, "*.jpg"))
+            {
+                var textureImporter = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+                if (textureImporter == null) continue;
+                textureImporter.textureShape = TextureImporterShape.Texture2D;
+                bool normal = texturePath.Contains("-normal");
+                textureImporter.textureType = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
+                textureImporter.flipGreenChannel = normal;
+                textureImporter.sRGBTexture = texturePath.Contains("-albedo"); textureImporter.maxTextureSize = 1024;
+                textureImporter.mipmapEnabled = true; textureImporter.wrapMode = TextureWrapMode.Repeat; textureImporter.anisoLevel = 4;
+                textureImporter.SaveAndReimport();
+            }
+            foreach (string prefix in new[] { "limestone", "paving" })
+            {
+                string materialPath = templeFolder + "/" + prefix + ".mat";
+                var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+                if (material == null) { material = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(material, materialPath); }
+                material.SetTexture("_BaseMap", AssetDatabase.LoadAssetAtPath<Texture2D>(templeFolder + "/" + prefix + "-albedo.jpg"));
+                material.SetTexture("_BumpMap", AssetDatabase.LoadAssetAtPath<Texture2D>(templeFolder + "/" + prefix + "-normal.jpg"));
+                material.SetTexture("_OcclusionMap", AssetDatabase.LoadAssetAtPath<Texture2D>(templeFolder + "/" + prefix + "-ao.jpg"));
+                material.SetFloat("_BumpScale", .32f); material.SetFloat("_Smoothness", .12f); material.EnableKeyword("_NORMALMAP"); material.EnableKeyword("_OCCLUSIONMAP");
+                EditorUtility.SetDirty(material);
+            }
+            importer.SaveAndReimport();
+            var animations = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
+            AnimationClip FindClip(string name)
+            {
+                var clip = animations.FirstOrDefault(c => c.name == name || c.name.EndsWith("|" + name) || c.name.EndsWith("_" + name));
+                if (clip == null) throw new InvalidOperationException("Missing skinned character animation " + name + "; found: " + string.Join(", ", animations.Select(c => c.name)));
+                return clip;
+            }
+            const string controllerPath = folder + "/YouthLocomotion.controller";
+            var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath);
+            if (controller == null) controller = AnimatorController.CreateAnimatorControllerAtPath(controllerPath);
+            if (!controller.parameters.Any(p => p.name == "Speed")) controller.AddParameter("Speed", AnimatorControllerParameterType.Float);
+            var machine = controller.layers[0].stateMachine;
+            var state = machine.states.Select(item => item.state).FirstOrDefault(item => item.name == "Locomotion");
+            if (state == null) state = machine.AddState("Locomotion");
+            var tree = state.motion as BlendTree;
+            if (tree == null) { tree = new BlendTree { name = "Idle Walk Run" }; AssetDatabase.AddObjectToAsset(tree, controller); }
+            tree.blendType = BlendTreeType.Simple1D; tree.blendParameter = "Speed"; tree.useAutomaticThresholds = false;
+            tree.children = new[] { new ChildMotion { motion = FindClip("Idle"), threshold = 0, timeScale = 1 }, new ChildMotion { motion = FindClip("Walk"), threshold = 1.75f, timeScale = 1 }, new ChildMotion { motion = FindClip("Run"), threshold = 3.7f, timeScale = 1 } };
+            state.motion = tree; machine.defaultState = state; state.writeDefaultValues = true;
+            EditorUtility.SetDirty(tree); EditorUtility.SetDirty(controller); AssetDatabase.SaveAssets();
         }
 
         static UniversalRenderPipelineAsset CreatePipeline(string name, float scale, int shadow, float distance, bool hdr)
@@ -136,16 +238,16 @@ namespace FirstGame.Editor
                 AssetDatabase.CreateAsset(font, path);
                 AssetDatabase.AddObjectToAsset(font.material, font);
                 foreach (var texture in font.atlasTextures) AssetDatabase.AddObjectToAsset(texture, font);
-                string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→①②③";
-                foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
-                    if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
-                string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
-                if (!font.TryAddCharacters(characters, out string missing))
-                    Debug.LogWarning("Font does not contain these optional source symbols: " + missing);
-                foreach (var texture in font.atlasTextures)
-                    if (!AssetDatabase.Contains(texture)) AssetDatabase.AddObjectToAsset(texture, font);
-                EditorUtility.SetDirty(font);
             }
+            string content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ·—×→①②③●○−–";
+            foreach (var file in Directory.GetFiles("Assets/Game", "*", SearchOption.AllDirectories))
+                if (file.EndsWith(".cs") || file.EndsWith(".ink")) content += File.ReadAllText(file);
+            string characters = new string(content.Where(c => !char.IsControl(c)).Distinct().ToArray());
+            if (!font.TryAddCharacters(characters, out string missing))
+                Debug.LogWarning("Font does not contain these optional source symbols: " + missing);
+            foreach (var texture in font.atlasTextures)
+                if (!AssetDatabase.Contains(texture)) AssetDatabase.AddObjectToAsset(texture, font);
+            EditorUtility.SetDirty(font);
             TMP_Settings.defaultFontAsset = font;
             EditorUtility.SetDirty(TMP_Settings.instance);
             return font;
@@ -477,23 +579,17 @@ namespace FirstGame.Editor
             if (!File.Exists(ScenePath)) throw new InvalidOperationException("Missing boot scene.");
             var app = UnityEngine.Object.FindFirstObjectByType(Type.GetType(AppType, true));
             if (app == null) throw new InvalidOperationException("Missing PathOfDawn app in the boot scene.");
-            foreach (string field in new[] { "EnvironmentPrefab", "JesusPrefab", "TravelerPrefab", "MiriamPrefab" })
-                if (app.GetType().GetField(field)?.GetValue(app) is UnityEngine.Object reference && reference != null)
-                    throw new InvalidOperationException("Retired 3D prefab is still included by the boot scene: " + field);
+            if (UnityEngine.Object.FindFirstObjectByType<PathOfDawn.Presentation.PathOfDawnApp>() != null)
+                throw new InvalidOperationException("The retired observer entry must not run beside the Gospel journey.");
             foreach (var go in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())
                 foreach (var transform in go.GetComponentsInChildren<Transform>(true))
                     if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(transform.gameObject) != 0)
                         throw new InvalidOperationException("Missing script on " + transform.name);
-            var chapter = Resources.Load<PathOfDawn.Authoring.StoryChapter>("Content/Galilee");
-            if (chapter == null || chapter.story == null || !chapter.story.isCompiled) throw new InvalidOperationException("Story chapter is missing or invalid.");
-            foreach (string name in new[] { "shore", "room", "jesus", "miriam", "traveler", "traveler-back", "traveler-walk" })
-                if (Resources.Load<Texture2D>("Art/Painted/" + name) == null)
-                    throw new InvalidOperationException("Missing imported painted stage asset: " + name);
-            var layoutAsset = Resources.Load<TextAsset>("Art/Painted/layout");
-            var layout = layoutAsset == null ? null : JsonUtility.FromJson<PaintedLayout>(layoutAsset.text);
-            if (layout == null || layout.characters == null || layout.characters.Length != 4 ||
-                layout.walkFrames == null || layout.walkFrames.Length != 8)
-                throw new InvalidOperationException("Painted stage requires four character cutout bounds and eight authored walk frames.");
+            var hero = Resources.Load<GameObject>(PathOfDawn.Presentation.GospelTempleWorld.HeroResource);
+            if (hero == null || !hero.GetComponentsInChildren<SkinnedMeshRenderer>(true).Any(r => r.sharedMesh != null && r.bones.Length >= 12))
+                throw new InvalidOperationException("The Gospel protagonist requires a genuine skinned character and skeleton.");
+            if (Resources.Load<RuntimeAnimatorController>(PathOfDawn.Presentation.GospelTempleWorld.AnimatorResource) == null)
+                throw new InvalidOperationException("Missing Gospel idle/walk/run animation controller.");
             Debug.Log("FIRSTGAME_ASSET_VALIDATION_OK " + Game);
         }
     }

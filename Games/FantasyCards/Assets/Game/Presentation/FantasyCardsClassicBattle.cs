@@ -11,50 +11,28 @@ namespace FantasyCards.Presentation
     {
         private void ShowBattle()
         {
-            battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld();
+            battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("battle");
             var state = engine.State; var player = state.players[0]; var enemy = state.players[1];
             Backdrop(false);
-            Gradient(root, 0, 0, 1, .44f, new Color(.016f, .020f, .045f, .99f), Color.clear);
-            Gradient(root, 0, .67f, 1, 1, Color.clear, new Color(.016f, .020f, .045f, .97f));
-            var header = Panel(root, .018f, .88f, .982f, .993f, ink);
-            Text(header, "FANTASY MASTERS", .015f, .50f, .38f, .97f, 25, gold);
-            Text(header, state.turn + "턴 · " + (state.activePlayer == 0 ? "내 공격" : "상대 공격") + " / " + PhaseName(state.phase), .015f, .03f, .63f, .52f, 23, ivory);
-            Button(root, "안내", .65f, .880f, .727f, .993f, () => ShowRulesHelp(ShowBattle), slate, 22, !locked);
-            Button(root, "음악", .735f, .880f, .812f, .993f, () => ShowMusicSettings(ShowBattle), slate, 22, !locked);
-            Button(root, "저장", .82f, .880f, .897f, .993f, () => { if (Save()) message = "전장과 다음 코인 상태를 저장했습니다."; ShowBattle(); }, slate, 22, !locked);
-            Button(root, "타이틀", .905f, .880f, .977f, .993f, () => LeaveBattle(ShowTitle), slate, 21, !locked);
-
-            var opponent = Panel(root, .025f, .755f, .975f, .872f, new Color(.085f, .09f, .17f, .96f));
-            Portrait(opponent, enemy.leaderId, .008f, .04f, .082f, .96f);
-            Text(opponent, DemoCatalog.GetLeader(enemy.leaderId).name + " · 덱 " + enemy.deck.Count + "장", .10f, .46f, .51f, .97f, 28, ivory);
-            Text(opponent, "LP " + enemy.levelPoints + " · 손패 " + enemy.hand.Count + " · 지형 " + enemy.terrain.Count + "/" + state.rules.terrainLimit, .10f, .03f, .51f, .48f, 22, gold);
-            Text(opponent, SoulSummary(enemy), .53f, .48f, .98f, .97f, 23, teal, TextAlignmentOptions.MidlineRight);
-            DrawTerrainPips(opponent, enemy, .53f, .07f, .98f, .43f);
-            BindTooltip(opponent.gameObject, "상대 · 덱이 생명입니다", "직접 공격은 유닛 레벨만큼 덱을 파괴합니다. 상대 손패와 예약 마법의 내용은 공개되지 않습니다.\n" + TerrainSummary(enemy));
-
-            DrawLanes(1, .600f, .745f);
-            DrawLanes(0, .325f, .470f);
-            var middle = Panel(root, .025f, .475f, .975f, .598f, new Color(.065f, .065f, .14f, .97f));
-            Text(middle, locked ? "전투 판정 중" : StatusMessage(), .018f, .50f, .59f, .97f, 22, ivory);
-            Text(middle, "AP 공격 / DP 방어 / HP 생명 · 전열 왼쪽부터 판정", .018f, .015f, .60f, .50f, 19, new Color(.75f, .79f, .88f));
-            DrawActions(.61f, .480f, .970f, .593f);
-
-            var resources = Panel(root, .025f, .270f, .975f, .318f, ink);
-            Text(resources, "나 · 덱 " + player.deck.Count + "장   손패 " + player.hand.Count + "   LP " + player.levelPoints + "   " + SoulSummary(player) + "   지형 " + player.terrain.Count + "/" + state.rules.terrainLimit,
-                .012f, .02f, .988f, .98f, 23, gold);
-            BindTooltip(resources.gameObject, "내 소울과 레벨 포인트", "LP는 지형 전개에 사용합니다. 지형에서 얻은 색소울과 총소울로 유닛·마법·아이템을 사용합니다.\n" + TerrainSummary(player));
-            DrawPlayerLeader();
-            if (player.hand.Count > 5) DrawScrollableHand();
-            else
-            {
-                float width = Mathf.Min(.16f, .79f / Mathf.Max(1, player.hand.Count)); float left = .59f - player.hand.Count * width * .5f;
-                for (int i = 0; i < player.hand.Count; i++)
-                {
-                    var instance = player.hand[i]; var card = CardCatalog.Get(instance.definitionId); int id = instance.instanceId;
-                    DrawCard(root, card, left + i * width, .022f, left + (i + 1) * width - .008f, .255f, selectedCard == id,
-                        () => SelectHandCard(id, card), !locked);
-                }
-            }
+            var field = Panel(root, .025f, .362f, .805f, .928f, new Color(.035f, .075f, .044f));
+            Frame(field, new Color(.43f, .42f, .25f), 2); Ornament(field, new Color(.56f, .58f, .36f, .55f));
+            DrawLanes(1, .665f, .925f); DrawLanes(0, .382f, .600f);
+            var messagePanel = Panel(root, .025f, .604f, .805f, .663f, new Color(.035f, .029f, .015f, .96f));
+            var status = Text(messagePanel, locked ? "전투 판정 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
+            status.textWrappingMode = TextWrappingModes.NoWrap;
+            BindTooltip(messagePanel.gameObject, "전장 안내", StatusMessage());
+            var opponent = Panel(root, .025f, .930f, .805f, .995f, ink);
+            var opponentText = Text(opponent, "상대 · 덱 " + enemy.deck.Count + "장 · 손패 " + enemy.hand.Count, .012f, .02f, .53f, .98f, 22, ivory);
+            opponentText.textWrappingMode = TextWrappingModes.NoWrap;
+            DrawTerrainPips(opponent, enemy, .55f, .07f, .985f, .93f);
+            BindTooltip(opponent.gameObject, "상대 지형", TerrainSummary(enemy));
+            var resources = Panel(root, .025f, .309f, .805f, .377f, ink);
+            string resourceText = Compact ? "나 · 덱 " + player.deck.Count + "장 · 손패 " + player.hand.Count + " · LP " + player.levelPoints + " · 지형 " + player.terrain.Count + "/" + state.rules.terrainLimit
+                : "나 · 덱 " + player.deck.Count + "장  손패 " + player.hand.Count + "  LP " + player.levelPoints + "  " + SoulSummary(player) + "  지형 " + player.terrain.Count + "/" + state.rules.terrainLimit;
+            var resourceLabel = Text(resources, resourceText, .012f, .02f, .988f, .98f, 21, gold);
+            resourceLabel.textWrappingMode = TextWrappingModes.NoWrap;
+            BindTooltip(resources.gameObject, "내 소울과 레벨 포인트", "LP로 지형을 전개합니다. 색소울과 총소울로 카드를 사용합니다.\n" + TerrainSummary(player));
+            DrawRevivalBattleRail(); DrawScrollableHand();
             if (state.phase == BattlePhase.Complete) ShowResult();
         }
 
@@ -100,23 +78,24 @@ namespace FantasyCards.Presentation
 
         private void DrawLanes(int owner, float bottom, float top)
         {
-            var state = engine.State; float start = .025f, span = .95f;
+            var state = engine.State; float start = .025f, span = .78f;
             for (int lane = 0; lane < state.rules.unitLanes; lane++)
             {
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);
                 float left = start + lane * span / state.rules.unitLanes, right = left + span / state.rules.unitLanes - .008f;
                 bool target = IsLegalLane(owner, lane);
-                var panel = Panel(root, left, bottom, right, top, new Color(.075f, .095f, .17f, .96f));
+                var panel = Panel(root, left, bottom, right, top, new Color(.032f, .065f, .043f, .92f));
                 panel.gameObject.name = "Lane " + owner + " " + lane;
                 panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
                 if (unit != null)
                 {
                     var card = CardCatalog.Get(unit.definitionId);
-                    Artwork(panel, card, 0, 0, 1, 1);
-                    Gradient(panel, 0, 0, 1, 1, new Color(.01f, .015f, .035f, .98f), new Color(.01f, .015f, .035f, .38f));
-                    Text(panel, card.name, .045f, .51f, .955f, .98f, 25, ivory);
+                    PrintedImage(panel, card, .015f, .02f, .985f, .98f);
+                    Panel(panel, 0, .70f, 1, 1, new Color(.025f, .025f, .015f, .94f));
+                    Panel(panel, 0, 0, 1, .30f, new Color(.025f, .025f, .015f, .96f));
+                    Text(panel, card.name, .035f, .71f, .965f, .99f, 24, ivory);
                     Text(panel, "AP " + CardCatalog.UnitAttack(unit) + "  DP " + CardCatalog.UnitDefense(unit) + "  HP " + CardCatalog.UnitHealth(unit),
-                        .045f, .02f, .955f, .50f, 24, gold);
+                        .025f, .01f, .975f, .30f, 22, gold);
                     Frame(panel, target ? ivory : RarityColor(card.rarity), target ? 3 : 1.5f);
                     BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                 }

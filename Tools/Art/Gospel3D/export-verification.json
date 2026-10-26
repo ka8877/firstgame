@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "scope": "Read-only Blender FBX reimport, three exported takes, finite deformed vertices, bounds. Unity runtime is separate.",
+  "actors": [
+    {
+      "actor": "YoungJesus",
+      "bones": 65,
+      "meshes": 38,
+      "actions": [
+        {
+          "name": "YoungJesusRig|Idle",
+          "frames": [
+            1.0,
+            76.0
+          ]
+        },
+        {
+          "name": "YoungJesusRig|Run",
+          "frames": [
+            1.0,
+            29.0
+          ]
+        },
+        {
+          "name": "YoungJesusRig|Walk",
+          "frames": [
+            1.0,
+            41.0
+          ]
+        }
+      ],
+      "idleWorldBoundsMeters": [
+        [
+          -0.27890390157699585,
+          0.2448349893093109
+        ],
+        [
+          -0.28030580282211304,
+          0.30331316590309143
+        ],
+        [
+          -0.011800384148955345,
+          1.4086142778396606
+        ]
+      ],
+      "status": "passed"
+    },
+    {
+      "actor": "AdultJesus",
+      "bones": 65,
+      "meshes": 40,
+      "actions": [
+        {
+          "name": "AdultJesusRig|Idle",
+          "frames": [
+            1.0,
+            76.0
+          ]
+        },
+        {
+          "name": "AdultJesusRig|Run",
+          "frames": [
+            1.0,
+            29.0
+          ]
+        },
+        {
+          "name": "AdultJesusRig|Walk",
+          "frames": [
+            1.0,
+            41.0
+          ]
+        }
+      ],
+      "idleWorldBoundsMeters": [
+        [
+          -0.39401865005493164,
+          0.36282944679260254
+        ],
+        [
+          -0.35275572538375854,
+          0.37736672163009644
+        ],
+        [
+          -0.011806375347077847,
+          1.741468906402588
+        ]
+      ],
+      "status": "passed"
+    }
+  ]
+}

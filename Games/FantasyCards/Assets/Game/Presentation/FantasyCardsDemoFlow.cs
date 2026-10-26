@@ -16,7 +16,6 @@ namespace FantasyCards.Presentation
         private int selectedEncounter, starterDeckPage;
         private bool useCustomDeck;
         private readonly HashSet<int> openingReplacements = new HashSet<int>();
-        private readonly Dictionary<string, Texture2D> leaderPortraits = new Dictionary<string, Texture2D>();
         private RectTransform tooltip;
         private float handScrollPosition;
 
@@ -27,7 +26,6 @@ namespace FantasyCards.Presentation
             if (DemoCatalog.Leaders.Any(value => value.id == leader)) selectedLeaderId = leader;
             if (DemoCatalog.StarterDecks.Any(value => value.id == deck)) selectedDeckId = deck;
             selectedEncounter = Mathf.Clamp(PlayerPrefs.GetInt("FC.demo.encounter", 0), 0, DemoCatalog.Encounters.Length - 1);
-            foreach (var item in DemoCatalog.Leaders) leaderPortraits[item.id] = Resources.Load<Texture2D>("Art/portrait-" + item.id);
             if (!PersistentSaves.Exists(DeckSlot)) { customDeck.Clear(); customDeck.AddRange(DemoCatalog.GetDeck(selectedDeckId).CopyCards()); }
             if (!PersistentSaves.Exists(Slot) && (PersistentSaves.Exists("fantasy-battle-demo-v2") || PersistentSaves.Exists("fantasy-battle")))
                 message = "이전 체험판 저장은 그대로 보관했습니다. 클래식 규칙의 새로운 결투를 시작하세요.";
@@ -62,95 +60,25 @@ namespace FantasyCards.Presentation
 
         private void Portrait(Transform parent, string leaderId, float x0, float y0, float x1, float y1)
         {
-            if (!leaderPortraits.TryGetValue(leaderId, out var portrait) || portrait == null)
-            {
-                portrait = Resources.Load<Texture2D>("Art/portrait-" + leaderId);
-                leaderPortraits[leaderId] = portrait;
-            }
-            if (portrait != null) ImageFrame(parent, portrait, new Rect(0, 0, 1, 1), x0, y0, x1, y1, new Vector2(.5f, .70f), true);
-            else Artwork(parent, CardCatalog.All.First(card => card.kind == CardKind.Unit), x0, y0, x1, y1);
+            var leader = DemoCatalog.GetLeader(leaderId);
+            var card = CardCatalog.All.Where(value => value.kind == CardKind.Unit && value.element == leader.skillElement).OrderBy(value => value.level).FirstOrDefault();
+            if (card != null) Artwork(parent, card, x0, y0, x1, y1);
+            else Panel(parent, x0, y0, x1, y1, slate);
         }
 
         private void ShowLeaderSelection()
         {
-            battleScreen = false; redraw = ShowLeaderSelection; Clear();
-            DemoHeading("01  /  CHOOSE YOUR AVATAR", "결투에 함께할 아바타", "아바타는 취향대로 선택하세요. 클래식 규칙에서는 고유 기술을 사용하지 않습니다.");
-            for (int i = 0; i < DemoCatalog.Leaders.Length; i++)
-            {
-                var leader = DemoCatalog.Leaders[i]; float left = .035f + i * .238f;
-                var tile = Panel(root, left, .255f, left + .216f, .75f, slate);
-                tile.gameObject.name = "Leader " + leader.id;
-                Portrait(tile, leader.id, .012f, .02f, .988f, .988f);
-                Gradient(tile, 0, 0, 1, .56f, new Color(.025f, .035f, .075f, 1), Color.clear);
-                Panel(tile, .015f, .015f, .985f, .315f, new Color(.025f, .035f, .075f, .94f));
-                Text(tile, leader.title, .06f, .18f, .94f, .29f, 20, gold);
-                Text(tile, leader.name, .06f, .035f, .94f, .19f, 34, ivory);
-                if (selectedLeaderId == leader.id) Text(tile, "선택", .62f, .81f, .94f, .96f, 21, gold, TextAlignmentOptions.MidlineRight);
-                Frame(tile, selectedLeaderId == leader.id ? gold : new Color(.58f, .61f, .78f, .65f), selectedLeaderId == leader.id ? 3 : 1);
-                var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>(); tile.GetComponent<Image>().raycastTarget = true;
-                button.onClick.AddListener(() => { selectedLeaderId = leader.id; ShowLeaderSelection(); });
-                BindTooltip(tile.gameObject, leader.name + " · 아바타", leader.description + "\n클래식 전투에서는 아바타 기술을 사용하지 않습니다.");
-            }
-            var selected = DemoCatalog.GetLeader(selectedLeaderId);
-            Text(root, selected.name + " · " + selected.description, .04f, .14f, .96f, .245f, 25, ivory);
-            Button(root, "타이틀", .035f, .015f, .23f, .135f, ShowTitle, slate, 25);
-            Button(root, "기본 덱 선택", .66f, .015f, .965f, .135f, ShowDeckSelection, gold, 27);
+            ShowLobby();
         }
 
         private void ShowDeckSelection()
         {
-            battleScreen = false; redraw = ShowDeckSelection; Clear();
-            DemoHeading("02  /  CHOOSE YOUR DECK", "첫 결투를 함께할 덱", DemoCatalog.GetLeader(selectedLeaderId).name + " · " + DemoCatalog.StarterDecks.Length + "개 기본 덱 · 각각 " + authoredRules.deckSize + "장");
-            int deckPages = Mathf.Max(1, (DemoCatalog.StarterDecks.Length + 3) / 4);
-            starterDeckPage = Mathf.Clamp(starterDeckPage, 0, deckPages - 1);
-            for (int i = 0; i < 4 && starterDeckPage * 4 + i < DemoCatalog.StarterDecks.Length; i++)
-            {
-                var deck = DemoCatalog.StarterDecks[starterDeckPage * 4 + i]; float left = i % 2 == 0 ? .035f : .515f, bottom = i < 2 ? .455f : .155f;
-                var tile = Panel(root, left, bottom, left + .45f, bottom + .28f, ink);
-                tile.gameObject.name = "Starter deck " + deck.id;
-                Portrait(tile, deck.recommendedLeaderId, .01f, .02f, .25f, .98f);
-                Text(tile, deck.name, .28f, .65f, .97f, .95f, 29, gold);
-                Text(tile, deck.description, .28f, .23f, .97f, .66f, 21, ivory, TextAlignmentOptions.TopLeft);
-                int terrains = deck.cards.Count(id => CardCatalog.Get(id).kind == CardKind.Terrain);
-                int units = deck.cards.Count(id => CardCatalog.Get(id).kind == CardKind.Unit);
-                Text(tile, deck.cards.Length + "장 · 지형 " + terrains + " · 유닛 " + units, .28f, .035f, .97f, .23f, 19, teal);
-                Frame(tile, !useCustomDeck && selectedDeckId == deck.id ? gold : new Color(.48f, .51f, .70f, .7f), !useCustomDeck && selectedDeckId == deck.id ? 3 : 1);
-                var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>(); tile.GetComponent<Image>().raycastTarget = true;
-                button.onClick.AddListener(() => { selectedDeckId = deck.id; useCustomDeck = false; ShowDeckSelection(); });
-                BindTooltip(tile.gameObject, deck.name, deck.description + "\n리더와 덱은 자유롭게 조합할 수 있습니다.");
-            }
-            Button(root, "아바타", .035f, .015f, .17f, .135f, ShowLeaderSelection, slate, 24);
-            Button(root, useCustomDeck ? "편집 덱 선택됨" : "내 편집 덱", .18f, .015f, .395f, .135f,
-                () => { useCustomDeck = !useCustomDeck; ShowDeckSelection(); }, useCustomDeck ? teal : slate, 23, ValidDeck(customDeck));
-            Button(root, "이전 덱", .41f, .015f, .54f, .135f, () => { starterDeckPage--; ShowDeckSelection(); }, slate, 23, starterDeckPage > 0);
-            Button(root, "다음 덱", .55f, .015f, .68f, .135f, () => { starterDeckPage++; ShowDeckSelection(); }, slate, 23, starterDeckPage + 1 < deckPages);
-            Button(root, "상대 선택", .705f, .015f, .965f, .135f, ShowEncounterSelection, gold, 27);
+            ShowRevivalDecks();
         }
 
         private void ShowEncounterSelection()
         {
-            battleScreen = false; redraw = ShowEncounterSelection; Clear();
-            DemoHeading("03  /  THREE DUELS", "별빛 시험의 세 결투", DemoCatalog.GetLeader(selectedLeaderId).name + " · " + (useCustomDeck ? "나의 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name));
-            for (int i = 0; i < DemoCatalog.Encounters.Length; i++)
-            {
-                int index = i; var encounter = DemoCatalog.Encounters[i]; float left = .035f + i * .318f;
-                var tile = Panel(root, left, .255f, left + .292f, .75f, ink);
-                tile.gameObject.name = "Encounter " + i;
-                Portrait(tile, encounter.leaderId, .012f, .22f, .988f, .988f);
-                Gradient(tile, 0, 0, 1, .66f, new Color(.025f, .035f, .075f, 1), Color.clear);
-                Panel(tile, .015f, .015f, .985f, .45f, new Color(.025f, .035f, .075f, .94f));
-                Text(tile, "DUEL " + (i + 1) + (PlayerPrefs.GetInt("FC.demo.won." + i, 0) != 0 ? "  ·  승리" : ""), .07f, .82f, .93f, .96f, 21, gold);
-                Text(tile, encounter.name, .065f, .23f, .945f, .42f, 30, ivory);
-                Text(tile, EncounterShortSummary(i), .065f, .025f, .945f, .23f, 20, new Color(.8f, .84f, .92f));
-                Frame(tile, selectedEncounter == i ? gold : new Color(.48f, .51f, .7f, .7f), selectedEncounter == i ? 3 : 1);
-                var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>(); tile.GetComponent<Image>().raycastTarget = true;
-                button.onClick.AddListener(() => { selectedEncounter = index; ShowEncounterSelection(); });
-                BindTooltip(tile.gameObject, encounter.name, encounter.description);
-            }
-            Text(root, "카드를 길게 누르면 상세 · 전체 손패 한 번 교체 · 전열 순서대로 자동 공방", .04f, .14f, .96f, .245f, 23, ivory);
-            Button(root, "덱 선택", .035f, .015f, .23f, .135f, ShowDeckSelection, slate, 25);
-            Button(root, "플레이 안내", .25f, .015f, .58f, .135f, () => ShowRulesHelp(ShowEncounterSelection), slate, 24);
-            Button(root, "덱을 섞고 시작", .66f, .015f, .965f, .135f, BeginSelectedBattle, gold, 27);
+            ShowRevivalRoom();
         }
 
         private void BeginSelectedBattle()
@@ -238,30 +166,23 @@ namespace FantasyCards.Presentation
         private void DrawScrollableHand()
         {
             var hand = engine.State.players[0].hand;
-            var viewport = Panel(root, .18f, .022f, .98f, .255f, Color.clear);
-            viewport.gameObject.name = "Scrollable hand";
-            viewport.GetComponent<Image>().raycastTarget = true;
+            var viewport = Panel(root, .025f, .025f, .805f, .305f, new Color(.025f, .023f, .016f));
+            viewport.gameObject.name = "Scrollable hand"; viewport.GetComponent<Image>().raycastTarget = true;
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Hand content", typeof(RectTransform)).GetComponent<RectTransform>();
             content.SetParent(viewport, false); content.pivot = new Vector2(0, .5f);
-            // Anchor width follows the viewport after CanvasScaler finishes a resize.
-            // A pixel width sampled here can still belong to the previous frame.
-            Anchor(content, 0, 0, (Compact ? .16f : .133f) * hand.Count / .8f, 1);
+            Anchor(content, 0, 0, Mathf.Max(1, hand.Count / 6f), 1);
             for (int i = 0; i < hand.Count; i++)
             {
                 var card = hand[i]; var definition = CardCatalog.Get(card.definitionId); int id = card.instanceId;
-                DrawCard(content, definition, (float)i / hand.Count, 0, (i + .95f) / hand.Count, 1, selectedCard == id,
+                DrawCard(content, definition, (float)i / Mathf.Max(1, hand.Count), .015f, (i + .95f) / Mathf.Max(1, hand.Count), .985f, selectedCard == id,
                     () => SelectHandCard(id, definition), !locked);
             }
             var scroll = viewport.gameObject.AddComponent<ScrollRect>(); scroll.viewport = viewport; scroll.content = content;
             scroll.horizontal = true; scroll.vertical = false; scroll.movementType = ScrollRect.MovementType.Clamped;
             scroll.inertia = true; scroll.decelerationRate = .12f; scroll.scrollSensitivity = 80;
-            var track = Panel(root, .18f, .007f, .98f, .016f, new Color(.15f, .17f, .26f));
-            var handle = Panel(track, 0, 0, 1, 1, gold);
-            var scrollbar = track.gameObject.AddComponent<Scrollbar>(); scrollbar.handleRect = handle; scrollbar.targetGraphic = handle.GetComponent<Image>();
-            scrollbar.direction = Scrollbar.Direction.LeftToRight; scroll.horizontalScrollbar = scrollbar;
             scroll.horizontalNormalizedPosition = handScrollPosition;
-            scroll.onValueChanged.AddListener(value => { handScrollPosition = value.x; HideTooltip(); });
+            scroll.onValueChanged.AddListener(value => handScrollPosition = value.x);
         }
 
         private void DrawPlayerLeader()
@@ -301,7 +222,7 @@ namespace FantasyCards.Presentation
                 "50장 덱으로 시작합니다. 직접 공격은 유닛 레벨만큼 덱을 파괴합니다. 내 덱이 사라지기 전에 상대 덱을 소진시키세요.",
                 "레벨 포인트(LP)로 지형을 전개하고, 지형의 색소울과 총소울로 카드를 사용합니다. 지형은 최대 10장, 유닛과 예약 마법은 전열 5칸에 배치합니다.",
                 "양쪽이 준비 완료하면 자동 공방합니다. 새 턴에는 손패를 6장까지 보충합니다. 각 준비에서 카드 사용 전에 손패 전체를 한 번 다시 섞을 수 있습니다.",
-                "왼쪽 유닛부터 맞붙습니다. 공격이 먼저, 살아남은 수비가 반격합니다. AP·DP·HP 각각의 코인을 확인하세요. 아바타 기술은 사용하지 않습니다." };
+                "왼쪽 유닛부터 맞붙습니다. 공격이 먼저, 살아남은 수비가 반격합니다. AP·DP·HP 각각의 코인을 확인하세요. 공방에 남길 소울을 확인하세요." };
             for (int i = 0; i < headings.Length; i++)
             {
                 float x = i % 2 == 0 ? .055f : .52f, y = i < 2 ? .49f : .18f;
@@ -375,10 +296,10 @@ namespace FantasyCards.Presentation
             if (label.StartsWith("등급 ·", StringComparison.Ordinal)) return "원작 카드의 등급 분류로 찾아봅니다. 등급만으로 카드의 강함을 판단하지 마세요.";
             switch (label)
             {
-                case "새로운 결투": return "아바타와 50장 기본 덱을 고른 뒤 세 결투에 도전합니다.";
+                case "새로운 결투": return "대기실에서 연습방과 50장 덱을 고른 뒤 싱글플레이 대전을 시작합니다.";
                 case "이어하기": return "저장한 덱 순서·손패·소울·준비 단계와 다음 코인 상태를 이어갑니다.";
                 case "카드 도감": return "원작 카드의 그림·레벨·소울·등급·AP·DP·HP를 확인합니다.";
-                case "기본 덱 선택": return "다양한 속성의 50장 기본 덱을 고릅니다. 아바타는 규칙에 영향을 주지 않습니다.";
+                case "기본 덱 선택": return "다양한 속성의 50장 기본 덱을 고릅니다.";
                 case "내 편집 덱": case "편집 덱 선택됨": return "덱 구성에서 저장한 편집 덱을 선택하거나 해제합니다.";
                 case "상대 선택": return "준비·공방·마법 사용을 익히는 세 가지 결투 중 하나를 고릅니다.";
                 case "전체 손패 교체": case "손패 셔플": return "손패 전부를 덱에 넣고 다시 섞어 6장을 뽑습니다. 각 준비 단계에서 카드 사용 전에 한 번 가능합니다. 처음 교체도 첫 준비의 셔플을 사용합니다.";

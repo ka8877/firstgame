@@ -1,0 +1,76 @@
+{
+  "materials": [
+    {
+      "assetId": "Plaster001",
+      "sourceUrl": "https://ambientcg.com/a/Plaster001",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "sourceKind": "Official API published surface-preview maps; not full-resolution original archive.",
+      "use": "Light rough mineral finish for warm limestone architecture. Not claimed to be archaeologically exact stone.",
+      "files": [
+        {
+          "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-albedo.jpg",
+          "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_Color.jpg?314",
+          "sha256": "ec76d207b21370cd3dbc7a02ac678e877396e51162c210241cccfa164c127fcd",
+          "bytes": 827723,
+          "size": [
+            2048,
+            2048
+          ],
+          "map": "albedo",
+          "normalConvention": null
+        },
+        {
+          "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-normal.jpg",
+          "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_NormalDX.jpg?1085",
+          "sha256": "e180fb3fcc88e3792ec9154115ecdcaba101d59c47fa0f775a10c5d6976d87e2",
+          "bytes": 3487605,
+          "size": [
+            2048,
+            2048
+          ],
+          "map": "normal",
+          "normalConvention": "DirectX; Unity importer flips green channel"
+        }
+      ]
+    },
+    {
+      "assetId": "Tiles143",
+      "sourceUrl": "https://ambientcg.com/a/Tiles143",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "sourceKind": "Official API published surface-preview maps (fullZIPCDNreturned403); not full-resolution source pack.",
+      "files": [
+        {
+          "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-albedo.jpg",
+          "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_Color.jpg?66813",
+          "sha256": "18605bf3c98e4e60ac6617b4175be04b21f71aa640a340abf919823fc40c37d7",
+          "bytes": 1308127,
+          "size": [
+            2048,
+            2048
+          ],
+          "map": "albedo",
+          "normalConvention": null
+        },
+        {
+          "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-normal.jpg",
+          "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_NormalDX.jpg?40901",
+          "sha256": "3ec82d0418bbd7ce9983c1943dcc1a05b336b2939d07d76e14a867c97354c17e",
+          "bytes": 184133,
+          "size": [
+            2048,
+            2048
+          ],
+          "map": "normal",
+          "normalConvention": "DirectX; Unity importer flips green channel"
+        }
+      ]
+    }
+  ],
+  "conversion": "Original published JPG bytes retained; Unity normal-map importer flips DirectX green channel and enables repeat/mipmapping. No image pixels edited.",
+  "rejectedCandidate": {
+    "assetId": "Rock030",
+    "reason": "Dark coarse rock looked unsuitable for light temple architecture when viewed directly; not used in final runtime."
+  }
+}

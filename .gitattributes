@@ -1,4 +1,6 @@
 * text=auto
+# Preserve upstream CC0 license/readme bytes, including their original line endings.
+Tools/Art/Gospel3D/Source/*.txt -text -whitespace
 *.cs text eol=lf
 *.ink text eol=lf
 *.meta text eol=lf

@@ -97,6 +97,18 @@ selected.extend(sorted((artifacts / "Validation/GitHub").glob("painted-dawn-*.js
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("fluid-dawn-*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("fm-classic-*.json")))
 selected.extend(sorted((root / "Tools/Art/ClassicCards").glob("*.json")))
+for name in ("FmRevival.md", "GospelJourney.md", "GospelChronology.md", "Gospel3DArt.md", "RevivalValidation.md",
+             "Research/FmRevivalSources.md", "ValidationHistory/2026-10-26-before-revival-Validation.md",
+             "ValidationHistory/2026-10-26-before-revival-VisualValidation.md"):
+    selected.append(root / "Docs" / name)
+selected.append(root / "Tools/Environment/validation-2026-10-26-before-revival.json")
+for directory in ("Tools/Data/Gospel", "Tools/Research/FmRevival", "Tools/Art/Gospel3D", "Tools/Art/GospelTemple"):
+    for pattern in ("*.json", "*NOTICE.txt"):
+        selected.extend(sorted((root / directory).glob(pattern)))
+for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx", "executed-harness.py"):
+    selected.extend(sorted((artifacts / "Validation/Revival").rglob(pattern)))
+selected.extend(sorted((artifacts / "Validation/GospelJourney").glob("*.json")))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("revival-*.json")))
 for pattern in ("*.json", "*.md"):
     selected.extend(sorted((root / "Tools/Art/Painted").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))

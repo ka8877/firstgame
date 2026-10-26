@@ -203,8 +203,8 @@ def inspect_landing(browser, base_url, output, width, height, timeout):
             "bothIllustrationsDecoded": len(metrics["images"]) == 2 and all(
                 image["complete"] and image["width"] > 0 and image["height"] > 0
                 and image["renderedWidth"] > 0 and image["renderedHeight"] > 0 for image in metrics["images"]),
-            "classicEditionVisible": "CLASSIC CARDS" in metrics["edition"],
-            "bothHeadings": metrics["headings"] == ["판타지마스터즈", "새벽의 길"],
+            "classicEditionVisible": "REVIVAL & GOSPEL" in metrics["edition"],
+            "bothHeadings": metrics["headings"] == ["판타지마스터즈", "예수님의 길"],
             "noPageErrors": not result["pageErrors"],
             "noFailedRequests": not result["failedRequests"],
             "noHttpErrors": not result["httpErrors"],

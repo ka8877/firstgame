@@ -1,0 +1,453 @@
+#!/usr/bin/env python3
+"""Real-input checks for FM revival and Gospel journey Web players.
+
+No Unity methods, runtime fields, random seeds or save payloads are inspected or
+changed. Visible gameplay checkpoints require explicit review of the original
+browser capture; a loaded canvas is never counted as a gameplay result. The
+review file can request additional ordinary input if a route needs adjustment.
+Run one browser/Unity owner at a time. Never publishes.
+"""
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import functools
+import hashlib
+import http.server
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+import threading
+import time
+import urllib.parse
+import urllib.request
+
+from PIL import Image, ImageStat
+
+SPEC = importlib.util.spec_from_file_location("revival_web_helpers", Path(__file__).with_name("web-smoke.py"))
+BASE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(BASE)
+ROOT = Path(__file__).resolve().parents[2]
+REVISIONS = {"FantasyCards": "fm-revival-2026-10-26", "PathOfDawn": "gospel-journey-2026-10-26"}
+REQUIRED_CHECKPOINTS = {
+    "FantasyCards": {"title", "lobby", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
+    "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple"},
+}
+
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def browser_proxy():
+    value = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    if not value:
+        return None
+    parsed = urllib.parse.urlsplit(value)
+    if parsed.scheme not in ("http", "https", "socks5") or not parsed.hostname:
+        raise ValueError("Unsupported configured browser proxy")
+    host = "[" + parsed.hostname + "]" if ":" in parsed.hostname else parsed.hostname
+    settings = {"server": parsed.scheme + "://" + host + (":" + str(parsed.port) if parsed.port else ""),
+                "bypass": "localhost,127.0.0.1," + (os.environ.get("NO_PROXY") or os.environ.get("no_proxy") or "")}
+    if parsed.username is not None:
+        settings["username"] = urllib.parse.unquote(parsed.username)
+        settings["password"] = urllib.parse.unquote(parsed.password or "")
+    return settings
+
+
+def digest(path):
+    result = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            result.update(chunk)
+    return result.hexdigest()
+
+
+def runtime_files(folder):
+    return BASE.runtime_entries(BASE.build_fingerprint(folder))
+
+
+class JourneySmoke:
+    def __init__(self, page, args, plan, output):
+        self.page, self.args, self.plan, self.output = page, args, plan, output
+        self.navigation, self.started = 0, time.monotonic()
+        self.report = {"game": args.game, "revision": REVISIONS[args.game], "status": "running",
+            "suite": "revival-real-input-v1", "startedUtc": now(), "profile": args.profile,
+            "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
+            "console": [], "pageErrors": [], "failedRequests": [], "networkResponses": [], "httpErrors": [],
+            "unityConfigurations": [], "checkpoints": [], "audioEvidence": {"windows": []},
+            "buildFingerprint": {"files": runtime_files(args.build_root / args.game / "Web")},
+            "harness": {"file": str(Path(__file__).relative_to(ROOT)), "sha256": digest(__file__),
+                        "helpersSha256": digest(BASE.__file__), "plan": str(args.plan), "planSha256": digest(args.plan)},
+            "visualReview": {"status": "pending", "method": "Original current-run frames require direct review."},
+            "limits": ["Software Chromium and touch emulation are not physical mobile or target-device performance tests.",
+                "Visible original-frame checkpoints supplement native state assertions; no Unity state injection or save editing.",
+                "Browser PCM is not physical speaker listening or an aesthetic approval."]}
+        observer = ROOT / "Tools/Validation/webaudio-observer.js"
+        page.add_init_script(path=str(observer))
+        self.report["audioEvidence"].update(observer=str(observer.relative_to(ROOT)), observerSha256=digest(observer))
+        page.on("console", lambda message: self.report["console"].append({"type": message.type,
+            "text": message.text, "location": message.location, "navigation": self.navigation}))
+        page.on("pageerror", lambda error: self.report["pageErrors"].append({"message": str(error), "stack": getattr(error, "stack", "")}))
+        page.on("requestfailed", lambda request: self.report["failedRequests"].append({"url": request.url,
+            "error": request.failure, "method": request.method, "navigation": self.navigation}))
+        page.on("response", self.response)
+        page.on("dialog", lambda dialog: (self.report["pageErrors"].append(dialog.message), dialog.dismiss()))
+        self.persist()
+        files = self.report["buildFingerprint"]["files"]
+        self.check(len(files) >= 5 and any(f["file"].endswith(".wasm.unityweb") for f in files),
+                   "Complete final local Web runtime is available", files)
+
+    def persist(self):
+        temporary = self.output / "report.json.tmp"
+        temporary.write_text(json.dumps(self.report, ensure_ascii=False, indent=2) + "\n")
+        temporary.replace(self.output / "report.json")
+
+    def check(self, condition, name, evidence=None):
+        self.report["checks"].append({"name": name, "passed": bool(condition), "navigation": self.navigation,
+                                      "evidence": evidence, "checkedUtc": now()})
+        self.persist()
+        if not condition:
+            raise AssertionError(name)
+
+    def response(self, response):
+        entry = {"url": response.url, "status": response.status, "method": response.request.method,
+                 "navigation": self.navigation}
+        self.report["networkResponses"].append(entry)
+        if response.status >= 400:
+            self.report["httpErrors"].append(entry)
+
+    def loaded(self, reload=False):
+        if reload:
+            self.navigation += 1
+            self.page.reload(wait_until="domcontentloaded")
+        self.page.wait_for_function("""() => {
+          const c=document.querySelector('#unity-canvas');
+          return c && ['ready','error'].includes(c.dataset.unityState);
+        }""", timeout=self.args.timeout * 1000)
+        canvas = self.page.locator("#unity-canvas")
+        self.check(canvas.get_attribute("data-unity-state") == "ready", "Unity createUnityInstance resolved" + (" after reload" if reload else ""))
+        configuration = self.page.evaluate("""() => {
+          const urls = {};
+          for (const key of ['dataUrl','frameworkUrl','codeUrl'])
+            if (typeof config === 'object' && typeof config[key] === 'string')
+              urls[key] = new URL(config[key], location.href).href;
+          return urls;
+        }""")
+        self.report["unityConfigurations"].append({**configuration, "navigation": self.navigation})
+        self.check(bool(configuration.get("dataUrl")), "Actual loader data URL recorded", configuration)
+        # createUnityInstance resolves before the real Personal splash finishes.
+        self.page.wait_for_timeout(4000)
+        capabilities = self.page.evaluate("""() => ({maxTouchPoints:navigator.maxTouchPoints,
+          coarse:matchMedia('(pointer: coarse)').matches, width:innerWidth,height:innerHeight})""")
+        self.report["browserInputCapabilities"] = capabilities
+        if self.args.profile == "mobile-landscape":
+            self.check(capabilities["maxTouchPoints"] > 0 and capabilities["coarse"], "Actual touch browser context", capabilities)
+
+    def point(self, x, y):
+        if not (0 <= x <= 1 and 0 <= y <= 1):
+            raise ValueError("Input must stay inside the normalized canvas")
+        box = self.page.locator("#unity-canvas").bounding_box()
+        if not box:
+            raise AssertionError("No visible game canvas")
+        return box["x"] + box["width"] * x, box["y"] + box["height"] * y
+
+    def screenshot(self, name):
+        path = self.output / (name + ".png")
+        self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
+        with Image.open(path) as pixels:
+            stat = ImageStat.Stat(pixels.convert("RGB"))
+            shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
+                    "size": list(pixels.size), "channelStddev": stat.stddev,
+                    "canvas": self.page.locator("#unity-canvas").bounding_box(), "navigation": self.navigation,
+                    "captureKind": "original-browser-canvas", "capturedUtc": now()}
+        self.report["screenshots"].append(shot)
+        self.persist()
+        self.check(min(shot["channelStddev"]) > 5, "Original capture contains nonblank scene pixels: " + name, shot)
+        return shot
+
+    def provider_audio(self, step):
+        """Observe real SoundCloud widget callbacks; never infer PCM across origins."""
+        label = step["label"]
+        evidence = {"label": label, "status": "unverified-external-service", "observations": [],
+            "expectedTrackId": str(step["trackId"]), "navigation": self.navigation,
+            "method": "Official provider PLAY/getCurrentSound and PLAY_PROGRESS events reflected by the shipped footer; no PCM or physical-speaker claim."}
+        try:
+            if step.get("clickToggle"):
+                self.page.locator("#fm-music-toggle").click()
+                self.report["input"].append({"type": "DOM-button-click", "selector": "#fm-music-toggle", "atUtc": now()})
+            self.page.wait_for_function("""track => {
+              const s=document.querySelector('#fm-music-status');
+              return s && s.dataset.playback==='playing' && s.dataset.trackId===track;
+            }""", arg=str(step["trackId"]), timeout=self.args.provider_timeout * 1000)
+            for _ in range(5):
+                evidence["observations"].append(self.page.locator("#fm-music-status").evaluate("""e => ({
+                  text:e.textContent,playback:e.dataset.playback,trackId:e.dataset.trackId,
+                  positionMs:Number(e.dataset.positionMs||0),title:e.dataset.trackTitle,publisher:e.dataset.publisher,
+                  observedAt:performance.now()})"""))
+                self.page.wait_for_timeout(700)
+            rows = evidence["observations"]
+            valid = (all(row["playback"] == "playing" and row["trackId"] == str(step["trackId"]) for row in rows)
+                     and rows[-1]["positionMs"] > rows[0]["positionMs"] + 500)
+            if not valid:
+                raise AssertionError("Expected original track did not show advancing official playback position")
+            evidence["status"] = "verified-provider-playback"
+        except Exception as error:
+            evidence["error"] = str(error)
+            if self.page.locator("#fm-music-status").count():
+                evidence["lastVisibleStatus"] = self.page.locator("#fm-music-status").inner_text()
+        path = self.output / ("provider-audio-" + str(self.navigation) + "-" + label + ".json")
+        path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n")
+        record = {**evidence, "rawEvidence": path.name, "sha256": digest(path)}
+        self.report["audioEvidence"].setdefault("providerWindows", []).append(record)
+        verified = evidence["status"] == "verified-provider-playback"
+        self.report["audioEvidence"]["status"] = ("verified-provider-playback" if all(w["status"] == "verified-provider-playback"
+            for w in self.report["audioEvidence"]["providerWindows"]) else "unverified-external-service")
+        if verified or self.args.require_provider_audio:
+            self.check(verified, "Official provider plays the actual original track: " + label, record)
+        if self.page.locator("#fm-player-panel").count() and self.page.locator("#fm-player-panel").get_attribute("open") is not None:
+            self.page.locator("#fm-player-panel > summary").click()
+            self.report["input"].append({"type": "DOM-button-click", "selector": "#fm-player-panel > summary",
+                                        "label": "Close the actual provider panel", "atUtc": now()})
+        self.persist()
+
+    def input(self, action):
+        kind = action["type"]
+        record = {**action, "navigation": self.navigation, "atUtc": now()}
+        if kind == "click":
+            px, py = self.point(*action["point"])
+            if self.args.profile == "mobile-landscape":
+                self.page.touchscreen.tap(px, py)
+            else:
+                self.page.mouse.click(px, py, delay=180)
+        elif kind == "key":
+            self.page.keyboard.press(action["key"])
+        elif kind == "hold":
+            keys = action["keys"]
+            for key in keys:
+                self.page.keyboard.down(key)
+            try:
+                self.page.wait_for_timeout(action["ms"])
+            finally:
+                for key in reversed(keys):
+                    self.page.keyboard.up(key)
+        elif kind == "touch_hold":
+            start, end = self.point(*action["start"]), self.point(*action["end"])
+            session = self.page.context.new_cdp_session(self.page)
+            try:
+                session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"x": start[0], "y": start[1]}]})
+                session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{"x": end[0], "y": end[1]}]})
+                self.page.wait_for_timeout(action["ms"])
+                session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+            finally:
+                session.detach()
+        else:
+            raise ValueError("Unsupported real input action: " + kind)
+        self.report["input"].append(record)
+        self.page.wait_for_timeout(action.get("settleMs", 450))
+        if kind == "click" and self.args.profile != "mobile-landscape":
+            # Keep the release over the button until Unity has consumed it.
+            self.page.mouse.move(*self.point(.005, .005))
+        self.persist()
+
+    def checkpoint(self, step):
+        attempt = 0
+        while True:
+            name = step["name"] + ("-adjusted-" + str(attempt) if attempt else "")
+            shot = self.screenshot(name)
+            resume = self.output / (name + ".review.json")
+            entry = {"name": name, "expected": step["expected"], "original": shot,
+                     "reviewFile": str(resume.relative_to(ROOT)), "status": "pending", "navigation": self.navigation}
+            self.report["checkpoints"].append(entry)
+            self.report["pendingReview"] = entry
+            self.persist()
+            print("REVIEW " + json.dumps(entry, ensure_ascii=False), flush=True)
+            deadline = time.monotonic() + self.args.review_timeout
+            while not resume.exists() and time.monotonic() < deadline:
+                self.page.wait_for_timeout(500)
+            if not resume.exists():
+                raise AssertionError("Original-frame review timed out: " + name)
+            decision = json.loads(resume.read_text())
+            if decision.get("actions"):
+                entry.update(status="needs-additional-real-input", adjustment=decision)
+                for action in decision["actions"]:
+                    self.input(action)
+                attempt += 1
+                self.persist()
+                continue
+            valid = (decision.get("status") == "approved" and decision.get("frameSha256") == shot["sha256"]
+                     and decision.get("reviewer") and decision.get("reviewedUtc") and decision.get("observed")
+                     and decision.get("expected") == step["expected"])
+            entry.update(status="approved" if valid else "rejected", review=decision)
+            self.report.pop("pendingReview", None)
+            self.check(valid, "Directly verified original gameplay frame: " + step["name"], entry)
+            return
+
+    def audio(self, label):
+        snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 2200)
+        summary = BASE.music_audio_summary(snapshots)
+        path = self.output / ("audio-" + str(self.navigation) + "-" + label + ".json")
+        path.write_text(json.dumps({"label": label, "snapshots": snapshots, "summary": summary}, indent=2) + "\n")
+        evidence = {k: v for k, v in summary.items() if k != "frames"}
+        evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation)
+        self.report["audioEvidence"]["windows"].append(evidence)
+        self.check(not evidence["observerErrors"] and evidence["nonfiniteSamples"] == 0,
+                   "Passive audio observer captured valid PCM: " + label, evidence)
+        if label == "before-first-gesture":
+            self.check(evidence["maximumRms"] < 1e-5, "No music output before first user gesture", evidence)
+        elif label == "muted":
+            self.check(evidence["maximumRms"] < 1e-5, "Actual mute control silences output", evidence)
+        else:
+            self.check(evidence["sampleCount"] >= 6 and evidence["allContextsRunning"]
+                       and evidence["isolatedMusicRoute"] and len(evidence["sourceIdentities"]) == 1
+                       and evidence["audibleSampleFraction"] >= .5 and evidence["medianRms"] > 1e-5,
+                       "Actual looping BGM is audible after user input: " + label, evidence)
+
+    def public_bytes(self, url):
+        files = []
+        for expected in self.report["buildFingerprint"]["files"]:
+            request = urllib.request.Request(urllib.parse.urljoin(url, urllib.parse.quote(expected["file"], safe="/")),
+                headers={"Accept-Encoding": "identity", "Cache-Control": "no-cache"})
+            hasher, size = hashlib.sha256(), 0
+            with urllib.request.urlopen(request, timeout=self.args.timeout) as response:
+                if response.headers.get("Content-Encoding", "identity").lower() not in ("identity", ""):
+                    raise AssertionError("Cannot compare encoded public bytes")
+                for block in iter(lambda: response.read(1024 * 1024), b""):
+                    hasher.update(block); size += len(block)
+                actual = {"file": expected["file"], "url": response.url, "status": response.status,
+                          "bytes": size, "sha256": hasher.hexdigest()}
+            files.append(actual)
+            self.check(actual["status"] == 200 and actual["bytes"] == expected["bytes"] and actual["sha256"] == expected["sha256"],
+                       "Public runtime matches the final local build: " + expected["file"], actual)
+        self.report["publicDelivery"] = {"status": "passed", "files": files, "gameUrl": url}
+
+    def network_check(self):
+        expected, unexpected, external = [], [], []
+        for failed in self.report["failedRequests"]:
+            nav, url = failed["navigation"], failed["url"]
+            if self.music_service(url):
+                external.append(failed)
+                continue
+            exact = any(c.get("navigation") == nav and c.get("dataUrl") == url for c in self.report["unityConfigurations"])
+            http304 = any(r["navigation"] == nav and r["url"] == url and r["status"] == 304 for r in self.report["networkResponses"])
+            marker = "[UnityCache] '" + url + "' successfully revalidated and served from the browser cache"
+            cached = any(m["navigation"] == nav and m["text"] == marker for m in self.report["console"])
+            restored = any(c["status"] == "approved" and c["navigation"] == nav and c["name"].startswith("continued-")
+                           for c in self.report["checkpoints"])
+            (expected if nav > 0 and failed["method"] == "GET" and failed["error"] == "net::ERR_ABORTED"
+             and exact and http304 and cached and restored else unexpected).append(failed)
+        diagnostic = {"verifiedUnityCacheRevalidationAborts": expected, "unexpectedFailures": unexpected,
+                      "externalMusicServiceFailures": external}
+        self.report["networkDiagnostic"] = diagnostic
+        self.check(not unexpected, "No unexpected failed requests; raw cache aborts retained", diagnostic)
+
+    def music_service(self, url):
+        host = urllib.parse.urlsplit(url).hostname or ""
+        return self.args.game == "FantasyCards" and any(host == domain or host.endswith("." + domain)
+            for domain in ("soundcloud.com", "sndcdn.com"))
+
+    def run(self, url):
+        try:
+            if self.args.base_url:
+                self.public_bytes(url)
+            self.page.goto(url, wait_until="domcontentloaded", timeout=self.args.timeout * 1000)
+            self.loaded()
+            for step in self.plan["steps"]:
+                if step.get("profile") and step["profile"] != self.args.profile:
+                    continue
+                kind = step["type"]
+                if kind == "checkpoint": self.checkpoint(step)
+                elif kind == "audio": self.audio(step["label"])
+                elif kind == "provider_audio": self.provider_audio(step)
+                elif kind == "reload": self.loaded(reload=True)
+                elif kind == "wait": self.page.wait_for_timeout(step["ms"])
+                else: self.input(step)
+            external_errors = [m for m in self.report["console"] if m["type"] == "error" and self.music_service(m.get("location", {}).get("url", ""))]
+            self.report["audioEvidence"]["externalConsoleErrors"] = external_errors
+            self.check(not self.report["pageErrors"], "No JavaScript page errors", self.report["pageErrors"])
+            self.check(not [r for r in self.report["httpErrors"] if not self.music_service(r["url"])],
+                       "No game-runtime HTTP errors; external music errors retained separately", self.report["httpErrors"])
+            self.check(not [m for m in self.report["console"] if m["type"] == "error" and m not in external_errors],
+                       "No game-runtime browser console errors")
+            self.network_check()
+            reviews = [c for c in self.report["checkpoints"] if c["status"] == "approved"]
+            self.report["visualReview"] = {"status": "approved", "reviewer": "; ".join(sorted({c["review"]["reviewer"] for c in reviews})),
+                "reviewedUtc": now(), "runtimeFiles": self.report["buildFingerprint"]["files"],
+                "screenshots": [c["original"] for c in reviews],
+                "findings": [c["review"]["observed"] for c in reviews],
+                "method": "Explicit direct review of this run's original rendered gameplay frames."}
+            self.report["status"] = "passed"
+        except Exception as error:
+            self.report.update(status="failed", failure=str(error))
+            try: self.screenshot("failure")
+            except Exception: pass
+        finally:
+            self.report["finishedUtc"] = now(); self.persist()
+        print(json.dumps({"game": self.args.game, "status": self.report["status"], "checks": len(self.report["checks"]),
+                          "report": str((self.output / "report.json").relative_to(ROOT))}), flush=True)
+        return self.report
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--game", choices=list(REVISIONS), required=True)
+    parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
+    parser.add_argument("--base-url")
+    parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
+    parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
+    parser.add_argument("--chromium", default=os.environ.get("CHROMIUM_BINARY", "/usr/bin/chromium"))
+    parser.add_argument("--timeout", type=int, default=180)
+    parser.add_argument("--review-timeout", type=int, default=1200)
+    parser.add_argument("--provider-timeout", type=int, default=15)
+    parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
+    args = parser.parse_args()
+    args.output = args.output.resolve()
+    args.build_root = args.build_root.resolve()
+    args.plan = args.plan.resolve()
+    artifact_root = (ROOT / "Artifacts").resolve()
+    if not args.output.resolve().is_relative_to(artifact_root) or args.output.resolve() == artifact_root:
+        parser.error("--output must be a separate directory inside Artifacts")
+    if not (args.build_root / args.game / "Web/index.html").is_file():
+        parser.error("A successful final local Web build is required, including for public verification")
+    plans = json.loads(args.plan.read_text())
+    plan = plans[args.game]
+    checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
+    if not REQUIRED_CHECKPOINTS[args.game].issubset(checkpoints):
+        parser.error("The authored plan lacks required current-game checkpoints")
+    output = args.output / args.game
+    previous = BASE.archive_previous_run(output)
+    server = None
+    if not args.base_url:
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(BASE.LocalHandler, directory=str(args.build_root.resolve())))
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        with BASE.sync_playwright() as playwright:
+            renderer = (["--ozone-platform=x11", "--use-gl=angle", "--use-angle=gl", "--ignore-gpu-blocklist"]
+                        if args.renderer == "x11-mesa" else ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"])
+            browser = playwright.chromium.launch(executable_path=args.chromium, headless=args.renderer != "x11-mesa", proxy=browser_proxy(),
+                ignore_default_args=["--mute-audio"], args=["--no-sandbox", "--disable-dev-shm-usage", *renderer])
+            try:
+                mobile = args.profile == "mobile-landscape"
+                options = {"viewport": {"width": 844 if mobile else 1280, "height": 390 if mobile else 720},
+                           "device_scale_factor": 1, "has_touch": mobile, "is_mobile": mobile}
+                if mobile:
+                    options["user_agent"] = "Mozilla/5.0 (Linux; Android 14; Mobile Smoke) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+                context = browser.new_context(**options)
+                try:
+                    smoke = JourneySmoke(context.new_page(), args, plan, output)
+                    if previous: smoke.report["previousRunArchive"] = str(previous)
+                    url = BASE.public_game_url(args.base_url, args.game) if args.base_url else f"http://127.0.0.1:{server.server_port}/{args.game}/Web/"
+                    report = smoke.run(url)
+                finally: context.close()
+            finally: browser.close()
+    finally:
+        if server: server.shutdown(); server.server_close()
+    return 0 if report["status"] == "passed" else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
