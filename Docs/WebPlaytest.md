@@ -1,55 +1,42 @@
-# 설치 없이 공유하는 웹 체험판
+# 웹 체험판과 리마스터 배포
 
-PC 및 모바일 브라우저에 동일한 URL을 배포하고, 개발 중에는 그 주소의 파일을 갱신한다. 정식 Windows 설치판은 별도로 만든다. 모바일은 가로 화면을 기준으로 터치 입력을 제공하며 실제 휴대폰의 성능과 브라우저 호환성은 별도 확인한다.
+공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)이다. 현재 소스 개정은 `fm-remaster-2026-10-26`과 `gospel-remaster-2026-10-26`이며, 해당 주소의 실제 배포 상태는 [Validation](Validation.md)의 공개 파일 해시와 현재 실행 보고서로 확인한다. 소스를 수정했거나 로컬 빌드가 통과한 것을 공개판의 통과로 표시하지 않는다.
 
-**게시된 체험판: [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)**
+판타지마스터즈는 원작 그림·규칙을 유지한 161종 카드와 네 가지 50장 기본 덱, 여섯 손패, 양측 준비와 자동 공방을 제공한다. 로그인 화면에서 게임 시작 → 연습방 → 대전실 → 덱 선택 → START로 들어간다. 도감/덱 편집에서 검색·필터·정렬과 원본 카드 전체 보기를 사용한다. 출처·카드 추가·저장 호환은 [CardRemaster](CardRemaster.md), 화면은 [FmRemasterUI](FmRemasterUI.md)를 따른다.
 
-현재 소스는 **원작 DB 카드96종·7속성·아바타4명·50장 기본 덱4종·세 결투, 서사 일러스트 2.5D 장면·전신 인물·보행·초반 한국어 음성**을 포함한다. 이것이 위 URL에 반영되었는지는 [검증 기록](Validation.md)의 최신 빌드·브라우저·공개 파일 해시를 기준으로 판단한다. 새 버전 검증 중에는 이전 공개판의 원화·BGM 검사 통과를 재사용하지 않는다. 이전 결과는 [보존 기록](ValidationHistory/2026-10-23-art-edition.md)을 따른다. 모바일 브라우저 자동 검사는 Chromium 터치 에뮬레이션이며 실제 휴대폰 성능과 구분한다. 업데이트 후에도 같은 URL을 사용한다.
+예수님의 길은 탄생 말씀 세 페이지와 소년 예수님의 성전 방문(누가복음2:41–52)이 현재 실행 구간이다. 관절 인물의 걷기·달리기·점프·착지와 선택 연습 동작을 포함한다. 이후 생애 장을 플레이 가능하다고 표시하지 않는다. 이전 회화풍 관찰자·회귀 이야기는 별도 소스·저장과 이력에 보존한다.
 
-## 새 체험판의 플레이 흐름
+## 음악과 저장
 
-카드는 `새로운 결투`에서 아바타→50장 기본 덱 또는 내 편집 덱→상대를 고르고, 6장 손패를 확인한다. 카드 사용 전에는 각 준비에서 전체 손패를 한 번 섞을 수 있다. 지형의 LP와 소환의 색 소울·총소울을 구분하며, 공격 준비와 방어 준비 후 배치 순서대로 자동 공방한다. 리더 기술 대신 원작 카드 효과를 사용한다. 카드·자원·단계 설명은 PC 마우스 hover, 모바일 카드 선택·상세 보기로 읽는다. 도감에서 속성·종류·비용·등급 필터와 원본 카드 전체 보기를 제공한다.
+카드 원작 음악은 제작사 SOUND-I의 공식 SoundCloud 외부 플레이어로 연결한다. 네트워크와 공급자 상태에 따라 실제 재생을 확인하고, 실패하면 미확인으로 기록한다. 음원 파일을 추출하거나 원곡을 번들에 복구했다고 표시하지 않는다. 지연 개선의 범위는 [FmMusicLatency](FmMusicLatency.md)를 따른다.
 
-서사의 최신 움직임 개정은 `fluid-dawn-2026-10-24`이며 시각 기반은 `painted-dawn-2026-10-24`다. 호숫가·석조 방 전체 그림과 투명 전신 인물, 앞뒤 보행 atlas로 구성하고 실제 이동·충돌·상호작용·저장 상태에 연결한다. 화면 기준 이동과 제한된 장면 드래그를 사용하며 이전 절차적 3D 모델을 렌더링하지 않는다. 제작 계약은 [PaintedDawn.md](PaintedDawn.md)를 따른다. 초반 도입 9줄·호숫가 11줄에 일반 한국어 AI 음성을 넣으며 선택 두 번·결과 세 가지·기억과 회귀를 유지한다. 전체 대사 더빙·인물별 배우 연기·립싱크나 상용 게임 수준의 품질을 제공한다고 소개하지 않는다.
+예수님의 길은 게임에 포함된 BGM을 사용하고 브라우저의 첫 실제 입력 이후 시작한다. 이전 관찰자 이야기의 음성 20줄을 새 성경 본문에 자동 연결하지 않는다. 재생 상태·브라우저 PCM 관찰과 실제 스피커 청취는 별도 확인이다.
 
-## 음악과 초반 대화 음성
+카드 저장은 schema3/`fm-classic-0.1.0`, `fantasy-battle-classic-v3`·`fantasy-deck-classic-v3`를 유지한다. 예수님의 길은 schema1/`gospel-0.1.0`, `GOSPEL.activeSlot`이 고르는 전용 여정 슬롯을 사용한다. 이전 `POD.activeSlot`을 덮어쓰지 않는다. 저장은 브라우저·origin별로 분리된다. 카드의 저장 옮기기는 별도 기기로 전송할 수 있고 성경 여정은 현재 기기의 저장·이어하기를 제공한다.
 
-게임마다 로컬에 포함된 별도의 오케스트라 음원을 반복 재생한다. 외부 음악 서비스나 실행 중 생성 API를 호출하지 않는다. 브라우저에서는 로딩 뒤 게임 화면을 클릭하거나 탭하면 음악이 시작된다. 첫 입력 전의 무음은 자동재생 정책에 따른 동작이며, 이를 우회하는 브라우저 옵션을 사용자에게 요구하지 않는다.
+## 실행과 배포 순서
 
-카드는 타이틀/전투의 **음악**에서 음소거와 음악 음량을, 서사는 **설정**에서 배경 음악·대화 음성 켜기/끄기와 음량을 조절한다. 서사는 현재 음성 대사 다시 듣기도 제공한다. 설정은 브라우저별로 저장되고 진행 JSON과는 별개다. 테스터용 조작법은 [PlaytestGuide.md](PlaytestGuide.md#배경-음악과-음량), 음원과 샘플의 사용 권리는 [Audio.md](Audio.md)를 따른다.
+`main`에는 두 Unity 프로젝트와 문서, `gh-pages`에는 선별한 Web 실행 파일·실제 화면 캡처·라이선스 안내를 둔다. Unity 빌드는 라이선스가 준비된 개발 환경에서 실행한다. `publish-site.py`는 저장소 공개 여부·계정 요금제·Pages 설정을 바꾸지 않는다.
 
-초반 음성 20줄은 MeloTTS의 일반 한국어 음성으로 미리 생성한 Ogg다. 화면 문장과 매니페스트가 정확히 일치할 때만 재생하고, 다음 대사·새 여정·이어하기·회귀에서는 이전 음성을 중단한다. 실행 중 외부 음성 서비스에 대사나 계정을 보내지 않으며 모델 가중치를 내려받지 않는다. 음성을 꺼도 자막과 선택은 유지한다. 생성·라이선스·문장 매칭·파일 분석은 [Voice.md](Voice.md)를 따른다. 자동 출력 분석과 사람이 발음·연기를 듣는 검수는 구분한다.
-
-## 배포 구조
-
-- `main`: 편집 가능한 두 Unity 프로젝트·원화·문서. 저장소의 공개 여부는 배포 스크립트가 변경하지 않는다.
-- `gh-pages`: `Tools/Web/stage-site.py`가 선별한 웹 실행 파일·타이틀 원화·라이선스만 포함. 소스나 인증 정보는 복사하지 않는다.
-- GitHub Actions의 **Publish web playtest**가 `gh-pages`를 확인한 뒤 Pages에 게시한다. Unity 빌드는 라이선스가 준비된 개발 환경에서 실행하고, GitHub Actions에는 라이선스나 로그인 값을 전달하지 않는다.
-
-웹 실행 파일은 공개 URL에서 다운로드할 수 있다. GitHub Pages는 체험판의 초대 제한이나 비밀번호를 제공하는 구성은 아니다. 2026-10-23 사용자가 Pages를 GitHub Actions로 설정했다고 알려준 뒤 API에서 `has_pages:true`, `private:false`를 확인했다. 현재 소스 저장소도 공개이며, 이 작업의 스크립트가 저장소 공개 여부를 변경한 것은 아니다.
-
-## 최초 Pages 설정
-
-최초 설정 당시 GitHub 연결은 저장소 코드·Actions를 사용할 수 있었지만 Pages 관리 API에는 `403 Resource not accessible by integration`을 반환했다. 자동으로 Pages 설정을 바꿨다고 간주하지 않는다. 사용자가 GitHub UI에서 설정한 뒤 활성화를 확인했다.
-
-저장소 소유자가 [Settings → Pages](https://github.com/ka8877/firstgame/settings/pages)에서 **Build and deployment → Source → GitHub Actions**를 선택한다. 비공개 저장소의 Pages는 GitHub 계정 요금제에 따라 제공되지 않을 수 있다. 업그레이드나 소스 공개 전환을 자동으로 수행하지 않는다. 사용할 수 없다면 웹 빌드만 담는 별도 공개 저장소나 사용자가 이미 이용하는 정적 호스팅으로 같은 폴더를 배포할 수 있다.
-
-Pages가 활성화되면 [Publish web playtest](https://github.com/ka8877/firstgame/actions/workflows/publish-web.yml)에서 **Run workflow**를 실행한다. 현재 주소는 `https://ka8877.github.io/firstgame/`이다. 이후 배포도 Actions 성공에 더해 실제 공개 파일과 게임 실행을 확인한다.
-
-## 이후 업데이트
-
-두 게임의 수정·native 테스트·Windows/Web 빌드를 마친 뒤 새 Web 파일에 대해 실제 브라우저 검사를 수행한다. 새벽의 길 그림 개정은 탐색·대화의 얼굴/배경/발 접지, 앞뒤 보행 프레임, 장면 전환, 터치 영역, 실제 이동·상호작용, 저장·회귀와 초반 음성의 재생/중단/다시 듣기를 확인해야 한다. 카드의 아바타/덱/상대 선택·전체 손패 셔플·LP/소울·양측 준비·자동 공방·설명·저장 검증을 수행하며, 변경된 빌드에는 해당 새 파일의 근거가 필요하다. 첫 사용자 입력 후 BGM 재생·반복·음소거·음량·페이지 새로고침도 유지한다. 실제 출력 파형·재생 상태 확인과 사람이 스피커로 듣는 검수는 구분한다. 동시 Web 컴파일이나 소프트웨어 브라우저 실행은 피한다.
+새 Windows/Web 빌드와 Core/native 검사를 마친 뒤 두 게임의 Desktop720(1280×720)과 Mobile844(844×390 터치 에뮬레이션)를 실제 입력으로 검사한다. 현재 보고서는 `Artifacts/Validation/Remaster/<profile>/<game>/report.json`에 둔다. 원본 캡처의 직접 검토, 체크포인트 승인과 정확한 런타임 SHA-256이 필요하다. `Portal/FantasyCards.png`와 `Portal/PathOfDawn.png`도 승인된 현재 원본 화면을 그대로 선택한다.
 
 ```bash
+python3 Tools/Validation/summarize-revival-release.py --check-only
+python3 Tools/Validation/summarize-revival-release.py
 python3 Tools/Web/stage-site.py --require-browser-reports
 python3 Tools/Web/publish-site.py
 gh workflow run publish-web.yml --ref main
 ```
 
-`stage-site.py`는 성공한 BuildEvidence와 최종 브라우저 보고서의 파일 해시를 대조한다. 동일한 경로의 게임 페이지를 유지하고 Unity 로더·데이터·WASM은 내용 해시 파일명을 사용해 업데이트 때 오래된 실행 파일이 섞이지 않도록 한다. 공개용 이미지·모델은 일반 Git 파일이며 Pages에 Git LFS 포인터를 올리지 않는다. 소스 저장소의 Git LFS 정책은 유지한다.
+`summarize-revival-release.py`라는 기존 파일명은 자동화 호출 호환을 위해 유지한다. 검증 대상은 위의 remaster 개정이다. 게시 준비 단계는 깨끗한 소스 커밋에서 다시 실행하며, 매니페스트에는 개정·콘텐츠 버전·파일 SHA-256·소스 커밋을 기록한다. 게시 직전 매니페스트와 실제 파일을 다시 비교한다. 게임 파일은 내용 기반 해시 이름을 사용하며 Pages에는 LFS 포인터를 게시하지 않는다.
 
-이전 2026-10-23 확장판 배포의 전체 조작 필수 프로필은 카드 PC 1280×720·모바일 844×390, 서사 PC 1280×720·1920×1080·모바일 844×390이었다. 새 그림 개정의 필수 검사와 실제 결과는 최신 검증 기록·배포 매니페스트를 따른다. 카드 1920×1080의 별도 전체 자동 실행은 소프트웨어 렌더링에서 입력 완료 대기·OCR 문제로 중단되어 미완료로 보존한다. 해당 실행의 일부 선택·셔플·설명 확인을 전체 통과로 세지 않는다. 카드 720 실행에는 1920 화면 캡처도 포함하지만 1920 전체 조작 실행의 대체 통과로 표현하지 않는다. 배포 매니페스트는 게임별 필수 프로필과 미완료 실행을 함께 명시한다.
+실제 Pages 실행이 성공하면 전체 공개 파일을 내려받아 대조하고, 공개 랜딩의 PC/모바일 원본 화면 및 두 게임의 PublicMobile844 실제 입력·저장·전체 새로고침·음악을 새로 확인한다. 브라우저 검사는 단독 실행한다.
 
-`build-manifest.json`에 배포 파일 SHA-256·소스 커밋·생성 시각을 남긴다. 게시 후 랜딩·두 게임 HTML·실제 로더/데이터/WASM·브라우저 입력·저장/새로고침과 BGM/음성 조작을 확인한다. 음원 파일의 파형 검사만으로 공개 브라우저 재생을 통과했다고 기록하지 않는다. 실패하면 최신 배포를 성공이라고 보고하지 않으며 기존 빌드 ZIP을 대안으로 제공한다.
+```bash
+python3 Tools/Validation/verify-public-portal.py
+# 공개 두 게임의 PublicMobile844 검사를 완료하고 원본 화면을 직접 검토한다.
+python3 Tools/Validation/summarize-revival-release.py --check-only --pages-run <실제-성공한-Pages-run-URL>
+python3 Tools/Validation/summarize-revival-release.py --pages-run <실제-성공한-Pages-run-URL>
+```
 
-브라우저 저장은 주소·브라우저별로 분리된다. 배포 주소를 바꾸거나 브라우저 데이터를 지우기 전에는 게임의 저장 내보내기를 사용한다. 카드 내부 저장은 schema 3/`fm-classic-0.1.0`이며 새 슬롯 `fantasy-battle-classic-v3`와 `fantasy-deck-classic-v3`를 사용한다. 이전판 전투/편집 덱 파일은 보존하고 호환되지 않는 전투를 조용히 이어 붙이지 않는다. 같은 새 버전끼리 전투 JSON을 옮기며 편집 덱·완료 표시·오디오 설정은 별도다. 서사의 내부 schema 2/`galilee-0.1.0`과 공통 전송 봉투 schema 1은 유지한다.
+공개 랜딩 보고서는 `Artifacts/Validation/Remaster/PublicPortal/report.json`, 공개 게임 보고서는 `Artifacts/Validation/Remaster/PublicMobile844/<game>/report.json`이다. 이전 Revival/Gospel의 검증 문서는 [before-remaster 이력](ValidationHistory/2026-10-26-before-remaster/archive-manifest.json)에 보존하며 새 통과로 합산하지 않는다. 실제 Android/iPhone·Safari·Windows 하드웨어 조작·성능과 사용자 미적 승인은 별도다.

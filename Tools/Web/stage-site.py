@@ -19,8 +19,9 @@ REQUIRED_PROFILES = {
     "FantasyCards": ("Desktop720", "Mobile844"),
     "PathOfDawn": ("Desktop720", "Mobile844"),
 }
-GAME_REVISIONS = {"FantasyCards": "fm-revival-2026-10-26", "PathOfDawn": "gospel-journey-2026-10-26"}
-REPORT_ROOTS = {game: "Artifacts/Validation/Revival" for game in GAMES}
+GAME_REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+CONTENT_VERSIONS = {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
+REPORT_ROOTS = {game: "Artifacts/Validation/Remaster" for game in GAMES}
 
 
 def runtime_file(relative):
@@ -30,7 +31,8 @@ def runtime_file(relative):
 def validate_report(report_path, game, profile, player):
     report = json.loads(report_path.read_text())
     if (report.get("game") != game or report.get("status") != "passed"
-            or report.get("revision") != GAME_REVISIONS[game]):
+            or report.get("revision") != GAME_REVISIONS[game]
+            or report.get("suite") != "remaster-real-input-v1"):
         raise SystemExit(f"Current passed browser report required: {game}/{profile}")
     if not report.get("checks") or not all(c.get("passed") is True for c in report["checks"]):
         raise SystemExit(f"Every game interaction check must pass: {game}/{profile}")
@@ -86,13 +88,17 @@ for game, slug in GAMES.items():
     evidence = player / "BuildEvidence.txt"
     if not evidence.is_file() or "Result: Succeeded" not in evidence.read_text():
         raise SystemExit(f"Successful Web build required: {game}")
+    build = dict(line.split(": ", 1) for line in evidence.read_text().splitlines() if ": " in line)
+    if (build.get("Revision") != GAME_REVISIONS[game] or build.get("Content") != CONTENT_VERSIONS[game]
+            or build.get("Target") != "WebGL" or build.get("Errors") != "0"):
+        raise SystemExit(f"Current remaster Web build required: {game}")
     reports = []
     if args.require_browser_reports:
         for profile in REQUIRED_PROFILES[game]:
             report_path = ROOT / REPORT_ROOTS[game] / profile / game / "report.json"
             reports.append(validate_report(report_path, game, profile, player))
     # Portal illustrations show this revision's actual game, not the retired art.
-    hero = ROOT / "Artifacts/Validation/Revival" / "Portal" / (game + ".png")
+    hero = ROOT / REPORT_ROOTS[game] / "Portal" / (game + ".png")
     if not hero.is_file():
         raise SystemExit(f"Choose a directly reviewed current game capture for the portal: {hero}")
     if reports and not any(hashlib.sha256(hero.read_bytes()).hexdigest() == shot["sha256"]
@@ -154,6 +160,7 @@ manifest = {
     "createdUtc": datetime.now(timezone.utc).isoformat(),
     "publishReady": args.require_browser_reports,
     "gameRevisions": GAME_REVISIONS,
+    "contentVersions": CONTENT_VERSIONS,
     "browserProfiles": ["Desktop720", "Mobile844"] if args.require_browser_reports else [],
     "browserProfilesByGame": REQUIRED_PROFILES if args.require_browser_reports else {},
     "browserReportRootsByGame": REPORT_ROOTS if args.require_browser_reports else {},

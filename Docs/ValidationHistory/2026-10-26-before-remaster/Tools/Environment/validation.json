@@ -1,0 +1,1720 @@
+{
+  "date": "2026-10-26",
+  "recordedUtc": "2026-10-26T08:34:30.549844+00:00",
+  "dateTimezone": "Asia/Seoul",
+  "gameRevisions": {
+    "FantasyCards": "fm-revival-2026-10-26",
+    "PathOfDawn": "gospel-journey-2026-10-26"
+  },
+  "contentVersions": {
+    "FantasyCards": "fm-classic-0.1.0",
+    "PathOfDawn": "gospel-0.1.0"
+  },
+  "sourceCommitAtSummary": "829d82dde18e4dc160172050334650eb22f8dcc8",
+  "sourceDirtyAtSummary": false,
+  "historicalBaseline": {
+    "evidence": "Tools/Environment/validation-2026-10-26-before-revival.json",
+    "sha256": "00e4a2ff06b42e8fac25199f158b1c847b3a543486ec5928de3a272b2b7caa10"
+  },
+  "externalCore": {
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0,
+    "finishedUtc": "2026-10-26T06:13:58.7454059+00:00",
+    "evidence": "Artifacts/TestResults/Core/core-tests.trx",
+    "sha256": "9bb3606b2053ee4ac6f8b3a8f51cfb0f21aea6980d7286aec8c533ef7b4f3752"
+  },
+  "nativeTests": {
+    "FantasyCards": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "fixture": "FantasyCardsRevivalSmokeTests",
+      "finishedUtc": "2026-10-26 06:13:18Z",
+      "evidence": "Artifacts/TestResults/FantasyCards/Revival.xml",
+      "sha256": "e3e28b66bc6ee6f1b4d1c1c8f192f7b31182b3ec817c0a301e3ddada7ba63cc8"
+    },
+    "PathOfDawn": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "fixture": "GospelJourneySmokeTests",
+      "finishedUtc": "2026-10-26 07:23:21Z",
+      "evidence": "Artifacts/TestResults/PathOfDawn/Gospel.xml",
+      "sha256": "565b7a689b0d36de3ee6679ab6d78f9fc5a8564ae2986acbe4c85723afc61a72"
+    }
+  },
+  "builds": {
+    "FantasyCards": {
+      "Windows": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Target": "StandaloneWindows64",
+          "Result": "Succeeded",
+          "Bytes": "221743618",
+          "Duration": "00:00:16.4014930",
+          "Errors": "0",
+          "Warnings": "3",
+          "Content": "fm-classic-0.1.0",
+          "Revision": "fm-revival-2026-10-26"
+        },
+        "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+        "sha256": "6b6299f54cb026d68c0d129ef352e558eb758e6c726d6f11b2e7ade75d09f80a"
+      },
+      "Web": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Target": "WebGL",
+          "Result": "Succeeded",
+          "Bytes": "13367",
+          "Duration": "00:05:14.5048180",
+          "Errors": "0",
+          "Warnings": "6",
+          "Content": "fm-classic-0.1.0",
+          "Revision": "fm-revival-2026-10-26"
+        },
+        "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+        "sha256": "1990f6eca2a96bd96a66ae5d3607733730b6865c809f73826fe44a0eced9248e",
+        "actualPlayerBytes": 109415920,
+        "runtimeFiles": [
+          {
+            "file": "Build/43885a498cdc73787b78e28f97860823.wasm.unityweb",
+            "bytes": 13080332,
+            "sha256": "d7ad0b3dec51136c7db1266f7d94f900971efd543ef84dd58be5b35ef118e106"
+          },
+          {
+            "file": "Build/667dea80f6f9a9667dc4472a40d98954.data.unityweb",
+            "bytes": 96184626,
+            "sha256": "90f7b6070b1f0c7d875780368bb340b75ab1a2e1518eb664823bad17b3107204"
+          },
+          {
+            "file": "Build/93a205b79f45e380dc1153a709c3a273.framework.js.unityweb",
+            "bytes": 89728,
+            "sha256": "14d16642d059a509f2e0da015f1a50872b5e754179618cf3fc8d6e4271d04017"
+          },
+          {
+            "file": "Build/e099eb27a432cb015bfec74da2ab1f54.loader.js",
+            "bytes": 47867,
+            "sha256": "18caba0fd84e5c4a4177069e7eeab523fa123be4cbbd0f7ba054f2610886bce9"
+          },
+          {
+            "file": "index.html",
+            "bytes": 13367,
+            "sha256": "d3e36fa29bbe3d92ea9b549ea392f8a7d3cc7b90d9ef65c09b96160ea847e75b"
+          }
+        ]
+      }
+    },
+    "PathOfDawn": {
+      "Windows": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Content": "gospel-0.1.0",
+          "Revision": "gospel-journey-2026-10-26",
+          "Target": "StandaloneWindows64",
+          "Result": "Succeeded",
+          "Bytes": "233059195",
+          "Duration": "00:00:17.6731150",
+          "Errors": "0",
+          "Warnings": "1"
+        },
+        "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+        "sha256": "1d11a77276f38019a6a313ffbcf17d82ed0f855eca7efe2f7b101d8958e36c7a"
+      },
+      "Web": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Content": "gospel-0.1.0",
+          "Revision": "gospel-journey-2026-10-26",
+          "Target": "WebGL",
+          "Result": "Succeeded",
+          "Bytes": "7333",
+          "Duration": "00:08:58.3234360",
+          "Errors": "0",
+          "Warnings": "1"
+        },
+        "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+        "sha256": "f3eb11554fab88988f35f45b6b8c1789fbc7e1def0ca540249d663f6777969b5",
+        "actualPlayerBytes": 72523244,
+        "runtimeFiles": [
+          {
+            "file": "Build/2d34865603e9c263ad76f143910dc1f0.data.unityweb",
+            "bytes": 59005915,
+            "sha256": "eedd4f59ec2aa7c1ac549e04dfb85e43b9ec65f2ebdd5c9f52ca87bfca69eec3"
+          },
+          {
+            "file": "Build/3412b4881a977c381f0a8b105d931abc.wasm.unityweb",
+            "bytes": 13372369,
+            "sha256": "50157bcc7c2a7b2e0bead909fe24d381fe7db36e9004b00578f4385fe303a379"
+          },
+          {
+            "file": "Build/76a96b3b760ab33dc18667990ded8e01.framework.js.unityweb",
+            "bytes": 89760,
+            "sha256": "0d49740c368c763b98c06c50c5a6f56b2406b89a468e2bd013e5974536cb5f79"
+          },
+          {
+            "file": "Build/938dcb308cd13d4b4d6ae41a60ad94a7.loader.js",
+            "bytes": 47867,
+            "sha256": "f9ea076fba76396a620b0e3ee055f836368c718606f648b68b8ee3b598b26c38"
+          },
+          {
+            "file": "index.html",
+            "bytes": 7333,
+            "sha256": "d207f3b6387a9dbebc0672699b5d4c344c3d01c2c0f3765eeda08d88b3835bbe"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "Desktop720": {
+      "FantasyCards": {
+        "status": "passed",
+        "checks": 30,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Desktop720/FantasyCards/report.json",
+        "sha256": "47e017ddb634d04dd1c203d592371d04fbde68dbb43d6a0af7f9a4617dc2b53f",
+        "audio": {
+          "status": "verified-provider-playback",
+          "pcmWindows": 0,
+          "providerWindows": 3
+        },
+        "reviewedUtc": "2026-10-26T07:11:25.832068+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/title.png",
+            "sha256": "096fffd6b06931e4f63182f8f4ab52e118488a2527b1e46c7308fc07c227cdbb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              76.66783514393066,
+              74.02588150961793,
+              72.6924666340831
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:05:48.638405+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/lobby.png",
+            "sha256": "199abdcdc5babf81e3360569b001c5fde5d86266a6c45e4d2029fffd3281b916",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              49.89863625169147,
+              46.72451853180035,
+              41.65174698442505
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:06:47.402621+00:00"
+          },
+          {
+            "name": "deck-selection",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/deck-selection.png",
+            "sha256": "fc7ad325e875672eebf4baf0a8219a5d51e3a1a42488ffc7bcdecb2871127d9a",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              64.94163020303534,
+              61.456636950673996,
+              55.90111679825669
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:07:25.011622+00:00"
+          },
+          {
+            "name": "room",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/room.png",
+            "sha256": "848979728e96934e56c49cfeedd1d4d869972ad459ec44116072e6cbe248a857",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              49.42549266470659,
+              44.63717234973965,
+              39.13334965367818
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:08:08.788626+00:00"
+          },
+          {
+            "name": "opening-drawn",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/opening-drawn.png",
+            "sha256": "a89063fdc3dbf4ce66f2144d079e4453ca43ba12c096b8e8a4a16b42e2be7544",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              65.23293866169955,
+              64.21382416068222,
+              53.86913886068944
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:08:34.044766+00:00"
+          },
+          {
+            "name": "opening",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/opening.png",
+            "sha256": "901fbaaadfb1b1cd5f8af156713878dfead9234f55f7f22b59be519042a0206f",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              69.81919267489704,
+              67.86226694349635,
+              63.51558731551105
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:00.704043+00:00"
+          },
+          {
+            "name": "battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/battle.png",
+            "sha256": "0bc1d737115328780abf63ddc4d7fdaef288f9a67d492326087f0295df3cf9e9",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.71478603599164,
+              48.7138100653409,
+              47.189752572094655
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:24.603918+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/saved-battle.png",
+            "sha256": "bcf2bda5fa1d903ac1f478555c8aa83667b8ce9b500dddbd2937eb2268a8abcb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.64898272005645,
+              48.669293219270635,
+              47.181582989908925
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:58.478033+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/continued-battle.png",
+            "sha256": "74a32154054cc117563fd00f92ea4da37d656e948ffc88f83daaa0569f28996f",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.686482959526096,
+              48.69541991763263,
+              47.18808220826095
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:10:55.035495+00:00"
+          }
+        ],
+        "findings": [
+          "직접 본 원본에 Fantasy Masters 원작 웹 로고와 판타지마스터즈 제목, 원작 웹 로그인 엘프 인물, 빛/물/불/숲/금속/대지/암흑 7문양과 게임 시작·이어하기·카드 도감·음악 설정 버튼이 표시된다. 이전 창작 아바타 선택 화면은 보이지 않는다. 원작 저해상도 자료의 픽셀은 확대되어 보인다.",
+          "Room 연습실에 숲과 빛/물과 암흑/불과 금속 3개 실제 AI 대전방이 있고 우측 덱 선택·카드 도감·덱 편집이 보인다. SYSTEM 안내는 컴퓨터 상대임을 명시하며 접속자·다른 이용자 채팅을 꾸며 표시하지 않는다. 현재 선택 덱은 숲·빛이다.",
+          "덱 선택 원본에 숲과 빛·생명의 전열, 불과 금속·강철의 진격, 물과 암흑·심연의 파도, 대지와 빛·황금의 성채 네 타일이 표시된다. 각 50장/지형16/유닛24/마법6/장비4 수량과 대전실로 버튼이 읽힌다. 첫 숲·빛 타일에 선택 테두리가 있다.",
+          "연습 대전실 01이 열렸고 PLAYER 표의 나/컴퓨터 두 행이 각각 숲과 빛·생명의 전열 덱을 표시한다. TOTAL CARD50, WINNING RULE DECK0와 실제 START·덱 선택·게임 방법 버튼이 보인다. 온라인 이용자나 가짜 대기 인원 표시는 없다.",
+          "시작 손패 확인 화면에 성당내부/요정의숲/늑대이빨/호크윙나이트/스웜/라비원숭이 6장의 원본 카드가 표시된다. 전체 손패 교체 버튼은 활성 밝기이며 교체 시 6장을 다시 뽑는다는 안내, 이대로 시작 버튼이 보인다. 원본 인쇄 글자는 저해상도이지만 상단 실제 카드명은 읽힌다.",
+          "실제 교체 후 손패가 스웜/발탄/창공/골드드래곤/성당내부/겨울잠 6장으로 바뀌었다. 이전 성당내부/요정의숲/늑대이빨/호크윙나이트/스웜/라비원숭이와 명확히 다르다. 안내는 전체 손패 교체를 사용했습니다로 변경됐고 교체 버튼이 어둡게 비활성화되며 이대로 시작은 활성 상태이다.",
+          "실제 전장에 상대/나의 빈 전열이 각각01~05 다섯 칸씩 있고 하단 손패는 스웜/발탄/창공/골드드래곤/성당내부/겨울잠 6장이다. 내 덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 우측7속성모두0·총소울0·1턴 공격 준비를 읽었다. Ready·기록/메뉴·카드 상세가 보이고 시작교체를 사용한 Shuffle은 비활성이다. 전에 작았던 자원/상태 띠 문구가 이제 정상 표시된다.",
+          "메뉴의 저장을 실제 클릭한 후 전장으로 돌아왔고 가운데에 전장과 다음 코인 상태를 저장했습니다 안내가 표시된다. 내 덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 모든7색소울0·총소울0,1턴 공격 준비이며 양측전열은 비어 있다. 손패 순서는 스웜/발탄/창공/골드드래곤/성당내부/겨울잠이다. 이 값을 reload 뒤 원본과 대조한다.",
+          "전체 페이지 reload 후 실제 이어하기로 돌아온 원본에서 저장한 전투와 다음 코인 상태를 복원했습니다 안내를 읽었다. saved-battle과 같은 손패 순서 스웜/발탄/창공/골드드래곤/성당내부/겨울잠, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴 공격 준비, 양측빈5전열이 동일하다. 서로 다른 원본2장을 직접 대조했다."
+        ]
+      },
+      "PathOfDawn": {
+        "status": "passed",
+        "checks": 38,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/report.json",
+        "sha256": "f09600ac24667752e3ad589acec68cce0a1fa0441185a7483209f21846bcd7b4",
+        "audio": {
+          "status": "recorded-pcm",
+          "pcmWindows": 5,
+          "providerWindows": 0
+        },
+        "reviewedUtc": "2026-10-26T07:55:04.663404+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/title.png",
+            "sha256": "a0eec01cc2e6e345a678cd9cb1a84391398530e38c09527efd97349277b3c737",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              84.4082100573472,
+              70.72729002791938,
+              61.58549778985732
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:45:42.885769+00:00"
+          },
+          {
+            "name": "birth-1",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-1.png",
+            "sha256": "6e6ae36686dac754fa89d80cf5ae15599feae8f010e8ac66eb324fd84cf6e26f",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              56.73871315373542,
+              55.59912996914322,
+              64.024465739118
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:46:36.101006+00:00"
+          },
+          {
+            "name": "birth-2",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-2.png",
+            "sha256": "e1fb3a9ad587f7ec57e13d6680cf95e063a41690e4d2c1619791c1060ebde218",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              56.99529036380562,
+              55.96201792834732,
+              64.44973959861275
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:47:24.254213+00:00"
+          },
+          {
+            "name": "birth-3",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-3.png",
+            "sha256": "4eb036bb5a0d3171a2d0e609f30e010abf8cac21485e96ce0013f7f93c660c47",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              57.47893887310321,
+              56.391828662969154,
+              64.66057748682177
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:48:08.583305+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/temple-idle.png",
+            "sha256": "9d2838b5d4c0014665f1d734091185dc3afd631e4fbab3ce3f528f2638fdc6e7",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              73.67660894794622,
+              56.4608260803612,
+              37.07240937247938
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:48:45.756501+00:00"
+          },
+          {
+            "name": "temple-walked-adjusted-1",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/temple-walked-adjusted-1.png",
+            "sha256": "e086d57299b2b6092dcb154c31527bd2221fe3714ed5db9b6f42cb3d72917ff3",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              73.57879265268872,
+              56.21322548051578,
+              36.62441519218633
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:51:30.091034+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/gate-reading.png",
+            "sha256": "ae05683ff3342859d90b1d57d7bd7f5dac6770beaea7d03d50a3b4f79ff7dd3d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              83.44296761197812,
+              66.2547820815121,
+              42.87905861825087
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:52:32.631521+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/saved-temple.png",
+            "sha256": "bb622f6db93c91527d4e14fff526f811565bb669ae61bd802c4ff2e38a72e37a",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              79.20404634492544,
+              59.768926866553706,
+              37.64766954998717
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:53:13.766185+00:00"
+          },
+          {
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/continued-temple.png",
+            "sha256": "ec3c4ec83f09cc384bb8e7c3de9b3b54159ee550d1d4ba5e804b9970bb26ff3d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              79.21561925903531,
+              59.77949396971685,
+              37.65016010138368
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:54:28.724645+00:00"
+          }
+        ],
+        "findings": [
+          "원본1280×720에서 말씀을 따라 예수님의 길 제목, 탄생에서 부활과 승천까지 설명, 새 여정/비활성 이어하기/장 선택/설정 버튼이 보인다. 뒤에는 실제 깊이와 그림자가 있는 성전 기둥·계단·분수·올리브 정원·인물이 표시되고 이전 회화 배경은 없다.",
+          "탄생1/3과 베들레헴의 탄생 제목, 누가복음2:6–7/개역한글, 6·7절 두 줄 원문이 온전히 보인다. 요셉과 마리아의 호적 여정 설명은 별도 아래 영역에 있으며 대한성서공회 출처와 다음 구절 버튼이 구분되어 보인다.",
+          "큰 기쁨의 소식·탄생2/3, 누가복음2:10–11/개역한글이 표시된다. 천사가 이르되와 오늘날 다윗의 동네에로 시작하는 10·11절 본문, 목자들 설명과 출처, 다음 구절 버튼이 모두 읽히며 선택 분기나 창작 화자 대화로 표시되지 않는다.",
+          "마음에 간직한 말씀·탄생3/3, 누가복음2:19–20/개역한글과 마리아·목자의 19·20절이 잘리지 않고 보인다(20절 마지막 라는 다음 줄로 자연스럽게 감김). 나사렛 성장 기록을 잇는 요약과 성전으로 버튼, 대한성서공회 표기가 보인다.",
+          "소년이 실제 3D 뜰 중앙에 서 있으며 발은 원본 약(640,485), 첫 바닥 표식은 약(640,326)에 있다. 성전으로 들어가기 목표와 4m 거리, 누가복음2:41–43/개역한글 및41절 고정본문, 비활성 읽기버튼이 보인다. 기둥·분수·인물·타일·그림자의 깊이가 표시된다. 바닥 위 작은 조작안내 글자는 금색과 밝은 바닥의 대비가 낮아 읽기 어려운 비차단 관찰이 있다.",
+          "추가 실제 W 유지 후 바닥링이y335→약412로 이동해 소년 바로앞으로 가까워졌고 분수·선생들의 투영관계도 달라졌다. 이전4m표시가 말씀을 읽을 수 있습니다로 바뀌었으며 읽기·E 버튼이 진한 활성색으로 표시된다. 초기원본과 실제위치관계 변화 및 읽기가능거리 도달을 확인했다.",
+          "근처에서 실제 E 입력 뒤 유월절의 예루살렘 읽기 화면이 열렸다. 누가복음2:41–43/개역한글과41·42·43절이 모두 표시되고 설명·대한성서공회 출처·말씀을 따라 걷기 버튼이 구분된다. 탐색 목표/저장/설정/읽기 HUD는 숨겨지고 실제3D장면은 읽기 패널 뒤에 남는다.",
+          "본문확인뒤 목표가 선생들 가운데로 바뀌고 거리11m로 표시된다. 고정참조는 누가복음2:46–47/개역한글, 첫본문46절(사흘후에성전에서만난즉...)이다. 현재위치와읽은말씀을저장했습니다 안내가 명확하다. 소년발약(642,485), 분수중심약(641,233), 왼쪽선생들로이동한표식과 타일정렬을 이어하기대조기준으로 기록한다.",
+          "전체페이지새로고침(navigation1)후 실제이어하기를눌렀고 저장한말씀과위치에서이어갑니다 안내가 보인다. saved-temple과동일하게 선생들가운데/11m/누가복음2:46–47·46절을복구했으며 소년발(약642,485)과분수·타일·다음표식의공간정렬이같다. Idle자세변화만있고 이전관찰자/갈릴리회귀서사로돌아가지않았다."
+        ]
+      }
+    },
+    "Mobile844": {
+      "FantasyCards": {
+        "status": "passed",
+        "checks": 32,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Mobile844/FantasyCards/report.json",
+        "sha256": "272bbcaf1739bba384f3ece8d355ee4050898df071141226cd15ecedf56a353d",
+        "audio": {
+          "status": "verified-provider-playback",
+          "pcmWindows": 0,
+          "providerWindows": 3
+        },
+        "reviewedUtc": "2026-10-26T07:44:04.673371+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/title.png",
+            "sha256": "d332390ff9c3cc38294b15164513b89de80243cbe5ebc8bbdce7f416020d55d2",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              76.4406372432133,
+              73.83061269944267,
+              72.47427449102717
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:36:16.577093+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/lobby.png",
+            "sha256": "65ac08856747370474bd63bd6f9eaf151bc64f9ad0e11360ef644089aa9c3ddf",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              53.19339272967795,
+              50.82840594822077,
+              46.25710340327866
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:38:23.676124+00:00"
+          },
+          {
+            "name": "deck-selection",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/deck-selection.png",
+            "sha256": "75e9bb7aaf9f2dc0c1e1bd6756a44e4ca278abba99e07f84d0edf8d257f9b5d2",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.92379576497407,
+              64.77080378357803,
+              59.33340840119939
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:39:22.556458+00:00"
+          },
+          {
+            "name": "room",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/room.png",
+            "sha256": "7142d1dc8298206fb5c1a615d7902cd1e25300e2f3881d5209e57c0801e50d8e",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              53.4824570215032,
+              48.728506417038304,
+              42.8862663177722
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:40:21.661335+00:00"
+          },
+          {
+            "name": "opening-drawn",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/opening-drawn.png",
+            "sha256": "3489b64d075cc2c617a147d90e9a65c60ce420d3faa36e3a8eb2cd95de645390",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.564057477171,
+              67.83290090340654,
+              60.10263944519662
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:40:46.356995+00:00"
+          },
+          {
+            "name": "opening",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/opening.png",
+            "sha256": "f101f137869053051a2bf3943d7045201253d2c241cab111fedbfd7ba948012f",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              69.80907981987492,
+              66.83705280587256,
+              58.12946489059327
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:41:15.285675+00:00"
+          },
+          {
+            "name": "battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/battle.png",
+            "sha256": "54fac089d5d5cefd63c9f70863e798796431c575722ebcb921b6aebefc478b44",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.407977744966026,
+              53.0990514741743,
+              49.640758158879486
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:41:44.484300+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/saved-battle.png",
+            "sha256": "870ae00fdba6725fa9fa98203adca63a8f1f149a5a9d9cb55c0af58aa02ebc64",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.278114283267804,
+              53.02058480573078,
+              49.64786920316439
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:42:29.281749+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/continued-battle.png",
+            "sha256": "1bdc23648abe6406323885766482fe40c6dfd78189dfa6035c13ff22aee14307",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.35637496663012,
+              53.068855095302396,
+              49.647156099057256
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:43:28.822220+00:00"
+          }
+        ],
+        "findings": [
+          "실제 모바일616x346 canvas 원본에 원작 로고·판타지마스터즈 제목·원작 웹 엘프 인물과 빛/물/불/숲/금속/대지/암흑7문양이 표시된다. 게임 시작·이어하기·카드 도감·음악 설정 버튼도 모두 보이며 이전 창작 아바타 선택 화면이 아니다. 저해상도 원작 픽셀이 확대되지만 버튼 글자는 읽을 수 있다.",
+          "모바일 실제 터치로 열린 Room 연습실에서 숲과 빛/물과 암흑/불과 금속 3 AI 방과 우측 덱 선택·카드 도감·덱 편집 버튼을 읽었다. SYSTEM 안내는 모든 대전이 컴퓨터 상대임을 표시하고 온라인 접속자·채팅 내용은 없다. 작은 canvas에서도 각 방과 버튼이 겹치지 않는다.",
+          "모바일에 숲과 빛·생명의 전열/불과 금속·강철의 진격/물과 암흑·심연의 파도/대지와 빛·황금의 성채 네 실제 선택 타일이 표시된다. 상단의 50장 기본 덱 안내와 하단 대전실로 버튼이 읽힌다. 세부 지형16/유닛24 등 작은 수량 줄은 이 축소 화면에서 표시되지 않지만 필수인 네 덱 선택과 50장 안내는 확인했다.",
+          "실제 터치로 연습 대전실01에 돌아왔고 PLAYER의 나/컴퓨터 두 행 모두 숲과 빛·생명의 전열을 표시한다. TOTAL CARD50/DECK0 조건과 START·덱 선택·게임 방법 버튼이 읽힌다. 방/선택 덱 내용이 네이티브 호출이 아닌 앞선 실제 화면 입력으로 연결되었다.",
+          "시작 손패 확인 원본에는 킬러메뚜기/요정의숲/요정의숲/창공/골드드래곤/라비원숭이 6장 이름과 원본 카드가 표시된다. 전체 손패 교체 버튼과 이대로 시작 버튼, 교체하면 다시6장을 뽑는다는 안내를 읽었다. 교체 전 원본 카드 순서를 이후 프레임과 대조할 수 있다.",
+          "실제 터치 교체 후 손패는 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤 6장으로 바뀌었다. 교체 전 킬러메뚜기/요정의숲2장/창공/골드드래곤/라비원숭이와 다르다. 안내가 전체 손패 교체를 사용했습니다로 바뀌고 해당 버튼은 비활성 어두운 색, 이대로 시작은 활성 색이다.",
+          "모바일 전장 원본에 양측01~05 빈 전열10칸과 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤 6장 손패가 보인다. 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 우측총소울0과7색소울0,1턴공격준비 및 Ready/기록·메뉴 버튼을 읽었다. 가운데 안내와 자원 띠는346px높이에서도 표시된다. 일부 손패 능력치줄은 줄임표가 있으며 상세보기로 확인할 항목이지 전부 읽었다고 주장하지 않는다.",
+          "실제 터치로 기록/메뉴→저장→돌아가기를 실행한 후 가운데 전장과 다음 코인 상태를 저장했습니다 안내를 확인했다. 현재 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비이며 양측전열은 비어 있다. 손패순서는 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤로 reload 뒤 원본과 비교할 값이다.",
+          "전체 페이지 새로고침 후 실제 타이틀 이어하기 터치로 전장이 복원됐고 저장한 전투와 다음 코인 상태를 복원했습니다 안내가 보인다. saved-battle 원본과 같은 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤6손패, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴 공격 준비, 빈전열10칸을 직접 두 원본으로 비교했다."
+        ]
+      },
+      "PathOfDawn": {
+        "status": "passed",
+        "checks": 40,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/report.json",
+        "sha256": "dbbe26abcc6ff3d63b705c3e6d81ce4f9eaa8dab349134571b369c792173672d",
+        "audio": {
+          "status": "recorded-pcm",
+          "pcmWindows": 5,
+          "providerWindows": 0
+        },
+        "reviewedUtc": "2026-10-26T08:07:19.942671+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/title.png",
+            "sha256": "8a19c1d01ffbea874adbee25fc2d4890e9861df2f182ce68ec99120533121609",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              83.61320406515057,
+              69.89323300416923,
+              60.963085122007016
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:59:08.408760+00:00"
+          },
+          {
+            "name": "birth-1",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-1.png",
+            "sha256": "f8226699520a8d9646d61df99b38ddadd8e8462876fbd2f40a0b78e267c3e532",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              55.678504116654295,
+              54.638658742030415,
+              63.355925039791416
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:00:04.396391+00:00"
+          },
+          {
+            "name": "birth-2",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-2.png",
+            "sha256": "51abffeccd3fade60bc43a8ef4e77a55711be6620f72de138b3b522843018b17",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              55.75826623313853,
+              54.83878865975758,
+              63.6682045601197
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:00:48.144965+00:00"
+          },
+          {
+            "name": "birth-3",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-3.png",
+            "sha256": "814993883a2611124a4b14b779b282bf6cc747a8728614c86179141154e7eac8",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              56.09846228156417,
+              55.13474108409734,
+              63.77885695893889
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:01:16.731355+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/temple-idle.png",
+            "sha256": "266b7324ef83ad51af05336e1375c0b0ade0a159cf86ad4ea6dcaf755e392229",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              72.76677950849154,
+              55.372419018730184,
+              35.965318834575406
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:01:44.995181+00:00"
+          },
+          {
+            "name": "temple-walked-adjusted-1",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/temple-walked-adjusted-1.png",
+            "sha256": "418d25d3734c4d324be2e84246d1e2df233f0e84bfd56bd56a589f9499ddb14b",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              72.741652417998,
+              55.27523563363618,
+              35.64446927341691
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:03:39.580025+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/gate-reading.png",
+            "sha256": "0bdeb712c88345e55f7692f3199da67f404a49f4f593fca6522f9723128030ad",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              82.04607402564199,
+              64.92249622053279,
+              41.553567479623226
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:04:44.701448+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/saved-temple.png",
+            "sha256": "a5275bbf8a316a54abce2ebff39257d94ea995014eb04ea295cc969126f4b7cf",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              78.0114390147659,
+              58.548543483352695,
+              36.50079718352472
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:05:26.944652+00:00"
+          },
+          {
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/continued-temple.png",
+            "sha256": "b1b3e8d06c4df37fe4b1832de82ba7b0d1085b0ce5a0a01409082b38563223fb",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              78.04439774461191,
+              58.56648450370474,
+              36.50231165870169
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:06:23.561594+00:00"
+          }
+        ],
+        "findings": [
+          "재실행의새원본694×390을직접확인했다. 말씀을따라예수님의길/탄생에서부활과승천까지 문구와 새여정/이어하기/장선택/설정버튼이완전히보이며 뒤에는실제3D성전기둥/정원/분수/인물/그림자가표시된다. 작은가로캔버스안에주요글자와버튼이잘리지않는다.",
+          "모바일첫탄생읽기에 베들레헴의탄생/탄생1/3, 누가복음2:6–7/개역한글,6·7절전체가보인다. 요셉과마리아설명은아래별도영역이고 성경전서개역한글판·대한성서공회출처와다음구절버튼이캔버스안에온전히표시된다. 본문은작은화면에서도줄잘림없이읽힌다.",
+          "모바일두번째탄생본문은 큰기쁨의소식/탄생2/3이며 누가복음2:10–11/개역한글과10·11절을온전히표시한다. 목자들에게전해진탄생설명과성경출처/다음구절버튼은본문과구분된다. 가상선택지나창작대화로바뀌지않았다.",
+          "모바일세번째탄생본문은 마음에간직한말씀/탄생3/3, 누가복음2:19–20/개역한글이다.19·20절과이후성장기록으로연결하는별도요약/대한성서공회출처가표시되며 성전으로버튼이완전히보인다.20절마지막글자는다음줄에감기지만누락되지않는다.",
+          "모바일탐색에서 소년예수님의발은원본약(350,268), 첫바닥링은약(347,178)에있다. 성전으로들어가기/4m·빛나는표식으로, 고정누가복음2:41–43·41절과우측비활성읽기버튼이보인다. 왼쪽이동패드/중앙노브가표시되어터치컨텍스트가실제적용되었다. 작은바닥조작힌트는밝은바닥과대비가낮으나주목표·본문·버튼은읽힌다.",
+          "추가실제터치패드유지후링은y190→약224로이동해소년바로앞에있고 분수·NPC와타일원근관계도변했다. 거리안내가 말씀을읽을수있습니다로바뀌고 우측읽기·E가활성화되었다. 초기4m원본과비교해실제터치이동과읽기가능거리도달을확인했다.",
+          "실제모바일읽기버튼터치후 유월절의예루살렘/누가복음2:41–43·개역한글 읽기가열렸다.41·42·43절과별도설명,대한성서공회출처,말씀을따라걷기버튼이보인다. 탐색HUD/이동패드는숨겨지고본문패널뒤에3D공간이남는다. 장절과본문은잘리지않는다.",
+          "모바일본문확인후 선생들가운데 목표/10m거리로진행했다. 누가복음2:46–47/개역한글과46절을고정표시하며 현재위치와읽은말씀을저장했습니다 안내가보인다. 소년발약(349,268), 분수중심약(348,130),왼쪽선생들/타일/이동패드정렬을이번모바일이어하기대조기준으로기록한다.",
+          "모바일전체새로고침navigation1뒤 실제이어하기를눌러 저장한말씀과위치에서이어갑니다 안내를확인했다. saved-temple과동일한 선생들가운데/10m/누가복음2:46–47·46절 및 소년발·분수·타일·왼쪽선생들의상대배치가복구되었다. 이동패드도다시보이고이전관찰자서사로돌아가지않는다. Idle애니메이션자세차이는위치복구와구분했다."
+        ]
+      }
+    }
+  },
+  "contentEvidence": {
+    "scripture": {
+      "readings": 7,
+      "verses": 16,
+      "evidence": "Artifacts/Validation/GospelJourney/scripture-verification.json",
+      "sha256": "e53953695ed3431d42952441785836076ea5ec11ddda670ba43bc5e8d7a65f3c"
+    },
+    "fmOriginalUi": {
+      "images": 8,
+      "evidence": "Tools/Research/FmRevival/unity-source-images.json",
+      "sha256": "3dc0c32bf118bd8b813046c1cd1ad3086421475b02967e370101621c7672cb92"
+    },
+    "actors": [
+      {
+        "name": "YoungJesus",
+        "bones": 65,
+        "vertices": 14565,
+        "evidence": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx",
+        "sha256": "dd90067bf9d0d9604ee3ff752205f8ed901e35c5fade2580fc808f71596257b6"
+      },
+      {
+        "name": "AdultJesus",
+        "bones": 65,
+        "vertices": 15459,
+        "evidence": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/AdultJesus.fbx",
+        "sha256": "8700c4c18e4a35d0cf769d2e5a00e840dde88d1948ddb423ed3e7f2f597f766c"
+      }
+    ],
+    "actorManifest": {
+      "evidence": "Tools/Art/Gospel3D/manifest.json",
+      "sha256": "315d97be03ab715b5a45ff792d60a309fa7a824fe6f2f977e5202b8a4e83b4f9"
+    },
+    "officialMusicSources": {
+      "evidence": "Tools/Research/FmRevival/soundcloud-original-tracks.json",
+      "sha256": "4a3153d48e3757559f6b2a424c5ccf1a2151e179248a42f4b7d8226029995938"
+    },
+    "templeMaterials": {
+      "maps": 4,
+      "materials": [
+        {
+          "assetId": "Plaster001",
+          "sourceUrl": "https://ambientcg.com/a/Plaster001",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://docs.ambientcg.com/license/",
+          "sourceKind": "Official API published surface-preview maps; not full-resolution original archive.",
+          "use": "Light rough mineral finish for warm limestone architecture. Not claimed to be archaeologically exact stone.",
+          "files": [
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-albedo.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_Color.jpg?314",
+              "sha256": "ec76d207b21370cd3dbc7a02ac678e877396e51162c210241cccfa164c127fcd",
+              "bytes": 827723,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "albedo",
+              "normalConvention": null
+            },
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-normal.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_NormalDX.jpg?1085",
+              "sha256": "e180fb3fcc88e3792ec9154115ecdcaba101d59c47fa0f775a10c5d6976d87e2",
+              "bytes": 3487605,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "normal",
+              "normalConvention": "DirectX; Unity importer flips green channel"
+            }
+          ]
+        },
+        {
+          "assetId": "Tiles143",
+          "sourceUrl": "https://ambientcg.com/a/Tiles143",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://docs.ambientcg.com/license/",
+          "sourceKind": "Official API published surface-preview maps (fullZIPCDNreturned403); not full-resolution source pack.",
+          "files": [
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-albedo.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_Color.jpg?66813",
+              "sha256": "18605bf3c98e4e60ac6617b4175be04b21f71aa640a340abf919823fc40c37d7",
+              "bytes": 1308127,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "albedo",
+              "normalConvention": null
+            },
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-normal.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_NormalDX.jpg?40901",
+              "sha256": "3ec82d0418bbd7ce9983c1943dcc1a05b336b2939d07d76e14a867c97354c17e",
+              "bytes": 184133,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "normal",
+              "normalConvention": "DirectX; Unity importer flips green channel"
+            }
+          ]
+        }
+      ],
+      "evidence": "Tools/Art/GospelTemple/manifest.json",
+      "sha256": "30c6e4e91a1bcc924d5464d4d755482df4df561b10059c6f245dabf1b76a58fd"
+    },
+    "notices": [
+      {
+        "evidence": "Tools/Research/FmRevival/SOURCE-NOTICE.txt",
+        "sha256": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73"
+      },
+      {
+        "evidence": "Tools/Art/Gospel3D/SOURCE-NOTICE.txt",
+        "sha256": "410d09a1aa019be20a956e2bd3ea1e85ae01080cb3624f4619488184e5fd232d"
+      },
+      {
+        "evidence": "Tools/Data/Gospel/SCRIPTURE-NOTICE.txt",
+        "sha256": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a"
+      },
+      {
+        "evidence": "Tools/Art/GospelTemple/LICENSE-NOTICE.txt",
+        "sha256": "5a1c8dbd05080b5fd5377716c7ade516e569327e8ba01d78f1b0727f1f31c01e"
+      }
+    ]
+  },
+  "publication": {
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40290452908",
+    "sourceCommit": "829d82dde18e4dc160172050334650eb22f8dcc8",
+    "verifiedFiles": 29,
+    "checkedUtc": "2026-10-26T08:12:48.933154+00:00",
+    "manifest": {
+      "evidence": "Artifacts/WebPlaytest/build-manifest.json",
+      "sha256": "c6a2984733717ea1f4e4a2ecebc220642fd5a721937c122ecf0f7f6d67600c9f"
+    },
+    "portal": {
+      "evidence": "Artifacts/Validation/PublicWeb/Portal/report.json",
+      "sha256": "b8bb8da45a05262a32701780c4248100e45bb1b6f0c744a7e0ca29fbf5dfa126"
+    }
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "status": "passed",
+      "checks": 37,
+      "checkpoints": 9,
+      "evidence": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/report.json",
+      "sha256": "852b1852e565289dbea9de0f73e6b8a28ab1871f596ac9e30a3d79d0b9b008ae",
+      "audio": {
+        "status": "verified-provider-playback",
+        "pcmWindows": 0,
+        "providerWindows": 3
+      },
+      "reviewedUtc": "2026-10-26T08:24:00.455332+00:00",
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/title.png",
+          "sha256": "d332390ff9c3cc38294b15164513b89de80243cbe5ebc8bbdce7f416020d55d2",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            76.4406372432133,
+            73.83061269944267,
+            72.47427449102717
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:15:52.247317+00:00"
+        },
+        {
+          "name": "lobby",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/lobby.png",
+          "sha256": "65ac08856747370474bd63bd6f9eaf151bc64f9ad0e11360ef644089aa9c3ddf",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            53.19339272967795,
+            50.82840594822077,
+            46.25710340327866
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:16:34.636001+00:00"
+        },
+        {
+          "name": "deck-selection",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/deck-selection.png",
+          "sha256": "75e9bb7aaf9f2dc0c1e1bd6756a44e4ca278abba99e07f84d0edf8d257f9b5d2",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            67.92379576497407,
+            64.77080378357803,
+            59.33340840119939
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:17:38.036735+00:00"
+        },
+        {
+          "name": "room",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/room.png",
+          "sha256": "7142d1dc8298206fb5c1a615d7902cd1e25300e2f3881d5209e57c0801e50d8e",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            53.4824570215032,
+            48.728506417038304,
+            42.8862663177722
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:18:23.594757+00:00"
+        },
+        {
+          "name": "opening-drawn",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/opening-drawn.png",
+          "sha256": "760346ea6eeb4672a7245ea4e9484dc2ca0019c6d3ec123ccd99da8f0bdb2d96",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            69.72049434028284,
+            66.96261641966595,
+            61.02917171389583
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:18:53.779347+00:00"
+        },
+        {
+          "name": "opening",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/opening.png",
+          "sha256": "fa7277d67360799047f6f1e80c6df9e91cc0ca2a7577e1f865a0bae837905dae",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            61.64853536338356,
+            62.442224149252056,
+            51.05657514724508
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:20:00.449988+00:00"
+        },
+        {
+          "name": "battle",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/battle.png",
+          "sha256": "41528b2a6a9bfda2cda0e0a48bd8277e72adc676760e4e248e6c1184994c5018",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            52.922927995423144,
+            51.505749641399845,
+            47.36655731500924
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:20:30.664976+00:00"
+        },
+        {
+          "name": "saved-battle",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/saved-battle.png",
+          "sha256": "4fcef5d48f4c7bbdef35281dc8765da139c7d723b2750c6c17ad76e4ff463276",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            52.77095075141327,
+            51.418822951506655,
+            47.36761786887797
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:21:02.858216+00:00"
+        },
+        {
+          "name": "continued-battle",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/FantasyCards/continued-battle.png",
+          "sha256": "3579ba9f7fe73a666c9e8584745e0bb44a9f0bf3708c1dc9360a489c6a3358fa",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            52.861678990103144,
+            51.47183993180053,
+            47.3703181199674
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 1,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:22:20.309144+00:00"
+        }
+      ],
+      "findings": [
+        "실제 공개 HTTPS 게임 주소에서 받은 원본이다. Fantasy Masters 원작 웹 로고·판타지마스터즈 제목·원작 엘프 인물·빛/물/불/숲/금속/대지/암흑7문양과 게임 시작·이어하기·카드 도감·음악 설정 버튼이 표시된다. 이전 창작 아바타 선택 화면이 아니다. 공개5개런타임 파일 바이트와SHA가 최종로컬빌드와 모두 일치한 뒤 이 화면을 확인했다.",
+        "공개 URL에서 실제 게임 시작 터치로 로비가 열렸다. 숲과 빛/물과 암흑/불과 금속 세 AI 대전방, 우측 덱 선택·카드 도감·덱 편집과 SYSTEM의 컴퓨터 상대 안내가 읽힌다. 다른 이용자 접속수나 채팅을 꾸미지 않은 로컬 연습방이다. 공개Login원곡은공식provider트랙ID234910360과실제진행시간0→1673ms가관찰됐다.",
+        "공개 주소에서 방과 덱 선택을 실제 터치하여 네 기본 덱 선택 화면이 열렸다. 숲과 빛/불과 금속/물과 암흑/대지와 빛의 네 타일과 상단50장 기본덱 안내, 하단 대전실로 버튼이 읽힌다. 각 덱의 매우 작은 구성수량 미니라인은 이 모바일 축소에서는 표시되지 않으며 필수 네 덱 선택과50장 안내를 확인했다.",
+        "공개 URL에서 실제 선택 후 연습 대전실01로 돌아왔다. 나와 컴퓨터의 두 PLAYER행은 모두 숲과 빛·생명의 전열을 표시한다. 승리조건DECK0·TOTAL CARD50과 START/덱 선택/게임 방법 버튼이 읽히고 가짜 온라인 매칭은 표시하지 않는다.",
+        "공개 게임의 START 실제 터치 후 시작 손패 확인에 퓨리울프/리틀엔젤/브리루탄/리틀엔젤/창공/겨울잠 6장이 표시된다. 브리루탄 이름과Lv7·SP/8·1·8수치도 원본에서 확인했고 정적 카드 목록의 철자와 대조했다. 전체 손패 교체 및 이대로 시작 버튼과 다시6장을 뽑는 안내가 읽힌다.",
+        "공개 게임의 실제 전체교체 뒤 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 6장으로 손패가 바뀌었다. 교체 전 퓨리울프/리틀엔젤/브리루탄/리틀엔젤/창공/겨울잠과 다른 순서·카드이며 전체교체 사용안내 및 비활성 교체 버튼, 활성 이대로 시작 버튼이 표시된다.",
+        "실제 공개 모바일 전장에 상대와 나의01~05 다섯 칸씩 총10전열, 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 6장손패가 표시된다. 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비, 우측 Ready/기록·메뉴를 읽었다. 자원·상태띠는 표시되며 손패일부 능력치에는 축소에 따른 줄임표가 있다.",
+        "공개 게임의 실제 기록/메뉴→저장→돌아가기 터치 뒤 전장과 다음 코인 상태를 저장했습니다 안내가 표시된다. 현재 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜 손패6장, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비·빈10전열이다. 이 원본 값을 전체reload뒤 원본과 대조한다.",
+        "공개 HTTPS 페이지 전체 새로고침 후 실제 이어하기 터치로 저장한 전투와 다음 코인 상태를 복원했습니다 안내를 읽었다. 저장전 원본과 같은 요정의숲/퓨리울프/퓨리울프/킬러메뚜기/라비원숭이/스웜6손패, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비·빈10전열을 두 원본으로 직접 대조했다."
+      ]
+    },
+    "PathOfDawn": {
+      "status": "passed",
+      "checks": 45,
+      "checkpoints": 9,
+      "evidence": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "b6a562a97329c188ef4128baae09d7d7ee299123879e0ea237a1257ace9b3f45",
+      "audio": {
+        "status": "recorded-pcm",
+        "pcmWindows": 5,
+        "providerWindows": 0
+      },
+      "reviewedUtc": "2026-10-26T08:33:45.738677+00:00",
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/title.png",
+          "sha256": "4b73168ccaac6a1108e3865b37fab4eed47b4f13a0822851c8e1e49f3fbe6053",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            83.61333787294515,
+            69.89347862427007,
+            60.96309897296302
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:25:29.834784+00:00"
+        },
+        {
+          "name": "birth-1",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-1.png",
+          "sha256": "f8226699520a8d9646d61df99b38ddadd8e8462876fbd2f40a0b78e267c3e532",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            55.678504116654295,
+            54.638658742030415,
+            63.355925039791416
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:26:40.263338+00:00"
+        },
+        {
+          "name": "birth-2",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-2.png",
+          "sha256": "51abffeccd3fade60bc43a8ef4e77a55711be6620f72de138b3b522843018b17",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            55.75826623313853,
+            54.83878865975758,
+            63.6682045601197
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:27:22.432611+00:00"
+        },
+        {
+          "name": "birth-3",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/birth-3.png",
+          "sha256": "814993883a2611124a4b14b779b282bf6cc747a8728614c86179141154e7eac8",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            56.09846228156417,
+            55.13474108409734,
+            63.77885695893889
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:27:57.535491+00:00"
+        },
+        {
+          "name": "temple-idle",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/temple-idle.png",
+          "sha256": "be3dc28166e44ce7e073925887a231a02f310be2ffdd12fec7571e8893755418",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            72.76969977051729,
+            55.37169712768128,
+            35.96234755991716
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:28:31.372133+00:00"
+        },
+        {
+          "name": "temple-walked-adjusted-1",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/temple-walked-adjusted-1.png",
+          "sha256": "71c25bb13f3563b9c8fa7eaf56c013c5b8978bca0716272564835c6d93c438c9",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            72.88331287810672,
+            55.51528630822423,
+            35.80964756222666
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:30:09.812578+00:00"
+        },
+        {
+          "name": "gate-reading",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/gate-reading.png",
+          "sha256": "cb61d6a4e8fd9550f7a98b3cb61f340b6ecd5292ca069a9614cd315db3544f4f",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            81.9708163062887,
+            64.81748017745859,
+            41.48280596005293
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:31:21.556935+00:00"
+        },
+        {
+          "name": "saved-temple",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/saved-temple.png",
+          "sha256": "35824a4df91acdbaa02d06ff2071fc94b23feb008573e02c38a258a26b22f6c6",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            78.11850648489109,
+            58.735731378908234,
+            36.65295261451027
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:31:50.035776+00:00"
+        },
+        {
+          "name": "continued-temple",
+          "path": "Artifacts/Validation/Revival/PublicMobile844/PathOfDawn/continued-temple.png",
+          "sha256": "a28afb8eb1f3670a4ac03dda3496646c7b3a4e81c0150c05d94f226c3c395c81",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            78.15130390390448,
+            58.75622354768573,
+            36.656731147890866
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 1,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-26T08:32:44.520774+00:00"
+        }
+      ],
+      "findings": [
+        "실제공개URL의새원본694×390에서 말씀을따라예수님의길/탄생에서부활과승천까지 문구와 새여정·비활성이어하기·장선택·설정 버튼이온전히보인다. 뒤의3D성전/기둥/분수/정원/인물이최종로컬판과같으며이전회화형관찰자화면이아니다.",
+        "공개주소첫탄생원본을직접확인했다. 베들레헴의탄생/탄생1/3,누가복음2:6–7·개역한글과6·7절본문,별도호적여정설명,대한성서공회출처와다음구절버튼이온전히보인다. 실제공개터치입력으로이장면에진입했으며본문과설명이구분된다.",
+        "공개모바일두번째탄생본문 큰기쁨의소식/탄생2/3과 누가복음2:10–11·개역한글,10·11절전체가보인다. 목자들관련안내/대한성서공회출처/다음구절버튼이본문과구분되며가상선택지로바뀌지않는다.",
+        "공개모바일세번째탄생원본에 마음에간직한말씀/탄생3/3,누가복음2:19–20·개역한글과19·20절을확인했다. 마지막글자라인감김은있지만본문누락은없다. 이후성장연결설명/대한성서공회출처와성전으로버튼이모두보인다.",
+        "공개3D성전에서소년발약(350,268),바닥링약(347,178)의초기배치를확인했다. 성전으로들어가기/4m안내,누가복음2:41–43·41절고정표시/비활성읽기버튼과실제터치이동패드가보인다. 기둥·분수·NPC·타일·그림자가최종로컬판처럼표시되며작은금색바닥조작힌트는낮은대비라는기존비차단관찰을유지한다.",
+        "추가3초실제터치유지후 소년앞바닥링과분수·NPC의투영관계가초기와달라졌고거리안내는말씀을읽을수있습니다로바뀌었다. 읽기·E버튼이진한활성색이다. 초기4m/이전3m원본과대조해실제공개터치이동과도달을확인했다.",
+        "공개근처표식에서실제읽기버튼터치로 유월절의예루살렘/누가복음2:41–43·개역한글 화면이열렸다.41·42·43절전체와별도요약/대한성서공회출처/말씀을따라걷기버튼이읽히고 이동패드·탐색HUD는숨겨져있다. 이전관찰자대화나회귀서사는표시되지않는다.",
+        "공개본문확인후 다음목표선생들가운데/10m와 누가복음2:46–47·46절이표시된다. 현재위치와읽은말씀을저장했습니다 안내가명확하다. 소년발약(349,268),분수중심약(348,130),타일·왼쪽선생들과터치패드배치를공개이어하기대조기준으로기록했다.",
+        "공개전체페이지새로고침navigation1뒤실제이어하기로 저장한말씀과위치에서이어갑니다 안내를확인했다. 공개saved-temple과동일한 선생들가운데/10m/누가복음2:46–47·46절 및 소년발·분수·타일·선생들·패드상대배치가복구되었다. Idle관절자세차이만있고이전관찰자서사로돌아가지않았다."
+      ]
+    }
+  }
+}

@@ -29,6 +29,9 @@ from PIL import Image, ImageStat
 SPEC = importlib.util.spec_from_file_location("revival_web_helpers", Path(__file__).with_name("web-smoke.py"))
 BASE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BASE)
+ERROR_SPEC = importlib.util.spec_from_file_location("fm_provider_errors", Path(__file__).with_name("fm-provider-errors.py"))
+PROVIDER_ERRORS = importlib.util.module_from_spec(ERROR_SPEC)
+ERROR_SPEC.loader.exec_module(PROVIDER_ERRORS)
 ROOT = Path(__file__).resolve().parents[2]
 REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
 REQUIRED_CHECKPOINTS = {
@@ -81,7 +84,8 @@ class JourneySmoke:
             "unityConfigurations": [], "checkpoints": [], "audioEvidence": {"windows": []},
             "buildFingerprint": {"files": runtime_files(args.build_root / args.game / "Web")},
             "harness": {"file": str(Path(__file__).relative_to(ROOT)), "sha256": digest(__file__),
-                        "helpersSha256": digest(BASE.__file__), "plan": str(args.plan), "planSha256": digest(args.plan)},
+                        "helpersSha256": digest(BASE.__file__), "plan": str(args.plan), "planSha256": digest(args.plan),
+                        "pageErrorClassifier": {"file": str(Path(PROVIDER_ERRORS.__file__).relative_to(ROOT)), "sha256": digest(PROVIDER_ERRORS.__file__)}},
             "visualReview": {"status": "pending", "method": "Original current-run frames require direct review."},
             "limits": ["Software Chromium and touch emulation are not physical mobile or target-device performance tests.",
                 "Visible original-frame checkpoints supplement native state assertions; no Unity state injection or save editing.",
@@ -463,7 +467,10 @@ class JourneySmoke:
                 else: self.input(step)
             external_errors = [m for m in self.report["console"] if m["type"] == "error" and self.music_service(m.get("location", {}).get("url", ""))]
             self.report["audioEvidence"]["externalConsoleErrors"] = external_errors
-            self.check(not self.report["pageErrors"], "No JavaScript page errors", self.report["pageErrors"])
+            diagnostic = PROVIDER_ERRORS.classify_page_errors(self.args.game, self.report["pageErrors"],
+                self.report["audioEvidence"].get("providerWindows", []))
+            self.report["pageErrorDiagnostic"] = diagnostic
+            self.check(not diagnostic["gameRuntimeErrors"], "No game-runtime JavaScript page errors; verified provider cancellations retained separately", diagnostic)
             self.check(not [r for r in self.report["httpErrors"] if not self.music_service(r["url"])],
                        "No game-runtime HTTP errors; external music errors retained separately", self.report["httpErrors"])
             self.check(not [m for m in self.report["console"] if m["type"] == "error" and m not in external_errors],

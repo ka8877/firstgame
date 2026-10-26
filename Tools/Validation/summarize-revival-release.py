@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate recorded revival/Gospel evidence before replacing release summaries.
+"""Validate recorded remaster evidence before replacing release summaries.
 
 Run without --pages-run after the four local suites, or with it after the public
 portal and both public mobile suites. This never runs games, approves frames, or
@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -19,16 +20,19 @@ import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
-REVISIONS = {"FantasyCards": "fm-revival-2026-10-26", "PathOfDawn": "gospel-journey-2026-10-26"}
+REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+REPORT_ROOT = "Artifacts/Validation/Remaster"
 CONTENTS = {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
 NATIVE = {"FantasyCards": ("Revival.xml", "FantasyCardsRevivalSmokeTests"),
           "PathOfDawn": ("Gospel.xml", "GospelJourneySmokeTests")}
 REQUIRED = {
-    "FantasyCards": {"title", "lobby", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
-    "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple"},
+    "FantasyCards": {"title", "lobby", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle",
+                     "collection-search", "collection-last-page"},
+    "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
+                   "npc-teacher-dialogue", "npc-mary-dialogue", "npc-jesus-dialogue", "jump-air"},
 }
 PUBLIC_URL = "https://ka8877.github.io/firstgame/"
-BASELINE = "Tools/Environment/validation-2026-10-26-before-revival.json"
+BASELINE = "Tools/Environment/validation-2026-10-26-before-remaster.json"
 
 
 def require(condition, message):
@@ -90,7 +94,16 @@ def core_result():
             and counts.get("failed") == 0 and all(n.get("outcome") == "Passed" for n in results), "Core suite did not wholly pass")
     names = {r.get("testName", "") for r in results}
     require("OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts" in names
-            and any("JsonSnapshotsResumeEveryReachablePhase" in n for n in names), "Core result lacks classic rules or Gospel save coverage")
+            and "NewOriginalEquipmentKeepsSignedStatsAndBeastRequirement" in names
+            and "NewOriginalGearSpellFiltersCapabilitiesAndResetsAfterBattle" in names
+            and "NewOriginalSetCoinUsesFourSharedTossesAndRestoresDeterministically" in names
+            and sum("CatalogExpansionPreservesEveryPresetCardAndItsOrder" in n for n in names) == 4
+            and any("JsonSnapshotsResumeEveryReachablePhase" in n for n in names)
+            and {"ConversationsResumeMidTurnWithoutAwardingUnreadScripture",
+                 "LegacySchemaOneWithoutDialogueFieldRestartsOnlyTheOpenConversation",
+                 "InvalidConversationCursorCannotChangeLiveProgress",
+                 "EveryQuotedDialogueIsAnExactSubstringOfItsVerifiedPassage"}.issubset(names),
+            "Core result lacks classic rules, exact Gospel quotes, or compatible dialogue-save coverage")
     finished = max(n.get("endTime", "") for n in results)
     fresh(finished, ["Tools/Validation/Tests", "Games/FantasyCards/Assets/Game/Core", "Games/FantasyCards/Assets/Game/Tests",
                     "Games/PathOfDawn/Assets/Game/Core", "Games/PathOfDawn/Assets/Game/Tests/EditMode",
@@ -107,6 +120,15 @@ def native_result(game):
             and int(xml.get("skipped", -1)) == 0 and cases
             and all(c.get("result") == "Passed" and fixture in c.get("fullname", "") for c in cases), f"Current native fixture did not wholly pass: {game}")
     require(int(xml.get("total", 0)) == int(xml.get("passed", -1)) == len(cases), f"Native result counts disagree: {game}")
+    required_cases = ({"RemasterTitleLocalRoomsDeckChoiceShuffleAndContinueUseLiveCallbacks",
+                       "RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent"} if game == "FantasyCards" else {
+        "BirthScripturePhysicalWalkingAndContinueRestoreTheRealJourney",
+        "EqualGameTimeWalkingTravelsTheSameDistanceAtThirtyAndTwelveFrames",
+        "MenusBlockMovementJumpAndActionAndPointerUiClicksDoNotPractice",
+        "PracticeActionRequiresItsContextAndCompletesARealGestureWithCooldown",
+        "RealApproachAndInteractionFollowScriptureObjectivesToNazareth",
+        "RealSprintJumpLandingAndTouchJumpArticulateTheProductionCharacter"})
+    require(required_cases.issubset({case.get("name") for case in cases}), f"Native remaster behavior coverage is incomplete: {game}")
     fresh(xml.get("end-time", ""), [f"Games/{game}/Assets/Game", f"Games/{game}/Assets/SmokeTests", f"Games/{game}/Assets/Shared"], f"Native {game}")
     return {"passed": len(cases), "failed": 0, "skipped": 0, "fixture": fixture,
             "finishedUtc": xml.get("end-time"), **ref(file)}
@@ -133,6 +155,15 @@ def normalized(files):
 
 def builds(game, files):
     result = {}
+    verified_card_authoring = None
+    if game == "FantasyCards":
+        spec = importlib.util.spec_from_file_location("remaster_card_authoring", ROOT / "Tools/Validation/verify-card-authoring.py")
+        authoring = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(authoring)
+        # Ensure/CreateContent reserializes these generated assets before each
+        # target build; serialization order or whitespace is not a source edit.
+        # Verify every current value/reference against the generated catalog.
+        verified_card_authoring = authoring.verify_authoring(ROOT)
     for platform, target in (("Windows", "StandaloneWindows64"), ("Web", "WebGL")):
         file = f"Artifacts/Builds/{game}/{platform}/BuildEvidence.txt"
         report = dict(line.split(": ", 1) for line in path(file).read_text().splitlines() if ": " in line)
@@ -146,7 +177,14 @@ def builds(game, files):
         if game == "PathOfDawn":
             fresh(finished, ["Games/PathOfDawn/Assets/Resources/Art/Gospel3D"],
                   f"Gospel model/texture {platform} build", (".fbx", ".png", ".jpg", ".jpeg"))
+        else:
+            fresh(finished, ["Games/FantasyCards/Assets/Resources/Art/ClassicCards"],
+                  f"Original card pixels {platform} build", (".png",))
+            fresh(finished, ["Tools/Art/ClassicCards/Originals"],
+                  f"Preserved original card source {platform} build", (".webp",))
         result[platform] = {"unityReport": report, **ref(file)}
+        if verified_card_authoring is not None:
+            result[platform]["cardAuthoring"] = verified_card_authoring
         if platform == "Windows":
             path(path(file).parent / (game + ".exe"))
         else:
@@ -154,11 +192,47 @@ def builds(game, files):
     return result
 
 
+def page_error_evidence(game, report, file):
+    """Recheck the narrow provider classifier without discarding raw errors."""
+    classifier = report.get("harness", {}).get("pageErrorClassifier", {})
+    checked(classifier.get("file"), classifier.get("sha256"))
+    helper_file = path("Tools/Validation/fm-provider-errors.py")
+    require(classifier["sha256"] == sha(helper_file), "Page-error classifier differs from current reviewed helper")
+    spec = importlib.util.spec_from_file_location("fm_provider_errors", helper_file)
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    errors = report.get("pageErrors")
+    windows = report.get("audioEvidence", {}).get("providerWindows", [])
+    require(isinstance(errors, list), "Raw JavaScript page errors must be retained")
+    provider_verified = (game == "FantasyCards" and report.get("audioEvidence", {}).get("status") == "verified-provider-playback"
+                         and isinstance(windows, list) and bool(windows)
+                         and all(isinstance(sample, dict) and sample.get("status") == "verified-provider-playback" for sample in windows))
+    frame_url = r"https://widget\.sndcdn\.com/widget-[A-Za-z0-9_-]+\.js:[1-9][0-9]*:[1-9][0-9]*"
+    frame = re.compile(r"(?:at " + frame_url + r"|at [^()\r\n]+ \(" + frame_url + r"\))")
+    expected = {"externalProviderCancellations": [], "gameRuntimeErrors": []}
+    for error in errors:
+        stack = error.get("stack") if isinstance(error, dict) else None
+        lines = stack.splitlines() if isinstance(stack, str) else []
+        external = (provider_verified and isinstance(error, dict)
+                    and error.get("message") == "signal is aborted without reason"
+                    and len(lines) >= 2 and lines[0] == "AbortError: signal is aborted without reason"
+                    and any(line.strip() for line in lines[1:])
+                    and all(frame.fullmatch(line.strip()) for line in lines[1:] if line.strip()))
+        expected["externalProviderCancellations" if external else "gameRuntimeErrors"].append(error)
+    actual = helper.classify_page_errors(game, errors, windows)
+    require(actual == expected and report.get("pageErrorDiagnostic") == expected,
+            f"Page-error diagnostic does not preserve the independently classified raw errors: {file}")
+    require(not expected["gameRuntimeErrors"], f"JavaScript game/runtime errors remain: {file}")
+    require(game == "FantasyCards" or not errors, f"Gospel must have no JavaScript page errors: {file}")
+    return {"externalProviderCancellations": len(expected["externalProviderCancellations"]),
+            "gameRuntimeErrors": 0, "classifier": classifier}
+
+
 def browser(game, profile, files):
-    file = f"Artifacts/Validation/Revival/{profile}/{game}/report.json"
+    file = f"{REPORT_ROOT}/{profile}/{game}/report.json"
     report = read(file)
     require(report.get("status") == "passed" and report.get("game") == game
-            and report.get("revision") == REVISIONS[game] and report.get("suite") == "revival-real-input-v1", f"Current browser suite did not pass: {file}")
+            and report.get("revision") == REVISIONS[game] and report.get("suite") == "remaster-real-input-v1", f"Current browser suite did not pass: {file}")
     checks = report.get("checks", [])
     require(checks and all(c.get("passed") is True for c in checks) and report.get("input"), f"Missing/failed real-input checks: {file}")
     mobile = "Mobile844" in profile
@@ -183,11 +257,14 @@ def browser(game, profile, files):
                 and decision.get("expected") == checkpoint.get("expected") and decision.get("observed")
                 and decision.get("reviewer") and decision.get("reviewedUtc"), f"Invalid direct review checkpoint: {file}")
     audio = report.get("audioEvidence", {})
+    checked(audio.get("observer"), audio.get("observerSha256"))
     for sample in audio.get("windows", []) + audio.get("providerWindows", []):
         raw = path(file).parent / sample["rawEvidence"]
         require(raw.resolve().is_relative_to(path(file).parent), "Audio evidence escaped its run")
         checked(raw, sample.get("sha256"))
     if game == "FantasyCards":
+        provider_observer = audio.get("providerObserver", {})
+        checked(provider_observer.get("file"), provider_observer.get("sha256"))
         windows = audio.get("providerWindows", [])
         require(windows and audio.get("status") in {"verified-provider-playback", "unverified-external-service"}, f"Missing honest official-provider evidence: {file}")
         if audio["status"] == "verified-provider-playback":
@@ -197,8 +274,12 @@ def browser(game, profile, files):
                         and all(o.get("playback") == "playing" and o.get("trackId") == sample.get("expectedTrackId") for o in observed)
                         and observed[-1].get("positionMs", 0) > observed[0].get("positionMs", 0) + 500,
                         f"Official provider playback is not independently evidenced: {file}")
+                require(str(sample.get("directOfficialWidget", {}).get("actualSoundId")) == sample.get("expectedTrackId")
+                        and sample.get("latency", {}).get("actualTrackId") == sample.get("expectedTrackId"),
+                        f"Current official widget identity and passive handover evidence are required: {file}")
     else:
         require(audio.get("windows"), f"Missing passive Gospel audio evidence: {file}")
+    page_errors = page_error_evidence(game, report, file)
     if profile.startswith("Public"):
         delivery = report.get("publicDelivery", {})
         slug = "fantasy-cards" if game == "FantasyCards" else "path-of-dawn"
@@ -206,12 +287,37 @@ def browser(game, profile, files):
                 and delivery.get("gameUrl") == PUBLIC_URL + "games/" + slug + "/"
                 and all(f.get("status") == 200 for f in delivery["files"]), f"Public bytes do not match: {file}")
     return {"status": "passed", "checks": len(checks), "checkpoints": len(checkpoints), **ref(file),
+            "pageErrors": page_errors,
             "audio": {"status": audio.get("status", "recorded-pcm"), "pcmWindows": len(audio.get("windows", [])),
                       "providerWindows": len(audio.get("providerWindows", []))}, "reviewedUtc": review["reviewedUtc"],
             "screenshots": review["screenshots"], "findings": review.get("findings", [])}
 
 
 def content():
+    selection_file = "Tools/Data/ClassicCards/selection.json"
+    verification_file = "Tools/Data/ClassicCards/remaster-verification.json"
+    selection, verification = read(selection_file), read(verification_file)
+    cards = selection.get("cards", [])
+    require(selection.get("revision") == REVISIONS["FantasyCards"]
+            and len(cards) == len({c["sourceId"] for c in cards}) == selection.get("expectedCount") == 161,
+            "The current catalog must contain 161 unique original cards")
+    require(verification.get("status") == "passed" and verification.get("cards") == 161
+            and verification.get("preservedRowsAndMedia") == 96 and verification.get("addedCards") == 65
+            and verification.get("generatorReproducible") is True, "Remaster catalog verification did not pass")
+    checked(selection_file, verification.get("sourceSelectionSha256"))
+    checked("Tools/Data/ClassicCards/remaster-source-audit.json", verification.get("sourceAuditSha256"))
+    media_file = "Tools/Art/ClassicCards/manifest.json"
+    media, pixel_check = read(media_file), read("Tools/Art/ClassicCards/verification.json")
+    require(media.get("revision") == REVISIONS["FantasyCards"] and media.get("count") == 161
+            and pixel_check.get("status") == "passed" and pixel_check.get("count") == 161
+            and pixel_check.get("decodedPixelsIdentical") is True
+            and {c["sourceId"] for c in media.get("cards", [])} == {c["sourceId"] for c in cards},
+            "Current original-card media and catalog differ")
+    checked(media_file, pixel_check.get("manifestSha256"))
+    for card in media["cards"] + media.get("decorations", []):
+        checked(card["original"], card["originalSha256"])
+        checked(card["texture"], card["textureSha256"])
+        require(card.get("decodedPixelsIdentical") is True, "Original card pixels changed")
     file = "Artifacts/Validation/GospelJourney/scripture-verification.json"
     scripture = read(file)
     require(scripture.get("status") == "passed" and scripture.get("readings") == 7 and scripture.get("quotedVerses") == 16
@@ -228,11 +334,13 @@ def content():
     model_file = "Tools/Art/Gospel3D/manifest.json"
     manifest = read(model_file)
     actors = manifest.get("actors", [])
-    require(manifest.get("license") == "CC0-1.0" and {a.get("name") for a in actors} >= {"YoungJesus", "AdultJesus"}, "Missing original articulated actor records")
+    require(manifest.get("revision") == REVISIONS["PathOfDawn"] and manifest.get("license") == "CC0-1.0"
+            and {a.get("name") for a in actors} >= {"YoungJesus", "AdultJesus"}, "Missing current articulated actor records")
     actor_records = []
     for actor in actors:
         require(actor.get("bones", 0) >= 12 and actor.get("vertices", 0) > 200
-                and {c.get("name") for c in actor.get("clips", [])} >= {"Idle", "Walk", "Run"}, "Actor lacks articulated locomotion")
+                and {c.get("name") for c in actor.get("clips", [])} >= {"Idle", "Walk", "Run", "JumpStart", "JumpAir", "JumpLand", "Practice"},
+                "Actor lacks articulated locomotion or remaster actions")
         file = "Games/PathOfDawn/Assets/Resources/" + actor["resource"] + ".fbx"
         require(path(file).stat().st_size == actor.get("bytes"), "Actor manifest bytes are stale")
         if actor.get("sha256") is not None:
@@ -249,9 +357,11 @@ def content():
     for texture in maps:
         checked(texture["file"], texture["sha256"])
         require(path(texture["file"]).stat().st_size == texture.get("bytes"), "Temple texture byte count is stale")
-    notices = ["Tools/Research/FmRevival/SOURCE-NOTICE.txt", "Tools/Art/Gospel3D/SOURCE-NOTICE.txt",
+    notices = ["Tools/Research/FmRevival/SOURCE-NOTICE.txt", "Tools/Art/ClassicCards/SOURCE-NOTICE.txt", "Tools/Art/Gospel3D/SOURCE-NOTICE.txt",
                "Tools/Data/Gospel/SCRIPTURE-NOTICE.txt", "Tools/Art/GospelTemple/LICENSE-NOTICE.txt"]
-    return {"scripture": {"readings": 7, "verses": 16, **ref("Artifacts/Validation/GospelJourney/scripture-verification.json")},
+    return {"classicCards": {"count": 161, "preserved": 96, "added": 65, "selection": ref(selection_file),
+                             "media": ref(media_file), "verification": ref(verification_file)},
+            "scripture": {"readings": 7, "verses": 16, **ref("Artifacts/Validation/GospelJourney/scripture-verification.json")},
             "fmOriginalUi": {"images": len(images), **ref(images_file)}, "actors": actor_records,
             "actorManifest": ref(model_file), "officialMusicSources": ref("Tools/Research/FmRevival/soundcloud-original-tracks.json"),
             "templeMaterials": {"maps": len(maps), "materials": materials, **ref(temple_file)},
@@ -264,9 +374,10 @@ def publication(run, files):
     manifest = read(file)
     commit = manifest.get("sourceCommit", "")
     require(manifest.get("publishReady") is True and manifest.get("sourceDirty") is False
-            and manifest.get("gameRevisions") == REVISIONS and re.fullmatch("[0-9a-f]{40}", commit), "Staged release is not current/clean")
+            and manifest.get("gameRevisions") == REVISIONS and manifest.get("contentVersions") == CONTENTS
+            and re.fullmatch("[0-9a-f]{40}", commit), "Staged release is not current/clean")
     subprocess.run(["git", "merge-base", "--is-ancestor", commit, "HEAD"], cwd=ROOT, check=True)
-    portal_file = "Artifacts/Validation/PublicWeb/Portal/report.json"
+    portal_file = f"{REPORT_ROOT}/PublicPortal/report.json"
     portal = read(portal_file)
     require(portal.get("status") == "passed" and portal.get("baseUrl") == PUBLIC_URL and portal.get("sourceCommit") == commit, "Public portal is not current")
     expected = {**manifest.get("files", {}), "build-manifest.json": sha(file)}
@@ -318,9 +429,9 @@ def markdown(record):
 
 ## 현재 실행 구간
 
-판타지마스터즈는 원작 공식 웹/매뉴얼 자료를 바탕으로 타이틀→로컬 대기실→덱/게임방→싱글 연습전으로 연결한 첫 개편판이다. 기존96종·7속성·50장4덱 규칙을 유지하며 원작 클라이언트/전체 소스를 복원했다고 주장하지 않는다. SOUND-I 공식 SoundCloud 곡을 외부 플레이어로 재생하며 음원 파일을 추출하거나 번들에 넣지 않았다.
+판타지마스터즈 리마스터는 원작 그림과 규칙을 유지하고 161종·7속성 카드, 검색·정렬·덱 편집과 더 선명한 클라이언트 화면을 제공한다. 기존96종과 50장4덱·저장 버전을 보존하며 원작 클라이언트/전체 소스를 복원했다고 주장하지 않는다. SOUND-I 공식 SoundCloud 곡을 외부 플레이어로 재생하며 음원 파일을 추출하거나 번들에 넣지 않았다.
 
-예수님의 길은 탄생 말씀3장과 소년 예수님의 성전 방문(누가복음2:41–52)을 직접 걷는 첫 구간이다. 관절 리그·스킨드 메시와 Idle/Walk/Run을 사용하는3D 인물, 입체 성전, 말씀/목표/저장·복귀를 검사한다. 대표 사건26장 중 현재2장만 실행 가능하며 후속 공생애·수난·부활·승천을 플레이 가능하다고 표시하지 않는다.
+예수님의 길은 탄생 말씀3장과 소년 예수님의 성전 방문(누가복음2:41–52)을 직접 걷는 첫 구간이다. 관절 리그·스킨드 메시와 Idle/Walk/Run·점프·착지·선택 연습 동작을 사용하는3D 인물, 입체 성전, 말씀/목표/저장·복귀를 검사한다. 대표 사건26장 중 현재2장만 실행 가능하며 후속 공생애·수난·부활·승천을 플레이 가능하다고 표시하지 않는다.
 
 ## 테스트와 실제 화면
 
@@ -344,9 +455,9 @@ Web 바이트는 index/Build/StreamingAssets/TemplateData의 실제 합계다. U
 
 ## 이전 판과 확인 범위
 
-이전 카드 클래식·회화풍 관찰자 이야기는 `Tools/Environment/validation-2026-10-26-before-revival.json` 및 `Docs/ValidationHistory/2026-10-26-before-revival-*`에 보존한다. 이전 native/UI/오디오 통과를 이번 개편의 통과 수에 합산하지 않는다. 새 실행의 실패/불완전 이력도 삭제하지 않는다.
+이전 Revival/Gospel 공개판은 `Tools/Environment/validation-2026-10-26-before-remaster.json` 및 `Docs/ValidationHistory/2026-10-26-before-remaster/`에 보존한다. 이전 카드 클래식·회화풍 관찰자 기록도 각각의 이력에 남긴다. 이전 native/UI/오디오 통과를 이번 개편의 통과 수에 합산하지 않는다. 새 실행의 실패/불완전 이력도 삭제하지 않는다.
 
-실물 Android/iPhone·Safari·Windows 조작·하드웨어 성능·사용자 미적 평가는 미확인이다. 원본 모델/Blender 프리뷰의 조형 기록과 실제 Unity/Web 화면 검증을 구분한다. 소프트웨어 렌더러의 결과를 상용 게임 완성도나 목표기기 성능으로 소개하지 않는다. 세부 출처와 범위는 `Docs/FmRevival.md`, `Docs/GospelJourney.md`, `Docs/GospelChronology.md`, `Docs/Gospel3DArt.md`를 따른다.
+실물 Android/iPhone·Safari·Windows 조작·하드웨어 성능·사용자 미적 평가는 미확인이다. 원본 모델/Blender 프리뷰의 조형 기록과 실제 Unity/Web 화면 검증을 구분한다. 소프트웨어 렌더러의 결과를 상용 게임 완성도나 목표기기 성능으로 소개하지 않는다. 세부 출처와 범위는 `Docs/CardRemaster.md`, `Docs/FmRemasterUI.md`, `Docs/FmMusicLatency.md`, `Docs/GospelJourney.md`, `Docs/GospelChronology.md`, `Docs/Gospel3DArt.md`를 따른다.
 """
     visual = f"""# 화면·음악 검증
 
@@ -354,7 +465,7 @@ Web 바이트는 index/Build/StreamingAssets/TemplateData의 실제 합계다. U
 
 {intro}
 
-이전 그림/아바타 진입 화면의 승인을 이번3D/클라이언트 개편에 재사용하지 않았다. 아래 링크는 이번 실행이 저장한 원본이며 편집·합성한 홍보 장면이 아니다. FM 음악은 공식 외부 플레이어, Gospel은 게임 BGM의 관찰 범위를 구분한다.
+이전 Revival/Gospel 공개판의 화면 승인을 이번 리마스터 검증에 재사용하지 않았다. 아래 링크는 이번 실행이 저장한 원본이며 편집·합성한 홍보 장면이 아니다. FM 음악은 공식 외부 플레이어, Gospel은 게임 BGM의 관찰 범위를 구분한다.
 
 {chr(10).join(frame_sections)}
 """
@@ -398,5 +509,5 @@ if __name__ == "__main__":
     try:
         main()
     except (ValueError, KeyError, OSError, ET.ParseError, subprocess.CalledProcessError) as error:
-        print("Revival release summary refused: " + str(error), file=sys.stderr)
+        print("Remaster release summary refused: " + str(error), file=sys.stderr)
         sys.exit(1)

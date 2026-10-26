@@ -1,6 +1,6 @@
 # 개발과 실행
 
-현재 진입 경로는 판타지마스터즈의 `fm-revival-2026-10-26` 화면과 예수님의 길 `GospelJourneyApp`이다. 카드의 규칙 콘텐츠는 `fm-classic-0.1.0`, 새 성경 여정은 `gospel-0.1.0`이다. 설계는 [FmRevival](FmRevival.md)·[GospelJourney](GospelJourney.md)·[GospelChronology](GospelChronology.md), 실제 실행 결과는 [Validation](Validation.md)을 따른다.
+현재 진입 경로는 판타지마스터즈의 `fm-remaster-2026-10-26` 화면과 예수님의 길 `gospel-remaster-2026-10-26`의 `GospelJourneyApp`이다. 카드의 규칙 콘텐츠는 `fm-classic-0.1.0`, 새 성경 여정은 `gospel-0.1.0`이다. 설계는 [FmRevival](FmRevival.md)·[GospelJourney](GospelJourney.md)·[GospelChronology](GospelChronology.md), 실제 실행 결과는 [Validation](Validation.md)을 따른다.
 
 ## 고정 도구
 
@@ -55,8 +55,8 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 
 | 게임 | 현재 실행·제작 기준 |
 |---|---|
-| FantasyCards | `FantasyCardsApp`의 revival 타이틀·로비·대전실·전장. `Resources/Art/Revival`의 원작 GIF 무손실 디코딩 PNG, 원작 카드 96종과 기존 Core |
-| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·Idle/Walk/Run 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
+| FantasyCards | `FantasyCardsApp`의 remaster 타이틀·로비·대전실·전장. `Resources/Art/Revival`의 원작 GIF 무손실 디코딩 PNG, 원작 카드 161종과 기존 Core |
+| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·이동/점프/착지/선택 연습 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
 
 일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 새 3D 인물의 재생성과 import 계약은 [Gospel3DArt](Gospel3DArt.md)를 따른다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
@@ -67,7 +67,7 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 ## 입력·저장
 
 - 카드: 마우스·터치로 방과 덱을 선택한다. 손패와 전열, 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작한다.
-- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, 우클릭 드래그로 회전, 휠로 거리 조절, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기 버튼이다.
+- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠로 거리 조절, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작 버튼이다.
 - 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
 - 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.
 - Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 `저장 옮기기`는 무결성·버전·실제 상태를 검증한 뒤 가져온다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.
@@ -88,3 +88,5 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 ## 현재 검사 진입점
 
 `unity-task.sh <Game> edit-tests`는 순수 규칙 테스트 네임스페이스를, `play-tests`는 새 `FantasyCardsRevivalSmokeTests` 또는 `GospelJourneySmokeTests` UI 경로를 선택합니다. 이전 아바타/관찰자 진입점의 UI fixture는 보존된 제작 이력이며 현재 Boot 검증으로 실행하지 않습니다. 새 규칙·저장 전체는 `run-core-tests.sh`로 함께 검사합니다.
+
+정적 CardAsset 의미 검증(`Tools/Validation/verify-card-authoring.py`)은 PyYAML을 사용한다. 현재 클라우드 검증 버전은 PyYAML 6.0.3이며, Unity를 실행하거나 생성 에셋을 다시 쓰지 않고 전체 필드와 그림 참조를 검사한다.

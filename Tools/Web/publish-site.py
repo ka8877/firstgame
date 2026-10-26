@@ -5,6 +5,7 @@ The user must authorize publication. This script does not change repo visibility
 enable a paid plan, or change Pages settings. No force push is used.
 """
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -28,6 +29,18 @@ if not (site / ".firstgame-web-output").is_file() or not (site / "build-manifest
 manifest = json.loads((site / "build-manifest.json").read_text())
 if manifest.get("publishReady") is not True:
     parser.error("Stage with --require-browser-reports after the required per-game browser checks pass.")
+if (manifest.get("gameRevisions") != {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+        or manifest.get("contentVersions") != {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
+        or manifest.get("sourceDirty") is not False):
+    parser.error("A current remaster stage from a clean source commit is required.")
+current = {str(p.relative_to(site)): p for p in site.rglob("*")
+           if p.is_file() and p.name not in {".firstgame-web-output", "build-manifest.json"}}
+if set(current) != set(manifest.get("files", {})):
+    parser.error("Staged file set changed; stage and review the complete site again.")
+for name, staged in current.items():
+    if (staged.is_symlink() or any(parent.is_symlink() for parent in staged.parents if parent != site)
+            or hashlib.sha256(staged.read_bytes()).hexdigest() != manifest["files"][name]):
+        parser.error("Staged file changed: " + name)
 remote = f"https://github.com/{args.repository}.git"
 with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as temporary:
     checkout = Path(temporary)

@@ -109,6 +109,20 @@ for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx", "executed-harn
     selected.extend(sorted((artifacts / "Validation/Revival").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/GospelJourney").glob("*.json")))
 selected.extend(sorted((artifacts / "Validation/GitHub").glob("revival-*.json")))
+for name in ("CardRemaster.md", "FmRemasterUI.md", "FmMusicLatency.md", "GospelRemaster.md", "RemasterValidation.md"):
+    selected.append(root / "Docs" / name)
+selected.append(root / "Tools/Environment/validation-2026-10-26-before-remaster.json")
+selected.extend(sorted((root / "Docs/ValidationHistory/2026-10-26-before-remaster").rglob("*.*")))
+selected.extend(sorted((root / "Tools/Data/ClassicCards").glob("*.json")))
+for pattern in ("*.json", "*.png", "*.png.txt", "*.xml", "*.trx", "*.js", "executed-*.py"):
+    selected.extend(sorted((artifacts / "Validation/Remaster").rglob(pattern)))
+selected.extend(sorted((artifacts / "Validation/GitHub").glob("remaster-*.json")))
+for directory in ("Tools/Art/GospelRemaster", "Tools/Data/GospelRemaster"):
+    selected.extend(sorted((root / directory).rglob("*.json")))
+for name in ("revival-smoke.py", "revival-smoke-plans.json", "remaster-gospel-plans.json",
+             "summarize-revival-release.py", "verify-card-authoring.py", "verify-public-portal.py", "webaudio-observer.js", "fm-music-observer.js"):
+    selected.append(root / "Tools/Validation" / name)
+selected.append(root / "Tools/Validation/fm-provider-errors.py")
 for pattern in ("*.json", "*.md"):
     selected.extend(sorted((root / "Tools/Art/Painted").rglob(pattern)))
 selected.extend(sorted((artifacts / "Validation/Subculture").rglob("*.json")))

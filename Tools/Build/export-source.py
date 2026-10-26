@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 """Package both Unity project sources with actual LFS working files, not pointers."""
 from pathlib import Path
+import json
 import os
 import zipfile
 
 root = Path(__file__).resolve().parents[2]
+validation = json.loads((root / 'Tools/Environment/validation.json').read_text())
+if (validation.get('gameRevisions') != {'FantasyCards': 'fm-remaster-2026-10-26', 'PathOfDawn': 'gospel-remaster-2026-10-26'}
+        or validation.get('contentVersions') != {'FantasyCards': 'fm-classic-0.1.0', 'PathOfDawn': 'gospel-0.1.0'}):
+    raise SystemExit('Summarize current remaster validation before exporting release sources.')
+for name in ('CardRemaster.md', 'FmRemasterUI.md', 'FmMusicLatency.md', 'GospelRemaster.md', 'RemasterValidation.md'):
+    if not (root / 'Docs' / name).is_file():
+        raise SystemExit('Missing current remaster source document: ' + name)
 output = root / 'Artifacts/FirstGame-UnitySources.zip'
 output.parent.mkdir(parents=True, exist_ok=True)
 excluded = {'.git', 'Artifacts', 'Library', 'Temp', 'Logs', 'UserSettings', 'obj', 'bin', '__pycache__',

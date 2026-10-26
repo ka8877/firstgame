@@ -19,6 +19,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACTS = ROOT / "Artifacts"
+REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
+CONTENTS = {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"}
 CHUNK = 1024 * 1024
 LFS_HEADER = b"version https://git-lfs.github.com/spec/v1"
 MANIFEST_NAME = "EvidenceManifest.sha256.json"
@@ -130,6 +132,9 @@ def player_files(game, target):
     evidence = player / "BuildEvidence.txt"
     require(evidence.is_file() and "Result: Succeeded" in evidence.read_text(encoding="utf-8"),
             f"A successful current build is required: {game}/{target}")
+    build = dict(line.split(": ", 1) for line in evidence.read_text().splitlines() if ": " in line)
+    require(build.get("Revision") == REVISIONS[game] and build.get("Content") == CONTENTS[game]
+            and build.get("Errors") == "0", f"A current remaster build is required: {game}/{target}")
     entrypoint = player / (game + ".exe" if target == "Windows" else "index.html")
     require(entrypoint.is_file(), f"Missing player entrypoint: {entrypoint}")
     result = {}
@@ -146,7 +151,8 @@ def player_files(game, target):
 def classic_media_check(sources):
     selection = json.loads((ROOT / "Tools/Data/ClassicCards/selection.json").read_text(encoding="utf-8"))
     ids = [card["sourceId"] for card in selection["cards"]]
-    require(len(ids) == len(set(ids)) == 96, "The classic selection must contain 96 unique cards.")
+    require(len(ids) == len(set(ids)) == selection.get("expectedCount") == 161,
+            "The remaster selection must contain 161 unique original cards.")
     png_prefix = "FirstGame/Games/FantasyCards/Assets/Resources/Art/ClassicCards/"
     original_prefix = "FirstGame/Tools/Art/ClassicCards/Originals/"
     expected_png = {png_prefix + f"fm_{card_id}.png" for card_id in ids}
@@ -155,7 +161,7 @@ def classic_media_check(sources):
     actual_png = {name for name in sources if name.startswith(png_prefix) and name.endswith(".png")}
     actual_webp = {name for name in sources if name.startswith(original_prefix + "fm_")
                    and name.endswith(".webp")}
-    exact_names(actual_png, expected_png, "Classic source PNGs (96 cards + one back)")
+    exact_names(actual_png, expected_png, "Classic source PNGs (161 cards + one back)")
     exact_names(actual_webp, expected_webp, "Classic source original card WebPs")
     # The exporter also includes the back's WebP and seven review samples. They
     # remain in the exact filesystem comparison rather than being silently omitted.
@@ -252,6 +258,9 @@ def verify_archive(name, expected, watched, evidence=False):
 
 
 def main():
+    validation = json.loads((ROOT / "Tools/Environment/validation.json").read_text())
+    require(validation.get("gameRevisions") == REVISIONS and validation.get("contentVersions") == CONTENTS,
+            "Summarize the current remaster validation before verifying release archives")
     sources = source_files()
     media = classic_media_check(sources)
     evidence = evidence_files()
@@ -271,19 +280,20 @@ def main():
     require(all(fingerprint(path) == before for path, before in watched.items()),
             "An archive or current file changed before verification finished; rerun after packaging settles.")
     report = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat(),
+              "gameRevisions": REVISIONS, "contentVersions": CONTENTS,
               "verifier": "Tools/Build/verify-deliverables.py", "archives": records,
               "classicSourceMedia": media,
               "scope": "Archive integrity, exact packaging selections and current file bytes; not runtime gameplay validation."}
     checksum_text = "".join(f"{item['sha256']}  {item['file']}\n" for item in records)
     outputs = {ARTIFACTS / "Deliverables.sha256": checksum_text,
-               ARTIFACTS / "Validation/deliverables.json": json.dumps(report, ensure_ascii=False, indent=2) + "\n"}
+               ARTIFACTS / "Validation/Remaster/deliverables.json": json.dumps(report, ensure_ascii=False, indent=2) + "\n"}
     # No result file is touched until all six archives and final stability checks pass.
     for path, text in outputs.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_name(path.name + ".tmp")
         temporary.write_text(text, encoding="utf-8")
         temporary.replace(path)
-    print("All six deliverables passed. Wrote Artifacts/Deliverables.sha256 and Artifacts/Validation/deliverables.json.")
+    print("All six deliverables passed. Wrote Artifacts/Deliverables.sha256 and Artifacts/Validation/Remaster/deliverables.json.")
 
 
 if __name__ == "__main__":
