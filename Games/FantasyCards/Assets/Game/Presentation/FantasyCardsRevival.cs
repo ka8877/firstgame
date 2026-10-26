@@ -98,16 +98,16 @@ namespace FantasyCards.Presentation
             for (int i = 0; i < elements.Length; i++)
             {
                 float x = .075f + i * .083f;
-                var seal = Panel(root, x, .445f, x + .073f, .575f, new Color(.04f, .035f, .023f));
+                var seal = Panel(root, x, .46f, x + .073f, .59f, new Color(.04f, .035f, .023f));
                 Frame(seal, new Color(.42f, .34f, .20f), 1);
-                ElementIcon(seal, elements[i], .25f, .39f, .75f, .91f);
-                Text(seal, CardCatalog.ElementName(elements[i]), .04f, .02f, .96f, .39f, 23, ElementColor(elements[i]), TextAlignmentOptions.Center);
+                ElementIcon(seal, elements[i], .25f, .48f, .75f, .98f);
+                Text(seal, CardCatalog.ElementName(elements[i]), .04f, .02f, .96f, .48f, 23, ElementColor(elements[i]), TextAlignmentOptions.Center);
             }
             Button(root, "게임 시작", .23f, .27f, .50f, .39f, ShowLobby, gold, 31);
             Button(root, "이어하기", .23f, .14f, .50f, .25f, Continue, slate, 27, PersistentSaves.Exists(Slot));
             Button(root, "카드 도감", .065f, .02f, .265f, .115f, () => ShowCollection(false), slate, 25);
             Button(root, "음악 설정", .465f, .02f, .665f, .115f, () => ShowMusicSettings(ShowTitle), slate, 25);
-            Text(root, "싱글플레이 · 일곱 속성 · " + CardCatalog.All.Length + "종 카드", .065f, .405f, .665f, .445f, 22, gold, TextAlignmentOptions.Center);
+            Text(root, "싱글플레이 · 일곱 속성 · " + CardCatalog.All.Length + "종 카드", .065f, .395f, .665f, .46f, 22, gold, TextAlignmentOptions.Center);
         }
 
         private void ShowLobby()
@@ -176,8 +176,8 @@ namespace FantasyCards.Presentation
                 var art = deck.cards.Select(CardCatalog.Get).Where(card => card.kind == CardKind.Unit).OrderByDescending(card => card.level).First();
                 Artwork(tile, art, .015f, .035f, .245f, .965f);
                 Text(tile, deck.name, .275f, .60f, .975f, .95f, 28, gold);
-                Text(tile, deck.description, .275f, .20f, .975f, .60f, 22, ivory, TextAlignmentOptions.TopLeft);
-                Text(tile, "50장 · 지형16 · 유닛24 · 마법6 · 장비4", .275f, .025f, .975f, .20f, 19, teal);
+                Text(tile, deck.description, .275f, .24f, .975f, .60f, 22, ivory, TextAlignmentOptions.TopLeft);
+                Text(tile, "지형16 유닛24 마법6 장비4", .275f, .02f, .975f, .24f, 19, teal);
                 Frame(tile, !useCustomDeck && selectedDeckId == deck.id ? gold : new Color(.40f, .33f, .23f), !useCustomDeck && selectedDeckId == deck.id ? 3 : 1);
                 tile.GetComponent<Image>().raycastTarget = true;
                 var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>();

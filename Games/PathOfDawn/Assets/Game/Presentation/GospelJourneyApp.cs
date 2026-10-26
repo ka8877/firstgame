@@ -164,7 +164,7 @@ namespace PathOfDawn.Presentation
         void BuildTouch()
         {
             if(touchRoot!=null)Destroy(touchRoot);touchRoot=ui.Fill(frame,"Gospel touch controls").gameObject;
-            var look=ui.Box(touchRoot.transform,"Camera drag",680,150,570,360);look.gameObject.AddComponent<Image>().color=new Color(0,0,0,.001f);lookPad=look.gameObject.AddComponent<DawnPointerPad>();
+            var look=ui.Box(touchRoot.transform,"Camera drag",680,150,570,290);look.gameObject.AddComponent<Image>().color=new Color(0,0,0,.001f);lookPad=look.gameObject.AddComponent<DawnPointerPad>();
             var pad=ui.Card(touchRoot.transform,"Move pad",32,472,180,180,new Color(.09f,.15f,.18f,.70f));
             pad.pivot=new Vector2(.5f,.5f);pad.anchoredPosition=new Vector2(122,-562);movePad=pad.gameObject.AddComponent<DawnPointerPad>();movePad.joystick=true;movePad.radius=67;
             var thumb=ui.Card(pad,"Move thumb",0,0,72,72,DawnUi.Gold);thumb.anchorMin=thumb.anchorMax=thumb.pivot=new Vector2(.5f,.5f);thumb.anchoredPosition=Vector2.zero;thumb.GetComponent<Image>().raycastTarget=false;movePad.thumb=thumb;
@@ -287,7 +287,7 @@ namespace PathOfDawn.Presentation
         }
         void Toast(string value)
         {
-            if(notice==null){var box=ui.Card(frame,"Gospel notice",250,148,780,88,new Color(.06f,.11f,.15f,.97f));noticeRoot=box.gameObject;notice=Text(box,"",18,12,744,64,22,DawnUi.Gold);}
+            if(notice==null){var box=ui.Card(frame,"Gospel notice",250,148,780,88,new Color(.06f,.11f,.15f,.97f));box.GetComponent<Image>().raycastTarget=false;noticeRoot=box.gameObject;notice=Text(box,"",18,12,744,64,22,DawnUi.Gold);}
             notice.text=value;noticeRoot.SetActive(true);noticeUntil=Time.unscaledTime+5;
         }
         void OnApplicationPause(bool paused){if(paused&&inGame)Save(false);}

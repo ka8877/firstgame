@@ -351,6 +351,26 @@ namespace PathOfDawn.SmokeTests
         public IEnumerator MenusBlockMovementJumpAndActionAndPointerUiClicksDoNotPractice()
         {
             yield return BeginTemple();
+            var cameraPad = UnityEngine.Object.FindObjectsByType<DawnPointerPad>(FindObjectsInactive.Include,FindObjectsSortMode.None)
+                .Single(pad => pad.name == "Camera drag");
+            var touchControls = cameraPad.transform.parent.gameObject;
+            bool touchWasActive = touchControls.activeSelf;
+            try
+            {
+                // Inspect the real touch-layer geometry synchronously, before
+                // the desktop app hides that layer on its next Update.
+                touchControls.SetActive(true); Canvas.ForceUpdateCanvases();
+                var practiceButton = SmokeUi.FindButton("동작 연습 · F");
+                Assert.That(practiceButton,Is.Not.Null);
+                var buttonRect = practiceButton.GetComponent<RectTransform>();
+                var position = RectTransformUtility.WorldToScreenPoint(null,buttonRect.TransformPoint(buttonRect.rect.center));
+                var hits = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = position },hits);
+                Assert.That(hits.Count,Is.GreaterThan(0),"The actual action button must be reachable by the UI raycaster.");
+                Assert.That(hits[0].gameObject.GetComponentInParent<Button>(),Is.SameAs(practiceButton),
+                    "The transparent camera pad must not cover the visible practice action button on touch screens.");
+            }
+            finally { touchControls.SetActive(touchWasActive); }
             var motor = App.Player; motor.SetPose(new Vector3(-8,.08f,-8),0);
             yield return Grounded(motor);
             yield return Press(Key.Escape);

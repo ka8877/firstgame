@@ -224,13 +224,13 @@ namespace FantasyCards.Presentation
             var texture = OriginalCardTexture(card);
             if (texture != null)
             {
-                var holder = Panel(root, .025f, .13f, .975f, .915f, Color.clear);
+                var holder = Panel(root, .025f, .15f, .975f, .915f, Color.clear);
                 var image = new GameObject("Original card image", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
                 var rect = (RectTransform)image.transform; rect.SetParent(holder, false); Anchor(rect, 0, 0, 1, 1);
                 image.texture = texture; image.raycastTarget = false;
                 var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = (float)texture.width / texture.height;
             }
-            Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .081f, .95f, .125f, 20, gold, TextAlignmentOptions.Center);
+            Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .078f, .95f, .145f, 20, gold, TextAlignmentOptions.Center);
             Button(root, "능력 설명", .35f, .005f, .65f, .078f, () => ShowDetail(card, back), gold, 25);
         }
 

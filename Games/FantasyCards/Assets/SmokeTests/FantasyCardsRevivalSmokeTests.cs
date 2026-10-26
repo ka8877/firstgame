@@ -197,6 +197,87 @@ namespace FantasyCards.SmokeTests
             LogAssert.NoUnexpectedReceived();
         }
 
+        [UnityTest]
+        public IEnumerator RemasterTextRemainsVisibleWhenRebuiltAtActualMobileCanvasSize()
+        {
+            yield return SmokeUi.Capture("FantasyCards", "remaster-11-title-616x346", 616, 346,
+                () =>
+                {
+                    foreach (Element element in Enum.GetValues(typeof(Element))) AssertMobileLabel(CardCatalog.ElementName(element));
+                    AssertMobileLabel("싱글플레이 · 일곱 속성 · " + CardCatalog.All.Length + "종 카드");
+                    AssertMobileLabel("게임 시작");
+                    AssertMobileLabel("카드 도감");
+                }, RebuildAtActualMobileSize);
+
+            SmokeUi.Click("카드 도감"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "remaster-12-collection-616x346", 616, 346,
+                () =>
+                {
+                    foreach (string label in new[] { "CARD COLLECTION · 카드 도감", "검색", "원본 순서", "모든 카드", "속성 · 전체", "종류 · 전체", "소울 · 전체", "등급 · 전체", "이전", "다음", "대기실" })
+                        AssertMobileLabel(label);
+                }, RebuildAtActualMobileSize);
+            ActiveButtons("Card ").First().onClick.Invoke(); yield return null;
+            SmokeUi.Click("원본 카드"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "remaster-13-original-caption-616x346", 616, 346,
+                () =>
+                {
+                    AssertMobileLabel("원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.");
+                    AssertMobileLabel("능력 설명");
+                }, RebuildAtActualMobileSize);
+            SmokeUi.Click("능력 설명"); yield return null;
+            SmokeUi.Click("돌아가기"); yield return null;
+            SmokeUi.Click("대기실"); yield return null;
+            ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke(); yield return null;
+            SmokeUi.Click("START");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable, 15, "The room must reach its real opening hand.");
+            SmokeUi.Click("이대로 시작");
+            yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("준비 완료") != null && SmokeUi.FindButton("준비 완료").interactable, 15, "The confirmed hand must reach the real battle.");
+            SmokeUi.Click("기록 / 메뉴"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "remaster-14-menu-616x346", 616, 346,
+                () =>
+                {
+                    foreach (string label in new[] { "GAME OPTION", "전투 기록", "음악", "저장", "대기실", "돌아가기" }) AssertMobileLabel(label);
+                }, RebuildAtActualMobileSize);
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        static void RebuildAtActualMobileSize()
+        {
+            var canvas = UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None)
+                .Single(value => value.gameObject.activeInHierarchy && value.isRootCanvas && value.gameObject.name == "Fantasy Masters Client");
+            Assert.That(canvas.pixelRect.width, Is.EqualTo(616).Within(.5f));
+            Assert.That(canvas.pixelRect.height, Is.EqualTo(346).Within(.5f));
+            var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+            var redraw = typeof(FantasyCardsApp).GetField("redraw", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(app) as Action;
+            Assert.That(redraw, Is.Not.Null);
+            // Recreate TMP objects after the capture canvas has its Web dimensions;
+            // merely shrinking objects authored at 1280 misses the mobile font floor.
+            redraw();
+            Canvas.ForceUpdateCanvases();
+        }
+
+        static void AssertMobileLabel(string label)
+        {
+            var text = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
+                .Single(value => value.gameObject.activeInHierarchy && value.text == label);
+            text.ForceMeshUpdate();
+            var glyphs = text.textInfo.characterInfo.Take(text.textInfo.characterCount).Where(value => value.isVisible).ToArray();
+            Assert.That(new string(glyphs.Select(value => value.character).ToArray()),
+                Is.EqualTo(new string(label.Where(value => !char.IsWhiteSpace(value)).ToArray())), label + " must draw every glyph at 616x346.");
+            Assert.That(text.isTextTruncated, Is.False, label + " must fit its text area.");
+            var canvas = text.GetComponentInParent<Canvas>().rootCanvas;
+            Assert.That(text.fontSize * canvas.scaleFactor, Is.GreaterThanOrEqualTo(11.9f), label + " must remain at least 12 pixels.");
+            float fringe = 1f / canvas.scaleFactor;
+            var bounds = text.rectTransform.rect;
+            foreach (var glyph in glyphs)
+            {
+                Assert.That(glyph.bottomLeft.y, Is.GreaterThanOrEqualTo(bounds.yMin - fringe), label + " lower glyph edge");
+                Assert.That(glyph.topRight.y, Is.LessThanOrEqualTo(bounds.yMax + fringe), label + " upper glyph edge");
+                Assert.That(glyph.bottomLeft.x, Is.GreaterThanOrEqualTo(bounds.xMin - fringe), label + " left glyph edge");
+                Assert.That(glyph.topRight.x, Is.LessThanOrEqualTo(bounds.xMax + fringe), label + " right glyph edge");
+            }
+        }
+
         [Serializable] sealed class DeckPayload { public string[] cards; }
 
         static CardDefinition[] VisibleCards() => ActiveButtons("Card ")

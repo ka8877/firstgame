@@ -121,7 +121,8 @@ def native_result(game):
             and all(c.get("result") == "Passed" and fixture in c.get("fullname", "") for c in cases), f"Current native fixture did not wholly pass: {game}")
     require(int(xml.get("total", 0)) == int(xml.get("passed", -1)) == len(cases), f"Native result counts disagree: {game}")
     required_cases = ({"RemasterTitleLocalRoomsDeckChoiceShuffleAndContinueUseLiveCallbacks",
-                       "RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent"} if game == "FantasyCards" else {
+                       "RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent",
+                       "RemasterTextRemainsVisibleWhenRebuiltAtActualMobileCanvasSize"} if game == "FantasyCards" else {
         "BirthScripturePhysicalWalkingAndContinueRestoreTheRealJourney",
         "EqualGameTimeWalkingTravelsTheSameDistanceAtThirtyAndTwelveFrames",
         "MenusBlockMovementJumpAndActionAndPointerUiClicksDoNotPractice",
