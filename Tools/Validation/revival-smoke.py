@@ -10,6 +10,7 @@ Run one browser/Unity owner at a time. Never publishes.
 from __future__ import annotations
 
 import argparse
+import base64
 from datetime import datetime, timezone
 import functools
 import hashlib
@@ -77,6 +78,7 @@ class JourneySmoke:
     def __init__(self, page, args, plan, output):
         self.page, self.args, self.plan, self.output = page, args, plan, output
         self.navigation, self.started = 0, time.monotonic()
+        self.capture_keys = []
         self.report = {"game": args.game, "revision": REVISIONS[args.game], "status": "running",
             "suite": "remaster-real-input-v1", "startedUtc": now(), "profile": args.profile,
             "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
@@ -166,10 +168,24 @@ class JourneySmoke:
     def screenshot(self, name):
         path = self.output / (name + ".png")
         if name.startswith("jump-air"):
-            # Locator screenshots wait for two stable layout frames. On a slow
-            # software GPU that can span an entire real-time jump. Capture the
-            # original canvas pixels directly without delaying the game clock.
-            self.page.screenshot(path=str(path), clip=self.page.locator("#unity-canvas").bounding_box(), timeout=30000)
+            # Reuse the already captured canvas bounds. Playwright screenshot
+            # preparation can span an entire real-time jump on a software GPU.
+            # CDP reads original compositor pixels without font/layout waits.
+            box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
+                       if shot["name"] == "temple-idle")
+            session = self.page.context.new_cdp_session(self.page)
+            try:
+                capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
+                    "captureBeyondViewport": False, "clip": {**box, "scale": 1}})
+                path.write_bytes(base64.b64decode(capture["data"]))
+            finally:
+                session.detach()
+                for key in reversed(self.capture_keys):
+                    self.page.keyboard.up(key)
+                if self.capture_keys:
+                    self.report["input"].append({"type": "key-release-after-original-capture", "keys": self.capture_keys,
+                        "navigation": self.navigation, "atUtc": now()})
+                    self.capture_keys = []
         else:
             self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
         with Image.open(path) as pixels:
@@ -317,7 +333,15 @@ class JourneySmoke:
                 self.page.keyboard.down(key)
             try:
                 self.page.wait_for_timeout(action["ms"])
-            finally:
+            except BaseException:
+                for key in reversed(keys):
+                    self.page.keyboard.up(key)
+                raise
+            if action.get("releaseAfterCapture"):
+                if self.capture_keys:
+                    raise ValueError("The previous capture keys have not been released")
+                self.capture_keys = list(keys)
+            else:
                 for key in reversed(keys):
                     self.page.keyboard.up(key)
         elif kind == "touch_hold":

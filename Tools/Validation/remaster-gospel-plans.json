@@ -575,10 +575,11 @@
         "keys": [
           "Space"
         ],
-        "ms": 350,
+        "ms": 100,
         "settleMs": 0,
         "profile": "desktop",
-        "label": "실제 Space 점프"
+        "label": "실제 Space 점프",
+        "releaseAfterCapture": true
       },
       {
         "type": "click",
@@ -593,7 +594,7 @@
       {
         "type": "checkpoint",
         "name": "jump-air",
-        "expected": "점프 입력 후 주인공이 바닥에서 떠 있고 관절이 공중 동작으로 바뀐다. 대화나 본문 진행은 이동 전과 같다."
+        "expected": "실제 점프 입력 중 주인공의 발이 바닥에서 떨어지고 그림자와 분리된 공중 프레임을 확인한다. 목표와 성경 참조는 이동 전과 같다. 관절 동작의 세부 상태는 별도 Unity 검사에서 확인한다."
       },
       {
         "type": "wait",

@@ -117,7 +117,11 @@ namespace PathOfDawn.Presentation
             if (transform.position.y < -3) SetPose(new Vector3(0,.1f,-9),0);
         }
 
-        bool CanJumpAt(float now) => InputEnabled && !neutralRequired && now - lastGroundedTime <= CoyoteTime && gravityVelocity <= 0 && (Actions == null || !Actions.IsActive);
+        // UI can query before this frame's motor update. Existing capsule contact
+        // remains valid even when the preceding timestamp is over .12 seconds old.
+        bool CanJumpAt(float now) => InputEnabled && !neutralRequired && gravityVelocity <= 0 &&
+            (Controller != null && Controller.enabled && Controller.isGrounded || now - lastGroundedTime <= CoyoteTime) &&
+            (Actions == null || !Actions.IsActive);
 
         float StepMovement(Vector3 desired, bool hasDirection, float dt, float now)
         {

@@ -270,7 +270,11 @@ namespace PathOfDawn.SmokeTests
                 var motor = App.Player; motor.SetPose(new Vector3(3,.08f,-10),0);
                 yield return null; yield return Grounded(motor);
                 float floor = motor.transform.position.y;
-                motor.JumpPressed(); yield return null;
+                var jumpButton = SmokeUi.FindButton("점프 · Space");
+                Assert.That(jumpButton,Is.Not.Null);
+                Assert.That(jumpButton.IsInteractable(),Is.True,
+                    "Ground contact must keep the actual jump button enabled when App.Update runs before a slow motor frame.");
+                SmokeUi.Click("점프 · Space"); yield return null;
                 Assert.That(!motor.IsGrounded && motor.transform.position.y > floor + .1f,Is.True,
                     "A queued touch jump must get a movement frame even when the frame interval exceeds its time buffer.");
                 TestContext.WriteLine("GOSPEL_FRAME_RATE_MOVEMENT_OK gameSeconds=2 distanceAt30=" + thirtyFrameDistance + " distanceAt12=" + twelveFrameDistance);
