@@ -378,7 +378,7 @@ def main():
     if args.pages_run:
         record["publicWeb"], record["publication"] = publication(args.pages_run, files)
     validation, visual = markdown(record)
-    outputs = {"Docs/Validation.md": validation, "Docs/VisualValidation.md": visual,
+    outputs = {"Docs/Validation.md": validation.rstrip() + "\n", "Docs/VisualValidation.md": visual.rstrip() + "\n",
                "Tools/Environment/validation.json": json.dumps(record, ensure_ascii=False, indent=2) + "\n"}
     for game in REVISIONS:
         outputs[f"Artifacts/Builds/{game}/Web/OutputFiles.json"] = json.dumps({"revision": REVISIONS[game],

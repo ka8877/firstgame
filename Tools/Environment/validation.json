@@ -1,1046 +1,1240 @@
 {
   "date": "2026-10-26",
-  "recordedUtc": "2026-10-26T05:30:29.590193+00:00",
+  "recordedUtc": "2026-10-26T08:09:34.134323+00:00",
   "dateTimezone": "Asia/Seoul",
-  "revision": "fm-classic-2026-10-26",
-  "contentVersion": "fm-classic-0.1.0",
   "gameRevisions": {
-    "FantasyCards": "fm-classic-2026-10-26",
-    "PathOfDawn": "fluid-dawn-2026-10-24"
+    "FantasyCards": "fm-revival-2026-10-26",
+    "PathOfDawn": "gospel-journey-2026-10-26"
   },
-  "baselineRecord": "Tools/Environment/validation-2026-10-26-before-classic.json",
-  "sourceCommitAtSummary": "2fa47159abc04281d5e6e202a0cca60562e64f6e",
+  "contentVersions": {
+    "FantasyCards": "fm-classic-0.1.0",
+    "PathOfDawn": "gospel-0.1.0"
+  },
+  "sourceCommitAtSummary": "382e4504ebef23540ca6afb59cbc4efe84caae05",
   "sourceDirtyAtSummary": true,
+  "historicalBaseline": {
+    "evidence": "Tools/Environment/validation-2026-10-26-before-revival.json",
+    "sha256": "00e4a2ff06b42e8fac25199f158b1c847b3a543486ec5928de3a272b2b7caa10"
+  },
   "externalCore": {
-    "passed": 73,
+    "passed": 88,
     "failed": 0,
     "skipped": 0,
-    "finishedUtc": "2026-10-26T03:40:28.2940409+00:00",
+    "finishedUtc": "2026-10-26T06:13:58.7454059+00:00",
     "evidence": "Artifacts/TestResults/Core/core-tests.trx",
-    "sha256": "32f29de0ddb1d7aada129c76621f9f995ea0d78a1e8396e20214b16c90757281"
+    "sha256": "9bb3606b2053ee4ac6f8b3a8f51cfb0f21aea6980d7286aec8c533ef7b4f3752"
   },
   "nativeTests": {
     "FantasyCards": {
-      "result": "Passed",
-      "total": "34",
-      "passed": "34",
-      "failed": "0",
-      "skipped": "0",
-      "start-time": "2026-10-26 03:43:55Z",
-      "end-time": "2026-10-26 03:44:14Z",
-      "evidence": "Artifacts/TestResults/FantasyCards/EditMode.xml",
-      "sha256": "508b1804015ce265e5e369a8aa3873ae3e108f3daac1978f88b291433d2a2bdf"
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "fixture": "FantasyCardsRevivalSmokeTests",
+      "finishedUtc": "2026-10-26 06:13:18Z",
+      "evidence": "Artifacts/TestResults/FantasyCards/Revival.xml",
+      "sha256": "e3e28b66bc6ee6f1b4d1c1c8f192f7b31182b3ec817c0a301e3ddada7ba63cc8"
+    },
+    "PathOfDawn": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "fixture": "GospelJourneySmokeTests",
+      "finishedUtc": "2026-10-26 07:23:21Z",
+      "evidence": "Artifacts/TestResults/PathOfDawn/Gospel.xml",
+      "sha256": "565b7a689b0d36de3ee6679ab6d78f9fc5a8564ae2986acbe4c85723afc61a72"
     }
   },
   "builds": {
-    "FantasyCards/Windows": {
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "StandaloneWindows64",
-        "Result": "Succeeded",
-        "Bytes": "219016098",
-        "Duration": "00:00:13.2995840",
-        "Errors": "0",
-        "Warnings": "2",
-        "Content": "fm-classic-0.1.0"
+    "FantasyCards": {
+      "Windows": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Target": "StandaloneWindows64",
+          "Result": "Succeeded",
+          "Bytes": "221743618",
+          "Duration": "00:00:16.4014930",
+          "Errors": "0",
+          "Warnings": "3",
+          "Content": "fm-classic-0.1.0",
+          "Revision": "fm-revival-2026-10-26"
+        },
+        "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+        "sha256": "6b6299f54cb026d68c0d129ef352e558eb758e6c726d6f11b2e7ade75d09f80a"
       },
-      "evidence": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
-      "sha256": "acae0792a003e5c84362e6b10980676b1fbed665ed43839c3480cace38b65efd"
+      "Web": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Target": "WebGL",
+          "Result": "Succeeded",
+          "Bytes": "13367",
+          "Duration": "00:05:14.5048180",
+          "Errors": "0",
+          "Warnings": "6",
+          "Content": "fm-classic-0.1.0",
+          "Revision": "fm-revival-2026-10-26"
+        },
+        "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+        "sha256": "1990f6eca2a96bd96a66ae5d3607733730b6865c809f73826fe44a0eced9248e",
+        "actualPlayerBytes": 109415920,
+        "runtimeFiles": [
+          {
+            "file": "Build/43885a498cdc73787b78e28f97860823.wasm.unityweb",
+            "bytes": 13080332,
+            "sha256": "d7ad0b3dec51136c7db1266f7d94f900971efd543ef84dd58be5b35ef118e106"
+          },
+          {
+            "file": "Build/667dea80f6f9a9667dc4472a40d98954.data.unityweb",
+            "bytes": 96184626,
+            "sha256": "90f7b6070b1f0c7d875780368bb340b75ab1a2e1518eb664823bad17b3107204"
+          },
+          {
+            "file": "Build/93a205b79f45e380dc1153a709c3a273.framework.js.unityweb",
+            "bytes": 89728,
+            "sha256": "14d16642d059a509f2e0da015f1a50872b5e754179618cf3fc8d6e4271d04017"
+          },
+          {
+            "file": "Build/e099eb27a432cb015bfec74da2ab1f54.loader.js",
+            "bytes": 47867,
+            "sha256": "18caba0fd84e5c4a4177069e7eeab523fa123be4cbbd0f7ba054f2610886bce9"
+          },
+          {
+            "file": "index.html",
+            "bytes": 13367,
+            "sha256": "d3e36fa29bbe3d92ea9b549ea392f8a7d3cc7b90d9ef65c09b96160ea847e75b"
+          }
+        ]
+      }
     },
-    "FantasyCards/Web": {
-      "unityReport": {
-        "Engine": "6000.3.26f1",
-        "Target": "WebGL",
-        "Result": "Succeeded",
-        "Bytes": "7343",
-        "Duration": "00:03:36.0567830",
-        "Errors": "0",
-        "Warnings": "5",
-        "Content": "fm-classic-0.1.0"
+    "PathOfDawn": {
+      "Windows": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Content": "gospel-0.1.0",
+          "Revision": "gospel-journey-2026-10-26",
+          "Target": "StandaloneWindows64",
+          "Result": "Succeeded",
+          "Bytes": "233059195",
+          "Duration": "00:00:17.6731150",
+          "Errors": "0",
+          "Warnings": "1"
+        },
+        "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+        "sha256": "1d11a77276f38019a6a313ffbcf17d82ed0f855eca7efe2f7b101d8958e36c7a"
       },
-      "evidence": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
-      "sha256": "dac0bdc28a707155e03259eb9071dafac02e8902da3f15b5373d792f76ce5b67",
-      "actualPlayerBytes": 108707491,
-      "filesEvidence": "Artifacts/Builds/FantasyCards/Web/OutputFiles.json",
-      "filesEvidenceSha256": "d317a49206b2d9b0f3796bcff9747028fdeb8842f1d59b4bbd6ff7fff6869a65"
+      "Web": {
+        "unityReport": {
+          "Engine": "6000.3.26f1",
+          "Content": "gospel-0.1.0",
+          "Revision": "gospel-journey-2026-10-26",
+          "Target": "WebGL",
+          "Result": "Succeeded",
+          "Bytes": "7333",
+          "Duration": "00:08:58.3234360",
+          "Errors": "0",
+          "Warnings": "1"
+        },
+        "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+        "sha256": "f3eb11554fab88988f35f45b6b8c1789fbc7e1def0ca540249d663f6777969b5",
+        "actualPlayerBytes": 72523244,
+        "runtimeFiles": [
+          {
+            "file": "Build/2d34865603e9c263ad76f143910dc1f0.data.unityweb",
+            "bytes": 59005915,
+            "sha256": "eedd4f59ec2aa7c1ac549e04dfb85e43b9ec65f2ebdd5c9f52ca87bfca69eec3"
+          },
+          {
+            "file": "Build/3412b4881a977c381f0a8b105d931abc.wasm.unityweb",
+            "bytes": 13372369,
+            "sha256": "50157bcc7c2a7b2e0bead909fe24d381fe7db36e9004b00578f4385fe303a379"
+          },
+          {
+            "file": "Build/76a96b3b760ab33dc18667990ded8e01.framework.js.unityweb",
+            "bytes": 89760,
+            "sha256": "0d49740c368c763b98c06c50c5a6f56b2406b89a468e2bd013e5974536cb5f79"
+          },
+          {
+            "file": "Build/938dcb308cd13d4b4d6ae41a60ad94a7.loader.js",
+            "bytes": 47867,
+            "sha256": "f9ea076fba76396a620b0e3ee055f836368c718606f648b68b8ee3b598b26c38"
+          },
+          {
+            "file": "index.html",
+            "bytes": 7333,
+            "sha256": "d207f3b6387a9dbebc0672699b5d4c344c3d01c2c0f3765eeda08d88b3835bbe"
+          }
+        ]
+      }
     }
   },
   "web": {
     "Desktop720": {
-      "status": "passed",
-      "checks": 91,
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/report.json",
-      "sha256": "442be9ed9e67a0e64026410963f6577c063edec0d39e1a55635fa069f633d8ae",
-      "audioWindows": 7,
-      "voiceWindows": 0,
-      "visualReview": "approved",
-      "reviewedScreenshots": [
-        {
-          "name": "title-1280x720",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/title-1280x720.png",
-          "sha256": "67c47f8bcae8a5d2fc0a814417b2e5782d23b4e7eb101b90857fc604a3b96751"
+      "FantasyCards": {
+        "status": "passed",
+        "checks": 30,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Desktop720/FantasyCards/report.json",
+        "sha256": "47e017ddb634d04dd1c203d592371d04fbde68dbb43d6a0af7f9a4617dc2b53f",
+        "audio": {
+          "status": "verified-provider-playback",
+          "pcmWindows": 0,
+          "providerWindows": 3
         },
-        {
-          "name": "collection-96-original-cards",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/collection-96-original-cards.png",
-          "sha256": "a334d6655ad2c32e3949a500bd7641abd89e33767b412a2005c0badadd8dfa0b"
-        },
-        {
-          "name": "original-card-explanation",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/original-card-explanation.png",
-          "sha256": "ce931aa0448b8394d39f50114aff838b3092c981db00343d2beb235de3b2e555"
-        },
-        {
-          "name": "original-card-full-print",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/original-card-full-print.png",
-          "sha256": "eab947a3d88e63bab738a142874022a6bf6887a3225a242721be32f9890c3c32"
-        },
-        {
-          "name": "four-fifty-card-starter-decks",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/four-fifty-card-starter-decks.png",
-          "sha256": "ac36d3c7321702185d772c6fdb30a52f9137a67667c51741c87bba24e6eeeae2"
-        },
-        {
-          "name": "preparation-3-placed-unit-detail-2",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/preparation-3-placed-unit-detail-2.png",
-          "sha256": "fefdd677661bef15a6a795c660d95310902f5d42b58a8133a36062236ec010c4"
-        },
-        {
-          "name": "classic-battle-after-automatic-rounds",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/classic-battle-after-automatic-rounds.png",
-          "sha256": "b8da4a2de613bba228f4b11152ee0f41af10fc99dfe0864e2e99fac95233ba51"
-        },
-        {
-          "name": "automatic-combat-3-record",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/automatic-combat-3-record.png",
-          "sha256": "4f8977147e74b10686adb40d8f403c448830ff0e5453ca8ff7e8dd472b68b6df"
-        },
-        {
-          "name": "classic-saved-battle",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/classic-saved-battle.png",
-          "sha256": "db7b335f3bb5c113c62f2a80d8d60eeccc744183f32bc0e241f90e4d59ab7ac3"
-        },
-        {
-          "name": "classic-restored-battle",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/classic-restored-battle.png",
-          "sha256": "5904e584267f3232905c7efd1d84e147f83cf17203fb50f3c53e74bad354e254"
-        },
-        {
-          "name": "four-cosmetic-avatars",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/four-cosmetic-avatars.png",
-          "sha256": "96da7d8050d124bbfd0834454ccf010cdea0f8af269a2046e7ffd71ea24ec118"
-        },
-        {
-          "name": "three-encounter-choices",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/three-encounter-choices.png",
-          "sha256": "f7ace908b3f517223a6b451b1cf1c7816e2178302f32c56dc274188d3ba18e6a"
-        },
-        {
-          "name": "filter-filterElement-3",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/filter-filterElement-3.png",
-          "sha256": "136fd9155d6deb40bcf3246eac69452ec640ed6c580d8e805235b2453dc3873d"
-        },
-        {
-          "name": "filter-filterRarity-3",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/filter-filterRarity-3.png",
-          "sha256": "a0b925f41de7ce65fd614714657429da819a297d3c4fb99595dc671c62744bd0"
-        },
-        {
-          "name": "filter-filterCost-0",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/filter-filterCost-0.png",
-          "sha256": "d6660f19b7b613df66ea657f65092fb5633e0eac7d9755870faf232cabfe32df"
-        },
-        {
-          "name": "filter-filterCost-7",
-          "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/filter-filterCost-7.png",
-          "sha256": "39657482bbe291d46fd77e83109f6e5d902922094f39dc39e194620ba1c350c7"
-        }
-      ],
-      "reviewedUtc": "2026-10-26T04:52:33.980156+00:00",
-      "visualFindings": [
-        {
-          "screenshots": [
-            "title-1280x720"
-          ],
-          "finding": "The Korean title and main actions are readable against the darkened illustration. New duel, continue, card collection, 50-card deck construction, save export/import, and music controls are within the canvas without blocking overlap or clipped labels."
-        },
-        {
-          "screenshots": [
-            "collection-96-original-cards",
-            "filter-filterElement-3",
-            "filter-filterRarity-3",
-            "filter-filterCost-0",
-            "filter-filterCost-7"
-          ],
-          "finding": "The collection visibly states 96 total cards. Directly viewed filter frames show forest 14, rare 1, soul 0 with 14, and soul 7 with 6 matching cards. Four-column card presentation keeps names, level/cost badges, rarity, and type/stat text readable. The forest frame visibly includes 요정의숲, 꽃밭, 스웜, and 라비원숭이; the rare frame shows 메테오. Pagination and filter controls remain on screen."
-        },
-        {
-          "screenshots": [
-            "original-card-explanation",
-            "original-card-full-print"
-          ],
-          "finding": "The 묘지 detail displays a large original art area and separately drawn readable Korean rules: Lv 0, LP 1, 암흑 1 / 총소울 1 생산. The full-print frame displays the entire printed card, including border, title, printed text area, and the 1 marker. The UI also visibly warns that printed information and current database values may differ. The small source image is visibly pixelated/soft when enlarged; its fine print is less clear than the separately rendered UI."
-        },
-        {
-          "screenshots": [
-            "four-cosmetic-avatars",
-            "four-fifty-card-starter-decks",
-            "three-encounter-choices"
-          ],
-          "finding": "Four avatar choices and their names 리리아, 카엘, 세린, 노아 are visible. The avatar screen states that classic rules do not use unique avatar skills. The starter screen shows all four choices together, each labelled 50장 · 지형 16 · 유닛 24, with 숲과 빛 · 생명의 전열 highlighted. Three encounter panels and their navigation controls are visible. Descriptions fit without observed text truncation."
-        },
-        {
-          "screenshots": [
-            "preparation-3-placed-unit-detail-2"
-          ],
-          "finding": "The actual placed-unit detail visibly identifies 킬러메뚜기, 프리 / 숲 / 유닛 / 4장까지, Lv 1, 숲 1, 총소울 1, 유지 0, and AP 2+2C1 DP 0 HP 2+C1. The coin-per-stat explanation and no-special-skill description are readable; return and original-card controls are visible."
-        },
-        {
-          "screenshots": [
-            "classic-battle-after-automatic-rounds"
-          ],
-          "finding": "The board shows turn 4, opponent attack / player defense preparation. The player front row contains 킬러메뚜기 with AP 2 DP 0 HP 2; the opponent has 리틀엔젤 with AP 2 DP 1 HP 2 plus a face-down reserved spell. The player resource row visibly reads deck 40, hand 6, LP 1, 빛 1 · 숲 2 · 총소울 3, 지형 3/10. Ready, detail, save, music, and title controls are readable and within the frame."
-        },
-        {
-          "screenshots": [
-            "automatic-combat-3-record"
-          ],
-          "finding": "The visible combat log reads 실프 · C1 뒷면, 실프 최종 AP 1 / DP 0 / HP 2, 킬러메뚜기 → 실프 피해 4 · 반격 없음, and 실프 전장 이탈. Further lines show resource upkeep and the opponent placing 창공 and 리틀엔젤 and reserving a spell. The log and return control are readable without observed clipping."
-        },
-        {
-          "screenshots": [
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "Saved and restored captures visibly retain turn 4, the same player 킬러메뚜기 and opponent 리틀엔젤 plus reserved spell, and matching player deck 40 / hand 6 / LP 1 / terrain 3/10. Both show the same scrolled hand sequence 꽃밭, 템플솔져, 요정의숲, 세르셜가드, 요정의숲. The status line changes from a successful save message to a successful battle-and-next-coin-state restore message. This is direct visible correspondence; the message itself is not an independent proof of hidden RNG state."
-        },
-        {
-          "screenshots": [
-            "classic-battle-after-automatic-rounds",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The hand is a horizontal scroll strip showing five cards at a time at this viewport; the visible scrollbar and changed scroll position explain why all six cards are not simultaneously visible. The card names and stat lines in the visible portion are not cut off. No blocking text clipping, empty render, broken glyphs, or unintended overlay obstruction was observed in the reviewed frames."
-        }
-      ],
-      "executionStatus": "failed",
-      "assessments": {
-        "reassessment": {
-          "type": "post-run-network-evidence-reassessment",
-          "assessedUtc": "2026-10-26T05:00:16.146342+00:00",
-          "noRerun": true,
-          "artifact": {
-            "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/network-reassessment.json",
-            "bytes": 16318,
-            "sha256": "65301f74b045d622df1624d696e6aeeeac88f821ac18dc78940045cb53675a7f"
-          },
-          "originalArtifacts": [
-            {
-              "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/Reassessment/original-report.json",
-              "bytes": 554490,
-              "sha256": "c8028ab716fa93fcd5d16461ab9c09ad4a40eed5346faef8d206edf532ce9aa8"
+        "reviewedUtc": "2026-10-26T07:11:25.832068+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/title.png",
+            "sha256": "096fffd6b06931e4f63182f8f4ab52e118488a2527b1e46c7308fc07c227cdbb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              76.66783514393066,
+              74.02588150961793,
+              72.6924666340831
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
             },
-            {
-              "path": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards/Reassessment/original-summary.json",
-              "bytes": 635410,
-              "sha256": "c9b9ef5fedcf8ced4106f5eed7f24cdee3975f5ff0e2c7d27d455497eb39d26d"
-            }
-          ],
-          "originalExecutionStatus": "failed",
-          "statusBasis": "Only the documented network-classification error was recomputed from original evidence; the original failure is retained."
-        }
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:05:48.638405+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/lobby.png",
+            "sha256": "199abdcdc5babf81e3360569b001c5fde5d86266a6c45e4d2029fffd3281b916",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              49.89863625169147,
+              46.72451853180035,
+              41.65174698442505
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:06:47.402621+00:00"
+          },
+          {
+            "name": "deck-selection",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/deck-selection.png",
+            "sha256": "fc7ad325e875672eebf4baf0a8219a5d51e3a1a42488ffc7bcdecb2871127d9a",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              64.94163020303534,
+              61.456636950673996,
+              55.90111679825669
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:07:25.011622+00:00"
+          },
+          {
+            "name": "room",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/room.png",
+            "sha256": "848979728e96934e56c49cfeedd1d4d869972ad459ec44116072e6cbe248a857",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              49.42549266470659,
+              44.63717234973965,
+              39.13334965367818
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:08:08.788626+00:00"
+          },
+          {
+            "name": "opening-drawn",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/opening-drawn.png",
+            "sha256": "a89063fdc3dbf4ce66f2144d079e4453ca43ba12c096b8e8a4a16b42e2be7544",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              65.23293866169955,
+              64.21382416068222,
+              53.86913886068944
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:08:34.044766+00:00"
+          },
+          {
+            "name": "opening",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/opening.png",
+            "sha256": "901fbaaadfb1b1cd5f8af156713878dfead9234f55f7f22b59be519042a0206f",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              69.81919267489704,
+              67.86226694349635,
+              63.51558731551105
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:00.704043+00:00"
+          },
+          {
+            "name": "battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/battle.png",
+            "sha256": "0bc1d737115328780abf63ddc4d7fdaef288f9a67d492326087f0295df3cf9e9",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.71478603599164,
+              48.7138100653409,
+              47.189752572094655
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:24.603918+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/saved-battle.png",
+            "sha256": "bcf2bda5fa1d903ac1f478555c8aa83667b8ce9b500dddbd2937eb2268a8abcb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.64898272005645,
+              48.669293219270635,
+              47.181582989908925
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:09:58.478033+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Revival/Desktop720/FantasyCards/continued-battle.png",
+            "sha256": "74a32154054cc117563fd00f92ea4da37d656e948ffc88f83daaa0569f28996f",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              51.686482959526096,
+              48.69541991763263,
+              47.18808220826095
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:10:55.035495+00:00"
+          }
+        ],
+        "findings": [
+          "직접 본 원본에 Fantasy Masters 원작 웹 로고와 판타지마스터즈 제목, 원작 웹 로그인 엘프 인물, 빛/물/불/숲/금속/대지/암흑 7문양과 게임 시작·이어하기·카드 도감·음악 설정 버튼이 표시된다. 이전 창작 아바타 선택 화면은 보이지 않는다. 원작 저해상도 자료의 픽셀은 확대되어 보인다.",
+          "Room 연습실에 숲과 빛/물과 암흑/불과 금속 3개 실제 AI 대전방이 있고 우측 덱 선택·카드 도감·덱 편집이 보인다. SYSTEM 안내는 컴퓨터 상대임을 명시하며 접속자·다른 이용자 채팅을 꾸며 표시하지 않는다. 현재 선택 덱은 숲·빛이다.",
+          "덱 선택 원본에 숲과 빛·생명의 전열, 불과 금속·강철의 진격, 물과 암흑·심연의 파도, 대지와 빛·황금의 성채 네 타일이 표시된다. 각 50장/지형16/유닛24/마법6/장비4 수량과 대전실로 버튼이 읽힌다. 첫 숲·빛 타일에 선택 테두리가 있다.",
+          "연습 대전실 01이 열렸고 PLAYER 표의 나/컴퓨터 두 행이 각각 숲과 빛·생명의 전열 덱을 표시한다. TOTAL CARD50, WINNING RULE DECK0와 실제 START·덱 선택·게임 방법 버튼이 보인다. 온라인 이용자나 가짜 대기 인원 표시는 없다.",
+          "시작 손패 확인 화면에 성당내부/요정의숲/늑대이빨/호크윙나이트/스웜/라비원숭이 6장의 원본 카드가 표시된다. 전체 손패 교체 버튼은 활성 밝기이며 교체 시 6장을 다시 뽑는다는 안내, 이대로 시작 버튼이 보인다. 원본 인쇄 글자는 저해상도이지만 상단 실제 카드명은 읽힌다.",
+          "실제 교체 후 손패가 스웜/발탄/창공/골드드래곤/성당내부/겨울잠 6장으로 바뀌었다. 이전 성당내부/요정의숲/늑대이빨/호크윙나이트/스웜/라비원숭이와 명확히 다르다. 안내는 전체 손패 교체를 사용했습니다로 변경됐고 교체 버튼이 어둡게 비활성화되며 이대로 시작은 활성 상태이다.",
+          "실제 전장에 상대/나의 빈 전열이 각각01~05 다섯 칸씩 있고 하단 손패는 스웜/발탄/창공/골드드래곤/성당내부/겨울잠 6장이다. 내 덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 우측7속성모두0·총소울0·1턴 공격 준비를 읽었다. Ready·기록/메뉴·카드 상세가 보이고 시작교체를 사용한 Shuffle은 비활성이다. 전에 작았던 자원/상태 띠 문구가 이제 정상 표시된다.",
+          "메뉴의 저장을 실제 클릭한 후 전장으로 돌아왔고 가운데에 전장과 다음 코인 상태를 저장했습니다 안내가 표시된다. 내 덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 모든7색소울0·총소울0,1턴 공격 준비이며 양측전열은 비어 있다. 손패 순서는 스웜/발탄/창공/골드드래곤/성당내부/겨울잠이다. 이 값을 reload 뒤 원본과 대조한다.",
+          "전체 페이지 reload 후 실제 이어하기로 돌아온 원본에서 저장한 전투와 다음 코인 상태를 복원했습니다 안내를 읽었다. saved-battle과 같은 손패 순서 스웜/발탄/창공/골드드래곤/성당내부/겨울잠, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴 공격 준비, 양측빈5전열이 동일하다. 서로 다른 원본2장을 직접 대조했다."
+        ]
       },
-      "classicEvidence": [
-        "collection_filters",
-        "combat",
-        "original_card",
-        "preparation",
-        "save_reload",
-        "shuffle",
-        "starter_deck"
-      ]
+      "PathOfDawn": {
+        "status": "passed",
+        "checks": 38,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/report.json",
+        "sha256": "f09600ac24667752e3ad589acec68cce0a1fa0441185a7483209f21846bcd7b4",
+        "audio": {
+          "status": "recorded-pcm",
+          "pcmWindows": 5,
+          "providerWindows": 0
+        },
+        "reviewedUtc": "2026-10-26T07:55:04.663404+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/title.png",
+            "sha256": "a0eec01cc2e6e345a678cd9cb1a84391398530e38c09527efd97349277b3c737",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              84.4082100573472,
+              70.72729002791938,
+              61.58549778985732
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:45:42.885769+00:00"
+          },
+          {
+            "name": "birth-1",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-1.png",
+            "sha256": "6e6ae36686dac754fa89d80cf5ae15599feae8f010e8ac66eb324fd84cf6e26f",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              56.73871315373542,
+              55.59912996914322,
+              64.024465739118
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:46:36.101006+00:00"
+          },
+          {
+            "name": "birth-2",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-2.png",
+            "sha256": "e1fb3a9ad587f7ec57e13d6680cf95e063a41690e4d2c1619791c1060ebde218",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              56.99529036380562,
+              55.96201792834732,
+              64.44973959861275
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:47:24.254213+00:00"
+          },
+          {
+            "name": "birth-3",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/birth-3.png",
+            "sha256": "4eb036bb5a0d3171a2d0e609f30e010abf8cac21485e96ce0013f7f93c660c47",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              57.47893887310321,
+              56.391828662969154,
+              64.66057748682177
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:48:08.583305+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/temple-idle.png",
+            "sha256": "9d2838b5d4c0014665f1d734091185dc3afd631e4fbab3ce3f528f2638fdc6e7",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              73.67660894794622,
+              56.4608260803612,
+              37.07240937247938
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:48:45.756501+00:00"
+          },
+          {
+            "name": "temple-walked-adjusted-1",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/temple-walked-adjusted-1.png",
+            "sha256": "e086d57299b2b6092dcb154c31527bd2221fe3714ed5db9b6f42cb3d72917ff3",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              73.57879265268872,
+              56.21322548051578,
+              36.62441519218633
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:51:30.091034+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/gate-reading.png",
+            "sha256": "ae05683ff3342859d90b1d57d7bd7f5dac6770beaea7d03d50a3b4f79ff7dd3d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              83.44296761197812,
+              66.2547820815121,
+              42.87905861825087
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:52:32.631521+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/saved-temple.png",
+            "sha256": "bb622f6db93c91527d4e14fff526f811565bb669ae61bd802c4ff2e38a72e37a",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              79.20404634492544,
+              59.768926866553706,
+              37.64766954998717
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:53:13.766185+00:00"
+          },
+          {
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Revival/Desktop720/PathOfDawn/continued-temple.png",
+            "sha256": "ec3c4ec83f09cc384bb8e7c3de9b3b54159ee550d1d4ba5e804b9970bb26ff3d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              79.21561925903531,
+              59.77949396971685,
+              37.65016010138368
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:54:28.724645+00:00"
+          }
+        ],
+        "findings": [
+          "원본1280×720에서 말씀을 따라 예수님의 길 제목, 탄생에서 부활과 승천까지 설명, 새 여정/비활성 이어하기/장 선택/설정 버튼이 보인다. 뒤에는 실제 깊이와 그림자가 있는 성전 기둥·계단·분수·올리브 정원·인물이 표시되고 이전 회화 배경은 없다.",
+          "탄생1/3과 베들레헴의 탄생 제목, 누가복음2:6–7/개역한글, 6·7절 두 줄 원문이 온전히 보인다. 요셉과 마리아의 호적 여정 설명은 별도 아래 영역에 있으며 대한성서공회 출처와 다음 구절 버튼이 구분되어 보인다.",
+          "큰 기쁨의 소식·탄생2/3, 누가복음2:10–11/개역한글이 표시된다. 천사가 이르되와 오늘날 다윗의 동네에로 시작하는 10·11절 본문, 목자들 설명과 출처, 다음 구절 버튼이 모두 읽히며 선택 분기나 창작 화자 대화로 표시되지 않는다.",
+          "마음에 간직한 말씀·탄생3/3, 누가복음2:19–20/개역한글과 마리아·목자의 19·20절이 잘리지 않고 보인다(20절 마지막 라는 다음 줄로 자연스럽게 감김). 나사렛 성장 기록을 잇는 요약과 성전으로 버튼, 대한성서공회 표기가 보인다.",
+          "소년이 실제 3D 뜰 중앙에 서 있으며 발은 원본 약(640,485), 첫 바닥 표식은 약(640,326)에 있다. 성전으로 들어가기 목표와 4m 거리, 누가복음2:41–43/개역한글 및41절 고정본문, 비활성 읽기버튼이 보인다. 기둥·분수·인물·타일·그림자의 깊이가 표시된다. 바닥 위 작은 조작안내 글자는 금색과 밝은 바닥의 대비가 낮아 읽기 어려운 비차단 관찰이 있다.",
+          "추가 실제 W 유지 후 바닥링이y335→약412로 이동해 소년 바로앞으로 가까워졌고 분수·선생들의 투영관계도 달라졌다. 이전4m표시가 말씀을 읽을 수 있습니다로 바뀌었으며 읽기·E 버튼이 진한 활성색으로 표시된다. 초기원본과 실제위치관계 변화 및 읽기가능거리 도달을 확인했다.",
+          "근처에서 실제 E 입력 뒤 유월절의 예루살렘 읽기 화면이 열렸다. 누가복음2:41–43/개역한글과41·42·43절이 모두 표시되고 설명·대한성서공회 출처·말씀을 따라 걷기 버튼이 구분된다. 탐색 목표/저장/설정/읽기 HUD는 숨겨지고 실제3D장면은 읽기 패널 뒤에 남는다.",
+          "본문확인뒤 목표가 선생들 가운데로 바뀌고 거리11m로 표시된다. 고정참조는 누가복음2:46–47/개역한글, 첫본문46절(사흘후에성전에서만난즉...)이다. 현재위치와읽은말씀을저장했습니다 안내가 명확하다. 소년발약(642,485), 분수중심약(641,233), 왼쪽선생들로이동한표식과 타일정렬을 이어하기대조기준으로 기록한다.",
+          "전체페이지새로고침(navigation1)후 실제이어하기를눌렀고 저장한말씀과위치에서이어갑니다 안내가 보인다. saved-temple과동일하게 선생들가운데/11m/누가복음2:46–47·46절을복구했으며 소년발(약642,485)과분수·타일·다음표식의공간정렬이같다. Idle자세변화만있고 이전관찰자/갈릴리회귀서사로돌아가지않았다."
+        ]
+      }
     },
     "Mobile844": {
-      "status": "passed",
-      "checks": 110,
-      "evidence": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/report.json",
-      "sha256": "a9131cc00259cb46db8dc1cc6c1e951608a07932c8c2bb1a83e4c6e9c94e615a",
-      "audioWindows": 7,
-      "voiceWindows": 0,
-      "visualReview": "approved",
-      "reviewedScreenshots": [
-        {
-          "name": "title-full-viewport",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/title-full-viewport.png",
-          "sha256": "852ed7804f403b30a5a5c3c5d2a0d35e23e340655f91c04bc7f169a0351f1cb2"
+      "FantasyCards": {
+        "status": "passed",
+        "checks": 32,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Mobile844/FantasyCards/report.json",
+        "sha256": "272bbcaf1739bba384f3ece8d355ee4050898df071141226cd15ecedf56a353d",
+        "audio": {
+          "status": "verified-provider-playback",
+          "pcmWindows": 0,
+          "providerWindows": 3
         },
-        {
-          "name": "title-844x390",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/title-844x390.png",
-          "sha256": "e8a4152bd1c4622ba20ed97da8c23168204f5af17db315dbf2c9366b96fa0530"
-        },
-        {
-          "name": "collection-96-original-cards",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/collection-96-original-cards.png",
-          "sha256": "5adb162c78ad3964e6e48c7900b0af7a537efb8a9bf61ec7222012526aef4fbb"
-        },
-        {
-          "name": "original-card-full-print",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/original-card-full-print.png",
-          "sha256": "af0dcd95995e32406f9ccc86657e65c1db28586316f71be5e435e8b3c0ac37cf"
-        },
-        {
-          "name": "original-card-explanation",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/original-card-explanation.png",
-          "sha256": "92ffd55c4a70a713e25c76e5d48b950deed6a7a9c408cf81b0eef53f249cc8e9"
-        },
-        {
-          "name": "four-fifty-card-starter-decks",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/four-fifty-card-starter-decks.png",
-          "sha256": "d1fde7d96b530d850fc2ae40db5a589531da8061ec7b50a4333764553399c5a8"
-        },
-        {
-          "name": "classic-first-preparation",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/classic-first-preparation.png",
-          "sha256": "9b6b4a2d89253a55d5424f404ca0f4002201df9c864b70abdbf4eece9fa30fa4"
-        },
-        {
-          "name": "preparation-6-placed-unit-detail-1",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/preparation-6-placed-unit-detail-1.png",
-          "sha256": "82e6ccf77bd06d82ddfa5723b206818d918a31cac5b1c7f4ad0448fa8b49b5c5"
-        },
-        {
-          "name": "preparation-6-play-1",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/preparation-6-play-1.png",
-          "sha256": "e93a97db925b844c35d98214d9de41a863aeb33dc51575a4be53dc5b1d371643"
-        },
-        {
-          "name": "classic-battle-after-automatic-rounds",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/classic-battle-after-automatic-rounds.png",
-          "sha256": "1eaa1a99bdf76bb07d65f364b4e9821ed6db7bea8c64ef7919b420af1e12c702"
-        },
-        {
-          "name": "automatic-combat-6-record",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/automatic-combat-6-record.png",
-          "sha256": "a87acc38b1bd8ec47cbad94f5a0bd23c781cd1968af47a7b75981410919bcc07"
-        },
-        {
-          "name": "opening-before-shuffle",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/opening-before-shuffle.png",
-          "sha256": "2e87668cf1f77d4458ef260327d8020d010c90e60e79cbec9b20fdd74827fa75"
-        },
-        {
-          "name": "opening-after-shuffle",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/opening-after-shuffle.png",
-          "sha256": "f45612a987625b10aaec53df4c9e109b91c6fc16bf56cb4c2009ccaea7060ae1"
-        },
-        {
-          "name": "classic-saved-battle",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/classic-saved-battle.png",
-          "sha256": "cb3e51ff6a0eee60c67c5cf9af4ee38b77c95627fe49aaa0d0f6602c569fcf82"
-        },
-        {
-          "name": "classic-restored-battle",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/classic-restored-battle.png",
-          "sha256": "b75d645a6edd44376367b6b350725e0a0ccb3dab33f15657f087a3cff87b070c"
-        },
-        {
-          "name": "automatic-combat-4-record",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/automatic-combat-4-record.png",
-          "sha256": "326fa249a8a0b371fee92bb3eb67437ced7663a11b921c79413cafcefbe9feaf"
-        },
-        {
-          "name": "filter-filterElement-3",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/filter-filterElement-3.png",
-          "sha256": "2fafdf4de03fbe3f75c2c3fd010e750cdf9ed69cd84e5a3ad33b4d5e78a24d67"
-        },
-        {
-          "name": "filter-filterRarity-3",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/filter-filterRarity-3.png",
-          "sha256": "dee9a5d0ff6945eccad54debdb06815143d103f89b1466f9209e0b0563ccc6b4"
-        },
-        {
-          "name": "filter-filterCost-0",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/filter-filterCost-0.png",
-          "sha256": "02c60823c5ac15bae5e5dea395f39010384e04a14a44b0274330f54d30a0e609"
-        },
-        {
-          "name": "filter-filterCost-7",
-          "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/filter-filterCost-7.png",
-          "sha256": "e778282a163fdfa43153365ed9faa103e8d4f55fa226f23e41fe907c9000ce53"
-        }
-      ],
-      "reviewedUtc": "2026-10-26T05:09:34.220017+00:00",
-      "visualFindings": [
-        {
-          "screenshots": [
-            "title-full-viewport",
-            "title-844x390"
-          ],
-          "finding": "The full viewport shows a centered 16:9 game canvas inside the 844 by 390 landscape viewport, with dark side margins of about 75 pixels. The canvas capture is 694 by 390. The title and main Korean actions are within the canvas and readable; no visible browser/canvas crop removes the navigation controls."
-        },
-        {
-          "screenshots": [
-            "collection-96-original-cards",
-            "filter-filterElement-3",
-            "filter-filterRarity-3",
-            "filter-filterCost-0",
-            "filter-filterCost-7"
-          ],
-          "finding": "The collection count visibly reads 96 total / 96 matching, with four displayed card columns. Directly reviewed filter frames visibly show forest 14, rare 1, soul 0 with 14, and soul 7 with 6. Names, cost and rarity badges, basic stat/type lines, pagination, and reset controls remain distinct. The rare frame shows 메테오 and the forest frame includes 요정의숲, 꽃밭, 스웜, and 라비원숭이."
-        },
-        {
-          "screenshots": [
-            "original-card-full-print",
-            "original-card-explanation"
-          ],
-          "finding": "The full printed 묘지 card is visible with its outer border, artwork, printed text area, and 1 marker, together with the printed/current-database discrepancy notice and ability-description button. The separate detail shows 묘지, Lv 0, LP 1, 암흑 1 / 총소울 1 생산 and a wrapped terrain explanation. The original raster print and its fine text are small and soft; the separate UI values are substantially clearer."
-        },
-        {
-          "screenshots": [
-            "four-fifty-card-starter-decks"
-          ],
-          "finding": "All four starter choices fit in a two-by-two layout, each visibly labelled 50장 · 지형 16 · 유닛 24. 숲과 빛 · 생명의 전열 is highlighted. Description wrapping stays inside the panels, and avatar/deck navigation plus opponent selection remain visible."
-        },
-        {
-          "screenshots": [
-            "opening-before-shuffle",
-            "opening-after-shuffle"
-          ],
-          "finding": "Both opening-hand screens display six complete cards at once and show a visibly different card order after replacement. The after frame contains 창공, 발탄, 허수아비, 요정의숲, 세르셜가드, 요정의숲; the status states that the whole-hand replacement was used. Start and replacement controls remain visible."
-        },
-        {
-          "screenshots": [
-            "classic-first-preparation"
-          ],
-          "finding": "The first battle shows turn 1 / player attack preparation and five empty lanes on each side. The own resource row visibly reads deck 44, hand 6, LP 1, colored souls 0, total souls 0, terrain 0/10. Ready, card-detail, save, music, title, battle-log, and hand-shuffle controls remain visible. The board/resource labels are compact at this canvas size."
-        },
-        {
-          "screenshots": [
-            "preparation-6-placed-unit-detail-1",
-            "preparation-6-play-1"
-          ],
-          "finding": "The actual placed-unit detail visibly identifies 스웜, 프리 / 숲 / 유닛 / 4장까지, Lv 1, 숲 1, 총소울 1, 유지 0, AP 2+C3 DP 0 HP 2. The coin-per-stat and no-special-skill text wraps within the detail panel. The played board shows 스웜 in the first player lane with AP 2 DP 0 HP 2 during turn 6 defense preparation; the player resource row shows deck 36, hand 5, LP 1, terrain 5/10. The opponent visibly has 퓨리울프, 실프, another 퓨리울프, and 리틀엔젤 in four lanes."
-        },
-        {
-          "screenshots": [
-            "automatic-combat-4-record",
-            "automatic-combat-6-record"
-          ],
-          "finding": "The compact combat text remains readable. Combat 4 visibly records 퓨리울프 · C1 뒷면, final AP 7 / DP 0 / HP 4, and direct attack level 3 causing 나 덱 -3. Combat 6 visibly records back-face coin outcomes for 실프, 퓨리울프, and 리틀엔젤, together with direct deck losses of -1, -3, and -1, then upkeep and the next preparation. These viewed frames prove visible back-face/direct-damage entries; they do not show both coin faces or every earlier log line."
-        },
-        {
-          "screenshots": [
-            "classic-battle-after-automatic-rounds",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The final board and saved/restored pair visibly show turn 7 / player attack preparation, empty player lanes, and the same four opponent units. The player resource row matches at deck 30, hand 6, LP 2, 빛 2 · 숲 3 · 총소울 5, terrain 5/10. The same visible scrolled hand contains 허수아비, 세르셜가드, 홀리레인, 신의은총, 꽃밭. Save and restore status messages are both legible; the latter states that the saved battle and next coin state were restored. This is visible correspondence, not independent verification of hidden RNG state."
-        },
-        {
-          "screenshots": [
-            "classic-first-preparation",
-            "preparation-6-play-1",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The battle hand uses a horizontal scroll strip with five visible cards at a time and a visible scrollbar; all six cards are not simultaneously shown on the board. Visible card names/stat lines remain inside their cards. No blocking text clipping, broken glyphs, blank rendering, or unintended overlap was observed in the reviewed frames."
-        }
-      ],
-      "executionStatus": "passed",
-      "assessments": {
-        "identityReassessment": {
-          "artifact": {
-            "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/identity-reassessment.json",
-            "sha256": "af91eaaccf63d74ad637678ef75485911da9f7aac51b6e8f6b2cff9df239146e"
-          },
-          "originalArtifacts": [
-            {
-              "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/IdentityReassessment/original-report.json",
-              "sha256": "accf25f96f1b5f6414307a957c1efdac0e6cf001dede78d9625f11ecbd675dd6"
+        "reviewedUtc": "2026-10-26T07:44:04.673371+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/title.png",
+            "sha256": "d332390ff9c3cc38294b15164513b89de80243cbe5ebc8bbdce7f416020d55d2",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              76.4406372432133,
+              73.83061269944267,
+              72.47427449102717
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
             },
-            {
-              "path": "Artifacts/Validation/ClassicCards/Mobile844/FantasyCards/IdentityReassessment/original-summary.json",
-              "sha256": "cde8dc68b29d2cf91fad13a3b931ef586cab08da80f81a4905e53a91ddfd578f"
-            }
-          ],
-          "noRerun": true,
-          "method": "direct-visual-correction",
-          "status": "passed",
-          "observations": [
-            "1 automatic card-name observations incorrectly matched 라; original screenshots directly confirm 라비원숭이.",
-            "Actual whole-hand replacement still changes the corrected six-card sequence.",
-            "Saved/restored six-card identities contain no affected match and remain equal."
-          ],
-          "scope": "The partial automatic OCR name matches are superseded by explicit original-frame identity confirmations; all raw observations are preserved."
-        }
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:36:16.577093+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/lobby.png",
+            "sha256": "65ac08856747370474bd63bd6f9eaf151bc64f9ad0e11360ef644089aa9c3ddf",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              53.19339272967795,
+              50.82840594822077,
+              46.25710340327866
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:38:23.676124+00:00"
+          },
+          {
+            "name": "deck-selection",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/deck-selection.png",
+            "sha256": "75e9bb7aaf9f2dc0c1e1bd6756a44e4ca278abba99e07f84d0edf8d257f9b5d2",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.92379576497407,
+              64.77080378357803,
+              59.33340840119939
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:39:22.556458+00:00"
+          },
+          {
+            "name": "room",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/room.png",
+            "sha256": "7142d1dc8298206fb5c1a615d7902cd1e25300e2f3881d5209e57c0801e50d8e",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              53.4824570215032,
+              48.728506417038304,
+              42.8862663177722
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:40:21.661335+00:00"
+          },
+          {
+            "name": "opening-drawn",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/opening-drawn.png",
+            "sha256": "3489b64d075cc2c617a147d90e9a65c60ce420d3faa36e3a8eb2cd95de645390",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.564057477171,
+              67.83290090340654,
+              60.10263944519662
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:40:46.356995+00:00"
+          },
+          {
+            "name": "opening",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/opening.png",
+            "sha256": "f101f137869053051a2bf3943d7045201253d2c241cab111fedbfd7ba948012f",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              69.80907981987492,
+              66.83705280587256,
+              58.12946489059327
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:41:15.285675+00:00"
+          },
+          {
+            "name": "battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/battle.png",
+            "sha256": "54fac089d5d5cefd63c9f70863e798796431c575722ebcb921b6aebefc478b44",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.407977744966026,
+              53.0990514741743,
+              49.640758158879486
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:41:44.484300+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/saved-battle.png",
+            "sha256": "870ae00fdba6725fa9fa98203adca63a8f1f149a5a9d9cb55c0af58aa02ebc64",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.278114283267804,
+              53.02058480573078,
+              49.64786920316439
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:42:29.281749+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Revival/Mobile844/FantasyCards/continued-battle.png",
+            "sha256": "1bdc23648abe6406323885766482fe40c6dfd78189dfa6035c13ff22aee14307",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              56.35637496663012,
+              53.068855095302396,
+              49.647156099057256
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:43:28.822220+00:00"
+          }
+        ],
+        "findings": [
+          "실제 모바일616x346 canvas 원본에 원작 로고·판타지마스터즈 제목·원작 웹 엘프 인물과 빛/물/불/숲/금속/대지/암흑7문양이 표시된다. 게임 시작·이어하기·카드 도감·음악 설정 버튼도 모두 보이며 이전 창작 아바타 선택 화면이 아니다. 저해상도 원작 픽셀이 확대되지만 버튼 글자는 읽을 수 있다.",
+          "모바일 실제 터치로 열린 Room 연습실에서 숲과 빛/물과 암흑/불과 금속 3 AI 방과 우측 덱 선택·카드 도감·덱 편집 버튼을 읽었다. SYSTEM 안내는 모든 대전이 컴퓨터 상대임을 표시하고 온라인 접속자·채팅 내용은 없다. 작은 canvas에서도 각 방과 버튼이 겹치지 않는다.",
+          "모바일에 숲과 빛·생명의 전열/불과 금속·강철의 진격/물과 암흑·심연의 파도/대지와 빛·황금의 성채 네 실제 선택 타일이 표시된다. 상단의 50장 기본 덱 안내와 하단 대전실로 버튼이 읽힌다. 세부 지형16/유닛24 등 작은 수량 줄은 이 축소 화면에서 표시되지 않지만 필수인 네 덱 선택과 50장 안내는 확인했다.",
+          "실제 터치로 연습 대전실01에 돌아왔고 PLAYER의 나/컴퓨터 두 행 모두 숲과 빛·생명의 전열을 표시한다. TOTAL CARD50/DECK0 조건과 START·덱 선택·게임 방법 버튼이 읽힌다. 방/선택 덱 내용이 네이티브 호출이 아닌 앞선 실제 화면 입력으로 연결되었다.",
+          "시작 손패 확인 원본에는 킬러메뚜기/요정의숲/요정의숲/창공/골드드래곤/라비원숭이 6장 이름과 원본 카드가 표시된다. 전체 손패 교체 버튼과 이대로 시작 버튼, 교체하면 다시6장을 뽑는다는 안내를 읽었다. 교체 전 원본 카드 순서를 이후 프레임과 대조할 수 있다.",
+          "실제 터치 교체 후 손패는 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤 6장으로 바뀌었다. 교체 전 킬러메뚜기/요정의숲2장/창공/골드드래곤/라비원숭이와 다르다. 안내가 전체 손패 교체를 사용했습니다로 바뀌고 해당 버튼은 비활성 어두운 색, 이대로 시작은 활성 색이다.",
+          "모바일 전장 원본에 양측01~05 빈 전열10칸과 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤 6장 손패가 보인다. 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6, 우측총소울0과7색소울0,1턴공격준비 및 Ready/기록·메뉴 버튼을 읽었다. 가운데 안내와 자원 띠는346px높이에서도 표시된다. 일부 손패 능력치줄은 줄임표가 있으며 상세보기로 확인할 항목이지 전부 읽었다고 주장하지 않는다.",
+          "실제 터치로 기록/메뉴→저장→돌아가기를 실행한 후 가운데 전장과 다음 코인 상태를 저장했습니다 안내를 확인했다. 현재 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴공격준비이며 양측전열은 비어 있다. 손패순서는 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤로 reload 뒤 원본과 비교할 값이다.",
+          "전체 페이지 새로고침 후 실제 타이틀 이어하기 터치로 전장이 복원됐고 저장한 전투와 다음 코인 상태를 복원했습니다 안내가 보인다. saved-battle 원본과 같은 겨울잠/퓨리울프/성당내부/호크윙나이트/늑대이빨/리틀엔젤6손패, 내덱44·손패6·LP1·지형0/10, 상대덱44·손패6,7색소울0·총소울0·1턴 공격 준비, 빈전열10칸을 직접 두 원본으로 비교했다."
+        ]
       },
-      "classicEvidence": [
-        "collection_filters",
-        "combat",
-        "original_card",
-        "preparation",
-        "save_reload",
-        "shuffle",
-        "starter_deck"
-      ]
+      "PathOfDawn": {
+        "status": "passed",
+        "checks": 40,
+        "checkpoints": 9,
+        "evidence": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/report.json",
+        "sha256": "dbbe26abcc6ff3d63b705c3e6d81ce4f9eaa8dab349134571b369c792173672d",
+        "audio": {
+          "status": "recorded-pcm",
+          "pcmWindows": 5,
+          "providerWindows": 0
+        },
+        "reviewedUtc": "2026-10-26T08:07:19.942671+00:00",
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/title.png",
+            "sha256": "8a19c1d01ffbea874adbee25fc2d4890e9861df2f182ce68ec99120533121609",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              83.61320406515057,
+              69.89323300416923,
+              60.963085122007016
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T07:59:08.408760+00:00"
+          },
+          {
+            "name": "birth-1",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-1.png",
+            "sha256": "f8226699520a8d9646d61df99b38ddadd8e8462876fbd2f40a0b78e267c3e532",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              55.678504116654295,
+              54.638658742030415,
+              63.355925039791416
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:00:04.396391+00:00"
+          },
+          {
+            "name": "birth-2",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-2.png",
+            "sha256": "51abffeccd3fade60bc43a8ef4e77a55711be6620f72de138b3b522843018b17",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              55.75826623313853,
+              54.83878865975758,
+              63.6682045601197
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:00:48.144965+00:00"
+          },
+          {
+            "name": "birth-3",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/birth-3.png",
+            "sha256": "814993883a2611124a4b14b779b282bf6cc747a8728614c86179141154e7eac8",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              56.09846228156417,
+              55.13474108409734,
+              63.77885695893889
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:01:16.731355+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/temple-idle.png",
+            "sha256": "266b7324ef83ad51af05336e1375c0b0ade0a159cf86ad4ea6dcaf755e392229",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              72.76677950849154,
+              55.372419018730184,
+              35.965318834575406
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:01:44.995181+00:00"
+          },
+          {
+            "name": "temple-walked-adjusted-1",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/temple-walked-adjusted-1.png",
+            "sha256": "418d25d3734c4d324be2e84246d1e2df233f0e84bfd56bd56a589f9499ddb14b",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              72.741652417998,
+              55.27523563363618,
+              35.64446927341691
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:03:39.580025+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/gate-reading.png",
+            "sha256": "0bdeb712c88345e55f7692f3199da67f404a49f4f593fca6522f9723128030ad",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              82.04607402564199,
+              64.92249622053279,
+              41.553567479623226
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:04:44.701448+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/saved-temple.png",
+            "sha256": "a5275bbf8a316a54abce2ebff39257d94ea995014eb04ea295cc969126f4b7cf",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              78.0114390147659,
+              58.548543483352695,
+              36.50079718352472
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:05:26.944652+00:00"
+          },
+          {
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Revival/Mobile844/PathOfDawn/continued-temple.png",
+            "sha256": "b1b3e8d06c4df37fe4b1832de82ba7b0d1085b0ce5a0a01409082b38563223fb",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              78.04439774461191,
+              58.56648450370474,
+              36.50231165870169
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-26T08:06:23.561594+00:00"
+          }
+        ],
+        "findings": [
+          "재실행의새원본694×390을직접확인했다. 말씀을따라예수님의길/탄생에서부활과승천까지 문구와 새여정/이어하기/장선택/설정버튼이완전히보이며 뒤에는실제3D성전기둥/정원/분수/인물/그림자가표시된다. 작은가로캔버스안에주요글자와버튼이잘리지않는다.",
+          "모바일첫탄생읽기에 베들레헴의탄생/탄생1/3, 누가복음2:6–7/개역한글,6·7절전체가보인다. 요셉과마리아설명은아래별도영역이고 성경전서개역한글판·대한성서공회출처와다음구절버튼이캔버스안에온전히표시된다. 본문은작은화면에서도줄잘림없이읽힌다.",
+          "모바일두번째탄생본문은 큰기쁨의소식/탄생2/3이며 누가복음2:10–11/개역한글과10·11절을온전히표시한다. 목자들에게전해진탄생설명과성경출처/다음구절버튼은본문과구분된다. 가상선택지나창작대화로바뀌지않았다.",
+          "모바일세번째탄생본문은 마음에간직한말씀/탄생3/3, 누가복음2:19–20/개역한글이다.19·20절과이후성장기록으로연결하는별도요약/대한성서공회출처가표시되며 성전으로버튼이완전히보인다.20절마지막글자는다음줄에감기지만누락되지않는다.",
+          "모바일탐색에서 소년예수님의발은원본약(350,268), 첫바닥링은약(347,178)에있다. 성전으로들어가기/4m·빛나는표식으로, 고정누가복음2:41–43·41절과우측비활성읽기버튼이보인다. 왼쪽이동패드/중앙노브가표시되어터치컨텍스트가실제적용되었다. 작은바닥조작힌트는밝은바닥과대비가낮으나주목표·본문·버튼은읽힌다.",
+          "추가실제터치패드유지후링은y190→약224로이동해소년바로앞에있고 분수·NPC와타일원근관계도변했다. 거리안내가 말씀을읽을수있습니다로바뀌고 우측읽기·E가활성화되었다. 초기4m원본과비교해실제터치이동과읽기가능거리도달을확인했다.",
+          "실제모바일읽기버튼터치후 유월절의예루살렘/누가복음2:41–43·개역한글 읽기가열렸다.41·42·43절과별도설명,대한성서공회출처,말씀을따라걷기버튼이보인다. 탐색HUD/이동패드는숨겨지고본문패널뒤에3D공간이남는다. 장절과본문은잘리지않는다.",
+          "모바일본문확인후 선생들가운데 목표/10m거리로진행했다. 누가복음2:46–47/개역한글과46절을고정표시하며 현재위치와읽은말씀을저장했습니다 안내가보인다. 소년발약(349,268), 분수중심약(348,130),왼쪽선생들/타일/이동패드정렬을이번모바일이어하기대조기준으로기록한다.",
+          "모바일전체새로고침navigation1뒤 실제이어하기를눌러 저장한말씀과위치에서이어갑니다 안내를확인했다. saved-temple과동일한 선생들가운데/10m/누가복음2:46–47·46절 및 소년발·분수·타일·왼쪽선생들의상대배치가복구되었다. 이동패드도다시보이고이전관찰자서사로돌아가지않는다. Idle애니메이션자세차이는위치복구와구분했다."
+        ]
+      }
     }
   },
-  "classicData": {
-    "manifest": {
-      "evidence": "Tools/Art/ClassicCards/manifest.json",
-      "sha256": "4aa18ecd95164f39f6f354bba5dd8cb06f29fc2fcdcb391fbe2eebfabbdfbd89"
+  "contentEvidence": {
+    "scripture": {
+      "readings": 7,
+      "verses": 16,
+      "evidence": "Artifacts/Validation/GospelJourney/scripture-verification.json",
+      "sha256": "e53953695ed3431d42952441785836076ea5ec11ddda670ba43bc5e8d7a65f3c"
     },
-    "verification": {
-      "evidence": "Tools/Art/ClassicCards/verification.json",
-      "sha256": "6abbeec0d26abf4308a398b15302ce182ec66c94babcb4196beca0484284c871"
+    "fmOriginalUi": {
+      "images": 8,
+      "evidence": "Tools/Research/FmRevival/unity-source-images.json",
+      "sha256": "3dc0c32bf118bd8b813046c1cd1ad3086421475b02967e370101621c7672cb92"
     },
-    "selection": {
-      "evidence": "Tools/Data/ClassicCards/selection.json",
-      "sha256": "a1408a821c53c8b7e5e8211c95772f83043355176db7519ab014124bd8f5c348"
-    },
-    "sourceAudit": {
-      "evidence": "Artifacts/Validation/FmExpansion/Research/database/generated-catalog-review.json",
-      "sha256": "61ec47910cbc685971a06736cd1a8646d3af1403f42099382004d6143dfa27ad"
-    },
-    "cards": 96,
-    "mappingChecks": 5776,
-    "categories": {
-      "1": 14,
-      "2": 56,
-      "3": 14,
-      "4": 12
-    },
-    "sourceRuleLimits": [
+    "actors": [
       {
-        "kind": "documented_implementation_interpretation",
-        "topic": "Coin shared-prefix orientation",
-        "detail": "Research confirms shared rolls and Cn count rather than binary value. First n coin positions are a documented synthesis; a direct official sentence defining first n was not located."
+        "name": "YoungJesus",
+        "bones": 65,
+        "vertices": 14565,
+        "evidence": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx",
+        "sha256": "dd90067bf9d0d9604ee3ff752205f8ed901e35c5fade2580fc808f71596257b6"
       },
       {
-        "kind": "unconfirmed_rule",
-        "topic": "Equipment stack count",
-        "file": "Games/FantasyCards/Assets/Game/Core/BattleEngine.cs",
-        "detail": "CanPlay caps two equipment per unit and ValidateState accepts at most two. Original equipment trait matching is confirmed; maximum simultaneous equipment count is not established by retained evidence. Do not call the two-item cap original-verified."
-      },
-      {
-        "kind": "selection_scope",
-        "topic": "Only selected one-battle spells are supported",
-        "detail": "Duration is not stored on CardDefinition; all selected spells have DurationType1/Duration1, and the generator asserts these. Multi-battle or permanent spells must not be added without engine duration support."
-      },
-      {
-        "kind": "runtime_not_tested",
-        "topic": "Generated assets and actual gameplay",
-        "detail": "This review validates generated source, not ScriptableObject synchronization, Unity build loading, runtime UI or gameplay execution."
+        "name": "AdultJesus",
+        "bones": 65,
+        "vertices": 15459,
+        "evidence": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/AdultJesus.fbx",
+        "sha256": "8700c4c18e4a35d0cf769d2e5a00e840dde88d1948ddb423ed3e7f2f597f766c"
       }
     ],
-    "rightsStatus": "Original third-party card images; redistribution permission was not established. Public availability or service closure is not a rights grant.",
-    "decodedPixelsIdentical": true
-  },
-  "music": {
-    "evidence": "Tools/Audio/classic-verification.json",
-    "sha256": "33368cdcc47b8054e70a7bb9708d7188b3cec466e8ec7c93eef222611e67294b",
-    "track": {
-      "file": "Games/FantasyCards/Assets/Resources/Audio/starlight-overture.ogg",
-      "sha256": "6153a23211c3e9d321dc2316d24cf59af1ca3cac88aaa7be0380513aac1945cd",
-      "generator": "Tools/Audio/compose-classic.py",
-      "generatorSha256": "23f082b812ce62926014d01fac975c08e5d1426428b51f5289376ea1acf75cd1",
-      "codec": "vorbis",
-      "sampleRate": 44100,
-      "channels": 2,
-      "decodedDurationSeconds": 109.090907,
-      "decodedPeakDbFS": -5.666,
-      "decodedRmsDbFS": -21.394,
-      "minimum100msRmsDbFS": -27.813,
-      "first50msRmsDbFS": -25.284,
-      "last50msRmsDbFS": -28.62,
-      "edgeSampleStep": 0.00148494,
-      "clippedSamples": 0
+    "actorManifest": {
+      "evidence": "Tools/Art/Gospel3D/manifest.json",
+      "sha256": "315d97be03ab715b5a45ff792d60a309fa7a824fe6f2f977e5202b8a4e83b4f9"
     },
-    "humanListeningPerformed": false
-  },
-  "assetAudit": {
-    "status": "passed",
-    "evidence": "Artifacts/Validation/ClassicCards/asset-audit.json",
-    "sha256": "38c42fc993847fb8e045d2c63dff2f9d9cba36cc0d3f7d1c6b6332e02a60364d",
-    "metaCounts": {
-      "FantasyCards": 390,
-      "PathOfDawn": 326
-    }
-  },
-  "reusedUnchangedEvidence": {
-    "PathOfDawn": {
-      "revision": "fluid-dawn-2026-10-24",
-      "baseline": {
-        "evidence": "Tools/Environment/validation-2026-10-26-before-classic.json",
-        "sha256": "d5557d8d14276d6f65613560d1dff79ef91b4d2c040c5d409ab16af63b0caf88"
-      },
-      "sourceComparisonBase": "65e93c69af37e13d619377e4c66bd06dd6c5b961",
-      "reason": "PathOfDawn and Shared source diff is empty; current Web runtime bytes match all prior reports. No new Dawn execution is claimed.",
-      "native": {
-        "result": "Passed",
-        "total": "17",
-        "passed": "17",
-        "failed": "0",
-        "skipped": "0",
-        "start-time": "2026-10-24 03:04:12Z",
-        "end-time": "2026-10-24 03:04:13Z",
-        "evidence": "Artifacts/TestResults/PathOfDawn/EditMode.xml",
-        "sha256": "c5a7f85e00eee909493b1c2365791b3afdbfa54b8c9802052489634ff7cfe2b4"
-      },
-      "builds": {
-        "PathOfDawn/Windows": {
-          "evidence": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
-          "unityReport": {
-            "Engine": "6000.3.26f1",
-            "Target": "StandaloneWindows64",
-            "Result": "Succeeded",
-            "Bytes": "172592107",
-            "Duration": "00:00:11.7920330",
-            "Errors": "0",
-            "Warnings": "1"
-          },
-          "sha256": "562b0e263d4a4ca1b958160485d843a75f9e4fbcd93ffc2c5edf43ddc868b92a"
-        },
-        "PathOfDawn/Web": {
-          "evidence": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
-          "unityReport": {
-            "Engine": "6000.3.26f1",
-            "Target": "WebGL",
-            "Result": "Succeeded",
-            "Bytes": "7333",
-            "Duration": "00:03:38.9144070",
-            "Errors": "0",
-            "Warnings": "4"
-          },
-          "sha256": "d40806f0033d7e51ab2f3b07838eb5ebf414b33a7c3e5c5b1dd492f3e7bd75cb",
-          "actualPlayerBytes": 58605048,
-          "filesEvidence": "Artifacts/Builds/PathOfDawn/Web/OutputFiles.json"
-        }
-      },
-      "web": {
-        "Desktop720": {
-          "status": "passed",
-          "checks": 53,
-          "evidence": "Artifacts/Validation/MotionDawn/Desktop720/PathOfDawn/report.json",
-          "sha256": "e414d95ef47e39adebe2b4039ee35789a18e445597750910f3d23a9f60448dea",
-          "audioWindows": 7,
-          "voiceWindows": 5,
-          "visualReview": "approved"
-        },
-        "Mobile844": {
-          "status": "passed",
-          "checks": 55,
-          "evidence": "Artifacts/Validation/MotionDawn/Mobile844/PathOfDawn/report.json",
-          "sha256": "2b0561d0d78fb9947dfb2464ad0ba30f0f9805016d288d83e925e10f40812c8a",
-          "audioWindows": 7,
-          "voiceWindows": 5,
-          "visualReview": "approved"
-        },
-        "PublicMobile844": {
-          "status": "passed",
-          "checks": 61,
-          "evidence": "Artifacts/Validation/MotionDawn/PublicMobile844/PathOfDawn/report.json",
-          "sha256": "b221bab795b171c68b9ae027b6c04e69aff126f20f23c0126095a7a69efb46e8",
-          "audioWindows": 7,
-          "voiceWindows": 5,
-          "visualReview": "approved"
-        }
-      },
-      "runtimeFiles": [
-        {
-          "file": "Build/4d35080f58ab48cbc35963c44c9fce1d.wasm.unityweb",
-          "bytes": 13277148,
-          "sha256": "3307eaa976b47e0c65abfa65538837454e1109d76d5a8d4abb461afafa719f86"
-        },
-        {
-          "file": "Build/74871e7f8cf27324a7244a92aeab3c53.data.unityweb",
-          "bytes": 45183022,
-          "sha256": "dfeff7d99f594d4ffcf040c148937fef67b217ddef40b3317bf8a00c8b3493f2"
-        },
-        {
-          "file": "Build/bf2cf8cf9922455147d353925206ed6a.framework.js.unityweb",
-          "bytes": 89678,
-          "sha256": "2ecc26bb3e2cca68bb4417fe4ab25f19786dbcb4e582148226cecb42ea5548fc"
-        },
-        {
-          "file": "Build/ed3b77eb51834ca4660087e38feaab83.loader.js",
-          "bytes": 47867,
-          "sha256": "689d7de682211d3de99304c3177d2176891693bdc24b8bcac32b97ce2130b783"
-        },
-        {
-          "file": "index.html",
-          "bytes": 7333,
-          "sha256": "b7764e92b11c9b9d11357932320bbcfd41a59124b08c304294f8c4b07d8792a0"
-        }
-      ],
-      "originalValidationDate": "2026-10-24"
-    }
-  },
-  "classicBrowserHistory": [
-    {
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards.previous-20261026T035353794966Z/report.json",
-      "sha256": "da4343e892e6f3ab7dfdbedd8c6bb962efaf66346ff9cc217ba821e7cd4a6a52",
-      "status": "interrupted",
-      "reason": "Preserved preceding attempt; not substituted for the final passing report."
+    "officialMusicSources": {
+      "evidence": "Tools/Research/FmRevival/soundcloud-original-tracks.json",
+      "sha256": "4a3153d48e3757559f6b2a424c5ccf1a2151e179248a42f4b7d8226029995938"
     },
-    {
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards.previous-20261026T040208449988Z/report.json",
-      "sha256": "fb9244b572cccb6b6c24f19ad4f55f31add7f2740188e2f934f5561121534025",
-      "status": "failed",
-      "reason": "Preserved preceding attempt; not substituted for the final passing report."
-    },
-    {
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards.previous-20261026T040933059376Z/report.json",
-      "sha256": "b7841692faf4916c05b04a55ad8c849d12fa9d33180f90305af52f44770137b1",
-      "status": "failed",
-      "reason": "Preserved preceding attempt; not substituted for the final passing report."
-    },
-    {
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards.previous-20261026T042226366080Z/report.json",
-      "sha256": "1ca8c309bd0817b2257f5577a2940b10459ff1b1f138a99759f3be24b32b3990",
-      "status": "failed",
-      "reason": "Preserved preceding attempt; not substituted for the final passing report."
-    },
-    {
-      "evidence": "Artifacts/Validation/ClassicCards/Desktop720/FantasyCards.previous-20261026T043438823652Z/report.json",
-      "sha256": "cec1e9defbb042c1cf5800b581216b03d7c0559e56765556ac989156ba16f28f",
-      "status": "failed",
-      "reason": "Preserved preceding attempt; not substituted for the final passing report."
-    }
-  ],
-  "previousReleaseIncompleteRuns": [
-    {
-      "game": "FantasyCards",
-      "profile": "Desktop1080",
-      "status": "incomplete",
-      "evidence": "Artifacts/Validation/VisualWeb/Desktop1080/FantasyCards/report.json",
-      "sha256": "a879d797207f4a38cb2c79ac9bbb10d5f0bf69b09840d7cde5a3965b25755a67",
-      "reason": "Full automated run interrupted by software-rendered input/OCR diagnostics; earlier partial successes do not establish a full pass."
-    }
-  ],
-  "previousReleaseBrowserHistory": [
-    {
-      "report": "Artifacts/Validation/MotionDawn/Desktop720/PathOfDawn.previous-20261024T032045694471Z/report.json",
-      "status": "failed",
-      "reason": "Preserved original browser attempt; see its checks and failure detail."
-    }
-  ],
-  "historicalEnvironmentMetadata": {
-    "baseline": "Tools/Environment/validation-2026-10-26-before-classic.json",
-    "scope": "Historical only. Current authentication and setup draft were not revalidated by this summary.",
-    "editorVersion": "6000.3.26f1",
-    "editorRevision": "de8167e7440c",
-    "editorModules": {
-      "windows-mono": "Installed",
-      "webgl": "Installed"
-    },
-    "cliVersion": "1.0.0-beta.13",
-    "dotnetSdk": "8.0.426",
-    "blender": "4.3.2",
-    "currentRuntime": {
-      "auth": {
-        "loggedIn": false,
-        "sessionState": "none",
-        "mode": "none",
-        "credentialSource": "none"
-      },
-      "authStatusExitCode": 3,
-      "authReady": false,
-      "authBlocker": "No current Unity CLI login; account-dependent commands may require sign-in",
-      "license": {
-        "active": true,
-        "signedIn": true,
-        "authMode": "oauth"
-      },
-      "licenseStatusExitCode": 0,
-      "licenseReady": true,
-      "runtimeEditorReady": true,
-      "runtimeReady": true,
-      "runtimeBlocker": null,
-      "diagnosticErrors": [],
-      "evidenceScope": "Historical baseline snapshot; authentication was not revalidated for this movement release. Current editor execution is evidenced separately by the successful native tests and Windows/Web builds."
-    },
-    "cloudStartConfiguration": {
-      "status": "draft saved and reread confirmed identical",
-      "revision": 10,
-      "requiresPublish": true,
-      "freshTaskRestorationVerified": false,
-      "evidenceScope": "Historical setup draft snapshot; this release does not publish or change cloud environment configuration."
-    }
-  },
-  "limitations": [
-    "Physical Windows play, Android/iPhone hardware, Safari and target-device performance are unverified.",
-    "Software Chromium mobile emulation is not physical mobile testing; browser PCM is not speaker listening.",
-    "96 selected cards and documented rule interpretations; not restoration of the complete original program.",
-    "Equipment limit of two is an implementation choice; shared-coin prefix interpretation is partly inferred."
-  ],
-  "publication": {
-    "status": "verified",
-    "url": "https://ka8877.github.io/firstgame/",
-    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40273009201",
-    "sourceCommit": "2fa47159abc04281d5e6e202a0cca60562e64f6e",
-    "verifiedFiles": 25,
-    "manifest": {
-      "evidence": "Artifacts/WebPlaytest/build-manifest.json",
-      "sha256": "54643bd9354fba59aa8639de40b287afd8e3db63a97a011c556111ec62fbec03"
-    },
-    "portal": {
-      "evidence": "Artifacts/Validation/PublicWeb/Portal/report.json",
-      "sha256": "7b52ce15546b2a3556ce46993eda3c9d38a3fa811cc73e077a46cd5114c56f06"
-    },
-    "checkedUtc": "2026-10-26T05:14:41.717419+00:00",
-    "scope": "Public bytes, landing viewports and current card mobile interaction; Dawn gameplay evidence reused unchanged."
-  },
-  "publicWeb": {
-    "FantasyCards": {
-      "status": "passed",
-      "checks": 86,
-      "evidence": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/report.json",
-      "sha256": "142bfb514583e7ced5b76f957907e82c824a027213baafdc52218919e4199574",
-      "audioWindows": 7,
-      "voiceWindows": 0,
-      "visualReview": "approved",
-      "reviewedScreenshots": [
+    "templeMaterials": {
+      "maps": 4,
+      "materials": [
         {
-          "name": "title-full-viewport",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/title-full-viewport.png",
-          "sha256": "852ed7804f403b30a5a5c3c5d2a0d35e23e340655f91c04bc7f169a0351f1cb2"
-        },
-        {
-          "name": "title-844x390",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/title-844x390.png",
-          "sha256": "e8a4152bd1c4622ba20ed97da8c23168204f5af17db315dbf2c9366b96fa0530"
-        },
-        {
-          "name": "collection-96-original-cards",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/collection-96-original-cards.png",
-          "sha256": "5adb162c78ad3964e6e48c7900b0af7a537efb8a9bf61ec7222012526aef4fbb"
-        },
-        {
-          "name": "filter-filterElement-3",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterElement-3.png",
-          "sha256": "2fafdf4de03fbe3f75c2c3fd010e750cdf9ed69cd84e5a3ad33b4d5e78a24d67"
-        },
-        {
-          "name": "filter-filterRarity-3",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterRarity-3.png",
-          "sha256": "dee9a5d0ff6945eccad54debdb06815143d103f89b1466f9209e0b0563ccc6b4"
-        },
-        {
-          "name": "original-card-explanation",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/original-card-explanation.png",
-          "sha256": "92ffd55c4a70a713e25c76e5d48b950deed6a7a9c408cf81b0eef53f249cc8e9"
-        },
-        {
-          "name": "filter-filterCost-0",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterCost-0.png",
-          "sha256": "02c60823c5ac15bae5e5dea395f39010384e04a14a44b0274330f54d30a0e609"
-        },
-        {
-          "name": "filter-filterCost-7",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/filter-filterCost-7.png",
-          "sha256": "e778282a163fdfa43153365ed9faa103e8d4f55fa226f23e41fe907c9000ce53"
-        },
-        {
-          "name": "original-card-full-print",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/original-card-full-print.png",
-          "sha256": "af0dcd95995e32406f9ccc86657e65c1db28586316f71be5e435e8b3c0ac37cf"
-        },
-        {
-          "name": "four-fifty-card-starter-decks",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/four-fifty-card-starter-decks.png",
-          "sha256": "d1fde7d96b530d850fc2ae40db5a589531da8061ec7b50a4333764553399c5a8"
-        },
-        {
-          "name": "opening-before-shuffle",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/opening-before-shuffle.png",
-          "sha256": "4b00b7076269482baecedc34284ce1662310da2345980c44490f9dbe32603fe3"
-        },
-        {
-          "name": "opening-after-shuffle",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/opening-after-shuffle.png",
-          "sha256": "e47668e7cae10ad72e63a651b6925a695f9322b1262e695ea49af7bb4c92260f"
-        },
-        {
-          "name": "classic-first-preparation",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-first-preparation.png",
-          "sha256": "0b083d0e78278a27a6bb3b95cfa4ddde447ed54512caf40dd230c32fb6ad6db1"
-        },
-        {
-          "name": "preparation-2-placed-unit-detail-2",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-placed-unit-detail-2.png",
-          "sha256": "8ab7d547c49f37dfc2c61152a22217425a39358f6c7e099c2e954cecd8156d37"
-        },
-        {
-          "name": "preparation-2-play-2",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-play-2.png",
-          "sha256": "8dcae28782c53314650bee19fa2e52a734c4088dd4b21f068c84bf0ee66f40c9"
-        },
-        {
-          "name": "preparation-1-play-1",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-1-play-1.png",
-          "sha256": "fe235d0e7bdae84d97bbba9531c370f12ccd3fef1606c8101f9b57955ffcf232"
-        },
-        {
-          "name": "preparation-2-play-1",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/preparation-2-play-1.png",
-          "sha256": "5ad3b3fae747847e0490984e0d2d25dacaf9d28c3b37b2c194f382a5e3767427"
-        },
-        {
-          "name": "automatic-combat-2-record",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/automatic-combat-2-record.png",
-          "sha256": "b466ce44b9022fb4ed5f8c831a97de924546aa9ccbe76849e1a2363d484dd751"
-        },
-        {
-          "name": "classic-battle-after-automatic-rounds",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-battle-after-automatic-rounds.png",
-          "sha256": "fa886d05113518258f65542c31ab0b672e0dc63d18363e13f934f8f5c601d112"
-        },
-        {
-          "name": "classic-saved-battle",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-saved-battle.png",
-          "sha256": "42daa1960984f267a4ded3b24e184fbd23a0c57d16bd2f66b977b7e582f7f0a5"
-        },
-        {
-          "name": "classic-restored-battle",
-          "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/classic-restored-battle.png",
-          "sha256": "0eacc5f0f047444ebbe4633676d61436b0431ef1937ea4b6c5034cc46c9c2b66"
-        }
-      ],
-      "reviewedUtc": "2026-10-26T05:28:26.664406+00:00",
-      "visualFindings": [
-        {
-          "screenshots": [
-            "title-full-viewport",
-            "title-844x390"
-          ],
-          "finding": "The public title fills a centered 16:9 game canvas in the 844 by 390 viewport, with dark side margins of about 75 pixels. Korean main actions, music, save transfer, and title labels remain within the canvas without blocking clipping."
-        },
-        {
-          "screenshots": [
-            "collection-96-original-cards",
-            "filter-filterElement-3",
-            "filter-filterRarity-3",
-            "filter-filterCost-0",
-            "filter-filterCost-7"
-          ],
-          "finding": "The collection visibly shows 96 total / 96 matching cards, and the reviewed filter frames show forest 14, rare 1, soul 0 with 14, and soul 7 with 6. Four-column names, badges, types/basic stats, pagination, and reset controls remain legible. The forest frame visibly includes 라비원숭이; the rare frame shows 메테오."
-        },
-        {
-          "screenshots": [
-            "original-card-explanation",
-            "original-card-full-print"
-          ],
-          "finding": "The 묘지 full print fits entirely with border, artwork, printed information area and 1 marker. Its fine print is small and soft at this viewport. The separate detail clearly shows 묘지, Lv 0, LP 1, 암흑 1 / 총소울 1 생산 and wrapped terrain rules, with return and original-card controls on screen."
-        },
-        {
-          "screenshots": [
-            "four-fifty-card-starter-decks"
-          ],
-          "finding": "All four starters fit in a two-by-two layout, each labelled 50장 · 지형 16 · 유닛 24, with 숲과 빛 · 생명의 전열 highlighted. Descriptions wrap inside their panels and navigation remains visible."
-        },
-        {
-          "screenshots": [
-            "opening-before-shuffle",
-            "opening-after-shuffle"
-          ],
-          "finding": "Each opening frame displays all six cards. Directly observed before order: 리틀엔젤, 퓨리울프, 창공, 골드드래곤, 성당내부, 라비원숭이. Directly observed after order: 발탄, 라비원숭이, 퓨리울프, 성당내부, 허수아비, 꽃밭. The raw report incorrectly identifies the before sixth and after second card as 라. Both actual cards visibly read 라비원숭이, Lv 2, 1+1, AP 3 DP 0 HP 3. This is direct visual correction, not an OCR success claim."
-        },
-        {
-          "screenshots": [
-            "classic-first-preparation",
-            "preparation-1-play-1"
-          ],
-          "finding": "The first board visibly shows player deck 44 / hand 6 / LP 1 / terrain 0/10; after the actual terrain play it shows deck 44 / hand 5 / LP 0 / terrain 1/10. Player lanes remain empty. The hand visibly includes 라비원숭이 with its full name and AP 3 DP 0 HP 3. Compact resource text, detail/ready controls, and horizontal hand scrollbar remain inside the canvas."
-        },
-        {
-          "screenshots": [
-            "preparation-2-play-1",
-            "preparation-2-play-2",
-            "preparation-2-placed-unit-detail-2"
-          ],
-          "finding": "Before the unit play, all five visible player hand cards are 발탄, 라비원숭이, 퓨리울프, 허수아비, 허수아비, with deck 43 / hand 5 / LP 0 / terrain 2/10. After play, 라비원숭이 occupies the first player lane with AP 3 DP 0 HP 3 and hand count 4. Its actual detail clearly reads 라비원숭이, 프리 / 숲 / 유닛 / 4장까지, Lv 2, 숲 1, 총소울 2, 유지 1, AP 3+C4 DP 0 HP 3. The raw 라 identity is inconsistent with the original displayed card; the real name and values are independently visible."
-        },
-        {
-          "screenshots": [
-            "automatic-combat-2-record"
-          ],
-          "finding": "The actual combat record visibly reads 라비원숭이 최종 AP 3 / DP 0 / HP 3, 킬러메뚜기 → 라비원숭이 피해 4 · 반격 없음, and 라비원숭이 전장 이탈. Further lines show 라비원숭이 C1, C2, C3, C4 뒷면, final AP 3 / DP 0 / HP 3, and direct attack level 2 causing 나 덱 -2. The log and return button are readable, with no observed truncation of these displayed lines."
-        },
-        {
-          "screenshots": [
-            "classic-battle-after-automatic-rounds",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The final/saved/restored boards show turn 3 / player attack preparation, empty player lanes, and opponent 킬러메뚜기 and 라비원숭이. Saved and restored resources match at player deck 39 / hand 6 / LP 1 / 빛 1 · 숲 1 · 총소울 2 / terrain 2/10. The right-scrolled saved/restored hand visibly matches as 퓨리울프, 허수아비, 허수아비, 꽃밭, 스웜; the earlier left-scrolled final board visibly includes first card 발탄. Save and restore status messages are legible."
-        },
-        {
-          "screenshots": [
-            "ocr-confirmation-064",
-            "ocr-confirmation-073",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The existing unprocessed raw card-name region from first-card inspection before saving (064) and after reload (073) was directly opened; both visibly read 발탄 and have identical SHA-256. Together with the five visible names in saved/restored boards and their hand count 6, the directly observed six-card order is 발탄, 퓨리울프, 허수아비, 허수아비, 꽃밭, 스웜 on both sides. The two small PNGs are original region observations, not full canvas screenshots."
-        },
-        {
-          "screenshots": [
-            "classic-first-preparation",
-            "preparation-2-play-1",
-            "preparation-2-play-2",
-            "classic-saved-battle",
-            "classic-restored-battle"
-          ],
-          "finding": "The battle hand is a horizontal scroll strip; five of six cards are visible in a single six-card board capture. Visible card names and stat lines remain inside their cards. No blocking text clipping, broken glyphs, blank render, or unintended overlap was observed. The text remains compact at the native 694 by 390 canvas capture size."
-        }
-      ],
-      "executionStatus": "passed",
-      "assessments": {
-        "identityReassessment": {
-          "artifact": {
-            "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/identity-reassessment.json",
-            "sha256": "5a7ca82d383289bbabad2cbd3519abc82aef6a30b584ec0343d0796af24788e6"
-          },
-          "originalArtifacts": [
+          "assetId": "Plaster001",
+          "sourceUrl": "https://ambientcg.com/a/Plaster001",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://docs.ambientcg.com/license/",
+          "sourceKind": "Official API published surface-preview maps; not full-resolution original archive.",
+          "use": "Light rough mineral finish for warm limestone architecture. Not claimed to be archaeologically exact stone.",
+          "files": [
             {
-              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/original-report.json",
-              "sha256": "db9e10ffc2f7441a42e4236d39b7c6d65f1c320d1ace09f09e74aae84bfbf4f1"
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-albedo.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_Color.jpg?314",
+              "sha256": "ec76d207b21370cd3dbc7a02ac678e877396e51162c210241cccfa164c127fcd",
+              "bytes": 827723,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "albedo",
+              "normalConvention": null
             },
             {
-              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/original-summary.json",
-              "sha256": "4b76f675e99f1507979555f80e73fd0c731f55f081959a932504d7fe18390397"
-            },
-            {
-              "path": "Artifacts/Validation/ClassicCards/PublicMobile844/FantasyCards/IdentityReassessment/executed-harness.py",
-              "sha256": "1e4979c881caf538976b21350eb7794810ad163b76b2e4afd52428bc3cc43643"
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-normal.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Plaster001/Plaster001_SQ_NormalDX.jpg?1085",
+              "sha256": "e180fb3fcc88e3792ec9154115ecdcaba101d59c47fa0f775a10c5d6976d87e2",
+              "bytes": 3487605,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "normal",
+              "normalConvention": "DirectX; Unity importer flips green channel"
             }
-          ],
-          "noRerun": true,
-          "method": "direct-visual-correction",
-          "status": "passed",
-          "observations": [
-            "4 automatic card-name observations incorrectly matched 라; original screenshots directly confirm 라비원숭이.",
-            "Actual whole-hand replacement still changes the corrected six-card sequence.",
-            "Saved/restored six-card identities contain no affected match and remain equal."
-          ],
-          "scope": "The partial automatic OCR name matches are superseded by explicit original-frame identity confirmations; all raw observations are preserved."
+          ]
+        },
+        {
+          "assetId": "Tiles143",
+          "sourceUrl": "https://ambientcg.com/a/Tiles143",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://docs.ambientcg.com/license/",
+          "sourceKind": "Official API published surface-preview maps (fullZIPCDNreturned403); not full-resolution source pack.",
+          "files": [
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-albedo.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_Color.jpg?66813",
+              "sha256": "18605bf3c98e4e60ac6617b4175be04b21f71aa640a340abf919823fc40c37d7",
+              "bytes": 1308127,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "albedo",
+              "normalConvention": null
+            },
+            {
+              "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/paving-normal.jpg",
+              "downloadUrl": "https://f003.backblazeb2.com/file/ambientCG-Web/media/surface-preview/Tiles143/Tiles143_SQ_NormalDX.jpg?40901",
+              "sha256": "3ec82d0418bbd7ce9983c1943dcc1a05b336b2939d07d76e14a867c97354c17e",
+              "bytes": 184133,
+              "size": [
+                2048,
+                2048
+              ],
+              "map": "normal",
+              "normalConvention": "DirectX; Unity importer flips green channel"
+            }
+          ]
         }
-      },
-      "classicEvidence": [
-        "collection_filters",
-        "combat",
-        "original_card",
-        "preparation",
-        "save_reload",
-        "shuffle",
-        "starter_deck"
-      ]
+      ],
+      "evidence": "Tools/Art/GospelTemple/manifest.json",
+      "sha256": "30c6e4e91a1bcc924d5464d4d755482df4df561b10059c6f245dabf1b76a58fd"
     },
-    "Portal": {
-      "evidence": "Artifacts/Validation/PublicWeb/Portal/report.json",
-      "sha256": "7b52ce15546b2a3556ce46993eda3c9d38a3fa811cc73e077a46cd5114c56f06"
-    }
+    "notices": [
+      {
+        "evidence": "Tools/Research/FmRevival/SOURCE-NOTICE.txt",
+        "sha256": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73"
+      },
+      {
+        "evidence": "Tools/Art/Gospel3D/SOURCE-NOTICE.txt",
+        "sha256": "410d09a1aa019be20a956e2bd3ea1e85ae01080cb3624f4619488184e5fd232d"
+      },
+      {
+        "evidence": "Tools/Data/Gospel/SCRIPTURE-NOTICE.txt",
+        "sha256": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a"
+      },
+      {
+        "evidence": "Tools/Art/GospelTemple/LICENSE-NOTICE.txt",
+        "sha256": "5a1c8dbd05080b5fd5377716c7ade516e569327e8ba01d78f1b0727f1f31c01e"
+      }
+    ]
+  },
+  "publication": {
+    "status": "pending",
+    "url": "https://ka8877.github.io/firstgame/"
   }
 }
