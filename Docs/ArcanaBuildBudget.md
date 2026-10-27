@@ -8,4 +8,6 @@
 
 임시 공간 정리는 고유 ZIP/원본 소스를 보존하고, ZIP의 파일 집합·CRC·전체 바이트 SHA가 대응되는 생성 플레이어 확장본과 재생성 캐시에 한정한다. 현재 작업의 복구 장부는 `Artifacts/Validation/Arcana/*recovery*.json`에 있다. 두 프로젝트의 동일한 패키지 잠금 파일을 확인한 뒤 카드 프로젝트의 무시되는 Library/PackageCache는 성전 프로젝트의 기존 패키지 캐시를 참조한다. Unity는 한 실행 소유자가 순차 실행한다.
 
-작업 공간과 분리된 `/tmp` 파일시스템의 여유 공간을 쓰기 위해 두 프로젝트의 무시되는 Bee/Artifacts/BurstCache/ShaderCache만 작업 전용 경로로 복사하고 전체 파일 집합·바이트 SHA를 비교한 뒤 Library 심볼릭 링크로 연결한다. 장부는 `generated-cache-relocation.json`이며 원본 소스와 패키지 캐시는 이동하지 않는다. `/tmp`가 초기화되면 activate-shell의 작은 복구 스크립트가 이 작업 전용 링크의 빈 대상만 만들고 Unity가 캐시를 재생성한다.
+작업 공간과 분리된 `/tmp` 파일시스템의 여유 공간을 쓰기 위해 두 프로젝트의 무시되는 Bee/Artifacts/BurstCache/ShaderCache/PlayerDataCache만 작업 전용 경로로 복사하고 전체 파일 집합·바이트 SHA를 비교한 뒤 Library 심볼릭 링크로 연결한다. 장부는 `generated-cache-relocation.json`이며 원본 소스와 패키지 캐시는 이동하지 않는다. `/tmp`가 초기화되면 activate-shell의 작은 복구 스크립트가 이 작업 전용 링크의 빈 대상만 만들고 Unity가 캐시를 재생성한다.
+
+최종 웹 스테이징도 새 생성 경로 `/tmp/firstgame-arcana-staged-site`에 쓰고 무시되는 `Artifacts/WebPlaytest`로 접근한다. 스테이징 파일 자체는 심볼릭 링크가 아니며 게시 도구가 실제 경로·전체 해시를 확인한다. 빌드 원본·유일한 ZIP·소스는 작업 공간에 남는다.

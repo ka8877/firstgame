@@ -504,7 +504,18 @@ class JourneySmoke:
             session = self.page.context.new_cdp_session(self.page)
             try:
                 session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"x": start[0], "y": start[1]}]})
-                session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{"x": end[0], "y": end[1]}]})
+                # Give the real pointer-down its own rendered update. Coalescing
+                # start and the final drag position can anchor the joystick at
+                # its end point and record an idle actor instead of a held walk.
+                self.page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                ramp_steps, ramp_ms = 8, 320
+                for index in range(1, ramp_steps + 1):
+                    fraction = index / ramp_steps
+                    session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{
+                        "x": start[0] + (end[0] - start[0]) * fraction,
+                        "y": start[1] + (end[1] - start[1]) * fraction}]})
+                    self.page.wait_for_timeout(ramp_ms / ramp_steps)
+                record["touchRamp"] = {"steps": ramp_steps, "requestedMs": ramp_ms, "pointerDownRenderFrames": 2}
                 self.page.wait_for_timeout(action["ms"])
                 session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
             finally:
