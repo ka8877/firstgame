@@ -56,17 +56,17 @@ namespace FantasyCards.SmokeTests
             Assert.That(ActiveButtons("Leader ").Length, Is.Zero);
             Assert.That(SmokeUi.FindButton("이어하기").interactable, Is.False);
             SmokeUi.AssertNoMissingScripts();
-            yield return SmokeUi.Capture("FantasyCards", "arcana-01-title", 1280, 720);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-01-title-mobile", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-01-title", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-01-title-mobile", 844, 390);
 
             SmokeUi.Click("게임 시작"); yield return null;
             if (ActiveButtons("Practice room ").Length == 0)
-                yield return SmokeUi.Capture("FantasyCards", "arcana-diagnostic-title-start-state", 1280,720);
+                yield return SmokeUi.Capture("FantasyCards", "restoration-diagnostic-title-start-state", 1280,720);
             yield return SmokeUi.WaitUntil(() => ActiveButtons("Practice room ").Length == 3, 5, "The actual title callback must enter the local room list.");
             Assert.That(ActiveButtons("Practice room ").Length, Is.EqualTo(3));
-            Assert.That(SmokeUi.HasText("AI 대전"), Is.True, "Rooms must identify their actual single-player opponent.");
+            Assert.That(SmokeUi.HasText("AI 상대"), Is.True, "Rooms must identify their actual single-player opponent.");
             Assert.That(ActiveButtons("Leader ").Length, Is.Zero);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-02-local-lobby", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-02-local-lobby", 1280, 720);
             foreach(var brand in UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
                 .Where(text=>text.gameObject.activeInHierarchy && text.text=="Fantasy Masters"))
             {
@@ -76,7 +76,7 @@ namespace FantasyCards.SmokeTests
             }
             ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke();
             yield return null;
-            Assert.That(SmokeUi.FindButton("대전 시작"), Is.Not.Null);
+            Assert.That(SmokeUi.FindButton("START · 대전 시작"), Is.Not.Null);
             SmokeUi.Click("덱 선택"); yield return null;
             Assert.That(ActiveButtons("Starter deck ").Length, Is.EqualTo(4));
             var decksSeen = new System.Collections.Generic.HashSet<string>();
@@ -88,7 +88,7 @@ namespace FantasyCards.SmokeTests
                 SmokeUi.Click("다음"); yield return null;
             } while (true);
             Assert.That(decksSeen, Is.EquivalentTo(DemoCatalog.StarterDecks.Select(deck => deck.id)));
-            Assert.That(decksSeen.Count, Is.EqualTo(18));
+            Assert.That(decksSeen.Count, Is.EqualTo(20));
             SmokeUi.Click("단일 속성"); yield return null;
             var monoSeen = new System.Collections.Generic.HashSet<string>();
             do
@@ -106,26 +106,26 @@ namespace FantasyCards.SmokeTests
                 if (!SmokeUi.FindButton("다음").interactable) break;
                 SmokeUi.Click("다음"); yield return null;
             } while (true);
-            Assert.That(dualSeen.Count, Is.EqualTo(11));
-            SmokeUi.TraceUiState("arcana-decks-before-all-filter");
-            SmokeUi.Click("전체"); SmokeUi.TraceUiState("arcana-decks-immediate-all-filter"); yield return null;
-            SmokeUi.TraceUiState("arcana-decks-after-all-filter");
+            Assert.That(dualSeen.Count, Is.EqualTo(13));
+            SmokeUi.TraceUiState("restoration-decks-before-all-filter");
+            SmokeUi.Click("전체"); SmokeUi.TraceUiState("restoration-decks-immediate-all-filter"); yield return null;
+            SmokeUi.TraceUiState("restoration-decks-after-all-filter");
             while (!ActiveButtons("Starter deck ").Any(tile => tile.gameObject.name == "Starter deck forest"))
-            { SmokeUi.TraceUiState("arcana-decks-before-find-forest-next"); SmokeUi.Click("다음"); yield return null; SmokeUi.TraceUiState("arcana-decks-after-find-forest-next"); }
+            { SmokeUi.TraceUiState("restoration-decks-before-find-forest-next"); SmokeUi.Click("다음"); yield return null; SmokeUi.TraceUiState("restoration-decks-after-find-forest-next"); }
             ActiveButtons("Starter deck ").Single(tile => tile.gameObject.name == "Starter deck forest").onClick.Invoke(); yield return null;
-            yield return SmokeUi.Capture("FantasyCards", "arcana-03-four-starter-decks", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-03-four-starter-decks", 1280, 720);
             SmokeUi.Click("대전실로"); yield return null;
             Assert.That(SmokeUi.HasText(DemoCatalog.GetDeck("forest").name), Is.True);
             Assert.That(SmokeUi.HasText("컴퓨터"), Is.True);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-04-local-game-room", 844, 390, () =>
+            yield return SmokeUi.Capture("FantasyCards", "restoration-04-local-game-room", 844, 390, () =>
             {
                 var compactBrand = UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
-                    .Single(text => text.gameObject.activeInHierarchy && text.gameObject.name == "Client brand");
+                    .Single(text => text.gameObject.activeInHierarchy && text.text == "Fantasy\nMasters");
                 compactBrand.ForceMeshUpdate();
-                Assert.That(compactBrand.text, Is.EqualTo("FM"), "The narrow rail uses an intentional complete abbreviation.");
+                Assert.That(string.Concat(compactBrand.text.Where(c=>!char.IsWhiteSpace(c))), Is.EqualTo("FantasyMasters"), "The classic rail keeps both complete title words across its deliberate line break.");
                 Assert.That(compactBrand.isTextTruncated, Is.False);
             });
-            SmokeUi.Click("대전 시작");
+            SmokeUi.Click("START · 대전 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable,
                 15, "The actual room start callback must shuffle and deal an opening hand.");
             SmokeUi.TraceUiState("fidelity-opening-before-read");
@@ -141,14 +141,14 @@ namespace FantasyCards.SmokeTests
             Assert.That(engine.State.players[0].hand.Count, Is.EqualTo(6));
             Assert.That(engine.State.randomState, Is.Not.EqualTo(beforeRng), "Whole-hand replacement must run the core shuffle.");
             Assert.That(SmokeUi.FindButton("전체 손패 교체").interactable, Is.False);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-05-shuffled-opening", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-05-shuffled-opening", 1280, 720);
             SmokeUi.Click("이대로 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("준비 완료") != null && SmokeUi.FindButton("준비 완료").interactable,
                 15, "The opening confirmation must enter the current battle board.");
             Assert.That(SmokeUi.ReadEngine().State.players[0].hand.Count, Is.EqualTo(6));
             Assert.That(SmokeUi.HasText("공격 준비"), Is.True);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-06-battle-desktop", 1280, 720);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-06-battle-mobile", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-06-battle-desktop", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-06-battle-mobile", 844, 390);
             yield return SaveThroughMenu();
             string saved = JsonUtility.ToJson(SmokeUi.ReadSavedBattle());
             int appId = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>().GetInstanceID();
@@ -160,7 +160,7 @@ namespace FantasyCards.SmokeTests
             yield return SaveThroughMenu();
             Assert.That(JsonUtility.ToJson(SmokeUi.ReadSavedBattle()), Is.EqualTo(saved));
             Assert.That(backend.Read("preserved-previous-player-slot"), Is.EqualTo("previous-player-save-bytes"));
-            yield return SmokeUi.Capture("FantasyCards", "arcana-07-continued-battle", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-07-continued-battle", 1280, 720);
             SmokeUi.AssertNoMissingScripts();
             LogAssert.NoUnexpectedReceived();
         }
@@ -173,7 +173,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("카드 도감"); yield return null;
             Assert.That(SmokeUi.HasText("전체 " + CardCatalog.All.Length + "종"), Is.True, "Active labels: " + string.Join(" | ", UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None).Where(text => text.gameObject.activeInHierarchy).Select(text => text.text).Take(20)));
             Assert.That(SmokeUi.FindButton("이전").interactable, Is.False);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-08-catalog", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-08-catalog", 1280, 720);
 
             var seen = new System.Collections.Generic.HashSet<string>();
             int pageTransitions = 0;
@@ -189,7 +189,7 @@ namespace FantasyCards.SmokeTests
             }
             Assert.That(seen, Is.EquivalentTo(CardCatalog.All.Select(card => card.id)), "Every shipped card must be reachable through actual next-page callbacks.");
             Assert.That(SmokeUi.FindButton("이전").interactable, Is.True);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-09-last-catalog-page", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-09-last-catalog-page", 844, 390);
 
             SmokeUi.Click("원본 순서"); yield return null;
             Assert.That(SmokeUi.FindButton("소울 순"), Is.Not.Null);
@@ -211,7 +211,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(VisibleCards().Select(card => card.id), Is.EqualTo(new[] { added.id }), "A card added after the original 96 must be searchable by name.");
             Assert.That(SmokeUi.FindButton("다음").interactable, Is.False);
             ActiveButtons("Card ").Single().onClick.Invoke(); yield return null;
-            SmokeUi.Click("원본 카드"); yield return null;
+            SmokeUi.Click("크게 보기"); yield return null;
             var original = UnityEngine.Object.FindObjectsByType<RawImage>(FindObjectsSortMode.None)
                 .Single(image => image.gameObject.activeInHierarchy && image.gameObject.name == "Original card image");
             Assert.That(original.texture, Is.SameAs(Resources.Load<Texture2D>(added.artResource)), "Detail must display the original complete card source.");
@@ -246,7 +246,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(editorDeck.Count, Is.EqualTo(50));
             Assert.That(editorDeck.Count(id => id == editable.id), Is.EqualTo(originalCount));
             Assert.That(SmokeUi.FindButton("+").interactable, Is.False);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-10-search-and-deck-counts", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-10-search-and-deck-counts", 844, 390);
             SmokeUi.Click("덱 저장"); yield return null;
             Assert.That(PersistentSaves.TryLoad(SmokeUi.DeckSlot, SmokeUi.GameId, 1, CardCatalog.Version, out string payload, out string error), Is.True, error);
             Assert.That(JsonUtility.FromJson<DeckPayload>(payload).cards, Is.EqualTo(editorDeck), "The save callback must preserve the edited deck, including card multiplicity.");
@@ -257,7 +257,7 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator RemasterTextRemainsVisibleWhenRebuiltAtActualMobileCanvasSize()
         {
-            yield return SmokeUi.Capture("FantasyCards", "arcana-11-title-616x346", 616, 346,
+            yield return SmokeUi.Capture("FantasyCards", "restoration-11-title-616x346", 616, 346,
                 () =>
                 {
                     foreach (Element element in Enum.GetValues(typeof(Element))) AssertMobileLabel(CardCatalog.ElementName(element));
@@ -267,7 +267,7 @@ namespace FantasyCards.SmokeTests
                 }, RebuildAtActualMobileSize);
 
             SmokeUi.Click("카드 도감"); yield return null;
-            yield return SmokeUi.Capture("FantasyCards", "arcana-12-collection-616x346", 616, 346,
+            yield return SmokeUi.Capture("FantasyCards", "restoration-12-collection-616x346", 616, 346,
                 () =>
                 {
                     foreach (string label in new[] { "카드 도감", "검색", "원본 순서", "모든 카드", "속성 · 전체", "종류 · 전체", "소울 · 전체", "등급 · 전체", "이전", "다음", "대기실" })
@@ -290,11 +290,11 @@ namespace FantasyCards.SmokeTests
                         if (!SmokeUi.FindButton("다음").interactable) break;
                         SmokeUi.Click("다음");
                     } while (checkedCards.Count <= CardCatalog.All.Length);
-                    Assert.That(checkedCards, Is.EquivalentTo(CardCatalog.All.Select(card => card.id)), "Every real catalog name, cost and stat must fit the mobile collection cards.");
+                    Assert.That(checkedCards, Is.EquivalentTo(CardCatalog.All.Select(card => card.id)), "Every original printed card must remain reachable at its complete source aspect.");
                 }, RebuildAtActualMobileSize);
             ActiveButtons("Card ").First().onClick.Invoke(); yield return null;
-            SmokeUi.Click("원본 카드"); yield return null;
-            yield return SmokeUi.Capture("FantasyCards", "arcana-13-original-caption-616x346", 616, 346,
+            SmokeUi.Click("크게 보기"); yield return null;
+            yield return SmokeUi.Capture("FantasyCards", "restoration-13-original-caption-616x346", 616, 346,
                 () =>
                 {
                     AssertMobileLabel("원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.");
@@ -304,10 +304,10 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("돌아가기"); yield return null;
             SmokeUi.Click("대기실"); yield return null;
             ActiveButtons("Practice room ").Single(button => button.gameObject.name == "Practice room 0").onClick.Invoke(); yield return null;
-            SmokeUi.Click("대전 시작");
+            SmokeUi.Click("START · 대전 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable, 15, "The room must reach its real opening hand.");
             UseLegalStressHand();
-            yield return SmokeUi.Capture("FantasyCards", "arcana-15-long-coins-opening-616x346", 616, 346,
+            yield return SmokeUi.Capture("FantasyCards", "restoration-15-long-coins-opening-616x346", 616, 346,
                 () =>
                 {
                     Assert.That(ActiveButtons("Card ").Length, Is.EqualTo(6));
@@ -316,7 +316,7 @@ namespace FantasyCards.SmokeTests
                 }, RebuildAtActualMobileSize);
             SmokeUi.Click("이대로 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("준비 완료") != null && SmokeUi.FindButton("준비 완료").interactable, 15, "The confirmed hand must reach the real battle.");
-            yield return SmokeUi.Capture("FantasyCards", "arcana-16-long-coins-hand-616x346", 616, 346,
+            yield return SmokeUi.Capture("FantasyCards", "restoration-16-long-coins-hand-616x346", 616, 346,
                 () =>
                 {
                     Assert.That(ActiveButtons("Card ").Length, Is.EqualTo(6));
@@ -335,7 +335,7 @@ namespace FantasyCards.SmokeTests
             try
             {
                 SetLegalResourceStressState();
-                yield return SmokeUi.Capture("FantasyCards", "arcana-17-resource-rail-616x346", 616, 346,
+                yield return SmokeUi.Capture("FantasyCards", "restoration-17-resource-rail-616x346", 616, 346,
                     () =>
                     {
                         AssertMobileResourceRail();
@@ -358,7 +358,7 @@ namespace FantasyCards.SmokeTests
                 }
             }
             SmokeUi.Click("기록 / 메뉴"); yield return null;
-            yield return SmokeUi.Capture("FantasyCards", "arcana-14-menu-616x346", 616, 346,
+            yield return SmokeUi.Capture("FantasyCards", "restoration-14-menu-616x346", 616, 346,
                 () =>
                 {
                     foreach (string label in new[] { "전투 메뉴", "전투 기록", "음악", "저장", "대기실", "전투로", "소각장 / 상태" }) AssertMobileLabel(label);
@@ -412,37 +412,10 @@ namespace FantasyCards.SmokeTests
 
         static void AssertMobileMiniCards()
         {
-            foreach (var button in ActiveButtons("Card "))
-            {
-                var card = CardCatalog.Get(button.gameObject.name.Substring("Card ".Length));
-                var labels = button.GetComponentsInChildren<TMP_Text>().Where(value => value.gameObject.name.StartsWith("Mini ", StringComparison.Ordinal)).ToArray();
-                var name = button.GetComponentsInChildren<TMP_Text>().Single(value => value.gameObject.name == "Arcana card name");
-                Assert.That(name.text, Is.EqualTo(card.name));
-                name.ForceMeshUpdate();
-                Assert.That(name.textInfo.characterInfo.Take(name.textInfo.characterCount).Any(glyph => glyph.isVisible), Is.True);
-                var surface = button.GetComponentInChildren<FmArcanaCardSurface>();
-                Assert.That(surface.RenderedAspect, Is.EqualTo(5f / 7f).Within(.015f));
-                foreach (var label in labels)
-                {
-                    AssertMobileLabel(label);
-                    Assert.That(label.textInfo.lineCount, Is.EqualTo(1), card.name + " must keep each cost or stat value on one line.");
-                    var cardRect = (RectTransform)button.transform;
-                    float fringe = 1 / label.GetComponentInParent<Canvas>().rootCanvas.scaleFactor;
-                    foreach (var glyph in label.textInfo.characterInfo.Take(label.textInfo.characterCount).Where(value => value.isVisible))
-                    {
-                        var bottom = cardRect.InverseTransformPoint(label.rectTransform.TransformPoint(glyph.bottomLeft));
-                        var top = cardRect.InverseTransformPoint(label.rectTransform.TransformPoint(glyph.topRight));
-                        Assert.That(bottom.y, Is.GreaterThanOrEqualTo(cardRect.rect.yMin - fringe), card.name + " text must stay above the bottom card border.");
-                        Assert.That(top.y, Is.LessThanOrEqualTo(cardRect.rect.yMax + fringe), card.name + " text must stay below the top card border.");
-                    }
-                }
-                if (card.kind == CardKind.Unit || card.kind == CardKind.Equipment)
-                {
-                    Assert.That(labels.Single(value => value.gameObject.name == "Mini AP").text, Is.EqualTo(card.attack + CardCatalog.CoinText(card.attackCoin)));
-                    Assert.That(labels.Single(value => value.gameObject.name == "Mini DP").text, Is.EqualTo(card.defense + CardCatalog.CoinText(card.defenseCoin)));
-                    Assert.That(labels.Single(value => value.gameObject.name == "Mini HP").text, Is.EqualTo(card.health + CardCatalog.CoinText(card.healthCoin)));
-                }
-            }
+            // Original printed lettering remains part of the source image.
+            // Test the full pixels/aspect and use separate live captions for battle values.
+            Canvas.ForceUpdateCanvases();
+            AssertArcanaSurfaces();
         }
 
         static void SetLegalResourceStressState()

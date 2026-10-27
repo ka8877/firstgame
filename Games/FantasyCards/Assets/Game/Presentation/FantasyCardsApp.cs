@@ -72,6 +72,7 @@ namespace FantasyCards.Presentation
             coinSound = MakeTone(960f, .13f); playSound = MakeTone(260f, .15f);
             inspectedId = CardCatalog.All.First(card => card.kind == CardKind.Unit).id;
             SetupWorld(); LoadDeck(); LoadDemoSelection(); ShowTitle();
+            FmBattleAudio.Initialize();
         }
         private void Update()
         {
@@ -180,7 +181,7 @@ namespace FantasyCards.Presentation
             engine.BeginPlaybackCapture();
             try { changed = action(); }
             finally { frames = engine.EndPlaybackCapture(); }
-            if (!changed) { ShowBattle(); return; }
+            if (!changed) { FmBattleAudio.Play("error"); ShowBattle(); return; }
             selectedCard = selectedAttacker = -1; Save(); locked = true;
             StartCoroutine(AnimateAndContinue(before, frames));
         }
@@ -227,8 +228,8 @@ namespace FantasyCards.Presentation
             Text(panel, result, .06f, .66f, .94f, .87f, 42, gold, TextAlignmentOptions.Center);
             Text(panel, (s.winner == 0 ? "승리" : s.winner == 1 ? "패배" : "무승부") + " · " + s.turn + "턴\n지형과 유닛의 균형, 방어에 남길 동료를 다시 생각해 보세요.", .08f, .38f, .92f, .64f, 24, Color.white, TextAlignmentOptions.Center);
             if (s.winner == 0) RecordDemoVictory();
-            Button(panel, s.winner == 0 && s.encounterIndex >= 0 && s.encounterIndex < DemoCatalog.Encounters.Length - 1 ? "다음 결투" : "다시 도전", .09f, .10f, .48f, .28f,
-                () => { RestoreDemoSelection(); if (s.winner == 0) selectedEncounter = Mathf.Min(DemoCatalog.Encounters.Length - 1, s.encounterIndex + 1); ShowEncounterSelection(); }, gold, 24, !locked);
+            Button(panel, FmScenarioCatalog.StageForBattle(s) != null ? (s.winner == 0 ? "시나리오 계속" : "다시 도전") : s.winner == 0 && s.encounterIndex >= 0 && s.encounterIndex < 2 ? "다음 결투" : "다시 도전", .09f, .10f, .48f, .28f,
+                RestorationNextBattle, gold, 24, !locked);
             Button(panel, "대기실로", .53f, .10f, .91f, .28f, () => LeaveBattle(ShowLobby), teal, 24, !locked);
         }
         private void ShowTransfer()
@@ -243,7 +244,7 @@ namespace FantasyCards.Presentation
             var status = Text(root, "저장을 가져오면 현재 전투 저장이 교체됩니다. 유효하지 않은 저장은 거부합니다.", .09f, .08f, .91f, .14f, 22, teal);
             Button(root, "내보내기", .09f, .15f, .28f, .28f, () => { if (PersistentSaves.TryExport(Slot, out string data, out string error)) { input.text = data; status.text = "저장 내용을 표시했습니다. 전체 선택 후 복사하세요."; } else status.text = error; }, gold);
             Button(root, "검증 후 가져오기", .31f, .15f, .58f, .28f, () => { bool ok = PersistentSaves.TryImport(Slot, GameId, 1, CardCatalog.Version, input.text, ValidatePayload, out string error); if (ok) engine = null; status.text = ok ? "가져오기 완료. 타이틀에서 이어하기를 누르세요." : "가져오기 실패: " + error; }, teal);
-            Button(root, "돌아가기", .70f, .15f, .91f, .28f, ShowTitle, new Color(.2f, .25f, .34f));
+            Button(root, "돌아가기", .70f, .15f, .91f, .28f, profileTransferReturn ?? ShowTitle, new Color(.2f, .25f, .34f));
         }
         private static bool ValidatePayload(string payload) { try { BattleEngine.Validate(JsonUtility.FromJson<BattleState>(payload)); return true; } catch { return false; } }
         [Serializable] private sealed class DeckSave { public List<string> cards = new List<string>(); }
@@ -373,7 +374,8 @@ namespace FantasyCards.Presentation
             colors.pressedColor = new Color(.80f, .86f, .90f); b.colors = colors;
             var shadow = panel.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.005f, .015f, .035f, .27f); shadow.effectDistance = new Vector2(0, -4);
             Frame(panel, color == gold ? new Color(1, .94f, .76f, .65f) : new Color(.72f, .84f, .94f, .28f), 1);
-            b.onClick.AddListener(() => { music?.NotifyUserGesture(); action(); });
+            b.onClick.AddListener(() => { music?.NotifyUserGesture(); FmBattleAudio.Play(ButtonCue(label)); action(); });
+            FmBattleAudio.AttachHover(panel.gameObject);
             var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.025f; hover.HoverLift = 3;
             var text = Text(panel, label, .04f, .07f, .96f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
             text.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font;

@@ -1,245 +1,69 @@
 {
-  "releaseProfile": "arcana",
-  "date": "2026-10-27",
-  "recordedUtc": "2026-10-27T10:57:01.242091+00:00",
-  "dateTimezone": "Asia/Seoul",
+  "status": "validation-in-progress",
+  "releaseProfile": "restoration",
+  "recordedUtc": "2026-10-27T16:28:58.325106+00:00",
   "gameRevisions": {
-    "FantasyCards": "fm-arcana-2026-10-27",
-    "PathOfDawn": "gospel-authored-2026-10-27"
+    "FantasyCards": "fm-restoration-2026-10-27",
+    "PathOfDawn": "gospel-toon-2026-10-27"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommitAtSummary": "1cdf3a2f104274879e29be5801f98b07221236ff",
-  "externalCore": {
-    "passed": 122,
-    "finishedUtc": "2026-10-27T06:03:25.9152907+00:00",
-    "file": "Artifacts/TestResults/Core/core-tests.trx",
-    "sha256": "5487053c23d91aeb35e9da1473f57e8ba1778201a7678fb7562afee654985b03",
-    "arcanaCopy": {
-      "file": "Artifacts/Validation/Arcana/core-tests.trx",
-      "sha256": "5487053c23d91aeb35e9da1473f57e8ba1778201a7678fb7562afee654985b03"
-    }
+  "sourceFreeze": {
+    "file": "Artifacts/Validation/Restoration/source-freeze.json",
+    "bytes": 784627,
+    "sha256": "5207dc47d1583b44ccb0a5a37046a60641570a0a8ce0f510c36b449ba6b57abb"
   },
-  "nativeTests": {
-    "FantasyCards": {
-      "passed": 7,
-      "finishedUtc": "2026-10-27 08:14:53Z",
-      "file": "Artifacts/TestResults/FantasyCards/PlayModeUI.xml",
-      "sha256": "adb9dc351c0324a9f0b6a3eb8fd68525011c7fab150b1bff8e9eef2935f8ce08",
-      "testNames": [
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.ArcanaPortraitCardsAndActualRoleChangesRetainTheirIdentity",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.DetailProfilePersistsAndCompletedBattleRecordsOnlyOnce",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityRealDragAndOrderedPlaybackPreserveBattleAndRandomness",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterTextRemainsVisibleWhenRebuiltAtActualMobileCanvasSize",
-        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterTitleLocalRoomsDeckChoiceShuffleAndContinueUseLiveCallbacks"
-      ],
-      "startedUtc": "2026-10-27 08:14:37Z"
-    },
-    "PathOfDawn": {
-      "passed": 7,
-      "finishedUtc": "2026-10-27 07:04:05Z",
-      "file": "Artifacts/TestResults/PathOfDawn/PlayModeUI.xml",
-      "sha256": "76ea8d4d09768640cc4e8eb69b077874ae32846c581813de13db035b271df35a",
-      "testNames": [
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.AuthoredNearbyNpcTopicsPreserveProgressAndLinkExactScripture",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.BirthScripturePhysicalWalkingAndContinueRestoreTheRealJourney",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.EqualGameTimeWalkingTravelsTheSameDistanceAtThirtyAndTwelveFrames",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.MenusBlockMovementJumpAndActionAndPointerUiClicksDoNotPractice",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.PracticeActionRequiresItsContextAndCompletesARealGestureWithCooldown",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.RealApproachAndInteractionFollowScriptureObjectivesToNazareth",
-        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.RealSprintJumpLandingAndTouchJumpArticulateTheProductionCharacter"
-      ],
-      "startedUtc": "2026-10-27 07:03:57Z"
-    }
+  "core": {
+    "passed": 142,
+    "file": "Artifacts/Validation/Restoration/core-tests.trx",
+    "bytes": 194468,
+    "sha256": "688569b5cc57b4593e2e21b9dc267a30532ae32d85e9e5ab946c773226b3f98c"
   },
   "cardAuthoring": {
-    "authoring": {
-      "status": "passed",
-      "cards": 600,
-      "completeDefinitions": 600,
-      "compatibilityMirrors": 600,
-      "originalArtworkBindings": 600,
-      "textureImporters": 601,
-      "cardAssetImporters": 600,
-      "fullCardRectangles": 600,
-      "generatorReproducedWithoutWrites": true,
-      "sourceSelectionSha256": "bfe7af4f6c6ed16285a2ab0d6e3e0bea7ada50559762e8a6198fdad1800ab8b8",
-      "generatedCatalogSha256": "3b06378ea6800d5055c41968853c15ee1a127aa97d5bf072d6c5cd36a9d45a82",
-      "policySha256": "95b1cae313420af6c04bc74211f58d6e3acb0d1f36373fb9abadccf7f52fbe34",
-      "helperSha256": "1dfeb743cf53f7b9fa852502704e8157abbc51e671d1a3c76ac243d352cd3497",
-      "importerSemanticSha256": "b080ab62e07e69c22b0061508a44f8e7bca0de0f5e11be1d2b16b3131d12b9b5",
-      "semanticSha256": "4a4a5296bb2d0d670f96fe2c698d6b63819e75c535a2ac88711ac491d070ec84",
-      "scope": "Current generated CardAsset values, complete PNG/CardAsset importer settings, and referenced original artwork; ignores YAML wrapping, whitespace, document order and volatile local Sprite IDs. Import policy is a reviewed source-derived expectation, not a pre-build capture."
-    },
-    "sourceAudit": {
-      "file": "Artifacts/Validation/Arcana/CoreCards/summary.json",
-      "sha256": "8a6ec59e8b9c7ecca08380882252bd23110c4e639309d241e428c04e6b651c71"
-    },
-    "cardCount": 600,
-    "starterDecks": 18,
-    "monoDecks": 7,
-    "distinctDualDecks": 11
-  },
-  "nativeMusic": {
-    "actualNative": {
-      "file": "Artifacts/Validation/Arcana/native-music-transitions.json",
-      "sha256": "1da55f5c04b78ff6475b6d58a0126591f1c729547cd3967647e0f7354b53e7d8",
-      "starts": [
-        {
-          "scene": "login",
-          "clip": "title",
-          "transition": 0,
-          "sourceTime": 0.0,
-          "dspTime": 20.138666666666666
-        },
-        {
-          "scene": "lobby",
-          "clip": "lobby",
-          "transition": 1,
-          "sourceTime": 0.0,
-          "dspTime": 23.850666666666665
-        },
-        {
-          "scene": "deck",
-          "clip": "deck",
-          "transition": 2,
-          "sourceTime": 0.0,
-          "dspTime": 28.181333333333335
-        },
-        {
-          "scene": "lobby",
-          "clip": "lobby",
-          "transition": 3,
-          "sourceTime": 0.0,
-          "dspTime": 32.256
-        }
-      ],
-      "verifiedReturn": [
-        {
-          "scene": "lobby",
-          "clip": "lobby",
-          "transition": 1,
-          "sourceTime": 0.0,
-          "dspTime": 23.850666666666665
-        },
-        {
-          "scene": "deck",
-          "clip": "deck",
-          "transition": 2,
-          "sourceTime": 0.0,
-          "dspTime": 28.181333333333335
-        },
-        {
-          "scene": "lobby",
-          "clip": "lobby",
-          "transition": 3,
-          "sourceTime": 0.0,
-          "dspTime": 32.256
-        }
-      ],
-      "featureCase": {
-        "name": "ArcanaPortraitCardsAndActualRoleChangesRetainTheirIdentity",
-        "startedUtc": "2026-10-27 08:12:58Z",
-        "finishedUtc": "2026-10-27 08:13:16Z",
-        "nativeXml": {
-          "file": "Artifacts/TestResults/FantasyCards/PlayModeUI.xml",
-          "sha256": "adb9dc351c0324a9f0b6a3eb8fd68525011c7fab150b1bff8e9eef2935f8ce08"
-        }
-      }
-    },
-    "modelChecks": {
-      "MusicWeb": {
-        "file": "Artifacts/Validation/Arcana/MusicWeb/report.json",
-        "sha256": "78898c0b2bf5fa76921219a7fd75ceac020fcb2bf1537b1373248cc484b1b020",
-        "passed": 18,
-        "scope": "Real bundled Web controller executed with deterministic fake media/WebAudio clocks. Not browser permission, real decoding/PCM or physical speaker evidence."
-      },
-      "MusicNative": {
-        "file": "Artifacts/Validation/Arcana/MusicNative/report.json",
-        "sha256": "90c8055b1ac23368fa07947d6e76712a925b99c48ee13b1199ea53f8048c51c5",
-        "assertions": 29,
-        "scope": "Actual native host source with deterministic AudioSource doubles; no Unity PCM/device claim."
-      }
-    },
-    "scope": "Native real AudioSource/DSP starts plus explicitly separate deterministic lifecycle checks; physical listening is not claimed."
-  },
-  "legacyResources": {
-    "Windows": {
-      "file": "Artifacts/Builds/PathOfDawn/Windows/LegacyResourceExclusions.json",
-      "sha256": "449161ee5263838977c14e36c790772dc0d15cd647d56330b66dd1b6dfdbe476",
-      "status": "restored",
-      "moves": 8,
-      "files": 76,
-      "restoredUtc": "2026-10-27T07:31:14.4295410Z",
-      "hashVerified": true,
-      "guidVerified": true,
-      "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion."
-    },
-    "Web": {
-      "file": "Artifacts/Builds/PathOfDawn/Web/LegacyResourceExclusions.json",
-      "sha256": "390f3f615216dd3583490f8fffcc528ca10fce5290107cf5711d41d9f78518ce",
-      "status": "restored",
-      "moves": 8,
-      "files": 76,
-      "restoredUtc": "2026-10-27T07:48:12.4192290Z",
-      "hashVerified": true,
-      "guidVerified": true,
-      "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion."
+    "file": "Artifacts/Validation/Restoration/card-authoring.json",
+    "bytes": 1065,
+    "sha256": "7776daa066e2d29ba9e355bf0c49eb80c2435519d1b4ee51a48e6c1ac8649720",
+    "binding": {
+      "file": "Artifacts/Validation/Restoration/card-authoring-source-binding.json",
+      "bytes": 335,
+      "sha256": "319f30ec6cd5e8149b8d6aae226dac9ce53887fd186db4eae4a940722baedfba"
     }
   },
-  "legacyRecoveryExercise": {
-    "records": {
-      "ArcanaLifecycleNormal": {
-        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleNormal/LegacyResourceExclusions.json",
-        "sha256": "82153ff87df39867f7f8236f09011563e7aee181b1bbfa75efc940dc093e9f8a",
-        "status": "restored",
-        "moves": 8,
-        "files": 76,
-        "restoredUtc": "2026-10-27T06:28:18.5464660Z",
-        "hashVerified": true,
-        "guidVerified": true,
-        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
-        "packagedCopy": {
-          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleNormal/LegacyResourceExclusions.json",
-          "sha256": "82153ff87df39867f7f8236f09011563e7aee181b1bbfa75efc940dc093e9f8a"
-        }
+  "native": {
+    "FantasyCards": {
+      "passed": 9,
+      "file": "Artifacts/Validation/Restoration/Native/FantasyCards/PlayModeUI.xml",
+      "bytes": 12917,
+      "sha256": "14bece26cc7170ad4af4926b13c5e2c30cfb3248a957a470f9afc10dda07860b",
+      "inputs": {
+        "file": "Artifacts/Validation/Restoration/Native/FantasyCards/inputs-before.json",
+        "bytes": 506751,
+        "sha256": "130e850c1305d4223b6dfa542dc01e3f5deee892db8692a0fa09fc08241c1703"
       },
-      "ArcanaLifecycleException": {
-        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleException/LegacyResourceExclusions.json",
-        "sha256": "83e96f943e1479456d33a436d46ec2d8798c54cdcbf1c5d73864be7270c74fc0",
-        "status": "restored",
-        "moves": 8,
-        "files": 76,
-        "restoredUtc": "2026-10-27T06:28:21.5890040Z",
-        "hashVerified": true,
-        "guidVerified": true,
-        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
-        "packagedCopy": {
-          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleException/LegacyResourceExclusions.json",
-          "sha256": "83e96f943e1479456d33a436d46ec2d8798c54cdcbf1c5d73864be7270c74fc0"
-        }
-      },
-      "ArcanaLifecycleRecovery": {
-        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleRecovery/LegacyResourceExclusions.json",
-        "sha256": "f859f869efe11cf6e15c5c14c06f20e1543915efc354b7d89166d6ce914682e7",
-        "status": "recovered-after-interruption",
-        "moves": 8,
-        "files": 76,
-        "restoredUtc": "2026-10-27T06:28:24.7914670Z",
-        "hashVerified": true,
-        "guidVerified": true,
-        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
-        "packagedCopy": {
-          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleRecovery/LegacyResourceExclusions.json",
-          "sha256": "f859f869efe11cf6e15c5c14c06f20e1543915efc354b7d89166d6ce914682e7"
-        }
+      "binding": {
+        "file": "Artifacts/Validation/Restoration/Native/FantasyCards/binding.json",
+        "bytes": 592,
+        "sha256": "fa3e15e2d30a3f3677d6c153d83b66d04bbf70b608a48acb06a54c6c1d4384ce"
       }
     },
-    "scope": "Actual Unity asset moves with normal disposal, exception disposal, and explicit journal recovery; no process-kill test is claimed."
+    "PathOfDawn": {
+      "passed": 8,
+      "file": "Artifacts/Validation/Restoration/Native/PathOfDawn/PlayModeUI.xml",
+      "bytes": 10630,
+      "sha256": "6a722419f5ff8f75598c5925c1a9ffa3fab811627dbee5272e78e8468bedfd74",
+      "inputs": {
+        "file": "Artifacts/Validation/Restoration/Native/PathOfDawn/inputs-before.json",
+        "bytes": 278360,
+        "sha256": "44d5addcd058eab8a8fcf79d884d134ab1230bf0d70af0eebe4599a144131dde"
+      },
+      "binding": {
+        "file": "Artifacts/Validation/Restoration/Native/PathOfDawn/binding.json",
+        "bytes": 588,
+        "sha256": "5ed1aea2cd73a86fafa87310ba38eecf8f593e5df286d24afa7f306ed4054334"
+      }
+    }
   },
   "builds": {
     "FantasyCards": {
@@ -247,19 +71,31 @@
         "Engine": "6000.3.26f1",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "334614507",
-        "Duration": "00:00:14.4882690",
+        "Bytes": "349642811",
+        "Duration": "00:00:17.4134320",
+        "SourceFingerprint": "2f12a17c00c5c1e7e591a095790bd5876b619cf6126f6c346a337e5cae1d2c3d",
         "Errors": "0",
-        "Warnings": "6",
+        "Warnings": "8",
         "Content": "fm-classic-0.1.0",
-        "Revision": "fm-arcana-2026-10-27",
-        "file": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
-        "sha256": "ba944a301cd74ef5650b771b03bef25dc6d83166f0276e3f9c24abf832875e7d",
+        "Revision": "fm-restoration-2026-10-27",
+        "file": "/tmp/firstgame-restoration-builds/FantasyCards/Windows/BuildEvidence.txt",
+        "bytes": 278,
+        "sha256": "15ffeabc6668c6196a702e730f748b92c885930f013523bd1608dc446cbea496",
+        "inputs": {
+          "file": "/tmp/firstgame-restoration-builds/FantasyCards/Windows/BuildInputs.json",
+          "bytes": 570690,
+          "sha256": "a1b6ca78b538561962eb1f5e7a84dc22fd917a31d0ed9a8371031034d71f115c"
+        },
         "files": [
           {
             "file": "BuildEvidence.txt",
-            "bytes": 189,
-            "sha256": "ba944a301cd74ef5650b771b03bef25dc6d83166f0276e3f9c24abf832875e7d"
+            "bytes": 278,
+            "sha256": "15ffeabc6668c6196a702e730f748b92c885930f013523bd1608dc446cbea496"
+          },
+          {
+            "file": "BuildInputs.json",
+            "bytes": 570690,
+            "sha256": "a1b6ca78b538561962eb1f5e7a84dc22fd917a31d0ed9a8371031034d71f115c"
           },
           {
             "file": "D3D12/D3D12Core.dll",
@@ -273,18 +109,18 @@
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Core.dll",
-            "bytes": 275968,
-            "sha256": "bcdf71a70c54c68124b4f78ff5f4956eb97570522ad47c036479bbe392424521"
+            "bytes": 302080,
+            "sha256": "11568dee17ad62c67391c00d2f4a15784f3b993578dd12aa5cb234f28cfabe89"
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Data.dll",
             "bytes": 5120,
-            "sha256": "f7615ff0cd5ec2b4ca9ece6ae85c6d4ff719d0960b2dae7ed51e975aa9e1103a"
+            "sha256": "0fad82bd50d8b5abc66a2abbb6dffa7e9976c6303f33b866f4ac3e582ffe29ef"
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Presentation.dll",
-            "bytes": 180736,
-            "sha256": "c91e3a0d79936f8d40888e8b327f745f4d3c9bd178b14f2a60ec3596d06d3e59"
+            "bytes": 197120,
+            "sha256": "96fad642d4310b0d5c3a837b484c56ec9c4b515d5f0d94931b2026e1182076eb"
           },
           {
             "file": "FantasyCards_Data/Managed/FirstGame.Shared.dll",
@@ -1024,17 +860,17 @@
           {
             "file": "FantasyCards_Data/boot.config",
             "bytes": 156,
-            "sha256": "af1ea070a0ce99861479cd656144bea34f62fe8c6300a53801a0ddda5c8db3de"
+            "sha256": "49dec38d978fffa4bb5b33362d260e364065a20835cd2b7c1ddbc1bbabf9c721"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers",
-            "bytes": 334804,
-            "sha256": "a4ba6e59bb879c67cd97caaf6c4e447b1f01da528c14aa402f3bda4de8b6d619"
+            "bytes": 338692,
+            "sha256": "af1e72d7ff3e89836dd0f160334f8b1814d628e770f8dce18df2f6bd02b9b27d"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers.assets",
-            "bytes": 516064,
-            "sha256": "f4fe2595954e4f31907a44e736fe33fc47fa2ab232b2fd293516261074a1f758"
+            "bytes": 517472,
+            "sha256": "7b18c38d2404b45e69278554faba762ba7cf67dd45fee65179b6415c24201747"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers.assets.resS",
@@ -1044,27 +880,27 @@
           {
             "file": "FantasyCards_Data/level0",
             "bytes": 53792,
-            "sha256": "230b54785d64c25a203587fd50700b7ca460014de21b2363400bdc911ae7bed9"
+            "sha256": "5182281675d38c8b1a4f4be868c635d9e4ea1df034816a09e5a174adaf79cf07"
           },
           {
             "file": "FantasyCards_Data/resources.assets",
-            "bytes": 7657640,
-            "sha256": "b0f2cdfac02f46556c7e7ecfa5b97e2edf52b3304cdd28752aeee6a8093969d2"
+            "bytes": 7897656,
+            "sha256": "ebffe67e7ae47c9cbe948caf6b715984fc1f6801a261f5adbcc0098c6283b4cf"
           },
           {
             "file": "FantasyCards_Data/resources.assets.resS",
-            "bytes": 219890512,
-            "sha256": "26056e780866b6085b02eb3925f8e261049e5d1d60988a233815f356dacc6f00"
+            "bytes": 232010592,
+            "sha256": "a9917efa6d9fd37c69f7972da6d067830717cea155ea40c5763381421986cb26"
           },
           {
             "file": "FantasyCards_Data/resources.resource",
-            "bytes": 2647584,
-            "sha256": "2198ed94bf267d4f31972ce02d7ee5dd6b8832ba3d484149f9f5719d8f2282f6"
+            "bytes": 5268000,
+            "sha256": "d85c6adf7bb3681767e7d1bbeade8a25ee1da04a95616404b36954cdfe99f262"
           },
           {
             "file": "FantasyCards_Data/sharedassets0.assets",
             "bytes": 432832,
-            "sha256": "94e05f261984af5ce8f31fd3a7cb123d1fde405d8f6b52c4292b28ce592ee5db"
+            "sha256": "16223d5f5d94c28af3562b9f1b3db9d2754cce71c40af5d66364f7d48752eddf"
           },
           {
             "file": "FantasyCards_Data/sharedassets0.assets.resS",
@@ -1097,11 +933,6 @@
             "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
           },
           {
-            "file": "MonoBleedingEdge/etc/mono/2.0/settings.map",
-            "bytes": 2622,
-            "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
-          },
-          {
             "file": "MonoBleedingEdge/etc/mono/2.0/web.config",
             "bytes": 11635,
             "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
@@ -1122,11 +953,6 @@
             "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
           },
           {
-            "file": "MonoBleedingEdge/etc/mono/4.0/settings.map",
-            "bytes": 2622,
-            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
-          },
-          {
             "file": "MonoBleedingEdge/etc/mono/4.0/web.config",
             "bytes": 18802,
             "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
@@ -1145,11 +971,6 @@
             "file": "MonoBleedingEdge/etc/mono/4.5/machine.config",
             "bytes": 34056,
             "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
-          },
-          {
-            "file": "MonoBleedingEdge/etc/mono/4.5/settings.map",
-            "bytes": 2622,
-            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
           },
           {
             "file": "MonoBleedingEdge/etc/mono/4.5/web.config",
@@ -1188,33 +1009,40 @@
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "5668296",
-        "Duration": "00:04:02.7882780",
+        "Duration": "00:10:33.9091610",
+        "SourceFingerprint": "2f12a17c00c5c1e7e591a095790bd5876b619cf6126f6c346a337e5cae1d2c3d",
         "Errors": "0",
-        "Warnings": "10",
+        "Warnings": "12",
         "Content": "fm-classic-0.1.0",
-        "Revision": "fm-arcana-2026-10-27",
-        "file": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
-        "sha256": "010e0ee2441eb2b7486fb306d277a851783533b365bce4c838d75469aa76498f",
+        "Revision": "fm-restoration-2026-10-27",
+        "file": "/tmp/firstgame-restoration-builds/FantasyCards/Web/BuildEvidence.txt",
+        "bytes": 263,
+        "sha256": "2e11f1344cfa7ff0e271e0dbf834dcedeb69b1bd0785b712f6c004719b35d459",
+        "inputs": {
+          "file": "/tmp/firstgame-restoration-builds/FantasyCards/Web/BuildInputs.json",
+          "bytes": 570690,
+          "sha256": "6d002d0c45a66fa4b96acbcbd29be73c51f322d63fe729abc993c2e78263be28"
+        },
         "files": [
           {
-            "file": "Build/51457f6061f8ece713d9f708691b9c50.data.unityweb",
-            "bytes": 85771141,
-            "sha256": "c81d392e897772f1c3ffbdb7ad298782276fb696bdba8610ee0013876759287e"
-          },
-          {
-            "file": "Build/7c68d9b8bbb73dbd5124e3dfdbbad5a6.framework.js.unityweb",
-            "bytes": 89971,
-            "sha256": "b892f262c69574e7a59e95ae25aac391a8f465196fbb92d2e6ab2a6810f18532"
-          },
-          {
-            "file": "Build/c4138d164c9db4b9344d10736296525f.wasm.unityweb",
-            "bytes": 13185262,
-            "sha256": "cea1bf94e32cf1bb9754ef54d19923f01b15440632b5b1818f3c4c447efd6dda"
-          },
-          {
-            "file": "Build/db5c393fc601d6f0244a82a1081e23ed.loader.js",
+            "file": "Build/8e6f9c6c5d3a2cf7bbd6b31c8f8ba2c0.loader.js",
             "bytes": 47867,
-            "sha256": "d39ab362747e386734b5ab6852fe26fdf2706d5d35da104a68d1e7475a763774"
+            "sha256": "25ed81ee271af1fe9b569d2149cc88faf8fae73ba095057e13e9b717cc475852"
+          },
+          {
+            "file": "Build/ddeef99742a9d62600ac79e9cb37e5dd.wasm.unityweb",
+            "bytes": 13208795,
+            "sha256": "98a0f3f0c156aed482b186bb08bc7e79e67a845a7a351389ed026e316d8f8a79"
+          },
+          {
+            "file": "Build/e3786c8d768b3235bc8efe93c654ac88.data.unityweb",
+            "bytes": 90088478,
+            "sha256": "2c5bbe8ed288d47afbeb0ed13de463a8fc974053d2bd2a76286799521b922155"
+          },
+          {
+            "file": "Build/f7dfc603dd44743984a07f372ee93382.framework.js.unityweb",
+            "bytes": 89985,
+            "sha256": "b291ef75e4bbac77fee7aaf43f2d8868b14a454f4c8ce302385375bd1e539d17"
           },
           {
             "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
@@ -1269,7 +1097,7 @@
           {
             "file": "index.html",
             "bytes": 27185,
-            "sha256": "785ce5a7b8343a7aeef633502366085cee6520a9e1ec1cd735218aeac73f88fc"
+            "sha256": "d9324e4c86da2a3025744477a9c7f21728255827ac907a9fbdabe752e8db2cd8"
           }
         ]
       }
@@ -1278,23 +1106,35 @@
       "Windows": {
         "Engine": "6000.3.26f1",
         "Content": "gospel-0.1.0",
-        "Revision": "gospel-authored-2026-10-27",
+        "Revision": "gospel-toon-2026-10-27",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "296508059",
-        "Duration": "00:00:44.5464540",
-        "LegacyResourceExclusions": "/workspace/firstgame/Artifacts/Builds/PathOfDawn/Windows/LegacyResourceExclusions.json",
+        "Bytes": "303538587",
+        "Duration": "00:00:16.1592240",
+        "LegacyResourceExclusions": "/tmp/firstgame-restoration-builds/PathOfDawn/Windows/LegacyResourceExclusions.json",
         "ExcludedLegacyAssets": "8",
+        "SourceFingerprint": "059fd50be9c60e6a1dbda9acdd15497a5ae9ca2bfa94745f8baa40e8eb60d1d0",
         "Errors": "0",
         "Warnings": "1",
         "LegacyResourcesRestored": "true",
-        "file": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
-        "sha256": "c3c817860384758123fe95e1f1619cd018aede4dc0edd1440142d7e0f42b3a71",
+        "file": "/tmp/firstgame-restoration-builds/PathOfDawn/Windows/BuildEvidence.txt",
+        "bytes": 434,
+        "sha256": "6f5d8e2d42d667cd529051a9d4200b82420f0cd99c8ae4e08d7680266f9eead0",
+        "inputs": {
+          "file": "/tmp/firstgame-restoration-builds/PathOfDawn/Windows/BuildInputs.json",
+          "bytes": 312217,
+          "sha256": "91a18194f8c4e49d93304673da2014b5dfd58e54c0672857e9b0291547436cb4"
+        },
         "files": [
           {
             "file": "BuildEvidence.txt",
-            "bytes": 358,
-            "sha256": "c3c817860384758123fe95e1f1619cd018aede4dc0edd1440142d7e0f42b3a71"
+            "bytes": 434,
+            "sha256": "6f5d8e2d42d667cd529051a9d4200b82420f0cd99c8ae4e08d7680266f9eead0"
+          },
+          {
+            "file": "BuildInputs.json",
+            "bytes": 312217,
+            "sha256": "91a18194f8c4e49d93304673da2014b5dfd58e54c0672857e9b0291547436cb4"
           },
           {
             "file": "D3D12/D3D12Core.dll",
@@ -1303,8 +1143,8 @@
           },
           {
             "file": "LegacyResourceExclusions.json",
-            "bytes": 76093,
-            "sha256": "449161ee5263838977c14e36c790772dc0d15cd647d56330b66dd1b6dfdbe476"
+            "bytes": 76085,
+            "sha256": "bfccb865699743dad7d77659b6d6b18e24801e1aa631e11be53aa00d9c670e4f"
           },
           {
             "file": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
@@ -1332,11 +1172,6 @@
             "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
           },
           {
-            "file": "MonoBleedingEdge/etc/mono/2.0/settings.map",
-            "bytes": 2622,
-            "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
-          },
-          {
             "file": "MonoBleedingEdge/etc/mono/2.0/web.config",
             "bytes": 11635,
             "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
@@ -1357,11 +1192,6 @@
             "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
           },
           {
-            "file": "MonoBleedingEdge/etc/mono/4.0/settings.map",
-            "bytes": 2622,
-            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
-          },
-          {
             "file": "MonoBleedingEdge/etc/mono/4.0/web.config",
             "bytes": 18802,
             "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
@@ -1380,11 +1210,6 @@
             "file": "MonoBleedingEdge/etc/mono/4.5/machine.config",
             "bytes": 34056,
             "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
-          },
-          {
-            "file": "MonoBleedingEdge/etc/mono/4.5/settings.map",
-            "bytes": 2622,
-            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
           },
           {
             "file": "MonoBleedingEdge/etc/mono/4.5/web.config",
@@ -1443,13 +1268,13 @@
           },
           {
             "file": "PathOfDawn_Data/Managed/PathOfDawn.Core.dll",
-            "bytes": 41472,
-            "sha256": "0f56d9e7c953c62fe225e531941d77392e4fb4094588254d6ea4305b7c3763b5"
+            "bytes": 44032,
+            "sha256": "a1ebbdcfe94863ac2f97945a58b51088835fbd1c81bcfc40fcd23dc66f125d17"
           },
           {
             "file": "PathOfDawn_Data/Managed/PathOfDawn.Presentation.dll",
-            "bytes": 159744,
-            "sha256": "d5a14183c429709608316a7eca00a55555e22c774afc2bbfc3b77fbc2ebaba7d"
+            "bytes": 173568,
+            "sha256": "c85d338a831daa59bf2c6282322e03c62ae6033d3b259d9a4dcbc2d5d87002dc"
           },
           {
             "file": "PathOfDawn_Data/Managed/System.ComponentModel.Composition.dll",
@@ -2124,17 +1949,17 @@
           {
             "file": "PathOfDawn_Data/boot.config",
             "bytes": 156,
-            "sha256": "d1af5da6a9ebb42c3bb044a046c5107954e2d172e9ec2f7ed189eb2aaa554bbe"
+            "sha256": "0d7ef628ae0f213b6bf1190e50e03c4e6b8bd81b37ae2780f55356eba644fd77"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers",
-            "bytes": 286660,
-            "sha256": "5926cae067f9315ad56647f79b81be4e599129a35f5422dae0d7593366af5a02"
+            "bytes": 296068,
+            "sha256": "bd163f4bca22608ea11a8b7745f395651e71a6b9c057026594d87fdcb830f756"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers.assets",
-            "bytes": 526960,
-            "sha256": "3029ec538221af497c9e0d486c1942332568f53ec6656267207a954913ceaece"
+            "bytes": 527248,
+            "sha256": "c62b63dbd6184ad22dcb529dfb75cb4d22907e2db71a7e16425d4e5865301f4c"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers.assets.resS",
@@ -2144,17 +1969,17 @@
           {
             "file": "PathOfDawn_Data/level0",
             "bytes": 1164,
-            "sha256": "8192dfca60a65b0300e4019e11506b608b9093d2c91c497b820aa7537c5adc7f"
+            "sha256": "d5897cc136715e5432724c13013c61cbc614c9830db4ddbffa001cd1c395d158"
           },
           {
             "file": "PathOfDawn_Data/resources.assets",
-            "bytes": 41490456,
-            "sha256": "a7c161977983bb25c8dfbe543e15cf8d3e05360a78de8011f27704e4f2203e4f"
+            "bytes": 46030008,
+            "sha256": "435acb5685a5a81e90140e05f8dcc99e1df294fe3c40ef3e931dd5beee90bafa"
           },
           {
             "file": "PathOfDawn_Data/resources.assets.resS",
-            "bytes": 151870080,
-            "sha256": "bf5524339c05ed85255d6bf5192734b56a32a7eadb2b2a5bffde0067feabce93"
+            "bytes": 154323616,
+            "sha256": "cfd4a54cb07b92629cf92a1f34bfacf7c455741431c0c426888fcc5a36bad37b"
           },
           {
             "file": "PathOfDawn_Data/resources.resource",
@@ -2163,8 +1988,8 @@
           },
           {
             "file": "PathOfDawn_Data/sharedassets0.assets",
-            "bytes": 3922636,
-            "sha256": "a9dfffa7a9d537c118bd8ecc0fcecd49f958f6014a8ca03824fa580111513bdc"
+            "bytes": 3933996,
+            "sha256": "02c6f5380ad52055c7136ca47ee4d08349ed7d995dd3a23d8a4660a55c2f94f2"
           },
           {
             "file": "PathOfDawn_Data/sharedassets0.assets.resS",
@@ -2186,43 +2011,50 @@
       "Web": {
         "Engine": "6000.3.26f1",
         "Content": "gospel-0.1.0",
-        "Revision": "gospel-authored-2026-10-27",
+        "Revision": "gospel-toon-2026-10-27",
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "7333",
-        "Duration": "00:13:40.8019140",
-        "LegacyResourceExclusions": "/workspace/firstgame/Artifacts/Builds/PathOfDawn/Web/LegacyResourceExclusions.json",
+        "Duration": "00:05:27.7538040",
+        "LegacyResourceExclusions": "/tmp/firstgame-restoration-builds/PathOfDawn/Web/LegacyResourceExclusions.json",
         "ExcludedLegacyAssets": "8",
+        "SourceFingerprint": "059fd50be9c60e6a1dbda9acdd15497a5ae9ca2bfa94745f8baa40e8eb60d1d0",
         "Errors": "0",
-        "Warnings": "1",
+        "Warnings": "4",
         "LegacyResourcesRestored": "true",
-        "file": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
-        "sha256": "6eea3d14ba3ee852ecd1b10f6bdabc3832992c7e7262b7e6d04bf8aadef7bb02",
+        "file": "/tmp/firstgame-restoration-builds/PathOfDawn/Web/BuildEvidence.txt",
+        "bytes": 411,
+        "sha256": "2638126521885a15332f845e993fbde38414730753a5d750e7586d9d63fb992b",
+        "inputs": {
+          "file": "/tmp/firstgame-restoration-builds/PathOfDawn/Web/BuildInputs.json",
+          "bytes": 312217,
+          "sha256": "7b395a970772f722155e5c3bd1cb9bc6140529178f8984b1defd6661812fa69f"
+        },
         "files": [
           {
-            "file": "Build/84e3270653900dae2169601d487d4944.wasm.unityweb",
-            "bytes": 13401695,
-            "sha256": "f2b97d043908afa08f3d64f7e533def11d6ae9bfc266f39dbf0f3f53ba58abea"
+            "file": "Build/24bf9dc6988a61198e0db94053c2cdd7.data.unityweb",
+            "bytes": 96337054,
+            "sha256": "6a7cd3ec75464288b849ffdb05b3f36c6be520a931774591b18e5b367793947b"
           },
           {
-            "file": "Build/a4867b85992aee1f879625bf8f72f284.loader.js",
-            "bytes": 47860,
-            "sha256": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7"
+            "file": "Build/9b8596580eed7910f94618e4666b832a.wasm.unityweb",
+            "bytes": 13410686,
+            "sha256": "10ac5016799efc6d0bb31ec32589ef1325c06f5b5e5bacb717d0d29361bff4cc"
           },
           {
-            "file": "Build/bde1aaf3928d3fbe6a03ce15059c35fd.data.unityweb",
-            "bytes": 92267524,
-            "sha256": "f6e551982b6707e908cde3cf86993ac9a469528aff297503a2bcb674cbdbc147"
+            "file": "Build/b8f74301e03929837ad9bdbc83feb90a.loader.js",
+            "bytes": 47867,
+            "sha256": "ef1cf39617e7f87dc193c557662e07740d99e7cf9d54dd7f05faf227fdfa7a6f"
           },
           {
-            "file": "Build/d9edd892c7d5893934879f2e27641d2b.framework.js.unityweb",
-            "bytes": 89822,
-            "sha256": "96ad1a3fcc4081fcc84b07b2c69bfae4ffdc58a10c92dccb6f87fd11881b2fb4"
+            "file": "Build/f888b7a6c9b25e8c2b5cbd6b52edafe8.framework.js.unityweb",
+            "bytes": 89836,
+            "sha256": "d13b773b3b0c9c5a92bfb173a51659dfb02c8191791432d46bf5e5a7c98e8385"
           },
           {
             "file": "index.html",
             "bytes": 7333,
-            "sha256": "536d8d0aa5f316c2c55fdef39eee6367deac6dc2825bda6338e2c7d02494cb4e"
+            "sha256": "775ad566f02cc862f439ff036729c6d7d77c150de47385937a89e9b051685148"
           }
         ]
       }
@@ -2231,1720 +2063,46 @@
   "web": {
     "Desktop720": {
       "FantasyCards": {
-        "checks": 78,
-        "rawChecks": 78,
-        "approvedOriginals": 17,
-        "screenshots": [
-          {
-            "name": "title",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/title.png",
-            "sha256": "4e01f5f7d265b4750bbea024c617c97cc57765874db5ada0b8a71412033acd0b",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              81.81921939913668,
-              71.99505806844682,
-              64.50493527994003
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:25:24.750622+00:00"
-          },
-          {
-            "name": "profile",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/profile.png",
-            "sha256": "eff6dfd9e661ac785e300b1cdfe19317b99966e28d28ad1c8ff189342c7ba336",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              68.1439466980446,
-              60.75136202400692,
-              54.85670091319534
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:27:18.202704+00:00"
-          },
-          {
-            "name": "continued-profile",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/continued-profile.png",
-            "sha256": "bc8469e8d337579b71bbcac7b5a847002c118db5d7db7a79c9606eb1abf0f92e",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              68.14425327499386,
-              60.75167886327289,
-              54.85688610840807
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:28:45.600708+00:00"
-          },
-          {
-            "name": "lobby",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/lobby.png",
-            "sha256": "b61daeddfa690b8c683fa48cf39827e554f2c9097568b2bcf38db4eccbdf165b",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              64.78408655477585,
-              57.80699164744044,
-              49.22428646661729
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:29:32.105921+00:00"
-          },
-          {
-            "name": "seven-mono-decks",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/seven-mono-decks.png",
-            "sha256": "8e64a416234197011dfb5d7968881bf3895489becc0e54daf76072b48122665d",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              56.25532124391447,
-              48.57557549400837,
-              37.37690049602894
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:30:23.517252+00:00"
-          },
-          {
-            "name": "mono-decks-last-page",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/mono-decks-last-page.png",
-            "sha256": "d1de381d366f2bb83d5250e69f67745cf02ac7944e4f90ded870230edf0cbbb2",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              52.45225096654068,
-              44.985443596120064,
-              34.452128170160286
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:31:14.907084+00:00"
-          },
-          {
-            "name": "dual-decks",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/dual-decks.png",
-            "sha256": "f083cda09fe37fb9d28255a51798a0eea5a7ad9dc8251f76f1130bf3354e69f4",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              58.85549727529044,
-              50.009539708927555,
-              39.08977081644653
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:32:23.801380+00:00"
-          },
-          {
-            "name": "eighteen-decks-last-page",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/eighteen-decks-last-page.png",
-            "sha256": "05d756975a27ac1550e82c400c24c2db4fa3fbc7c251376ab099890cc987135a",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              52.87104466762223,
-              43.964814288302364,
-              34.65359276592107
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:32:53.152518+00:00"
-          },
-          {
-            "name": "portrait-card-gallery",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/portrait-card-gallery.png",
-            "sha256": "87becbc888a2f0437ee27212fbfdf61622390a80cfc8feb04d86fe8832cb85f2",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              50.041518818702215,
-              39.56798641898219,
-              36.500679783116624
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:33:33.952048+00:00"
-          },
-          {
-            "name": "new-legend-card-adjusted-1",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/new-legend-card-adjusted-1.png",
-            "sha256": "2fccb5492343355d3767df34e9e10d82e69c9a6158d4e74a4468d4a0a896654a",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              67.72090466834666,
-              55.3045417044372,
-              56.80265279629369
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:37:32.881897+00:00"
-          },
-          {
-            "name": "original-printed-card",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/original-printed-card.png",
-            "sha256": "cd0703a3e24c45c5d718cf69d42d3c21b296543747fd171b7ddf5e96635594ea",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              55.955805170638776,
-              42.05048326509608,
-              42.89258583617673
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:38:18.764070+00:00"
-          },
-          {
-            "name": "opening-portrait-hand",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/opening-portrait-hand.png",
-            "sha256": "7a6ad2436fc0aee282b3261481b237b807c570050e54ec4f30ff3205d4323474",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              70.83693175379719,
-              65.88750287197982,
-              51.56377614691012
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:39:01.020555+00:00"
-          },
-          {
-            "name": "backfield-terrain-adjusted-1",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/backfield-terrain-adjusted-1.png",
-            "sha256": "a62d6ab073d46ec6256870699e76066648df01cc602abcf783c4507c98694f2c",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              54.47121202129584,
-              51.394622153494495,
-              43.26113955880684
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:41:00.946486+00:00"
-          },
-          {
-            "name": "portrait-hand-and-field-adjusted-1",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/portrait-hand-and-field-adjusted-1.png",
-            "sha256": "0f66e84efc971498a9481e9e5f18142de8407862ddf91c3e7491ed6d9afaabd2",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              53.03527376965195,
-              49.78264021252695,
-              41.54349176129343
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:42:50.248729+00:00"
-          },
-          {
-            "name": "terrain-detail",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/terrain-detail.png",
-            "sha256": "752419e554a2e46ea4502140c3a20f1c778a9844aac51cabb3c461b66e31dfa8",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              77.00225855231184,
-              71.71678653636978,
-              65.40506146342891
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:43:18.918164+00:00"
-          },
-          {
-            "name": "saved-battle",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/saved-battle.png",
-            "sha256": "a38ffa3fb358e41cfe06b7526a8689b845a1c22dc72c8f03e10106392987c331",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              52.924385514988394,
-              49.71681400146492,
-              41.52512245307535
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:44:08.467702+00:00"
-          },
-          {
-            "name": "continued-battle",
-            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/continued-battle.png",
-            "sha256": "2b4b7b1c74fd0aaabbf0db0fd0e3492be511e2695e5fb73a26d4783eceb1e0df",
-            "size": [
-              1202,
-              676
-            ],
-            "channelStddev": [
-              52.9859520184572,
-              49.75285557270278,
-              41.5351414036239
-            ],
-            "canvas": {
-              "x": 39.109375,
-              "y": 0,
-              "width": 1201.765625,
-              "height": 676
-            },
-            "navigation": 2,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:45:17.866262+00:00"
-          }
-        ],
-        "audioWindows": 10,
-        "file": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/report.json",
-        "sha256": "a67910548a80f026187b10b6a391820707d02da0174272bf50c775daef5b89ea",
-        "rawStatus": "passed",
-        "capturePlan": {
-          "file": "Tools/Validation/arcana-smoke-plans.json",
-          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
-        },
-        "captureHarness": {
-          "file": "Artifacts/Validation/Arcana/HarnessHistory/before-gospel-cdp/revival-smoke.py",
-          "sha256": "ee1c563028a532d93eafa3eb04195afabb5653c97bd04e97a0271aba59bd7ddf"
-        },
-        "musicRoles": {
-          "returnStartsAtZero": {
-            "navigation": 1,
-            "promoted": [
-              {
-                "event": "promoted",
-                "scene": "lobby",
-                "serial": 1,
-                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
-                "position": 0,
-                "startPosition": 0,
-                "restartCount": 1,
-                "atMs": 59615.40000000596
-              },
-              {
-                "event": "promoted",
-                "scene": "deck",
-                "serial": 2,
-                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
-                "position": 0,
-                "startPosition": 0,
-                "restartCount": 1,
-                "atMs": 107240.20000001788
-              },
-              {
-                "event": "promoted",
-                "scene": "lobby",
-                "serial": 3,
-                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
-                "position": 0.006485,
-                "startPosition": 0,
-                "restartCount": 2,
-                "atMs": 296913.2000000179
-              }
-            ]
-          },
-          "sameRoleRetainsStart": {
-            "navigation": 1,
-            "scene": "deck",
-            "beforeObservedMs": 110086.20000001788,
-            "afterObservedMs": 161408.30000001192,
-            "sameRoleMessagesBefore": 2,
-            "sameRoleMessagesAfter": 3,
-            "restartCount": 1,
-            "lastStartAtMs": 106750.80000001192
-          },
-          "scope": "Actual controller role/time ledger plus separately verified PCM, not physical speaker listening."
-        }
+        "checks": 101,
+        "reviewedOriginals": 26,
+        "pcmWindows": 10,
+        "file": "Artifacts/Validation/Restoration/Desktop720/FantasyCards/report.json",
+        "bytes": 1060442,
+        "sha256": "359ffd6237968551be26baedf1a5b3f0d85504b44bfaafcabcaf6de0c5e3524f"
       },
       "PathOfDawn": {
-        "checks": 44,
-        "rawChecks": 44,
-        "approvedOriginals": 12,
-        "screenshots": [
-          {
-            "name": "title",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/title.png",
-            "sha256": "8b46ba0d3f719fb12f7338c6bf080785581a191de6c7005bdbe89e8864226db1",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              78.15396509785467,
-              76.91455198902462,
-              70.41241386809814
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T09:45:52.889133+00:00"
-          },
-          {
-            "name": "temple-idle",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/temple-idle.png",
-            "sha256": "47f9c66a103f2da82eb9a49431d284104477047648836b397361ba57e820b5c4",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              61.06076806800998,
-              53.859982439201815,
-              46.20358978191625
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T09:51:35.610812+00:00"
-          },
-          {
-            "name": "hero-rear-close",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-rear-close.png",
-            "sha256": "925b1f598c3b53ed3cfddf090219b334f857facb7679ce1efd985f73fea4499b",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              61.012817380217385,
-              53.593070862870995,
-              45.94999342003923
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T09:53:07.564461+00:00"
-          },
-          {
-            "name": "hero-front-close",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-front-close.png",
-            "sha256": "97440e88108ce28b7a42e86a821619ecfdecd361bb4144c26db343a8f2840979",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              69.39023876276748,
-              69.52044496847917,
-              66.05198976481955
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T09:54:28.288552+00:00"
-          },
-          {
-            "name": "status",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/status.png",
-            "sha256": "461883bbd13fcbdb19c50cfacefa0b08f9028dde4b8bd8f75207e5d0f06ceba5",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              65.355403298296,
-              62.24294795865385,
-              57.139284338981014
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T09:57:01.917978+00:00"
-          },
-          {
-            "name": "hero-walk-compositor-0-002",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-walk-compositor-0-002.png",
-            "sha256": "aa594cd8655eb652393d0caa2e19d95a35520ed1a4ad7f731d9f4e3df8340e4f",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              60.75861953598354,
-              53.02657901412038,
-              45.299697277258346
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-full-viewport-compositor-screencast-png",
-            "metadata": {
-              "offsetTop": 0,
-              "pageScaleFactor": 1,
-              "deviceWidth": 1280,
-              "deviceHeight": 720,
-              "scrollOffsetX": 0,
-              "scrollOffsetY": 0,
-              "timestamp": 1793095116.413926
-            },
-            "receivedUtc": "2026-10-27T09:58:36.523172+00:00"
-          },
-          {
-            "name": "hero-run-compositor-1-003",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-run-compositor-1-003.png",
-            "sha256": "3ffdbbf255e9777a49eb06f80334367ee487ec6972b4a6966cdb16045dd05eab",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              61.37773554293806,
-              53.25102457053346,
-              45.410272646076194
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-full-viewport-compositor-screencast-png",
-            "metadata": {
-              "offsetTop": 0,
-              "pageScaleFactor": 1,
-              "deviceWidth": 1280,
-              "deviceHeight": 720,
-              "scrollOffsetX": 0,
-              "scrollOffsetY": 0,
-              "timestamp": 1793095170.97718
-            },
-            "receivedUtc": "2026-10-27T09:59:31.077002+00:00"
-          },
-          {
-            "name": "npc-topics-adjusted-1",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/npc-topics-adjusted-1.png",
-            "sha256": "8b7f765b413b3e649500d1862371157a7ba828f0fd3543a084b65a6515871e81",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              61.686855966917754,
-              60.32420257226079,
-              58.14013677451346
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:02:23.247698+00:00"
-          },
-          {
-            "name": "npc-study-scripture",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/npc-study-scripture.png",
-            "sha256": "52403beef7241da1ad5fa6308410501506dec77d0fc2baba59e259ff6433315f",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              81.94722285209184,
-              80.15293395525586,
-              77.74091110742835
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:04:07.905336+00:00"
-          },
-          {
-            "name": "gate-reading",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/gate-reading.png",
-            "sha256": "4060cc882d4a2f1d15bf6be60b4ed0360c84038b49d3ead967bc674c8955bb27",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              88.30084584342195,
-              85.78094801564619,
-              82.60041246491289
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:06:55.758490+00:00"
-          },
-          {
-            "name": "saved-temple",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/saved-temple.png",
-            "sha256": "09bb12ecb88cb3fd300710fff9a3eaebd09cb0df8b18976a7a16d72705bc2d1b",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              62.74006794533824,
-              53.74499500753355,
-              45.29800327534799
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:10:28.217076+00:00"
-          },
-          {
-            "name": "continued-temple",
-            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/continued-temple.png",
-            "sha256": "d7efeb24992595c3bb121d99ffafe5e3a71dda89ab5ccbd9811da98606e94ed4",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              62.84541916971105,
-              53.996819219450934,
-              45.501619900968116
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:14:56.856766+00:00"
-          }
-        ],
-        "audioWindows": 5,
-        "file": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/report.json",
-        "sha256": "1c4e1e6f2285c84c353bdab6588f19e2740db292dff003c8880f25ec3cffeaa1",
-        "rawStatus": "passed",
-        "capturePlan": {
-          "file": "Tools/Validation/arcana-smoke-plans.json",
-          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
+        "checks": 65,
+        "reviewedOriginals": 18,
+        "pcmWindows": 5,
+        "file": "Artifacts/Validation/Restoration/Desktop720/PathOfDawn/report.json",
+        "bytes": 158990,
+        "sha256": "a92bfab0f181f643045bf0060c11b30763bbea8051d5b5a2d6c555675ef6b4c3",
+        "rawStatus": "failed",
+        "ordinarySessions": 2,
+        "qualification": {
+          "file": "Artifacts/Validation/Restoration/Desktop720/PathOfDawn/followup-verification.json",
+          "bytes": 87349,
+          "sha256": "a7bcb8d28f1cc249f6bb89244ad58958178bffd4551309a2ae81fd03cfbcb56f"
         },
-        "captureHarness": {
-          "file": "Tools/Validation/revival-smoke.py",
-          "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
-        }
+        "suffixReport": {
+          "file": "Artifacts/Validation/Restoration/Desktop720Followup/PathOfDawn/report.json",
+          "sha256": "7527dfd7768dd41cec4647c69581f154dbc179e09a093f5d144777498ed72a36"
+        },
+        "scope": "Two separate ordinary-start desktop browser sessions on identical current Gospel runtime bytes. The exact prefix remains raw FAILED solely for Keyboard.down Unknown key shift in the unapproved running-frame reviewer adjustment; all 35 earlier executed checks remain true and only its ten actually approved gates are retained. The independently PASSED fresh follow-up supplies all seven unreached original gates plus its own temple-start original, after normal Start New, three birth pages and actual lamp equip; it includes actual save/full reload/continue and advancing isolated after-continue PCM. Every approval is an existing original decision, never created or copied by this verifier. The original running frame is not retroactively approved. This is NOT one uninterrupted run, not a rewritten automatic all-pass and not proof of physical-device performance or human speaker listening. No game-state, save-payload, camera or runtime injection is used; raw reports/images/inputs/PCM remain unchanged."
       }
     },
     "Mobile844": {
-      "FantasyCards": {
-        "checks": 80,
-        "rawChecks": 81,
-        "approvedOriginals": 17,
-        "screenshots": [
-          {
-            "name": "title",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/title.png",
-            "sha256": "19da050e7a429bcecf433cc5cd0b7b601c2b6a5b7988fcd6b3a7901963911906",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              80.5401223045047,
-              70.95165892605671,
-              64.06998454047152
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:46:46.356395+00:00"
-          },
-          {
-            "name": "profile",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/profile.png",
-            "sha256": "0074ba297b058055a333bb6ba0df93585e20b104ccfa759b549a4c7e6f6ac031",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              68.85744029982378,
-              61.58418997789619,
-              56.25216290441895
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:48:39.868739+00:00"
-          },
-          {
-            "name": "continued-profile",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/continued-profile.png",
-            "sha256": "82f91a54402fafe41abc0ff12467a1f8e7a6eceaf6d669f660c87d349b2558f8",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              68.85740005148459,
-              61.58412083224342,
-              56.25207369524421
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:50:25.879530+00:00"
-          },
-          {
-            "name": "lobby",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/lobby.png",
-            "sha256": "c9d59a0dfcf42912c8350a059e05b2cb3f454784d74220a7ec201d8c7d770870",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              65.59229641529478,
-              59.03219470063649,
-              51.29673296013857
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:52:07.099193+00:00"
-          },
-          {
-            "name": "seven-mono-decks",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/seven-mono-decks.png",
-            "sha256": "830978d55e4299466bde5d21c77819dd536406fc2d16988ee9c630e237bd9e15",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              58.714390548006946,
-              51.046605939877914,
-              41.77281499005691
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:52:47.874418+00:00"
-          },
-          {
-            "name": "mono-decks-last-page",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/mono-decks-last-page.png",
-            "sha256": "ffa3a28f5589c9d355672dfdf8e904596c499c0f9be478d32713efdb0c39d98b",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              54.89538293203853,
-              47.47895146724603,
-              38.894751872596736
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:53:20.091765+00:00"
-          },
-          {
-            "name": "dual-decks",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/dual-decks.png",
-            "sha256": "2cb1be0493d20c79e5692af052406ac2f7d29d89a4854a7115c82244463d897d",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              60.975906080281575,
-              52.24074221112676,
-              42.55897029086
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:53:49.814642+00:00"
-          },
-          {
-            "name": "eighteen-decks-last-page",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/eighteen-decks-last-page.png",
-            "sha256": "b946f7199166fe135ef17f82e07cb077935768ab66bd4e39c750544beb262357",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              55.20371219752531,
-              46.7510174714799,
-              38.78554440344387
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:54:26.014340+00:00"
-          },
-          {
-            "name": "portrait-card-gallery",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/portrait-card-gallery.png",
-            "sha256": "79336447ad2224e5830b1436a5e95bc236436b05f356419d4a6d64376ead496d",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              52.46680353645635,
-              43.26359451048105,
-              40.68723881968043
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:54:57.716296+00:00"
-          },
-          {
-            "name": "new-legend-card",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/new-legend-card.png",
-            "sha256": "752cbf8e0a55ae734163ee7ff9f6e985ecaa1a62938bfa9476cb67d566bfbd9f",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              66.74708942487533,
-              55.43442655454336,
-              56.19319345338048
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:55:48.989747+00:00"
-          },
-          {
-            "name": "original-printed-card",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/original-printed-card.png",
-            "sha256": "2eff4ae4e74e58ad07e9d528d6cef6a1746be7cee659e268b1a8fe30c2699269",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              55.551662465863394,
-              41.33294640094594,
-              41.85597632402229
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:56:19.162872+00:00"
-          },
-          {
-            "name": "opening-portrait-hand",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/opening-portrait-hand.png",
-            "sha256": "b60334d34b86832d5047ffdfa04883ab690d0b16d2f2df1018d93bab5e502b80",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              71.75912044866814,
-              66.21019609605955,
-              55.34102934931579
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:56:54.401541+00:00"
-          },
-          {
-            "name": "backfield-terrain-adjusted-1",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/backfield-terrain-adjusted-1.png",
-            "sha256": "77664d32065aaea2d69ccae0b15ea9b092087bd78a2a8e410b0cdcd4f3fb7256",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              57.31090247649168,
-              53.093844009458905,
-              48.096818931923764
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T08:58:43.444073+00:00"
-          },
-          {
-            "name": "portrait-hand-and-field-adjusted-2",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/portrait-hand-and-field-adjusted-2.png",
-            "sha256": "f7c01be06783a39431622cf03b9a44be89883710e47153ee89d79a0b6e80f5c8",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              59.688526308728555,
-              54.91556242297268,
-              47.79433342783889
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T09:02:20.132839+00:00"
-          },
-          {
-            "name": "terrain-detail",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/terrain-detail.png",
-            "sha256": "4088f7c4987a20f7f0ea98d63b3d89166d9de263b98d55732cb511ab9a592619",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              79.54293386687057,
-              77.52563227101126,
-              74.069819072137
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T09:02:58.456784+00:00"
-          },
-          {
-            "name": "saved-battle",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/saved-battle.png",
-            "sha256": "156b1dbc0e5178b0827f0a48d5b50e6c354b6480684776649f85a7415365705b",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              59.27853532719234,
-              54.675075286491044,
-              47.740204977017264
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T09:03:35.595882+00:00"
-          },
-          {
-            "name": "continued-battle",
-            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/continued-battle.png",
-            "sha256": "bbaba5426870aa4025ea144729e764e292db5109303a2b9a09b1f76fc243baf2",
-            "size": [
-              616,
-              346
-            ],
-            "channelStddev": [
-              59.42330124251137,
-              54.759689585522224,
-              47.75918647578356
-            ],
-            "canvas": {
-              "x": 114.4375,
-              "y": 0,
-              "width": 615.109375,
-              "height": 346
-            },
-            "navigation": 2,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T09:04:42.837668+00:00"
-          }
-        ],
-        "audioWindows": 10,
-        "file": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/report.json",
-        "sha256": "76bccabe998063f6ea66a10cf49322da87b0f4a1e5dac8a2829ea0ff4d7a9e38",
-        "rawStatus": "failed",
-        "capturePlan": {
-          "file": "Tools/Validation/arcana-smoke-plans.json",
-          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
-        },
-        "captureHarness": {
-          "file": "Artifacts/Validation/Arcana/HarnessHistory/before-gospel-cdp/revival-smoke.py",
-          "sha256": "ee1c563028a532d93eafa3eb04195afabb5653c97bd04e97a0271aba59bd7ddf"
-        },
-        "qualifiedNetworkProof": {
-          "file": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/media-adjudication.json",
-          "sha256": "e4212979ee3460fc8baf3c95b96e2091766458c7b08ff47c3c56ac9b34269ca1"
-        },
-        "qualifiedReport": {
-          "rawStatus": "failed",
-          "rawChecks": 81,
-          "passedChecks": 80,
-          "reviewedOriginals": 17,
-          "recordedPcmWindows": 10,
-          "adjudicatedMediaCancellations": 3,
-          "alreadyClassifiedCacheRequests": 2
-        },
-        "qualificationScope": "The automatic network gate remains FAILED (80 of81 raw checks passed). Only three exact inactive/pre-unlock media cancellations at the recorded navigation boundary are interpreted. Exact current files fully decode; the same recovered lobby/battle sources later advance and produce isolated audible PCM in navigation1. Request events lack initiating-document IDs, so the failed GETs are not assigned to the old or new document. No uninterrupted samples, loop-boundary continuity, physical listening or zero reload gap is claimed. No raw status, original, input, PCM, runtime source or harness was changed.",
-        "musicRoles": {
-          "returnStartsAtZero": {
-            "navigation": 1,
-            "promoted": [
-              {
-                "event": "promoted",
-                "scene": "lobby",
-                "serial": 1,
-                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
-                "position": 0,
-                "startPosition": 0,
-                "restartCount": 1,
-                "atMs": 114666.80000001192
-              },
-              {
-                "event": "promoted",
-                "scene": "deck",
-                "serial": 2,
-                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
-                "position": 0,
-                "startPosition": 0,
-                "restartCount": 1,
-                "atMs": 151561.80000001192
-              },
-              {
-                "event": "promoted",
-                "scene": "lobby",
-                "serial": 3,
-                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
-                "position": 0,
-                "startPosition": 0,
-                "restartCount": 2,
-                "atMs": 281435.90000000596
-              }
-            ]
-          },
-          "sameRoleRetainsStart": {
-            "navigation": 1,
-            "scene": "deck",
-            "beforeObservedMs": 154521.20000001788,
-            "afterObservedMs": 186114.70000001788,
-            "sameRoleMessagesBefore": 2,
-            "sameRoleMessagesAfter": 3,
-            "restartCount": 1,
-            "lastStartAtMs": 150866
-          },
-          "scope": "Actual controller role/time ledger plus separately verified PCM, not physical speaker listening."
-        }
-      },
-      "PathOfDawn": {
-        "checks": 45,
-        "rawChecks": 45,
-        "approvedOriginals": 12,
-        "screenshots": [
-          {
-            "name": "title",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/title.png",
-            "sha256": "d7cacb32b72e74d6a61b704d75a8aa0fe3eb2508bc782cc225f103720bfb8a40",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              77.31916596053473,
-              76.10770245342331,
-              69.73421201870052
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:16:41.338618+00:00"
-          },
-          {
-            "name": "temple-idle",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/temple-idle.png",
-            "sha256": "3265b4cee23b551a9c84249af4b0e07e6f7c60082ce5f55e151bcd096fbff360",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              60.846227205013456,
-              53.59419714500143,
-              45.743733938891324
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:19:35.745970+00:00"
-          },
-          {
-            "name": "hero-rear-close",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-rear-close.png",
-            "sha256": "4ba9b96003e728be1692295b84a3c7eff0fa194643871eeaf7b5fc74073952c4",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              62.649062377951026,
-              55.839537980097326,
-              48.161358940034965
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:21:18.480094+00:00"
-          },
-          {
-            "name": "hero-front-close",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-front-close.png",
-            "sha256": "b6668ac7f7c8a15c642506935561fc4fe26791bef7f050fd7e8a736edd91f501",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              67.6543958847728,
-              65.22391304296872,
-              62.277034370611325
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:22:56.689871+00:00"
-          },
-          {
-            "name": "status",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/status.png",
-            "sha256": "635e25035556b602b05433a2f55cdbc1b6070b7ddc1dd0f3c5c925066939a9f6",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              64.68576755764849,
-              61.62779671889713,
-              56.612961752883706
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:25:03.080237+00:00"
-          },
-          {
-            "name": "hero-walk-compositor-0-038",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-walk-compositor-0-038.png",
-            "sha256": "1b139930e64a4d206c72e179d9afbc367ce59bee5a0d46de5eac793a6d48f328",
-            "size": [
-              844,
-              390
-            ],
-            "channelStddev": [
-              81.17338705445331,
-              70.26466156718988,
-              56.8135769308687
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-full-viewport-compositor-screencast-png",
-            "metadata": {
-              "offsetTop": 0,
-              "pageScaleFactor": 1,
-              "deviceWidth": 844,
-              "deviceHeight": 390,
-              "scrollOffsetX": 0,
-              "scrollOffsetY": 0,
-              "timestamp": 1793096777.252593
-            },
-            "receivedUtc": "2026-10-27T10:26:17.295476+00:00"
-          },
-          {
-            "name": "hero-run-compositor-1-038",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-run-compositor-1-038.png",
-            "sha256": "402da6b380531bc0f21a030d02b0dae0fa30e74c146fd7254605fa289304592c",
-            "size": [
-              844,
-              390
-            ],
-            "channelStddev": [
-              81.62440821552272,
-              70.49307711385661,
-              56.85126917554437
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-full-viewport-compositor-screencast-png",
-            "metadata": {
-              "offsetTop": 0,
-              "pageScaleFactor": 1,
-              "deviceWidth": 844,
-              "deviceHeight": 390,
-              "scrollOffsetX": 0,
-              "scrollOffsetY": 0,
-              "timestamp": 1793096924.805514
-            },
-            "receivedUtc": "2026-10-27T10:28:44.830230+00:00"
-          },
-          {
-            "name": "npc-topics",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/npc-topics.png",
-            "sha256": "26ee127204d7573b87cbb604a340fc619b151f3c6e79772f6a2148a4e5850cda",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              60.087454278812416,
-              58.99638187960403,
-              57.13137210760699
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:32:57.118184+00:00"
-          },
-          {
-            "name": "npc-study-scripture",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/npc-study-scripture.png",
-            "sha256": "fcf1afac770c8ad150db3466e97ec0dcfa0182c775e8138dd843acc5d81ea1a8",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              79.56555595834261,
-              78.00959619297929,
-              75.74589575434878
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:34:47.899973+00:00"
-          },
-          {
-            "name": "gate-reading",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/gate-reading.png",
-            "sha256": "1b9a4315d0908d4aeff2f2b53852ba8c9db7294a1f4aef2ea7283ac8ae5b3e4c",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              86.29029659574375,
-              83.99237282559295,
-              81.02483559115828
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:35:53.112012+00:00"
-          },
-          {
-            "name": "saved-temple",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/saved-temple.png",
-            "sha256": "cc1e0aacbecc78859f7dfc9ac12661657a947185aef33e1df0c184332dabea92",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              62.03488583835927,
-              54.01927210525922,
-              46.05942118577632
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:38:27.554185+00:00"
-          },
-          {
-            "name": "continued-temple",
-            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/continued-temple.png",
-            "sha256": "7df34ff6b4b905b15e9a0b096a6d4a76a9729da8df097a3959eb2e0522c9ca52",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              62.052710815590586,
-              54.158485332148196,
-              46.13378509532924
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 1,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-10-27T10:40:42.138241+00:00"
-          }
-        ],
-        "audioWindows": 5,
-        "file": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/report.json",
-        "sha256": "8dcfdd736526ea712bfeb9dc1414e702c4c432a6cd6906dd071c769737e8fd15",
-        "rawStatus": "passed",
-        "capturePlan": {
-          "file": "Tools/Validation/arcana-smoke-plans.json",
-          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
-        },
-        "captureHarness": {
-          "file": "Tools/Validation/revival-smoke.py",
-          "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
-        }
-      }
+      "status": "in-progress",
+      "currentReport": "Artifacts/Validation/Restoration/Mobile844/FantasyCards/report.json"
     }
   },
   "publication": {
-    "status": "verified",
+    "status": "not-verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40490869217",
-    "sourceCommit": "aea33845c209c15deeac22474c6626b3efcb8486",
-    "verifiedFiles": 41,
-    "scope": "Every public file is byte-exact to locally tested runtime; public title/game launch sanity, not duplicated full gameplay.",
-    "file": "Artifacts/Validation/Arcana/PublicPortal/report.json",
-    "sha256": "76aa8936c5c6c8fbc91ed282990807196ccb099bfd14df1b95d4ed7237d4d9f6"
+    "scope": "This current release has not yet been published. Existing public URL remains the previous release until mobile and public checks complete."
   },
-  "publicWeb": {
-    "FantasyCards": {
-      "checks": 33,
-      "rawChecks": 34,
-      "approvedOriginals": 2,
-      "screenshots": [
-        {
-          "name": "title",
-          "path": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/title.png",
-          "sha256": "19da050e7a429bcecf433cc5cd0b7b601c2b6a5b7988fcd6b3a7901963911906",
-          "size": [
-            616,
-            346
-          ],
-          "channelStddev": [
-            80.5401223045047,
-            70.95165892605671,
-            64.06998454047152
-          ],
-          "canvas": {
-            "x": 114.4375,
-            "y": 0,
-            "width": 615.109375,
-            "height": 346
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T10:48:57.626316+00:00"
-        },
-        {
-          "name": "lobby",
-          "path": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/lobby.png",
-          "sha256": "fb8f1773528fa21d76f4f59914b65c027e15a8e68c78359cca504be70a46eebb",
-          "size": [
-            616,
-            346
-          ],
-          "channelStddev": [
-            67.22993850721994,
-            63.26044524884312,
-            54.99407609288326
-          ],
-          "canvas": {
-            "x": 114.4375,
-            "y": 0,
-            "width": 615.109375,
-            "height": 346
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T10:49:40.996941+00:00"
-        }
-      ],
-      "audioWindows": 2,
-      "file": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/report.json",
-      "sha256": "72a94115cc5d8a917d067c806a22f3590c35ca1287309c01d9700e996f913bd9",
-      "rawStatus": "failed",
-      "capturePlan": {
-        "file": "Tools/Validation/arcana-public-plans.json",
-        "sha256": "1905afd12581184bf26fd50313fbd1ec1be8faff28bf1426d0b884f0d0dfd4c2"
-      },
-      "captureHarness": {
-        "file": "Tools/Validation/revival-smoke.py",
-        "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
-      },
-      "qualifiedNetworkProof": {
-        "file": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/public-media-adjudication.json",
-        "sha256": "24c6e3f696a617b8bf90a3781776b79c09cd4a8084e1c44142c2aa76138c2835"
-      },
-      "qualifiedReport": {
-        "rawStatus": "failed",
-        "rawChecks": 34,
-        "passedChecks": 33,
-        "reviewedOriginals": 2,
-        "recordedPcmWindows": 2,
-        "exactMediaCancellations": 5,
-        "newlyQualifiedMediaCancellations": 4,
-        "alreadyClassifiedInactivePreloads": 1
-      },
-      "qualificationScope": "The automatic public network gate remains FAILED (33 of34 raw checks passed). This proof is restricted to five exact same-origin OGG GET cancellations in the first600ms of navigation0, four unclassified and one already-classified inactive preload. Three precede the first passive observation, so their pre-cancellation state and pre-gesture timing are not claimed; subsequent browser decode is recorded. Selected title samples advance across a later cancellation; uninterrupted sample playback is not measured. Later title/lobby isolated audible PCM and full HTTPS/current-file bytes plus full4-OGG decode are verified. Battle remains an unused browser-decoded preload, with no public battle audibility claim. No loop/reload continuity, zero gap, physical listening, new visual approval or blanket network exemption is claimed. Raw report, source, input, originals, PCM and harness are unchanged."
-    },
-    "PathOfDawn": {
-      "checks": 19,
-      "rawChecks": 19,
-      "approvedOriginals": 2,
-      "screenshots": [
-        {
-          "name": "title",
-          "path": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/title.png",
-          "sha256": "95636e892ff838002bc5f35a0fd11fb21064d3bda4b50df35062cd7b18729fc9",
-          "size": [
-            693,
-            390
-          ],
-          "channelStddev": [
-            77.31929012497525,
-            76.10776954736976,
-            69.73418627411705
-          ],
-          "canvas": {
-            "x": 75.328125,
-            "y": 0,
-            "width": 693.328125,
-            "height": 390
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas-cdp",
-          "capturedUtc": "2026-10-27T10:52:19.223481+00:00"
-        },
-        {
-          "name": "temple-idle",
-          "path": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/temple-idle.png",
-          "sha256": "bfbd672b5ecea1b6899c5b04586136bde84f20466d1f9836e56450cfdc7aa36f",
-          "size": [
-            693,
-            390
-          ],
-          "channelStddev": [
-            60.84685857757323,
-            53.59492331589401,
-            45.74405797347189
-          ],
-          "canvas": {
-            "x": 75.328125,
-            "y": 0,
-            "width": 693.328125,
-            "height": 390
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas-cdp",
-          "capturedUtc": "2026-10-27T10:53:37.726961+00:00"
-        }
-      ],
-      "audioWindows": 1,
-      "file": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/report.json",
-      "sha256": "e4633b02894c0602fb97977393c9a66c576b1986eb71a246e4546bf3661551d9",
-      "rawStatus": "passed",
-      "capturePlan": {
-        "file": "Tools/Validation/arcana-public-plans.json",
-        "sha256": "1905afd12581184bf26fd50313fbd1ec1be8faff28bf1426d0b884f0d0dfd4c2"
-      },
-      "captureHarness": {
-        "file": "Tools/Validation/revival-smoke.py",
-        "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
-      }
-    }
-  }
+  "limits": [
+    "Gospel desktop is two qualified ordinary sessions, rawprefixFAILED/rawsuffixPASSED; not one uninterrupted run.",
+    "Software browser/mobile input emulation, not physical Windows/mobile performance, human speaker listening or user aesthetic approval."
+  ]
 }

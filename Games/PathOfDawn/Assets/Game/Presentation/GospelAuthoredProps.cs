@@ -17,6 +17,7 @@ namespace PathOfDawn.Presentation
     public sealed class GospelAuthoredProps : MonoBehaviour
     {
         const string ResourceRoot = "Art/GospelAuthoredProps/";
+        const string WellResourceRoot = "Art/GospelWell/";
         readonly Dictionary<string, Material> materials = new Dictionary<string, Material>();
         readonly List<Mesh> ownedMeshes = new List<Mesh>();
         bool initialized;
@@ -36,7 +37,40 @@ namespace PathOfDawn.Presentation
             water.SetColor("_BaseColor", new Color(.16f, .33f, .35f));
             water.SetFloat("_Smoothness", .70f); water.SetFloat("_Metallic", .05f);
             materials.Add(water.name, water);
+            AddWellMaterial(shader, "Well_Limestone", new Color(.94f,.91f,.82f), .09f,
+                "Art/Gospel3D/TempleMaterials/limestone-albedo", "Art/Gospel3D/TempleMaterials/limestone-normal", .32f);
+            AddWellMaterial(shader, "Well_ShadedStone", new Color(.34f,.31f,.25f), .03f);
+            AddWellMaterial(shader, "Well_Cedar", Color.white, .10f,
+                WellResourceRoot + "cedar-albedo", WellResourceRoot + "cedar-normal", .40f);
+            AddWellMaterial(shader, "Well_Rope", new Color(.45f,.31f,.16f), .02f);
+            AddWellMaterial(shader, "Well_Iron", new Color(.105f,.115f,.11f), .25f, null, null, 0, .55f);
+            AddWellMaterial(shader, "Well_Water", new Color(.025f,.095f,.105f), .82f);
+            AddWellMaterial(shader, "Well_Clay", new Color(.48f,.24f,.11f), .08f);
             initialized = true;
+        }
+
+        void AddWellMaterial(Shader shader, string name, Color color, float smoothness,
+            string albedo = null, string normal = null, float normalScale = 0, float metallic = 0)
+        {
+            var prepared = Resources.Load<Material>(WellResourceRoot + "Materials/" + name);
+            var material = prepared != null ? new Material(prepared) : new Material(shader);
+            material.name = name;
+            material.SetColor("_BaseColor", color); material.SetFloat("_Smoothness", smoothness);
+            material.SetFloat("_Metallic", metallic); material.SetFloat("_Cull", (float)CullMode.Back);
+            if (albedo != null)
+            {
+                var map = Resources.Load<Texture2D>(albedo);
+                if (map == null) throw new InvalidOperationException("Missing well albedo: " + albedo);
+                material.SetTexture("_BaseMap", map);
+            }
+            if (normal != null)
+            {
+                var map = Resources.Load<Texture2D>(normal);
+                if (map == null) throw new InvalidOperationException("Missing well normal: " + normal);
+                material.SetTexture("_BumpMap", map); material.SetFloat("_BumpScale", normalScale);
+                material.EnableKeyword("_NORMALMAP");
+            }
+            materials.Add(name, material);
         }
 
         void AddMaterial(Shader shader, string name, string albedo, string normal, float smoothness,
@@ -116,6 +150,43 @@ namespace PathOfDawn.Presentation
             return root;
         }
 
+        /// <summary>A hollow masonry draw well with a real winch, lowering rope and bucket.</summary>
+        public GameObject AddWell(Transform parent, Vector3 position, float yaw = 0)
+        {
+            Initialize();
+            var root = Root(parent, "Authored limestone draw well", "well", position, 0);
+            // Keep the authored XZ origin: the projecting crank deliberately
+            // makes the visual bounds asymmetric, while masonry stays centred.
+            Model(root.transform, "StoneWell", 3.055f, false, WellResourceRoot, true);
+            for (int i = 0; i < 16; i++)
+            {
+                float angle = i * Mathf.PI * 2 / 16;
+                var block = new GameObject("Well curb collision");
+                block.transform.SetParent(root.transform, false);
+                block.transform.localPosition = new Vector3(Mathf.Sin(angle) * .96f, .44f, Mathf.Cos(angle) * .96f);
+                block.transform.localRotation = Quaternion.Euler(0, angle * Mathf.Rad2Deg, 0);
+                var collider = block.AddComponent<BoxCollider>();
+                collider.size = new Vector3(.45f, .91f, .47f);
+            }
+            foreach (float side in new[] { -1f, 1f })
+            {
+                var post = new GameObject("Well timber collision"); post.transform.SetParent(root.transform, false);
+                post.transform.localPosition = new Vector3(side * .98f, 1.48f, 0);
+                var collider = post.AddComponent<BoxCollider>(); collider.size = new Vector3(.21f, 2.95f, .24f);
+            }
+            root.transform.localRotation = Quaternion.Euler(0, yaw, 0);
+            return root;
+        }
+
+        /// <summary>Non-colliding, correctly oriented lamp; the inventory owns its light and state.</summary>
+        public GameObject AddTravelLamp(Transform parent, Vector3 localPosition)
+        {
+            Initialize();
+            var root = Root(parent, "Authored travelling clay oil lamp", "travel-lamp", localPosition, 0);
+            Model(root.transform, "TravelLamp", .049f, false, WellResourceRoot);
+            return root;
+        }
+
         public GameObject AddCeramicVessel(Transform parent, Vector3 position, float height, float yaw = 0)
             => Vessel(parent, position, height, yaw, "CeramicVessel", "Authored handled ceramic vessel", "ceramic");
 
@@ -149,9 +220,10 @@ namespace PathOfDawn.Presentation
             return root;
         }
 
-        GameObject Model(Transform parent, string asset, float target, bool fitDiameter)
+        GameObject Model(Transform parent, string asset, float target, bool fitDiameter,
+            string resourceRoot = ResourceRoot, bool preserveHorizontalOrigin = false)
         {
-            var prefab = Resources.Load<GameObject>(ResourceRoot + asset);
+            var prefab = Resources.Load<GameObject>(resourceRoot + asset);
             if (prefab == null) throw new InvalidOperationException("Missing authored prop model " + asset);
             var model = Instantiate(prefab, parent, false);
             model.name = asset; model.transform.localPosition = Vector3.zero;
@@ -177,7 +249,8 @@ namespace PathOfDawn.Presentation
             if (size <= .00001f) throw new InvalidOperationException("Invalid authored prop bounds: " + asset);
             float scale = target / size;
             model.transform.localScale = importedScale * scale;
-            model.transform.localPosition = new Vector3(-bounds.center.x, -bounds.min.y, -bounds.center.z) * scale;
+            model.transform.localPosition = new Vector3(preserveHorizontalOrigin ? 0 : -bounds.center.x,
+                -bounds.min.y, preserveHorizontalOrigin ? 0 : -bounds.center.z) * scale;
             return model;
         }
 

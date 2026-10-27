@@ -1,0 +1,39 @@
+{
+  "revision": "gospel-toon-2026-10-27",
+  "reason": "Root actual Native review: shaded ivory front too gray against bright courtyard. One approved material/shader shadow lift only.",
+  "clothHairShadeColor": [
+    0.8,
+    0.78,
+    0.85,
+    1
+  ],
+  "castShadowMinimumBefore": 0.78,
+  "castShadowMinimumAfter": 0.88,
+  "modifiedMaterialNames": [
+    "Gospel_BlueMantle",
+    "Gospel_HairCap",
+    "Gospel_Linen",
+    "Gospel_RedMantle",
+    "Gospel_ToonHair",
+    "Gospel_ToonHairGray",
+    "Gospel_ToonHairLight",
+    "Gospel_Veil"
+  ],
+  "skinMaterialSpecsUnchanged": true,
+  "geometryChanged": false,
+  "fbxRegenerated": false,
+  "files": {
+    "generator": {
+      "path": "Tools/Art/GospelToon/build-toon-actors.py",
+      "sha256": "56d90b94da098a801b3b45b5c4d8e60d80282cc0f31293477707932229451197"
+    },
+    "shader": {
+      "path": "Games/PathOfDawn/Assets/Game/Presentation/GospelToonCharacter.shader",
+      "sha256": "4561616b130a77a9210f0e48f1a27848a774bf2b149a3c186e9b7654c7004220"
+    },
+    "materialSpec": {
+      "path": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/material-spec.json",
+      "sha256": "5cb4f59ec7dba824d29f278173ed2b0d00d7ce91b7490694903221f65af2233d"
+    }
+  }
+}

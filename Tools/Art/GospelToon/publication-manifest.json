@@ -1,0 +1,89 @@
+{
+  "revision": "gospel-toon-2026-10-27",
+  "status": "final-assets-copied-and-fbx-verified",
+  "actors": [
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx",
+      "sha256": "6233337a950fa385ad31503ad6d8d9d18cad13e78f0dc63d4e80ec8353bf7d0f",
+      "bytes": 7765548,
+      "metaSha256Unchanged": "56db98eaeb436942ef197c49965e46623ba5ebd78704b313edc1a32c673c35ec"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/AdultJesus.fbx",
+      "sha256": "cdedbbb77a6209712f20d62d659b5907dc6f0342d2a1fb9148967f6376e060c7",
+      "bytes": 8203036,
+      "metaSha256Unchanged": "08f3ff1cf33181f4f48b896d4d9c680c6b821e386375bdbb76cc3ca0cb3877a4"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/Mary.fbx",
+      "sha256": "85e233312185bee23dad19b7eb91d4f0901344212794e473e47bfadc69543e40",
+      "bytes": 8044076,
+      "metaSha256Unchanged": "debc0c3855aaf2f0c1e3b58d9fe1680e52a4c6b66a44dfeeb944857cdf235ae5"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleTeacher.fbx",
+      "sha256": "cdb360286b91c930332830178dc0cf963654378565ea714edff8ec138e574246",
+      "bytes": 8206060,
+      "metaSha256Unchanged": "b98a9942e1754328f194b42bf9e805eb18d606b6f675b8c8d7236044c38fe1f4"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/Joseph.fbx",
+      "sha256": "a27e0ec7a513c51abd8a6c6e4fc664e84b4b3bd249fd2ab483faa2f113a17f69",
+      "bytes": 8204524,
+      "metaSha256Unchanged": "bded1fd4c08ce70112d4d47b2aa7fef836b708e2884d1112af0cb7d7d5a2935c"
+    }
+  ],
+  "sourcePipeline": "Tools/Art/GospelToon/build-toon-actors.py",
+  "sourceBlend": "Tools/Art/GospelAuthored/GospelActorsAuthored.blend",
+  "artReview": "Root internal prototype direction approved eighth candidate, not user approval or AAA equivalence. Native/Web pending release owner.",
+  "verification": "Tools/Art/GospelToon/export-verification.json",
+  "poseSamples": 105,
+  "nativeWebStatus": "pending-release-owner",
+  "previews": [
+    {
+      "path": "Tools/Art/GospelToon/Previews/AdultJesus-face.png",
+      "sha256": "3f8c8aff76a2ee304a5dc2bac464d83c4e5995409d60dfb1c1174277a998684d",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "cdedbbb77a6209712f20d62d659b5907dc6f0342d2a1fb9148967f6376e060c7",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    },
+    {
+      "path": "Tools/Art/GospelToon/Previews/Joseph-face.png",
+      "sha256": "c61c88c09419083bc10097059c9f5433c0b89e0b9e214b850c590a9a58a613ed",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "a27e0ec7a513c51abd8a6c6e4fc664e84b4b3bd249fd2ab483faa2f113a17f69",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    },
+    {
+      "path": "Tools/Art/GospelToon/Previews/Mary-face.png",
+      "sha256": "848776bf859c75aaadacf321a82dfe7fa7ef926bbae1f1871c1e7e601ff6e5e2",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "85e233312185bee23dad19b7eb91d4f0901344212794e473e47bfadc69543e40",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    },
+    {
+      "path": "Tools/Art/GospelToon/Previews/TempleTeacher-face.png",
+      "sha256": "1c04fabe4ea6ba646ad126d24ed75651077cc426ab8ad848fa711c2c8f14868c",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "cdb360286b91c930332830178dc0cf963654378565ea714edff8ec138e574246",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    },
+    {
+      "path": "Tools/Art/GospelToon/Previews/YoungJesus-face.png",
+      "sha256": "043fe808b2c980dac76d9c6ae853b703b1cbc6dd15312f07431b81725dd61650",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "6233337a950fa385ad31503ad6d8d9d18cad13e78f0dc63d4e80ec8353bf7d0f",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    },
+    {
+      "path": "Tools/Art/GospelToon/Previews/YoungJesus-front.png",
+      "sha256": "5836a447a82c32aee1c73872a5d9f765ad8564b59333657c3f742cfc4d065926",
+      "captureKind": "Blender authored scene preview, not Unity/Web",
+      "sourceFbxSha256": "6233337a950fa385ad31503ad6d8d9d18cad13e78f0dc63d4e80ec8353bf7d0f",
+      "materialStage": "Geometry-final Blender preview before final approved Native shadow lift; actual final lighting is validated in Native/Web separately."
+    }
+  ],
+  "finalMaterialAdjustment": "Tools/Art/GospelToon/final-shadow-lift.json",
+  "materialSpecSha256": "5cb4f59ec7dba824d29f278173ed2b0d00d7ce91b7490694903221f65af2233d",
+  "toonShaderSha256": "4561616b130a77a9210f0e48f1a27848a774bf2b149a3c186e9b7654c7004220"
+}

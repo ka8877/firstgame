@@ -9,7 +9,7 @@ namespace FantasyCards.Core
     public enum CardRarity { Free, Common, Uncommon, Rare, Special, Upgrade, Unique, Event, Legend, Icajen, Secret, Epic }
     // Rank is a separate original-card variant, not a rarity or a power tier.
     public enum CardRank { N, C, B, A, S }
-    public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin, Draw, Resource, Sweep, Health, Weaken, DefenseBreak, HealAll, RallyAll, ArmorAll, HealthAll, DrainAll, StatOperations }
+    public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin, Draw, Resource, Sweep, Health, Weaken, DefenseBreak, HealAll, RallyAll, ArmorAll, HealthAll, DrainAll, StatOperations, DimensionShockwave }
     public enum LeaderSkill { QuickShot, Rally, Restoration, Insight }
     public enum BattlePhase { Main, AttackDeclaration, BlockResponse, Complete, DefensePreparation }
     public enum CoinResolutionOrder { AttackerFirst, DefenderFirst }
@@ -141,6 +141,9 @@ namespace FantasyCards.Core
         public bool mulliganUsed, preparationComplete, playedThisPreparation;
         public int lastShuffleTurn;
         public int health, levelPoints, dawn, tide, fire, forest, metal, earth, darkness, genericSoul;
+        // Optional schema-3 field. Older saves deserialize to zero; consumed by
+        // exactly one subsequent soul-cost stage, never by UI or audio.
+        public int nextGenericSoulBonus;
         public int fatigue, terrainPlayed;
         public List<CardInstance> deck = new List<CardInstance>(), hand = new List<CardInstance>(), terrain = new List<CardInstance>(), discard = new List<CardInstance>();
         public List<UnitState> units = new List<UnitState>();

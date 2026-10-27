@@ -37,7 +37,7 @@ namespace FirstGame.Editor
         {
             if (!File.Exists(Journal)) return;
             var record = JsonUtility.FromJson<Record>(File.ReadAllText(Journal));
-            if (record == null || record.revision != "gospel-authored-2026-10-27" || record.moves == null || record.files == null)
+            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27") || record.moves == null || record.files == null)
                 throw new BuildFailedException("Invalid legacy resource recovery journal; retained for inspection.");
             Restore(record, "recovered-after-interruption");
             Debug.Log("FIRSTGAME_LEGACY_RESOURCES_RECOVERED " + record.moves.Length);
@@ -61,6 +61,10 @@ namespace FirstGame.Editor
         {
             RecoverInterrupted();
             var candidates = new List<string> { "Assets/Resources/Art/Painted", "Assets/Resources/Voice" };
+            // Default off. Only enable after a measured Web data file exceeds
+            // the hosting limit; the active temple uses YoungJesus, not this future actor.
+            if(target=="Web"&&Environment.GetEnvironmentVariable("FIRSTGAME_WEB_EXCLUDE_ADULT")=="1")
+                candidates.Add("Assets/Resources/Art/Gospel3D/AdultJesus.fbx");
             // Current Gospel code only loads Gospel3D/GospelRemaster. These root
             // images/material belong to the inactive observer and Galilee entry.
             candidates.AddRange(Directory.GetFiles("Assets/Resources/Art", "*", SearchOption.TopDirectoryOnly)
@@ -95,7 +99,7 @@ namespace FirstGame.Editor
             string root = Environment.GetEnvironmentVariable("FIRSTGAME_BUILD_ROOT");
             if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");
             var evidence = Path.Combine(root, "PathOfDawn", target, "LegacyResourceExclusions.json");
-            var record = new Record { revision = "gospel-authored-2026-10-27", target = target,
+            var record = new Record { revision = "gospel-toon-2026-10-27", target = target,
                 startedUtc = DateTime.UtcNow.ToString("o"), status = "journaled-before-mutation", evidencePath = evidence,
                 moves = moves, files = files.ToArray() };
             Directory.CreateDirectory("Library");
@@ -176,17 +180,17 @@ namespace FirstGame.Editor
         {
             RecoverInterrupted();
             ProjectSetup.Ensure();
-            using (Begin("ArcanaLifecycleNormal")) { }
+            using (Begin("RestorationLifecycleNormal")) { }
             try
             {
-                using (Begin("ArcanaLifecycleException"))
+                using (Begin("RestorationLifecycleException"))
                     throw new InvalidOperationException("Expected lifecycle verification exception");
             }
             catch (InvalidOperationException error)
             {
                 if (error.Message != "Expected lifecycle verification exception") throw;
             }
-            Begin("ArcanaLifecycleRecovery");
+            Begin("RestorationLifecycleRecovery");
             if (!File.Exists(Journal)) throw new BuildFailedException("Recovery exercise did not retain its journal.");
             RecoverInterrupted();
             if (File.Exists(Journal) || Directory.Exists(Holding))

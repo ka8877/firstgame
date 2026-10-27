@@ -9,11 +9,12 @@ import re
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / 'Games/PathOfDawn'
-REVISION = 'gospel-authored-2026-10-27'
+REVISION = 'gospel-toon-2026-10-27'
 
 
 def verify(path: Path, require_build: bool = True):
     path = path.resolve()
+    assert path.is_relative_to(ROOT/'Artifacts') or path.is_relative_to(Path('/tmp/firstgame-restoration-builds/PathOfDawn')), 'Unexpected restoration ledger location'
     value = json.loads(path.read_text())
     assert value['revision'] == REVISION and value['status'] in ({'restored'} if require_build else {'restored', 'recovered-after-interruption'}), 'Current restoration required'
     assert value.get('startedUtc') and value.get('restoredUtc') and value['startedUtc'] <= value['restoredUtc']
@@ -38,7 +39,7 @@ def verify(path: Path, require_build: bool = True):
     if require_build:
         text = (path.parent / 'BuildEvidence.txt').read_text()
         assert 'Revision: ' + REVISION in text and 'Result: Succeeded' in text and 'LegacyResourcesRestored: true' in text
-    return {'status': 'passed', 'revision': REVISION, 'ledger': str(path.relative_to(ROOT)),
+    return {'status': 'passed', 'revision': REVISION, 'ledger': str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
             'ledgerSha256': hashlib.sha256(path.read_bytes()).hexdigest(),
             'files': len(recorded), 'moves': len(value['moves']), 'sourceBytes': sum(row['bytes'] for row in value['files']),
             'scope': 'Actual restored source byte SHA256, asset GUIDs, absent holding/journal; no hardware claim.'}

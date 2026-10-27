@@ -18,6 +18,7 @@ namespace FantasyCards.SmokeTests
         {
             var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
             int wins = app.LocalProfileWins, losses = app.LocalProfileLosses, draws = app.LocalProfileDraws;
+            SmokeUi.Click("게임 시작"); yield return null;
             SmokeUi.Click("프로필"); yield return null;
             var input = UnityEngine.Object.FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None)
                 .Single(field => field.gameObject.activeInHierarchy && field.gameObject.name == "Profile nickname input");
@@ -29,13 +30,14 @@ namespace FantasyCards.SmokeTests
             choice.onClick.Invoke(); yield return null;
             Assert.That(app.LocalProfileAvatarId, Is.EqualTo(avatar));
             Assert.That(app.LocalProfileWins, Is.EqualTo(wins), "Changing a portrait cannot award a battle result.");
-            yield return SmokeUi.Capture("FantasyCards", "arcana-profile-local", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-profile-local", 1280, 720);
             yield return SmokeUi.LoadBoot();
             app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
             Assert.That(app.LocalProfileName, Is.EqualTo("리마스터 검증"));
             Assert.That(app.LocalProfileAvatarId, Is.EqualTo(avatar));
             Assert.That(app.LocalProfileLosses, Is.EqualTo(losses));
             Assert.That(app.LocalProfileDraws, Is.EqualTo(draws));
+            SmokeUi.Click("게임 시작"); yield return null;
             SmokeUi.Click("프로필"); yield return null;
             Assert.That(SmokeUi.HasText("리마스터 검증"), Is.True);
 

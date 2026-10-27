@@ -197,7 +197,8 @@ namespace FantasyCards.Presentation
                 int count = CardCatalog.All.Count(card => card.rarity == rarity);
                 Text(button.transform, "수록 " + count + "종", .28f, .07f, .97f, .49f, 21, count > 0 ? gold : new Color(.60f, .67f, .68f));
             }
-            Button(root, "돌아가기", .35f, .018f, .65f, .095f, back ?? (() => ShowCollection(edit)), gold, 25);
+            Button(root, "상위 등급 원본도감", .055f, .018f, .53f, .095f, ShowRestorationOriginalArchive, slate, 24);
+            Button(root, "돌아가기", .55f, .018f, .945f, .095f, back ?? (() => ShowCollection(edit)), gold, 25);
         }
 
         private void ShowFidelityDeckAnalysis(Action back)

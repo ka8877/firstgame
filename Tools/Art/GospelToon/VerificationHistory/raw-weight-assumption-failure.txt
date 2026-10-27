@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/firstgame/Tools/Art/GospelToon/verify-toon-actors.py", line 31, in <module>
+    assert all(sum(g.weight for g in v.groups)>.9 for v in ob.data.vertices),(actor,ob.name,'unweighted')
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('YoungJesus', 'SuperHero_Male', 'unweighted')
+
+Error: script failed, file: 'Tools/Art/GospelToon/verify-toon-actors.py', exiting.
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+FBX version: 7400
+Blender 4.3.2
+
+Blender quit

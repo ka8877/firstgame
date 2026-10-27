@@ -39,16 +39,16 @@ namespace FantasyCards.Presentation
             play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
             Button(root, "이어하기", .335f, .22f, .535f, .335f, Continue, new Color(.08f, .11f, .20f, .95f), 27, PersistentSaves.Exists(Slot));
             Button(root, "카드 도감", .065f, .070f, .225f, .160f, () => ShowCollection(false), slate, 24);
-            Button(root, "프로필", .245f, .070f, .405f, .160f, () => ShowLocalProfile(ShowTitle), slate, 24);
-            Button(root, "음악 설정", .425f, .070f, .585f, .160f, () => ShowMusicSettings(ShowTitle), slate, 24);
+            Button(root, "상위 등급 도감", .245f, .070f, .405f, .160f, ShowRestorationPremiumHub, slate, 24);
+            Button(root, "소리 설정", .425f, .070f, .585f, .160f, () => ShowSoundSettings(ShowTitle), slate, 24);
             DrawArcanaTitleFan();
             Text(root, "등급의 빛을 담은 카드, 소울로 이어지는 결투", .625f, .025f, .965f, .085f, 19, new Color(.88f, .85f, 1), TextAlignmentOptions.MidlineRight);
         }
 
         private void DrawArcanaTitleFan()
         {
-            string[] ids = { "fm_3121920887", "fm_3062720584", "fm_15120941678" };
-            var cards = ids.Select(id => CardCatalog.All.FirstOrDefault(card => card.id == id)).Where(card => card != null).ToList();
+            var cards = CardCatalog.All.Where(card => card.rarity == CardRarity.Unique || card.rarity == CardRarity.Legend || card.rarity == CardRarity.Secret)
+                .GroupBy(card => card.rarity).OrderBy(group => group.Key).Select(group => group.Last()).Take(3).ToList();
             for (int i = 0; i < cards.Count; i++)
             {
                 float x = .72f + i * .062f, bottom = i == 1 ? .100f : .080f;
@@ -58,63 +58,144 @@ namespace FantasyCards.Presentation
             }
         }
 
+        private int restorationLobbyMode;
+        private static readonly Color RestorationLeather = new Color(.095f, .067f, .052f, .98f);
+        private static readonly Color RestorationMetal = new Color(.69f, .62f, .46f);
+        private static readonly Color RestorationButtonColor = new Color(.18f, .135f, .095f);
+
+        private void RestorationTrim(RectTransform parent, bool orb = false)
+        {
+            var border = new GameObject(orb ? "Original lobby violet soul orb" : "Engraved restoration frame", typeof(RectTransform), typeof(FmRestorationFrame)).GetComponent<FmRestorationFrame>();
+            border.transform.SetParent(parent, false); Anchor((RectTransform)border.transform, 0, 0, 1, 1);
+            border.Orb = orb; border.color = RestorationMetal; border.raycastTarget = false;
+        }
+
+        private RectTransform RestorationPanel(Transform parent, float x0, float y0, float x1, float y1, Color tint, string name)
+        {
+            var panel = Panel(parent, x0, y0, x1, y1, tint); panel.gameObject.name = name;
+            panel.GetComponent<UiRoundedImage>().Radius = 4; RestorationTrim(panel); return panel;
+        }
+
+        private Button RestorationButton(Transform parent, string text, float x0, float y0, float x1, float y1, Action action, bool selected = false, bool enabled = true)
+        {
+            var button = Button(parent, text, x0, y0, x1, y1, action,
+                selected ? new Color(.36f, .25f, .13f) : RestorationButtonColor, 24, enabled);
+            button.GetComponent<UiRoundedImage>().Radius = 5;
+            Frame((RectTransform)button.transform, selected ? gold : RestorationMetal, selected ? 2.5f : 1);
+            return button;
+        }
+
+        private void RestorationBackdrop()
+        {
+            DetailPanorama(true);
+            Gradient(root, 0, 0, 1, 1, new Color(.025f, .020f, .015f, .96f), new Color(.065f, .047f, .036f, .96f), true);
+            RestorationPanel(root, .014f, .018f, .986f, .982f, Color.clear, "Classic lobby outer frame");
+        }
+
         private void ShowArcanaLobby()
         {
             battleScreen = false; redraw = ShowLobby; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("lobby");
-            DetailPanorama(true);
-            ArcanaDuo(.46f, .54f, .995f, .995f);
-            Gradient(root, .025f, .66f, .72f, .99f, new Color(.03f, .035f, .10f, .94f), Color.clear, true);
-            var tag = Text(root, "ARCANA OF SEVEN SOULS", .055f, .895f, .62f, .963f, 20, new Color(.78f, .72f, 1));
-            tag.characterSpacing = 3;
-            Text(root, "오늘의 결투를 준비하세요", .055f, .785f, .67f, .895f, 43, ivory);
-            int mono = DemoCatalog.StarterDecks.Count(deck => ArcanaDeckElements(deck).Length == 1);
-            Text(root, CardCatalog.All.Length + "종 카드  /  단일 속성 " + mono + "덱  /  듀얼 " + (DemoCatalog.StarterDecks.Length - mono) + "덱", .055f, .695f, .69f, .775f, 24, gold);
-            Button(root, "PLAY · 연습 대전", .055f, .595f, .215f, .682f, ShowLobby, gold, 24);
-            Button(root, "카드 도감", .225f, .595f, .385f, .682f, () => ShowCollection(false), slate, 24);
-            Button(root, "덱 편집", .395f, .595f, .555f, .682f, () => ShowCollection(true), slate, 24);
-            Button(root, "기본 덱", .565f, .595f, .725f, .682f, ShowDeckSelection, slate, 24);
-            var list = Panel(root, .055f, .225f, .725f, .575f, new Color(.035f, .055f, .12f, .95f));
-            Frame(list, new Color(.58f, .53f, .90f, .8f), 2.5f);
-            Text(list, "연습 대전실", .025f, .84f, .73f, .99f, 25, ivory);
-            Text(list, "SOLO / AI", .76f, .84f, .975f, .99f, 19, teal, TextAlignmentOptions.Center);
-            for (int i = 0; i < DemoCatalog.Encounters.Length; i++)
+            RestorationBackdrop();
+            Text(root, "FANTASY MASTERS", .055f, .918f, .74f, .975f, 34, new Color(.94f, .84f, .62f));
+            Text(root, "일곱 소울의 대기실", .055f, .865f, .44f, .92f, 27, ivory);
+            Text(root, "로컬 싱글 플레이", .46f, .865f, .745f, .92f, 23, new Color(.74f, .70f, .61f), TextAlignmentOptions.MidlineRight);
+            string[] tabs = { "ROOM · 연습", "SCENARIO · 시나리오", "MULTI · 멀티플레이" };
+            for (int i = 0; i < tabs.Length; i++)
             {
-                int encounterIndex = i; var encounter = DemoCatalog.GetEncounter(i);
-                float top = .82f - i * .258f, bottom = top - .235f;
-                var row = Button(list, "", .025f, bottom, .975f, top,
-                    () => { selectedEncounter = encounterIndex; ShowEncounterSelection(); }, new Color(.07f, .105f, .185f, .97f), 24);
-                row.gameObject.name = "Practice room " + i;
-                var featured = DemoCatalog.GetDeck(encounter.deckId).cards.Select(CardCatalog.Get).First(card => card.kind == CardKind.Unit);
-                ImageFrame(row.transform, OriginalCardTexture(featured), new Rect(.13f, .36f, .805f, .56f), .012f, .06f, .125f, .94f, new Vector2(.5f, .66f), true);
-                bool won = PlayerPrefs.GetInt("FC.demo.won." + i, 0) != 0;
-                Text(row.transform, encounter.name, .15f, .44f, .77f, .98f, 26, ivory);
-                Text(row.transform, won ? "완료한 연습전 · 다시 도전" : DeckShortName(encounter.deckId) + " · 50장 덱", .15f, .02f, .77f, .46f, 20, new Color(.74f, .80f, .93f));
-                Text(row.transform, won ? "승리" : "AI 대전", .80f, .04f, .98f, .96f, 22, won ? gold : teal, TextAlignmentOptions.Center);
+                int tab = i; float x = .048f + i * .236f;
+                RestorationButton(root, tabs[i], x, .773f, x + .225f, .849f,
+                    () => { restorationLobbyMode = tab; ShowLobby(); }, restorationLobbyMode == i);
             }
-            var shelf = Panel(root, .055f, .065f, .725f, .205f, new Color(.035f, .055f, .11f, .96f));
-            Button(shelf, "게임 방법", .025f, .16f, .315f, .84f, () => ShowRulesHelp(ShowLobby), slate, 23);
-            Button(shelf, "등급 / 랭크", .35f, .16f, .64f, .84f, () => ShowCardGradeGuide(false, ShowLobby), slate, 23);
-            Button(shelf, "편집 덱 분석", .675f, .16f, .975f, .84f, () => ShowDeckAnalysis(ShowLobby), slate, 23);
-            DrawArcanaProfileRail();
-            Button(root, "타이틀", .055f, .008f, .215f, .058f, ShowTitle, slate, 20);
-            Button(root, "이어하기", .225f, .008f, .385f, .058f, Continue, slate, 20, PersistentSaves.Exists(Slot));
-            Button(root, "저장 옮기기", .395f, .008f, .555f, .058f, ShowTransfer, slate, 20);
-            Button(root, "음악", .565f, .008f, .725f, .058f, () => ShowMusicSettings(ShowLobby), slate, 20);
+            var roomList = RestorationPanel(root, .048f, .308f, .744f, .759f, RestorationLeather, "Classic live room list");
+            if (restorationLobbyMode == 0) DrawRestorationPracticeRooms(roomList);
+            else if (restorationLobbyMode == 1) DrawRestorationScenarioRooms(roomList);
+            else DrawRestorationMultiplayer(roomList);
+            var notices = RestorationPanel(root, .048f, .151f, .744f, .291f, new Color(.045f, .035f, .028f, .99f), "Local notice and record panel");
+            int mono = DemoCatalog.StarterDecks.Count(deck => ArcanaDeckElements(deck).Length == 1);
+            Text(notices, "NOTICE  /  내 기록", .025f, .63f, .975f, .95f, 21, gold);
+            Text(notices, "카드 " + CardCatalog.All.Length + "종 · 단일 " + mono + "덱 / 듀얼 " + (DemoCatalog.StarterDecks.Length - mono) + "덱 · 원본 인쇄 카드 표시", .025f, .32f, .975f, .67f, 22, ivory);
+            Text(notices, "이 기기 전적  " + LocalProfileWins + "승 " + LocalProfileLosses + "패 " + LocalProfileDraws + "무  ·  " + (useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name), .025f, .025f, .975f, .36f, 21, new Color(.72f, .76f, .66f));
+            RestorationButton(root, "기본 덱", .048f, .051f, .176f, .132f, ShowDeckSelection);
+            RestorationButton(root, "덱 편집", .188f, .051f, .316f, .132f, () => ShowCollection(true));
+            RestorationButton(root, "카드 도감", .328f, .051f, .456f, .132f, () => ShowCollection(false));
+            RestorationButton(root, "상위 등급", .468f, .051f, .596f, .132f, ShowRestorationPremiumHub);
+            RestorationButton(root, "게임 방법", .608f, .051f, .744f, .132f, () => ShowRulesHelp(ShowLobby));
+            DrawRestorationProfileRail(ShowTitle, "대기실");
         }
 
-        private void DrawArcanaProfileRail()
+        private void DrawRestorationRoomHeading(RectTransform list, string text, string detail)
         {
-            var rail = Panel(root, .747f, .065f, .962f, .682f, new Color(.04f, .055f, .125f, .97f));
-            Frame(rail, new Color(.72f, .60f, .94f), 2.5f);
-            Text(rail, "MY SOUL", .06f, .88f, .94f, .98f, 21, new Color(.81f, .76f, 1), TextAlignmentOptions.Center);
-            var portrait = Button(rail, "", .075f, .43f, .925f, .875f, () => ShowLocalProfile(ShowLobby), slate, 22);
-            portrait.gameObject.name = "Local profile card";
+            Text(list, text, .035f, .865f, .70f, .98f, 25, gold);
+            Text(list, detail, .71f, .865f, .965f, .98f, 20, new Color(.70f, .75f, .66f), TextAlignmentOptions.MidlineRight);
+            Panel(list, .035f, .84f, .965f, .845f, new Color(.54f, .45f, .31f, .55f));
+        }
+
+        private void DrawRestorationPracticeRooms(RectTransform list)
+        {
+            DrawRestorationRoomHeading(list, "ROOM  /  연습 대전실", "AI 상대");
+            var practices = DemoCatalog.Encounters.Select((encounter, index) => new { encounter, index })
+                .Where(entry => !FmScenarioCatalog.Stages.Any(stage => stage.encounterIndex == entry.index)).ToArray();
+            for (int i = 0; i < practices.Length && i < 3; i++)
+            {
+                var entry = practices[i]; int index = entry.index;
+                float top = .80f - i * .245f, bottom = top - .22f;
+                bool won = PlayerPrefs.GetInt("FC.demo.won." + index, 0) != 0;
+                var row = RestorationButton(list, "", .032f, bottom, .968f, top,
+                    () => { selectedEncounter = index; ShowEncounterSelection(); });
+                row.gameObject.name = "Practice room " + index;
+                Text(row.transform, (i + 1).ToString("00"), .02f, .1f, .085f, .9f, 28, RestorationMetal, TextAlignmentOptions.Center);
+                Text(row.transform, entry.encounter.name, .115f, .45f, .76f, .94f, 27, ivory);
+                Text(row.transform, DeckShortName(entry.encounter.deckId) + " · 50장", .115f, .05f, .76f, .46f, 21, new Color(.72f, .72f, .65f));
+                Text(row.transform, won ? "완료 · 재도전" : "입장", .78f, .10f, .97f, .9f, 22, won ? gold : new Color(.72f, .84f, .64f), TextAlignmentOptions.Center);
+                BindTooltip(row.gameObject, entry.encounter.name, entry.encounter.description);
+            }
+        }
+
+        private void DrawRestorationScenarioRooms(RectTransform list)
+        {
+            DrawRestorationRoomHeading(list, "SCENARIO  /  소울 연대기", "4개 실전 과제");
+            var completed = FmScenarioCatalog.Stages.Where(stage => PlayerPrefs.GetInt("FC.scenario.won." + stage.id, 0) != 0).Select(stage => stage.id).ToArray();
+            for (int i = 0; i < FmScenarioCatalog.Stages.Length; i++)
+            {
+                var stage = FmScenarioCatalog.Stages[i]; float top = .81f - i * .192f;
+                bool won = completed.Contains(stage.id), unlocked = FmScenarioCatalog.IsUnlocked(stage.id, completed);
+                var row = RestorationButton(list, "", .032f, top - .172f, .968f, top,
+                    () => ShowRestorationScenario(stage.id), won, unlocked);
+                row.gameObject.name = "Scenario stage " + stage.id;
+                Text(row.transform, (i + 1).ToString("00"), .02f, .07f, .085f, .93f, 27, RestorationMetal, TextAlignmentOptions.Center);
+                Text(row.transform, stage.name, .115f, .43f, .77f, .98f, 25, ivory);
+                Text(row.transform, "추천 · " + DemoCatalog.GetDeck(stage.recommendedDeckId).name, .115f, .015f, .77f, .47f, 20, new Color(.72f, .72f, .65f));
+                Text(row.transform, won ? "완료" : unlocked ? "입장" : "잠김", .80f, .05f, .97f, .95f, 22, won ? gold : new Color(.72f, .84f, .64f), TextAlignmentOptions.Center);
+                BindTooltip(row.gameObject, stage.name, stage.description + "\n" + (unlocked ? stage.objective : "앞선 과제에서 승리하면 열립니다."));
+            }
+        }
+
+        private void DrawRestorationMultiplayer(RectTransform list)
+        {
+            DrawRestorationRoomHeading(list, "MULTIPLAYER  /  대전 채널", "준비 중");
+            Text(list, "멀티플레이 대기실", .08f, .53f, .92f, .79f, 34, ivory, TextAlignmentOptions.Center);
+            Text(list, "현재는 AI와 싱글 플레이를 즐길 수 있습니다.\n온라인 방 만들기·친구 초대·매칭은 추후 제공됩니다.", .08f, .23f, .92f, .55f, 25, new Color(.76f, .73f, .66f), TextAlignmentOptions.Center);
+            RestorationButton(list, "연습 대전실로", .27f, .055f, .73f, .22f,
+                () => { restorationLobbyMode = 0; ShowLobby(); }, true);
+        }
+
+        private void DrawRestorationProfileRail(Action back, string heading)
+        {
+            var rail = RestorationPanel(root, .77f, .051f, .957f, .951f, new Color(.035f, .030f, .027f, .98f), "Original layout local profile rail");
+            Text(rail, "Fantasy\nMasters", .07f, .835f, .93f, .97f, 34, new Color(.94f, .82f, .52f), TextAlignmentOptions.Center);
+            var orb = Panel(rail, .19f, .61f, .81f, .845f, Color.clear); RestorationTrim(orb, true);
+            Text(rail, heading, .07f, .59f, .93f, .65f, 20, RestorationMetal, TextAlignmentOptions.Center);
+            var profile = RestorationButton(rail, "", .08f, .405f, .92f, .58f, () => ShowLocalProfile(redraw ?? ShowLobby));
+            profile.gameObject.name = "Local profile card";
             var avatar = LocalProfileAvatar();
-            ImageFrame(portrait.transform, OriginalCardTexture(avatar), new Rect(.13f, .36f, .805f, .56f), .025f, .025f, .975f, .975f, new Vector2(.5f, .68f), true);
-            Text(rail, LocalProfileName, .05f, .315f, .95f, .42f, 28, ivory, TextAlignmentOptions.Center);
-            Text(rail, LocalProfileWins + "승  " + LocalProfileLosses + "패  " + LocalProfileDraws + "무", .04f, .22f, .96f, .32f, 22, teal, TextAlignmentOptions.Center);
-            Button(rail, "프로필", .065f, .12f, .935f, .215f, () => ShowLocalProfile(ShowLobby), slate, 24);
-            Button(rail, "덱 선택", .065f, .015f, .935f, .11f, ShowDeckSelection, gold, 24);
+            ImageFrame(profile.transform, OriginalCardTexture(avatar), new Rect(.13f, .36f, .805f, .56f), .035f, .09f, .35f, .91f, new Vector2(.5f, .68f), true);
+            Text(profile.transform, LocalProfileName, .38f, .50f, .97f, .94f, 24, ivory);
+            Text(profile.transform, "LOCAL PLAYER", .38f, .08f, .97f, .50f, 17, RestorationMetal);
+            Text(rail, LocalProfileWins + "승  " + LocalProfileLosses + "패  " + LocalProfileDraws + "무", .065f, .33f, .935f, .405f, 23, new Color(.74f, .82f, .65f), TextAlignmentOptions.Center);
+            RestorationButton(rail, "이어하기", .08f, .245f, .92f, .325f, Continue, false, PersistentSaves.Exists(Slot));
+            RestorationButton(rail, "프로필", .08f, .165f, .92f, .235f, () => ShowLocalProfile(redraw ?? ShowLobby));
+            RestorationButton(rail, "음악 / 효과음", .08f, .09f, .92f, .16f, () => ShowSoundSettings(redraw ?? ShowLobby));
+            RestorationButton(rail, "돌아가기", .08f, .015f, .92f, .085f, back);
         }
 
         private static Element[] ArcanaDeckElements(StarterDeckDefinition deck)
@@ -175,12 +256,8 @@ namespace FantasyCards.Presentation
         private void ArcanaHiddenBack(Transform parent, float x0, float y0, float x1, float y1)
         {
             var bounds = Panel(parent, x0, y0, x1, y1, Color.clear);
-            var surface = Panel(bounds, 0, 0, 1, 1, new Color(.045f, .055f, .12f));
-            surface.gameObject.name = "Unrevealed portrait card back";
-            var fit = surface.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = ArcanaCardAspect;
             var texture = Resources.Load<Texture2D>("Art/ClassicCards/Decor/card-back");
-            if (texture != null) FittedImage(surface, texture, new Rect(0, 0, 1, 1), .04f, .03f, .96f, .97f, "Hidden opponent card");
-            Frame(surface, gold, 2.5f);
+            if (texture != null) FittedImage(bounds, texture, new Rect(0, 0, 1, 1), 0, 0, 1, 1, "Hidden opponent original card back");
         }
     }
 }

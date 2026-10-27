@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""Run one current native suite, retaining each attempt and binding exact per-game inputs."""
+import argparse,json,shutil,subprocess,sys
+from pathlib import Path
+from datetime import datetime,timezone
+import xml.etree.ElementTree as ET
+from restoration_source_binding import ROOT,capture,verify,digest
+p=argparse.ArgumentParser();p.add_argument('game',choices=('FantasyCards','PathOfDawn'));a=p.parse_args()
+out=ROOT/'Artifacts/Validation/Restoration';stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'NativeAttempts'/a.game/stamp;attempt.mkdir(parents=True)
+def fonts():
+ return [{'file':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':digest(p)} for name in ('Korean','Display') for p in [ROOT/f'Games/{a.game}/Assets/Resources/Fonts/{name}.asset']]
+font_before=fonts()
+inputs=capture(a.game);(attempt/'inputs-before.json').write_text(json.dumps(inputs,indent=2)+'\n')
+value=subprocess.run(['bash',str(ROOT/'Tools/Build/unity-task.sh'),a.game,'play-tests'],cwd=ROOT)
+for source in (ROOT/f'Artifacts/TestResults/{a.game}/PlayModeUI.xml',ROOT/f'Artifacts/UnityLogs/{a.game}/PlayModeUI.log'):
+ if source.is_file():shutil.copyfile(source,attempt/source.name)
+changed=False
+try:verify(inputs)
+except AssertionError:changed=True
+record={'game':a.game,'status':'failed','exitCode':value.returncode,'sourceChangedDuringRun':changed,'startedInputs':str((attempt/'inputs-before.json').relative_to(ROOT)),'sourceFingerprint':inputs['fingerprint'],'inputManifestSha256':digest(attempt/'inputs-before.json')}
+xml=attempt/'PlayModeUI.xml'
+if xml.is_file():
+ tree=ET.parse(xml).getroot();record.update(result=tree.get('result'),passed=tree.get('passed'),failed=tree.get('failed'),finishedUtc=tree.get('end-time'),xmlSha256=digest(xml))
+ if value.returncode==0 and tree.get('result')=='Passed' and tree.get('skipped')=='0' and not changed:record['status']='passed'
+(attempt/'generated-font-cache.json').write_text(json.dumps({'scope':'Generated TMP atlas/kerning cache assets; origin OTFs, stable metadata and generator are in the authored-input fingerprint. Runtime font visibility is checked in actual captures.','before':font_before,'after':fonts()},indent=2)+'\n')
+(attempt/'binding.json').write_text(json.dumps(record,indent=2)+'\n')
+if record['status']=='passed':
+ target=out/'Native'/a.game;target.mkdir(parents=True,exist_ok=True)
+ for name in ('PlayModeUI.xml','inputs-before.json','binding.json','PlayModeUI.log','generated-font-cache.json'):shutil.copyfile(attempt/name,target/name)
+print(json.dumps(record));sys.exit(0 if record['status']=='passed'else 1)

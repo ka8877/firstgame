@@ -1,0 +1,34 @@
+Gospel draw well and travelling oil lamp
+Revision: gospel-toon-2026-10-27
+
+The masonry, coping, shaft lining, timber winch, crank, winding rope, hollow
+staved bucket and ceramic travelling lamp are original authored geometry.
+build-well.py is the editable source. No commercial game model or recovered
+proprietary client source is included in these new assets.
+
+cedar-albedo.png and cedar-normal.png are original deterministic small grain
+maps authored with make-cedar.py; their seed, bytes and hashes are recorded in
+cedar-manifest.json. Normal convention: OpenGL +Y, no Unity green-channel flip.
+
+Shared light mineral stone appearance:
+ambientCG Plaster001, CC0 1.0 Universal.
+https://ambientcg.com/a/Plaster001
+https://docs.ambientcg.com/license/
+Original official API published surface-preview JPEGs remain unchanged in
+Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleMaterials/limestone-albedo.jpg
+and limestone-normal.jpg. Exact URLs/hashes/2048px size are recorded in
+Tools/Art/GospelTemple/manifest.json. These are surface-preview images, not a
+claimed recovery of the full-resolution archive. The source normal is DirectX;
+the existing Unity importer flips green and remains unchanged. Only the
+Blender preview material graph converts the green convention without editing
+source pixels.
+
+The former Poly Haven stone-fire-pit-derived water basin and all its sources
+remain preserved in GospelAuthored/GospelAuthoredProps. It is no longer used
+as the active courtyard well. Existing good authored shade trees and shrubs
+are unchanged.
+
+These are illustrative game props, not a measured archaeological restoration
+of a particular historical well, Temple courtyard, or first-century winch.
+Asset reimport/render checks do not establish Unity execution, physical-device
+performance, user approval or full Bible campaign completion.

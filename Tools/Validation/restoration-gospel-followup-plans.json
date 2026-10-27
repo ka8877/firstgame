@@ -1,0 +1,376 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-toon-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas top-left origin",
+    "steps": [
+      {
+        "type": "click",
+        "point": [
+          0.2328125,
+          0.6194444444444445
+        ],
+        "label": "새 여정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "성전으로",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "followup-temple-start",
+        "expected": "동일한현재빌드의새정상세션에서탄생3페이지를실제클릭해성전첫구간으로들어왔다. 기본주인공·새카툰/우물·현재목표와3/7초기말씀상태가보인다. 이전세션저장/엔진상태를주입하지않았다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.3472222222
+        ],
+        "repeat": 6,
+        "settleMs": 900,
+        "label": "정상 + 버튼으로 실제 인물 달리기 관찰 거리 확보"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5766,
+          0.0667
+        ],
+        "label": "상태창",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.375,
+          0.2292
+        ],
+        "label": "소지품 탭",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1156,
+          0.646
+        ],
+        "label": "등잔 소지품 선택",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7727,
+          0.8069
+        ],
+        "label": "등잔 켜고 장착",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.886,
+          0.9333
+        ],
+        "label": "상태창 닫기",
+        "settleMs": 1800
+      },
+      {
+        "type": "wait",
+        "ms": 1500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4,
+          0.69
+        ],
+        "settleMs": 900,
+        "label": "실제 성전 바닥에서 canvas 입력 초점"
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "a"
+        ],
+        "ms": 1500,
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-run-open-paving",
+        "captureMs": 4000,
+        "settleMs": 0,
+        "label": "열린 왼쪽 포장으로 실제 Shift+A 달리기"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-run",
+        "useCompositorBurst": true,
+        "expected": "실제 달리기 입력의 새 주인공과 성전 배경이 함께 보이는 원본이다. 걷기와 다른 다리·팔 자세를 관찰하며 골격/천/머리의 큰 파손이 없다. 실물 장치 FPS나 모든 프레임의 완전 무관통을 측정했다고 주장하지 않는다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 5500,
+        "settleMs": 900,
+        "label": "실제 오른쪽 달리기로 길잡이 방향 복귀"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.4361111
+        ],
+        "repeat": 3,
+        "settleMs": 900,
+        "label": "실제 - 버튼으로 NPC 접근 시야 복원"
+      },
+      {
+        "type": "wait",
+        "ms": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 3000,
+        "profile": "desktop",
+        "label": "첫 표식으로 이동"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 2200,
+        "profile": "mobile-landscape",
+        "label": "첫 표식으로 터치 이동"
+      },
+      {
+        "type": "key",
+        "key": "e",
+        "label": "첫 표식 대화",
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9047,
+          0.8833
+        ],
+        "label": "첫 표식 터치 대화",
+        "profile": "mobile-landscape",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-topics",
+        "expected": "가까이 다가가 실제 인물 성전 길잡이에게 말 걸면 주제 두 가지와 현재 여정 이어가기가 보인다. 원격 대화나 자동 목표 완료가 아니다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.604,
+          0.645
+        ],
+        "label": "성전 길잡이의 첫 학습 대화 주제",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-study-scripture",
+        "expected": "성전 길잡이와 주제별 실제 대화의 해설이 위에, 연결된 개역한글 성경 본문·장절·번역 표시가 아래에 보인다. 초반 여정은 곁가지 대화로 완료되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.636,
+          0.8972
+        ],
+        "label": "다른 주제로 돌아가기",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.604,
+          0.5361
+        ],
+        "label": "성전 길잡이와 현재 여정 이어가기",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "gate-reading",
+        "expected": "실제 표식 근접 상호작용으로 말씀 길잡이의 학습 안내·본문 요약 대화1/2와 관련 누가복음2:41–43 인용·출처가 아래에 보인다. 안내/요약과 성경 직접 인용이 구분되고 한글이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 대화",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "말씀을 따라 걷기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.840625,
+          0.06666666666666667
+        ],
+        "label": "현재 위치 저장",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-temple",
+        "expected": "실제 저장 안내와 현재 인물 위치·다음 목표·성경 참조를 이어하기 비교 기준으로 기록한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.93515625,
+          0.06666666666666667
+        ],
+        "label": "설정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81796875,
+          0.9111111111111111
+        ],
+        "label": "처음 화면",
+        "settleMs": 1800
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13203125,
+          0.7375
+        ],
+        "label": "이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-temple",
+        "expected": "전체새로고침후이어하기로saved-temple인물위치·다음목표·본문이복원되고장착한실제등잔모델/불빛이유지된다."
+      },
+      {
+        "type": "audio",
+        "label": "after-continue-gesture"
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d"
+        ],
+        "ms": 900,
+        "profile": "desktop",
+        "label": "우물 동측으로 걷기"
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 2300,
+        "profile": "desktop",
+        "label": "우물에 가까이 걷기"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.17,
+          0.7806
+        ],
+        "ms": 600,
+        "profile": "mobile-landscape",
+        "label": "우물 동측으로 터치 이동"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 1800,
+        "profile": "mobile-landscape",
+        "label": "우물에 접근"
+      },
+      {
+        "type": "checkpoint",
+        "name": "modeled-stone-well",
+        "expected": "일반이동으로가까이본실제우물은속이빈석조고리·돌줄눈·양쪽목재기둥·도르래·드리운밧줄/두레박이읽힌다. 기존불쏘시개수반모양이아니다. 원경나무와인물이유지된다."
+      }
+    ],
+    "requiredCheckpoints": [
+      "followup-temple-start",
+      "hero-run",
+      "npc-topics",
+      "npc-study-scripture",
+      "gate-reading",
+      "saved-temple",
+      "continued-temple",
+      "modeled-stone-well"
+    ],
+    "scope": "Fresh ordinary-input continuation of the exact reviewer-key-typo interrupted desktop evidence; not one uninterrupted run, no state/save injection."
+  }
+}

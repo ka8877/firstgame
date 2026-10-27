@@ -100,7 +100,9 @@ namespace FantasyCards.Presentation
             bool burn = item.kind == "burn";
             bool play = item.kind == "play";
             bool terrainPlay = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Terrain;
-            bool heal = spell && (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0;
+            bool healingSpell = item.kind == "spell" && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
+                (CardCatalog.Get(item.sourceDefinitionId).effect == Effect.Heal || CardCatalog.Get(item.sourceDefinitionId).effect == Effect.HealAll);
+            bool heal = spell && (healingSpell || (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0);
             float duration = coin ? .58f : attack ? .65f : defeat ? .54f : burn ? .40f : spell ? .54f : play ? .4f : item.kind == "power" ? .46f : .25f;
 
             RectTransform source = null, target = null;
@@ -176,7 +178,11 @@ namespace FantasyCards.Presentation
                     item.kind == "spell-target" ? (item.amount >= 0 ? "+" : "") + item.amount : "";
                 if (!string.IsNullOrEmpty(amount))
                     number = Text(layer, amount, targetPoint.x - .10f, targetPoint.y - .025f, targetPoint.x + .10f, targetPoint.y + .08f, 40, tint, TextAlignmentOptions.Center);
-                FmBattleAudio.Play(audioSource, defeat ? "defeat" : burn ? "burn" : heal ? "heal" : spell ? "spell" : attack ? "attack" : "play");
+                string playCue = terrainPlay ? "terrain" : play && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
+                    CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Equipment ? "equip" :
+                    play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Spell ? "card-draw" : "summon";
+                FmBattleAudio.Play(defeat ? "destroy" : burn ? "burn" : heal ? "heal" : spell ? "spell" :
+                    attack ? item.kind == "counter" ? "counter" : "attack" : playCue);
                 if (defeat && source != null)
                 {
                     sourceOpacity = source.GetComponent<CanvasGroup>();
@@ -195,9 +201,12 @@ namespace FantasyCards.Presentation
             {
                 sourcePoint = DeckCenter(item.actor); targetPoint = new Vector2(.42f, item.actor == 0 ? .17f : .97f);
                 flyingCard = BattleMovingCard(layer, item.sourceDefinitionId, sourcePoint, item.actor != 0);
-                FmBattleAudio.Play(audioSource, "play");
+                FmBattleAudio.Play("card-draw");
             }
-            else if (item.kind == "phase" || item.kind == "result") FmBattleAudio.Play(audioSource, "phase");
+            else if (item.kind == "phase" || item.kind == "turn") FmBattleAudio.Play("turn");
+            else if (item.kind == "ready") FmBattleAudio.Play("confirm");
+            else if (item.kind == "discard") FmBattleAudio.Play("burn");
+            else if (item.kind == "result") FmBattleAudio.Play(item.amount == 0 ? "victory" : item.amount == 1 ? "loss" : "turn");
 
             bool impactPlayed = false;
             for (float elapsed = 0; elapsed < duration && !battleSkipRequested; elapsed += Time.unscaledDeltaTime * battlePlaybackSpeed)

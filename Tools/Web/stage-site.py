@@ -61,6 +61,13 @@ def validate_report(report_path, game, profile, player):
         module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
         cache_proof = module.verify_record(report_path)
         proof_name = "followup-verification.json"
+    elif (game == "PathOfDawn" and profile == "Desktop720" and report.get("status") == "failed"
+            and GAME_REVISIONS[game] == "gospel-toon-2026-10-27"):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("restoration_stage_gospel_followup", ROOT / "Tools/Validation/verify-restoration-gospel-followup.py")
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        cache_proof = module.verify_record(report_path)
+        proof_name = "followup-verification.json"
     if (report.get("game") != game or (report.get("status") != "passed" and cache_proof is None)
             or report.get("revision") != GAME_REVISIONS[game]
             or report.get("suite") != "modern-real-input-v1"):
@@ -118,7 +125,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
 parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/WebPlaytest")
 parser.add_argument("--require-browser-reports", action="store_true")
-parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana"), default="modern",
+parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration"), default="modern",
                     help="FC fidelity uses new FC checks and explicitly preserves the verified Gospel bytes")
 args = parser.parse_args()
 release = contract(args.release_profile)
@@ -143,7 +150,7 @@ for game, slug in GAMES.items():
     if (build.get("Revision") != GAME_REVISIONS[game] or build.get("Content") != CONTENT_VERSIONS[game]
             or build.get("Target") != "WebGL" or build.get("Errors") != "0"):
         raise SystemExit(f"Current remaster Web build required: {game}")
-    if args.release_profile == "arcana" and game == "PathOfDawn":
+    if args.release_profile in ("arcana", "restoration") and game == "PathOfDawn":
         subprocess.run(["python3", str(ROOT / "Tools/Validation/verify-resource-isolation.py"),
                         "--ledger", str(player / "LegacyResourceExclusions.json")], check=True)
     reports = []
@@ -220,6 +227,14 @@ for game, slug in GAMES.items():
         detail_notice = ROOT / "Tools/Art/FmDetail/SOURCE-NOTICE.txt"
         if release["name"] == "detail" and detail_notice.is_file():
             shutil.copyfile(detail_notice, notices / "TitleArt-SOURCE-NOTICE.txt")
+    if release["name"] == "restoration":
+        current_notices = (["Tools/Audio/Restoration/SOURCE-NOTICE.txt"] if game == "FantasyCards" else
+                           ["Tools/Art/GospelAuthored/SOURCE-NOTICE.txt", "Tools/Art/GospelAuthoredProps/SOURCE-NOTICE.txt",
+                            "Tools/Art/GospelToon/SOURCE-NOTICE.txt", "Tools/Art/GospelWell/SOURCE-NOTICE.txt"])
+        for relative in current_notices:
+            path=ROOT/relative
+            if not path.is_file(): raise SystemExit("Missing current source notice: "+relative)
+            shutil.copyfile(path,notices/(path.parent.name+"-"+path.name))
     shutil.copyfile(hero, output / "art" / f"{slug}.png")
 
 files = sorted(p for p in output.rglob("*") if p.is_file() and p.name != ".firstgame-web-output")

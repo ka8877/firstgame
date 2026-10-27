@@ -156,7 +156,7 @@ namespace FantasyCards.Tests
             Assert.That(extra.Count(c => c.rarity == CardRarity.Upgrade), Is.EqualTo(3));
             Assert.That(extra.Count(c => c.rarity == CardRarity.Unique), Is.EqualTo(1));
             Assert.That(extra.Count(c => c.rarity == CardRarity.Event), Is.EqualTo(13));
-            Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(9));
+            Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(10));
             Assert.That(DemoCatalog.StarterDecks.Take(5).Select(d => d.id), Is.EqualTo(new[] { "forest", "knights", "tides", "stars", "fidelity" }));
             var deck = DemoCatalog.GetDeck("fidelity"); DemoCatalog.ValidatePlayableDeck(deck.cards);
             Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Upgrade), Is.EqualTo(4));
@@ -215,8 +215,8 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(600));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,450},{CardKind.Spell,25},{CardKind.Equipment,96} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(605));
+            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,453},{CardKind.Spell,26},{CardKind.Equipment,97} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
             { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(50)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(element == Element.Forest ? 5 : 4)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }

@@ -1,6 +1,6 @@
 # 개발과 실행
 
-현재 개정은 판타지마스터즈 `fm-arcana-2026-10-27`과 예수님의 길 `gospel-authored-2026-10-27`이다. 카드600종·7단일속성/11듀얼 기본 덱·세로 TCG 카드·새 서브컬처 UI, 실제 NPC 주제 대화와 정확한 본문·제작된 인물/환경을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 실제 새 실행·빌드·공개 검증은 [ArcanaValidation](ArcanaValidation.md)을 따른다. 이전 개정의 검증·자산은 이력으로 보존한다.
+현재 개정은 판타지마스터즈 `fm-restoration-2026-10-27`과 예수님의 길 `gospel-toon-2026-10-27`, 릴리스 프로필 `restoration`이다. 판마는 출전 카드605종·기본 덱20개(단일7·듀얼13), 원본 전체 인쇄 카드, 별도 상위 등급 감상 도감30종, 원작 대기실을 참고한 로비, 실제 싱글 시나리오4과제와 별도 효과음을 구현한다. 예수님의 길은 카툰 인물·구조가 있는 석조 우물, NPC 대화 아래 정확한 본문, 인물·가방·안내도와 실제 등잔 장착을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 이 문서는 개발 진입점이며 현재 빌드·실행·공개 반영 여부는 [RestorationValidation](RestorationValidation.md)의 새 근거를 따른다. 이전 검증·자산은 이력으로 보존한다.
 
 ## 고정 도구
 
@@ -18,7 +18,7 @@
 4. 패키지 import 후 각 프로젝트의 `FirstGame > Prepare First Slice`를 실행한다. 새벽의 길의 기존 클론에서도 이 명령을 실행해야 이전 관찰자 Boot가 새 `GospelJourneyApp`으로 전환되고 3D 인물·재질·Idle/Walk/Run 컨트롤러와 글꼴을 준비한다.
 5. `Assets/Scenes/Boot.unity`에서 Play한다. 카드는 `게임 시작 → 연습방 → 대전실 → 덱 선택 → START`, 예수님의 길은 `새 여정 → 탄생 말씀 세 페이지 → 성전 탐색`으로 확인한다.
 6. `FirstGame > Validate First Slice`와 현재 규칙·저장·UI 테스트를 수행한다. 생성한 씬·설정·에셋은 `.meta`와 함께 관리하며 `Library`, `Temp`, `Logs`, 빌드 출력은 커밋하지 않는다.
-7. `FirstGame > Build Windows` / `Build Web`으로 게임별 플레이어를 만든다. 출력은 `Artifacts/Builds/<Game>/Windows|Web`이며 빌드 성공과 실제 플레이 검증은 구분한다.
+7. `FirstGame > Build Windows` / `Build Web`으로 게임별 플레이어를 만든다. 기본 출력은 `Artifacts/Builds/<Game>/Windows|Web`이며 `FIRSTGAME_BUILD_ROOT`로 생성 빌드 루트를 바꿀 수 있다. 현재 클라우드는 `/tmp/firstgame-restoration-builds/<Game>/Windows|Web`를 사용한다. 빌드 성공과 실제 플레이 검증은 구분한다.
 
 집과 회사에서 소스를 주고받을 때는 작업을 커밋·푸시한 뒤 다른 PC에서 최신 소스와 LFS 파일을 받는다. GitHub 소스 동기화와 게임 안의 진행 저장 동기화는 별도다. 진행 저장 전송 범위는 [첫 플레이 안내](PlaytestGuide.md#저장과-다른-기기에서-플레이)를 따른다.
 
@@ -28,7 +28,10 @@
 
 ```bash
 cd /workspace/firstgame
+export XDG_CACHE_HOME=/tmp/firstgame-restoration-runtime-cache
 source Tools/Environment/activate-shell.sh
+# 현재 클라우드의 생성 빌드 전용 경로. HOME·XDG_CONFIG_HOME과 라이선스는 바꾸지 않는다.
+export FIRSTGAME_BUILD_ROOT=/tmp/firstgame-restoration-builds
 # 새 환경에 도구가 없을 때만 설치한다.
 bash Tools/Environment/install.sh
 bash Tools/Validation/run-core-tests.sh
@@ -55,10 +58,10 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 
 | 게임 | 현재 실행·제작 기준 |
 |---|---|
-| FantasyCards | `FantasyCardsApp`의 fidelity 타이틀·로비·대전실·전장. 원작 인물·카드 178종·Core와 구조화 전투 이벤트/중간 스냅샷, Pretendard, 원작 BGM 발췌·제작곡 |
-| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·이동/점프/착지/선택 연습 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
+| FantasyCards | `FantasyCardsApp`·`FmArcanaCards`의 전체 원본 인쇄605종, `FmRestorationModes`의4과제, `OriginalCardArchive`의 감상 전용30종, 기본 덱20개. 원작식 로비·준비실·5전열과 실제 Core 이벤트/중간 스냅샷, Pretendard, 원작 BGM 발췌와 별도 `FmSfxHost` 효과음 |
+| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`와 카툰 인물5종·65본/7클립·`GospelToonCharacter.shader`. 새 `GospelWell` 우물, `GospelCharacterMenu`·`GospelBelongings`의 인물/가방/안내도와 등잔, `GospelNpcDialog`·`GospelCatalog`의 실제 대화·성경 본문 |
 
-일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 새 3D 인물의 재생성과 import 계약은 [Gospel3DArt](Gospel3DArt.md)를 따른다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
+일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 현재 미술·UI 계약은 [원본 카드와 대기실](FmRestorationUI.md)·[상위 등급과 시나리오](FmRestorationCards.md)·[효과음](FmRestorationAudio.md)·[카툰 인물](GospelToonArt.md)·[우물](GospelWell.md)·[인물과 가방](GospelCharacterMenu.md)을 따른다. 기존 골격의 원본과 import 계약은 [Gospel3DArt](Gospel3DArt.md)에 보존한다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
 원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 현재 카드 Web/Windows는 SOUND-I 원작 로그인·로비·덱의 무음성 발췌 편집본과 SID-Sound 원작 전투곡을 포함한다. 원본·편집 구간·변환·출처는 [fidelity 음악 조사](Research/FmFidelityMusic.md)를 따른다. 외부 SoundCloud 임베드·SDK는 일반 플레이에서 사용하지 않는다. 실제 첫 입력·음소거·음량·장면별 전환을 출력과 함께 확인하며, 발췌를 전체 원작 음원 복구로 표시하지 않는다.
 
@@ -67,10 +70,10 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 ## 입력·저장
 
 - 카드: 마우스·터치로 방과 덱을 선택한다. 손패 클릭/드래그로 지형·전열·장비·마법을 배치하고 소각장으로 버린다. 모바일 가로 스와이프는 손패 스크롤이다. 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작하며 전투 재생 속도·건너뛰기는 규칙을 바꾸지 않는다.
-- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠/화면 버튼/설정 슬라이더로 1.8–8m 줌, I 상태창, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작·줌·상태 버튼이다.
+- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠/화면 버튼/설정 슬라이더로 1.8–8m 줌, I 인물, B 가방, M 안내도, E 가까운 NPC 대화/말씀 읽기, Esc 설정. 가방의 등잔 장착/보관은 실제 모델·조명·현재 여정 저장에 연결된다. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작·줌·인물/가방/지도 버튼이다.
 - 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
 - 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.
-- Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 `저장 옮기기`는 무결성·버전·실제 상태를 검증한 뒤 가져온다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.
+- Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 저장 전송 구현은 무결성·버전·실제 상태를 검증한다. 현재 메뉴에서 제공하는 접근 경로는 [첫 플레이 안내](PlaytestGuide.md#저장과-다른-기기에서-플레이)를 따른다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.
 - 손상·미지원 저장의 원본을 지우거나 새 게임으로 조용히 해석하지 않는다. 읽기 중 상태·현재 목표·읽은 말씀·유효한 인물 위치를 함께 복원한다.
 
 ## 빌드·배포·산출물
@@ -79,7 +82,7 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 
 프로젝트별 품질 설정은 `ProjectSetup`과 생성된 URP 에셋이 기준이다. 카드의 Web renderScale은 0.8, 새 성경 여정의 Web은 1.0이며 실제 기기의 성능을 별도로 측정해야 한다. Windows 1080p60은 목표이고 클라우드 llvmpipe의 결과를 실물 기기 성능으로 주장하지 않는다. Blender 미리보기와 실제 Unity·웹 캡처를 구분한다.
 
-두 게임의 필요한 빌드·검증이 끝나면 `python3 Tools/Build/package-builds.py`로 Windows/Web ZIP, `python3 Tools/Build/export-source.py`로 실제 LFS 에셋을 포함한 소스 ZIP, `python3 Tools/Build/package-evidence.py`로 허용된 검증 자료를 묶는다. `python3 Tools/Build/verify-deliverables.py`로 현재 파일·ZIP·무결성을 확인한다. 각 도구가 요구하는 최신 개정의 근거가 있어야 하며 이전 보고서를 새 통과로 세지 않는다. 웹 배포는 [WebPlaytest](WebPlaytest.md)를 따른다.
+현재 `restoration`의 소스 고정·실행·빌드·공개 검증은 `Tools/Validation/summarize-restoration-release.py`가 새 근거를 확인한다. 웹 스테이징/배포에는 `--release-profile restoration`을 사용한다. 필요한 근거가 모두 준비된 뒤 `python3 Tools/Build/package-restoration.py`로 Windows/Web·실제 LFS 소스·허용된 검증 자료를 묶고 파일 집합·현재 바이트·CRC를 검사한다. 현재 생성 빌드는 `/tmp/firstgame-restoration-builds`, 새 ZIP은 `/tmp/firstgame-restoration-deliverables`에 둔다. 이 임시 경로의 산출물과 저장소의 경로·해시 기록을 함께 확인한다. 기존 `package-builds.py`·`export-source.py`·`package-evidence.py`와 이전 프로필은 해당 과거판 재현용이며 이전 보고서를 새 통과로 세지 않는다. 웹 배포의 공통 원칙은 [WebPlaytest](WebPlaytest.md)를 따른다.
 
 ## 이전 판의 제작 이력
 
@@ -91,8 +94,12 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 
 정적 CardAsset 의미 검증(`Tools/Validation/verify-card-authoring.py`)은 PyYAML을 사용한다. 현재 클라우드 검증 버전은 PyYAML 6.0.3이며, Unity를 실행하거나 생성 에셋을 다시 쓰지 않고 전체 필드와 그림 참조를 검사한다.
 
-현재 디자인판은 `Tools/Validation/modern-smoke-plans.json`과 `modern-public-plans.json`으로 실제 입력/원본 화면/로컬 음악 출력을 검사한다. `summarize-modern-release.py`로 현재 근거를 정리하며 이전 Remaster의 외부 음악/이전 모델 고정 검사를 현재 결과로 쓰지 않는다.
+현재 실제 입력 계획은 `Tools/Validation/restoration-smoke-plans.json`과 `restoration-public-plans.json`, 새 근거 폴더는 `Artifacts/Validation/Restoration`이다. `summarize-restoration-release.py`로 실제 소스·빌드·로컬/공개 입력·오디오 근거를 구분한다. Unity·브라우저·빌드·배포 실행 소유자는 `/root/restoration_release` 하나이며 같은 프로젝트나 브라우저를 병렬 실행하지 않는다.
 
-현재 두 게임의 새 검증은 `Tools/Validation/detail-smoke-plans.json`과 `detail-public-plans.json`, 릴리스는 `--release-profile detail`과 `summarize-detail-release.py`를 사용한다. 원작 BGM 네 고정 로컬 파일과 기존 저장 슬롯은 유지한다. 이전 modern/fidelity 프로필은 해당 이력을 재현할 때만 선택한다.
+클라우드의 `activate-shell.sh`는 표준 생성 캐시 루트 `XDG_CACHE_HOME`을 `/tmp/firstgame-restoration-runtime-cache`로 기본 설정하고, 기록된 작업 전용 캐시 링크만 복구한다. 기존 `HOME`·`CODEX_HOME`·`XDG_CONFIG_HOME`과 Unity 라이선스 위치를 바꾸거나 인증 디렉터리를 임시 폴더로 복사하지 않는다. `/tmp`가 교체되면 생성 캐시·빌드가 없을 수 있으므로 경로가 남아 있다는 이유만으로 성공 산출물이라고 취급하지 않는다.
 
-현재 릴리스 프로필은 `arcana`다. 고품질 Web 카드 텍스처 압축은 원본 PNG/GUID/종횡비를 보존한다. 이전 미사용 Resources의 빌드 중 임시 이동은 선행 복구 저널과 finally 복원·해시/GUID 검사를 따르며 비정상 종료 후 다음 에디터 시작에서 복구한다.
+이전 `modern`·`detail`·`arcana` 입력 계획·릴리스 프로필·문서는 해당 판의 제작 이력이다. 현재 Web 카드 텍스처 압축은 원본 PNG/GUID/종횡비를 보존한다. 미사용 이전 Resources의 빌드 중 임시 이동은 선행 복구 저널·finally 복원과 해시/GUID 검사를 따르며 비정상 종료 후 다음 에디터 시작에서 복구한다.
+
+현재 클라우드의 `restoration` 빌드는 `FIRSTGAME_BUILD_ROOT=/tmp/firstgame-restoration-builds`를 사용한다. Windows/Web 산출물은 이 작업 전용 경로에 생성하며 이전 Arcana 산출물은 보존한다. `python3 Tools/Build/package-restoration.py`는 최신 소스·실행·공개 파일 검증을 다시 확인하고 `Artifacts/RestorationDeliverables`에서 다운로드할 수 있는 새 ZIP을 만든다. 기존 일반 패키징 진입점도 현재 개정으로 전달한다.
+
+클라우드에서 홈 디렉터리가 읽기 전용일 때 `activate-shell.sh`는 표준 `XDG_CACHE_HOME`을 작업 전용 `/tmp`로 지정한다. Unity 내부 GI 캐시 경로와 실제 실행으로 확인했다. 기존 라이선스를 사용하는 설정 루트와 `HOME`은 변경하지 않는다.

@@ -1,0 +1,102 @@
+{
+  "revision": "gospel-toon-2026-10-27",
+  "authorship": "New authored geometry; shared ambientCG Plaster001 CC0 surface-preview maps; original procedural cedar texture.",
+  "units": "metres, Blender Z-up; FBX export -Zforward/Yup with imported root rotation preserved by runtime",
+  "historicalScope": "Illustrative courtyard well and travelling lamp; no archaeological site or exact first-century mechanism reconstruction claimed.",
+  "models": [
+    {
+      "name": "StoneWell",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelWell/StoneWell.fbx",
+      "sha256": "00b0ac2cfea9f3f68cc8493e6331e7516e12b11a030608b6fd8358ae57d63634",
+      "bytes": 983804,
+      "triangles": 26960,
+      "meshes": 6,
+      "materials": [
+        "Well_Cedar",
+        "Well_Iron",
+        "Well_Limestone",
+        "Well_Rope",
+        "Well_ShadedStone",
+        "Well_Water"
+      ],
+      "bounds": {
+        "min": [
+          -1.2100000381469727,
+          -1.1894140243530273,
+          0.009999990463256836
+        ],
+        "max": [
+          1.4900000095367432,
+          1.1894140243530273,
+          3.065000057220459
+        ]
+      },
+      "reimport": {
+        "status": "passed",
+        "boundsMin": [
+          -1.2100000381469727,
+          -1.1894139051437378,
+          0.009999977424740791
+        ],
+        "boundsMax": [
+          1.4900000095367432,
+          1.189414143562317,
+          3.065000057220459
+        ],
+        "uvs": true,
+        "triangles": 26960
+      }
+    },
+    {
+      "name": "TravelLamp",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelWell/TravelLamp.fbx",
+      "sha256": "f51c8c1537cb8d463aed56c3f42e12f6b1534af9203e34022f4ca29a21d3bb6f",
+      "bytes": 89900,
+      "triangles": 2032,
+      "meshes": 2,
+      "materials": [
+        "Well_Clay",
+        "Well_Rope"
+      ],
+      "bounds": {
+        "min": [
+          -0.061000000685453415,
+          -0.11862819641828537,
+          0.00800000037997961
+        ],
+        "max": [
+          0.061000000685453415,
+          0.0836002379655838,
+          0.05700000002980232
+        ]
+      },
+      "reimport": {
+        "status": "passed",
+        "boundsMin": [
+          -0.061000000685453415,
+          -0.11862818896770477,
+          0.007999994792044163
+        ],
+        "boundsMax": [
+          0.061000000685453415,
+          0.0836002454161644,
+          0.05700000748038292
+        ],
+        "uvs": true,
+        "triangles": 2032
+      }
+    }
+  ],
+  "previews": [
+    {
+      "path": "/tmp/firstgame-gospel-well/well-exported-preview.png",
+      "sha256": "beb62c6477c0dcc5f4f91f8a00845ead6f92066c2da5c2dbe5cd91239f566712",
+      "type": "Blender render of reimported exact final FBX, not game screenshot"
+    },
+    {
+      "path": "/tmp/firstgame-gospel-well/well-exported-close.png",
+      "sha256": "f26261e352e191cdc0489235ec0b1c163cb3e59619cb8780001a8254f8816f33",
+      "type": "Blender render of reimported exact final FBX, not game screenshot"
+    }
+  ]
+}

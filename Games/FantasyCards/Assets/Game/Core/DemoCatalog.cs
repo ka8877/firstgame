@@ -58,7 +58,7 @@ namespace FantasyCards.Core
             Pair("tides", "물과 암흑 · 심연의 파도", "물의 전열과 암흑 제거 마법. 코인과 공방 전용 마법을 활용합니다.", "serin", Element.Tide, Element.Darkness),
             Pair("stars", "대지와 빛 · 황금의 성채", "물리 피해·수비 마법과 빛의 강화. 다섯 칸의 배치 순서가 중요합니다.", "noa", Element.Earth, Element.Dawn),
             FidelityDeck()
-        }.Concat(ArcanaStarterDeckData.Create()).ToArray();
+        }.Concat(ArcanaStarterDeckData.Create()).Concat(RestorationStarterDeckData.Create()).ToArray();
         static StarterDeckDefinition FidelityDeck()
         {
             var cards = new List<string>();
@@ -93,7 +93,13 @@ namespace FantasyCards.Core
         {
             new EncounterDefinition("garden", "1장 · 숲의 첫 결투", "LP와 지형, 소울, 양측 준비 완료와 전열 순서 전투를 익힙니다.", "forest", "lyria", 1),
             new EncounterDefinition("lake", "2장 · 심연의 시험", "물·암흑의 코인과 공방 전용 마법에 대응하세요.", "tides", "serin", 2),
-            new EncounterDefinition("observatory", "3장 · 강철의 관문", "불·금속의 제거와 장비 전열을 넘고 상대 덱을 소진시키세요.", "knights", "kael", 3)
+            new EncounterDefinition("observatory", "3장 · 강철의 관문", "불·금속의 제거와 장비 전열을 넘고 상대 덱을 소진시키세요.", "knights", "kael", 3),
+            // Appended stable scenario-only IDs. The old three indices/decks
+            // remain identical for existing battle saves and practice rooms.
+            new EncounterDefinition("scenario-roots", "시나리오1 · 소울의 기초", "숲 전열과 지형을 익히는 첫 시험입니다.", "mono-forest", "lyria", 1),
+            new EncounterDefinition("scenario-tides", "시나리오2 · 파도의 시험", "물과 암흑의 마법 예고와 방어 준비에 대응합니다.", "tides", "serin", 2),
+            new EncounterDefinition("scenario-forge", "시나리오3 · 강철의 관문", "공격 마법과 장비를 사용하는 강철 전열을 넘습니다.", "knights", "kael", 3),
+            new EncounterDefinition("scenario-relic", "시나리오4 · 유산의 수호자", "유니크·레전드·시크릿 카드가 포함된 덱과 겨룹니다.", "premium-relic", "noa", 4)
         };
 
         public static LeaderDefinition GetLeader(string id)

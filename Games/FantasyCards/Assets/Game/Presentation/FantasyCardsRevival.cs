@@ -66,26 +66,28 @@ namespace FantasyCards.Presentation
 
         private void ShowRevivalRoom()
         {
-            battleScreen = false; redraw = ShowEncounterSelection; Clear(); FmOriginalMusic.SetScene("lobby"); RevivalBackdrop(true); ClientRail(ShowLobby, "PRACTICE");
-            var room = Panel(root, .055f, .315f, .775f, .94f, new Color(.070f, .085f, .060f, .98f)); Frame(room, gold, 2); Ornament(room, new Color(.50f, .45f, .32f));
-            Text(room, "연습 대전실  " + (selectedEncounter + 1).ToString("00"), .045f, .83f, .95f, .97f, 34, gold);
-            Text(room, "PLAYER", .045f, .70f, .42f, .83f, 22, gold);
-            Text(room, "DECK", .45f, .70f, .95f, .83f, 22, gold);
+            battleScreen = false; redraw = ShowEncounterSelection; Clear(); FmOriginalMusic.SetScene("lobby"); RestorationBackdrop(); ClientRail(ShowLobby, "대전 준비실");
+            var opponent = DemoCatalog.GetEncounter(selectedEncounter);
+            var scenario = FmScenarioCatalog.Stages.FirstOrDefault(stage => stage.encounterIndex == selectedEncounter);
+            var room = RestorationPanel(root, .048f, .305f, .744f, .936f, RestorationLeather, "Classic game waiting room");
+            Text(room, scenario != null ? "SCENARIO  /  " + scenario.name : "GAME ROOM  /  연습 대전실 " + (selectedEncounter + 1).ToString("00"), .045f, .83f, .955f, .96f, 32, gold);
+            Text(room, "PLAYER", .045f, .70f, .42f, .83f, 22, RestorationMetal);
+            Text(room, "DECK", .45f, .70f, .95f, .83f, 22, RestorationMetal);
             string deck = useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name;
             RoomPlayerRow(room, LocalProfileName, deck, .48f, false);
-            var opponent = DemoCatalog.GetEncounter(selectedEncounter);
             RoomPlayerRow(room, "컴퓨터", DemoCatalog.GetDeck(opponent.deckId).name, .27f, true);
-            Text(room, "덱 승리 · 50장 · 손패 6장 · 전열 5칸\n공격 준비 → 방어 준비 → 배틀 → 소울코스트", .045f, .045f, .95f, .25f, 21, gold, TextAlignmentOptions.Center);
-            Button(root, "대전 시작", .59f, .19f, .775f, .295f, BeginSelectedBattle, gold, 31);
-            Button(root, "덱 선택", .055f, .19f, .28f, .295f, ShowDeckSelection, slate, 26);
-            Button(root, "게임 방법", .29f, .19f, .515f, .295f, () => ShowRulesHelp(ShowEncounterSelection), slate, 26);
-            Text(root, "지형과 소울을 준비하고 다섯 칸의 전열로 상대 덱을 소진시키세요.", .065f, .095f, .77f, .175f, 24, ivory);
-            Text(root, "" + opponent.description, .065f, .035f, .77f, .10f, 21, gold);
+            Text(room, "덱 승리 · 50장 · 손패 6장 · 전열 5칸\n공격 준비 → 방어 준비 → 배틀 → 소울코스트", .045f, .045f, .95f, .25f, 21, new Color(.79f, .75f, .63f), TextAlignmentOptions.Center);
+            RestorationButton(root, "START · 대전 시작", .51f, .19f, .744f, .285f, BeginSelectedBattle, true);
+            RestorationButton(root, "덱 선택", .048f, .19f, .27f, .285f, ShowDeckSelection);
+            RestorationButton(root, "게임 방법", .28f, .19f, .50f, .285f, () => ShowRulesHelp(ShowEncounterSelection));
+            var notice = RestorationPanel(root, .048f, .05f, .744f, .17f, new Color(.045f, .035f, .028f), "Waiting room rules notice");
+            Text(notice, scenario != null ? scenario.objective : opponent.description, .025f, .40f, .975f, .94f, 23, ivory);
+            Text(notice, "지형과 소울을 준비하고 다섯 칸의 전열로 상대 덱을 소진시키세요.", .025f, .04f, .975f, .46f, 21, RestorationMetal);
         }
 
         private void RoomPlayerRow(Transform parent, string name, string deck, float y, bool opponent)
         {
-            var row = Panel(parent, .045f, y, .955f, y + .19f, new Color(.10f, .13f, .09f)); Frame(row, new Color(.57f, .70f, .78f, .55f), 1);
+            var row = RestorationPanel(parent, .045f, y, .955f, y + .19f, new Color(.13f, .115f, .085f), "Waiting player row");
             Text(row, name, .035f, .06f, .40f, .94f, 29, opponent ? teal : ivory);
             Text(row, deck, .45f, .06f, .97f, .94f, 24, ivory);
         }
@@ -282,7 +284,7 @@ namespace FantasyCards.Presentation
             redraw = ShowRevivalBattleMenu; Clear(); Backdrop(true);
             Text(root, "전투 메뉴", .07f, .81f, .93f, .95f, 43, gold, TextAlignmentOptions.Center);
             Button(root, "전투 기록", .18f, .61f, .48f, .75f, ShowBattleLog, slate, 27);
-            Button(root, "음악", .52f, .61f, .82f, .75f, () => ShowMusicSettings(ShowRevivalBattleMenu), slate, 27);
+            Button(root, "음악", .52f, .61f, .82f, .75f, () => ShowSoundSettings(ShowRevivalBattleMenu), slate, 27);
             Button(root, "저장", .18f, .42f, .48f, .56f, () => { if (Save()) message = "전장과 다음 코인 상태를 저장했습니다."; ShowRevivalBattleMenu(); }, slate, 27);
             Button(root, "대기실", .52f, .42f, .82f, .56f, () => LeaveBattle(ShowLobby), slate, 27);
             Button(root, "소각장 / 상태", .18f, .225f, .48f, .365f, () => { battleArchivePage = 0; ShowBattleArchive(); }, slate, 25);

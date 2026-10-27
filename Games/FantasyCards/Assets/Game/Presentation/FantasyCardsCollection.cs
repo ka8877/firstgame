@@ -50,7 +50,7 @@ namespace FantasyCards.Presentation
             collectionPage = Mathf.Clamp(collectionPage, 0, pages - 1);
             Text(root, edit ? "덱 편집" : "카드 도감", .035f, .913f, .81f, .988f, 38, ivory);
             string totals = edit ? customDeck.Count + " / " + authoredRules.deckSize + "장 · " + DeckKindCounts(customDeck)
-                : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종" + (small ? "" : " · 그림과 적용 수치 확인");
+                : "전체 " + CardCatalog.All.Length + "종 · 검색 결과 " + cards.Length + "종" + (small ? "" : " · 원본 인쇄 전체 표시");
             ReadableText(root, totals, .04f, .849f, small ? .64f : .81f, .913f, 23, gold);
             if (small) Text(root, "AP / DP / HP", .665f, .849f, .815f, .913f, 21, teal, TextAlignmentOptions.Center);
             Button(root, "대기실", .835f, .876f, .965f, .982f, ShowLobby, slate, 24);
@@ -177,7 +177,7 @@ namespace FantasyCards.Presentation
         {
             redraw = () => ShowDetail(card, back); Clear(); Backdrop(true);
             var portraitFrame = ArcanaCardFace(root, card, .025f, .06f, .515f, .945f, ArcanaCardMode.Detail);
-            portraitFrame.gameObject.name = "Detailed remaster card " + card.id;
+            portraitFrame.gameObject.name = "Detailed original printed card " + card.id;
             Text(root, CardGradeSummary(card) + "\n" + CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · 덱 " + card.deckLimit + "장까지", .55f, .82f, .965f, .94f, 26, RarityColor(card.rarity));
             ReadableText(root, card.name, .545f, .68f, .965f, .825f, Compact ? 43 : 53, ivory);
             ReadableText(root, "Lv " + card.level + "\n" + CardCatalog.CostText(card), .55f, .565f, .96f, .675f, 27, gold);
@@ -185,7 +185,7 @@ namespace FantasyCards.Presentation
             ScrollableCardText(CardAbilitySummary(card) + "\n" + card.text, .55f, .23f, .96f, .415f);
             Button(root, "돌아가기", .55f, .065f, .79f, .195f, back, gold, 27);
             if (OriginalCardTexture(card) != null)
-                Button(root, "원본 카드", .805f, .065f, .965f, .195f, () => ShowOriginalCard(card, back), slate, 24);
+                Button(root, "크게 보기", .805f, .065f, .965f, .195f, () => ShowOriginalCard(card, back), slate, 24);
         }
 
         private void ScrollableCardText(string value, float x0, float y0, float x1, float y1)

@@ -19,7 +19,7 @@ namespace FirstGame.Editor
     {
         [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
         [Serializable] sealed class GospelMaterialPalette { public GospelMaterialSpec[] materials; }
-        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap, normalMap; public float normalStrength = .3f; public float smoothness; public bool doubleSided; public bool alphaClip; public float cutoff = .5f; }
+        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap, normalMap, shader; public float[] shadeColor, rimColor; public float shadeThreshold = .38f, shadeSoftness = .07f, rimStrength = .055f, outlineWidth, hairPaint; public float normalStrength = .3f; public float smoothness; public bool doubleSided; public bool alphaClip; public float cutoff = .5f; }
         [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
         [Serializable] sealed class PaintedLayout { public PaintedRegion[] characters; public PaintedRegion[] walkFrames; }
         [Serializable] sealed class PaintedRegion
@@ -68,6 +68,7 @@ namespace FirstGame.Editor
                 var font = CreateFont();
                 PrepareGospelCharacter();
                 AuthoredPropsSetup.Prepare();
+                GospelWellSetup.Prepare();
                 PrepareGospelPortraits();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
                     : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -81,6 +82,7 @@ namespace FirstGame.Editor
                 EditorSceneManager.SaveScene(scene, ScenePath);
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
                 AssetDatabase.SaveAssets();
+                NormalizeGeneratedController();
                 Validate();
                 File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:gospel-journey:1\n");
                 Debug.Log("FIRSTGAME_SETUP_OK " + Game);
@@ -141,8 +143,17 @@ namespace FirstGame.Editor
                 string materialPath = folder + "/" + entry.name + ".mat";
                 var material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
                 if (material == null) { material = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(material, materialPath); }
-                material.name = entry.name; material.shader = Shader.Find("Universal Render Pipeline/Lit");
+                var characterShader = Shader.Find(string.IsNullOrEmpty(entry.shader) ? "Universal Render Pipeline/Lit" : entry.shader);
+                if (characterShader == null) throw new InvalidOperationException("Missing requested character shader: " + entry.shader);
+                material.name = entry.name; material.shader = characterShader;
                 material.SetColor("_BaseColor", new Color(entry.baseColor[0], entry.baseColor[1], entry.baseColor[2], entry.baseColor[3]));
+                if (entry.shadeColor != null && entry.shadeColor.Length == 4) material.SetColor("_ShadeColor", new Color(entry.shadeColor[0], entry.shadeColor[1], entry.shadeColor[2], entry.shadeColor[3]));
+                if (entry.rimColor != null && entry.rimColor.Length == 4) material.SetColor("_RimColor", new Color(entry.rimColor[0], entry.rimColor[1], entry.rimColor[2], entry.rimColor[3]));
+                if (!string.IsNullOrEmpty(entry.shader))
+                {
+                    material.SetFloat("_ShadeThreshold", entry.shadeThreshold); material.SetFloat("_ShadeSoftness", entry.shadeSoftness);
+                    material.SetFloat("_RimStrength", entry.rimStrength); material.SetFloat("_OutlineWidth", entry.outlineWidth); material.SetFloat("_HairPaint", entry.hairPaint);
+                }
                 material.SetFloat("_Smoothness", Mathf.Clamp01(entry.smoothness));
                 material.SetFloat("_Cull", (float)(entry.doubleSided ? CullMode.Off : CullMode.Back));
                 // Authored hair cards use the original RGBA strand mask. Keep
@@ -285,9 +296,9 @@ namespace FirstGame.Editor
             Parameter("Jump",AnimatorControllerParameterType.Trigger);
             Parameter("Land",AnimatorControllerParameterType.Trigger);
             Parameter("Practice",AnimatorControllerParameterType.Trigger);
-            // Rebuilding these transitions is intentional: Ensure remains repeatable without duplicate exits.
-            foreach (var item in machine.states)
-                foreach (var transition in item.state.transitions) item.state.RemoveTransition(transition);
+            // Reuse the same edges so repeated preparation/builds preserve
+            // serialized object IDs while still repairing their exact conditions.
+            var desiredTransitions = new System.Collections.Generic.HashSet<AnimatorStateTransition>();
             AnimatorState State(string name, string motion, float speed)
             {
                 var result = machine.states.Select(item => item.state).FirstOrDefault(item => item.name == name) ?? machine.AddState(name);
@@ -295,8 +306,11 @@ namespace FirstGame.Editor
             }
             AnimatorStateTransition Transition(AnimatorState from, AnimatorState to, float duration)
             {
-                var result = from.AddTransition(to); result.hasExitTime = false; result.hasFixedDuration = true;
-                result.duration = duration; result.interruptionSource = TransitionInterruptionSource.Destination; return result;
+                var result = from.transitions.FirstOrDefault(edge => edge.destinationState == to && !desiredTransitions.Contains(edge)) ?? from.AddTransition(to);
+                result.conditions = Array.Empty<AnimatorCondition>();
+                result.hasExitTime = false; result.hasFixedDuration = true;
+                result.duration = duration; result.interruptionSource = TransitionInterruptionSource.Destination;
+                desiredTransitions.Add(result); return result;
             }
             var takeoff = State("Jump takeoff","JumpStart",3.8f);
             var airborne = State("Jump airborne","JumpAir",1);
@@ -309,6 +323,9 @@ namespace FirstGame.Editor
             var settle = Transition(landing,locomotion,.12f); settle.hasExitTime = true; settle.exitTime = .68f;
             Transition(landing,takeoff,.05f).AddCondition(AnimatorConditionMode.If,0,"Jump");
             Transition(landing,airborne,.08f).AddCondition(AnimatorConditionMode.IfNot,0,"Grounded");
+            foreach(var item in machine.states)
+                foreach(var edge in item.state.transitions)
+                    if(!desiredTransitions.Contains(edge))item.state.RemoveTransition(edge);
 
             string maskPath = folder + "/GospelPracticeUpperBody.mask";
             var mask = AssetDatabase.LoadAssetAtPath<AvatarMask>(maskPath);
@@ -330,13 +347,28 @@ namespace FirstGame.Editor
             var actionMachine = layer.stateMachine;
             var ready = actionMachine.states.Select(item => item.state).FirstOrDefault(item => item.name == "Practice ready") ?? actionMachine.AddState("Practice ready");
             var practice = actionMachine.states.Select(item => item.state).FirstOrDefault(item => item.name == "Practice gesture") ?? actionMachine.AddState("Practice gesture");
-            foreach (var item in actionMachine.states) foreach (var transition in item.state.transitions) item.state.RemoveTransition(transition);
             ready.motion = null; ready.writeDefaultValues = false; actionMachine.defaultState = ready;
             practice.motion = clip("Practice"); practice.speed = 1.5f; practice.writeDefaultValues = false;
-            var perform = ready.AddTransition(practice); perform.hasExitTime = false; perform.hasFixedDuration = true; perform.duration = .12f; perform.AddCondition(AnimatorConditionMode.If,0,"Practice");
-            var recover = practice.AddTransition(ready); recover.hasExitTime = true; recover.exitTime = .92f; recover.hasFixedDuration = true; recover.duration = .1f;
+            var perform = ready.transitions.FirstOrDefault(edge=>edge.destinationState==practice) ?? ready.AddTransition(practice);
+            perform.conditions = Array.Empty<AnimatorCondition>(); perform.hasExitTime = false; perform.hasFixedDuration = true; perform.duration = .12f; perform.AddCondition(AnimatorConditionMode.If,0,"Practice");
+            var recover = practice.transitions.FirstOrDefault(edge=>edge.destinationState==ready) ?? practice.AddTransition(ready);
+            recover.conditions = Array.Empty<AnimatorCondition>(); recover.hasExitTime = true; recover.exitTime = .92f; recover.hasFixedDuration = true; recover.duration = .1f;
+            foreach(var item in actionMachine.states)
+                foreach(var edge in item.state.transitions)
+                    if(edge!=perform&&edge!=recover)item.state.RemoveTransition(edge);
             layers[layerIndex] = layer; controller.layers = layers;
             EditorUtility.SetDirty(mask); EditorUtility.SetDirty(actionMachine);
+        }
+
+        static void NormalizeGeneratedController()
+        {
+            const string path="Assets/Resources/Art/Gospel3D/YouthLocomotion.controller";
+            if(!File.Exists(path))return;
+            string value=File.ReadAllText(path);
+            string clean=System.Text.RegularExpressions.Regex.Replace(value,@"[ \t]+(?=\r?$)","",System.Text.RegularExpressions.RegexOptions.Multiline);
+            if(value==clean)return;
+            File.WriteAllText(path,clean);
+            AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
         }
 
         static UniversalRenderPipelineAsset CreatePipeline(string name, float scale, int shadow, float distance, bool hdr)

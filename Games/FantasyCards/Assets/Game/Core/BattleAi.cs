@@ -29,6 +29,8 @@ namespace FantasyCards.Core
         static bool HasUsefulSpellTarget(BattleState state, int player, CardDefinition card)
         {
             var own = state.players[player]; var enemy = state.players[1 - player];
+            if (card.effect == Effect.DimensionShockwave)
+                return enemy.units.Any(unit => unit.lane <= 1);
             if (card.effect == Effect.StatOperations)
                 return card.operations.Any(op => state.players.SelectMany((p, owner) => p.units.Select(u => new { owner, unit = u }))
                     .Any(x => (op.side == OperationSide.Both || (op.side == OperationSide.Ally ? x.owner == player : x.owner != player)) && (op.laneMask & (1 << x.unit.lane)) != 0 && (op.requiredCapabilityMask == 0 || (CardCatalog.Get(x.unit.definitionId).capabilityMask & op.requiredCapabilityMask) != 0) && (op.requiredElement < 0 || (int)CardCatalog.Get(x.unit.definitionId).element == op.requiredElement)));

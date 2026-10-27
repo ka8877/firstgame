@@ -33,8 +33,18 @@ ARCANA = {
     'preservedGames': []
 }
 
+RESTORATION = {
+    'name': 'restoration',
+    'revisions': {'FantasyCards': 'fm-restoration-2026-10-27', 'PathOfDawn': 'gospel-toon-2026-10-27'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Restoration' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': []
+}
+
 
 def contract(name):
+    if name == 'restoration':
+        return RESTORATION
     if name == 'modern':
         return MODERN
     if name == 'fm-fidelity':

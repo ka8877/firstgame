@@ -18,7 +18,8 @@ namespace FantasyCards.SmokeTests
         public IEnumerator FidelityGradeGuideAndRankCapabilityFiltersUseActualCards()
         {
             SmokeUi.Click("게임 시작"); yield return null;
-            SmokeUi.Click("등급 / 랭크"); yield return null;
+            SmokeUi.Click("게임 방법"); yield return null;
+            SmokeUi.Click("카드 등급 / 랭크"); yield return null;
             var guide = ActiveButtons("Grade guide ");
             Assert.That(guide.Length, Is.EqualTo(12), "Every documented grade must remain visible, including explicitly unsupplied grades.");
             foreach (CardRarity rarity in Enum.GetValues(typeof(CardRarity)))
@@ -29,7 +30,7 @@ namespace FantasyCards.SmokeTests
                 Assert.That(labels, Does.Contain(CardCatalog.RarityCode(rarity)));
                 Assert.That(labels, Does.Contain("수록 " + CardCatalog.All.Count(card => card.rarity == rarity) + "종"));
             }
-            yield return SmokeUi.Capture("FantasyCards", "arcana-grade-guide", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-grade-guide", 844, 390);
             ActiveButtons("Grade guide ").Single(button => button.gameObject.name == "Grade guide Rare").onClick.Invoke(); yield return null;
             Assert.That(VisibleCards(), Is.Not.Empty);
             Assert.That(VisibleCards().All(card => card.rarity == CardRarity.Rare), Is.True);
@@ -43,9 +44,9 @@ namespace FantasyCards.SmokeTests
             {
                 var identity = cardButton.GetComponentInChildren<FmArcanaCardSurface>();
                 Assert.That(CardCatalog.Get(identity.DefinitionId).rank, Is.EqualTo(CardRank.N));
-                var grade = cardButton.GetComponentsInChildren<TMP_Text>().Single(text => text.gameObject.name == "Card grade code");
                 var definition = CardCatalog.Get(cardButton.gameObject.name.Substring("Card ".Length));
-                Assert.That(grade.text, Does.StartWith(CardCatalog.RarityCode(definition.rarity)));
+                Assert.That(identity.Grade,Is.EqualTo(definition.rarity));
+                Assert.That(identity.UsesFullPrint,Is.True,"The source's printed grade is preserved, rather than recreated as an overlay label.");
             }
             SmokeUi.Click("능력 · 전체"); yield return null;
             int equipment = CardCatalog.All.Count(card => card.kind == CardKind.Unit && (card.capabilityMask & 1) != 0);
@@ -53,7 +54,8 @@ namespace FantasyCards.SmokeTests
             Assert.That(VisibleCards().All(card => card.kind == CardKind.Unit && (card.capabilityMask & 1) != 0), Is.True);
             SmokeUi.Click("검색 / 필터 초기화"); yield return null;
             SmokeUi.Click("대기실"); yield return null;
-            SmokeUi.Click("편집 덱 분석"); yield return null;
+            SmokeUi.Click("덱 편집"); yield return null;
+            SmokeUi.Click("덱 분석"); yield return null;
             Assert.That(SmokeUi.FindButton("소울 곡선"), Is.Not.Null);
             SmokeUi.Click("속성 / 유지비"); yield return null;
             Assert.That(SmokeUi.HasText("유지비 합계"), Is.True);
@@ -98,7 +100,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(dragEngine.State.players[0].AtLane(2).instanceId, Is.EqualTo(unit.instanceId));
             Assert.That(dragEngine.State.players[0].genericSoul, Is.EqualTo(soul - CardCatalog.Get(unit.definitionId).cost));
             BattleEngine.Validate(dragEngine.State);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-critical-deployed-field", 1280, 720, AssertArcanaSurfaces);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-critical-deployed-field", 1280, 720, AssertArcanaSurfaces);
 
             // Native-only legal deterministic fixture. Browser checks use ordinary
             // pointer/touch input and never inject this state.

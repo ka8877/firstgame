@@ -40,6 +40,7 @@ namespace FirstGame.Editor
                 if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");
                 string output = Path.Combine(root, "FantasyCards", profile);
                 Directory.CreateDirectory(output);
+                string sourceFingerprint=BuildSourceBinding.Capture(output,"FantasyCards");
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                     scenes = new[] { "Assets/Scenes/Boot.unity" }, target = target,
                     locationPathName = string.IsNullOrEmpty(executable) ? output : Path.Combine(output, executable),
@@ -48,8 +49,8 @@ namespace FirstGame.Editor
                 File.WriteAllText(Path.Combine(output, "BuildEvidence.txt"),
                     "Engine: " + Application.unityVersion + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
-                    "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings +
-                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\nRevision: fm-arcana-2026-10-27\n");
+                    "\nSourceFingerprint: " + sourceFingerprint + "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings +
+                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\nRevision: fm-restoration-2026-10-27\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }

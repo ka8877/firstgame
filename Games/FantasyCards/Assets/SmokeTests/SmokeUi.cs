@@ -32,18 +32,22 @@ namespace FantasyCards.SmokeTests
         sealed class DemoPreferenceScope : IDisposable
         {
             readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck", "FC.profile.name", "FC.profile.avatar" };
-            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2", "FC.profile.wins", "FC.profile.losses", "FC.profile.draws" };
+            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2", "FC.demo.won.3", "FC.demo.won.4", "FC.demo.won.5", "FC.demo.won.6", "FC.profile.wins", "FC.profile.losses", "FC.profile.draws", "FC.effects.muted", "FC.originalMusic.muted", "FC.scenario.won.roots", "FC.scenario.won.tides", "FC.scenario.won.forge", "FC.scenario.won.relic" };
+            readonly string[] floatKeys = { "FC.effects.volume", "FC.originalMusic.volume" };
+            readonly Dictionary<string,float> floats = new Dictionary<string,float>();
             readonly Dictionary<string, string> strings = new Dictionary<string, string>();
             readonly Dictionary<string, int> ints = new Dictionary<string, int>();
             public DemoPreferenceScope()
             {
                 foreach (string key in stringKeys) if (PlayerPrefs.HasKey(key)) strings[key] = PlayerPrefs.GetString(key);
                 foreach (string key in intKeys) if (PlayerPrefs.HasKey(key)) ints[key] = PlayerPrefs.GetInt(key);
+                foreach (string key in floatKeys) if (PlayerPrefs.HasKey(key)) floats[key] = PlayerPrefs.GetFloat(key);
             }
             public void Dispose()
             {
                 foreach (string key in stringKeys) { if (strings.TryGetValue(key, out var value)) PlayerPrefs.SetString(key, value); else PlayerPrefs.DeleteKey(key); }
                 foreach (string key in intKeys) { if (ints.TryGetValue(key, out var value)) PlayerPrefs.SetInt(key, value); else PlayerPrefs.DeleteKey(key); }
+                foreach (string key in floatKeys) { if (floats.TryGetValue(key, out var value)) PlayerPrefs.SetFloat(key,value); else PlayerPrefs.DeleteKey(key); }
                 PlayerPrefs.Save();
             }
         }

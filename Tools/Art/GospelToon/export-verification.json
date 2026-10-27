@@ -1,0 +1,2164 @@
+{
+  "revision": "gospel-toon-2026-10-27",
+  "scope": "Actual FBX reimport, skinned pose and shared transform paths; not Unity or Web or hardware performance.",
+  "actors": [
+    {
+      "actor": "YoungJesus",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx",
+      "sha256": "6233337a950fa385ad31503ad6d8d9d18cad13e78f0dc63d4e80ec8353bf7d0f",
+      "bytes": 7765548,
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "JumpAir",
+        "JumpLand",
+        "JumpStart",
+        "Practice",
+        "Run",
+        "Walk"
+      ],
+      "sharedTransformPaths": true,
+      "meshes": 10,
+      "materials": [
+        "Gospel_BlueMantle",
+        "Gospel_Eyes",
+        "Gospel_HairCap",
+        "Gospel_Leather",
+        "Gospel_Linen",
+        "Gospel_Rope",
+        "Gospel_ToonHair",
+        "Gospel_ToonHairLight",
+        "Gospel_ToonHighlight",
+        "Gospel_ToonInk",
+        "Gospel_ToonIris",
+        "Gospel_ToonIrisAmber",
+        "Gospel_ToonIrisRim",
+        "Gospel_ToonLid",
+        "Gospel_ToonLip",
+        "Gospel_ToonPupil",
+        "Gospel_ToonSkinYoung"
+      ],
+      "skinWeightAudit": [
+        {
+          "mesh": "YoungJesus_Leather_Skin",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_PlainWovenWaistRope",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_ToonEar",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_ToonHair",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "SuperHero_Male",
+          "minimumRawWeightSum": 0.08451110266469186,
+          "maximumRawWeightSum": 1.0034894291311502,
+          "nonUnitRawSums": 9080,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Eyes",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_LooseFlatFrontLinen",
+          "minimumRawWeightSum": 0.9998948574066162,
+          "maximumRawWeightSum": 1.0000000912696123,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_ToonDetails",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_ToonEar.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "YoungJesus_ToonSculptedHead",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        }
+      ],
+      "crownFaces": 2205,
+      "outwardCrownFaces": 2205,
+      "poseSamples": [
+        {
+          "clip": "Idle",
+          "frame": 1,
+          "min": [
+            -0.2789038419723511,
+            -0.28030577301979065,
+            -0.009959794580936432
+          ],
+          "max": [
+            0.23917467892169952,
+            0.3015229403972626,
+            1.449631690979004
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Idle",
+          "frame": 38,
+          "min": [
+            -0.2784932553768158,
+            -0.2803192734718323,
+            -0.010071038268506527
+          ],
+          "max": [
+            0.23275338113307953,
+            0.3015162944793701,
+            1.449289083480835
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Idle",
+          "frame": 76,
+          "min": [
+            -0.2789093554019928,
+            -0.28031277656555176,
+            -0.009891955181956291
+          ],
+          "max": [
+            0.23871289193630219,
+            0.3015219569206238,
+            1.4494448900222778
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 1,
+          "min": [
+            -0.5664776563644409,
+            -0.28844714164733887,
+            -0.130708709359169
+          ],
+          "max": [
+            0.4857501685619354,
+            0.23575104773044586,
+            1.4078110456466675
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 38,
+          "min": [
+            -0.5610446333885193,
+            -0.28483161330223083,
+            -0.09641939401626587
+          ],
+          "max": [
+            0.48479676246643066,
+            0.21613365411758423,
+            1.4032247066497803
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 76,
+          "min": [
+            -0.5664776563644409,
+            -0.28844714164733887,
+            -0.130708709359169
+          ],
+          "max": [
+            0.4857501685619354,
+            0.23575104773044586,
+            1.4078110456466675
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 1,
+          "min": [
+            -0.5422232747077942,
+            -0.2946750819683075,
+            -0.04076002165675163
+          ],
+          "max": [
+            0.45970070362091064,
+            0.2783544063568115,
+            1.420888066291809
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 20,
+          "min": [
+            -0.3316900134086609,
+            -0.43015536665916443,
+            0.0067166793160140514
+          ],
+          "max": [
+            0.24021559953689575,
+            0.2994644045829773,
+            1.2102762460708618
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 39,
+          "min": [
+            -0.2787702679634094,
+            -0.28029394149780273,
+            -0.010166141204535961
+          ],
+          "max": [
+            0.2263416200876236,
+            0.3015287220478058,
+            1.4526550769805908
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 1,
+          "min": [
+            -0.3482893705368042,
+            -0.31269651651382446,
+            0.021159205585718155
+          ],
+          "max": [
+            0.237458273768425,
+            0.29174333810806274,
+            1.0595707893371582
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 21,
+          "min": [
+            -0.5771887898445129,
+            -0.37066733837127686,
+            0.11918032169342041
+          ],
+          "max": [
+            0.4780493676662445,
+            0.2266564965248108,
+            1.3896844387054443
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 41,
+          "min": [
+            -0.5664776563644409,
+            -0.28844714164733887,
+            -0.130708709359169
+          ],
+          "max": [
+            0.4857501685619354,
+            0.23575109243392944,
+            1.4078110456466675
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Practice",
+          "frame": 1,
+          "min": [
+            -0.2789042592048645,
+            -0.28030675649642944,
+            -0.009949741885066032
+          ],
+          "max": [
+            0.2275155633687973,
+            0.3015229105949402,
+            1.4481639862060547
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Practice",
+          "frame": 31,
+          "min": [
+            -0.27848002314567566,
+            -0.4313848912715912,
+            -0.010125603526830673
+          ],
+          "max": [
+            0.22666777670383453,
+            0.30152976512908936,
+            1.4496709108352661
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Practice",
+          "frame": 61,
+          "min": [
+            -0.2789042592048645,
+            -0.28030675649642944,
+            -0.009949741885066032
+          ],
+          "max": [
+            0.2275155633687973,
+            0.3015229105949402,
+            1.4481639862060547
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Run",
+          "frame": 1,
+          "min": [
+            -0.1994321644306183,
+            -0.5649983882904053,
+            0.04931265488266945
+          ],
+          "max": [
+            0.2960498332977295,
+            0.7047958374023438,
+            1.3458887338638306
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Run",
+          "frame": 15,
+          "min": [
+            -0.3012835383415222,
+            -0.5590285062789917,
+            0.04875209927558899
+          ],
+          "max": [
+            0.19738568365573883,
+            0.7048299908638,
+            1.3555375337600708
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Run",
+          "frame": 29,
+          "min": [
+            -0.1994321644306183,
+            -0.5649983882904053,
+            0.04931265488266945
+          ],
+          "max": [
+            0.2953237295150757,
+            0.7047958374023438,
+            1.3458887338638306
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Walk",
+          "frame": 1,
+          "min": [
+            -0.22897590696811676,
+            -0.3981030285358429,
+            -0.007415370550006628
+          ],
+          "max": [
+            0.19941312074661255,
+            0.3920855224132538,
+            1.4394500255584717
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Walk",
+          "frame": 21,
+          "min": [
+            -0.1914840191602707,
+            -0.3981005549430847,
+            -0.015492073260247707
+          ],
+          "max": [
+            0.23493434488773346,
+            0.3795168101787567,
+            1.4391838312149048
+          ],
+          "vertices": 81336
+        },
+        {
+          "clip": "Walk",
+          "frame": 41,
+          "min": [
+            -0.22897590696811676,
+            -0.3981030285358429,
+            -0.007415370550006628
+          ],
+          "max": [
+            0.19941312074661255,
+            0.3920855224132538,
+            1.4394500255584717
+          ],
+          "vertices": 81336
+        }
+      ],
+      "testedInputFile": "/tmp/firstgame-gospel-toon/finalcandidate/YoungJesus.fbx",
+      "currentRuntimeAssetBytesMatch": true
+    },
+    {
+      "actor": "AdultJesus",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/AdultJesus.fbx",
+      "sha256": "cdedbbb77a6209712f20d62d659b5907dc6f0342d2a1fb9148967f6376e060c7",
+      "bytes": 8203036,
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "JumpAir",
+        "JumpLand",
+        "JumpStart",
+        "Practice",
+        "Run",
+        "Walk"
+      ],
+      "sharedTransformPaths": true,
+      "meshes": 10,
+      "materials": [
+        "Gospel_Eyes",
+        "Gospel_HairCap",
+        "Gospel_Leather",
+        "Gospel_Linen",
+        "Gospel_RedMantle",
+        "Gospel_Rope",
+        "Gospel_ToonHair",
+        "Gospel_ToonHairLight",
+        "Gospel_ToonHighlight",
+        "Gospel_ToonInk",
+        "Gospel_ToonIris",
+        "Gospel_ToonIrisAmber",
+        "Gospel_ToonIrisRim",
+        "Gospel_ToonLid",
+        "Gospel_ToonLip",
+        "Gospel_ToonPupil",
+        "Gospel_ToonSkin"
+      ],
+      "skinWeightAudit": [
+        {
+          "mesh": "AdultJesus_ToonDetails",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_Leather_Skin",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_ToonEar.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_ToonSculptedHead",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Eyes",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "SuperHero_Male.001",
+          "minimumRawWeightSum": 0.08451110266469186,
+          "maximumRawWeightSum": 1.156436026096344,
+          "nonUnitRawSums": 9410,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_PlainWovenWaistRope",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_LooseFlatFrontLinen",
+          "minimumRawWeightSum": 0.9998930096626282,
+          "maximumRawWeightSum": 1.000000100582838,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_ToonEar",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_ToonHair",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        }
+      ],
+      "crownFaces": 2205,
+      "outwardCrownFaces": 2205,
+      "poseSamples": [
+        {
+          "clip": "Idle",
+          "frame": 1,
+          "min": [
+            -0.357293963432312,
+            -0.35275569558143616,
+            -0.00951074156910181
+          ],
+          "max": [
+            0.36271387338638306,
+            0.375453919172287,
+            1.8080213069915771
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 38,
+          "min": [
+            -0.35679709911346436,
+            -0.35276278853416443,
+            -0.009549112059175968
+          ],
+          "max": [
+            0.35439103841781616,
+            0.3754526376724243,
+            1.807593822479248
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 76,
+          "min": [
+            -0.3572980761528015,
+            -0.3527641296386719,
+            -0.009423497132956982
+          ],
+          "max": [
+            0.3615109324455261,
+            0.3754507601261139,
+            1.8077876567840576
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 1,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 38,
+          "min": [
+            -0.8171857595443726,
+            -0.35723671317100525,
+            -0.11233624815940857
+          ],
+          "max": [
+            0.7420317530632019,
+            0.3416832387447357,
+            1.7501410245895386
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 76,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 1,
+          "min": [
+            -0.792911171913147,
+            -0.3675268590450287,
+            -0.047630082815885544
+          ],
+          "max": [
+            0.7111563086509705,
+            0.3468480408191681,
+            1.7721714973449707
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 20,
+          "min": [
+            -0.48130613565444946,
+            -0.5365017056465149,
+            0.012984254397451878
+          ],
+          "max": [
+            0.3041607439517975,
+            0.3728715479373932,
+            1.509490966796875
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 39,
+          "min": [
+            -0.36668217182159424,
+            -0.3527337610721588,
+            -0.00974185112863779
+          ],
+          "max": [
+            0.3408617079257965,
+            0.37546873092651367,
+            1.811792016029358
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 1,
+          "min": [
+            -0.517505943775177,
+            -0.3900034725666046,
+            0.0313059464097023
+          ],
+          "max": [
+            0.37773939967155457,
+            0.3649992346763611,
+            1.3215267658233643
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 21,
+          "min": [
+            -0.8320925235748291,
+            -0.46571865677833557,
+            0.16052168607711792
+          ],
+          "max": [
+            0.7334632277488708,
+            0.29561400413513184,
+            1.7332534790039062
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 41,
+          "min": [
+            -0.8226326704025269,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.35663700103759766,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 1,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 31,
+          "min": [
+            -0.35678279399871826,
+            -0.6389528512954712,
+            -0.009624561294913292
+          ],
+          "max": [
+            0.29117512702941895,
+            0.3754706382751465,
+            1.808070182800293
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 61,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 1,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.41916340589523315,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 15,
+          "min": [
+            -0.42350682616233826,
+            -0.7017677426338196,
+            0.06216514855623245
+          ],
+          "max": [
+            0.34525081515312195,
+            0.8789239525794983,
+            1.6906641721725464
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 29,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.4175858795642853,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 1,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 21,
+          "min": [
+            -0.28042566776275635,
+            -0.4954192042350769,
+            -0.017457466572523117
+          ],
+          "max": [
+            0.3563564419746399,
+            0.472448468208313,
+            1.7949901819229126
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 41,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        }
+      ],
+      "testedInputFile": "/tmp/firstgame-gospel-toon/finalcandidate/AdultJesus.fbx",
+      "currentRuntimeAssetBytesMatch": true
+    },
+    {
+      "actor": "Mary",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/Mary.fbx",
+      "sha256": "85e233312185bee23dad19b7eb91d4f0901344212794e473e47bfadc69543e40",
+      "bytes": 8044076,
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "JumpAir",
+        "JumpLand",
+        "JumpStart",
+        "Practice",
+        "Run",
+        "Walk"
+      ],
+      "sharedTransformPaths": true,
+      "meshes": 11,
+      "materials": [
+        "Gospel_BlueMantle",
+        "Gospel_Eyes",
+        "Gospel_HairCap",
+        "Gospel_Leather",
+        "Gospel_Linen",
+        "Gospel_Rope",
+        "Gospel_ToonHair",
+        "Gospel_ToonHairLight",
+        "Gospel_ToonHighlight",
+        "Gospel_ToonInk",
+        "Gospel_ToonIris",
+        "Gospel_ToonIrisAmber",
+        "Gospel_ToonIrisRim",
+        "Gospel_ToonLid",
+        "Gospel_ToonLip",
+        "Gospel_ToonPupil",
+        "Gospel_ToonSkinMary",
+        "Gospel_Veil"
+      ],
+      "skinWeightAudit": [
+        {
+          "mesh": "Mary_IvoryHeadVeil",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "AdultJesus_Leather_Skin.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_ToonDetails",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_ToonEar.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_ToonSculptedHead",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "SuperHero_Male.002",
+          "minimumRawWeightSum": 0.08451110266469186,
+          "maximumRawWeightSum": 1.0718906819820404,
+          "nonUnitRawSums": 9052,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Eyes",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_LooseFlatFrontLinen",
+          "minimumRawWeightSum": 0.9998930096626282,
+          "maximumRawWeightSum": 1.000000100582838,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_PlainWovenWaistRope",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_ToonEar",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Mary_ToonHair",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        }
+      ],
+      "crownFaces": 2205,
+      "outwardCrownFaces": 2205,
+      "poseSamples": [
+        {
+          "clip": "Idle",
+          "frame": 1,
+          "min": [
+            -0.3066134452819824,
+            -0.3114908039569855,
+            -0.02300095371901989
+          ],
+          "max": [
+            0.29080039262771606,
+            0.3479180932044983,
+            1.6455023288726807
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Idle",
+          "frame": 38,
+          "min": [
+            -0.3055891990661621,
+            -0.3113320767879486,
+            -0.02273956499993801
+          ],
+          "max": [
+            0.2835352420806885,
+            0.3478688597679138,
+            1.6451131105422974
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Idle",
+          "frame": 76,
+          "min": [
+            -0.3066047132015228,
+            -0.31150051951408386,
+            -0.022923659533262253
+          ],
+          "max": [
+            0.2903221547603607,
+            0.3479458689689636,
+            1.6452897787094116
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 1,
+          "min": [
+            -0.6773176789283752,
+            -0.3259056508541107,
+            -0.15892402827739716
+          ],
+          "max": [
+            0.5956594944000244,
+            0.2907514274120331,
+            1.5980308055877686
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 38,
+          "min": [
+            -0.6721652746200562,
+            -0.32177120447158813,
+            -0.12009947746992111
+          ],
+          "max": [
+            0.5940313935279846,
+            0.2819923758506775,
+            1.5928248167037964
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 76,
+          "min": [
+            -0.6773176789283752,
+            -0.3259056508541107,
+            -0.15892402827739716
+          ],
+          "max": [
+            0.5956594944000244,
+            0.2907514274120331,
+            1.5980308055877686
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 1,
+          "min": [
+            -0.6506786942481995,
+            -0.3344905376434326,
+            -0.06888643652200699
+          ],
+          "max": [
+            0.5663486123085022,
+            0.3201209008693695,
+            1.6128755807876587
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 20,
+          "min": [
+            -0.4032411575317383,
+            -0.48827654123306274,
+            0.002035590121522546
+          ],
+          "max": [
+            0.28231164813041687,
+            0.34837037324905396,
+            1.3738049268722534
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 39,
+          "min": [
+            -0.30627742409706116,
+            -0.3114074170589447,
+            -0.02313753217458725
+          ],
+          "max": [
+            0.27370965480804443,
+            0.34786295890808105,
+            1.6489341259002686
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 1,
+          "min": [
+            -0.4266969859600067,
+            -0.35494694113731384,
+            0.005747104994952679
+          ],
+          "max": [
+            0.2956850230693817,
+            0.3376174867153168,
+            1.202737808227539
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 21,
+          "min": [
+            -0.6854362487792969,
+            -0.41975411772727966,
+            0.11489972472190857
+          ],
+          "max": [
+            0.5867881774902344,
+            0.2582494914531708,
+            1.5774552822113037
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 41,
+          "min": [
+            -0.6773176789283752,
+            -0.3259056508541107,
+            -0.15892402827739716
+          ],
+          "max": [
+            0.5956594944000244,
+            0.2907514274120331,
+            1.5980308055877686
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Practice",
+          "frame": 1,
+          "min": [
+            -0.3066149652004242,
+            -0.31149306893348694,
+            -0.022988541051745415
+          ],
+          "max": [
+            0.28204959630966187,
+            0.34792080521583557,
+            1.6438360214233398
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Practice",
+          "frame": 31,
+          "min": [
+            -0.30558881163597107,
+            -0.5313925743103027,
+            -0.022803692147135735
+          ],
+          "max": [
+            0.2568647563457489,
+            0.3478601574897766,
+            1.645546555519104
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Practice",
+          "frame": 61,
+          "min": [
+            -0.3066149652004242,
+            -0.31149306893348694,
+            -0.022988541051745415
+          ],
+          "max": [
+            0.28204959630966187,
+            0.34792080521583557,
+            1.6438360214233398
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Run",
+          "frame": 1,
+          "min": [
+            -0.24584831297397614,
+            -0.6430345177650452,
+            0.0575244314968586
+          ],
+          "max": [
+            0.3612053394317627,
+            0.7972382307052612,
+            1.5277416706085205
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Run",
+          "frame": 15,
+          "min": [
+            -0.3661845028400421,
+            -0.6314265727996826,
+            0.05715625360608101
+          ],
+          "max": [
+            0.24198104441165924,
+            0.7973144054412842,
+            1.5386942625045776
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Run",
+          "frame": 29,
+          "min": [
+            -0.24584831297397614,
+            -0.6430345177650452,
+            0.0575244314968586
+          ],
+          "max": [
+            0.3602606952190399,
+            0.7972382307052612,
+            1.5277416706085205
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Walk",
+          "frame": 1,
+          "min": [
+            -0.2782730460166931,
+            -0.4508036673069,
+            -0.008807611651718616
+          ],
+          "max": [
+            0.23962725698947906,
+            0.44372665882110596,
+            1.6339446306228638
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Walk",
+          "frame": 21,
+          "min": [
+            -0.23357783257961273,
+            -0.45113417506217957,
+            -0.016338221728801727
+          ],
+          "max": [
+            0.2852384150028229,
+            0.42921608686447144,
+            1.633642315864563
+          ],
+          "vertices": 86316
+        },
+        {
+          "clip": "Walk",
+          "frame": 41,
+          "min": [
+            -0.2782730460166931,
+            -0.4508036673069,
+            -0.008807611651718616
+          ],
+          "max": [
+            0.23962725698947906,
+            0.44372665882110596,
+            1.6339446306228638
+          ],
+          "vertices": 86316
+        }
+      ],
+      "testedInputFile": "/tmp/firstgame-gospel-toon/finalcandidate/Mary.fbx",
+      "currentRuntimeAssetBytesMatch": true
+    },
+    {
+      "actor": "TempleTeacher",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/TempleTeacher.fbx",
+      "sha256": "cdb360286b91c930332830178dc0cf963654378565ea714edff8ec138e574246",
+      "bytes": 8206060,
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "JumpAir",
+        "JumpLand",
+        "JumpStart",
+        "Practice",
+        "Run",
+        "Walk"
+      ],
+      "sharedTransformPaths": true,
+      "meshes": 10,
+      "materials": [
+        "Gospel_Eyes",
+        "Gospel_HairCap",
+        "Gospel_Leather",
+        "Gospel_Linen",
+        "Gospel_RedMantle",
+        "Gospel_Rope",
+        "Gospel_ToonHairGray",
+        "Gospel_ToonHighlight",
+        "Gospel_ToonInk",
+        "Gospel_ToonIris",
+        "Gospel_ToonIrisAmber",
+        "Gospel_ToonIrisRim",
+        "Gospel_ToonLid",
+        "Gospel_ToonLip",
+        "Gospel_ToonPupil",
+        "Gospel_ToonSkin"
+      ],
+      "skinWeightAudit": [
+        {
+          "mesh": "TempleTeacher_AdultJesus_LooseFlatFrontLinen",
+          "minimumRawWeightSum": 0.9998930096626282,
+          "maximumRawWeightSum": 1.000000100582838,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_SuperHero_Male.001",
+          "minimumRawWeightSum": 0.08451110266469186,
+          "maximumRawWeightSum": 1.156436026096344,
+          "nonUnitRawSums": 9410,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_ToonDetails",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_ToonEar",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_ToonEar.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_ToonSculptedHead",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_AdultJesus_Leather_Skin",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Eyes",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_AdultJesus_PlainWovenWaistRope",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "TempleTeacher_ToonHair",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        }
+      ],
+      "crownFaces": 2205,
+      "outwardCrownFaces": 2205,
+      "poseSamples": [
+        {
+          "clip": "Idle",
+          "frame": 1,
+          "min": [
+            -0.357293963432312,
+            -0.35275569558143616,
+            -0.00951074156910181
+          ],
+          "max": [
+            0.36271387338638306,
+            0.375453919172287,
+            1.8080213069915771
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 38,
+          "min": [
+            -0.35679709911346436,
+            -0.35276278853416443,
+            -0.009549112059175968
+          ],
+          "max": [
+            0.35439103841781616,
+            0.3754526376724243,
+            1.807593822479248
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 76,
+          "min": [
+            -0.3572980761528015,
+            -0.3527641296386719,
+            -0.009423497132956982
+          ],
+          "max": [
+            0.3615109324455261,
+            0.3754507601261139,
+            1.8077876567840576
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 1,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 38,
+          "min": [
+            -0.8171857595443726,
+            -0.35723671317100525,
+            -0.11233624815940857
+          ],
+          "max": [
+            0.7420317530632019,
+            0.3416832387447357,
+            1.7501410245895386
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 76,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 1,
+          "min": [
+            -0.792911171913147,
+            -0.3675268590450287,
+            -0.047630082815885544
+          ],
+          "max": [
+            0.7111563086509705,
+            0.3468480408191681,
+            1.772175908088684
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 20,
+          "min": [
+            -0.48130613565444946,
+            -0.5365017056465149,
+            0.012984254397451878
+          ],
+          "max": [
+            0.3041607439517975,
+            0.3728715479373932,
+            1.5094932317733765
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 39,
+          "min": [
+            -0.36668217182159424,
+            -0.3527337610721588,
+            -0.00974185112863779
+          ],
+          "max": [
+            0.3408617079257965,
+            0.37546873092651367,
+            1.811792016029358
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 1,
+          "min": [
+            -0.517505943775177,
+            -0.3900034725666046,
+            0.0313059464097023
+          ],
+          "max": [
+            0.37773939967155457,
+            0.3649992346763611,
+            1.3215267658233643
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 21,
+          "min": [
+            -0.8320925235748291,
+            -0.46571865677833557,
+            0.16052168607711792
+          ],
+          "max": [
+            0.7334632277488708,
+            0.29561400413513184,
+            1.7332534790039062
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 41,
+          "min": [
+            -0.8226326704025269,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.35663700103759766,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 1,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 31,
+          "min": [
+            -0.35678279399871826,
+            -0.6389528512954712,
+            -0.009624561294913292
+          ],
+          "max": [
+            0.29117512702941895,
+            0.3754706382751465,
+            1.808070182800293
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 61,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 1,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.41916340589523315,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 15,
+          "min": [
+            -0.42350682616233826,
+            -0.7017677426338196,
+            0.06216514855623245
+          ],
+          "max": [
+            0.34525081515312195,
+            0.8789239525794983,
+            1.6906641721725464
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 29,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.4175858795642853,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 1,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 21,
+          "min": [
+            -0.28042566776275635,
+            -0.4954192042350769,
+            -0.017457466572523117
+          ],
+          "max": [
+            0.3563564419746399,
+            0.472448468208313,
+            1.7949901819229126
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 41,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        }
+      ],
+      "testedInputFile": "/tmp/firstgame-gospel-toon/finalcandidate/TempleTeacher.fbx",
+      "currentRuntimeAssetBytesMatch": true
+    },
+    {
+      "actor": "Joseph",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/Gospel3D/Joseph.fbx",
+      "sha256": "a27e0ec7a513c51abd8a6c6e4fc664e84b4b3bd249fd2ab483faa2f113a17f69",
+      "bytes": 8204524,
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "JumpAir",
+        "JumpLand",
+        "JumpStart",
+        "Practice",
+        "Run",
+        "Walk"
+      ],
+      "sharedTransformPaths": true,
+      "meshes": 10,
+      "materials": [
+        "Gospel_Eyes",
+        "Gospel_HairCap",
+        "Gospel_Leather",
+        "Gospel_Linen",
+        "Gospel_RedMantle",
+        "Gospel_Rope",
+        "Gospel_ToonHair",
+        "Gospel_ToonHairLight",
+        "Gospel_ToonHighlight",
+        "Gospel_ToonInk",
+        "Gospel_ToonIris",
+        "Gospel_ToonIrisAmber",
+        "Gospel_ToonIrisRim",
+        "Gospel_ToonLid",
+        "Gospel_ToonLip",
+        "Gospel_ToonPupil",
+        "Gospel_ToonSkin"
+      ],
+      "skinWeightAudit": [
+        {
+          "mesh": "Joseph_SuperHero_Male.001",
+          "minimumRawWeightSum": 0.08451110266469186,
+          "maximumRawWeightSum": 1.156436026096344,
+          "nonUnitRawSums": 9410,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_ToonEar",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_ToonEar.001",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_ToonHair",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_ToonSculptedHead",
+          "minimumRawWeightSum": 0.9999999701976776,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_AdultJesus_LooseFlatFrontLinen",
+          "minimumRawWeightSum": 0.9998930096626282,
+          "maximumRawWeightSum": 1.000000100582838,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_AdultJesus_Leather_Skin",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Eyes",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_AdultJesus_PlainWovenWaistRope",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0000000298023224,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        },
+        {
+          "mesh": "Joseph_ToonDetails",
+          "minimumRawWeightSum": 1.0,
+          "maximumRawWeightSum": 1.0,
+          "nonUnitRawSums": 0,
+          "note": "Existing licensed limb weights have non-unit raw sums; engine normalization retained. New generated head/hair/cloth are normalized; all vertices have finite positive skin weights."
+        }
+      ],
+      "crownFaces": 2205,
+      "outwardCrownFaces": 2205,
+      "poseSamples": [
+        {
+          "clip": "Idle",
+          "frame": 1,
+          "min": [
+            -0.357293963432312,
+            -0.35275569558143616,
+            -0.00951074156910181
+          ],
+          "max": [
+            0.36271387338638306,
+            0.375453919172287,
+            1.8080213069915771
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 38,
+          "min": [
+            -0.35679709911346436,
+            -0.35276278853416443,
+            -0.009549112059175968
+          ],
+          "max": [
+            0.35439103841781616,
+            0.3754526376724243,
+            1.807593822479248
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Idle",
+          "frame": 76,
+          "min": [
+            -0.3572980761528015,
+            -0.3527641296386719,
+            -0.009423497132956982
+          ],
+          "max": [
+            0.3615109324455261,
+            0.3754507601261139,
+            1.8077876567840576
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 1,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 38,
+          "min": [
+            -0.8171857595443726,
+            -0.35723671317100525,
+            -0.11233624815940857
+          ],
+          "max": [
+            0.7420317530632019,
+            0.3416832387447357,
+            1.7501410245895386
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpAir",
+          "frame": 76,
+          "min": [
+            -0.8226326107978821,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.3566371202468872,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 1,
+          "min": [
+            -0.792911171913147,
+            -0.3675268590450287,
+            -0.047630082815885544
+          ],
+          "max": [
+            0.7111563086509705,
+            0.3468480408191681,
+            1.772175908088684
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 20,
+          "min": [
+            -0.48130613565444946,
+            -0.5365017056465149,
+            0.012984254397451878
+          ],
+          "max": [
+            0.3041607439517975,
+            0.3728715479373932,
+            1.5094932317733765
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpLand",
+          "frame": 39,
+          "min": [
+            -0.36668217182159424,
+            -0.3527337610721588,
+            -0.00974185112863779
+          ],
+          "max": [
+            0.3408617079257965,
+            0.37546873092651367,
+            1.811792016029358
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 1,
+          "min": [
+            -0.517505943775177,
+            -0.3900034725666046,
+            0.0313059464097023
+          ],
+          "max": [
+            0.37773939967155457,
+            0.3649992346763611,
+            1.3215267658233643
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 21,
+          "min": [
+            -0.8320925235748291,
+            -0.46571865677833557,
+            0.16052168607711792
+          ],
+          "max": [
+            0.7334632277488708,
+            0.29561400413513184,
+            1.7332534790039062
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "JumpStart",
+          "frame": 41,
+          "min": [
+            -0.8226326704025269,
+            -0.36266642808914185,
+            -0.1550891399383545
+          ],
+          "max": [
+            0.7436171770095825,
+            0.35663700103759766,
+            1.7558611631393433
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 1,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 31,
+          "min": [
+            -0.35678279399871826,
+            -0.6389528512954712,
+            -0.009624561294913292
+          ],
+          "max": [
+            0.29117512702941895,
+            0.3754706382751465,
+            1.808070182800293
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Practice",
+          "frame": 61,
+          "min": [
+            -0.35729435086250305,
+            -0.3527567982673645,
+            -0.00949782133102417
+          ],
+          "max": [
+            0.35642164945602417,
+            0.37545350193977356,
+            1.8061906099319458
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 1,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.41916340589523315,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 15,
+          "min": [
+            -0.42350682616233826,
+            -0.7017677426338196,
+            0.06216514855623245
+          ],
+          "max": [
+            0.34525081515312195,
+            0.8789239525794983,
+            1.6906641721725464
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Run",
+          "frame": 29,
+          "min": [
+            -0.3450186252593994,
+            -0.701320469379425,
+            0.0630066841840744
+          ],
+          "max": [
+            0.4175858795642853,
+            0.8788661360740662,
+            1.678629994392395
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 1,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 21,
+          "min": [
+            -0.28042566776275635,
+            -0.4954192042350769,
+            -0.017457466572523117
+          ],
+          "max": [
+            0.3563564419746399,
+            0.472448468208313,
+            1.7949901819229126
+          ],
+          "vertices": 91358
+        },
+        {
+          "clip": "Walk",
+          "frame": 41,
+          "min": [
+            -0.34824734926223755,
+            -0.4953644573688507,
+            -0.00987045094370842
+          ],
+          "max": [
+            0.2904193103313446,
+            0.48819291591644287,
+            1.7953224182128906
+          ],
+          "vertices": 91358
+        }
+      ],
+      "testedInputFile": "/tmp/firstgame-gospel-toon/finalcandidate/Joseph.fbx",
+      "currentRuntimeAssetBytesMatch": true
+    }
+  ],
+  "status": "passed"
+}

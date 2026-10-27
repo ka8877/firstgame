@@ -13,6 +13,7 @@ namespace FantasyCards.Presentation
     {
         private const string ProfileNameKey = "FC.profile.name", ProfileAvatarKey = "FC.profile.avatar";
         private string profileDraftName;
+        private Action profileTransferReturn;
         public string LocalProfileName => SafeProfileName(PlayerPrefs.GetString(ProfileNameKey, "소울 여행자"));
         public string LocalProfileAvatarId => LocalProfileAvatar().id;
         public int LocalProfileWins => PlayerPrefs.GetInt("FC.profile.wins", 0);
@@ -72,23 +73,7 @@ namespace FantasyCards.Presentation
 
         private void DrawDetailClientRail(Action back, string heading)
         {
-            var rail = Panel(root, .812f, .035f, .972f, .958f, new Color(.035f, .070f, .055f, .96f));
-            Frame(rail, gold, 2);
-            ClientBrand(rail, .035f, .885f, .965f, .985f);
-            Action profileBack = redraw ?? back;
-            var profile = Button(rail, "", .07f, .64f, .93f, .87f, () => ShowLocalProfile(profileBack), new Color(.075f, .12f, .09f), 24);
-            profile.gameObject.name = "Local profile card";
-            var avatar = LocalProfileAvatar(); Artwork(profile.transform, avatar, .035f, .32f, .44f, .96f);
-            Text(profile.transform, "LOCAL", .49f, .66f, .97f, .94f, 18, gold, TextAlignmentOptions.Center);
-            Text(profile.transform, LocalProfileName, .045f, .035f, .955f, .32f, 24, ivory, TextAlignmentOptions.Center);
-            Text(profile.transform, LocalProfileWins + "승 " + LocalProfileLosses + "패", .46f, .35f, .97f, .65f, 19, teal, TextAlignmentOptions.Center);
-            BindTooltip(profile.gameObject, "나의 프로필", "닉네임·원작 카드 아바타와 이 기기에서 기록한 연습전 전적을 확인합니다.");
-            Text(rail, heading, .04f, .575f, .96f, .635f, 19, gold, TextAlignmentOptions.Center);
-            Text(rail, useCustomDeck ? "편집 덱 선택" : DeckShortName(selectedDeckId), .045f, .45f, .955f, .565f, 24, ivory, TextAlignmentOptions.Center);
-            Button(rail, "덱 선택", .06f, .335f, .94f, .425f, ShowDeckSelection, slate, 23);
-            Button(rail, "카드 도감", .06f, .235f, .94f, .325f, () => ShowCollection(false), slate, 23);
-            Button(rail, "덱 편집", .06f, .135f, .94f, .225f, () => ShowCollection(true), slate, 23);
-            Button(rail, "돌아가기", .06f, .03f, .94f, .12f, back, slate, 23);
+            DrawRestorationProfileRail(back, heading);
         }
 
         private CardDefinition LocalProfileAvatar()
@@ -163,8 +148,10 @@ namespace FantasyCards.Presentation
                 BindTooltip(tile.gameObject, choice.name, "이 원작 카드 원화를 프로필 아바타로 선택합니다. 카드 기술이나 전투 능력을 부여하지 않습니다.");
             }
             Button(root, "돌아가기", .06f, .02f, .27f, .115f, back, slate, 25);
+            Button(root, "저장 옮기기", .31f, .025f, .55f, .105f, () =>
+            { profileTransferReturn = () => ShowLocalProfile(back); ShowTransfer(); }, slate, 23);
             int completed = Enumerable.Range(0, DemoCatalog.Encounters.Length).Count(i => PlayerPrefs.GetInt("FC.demo.won." + i, 0) != 0);
-            Text(root, "연습방 승리 " + completed + "/" + DemoCatalog.Encounters.Length + "  ·  도감 " + CardCatalog.All.Length + "종", .31f, .025f, .94f, .105f, 22, ivory, TextAlignmentOptions.MidlineRight);
+            Text(root, "AI 승리 " + completed + "/" + DemoCatalog.Encounters.Length + " · " + CardCatalog.All.Length + "종", .57f, .025f, .94f, .105f, 22, ivory, TextAlignmentOptions.MidlineRight);
         }
 
         private void RecordLocalBattleResult()

@@ -55,7 +55,9 @@ for c in cards:
   produced=souls(f['EarnSoulList']);assert all(k==81 or k//10==f['SoulType'] for k,n in produced)
   props.extend([f'landPointCost = {f["RequireLP"]}',f'producedColored = {sum(n for k,n in produced if k!=81)}',f'producedGeneric = {sum(n for k,n in produced if k==81)}'])
  if cat==2:
-  assert f['Skill1']==f['Skill2']==1 and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
+  # These three exact original variants have complete, tested techniques.
+  reviewed_skills={'3061320559':17,'3061320560':452,'3022820395':159}
+  assert f['Skill1']==reviewed_skills.get(c['sourceId'],1) and f['Skill2']==1 and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
   rank={1:'N',2:'C',3:'B',4:'A',5:'S'}[f.get('RankType',1)]
   props.extend([f'rank = CardRank.{rank}',f'capabilityMask = {MASK[f["UnitType"]]}',f'attackCoin = {coin(f,"ATK")}',f'defenseCoin = {coin(f,"DEF")}',f'healthCoin = {coin(f,"HP")}'])
   if effect.get('freeEquipmentBelowLevel'):props.append('freeEquipmentBelowLevel = true')
@@ -65,7 +67,11 @@ for c in cards:
   props.append(f'requiredCapabilityMask = {0 if f["UnitType"]==1 else MASK[f["UnitType"]]}')
  if cat==3:
   assert f['Duration']==1 and f['DurationType']==1
-  props.extend(['effect = Effect.StatOperations',f'playWindow = PlayWindow.{{1}}'.replace('{1}',{1:'Any',2:'AttackOnly',3:'DefenseOnly'}[f['TurnType']]),'operations = new SpellOperation[] { '+', '.join(operation(op) for op in effect['operations'])+' }'])
+  if c['sourceId']=='15052733622':
+   assert effect['kind']=='dimensionShockwave' and f['RareType']==11
+   props.extend(['effect = Effect.DimensionShockwave','playWindow = PlayWindow.AttackOnly'])
+  else:
+   props.extend(['effect = Effect.StatOperations',f'playWindow = PlayWindow.{{1}}'.replace('{1}',{1:'Any',2:'AttackOnly',3:'DefenseOnly'}[f['TurnType']]),'operations = new SpellOperation[] { '+', '.join(operation(op) for op in effect['operations'])+' }'])
  lines.append('                { '+', '.join(props)+' },')
 lines.extend(['            };','        }','    }','}'])
 OUTPUT.write_text('\n'.join(lines)+'\n')

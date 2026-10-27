@@ -42,6 +42,7 @@ REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-rem
 MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
 DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
+RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
     "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
@@ -127,6 +128,8 @@ class JourneySmoke:
         self.page, self.args, self.plan, self.output = page, args, plan, output
         self.navigation, self.started = 0, time.monotonic()
         self.capture_keys = []
+        self.canvas_geometry_element = None
+        self.canvas_geometry_box = self.canvas_geometry_guard = self.canvas_geometry_navigation = None
         self.pending_compositor_frames = []
         self.modern = plan.get("suite") == "modern-real-input-v1"
         # Attach while the page is still idle, before any short transient input.
@@ -165,6 +168,15 @@ class JourneySmoke:
             "observedEpochMs": time.time() * 1000, "navigation": self.navigation}))
         page.on("response", self.response)
         page.on("dialog", lambda dialog: (self.report["pageErrors"].append(dialog.message), dialog.dismiss()))
+        # Keep the exact executed harness/plan beside each attempt so a later
+        # diagnostic tool edit cannot replace the source behind a raw report SHA.
+        captured=[]
+        for source in (Path(__file__),Path(BASE.__file__),Path(PROVIDER_ERRORS.__file__),Path(LOCAL_ERRORS.__file__),
+                       ROOT/"Tools/Validation/webaudio-observer.js",ROOT/"Tools/Validation/fm-local-media-observer.js",args.plan):
+            target=self.output/"RecordedHarness"/source.relative_to(ROOT)
+            target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(source.read_bytes())
+            captured.append({"source":str(source.relative_to(ROOT)),"file":str(target.relative_to(ROOT)),"sha256":digest(target)})
+        self.report["harness"]["capturedSources"]=captured
         self.persist()
         files = self.report["buildFingerprint"]["files"]
         self.check(len(files) >= 5 and any(f["file"].endswith(".wasm.unityweb") for f in files),
@@ -190,6 +202,10 @@ class JourneySmoke:
             self.report["httpErrors"].append(entry)
 
     def loaded(self, reload=False):
+        if self.canvas_geometry_element is not None:
+            self.canvas_geometry_element.dispose()
+        self.canvas_geometry_element = None
+        self.canvas_geometry_box = self.canvas_geometry_guard = self.canvas_geometry_navigation = None
         if reload:
             self.local_media_timeline()
             self.navigation += 1
@@ -217,10 +233,72 @@ class JourneySmoke:
         if self.args.profile == "mobile-landscape":
             self.check(capabilities["maxTouchPoints"] > 0 and capabilities["coarse"], "Actual touch browser context", capabilities)
 
+    def canvas_box(self):
+        """Read ordinary DOM geometry once per unchanged shipping canvas."""
+        if self.report["revision"] not in RESTORATION_REVISIONS.values():
+            return self.page.locator("#unity-canvas").bounding_box()
+        expected_viewport = self.report["interactionViewport"]
+        if self.page.viewport_size != expected_viewport:
+            raise AssertionError("Interaction viewport changed")
+        if self.canvas_geometry_element is not None:
+            current = self.canvas_geometry_element.evaluate(self.canvas_geometry_reader, False)
+            if self.canvas_geometry_navigation == self.navigation and current == self.canvas_geometry_guard:
+                return dict(self.canvas_geometry_box)
+        if self.canvas_geometry_element is not None:
+            self.canvas_geometry_element.dispose()
+        self.canvas_geometry_element = self.page.query_selector("#unity-canvas")
+        if self.canvas_geometry_element is None:
+            raise AssertionError("No shipping game canvas")
+        measured = self.canvas_geometry_element.evaluate(self.canvas_geometry_reader, True)
+        geometry = measured.pop("measurement")
+        if not (measured["connected"] and measured["shippingCanvas"] and measured["ready"] == "ready"
+                and measured["url"] == self.game_url and measured["viewport"] == expected_viewport
+                and measured["dataUrl"] == self.report["unityConfigurations"][-1]["dataUrl"]
+                and measured["scroll"] == {"x": 0, "y": 0}
+                and measured["renderWidth"] > 0 and measured["renderHeight"] > 0
+                and not measured["hidden"] and measured["ariaHidden"] != "true"
+                and geometry["finite"] and geometry["display"] != "none"
+                and geometry["visibility"] == "visible" and geometry["opacity"] > 0):
+            raise AssertionError("Shipping canvas identity/ready/viewport/visibility changed: " + str(measured))
+        box = geometry["box"]
+        if not (box["width"] > 0 and box["height"] > 0 and box["x"] >= -.5 and box["y"] >= -.5
+                and box["x"] + box["width"] <= expected_viewport["width"] + .5
+                and box["y"] + box["height"] <= expected_viewport["height"] + .5):
+            raise AssertionError("Canvas bounds leave the actual interaction viewport")
+        self.canvas_geometry_guard, self.canvas_geometry_box = measured, box
+        self.canvas_geometry_navigation = self.navigation
+        self.report.setdefault("canvasGeometryChanges", []).append({
+            "navigation": self.navigation, "measuredUtc": now(), "guard": measured, **geometry,
+            "method": "Original DOM getBoundingClientRect; cached only while the same connected shipping canvas, URL, ready/data URL, viewport, scroll, backing dimensions, classes, inline styles, device scale and stylesheet count remain unchanged."})
+        self.persist()
+        return dict(box)
+
+    canvas_geometry_reader = """(c, measure) => {
+        if (!(c instanceof HTMLCanvasElement)) throw new Error('Not an HTML game canvas');
+        const p = c.parentElement;
+        const state = {connected:c.isConnected, shippingCanvas:c===window.canvas,
+            ready:c.dataset.unityState, dataUrl:c.dataset.dataUrl, url:location.href,
+            viewport:{width:innerWidth,height:innerHeight}, deviceScale:devicePixelRatio, scroll:{x:scrollX,y:scrollY},
+            renderWidth:c.width,renderHeight:c.height,hidden:c.hidden,
+            ariaHidden:c.getAttribute('aria-hidden'),
+            canvasClass:c.className,canvasStyle:c.getAttribute('style'),
+            parentClass:p?.className,parentStyle:p?.getAttribute('style'),
+            parentHidden:p?.hidden,bodyClass:document.body.className,
+            bodyStyle:document.body.getAttribute('style'),sheetCount:document.styleSheets.length};
+        if (measure) {
+            const r=c.getBoundingClientRect(), s=getComputedStyle(c);
+            state.measurement={box:{x:r.x,y:r.y,width:r.width,height:r.height},
+                finite:[r.x,r.y,r.width,r.height].every(Number.isFinite),
+                display:s.display,visibility:s.visibility,opacity:Number(s.opacity)};
+        }
+        return state;
+    }"""
+
+
     def point(self, x, y):
         if not (0 <= x <= 1 and 0 <= y <= 1):
             raise ValueError("Input must stay inside the normalized canvas")
-        box = self.page.locator("#unity-canvas").bounding_box()
+        box = self.canvas_box()
         if not box:
             raise AssertionError("No visible game canvas")
         return box["x"] + box["width"] * x, box["y"] + box["height"] * y
@@ -231,8 +309,11 @@ class JourneySmoke:
             # Reuse the already captured canvas bounds. Playwright screenshot
             # preparation can span an entire real-time jump on a software GPU.
             # CDP reads original compositor pixels without font/layout waits.
-            box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
-                       if shot["name"] == "temple-idle")
+            if self.report["revision"] in RESTORATION_REVISIONS.values():
+                box = self.canvas_box()
+            else:
+                box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
+                           if shot["name"] == "temple-idle")
             session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
             try:
                 capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
@@ -251,7 +332,7 @@ class JourneySmoke:
             # A software-rendered 3D frame can miss Playwright's two-frame
             # element-stability wait. Capture the actual compositor PNG at the
             # same measured full-canvas bounds, without font/layout alteration.
-            box = self.page.locator("#unity-canvas").bounding_box()
+            box = self.canvas_box()
             if not box or box["width"] <= 0 or box["height"] <= 0:
                 raise AssertionError("No visible Gospel canvas for original compositor capture")
             session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
@@ -262,12 +343,13 @@ class JourneySmoke:
             finally:
                 if session is not self.raw_capture_session: session.detach()
         else:
+            box = self.canvas_box()
             self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
         with Image.open(path) as pixels:
             stat = ImageStat.Stat(pixels.convert("RGB"))
             shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
                     "size": list(pixels.size), "channelStddev": stat.stddev,
-                    "canvas": self.page.locator("#unity-canvas").bounding_box(), "navigation": self.navigation,
+                    "canvas": box, "navigation": self.navigation,
                     "captureKind": "original-browser-canvas-cdp" if self.args.game == "PathOfDawn" else "original-browser-canvas", "capturedUtc": now()}
         self.report["screenshots"].append(shot)
         self.persist()
@@ -385,7 +467,7 @@ class JourneySmoke:
         session = self.raw_capture_session
         if session is None or self.pending_compositor_frames:
             raise ValueError("Compositor capture needs a current browser session and no pending burst")
-        box = self.page.locator("#unity-canvas").bounding_box()
+        box = self.canvas_box()
         raw = []
         def frame(event):
             raw.append({"data": event["data"], "metadata": event["metadata"], "receivedUtc": now()})
@@ -396,6 +478,10 @@ class JourneySmoke:
         session.send("Page.startScreencast", {"format": "png", "maxWidth": self.page.viewport_size["width"],
                      "maxHeight": self.page.viewport_size["height"], "everyNthFrame": 1})
         try:
+            # Let menu-close input safeguards observe real neutral render frames
+            # before any new movement key/touch is dispatched.
+            self.page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+            burst["neutralRenderFramesBeforeInput"] = 2
             # A software GPU can take longer than a short movement hold to
             # deliver the first compositor frame. Wait passively for the first
             # ACK before ordinary input, rather than missing the entire pose.
@@ -497,21 +583,23 @@ class JourneySmoke:
                     self.page.mouse.up(button=button)
         elif kind == "hold":
             keys = action["keys"]
-            for key in keys:
-                self.page.keyboard.down(key)
+            pressed = []
             try:
+                for key in keys:
+                    self.page.keyboard.down(key)
+                    pressed.append(key)
                 if action["ms"] > 0:
                     self.page.wait_for_timeout(action["ms"])
             except BaseException:
-                for key in reversed(keys):
+                for key in reversed(pressed):
                     self.page.keyboard.up(key)
                 raise
             if action.get("releaseAfterCapture"):
                 if self.capture_keys:
                     raise ValueError("The previous capture keys have not been released")
-                self.capture_keys = list(keys)
+                self.capture_keys = list(pressed)
             else:
-                for key in reversed(keys):
+                for key in reversed(pressed):
                     self.page.keyboard.up(key)
         elif kind == "touch_hold":
             start, end = self.point(*action["start"]), self.point(*action["end"])
@@ -546,6 +634,51 @@ class JourneySmoke:
             self.page.mouse.move(*self.point(.005, .005))
         self.persist()
 
+    def sfx_audio(self, step):
+        """Observe short Unity cues while real UI input runs with music muted."""
+        if self.args.game != "FantasyCards" or not self.modern:
+            raise ValueError("Effect-only PCM is a current cardgame check")
+        music = self.page.evaluate("() => window.FirstGameLocalMusic.getState()")
+        self.check(music.get("muted") is True, "Effect-only observation has music muted through its visible control", music)
+        self.page.evaluate("() => { window.__firstGamePendingSfxWindow = window.__firstGameAudioEvidence.sampleWindow(6000, 50); return true; }")
+        for action in step.get("actions", []):
+            self.input(action)
+        snapshots = self.page.evaluate("() => window.__firstGamePendingSfxWindow")
+        frames=[]; errors=[]
+        for shot in snapshots:
+            errors.extend(shot.get("errors", []))
+            for context in shot["contexts"]:
+                active=[b for b in context["buffers"] if not b["loop"] and .01 < b["duration"] < 4 and BASE.active_audio_buffer(b, context["currentTime"])]
+                routes=[]
+                for buffer in active:
+                    reachable=BASE.audio_reachable(context,buffer["nodeId"])
+                    outputs={a for a,b,_,_ in context["connections"] if a in reachable and b==context["destinationNodeId"]}
+                    routes.extend(route for route in context["destinationRoutes"] if route["sourceNodeId"] in outputs)
+                channels=[channel for route in routes for channel in route["channels"]]
+                allchannels=[channel for route in context["destinationRoutes"] for channel in route["channels"]]
+                frames.append({"contextId":context["id"],"contextState":context["state"],"currentTime":context["currentTime"],"activeShortBuffers":active,
+                    "destinationRoutes":len(context["destinationRoutes"]),"destinationChannelSamples":sum(c["samples"] for c in allchannels),
+                    "activeCueRms":max((c["rms"] for c in channels),default=0),"destinationPeakRms":max((c["rms"] for c in allchannels),default=0),
+                    "nonfiniteSamples":sum(c["nonfinite"] for c in allchannels)})
+        audible=[f for f in frames if f["activeCueRms"]>1e-5 and f["contextState"]=="running"]
+        path=self.output/("sfx-"+str(self.navigation)+"-"+step["label"]+".json")
+        value={"label":step["label"],"snapshots":snapshots,"frames":frames,"observerErrors":sorted(set(errors)),
+               "audibleShortCueFrames":len(audible),"audibleContextIds":sorted({f["contextId"] for f in audible}),"maximumCueRms":max((f["activeCueRms"] for f in frames),default=0),
+               "maximumDestinationRms":max((f["destinationPeakRms"] for f in frames),default=0),"musicMutedState":music}
+        path.write_text(json.dumps(value,indent=2)+"\n")
+        evidence={k:v for k,v in value.items() if k not in ("snapshots","frames")}
+        evidence.update(rawEvidence=path.name,sha256=digest(path),navigation=self.navigation)
+        self.report["audioEvidence"].setdefault("sfxWindows",[]).append(evidence)
+        self.check(not errors and all(f["nonfiniteSamples"]==0 for f in frames),"Effect PCM observer contains finite samples: "+step["label"],evidence)
+        if step.get("expectSilent"):
+            earlier=set(context for w in self.report["audioEvidence"].get("sfxWindows",[])[:-1] for context in w.get("audibleContextIds",[]))
+            observed=[f for f in frames if f["contextId"] in earlier and f["contextState"]=="running" and f["destinationRoutes"]>0 and f["destinationChannelSamples"]>=2048]
+            advancing=any(max(f["currentTime"] for f in observed if f["contextId"]==context)-min(f["currentTime"] for f in observed if f["contextId"]==context)>.5 for context in earlier if any(f["contextId"]==context for f in observed))
+            self.check(bool(step.get("actions")) and len(observed)>=6 and advancing,"Muted effects were actually requested while the previously audible destination/context stayed live",evidence)
+            self.check(value["maximumDestinationRms"]<1e-5,"Actual effect mute silences the destination while music remains muted: "+step["label"],evidence)
+        else:
+            self.check(len(audible)>=3 and value["maximumCueRms"]>1e-5,"Actual short effect buffers reach audible destination during real UI input: "+step["label"],evidence)
+
     def provider_state(self, step):
         self.page.wait_for_function("""expected => {
           const state=window.FirstGameOriginalMusic?.getState();
@@ -556,6 +689,29 @@ class JourneySmoke:
           players:window.FirstGameOriginalMusic.getDiagnostics()})""")
         self.check(evidence["state"]["muted"] == step["muted"] and abs(evidence["state"]["volume"]-step["volume"]) < .01,
                    "Footer and Unity music action share the same setting: " + step["label"], evidence)
+
+    def review_key_errors(self, actions):
+        """Reject malformed review-driver key names before dispatching a batch."""
+        named = {"Shift", "Control", "Alt", "Meta", "ControlOrMeta", "Space", "Enter", "Tab", "Escape",
+                 "Backspace", "Delete", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"}
+        named.update("F" + str(number) for number in range(1, 25))
+        errors = []
+        for action in actions:
+            kind = action.get("type")
+            if kind == "hold":
+                keys = action.get("keys")
+                if not isinstance(keys, list) or not keys:
+                    errors.append("Movement hold requires a nonempty key list")
+                    continue
+            elif kind == "key":
+                chord = action.get("key")
+                keys = chord.split("+") if isinstance(chord, str) else [None]
+            else:
+                continue
+            for key in keys:
+                if not (isinstance(key, str) and (key in named or len(key) == 1 and 32 <= ord(key) < 127)):
+                    errors.append("Unknown review key name: " + repr(key) + "; modifiers use Shift/Control/Alt/Meta")
+        return errors
 
     def checkpoint(self, step):
         attempt = 0
@@ -581,6 +737,14 @@ class JourneySmoke:
                 raise AssertionError("Original-frame review timed out: " + name)
             decision = json.loads(resume.read_text())
             if decision.get("actions"):
+                key_errors = self.review_key_errors(decision["actions"])
+                if key_errors:
+                    entry.update(status="invalid-review-command", adjustment=decision, commandErrors=key_errors)
+                    self.report.setdefault("reviewCommandErrors", []).append({"checkpoint": name, "errors": key_errors,
+                        "reviewFile": str(resume.relative_to(ROOT)), "dispatched": False, "observedUtc": now()})
+                    attempt += 1
+                    self.persist()
+                    continue
                 entry.update(status="needs-additional-real-input", adjustment=decision)
                 for action in decision["actions"]:
                     self.input(action)
@@ -608,7 +772,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27'):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27'):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -619,7 +783,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27')) and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27')) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -630,7 +794,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] == 'fm-arcana-2026-10-27':
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27'):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -756,6 +920,7 @@ class JourneySmoke:
                 kind = step["type"]
                 if kind == "checkpoint": self.checkpoint(step)
                 elif kind == "audio": self.audio(step["label"])
+                elif kind == "sfx_audio": self.sfx_audio(step)
                 elif kind == "provider_audio": self.provider_audio(step)
                 elif kind == "provider_ready": self.provider_ready()
                 elif kind in ("provider_state", "music_state"): self.provider_state(step)
@@ -803,7 +968,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana"), default="modern")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration"), default="modern")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -825,7 +990,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:
@@ -852,8 +1017,13 @@ def main():
                 if mobile:
                     options["user_agent"] = "Mozilla/5.0 (Linux; Android 14; Mobile Smoke) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
                 context = browser.new_context(**options)
+                # Software rendering can delay even a visible canvas geometry
+                # query. Honor the explicitly requested control timeout rather
+                # than Playwright's unrelated 30-second locator default.
+                context.set_default_timeout(args.timeout * 1000)
                 try:
                     smoke = JourneySmoke(context.new_page(), args, plan, output)
+                    smoke.report["browserControlTimeoutMs"] = args.timeout * 1000
                     if previous: smoke.report["previousRunArchive"] = str(previous)
                     url = BASE.public_game_url(args.base_url, args.game) if args.base_url else f"http://127.0.0.1:{server.server_port}/{args.game}/Web/"
                     report = smoke.run(url)

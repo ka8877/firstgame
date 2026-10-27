@@ -45,6 +45,7 @@ namespace FantasyCards.Presentation
             var hover = GetComponent<UiCardHover>();
             if (hover != null) hover.OnCancel(data);
             begin?.Invoke();
+            FmBattleAudio.Play("card-pick");
             data.eligibleForClick = false;
             dragging = true; Active = this;
 
@@ -99,11 +100,11 @@ namespace FantasyCards.Presentation
             var target = hit == null ? null : hit.GetComponentInParent<FmCardDropTarget>();
             int id = InstanceId;
             Cleanup(); // A successful drop can rebuild the whole screen.
-            if (target == null || !target.TryDrop(id)) cancel?.Invoke();
+            if (target == null || !target.TryDrop(id)) { FmBattleAudio.Play("cancel"); cancel?.Invoke(); }
         }
 
         public void OnCancel(BaseEventData data)
-        { if (dragging) { Cleanup(); cancel?.Invoke(); } }
+        { if (dragging) { Cleanup(); FmBattleAudio.Play("cancel"); cancel?.Invoke(); } }
 
         void OnDisable() { Cleanup(); }
         void Cleanup()

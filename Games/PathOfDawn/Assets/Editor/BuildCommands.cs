@@ -43,6 +43,7 @@ namespace FirstGame.Editor
                 if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");
                 string output = Path.Combine(root, "PathOfDawn", profile);
                 Directory.CreateDirectory(output);
+                string sourceFingerprint=BuildSourceBinding.Capture(output,"PathOfDawn");
                 excludedResources = LegacyResourceIsolation.Begin(profile);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                     scenes = new[] { "Assets/Scenes/Boot.unity" }, target = target,
@@ -51,10 +52,10 @@ namespace FirstGame.Editor
                 });
                 buildEvidencePath = Path.Combine(output, "BuildEvidence.txt");
                 File.WriteAllText(buildEvidencePath,
-                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-authored-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
+                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-toon-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nLegacyResourceExclusions: " + excludedResources.EvidencePath + "\nExcludedLegacyAssets: " + excludedResources.ExcludedAssets +
-                    "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");
+                    "\nSourceFingerprint: " + sourceFingerprint + "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }

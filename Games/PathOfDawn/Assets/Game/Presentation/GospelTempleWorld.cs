@@ -169,7 +169,7 @@ namespace PathOfDawn.Presentation
             foreach(float gateX in new[]{-1.5f,1.5f})foreach(float y in new[]{.55f,1.85f})
                 Primitive("Gate bronze hinge",PrimitiveType.Cube,courtyard,new Vector3(gateX,y,-14.79f),new Vector3(2.5f,.12f,.06f),gold,false);
             Primitive("North perimeter wall",PrimitiveType.Cube,courtyard,new Vector3(0,1.25f,16.9f),new Vector3(30,2.5f,.5f),stone,true);
-            Fountain();
+            DrawWell();
         }
         void BuildTemple()
         {
@@ -333,11 +333,13 @@ namespace PathOfDawn.Presentation
             var go=new GameObject("Olive leaves",typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(courtyard,false);go.transform.position=position;
             go.GetComponent<MeshFilter>().sharedMesh=mesh;go.GetComponent<MeshRenderer>().sharedMaterial=material;return go.transform;
         }
-        void Fountain()
+        void DrawWell()
         {
-            // An authored irregular stone-ring scan replaces the smooth lathe.
-            // This is an illustrative water basin, not an archaeological claim.
-            authoredProps.AddBasin(courtyard,Vector3.zero,3.8f,18);
+            // A purpose-authored hollow draw well replaces the repurposed
+            // fire-pit basin. The opening, shaded lining, recessed water,
+            // timber winch, rope and bucket are actual three-dimensional parts.
+            // This courtyard arrangement is illustrative, not a recovered site.
+            authoredProps.AddWell(courtyard,new Vector3(0,.055f,0),18);
         }
         void BuildManger()
         {

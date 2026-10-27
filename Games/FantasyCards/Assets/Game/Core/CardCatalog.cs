@@ -61,7 +61,7 @@ namespace FantasyCards.Core
         public static int UnitHealth(UnitState unit) { return Math.Max(0, MaximumHealth(unit) - unit.damage); }
         public static bool RequiresUnitTarget(CardDefinition card)
         {
-            return card.kind == CardKind.Equipment || (card.kind == CardKind.Spell && card.effect != Effect.Draw && card.effect != Effect.Resource && card.effect != Effect.Sweep && card.effect != Effect.HealAll && card.effect != Effect.RallyAll && card.effect != Effect.ArmorAll && card.effect != Effect.HealthAll && card.effect != Effect.DrainAll && card.effect != Effect.StatOperations);
+            return card.kind == CardKind.Equipment || (card.kind == CardKind.Spell && card.effect != Effect.Draw && card.effect != Effect.Resource && card.effect != Effect.Sweep && card.effect != Effect.HealAll && card.effect != Effect.RallyAll && card.effect != Effect.ArmorAll && card.effect != Effect.HealthAll && card.effect != Effect.DrainAll && card.effect != Effect.StatOperations && card.effect != Effect.DimensionShockwave);
         }
     }
 }

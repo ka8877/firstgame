@@ -12,18 +12,18 @@ namespace FantasyCards.SmokeTests
     public sealed partial class FantasyCardsRevivalSmokeTests
     {
         [UnityTest]
-        public IEnumerator ArcanaPortraitCardsAndActualRoleChangesRetainTheirIdentity()
+        public IEnumerator RestorationCompleteOriginalCardsAndActualRoleChangesRetainTheirIdentity()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(600));
-            Assert.That(DemoCatalog.StarterDecks.Length, Is.EqualTo(18));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(605));
+            Assert.That(DemoCatalog.StarterDecks.Length, Is.EqualTo(20));
             Assert.That(GameObject.Find("Arcana original character duo"), Is.Not.Null);
-            yield return SmokeUi.Capture("FantasyCards", "arcana-critical-title", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-critical-title", 1280, 720);
             FmOriginalMusic.SetMuted(false);
             SmokeUi.Click("게임 시작"); yield return null;
             var music = UnityEngine.Object.FindFirstObjectByType<FmLocalMusicHost>();
             Assert.That(music, Is.Not.Null);
             yield return SmokeUi.WaitUntil(() => music.ActiveScene == "lobby" && music.PlaybackPosition > 1.2f, 15, "Lobby audio must really advance.");
-            yield return SmokeUi.Capture("FantasyCards", "arcana-critical-lobby", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-critical-lobby", 1280, 720);
             SmokeUi.Click("카드 도감"); yield return null;
             yield return SmokeUi.WaitUntil(() => music.ActiveScene == "deck", 15, "Collection changes the actual music role.");
             yield return new WaitForSecondsRealtime(.6f);
@@ -34,7 +34,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("원본 순서"); yield return new WaitForSecondsRealtime(.4f);
             Assert.That(music.PlaybackStarts.Length, Is.EqualTo(startsBefore), "Same-role redraw cannot restart a song.");
             Assert.That(music.PlaybackPosition, Is.GreaterThan(timeBefore));
-            yield return SmokeUi.Capture("FantasyCards", "arcana-critical-portrait-catalog", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "restoration-critical-portrait-catalog", 1280, 720);
             SmokeUi.Click("대기실"); yield return null;
             yield return SmokeUi.WaitUntil(() => music.ActiveScene == "lobby" && music.PlaybackStarts.Length > startsBefore, 15, "Return to Lobby must start a new role instance.");
             var lobbyStart = music.PlaybackStarts.Last();
@@ -42,7 +42,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(lobbyStart.sourceTime, Is.EqualTo(0).Within(.001f));
             Assert.That(music.PlaybackPosition, Is.LessThan(1.2f), "Returning A-B-A starts A from zero instead of resuming.");
             System.IO.File.WriteAllText(System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                "../../../Artifacts/Validation/Arcana/native-music-transitions.json")), JsonUtility.ToJson(new ArcanaMusicLedger { starts = music.PlaybackStarts }, true));
+                "../../../Artifacts/Validation/Restoration/native-music-transitions.json")), JsonUtility.ToJson(new ArcanaMusicLedger { starts = music.PlaybackStarts }, true));
             SmokeUi.AssertNoMissingScripts(); LogAssert.NoUnexpectedReceived();
         }
         [Serializable] private sealed class ArcanaMusicLedger { public FmLocalMusicHost.PlaybackStart[] starts; }
@@ -59,17 +59,22 @@ namespace FantasyCards.SmokeTests
                     truncated=label.isTextTruncated, characters=label.textInfo.characterCount,
                     visible=label.textInfo.characterInfo.Take(label.textInfo.characterCount).Count(glyph=>glyph.isVisible) }).ToArray() };
             System.IO.File.WriteAllText(System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                "../../../Artifacts/Validation/Arcana/native-arcana-labels.json")), JsonUtility.ToJson(dump,true));
-            var grades = surfaces.GroupBy(surface => surface.Grade).ToArray();
-            if (grades.Length > 1)
-                Assert.That(grades.Select(group => group.First().GetComponent<UiRoundedImage>().BorderColor).Distinct().Count(),
-                    Is.EqualTo(grades.Length), "Different supplied grades need visibly different frame colours.");
+                "../../../Artifacts/Validation/Restoration/native-arcana-labels.json")), JsonUtility.ToJson(dump,true));
             foreach (var surface in surfaces)
             {
-                Assert.That(surface.RenderedAspect, Is.EqualTo(5f / 7f).Within(.015f), surface.DefinitionId);
-                Assert.That(surface.Grade, Is.EqualTo(CardCatalog.Get(surface.DefinitionId).rarity));
-                var art = surface.GetComponentsInChildren<UnityEngine.UI.RawImage>();
-                Assert.That(art.Any(image => image.texture == Resources.Load<Texture2D>(CardCatalog.Get(surface.DefinitionId).artResource)), Is.True);
+                var definition=CardCatalog.Get(surface.DefinitionId);
+                var texture=Resources.Load<Texture2D>(definition.artResource);
+                Assert.That(texture,Is.Not.Null,surface.DefinitionId);
+                Assert.That(surface.UsesFullPrint,Is.True,surface.DefinitionId);
+                Assert.That(surface.SourceAspect,Is.EqualTo((float)texture.width/texture.height).Within(.0001f));
+                Assert.That(surface.RenderedAspect,Is.EqualTo(surface.SourceAspect).Within(.015f),surface.DefinitionId);
+                Assert.That(surface.Grade,Is.EqualTo(definition.rarity));
+                var art=surface.GetComponentsInChildren<UnityEngine.UI.RawImage>();
+                Assert.That(art.Length,Is.EqualTo(1),"One complete original print replaces the old recomposed crop and frames.");
+                Assert.That(art[0].texture,Is.SameAs(texture));
+                Assert.That(art[0].uvRect,Is.EqualTo(new Rect(0,0,1,1)),"Every original printed pixel stays within the full normalized source rectangle.");
+                Assert.That(art[0].color,Is.EqualTo(Color.white),"The source grade/frame colors must not be retinted.");
+                Assert.That(surface.GetComponentsInChildren<UnityEngine.UI.Mask>(),Is.Empty);
             }
         }
     }

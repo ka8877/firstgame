@@ -17,13 +17,16 @@ namespace PathOfDawn.Core
         public int dialoguePage;
         public List<string> collectedReadings = new List<string>();
         public float playerX, playerY, playerZ, playerYaw;
+        // Optional schema-1 extension: old saves have no equipped utility.
+        public string equippedUtility;
 
         public GospelSave Copy() => new GospelSave
         {
             schemaVersion = schemaVersion, contentVersion = contentVersion, phase = phase,
             prologuePage = prologuePage, objectiveIndex = objectiveIndex, dialoguePage = dialoguePage,
             collectedReadings = collectedReadings == null ? null : new List<string>(collectedReadings),
-            playerX = playerX, playerY = playerY, playerZ = playerZ, playerYaw = playerYaw
+            playerX = playerX, playerY = playerY, playerZ = playerZ, playerYaw = playerYaw,
+            equippedUtility = equippedUtility
         };
     }
 
@@ -50,6 +53,13 @@ namespace PathOfDawn.Core
         public float PlayerY => state.playerY;
         public float PlayerZ => state.playerZ;
         public float PlayerYaw => state.playerYaw;
+        public string EquippedUtility => state.equippedUtility ?? "";
+        public bool LampEquipped => EquippedUtility == GospelBelongings.LampId;
+        public void SetUtility(string id)
+        {
+            if(!GospelBelongings.IsValidUtility(id))throw new ArgumentException("장착할 수 없는 도구입니다.",nameof(id));
+            state.equippedUtility=id??"";
+        }
         public IReadOnlyList<string> CollectedReadings => state.collectedReadings.AsReadOnly();
         public GospelObjective CurrentObjective => state.objectiveIndex < GospelCatalog.Objectives.Count
             ? GospelCatalog.Objectives[state.objectiveIndex] : null;
@@ -129,6 +139,8 @@ namespace PathOfDawn.Core
             if (save == null) throw new ArgumentException("저장 내용이 없습니다.");
             if (save.schemaVersion != SchemaVersion || save.contentVersion != ContentVersion)
                 throw new ArgumentException("호환되지 않는 복음서 여정 저장입니다. 기존 파일을 보존해 주세요.");
+            if(!GospelBelongings.IsValidUtility(save.equippedUtility))
+                throw new ArgumentException("저장된 장착 도구를 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
             if (!Enum.IsDefined(typeof(GospelPhase), save.phase) || save.prologuePage < 0
                 || save.prologuePage > GospelCatalog.PrologueReadings.Count || save.objectiveIndex < 0
                 || save.objectiveIndex > GospelCatalog.Objectives.Count)

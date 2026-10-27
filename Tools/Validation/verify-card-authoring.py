@@ -169,6 +169,11 @@ def expected_definition(card):
     if category == 4:
         result["requiredCapabilityMask"] = 0 if fields["UnitType"] == 1 else CAPABILITIES[fields["UnitType"]]
     if category == 3:
+        if card["sourceId"] == "15052733622":
+            require(effect.get("kind") == "dimensionShockwave" and fields["TurnType"] == 2,
+                    "Unreviewed Secret spell semantics")
+            result["effect"], result["playWindow"] = 19, 1
+            return result
         result["effect"], result["playWindow"] = 18, fields["TurnType"] - 1
         for operation in effect["operations"]:
             result["operations"].append({

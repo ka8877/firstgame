@@ -119,7 +119,7 @@ if arcana:
     assert sha(records_path.read_bytes()) == arcana["recordsSha256"]
     source = json.loads(records_path.read_text())
     records = {c["fields"]["ID"]: c for c in source["cards"]}
-    assert len(cards[250:]) == arcana["addedCards"] == len(records) == 350
+    assert len(cards[250:600]) == arcana["addedCards"] == len(records) == 350
     # Source snapshots retain complete observed fields. Validate the chosen
     # records against those snapshots; no rules text may be removed to fit Core.
     observations = {}
@@ -129,7 +129,7 @@ if arcana:
         observations.update({c["fields"]["ID"]: c for c in json.loads(path.read_text())["cards"]})
     reviewed = json.loads((ROOT / "Tools/Research/FmArcana/spell-print-review.json").read_text())["cards"]
     reviewed = {c["sourceId"]: c for c in reviewed}
-    for card in cards[250:]:
+    for card in cards[250:600]:
         record = records[card["sourceId"]]
         assert card["fields"] == record["fields"] == observations[card["sourceId"]]["fields"]
         assert card["sourceUrl"] == record["pageUrl"] and card["imageUrl"] == record["imageUrl"]
@@ -140,6 +140,32 @@ if arcana:
             assert card["fields"]["TextBase"] == review["sourceText"]
             assert review["printRulesMatchFullDatabaseText"]
             assert sha((ROOT / review["texture"]).read_bytes()) == review["sha256"]
+restoration = selection.get("restorationExpansion")
+if restoration:
+    baseline_path = ROOT / restoration["baseline"]
+    assert sha(baseline_path.read_bytes()) == restoration["baselineSha256"]
+    preserved = json.loads(baseline_path.read_text())["cards"]
+    assert len(preserved) == restoration["preservedCards"] == 600
+    for card, original in zip(cards, preserved):
+        assert card["sourceId"] == original["sourceId"]
+        assert canonical_sha(card) == original["canonicalSelectionRowSha256"]
+        for key in ("texture", "original"):
+            assert sha((ROOT / original[key]).read_bytes()) == original[key + "Sha256"]
+        assert sha(Path(str(ROOT / original["texture"]) + ".meta").read_bytes()) == original["textureMetaSha256"]
+    records_path = ROOT / restoration["records"]
+    assert sha(records_path.read_bytes()) == restoration["recordsSha256"]
+    source = json.loads(records_path.read_text())
+    records = {row["fields"]["ID"]: row for row in source["cards"]}
+    observations = {}
+    for item in source["sourceObservations"]:
+        path = ROOT / item["file"]
+        assert sha(path.read_bytes()) == item["sha256"]
+        observations.update({row["fields"]["ID"]: row for row in json.loads(path.read_text())["cards"]})
+    assert len(cards[600:]) == restoration["addedPlayableCards"] == len(records) == 5
+    for card in cards[600:]:
+        observed = records[card["sourceId"]]
+        assert card["fields"] == observed["fields"] == observations[card["sourceId"]]["fields"]
+        assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
 for card in cards:
     assert card["fields"]["ID"] == card["sourceId"]
     assert card["fields"]["Name"] == card["name"]
@@ -147,8 +173,10 @@ for card in cards:
     assert card["sourceUrl"] == "https://fmlunatic.com/card/" + card["sourceId"]
     assert card["imageUrl"].startswith("https://storage.googleapis.com/fmdb-bcb70.appspot.com/cardlist/")
     if card["fields"]["Category"] == 2:
+        expected_skill = {"3061320559": 17, "3061320560": 452, "3022820395": 159}.get(card["sourceId"], 1)
+        assert card["fields"]["Skill1"] == expected_skill
         assert all(card["fields"][key] == 1 for key in
-                   ("Skill1", "Skill2", "ATKStatType", "DEFStatType", "HPStatType"))
+                   ("Skill2", "ATKStatType", "DEFStatType", "HPStatType"))
 media = {card["sourceId"]: card for card in manifest["cards"]}
 assert set(media) == {card["sourceId"] for card in cards}
 assert all(media[c["sourceId"]]["imageUrl"] == c["imageUrl"] for c in cards)
@@ -167,6 +195,7 @@ result = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat
                   "preservedFidelityRowsMediaAndGuids": 161 if fidelity else None,
                   "preservedDetailRowsMediaAndGuids": 178 if detail else None,
                   "preservedArcanaRowsMediaAndGuids": 250 if arcana else None,
+                  "preservedRestorationRowsMediaAndGuids": 600 if restoration else None,
                   "addedCards": len(cards) - 96, "generatorReproducible": True,
                   "preservedResearchSnapshotVerified": source_snapshot.exists(),
                   "sourceSelectionSha256": sha((DATA / "selection.json").read_bytes()),

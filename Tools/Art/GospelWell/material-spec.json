@@ -1,0 +1,123 @@
+{
+  "revision": "gospel-toon-2026-10-27",
+  "resourceRoot": "Art/GospelWell/",
+  "normalConvention": "New cedar normal: OpenGL +Y, flipGreenChannel=false. Shared ambientCG Plaster001 limestone: DirectX, preserve existing flipGreenChannel=true; do not change shared temple texture import.",
+  "materials": [
+    {
+      "name": "Well_Limestone",
+      "baseColor": [
+        0.94,
+        0.91,
+        0.82,
+        1
+      ],
+      "baseMap": "Art/Gospel3D/TempleMaterials/limestone-albedo",
+      "normalMap": "Art/Gospel3D/TempleMaterials/limestone-normal",
+      "normalStrength": 0.32,
+      "smoothness": 0.09,
+      "metallic": 0,
+      "normalConvention": "DirectX; shared existing importer flipGreenChannel=true"
+    },
+    {
+      "name": "Well_ShadedStone",
+      "baseColor": [
+        0.34,
+        0.31,
+        0.25,
+        1
+      ],
+      "smoothness": 0.03,
+      "metallic": 0
+    },
+    {
+      "name": "Well_Cedar",
+      "baseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "baseMap": "Art/GospelWell/cedar-albedo",
+      "normalMap": "Art/GospelWell/cedar-normal",
+      "normalStrength": 0.4,
+      "smoothness": 0.1,
+      "metallic": 0,
+      "normalConvention": "OpenGL +Y; flipGreenChannel=false"
+    },
+    {
+      "name": "Well_Rope",
+      "baseColor": [
+        0.45,
+        0.31,
+        0.16,
+        1
+      ],
+      "smoothness": 0.02,
+      "metallic": 0
+    },
+    {
+      "name": "Well_Iron",
+      "baseColor": [
+        0.105,
+        0.115,
+        0.11,
+        1
+      ],
+      "smoothness": 0.25,
+      "metallic": 0.55
+    },
+    {
+      "name": "Well_Water",
+      "baseColor": [
+        0.025,
+        0.095,
+        0.105,
+        1
+      ],
+      "smoothness": 0.82,
+      "metallic": 0
+    },
+    {
+      "name": "Well_Clay",
+      "baseColor": [
+        0.48,
+        0.24,
+        0.11,
+        1
+      ],
+      "smoothness": 0.08,
+      "metallic": 0
+    }
+  ],
+  "models": [
+    "StoneWell",
+    "TravelLamp"
+  ],
+  "importer": {
+    "importAnimation": false,
+    "preserveHierarchy": true,
+    "useFileScale": true,
+    "axisConversion": "FBX root local transform MUST remain preserved",
+    "meshesReadable": false,
+    "generateColliders": false,
+    "normals": "Import",
+    "materialImportMode": "ImportStandard",
+    "materialLocation": "InPrefab"
+  },
+  "newTextures": [
+    {
+      "path": "Assets/Resources/Art/GospelWell/cedar-albedo.png",
+      "normal": false,
+      "sRGB": true,
+      "maxSize": 512,
+      "mipmaps": true
+    },
+    {
+      "path": "Assets/Resources/Art/GospelWell/cedar-normal.png",
+      "normal": true,
+      "sRGB": false,
+      "maxSize": 512,
+      "mipmaps": true
+    }
+  ]
+}

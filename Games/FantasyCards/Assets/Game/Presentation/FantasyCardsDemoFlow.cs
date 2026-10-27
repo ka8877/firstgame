@@ -94,6 +94,7 @@ namespace FantasyCards.Presentation
 
         private IEnumerator ShuffleAndDeal(bool opening = true)
         {
+            FmBattleAudio.Play("card-shuffle");
             battleScreen = false; redraw = null; Clear(); Backdrop(true);
             Text(root, "판타지마스터즈", .1f, .82f, .9f, .94f, 43, gold, TextAlignmentOptions.Center);
             Text(root, "덱 셔플", .1f, .18f, .9f, .30f, 36, ivory, TextAlignmentOptions.Center);
@@ -104,7 +105,7 @@ namespace FantasyCards.Presentation
                 var card = Panel(root, .43f, .34f, .57f, .77f, new Color(.14f + i * .003f, .15f, .29f));
                 card.gameObject.name = "Shuffle card " + i; Frame(card, gold, 2); Ornament(card, gold, true);
                 var back = Resources.Load<Texture2D>("Art/ClassicCards/Decor/card-back");
-                if (back != null) ImageFrame(card, back, new Rect(0, 0, 1, 1), .015f, .015f, .985f, .985f, new Vector2(.5f, .5f), true);
+                if (back != null) FittedImage(card, back, new Rect(0, 0, 1, 1), 0, 0, 1, 1, "Original shuffled card back");
                 else Text(card, "FM", .15f, .3f, .85f, .7f, 45, gold, TextAlignmentOptions.Center);
                 Frame(card, gold, 2); backs.Add(card);
             }
@@ -120,6 +121,7 @@ namespace FantasyCards.Presentation
                 }
                 yield return null;
             }
+            FmBattleAudio.Play("card-draw");
             locked = false; if (opening) ShowOpeningHand(); else ShowBattle();
         }
 
@@ -141,7 +143,8 @@ namespace FantasyCards.Presentation
             bool canReplace = engine.CanMulligan(0, out string reason);
             Text(root, canReplace ? "교체하면 모든 손패를 덱에 넣어 다시 섞고 6장을 뽑습니다." : "전체 손패 교체를 사용했습니다. 준비가 되면 시작하세요.", .04f, .15f, .96f, .25f, 24, ivory);
             Button(root, "전체 손패 교체", .035f, .015f, .43f, .135f,
-                () => { engine.MulliganWholeHand(0, out message); Save(); ShowOpeningHand(); }, slate, 25, canReplace);
+                () => { if (engine.MulliganWholeHand(0, out message)) FmBattleAudio.Play("card-shuffle");
+                    else FmBattleAudio.Play("error"); Save(); ShowOpeningHand(); }, slate, 25, canReplace);
             Button(root, "이대로 시작", .62f, .015f, .965f, .135f, ConfirmOpeningHand, gold, 26);
         }
 
@@ -212,6 +215,7 @@ namespace FantasyCards.Presentation
 
         private void RecordDemoVictory()
         {
+            RecordRestorationScenarioVictory();
             int index = engine.State.encounterIndex;
             if (index < 0 || index >= DemoCatalog.Encounters.Length || PlayerPrefs.GetInt("FC.demo.won." + index, 0) != 0) return;
             PlayerPrefs.SetInt("FC.demo.won." + index, 1); PlayerPrefs.Save();

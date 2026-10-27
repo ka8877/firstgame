@@ -55,9 +55,14 @@ namespace PathOfDawn.Presentation
             if(World==null)return;
             if((Pointer.current!=null&&Pointer.current.press.wasPressedThisFrame)||(Keyboard.current!=null&&Keyboard.current.anyKey.wasPressedThisFrame))music.NotifyUserGesture();
             if(noticeRoot!=null)noticeRoot.SetActive(Time.unscaledTime<noticeUntil);
+            SyncUtilityVisual();
             if(!inGame)return;
             if(Keyboard.current!=null&&Keyboard.current.iKey.wasPressedThisFrame&&Journey.Phase==GospelPhase.Exploring)
             {if(statusVisible)ResumeJourney();else if(!modal)ShowStatus();}
+            if(Keyboard.current!=null&&Keyboard.current.bKey.wasPressedThisFrame&&Journey.Phase==GospelPhase.Exploring)
+            {if(statusVisible)ResumeJourney();else if(!modal)ShowCharacterMenu("inventory");}
+            if(Keyboard.current!=null&&Keyboard.current.mKey.wasPressedThisFrame&&Journey.Phase==GospelPhase.Exploring)
+            {if(statusVisible)ResumeJourney();else if(!modal)ShowCharacterMenu("map");}
             if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){if(modal&&Journey.Phase!=GospelPhase.Prologue&&Journey.Phase!=GospelPhase.Reading)ResumeJourney();else if(!modal)ShowSettings();}
             if(!modal&&Journey.Phase==GospelPhase.Exploring)
             {
@@ -82,6 +87,7 @@ namespace PathOfDawn.Presentation
         {
             statusVisible=false;
             if(screen!=null){screen.gameObject.SetActive(false);Destroy(screen.gameObject);}screen=ui.Fill(frame,"Gospel screen");
+            if(noticeRoot!=null)noticeRoot.transform.SetAsLastSibling();
             screen.gameObject.AddComponent<CanvasGroup>();
             screen.gameObject.AddComponent<GospelUiMotion>();
             Player?.StopInput();if(touchRoot!=null)touchRoot.SetActive(false);if(movePad!=null)movePad.ResetInput();if(lookPad!=null)lookPad.ResetInput();
@@ -167,14 +173,16 @@ namespace PathOfDawn.Presentation
             Text(top,"현재 여정",18,10,340,27,19,DawnUi.ModernGold);
             objective=Text(top,Journey.CurrentObjective?.Title??"첫 여정 완료",18,40,350,34,25);
             distance=Text(top,"",18,79,350,27,20,new Color(.72f,.78f,.77f));
-            Button(hud,"상태",760,24,110,48,ShowStatus);
-            Button(hud,"성경 기록",882,24,132,48,ShowJournal);
+            Button(hud,"인물 · I",674,24,128,48,ShowStatus);
+            Button(hud,"가방 · B",812,24,128,48,()=>ShowCharacterMenu("inventory"));
+            Button(hud,"지도",950,24,66,48,()=>ShowCharacterMenu("map"));
             Button(hud,"저장",1026,24,100,48,()=>Save());
             Button(hud,"설정",1138,24,118,48,ShowSettings);
             var scripture=ui.Card(hud,"Pinned Scripture",242,594,796,98,new Color(.075f,.105f,.12f,.88f));
             pinned=Text(scripture,Journey.CurrentReading.Reference+" · 개역한글 · 발췌",18,9,760,27,19,DawnUi.ModernGold);
             var excerpt=Text(scripture,FirstVerseLine(Journey.CurrentReading.Text),18,39,760,51,23);excerpt.overflowMode=TextOverflowModes.Ellipsis;excerpt.maxVisibleLines=2;
-            prompt=Text(hud,"",242,550,796,34,21,DawnUi.ModernPaper);
+            var promptPanel=ui.Card(hud,"Interaction prompt",242,544,796,42,new Color(.055f,.085f,.11f,.86f));
+            prompt=Text(promptPanel,"",14,6,768,30,23,DawnUi.ModernPaper);
             interactionButton=Button(hud,"대화 · E",1060,604,196,64,Interact,false);
             jumpButton=Button(hud,"점프 · Space",1060,530,196,58,()=>Player.JumpPressed());
             actionButton=Button(hud,"동작 연습 · F",1060,456,196,58,()=>{
@@ -304,26 +312,7 @@ namespace PathOfDawn.Presentation
         }
         void ShowStatus()
         {
-            if(Journey==null)return;
-            modal=true;Player.InputEnabled=false;ClearScreen();statusVisible=true;
-            if(hud!=null)hud.gameObject.SetActive(false);
-            ui.Fill(screen,"Status backdrop",new Color(.025f,.045f,.055f,.78f));
-            var panel=ui.Card(screen,"Character status",80,80,1120,580,DawnUi.ModernPanel);
-            var portraitGround=ui.Card(panel,"Status portrait",24,24,310,508,new Color(.84f,.86f,.80f));
-            var portrait=ui.Art(portraitGround,"Art/GospelRemaster/portraits",0,54,310,350,false);if(portrait!=null)portrait.uvRect=PortraitUv("jesus");
-            Text(portraitGround,"성전의 소년",24,434,262,36,26,DawnUi.ModernInk);
-            Text(portraitGround,"누가복음 2:41–52",24,474,262,28,20,new Color(.25f,.39f,.38f));
-            Text(panel,"인물 상태",374,28,680,42,31,DawnUi.ModernGold);
-            Text(panel,"예수님",370,92,680,66,48,DawnUi.ModernPaper);
-            Text(panel,"열두 살 · 예루살렘",374,166,680,38,25,new Color(.73f,.79f,.77f));
-            var line=ui.Box(panel,"Status divider",374,218,680,1,new Color(.84f,.88f,.83f,.18f));line.GetComponent<Image>().raycastTarget=false;
-            Text(panel,"현재 여정",374,240,310,28,20,DawnUi.ModernGold);
-            Text(panel,Journey.CurrentObjective?.Title??"첫 여정 완료",374,276,680,44,29);
-            Text(panel,"현재 본문",374,344,310,28,20,DawnUi.ModernGold);
-            Text(panel,Journey.CurrentReading.Reference+" · "+Journey.CurrentReading.Translation,374,381,680,40,26);
-            Text(panel,"읽은 말씀  "+Journey.CollectedReadings.Count+"개",374,443,680,36,24,new Color(.73f,.79f,.77f));
-            Button(screen,"저장",750,590,208,58,()=>Save());
-            Primary(screen,"돌아가기",980,590,200,58,ResumeJourney);
+            ShowCharacterMenu("character");
         }
         Slider SliderControl(Transform parent,string name,float x,float y,float width,float value,UnityEngine.Events.UnityAction<float> changed)
         {
@@ -361,7 +350,7 @@ namespace PathOfDawn.Presentation
         void Toast(string value)
         {
             if(notice==null){var box=ui.Card(frame,"Gospel notice",250,148,780,88,new Color(.06f,.11f,.15f,.97f));box.GetComponent<Image>().raycastTarget=false;noticeRoot=box.gameObject;notice=Text(box,"",18,12,744,64,22,DawnUi.ModernGold);}
-            notice.text=value;noticeRoot.SetActive(true);noticeUntil=Time.unscaledTime+5;
+            notice.text=value;noticeRoot.transform.SetAsLastSibling();noticeRoot.SetActive(true);noticeUntil=Time.unscaledTime+5;
         }
         void OnApplicationPause(bool paused){if(paused&&inGame)Save(false);}
         void OnApplicationQuit(){if(inGame)Save(false);}

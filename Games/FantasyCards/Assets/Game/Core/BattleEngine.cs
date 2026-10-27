@@ -50,7 +50,7 @@ namespace FantasyCards.Core
             for (int player = 0; player < 2; player++)
             {
                 var p = s.players[player];
-                if (p == null || p.deck == null || p.hand == null || p.terrain == null || p.discard == null || p.units == null || p.preparedSpells == null || p.units.Count + p.preparedSpells.Count > s.rules.unitLanes || p.terrain.Count > s.rules.terrainLimit || p.hand.Count > s.rules.handLimit || p.levelPoints < 0 || p.levelPoints > s.rules.maximumTurns + 1 || p.genericSoul < 0 || p.genericSoul > s.rules.maximumResource || p.health > s.rules.startingHealth || p.health < -10000 || p.fatigue < 0 || p.terrainPlayed < 0 || p.terrainPlayed > s.rules.terrainPerTurn || p.leaderSkillUses != 0 || p.lastLeaderSkillTurn != 0 || p.lastShuffleTurn < 0 || p.lastShuffleTurn > s.turn) throw new ArgumentException("잘못된 플레이어 상태입니다.");
+                if (p == null || p.deck == null || p.hand == null || p.terrain == null || p.discard == null || p.units == null || p.preparedSpells == null || p.units.Count + p.preparedSpells.Count > s.rules.unitLanes || p.terrain.Count > s.rules.terrainLimit || p.hand.Count > s.rules.handLimit || p.levelPoints < 0 || p.levelPoints > s.rules.maximumTurns + 1 || p.genericSoul < 0 || p.genericSoul > s.rules.maximumResource || p.nextGenericSoulBonus < 0 || p.nextGenericSoulBonus > s.rules.maximumResource || p.health > s.rules.startingHealth || p.health < -10000 || p.fatigue < 0 || p.terrainPlayed < 0 || p.terrainPlayed > s.rules.terrainPerTurn || p.leaderSkillUses != 0 || p.lastLeaderSkillTurn != 0 || p.lastShuffleTurn < 0 || p.lastShuffleTurn > s.turn) throw new ArgumentException("잘못된 플레이어 상태입니다.");
                 foreach (Element element in Enum.GetValues(typeof(Element))) if (p.Resource(element) < 0 || p.Resource(element) > s.rules.maximumResource) throw new ArgumentException("잘못된 소울 상태입니다.");
                 if (s.phase != BattlePhase.Complete && (s.rules.victoryRule == VictoryRule.Deck ? p.deck.Count == 0 : p.health <= 0)) throw new ArgumentException("패배한 전투를 진행 상태로 저장할 수 없습니다.");
                 DemoCatalog.GetLeader(p.leaderId); if (p.deckId != "custom") DemoCatalog.GetDeck(p.deckId);
@@ -193,6 +193,8 @@ namespace FantasyCards.Core
                 foreach (Element element in Enum.GetValues(typeof(Element))) p.SetResource(element, 0);
                 p.genericSoul = 0;
                 foreach (var card in p.terrain) AddProduction(p, CardCatalog.Get(card.definitionId));
+                p.genericSoul = Math.Min(State.rules.maximumResource, p.genericSoul + p.nextGenericSoulBonus);
+                p.nextGenericSoulBonus = 0;
             }
         }
         public bool CanUseLeaderSkill(int player, out string reason) => Fail("클래식 모드의 아바타에는 리더 기술이 없습니다.", out reason);
@@ -363,7 +365,14 @@ namespace FantasyCards.Core
                 }
                 else
                 {
-                    int outgoing = Math.Max(0, CardCatalog.UnitAttack(unit) - CardCatalog.UnitDefense(blocker));
+                    if (unit.definitionId == RestorationCardSkills.StrongPoison && CardCatalog.UnitAttack(unit) >= 1)
+                    {
+                        blocker.rolledAttack = 1; blocker.rolledHealth = 1;
+                        Log("skill", "정글의독침수 · 강한치명 · 상대 AP·HP =1", 1, attacker, source: unit, sourceOwner: attacker, target: blocker, targetOwner: defender);
+                    }
+                    bool evaded = RestorationCardSkills.EvadesBeast(blocker, unit);
+                    int outgoing = evaded ? 0 : Math.Max(0, CardCatalog.UnitAttack(unit) - CardCatalog.UnitDefense(blocker));
+                    if (evaded) Log("skill", "투우사 · 야수회피 · 공격 피해 무효", 0, defender, source: blocker, sourceOwner: defender, target: unit, targetOwner: attacker);
                     int incoming = Math.Max(0, CardCatalog.UnitAttack(blocker) - CardCatalog.UnitDefense(unit));
                     blocker.damage += outgoing;
                     Log("attack", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " · 피해 " + outgoing,
@@ -399,23 +408,37 @@ namespace FantasyCards.Core
         {
             if (unit.coinsRolled) return;
             var d = CardCatalog.Get(unit.definitionId);
-            int count = State.rules.baseCoins >= 0 ? State.rules.baseCoins : Math.Max(d.attackCoin.count, Math.Max(d.defenseCoin.count, d.healthCoin.count));
-            count = Math.Min(5, count + unit.extraCoins); var heads = new bool[count];
+            int attackCount = OriginalEquipmentModifiers.CoinCount(d.attackCoin, OriginalEquipmentModifiers.CoinDelta(unit, OperationStat.Attack));
+            int defenseCount = OriginalEquipmentModifiers.CoinCount(d.defenseCoin, OriginalEquipmentModifiers.CoinDelta(unit, OperationStat.Defense));
+            int healthCount = OriginalEquipmentModifiers.CoinCount(d.healthCoin, OriginalEquipmentModifiers.CoinDelta(unit, OperationStat.Health));
+            int count = State.rules.baseCoins >= 0 ? Math.Max(0, Math.Min(5, State.rules.baseCoins + unit.extraCoins)) : Math.Max(attackCount, Math.Max(defenseCount, healthCount));
+            int chance = OriginalEquipmentModifiers.ChancePercent(unit); var heads = new bool[count];
             for (int i = 0; i < count; i++)
-            { heads[i] = StableRandom.Range(ref State.randomState, 2) == 1; Log("coin", d.name + " · C" + (i + 1) + " " + (heads[i] ? "앞면" : "뒷면"), heads[i] ? 1 : 0, player,
-                source: unit, sourceOwner: player, coinIndex: i + 1, coinHeads: heads[i]); }
-            unit.rolledAttack = ApplyCoins(CardCatalog.BaseAttack(unit), d.attackCoin, heads);
-            unit.rolledDefense = ApplyCoins(CardCatalog.BaseDefense(unit), d.defenseCoin, heads);
-            unit.rolledHealth = ApplyCoins(CardCatalog.BaseHealth(unit), d.healthCoin, heads);
+            {
+                // Preserve the original 50% RNG path exactly, including old
+                // fixed seeds and saves. Non-default source equipment chances
+                // use integer percentage points, never presentation randomness.
+                heads[i] = chance == 50 ? StableRandom.Range(ref State.randomState, 2) == 1 : StableRandom.Range(ref State.randomState, 100) < chance;
+                Log("coin", d.name + " · C" + (i + 1) + " " + (heads[i] ? "앞면" : "뒷면"), heads[i] ? 1 : 0, player,
+                    source: unit, sourceOwner: player, coinIndex: i + 1, coinHeads: heads[i]);
+            }
+            unit.rolledAttack = ApplyCoins(CardCatalog.BaseAttack(unit), d.attackCoin, heads, attackCount);
+            unit.rolledDefense = ApplyCoins(CardCatalog.BaseDefense(unit), d.defenseCoin, heads, defenseCount);
+            unit.rolledHealth = ApplyCoins(CardCatalog.BaseHealth(unit), d.healthCoin, heads, healthCount);
             unit.coinsRolled = true;
             Log("power", d.name + " 최종 AP " + unit.rolledAttack + " / DP " + unit.rolledDefense + " / HP " + unit.rolledHealth, unit.rolledAttack, player,
                 source: unit, sourceOwner: player);
         }
-        static int ApplyCoins(int basis, CoinRule spec, bool[] heads)
+        static int ApplyCoins(int basis, CoinRule spec, bool[] heads, int effectiveCount)
         {
-            if (heads.Length == 0 || spec.operation == CoinOperation.None || spec.count == 0) return Math.Max(0, basis);
-            int value = heads.Take(Math.Min(heads.Length, spec.count)).Count(h => h) * spec.multiplier;
-            switch (spec.operation)
+            if (heads.Length == 0 || effectiveCount == 0) return Math.Max(0, basis);
+            // A positive item modifier can introduce a +C term to a stat that
+            // previously had no coin term. Existing + / - / × / = operators and
+            // their multipliers are preserved when changing their coin counts.
+            CoinOperation operation = spec.operation == CoinOperation.None ? CoinOperation.Add : spec.operation;
+            int multiplier = spec.operation == CoinOperation.None ? 1 : spec.multiplier;
+            int value = heads.Take(Math.Min(heads.Length, effectiveCount)).Count(h => h) * multiplier;
+            switch (operation)
             { case CoinOperation.Add: basis += value; break; case CoinOperation.Subtract: basis -= value; break; case CoinOperation.Multiply: basis *= value; break; case CoinOperation.Set: basis = value; break; }
             return Math.Max(0, basis);
         }
@@ -467,6 +490,27 @@ namespace FantasyCards.Core
             }
             switch (d.effect)
             {
+                case Effect.DimensionShockwave:
+                    foreach (var affected in enemies.units.Where(u => u.lane <= 1).OrderBy(u => u.lane))
+                    {
+                        // This is a temporary HP statistic change, not damage:
+                        // preserve prior physical damage and floor the statistic.
+                        int before = CardCatalog.MaximumHealth(affected), after = before / 4;
+                        if (affected.coinsRolled) affected.rolledHealth = after;
+                        else affected.bonusHealth += after - before;
+                        Log("spell-target", d.name + " · " + CardCatalog.Get(affected.definitionId).name + " HP " + before + " → " + after,
+                            after - before, player, card: spellCard, sourceOwner: player, lane: spell.lane, target: affected, targetOwner: 1 - player, stat: "Health");
+                    }
+                    if (enemies.preparedSpells.Count > 0)
+                    {
+                        // The current classic slice has no hero-counter feature:
+                        // all legal states have zero counters, so clearing is a
+                        // defined no-op. Do not invent a usable hero or skip the
+                        // remaining, real next-soul-cost compensation.
+                        enemies.nextGenericSoulBonus = Math.Min(State.rules.maximumResource, enemies.nextGenericSoulBonus + 1);
+                        Log("soul-bonus", d.name + " · 상대 다음 소울 코스트 무소울 +1", 1, player, card: spellCard, sourceOwner: player, lane: spell.lane, targetOwner: 1 - player);
+                    }
+                    break;
                 case Effect.Heal: if (target != null) target.damage = Math.Max(0, target.damage - d.magnitude); break;
                 case Effect.Damage: if (target != null) target.damage += Math.Max(0, d.magnitude - CardCatalog.UnitDefense(target)); break;
                 case Effect.Rally: case Effect.Power: if (target != null) target.bonusPower += d.magnitude; break;
@@ -493,7 +537,16 @@ namespace FantasyCards.Core
             {
                 var p = State.players[player];
                 foreach (var unit in p.units.Where(u => CardCatalog.UnitHealth(u) <= 0).OrderBy(u => u.lane).ToArray())
-                { p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment); Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player); }
+                {
+                    p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment);
+                    Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player);
+                    if (unit.definitionId == RestorationCardSkills.LandRuin)
+                    {
+                        var opponent = State.players[1 - player]; int lost = opponent.levelPoints > 0 ? 1 : 0;
+                        opponent.levelPoints -= lost;
+                        Log("skill", "랜드트랩퍼 · 랜드루인 · 상대 LP -" + lost, lost, player, source: unit, sourceOwner: player, targetOwner: 1 - player);
+                    }
+                }
             }
         }
         void DamagePlayer(int player, int amount, string cause, UnitState source = null, int sourceOwner = -1)
