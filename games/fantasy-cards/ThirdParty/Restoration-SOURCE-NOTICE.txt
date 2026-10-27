@@ -1,0 +1,15 @@
+FM Restoration sound effects, 2026-10-27
+
+All 25 short sound effects are original offline synthesis authored for this
+project by Tools/Audio/Restoration/render-sfx.py. They use mathematical oscillators,
+seeded filtered noise, envelopes and short stereo reflections. They contain no
+third-party audio recordings, samples, voice, watermark or cloned voice.
+
+These effects are remaster additions, not recovered original Fantasy Masters
+sound effects or original client source. Existing BGM recordings and their
+separate provenance notices are unchanged.
+
+The source recipe, cue names, exact output SHA-256 values and technical waveform
+checks are recorded beside the generator in sfx-manifest.json. The generator
+uses NumPy and SciPy only as signal-processing tools; their code is not embedded
+in the game runtime.

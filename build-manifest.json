@@ -1,10 +1,10 @@
 {
-  "releaseProfile": "arcana",
-  "createdUtc": "2026-10-27T10:43:36.976385+00:00",
+  "releaseProfile": "restoration",
+  "createdUtc": "2026-10-27T17:49:58.450466+00:00",
   "publishReady": true,
   "gameRevisions": {
-    "FantasyCards": "fm-arcana-2026-10-27",
-    "PathOfDawn": "gospel-authored-2026-10-27"
+    "FantasyCards": "fm-restoration-2026-10-27",
+    "PathOfDawn": "gospel-toon-2026-10-27"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
@@ -25,36 +25,35 @@
     ]
   },
   "browserReportRootsByGame": {
-    "FantasyCards": "Artifacts/Validation/Arcana",
-    "PathOfDawn": "Artifacts/Validation/Arcana"
+    "FantasyCards": "Artifacts/Validation/Restoration",
+    "PathOfDawn": "Artifacts/Validation/Restoration"
   },
   "reusedBrowserEvidence": [],
   "incompleteBrowserRuns": [],
   "adjudicatedBrowserReports": [
     {
-      "game": "FantasyCards",
-      "profile": "Mobile844",
+      "game": "PathOfDawn",
+      "profile": "Desktop720",
       "rawStatus": "failed",
-      "proofStatus": "verified-exact-arcana-preunlock-cancellations",
+      "proofStatus": "verified",
       "rawReport": {
-        "file": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/report.json",
-        "sha256": "76bccabe998063f6ea66a10cf49322da87b0f4a1e5dac8a2829ea0ff4d7a9e38",
-        "status": "failed"
+        "file": "Artifacts/Validation/Restoration/Desktop720/PathOfDawn/report.json",
+        "sha256": "a92bfab0f181f643045bf0060c11b30763bbea8051d5b5a2d6c555675ef6b4c3"
       },
-      "proofFile": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/media-adjudication.json",
-      "proofSha256": "e4212979ee3460fc8baf3c95b96e2091766458c7b08ff47c3c56ac9b34269ca1"
+      "proofFile": "Artifacts/Validation/Restoration/Desktop720/PathOfDawn/followup-verification.json",
+      "proofSha256": "a7bcb8d28f1cc249f6bb89244ad58958178bffd4551309a2ae81fd03cfbcb56f"
     }
   ],
-  "sourceCommit": "aea33845c209c15deeac22474c6626b3efcb8486",
+  "sourceCommit": "540ca407f34c60bd23b9f6b6ec3e9a177f3dc9a0",
   "sourceDirty": false,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "art/fantasy-cards.png": "4e01f5f7d265b4750bbea024c617c97cc57765874db5ada0b8a71412033acd0b",
-    "art/path-of-dawn.png": "47f9c66a103f2da82eb9a49431d284104477047648836b397361ba57e820b5c4",
-    "games/fantasy-cards/Build/51457f6061f8ece713d9f708691b9c50.data.unityweb": "c81d392e897772f1c3ffbdb7ad298782276fb696bdba8610ee0013876759287e",
-    "games/fantasy-cards/Build/7c68d9b8bbb73dbd5124e3dfdbbad5a6.framework.js.unityweb": "b892f262c69574e7a59e95ae25aac391a8f465196fbb92d2e6ab2a6810f18532",
-    "games/fantasy-cards/Build/c4138d164c9db4b9344d10736296525f.wasm.unityweb": "cea1bf94e32cf1bb9754ef54d19923f01b15440632b5b1818f3c4c447efd6dda",
-    "games/fantasy-cards/Build/db5c393fc601d6f0244a82a1081e23ed.loader.js": "d39ab362747e386734b5ab6852fe26fdf2706d5d35da104a68d1e7475a763774",
+    "art/fantasy-cards.png": "91358848255200946839646f674814d1d8385e0d14b3cd31408a21bd6b891c12",
+    "art/path-of-dawn.png": "f189310a6cc8f601de38dc3c452dcc6cde027ebe5f935690c7d978456685ee55",
+    "games/fantasy-cards/Build/8e6f9c6c5d3a2cf7bbd6b31c8f8ba2c0.loader.js": "25ed81ee271af1fe9b569d2149cc88faf8fae73ba095057e13e9b717cc475852",
+    "games/fantasy-cards/Build/ddeef99742a9d62600ac79e9cb37e5dd.wasm.unityweb": "98a0f3f0c156aed482b186bb08bc7e79e67a845a7a351389ed026e316d8f8a79",
+    "games/fantasy-cards/Build/e3786c8d768b3235bc8efe93c654ac88.data.unityweb": "2c5bbe8ed288d47afbeb0ed13de463a8fc974053d2bd2a76286799521b922155",
+    "games/fantasy-cards/Build/f7dfc603dd44743984a07f372ee93382.framework.js.unityweb": "b291ef75e4bbac77fee7aaf43f2d8868b14a454f4c8ce302385375bd1e539d17",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt": "35518412e1cd06e8310fc987941311538328b5b2f3954a75acee51b6a1baf8d3",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.mp3": "752d3726853b8d8e3e6b7dcb5f9ed3382f9893aeef4b7307e66502cdb3a999c2",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg": "e72d5a96e33835a25885977c312c2b31a8589f7baf5d79fda970a9a5207b992d",
@@ -70,14 +69,19 @@
     "games/fantasy-cards/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
     "games/fantasy-cards/ThirdParty/Music-NOTICE.txt": "fdfa0b80f08308d1816c690bd8d8b10cb9f4f8080e6a2a473a11490884659016",
     "games/fantasy-cards/ThirdParty/Pretendard-OFL.txt": "85fce85e25260b03777bf10373d3bd9363b9da96d9e0ca86a280dd37ed7667a0",
+    "games/fantasy-cards/ThirdParty/Restoration-SOURCE-NOTICE.txt": "3dc8cf85a5d6dca3292050650dc6faa3f6588a10c7a4ede6ae33efcb302f5073",
     "games/fantasy-cards/ThirdParty/Revival-SOURCE-NOTICE.txt": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73",
-    "games/fantasy-cards/index.html": "785ce5a7b8343a7aeef633502366085cee6520a9e1ec1cd735218aeac73f88fc",
-    "games/path-of-dawn/Build/84e3270653900dae2169601d487d4944.wasm.unityweb": "f2b97d043908afa08f3d64f7e533def11d6ae9bfc266f39dbf0f3f53ba58abea",
-    "games/path-of-dawn/Build/a4867b85992aee1f879625bf8f72f284.loader.js": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7",
-    "games/path-of-dawn/Build/bde1aaf3928d3fbe6a03ce15059c35fd.data.unityweb": "f6e551982b6707e908cde3cf86993ac9a469528aff297503a2bcb674cbdbc147",
-    "games/path-of-dawn/Build/d9edd892c7d5893934879f2e27641d2b.framework.js.unityweb": "96ad1a3fcc4081fcc84b07b2c69bfae4ffdc58a10c92dccb6f87fd11881b2fb4",
+    "games/fantasy-cards/index.html": "d9324e4c86da2a3025744477a9c7f21728255827ac907a9fbdabe752e8db2cd8",
+    "games/path-of-dawn/Build/24bf9dc6988a61198e0db94053c2cdd7.data.unityweb": "6a7cd3ec75464288b849ffdb05b3f36c6be520a931774591b18e5b367793947b",
+    "games/path-of-dawn/Build/9b8596580eed7910f94618e4666b832a.wasm.unityweb": "10ac5016799efc6d0bb31ec32589ef1325c06f5b5e5bacb717d0d29361bff4cc",
+    "games/path-of-dawn/Build/b8f74301e03929837ad9bdbc83feb90a.loader.js": "ef1cf39617e7f87dc193c557662e07740d99e7cf9d54dd7f05faf227fdfa7a6f",
+    "games/path-of-dawn/Build/f888b7a6c9b25e8c2b5cbd6b52edafe8.framework.js.unityweb": "d13b773b3b0c9c5a92bfb173a51659dfb02c8191791432d46bf5e5a7c98e8385",
     "games/path-of-dawn/ThirdParty/FirstGameKorean-OFL.txt": "a93334c1f1f4995de0a8d4b3212bf91a5925007d02aa3c20b1de83d9e64fe464",
     "games/path-of-dawn/ThirdParty/Gospel3D-SOURCE-NOTICE.txt": "8222c3273ffd9e988313e06d537db8f19eb99760330426907ba76186b450bff1",
+    "games/path-of-dawn/ThirdParty/GospelAuthored-SOURCE-NOTICE.txt": "ad881218d0e4994ca3dc994921d4a9826f7e467dc6938c25e853e01b6366a082",
+    "games/path-of-dawn/ThirdParty/GospelAuthoredProps-SOURCE-NOTICE.txt": "0c1ee3598af0de87c1d02d11242f16f4bbf2573589e8e46249853ecde5485ea3",
+    "games/path-of-dawn/ThirdParty/GospelToon-SOURCE-NOTICE.txt": "3000110dd16dc54ab587a6e1c6087b05b999bfbdc31d2f485a09f3fa0d4f1ad7",
+    "games/path-of-dawn/ThirdParty/GospelWell-SOURCE-NOTICE.txt": "74e0260b6e641802e7dddce4bfbe3232d46921105e16b69d57bb8e238b8b5772",
     "games/path-of-dawn/ThirdParty/Ink-LICENCE.md": "ccdb47efceb80452798d5d0d14ab26a11c5edb6267bcd90a4035912937675a29",
     "games/path-of-dawn/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
     "games/path-of-dawn/ThirdParty/Music-NOTICE.txt": "fdfa0b80f08308d1816c690bd8d8b10cb9f4f8080e6a2a473a11490884659016",
@@ -85,8 +89,8 @@
     "games/path-of-dawn/ThirdParty/Scripture-NOTICE.txt": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a",
     "games/path-of-dawn/ThirdParty/TempleMaterials-NOTICE.txt": "5a1c8dbd05080b5fd5377716c7ade516e569327e8ba01d78f1b0727f1f31c01e",
     "games/path-of-dawn/ThirdParty/Voice-NOTICE.txt": "fab163eb8f9f6a3a6b4289743b6183f4c0aa427ae67cbd10659a9669e6255cf3",
-    "games/path-of-dawn/index.html": "536d8d0aa5f316c2c55fdef39eee6367deac6dc2825bda6338e2c7d02494cb4e",
-    "index.html": "64b289be168ef5b51fc1c8d4b78bd1b3feba159f9539cfe65b473f4e1a65d634",
+    "games/path-of-dawn/index.html": "775ad566f02cc862f439ff036729c6d7d77c150de47385937a89e9b051685148",
+    "index.html": "9031701aac155328b97c46489cf5bffe7ead3d109d87d5773e478df8cf55537a",
     "site.css": "0db62e51c8c98f814848719084d979b834c3afd9fcb977f30a2bafbec2305e57"
   }
 }
