@@ -50,23 +50,26 @@
   </main>
   <footer id="fm-music" aria-label="배경 음악">
     <button id="fm-music-toggle" type="button">음악 시작</button>
-    <span id="fm-music-status" role="status">별문이 열릴 때 · 배경 음악</span>
-    <span id="fm-music-credit">FirstGame instrumental score</span>
-    <a href="https://soundcloud.com/sound-i2/sets/eomgh4mkqbec" target="_blank" rel="noopener noreferrer" aria-label="새 탭에서 SOUND-I 원곡 듣기">원곡 듣기 ↗</a>
+    <span id="fm-music-status" role="status">원작 로그인 · 배경 음악</span>
+    <span id="fm-music-credit">SOUND-I · 원작곡 발췌</span>
+    <a id="fm-music-source" href="https://soundcloud.com/sound-i2/2-bgm-login" target="_blank" rel="noopener noreferrer" aria-label="새 탭에서 현재 음악의 제작자 공개 페이지 보기">음악 출처 ↗</a>
   </footer>
   <script id="fm-local-music-controller">
     (function () {
       "use strict";
       // Only same-origin, bundled instrumental files are used in normal play.
+      // Sources and excerpt boundaries are recorded in the bundled manifest.
       // This graph has no iframe, hosted SDK, advertisement or speech source.
       var tracks = {
-        login: { file: "title", label: "별문이 열릴 때" },
-        lobby: { file: "lobby", label: "여행자의 정원" },
-        deck: { file: "deck", label: "빛을 엮는 서고" },
-        battle: { file: "battle", label: "별의 결투" }
+        login: { file: "title", label: "원작 로그인", credit: "SOUND-I · 원작곡 발췌", url: "https://soundcloud.com/sound-i2/2-bgm-login" },
+        lobby: { file: "lobby", label: "원작 로비", credit: "SOUND-I · 원작곡 발췌", url: "https://soundcloud.com/sound-i2/3-bgm-lobby" },
+        deck: { file: "deck", label: "원작 덱 편집", credit: "SOUND-I · 원작곡 발췌", url: "https://soundcloud.com/sound-i2/1-bgm-deck" },
+        battle: { file: "battle", label: "원작 전투", credit: "S.I.D-Sound · Ye eun-su", url: "https://soundcloud.com/sid_sound/fantasy-masters-battle-bgm" }
       };
       var button = document.getElementById("fm-music-toggle");
       var status = document.getElementById("fm-music-status");
+      var credit = document.getElementById("fm-music-credit");
+      var sourceLink = document.getElementById("fm-music-source");
       var scene = "login", active = null, generation = 0, unlocked = false;
       var context = null, master = null, graphUnavailable = false;
       var muted = false, volume = .6, hasMutedPreference = false, hasVolumePreference = false;
@@ -120,6 +123,9 @@
       }
       function render() {
         refreshActualState();
+        var audibleTrack = active || tracks[scene];
+        if (credit) credit.textContent = audibleTrack.credit;
+        if (sourceLink) sourceLink.href = audibleTrack.url;
         status.textContent = tracks[scene].label + " · " + (muted ? "음소거" :
           status.dataset.playback === "playing" ? "배경 음악" : unlocked ? "음악 준비 중" : "시작하면 음악 재생");
         button.textContent = muted ? "음악 켜기" : status.dataset.playback === "playing" ? "음악 끄기" : "음악 시작";
@@ -325,12 +331,12 @@
       }
     }
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/974ceec12c8f8ba527df14e8c8e4459b.loader.js";
+    var loaderUrl = buildUrl + "/8952640eb6a0ed9217684febb5361b6d.loader.js";
     var config = {
       arguments: [],
-      dataUrl: buildUrl + "/601d0d75fddf977777a628fbc2673813.data.unityweb",
-      frameworkUrl: buildUrl + "/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb",
-      codeUrl: buildUrl + "/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb",
+      dataUrl: buildUrl + "/5cf70ce31941effed729f2e7f2337e3f.data.unityweb",
+      frameworkUrl: buildUrl + "/b1e6c63c37c138df4a6be014d735fc39.framework.js.unityweb",
+      codeUrl: buildUrl + "/4f38b3b9edcd1b62c3775546c3c75900.wasm.unityweb",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "FirstGame",
       productName: "FantasyCards",

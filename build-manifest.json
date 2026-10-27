@@ -1,8 +1,9 @@
 {
-  "createdUtc": "2026-10-26T18:31:46.778468+00:00",
+  "releaseProfile": "fm-fidelity",
+  "createdUtc": "2026-10-27T01:44:02.357446+00:00",
   "publishReady": true,
   "gameRevisions": {
-    "FantasyCards": "fm-modern-2026-10-26",
+    "FantasyCards": "fm-fidelity-2026-10-27",
     "PathOfDawn": "gospel-modern-2026-10-26"
   },
   "contentVersions": {
@@ -24,38 +25,46 @@
     ]
   },
   "browserReportRootsByGame": {
-    "FantasyCards": "Artifacts/Validation/Modern",
+    "FantasyCards": "Artifacts/Validation/FmFidelity",
     "PathOfDawn": "Artifacts/Validation/Modern"
   },
-  "reusedBrowserEvidence": [],
+  "reusedBrowserEvidence": [
+    {
+      "game": "PathOfDawn",
+      "revision": "gospel-modern-2026-10-26",
+      "reportRoot": "Artifacts/Validation/Modern",
+      "reason": "Previously verified runtime is unchanged; no new build or browser execution is claimed.",
+      "preservationRecord": "Artifacts/Validation/FmFidelity/preserved-gospel.json"
+    }
+  ],
   "incompleteBrowserRuns": [],
-  "sourceCommit": "855ab30372f48a8b681e798b165830d11e40ce4c",
+  "sourceCommit": "203e96fbe1d79f556cb03cf806e06677b71a1da1",
   "sourceDirty": false,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "art/fantasy-cards.png": "5043f62b5be552255dc8b6de1e1dc0769088074de94cf7eb6123c089b4544d9f",
+    "art/fantasy-cards.png": "f3655548ecf8c11139e012604df42442f5bbe998ed435b9cee241932e504a104",
     "art/path-of-dawn.png": "10929a426883446823c6f1894a7c00e1affdba1d1a0e7cd04c2be4b04127c396",
-    "games/fantasy-cards/Build/476d9ab9eb022e0d093b685558e7d3bf.wasm.unityweb": "a32ea1f19bd34debd005ade5af7ac2f34645680b01d0ca4f65fb566c31810290",
-    "games/fantasy-cards/Build/601d0d75fddf977777a628fbc2673813.data.unityweb": "7c9873afc2079b6650e5716edd69e3fe17b4405b83a3f466f9bb8de36e2de5e5",
-    "games/fantasy-cards/Build/7c88f411c94bc429f2b32e5b9c5ba54f.framework.js.unityweb": "9b5afcd0011cd673bdaedc11ffac15bc303ece9c50efe573bdca8c9785dcf89a",
-    "games/fantasy-cards/Build/974ceec12c8f8ba527df14e8c8e4459b.loader.js": "680bb806514430eccba38498c5755baed1f2d2609b8faea4847a008a725596f8",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt": "672b8250b34543686f55aa14a6fb159e97eaed349fe4fc84cceb539ed8b919b0",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.mp3": "bd0b6eeef15b932f38b8b17c7efcc3924b87a66b0e27a3af2ab23f88d9273418",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg": "09c35ffa207fe68a9550493b0c66a2fbd2cedbd8ea00bd563e2d6ccde662c075",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.mp3": "1924a9b930c902052cc37ceade83385ca500db861c689d0b59cd6136bac86884",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg": "a4f3a78c4783215d214f1c932673c92906cc8bb66224df8c6c36cab6bd2753be",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.mp3": "04b694ce07c07a7078c8ad4a02e1744e910be2f262de14891a9002188b027644",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg": "6d41504bfb7560358db6a09c7fe2e2701f3699c741d55adce3721d10dfb78610",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/manifest.json": "a5327dff508bcfbd38cfc6a7b0b3e3a7bb773a9dfc2bde6dd02e514349eaa539",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.mp3": "bceb27c38e0a844726bfa2875f1827371f959c814b625d47e4afc6a89aa72e4e",
-    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg": "ebe993881721cde73fdb645531bf8d9265ce11679f4d273dbc9f92dc1e7a48fe",
+    "games/fantasy-cards/Build/4f38b3b9edcd1b62c3775546c3c75900.wasm.unityweb": "be2bb9065fd5aa8c159fed6627bb5d8950740b49e1b0e359f62c64bc8ed5fe87",
+    "games/fantasy-cards/Build/5cf70ce31941effed729f2e7f2337e3f.data.unityweb": "e202d12be73d3cc03e6623e35b48af0e1b8f7b4a06f17e8bb20d8f02676b1ce5",
+    "games/fantasy-cards/Build/8952640eb6a0ed9217684febb5361b6d.loader.js": "ab1935970ef8225a956ff8adc5281f1297ab85b9939a1e90b87d1184156dc51d",
+    "games/fantasy-cards/Build/b1e6c63c37c138df4a6be014d735fc39.framework.js.unityweb": "a786bf6e05bae4e309a1e21e0d3ae706cb3e57ed1831d27d0a6cdbedc4bfb8be",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt": "35518412e1cd06e8310fc987941311538328b5b2f3954a75acee51b6a1baf8d3",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.mp3": "752d3726853b8d8e3e6b7dcb5f9ed3382f9893aeef4b7307e66502cdb3a999c2",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg": "e72d5a96e33835a25885977c312c2b31a8589f7baf5d79fda970a9a5207b992d",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.mp3": "e8af03c908ea97968d44fa9e855eb2cc2455c6d2aa858239019a16d2a4cd9e22",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/deck.ogg": "2d86efd77128b4c43c63bc40483cc69ab399935ad7e91e03bb8884e0f21b0040",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.mp3": "91fec1767ac8a0385a40eb1e4ff7df8fb43db4301ce01bd8e79c8a05bfb24b08",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/lobby.ogg": "897b2a946584e9e2572d2723b32f040ffba1e7d315d3fab5570b4f3dfafeb85a",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/manifest.json": "d92ea8a5c8f1bacf8c7ccac0f60b80ff5a465de08b96185cb75fec1aa6928210",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.mp3": "d56372cae809635d95a6300507e1b3e9823b7be2ff606dcce9ac3c6dfcee620b",
+    "games/fantasy-cards/StreamingAssets/Audio/ModernCard/title.ogg": "7ea53aeba03018c99c76cc6ebee6498a7adabffb8c9dd525b8c6ae11d679d1b1",
     "games/fantasy-cards/ThirdParty/ClassicCards-SOURCE-NOTICE.txt": "52e8d2e68bf01cae6f398e3daf46fc563c21df078ad5deb6472b01347be85d1d",
     "games/fantasy-cards/ThirdParty/FirstGameKorean-OFL.txt": "a93334c1f1f4995de0a8d4b3212bf91a5925007d02aa3c20b1de83d9e64fe464",
     "games/fantasy-cards/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
-    "games/fantasy-cards/ThirdParty/Music-NOTICE.txt": "672b8250b34543686f55aa14a6fb159e97eaed349fe4fc84cceb539ed8b919b0",
+    "games/fantasy-cards/ThirdParty/Music-NOTICE.txt": "fdfa0b80f08308d1816c690bd8d8b10cb9f4f8080e6a2a473a11490884659016",
     "games/fantasy-cards/ThirdParty/Pretendard-OFL.txt": "85fce85e25260b03777bf10373d3bd9363b9da96d9e0ca86a280dd37ed7667a0",
     "games/fantasy-cards/ThirdParty/Revival-SOURCE-NOTICE.txt": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73",
-    "games/fantasy-cards/index.html": "83f26b6d086578a5cf259a45d9601d9aafb6b73be25472fe2313a802f2825819",
+    "games/fantasy-cards/index.html": "017a91ea4a9172e93e79d21fbbfb5c05bf9cbd4b07a57fb9633ab49bc6e2a969",
     "games/path-of-dawn/Build/57eb5b245772ecbef03885daa438b1ef.framework.js.unityweb": "8481133aa6af55ce723a4a3ab4ea7136514fc6041ff3e40f758f3d036c6ed573",
     "games/path-of-dawn/Build/afbfb4168f91dc510b97cad25a182ef8.data.unityweb": "4cabd562b2b9958020e7199dd9a243a95bc4f8ab53ea8765a4c0e737f4b86e32",
     "games/path-of-dawn/Build/b14b4b8b8e820a34fdc02fabdc8a122d.wasm.unityweb": "d4261871d16e3577e7b02337d76bede6b4cf3a18a22a50aaf35f520334cb09cb",
@@ -70,7 +79,7 @@
     "games/path-of-dawn/ThirdParty/TempleMaterials-NOTICE.txt": "5a1c8dbd05080b5fd5377716c7ade516e569327e8ba01d78f1b0727f1f31c01e",
     "games/path-of-dawn/ThirdParty/Voice-NOTICE.txt": "fab163eb8f9f6a3a6b4289743b6183f4c0aa427ae67cbd10659a9669e6255cf3",
     "games/path-of-dawn/index.html": "88da611e06c0c9b8e87d146893a8c7766edb721a7ae50257680ec9c23b555515",
-    "index.html": "46ebe69f0adc9fcad26298dfb53839f649aaff08ed2fea361f31611c7cb37176",
+    "index.html": "58fe3f79e0c6c607212e9c5f20f53dac48d87f89e19a42661bf9ad77b1894be2",
     "site.css": "0db62e51c8c98f814848719084d979b834c3afd9fcb977f30a2bafbec2305e57"
   }
 }

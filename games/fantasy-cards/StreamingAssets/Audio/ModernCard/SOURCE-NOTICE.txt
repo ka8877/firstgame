@@ -1,48 +1,42 @@
-FIRSTGAME ORIGINAL SOUNDTRACKS
+FANTASY MASTERS — SOURCE-CREDITED BUNDLED MUSIC
+Revision: fm-fidelity-audio-2026-10-27
 
-Starlight Overture / 별빛의 서곡
-Recollections of Starlight / 별빛의 회상 (classic card edition)
-Dawn on Galilee / 갈릴리의 새벽
-Gates of Starlight / 별문이 열릴 때 (modern card title)
-The Wayfarer's Garden / 여행자의 정원 (modern card lobby)
-The Luminous Archive / 빛을 엮는 서고 (modern card deck)
-Duel beneath the Stars / 별의 결투 (modern card battle)
+Login, lobby and deck:
+SOUND-I, (주)제오닉스 "판타지 마스터즈" publisher portfolio
+https://soundcloud.com/sound-i2/sets/eomgh4mkqbec
+1 BGM Deck / 234910362
+2 BGM Login / 234910360
+3 BGM Lobby / 234910359
 
-Original musical compositions and arrangements created for FirstGame with
-AI-assisted development. Their scores are in Tools/Audio/Scores. The classic
-card edition is rendered with Tools/Audio/compose-classic.py; the original
-two-game edition uses Tools/Audio/compose-soundtracks.py. The bundled modern
-card themes use Tools/Audio/compose-modern-cards.py and their authored MIDI/JSON
-scores are in Tools/Audio/ModernCards/Scores. They contain no speech, vocal
-instruments, streamed performances or advertising inserts. No existing MIDI, melody,
-commercial game score or recorded performance was used as a source.
+Battle:
+S.I.D-Sound, Fantasy Masters - battle BGM / 139975621
+Composer credit in publisher description: Ye eun-su (S.I.D-Sound)
+https://soundcloud.com/sid_sound/fantasy-masters-battle-bgm
 
-The performances use the FluidR3 GM orchestral instrument samples, rendered
-offline through FluidSynth. The SoundFont is a build tool and is not shipped
-inside the game. Music samples are covered by the following MIT permission.
-FluidSynth's software license does not change the license of its audio output.
+The original portfolio MP3 files are preserved without modifying their bytes
+under Tools/Audio/FmFidelity/Originals, with SHA-256, source pages and metadata
+in source-files.json. Additional SOUND-I Market, Tutorial, Game1 and Game2
+recordings are preserved as research sources; they are not active runtime music.
 
-FluidR3 sample source:
-https://deb.debian.org/debian/pool/main/f/fluid-soundfont/
-Package: fluid-soundfont-gm 3.1-6
-Copyright: 2000-2002, 2008 Frank Wen
-           2008 Toby Smithe
-License: MIT
+The SOUND-I portfolio recordings contain a spoken "Welcome to Sound Interactive"
+ident. Runtime login/lobby/deck music is an EDIT assembled from documented
+instrumental excerpts of those recordings, with 40ms incoming pre-roll joins,
+loudness normalization and Ogg/MP3 encoding. It is not an unmodified recording,
+a full client-ripped soundtrack, or a restoration of missing music. No speech
+separation or reconstructed/replacement melody is used. Every selected interval
+is listed in loop-spec.json and runtime-manifest.json.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to
-do so, subject to the following conditions:
+Battle retains all decoded audio from the complete publicly supplied S.I.D-Sound
+portfolio file, with only loudness normalization and codec conversion. The
+60.479s source metadata includes encoder padding; its decoded runtime is 60.421s.
+An exact historical game patch or a complete original soundtrack is unverified.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+Original copyrights remain with their respective creators/rightsholders.
+The source pages report all-rights-reserved and no general redistribution
+license was verified. These source recordings and documented edits are used
+under the user's explicit request for this personal remaster study; this is not
+a new rights grant or a FirstGame original musical composition. The FluidR3 MIT
+notice for the preceding FirstGame compositions does not license these recordings.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Normal gameplay uses only bundled same-origin files, no hosted music iframe,
+advertising SDK or remote stream. Source links open only when explicitly chosen.
