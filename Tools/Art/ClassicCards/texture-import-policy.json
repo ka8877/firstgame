@@ -1,17 +1,19 @@
 {
-  "schema": 1,
-  "revision": "fm-remaster-2026-10-26",
+  "schema": 2,
+  "revision": "fm-arcana-2026-10-27",
   "engine": "Unity 6000.3.26f1",
-  "purpose": "Explicit expected import policy for preserved original full-card PNGs; compare every serialized setting and reject unknown or changed settings.",
+  "purpose": "Explicit full source-preserving native import plus high-quality ASTC4x4 Web override; no NPOT resize or aspect change.",
   "provenance": {
-    "kind": "Reviewed source-derived import policy authored during release-gate repair",
+    "kind": "Reviewed source-derived import policy with isolated Unity NPOT compression experiment",
     "notABuildCapture": true,
     "limitation": "This is an expected settings contract, not a pre-build snapshot or proof that a particular build consumed metadata bytes. Native artwork coverage and current source/build/runtime evidence remain separate.",
     "referenceMetadata": "Games/FantasyCards/Assets/Art/Archive/LegacyResources/cards-02-heroes.png.meta",
     "referenceMetadataSha256": "828ad5c226c786a9c5254d16a13ee470484c3eb66d37f37fee2eb9a2d12588a6",
-    "recipe": "Tools/Art/ClassicCards/prepare-media.py::texture_meta copies this versioned reference, sets ignoreMipmapLimit to 1 and changes every textureCompression 1 to 0.",
-    "editorEnforcer": "Games/FantasyCards/Assets/Editor/ProjectSetup.cs::ImportIllustration requires Default Texture2D, sRGB, no mipmap/NPOT resize, clamp, size at least 2048, uncompressed import.",
-    "reviewedSettings": "The full source-reference Unity TextureImporter v13 contract, including all default values, bilinear filtering, every platformSettings entry, empty spriteSheet and asset-bundle fields, is retained below; per-file GUID is checked separately against the verified media records."
+    "recipe": "Preserve all prior native/default settings; only WebGL platform overrides ASTC_4x4 enum48, HQ2, quality100, overridden1. Source PNG bytes/GUIDs and full-source Sprite rect remain unchanged.",
+    "editorEnforcer": "ProjectSetup.ImportIllustration retains nativeUncompressed and uses explicit WebASTC4x4 max2048/NpotNone; actual285x405 stays285x405.",
+    "reviewedSettings": "The full source-reference Unity TextureImporter v13 contract, including all default values, bilinear filtering, every platformSettings entry, empty spriteSheet and asset-bundle fields, is retained below; per-file GUID is checked separately against the verified media records.",
+    "webCompatibility": "Unity6000 Web documentation supports software decompression fallback on GPUs without ASTC; no hardware performance claim. Web pixels are HQ GPU-encoded, original source pixels remain preserved.",
+    "probe": "Artifacts/Validation/Arcana/texture-format-probe.json"
   },
   "excludedUniqueTopLevelKeys": [
     "guid"
@@ -131,12 +133,12 @@
           "buildTarget": "WebGL",
           "maxTextureSize": 2048,
           "resizeAlgorithm": 0,
-          "textureFormat": -1,
-          "textureCompression": 0,
-          "compressionQuality": 50,
+          "textureFormat": 48,
+          "textureCompression": 2,
+          "compressionQuality": 100,
           "crunchedCompression": 0,
           "allowsAlphaSplitting": 0,
-          "overridden": 0,
+          "overridden": 1,
           "ignorePlatformSupport": 0,
           "androidETC2FallbackOverride": 0,
           "forceMaximumCompressionQuality_BC6H_BC7": 0

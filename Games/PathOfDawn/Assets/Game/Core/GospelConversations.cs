@@ -40,10 +40,10 @@ namespace PathOfDawn.Core
                 ["birth-good-news"] = Array.AsReadOnly(new[] { Guide(GospelCatalog.GetReading("birth-good-news").Context, "joseph") }),
                 ["birth-remembered"] = Array.AsReadOnly(new[] { Guide(GospelCatalog.GetReading("birth-remembered").Context, "mary") }),
                 ["temple-passover"] = Array.AsReadOnly(new[] {
-                    Guide("누가는 예수님의 부모가 해마다 유월절에 예루살렘으로 갔다고 기록합니다. 이번 여정의 예수님은 열두 살입니다.", "joseph"),
-                    Guide("절기를 마치고 돌아갈 때, 예수님은 예루살렘에 머무셨습니다. 부모는 이를 알지 못했습니다. 선생들이 있는 곳에서 다음 기록을 살펴보세요.", "jesus") }),
+                    Guide("누가는 예수님의 부모가 해마다 유월절에 예루살렘으로 갔다고 기록합니다. 이번 여정의 예수님은 열두 살입니다.", "teacher", "성전 길잡이"),
+                    Guide("절기를 마치고 돌아갈 때, 예수님은 예루살렘에 머무셨습니다. 부모는 이를 알지 못했습니다. 선생들이 있는 곳에서 다음 기록을 살펴보세요.", "teacher", "성전 길잡이") }),
                 ["temple-teachers"] = Array.AsReadOnly(new[] {
-                    Guide("부모는 예수님을 찾으러 예루살렘으로 돌아옵니다. 사흘 후 성전에서 만났을 때, 예수님은 선생들 가운데 앉아 계셨습니다."),
+                    Guide("부모는 예수님을 찾으러 예루살렘으로 돌아옵니다. 사흘 후 성전에서 만났을 때, 예수님은 선생들 가운데 앉아 계셨습니다.", "teacher", "율법 선생"),
                     Quote("temple-teachers",46,"복음서의 기록","teacher"),
                     Quote("temple-teachers",47,"복음서의 기록","jesus"),
                     Guide("어떤 질문과 대답이 오갔는지는 이 본문에 기록되어 있지 않습니다. 기록된 만남에 이어, 마리아와 예수님의 대화를 들어보세요.") }),

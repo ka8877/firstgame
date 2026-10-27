@@ -1,0 +1,691 @@
+{
+  "revision": "gospel-authored-2026-10-27",
+  "sourceManifest": "Tools/Art/GospelAuthored/source-manifest.json",
+  "scope": "Actual authored CC0 meshes, not recovered historical Temple architecture/botany. Simplified render LODs preserve UVs and complete retained foliage islands.",
+  "models": [
+    {
+      "sourceAsset": "searsia_lucida",
+      "sourceObject": "searsia_lucida_a_LOD0",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            0.6825634241104126,
+            -0.3965953588485718,
+            -0.024149363860487938
+          ],
+          "max": [
+            2.4885714054107666,
+            1.569059133529663,
+            2.314770221710205
+          ]
+        },
+        "scale": 0.42754782296684857,
+        "verticalAdaptation": 1
+      },
+      "lod": 0,
+      "parts": [
+        {
+          "part": "Bark",
+          "triangles": 8792,
+          "derivation": {
+            "branchCollapseRatio": 0.12
+          }
+        },
+        {
+          "part": "Leaves",
+          "triangles": 25350,
+          "derivation": {
+            "sourceIslands": 5280,
+            "retainedIslands": 4225,
+            "requestedFraction": 0.8
+          }
+        },
+        {
+          "part": "Twigs",
+          "triangles": 3477,
+          "derivation": {
+            "sourceIslands": 392,
+            "retainedIslands": 157,
+            "requestedFraction": 0.4
+          }
+        }
+      ],
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "ShadeTreeA_Bark",
+          "beforeVerticesFaces": [
+            16506,
+            8792
+          ],
+          "afterVerticesFaces": [
+            5946,
+            8792
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeA_Leaves",
+          "beforeVerticesFaces": [
+            33800,
+            25350
+          ],
+          "afterVerticesFaces": [
+            33800,
+            25350
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeA_Twigs",
+          "beforeVerticesFaces": [
+            3791,
+            3477
+          ],
+          "afterVerticesFaces": [
+            3791,
+            3477
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "ShadeTreeA_LOD0",
+      "resource": "Art/GospelAuthoredProps/ShadeTreeA_LOD0",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD0.fbx",
+      "sha256": "a5fba354c03c9e2897f6b12ee85698e6016f7d74231eacd9276057dd21dae42d",
+      "bytes": 1919932,
+      "triangles": 37619,
+      "meshes": 3,
+      "materials": [
+        "Authored_Tree_Bark",
+        "Authored_Tree_Leaves",
+        "Authored_Tree_Twigs"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "searsia_lucida",
+      "sourceObject": "searsia_lucida_a_LOD0",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            0.6825634241104126,
+            -0.3965953588485718,
+            -0.024149363860487938
+          ],
+          "max": [
+            2.4885714054107666,
+            1.569059133529663,
+            2.314770221710205
+          ]
+        },
+        "scale": 0.42754782296684857,
+        "verticalAdaptation": 1
+      },
+      "lod": 1,
+      "parts": [
+        {
+          "part": "Bark",
+          "triangles": 3296,
+          "derivation": {
+            "branchCollapseRatio": 0.045
+          }
+        },
+        {
+          "part": "Leaves",
+          "triangles": 6984,
+          "derivation": {
+            "sourceIslands": 5280,
+            "retainedIslands": 1164,
+            "requestedFraction": 0.22
+          }
+        },
+        {
+          "part": "Twigs",
+          "triangles": 1166,
+          "derivation": {
+            "sourceIslands": 392,
+            "retainedIslands": 49,
+            "requestedFraction": 0.12
+          }
+        }
+      ],
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "ShadeTreeA_Bark",
+          "beforeVerticesFaces": [
+            13758,
+            3244
+          ],
+          "afterVerticesFaces": [
+            3198,
+            3244
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeA_Leaves",
+          "beforeVerticesFaces": [
+            9312,
+            6984
+          ],
+          "afterVerticesFaces": [
+            9312,
+            6984
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeA_Twigs",
+          "beforeVerticesFaces": [
+            1264,
+            1166
+          ],
+          "afterVerticesFaces": [
+            1264,
+            1166
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "ShadeTreeA_LOD1",
+      "resource": "Art/GospelAuthoredProps/ShadeTreeA_LOD1",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD1.fbx",
+      "sha256": "abf5b8d7cc147dab32c20b77d4eb3b351af70a1d0edcd139593bd282b08f88e6",
+      "bytes": 629116,
+      "triangles": 11394,
+      "meshes": 3,
+      "materials": [
+        "Authored_Tree_Bark",
+        "Authored_Tree_Leaves",
+        "Authored_Tree_Twigs"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "searsia_lucida",
+      "sourceObject": "searsia_lucida_b_LOD0",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.7282518148422241,
+            0.06120210886001587,
+            -0.017967941239476204
+          ],
+          "max": [
+            0.7356298565864563,
+            1.5849486589431763,
+            1.9761439561843872
+          ]
+        },
+        "scale": 0.501476372627807,
+        "verticalAdaptation": 1
+      },
+      "lod": 0,
+      "parts": [
+        {
+          "part": "Bark",
+          "triangles": 7546,
+          "derivation": {
+            "branchCollapseRatio": 0.12
+          }
+        },
+        {
+          "part": "Leaves",
+          "triangles": 17380,
+          "derivation": {
+            "sourceIslands": 4938,
+            "retainedIslands": 4345,
+            "requestedFraction": 0.88
+          }
+        },
+        {
+          "part": "Twigs",
+          "triangles": 2556,
+          "derivation": {
+            "sourceIslands": 280,
+            "retainedIslands": 126,
+            "requestedFraction": 0.45
+          }
+        }
+      ],
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "ShadeTreeB_Bark",
+          "beforeVerticesFaces": [
+            14926,
+            7545
+          ],
+          "afterVerticesFaces": [
+            5378,
+            7545
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeB_Leaves",
+          "beforeVerticesFaces": [
+            26070,
+            17380
+          ],
+          "afterVerticesFaces": [
+            26070,
+            17380
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeB_Twigs",
+          "beforeVerticesFaces": [
+            2808,
+            2556
+          ],
+          "afterVerticesFaces": [
+            2808,
+            2556
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "ShadeTreeB_LOD0",
+      "resource": "Art/GospelAuthoredProps/ShadeTreeB_LOD0",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD0.fbx",
+      "sha256": "3e92e2132ae52177d6b93f42712b5464812bac6003e4346257a416d2ae69df8e",
+      "bytes": 1483276,
+      "triangles": 27481,
+      "meshes": 3,
+      "materials": [
+        "Authored_Tree_Bark",
+        "Authored_Tree_Leaves",
+        "Authored_Tree_Twigs"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "searsia_lucida",
+      "sourceObject": "searsia_lucida_b_LOD0",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.7282518148422241,
+            0.06120210886001587,
+            -0.017967941239476204
+          ],
+          "max": [
+            0.7356298565864563,
+            1.5849486589431763,
+            1.9761439561843872
+          ]
+        },
+        "scale": 0.501476372627807,
+        "verticalAdaptation": 1
+      },
+      "lod": 1,
+      "parts": [
+        {
+          "part": "Bark",
+          "triangles": 2828,
+          "derivation": {
+            "branchCollapseRatio": 0.045
+          }
+        },
+        {
+          "part": "Leaves",
+          "triangles": 4356,
+          "derivation": {
+            "sourceIslands": 4938,
+            "retainedIslands": 1089,
+            "requestedFraction": 0.22
+          }
+        },
+        {
+          "part": "Twigs",
+          "triangles": 879,
+          "derivation": {
+            "sourceIslands": 280,
+            "retainedIslands": 37,
+            "requestedFraction": 0.12
+          }
+        }
+      ],
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "ShadeTreeB_Bark",
+          "beforeVerticesFaces": [
+            12485,
+            2821
+          ],
+          "afterVerticesFaces": [
+            2609,
+            2821
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeB_Leaves",
+          "beforeVerticesFaces": [
+            6534,
+            4356
+          ],
+          "afterVerticesFaces": [
+            6534,
+            4356
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "ShadeTreeB_Twigs",
+          "beforeVerticesFaces": [
+            953,
+            879
+          ],
+          "afterVerticesFaces": [
+            953,
+            879
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "ShadeTreeB_LOD1",
+      "resource": "Art/GospelAuthoredProps/ShadeTreeB_LOD1",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD1.fbx",
+      "sha256": "cf381ef66647b9998da169a524849a19f3f05bb6e214b2d5998dc47ec60c2f17",
+      "bytes": 467692,
+      "triangles": 8056,
+      "meshes": 3,
+      "materials": [
+        "Authored_Tree_Bark",
+        "Authored_Tree_Leaves",
+        "Authored_Tree_Twigs"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "searsia_lucida",
+      "sourceObject": "searsia_lucida_f_LOD0",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.8391706943511963,
+            -0.9347792267799377,
+            -0.0057983980514109135
+          ],
+          "max": [
+            -0.18152496218681335,
+            -0.4515749216079712,
+            0.732806384563446
+          ]
+        },
+        "scale": 1.3539040385960575,
+        "verticalAdaptation": 1
+      },
+      "lod": 0,
+      "parts": [
+        {
+          "part": "Bark",
+          "triangles": 4471,
+          "derivation": {
+            "retainedOriginalGeometry": true
+          }
+        },
+        {
+          "part": "Leaves",
+          "triangles": 2064,
+          "derivation": {
+            "retainedOriginalGeometry": true
+          }
+        },
+        {
+          "part": "Twigs",
+          "triangles": 697,
+          "derivation": {
+            "retainedOriginalGeometry": true
+          }
+        }
+      ],
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "Shrub_Bark",
+          "beforeVerticesFaces": [
+            3160,
+            4471
+          ],
+          "afterVerticesFaces": [
+            3160,
+            4471
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "Shrub_Leaves",
+          "beforeVerticesFaces": [
+            2752,
+            2064
+          ],
+          "afterVerticesFaces": [
+            2752,
+            2064
+          ],
+          "removedZeroAreaFaces": 0
+        },
+        {
+          "object": "Shrub_Twigs",
+          "beforeVerticesFaces": [
+            759,
+            697
+          ],
+          "afterVerticesFaces": [
+            759,
+            697
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "Shrub",
+      "resource": "Art/GospelAuthoredProps/Shrub",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/Shrub.fbx",
+      "sha256": "572e17cf57283d7863035e4326ed3f9635dd305bd87748ff105347c65e22295f",
+      "bytes": 343996,
+      "triangles": 7232,
+      "meshes": 3,
+      "materials": [
+        "Authored_Tree_Bark",
+        "Authored_Tree_Leaves",
+        "Authored_Tree_Twigs"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "stone_fire_pit",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.736316442489624,
+            -0.7183254957199097,
+            -0.19342292845249176
+          ],
+          "max": [
+            0.7121797800064087,
+            0.7149089574813843,
+            0.1949031502008438
+          ]
+        },
+        "scale": 0.6903711480012085,
+        "verticalAdaptation": 0.6
+      },
+      "adaptation": "Authored irregular stone ring made shallower for an artistic water basin; no fire/wood object added.",
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "StoneBasin",
+          "beforeVerticesFaces": [
+            2278,
+            3887
+          ],
+          "afterVerticesFaces": [
+            2278,
+            3887
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "StoneBasin",
+      "resource": "Art/GospelAuthoredProps/StoneBasin",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/StoneBasin.fbx",
+      "sha256": "65b071a5a829450935af267be9a1c16cb901e0c2ee9921e3b2cec9450f2a6c16",
+      "bytes": 168652,
+      "triangles": 3887,
+      "meshes": 1,
+      "materials": [
+        "Authored_Basin_Stone"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "ceramic_pot",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.3281251788139343,
+            -0.2512340545654297,
+            -0.0008817671332508326
+          ],
+          "max": [
+            0.32812511920928955,
+            0.2505183219909668,
+            0.3707836866378784
+          ]
+        },
+        "scale": 2.690591782245931,
+        "verticalAdaptation": 1
+      },
+      "adaptation": "Original authored scan geometry retained with bottom/height normalization.",
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "CeramicVessel",
+          "beforeVerticesFaces": [
+            2075,
+            3592
+          ],
+          "afterVerticesFaces": [
+            2075,
+            3592
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "CeramicVessel",
+      "resource": "Art/GospelAuthoredProps/CeramicVessel",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/CeramicVessel.fbx",
+      "sha256": "b58010d15a2b3b686cde62c74ec4ee38640085b7092737a16901a23443b61b25",
+      "bytes": 137676,
+      "triangles": 3592,
+      "meshes": 1,
+      "materials": [
+        "Authored_Ceramic"
+      ],
+      "uvPreserved": true
+    },
+    {
+      "sourceAsset": "planter_pot_clay",
+      "normalization": {
+        "sourceBounds": {
+          "min": [
+            -0.13400615751743317,
+            -0.1431802362203598,
+            0.00040199398063123226
+          ],
+          "max": [
+            0.13199056684970856,
+            0.12028281390666962,
+            0.2222723364830017
+          ]
+        },
+        "scale": 4.507136756473553,
+        "verticalAdaptation": 1
+      },
+      "adaptation": "Original authored scan geometry retained with bottom/height normalization.",
+      "nonRenderingGeometryCleanup": [
+        {
+          "object": "ClayPlanter",
+          "beforeVerticesFaces": [
+            1863,
+            3080
+          ],
+          "afterVerticesFaces": [
+            1863,
+            3080
+          ],
+          "removedZeroAreaFaces": 0
+        }
+      ],
+      "name": "ClayPlanter",
+      "resource": "Art/GospelAuthoredProps/ClayPlanter",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ClayPlanter.fbx",
+      "sha256": "cd82008a5da1810f3b7d2341d9694be1adeab683c7b027427e7b830ec476f47b",
+      "bytes": 124236,
+      "triangles": 3080,
+      "meshes": 1,
+      "materials": [
+        "Authored_Planter"
+      ],
+      "uvPreserved": true
+    }
+  ],
+  "textures": [
+    {
+      "source": "Tools/Art/GospelAuthored/Source/searsia_lucida/textures/searsia_lucida_nor_gl_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/tree-normal.jpg",
+      "sha256": "d28556973d1cbf96c5327341be7a71da66ac63ed97b31f22162376a9f95b0041",
+      "bytes": 793264,
+      "copiedUnchanged": true,
+      "normalConvention": "OpenGL +Y; no green flip"
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/stone_fire_pit/textures/stone_fire_pit_diff_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/basin-albedo.jpg",
+      "sha256": "3f2a2340a7dc7207d5b24deb7697c11c43bbd1963533b8f7c41644d32872d1ff",
+      "bytes": 785670,
+      "copiedUnchanged": true,
+      "normalConvention": null
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/stone_fire_pit/textures/stone_fire_pit_nor_gl_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/basin-normal.jpg",
+      "sha256": "6ba240fbdc1ab6dac4b06ac342e7fca9fa6064c7d4f98e75cfccad44214c533a",
+      "bytes": 969822,
+      "copiedUnchanged": true,
+      "normalConvention": "OpenGL +Y; no green flip"
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/ceramic_pot/textures/ceramic_pot_diff_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ceramic-albedo.jpg",
+      "sha256": "583e49e8be2ba460700f2dcd6466ab347f5285ccc651dd9054b59ef6a78d812b",
+      "bytes": 664480,
+      "copiedUnchanged": true,
+      "normalConvention": null
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/ceramic_pot/textures/ceramic_pot_nor_gl_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ceramic-normal.jpg",
+      "sha256": "2102b4345882c9648de7ee3b3e547bf7a2a3c9fd35db0ded322df60df16a5c57",
+      "bytes": 252874,
+      "copiedUnchanged": true,
+      "normalConvention": "OpenGL +Y; no green flip"
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/planter_pot_clay/textures/planter_pot_clay_diff_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/planter-albedo.jpg",
+      "sha256": "4f2962fd238401e49fd400596fdccd1ee9e2cca9ed21e44bb924dca3076f524c",
+      "bytes": 596319,
+      "copiedUnchanged": true,
+      "normalConvention": null
+    },
+    {
+      "source": "Tools/Art/GospelAuthored/Source/planter_pot_clay/textures/planter_pot_clay_nor_gl_1k.jpg",
+      "output": "Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/planter-normal.jpg",
+      "sha256": "25a564e55b247a94863b513853b1aeaad5c894dd78e92e1fd89e794b83b483c4",
+      "bytes": 506446,
+      "copiedUnchanged": true,
+      "normalConvention": "OpenGL +Y; no green flip"
+    }
+  ]
+}

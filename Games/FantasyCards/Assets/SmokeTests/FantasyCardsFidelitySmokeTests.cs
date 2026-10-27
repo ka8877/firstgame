@@ -29,7 +29,7 @@ namespace FantasyCards.SmokeTests
                 Assert.That(labels, Does.Contain(CardCatalog.RarityCode(rarity)));
                 Assert.That(labels, Does.Contain("수록 " + CardCatalog.All.Count(card => card.rarity == rarity) + "종"));
             }
-            yield return SmokeUi.Capture("FantasyCards", "fidelity-grade-guide", 844, 390);
+            yield return SmokeUi.Capture("FantasyCards", "arcana-grade-guide", 844, 390);
             ActiveButtons("Grade guide ").Single(button => button.gameObject.name == "Grade guide Rare").onClick.Invoke(); yield return null;
             Assert.That(VisibleCards(), Is.Not.Empty);
             Assert.That(VisibleCards().All(card => card.rarity == CardRarity.Rare), Is.True);
@@ -41,11 +41,11 @@ namespace FantasyCards.SmokeTests
             Assert.That(VisibleCards().All(card => card.kind == CardKind.Unit && card.rank == CardRank.N), Is.True);
             foreach (var cardButton in ActiveButtons("Card "))
             {
-                var rank = cardButton.GetComponentsInChildren<TMP_Text>().Single(text => text.gameObject.name == "Card rank code");
-                Assert.That(rank.text, Is.EqualTo("N"));
+                var identity = cardButton.GetComponentInChildren<FmArcanaCardSurface>();
+                Assert.That(CardCatalog.Get(identity.DefinitionId).rank, Is.EqualTo(CardRank.N));
                 var grade = cardButton.GetComponentsInChildren<TMP_Text>().Single(text => text.gameObject.name == "Card grade code");
                 var definition = CardCatalog.Get(cardButton.gameObject.name.Substring("Card ".Length));
-                Assert.That(grade.text, Is.EqualTo(CardCatalog.RarityCode(definition.rarity)));
+                Assert.That(grade.text, Does.StartWith(CardCatalog.RarityCode(definition.rarity)));
             }
             SmokeUi.Click("능력 · 전체"); yield return null;
             int equipment = CardCatalog.All.Count(card => card.kind == CardKind.Unit && (card.capabilityMask & 1) != 0);
@@ -98,6 +98,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(dragEngine.State.players[0].AtLane(2).instanceId, Is.EqualTo(unit.instanceId));
             Assert.That(dragEngine.State.players[0].genericSoul, Is.EqualTo(soul - CardCatalog.Get(unit.definitionId).cost));
             BattleEngine.Validate(dragEngine.State);
+            yield return SmokeUi.Capture("FantasyCards", "arcana-critical-deployed-field", 1280, 720, AssertArcanaSurfaces);
 
             // Native-only legal deterministic fixture. Browser checks use ordinary
             // pointer/touch input and never inject this state.

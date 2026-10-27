@@ -54,7 +54,7 @@ namespace FantasyCards.Presentation
             ghost = copy.transform as RectTransform;
             foreach (var behaviour in copy.GetComponentsInChildren<MonoBehaviour>(true))
                 if (!(behaviour is Graphic) && !(behaviour is LayoutGroup) &&
-                    !(behaviour is ContentSizeFitter) && !(behaviour is Mask) &&
+                    !(behaviour is ContentSizeFitter) && !(behaviour is AspectRatioFitter) && !(behaviour is Mask) &&
                     !(behaviour is RectMask2D) && !(behaviour is BaseMeshEffect)) behaviour.enabled = false;
             foreach (var graphic in copy.GetComponentsInChildren<Graphic>(true)) graphic.raycastTarget = false;
             var copyGroup = copy.GetComponent<CanvasGroup>();

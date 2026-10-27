@@ -1,0 +1,73 @@
+{
+  "revision": "fm-arcana-2026-10-27",
+  "createdUtc": "2026-10-27T05:33:53.502116+00:00",
+  "generator": "image_gen tool",
+  "kind": "new original fictional adult anime fantasy foreground duo",
+  "scope": "New artwork, not original Fantasy Masters recovered client/card art. Source and runtime directly viewed; actual Unity/browser UI validation is separate.",
+  "promptFile": "Tools/Art/FmArcana/hero-duo-prompt.txt",
+  "generatedWorkspaceFile": "/workspace/generated_images/exec-910f6920-c51e-46c7-af6e-a9129e620f56.png",
+  "resource": "Art/FmArcana/hero-duo",
+  "size": [
+    1536,
+    1024
+  ],
+  "mode": "RGBA",
+  "source": {
+    "file": "Tools/Art/FmArcana/hero-duo-original.png",
+    "bytes": 3146171,
+    "sha256": "f14f66acc18f6d768b07a69b91b476ac906dec13a07c1fa3f35bfb30c93b9291"
+  },
+  "runtime": {
+    "file": "Games/FantasyCards/Assets/Resources/Art/FmArcana/hero-duo.png",
+    "bytes": 2996995,
+    "sha256": "485ab5b2f7147e8794f0dd634c9159eec035dfbeef65df4ee9255b46ee2a8dcc"
+  },
+  "rgbaPixelSha256": "cad17970203ba02f10d88bd9b540903480f6f89265b4d294267e2d96e7cb6cab",
+  "pixelPreservation": "Source/runtime decoded RGBA bytes are identical; lossless PNG re-encoding only.",
+  "alpha": {
+    "extrema": [
+      0,
+      254
+    ],
+    "fullyTransparentPixels": 425706,
+    "nonzeroPixels": 1147158,
+    "uniqueValues": 255
+  },
+  "layout": {
+    "aspectRatio": 1.5,
+    "facesNormalized": {
+      "elf": [
+        0.44,
+        0.2
+      ],
+      "knight": [
+        0.69,
+        0.14
+      ]
+    },
+    "instruction": "Preserve aspect; use as transparent right-side foreground against existing FmDetail landscape. Do not squash characters or crop faces."
+  },
+  "reviews": [
+    {
+      "reviewer": "/root/arcana_art",
+      "reviewedUtc": "2026-10-27T05:36:08.912782+00:00",
+      "status": "reviewed",
+      "sourceSha256": "f14f66acc18f6d768b07a69b91b476ac906dec13a07c1fa3f35bfb30c93b9291",
+      "runtimeSha256": "485ab5b2f7147e8794f0dd634c9159eec035dfbeef65df4ee9255b46ee2a8dcc",
+      "observed": [
+        "Image generation output and runtime PNG directly viewed. Two adult anime fantasy characters have distinct faces/silhouettes, detailed emerald/ivory/indigo garments and readable expressions.",
+        "Decoded RGBA comparison proves runtime pixels identical to generated source. Corner alpha is0,425706pixels fully transparent; foreground sampled alpha252+.",
+        "Runtime PNG is2996995bytes at1536x1024, with unique Texture2D GUID and alpha transparency enabled.",
+        "This is asset composition/alpha review, not Unity/browser integration or user aesthetic approval."
+      ]
+    },
+    {
+      "reviewer": "/root",
+      "status": "internally-approved-composition",
+      "sourceSha256": "f14f66acc18f6d768b07a69b91b476ac906dec13a07c1fa3f35bfb30c93b9291",
+      "observed": [
+        "Parent directly reviewed the generated duo and approved anime faces/clothing/cel-paint direction as an internal asset composition review, not user approval."
+      ]
+    }
+  ]
+}

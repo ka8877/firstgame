@@ -34,31 +34,7 @@ namespace FantasyCards.Presentation
             Frame(frame, new Color(.82f, .70f, .43f, .65f), 1);
         }
 
-        private void ShowDetailTitle()
-        {
-            battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login");
-            DetailPanorama(false);
-            var edition = Text(root, "FANTASY MASTERS  /  REMASTER", .065f, .885f, .64f, .947f, 20, gold);
-            edition.characterSpacing = 3.5f;
-            var shadow = Text(root, "판타지\n마스터즈", .066f, .598f, .60f, .852f, 90, new Color(.01f, .02f, .015f, .80f));
-            shadow.fontStyle = FontStyles.Bold; shadow.lineSpacing = -6;
-            var title = Text(root, "판타지\n마스터즈", .065f, .605f, .60f, .859f, 90, ivory);
-            title.gameObject.name = "Remaster title logo";
-            title.fontStyle = FontStyles.Bold; title.lineSpacing = -6;
-            Panel(root, .067f, .583f, .18f, .586f, gold);
-            Text(root, "소울과 코인으로 펼치는 일곱 세계의 결투", .065f, .515f, .66f, .578f, 26, new Color(.90f, .89f, .79f));
-            DrawDetailElementSeals(root, .065f, .435f, .61f, .501f);
-            int grades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
-            Text(root, CardCatalog.All.Length + "종 카드  ·  " + grades + "등급  ·  " + DemoCatalog.StarterDecks.Length + "개 기본 덱", .065f, .365f, .635f, .423f, 23, new Color(.80f, .85f, .75f));
-            var play = Button(root, "게임 시작", .065f, .22f, .315f, .335f, ShowLobby, gold, 31);
-            play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
-            Button(root, "이어하기", .335f, .22f, .535f, .335f, Continue, new Color(.07f, .12f, .10f, .94f), 27, PersistentSaves.Exists(Slot));
-            Button(root, "카드 도감", .065f, .070f, .225f, .160f, () => ShowCollection(false), new Color(.055f, .09f, .075f, .94f), 24);
-            Button(root, "프로필", .245f, .070f, .405f, .160f, () => ShowLocalProfile(ShowTitle), new Color(.055f, .09f, .075f, .94f), 24);
-            Button(root, "음악 설정", .425f, .070f, .585f, .160f, () => ShowMusicSettings(ShowTitle), new Color(.055f, .09f, .075f, .94f), 24);
-            DrawTitleCardFan();
-            Text(root, "지형을 펼치고, 소울을 모으고, 전열을 완성하세요.", .625f, .045f, .955f, .105f, 19, new Color(.87f, .87f, .76f), TextAlignmentOptions.MidlineRight);
-        }
+        private void ShowDetailTitle() { ShowArcanaTitle(); }
 
         private void DrawDetailElementSeals(Transform parent, float x0, float y0, float x1, float y1)
         {
@@ -92,41 +68,7 @@ namespace FantasyCards.Presentation
             }
         }
 
-        private void ShowDetailLobby()
-        {
-            battleScreen = false; redraw = ShowLobby; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("lobby"); DetailPanorama(true);
-            DrawDetailClientRail(ShowTitle, "LOCAL PRACTICE");
-            Button(root, "PLAY · 연습 대전", .055f, .865f, .22f, .955f, ShowLobby, gold, 25);
-            Button(root, "카드 도감", .23f, .865f, .40f, .955f, () => ShowCollection(false), slate, 24);
-            Button(root, "덱 편집", .41f, .865f, .58f, .955f, () => ShowCollection(true), slate, 24);
-            Button(root, "프로필", .59f, .865f, .775f, .955f, () => ShowLocalProfile(ShowLobby), slate, 24);
-            var list = Panel(root, .055f, .335f, .775f, .85f, new Color(.035f, .075f, .060f, .94f)); Frame(list, gold, 1.5f);
-            Text(list, "연습 대전실", .025f, .84f, .72f, .98f, 27, ivory);
-            Text(list, "SOLO / AI", .75f, .84f, .97f, .98f, 20, teal, TextAlignmentOptions.Center);
-            string[] names = { "숲과 빛의 첫 대전", "물과 암흑의 대전", "불과 금속의 대전" };
-            for (int i = 0; i < DemoCatalog.Encounters.Length; i++)
-            {
-                int encounter = i; float y = .61f - i * .225f;
-                var row = Button(list, "", .025f, y, .975f, y + .205f, () => { selectedEncounter = encounter; ShowEncounterSelection(); }, new Color(.085f, .135f, .105f, .96f), 24);
-                row.gameObject.name = "Practice room " + i;
-                var featured = DemoCatalog.GetDeck(DemoCatalog.GetEncounter(i).deckId).cards.Select(CardCatalog.Get).First(card => card.kind == CardKind.Unit);
-                Artwork(row.transform, featured, .018f, .08f, .13f, .92f);
-                bool won = PlayerPrefs.GetInt("FC.demo.won." + i, 0) != 0;
-                Text(row.transform, names[i], .155f, .48f, .76f, .94f, 27, ivory);
-                Text(row.transform, won ? "연습 승리 기록 있음 · 다시 대전" : "50장 덱 · 지형과 소울의 전략", .155f, .06f, .76f, .46f, 20, new Color(.69f, .79f, .72f));
-                Text(row.transform, won ? "승리" : "AI 대전", .79f, .10f, .98f, .90f, 23, won ? gold : teal, TextAlignmentOptions.Center);
-            }
-            var system = Panel(root, .055f, .085f, .775f, .315f, new Color(.025f, .055f, .043f, .94f)); Frame(system, gold, 1.5f);
-            Text(system, "백필드의 지형에서 시작하는 일곱 속성의 전략", .035f, .67f, .97f, .96f, 28, ivory);
-            int includedGrades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
-            Text(system, CardCatalog.All.Length + "종 카드 · " + includedGrades + "등급 수록 · 50장 덱 / 6손패 / 5전열", .035f, .39f, .97f, .67f, 22, new Color(.74f, .82f, .74f));
-            Button(system, "게임 방법", .025f, .045f, .325f, .35f, () => ShowRulesHelp(ShowLobby), slate, 22);
-            Button(system, "등급 / 랭크", .35f, .045f, .65f, .35f, () => ShowCardGradeGuide(false, ShowLobby), slate, 22);
-            Button(system, "편집 덱 분석", .675f, .045f, .975f, .35f, () => ShowDeckAnalysis(ShowLobby), slate, 22);
-            Button(root, "이어하기", .055f, .005f, .265f, .08f, Continue, slate, 23, PersistentSaves.Exists(Slot));
-            Button(root, "저장 옮기기", .275f, .005f, .485f, .08f, ShowTransfer, slate, 23);
-            Button(root, "음악", .565f, .005f, .775f, .08f, () => ShowMusicSettings(ShowLobby), slate, 23);
-        }
+        private void ShowDetailLobby() { ShowArcanaLobby(); }
 
         private void DrawDetailClientRail(Action back, string heading)
         {
@@ -174,7 +116,6 @@ namespace FantasyCards.Presentation
         private void ShowLocalProfile(Action back)
         {
             battleScreen = false; redraw = () => ShowLocalProfile(back); Clear(); DetailPanorama(true);
-            FmOriginalMusic.SetScene("lobby");
             if (profileDraftName == null) profileDraftName = LocalProfileName;
             Text(root, "나의 프로필", .06f, .875f, .94f, .97f, 43, ivory);
             Text(root, "닉네임과 아바타, 이 기기에 기록된 연습전 이야기", .06f, .81f, .94f, .87f, 23, gold);

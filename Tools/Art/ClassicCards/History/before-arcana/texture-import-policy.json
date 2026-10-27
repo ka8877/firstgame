@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "revision": "fm-remaster-2026-10-26",
+  "engine": "Unity 6000.3.26f1",
+  "purpose": "Explicit expected import policy for preserved original full-card PNGs; compare every serialized setting and reject unknown or changed settings.",
+  "provenance": {
+    "kind": "Reviewed source-derived import policy authored during release-gate repair",
+    "notABuildCapture": true,
+    "limitation": "This is an expected settings contract, not a pre-build snapshot or proof that a particular build consumed metadata bytes. Native artwork coverage and current source/build/runtime evidence remain separate.",
+    "referenceMetadata": "Games/FantasyCards/Assets/Art/Archive/LegacyResources/cards-02-heroes.png.meta",
+    "referenceMetadataSha256": "828ad5c226c786a9c5254d16a13ee470484c3eb66d37f37fee2eb9a2d12588a6",
+    "recipe": "Tools/Art/ClassicCards/prepare-media.py::texture_meta copies this versioned reference, sets ignoreMipmapLimit to 1 and changes every textureCompression 1 to 0.",
+    "editorEnforcer": "Games/FantasyCards/Assets/Editor/ProjectSetup.cs::ImportIllustration requires Default Texture2D, sRGB, no mipmap/NPOT resize, clamp, size at least 2048, uncompressed import.",
+    "reviewedSettings": "The full source-reference Unity TextureImporter v13 contract, including all default values, bilinear filtering, every platformSettings entry, empty spriteSheet and asset-bundle fields, is retained below; per-file GUID is checked separately against the verified media records."
+  },
+  "excludedUniqueTopLevelKeys": [
+    "guid"
+  ],
+  "expectedPngMetadata": {
+    "fileFormatVersion": 2,
+    "TextureImporter": {
+      "internalIDToNameTable": [],
+      "externalObjects": {},
+      "serializedVersion": 13,
+      "mipmaps": {
+        "mipMapMode": 0,
+        "enableMipMap": 0,
+        "sRGBTexture": 1,
+        "linearTexture": 0,
+        "fadeOut": 0,
+        "borderMipMap": 0,
+        "mipMapsPreserveCoverage": 0,
+        "alphaTestReferenceValue": 0.5,
+        "mipMapFadeDistanceStart": 1,
+        "mipMapFadeDistanceEnd": 3
+      },
+      "bumpmap": {
+        "convertToNormalMap": 0,
+        "externalNormalMap": 0,
+        "heightScale": 0.25,
+        "normalMapFilter": 0,
+        "flipGreenChannel": 0
+      },
+      "isReadable": 0,
+      "streamingMipmaps": 0,
+      "streamingMipmapsPriority": 0,
+      "vTOnly": 0,
+      "ignoreMipmapLimit": 1,
+      "grayScaleToAlpha": 0,
+      "generateCubemap": 6,
+      "cubemapConvolution": 0,
+      "seamlessCubemap": 0,
+      "textureFormat": 1,
+      "maxTextureSize": 2048,
+      "textureSettings": {
+        "serializedVersion": 2,
+        "filterMode": 1,
+        "aniso": 1,
+        "mipBias": 0,
+        "wrapU": 1,
+        "wrapV": 1,
+        "wrapW": 1
+      },
+      "nPOTScale": 0,
+      "lightmap": 0,
+      "compressionQuality": 50,
+      "spriteMode": 0,
+      "spriteExtrude": 1,
+      "spriteMeshType": 1,
+      "alignment": 0,
+      "spritePivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "spritePixelsToUnits": 100,
+      "spriteBorder": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 0
+      },
+      "spriteGenerateFallbackPhysicsShape": 1,
+      "alphaUsage": 1,
+      "alphaIsTransparency": 0,
+      "spriteTessellationDetail": -1,
+      "textureType": 0,
+      "textureShape": 1,
+      "singleChannelComponent": 0,
+      "flipbookRows": 1,
+      "flipbookColumns": 1,
+      "maxTextureSizeSet": 0,
+      "compressionQualitySet": 0,
+      "textureFormatSet": 0,
+      "ignorePngGamma": 0,
+      "applyGammaDecoding": 0,
+      "swizzle": 50462976,
+      "cookieLightType": 0,
+      "platformSettings": [
+        {
+          "serializedVersion": 4,
+          "buildTarget": "DefaultTexturePlatform",
+          "maxTextureSize": 2048,
+          "resizeAlgorithm": 0,
+          "textureFormat": -1,
+          "textureCompression": 0,
+          "compressionQuality": 50,
+          "crunchedCompression": 0,
+          "allowsAlphaSplitting": 0,
+          "overridden": 0,
+          "ignorePlatformSupport": 0,
+          "androidETC2FallbackOverride": 0,
+          "forceMaximumCompressionQuality_BC6H_BC7": 0
+        },
+        {
+          "serializedVersion": 4,
+          "buildTarget": "Standalone",
+          "maxTextureSize": 2048,
+          "resizeAlgorithm": 0,
+          "textureFormat": -1,
+          "textureCompression": 0,
+          "compressionQuality": 50,
+          "crunchedCompression": 0,
+          "allowsAlphaSplitting": 0,
+          "overridden": 0,
+          "ignorePlatformSupport": 0,
+          "androidETC2FallbackOverride": 0,
+          "forceMaximumCompressionQuality_BC6H_BC7": 0
+        },
+        {
+          "serializedVersion": 4,
+          "buildTarget": "WebGL",
+          "maxTextureSize": 2048,
+          "resizeAlgorithm": 0,
+          "textureFormat": -1,
+          "textureCompression": 0,
+          "compressionQuality": 50,
+          "crunchedCompression": 0,
+          "allowsAlphaSplitting": 0,
+          "overridden": 0,
+          "ignorePlatformSupport": 0,
+          "androidETC2FallbackOverride": 0,
+          "forceMaximumCompressionQuality_BC6H_BC7": 0
+        }
+      ],
+      "spriteSheet": {
+        "serializedVersion": 2,
+        "sprites": [],
+        "outline": [],
+        "customData": null,
+        "physicsShape": [],
+        "bones": [],
+        "spriteID": null,
+        "internalID": 0,
+        "vertices": [],
+        "indices": null,
+        "edges": [],
+        "weights": [],
+        "secondaryTextures": [],
+        "spriteCustomMetadata": {
+          "entries": []
+        },
+        "nameFileIdTable": {}
+      },
+      "mipmapLimitGroupName": null,
+      "pSDRemoveMatte": 0,
+      "userData": null,
+      "assetBundleName": null,
+      "assetBundleVariant": null
+    }
+  },
+  "expectedCardAssetMetadata": {
+    "fileFormatVersion": 2,
+    "NativeFormatImporter": {
+      "externalObjects": {},
+      "mainObjectFileID": 11400000,
+      "userData": null,
+      "assetBundleName": null,
+      "assetBundleVariant": null
+    }
+  }
+}

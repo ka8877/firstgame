@@ -1,5 +1,5 @@
 {
-  "revision": "gospel-natural-2026-10-27",
+  "revision": "gospel-authored-2026-10-27",
   "materials": [
     {
       "name": "Gospel_Skin",
@@ -64,14 +64,16 @@
     {
       "name": "Gospel_Linen",
       "baseColor": [
+        1,
+        0.98,
         0.94,
-        0.87,
-        0.7,
         1
       ],
       "baseMap": "linen-albedo.png",
-      "smoothness": 0.06000000000000005,
-      "doubleSided": true
+      "smoothness": 0.12,
+      "doubleSided": true,
+      "normalMap": "authored-linen-normal.jpg",
+      "normalStrength": 0.28
     },
     {
       "name": "Gospel_RedMantle",
@@ -82,8 +84,10 @@
         1
       ],
       "baseMap": "linen-albedo.png",
-      "smoothness": 0.08999999999999997,
-      "doubleSided": true
+      "smoothness": 0.12,
+      "doubleSided": true,
+      "normalMap": "authored-linen-normal.jpg",
+      "normalStrength": 0.28
     },
     {
       "name": "Gospel_TealTrim",
@@ -130,8 +134,10 @@
         1
       ],
       "baseMap": "linen-albedo.png",
-      "smoothness": 0.08999999999999997,
-      "doubleSided": true
+      "smoothness": 0.12,
+      "doubleSided": true,
+      "normalMap": "authored-linen-normal.jpg",
+      "normalStrength": 0.28
     },
     {
       "name": "Gospel_WovenTrim",
@@ -166,8 +172,10 @@
         1
       ],
       "baseMap": "linen-albedo.png",
-      "smoothness": 0.050000000000000044,
-      "doubleSided": true
+      "smoothness": 0.12,
+      "doubleSided": true,
+      "normalMap": "authored-linen-normal.jpg",
+      "normalStrength": 0.28
     },
     {
       "name": "Gospel_NaturalHeadSkin",
@@ -196,13 +204,13 @@
     {
       "name": "Gospel_NaturalHair",
       "baseColor": [
-        0.4,
-        0.31,
-        0.24,
+        0.55,
+        0.44,
+        0.34,
         1
       ],
       "baseMap": "natural-hair.png",
-      "smoothness": 0.18000000000000005,
+      "smoothness": 0.24,
       "doubleSided": true,
       "alphaClip": true,
       "cutoff": 0.42
@@ -218,6 +226,82 @@
       "baseMap": null,
       "smoothness": 0.12,
       "doubleSided": false
+    },
+    {
+      "name": "Gospel_TempleTeacher_NaturalHeadSkin",
+      "baseColor": [
+        0.84,
+        0.78,
+        0.69,
+        1
+      ],
+      "baseMap": "natural-young-skin.png",
+      "smoothness": 0.24,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_TempleTeacher_HairCap",
+      "baseColor": [
+        0.38,
+        0.35,
+        0.29,
+        1
+      ],
+      "baseMap": null,
+      "smoothness": 0.20999999999999996,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_TempleTeacher_NaturalHair",
+      "baseColor": [
+        0.38,
+        0.35,
+        0.29,
+        1
+      ],
+      "baseMap": "natural-hair.png",
+      "smoothness": 0.24,
+      "doubleSided": true,
+      "alphaClip": true,
+      "cutoff": 0.42
+    },
+    {
+      "name": "Gospel_Joseph_NaturalHeadSkin",
+      "baseColor": [
+        0.87,
+        0.79,
+        0.68,
+        1
+      ],
+      "baseMap": "natural-young-skin.png",
+      "smoothness": 0.24,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_Joseph_HairCap",
+      "baseColor": [
+        0.27,
+        0.21,
+        0.15,
+        1
+      ],
+      "baseMap": null,
+      "smoothness": 0.20999999999999996,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_Joseph_NaturalHair",
+      "baseColor": [
+        0.27,
+        0.21,
+        0.15,
+        1
+      ],
+      "baseMap": "natural-hair.png",
+      "smoothness": 0.24,
+      "doubleSided": true,
+      "alphaClip": true,
+      "cutoff": 0.42
     }
   ]
 }

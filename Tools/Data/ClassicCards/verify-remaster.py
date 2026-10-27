@@ -94,12 +94,52 @@ if detail:
     records_path = ROOT / detail["records"]
     assert sha(records_path.read_bytes()) == detail["recordsSha256"]
     records = {c["fields"]["ID"]: c for c in json.loads(records_path.read_text())["cards"]}
-    assert len(cards[178:]) == detail["addedCards"] == len(records) == 72
-    for card in cards[178:]:
+    assert len(cards[178:250]) == detail["addedCards"] == len(records) == 72
+    for card in cards[178:250]:
         observed = records[card["sourceId"]]
         assert card["fields"] == observed["fields"]
         assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
         assert not card["fields"].get("TextExtra")
+arcana = selection.get("arcanaExpansion")
+if arcana:
+    arcana_baseline_path = ROOT / arcana["baseline"]
+    assert sha(arcana_baseline_path.read_bytes()) == arcana["baselineSha256"]
+    arcana_baseline = json.loads(arcana_baseline_path.read_text())["cards"]
+    assert len(arcana_baseline) == arcana["preservedCards"] == 250
+    for card, original in zip(cards, arcana_baseline):
+        assert card["sourceId"] == original["sourceId"]
+        assert canonical_sha(card) == original["canonicalSelectionRowSha256"]
+        for key in ("original", "texture"):
+            assert sha((ROOT / original[key]).read_bytes()) == original[key + "Sha256"]
+        texture_meta = Path(str(ROOT / original["texture"]) + ".meta")
+        assert re.search(r"(?m)^guid: ([0-9a-f]{32})$", texture_meta.read_text())[1] == original["textureGuid"]
+        card_meta = Path(str(ROOT / original["cardAsset"]) + ".meta")
+        assert re.search(r"(?m)^guid: ([0-9a-f]{32})$", card_meta.read_text())[1] == original["cardAssetGuid"]
+    records_path = ROOT / arcana["records"]
+    assert sha(records_path.read_bytes()) == arcana["recordsSha256"]
+    source = json.loads(records_path.read_text())
+    records = {c["fields"]["ID"]: c for c in source["cards"]}
+    assert len(cards[250:]) == arcana["addedCards"] == len(records) == 350
+    # Source snapshots retain complete observed fields. Validate the chosen
+    # records against those snapshots; no rules text may be removed to fit Core.
+    observations = {}
+    for item in source["sourceObservations"]:
+        path = ROOT / item["file"]
+        assert sha(path.read_bytes()) == item["sha256"]
+        observations.update({c["fields"]["ID"]: c for c in json.loads(path.read_text())["cards"]})
+    reviewed = json.loads((ROOT / "Tools/Research/FmArcana/spell-print-review.json").read_text())["cards"]
+    reviewed = {c["sourceId"]: c for c in reviewed}
+    for card in cards[250:]:
+        record = records[card["sourceId"]]
+        assert card["fields"] == record["fields"] == observations[card["sourceId"]]["fields"]
+        assert card["sourceUrl"] == record["pageUrl"] and card["imageUrl"] == record["imageUrl"]
+        assert not card["fields"].get("TextExtra")
+        if card["fields"]["Category"] == 3:
+            review = reviewed[card["sourceId"]]
+            assert card["effect"] == record["effect"] == review["implementedEffect"]
+            assert card["fields"]["TextBase"] == review["sourceText"]
+            assert review["printRulesMatchFullDatabaseText"]
+            assert sha((ROOT / review["texture"]).read_bytes()) == review["sha256"]
 for card in cards:
     assert card["fields"]["ID"] == card["sourceId"]
     assert card["fields"]["Name"] == card["name"]
@@ -126,6 +166,7 @@ result = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat
                   "cards": len(cards), "preservedRowsAndMedia": 96,
                   "preservedFidelityRowsMediaAndGuids": 161 if fidelity else None,
                   "preservedDetailRowsMediaAndGuids": 178 if detail else None,
+                  "preservedArcanaRowsMediaAndGuids": 250 if arcana else None,
                   "addedCards": len(cards) - 96, "generatorReproducible": True,
                   "preservedResearchSnapshotVerified": source_snapshot.exists(),
                   "sourceSelectionSha256": sha((DATA / "selection.json").read_bytes()),

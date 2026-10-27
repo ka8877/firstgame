@@ -25,14 +25,9 @@ namespace FantasyCards.Presentation
 
         private void RevivalBackdrop(bool calm)
         {
-            Panel(root, 0, 0, 1, 1, new Color(.025f, .035f, .030f));
-            Gradient(root, 0, 0, 1, 1, new Color(.080f, .067f, .045f), new Color(.025f, .070f, .058f), true);
-            Gradient(root, 0, 0, 1, 1, new Color(.012f, .018f, .016f, calm ? .38f : .62f), Color.clear);
-            var surround = Panel(root, .017f, .016f, .983f, .984f, Color.clear);
-            surround.gameObject.name = "Remastered client molding";
-            Frame(surround, new Color(.63f, .48f, .27f, .65f), 1.5f);
-            Panel(root, .028f, .032f, .030f, .965f, new Color(.63f, .48f, .27f, .22f));
-            Panel(root, .970f, .032f, .972f, .965f, new Color(.63f, .48f, .27f, .22f));
+            DetailPanorama(true);
+            Gradient(root, 0, 0, 1, 1, new Color(.025f, .035f, .09f, calm ? .64f : .82f),
+                new Color(.045f, .035f, .11f, calm ? .75f : .88f), true);
         }
 
         private void SkinFragment(Transform parent, Texture2D source, Rect pixelsFromTop, float x0, float y0, float x1, float y1)
@@ -95,39 +90,7 @@ namespace FantasyCards.Presentation
             Text(row, deck, .45f, .06f, .97f, .94f, 24, ivory);
         }
 
-        private void ShowRevivalDecks()
-        {
-            battleScreen = false; redraw = ShowDeckSelection; Clear(); FmOriginalMusic.SetScene("deck"); RevivalBackdrop(true);
-            Text(root, "덱 선택", .045f, .865f, .96f, .97f, 42, gold);
-            int pages = Mathf.Max(1, (DemoCatalog.StarterDecks.Length + 3) / 4);
-            starterDeckPage = Mathf.Clamp(starterDeckPage, 0, pages - 1);
-            Text(root, DemoCatalog.StarterDecks.Length + "개 기본 덱 · 50장 구성을 선택하고 덱 편집에서 조정하세요.", .045f, .78f, .68f, .86f, 24, ivory);
-            if (pages > 1)
-            {
-                Button(root, "이전", .70f, .785f, .775f, .86f, () => { starterDeckPage--; ShowDeckSelection(); }, slate, 21, starterDeckPage > 0);
-                Text(root, (starterDeckPage + 1) + "/" + pages, .78f, .785f, .865f, .86f, 23, gold, TextAlignmentOptions.Center);
-                Button(root, "다음", .87f, .785f, .955f, .86f, () => { starterDeckPage++; ShowDeckSelection(); }, slate, 21, starterDeckPage + 1 < pages);
-            }
-            for (int i = 0; i < 4 && starterDeckPage * 4 + i < DemoCatalog.StarterDecks.Length; i++)
-            {
-                var deck = DemoCatalog.StarterDecks[starterDeckPage * 4 + i]; float left = i % 2 == 0 ? .045f : .52f, bottom = i < 2 ? .455f : .155f;
-                var tile = Panel(root, left, bottom, left + .435f, bottom + .28f, new Color(.080f, .12f, .080f, .98f));
-                tile.gameObject.name = "Starter deck " + deck.id;
-                var art = deck.cards.Select(CardCatalog.Get).Where(card => card.kind == CardKind.Unit).OrderByDescending(card => card.level).First();
-                Artwork(tile, art, .015f, .035f, .245f, .965f);
-                Text(tile, deck.name, .275f, .60f, .975f, .95f, 28, gold);
-                Text(tile, deck.description, .275f, .24f, .975f, .60f, 22, ivory, TextAlignmentOptions.TopLeft);
-                Text(tile, DeckKindCounts(deck.cards), .275f, .02f, .975f, .24f, 19, teal);
-                Frame(tile, !useCustomDeck && selectedDeckId == deck.id ? gold : new Color(.36f, .50f, .59f, .50f), !useCustomDeck && selectedDeckId == deck.id ? 3 : 1);
-                tile.GetComponent<Image>().raycastTarget = true;
-                var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>();
-                button.onClick.AddListener(() => { selectedDeckId = deck.id; selectedLeaderId = deck.recommendedLeaderId; useCustomDeck = false; RememberDemoSelection(); ShowDeckSelection(); });
-                BindTooltip(tile.gameObject, deck.name, deck.description);
-            }
-            Button(root, "대기실", .045f, .02f, .235f, .135f, ShowLobby, slate, 25);
-            Button(root, useCustomDeck ? "편집 덱 선택됨" : "내 편집 덱", .25f, .02f, .57f, .135f, () => { useCustomDeck = !useCustomDeck; ShowDeckSelection(); }, useCustomDeck ? teal : slate, 24, ValidDeck(customDeck));
-            Button(root, "대전실로", .705f, .02f, .955f, .135f, ShowEncounterSelection, gold, 27);
-        }
+        private void ShowRevivalDecks() { ShowArcanaDecks(); }
 
         private static string DeckShortName(string id)
         {
@@ -174,55 +137,7 @@ namespace FantasyCards.Presentation
 
         private void DrawPrintedCard(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
         {
-            var panel = Panel(parent, x0, y0, x1, y1, new Color(.075f, .115f, .16f)); panel.gameObject.name = "Card " + card.id;
-            bool small = canvas.pixelRect.height < 600;
-            float height = Mathf.Max(1, panel.rect.height * canvas.scaleFactor);
-            // A miniature needs real line height, independent of how short its
-            // hand/collection slot becomes. Mobile values use a shared AP/DP/HP
-            // legend and one row so no number is wrapped into the card below.
-            float statsBottom = small ? 3 / height : .025f;
-            float statsTop = small ? 24 / height : Mathf.Max(.195f, statsBottom + 42 / height);
-            float costBottom = small ? 25 / height : Mathf.Max(.205f, statsTop + 1 / height);
-            float costTop = small ? 46 / height : Mathf.Max(.285f, costBottom + 21 / height);
-            float nameTop = small ? 1 - 3 / height : .975f;
-            float nameBottom = small ? nameTop - 21 / height : .865f;
-            float artBottom = Mathf.Max(small ? .36f : .295f, costTop + 1 / height);
-            float artTop = small ? nameBottom - 1 / height : .855f;
-            Gradient(panel, .025f, artBottom, .975f, artTop, new Color(.10f, .16f, .21f), new Color(.035f, .065f, .095f));
-            Artwork(panel, card, .035f, artBottom, .965f, artTop);
-            DrawCardGradeBadges(panel, card, artBottom, artTop, small);
-            var heading = Panel(panel, .025f, nameBottom, .975f, nameTop, new Color(.09f, .145f, .19f));
-            ElementIcon(heading, card.element, .015f, .16f, .16f, .84f);
-            MiniCardText(heading, card.name, .17f, .01f, .985f, .99f, battleScreen ? 22 : 26, ivory, "Mini name");
-            var cost = Panel(panel, .025f, costBottom, .975f, costTop, new Color(.055f, .09f, .13f));
-            string costText = card.kind == CardKind.Terrain ? "LP" + card.landPointCost + " → " + CardCatalog.ElementName(card.element) + card.producedColored + " 총" + card.producedGeneric
-                : "Lv" + card.level + " " + CardCatalog.ElementName(card.element) + card.coloredCost + " 총" + card.cost;
-            MiniCardText(cost, costText, .015f, .01f, .985f, .99f, battleScreen ? 17 : 21, gold, "Mini cost");
-            var stats = Panel(panel, small ? .01f : .025f, statsBottom, small ? .99f : .975f, statsTop, new Color(.045f, .075f, .11f));
-            if (card.kind == CardKind.Unit || card.kind == CardKind.Equipment)
-            {
-                string[] names = { "AP", "DP", "HP" };
-                string[] values = { card.attack + CardCatalog.CoinText(card.attackCoin), card.defense + CardCatalog.CoinText(card.defenseCoin), card.health + CardCatalog.CoinText(card.healthCoin) };
-                // Coin formulas need more width than a single base number. Preserve
-                // each full formula at the same >=12px floor instead of truncating it.
-                float[] weights = values.Select(value => small ? Mathf.Max(3, value.Length) : 1f).ToArray();
-                float totalWeight = weights.Sum(), position = 0;
-                for (int i = 0; i < 3; i++)
-                {
-                    float left = position / totalWeight + .003f;
-                    position += weights[i];
-                    float right = position / totalWeight - .003f;
-                    if (!small) MiniCardText(stats, names[i], left, .51f, right, .99f, 18, gold, "Mini label " + names[i]);
-                    MiniCardText(stats, values[i], left, .01f, right, small ? .99f : .50f, battleScreen ? 17 : 20, i == 2 ? teal : ivory, "Mini " + names[i]);
-                }
-            }
-            else MiniCardText(stats, CardCatalog.KindName(card.kind) + " · " + CardCatalog.RarityName(card.rarity), .015f, .01f, .985f, .99f, battleScreen ? 18 : 21, RarityColor(card.rarity), "Mini kind");
-            Ornament(panel, selected ? new Color(1f, .88f, .44f) : new Color(.62f, .48f, .26f), true);
-            Frame(panel, selected ? new Color(1f, .89f, .48f) : Color.Lerp(new Color(.16f, .25f, .31f), RarityColor(card.rarity), .55f), selected ? 2.5f : 1);
-            panel.GetComponent<Image>().raycastTarget = true;
-            var button = panel.gameObject.AddComponent<Button>(); button.interactable = interactable; button.targetGraphic = panel.GetComponent<Image>(); button.onClick.AddListener(() => onClick());
-            BindCardHelp(panel.gameObject, card, () => ShowDetail(card, redraw));
-            var hover = panel.GetComponent<UiCardHover>(); hover.HoverScale = 1.025f; hover.HoverLift = 4;
+            DrawArcanaCard(parent, card, x0, y0, x1, y1, selected, onClick, interactable);
         }
 
         private TMP_Text MiniCardText(Transform parent, string value, float x0, float y0, float x1, float y1, float size, Color tint, string name)
@@ -231,11 +146,11 @@ namespace FantasyCards.Presentation
             label.gameObject.name = name;
             label.font = font; label.fontStyle = FontStyles.Normal;
             label.textWrappingMode = TextWrappingModes.NoWrap;
-            label.characterWidthAdjustment = 18;
-            float scale = Mathf.Max(.01f, canvas.scaleFactor);
-            label.fontSizeMin = Mathf.Max(label.fontSizeMin, 12 / scale);
-            label.fontSizeMax = Mathf.Max(label.fontSizeMax, label.fontSizeMin);
-            label.overflowMode = TextOverflowModes.Truncate;
+            label.characterWidthAdjustment = 0;
+            label.GetComponent<UiCanvasTextSize>().Configure(size, true, true);
+            // Compact numeric cells use glyph bounds, not a whole font ascent
+            // line, to avoid dropping every glyph in an otherwise legible row.
+            label.overflowMode = TextOverflowModes.Overflow;
             return label;
         }
 
@@ -292,10 +207,10 @@ namespace FantasyCards.Presentation
         private void DrawCompactBattleRail(RectTransform rail)
         {
             var player = BattleDisplayState.players[0]; var enemy = BattleDisplayState.players[1];
-            float height = rail.rect.height * canvas.scaleFactor;
+            float height = Mathf.Max(1, canvas.pixelRect.height * .952f);
             float cursor = 1 - 4 / height;
-            Vector2 Row(float gap = 2)
-            { var row = new Vector2(cursor - 23 / height, cursor); cursor = row.x - gap / height; return row; }
+            Vector2 Row(float gap = 1)
+            { var row = new Vector2(cursor - 22 / height, cursor); cursor = row.x - gap / height; return row; }
             RectTransform Plate(Vector2 row, float left = .03f, float right = .97f)
             { return Panel(rail, left, row.x, right, row.y, new Color(.08f, .125f, .17f)); }
             TMP_Text Label(Transform parent, string value, string role, float left = .02f, float right = .98f, Color? tint = null)
@@ -304,7 +219,7 @@ namespace FantasyCards.Presentation
             {
                 var button = Button(rail, label, .03f, row.x, .97f, row.y, action, color, 23, enabled);
                 var text = button.GetComponentInChildren<TMP_Text>();
-                text.gameObject.name = "Rail button " + label; text.textWrappingMode = TextWrappingModes.NoWrap; text.characterWidthAdjustment = 18;
+                text.gameObject.name = "Rail button " + label; text.textWrappingMode = TextWrappingModes.NoWrap; text.characterWidthAdjustment = 0;
             }
 
             // The 616x346 game canvas leaves a 100px-wide rail. Reserve real
@@ -326,7 +241,9 @@ namespace FantasyCards.Presentation
                 for (int col = 0; col < 2; col++)
                 {
                     int index = rowIndex * 2 + col;
-                    var cell = Plate(row, .03f + col * .48f, .49f + col * .48f);
+                    float cellLeft = rowIndex == 3 ? (col == 0 ? .03f : .445f) : .03f + col * .48f;
+                    float cellRight = rowIndex == 3 ? (col == 0 ? .435f : .97f) : .49f + col * .48f;
+                    var cell = Plate(row, cellLeft, cellRight);
                     if (index < elements.Length)
                     {
                         var element = elements[index];
@@ -357,6 +274,7 @@ namespace FantasyCards.Presentation
                 selectedCard = -1; Save(); locked = true; StartCoroutine(ShuffleAndDeal(false));
             }, slate, !locked && canShuffle);
             ActionButton("준비 완료", Row(), EndTurn, gold, !locked && myPreparation);
+            Label(Plate(Row()), "AP / DP / HP", "hand stat legend", tint: new Color(.70f, .81f, .94f));
         }
 
         private void ShowRevivalBattleMenu()

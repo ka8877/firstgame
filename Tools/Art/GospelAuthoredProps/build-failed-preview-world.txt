@@ -1,0 +1,55 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+FBX version: 7400
+1 0
+1 0
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD0.fbx'
+export finished in 0.0768 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD1.fbx'
+export finished in 0.0276 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD0.fbx'
+export finished in 0.0565 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD1.fbx'
+export finished in 0.0216 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/Shrub.fbx'
+export finished in 0.0182 sec.
+05:57:16 | INFO: Data are loaded, start creating Blender stuff
+05:57:16 | INFO: Blender create Mesh node texturedMesh.002
+05:57:16 | INFO: glTF import finished in 0.01s
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/StoneBasin.fbx'
+export finished in 0.0128 sec.
+05:57:16 | INFO: Data are loaded, start creating Blender stuff
+05:57:16 | INFO: Blender create Mesh node PRL_CERAMIC_POT_COMBINED
+05:57:16 | INFO: glTF import finished in 0.01s
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/CeramicVessel.fbx'
+export finished in 0.0114 sec.
+05:57:16 | INFO: Data are loaded, start creating Blender stuff
+05:57:16 | INFO: Blender create Mesh node Planter_Pot_01
+05:57:16 | INFO: glTF import finished in 0.01s
+Traceback (most recent call last):
+  File "/workspace/firstgame/Tools/Art/GospelAuthoredProps/build-props.py", line 169, in <module>
+    scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=24;scene.cycles.use_denoising=True;scene.cycles.transparent_max_bounces=12;scene.render.resolution_x=1600;scene.render.resolution_y=1000;scene.render.resolution_percentage=100;scene.world.color=(.30,.34,.40)
+                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'color' and no __dict__ for setting new attributes
+
+Error: script failed, file: 'Tools/Art/GospelAuthoredProps/build-props.py', exiting.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ClayPlanter.fbx'
+export finished in 0.0106 sec.
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+Blender 4.3.2
+
+Blender quit

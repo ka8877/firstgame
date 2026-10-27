@@ -51,14 +51,14 @@ namespace FantasyCards.Core
             new LeaderDefinition("serin", "세린", "물결 마녀", "물과 암흑의 코인·제거 마법을 다루는 아바타.", "클래식 아바타", "클래식 규칙에는 리더 기술이 없습니다.", Element.Tide, LeaderSkill.Restoration, 2),
             new LeaderDefinition("noa", "노아", "대지의 기록자", "대지와 빛의 수비·강화로 전열을 지키는 아바타.", "클래식 아바타", "클래식 규칙에는 리더 기술이 없습니다.", Element.Earth, LeaderSkill.Insight, 3)
         };
-        public static readonly StarterDeckDefinition[] StarterDecks =
+        public static readonly StarterDeckDefinition[] StarterDecks = new[]
         {
             Pair("forest", "숲과 빛 · 생명의 전열", "숲의 야수와 빛의 수호자. 겨울잠·홀리레인으로 전열을 지킵니다.", "lyria", Element.Forest, Element.Dawn),
             Pair("knights", "불과 금속 · 강철의 진격", "파이어볼·메테오와 금속 장비. 공격 준비에 소울을 집중합니다.", "kael", Element.Fire, Element.Metal),
             Pair("tides", "물과 암흑 · 심연의 파도", "물의 전열과 암흑 제거 마법. 코인과 공방 전용 마법을 활용합니다.", "serin", Element.Tide, Element.Darkness),
             Pair("stars", "대지와 빛 · 황금의 성채", "물리 피해·수비 마법과 빛의 강화. 다섯 칸의 배치 순서가 중요합니다.", "noa", Element.Earth, Element.Dawn),
             FidelityDeck()
-        };
+        }.Concat(ArcanaStarterDeckData.Create()).ToArray();
         static StarterDeckDefinition FidelityDeck()
         {
             var cards = new List<string>();

@@ -1,0 +1,15 @@
+{
+  "revision": "gospel-authored-2026-10-27",
+  "resourceRoot": "Art/GospelAuthoredProps/",
+  "normalConvention": "OpenGL +Y; import as NormalMap, flipGreenChannel=false",
+  "textures": {"size": 1024, "mipmaps": true, "compression": "HQ", "alphaIsTransparency": true},
+  "materials": [
+    {"name":"Authored_Tree_Bark","baseMap":"tree-albedo-alpha","normalMap":"tree-normal","smoothness":0.10,"bumpScale":0.65,"alphaClip":false,"cutoff":0.45,"doubleSided":false},
+    {"name":"Authored_Tree_Leaves","baseMap":"tree-albedo-alpha","normalMap":"tree-normal","smoothness":0.12,"bumpScale":0.45,"alphaClip":true,"cutoff":0.45,"doubleSided":true},
+    {"name":"Authored_Tree_Twigs","baseMap":"tree-albedo-alpha","normalMap":"tree-normal","smoothness":0.08,"bumpScale":0.55,"alphaClip":true,"cutoff":0.45,"doubleSided":true},
+    {"name":"Authored_Basin_Stone","baseMap":"basin-albedo","normalMap":"basin-normal","smoothness":0.08,"bumpScale":0.70,"alphaClip":false,"doubleSided":true},
+    {"name":"Authored_Ceramic","baseMap":"ceramic-albedo","normalMap":"ceramic-normal","smoothness":0.18,"bumpScale":0.60,"alphaClip":false,"doubleSided":true},
+    {"name":"Authored_Planter","baseMap":"planter-albedo","normalMap":"planter-normal","smoothness":0.06,"bumpScale":0.65,"alphaClip":false,"doubleSided":true}
+  ],
+  "armScope": "Original ARM maps are retained in source provenance but not assigned as an occlusion texture with an incorrect channel. Runtime uses explicit constant nonmetallic roughness."
+}

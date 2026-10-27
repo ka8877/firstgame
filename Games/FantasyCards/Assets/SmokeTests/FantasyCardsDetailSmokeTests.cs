@@ -29,7 +29,7 @@ namespace FantasyCards.SmokeTests
             choice.onClick.Invoke(); yield return null;
             Assert.That(app.LocalProfileAvatarId, Is.EqualTo(avatar));
             Assert.That(app.LocalProfileWins, Is.EqualTo(wins), "Changing a portrait cannot award a battle result.");
-            yield return SmokeUi.Capture("FantasyCards", "detail-profile-local", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "arcana-profile-local", 1280, 720);
             yield return SmokeUi.LoadBoot();
             app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
             Assert.That(app.LocalProfileName, Is.EqualTo("리마스터 검증"));

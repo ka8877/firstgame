@@ -19,7 +19,7 @@ namespace FirstGame.Editor
     {
         [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
         [Serializable] sealed class GospelMaterialPalette { public GospelMaterialSpec[] materials; }
-        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap; public float smoothness; public bool doubleSided; public bool alphaClip; public float cutoff = .5f; }
+        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap, normalMap; public float normalStrength = .3f; public float smoothness; public bool doubleSided; public bool alphaClip; public float cutoff = .5f; }
         [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
         [Serializable] sealed class PaintedLayout { public PaintedRegion[] characters; public PaintedRegion[] walkFrames; }
         [Serializable] sealed class PaintedRegion
@@ -67,6 +67,7 @@ namespace FirstGame.Editor
                 QualitySettings.vSyncCount = 0;
                 var font = CreateFont();
                 PrepareGospelCharacter();
+                AuthoredPropsSetup.Prepare();
                 PrepareGospelPortraits();
                 var scene = File.Exists(ScenePath) ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
                     : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -118,6 +119,7 @@ namespace FirstGame.Editor
             importer.importNormals = ModelImporterNormals.Import;
             importer.importCameras = false; importer.importLights = false;
             importer.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+            importer.materialLocation = ModelImporterMaterialLocation.InPrefab;
             var clips = importer.defaultClipAnimations;
             foreach (var clip in clips)
             {
@@ -164,6 +166,20 @@ namespace FirstGame.Editor
                     if (texture == null) throw new InvalidOperationException("Missing character texture " + texturePath);
                     material.SetTexture("_BaseMap", texture);
                 }
+                material.SetTexture("_BumpMap", null); material.DisableKeyword("_NORMALMAP");
+                if (!string.IsNullOrEmpty(entry.normalMap))
+                {
+                    string normalPath = folder + "/" + entry.normalMap;
+                    var normalImporter = AssetImporter.GetAtPath(normalPath) as TextureImporter;
+                    if (normalImporter == null) throw new InvalidOperationException("Missing actor fabric normal map: " + normalPath);
+                    normalImporter.textureType = TextureImporterType.NormalMap; normalImporter.sRGBTexture = false;
+                    normalImporter.flipGreenChannel = false; normalImporter.mipmapEnabled = true;
+                    normalImporter.maxTextureSize = 1024; normalImporter.wrapMode = TextureWrapMode.Repeat;
+                    normalImporter.textureCompression = TextureImporterCompression.CompressedHQ;
+                    normalImporter.SaveAndReimport();
+                    material.SetTexture("_BumpMap", AssetDatabase.LoadAssetAtPath<Texture2D>(normalPath));
+                    material.SetFloat("_BumpScale", entry.normalStrength); material.EnableKeyword("_NORMALMAP");
+                }
                 importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), entry.name), material);
                 EditorUtility.SetDirty(material);
             }
@@ -202,7 +218,7 @@ namespace FirstGame.Editor
                 EditorUtility.SetDirty(material);
             }
             importer.SaveAndReimport();
-            foreach (string actor in new[] { "AdultJesus", "Mary" })
+            foreach (string actor in new[] { "AdultJesus", "Mary", "TempleTeacher", "Joseph" })
             {
                 string actorPath = folder + "/" + actor + ".fbx";
                 if (!File.Exists(actorPath)) throw new InvalidOperationException("Missing distinct adult character: " + actorPath);
@@ -215,6 +231,16 @@ namespace FirstGame.Editor
                 actorImporter.importNormals = ModelImporterNormals.Import;
                 actorImporter.importCameras = false; actorImporter.importLights = false;
                 actorImporter.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+                actorImporter.materialLocation = ModelImporterMaterialLocation.InPrefab;
+                var actorClips = actorImporter.defaultClipAnimations;
+                foreach (var clip in actorClips)
+                {
+                    clip.loopTime = new[] { "Idle", "Walk", "Run", "JumpAir" }.Any(name => clip.name == name || clip.name.EndsWith("|" + name) || clip.name.EndsWith("_" + name));
+                    clip.loopPose = clip.loopTime; clip.keepOriginalOrientation = true;
+                    clip.keepOriginalPositionY = true; clip.keepOriginalPositionXZ = true;
+                    clip.lockRootRotation = true; clip.lockRootHeightY = true; clip.lockRootPositionXZ = true;
+                }
+                if (actorClips.Length > 0) actorImporter.clipAnimations = actorClips;
                 foreach (var entry in palette.materials)
                 {
                     var material = AssetDatabase.LoadAssetAtPath<Material>(folder + "/" + entry.name + ".mat");

@@ -168,7 +168,7 @@ namespace FantasyCards.Presentation
         private void DrawScrollableHand()
         {
             var hand = BattleDisplayState.players[0].hand;
-            var viewport = Panel(root, .025f, .025f, .805f, .305f, new Color(.045f, .075f, .11f, .98f));
+            var viewport = Panel(root, .025f, .015f, .805f, .350f, new Color(.045f, .075f, .11f, .98f));
             viewport.gameObject.name = "Scrollable hand"; viewport.GetComponent<Image>().raycastTarget = true;
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Hand content", typeof(RectTransform)).GetComponent<RectTransform>();
@@ -276,7 +276,7 @@ namespace FantasyCards.Presentation
         private void ShowTooltip(string title, string body, Vector2 position)
         {
             HideTooltip();
-            float width = Compact ? .47f : .34f;
+            float width = Compact ? .36f : .32f;
             // Size the popup from the actual text instead of silently ellipsizing
             // the last stat or rule when the catalog contains longer abilities.
             var measure = Text(root, body, 0, 0, width, 1, 23, ivory, TextAlignmentOptions.TopLeft);
@@ -287,7 +287,7 @@ namespace FantasyCards.Presentation
             float x = Mathf.Clamp(position.x / Mathf.Max(1, canvas.pixelRect.width) + .018f, .015f, .985f - width);
             float y = position.y / Mathf.Max(1, canvas.pixelRect.height);
             y = Mathf.Clamp(y > .55f ? y - height - .035f : y + .04f, .025f, .975f - height);
-            tooltip = Panel(root, x, y, x + width, y + height, new Color(.04f, .075f, .115f, .99f));
+            tooltip = Panel(root, x, y, x + width, y + height, new Color(.035f, .050f, .115f, .99f));
             tooltip.gameObject.name = "Hover explanation"; Frame(tooltip, gold, 1.5f);
             ReadableText(tooltip, title, .055f, .80f, .945f, .96f, 27, gold);
             ReadableText(tooltip, body, .055f, .045f, .945f, .79f, 23, ivory, TextAlignmentOptions.TopLeft);

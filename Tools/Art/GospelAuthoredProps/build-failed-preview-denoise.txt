@@ -1,0 +1,81 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+FBX version: 7400
+1 0
+1 0
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD0.fbx'
+export finished in 0.0703 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeA_LOD1.fbx'
+export finished in 0.0256 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD0.fbx'
+export finished in 0.0540 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ShadeTreeB_LOD1.fbx'
+export finished in 0.0202 sec.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/Shrub.fbx'
+export finished in 0.0165 sec.
+05:59:18 | INFO: Data are loaded, start creating Blender stuff
+05:59:18 | INFO: Blender create Mesh node texturedMesh.002
+05:59:18 | INFO: glTF import finished in 0.01s
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/StoneBasin.fbx'
+export finished in 0.0115 sec.
+05:59:18 | INFO: Data are loaded, start creating Blender stuff
+05:59:18 | INFO: Blender create Mesh node PRL_CERAMIC_POT_COMBINED
+05:59:18 | INFO: glTF import finished in 0.01s
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/CeramicVessel.fbx'
+export finished in 0.0109 sec.
+05:59:18 | INFO: Data are loaded, start creating Blender stuff
+05:59:18 | INFO: Blender create Mesh node Planter_Pot_01
+05:59:18 | INFO: glTF import finished in 0.01s
+Blender 4.3.2
+Fra:1 Mem:94.88M (Peak 202.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShadeTreeA_Bark
+Fra:1 Mem:94.88M (Peak 202.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShadeTreeA_Twigs
+Fra:1 Mem:96.97M (Peak 202.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Preview only neutral ground
+Fra:1 Mem:96.97M (Peak 202.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ClayPlanter
+Fra:1 Mem:103.36M (Peak 202.22M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | CeramicVessel
+Fra:1 Mem:105.07M (Peak 202.22M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShadeTreeB_Bark
+Fra:1 Mem:107.64M (Peak 202.22M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | StoneBasin
+Fra:1 Mem:108.50M (Peak 202.22M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShadeTreeB_Leaves
+Fra:1 Mem:111.36M (Peak 202.22M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shrub_Twigs
+Fra:1 Mem:111.51M (Peak 202.22M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shrub_Leaves
+Fra:1 Mem:111.96M (Peak 202.22M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Shrub_Bark
+Fra:1 Mem:112.47M (Peak 202.22M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ShadeTreeB_Twigs
+Fra:1 Mem:113.52M (Peak 202.22M) | Time:00:00.03 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:112.65M (Peak 202.22M) | Time:00:00.03 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Failed to denoise, build has no OpenImageDenoise support
+Fra:1 Mem:112.65M (Peak 202.22M) | Time:00:00.03 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:112.65M (Peak 202.22M) | Time:00:00.03 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:112.65M (Peak 202.22M) | Time:00:00.03 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:112.74M (Peak 202.22M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:112.74M (Peak 202.22M) | Time:00:00.04 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Failed to denoise, build has no OpenImageDenoise support
+Traceback (most recent call last):
+  File "/workspace/firstgame/Tools/Art/GospelAuthoredProps/build-props.py", line 176, in <module>
+    scene.view_settings.view_transform='AgX';scene.render.filepath=str(ART/'exported-props-studio.png');bpy.ops.render.render(write_still=True)
+                                                                                                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/share/blender/scripts/modules/bpy/ops.py", line 109, in __call__
+    ret = _op_call(self.idname_py(), kw)
+RuntimeError: Error: Failed to denoise, build has no OpenImageDenoise support
+Error: Failed to denoise, build has no OpenImageDenoise support
+
+
+Error: script failed, file: 'Tools/Art/GospelAuthoredProps/build-props.py', exiting.
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/GospelAuthoredProps/ClayPlanter.fbx'
+export finished in 0.0098 sec.
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+FBX version: 7400
+Error: Failed to denoise, build has no OpenImageDenoise support
+Error: Failed to denoise, build has no OpenImageDenoise support
+
+Blender quit

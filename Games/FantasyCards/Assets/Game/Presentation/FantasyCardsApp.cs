@@ -20,9 +20,9 @@ namespace FantasyCards.Presentation
     public sealed partial class FantasyCardsApp : MonoBehaviour
     {
         private const string Slot = "fantasy-battle-classic-v3", DeckSlot = "fantasy-deck-classic-v3", GameId = "starlight-oath";
-        private readonly Color ink = new Color(.035f, .065f, .050f, .98f);
-        private readonly Color gold = new Color(.88f, .75f, .47f);
-        private readonly Color teal = new Color(.48f, .80f, .65f);
+        private readonly Color ink = new Color(.030f, .040f, .085f, .98f);
+        private readonly Color gold = new Color(.96f, .80f, .48f);
+        private readonly Color teal = new Color(.40f, .86f, .80f);
         private readonly List<string> customDeck = CardCatalog.DefaultDeck();
         private readonly Dictionary<string, Sprite> authoredIllustrations = new Dictionary<string, Sprite>();
         private BattleEngine engine;
@@ -34,8 +34,8 @@ namespace FantasyCards.Presentation
         private Vector2 lastViewport;
         private int collectionPage;
         private bool Compact => canvas != null && (canvas.pixelRect.width < 1400 || canvas.pixelRect.width / Mathf.Max(1, canvas.pixelRect.height) > 1.95f);
-        private readonly Color ivory = new Color(.96f, .95f, .88f);
-        private readonly Color slate = new Color(.11f, .17f, .135f, .98f);
+        private readonly Color ivory = new Color(.96f, .96f, 1f);
+        private readonly Color slate = new Color(.085f, .12f, .215f, .98f);
         private int selectedCard = -1, selectedAttacker = -1;
         private string inspectedId = "dawn_scout", message = "판타지마스터즈에 오신 것을 환영합니다.";
         private string saveError = "";
@@ -265,7 +265,7 @@ namespace FantasyCards.Presentation
         }
         private void DrawCard(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
         {
-            DrawPrintedCard(parent, card, x0, y0, x1, y1, selected, onClick, interactable);
+            DrawArcanaCard(parent, card, x0, y0, x1, y1, selected, onClick, interactable);
         }
         private void Artwork(Transform parent, CardDefinition d, float x0, float y0, float x1, float y1)
         {
@@ -346,22 +346,25 @@ namespace FantasyCards.Presentation
             var go = new GameObject("Panel", typeof(RectTransform), typeof(UiRoundedImage));
             var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
             var image = go.GetComponent<UiRoundedImage>(); image.color = color; image.raycastTarget = false;
-            image.Radius = 12; image.TopTint = new Color(1.025f, 1.035f, 1.045f, 1); image.BottomTint = new Color(.98f, .99f, 1f, 1);
+            image.Radius = 18; image.TopTint = new Color(1.025f, 1.035f, 1.045f, 1); image.BottomTint = new Color(.98f, .99f, 1f, 1);
             return rt;
         }
         private TMP_Text Text(Transform parent, string value, float x0, float y0, float x1, float y1, float size, Color color, TextAlignmentOptions alignment = TextAlignmentOptions.MidlineLeft)
         {
+            float authoredSize = size;
             var go = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI)); var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
             float scale = Mathf.Sqrt(Mathf.Max(1, canvas.pixelRect.width) / 1920f * Mathf.Max(1, canvas.pixelRect.height) / 1080f);
             bool small = Compact && canvas.pixelRect.height < 600;
             bool heading = size >= 34; // Font role follows authored hierarchy, not the mobile pixel floor.
             if (small) size = Mathf.Max(size, 13f / scale);
-            var text = go.GetComponent<TextMeshProUGUI>(); text.font = heading ? Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font : font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.fontStyle = FontStyles.Normal; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Truncate; return text;
+            var text = go.GetComponent<TextMeshProUGUI>(); text.font = heading ? Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font : font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.fontStyle = FontStyles.Normal; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Truncate;
+            go.AddComponent<UiCanvasTextSize>().Configure(authoredSize);
+            return text;
         }
         private Button Button(Transform parent, string label, float x0, float y0, float x1, float y1, Action action, Color color, float size = 22, bool enabled = true)
         {
             var panel = Panel(parent, x0, y0, x1, y1, color); panel.gameObject.name = "Button " + label; panel.GetComponent<Image>().raycastTarget = true;
-            panel.GetComponent<UiRoundedImage>().Radius = 12;
+            panel.GetComponent<UiRoundedImage>().Radius = 18;
             var b = panel.gameObject.AddComponent<Button>(); b.interactable = enabled;
             var colors = b.colors; colors.fadeDuration = .14f;
             colors.highlightedColor = new Color(1.16f, 1.18f, 1.20f);
@@ -371,7 +374,7 @@ namespace FantasyCards.Presentation
             var shadow = panel.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.005f, .015f, .035f, .27f); shadow.effectDistance = new Vector2(0, -4);
             Frame(panel, color == gold ? new Color(1, .94f, .76f, .65f) : new Color(.72f, .84f, .94f, .28f), 1);
             b.onClick.AddListener(() => { music?.NotifyUserGesture(); action(); });
-            var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.015f; hover.HoverLift = 2;
+            var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.025f; hover.HoverLift = 3;
             var text = Text(panel, label, .04f, .07f, .96f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
             text.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font;
             text.textWrappingMode = TextWrappingModes.NoWrap;

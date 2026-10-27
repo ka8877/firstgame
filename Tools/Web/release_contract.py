@@ -25,6 +25,13 @@ DETAIL = {
     'reportRoots': {game: 'Artifacts/Validation/Detail' for game in ('FantasyCards', 'PathOfDawn')},
     'preservedGames': []
 }
+ARCANA = {
+    'name': 'arcana',
+    'revisions': {'FantasyCards': 'fm-arcana-2026-10-27', 'PathOfDawn': 'gospel-authored-2026-10-27'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Arcana' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': []
+}
 
 
 def contract(name):
@@ -34,6 +41,8 @@ def contract(name):
         return FIDELITY
     if name == 'detail':
         return DETAIL
+    if name == 'arcana':
+        return ARCANA
     raise ValueError('Unknown explicit release profile: ' + str(name))
 
 

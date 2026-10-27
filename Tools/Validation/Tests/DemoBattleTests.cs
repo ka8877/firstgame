@@ -8,9 +8,9 @@ namespace FirstGame.Validation
 {
     [TestFixture] public sealed class DemoBattleTests
     {
-        [Test] public void FiveStarterDecksRetainTheFourOriginalCurvesAndUseAllSevenElements()
+        [Test] public void EighteenStarterDecksRetainTheFiveOriginalPresetsAndCoverMonoAndDualElements()
         {
-            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(5));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(3));
+            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(18));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(3));
             foreach(var deck in DemoCatalog.StarterDecks.Take(4))
             {
                 DemoCatalog.ValidatePlayableDeck(deck.cards);
@@ -23,8 +23,53 @@ namespace FirstGame.Validation
             }
             DemoCatalog.ValidatePlayableDeck(DemoCatalog.GetDeck("fidelity").cards);
             Assert.That(DemoCatalog.GetDeck("fidelity").cards.Length,Is.EqualTo(50));
-            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards)).Distinct().Count(),Is.EqualTo(5));
+            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards.OrderBy(id=>id))).Distinct().Count(),Is.EqualTo(18));
             Assert.That(DemoCatalog.StarterDecks.SelectMany(d=>d.cards).Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count(),Is.EqualTo(7));
+            var mono=DemoCatalog.StarterDecks.Where(d=>d.id.StartsWith("mono-")).ToArray();
+            Assert.That(mono.Length,Is.EqualTo(7));
+            Assert.That(mono.Select(d=>d.cards.Select(CardCatalog.Get).Select(c=>c.element).Distinct().Single()),Is.EquivalentTo(Enum.GetValues(typeof(Element))));
+            var dual=DemoCatalog.StarterDecks.Where(d=>d.cards.Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count()==2).ToArray();
+            Assert.That(dual.Length,Is.EqualTo(11));
+            Assert.That(dual.Select(d=>string.Join(",",d.cards.Select(CardCatalog.Get).Select(c=>(int)c.element).Distinct().OrderBy(e=>e))).Distinct().Count(),Is.EqualTo(11));
+            foreach(var deck in DemoCatalog.StarterDecks.Skip(5))
+            {
+                DemoCatalog.ValidatePlayableDeck(deck.cards);
+                var definitions=deck.cards.Select(CardCatalog.Get).ToArray();
+                Assert.That(definitions.Count(c=>c.kind==CardKind.Terrain),Is.EqualTo(16),deck.id);
+                Assert.That(definitions.Count(c=>c.kind==CardKind.Unit),Is.EqualTo(24),deck.id);
+                Assert.That(definitions.Count(c=>c.kind==CardKind.Spell),Is.EqualTo(6),deck.id);
+                Assert.That(definitions.Count(c=>c.kind==CardKind.Equipment),Is.EqualTo(4),deck.id);
+                Assert.That(definitions.Count(c=>c.kind==CardKind.Unit&&c.level<=2),Is.GreaterThanOrEqualTo(14),deck.id);
+                Assert.That(definitions.Where(c=>c.kind==CardKind.Unit&&c.level<=3).Sum(c=>c.genericCost),Is.LessThanOrEqualTo(16),deck.id);
+                foreach(var source in definitions.Where(c=>c.kind==CardKind.Terrain))
+                { Assert.That(source.landPointCost,Is.EqualTo(1));Assert.That(source.producedColored,Is.EqualTo(1));Assert.That(source.producedGeneric,Is.EqualTo(1)); }
+                foreach(var item in definitions.Where(c=>c.kind==CardKind.Equipment))
+                    Assert.That(definitions.Any(c=>c.kind==CardKind.Unit&&(item.requiredCapabilityMask==0||(item.requiredCapabilityMask&c.capabilityMask)!=0)),Is.True,deck.id+" item "+item.name);
+                foreach(var spell in definitions.Where(c=>c.kind==CardKind.Spell))foreach(var op in spell.operations.Where(o=>o.side==OperationSide.Ally&&o.requiredCapabilityMask!=0))
+                    Assert.That(definitions.Any(c=>c.kind==CardKind.Unit&&(c.capabilityMask&op.requiredCapabilityMask)!=0),Is.True,deck.id+" spell "+spell.name);
+                foreach(var group in definitions.GroupBy(c=>c.element))
+                    Assert.That(group.Count(c=>c.kind==CardKind.Terrain),Is.EqualTo(deck.id.StartsWith("mono-")?16:8),deck.id+" soul source "+group.Key);
+            }
+        }
+        [Test] public void NewPracticePresetsDeployRealUnitsAndFinishFromShuffledUnmodifiedDecks()
+        {
+            foreach(var deck in DemoCatalog.StarterDecks.Skip(5))for(uint seed=17;seed<=19;seed++)
+            {
+                var e=DemoCatalog.CreateBattle(seed,deck.id,deck.recommendedLeaderId,(int)(seed%3));
+                int actions=0;bool deployedTerrain=false,deployedUnit=false;
+                while(e.State.phase!=BattlePhase.Complete&&actions++<2000)
+                {
+                    Assert.That(BattleAi.Step(e,e.PreparingPlayer,out var error),Is.True,deck.id+" "+error);
+                    BattleEngine.Validate(e.State);
+                    deployedTerrain|=e.State.players[0].terrain.Count>0;
+                    deployedUnit|=e.State.players[0].units.Count>0;
+                }
+                Assert.That(deployedTerrain,Is.True,deck.id+" seed "+seed+" never deployed a soul source");
+                Assert.That(deployedUnit,Is.True,deck.id+" seed "+seed+" never afforded a unit");
+                Assert.That(e.State.phase,Is.EqualTo(BattlePhase.Complete),deck.id+" seed "+seed);
+                Assert.That(actions,Is.LessThan(2000),deck.id);
+                TestContext.WriteLine(deck.id+" / seed "+seed+": winner="+e.State.winner+", turns="+e.State.turn+", actions="+actions);
+            }
         }
         [TestCase("forest")] [TestCase("knights")] [TestCase("tides")] [TestCase("stars")] [TestCase("fidelity")]
         public void EveryDeckCompletesThreeTrialsAndRestoresEachActionForSeveralSeeds(string deckId)

@@ -23,6 +23,7 @@ namespace PathOfDawn.Presentation
         readonly List<Transform> oliveCrowns = new List<Transform>();
         readonly List<Quaternion> oliveRest = new List<Quaternion>();
         VolumeProfile ownedProfile;
+        GospelAuthoredProps authoredProps;
         Transform courtyard, manger, marker;
         Light sun;
         Material stone, paleStone, warmStone, darkStone, gold, wood, leaf, foliageLight, water, linen, pottery, ground, paving, pavingWarm, waterGlint, clayLight;
@@ -59,6 +60,7 @@ namespace PathOfDawn.Presentation
             // gentle so skin and cloth retain their authored colour and detail.
             fill.intensity=.55f;fill.range=6;fill.shadows=LightShadows.None;fill.cullingMask=1<<8;
             courtyard=new GameObject("Temple courtyard · physical scene").transform;courtyard.SetParent(transform,false);
+            authoredProps=gameObject.AddComponent<GospelAuthoredProps>();authoredProps.Initialize();
             BuildLandscape();BuildCourtyard();BuildTemple();BuildColonnades();BuildGarden();BuildCourtyardDetails();BuildQuietCourtyardLife();CombineArchitecture();BuildManger();
             var playerRoot=new GameObject("Jesus · playable protagonist");playerRoot.transform.SetParent(courtyard,false);playerRoot.layer=8;
             var body=CreatePerson(playerRoot.transform,"Young Jesus",Vector3.zero,1);
@@ -71,9 +73,10 @@ namespace PathOfDawn.Presentation
             Player.SetPose(new Vector3(0,.08f,-9),0);
             Player.Actions.ConfigureTrainingArea(new Vector3(-8,0,-8),3);
             Torus("Optional practice area · outside Scripture progression",courtyard,new Vector3(-8,.06f,-8),2.8f,.025f,gold,64,false);
+            CreateNpc("Temple guide",new Vector3(1.2f,0,-5),220,1.08f,new Color(.65f,.62f,.48f));
             CreateNpc("Teacher reading",new Vector3(-5.8f,0,2.4f),120,1.15f,new Color(.58f,.48f,.32f));
             CreateNpc("Teacher listening",new Vector3(-4.4f,0,2.7f),210,1.1f,new Color(.65f,.57f,.42f));
-            CreateNpc("Mary",new Vector3(4.6f,0,3.2f),210,1.06f,new Color(.35f,.48f,.55f));
+            CreateNpc("Mary",new Vector3(4.6f,0,3.2f),210,1.18f,new Color(.35f,.48f,.55f));
             CreateNpc("Joseph",new Vector3(5.6f,0,3.4f),225,1.17f,new Color(.58f,.39f,.26f));
             marker=new GameObject("Current Scripture landmark").transform;marker.SetParent(courtyard,false);
             // The guide belongs to the ground plane. A floating bronze sphere
@@ -143,12 +146,12 @@ namespace PathOfDawn.Presentation
             for(int x=-7;x<=7;x++)for(int z=-7;z<=7;z++)
             {
                 var mat=(x+z)%5==0?pavingWarm:paving;
-                Primitive("Limestone paving",PrimitiveType.Cube,courtyard,new Vector3(x*1.95f,.013f,z*1.95f),new Vector3(1.93f,.022f,1.93f),mat,false,false);
+                Primitive("Limestone paving",PrimitiveType.Cube,courtyard,new Vector3(x*1.95f,.013f,z*1.95f),new Vector3(1.93f,.022f,1.93f),mat,true,false);
             }
             foreach(int approach in new[]{-1,1})for(int row=0;row<5;row++)for(int column=0;column<4;column++)
             {
                 float z=approach*(3.48f+row*1.41f);
-                Primitive("Broad processional paving stone",PrimitiveType.Cube,courtyard,new Vector3(-1.50f+column,.038f,z),new Vector3(.98f,.014f,1.38f),(row+column)%6==0?stone:paleStone,false,false);
+                Primitive("Broad processional paving stone",PrimitiveType.Cube,courtyard,new Vector3(-1.50f+column,.038f,z),new Vector3(.98f,.014f,1.38f),(row+column)%6==0?stone:paleStone,true,false);
             }
             foreach(int side in new[]{-1,1})foreach(int approach in new[]{-1,1})
                 Primitive("Processional path inlay",PrimitiveType.Cube,courtyard,new Vector3(side*2.10f,.043f,approach*6.3f),new Vector3(.075f,.012f,7),warmStone,false,false);
@@ -203,23 +206,32 @@ namespace PathOfDawn.Presentation
         }
         void BuildGarden()
         {
-            foreach(var p in new[]{new Vector3(-8,0,-6),new Vector3(8,0,-6),new Vector3(-8,0,6),new Vector3(8,0,7)})
+            // Authored CC0 broadleaf meshes and photographic bark/leaf materials
+            // replace procedural round crowns. These are artistic shade trees,
+            // not a claim about a particular historical botanical species.
+            var treePositions=new[]{new Vector3(-8,0,-6),new Vector3(8,0,-6),new Vector3(-8,0,6),new Vector3(8,0,7)};
+            for(int i=0;i<treePositions.Length;i++)
             {
-                Cylinder("Raised garden bed",courtyard,p+Vector3.up*.16f,1.25f,.3f,paleStone,true);
-                Cylinder("Garden earth",courtyard,p+Vector3.up*.33f,1.05f,.035f,ground,false);OliveTree(p+Vector3.up*.35f);
+                var p=treePositions[i];
+                Cylinder("Stone garden curb",courtyard,p+Vector3.up*.12f,1.20f,.22f,paleStone,true);
+                Cylinder("Garden soil",courtyard,p+Vector3.up*.24f,1.05f,.025f,ground,false);
+                authoredProps.AddTree(courtyard,p+Vector3.up*.25f,3.65f+(i%2)*.35f,i*61,i%2);
+                for(int n=0;n<3;n++)
+                {
+                    float angle=(n*2.1f+i)*1.1f;
+                    authoredProps.AddShrub(courtyard,p+new Vector3(Mathf.Sin(angle)*.75f,.25f,Mathf.Cos(angle)*.75f),.47f+n*.07f,i*43+n*21,n);
+                }
             }
-            foreach(var p in new[]{new Vector3(-6.6f,0,2.4f),new Vector3(6.8f,0,3.7f),new Vector3(-10,0,-9),new Vector3(10,0,-9)})
+            var vessels=new[]{new Vector3(-6.6f,0,2.4f),new Vector3(6.8f,0,3.7f),new Vector3(-10,0,-9),new Vector3(10,0,-9)};
+            for(int i=0;i<vessels.Length;i++)
             {
-                Lathe("Terracotta water jar",courtyard,p,new[]{new Vector2(.18f,0),new Vector2(.36f,.16f),new Vector2(.43f,.58f),new Vector2(.27f,.85f),new Vector2(.20f,.92f),new Vector2(.23f,.98f)},pottery,28);
-                Torus("Jar rim",courtyard,p+Vector3.up*.98f,.23f,.035f,pottery,28);
+                authoredProps.AddCeramicVessel(courtyard,vessels[i],.74f+(i%2)*.12f,i*49);
+                authoredProps.AddClayPlanter(courtyard,vessels[i]+new Vector3((i%2==0?1:-1)*.65f,0,.35f),.38f,i*29);
             }
             Primitive("Teacher bench",PrimitiveType.Cube,courtyard,new Vector3(-5.1f,.28f,3.4f),new Vector3(3.7f,.28f,.8f),paleStone,true);
             foreach(float x in new[]{-6.3f,-3.9f})Primitive("Bench leg",PrimitiveType.Cube,courtyard,new Vector3(x,.13f,3.4f),new Vector3(.3f,.26f,.55f),stone,false);
-            var table=Primitive("Reading table",PrimitiveType.Cube,courtyard,new Vector3(-5,.65f,1.65f),new Vector3(1.5f,.09f,.75f),wood,true);
-            Primitive("Open scroll",PrimitiveType.Cube,courtyard,new Vector3(-5,.705f,1.65f),new Vector3(1.1f,.02f,.55f),linen,false);
-            foreach(float x in new[]{-5.57f,-4.43f})
-            {var roller=Primitive("Scroll roller",PrimitiveType.Cylinder,courtyard,new Vector3(x,.74f,1.65f),new Vector3(.09f,.32f,.09f),wood,false);roller.transform.rotation=Quaternion.Euler(90,0,0);}
-            for(int i=0;i<5;i++)Primitive("Ink marks on scroll",PrimitiveType.Cube,courtyard,new Vector3(-5,.72f,1.47f+i*.075f),new Vector3(.65f,.006f,.012f),darkStone,false);
+            var table=Primitive("Reading table",PrimitiveType.Cube,courtyard,new Vector3(-5.0f,.71f,2.45f),new Vector3(1.1f,.10f,.67f),wood,false);
+            Primitive("Open Scripture scroll",PrimitiveType.Cube,courtyard,new Vector3(-5.0f,.775f,2.45f),new Vector3(.65f,.015f,.39f),linen,false);
         }
         void BuildCourtyardDetails()
         {
@@ -280,20 +292,14 @@ namespace PathOfDawn.Presentation
             {
                 for(int i=0;i<3;i++)
                 {
-                    var p=new Vector3(side*(11.15f+i*.35f),0,-3.2f+(i%2)*.55f);
-                    float scale=.68f+i*.13f;
-                    Lathe("Grouped portico amphora",courtyard,p,new[]{new Vector2(.17f,0),new Vector2(.29f,.13f*scale),new Vector2(.32f,.49f*scale),new Vector2(.17f,.75f*scale),new Vector2(.115f,.88f*scale),new Vector2(.14f,.92f*scale)},i%2==0?pottery:clayLight,32);
-                    Torus("Amphora rolled rim",courtyard,p+Vector3.up*(.92f*scale),.14f,.024f,pottery,24);
-                    Cylinder("Amphora dark open mouth",courtyard,p+Vector3.up*(.905f*scale),.112f,.012f,darkStone,false);
+                    var p=new Vector3(side*(11.05f+i*.52f),0,-3.2f+(i%2)*.55f);
+                    if(i%2==0)authoredProps.AddCeramicVessel(courtyard,p,.54f+i*.12f,side*33+i*61);
+                    else authoredProps.AddClayPlanter(courtyard,p,.53f,side*19+i*31);
                 }
                 Primitive("Portico stone seat",PrimitiveType.Cube,courtyard,new Vector3(side*13.65f,.49f,1.3f),new Vector3(.80f,.15f,3.0f),paleStone,false);
                 foreach(float z in new[]{.12f,2.48f})Primitive("Portico seat pedestal",PrimitiveType.Cube,courtyard,new Vector3(side*13.65f,.24f,z),new Vector3(.60f,.48f,.34f),warmStone,false);
-                for(int sprig=0;sprig<8;sprig++)
-                {
-                    var p=new Vector3(side*(9.04f+(sprig%3)*.19f),.05f,6.25f+(sprig/3)*.24f);
-                    var herb=OliveSpray(p+Vector3.up*.20f,sprig%2==0?leaf:foliageLight,44,.42f);
-                    herb.localScale=new Vector3(.72f,.43f,.72f);
-                }
+                for(int sprig=0;sprig<3;sprig++)
+                    authoredProps.AddShrub(courtyard,new Vector3(side*(9.3f+sprig*.3f),.04f,6.4f),.35f+sprig*.08f,sprig*47,sprig);
                 Primitive("Portico low threshold",PrimitiveType.Cube,courtyard,new Vector3(side*11.5f,.046f,-.5f),new Vector3(.13f,.028f,20),warmStone,false,false);
             }
         }
@@ -329,17 +335,9 @@ namespace PathOfDawn.Presentation
         }
         void Fountain()
         {
-            Cylinder("Low courtyard basin plinth",courtyard,new Vector3(0,.105f,0),2.05f,.21f,warmStone,true);
-            Cylinder("Basin shadow well",courtyard,new Vector3(0,.205f,0),1.84f,.09f,darkStone,false);
-            Lathe("Dressed limestone basin",courtyard,Vector3.zero,new[]{new Vector2(1.94f,.18f),new Vector2(1.96f,.25f),new Vector2(1.99f,.34f),new Vector2(1.98f,.41f),new Vector2(1.92f,.46f),new Vector2(1.80f,.46f),new Vector2(1.74f,.39f),new Vector2(1.72f,.24f)},paleStone,80);
-            Cylinder("Quiet basin water",courtyard,new Vector3(0,.335f,0),1.73f,.018f,water,false);
-            // Individual coping joints remain visible after static mesh batching.
-            for(int joint=0;joint<16;joint++)
-            {
-                float a=joint*Mathf.PI/8;
-                var cut=Primitive("Basin coping joint",PrimitiveType.Cube,courtyard,new Vector3(Mathf.Sin(a)*1.86f,.463f,Mathf.Cos(a)*1.86f),new Vector3(.012f,.007f,.16f),warmStone,false,false);
-                cut.transform.localRotation=Quaternion.Euler(0,a*Mathf.Rad2Deg,0);
-            }
+            // An authored irregular stone-ring scan replaces the smooth lathe.
+            // This is an illustrative water basin, not an archaeological claim.
+            authoredProps.AddBasin(courtyard,Vector3.zero,3.8f,18);
         }
         void BuildManger()
         {
@@ -383,10 +381,10 @@ namespace PathOfDawn.Presentation
         }
         void CreateNpc(string name,Vector3 position,float yaw,float scale,Color robeColor)
         {
-            var actor=new GameObject(name);actor.transform.SetParent(courtyard,false);actor.transform.localPosition=position;actor.transform.localRotation=Quaternion.Euler(0,yaw,0);
+            var actor=new GameObject(name);actor.transform.SetParent(courtyard,false);actor.transform.localPosition=position+Vector3.up*(name=="Temple guide"?.055f:.034f);actor.transform.localRotation=Quaternion.Euler(0,yaw,0);
             // Adults use an adult body, rather than enlarged copies of the boy.
             // Mary has her own veiled silhouette and facial proportions.
-            string resource=name=="Mary"?"Art/Gospel3D/Mary":"Art/Gospel3D/AdultJesus";
+            string resource=name=="Mary"?"Art/Gospel3D/Mary":name=="Joseph"?"Art/Gospel3D/Joseph":"Art/Gospel3D/TempleTeacher";
             var body=CreatePerson(actor.transform,name+" model",Vector3.zero,scale*.84f,resource);
             var animator=body.GetComponentInChildren<Animator>();if(animator==null)animator=body.AddComponent<Animator>();animator.runtimeAnimatorController=Resources.Load<RuntimeAnimatorController>(AnimatorResource);animator.applyRootMotion=false;
             foreach(var renderer in body.GetComponentsInChildren<Renderer>())
@@ -397,6 +395,8 @@ namespace PathOfDawn.Presentation
                 renderer.sharedMaterials=mats;
             }
             var collider=actor.AddComponent<CapsuleCollider>();collider.center=Vector3.up*.8f;collider.radius=.27f;collider.height=1.6f;
+            string id=name=="Mary"?"mary":name=="Joseph"?"joseph":name=="Teacher reading"?"teacher-reading":name=="Teacher listening"?"teacher-listening":"temple-guide";
+            GospelNpcAnchor.Attach(actor,id);
         }
         public void SetCurrentLandmark(string id){currentLandmark=id;if(marker!=null){marker.gameObject.SetActive(landmarks.ContainsKey(id??""));if(landmarks.TryGetValue(id??"",out var p))marker.position=p;}}
         void Update()
@@ -544,6 +544,7 @@ namespace PathOfDawn.Presentation
             foreach(var renderer in courtyard.GetComponentsInChildren<MeshRenderer>())
             {
                 var filter=renderer.GetComponent<MeshFilter>();
+                if(renderer.GetComponentInParent<GospelAuthoredPropRoot>()!=null)continue;
                 if(filter==null||filter.sharedMesh==null||renderer.sharedMaterial==null||renderer.sharedMaterial==leaf||renderer.sharedMaterial==foliageLight)continue;
                 var key=(renderer.sharedMaterial,renderer.shadowCastingMode,renderer.receiveShadows);
                 if(!groups.TryGetValue(key,out var list)){list=new List<CombineInstance>();groups.Add(key,list);}

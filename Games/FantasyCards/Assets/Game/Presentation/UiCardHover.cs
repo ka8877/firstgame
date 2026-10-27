@@ -13,7 +13,9 @@ namespace FantasyCards.Presentation
         public Action<Vector2> Enter;
         public Action Leave;
         public Action LongPress;
-        bool hovered, pressing, longPressed;
+        bool hovered, pressing, longPressed, pointerPressed, pendingEnter;
+        float enterAt;
+        Vector2 enterPosition;
         RectTransform rect;
         float lift;
         float pressedAt;
@@ -23,23 +25,24 @@ namespace FantasyCards.Presentation
         {
             button = GetComponent<Button>(); rect = transform as RectTransform;
         }
-        public void OnCancel(BaseEventData data) { hovered = pressing = false; Leave?.Invoke(); }
+        public void OnCancel(BaseEventData data) { hovered = pressing = pointerPressed = pendingEnter = false; Leave?.Invoke(); }
         static bool IsTouch(PointerEventData data) => data is ExtendedPointerEventData extended
             ? extended.pointerType == UIPointerType.Touch : data.pointerId >= 0;
         public void OnPointerEnter(PointerEventData data)
         {
             hovered = !IsTouch(data);
-            if (hovered) Enter?.Invoke(data.position);
+            if (hovered) { pendingEnter = true; enterAt = Time.unscaledTime + .23f; enterPosition = data.position; }
         }
-        public void OnPointerExit(PointerEventData data) { hovered = pressing = false; Leave?.Invoke(); }
+        public void OnPointerExit(PointerEventData data) { hovered = pressing = pointerPressed = pendingEnter = false; Leave?.Invoke(); }
         public void OnPointerDown(PointerEventData data)
         {
+            pointerPressed = true; pendingEnter = false; Leave?.Invoke();
             longPressed = false; pressing = IsTouch(data) && LongPress != null;
             pressedAt = Time.unscaledTime; pressedPosition = data.position;
         }
         public void OnPointerUp(PointerEventData data)
         {
-            pressing = false;
+            pressing = pointerPressed = false;
             if (longPressed) data.eligibleForClick = false;
         }
         public void OnPointerClick(PointerEventData data)
@@ -52,17 +55,18 @@ namespace FantasyCards.Presentation
         }
         void OnDisable()
         {
-            hovered = pressing = false; transform.localScale = Vector3.one;
+            hovered = pressing = pointerPressed = pendingEnter = false; transform.localScale = Vector3.one;
             if (rect != null && lift != 0) rect.anchoredPosition -= Vector2.up * lift;
             lift = 0; Leave?.Invoke();
         }
         void Update()
         {
+            if (pendingEnter && hovered && Time.unscaledTime >= enterAt) { pendingEnter = false; Enter?.Invoke(enterPosition); }
             if (pressing && !longPressed && Time.unscaledTime - pressedAt >= .48f)
             {
                 longPressed = true; pressing = false; LongPress?.Invoke();
             }
-            float target = hovered && button != null && button.IsInteractable() ? HoverScale : 1;
+            float target = button != null && button.IsInteractable() ? pointerPressed ? .985f : hovered ? HoverScale : 1 : 1;
             float ease = 1 - Mathf.Exp(-18 * Time.unscaledDeltaTime);
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * target, ease);
             var entrance = GetComponent<UiPanelEntrance>();

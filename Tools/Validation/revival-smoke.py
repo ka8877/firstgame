@@ -42,6 +42,7 @@ REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-rem
 MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
 DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
+ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
     "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
     "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
@@ -582,7 +583,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27'):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27'):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -593,7 +594,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27')) and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27')) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -604,6 +605,12 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
+        if local_media and self.report['revision'] == 'fm-arcana-2026-10-27':
+            evidence["rolePlayback"] = self.page.evaluate("""() => ({
+                state: window.FirstGameLocalMusic.getState(),
+                players: window.FirstGameLocalMusic.getDiagnostics(),
+                transitions: window.FirstGameLocalMusic.getTransitions(), observedAtMs:performance.now()
+            })""")
         self.report["audioEvidence"]["windows"].append(evidence)
         self.check(not evidence["observerErrors"] and evidence["nonfiniteSamples"] == 0,
                    "Passive audio observer captured valid PCM: " + label, evidence)
@@ -771,7 +778,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail"), default="modern")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana"), default="modern")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -793,7 +800,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:

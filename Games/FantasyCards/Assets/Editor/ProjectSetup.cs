@@ -293,6 +293,8 @@ namespace FirstGame.Editor
                 }
                 EditorUtility.SetDirty(asset);
             }
+            foreach (var decoration in Directory.GetFiles("Assets/Resources/Art/ClassicCards/Decor", "*.png"))
+                ImportIllustration(decoration.Replace(Path.DirectorySeparatorChar, '/'));
             if (!File.Exists("Assets/Resources/Data/Rules.asset"))
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<FantasyCards.Data.RuleSetAsset>(), "Assets/Resources/Data/Rules.asset");
             var rules = AssetDatabase.LoadAssetAtPath<FantasyCards.Data.RuleSetAsset>("Assets/Resources/Data/Rules.asset");
@@ -321,6 +323,20 @@ namespace FirstGame.Editor
                 importer.sRGBTexture = true; importer.wrapMode = TextureWrapMode.Clamp;
                 importer.maxTextureSize = 2048; importer.textureCompression = TextureImporterCompression.Uncompressed;
                 importer.SaveAndReimport();
+            }
+            // Source PNGs and native previews remain lossless. Most original
+            // cards are285x405: DXT/ETC silently becomeRGBA32 for those NPOT
+            // dimensions. ASTC4x4 preserves their exact size/aspect and sharply
+            // reduces the Web payload; unsupported GPUs use Unity's documented
+            // runtime software decompression fallback.
+            var web = importer.GetPlatformTextureSettings("WebGL");
+            if (!web.overridden || web.format != TextureImporterFormat.ASTC_4x4 || web.maxTextureSize != 2048
+                || web.compressionQuality != 100 || web.crunchedCompression)
+            {
+                web.name = "WebGL"; web.overridden = true; web.format = TextureImporterFormat.ASTC_4x4;
+                web.maxTextureSize = 2048; web.compressionQuality = 100; web.crunchedCompression = false;
+                web.textureCompression = TextureImporterCompression.CompressedHQ;
+                importer.SetPlatformTextureSettings(web); importer.SaveAndReimport();
             }
             var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
             if (texture == null) throw new InvalidOperationException("Illustration must import as a 2D texture: " + path);

@@ -97,7 +97,7 @@ def verify_texture_importers(root, media_manifest, verification, policy):
     expected_paths = {root / (record["texture"] + ".meta") for record in records}
     actual_paths = set((root / "Games/FantasyCards/Assets/Resources/Art/ClassicCards").rglob("*.png.meta"))
     require(actual_paths == expected_paths, "Original-card PNG metadata set differs")
-    require(policy.get("schema") == 1 and policy.get("revision") == "fm-remaster-2026-10-26"
+    require((policy.get("schema"), policy.get("revision")) in {(1, "fm-remaster-2026-10-26"), (2, "fm-arcana-2026-10-27")}
             and policy.get("excludedUniqueTopLevelKeys") == ["guid"], "Unsupported full texture import policy")
     result, seen_guids = [], set()
     for record in records:

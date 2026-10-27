@@ -10,6 +10,9 @@ def dispatch(root, part):
     record=root/'Tools/Environment/validation.json'
     if not record.is_file():return
     revisions=json.loads(record.read_text()).get('gameRevisions')
+    if revisions=={'FantasyCards':'fm-arcana-2026-10-27','PathOfDawn':'gospel-authored-2026-10-27'}:
+        result=subprocess.run([sys.executable,str(root/'Tools/Build/package-arcana.py'),'--part',part],cwd=root)
+        raise SystemExit(result.returncode)
     if revisions=={'FantasyCards':'fm-detail-2026-10-27','PathOfDawn':'gospel-natural-2026-10-27'}:
         result=subprocess.run([sys.executable,str(root/'Tools/Build/package-detail.py'),'--part',part],cwd=root)
         raise SystemExit(result.returncode)

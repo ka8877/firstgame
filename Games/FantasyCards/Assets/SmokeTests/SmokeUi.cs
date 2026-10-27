@@ -118,9 +118,12 @@ namespace FantasyCards.SmokeTests
                 .GetField("redraw", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(app) as Action;
             string keyboards = string.Join(";", InputSystem.devices.OfType<Keyboard>().Select(keyboard =>
                 "id=" + keyboard.deviceId + ",current=" + (keyboard == Keyboard.current) +
-                ",pressed=" + keyboard.escapeKey.isPressed + ",pressedThisFrame=" + keyboard.escapeKey.wasPressedThisFrame));
+                ",updated=" + keyboard.wasUpdatedThisFrame + ",pressed=" + keyboard.escapeKey.isPressed + ",pressedThisFrame=" + keyboard.escapeKey.wasPressedThisFrame));
             TestContext.Out.WriteLine("UI_STATE " + point + " frame=" + Time.frameCount + " app=" +
-                (app == null ? "none" : app.GetInstanceID().ToString()) + " redraw=" + callback?.Method.Name + " keyboards=" + keyboards);
+                (app == null ? "none" : app.GetInstanceID().ToString()) + " apps=" +
+                string.Join(",", UnityEngine.Object.FindObjectsByType<FantasyCardsApp>(FindObjectsSortMode.None).Select(value=>value.GetInstanceID())) +
+                " scene=" + SceneManager.GetActiveScene().name + " inputUpdate=" + UnityEngine.InputSystem.LowLevel.InputState.currentUpdateType +
+                " redraw=" + callback?.Method.Name + " keyboards=" + keyboards);
         }
         public static BattleState ReadSavedBattle()
         {
@@ -242,7 +245,18 @@ namespace FantasyCards.SmokeTests
                 yield return null; // Allow CanvasScaler, responsive UI, and Cinemachine to observe capture dimensions.
                 yield return null;
                 yield return new WaitForSecondsRealtime(.35f); // A responsive redraw can start its own card entrance animation.
-                beforeCapture?.Invoke();
+                Canvas.ForceUpdateCanvases();
+                if (beforeCapture != null) beforeCapture();
+                else
+                {
+                    // Build labels at the actual capture viewport, as a player
+                    // launched at these dimensions does. A temporary target can
+                    // otherwise retain the Editor GameView's mobile font floor.
+                    var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
+                    var redraw = app == null ? null : typeof(FantasyCardsApp).GetField("redraw",
+                        System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(app) as Action;
+                    redraw?.Invoke();
+                }
                 Canvas.ForceUpdateCanvases();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
                 Assert.That(UnityEngine.Rendering.RenderPipeline.SupportsRenderRequest(camera, request), Is.True,

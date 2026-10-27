@@ -176,10 +176,8 @@ namespace FantasyCards.Presentation
         private void ShowDetail(CardDefinition card, Action back)
         {
             redraw = () => ShowDetail(card, back); Clear(); Backdrop(true);
-            var portraitFrame = Panel(root, .025f, .06f, .515f, .945f, new Color(.045f, .041f, .025f));
-            Frame(portraitFrame, RarityColor(card.rarity), 2);
-            PrintedImage(portraitFrame, card, .025f, .025f, .975f, .975f);
-            Ornament(portraitFrame, new Color(.64f, .49f, .26f));
+            var portraitFrame = ArcanaCardFace(root, card, .025f, .06f, .515f, .945f, ArcanaCardMode.Detail);
+            portraitFrame.gameObject.name = "Detailed remaster card " + card.id;
             Text(root, CardGradeSummary(card) + "\n" + CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · 덱 " + card.deckLimit + "장까지", .55f, .82f, .965f, .94f, 26, RarityColor(card.rarity));
             ReadableText(root, card.name, .545f, .68f, .965f, .825f, Compact ? 43 : 53, ivory);
             ReadableText(root, "Lv " + card.level + "\n" + CardCatalog.CostText(card), .55f, .565f, .96f, .675f, 27, gold);
@@ -250,14 +248,22 @@ namespace FantasyCards.Presentation
         }
         private static Color RarityColor(CardRarity rarity)
         {
-            switch ((int)rarity)
+            // A new consistent remaster palette. Original printed frames also
+            // varied by element/edition; those source pixels remain untouched.
+            switch (rarity)
             {
-                case 0: case 1: return new Color(.74f, .80f, .87f);
-                case 2: return new Color(.45f, .83f, .68f);
-                case 3: return new Color(.46f, .74f, 1f);
-                case 4: case 5: return new Color(.76f, .61f, 1f);
-                case 6: case 7: return new Color(1f, .64f, .78f);
-                default: return new Color(1f, .84f, .48f);
+                case CardRarity.Free: return new Color(.64f, .71f, .81f);
+                case CardRarity.Common: return new Color(.82f, .71f, .51f);
+                case CardRarity.Uncommon: return new Color(.40f, .85f, .55f);
+                case CardRarity.Rare: return new Color(.35f, .64f, 1f);
+                case CardRarity.Special: return new Color(.70f, .51f, .98f);
+                case CardRarity.Upgrade: return new Color(.30f, .80f, .96f);
+                case CardRarity.Unique: return new Color(1f, .76f, .29f);
+                case CardRarity.Event: return new Color(.30f, .92f, .77f);
+                case CardRarity.Legend: return new Color(.95f, .43f, .90f);
+                case CardRarity.Icajen: return new Color(.78f, .89f, 1f);
+                case CardRarity.Secret: return new Color(1f, .36f, .45f);
+                default: return new Color(1f, .89f, .48f);
             }
         }
     }

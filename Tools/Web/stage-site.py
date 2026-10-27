@@ -110,7 +110,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
 parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/WebPlaytest")
 parser.add_argument("--require-browser-reports", action="store_true")
-parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail"), default="modern",
+parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana"), default="modern",
                     help="FC fidelity uses new FC checks and explicitly preserves the verified Gospel bytes")
 args = parser.parse_args()
 release = contract(args.release_profile)
@@ -135,6 +135,9 @@ for game, slug in GAMES.items():
     if (build.get("Revision") != GAME_REVISIONS[game] or build.get("Content") != CONTENT_VERSIONS[game]
             or build.get("Target") != "WebGL" or build.get("Errors") != "0"):
         raise SystemExit(f"Current remaster Web build required: {game}")
+    if args.release_profile == "arcana" and game == "PathOfDawn":
+        subprocess.run(["python3", str(ROOT / "Tools/Validation/verify-resource-isolation.py"),
+                        "--ledger", str(player / "LegacyResourceExclusions.json")], check=True)
     reports = []
     if args.require_browser_reports:
         for profile in REQUIRED_PROFILES[game]:

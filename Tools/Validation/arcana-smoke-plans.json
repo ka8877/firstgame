@@ -1,0 +1,1056 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-authored-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "temple-idle",
+      "hero-rear-close",
+      "hero-front-close",
+      "status",
+      "hero-walk",
+      "hero-run",
+      "gate-reading",
+      "saved-temple",
+      "continued-temple",
+      "npc-topics",
+      "npc-study-scripture"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 글꼴과 간결한 현대적 UI, 예수님의 길 제목·새 여정·이어하기·설정이 실제 3D 장면 위에서 읽힌다."
+      },
+      {
+        "type": "audio",
+        "label": "before-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33359375,
+          0.8430555555555556
+        ],
+        "label": "설정 첫 사용자 입력",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "after-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13984375,
+          0.5277777777777778
+        ],
+        "label": "음악 끄기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "muted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13984375,
+          0.5277777777777778
+        ],
+        "label": "음악 켜기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "unmuted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.18203125,
+          0.9111111111111111
+        ],
+        "label": "설정 돌아가기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2328125,
+          0.6194444444444445
+        ],
+        "label": "새 여정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 탄생 구절",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "성전으로",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-idle",
+        "expected": "실제65본 스키닝 소년 예수님이 성전 뜰에 있다. 느슨한 남성 튜닉의 평평한 상체, 주름·머리와 입체 석재/나무 소품이 보이고 첫 목표와 성경 참조가 읽힌다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.55,
+          0.43
+        ],
+        "deltaY": -360,
+        "label": "마우스 휠 줌인",
+        "profile": "desktop",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.3472222222222222
+        ],
+        "label": "화면 + 줌인",
+        "profile": "mobile-landscape",
+        "repeat": 3,
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-rear-close",
+        "expected": "실제 새 관절 인물의 뒤쪽 머리·정수리·목·린넨 의상이 가까운 카메라에서 보인다. 머리 표면에 빈 정수리/뒤집힌 면/분리된 두상이 없고 얼굴 그림을 붙인 이미지 이동이 아니다."
+      },
+      {
+        "type": "drag",
+        "start": [
+          0.36,
+          0.56
+        ],
+        "end": [
+          0.9,
+          0.5
+        ],
+        "durationMs": 1000,
+        "button": "right",
+        "repeat": 2,
+        "label": "실제 우클릭/시점패드 두 번으로 인물 정면까지 회전",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.3472222
+        ],
+        "repeat": 2,
+        "settleMs": 900,
+        "profile": "mobile-landscape",
+        "label": "실제+버튼으로 모바일 정면을 최소거리까지 확대"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-front-close",
+        "expected": "실제 카메라 회전·줌으로 소년 예수님 정면의 얼굴·머리/목·느슨한 남성 튜닉과 평평한 앞가슴을 확인한다. 피부가 찢어지거나 의상이 여성 가슴 형태로 부풀지 않는다."
+      },
+      {
+        "type": "drag",
+        "start": [
+          0.9,
+          0.5
+        ],
+        "end": [
+          0.36,
+          0.56
+        ],
+        "durationMs": 1000,
+        "button": "right",
+        "repeat": 2,
+        "label": "실제 시점 조작으로 원래 후방 방향 복귀",
+        "settleMs": 800
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.55,
+          0.43
+        ],
+        "deltaY": 360,
+        "label": "마우스 휠 줌아웃",
+        "profile": "desktop",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.4361111111111111
+        ],
+        "label": "화면 - 줌아웃",
+        "profile": "mobile-landscape",
+        "repeat": 3,
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.953125,
+          0.4361111
+        ],
+        "settleMs": 900,
+        "profile": "mobile-landscape",
+        "label": "모바일 걷기 전 넓은 시야 복원"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.63671875,
+          0.06666666666666667
+        ],
+        "label": "상태창",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "status",
+        "expected": "현대적인 상태창에 소년 예수님의 이름·12세·예루살렘·현재 목표·성경 참조·읽은 말씀 수가 읽히고 저장/돌아가기 버튼이 보인다. 근거 없는 전투 HP/레벨이나 미구현 장 진행을 보여주지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.84375,
+          0.8597222222222223
+        ],
+        "label": "상태창 닫기",
+        "settleMs": 1800
+      },
+      {
+        "type": "wait",
+        "ms": 1500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 0,
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-walk",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "desktop",
+        "label": "실제 W 걷기 원본"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 1100,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-walk",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "mobile-landscape",
+        "label": "실제 이동 패드 걷기 원본"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-walk",
+        "useCompositorBurst": true,
+        "expected": "일반 키보드/터치 이동으로 새 인물의 보행 관절과 옷이 실제 성전 공간에서 움직이는 원본 프레임이다. 메인 화면/손·발·머리·의상이 유지되며 실제 입력 전후 위치가 달라진다. 연속 원본 중 직접 본 한 시점만 기술한다."
+      },
+      {
+        "type": "wait",
+        "ms": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0953,
+          0.5806
+        ],
+        "profile": "mobile-landscape",
+        "label": "화면 달리기 ON",
+        "settleMs": 300
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "s"
+        ],
+        "ms": 0,
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-run",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "desktop",
+        "label": "실제 Shift+S 달리기 원본"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.8736
+        ],
+        "ms": 1100,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-run",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "mobile-landscape",
+        "label": "실제 이동 패드 달리기 원본"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-run",
+        "useCompositorBurst": true,
+        "expected": "실제 달리기 입력의 새 주인공과 성전 배경이 함께 보이는 원본이다. 걷기와 다른 다리·팔 자세를 관찰하며 골격/천/머리의 큰 파손이 없다. 실물 장치 FPS나 모든 프레임의 완전 무관통을 측정했다고 주장하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0953,
+          0.5806
+        ],
+        "profile": "mobile-landscape",
+        "label": "화면 달리기 OFF",
+        "settleMs": 300
+      },
+      {
+        "type": "wait",
+        "ms": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 3000,
+        "profile": "desktop",
+        "label": "첫 표식으로 이동"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 2200,
+        "profile": "mobile-landscape",
+        "label": "첫 표식으로 터치 이동"
+      },
+      {
+        "type": "key",
+        "key": "e",
+        "label": "첫 표식 대화",
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9047,
+          0.8833
+        ],
+        "label": "첫 표식 터치 대화",
+        "profile": "mobile-landscape",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-topics",
+        "expected": "가까이 다가가 실제 인물 성전 길잡이에게 말 걸면 주제 두 가지와 현재 여정 이어가기가 보인다. 원격 대화나 자동 목표 완료가 아니다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.604,
+          0.645
+        ],
+        "label": "성전 길잡이의 첫 학습 대화 주제",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-study-scripture",
+        "expected": "성전 길잡이와 주제별 실제 대화의 해설이 위에, 연결된 개역한글 성경 본문·장절·번역 표시가 아래에 보인다. 초반 여정은 곁가지 대화로 완료되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.636,
+          0.8972
+        ],
+        "label": "다른 주제로 돌아가기",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.604,
+          0.5361
+        ],
+        "label": "성전 길잡이와 현재 여정 이어가기",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "gate-reading",
+        "expected": "실제 표식 근접 상호작용으로 말씀 길잡이의 학습 안내·본문 요약 대화1/2와 관련 누가복음2:41–43 인용·출처가 아래에 보인다. 안내/요약과 성경 직접 인용이 구분되고 한글이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 대화",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "말씀을 따라 걷기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.840625,
+          0.06666666666666667
+        ],
+        "label": "현재 위치 저장",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-temple",
+        "expected": "실제 저장 안내와 현재 인물 위치·다음 목표·성경 참조를 이어하기 비교 기준으로 기록한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.93515625,
+          0.06666666666666667
+        ],
+        "label": "설정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81796875,
+          0.9111111111111111
+        ],
+        "label": "처음 화면",
+        "settleMs": 1800
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13203125,
+          0.7375
+        ],
+        "label": "이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-temple",
+        "expected": "전체 새로고침 뒤 이어하기가 saved-temple과 같은 인물 위치·실제 다음 목표·관련 성경 참조를 복원했다. 새 인물·HUD·카메라 조작이 유지된다."
+      },
+      {
+        "type": "audio",
+        "label": "after-continue-gesture"
+      }
+    ],
+    "scope": "Fresh natural actor/temple visual and input checks. Existing native action/navigation/scripture/save regressions run separately; no injected state or camera."
+  },
+  "FantasyCards": {
+    "revision": "fm-arcana-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "profile",
+      "continued-profile",
+      "lobby",
+      "seven-mono-decks",
+      "mono-decks-last-page",
+      "dual-decks",
+      "eighteen-decks-last-page",
+      "portrait-card-gallery",
+      "new-legend-card",
+      "original-printed-card",
+      "opening-portrait-hand",
+      "backfield-terrain",
+      "portrait-hand-and-field",
+      "terrain-detail",
+      "saved-battle",
+      "continued-battle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 투명 배경 애니메이션풍 성인 듀오가 성채·숲 파노라마 위에 자연스럽게 합성되고 리마스터 제목, 일곱 속성, 실제600종·9수록등급·18기본덱이 읽힌다. 우하단 실제 세로 카드에 원화 창과 등급색 프레임이 있고 인물이 찌그러지지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "title-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.505,
+          0.885
+        ],
+        "label": "타이틀 음악 설정",
+        "settleMs": 1000
+      },
+      {
+        "type": "audio",
+        "label": "after-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3446,
+          0.5035
+        ],
+        "label": "음악 끄기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "muted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3446,
+          0.5035
+        ],
+        "label": "음악 켜기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "unmuted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9175
+        ],
+        "label": "음악 설정 돌아가기",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.325,
+          0.885
+        ],
+        "label": "타이틀 프로필",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.55,
+          0.2975
+        ],
+        "label": "프로필 이름 입력",
+        "settleMs": 1000
+      },
+      {
+        "type": "key",
+        "key": "Control+a",
+        "label": "닉네임 전체 선택"
+      },
+      {
+        "type": "text",
+        "text": "SoulTester",
+        "label": "실제 키보드 닉네임 입력"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.855,
+          0.2975
+        ],
+        "label": "닉네임 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2445,
+          0.755
+        ],
+        "label": "두 번째 원작 카드 아바타 선택",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "profile",
+        "expected": "실제로 입력한 SoulTester 이름과 선택한 원작 카드 아바타, 로컬 대전·승패 기록이 보인다. 온라인 계정·가짜 재화가 아닌 이 기기 기록임을 안내한다."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.325,
+          0.885
+        ],
+        "label": "새로고침 후 프로필",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-profile",
+        "expected": "전체 새로고침 후에도 SoulTester 이름과 동일한 선택 아바타가 복원되고 로컬 안내가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.165,
+          0.9325
+        ],
+        "label": "프로필에서 타이틀로",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.7225
+        ],
+        "label": "게임 시작",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "새 애니메이션풍 듀오·로비 패널, 실제 AI 연습방 세 개, 도감·덱 편집·기본 덱·프로필 경로와 우측 실제 SoulTester 프로필·전적이 읽힌다.600종·단일7덱·듀얼11덱이며 가짜 온라인 인원·화폐가 없다."
+      },
+      {
+        "type": "audio",
+        "label": "lobby-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.645,
+          0.3615
+        ],
+        "label": "기본 덱 열기",
+        "settleMs": 1000
+      },
+      {
+        "type": "audio",
+        "label": "deck-role-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3225,
+          0.244
+        ],
+        "label": "단일 속성 덱 필터",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "seven-mono-decks",
+        "expected": "단일 속성 필터가 선택되고 7단일 덱 중 첫4개의 실제 덱명·원화·서로 다른 속성·50장 종류별 구성이 읽힌다. 페이지1/2이며 나머지 세 속성은 다음 페이지로 접근한다."
+      },
+      {
+        "type": "audio",
+        "label": "deck-same-role-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "단일 속성 덱 다음 페이지",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "mono-decks-last-page",
+        "expected": "단일 덱 페이지2/2에 나머지 세 속성의 실제 덱이 표시되어 단일 속성 일곱 덱을 모두 접근할 수 있다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5125,
+          0.244
+        ],
+        "label": "듀얼 속성 덱 필터",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "dual-decks",
+        "expected": "듀얼 필터가 선택되고 두 속성명이 함께 표시되는 실제 덱 타일과 11듀얼 덱의 페이지1/3이 읽힌다. 단일 속성과 혼동되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1325,
+          0.244
+        ],
+        "label": "모든 기본 덱 필터",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "18개 기본 덱 마지막 페이지로",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "18개 기본 덱 페이지3",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "18개 기본 덱 페이지4",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "18개 기본 덱 페이지5",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "eighteen-decks-last-page",
+        "expected": "전체 필터의5/5페이지에 실제 마지막 두 덱이 있고 현재 선택 덱 표시와 대기실·대전실 경로가 읽힌다. 총18개 덱을 네 개씩 탐색하며 50장 수치가 데이터와 연결된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.155,
+          0.963
+        ],
+        "label": "기본 덱에서 대기실",
+        "settleMs": 1000
+      },
+      {
+        "type": "audio",
+        "label": "lobby-return-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.305,
+          0.3615
+        ],
+        "label": "로비 카드 도감",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "portrait-card-gallery",
+        "expected": "도감은 실제600종이며 카드가5:7 세로 실루엣·둥근 등급 프레임·이름·소울 보석·비율을 유지한 원화 창·비용·수치 영역으로 구성된다. 전체 인쇄 이미지를 정사각형에 압축한 화면이 아니며 작은 글자가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.25,
+          0.201
+        ],
+        "label": "카드 이름 검색 입력",
+        "settleMs": 1000
+      },
+      {
+        "type": "text",
+        "text": "제압의길",
+        "label": "실제 레전드 카드 이름 검색"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.599,
+          0.201
+        ],
+        "label": "카드 검색 실행",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "label": "레전드 카드 상세",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "new-legend-card",
+        "expected": "실제 레전드 장비 제압의길의 세로 리마스터 카드, 분홍보라 등급 프레임·명칭·원화 창·비용·장착 수치와 오른쪽 전체 규칙이 읽힌다. 원작 원화를 다시 그린 것으로 표시하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.885,
+          0.87
+        ],
+        "label": "원본 인쇄 카드 보기",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "original-printed-card",
+        "expected": "동일한 제압의길 원본 인쇄 전체가 원본 세로 비율로 표시되고 새 리마스터 카드와 별도임을 알 수 있다. 원작 이미지의 이름·프레임·수치 영역을 임의로 잘라 없애지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9585
+        ],
+        "label": "능력 설명으로 돌아가기",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "카드 상세에서 도감",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9,
+          0.071
+        ],
+        "label": "도감에서 대기실",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.39,
+          0.529
+        ],
+        "label": "첫 AI 연습방",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6825,
+          0.7575
+        ],
+        "label": "대전 시작",
+        "settleMs": 1600
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-portrait-hand",
+        "expected": "실제 셔플로 뽑은 시작 손패6장이 세로 카드·원화 창·실제 등급·소울 비용·AP/DP/HP 수식으로 표시되고 전체 교체와 시작 버튼이 읽힌다. 손패/RNG를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7925,
+          0.925
+        ],
+        "label": "시작 손패 확정",
+        "settleMs": 1600
+      },
+      {
+        "type": "drag",
+        "start": [
+          0.099,
+          0.82
+        ],
+        "end": [
+          0.4,
+          0.6025
+        ],
+        "durationMs": 750,
+        "label": "보이는 첫 손패를 실제 지형 줄로 드래그",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "backfield-terrain",
+        "expected": "일반 입력으로 지형 한 장 이상을 실제 전개한 화면이다. 손패 위 백필드에 해당 지형 원화와 실제 장수·소울·LP 변화가 보인다. 첫 카드가 지형이 아니면 원본 화면을 보고 일반 추가 클릭/드래그만 사용한다. 손패·RNG·저장을 주입하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "battle-original"
+      },
+      {
+        "type": "drag",
+        "start": [
+          0.225,
+          0.82
+        ],
+        "end": [
+          0.099,
+          0.455
+        ],
+        "durationMs": 750,
+        "label": "사용 가능한 실제 유닛을 아군 첫 전열로 드래그",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "portrait-hand-and-field",
+        "expected": "실제로 사용 가능한 유닛을 전열에 배치한 뒤 손패와 전장의 카드가 모두 세로 프레임·올바른 원화 비율·실제 등급색으로 보인다. 필드 이름/등급과 현재AP·DP·HP 캡션이 읽히고5전열·10지형 공간이 유지된다. 첫 시도 카드가 불가능하면 일반 추가 입력으로 가능한 카드를 고른다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.197,
+          0.6025
+        ],
+        "label": "전개한 첫 백필드 지형 상세",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "terrain-detail",
+        "expected": "실제 전개한 백필드 지형을 클릭하여 동일 원작 카드의 세로 리마스터 카드·이름·LP·색소울/총소울 생산 정보를 열었다. 다른 손패 카드를 대신 표시하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "지형 상세에서 전장 복귀",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "기록 / 메뉴",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33,
+          0.51
+        ],
+        "label": "전장 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.705
+        ],
+        "label": "전투로",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-battle",
+        "expected": "저장한 실제 백필드·전장 유닛·손패·소울·LP·덱·단계를 이어하기 비교 기준으로 기록한다. 만료된 저장 알림 자체를 요구하지 않는다."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.435,
+          0.7225
+        ],
+        "label": "저장한 전장 이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-battle",
+        "expected": "전체 새로고침 후 이어하기가 saved-battle의 실제 지형·유닛·손패·덱·LP·소울·현재 단계를 복원했다. 프로필과 원작 음악·클릭/드래그 조작을 유지한다."
+      },
+      {
+        "type": "audio",
+        "label": "continued-original"
+      }
+    ],
+    "scope": "Fresh Arcana title/duo/lobby/profile,600-card portrait/grade/original-print identity,7mono+11dual/18deck paging, lobby→deck→lobby restart and same-role redraw PCM, real hand/field/terrain drag and save persistence. Native tests separately cover real rule/playback identity. Extra ordinary inputs only when a random hand requires them; no state/RNG injection."
+  }
+}

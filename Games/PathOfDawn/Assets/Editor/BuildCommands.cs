@@ -18,6 +18,7 @@ namespace FirstGame.Editor
 
         static void Build(BuildTarget target, string profile, string executable)
         {
+            LegacyResourceIsolation.RecoverInterrupted();
             ProjectSetup.Ensure();
             if (!BuildPipeline.IsBuildTargetSupported(BuildPipeline.GetBuildTargetGroup(target), target))
                 throw new BuildFailedException("Install the Unity module for " + target + ".");
@@ -25,6 +26,8 @@ namespace FirstGame.Editor
             var previousPipelinePath = AssetDatabase.GetAssetPath(GraphicsSettings.defaultRenderPipeline);
             var previousQualityPipelinePath = AssetDatabase.GetAssetPath(QualitySettings.renderPipeline);
             int previousTextureLimit = QualitySettings.globalTextureMipmapLimit;
+            LegacyResourceIsolation.Scope excludedResources = null;
+            string buildEvidencePath = null;
             try
             {
                 var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/Settings/" + (target == BuildTarget.WebGL ? "Web" : "Desktop") + "URP.asset");
@@ -40,23 +43,35 @@ namespace FirstGame.Editor
                 if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");
                 string output = Path.Combine(root, "PathOfDawn", profile);
                 Directory.CreateDirectory(output);
+                excludedResources = LegacyResourceIsolation.Begin(profile);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                     scenes = new[] { "Assets/Scenes/Boot.unity" }, target = target,
                     locationPathName = string.IsNullOrEmpty(executable) ? output : Path.Combine(output, executable),
                     options = BuildOptions.StrictMode
                 });
-                File.WriteAllText(Path.Combine(output, "BuildEvidence.txt"),
-                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-natural-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
+                buildEvidencePath = Path.Combine(output, "BuildEvidence.txt");
+                File.WriteAllText(buildEvidencePath,
+                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-authored-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
+                    "\nLegacyResourceExclusions: " + excludedResources.EvidencePath + "\nExcludedLegacyAssets: " + excludedResources.ExcludedAssets +
                     "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }
             finally
             {
-                GraphicsSettings.defaultRenderPipeline = LoadPreviousPipeline(previousPipelinePath);
-                QualitySettings.renderPipeline = LoadPreviousPipeline(previousQualityPipelinePath);
-                QualitySettings.globalTextureMipmapLimit = previousTextureLimit; AssetDatabase.SaveAssets();
+                try
+                {
+                    excludedResources?.Dispose();
+                    if (excludedResources != null && buildEvidencePath != null && File.Exists(buildEvidencePath))
+                        File.AppendAllText(buildEvidencePath, "LegacyResourcesRestored: true\n");
+                }
+                finally
+                {
+                    GraphicsSettings.defaultRenderPipeline = LoadPreviousPipeline(previousPipelinePath);
+                    QualitySettings.renderPipeline = LoadPreviousPipeline(previousQualityPipelinePath);
+                    QualitySettings.globalTextureMipmapLimit = previousTextureLimit; AssetDatabase.SaveAssets();
+                }
             }
         }
 

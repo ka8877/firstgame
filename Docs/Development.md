@@ -1,6 +1,6 @@
 # 개발과 실행
 
-현재 개정은 판타지마스터즈 `fm-detail-2026-10-27`과 예수님의 길 `gospel-natural-2026-10-27`이다. 카드250종·9수록등급과 실제 지형 백필드·로컬 프로필, 자연스러운3D 인물·성전 배경을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 범위는 [DetailRemaster](DetailRemaster.md), 실제 새 실행·빌드·공개 검증은 [DetailValidation](DetailValidation.md)을 따른다. 이전 개정의 검증과 에셋은 이력으로 보존한다.
+현재 개정은 판타지마스터즈 `fm-arcana-2026-10-27`과 예수님의 길 `gospel-authored-2026-10-27`이다. 카드600종·7단일속성/11듀얼 기본 덱·세로 TCG 카드·새 서브컬처 UI, 실제 NPC 주제 대화와 정확한 본문·제작된 인물/환경을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 실제 새 실행·빌드·공개 검증은 [ArcanaValidation](ArcanaValidation.md)을 따른다. 이전 개정의 검증·자산은 이력으로 보존한다.
 
 ## 고정 도구
 
@@ -94,3 +94,5 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 현재 디자인판은 `Tools/Validation/modern-smoke-plans.json`과 `modern-public-plans.json`으로 실제 입력/원본 화면/로컬 음악 출력을 검사한다. `summarize-modern-release.py`로 현재 근거를 정리하며 이전 Remaster의 외부 음악/이전 모델 고정 검사를 현재 결과로 쓰지 않는다.
 
 현재 두 게임의 새 검증은 `Tools/Validation/detail-smoke-plans.json`과 `detail-public-plans.json`, 릴리스는 `--release-profile detail`과 `summarize-detail-release.py`를 사용한다. 원작 BGM 네 고정 로컬 파일과 기존 저장 슬롯은 유지한다. 이전 modern/fidelity 프로필은 해당 이력을 재현할 때만 선택한다.
+
+현재 릴리스 프로필은 `arcana`다. 고품질 Web 카드 텍스처 압축은 원본 PNG/GUID/종횡비를 보존한다. 이전 미사용 Resources의 빌드 중 임시 이동은 선행 복구 저널과 finally 복원·해시/GUID 검사를 따르며 비정상 종료 후 다음 에디터 시작에서 복구한다.

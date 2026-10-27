@@ -1,0 +1,426 @@
+{
+  "revision": "fm-arcana-2026-10-27",
+  "reviewedUtc": "2026-10-27T05:43:40.569863+00:00",
+  "method": "Direct visual inspection of all ten printed source PNGs in batches of two or three, compared with complete database rule text and operation mappings. Field numbers mean fixed one-based field slots; reservation slot remains independent. Timing/duration also retained from complete database fields.",
+  "cards": [
+    {
+      "sourceId": "11030232505",
+      "name": "스네이크스펠",
+      "sourceUrl": "https://fmlunatic.com/card/11030232505",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_11030232505.png",
+      "sha256": "334d654eba4af9dafb3c889f5b411dc410408338a1ad00d3de9c323f3f43134e",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적 필드 유닛 1,2는 HP-2, 아군 필드 유닛 1,2는 HP+2 [뱀의 마법사가 손을 뻗자 그의 손에서 마법의 뱀이 나타나서 꼼짝도 할 수 없게 우리를 동여매기 시작했다. 힘이 빠져나간다. 저 뱀이 우리의 힘을 빨아들이는 것 일까?]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적1·2전열 HP-2, 아군1·2전열 HP+2.",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "slots",
+            "stat": "hp",
+            "delta": -2,
+            "slots": [
+              1,
+              2
+            ]
+          },
+          {
+            "side": "ally",
+            "range": "slots",
+            "stat": "hp",
+            "delta": 2,
+            "slots": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceRuleExcerpt": "적 필드 유닛 1,2는 HP-2, 아군 필드 유닛 1,2는 HP+2",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "2042930008",
+      "name": "파이어월",
+      "sourceUrl": "https://fmlunatic.com/card/2042930008",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_2042930008.png",
+      "sha256": "b10385cfaa9c74952cb2a8415ddec612ede8d82a55db74c4d63fceb6af3eb76e",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "아군 유닛 3 DP+1 적군 유닛 3 HP-2 [늙은 마법사 한명쯤 쉽사리 잡을 것이라 생각했던 예상은 불길이 병사들을 모두 태워버릴 때 사라졌다.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "아군3전열 DP+1, 적3전열 HP-2.",
+        "operations": [
+          {
+            "side": "ally",
+            "range": "slots",
+            "stat": "dp",
+            "delta": 1,
+            "slots": [
+              3
+            ]
+          },
+          {
+            "side": "enemy",
+            "range": "slots",
+            "stat": "hp",
+            "delta": -2,
+            "slots": [
+              3
+            ]
+          }
+        ],
+        "sourceRuleExcerpt": "아군 유닛 3 DP+1 적군 유닛 3 HP-2",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "2042930019",
+      "name": "함정",
+      "sourceUrl": "https://fmlunatic.com/card/2042930019",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_2042930019.png",
+      "sha256": "b465a4029f7c12fffdeb1eba14290347ed490a2beda67990131d0c6cd4a74cc4",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적군 야수 능력 HP-3 그 외 적군 HP-1 [더 이상 앞으로 나갈 수가 없었다. 살아 움직이는 덫들이 가득한 지대가 펼쳐져 있었기 때문이다.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적 전체 HP-1. 야수 능력 적은 추가 HP-2(합계-3).",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "all",
+            "stat": "hp",
+            "delta": -1
+          },
+          {
+            "side": "enemy",
+            "range": "all",
+            "stat": "hp",
+            "delta": -2,
+            "requiredTrait": "beast"
+          }
+        ],
+        "sourceRuleExcerpt": "적군 야수 능력 HP-3 그 외 적군 HP-1",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "2071130077",
+      "name": "파이어실드",
+      "sourceUrl": "https://fmlunatic.com/card/2071130077",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_2071130077.png",
+      "sha256": "4e55a43b4c04c072e8e61e074477e7d62fb66b48673bd8d1d77562896e4e4ee2",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적 필드유닛 1, HP-2. 아군 필드유닛 1, DP+1 [녹슨 방패 하나를 뜨게 하더니 불길이 치솟게 만들어 칼을 빼는 병사에게 돌진시키기 시작했다.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적1전열 HP-2, 아군1전열 DP+1.",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "slots",
+            "stat": "hp",
+            "delta": -2,
+            "slots": [
+              1
+            ]
+          },
+          {
+            "side": "ally",
+            "range": "slots",
+            "stat": "dp",
+            "delta": 1,
+            "slots": [
+              1
+            ]
+          }
+        ],
+        "sourceRuleExcerpt": "적 필드유닛 1, HP-2. 아군 필드유닛 1, DP+1",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "2082130132",
+      "name": "적장목베기",
+      "sourceUrl": "https://fmlunatic.com/card/2082130132",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_2082130132.png",
+      "sha256": "d2da032e5ee5dac5b5f6ba5331d17d3d14f183c7831e457f135b42ed9f6f5b0e",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "아군 전체 유니트의 AP/DP/HP 를 +1 한다. [전투는 끝났다. 적장의 목이 높게 치켜올려질 때 적의 사기는 땅으로 곤두박질 쳤으며 곧 아군의 환호성이 하늘을 찌르기 시작했다.]",
+      "sourceTextExtra": "",
+      "turnType": 1,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "아군 전체 AP·DP·HP+1.",
+        "operations": [
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "ap",
+            "delta": 1
+          },
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "dp",
+            "delta": 1
+          },
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "hp",
+            "delta": 1
+          }
+        ],
+        "sourceRuleExcerpt": "아군 전체 유니트의 AP/DP/HP 를 +1 한다.",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 1,
+        "allowedTurns": "any",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "3031430191",
+      "name": "승리의함성",
+      "sourceUrl": "https://fmlunatic.com/card/3031430191",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_3031430191.png",
+      "sha256": "74e6c266f8f2b6e49176af2b3285b04d54ccd9684bbd334edc7ad7c3e0ac5331",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적군 유니트 전체 AP-1, 아군 유니트 전체 AP,HP+1 [힘의 주인이시여, 들어보십시오. 저들의 함성이 벌써 이곳까지 도착했습니다. 지시하신 모든 일이 성공하여 승리한 것입니다.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적 전체 AP-1, 아군 전체 AP·HP+1.",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "all",
+            "stat": "ap",
+            "delta": -1
+          },
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "ap",
+            "delta": 1
+          },
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "hp",
+            "delta": 1
+          }
+        ],
+        "sourceRuleExcerpt": "적군 유니트 전체 AP-1, 아군 유니트 전체 AP,HP+1",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "3050230245",
+      "name": "프로즌실드",
+      "sourceUrl": "https://fmlunatic.com/card/3050230245",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_3050230245.png",
+      "sha256": "48a0bd19c4814c3166dbfa97aa7d6478873f71c7ea0e86966f63d4813dfb1084",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "아군1 DP+2, 적군1,2 AP-1 [힘이 작용한다면 너를 지키면서도 너를 더욱 강하게 할 수 있는 것. 그러한 힘을 가질 수 있어야 할 것이다.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "아군1전열 DP+2, 적1·2전열 AP-1.",
+        "operations": [
+          {
+            "side": "ally",
+            "range": "slots",
+            "stat": "dp",
+            "delta": 2,
+            "slots": [
+              1
+            ]
+          },
+          {
+            "side": "enemy",
+            "range": "slots",
+            "stat": "ap",
+            "delta": -1,
+            "slots": [
+              1,
+              2
+            ]
+          }
+        ],
+        "sourceRuleExcerpt": "아군1 DP+2, 적군1,2 AP-1",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "3050230248",
+      "name": "황소힘겨루기",
+      "sourceUrl": "https://fmlunatic.com/card/3050230248",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_3050230248.png",
+      "sha256": "8a32f3e1c2a75e575dc3bc00d6b31f255033ebe81003f5a668cbcddc4b4388a2",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "아군 야수능력 유닛 전체의 AP와 HP가 1씩 증가한다. [오냐 덤벼라. 풀이나 배부르게 뜯어먹을 어린것이 힘이 철철 넘쳐나나보구다. 내 오늘 혼쭐을 내주마!]",
+      "sourceTextExtra": "",
+      "turnType": 2,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "아군 야수 능력 유닛 전체 AP·HP+1.",
+        "operations": [
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "ap",
+            "delta": 1,
+            "requiredTrait": "beast"
+          },
+          {
+            "side": "ally",
+            "range": "all",
+            "stat": "hp",
+            "delta": 1,
+            "requiredTrait": "beast"
+          }
+        ],
+        "sourceRuleExcerpt": "아군 야수능력 유닛 전체의 AP와 HP가 1씩 증가한다.",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 2,
+        "allowedTurns": "attack-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "3052330253",
+      "name": "도깨비불",
+      "sourceUrl": "https://fmlunatic.com/card/3052330253",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_3052330253.png",
+      "sha256": "99caf1748f559aa808de736284056f28678e57dac6c430ada51e32eade0b9680",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적군 유니트 1의 HP를 4 감소시킨다. [음산한 밤길에 괴기스런 소리를 내며 머리 위로 날아오는 도깨비불을 보니 머리카락이 곤두서고 소름이 끼치지 않겠나.]",
+      "sourceTextExtra": "",
+      "turnType": 2,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적1전열 HP-4.",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "slots",
+            "stat": "hp",
+            "delta": -4,
+            "slots": [
+              1
+            ]
+          }
+        ],
+        "sourceRuleExcerpt": "적군 유니트 1의 HP를 4 감소시킨다.",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 2,
+        "allowedTurns": "attack-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    },
+    {
+      "sourceId": "3062730294",
+      "name": "개미지옥",
+      "sourceUrl": "https://fmlunatic.com/card/3062730294",
+      "texture": "Games/FantasyCards/Assets/Resources/Art/ClassicCards/fm_3062730294.png",
+      "sha256": "fe1420b0c4eac0f6c4a6dc363a399d20a1136ce3ae5e549e6c30ea961907f2e5",
+      "printRulesMatchFullDatabaseText": true,
+      "sourceText": "적군 유닛 전체 AP -1 HP -2 [저곳에 빠져서 다시 올라올 수는 없지. 보통 구덩이 처럼 보이지만 저 끝에 지옥으로 향하는 입이 있네.]",
+      "sourceTextExtra": "",
+      "turnType": 3,
+      "durationType": 1,
+      "duration": 1,
+      "implementedEffect": {
+        "kind": "statOperations",
+        "description": "적 전체 AP-1·HP-2.",
+        "operations": [
+          {
+            "side": "enemy",
+            "range": "all",
+            "stat": "ap",
+            "delta": -1
+          },
+          {
+            "side": "enemy",
+            "range": "all",
+            "stat": "hp",
+            "delta": -2
+          }
+        ],
+        "sourceRuleExcerpt": "적군 유닛 전체 AP -1 HP -2",
+        "targeting": "Explicit field slots or whole-side capability-filtered scope; no manual-target simplification.",
+        "hpDeltaNote": "Temporary combat HP statistic change, not conventional capped healing.",
+        "turnTypeCode": 3,
+        "allowedTurns": "defense-only",
+        "durationTypeCode": 1,
+        "duration": 1
+      }
+    }
+  ]
+}

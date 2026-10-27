@@ -1,0 +1,43 @@
+Gospel authored actors and courtyard — gospel-authored-2026-10-27
+
+The anatomical heads, head/eye UVs, skin/hair source maps and retained
+GospelRig 65-bone/seven-take locomotion use the previously documented CC0
+MakeHuman and Quaternius sources. Their untouched source files, licenses,
+download records and previous asset revisions remain in:
+  Tools/Art/GospelNatural/SOURCE-NOTICE.txt
+  Tools/Art/Gospel3D/SOURCE-NOTICE.txt
+
+This revision replaces the old muscle-shaped clothing with a separately
+constructed continuous loose tunic, narrow shoulder drape, cloth-seated waist
+rope and analytic garment skin weights. No original pectoral mesh surface is
+copied into the new tunic. The boy has a neutral flat chest and approximately
+0.369 m cloth shoulder width at the current 1.45 m character height. Adult and
+female body/head resources remain distinct; Joseph and the supporting Temple
+teacher have separately adapted adult faces, cropped hair and materials.
+These are artistic depictions, not recovered historical likenesses.
+
+The subtle new cloth normal map comes from Poly Haven Rough Linen:
+https://polyhaven.com/a/rough_linen
+https://polyhaven.com/license
+colormass (Photography), Rico Cilliers (Processing).
+The source is CC0. Exact original URLs, MD5 and SHA-256 are recorded in
+linen-source-manifest.json. All three original 1K JPG maps remain unchanged
+in Source/rough_linen. Only the OpenGL normal map is used at runtime, at
+strength 0.28; the existing cream/blue linen albedo is retained. The blue
+source diffuse is not painted into the robe. This is a material assignment,
+not a retouched or generated source photograph.
+
+The new source-textured trees, stone ring and ceramic vessels use selected
+Poly Haven CC0 models. Their original downloaded files, authors, API source
+records, licenses and hashes are retained in source-manifest.json and Source.
+The compact LOD/scan derivations, exact runtime maps and source attributions
+are documented in Tools/Art/GospelAuthoredProps/SOURCE-NOTICE.txt and its
+README, material-spec and derivation-manifest. The broadleaf shade tree and
+repurposed stone water basin are illustrative scene assets; no identified
+historical flora, archaeological reconstruction or recovered Temple facility
+is claimed.
+
+Existing actor .meta GUIDs, GospelRig transform paths, seven animation takes,
+Scripture content IDs and save versions are retained. Blender reimport and
+asset renders are distinct from Unity/browser execution and physical-device
+performance evidence. Original sources/history are not removed by this work.

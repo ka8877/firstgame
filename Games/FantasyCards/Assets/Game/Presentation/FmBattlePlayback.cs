@@ -124,8 +124,8 @@ namespace FantasyCards.Presentation
             if (battleClashContext != null)
             {
                 // The 2017 original moves the pair into a central duel. These are visual copies only.
-                Panel(layer, .025f, .688f, .805f, .896f, new Color(.01f, .025f, .02f, .73f));
-                Panel(layer, .025f, .418f, .805f, .625f, new Color(.01f, .025f, .02f, .73f));
+                Panel(layer, .025f, .706f, .805f, .912f, new Color(.01f, .025f, .02f, .73f));
+                Panel(layer, .025f, .442f, .805f, .648f, new Color(.01f, .025f, .02f, .73f));
                 var copies = new Dictionary<int, RectTransform>();
                 AddClashCard(layer, battleClashContext.sourcePlayer, battleClashContext.sourceInstanceId, copies);
                 AddClashCard(layer, battleClashContext.targetPlayer, battleClashContext.targetInstanceId, copies);
@@ -252,12 +252,12 @@ namespace FantasyCards.Presentation
         private Vector2 BackfieldCardCenter(int owner, int index)
         {
             float slot = .81f / Mathf.Max(1, BattleDisplayState.rules.terrainLimit);
-            return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3585f : .9485f);
+            return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3975f : .957f);
         }
-        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .792f : .5215f);
+        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .809f : .545f);
         private static Vector2 DeckCenter(int owner) => new Vector2(.90f, owner == 1 ? .49f : .42f);
         private static Vector2 GraveyardCenter(int owner) => new Vector2(.90f, owner == 1 ? .43f : .37f);
-        private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .792f : .5215f);
+        private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .809f : .545f);
         private void AddClashCard(Transform parent, int owner, int instanceId, Dictionary<int, RectTransform> copies)
         {
             if (owner < 0 || owner > 1 || instanceId < 0 || copies.ContainsKey(instanceId)) return;
@@ -265,16 +265,11 @@ namespace FantasyCards.Presentation
             // No opponent hand or unrevealed reserved spell is ever materialized here.
             if (unit == null) return;
             var definition = CardCatalog.Get(unit.definitionId); var point = ClashCenter(owner);
-            var card = Panel(parent, point.x - .083f, point.y - .12f, point.x + .083f, point.y + .12f, new Color(.035f, .055f, .04f));
+            var card = ArcanaCardFace(parent, definition, point.x - .083f, point.y - .12f, point.x + .083f, point.y + .12f,
+                ArcanaCardMode.Duel, false, unit);
             card.gameObject.name = "Central duel card " + instanceId;
-            var texture = Resources.Load<Texture2D>(definition.artResource);
-            if (texture != null) FittedImage(card, texture, new Rect(0, 0, 1, 1), .02f, .02f, .98f, .98f, "Original central duel card");
-            var title = Panel(card, .02f, .835f, .98f, .99f, new Color(.045f, .055f, .035f, .96f));
-            Text(title, definition.name, .035f, .02f, .965f, .98f, 25, ivory, TextAlignmentOptions.Center);
-            var stats = Panel(card, .02f, .015f, .98f, .175f, new Color(.025f, .04f, .03f, .98f));
-            Text(stats, CardCatalog.UnitAttack(unit) + " / " + CardCatalog.UnitDefense(unit) + " / " + Math.Max(0, CardCatalog.UnitHealth(unit)),
-                .03f, .03f, .97f, .97f, 27, gold, TextAlignmentOptions.Center);
-            Frame(card, gold, 2); copies[instanceId] = card;
+            copies[instanceId] = card;
+
         }
         private RectTransform DrawClashCoinTray(Transform parent, BattleEvent item)
         {
@@ -304,10 +299,13 @@ namespace FantasyCards.Presentation
         { Anchor((RectTransform)effect.transform, point.x - .078f, point.y - .12f, point.x + .078f, point.y + .12f); }
         private RectTransform BattleMovingCard(Transform parent, string definition, Vector2 point, bool hidden)
         {
-            var card = Panel(parent, point.x - .024f, point.y - .05f, point.x + .024f, point.y + .05f, ink);
-            var texture = Resources.Load<Texture2D>(hidden || string.IsNullOrEmpty(definition) ? "Art/ClassicCards/Decor/card-back" : CardCatalog.Get(definition).artResource);
-            if (texture != null) FittedImage(card, texture, new Rect(0, 0, 1, 1), .03f, .03f, .97f, .97f, hidden ? "Hidden opponent card" : "Moving original card");
-            Frame(card, gold, 1); return card;
+            if (!hidden && !string.IsNullOrEmpty(definition))
+                return ArcanaCardFace(parent, CardCatalog.Get(definition), point.x - .029f, point.y - .065f,
+                    point.x + .029f, point.y + .065f, ArcanaCardMode.Field);
+            var card = Panel(parent, point.x - .029f, point.y - .065f, point.x + .029f, point.y + .065f, Color.clear);
+            ArcanaHiddenBack(card, 0, 0, 1, 1);
+            return card;
+
         }
         private Color EventColor(BattleEvent item)
         {

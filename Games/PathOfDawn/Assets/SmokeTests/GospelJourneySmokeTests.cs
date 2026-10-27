@@ -104,9 +104,113 @@ namespace PathOfDawn.SmokeTests
         }
 
         [UnityTest]
+        public IEnumerator AuthoredNearbyNpcTopicsPreserveProgressAndLinkExactScripture()
+        {
+            yield return BeginTemple();
+            Assert.That(App.World.GetComponentsInChildren<GospelNpcAnchor>().Select(n=>n.NpcId),
+                Is.EquivalentTo(GospelNpcCatalog.All.Select(n=>n.Id)),"The physical world must contain all five actual conversation NPCs.");
+            int objective=App.Journey.ObjectiveIndex;
+            var collected=App.Journey.CollectedReadings.ToArray();
+            var guide=GospelNpcCatalog.Get("temple-guide");
+            yield return WalkTo(new Vector3(1.2f,0,-5));
+            yield return Press(Key.E);
+            Assert.That(App.IsNpcConversation,Is.True,"Nearby real E input must open the NPC topic menu.");
+            Assert.That(App.ActiveNpcId,Is.EqualTo(guide.Id));
+            Assert.That(App.ActiveNpcTopic,Is.Null);
+            Assert.That(App.Journey.Phase,Is.EqualTo(GospelPhase.Exploring));
+            Assert.That(App.Player.InputEnabled,Is.False,"The topic menu must own movement input.");
+            Assert.That(SmokeUi.HasText(guide.Greeting),Is.True);
+            foreach(var topic in guide.Topics)Assert.That(SmokeUi.FindButton(topic.Title),Is.Not.Null);
+            yield return SmokeUi.Capture("PathOfDawn","authored-npc-topics",1280,720);
+            yield return ReadNpcStudyTopic(guide.Id,guide.Topics[0].Id,true);
+            Assert.That(App.Journey.ObjectiveIndex,Is.EqualTo(objective));
+            Assert.That(App.Journey.CollectedReadings,Is.EqualTo(collected));
+
+            // Take the clear east approach using actual keyboard movement. Do
+            // not teleport the actor or inject a later Scripture state to visit Mary.
+            yield return WalkTo(new Vector3(5.5f,0,-3));
+            var mary=App.World.GetComponentsInChildren<GospelNpcAnchor>().Single(n=>n.NpcId=="mary");
+            yield return WalkTo(mary.transform.position);
+            for(int repeat=0;repeat<2;repeat++)
+            {
+                yield return Press(Key.E);
+                Assert.That(App.ActiveNpcId,Is.EqualTo("mary"));
+                Assert.That(SmokeUi.FindButton("여정 이어가기 · "+App.Journey.CurrentObjective.Title),Is.Null,
+                    "Mary must not skip the current gate objective through a side conversation.");
+                yield return ReadNpcStudyTopic("mary","found",repeat==0);
+                Assert.That(App.Journey.Phase,Is.EqualTo(GospelPhase.Exploring));
+                Assert.That(App.Journey.ObjectiveIndex,Is.EqualTo(objective));
+                Assert.That(App.Journey.CollectedReadings,Is.EqualTo(collected),
+                    "Repeated optional NPC topics must not award future readings or advance the ordered journey.");
+            }
+
+            yield return WalkTo(new Vector3(5.5f,0,-3));
+            yield return WalkTo(new Vector3(1.2f,0,-5));
+            yield return Press(Key.E);
+            Assert.That(App.ActiveNpcId,Is.EqualTo("temple-guide"));
+            SmokeUi.Click("여정 이어가기 · "+App.Journey.CurrentObjective.Title);yield return null;
+            Assert.That(App.IsNpcConversation,Is.False);
+            Assert.That(App.Journey.Phase,Is.EqualTo(GospelPhase.Reading));
+            Assert.That(App.Journey.CurrentReading.Id,Is.EqualTo("temple-passover"));
+            SmokeUi.Click("다음 대화");yield return null;
+            Assert.That(App.Journey.DialogueIndex,Is.EqualTo(1),"The real story button must advance one dialogue turn.");
+            var saved=ReadSave();
+            Assert.That(saved.phase,Is.EqualTo(GospelPhase.Reading));
+            Assert.That(saved.dialoguePage,Is.EqualTo(1),"The actual dialogue callback must save its current turn.");
+            Assert.That(saved.objectiveIndex,Is.EqualTo(objective));
+            Assert.That(saved.collectedReadings,Is.EqualTo(collected));
+            yield return SmokeUi.LoadBoot();
+            SmokeUi.Click("이어하기");yield return null;
+            Assert.That(App.Journey.Phase,Is.EqualTo(GospelPhase.Reading));
+            Assert.That(App.Journey.DialogueIndex,Is.EqualTo(saved.dialoguePage));
+            Assert.That(App.Journey.ObjectiveIndex,Is.EqualTo(objective));
+            Assert.That(App.Journey.CollectedReadings,Is.EqualTo(collected));
+            Assert.That(App.IsNpcConversation,Is.False,"Repeatable NPC UI state must not leak into a restored story reading.");
+            Assert.That(App.Player.InputEnabled,Is.False);
+            yield return SmokeUi.Capture("PathOfDawn","authored-npc-main-story-continued",1280,720);
+            yield return ConsumeCurrentDialogue();
+            Assert.That(App.Journey.ObjectiveIndex,Is.EqualTo(objective+1));
+            Assert.That(App.Journey.CollectedReadings.Count,Is.EqualTo(collected.Length+1));
+            Assert.That(backend.Read("preserved-observer-slot"),Is.EqualTo("old-observer-save-bytes"));
+            TestContext.WriteLine("GOSPEL_AUTHORED_NPC_OK actualNearbyE=true optionalMaryRepeated=2 exactLinkedScripture=true savedDialogueTurn=1");
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        IEnumerator ReadNpcStudyTopic(string npcId,string topicId,bool capture)
+        {
+            var topic=GospelNpcCatalog.GetTopic(npcId,topicId);
+            var reading=GospelCatalog.GetReading(topic.ReadingId);
+            var turns=GospelNpcCatalog.ForTopic(npcId,topicId);
+            SmokeUi.Click(topic.Title);yield return null;
+            for(int turn=0;turn<turns.Count;turn++)
+            {
+                Assert.That(App.ActiveNpcId,Is.EqualTo(npcId));
+                Assert.That(App.ActiveNpcTopic,Is.EqualTo(topicId));
+                Assert.That(App.ActiveNpcTurn,Is.EqualTo(turn));
+                Assert.That(SmokeUi.HasText(turns[turn].Speaker),Is.True);
+                Assert.That(SmokeUi.HasText(turns[turn].Label),Is.True,"Direct quotation and study explanation must remain visibly distinguished.");
+                Assert.That(SmokeUi.HasText(turns[turn].Text),Is.True);
+                var scripture=UnityEngine.Object.FindObjectsByType<ScrollRect>(FindObjectsSortMode.None)
+                    .Single(s=>s.gameObject.activeInHierarchy&&s.name=="NPC 성경 본문");
+                var dialogue=UnityEngine.Object.FindObjectsByType<ScrollRect>(FindObjectsSortMode.None)
+                    .Single(s=>s.gameObject.activeInHierarchy&&s.name=="NPC 대화 내용");
+                Assert.That(scripture.GetComponentsInChildren<TMPro.TMP_Text>().Any(t=>t.text==reading.Text),Is.True,
+                    "The linked lower Scripture panel must contain the complete exact canonical passage, not a paraphrase.");
+                Assert.That(scripture.transform.position.y,Is.LessThan(dialogue.transform.position.y),
+                    "The actual Scripture viewport must be below the current NPC dialogue.");
+                Assert.That(SmokeUi.HasText(reading.Reference+" / "+reading.Translation),Is.True);
+                if(capture&&turn==1)
+                    yield return SmokeUi.Capture("PathOfDawn","authored-npc-study-scripture-"+npcId,1280,720);
+                SmokeUi.Click(turn+1<turns.Count?"다음 대화":"대화 마치기");yield return null;
+            }
+            Assert.That(App.IsNpcConversation,Is.False);
+            Assert.That(App.Player.InputEnabled,Is.True);
+        }
+
+        [UnityTest]
         public IEnumerator BirthScripturePhysicalWalkingAndContinueRestoreTheRealJourney()
         {
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-01-title", 1280, 720);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-01-title", 1280, 720);
             yield return BeginTemple();
             Assert.That(UnityEngine.Object.FindFirstObjectByType<DawnIllustratedStage>(), Is.Null,
                 "Current exploration must not render the retired living-picture stage.");
@@ -132,7 +236,7 @@ namespace PathOfDawn.SmokeTests
             var actualEyes = actualSkins.First(s => s.name == "Eyes");
             Assert.That(actualEyes.sharedMaterial.GetTexture("_BaseMap"), Is.Not.Null,
                 "The visible protagonist must use the actual eye albedo texture.");
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-02-temple-idle", 1280, 720);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-02-temple-idle", 1280, 720);
             var beforePosition = motor.transform.position;
             var beforeBones = skin.bones.Select(bone => bone.localRotation).ToArray();
             yield return Hold(new[] { Key.W }, .85f);
@@ -141,7 +245,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(motor.MeasuredSpeed, Is.GreaterThan(.1f));
             Assert.That(skin.bones.Where((bone, index) => Quaternion.Angle(beforeBones[index], bone.localRotation) > .5f).Count(),
                 Is.GreaterThanOrEqualTo(2), "Walk playback must articulate the rig instead of translating a still picture.");
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-03-temple-walking", 1280, 720);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-03-temple-walking", 1280, 720);
             InputSystem.QueueStateEvent(keyboard, new KeyboardState());
             yield return new WaitForSecondsRealtime(.35f);
             Assert.That(motor.PlanarVelocity.magnitude, Is.LessThan(.06f), "Releasing movement must stop the physical motor.");
@@ -165,13 +269,30 @@ namespace PathOfDawn.SmokeTests
                     "Real wheel input must bring the camera closer to the articulated character.");
                 Assert.That(initialZoom-motor.CameraDistance,Is.InRange(.5f,.8f),
                     "One normalized wheel tick must produce a perceptible camera change, not a legacy pixel-scale movement.");
-                yield return SmokeUi.Capture("PathOfDawn", "gospel-03b-protagonist-front", 1280, 720);
+                yield return SmokeUi.Capture("PathOfDawn", "authored-03b-protagonist-front", 1280, 720);
                 float frontDistance = motor.CameraDistance;
+                motor.SetCameraDistance(initialZoom);
+                yield return new WaitForSecondsRealtime(.7f);
+                yield return SmokeUi.Capture("PathOfDawn","authored-critical-front",1280,720);
+                CaptureCharacterPose(motor,"front");
+                float actorYaw=motor.transform.eulerAngles.y;
+                InputSystem.QueueStateEvent(pointer,new MouseState{buttons=2,delta=new Vector2(-90f/.13f,0)});yield return null;
+                InputSystem.QueueStateEvent(pointer,new MouseState());
+                yield return new WaitForSecondsRealtime(.7f);
+                var sideToCamera=App.World.View.transform.position-motor.transform.position;sideToCamera.y=0;
+                Assert.That(Mathf.Abs(Vector3.Dot(sideToCamera.normalized,motor.transform.forward)),Is.LessThan(.3f),
+                    "The actual side capture must show the tunic chest silhouette in profile.");
+                Assert.That(Mathf.Abs(Mathf.DeltaAngle(actorYaw,motor.transform.eulerAngles.y)),Is.LessThan(1),
+                    "Front and side evidence must use the same stationary authored character.");
+                yield return SmokeUi.Capture("PathOfDawn","authored-critical-side",1280,720);
+                CaptureCharacterPose(motor,"side");
+                InputSystem.QueueStateEvent(pointer,new MouseState{buttons=2,delta=new Vector2(90f/.13f,0)});yield return null;
+                InputSystem.QueueStateEvent(pointer,new MouseState());
+                yield return new WaitForSecondsRealtime(.7f);
                 motor.SetCameraDistance(GospelThirdPersonMotor.MinimumCameraDistance);
                 yield return new WaitForSecondsRealtime(.7f);
-                yield return SmokeUi.Capture("PathOfDawn", "gospel-natural-front-close", 1280, 720);
+                yield return SmokeUi.Capture("PathOfDawn", "authored-natural-front-close", 1280, 720);
                 motor.SetCameraDistance(frontDistance);
-                CaptureCharacterPose(motor);
                 InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.down});yield return null;
                 InputSystem.QueueStateEvent(pointer,new MouseState());yield return null;
                 Assert.That(motor.CameraDistance,Is.EqualTo(initialZoom).Within(.01f),
@@ -197,7 +318,7 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(motor.CameraDistance,Is.EqualTo(distanceBeforeModalWheel).Within(.001f),
                     "Reading and status modals must own pointer input instead of zooming the world behind them.");
                 InputSystem.QueueStateEvent(pointer,new MouseState());
-                yield return SmokeUi.Capture("PathOfDawn","gospel-modern-character-status",1280,720);
+                yield return SmokeUi.Capture("PathOfDawn","authored-modern-character-status",1280,720);
                 SmokeUi.Click("돌아가기");yield return null;
                 SmokeUi.Click("-");yield return null;
                 Assert.That(motor.CameraDistance,Is.GreaterThan(distanceBeforeModalWheel),"The visible zoom-out button must change camera distance.");
@@ -206,7 +327,7 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(App.Journey.CurrentObjective.Id,Is.EqualTo(objectiveBeforeStatus),"Camera and status controls must not advance Scripture progress.");
             }
             finally { InputSystem.RemoveDevice(pointer); }
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-04-temple-mobile", 844, 390);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-04-temple-mobile", 844, 390);
             SmokeUi.Click("저장"); yield return null;
             var saved = ReadSave();
             var savedPosition = new Vector3(saved.playerX, saved.playerY, saved.playerZ);
@@ -221,7 +342,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(App.Journey.CollectedReadings, Is.EqualTo(saved.collectedReadings));
             Assert.That(Vector3.Distance(App.Player.transform.position, savedPosition), Is.LessThan(.05f));
             Assert.That(backend.Read("preserved-observer-slot"), Is.EqualTo("old-observer-save-bytes"));
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-05-continued-temple", 1280, 720);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-05-continued-temple", 1280, 720);
             LogAssert.NoUnexpectedReceived();
         }
 
@@ -235,12 +356,22 @@ namespace PathOfDawn.SmokeTests
             for (int i = 0; i < 4; i++)
             {
                 string objectiveId = App.Journey.CurrentObjective.Id;
+                if(objectiveId=="nazareth-gate")
+                    // The direct diagonal from the parents crosses the real
+                    // central basin. Walk around its open east side instead.
+                    yield return WalkTo(new Vector3(6.5f,0,-5));
                 yield return WalkTo(App.World.LandmarkPosition(objectiveId));
                 yield return Press(Key.E);
+                if(App.IsNpcConversation)
+                {
+                    Assert.That(GospelNpcCatalog.CanGuide(App.ActiveNpcId,objectiveId),Is.True,
+                        "The NPC reached at this Scripture landmark must offer its current ordered journey.");
+                    SmokeUi.Click("여정 이어가기 · "+App.Journey.CurrentObjective.Title);yield return null;
+                }
                 Assert.That(App.Journey.Phase, Is.EqualTo(GospelPhase.Reading), "Nearby E interaction must open the actual landmark Scripture.");
                 Assert.That(SmokeUi.HasText(App.Journey.CurrentReading.Reference), Is.True);
                 Assert.That(App.Player.InputEnabled, Is.False, "Movement must pause during Scripture reading.");
-                yield return SmokeUi.Capture("PathOfDawn", "gospel-reading-" + objectiveId, 1280, 720);
+                yield return SmokeUi.Capture("PathOfDawn", "authored-reading-" + objectiveId, 1280, 720);
                 yield return ConsumeCurrentDialogue();
                 Assert.That(App.Journey.ObjectiveIndex, Is.EqualTo(i + 1));
             }
@@ -248,7 +379,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(App.Journey.CollectedReadings.Count, Is.EqualTo(7));
             SmokeUi.Click("저장"); yield return null;
             Assert.That(ReadSave().phase, Is.EqualTo(GospelPhase.Completed));
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-06-first-journey-completed", 1280, 720);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-06-first-journey-completed", 1280, 720);
             LogAssert.NoUnexpectedReceived();
         }
 
@@ -257,8 +388,15 @@ namespace PathOfDawn.SmokeTests
         {
             yield return BeginTemple();
             var motor = App.Player;
+            CaptureSprintMotorProbe("acquired",motor);
+            Assert.That(motor!=null,Is.True,"Sprint fixture must acquire the live physical motor after the birth readings.");
             yield return Grounded(motor);
+            CaptureSprintMotorProbe("before-walk-hold",motor);
             yield return Hold(new[] { Key.W }, .75f);
+            CaptureSprintMotorProbe("after-walk-hold",motor);
+            Assert.That(motor!=null,Is.True,"The acquired physical motor disappeared during actual W input; inspect Arcana/SprintMotorProbe.");
+            Assert.That(App,Is.Not.Null,"The Gospel entry component disappeared during actual W input.");
+            Assert.That(App.Player,Is.SameAs(motor),"The active world replaced the sprint actor during actual W input; inspect Arcana/SprintMotorProbe.");
             float walkingSpeed = motor.MeasuredSpeed;
             Assert.That(walkingSpeed, Is.InRange(1.1f,2.1f), "Normal real input must produce a controlled walk.");
             yield return Hold(new[] { Key.W, Key.LeftShift }, .8f);
@@ -266,7 +404,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(runningSpeed, Is.GreaterThan(3), "Shift must change the actual capsule speed to a run.");
             Assert.That(runningSpeed, Is.GreaterThan(walkingSpeed + 1));
             Assert.That(motor.State, Is.EqualTo(GospelLocomotionState.Running));
-            yield return SmokeUi.Capture("PathOfDawn", "gospel-remaster-running", 1280,720,settleSeconds:.08f);
+            yield return SmokeUi.Capture("PathOfDawn", "authored-remaster-running", 1280,720,settleSeconds:.08f);
             InputSystem.QueueStateEvent(keyboard,new KeyboardState());
             yield return SmokeUi.WaitUntil(() => motor.PlanarVelocity.magnitude < .06f,5,"Sprint release must brake to a stable idle.");
             yield return Grounded(motor);
@@ -289,11 +427,11 @@ namespace PathOfDawn.SmokeTests
             Assert.That(motor.IsGrounded,Is.True,"The jump must land instead of leaving the player suspended.");
             Assert.That(Mathf.Abs(motor.transform.position.y - floor),Is.LessThan(.08f));
             Assert.That(sawJointMotion,Is.True,"The airborne character must articulate its rig.");
-            yield return SmokeUi.Capture("PathOfDawn","gospel-remaster-landed",1280,720,settleSeconds:.1f);
+            yield return SmokeUi.Capture("PathOfDawn","authored-remaster-landed",1280,720,settleSeconds:.1f);
             // This is the same public input path used by the touch jump button.
             motor.JumpPressed();
             yield return SmokeUi.WaitUntil(() => !motor.IsGrounded && motor.transform.position.y > floor + .15f,5,"Touch jump must use the same physical jump as Space.");
-            yield return SmokeUi.Capture("PathOfDawn","gospel-remaster-jumping",1280,720,settleSeconds:0);
+            yield return SmokeUi.Capture("PathOfDawn","authored-remaster-jumping",1280,720,settleSeconds:0);
             yield return Grounded(motor);
             var stopped = motor.transform.position;
             yield return new WaitForSecondsRealtime(.35f);
@@ -386,7 +524,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(motor.Actions.State,Is.EqualTo(GospelActionState.Cooldown));
             Assert.That(motor.TryAction(),Is.False,"The completed action must have a cooldown.");
             yield return SmokeUi.WaitUntil(() => motor.CanPerformAction,5,"The practice action must recover for another input.");
-            yield return SmokeUi.Capture("PathOfDawn","gospel-remaster-practice-area",1280,720,settleSeconds:.05f);
+            yield return SmokeUi.Capture("PathOfDawn","authored-remaster-practice-area",1280,720,settleSeconds:.05f);
             Assert.That(App.Journey.Phase,Is.EqualTo(GospelPhase.Exploring));
             Assert.That(App.Journey.ObjectiveIndex,Is.EqualTo(objective));
             Assert.That(App.Journey.CollectedReadings.Count,Is.EqualTo(readings),"Optional practice must not rewrite Scripture progress.");
@@ -460,7 +598,7 @@ namespace PathOfDawn.SmokeTests
             Assert.That(turns,Is.GreaterThanOrEqualTo(1),"Every Scripture scene must have a readable turn.");
             if (App.Journey.Phase == GospelPhase.Reading)
                 Assert.That(turns,Is.GreaterThan(1),"The temple conversations must offer several readable turns.");
-            for (int turn = 0; turn < turns; turn++)
+            for (int turn = App.Journey.DialogueIndex; turn < turns; turn++)
             {
                 Assert.That(App.Journey.DialogueIndex,Is.EqualTo(turn));
                 Assert.That(SmokeUi.HasText(App.Journey.CurrentDialogue.Speaker),Is.True,"The current speaker must be visible.");
@@ -485,6 +623,34 @@ namespace PathOfDawn.SmokeTests
         static float PlanarDistance(Vector3 first,Vector3 second) => Vector2.Distance(new Vector2(first.x,first.z),new Vector2(second.x,second.z));
 
         [Serializable]
+        sealed class SprintMotorProbe
+        {
+            public string stage,utc,activeScene,phase;
+            public int appId,worldId,localMotorId,activeMotorId,controllerId;
+            public bool playing,localMotorPresent,activeMotorPresent,inputEnabled,grounded,keyboardAdded;
+            public Vector3 position;
+        }
+
+        void CaptureSprintMotorProbe(string stage,GospelThirdPersonMotor motor)
+        {
+            var app=App;var world=app!=null?app.World:null;var activeMotor=app!=null?app.Player:null;
+            var probe=new SprintMotorProbe {
+                stage=stage,utc=DateTime.UtcNow.ToString("o"),
+                activeScene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,
+                phase=app!=null&&app.Journey!=null?app.Journey.Phase.ToString():"missing",
+                appId=app!=null?app.GetInstanceID():0,worldId=world!=null?world.GetInstanceID():0,
+                localMotorId=motor!=null?motor.GetInstanceID():0,activeMotorId=activeMotor!=null?activeMotor.GetInstanceID():0,
+                controllerId=motor!=null&&motor.Controller!=null?motor.Controller.GetInstanceID():0,
+                playing=Application.isPlaying,localMotorPresent=motor!=null,activeMotorPresent=activeMotor!=null,
+                inputEnabled=motor!=null&&motor.InputEnabled,grounded=motor!=null&&motor.IsGrounded,
+                keyboardAdded=keyboard!=null&&keyboard.added,position=motor!=null?motor.transform.position:Vector3.zero
+            };
+            var directory=System.IO.Path.GetFullPath("../../Artifacts/Validation/Arcana/SprintMotorProbe");
+            System.IO.Directory.CreateDirectory(directory);
+            System.IO.File.WriteAllText(System.IO.Path.Combine(directory,"authored-sprint-"+stage+".json"),JsonUtility.ToJson(probe,true));
+        }
+
+        [Serializable]
         sealed class CharacterPose
         {
             public Vector3 prefabEuler, actorForward, cameraPosition, headPosition, eyesPosition;
@@ -493,7 +659,7 @@ namespace PathOfDawn.SmokeTests
             public string[] renderers;
         }
 
-        void CaptureCharacterPose(GospelThirdPersonMotor motor)
+        void CaptureCharacterPose(GospelThirdPersonMotor motor,string view)
         {
             var skins = motor.GetComponentsInChildren<SkinnedMeshRenderer>();
             var head = skins.SelectMany(s => s.bones).FirstOrDefault(b => b != null && b.name.Equals("head", StringComparison.OrdinalIgnoreCase));
@@ -510,9 +676,9 @@ namespace PathOfDawn.SmokeTests
                 eyesForwardDot = Vector3.Dot(eyeDirection, motor.transform.forward),
                 renderers = skins.Select(s => s.name + " · " + string.Join(",", s.sharedMaterials.Select(m => m != null ? m.name : "missing"))).ToArray()
             };
-            var directory = System.IO.Path.GetFullPath("../../Artifacts/Validation/Revival");
+            var directory = System.IO.Path.GetFullPath("../../Artifacts/Validation/Arcana");
             System.IO.Directory.CreateDirectory(directory);
-            System.IO.File.WriteAllText(System.IO.Path.Combine(directory, "native-gospel-character-pose.json"), JsonUtility.ToJson(result, true));
+            System.IO.File.WriteAllText(System.IO.Path.Combine(directory, "authored-native-gospel-character-"+view+"-pose.json"), JsonUtility.ToJson(result, true));
         }
 
         IEnumerator Hold(Key[] keys, float seconds)

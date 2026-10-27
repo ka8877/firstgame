@@ -60,8 +60,14 @@ def texture_meta(path: Path) -> None:
     text = REFERENCE_META.read_text()
     text = re.sub(r"(?m)^guid: [0-9a-f]+$", "guid: " + stable_guid(path), text)
     text = text.replace("ignoreMipmapLimit: 0", "ignoreMipmapLimit: 1")
-    # No texture resize or compression: the source card is already small.
+    # Native stays uncompressed; WebASTC4x4 preserves odd source dimensions.
     text = text.replace("textureCompression: 1", "textureCompression: 0")
+    def web_override(match):
+        block = match.group(0)
+        for key, value in (("textureFormat", 48), ("textureCompression", 2), ("compressionQuality", 100), ("crunchedCompression", 0), ("overridden", 1)):
+            block = re.sub(r"(?m)^(    " + key + r":) [^\n]+$", lambda m: m.group(1) + " " + str(value), block)
+        return block
+    text = re.sub(r"(?ms)^  - serializedVersion: 4\n    buildTarget: WebGL\n.*?(?=^  spriteSheet:|^  - serializedVersion:|\Z)", web_override, text)
     meta.write_text("\n".join(line.rstrip() for line in text.splitlines()) + "\n")
 
 

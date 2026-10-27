@@ -157,7 +157,7 @@ namespace FantasyCards.Tests
             Assert.That(extra.Count(c => c.rarity == CardRarity.Unique), Is.EqualTo(1));
             Assert.That(extra.Count(c => c.rarity == CardRarity.Event), Is.EqualTo(13));
             Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(9));
-            Assert.That(DemoCatalog.StarterDecks.Select(d => d.id), Is.EqualTo(new[] { "forest", "knights", "tides", "stars", "fidelity" }));
+            Assert.That(DemoCatalog.StarterDecks.Take(5).Select(d => d.id), Is.EqualTo(new[] { "forest", "knights", "tides", "stars", "fidelity" }));
             var deck = DemoCatalog.GetDeck("fidelity"); DemoCatalog.ValidatePlayableDeck(deck.cards);
             Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Upgrade), Is.EqualTo(4));
             Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Unique), Is.EqualTo(2));
@@ -215,10 +215,10 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(250));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,28},{CardKind.Unit,180},{CardKind.Spell,15},{CardKind.Equipment,27} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(600));
+            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,450},{CardKind.Spell,25},{CardKind.Equipment,96} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
-            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(17)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(4)); }
+            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(50)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(element == Element.Forest ? 5 : 4)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }
             var deathKnight = CardCatalog.Get(ClassicFixtures.Id("듀라한"));
             Assert.That(new[] { deathKnight.level,deathKnight.coloredCost,deathKnight.genericCost,deathKnight.cost }, Is.EqualTo(new[] {4,2,2,4}));
@@ -235,6 +235,42 @@ namespace FantasyCards.Tests
             Assert.That(CardCatalog.UnitDefense(beast),Is.EqualTo(Math.Max(0,defense-1)));
             Assert.That(CardCatalog.MaximumHealth(beast),Is.EqualTo(health+3));
             Assert.That(gear.equipment,Is.Empty);BattleEngine.Validate(e.State);
+        }
+        [TestCase("스네이크스펠", "E0:Health:-2;A0:Health:2")]
+        [TestCase("파이어월", "A2:Defense:1;E2:Health:-2")]
+        [TestCase("함정", "E0:Health:-1;E2:Health:-1;E4:Health:-1;E0:Health:-2")]
+        [TestCase("파이어실드", "E0:Health:-2;A0:Defense:1")]
+        [TestCase("적장목베기", "A0:Attack:1;A2:Attack:1;A4:Attack:1;A0:Defense:1;A2:Defense:1;A4:Defense:1;A0:Health:1;A2:Health:1;A4:Health:1")]
+        [TestCase("승리의함성", "E0:Attack:-1;E2:Attack:-1;E4:Attack:-1;A0:Attack:1;A2:Attack:1;A4:Attack:1;A0:Health:1;A2:Health:1;A4:Health:1")]
+        [TestCase("프로즌실드", "A0:Defense:2;E0:Attack:-1")]
+        [TestCase("황소힘겨루기", "A0:Attack:1;A0:Health:1")]
+        [TestCase("도깨비불", "E0:Health:-4")]
+        [TestCase("개미지옥", "E0:Attack:-1;E2:Attack:-1;E4:Attack:-1;E0:Health:-2;E2:Health:-2;E4:Health:-2")]
+        public void ArcanaSpellsResolvePrintedSidesFixedSlotsAndCapabilityFilters(string name,string expected)
+        {
+            var e=ClassicFixtures.Battle(rules:new RuleSet{baseCoins=0});
+            var definition=CardCatalog.Get(ClassicFixtures.Id(name));
+            int actor=definition.playWindow==PlayWindow.DefenseOnly?1:0;
+            for(int player=0;player<2;player++)
+            {
+                ClassicFixtures.Unit(e,player,"크라켄",0); // beast, fixed slot1
+                ClassicFixtures.Unit(e,player,"농민",2); // gear, fixed slot3
+                ClassicFixtures.Unit(e,player,"타락천사",4); // magic, fixed slot5
+            }
+            ClassicFixtures.Souls(e,actor);
+            if(actor==1)Assert.True(e.CompletePreparation(0,out _));
+            var spell=ClassicFixtures.Hand(e,actor,name);
+            // Slot2 is empty: reserve there without changing the original
+            // numbered targets or renumbering the sparse occupied unit slots.
+            Assert.True(e.PlayInSlot(actor,spell.instanceId,1,-1,out var error),error);
+            if(actor==0)Assert.True(e.CompletePreparation(0,out error),error);
+            Assert.True(e.CompletePreparation(1,out error),error);
+            var changes=e.State.events.Where(ev=>ev.kind=="spell-target"&&ev.sourceDefinitionId==definition.id)
+                .Select(ev=>(ev.targetPlayer==actor?"A":"E")+ev.targetLane+":"+ev.stat+":"+ev.amount);
+            Assert.That(string.Join(";",changes),Is.EqualTo(expected));
+            Assert.That(e.State.players[actor].preparedSpells,Is.Empty);
+            Assert.That(e.State.players[actor].discard.Any(c=>c.instanceId==spell.instanceId),Is.True);
+            BattleEngine.Validate(e.State);
         }
         [Test] public void NewOriginalGearSpellFiltersCapabilitiesAndResetsAfterBattle()
         {

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 namespace PathOfDawn.Presentation
 {
     /// <summary>The new, Scripture-led journey. Legacy observer fiction remains separate and inactive.</summary>
-    public sealed class GospelJourneyApp : MonoBehaviour
+    public sealed partial class GospelJourneyApp : MonoBehaviour
     {
         public TMP_FontAsset KoreanFont;
         public GospelJourney Journey { get; private set; }
@@ -64,14 +64,16 @@ namespace PathOfDawn.Presentation
                 Player.TouchMove=movePad!=null?movePad.Value:Vector2.zero;
                 Player.TouchLook=lookPad!=null?lookPad.ConsumeLook()*.13f:Vector2.zero;
                 float meters=Vector3.Distance(Player.transform.position,World.LandmarkPosition(Journey.CurrentObjective.Id));
+                var nearbyNpc=FindNearbyNpc();
                 bool nearby=meters<InteractionRadius;
-                if(distance!=null)distance.text=nearby?"말씀을 읽을 수 있습니다":Mathf.CeilToInt(meters)+" m · 빛나는 표식으로";
-                if(prompt!=null)prompt.text=nearby?(TouchInterface?"대화 버튼 · ":"E · ")+Journey.CurrentObjective.Title:
+                if(distance!=null)distance.text=nearbyNpc!=null?nearbyNpc.DisplayName+" · 대화할 수 있습니다":nearby?"말씀을 읽을 수 있습니다":Mathf.CeilToInt(meters)+" m · 빛나는 표식으로";
+                if(prompt!=null)prompt.text=nearbyNpc!=null?(TouchInterface?"대화 버튼 · ":"E · ")+nearbyNpc.DisplayName+"에게 말 걸기":nearby?(TouchInterface?"대화 버튼 · ":"E · ")+Journey.CurrentObjective.Title:
                     Player.Actions.IsInTrainingArea?"자유 연습 구역 · F 동작 연습 · 성경 본문 외 조작":TouchInterface?"왼쪽 이동 · 오른쪽 회전 · + / - 줌":"WASD 이동 · Shift 달리기 · Space 점프 · 휠 줌 · I 상태";
-                if(interactionButton!=null)interactionButton.interactable=nearby;
+                if(interactionButton!=null){interactionButton.interactable=nearby||nearbyNpc!=null;interactionButton.GetComponentInChildren<TextMeshProUGUI>().text=nearbyNpc!=null?"대화 · "+nearbyNpc.DisplayName:"말씀 · E";}
                 if(jumpButton!=null)jumpButton.interactable=Player.CanJump;
                 if(actionButton!=null)actionButton.interactable=Player.CanPerformAction;
-                if(nearby&&Keyboard.current!=null&&Keyboard.current.eKey.wasPressedThisFrame)Interact();
+                if((nearby||nearbyNpc!=null)&&Keyboard.current!=null&&Keyboard.current.eKey.wasPressedThisFrame)Interact();
+                TryClickNpc();
                 autosaveTimer+=Time.deltaTime;if(autosaveTimer>18){Save(false);autosaveTimer=0;}
             }
             if(touchRoot!=null)touchRoot.SetActive(!modal&&Journey.Phase==GospelPhase.Exploring&&TouchInterface);
@@ -200,6 +202,7 @@ namespace PathOfDawn.Presentation
         }
         void ResumeJourney()
         {
+            ClearNpcConversation();
             if(Journey==null){ShowTitle();return;}
             if(Journey.Phase==GospelPhase.Prologue||Journey.Phase==GospelPhase.Reading){ShowReading(Journey.Phase==GospelPhase.Prologue);return;}
             if(Journey.IsComplete){ShowCompletion();return;}
@@ -251,6 +254,8 @@ namespace PathOfDawn.Presentation
         public void Interact()
         {
             if(Journey==null||Journey.Phase!=GospelPhase.Exploring||modal)return;
+            var npc=FindNearbyNpc();
+            if(npc!=null){OpenNpcConversation(npc.NpcId);return;}
             float meters=Vector3.Distance(Player.transform.position,World.LandmarkPosition(Journey.CurrentObjective.Id));
             if(meters>InteractionRadius){Toast("표식 가까이 걸어가 말씀을 읽어 보세요.");return;}
             if(Journey.TryInteract(Journey.CurrentObjective.Id,out var result)){Save(false);ShowReading(false);}else Toast(result);
