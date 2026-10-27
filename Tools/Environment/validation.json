@@ -1,7 +1,7 @@
 {
   "releaseProfile": "detail",
   "date": "2026-10-27",
-  "recordedUtc": "2026-10-27T04:54:05.590472+00:00",
+  "recordedUtc": "2026-10-27T05:07:00.192250+00:00",
   "dateTimezone": "Asia/Seoul",
   "gameRevisions": {
     "FantasyCards": "fm-detail-2026-10-27",
@@ -11,7 +11,7 @@
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommitAtSummary": "dcf1e8eb40b86e94e89a76872cbf10df1c6840ed",
+  "sourceCommitAtSummary": "464fc1a05390a2d7975ba122bde42cc286b5b011",
   "externalCore": {
     "passed": 108,
     "finishedUtc": "2026-10-27T02:31:18.6098891+00:00",
@@ -2996,7 +2996,131 @@
     }
   },
   "publication": {
-    "status": "pending",
-    "url": "https://ka8877.github.io/firstgame/"
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40452759933",
+    "sourceCommit": "464fc1a05390a2d7975ba122bde42cc286b5b011",
+    "verifiedFiles": 44,
+    "scope": "Every public file is byte-exact to locally tested runtime; public title/game launch sanity, not duplicated full gameplay.",
+    "file": "Artifacts/Validation/Detail/PublicPortal/report.json",
+    "sha256": "bdd1e8344c8b56b384a395cd45ca474e5af6f57a849c4b179c45a3f10c50fb3f"
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "checks": 33,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/title.png",
+          "sha256": "fb274f2abb3183d9969f9568ce81cc6d54d436a096d467c1aff4e81bde9e9e48",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            76.73350516981404,
+            67.95157833136088,
+            59.79603330499033
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:01:30.819263+00:00"
+        },
+        {
+          "name": "lobby",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/lobby.png",
+          "sha256": "c5e1c52845384ffc7c3b0525e10b191244cdbf13d2ab058511435b9577d07017",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            48.870637240883724,
+            44.51582541591487,
+            38.730060199169394
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:02:42.143435+00:00"
+        }
+      ],
+      "audioWindows": 2,
+      "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/report.json",
+      "sha256": "d7e8f262721b8c905d5df6e7394a7700078e4efa032fba21a029af78b05b9c82",
+      "rawStatus": "failed",
+      "adjudicatedPublicMediaRanges": 6,
+      "adjudication": {
+        "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/range-adjudication.json",
+        "sha256": "f30af5286289666f8b6d39346e3215d1da16c94742b9cc51e2c444af8e4eeef2"
+      }
+    },
+    "PathOfDawn": {
+      "checks": 19,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/title.png",
+          "sha256": "cb77c897c05af8182affd73985c62cc4ee181e37124c98658b807ac993aa9b45",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            77.51294085930553,
+            76.24234843941143,
+            69.76848622761999
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:04:03.535866+00:00"
+        },
+        {
+          "name": "temple-idle",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/temple-idle.png",
+          "sha256": "a3d262d96ed7a23c67d750f2102c7ee153182e51ebc76fbb6a64748aefec2486",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            61.09209311294285,
+            53.86366094704002,
+            46.17671356693635
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:05:36.345821+00:00"
+        }
+      ],
+      "audioWindows": 1,
+      "file": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "19d64bde6c2c043a0ee71f93978adcddaebb84934cc6689de61307aa6b12e3e7"
+    }
   }
 }
