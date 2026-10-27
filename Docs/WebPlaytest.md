@@ -15,7 +15,7 @@ python3 Tools/Web/publish-site.py --site Artifacts/RestorationWebPlaytest
 gh workflow run publish-web.yml --ref main
 ```
 
-실제 Pages 실행이 성공한 뒤 공개 파일의 현재 바이트와 랜딩 PC/모바일 원본을 확인하고, 두 게임의 `PublicMobile844` 실제 입력·저장·전체 새로고침·음악 검사를 별도로 마친다. 브라우저/Unity 검사는 동시에 실행하지 않는다.
+실제 Pages 실행이 성공한 뒤 공개 파일의 현재 바이트와 랜딩 PC/모바일 원본을 확인하고, 두 게임의 `PublicMobile844` 실제 입력·새 게임 진입·음악 검사를 별도로 마친다. 공개 검사는 실행 확인 범위이며 저장·전체 새로고침·이어하기는 동일 바이트의 현재 로컬 Desktop720/Mobile844 결과를 따른다. 브라우저/Unity 검사는 동시에 실행하지 않는다.
 
 ```bash
 python3 Tools/Validation/verify-public-portal.py --stage Artifacts/RestorationWebPlaytest --output Artifacts/Validation/Restoration/PublicPortal

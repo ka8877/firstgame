@@ -62,7 +62,7 @@ def evidence_files():
             for p in sorted(folder.rglob('*')):
                 if p.is_file() and p.suffix.lower() in {'.json','.png','.md','.txt','.sha256','.trx','.xml','.py','.js','.cjs','.controller'} and p.name not in {'deliverables.json'}:
                     result[str(p.relative_to(ROOT))]=p
-    for relative in ('Tools/Environment/validation.json','Docs/RestorationValidation.md','Tools/Validation/summarize-restoration-release.py','Tools/Validation/verify-restoration-gospel-followup.py','Tools/Validation/restoration-gospel-followup-plans.json','Tools/Validation/restoration-smoke-plans.json','Tools/Validation/restoration-mobile-plans.json','Tools/Validation/restoration-public-plans.json','Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js','Tools/Build/package-restoration.py'):
+    for relative in ('Tools/Environment/validation.json','Docs/RestorationValidation.md','Tools/Validation/summarize-restoration-release.py','Tools/Validation/verify-restoration-gospel-followup.py','Tools/Validation/verify-restoration-fm-public-ranges.py','Tools/Validation/restoration-gospel-followup-plans.json','Tools/Validation/restoration-smoke-plans.json','Tools/Validation/restoration-mobile-plans.json','Tools/Validation/restoration-public-plans.json','Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js','Tools/Build/package-restoration.py'):
         p=ROOT/relative
         if p.is_file():result[relative]=p
     for game in BASE.REVISIONS:

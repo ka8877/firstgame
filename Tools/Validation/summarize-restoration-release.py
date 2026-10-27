@@ -120,14 +120,19 @@ def normalized(files):return sorted(({k:row[k] for k in ('file','bytes','sha256'
 def browser(game,profile,files):
     p=OUT/profile/game/'report.json';v=read(p)
     qualification=None
+    public_media_qualification=None
     if game=='PathOfDawn' and profile=='Desktop720' and v.get('status')=='failed':
         spec=importlib.util.spec_from_file_location('restoration_summary_gospel_followup',ROOT/'Tools/Validation/verify-restoration-gospel-followup.py')
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         qualification=module.verify_record(p)
-    require(v.get('revision')==REVISIONS[game] and v.get('game')==game and v.get('suite')=='modern-real-input-v1' and (v.get('status')=='passed' or qualification),'Current passed browser report or exact qualified two-session Gospel evidence required: '+str(p))
-    require(v.get('checks') and all(c.get('passed') is True for c in v['checks']) and v.get('input'),'Actual browser checks/input missing')
+    if game=='FantasyCards' and profile=='PublicMobile844' and v.get('status')=='failed':
+        spec=importlib.util.spec_from_file_location('restoration_summary_fm_public_ranges',ROOT/'Tools/Validation/verify-restoration-fm-public-ranges.py')
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        public_media_qualification=module.verify_record(p)
+    require(v.get('revision')==REVISIONS[game] and v.get('game')==game and v.get('suite')=='modern-real-input-v1' and (v.get('status')=='passed' or qualification or public_media_qualification),'Current passed browser report or exact separately qualified evidence required: '+str(p))
+    require(v.get('checks') and (all(c.get('passed') is True for c in v['checks']) or public_media_qualification) and v.get('input'),'Actual browser checks/input missing')
     require(normalized(v['buildFingerprint']['files'])==normalized(files),'Browser runtime differs from current build')
-    review=qualification['visualReview'] if qualification else v.get('visualReview',{})
+    review=(qualification or public_media_qualification)['visualReview'] if (qualification or public_media_qualification) else v.get('visualReview',{})
     require(review.get('status')=='approved' and review.get('reviewer') and review.get('reviewedUtc') and normalized(review['runtimeFiles'])==normalized(files),'Current original screenshot review missing')
     expected=(844,390) if profile in ('Mobile844','PublicMobile844') else (1280,720)
     require(tuple(v['interactionViewport'][k] for k in ('width','height'))==expected,'Wrong current browser viewport')
@@ -165,6 +170,9 @@ def browser(game,profile,files):
     result={'checks':qualification['totalChecks'] if qualification else len(v['checks']),'reviewedOriginals':len(review['screenshots']),'pcmWindows':qualification['pcmWindows'] if qualification else len(v['audioEvidence']['windows']),**ref(p)}
     if qualification:
         result.update(rawStatus=v['status'],ordinarySessions=2,qualification=ref(p.parent/'followup-verification.json'),suffixReport=qualification['suffixReport'],scope=qualification['scope'])
+    if public_media_qualification:
+        result.update(rawStatus=v['status'],passedChecks=public_media_qualification['passedChecks'],ordinarySessions=1,
+                      qualification=ref(ROOT/public_media_qualification['qualificationFile']),scope=public_media_qualification['scope'])
     return result
 
 
