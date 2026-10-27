@@ -41,6 +41,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
 MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
+DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
     "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
     "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
@@ -380,6 +381,16 @@ class JourneySmoke:
         session.send("Page.startScreencast", {"format": "png", "maxWidth": self.page.viewport_size["width"],
                      "maxHeight": self.page.viewport_size["height"], "everyNthFrame": 1})
         try:
+            # A software GPU can take longer than a short movement hold to
+            # deliver the first compositor frame. Wait passively for the first
+            # ACK before ordinary input, rather than missing the entire pose.
+            warmup_deadline = time.monotonic() + 10
+            while not raw and time.monotonic() < warmup_deadline:
+                self.page.wait_for_timeout(100)
+            if not raw:
+                raise AssertionError("Compositor did not deliver an initial original frame before input")
+            burst["firstOriginalBeforeInputUtc"] = raw[0]["receivedUtc"]
+            burst["inputStartedUtc"] = now()
             self.input({k:v for k,v in action.items() if k not in ("captureCompositorBurst", "captureLabel", "captureMs")})
             capture_ms = action.get("captureMs", 2600)
             if not isinstance(capture_ms, int) or not 100 <= capture_ms <= 12000:
@@ -458,14 +469,17 @@ class JourneySmoke:
                 finally:
                     session.detach()
             else:
-                self.page.mouse.move(*start); self.page.mouse.down()
+                button = action.get("button", "left")
+                if button not in ("left", "right", "middle"):
+                    raise ValueError("Unsupported ordinary mouse button")
+                self.page.mouse.move(*start); self.page.mouse.down(button=button)
                 try:
                     for index in range(1, steps + 1):
                         p = index / steps
                         self.page.mouse.move(start[0] + (end[0] - start[0]) * p, start[1] + (end[1] - start[1]) * p)
                         self.page.wait_for_timeout(duration / steps)
                 finally:
-                    self.page.mouse.up()
+                    self.page.mouse.up(button=button)
         elif kind == "hold":
             keys = action["keys"]
             for key in keys:
@@ -568,7 +582,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] == 'fm-fidelity-2026-10-27':
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27'):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -579,7 +593,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] == 'fm-fidelity-2026-10-27') and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27')) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -757,7 +771,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity"), default="modern")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail"), default="modern")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -779,7 +793,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = FIDELITY_REVISIONS if args.release_profile == "fm-fidelity" else MODERN_REVISIONS
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:

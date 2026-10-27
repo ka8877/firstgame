@@ -1,5 +1,7 @@
 # 웹 체험판과 리마스터 배포
 
+현재 요청은 **두 게임 모두**를 바꾸는 `fm-detail-2026-10-27` / `gospel-natural-2026-10-27`이다. 판마는250종·9수록등급·5기본덱과 새 타이틀·로컬 프로필·실제 지형 백필드, 성경 여정은 실제 관절 인물과3D 성전의 새 외형을 포함한다. 카드 음악은 게임에 포함한 원작 공개 음원 발췌/전투 녹음으로 재생하며 외부 플레이어를 일반 흐름에 사용하지 않는다. 공개 상태는 [DetailValidation](DetailValidation.md)과 `Artifacts/Validation/Detail`의 새 원본·음악·저장·파일 해시로 확인한다. 아래 이전 remaster 명령·설명은 당시 기록이며, 현재 도구는 `--release-profile detail`과 `summarize-detail-release.py`를 사용한다.
+
 공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)이다. 현재 소스 개정은 `fm-remaster-2026-10-26`과 `gospel-remaster-2026-10-26`이며, 해당 주소의 실제 배포 상태는 [Validation](Validation.md)의 공개 파일 해시와 현재 실행 보고서로 확인한다. 소스를 수정했거나 로컬 빌드가 통과한 것을 공개판의 통과로 표시하지 않는다.
 
 판타지마스터즈는 원작 그림·규칙을 유지한 161종 카드와 네 가지 50장 기본 덱, 여섯 손패, 양측 준비와 자동 공방을 제공한다. 로그인 화면에서 게임 시작 → 연습방 → 대전실 → 덱 선택 → START로 들어간다. 도감/덱 편집에서 검색·필터·정렬과 원본 카드 전체 보기를 사용한다. 출처·카드 추가·저장 호환은 [CardRemaster](CardRemaster.md), 화면은 [FmRemasterUI](FmRemasterUI.md)를 따른다.

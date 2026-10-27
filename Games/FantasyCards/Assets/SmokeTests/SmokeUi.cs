@@ -31,8 +31,8 @@ namespace FantasyCards.SmokeTests
         public static IDisposable PreserveDemoPreferences() => new DemoPreferenceScope();
         sealed class DemoPreferenceScope : IDisposable
         {
-            readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck" };
-            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2" };
+            readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck", "FC.profile.name", "FC.profile.avatar" };
+            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2", "FC.profile.wins", "FC.profile.losses", "FC.profile.draws" };
             readonly Dictionary<string, string> strings = new Dictionary<string, string>();
             readonly Dictionary<string, int> ints = new Dictionary<string, int>();
             public DemoPreferenceScope()

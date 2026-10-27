@@ -1,0 +1,83 @@
+{
+  "revision": "gospel-natural-2026-10-27",
+  "checkedUtc": "2026-10-27T03:39:38.770758+00:00",
+  "file": "Games/PathOfDawn/Assets/Game/Presentation/GospelTempleWorld.cs",
+  "sha256": "d63e2d9ca2b637acd57d36b8cdf79fa1e717c1690a38a150c309dab4d631ffe4",
+  "ownership": "World source only; actors,Core,Scripture,UI,Editor untouched by world task.",
+  "geometrySources": "Original runtime parametric authored geometry; existing ambientCG maps unchanged.",
+  "layoutPreserved": {
+    "landmarks": {
+      "temple-gate": [
+        0,
+        0,
+        -5.5
+      ],
+      "teachers": [
+        -5,
+        0,
+        2
+      ],
+      "parents": [
+        5,
+        0,
+        3
+      ],
+      "nazareth-gate": [
+        0,
+        0,
+        -9
+      ]
+    },
+    "playerStart": [
+      0,
+      0.08,
+      -9
+    ],
+    "trainingCenter": [
+      -8,
+      0,
+      -8
+    ],
+    "courtyardBoundary": [
+      30,
+      30
+    ]
+  },
+  "newGeometry": {
+    "sidePorticoArches": 12,
+    "voussoirsPerArch": 12,
+    "wingWindowArches": 4,
+    "sideColumns": 14,
+    "sanctuaryColumns": 6,
+    "treeCrownGroups": 44
+  },
+  "runtimeValidation": "pending sole release owner; compile report is not Unity/runtime evidence",
+  "targetedOverlayFix": {
+    "reference": "Artifacts/Screenshots/PathOfDawn/gospel-02-temple-idle.png",
+    "referenceSha256": "8fc85724468f888286ac5692fae0dfe64c124ab99252689bf34d27725310ef98",
+    "changes": [
+      "Separate vertical clearances for base paving,raisedpath,thinborders and waterripples.",
+      "Shallowdecorations stopcasting shadows; groundstillreceives actor/architectureshadows.",
+      "Batchkeypreservesmaterial,shadowCastingMode,receiveShadows.",
+      "Onlywaterglintmaterial disablesreceivingshadow; sunbiasunchanged."
+    ],
+    "runtimeValidation": "pending one fresh Unity wide capture by release owner"
+  },
+  "finalFineGeometryRemoval": {
+    "reference": "Artifacts/Screenshots/PathOfDawn/gospel-02-temple-idle.png",
+    "referenceSha256": "95f06994ffe6a8234d8bab6f58759566181fd7febc7142e6801e9d789343d419",
+    "observed": "Paving improved, but subpixel torus geometry still stippled even after shadowcasting was disabled.",
+    "removed": {
+      "fineWaterReflectionRipples": 7,
+      "poolPavingInlays": 3
+    },
+    "retained": [
+      "dressedstonebasin",
+      "plainquietwater",
+      "waypointgroundring",
+      "trainingring",
+      "allarchitecture/shadows"
+    ],
+    "runtimeValidation": "pending one fresh Unity wide capture by release owner"
+  }
+}

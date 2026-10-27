@@ -1,0 +1,67 @@
+{
+  "status": "reviewed",
+  "reviewer": "/root/gospel_actor_natural",
+  "reviewedUtc": "2026-10-27T03:13:26.931868+00:00",
+  "scope": "Actual exported FBX asset art. Not Unity/browser validation, physical-device performance or user aesthetic approval.",
+  "currentFitScreenshots": [
+    {
+      "path": "Tools/Art/GospelNatural/ExportedPreviews/YoungJesus-rear-fbx.png",
+      "sha256": "33ca2330ba5948fa6ceaf0513026319072de229e4efb7b3a333759e7c2a69b4b",
+      "sourceFbxSha256": "db5b3bbb0c3b016ee1b437e0cfb408e18bc5634d08c4cd84bc63ecba0e3940d6",
+      "view": "rear",
+      "take": "Idle",
+      "frame": 1,
+      "captureKind": "Actual exported FBX asset Blender render; notUnity"
+    },
+    {
+      "path": "Tools/Art/GospelNatural/ExportedPreviews/AdultJesus-face-fbx.png",
+      "sha256": "af8db4ac4880b84b29ac564e3fedb10330778dfeeee7b9cb8efd34eee0d1c2fb",
+      "sourceFbxSha256": "8e37428b2f47869e2435f2c62fd73725c44c49c4a452cf82d7c636d796307f26",
+      "view": "face",
+      "take": "Idle",
+      "frame": 1,
+      "captureKind": "Actual exported FBX asset Blender render; notUnity"
+    },
+    {
+      "path": "Tools/Art/GospelNatural/ExportedPreviews/Mary-face-fbx.png",
+      "sha256": "91a2f1a665c4005127bf389d91b6f268b6ae8c656008adf67385bf46461834aa",
+      "sourceFbxSha256": "379e0eb3fe8d243e20fe1e399d5ec8f29d570f46f06b60dd3ff45b23a7b4338e",
+      "view": "face",
+      "take": "Idle",
+      "frame": 1,
+      "captureKind": "Actual exported FBX asset Blender render; notUnity"
+    }
+  ],
+  "observed": [
+    "Final Young rear: the linen poke-through patch on the blue upper-back mantle is covered; complete hair/scalp retained.",
+    "Final Adult face: the erroneous opaque beard mouth plate is gone; actual lips remain visible among short beard strands.",
+    "Final Mary face: raised/widened skinned veil clears the new crown, leaving the face open.",
+    "Before the small fit corrections, actual Young face/three-quarter/front/rear/Walk/Run/JumpAir renders were directly viewed; face anatomy, eye/lip shading and human proportions are retained. These earlier views are preserved in History/before-mantle-clearance with their original FBX hashes."
+  ],
+  "limitations": [
+    "Hair uses a cropped authored surface with a fairly straight back trim, not simulated hair.",
+    "The retained robe has skinned deformation rather than cloth simulation; physical-device performance and final artistic approval are separate."
+  ],
+  "parentReview": {
+    "status": "approved",
+    "reviewer": "/root",
+    "reviewedUtc": "2026-10-27T03:14:24.521386+00:00",
+    "scope": "Exact final exported Young rear asset render directly viewed. Earlier candidate Young face/front/rear were also directly viewed before targeted garment clearance; current face appearance still requires Unity/browser review. Not user approval or physical performance.",
+    "screenshots": [
+      {
+        "path": "Tools/Art/GospelNatural/ExportedPreviews/YoungJesus-rear-fbx.png",
+        "sha256": "33ca2330ba5948fa6ceaf0513026319072de229e4efb7b3a333759e7c2a69b4b",
+        "sourceFbxSha256": "db5b3bbb0c3b016ee1b437e0cfb408e18bc5634d08c4cd84bc63ecba0e3940d6",
+        "view": "rear",
+        "take": "Idle",
+        "frame": 1,
+        "captureKind": "Actual exported FBX asset Blender render; notUnity"
+      }
+    ],
+    "observed": [
+      "The previously visible white linen patch through the blue upper-back mantle is covered.",
+      "Rear hair and scalp are complete with no bare crown or old segmented tube locks.",
+      "Straight cropped back hair trim is accepted for this development revision; no hair simulation is claimed."
+    ]
+  }
+}

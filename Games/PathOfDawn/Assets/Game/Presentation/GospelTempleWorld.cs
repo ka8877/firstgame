@@ -25,7 +25,7 @@ namespace PathOfDawn.Presentation
         VolumeProfile ownedProfile;
         Transform courtyard, manger, marker;
         Light sun;
-        Material stone, paleStone, warmStone, darkStone, gold, wood, leaf, foliageLight, water, linen, pottery, ground, paving, pavingWarm;
+        Material stone, paleStone, warmStone, darkStone, gold, wood, leaf, foliageLight, water, linen, pottery, ground, paving, pavingWarm, waterGlint, clayLight;
         System.Random random = new System.Random(41252);
         string currentLandmark;
         public Vector3 LandmarkPosition(string id) => landmarks.TryGetValue(id,out var p) ? p : Vector3.zero;
@@ -33,16 +33,18 @@ namespace PathOfDawn.Presentation
         {
             var shader = Shader.Find("Universal Render Pipeline/Lit");
             if (shader == null) throw new InvalidOperationException("The URP Lit shader is required.");
-            stone=Mat("Warm Jerusalem limestone",new Color(.73f,.62f,.45f)); paleStone=Mat("Chalk stone",new Color(.91f,.82f,.64f));
-            warmStone=Mat("Warm stone variation",new Color(.82f,.68f,.47f)); darkStone=Mat("Weathered recess",new Color(.40f,.35f,.27f));
-            gold=Mat("Bronze detailing",new Color(.70f,.47f,.18f),.65f,.45f);wood=Mat("Cedar",new Color(.29f,.17f,.085f));
-            leaf=Mat("Olive leaves",new Color(.29f,.40f,.23f));foliageLight=Mat("Olive sunlit leaves",new Color(.43f,.51f,.27f));
-            water=Mat("Pool water",new Color(.18f,.44f,.46f),.15f,.86f);linen=Mat("Linen canopy",new Color(.90f,.79f,.56f));
-            pottery=Mat("Terracotta",new Color(.61f,.30f,.16f));ground=Mat("Distant earth",new Color(.52f,.46f,.31f));
+            stone=Mat("Warm Jerusalem limestone",new Color(.78f,.76f,.68f)); paleStone=Mat("Chalk stone",new Color(.94f,.92f,.84f));
+            warmStone=Mat("Warm stone variation",new Color(.78f,.72f,.60f)); darkStone=Mat("Weathered recess",new Color(.34f,.35f,.32f));
+            gold=Mat("Aged bronze detailing",new Color(.56f,.39f,.17f),.55f,.30f);wood=Mat("Cedar",new Color(.24f,.145f,.085f));
+            leaf=Mat("Olive shaded leaves",new Color(.25f,.34f,.24f));foliageLight=Mat("Olive silver leaves",new Color(.43f,.49f,.34f));
+            water=Mat("Pool water",new Color(.12f,.30f,.32f),.18f,.91f);waterGlint=Mat("Pool reflected daylight",new Color(.40f,.61f,.59f),.12f,.8f);
+            waterGlint.SetFloat("_ReceiveShadows",0);waterGlint.EnableKeyword("_RECEIVE_SHADOWS_OFF");
+            linen=Mat("Unbleached linen canopy",new Color(.79f,.73f,.59f));
+            pottery=Mat("Terracotta",new Color(.51f,.27f,.17f));clayLight=Mat("Pale fired clay",new Color(.68f,.48f,.31f));ground=Mat("Distant earth",new Color(.48f,.45f,.36f));
             paving=Mat("Limestone courtyard paving",Color.white);pavingWarm=Mat("Weathered courtyard paving",new Color(.94f,.91f,.84f));
-            ApplyStone(stone,"limestone",new Color(.93f,.86f,.72f));ApplyStone(paleStone,"limestone",new Color(1,.96f,.85f));
-            ApplyStone(warmStone,"limestone",new Color(.94f,.82f,.64f));ApplyStone(darkStone,"limestone",new Color(.52f,.48f,.40f));
-            ApplyStone(paving,"paving",Color.white);ApplyStone(pavingWarm,"paving",new Color(.94f,.91f,.84f));
+            ApplyStone(stone,"limestone",new Color(.91f,.89f,.83f));ApplyStone(paleStone,"limestone",new Color(1,.985f,.93f));
+            ApplyStone(warmStone,"limestone",new Color(.88f,.84f,.74f));ApplyStone(darkStone,"limestone",new Color(.50f,.49f,.44f));
+            ApplyStone(paving,"paving",new Color(.88f,.91f,.92f));ApplyStone(pavingWarm,"paving",new Color(.92f,.89f,.81f));
             ConfigureLighting();
             var cam = new GameObject("Gospel camera",typeof(Camera),typeof(AudioListener)); View=cam.GetComponent<Camera>();
             View.tag="MainCamera";View.fieldOfView=52;View.nearClipPlane=.13f;View.farClipPlane=180;View.allowHDR=true;
@@ -57,7 +59,7 @@ namespace PathOfDawn.Presentation
             // gentle so skin and cloth retain their authored colour and detail.
             fill.intensity=.55f;fill.range=6;fill.shadows=LightShadows.None;fill.cullingMask=1<<8;
             courtyard=new GameObject("Temple courtyard · physical scene").transform;courtyard.SetParent(transform,false);
-            BuildLandscape();BuildCourtyard();BuildTemple();BuildColonnades();BuildGarden();BuildCourtyardDetails();CombineArchitecture();BuildManger();
+            BuildLandscape();BuildCourtyard();BuildTemple();BuildColonnades();BuildGarden();BuildCourtyardDetails();BuildQuietCourtyardLife();CombineArchitecture();BuildManger();
             var playerRoot=new GameObject("Jesus · playable protagonist");playerRoot.transform.SetParent(courtyard,false);playerRoot.layer=8;
             var body=CreatePerson(playerRoot.transform,"Young Jesus",Vector3.zero,1);
             foreach(var node in body.GetComponentsInChildren<Transform>(true))node.gameObject.layer=8;
@@ -68,15 +70,15 @@ namespace PathOfDawn.Presentation
             playerRoot.AddComponent<CharacterController>();Player=playerRoot.AddComponent<GospelThirdPersonMotor>();Player.Initialize(View,animator);
             Player.SetPose(new Vector3(0,.08f,-9),0);
             Player.Actions.ConfigureTrainingArea(new Vector3(-8,0,-8),3);
-            Torus("Optional practice area · outside Scripture progression",courtyard,new Vector3(-8,.06f,-8),2.8f,.025f,gold,64);
+            Torus("Optional practice area · outside Scripture progression",courtyard,new Vector3(-8,.06f,-8),2.8f,.025f,gold,64,false);
             CreateNpc("Teacher reading",new Vector3(-5.8f,0,2.4f),120,1.15f,new Color(.58f,.48f,.32f));
             CreateNpc("Teacher listening",new Vector3(-4.4f,0,2.7f),210,1.1f,new Color(.65f,.57f,.42f));
             CreateNpc("Mary",new Vector3(4.6f,0,3.2f),210,1.06f,new Color(.35f,.48f,.55f));
             CreateNpc("Joseph",new Vector3(5.6f,0,3.4f),225,1.17f,new Color(.58f,.39f,.26f));
             marker=new GameObject("Current Scripture landmark").transform;marker.SetParent(courtyard,false);
-            var gem=Primitive("Waypoint light",PrimitiveType.Sphere,marker,new Vector3(0,1.9f,0),new Vector3(.14f,.25f,.14f),gold,false);
-            gem.transform.rotation=Quaternion.Euler(0,0,25);
-            Torus("Waypoint floor ring",marker,Vector3.up*.045f,.58f,.035f,gold,48);
+            // The guide belongs to the ground plane. A floating bronze sphere
+            // previously overlapped the basin and resembled a religious statue.
+            Torus("Waypoint floor ring",marker,Vector3.up*.072f,.58f,.018f,gold,64,false);
             SetOverview(false);SetCurrentLandmark("temple-gate");
         }
         Material Mat(string name,Color color,float metallic=0,float smooth=.24f)
@@ -105,19 +107,19 @@ namespace PathOfDawn.Presentation
         }
         void ConfigureLighting()
         {
-            RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=new Color(.72f,.79f,.88f);
-            RenderSettings.ambientEquatorColor=new Color(.64f,.61f,.54f);RenderSettings.ambientGroundColor=new Color(.31f,.32f,.30f);
-            RenderSettings.fog=true;RenderSettings.fogColor=new Color(.77f,.80f,.79f);RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogDensity=.0068f;
+            RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=new Color(.56f,.64f,.75f);
+            RenderSettings.ambientEquatorColor=new Color(.44f,.46f,.43f);RenderSettings.ambientGroundColor=new Color(.27f,.26f,.23f);
+            RenderSettings.fog=true;RenderSettings.fogColor=new Color(.73f,.77f,.78f);RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogDensity=.0048f;
             var lightObject=new GameObject("Afternoon sun",typeof(Light));lightObject.transform.SetParent(transform,false);
-            sun=lightObject.GetComponent<Light>();sun.type=LightType.Directional;sun.color=new Color(1,.94f,.85f);sun.intensity=1.65f;sun.shadows=LightShadows.Soft;
-            sun.shadowBias=.045f;sun.shadowNormalBias=.28f;lightObject.transform.rotation=Quaternion.Euler(38,-32,0);RenderSettings.sun=sun;
+            sun=lightObject.GetComponent<Light>();sun.type=LightType.Directional;sun.color=new Color(1,.95f,.86f);sun.intensity=1.38f;sun.shadows=LightShadows.Soft;
+            sun.shadowBias=.035f;sun.shadowNormalBias=.20f;lightObject.transform.rotation=Quaternion.Euler(43,-32,0);RenderSettings.sun=sun;
             var skyShader=Shader.Find("Skybox/Procedural");
-            if(skyShader!=null){var sky=new Material(skyShader);sky.SetFloat("_SunSize",.025f);sky.SetFloat("_AtmosphereThickness",.75f);sky.SetColor("_SkyTint",new Color(.46f,.57f,.66f));sky.SetColor("_GroundColor",new Color(.58f,.51f,.38f));RenderSettings.skybox=sky;ownedMaterials.Add(sky);}
+            if(skyShader!=null){var sky=new Material(skyShader);sky.SetFloat("_SunSize",.025f);sky.SetFloat("_AtmosphereThickness",1.05f);sky.SetColor("_SkyTint",new Color(.53f,.64f,.78f));sky.SetColor("_GroundColor",new Color(.52f,.48f,.39f));RenderSettings.skybox=sky;ownedMaterials.Add(sky);}
             var volumeObject=new GameObject("Warm daylight grade",typeof(Volume));volumeObject.transform.SetParent(transform,false);
             var volume=volumeObject.GetComponent<Volume>();volume.isGlobal=true;var profile=ScriptableObject.CreateInstance<VolumeProfile>();ownedProfile=profile;volume.profile=profile;
             var tone=profile.Add<Tonemapping>();tone.mode.Override(TonemappingMode.ACES);
-            var adjustment=profile.Add<ColorAdjustments>();adjustment.postExposure.Override(-.06f);adjustment.contrast.Override(5);adjustment.saturation.Override(-2);
-            var bloom=profile.Add<Bloom>();bloom.intensity.Override(.12f);bloom.threshold.Override(1.1f);
+            var adjustment=profile.Add<ColorAdjustments>();adjustment.postExposure.Override(.03f);adjustment.contrast.Override(7);adjustment.saturation.Override(-5);
+            var bloom=profile.Add<Bloom>();bloom.intensity.Override(.075f);bloom.threshold.Override(1.2f);
         }
         void BuildLandscape()
         {
@@ -141,12 +143,19 @@ namespace PathOfDawn.Presentation
             for(int x=-7;x<=7;x++)for(int z=-7;z<=7;z++)
             {
                 var mat=(x+z)%5==0?pavingWarm:paving;
-                Primitive("Limestone paving",PrimitiveType.Cube,courtyard,new Vector3(x*1.95f,.008f,z*1.95f),new Vector3(1.90f,.028f,1.90f),mat,false);
+                Primitive("Limestone paving",PrimitiveType.Cube,courtyard,new Vector3(x*1.95f,.013f,z*1.95f),new Vector3(1.93f,.022f,1.93f),mat,false,false);
             }
+            foreach(int approach in new[]{-1,1})for(int row=0;row<5;row++)for(int column=0;column<4;column++)
+            {
+                float z=approach*(3.48f+row*1.41f);
+                Primitive("Broad processional paving stone",PrimitiveType.Cube,courtyard,new Vector3(-1.50f+column,.038f,z),new Vector3(.98f,.014f,1.38f),(row+column)%6==0?stone:paleStone,false,false);
+            }
+            foreach(int side in new[]{-1,1})foreach(int approach in new[]{-1,1})
+                Primitive("Processional path inlay",PrimitiveType.Cube,courtyard,new Vector3(side*2.10f,.043f,approach*6.3f),new Vector3(.075f,.012f,7),warmStone,false,false);
             for(int i=-7;i<=7;i++)foreach(int edge in new[]{-1,1})
             {
-                Primitive("Inlaid border",PrimitiveType.Cube,courtyard,new Vector3(i*1.95f,.028f,edge*11.1f),new Vector3(1.8f,.02f,.13f),darkStone,false);
-                Primitive("Inlaid border",PrimitiveType.Cube,courtyard,new Vector3(edge*11.1f,.028f,i*1.95f),new Vector3(.13f,.02f,1.8f),darkStone,false);
+                Primitive("Inlaid border",PrimitiveType.Cube,courtyard,new Vector3(i*1.95f,.035f,edge*11.1f),new Vector3(1.8f,.016f,.13f),darkStone,false,false);
+                Primitive("Inlaid border",PrimitiveType.Cube,courtyard,new Vector3(edge*11.1f,.035f,i*1.95f),new Vector3(.13f,.016f,1.8f),darkStone,false,false);
             }
             // The surrounding wall keeps the first teaching area coherent and physically bounded.
             foreach(int side in new[]{-1,1})
@@ -181,9 +190,15 @@ namespace PathOfDawn.Presentation
         {
             foreach(int side in new[]{-1,1})
             {
-                for(int i=0;i<7;i++)Column(new Vector3(side*12.8f,0,-10+i*3.0f),3.6f,.28f,courtyard);
-                Primitive("Colonnade roof",PrimitiveType.Cube,courtyard,new Vector3(side*13.2f,3.95f,-1),new Vector3(4.0f,.36f,22.5f),paleStone,false);
-                Primitive("Colonnade frieze",PrimitiveType.Cube,courtyard,new Vector3(side*12.0f,3.6f,-1),new Vector3(.25f,.4f,22.5f),warmStone,false);
+                for(int i=0;i<7;i++)Column(new Vector3(side*12.8f,0,-10+i*3.0f),2.84f,.29f,courtyard);
+                for(int bay=0;bay<6;bay++)
+                    StoneArch("Portico voussoir arch",courtyard,new Vector3(side*12.8f,3.12f,-8.5f+bay*3),2.78f,.28f,.62f,90);
+                Primitive("Colonnade shadow cornice",PrimitiveType.Cube,courtyard,new Vector3(side*13.2f,4.88f,-1),new Vector3(4.0f,.18f,22.5f),warmStone,false);
+                Primitive("Colonnade roof",PrimitiveType.Cube,courtyard,new Vector3(side*13.2f,5.04f,-1),new Vector3(4.20f,.22f,22.75f),paleStone,false);
+                Primitive("Colonnade upper lip",PrimitiveType.Cube,courtyard,new Vector3(side*13.2f,5.19f,-1),new Vector3(4.34f,.10f,22.90f),stone,false);
+                // Recessed timber ceiling is visible through the open arch bays.
+                for(int beam=0;beam<12;beam++)
+                    Primitive("Portico cedar rafter",PrimitiveType.Cube,courtyard,new Vector3(side*13.45f,4.75f,-10.6f+beam*1.8f),new Vector3(3.0f,.13f,.14f),wood,false);
             }
         }
         void BuildGarden()
@@ -228,27 +243,82 @@ namespace PathOfDawn.Presentation
                 foreach(float y in new[]{1.5f,3.5f,5.5f})Primitive("Cedar door raised panel",PrimitiveType.Cube,courtyard,new Vector3(side*.83f,y,10.73f),new Vector3(1.23f,1.40f,.075f),wood,false);
             }
             Primitive("Sanctuary lintel moulding",PrimitiveType.Cube,courtyard,new Vector3(0,6.64f,10.70f),new Vector3(5.10f,.24f,.48f),paleStone,false);
+            // Distinct recessed joints and projecting courses read as dressed
+            // masonry in grazing light, rather than a single featureless box.
+            for(int course=0;course<9;course++)
+            {
+                float y=1.47f+course*.61f;
+                for(int block=0;block<12;block++)
+                {
+                    float x=-8.1f+block*1.47f+(course%2)*.735f;
+                    if(Mathf.Abs(x)<2.5f||x>8.5f)continue;
+                    Primitive("Sanctuary dressed ashlar",PrimitiveType.Cube,courtyard,new Vector3(x,y,10.90f),new Vector3(1.42f,.56f,.16f),(course+block)%7==0?warmStone:paleStone,false);
+                }
+            }
+            foreach(int side in new[]{-1,1})
+            {
+                // The side wings retain their existing collision envelope.
+                var wing=courtyard;
+                for(int storey=0;storey<2;storey++)
+                {
+                    Vector3 aperture=new Vector3(side*11,1.48f+storey*2.38f,8.94f);
+                    Primitive("Wing recessed window",PrimitiveType.Cube,wing,aperture+Vector3.up*.47f,new Vector3(1.10f,1.29f,.12f),darkStone,false);
+                    StoneArch("Wing window arch",wing,aperture+Vector3.up*1.10f,.99f,.18f,.20f,0);
+                    foreach(int jamb in new[]{-1,1})Primitive("Wing window jamb",PrimitiveType.Cube,wing,aperture+new Vector3(jamb*.585f,.39f,-.03f),new Vector3(.17f,1.43f,.24f),paleStone,false);
+                    for(int bar=0;bar<4;bar++)Primitive("Wing bronze lattice",PrimitiveType.Cube,wing,aperture+new Vector3(-.37f+bar*.245f,.42f,-.09f),new Vector3(.025f,1.12f,.025f),gold,false);
+                    Primitive("Wing window sill",PrimitiveType.Cube,wing,aperture+new Vector3(0,-.34f,-.06f),new Vector3(1.52f,.16f,.44f),paleStone,false);
+                }
+                for(int i=0;i<6;i++)
+                    Primitive("Wing corner ashlar",PrimitiveType.Cube,wing,new Vector3(side*12.76f,.52f+i*.94f,8.92f),new Vector3(.42f,.90f,.23f),paleStone,false);
+            }
+        }
+        void BuildQuietCourtyardLife()
+        {
+            // Keep the central route and all Scripture landmarks free. Small
+            // groups of hand-modelled props belong to the shaded portico edge.
+            foreach(int side in new[]{-1,1})
+            {
+                for(int i=0;i<3;i++)
+                {
+                    var p=new Vector3(side*(11.15f+i*.35f),0,-3.2f+(i%2)*.55f);
+                    float scale=.68f+i*.13f;
+                    Lathe("Grouped portico amphora",courtyard,p,new[]{new Vector2(.17f,0),new Vector2(.29f,.13f*scale),new Vector2(.32f,.49f*scale),new Vector2(.17f,.75f*scale),new Vector2(.115f,.88f*scale),new Vector2(.14f,.92f*scale)},i%2==0?pottery:clayLight,32);
+                    Torus("Amphora rolled rim",courtyard,p+Vector3.up*(.92f*scale),.14f,.024f,pottery,24);
+                    Cylinder("Amphora dark open mouth",courtyard,p+Vector3.up*(.905f*scale),.112f,.012f,darkStone,false);
+                }
+                Primitive("Portico stone seat",PrimitiveType.Cube,courtyard,new Vector3(side*13.65f,.49f,1.3f),new Vector3(.80f,.15f,3.0f),paleStone,false);
+                foreach(float z in new[]{.12f,2.48f})Primitive("Portico seat pedestal",PrimitiveType.Cube,courtyard,new Vector3(side*13.65f,.24f,z),new Vector3(.60f,.48f,.34f),warmStone,false);
+                for(int sprig=0;sprig<8;sprig++)
+                {
+                    var p=new Vector3(side*(9.04f+(sprig%3)*.19f),.05f,6.25f+(sprig/3)*.24f);
+                    var herb=OliveSpray(p+Vector3.up*.20f,sprig%2==0?leaf:foliageLight,44,.42f);
+                    herb.localScale=new Vector3(.72f,.43f,.72f);
+                }
+                Primitive("Portico low threshold",PrimitiveType.Cube,courtyard,new Vector3(side*11.5f,.046f,-.5f),new Vector3(.13f,.028f,20),warmStone,false,false);
+            }
         }
         void OliveTree(Vector3 p)
         {
-            var trunk=Primitive("Olive trunk",PrimitiveType.Cylinder,courtyard,p+Vector3.up*1.1f,new Vector3(.28f,1.12f,.28f),wood,false);trunk.transform.rotation=Quaternion.Euler(4,15,-8);
-            for(int i=0;i<8;i++)
+            CurvedBranch("Gnarled olive trunk",courtyard,new[]{p,p+new Vector3(-.09f,.62f,.04f),p+new Vector3(.11f,1.30f,-.03f),p+new Vector3(.02f,1.97f,.08f)},new[]{.19f,.16f,.12f,.075f},wood,10);
+            for(int i=0;i<11;i++)
             {
-                float angle=i*2.4f;var end=p+new Vector3(Mathf.Sin(angle)*(.7f+i*.06f),2.3f+(i%3)*.3f,Mathf.Cos(angle)*(.7f+i*.06f));
-                Beam("Olive branch",p+Vector3.up*1.5f,end,.10f,wood,courtyard);
-                var crown=OliveSpray(end,i%2==0?leaf:foliageLight);
+                float angle=i*2.4f;float reach=.63f+(i%4)*.18f;
+                var end=p+new Vector3(Mathf.Sin(angle)*reach,2.12f+(i%3)*.29f,Mathf.Cos(angle)*reach);
+                var start=p+new Vector3(.04f,1.25f+(i%4)*.14f,.03f);
+                CurvedBranch("Tapering olive bough",courtyard,new[]{start,Vector3.Lerp(start,end,.50f)+Vector3.up*.13f,end},new[]{.072f,.044f,.017f},wood,7);
+                var crown=OliveSpray(end,i%3==0?foliageLight:leaf,136,1.18f);
                 crown.rotation=Quaternion.Euler(i*13,i*41,15);oliveCrowns.Add(crown);oliveRest.Add(crown.localRotation);
             }
         }
-        Transform OliveSpray(Vector3 position,Material material)
+        Transform OliveSpray(Vector3 position,Material material,int count=160,float spread=1)
         {
             // Small curved, double-sided leaves give the canopy depth and open sky gaps.
             var vertices=new List<Vector3>();var normals=new List<Vector3>();var triangles=new List<int>();
-            for(int i=0;i<160;i++)
+            for(int i=0;i<count;i++)
             {
-                var center=new Vector3((float)random.NextDouble()-.5f,((float)random.NextDouble()-.5f)*.65f,(float)random.NextDouble()-.5f);
+                var center=new Vector3((float)random.NextDouble()-.5f,((float)random.NextDouble()-.5f)*.68f,(float)random.NextDouble()-.5f)*spread;
                 var rotation=Quaternion.Euler((float)random.NextDouble()*150,(float)random.NextDouble()*360,(float)random.NextDouble()*90);
-                float length=.16f+(float)random.NextDouble()*.13f,width=length*.22f;int start=vertices.Count;
+                float length=.14f+(float)random.NextDouble()*.10f,width=length*.19f;int start=vertices.Count;
                 foreach(var p in new[]{new Vector3(0,0,-length*.5f),new Vector3(-width,0,0),new Vector3(0,.025f,0),new Vector3(width,0,0),new Vector3(0,0,length*.5f)})
                 { vertices.Add(center+rotation*p);normals.Add(rotation*Vector3.up); }
                 foreach(int index in new[]{0,1,2,0,2,3,1,4,2,2,4,3,2,1,0,3,2,0,2,4,1,3,4,2})triangles.Add(start+index);
@@ -259,13 +329,17 @@ namespace PathOfDawn.Presentation
         }
         void Fountain()
         {
-            Cylinder("Pool pedestal",courtyard,new Vector3(0,.10f,0),2.05f,.20f,paleStone,true);
-            Cylinder("Pool shadow well",courtyard,new Vector3(0,.22f,0),1.87f,.08f,darkStone,false);
-            Torus("Rounded fountain rim",courtyard,new Vector3(0,.32f,0),1.95f,.13f,paleStone,64);
-            Cylinder("Reflective pool",courtyard,new Vector3(0,.28f,0),1.80f,.025f,water,false);
-            Lathe("Carved fountain stem",courtyard,new Vector3(0,.30f,0),new[]{new Vector2(.42f,0),new Vector2(.29f,.15f),new Vector2(.18f,.6f),new Vector2(.36f,.8f),new Vector2(.65f,.9f),new Vector2(.68f,1.02f)},paleStone,40);
-            Cylinder("Upper water bowl",courtyard,new Vector3(0,1.34f,0),.57f,.025f,water,false);
-            for(int i=0;i<6;i++){float a=i*Mathf.PI/3;Primitive("Water trickle",PrimitiveType.Cylinder,courtyard,new Vector3(Mathf.Sin(a)*.63f,.9f,Mathf.Cos(a)*.63f),new Vector3(.025f,.40f,.025f),water,false);}
+            Cylinder("Low courtyard basin plinth",courtyard,new Vector3(0,.105f,0),2.05f,.21f,warmStone,true);
+            Cylinder("Basin shadow well",courtyard,new Vector3(0,.205f,0),1.84f,.09f,darkStone,false);
+            Lathe("Dressed limestone basin",courtyard,Vector3.zero,new[]{new Vector2(1.94f,.18f),new Vector2(1.96f,.25f),new Vector2(1.99f,.34f),new Vector2(1.98f,.41f),new Vector2(1.92f,.46f),new Vector2(1.80f,.46f),new Vector2(1.74f,.39f),new Vector2(1.72f,.24f)},paleStone,80);
+            Cylinder("Quiet basin water",courtyard,new Vector3(0,.335f,0),1.73f,.018f,water,false);
+            // Individual coping joints remain visible after static mesh batching.
+            for(int joint=0;joint<16;joint++)
+            {
+                float a=joint*Mathf.PI/8;
+                var cut=Primitive("Basin coping joint",PrimitiveType.Cube,courtyard,new Vector3(Mathf.Sin(a)*1.86f,.463f,Mathf.Cos(a)*1.86f),new Vector3(.012f,.007f,.16f),warmStone,false,false);
+                cut.transform.localRotation=Quaternion.Euler(0,a*Mathf.Rad2Deg,0);
+            }
         }
         void BuildManger()
         {
@@ -327,18 +401,6 @@ namespace PathOfDawn.Presentation
         public void SetCurrentLandmark(string id){currentLandmark=id;if(marker!=null){marker.gameObject.SetActive(landmarks.ContainsKey(id??""));if(landmarks.TryGetValue(id??"",out var p))marker.position=p;}}
         void Update()
         {
-            if(marker!=null&&marker.gameObject.activeSelf)
-            {
-                // Keep the floor guide and HUD at reading distance; the floating guide
-                // must never sit between the orbiting camera and the protagonist's face.
-                var gem=marker.Find("Waypoint light");
-                if(gem!=null)
-                {
-                    bool distant=Player!=null&&Vector3.Distance(Player.transform.position,marker.position)>3.1f;
-                    gem.gameObject.SetActive(distant);
-                    if(distant){gem.localPosition=new Vector3(0,1.9f+Mathf.Sin(Time.time*2)*.08f,0);gem.Rotate(0,36*Time.deltaTime,0,Space.World);}
-                }
-            }
             for(int i=0;i<oliveCrowns.Count;i++)if(oliveCrowns[i]!=null)oliveCrowns[i].localRotation=oliveRest[i]*Quaternion.Euler(Mathf.Sin(Time.time*.65f+i)*.55f,0,Mathf.Sin(Time.time*.9f+i*.7f)*.8f);
         }
         public void SetOverview(bool birth)
@@ -349,9 +411,10 @@ namespace PathOfDawn.Presentation
             else{View.transform.position=new Vector3(13,7.8f,-14);View.transform.LookAt(new Vector3(0,2.4f,2));}
         }
         public void BeginExploration(){courtyard.gameObject.SetActive(true);manger.gameObject.SetActive(false);Player.CameraFollow=true;Player.SnapCamera();}
-        GameObject Primitive(string name,PrimitiveType kind,Transform parent,Vector3 p,Vector3 scale,Material mat,bool collide)
+        GameObject Primitive(string name,PrimitiveType kind,Transform parent,Vector3 p,Vector3 scale,Material mat,bool collide,bool castShadows=true)
         {
             var go=GameObject.CreatePrimitive(kind);go.name=name;go.transform.SetParent(parent,false);go.transform.localPosition=p;go.transform.localScale=scale;go.GetComponent<Renderer>().sharedMaterial=mat;
+            go.GetComponent<Renderer>().shadowCastingMode=castShadows?ShadowCastingMode.On:ShadowCastingMode.Off;
             // Small bevels catch daylight on cut stone and timber. Collision
             // remains the original simple box; the walkable layout is unchanged.
             if(kind==PrimitiveType.Cube&&Mathf.Min(scale.x,scale.y,scale.z)>.12f)
@@ -386,44 +449,112 @@ namespace PathOfDawn.Presentation
         void Cylinder(string name,Transform parent,Vector3 p,float radius,float height,Material mat,bool collide)=>Primitive(name,PrimitiveType.Cylinder,parent,p,new Vector3(radius*2,height*.5f,radius*2),mat,collide);
         void Column(Vector3 p,float height,float radius,Transform parent)
         {
-            Cylinder("Column base",parent,p+Vector3.up*.12f,radius*1.6f,.24f,paleStone,true);
-            Cylinder("Column shaft",parent,p+Vector3.up*(height*.5f+.24f),radius,height,stone,true);
-            Cylinder("Column capital",parent,p+Vector3.up*(height+.24f),radius*1.55f,.24f,paleStone,false);
-            for(int i=1;i<5;i++)Torus("Column carved band",parent,p+Vector3.up*(.24f+i*height/5),radius*1.015f,.018f,warmStone,24);
+            Primitive("Column square plinth",PrimitiveType.Cube,parent,p+Vector3.up*.08f,new Vector3(radius*3.2f,.16f,radius*3.2f),paleStone,true);
+            Lathe("Profiled Attic column base",parent,p,new[]{new Vector2(radius*1.38f,.16f),new Vector2(radius*1.43f,.20f),new Vector2(radius*1.22f,.25f),new Vector2(radius*1.18f,.30f),new Vector2(radius*1.30f,.34f),new Vector2(radius,.39f)},paleStone,40);
+            // Continuous entasis and shallow flutes replace the rigid straight
+            // primitive cylinder. Collision remains one simple capsule.
+            const int rings=12,sides=48;var vertices=new List<Vector3>();var triangles=new List<int>();
+            for(int row=0;row<=rings;row++)
+            {
+                float t=row/(float)rings,y=.37f+t*(height-.25f);
+                float r=radius*(1-.13f*t+.045f*Mathf.Sin(t*Mathf.PI));
+                for(int i=0;i<=sides;i++)
+                {
+                    float a=i*Mathf.PI*2/sides;float flute=radius*.034f*(.5f+.5f*Mathf.Cos(a*16))*Mathf.Clamp01(t*8)*Mathf.Clamp01((1-t)*8);
+                    vertices.Add(new Vector3(Mathf.Sin(a)*(r-flute),y,Mathf.Cos(a)*(r-flute)));
+                }
+            }
+            for(int row=0;row<rings;row++)for(int i=0;i<sides;i++){int a=row*(sides+1)+i,b=a+sides+1;triangles.AddRange(new[]{a,a+1,b,a+1,b+1,b});}
+            var shaft=MeshObject("Entasis fluted limestone shaft",parent,p,vertices,triangles,stone);
+            var collision=shaft.AddComponent<CapsuleCollider>();collision.center=Vector3.up*(height*.5f+.24f);collision.height=height;collision.radius=radius;
+            Lathe("Carved column neck and capital",parent,p,new[]{new Vector2(radius*.87f,height+.12f),new Vector2(radius*.99f,height+.16f),new Vector2(radius*.95f,height+.20f),new Vector2(radius*1.24f,height+.26f),new Vector2(radius*1.45f,height+.31f),new Vector2(radius*1.43f,height+.36f)},paleStone,40);
+            Primitive("Column capital abacus",PrimitiveType.Cube,parent,p+Vector3.up*(height+.405f),new Vector3(radius*3.15f,.09f,radius*3.15f),paleStone,false);
+            Torus("Column neck shadow bead",parent,p+Vector3.up*(height+.19f),radius*.975f,.018f,warmStone,40);
         }
         void Beam(string name,Vector3 from,Vector3 to,float radius,Material material,Transform parent)
         {var go=Primitive(name,PrimitiveType.Cylinder,parent,(from+to)*.5f,new Vector3(radius,(to-from).magnitude*.5f,radius),material,false);go.transform.up=(to-from).normalized;}
+        GameObject MeshObject(string name,Transform parent,Vector3 p,List<Vector3> vertices,List<int> triangles,Material mat)
+        {
+            var mesh=new Mesh{name=name};mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateBounds();ownedMeshes.Add(mesh);
+            var go=new GameObject(name,typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(parent,false);go.transform.localPosition=p;
+            go.GetComponent<MeshFilter>().sharedMesh=mesh;go.GetComponent<MeshRenderer>().sharedMaterial=mat;return go;
+        }
+        void StoneArch(string name,Transform parent,Vector3 spring,float opening,float thickness,float depth,float yaw)
+        {
+            // Twelve separate wedge-shaped stones make a real open arch. They
+            // have front/back, intrados/extrados and end faces, not a flat decal.
+            const int blocks=12;float inner=opening*.5f,outer=inner+thickness;
+            Quaternion rotation=Quaternion.Euler(0,yaw,0);
+            for(int block=0;block<blocks;block++)
+            {
+                float a=block*Mathf.PI/blocks+.006f,b=(block+1)*Mathf.PI/blocks-.006f;
+                var points=new[]{new Vector3(Mathf.Cos(a)*inner,Mathf.Sin(a)*inner,-depth*.5f),new Vector3(Mathf.Cos(b)*inner,Mathf.Sin(b)*inner,-depth*.5f),new Vector3(Mathf.Cos(b)*outer,Mathf.Sin(b)*outer,-depth*.5f),new Vector3(Mathf.Cos(a)*outer,Mathf.Sin(a)*outer,-depth*.5f),
+                    new Vector3(Mathf.Cos(a)*inner,Mathf.Sin(a)*inner,depth*.5f),new Vector3(Mathf.Cos(b)*inner,Mathf.Sin(b)*inner,depth*.5f),new Vector3(Mathf.Cos(b)*outer,Mathf.Sin(b)*outer,depth*.5f),new Vector3(Mathf.Cos(a)*outer,Mathf.Sin(a)*outer,depth*.5f)};
+                var vertices=new List<Vector3>(24);var triangles=new List<int>(36);Vector3 center=Vector3.zero;foreach(var point in points)center+=point/8;
+                foreach(var face in new[]{new[]{0,1,2,3},new[]{4,7,6,5},new[]{0,4,5,1},new[]{3,2,6,7},new[]{0,3,7,4},new[]{1,5,6,2}})
+                {
+                    var pa=points[face[0]];var pb=points[face[1]];var pc=points[face[2]];var pd=points[face[3]];
+                    if(Vector3.Dot(Vector3.Cross(pb-pa,pc-pa),(pa+pb+pc+pd)*.25f-center)<0){var swap=pb;pb=pd;pd=swap;}
+                    int start=vertices.Count;vertices.Add(rotation*pa);vertices.Add(rotation*pb);vertices.Add(rotation*pc);vertices.Add(rotation*pd);
+                    triangles.AddRange(new[]{start,start+1,start+2,start,start+2,start+3});
+                }
+                MeshObject(name+" · stone "+(block+1),parent,spring,vertices,triangles,block%7==0?warmStone:paleStone);
+            }
+        }
+        void CurvedBranch(string name,Transform parent,Vector3[] points,float[] radii,Material mat,int sides)
+        {
+            var vertices=new List<Vector3>();var triangles=new List<int>();
+            for(int row=0;row<points.Length;row++)
+            {
+                Vector3 tangent=(points[Mathf.Min(row+1,points.Length-1)]-points[Mathf.Max(row-1,0)]).normalized;
+                Vector3 u=Vector3.Cross(tangent,Mathf.Abs(tangent.z)>.95f?Vector3.up:Vector3.forward).normalized,v=Vector3.Cross(tangent,u);
+                for(int i=0;i<=sides;i++)
+                {
+                    float a=i*Mathf.PI*2/sides;
+                    float bark=radii[row]*(1+.055f*Mathf.Sin(i*4.1f+row));vertices.Add(points[row]+(u*Mathf.Cos(a)+v*Mathf.Sin(a))*bark);
+                }
+            }
+            for(int row=0;row<points.Length-1;row++)for(int i=0;i<sides;i++){int a=row*(sides+1)+i,b=a+sides+1;triangles.AddRange(new[]{a,a+1,b,a+1,b+1,b});}
+            MeshObject(name,parent,Vector3.zero,vertices,triangles,mat);
+        }
         void Lathe(string name,Transform parent,Vector3 p,Vector2[] profile,Material mat,int sides)
         {
-            var vertices=new Vector3[(sides+1)*profile.Length];var triangles=new int[sides*(profile.Length-1)*6];int t=0;
-            for(int row=0;row<profile.Length;row++)for(int i=0;i<=sides;i++){float a=i*Mathf.PI*2/sides;vertices[row*(sides+1)+i]=new Vector3(Mathf.Sin(a)*profile[row].x,profile[row].y,Mathf.Cos(a)*profile[row].x);}
-            for(int row=0;row<profile.Length-1;row++)for(int i=0;i<sides;i++){int a=row*(sides+1)+i,b=a+sides+1;triangles[t++]=a;triangles[t++]=b;triangles[t++]=a+1;triangles[t++]=a+1;triangles[t++]=b;triangles[t++]=b+1;}
-            var mesh=new Mesh{name=name};mesh.vertices=vertices;mesh.triangles=triangles;mesh.RecalculateNormals();mesh.RecalculateBounds();ownedMeshes.Add(mesh);
+            var vertices=new Vector3[(sides+1)*profile.Length];var uv=new Vector2[vertices.Length];var triangles=new int[sides*(profile.Length-1)*6];int t=0;
+            for(int row=0;row<profile.Length;row++)for(int i=0;i<=sides;i++){float a=i*Mathf.PI*2/sides;int index=row*(sides+1)+i;vertices[index]=new Vector3(Mathf.Sin(a)*profile[row].x,profile[row].y,Mathf.Cos(a)*profile[row].x);uv[index]=new Vector2(i/(float)sides,profile[row].y);}
+            // At the front of a ring d(angle) points right and d(height)
+            // points up. Their cross product faces out, so this winding is
+            // visible with normal backface culling (the former order was inward).
+            for(int row=0;row<profile.Length-1;row++)for(int i=0;i<sides;i++){int a=row*(sides+1)+i,b=a+sides+1;triangles[t++]=a;triangles[t++]=a+1;triangles[t++]=b;triangles[t++]=a+1;triangles[t++]=b+1;triangles[t++]=b;}
+            var mesh=new Mesh{name=name};mesh.vertices=vertices;mesh.uv=uv;mesh.triangles=triangles;mesh.RecalculateNormals();mesh.RecalculateTangents();mesh.RecalculateBounds();ownedMeshes.Add(mesh);
             var go=new GameObject(name,typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(parent,false);go.transform.localPosition=p;go.GetComponent<MeshFilter>().sharedMesh=mesh;go.GetComponent<Renderer>().sharedMaterial=mat;
         }
-        void Torus(string name,Transform parent,Vector3 p,float radius,float thickness,Material mat,int segments)
+        void Torus(string name,Transform parent,Vector3 p,float radius,float thickness,Material mat,int segments,bool castShadows=true,bool receiveShadows=true)
         {
             const int rings=8;var vertices=new Vector3[(segments+1)*(rings+1)];var triangles=new int[segments*rings*6];int t=0;
             for(int i=0;i<=segments;i++)for(int j=0;j<=rings;j++){float a=i*Mathf.PI*2/segments,b=j*Mathf.PI*2/rings;vertices[i*(rings+1)+j]=new Vector3((radius+Mathf.Cos(b)*thickness)*Mathf.Sin(a),Mathf.Sin(b)*thickness,(radius+Mathf.Cos(b)*thickness)*Mathf.Cos(a));}
             for(int i=0;i<segments;i++)for(int j=0;j<rings;j++){int a=i*(rings+1)+j,b=a+rings+1;triangles[t++]=a;triangles[t++]=b;triangles[t++]=a+1;triangles[t++]=a+1;triangles[t++]=b;triangles[t++]=b+1;}
-            var mesh=new Mesh{name=name};mesh.vertices=vertices;mesh.triangles=triangles;mesh.RecalculateNormals();ownedMeshes.Add(mesh);var go=new GameObject(name,typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(parent,false);go.transform.localPosition=p;go.GetComponent<MeshFilter>().sharedMesh=mesh;go.GetComponent<Renderer>().sharedMaterial=mat;
+            var mesh=new Mesh{name=name};mesh.vertices=vertices;mesh.triangles=triangles;mesh.RecalculateNormals();ownedMeshes.Add(mesh);var go=new GameObject(name,typeof(MeshFilter),typeof(MeshRenderer));go.transform.SetParent(parent,false);go.transform.localPosition=p;go.GetComponent<MeshFilter>().sharedMesh=mesh;var renderer=go.GetComponent<Renderer>();renderer.sharedMaterial=mat;renderer.shadowCastingMode=castShadows?ShadowCastingMode.On:ShadowCastingMode.Off;renderer.receiveShadows=receiveShadows;
         }
         void CombineArchitecture()
         {
-            var groups=new Dictionary<Material,List<CombineInstance>>();
+            // Preserve shadow intent across batching. Millimetre-thick paving
+            // overlays/ripples must not re-acquire shadow casting merely because
+            // a wall uses the same limestone material.
+            var groups=new Dictionary<(Material material,ShadowCastingMode casts,bool receives),List<CombineInstance>>();
             foreach(var renderer in courtyard.GetComponentsInChildren<MeshRenderer>())
             {
                 var filter=renderer.GetComponent<MeshFilter>();
                 if(filter==null||filter.sharedMesh==null||renderer.sharedMaterial==null||renderer.sharedMaterial==leaf||renderer.sharedMaterial==foliageLight)continue;
-                if(!groups.TryGetValue(renderer.sharedMaterial,out var list)){list=new List<CombineInstance>();groups.Add(renderer.sharedMaterial,list);}
+                var key=(renderer.sharedMaterial,renderer.shadowCastingMode,renderer.receiveShadows);
+                if(!groups.TryGetValue(key,out var list)){list=new List<CombineInstance>();groups.Add(key,list);}
                 list.Add(new CombineInstance{mesh=renderer.sharedMaterial.GetTexture("_BaseMap")!=null?WorldUvMesh(filter.sharedMesh,renderer.transform):filter.sharedMesh,transform=courtyard.worldToLocalMatrix*renderer.transform.localToWorldMatrix});
                 renderer.enabled=false;
             }
             foreach(var group in groups)
             {
-                var mesh=new Mesh{name="Courtyard · "+group.Key.name,indexFormat=IndexFormat.UInt32};mesh.CombineMeshes(group.Value.ToArray(),true,true);ownedMeshes.Add(mesh);
+                var mesh=new Mesh{name="Courtyard · "+group.Key.material.name+" · "+group.Key.casts,indexFormat=IndexFormat.UInt32};mesh.CombineMeshes(group.Value.ToArray(),true,true);ownedMeshes.Add(mesh);
                 var combined=new GameObject(mesh.name,typeof(MeshFilter),typeof(MeshRenderer));combined.transform.SetParent(courtyard,false);
-                combined.GetComponent<MeshFilter>().sharedMesh=mesh;combined.GetComponent<MeshRenderer>().sharedMaterial=group.Key;
+                combined.GetComponent<MeshFilter>().sharedMesh=mesh;var renderer=combined.GetComponent<MeshRenderer>();renderer.sharedMaterial=group.Key.material;renderer.shadowCastingMode=group.Key.casts;renderer.receiveShadows=group.Key.receives;
             }
         }
         void OnDestroy(){foreach(var material in ownedMaterials)if(material!=null)Destroy(material);foreach(var mesh in ownedMeshes)if(mesh!=null)Destroy(mesh);if(ownedProfile!=null)Destroy(ownedProfile);}

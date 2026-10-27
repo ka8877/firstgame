@@ -46,7 +46,7 @@ namespace FirstGame.Editor
                     options = BuildOptions.StrictMode
                 });
                 File.WriteAllText(Path.Combine(output, "BuildEvidence.txt"),
-                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-modern-2026-10-26\nTarget: " + target + "\nResult: " + report.summary.result +
+                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-natural-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);

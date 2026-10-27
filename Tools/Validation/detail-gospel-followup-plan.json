@@ -1,0 +1,260 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-natural-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "hero-walk",
+      "hero-run",
+      "gate-reading",
+      "saved-temple",
+      "continued-temple"
+    ],
+    "steps": [
+      {
+        "type": "click",
+        "point": [
+          0.2328125,
+          0.6194444
+        ],
+        "settleMs": 1800,
+        "label": "새 브라우저에서 실제 새 여정"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222
+        ],
+        "repeat": 3,
+        "settleMs": 1800,
+        "label": "실제 탄생 본문 세 페이지 진행"
+      },
+      {
+        "type": "audio",
+        "label": "followup-journey-original"
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 0,
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-walk",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "desktop",
+        "label": "실제 W 걷기 원본"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 1100,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-walk",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "mobile-landscape",
+        "label": "실제 이동 패드 걷기 원본"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-walk",
+        "useCompositorBurst": true,
+        "expected": "일반 키보드/터치 이동으로 새 인물의 보행 관절과 옷이 실제 성전 공간에서 움직이는 원본 프레임이다. 메인 화면/손·발·머리·의상이 유지되며 실제 입력 전후 위치가 달라진다. 연속 원본 중 직접 본 한 시점만 기술한다."
+      },
+      {
+        "type": "wait",
+        "ms": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0953,
+          0.5806
+        ],
+        "profile": "mobile-landscape",
+        "label": "화면 달리기 ON",
+        "settleMs": 300
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "s"
+        ],
+        "ms": 0,
+        "releaseAfterCapture": true,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-run",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "desktop",
+        "label": "실제 Shift+S 달리기 원본"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.8736
+        ],
+        "ms": 1100,
+        "captureCompositorBurst": true,
+        "captureLabel": "hero-run",
+        "captureMs": 2600,
+        "settleMs": 0,
+        "profile": "mobile-landscape",
+        "label": "실제 이동 패드 달리기 원본"
+      },
+      {
+        "type": "checkpoint",
+        "name": "hero-run",
+        "useCompositorBurst": true,
+        "expected": "실제 달리기 입력의 새 주인공과 성전 배경이 함께 보이는 원본이다. 걷기와 다른 다리·팔 자세를 관찰하며 골격/천/머리의 큰 파손이 없다. 실물 장치 FPS나 모든 프레임의 완전 무관통을 측정했다고 주장하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0953,
+          0.5806
+        ],
+        "profile": "mobile-landscape",
+        "label": "화면 달리기 OFF",
+        "settleMs": 300
+      },
+      {
+        "type": "wait",
+        "ms": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 6000,
+        "profile": "desktop",
+        "label": "첫 표식으로 이동"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.0953,
+          0.7806
+        ],
+        "end": [
+          0.0953,
+          0.6875
+        ],
+        "ms": 2200,
+        "profile": "mobile-landscape",
+        "label": "첫 표식으로 터치 이동"
+      },
+      {
+        "type": "key",
+        "key": "e",
+        "label": "첫 표식 대화",
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9047,
+          0.8833
+        ],
+        "label": "첫 표식 터치 대화",
+        "profile": "mobile-landscape",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "gate-reading",
+        "expected": "실제 표식 근접 상호작용으로 요셉 초상화와 대화 1/2, 관련 누가복음 2:41–43 본문·출처가 아래에 보인다. 현대적 대화 UI와 한글이 읽히고 해설/성경 인용이 구분된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "다음 대화",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "말씀을 따라 걷기",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.840625,
+          0.06666666666666667
+        ],
+        "label": "현재 위치 저장",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-temple",
+        "expected": "실제 저장 안내와 현재 인물 위치·다음 목표·성경 참조를 이어하기 비교 기준으로 기록한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.93515625,
+          0.06666666666666667
+        ],
+        "label": "설정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81796875,
+          0.9111111111111111
+        ],
+        "label": "처음 화면",
+        "settleMs": 1800
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13203125,
+          0.7375
+        ],
+        "label": "이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-temple",
+        "expected": "전체 새로고침 뒤 이어하기가 saved-temple과 같은 인물 위치·실제 다음 목표·관련 성경 참조를 복원했다. 새 인물·HUD·카메라 조작이 유지된다."
+      },
+      {
+        "type": "audio",
+        "label": "after-continue-gesture"
+      }
+    ],
+    "scope": "Second ordinary-start session on identical runtime, continuing ONLY walk/run/reading/save/continue checks after the first session captured zero compositor PNGs. Earlier title/world/rear/front/status/audio proofs remain immutable separately. No browser storage, camera or game-state injection."
+  }
+}

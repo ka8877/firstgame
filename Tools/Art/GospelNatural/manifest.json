@@ -1,0 +1,70 @@
+{
+  "revision": "gospel-natural-2026-10-27",
+  "scope": "Natural anatomical heads adapted from explicitlyCC0 MakeHuman data. Existing65boneQuaternius locomotion rig andsevenactions retained. Artistic depictions, not recovered historical likenesses.",
+  "actors": [
+    {
+      "name": "YoungJesus",
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "meshes": 10,
+      "vertices": 55502,
+      "triangles": 108032,
+      "headSource": "MakeHuman explicitlyCC0 base/macrotargets",
+      "headScale": 0.13348421895681056,
+      "macroTargetWeights": {
+        "caucasian-male-child": 0.72,
+        "caucasian-male-young": 0.28
+      }
+    },
+    {
+      "name": "AdultJesus",
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "meshes": 10,
+      "vertices": 85453,
+      "triangles": 123136,
+      "headSource": "MakeHuman explicitlyCC0 base/macrotargets",
+      "headScale": 0.122099152608541,
+      "macroTargetWeights": {
+        "caucasian-male-young": 1.0
+      }
+    },
+    {
+      "name": "Mary",
+      "bones": 65,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "JumpStart",
+        "JumpAir",
+        "JumpLand",
+        "Practice"
+      ],
+      "meshes": 11,
+      "vertices": 60649,
+      "triangles": 118264,
+      "headSource": "MakeHuman explicitlyCC0 base/macrotargets",
+      "headScale": 0.132899143187129,
+      "macroTargetWeights": {
+        "caucasian-female-young": 1.0
+      }
+    }
+  ]
+}

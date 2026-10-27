@@ -1,0 +1,85 @@
+{
+  "FantasyCards": {
+    "revision": "fm-detail-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "lobby"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 판타지 풍경 원화와 리마스터 타이틀, 시작/이어하기/프로필·도감 버튼이 실제 공개 빌드에서 읽힌다. 원래 카드 원화나 전체 클라이언트 복구로 새 그림을 표시하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "title-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.7225
+        ],
+        "label": "게임 시작"
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "현재 새 로비·로컬 프로필·AI 연습방과 실제 수록250종/9등급이 읽힌다. 가짜 온라인 인원이나 미구현 화폐가 없다."
+      },
+      {
+        "type": "audio",
+        "label": "public-lobby-instrumental"
+      }
+    ],
+    "scope": "Public byte-exact build launch sanity only. Full current interactions are verified in the local desktop/mobile plans."
+  },
+  "PathOfDawn": {
+    "revision": "gospel-natural-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "temple-idle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "새 글꼴과 간결한 현대적 UI, 예수님의 길 제목·새 여정·이어하기·설정이 실제 3D 장면 위에서 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2328125,
+          0.6194444444444445
+        ],
+        "label": "공개 새 여정",
+        "settleMs": 1800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.81015625,
+          0.8972222222222223
+        ],
+        "label": "공개 탄생 본문 진행",
+        "repeat": 3,
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-idle",
+        "expected": "새 자연스러운 관절 인물과 석조 성전이 실제 공개 빌드에서 보인다. 탄생 본문에서 정상 진행했고 HUD·목표·성경 참조가 읽힌다."
+      },
+      {
+        "type": "audio",
+        "label": "public-journey-instrumental"
+      }
+    ],
+    "scope": "Public byte-exact build launch sanity only. Full current interactions are verified in the local desktop/mobile plans."
+  }
+}

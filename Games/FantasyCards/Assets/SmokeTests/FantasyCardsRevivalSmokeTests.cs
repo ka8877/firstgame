@@ -227,7 +227,7 @@ namespace FantasyCards.SmokeTests
                 () =>
                 {
                     foreach (Element element in Enum.GetValues(typeof(Element))) AssertMobileLabel(CardCatalog.ElementName(element));
-                    AssertMobileLabel("싱글플레이 · " + CardCatalog.All.Length + "종 카드 · 50장 덱 / 6손패 / 5전열");
+                    AssertMobileLabel(CardCatalog.All.Length + "종 카드  ·  " + CardCatalog.All.Select(card => card.rarity).Distinct().Count() + "등급  ·  " + DemoCatalog.StarterDecks.Length + "개 기본 덱");
                     AssertMobileLabel("게임 시작");
                     AssertMobileLabel("카드 도감");
                 }, RebuildAtActualMobileSize);

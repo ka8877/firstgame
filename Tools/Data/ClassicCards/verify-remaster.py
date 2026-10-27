@@ -73,12 +73,33 @@ if fidelity:
     records_path = ROOT / fidelity["records"]
     assert sha(records_path.read_bytes()) == fidelity["recordsSha256"]
     records = {c["fields"]["ID"]: c for c in json.loads(records_path.read_text())["cards"]}
-    assert len(cards[161:]) == fidelity["addedCards"] == len(records) == 17
-    for card in cards[161:]:
+    assert len(cards[161:178]) == fidelity["addedCards"] == len(records) == 17
+    for card in cards[161:178]:
         observed = records[card["sourceId"]]
         assert card["fields"] == observed["fields"]
         assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
         assert card["fields"]["DeckLimit"] == 2 and card["fields"]["RankType"] == 1
+detail = selection.get("detailExpansion")
+if detail:
+    detail_baseline_path = ROOT / detail["baseline"]
+    assert sha(detail_baseline_path.read_bytes()) == detail["baselineSha256"]
+    detail_baseline = json.loads(detail_baseline_path.read_text())["cards"]
+    assert len(detail_baseline) == detail["preservedCards"] == 178
+    for card, original in zip(cards, detail_baseline):
+        assert card["sourceId"] == original["sourceId"]
+        assert canonical_sha(card) == original["canonicalSelectionRowSha256"]
+        for key in ("original", "texture"):
+            assert sha((ROOT / original[key]).read_bytes()) == original[key + "Sha256"]
+        assert re.search(r"(?m)^guid: ([0-9a-f]{32})$", Path(str(ROOT / original["texture"]) + ".meta").read_text())[1] == original["textureGuid"]
+    records_path = ROOT / detail["records"]
+    assert sha(records_path.read_bytes()) == detail["recordsSha256"]
+    records = {c["fields"]["ID"]: c for c in json.loads(records_path.read_text())["cards"]}
+    assert len(cards[178:]) == detail["addedCards"] == len(records) == 72
+    for card in cards[178:]:
+        observed = records[card["sourceId"]]
+        assert card["fields"] == observed["fields"]
+        assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
+        assert not card["fields"].get("TextExtra")
 for card in cards:
     assert card["fields"]["ID"] == card["sourceId"]
     assert card["fields"]["Name"] == card["name"]
@@ -104,6 +125,7 @@ subprocess.run([sys.executable, str(ROOT / "Tools/Art/ClassicCards/verify-media.
 result = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat(),
                   "cards": len(cards), "preservedRowsAndMedia": 96,
                   "preservedFidelityRowsMediaAndGuids": 161 if fidelity else None,
+                  "preservedDetailRowsMediaAndGuids": 178 if detail else None,
                   "addedCards": len(cards) - 96, "generatorReproducible": True,
                   "preservedResearchSnapshotVerified": source_snapshot.exists(),
                   "sourceSelectionSha256": sha((DATA / "selection.json").read_bytes()),

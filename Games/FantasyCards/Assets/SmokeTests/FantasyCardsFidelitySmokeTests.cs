@@ -82,6 +82,15 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.WaitUntil(() => !app.IsBattlePlaybackActive, 8, "Actual legal terrain drag must finish its presentation.");
             Assert.That(dragEngine.State.players[0].terrain.Any(card => card.instanceId == terrain.instanceId), Is.True);
             Assert.That(dragEngine.State.players[0].levelPoints, Is.EqualTo(lp - terrainDefinition.landPointCost));
+            var backfield = GameObject.Find("Backfield 0 0");
+            Assert.That(backfield, Is.Not.Null, "A played terrain must remain visible in its actual backfield slot.");
+            Assert.That(backfield.GetComponentsInChildren<RawImage>().Any(image => image.texture != null
+                && image.texture.name == System.IO.Path.GetFileName(terrainDefinition.artResource)), Is.True,
+                "The backfield must show the deployed original terrain artwork, not just a resource pip.");
+            Assert.That(backfield.GetComponent<Button>(), Is.Not.Null);
+            backfield.GetComponent<Button>().onClick.Invoke(); yield return null;
+            Assert.That(SmokeUi.HasText(terrainDefinition.name), Is.True);
+            SmokeUi.Click("돌아가기"); yield return null;
             var unit = dragEngine.State.players[0].hand.First(card => CardCatalog.Get(card.definitionId).kind == CardKind.Unit);
             int soul = dragEngine.State.players[0].genericSoul;
             DragHandEvent(unit.instanceId, GameObject.Find("Lane 0 2"));

@@ -99,6 +99,7 @@ namespace FantasyCards.Presentation
             bool defeat = item.kind == "defeat";
             bool burn = item.kind == "burn";
             bool play = item.kind == "play";
+            bool terrainPlay = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Terrain;
             bool heal = spell && (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0;
             float duration = coin ? .58f : attack ? .65f : defeat ? .54f : burn ? .40f : spell ? .54f : play ? .4f : item.kind == "power" ? .46f : .25f;
 
@@ -110,14 +111,21 @@ namespace FantasyCards.Presentation
             if (item.kind == "direct" || burn) targetPoint = DeckCenter(item.targetPlayer >= 0 ? item.targetPlayer : item.actor);
             if (defeat) targetPoint = sourcePoint;
             if (item.kind == "spell" && target == null) targetPoint = sourcePoint;
+            if (terrainPlay)
+            {
+                int owner = item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor;
+                sourcePoint = new Vector2(.42f, owner == 0 ? .17f : .97f);
+                int index = battleVisualState.players[owner].terrain.Count;
+                targetPoint = BackfieldCardCenter(owner, index);
+            }
 
             var layer = new GameObject("Battle event " + item.sequence + " " + item.kind, typeof(RectTransform)).GetComponent<RectTransform>();
             layer.SetParent(root, false); Anchor(layer, 0, 0, 1, 1);
             if (battleClashContext != null)
             {
                 // The 2017 original moves the pair into a central duel. These are visual copies only.
-                Panel(layer, .025f, .665f, .805f, .925f, new Color(.01f, .025f, .02f, .73f));
-                Panel(layer, .025f, .382f, .805f, .600f, new Color(.01f, .025f, .02f, .73f));
+                Panel(layer, .025f, .688f, .805f, .896f, new Color(.01f, .025f, .02f, .73f));
+                Panel(layer, .025f, .418f, .805f, .625f, new Color(.01f, .025f, .02f, .73f));
                 var copies = new Dictionary<int, RectTransform>();
                 AddClashCard(layer, battleClashContext.sourcePlayer, battleClashContext.sourceInstanceId, copies);
                 AddClashCard(layer, battleClashContext.targetPlayer, battleClashContext.targetInstanceId, copies);
@@ -162,7 +170,8 @@ namespace FantasyCards.Presentation
                     play ? FmBattleFxGraphic.EffectStyle.Summon : item.amount <= 0 && hit ? FmBattleFxGraphic.EffectStyle.Shield : FmBattleFxGraphic.EffectStyle.Slash;
                 effect = CreateBattleFx(layer, style, targetPoint, tint);
                 if (item.kind == "direct") effect.Style = FmBattleFxGraphic.EffectStyle.Impact;
-                if (play) { targetPoint = sourcePoint; PositionBattleFx(effect, targetPoint); }
+                if (play && !terrainPlay) { targetPoint = sourcePoint; PositionBattleFx(effect, targetPoint); }
+                if (terrainPlay) flyingCard = BattleMovingCard(layer, item.sourceDefinitionId, sourcePoint, false);
                 string amount = defeat ? "소각장" : burn ? "소각 −1" : hit ? item.amount == 0 ? "방어" : "−" + item.amount :
                     item.kind == "spell-target" ? (item.amount >= 0 ? "+" : "") + item.amount : "";
                 if (!string.IsNullOrEmpty(amount))
@@ -220,7 +229,7 @@ namespace FantasyCards.Presentation
                 }
                 if (flyingCard != null)
                 {
-                    Vector2 position = item.kind == "draw" ? Vector2.Lerp(sourcePoint, targetPoint, Mathf.SmoothStep(0, 1, p)) :
+                    Vector2 position = item.kind == "draw" || terrainPlay ? Vector2.Lerp(sourcePoint, targetPoint, Mathf.SmoothStep(0, 1, p)) :
                         Vector2.Lerp(targetPoint, GraveyardCenter(item.targetPlayer >= 0 ? item.targetPlayer : item.actor), Mathf.SmoothStep(0, 1, p));
                     Anchor(flyingCard, position.x - .024f, position.y - .05f, position.x + .024f, position.y + .05f);
                     flyingCard.localRotation = Quaternion.Euler(0, 0, p * (burn ? 30 : -6));
@@ -240,10 +249,15 @@ namespace FantasyCards.Presentation
             var point = root.InverseTransformPoint(view.TransformPoint(view.rect.center));
             return new Vector2((point.x - root.rect.xMin) / root.rect.width, (point.y - root.rect.yMin) / root.rect.height);
         }
-        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .79f : .49f);
+        private Vector2 BackfieldCardCenter(int owner, int index)
+        {
+            float slot = .81f / Mathf.Max(1, BattleDisplayState.rules.terrainLimit);
+            return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3585f : .9485f);
+        }
+        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .792f : .5215f);
         private static Vector2 DeckCenter(int owner) => new Vector2(.90f, owner == 1 ? .49f : .42f);
         private static Vector2 GraveyardCenter(int owner) => new Vector2(.90f, owner == 1 ? .43f : .37f);
-        private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .79f : .49f);
+        private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .792f : .5215f);
         private void AddClashCard(Transform parent, int owner, int instanceId, Dictionary<int, RectTransform> copies)
         {
             if (owner < 0 || owner > 1 || instanceId < 0 || copies.ContainsKey(instanceId)) return;

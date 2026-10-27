@@ -1,0 +1,56 @@
+{
+  "revision": "fm-detail-2026-10-27",
+  "kind": "new original AI-generated development title illustration",
+  "createdDate": "2026-10-27",
+  "generator": "image_gen.imagegen",
+  "generatedOriginal": "/workspace/generated_images/exec-8cd91016-4e70-4102-8145-2df59dc7e68c.png",
+  "prompt": "Tools/Art/FmDetail/title-keyart-prompt.txt",
+  "source": {
+    "file": "Tools/Art/FmDetail/title-keyart-original.png",
+    "bytes": 3200613,
+    "sha256": "f3ed85bb9e827eaf74d5f4b0ff532e9ca0a0b24db1fcbe9228d09745d0350492",
+    "width": 1672,
+    "height": 941
+  },
+  "runtime": {
+    "file": "Games/FantasyCards/Assets/Resources/Art/FmDetail/title-keyart.jpg",
+    "bytes": 845463,
+    "sha256": "cf1d89676e719a8e2f60a083fce73dac1388b34350fa9ab62a7d695f5c5e4c88",
+    "width": 1672,
+    "height": 941
+  },
+  "resourceKey": "Art/FmDetail/title-keyart",
+  "encoding": {
+    "tool": "ImageMagick convert",
+    "arguments": [
+      "-sampling-factor",
+      "4:4:4",
+      "-quality",
+      "93"
+    ],
+    "scope": "PNG to JPEG encoding only; dimensions and composition retained. Original generated PNG remains intact."
+  },
+  "import": {
+    "type": "Texture2D for RawImage",
+    "guid": "d05f1c09d26b4e41a783fa791425725a",
+    "maxTextureSize": 2048,
+    "mipmaps": false,
+    "nonPowerOfTwoScale": "None",
+    "wrap": "Clamp"
+  },
+  "scope": "Newly generated environmental title key art, not a recovered Fantasy Masters illustration or HD reconstruction of original low-resolution art. All original card illustrations and existing character source media remain unchanged. No large character face or copied game logo. UI typography, controls and particles are separate runtime objects.",
+  "visualReview": {
+    "status": "internally-reviewed",
+    "reviewers": [
+      "/root/remaster_art",
+      "/root"
+    ],
+    "sourceViewed": "original full-resolution generated PNG",
+    "findings": [
+      "Dark forest left side supports overlaid title and buttons.",
+      "Luminous citadel, layered bridges, waterfalls and seven elemental lights occupy the right side.",
+      "No baked title/UI/text, no portrait or obstructive close-up character.",
+      "This is asset composition review, not Unity/web runtime verification or user aesthetic approval."
+    ]
+  }
+}

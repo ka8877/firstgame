@@ -1,0 +1,23 @@
+
+FBX export starting... '/workspace/firstgame/Games/PathOfDawn/Assets/Resources/Art/Gospel3D/YoungJesus.fbx'
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+(bpy.data.armatures['Armature.001'], 'POSE')
+export finished in 4.2809 sec.
+NATURAL_ACTOR_READY YoungJesus
+Traceback (most recent call last):
+  File "/workspace/firstgame/Tools/Art/GospelNatural/build-natural-actors.py", line 248, in <module>
+    c=sum((BASE[i[0]]for i in source),Vector())/len(source)
+                              ^^^^^^
+TypeError: 'BMVert' object is not iterable
+Blender 4.3.2
+Read blend: "/workspace/firstgame/Tools/Art/Gospel3D/GospelActors.blend"
+
+Blender quit

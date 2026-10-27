@@ -1,0 +1,7 @@
+{
+  "status": "failed-then-corrected",
+  "cause": "The adult beard loop used a garment BMVert selection instead of retained source face records. The incomplete follow-on read-only verification was stopped.",
+  "correction": "Renamed garment selection variable and re-exported all three with Blender --python-exit-code1 and fail-fast shell handling.",
+  "finalEvidence": "Tools/Art/GospelNatural/export-verification.json",
+  "scope": "Failed intermediate artist attempt; not current Unity or browser verification."
+}

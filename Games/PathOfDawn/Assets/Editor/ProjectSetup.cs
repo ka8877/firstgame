@@ -19,7 +19,7 @@ namespace FirstGame.Editor
     {
         [Serializable] sealed class ModelPalette { public ModelColor[] materials; }
         [Serializable] sealed class GospelMaterialPalette { public GospelMaterialSpec[] materials; }
-        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap; public float smoothness; public bool doubleSided; }
+        [Serializable] sealed class GospelMaterialSpec { public string name; public float[] baseColor; public string baseMap; public float smoothness; public bool doubleSided; public bool alphaClip; public float cutoff = .5f; }
         [Serializable] sealed class ModelColor { public string name; public float r, g, b; }
         [Serializable] sealed class PaintedLayout { public PaintedRegion[] characters; public PaintedRegion[] walkFrames; }
         [Serializable] sealed class PaintedRegion
@@ -143,12 +143,23 @@ namespace FirstGame.Editor
                 material.SetColor("_BaseColor", new Color(entry.baseColor[0], entry.baseColor[1], entry.baseColor[2], entry.baseColor[3]));
                 material.SetFloat("_Smoothness", Mathf.Clamp01(entry.smoothness));
                 material.SetFloat("_Cull", (float)(entry.doubleSided ? CullMode.Off : CullMode.Back));
+                // Authored hair cards use the original RGBA strand mask. Keep
+                // them in the depth-writing cutout pass, not a sorted opaque
+                // rectangle or transparent sheet that hides the real face.
+                material.SetFloat("_Surface", 0);
+                material.SetFloat("_AlphaClip", entry.alphaClip ? 1 : 0);
+                material.SetFloat("_Cutoff", Mathf.Clamp01(entry.cutoff));
+                material.SetFloat("_AlphaToMask", entry.alphaClip ? 1 : 0);
+                if (entry.alphaClip) material.EnableKeyword("_ALPHATEST_ON");
+                else material.DisableKeyword("_ALPHATEST_ON");
+                material.SetOverrideTag("RenderType", entry.alphaClip ? "TransparentCutout" : "Opaque");
+                material.renderQueue = entry.alphaClip ? (int)RenderQueue.AlphaTest : -1;
                 material.SetTexture("_BaseMap", null);
                 if (!string.IsNullOrEmpty(entry.baseMap))
                 {
                     string texturePath = folder + "/" + entry.baseMap;
                     var textureImporter = AssetImporter.GetAtPath(texturePath) as TextureImporter;
-                    if (textureImporter != null) { textureImporter.textureShape = TextureImporterShape.Texture2D; textureImporter.sRGBTexture = true; textureImporter.maxTextureSize = 2048; textureImporter.mipmapEnabled = true; textureImporter.SaveAndReimport(); }
+                    if (textureImporter != null) { textureImporter.textureShape = TextureImporterShape.Texture2D; textureImporter.textureType = TextureImporterType.Default; textureImporter.sRGBTexture = true; textureImporter.alphaSource = TextureImporterAlphaSource.FromInput; textureImporter.alphaIsTransparency = entry.alphaClip; textureImporter.maxTextureSize = 2048; textureImporter.mipmapEnabled = true; textureImporter.SaveAndReimport(); }
                     var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
                     if (texture == null) throw new InvalidOperationException("Missing character texture " + texturePath);
                     material.SetTexture("_BaseMap", texture);
@@ -326,7 +337,10 @@ namespace FirstGame.Editor
             // URP17.3 exposes this setting read-only in its public runtime API.
             // The serialized field is verified in the installed package source.
             var serializedPipeline = new SerializedObject(asset);
-            serializedPipeline.FindProperty("m_SoftShadowsSupported").boolValue = hdr;
+            // The courtyard sun explicitly requests soft shadows. Keep the
+            // filtered shadow variant in Web too; otherwise face, hair and
+            // carved stone fall back to the old hard pixelated silhouette.
+            serializedPipeline.FindProperty("m_SoftShadowsSupported").boolValue = true;
             serializedPipeline.ApplyModifiedPropertiesWithoutUndo();
             if (create) AssetDatabase.CreateAsset(asset, path); else EditorUtility.SetDirty(asset);
             return asset;

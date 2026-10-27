@@ -1,16 +1,16 @@
 {
-  "revision": "gospel-modern-2026-10-26",
+  "revision": "gospel-natural-2026-10-27",
   "materials": [
     {
       "name": "Gospel_Skin",
       "baseColor": [
-        0.94,
-        0.91,
-        0.88,
+        0.83,
+        0.75,
+        0.66,
         1
       ],
       "baseMap": "body-soft-albedo.png",
-      "smoothness": 0.16000000000000003,
+      "smoothness": 0.24,
       "doubleSided": false
     },
     {
@@ -21,8 +21,8 @@
         1,
         1
       ],
-      "baseMap": "eyes-albedo.png",
-      "smoothness": 0.72,
+      "baseMap": "natural-eyes.png",
+      "smoothness": 0.7,
       "doubleSided": false
     },
     {
@@ -52,13 +52,13 @@
     {
       "name": "Gospel_HairCap",
       "baseColor": [
-        0.047,
-        0.025,
+        0.036,
+        0.021,
         0.014,
         1
       ],
       "baseMap": null,
-      "smoothness": 0.22999999999999998,
+      "smoothness": 0.20999999999999996,
       "doubleSided": false
     },
     {
@@ -148,9 +148,9 @@
     {
       "name": "Gospel_HairWave",
       "baseColor": [
-        0.065,
-        0.028,
-        0.014,
+        0.048,
+        0.029,
+        0.018,
         1
       ],
       "baseMap": null,
@@ -168,6 +168,56 @@
       "baseMap": "linen-albedo.png",
       "smoothness": 0.050000000000000044,
       "doubleSided": true
+    },
+    {
+      "name": "Gospel_NaturalHeadSkin",
+      "baseColor": [
+        0.9,
+        0.84,
+        0.76,
+        1
+      ],
+      "baseMap": "natural-young-skin.png",
+      "smoothness": 0.24,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_NaturalFemaleSkin",
+      "baseColor": [
+        0.9,
+        0.84,
+        0.76,
+        1
+      ],
+      "baseMap": "natural-female-skin.png",
+      "smoothness": 0.24,
+      "doubleSided": false
+    },
+    {
+      "name": "Gospel_NaturalHair",
+      "baseColor": [
+        0.4,
+        0.31,
+        0.24,
+        1
+      ],
+      "baseMap": "natural-hair.png",
+      "smoothness": 0.18000000000000005,
+      "doubleSided": true,
+      "alphaClip": true,
+      "cutoff": 0.42
+    },
+    {
+      "name": "Gospel_NaturalBrow",
+      "baseColor": [
+        0.035,
+        0.022,
+        0.017,
+        1
+      ],
+      "baseMap": null,
+      "smoothness": 0.12,
+      "doubleSided": false
     }
   ]
 }

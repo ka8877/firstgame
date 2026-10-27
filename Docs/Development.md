@@ -1,6 +1,6 @@
 # 개발과 실행
 
-현재 진입 경로는 판타지마스터즈의 `fm-remaster-2026-10-26` 화면과 예수님의 길 `gospel-remaster-2026-10-26`의 `GospelJourneyApp`이다. 카드의 규칙 콘텐츠는 `fm-classic-0.1.0`, 새 성경 여정은 `gospel-0.1.0`이다. 설계는 [FmRevival](FmRevival.md)·[GospelJourney](GospelJourney.md)·[GospelChronology](GospelChronology.md), 실제 실행 결과는 [Validation](Validation.md)을 따른다.
+현재 개정은 판타지마스터즈 `fm-detail-2026-10-27`과 예수님의 길 `gospel-natural-2026-10-27`이다. 카드250종·9수록등급과 실제 지형 백필드·로컬 프로필, 자연스러운3D 인물·성전 배경을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 범위는 [DetailRemaster](DetailRemaster.md), 실제 새 실행·빌드·공개 검증은 [DetailValidation](DetailValidation.md)을 따른다. 이전 개정의 검증과 에셋은 이력으로 보존한다.
 
 ## 고정 도구
 
@@ -92,3 +92,5 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 정적 CardAsset 의미 검증(`Tools/Validation/verify-card-authoring.py`)은 PyYAML을 사용한다. 현재 클라우드 검증 버전은 PyYAML 6.0.3이며, Unity를 실행하거나 생성 에셋을 다시 쓰지 않고 전체 필드와 그림 참조를 검사한다.
 
 현재 디자인판은 `Tools/Validation/modern-smoke-plans.json`과 `modern-public-plans.json`으로 실제 입력/원본 화면/로컬 음악 출력을 검사한다. `summarize-modern-release.py`로 현재 근거를 정리하며 이전 Remaster의 외부 음악/이전 모델 고정 검사를 현재 결과로 쓰지 않는다.
+
+현재 두 게임의 새 검증은 `Tools/Validation/detail-smoke-plans.json`과 `detail-public-plans.json`, 릴리스는 `--release-profile detail`과 `summarize-detail-release.py`를 사용한다. 원작 BGM 네 고정 로컬 파일과 기존 저장 슬롯은 유지한다. 이전 modern/fidelity 프로필은 해당 이력을 재현할 때만 선택한다.

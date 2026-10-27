@@ -150,13 +150,13 @@ namespace FantasyCards.Tests
 
         [Test] public void HigherGradeOriginalsKeepActualTwoCopyLimitsAndHaveAPlayableFifthDeck()
         {
-            var extra = CardCatalog.All.Skip(161).ToArray();
+            var extra = CardCatalog.All.Skip(161).Take(17).ToArray();
             Assert.That(extra.Length, Is.EqualTo(17));
             Assert.That(extra.All(c => c.deckLimit == 2), Is.True);
             Assert.That(extra.Count(c => c.rarity == CardRarity.Upgrade), Is.EqualTo(3));
             Assert.That(extra.Count(c => c.rarity == CardRarity.Unique), Is.EqualTo(1));
             Assert.That(extra.Count(c => c.rarity == CardRarity.Event), Is.EqualTo(13));
-            Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(8));
+            Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(9));
             Assert.That(DemoCatalog.StarterDecks.Select(d => d.id), Is.EqualTo(new[] { "forest", "knights", "tides", "stars", "fidelity" }));
             var deck = DemoCatalog.GetDeck("fidelity"); DemoCatalog.ValidatePlayableDeck(deck.cards);
             Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Upgrade), Is.EqualTo(4));
@@ -215,14 +215,14 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(178));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,14},{CardKind.Unit,136},{CardKind.Spell,15},{CardKind.Equipment,13} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(250));
+            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,28},{CardKind.Unit,180},{CardKind.Spell,15},{CardKind.Equipment,27} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
-            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(11)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(2)); }
+            { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(17)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(4)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }
             var deathKnight = CardCatalog.Get(ClassicFixtures.Id("듀라한"));
             Assert.That(new[] { deathKnight.level,deathKnight.coloredCost,deathKnight.genericCost,deathKnight.cost }, Is.EqualTo(new[] {4,2,2,4}));
-            Assert.That(CardCatalog.All.Where(c=>c.kind==CardKind.Unit).Select(c=>c.level).Distinct(), Is.EquivalentTo(Enumerable.Range(1,7)));
+            Assert.That(CardCatalog.All.Where(c=>c.kind==CardKind.Unit).Select(c=>c.level).Distinct(), Is.EquivalentTo(Enumerable.Range(1,8)));
         }
         [Test] public void NewOriginalEquipmentKeepsSignedStatsAndBeastRequirement()
         {

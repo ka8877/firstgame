@@ -15,26 +15,16 @@ namespace FantasyCards.Presentation
             var state = BattleDisplayState; var player = state.players[0]; var enemy = state.players[1];
             battleUnitViews.Clear();
             Backdrop(false);
-            var field = Panel(root, .025f, .362f, .805f, .928f, new Color(.065f, .14f, .115f, .99f));
+            var field = Panel(root, .025f, .412f, .805f, .899f, new Color(.065f, .14f, .115f, .99f));
             var stone = new GameObject("Remastered green stone field", typeof(RectTransform), typeof(FmBattleStoneGraphic)).GetComponent<RectTransform>();
             stone.SetParent(field, false); Anchor(stone, 0, 0, 1, 1);
             Frame(field, new Color(.59f, .49f, .29f, .85f), 2); Ornament(field, gold);
-            DrawLanes(1, .665f, .925f); DrawLanes(0, .382f, .600f);
-            var messagePanel = Panel(root, .025f, .604f, .805f, .663f, new Color(.06f, .10f, .15f, .96f));
+            DrawLanes(1, .688f, .896f); DrawLanes(0, .418f, .625f);
+            var messagePanel = Panel(root, .025f, .630f, .805f, .682f, new Color(.06f, .10f, .15f, .96f));
             ReadableText(messagePanel, battlePlaybackActive ? battlePlaybackIndex + "/" + battlePlaybackCount + " · " + battlePlaybackCaption : locked ? "전투 준비 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", battlePlaybackActive ? battlePlaybackCaption : StatusMessage());
-            var opponent = Panel(root, .025f, .930f, .805f, .995f, ink);
-            var opponentText = Text(opponent, "상대 · " + (state.activePlayer == 1 ? "공격" : "방어") + " · 덱 " + enemy.deck.Count + " · 손패 " + enemy.hand.Count, .012f, .02f, .53f, .98f, 22, ivory);
-            opponentText.textWrappingMode = TextWrappingModes.NoWrap;
-            DrawTerrainPips(opponent, enemy, .55f, .07f, .985f, .93f);
-            BindTooltip(opponent.gameObject, "상대 지형", TerrainSummary(enemy));
-            var resources = Panel(root, .025f, .309f, .805f, .377f, ink);
-            resources.gameObject.name = "Terrain drop band";
-            string resourceText = "내 손패 " + player.hand.Count + "장 · 지형 " + player.terrain.Count + "/" + state.rules.terrainLimit + "  |  카드 선택 → 빛나는 칸 · 길게 누르면 상세";
-            if (canvas.pixelRect.height < 600) resourceText = "손패 " + player.hand.Count + "장 · AP/DP/HP · 선택→전열 · 길게 눌러 상세";
-            ReadableText(resources, resourceText, .012f, .02f, .988f, .98f, 21, gold);
-            BindTooltip(resources.gameObject, "내 소울과 레벨 포인트", "LP로 지형을 전개합니다. 색소울과 총소울로 카드를 사용합니다.\n" + TerrainSummary(player));
-            BindTerrainDrop(resources);
+            DrawTerrainBackfield(enemy, 1, .902f, .995f);
+            DrawTerrainBackfield(player, 0, .309f, .408f);
             DrawRevivalBattleRail(); DrawScrollableHand();
             DrawBattlePlaybackControls();
             if (!battlePlaybackActive && state.phase == BattlePhase.Complete) ShowResult();
@@ -51,17 +41,6 @@ namespace FantasyCards.Presentation
         {
             return "지형: " + (player.terrain.Count == 0 ? "아직 없음" : string.Join(" · ", player.terrain.Select(card => CardCatalog.Get(card.definitionId).name)));
         }
-        private void DrawTerrainPips(Transform parent, PlayerState player, float x0, float y0, float x1, float y1)
-        {
-            for (int i = 0; i < engine.State.rules.terrainLimit; i++)
-            {
-                var card = i < player.terrain.Count ? CardCatalog.Get(player.terrain[i].definitionId) : null;
-                float width = (x1 - x0) / engine.State.rules.terrainLimit, x = x0 + i * width;
-                var pip = Panel(parent, x, y0, x + width - .005f, y1, card == null ? new Color(.18f, .20f, .29f) : ElementColor(card.element) * new Color(.65f, .65f, .65f, 1));
-                Text(pip, card == null ? "·" : CardCatalog.ElementName(card.element).Substring(0, 1), .03f, .02f, .97f, .98f, 18, ivory, TextAlignmentOptions.Center);
-            }
-        }
-
         private void DrawActions(float x0, float y0, float x1, float y1)
         {
             if (!engine.IsPreparing(0))

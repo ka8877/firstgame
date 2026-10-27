@@ -166,6 +166,11 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(initialZoom-motor.CameraDistance,Is.InRange(.5f,.8f),
                     "One normalized wheel tick must produce a perceptible camera change, not a legacy pixel-scale movement.");
                 yield return SmokeUi.Capture("PathOfDawn", "gospel-03b-protagonist-front", 1280, 720);
+                float frontDistance = motor.CameraDistance;
+                motor.SetCameraDistance(GospelThirdPersonMotor.MinimumCameraDistance);
+                yield return new WaitForSecondsRealtime(.7f);
+                yield return SmokeUi.Capture("PathOfDawn", "gospel-natural-front-close", 1280, 720);
+                motor.SetCameraDistance(frontDistance);
                 CaptureCharacterPose(motor);
                 InputSystem.QueueStateEvent(pointer,new MouseState{scroll=Vector2.down});yield return null;
                 InputSystem.QueueStateEvent(pointer,new MouseState());yield return null;

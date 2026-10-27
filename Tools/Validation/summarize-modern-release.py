@@ -89,7 +89,22 @@ def build(game,target):
 def browser(game,profile,files):
     p=REPORTS/profile/game/'report.json';r=json.loads(p.read_text())
     adjudication=None
-    if game=='FantasyCards' and profile=='PublicMobile844' and r.get('status')=='failed':
+    cache_adjudication=False
+    local_media_adjudication=False
+    followup_adjudication=False
+    if game=='FantasyCards' and profile=='Desktop720' and r.get('revision')=='fm-detail-2026-10-27' and r.get('status')=='failed':
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('detail_cache_analysis',ROOT/'Tools/Validation/adjudicate-detail-cache.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        adjudication=module.verify_record(p);cache_adjudication=True
+    elif game=='FantasyCards' and profile=='Mobile844' and r.get('revision')=='fm-detail-2026-10-27' and r.get('status')=='failed':
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('detail_mobile_media_analysis',ROOT/'Tools/Validation/adjudicate-detail-media.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        adjudication=module.verify_record(p);local_media_adjudication=True
+    elif game=='PathOfDawn' and profile=='Desktop720' and r.get('revision')=='gospel-natural-2026-10-27' and r.get('status')=='failed':
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('detail_gospel_followup',ROOT/'Tools/Validation/verify-detail-gospel-followup.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        adjudication=module.verify_record(p);followup_adjudication=True
+    elif game=='FantasyCards' and profile=='PublicMobile844' and r.get('status')=='failed':
         import importlib.util
         spec=importlib.util.spec_from_file_location('public_range_analysis',ROOT/'Tools/Validation/adjudicate-fm-public-ranges.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         adjudication=module.analyze(p)
@@ -100,15 +115,20 @@ def browser(game,profile,files):
     require(normalized(r.get('buildFingerprint',{}).get('files',[]))==normalized(files),'Runtime bytes changed after browser run: '+str(p))
     require(not r.get('pageErrors') and not r.get('httpErrors'),'Runtime page/HTTP errors: '+str(p))
     review=adjudication['visualReview'] if adjudication else r.get('visualReview',{});require(review.get('status')=='approved' and review.get('reviewer') and review.get('reviewedUtc') and normalized(review.get('runtimeFiles',[]))==normalized(files),'Direct current original review required: '+str(p))
-    approved=[c for c in r.get('checkpoints',[]) if c.get('status')=='approved'];require(approved,'No original gameplay checkpoints')
+    approved=adjudication['approvedCheckpoints'] if followup_adjudication else [c for c in r.get('checkpoints',[]) if c.get('status')=='approved'];require(approved,'No original gameplay checkpoints')
+    evidence_parents=[ROOT/parent for parent in adjudication['evidenceParents']] if followup_adjudication else [p.parent]
     for c in approved:
         s,d=c['original'],c['review'];shot=ROOT/s['path']
-        require(shot.resolve().is_relative_to(p.parent.resolve()) and digest(shot)==s['sha256'] and d.get('frameSha256')==s['sha256'] and d.get('expected')==c['expected'] and d.get('observed'),'Invalid current original approval')
-    audio=r.get('audioEvidence',{}).get('windows',[])
+        require(any(shot.resolve().is_relative_to(parent.resolve()) for parent in evidence_parents) and digest(shot)==s['sha256'] and d.get('frameSha256')==s['sha256'] and d.get('expected')==c['expected'] and d.get('observed'),'Invalid current original approval')
+    audio=adjudication['audioWindows'] if followup_adjudication else r.get('audioEvidence',{}).get('windows',[])
     require(audio and any(a.get('medianRms',0)>1e-5 for a in audio),'No actual audible PCM evidence: '+str(p))
     if game=='FantasyCards':
         require(any('/StreamingAssets/Audio/ModernCard/' in u for a in audio for u in a.get('sourceUrls',[])),'No bundled instrumental PCM source')
-    return {'checks':sum(c.get('passed') is True for c in r['checks']),'approvedOriginals':len(approved),'screenshots':[c['original'] for c in approved],'audioWindows':len(audio),**ref(p),**({'rawStatus':'failed','adjudicatedPublicMediaRanges':len(adjudication['requests']),'adjudication':ref(p.parent/'range-adjudication.json')} if adjudication else {})}
+    proof=({'rawStatus':'failed','adjudicatedCacheRevalidations':len(adjudication['requests']),'adjudication':ref(p.parent/'cache-adjudication.json')} if cache_adjudication else
+           {'rawStatus':'failed','adjudicatedLocalMediaRequests':len(adjudication['requests']),'adjudication':ref(p.parent/'media-adjudication.json')} if local_media_adjudication else
+           {'rawStatus':'failed','ordinarySessions':2,'followupReport':adjudication['followupReport'],'checksBySession':adjudication['checksBySession'],'adjudication':ref(p.parent/'followup-verification.json')} if followup_adjudication else
+           {'rawStatus':'failed','adjudicatedPublicMediaRanges':len(adjudication['requests']),'adjudication':ref(p.parent/'range-adjudication.json')} if adjudication else {})
+    return {'checks':adjudication['passedChecks'] if followup_adjudication else sum(c.get('passed') is True for c in r['checks']),'approvedOriginals':len(approved),'screenshots':[c['original'] for c in approved],'audioWindows':len(audio),**ref(p),**proof}
 
 
 def public(record,run):

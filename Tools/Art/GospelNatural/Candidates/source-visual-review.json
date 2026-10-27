@@ -1,0 +1,52 @@
+{
+  "reviewedUtc": "2026-10-27T02:50:21.133429+00:00",
+  "reviewer": "/root/fm_cards_research",
+  "scope": "SourceUVtextureinspection only; sourceimagesviewedbutnotedited. Runtimefit/skinshader/hairculling must be checked byactor/release owners.",
+  "files": [
+    {
+      "file": "Tools/Art/GospelNatural/Candidates/skins/young_caucasian_male/young_lightskinned_male_diffuse.png",
+      "sha256": "862a26e335e958b70534cb5f0d7c47ef30ab148a56c42b3e9da969cf76f12963",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB",
+      "directlyViewed": true
+    },
+    {
+      "file": "Tools/Art/GospelNatural/Candidates/hair/long01/long01_diffuse.png",
+      "sha256": "e8dc25d90f8f62467e8630420e1240a400d070054fb7c3f1d3f7bf3e457d6c2c",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA",
+      "directlyViewed": true,
+      "alpha": {
+        "min": 0,
+        "max": 255,
+        "distinctValues": 256,
+        "fullyTransparentPixels": 797182,
+        "fullyOpaquePixels": 2352850
+      }
+    },
+    {
+      "file": "Tools/Art/GospelNatural/Candidates/skins/young_caucasian_female/young_lightskinned_female_diffuse.png",
+      "sha256": "b2a6ac8cd4f9febdb447368e29c76cd68410bb66e46d9dcfa2d5f75126eea8fc",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB",
+      "directlyViewed": true
+    }
+  ],
+  "observed": [
+    "Young male diffuse has a clean youthful face with lip/nostril/ear colour detail; no visible moustache or beard stubble in the face patch. Buzzed scalp detail is present and should be covered by hair.",
+    "The male mhmat internalname says old_caucasian_male_detailed despiteyoungtags andofficialyoung_caucasian_maleassetpath; actualdiffuse was directlyviewed rather thantrustingthelabel.",
+    "Long01 diffuse contains finebrownstrandtexture andgenuinefeatheredalpha,notanopaqueclothsurface.",
+    "Long01 mhmat explicitlysets transparentTrue,alphaToCoverageTrue,backfaceCullFalse; mesh/.mhclo/.mhmat headers explicitlysayCC0September2020.",
+    "Hairproxy declaresbasemeshhm08andreference-vertexweightsforMakeHuman; sourcebodyUV is not a freeprojectionportrait.",
+    "OptionalyoungfemaleUVdiffusewasdirectlyviewed:cleanfacewithnaturallip/ear/nostrilcolourandno facialhair; intendedforMarywithactorfitreview."
+  ]
+}

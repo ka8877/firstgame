@@ -18,6 +18,13 @@ FIDELITY = {
     'reportRoots': {'FantasyCards': 'Artifacts/Validation/FmFidelity', 'PathOfDawn': 'Artifacts/Validation/Modern'},
     'preservedGames': ['PathOfDawn']
 }
+DETAIL = {
+    'name': 'detail',
+    'revisions': {'FantasyCards': 'fm-detail-2026-10-27', 'PathOfDawn': 'gospel-natural-2026-10-27'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Detail' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': []
+}
 
 
 def contract(name):
@@ -25,6 +32,8 @@ def contract(name):
         return MODERN
     if name == 'fm-fidelity':
         return FIDELITY
+    if name == 'detail':
+        return DETAIL
     raise ValueError('Unknown explicit release profile: ' + str(name))
 
 

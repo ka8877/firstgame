@@ -219,6 +219,7 @@ namespace FantasyCards.Presentation
         private void ShowResult()
         {
             var s = engine.State;
+            RecordLocalBattleResult();
             var shade = Panel(root, 0, 0, 1, 1, new Color(.01f, .02f, .04f, .73f)); shade.GetComponent<Image>().raycastTarget = true;
             var panel = Panel(root, Compact ? .10f : .275f, Compact ? .16f : .30f, Compact ? .90f : .79f, Compact ? .84f : .77f, new Color(.025f, .045f, .085f, .99f));
             Frame(panel, gold, 1); panel.gameObject.AddComponent<UiPanelEntrance>();

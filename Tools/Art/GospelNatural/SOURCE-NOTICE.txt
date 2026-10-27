@@ -1,0 +1,46 @@
+Gospel natural actor revision — gospel-natural-2026-10-27
+
+The MakeHuman hm08 anatomical base mesh, eye proxy/atlas and macro-targets
+are from the official MakeHuman repository:
+https://github.com/makehumancommunity/makehuman
+
+The exact downloaded files are kept in Source. Their headers explicitly state
+that the assets were released as CC0 in September2020. Source/LICENSE.ASSETS.md
+contains the full Creative Commons CC0 1.0 Universal terms. The application code
+license is separate; no MakeHuman application code is bundled in the game.
+
+The young, adult and female head adaptations use the licensed anatomical mesh
+with its original UVs, age/sex target data, fitted eyelids and eye proxy. They are
+artistic depictions. No historically recovered portrait or measured likeness of
+Jesus or Mary is claimed.
+
+The compatible young male/female skin atlases and long01 authored hair mesh,
+three-anchor fitting proxy, diffuse/alpha atlas and materials are selected
+members of the official MakeHuman system asset pack, explicitly listed CC0:
+https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html
+https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip
+Exact selected members, normal HTTP byte ranges, archive CRC and SHA-256 are
+recorded in Candidates/source-manifest.json. The untouched source members and
+their embedded CC0 headers remain in Candidates. The full267MB archive is not
+bundled. Hair is fitted using its supplied anatomical proxy and cropped at
+shoulder length; it is not compressed from waist length into the cheeks.
+
+MakeHuman head UVs and Quaternius body UVs remain separate. The new skin atlases
+are used only by the new anatomical head/neck; the retained visible hands/feet
+keep their own texture. Hair uses double-sided alpha-clipped strands and an
+opaque anatomical scalp beneath them. The runtime material manifest records
+the exact atlas paths, colors, alpha cutoff and smoothness.
+
+Source/natural-eye-edited.png is an image-generation edit of the original
+MakeHuman brown_eye.png atlas: the irises were changed from saturated red-brown
+to muted chestnut while retaining the two-eye UV atlas layout. The unchanged
+original and its CC0 provenance remain in Source. This is an edited asset, not
+an unmodified MakeHuman original or a photograph of a real individual.
+
+The retained body/hand/foot geometry, GospelRig65bone skeleton and authored
+locomotion take data originate in the previously documented Quaternius CC0
+Universal Base Characters / Universal Animation Library Standard sources.
+See Tools/Art/Gospel3D/SOURCE-NOTICE.txt and its Source license files.
+
+Original .meta GUIDs, runtime content IDs, scripture and save versions are kept.
+Blender art review images are distinct from actual Unity/browser validation.

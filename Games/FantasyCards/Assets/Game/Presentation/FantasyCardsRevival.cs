@@ -56,89 +56,17 @@ namespace FantasyCards.Presentation
 
         private void ClientRail(Action back, string heading = "SINGLE PLAY")
         {
-            var rail = Panel(root, .812f, .035f, .972f, .958f, new Color(.065f, .080f, .058f, .98f));
-            Frame(rail, gold, 2); Ornament(rail, new Color(.55f, .75f, .80f, .45f));
-            ClientBrand(rail, .035f, .865f, .965f, .985f);
-            var emblem = Panel(rail, .15f, .68f, .85f, .85f, new Color(.20f, .10f, .29f));
-            emblem.gameObject.name = "Client violet soul emblem";
-            emblem.GetComponent<UiRoundedImage>().Radius = 1000; Frame(emblem, gold, 2);
-            var glow = Panel(emblem, .14f, .14f, .86f, .86f, new Color(.48f, .29f, .73f)); glow.GetComponent<UiRoundedImage>().Radius = 1000;
-            var core = Panel(emblem, .29f, .29f, .71f, .71f, new Color(.87f, .78f, 1f)); core.GetComponent<UiRoundedImage>().Radius = 1000;
-            var glint = Panel(emblem, .30f, .57f, .43f, .72f, new Color(1, 1, 1, .85f)); glint.GetComponent<UiRoundedImage>().Radius = 1000;
-            Text(rail, heading, .04f, .60f, .96f, .68f, 21, gold, TextAlignmentOptions.Center);
-            Text(rail, "나의 덱\n" + (useCustomDeck ? "편집 덱" : DeckShortName(selectedDeckId)), .045f, .43f, .955f, .59f, 24, ivory, TextAlignmentOptions.Center);
-            Button(rail, "덱 선택", .06f, .335f, .94f, .425f, ShowDeckSelection, slate, 23);
-            Button(rail, "카드 도감", .06f, .235f, .94f, .325f, () => ShowCollection(false), slate, 23);
-            Button(rail, "덱 편집", .06f, .135f, .94f, .225f, () => ShowCollection(true), slate, 23);
-            Button(rail, "돌아가기", .06f, .03f, .94f, .12f, back, slate, 23);
+            DrawDetailClientRail(back, heading);
         }
 
         private void ShowRevivalTitle()
         {
-            battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login");
-            RevivalBackdrop(true);
-            // The preserved official web character is used as original artwork,
-            // not presented as a recovered client title or fabricated HD asset.
-            OriginalLoginCharacter();
-            Gradient(root, 0, 0, .68f, 1, new Color(.020f, .030f, .024f, .55f), Color.clear, true);
-            var edition = Text(root, "FANTASY MASTERS  /  REMASTER", .065f, .885f, .62f, .947f, 20, gold);
-            edition.characterSpacing = 2.5f;
-            var title = Text(root, "판타지\n마스터즈", .06f, .605f, .62f, .855f, 85, ivory);
-            title.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font;
-            title.lineSpacing = -8;
-            title.fontStyle = FontStyles.Bold;
-            Text(root, "소울과 코인, 다시 만나는 클래식 공방", .065f, .535f, .63f, .605f, 27, new Color(.87f, .85f, .75f));
-            var elements = Enum.GetValues(typeof(Element)).Cast<Element>().ToArray();
-            for (int i = 0; i < elements.Length; i++)
-            {
-                float x = .065f + i * .078f;
-                var seal = Panel(root, x, .445f, x + .072f, .515f, new Color(.075f, .11f, .085f, .94f));
-                seal.gameObject.name = "Title element " + elements[i];
-                Frame(seal, new Color(.58f, .48f, .28f, .6f), 1);
-                ElementIcon(seal, elements[i], .06f, .22f, .32f, .78f);
-                Text(seal, CardCatalog.ElementName(elements[i]), .35f, .04f, .98f, .96f, 22, ElementColor(elements[i]), TextAlignmentOptions.Center);
-            }
-            Text(root, "싱글플레이 · " + CardCatalog.All.Length + "종 카드 · 50장 덱 / 6손패 / 5전열", .065f, .365f, .63f, .425f, 22, new Color(.75f, .80f, .71f));
-            var play = Button(root, "게임 시작", .065f, .22f, .315f, .335f, ShowLobby, gold, 31);
-            play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
-            Button(root, "이어하기", .335f, .22f, .535f, .335f, Continue, new Color(.11f, .16f, .12f, .96f), 27, PersistentSaves.Exists(Slot));
-            Button(root, "카드 도감", .065f, .070f, .245f, .160f, () => ShowCollection(false), new Color(.075f, .105f, .080f, .94f), 24);
-            Button(root, "음악 설정", .265f, .070f, .445f, .160f, () => ShowMusicSettings(ShowTitle), new Color(.075f, .105f, .080f, .94f), 24);
-            Text(root, "일곱 속성 · 지형 · 유닛 · 아이템 · 마법", .63f, .045f, .955f, .115f, 18, new Color(.83f, .82f, .71f), TextAlignmentOptions.MidlineRight);
+            ShowDetailTitle();
         }
 
         private void ShowLobby()
         {
-            battleScreen = false; redraw = ShowLobby; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("lobby"); RevivalBackdrop(true);
-            ClientRail(ShowTitle);
-            Button(root, "PLAY · 연습 대전", .055f, .865f, .285f, .955f, ShowLobby, gold, 25);
-            Button(root, "카드 도감", .295f, .865f, .525f, .955f, () => ShowCollection(false), slate, 24);
-            Button(root, "덱 편집", .535f, .865f, .775f, .955f, () => ShowCollection(true), slate, 24);
-            var list = Panel(root, .055f, .335f, .775f, .85f, new Color(.070f, .095f, .075f, .98f)); Frame(list, gold, 1.5f);
-            Text(list, "오늘의 연습 대전", .025f, .84f, .72f, .98f, 25, ivory);
-            Text(list, "SOLO / AI", .75f, .84f, .97f, .98f, 20, teal, TextAlignmentOptions.Center);
-            string[] names = { "숲과 빛의 첫 대전", "물과 암흑의 대전", "불과 금속의 대전" };
-            for (int i = 0; i < DemoCatalog.Encounters.Length; i++)
-            {
-                int encounter = i; float y = .61f - i * .225f;
-                var row = Button(list, "", .025f, y, .975f, y + .205f, () => { selectedEncounter = encounter; ShowEncounterSelection(); }, new Color(.105f, .14f, .105f), 24);
-                row.gameObject.name = "Practice room " + i;
-                var featured = DemoCatalog.GetDeck(DemoCatalog.GetEncounter(i).deckId).cards.Select(CardCatalog.Get).First(card => card.kind == CardKind.Unit);
-                Artwork(row.transform, featured, .018f, .08f, .13f, .92f);
-                Text(row.transform, names[i], .155f, .48f, .75f, .94f, 27, ivory);
-                Text(row.transform, "50장 덱 · 지형과 소울의 전략", .155f, .06f, .75f, .46f, 20, new Color(.65f, .77f, .84f));
-                Text(row.transform, "AI 대전", .78f, .10f, .98f, .90f, 23, teal, TextAlignmentOptions.Center);
-            }
-            var system = Panel(root, .055f, .085f, .775f, .315f, new Color(.045f, .065f, .045f, .96f)); Frame(system, gold, 1.5f);
-            Text(system, "소울 · 코인 · 다섯 칸의 공방", .035f, .67f, .97f, .96f, 28, ivory);
-            int includedGrades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
-            Text(system, "일곱 속성 · " + CardCatalog.All.Length + "종 / " + includedGrades + "등급 수록 · 50장 덱", .035f, .39f, .97f, .67f, 22, new Color(.70f, .80f, .87f));
-            Button(system, "게임 방법", .025f, .045f, .325f, .35f, () => ShowRulesHelp(ShowLobby), slate, 22);
-            Button(system, "등급 / 랭크", .35f, .045f, .65f, .35f, () => ShowCardGradeGuide(false, ShowLobby), slate, 22);
-            Button(system, "편집 덱 분석", .675f, .045f, .975f, .35f, () => ShowDeckAnalysis(ShowLobby), slate, 22);
-            Button(root, "이어하기", .055f, .005f, .265f, .08f, Continue, slate, 23, PersistentSaves.Exists(Slot));
-            Button(root, "저장 옮기기", .275f, .005f, .485f, .08f, ShowTransfer, slate, 23);
-            Button(root, "음악", .565f, .005f, .775f, .08f, () => ShowMusicSettings(ShowLobby), slate, 23);
+            ShowDetailLobby();
         }
 
         private void ShowRevivalRoom()
@@ -149,7 +77,7 @@ namespace FantasyCards.Presentation
             Text(room, "PLAYER", .045f, .70f, .42f, .83f, 22, gold);
             Text(room, "DECK", .45f, .70f, .95f, .83f, 22, gold);
             string deck = useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name;
-            RoomPlayerRow(room, "나", deck, .48f, false);
+            RoomPlayerRow(room, LocalProfileName, deck, .48f, false);
             var opponent = DemoCatalog.GetEncounter(selectedEncounter);
             RoomPlayerRow(room, "컴퓨터", DemoCatalog.GetDeck(opponent.deckId).name, .27f, true);
             Text(room, "덱 승리 · 50장 · 손패 6장 · 전열 5칸\n공격 준비 → 방어 준비 → 배틀 → 소울코스트", .045f, .045f, .95f, .25f, 21, gold, TextAlignmentOptions.Center);
