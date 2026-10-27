@@ -14,7 +14,7 @@ using UnityEngine.UI;
 namespace FantasyCards.SmokeTests
 {
     /// <summary>Current remaster callbacks and catalog browsing; retired avatar fixtures are historical.</summary>
-    public sealed class FantasyCardsRevivalSmokeTests
+    public sealed partial class FantasyCardsRevivalSmokeTests
     {
         IDisposable storageScope, preferenceScope;
         MemorySaveBackend backend;
@@ -76,6 +76,10 @@ namespace FantasyCards.SmokeTests
             Assert.That(SmokeUi.FindButton("대전 시작"), Is.Not.Null);
             SmokeUi.Click("덱 선택"); yield return null;
             Assert.That(ActiveButtons("Starter deck ").Length, Is.EqualTo(4));
+            SmokeUi.Click("다음"); yield return null;
+            Assert.That(ActiveButtons("Starter deck ").Length, Is.EqualTo(1));
+            Assert.That(ActiveButtons("Starter deck ").Single().gameObject.name, Is.EqualTo("Starter deck fidelity"));
+            SmokeUi.Click("이전"); yield return null;
             SmokeUi.Click(DemoCatalog.GetDeck("forest").name); yield return null;
             yield return SmokeUi.Capture("FantasyCards", "remaster-03-four-starter-decks", 1280, 720);
             SmokeUi.Click("대전실로"); yield return null;
@@ -92,6 +96,7 @@ namespace FantasyCards.SmokeTests
             SmokeUi.Click("대전 시작");
             yield return SmokeUi.WaitUntil(() => SmokeUi.FindButton("이대로 시작") != null && SmokeUi.FindButton("이대로 시작").interactable,
                 15, "The actual room start callback must shuffle and deal an opening hand.");
+            SmokeUi.TraceUiState("fidelity-opening-before-read");
             var engine = SmokeUi.ReadEngine();
             Assert.That(engine.State.players[0].hand.Count, Is.EqualTo(6));
             uint beforeRng = engine.State.randomState;
@@ -131,10 +136,10 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(161), "The remaster must ship the expanded actual catalog.");
-            Assert.That(CardCatalog.All.Select(card => card.id).Distinct().Count(), Is.EqualTo(161));
+            Assert.That(CardCatalog.All.Length, Is.GreaterThanOrEqualTo(161), "The fidelity catalog must retain the original shipped cards.");
+            Assert.That(CardCatalog.All.Select(card => card.id).Distinct().Count(), Is.EqualTo(CardCatalog.All.Length));
             SmokeUi.Click("카드 도감"); yield return null;
-            Assert.That(SmokeUi.HasText("전체 161종"), Is.True);
+            Assert.That(SmokeUi.HasText("전체 " + CardCatalog.All.Length + "종"), Is.True, "Active labels: " + string.Join(" | ", UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None).Where(text => text.gameObject.activeInHierarchy).Select(text => text.text).Take(20)));
             Assert.That(SmokeUi.FindButton("이전").interactable, Is.False);
             yield return SmokeUi.Capture("FantasyCards", "remaster-08-catalog", 1280, 720);
 
@@ -199,7 +204,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(VisibleCards().Select(card => card.id), Is.EqualTo(new[] { editable.id }));
             Assert.That(editorDeck.Count, Is.EqualTo(50));
             Assert.That(SmokeUi.FindButton("+").interactable, Is.False, "A full 50-card deck cannot accept another card.");
-            SmokeUi.Click("-"); yield return null;
+            SmokeUi.Click(ActiveButtons("Collection list card ").Length > 0 ? "−" : "-"); yield return null;
             Assert.That(editorDeck.Count, Is.EqualTo(49));
             Assert.That(editorDeck.Count(id => id == editable.id), Is.EqualTo(originalCount - 1));
             Assert.That(SmokeUi.FindButton("+").interactable, Is.True);
@@ -222,7 +227,7 @@ namespace FantasyCards.SmokeTests
                 () =>
                 {
                     foreach (Element element in Enum.GetValues(typeof(Element))) AssertMobileLabel(CardCatalog.ElementName(element));
-                    AssertMobileLabel("싱글플레이  ·  " + CardCatalog.All.Length + "종 카드  ·  네 개의 시작 덱");
+                    AssertMobileLabel("싱글플레이 · " + CardCatalog.All.Length + "종 카드 · 50장 덱 / 6손패 / 5전열");
                     AssertMobileLabel("게임 시작");
                     AssertMobileLabel("카드 도감");
                 }, RebuildAtActualMobileSize);
@@ -322,7 +327,7 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.Capture("FantasyCards", "remaster-14-menu-616x346", 616, 346,
                 () =>
                 {
-                    foreach (string label in new[] { "전투 메뉴", "전투 기록", "음악", "저장", "대기실", "돌아가기" }) AssertMobileLabel(label);
+                    foreach (string label in new[] { "전투 메뉴", "전투 기록", "음악", "저장", "대기실", "전투로", "소각장 / 상태" }) AssertMobileLabel(label);
                 }, RebuildAtActualMobileSize);
             LogAssert.NoUnexpectedReceived();
         }
@@ -480,9 +485,10 @@ namespace FantasyCards.SmokeTests
 
         [Serializable] sealed class DeckPayload { public string[] cards; }
 
-        static CardDefinition[] VisibleCards() => ActiveButtons("Card ")
+        static CardDefinition[] VisibleCards() => ActiveButtons("Card ").Concat(ActiveButtons("Collection list card "))
             .OrderBy(button => button.transform.GetSiblingIndex())
-            .Select(button => CardCatalog.Get(button.gameObject.name.Substring("Card ".Length))).ToArray();
+            .Select(button => CardCatalog.Get(button.gameObject.name.Substring(button.gameObject.name.StartsWith("Card ", StringComparison.Ordinal)
+                ? "Card ".Length : "Collection list card ".Length))).ToArray();
 
         static void SearchFor(string value)
         {
@@ -508,7 +514,7 @@ namespace FantasyCards.SmokeTests
         {
             SmokeUi.Click("기록 / 메뉴"); yield return null;
             SmokeUi.Click("저장"); yield return null;
-            SmokeUi.Click("돌아가기"); yield return null;
+            SmokeUi.Click("전투로"); yield return null;
         }
     }
 }

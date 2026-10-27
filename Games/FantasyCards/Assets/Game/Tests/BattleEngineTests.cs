@@ -49,6 +49,158 @@ namespace FantasyCards.Tests
 
     public sealed class BattleEngineTests
     {
+        [Test] public void PlaybackCaptureDoesNotChangeRulesRandomnessOrSavedBattle()
+        {
+            var a = ClassicFixtures.Battle(109);
+            ClassicFixtures.Unit(a, 0, "임프", 2); ClassicFixtures.Unit(a, 1, "크라켄", 4);
+            var b = new BattleEngine(a.State.Copy());
+            a.BeginPlaybackCapture(); ClassicFixtures.Resolve(a); ClassicFixtures.Resolve(b);
+            var frames = a.EndPlaybackCapture();
+            Assert.That(frames.Count, Is.GreaterThan(5));
+            Assert.That(a.State.randomState, Is.EqualTo(b.State.randomState));
+            Assert.That(a.State.events.Select(e => e.sequence + ":" + e.kind + ":" + e.text),
+                Is.EqualTo(b.State.events.Select(e => e.sequence + ":" + e.kind + ":" + e.text)));
+            Assert.That(a.State.players.Select(p => p.deck.Count), Is.EqualTo(b.State.players.Select(p => p.deck.Count)));
+            Assert.That(a.State.players.Select(p => p.units.Count), Is.EqualTo(b.State.players.Select(p => p.units.Count)));
+            BattleEngine.Validate(a.State); BattleEngine.Validate(b.State);
+            frames[0].players[0].hand.Clear(); frames[0].item.text = "changed copy";
+            Assert.That(a.State.players[0].hand.Count, Is.EqualTo(6));
+            Assert.That(a.State.events.Any(e => e.text == "changed copy"), Is.False);
+            Assert.That(a.EndPlaybackCapture(), Is.Empty);
+            Assert.That(b.EndPlaybackCapture(), Is.Empty);
+            a.BeginPlaybackCapture(); Assert.Throws<InvalidOperationException>(() => a.BeginPlaybackCapture());
+            Assert.That(a.EndPlaybackCapture(), Is.Empty);
+        }
+
+        [Test] public void PlaybackSeparatesActualFirstStrikeCounterAndRemovalWithExactLanes()
+        {
+            var e = ClassicFixtures.Battle(rules: new RuleSet { baseCoins = 0 });
+            var attacker = ClassicFixtures.Unit(e, 0, "임프", 2);
+            var defender = ClassicFixtures.Unit(e, 1, "크라켄", 4);
+            e.BeginPlaybackCapture(); ClassicFixtures.Resolve(e); var frames = e.EndPlaybackCapture();
+            var strike = frames.Single(f => f.item.kind == "attack");
+            var counter = frames.Single(f => f.item.kind == "counter");
+            var defeat = frames.Single(f => f.item.kind == "defeat" && f.item.sourceInstanceId == attacker.instanceId);
+            Assert.That(new[] { strike.item.sourcePlayer, strike.item.sourceLane, strike.item.targetPlayer, strike.item.targetLane }, Is.EqualTo(new[] { 0, 2, 1, 4 }));
+            Assert.That(strike.item.amount, Is.EqualTo(3)); Assert.That(strike.item.targetHealth, Is.EqualTo(5));
+            Assert.That(CardCatalog.UnitHealth(strike.players[0].AtLane(2)), Is.EqualTo(2));
+            Assert.That(counter.item.sourceInstanceId, Is.EqualTo(defender.instanceId));
+            Assert.That(counter.item.targetHealth, Is.Zero);
+            Assert.That(counter.players[0].AtLane(2), Is.Not.Null);
+            Assert.That(defeat.players[0].AtLane(2), Is.Null);
+            Assert.That(strike.item.sequence, Is.LessThan(counter.item.sequence));
+            Assert.That(counter.item.sequence, Is.LessThan(defeat.item.sequence));
+        }
+
+        [Test] public void PlaybackBurnsActualCardsOneAtATimeAndRevealsMagicBeforeItsEffect()
+        {
+            var e = ClassicFixtures.Battle(rules: new RuleSet { baseCoins = 0 });
+            var unit = ClassicFixtures.Unit(e, 0, "데몬", 3); int before = e.State.players[1].deck.Count;
+            e.BeginPlaybackCapture(); ClassicFixtures.Resolve(e); var frames = e.EndPlaybackCapture();
+            var burns = frames.Where(f => f.item.kind == "burn" && f.item.sourceInstanceId == unit.instanceId).ToArray();
+            Assert.That(burns.Length, Is.EqualTo(5));
+            for (int i = 0; i < burns.Length; i++)
+            {
+                Assert.That(burns[i].players[1].deck.Count, Is.EqualTo(before - i - 1));
+                Assert.That(burns[i].players[1].discard.Any(c => c.instanceId == burns[i].item.targetInstanceId), Is.True);
+                Assert.That(burns[i].item.targetPlayer, Is.EqualTo(1));
+            }
+            var magic = ClassicFixtures.Battle(rules: new RuleSet { baseCoins = 0 }); ClassicFixtures.Souls(magic, 0);
+            var target = ClassicFixtures.Unit(magic, 1, "파이어버그", 0);
+            var spell = ClassicFixtures.Hand(magic, 0, "파이어볼");
+            magic.BeginPlaybackCapture(); Assert.True(magic.Play(0, spell.instanceId, -1, out _)); ClassicFixtures.Resolve(magic);
+            var spellFrames = magic.EndPlaybackCapture(); var reveal = spellFrames.Single(f => f.item.kind == "spell");
+            var hit = spellFrames.Single(f => f.item.kind == "spell-target" && f.item.targetInstanceId == target.instanceId);
+            Assert.That(reveal.item.sourceInstanceId, Is.EqualTo(spell.instanceId));
+            Assert.That(CardCatalog.UnitHealth(reveal.players[1].AtLane(0)), Is.EqualTo(1));
+            Assert.That(hit.item.sourceDefinitionId, Is.EqualTo(spell.definitionId));
+            Assert.That(hit.item.targetPlayer, Is.EqualTo(1)); Assert.That(hit.item.targetLane, Is.Zero);
+            Assert.That(hit.item.amount, Is.EqualTo(-2)); Assert.That(hit.item.targetHealth, Is.Zero);
+            Assert.That(reveal.item.sequence, Is.LessThan(hit.item.sequence));
+        }
+
+        [Test] public void OriginalRankIsSeparateFromRarityAndLegacyEventMetadataIsOptional()
+        {
+            var card = CardCatalog.Get(ClassicFixtures.Id("크라켄"));
+            Assert.That(card.rarity, Is.EqualTo(CardRarity.Common)); Assert.That(card.rank, Is.EqualTo(CardRank.N));
+            Assert.That(Enum.GetValues(typeof(CardRarity)).Length, Is.EqualTo(12));
+            Assert.That(Enum.GetValues(typeof(CardRank)).Cast<CardRank>().Select(CardCatalog.RankName), Is.EqualTo(new[] { "N", "C", "B", "A", "S" }));
+            var e = ClassicFixtures.Battle();
+            foreach (var item in e.State.events) { item.hasPresentationData = false; item.sourcePlayer = 0; item.sourceLane = 0; item.sourceInstanceId = 0; }
+            BattleEngine.Validate(e.State);
+            var old = new BattleEngine(e.State); Assert.That(old.State.schemaVersion, Is.EqualTo(3));
+        }
+
+        [Test] public void MagicReservationSlotIsIndependentFromItsEffectTargetAndLegacyPlayStillWorks()
+        {
+            var e = ClassicFixtures.Battle(); ClassicFixtures.Souls(e, 0);
+            var spell = ClassicFixtures.Hand(e, 0, "파이어볼");
+            Assert.True(e.PlayInSlot(0, spell.instanceId, 4, -1, out var error), error);
+            Assert.That(e.State.players[0].SpellAtLane(4).instanceId, Is.EqualTo(spell.instanceId));
+            Assert.That(e.State.players[0].SpellAtLane(0), Is.Null);
+            Assert.That(e.State.events.Last().sourceLane, Is.EqualTo(4));
+            var other = ClassicFixtures.Hand(e, 0, "홀리레인"); uint random = e.State.randomState;
+            Assert.False(e.PlayInSlot(0, other.instanceId, 4, -1, out _));
+            Assert.That(e.State.randomState, Is.EqualTo(random));
+            Assert.That(e.State.players[0].hand.Contains(other), Is.True);
+            Assert.True(e.Play(0, other.instanceId, -1, out error), error);
+            Assert.That(e.State.players[0].SpellAtLane(0).instanceId, Is.EqualTo(other.instanceId));
+            BattleEngine.Validate(e.State);
+        }
+
+        [Test] public void HigherGradeOriginalsKeepActualTwoCopyLimitsAndHaveAPlayableFifthDeck()
+        {
+            var extra = CardCatalog.All.Skip(161).ToArray();
+            Assert.That(extra.Length, Is.EqualTo(17));
+            Assert.That(extra.All(c => c.deckLimit == 2), Is.True);
+            Assert.That(extra.Count(c => c.rarity == CardRarity.Upgrade), Is.EqualTo(3));
+            Assert.That(extra.Count(c => c.rarity == CardRarity.Unique), Is.EqualTo(1));
+            Assert.That(extra.Count(c => c.rarity == CardRarity.Event), Is.EqualTo(13));
+            Assert.That(CardCatalog.All.Select(c => c.rarity).Distinct().Count(), Is.EqualTo(8));
+            Assert.That(DemoCatalog.StarterDecks.Select(d => d.id), Is.EqualTo(new[] { "forest", "knights", "tides", "stars", "fidelity" }));
+            var deck = DemoCatalog.GetDeck("fidelity"); DemoCatalog.ValidatePlayableDeck(deck.cards);
+            Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Upgrade), Is.EqualTo(4));
+            Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Unique), Is.EqualTo(2));
+            Assert.That(deck.cards.Count(id => CardCatalog.Get(id).rarity == CardRarity.Event), Is.EqualTo(8));
+            var battle = DemoCatalog.CreateBattle(109, "fidelity", "noa"); BattleEngine.Validate(battle.State);
+        }
+
+        [Test] public void UpgradeHandDiscardProducesOnlyNeutralSoulAndConservesCardsWithoutRng()
+        {
+            var e = ClassicFixtures.Battle(); var p = e.State.players[0];
+            var card = ClassicFixtures.Hand(e, 0, "다크핸드"); uint random = e.State.randomState;
+            e.BeginPlaybackCapture(); Assert.True(e.DiscardHand(0, card.instanceId, out var error), error); var frames = e.EndPlaybackCapture();
+            Assert.That(p.hand.Contains(card), Is.False); Assert.That(p.discard.Contains(card), Is.True);
+            Assert.That(p.genericSoul, Is.EqualTo(1));
+            Assert.That(Enum.GetValues(typeof(Element)).Cast<Element>().All(el => p.Resource(el) == 0), Is.True);
+            Assert.That(e.State.randomState, Is.EqualTo(random)); Assert.That(ClassicFixtures.AllCards(p), Is.EqualTo(50));
+            Assert.That(frames.Select(f => f.item.kind), Is.EqualTo(new[] { "discard", "resource" }));
+            Assert.That(frames[1].item.amount, Is.EqualTo(1));
+            Assert.That(p.playedThisPreparation, Is.False); // Discard is not a card deployment.
+            Assert.True(e.CanShuffleHand(0, out _));
+            var normal = ClassicFixtures.Hand(e, 0, "좀비"); Assert.True(e.DiscardHand(0, normal.instanceId, out _));
+            Assert.That(p.genericSoul, Is.EqualTo(1));
+            Assert.False(e.DiscardHand(1, normal.instanceId, out _)); Assert.False(e.DiscardHand(0, normal.instanceId, out _));
+            BattleEngine.Validate(e.State);
+        }
+
+        [Test] public void KingpinWaivesBelowLevelEquipmentSoulButPreservesAttachmentLimit()
+        {
+            var e = ClassicFixtures.Battle(); var p = e.State.players[0];
+            var kingpin = ClassicFixtures.Unit(e, 0, "킹핀사이클롭", 2);
+            var onyx = ClassicFixtures.Hand(e, 0, "오닉스");
+            Assert.True(e.IsFreeEquipment(0, onyx.instanceId, 2));
+            Assert.True(e.Play(0, onyx.instanceId, 2, out var error), error);
+            Assert.That(p.genericSoul, Is.Zero);
+            Assert.That(Enum.GetValues(typeof(Element)).Cast<Element>().All(el => p.Resource(el) == 0), Is.True);
+            var second = ClassicFixtures.Hand(e, 0, "거인의곤봉"); Assert.True(e.Play(0, second.instanceId, 2, out error), error);
+            var third = ClassicFixtures.Hand(e, 0, "거인의팔찌"); Assert.False(e.Play(0, third.instanceId, 2, out _));
+            Assert.That(kingpin.equipment.Count, Is.EqualTo(2));
+            var normal = ClassicFixtures.Unit(e, 0, "드워프", 3); Assert.False(e.IsFreeEquipment(0, third.instanceId, 3));
+            Assert.False(e.Play(0, third.instanceId, 3, out _)); Assert.That(normal.equipment, Is.Empty);
+            BattleEngine.Validate(e.State);
+        }
+
         [Test] public void PreparedEnemyMagicHidesItsNameAndLevelUntilResolution()
         {
             var e=ClassicFixtures.Battle();ClassicFixtures.Souls(e,1);
@@ -63,8 +215,8 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(161));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,14},{CardKind.Unit,119},{CardKind.Spell,15},{CardKind.Equipment,13} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(178));
+            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,14},{CardKind.Unit,136},{CardKind.Spell,15},{CardKind.Equipment,13} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
             { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(11)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(2)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }

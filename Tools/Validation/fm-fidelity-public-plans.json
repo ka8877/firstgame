@@ -1,0 +1,41 @@
+{
+  "FantasyCards": {
+    "revision": "fm-fidelity-2026-10-27",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas, top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "lobby"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "원작 웹 인물과 초록·청동 프레임의 판타지마스터즈 시작 화면이며 제목·178종·시작/도감/이어하기가 읽힌다. 원작 발췌 음악을 창작 대체곡이나 전체 클라이언트 복구로 표시하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "title-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.7225
+        ],
+        "label": "게임 시작",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "현재 원작 인물·초록/청동 로비와 실제AI 대전·178종/8등급·도감/덱 동선이 읽힌다. 로비 음악은 원작 공개 발췌 로컬 파일에서 재생된다."
+      },
+      {
+        "type": "audio",
+        "label": "public-lobby-original"
+      }
+    ],
+    "scope": "Byte-exact new FC public launch only. Full changed FC interactions are verified locally. Gospel is hash-preserved and not rerun."
+  }
+}

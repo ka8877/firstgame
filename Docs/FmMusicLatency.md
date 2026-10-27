@@ -1,5 +1,7 @@
 # 판타지마스터즈 공식 BGM 시작·장면 전환
 
+이 문서는 이전 공식 외부 플레이어의 구현 이력이다. 현재 정상 플레이에는 외부 플레이어를 사용하지 않는다. 최신 원작 녹음의 로컬 발췌·전투곡과 출처는 [FmFidelityMusic.md](Research/FmFidelityMusic.md)를 따른다.
+
 2026-10-26 소스 개정. 원 제작사 SOUND-I의 공식 SoundCloud 플레이어를 사용한다. 원곡 파일을 추출·다운로드·변환하거나 다른 BGM을 원작 음악으로 대신 재생하지 않는다. 출처와 공개 원곡의 범위는 [FmRevivalSources.md](Research/FmRevivalSources.md)를 따른다.
 
 ## 지연 원인과 변경

@@ -10,6 +10,9 @@ def dispatch(root, part):
     record=root/'Tools/Environment/validation.json'
     if not record.is_file():return
     revisions=json.loads(record.read_text()).get('gameRevisions')
+    if revisions=={'FantasyCards':'fm-fidelity-2026-10-27','PathOfDawn':'gospel-modern-2026-10-26'}:
+        result=subprocess.run([sys.executable,str(root/'Tools/Build/package-fm-fidelity.py'),*(['--verify'] if part=='verify' else [])],cwd=root)
+        raise SystemExit(result.returncode)
     if revisions!={'FantasyCards':'fm-modern-2026-10-26','PathOfDawn':'gospel-modern-2026-10-26'}:return
     result=subprocess.run([sys.executable,str(root/'Tools/Build/package-modern.py'),'--part',part],cwd=root)
     raise SystemExit(result.returncode)

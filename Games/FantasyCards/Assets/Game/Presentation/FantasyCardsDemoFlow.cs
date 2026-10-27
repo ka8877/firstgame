@@ -130,7 +130,7 @@ namespace FantasyCards.Presentation
             Text(root, "시작 손패 확인", .04f, .85f, .96f, .97f, 44, ivory);
             Text(root, "전체 손패를 한 번 다시 섞을 수 있습니다. 마음에 들면 그대로 시작하세요.", .04f, small ? .79f : .76f, .96f, .85f, 25, gold);
             if (small) Text(root, "카드 수치 순서  AP / DP / HP", .04f, .725f, .96f, .785f, 22, teal, TextAlignmentOptions.Center);
-            var hand = engine.State.players[0].hand;
+            var hand = BattleDisplayState.players[0].hand;
             float width = Mathf.Min(.18f, .93f / Mathf.Max(1, hand.Count)), left = .5f - hand.Count * width / 2;
             for (int i = 0; i < hand.Count; i++)
             {
@@ -167,7 +167,7 @@ namespace FantasyCards.Presentation
 
         private void DrawScrollableHand()
         {
-            var hand = engine.State.players[0].hand;
+            var hand = BattleDisplayState.players[0].hand;
             var viewport = Panel(root, .025f, .025f, .805f, .305f, new Color(.045f, .075f, .11f, .98f));
             viewport.gameObject.name = "Scrollable hand"; viewport.GetComponent<Image>().raycastTarget = true;
             viewport.gameObject.AddComponent<RectMask2D>();
@@ -180,6 +180,7 @@ namespace FantasyCards.Presentation
                 var card = hand[i]; var definition = CardCatalog.Get(card.definitionId); int id = card.instanceId;
                 DrawCard(content, definition, (float)i / Mathf.Max(1, hand.Count), .015f, (i + .95f) / Mathf.Max(1, hand.Count), .985f, selectedCard == id,
                     () => SelectHandCard(id, definition), !locked);
+                BindHandDrag(content.GetChild(content.childCount - 1).gameObject, id, definition);
             }
             var scroll = viewport.gameObject.AddComponent<ScrollRect>(); scroll.viewport = viewport; scroll.content = content;
             scroll.horizontal = true; scroll.vertical = false; scroll.movementType = ScrollRect.MovementType.Clamped;
@@ -219,7 +220,8 @@ namespace FantasyCards.Presentation
         private void ShowRulesHelp(Action back)
         {
             redraw = () => ShowRulesHelp(back); Clear(); Backdrop(true);
-            Text(root, "클래식 공방 · 첫 결투의 길잡이", .055f, .81f, .95f, .96f, 42, ivory);
+            Text(root, "클래식 공방 · 게임 방법", .055f, .81f, .715f, .96f, 42, ivory);
+            Button(root, "카드 등급 / 랭크", .735f, .835f, .945f, .965f, () => ShowCardGradeGuide(false, () => ShowRulesHelp(back)), slate, 23);
             string[] headings = { "덱이 곧 생명", "LP와 지형 소울", "공격 준비 → 방어 준비", "전열과 코인" };
             string[] bodies = {
                 "50장 덱으로 시작합니다. 직접 공격은 유닛 레벨만큼 덱을 파괴합니다. 내 덱이 사라지기 전에 상대 덱을 소진시키세요.",
@@ -255,10 +257,10 @@ namespace FantasyCards.Presentation
 
         private void BindCardHelp(GameObject target, CardDefinition card, Action detail)
         {
-            BindTooltip(target, card.name + " · " + CardCatalog.RarityName(card.rarity),
+            BindTooltip(target, card.name + " · " + CardGradeSummary(card),
                 CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · Lv " + card.level + "\n" + CardCatalog.CostText(card) + "\n" +
-                (card.kind == CardKind.Unit || card.kind == CardKind.Equipment ? CardCatalog.StatsText(card) + "\n" : "") + card.text + "\n길게 누르면 원본과 상세 보기");
-            target.GetComponent<UiCardHover>().LongPress = detail;
+                (card.kind == CardKind.Unit || card.kind == CardKind.Equipment ? CardCatalog.StatsText(card) + "\n" : "") + CardAbilitySummary(card) + "\n" + card.text + "\n길게 누르면 원본과 상세 보기");
+            target.GetComponent<UiCardHover>().LongPress = () => { if (!battleScreen || !locked) detail(); };
         }
 
         private void BindTooltip(GameObject target, string title, string description)
@@ -323,7 +325,11 @@ namespace FantasyCards.Presentation
                 case "음악": return "배경 음악의 음량과 음소거를 조절합니다.";
                 case "카드 상세": return "선택한 카드의 원화와 실제 적용되는 능력을 확인합니다.";
                 case "원본 카드": return "원본 카드 이미지 전체를 확인합니다. 인쇄 수치와 DB 수치는 버전에 따라 다를 수 있습니다.";
-                case "덱 분석": return "현재 편집 덱의 0~7·8 이상 소울 분포와 출전 조건을 확인합니다.";
+                case "등급 / 랭크 안내": return "원작 DB의 12등급, 실제 수록 수와 유닛 N/C/B/A/S 랭크의 차이를 확인합니다.";
+                case "목록 보기": return "이름·등급·랭크·레벨·소울·유지비·코인식·수량을 행별로 보고 덱을 편집합니다.";
+                case "큰 카드 보기": return "큰 원화와 능력치를 네 카드씩 확인하는 보기로 바꿉니다.";
+                case "소각장 / 상태": return "양측의 손패 수·덱·LP와 실제 소각된 카드를 열람합니다. 상대 손패 내용은 숨겨집니다.";
+                case "덱 분석": case "편집 덱 분석": return "편집 덱의 소울 곡선·속성·유지비·등급·랭크 구성과 출전 조건을 확인합니다.";
                 default: return null;
             }
         }

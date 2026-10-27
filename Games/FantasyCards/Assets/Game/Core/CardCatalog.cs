@@ -24,6 +24,8 @@ namespace FantasyCards.Core
         public static void ValidateDefinition(CardDefinition d)
         {
             if (d == null || string.IsNullOrWhiteSpace(d.id) || string.IsNullOrWhiteSpace(d.name) || d.level < 0 || d.level > 20 || d.cost != d.coloredCost + d.genericCost || d.coloredCost < 0 || d.genericCost < 0 || d.cost > 20 || Math.Abs(d.attack) > 100 || Math.Abs(d.defense) > 100 || Math.Abs(d.health) > 100 || Math.Abs(d.magnitude) > 100 || d.landPointCost < 0 || d.landPointCost > 10 || d.producedColored < 0 || d.producedColored > 10 || d.producedGeneric < 0 || d.producedGeneric > 10 || d.deckLimit < 1 || d.deckLimit > 50 || !Enum.IsDefined(typeof(CardKind), d.kind) || !Enum.IsDefined(typeof(Element), d.element) || !Enum.IsDefined(typeof(Effect), d.effect) || !Enum.IsDefined(typeof(CardRarity), d.rarity) || !Enum.IsDefined(typeof(PlayWindow), d.playWindow) || d.capabilityMask < 0 || d.capabilityMask > 7 || d.requiredCapabilityMask < 0 || d.requiredCapabilityMask > 7 || d.firstAffectedLane < 0 || d.lastAffectedLane > 5 || d.lastAffectedLane < d.firstAffectedLane || (d.kind == CardKind.Unit && (d.health < 1 || d.attack < 0 || d.defense < 0))) throw new ArgumentException("잘못된 카드 제작 데이터: " + d?.id);
+            if (!Enum.IsDefined(typeof(CardRank), d.rank)) throw new ArgumentException("잘못된 원작 랭크: " + d.id);
+            if (d.discardGenericSoul < 0 || d.discardGenericSoul > 10 || (d.kind != CardKind.Unit && (d.freeEquipmentBelowLevel || d.discardGenericSoul != 0))) throw new ArgumentException("잘못된 유닛 부가 능력: " + d.id);
             if (d.operations == null) throw new ArgumentException("마법 연산이 없습니다: " + d.id);
             foreach (var operation in d.operations)
                 if (operation == null || !Enum.IsDefined(typeof(OperationSide), operation.side) || !Enum.IsDefined(typeof(OperationStat), operation.stat) || !Enum.IsDefined(typeof(DeltaSource), operation.deltaSource) || operation.laneMask < 1 || operation.laneMask > 31 || Math.Abs(operation.delta) > 100 || operation.requiredCapabilityMask < 0 || operation.requiredCapabilityMask > 7 || operation.requiredElement < -1 || operation.requiredElement > 6) throw new ArgumentException("잘못된 마법 연산: " + d.id);
@@ -36,6 +38,7 @@ namespace FantasyCards.Core
         public static string ElementName(Element element) { return new[] { "빛", "물", "불", "숲", "금속", "대지", "암흑" }[(int)element]; }
         public static string RarityName(CardRarity rarity) { return new[] { "프리", "커먼", "언커먼", "레어", "스페셜", "업그레이드", "유니크", "이벤트", "레전드", "이카젠", "시크릿", "에픽" }[(int)rarity]; }
         public static string RarityCode(CardRarity rarity) { return new[] { "F", "C", "UC", "R", "SP", "UP", "U", "E", "L", "IC", "SC", "EP" }[(int)rarity]; }
+        public static string RankName(CardRank rank) { return new[] { "N", "C", "B", "A", "S" }[(int)rank]; }
         public static string CoinText(CoinRule coin)
         {
             if (coin == null || coin.count == 0 || coin.operation == CoinOperation.None) return "";

@@ -1,0 +1,149 @@
+{
+  "checkedUtc": "2026-10-27T00:05:21.921425+00:00",
+  "url": "https://firestore.googleapis.com/v1/projects/fmdb-bcb70/databases/(default)/documents:runQuery",
+  "request": {
+    "structuredQuery": {
+      "from": [
+        {
+          "collectionId": "livecardlist"
+        }
+      ],
+      "select": {
+        "fields": [
+          {
+            "fieldPath": "ID"
+          },
+          {
+            "fieldPath": "NumID"
+          },
+          {
+            "fieldPath": "Name"
+          },
+          {
+            "fieldPath": "Category"
+          },
+          {
+            "fieldPath": "KIND"
+          },
+          {
+            "fieldPath": "RareType"
+          },
+          {
+            "fieldPath": "RareUI"
+          },
+          {
+            "fieldPath": "RankType"
+          },
+          {
+            "fieldPath": "LV"
+          },
+          {
+            "fieldPath": "RequireSoul"
+          },
+          {
+            "fieldPath": "SoulType"
+          },
+          {
+            "fieldPath": "Skill1"
+          },
+          {
+            "fieldPath": "Skill2"
+          },
+          {
+            "fieldPath": "ATK"
+          },
+          {
+            "fieldPath": "DEF"
+          },
+          {
+            "fieldPath": "HP"
+          },
+          {
+            "fieldPath": "ATKStatType"
+          },
+          {
+            "fieldPath": "DEFStatType"
+          },
+          {
+            "fieldPath": "HPStatType"
+          },
+          {
+            "fieldPath": "ATKCoin"
+          },
+          {
+            "fieldPath": "DEFCoin"
+          },
+          {
+            "fieldPath": "HPCoin"
+          },
+          {
+            "fieldPath": "ATKCoinType"
+          },
+          {
+            "fieldPath": "DEFCoinType"
+          },
+          {
+            "fieldPath": "HPCoinType"
+          },
+          {
+            "fieldPath": "ATKCoinCount"
+          },
+          {
+            "fieldPath": "DEFCoinCount"
+          },
+          {
+            "fieldPath": "HPCoinCount"
+          },
+          {
+            "fieldPath": "UnitType"
+          },
+          {
+            "fieldPath": "DeckLimit"
+          },
+          {
+            "fieldPath": "DeckPoint"
+          },
+          {
+            "fieldPath": "RaceType"
+          },
+          {
+            "fieldPath": "CompanyType"
+          },
+          {
+            "fieldPath": "ReleaseDate"
+          },
+          {
+            "fieldPath": "TextBase"
+          },
+          {
+            "fieldPath": "TextExtra"
+          },
+          {
+            "fieldPath": "TextGameText"
+          },
+          {
+            "fieldPath": "TextSkill"
+          }
+        ]
+      },
+      "where": {
+        "fieldFilter": {
+          "field": {
+            "fieldPath": "RareType"
+          },
+          "op": "EQUAL",
+          "value": {
+            "integerValue": "10"
+          }
+        }
+      },
+      "limit": 1000
+    }
+  },
+  "status": 200,
+  "responseBytes": 64651,
+  "responseSha256": "197d5ac43f1f1fbefb12586918883b1bdbc05dfd26c672f6943ae7d4f46287b0",
+  "returnedCount": 24,
+  "limit": 1000,
+  "simpleCandidates": []
+}

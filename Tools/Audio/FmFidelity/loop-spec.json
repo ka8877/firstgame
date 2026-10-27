@@ -1,0 +1,51 @@
+{
+  "revision": "fm-fidelity-audio-2026-10-27",
+  "sampleRate": 44100,
+  "channels": 2,
+  "targetLufs": -19,
+  "truePeakDb": -1.8,
+  "joinPreRollSeconds": 0.04,
+  "tracks": [
+    {
+      "scene": "title",
+      "bridgeScene": "login",
+      "source": "sound-i-login.mp3",
+      "title": "2 BGM Login",
+      "displayTitle": "원작 로그인",
+      "publisher": "SOUND-I",
+      "sourceKind": "publisher-portfolio-excerpt-edit",
+      "segments": [[0, 3.64553], [10.19356, 13.46757], [16.97379, 23.01098], [27.63175, 33.20454]]
+    },
+    {
+      "scene": "lobby",
+      "bridgeScene": "lobby",
+      "source": "sound-i-lobby.mp3",
+      "title": "3 BGM Lobby",
+      "displayTitle": "원작 로비",
+      "publisher": "SOUND-I",
+      "sourceKind": "publisher-portfolio-excerpt-edit",
+      "segments": [[17.27565, 23.28961], [27.79429, 33.78503], [37.54667, 43.53741], [47.29905, 53.28980], [57.42295, 63.43692]]
+    },
+    {
+      "scene": "deck",
+      "bridgeScene": "deck",
+      "source": "sound-i-deck.mp3",
+      "title": "1 BGM Deck",
+      "displayTitle": "원작 덱 편집",
+      "publisher": "SOUND-I",
+      "sourceKind": "publisher-portfolio-excerpt-edit",
+      "segments": [[0, 3.85451], [9.86848, 13.69977], [16.95057, 23.24317], [27.60853, 33.18132]]
+    },
+    {
+      "scene": "battle",
+      "bridgeScene": "battle",
+      "source": "sid-battle.mp3",
+      "title": "Fantasy Masters - battle BGM",
+      "displayTitle": "원작 전투",
+      "publisher": "S.I.D-Sound",
+      "composer": "Ye eun-su",
+      "sourceKind": "complete-public-publisher-recording",
+      "segments": null
+    }
+  ]
+}

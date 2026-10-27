@@ -47,7 +47,7 @@ for c in cards:
    assert effect[key]==(0 if kind==1 else f[stat]*(1 if kind==31 else -1)),(c['name'],stat)
   attack=effect['attackDelta'];defense=effect['defenseDelta'];hp=effect['healthDelta']
   text=f'AP {attack:+d} · DP {defense:+d} · HP {hp:+d}'
- elif cat==2:text='특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다.'
+ elif cat==2:text=effect.get('description','특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다.')
  elif cat==1:text='LP로 전개하고 소울 코스트 단계마다 소울을 회복합니다.'
  line=f'                new CardDefinition({q("fm_"+c["sourceId"])}, {q(c["name"])}, {q(text)}, CardKind.{K[cat]}, Element.{e}, {color+generic}, attack: {attack}, health: {hp}, coinBonus: 0, rarity: CardRarity.{R[f["RareType"]-1]}, level: {f["LV"]}, coloredCost: {color}, genericCost: {generic}, defense: {defense})'
  lines.append(line);props=[f'sourceId = {q(c["sourceId"])}',f'sourceUrl = {q(c["sourceUrl"])}',f'artResource = {q(c["artResource"])}',f'deckLimit = {f["DeckLimit"]}']
@@ -56,7 +56,10 @@ for c in cards:
   props.extend([f'landPointCost = {f["RequireLP"]}',f'producedColored = {sum(n for k,n in produced if k!=81)}',f'producedGeneric = {sum(n for k,n in produced if k==81)}'])
  if cat==2:
   assert f['Skill1']==f['Skill2']==1 and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
-  props.extend([f'capabilityMask = {MASK[f["UnitType"]]}',f'attackCoin = {coin(f,"ATK")}',f'defenseCoin = {coin(f,"DEF")}',f'healthCoin = {coin(f,"HP")}'])
+  rank={1:'N',2:'C',3:'B',4:'A',5:'S'}[f.get('RankType',1)]
+  props.extend([f'rank = CardRank.{rank}',f'capabilityMask = {MASK[f["UnitType"]]}',f'attackCoin = {coin(f,"ATK")}',f'defenseCoin = {coin(f,"DEF")}',f'healthCoin = {coin(f,"HP")}'])
+  if effect.get('freeEquipmentBelowLevel'):props.append('freeEquipmentBelowLevel = true')
+  if effect.get('discardGenericSoul'):props.append(f'discardGenericSoul = {effect["discardGenericSoul"]}')
  else:props.extend(['attackCoin = new CoinRule()','defenseCoin = new CoinRule()','healthCoin = new CoinRule()'])
  if cat==4:
   props.append(f'requiredCapabilityMask = {0 if f["UnitType"]==1 else MASK[f["UnitType"]]}')

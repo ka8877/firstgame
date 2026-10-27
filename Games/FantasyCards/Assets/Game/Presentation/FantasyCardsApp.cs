@@ -20,9 +20,9 @@ namespace FantasyCards.Presentation
     public sealed partial class FantasyCardsApp : MonoBehaviour
     {
         private const string Slot = "fantasy-battle-classic-v3", DeckSlot = "fantasy-deck-classic-v3", GameId = "starlight-oath";
-        private readonly Color ink = new Color(.035f, .060f, .095f, .98f);
-        private readonly Color gold = new Color(.88f, .80f, .61f);
-        private readonly Color teal = new Color(.48f, .80f, .76f);
+        private readonly Color ink = new Color(.035f, .065f, .050f, .98f);
+        private readonly Color gold = new Color(.88f, .75f, .47f);
+        private readonly Color teal = new Color(.48f, .80f, .65f);
         private readonly List<string> customDeck = CardCatalog.DefaultDeck();
         private readonly Dictionary<string, Sprite> authoredIllustrations = new Dictionary<string, Sprite>();
         private BattleEngine engine;
@@ -34,8 +34,8 @@ namespace FantasyCards.Presentation
         private Vector2 lastViewport;
         private int collectionPage;
         private bool Compact => canvas != null && (canvas.pixelRect.width < 1400 || canvas.pixelRect.width / Mathf.Max(1, canvas.pixelRect.height) > 1.95f);
-        private readonly Color ivory = new Color(.95f, .96f, .95f);
-        private readonly Color slate = new Color(.11f, .17f, .23f, .98f);
+        private readonly Color ivory = new Color(.96f, .95f, .88f);
+        private readonly Color slate = new Color(.11f, .17f, .135f, .98f);
         private int selectedCard = -1, selectedAttacker = -1;
         private string inspectedId = "dawn_scout", message = "판타지마스터즈에 오신 것을 환영합니다.";
         private string saveError = "";
@@ -118,7 +118,7 @@ namespace FantasyCards.Presentation
             redraw = () => ShowMusicSettings(back); Clear(); Backdrop(true);
             var panel = Panel(root, .13f, .15f, .87f, .85f, ink); Frame(panel, gold, 1.5f);
             Text(panel, "판타지마스터즈 음악", .07f, .74f, .93f, .92f, 43, ivory, TextAlignmentOptions.Center);
-            Text(panel, "배경 음악 · 광고·안내 음성 없음", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
+            Text(panel, "SOUND-I 원작곡 발췌 · S.I.D-Sound 전투곡", .07f, .62f, .93f, .75f, 24, gold, TextAlignmentOptions.Center);
             var toggle = Button(panel, originalMusicMuted ? "음악 켜기" : "음악 끄기", .12f, .40f, .46f, .59f,
                 () => { FmOriginalMusic.SetMuted(!FmOriginalMusic.Muted); ShowMusicSettings(back); }, slate, 26);
             musicToggleLabel = toggle.GetComponentInChildren<TMP_Text>();
@@ -174,47 +174,30 @@ namespace FantasyCards.Presentation
         private string StatusMessage() { return string.IsNullOrEmpty(saveError) ? message : message + " · " + saveError; }
         private void Act(Func<bool> action)
         {
-            if (locked) return; int start = engine.State.events.Count;
-            if (!action()) { ShowBattle(); return; }
-            selectedCard = selectedAttacker = -1; Save(); StartCoroutine(AnimateAndContinue(start));
+            if (locked) return;
+            var before = engine.State.Copy(); List<BattlePlaybackFrame> frames;
+            bool changed;
+            engine.BeginPlaybackCapture();
+            try { changed = action(); }
+            finally { frames = engine.EndPlaybackCapture(); }
+            if (!changed) { ShowBattle(); return; }
+            selectedCard = selectedAttacker = -1; Save(); locked = true;
+            StartCoroutine(AnimateAndContinue(before, frames));
         }
-        private IEnumerator AnimateAndContinue(int start)
+        private IEnumerator AnimateAndContinue(BattleState before, List<BattlePlaybackFrame> frames)
         {
-            locked = true; ShowBattle();
-            var recorded = engine.State.events.Skip(start)
-                .Where(item => item.kind == "coin" || item.kind == "damage" || item.kind == "play" || item.kind == "spell" || item.kind == "upkeep").ToArray();
-            // Keep a long clash responsive. Every core event remains in the battle
-            // record; the animation highlights its opening and final outcomes.
-            var highlights = recorded.Length <= 18 ? recorded : recorded.Take(9).Concat(recorded.Skip(recorded.Length - 9)).ToArray();
-            float duration = Mathf.Clamp(3f / Mathf.Max(1, highlights.Length), .16f, .48f);
-            foreach (var item in highlights)
-            {
-                bool coin = item.kind == "coin";
-                ShowEffect(item.text, coin ? gold : teal, coin, item.amount);
-                if (audioSource != null) audioSource.PlayOneShot(coin ? coinSound : playSound, coin ? .7f : .65f);
-                var rect = effectObject != null ? effectObject.GetComponent<RectTransform>() : null;
-                var opacity = effectObject != null ? effectObject.AddComponent<CanvasGroup>() : null;
-                for (float t = 0; t < duration; t += Time.unscaledDeltaTime)
-                {
-                    float progress = Mathf.Clamp01(t / duration), ease = 1 - Mathf.Pow(1 - progress, 3);
-                    if (rect != null) rect.anchoredPosition = Vector2.up * Mathf.Lerp(-9, 0, ease);
-                    if (opacity != null) opacity.alpha = Mathf.Clamp01(progress * 6) * Mathf.Clamp01((1 - progress) * 7);
-                    if (effectCoin != null)
-                    {
-                        float flip = Mathf.Abs(Mathf.Cos(progress * Mathf.PI * 3));
-                        effectCoin.localScale = new Vector3(Mathf.Lerp(.12f, 1, progress < .78f ? flip : Mathf.SmoothStep(0, 1, (progress - .78f) / .22f)), 1, 1);
-                    }
-                    yield return null;
-                }
-            }
-            locked = false; message = Hint(); ShowBattle(); PumpAi();
+            yield return ReplayBattleFrames(before, frames);
         }
         private void PumpAi()
         {
             if (locked || !battleScreen || engine.State.phase == BattlePhase.Complete) return;
             var s = engine.State; bool aiAction = engine.PreparingPlayer == 1;
             if (!aiAction) return;
-            int start = s.events.Count; if (BattleAi.Step(engine, 1, out message)) { Save(); StartCoroutine(AnimateAndContinue(start)); }
+            var before = s.Copy(); List<BattlePlaybackFrame> frames; bool changed;
+            engine.BeginPlaybackCapture();
+            try { changed = BattleAi.Step(engine, 1, out message); }
+            finally { frames = engine.EndPlaybackCapture(); }
+            if (changed) { Save(); locked = true; StartCoroutine(AnimateAndContinue(before, frames)); }
         }
         private void ShowEffect(string text, Color color, bool coin = false, int result = 0)
         {

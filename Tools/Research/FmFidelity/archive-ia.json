@@ -1,0 +1,26 @@
+{
+  "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22Fantasy+Masters%22%29+OR+title%3A%28%ED%8C%90%ED%83%80%EC%A7%80%EB%A7%88%EC%8A%A4%ED%84%B0%EC%A6%88%29&output=json&rows=50&fl%5B%5D=identifier&fl%5B%5D=title",
+  "status": 200,
+  "responseBytes": 353,
+  "responseSha256": "e81d23d520030cbb4f6b76a85934a784a3cba2210faca69e93d784c9d1b181b9",
+  "checkedUtc": "2026-10-27T00:05:50.996368+00:00",
+  "response": {
+    "responseHeader": {
+      "status": 0,
+      "QTime": 18,
+      "params": {
+        "query": "title:&quot;Fantasy Masters&quot; OR title:판타지마스터즈",
+        "qin": "title:(&quot;Fantasy Masters&quot;) OR title:(판타지마스터즈)",
+        "fields": "identifier,title",
+        "wt": "json",
+        "rows": 50,
+        "start": 0
+      }
+    },
+    "response": {
+      "numFound": 0,
+      "start": 0,
+      "docs": []
+    }
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "checkedUtc": "2026-10-27T00:05:20.946774+00:00",
+  "url": "https://firestore.googleapis.com/v1/projects/fmdb-bcb70/databases/(default)/documents:runQuery",
+  "request": {
+    "structuredQuery": {
+      "from": [
+        {
+          "collectionId": "livecardlist"
+        }
+      ],
+      "select": {
+        "fields": [
+          {
+            "fieldPath": "ID"
+          },
+          {
+            "fieldPath": "NumID"
+          },
+          {
+            "fieldPath": "Name"
+          },
+          {
+            "fieldPath": "Category"
+          },
+          {
+            "fieldPath": "KIND"
+          },
+          {
+            "fieldPath": "RareType"
+          },
+          {
+            "fieldPath": "RareUI"
+          },
+          {
+            "fieldPath": "RankType"
+          },
+          {
+            "fieldPath": "LV"
+          },
+          {
+            "fieldPath": "RequireSoul"
+          },
+          {
+            "fieldPath": "SoulType"
+          },
+          {
+            "fieldPath": "Skill1"
+          },
+          {
+            "fieldPath": "Skill2"
+          },
+          {
+            "fieldPath": "ATK"
+          },
+          {
+            "fieldPath": "DEF"
+          },
+          {
+            "fieldPath": "HP"
+          },
+          {
+            "fieldPath": "ATKStatType"
+          },
+          {
+            "fieldPath": "DEFStatType"
+          },
+          {
+            "fieldPath": "HPStatType"
+          },
+          {
+            "fieldPath": "ATKCoin"
+          },
+          {
+            "fieldPath": "DEFCoin"
+          },
+          {
+            "fieldPath": "HPCoin"
+          },
+          {
+            "fieldPath": "ATKCoinType"
+          },
+          {
+            "fieldPath": "DEFCoinType"
+          },
+          {
+            "fieldPath": "HPCoinType"
+          },
+          {
+            "fieldPath": "ATKCoinCount"
+          },
+          {
+            "fieldPath": "DEFCoinCount"
+          },
+          {
+            "fieldPath": "HPCoinCount"
+          },
+          {
+            "fieldPath": "UnitType"
+          },
+          {
+            "fieldPath": "DeckLimit"
+          },
+          {
+            "fieldPath": "DeckPoint"
+          },
+          {
+            "fieldPath": "RaceType"
+          },
+          {
+            "fieldPath": "CompanyType"
+          },
+          {
+            "fieldPath": "ReleaseDate"
+          },
+          {
+            "fieldPath": "TextBase"
+          },
+          {
+            "fieldPath": "TextExtra"
+          },
+          {
+            "fieldPath": "TextGameText"
+          },
+          {
+            "fieldPath": "TextSkill"
+          }
+        ]
+      },
+      "where": {
+        "fieldFilter": {
+          "field": {
+            "fieldPath": "RareType"
+          },
+          "op": "EQUAL",
+          "value": {
+            "integerValue": "7"
+          }
+        }
+      },
+      "limit": 1000
+    }
+  },
+  "status": 200,
+  "responseBytes": 529594,
+  "responseSha256": "39c286444596e545245f213794ab02fe3190679297716538c647d84626c3a848",
+  "returnedCount": 207,
+  "limit": 1000,
+  "simpleCandidates": [
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/10091525192",
+      "fields": {
+        "NumID": 10091525192,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 4,
+        "RaceType": 19,
+        "LV": 3,
+        "HPCoinCount": 0,
+        "Name": "자일나이트",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 3,
+        "UnitType": 21,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "10091525192",
+        "ATKCoinCount": 2,
+        "HPCoin": "NONE",
+        "RequireSoul": "21028301",
+        "ATKCoinType": 2,
+        "DEF": 0,
+        "ATKCoin": "2C2",
+        "DEFCoinCount": 3,
+        "CompanyType": 7,
+        "ReleaseDate": 20100915,
+        "TextExtra": "☆ 섀도우펌핑(종족펌핑) : ●● + ●(연속 사용시 1소울 증가) 해당 유닛과 동일한 종족의 아군 필드 유닛 수(자신 제외)만큼 자신의 공체 증가.<br><br>☆ 섀도우오라 ●●● : 적 필드 유닛 1,2의 DP -2.",
+        "RareUI": 7,
+        "DEFCoin": "C3",
+        "DeckLimit": 2,
+        "KIND": 5192,
+        "ATK": 4,
+        "DeckPoint": 25,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 2,
+        "HPCoinType": 1
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/10091525196",
+      "fields": {
+        "NumID": 10091525196,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 2,
+        "RaceType": 42,
+        "LV": 2,
+        "HPCoinCount": 2,
+        "Name": "님블스피어",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 3,
+        "UnitType": 31,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "10091525196",
+        "ATKCoinCount": 2,
+        "HPCoin": "2C2",
+        "RequireSoul": "31018301",
+        "ATKCoinType": 2,
+        "DEF": 0,
+        "ATKCoin": "2C2",
+        "DEFCoinCount": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20100915,
+        "TextExtra": "☆ 섀도우펌핑(종족펌핑) : ●● + ●(연속 사용시 1소울 증가) 해당 유닛과 동일한 종족의 아군 필드 유닛 수(자신 제외)만큼 자신의 공체 증가.<br><br>☆ 섀도우오라 능력 : ●●●, 자신 제외한 아군 필드 유닛 1의 공방체 +1.",
+        "RareUI": 7,
+        "DEFCoin": "C1",
+        "DeckLimit": 2,
+        "KIND": 5196,
+        "ATK": 2,
+        "DeckPoint": 20,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 3,
+        "HPCoinType": 2
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/10091525197",
+      "fields": {
+        "NumID": 10091525197,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 4,
+        "RaceType": 17,
+        "LV": 3,
+        "HPCoinCount": 1,
+        "Name": "허밍세이렌",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 2,
+        "UnitType": 31,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "10091525197",
+        "ATKCoinCount": 1,
+        "HPCoin": "2C1",
+        "RequireSoul": "310181018301",
+        "ATKCoinType": 2,
+        "DEF": 0,
+        "ATKCoin": "3C1",
+        "DEFCoinCount": 1,
+        "CompanyType": 56,
+        "ReleaseDate": 20100915,
+        "TextExtra": "종족형 섀도우펌핑 능력 : 해당 유닛과 동일한 종족의 아군 필드 유닛 수(자신 제외)만큼 자신의 공체 증가, 비용 : 자신 속성 2소울, 1회당 발동비용 1무소울씩 증가.<br><br>★ 섀도우오라 능력 : 자신 제외한 아군 필드 유닛 1의 공방체 +1, 비용 : 3소울.<br><br>☆ 상성효과 : <br>머메프린세스 → 허밍세이렌 : AP/DP/HP+1, C+1, <br>허밍세이렌 → 머메프린세스 : AP/HP+2, 코인확률+10%, <br>엔젤머메이드 → 허밍세이렌 : AP/DP/HP+1, C+1, <br>허무의반지 장착시 : AP+3, C+1, <br>인어의보석 장착시 : AP/HP+1, C+1.<br>☆ 상성카드 : 머메프린세스, 엔젤머메이드, 허무의반지, 인어의보석.",
+        "RareUI": 7,
+        "DEFCoin": "C1",
+        "DeckLimit": 2,
+        "KIND": 5197,
+        "ATK": 3,
+        "DeckPoint": 25,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 3,
+        "HPCoinType": 2
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/10091525209",
+      "fields": {
+        "NumID": 10091525209,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 4,
+        "RaceType": 38,
+        "LV": 3,
+        "HPCoinCount": 1,
+        "Name": "러프오크",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 2,
+        "UnitType": 21,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "10091525209",
+        "ATKCoinCount": 1,
+        "HPCoin": "3C1",
+        "RequireSoul": "610181018301",
+        "ATKCoinType": 2,
+        "DEF": 0,
+        "ATKCoin": "2C1",
+        "DEFCoinCount": 1,
+        "CompanyType": 54,
+        "ReleaseDate": 20100915,
+        "TextExtra": "☆ 섀도우펌핑(종족펌핑) : ●● + ●(연속 사용시 1소울 증가), 해당 유닛과 동일한 종족의 아군 필드 유닛 수(자신 제외)만큼 자신의 공체 증가.<br><br>☆ 섀도우오라 : ●●●, 자신 제외한 아군 필드 유닛 1의 코인 +1.",
+        "RareUI": 7,
+        "DEFCoin": "C1",
+        "DeckLimit": 2,
+        "KIND": 5209,
+        "ATK": 3,
+        "DeckPoint": 30,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 6,
+        "HPCoinType": 2
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/5033021675",
+      "fields": {
+        "NumID": 5033021675,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 9,
+        "RaceType": 16,
+        "LV": 9,
+        "HPCoinCount": 0,
+        "Name": "세인트마스터",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 4,
+        "UnitType": 31,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "5033021675",
+        "ATKCoinCount": 5,
+        "HPCoin": "NONE",
+        "RequireSoul": "71048105",
+        "ATKCoinType": 2,
+        "DEF": 2,
+        "ATKCoin": "C5",
+        "DEFCoinCount": 2,
+        "CompanyType": 17,
+        "ReleaseDate": 20050330,
+        "TextExtra": "▶ 소환시 포비든파워 상태가 무한턴 부여되어 소환됩니다.<br>★ 포비든파워 : 아군 백필드 생성 유소울이 자신의 속성과 동일하면 AP/HP 2 증가, 동일하지 않으면 HP를 절반(내림)으로 변경.",
+        "RareUI": 7,
+        "DEFCoin": "C2",
+        "DeckLimit": 1,
+        "KIND": 1675,
+        "ATK": 8,
+        "DeckPoint": 30,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 7,
+        "HPCoinType": 1
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/5112322069",
+      "fields": {
+        "NumID": 5112322069,
+        "RareType": 7,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 7,
+        "RaceType": 43,
+        "LV": 6,
+        "HPCoinCount": 1,
+        "Name": "킹핀사이클롭",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 2,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "5112322069",
+        "ATKCoinCount": 1,
+        "HPCoin": "C1",
+        "RequireSoul": "61028104",
+        "ATKCoinType": 2,
+        "DEF": 0,
+        "ATKCoin": "C1",
+        "DEFCoinCount": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20051123,
+        "TextExtra": "만능능력<br><br>3차 강화 카드는 만능능력 유닛입니다. <br><br>따라서, 아이템 착용에 있어서 제한이 전혀 없는 특징을 갖고 있는 유닛입니다. <br><br>또한 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "RareUI": 7,
+        "DEFCoin": "2C1",
+        "DeckLimit": 2,
+        "KIND": 2069,
+        "ATK": 8,
+        "DeckPoint": 20,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 6,
+        "HPCoinType": 2
+      }
+    }
+  ]
+}

@@ -56,8 +56,24 @@ namespace FantasyCards.Core
             Pair("forest", "숲과 빛 · 생명의 전열", "숲의 야수와 빛의 수호자. 겨울잠·홀리레인으로 전열을 지킵니다.", "lyria", Element.Forest, Element.Dawn),
             Pair("knights", "불과 금속 · 강철의 진격", "파이어볼·메테오와 금속 장비. 공격 준비에 소울을 집중합니다.", "kael", Element.Fire, Element.Metal),
             Pair("tides", "물과 암흑 · 심연의 파도", "물의 전열과 암흑 제거 마법. 코인과 공방 전용 마법을 활용합니다.", "serin", Element.Tide, Element.Darkness),
-            Pair("stars", "대지와 빛 · 황금의 성채", "물리 피해·수비 마법과 빛의 강화. 다섯 칸의 배치 순서가 중요합니다.", "noa", Element.Earth, Element.Dawn)
+            Pair("stars", "대지와 빛 · 황금의 성채", "물리 피해·수비 마법과 빛의 강화. 다섯 칸의 배치 순서가 중요합니다.", "noa", Element.Earth, Element.Dawn),
+            FidelityDeck()
         };
+        static StarterDeckDefinition FidelityDeck()
+        {
+            var cards = new List<string>();
+            foreach (var id in new[] { "2042810001", "2042810002", "2042810023", "2042810024" }) AddCopies(cards, id, 4);
+            // Every new higher-grade original retains its actual two-copy limit.
+            foreach (var id in new[] { "4071421199", "4071421203", "5112322069", "11112425384", "11112425389", "12032826208", "12032826213" }) AddCopies(cards, id, 2);
+            foreach (var id in new[] { "2042920002", "2042920037", "2043020043", "2042820004", "2042920038" }) AddCopies(cards, id, 2);
+            foreach (var id in new[] { "3111430391", "2050330032", "2042930028" }) AddCopies(cards, id, 2);
+            foreach (var id in new[] { "2042940005", "2042940024", "2042940025", "2042940027" }) AddCopies(cards, id, 1);
+            ValidatePlayableDeck(cards);
+            return new StarterDeckDefinition("fidelity", "강화 체험 · 암흑과 대지",
+                "업그레이드의 손패 소각, 유니크 킹핀사이클롭의 무료 장착과 이벤트 원작 카드를 사용하는 50장 덱입니다.", "noa", cards.ToArray());
+        }
+        static void AddCopies(List<string> cards, string sourceId, int copies)
+        { for (int i = 0; i < copies; i++) cards.Add("fm_" + sourceId); }
         static StarterDeckDefinition Pair(string id, string name, string text, string leader, Element first, Element second)
         {
             var pool = ClassicCardData.StarterCardIds.Select(CardCatalog.Get).Where(c => c.element == first || c.element == second).ToArray();

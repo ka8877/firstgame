@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FantasyCards.Presentation
 {
-    /// <summary>Native playback uses the same four offline files as the Web template.</summary>
+    /// <summary>Native playback uses the same four credited source edits as the Web template.</summary>
     [DisallowMultipleComponent]
     public sealed class FmLocalMusicHost : MonoBehaviour
     {

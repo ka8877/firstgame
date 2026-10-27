@@ -40,6 +40,7 @@ LOCAL_ERROR_SPEC.loader.exec_module(LOCAL_ERRORS)
 ROOT = Path(__file__).resolve().parents[2]
 REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-remaster-2026-10-26"}
 MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
+FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
 REQUIRED_CHECKPOINTS = {
     "FantasyCards": {"title", "lobby", "collection-search", "collection-last-page", "deck-selection", "room", "opening", "battle", "saved-battle", "continued-battle"},
     "PathOfDawn": {"title", "birth-1", "birth-2", "birth-3", "temple-idle", "temple-walked", "gate-reading", "saved-temple", "continued-temple",
@@ -79,14 +80,14 @@ def runtime_files(folder):
     return BASE.runtime_entries(BASE.build_fingerprint(folder))
 
 
-def media_audio_summary(snapshots):
+def media_audio_summary(snapshots, minimum_duration=30):
     """Observe the real local HTML media source through its unchanged WebAudio route."""
     frames, errors = [], []
     for snapshot in snapshots:
         errors.extend(snapshot.get("errors", []))
         for context in snapshot["contexts"]:
             sources = [source for source in context.get("media", []) if not source["paused"]
-                       and not source["ended"] and source["loop"] and (source["duration"] or 0) >= 30]
+                       and not source["ended"] and source["loop"] and (source["duration"] or 0) >= minimum_duration]
             for source in sources:
                 reachable = BASE.audio_reachable(context, source["nodeId"])
                 outputs = {a for a, b, _, _ in context["connections"]
@@ -128,7 +129,7 @@ class JourneySmoke:
         self.modern = plan.get("suite") == "modern-real-input-v1"
         # Attach while the page is still idle, before any short transient input.
         # A late CDP attach can consume an entire jump on a software renderer.
-        self.raw_capture_session = page.context.new_cdp_session(page) if self.modern and args.game == "PathOfDawn" else None
+        self.raw_capture_session = page.context.new_cdp_session(page) if self.modern else None
         self.report = {"game": args.game, "revision": plan.get("revision", REVISIONS[args.game]), "status": "running",
             "suite": plan.get("suite", "remaster-real-input-v1"), "startedUtc": now(), "profile": args.profile,
             "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
@@ -367,7 +368,7 @@ class JourneySmoke:
         """Capture every actual compositor PNG before real input; reviewer selects pixels."""
         session = self.raw_capture_session
         if session is None or self.pending_compositor_frames:
-            raise ValueError("Compositor capture needs the modern Gospel session and no pending burst")
+            raise ValueError("Compositor capture needs a current browser session and no pending burst")
         box = self.page.locator("#unity-canvas").bounding_box()
         raw = []
         def frame(event):
@@ -379,8 +380,11 @@ class JourneySmoke:
         session.send("Page.startScreencast", {"format": "png", "maxWidth": self.page.viewport_size["width"],
                      "maxHeight": self.page.viewport_size["height"], "everyNthFrame": 1})
         try:
-            self.input({k:v for k,v in action.items() if k != "captureCompositorBurst"})
-            self.page.wait_for_timeout(2600)
+            self.input({k:v for k,v in action.items() if k not in ("captureCompositorBurst", "captureLabel", "captureMs")})
+            capture_ms = action.get("captureMs", 2600)
+            if not isinstance(capture_ms, int) or not 100 <= capture_ms <= 12000:
+                raise ValueError("Compositor observation must be between100 and12000ms")
+            self.page.wait_for_timeout(capture_ms)
         finally:
             session.send("Page.stopScreencast")
             session.remove_listener("Page.screencastFrame", frame)
@@ -390,7 +394,7 @@ class JourneySmoke:
         burst["endedUtc"] = now()
         shots = []
         for index, original in enumerate(raw):
-            name = "jump-air-compositor-" + str(len(self.report.get("compositorBursts", []))) + "-" + str(index).zfill(3)
+            name = action.get("captureLabel", "jump-air") + "-compositor-" + str(len(self.report.get("compositorBursts", []))) + "-" + str(index).zfill(3)
             path = self.output / (name + ".png")
             path.write_bytes(base64.b64decode(original.pop("data")))
             with Image.open(path) as pixels:
@@ -435,6 +439,33 @@ class JourneySmoke:
         elif kind == "wheel":
             self.page.mouse.move(*self.point(*action["point"]))
             self.page.mouse.wheel(action.get("deltaX", 0), action["deltaY"])
+        elif kind == "drag":
+            start, end = self.point(*action["start"]), self.point(*action["end"])
+            duration = action.get("durationMs", 700)
+            if not isinstance(duration, int) or not 200 <= duration <= 2500:
+                raise ValueError("Ordinary pointer drag must last between200 and2500ms")
+            steps = 12
+            if self.args.profile == "mobile-landscape":
+                session = self.page.context.new_cdp_session(self.page)
+                try:
+                    session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"x": start[0], "y": start[1]}]})
+                    for index in range(1, steps + 1):
+                        p = index / steps
+                        session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [
+                            {"x": start[0] + (end[0] - start[0]) * p, "y": start[1] + (end[1] - start[1]) * p}]})
+                        self.page.wait_for_timeout(duration / steps)
+                    session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+                finally:
+                    session.detach()
+            else:
+                self.page.mouse.move(*start); self.page.mouse.down()
+                try:
+                    for index in range(1, steps + 1):
+                        p = index / steps
+                        self.page.mouse.move(start[0] + (end[0] - start[0]) * p, start[1] + (end[1] - start[1]) * p)
+                        self.page.wait_for_timeout(duration / steps)
+                finally:
+                    self.page.mouse.up()
         elif kind == "hold":
             keys = action["keys"]
             for key in keys:
@@ -490,7 +521,7 @@ class JourneySmoke:
         attempt = 0
         while True:
             name = step["name"] + ("-adjusted-" + str(attempt) if attempt else "")
-            candidates = self.pending_compositor_frames if step["name"] == "jump-air" else []
+            candidates = self.pending_compositor_frames if step["name"] == "jump-air" or step.get("useCompositorBurst") else []
             self.pending_compositor_frames = []
             shot = candidates[0] if candidates else self.screenshot(name)
             resume = self.output / (name + ".review.json")
@@ -498,7 +529,7 @@ class JourneySmoke:
                      "reviewFile": str(resume.relative_to(ROOT)), "status": "pending", "navigation": self.navigation}
             if candidates:
                 entry["candidateOriginals"] = candidates
-                entry["selectionMethod"] = "Reviewer directly inspects all unedited original compositor frames and selects exact frameSha256; no inferred airborne state."
+                entry["selectionMethod"] = "Reviewer directly inspects unedited original compositor frames and selects exact frameSha256; the selected visible state is not inferred or injected."
             self.report["checkpoints"].append(entry)
             self.report["pendingReview"] = entry
             self.persist()
@@ -536,16 +567,23 @@ class JourneySmoke:
         window_ms = 8000 if self.modern and self.args.game == "PathOfDawn" and label not in ("before-first-gesture", "muted") else 2200
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
-        summary = media_audio_summary(snapshots) if local_media else BASE.music_audio_summary(snapshots)
+        minimum_duration = 30
+        if local_media and self.report['revision'] == 'fm-fidelity-2026-10-27':
+            # The verified publisher excerpts are18.53/19.55s, not the earlier
+            # invented60s loops. Their exact URLs, looping source and advancing
+            # isolated PCM still have to pass the normal source checks below.
+            manifest = json.loads((ROOT / 'Tools/Audio/FmFidelity/runtime-manifest.json').read_text())
+            minimum_duration = min(track['seconds'] for track in manifest['tracks']) - .1
+        summary = media_audio_summary(snapshots, minimum_duration) if local_media else BASE.music_audio_summary(snapshots)
         acquisition_windows = [window_ms]
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and self.args.game == "PathOfDawn" and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] == 'fm-fidelity-2026-10-27') and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
-                summary = BASE.music_audio_summary(snapshots)
+                summary = media_audio_summary(snapshots, minimum_duration) if local_media else BASE.music_audio_summary(snapshots)
         path = self.output / ("audio-" + str(self.navigation) + "-" + label + ".json")
         path.write_text(json.dumps({"label": label, "requestedWindowMs": sum(acquisition_windows),
             "acquisitionWindowsMs": acquisition_windows, "snapshots": snapshots, "summary": summary}, indent=2) + "\n")
@@ -719,6 +757,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity"), default="modern")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -740,8 +779,11 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    if modern and plan.get("revision") != MODERN_REVISIONS[args.game]:
-        parser.error("The modern plan revision differs from the current modern build")
+    expected_revisions = FIDELITY_REVISIONS if args.release_profile == "fm-fidelity" else MODERN_REVISIONS
+    if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
+        parser.error("The fidelity suite preserves Gospel without re-executing it")
+    if modern and plan.get("revision") != expected_revisions[args.game]:
+        parser.error("The plan revision differs from the explicit current release profile")
     required = set(plan.get("requiredCheckpoints", [])) if modern else REQUIRED_CHECKPOINTS[args.game]
     if not required or not required.issubset(checkpoints):
         parser.error("The authored plan lacks required current-game checkpoints")

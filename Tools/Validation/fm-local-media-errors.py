@@ -11,6 +11,7 @@ from urllib.parse import urljoin, urlsplit
 
 FILENAMES={name+extension for name in ('title','lobby','deck','battle') for extension in ('.ogg','.mp3')}
 PREFIX='StreamingAssets/Audio/ModernCard/'
+SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27'}
 
 
 def _number(value):
@@ -18,7 +19,7 @@ def _number(value):
 
 
 def inactive_local_media_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows):
-    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+    if (game!='FantasyCards' or revision not in SUPPORTED_LOCAL_REVISIONS or suite!='modern-real-input-v1'
             or failure.get('resourceType')!='media' or failure.get('method')!='GET'
             or failure.get('error')!='net::ERR_ABORTED'):
         return None
@@ -72,7 +73,7 @@ def inactive_local_media_preload_cancellation(game,revision,suite,failure,game_u
     inactive and at zero, while the selected other source advances and is later
     independently verified as audible isolated PCM in this navigation.
     """
-    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+    if (game!='FantasyCards' or revision not in SUPPORTED_LOCAL_REVISIONS or suite!='modern-real-input-v1'
             or failure.get('resourceType')!='media' or failure.get('method')!='GET'
             or failure.get('error')!='net::ERR_ABORTED'):
         return None
@@ -122,7 +123,7 @@ def recovered_public_pregesture_range_cancellation(game,revision,suite,failure,g
     Immutable public bytes were fetched/hashed before navigation. Chrome can
     abort an initial HTTP206 range while successfully loading another range.
     """
-    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+    if (game!='FantasyCards' or revision not in SUPPORTED_LOCAL_REVISIONS or suite!='modern-real-input-v1'
             or failure.get('resourceType')!='media' or failure.get('method')!='GET'
             or failure.get('error')!='net::ERR_ABORTED' or failure.get('navigation')!=0):return None
     origin=urlsplit(game_url)
@@ -164,7 +165,7 @@ def recovered_public_pregesture_range_cancellation(game,revision,suite,failure,g
 
 def recovered_public_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
     """Prove startup decode recovery or uninterrupted playback across a range abort."""
-    if (game!='FantasyCards' or revision!='fm-modern-2026-10-26' or suite!='modern-real-input-v1'
+    if (game!='FantasyCards' or revision not in SUPPORTED_LOCAL_REVISIONS or suite!='modern-real-input-v1'
             or failure.get('resourceType')!='media' or failure.get('method')!='GET'
             or failure.get('error')!='net::ERR_ABORTED' or failure.get('navigation')!=0):return None
     origin=urlsplit(game_url)

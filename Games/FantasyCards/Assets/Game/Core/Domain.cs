@@ -7,6 +7,8 @@ namespace FantasyCards.Core
     public enum Element { Dawn, Tide, Fire, Forest, Metal, Earth, Darkness }
     public enum CardKind { Terrain, Unit, Spell, Equipment }
     public enum CardRarity { Free, Common, Uncommon, Rare, Special, Upgrade, Unique, Event, Legend, Icajen, Secret, Epic }
+    // Rank is a separate original-card variant, not a rarity or a power tier.
+    public enum CardRank { N, C, B, A, S }
     public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin, Draw, Resource, Sweep, Health, Weaken, DefenseBreak, HealAll, RallyAll, ArmorAll, HealthAll, DrainAll, StatOperations }
     public enum LeaderSkill { QuickShot, Rally, Restoration, Insight }
     public enum BattlePhase { Main, AttackDeclaration, BlockResponse, Complete, DefensePreparation }
@@ -73,6 +75,7 @@ namespace FantasyCards.Core
         public CardKind kind;
         public Element element;
         public CardRarity rarity;
+        public CardRank rank = CardRank.N;
         public int level, coloredCost, genericCost, cost;
         public int landPointCost = 1, producedColored = 1, producedGeneric;
         public int attack, defense, health, coinBonus;
@@ -81,6 +84,8 @@ namespace FantasyCards.Core
         public Effect effect;
         public int magnitude;
         public int deckLimit = 4;
+        public bool freeEquipmentBelowLevel;
+        public int discardGenericSoul;
         public int capabilityMask = 7, requiredCapabilityMask;
         public PlayWindow playWindow = PlayWindow.Any;
         public int firstAffectedLane = 0, lastAffectedLane = 4;
@@ -160,7 +165,30 @@ namespace FantasyCards.Core
     {
         public int sequence, turn, amount, actor;
         public string kind, text;
+        public bool hasPresentationData;
+        // Optional presentation metadata. Older schema-3 saves omit these fields.
+        // The source owns the action; the target receives it. No rendering code
+        // needs to parse the Korean log text or consume the battle RNG.
+        public int sourceInstanceId = -1, targetInstanceId = -1;
+        public int sourcePlayer = -1, targetPlayer = -1, sourceLane = -1, targetLane = -1;
+        public string sourceDefinitionId, targetDefinitionId;
+        public int coinIndex, secondaryAmount;
+        public bool coinHeads;
+        // For unit events these are the source's current AP/DP/remaining HP.
+        // targetHealth is the receiving unit's remaining HP after this event.
+        public int attack, defense, health, targetHealth;
+        public string stat;
         public BattleEvent Copy() { return (BattleEvent)MemberwiseClone(); }
+    }
+
+    // Captured only when explicitly requested by presentation. It is deliberately
+    // outside BattleState: replay speed/skip never changes a save or RNG state.
+    public sealed class BattlePlaybackFrame
+    {
+        public BattleEvent item;
+        public List<PlayerState> players;
+        public int turn, activePlayer, winner;
+        public BattlePhase phase;
     }
 
     [Serializable] public sealed class BattleState

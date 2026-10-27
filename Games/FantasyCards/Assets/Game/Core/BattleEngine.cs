@@ -8,6 +8,20 @@ namespace FantasyCards.Core
     public sealed class BattleEngine
     {
         public BattleState State { get; private set; }
+        bool capturePlayback;
+        List<BattlePlaybackFrame> playbackFrames = new List<BattlePlaybackFrame>();
+
+        public void BeginPlaybackCapture()
+        {
+            if (capturePlayback) throw new InvalidOperationException("이미 전투 연출을 수집하고 있습니다.");
+            playbackFrames.Clear(); capturePlayback = true;
+        }
+        public List<BattlePlaybackFrame> EndPlaybackCapture()
+        {
+            capturePlayback = false;
+            var frames = playbackFrames; playbackFrames = new List<BattlePlaybackFrame>();
+            return frames;
+        }
         public int PreparingPlayer => State.phase == BattlePhase.Main ? State.activePlayer : State.phase == BattlePhase.DefensePreparation ? 1 - State.activePlayer : -1;
         public int ActivePreparationPlayer => PreparingPlayer;
         public bool IsPreparing(int player) => player >= 0 && player <= 1 && PreparingPlayer == player;
@@ -62,7 +76,14 @@ namespace FantasyCards.Core
                 }
             }
             if (ids.Count != 2 * s.rules.deckSize || ids.Any(x => x >= s.nextInstanceId)) throw new ArgumentException("카드 보존 검증에 실패했습니다.");
-            for (int i = 0; i < s.events.Count; i++) if (s.events[i] == null || s.events[i].sequence != i + 1 || s.events[i].turn < 1 || s.events[i].turn > s.turn || s.events[i].text == null || s.events[i].kind == null || s.events[i].actor < -1 || s.events[i].actor > 1) throw new ArgumentException("전투 기록이 잘못되었습니다.");
+            for (int i = 0; i < s.events.Count; i++)
+            {
+                var item = s.events[i];
+                if (item == null || item.sequence != i + 1 || item.turn < 1 || item.turn > s.turn || item.text == null || item.kind == null || item.actor < -1 || item.actor > 1) throw new ArgumentException("전투 기록이 잘못되었습니다.");
+                if (item.hasPresentationData && (item.sourcePlayer < -1 || item.sourcePlayer > 1 || item.targetPlayer < -1 || item.targetPlayer > 1 || item.sourceLane < -1 || item.sourceLane >= s.rules.unitLanes || item.targetLane < -1 || item.targetLane >= s.rules.unitLanes || item.sourceInstanceId < -1 || item.sourceInstanceId >= s.nextInstanceId || item.targetInstanceId < -1 || item.targetInstanceId >= s.nextInstanceId || item.coinIndex < 0 || item.coinIndex > 5)) throw new ArgumentException("전투 연출 기록이 잘못되었습니다.");
+                if (item.hasPresentationData && !string.IsNullOrEmpty(item.sourceDefinitionId)) CardCatalog.Get(item.sourceDefinitionId);
+                if (item.hasPresentationData && !string.IsNullOrEmpty(item.targetDefinitionId)) CardCatalog.Get(item.targetDefinitionId);
+            }
             for (int player = 0; player < 2; player++)
             {
                 var shuffles = s.events.Where(e => e.kind == "shuffle-hand" && e.actor == player).ToArray();
@@ -138,6 +159,7 @@ namespace FantasyCards.Core
             if (p.deck.Count == 0) { Finish(1 - player, Owner(player) + "의 덱에서 보충할 카드가 없습니다."); return false; }
             var card = p.deck[0]; p.deck.RemoveAt(0);
             if (p.hand.Count < State.rules.handLimit) p.hand.Add(card); else p.discard.Add(card);
+            Log("draw", Owner(player) + " · 카드 1장 보충", 1, player, card: card, sourceOwner: player);
             return true;
         }
         void BeginRound(bool refill)
@@ -175,6 +197,39 @@ namespace FantasyCards.Core
         }
         public bool CanUseLeaderSkill(int player, out string reason) => Fail("클래식 모드의 아바타에는 리더 기술이 없습니다.", out reason);
         public bool UseLeaderSkill(int player, out string reason) => CanUseLeaderSkill(player, out reason);
+        public bool CanDiscardHand(int player, int instanceId, out string reason)
+        {
+            reason = "";
+            if (!IsPreparing(player)) return Fail("자신의 준비 단계에만 손패를 소각할 수 있습니다.", out reason);
+            if (State.openingHandOpen) return Fail("시작 손패를 먼저 확정하세요.", out reason);
+            if (!State.players[player].hand.Any(c => c.instanceId == instanceId)) return Fail("소각할 손패를 선택하세요.", out reason);
+            return true;
+        }
+        public bool DiscardHand(int player, int instanceId, out string reason)
+        {
+            if (!CanDiscardHand(player, instanceId, out reason)) return false;
+            var p = State.players[player]; var card = p.hand.Find(c => c.instanceId == instanceId); var definition = CardCatalog.Get(card.definitionId);
+            p.hand.Remove(card); p.discard.Add(card);
+            int gain = Math.Min(State.rules.maximumResource - p.genericSoul, definition.discardGenericSoul);
+            p.genericSoul += gain;
+            Log("discard", Owner(player) + " · " + definition.name + " 손패 소각", 1, player, card: card, sourceOwner: player);
+            if (gain > 0) Log("resource", definition.name + " · 사용 가능한 무소울 +" + gain, gain, player, card: card, sourceOwner: player);
+            return true;
+        }
+        bool FreeEquipment(PlayerState player, CardDefinition item, int lane)
+        {
+            if (item.kind != CardKind.Equipment) return false;
+            var target = player.AtLane(lane);
+            if (target == null) return false;
+            var unit = CardCatalog.Get(target.definitionId);
+            return unit.freeEquipmentBelowLevel && item.level < unit.level;
+        }
+        public bool IsFreeEquipment(int player, int instanceId, int lane)
+        {
+            if (player < 0 || player >= State.players.Count) return false;
+            var card = State.players[player].hand.Find(c => c.instanceId == instanceId);
+            return card != null && FreeEquipment(State.players[player], CardCatalog.Get(card.definitionId), lane);
+        }
         int FirstEmptyLane(PlayerState p) { for (int lane = 0; lane < State.rules.unitLanes; lane++) if (p.AtLane(lane) == null && p.SpellAtLane(lane) == null) return lane; return -1; }
         static int TargetPlayer(CardDefinition card, int player) => card.effect == Effect.Damage || card.effect == Effect.Weaken || card.effect == Effect.DefenseBreak ? 1 - player : player;
         public bool CanPlay(int player, int instanceId, int lane, out string reason)
@@ -192,7 +247,7 @@ namespace FantasyCards.Core
                 if (p.terrain.Count >= State.rules.terrainLimit || p.terrainPlayed >= State.rules.terrainPerTurn) return Fail("전장 지형은 최대 " + State.rules.terrainLimit + "장입니다.", out reason);
                 return true;
             }
-            if (p.Resource(d.element) < d.coloredCost || p.genericSoul < d.cost) return Fail(CardCatalog.CostText(d) + "이 필요합니다.", out reason);
+            if (!FreeEquipment(p, d, lane) && (p.Resource(d.element) < d.coloredCost || p.genericSoul < d.cost)) return Fail(CardCatalog.CostText(d) + "이 필요합니다.", out reason);
             if (d.kind == CardKind.Unit)
             {
                 if (lane < 0 || lane >= State.rules.unitLanes || p.AtLane(lane) != null || p.SpellAtLane(lane) != null) return Fail("유닛과 예고 마법이 없는 전열 칸을 선택하세요.", out reason);
@@ -214,18 +269,45 @@ namespace FantasyCards.Core
         public bool Play(int player, int instanceId, int lane, out string reason)
         {
             if (!CanPlay(player, instanceId, lane, out reason)) return false;
+            return PlayValidated(player, instanceId, lane, -1, out reason);
+        }
+        // A magic card's reserved front slot is separate from its effect target.
+        // The legacy Play API keeps selecting the first empty reserved slot.
+        public bool CanPlayInSlot(int player, int instanceId, int reservationLane, int targetLane, out string reason)
+        {
+            var instance = player >= 0 && player < State.players.Count ? State.players[player].hand.Find(c => c.instanceId == instanceId) : null;
+            var definition = instance == null ? null : CardCatalog.Get(instance.definitionId);
+            int lane = definition != null && definition.kind == CardKind.Unit ? reservationLane : targetLane;
+            if (!CanPlay(player, instanceId, lane, out reason)) return false;
+            if (definition.kind == CardKind.Spell && (reservationLane < 0 || reservationLane >= State.rules.unitLanes || State.players[player].AtLane(reservationLane) != null || State.players[player].SpellAtLane(reservationLane) != null))
+                return Fail("마법을 예고할 빈 전열 칸을 선택하세요.", out reason);
+            return true;
+        }
+        public bool PlayInSlot(int player, int instanceId, int reservationLane, int targetLane, out string reason)
+        {
+            if (!CanPlayInSlot(player, instanceId, reservationLane, targetLane, out reason)) return false;
+            var definition = CardCatalog.Get(State.players[player].hand.Find(c => c.instanceId == instanceId).definitionId);
+            return PlayValidated(player, instanceId, definition.kind == CardKind.Unit ? reservationLane : targetLane, reservationLane, out reason);
+        }
+        bool PlayValidated(int player, int instanceId, int lane, int reservationLane, out string reason)
+        {
+            reason = "";
             var p = State.players[player]; var card = p.hand.Find(x => x.instanceId == instanceId); var d = CardCatalog.Get(card.definitionId);
             p.hand.Remove(card); p.playedThisPreparation = true;
             if (d.kind == CardKind.Terrain)
             { p.levelPoints -= d.landPointCost; p.terrain.Add(card); p.terrainPlayed++; AddProduction(p, d); }
             else
             {
-                p.SetResource(d.element, p.Resource(d.element) - d.coloredCost); p.genericSoul -= d.cost;
+                if (!FreeEquipment(p, d, lane))
+                { p.SetResource(d.element, p.Resource(d.element) - d.coloredCost); p.genericSoul -= d.cost; }
                 if (d.kind == CardKind.Unit) p.units.Add(new UnitState { instanceId = card.instanceId, definitionId = d.id, lane = lane });
                 else if (d.kind == CardKind.Equipment) p.AtLane(lane).equipment.Add(card);
-                else p.preparedSpells.Add(new PreparedSpellState { instanceId = card.instanceId, definitionId = d.id, lane = FirstEmptyLane(p), targetLane = CardCatalog.RequiresUnitTarget(d) ? lane : -1, targetPlayer = CardCatalog.RequiresUnitTarget(d) ? TargetPlayer(d, player) : -1 });
+                else p.preparedSpells.Add(new PreparedSpellState { instanceId = card.instanceId, definitionId = d.id, lane = reservationLane >= 0 ? reservationLane : FirstEmptyLane(p), targetLane = CardCatalog.RequiresUnitTarget(d) ? lane : -1, targetPlayer = CardCatalog.RequiresUnitTarget(d) ? TargetPlayer(d, player) : -1 });
             }
-            Log("play", Owner(player) + " · " + (d.kind == CardKind.Spell ? "마법 1장 예고" : d.name + " 배치"), d.kind == CardKind.Spell ? 0 : d.level, player);
+            int placedLane = d.kind == CardKind.Spell ? p.preparedSpells.Find(s => s.instanceId == card.instanceId).lane : lane;
+            Log("play", Owner(player) + " · " + (d.kind == CardKind.Spell ? "마법 1장 예고" : d.name + " 배치"), d.kind == CardKind.Spell ? 0 : d.level, player,
+                card: card, sourceOwner: player, lane: d.kind == CardKind.Terrain ? -1 : placedLane,
+                target: d.kind == CardKind.Equipment ? p.AtLane(lane) : null, targetOwner: d.kind == CardKind.Equipment ? player : -1);
             RemoveDefeated(); CheckVictory(); return true;
         }
         public bool CompletePreparation(int player, out string reason)
@@ -275,15 +357,24 @@ namespace FantasyCards.Core
                 if (blocker == null)
                 {
                     int amount = CardCatalog.Get(unit.definitionId).level;
-                    DamagePlayer(defender, amount, CardCatalog.Get(unit.definitionId).name + " 직접 공격 · 레벨 " + amount);
+                    Log("direct", CardCatalog.Get(unit.definitionId).name + " · 상대 덱 직접 공격", amount, attacker,
+                        source: unit, sourceOwner: attacker, targetOwner: defender);
+                    DamagePlayer(defender, amount, CardCatalog.Get(unit.definitionId).name + " 직접 공격 · 레벨 " + amount, unit, attacker);
                 }
                 else
                 {
                     int outgoing = Math.Max(0, CardCatalog.UnitAttack(unit) - CardCatalog.UnitDefense(blocker));
                     int incoming = Math.Max(0, CardCatalog.UnitAttack(blocker) - CardCatalog.UnitDefense(unit));
                     blocker.damage += outgoing;
+                    Log("attack", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " · 피해 " + outgoing,
+                        outgoing, attacker, source: unit, sourceOwner: attacker, target: blocker, targetOwner: defender);
                     bool retaliate = State.rules.defenderStrikesBack && (State.rules.damageOrder == DamageResolutionOrder.Simultaneous || CardCatalog.UnitHealth(blocker) > 0);
-                    if (retaliate) unit.damage += incoming;
+                    if (retaliate)
+                    {
+                        unit.damage += incoming;
+                        Log("counter", CardCatalog.Get(blocker.definitionId).name + " → " + CardCatalog.Get(unit.definitionId).name + " · 생존 반격 " + incoming,
+                            incoming, defender, source: blocker, sourceOwner: defender, target: unit, targetOwner: attacker);
+                    }
                     Log("damage", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " 피해 " + outgoing + (retaliate ? " · 생존 반격 " + incoming : " · 반격 없음"), outgoing, attacker);
                 }
                 RemoveDefeated(); CheckVictory();
@@ -311,12 +402,14 @@ namespace FantasyCards.Core
             int count = State.rules.baseCoins >= 0 ? State.rules.baseCoins : Math.Max(d.attackCoin.count, Math.Max(d.defenseCoin.count, d.healthCoin.count));
             count = Math.Min(5, count + unit.extraCoins); var heads = new bool[count];
             for (int i = 0; i < count; i++)
-            { heads[i] = StableRandom.Range(ref State.randomState, 2) == 1; Log("coin", d.name + " · C" + (i + 1) + " " + (heads[i] ? "앞면" : "뒷면"), heads[i] ? 1 : 0, player); }
+            { heads[i] = StableRandom.Range(ref State.randomState, 2) == 1; Log("coin", d.name + " · C" + (i + 1) + " " + (heads[i] ? "앞면" : "뒷면"), heads[i] ? 1 : 0, player,
+                source: unit, sourceOwner: player, coinIndex: i + 1, coinHeads: heads[i]); }
             unit.rolledAttack = ApplyCoins(CardCatalog.BaseAttack(unit), d.attackCoin, heads);
             unit.rolledDefense = ApplyCoins(CardCatalog.BaseDefense(unit), d.defenseCoin, heads);
             unit.rolledHealth = ApplyCoins(CardCatalog.BaseHealth(unit), d.healthCoin, heads);
             unit.coinsRolled = true;
-            Log("power", d.name + " 최종 AP " + unit.rolledAttack + " / DP " + unit.rolledDefense + " / HP " + unit.rolledHealth, unit.rolledAttack, player);
+            Log("power", d.name + " 최종 AP " + unit.rolledAttack + " / DP " + unit.rolledDefense + " / HP " + unit.rolledHealth, unit.rolledAttack, player,
+                source: unit, sourceOwner: player);
         }
         static int ApplyCoins(int basis, CoinRule spec, bool[] heads)
         {
@@ -330,6 +423,9 @@ namespace FantasyCards.Core
         {
             var d = CardCatalog.Get(spell.definitionId); var p = State.players[player]; var enemies = State.players[1 - player];
             var target = spell.targetPlayer < 0 ? null : State.players[spell.targetPlayer].AtLane(spell.targetLane);
+            var spellCard = new CardInstance(spell.instanceId, spell.definitionId);
+            Log("spell", d.name + " 공개 · " + d.text + (CardCatalog.RequiresUnitTarget(d) && target == null ? " (대상 부재)" : ""), d.magnitude, player,
+                card: spellCard, sourceOwner: player, lane: spell.lane, target: target, targetOwner: spell.targetPlayer);
             if (d.effect == Effect.StatOperations)
             {
                 // Snapshot every delta before applying the card, including its still-occupied spell slot.
@@ -356,6 +452,7 @@ namespace FantasyCards.Core
                         }
                     }
                 foreach (var change in changes)
+                {
                     switch (change.Item2)
                     {
                         case OperationStat.Attack: change.Item1.bonusPower += change.Item3; break;
@@ -363,6 +460,10 @@ namespace FantasyCards.Core
                         case OperationStat.Health: change.Item1.bonusHealth += change.Item3; break;
                         case OperationStat.PhysicalDamage: change.Item1.damage += change.Item3; break;
                     }
+                    int owner = State.players[0].units.Contains(change.Item1) ? 0 : 1;
+                    Log("spell-target", d.name + " · " + CardCatalog.Get(change.Item1.definitionId).name + " " + change.Item2 + " " + change.Item3.ToString("+0;-0;0"),
+                        change.Item3, player, card: spellCard, sourceOwner: player, lane: spell.lane, target: change.Item1, targetOwner: owner, stat: change.Item2.ToString());
+                }
             }
             switch (d.effect)
             {
@@ -383,7 +484,8 @@ namespace FantasyCards.Core
                 case Effect.HealthAll: foreach (var u in p.units) u.bonusHealth += d.magnitude; break;
                 case Effect.DrainAll: foreach (var u in p.units) u.bonusHealth += d.magnitude; foreach (var u in enemies.units) u.bonusHealth -= d.magnitude; break;
             }
-            Log("spell", d.name + " 공개 · " + d.text + (CardCatalog.RequiresUnitTarget(d) && target == null ? " (대상 부재)" : ""), d.magnitude, player);
+            Log("spell-resolved", d.name + " 효과 처리 완료", d.magnitude, player,
+                card: spellCard, sourceOwner: player, lane: spell.lane, target: target, targetOwner: spell.targetPlayer);
         }
         void RemoveDefeated()
         {
@@ -391,14 +493,19 @@ namespace FantasyCards.Core
             {
                 var p = State.players[player];
                 foreach (var unit in p.units.Where(u => CardCatalog.UnitHealth(u) <= 0).OrderBy(u => u.lane).ToArray())
-                { p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment); Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player); }
+                { p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment); Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player); }
             }
         }
-        void DamagePlayer(int player, int amount, string cause)
+        void DamagePlayer(int player, int amount, string cause, UnitState source = null, int sourceOwner = -1)
         {
             var p = State.players[player];
             if (State.rules.victoryRule == VictoryRule.Life) p.health -= amount;
-            else for (int i = 0; i < amount && p.deck.Count > 0; i++) { var card = p.deck[0]; p.deck.RemoveAt(0); p.discard.Add(card); }
+            else for (int i = 0; i < amount && p.deck.Count > 0; i++)
+            {
+                var card = p.deck[0]; p.deck.RemoveAt(0); p.discard.Add(card);
+                Log("burn", cause + " · " + Owner(player) + " 덱 1장 소각", 1, sourceOwner,
+                    source: source, sourceOwner: sourceOwner, targetOwner: player, targetCard: card);
+            }
             Log("damage", cause + " · " + Owner(player) + (State.rules.victoryRule == VictoryRule.Deck ? " 덱 " : " 라이프 ") + "-" + amount, amount, player);
         }
         int RemainingLife(int player) => State.rules.victoryRule == VictoryRule.Deck ? State.players[player].deck.Count : State.players[player].health;
@@ -414,7 +521,29 @@ namespace FantasyCards.Core
         { State.winner = winner; State.phase = BattlePhase.Complete; State.openingHandOpen = false; Log("result", reason + " · " + (winner == 2 ? "무승부" : Owner(winner) + " 승리"), winner); }
         static bool Fail(string message, out string reason) { reason = message; return false; }
         static string Owner(int player) => player == 0 ? "나" : "상대";
-        void Log(string kind, string text, int amount = 0, int actor = -1)
-        { State.events.Add(new BattleEvent { sequence = State.events.Count + 1, turn = State.turn, kind = kind, text = text, amount = amount, actor = actor }); }
+        void Log(string kind, string text, int amount = 0, int actor = -1,
+            UnitState source = null, int sourceOwner = -1, UnitState target = null, int targetOwner = -1,
+            CardInstance card = null, int lane = -1, CardInstance targetCard = null,
+            int coinIndex = 0, bool coinHeads = false, string stat = null)
+        {
+            var item = new BattleEvent { sequence = State.events.Count + 1, turn = State.turn, kind = kind, text = text,
+                amount = amount, actor = actor, hasPresentationData = true, sourcePlayer = sourceOwner,
+                targetPlayer = targetOwner, coinIndex = coinIndex, coinHeads = coinHeads, stat = stat };
+            if (source != null)
+            {
+                item.sourceInstanceId = source.instanceId; item.sourceDefinitionId = source.definitionId; item.sourceLane = source.lane;
+                item.attack = CardCatalog.UnitAttack(source); item.defense = CardCatalog.UnitDefense(source); item.health = CardCatalog.UnitHealth(source);
+            }
+            else if (card != null)
+            { item.sourceInstanceId = card.instanceId; item.sourceDefinitionId = card.definitionId; item.sourceLane = lane; }
+            if (target != null)
+            { item.targetInstanceId = target.instanceId; item.targetDefinitionId = target.definitionId; item.targetLane = target.lane; item.targetHealth = CardCatalog.UnitHealth(target); }
+            else if (targetCard != null)
+            { item.targetInstanceId = targetCard.instanceId; item.targetDefinitionId = targetCard.definitionId; }
+            State.events.Add(item);
+            if (capturePlayback)
+                playbackFrames.Add(new BattlePlaybackFrame { item = item.Copy(), players = State.players.ConvertAll(p => p.Copy()),
+                    turn = State.turn, activePlayer = State.activePlayer, phase = State.phase, winner = State.winner });
+        }
     }
 }

@@ -30,22 +30,23 @@ manifest = json.loads((ROOT / "Tools/Art/ClassicCards/manifest.json").read_text(
 audit = json.loads((DATA / "remaster-source-audit.json").read_text())
 assert audit["source"]["sha256"] == selection["expansion"]["sourceCandidatesSha256"]
 assert audit["preservedBaseline"]["sha256"] == baseline["selectionSha256"]
-assert audit["addedSourceIds"] == [card["sourceId"] for card in cards[96:]]
+assert audit["addedSourceIds"] == [card["sourceId"] for card in cards[96:161]]
 source_snapshot = ROOT / audit["source"]["path"]
 if source_snapshot.exists():
     assert sha(source_snapshot.read_bytes()) == audit["source"]["sha256"]
     source_cards = {row["fields"]["ID"]: row for row in
                     json.loads(source_snapshot.read_text())["cards"]}
-    for card in cards[96:]:
+    for card in cards[96:161]:
         source = source_cards[card["sourceId"]]
         assert all(source["fields"][key] == value for key, value in card["fields"].items()), card["sourceId"]
         assert source["pageUrl"] == card["sourceUrl"]
         assert source["imageUrl"] == card["imageUrl"]
-assert len(cards) == selection["expectedCount"] == 161
+assert len(cards) == selection["expectedCount"] and len(cards) >= 161
 assert len({c["sourceId"] for c in cards}) == len(cards)
 assert len({c["name"] for c in cards}) == len(cards)
 assert len({c["imageUrl"] for c in cards}) == len(cards)
-assert Counter(c["fields"]["Category"] for c in cards) == {1: 14, 2: 119, 3: 15, 4: 13}
+assert Counter(c["fields"]["Category"] for c in cards[:161]) == {1: 14, 2: 119, 3: 15, 4: 13}
+assert Counter(c["fields"]["Category"] for c in cards) == {int(k): v for k, v in selection["counts"].items()}
 assert len(baseline["cards"]) == 96
 for card, original in zip(cards, baseline["cards"]):
     assert card["sourceId"] == original["sourceId"]
@@ -57,6 +58,27 @@ for card, original in zip(cards, baseline["cards"]):
     assert sha(texture.read_bytes()) == original["textureSha256"], stem
     guid = re.search(r"(?m)^guid: ([0-9a-f]{32})$", Path(str(texture) + ".meta").read_text())[1]
     assert guid == original["textureGuid"], stem
+fidelity = selection.get("fidelityExpansion")
+if fidelity:
+    fidelity_baseline_path = ROOT / fidelity["baseline"]
+    assert sha(fidelity_baseline_path.read_bytes()) == fidelity["baselineSha256"]
+    fidelity_baseline = json.loads(fidelity_baseline_path.read_text())["cards"]
+    assert len(fidelity_baseline) == fidelity["preservedCards"] == 161
+    for card, original in zip(cards, fidelity_baseline):
+        assert card["sourceId"] == original["sourceId"]
+        assert canonical_sha(card) == original["canonicalSelectionRowSha256"]
+        for key in ("original", "texture"):
+            assert sha((ROOT / original[key]).read_bytes()) == original[key + "Sha256"]
+        assert re.search(r"(?m)^guid: ([0-9a-f]{32})$", Path(str(ROOT / original["texture"]) + ".meta").read_text())[1] == original["textureGuid"]
+    records_path = ROOT / fidelity["records"]
+    assert sha(records_path.read_bytes()) == fidelity["recordsSha256"]
+    records = {c["fields"]["ID"]: c for c in json.loads(records_path.read_text())["cards"]}
+    assert len(cards[161:]) == fidelity["addedCards"] == len(records) == 17
+    for card in cards[161:]:
+        observed = records[card["sourceId"]]
+        assert card["fields"] == observed["fields"]
+        assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
+        assert card["fields"]["DeckLimit"] == 2 and card["fields"]["RankType"] == 1
 for card in cards:
     assert card["fields"]["ID"] == card["sourceId"]
     assert card["fields"]["Name"] == card["name"]
@@ -81,6 +103,7 @@ subprocess.run([sys.executable, str(ROOT / "Tools/Art/ClassicCards/verify-media.
                cwd=ROOT, check=True, stdout=subprocess.DEVNULL)
 result = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat(),
                   "cards": len(cards), "preservedRowsAndMedia": 96,
+                  "preservedFidelityRowsMediaAndGuids": 161 if fidelity else None,
                   "addedCards": len(cards) - 96, "generatorReproducible": True,
                   "preservedResearchSnapshotVerified": source_snapshot.exists(),
                   "sourceSelectionSha256": sha((DATA / "selection.json").read_bytes()),

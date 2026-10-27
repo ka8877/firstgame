@@ -8,10 +8,10 @@ namespace FirstGame.Validation
 {
     [TestFixture] public sealed class DemoBattleTests
     {
-        [Test] public void FourStarterDecksAreDistinctFiftyCardCurvesUsingAllSevenElements()
+        [Test] public void FiveStarterDecksRetainTheFourOriginalCurvesAndUseAllSevenElements()
         {
-            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(3));
-            foreach(var deck in DemoCatalog.StarterDecks)
+            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(5));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(3));
+            foreach(var deck in DemoCatalog.StarterDecks.Take(4))
             {
                 DemoCatalog.ValidatePlayableDeck(deck.cards);
                 Assert.That(deck.cards.Length,Is.EqualTo(50));Assert.That(deck.cards.Select(CardCatalog.Get).Count(c=>c.kind==CardKind.Terrain),Is.EqualTo(16));
@@ -21,10 +21,12 @@ namespace FirstGame.Validation
                 Assert.That(deck.cards.Select(CardCatalog.Get).Max(c=>c.level),Is.GreaterThanOrEqualTo(6));
                 var copy=deck.CopyCards();copy.Clear();Assert.That(deck.cards.Length,Is.EqualTo(50));
             }
-            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards)).Distinct().Count(),Is.EqualTo(4));
+            DemoCatalog.ValidatePlayableDeck(DemoCatalog.GetDeck("fidelity").cards);
+            Assert.That(DemoCatalog.GetDeck("fidelity").cards.Length,Is.EqualTo(50));
+            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards)).Distinct().Count(),Is.EqualTo(5));
             Assert.That(DemoCatalog.StarterDecks.SelectMany(d=>d.cards).Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count(),Is.EqualTo(7));
         }
-        [TestCase("forest")] [TestCase("knights")] [TestCase("tides")] [TestCase("stars")]
+        [TestCase("forest")] [TestCase("knights")] [TestCase("tides")] [TestCase("stars")] [TestCase("fidelity")]
         public void EveryDeckCompletesThreeTrialsAndRestoresEachActionForSeveralSeeds(string deckId)
         {
             for(int trial=0;trial<3;trial++)for(uint seed=1;seed<=3;seed++)

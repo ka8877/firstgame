@@ -22,6 +22,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'Web'))
+from release_contract import manifest_contract
+
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_URL = "https://ka8877.github.io/firstgame/"
 GAME_SLUGS = ("fantasy-cards", "path-of-dawn")
@@ -89,9 +92,7 @@ def staged_manifest(stage):
     manifest = json.loads(path.read_text())
     require(manifest.get("publishReady") is True and manifest.get("sourceDirty") is False,
             "The staged release must be browser-verified and identify a clean source commit")
-    require(manifest.get("gameRevisions") == {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
-            and manifest.get("contentVersions") == {"FantasyCards": "fm-classic-0.1.0", "PathOfDawn": "gospel-0.1.0"},
-            "The public portal check requires the current modern stage")
+    manifest_contract(manifest)
     require(re.fullmatch(r"[0-9a-f]{40}", manifest.get("sourceCommit", "")), "Invalid staged sourceCommit")
     files = manifest.get("files", {})
     require(isinstance(files, dict) and files and "index.html" in files and "site.css" in files,

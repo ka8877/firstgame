@@ -1,5 +1,13 @@
 # 자산 출처와 교체 장부
 
+## 2026-10-27 판타지마스터즈 원작 충실성 개정
+
+현재 카드게임은 `fm-fidelity-2026-10-27`이다. 기존161종의 원본·픽셀·메타 GUID를 보존하고, 공개 원작 DB로 검증한17종을 추가해178종을 사용한다. 신규17장은 업그레이드3·유니크1·이벤트13이며 개별 인쇄 원본도 직접 대조했다. 원본 WebP와 픽셀을 보존한 Unity PNG, 출처·해시는 `Tools/Art/ClassicCards`, 생성·데이터 감사는 `Tools/Data/FmFidelity`, 원본 직접 검토는 `Tools/Research/FmFidelity/card-print-review.json`을 따른다. 원작12등급 중 실제 수록은8등급이다. 지원하지 않는 기술을 삭제해 나머지 등급을 채우지 않는다.
+
+타이틀의 원작 웹 인물 조각과 카드 인쇄 그림은 보존한 공개 원작 자료이며 새로 생성한 HD 원화로 소개하지 않는다. 전장의 녹색 석재와 청동 테두리, 코인·베기·마법·피해·파괴 이펙트는 원작 자료와 실제 플레이 영상을 참고해 그린 새 런타임 UI다. 효과음은 별도 합성한 리마스터 효과음이며 원작 녹음 파일을 복구한 것으로 표시하지 않는다. `Docs/FmFidelityBattle.md`, `Tools/Audio/FmFidelitySfx/manifest.json`을 따른다.
+
+음악은 SOUND-I의 원작 로그인·로비·덱 공개 데모에서 안내 음성이 없는 구간을 편집한 루프와 S.I.D-Sound의 공개 원작 전투곡이다. 공개 데모 원본에는 반복 안내가 있어 원본과 사용 발췌를 구분한다. 출처·원본·사용구간·변환·해시는 [음악 조사](Research/FmFidelityMusic.md)와 `Tools/Audio/FmFidelity`에 기록한다. 기존 창작곡도 제작 이력에 보존한다. 예수님 게임의 자산과 공개 바이트는 이번에 변경하지 않는다. 아래 이전 판의 '현재' 표기는 해당 제작 시점의 기록이다.
+
 ## 2026-10-26 판타지마스터즈 카드 개정
 
 현재 카드96종과 뒷면1장은 공개 원작 카드 이미지다. `Tools/Art/ClassicCards/Originals`에 원본 WebP, `Resources/Art/ClassicCards`에 픽셀이 같은 Unity용 PNG를 보관한다. 출처·변환·해시는 [ClassicCardArt.md](ClassicCardArt.md)와 매니페스트를 따른다. 원본의 낮은 해상도를 고해상도 재제작으로 소개하지 않는다. 기존40종 atlas는 제작 이력으로 보존하며 네 창작 아바타와 배경은 현재에도 사용한다. 새 카드 BGM은 [ClassicAudio.md](ClassicAudio.md)의 독자적 오케스트라 곡이다. 아래 과거 카드 제작 기록과 현재 원작 이미지의 출처를 구분한다.

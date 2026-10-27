@@ -11,6 +11,7 @@ from pathlib import Path
 import shutil
 import subprocess
 from datetime import datetime, timezone
+from release_contract import contract, preserved_public
 
 ROOT = Path(__file__).resolve().parents[2]
 GAMES = {"FantasyCards": "fantasy-cards", "PathOfDawn": "path-of-dawn"}
@@ -75,7 +76,14 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
 parser.add_argument("--output", type=Path, default=ROOT / "Artifacts/WebPlaytest")
 parser.add_argument("--require-browser-reports", action="store_true")
+parser.add_argument("--release-profile", choices=("modern", "fm-fidelity"), default="modern",
+                    help="FC fidelity uses new FC checks and explicitly preserves the verified Gospel bytes")
 args = parser.parse_args()
+release = contract(args.release_profile)
+GAME_REVISIONS = release["revisions"]
+CONTENT_VERSIONS = release["contents"]
+REPORT_ROOTS = release["reportRoots"]
+preserved_root, preserved_record = preserved_public() if release["preservedGames"] else (None, None)
 output = args.output.resolve()
 if output == ROOT or ROOT in output.parents and "Artifacts" not in output.relative_to(ROOT).parts:
     raise SystemExit("Stage output must be a generated artifact directory.")
@@ -117,6 +125,12 @@ for name in ("index.html", "site.css"):
 for game, slug in GAMES.items():
     player, hero = inputs[game]
     target = output / "games" / slug
+    if game in release["preservedGames"]:
+        # Preserve even notices and the old title preview byte-for-byte. A shared
+        # FC music/source notice must not silently alter the untouched game.
+        shutil.copytree(preserved_root / "games" / slug, target)
+        shutil.copyfile(preserved_root / "art" / f"{slug}.png", output / "art" / f"{slug}.png")
+        continue
     target.mkdir(parents=True)
     shutil.copyfile(player / "index.html", target / "index.html")
     # Unity owns these directories. DoNotShip and debug dumps are never copied.
@@ -158,6 +172,7 @@ for path in files:
     if path.stat().st_size < 512 and path.read_bytes().startswith(b"version https://git-lfs.github.com/spec/v1"):
         raise SystemExit(f"LFS content missing: {path.relative_to(output)}")
 manifest = {
+    "releaseProfile": release["name"],
     "createdUtc": datetime.now(timezone.utc).isoformat(),
     "publishReady": args.require_browser_reports,
     "gameRevisions": GAME_REVISIONS,
@@ -165,7 +180,12 @@ manifest = {
     "browserProfiles": ["Desktop720", "Mobile844"] if args.require_browser_reports else [],
     "browserProfilesByGame": REQUIRED_PROFILES if args.require_browser_reports else {},
     "browserReportRootsByGame": REPORT_ROOTS if args.require_browser_reports else {},
-    "reusedBrowserEvidence": [],
+    "reusedBrowserEvidence": [
+        {"game": game, "revision": GAME_REVISIONS[game], "reportRoot": REPORT_ROOTS[game],
+         "reason": "Previously verified runtime is unchanged; no new build or browser execution is claimed.",
+         "preservationRecord": "Artifacts/Validation/FmFidelity/preserved-gospel.json"}
+        for game in release["preservedGames"]
+    ],
     "incompleteBrowserRuns": [],
     "sourceCommit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
     "sourceDirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True)),

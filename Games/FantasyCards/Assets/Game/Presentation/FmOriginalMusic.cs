@@ -5,7 +5,7 @@ namespace FantasyCards.Presentation
 {
     /// <summary>
     /// The API name remains for UI/save compatibility. Normal play now uses
-    /// bundled FirstGame instrumental themes, never a hosted player.
+    /// bundled original-game portfolio excerpts/recording, never a hosted player.
     /// </summary>
     public static class FmOriginalMusic
     {

@@ -89,7 +89,8 @@ def metadata(path):
 
 def verify_texture_importers(root, media_manifest, verification, policy):
     records = media_manifest["cards"] + media_manifest.get("decorations", [])
-    require(len(records) == 162, "Expected all 161 card importers and their original back")
+    require(len(media_manifest["cards"]) == media_manifest.get("count") and len(records) >= 162,
+            "Expected every reviewed original card importer and decoration")
     recorded = {record["id"]: record for record in verification["cards"]}
     require(len(recorded) == len(verification["cards"]) == len(records)
             and set(recorded) == {record["id"] for record in records}, "Verified texture GUID record set differs")
@@ -129,14 +130,15 @@ def expected_definition(card):
     if category == 1:
         text = "LP로 전개하고 소울 코스트 단계마다 소울을 회복합니다."
     elif category == 2:
-        text = "특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다."
+        text = effect.get("description", "특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다.")
     elif category == 4:
         attack, defense, health = (effect[key] for key in ("attackDelta", "defenseDelta", "healthDelta"))
         text = f"AP {attack:+d} · DP {defense:+d} · HP {health:+d}"
     result = {
         "id": "fm_" + card["sourceId"], "name": card["name"], "text": text,
         "kind": category - 1, "element": ELEMENTS[fields["SoulType"]],
-        "rarity": fields["RareType"] - 1, "level": fields["LV"],
+        "rarity": fields["RareType"] - 1, "rank": fields.get("RankType", 1) - 1 if category == 2 else 0,
+        "level": fields["LV"],
         "coloredCost": colored, "genericCost": generic, "cost": colored + generic,
         "landPointCost": 1, "producedColored": 1, "producedGeneric": 0,
         "attack": attack, "defense": defense, "health": health, "coinBonus": 0,
@@ -144,6 +146,8 @@ def expected_definition(card):
         "defenseCoin": {"operation": 1, "count": 0, "multiplier": 1},
         "healthCoin": {"operation": 1, "count": 0, "multiplier": 1},
         "operations": [], "effect": 0, "magnitude": 0, "deckLimit": fields["DeckLimit"],
+        "freeEquipmentBelowLevel": bool(effect.get("freeEquipmentBelowLevel", False)),
+        "discardGenericSoul": effect.get("discardGenericSoul", 0),
         "capabilityMask": 7, "requiredCapabilityMask": 0, "playWindow": 0,
         "firstAffectedLane": 0, "lastAffectedLane": 4, "artResource": card["artResource"],
         "sourceId": card["sourceId"], "sourceUrl": card["sourceUrl"],
@@ -211,13 +215,13 @@ def verify_authoring(root=ROOT):
     selection = json.loads(selection_file.read_text())
     cards = selection["cards"]
     identifiers = {"fm_" + card["sourceId"] for card in cards}
-    require(len(cards) == len(identifiers) == selection.get("expectedCount") == 161,
-            "Semantic authoring verification requires all 161 original cards")
+    require(len(cards) == len(identifiers) == selection.get("expectedCount") and len(cards) >= 161,
+            "Semantic authoring verification requires the complete reviewed original selection")
     media_file = root / "Tools/Art/ClassicCards/manifest.json"
     media_manifest = json.loads(media_file.read_text())
     media = {card["sourceId"]: card for card in media_manifest["cards"]}
     verification = json.loads((root / "Tools/Art/ClassicCards/verification.json").read_text())
-    require(verification.get("status") == "passed" and verification.get("count") == 161
+    require(verification.get("status") == "passed" and verification.get("count") == len(cards)
             and verification.get("manifestSha256") == digest(media_file.read_bytes()), "Verified original-media manifest is stale")
     policy_file = root / "Tools/Art/ClassicCards/texture-import-policy.json"
     policy = json.loads(policy_file.read_text())
@@ -250,6 +254,9 @@ def verify_authoring(root=ROOT):
         actual = mono.get("classicDefinition", {})
         # Unity's unquoted numeric string is a YAML integer; it remains a string in C#.
         actual["sourceId"] = str(actual.get("sourceId"))
+        # Unity YAML serializes C# bool as0/1; compare the semantic bool value.
+        require(actual.get("freeEquipmentBelowLevel") in (0, 1), "Invalid serialized equipment flag")
+        actual["freeEquipmentBelowLevel"] = bool(actual["freeEquipmentBelowLevel"])
         require(canonical(actual) == canonical(expected), "Serialized complete CardDefinition differs: " + expected["id"])
         mirrors = {"stableId": expected["id"], "displayName": expected["name"], "description": expected["text"],
                    "kind": expected["kind"], "element": expected["element"], "cost": expected["cost"],

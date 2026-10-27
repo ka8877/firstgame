@@ -1,0 +1,563 @@
+{
+  "checkedUtc": "2026-10-27T00:05:20.755313+00:00",
+  "url": "https://firestore.googleapis.com/v1/projects/fmdb-bcb70/databases/(default)/documents:runQuery",
+  "request": {
+    "structuredQuery": {
+      "from": [
+        {
+          "collectionId": "livecardlist"
+        }
+      ],
+      "select": {
+        "fields": [
+          {
+            "fieldPath": "ID"
+          },
+          {
+            "fieldPath": "NumID"
+          },
+          {
+            "fieldPath": "Name"
+          },
+          {
+            "fieldPath": "Category"
+          },
+          {
+            "fieldPath": "KIND"
+          },
+          {
+            "fieldPath": "RareType"
+          },
+          {
+            "fieldPath": "RareUI"
+          },
+          {
+            "fieldPath": "RankType"
+          },
+          {
+            "fieldPath": "LV"
+          },
+          {
+            "fieldPath": "RequireSoul"
+          },
+          {
+            "fieldPath": "SoulType"
+          },
+          {
+            "fieldPath": "Skill1"
+          },
+          {
+            "fieldPath": "Skill2"
+          },
+          {
+            "fieldPath": "ATK"
+          },
+          {
+            "fieldPath": "DEF"
+          },
+          {
+            "fieldPath": "HP"
+          },
+          {
+            "fieldPath": "ATKStatType"
+          },
+          {
+            "fieldPath": "DEFStatType"
+          },
+          {
+            "fieldPath": "HPStatType"
+          },
+          {
+            "fieldPath": "ATKCoin"
+          },
+          {
+            "fieldPath": "DEFCoin"
+          },
+          {
+            "fieldPath": "HPCoin"
+          },
+          {
+            "fieldPath": "ATKCoinType"
+          },
+          {
+            "fieldPath": "DEFCoinType"
+          },
+          {
+            "fieldPath": "HPCoinType"
+          },
+          {
+            "fieldPath": "ATKCoinCount"
+          },
+          {
+            "fieldPath": "DEFCoinCount"
+          },
+          {
+            "fieldPath": "HPCoinCount"
+          },
+          {
+            "fieldPath": "UnitType"
+          },
+          {
+            "fieldPath": "DeckLimit"
+          },
+          {
+            "fieldPath": "DeckPoint"
+          },
+          {
+            "fieldPath": "RaceType"
+          },
+          {
+            "fieldPath": "CompanyType"
+          },
+          {
+            "fieldPath": "ReleaseDate"
+          },
+          {
+            "fieldPath": "TextBase"
+          },
+          {
+            "fieldPath": "TextExtra"
+          },
+          {
+            "fieldPath": "TextGameText"
+          },
+          {
+            "fieldPath": "TextSkill"
+          }
+        ]
+      },
+      "where": {
+        "fieldFilter": {
+          "field": {
+            "fieldPath": "RareType"
+          },
+          "op": "EQUAL",
+          "value": {
+            "integerValue": "9"
+          }
+        }
+      },
+      "limit": 1000
+    }
+  },
+  "status": 200,
+  "responseBytes": 167969,
+  "responseSha256": "6fddbb6733da64470123348ba0a9ce1f87714bcebd27192b8efe5d4088987ca0",
+  "returnedCount": 68,
+  "limit": 1000,
+  "simpleCandidates": [
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/13061941464",
+      "fields": {
+        "NumID": 13061941464,
+        "RareType": 9,
+        "TextBase": "[전설로 내려오는 수호룡이 저와 같으리라. 카핀탑을 수호하는 용 이여! 마치 살아있는 듯 탑을 지키고 있노라, 검디 검어 모든 힘을 흡수하는 오닉스의 가호가 조각. 상에 깃들어있으니, 어떠한 자도 감히 탑을 침범지 못하리라.]",
+        "Category": 4,
+        "HP": 2,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "용의조각상",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "13061941464",
+        "RequireSoul": "8103",
+        "DEF": 2,
+        "CompanyType": 1,
+        "ReleaseDate": 20130619,
+        "TextExtra": "▶ 상성효과 : 용의조각상 → 흉성의군주 : C+1",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 1464,
+        "ATK": 2,
+        "DeckPoint": 30,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/14061841555",
+      "fields": {
+        "NumID": 14061841555,
+        "RareType": 9,
+        "TextBase": "[동방의 용은 자신의 힘이 깃든 구슬을 가지고 있다 하지? 그곳의 말로 여의주라 한다더군. 세계의 법칙을 쥐락펴락 할 수 있는, 난 드디어 동방의 청룡왕과 거래 할 수 있는 보주를 찾아내었다네. 계획이 가까워지는군.]",
+        "Category": 4,
+        "HP": 1,
+        "RaceType": 1,
+        "LV": 2,
+        "Name": "용의보주",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "14061841555",
+        "RequireSoul": "8102",
+        "DEF": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20140618,
+        "TextExtra": "▶ [용사의습격] 마법과 [용의보주] 아이템은 각각 추후 발매될 레전드 유닛의 재료로 사용될 예정입니다. (용사의습격 + 용의보주 → 이웨브 또는 베르티에)",
+        "RareUI": 10,
+        "DeckLimit": 1,
+        "KIND": 1555,
+        "ATK": 1,
+        "DeckPoint": 35,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/14111227703",
+      "fields": {
+        "NumID": 14111227703,
+        "RareType": 9,
+        "TextBase": "",
+        "Category": 2,
+        "HP": 7,
+        "RaceType": 30,
+        "LV": 4,
+        "HPCoinCount": 1,
+        "Name": "천상의군주",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "DEFCoinType": 1,
+        "UnitType": 21,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "14111227703",
+        "ATKCoinCount": 1,
+        "HPCoin": "C1",
+        "RequireSoul": "8104",
+        "ATKCoinType": 2,
+        "DEF": 1,
+        "ATKCoin": "2C1",
+        "DEFCoinCount": 0,
+        "CompanyType": 17,
+        "ReleaseDate": 20141112,
+        "TextExtra": "▶ 해당 유닛은 천상의검장착 섀도우오라와 천상의검개방 섀도우쉬프트를 가지고 있습니다.<br>▶ 천상의검장착(섀도우오라) : ○○ - 자신에게 천상의검 아이템을 장착한다.<br>▶ 천상의검 : 천상의위엄, +1 / 0 / +1.<br>★ 천상의위엄 : 적 1 파괴시, 자신 AP를 영구히 1 증가시킨다.<br><br>▶ 천상의검개방(섀도우쉬프트) : ○○ - 자신이 천상의 검을 장착하고 있으면, 적 필드 마법 1을 NCS소울로 아군 핸드 카드 1에 복사하여 교체한 후 자신에게 장착된 천상의검을 삭제하고 유지비 1을 NCS소울로 영구히 변경한다.<br>☆ 상성카드 : 천상의검 → 천상의군주 : DP+1",
+        "RareUI": 10,
+        "DEFCoin": "NONE",
+        "DeckLimit": 1,
+        "KIND": 7703,
+        "ATK": 6,
+        "DeckPoint": 70,
+        "HPStatType": 1,
+        "RankType": 1,
+        "SoulType": 7,
+        "HPCoinType": 2
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/15052741630",
+      "fields": {
+        "NumID": 15052741630,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업(균형의마력) 아군 필드 유닛에게 아이템 장착시, 아군 필드 빈공간에 \"칠색조의가호\" 마법1을 소환한다. [균형과 질서의 여신 라리슈어의 힘이 깃든 천칭은 여신이 소멸할 지라도 계속해서 움직이리라.]",
+        "Category": 4,
+        "HP": 1,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "균형의천칭",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "15052741630",
+        "RequireSoul": "8103",
+        "DEF": 2,
+        "CompanyType": 1,
+        "ReleaseDate": 20150527,
+        "TextExtra": "[칠색조의가호] :  ○○, 적 필드 50 덱포인트 이상인 마법 1을 파괴한다.(◇ 소환되는 [칠색조의가호]카드는 디스인첸트 카드입니다.)<br>▶ 디스인첸트 카드 : 디스인첸트 카드가 필드에 존재 시, 인첸트 발동 페이즈에 해당 디스인첸트 카드 수만큼 아군적군 필드 각각의 첫번째 인첸트부터 순서대로 인첸트 카드가 파괴됩니다.ex) 디스인첸트 카드 1장당, 아군 필드 1장, 적군 필드 1장의 인첸트 파괴.",
+        "RareUI": 10,
+        "DeckLimit": 1,
+        "KIND": 1630,
+        "ATK": 1,
+        "DeckPoint": 40,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/15120941678",
+      "fields": {
+        "NumID": 15120941678,
+        "RareType": 9,
+        "TextBase": "[제압하는 자는 간혹 자신의 힘에 몰입해서 정도를 벗어날 수도 있지. 길을 잃고 폭주하는 힘을 추슬러 올바른 길로 들어서기 위해 제압의 길이 길잡이가 되어줄 것이다.]",
+        "Category": 4,
+        "HP": 2,
+        "RaceType": 1,
+        "LV": 1,
+        "Name": "제압의길",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "15120941678",
+        "RequireSoul": "8101",
+        "DEF": 0,
+        "CompanyType": 1,
+        "ReleaseDate": 20151209,
+        "TextExtra": "",
+        "RareUI": 10,
+        "DeckLimit": 1,
+        "KIND": 1678,
+        "ATK": 2,
+        "DeckPoint": 25,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/3080140333",
+      "fields": {
+        "NumID": 3080140333,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [전설의 보물을 손에 넣는 것은 매우 어려운 일이지만 그것을 가진 자에게 노력에 대한 보상이 주어지리라.]",
+        "Category": 4,
+        "HP": 1,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "전설의왕관",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "3080140333",
+        "RequireSoul": "8103",
+        "DEF": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20030801,
+        "TextExtra": "※ 아이템빌드업(응축부여) : 장착한 유닛에게 응축상태를 2턴간 부여한다.<br>(아이템 장착시 1턴이 적용되어 다음턴에 유지비1이 유소울1로 변경되어 총 1개의 유지비만 변경되게 됩니다).<br><br>★ 응축상태 : 소울코스트시 자신의 유지비 1개를 유소울로 바꾼다.<br><br>상성카드 : 전설의기사<br>상성효과 : AP+1 ",
+        "RareUI": 10,
+        "DeckLimit": 4,
+        "KIND": 333,
+        "ATK": 1,
+        "DeckPoint": 35,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/4031940424",
+      "fields": {
+        "NumID": 4031940424,
+        "RareType": 9,
+        "TextBase": "[이 보물들은 세상에 나온 이래 세계 곳곳으로 옮겨지고 아무도 알 수 없는 곳에 숨겨져 찾기 힘들게 되었다 합니다.]",
+        "Category": 4,
+        "HP": 1,
+        "RaceType": 1,
+        "LV": 2,
+        "Name": "전설의반지",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "4031940424",
+        "RequireSoul": "8102",
+        "DEF": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20040319,
+        "TextExtra": "상성카드 : 전설의기사<br>상성효과 : HP+1 ",
+        "RareUI": 10,
+        "DeckLimit": 4,
+        "KIND": 424,
+        "ATK": 0,
+        "DeckPoint": 10,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/5042740547",
+      "fields": {
+        "NumID": 5042740547,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [창공의 독수리처럼 날아 오르는 이상을 그 목걸이가 변치 않도록 도와줄 것입니다. 당신의 이상을 현실로 만드는 날을 기원합니다.]",
+        "Category": 4,
+        "HP": 5,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "전설의목걸이",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "5042740547",
+        "RequireSoul": "8103",
+        "DEF": 0,
+        "CompanyType": 1,
+        "ReleaseDate": 20050427,
+        "TextExtra": "※ 아이템빌드업(응축부여) : 장착한 유닛에게 응축상태를 2턴간 부여한다.<br>(아이템 장착시 1턴이 적용되어 다음턴에 유지비1이 유소울1로 변경되어 총 1개의 유지비만 변경되게 됩니다).<br><br>★ 응축상태 : 소울코스트시 자신의 유지비 1개를 유소울로 바꾼다.<br><br>상성카드 : 전설의기사<br>상성효과 : AP+1 ",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 547,
+        "ATK": 0,
+        "DeckPoint": 20,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/5042740549",
+      "fields": {
+        "NumID": 5042740549,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [당신에 대한 희망을 이 신발에 담았으니 당신이 내딛는 한 걸음이 우리의 미래가 될 것입니다. 부디 행운이 함께 하기를.]",
+        "Category": 4,
+        "HP": 3,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "전설의신발",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "5042740549",
+        "RequireSoul": "8103",
+        "DEF": 0,
+        "CompanyType": 1,
+        "ReleaseDate": 20050427,
+        "TextExtra": "※ 아이템빌드업(응축부여) : 장착한 유닛에게 응축상태를 2턴간 부여한다.<br>(아이템 장착시 1턴이 적용되어 다음턴에 유지비1이 유소울1로 변경되어 총 1개의 유지비만 변경되게 됩니다).<br><br>★ 응축상태 : 소울코스트시 자신의 유지비 1개를 유소울로 바꾼다.<br><br>상성카드 : 전설의기사<br>상성효과 : DP+1 ",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 549,
+        "ATK": 2,
+        "DeckPoint": 10,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/6082340719",
+      "fields": {
+        "NumID": 6082340719,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [출진 준비는 끝났는가, 내 투구를 가져오도록 해라. 신이시여, 저에게 축복의 가호를 내려주시기를.]",
+        "Category": 4,
+        "HP": 2,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "패황의투구",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 31,
+        "ID": "6082340719",
+        "RequireSoul": "8103",
+        "DEF": 1,
+        "CompanyType": 1,
+        "ReleaseDate": 20060823,
+        "TextExtra": "",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 719,
+        "ATK": 2,
+        "DeckPoint": 20,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/6082340720",
+      "fields": {
+        "NumID": 6082340720,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [이 가슴 안에 품은 크나큰 야망을 가늠하려는 어리석은 이들이여, 하늘 위에 또 다른 하늘이 있음을 내 오늘 몸소 보여주리라.]",
+        "Category": 4,
+        "HP": 1,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "패황의갑주",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "6082340720",
+        "RequireSoul": "8103",
+        "DEF": 2,
+        "CompanyType": 1,
+        "ReleaseDate": 20060823,
+        "TextExtra": "",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 720,
+        "ATK": 0,
+        "DeckPoint": 35,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/6082340723",
+      "fields": {
+        "NumID": 6082340723,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [자 휘날리라! 나의 깃발아래 서 있는 이들이여, 내가 내딛는 첫걸음이 이 분할된 대륙의 통합을 알리는 신호탄이 될 것이다!]",
+        "Category": 4,
+        "HP": 2,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "패황의망토",
+        "DEFStatType": 31,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "6082340723",
+        "RequireSoul": "8103",
+        "DEF": 2,
+        "CompanyType": 1,
+        "ReleaseDate": 20060823,
+        "TextExtra": "",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 723,
+        "ATK": 0,
+        "DeckPoint": 20,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    },
+    {
+      "document": "projects/fmdb-bcb70/databases/(default)/documents/livecardlist/6082340725",
+      "fields": {
+        "NumID": 6082340725,
+        "RareType": 9,
+        "TextBase": "※ 아이템빌드업 (응축부여) [오늘을 기억하라. 전투가 끝난 후 숨 쉬고 있는 자는 이곳의 주인이 될 것이요. 그렇지 않은 자는 이 시대의 역사가 될 것이다.]",
+        "Category": 4,
+        "HP": 3,
+        "RaceType": 1,
+        "LV": 3,
+        "Name": "패황의철장갑",
+        "DEFStatType": 1,
+        "Skill2": 1,
+        "UnitType": 1,
+        "Skill1": 1,
+        "ATKStatType": 1,
+        "ID": "6082340725",
+        "RequireSoul": "8103",
+        "DEF": 0,
+        "CompanyType": 1,
+        "ReleaseDate": 20060823,
+        "TextExtra": "",
+        "RareUI": 10,
+        "DeckLimit": 2,
+        "KIND": 725,
+        "ATK": 0,
+        "DeckPoint": 30,
+        "HPStatType": 31,
+        "SoulType": 7
+      }
+    }
+  ]
+}

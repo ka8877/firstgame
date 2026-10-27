@@ -55,18 +55,18 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 
 | 게임 | 현재 실행·제작 기준 |
 |---|---|
-| FantasyCards | `FantasyCardsApp`의 modern 타이틀·로비·대전실·전장. 새 `Resources/Art/ModernRemaster` 원화와 기존 원작 카드 161종·Core, Pretendard, 로컬 연주곡 |
+| FantasyCards | `FantasyCardsApp`의 fidelity 타이틀·로비·대전실·전장. 원작 인물·카드 178종·Core와 구조화 전투 이벤트/중간 스냅샷, Pretendard, 원작 BGM 발췌·제작곡 |
 | PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`. `Resources/Art/Gospel3D/YoungJesus.fbx`와 스키닝·이동/점프/착지/선택 연습 컨트롤러, 성전 메시·충돌체, `GospelCatalog`의 성경 본문 |
 
 일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 새 3D 인물의 재생성과 import 계약은 [Gospel3DArt](Gospel3DArt.md)를 따른다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
-원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 현재 카드 Web/Windows는 네 개의 로컬 창작 연주곡을 포함한다. 외부 SoundCloud 임베드·SDK는 일반 플레이에서 사용하지 않는다. 실제 첫 입력·음소거·음량·장면별 전환을 출력과 함께 확인한다. 원작 공식 트랙은 조사 이력의 링크이며 새 창작곡을 원작곡으로 표시하지 않는다.
+원작 UI PNG 재현은 `python3 Tools/Research/FmRevival/prepare-original-ui.py`를 사용한다. 픽셀·출처 근거와 공식 음악 트랙 ID는 [FmRevivalSources](Research/FmRevivalSources.md)에 있다. 현재 카드 Web/Windows는 SOUND-I 원작 로그인·로비·덱의 무음성 발췌 편집본과 SID-Sound 원작 전투곡을 포함한다. 원본·편집 구간·변환·출처는 [fidelity 음악 조사](Research/FmFidelityMusic.md)를 따른다. 외부 SoundCloud 임베드·SDK는 일반 플레이에서 사용하지 않는다. 실제 첫 입력·음소거·음량·장면별 전환을 출력과 함께 확인하며, 발췌를 전체 원작 음원 복구로 표시하지 않는다.
 
 예수님의 길은 로컬 BGM을 사용하고 브라우저 첫 입력 후 시작한다. 이전 20줄의 창작 대사 음성을 새 성경 본문에 자동 연결하지 않는다. 읽는 구절과 문맥 요약은 분리하며 `성경전서 개역한글판 · 대한성서공회`를 표시한다.
 
 ## 입력·저장
 
-- 카드: 마우스·터치로 방과 덱을 선택한다. 손패와 전열, 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작한다.
+- 카드: 마우스·터치로 방과 덱을 선택한다. 손패 클릭/드래그로 지형·전열·장비·마법을 배치하고 소각장으로 버린다. 모바일 가로 스와이프는 손패 스크롤이다. 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작하며 전투 재생 속도·건너뛰기는 규칙을 바꾸지 않는다.
 - 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠/화면 버튼/설정 슬라이더로 1.8–8m 줌, I 상태창, E 말씀 읽기, Esc 설정. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작·줌·상태 버튼이다.
 - 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
 - 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.

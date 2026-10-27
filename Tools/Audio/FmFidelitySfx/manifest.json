@@ -1,0 +1,21 @@
+{
+  "description": "Original synthesized remaster cues; not recovered Fantasy Masters recordings",
+  "generation": "runtime AudioClip synthesis, mono 44100 Hz",
+  "sourceFile": "Games/FantasyCards/Assets/Game/Presentation/FmBattleAudio.cs",
+  "sourceSha256": "70d8913b2c2b8fc4212017dd9922893a3bfa3bed1a40a0a818600cb829a717e3",
+  "externalSamples": [],
+  "speech": false,
+  "cues": [
+    "play",
+    "coin",
+    "attack",
+    "hit",
+    "shield",
+    "spell",
+    "heal",
+    "burn",
+    "defeat",
+    "phase"
+  ],
+  "randomness": "Local fixed integer noise generator for audio waveforms only; never consumes the battle RNG"
+}

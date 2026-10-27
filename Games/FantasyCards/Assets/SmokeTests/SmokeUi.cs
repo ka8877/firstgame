@@ -49,7 +49,7 @@ namespace FantasyCards.SmokeTests
         }
         public static Button FindButton(string label) => UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
             .FirstOrDefault(b => b.gameObject.activeInHierarchy && b.GetComponentsInChildren<TMP_Text>()
-                .Any(t => t.text == label));
+                .Any(t => t.text == label && t.GetComponentInParent<Button>() == b));
         public static bool HasText(string value) => UnityEngine.Object.FindObjectsByType<TMP_Text>(FindObjectsSortMode.None)
             .Any(t => t.gameObject.activeInHierarchy && t.text.Contains(value));
         public static void Click(string label)
