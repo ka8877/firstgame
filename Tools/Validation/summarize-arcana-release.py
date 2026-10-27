@@ -112,12 +112,21 @@ def cards():
 
 
 def native_music(native_result):
+    xml = inside(ROOT / native_result['file'])
+    require(digest(xml) == native_result['sha256'], 'Current native XML changed after its successful verification')
+    # Unity can reset the suite clock across PlayMode domain reloads. The music
+    # ledger belongs to this exact feature case, whose own interval is stable;
+    # the aggregate root start/end timestamps can begin after that case ended.
+    feature_cases = [case for case in ET.parse(xml).getroot().findall('.//test-case')
+                     if case.get('methodname', case.get('name')) == NATIVE_CARD_FEATURE]
+    require(len(feature_cases) == 1 and feature_cases[0].get('result') == 'Passed', 'Exactly one passed current native music feature case required')
+    feature = feature_cases[0]
     path = REPORTS / 'native-music-transitions.json'
     ledger = read(path)
     starts = ledger.get('starts', [])
     require(3 <= len(starts) <= 24, 'Actual bounded native music start ledger required')
-    require(BASE.timestamp(native_result['startedUtc']) - 1 <= path.stat().st_mtime
-            <= BASE.timestamp(native_result['finishedUtc']) + 2, 'Native music ledger is not from the current native run')
+    require(BASE.timestamp(feature.get('start-time', '')) - 1 <= path.stat().st_mtime
+            <= BASE.timestamp(feature.get('end-time', '')) + 2, 'Native music ledger is not from the current passed feature case')
     for entry in starts:
         require(entry.get('scene') in ROLES and isinstance(entry.get('transition'), int)
                 and math.isfinite(entry.get('dspTime', float('nan')))
@@ -133,7 +142,9 @@ def native_music(native_result):
         require(row.get('status') == 'passed' and row.get(count_key, 0) >= count, 'Current music lifecycle model checks missing: ' + name)
         source_rows(row, name)
         models[name] = {**ref(candidate), count_key: row[count_key], 'scope': row.get('scope')}
-    return {'actualNative': {**ref(path), 'starts': starts, 'verifiedReturn': triple},
+    return {'actualNative': {**ref(path), 'starts': starts, 'verifiedReturn': triple,
+                             'featureCase': {'name': NATIVE_CARD_FEATURE, 'startedUtc': feature.get('start-time'),
+                                             'finishedUtc': feature.get('end-time'), 'nativeXml': ref(xml)}},
             'modelChecks': models, 'scope': 'Native real AudioSource/DSP starts plus explicitly separate deterministic lifecycle checks; physical listening is not claimed.'}
 
 
