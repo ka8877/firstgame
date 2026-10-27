@@ -225,9 +225,14 @@ def checked_browser(game, profile, files):
     path = REPORTS / profile / game / 'report.json'
     record = read(path)
     adjudication = None
+    proof_name = 'media-adjudication.json'
     if game == 'FantasyCards' and profile == 'Mobile844' and record.get('status') == 'failed':
         proof = module('exact_arcana_mobile_media', ROOT / 'Tools/Validation/adjudicate-arcana-media.py')
         adjudication = proof.verify_record(path)
+    elif game == 'FantasyCards' and profile == 'PublicMobile844' and record.get('status') == 'failed':
+        proof = module('exact_arcana_public_media', ROOT / 'Tools/Validation/adjudicate-arcana-public-media.py')
+        adjudication = proof.verify_record(path)
+        proof_name = 'public-media-adjudication.json'
     require(record.get('status') == 'passed' or adjudication is not None, 'Current raw browser run did not pass; preserve it and integrate a specific current proof: ' + str(path))
     require(record.get('revision') == ARCANA['revisions'][game] and record.get('game') == game
             and record.get('profile') == PROFILES[profile] and record.get('suite') == 'modern-real-input-v1', 'Wrong browser revision/profile: ' + str(path))
@@ -281,7 +286,7 @@ def checked_browser(game, profile, files):
               'audioWindows': len(windows), **ref(path), 'rawStatus': record['status'],
               'capturePlan': ref(plan_path), 'captureHarness': ref(harness_path)}
     if adjudication:
-        result.update(qualifiedNetworkProof=ref(path.parent / 'media-adjudication.json'),
+        result.update(qualifiedNetworkProof=ref(path.parent / proof_name),
                       qualifiedReport=adjudication['qualifiedReport'], qualificationScope=adjudication['scope'])
     if game == 'FantasyCards' and profile != 'PublicMobile844': result['musicRoles'] = web_music_roles(windows)
     return result
@@ -363,6 +368,8 @@ def markdown(record):
     for game, row in record.get('publicWeb', {}).items(): text += f"| PublicMobile844/{game} | {row['checks']} | {row['approvedOriginals']} | {row['audioWindows']} |\n"
     if any(row.get('qualifiedNetworkProof') for games in record['web'].values() for row in games.values()):
         text += '\n모바일 카드게임의 자동 네트워크 검사는 원본 그대로 실패 상태이며 전체81개 중80개 검사만 통과했다. 별도 현재 해시 기반 증거로 새로고침 경계의 미선택·잠금 해제 전 음원 GET 취소3건을 한정 분석했다. 동일 파일의 전체 디코딩과 이후 같은 탐색의 로비·전투 PCM을 확인했으며 원본17개 화면의 기존 명시적 검토만 집계했다. 끊김 없는 샘플·루프 경계 연속성·재로딩 무중단을 주장하지 않으며 실패를 일괄 무시하거나 원본 통과로 바꾸지 않았다.\n'
+    if any(row.get('qualifiedNetworkProof') for row in record.get('publicWeb', {}).values()):
+        text += '\n공개 카드게임도 자동 네트워크 검사는 실패 상태로 보존했으며34개 중33개 검사만 통과했다. 현재 전체 HTTPS 바이트와 실제 재생 기록으로 첫600ms의 음원 GET 취소5건을 한정 검토했다(새 한정 분석4건·기존 미사용 사전 읽기1건). 첫 관찰보다 이른3건의 취소 직전 상태·첫 입력 전후 시점은 확인했다고 주장하지 않는다. 이후 타이틀·로비 PCM과 미사용 전투 음원의 브라우저 디코딩을 구분하며, 이 짧은 공개 경로에서 전투 음악 청취나 끊김 없는 루프·재로딩을 주장하지 않는다. 기존 원본 화면2장의 명시적 검토만 집계했다.\n'
     text += '\n카드의 원작 인쇄 그림은 보존하고 새 세로 카드 프레임·등급 색·재질 표현과 구분한다. 새 타이틀 인물 원화는 새 제작물이며 원작의 고해상도 복원으로 소개하지 않는다. 단일7속성 덱과복합11덱은 실제50장 구성·카드 제한·생산 속성과 원작 기술 지원 여부를 검사한다.\n\n'
     text += '음악은 확인된 원작 발췌/공개 전투곡을 유지한다. 실제 역할 변경의0초 시작과 같은 역할 재표시의 위치 유지를 Native AudioSource/DSP 기록과 Web 역할 기록으로 확인하며 PCM·물리 스피커 청취를 구분한다. 짧은 발췌를 전체 OST 복구로 소개하지 않는다.\n\n'
     text += 'NPC 학습 대화는 해설과 직접 성경 인용을 구분하고 아래에 연결 본문을 표시한다. 보조 주제는 본편 순서·수집 구절을 변경하지 않으며 현재 목표에 맞는 인물만 본편 대화를 시작한다. 실제 클릭/E/터치·대화·저장 검증은 위의 현재 실행 원본에 한정한다.\n\n'
@@ -409,11 +416,13 @@ def main():
             path = ROOT / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content)
+    qualified = [{'game': game, 'profile': profile, **row['qualifiedReport']}
+                 for profile, games in record['web'].items() for game, row in games.items() if row.get('qualifiedNetworkProof')]
+    qualified.extend({'game': game, 'profile': 'PublicMobile844', **row['qualifiedReport']}
+                     for game, row in record.get('publicWeb', {}).items() if row.get('qualifiedNetworkProof'))
     print(json.dumps({'status': 'passed', 'checkOnly': args.check_only, 'publication': record['publication']['status'],
                       'core': record['externalCore']['passed'], 'native': {game: row['passed'] for game, row in native_results.items()},
-                      'qualifiedBrowserReports': [{'game': game, 'profile': profile, **row['qualifiedReport']}
-                                                  for profile, games in record['web'].items() for game, row in games.items()
-                                                  if row.get('qualifiedNetworkProof')]}, ensure_ascii=False))
+                      'qualifiedBrowserReports': qualified}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

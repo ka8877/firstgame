@@ -92,6 +92,7 @@ def evidence():
                      'Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js',
                      'Tools/Validation/fm-local-media-observer.js','Tools/Validation/fm-local-media-errors.py',
                      'Tools/Validation/adjudicate-fm-public-ranges.py','Tools/Validation/adjudicate-arcana-media.py',
+                     'Tools/Validation/adjudicate-arcana-public-media.py',
                      'Tools/Web/release_contract.py',
                      'Tools/Build/package-arcana.py','Docs/FmArcanaMusic.md','Docs/FmArcanaArt.md',
                      'Tools/Audio/Arcana/verify-native-lifecycle.py','Tools/Validation/test-fm-local-music.cjs',
