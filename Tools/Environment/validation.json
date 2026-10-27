@@ -1,36 +1,245 @@
 {
-  "releaseProfile": "detail",
+  "releaseProfile": "arcana",
   "date": "2026-10-27",
-  "recordedUtc": "2026-10-27T05:07:00.192250+00:00",
+  "recordedUtc": "2026-10-27T10:42:46.359888+00:00",
   "dateTimezone": "Asia/Seoul",
   "gameRevisions": {
-    "FantasyCards": "fm-detail-2026-10-27",
-    "PathOfDawn": "gospel-natural-2026-10-27"
+    "FantasyCards": "fm-arcana-2026-10-27",
+    "PathOfDawn": "gospel-authored-2026-10-27"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommitAtSummary": "464fc1a05390a2d7975ba122bde42cc286b5b011",
+  "sourceCommitAtSummary": "ecf166770e57b1fc74f861cf71d8d2e76f9dfbaf",
   "externalCore": {
-    "passed": 108,
-    "finishedUtc": "2026-10-27T02:31:18.6098891+00:00",
+    "passed": 122,
+    "finishedUtc": "2026-10-27T06:03:25.9152907+00:00",
     "file": "Artifacts/TestResults/Core/core-tests.trx",
-    "sha256": "2396eb508f94baf5cfc57dbd34729ac92a3f1f4b421cae19bd28ce8337ea1d13"
+    "sha256": "5487053c23d91aeb35e9da1473f57e8ba1778201a7678fb7562afee654985b03",
+    "arcanaCopy": {
+      "file": "Artifacts/Validation/Arcana/core-tests.trx",
+      "sha256": "5487053c23d91aeb35e9da1473f57e8ba1778201a7678fb7562afee654985b03"
+    }
   },
   "nativeTests": {
     "FantasyCards": {
-      "passed": 6,
-      "finishedUtc": "2026-10-27 02:44:09Z",
+      "passed": 7,
+      "finishedUtc": "2026-10-27 08:14:53Z",
       "file": "Artifacts/TestResults/FantasyCards/PlayModeUI.xml",
-      "sha256": "64cdfeba007ea53b77bdd00471d071793a6bb658f2797e066859ae33a0ed6d6f"
+      "sha256": "adb9dc351c0324a9f0b6a3eb8fd68525011c7fab150b1bff8e9eef2935f8ce08",
+      "testNames": [
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.ArcanaPortraitCardsAndActualRoleChangesRetainTheirIdentity",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.DetailProfilePersistsAndCompletedBattleRecordsOnlyOnce",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityRealDragAndOrderedPlaybackPreserveBattleAndRandomness",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterCatalogSearchSortPagingAndDeckControlsUseActualContent",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterTextRemainsVisibleWhenRebuiltAtActualMobileCanvasSize",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.RemasterTitleLocalRoomsDeckChoiceShuffleAndContinueUseLiveCallbacks"
+      ],
+      "startedUtc": "2026-10-27 08:14:37Z"
     },
     "PathOfDawn": {
-      "passed": 6,
-      "finishedUtc": "2026-10-27 03:41:53Z",
+      "passed": 7,
+      "finishedUtc": "2026-10-27 07:04:05Z",
       "file": "Artifacts/TestResults/PathOfDawn/PlayModeUI.xml",
-      "sha256": "f8adfa57632118a5084350bd9d6ad749b7925e021ff8261e738f40d640db8699"
+      "sha256": "76ea8d4d09768640cc4e8eb69b077874ae32846c581813de13db035b271df35a",
+      "testNames": [
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.AuthoredNearbyNpcTopicsPreserveProgressAndLinkExactScripture",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.BirthScripturePhysicalWalkingAndContinueRestoreTheRealJourney",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.EqualGameTimeWalkingTravelsTheSameDistanceAtThirtyAndTwelveFrames",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.MenusBlockMovementJumpAndActionAndPointerUiClicksDoNotPractice",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.PracticeActionRequiresItsContextAndCompletesARealGestureWithCooldown",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.RealApproachAndInteractionFollowScriptureObjectivesToNazareth",
+        "PathOfDawn.SmokeTests.GospelJourneySmokeTests.RealSprintJumpLandingAndTouchJumpArticulateTheProductionCharacter"
+      ],
+      "startedUtc": "2026-10-27 07:03:57Z"
     }
+  },
+  "cardAuthoring": {
+    "authoring": {
+      "status": "passed",
+      "cards": 600,
+      "completeDefinitions": 600,
+      "compatibilityMirrors": 600,
+      "originalArtworkBindings": 600,
+      "textureImporters": 601,
+      "cardAssetImporters": 600,
+      "fullCardRectangles": 600,
+      "generatorReproducedWithoutWrites": true,
+      "sourceSelectionSha256": "bfe7af4f6c6ed16285a2ab0d6e3e0bea7ada50559762e8a6198fdad1800ab8b8",
+      "generatedCatalogSha256": "3b06378ea6800d5055c41968853c15ee1a127aa97d5bf072d6c5cd36a9d45a82",
+      "policySha256": "95b1cae313420af6c04bc74211f58d6e3acb0d1f36373fb9abadccf7f52fbe34",
+      "helperSha256": "1dfeb743cf53f7b9fa852502704e8157abbc51e671d1a3c76ac243d352cd3497",
+      "importerSemanticSha256": "b080ab62e07e69c22b0061508a44f8e7bca0de0f5e11be1d2b16b3131d12b9b5",
+      "semanticSha256": "4a4a5296bb2d0d670f96fe2c698d6b63819e75c535a2ac88711ac491d070ec84",
+      "scope": "Current generated CardAsset values, complete PNG/CardAsset importer settings, and referenced original artwork; ignores YAML wrapping, whitespace, document order and volatile local Sprite IDs. Import policy is a reviewed source-derived expectation, not a pre-build capture."
+    },
+    "sourceAudit": {
+      "file": "Artifacts/Validation/Arcana/CoreCards/summary.json",
+      "sha256": "8a6ec59e8b9c7ecca08380882252bd23110c4e639309d241e428c04e6b651c71"
+    },
+    "cardCount": 600,
+    "starterDecks": 18,
+    "monoDecks": 7,
+    "distinctDualDecks": 11
+  },
+  "nativeMusic": {
+    "actualNative": {
+      "file": "Artifacts/Validation/Arcana/native-music-transitions.json",
+      "sha256": "1da55f5c04b78ff6475b6d58a0126591f1c729547cd3967647e0f7354b53e7d8",
+      "starts": [
+        {
+          "scene": "login",
+          "clip": "title",
+          "transition": 0,
+          "sourceTime": 0.0,
+          "dspTime": 20.138666666666666
+        },
+        {
+          "scene": "lobby",
+          "clip": "lobby",
+          "transition": 1,
+          "sourceTime": 0.0,
+          "dspTime": 23.850666666666665
+        },
+        {
+          "scene": "deck",
+          "clip": "deck",
+          "transition": 2,
+          "sourceTime": 0.0,
+          "dspTime": 28.181333333333335
+        },
+        {
+          "scene": "lobby",
+          "clip": "lobby",
+          "transition": 3,
+          "sourceTime": 0.0,
+          "dspTime": 32.256
+        }
+      ],
+      "verifiedReturn": [
+        {
+          "scene": "lobby",
+          "clip": "lobby",
+          "transition": 1,
+          "sourceTime": 0.0,
+          "dspTime": 23.850666666666665
+        },
+        {
+          "scene": "deck",
+          "clip": "deck",
+          "transition": 2,
+          "sourceTime": 0.0,
+          "dspTime": 28.181333333333335
+        },
+        {
+          "scene": "lobby",
+          "clip": "lobby",
+          "transition": 3,
+          "sourceTime": 0.0,
+          "dspTime": 32.256
+        }
+      ],
+      "featureCase": {
+        "name": "ArcanaPortraitCardsAndActualRoleChangesRetainTheirIdentity",
+        "startedUtc": "2026-10-27 08:12:58Z",
+        "finishedUtc": "2026-10-27 08:13:16Z",
+        "nativeXml": {
+          "file": "Artifacts/TestResults/FantasyCards/PlayModeUI.xml",
+          "sha256": "adb9dc351c0324a9f0b6a3eb8fd68525011c7fab150b1bff8e9eef2935f8ce08"
+        }
+      }
+    },
+    "modelChecks": {
+      "MusicWeb": {
+        "file": "Artifacts/Validation/Arcana/MusicWeb/report.json",
+        "sha256": "78898c0b2bf5fa76921219a7fd75ceac020fcb2bf1537b1373248cc484b1b020",
+        "passed": 18,
+        "scope": "Real bundled Web controller executed with deterministic fake media/WebAudio clocks. Not browser permission, real decoding/PCM or physical speaker evidence."
+      },
+      "MusicNative": {
+        "file": "Artifacts/Validation/Arcana/MusicNative/report.json",
+        "sha256": "90c8055b1ac23368fa07947d6e76712a925b99c48ee13b1199ea53f8048c51c5",
+        "assertions": 29,
+        "scope": "Actual native host source with deterministic AudioSource doubles; no Unity PCM/device claim."
+      }
+    },
+    "scope": "Native real AudioSource/DSP starts plus explicitly separate deterministic lifecycle checks; physical listening is not claimed."
+  },
+  "legacyResources": {
+    "Windows": {
+      "file": "Artifacts/Builds/PathOfDawn/Windows/LegacyResourceExclusions.json",
+      "sha256": "449161ee5263838977c14e36c790772dc0d15cd647d56330b66dd1b6dfdbe476",
+      "status": "restored",
+      "moves": 8,
+      "files": 76,
+      "restoredUtc": "2026-10-27T07:31:14.4295410Z",
+      "hashVerified": true,
+      "guidVerified": true,
+      "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion."
+    },
+    "Web": {
+      "file": "Artifacts/Builds/PathOfDawn/Web/LegacyResourceExclusions.json",
+      "sha256": "390f3f615216dd3583490f8fffcc528ca10fce5290107cf5711d41d9f78518ce",
+      "status": "restored",
+      "moves": 8,
+      "files": 76,
+      "restoredUtc": "2026-10-27T07:48:12.4192290Z",
+      "hashVerified": true,
+      "guidVerified": true,
+      "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion."
+    }
+  },
+  "legacyRecoveryExercise": {
+    "records": {
+      "ArcanaLifecycleNormal": {
+        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleNormal/LegacyResourceExclusions.json",
+        "sha256": "82153ff87df39867f7f8236f09011563e7aee181b1bbfa75efc940dc093e9f8a",
+        "status": "restored",
+        "moves": 8,
+        "files": 76,
+        "restoredUtc": "2026-10-27T06:28:18.5464660Z",
+        "hashVerified": true,
+        "guidVerified": true,
+        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
+        "packagedCopy": {
+          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleNormal/LegacyResourceExclusions.json",
+          "sha256": "82153ff87df39867f7f8236f09011563e7aee181b1bbfa75efc940dc093e9f8a"
+        }
+      },
+      "ArcanaLifecycleException": {
+        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleException/LegacyResourceExclusions.json",
+        "sha256": "83e96f943e1479456d33a436d46ec2d8798c54cdcbf1c5d73864be7270c74fc0",
+        "status": "restored",
+        "moves": 8,
+        "files": 76,
+        "restoredUtc": "2026-10-27T06:28:21.5890040Z",
+        "hashVerified": true,
+        "guidVerified": true,
+        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
+        "packagedCopy": {
+          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleException/LegacyResourceExclusions.json",
+          "sha256": "83e96f943e1479456d33a436d46ec2d8798c54cdcbf1c5d73864be7270c74fc0"
+        }
+      },
+      "ArcanaLifecycleRecovery": {
+        "file": "Artifacts/Builds/PathOfDawn/ArcanaLifecycleRecovery/LegacyResourceExclusions.json",
+        "sha256": "f859f869efe11cf6e15c5c14c06f20e1543915efc354b7d89166d6ce914682e7",
+        "status": "recovered-after-interruption",
+        "moves": 8,
+        "files": 76,
+        "restoredUtc": "2026-10-27T06:28:24.7914670Z",
+        "hashVerified": true,
+        "guidVerified": true,
+        "scope": "Exact current original bytes/GUIDs restored; temporary exclusion is not source deletion.",
+        "packagedCopy": {
+          "file": "Artifacts/Validation/Arcana/LegacyResources/ArcanaLifecycleRecovery/LegacyResourceExclusions.json",
+          "sha256": "f859f869efe11cf6e15c5c14c06f20e1543915efc354b7d89166d6ce914682e7"
+        }
+      }
+    },
+    "scope": "Actual Unity asset moves with normal disposal, exception disposal, and explicit journal recovery; no process-kill test is claimed."
   },
   "builds": {
     "FantasyCards": {
@@ -38,19 +247,19 @@
         "Engine": "6000.3.26f1",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "211207371",
-        "Duration": "00:00:33.7095800",
+        "Bytes": "334614507",
+        "Duration": "00:00:14.4882690",
         "Errors": "0",
         "Warnings": "6",
         "Content": "fm-classic-0.1.0",
-        "Revision": "fm-detail-2026-10-27",
+        "Revision": "fm-arcana-2026-10-27",
         "file": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
-        "sha256": "663c452f613196fad8b6f94e19e4272036a5ccee27ded19398bfb97af9072b89",
+        "sha256": "ba944a301cd74ef5650b771b03bef25dc6d83166f0276e3f9c24abf832875e7d",
         "files": [
           {
             "file": "BuildEvidence.txt",
             "bytes": 189,
-            "sha256": "663c452f613196fad8b6f94e19e4272036a5ccee27ded19398bfb97af9072b89"
+            "sha256": "ba944a301cd74ef5650b771b03bef25dc6d83166f0276e3f9c24abf832875e7d"
           },
           {
             "file": "D3D12/D3D12Core.dll",
@@ -64,18 +273,18 @@
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Core.dll",
-            "bytes": 147968,
-            "sha256": "e648e64ba8285224015bd70154e526234e4d4eadae4aa37f314d5679d495c601"
+            "bytes": 275968,
+            "sha256": "bcdf71a70c54c68124b4f78ff5f4956eb97570522ad47c036479bbe392424521"
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Data.dll",
             "bytes": 5120,
-            "sha256": "0d99cd1e7312a6214eca7710d0c12b4777b9b850bcde6d42b43f8ca893cb5f88"
+            "sha256": "f7615ff0cd5ec2b4ca9ece6ae85c6d4ff719d0960b2dae7ed51e975aa9e1103a"
           },
           {
             "file": "FantasyCards_Data/Managed/FantasyCards.Presentation.dll",
-            "bytes": 168448,
-            "sha256": "029d0600d50f726776bbb2956a0be72e0924e80c19118413da137bb5f19e98a5"
+            "bytes": 180736,
+            "sha256": "c91e3a0d79936f8d40888e8b327f745f4d3c9bd178b14f2a60ec3596d06d3e59"
           },
           {
             "file": "FantasyCards_Data/Managed/FirstGame.Shared.dll",
@@ -735,7 +944,7 @@
           {
             "file": "FantasyCards_Data/Plugins/x86_64/lib_burst_generated.dll",
             "bytes": 450048,
-            "sha256": "2c67f8b43038ddefb8f5e828ee60f46d1e9f45627a410d090010d6a7bb8a0590"
+            "sha256": "40bc384bc9e99f9125d029113796e958e252b5a150461c5e54db626814f28ab7"
           },
           {
             "file": "FantasyCards_Data/Resources/unity default resources",
@@ -815,17 +1024,17 @@
           {
             "file": "FantasyCards_Data/boot.config",
             "bytes": 156,
-            "sha256": "8b2dbce366d84d83e3afa7e185b2fdf384ada294f64e8d8bd27ea556b3308105"
+            "sha256": "af1ea070a0ce99861479cd656144bea34f62fe8c6300a53801a0ddda5c8db3de"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers",
-            "bytes": 265636,
-            "sha256": "4febd8622b296141459cca019f5ffe17897e3889b606817907eda44743e6726a"
+            "bytes": 334804,
+            "sha256": "a4ba6e59bb879c67cd97caaf6c4e447b1f01da528c14aa402f3bda4de8b6d619"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers.assets",
-            "bytes": 515584,
-            "sha256": "ab933453b765d5650d1a4f640ff145dbbf1482fdda07d69957c3db021179ff53"
+            "bytes": 516064,
+            "sha256": "f4fe2595954e4f31907a44e736fe33fc47fa2ab232b2fd293516261074a1f758"
           },
           {
             "file": "FantasyCards_Data/globalgamemanagers.assets.resS",
@@ -835,17 +1044,17 @@
           {
             "file": "FantasyCards_Data/level0",
             "bytes": 53792,
-            "sha256": "c3b66b8de85dac89542b03a7dd8e6a36cb655b299a956bc441a4eb81634a9cf7"
+            "sha256": "230b54785d64c25a203587fd50700b7ca460014de21b2363400bdc911ae7bed9"
           },
           {
             "file": "FantasyCards_Data/resources.assets",
-            "bytes": 7171704,
-            "sha256": "20602f26b8d50a90b2d615b8e8ca8a3b5282a7f20651e42f99056fe3ecfaa5ce"
+            "bytes": 7657640,
+            "sha256": "b0f2cdfac02f46556c7e7ecfa5b97e2edf52b3304cdd28752aeee6a8093969d2"
           },
           {
             "file": "FantasyCards_Data/resources.assets.resS",
-            "bytes": 97179248,
-            "sha256": "cf38bf6cefaf43acc57239266beb92ffc444bd2b7fe1c77b6d85e7ba23bf6e53"
+            "bytes": 219890512,
+            "sha256": "26056e780866b6085b02eb3925f8e261049e5d1d60988a233815f356dacc6f00"
           },
           {
             "file": "FantasyCards_Data/resources.resource",
@@ -855,7 +1064,7 @@
           {
             "file": "FantasyCards_Data/sharedassets0.assets",
             "bytes": 432832,
-            "sha256": "3eb02f591217a23d930a266d8441ad92cecdb6a0e8e4badcfa8b1c8d8a15c854"
+            "sha256": "94e05f261984af5ce8f31fd3a7cb123d1fde405d8f6b52c4292b28ce592ee5db"
           },
           {
             "file": "FantasyCards_Data/sharedassets0.assets.resS",
@@ -978,34 +1187,34 @@
         "Engine": "6000.3.26f1",
         "Target": "WebGL",
         "Result": "Succeeded",
-        "Bytes": "5662766",
-        "Duration": "00:16:36.6856730",
+        "Bytes": "5668296",
+        "Duration": "00:04:02.7882780",
         "Errors": "0",
-        "Warnings": "6",
+        "Warnings": "10",
         "Content": "fm-classic-0.1.0",
-        "Revision": "fm-detail-2026-10-27",
+        "Revision": "fm-arcana-2026-10-27",
         "file": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
-        "sha256": "37825378b5c599b032cc45e4bf68a8e7dd355eca3f46faee7b247c79e71f6cbb",
+        "sha256": "010e0ee2441eb2b7486fb306d277a851783533b365bce4c838d75469aa76498f",
         "files": [
           {
-            "file": "Build/331bd385d8066485836fe0d858b30e46.framework.js.unityweb",
-            "bytes": 89894,
-            "sha256": "ed4c4ed37fec1604c2ee37c6a179e41de226e7055b763f30821f87998484a05d"
+            "file": "Build/51457f6061f8ece713d9f708691b9c50.data.unityweb",
+            "bytes": 85771141,
+            "sha256": "c81d392e897772f1c3ffbdb7ad298782276fb696bdba8610ee0013876759287e"
           },
           {
-            "file": "Build/441157597bdcbcbe018c24452303d7b4.wasm.unityweb",
-            "bytes": 13146314,
-            "sha256": "fba48b4dfb2d6bdf2b7c333ceb32a9bda7142121814f22fee8f964abf293fbc2"
+            "file": "Build/7c68d9b8bbb73dbd5124e3dfdbbad5a6.framework.js.unityweb",
+            "bytes": 89971,
+            "sha256": "b892f262c69574e7a59e95ae25aac391a8f465196fbb92d2e6ab2a6810f18532"
           },
           {
-            "file": "Build/a4867b85992aee1f879625bf8f72f284.loader.js",
-            "bytes": 47860,
-            "sha256": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7"
+            "file": "Build/c4138d164c9db4b9344d10736296525f.wasm.unityweb",
+            "bytes": 13185262,
+            "sha256": "cea1bf94e32cf1bb9754ef54d19923f01b15440632b5b1818f3c4c447efd6dda"
           },
           {
-            "file": "Build/d6d18f2df7dcb34f80d7a4a8a43a2e28.data.unityweb",
-            "bytes": 82854992,
-            "sha256": "d991f3dd339e5c584396e63a2a3b799361fda40e64f85b8dd58df250ca8a73b7"
+            "file": "Build/db5c393fc601d6f0244a82a1081e23ed.loader.js",
+            "bytes": 47867,
+            "sha256": "d39ab362747e386734b5ab6852fe26fdf2706d5d35da104a68d1e7475a763774"
           },
           {
             "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
@@ -1059,8 +1268,8 @@
           },
           {
             "file": "index.html",
-            "bytes": 21655,
-            "sha256": "5ed5b8b545f376d4f2776bd5801c7d3af9ee423d404b8360755ef713dad6ab22"
+            "bytes": 27185,
+            "sha256": "785ce5a7b8343a7aeef633502366085cee6520a9e1ec1cd735218aeac73f88fc"
           }
         ]
       }
@@ -1069,25 +1278,33 @@
       "Windows": {
         "Engine": "6000.3.26f1",
         "Content": "gospel-0.1.0",
-        "Revision": "gospel-natural-2026-10-27",
+        "Revision": "gospel-authored-2026-10-27",
         "Target": "StandaloneWindows64",
         "Result": "Succeeded",
-        "Bytes": "322908131",
-        "Duration": "00:00:33.8634680",
+        "Bytes": "296508059",
+        "Duration": "00:00:44.5464540",
+        "LegacyResourceExclusions": "/workspace/firstgame/Artifacts/Builds/PathOfDawn/Windows/LegacyResourceExclusions.json",
+        "ExcludedLegacyAssets": "8",
         "Errors": "0",
         "Warnings": "1",
+        "LegacyResourcesRestored": "true",
         "file": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
-        "sha256": "340501dee92f17dc19fa0f3862de330b928400fc75217d2fac3e9d29102feda5",
+        "sha256": "c3c817860384758123fe95e1f1619cd018aede4dc0edd1440142d7e0f42b3a71",
         "files": [
           {
             "file": "BuildEvidence.txt",
-            "bytes": 190,
-            "sha256": "340501dee92f17dc19fa0f3862de330b928400fc75217d2fac3e9d29102feda5"
+            "bytes": 358,
+            "sha256": "c3c817860384758123fe95e1f1619cd018aede4dc0edd1440142d7e0f42b3a71"
           },
           {
             "file": "D3D12/D3D12Core.dll",
             "bytes": 4725304,
             "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052"
+          },
+          {
+            "file": "LegacyResourceExclusions.json",
+            "bytes": 76093,
+            "sha256": "449161ee5263838977c14e36c790772dc0d15cd647d56330b66dd1b6dfdbe476"
           },
           {
             "file": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
@@ -1226,13 +1443,13 @@
           },
           {
             "file": "PathOfDawn_Data/Managed/PathOfDawn.Core.dll",
-            "bytes": 34816,
-            "sha256": "cec6c801e42f68046ff7ec8dba63590e952a4fba9ad4766e47b388d1cd1a9f1f"
+            "bytes": 41472,
+            "sha256": "0f56d9e7c953c62fe225e531941d77392e4fb4094588254d6ea4305b7c3763b5"
           },
           {
             "file": "PathOfDawn_Data/Managed/PathOfDawn.Presentation.dll",
-            "bytes": 148480,
-            "sha256": "419fa58522e7806b6c8de47ed0a95c9bdfe882102c4769831065650260b7f11f"
+            "bytes": 159744,
+            "sha256": "d5a14183c429709608316a7eca00a55555e22c774afc2bbfc3b77fbc2ebaba7d"
           },
           {
             "file": "PathOfDawn_Data/Managed/System.ComponentModel.Composition.dll",
@@ -1877,7 +2094,7 @@
           {
             "file": "PathOfDawn_Data/Plugins/x86_64/lib_burst_generated.dll",
             "bytes": 450048,
-            "sha256": "bbfc0ceecc2a26f7ec69baf9c82417c5038da71ca15a430fa4c67a0f644e05d2"
+            "sha256": "a7056ee9fb3bde64ef94a73d005150904763b58a956375222037e5aaf6a94d6a"
           },
           {
             "file": "PathOfDawn_Data/Resources/unity default resources",
@@ -1907,17 +2124,17 @@
           {
             "file": "PathOfDawn_Data/boot.config",
             "bytes": 156,
-            "sha256": "71f62d5d471667be99a6549a6619294242af2b44258ea31113b4d65f9a940b15"
+            "sha256": "d1af5da6a9ebb42c3bb044a046c5107954e2d172e9ec2f7ed189eb2aaa554bbe"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers",
-            "bytes": 252884,
-            "sha256": "f87702422956e07b0f11c29974afaeccbd6c89ff76fbbfb855d7a6b43da325d8"
+            "bytes": 286660,
+            "sha256": "5926cae067f9315ad56647f79b81be4e599129a35f5422dae0d7593366af5a02"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers.assets",
-            "bytes": 526528,
-            "sha256": "19c15ee8f473564ee8d5ad23d8db897e467edb5e59890cd189fa51dc7c0998b0"
+            "bytes": 526960,
+            "sha256": "3029ec538221af497c9e0d486c1942332568f53ec6656267207a954913ceaece"
           },
           {
             "file": "PathOfDawn_Data/globalgamemanagers.assets.resS",
@@ -1927,27 +2144,27 @@
           {
             "file": "PathOfDawn_Data/level0",
             "bytes": 1164,
-            "sha256": "245cc15b5ece63d80171fcfc13be4953bf0e149c6593ea3b9280c46f0835d89c"
+            "sha256": "8192dfca60a65b0300e4019e11506b608b9093d2c91c497b820aa7537c5adc7f"
           },
           {
             "file": "PathOfDawn_Data/resources.assets",
-            "bytes": 27443032,
-            "sha256": "2a2c56a5f8d8e3817ba02c9acde248528fbe14fe87f939239821f50275848753"
+            "bytes": 41490456,
+            "sha256": "a7c161977983bb25c8dfbe543e15cf8d3e05360a78de8011f27704e4f2203e4f"
           },
           {
             "file": "PathOfDawn_Data/resources.assets.resS",
-            "bytes": 191392368,
-            "sha256": "8efaa7f7b182c7a6429c924a27372331de50e13afb1d53dd90d2b5a06c61cde6"
+            "bytes": 151870080,
+            "sha256": "bf5524339c05ed85255d6bf5192734b56a32a7eadb2b2a5bffde0067feabce93"
           },
           {
             "file": "PathOfDawn_Data/resources.resource",
-            "bytes": 2017760,
-            "sha256": "a29fd9007064278381ef294bfb3c346869a6d3876d82f772ad768dd66cfffe23"
+            "bytes": 962400,
+            "sha256": "7026df85e1f3854dbbe0bf29f2879d34024c1b310df1fb281ffc027a47477685"
           },
           {
             "file": "PathOfDawn_Data/sharedassets0.assets",
-            "bytes": 3844612,
-            "sha256": "ae1f315bfe9ba35b1ce34ba29d475db1ecc6ceaf937cf6368aad3402edd1e2c3"
+            "bytes": 3922636,
+            "sha256": "a9dfffa7a9d537c118bd8ecc0fcecd49f958f6014a8ca03824fa580111513bdc"
           },
           {
             "file": "PathOfDawn_Data/sharedassets0.assets.resS",
@@ -1969,25 +2186,23 @@
       "Web": {
         "Engine": "6000.3.26f1",
         "Content": "gospel-0.1.0",
-        "Revision": "gospel-natural-2026-10-27",
+        "Revision": "gospel-authored-2026-10-27",
         "Target": "WebGL",
         "Result": "Succeeded",
         "Bytes": "7333",
-        "Duration": "00:12:55.2730080",
+        "Duration": "00:13:40.8019140",
+        "LegacyResourceExclusions": "/workspace/firstgame/Artifacts/Builds/PathOfDawn/Web/LegacyResourceExclusions.json",
+        "ExcludedLegacyAssets": "8",
         "Errors": "0",
         "Warnings": "1",
+        "LegacyResourcesRestored": "true",
         "file": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
-        "sha256": "ef6058154448279c92ba6557ba2d114fff69affddaec556d0561f490896372be",
+        "sha256": "6eea3d14ba3ee852ecd1b10f6bdabc3832992c7e7262b7e6d04bf8aadef7bb02",
         "files": [
           {
-            "file": "Build/2f14964ca6af418c2cecedbdb1d23dad.wasm.unityweb",
-            "bytes": 13380133,
-            "sha256": "2a410e07066489a5ded4abc7338851382fee8f7fd42fb845625debf4c4c48267"
-          },
-          {
-            "file": "Build/a22ad982946719089680ee441bbfc0e3.framework.js.unityweb",
-            "bytes": 89757,
-            "sha256": "0443e52eca1ea7c1a3b7a873d11466f193ac7dbfb6e99c12e8e22b87f42cc439"
+            "file": "Build/84e3270653900dae2169601d487d4944.wasm.unityweb",
+            "bytes": 13401695,
+            "sha256": "f2b97d043908afa08f3d64f7e533def11d6ae9bfc266f39dbf0f3f53ba58abea"
           },
           {
             "file": "Build/a4867b85992aee1f879625bf8f72f284.loader.js",
@@ -1995,14 +2210,19 @@
             "sha256": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7"
           },
           {
-            "file": "Build/ca9518b01fb82c53987a958d43850b28.data.unityweb",
-            "bytes": 99305054,
-            "sha256": "bd8191346036c3d2b87e792f349e076169e50371fa98361980f814e08010062b"
+            "file": "Build/bde1aaf3928d3fbe6a03ce15059c35fd.data.unityweb",
+            "bytes": 92267524,
+            "sha256": "f6e551982b6707e908cde3cf86993ac9a469528aff297503a2bcb674cbdbc147"
+          },
+          {
+            "file": "Build/d9edd892c7d5893934879f2e27641d2b.framework.js.unityweb",
+            "bytes": 89822,
+            "sha256": "96ad1a3fcc4081fcc84b07b2c69bfae4ffdc58a10c92dccb6f87fd11881b2fb4"
           },
           {
             "file": "index.html",
             "bytes": 7333,
-            "sha256": "00c090cf952ab463e88d540151e325b95b87035981b3a412d433188f2bad9f51"
+            "sha256": "536d8d0aa5f316c2c55fdef39eee6367deac6dc2825bda6338e2c7d02494cb4e"
           }
         ]
       }
@@ -2011,21 +2231,22 @@
   "web": {
     "Desktop720": {
       "FantasyCards": {
-        "checks": 45,
-        "approvedOriginals": 9,
+        "checks": 78,
+        "rawChecks": 78,
+        "approvedOriginals": 17,
         "screenshots": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/title.png",
-            "sha256": "603fa41ad46ef209a1ea296e8faa4d9abae26900c2b6c9199b07fe65755ab5e0",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/title.png",
+            "sha256": "4e01f5f7d265b4750bbea024c617c97cc57765874db5ada0b8a71412033acd0b",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              77.43342489063907,
-              68.54097231975794,
-              60.35062695978906
+              81.81921939913668,
+              71.99505806844682,
+              64.50493527994003
             ],
             "canvas": {
               "x": 39.109375,
@@ -2035,20 +2256,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:06:09.331726+00:00"
+            "capturedUtc": "2026-10-27T08:25:24.750622+00:00"
           },
           {
             "name": "profile",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/profile.png",
-            "sha256": "ff06427fd44fbdfc5c74b21abff3c19c82accd8b2d815af7fa8df2424b8973fb",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/profile.png",
+            "sha256": "eff6dfd9e661ac785e300b1cdfe19317b99966e28d28ad1c8ff189342c7ba336",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              66.88568680108797,
-              59.77379718002373,
-              54.540773282587736
+              68.1439466980446,
+              60.75136202400692,
+              54.85670091319534
             ],
             "canvas": {
               "x": 39.109375,
@@ -2058,20 +2279,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:06:47.758141+00:00"
+            "capturedUtc": "2026-10-27T08:27:18.202704+00:00"
           },
           {
-            "name": "profile-continued",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/profile-continued.png",
-            "sha256": "af7778c16353450f1867df8527a36a91a4db8ba66b8b6cd4d2d83ca8adb9a32d",
+            "name": "continued-profile",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/continued-profile.png",
+            "sha256": "bc8469e8d337579b71bbcac7b5a847002c118db5d7db7a79c9606eb1abf0f92e",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              66.8864428109808,
-              59.774305625225495,
-              54.54125857776563
+              68.14425327499386,
+              60.75167886327289,
+              54.85688610840807
             ],
             "canvas": {
               "x": 39.109375,
@@ -2081,20 +2302,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:07:36.853336+00:00"
+            "capturedUtc": "2026-10-27T08:28:45.600708+00:00"
           },
           {
             "name": "lobby",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/lobby.png",
-            "sha256": "5ddc8afb398ec4cc829b22ac2c6c1c65b758514b46a9f2f2dc0a6615adea00fb",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/lobby.png",
+            "sha256": "b61daeddfa690b8c683fa48cf39827e554f2c9097568b2bcf38db4eccbdf165b",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              43.974258560748375,
-              38.532475216923395,
-              32.56534694777289
+              64.78408655477585,
+              57.80699164744044,
+              49.22428646661729
             ],
             "canvas": {
               "x": 39.109375,
@@ -2104,20 +2325,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:08:14.088239+00:00"
+            "capturedUtc": "2026-10-27T08:29:32.105921+00:00"
           },
           {
-            "name": "new-legend-card",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/new-legend-card.png",
-            "sha256": "15f4b18138efaba7f8709cfbbbbc43da97d9c2d6b3bcc9c07a9a8ee0a1598e09",
+            "name": "seven-mono-decks",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/seven-mono-decks.png",
+            "sha256": "8e64a416234197011dfb5d7968881bf3895489becc0e54daf76072b48122665d",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              60.80777779185135,
-              46.579184922165695,
-              52.0379599048067
+              56.25532124391447,
+              48.57557549400837,
+              37.37690049602894
             ],
             "canvas": {
               "x": 39.109375,
@@ -2127,20 +2348,181 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:08:47.718726+00:00"
+            "capturedUtc": "2026-10-27T08:30:23.517252+00:00"
+          },
+          {
+            "name": "mono-decks-last-page",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/mono-decks-last-page.png",
+            "sha256": "d1de381d366f2bb83d5250e69f67745cf02ac7944e4f90ded870230edf0cbbb2",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              52.45225096654068,
+              44.985443596120064,
+              34.452128170160286
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:31:14.907084+00:00"
+          },
+          {
+            "name": "dual-decks",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/dual-decks.png",
+            "sha256": "f083cda09fe37fb9d28255a51798a0eea5a7ad9dc8251f76f1130bf3354e69f4",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              58.85549727529044,
+              50.009539708927555,
+              39.08977081644653
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:32:23.801380+00:00"
+          },
+          {
+            "name": "eighteen-decks-last-page",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/eighteen-decks-last-page.png",
+            "sha256": "05d756975a27ac1550e82c400c24c2db4fa3fbc7c251376ab099890cc987135a",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              52.87104466762223,
+              43.964814288302364,
+              34.65359276592107
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:32:53.152518+00:00"
+          },
+          {
+            "name": "portrait-card-gallery",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/portrait-card-gallery.png",
+            "sha256": "87becbc888a2f0437ee27212fbfdf61622390a80cfc8feb04d86fe8832cb85f2",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              50.041518818702215,
+              39.56798641898219,
+              36.500679783116624
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:33:33.952048+00:00"
+          },
+          {
+            "name": "new-legend-card-adjusted-1",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/new-legend-card-adjusted-1.png",
+            "sha256": "2fccb5492343355d3767df34e9e10d82e69c9a6158d4e74a4468d4a0a896654a",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              67.72090466834666,
+              55.3045417044372,
+              56.80265279629369
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:37:32.881897+00:00"
+          },
+          {
+            "name": "original-printed-card",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/original-printed-card.png",
+            "sha256": "cd0703a3e24c45c5d718cf69d42d3c21b296543747fd171b7ddf5e96635594ea",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              55.955805170638776,
+              42.05048326509608,
+              42.89258583617673
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:38:18.764070+00:00"
+          },
+          {
+            "name": "opening-portrait-hand",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/opening-portrait-hand.png",
+            "sha256": "7a6ad2436fc0aee282b3261481b237b807c570050e54ec4f30ff3205d4323474",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              70.83693175379719,
+              65.88750287197982,
+              51.56377614691012
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:39:01.020555+00:00"
           },
           {
             "name": "backfield-terrain-adjusted-1",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/backfield-terrain-adjusted-1.png",
-            "sha256": "361ccbe5c15b6afafc419f95b40e55ef1ab80e7d960bc6ce41bd0673fcd40412",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/backfield-terrain-adjusted-1.png",
+            "sha256": "a62d6ab073d46ec6256870699e76066648df01cc602abcf783c4507c98694f2c",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              45.83726665386297,
-              41.44642872744001,
-              36.3488962684108
+              54.47121202129584,
+              51.394622153494495,
+              43.26113955880684
             ],
             "canvas": {
               "x": 39.109375,
@@ -2150,20 +2532,43 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:11:03.309545+00:00"
+            "capturedUtc": "2026-10-27T08:41:00.946486+00:00"
+          },
+          {
+            "name": "portrait-hand-and-field-adjusted-1",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/portrait-hand-and-field-adjusted-1.png",
+            "sha256": "0f66e84efc971498a9481e9e5f18142de8407862ddf91c3e7491ed6d9afaabd2",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              53.03527376965195,
+              49.78264021252695,
+              41.54349176129343
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:42:50.248729+00:00"
           },
           {
             "name": "terrain-detail",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/terrain-detail.png",
-            "sha256": "80207dbe1b53e23bf9764781e5c276beb416002ac4ab47685487f187faee372a",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/terrain-detail.png",
+            "sha256": "752419e554a2e46ea4502140c3a20f1c778a9844aac51cabb3c461b66e31dfa8",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              61.69515063180352,
-              63.888338037887294,
-              46.44110018750122
+              77.00225855231184,
+              71.71678653636978,
+              65.40506146342891
             ],
             "canvas": {
               "x": 39.109375,
@@ -2173,20 +2578,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:11:47.508050+00:00"
+            "capturedUtc": "2026-10-27T08:43:18.918164+00:00"
           },
           {
             "name": "saved-battle",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/saved-battle.png",
-            "sha256": "04834ff263c66e938d565e7ea31f22aab2b8963179ad3a22a15a6efda1284abd",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/saved-battle.png",
+            "sha256": "a38ffa3fb358e41cfe06b7526a8689b845a1c22dc72c8f03e10106392987c331",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              44.44310125182604,
-              40.184684651765735,
-              35.94175359143427
+              52.924385514988394,
+              49.71681400146492,
+              41.52512245307535
             ],
             "canvas": {
               "x": 39.109375,
@@ -2196,20 +2601,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:12:18.014122+00:00"
+            "capturedUtc": "2026-10-27T08:44:08.467702+00:00"
           },
           {
             "name": "continued-battle",
-            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/continued-battle.png",
-            "sha256": "364e1f4985b26ecaa994564442c6531b7507098b3230a41eaf220988883870aa",
+            "path": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/continued-battle.png",
+            "sha256": "2b4b7b1c74fd0aaabbf0db0fd0e3492be511e2695e5fb73a26d4783eceb1e0df",
             "size": [
               1202,
               676
             ],
             "channelStddev": [
-              44.50906721449684,
-              40.22825680195181,
-              35.95754502874598
+              52.9859520184572,
+              49.75285557270278,
+              41.5351414036239
             ],
             "canvas": {
               "x": 39.109375,
@@ -2219,35 +2624,87 @@
             },
             "navigation": 2,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:13:07.932348+00:00"
+            "capturedUtc": "2026-10-27T08:45:17.866262+00:00"
           }
         ],
-        "audioWindows": 5,
-        "file": "Artifacts/Validation/Detail/Desktop720/FantasyCards/report.json",
-        "sha256": "166ab69f7529a5f89c9fd266b1f3a64cb8d32504e726c9cb67225a8eeb228605",
-        "rawStatus": "failed",
-        "adjudicatedCacheRevalidations": 2,
-        "adjudication": {
-          "file": "Artifacts/Validation/Detail/Desktop720/FantasyCards/cache-adjudication.json",
-          "sha256": "804b8bda041532124ce11d963eb235c3ef305b6544375a8c4ce47e53a5eb5533"
+        "audioWindows": 10,
+        "file": "Artifacts/Validation/Arcana/Desktop720/FantasyCards/report.json",
+        "sha256": "a67910548a80f026187b10b6a391820707d02da0174272bf50c775daef5b89ea",
+        "rawStatus": "passed",
+        "capturePlan": {
+          "file": "Tools/Validation/arcana-smoke-plans.json",
+          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
+        },
+        "captureHarness": {
+          "file": "Artifacts/Validation/Arcana/HarnessHistory/before-gospel-cdp/revival-smoke.py",
+          "sha256": "ee1c563028a532d93eafa3eb04195afabb5653c97bd04e97a0271aba59bd7ddf"
+        },
+        "musicRoles": {
+          "returnStartsAtZero": {
+            "navigation": 1,
+            "promoted": [
+              {
+                "event": "promoted",
+                "scene": "lobby",
+                "serial": 1,
+                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+                "position": 0,
+                "startPosition": 0,
+                "restartCount": 1,
+                "atMs": 59615.40000000596
+              },
+              {
+                "event": "promoted",
+                "scene": "deck",
+                "serial": 2,
+                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+                "position": 0,
+                "startPosition": 0,
+                "restartCount": 1,
+                "atMs": 107240.20000001788
+              },
+              {
+                "event": "promoted",
+                "scene": "lobby",
+                "serial": 3,
+                "source": "http://127.0.0.1:46865/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+                "position": 0.006485,
+                "startPosition": 0,
+                "restartCount": 2,
+                "atMs": 296913.2000000179
+              }
+            ]
+          },
+          "sameRoleRetainsStart": {
+            "navigation": 1,
+            "scene": "deck",
+            "beforeObservedMs": 110086.20000001788,
+            "afterObservedMs": 161408.30000001192,
+            "sameRoleMessagesBefore": 2,
+            "sameRoleMessagesAfter": 3,
+            "restartCount": 1,
+            "lastStartAtMs": 106750.80000001192
+          },
+          "scope": "Actual controller role/time ledger plus separately verified PCM, not physical speaker listening."
         }
       },
       "PathOfDawn": {
-        "checks": 47,
-        "approvedOriginals": 10,
+        "checks": 44,
+        "rawChecks": 44,
+        "approvedOriginals": 12,
         "screenshots": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/title.png",
-            "sha256": "c424e209775bb1cfb53cbb5fb3a5a5e89e452a314212abac09145968722cc4ea",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/title.png",
+            "sha256": "8b46ba0d3f719fb12f7338c6bf080785581a191de6c7005bdbe89e8864226db1",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              78.44413082570387,
-              77.10407681925219,
-              70.46816260803116
+              78.15396509785467,
+              76.91455198902462,
+              70.41241386809814
             ],
             "canvas": {
               "x": 0,
@@ -2256,21 +2713,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:00:17.068344+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T09:45:52.889133+00:00"
           },
           {
             "name": "temple-idle",
-            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/temple-idle.png",
-            "sha256": "4f30f1632425ff857e5dc42980b079195d9e1d28bb2c0c246152a6120b4dff02",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/temple-idle.png",
+            "sha256": "47f9c66a103f2da82eb9a49431d284104477047648836b397361ba57e820b5c4",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              61.195340577041534,
-              54.01575522925225,
-              46.514153833080854
+              61.06076806800998,
+              53.859982439201815,
+              46.20358978191625
             ],
             "canvas": {
               "x": 0,
@@ -2279,21 +2736,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:01:38.661751+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T09:51:35.610812+00:00"
           },
           {
             "name": "hero-rear-close",
-            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/hero-rear-close.png",
-            "sha256": "4f53b9077345a3b345baff5280a35f4c192cf11b773f128ad1adf7ae5ddea96b",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-rear-close.png",
+            "sha256": "925b1f598c3b53ed3cfddf090219b334f857facb7679ce1efd985f73fea4499b",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              61.18401347701519,
-              53.98869192444424,
-              46.643194818745606
+              61.012817380217385,
+              53.593070862870995,
+              45.94999342003923
             ],
             "canvas": {
               "x": 0,
@@ -2302,21 +2759,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:02:59.871086+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T09:53:07.564461+00:00"
           },
           {
-            "name": "hero-front-close-adjusted-1",
-            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/hero-front-close-adjusted-1.png",
-            "sha256": "47564943d669c086bdd557e6e167889c6a9ea0ea088bb637379320be84d70102",
+            "name": "hero-front-close",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-front-close.png",
+            "sha256": "97440e88108ce28b7a42e86a821619ecfdecd361bb4144c26db343a8f2840979",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              70.9723782227475,
-              67.94813498422607,
-              64.57852022669952
+              69.39023876276748,
+              69.52044496847917,
+              66.05198976481955
             ],
             "canvas": {
               "x": 0,
@@ -2325,21 +2782,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:06:02.001232+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T09:54:28.288552+00:00"
           },
           {
-            "name": "status-adjusted-1",
-            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/status-adjusted-1.png",
-            "sha256": "81a159504f7d58d9af33a76f5dac4bf1d663ce458e80d46228d9e542f9b1169d",
+            "name": "status",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/status.png",
+            "sha256": "461883bbd13fcbdb19c50cfacefa0b08f9028dde4b8bd8f75207e5d0f06ceba5",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              65.51256472990629,
-              62.33398947482685,
-              57.22717315572591
+              65.355403298296,
+              62.24294795865385,
+              57.139284338981014
             ],
             "canvas": {
               "x": 0,
@@ -2348,21 +2805,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:10:17.753164+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T09:57:01.917978+00:00"
           },
           {
-            "name": "hero-walk-compositor-0-004",
-            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/hero-walk-compositor-0-004.png",
-            "sha256": "e9f0b9344033fc67734012b35f78be0de2a8e52cb2f8835a1c999a68d2fd75fa",
+            "name": "hero-walk-compositor-0-002",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-walk-compositor-0-002.png",
+            "sha256": "aa594cd8655eb652393d0caa2e19d95a35520ed1a4ad7f731d9f4e3df8340e4f",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              61.167132400843045,
-              53.37970756152823,
-              45.7465872720786
+              60.75861953598354,
+              53.02657901412038,
+              45.299697277258346
             ],
             "canvas": {
               "x": 0,
@@ -2379,22 +2836,22 @@
               "deviceHeight": 720,
               "scrollOffsetX": 0,
               "scrollOffsetY": 0,
-              "timestamp": 1793074694.679619
+              "timestamp": 1793095116.413926
             },
-            "receivedUtc": "2026-10-27T04:18:14.758837+00:00"
+            "receivedUtc": "2026-10-27T09:58:36.523172+00:00"
           },
           {
-            "name": "hero-run-compositor-1-004",
-            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/hero-run-compositor-1-004.png",
-            "sha256": "f95fc31218f9f26870dd0b21fc35af6abba9a78928ebb0c16c75a306043f6d74",
+            "name": "hero-run-compositor-1-003",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/hero-run-compositor-1-003.png",
+            "sha256": "3ffdbbf255e9777a49eb06f80334367ee487ec6972b4a6966cdb16045dd05eab",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              61.770032054235465,
-              54.040689017380856,
-              46.31984869390052
+              61.37773554293806,
+              53.25102457053346,
+              45.410272646076194
             ],
             "canvas": {
               "x": 0,
@@ -2411,22 +2868,68 @@
               "deviceHeight": 720,
               "scrollOffsetX": 0,
               "scrollOffsetY": 0,
-              "timestamp": 1793074758.902669
+              "timestamp": 1793095170.97718
             },
-            "receivedUtc": "2026-10-27T04:19:19.014809+00:00"
+            "receivedUtc": "2026-10-27T09:59:31.077002+00:00"
+          },
+          {
+            "name": "npc-topics-adjusted-1",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/npc-topics-adjusted-1.png",
+            "sha256": "8b7f765b413b3e649500d1862371157a7ba828f0fd3543a084b65a6515871e81",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              61.686855966917754,
+              60.32420257226079,
+              58.14013677451346
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:02:23.247698+00:00"
+          },
+          {
+            "name": "npc-study-scripture",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/npc-study-scripture.png",
+            "sha256": "52403beef7241da1ad5fa6308410501506dec77d0fc2baba59e259ff6433315f",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              81.94722285209184,
+              80.15293395525586,
+              77.74091110742835
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:04:07.905336+00:00"
           },
           {
             "name": "gate-reading",
-            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/gate-reading.png",
-            "sha256": "e62e4d99445661ffc7dd8cb5e5bfdc9daf05aac1cb6508b4c80df9c1c6ac2ab1",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/gate-reading.png",
+            "sha256": "4060cc882d4a2f1d15bf6be60b4ed0360c84038b49d3ead967bc674c8955bb27",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              88.53718218375933,
-              86.26128288771541,
-              82.84212961792828
+              88.30084584342195,
+              85.78094801564619,
+              82.60041246491289
             ],
             "canvas": {
               "x": 0,
@@ -2435,21 +2938,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:20:34.904048+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:06:55.758490+00:00"
           },
           {
             "name": "saved-temple",
-            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/saved-temple.png",
-            "sha256": "07c5f9b43f5ea2c588f4700272ba53ae45a8823694cab6c157165e50563692f3",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/saved-temple.png",
+            "sha256": "09bb12ecb88cb3fd300710fff9a3eaebd09cb0df8b18976a7a16d72705bc2d1b",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              62.02784557653877,
-              53.816572884526146,
-              46.10372061802031
+              62.74006794533824,
+              53.74499500753355,
+              45.29800327534799
             ],
             "canvas": {
               "x": 0,
@@ -2458,21 +2961,21 @@
               "height": 720
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:22:09.302104+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:10:28.217076+00:00"
           },
           {
             "name": "continued-temple",
-            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/continued-temple.png",
-            "sha256": "e041625767c366c3172cfdd1e1c7a58c2c023b28c5bf74879649c74732346121",
+            "path": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/continued-temple.png",
+            "sha256": "d7efeb24992595c3bb121d99ffafe5e3a71dda89ab5ccbd9811da98606e94ed4",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              62.023982680830414,
-              53.81425896676634,
-              46.087798376355664
+              62.84541916971105,
+              53.996819219450934,
+              45.501619900968116
             ],
             "canvas": {
               "x": 0,
@@ -2481,55 +2984,42 @@
               "height": 720
             },
             "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:23:27.168575+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:14:56.856766+00:00"
           }
         ],
-        "audioWindows": 6,
-        "file": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/report.json",
-        "sha256": "576f19e16a7d8c0da123b1cb686980ebd43793ad9c884e8d6c9684065d4a193a",
-        "rawStatus": "failed",
-        "ordinarySessions": 2,
-        "followupReport": {
-          "file": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/report.json",
-          "sha256": "841de7ed074866eec90e2e6530f10bc5c4f846dde75e3e843d9909176188d35b",
-          "status": "passed"
+        "audioWindows": 5,
+        "file": "Artifacts/Validation/Arcana/Desktop720/PathOfDawn/report.json",
+        "sha256": "1c4e1e6f2285c84c353bdab6588f19e2740db292dff003c8880f25ec3cffeaa1",
+        "rawStatus": "passed",
+        "capturePlan": {
+          "file": "Tools/Validation/arcana-smoke-plans.json",
+          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
         },
-        "checksBySession": {
-          "primary": {
-            "passed": 24,
-            "total": 25,
-            "rawStatus": "failed"
-          },
-          "followup": {
-            "passed": 23,
-            "total": 23,
-            "rawStatus": "passed"
-          }
-        },
-        "adjudication": {
-          "file": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/followup-verification.json",
-          "sha256": "086c1bb970baaad55547c3c0f0441cc5d46342cbef619420253a17cddbe50dc2"
+        "captureHarness": {
+          "file": "Tools/Validation/revival-smoke.py",
+          "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
         }
       }
     },
     "Mobile844": {
       "FantasyCards": {
-        "checks": 49,
-        "approvedOriginals": 9,
+        "checks": 80,
+        "rawChecks": 81,
+        "approvedOriginals": 17,
         "screenshots": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/title.png",
-            "sha256": "fb274f2abb3183d9969f9568ce81cc6d54d436a096d467c1aff4e81bde9e9e48",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/title.png",
+            "sha256": "19da050e7a429bcecf433cc5cd0b7b601c2b6a5b7988fcd6b3a7901963911906",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              76.73350516981404,
-              67.95157833136088,
-              59.79603330499033
+              80.5401223045047,
+              70.95165892605671,
+              64.06998454047152
             ],
             "canvas": {
               "x": 114.4375,
@@ -2539,20 +3029,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:16:11.137889+00:00"
+            "capturedUtc": "2026-10-27T08:46:46.356395+00:00"
           },
           {
             "name": "profile",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/profile.png",
-            "sha256": "89febb1d6ea6ec6bf644cab93618a7df98f639c0ed0251ab938dae9c203b6a72",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/profile.png",
+            "sha256": "0074ba297b058055a333bb6ba0df93585e20b104ccfa759b549a4c7e6f6ac031",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              67.58031609736464,
-              60.60359556866932,
-              55.34113986660672
+              68.85744029982378,
+              61.58418997789619,
+              56.25216290441895
             ],
             "canvas": {
               "x": 114.4375,
@@ -2562,20 +3052,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:16:47.497611+00:00"
+            "capturedUtc": "2026-10-27T08:48:39.868739+00:00"
           },
           {
             "name": "continued-profile",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/continued-profile.png",
-            "sha256": "31d6f86a8cc2e5dcb6dd3043b0feeedb656503e1c6a00b7819d0f3ae0df4c98e",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/continued-profile.png",
+            "sha256": "82f91a54402fafe41abc0ff12467a1f8e7a6eceaf6d669f660c87d349b2558f8",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              67.58025172945781,
-              60.60351512100322,
-              55.34110738925823
+              68.85740005148459,
+              61.58412083224342,
+              56.25207369524421
             ],
             "canvas": {
               "x": 114.4375,
@@ -2585,20 +3075,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:17:38.832720+00:00"
+            "capturedUtc": "2026-10-27T08:50:25.879530+00:00"
           },
           {
             "name": "lobby",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/lobby.png",
-            "sha256": "a87292d091cf27b7fb11314e23d86e1ce6eb1bf48ff85709b84511651963ba08",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/lobby.png",
+            "sha256": "c9d59a0dfcf42912c8350a059e05b2cb3f454784d74220a7ec201d8c7d770870",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              48.5160542261771,
-              43.73484417949208,
-              37.992185662203205
+              65.59229641529478,
+              59.03219470063649,
+              51.29673296013857
             ],
             "canvas": {
               "x": 114.4375,
@@ -2608,20 +3098,135 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:18:12.486849+00:00"
+            "capturedUtc": "2026-10-27T08:52:07.099193+00:00"
+          },
+          {
+            "name": "seven-mono-decks",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/seven-mono-decks.png",
+            "sha256": "830978d55e4299466bde5d21c77819dd536406fc2d16988ee9c630e237bd9e15",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              58.714390548006946,
+              51.046605939877914,
+              41.77281499005691
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:52:47.874418+00:00"
+          },
+          {
+            "name": "mono-decks-last-page",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/mono-decks-last-page.png",
+            "sha256": "ffa3a28f5589c9d355672dfdf8e904596c499c0f9be478d32713efdb0c39d98b",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              54.89538293203853,
+              47.47895146724603,
+              38.894751872596736
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:53:20.091765+00:00"
+          },
+          {
+            "name": "dual-decks",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/dual-decks.png",
+            "sha256": "2cb1be0493d20c79e5692af052406ac2f7d29d89a4854a7115c82244463d897d",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              60.975906080281575,
+              52.24074221112676,
+              42.55897029086
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:53:49.814642+00:00"
+          },
+          {
+            "name": "eighteen-decks-last-page",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/eighteen-decks-last-page.png",
+            "sha256": "b946f7199166fe135ef17f82e07cb077935768ab66bd4e39c750544beb262357",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              55.20371219752531,
+              46.7510174714799,
+              38.78554440344387
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:54:26.014340+00:00"
+          },
+          {
+            "name": "portrait-card-gallery",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/portrait-card-gallery.png",
+            "sha256": "79336447ad2224e5830b1436a5e95bc236436b05f356419d4a6d64376ead496d",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              52.46680353645635,
+              43.26359451048105,
+              40.68723881968043
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:54:57.716296+00:00"
           },
           {
             "name": "new-legend-card",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/new-legend-card.png",
-            "sha256": "d5ce1b69cf0697eee5d9ce7bf65b05c19a820fab6761f2e9ffc7cb1f375db77a",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/new-legend-card.png",
+            "sha256": "752cbf8e0a55ae734163ee7ff9f6e985ecaa1a62938bfa9476cb67d566bfbd9f",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              60.66071252012895,
-              47.02774146754934,
-              51.80731231147679
+              66.74708942487533,
+              55.43442655454336,
+              56.19319345338048
             ],
             "canvas": {
               "x": 114.4375,
@@ -2631,20 +3236,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:18:39.057224+00:00"
+            "capturedUtc": "2026-10-27T08:55:48.989747+00:00"
           },
           {
-            "name": "backfield-terrain-adjusted-2",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/backfield-terrain-adjusted-2.png",
-            "sha256": "1659c27c5b841c9ceb84d97d5c3c3d6d420812096aa3e4ef5d9205117a1a7bc0",
+            "name": "original-printed-card",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/original-printed-card.png",
+            "sha256": "2eff4ae4e74e58ad07e9d528d6cef6a1746be7cee659e268b1a8fe30c2699269",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              44.638749638127926,
-              40.34282810371267,
-              37.34838532673014
+              55.551662465863394,
+              41.33294640094594,
+              41.85597632402229
             ],
             "canvas": {
               "x": 114.4375,
@@ -2654,20 +3259,89 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:21:48.346468+00:00"
+            "capturedUtc": "2026-10-27T08:56:19.162872+00:00"
+          },
+          {
+            "name": "opening-portrait-hand",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/opening-portrait-hand.png",
+            "sha256": "b60334d34b86832d5047ffdfa04883ab690d0b16d2f2df1018d93bab5e502b80",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              71.75912044866814,
+              66.21019609605955,
+              55.34102934931579
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:56:54.401541+00:00"
+          },
+          {
+            "name": "backfield-terrain-adjusted-1",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/backfield-terrain-adjusted-1.png",
+            "sha256": "77664d32065aaea2d69ccae0b15ea9b092087bd78a2a8e410b0cdcd4f3fb7256",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              57.31090247649168,
+              53.093844009458905,
+              48.096818931923764
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T08:58:43.444073+00:00"
+          },
+          {
+            "name": "portrait-hand-and-field-adjusted-2",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/portrait-hand-and-field-adjusted-2.png",
+            "sha256": "f7c01be06783a39431622cf03b9a44be89883710e47153ee89d79a0b6e80f5c8",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              59.688526308728555,
+              54.91556242297268,
+              47.79433342783889
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T09:02:20.132839+00:00"
           },
           {
             "name": "terrain-detail",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/terrain-detail.png",
-            "sha256": "0df1913313948bdc363c2f67d24fb4e20185d516f283f6a4bdb4814c191c603b",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/terrain-detail.png",
+            "sha256": "4088f7c4987a20f7f0ea98d63b3d89166d9de263b98d55732cb511ab9a592619",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              87.51615197018545,
-              82.34325789560418,
-              84.42065234183224
+              79.54293386687057,
+              77.52563227101126,
+              74.069819072137
             ],
             "canvas": {
               "x": 114.4375,
@@ -2677,20 +3351,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:22:26.752450+00:00"
+            "capturedUtc": "2026-10-27T09:02:58.456784+00:00"
           },
           {
             "name": "saved-battle",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/saved-battle.png",
-            "sha256": "a351e5a7fdc73c1ab70a5b6e0e232465365febbaa891fe0753ed1686e423a6e3",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/saved-battle.png",
+            "sha256": "156b1dbc0e5178b0827f0a48d5b50e6c354b6480684776649f85a7415365705b",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              44.32522085429711,
-              40.13997209133562,
-              37.279076685914475
+              59.27853532719234,
+              54.675075286491044,
+              47.740204977017264
             ],
             "canvas": {
               "x": 114.4375,
@@ -2700,20 +3374,20 @@
             },
             "navigation": 1,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:23:01.068772+00:00"
+            "capturedUtc": "2026-10-27T09:03:35.595882+00:00"
           },
           {
             "name": "continued-battle",
-            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/continued-battle.png",
-            "sha256": "77aad85e2bbccf5d507a7397e1d26a14de7d24b4d495a2042a61f30d67b36849",
+            "path": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/continued-battle.png",
+            "sha256": "bbaba5426870aa4025ea144729e764e292db5109303a2b9a09b1f76fc243baf2",
             "size": [
               616,
               346
             ],
             "channelStddev": [
-              44.51705905180282,
-              40.263942173376535,
-              37.320457216377186
+              59.42330124251137,
+              54.759689585522224,
+              47.75918647578356
             ],
             "canvas": {
               "x": 114.4375,
@@ -2723,35 +3397,101 @@
             },
             "navigation": 2,
             "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T03:23:54.307201+00:00"
+            "capturedUtc": "2026-10-27T09:04:42.837668+00:00"
           }
         ],
-        "audioWindows": 5,
-        "file": "Artifacts/Validation/Detail/Mobile844/FantasyCards/report.json",
-        "sha256": "59d45de51fecdefa36c115f99b12254f9cf53a3b5b3a515866113e86b63f7816",
+        "audioWindows": 10,
+        "file": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/report.json",
+        "sha256": "76bccabe998063f6ea66a10cf49322da87b0f4a1e5dac8a2829ea0ff4d7a9e38",
         "rawStatus": "failed",
-        "adjudicatedLocalMediaRequests": 3,
-        "adjudication": {
-          "file": "Artifacts/Validation/Detail/Mobile844/FantasyCards/media-adjudication.json",
-          "sha256": "23f797b33ffacfe46c0e581cea87b83062f1271056ca2d6d0e4f2de2484aa7fa"
+        "capturePlan": {
+          "file": "Tools/Validation/arcana-smoke-plans.json",
+          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
+        },
+        "captureHarness": {
+          "file": "Artifacts/Validation/Arcana/HarnessHistory/before-gospel-cdp/revival-smoke.py",
+          "sha256": "ee1c563028a532d93eafa3eb04195afabb5653c97bd04e97a0271aba59bd7ddf"
+        },
+        "qualifiedNetworkProof": {
+          "file": "Artifacts/Validation/Arcana/Mobile844/FantasyCards/media-adjudication.json",
+          "sha256": "e4212979ee3460fc8baf3c95b96e2091766458c7b08ff47c3c56ac9b34269ca1"
+        },
+        "qualifiedReport": {
+          "rawStatus": "failed",
+          "rawChecks": 81,
+          "passedChecks": 80,
+          "reviewedOriginals": 17,
+          "recordedPcmWindows": 10,
+          "adjudicatedMediaCancellations": 3,
+          "alreadyClassifiedCacheRequests": 2
+        },
+        "qualificationScope": "The automatic network gate remains FAILED (80 of81 raw checks passed). Only three exact inactive/pre-unlock media cancellations at the recorded navigation boundary are interpreted. Exact current files fully decode; the same recovered lobby/battle sources later advance and produce isolated audible PCM in navigation1. Request events lack initiating-document IDs, so the failed GETs are not assigned to the old or new document. No uninterrupted samples, loop-boundary continuity, physical listening or zero reload gap is claimed. No raw status, original, input, PCM, runtime source or harness was changed.",
+        "musicRoles": {
+          "returnStartsAtZero": {
+            "navigation": 1,
+            "promoted": [
+              {
+                "event": "promoted",
+                "scene": "lobby",
+                "serial": 1,
+                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+                "position": 0,
+                "startPosition": 0,
+                "restartCount": 1,
+                "atMs": 114666.80000001192
+              },
+              {
+                "event": "promoted",
+                "scene": "deck",
+                "serial": 2,
+                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/deck.ogg",
+                "position": 0,
+                "startPosition": 0,
+                "restartCount": 1,
+                "atMs": 151561.80000001192
+              },
+              {
+                "event": "promoted",
+                "scene": "lobby",
+                "serial": 3,
+                "source": "http://127.0.0.1:42833/FantasyCards/Web/StreamingAssets/Audio/ModernCard/lobby.ogg",
+                "position": 0,
+                "startPosition": 0,
+                "restartCount": 2,
+                "atMs": 281435.90000000596
+              }
+            ]
+          },
+          "sameRoleRetainsStart": {
+            "navigation": 1,
+            "scene": "deck",
+            "beforeObservedMs": 154521.20000001788,
+            "afterObservedMs": 186114.70000001788,
+            "sameRoleMessagesBefore": 2,
+            "sameRoleMessagesAfter": 3,
+            "restartCount": 1,
+            "lastStartAtMs": 150866
+          },
+          "scope": "Actual controller role/time ledger plus separately verified PCM, not physical speaker listening."
         }
       },
       "PathOfDawn": {
-        "checks": 46,
-        "approvedOriginals": 10,
+        "checks": 45,
+        "rawChecks": 45,
+        "approvedOriginals": 12,
         "screenshots": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/title.png",
-            "sha256": "d296946d60aaf6d541d43e8e210a97e2b66b85908e72ad9454c65ff569db343d",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/title.png",
+            "sha256": "d7cacb32b72e74d6a61b704d75a8aa0fe3eb2508bc782cc225f103720bfb8a40",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              77.51103931635717,
-              76.24336320774765,
-              69.77164256997075
+              77.31916596053473,
+              76.10770245342331,
+              69.73421201870052
             ],
             "canvas": {
               "x": 75.328125,
@@ -2760,21 +3500,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:25:48.887744+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:16:41.338618+00:00"
           },
           {
             "name": "temple-idle",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/temple-idle.png",
-            "sha256": "ff3e28656c30ff9279d99c4bf6ec03962b3d1e1a39d506153fb4bcac17e8328a",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/temple-idle.png",
+            "sha256": "3265b4cee23b551a9c84249af4b0e07e6f7c60082ce5f55e151bcd096fbff360",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              61.101091070227895,
-              53.86703061240455,
-              46.17297139069545
+              60.846227205013456,
+              53.59419714500143,
+              45.743733938891324
             ],
             "canvas": {
               "x": 75.328125,
@@ -2783,21 +3523,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:27:10.346153+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:19:35.745970+00:00"
           },
           {
             "name": "hero-rear-close",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-rear-close.png",
-            "sha256": "bd6a49d6c51042b4bec38a6f45fc69d7db2001f0ae0cdb55beb003212fa5d905",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-rear-close.png",
+            "sha256": "4ba9b96003e728be1692295b84a3c7eff0fa194643871eeaf7b5fc74073952c4",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              63.06476527240369,
-              56.20097162156308,
-              48.75178959403835
+              62.649062377951026,
+              55.839537980097326,
+              48.161358940034965
             ],
             "canvas": {
               "x": 75.328125,
@@ -2806,21 +3546,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:29:13.161931+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:21:18.480094+00:00"
           },
           {
             "name": "hero-front-close",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-front-close.png",
-            "sha256": "ffa3836909424d3f4724ccc468a8d1a4fc75d5483bab8512116188d7e01ce03f",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-front-close.png",
+            "sha256": "b6668ac7f7c8a15c642506935561fc4fe26791bef7f050fd7e8a736edd91f501",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              68.0811977005341,
-              64.96499619224613,
-              61.84367707924307
+              67.6543958847728,
+              65.22391304296872,
+              62.277034370611325
             ],
             "canvas": {
               "x": 75.328125,
@@ -2829,21 +3569,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:30:13.969418+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:22:56.689871+00:00"
           },
           {
             "name": "status",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/status.png",
-            "sha256": "8d2c34b9f803cdcc6595f69a5b8c672bdcabd9a104e70d2e6bc2a2c3f2ff56a6",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/status.png",
+            "sha256": "635e25035556b602b05433a2f55cdbc1b6070b7ddc1dd0f3c5c925066939a9f6",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              64.77797899370304,
-              61.670368259918106,
-              56.66571591602238
+              64.68576755764849,
+              61.62779671889713,
+              56.612961752883706
             ],
             "canvas": {
               "x": 75.328125,
@@ -2852,21 +3592,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:32:07.081932+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:25:03.080237+00:00"
           },
           {
-            "name": "hero-walk-stepped-touch-compositor-1-027",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-walk-stepped-touch-compositor-1-027.png",
-            "sha256": "e8bbac4499ba586cebf0c3db4d5f40108ba8561ebe80f6f9f9dce93b0b4df3e5",
+            "name": "hero-walk-compositor-0-038",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-walk-compositor-0-038.png",
+            "sha256": "1b139930e64a4d206c72e179d9afbc367ce59bee5a0d46de5eac793a6d48f328",
             "size": [
               844,
               390
             ],
             "channelStddev": [
-              81.4692140952846,
-              70.15351471259851,
-              56.43069408283537
+              81.17338705445331,
+              70.26466156718988,
+              56.8135769308687
             ],
             "canvas": {
               "x": 75.328125,
@@ -2883,22 +3623,22 @@
               "deviceHeight": 390,
               "scrollOffsetX": 0,
               "scrollOffsetY": 0,
-              "timestamp": 1793075789.66213
+              "timestamp": 1793096777.252593
             },
-            "receivedUtc": "2026-10-27T04:36:29.690397+00:00"
+            "receivedUtc": "2026-10-27T10:26:17.295476+00:00"
           },
           {
-            "name": "hero-run-stepped-touch-compositor-3-020",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-run-stepped-touch-compositor-3-020.png",
-            "sha256": "8e33b9b28680f18df175fa7885226cc42b091f7a7831c47a7cf6846a4aba1027",
+            "name": "hero-run-compositor-1-038",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/hero-run-compositor-1-038.png",
+            "sha256": "402da6b380531bc0f21a030d02b0dae0fa30e74c146fd7254605fa289304592c",
             "size": [
               844,
               390
             ],
             "channelStddev": [
-              80.59216873789862,
-              69.24766714673366,
-              55.41695933306452
+              81.62440821552272,
+              70.49307711385661,
+              56.85126917554437
             ],
             "canvas": {
               "x": 75.328125,
@@ -2915,22 +3655,22 @@
               "deviceHeight": 390,
               "scrollOffsetX": 0,
               "scrollOffsetY": 0,
-              "timestamp": 1793075998.11181
+              "timestamp": 1793096924.805514
             },
-            "receivedUtc": "2026-10-27T04:39:58.142674+00:00"
+            "receivedUtc": "2026-10-27T10:28:44.830230+00:00"
           },
           {
-            "name": "gate-reading-adjusted-2",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/gate-reading-adjusted-2.png",
-            "sha256": "52352cb8fc54835911cf7e3a5e5ef675f67e83e3055ec0b50f50d2bc8edbc607",
+            "name": "npc-topics",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/npc-topics.png",
+            "sha256": "26ee127204d7573b87cbb604a340fc619b151f3c6e79772f6a2148a4e5850cda",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              86.66231781198333,
-              84.46840802979656,
-              81.27197421662045
+              60.087454278812416,
+              58.99638187960403,
+              57.13137210760699
             ],
             "canvas": {
               "x": 75.328125,
@@ -2939,21 +3679,67 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:47:08.504178+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:32:57.118184+00:00"
+          },
+          {
+            "name": "npc-study-scripture",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/npc-study-scripture.png",
+            "sha256": "fcf1afac770c8ad150db3466e97ec0dcfa0182c775e8138dd843acc5d81ea1a8",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              79.56555595834261,
+              78.00959619297929,
+              75.74589575434878
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:34:47.899973+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/gate-reading.png",
+            "sha256": "1b9a4315d0908d4aeff2f2b53852ba8c9db7294a1f4aef2ea7283ac8ae5b3e4c",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              86.29029659574375,
+              83.99237282559295,
+              81.02483559115828
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:35:53.112012+00:00"
           },
           {
             "name": "saved-temple",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/saved-temple.png",
-            "sha256": "170f9f3681bfcaf7f10ced67f81c4c609b7f1e58bc9062dca40e94ec59fc80ce",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/saved-temple.png",
+            "sha256": "cc1e0aacbecc78859f7dfc9ac12661657a947185aef33e1df0c184332dabea92",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              66.7933098213349,
-              57.43102428727482,
-              47.78210824624062
+              62.03488583835927,
+              54.01927210525922,
+              46.05942118577632
             ],
             "canvas": {
               "x": 75.328125,
@@ -2962,21 +3748,21 @@
               "height": 390
             },
             "navigation": 0,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:48:05.257354+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:38:27.554185+00:00"
           },
           {
-            "name": "continued-temple-adjusted-1",
-            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/continued-temple-adjusted-1.png",
-            "sha256": "75799cae83bdadb08f7c349d979ee0487fa7bebbf483d7184fad6dabe69e068e",
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/continued-temple.png",
+            "sha256": "7df34ff6b4b905b15e9a0b096a6d4a76a9729da8df097a3959eb2e0522c9ca52",
             "size": [
-              694,
+              693,
               390
             ],
             "channelStddev": [
-              61.47367783978728,
-              53.69721319569509,
-              46.086352587661885
+              62.052710815590586,
+              54.158485332148196,
+              46.13378509532924
             ],
             "canvas": {
               "x": 75.328125,
@@ -2985,142 +3771,27 @@
               "height": 390
             },
             "navigation": 1,
-            "captureKind": "original-browser-canvas",
-            "capturedUtc": "2026-10-27T04:52:22.787474+00:00"
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-10-27T10:40:42.138241+00:00"
           }
         ],
         "audioWindows": 5,
-        "file": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/report.json",
-        "sha256": "4d2b8c77edace6f99a6c6e31a1c765593d4580c62259710bab3f9d5540ad279a"
+        "file": "Artifacts/Validation/Arcana/Mobile844/PathOfDawn/report.json",
+        "sha256": "8dcfdd736526ea712bfeb9dc1414e702c4c432a6cd6906dd071c769737e8fd15",
+        "rawStatus": "passed",
+        "capturePlan": {
+          "file": "Tools/Validation/arcana-smoke-plans.json",
+          "sha256": "bc7f2e15e39ca6f1ac8cfefe408c2d7e4fe2fd5273a14accb0dc96ab15b44aba"
+        },
+        "captureHarness": {
+          "file": "Tools/Validation/revival-smoke.py",
+          "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
+        }
       }
     }
   },
   "publication": {
-    "status": "verified",
-    "url": "https://ka8877.github.io/firstgame/",
-    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40452759933",
-    "sourceCommit": "464fc1a05390a2d7975ba122bde42cc286b5b011",
-    "verifiedFiles": 44,
-    "scope": "Every public file is byte-exact to locally tested runtime; public title/game launch sanity, not duplicated full gameplay.",
-    "file": "Artifacts/Validation/Detail/PublicPortal/report.json",
-    "sha256": "bdd1e8344c8b56b384a395cd45ca474e5af6f57a849c4b179c45a3f10c50fb3f"
-  },
-  "publicWeb": {
-    "FantasyCards": {
-      "checks": 33,
-      "approvedOriginals": 2,
-      "screenshots": [
-        {
-          "name": "title",
-          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/title.png",
-          "sha256": "fb274f2abb3183d9969f9568ce81cc6d54d436a096d467c1aff4e81bde9e9e48",
-          "size": [
-            616,
-            346
-          ],
-          "channelStddev": [
-            76.73350516981404,
-            67.95157833136088,
-            59.79603330499033
-          ],
-          "canvas": {
-            "x": 114.4375,
-            "y": 0,
-            "width": 615.109375,
-            "height": 346
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T05:01:30.819263+00:00"
-        },
-        {
-          "name": "lobby",
-          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/lobby.png",
-          "sha256": "c5e1c52845384ffc7c3b0525e10b191244cdbf13d2ab058511435b9577d07017",
-          "size": [
-            616,
-            346
-          ],
-          "channelStddev": [
-            48.870637240883724,
-            44.51582541591487,
-            38.730060199169394
-          ],
-          "canvas": {
-            "x": 114.4375,
-            "y": 0,
-            "width": 615.109375,
-            "height": 346
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T05:02:42.143435+00:00"
-        }
-      ],
-      "audioWindows": 2,
-      "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/report.json",
-      "sha256": "d7e8f262721b8c905d5df6e7394a7700078e4efa032fba21a029af78b05b9c82",
-      "rawStatus": "failed",
-      "adjudicatedPublicMediaRanges": 6,
-      "adjudication": {
-        "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/range-adjudication.json",
-        "sha256": "f30af5286289666f8b6d39346e3215d1da16c94742b9cc51e2c444af8e4eeef2"
-      }
-    },
-    "PathOfDawn": {
-      "checks": 19,
-      "approvedOriginals": 2,
-      "screenshots": [
-        {
-          "name": "title",
-          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/title.png",
-          "sha256": "cb77c897c05af8182affd73985c62cc4ee181e37124c98658b807ac993aa9b45",
-          "size": [
-            694,
-            390
-          ],
-          "channelStddev": [
-            77.51294085930553,
-            76.24234843941143,
-            69.76848622761999
-          ],
-          "canvas": {
-            "x": 75.328125,
-            "y": 0,
-            "width": 693.328125,
-            "height": 390
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T05:04:03.535866+00:00"
-        },
-        {
-          "name": "temple-idle",
-          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/temple-idle.png",
-          "sha256": "a3d262d96ed7a23c67d750f2102c7ee153182e51ebc76fbb6a64748aefec2486",
-          "size": [
-            694,
-            390
-          ],
-          "channelStddev": [
-            61.09209311294285,
-            53.86366094704002,
-            46.17671356693635
-          ],
-          "canvas": {
-            "x": 75.328125,
-            "y": 0,
-            "width": 693.328125,
-            "height": 390
-          },
-          "navigation": 0,
-          "captureKind": "original-browser-canvas",
-          "capturedUtc": "2026-10-27T05:05:36.345821+00:00"
-        }
-      ],
-      "audioWindows": 1,
-      "file": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/report.json",
-      "sha256": "19d64bde6c2c043a0ee71f93978adcddaebb84934cc6689de61307aa6b12e3e7"
-    }
+    "status": "pending",
+    "url": "https://ka8877.github.io/firstgame/"
   }
 }

@@ -1,0 +1,3126 @@
+{
+  "releaseProfile": "detail",
+  "date": "2026-10-27",
+  "recordedUtc": "2026-10-27T05:07:00.192250+00:00",
+  "dateTimezone": "Asia/Seoul",
+  "gameRevisions": {
+    "FantasyCards": "fm-detail-2026-10-27",
+    "PathOfDawn": "gospel-natural-2026-10-27"
+  },
+  "contentVersions": {
+    "FantasyCards": "fm-classic-0.1.0",
+    "PathOfDawn": "gospel-0.1.0"
+  },
+  "sourceCommitAtSummary": "464fc1a05390a2d7975ba122bde42cc286b5b011",
+  "externalCore": {
+    "passed": 108,
+    "finishedUtc": "2026-10-27T02:31:18.6098891+00:00",
+    "file": "Artifacts/TestResults/Core/core-tests.trx",
+    "sha256": "2396eb508f94baf5cfc57dbd34729ac92a3f1f4b421cae19bd28ce8337ea1d13"
+  },
+  "nativeTests": {
+    "FantasyCards": {
+      "passed": 6,
+      "finishedUtc": "2026-10-27 02:44:09Z",
+      "file": "Artifacts/TestResults/FantasyCards/PlayModeUI.xml",
+      "sha256": "64cdfeba007ea53b77bdd00471d071793a6bb658f2797e066859ae33a0ed6d6f"
+    },
+    "PathOfDawn": {
+      "passed": 6,
+      "finishedUtc": "2026-10-27 03:41:53Z",
+      "file": "Artifacts/TestResults/PathOfDawn/PlayModeUI.xml",
+      "sha256": "f8adfa57632118a5084350bd9d6ad749b7925e021ff8261e738f40d640db8699"
+    }
+  },
+  "builds": {
+    "FantasyCards": {
+      "Windows": {
+        "Engine": "6000.3.26f1",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "211207371",
+        "Duration": "00:00:33.7095800",
+        "Errors": "0",
+        "Warnings": "6",
+        "Content": "fm-classic-0.1.0",
+        "Revision": "fm-detail-2026-10-27",
+        "file": "Artifacts/Builds/FantasyCards/Windows/BuildEvidence.txt",
+        "sha256": "663c452f613196fad8b6f94e19e4272036a5ccee27ded19398bfb97af9072b89",
+        "files": [
+          {
+            "file": "BuildEvidence.txt",
+            "bytes": 189,
+            "sha256": "663c452f613196fad8b6f94e19e4272036a5ccee27ded19398bfb97af9072b89"
+          },
+          {
+            "file": "D3D12/D3D12Core.dll",
+            "bytes": 4725304,
+            "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052"
+          },
+          {
+            "file": "FantasyCards.exe",
+            "bytes": 667136,
+            "sha256": "eb143ead6441b6dd9d7d145adb85410e9389fb3878899ae537e8c9869cce38fa"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/FantasyCards.Core.dll",
+            "bytes": 147968,
+            "sha256": "e648e64ba8285224015bd70154e526234e4d4eadae4aa37f314d5679d495c601"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/FantasyCards.Data.dll",
+            "bytes": 5120,
+            "sha256": "0d99cd1e7312a6214eca7710d0c12b4777b9b850bcde6d42b43f8ca893cb5f88"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/FantasyCards.Presentation.dll",
+            "bytes": 168448,
+            "sha256": "029d0600d50f726776bbb2956a0be72e0924e80c19118413da137bb5f19e98a5"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/FirstGame.Shared.dll",
+            "bytes": 13312,
+            "sha256": "b30d4754de05ac173fe1a12078068814b65c09fb93682f0c6dbc6b712f6a7c79"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Mono.Security.dll",
+            "bytes": 241152,
+            "sha256": "82df31404def10ffd69c09e3a8c454e76552f3a37675d1b7b8c743cfd3d1af6f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Newtonsoft.Json.dll",
+            "bytes": 691712,
+            "sha256": "a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.ComponentModel.Composition.dll",
+            "bytes": 257024,
+            "sha256": "9373a420101d4c674b9f74bce93a45c58ddb3548c130d9b65ab87235d0a4ed30"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Configuration.dll",
+            "bytes": 124928,
+            "sha256": "d3acb14b8ebaf7482d2d3e26e8c04685299e2b471a513a30508bd0cab8336354"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Core.dll",
+            "bytes": 1113088,
+            "sha256": "ebf140bf5f8d49ccac20c14935625b0ae0a46c30aa4f90b2808f3b9678822470"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Data.DataSetExtensions.dll",
+            "bytes": 29696,
+            "sha256": "79a01061129709358567a9254684ba52ba66371e01e0354e7fa4852a9f62e59f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Data.dll",
+            "bytes": 2125312,
+            "sha256": "5d0807269bfcf112aa844951232ef105bbb642abb1e14c2e78dd70fb9245e98a"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Drawing.dll",
+            "bytes": 489984,
+            "sha256": "76dca8fbe098c285b03de79369f9f2aa141dec44de99ebcc0478c7e762024204"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.EnterpriseServices.dll",
+            "bytes": 44544,
+            "sha256": "d8a3d6c1929ec028793ff07df92781c03ebb38c63005d4c12c35e3116d04fcaf"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.IO.Compression.FileSystem.dll",
+            "bytes": 18432,
+            "sha256": "40ef91246d44d6c4d8a1505e1210b0c54963a12938ba0458959bb064d62f36f4"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.IO.Compression.dll",
+            "bytes": 114688,
+            "sha256": "7370dc2d3a6f02dbda1a69ca596f2ae96fc464809b3bbca6071fc1fc1edfbb2d"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Net.Http.dll",
+            "bytes": 122880,
+            "sha256": "c46d5b5dc68af8ce1b34e8ace4372b157e2e85ab63d6b5eea938ca71dc7fb064"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Numerics.dll",
+            "bytes": 119296,
+            "sha256": "74f6771aedd33262470e8e653fc0f4e04a659bcdadbeb44b2f8826fba7053f77"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Runtime.Serialization.dll",
+            "bytes": 934400,
+            "sha256": "2aa92fb930200ddb3c9c3ffaaff39bd6cdc6d689f19614f6c3b84a15060800f0"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Runtime.dll",
+            "bytes": 12288,
+            "sha256": "e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Security.dll",
+            "bytes": 320000,
+            "sha256": "95a29120e164e5bdb7ff5dcb2cb4641e5ea0aca7c1ad0854b0e9b2b0ff5abe2d"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.ServiceModel.Internals.dll",
+            "bytes": 215040,
+            "sha256": "6738a31088136d38a50354371feb83a4fd1558acca2a5f8b165c34a859e08c47"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Transactions.dll",
+            "bytes": 35328,
+            "sha256": "cfac784408e3b7da6c6e94ec04c162c6d902372fab19353c02aeda3464ce185f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Xml.Linq.dll",
+            "bytes": 136704,
+            "sha256": "ed219710472b837fddf45cc73c912e04b4d6b8ca833ea074ec1f73bc00157b05"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.Xml.dll",
+            "bytes": 3160064,
+            "sha256": "f90799a0c38f3d45e390f9768ab467bf681a052e1b807f4c59fabef5f7edaffa"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/System.dll",
+            "bytes": 2641920,
+            "sha256": "9e8a5190797e35428b1ae9bce6d47d39a1dbc3e974f14239e44678913dc6194a"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Burst.Unsafe.dll",
+            "bytes": 5632,
+            "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Burst.dll",
+            "bytes": 296960,
+            "sha256": "da29b87c126f2837dc946ea3b5dfccf7c5a53e59e6ea92d752b0da62dfd35848"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Cinemachine.dll",
+            "bytes": 456192,
+            "sha256": "af08955549c8022d2838c525c53c347bbe0dc97b7defc73d790d2905a780466b"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+            "bytes": 5120,
+            "sha256": "ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Collections.dll",
+            "bytes": 432128,
+            "sha256": "6663479c7f5d4f2dae758c9632f56097d5f1c8d770256bd5b4a1de0557d0e7ab"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.InputSystem.ForUI.dll",
+            "bytes": 15360,
+            "sha256": "77387983a4170cfc0131db774d20ce82f330058849f175bac121beb72c5ec74f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.InputSystem.dll",
+            "bytes": 1090048,
+            "sha256": "a0ddce51c94e3d441f501a5cf26cf7021c55ead8181707be909089d81e0d6f38"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+            "bytes": 4096,
+            "sha256": "60e58dc016031fded8a4158e3bb16ebfca8f8550b7d58280b777923054e98369"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Mathematics.dll",
+            "bytes": 737280,
+            "sha256": "673de832871ba678fd1570de1ac878daf2d0fa716994aaf689f4c2c737572911"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Pipeline.Attributes.dll",
+            "bytes": 6144,
+            "sha256": "7d49d5038e9fa30600be24b45f1f37b5aada5365873e572d3e7e6f06ade8992c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+            "bytes": 7680,
+            "sha256": "5ae34cb63942945874312c84ed13f246b8bcc79113045c49975a33d5cff5e7d6"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+            "bytes": 4608,
+            "sha256": "f754ecea7994ec0c47f71702417fb50f1431d0f298a917a636512a8c7066a568"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+            "bytes": 1131520,
+            "sha256": "9b39ac5362d8f295aac18630cf0eed4365911f29f1bd5bb4f4c7e332e10899e8"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+            "bytes": 3584,
+            "sha256": "68ba55ef513cc79714534f1833052d0c284f650ab1567cce7c7d4e66b08cb991"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+            "bytes": 220160,
+            "sha256": "5041215e33d875cb041f9338d4303bfd02e0f7d96f57c5dc851d0736b6a8aefd"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+            "bytes": 3584,
+            "sha256": "3b05efe8e0b7573c5a4a0f3e5e47ca9c2b201fdff40fac58ed6bc43d8a7951db"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+            "bytes": 219648,
+            "sha256": "f829a8975ee7ffd14fab967dedecc49689384a387e38c5712f034681d0b5e9d9"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+            "bytes": 4096,
+            "sha256": "f4149c918f96b83aa668346f21802904c582d34ea9bae5c9a67fd9c2408f8992"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+            "bytes": 699392,
+            "sha256": "a0a00eaf42ece927648ab58598e48483980502734e2380bfdc1d2e61c1ddede0"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+            "bytes": 3584,
+            "sha256": "2cd5e56eda0242e0a5b7a2ba12e439f9c37eac42a57e8aebdfee3bdd1308ebf8"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Splines.dll",
+            "bytes": 144384,
+            "sha256": "7f021419319a4506c274e82d1e07444be881449fed5a92127a23b8fa36fabb00"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.TextMeshPro.dll",
+            "bytes": 436736,
+            "sha256": "c470b841043237f5ba58b1c211431ead20b35774ada2bfd81aa5003ab2f97e28"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.Timeline.dll",
+            "bytes": 121856,
+            "sha256": "2531bf460636fce0592ec40caa9b9b2fa9edc61010b69539920ea8d1532a9af7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+            "bytes": 90624,
+            "sha256": "cf067ff6de4d2dea55f3624b8b7af8e63be3c9fdb945ef1ba3ef96360b8d676c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AIModule.dll",
+            "bytes": 77232,
+            "sha256": "ba39f35f31d89b3d726002db219fb4f4c75de24d2dbd31fe5e6eeb5e8fe9404c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AMDModule.dll",
+            "bytes": 21928,
+            "sha256": "d618b3cfa47906c136c1def44728e69c1d16e264b4ec65a4bf47b419300728b2"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ARModule.dll",
+            "bytes": 25512,
+            "sha256": "e292c7b2f67464d1f0e34926a99a35b9b4d1450fdef7865f8f103657d7a662b7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AccessibilityModule.dll",
+            "bytes": 51112,
+            "sha256": "9413f549098eba189f2fdd506fdc65d7edde3bbc2866f041e3ad786756dd66c9"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+            "bytes": 125360,
+            "sha256": "a473e505c63cfa4558fd3f553b3a8d57376bdb2b683fc8e37090883051bd2698"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+            "bytes": 121768,
+            "sha256": "22588a69d0e54c5d794c0ead557f6cd4c5e9eb15c5198b6dbd4b3aad09b9e031"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AnimationModule.dll",
+            "bytes": 225200,
+            "sha256": "f1762f5fb06252b4dd5c7de2bd5748cee31edb800a749e5be88e98cb850e8683"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AssetBundleModule.dll",
+            "bytes": 41896,
+            "sha256": "efc4255fd77f62033bf1cf757d5b4e7d26d08fe2f437678753273898132f4a1b"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.AudioModule.dll",
+            "bytes": 142760,
+            "sha256": "a50256c632695a1a16ce1a81f407a8767c8039d4b641550582e3a4ec5728ba4f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ClothModule.dll",
+            "bytes": 36264,
+            "sha256": "a3d741b647415173bdaedeb611ec6e6fdb863e8d7f31bc1dc937a9b0d08ff721"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ClusterInputModule.dll",
+            "bytes": 28080,
+            "sha256": "00417d9c78620b833db40149d67faad19c16ac77160e5123719e30e1174bd7e5"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+            "bytes": 26544,
+            "sha256": "efc5c5909ffd34c979d6ef8c8ba1b3b47b300bb75d5234c5b9d2e49b0af3d6da"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ContentLoadModule.dll",
+            "bytes": 32688,
+            "sha256": "13026b7b91158cfe87ede96ce98ce3f377549d0d15fb83eff86286797492e031"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.CoreModule.dll",
+            "bytes": 1985968,
+            "sha256": "9e3de7931374a2c77b09de567b00a70c69a5aa758f03a7e86f640c28c1e5a9fa"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.CrashReportingModule.dll",
+            "bytes": 26536,
+            "sha256": "73076aa15f7ab4460b42cf7cfa9df6929037d8990a0d045d1b094a096a50d57b"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.DSPGraphModule.dll",
+            "bytes": 31664,
+            "sha256": "9e1c9e6f4552a93710fc47ae301c66ba764056781ad3c62de2aa1d0f050b08a8"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.DirectorModule.dll",
+            "bytes": 41896,
+            "sha256": "798e180fdc62cb3a1ef784d4b8282b45635f94050c2f3df15b5a01c7da0087d3"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.GIModule.dll",
+            "bytes": 24496,
+            "sha256": "dfd6575ef5bf41823f0daf36ffd32bc6a84f23e720066c3f3d0e3e7e22dbb350"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.GameCenterModule.dll",
+            "bytes": 45992,
+            "sha256": "84187b9aa3ddb798ed3d10e98ca31dde302ebfe0de9a83ce81ae45e5e1ed2a16"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+            "bytes": 14248,
+            "sha256": "13799b96205bac9d5035d0252b6f48a44237ec3591101e1a4a341695414dd796"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.GridModule.dll",
+            "bytes": 30640,
+            "sha256": "ad7549fba12e92dab18cfe10809f13ed25a8eb64fe6c2269a6745d05ded1e74e"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+            "bytes": 109480,
+            "sha256": "fd21db4b0eb1b4c3bec203302923d7dc08da58c95c19be24b9296fefed1b51c5"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.HierarchyModule.dll",
+            "bytes": 102312,
+            "sha256": "39ae4c794800fecd274ada0db3ef1602b6a0153b7c0bd516fa3b47ae1945b6ca"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.HotReloadModule.dll",
+            "bytes": 24488,
+            "sha256": "75c1db04e92ac9d5f7d24e78f65c6262bf628384abc5bea4a6f771405c49faa3"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.IMGUIModule.dll",
+            "bytes": 214448,
+            "sha256": "8ba45dbf28d35692ac54aa7c0c29d9844c2f94c7cdd116b50caad919c70e924d"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.IdentifiersModule.dll",
+            "bytes": 16816,
+            "sha256": "58e09982007a313c0b70723fb99c582be84c4d0da1c5e1c8db4a90cb2b54e9a6"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ImageConversionModule.dll",
+            "bytes": 31144,
+            "sha256": "f26022563e96dd347f2eb638f320ddff0a9285bbce0b9ac8bd983213bda8cd6e"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.InputForUIModule.dll",
+            "bytes": 57768,
+            "sha256": "80773fc98db5dda31a9e0755f6be3dbf00ff6e457b04dd954d7b72358de0838c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.InputLegacyModule.dll",
+            "bytes": 45480,
+            "sha256": "d1c30e150af23c16400ef2f6ece52e2155f8334eb6b2a86ee3cafb3eb53150ca"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.InputModule.dll",
+            "bytes": 28584,
+            "sha256": "17e0fe1bec245c1ced0027f592cd45cace36644310e359742e5d275c2adcca19"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.InsightsModule.dll",
+            "bytes": 14256,
+            "sha256": "bbe4d6412954a4b38180f1bd5eb062d5d159e038516717fd4e112e685e417691"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+            "bytes": 27048,
+            "sha256": "d7c70045517ff7ae508c35c2c8bb94229c04d3c6a0e15893f12c08d04f82c093"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.LocalizationModule.dll",
+            "bytes": 27056,
+            "sha256": "c8493e9199ad1b1e60d5a155df165bb0df55602982042358a448e2fc203c5ad9"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.MarshallingModule.dll",
+            "bytes": 83880,
+            "sha256": "f82a545b2f05feafb08cbff66dfeb22f578adcb88a1f198d543e6f614e9ae2d5"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.MultiplayerModule.dll",
+            "bytes": 17832,
+            "sha256": "07365a8bb981493ca3e870f5b2964354e48b41fd4ea6a2f9e8ae4338f34cecc7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.NVIDIAModule.dll",
+            "bytes": 40880,
+            "sha256": "3018adec1b670b25fae6e9f4fb0af07252b4186fece66431d6d6d5276562458a"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+            "bytes": 171952,
+            "sha256": "ef26b7d39e56208595f230da6fc9f11512299e81a9aa46426b933690490eadff"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+            "bytes": 25000,
+            "sha256": "585d98090f0a26af7a46d46b454a73d4eb23570c0a2452e3988d3b7a4ac9a210"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.Physics2DModule.dll",
+            "bytes": 586664,
+            "sha256": "2a485ecfbafad8274361f6ac7d35070f192a283521f01b4639951b5eee2f39dc"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+            "bytes": 14256,
+            "sha256": "2b5e11d24b92d3e8787d39f4d5b4d6c49ea4af4389fb4d74b91d20a31d1d6000"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.PhysicsModule.dll",
+            "bytes": 183720,
+            "sha256": "e48a765c1693241cfc4dda50c871cf097872b31d1b9166aa5d721d3e5a69dccd"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.PropertiesModule.dll",
+            "bytes": 134056,
+            "sha256": "d861efc231122a370481ab8c43f4010b4e8a2786b321ff426bfe7d075bc35be6"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+            "bytes": 25520,
+            "sha256": "ec4556d29fe23c471c9d44a53269911a47e7c0e585a56336bdf1ae488d74d145"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+            "bytes": 24488,
+            "sha256": "bdf07783bcbaa6db1aa258829b5d2c923452225c443a0e3f4b56fa367649ec68"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+            "bytes": 26544,
+            "sha256": "c27da2faa606e13fb2b2d3382fc5c2a81a44a06ff7aafeb6dbbf4a2311c39526"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ShaderRuntimeModule.dll",
+            "bytes": 25520,
+            "sha256": "392db35017695a340ab20e06b420e1c9ca0b78938f7a385e428a4209c9ce7dec"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+            "bytes": 24496,
+            "sha256": "3a33103c6bc3294e03d1bc379b85c8c1d03dbaa38741c0c3a20238b96ab7aca1"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+            "bytes": 38320,
+            "sha256": "adb3643f1c09fe18eda362cea402d06c48456b978e61552b8a83e92cd7c69745"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+            "bytes": 28592,
+            "sha256": "67a31f21e1a3dd7fef9330a4898f1b124bf9cc0ccc2e2a34f469c2bb1aed46cb"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+            "bytes": 32680,
+            "sha256": "ab5ccec7face44492c200ea840af221699e73d14e66dfd335bc6df54f9609785"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.StreamingModule.dll",
+            "bytes": 26024,
+            "sha256": "6f11e62f98109666fdb3abef6bb9d445492115b87efb7dae2e75ad37a13f90f8"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.SubstanceModule.dll",
+            "bytes": 29096,
+            "sha256": "6a296fb26a2072d9dd53ee7b2c65e29b6b1198c8d6abbf526bf85f74f861418f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.SubsystemsModule.dll",
+            "bytes": 41904,
+            "sha256": "3e66e3da74a0bab864c1ca21ed2113dafb23548f56ffa625f064b5ebb592b527"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TLSModule.dll",
+            "bytes": 32176,
+            "sha256": "67bf3eacdde2cdcfd91e8bd643546cce0fd8001bad60c5ecd5bbad049da1b1c8"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TerrainModule.dll",
+            "bytes": 134056,
+            "sha256": "b7b7d60e4ba0e0321ac9e7f669fb45bd7c8ddda4e1545026c2d980f88aafb4cf"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+            "bytes": 25512,
+            "sha256": "7184337244ebf5a50cb17c5fdfee86f68121a5bd1dff685baba4509d20b03384"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+            "bytes": 91568,
+            "sha256": "f27fb10a2c7163da8dffc4dc8106354d7c39925b81466560355c4ccf4179a6c7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+            "bytes": 334760,
+            "sha256": "ee1a223e336e53bc94ffb8b7051b74e0631c14f645df922c0055872d1b58fe50"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TextRenderingModule.dll",
+            "bytes": 39344,
+            "sha256": "fa6d3b1167a6a101033dba62b9b24efd1af0bd6cf04e72a93daaf97f47979ff7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.TilemapModule.dll",
+            "bytes": 58792,
+            "sha256": "c0f5aae8b9623a0f0e2ed77db16230e4cdc49750eee4c542b64da167fcfe0192"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UI.dll",
+            "bytes": 263168,
+            "sha256": "2c5dbd83cc4226fde13d7148f04d5cfb2466de151c04ba189336e15717f23e01"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UIElementsModule.dll",
+            "bytes": 2453424,
+            "sha256": "0104eb031aa1c342177d06f8ceb18824a1678f6d9b44523316a533ec5aef86ea"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UIModule.dll",
+            "bytes": 50088,
+            "sha256": "72fc11bc7df760dfebc17a2a6c256cec119e339c466aa738c9fac2ac5243b4e1"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UmbraModule.dll",
+            "bytes": 24488,
+            "sha256": "e0afc364c4a19f6235d5cfa91d0cae4de7257f94f4090379ce497a0d9593a927"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+            "bytes": 35760,
+            "sha256": "b1bdbf4ea453ca8a09c16326cdbbdaf70c8767ea0aa177c2c98fb08dd5181755"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+            "bytes": 60848,
+            "sha256": "d341faac2e992bff7882fc85363143d9d4a042ac207ae089fcf03230253f097b"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityConnectModule.dll",
+            "bytes": 27568,
+            "sha256": "15f2dcce0f7815d7594a934ff832007f8a6c5191a57c723f9eb07aef9bdd5298"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityConsentModule.dll",
+            "bytes": 16304,
+            "sha256": "258b2697da2354da78154eaade613800789baff3692d161034e46ea7c18f6a59"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityCurlModule.dll",
+            "bytes": 26032,
+            "sha256": "e4dce8fef34f42d3d53ccd203440e66f438a3a3cd7deff73a4f1bc605ffcca72"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+            "bytes": 28592,
+            "sha256": "3a3b8014af189d1338b28b2de21438c36dcf91d7d78758fabeb5f64ec2ca69c4"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+            "bytes": 28584,
+            "sha256": "af45256b9c06caea7a962d1c1f329c945016b606a35c793314062103048edb8c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+            "bytes": 70064,
+            "sha256": "392183a43363663ffe7d622bbceec1cce6efe4fcc3d74f10d777a8883585d494"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+            "bytes": 27568,
+            "sha256": "f17e96a9cba1d329c189b9337cef24a7413604ea5aee241e131f0b90ed8ffa4e"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+            "bytes": 36784,
+            "sha256": "5be8ff5a42c94e34d123f40d54d66181565c7780c21c4473ab9b8f845ce7cbb9"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VFXModule.dll",
+            "bytes": 78256,
+            "sha256": "6ba6c7868736da3d46ed89c48d850757c26c34e57fc7ff27aae7ba678b80498a"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VRModule.dll",
+            "bytes": 31656,
+            "sha256": "5df47299a7bdf80c03097c27f4ca535fc1ebdd4db9228df4d7b695c79ae8a250"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+            "bytes": 254896,
+            "sha256": "0de3129e30ffa373fb72dd8df3b81c2d5e44ada18cdfd008ed9ec8194ed7a743"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VehiclesModule.dll",
+            "bytes": 31664,
+            "sha256": "eff49c1fb43845f3aaa7dd59ba8af91bd8f2d1495e463f55c4d2995cb41073e4"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VideoModule.dll",
+            "bytes": 49064,
+            "sha256": "31f930dc5a532bb00b3f3f57f279987faa3dd7cb0c8e9013659b8b0f0d92bc4d"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+            "bytes": 42928,
+            "sha256": "03bc3fd50942b64894be32c885eeaa1e59c8c1777461f72f0fd70d168c4f9c7c"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.WindModule.dll",
+            "bytes": 26536,
+            "sha256": "2aa9ffe8d067f79245ab4b3fdad6cf3b24c94e4ae9f3d9e641d9ab53bdb188e7"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.XRModule.dll",
+            "bytes": 88488,
+            "sha256": "881e556460fb5181a78644d51af7d4924fa386f1f45b5ffffbc3d84d6e57bf30"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/UnityEngine.dll",
+            "bytes": 197544,
+            "sha256": "58592c4bb7ffec04593f098c3f88f4e63d961de730b44091f889ece9c1b62ccb"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/mscorlib.dll",
+            "bytes": 4632064,
+            "sha256": "194417662b72e9fdc29df44aa07fb693a9cf2194d84e327231f3eeff1104ae0f"
+          },
+          {
+            "file": "FantasyCards_Data/Managed/netstandard.dll",
+            "bytes": 90112,
+            "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5"
+          },
+          {
+            "file": "FantasyCards_Data/Plugins/x86_64/lib_burst_generated.dll",
+            "bytes": 450048,
+            "sha256": "2c67f8b43038ddefb8f5e828ee60f46d1e9f45627a410d090010d6a7bb8a0590"
+          },
+          {
+            "file": "FantasyCards_Data/Resources/unity default resources",
+            "bytes": 5883716,
+            "sha256": "32b58bdb9cf090212b46a8ca7436dcdae89e4ef43e9d55a835233c21d1347734"
+          },
+          {
+            "file": "FantasyCards_Data/Resources/unity_builtin_extra",
+            "bytes": 397720,
+            "sha256": "72f6d57e89fd590a1a223b498b7b79b061a552c233014178e53d1ea66aaa8f5a"
+          },
+          {
+            "file": "FantasyCards_Data/RuntimeInitializeOnLoads.json",
+            "bytes": 4253,
+            "sha256": "b845c2971ba563a6e9bbb7e0b4c2b213c0b76f1939a8eb51e6cd9608dd818378"
+          },
+          {
+            "file": "FantasyCards_Data/ScriptingAssemblies.json",
+            "bytes": 4247,
+            "sha256": "33636f74416d38e479ea0bcc73baa4a8821cbb4b4f499586098a366f9b2ad4ac"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+            "bytes": 2282,
+            "sha256": "35518412e1cd06e8310fc987941311538328b5b2f3954a75acee51b6a1baf8d3"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/battle.mp3",
+            "bytes": 1221493,
+            "sha256": "752d3726853b8d8e3e6b7dcb5f9ed3382f9893aeef4b7307e66502cdb3a999c2"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/battle.ogg",
+            "bytes": 1405347,
+            "sha256": "e72d5a96e33835a25885977c312c2b31a8589f7baf5d79fda970a9a5207b992d"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/deck.mp3",
+            "bytes": 432595,
+            "sha256": "e8af03c908ea97968d44fa9e855eb2cc2455c6d2aa858239019a16d2a4cd9e22"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/deck.ogg",
+            "bytes": 420076,
+            "sha256": "2d86efd77128b4c43c63bc40483cc69ab399935ad7e91e03bb8884e0f21b0040"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/lobby.mp3",
+            "bytes": 670807,
+            "sha256": "91fec1767ac8a0385a40eb1e4ff7df8fb43db4301ce01bd8e79c8a05bfb24b08"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/lobby.ogg",
+            "bytes": 681274,
+            "sha256": "897b2a946584e9e2572d2723b32f040ffba1e7d315d3fab5570b4f3dfafeb85a"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/manifest.json",
+            "bytes": 4819,
+            "sha256": "d92ea8a5c8f1bacf8c7ccac0f60b80ff5a465de08b96185cb75fec1aa6928210"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/title.mp3",
+            "bytes": 405442,
+            "sha256": "d56372cae809635d95a6300507e1b3e9823b7be2ff606dcce9ac3c6dfcee620b"
+          },
+          {
+            "file": "FantasyCards_Data/StreamingAssets/Audio/ModernCard/title.ogg",
+            "bytes": 396976,
+            "sha256": "7ea53aeba03018c99c76cc6ebee6498a7adabffb8c9dd525b8c6ae11d679d1b1"
+          },
+          {
+            "file": "FantasyCards_Data/app.info",
+            "bytes": 22,
+            "sha256": "4713096d0ccf9e4a8320c35fb0e6c6e3339b84d903979b626a6cda1ae4eaacbb"
+          },
+          {
+            "file": "FantasyCards_Data/boot.config",
+            "bytes": 156,
+            "sha256": "8b2dbce366d84d83e3afa7e185b2fdf384ada294f64e8d8bd27ea556b3308105"
+          },
+          {
+            "file": "FantasyCards_Data/globalgamemanagers",
+            "bytes": 265636,
+            "sha256": "4febd8622b296141459cca019f5ffe17897e3889b606817907eda44743e6726a"
+          },
+          {
+            "file": "FantasyCards_Data/globalgamemanagers.assets",
+            "bytes": 515584,
+            "sha256": "ab933453b765d5650d1a4f640ff145dbbf1482fdda07d69957c3db021179ff53"
+          },
+          {
+            "file": "FantasyCards_Data/globalgamemanagers.assets.resS",
+            "bytes": 2816736,
+            "sha256": "fa17cbffcba886c81d7e30fbb839bcb97932cedb8b38686ab06cc2c1e8cb4c99"
+          },
+          {
+            "file": "FantasyCards_Data/level0",
+            "bytes": 53792,
+            "sha256": "c3b66b8de85dac89542b03a7dd8e6a36cb655b299a956bc441a4eb81634a9cf7"
+          },
+          {
+            "file": "FantasyCards_Data/resources.assets",
+            "bytes": 7171704,
+            "sha256": "20602f26b8d50a90b2d615b8e8ca8a3b5282a7f20651e42f99056fe3ecfaa5ce"
+          },
+          {
+            "file": "FantasyCards_Data/resources.assets.resS",
+            "bytes": 97179248,
+            "sha256": "cf38bf6cefaf43acc57239266beb92ffc444bd2b7fe1c77b6d85e7ba23bf6e53"
+          },
+          {
+            "file": "FantasyCards_Data/resources.resource",
+            "bytes": 2647584,
+            "sha256": "2198ed94bf267d4f31972ce02d7ee5dd6b8832ba3d484149f9f5719d8f2282f6"
+          },
+          {
+            "file": "FantasyCards_Data/sharedassets0.assets",
+            "bytes": 432832,
+            "sha256": "3eb02f591217a23d930a266d8441ad92cecdb6a0e8e4badcfa8b1c8d8a15c854"
+          },
+          {
+            "file": "FantasyCards_Data/sharedassets0.assets.resS",
+            "bytes": 524288,
+            "sha256": "87a4847eade1de49f6aac782a74b9929acbdb3c0f8b36d7750474215f1880479"
+          },
+          {
+            "file": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+            "bytes": 611248,
+            "sha256": "b152bf0e1b6c31b8250eb7e0a8eaf216e58efbaa6993f732be147a89b6ca5f5b"
+          },
+          {
+            "file": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+            "bytes": 7828904,
+            "sha256": "d24dae84ab5128688d896d65acd61184056d7a8df5d0f8c8b6c4651e8e7138de"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+            "bytes": 29066,
+            "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+            "bytes": 2622,
+            "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/web.config",
+            "bytes": 11635,
+            "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+            "bytes": 33598,
+            "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+            "bytes": 2622,
+            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/web.config",
+            "bytes": 18802,
+            "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+            "bytes": 34056,
+            "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+            "bytes": 2622,
+            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/web.config",
+            "bytes": 18811,
+            "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/browscap.ini",
+            "bytes": 311984,
+            "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/config",
+            "bytes": 3815,
+            "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+            "bytes": 25817,
+            "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d"
+          },
+          {
+            "file": "UnityCrashHandler64.exe",
+            "bytes": 1669544,
+            "sha256": "40386d1da003ded4b5bd1d6afb93426882a01b3c3c53bd3318df785c331e38a9"
+          },
+          {
+            "file": "UnityPlayer.dll",
+            "bytes": 36784048,
+            "sha256": "851da827899734e8b3d56f7e4dbbd58210e58e4daef504e6b7472b9ee503914b"
+          }
+        ]
+      },
+      "Web": {
+        "Engine": "6000.3.26f1",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "5662766",
+        "Duration": "00:16:36.6856730",
+        "Errors": "0",
+        "Warnings": "6",
+        "Content": "fm-classic-0.1.0",
+        "Revision": "fm-detail-2026-10-27",
+        "file": "Artifacts/Builds/FantasyCards/Web/BuildEvidence.txt",
+        "sha256": "37825378b5c599b032cc45e4bf68a8e7dd355eca3f46faee7b247c79e71f6cbb",
+        "files": [
+          {
+            "file": "Build/331bd385d8066485836fe0d858b30e46.framework.js.unityweb",
+            "bytes": 89894,
+            "sha256": "ed4c4ed37fec1604c2ee37c6a179e41de226e7055b763f30821f87998484a05d"
+          },
+          {
+            "file": "Build/441157597bdcbcbe018c24452303d7b4.wasm.unityweb",
+            "bytes": 13146314,
+            "sha256": "fba48b4dfb2d6bdf2b7c333ceb32a9bda7142121814f22fee8f964abf293fbc2"
+          },
+          {
+            "file": "Build/a4867b85992aee1f879625bf8f72f284.loader.js",
+            "bytes": 47860,
+            "sha256": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7"
+          },
+          {
+            "file": "Build/d6d18f2df7dcb34f80d7a4a8a43a2e28.data.unityweb",
+            "bytes": 82854992,
+            "sha256": "d991f3dd339e5c584396e63a2a3b799361fda40e64f85b8dd58df250ca8a73b7"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt",
+            "bytes": 2282,
+            "sha256": "35518412e1cd06e8310fc987941311538328b5b2f3954a75acee51b6a1baf8d3"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/battle.mp3",
+            "bytes": 1221493,
+            "sha256": "752d3726853b8d8e3e6b7dcb5f9ed3382f9893aeef4b7307e66502cdb3a999c2"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/battle.ogg",
+            "bytes": 1405347,
+            "sha256": "e72d5a96e33835a25885977c312c2b31a8589f7baf5d79fda970a9a5207b992d"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/deck.mp3",
+            "bytes": 432595,
+            "sha256": "e8af03c908ea97968d44fa9e855eb2cc2455c6d2aa858239019a16d2a4cd9e22"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/deck.ogg",
+            "bytes": 420076,
+            "sha256": "2d86efd77128b4c43c63bc40483cc69ab399935ad7e91e03bb8884e0f21b0040"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/lobby.mp3",
+            "bytes": 670807,
+            "sha256": "91fec1767ac8a0385a40eb1e4ff7df8fb43db4301ce01bd8e79c8a05bfb24b08"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/lobby.ogg",
+            "bytes": 681274,
+            "sha256": "897b2a946584e9e2572d2723b32f040ffba1e7d315d3fab5570b4f3dfafeb85a"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/manifest.json",
+            "bytes": 4819,
+            "sha256": "d92ea8a5c8f1bacf8c7ccac0f60b80ff5a465de08b96185cb75fec1aa6928210"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/title.mp3",
+            "bytes": 405442,
+            "sha256": "d56372cae809635d95a6300507e1b3e9823b7be2ff606dcce9ac3c6dfcee620b"
+          },
+          {
+            "file": "StreamingAssets/Audio/ModernCard/title.ogg",
+            "bytes": 396976,
+            "sha256": "7ea53aeba03018c99c76cc6ebee6498a7adabffb8c9dd525b8c6ae11d679d1b1"
+          },
+          {
+            "file": "index.html",
+            "bytes": 21655,
+            "sha256": "5ed5b8b545f376d4f2776bd5801c7d3af9ee423d404b8360755ef713dad6ab22"
+          }
+        ]
+      }
+    },
+    "PathOfDawn": {
+      "Windows": {
+        "Engine": "6000.3.26f1",
+        "Content": "gospel-0.1.0",
+        "Revision": "gospel-natural-2026-10-27",
+        "Target": "StandaloneWindows64",
+        "Result": "Succeeded",
+        "Bytes": "322908131",
+        "Duration": "00:00:33.8634680",
+        "Errors": "0",
+        "Warnings": "1",
+        "file": "Artifacts/Builds/PathOfDawn/Windows/BuildEvidence.txt",
+        "sha256": "340501dee92f17dc19fa0f3862de330b928400fc75217d2fac3e9d29102feda5",
+        "files": [
+          {
+            "file": "BuildEvidence.txt",
+            "bytes": 190,
+            "sha256": "340501dee92f17dc19fa0f3862de330b928400fc75217d2fac3e9d29102feda5"
+          },
+          {
+            "file": "D3D12/D3D12Core.dll",
+            "bytes": 4725304,
+            "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052"
+          },
+          {
+            "file": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+            "bytes": 611248,
+            "sha256": "b152bf0e1b6c31b8250eb7e0a8eaf216e58efbaa6993f732be147a89b6ca5f5b"
+          },
+          {
+            "file": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+            "bytes": 7828904,
+            "sha256": "d24dae84ab5128688d896d65acd61184056d7a8df5d0f8c8b6c4651e8e7138de"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+            "bytes": 29066,
+            "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+            "bytes": 2622,
+            "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/2.0/web.config",
+            "bytes": 11635,
+            "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+            "bytes": 33598,
+            "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+            "bytes": 2622,
+            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.0/web.config",
+            "bytes": 18802,
+            "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+            "bytes": 1605,
+            "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+            "bytes": 60575,
+            "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+            "bytes": 34056,
+            "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+            "bytes": 2622,
+            "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/4.5/web.config",
+            "bytes": 18811,
+            "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/browscap.ini",
+            "bytes": 311984,
+            "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/config",
+            "bytes": 3815,
+            "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662"
+          },
+          {
+            "file": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+            "bytes": 25817,
+            "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d"
+          },
+          {
+            "file": "PathOfDawn.exe",
+            "bytes": 667136,
+            "sha256": "eb143ead6441b6dd9d7d145adb85410e9389fb3878899ae537e8c9869cce38fa"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/FirstGame.Shared.dll",
+            "bytes": 13312,
+            "sha256": "284dbe66ea5f1391d4c15ec4ddb8dc8db05d8e6e3be2434da717f521bb8f2c59"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Ink-Libraries.dll",
+            "bytes": 257536,
+            "sha256": "ca97e0bb7516693b7423e72007295fbcc39b6d11ffbf9c1fad6b12227eb1cf98"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Ink.dll",
+            "bytes": 6144,
+            "sha256": "ebc7a7c013e02b32e08aae6ecb8cf4f5b8843b92f9e51fd860dc8d55c735480a"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Mono.Security.dll",
+            "bytes": 241152,
+            "sha256": "82df31404def10ffd69c09e3a8c454e76552f3a37675d1b7b8c743cfd3d1af6f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Newtonsoft.Json.dll",
+            "bytes": 691712,
+            "sha256": "a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/PathOfDawn.Authoring.dll",
+            "bytes": 4608,
+            "sha256": "746aafa6513deb054452de0ab0fbabd464ddd43f515852c4acbf8c1d19263156"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/PathOfDawn.Core.dll",
+            "bytes": 34816,
+            "sha256": "cec6c801e42f68046ff7ec8dba63590e952a4fba9ad4766e47b388d1cd1a9f1f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/PathOfDawn.Presentation.dll",
+            "bytes": 148480,
+            "sha256": "419fa58522e7806b6c8de47ed0a95c9bdfe882102c4769831065650260b7f11f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.ComponentModel.Composition.dll",
+            "bytes": 257024,
+            "sha256": "9373a420101d4c674b9f74bce93a45c58ddb3548c130d9b65ab87235d0a4ed30"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Configuration.dll",
+            "bytes": 124928,
+            "sha256": "d3acb14b8ebaf7482d2d3e26e8c04685299e2b471a513a30508bd0cab8336354"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Core.dll",
+            "bytes": 1113088,
+            "sha256": "ebf140bf5f8d49ccac20c14935625b0ae0a46c30aa4f90b2808f3b9678822470"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Data.DataSetExtensions.dll",
+            "bytes": 29696,
+            "sha256": "79a01061129709358567a9254684ba52ba66371e01e0354e7fa4852a9f62e59f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Data.dll",
+            "bytes": 2125312,
+            "sha256": "5d0807269bfcf112aa844951232ef105bbb642abb1e14c2e78dd70fb9245e98a"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Drawing.dll",
+            "bytes": 489984,
+            "sha256": "76dca8fbe098c285b03de79369f9f2aa141dec44de99ebcc0478c7e762024204"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.EnterpriseServices.dll",
+            "bytes": 44544,
+            "sha256": "d8a3d6c1929ec028793ff07df92781c03ebb38c63005d4c12c35e3116d04fcaf"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.IO.Compression.FileSystem.dll",
+            "bytes": 18432,
+            "sha256": "40ef91246d44d6c4d8a1505e1210b0c54963a12938ba0458959bb064d62f36f4"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.IO.Compression.dll",
+            "bytes": 114688,
+            "sha256": "7370dc2d3a6f02dbda1a69ca596f2ae96fc464809b3bbca6071fc1fc1edfbb2d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Net.Http.dll",
+            "bytes": 122880,
+            "sha256": "c46d5b5dc68af8ce1b34e8ace4372b157e2e85ab63d6b5eea938ca71dc7fb064"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Numerics.dll",
+            "bytes": 119296,
+            "sha256": "74f6771aedd33262470e8e653fc0f4e04a659bcdadbeb44b2f8826fba7053f77"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Runtime.Serialization.dll",
+            "bytes": 934400,
+            "sha256": "2aa92fb930200ddb3c9c3ffaaff39bd6cdc6d689f19614f6c3b84a15060800f0"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Runtime.dll",
+            "bytes": 12288,
+            "sha256": "e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Security.dll",
+            "bytes": 320000,
+            "sha256": "95a29120e164e5bdb7ff5dcb2cb4641e5ea0aca7c1ad0854b0e9b2b0ff5abe2d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.ServiceModel.Internals.dll",
+            "bytes": 215040,
+            "sha256": "6738a31088136d38a50354371feb83a4fd1558acca2a5f8b165c34a859e08c47"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Transactions.dll",
+            "bytes": 35328,
+            "sha256": "cfac784408e3b7da6c6e94ec04c162c6d902372fab19353c02aeda3464ce185f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Xml.Linq.dll",
+            "bytes": 136704,
+            "sha256": "ed219710472b837fddf45cc73c912e04b4d6b8ca833ea074ec1f73bc00157b05"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.Xml.dll",
+            "bytes": 3160064,
+            "sha256": "f90799a0c38f3d45e390f9768ab467bf681a052e1b807f4c59fabef5f7edaffa"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/System.dll",
+            "bytes": 2641920,
+            "sha256": "9e8a5190797e35428b1ae9bce6d47d39a1dbc3e974f14239e44678913dc6194a"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Burst.Unsafe.dll",
+            "bytes": 5632,
+            "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Burst.dll",
+            "bytes": 296960,
+            "sha256": "29211aec59de714b1472a1f9d83f188c481fa7a6e3d0010c98768fcbf0e01a75"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Cinemachine.dll",
+            "bytes": 456192,
+            "sha256": "2bd2d93660f30c5e53da586276db62579c607ca90309be37cdc898043aa2b4cd"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+            "bytes": 5120,
+            "sha256": "ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Collections.dll",
+            "bytes": 432128,
+            "sha256": "0c0eda4cdda8ce34120a3b76604cb11fc5b680d65c278198fe214fc71f2f5416"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.InputSystem.ForUI.dll",
+            "bytes": 15360,
+            "sha256": "05b4d104df5beaa5b07b18b5328881f22d508b254a7bcda085391e11c38456f5"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.InputSystem.dll",
+            "bytes": 1090048,
+            "sha256": "48a23c18d1af84658692932775414c1f99f1d6275eb1b83ff7320dea812674ac"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+            "bytes": 4096,
+            "sha256": "86836deb2cabd452ba2a9815626b8a330d7c3f256615fe76bdea7cd19e3fb7bf"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Mathematics.dll",
+            "bytes": 737280,
+            "sha256": "0846c6c8bd24b7590479aaa8736f7e942b3d6a9113de9df096399271b434f72d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Pipeline.Attributes.dll",
+            "bytes": 6144,
+            "sha256": "1a45381ed24d26c776bc57d499858407a567ce89a59b3aeffbd91564407bf2bb"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+            "bytes": 7680,
+            "sha256": "9aab2485c74de562597fa53d006acb11302a6b1fdc940ea8cb1f55571a628ea8"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+            "bytes": 4608,
+            "sha256": "f16de38a4bf3ce75a66bfc72577d3d92d0f5075d1d93e0bb1538e692d5a1642f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+            "bytes": 1131520,
+            "sha256": "0a755c3eda8539ce8fc674040eacbec50e96d229201a47aeda6216d141feb659"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+            "bytes": 3584,
+            "sha256": "c4955f5448f6c69040281c4da06b27bb91f19fa9ae990ea0547c00a5b022a921"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+            "bytes": 220160,
+            "sha256": "67abe4c4b764169ad9a2f7af60473e70ba328a1ff23b77efd1eca64298d8ed98"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+            "bytes": 3584,
+            "sha256": "25dabc06b4fe2999a26738f134289329d262dc6d838c7062d5ae36eb787dd334"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+            "bytes": 219648,
+            "sha256": "22e5f54eb5865ea01225c64bb9d62a02fe1d47ed9024cb0469864b137809a6b5"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+            "bytes": 4096,
+            "sha256": "700e667bc8269974eb7b35f41ab90de265fd21080cbc0131c7bbd716fb1b9a65"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+            "bytes": 699392,
+            "sha256": "af41349ce260355b9329f3c1ce7cf09bd02b93ba11573096f9c12c0a51ceaca8"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+            "bytes": 3584,
+            "sha256": "72132a8852cfef46eb726140daec13f3b6e9a2976a9fe818d81b6b7972b8b803"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Splines.dll",
+            "bytes": 144384,
+            "sha256": "8fdc190dca0eded13460ad4bb7881ece87274849022b9e7dd41864773862288f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.TextMeshPro.dll",
+            "bytes": 436736,
+            "sha256": "88989a6340bc39991b60098c39c87f4af3e376ded239655d38e03052c545f6ae"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.Timeline.dll",
+            "bytes": 121856,
+            "sha256": "058ebca9ede35c9ad9b827e746e88f093e5d2fb2f09523894617380c877850a0"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+            "bytes": 90624,
+            "sha256": "c845dceb736254111d5b67f7ce929e18c066a2ec30071010c405e71a87390e03"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AIModule.dll",
+            "bytes": 77232,
+            "sha256": "ba39f35f31d89b3d726002db219fb4f4c75de24d2dbd31fe5e6eeb5e8fe9404c"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AMDModule.dll",
+            "bytes": 21928,
+            "sha256": "d618b3cfa47906c136c1def44728e69c1d16e264b4ec65a4bf47b419300728b2"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ARModule.dll",
+            "bytes": 25512,
+            "sha256": "e292c7b2f67464d1f0e34926a99a35b9b4d1450fdef7865f8f103657d7a662b7"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AccessibilityModule.dll",
+            "bytes": 51112,
+            "sha256": "9413f549098eba189f2fdd506fdc65d7edde3bbc2866f041e3ad786756dd66c9"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+            "bytes": 125360,
+            "sha256": "a473e505c63cfa4558fd3f553b3a8d57376bdb2b683fc8e37090883051bd2698"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+            "bytes": 121768,
+            "sha256": "22588a69d0e54c5d794c0ead557f6cd4c5e9eb15c5198b6dbd4b3aad09b9e031"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AnimationModule.dll",
+            "bytes": 225200,
+            "sha256": "f1762f5fb06252b4dd5c7de2bd5748cee31edb800a749e5be88e98cb850e8683"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AssetBundleModule.dll",
+            "bytes": 41896,
+            "sha256": "efc4255fd77f62033bf1cf757d5b4e7d26d08fe2f437678753273898132f4a1b"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.AudioModule.dll",
+            "bytes": 142760,
+            "sha256": "a50256c632695a1a16ce1a81f407a8767c8039d4b641550582e3a4ec5728ba4f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ClothModule.dll",
+            "bytes": 36264,
+            "sha256": "a3d741b647415173bdaedeb611ec6e6fdb863e8d7f31bc1dc937a9b0d08ff721"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ClusterInputModule.dll",
+            "bytes": 28080,
+            "sha256": "00417d9c78620b833db40149d67faad19c16ac77160e5123719e30e1174bd7e5"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+            "bytes": 26544,
+            "sha256": "efc5c5909ffd34c979d6ef8c8ba1b3b47b300bb75d5234c5b9d2e49b0af3d6da"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ContentLoadModule.dll",
+            "bytes": 32688,
+            "sha256": "13026b7b91158cfe87ede96ce98ce3f377549d0d15fb83eff86286797492e031"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.CoreModule.dll",
+            "bytes": 1985968,
+            "sha256": "9e3de7931374a2c77b09de567b00a70c69a5aa758f03a7e86f640c28c1e5a9fa"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.CrashReportingModule.dll",
+            "bytes": 26536,
+            "sha256": "73076aa15f7ab4460b42cf7cfa9df6929037d8990a0d045d1b094a096a50d57b"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.DSPGraphModule.dll",
+            "bytes": 31664,
+            "sha256": "9e1c9e6f4552a93710fc47ae301c66ba764056781ad3c62de2aa1d0f050b08a8"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.DirectorModule.dll",
+            "bytes": 41896,
+            "sha256": "798e180fdc62cb3a1ef784d4b8282b45635f94050c2f3df15b5a01c7da0087d3"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.GIModule.dll",
+            "bytes": 24496,
+            "sha256": "dfd6575ef5bf41823f0daf36ffd32bc6a84f23e720066c3f3d0e3e7e22dbb350"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.GameCenterModule.dll",
+            "bytes": 45992,
+            "sha256": "84187b9aa3ddb798ed3d10e98ca31dde302ebfe0de9a83ce81ae45e5e1ed2a16"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+            "bytes": 14248,
+            "sha256": "13799b96205bac9d5035d0252b6f48a44237ec3591101e1a4a341695414dd796"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.GridModule.dll",
+            "bytes": 30640,
+            "sha256": "ad7549fba12e92dab18cfe10809f13ed25a8eb64fe6c2269a6745d05ded1e74e"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+            "bytes": 109480,
+            "sha256": "fd21db4b0eb1b4c3bec203302923d7dc08da58c95c19be24b9296fefed1b51c5"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.HierarchyModule.dll",
+            "bytes": 102312,
+            "sha256": "39ae4c794800fecd274ada0db3ef1602b6a0153b7c0bd516fa3b47ae1945b6ca"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.HotReloadModule.dll",
+            "bytes": 24488,
+            "sha256": "75c1db04e92ac9d5f7d24e78f65c6262bf628384abc5bea4a6f771405c49faa3"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.IMGUIModule.dll",
+            "bytes": 214448,
+            "sha256": "8ba45dbf28d35692ac54aa7c0c29d9844c2f94c7cdd116b50caad919c70e924d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.IdentifiersModule.dll",
+            "bytes": 16816,
+            "sha256": "58e09982007a313c0b70723fb99c582be84c4d0da1c5e1c8db4a90cb2b54e9a6"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ImageConversionModule.dll",
+            "bytes": 31144,
+            "sha256": "f26022563e96dd347f2eb638f320ddff0a9285bbce0b9ac8bd983213bda8cd6e"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.InputForUIModule.dll",
+            "bytes": 57768,
+            "sha256": "80773fc98db5dda31a9e0755f6be3dbf00ff6e457b04dd954d7b72358de0838c"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.InputLegacyModule.dll",
+            "bytes": 45480,
+            "sha256": "d1c30e150af23c16400ef2f6ece52e2155f8334eb6b2a86ee3cafb3eb53150ca"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.InputModule.dll",
+            "bytes": 28584,
+            "sha256": "17e0fe1bec245c1ced0027f592cd45cace36644310e359742e5d275c2adcca19"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.InsightsModule.dll",
+            "bytes": 14256,
+            "sha256": "bbe4d6412954a4b38180f1bd5eb062d5d159e038516717fd4e112e685e417691"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+            "bytes": 27048,
+            "sha256": "d7c70045517ff7ae508c35c2c8bb94229c04d3c6a0e15893f12c08d04f82c093"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.LocalizationModule.dll",
+            "bytes": 27056,
+            "sha256": "c8493e9199ad1b1e60d5a155df165bb0df55602982042358a448e2fc203c5ad9"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.MarshallingModule.dll",
+            "bytes": 83880,
+            "sha256": "f82a545b2f05feafb08cbff66dfeb22f578adcb88a1f198d543e6f614e9ae2d5"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.MultiplayerModule.dll",
+            "bytes": 17832,
+            "sha256": "07365a8bb981493ca3e870f5b2964354e48b41fd4ea6a2f9e8ae4338f34cecc7"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.NVIDIAModule.dll",
+            "bytes": 40880,
+            "sha256": "3018adec1b670b25fae6e9f4fb0af07252b4186fece66431d6d6d5276562458a"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+            "bytes": 171952,
+            "sha256": "ef26b7d39e56208595f230da6fc9f11512299e81a9aa46426b933690490eadff"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+            "bytes": 25000,
+            "sha256": "585d98090f0a26af7a46d46b454a73d4eb23570c0a2452e3988d3b7a4ac9a210"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.Physics2DModule.dll",
+            "bytes": 586664,
+            "sha256": "2a485ecfbafad8274361f6ac7d35070f192a283521f01b4639951b5eee2f39dc"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+            "bytes": 14256,
+            "sha256": "2b5e11d24b92d3e8787d39f4d5b4d6c49ea4af4389fb4d74b91d20a31d1d6000"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.PhysicsModule.dll",
+            "bytes": 183720,
+            "sha256": "e48a765c1693241cfc4dda50c871cf097872b31d1b9166aa5d721d3e5a69dccd"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.PropertiesModule.dll",
+            "bytes": 134056,
+            "sha256": "d861efc231122a370481ab8c43f4010b4e8a2786b321ff426bfe7d075bc35be6"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+            "bytes": 25520,
+            "sha256": "ec4556d29fe23c471c9d44a53269911a47e7c0e585a56336bdf1ae488d74d145"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+            "bytes": 24488,
+            "sha256": "bdf07783bcbaa6db1aa258829b5d2c923452225c443a0e3f4b56fa367649ec68"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+            "bytes": 26544,
+            "sha256": "c27da2faa606e13fb2b2d3382fc5c2a81a44a06ff7aafeb6dbbf4a2311c39526"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ShaderRuntimeModule.dll",
+            "bytes": 25520,
+            "sha256": "392db35017695a340ab20e06b420e1c9ca0b78938f7a385e428a4209c9ce7dec"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+            "bytes": 24496,
+            "sha256": "3a33103c6bc3294e03d1bc379b85c8c1d03dbaa38741c0c3a20238b96ab7aca1"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+            "bytes": 38320,
+            "sha256": "adb3643f1c09fe18eda362cea402d06c48456b978e61552b8a83e92cd7c69745"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+            "bytes": 28592,
+            "sha256": "67a31f21e1a3dd7fef9330a4898f1b124bf9cc0ccc2e2a34f469c2bb1aed46cb"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+            "bytes": 32680,
+            "sha256": "ab5ccec7face44492c200ea840af221699e73d14e66dfd335bc6df54f9609785"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.StreamingModule.dll",
+            "bytes": 26024,
+            "sha256": "6f11e62f98109666fdb3abef6bb9d445492115b87efb7dae2e75ad37a13f90f8"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.SubstanceModule.dll",
+            "bytes": 29096,
+            "sha256": "6a296fb26a2072d9dd53ee7b2c65e29b6b1198c8d6abbf526bf85f74f861418f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.SubsystemsModule.dll",
+            "bytes": 41904,
+            "sha256": "3e66e3da74a0bab864c1ca21ed2113dafb23548f56ffa625f064b5ebb592b527"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TLSModule.dll",
+            "bytes": 32176,
+            "sha256": "67bf3eacdde2cdcfd91e8bd643546cce0fd8001bad60c5ecd5bbad049da1b1c8"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TerrainModule.dll",
+            "bytes": 134056,
+            "sha256": "b7b7d60e4ba0e0321ac9e7f669fb45bd7c8ddda4e1545026c2d980f88aafb4cf"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+            "bytes": 25512,
+            "sha256": "7184337244ebf5a50cb17c5fdfee86f68121a5bd1dff685baba4509d20b03384"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+            "bytes": 91568,
+            "sha256": "f27fb10a2c7163da8dffc4dc8106354d7c39925b81466560355c4ccf4179a6c7"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+            "bytes": 334760,
+            "sha256": "ee1a223e336e53bc94ffb8b7051b74e0631c14f645df922c0055872d1b58fe50"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TextRenderingModule.dll",
+            "bytes": 39344,
+            "sha256": "fa6d3b1167a6a101033dba62b9b24efd1af0bd6cf04e72a93daaf97f47979ff7"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.TilemapModule.dll",
+            "bytes": 58792,
+            "sha256": "c0f5aae8b9623a0f0e2ed77db16230e4cdc49750eee4c542b64da167fcfe0192"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UI.dll",
+            "bytes": 263168,
+            "sha256": "b3905371555bedf782b2f1e4862135193ebb8fc7ebf320491c9211dd0d6a426b"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UIElementsModule.dll",
+            "bytes": 2453424,
+            "sha256": "0104eb031aa1c342177d06f8ceb18824a1678f6d9b44523316a533ec5aef86ea"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UIModule.dll",
+            "bytes": 50088,
+            "sha256": "72fc11bc7df760dfebc17a2a6c256cec119e339c466aa738c9fac2ac5243b4e1"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UmbraModule.dll",
+            "bytes": 24488,
+            "sha256": "e0afc364c4a19f6235d5cfa91d0cae4de7257f94f4090379ce497a0d9593a927"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+            "bytes": 35760,
+            "sha256": "b1bdbf4ea453ca8a09c16326cdbbdaf70c8767ea0aa177c2c98fb08dd5181755"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+            "bytes": 60848,
+            "sha256": "d341faac2e992bff7882fc85363143d9d4a042ac207ae089fcf03230253f097b"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityConnectModule.dll",
+            "bytes": 27568,
+            "sha256": "15f2dcce0f7815d7594a934ff832007f8a6c5191a57c723f9eb07aef9bdd5298"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityConsentModule.dll",
+            "bytes": 16304,
+            "sha256": "258b2697da2354da78154eaade613800789baff3692d161034e46ea7c18f6a59"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityCurlModule.dll",
+            "bytes": 26032,
+            "sha256": "e4dce8fef34f42d3d53ccd203440e66f438a3a3cd7deff73a4f1bc605ffcca72"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+            "bytes": 28592,
+            "sha256": "3a3b8014af189d1338b28b2de21438c36dcf91d7d78758fabeb5f64ec2ca69c4"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+            "bytes": 28584,
+            "sha256": "af45256b9c06caea7a962d1c1f329c945016b606a35c793314062103048edb8c"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+            "bytes": 70064,
+            "sha256": "392183a43363663ffe7d622bbceec1cce6efe4fcc3d74f10d777a8883585d494"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+            "bytes": 27568,
+            "sha256": "f17e96a9cba1d329c189b9337cef24a7413604ea5aee241e131f0b90ed8ffa4e"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+            "bytes": 36784,
+            "sha256": "5be8ff5a42c94e34d123f40d54d66181565c7780c21c4473ab9b8f845ce7cbb9"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VFXModule.dll",
+            "bytes": 78256,
+            "sha256": "6ba6c7868736da3d46ed89c48d850757c26c34e57fc7ff27aae7ba678b80498a"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VRModule.dll",
+            "bytes": 31656,
+            "sha256": "5df47299a7bdf80c03097c27f4ca535fc1ebdd4db9228df4d7b695c79ae8a250"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+            "bytes": 254896,
+            "sha256": "0de3129e30ffa373fb72dd8df3b81c2d5e44ada18cdfd008ed9ec8194ed7a743"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VehiclesModule.dll",
+            "bytes": 31664,
+            "sha256": "eff49c1fb43845f3aaa7dd59ba8af91bd8f2d1495e463f55c4d2995cb41073e4"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VideoModule.dll",
+            "bytes": 49064,
+            "sha256": "31f930dc5a532bb00b3f3f57f279987faa3dd7cb0c8e9013659b8b0f0d92bc4d"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+            "bytes": 42928,
+            "sha256": "03bc3fd50942b64894be32c885eeaa1e59c8c1777461f72f0fd70d168c4f9c7c"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.WindModule.dll",
+            "bytes": 26536,
+            "sha256": "2aa9ffe8d067f79245ab4b3fdad6cf3b24c94e4ae9f3d9e641d9ab53bdb188e7"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.XRModule.dll",
+            "bytes": 88488,
+            "sha256": "881e556460fb5181a78644d51af7d4924fa386f1f45b5ffffbc3d84d6e57bf30"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/UnityEngine.dll",
+            "bytes": 197544,
+            "sha256": "58592c4bb7ffec04593f098c3f88f4e63d961de730b44091f889ece9c1b62ccb"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/mscorlib.dll",
+            "bytes": 4632064,
+            "sha256": "194417662b72e9fdc29df44aa07fb693a9cf2194d84e327231f3eeff1104ae0f"
+          },
+          {
+            "file": "PathOfDawn_Data/Managed/netstandard.dll",
+            "bytes": 90112,
+            "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5"
+          },
+          {
+            "file": "PathOfDawn_Data/Plugins/x86_64/lib_burst_generated.dll",
+            "bytes": 450048,
+            "sha256": "bbfc0ceecc2a26f7ec69baf9c82417c5038da71ca15a430fa4c67a0f644e05d2"
+          },
+          {
+            "file": "PathOfDawn_Data/Resources/unity default resources",
+            "bytes": 5883716,
+            "sha256": "32b58bdb9cf090212b46a8ca7436dcdae89e4ef43e9d55a835233c21d1347734"
+          },
+          {
+            "file": "PathOfDawn_Data/Resources/unity_builtin_extra",
+            "bytes": 397720,
+            "sha256": "72f6d57e89fd590a1a223b498b7b79b061a552c233014178e53d1ea66aaa8f5a"
+          },
+          {
+            "file": "PathOfDawn_Data/RuntimeInitializeOnLoads.json",
+            "bytes": 4075,
+            "sha256": "6827837974e098e3c88d38062bcc51d76fc7d41026fd7bf2915a3f358446d1fe"
+          },
+          {
+            "file": "PathOfDawn_Data/ScriptingAssemblies.json",
+            "bytes": 4282,
+            "sha256": "7eadddaeb7432cf9c21b78ed199c2e934a64548bdaf5e8d3cabba9bf8fffd3f2"
+          },
+          {
+            "file": "PathOfDawn_Data/app.info",
+            "bytes": 20,
+            "sha256": "a12e10d7b6e7448339ac7ed064fdad8e31dae014a4d43827ab4c5f51168a4ce6"
+          },
+          {
+            "file": "PathOfDawn_Data/boot.config",
+            "bytes": 156,
+            "sha256": "71f62d5d471667be99a6549a6619294242af2b44258ea31113b4d65f9a940b15"
+          },
+          {
+            "file": "PathOfDawn_Data/globalgamemanagers",
+            "bytes": 252884,
+            "sha256": "f87702422956e07b0f11c29974afaeccbd6c89ff76fbbfb855d7a6b43da325d8"
+          },
+          {
+            "file": "PathOfDawn_Data/globalgamemanagers.assets",
+            "bytes": 526528,
+            "sha256": "19c15ee8f473564ee8d5ad23d8db897e467edb5e59890cd189fa51dc7c0998b0"
+          },
+          {
+            "file": "PathOfDawn_Data/globalgamemanagers.assets.resS",
+            "bytes": 2816736,
+            "sha256": "fa17cbffcba886c81d7e30fbb839bcb97932cedb8b38686ab06cc2c1e8cb4c99"
+          },
+          {
+            "file": "PathOfDawn_Data/level0",
+            "bytes": 1164,
+            "sha256": "245cc15b5ece63d80171fcfc13be4953bf0e149c6593ea3b9280c46f0835d89c"
+          },
+          {
+            "file": "PathOfDawn_Data/resources.assets",
+            "bytes": 27443032,
+            "sha256": "2a2c56a5f8d8e3817ba02c9acde248528fbe14fe87f939239821f50275848753"
+          },
+          {
+            "file": "PathOfDawn_Data/resources.assets.resS",
+            "bytes": 191392368,
+            "sha256": "8efaa7f7b182c7a6429c924a27372331de50e13afb1d53dd90d2b5a06c61cde6"
+          },
+          {
+            "file": "PathOfDawn_Data/resources.resource",
+            "bytes": 2017760,
+            "sha256": "a29fd9007064278381ef294bfb3c346869a6d3876d82f772ad768dd66cfffe23"
+          },
+          {
+            "file": "PathOfDawn_Data/sharedassets0.assets",
+            "bytes": 3844612,
+            "sha256": "ae1f315bfe9ba35b1ce34ba29d475db1ecc6ceaf937cf6368aad3402edd1e2c3"
+          },
+          {
+            "file": "PathOfDawn_Data/sharedassets0.assets.resS",
+            "bytes": 524288,
+            "sha256": "87a4847eade1de49f6aac782a74b9929acbdb3c0f8b36d7750474215f1880479"
+          },
+          {
+            "file": "UnityCrashHandler64.exe",
+            "bytes": 1669544,
+            "sha256": "40386d1da003ded4b5bd1d6afb93426882a01b3c3c53bd3318df785c331e38a9"
+          },
+          {
+            "file": "UnityPlayer.dll",
+            "bytes": 36784048,
+            "sha256": "851da827899734e8b3d56f7e4dbbd58210e58e4daef504e6b7472b9ee503914b"
+          }
+        ]
+      },
+      "Web": {
+        "Engine": "6000.3.26f1",
+        "Content": "gospel-0.1.0",
+        "Revision": "gospel-natural-2026-10-27",
+        "Target": "WebGL",
+        "Result": "Succeeded",
+        "Bytes": "7333",
+        "Duration": "00:12:55.2730080",
+        "Errors": "0",
+        "Warnings": "1",
+        "file": "Artifacts/Builds/PathOfDawn/Web/BuildEvidence.txt",
+        "sha256": "ef6058154448279c92ba6557ba2d114fff69affddaec556d0561f490896372be",
+        "files": [
+          {
+            "file": "Build/2f14964ca6af418c2cecedbdb1d23dad.wasm.unityweb",
+            "bytes": 13380133,
+            "sha256": "2a410e07066489a5ded4abc7338851382fee8f7fd42fb845625debf4c4c48267"
+          },
+          {
+            "file": "Build/a22ad982946719089680ee441bbfc0e3.framework.js.unityweb",
+            "bytes": 89757,
+            "sha256": "0443e52eca1ea7c1a3b7a873d11466f193ac7dbfb6e99c12e8e22b87f42cc439"
+          },
+          {
+            "file": "Build/a4867b85992aee1f879625bf8f72f284.loader.js",
+            "bytes": 47860,
+            "sha256": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7"
+          },
+          {
+            "file": "Build/ca9518b01fb82c53987a958d43850b28.data.unityweb",
+            "bytes": 99305054,
+            "sha256": "bd8191346036c3d2b87e792f349e076169e50371fa98361980f814e08010062b"
+          },
+          {
+            "file": "index.html",
+            "bytes": 7333,
+            "sha256": "00c090cf952ab463e88d540151e325b95b87035981b3a412d433188f2bad9f51"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "Desktop720": {
+      "FantasyCards": {
+        "checks": 45,
+        "approvedOriginals": 9,
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/title.png",
+            "sha256": "603fa41ad46ef209a1ea296e8faa4d9abae26900c2b6c9199b07fe65755ab5e0",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              77.43342489063907,
+              68.54097231975794,
+              60.35062695978906
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:06:09.331726+00:00"
+          },
+          {
+            "name": "profile",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/profile.png",
+            "sha256": "ff06427fd44fbdfc5c74b21abff3c19c82accd8b2d815af7fa8df2424b8973fb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              66.88568680108797,
+              59.77379718002373,
+              54.540773282587736
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:06:47.758141+00:00"
+          },
+          {
+            "name": "profile-continued",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/profile-continued.png",
+            "sha256": "af7778c16353450f1867df8527a36a91a4db8ba66b8b6cd4d2d83ca8adb9a32d",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              66.8864428109808,
+              59.774305625225495,
+              54.54125857776563
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:07:36.853336+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/lobby.png",
+            "sha256": "5ddc8afb398ec4cc829b22ac2c6c1c65b758514b46a9f2f2dc0a6615adea00fb",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              43.974258560748375,
+              38.532475216923395,
+              32.56534694777289
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:08:14.088239+00:00"
+          },
+          {
+            "name": "new-legend-card",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/new-legend-card.png",
+            "sha256": "15f4b18138efaba7f8709cfbbbbc43da97d9c2d6b3bcc9c07a9a8ee0a1598e09",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              60.80777779185135,
+              46.579184922165695,
+              52.0379599048067
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:08:47.718726+00:00"
+          },
+          {
+            "name": "backfield-terrain-adjusted-1",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/backfield-terrain-adjusted-1.png",
+            "sha256": "361ccbe5c15b6afafc419f95b40e55ef1ab80e7d960bc6ce41bd0673fcd40412",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              45.83726665386297,
+              41.44642872744001,
+              36.3488962684108
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:11:03.309545+00:00"
+          },
+          {
+            "name": "terrain-detail",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/terrain-detail.png",
+            "sha256": "80207dbe1b53e23bf9764781e5c276beb416002ac4ab47685487f187faee372a",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              61.69515063180352,
+              63.888338037887294,
+              46.44110018750122
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:11:47.508050+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/saved-battle.png",
+            "sha256": "04834ff263c66e938d565e7ea31f22aab2b8963179ad3a22a15a6efda1284abd",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              44.44310125182604,
+              40.184684651765735,
+              35.94175359143427
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:12:18.014122+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Detail/Desktop720/FantasyCards/continued-battle.png",
+            "sha256": "364e1f4985b26ecaa994564442c6531b7507098b3230a41eaf220988883870aa",
+            "size": [
+              1202,
+              676
+            ],
+            "channelStddev": [
+              44.50906721449684,
+              40.22825680195181,
+              35.95754502874598
+            ],
+            "canvas": {
+              "x": 39.109375,
+              "y": 0,
+              "width": 1201.765625,
+              "height": 676
+            },
+            "navigation": 2,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:13:07.932348+00:00"
+          }
+        ],
+        "audioWindows": 5,
+        "file": "Artifacts/Validation/Detail/Desktop720/FantasyCards/report.json",
+        "sha256": "166ab69f7529a5f89c9fd266b1f3a64cb8d32504e726c9cb67225a8eeb228605",
+        "rawStatus": "failed",
+        "adjudicatedCacheRevalidations": 2,
+        "adjudication": {
+          "file": "Artifacts/Validation/Detail/Desktop720/FantasyCards/cache-adjudication.json",
+          "sha256": "804b8bda041532124ce11d963eb235c3ef305b6544375a8c4ce47e53a5eb5533"
+        }
+      },
+      "PathOfDawn": {
+        "checks": 47,
+        "approvedOriginals": 10,
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/title.png",
+            "sha256": "c424e209775bb1cfb53cbb5fb3a5a5e89e452a314212abac09145968722cc4ea",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              78.44413082570387,
+              77.10407681925219,
+              70.46816260803116
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:00:17.068344+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/temple-idle.png",
+            "sha256": "4f30f1632425ff857e5dc42980b079195d9e1d28bb2c0c246152a6120b4dff02",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              61.195340577041534,
+              54.01575522925225,
+              46.514153833080854
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:01:38.661751+00:00"
+          },
+          {
+            "name": "hero-rear-close",
+            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/hero-rear-close.png",
+            "sha256": "4f53b9077345a3b345baff5280a35f4c192cf11b773f128ad1adf7ae5ddea96b",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              61.18401347701519,
+              53.98869192444424,
+              46.643194818745606
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:02:59.871086+00:00"
+          },
+          {
+            "name": "hero-front-close-adjusted-1",
+            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/hero-front-close-adjusted-1.png",
+            "sha256": "47564943d669c086bdd557e6e167889c6a9ea0ea088bb637379320be84d70102",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              70.9723782227475,
+              67.94813498422607,
+              64.57852022669952
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:06:02.001232+00:00"
+          },
+          {
+            "name": "status-adjusted-1",
+            "path": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/status-adjusted-1.png",
+            "sha256": "81a159504f7d58d9af33a76f5dac4bf1d663ce458e80d46228d9e542f9b1169d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              65.51256472990629,
+              62.33398947482685,
+              57.22717315572591
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:10:17.753164+00:00"
+          },
+          {
+            "name": "hero-walk-compositor-0-004",
+            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/hero-walk-compositor-0-004.png",
+            "sha256": "e9f0b9344033fc67734012b35f78be0de2a8e52cb2f8835a1c999a68d2fd75fa",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              61.167132400843045,
+              53.37970756152823,
+              45.7465872720786
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-full-viewport-compositor-screencast-png",
+            "metadata": {
+              "offsetTop": 0,
+              "pageScaleFactor": 1,
+              "deviceWidth": 1280,
+              "deviceHeight": 720,
+              "scrollOffsetX": 0,
+              "scrollOffsetY": 0,
+              "timestamp": 1793074694.679619
+            },
+            "receivedUtc": "2026-10-27T04:18:14.758837+00:00"
+          },
+          {
+            "name": "hero-run-compositor-1-004",
+            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/hero-run-compositor-1-004.png",
+            "sha256": "f95fc31218f9f26870dd0b21fc35af6abba9a78928ebb0c16c75a306043f6d74",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              61.770032054235465,
+              54.040689017380856,
+              46.31984869390052
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-full-viewport-compositor-screencast-png",
+            "metadata": {
+              "offsetTop": 0,
+              "pageScaleFactor": 1,
+              "deviceWidth": 1280,
+              "deviceHeight": 720,
+              "scrollOffsetX": 0,
+              "scrollOffsetY": 0,
+              "timestamp": 1793074758.902669
+            },
+            "receivedUtc": "2026-10-27T04:19:19.014809+00:00"
+          },
+          {
+            "name": "gate-reading",
+            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/gate-reading.png",
+            "sha256": "e62e4d99445661ffc7dd8cb5e5bfdc9daf05aac1cb6508b4c80df9c1c6ac2ab1",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              88.53718218375933,
+              86.26128288771541,
+              82.84212961792828
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:20:34.904048+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/saved-temple.png",
+            "sha256": "07c5f9b43f5ea2c588f4700272ba53ae45a8823694cab6c157165e50563692f3",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              62.02784557653877,
+              53.816572884526146,
+              46.10372061802031
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:22:09.302104+00:00"
+          },
+          {
+            "name": "continued-temple",
+            "path": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/continued-temple.png",
+            "sha256": "e041625767c366c3172cfdd1e1c7a58c2c023b28c5bf74879649c74732346121",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              62.023982680830414,
+              53.81425896676634,
+              46.087798376355664
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:23:27.168575+00:00"
+          }
+        ],
+        "audioWindows": 6,
+        "file": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/report.json",
+        "sha256": "576f19e16a7d8c0da123b1cb686980ebd43793ad9c884e8d6c9684065d4a193a",
+        "rawStatus": "failed",
+        "ordinarySessions": 2,
+        "followupReport": {
+          "file": "Artifacts/Validation/Detail/Desktop720Followup/PathOfDawn/report.json",
+          "sha256": "841de7ed074866eec90e2e6530f10bc5c4f846dde75e3e843d9909176188d35b",
+          "status": "passed"
+        },
+        "checksBySession": {
+          "primary": {
+            "passed": 24,
+            "total": 25,
+            "rawStatus": "failed"
+          },
+          "followup": {
+            "passed": 23,
+            "total": 23,
+            "rawStatus": "passed"
+          }
+        },
+        "adjudication": {
+          "file": "Artifacts/Validation/Detail/Desktop720/PathOfDawn/followup-verification.json",
+          "sha256": "086c1bb970baaad55547c3c0f0441cc5d46342cbef619420253a17cddbe50dc2"
+        }
+      }
+    },
+    "Mobile844": {
+      "FantasyCards": {
+        "checks": 49,
+        "approvedOriginals": 9,
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/title.png",
+            "sha256": "fb274f2abb3183d9969f9568ce81cc6d54d436a096d467c1aff4e81bde9e9e48",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              76.73350516981404,
+              67.95157833136088,
+              59.79603330499033
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:16:11.137889+00:00"
+          },
+          {
+            "name": "profile",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/profile.png",
+            "sha256": "89febb1d6ea6ec6bf644cab93618a7df98f639c0ed0251ab938dae9c203b6a72",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.58031609736464,
+              60.60359556866932,
+              55.34113986660672
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:16:47.497611+00:00"
+          },
+          {
+            "name": "continued-profile",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/continued-profile.png",
+            "sha256": "31d6f86a8cc2e5dcb6dd3043b0feeedb656503e1c6a00b7819d0f3ae0df4c98e",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              67.58025172945781,
+              60.60351512100322,
+              55.34110738925823
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:17:38.832720+00:00"
+          },
+          {
+            "name": "lobby",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/lobby.png",
+            "sha256": "a87292d091cf27b7fb11314e23d86e1ce6eb1bf48ff85709b84511651963ba08",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              48.5160542261771,
+              43.73484417949208,
+              37.992185662203205
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:18:12.486849+00:00"
+          },
+          {
+            "name": "new-legend-card",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/new-legend-card.png",
+            "sha256": "d5ce1b69cf0697eee5d9ce7bf65b05c19a820fab6761f2e9ffc7cb1f375db77a",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              60.66071252012895,
+              47.02774146754934,
+              51.80731231147679
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:18:39.057224+00:00"
+          },
+          {
+            "name": "backfield-terrain-adjusted-2",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/backfield-terrain-adjusted-2.png",
+            "sha256": "1659c27c5b841c9ceb84d97d5c3c3d6d420812096aa3e4ef5d9205117a1a7bc0",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              44.638749638127926,
+              40.34282810371267,
+              37.34838532673014
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:21:48.346468+00:00"
+          },
+          {
+            "name": "terrain-detail",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/terrain-detail.png",
+            "sha256": "0df1913313948bdc363c2f67d24fb4e20185d516f283f6a4bdb4814c191c603b",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              87.51615197018545,
+              82.34325789560418,
+              84.42065234183224
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:22:26.752450+00:00"
+          },
+          {
+            "name": "saved-battle",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/saved-battle.png",
+            "sha256": "a351e5a7fdc73c1ab70a5b6e0e232465365febbaa891fe0753ed1686e423a6e3",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              44.32522085429711,
+              40.13997209133562,
+              37.279076685914475
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:23:01.068772+00:00"
+          },
+          {
+            "name": "continued-battle",
+            "path": "Artifacts/Validation/Detail/Mobile844/FantasyCards/continued-battle.png",
+            "sha256": "77aad85e2bbccf5d507a7397e1d26a14de7d24b4d495a2042a61f30d67b36849",
+            "size": [
+              616,
+              346
+            ],
+            "channelStddev": [
+              44.51705905180282,
+              40.263942173376535,
+              37.320457216377186
+            ],
+            "canvas": {
+              "x": 114.4375,
+              "y": 0,
+              "width": 615.109375,
+              "height": 346
+            },
+            "navigation": 2,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T03:23:54.307201+00:00"
+          }
+        ],
+        "audioWindows": 5,
+        "file": "Artifacts/Validation/Detail/Mobile844/FantasyCards/report.json",
+        "sha256": "59d45de51fecdefa36c115f99b12254f9cf53a3b5b3a515866113e86b63f7816",
+        "rawStatus": "failed",
+        "adjudicatedLocalMediaRequests": 3,
+        "adjudication": {
+          "file": "Artifacts/Validation/Detail/Mobile844/FantasyCards/media-adjudication.json",
+          "sha256": "23f797b33ffacfe46c0e581cea87b83062f1271056ca2d6d0e4f2de2484aa7fa"
+        }
+      },
+      "PathOfDawn": {
+        "checks": 46,
+        "approvedOriginals": 10,
+        "screenshots": [
+          {
+            "name": "title",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/title.png",
+            "sha256": "d296946d60aaf6d541d43e8e210a97e2b66b85908e72ad9454c65ff569db343d",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              77.51103931635717,
+              76.24336320774765,
+              69.77164256997075
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:25:48.887744+00:00"
+          },
+          {
+            "name": "temple-idle",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/temple-idle.png",
+            "sha256": "ff3e28656c30ff9279d99c4bf6ec03962b3d1e1a39d506153fb4bcac17e8328a",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              61.101091070227895,
+              53.86703061240455,
+              46.17297139069545
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:27:10.346153+00:00"
+          },
+          {
+            "name": "hero-rear-close",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-rear-close.png",
+            "sha256": "bd6a49d6c51042b4bec38a6f45fc69d7db2001f0ae0cdb55beb003212fa5d905",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              63.06476527240369,
+              56.20097162156308,
+              48.75178959403835
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:29:13.161931+00:00"
+          },
+          {
+            "name": "hero-front-close",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-front-close.png",
+            "sha256": "ffa3836909424d3f4724ccc468a8d1a4fc75d5483bab8512116188d7e01ce03f",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              68.0811977005341,
+              64.96499619224613,
+              61.84367707924307
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:30:13.969418+00:00"
+          },
+          {
+            "name": "status",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/status.png",
+            "sha256": "8d2c34b9f803cdcc6595f69a5b8c672bdcabd9a104e70d2e6bc2a2c3f2ff56a6",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              64.77797899370304,
+              61.670368259918106,
+              56.66571591602238
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:32:07.081932+00:00"
+          },
+          {
+            "name": "hero-walk-stepped-touch-compositor-1-027",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-walk-stepped-touch-compositor-1-027.png",
+            "sha256": "e8bbac4499ba586cebf0c3db4d5f40108ba8561ebe80f6f9f9dce93b0b4df3e5",
+            "size": [
+              844,
+              390
+            ],
+            "channelStddev": [
+              81.4692140952846,
+              70.15351471259851,
+              56.43069408283537
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-full-viewport-compositor-screencast-png",
+            "metadata": {
+              "offsetTop": 0,
+              "pageScaleFactor": 1,
+              "deviceWidth": 844,
+              "deviceHeight": 390,
+              "scrollOffsetX": 0,
+              "scrollOffsetY": 0,
+              "timestamp": 1793075789.66213
+            },
+            "receivedUtc": "2026-10-27T04:36:29.690397+00:00"
+          },
+          {
+            "name": "hero-run-stepped-touch-compositor-3-020",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/hero-run-stepped-touch-compositor-3-020.png",
+            "sha256": "8e33b9b28680f18df175fa7885226cc42b091f7a7831c47a7cf6846a4aba1027",
+            "size": [
+              844,
+              390
+            ],
+            "channelStddev": [
+              80.59216873789862,
+              69.24766714673366,
+              55.41695933306452
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-full-viewport-compositor-screencast-png",
+            "metadata": {
+              "offsetTop": 0,
+              "pageScaleFactor": 1,
+              "deviceWidth": 844,
+              "deviceHeight": 390,
+              "scrollOffsetX": 0,
+              "scrollOffsetY": 0,
+              "timestamp": 1793075998.11181
+            },
+            "receivedUtc": "2026-10-27T04:39:58.142674+00:00"
+          },
+          {
+            "name": "gate-reading-adjusted-2",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/gate-reading-adjusted-2.png",
+            "sha256": "52352cb8fc54835911cf7e3a5e5ef675f67e83e3055ec0b50f50d2bc8edbc607",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              86.66231781198333,
+              84.46840802979656,
+              81.27197421662045
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:47:08.504178+00:00"
+          },
+          {
+            "name": "saved-temple",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/saved-temple.png",
+            "sha256": "170f9f3681bfcaf7f10ced67f81c4c609b7f1e58bc9062dca40e94ec59fc80ce",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              66.7933098213349,
+              57.43102428727482,
+              47.78210824624062
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:48:05.257354+00:00"
+          },
+          {
+            "name": "continued-temple-adjusted-1",
+            "path": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/continued-temple-adjusted-1.png",
+            "sha256": "75799cae83bdadb08f7c349d979ee0487fa7bebbf483d7184fad6dabe69e068e",
+            "size": [
+              694,
+              390
+            ],
+            "channelStddev": [
+              61.47367783978728,
+              53.69721319569509,
+              46.086352587661885
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas",
+            "capturedUtc": "2026-10-27T04:52:22.787474+00:00"
+          }
+        ],
+        "audioWindows": 5,
+        "file": "Artifacts/Validation/Detail/Mobile844/PathOfDawn/report.json",
+        "sha256": "4d2b8c77edace6f99a6c6e31a1c765593d4580c62259710bab3f9d5540ad279a"
+      }
+    }
+  },
+  "publication": {
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40452759933",
+    "sourceCommit": "464fc1a05390a2d7975ba122bde42cc286b5b011",
+    "verifiedFiles": 44,
+    "scope": "Every public file is byte-exact to locally tested runtime; public title/game launch sanity, not duplicated full gameplay.",
+    "file": "Artifacts/Validation/Detail/PublicPortal/report.json",
+    "sha256": "bdd1e8344c8b56b384a395cd45ca474e5af6f57a849c4b179c45a3f10c50fb3f"
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "checks": 33,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/title.png",
+          "sha256": "fb274f2abb3183d9969f9568ce81cc6d54d436a096d467c1aff4e81bde9e9e48",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            76.73350516981404,
+            67.95157833136088,
+            59.79603330499033
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:01:30.819263+00:00"
+        },
+        {
+          "name": "lobby",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/lobby.png",
+          "sha256": "c5e1c52845384ffc7c3b0525e10b191244cdbf13d2ab058511435b9577d07017",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            48.870637240883724,
+            44.51582541591487,
+            38.730060199169394
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:02:42.143435+00:00"
+        }
+      ],
+      "audioWindows": 2,
+      "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/report.json",
+      "sha256": "d7e8f262721b8c905d5df6e7394a7700078e4efa032fba21a029af78b05b9c82",
+      "rawStatus": "failed",
+      "adjudicatedPublicMediaRanges": 6,
+      "adjudication": {
+        "file": "Artifacts/Validation/Detail/PublicMobile844/FantasyCards/range-adjudication.json",
+        "sha256": "f30af5286289666f8b6d39346e3215d1da16c94742b9cc51e2c444af8e4eeef2"
+      }
+    },
+    "PathOfDawn": {
+      "checks": 19,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/title.png",
+          "sha256": "cb77c897c05af8182affd73985c62cc4ee181e37124c98658b807ac993aa9b45",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            77.51294085930553,
+            76.24234843941143,
+            69.76848622761999
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:04:03.535866+00:00"
+        },
+        {
+          "name": "temple-idle",
+          "path": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/temple-idle.png",
+          "sha256": "a3d262d96ed7a23c67d750f2102c7ee153182e51ebc76fbb6a64748aefec2486",
+          "size": [
+            694,
+            390
+          ],
+          "channelStddev": [
+            61.09209311294285,
+            53.86366094704002,
+            46.17671356693635
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T05:05:36.345821+00:00"
+        }
+      ],
+      "audioWindows": 1,
+      "file": "Artifacts/Validation/Detail/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "19d64bde6c2c043a0ee71f93978adcddaebb84934cc6689de61307aa6b12e3e7"
+    }
+  }
+}
