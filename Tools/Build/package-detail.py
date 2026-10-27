@@ -60,6 +60,11 @@ def notes(game,target):
 
 def evidence():
     selected=set(); result={}
+    native=json.loads((OUT/'Nativecritical-review.json').read_text())
+    for screenshot in native['screenshots']:
+        path=ROOT/screenshot['path']
+        BASE.require(path.is_file() and BASE.digest(path)==screenshot['sha256'],'Native reviewed original changed')
+        result[screenshot['path']]=path
     for p in OUT.rglob('report.json'):
         if any('.previous-' in part for part in p.relative_to(OUT).parts): continue
         report=json.loads(p.read_text())
