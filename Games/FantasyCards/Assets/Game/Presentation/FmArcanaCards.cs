@@ -98,8 +98,12 @@ namespace FantasyCards.Presentation
             else if (album && !small)
             {
                 var ribbon = Panel(surface, .055f, .185f, .945f, .282f, new Color(.075f, .09f, .14f));
-                ArcanaText(ribbon, CardAbilitySummary(card).Replace("유닛 능력 · ", "").Replace("사용 시점 · ", ""),
-                    .025f, .025f, .975f, .975f, 20, new Color(.75f, .81f, .91f), "Arcana ability ribbon");
+                var summary = ArcanaText(ribbon, CardAbilitySummary(card).Replace("유닛 능력 · ", "").Replace("사용 시점 · ", ""),
+                    .045f, .025f, .955f, .975f, 20, new Color(.75f, .81f, .91f), "Arcana ability ribbon");
+                // Prose is an excerpt. Numeric cells retain their exact-value
+                // fit, while this line keeps its beginning and ends cleanly.
+                summary.alignment = TextAlignmentOptions.MidlineLeft;
+                summary.overflowMode = TextOverflowModes.Ellipsis;
             }
             float statsTop = detail ? .155f : compactStats ? .26f : album && !small ? .18f : duel ? .23f : .225f;
             ArcanaCardStats(surface, card, live, .045f, .045f, .955f, statsTop, detail || album || canvas.pixelRect.height >= 600, compactStats);

@@ -83,6 +83,8 @@ def evidence():
         p=ART/f'TestResults/{game}/PlayModeUI.xml'; result[str(p.relative_to(ROOT))]=p
         for target in ('Windows','Web'):
             p=ART/f'Builds/{game}/{target}/BuildEvidence.txt'; result[str(p.relative_to(ROOT))]=p
+            if game == 'PathOfDawn':
+                p=ART/f'Builds/{game}/{target}/LegacyResourceExclusions.json'; result[str(p.relative_to(ROOT))]=p
     for relative in ('Artifacts/TestResults/Core/core-tests.trx','Docs/ArcanaValidation.md','Docs/FmArcanaUI.md',
                      'Docs/GospelAuthoredArt.md','Docs/ArcanaBuildBudget.md','Docs/GospelNpcConversations.md','Docs/FmArcanaCards.md',
                      'Tools/Environment/validation.json','Tools/Validation/arcana-smoke-plans.json',
