@@ -1,7 +1,7 @@
 {
   "releaseProfile": "arcana",
   "date": "2026-10-27",
-  "recordedUtc": "2026-10-27T10:42:46.359888+00:00",
+  "recordedUtc": "2026-10-27T10:57:01.242091+00:00",
   "dateTimezone": "Asia/Seoul",
   "gameRevisions": {
     "FantasyCards": "fm-arcana-2026-10-27",
@@ -11,7 +11,7 @@
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommitAtSummary": "ecf166770e57b1fc74f861cf71d8d2e76f9dfbaf",
+  "sourceCommitAtSummary": "1cdf3a2f104274879e29be5801f98b07221236ff",
   "externalCore": {
     "passed": 122,
     "finishedUtc": "2026-10-27T06:03:25.9152907+00:00",
@@ -3791,7 +3791,160 @@
     }
   },
   "publication": {
-    "status": "pending",
-    "url": "https://ka8877.github.io/firstgame/"
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40490869217",
+    "sourceCommit": "aea33845c209c15deeac22474c6626b3efcb8486",
+    "verifiedFiles": 41,
+    "scope": "Every public file is byte-exact to locally tested runtime; public title/game launch sanity, not duplicated full gameplay.",
+    "file": "Artifacts/Validation/Arcana/PublicPortal/report.json",
+    "sha256": "76aa8936c5c6c8fbc91ed282990807196ccb099bfd14df1b95d4ed7237d4d9f6"
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "checks": 33,
+      "rawChecks": 34,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/title.png",
+          "sha256": "19da050e7a429bcecf433cc5cd0b7b601c2b6a5b7988fcd6b3a7901963911906",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            80.5401223045047,
+            70.95165892605671,
+            64.06998454047152
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T10:48:57.626316+00:00"
+        },
+        {
+          "name": "lobby",
+          "path": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/lobby.png",
+          "sha256": "fb8f1773528fa21d76f4f59914b65c027e15a8e68c78359cca504be70a46eebb",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            67.22993850721994,
+            63.26044524884312,
+            54.99407609288326
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T10:49:40.996941+00:00"
+        }
+      ],
+      "audioWindows": 2,
+      "file": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/report.json",
+      "sha256": "72a94115cc5d8a917d067c806a22f3590c35ca1287309c01d9700e996f913bd9",
+      "rawStatus": "failed",
+      "capturePlan": {
+        "file": "Tools/Validation/arcana-public-plans.json",
+        "sha256": "1905afd12581184bf26fd50313fbd1ec1be8faff28bf1426d0b884f0d0dfd4c2"
+      },
+      "captureHarness": {
+        "file": "Tools/Validation/revival-smoke.py",
+        "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
+      },
+      "qualifiedNetworkProof": {
+        "file": "Artifacts/Validation/Arcana/PublicMobile844/FantasyCards/public-media-adjudication.json",
+        "sha256": "24c6e3f696a617b8bf90a3781776b79c09cd4a8084e1c44142c2aa76138c2835"
+      },
+      "qualifiedReport": {
+        "rawStatus": "failed",
+        "rawChecks": 34,
+        "passedChecks": 33,
+        "reviewedOriginals": 2,
+        "recordedPcmWindows": 2,
+        "exactMediaCancellations": 5,
+        "newlyQualifiedMediaCancellations": 4,
+        "alreadyClassifiedInactivePreloads": 1
+      },
+      "qualificationScope": "The automatic public network gate remains FAILED (33 of34 raw checks passed). This proof is restricted to five exact same-origin OGG GET cancellations in the first600ms of navigation0, four unclassified and one already-classified inactive preload. Three precede the first passive observation, so their pre-cancellation state and pre-gesture timing are not claimed; subsequent browser decode is recorded. Selected title samples advance across a later cancellation; uninterrupted sample playback is not measured. Later title/lobby isolated audible PCM and full HTTPS/current-file bytes plus full4-OGG decode are verified. Battle remains an unused browser-decoded preload, with no public battle audibility claim. No loop/reload continuity, zero gap, physical listening, new visual approval or blanket network exemption is claimed. Raw report, source, input, originals, PCM and harness are unchanged."
+    },
+    "PathOfDawn": {
+      "checks": 19,
+      "rawChecks": 19,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/title.png",
+          "sha256": "95636e892ff838002bc5f35a0fd11fb21064d3bda4b50df35062cd7b18729fc9",
+          "size": [
+            693,
+            390
+          ],
+          "channelStddev": [
+            77.31929012497525,
+            76.10776954736976,
+            69.73418627411705
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas-cdp",
+          "capturedUtc": "2026-10-27T10:52:19.223481+00:00"
+        },
+        {
+          "name": "temple-idle",
+          "path": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/temple-idle.png",
+          "sha256": "bfbd672b5ecea1b6899c5b04586136bde84f20466d1f9836e56450cfdc7aa36f",
+          "size": [
+            693,
+            390
+          ],
+          "channelStddev": [
+            60.84685857757323,
+            53.59492331589401,
+            45.74405797347189
+          ],
+          "canvas": {
+            "x": 75.328125,
+            "y": 0,
+            "width": 693.328125,
+            "height": 390
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas-cdp",
+          "capturedUtc": "2026-10-27T10:53:37.726961+00:00"
+        }
+      ],
+      "audioWindows": 1,
+      "file": "Artifacts/Validation/Arcana/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "e4633b02894c0602fb97977393c9a66c576b1986eb71a246e4546bf3661551d9",
+      "rawStatus": "passed",
+      "capturePlan": {
+        "file": "Tools/Validation/arcana-public-plans.json",
+        "sha256": "1905afd12581184bf26fd50313fbd1ec1be8faff28bf1426d0b884f0d0dfd4c2"
+      },
+      "captureHarness": {
+        "file": "Tools/Validation/revival-smoke.py",
+        "sha256": "d33d2b01eecea95a8c971707da4223c45cdfb997cb44f770ff6465ba329f8f20"
+      }
+    }
   }
 }
