@@ -1,6 +1,6 @@
 {
   "releaseProfile": "fm-fidelity",
-  "recordedUtc": "2026-10-27T01:42:04.379108+00:00",
+  "recordedUtc": "2026-10-27T01:54:39.505140+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-fidelity-2026-10-27",
     "PathOfDawn": "gospel-modern-2026-10-26"
@@ -9,7 +9,7 @@
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommitAtSummary": "4565ac2c07f26e33e6ea275e75625524651d37f9",
+  "sourceCommitAtSummary": "203e96fbe1d79f556cb03cf806e06677b71a1da1",
   "externalCore": {
     "passed": 108,
     "finishedUtc": "2026-10-27T00:22:25.2442535+00:00",
@@ -1492,7 +1492,76 @@
     }
   },
   "publication": {
-    "status": "pending",
-    "url": "https://ka8877.github.io/firstgame/"
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "pagesRun": "https://github.com/ka8877/firstgame/actions/runs/40434353064",
+    "sourceCommit": "203e96fbe1d79f556cb03cf806e06677b71a1da1",
+    "verifiedFiles": 41,
+    "scope": "New FC public launch and byte verification; Gospel files preserved exactly without re-execution.",
+    "file": "Artifacts/Validation/FmFidelity/PublicPortal/report.json",
+    "sha256": "798e72f8d2f74dec7d3547785aee8073eac83cf2f06a34bf027799091b6f9b5c"
+  },
+  "publicWeb": {
+    "FantasyCards": {
+      "checks": 33,
+      "approvedOriginals": 2,
+      "screenshots": [
+        {
+          "name": "title",
+          "path": "Artifacts/Validation/FmFidelity/PublicMobile844/FantasyCards/title.png",
+          "sha256": "b0a1f071819d73eabb2c6cad72d04886625193e1cc983fe987cd2fb6201992b5",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            75.22047407199479,
+            68.39412126908621,
+            66.43314360509211
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T01:53:19.129116+00:00"
+        },
+        {
+          "name": "lobby",
+          "path": "Artifacts/Validation/FmFidelity/PublicMobile844/FantasyCards/lobby.png",
+          "sha256": "541f8a4b6e683129ebbe22b335d26e6e63091a320b51ff08d566128274d67248",
+          "size": [
+            616,
+            346
+          ],
+          "channelStddev": [
+            47.76809171869568,
+            43.2120308001837,
+            39.73469424223048
+          ],
+          "canvas": {
+            "x": 114.4375,
+            "y": 0,
+            "width": 615.109375,
+            "height": 346
+          },
+          "navigation": 0,
+          "captureKind": "original-browser-canvas",
+          "capturedUtc": "2026-10-27T01:53:47.967746+00:00"
+        }
+      ],
+      "audioWindows": 2,
+      "file": "Artifacts/Validation/FmFidelity/PublicMobile844/FantasyCards/report.json",
+      "sha256": "023b6e3679768f6f1c537f74511f7ec772fc15c61bc8079ea15c41e1e757b8a8",
+      "rawStatus": "failed",
+      "adjudicatedPublicMediaRanges": 4,
+      "adjudication": {
+        "file": "Artifacts/Validation/FmFidelity/PublicMobile844/FantasyCards/range-adjudication.json",
+        "sha256": "dab7e89620f12a75c503b6ba5db67e289b0d9bfb2118c3e9c63660428dbc93cf"
+      }
+    }
   }
 }
