@@ -247,6 +247,20 @@ class JourneySmoke:
                     self.report["input"].append({"type": "key-release-after-original-capture", "keys": self.capture_keys,
                         "navigation": self.navigation, "atUtc": now()})
                     self.capture_keys = []
+        elif self.args.game == "PathOfDawn":
+            # A software-rendered 3D frame can miss Playwright's two-frame
+            # element-stability wait. Capture the actual compositor PNG at the
+            # same measured full-canvas bounds, without font/layout alteration.
+            box = self.page.locator("#unity-canvas").bounding_box()
+            if not box or box["width"] <= 0 or box["height"] <= 0:
+                raise AssertionError("No visible Gospel canvas for original compositor capture")
+            session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
+            try:
+                capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
+                    "captureBeyondViewport": False, "clip": {**box, "scale": 1}})
+                path.write_bytes(base64.b64decode(capture["data"]))
+            finally:
+                if session is not self.raw_capture_session: session.detach()
         else:
             self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
         with Image.open(path) as pixels:
@@ -254,7 +268,7 @@ class JourneySmoke:
             shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
                     "size": list(pixels.size), "channelStddev": stat.stddev,
                     "canvas": self.page.locator("#unity-canvas").bounding_box(), "navigation": self.navigation,
-                    "captureKind": "original-browser-canvas", "capturedUtc": now()}
+                    "captureKind": "original-browser-canvas-cdp" if self.args.game == "PathOfDawn" else "original-browser-canvas", "capturedUtc": now()}
         self.report["screenshots"].append(shot)
         self.persist()
         self.check(min(shot["channelStddev"]) > 5, "Original capture contains nonblank scene pixels: " + name, shot)

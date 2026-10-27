@@ -46,6 +46,14 @@ def validate_report(report_path, game, profile, player):
         module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
         cache_proof = module.verify_record(report_path)
         proof_name = "media-adjudication.json"
+    elif (game == "FantasyCards" and profile == "Mobile844" and report.get("status") == "failed"
+            and GAME_REVISIONS[game] == "fm-arcana-2026-10-27"):
+        # Exact current-run media evidence; preserve the raw failed report.
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("arcana_stage_media_proof", ROOT / "Tools/Validation/adjudicate-arcana-media.py")
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        cache_proof = module.verify_record(report_path)
+        proof_name = "media-adjudication.json"
     elif (game == "PathOfDawn" and profile == "Desktop720" and report.get("status") == "failed"
             and GAME_REVISIONS[game] == "gospel-natural-2026-10-27"):
         import importlib.util

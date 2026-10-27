@@ -91,10 +91,12 @@ def evidence():
                      'Tools/Validation/arcana-public-plans.json','Tools/Validation/summarize-arcana-release.py',
                      'Tools/Validation/revival-smoke.py','Tools/Validation/webaudio-observer.js',
                      'Tools/Validation/fm-local-media-observer.js','Tools/Validation/fm-local-media-errors.py',
-                     'Tools/Validation/adjudicate-fm-public-ranges.py','Tools/Web/release_contract.py',
+                     'Tools/Validation/adjudicate-fm-public-ranges.py','Tools/Validation/adjudicate-arcana-media.py',
+                     'Tools/Web/release_contract.py',
                      'Tools/Build/package-arcana.py','Docs/FmArcanaMusic.md','Docs/FmArcanaArt.md',
                      'Tools/Audio/Arcana/verify-native-lifecycle.py','Tools/Validation/test-fm-local-music.cjs',
-                     'Tools/Art/GospelAuthoredProps/material-spec.json','Tools/Validation/verify-resource-isolation.py'):
+                     'Tools/Art/GospelAuthoredProps/material-spec.json','Tools/Validation/verify-resource-isolation.py',
+                     'Tools/Validation/verify-public-portal.py'):
         p=ROOT/relative
         if p.is_file(): result[relative]=p
     return result

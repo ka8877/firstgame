@@ -224,10 +224,14 @@ def captured_source(original, sha, report_parent, suffixes):
 def checked_browser(game, profile, files):
     path = REPORTS / profile / game / 'report.json'
     record = read(path)
-    require(record.get('status') == 'passed', 'Current raw browser run did not pass; preserve it and integrate a specific current proof: ' + str(path))
+    adjudication = None
+    if game == 'FantasyCards' and profile == 'Mobile844' and record.get('status') == 'failed':
+        proof = module('exact_arcana_mobile_media', ROOT / 'Tools/Validation/adjudicate-arcana-media.py')
+        adjudication = proof.verify_record(path)
+    require(record.get('status') == 'passed' or adjudication is not None, 'Current raw browser run did not pass; preserve it and integrate a specific current proof: ' + str(path))
     require(record.get('revision') == ARCANA['revisions'][game] and record.get('game') == game
             and record.get('profile') == PROFILES[profile] and record.get('suite') == 'modern-real-input-v1', 'Wrong browser revision/profile: ' + str(path))
-    require(record.get('checks') and all(item.get('passed') is True for item in record['checks']) and record.get('input'), 'Missing real input/current checks')
+    require(record.get('checks') and (all(item.get('passed') is True for item in record['checks']) or adjudication is not None) and record.get('input'), 'Missing real input/current checks')
     require(not record.get('pageErrors') and not record.get('httpErrors'), 'Runtime page/HTTP errors')
     require(normalized(record.get('buildFingerprint', {}).get('files', [])) == normalized(files), 'Browser runtime differs from current player')
     harness = record.get('harness', {})
@@ -235,7 +239,7 @@ def checked_browser(game, profile, files):
     plan_path = captured_source(harness['plan'], harness['planSha256'], path.parent, {'.json'})
     plan = read(plan_path)[game]
     require(plan.get('revision') == ARCANA['revisions'][game] and plan.get('suite') == record['suite'] and plan.get('requiredCheckpoints'), 'Wrong captured current plan')
-    review = record.get('visualReview', {})
+    review = adjudication['visualReview'] if adjudication else record.get('visualReview', {})
     require(review.get('status') == 'approved' and review.get('reviewer') and review.get('reviewedUtc')
             and normalized(review.get('runtimeFiles', [])) == normalized(files), 'Current directly reviewed originals required')
     approved = [item for item in record.get('checkpoints', []) if item.get('status') == 'approved']
@@ -272,9 +276,13 @@ def checked_browser(game, profile, files):
                 require(not media_contexts or (len(media_contexts) == 1 and len(media_contexts[0]['media']) == 4), 'Fixed four media elements/one music graph not retained')
     if game == 'FantasyCards':
         require(any('/StreamingAssets/Audio/ModernCard/' in url for item in windows for url in item.get('sourceUrls', [])), 'No current bundled source PCM')
-    result = {'checks': len(record['checks']), 'approvedOriginals': len(approved), 'screenshots': [item['original'] for item in approved],
-              'audioWindows': len(windows), **ref(path), 'rawStatus': 'passed',
+    result = {'checks': sum(item.get('passed') is True for item in record['checks']), 'rawChecks': len(record['checks']),
+              'approvedOriginals': len(approved), 'screenshots': [item['original'] for item in approved],
+              'audioWindows': len(windows), **ref(path), 'rawStatus': record['status'],
               'capturePlan': ref(plan_path), 'captureHarness': ref(harness_path)}
+    if adjudication:
+        result.update(qualifiedNetworkProof=ref(path.parent / 'media-adjudication.json'),
+                      qualifiedReport=adjudication['qualifiedReport'], qualificationScope=adjudication['scope'])
     if game == 'FantasyCards' and profile != 'PublicMobile844': result['musicRoles'] = web_music_roles(windows)
     return result
 
@@ -353,6 +361,8 @@ def markdown(record):
     for profile, games in record['web'].items():
         for game, row in games.items(): text += f"| {profile}/{game} | {row['checks']} | {row['approvedOriginals']} | {row['audioWindows']} |\n"
     for game, row in record.get('publicWeb', {}).items(): text += f"| PublicMobile844/{game} | {row['checks']} | {row['approvedOriginals']} | {row['audioWindows']} |\n"
+    if any(row.get('qualifiedNetworkProof') for games in record['web'].values() for row in games.values()):
+        text += '\n모바일 카드게임의 자동 네트워크 검사는 원본 그대로 실패 상태이며 전체81개 중80개 검사만 통과했다. 별도 현재 해시 기반 증거로 새로고침 경계의 미선택·잠금 해제 전 음원 GET 취소3건을 한정 분석했다. 동일 파일의 전체 디코딩과 이후 같은 탐색의 로비·전투 PCM을 확인했으며 원본17개 화면의 기존 명시적 검토만 집계했다. 끊김 없는 샘플·루프 경계 연속성·재로딩 무중단을 주장하지 않으며 실패를 일괄 무시하거나 원본 통과로 바꾸지 않았다.\n'
     text += '\n카드의 원작 인쇄 그림은 보존하고 새 세로 카드 프레임·등급 색·재질 표현과 구분한다. 새 타이틀 인물 원화는 새 제작물이며 원작의 고해상도 복원으로 소개하지 않는다. 단일7속성 덱과복합11덱은 실제50장 구성·카드 제한·생산 속성과 원작 기술 지원 여부를 검사한다.\n\n'
     text += '음악은 확인된 원작 발췌/공개 전투곡을 유지한다. 실제 역할 변경의0초 시작과 같은 역할 재표시의 위치 유지를 Native AudioSource/DSP 기록과 Web 역할 기록으로 확인하며 PCM·물리 스피커 청취를 구분한다. 짧은 발췌를 전체 OST 복구로 소개하지 않는다.\n\n'
     text += 'NPC 학습 대화는 해설과 직접 성경 인용을 구분하고 아래에 연결 본문을 표시한다. 보조 주제는 본편 순서·수집 구절을 변경하지 않으며 현재 목표에 맞는 인물만 본편 대화를 시작한다. 실제 클릭/E/터치·대화·저장 검증은 위의 현재 실행 원본에 한정한다.\n\n'
@@ -400,7 +410,10 @@ def main():
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content)
     print(json.dumps({'status': 'passed', 'checkOnly': args.check_only, 'publication': record['publication']['status'],
-                      'core': record['externalCore']['passed'], 'native': {game: row['passed'] for game, row in native_results.items()}}, ensure_ascii=False))
+                      'core': record['externalCore']['passed'], 'native': {game: row['passed'] for game, row in native_results.items()},
+                      'qualifiedBrowserReports': [{'game': game, 'profile': profile, **row['qualifiedReport']}
+                                                  for profile, games in record['web'].items() for game, row in games.items()
+                                                  if row.get('qualifiedNetworkProof')]}, ensure_ascii=False))
 
 
 if __name__ == '__main__':
