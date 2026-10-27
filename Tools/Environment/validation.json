@@ -1,7 +1,6 @@
 {
-  "status": "validation-in-progress",
   "releaseProfile": "restoration",
-  "recordedUtc": "2026-10-27T16:28:58.325106+00:00",
+  "date": "2026-10-27",
   "gameRevisions": {
     "FantasyCards": "fm-restoration-2026-10-27",
     "PathOfDawn": "gospel-toon-2026-10-27"
@@ -2092,17 +2091,30 @@
       }
     },
     "Mobile844": {
-      "status": "in-progress",
-      "currentReport": "Artifacts/Validation/Restoration/Mobile844/FantasyCards/report.json"
+      "FantasyCards": {
+        "checks": 119,
+        "reviewedOriginals": 26,
+        "pcmWindows": 10,
+        "file": "Artifacts/Validation/Restoration/Mobile844/FantasyCards/report.json",
+        "bytes": 1119317,
+        "sha256": "e708d7a2ad7f8b05c79cffae8f7b2383804cda7182952764c2a6787f6383d5a1"
+      },
+      "PathOfDawn": {
+        "checks": 59,
+        "reviewedOriginals": 17,
+        "pcmWindows": 5,
+        "file": "Artifacts/Validation/Restoration/Mobile844/PathOfDawn/report.json",
+        "bytes": 510169,
+        "sha256": "cf7e7a849ee3dd3cc8b17006ca1b0b3a9c26a41b7108894bae82697c4982f8d1"
+      }
     }
   },
   "publication": {
-    "status": "not-verified",
-    "url": "https://ka8877.github.io/firstgame/",
-    "scope": "This current release has not yet been published. Existing public URL remains the previous release until mobile and public checks complete."
+    "status": "not-verified"
   },
   "limits": [
-    "Gospel desktop is two qualified ordinary sessions, rawprefixFAILED/rawsuffixPASSED; not one uninterrupted run.",
-    "Software browser/mobile input emulation, not physical Windows/mobile performance, human speaker listening or user aesthetic approval."
+    "Software Chromium/mobile input emulation; no physical mobile/Windows performance or human speaker listening claim.",
+    "Original asset and UI reference reconstruction; no recovered proprietary client/source or full original game claim.",
+    "Gospel birth prologue and temple opening only; artwork is an original interpretation."
   ]
 }

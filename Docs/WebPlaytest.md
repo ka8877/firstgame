@@ -1,6 +1,34 @@
 # 웹 체험판과 리마스터 배포
 
-현재 요청은 **두 게임 모두**를 바꾸는 `fm-detail-2026-10-27` / `gospel-natural-2026-10-27`이다. 판마는250종·9수록등급·5기본덱과 새 타이틀·로컬 프로필·실제 지형 백필드, 성경 여정은 실제 관절 인물과3D 성전의 새 외형을 포함한다. 카드 음악은 게임에 포함한 원작 공개 음원 발췌/전투 녹음으로 재생하며 외부 플레이어를 일반 흐름에 사용하지 않는다. 공개 상태는 [DetailValidation](DetailValidation.md)과 `Artifacts/Validation/Detail`의 새 원본·음악·저장·파일 해시로 확인한다. 아래 이전 remaster 명령·설명은 당시 기록이며, 현재 도구는 `--release-profile detail`과 `summarize-detail-release.py`를 사용한다.
+## 현재 Restoration 배포
+
+현재 개정은 `fm-restoration-2026-10-27` / `gospel-toon-2026-10-27`이며 릴리스 프로필은 `restoration`이다. 카드 605종·기본덱 20개·원본 카드 전체 인쇄면·25종 효과음과 Gospel의 카툰 인물·석조 우물·인물/가방/지도/여정 메뉴가 대상이다. 실제 배포 완료 여부와 제한은 [RestorationValidation](RestorationValidation.md), 실행 방법은 [PlaytestGuide](PlaytestGuide.md)를 따른다. 아래 detail/remaster 설명과 명령은 이전 배포 이력이며 현재 릴리스 명령으로 사용하지 않는다.
+
+공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)이다. 현재 검증 원본은 `Artifacts/Validation/Restoration`에 보존한다. Gospel 데스크톱은 원래 실패 기록을 보존한 두 세션의 제한된 검증이며, 하나의 중단 없는 통과로 합치지 않는다. 공개 완료 전 로컬 결과를 공개 결과로 소개하지 않는다.
+
+최종 소스의 Core·Native·Windows/Web 빌드와 두 게임의 Desktop720/Mobile844 실제 입력 검사를 완료한 뒤, 깨끗한 소스 커밋에서 다음 순서로 실행한다. 새 빌드·스테이지·ZIP은 저장 공간을 위해 기록된 `/tmp/firstgame-restoration-*` 경로를 사용한다.
+
+```bash
+python3 Tools/Validation/summarize-restoration-release.py
+python3 Tools/Web/stage-site.py --release-profile restoration --build-root /tmp/firstgame-restoration-builds --output Artifacts/RestorationWebPlaytest --require-browser-reports
+python3 Tools/Web/publish-site.py --site Artifacts/RestorationWebPlaytest
+gh workflow run publish-web.yml --ref main
+```
+
+실제 Pages 실행이 성공한 뒤 공개 파일의 현재 바이트와 랜딩 PC/모바일 원본을 확인하고, 두 게임의 `PublicMobile844` 실제 입력·저장·전체 새로고침·음악 검사를 별도로 마친다. 브라우저/Unity 검사는 동시에 실행하지 않는다.
+
+```bash
+python3 Tools/Validation/verify-public-portal.py --stage Artifacts/RestorationWebPlaytest --output Artifacts/Validation/Restoration/PublicPortal
+# 두 공개 게임의 PublicMobile844 검사를 완료하고 원본을 직접 검토한다.
+python3 Tools/Validation/summarize-restoration-release.py --public
+python3 Tools/Build/package-restoration.py
+```
+
+실제 휴대폰·Safari·Windows 하드웨어 성능, 사람의 스피커 청취와 사용자 미적 승인은 별도다. 원작 클라이언트 전체를 복구한 것으로 소개하지 않는다.
+
+## 이전 Detail / Remaster 배포 이력
+
+이전 요청은 **두 게임 모두**를 바꾸는 `fm-detail-2026-10-27` / `gospel-natural-2026-10-27`이었다. 판마는250종·9수록등급·5기본덱과 새 타이틀·로컬 프로필·실제 지형 백필드, 성경 여정은 실제 관절 인물과3D 성전의 새 외형을 포함했다. 당시 검증은 [DetailValidation](DetailValidation.md)과 `Artifacts/Validation/Detail`에 남아 있다. `--release-profile detail`과 `summarize-detail-release.py`는 해당 이력의 명령이다.
 
 공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)이다. 현재 소스 개정은 `fm-remaster-2026-10-26`과 `gospel-remaster-2026-10-26`이며, 해당 주소의 실제 배포 상태는 [Validation](Validation.md)의 공개 파일 해시와 현재 실행 보고서로 확인한다. 소스를 수정했거나 로컬 빌드가 통과한 것을 공개판의 통과로 표시하지 않는다.
 
