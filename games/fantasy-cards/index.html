@@ -74,6 +74,13 @@
       var context = null, master = null, graphUnavailable = false;
       var muted = false, volume = .6, hasMutedPreference = false, hasVolumePreference = false;
       var requestedAt = performance.now();
+      var fadeOutSeconds = .18, fadeInSeconds = .42;
+      var sceneTransitionCount = 0, sameRoleMessages = 0, transitions = [];
+      function recordTransition(entry) {
+        entry.atMs = performance.now();
+        transitions.push(entry);
+        if (transitions.length > 24) transitions.shift();
+      }
       function readPreference(key) {
         try { return window.localStorage.getItem("FC.originalMusic." + key); } catch (_) { return null; }
       }
@@ -92,9 +99,51 @@
         if (smooth) node.gain.setTargetAtTime(value, now, .035);
         else node.gain.setValueAtTime(value, now);
       }
+      function cancelFade(player) {
+        ++player.fadeEpoch;
+        if (player.fadeTimer !== null) window.clearTimeout(player.fadeTimer);
+        player.fadeTimer = null;
+      }
+      function fadeTrack(player, value, seconds, complete) {
+        cancelFade(player);
+        player.fadeTarget = value;
+        var epoch = player.fadeEpoch;
+        var duration = seconds * 1000, started = performance.now();
+        if (player.gain && context) {
+          var parameter = player.gain.gain, now = context.currentTime;
+          if (typeof parameter.cancelAndHoldAtTime === "function") parameter.cancelAndHoldAtTime(now);
+          else {
+            var held = parameter.value;
+            parameter.cancelScheduledValues(now);
+            parameter.setValueAtTime(held, now);
+          }
+          parameter.linearRampToValueAtTime(value, now + seconds);
+          if (complete) player.fadeTimer = window.setTimeout(function () {
+            if (player.fadeEpoch !== epoch) return;
+            player.fadeTimer = null;
+            complete();
+          }, duration);
+          return;
+        }
+        // Same behaviour when WebAudio is unavailable: fade the one local
+        // media element instead of introducing another player or remote source.
+        var from = player.fadeWeight;
+        function step() {
+          if (player.fadeEpoch !== epoch) return;
+          var progress = Math.min(1, (performance.now() - started) / duration);
+          player.fadeWeight = from + (value - from) * progress;
+          player.audio.volume = (muted ? 0 : volume) * player.fadeWeight;
+          if (progress < 1) player.fadeTimer = window.setTimeout(step, 16);
+          else { player.fadeTimer = null; if (complete) complete(); }
+        }
+        step();
+      }
       function silence(player) {
+        cancelFade(player);
         player.pending = false;
         ++player.epoch;
+        player.fadeTarget = 0;
+        player.fadeWeight = 0;
         setGain(player.gain, 0, false);
         if (!player.gain) player.audio.volume = 0;
         player.audio.pause();
@@ -145,7 +194,20 @@
         player.pending = false;
         player.epoch = 0;
         player.gain = null;
+        player.fadeTimer = null;
+        player.fadeEpoch = 0;
+        player.fadeTarget = 0;
+        player.fadeWeight = 0;
+        player.restartNeeded = true;
+        player.restartCount = 0;
+        player.lastStartAtMs = null;
+        player.lastStartPosition = null;
+        player.lastStartRoleSerial = null;
+        player.lastPromotionPosition = null;
         document.body.appendChild(player.audio);
+        player.audio.addEventListener("loadedmetadata", function () {
+          if (tracks[scene] === player && unlocked && !muted) requestTarget();
+        });
         player.audio.addEventListener("timeupdate", function () { if (active === player) refreshActualState(); });
         player.audio.addEventListener("error", function () {
           player.pending = false;
@@ -186,11 +248,23 @@
           return;
         }
         if (player.audio.paused) return;
-        Object.keys(tracks).forEach(function (key) { if (tracks[key] !== player) silence(tracks[key]); });
+        var outgoing = active;
         active = player;
         player.pending = false;
-        if (player.gain) setGain(player.gain, 1, true);
-        else player.audio.volume = muted ? 0 : volume;
+        Object.keys(tracks).forEach(function (key) {
+          var other = tracks[key];
+          if (other === player) return;
+          if (other === outgoing && !other.audio.paused) {
+            fadeTrack(other, 0, fadeOutSeconds, function () {
+              if (active !== other) silence(other);
+            });
+          } else silence(other);
+        });
+        fadeTrack(player, 1, fadeInSeconds);
+        player.lastPromotionPosition = player.audio.currentTime;
+        recordTransition({ event: "promoted", scene: scene, serial: sceneTransitionCount,
+          source: player.audio.currentSrc || player.audio.src, position: player.audio.currentTime,
+          startPosition: player.lastStartPosition, restartCount: player.restartCount });
         status.dataset.playAtMs = String(performance.now());
         status.dataset.latencyMs = String(Math.max(0, performance.now() - requestedAt));
         render();
@@ -198,24 +272,46 @@
       function requestTarget() {
         if (!unlocked || muted) { render(); return; }
         var player = tracks[scene];
-        if (active === player && !player.audio.paused) { render(); return; }
+        if (active === player && !player.audio.paused && !player.restartNeeded) { render(); return; }
         if (player.pending) { render(); return; }
-        // Keep the outgoing track until actual playback of the local target is
-        // confirmed; the new element is inaudible while its play is pending.
-        setGain(player.gain, 0, false);
-        if (!player.gain) player.audio.volume = 0;
         player.pending = true;
         var epoch = ++player.epoch, version = generation;
-        var result;
-        try { result = player.audio.play(); }
-        catch (_) { player.pending = false; render(); return; }
-        if (result && typeof result.then === "function") {
-          result.then(function () { promote(player, epoch, version); }).catch(function () {
-            if (player.epoch !== epoch) return;
-            player.pending = false;
-            render();
-          });
-        } else promote(player, epoch, version);
+        function begin() {
+          if (muted || !unlocked || tracks[scene] !== player || player.epoch !== epoch || version !== generation) return;
+          cancelFade(player);
+          setGain(player.gain, 0, false);
+          if (!player.gain) player.audio.volume = 0;
+          if (player.restartNeeded) {
+            // A real role change always starts its recording at the beginning,
+            // including returning to a previously played lobby/deck/title.
+            try { player.audio.currentTime = 0; }
+            catch (_) { player.pending = false; render(); return; }
+            player.restartNeeded = false;
+            player.restartCount++;
+          }
+          player.lastStartAtMs = performance.now();
+          player.lastStartPosition = player.audio.currentTime;
+          player.lastStartRoleSerial = sceneTransitionCount;
+          recordTransition({ event: "play-request", scene: scene, serial: sceneTransitionCount,
+            source: player.audio.currentSrc || player.audio.src, position: player.audio.currentTime,
+            restartCount: player.restartCount });
+          var result;
+          try { result = player.audio.play(); }
+          catch (_) { player.pending = false; render(); return; }
+          if (result && typeof result.then === "function") {
+            result.then(function () { promote(player, epoch, version); }).catch(function () {
+              if (player.epoch !== epoch) return;
+              player.pending = false;
+              render();
+            });
+          } else promote(player, epoch, version);
+        }
+        var stillAudible = player.gain ? player.gain.gain.value > .001 : player.audio.volume > .001;
+        if (!player.audio.paused && player.restartNeeded && stillAudible) {
+          // A rapid A -> B -> A may return before B has decoded. Fade A's old
+          // tail out before rewinding it; an obsolete timer cannot stop new A.
+          fadeTrack(player, 0, fadeOutSeconds, begin);
+        } else begin();
         render();
       }
       function setMuted(value) {
@@ -233,21 +329,24 @@
         hasVolumePreference = true;
         savePreference("volume", volume);
         setGain(master, muted ? 0 : volume, true);
-        if (active && !active.gain) active.audio.volume = muted ? 0 : volume;
+        if (active && !active.gain) active.audio.volume = (muted ? 0 : volume) * active.fadeWeight;
         render();
       }
       function setScene(value) {
         if (!tracks[value]) return;
         if (scene !== value) {
+          recordTransition({ event: "role-change", from: scene, to: value, serial: ++sceneTransitionCount,
+            previousPosition: tracks[scene].audio.currentTime, targetPositionBefore: tracks[value].audio.currentTime });
           scene = value;
           ++generation;
           requestedAt = performance.now();
+          tracks[scene].restartNeeded = true;
           // In-flight inactive requests are cancelled without stopping the
           // audible outgoing source before the replacement is ready.
           Object.keys(tracks).forEach(function (key) {
-            if (tracks[key] !== active && key !== scene) silence(tracks[key]);
+            if (tracks[key] !== active && key !== scene && tracks[key].pending) silence(tracks[key]);
           });
-        }
+        } else ++sameRoleMessages;
         requestTarget();
       }
       function trustedGesture(event) {
@@ -273,14 +372,20 @@
             hasVolumePreference: hasVolumePreference, unlocked: unlocked, sourceKind: "bundled-instrumental",
             actualSource: active ? active.audio.currentSrc || active.audio.src : null,
             actualPosition: active ? active.audio.currentTime : null,
-            actualPaused: active ? active.audio.paused : true, contextState: context ? context.state : "not-created" };
+            actualPaused: active ? active.audio.paused : true, contextState: context ? context.state : "not-created",
+            sceneTransitionCount: sceneTransitionCount, sameRoleMessages: sameRoleMessages,
+            fadeOutSeconds: fadeOutSeconds, fadeInSeconds: fadeInSeconds };
         },
+        getTransitions: function () { return transitions.map(function (entry) { return Object.assign({}, entry); }); },
         getDiagnostics: function () {
           return Object.keys(tracks).map(function (key) {
             var player = tracks[key];
             return { scene: key, source: player.audio.currentSrc || player.audio.src, currentTime: player.audio.currentTime,
               paused: player.audio.paused, pending: player.pending, readyState: player.audio.readyState,
-              active: player === active, contextState: context ? context.state : "not-created" };
+              active: player === active, restartNeeded: player.restartNeeded, restartCount: player.restartCount,
+              lastStartAtMs: player.lastStartAtMs, lastStartPosition: player.lastStartPosition,
+              lastStartRoleSerial: player.lastStartRoleSerial, lastPromotionPosition: player.lastPromotionPosition,
+              fadeTarget: player.fadeTarget, contextState: context ? context.state : "not-created" };
           });
         }
       };
@@ -331,12 +436,12 @@
       }
     }
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/a4867b85992aee1f879625bf8f72f284.loader.js";
+    var loaderUrl = buildUrl + "/db5c393fc601d6f0244a82a1081e23ed.loader.js";
     var config = {
       arguments: [],
-      dataUrl: buildUrl + "/d6d18f2df7dcb34f80d7a4a8a43a2e28.data.unityweb",
-      frameworkUrl: buildUrl + "/331bd385d8066485836fe0d858b30e46.framework.js.unityweb",
-      codeUrl: buildUrl + "/441157597bdcbcbe018c24452303d7b4.wasm.unityweb",
+      dataUrl: buildUrl + "/51457f6061f8ece713d9f708691b9c50.data.unityweb",
+      frameworkUrl: buildUrl + "/7c68d9b8bbb73dbd5124e3dfdbbad5a6.framework.js.unityweb",
+      codeUrl: buildUrl + "/c4138d164c9db4b9344d10736296525f.wasm.unityweb",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "FirstGame",
       productName: "FantasyCards",
