@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace FirstGame.Editor
 {
@@ -13,8 +14,9 @@ namespace FirstGame.Editor
     {
         const string Pending = "FirstGame.Luminous.GameViewPending";
         const string Destination = "FirstGame.Luminous.GameViewDestination";
+        const string Diagnostic = "FirstGame.Luminous.GameViewDiagnostic";
         static double readyAt = -1, deadline;
-        static bool requested;
+        static bool requested, configured;
         static LuminousGameViewPreview() { EditorApplication.update += Tick; }
 
         public static void Capture()
@@ -27,6 +29,10 @@ namespace FirstGame.Editor
                 throw new InvalidOperationException("GameView capture must stay inside current Luminous evidence.");
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             SessionState.SetString(Destination, path);
+            string diagnostic = Environment.GetEnvironmentVariable("FIRSTGAME_GAMEVIEW_DIAGNOSTIC") ?? "normal";
+            if (diagnostic != "normal" && diagnostic != "global-only" && diagnostic != "normal-maps-off")
+                throw new InvalidOperationException("Unsupported bounded Editor render diagnostic.");
+            SessionState.SetString(Diagnostic, diagnostic);
             SessionState.SetBool(Pending, true);
             EditorSceneManager.OpenScene(LuminousProjectSetup.ScenePath, OpenSceneMode.Single);
             var type = AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetType("UnityEditor.GameView")).FirstOrDefault(t => t != null);
@@ -41,6 +47,25 @@ namespace FirstGame.Editor
             if (!SessionState.GetBool(Pending, false) || !EditorApplication.isPlaying) return;
             if (readyAt < 0) readyAt = EditorApplication.timeSinceStartup + 5;
             string path = SessionState.GetString(Destination, "");
+            if (!configured && EditorApplication.timeSinceStartup >= readyAt - 3)
+            {
+                string diagnostic = SessionState.GetString(Diagnostic, "normal");
+                int changed = 0;
+                foreach (var light in UnityEngine.Object.FindObjectsByType<Light2D>(FindObjectsSortMode.None))
+                {
+                    if (light.lightType == Light2D.LightType.Global) continue;
+                    if (diagnostic == "global-only") { light.enabled = false; changed++; }
+                    else if (diagnostic == "normal-maps-off")
+                    {
+                        var settings = new SerializedObject(light);
+                        settings.FindProperty("m_NormalMapQuality").intValue = (int)Light2D.NormalMapQuality.Disabled;
+                        settings.ApplyModifiedPropertiesWithoutUndo(); changed++;
+                    }
+                }
+                configured = true;
+                File.WriteAllText(path + ".diagnostic.txt", "Actual normal GUI GameView screenshot\nEditor-only diagnostic: " + diagnostic +
+                    "\nChanged runtime local lights: " + changed + "\nNo source image/camera/UI/physics/save mutation. Diagnostic light changes are not shipping prefab changes.\n");
+            }
             if (!requested && EditorApplication.timeSinceStartup >= readyAt)
             {
                 // Normal player screenshot: no RenderTexture/StandardRequest,

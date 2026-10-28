@@ -42,7 +42,8 @@ namespace FirstGame.Editor
                 QualitySettings.vSyncCount = 0;
                 Physics2D.gravity = new Vector2(0, -9.81f);
                 KeepSpriteShaders();
-                PrepareNormalPointLight();
+                PrepareLightCookie();
+                PrepareNormalLight();
                 var font = ProjectSetup.CreateFont();
                 var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
                 var type = Type.GetType(AppType, true);
@@ -115,25 +116,53 @@ namespace FirstGame.Editor
             }
         }
 
-        static void PrepareNormalPointLight()
+        static void PrepareLightCookie()
+        {
+            const string path = "Assets/Resources/Art/GospelLuminous/World/SoftGlow.png";
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+            if (importer == null || texture == null)
+                throw new InvalidOperationException("Missing authored 2D light cookie.");
+            // A two-unit cookie diameter gives radial lights a stable unit-radius
+            // transform contract. World sprites create their own PPU at runtime.
+            float pixelsPerUnit = texture.height / 2f;
+            if (Mathf.Abs(importer.spritePixelsPerUnit - pixelsPerUnit) > .001f)
+            {
+                importer.spritePixelsPerUnit = pixelsPerUnit;
+                importer.SaveAndReimport();
+            }
+        }
+
+        static void PrepareNormalLight()
         {
             const string path = "Assets/Resources/Art/GospelLuminous/Rendering/NormalPointLight.prefab";
             bool existing = AssetDatabase.LoadAssetAtPath<GameObject>(path) != null;
-            var root = existing ? PrefabUtility.LoadPrefabContents(path) : new GameObject("Authored normal-lit point light");
+            var root = existing ? PrefabUtility.LoadPrefabContents(path) : new GameObject("Authored normal-lit cookie light");
             try
             {
                 var light = root.GetComponent<Light2D>();
                 if (light == null) light = root.AddComponent<Light2D>();
-                light.lightType = Light2D.LightType.Point;
-                light.pointLightOuterRadius = 4f;
+                // The supported Sprite cookie path retains spatial colored
+                // normal lighting without the Point/Freeform core artifacts
+                // observed in this actual URP 17.3 renderer.
+                light.lightType = Light2D.LightType.Sprite;
+                light.lightCookieSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
+                    "Assets/Resources/Art/GospelLuminous/World/SoftGlow.png");
+                if (light.lightCookieSprite == null)
+                    throw new InvalidOperationException("Missing authored radial light cookie.");
+                light.overlapOperation = Light2D.OverlapOperation.Additive;
                 light.intensity = 1f;
+                // This painted scene has no ShadowCaster2D. Do not sample an
+                // unused shadow buffer while retaining real local/normal light.
+                light.shadowsEnabled = false;
+                light.shadowIntensity = 0f;
                 var settings = new SerializedObject(light);
                 var quality = settings.FindProperty("m_NormalMapQuality");
                 if (quality == null) throw new InvalidOperationException("URP 2D normal-light authoring schema changed.");
-                quality.enumValueIndex = (int)Light2D.NormalMapQuality.Fast;
+                quality.enumValueIndex = (int)Light2D.NormalMapQuality.Accurate;
                 settings.ApplyModifiedPropertiesWithoutUndo();
-                if (light.normalMapQuality != Light2D.NormalMapQuality.Fast)
-                    throw new InvalidOperationException("The authored point light did not retain normal-map quality.");
+                if (light.normalMapQuality != Light2D.NormalMapQuality.Accurate)
+                    throw new InvalidOperationException("The authored cookie light did not retain normal-map quality.");
                 PrefabUtility.SaveAsPrefabAsset(root, path);
             }
             finally

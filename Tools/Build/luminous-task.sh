@@ -29,7 +29,13 @@ case "$task" in
   windows|web)
     method=Windows; target=StandaloneWindows64
     if [[ "$task" == web ]]; then method=Web; target=WebGL; fi
+    python3 Tools/Build/luminous-pipeline-state.py snapshot "$attempt" "$task"
+    # URP saves generated prefilter/active-resource metadata during a build.
+    # Preserve the exact authored files after the Editor has fully exited.
+    build_exit=0
     "$UNITY_EDITOR" -batchmode -nographics -projectPath Games/PathOfDawn -buildTarget "$target" \
-      -executeMethod "FirstGame.Editor.BuildCommands.$method" -quit -logFile "$log"
+      -executeMethod "FirstGame.Editor.BuildCommands.$method" -quit -logFile "$log" || build_exit=$?
+    python3 Tools/Build/luminous-pipeline-state.py restore "$attempt" "$task"
+    exit "$build_exit"
     ;;
 esac

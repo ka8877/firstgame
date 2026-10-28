@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
   m_ComponentVersion: 3
-  m_LightType: 3
+  m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -53,34 +53,54 @@ MonoBehaviour:
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
+  m_LightCookieSprite: {fileID: 21300000, guid: 1a90da5004fa3ba8be6abdcb14fd031c, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
-  m_NormalMapQuality: 0
+  m_NormalMapQuality: 1
   m_UseNormalMap: 0
-  m_ShadowsEnabled: 1
-  m_ShadowIntensity: 0.75
+  m_ShadowsEnabled: 0
+  m_ShadowIntensity: 0
   m_ShadowSoftness: 0.3
   m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_PointLightInnerAngle: 360
+    m_Center: {x: -0.00040000677, y: 0.00095000863, z: 0}
+    m_Extent: {x: 1.0006001, y: 0.99995005, z: 0}
+  m_PointLightInnerAngle: 359
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 4
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.9
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.1, y: 0, z: 0}
+  - {x: 0.09659258, y: 0.025881905, z: 0}
+  - {x: 0.08660254, y: 0.05, z: 0}
+  - {x: 0.07071068, y: 0.07071068, z: 0}
+  - {x: 0.049999997, y: 0.086602546, z: 0}
+  - {x: 0.025881907, y: 0.09659258, z: 0}
+  - {x: -0.000000004371139, y: 0.1, z: 0}
+  - {x: -0.025881916, y: 0.09659258, z: 0}
+  - {x: -0.05000001, y: 0.08660254, z: 0}
+  - {x: -0.07071068, y: 0.07071068, z: 0}
+  - {x: -0.08660254, y: 0.05000001, z: 0}
+  - {x: -0.09659259, y: 0.025881892, z: 0}
+  - {x: -0.1, y: -0.000000008742278, z: 0}
+  - {x: -0.09659258, y: -0.025881907, z: 0}
+  - {x: -0.08660253, y: -0.05000002, z: 0}
+  - {x: -0.07071067, y: -0.07071069, z: 0}
+  - {x: -0.049999993, y: -0.086602546, z: 0}
+  - {x: -0.0258819, y: -0.09659259, z: 0}
+  - {x: 0.0000000011924881, y: -0.1, z: 0}
+  - {x: 0.025881901, y: -0.09659258, z: 0}
+  - {x: 0.049999993, y: -0.086602546, z: 0}
+  - {x: 0.070710704, y: -0.07071065, z: 0}
+  - {x: 0.08660256, y: -0.04999998, z: 0}
+  - {x: 0.09659259, y: -0.025881885, z: 0}

@@ -118,8 +118,8 @@ namespace PathOfDawn.Presentation
         void LateUpdate()
         {
             if (SceneCamera == null || Player == null || World == null) return;
-            float x = inGame ? Player.Position.x + Player.Facing * 1.15f : -20.6f;
-            float y = World.HeightAt(inGame ? Player.Position.x : -18) + (inGame ? 2.2f : 2.6f);
+            float x = Player.Position.x + (inGame ? Player.Facing * 1.15f : -2.6f);
+            float y = World.HeightAt(Player.Position.x) + (inGame ? 2.2f : 2.6f);
             var target = new Vector3(Mathf.Clamp(x, -29, 29), y, -30);
             SceneCamera.transform.position = Vector3.SmoothDamp(SceneCamera.transform.position, target, ref cameraVelocity, .38f);
             SceneCamera.orthographicSize = Mathf.Lerp(SceneCamera.orthographicSize, inGame ? zoom : 4.8f, 1 - Mathf.Exp(-4 * Time.deltaTime));
@@ -157,6 +157,7 @@ namespace PathOfDawn.Presentation
             Journey = GospelJourney.New();
             Journey.SetPresentationSpace(GospelJourney.LuminousSpace);
             Player.SetPose(new Vector2(-18, World.HeightAt(-18) + .06f));
+            saveClock = 0;
             inGame = true;
             Save(false);
             Resume();
@@ -174,6 +175,7 @@ namespace PathOfDawn.Presentation
                 float y = saved.PresentationSpace == GospelJourney.LuminousSpace ? saved.PlayerY : World.HeightAt(x) + .06f;
                 Journey = saved;
                 Player.SetPose(new Vector2(Mathf.Clamp(x, -33, 33), y), saved.PlayerYaw > 90 ? -1 : 1);
+                saveClock = 0;
                 inGame = true;
                 Resume();
                 if (Journey.Phase == GospelPhase.Reading) ShowCurrentReading();

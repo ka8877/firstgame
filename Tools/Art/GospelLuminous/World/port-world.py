@@ -67,6 +67,9 @@ def main():
             text = re.sub(r'sRGBTexture: \d+', 'sRGBTexture: 0', text)
         if name.startswith('GrassFill'):
             text = re.sub(r'wrap([UVW]): \d+', r'wrap\1: 0', text)
+        if name == 'SoftGlow':
+            with Image.open(source) as cookie:
+                text = re.sub(r'spritePixelsToUnits: [\d.]+', 'spritePixelsToUnits: ' + str(cookie.height / 2), text)
         target.with_name(target.name + '.meta').write_text(text)
         im=Image.open(target)
         rows.append({'resource': name, 'source': relative, 'sourceGuid': original_guid,
@@ -92,7 +95,8 @@ def main():
         'importChanges':['New deterministic resource GUIDs, original source GUIDs retained in ledger.',
             '2048 maximum import dimension, no mipmaps; source PNG bytes preserved.',
             'Foliage normal textures imported as linear normal maps for URP2D lights.',
-            'Ground fill textures repeat in generated ground-ribbon UVs.'],
+            'Ground fill textures repeat in generated ground-ribbon UVs.',
+            'SoftGlow sprite pixels per unit is source height/2, making the original cookie two world units high.'],
         'license':'Unity Companion License 1.4; complete notice included with assets.',
         'spriteRegions':'Grass and flower source padding is addressed with runtime UV rectangles; the source images are not cropped or edited.'}
     (Path(__file__).parent/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

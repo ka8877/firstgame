@@ -2,6 +2,8 @@
 
 현재 예수님 게임 개정은 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. `GospelLuminousApp`·실제 URP2D Renderer·다층 숲과 성전 그림·관절 2D 인물·Rigidbody2D 이동·새 UI가 실행 경로다. 새 여정은 곧바로 2D 장면으로 들어가며 말씀 버튼에서 탄생 본문을 선택해 읽는다. 읽지 않은 본문을 자동 완료하지 않는다. 기존 schema1/`gospel-0.1.0`을 유지하고 선택 필드 `presentationSpace`로 이전 3D와 새 2D 좌표를 구분한다. 세부 계약과 실제 완료 상태는 [GospelLuminous](GospelLuminous.md)·[검증 기록](GospelLuminousValidation.md)을 따른다.
 
+URP의 플레이어 빌드는 파이프라인 에셋의 셰이더 사전 필터와 전역 설정의 활성 리소스 목록을 생성·저장한다. 현재 `luminous-task.sh`는 세 에셋의 제작 원본을 보관하고 Unity 프로세스가 종료된 뒤 정확한 바이트로 복원한다. 각 시도의 `PipelineState`에 변경 전·후와 해시를 남기며, 소스 지문에서 이 파일을 제외하거나 실행 결과를 새 소스에 다시 묶지 않는다.
+
 판타지마스터즈는 기존 `fm-restoration-2026-10-27`의 출전605종·20덱·4시나리오·25효과음을 그대로 유지한다. 이번 Gospel 전용 배포는 현재 공개 카드 파일·미리보기를 SHA로 보존하며 카드를 다시 빌드하거나 이전 카드 검사를 새 통과로 합치지 않는다. 이하 이전3D·Restoration 명령/설명은 명시한 경우에만 이력이다.
 
 ## 고정 도구
@@ -39,17 +41,15 @@ bash Tools/Environment/install.sh
 bash Tools/Validation/run-core-tests.sh
 python3 Tools/Data/Gospel/verify-readings.py
 
-bash Tools/Build/unity-task.sh PathOfDawn prepare
+bash Tools/Build/luminous-task.sh prepare LocalPrepare01
 bash Tools/Build/unity-task.sh PathOfDawn edit-tests
-# Current native fixture: PathOfDawn.SmokeTests.GospelLuminousSmokeTests
-# Run via Unity -runTests -testPlatform EditMode -testFilter above fixture.
-# The old play-tests wrapper points to the archived 3D fixture.
+bash Tools/Build/luminous-task.sh native LocalNative01
 
-bash Tools/Build/unity-task.sh PathOfDawn windows
-bash Tools/Build/unity-task.sh PathOfDawn web
+bash Tools/Build/luminous-task.sh windows Windows01
+bash Tools/Build/luminous-task.sh web Web01
 ```
 
-UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어간다. 이전 관찰자 서사·저장 회귀 테스트가 통과한 것을 새 Gospel Boot와 이동 검사로 대신하지 않는다. 성경 검사는 독립된 공식 본문 스냅샷과 C#의 직접 인용을 비교하며 화면·애니메이션의 통과를 뜻하지 않는다. 현재 개정의 네이티브·브라우저 명령과 결과는 최종 검증 기록을 따른다. `classic-cards-smoke.py`·기존 움직임 검증 도구의 이전 UI 좌표와 흐름을 새 시작 화면에 그대로 적용하지 않는다.
+현재 `GospelLuminousSmokeTests`는 Editor 테스트 러너 안에서 실제 PlayMode에 들어간다. 각 명령은 기존 원본을 덮어쓰지 않도록 새 attempt 이름을 사용한다. `luminous-task.sh`는 작업 소유 PID와 일치하고 실제로 죽은 Xvfb의 잠금/소켓만 복구하며, 살아 있는 서버나 인증 자료는 변경하지 않는다. 이전 관찰자 서사·저장 회귀 테스트가 통과한 것을 새 Gospel Boot와 이동 검사로 대신하지 않는다. 성경 검사는 독립된 공식 본문 스냅샷과 C#의 직접 인용을 비교하며 화면·애니메이션의 통과를 뜻하지 않는다. 현재 개정의 네이티브·브라우저 명령과 결과는 최종 검증 기록을 따른다. `classic-cards-smoke.py`·기존 움직임 검증 도구의 이전 UI 좌표와 흐름을 새 시작 화면에 그대로 적용하지 않는다.
 
 다른 운영체제의 정확한 실행 파일은 `UNITY_EDITOR`로 지정한다. 공식 CLI Build Profile을 재생성할 때는 `bash Tools/Build/unity-task.sh <Game> profiles`를 사용하고 실제 생성 여부를 확인한다. 각 작업은 이미 격리된 기존 체크아웃에서 수행하며, 사용자 요청 없이 별도 worktree를 만들지 않는다. 스냅샷의 파일·도구가 남아 있어도 에디터·Xvfb·서버 프로세스와 로그인 세션이 유지된다고 가정하지 않는다.
 

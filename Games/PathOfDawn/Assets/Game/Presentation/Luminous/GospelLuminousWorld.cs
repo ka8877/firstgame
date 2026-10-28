@@ -272,13 +272,13 @@ namespace PathOfDawn.Presentation
             ambient.transform.SetParent(lightRoot, false);
             ambient.lightType = Light2D.LightType.Global;
             ambient.color = new Color(.68f, .83f, .87f); ambient.intensity = .66f;
-            PointLight(lightRoot, "Warm garden opening", -16.5f, 4.5f, 10f,
+            RadialLight(lightRoot, "Warm garden opening", -16.5f, 4.5f, 10f,
                 new Color(1f, .86f, .53f), 1.15f);
-            PointLight(lightRoot, "Blue depth at ancient trees", -28f, 4.5f, 10f,
+            RadialLight(lightRoot, "Blue depth at ancient trees", -28f, 4.5f, 10f,
                 new Color(.35f, .70f, 1f), .5f);
-            PointLight(lightRoot, "Sun across the middle clearing", 2f, 5.5f, 12f,
+            RadialLight(lightRoot, "Sun across the middle clearing", 2f, 5.5f, 12f,
                 new Color(.92f, .98f, .66f), 1.0f);
-            PointLight(lightRoot, "Temple honey light", 23.5f, 4.5f, 11f,
+            RadialLight(lightRoot, "Temple honey light", 23.5f, 4.5f, 11f,
                 new Color(1f, .78f, .44f), 1.15f);
 
             float[] rays = { -18f, -1f, 21f };
@@ -297,22 +297,25 @@ namespace PathOfDawn.Presentation
             grade.contrast.Override(7f); grade.saturation.Override(-3f);
         }
 
-        Light2D PointLight(Transform parent, string name, float x, float y, float radius, Color color, float intensity)
+        Light2D RadialLight(Transform parent, string name, float x, float y, float radius, Color color, float intensity)
         {
             // URP17 exposes normalMapQuality as a read-only runtime property.
-            // Its Fast setting is authored in the actual resource prefab by the
+            // Its Accurate setting is authored in the actual resource prefab by the
             // Editor setup, rather than mutating private package state at runtime.
             var prefab = Resources.Load<GameObject>("Art/GospelLuminous/Rendering/NormalPointLight");
             if (prefab == null) throw new System.InvalidOperationException("Missing authored normal-mapped 2D light prefab.");
             var instance = Instantiate(prefab);
             instance.name = name;
             var light = instance.GetComponent<Light2D>();
-            if (light == null || light.normalMapQuality == Light2D.NormalMapQuality.Disabled)
-                throw new System.InvalidOperationException("Authored 2D light must contain a Light2D with normal mapping enabled.");
+            if (light == null || light.lightType != Light2D.LightType.Sprite ||
+                light.normalMapQuality != Light2D.NormalMapQuality.Accurate || light.lightCookieSprite == null ||
+                Mathf.Abs(light.lightCookieSprite.bounds.size.y - 2f) > .03f)
+                throw new System.InvalidOperationException("Authored 2D light must contain an accurately normal-mapped Sprite Light2D with a two-unit soft radial cookie.");
             light.transform.SetParent(parent, false); light.transform.localPosition = new Vector3(x, y, -1f);
-            light.lightType = Light2D.LightType.Point; light.color = color; light.intensity = intensity;
-            light.pointLightInnerRadius = radius * .05f; light.pointLightOuterRadius = radius;
-            light.pointLightInnerAngle = 360f; light.pointLightOuterAngle = 360f;
+            // The authored soft cookie is two world units high. Uniform scaling
+            // sets its radius while genuine colored 2D lighting and normals remain active.
+            light.transform.localScale = new Vector3(radius, radius, 1f);
+            light.color = color; light.intensity = intensity;
             return light;
         }
 
@@ -338,7 +341,7 @@ namespace PathOfDawn.Presentation
                 new Color(1f, .84f, .35f, .42f), false);
             objectiveGlow.transform.localScale = new Vector3(objectiveGlow.transform.localScale.x * 5f,
                 objectiveGlow.transform.localScale.y, 1f);
-            objectiveLight = PointLight(objective, "Current place quiet warm light", 0f, .5f, 2.4f,
+            objectiveLight = RadialLight(objective, "Current place quiet warm light", 0f, .5f, 2.4f,
                 new Color(1f, .86f, .53f), .19f);
             for (int i = 0; i < 6; i++)
             {

@@ -4,7 +4,7 @@
 
 현재 개정은 예수님의 길 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. 판타지마스터즈의 현재 공개 `fm-restoration-2026-10-27` 파일과 미리보기는 바이트 그대로 보존한다. 이번에는 Gospel만 새 네이티브·Windows/Web·Desktop720/Mobile844 검사를 진행하며 실제 완료 상태는 [GospelLuminousValidation](GospelLuminousValidation.md)을 따른다.
 
-새 빌드는 `/tmp/firstgame-luminous-builds`, 공개판 보존본은 `/tmp/firstgame-luminous-preserved-public`, 새 사이트는 기록된 `/tmp/firstgame-luminous-staged-site`와 `Artifacts/LuminousWebPlaytest` 링크를 사용한다. `stage-luminous.py`는 현재 빌드 입력·Core와 별도 실제 웹 검사·Root의 원본 검토·전체 런타임 해시를 확인한다. 원본 Lost Crypt 안내와 Unity Companion License 전문은 플레이어/사이트 ThirdParty에 함께 배포한다.
+새 빌드는 `/tmp/firstgame-luminous-builds`, 공개판 보존본은 `/tmp/firstgame-luminous-preserved-public`, 새 사이트는 기록된 `/tmp/firstgame-luminous-staged-site`와 `Artifacts/LuminousWebPlaytest` 링크를 사용한다. `stage-luminous.py`는 현재 빌드 입력·실제 웹 검사·Root의 원본 검토·전체 런타임 해시를 확인한다. Core와 네이티브 검사는 별도의 현재 결과에 기록한다. 원본 Lost Crypt 안내와 Unity Companion License 전문은 플레이어/사이트 ThirdParty에 함께 배포한다.
 
 ```bash
 # Current Gospel builds + Desktop720/Mobile844 actual input and direct Root review first.

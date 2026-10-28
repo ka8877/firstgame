@@ -201,11 +201,17 @@ namespace PathOfDawn.Presentation
             var hand = Node("Right hand lamp socket",nearForearm,new Vector2(.035f,-.285f));
             lamp = new GameObject("Held clay oil lamp"); lamp.transform.SetParent(hand,false);
             SpritePart("Clay lamp and flame",13,lamp.transform,new Vector2(.02f,.01f),.14f,new Vector2(.2f,.2f),29,.22f);
-            var lightObject = new GameObject("Warm oil flame Light2D"); lightObject.transform.SetParent(lamp.transform,false);
+            var lightPrefab = Resources.Load<GameObject>("Art/GospelLuminous/Rendering/NormalPointLight");
+            if (!lightPrefab) throw new System.InvalidOperationException("Missing authored SoftGlow lamp light.");
+            var lightObject = Instantiate(lightPrefab,lamp.transform,false);
+            lightObject.name = "Warm oil flame · SoftGlow Sprite Light2D";
             lightObject.transform.localPosition = new Vector3(.17f,.08f,0);
-            lampLight = lightObject.AddComponent<Light2D>(); lampLight.lightType = Light2D.LightType.Point;
+            lightObject.transform.localScale = new Vector3(1.8f,1.8f,1);
+            lampLight = lightObject.GetComponent<Light2D>();
+            if (!lampLight || lampLight.lightType != Light2D.LightType.Sprite || !lampLight.lightCookieSprite || lampLight.normalMapQuality != Light2D.NormalMapQuality.Accurate)
+                throw new System.InvalidOperationException("Lamp light must retain its authored SoftGlow sprite cookie and accurate normals.");
             lampLight.color = new Color(1,.64f,.20f); lampLight.intensity = .7f;
-            lampLight.pointLightInnerRadius = .12f; lampLight.pointLightOuterRadius = 1.8f;
+            lampLight.shadowsEnabled = false; lampLight.shadowIntensity = 0;
             lamp.SetActive(false);
         }
 

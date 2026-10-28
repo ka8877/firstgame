@@ -476,7 +476,8 @@
     "New deterministic resource GUIDs, original source GUIDs retained in ledger.",
     "2048 maximum import dimension, no mipmaps; source PNG bytes preserved.",
     "Foliage normal textures imported as linear normal maps for URP2D lights.",
-    "Ground fill textures repeat in generated ground-ribbon UVs."
+    "Ground fill textures repeat in generated ground-ribbon UVs.",
+    "SoftGlow sprite pixels per unit is source height/2, making the original cookie two world units high."
   ],
   "license": "Unity Companion License 1.4; complete notice included with assets.",
   "spriteRegions": "Grass and flower source padding is addressed with runtime UV rectangles; the source images are not cropped or edited."

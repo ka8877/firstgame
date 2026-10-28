@@ -73,6 +73,8 @@ def main():
               'checks': [], 'screenshots': [], 'input': [], 'console': [], 'pageErrors': [], 'failedRequests': [], 'httpErrors': [],
               'unityConfigurations': [], 'visualReview': {'status': 'pending', 'scope': 'Actual originals must be directly reviewed by Root.'},
               'audioEvidence': {'observer': str(observer.relative_to(ROOT)), 'observerSha256': sha(observer), 'windows': []},
+              'readiness': {'loaderPromise': 'createUnityInstance', 'normalSplashSettleMs': 4000,
+                            'scope': 'Ordinary splash/scene settle after loader resolution; actual title originals still require direct review.'},
               'limits': ['Software Chromium/Mesa and emulated touch; no physical device FPS or human speaker listening.',
                          'Original screenshots are not automatic visual approvals. No game-state injection.',
                          'Public scope is byte-bound launch and music only; complete local movement/save/reload are separate.']}
@@ -108,7 +110,10 @@ def main():
                 page.on('response', lambda response: report['httpErrors'].append({'url': response.url, 'status': response.status, 'navigation': navigation}) if response.status >= 400 else None)
                 def ready():
                     page.wait_for_function("document.querySelector('#unity-canvas')?.dataset.unityState === 'ready'", timeout=args.timeout * 1000)
-                    page.wait_for_timeout(900)
+                    # Unity's normal splash can remain on screen after the
+                    # loader promise resolves. Wait before ordinary UI inputs;
+                    # do not call game methods or replace the splash with a hook.
+                    page.wait_for_timeout(4000)
                     data = page.evaluate("document.querySelector('#unity-canvas').dataset.dataUrl")
                     report['unityConfigurations'].append({'dataUrl': data, 'navigation': navigation})
                     check('Unity createUnityInstance resolved after reload' if navigation else 'Unity createUnityInstance resolved', True, data)
