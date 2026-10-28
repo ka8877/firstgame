@@ -45,6 +45,13 @@ namespace FirstGame.Editor
         [MenuItem("FirstGame/Prepare First Slice")]
         public static void Ensure()
         {
+            LuminousProjectSetup.Ensure();
+        }
+
+        // The previous 3D construction remains editable history. The latest user
+        // request deliberately replaces its active entry with the 2D scene.
+        public static void EnsureLegacy()
+        {
             if (initializing) return;
             initializing = true;
             try
@@ -83,7 +90,7 @@ namespace FirstGame.Editor
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
                 AssetDatabase.SaveAssets();
                 NormalizeGeneratedController();
-                Validate();
+                ValidateLegacy();
                 File.WriteAllText("ProjectSettings/FirstGameSetup.version", "6000.3.26f1:gospel-journey:1\n");
                 Debug.Log("FIRSTGAME_SETUP_OK " + Game);
             }
@@ -404,7 +411,7 @@ namespace FirstGame.Editor
             return asset;
         }
 
-        static TMP_FontAsset CreateFont()
+        internal static TMP_FontAsset CreateFont()
         {
             // Source-derived prefill keeps current UI, cards and Scripture available offline.
             // Dynamic atlases cover later content without shipping every Hangul syllable as pixels.
@@ -799,6 +806,11 @@ namespace FirstGame.Editor
 
         [MenuItem("FirstGame/Validate First Slice")]
         public static void Validate()
+        {
+            LuminousProjectSetup.Validate();
+        }
+
+        public static void ValidateLegacy()
         {
             if (Resources.Load<TMP_FontAsset>("Fonts/Korean") == null) throw new InvalidOperationException("Missing Korean font.");
             if (!(GraphicsSettings.defaultRenderPipeline is UniversalRenderPipelineAsset)) throw new InvalidOperationException("URP is not active.");

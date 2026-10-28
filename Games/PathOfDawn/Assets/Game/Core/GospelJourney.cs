@@ -19,6 +19,8 @@ namespace PathOfDawn.Core
         public float playerX, playerY, playerZ, playerYaw;
         // Optional schema-1 extension: old saves have no equipped utility.
         public string equippedUtility;
+        // Optional schema-1 metadata. Empty identifies the preserved 3D coordinate space.
+        public string presentationSpace;
 
         public GospelSave Copy() => new GospelSave
         {
@@ -26,7 +28,7 @@ namespace PathOfDawn.Core
             prologuePage = prologuePage, objectiveIndex = objectiveIndex, dialoguePage = dialoguePage,
             collectedReadings = collectedReadings == null ? null : new List<string>(collectedReadings),
             playerX = playerX, playerY = playerY, playerZ = playerZ, playerYaw = playerYaw,
-            equippedUtility = equippedUtility
+            equippedUtility = equippedUtility, presentationSpace = presentationSpace
         };
     }
 
@@ -37,6 +39,7 @@ namespace PathOfDawn.Core
         public const string ContentVersion = "gospel-0.1.0";
         public const string GameId = "gospel-journey";
         public const string SaveSlot = "gospel-journey-v1";
+        public const string LuminousSpace = "luminous-side-v1";
         GospelSave state;
 
         GospelJourney() { state = new GospelSave { schemaVersion = SchemaVersion,
@@ -54,6 +57,12 @@ namespace PathOfDawn.Core
         public float PlayerZ => state.playerZ;
         public float PlayerYaw => state.playerYaw;
         public string EquippedUtility => state.equippedUtility ?? "";
+        public string PresentationSpace => state.presentationSpace ?? "";
+        public void SetPresentationSpace(string space)
+        {
+            if (!ValidPresentationSpace(space)) throw new ArgumentException("저장된 화면 좌표 공간을 확인할 수 없습니다.", nameof(space));
+            state.presentationSpace = space ?? "";
+        }
         public bool LampEquipped => EquippedUtility == GospelBelongings.LampId;
         public void SetUtility(string id)
         {
@@ -141,6 +150,8 @@ namespace PathOfDawn.Core
                 throw new ArgumentException("호환되지 않는 복음서 여정 저장입니다. 기존 파일을 보존해 주세요.");
             if(!GospelBelongings.IsValidUtility(save.equippedUtility))
                 throw new ArgumentException("저장된 장착 도구를 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
+            if (!ValidPresentationSpace(save.presentationSpace))
+                throw new ArgumentException("저장된 화면 좌표 공간을 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
             if (!Enum.IsDefined(typeof(GospelPhase), save.phase) || save.prologuePage < 0
                 || save.prologuePage > GospelCatalog.PrologueReadings.Count || save.objectiveIndex < 0
                 || save.objectiveIndex > GospelCatalog.Objectives.Count)
@@ -171,6 +182,7 @@ namespace PathOfDawn.Core
         }
 
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
+        static bool ValidPresentationSpace(string space) => string.IsNullOrEmpty(space) || space == LuminousSpace;
         static bool ValidPosition(float x, float y, float z) => Finite(x) && Finite(y) && Finite(z)
             && Math.Abs(x) <= 100f && Math.Abs(z) <= 100f && y >= -5f && y <= 30f;
     }

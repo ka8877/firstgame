@@ -1,6 +1,8 @@
 # 개발과 실행
 
-현재 개정은 판타지마스터즈 `fm-restoration-2026-10-27`과 예수님의 길 `gospel-toon-2026-10-27`, 릴리스 프로필 `restoration`이다. 판마는 출전 카드605종·기본 덱20개(단일7·듀얼13), 원본 전체 인쇄 카드, 별도 상위 등급 감상 도감30종, 원작 대기실을 참고한 로비, 실제 싱글 시나리오4과제와 별도 효과음을 구현한다. 예수님의 길은 카툰 인물·구조가 있는 석조 우물, NPC 대화 아래 정확한 본문, 인물·가방·안내도와 실제 등잔 장착을 제공한다. 카드 규칙/저장은 `fm-classic-0.1.0`/schema3, 성경 여정은 `gospel-0.1.0`/schema1을 유지한다. 이 문서는 개발 진입점이며 현재 빌드·실행·공개 반영 여부는 [RestorationValidation](RestorationValidation.md)의 새 근거를 따른다. 이전 검증·자산은 이력으로 보존한다.
+현재 예수님 게임 개정은 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. `GospelLuminousApp`·실제 URP2D Renderer·다층 숲과 성전 그림·관절 2D 인물·Rigidbody2D 이동·새 UI가 실행 경로다. 새 여정은 곧바로 2D 장면으로 들어가며 말씀 버튼에서 탄생 본문을 선택해 읽는다. 읽지 않은 본문을 자동 완료하지 않는다. 기존 schema1/`gospel-0.1.0`을 유지하고 선택 필드 `presentationSpace`로 이전 3D와 새 2D 좌표를 구분한다. 세부 계약과 실제 완료 상태는 [GospelLuminous](GospelLuminous.md)·[검증 기록](GospelLuminousValidation.md)을 따른다.
+
+판타지마스터즈는 기존 `fm-restoration-2026-10-27`의 출전605종·20덱·4시나리오·25효과음을 그대로 유지한다. 이번 Gospel 전용 배포는 현재 공개 카드 파일·미리보기를 SHA로 보존하며 카드를 다시 빌드하거나 이전 카드 검사를 새 통과로 합치지 않는다. 이하 이전3D·Restoration 명령/설명은 명시한 경우에만 이력이다.
 
 ## 고정 도구
 
@@ -15,7 +17,7 @@
 1. Git과 Git LFS를 설치하고 `ka8877/firstgame`을 클론한다. 기존 클론은 변경 사항을 먼저 보존한 뒤 최신 소스를 받는다. `git lfs install --local`, `git lfs pull`, `git lfs checkout`으로 그림·FBX·글꼴·음원의 실제 파일을 받는다. 작은 LFS 포인터 파일을 모델로 가져오지 않는다.
 2. Unity Hub에 정확한 에디터 버전과 Windows/WebGL 모듈을 설치하고 본인 계정의 적합한 라이선스를 활성화한다. 계정·라이선스 파일을 저장소에 넣지 않는다.
 3. Hub에서 `Games/FantasyCards`, `Games/PathOfDawn`을 각각 추가한다. 서로 다른 두 Unity 프로젝트다.
-4. 패키지 import 후 각 프로젝트의 `FirstGame > Prepare First Slice`를 실행한다. 새벽의 길의 기존 클론에서도 이 명령을 실행해야 이전 관찰자 Boot가 새 `GospelJourneyApp`으로 전환되고 3D 인물·재질·Idle/Walk/Run 컨트롤러와 글꼴을 준비한다.
+4. 패키지 import 후 각 프로젝트의 `FirstGame > Prepare First Slice`를 실행한다. 예수님 게임의 기존 클론에서도 이 명령을 실행해야 Boot가 새 `GospelLuminousApp`으로 전환되고 URP2D Renderer·정상 조명 프리팹·글꼴을 준비한다. 이전3D 코드와 에셋은 제작 이력으로 남아 있다.
 5. `Assets/Scenes/Boot.unity`에서 Play한다. 카드는 `게임 시작 → 연습방 → 대전실 → 덱 선택 → START`, 예수님의 길은 `새 여정 → 탄생 말씀 세 페이지 → 성전 탐색`으로 확인한다.
 6. `FirstGame > Validate First Slice`와 현재 규칙·저장·UI 테스트를 수행한다. 생성한 씬·설정·에셋은 `.meta`와 함께 관리하며 `Library`, `Temp`, `Logs`, 빌드 출력은 커밋하지 않는다.
 7. `FirstGame > Build Windows` / `Build Web`으로 게임별 플레이어를 만든다. 기본 출력은 `Artifacts/Builds/<Game>/Windows|Web`이며 `FIRSTGAME_BUILD_ROOT`로 생성 빌드 루트를 바꿀 수 있다. 현재 클라우드는 `/tmp/firstgame-restoration-builds/<Game>/Windows|Web`를 사용한다. 빌드 성공과 실제 플레이 검증은 구분한다.
@@ -28,24 +30,21 @@
 
 ```bash
 cd /workspace/firstgame
-export XDG_CACHE_HOME=/tmp/firstgame-restoration-runtime-cache
+export XDG_CACHE_HOME=/tmp/firstgame-luminous-runtime-cache
 source Tools/Environment/activate-shell.sh
 # 현재 클라우드의 생성 빌드 전용 경로. HOME·XDG_CONFIG_HOME과 라이선스는 바꾸지 않는다.
-export FIRSTGAME_BUILD_ROOT=/tmp/firstgame-restoration-builds
+export FIRSTGAME_BUILD_ROOT=/tmp/firstgame-luminous-builds
 # 새 환경에 도구가 없을 때만 설치한다.
 bash Tools/Environment/install.sh
 bash Tools/Validation/run-core-tests.sh
 python3 Tools/Data/Gospel/verify-readings.py
 
-bash Tools/Build/unity-task.sh FantasyCards prepare
 bash Tools/Build/unity-task.sh PathOfDawn prepare
-bash Tools/Build/unity-task.sh FantasyCards edit-tests
 bash Tools/Build/unity-task.sh PathOfDawn edit-tests
-bash Tools/Build/unity-task.sh FantasyCards play-tests
-bash Tools/Build/unity-task.sh PathOfDawn play-tests
+# Current native fixture: PathOfDawn.SmokeTests.GospelLuminousSmokeTests
+# Run via Unity -runTests -testPlatform EditMode -testFilter above fixture.
+# The old play-tests wrapper points to the archived 3D fixture.
 
-bash Tools/Build/unity-task.sh FantasyCards windows
-bash Tools/Build/unity-task.sh FantasyCards web
 bash Tools/Build/unity-task.sh PathOfDawn windows
 bash Tools/Build/unity-task.sh PathOfDawn web
 ```
@@ -59,7 +58,7 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 | 게임 | 현재 실행·제작 기준 |
 |---|---|
 | FantasyCards | `FantasyCardsApp`·`FmArcanaCards`의 전체 원본 인쇄605종, `FmRestorationModes`의4과제, `OriginalCardArchive`의 감상 전용30종, 기본 덱20개. 원작식 로비·준비실·5전열과 실제 Core 이벤트/중간 스냅샷, Pretendard, 원작 BGM 발췌와 별도 `FmSfxHost` 효과음 |
-| PathOfDawn | `GospelJourneyApp`·`GospelTempleWorld`·`GospelThirdPersonMotor`·`GospelActionController`와 카툰 인물5종·65본/7클립·`GospelToonCharacter.shader`. 새 `GospelWell` 우물, `GospelCharacterMenu`·`GospelBelongings`의 인물/가방/안내도와 등잔, `GospelNpcDialog`·`GospelCatalog`의 실제 대화·성경 본문 |
+| PathOfDawn | `GospelLuminousApp`·`GospelLuminousWorld`·`GospelLuminousController`·`GospelLuminousActor`·`GospelLuminousUi`. 공식 Lost Crypt 그림과 새 인물/성전 그림, 실제 2D 조명·관절·천 변형, 좌우 이동·달리기·점프·소지품·선택 말씀 읽기 |
 
 일반 클론·빌드는 커밋된 FBX와 그림을 사용한다. 현재 미술·UI 계약은 [원본 카드와 대기실](FmRestorationUI.md)·[상위 등급과 시나리오](FmRestorationCards.md)·[효과음](FmRestorationAudio.md)·[카툰 인물](GospelToonArt.md)·[우물](GospelWell.md)·[인물과 가방](GospelCharacterMenu.md)을 따른다. 기존 골격의 원본과 import 계약은 [Gospel3DArt](Gospel3DArt.md)에 보존한다. 누락된 인물·애니메이션을 기본 도형으로 바꾸고 정상 실행으로 표시하지 않는다. 정적 성전 공간은 메시 결합과 충돌을 사용하고, 이동 애니메이션은 실제 CharacterController 속도를 따른다. 공간 배치와 인물 외모는 학습용 구성이지 고고학적 실측 복원이나 인물 외모의 역사적 확인이 아니다.
 
@@ -70,7 +69,7 @@ UI smoke fixture는 Editor 테스트 러너 안에서 실제 PlayMode에 들어�
 ## 입력·저장
 
 - 카드: 마우스·터치로 방과 덱을 선택한다. 손패 클릭/드래그로 지형·전열·장비·마법을 배치하고 소각장으로 버린다. 모바일 가로 스와이프는 손패 스크롤이다. 오른쪽 소울·LP·덱·`Shuffle`·`Ready`, `기록 / 메뉴`를 조작하며 전투 재생 속도·건너뛰기는 규칙을 바꾸지 않는다.
-- 예수님의 길: WASD/방향키로 카메라 기준 이동, Shift 달리기, Space 점프, 연습 구역에서 F 동작 연습, 우클릭 드래그로 회전, 휠/화면 버튼/설정 슬라이더로 1.8–8m 줌, I 인물, B 가방, M 안내도, E 가까운 NPC 대화/말씀 읽기, Esc 설정. 가방의 등잔 장착/보관은 실제 모델·조명·현재 여정 저장에 연결된다. 모바일은 왼쪽 이동 패드와 오른쪽 시점 드래그·읽기·점프·동작·줌·인물/가방/지도 버튼이다.
+- 예수님의 길: A/D·좌우 방향키 이동, Shift 달리기, Space 점프, E 가까운 대화/말씀, 휠 줌, I 인물, B 가방, M 말씀 기록, Esc 쉼표 메뉴. 모바일은 좌/우 누름 버튼·달리기 전환·점프·대화·상단 인물/가방/말씀 버튼을 사용한다. 등잔은 실제 인물과 불빛에 연결되며 현재 여정과 함께 저장된다.
 - 카드의 전투·편집 덱 슬롯은 `fantasy-battle-classic-v3`/`fantasy-deck-classic-v3`를 유지한다. 외부 game ID `starlight-oath`도 저장 호환을 위한 ID로 유지한다.
 - 성경 여정은 내부 schema1/`gospel-0.1.0`, game ID `gospel-journey`, 전용 슬롯 `gospel-journey-v1`과 새 여정별 별도 슬롯을 사용한다. `GOSPEL.activeSlot`이 현재 이어하기 슬롯을 고른다. 이전 `POD.activeSlot`과 관찰자 서사 저장을 덮어쓰지 않는다.
 - Windows 저장은 `Application.persistentDataPath/Saves`, Web은 해당 origin의 PlayerPrefs/IndexedDB다. 카드의 저장 전송 구현은 무결성·버전·실제 상태를 검증한다. 현재 메뉴에서 제공하는 접근 경로는 [첫 플레이 안내](PlaytestGuide.md#저장과-다른-기기에서-플레이)를 따른다. 성경 여정의 현재 UI는 같은 기기의 저장·이어하기를 제공한다.

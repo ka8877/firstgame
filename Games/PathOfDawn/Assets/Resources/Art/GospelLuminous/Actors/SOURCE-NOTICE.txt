@@ -1,0 +1,27 @@
+Luminous actor artwork and rendering
+
+jesus-parts.png and npcs.png are original image-generation outputs created for
+this project. They are not extracted Ori, Lost Crypt or other commercial-game
+character art. Original pixels, alpha channels and file hashes are recorded in
+Tools/Art/GospelLuminous/Actors/manifest.json. Runtime sprite rectangles only
+select those pixels; there is no source-pixel postprocessing.
+
+LuminousCloth2D.shader adapts the material/pass contract of Unity URP 17's
+Mesh2D-Lit-Default.shader for this project's deforming cloth meshes. It uses
+Unity's package shader includes. Changes: two-sided alpha rendering without
+depth writes, explicit material tint, and mesh-normal rendering independent of
+SpriteRenderer-only per-draw properties (including correct mirrored tangent
+handedness). The original Unity shader/package copyright remains:
+
+com.unity.render-pipelines.universal copyright (c) 2020 Unity Technologies ApS
+
+Licensed under the Unity Companion License for Unity-dependent projects.
+https://unity.com/legal/licenses/unity-companion-license
+
+Unless expressly provided otherwise, the Software under this license is made
+available strictly on an AS IS BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. Please review the license for details on these and other terms.
+The full Unity Companion License accompanies this directory as
+UnityCompanionLicense.txt. The sample's full license also accompanies
+Art/GospelLuminous/World/SOURCE-NOTICE.txt. The original package LICENSE.md
+remains in the installed Unity package.

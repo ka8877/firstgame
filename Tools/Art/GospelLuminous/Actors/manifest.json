@@ -1,0 +1,40 @@
+{
+  "kind": "original-generated-painted-sprite-atlases",
+  "revision": "gospel-luminous-2026-10-28",
+  "files": [
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/jesus-parts.png",
+      "source": "/workspace/generated_images/exec-c1cc3218-cd1e-4ef7-8c43-7c03daddfa68.png",
+      "bytes": 1178455,
+      "sha256": "a9240b43b2511de0999a5722b40d30b79a5b46b7de513c740266b9511ada0271"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/npcs.png",
+      "source": "/workspace/generated_images/exec-7d6da73d-66ff-432c-b0ff-93279ab425e1.png",
+      "bytes": 2703607,
+      "sha256": "c8ba7626578661a09a26983ad21c62b627deea0215e002482e788b5bd7564ddd"
+    }
+  ],
+  "creation": "OpenAI image generation; child parts original plus alpha-edge refinement; distinct teacher/Mary/Joseph original sheet. No source-pixel postprocessing.",
+  "alphaNote": "Preview tools may display RGB values beneath alpha=0 or1; those are transparent in actual alpha-blended Unity rendering. Sprite source rectangles measured from alpha>=32 connected silhouettes, with no pixel edits.",
+  "scope": "Young Jesus articulated part hierarchy and deforming cloth grid. NPCs distinct single painted figures. No commercial Ori sprites or original client source recovered.",
+  "runtimeChecks": "Pending sole owner Unity/native/Web review; generation and file analysis do not establish actual engine quality.",
+  "rendering": "Original atlas MainTex, white MaskTex and linear flat normal explicitly bound to each sprite/material. Cloth uses separate FirstGame/Luminous Cloth 2D Lit shader: mesh-safe URP2D passes, two-sided, no depth writes, no SpriteRenderer per-draw color/flip globals.",
+  "renderingFiles": [
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/LuminousCloth2D.shader",
+      "bytes": 4445,
+      "sha256": "2023a81013c586fd6144b04ab1b8fa226c8c8cf3ab6a6a835af4c6f96cfac7b9"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/SOURCE-NOTICE.txt",
+      "bytes": 1553,
+      "sha256": "0d0e50558592b81dbe511cfc779307da2c043bc0811ea38f0694dc0130dacc8a"
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/UnityCompanionLicense.txt",
+      "bytes": 5898,
+      "sha256": "d141f38cb99ffb9f2b75f2f6162e85564c69466dfdff7c78a368f0bb74a11919"
+    }
+  ]
+}

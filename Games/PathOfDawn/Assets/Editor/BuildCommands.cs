@@ -30,9 +30,9 @@ namespace FirstGame.Editor
             string buildEvidencePath = null;
             try
             {
-                var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/Settings/" + (target == BuildTarget.WebGL ? "Web" : "Desktop") + "URP.asset");
+                var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/Settings/Luminous" + (target == BuildTarget.WebGL ? "Web" : "Desktop") + "URP.asset");
                 GraphicsSettings.defaultRenderPipeline = pipeline; QualitySettings.renderPipeline = pipeline;
-                QualitySettings.globalTextureMipmapLimit = target == BuildTarget.WebGL ? 1 : 0;
+                QualitySettings.globalTextureMipmapLimit = 0;
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
                 PlayerSettings.WebGL.decompressionFallback = true;
                 PlayerSettings.WebGL.dataCaching = true;
@@ -52,7 +52,7 @@ namespace FirstGame.Editor
                 });
                 buildEvidencePath = Path.Combine(output, "BuildEvidence.txt");
                 File.WriteAllText(buildEvidencePath,
-                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: gospel-toon-2026-10-27\nTarget: " + target + "\nResult: " + report.summary.result +
+                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: " + LuminousProjectSetup.Revision + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nLegacyResourceExclusions: " + excludedResources.EvidencePath + "\nExcludedLegacyAssets: " + excludedResources.ExcludedAssets +
                     "\nSourceFingerprint: " + sourceFingerprint + "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");

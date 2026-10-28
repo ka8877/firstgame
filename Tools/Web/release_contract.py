@@ -41,8 +41,18 @@ RESTORATION = {
     'preservedGames': []
 }
 
+LUMINOUS = {
+    'name': 'luminous',
+    'revisions': {'FantasyCards': 'fm-restoration-2026-10-27', 'PathOfDawn': 'gospel-luminous-2026-10-28'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {'FantasyCards': 'Artifacts/Validation/Restoration', 'PathOfDawn': 'Artifacts/Validation/Luminous'},
+    'preservedGames': ['FantasyCards']
+}
+
 
 def contract(name):
+    if name == 'luminous':
+        return LUMINOUS
     if name == 'restoration':
         return RESTORATION
     if name == 'modern':
