@@ -43,7 +43,7 @@ if source_snapshot.exists():
         assert source["imageUrl"] == card["imageUrl"]
 assert len(cards) == selection["expectedCount"] and len(cards) >= 161
 assert len({c["sourceId"] for c in cards}) == len(cards)
-assert len({c["name"] for c in cards}) == len(cards)
+assert len({c["name"] for c in cards[:605]}) == len(cards[:605])  # Later ranked/reprint variants keep their original names and distinct IDs.
 assert len({c["imageUrl"] for c in cards}) == len(cards)
 assert Counter(c["fields"]["Category"] for c in cards[:161]) == {1: 14, 2: 119, 3: 15, 4: 13}
 assert Counter(c["fields"]["Category"] for c in cards) == {int(k): v for k, v in selection["counts"].items()}
@@ -161,25 +161,47 @@ if restoration:
         path = ROOT / item["file"]
         assert sha(path.read_bytes()) == item["sha256"]
         observations.update({row["fields"]["ID"]: row for row in json.loads(path.read_text())["cards"]})
-    assert len(cards[600:]) == restoration["addedPlayableCards"] == len(records) == 5
-    for card in cards[600:]:
+    assert len(cards[600:605]) == restoration["addedPlayableCards"] == len(records) == 5
+    for card in cards[600:605]:
         observed = records[card["sourceId"]]
         assert card["fields"] == observed["fields"] == observations[card["sourceId"]]["fields"]
         assert card["sourceUrl"] == observed["pageUrl"] and card["imageUrl"] == observed["imageUrl"]
 for card in cards:
     assert card["fields"]["ID"] == card["sourceId"]
     assert card["fields"]["Name"] == card["name"]
-    assert card["artResource"] == "Art/ClassicCards/fm_" + card["sourceId"]
+    assert card["artResource"] in ("Art/ClassicCards/fm_" + card["sourceId"], "StreamingCards/fm_" + card["sourceId"])
     assert card["sourceUrl"] == "https://fmlunatic.com/card/" + card["sourceId"]
     assert card["imageUrl"].startswith("https://storage.googleapis.com/fmdb-bcb70.appspot.com/cardlist/")
     if card["fields"]["Category"] == 2:
-        expected_skill = {"3061320559": 17, "3061320560": 452, "3022820395": 159}.get(card["sourceId"], 1)
-        assert card["fields"]["Skill1"] == expected_skill
-        assert all(card["fields"][key] == 1 for key in
-                   ("Skill2", "ATKStatType", "DEFStatType", "HPStatType"))
+        expected_skill = card.get("effect", {}).get("sourceSkillCode", {"3061320559": 17, "3061320560": 452, "3022820395": 159}.get(card["sourceId"], 1))
+        if card.get("effect", {}).get("premiumImplementation"):
+            assert expected_skill in (card["fields"]["Skill1"], card["fields"]["Skill2"])
+        else:
+            assert card["fields"]["Skill1"] == expected_skill and card["fields"]["Skill2"] == 1
+        assert all(card["fields"][key] == 1 for key in ("ATKStatType", "DEFStatType", "HPStatType"))
 media = {card["sourceId"]: card for card in manifest["cards"]}
-assert set(media) == {card["sourceId"] for card in cards}
-assert all(media[c["sourceId"]]["imageUrl"] == c["imageUrl"] for c in cards)
+embedded = [card for card in cards if card["artResource"].startswith("Art/ClassicCards/")]
+assert set(media) == {card["sourceId"] for card in embedded}
+assert all(media[c["sourceId"]]["imageUrl"] == c["imageUrl"] for c in embedded)
+renewal = selection.get("renewalExpansion")
+if renewal:
+    source_file = ROOT / renewal["source"]
+    assert sha(source_file.read_bytes()) == renewal["sourceSha256"]
+    observed = json.loads(source_file.read_text())
+    assert observed["pages"][-1]["returnedCount"] == 0 and observed["count"] == len(observed["cards"]) == 15350
+    full_rows = {row["fields"]["ID"]: row["fields"] for row in observed["cards"]}
+    assert len(full_rows) == 15350
+    preserved = json.loads((ROOT / "Tools/Data/Renewal/compatibility-baseline-605.json").read_text())["cards"]
+    for card, original in zip(cards[:605], preserved):
+        assert card["sourceId"] == original["sourceId"] and canonical_sha(card) == original["canonicalRowSha256"]
+    streams = json.loads((ROOT / "Tools/Data/Renewal/media-manifest.json").read_text())
+    available = {record["sourceId"]: record for record in streams["cards"] if record["status"] == "available"}
+    for card in cards[605:]:
+        assert card["fields"] == full_rows[card["sourceId"]]
+        image = available[card["sourceId"]]
+        assert image["imageUrl"] == card["imageUrl"] and image["fullFrame"]
+        file = ROOT / image["delivery"]
+        assert file.is_file() and sha(file.read_bytes()) == image["deliverySha256"]
 core = ROOT / "Games/FantasyCards/Assets/Game/Core/ClassicCardData.cs"
 before = core.read_bytes()
 spec = importlib.util.spec_from_file_location("card_authoring", ROOT / "Tools/Validation/verify-card-authoring.py")
@@ -196,6 +218,8 @@ result = {"status": "passed", "checkedUtc": datetime.now(timezone.utc).isoformat
                   "preservedDetailRowsMediaAndGuids": 178 if detail else None,
                   "preservedArcanaRowsMediaAndGuids": 250 if arcana else None,
                   "preservedRestorationRowsMediaAndGuids": 600 if restoration else None,
+                  "preservedRenewalRows": 605 if renewal else None,
+                  "streamedOriginals": len(cards) - len(embedded),
                   "addedCards": len(cards) - 96, "generatorReproducible": True,
                   "preservedResearchSnapshotVerified": source_snapshot.exists(),
                   "sourceSelectionSha256": sha((DATA / "selection.json").read_bytes()),

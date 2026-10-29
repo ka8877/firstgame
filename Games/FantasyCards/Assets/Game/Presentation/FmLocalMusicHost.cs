@@ -11,7 +11,7 @@ namespace FantasyCards.Presentation
         private readonly string[] files = { "title", "lobby", "deck", "battle" };
         private readonly AudioSource[] sources = new AudioSource[4];
         private readonly float[] weights = new float[4];
-        private const float FadeOutSeconds = .18f, FadeInSeconds = .42f;
+        private const float FadeOutSeconds = .55f, FadeInSeconds = .55f;
         private int selected, active = -1;
         private bool muted, restartRequested = true;
         private float volume;
@@ -120,7 +120,10 @@ namespace FantasyCards.Presentation
                 float goal = i == active ? 1 : 0;
                 weights[i] = Mathf.MoveTowards(weights[i], goal,
                     Time.unscaledDeltaTime / (goal > weights[i] ? FadeInSeconds : FadeOutSeconds));
-                source.volume = weights[i] * volume;
+                // Equal-power mixing avoids the audible trough caused by the old
+                // fast fade-out / slow fade-in. The old source stays alive until
+                // the replacement is loaded, and a role change still starts at 0.
+                source.volume = Mathf.Sqrt(weights[i]) * volume;
                 if (i != active && weights[i] <= 0 && source.isPlaying) source.Pause();
             }
         }

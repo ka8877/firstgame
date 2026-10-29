@@ -13,7 +13,8 @@ namespace FantasyCards.Presentation
 
         // The source is a complete printed card, not an illustration atlas.
         // Every mode displays all source pixels at the source aspect ratio.
-        // Names, changing battle values and help belong outside this surface.
+        // During play the current name and stats are integrated onto that same card.
+        // Detail/album modes retain the unobstructed full source print.
         private RectTransform ArcanaCardFace(Transform parent, CardDefinition card,
             float x0, float y0, float x1, float y1, ArcanaCardMode mode,
             bool selected = false, UnitState live = null)
@@ -31,12 +32,18 @@ namespace FantasyCards.Presentation
             var descriptor = surface.gameObject.AddComponent<FmArcanaCardSurface>();
             descriptor.DefinitionId = card.id; descriptor.Grade = card.rarity;
             descriptor.SourceAspect = fit.aspectRatio; descriptor.UsesFullPrint = texture != null;
-            if (texture != null)
+            if (texture != null || FmStreamingCardArt.IsStreamed(card.artResource))
             {
                 var print = new GameObject("Original complete print " + card.id, typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
                 print.transform.SetParent(surface, false); Anchor((RectTransform)print.transform, 0, 0, 1, 1);
                 print.texture = texture; print.uvRect = new Rect(0, 0, 1, 1); print.raycastTarget = false;
                 print.color = Color.white;
+                FmStreamingCardArt.Bind(print, card.artResource, loaded =>
+                {
+                    if (fit == null || descriptor == null) return;
+                    fit.aspectRatio = (float)loaded.width / loaded.height;
+                    descriptor.SourceAspect = fit.aspectRatio; descriptor.UsesFullPrint = true;
+                });
             }
             else
             {
@@ -52,6 +59,21 @@ namespace FantasyCards.Presentation
                 var outline = halo.GetComponent<UiRoundedImage>(); outline.Fill = false; outline.Radius = 3;
                 outline.BorderWidth = 2; outline.BorderColor = new Color(1, .91f, .58f); outline.raycastTarget = false;
             }
+            if (mode == ArcanaCardMode.Hand || live != null)
+                DrawRenewalCardValues(surface, card, live, selected);
+            return bounds;
+        }
+
+        private RectTransform RenewalSourcePrint(Transform parent, string resource, float x0, float y0, float x1, float y1, string name, Rect? window = null)
+        {
+            var bounds = Panel(parent, x0, y0, x1, y1, Color.clear); bounds.gameObject.name = name + " bounds";
+            var image = new GameObject(name, typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
+            image.transform.SetParent(bounds, false); Anchor((RectTransform)image.transform, 0, 0, 1, 1);
+            var uv = window ?? new Rect(0, 0, 1, 1); image.uvRect = uv; image.raycastTarget = false;
+            var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+            fit.aspectRatio = ArcanaCardAspect * uv.width / uv.height;
+            FmStreamingCardArt.Bind(image, resource, texture =>
+            { if (fit != null) fit.aspectRatio = texture.width * uv.width / (texture.height * uv.height); });
             return bounds;
         }
 
@@ -74,7 +96,8 @@ namespace FantasyCards.Presentation
             // The original print always remains white and unmodified. Hover
             // feedback moves the whole fitted card instead of tinting its art.
             button.transition = Selectable.Transition.None;
-            button.onClick.AddListener(() => { FmBattleAudio.Play("card-select"); onClick(); });
+            button.onClick.AddListener(() =>
+            { FmBattleAudio.Play(!battleScreen && (card.rarity == CardRarity.Unique || card.rarity == CardRarity.Legend || card.rarity == CardRarity.Secret || card.rarity == CardRarity.Epic) ? "rare-reveal" : "card-select"); onClick(); });
             BindCardHelp(view.gameObject, card, () => ShowDetail(card, redraw));
             var hover = view.GetComponent<UiCardHover>(); hover.HoverScale = 1.045f; hover.HoverLift = 7;
         }

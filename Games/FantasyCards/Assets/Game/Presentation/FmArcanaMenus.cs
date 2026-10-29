@@ -19,30 +19,46 @@ namespace FantasyCards.Presentation
             FittedImage(root, duo, new Rect(0, 0, 1, 1), x0, y0, x1, y1, "Arcana original character duo");
         }
 
+        private void RenewalBackdrop(bool quiet)
+        {
+            Panel(root, 0, 0, 1, 1, new Color(.018f, .027f, .065f));
+            var art = Resources.Load<Texture2D>("Art/FmRenewal/late-official");
+            if (art != null) ImageFrame(root, art, new Rect(.245f, .45f, .51f, .55f), 0, .35f, 1, 1, new Vector2(.5f, .54f));
+            Gradient(root, 0, .30f, 1, .72f, new Color(.018f, .027f, .065f, 1), Color.clear);
+            if (quiet) Panel(root, 0, 0, 1, 1, new Color(.012f, .02f, .055f, .78f));
+            var border = Panel(root, .018f, .025f, .982f, .975f, Color.clear);
+            Frame(border, new Color(.66f, .73f, .91f, .42f), 1);
+        }
+
         private void ShowArcanaTitle()
         {
             battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login");
-            DetailPanorama(false);
-            ArcanaDuo(.365f, .12f, 1.015f, .985f);
-            Gradient(root, 0, 0, .63f, 1, new Color(.025f, .035f, .09f, .94f), Color.clear, true);
-            Gradient(root, 0, 0, 1, .27f, new Color(.015f, .025f, .065f, .96f), Color.clear);
-            var edition = Text(root, "FANTASY MASTERS  /  REMASTER", .065f, .885f, .61f, .947f, 20, new Color(.83f, .80f, 1));
-            edition.characterSpacing = 3.5f;
-            var title = Text(root, "판타지\n마스터즈", .065f, .605f, .59f, .859f, 90, ivory);
-            title.gameObject.name = "Remaster title logo"; title.fontStyle = FontStyles.Bold; title.lineSpacing = -6;
-            Panel(root, .067f, .583f, .18f, .586f, gold);
-            Text(root, "일곱 소울이 만나는 곳, 당신의 전열을 펼치세요.", .065f, .515f, .65f, .578f, 26, new Color(.87f, .88f, 1));
-            DrawDetailElementSeals(root, .065f, .435f, .61f, .501f);
-            int grades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
-            Text(root, CardCatalog.All.Length + "종 카드  ·  " + grades + "등급  ·  " + DemoCatalog.StarterDecks.Length + "개 기본 덱", .065f, .365f, .635f, .423f, 23, new Color(.77f, .87f, 1));
-            var play = Button(root, "게임 시작", .065f, .22f, .315f, .335f, ShowLobby, gold, 31);
+            RenewalBackdrop(false);
+            var edition = Text(root, "FANTASY MASTERS", .28f, .80f, .72f, .935f, 54, ivory, TextAlignmentOptions.Center);
+            edition.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font; edition.characterSpacing = 1.8f;
+            Text(root, "REMASTER  ·  일곱 소울의 귀환", .29f, .735f, .71f, .805f, 22, gold, TextAlignmentOptions.Center);
+            var title = Text(root, "판타지마스터즈", .15f, .515f, .85f, .68f, 70, ivory, TextAlignmentOptions.Center);
+            title.gameObject.name = "Remaster title logo"; title.fontStyle = FontStyles.Bold;
+            Text(root, "카드를 펼치고, 코인의 운명에 도전하세요.", .20f, .435f, .80f, .51f, 26, new Color(.79f, .86f, 1), TextAlignmentOptions.Center);
+            var play = Button(root, "게임 시작", .34f, .28f, .66f, .405f, ShowLobby, gold, 32);
             play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
-            Button(root, "이어하기", .335f, .22f, .535f, .335f, Continue, new Color(.08f, .11f, .20f, .95f), 27, PersistentSaves.Exists(Slot));
-            Button(root, "카드 도감", .065f, .070f, .225f, .160f, () => ShowCollection(false), slate, 24);
-            Button(root, "상위 등급 도감", .245f, .070f, .405f, .160f, ShowRestorationPremiumHub, slate, 24);
-            Button(root, "소리 설정", .425f, .070f, .585f, .160f, () => ShowSoundSettings(ShowTitle), slate, 24);
-            DrawArcanaTitleFan();
-            Text(root, "등급의 빛을 담은 카드, 소울로 이어지는 결투", .625f, .025f, .965f, .085f, 19, new Color(.88f, .85f, 1), TextAlignmentOptions.MidlineRight);
+            Button(root, "이어하기", .34f, .18f, .66f, .26f, Continue, new Color(.08f, .12f, .23f, .97f), 26, PersistentSaves.Exists(Slot));
+            Button(root, "출전 카드", .10f, .075f, .34f, .155f, () => ShowCollection(false), slate, 24);
+            Button(root, "전체 원본 도감", .38f, .075f, .62f, .155f, ShowRestorationOriginalArchive, slate, 24);
+            Button(root, "소리 설정", .66f, .075f, .90f, .155f, () => ShowSoundSettings(ShowTitle), slate, 24);
+            int grades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
+            Text(root, "출전 " + CardCatalog.All.Length + "종 · " + grades + "등급 · 기본 덱 " + DemoCatalog.StarterDecks.Length + "개  /  원본 도감 " + OriginalCardArchive.All.Length + "종",
+                .065f, .012f, .935f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
+            var featured = CardCatalog.All.Where(card => card.rarity == CardRarity.Unique || card.rarity == CardRarity.Secret).GroupBy(card => card.rarity).Select(group => group.Last()).Take(2).ToArray();
+            for (int i = 0; i < featured.Length; i++)
+            {
+                float x = i == 0 ? .105f : .755f;
+                var face = ArcanaCardFace(root, featured[i], x, .185f, x + .14f, .425f, ArcanaCardMode.Showcase);
+                face.localRotation = Quaternion.Euler(0, 0, i == 0 ? 7 : -7);
+                face.GetComponent<Image>().raycastTarget = true;
+                var button = face.gameObject.AddComponent<Button>(); var selected = featured[i];
+                button.onClick.AddListener(() => ShowDetail(selected, ShowTitle)); BindCardHelp(face.gameObject, selected, () => ShowDetail(selected, ShowTitle));
+            }
         }
 
         private void DrawArcanaTitleFan()
@@ -59,9 +75,9 @@ namespace FantasyCards.Presentation
         }
 
         private int restorationLobbyMode;
-        private static readonly Color RestorationLeather = new Color(.095f, .067f, .052f, .98f);
-        private static readonly Color RestorationMetal = new Color(.69f, .62f, .46f);
-        private static readonly Color RestorationButtonColor = new Color(.18f, .135f, .095f);
+        private static readonly Color RestorationLeather = new Color(.035f, .052f, .095f, .94f);
+        private static readonly Color RestorationMetal = new Color(.72f, .72f, .65f);
+        private static readonly Color RestorationButtonColor = new Color(.075f, .105f, .18f);
 
         private void RestorationTrim(RectTransform parent, bool orb = false)
         {
@@ -73,23 +89,22 @@ namespace FantasyCards.Presentation
         private RectTransform RestorationPanel(Transform parent, float x0, float y0, float x1, float y1, Color tint, string name)
         {
             var panel = Panel(parent, x0, y0, x1, y1, tint); panel.gameObject.name = name;
-            panel.GetComponent<UiRoundedImage>().Radius = 4; RestorationTrim(panel); return panel;
+            panel.GetComponent<UiRoundedImage>().Radius = 10; RestorationTrim(panel); return panel;
         }
 
         private Button RestorationButton(Transform parent, string text, float x0, float y0, float x1, float y1, Action action, bool selected = false, bool enabled = true)
         {
             var button = Button(parent, text, x0, y0, x1, y1, action,
-                selected ? new Color(.36f, .25f, .13f) : RestorationButtonColor, 24, enabled);
-            button.GetComponent<UiRoundedImage>().Radius = 5;
+                selected ? new Color(.22f, .23f, .30f) : RestorationButtonColor, 24, enabled);
+            button.GetComponent<UiRoundedImage>().Radius = 8;
             Frame((RectTransform)button.transform, selected ? gold : RestorationMetal, selected ? 2.5f : 1);
             return button;
         }
 
         private void RestorationBackdrop()
         {
-            DetailPanorama(true);
-            Gradient(root, 0, 0, 1, 1, new Color(.025f, .020f, .015f, .96f), new Color(.065f, .047f, .036f, .96f), true);
-            RestorationPanel(root, .014f, .018f, .986f, .982f, Color.clear, "Classic lobby outer frame");
+            RenewalBackdrop(true);
+            RestorationPanel(root, .014f, .018f, .986f, .982f, Color.clear, "Late-era remaster lobby outer frame");
         }
 
         private void ShowArcanaLobby()
@@ -110,14 +125,14 @@ namespace FantasyCards.Presentation
             if (restorationLobbyMode == 0) DrawRestorationPracticeRooms(roomList);
             else if (restorationLobbyMode == 1) DrawRestorationScenarioRooms(roomList);
             else DrawRestorationMultiplayer(roomList);
-            var notices = RestorationPanel(root, .048f, .151f, .744f, .291f, new Color(.045f, .035f, .028f, .99f), "Local notice and record panel");
+            var notices = RestorationPanel(root, .048f, .151f, .744f, .291f, new Color(.025f, .04f, .075f, .95f), "Local notice and record panel");
             int mono = DemoCatalog.StarterDecks.Count(deck => ArcanaDeckElements(deck).Length == 1);
             Text(notices, "NOTICE  /  내 기록", .025f, .63f, .975f, .95f, 21, gold);
             Text(notices, "카드 " + CardCatalog.All.Length + "종 · 단일 " + mono + "덱 / 듀얼 " + (DemoCatalog.StarterDecks.Length - mono) + "덱 · 원본 인쇄 카드 표시", .025f, .32f, .975f, .67f, 22, ivory);
             Text(notices, "이 기기 전적  " + LocalProfileWins + "승 " + LocalProfileLosses + "패 " + LocalProfileDraws + "무  ·  " + (useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name), .025f, .025f, .975f, .36f, 21, new Color(.72f, .76f, .66f));
             RestorationButton(root, "기본 덱", .048f, .051f, .176f, .132f, ShowDeckSelection);
             RestorationButton(root, "덱 편집", .188f, .051f, .316f, .132f, () => ShowCollection(true));
-            RestorationButton(root, "카드 도감", .328f, .051f, .456f, .132f, () => ShowCollection(false));
+            RestorationButton(root, "전체 원본", .328f, .051f, .456f, .132f, ShowRestorationOriginalArchive);
             RestorationButton(root, "상위 등급", .468f, .051f, .596f, .132f, ShowRestorationPremiumHub);
             RestorationButton(root, "게임 방법", .608f, .051f, .744f, .132f, () => ShowRulesHelp(ShowLobby));
             DrawRestorationProfileRail(ShowTitle, "대기실");
@@ -181,14 +196,14 @@ namespace FantasyCards.Presentation
 
         private void DrawRestorationProfileRail(Action back, string heading)
         {
-            var rail = RestorationPanel(root, .77f, .051f, .957f, .951f, new Color(.035f, .030f, .027f, .98f), "Original layout local profile rail");
+            var rail = RestorationPanel(root, .77f, .051f, .957f, .951f, new Color(.022f, .036f, .075f, .97f), "Original layout local profile rail");
             Text(rail, "Fantasy\nMasters", .07f, .835f, .93f, .97f, 34, new Color(.94f, .82f, .52f), TextAlignmentOptions.Center);
             var orb = Panel(rail, .19f, .61f, .81f, .845f, Color.clear); RestorationTrim(orb, true);
             Text(rail, heading, .07f, .59f, .93f, .65f, 20, RestorationMetal, TextAlignmentOptions.Center);
             var profile = RestorationButton(rail, "", .08f, .405f, .92f, .58f, () => ShowLocalProfile(redraw ?? ShowLobby));
             profile.gameObject.name = "Local profile card";
             var avatar = LocalProfileAvatar();
-            ImageFrame(profile.transform, OriginalCardTexture(avatar), new Rect(.13f, .36f, .805f, .56f), .035f, .09f, .35f, .91f, new Vector2(.5f, .68f), true);
+            Artwork(profile.transform, avatar, .035f, .09f, .35f, .91f);
             Text(profile.transform, LocalProfileName, .38f, .50f, .97f, .94f, 24, ivory);
             Text(profile.transform, "LOCAL PLAYER", .38f, .08f, .97f, .50f, 17, RestorationMetal);
             Text(rail, LocalProfileWins + "승  " + LocalProfileLosses + "패  " + LocalProfileDraws + "무", .065f, .33f, .935f, .405f, 23, new Color(.74f, .82f, .65f), TextAlignmentOptions.Center);

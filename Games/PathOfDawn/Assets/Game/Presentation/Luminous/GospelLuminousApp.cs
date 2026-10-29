@@ -31,6 +31,9 @@ namespace PathOfDawn.Presentation
         float zoom = 4.4f, saveClock;
         Vector3 cameraVelocity;
         BgmPlayer music;
+        readonly System.Collections.Generic.List<Transform> meetingRoots=new System.Collections.Generic.List<Transform>();
+        readonly System.Collections.Generic.List<SpriteRenderer> meetingPeople=new System.Collections.Generic.List<SpriteRenderer>();
+        readonly int[] meetingVariants={2,0,0,1,2,0,1,1,2,2};
 
         void Start()
         {
@@ -72,7 +75,8 @@ namespace PathOfDawn.Presentation
             Ui.OnInventory = ShowInventory;
             Ui.OnStatus = ShowStatus;
             Ui.OnJournal = ShowJournal;
-            Ui.OnRead = OpenScripture;
+            Ui.OnRead = ShowJournal;
+            Ui.OnOpeningReplay = () => ShowOpening(0, true);
             Ui.OnSettings = ShowSettings;
             Ui.OnExit = () => { if (inGame) Save(false); ShowTitle(); };
             Ui.OnLampToggle = ToggleLamp;
@@ -108,9 +112,9 @@ namespace PathOfDawn.Presentation
                 float scroll = Mouse.current.scroll.ReadValue().y;
                 if (Mathf.Abs(scroll) > .1f) zoom = Mathf.Clamp(zoom - Mathf.Sign(scroll) * .35f, 3f, 6.4f);
             }
-            string nearby = CanInteract ? (Journey.Phase == GospelPhase.Prologue ? "탄생의 말씀 읽기" : ObjectiveName) : "";
-            Ui.UpdateHud(ObjectiveName, Journey.CurrentReading.Reference, FirstLine(Journey.CurrentReading.Text),
-                Journey.CollectedReadings.Count, GospelCatalog.Readings.Count, nearby, CanInteract);
+            string nearby = CanInteract ? ObjectiveName : "";
+            Ui.UpdateHud(ObjectiveName, VisualReading.Reference, FirstLine(VisualReading.Text),
+                Journey.CodexCount, Journey.CodexTotal, nearby, CanInteract);
             saveClock += Time.deltaTime;
             if (saveClock >= 25) { Save(false); saveClock = 0; }
         }
@@ -125,12 +129,17 @@ namespace PathOfDawn.Presentation
             SceneCamera.orthographicSize = Mathf.Lerp(SceneCamera.orthographicSize, inGame ? zoom : 4.8f, 1 - Mathf.Exp(-4 * Time.deltaTime));
         }
 
-        public string ObjectiveName => Journey == null ? "성전의 뜰" : Journey.Phase == GospelPhase.Prologue
-            ? "성전의 뜰 · 빛나는 길을 따라" : Journey.IsComplete ? "첫 여정의 끝 · 나사렛으로" : Journey.CurrentObjective.Title;
+        GospelReading VisualReading => Journey.StudyPending ? Journey.CurrentStudy.Reading : Journey.CurrentReading;
+        public string ObjectiveName => Journey==null ? "성전의 뜰" : !Journey.OpeningFinished ? "여정의 시작" : Journey.StudyPending
+            ? "기억의 길 · "+Journey.CurrentStudy.Reading.Title : Journey.Phase==GospelPhase.Prologue
+            ? Journey.CurrentReading.Title : Journey.IsComplete ? "첫 여정 완료 · 나사렛으로" : Journey.CurrentObjective.Title;
         public float ObjectiveX
         {
             get
             {
+                if(Journey!=null&&Journey.StudyPending)return Journey.CurrentStudy.X;
+                if(Journey!=null&&Journey.Phase==GospelPhase.Prologue&&Journey.HasStudyJourney)
+                    return new[]{-26f,-18f,-10f}[Journey.ProloguePage];
                 switch (Journey?.CurrentObjective?.Id)
                 {
                     case "teachers": return 5;
@@ -140,8 +149,8 @@ namespace PathOfDawn.Presentation
                 }
             }
         }
-        public bool CanInteract => Journey != null && !Journey.IsComplete &&
-            (Journey.Phase == GospelPhase.Prologue || Mathf.Abs(Player.Position.x - ObjectiveX) <= InteractionRadius);
+        public bool CanInteract => Journey!=null && Journey.OpeningFinished && !Journey.IsComplete &&
+            ((!Journey.HasStudyJourney&&Journey.Phase==GospelPhase.Prologue) || Mathf.Abs(Player.Position.x-ObjectiveX)<=InteractionRadius);
 
         public void ShowTitle()
         {
@@ -154,13 +163,13 @@ namespace PathOfDawn.Presentation
             activeSlot = PersistentSaves.Exists(GospelJourney.SaveSlot)
                 ? GospelJourney.SaveSlot + "-" + DateTime.UtcNow.Ticks : GospelJourney.SaveSlot;
             PlayerPrefs.SetString(ActiveSlotKey, activeSlot);
-            Journey = GospelJourney.New();
+            Journey = GospelJourney.NewStudyJourney();
             Journey.SetPresentationSpace(GospelJourney.LuminousSpace);
-            Player.SetPose(new Vector2(-18, World.HeightAt(-18) + .06f));
+            Player.SetPose(new Vector2(-30, World.HeightAt(-30) + .06f));
             saveClock = 0;
             inGame = true;
             Save(false);
-            Resume();
+            ShowOpening();
         }
         public void ContinueGame()
         {
@@ -178,7 +187,9 @@ namespace PathOfDawn.Presentation
                 saveClock = 0;
                 inGame = true;
                 Resume();
-                if (Journey.Phase == GospelPhase.Reading) ShowCurrentReading();
+                if (!Journey.OpeningFinished) ShowOpening();
+                else if(Journey.StudyReadingOpen) ShowStudyReading();
+                else if (Journey.Phase == GospelPhase.Reading) ShowCurrentReading();
                 else Ui.Toast("저장한 말씀과 여정에서 이어갑니다.");
             }
             catch (Exception exception) { Ui.Toast("저장 원본을 보존했습니다. " + exception.Message); }
@@ -202,9 +213,11 @@ namespace PathOfDawn.Presentation
         public void Resume()
         {
             if (!inGame || Journey == null) { ShowTitle(); return; }
+            if(!Journey.OpeningFinished){ShowOpening();return;}
+            RefreshPeople();
             inGame = true;
-            Ui.ShowHud(ObjectiveName, Journey.CurrentReading.Reference, FirstLine(Journey.CurrentReading.Text),
-                Journey.CollectedReadings.Count, GospelCatalog.Readings.Count, DawnPlatformInput.UseTouchControls);
+            Ui.ShowHud(ObjectiveName, VisualReading.Reference, FirstLine(VisualReading.Text),
+                Journey.CodexCount, Journey.CodexTotal, DawnPlatformInput.UseTouchControls);
             Player.Enabled = true;
             World.SetObjective(ObjectiveX, !Journey.IsComplete);
         }
@@ -216,7 +229,7 @@ namespace PathOfDawn.Presentation
             if (Journey == null) return;
             Player.Enabled = false;
             Ui.ShowStatus("예수님\n열두 살 · 성전의 소년\n\n현재 여정  " + ObjectiveName + "\n읽은 말씀  "
-                + Journey.CollectedReadings.Count + " / " + GospelCatalog.Readings.Count + "\n장착 도구  "
+                + Journey.CodexCount + " / " + Journey.CodexTotal + "\n장착 도구  "
                 + (Journey.LampEquipped ? "토기 등잔" : "없음") + "\n\n현재 구간: 탄생의 말씀 / 누가복음 2장 성전 방문");
         }
         void ToggleLamp()
@@ -229,15 +242,35 @@ namespace PathOfDawn.Presentation
         }
         void ShowJournal()
         {
-            var body = new StringBuilder("말씀 기록\n\n");
-            if (Journey == null || Journey.CollectedReadings.Count == 0) body.Append("아직 읽은 말씀 기록이 없습니다. ‘말씀’에서 탄생의 기록을 읽어보세요.");
-            else foreach (string id in Journey.CollectedReadings)
-            {
-                var reading = GospelCatalog.GetReading(id);
-                body.Append(reading.Title).Append(" · ").Append(reading.Reference).Append("\n").Append(reading.Text).Append("\n\n");
-            }
-            Player.Enabled = false;
-            Ui.ShowJournal(body.ToString());
+            if(Journey==null)return;
+            Player.Enabled=false;
+            Ui.ShowCodex(Journey.HasStudyJourney ? GospelStudyCatalog.AllReadings : GospelCatalog.Readings, Journey.HasReading, Journey.CodexCount);
+        }
+        void ShowOpening(int page=-1,bool replay=false)
+        {
+            if(Journey==null)return;
+            Player.Enabled=false;
+            int index=page<0?Journey.OpeningPage:page;
+            index=Mathf.Clamp(index,0,GospelStudyCatalog.Opening.Count-1);
+            Ui.ShowOpening(GospelStudyCatalog.Opening[index],index,GospelStudyCatalog.Opening.Count,()=>{
+                if(replay){if(index+1<GospelStudyCatalog.Opening.Count)ShowOpening(index+1,true);else Resume();return;}
+                Journey.AdvanceOpening();Save(false);
+                if(Journey.OpeningFinished)Resume();else ShowOpening();
+            },()=>{if(!replay){Journey.FinishOpening();Save(false);}Resume();});
+        }
+        void ShowStudyReading()
+        {
+            if(!Journey.StudyReadingOpen)return;
+            Player.Enabled=false;
+            var encounter=Journey.CurrentStudy;
+            bool childTurn=Journey.StudyDialogueIndex%2==1;
+            string speaker=childTurn?"예수님":encounter.Portrait=="mary"?"마리아":encounter.Portrait=="joseph"?"요셉":"성전의 선생";
+            Ui.ShowReading(encounter.Reading.Title,speaker,encounter.Turns[Journey.StudyDialogueIndex],
+                encounter.Reading.Reference,encounter.Reading.Text,
+                "만남 "+(Journey.StudyCount+1)+"/8 · 대화 "+(Journey.StudyDialogueIndex+1)+"/"+encounter.Turns.Count,
+                ()=>{var title=encounter.Reading.Title;Journey.AdvanceStudyDialogue();Save(false);
+                    if(Journey.StudyReadingOpen)ShowStudyReading();else{Resume();Ui.Toast("말씀 도감 획득 · "+title);}},
+                childTurn?"jesus":encounter.Portrait,()=>Ui.ShowStudyQuestions(encounter,ShowStudyReading));
         }
         void OpenScripture()
         {
@@ -250,12 +283,15 @@ namespace PathOfDawn.Presentation
         }
         public void Interact()
         {
-            if (!inGame || IsModal || Journey == null) return;
-            if (Journey.Phase == GospelPhase.Prologue || Journey.Phase == GospelPhase.Reading)
-            { ShowCurrentReading(); return; }
-            if (!CanInteract) { Ui.Toast("빛이 머무는 길을 따라 다음 만남으로 걸어가세요."); return; }
-            if (Journey.TryInteract(Journey.CurrentObjective.Id, out var message)) ShowCurrentReading();
-            else Ui.Toast(message);
+            if(!inGame||IsModal||Journey==null)return;
+            if(!CanInteract){Ui.Toast("빛이 머무는 만남으로 걸어가 대화를 시작하세요.");return;}
+            if(Journey.StudyPending)
+            {
+                if(Journey.StudyReadingOpen||Journey.TryStudyEncounter(Journey.CurrentStudy.Reading.Id))ShowStudyReading();
+                return;
+            }
+            if(Journey.Phase==GospelPhase.Prologue||Journey.Phase==GospelPhase.Reading){ShowCurrentReading();return;}
+            if(Journey.TryInteract(Journey.CurrentObjective.Id,out var message))ShowCurrentReading();else Ui.Toast(message);
         }
         void ShowCurrentReading()
         {
@@ -265,12 +301,12 @@ namespace PathOfDawn.Presentation
             Ui.ShowReading(reading.Title, turn.Speaker, turn.Text, reading.Reference, reading.Text,
                 Journey.ProgressText + (turn.IsVerbatim ? " · 성경 직접 인용" : " · 학습 안내"), () =>
                 {
-                    if (Journey.Phase == GospelPhase.Prologue) Journey.AdvanceReading();
-                    else Journey.AdvanceDialogue();
+                    int before=Journey.CodexCount;
+                    Journey.AdvanceDialogue();
                     Save(false);
-                    if (Journey.Phase == GospelPhase.Prologue || Journey.Phase == GospelPhase.Reading) ShowCurrentReading();
-                    else Resume();
-                });
+                    if(Journey.Phase==GospelPhase.Reading || (Journey.Phase==GospelPhase.Prologue&&Journey.CodexCount==before))ShowCurrentReading();
+                    else {Resume();if(Journey.CodexCount>before)Ui.Toast("말씀 도감 획득 · "+reading.Title);}
+                },turn.PortraitKey);
         }
         static string FirstLine(string value)
         {
@@ -279,8 +315,8 @@ namespace PathOfDawn.Presentation
         }
         void BuildPeople()
         {
-            float[] xs = { -10f, 5f, 16f, 23.5f };
-            int[] variants = { 0, 0, 1, 2 };
+            float[] xs = { -26f,-18f,-10f,-3f,5f,12f,16f,20f,24f,27f };
+            int[] variants = { 2,0,0,1,2,0,1,1,2,2 };
             for (int i = 0; i < xs.Length; i++)
             {
                 var root = new GameObject("A meeting in the courtyard " + i).transform;
@@ -288,6 +324,24 @@ namespace PathOfDawn.Presentation
                 root.position = new Vector3(xs[i], World.HeightAt(xs[i]) + .01f, 0);
                 var person = GospelLuminousActor.BuildNpc(root, variants[i]);
                 if (person != null) person.sortingOrder = 10;
+                meetingRoots.Add(root);meetingPeople.Add(person);
+            }
+        }
+        void RefreshPeople()
+        {
+            // Each memory marker contains the speaker of that encounter. The same
+            // place can be revisited at a later recorded time with a different speaker.
+            for(int i=0;i<meetingRoots.Count;i++)
+            {
+                int desired=new[]{2,0,0,1,2,0,1,1,2,2}[i];
+                if(Journey!=null&&Journey.Phase==GospelPhase.Prologue)
+                {if(i==0)desired=1;if(i==1)desired=2;if(i==2)desired=1;}
+                if(i==4&&Journey!=null&&!Journey.StudyPending&&Journey.Phase!=GospelPhase.Prologue)desired=0;
+                if(meetingVariants[i]==desired)continue;
+                if(meetingPeople[i]!=null)Destroy(meetingPeople[i].gameObject);
+                meetingPeople[i]=GospelLuminousActor.BuildNpc(meetingRoots[i],desired);
+                if(meetingPeople[i]!=null)meetingPeople[i].sortingOrder=10;
+                meetingVariants[i]=desired;
             }
         }
         void OnDestroy()

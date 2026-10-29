@@ -1,0 +1,184 @@
+{
+  "revision": "fm-renewal-2026-10-29",
+  "cards": [
+    {
+      "sourceId": "3010820340",
+      "name": "아크데몬",
+      "effect": {
+        "sourceSkillCode": 539,
+        "description": "이블피어싱\n\n상대를 소멸시킨 뒤 남은 데미지를 적 필드 다음 유니트에게 준다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3010820341",
+      "name": "아이스드래곤",
+      "effect": {
+        "sourceSkillCode": 425,
+        "description": "아이스브레스\n\nAP3 이상 공격시 자신 AP-3, 적 필드 유닛전체는 자신의 AP가 절반(올림)이 된다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3010820343",
+      "name": "아너제너럴",
+      "effect": {
+        "sourceSkillCode": 219,
+        "description": "모랄라이징\n\nAP2 이상으로 공격시 자신 AP-2, 자신제외 아군 필드 유닛 전체 영구히 AP1 상승.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3010820344",
+      "name": "록마운틴킹",
+      "effect": {
+        "sourceSkillCode": 397,
+        "description": "스톤드로잉\n\n상대를 파괴시키면 아군 필드 다음 위치에 낙석 1장이 행동불능으로 소환된다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3022820392",
+      "name": "블루웨이브",
+      "effect": {
+        "sourceSkillCode": 417,
+        "description": "실드오오라\n\n자신 파괴시 자신 DP만큼 아군 행동가능 다음 유닛 1은 DP 상승, 행동가능 적 다음 유닛 1은 AP감소",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3022820394",
+      "name": "소드마스터",
+      "effect": {
+        "sourceSkillCode": 674,
+        "description": "크로스카운트\n\n자신 파괴시, 자신 AP만큼 적군 다음 행동할 유니트에 물리데미지.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3041120439",
+      "name": "에인션트엔트",
+      "effect": {
+        "sourceSkillCode": 518,
+        "description": "워킹우드\n\n자신 파괴시, 아군 필드 다음 위치 트리언트 1개 생성 후 지형1 파괴.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3041120441",
+      "name": "베히모스",
+      "effect": {
+        "sourceSkillCode": 392,
+        "description": "쉐이킹\n\nAP1 이상으로 공격시 모든 필드 빈공간만큼 적군 다음 위치부터의 유닛 DP감소.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "3061320557",
+      "name": "마계대장군",
+      "effect": {
+        "sourceSkillCode": 52,
+        "description": "관통무시\n\nAP 1 이상으로 공격시 상대 DP를 무시하고 HP를 직접 공격한 뒤 적 필드 유닛1,2의 DP를 자신의 AP 절반(올림)만큼 감소.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "4021320943",
+      "name": "파이브플레임",
+      "effect": {
+        "sourceSkillCode": 669,
+        "description": "코인플레임\n\n자신 파괴시, 자신의 코인 앞면수로 적전투 유닛제외 적군전체 HP 데미지.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "4021320944",
+      "name": "에코아이스",
+      "effect": {
+        "sourceSkillCode": 473,
+        "description": "에코카피\n\n자신 파괴시, 자신lv 이하 상대방 핸드 유닛 1을 아군 필드 다음 위치에 복사.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "4021320948",
+      "name": "럭스틸러",
+      "effect": {
+        "sourceSkillCode": 755,
+        "description": "행운훔치기\n\nAP 1 이상으로 공격시 적전체 코인확률 -20%, 아군전체 코인확률+20%.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "5112322070",
+      "name": "추기경",
+      "effect": {
+        "sourceSkillCode": 603,
+        "description": "주문제압\n\nAP1이상으로 공격시 상대가 마법이면 공격 후 상대 AP,DP=0,HP=1.\n\n만능능력\n\n3차 강화 카드는 만능능력 유닛입니다. \n\n따라서, 아이템 착용에 있어서 제한이 전혀 없는 특징을 갖고 있는 유닛입니다. \n\n또한 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      }
+    },
+    {
+      "sourceId": "8051723220",
+      "name": "카틀린",
+      "effect": {
+        "sourceSkillCode": 123,
+        "description": "대지의왕\n\n공격시, 아군 백필드 대지 지형 1/3(내림)만큼 공체증가(추가데미지, AP0이하에서도 발동).\n\n▶ 아군 생성 유소울이 모두 대지소울이 아닐 경우 증가수치 1감소(3->2).\n▶ 해당 능력은 유닛 카드 고유능력이므로 복사의 대상이 되지 않습니다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "8061823520",
+      "name": "황야의주인",
+      "effect": {
+        "sourceSkillCode": 731,
+        "description": "포효공격 : 적 1파괴시, 적 필드 유닛 전체 AP-2\n\n수집랭커 유니크는 수집랭커 1레벨 이상의 유저분만 구매가 가능합니다. 수집랭커에 대해서는 통합검색에서 \"수집 랭킹 시스템\"으로 검색해 보세요.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "8062923223",
+      "name": "세인마이어스",
+      "effect": {
+        "sourceSkillCode": 489,
+        "description": "영광의기사\n\n방어시 적 AP와 아군 핸드수 차이의 절대값만큼 HP데미지(최대6), 이 능력으로 상대 유닛 파괴될 경우 적 AP에 의한 데미지 무시. (아군 생성 유소울이 모두 빛소울이 아닐 경우 최대 데미지 수치 3으로 제한.)\n▶ 해당 능력은 유닛 카드 고유능력이므로 복사의 대상이 되지 않습니다.",
+        "premiumImplementation": "BattleEngine.Premium.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    }
+  ],
+  "excludedConflicts": [
+    {
+      "name": "뷰티플라워",
+      "db": "그린그로우 creates terrain in hand",
+      "lateManual": "creates terrain in backfield"
+    },
+    {
+      "name": "퓨리파이터",
+      "db": "블러드퓨리 on death",
+      "lateManual": "on defense"
+    },
+    {
+      "name": "랜드트랩퍼",
+      "db": "LP minus1",
+      "lateManual": "nextturn LP set0"
+    }
+  ],
+  "scope": "Sixteen complete original Unique techniques; no unsupported state, aura, NCS cost or fixed symbol removed. Core integration/testing is separate."
+}

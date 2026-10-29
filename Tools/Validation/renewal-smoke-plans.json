@@ -1,0 +1,2330 @@
+{
+  "FantasyCards": {
+    "revision": "fm-renewal-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "sound-settings",
+      "lobby",
+      "profile",
+      "scenario-list",
+      "multiplayer-preparation",
+      "mono-decks",
+      "mono-decks-last-page",
+      "dual-decks",
+      "all-decks-last-page",
+      "playable-high-grades",
+      "archive-originals",
+      "late-secret-search",
+      "late-secret-original-detail",
+      "all-original-grades",
+      "secret-originals",
+      "original-card-gallery",
+      "secret-card-detail",
+      "original-printed-card",
+      "opening-original-hand",
+      "backfield-terrain",
+      "original-hand-and-field",
+      "terrain-detail",
+      "ready-resolution-01",
+      "ready-resolution-02",
+      "ready-resolution-03",
+      "ready-resolution-04",
+      "ready-resolution-05",
+      "ready-resolution-06",
+      "ready-resolution-07",
+      "ready-resolution-08",
+      "ready-resolution-09",
+      "ready-resolution-10",
+      "ready-resolution-11",
+      "ready-resolution-12",
+      "post-ready-field",
+      "saved-battle",
+      "continued-battle",
+      "continued-profile",
+      "save-transfer",
+      "invalid-transfer-rejected",
+      "continued-after-invalid-transfer"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "후기 공식 홈페이지 원작 인물 두 명과 새 타이틀·게임 시작·이어하기·출전 카드·전체 원본 도감·소리 설정이 읽힌다. 실제 현재 출전/원본/덱 수를 구분한다. 원작 마지막 클라이언트 타이틀 복구로 오인하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "title-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.78,
+          0.885
+        ],
+        "label": "소리 설정",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "sound-settings",
+        "expected": "효과음 별도 켜기/끄기·음량·전투 효과 듣기와 배경 음악 설정 경로가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.318,
+          0.739
+        ],
+        "label": "배경 음악 설정",
+        "settleMs": 900
+      },
+      {
+        "type": "audio",
+        "label": "after-first-gesture"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3446,
+          0.5035
+        ],
+        "label": "음악 끄기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "muted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9175
+        ],
+        "label": "효과음 설정으로",
+        "settleMs": 900
+      },
+      {
+        "type": "wait",
+        "ms": 1000
+      },
+      {
+        "type": "sfx_audio",
+        "label": "audible-ui-combat-cues",
+        "actions": [
+          {
+            "type": "click",
+            "point": [
+              0.744,
+              0.488
+            ],
+            "label": "실제 전투 효과 듣기",
+            "settleMs": 700,
+            "repeat": 4
+          }
+        ]
+      },
+      {
+        "type": "click",
+        "point": [
+          0.686,
+          0.359
+        ],
+        "label": "효과음 끄기",
+        "settleMs": 1200
+      },
+      {
+        "type": "sfx_audio",
+        "label": "independent-effects-muted",
+        "expectSilent": true,
+        "actions": [
+          {
+            "type": "click",
+            "point": [
+              0.254,
+              0.488
+            ],
+            "label": "음소거 중 실제 효과음 줄이기",
+            "settleMs": 650,
+            "repeat": 2
+          },
+          {
+            "type": "click",
+            "point": [
+              0.498,
+              0.488
+            ],
+            "label": "음소거 중 실제 효과음 원음량 복원",
+            "settleMs": 650,
+            "repeat": 2
+          }
+        ]
+      },
+      {
+        "type": "click",
+        "point": [
+          0.686,
+          0.359
+        ],
+        "label": "효과음 켜기",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.318,
+          0.739
+        ],
+        "label": "배경 음악 설정",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3446,
+          0.5035
+        ],
+        "label": "음악 켜기",
+        "settleMs": 1800
+      },
+      {
+        "type": "audio",
+        "label": "unmuted"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9175
+        ],
+        "label": "효과음 설정으로",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.686,
+          0.739
+        ],
+        "label": "타이틀로",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "후기 원작 인물 배경과 남색 대기실에 ROOM/SCENARIO/MULTI·실제 AI 연습방·로컬 프로필·실제 카드/덱 수·전체 원본/상위 등급 경로가 보인다."
+      },
+      {
+        "type": "audio",
+        "label": "lobby-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.87,
+          0.49
+        ],
+        "label": "실제 로컬 프로필",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.55,
+          0.2975
+        ],
+        "label": "닉네임 입력",
+        "settleMs": 900
+      },
+      {
+        "type": "key",
+        "key": "Control+a",
+        "label": "이름 전체 선택"
+      },
+      {
+        "type": "text",
+        "text": "SoulTester",
+        "label": "실제 닉네임 입력"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.855,
+          0.2975
+        ],
+        "label": "이름 저장",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2445,
+          0.755
+        ],
+        "label": "원작 카드 아바타 선택",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "profile",
+        "expected": "입력한SoulTester이름과 선택한 원작 카드 아바타·실제 로컬 전적·기기 저장 안내가 보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.165,
+          0.9325
+        ],
+        "label": "프로필에서 대기실",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.398,
+          0.189
+        ],
+        "label": "SCENARIO 탭",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "scenario-list",
+        "expected": "새싱글시나리오4과제가추천덱과순차잠금상태로보인다. 첫과제입장이실제가능하고완료하지않은다음과제는잠겨있다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.634,
+          0.189
+        ],
+        "label": "MULTI 탭",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "multiplayer-preparation",
+        "expected": "멀티플레이 대기실은 준비 중으로 명시되고 현재AI싱글 제공과 추후 방/초대/매칭 안내가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.162,
+          0.189
+        ],
+        "label": "ROOM 탭",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.112,
+          0.909
+        ],
+        "label": "기본 덱",
+        "settleMs": 900
+      },
+      {
+        "type": "audio",
+        "label": "deck-role-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3225,
+          0.244
+        ],
+        "label": "단일 속성 필터",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "mono-decks",
+        "expected": "현재 덱 실제 카드 구성에 따른 단일 속성 필터가 적용된다. 새 시크릿 단일 덱과 기존 덱을 포함하며, 옛 7개라는 고정 수를 요구하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "deck-same-role-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "현재 단일 속성 덱의 마지막 페이지",
+        "settleMs": 900,
+        "repeat": 3
+      },
+      {
+        "type": "checkpoint",
+        "name": "mono-decks-last-page",
+        "expected": "단일 속성 필터의 마지막 페이지이며 다음 버튼이 비활성이다. 각 덱은 실제 50장이고 표시한 속성과 일치한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5125,
+          0.244
+        ],
+        "label": "듀얼 속성 필터",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "dual-decks",
+        "expected": "듀얼 필터에서 실제 두 속성을 사용하는 덱만 보인다. 단일 시크릿 덱이 듀얼로 잘못 분류되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1325,
+          0.244
+        ],
+        "label": "전체 기본 덱",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.8875
+        ],
+        "label": "기본 덱 마지막 페이지",
+        "settleMs": 650,
+        "repeat": 6
+      },
+      {
+        "type": "checkpoint",
+        "name": "all-decks-last-page",
+        "expected": "전체 기본 덱 목록의 마지막 페이지에 도달한다. 마지막 카드 구성과 실제 전체 덱 수가 맞고 다음 버튼은 비활성이다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.155,
+          0.963
+        ],
+        "label": "덱에서 대기실",
+        "settleMs": 900
+      },
+      {
+        "type": "audio",
+        "label": "lobby-return-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.532,
+          0.909
+        ],
+        "label": "상위 등급",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "playable-high-grades",
+        "expected": "스페셜·유니크·레전드·시크릿 네 출전 등급의 대표 원본과 실제 개수가 보이며 전체 원본 도감 버튼과 구분된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.843
+        ],
+        "label": "전체 원본 도감",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "archive-originals",
+        "expected": "현재 전체 원본 메타데이터 수·검색 결과 수·이름/번호/능력 검색·등급·속성 필터와 원래 세로 비율의 전체 카드가 보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.25,
+          0.225
+        ],
+        "label": "전체 원본 검색 입력",
+        "settleMs": 900
+      },
+      {
+        "type": "text",
+        "text": "16051128346",
+        "label": "2016년 원작 시크릿 테오 번호 검색"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.62,
+          0.225
+        ],
+        "label": "원본 검색 실행",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "late-secret-search",
+        "expected": "원작 번호16051128346 테오가 실제 원본 도감에서 검색되고 시크릿과 지원 상태가 표시된다. 원본 카드가 실제로 불러와져야 한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1535,
+          0.565
+        ],
+        "label": "후기 시크릿 원본 상세",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "late-secret-original-detail",
+        "expected": "테오의 원본 전체 인쇄·시크릿 등급·원작 번호·원문 설명·전투 지원 상태가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.635,
+          0.895
+        ],
+        "label": "원본 상세에서 도감으로",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.515,
+          0.3115
+        ],
+        "label": "검색 초기화",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8225,
+          0.225
+        ],
+        "label": "전체 등급 선택 열기",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "all-original-grades",
+        "expected": "현재 원본 등급별 개수와 스페셜·유니크·레전드·시크릿·에픽·이카젠 등을 선택할 수 있다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8,
+          0.634
+        ],
+        "label": "시크릿 원본 필터",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "secret-originals",
+        "expected": "현재 전체 원본 중 시크릿으로 실제 필터링된다. 원작 카드 이름·전체 인쇄·등급과 원본 도감의 의미가 읽히며 미디어 누락을 성공으로 간주하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.13,
+          0.942
+        ],
+        "label": "대기실",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.532,
+          0.909
+        ],
+        "label": "출전 도감으로 가는 상위 등급 화면",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.94
+        ],
+        "label": "출전 카드 도감",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "original-card-gallery",
+        "expected": "현재 실제 출전 카탈로그의 카드가 원본 전체 인쇄·세로 비율로 보이고 검색·속성·종류·비용·등급·랭크·능력 필터가 연결된다. 원본 도감 전체 수와 혼동하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.25,
+          0.201
+        ],
+        "label": "카드 이름 검색 입력",
+        "settleMs": 1000
+      },
+      {
+        "type": "text",
+        "text": "차원의충격파",
+        "label": "실제 시크릿 카드 이름 검색"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.599,
+          0.201
+        ],
+        "label": "카드 검색 실행",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "label": "실제 시크릿 카드 상세",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "secret-card-detail",
+        "expected": "실제시크릿 차원의충격파의 원본인쇄전체·원작프레임·실제등급과 오른쪽현재지원효과/코스트·조건이함께보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.885,
+          0.87
+        ],
+        "label": "원본 인쇄 카드 보기",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "original-printed-card",
+        "expected": "동일한차원의충격파의전체원본인쇄가원래세로비율로확대되며원작이름·수치·프레임을자르거나재배치하지않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.9585
+        ],
+        "label": "능력 설명으로 돌아가기",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "카드 상세에서 도감",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9,
+          0.071
+        ],
+        "label": "도감에서 대기실",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.39,
+          0.383
+        ],
+        "label": "첫 AI 연습방",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.627,
+          0.7625
+        ],
+        "label": "대전 시작",
+        "settleMs": 1600
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-original-hand",
+        "expected": "실제셔플된시작손패6장이완전한원본카드로보이고교체·시작버튼과도움말경로가읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7925,
+          0.925
+        ],
+        "label": "시작 손패 확정",
+        "settleMs": 1600
+      },
+      {
+        "type": "review_input",
+        "name": "desktop-actual-hand-deployment",
+        "expected": "현재 원본 손패를 보고 합법적인 지형과 유닛을 실제로 낸다. 필요하면 화면의 비용/LP/소울과 준비 완료/다음 턴을 사용한다. 소유 지형1장 이상과 살아 있는 아군 유닛1장 이상이 보이며 내 준비 단계에서 입력 가능한 상태일 때 continue한다. 지형 띠는(.4,.6785), 아군 첫 전열은(.099,.51), desktop Ready는(.898,.903)다. 일반 입력만 허용한다."
+      },
+      {
+        "type": "checkpoint",
+        "name": "backfield-terrain",
+        "expected": "일반 입력으로 지형 한 장 이상을 실제 전개한 화면이다. 손패 위 백필드에 해당 지형 원화와 실제 장수·소울·LP 변화가 보인다. 첫 카드가 지형이 아니면 원본 화면을 보고 일반 추가 클릭/드래그만 사용한다. 손패·RNG·저장을 주입하지 않는다."
+      },
+      {
+        "type": "audio",
+        "label": "battle-original"
+      },
+      {
+        "type": "checkpoint",
+        "name": "original-hand-and-field",
+        "expected": "일반 입력으로 유닛을 실제 아군 전열에 배치했다. 카드 안에 이름과 AP/DP/HP가 읽히며 별도 전열 밖 능력치 패널이 없다. 손패 이름·비용·수치의 검은 판넬이 빈 상태여서는 안 된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.197,
+          0.6785
+        ],
+        "label": "전개한 첫 백필드 지형 상세",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "terrain-detail",
+        "expected": "일반입력으로전개한실제백필드지형을클릭하여동일원본전체카드와현재LP/색소울/총소울생산설명을보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "지형 상세에서 전장 복귀",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.903
+        ],
+        "label": "실제 준비 완료로 공방 진행",
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-01",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-02",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-03",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-04",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-05",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-06",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-07",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-08",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-09",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-10",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-11",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "ready-resolution-12",
+        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
+      },
+      {
+        "type": "wait",
+        "ms": 850
+      },
+      {
+        "type": "wait",
+        "ms": 30000
+      },
+      {
+        "type": "review_input",
+        "name": "desktop-resolution-before-save",
+        "expected": "앞선 실제 원본 연속 캡처를 확인한다. 코인/현재값과 +/− 변화량의 실제 화면이 필요한 경우 일반 준비 완료와 화면상 합법 배치로 계속 진행하고 원본을 남긴다. 준비 완료/속도/끝까지/범례가 겹치지 않는지 살핀다. 저장하기 전에 실제 전장이 내 준비 단계로 돌아와 메뉴 버튼이 입력 가능한 상태인지 확인한다. 손패·RNG·저장·엔진 상태 접근이나 주입을 사용하지 않는다."
+      },
+      {
+        "type": "checkpoint",
+        "name": "post-ready-field",
+        "expected": "실제 공방이 끝난 전장. 살아남은 카드 현재HP/소각/덱/다음 준비 단계를 확인한다. 카드 수치가 이전 코인 미리보기로 고정되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "기록 / 메뉴",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33,
+          0.51
+        ],
+        "label": "전장 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.705
+        ],
+        "label": "전투로",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-battle",
+        "expected": "저장한 실제 백필드·전장 유닛·손패·소울·LP·덱·단계를 이어하기 비교 기준으로 기록한다. 만료된 저장 알림 자체를 요구하지 않는다."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.78
+        ],
+        "label": "저장한 전장 이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-battle",
+        "expected": "전체 새로고침 후 이어하기가 saved-battle의 실제 지형·유닛·손패·덱·LP·소울·현재 단계를 복원했다. 프로필과 원작 음악·클릭/드래그 조작을 유지한다."
+      },
+      {
+        "type": "audio",
+        "label": "continued-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "전투 기록 메뉴",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.51
+        ],
+        "label": "대기실",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.87,
+          0.49
+        ],
+        "label": "저장된 프로필 확인",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-profile",
+        "expected": "전장저장및전체새로고침후SoulTester이름과선택아바타가그대로보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.43,
+          0.935
+        ],
+        "label": "프로필 저장 옮기기",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "save-transfer",
+        "expected": "실제프로필경로에서전투저장옮기기화면을열었다. 내보내기/검증후가져오기/돌아가기와저장안내가읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.52
+        ],
+        "label": "가져오기 입력란",
+        "settleMs": 300
+      },
+      {
+        "type": "text",
+        "text": "invalid-transfer-payload",
+        "label": "잘못된 저장 문자열 실제입력"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.445,
+          0.785
+        ],
+        "label": "잘못된 저장 검증 후 가져오기",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "invalid-transfer-rejected",
+        "expected": "입력한잘못된저장문자열이거부되었다는가져오기실패안내가보인다. 정상저장슬롯을지우고새게임으로대신하지않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.805,
+          0.785
+        ],
+        "label": "저장 옮기기에서 프로필로",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.165,
+          0.9325
+        ],
+        "label": "프로필에서 로비로",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.87,
+          0.693
+        ],
+        "label": "유효한 이전 전장 이어하기",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-after-invalid-transfer",
+        "expected": "잘못된저장가져오기를거부한뒤에도앞서저장한실제전장·백필드·손패·LP/소울이이어하기로복원된다."
+      }
+    ],
+    "intendedViewport": {
+      "width": 1280,
+      "height": 720,
+      "scope": "Desktop draft. Compact mobile right rail has different vertical positions; release owner must adapt from actual originals."
+    },
+    "reviewNotes": [
+      "Current ordinary inputs only; never seed or inject hand/Core/save state to force a coin. If drawn cards differ, inspect originals and amend ordinary drag/click steps.",
+      "Full media audit is a separate release gate. Missing card images are a failed media requirement, not an accepted gallery capture.",
+      "Intermediate Ready captures must directly show actual coin/power states and signed on-card changes. Timing is a draft and must be adapted to the observed normal AI preparation; nonblank images alone do not pass.",
+      "Original gallery artwork/portrait ratios, mobile text and Ready-control ghost fixes need current Root visual review. No previous screenshots are approvals."
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-renewal-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized actual 16:9 canvas top-left origin",
+    "requiredCheckpoints": [
+      "title",
+      "opening-birth",
+      "opening-age-twelve",
+      "world-idle",
+      "codex-locked",
+      "illustrated-items",
+      "jump-and-landing",
+      "character-lamp",
+      "birth-1",
+      "birth-2",
+      "birth-3",
+      "study-dialogue",
+      "jesus-dialogue-portrait",
+      "optional-question",
+      "birth-memory-before-birth-clarified",
+      "saved-study",
+      "continued-study",
+      "study-complete-1",
+      "study-complete-2",
+      "study-complete-3",
+      "study-complete-4",
+      "study-complete-5",
+      "study-complete-6",
+      "study-complete-7",
+      "study-complete-8",
+      "temple-dialogue-1",
+      "temple-dialogue-2",
+      "temple-dialogue-3",
+      "temple-dialogue-4",
+      "journey-complete",
+      "codex-complete",
+      "codex-final-page",
+      "continued-complete-codex"
+    ],
+    "scope": "Ordinary keyboard/mouse or touch: illustrated opening, 15 actual encounter readings, inventory, optional question, persistent save/full reload; original visual state checks require Root review, precise rules/state assertions are separately native.",
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "그림 타이틀에 열두 살 여정 안내·새 여정·이어하기가 읽히고 얼굴과 제목이 겹치지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.172,
+          0.832
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-birth",
+        "expected": "탄생 원화와 기록에 근거한 오프닝, 학습용 극화 안내가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 두 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 세 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 열두 살",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-age-twelve",
+        "expected": "열두 살 예수님과 성전 방문 소개가 실제 그림과 함께 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 다섯 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 여섯 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "열두 살 여정으로",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "world-idle",
+        "expected": "2D 다층 숲에 예수님 전신·걷기 목표·도감 0/15와 실제 NPC가 표시된다."
+      },
+      {
+        "type": "audio",
+        "label": "journey-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.23,
+          0.075
+        ],
+        "label": "획득 전 도감 열기",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "codex-locked",
+        "expected": "도감 0/15, 탄생부터 순서대로 잠긴 말씀과 획득 방법이 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.824,
+          0.819
+        ],
+        "label": "여정 복귀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.874,
+          0.075
+        ],
+        "label": "소지품 열기",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.629,
+          0.819
+        ],
+        "label": "등잔 장착",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "illustrated-items",
+        "expected": "정사각형 원화 아이템과 설명, 실제 장착 상태가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.835,
+          0.819
+        ],
+        "label": "소지품 닫기",
+        "settleMs": 500
+      },
+      {
+        "type": "key",
+        "key": "Space",
+        "label": "실제 키 점프",
+        "settleMs": 0,
+        "captureCompositorBurst": true,
+        "captureLabel": "jump-air",
+        "captureMs": 1100,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.829,
+          0.886
+        ],
+        "label": "실제 터치 점프",
+        "settleMs": 500,
+        "captureCompositorBurst": true,
+        "captureLabel": "jump-air",
+        "captureMs": 1100,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "checkpoint",
+        "name": "jump-and-landing",
+        "expected": "보존된 원본 연속 프레임에 실제 점프·착지 전신이 보이고 목각처럼 분리된 관절이 없다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": -360,
+        "label": "실제 휠 확대",
+        "profile": "desktop",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "character-lamp",
+        "expected": "등잔이 실제 손에 장착되고 인물 전경 가림이 완화된다. 데스크톱은 휠 확대가 반영된다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": 360,
+        "label": "기본 시야 복귀",
+        "profile": "desktop",
+        "settleMs": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d"
+        ],
+        "ms": 1833,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1833,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-1",
+        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 1
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-2",
+        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 1
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-3",
+        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 1
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "a"
+        ],
+        "ms": 3840,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.0523,
+          0.886
+        ],
+        "ms": 3840,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-dialogue",
+        "expected": "요셉과 열두 살 예수님의 실제 학습 대화와 출처 구절이 분리되어 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 1
+      },
+      {
+        "type": "checkpoint",
+        "name": "jesus-dialogue-portrait",
+        "expected": "대답하는 열두 살 예수님의 올바른 얼굴 초상과 자연스러운 대화가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.117,
+          0.91
+        ],
+        "label": "궁금한 내용 질문하기",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.401
+        ],
+        "label": "현재 주제 첫 질문",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "optional-question",
+        "expected": "곁가지 질문과 답이 표시되며 말씀 획득이나 대화 순서를 건너뛰지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.815,
+          0.819
+        ],
+        "label": "원래 대화로",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 1
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-memory-before-birth-clarified",
+        "expected": "요셉의 회상에서 당시 예수님이 아직 태어나기 전이었다고 명확히 읽히며 누가복음2장 본문과 구분된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 6
+      },
+      {
+        "type": "click",
+        "point": [
+          0.929,
+          0.075
+        ],
+        "label": "쉼표 메뉴",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.5528
+        ],
+        "label": "첫 학습 완료 상태 저장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.4319
+        ],
+        "label": "저장 후 여정 계속",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-study",
+        "expected": "첫 학습까지 4/15 획득과 등잔·현재 장소가 표시된다."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.378,
+          0.832
+        ],
+        "label": "브라우저 새로고침 후 이어하기",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-study",
+        "expected": "실제 지속 저장에서 4/15 수집과 위치·등잔·다음 목표가 유지된다."
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-1",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-2",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-3",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1697,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1697,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-4",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-5",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1697,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1697,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-6",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-7",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1697,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1697,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 8
+      },
+      {
+        "type": "checkpoint",
+        "name": "study-complete-8",
+        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "a"
+        ],
+        "ms": 8840,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.0523,
+          0.886
+        ],
+        "ms": 8840,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-dialogue-1",
+        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 2
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 3601,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3601,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-dialogue-2",
+        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 4
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 2649,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 2649,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "review_input",
+        "name": "inspect-temple-three",
+        "profile": "mobile-landscape",
+        "scope": "Actual original screenshot followed only by logged ordinary touch correction if necessary; no engine or save state access."
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-dialogue-3",
+        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 4
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Shift",
+          "d"
+        ],
+        "ms": 1935,
+        "label": "실제 좌우 이동",
+        "settleMs": 350,
+        "profile": "desktop"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.185,
+          0.894
+        ],
+        "label": "터치 달리기 켜기",
+        "settleMs": 500,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1935,
+        "label": "터치 방향 버튼 계속 누르기",
+        "settleMs": 350,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "현재 만남 대화 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-dialogue-4",
+        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음 말씀",
+        "settleMs": 500,
+        "repeat": 3
+      },
+      {
+        "type": "review_input",
+        "name": "inspect-complete-journey",
+        "profile": "mobile-landscape",
+        "scope": "Actual original screenshot followed only by logged ordinary touch correction if necessary; no engine or save state access."
+      },
+      {
+        "type": "checkpoint",
+        "name": "journey-complete",
+        "expected": "탄생 3·배움 8·성전 4 본문 총 15/15를 실제 대화로 모은 완료 안내가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.23,
+          0.075
+        ],
+        "label": "완성된 도감",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "codex-complete",
+        "expected": "획득 15/15와 실제 개역한글 본문·출처가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.307,
+          0.819
+        ],
+        "label": "도감 두 번째 페이지",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.307,
+          0.819
+        ],
+        "label": "도감 성전 페이지",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "codex-final-page",
+        "expected": "마지막 성전 본문 네 장 모두 획득 표시이며 전체 3페이지와 정확한 구절이 보인다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.824,
+          0.819
+        ],
+        "label": "여정 복귀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.929,
+          0.075
+        ],
+        "label": "완료 저장 메뉴",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.5528
+        ],
+        "label": "전체 여정 저장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.4319
+        ],
+        "label": "저장 후 계속",
+        "settleMs": 500
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.378,
+          0.832
+        ],
+        "label": "완료 저장 이어하기",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.23,
+          0.075
+        ],
+        "label": "재접속 후 도감",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-complete-codex",
+        "expected": "브라우저 완전 재로딩 뒤에도 획득15/15와 실제 본문이 유지된다."
+      }
+    ]
+  }
+}

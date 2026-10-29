@@ -8,23 +8,23 @@ namespace FirstGame.Validation
 {
     public sealed class RestorationCardsTests
     {
-        [Test] public void UpperGradeArchiveIsSeparateFromPlayableCardsAndPreservesCompleteSourceRules()
+        [Test] public void CompleteOriginalArchiveSeparatesSupportedRulesFromUnsupportedSources()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(605));
-            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Unique), Is.EqualTo(4));
-            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Legend), Is.EqualTo(2));
-            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Secret), Is.EqualTo(1));
-            Assert.That(OriginalCardArchive.All.Length, Is.EqualTo(30));
-            Assert.That(OriginalCardArchive.All.Select(c=>c.id).Distinct().Count(), Is.EqualTo(30));
-            Assert.That(OriginalCardArchive.All.GroupBy(c=>c.rarity).ToDictionary(g=>g.Key,g=>g.Count()),
-                Is.EquivalentTo(new System.Collections.Generic.Dictionary<CardRarity,int>{{CardRarity.Unique,7},{CardRarity.Legend,7},{CardRarity.Secret,7},{CardRarity.Epic,7},{CardRarity.Icajen,2}}));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2571));
+            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Unique), Is.EqualTo(23));
+            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Legend), Is.EqualTo(4));
+            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Secret), Is.EqualTo(15));
+            Assert.That(OriginalCardArchive.All.Length, Is.EqualTo(15350));
+            Assert.That(OriginalCardArchive.All.Select(c=>c.id).Distinct().Count(), Is.EqualTo(15350));
+            Assert.That(OriginalCardArchive.All.Count(c=>c.rarity==CardRarity.Uncatalogued), Is.EqualTo(23));
+            var supported = new System.Collections.Generic.HashSet<string>(CardCatalog.All.Select(c=>c.id));
             foreach(var card in OriginalCardArchive.All)
             {
-                Assert.That(card.sourceRules.Length, Is.GreaterThan(20),card.id);
-                Assert.That(card.unsupportedReason, Does.Contain("감상 전용"));
-                Assert.That(CardCatalog.All.Any(c=>c.id==card.id), Is.False);
-                Assert.That(card.artResource,Does.StartWith("Art/FmArchives/fm_"));
-                Assert.Throws<ArgumentException>(()=>CardCatalog.Get(card.id));
+                Assert.That(card.sourceRules, Is.Not.Empty, card.id);
+                Assert.That(card.playable, Is.EqualTo(supported.Contains(card.id)),card.id);
+                if (card.playable) Assert.That(card.unsupportedReason, Is.Empty,card.id);
+                else { Assert.That(card.unsupportedReason, Is.Not.Empty,card.id); Assert.Throws<ArgumentException>(()=>CardCatalog.Get(card.id)); }
+                Assert.That(card.sourceUrl, Does.EndWith(card.id.Substring(3)));
             }
         }
         [Test] public void StrongPoisonAppliesBeforeDamageWithoutExtraRandomnessOrPermanentChanges()

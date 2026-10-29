@@ -22,17 +22,7 @@ namespace FantasyCards.Presentation
 
         private void DetailPanorama(bool quiet)
         {
-            Panel(root, 0, 0, 1, 1, new Color(.025f, .045f, .038f));
-            var texture = Resources.Load<Texture2D>("Art/FmDetail/title-keyart");
-            if (texture != null)
-                ImageFrame(root, texture, new Rect(0, 0, 1, 1), 0, 0, 1, 1, new Vector2(.58f, .48f));
-            Gradient(root, 0, 0, 1, 1, new Color(.015f, .035f, .028f, quiet ? .70f : .15f),
-                new Color(.015f, .035f, .028f, quiet ? .82f : .10f));
-            Gradient(root, 0, 0, .69f, 1, new Color(.018f, .035f, .030f, .96f), Color.clear, true);
-            Gradient(root, 0, 0, 1, .39f, new Color(.010f, .022f, .020f, .97f), Color.clear);
-            var frame = Panel(root, .018f, .022f, .982f, .978f, Color.clear);
-            frame.gameObject.name = "Remaster panorama frame";
-            Frame(frame, new Color(.82f, .70f, .43f, .65f), 1);
+            RenewalBackdrop(quiet);
         }
 
         private void ShowDetailTitle() { ShowArcanaTitle(); }
@@ -190,9 +180,7 @@ namespace FantasyCards.Presentation
                     continue;
                 }
                 var instance = player.terrain[i]; var card = CardCatalog.Get(instance.definitionId);
-                var texture = OriginalCardTexture(card);
-                if (texture != null) ImageFrame(tile, texture, new Rect(.13f, .36f, .805f, .56f), .02f, .03f, .98f, .98f, new Vector2(.5f, .5f), true);
-                else Artwork(tile, card, .02f, .03f, .98f, .98f);
+                RenewalSourcePrint(tile, card.artResource, .02f, .03f, .98f, .98f, "Original terrain art", new Rect(.13f, .36f, .805f, .56f));
                 if (!small)
                 {
                     Panel(tile, .02f, .02f, .98f, .30f, new Color(.025f, .045f, .035f, .95f));

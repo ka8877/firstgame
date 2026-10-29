@@ -1,0 +1,142 @@
+{
+  "FantasyCards": {
+    "revision": "fm-renewal-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas top-left origin",
+    "scope": "Public exact-runtime launch and output check; full local current-source route is separate.",
+    "requiredCheckpoints": [
+      "title",
+      "lobby"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "후기 공식 홈페이지 인물 원화와 새 리마스터 UI가 실제 현재 런타임으로 표시된다. 원작 최종 클라이언트 타이틀을 복구했다는 주장과 구분한다."
+      },
+      {
+        "type": "audio",
+        "label": "title-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "lobby",
+        "expected": "실제 로컬 방·현재 카드·기본덱 정보와 새 리마스터 UI가 표시된다."
+      },
+      {
+        "type": "audio",
+        "label": "lobby-instrumental"
+      }
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-renewal-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas top-left origin",
+    "scope": "Public exact-runtime launch and output check; full local current-source route is separate.",
+    "requiredCheckpoints": [
+      "title",
+      "opening-birth",
+      "opening-age-twelve",
+      "world-idle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "그림 타이틀에 열두 살 여정 안내·새 여정·이어하기가 읽히고 얼굴과 제목이 겹치지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.172,
+          0.832
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-birth",
+        "expected": "탄생 원화와 기록에 근거한 오프닝, 학습용 극화 안내가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 두 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 세 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 열두 살",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-age-twelve",
+        "expected": "열두 살 예수님과 성전 방문 소개가 실제 그림과 함께 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 다섯 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "오프닝 여섯 번째 장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.182,
+          0.861
+        ],
+        "label": "열두 살 여정으로",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "world-idle",
+        "expected": "2D 다층 숲에 예수님 전신·걷기 목표·도감 0/15와 실제 NPC가 표시된다."
+      },
+      {
+        "type": "audio",
+        "label": "journey-instrumental"
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ namespace FantasyCards.Core
     // Preserve the first two numeric values for editor references; display names are light/water.
     public enum Element { Dawn, Tide, Fire, Forest, Metal, Earth, Darkness }
     public enum CardKind { Terrain, Unit, Spell, Equipment }
-    public enum CardRarity { Free, Common, Uncommon, Rare, Special, Upgrade, Unique, Event, Legend, Icajen, Secret, Epic }
+    public enum CardRarity { Free, Common, Uncommon, Rare, Special, Upgrade, Unique, Event, Legend, Icajen, Secret, Epic, Uncatalogued }
     // Rank is a separate original-card variant, not a rarity or a power tier.
     public enum CardRank { N, C, B, A, S }
     public enum Effect { None, Heal, Damage, Rally, Power, Armor, Coin, Draw, Resource, Sweep, Health, Weaken, DefenseBreak, HealAll, RallyAll, ArmorAll, HealthAll, DrainAll, StatOperations, DimensionShockwave }
@@ -119,6 +119,8 @@ namespace FantasyCards.Core
         public int lane, damage, bonusPower, armor, bonusHealth, extraCoins;
         public bool exhausted, summoningSick, coinsRolled;
         public int rolledAttack, rolledDefense, rolledHealth;
+        // Optional schema-3 fields; older saves naturally default to zero.
+        public int permanentPower, coinChanceDelta;
         public List<CardInstance> equipment = new List<CardInstance>();
         public UnitState Copy()
         {
@@ -177,6 +179,9 @@ namespace FantasyCards.Core
         public string sourceDefinitionId, targetDefinitionId;
         public int coinIndex, secondaryAmount;
         public bool coinHeads;
+        public bool hasStatTransition;
+        public int beforeAttack, beforeDefense, beforeHealth, afterAttack, afterDefense, afterHealth;
+        public int additionalAttackDamage;
         // For unit events these are the source's current AP/DP/remaining HP.
         // targetHealth is the receiving unit's remaining HP after this event.
         public int attack, defense, health, targetHealth;
@@ -194,6 +199,13 @@ namespace FantasyCards.Core
         public BattlePhase phase;
     }
 
+    [Serializable] public sealed class GeneratedCardProof
+    {
+        public int instanceId, sourceInstanceId, owner;
+        public string definitionId, sourceDefinitionId, reason;
+        public GeneratedCardProof Copy() => (GeneratedCardProof)MemberwiseClone();
+    }
+
     [Serializable] public sealed class BattleState
     {
         public int schemaVersion = 3;
@@ -206,9 +218,10 @@ namespace FantasyCards.Core
         public bool openingHandOpen = true;
         public List<PlayerState> players = new List<PlayerState>();
         public List<BattleEvent> events = new List<BattleEvent>();
+        public List<GeneratedCardProof> generatedCards = new List<GeneratedCardProof>();
         public BattleState Copy()
         {
-            var c = (BattleState)MemberwiseClone(); c.rules = rules.Copy(); c.players = players.ConvertAll(x => x.Copy()); c.events = events.ConvertAll(x => x.Copy()); return c;
+            var c = (BattleState)MemberwiseClone(); c.rules = rules.Copy(); c.players = players.ConvertAll(x => x.Copy()); c.events = events.ConvertAll(x => x.Copy()); c.generatedCards = generatedCards == null ? new List<GeneratedCardProof>() : generatedCards.ConvertAll(x => x.Copy()); return c;
         }
     }
 

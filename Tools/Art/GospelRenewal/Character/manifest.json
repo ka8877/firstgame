@@ -1,0 +1,40 @@
+{
+  "revision": "gospel-renewal-2026-10-29",
+  "sourceAtlas": {
+    "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLuminous/Actors/jesus-parts.png",
+    "sha256": "a9240b43b2511de0999a5722b40d30b79a5b46b7de513c740266b9511ada0271",
+    "width": 1254,
+    "height": 1254,
+    "originalSource": "Tools/Art/GospelLuminous/Actors/manifest.json",
+    "modifiedPixels": false
+  },
+  "additionalSourceRectanglesBottomLeft": {
+    "nearShin": [
+      432,
+      438,
+      110,
+      195
+    ],
+    "nearSandal": [
+      418,
+      370,
+      184,
+      100
+    ],
+    "farShin": [
+      1053,
+      442,
+      99,
+      187
+    ],
+    "farSandal": [
+      1040,
+      374,
+      180,
+      102
+    ]
+  },
+  "rendering": "Original Sprite-Lit materials and mesh-safe LuminousCloth2D shader, explicit MainTex/MaskTex/NormalMap, accurate-normal SoftGlow Sprite Light2D remain unchanged.",
+  "motion": "Distance-driven stance/swing targets, fixed-length two-bone leg IK with reachable pelvis, independent level sandals, measured ground slope; smoothed torso/head/arm/hair and restrained cloth. Controller owns real physics and position.",
+  "validationScope": "Source/image inspection only at authoring time. Actual runtime validation is owned by Renewal release runner, with fresh captures and ordinary input."
+}

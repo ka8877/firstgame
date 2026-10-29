@@ -1,0 +1,171 @@
+{
+  "revision": "fm-renewal-audio-2026-10-29",
+  "generator": "Tools/Audio/Renewal/polish-loops.py",
+  "generatorSha256": "1f8cb6ff30fbb770df0fb45bd9d6ad69d5fe29cfdf2b5e7c91b460561da2ef7c",
+  "scope": "Actual decoded Ogg and MP3 source-file PCM and circular seam analysis. No human listening, browser output or physical device performance claim.",
+  "tracks": [
+    {
+      "scene": "title",
+      "sourceFile": "Tools/Audio/FmFidelity/Originals/sound-i-login.mp3",
+      "sourceSha256": "e083b7a221b3a9a7975a7aecc591ad47598bf5efbc86ea0980a0f588b99995ed",
+      "basis": "Same hash-checked publisher recording; title uses previously documented instrumental intervals, then normalization before the loop edit.",
+      "recipe": {
+        "trimStartSeconds": 0.35,
+        "trimEndSeconds": 18.52952380952381,
+        "overlapSeconds": 0.3
+      },
+      "effectiveFirstSourceSecondsAfterOriginalExcerptAssembly": 0.65,
+      "method": "Trim bounded low-energy edges, mix last/first N frames with sqrt(1-t)/sqrt(t), output core[N:-N] followed by mixed tail/head. No source separation, tempo stretch, new melody or speech.",
+      "beforeOgg": {
+        "seconds": 18.52952380952381,
+        "peak": 0.5181295275688171,
+        "rms": 0.0829983651638031,
+        "dc": 0.00018605134391691536,
+        "clippedSamples": 0,
+        "finite": true,
+        "first100msRms": 0.001831282745115459,
+        "last100msRms": 0.02235616184771061,
+        "quietIntroSeconds": 0.34,
+        "quietOutroSeconds": 0.0,
+        "minimum10msRmsAcrossLoopSeam": 0.0011484023416414857,
+        "below005RmsWindowsAcrossLoopSeam": 34,
+        "loopBoundarySampleJumpMax": 0.0003299530071672052
+      },
+      "after": {
+        "ogg": {
+          "seconds": 17.87952380952381,
+          "peak": 0.5227083563804626,
+          "rms": 0.08447679877281189,
+          "dc": 0.00019656734366435558,
+          "clippedSamples": 0,
+          "finite": true,
+          "first100msRms": 0.0133795952424407,
+          "last100msRms": 0.011957098729908466,
+          "quietIntroSeconds": 0.0,
+          "quietOutroSeconds": 0.0,
+          "minimum10msRmsAcrossLoopSeam": 0.007737764157354832,
+          "below005RmsWindowsAcrossLoopSeam": 0,
+          "loopBoundarySampleJumpMax": 0.0009028231725096703
+        },
+        "mp3": {
+          "seconds": 17.87952380952381,
+          "peak": 0.525231122970581,
+          "rms": 0.08456326276063919,
+          "dc": 0.00023443761165253818,
+          "clippedSamples": 0,
+          "finite": true,
+          "first100msRms": 0.0133286714553833,
+          "last100msRms": 0.011944944970309734,
+          "quietIntroSeconds": 0.0,
+          "quietOutroSeconds": 0.0,
+          "minimum10msRmsAcrossLoopSeam": 0.00769205903634429,
+          "below005RmsWindowsAcrossLoopSeam": 0,
+          "loopBoundarySampleJumpMax": 0.0017131706699728966
+        }
+      },
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/Resources/Audio/ModernCard/title.ogg",
+          "bytes": 384043,
+          "sha256": "bd9ce5f8920988a893476c0d537501ca7c38af3aac101a5e8535208181e079dc"
+        },
+        {
+          "file": "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/title.ogg",
+          "bytes": 384043,
+          "sha256": "bd9ce5f8920988a893476c0d537501ca7c38af3aac101a5e8535208181e079dc"
+        },
+        {
+          "file": "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/title.mp3",
+          "bytes": 398078,
+          "sha256": "dd7c42c9cd370dc1a8dd79e3188655e801a8a91d6582f1e8289bbe61d1dd75fd"
+        }
+      ]
+    },
+    {
+      "scene": "battle",
+      "sourceFile": "Tools/Audio/FmFidelity/Originals/sid-battle.mp3",
+      "sourceSha256": "bbb2310ccf6c268e1d7e6506deb668fa367a85bcd8e7bead6c5429f9d00f30a9",
+      "basis": "Same hash-checked publisher recording; title uses previously documented instrumental intervals, then normalization before the loop edit.",
+      "recipe": {
+        "trimStartSeconds": 0.85,
+        "trimEndSeconds": 59.35,
+        "overlapSeconds": 0.35
+      },
+      "effectiveFirstSourceSecondsAfterOriginalExcerptAssembly": 1.2,
+      "method": "Trim bounded low-energy edges, mix last/first N frames with sqrt(1-t)/sqrt(t), output core[N:-N] followed by mixed tail/head. No source separation, tempo stretch, new melody or speech.",
+      "beforeOgg": {
+        "seconds": 60.42122448979592,
+        "peak": 0.6883456110954285,
+        "rms": 0.07295891642570496,
+        "dc": -1.0096327059727628e-05,
+        "clippedSamples": 0,
+        "finite": true,
+        "first100msRms": 2.12786253541708e-05,
+        "last100msRms": 7.284152525244281e-05,
+        "quietIntroSeconds": 0.8,
+        "quietOutroSeconds": 0.9400000000000001,
+        "minimum10msRmsAcrossLoopSeam": 0.0,
+        "below005RmsWindowsAcrossLoopSeam": 100,
+        "loopBoundarySampleJumpMax": 2.493141255399678e-05
+      },
+      "after": {
+        "ogg": {
+          "seconds": 58.15,
+          "peak": 0.6952096223831177,
+          "rms": 0.07438299059867859,
+          "dc": 8.201560376619454e-06,
+          "clippedSamples": 0,
+          "finite": true,
+          "first100msRms": 0.016105104237794876,
+          "last100msRms": 0.013276149518787861,
+          "quietIntroSeconds": 0.0,
+          "quietOutroSeconds": 0.0,
+          "minimum10msRmsAcrossLoopSeam": 0.0075173452496528625,
+          "below005RmsWindowsAcrossLoopSeam": 0,
+          "loopBoundarySampleJumpMax": 0.0006447415798902512
+        },
+        "mp3": {
+          "seconds": 58.15,
+          "peak": 0.6898707151412964,
+          "rms": 0.07476592808961868,
+          "dc": 4.719658591056941e-06,
+          "clippedSamples": 0,
+          "finite": true,
+          "first100msRms": 0.016127150505781174,
+          "last100msRms": 0.013134985230863094,
+          "quietIntroSeconds": 0.0,
+          "quietOutroSeconds": 0.0,
+          "minimum10msRmsAcrossLoopSeam": 0.007544100284576416,
+          "below005RmsWindowsAcrossLoopSeam": 0,
+          "loopBoundarySampleJumpMax": 0.0005634529516100883
+        }
+      },
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/Resources/Audio/ModernCard/battle.ogg",
+          "bytes": 1359350,
+          "sha256": "67d70ddc22dc6d768aeedfb6540ebeb04d22c8b6044186c9ecb917669d60fc96"
+        },
+        {
+          "file": "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/battle.ogg",
+          "bytes": 1359350,
+          "sha256": "67d70ddc22dc6d768aeedfb6540ebeb04d22c8b6044186c9ecb917669d60fc96"
+        },
+        {
+          "file": "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/battle.mp3",
+          "bytes": 1356911,
+          "sha256": "e711038037f8081fa9d72f06294199a456c616d06cd8909cdd62ec6724368e8c"
+        }
+      ]
+    }
+  ],
+  "unchangedFiles": {
+    "Games/FantasyCards/Assets/Resources/Audio/ModernCard/lobby.ogg": "897b2a946584e9e2572d2723b32f040ffba1e7d315d3fab5570b4f3dfafeb85a",
+    "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/lobby.ogg": "897b2a946584e9e2572d2723b32f040ffba1e7d315d3fab5570b4f3dfafeb85a",
+    "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/lobby.mp3": "91fec1767ac8a0385a40eb1e4ff7df8fb43db4301ce01bd8e79c8a05bfb24b08",
+    "Games/FantasyCards/Assets/Resources/Audio/ModernCard/deck.ogg": "2d86efd77128b4c43c63bc40483cc69ab399935ad7e91e03bb8884e0f21b0040",
+    "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/deck.ogg": "2d86efd77128b4c43c63bc40483cc69ab399935ad7e91e03bb8884e0f21b0040",
+    "Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard/deck.mp3": "e8af03c908ea97968d44fa9e855eb2cc2455c6d2aa858239019a16d2a4cd9e22"
+  },
+  "history": "Tools/Audio/Renewal/History/before-loop-polish"
+}

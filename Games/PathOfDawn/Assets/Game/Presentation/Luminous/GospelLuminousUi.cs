@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using PathOfDawn.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +13,7 @@ namespace PathOfDawn.Presentation
     public sealed class GospelLuminousUi : MonoBehaviour
     {
         public Action OnStart, OnContinue, OnResume, OnPause, OnSave, OnInventory, OnJournal,
-            OnStatus, OnSettings, OnExit, OnLampToggle, OnJump, OnInteract, OnRead, OnUserGesture;
+            OnStatus, OnSettings, OnExit, OnLampToggle, OnJump, OnInteract, OnRead, OnUserGesture, OnOpeningReplay;
         public Action<float> OnMove, OnMusicVolume;
         public Action<bool> OnRun, OnMusicMute;
         public bool IsModal { get; private set; }
@@ -100,6 +102,7 @@ namespace PathOfDawn.Presentation
         public void ShowTitle(bool canContinue)
         {
             StartModal("title", false);
+            StoryArt(modal,"Art/GospelRenewal/Opening/temple-journey");
             var veil = Rect(modal, "Title soft shade", 0, 0, 666, 720);
             var gradient = veil.gameObject.AddComponent<RawImage>(); gradient.texture = TitleGradient(); gradient.raycastTarget = false;
             Ornament(modal, 72, 126, 342, Gold);
@@ -109,11 +112,11 @@ namespace PathOfDawn.Presentation
             first.textWrappingMode = second.textWrappingMode = TextWrappingModes.NoWrap;
             first.overflowMode = second.overflowMode = TextOverflowModes.Overflow;
             Text(modal, "예수님의 길", 74, 391, 550, 58, 38, Cream);
-            Text(modal, "올리브 숲을 지나 성전의 뜰로.\n누가복음의 기록을 함께 읽는 첫 여정.", 76, 462, 542, 76, 25, Quiet);
+            Text(modal, "탄생의 기억에서 열두 살의 성전으로.\n사람을 만나고, 말씀을 모으는 첫 여정.", 76, 462, 542, 76, 25, Quiet);
             Button(modal, "새 여정 시작", "play", 74, 566, 292, 66, () => OnStart?.Invoke(), true, true);
             Button(modal, "이어하기", "leaf", 380, 566, 208, 66, () => OnContinue?.Invoke(), canContinue);
             Button(modal, "설정", "settings", 74, 651, 142, 48, () => OnSettings?.Invoke());
-            Text(modal, "첫 장  ·  탄생의 말씀 / 성전의 소년", 224, 662, 605, 30, 21, Quiet);
+            Text(modal, "첫 장 · 열두 살의 예수님 · 말씀 도감 15장", 224, 662, 605, 30, 21, Quiet);
             var tag = Panel(modal, "Place label", 939, 61, 281, 68, new Color(.025f, .09f, .12f, .67f));
             Text(tag, "JERUSALEM", 18, 9, 242, 24, 20, Gold).characterSpacing = 4;
             Text(tag, "예루살렘 · 올리브 뜰", 18, 34, 242, 27, 21, Cream);
@@ -134,7 +137,7 @@ namespace PathOfDawn.Presentation
             pinnedScripture.gameObject.SetActive(!string.IsNullOrEmpty(reference) || !string.IsNullOrEmpty(verse));
             nearbyText.text = string.IsNullOrEmpty(nearby) ? "" : "E  ·  " + nearby;
             interact.interactable = canInteract;
-            int count = Mathf.Clamp(total, 0, 12);
+            int count = Mathf.Clamp(total, 0, 15);
             for (int i = 0; i < progress.Length; i++)
             {
                 progress[i].gameObject.SetActive(i < count);
@@ -146,14 +149,14 @@ namespace PathOfDawn.Presentation
             hud = Rect(frame, "Luminous exploration HUD", 0, 0, 1280, 720);
             var identity = Button(hud, "예수님", "leaf", 30, 26, 171, 56, () => OnStatus?.Invoke());
             identity.GetComponent<Image>().color = new Color(.018f, .07f, .09f, .68f);
-            Button(hud, "말씀", "book", 216, 26, 157, 56, () => OnRead?.Invoke());
+            Button(hud, "도감", "book", 216, 26, 157, 56, () => OnRead?.Invoke());
             var aim = Panel(hud, "Current Scripture objective", 405, 24, 470, 62, new Color(.025f, .075f, .09f, .70f));
             Ornament(aim, 16, 9, 438, new Color(Gold.r, Gold.g, Gold.b, .44f));
             objectiveText = Text(aim, "말씀을 따라 걷기", 20, 25, 430, 31, 23, Cream, TextAlignmentOptions.Center);
             Button(hud, "", "book", 1020, 26, 58, 56, () => OnJournal?.Invoke());
             Button(hud, "", "bag", 1090, 26, 58, 56, () => OnInventory?.Invoke());
             Button(hud, "", "pause", 1160, 26, 58, 56, () => OnPause?.Invoke());
-            progress = new Image[12];
+            progress = new Image[15];
             for (int i = 0; i < progress.Length; i++)
             {
                 var pip = Rect(hud, "Read Scripture light " + (i + 1), 34 + i * 15, 98, 9, 9);
@@ -177,19 +180,98 @@ namespace PathOfDawn.Presentation
             interact = Button(hud, "대화", "spark", 1116, 606, 122, 68, () => OnInteract?.Invoke(), false);
         }
 
-        public void ShowReading(string heading, string speaker, string dialogue, string reference, string verses, string progressLabel, Action next)
+        void StoryArt(Transform parent,string key)
         {
-            StartModal("reading", false);
-            var top = Panel(modal, "Reading chapter label", 34, 26, 590, 57, new Color(.025f, .075f, .09f, .74f));
-            Text(top, heading, 21, 10, 550, 36, 25, Cream);
-            var box = Panel(modal, "Story and Scripture", 58, 346, 1164, 342, new Color(.022f, .068f, .09f, .94f));
-            Text(box, speaker, 30, 20, 1010, 31, 25, Gold);
-            Text(box, dialogue, 30, 62, 1102, 82, 27, Cream);
-            Ornament(box, 30, 152, 1102, new Color(.80f, .83f, .70f, .35f));
-            Text(box, reference + "  ·  개역한글", 30, 173, 1064, 30, 22, Gold);
-            ScrollText(box, verses, 30, 211, 845, 96, 24, Cream);
-            Text(box, progressLabel, 890, 211, 242, 28, 20, Quiet, TextAlignmentOptions.Center);
-            Button(box, "다음 말씀", "right", 886, 252, 244, 62, next, true, true);
+            var texture=Resources.Load<Texture2D>(key);if(texture==null)return;
+            var image=Rect(parent,"Illustrated story painting",0,0,1280,720).gameObject.AddComponent<RawImage>();
+            image.texture=texture;image.raycastTarget=false;
+            float imageAspect=(float)texture.width/texture.height,targetAspect=1280f/720f;
+            image.uvRect=imageAspect>targetAspect?new Rect((1-targetAspect/imageAspect)/2,0,targetAspect/imageAspect,1)
+                :new Rect(0,(1-imageAspect/targetAspect)/2,1,imageAspect/targetAspect);
+        }
+        public void ShowOpening(GospelOpeningPage page,int index,int total,Action next,Action skip)
+        {
+            StartModal("opening",false);
+            StoryArt(modal,index<3?"Art/GospelRenewal/Opening/nativity":"Art/GospelRenewal/Opening/temple-journey");
+            var veil=Rect(modal,"Opening reading shade",0,0,810,720).gameObject.AddComponent<RawImage>();
+            veil.texture=TitleGradient();veil.raycastTarget=false;
+            Ornament(modal,58,70,530,Gold);
+            Text(modal,"PROLOGUE · "+(index+1)+" / "+total,60,95,540,34,22,Gold).characterSpacing=3;
+            Text(modal,page.Title,58,151,650,75,47,Cream);
+            Text(modal,page.Subtitle,62,241,620,42,29,Gold);
+            ScrollText(modal,page.Body,62,305,590,180,28,Cream);
+            Text(modal,page.Reference+" · 학습용 요약",62,506,640,45,21,Quiet);
+            Button(modal,index+1==total?"열두 살의 여정 시작":"이야기 계속", "right",60,585,345,70,next,true,true);
+            Button(modal,"도입 건너뛰기","play",428,594,258,60,skip);
+            Text(modal,"도입은 메뉴에서 다시 볼 수 있습니다. 말씀은 만남을 통해 도감에 모입니다.",60,675,1100,28,20,Quiet);
+        }
+        void Portrait(Transform parent,string portrait,float x,float y,float width,float height)
+        {
+            var panel=Panel(parent,"Speaker portrait",x,y,width,height,new Color(.13f,.24f,.24f,.55f));
+            var texture=Resources.Load<Texture2D>("Art/GospelLuminous/Actors/npcs");
+            if(texture==null)return;
+            int variant=portrait=="mary"?1:portrait=="joseph"?2:0;
+            var source=GospelLuminousActor.NpcRects[variant];
+            // Face and shoulders from the unchanged original NPC atlas.
+            float cropHeight=source.width*height/width;
+            var art=Rect(panel,"Painted speaker",0,0,width,height).gameObject.AddComponent<RawImage>();
+            art.texture=texture;art.uvRect=new Rect(source.x/texture.width,(source.yMax-cropHeight)/texture.height,source.width/texture.width,cropHeight/texture.height);art.raycastTarget=false;
+            if(portrait=="jesus")
+            {
+                // A portrait of the child protagonist is cropped from the new title illustration;
+                // do not label the teacher atlas tile as Jesus.
+                art.texture=Resources.Load<Texture2D>("Art/GospelRenewal/Opening/temple-journey");
+                art.uvRect=new Rect(.728f,.45f,.098f,.23f);
+            }
+        }
+        public void ShowReading(string heading,string speaker,string dialogue,string reference,string verses,string progressLabel,Action next,string portrait="teacher",Action question=null)
+        {
+            StartModal("reading",false);
+            var top=Panel(modal,"Reading chapter label",34,26,800,57,new Color(.025f,.075f,.09f,.74f));
+            Text(top,heading,21,10,750,36,25,Cream);
+            var box=Panel(modal,"Story and Scripture",42,286,1196,412,new Color(.022f,.068f,.09f,.96f));
+            Portrait(box,portrait,24,28,164,216);
+            Text(box,speaker,216,23,936,34,25,Gold);
+            ScrollText(box,dialogue,216,76,936,126,27,Cream);
+            Ornament(box,216,218,936,new Color(.80f,.83f,.70f,.35f));
+            Text(box,reference+" · 개역한글 · 위아래로 읽기",216,236,936,30,22,Gold);
+            ScrollText(box,verses,216,278,684,105,23,Cream);
+            Text(box,progressLabel,918,280,250,41,19,Quiet,TextAlignmentOptions.Center);
+            Button(box,"다음 말씀","right",918,331,250,60,next,true,true);
+            Text(box,"성경 본문\n위아래로 스크롤",24,268,170,65,18,Quiet);
+            if(question!=null)Button(box,"질문하기","spark",24,346,168,46,question);
+        }
+        public void ShowStudyQuestions(GospelStudyEncounter encounter,Action back)
+        {
+            var box=Menu("study-question",encounter.Reading.Title+" · 더 이야기하기","궁금한 것을 물어보고 대화로 돌아갈 수 있습니다.");
+            var options=GospelStudyQuestions.For(encounter.Reading.Id);
+            var answer=Text(box,"궁금한 내용을 골라보세요.",48,330,1060,130,26,Cream);
+            answer.overflowMode=TextOverflowModes.Overflow;
+            Button(box,options[0],"book",36,184,1106,55,()=>answer.text=options[1]);
+            Button(box,options[2],"spark",36,252,1106,55,()=>answer.text=options[3]);
+            Button(box,"대화로 돌아가기","back",844,484,298,58,back,true,true);
+        }
+        public void ShowCodex(IReadOnlyList<GospelReading> readings,Func<string,bool> acquired,int count,int page=0,string selected=null)
+        {
+            var box=Menu("journal","말씀 도감", "획득 "+count+" / "+readings.Count+" · 만남의 대화를 끝까지 읽으면 한 장씩 기록됩니다.");
+            const int perPage=5;int pageCount=(readings.Count+perPage-1)/perPage;page=Mathf.Clamp(page,0,pageCount-1);
+            var chosen=readings[Mathf.Clamp(page*perPage,0,readings.Count-1)];
+            if(selected!=null)foreach(var r in readings)if(r.Id==selected)chosen=r;
+            for(int i=page*perPage;i<Math.Min(readings.Count,(page+1)*perPage);i++)
+            {
+                var reading=readings[i];bool open=acquired(reading.Id);
+                var button=Button(box,(open?"✓ ":"◇ ")+reading.Title,"",36,176+(i%perPage)*53,379,47,()=>ShowCodex(readings,acquired,count,page,reading.Id));
+                if(chosen.Id==reading.Id)button.GetComponent<Image>().color=new Color(.24f,.40f,.36f,.95f);
+            }
+            var detail=Panel(box,"Selected Scripture page",444,173,698,286,new Color(.10f,.20f,.22f,.8f));
+            bool unlocked=acquired(chosen.Id);
+            Text(detail,chosen.Title,24,18,650,40,29,Gold);
+            Text(detail,unlocked?chosen.Reference+" · 개역한글":"아직 만나지 않은 말씀",24,65,650,31,22,Quiet);
+            ScrollText(detail,unlocked?chosen.Text:"이 말씀은 아직 도감에 기록되지 않았습니다.\n\n빛나는 만남으로 걸어가 대화를 끝까지 읽어 보세요. 미리 보기만으로 말씀을 획득하지는 않습니다.",24,112,650,151,25,Cream);
+            Button(box,"이전","left",36,484,142,58,()=>ShowCodex(readings,acquired,count,page-1),page>0);
+            Text(box,(page+1)+" / "+pageCount,188,496,75,35,24,Quiet,TextAlignmentOptions.Center);
+            Button(box,"다음","right",272,484,143,58,()=>ShowCodex(readings,acquired,count,page+1),page+1<pageCount);
+            Button(box,"여정으로","right",868,484,274,58,()=>OnResume?.Invoke(),true,true);
         }
 
         RectTransform Menu(string view, string title, string subtitle)
@@ -210,7 +292,8 @@ namespace PathOfDawn.Presentation
             Button(box, "말씀 기록", "book", 610, 288, 530, 66, () => OnJournal?.Invoke());
             Button(box, "소리 설정", "settings", 36, 397, 530, 66, () => OnSettings?.Invoke());
             Button(box, "처음 화면", "back", 610, 397, 530, 66, () => OnExit?.Invoke());
-            Text(box, "A / D 또는 ← / → 이동    Shift 달리기    Space 점프    E 대화    Esc 쉬기", 36, 505, 1110, 35, 22, Quiet, TextAlignmentOptions.Center);
+            Button(box,"도입 다시보기","book",36,484,295,54,()=>OnOpeningReplay?.Invoke());
+            Text(box,"A / D 이동 · Shift 달리기 · Space 점프 · E 대화",356,497,780,35,21,Quiet,TextAlignmentOptions.Center);
         }
         public void ShowInventory(bool lamp)
         {
@@ -227,7 +310,8 @@ namespace PathOfDawn.Presentation
             };
             var detail = Panel(box, "Selected travel item", 641, 178, 501, 281, new Color(.08f, .17f, .19f, .71f));
             var heading = Text(detail, "", 28, 22, 445, 40, 29, Gold);
-            var body = Text(detail, "", 28, 77, 445, 179, 24, Cream);
+            var body = Text(detail, "", 28, 77, 445, 179, 23, Cream);
+            body.overflowMode=TextOverflowModes.Overflow;
             Button lampButton = null, notesButton = null;
             Action<int> select = i =>
             {
@@ -238,8 +322,10 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < titles.Length; i++)
             {
                 int index = i; var b = Button(box, "", "", 36 + i % 3 * 194, 178 + i / 3 * 145, 178, 130, () => select(index));
-                Glyph(b.transform, icons[i], 66, 15, 46, 46, Gold);
-                Text(b.transform, titles[i], 8, 76, 162, 33, 22, Cream, TextAlignmentOptions.Center);
+                var atlas=Resources.Load<Texture2D>("Art/GospelRenewal/Opening/travel-items");
+                if(atlas!=null){var art=Rect(b.transform,"Painted item "+titles[i],49,0,80,80).gameObject.AddComponent<RawImage>();art.texture=atlas;art.uvRect=new Rect((i%3)/3f,1-(i/3+1)/2f,1/3f,.5f);art.raycastTarget=false;}
+                else Glyph(b.transform, icons[i], 66, 15, 46, 46, Gold);
+                Text(b.transform, i==5?"성전 안내도":titles[i], 8, 86, 162, 33, 20, Cream, TextAlignmentOptions.Center);
             }
             lampButton = Button(box, lamp ? "등잔 보관" : "등잔 장착", "lamp", 642, 484, 226, 58, () => OnLampToggle?.Invoke());
             notesButton = Button(box, "말씀 기록 열기", "book", 642, 484, 226, 58, () => OnJournal?.Invoke());

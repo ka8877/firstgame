@@ -128,13 +128,7 @@ namespace FantasyCards.Presentation
 
         private void PrintedImage(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1)
         {
-            var texture = OriginalCardTexture(card);
-            if (texture == null) { Artwork(parent, card, x0, y0, x1, y1); return; }
-            var holder = new GameObject("Printed card holder", typeof(RectTransform)).GetComponent<RectTransform>();
-            holder.SetParent(parent, false); Anchor(holder, x0, y0, x1, y1);
-            var image = new GameObject("Original printed card", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
-            image.transform.SetParent(holder, false); Anchor((RectTransform)image.transform, 0, 0, 1, 1); image.texture = texture; image.raycastTarget = false;
-            var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = (float)texture.width / texture.height;
+            RenewalSourcePrint(parent, card.artResource, x0, y0, x1, y1, "Original printed card");
         }
 
         private void DrawPrintedCard(Transform parent, CardDefinition card, float x0, float y0, float x1, float y1, bool selected, Action onClick, bool interactable)
@@ -203,7 +197,7 @@ namespace FantasyCards.Presentation
                 selectedCard = -1; Save(); locked = true; StartCoroutine(ShuffleAndDeal(false));
             }, slate, 22, !locked && canShuffle);
             BindTooltip(shuffle.gameObject, "손패 셔플", canShuffle ? "손패를 덱에 돌려놓고 6장을 다시 뽑습니다." : shuffleReason);
-            Button(rail, "준비 완료", .04f, .035f, .96f, .116f, EndTurn, gold, 27, !locked && myPreparation);
+            if (!battlePlaybackActive) Button(rail, "준비 완료", .04f, .035f, .96f, .116f, EndTurn, gold, 27, !locked && myPreparation);
         }
 
         private void DrawCompactBattleRail(RectTransform rail)
@@ -275,8 +269,9 @@ namespace FantasyCards.Presentation
                 if (!engine.ShuffleHand(0, out message)) { ShowBattle(); return; }
                 selectedCard = -1; Save(); locked = true; StartCoroutine(ShuffleAndDeal(false));
             }, slate, !locked && canShuffle);
-            ActionButton("준비 완료", Row(), EndTurn, gold, !locked && myPreparation);
-            Label(Plate(Row()), "AP / DP / HP", "hand stat legend", tint: new Color(.70f, .81f, .94f));
+            var readyRow = Row();
+            if (!battlePlaybackActive) ActionButton("준비 완료", readyRow, EndTurn, gold, !locked && myPreparation);
+            if (!battlePlaybackActive) Label(Plate(Row()), "AP / DP / HP", "hand stat legend", tint: new Color(.70f, .81f, .94f));
         }
 
         private void ShowRevivalBattleMenu()

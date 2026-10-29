@@ -32,6 +32,12 @@ namespace FantasyCards.Presentation
             if (Muted || Volume <= 0 || string.IsNullOrEmpty(cue)) return;
             Initialize(); host.Play(cue);
         }
+        public static void PlayCoin(bool heads, int coinIndex, float pan = 0)
+        {
+            if (Muted || Volume <= 0) return;
+            Initialize();
+            host.Play(heads ? "coin-head" : "coin-tail", pan, coinIndex);
+        }
         public static void SetMuted(bool value)
         {
             PlayerPrefs.SetInt(MutedKey, value ? 1 : 0); PlayerPrefs.Save();

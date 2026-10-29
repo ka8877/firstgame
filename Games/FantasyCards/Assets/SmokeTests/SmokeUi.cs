@@ -219,9 +219,9 @@ namespace FantasyCards.SmokeTests
             Assert.That(text.textInfo.characterCount, Is.GreaterThan(0), "TMP did not build text geometry.");
             Assert.That(text.textInfo.characterInfo.Take(text.textInfo.characterCount).Any(c => c.isVisible), Is.True);
         }
-        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action inspect = null, Action beforeCapture = null)
+        public static IEnumerator Capture(string game, string name, int width = 1920, int height = 1080, Action inspect = null, Action beforeCapture = null, float settleSeconds = .35f)
         {
-            yield return new WaitForSecondsRealtime(.35f); // Let authored panel entrance/hover easing settle.
+            if (settleSeconds > 0) yield return new WaitForSecondsRealtime(settleSeconds); // Let authored panel entrance/hover easing settle.
             // Native URP camera render. Batch mode does not service WaitForEndOfFrame reliably.
             // Overlay canvases temporarily use the same camera so real uGUI/TMP is in the PNG.
             var camera = Camera.main;
@@ -248,7 +248,7 @@ namespace FantasyCards.SmokeTests
                 }
                 yield return null; // Allow CanvasScaler, responsive UI, and Cinemachine to observe capture dimensions.
                 yield return null;
-                yield return new WaitForSecondsRealtime(.35f); // A responsive redraw can start its own card entrance animation.
+                if (settleSeconds > 0) yield return new WaitForSecondsRealtime(settleSeconds); // A responsive redraw can start its own card entrance animation.
                 Canvas.ForceUpdateCanvases();
                 if (beforeCapture != null) beforeCapture();
                 else

@@ -21,6 +21,8 @@ namespace FantasyCards.Data
         public Effect effect;
         [Min(0)] public int magnitude;
         public Sprite illustration;
+        // Streamed full-card prints stay outside the packed Resources payload.
+        public string streamedIllustration;
         public void SetDefinition(CardDefinition definition)
         {
             classicDefinition = Copy(definition);

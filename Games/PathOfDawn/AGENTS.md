@@ -1,5 +1,9 @@
 # 말씀을 따라 예수님의 길
 
+## 현재 개정 — 2026-10-29
+
+루트 AGENTS의 최신 두 게임 확장과 사용자의 최신 요청을 따른다. 현재 개정은 `gospel-renewal-2026-10-29`이며 그림 오프닝과 열두 살 시점 설명, 약10분의 NPC 대화·말씀 수집 도감, 관절 보행과 UI를 개선한다. 지난 직접 월드 진입·7본문만 범위는 최신 요청으로 확장한다. 실행 소유자는 `/root/renewal_release`이며 현재 증거는 `Artifacts/Validation/Renewal`이다. 소유권·저장 호환·본문 정확성은 루트 최신 지침을 따른다.
+
 ## 최신 2D Luminous 개편 — 2026-10-28
 
 사용자가 Ori/Lost Crypt 화면을 제공하고 현재 외형을 전면 교체하도록 요청했다. 현재 진입점은 새 `GospelLuminousApp`으로 옮기며 다층 2D 월드·실제 2D 관절 보행·Unity URP 2D 조명·간결한 UI를 만든다. 이전 3D/65본 강제 조건은 이번 요청에 적용하지 않는다. 기존 3D 소스/에셋은 이력으로 보존하고 현재 빌드에서 분리한다. 기존 Gospel Core의 본문·진행 순서·저장 schema1을 유지하고, 선택적 presentationSpace 필드로 예전 3D 위치와 새 2D 위치를 구분한다. 카드게임은 변경하지 않는다. 실제 실행 소유자는 `/root/luminous_release`이며 새 검증은 `Artifacts/Validation/Luminous`다.

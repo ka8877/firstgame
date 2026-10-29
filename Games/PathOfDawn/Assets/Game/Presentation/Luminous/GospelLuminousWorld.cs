@@ -28,6 +28,8 @@ namespace PathOfDawn.Presentation
         readonly List<ParallaxPlane> planes = new List<ParallaxPlane>();
         readonly List<LeafMotion> leaves = new List<LeafMotion>();
         readonly List<Mote> motes = new List<Mote>();
+        readonly List<ForegroundOccluder> foregroundOccluders = new List<ForegroundOccluder>();
+        GospelLuminousController focus;
         Camera view;
         Transform content, objective;
         SpriteRenderer objectiveGlow;
@@ -42,6 +44,7 @@ namespace PathOfDawn.Presentation
         struct ParallaxPlane { public Transform transform; public Vector3 origin; public float amount; }
         struct LeafMotion { public Transform transform; public Quaternion rest; public float phase; public float amount; }
         struct Mote { public Transform transform; public SpriteRenderer renderer; public Vector3 origin; public float phase; public float travel; public bool goal; }
+        struct ForegroundOccluder { public SpriteRenderer renderer; public Color original; public float minimumAlpha; }
 
         public float HeightAt(float x)
         {
@@ -258,10 +261,12 @@ namespace PathOfDawn.Presentation
                     65, new Color(.15f, .31f, .28f, .94f), false, i % 2 == 0);
                 leaves.Add(new LeafMotion { transform = f.transform, rest = f.transform.localRotation,
                     phase = i * 2.1f, amount = .18f });
+                foregroundOccluders.Add(new ForegroundOccluder { renderer = f, original = f.color, minimumAlpha = .18f });
             }
             var side = Paint(frame, "Trunk2", -34.6f, 6.4f, 15.8f, 70,
                 new Color(.12f, .25f, .24f, .96f), false, true);
             side.transform.localRotation = Quaternion.Euler(0f, 0f, -4f);
+            foregroundOccluders.Add(new ForegroundOccluder { renderer = side, original = side.color, minimumAlpha = .09f });
         }
 
         void BuildLight()
@@ -435,12 +440,41 @@ namespace PathOfDawn.Presentation
                 color.a = (mote.goal ? .55f : .36f) + .18f * Mathf.Sin(time * 1.2f + mote.phase);
                 mote.renderer.color = color;
             }
+            UpdateForegroundVisibility();
             if (objectiveGlow != null)
             {
                 var c = objectiveGlow.color; c.a = .36f + .055f * Mathf.Sin(time * 1.2f);
                 objectiveGlow.color = c;
             }
             if (objectiveLight != null) objectiveLight.intensity = .18f + .015f * Mathf.Sin(time * 1.2f);
+        }
+
+        void UpdateForegroundVisibility()
+        {
+            // The player is created after Build, so resolve once from this app's own
+            // hierarchy. Use its interpolated render transform, not a scripted camera
+            // centre or physics position: jumping and close zoom must stay readable too.
+            if (focus == null && content.parent != null)
+                focus = content.parent.GetComponentInChildren<GospelLuminousController>();
+            if (focus == null) return;
+            Vector3 position = focus.transform.position;
+            float left = position.x - .62f, right = position.x + .62f;
+            float bottom = position.y + .03f, top = position.y + GospelLuminousActor.Height + .16f;
+            float ease = 1f - Mathf.Exp(-13f * Time.deltaTime);
+            foreach (var item in foregroundOccluders)
+            {
+                if (item.renderer == null) continue;
+                // Only the seven authored front-layer sprites participate. Background,
+                // actual character colours, lighting and all original source pixels stay intact.
+                Bounds bounds = item.renderer.bounds;
+                float dx = Mathf.Max(0f, Mathf.Max(bounds.min.x - right, left - bounds.max.x));
+                float dy = Mathf.Max(0f, Mathf.Max(bounds.min.y - top, bottom - bounds.max.y));
+                float proximity = 1f - Mathf.SmoothStep(0f, 1f, Mathf.Max(dx, dy * 1.5f) / 1.1f);
+                float alpha = Mathf.Lerp(item.original.a, item.minimumAlpha, proximity);
+                Color current = item.renderer.color;
+                current.a = Mathf.Lerp(current.a, alpha, ease);
+                item.renderer.color = current;
+            }
         }
 
         void OnDestroy()

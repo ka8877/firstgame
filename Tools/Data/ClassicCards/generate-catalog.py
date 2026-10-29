@@ -46,7 +46,7 @@ for c in cards:
    kind=f.get(stat+'StatType',1);assert kind in (1,31,32),(c['name'],stat,kind)
    assert effect[key]==(0 if kind==1 else f[stat]*(1 if kind==31 else -1)),(c['name'],stat)
   attack=effect['attackDelta'];defense=effect['defenseDelta'];hp=effect['healthDelta']
-  text=f'AP {attack:+d} · DP {defense:+d} · HP {hp:+d}'
+  text=f'AP {attack:+d} · DP {defense:+d} · HP {hp:+d}' + (' · '+effect['description'] if effect.get('renewalBuild') else '')
  elif cat==2:text=effect.get('description','특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다.')
  elif cat==1:text='LP로 전개하고 소울 코스트 단계마다 소울을 회복합니다.'
  line=f'                new CardDefinition({q("fm_"+c["sourceId"])}, {q(c["name"])}, {q(text)}, CardKind.{K[cat]}, Element.{e}, {color+generic}, attack: {attack}, health: {hp}, coinBonus: 0, rarity: CardRarity.{R[f["RareType"]-1]}, level: {f["LV"]}, coloredCost: {color}, genericCost: {generic}, defense: {defense})'
@@ -57,7 +57,10 @@ for c in cards:
  if cat==2:
   # These three exact original variants have complete, tested techniques.
   reviewed_skills={'3061320559':17,'3061320560':452,'3022820395':159}
-  assert f['Skill1']==reviewed_skills.get(c['sourceId'],1) and f['Skill2']==1 and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
+  if effect.get('premiumImplementation'):
+   assert effect['sourceSkillCode'] in (f['Skill1'],f['Skill2']) and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
+  else:
+   assert f['Skill1']==effect.get('sourceSkillCode',reviewed_skills.get(c['sourceId'],1)) and f['Skill2']==1 and f['ATKStatType']==f['DEFStatType']==f['HPStatType']==1
   rank={1:'N',2:'C',3:'B',4:'A',5:'S'}[f.get('RankType',1)]
   props.extend([f'rank = CardRank.{rank}',f'capabilityMask = {MASK[f["UnitType"]]}',f'attackCoin = {coin(f,"ATK")}',f'defenseCoin = {coin(f,"DEF")}',f'healthCoin = {coin(f,"HP")}'])
   if effect.get('freeEquipmentBelowLevel'):props.append('freeEquipmentBelowLevel = true')

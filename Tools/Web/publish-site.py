@@ -57,6 +57,10 @@ with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as tem
         git("config", key, value)
     # Deployment binaries must be ordinary Git objects: Pages does not serve LFS pointers.
     git("config", "core.attributesFile", "/dev/null")
+    # Large sets of small streamed card derivatives are pushed in one pack.
+    # Avoid an incidental duplicate repack in this disposable checkout.
+    git("config", "gc.auto", "0")
+    git("config", "maintenance.auto", "false")
     refs = git("ls-remote", "origin", f"refs/heads/{args.branch}", capture=True).stdout.strip()
     if refs:
         git("fetch", "--depth=1", "origin", args.branch)

@@ -54,7 +54,7 @@ def unique_mapping(loader, node, deep=False):
 UniqueLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, unique_mapping)
 
 
-def unity_documents(text):
+def unity_documents(text, streamed=False):
     headers = list(re.finditer(r"^--- !u!(\d+) &(-?\d+)\s*$", text, re.M))
     require(headers, "CardAsset has no Unity YAML documents")
     documents = {}
@@ -67,7 +67,7 @@ def unity_documents(text):
         require(isinstance(body, dict) and len(body) == 1, "Unexpected Unity document body")
         documents[file_id] = body
         classes[class_id] += 1
-    require(classes == {114: 1, 213: 1}, "Each card needs one CardAsset and its one full-card Sprite")
+    require(classes == ({114: 1} if streamed else {114: 1, 213: 1}), "CardAsset must contain exactly its declared embedded Sprite or verified streamed binding")
     return documents
 
 
@@ -133,7 +133,7 @@ def expected_definition(card):
         text = effect.get("description", "특수 기술 없음. 전투에서 카드의 AP·DP·HP 코인을 함께 판정합니다.")
     elif category == 4:
         attack, defense, health = (effect[key] for key in ("attackDelta", "defenseDelta", "healthDelta"))
-        text = f"AP {attack:+d} · DP {defense:+d} · HP {health:+d}"
+        text = f"AP {attack:+d} · DP {defense:+d} · HP {health:+d}" + (" · " + effect["description"] if effect.get("renewalBuild") else "")
     result = {
         "id": "fm_" + card["sourceId"], "name": card["name"], "text": text,
         "kind": category - 1, "element": ELEMENTS[fields["SoulType"]],
@@ -226,12 +226,16 @@ def verify_authoring(root=ROOT):
     media_manifest = json.loads(media_file.read_text())
     media = {card["sourceId"]: card for card in media_manifest["cards"]}
     verification = json.loads((root / "Tools/Art/ClassicCards/verification.json").read_text())
-    require(verification.get("status") == "passed" and verification.get("count") == len(cards)
+    require(verification.get("status") == "passed" and verification.get("count") == len(media)
             and verification.get("manifestSha256") == digest(media_file.read_bytes()), "Verified original-media manifest is stale")
     policy_file = root / "Tools/Art/ClassicCards/texture-import-policy.json"
     policy = json.loads(policy_file.read_text())
     importer_records = verify_texture_importers(root, media_manifest, verification, policy)
-    require(set(media) == {card["sourceId"] for card in cards}, "Card media and authoring selections differ")
+    embedded_cards = [card for card in cards if not card["artResource"].startswith("StreamingCards/")]
+    require(set(media) == {card["sourceId"] for card in embedded_cards}, "Embedded card media and authoring selections differ")
+    streamed_file = root / "Tools/Data/Renewal/media-manifest.json"
+    streamed_manifest = json.loads(streamed_file.read_text()) if len(embedded_cards) != len(cards) else {"cards": []}
+    streamed_media = {record["sourceId"]: record for record in streamed_manifest["cards"] if record["status"] == "available"}
     folder = root / "Games/FantasyCards/Assets/Resources/Data/Cards"
     require({path.stem for path in folder.glob("*.asset")} == identifiers, "Authored card asset set differs from catalog")
     require({path.name.removesuffix(".asset.meta") for path in folder.glob("*.asset.meta")} == identifiers,
@@ -249,7 +253,7 @@ def verify_authoring(root=ROOT):
         require(authoring_guid not in asset_guids, "Duplicate CardAsset metadata GUID")
         asset_guids.add(authoring_guid)
         try:
-            documents = unity_documents(asset.read_text())
+            documents = unity_documents(asset.read_text(), expected["artResource"].startswith("StreamingCards/"))
         except yaml.YAMLError as error:
             raise ValueError("Malformed generated card YAML: " + expected["id"]) from error
         mono = [document["MonoBehaviour"] for document in documents.values()
@@ -270,6 +274,22 @@ def verify_authoring(root=ROOT):
         require(canonical({key: mono.get(key) for key in mirrors}) == canonical(mirrors),
                 "CardAsset compatibility fields differ: " + expected["id"])
         illustration = mono.get("illustration", {})
+        if expected["artResource"].startswith("StreamingCards/"):
+            expected_relative = "Cards/" + expected["id"] + ".jpg"
+            require(mono.get("streamedIllustration") == expected_relative and illustration == {"fileID": 0},
+                    "Streamed card must bind its exact local full-card JPEG without a fake Sprite: " + expected["id"])
+            require(card["sourceId"] in streamed_media, "Streamed card has no successful source/download evidence: " + expected["id"])
+            record = streamed_media[card["sourceId"]]
+            path = root / "Games/FantasyCards/Assets/StreamingAssets" / expected_relative
+            require(path.is_file() and path.stat().st_size == record["deliveryBytes"]
+                    and digest(path.read_bytes()) == record["deliverySha256"] and record["fullFrame"],
+                    "Streamed original-card delivery bytes differ: " + expected["id"])
+            texture_guid = meta_guid(Path(str(path) + ".meta"))
+            records.append({"definition": expected, "mirrors": mirrors, "assetGuid": authoring_guid,
+                            "streamedFile": expected_relative, "deliverySha256": record["deliverySha256"],
+                            "sourceSha256": record["originalSha256"], "fullFrameSize": record["size"]})
+            continue
+        require(not mono.get("streamedIllustration"), "Embedded original must not acquire a streamed override")
         require(set(illustration) == {"fileID"}, "Card illustration must resolve its local full-card Sprite")
         sprite = documents.get(illustration["fileID"], {}).get("Sprite")
         require(isinstance(sprite, dict), "Missing referenced local full-card Sprite: " + expected["id"])
@@ -286,7 +306,7 @@ def verify_authoring(root=ROOT):
         records.append({"definition": expected, "mirrors": mirrors, "assetGuid": authoring_guid,
                         "textureGuid": texture_guid, "fullCardRect": expected_rect})
     return {"status": "passed", "cards": len(cards), "completeDefinitions": len(cards),
-            "compatibilityMirrors": len(cards), "originalArtworkBindings": len(cards),
+            "compatibilityMirrors": len(cards), "originalArtworkBindings": len(cards), "embeddedOriginals": len(embedded_cards), "streamedOriginals": len(cards) - len(embedded_cards),
             "textureImporters": len(importer_records), "cardAssetImporters": len(cards),
             "fullCardRectangles": len(cards), "generatorReproducedWithoutWrites": True,
             "sourceSelectionSha256": digest(selection_file.read_bytes()),

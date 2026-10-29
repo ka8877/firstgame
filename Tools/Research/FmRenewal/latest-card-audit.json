@@ -1,0 +1,123 @@
+{
+  "checkedUtc": "2026-10-29T02:37:31.582584+00:00",
+  "sourceFile": "Tools/Data/Renewal/complete-observations.json",
+  "sourceSha256": "5c820a6c6be09850cd933fc8dc57a14f85d5761325126ccccc64f03ab5f66aac",
+  "count": 15350,
+  "maxReleaseDate": 20161215,
+  "maxFirestoreUpdateTime": "2023-08-30T12:32:49.170693Z",
+  "idPrefixReleaseDateMismatchCount": 0,
+  "sameNameDifferentReleaseDateGroups": 590,
+  "finding": "ReleaseDate is original card release metadata, not Firestore edit date or proof of final client balance. Last card TextExtra refers prospectively to 2016-12-22 bug fix. A 2017 final catalog cannot be asserted from this field alone.",
+  "revision": "fm-renewal-2026-10-29",
+  "scope": "Read-only audit of the full fetched public catalog and targeted public references. No recovered 2017 final client or new later cards.",
+  "variantExamples": [
+    {
+      "name": "다크퍼밀리어",
+      "category": 2,
+      "variants": [
+        {
+          "id": "10010624537",
+          "releaseDate": 20100106,
+          "rank": 1
+        },
+        {
+          "id": "10010624538",
+          "releaseDate": 20100106,
+          "rank": 2
+        },
+        {
+          "id": "10010624539",
+          "releaseDate": 20100106,
+          "rank": 3
+        },
+        {
+          "id": "10010624540",
+          "releaseDate": 20100106,
+          "rank": 4
+        },
+        {
+          "id": "10010624541",
+          "releaseDate": 20100106,
+          "rank": 5
+        },
+        {
+          "id": "2082420167",
+          "releaseDate": 20020824,
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "name": "타투파이터",
+      "category": 2,
+      "variants": [
+        {
+          "id": "10010624544",
+          "releaseDate": 20100106,
+          "rank": 1
+        },
+        {
+          "id": "10010624545",
+          "releaseDate": 20100106,
+          "rank": 2
+        },
+        {
+          "id": "10010624546",
+          "releaseDate": 20100106,
+          "rank": 3
+        },
+        {
+          "id": "10010624547",
+          "releaseDate": 20100106,
+          "rank": 4
+        },
+        {
+          "id": "10010624548",
+          "releaseDate": 20100106,
+          "rank": 5
+        },
+        {
+          "id": "3112820807",
+          "releaseDate": 20031128,
+          "rank": 1
+        }
+      ]
+    }
+  ],
+  "latestCardExample": {
+    "id": "16121533861",
+    "name": "선물쟁탈전",
+    "releaseDate": 20161215,
+    "rank": null,
+    "extra": "※ 다음주 종료되는 접속보너스 이벤트에 영향을 줄 수 있어 해당 카드의 버그 현상은 2016년 12월 22일 수정될 예정입니다. <br>- 현재 변경되는 카드 레벨과 관련된 버그사 발견되어 수정중에 있으니 이점 이용에 참고 부탁드립니다. -<br><br>★ 변경되는 유닛 목록.<br>1레벨 : 베리 : ⓝ, 산타어시스트 1 +C3 / 0 / 4.<br><br>2레벨 : 괴도산타 : ⓝ○, 산타의각오 0+2C3 / ▲1 / 4.<br><br>3레벨 : 산타걸 : ⓝ○○, 선물하기 0=C5 / 1-C1 / 6.<br><br>4레벨 : 퓨리산타 : ⓝ○○○, 방어이용 4+C5 / 1-C2 / 5.<br><br>5레벨 이상 : 블러드산타 : ⓝⓝⓝ○○, 방어무시 5+C3 / 1-C3 / 5+C1.<br> <br>☆ 성탄절양말 : ○○, 선물하기, +1 / +1 / +1."
+  },
+  "retrievalFailures": [
+    {
+      "url": "https://web.archive.org/web/20171216010139id_/http://www.fantasymasters.co.kr/",
+      "checkedUtc": "2026-10-29T02:37:48.830160+00:00",
+      "status": 503,
+      "failure": "Proxy upstream connection failure before response headers; Invalid argument on the managed Cloudflare HTTPS tunnel. This does not establish that the source is missing."
+    },
+    {
+      "url": "https://web.archive.org/web/20170105000000id_/http://www.fantasymasters.co.kr/fmnews/notice/view.asp?annoid=3351&bbsid=0",
+      "checkedUtc": "2026-10-29T02:37:48.830778+00:00",
+      "status": 503,
+      "failure": "Proxy upstream connection failure before response headers; Invalid argument on the managed Cloudflare HTTPS tunnel. This does not establish that the source is missing."
+    },
+    {
+      "url": "https://fmlunatic.com/",
+      "checkedUtc": "2026-10-29T02:37:48.831300+00:00",
+      "status": 503,
+      "failure": "Proxy upstream connection failure before response headers; Invalid argument on the managed Cloudflare HTTPS tunnel. This does not establish that the source is missing."
+    }
+  ],
+  "observedHomepageContext": {
+    "sourceRecord": "Tools/Research/FmRenewal/latest-home.json",
+    "officialArchive": "2017-12-16",
+    "observations": [
+      "Retained official homepage links a 2017-01-04 notice titled 유저 여러분께 드리는 예정 안내 공지입니다. and March maintenance notices.",
+      "The new-card HTML section is commented out. No conclusion that all new-card production ended is established from this alone."
+    ],
+    "unavailableFollowup": "Official notice3351, official card market and public DB frontend requests failed with the same upstream503; no later card data was obtained."
+  }
+}

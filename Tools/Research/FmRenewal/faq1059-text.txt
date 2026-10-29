@@ -1,0 +1,307 @@
+▒ Fantasy masters ▒
+<!--
+	function searchGo()
+	{
+		if (sForm.searchword.value==""){
+			alert("검색할 단어를 입력 하세요.");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+// -->
+body{margin:0;}
+.Gnb_wrap { margin:0 auto; position:relative; width:996px;font-family: "돋움" Times New Roman; font-size:11px; color:#c34a01; -webkit-text-size-adjust:none; top:0px; z-index:3;}
+.Gnb_logo { position:absolute;left:381px;top:21px;}
+.Gnb_sub1 {	position:absolute;left:96px;top:45px;width:90px; }
+.Gnb_sub2 {	position:absolute;left:231px;top:45px;width:90px; }
+.Gnb_sub3 {	position:absolute;left:690px;top:45px;width:90px; }
+.Gnb_sub4 {	position:absolute;left:832px;top:45px;width:90px; }
+.Gnb_sublist { margin:0; padding:0; }
+.Gnb_submenu { display:block; list-style:none; text-align:left; line-height:20px; }
+.Gnb_submenu > a {text-decoration: none; color: #c097b4;background-image:url(/common/menu/img/ar_off.gif);background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+.Gnb_submenu > a:hover {text-decoration:none; color:#f66a9f;background-image:url(/common/menu/img/ar_on.gif); background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+.small2 {
+	font-family: "돋움";
+	font-size: 8.3pt;
+	color: #a16072;
+}
+$(function () {
+        // reck 테두리 제거
+        $("#Maaaaaaaap > area").attr("onfocus", "this.blur()");
+
+        // 메인진입시 보조 메뉴 숨김
+        $(".Gnb_sublist").hide();
+        $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+        $(".Gnb_wrap").attr("style", "top:0px");
+
+        // 메뉴 마우스 오버
+        $(".Gnb_wrap").bind("mouseover", function () {
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+            $(".Gnb_sublist").show();
+            $(".Gnb_wrap").attr("style", "top:0px");
+        });
+
+        // 메뉴 마우스 아웃
+        $(".Gnb_wrap").bind("mouseout", function () {
+            $(".Gnb_sublist").hide();
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            $(".Gnb_wrap").attr("style", "top:0px");
+        });
+
+        // ie 8이하 코드 ( 안넣으면 디자인 틀어짐 )
+        if (navigator.userAgent.indexOf('Trident/4.0') > -1 || navigator.userAgent.indexOf('Trident/5.0') > -1 || navigator.userAgent.indexOf('Trident/6.0') > -1) {
+            $(".Gnb_wrap").attr("style", "top:0px");
+
+            // 메뉴 마우스 오버
+            $(".Gnb_wrap").bind("mouseover", function () {
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+                $(".Gnb_sublist").show();
+            });
+
+            // 메뉴 마우스 아웃
+            $(".Gnb_wrap").bind("mouseout", function () {
+                $(".Gnb_sublist").hide();
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            });
+
+            $(".Gnb_submenu > a").css("color", "#c097b4");
+            $(".Gnb_submenu > a").mouseenter(function () {
+                $(this).css("color", "#f66a9f");
+            });
+
+            $(".Gnb_submenu > a").mouseleave(function () {
+                $(this).css("color", "#c097b4");
+            });
+        }
+
+        // 사이드 바
+        var $doc = $(document);
+        var position = 0;
+        var top = $doc.scrollTop(); //현재 스크롤바 위치  
+        var screenSize = 0;        // 화면크기  
+        var halfScreenSize = 0;    // 화면의 반  
+
+        /*사용자 설정 값 시작*/
+        var pageWidth = 1000; // 페이지 폭, 단위:px  
+        var leftOffet = 510;  // 중앙에서의 폭(왼쪽 -, 오른쪽 +), 단위:px  
+        var leftMargin = 1020; // 페이지 폭보다 화면이 작을때 옵셋, 단위:px, leftOffet과 pageWidth의 반만큼 차이가 난다.  
+        var speed = 1500;     // 따라다닐 속도 : "slow", "normal", or "fast" or numeric(단위:msec)  
+        var easing = 'swing'; // 따라다니는 방법 기본 두가지 linear, swing  
+        var $layer = $('#floating'); // 레이어 셀렉팅  
+        var layerTopOffset = 300;   // 레이어 높이 상한선, 단위:px  
+        $layer.css('z-index', 10);   // 레이어 z-인덱스  
+        /*사용자 설정 값 끝*/
+
+        //좌우 값을 설정하기 위한 함수  
+        function resetXPosition() {
+            $screenSize = $('body').width(); // 화면크기  
+            halfScreenSize = $screenSize / 2; // 화면의 반  
+            xPosition = halfScreenSize + leftOffet;
+            if ($screenSize < pageWidth)
+                xPosition = leftMargin;
+            $layer.css('left', xPosition);
+        }
+
+        // 스크롤 바를 내린 상태에서 리프레시 했을 경우를 위해  
+        if (top > 0)
+            $doc.scrollTop(layerTopOffset + top);
+        else
+            $doc.scrollTop(0);
+
+        // 최초 레이어가 있을 자리 세팅  
+        $layer.css('top', layerTopOffset);
+        resetXPosition();
+
+        //윈도우 크기 변경 이벤트가 발생하면  
+        $(window).resize(resetXPosition);
+
+        //스크롤이벤트가 발생하면  
+        $(window).scroll(function () {
+            yPosition = $doc.scrollTop() + layerTopOffset;
+            $layer.animate({ "top": yPosition }, { duration: speed, easing: easing, queue: false });
+        });
+        // 사이드 바
+
+    });
+새소식
+이벤트
+다운로드
+게임가이드
+판마카툰
+자유게시판
+덱게시판
+스크린샷
+길드
+명예의전당
+카드상점
+마일리지상점
+힐링상점
+덱상점
+스페셜상점
+부스터
+카드변환
+앨범
+강화북
+트레이드
+var secondMenu=Number(6);
+    switch(secondMenu){
+        case 0 : $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg"); break;
+        case 1 : $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg"); break;
+        case 2 : $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg"); break;
+        case 3 : $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg"); break;
+        case 4 : $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg"); break;
+        case 5 : $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg"); break;
+        case 6 : $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg"); break;    
+//		case 0 : document.menuform.elements.submenu[0].src="/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg"; break;
+//		case 1 : document.menuform.elements.submenu[1].src="/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg"; break;
+//		case 2 : document.menuform.elements.submenu[2].src="/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg"; break;
+//		case 3 : document.menuform.elements.submenu[3].src="/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg"; break;
+//		case 4 : document.menuform.elements.submenu[4].src="/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg"; break;
+//		case 5 : document.menuform.elements.submenu[5].src="/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg"; break;
+//		case 6 : document.menuform.elements.submenu[6].src="/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg"; break;	
+		default : break;
+	}
+
+    $(function() {
+        $("#submenu01").mouseover(function(){
+            if (secondMenu == 0) return;
+            $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg");
+        });
+        $("#submenu01").mouseout(function(){
+            if (secondMenu == 0) return;
+            $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01.jpg");
+        });
+
+        $("#submenu02").mouseover(function(){
+            if (secondMenu == 1) return;
+            $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg");
+        });
+        $("#submenu02").mouseout(function(){
+            if (secondMenu == 1) return;
+            $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02.jpg");
+        });
+
+        $("#submenu03").mouseover(function(){
+            if (secondMenu == 2) return;
+            $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg");
+        });
+        $("#submenu03").mouseout(function(){
+            if (secondMenu == 2) return;
+            $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03.jpg");
+        });
+
+        $("#submenu04").mouseover(function(){
+            if (secondMenu == 3) return;
+            $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg");
+        });
+        $("#submenu04").mouseout(function(){
+            if (secondMenu == 3) return;
+            $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04.jpg");
+        });
+
+        $("#submenu05").mouseover(function(){
+            if (secondMenu == 4) return;
+            $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg");
+        });
+        $("#submenu05").mouseout(function(){
+            if (secondMenu == 4) return;
+            $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05.jpg");
+        });
+
+        $("#submenu06").mouseover(function(){
+            if (secondMenu == 5) return;
+            $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg");
+        });
+        $("#submenu06").mouseout(function(){
+            if (secondMenu == 5) return;
+            $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06.jpg");
+        });
+
+        $("#submenu07").mouseover(function(){
+            if (secondMenu == 6) return;
+            $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg");
+        });
+        $("#submenu07").mouseout(function(){
+            if (secondMenu == 6) return;
+            $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07.jpg");
+        });
+    });
+$(function() {
+            $("#Image19").mouseover(function() {
+                $("#Image19").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_05_o.jpg");
+            });
+
+            $("#Image19").mouseout(function () {
+                $("#Image19").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_05.jpg");
+            });
+
+            $("#Image20").mouseover(function () {
+                $("#Image20").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_02_o.jpg");
+            });
+
+            $("#Image20").mouseout(function () {
+                $("#Image20").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_02.jpg");
+            });
+
+            $("#Image21").mouseover(function () {
+                $("#Image21").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_03_o.jpg");
+            });
+
+            $("#Image21").mouseout(function () {
+                $("#Image21").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_03.jpg");
+            });
+
+            $("#Image22").mouseover(function () {
+                $("#Image22").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_04_o.jpg");
+            });
+
+            $("#Image22").mouseout(function () {
+                $("#Image22").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_04.jpg");
+            });
+    });
+질문내용을 입력하시면 관련된 답변을 찾아 드립니다.
+설치/실행
+개인계정
+게임관련
+요금결제
+신고관련
+홈페이지
+서비스/운영
+오류메시지
+초보자가이드
+<
+남만왕비둘기(kingseizi)님의 튜토리얼 투고 >
+: [PD대정령]님 방송의 매니져 활동을 하고 계신 남만왕비둘기(kingseizi)님이 제작하신 
+초보자가이드 영상입니다. 정성이 가득 담긴 영상이므로 보다 많은 분들이 확인할 수 있도록 
+초보자가이드에 링크를 연결하였습니다.
+※ 상단의 이미지를 클릭하면 남만왕비둘기(kingseizi)님이 투고하신 영상 목록으로 이동합니다.
+☞ 초보입문 영상보기
+☞ 카드설명 영상보기
+☞ 신규유저팁1 영상보기
+☞ 신규유저팁2 영상보기
+① 판타지마스터즈에 오신 것을 환영합니다! 게임을 즐기려면 로그인을 해야겠죠?
+→
+◇ 아이디 : 가입하실 때 적은 아이디입니다. 영문자가 아닌 한글로도 이용이 가능하며 변경할 
+수 없니다.
+◇ 비밀번호 : 가입하실 때 적은 비밀번호입니다. 내정보변경에서 변경하실 수 있습니다.
+◇ 구매인증번호 : 아이디 보호를 위한 제2의 비밀번호입니다. 2008년 이전 가입자이고 변경한 
+적이 없다면 비밀번호와 동일합니다.
+② 이제 게임을 설치해봅시다. 로그인 창 바로 밑에 위치한 다운 버튼을 눌러주세요.
+: [게임가이드] - [다운로드]에서 설치 파일을 받아서 인스톨한 후 바탕화면의 [Fantasy 
+Masters 바로가기]를 실행하면 됩니다.
+[비인스톨 버전]을 받아서 Game.exe를 실행할 수도 있습니다. 만약 게임 실행에 문제가 
+있으신 분들은
+여기
+를 누르시길 바랍니다.
+: 최초 실행시
+클라이언트를 다운받아 수동으로 설치한 후 [GAMESTART]를 눌러주세요.
+설치되지 않은 상태에서 [GAMESTART]를 누르면 [FantasyMasters.exe 다운로드 중]에서 
+웹런처가 멈춰서 [Alt+F4]로 창을 꺼야 합니다.
+※ Active-X가 설치되지 않는 경우에는
+여기
+를 눌러서 다운로드 
+페이지의 [FMWebLauncher 파일 받기]을 인스톨하시면 됩니다.
+③ 게임에 접속하면 아래와 같은 창이 표시될 것입니다. [도와줘요!] 클릭 후 [튜토리얼]을 
+진행해보세요.

@@ -21,6 +21,10 @@ namespace PathOfDawn.Core
         public string equippedUtility;
         // Optional schema-1 metadata. Empty identifies the preserved 3D coordinate space.
         public string presentationSpace;
+        // Optional schema-1 extension. Absent fields preserve the original seven-reading journey.
+        public bool studyJourney, openingFinished, studyReadingOpen;
+        public int openingPage, studyDialoguePage;
+        public List<string> studyReadings = new List<string>();
 
         public GospelSave Copy() => new GospelSave
         {
@@ -28,7 +32,10 @@ namespace PathOfDawn.Core
             prologuePage = prologuePage, objectiveIndex = objectiveIndex, dialoguePage = dialoguePage,
             collectedReadings = collectedReadings == null ? null : new List<string>(collectedReadings),
             playerX = playerX, playerY = playerY, playerZ = playerZ, playerYaw = playerYaw,
-            equippedUtility = equippedUtility, presentationSpace = presentationSpace
+            equippedUtility = equippedUtility, presentationSpace = presentationSpace,
+            studyJourney=studyJourney, openingFinished=openingFinished, openingPage=openingPage,
+            studyReadingOpen=studyReadingOpen, studyDialoguePage=studyDialoguePage,
+            studyReadings=studyReadings==null?null:new List<string>(studyReadings)
         };
     }
 
@@ -45,6 +52,31 @@ namespace PathOfDawn.Core
         GospelJourney() { state = new GospelSave { schemaVersion = SchemaVersion,
             contentVersion = ContentVersion, phase = GospelPhase.Prologue, playerZ = -9f }; }
         public static GospelJourney New() => new GospelJourney();
+        public static GospelJourney NewStudyJourney() {var result=New();result.state.studyJourney=true;return result;}
+        public bool HasStudyJourney => state.studyJourney;
+        public bool OpeningFinished => !HasStudyJourney || state.openingFinished;
+        public int OpeningPage => state.openingPage;
+        public bool StudyReadingOpen => state.studyReadingOpen;
+        public int StudyDialogueIndex => state.studyDialoguePage;
+        public int StudyCount => state.studyReadings==null?0:state.studyReadings.Count;
+        public GospelStudyEncounter CurrentStudy => StudyCount<GospelStudyCatalog.Encounters.Count ? GospelStudyCatalog.Encounters[StudyCount] : null;
+        public bool StudyPending => HasStudyJourney && Phase==GospelPhase.Exploring && ObjectiveIndex==0 && CurrentStudy!=null;
+        public int CodexCount => CollectedReadings.Count+StudyCount;
+        public int CodexTotal => HasStudyJourney ? GospelStudyCatalog.AllReadings.Count : GospelCatalog.Readings.Count;
+        public bool HasReading(string id) => state.collectedReadings.Contains(id)||(state.studyReadings!=null&&state.studyReadings.Contains(id));
+        public void AdvanceOpening() {if(!HasStudyJourney||state.openingFinished)return;state.openingPage++;if(state.openingPage>=GospelStudyCatalog.Opening.Count){state.openingPage=GospelStudyCatalog.Opening.Count;state.openingFinished=true;}}
+        public void FinishOpening() {if(!HasStudyJourney)return;state.openingPage=GospelStudyCatalog.Opening.Count;state.openingFinished=true;}
+        public bool TryStudyEncounter(string id)
+        {
+            if(!OpeningFinished||!StudyPending||StudyReadingOpen||CurrentStudy.Reading.Id!=id)return false;
+            state.studyReadingOpen=true;state.studyDialoguePage=0;return true;
+        }
+        public bool AdvanceStudyDialogue()
+        {
+            if(!StudyPending||!StudyReadingOpen)return false;
+            if(state.studyDialoguePage+1<CurrentStudy.Turns.Count){state.studyDialoguePage++;return true;}
+            state.studyReadings.Add(CurrentStudy.Reading.Id);state.studyDialoguePage=0;state.studyReadingOpen=false;return true;
+        }
         public GospelPhase Phase => state.phase;
         public int ProloguePage => state.prologuePage;
         public int ObjectiveIndex => state.objectiveIndex;
@@ -86,7 +118,7 @@ namespace PathOfDawn.Core
 
         public bool AdvanceDialogue()
         {
-            if (Phase != GospelPhase.Prologue && Phase != GospelPhase.Reading) return false;
+            if (!OpeningFinished || StudyReadingOpen || (Phase != GospelPhase.Prologue && Phase != GospelPhase.Reading)) return false;
             if (state.dialoguePage + 1 < DialogueCount) { state.dialoguePage++; return true; }
             return AdvanceReading();
         }
@@ -94,6 +126,7 @@ namespace PathOfDawn.Core
         /// <summary>Acknowledges the displayed Scripture reading; never invents a narrative branch.</summary>
         public bool AdvanceReading()
         {
+            if(!OpeningFinished || StudyReadingOpen)return false;
             if (Phase == GospelPhase.Prologue)
             {
                 state.dialoguePage = 0;
@@ -113,6 +146,8 @@ namespace PathOfDawn.Core
 
         public bool TryInteract(string landmarkId, out string message)
         {
+            if (!OpeningFinished || StudyPending)
+            { message="먼저 빛나는 만남에서 어린 시절의 기록을 읽어 주세요."; return false; }
             if (Phase != GospelPhase.Exploring)
             {
                 message = IsComplete ? "첫 여정을 마쳤습니다. 말씀 기록에서 읽은 구절을 다시 볼 수 있습니다."
@@ -152,6 +187,7 @@ namespace PathOfDawn.Core
                 throw new ArgumentException("저장된 장착 도구를 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
             if (!ValidPresentationSpace(save.presentationSpace))
                 throw new ArgumentException("저장된 화면 좌표 공간을 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
+            ValidateStudySave(save);
             if (!Enum.IsDefined(typeof(GospelPhase), save.phase) || save.prologuePage < 0
                 || save.prologuePage > GospelCatalog.PrologueReadings.Count || save.objectiveIndex < 0
                 || save.objectiveIndex > GospelCatalog.Objectives.Count)
@@ -181,6 +217,34 @@ namespace PathOfDawn.Core
                 throw new ArgumentException("저장된 인물 위치가 유효하지 않습니다.");
         }
 
+        static void ValidateStudySave(GospelSave save)
+        {
+            int count=save.studyReadings==null?0:save.studyReadings.Count;
+            if(!save.studyJourney)
+            {
+                if(count!=0||save.studyReadingOpen||save.studyDialoguePage!=0||save.openingPage!=0||save.openingFinished)
+                    throw new ArgumentException("확장 여정의 기록과 종류가 일치하지 않습니다.");
+                return;
+            }
+            if(save.studyReadings==null||count>GospelStudyCatalog.Encounters.Count||save.openingPage<0||save.openingPage>GospelStudyCatalog.Opening.Count
+                ||save.openingFinished!=(save.openingPage==GospelStudyCatalog.Opening.Count))
+                throw new ArgumentException("여정 도입 또는 말씀 도감의 범위가 잘못되었습니다.");
+            if(!save.openingFinished&&(save.prologuePage!=0||save.objectiveIndex!=0||count!=0||save.studyReadingOpen))
+                throw new ArgumentException("도입 이전의 말씀 기록이 올바르지 않습니다.");
+            for(int i=0;i<count;i++)if(save.studyReadings[i]!=GospelStudyCatalog.Encounters[i].Reading.Id)
+                throw new ArgumentException("말씀 도감의 순서 또는 식별자가 잘못되었습니다.");
+            if((count>0||save.studyReadingOpen)&&save.prologuePage!=GospelCatalog.PrologueReadings.Count)
+                throw new ArgumentException("탄생의 말씀 이전에 확장 여정 기록이 있습니다.");
+            if((save.objectiveIndex>0||save.phase==GospelPhase.Reading||save.phase==GospelPhase.Completed)&&count!=GospelStudyCatalog.Encounters.Count)
+                throw new ArgumentException("성전 여정 이전의 말씀 기록이 완성되지 않았습니다.");
+            if(save.studyReadingOpen)
+            {
+                if(save.phase!=GospelPhase.Exploring||save.objectiveIndex!=0||count>=GospelStudyCatalog.Encounters.Count
+                    ||save.studyDialoguePage<0||save.studyDialoguePage>=GospelStudyCatalog.Encounters[count].Turns.Count)
+                    throw new ArgumentException("확장 여정의 대화 위치가 잘못되었습니다.");
+            }
+            else if(save.studyDialoguePage!=0)throw new ArgumentException("닫힌 대화의 위치가 잘못되었습니다.");
+        }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
         static bool ValidPresentationSpace(string space) => string.IsNullOrEmpty(space) || space == LuminousSpace;
         static bool ValidPosition(float x, float y, float z) => Finite(x) && Finite(y) && Finite(z)

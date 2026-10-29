@@ -11,7 +11,7 @@ namespace FirstGame.Editor
     /// <summary>Build the current authored 2D scene; legacy 3D sources remain intact.</summary>
     public static class LuminousProjectSetup
     {
-        public const string Revision = "gospel-luminous-2026-10-28";
+        public const string Revision = "gospel-renewal-2026-10-29";
         public const string AppType = "PathOfDawn.Presentation.GospelLuminousApp, PathOfDawn.Presentation";
         public const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool preparing;

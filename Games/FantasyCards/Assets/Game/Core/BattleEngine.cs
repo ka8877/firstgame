@@ -5,11 +5,14 @@ using System.Linq;
 namespace FantasyCards.Core
 {
     /// <summary>Classic preparation, ordered combat and soul-cost rules. No presentation randomness.</summary>
-    public sealed class BattleEngine
+    public sealed partial class BattleEngine
     {
         public BattleState State { get; private set; }
         bool capturePlayback;
         List<BattlePlaybackFrame> playbackFrames = new List<BattlePlaybackFrame>();
+        // A synchronous pair exists before coins and preemptive defenses. Death
+        // abilities must not reconstruct that pair from later damage events.
+        readonly int[] combatUnitIds = new int[2];
 
         public void BeginPlaybackCapture()
         {
@@ -46,7 +49,13 @@ namespace FantasyCards.Core
         {
             if (s == null || s.schemaVersion != 3 || s.contentVersion != CardCatalog.Version || s.rules == null || s.players == null || s.players.Count != 2 || s.events == null || s.randomState == 0 || s.activePlayer < 0 || s.activePlayer > 1 || s.turn < 1 || (s.phase != BattlePhase.Main && s.phase != BattlePhase.DefensePreparation && s.phase != BattlePhase.Complete)) throw new ArgumentException("클래식 전투 저장 버전 3이 필요합니다. 이전 저장은 보존하고 새 결투를 시작하세요.");
             s.rules.Validate(); var ids = new HashSet<int>();
-            if (s.turn > s.rules.maximumTurns + 1 || s.nextInstanceId != s.rules.deckSize * 2 + 1 || (s.phase != BattlePhase.Complete && s.winner != -1) || s.pendingAttackerId != -1 || s.pendingTargetLane != -1 || s.encounterIndex < -1 || s.encounterIndex >= DemoCatalog.Encounters.Length) throw new ArgumentException("잘못된 턴 또는 결과 상태입니다.");
+            // Older schema3 payloads predate this optional list. Unity may
+            // deserialize a missing list as null; it represents zero proofs,
+            // never permission to omit proofs for actually generated cards.
+            int generatedCount = s.generatedCards == null ? 0 : s.generatedCards.Count;
+            if (generatedCount > 4096) throw new ArgumentException("카드 생성 출처 기록이 잘못되었습니다.");
+            int firstGeneratedId = s.rules.deckSize * 2 + 1;
+            if (s.turn > s.rules.maximumTurns + 1 || s.nextInstanceId != firstGeneratedId + generatedCount || (s.phase != BattlePhase.Complete && s.winner != -1) || s.pendingAttackerId != -1 || s.pendingTargetLane != -1 || s.encounterIndex < -1 || s.encounterIndex >= DemoCatalog.Encounters.Length) throw new ArgumentException("잘못된 턴 또는 결과 상태입니다.");
             for (int player = 0; player < 2; player++)
             {
                 var p = s.players[player];
@@ -61,21 +70,18 @@ namespace FantasyCards.Core
                 foreach (var card in p.deck.Concat(p.hand).Concat(p.terrain).Concat(p.discard)) CheckCard(card, ids);
                 foreach (var unit in p.units)
                 {
-                    if (unit == null || !ids.Add(unit.instanceId) || unit.instanceId <= 0 || unit.lane < 0 || unit.lane >= s.rules.unitLanes || !lanes.Add(unit.lane) || CardCatalog.Get(unit.definitionId).kind != CardKind.Unit || unit.equipment == null || unit.equipment.Count > 2 || unit.damage < 0 || CardCatalog.UnitHealth(unit) <= 0 || Math.Abs(unit.bonusPower) > 100 || Math.Abs(unit.armor) > 100 || Math.Abs(unit.bonusHealth) > 100 || unit.extraCoins < 0 || unit.extraCoins > 5 || Math.Abs(unit.rolledAttack) > 1000 || Math.Abs(unit.rolledDefense) > 1000 || Math.Abs(unit.rolledHealth) > 1000) throw new ArgumentException("잘못된 전열 유닛입니다.");
+                    if (unit == null || !ids.Add(unit.instanceId) || unit.instanceId <= 0 || unit.lane < 0 || unit.lane >= s.rules.unitLanes || !lanes.Add(unit.lane) || CardCatalog.Get(unit.definitionId).kind != CardKind.Unit || unit.equipment == null || unit.equipment.Count > 2 || unit.damage < 0 || CardCatalog.UnitHealth(unit) <= 0 || Math.Abs(unit.permanentPower) > 100 || Math.Abs(unit.coinChanceDelta) > 100 || Math.Abs(unit.bonusPower) > 100 || Math.Abs(unit.armor) > 100 || Math.Abs(unit.bonusHealth) > 100 || unit.extraCoins < 0 || unit.extraCoins > 5 || Math.Abs(unit.rolledAttack) > 1000 || Math.Abs(unit.rolledDefense) > 1000 || Math.Abs(unit.rolledHealth) > 1000) throw new ArgumentException("잘못된 전열 유닛입니다.");
                     foreach (var equipment in unit.equipment) { CheckCard(equipment, ids); if (CardCatalog.Get(equipment.definitionId).kind != CardKind.Equipment || (CardCatalog.Get(equipment.definitionId).requiredCapabilityMask != 0 && (CardCatalog.Get(unit.definitionId).capabilityMask & CardCatalog.Get(equipment.definitionId).requiredCapabilityMask) == 0)) throw new ArgumentException("잘못된 아이템입니다."); }
                 }
                 foreach (var spell in p.preparedSpells)
                     if (spell == null || !ids.Add(spell.instanceId) || spell.instanceId <= 0 || spell.lane < 0 || spell.lane >= s.rules.unitLanes || !lanes.Add(spell.lane) || spell.targetLane < -1 || spell.targetLane >= s.rules.unitLanes || spell.targetPlayer < -1 || spell.targetPlayer > 1 || CardCatalog.Get(spell.definitionId).kind != CardKind.Spell) throw new ArgumentException("잘못된 예고 마법입니다.");
-                var definitionsInPlay = p.deck.Concat(p.hand).Concat(p.terrain).Concat(p.discard).Select(c => c.definitionId).Concat(p.units.Select(u => u.definitionId)).Concat(p.units.SelectMany(u => u.equipment).Select(c => c.definitionId)).Concat(p.preparedSpells.Select(c => c.definitionId));
-                if (definitionsInPlay.GroupBy(id => id).Any(group => group.Count() > CardCatalog.Get(group.Key).deckLimit)) throw new ArgumentException("동일 카드 한도를 초과했습니다.");
-                if (p.terrain.Any(c => CardCatalog.Get(c.definitionId).kind != CardKind.Terrain) || ids.Count - previousCount != s.rules.deckSize) throw new ArgumentException("플레이어의 카드 수가 보존되지 않았습니다.");
-                if (p.deckId != "custom")
-                {
-                    var actual = p.deck.Concat(p.hand).Concat(p.terrain).Concat(p.discard).Select(c => c.definitionId).Concat(p.units.Select(u => u.definitionId)).Concat(p.units.SelectMany(u => u.equipment).Select(c => c.definitionId)).Concat(p.preparedSpells.Select(c => c.definitionId));
-                    if (!actual.OrderBy(x => x).SequenceEqual(DemoCatalog.GetDeck(p.deckId).cards.OrderBy(x => x))) throw new ArgumentException("선택한 기본 덱과 저장 카드 구성이 다릅니다.");
-                }
+                var originalCards = AllInstances(p).Where(c => c.instanceId < firstGeneratedId).ToArray();
+                if (originalCards.GroupBy(c => c.definitionId).Any(group => group.Count() > CardCatalog.Get(group.Key).deckLimit)) throw new ArgumentException("동일 원본 카드 한도를 초과했습니다.");
+                if (p.terrain.Any(c => CardCatalog.Get(c.definitionId).kind != CardKind.Terrain) || originalCards.Length != s.rules.deckSize) throw new ArgumentException("플레이어의 원본 카드 수가 보존되지 않았습니다.");
+                if (p.deckId != "custom" && !originalCards.Select(c => c.definitionId).OrderBy(x => x).SequenceEqual(DemoCatalog.GetDeck(p.deckId).cards.OrderBy(x => x))) throw new ArgumentException("선택한 기본 덱과 저장 원본 카드 구성이 다릅니다.");
             }
-            if (ids.Count != 2 * s.rules.deckSize || ids.Any(x => x >= s.nextInstanceId)) throw new ArgumentException("카드 보존 검증에 실패했습니다.");
+            if (ids.Count != s.nextInstanceId - 1 || ids.Any(x => x >= s.nextInstanceId)) throw new ArgumentException("원본·생성 카드 보존 검증에 실패했습니다.");
+            ValidateGeneratedCards(s, firstGeneratedId);
             for (int i = 0; i < s.events.Count; i++)
             {
                 var item = s.events[i];
@@ -169,7 +175,7 @@ namespace FantasyCards.Core
             {
                 var p = State.players[player]; p.preparationComplete = false; p.playedThisPreparation = false; p.terrainPlayed = 0; p.levelPoints++;
                 foreach (var unit in p.units)
-                { unit.damage = unit.bonusPower = unit.armor = unit.bonusHealth = 0; unit.coinsRolled = unit.exhausted = unit.summoningSick = false; unit.rolledAttack = unit.rolledDefense = unit.rolledHealth = 0; }
+                { unit.damage = unit.bonusPower = unit.armor = unit.bonusHealth = unit.coinChanceDelta = 0; unit.coinsRolled = unit.exhausted = unit.summoningSick = false; unit.rolledAttack = unit.rolledDefense = unit.rolledHealth = 0; }
             }
             RemoveDefeated();
             if (refill)
@@ -310,6 +316,7 @@ namespace FantasyCards.Core
             Log("play", Owner(player) + " · " + (d.kind == CardKind.Spell ? "마법 1장 예고" : d.name + " 배치"), d.kind == CardKind.Spell ? 0 : d.level, player,
                 card: card, sourceOwner: player, lane: d.kind == CardKind.Terrain ? -1 : placedLane,
                 target: d.kind == CardKind.Equipment ? p.AtLane(lane) : null, targetOwner: d.kind == CardKind.Equipment ? player : -1);
+            if (d.kind == CardKind.Equipment) ApplyRenewalEquipment(player, p.AtLane(lane), card);
             RemoveDefeated(); CheckVictory(); return true;
         }
         public bool CompletePreparation(int player, out string reason)
@@ -346,48 +353,43 @@ namespace FantasyCards.Core
                 if (!State.players[attacker].units.Contains(unit)) continue;
                 unit.exhausted = true;
                 var blocker = State.players[defender].units.OrderBy(u => u.lane).FirstOrDefault();
-                if (State.rules.coinOrder == CoinResolutionOrder.DefenderFirst && blocker != null) RollUnit(blocker, defender);
-                RollUnit(unit, attacker);
-                if (State.rules.coinOrder == CoinResolutionOrder.AttackerFirst && blocker != null) RollUnit(blocker, defender);
-                RemoveDefeated();
-                if (!State.players[attacker].units.Contains(unit)) continue;
-                while (blocker != null && !State.players[defender].units.Contains(blocker))
+                combatUnitIds[attacker] = unit.instanceId;
+                combatUnitIds[defender] = blocker == null ? 0 : blocker.instanceId;
+                try
                 {
-                    blocker = State.players[defender].units.OrderBy(u => u.lane).FirstOrDefault();
-                    if (blocker != null) { RollUnit(blocker, defender); RemoveDefeated(); }
-                }
-                if (blocker == null)
-                {
-                    int amount = CardCatalog.Get(unit.definitionId).level;
-                    Log("direct", CardCatalog.Get(unit.definitionId).name + " · 상대 덱 직접 공격", amount, attacker,
-                        source: unit, sourceOwner: attacker, targetOwner: defender);
-                    DamagePlayer(defender, amount, CardCatalog.Get(unit.definitionId).name + " 직접 공격 · 레벨 " + amount, unit, attacker);
-                }
-                else
-                {
-                    if (unit.definitionId == RestorationCardSkills.StrongPoison && CardCatalog.UnitAttack(unit) >= 1)
+                    if (State.rules.coinOrder == CoinResolutionOrder.DefenderFirst && blocker != null) RollUnit(blocker, defender);
+                    RollUnit(unit, attacker);
+                    if (State.rules.coinOrder == CoinResolutionOrder.AttackerFirst && blocker != null) RollUnit(blocker, defender);
+                    RemoveDefeated();
+                    if (!State.players[attacker].units.Contains(unit)) continue;
+                    while (blocker != null && !State.players[defender].units.Contains(blocker))
                     {
-                        blocker.rolledAttack = 1; blocker.rolledHealth = 1;
-                        Log("skill", "정글의독침수 · 강한치명 · 상대 AP·HP =1", 1, attacker, source: unit, sourceOwner: attacker, target: blocker, targetOwner: defender);
+                        blocker = State.players[defender].units.OrderBy(u => u.lane).FirstOrDefault();
+                        combatUnitIds[defender] = blocker == null ? 0 : blocker.instanceId;
+                        if (blocker != null) { RollUnit(blocker, defender); RemoveDefeated(); }
                     }
-                    bool evaded = RestorationCardSkills.EvadesBeast(blocker, unit);
-                    int outgoing = evaded ? 0 : Math.Max(0, CardCatalog.UnitAttack(unit) - CardCatalog.UnitDefense(blocker));
-                    if (evaded) Log("skill", "투우사 · 야수회피 · 공격 피해 무효", 0, defender, source: blocker, sourceOwner: defender, target: unit, targetOwner: attacker);
-                    int incoming = Math.Max(0, CardCatalog.UnitAttack(blocker) - CardCatalog.UnitDefense(unit));
-                    blocker.damage += outgoing;
-                    Log("attack", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " · 피해 " + outgoing,
-                        outgoing, attacker, source: unit, sourceOwner: attacker, target: blocker, targetOwner: defender);
-                    bool retaliate = State.rules.defenderStrikesBack && (State.rules.damageOrder == DamageResolutionOrder.Simultaneous || CardCatalog.UnitHealth(blocker) > 0);
-                    if (retaliate)
+                    if (blocker == null)
                     {
-                        unit.damage += incoming;
-                        Log("counter", CardCatalog.Get(blocker.definitionId).name + " → " + CardCatalog.Get(unit.definitionId).name + " · 생존 반격 " + incoming,
-                            incoming, defender, source: blocker, sourceOwner: defender, target: unit, targetOwner: attacker);
+                        int amount = CardCatalog.Get(unit.definitionId).level;
+                        Log("direct", CardCatalog.Get(unit.definitionId).name + " · 상대 덱 직접 공격", amount, attacker,
+                            source: unit, sourceOwner: attacker, targetOwner: defender);
+                        DamagePlayer(defender, amount, CardCatalog.Get(unit.definitionId).name + " 직접 공격 · 레벨 " + amount, unit, attacker);
                     }
-                    Log("damage", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " 피해 " + outgoing + (retaliate ? " · 생존 반격 " + incoming : " · 반격 없음"), outgoing, attacker);
+                    else
+                    {
+                        int outgoing = RenewalStrike(unit, blocker, attacker, defender, "attack");
+                        bool retaliate = State.rules.defenderStrikesBack && CardCatalog.UnitHealth(unit) > 0 && !(RenewalCardSkills.AttackCode(unit.definitionId) == 568 && outgoing > 0)
+                            && (State.rules.damageOrder == DamageResolutionOrder.Simultaneous || CardCatalog.UnitHealth(blocker) > 0);
+                        int incoming = retaliate ? RenewalStrike(blocker, unit, defender, attacker, "counter") : 0;
+                        Log("damage", CardCatalog.Get(unit.definitionId).name + " → " + CardCatalog.Get(blocker.definitionId).name + " 피해 " + outgoing + (retaliate ? " · 생존 반격 " + incoming : " · 반격 없음"), outgoing, attacker);
+                    }
+                    RemoveDefeated(); CheckVictory();
+                    if (State.phase == BattlePhase.Complete) return;
                 }
-                RemoveDefeated(); CheckVictory();
-                if (State.phase == BattlePhase.Complete) return;
+                finally
+                {
+                    combatUnitIds[0] = combatUnitIds[1] = 0;
+                }
             }
             RefreshSouls();
             for (int player = 0; player < 2; player++)
@@ -413,21 +415,26 @@ namespace FantasyCards.Core
             int healthCount = OriginalEquipmentModifiers.CoinCount(d.healthCoin, OriginalEquipmentModifiers.CoinDelta(unit, OperationStat.Health));
             int count = State.rules.baseCoins >= 0 ? Math.Max(0, Math.Min(5, State.rules.baseCoins + unit.extraCoins)) : Math.Max(attackCount, Math.Max(defenseCount, healthCount));
             int chance = OriginalEquipmentModifiers.ChancePercent(unit); var heads = new bool[count];
+            int basisAttack = CardCatalog.BaseAttack(unit), basisDefense = CardCatalog.BaseDefense(unit), basisHealth = CardCatalog.BaseHealth(unit);
+            int initialAttack = CardCatalog.UnitAttack(unit), initialDefense = CardCatalog.UnitDefense(unit), initialHealth = CardCatalog.UnitHealth(unit);
+            unit.rolledAttack = Math.Max(0, basisAttack); unit.rolledDefense = Math.Max(0, basisDefense); unit.rolledHealth = Math.Max(0, basisHealth);
+            unit.coinsRolled = true;
             for (int i = 0; i < count; i++)
             {
-                // Preserve the original 50% RNG path exactly, including old
-                // fixed seeds and saves. Non-default source equipment chances
-                // use integer percentage points, never presentation randomness.
+                int beforeAp = CardCatalog.UnitAttack(unit), beforeDp = CardCatalog.UnitDefense(unit), beforeHp = CardCatalog.UnitHealth(unit);
                 heads[i] = chance == 50 ? StableRandom.Range(ref State.randomState, 2) == 1 : StableRandom.Range(ref State.randomState, 100) < chance;
+                // Only resolved coins contribute to this transient snapshot.
+                // The complete result and RNG order remain identical.
+                var resolved = heads.Take(i + 1).ToArray();
+                unit.rolledAttack = ApplyCoins(basisAttack, d.attackCoin, resolved, attackCount);
+                unit.rolledDefense = ApplyCoins(basisDefense, d.defenseCoin, resolved, defenseCount);
+                unit.rolledHealth = ApplyCoins(basisHealth, d.healthCoin, resolved, healthCount);
                 Log("coin", d.name + " · C" + (i + 1) + " " + (heads[i] ? "앞면" : "뒷면"), heads[i] ? 1 : 0, player,
-                    source: unit, sourceOwner: player, coinIndex: i + 1, coinHeads: heads[i]);
+                    source: unit, sourceOwner: player, coinIndex: i + 1, coinHeads: heads[i],
+                    hasStatTransition: true, beforeAttack: beforeAp, beforeDefense: beforeDp, beforeHealth: beforeHp);
             }
-            unit.rolledAttack = ApplyCoins(CardCatalog.BaseAttack(unit), d.attackCoin, heads, attackCount);
-            unit.rolledDefense = ApplyCoins(CardCatalog.BaseDefense(unit), d.defenseCoin, heads, defenseCount);
-            unit.rolledHealth = ApplyCoins(CardCatalog.BaseHealth(unit), d.healthCoin, heads, healthCount);
-            unit.coinsRolled = true;
             Log("power", d.name + " 최종 AP " + unit.rolledAttack + " / DP " + unit.rolledDefense + " / HP " + unit.rolledHealth, unit.rolledAttack, player,
-                source: unit, sourceOwner: player);
+                source: unit, sourceOwner: player, hasStatTransition: true, beforeAttack: initialAttack, beforeDefense: initialDefense, beforeHealth: initialHealth);
         }
         static int ApplyCoins(int basis, CoinRule spec, bool[] heads, int effectiveCount)
         {
@@ -533,13 +540,18 @@ namespace FantasyCards.Core
         }
         void RemoveDefeated()
         {
+            int removals = 0;
+            while (State.players.Any(p => p.units.Any(u => CardCatalog.UnitHealth(u) <= 0)))
             for (int player = 0; player < 2; player++)
             {
                 var p = State.players[player];
                 foreach (var unit in p.units.Where(u => CardCatalog.UnitHealth(u) <= 0).OrderBy(u => u.lane).ToArray())
                 {
+                    if (!p.units.Contains(unit)) continue;
+                    if (++removals > 256) throw new InvalidOperationException("카드 파괴 연쇄가 안전 한도를 넘었습니다.");
                     p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment);
                     Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player);
+                    OnPremiumDeath(unit, player);
                     if (unit.definitionId == RestorationCardSkills.LandRuin)
                     {
                         var opponent = State.players[1 - player]; int lost = opponent.levelPoints > 0 ? 1 : 0;
@@ -577,15 +589,18 @@ namespace FantasyCards.Core
         void Log(string kind, string text, int amount = 0, int actor = -1,
             UnitState source = null, int sourceOwner = -1, UnitState target = null, int targetOwner = -1,
             CardInstance card = null, int lane = -1, CardInstance targetCard = null,
-            int coinIndex = 0, bool coinHeads = false, string stat = null)
+            int coinIndex = 0, bool coinHeads = false, string stat = null,
+            bool hasStatTransition = false, int beforeAttack = 0, int beforeDefense = 0, int beforeHealth = 0, int additionalAttackDamage = 0)
         {
             var item = new BattleEvent { sequence = State.events.Count + 1, turn = State.turn, kind = kind, text = text,
                 amount = amount, actor = actor, hasPresentationData = true, sourcePlayer = sourceOwner,
-                targetPlayer = targetOwner, coinIndex = coinIndex, coinHeads = coinHeads, stat = stat };
+                targetPlayer = targetOwner, coinIndex = coinIndex, coinHeads = coinHeads, stat = stat,
+                hasStatTransition = hasStatTransition, beforeAttack = beforeAttack, beforeDefense = beforeDefense, beforeHealth = beforeHealth, additionalAttackDamage = additionalAttackDamage };
             if (source != null)
             {
                 item.sourceInstanceId = source.instanceId; item.sourceDefinitionId = source.definitionId; item.sourceLane = source.lane;
                 item.attack = CardCatalog.UnitAttack(source); item.defense = CardCatalog.UnitDefense(source); item.health = CardCatalog.UnitHealth(source);
+                item.afterAttack = item.attack; item.afterDefense = item.defense; item.afterHealth = item.health;
             }
             else if (card != null)
             { item.sourceInstanceId = card.instanceId; item.sourceDefinitionId = card.definitionId; item.sourceLane = lane; }

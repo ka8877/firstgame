@@ -1,5 +1,5 @@
 FANTASY MASTERS — SOURCE-CREDITED BUNDLED MUSIC
-Revision: fm-fidelity-audio-2026-10-27
+Revision: fm-renewal-audio-2026-10-29
 
 Login, lobby and deck:
 SOUND-I, (주)제오닉스 "판타지 마스터즈" publisher portfolio
@@ -26,9 +26,15 @@ a full client-ripped soundtrack, or a restoration of missing music. No speech
 separation or reconstructed/replacement melody is used. Every selected interval
 is listed in loop-spec.json and runtime-manifest.json.
 
-Battle retains all decoded audio from the complete publicly supplied S.I.D-Sound
-portfolio file, with only loudness normalization and codec conversion. The
-60.479s source metadata includes encoder padding; its decoded runtime is 60.421s.
+The complete publicly supplied S.I.D-Sound battle recording remains preserved
+unchanged in Originals. The active battle loop is now an EDIT: trim the normalized
+recording to 0.85–59.35 seconds, then bake a 0.35-second equal-power circular
+tail/head overlap (58.15-second runtime). Login similarly trims its already
+assembled instrumental excerpt to 0.35–18.52952381 seconds and uses a 0.30-second
+circular overlap (17.87952381-second runtime). The original low-energy intro/outro
+and earlier runtime files remain in Tools/Audio/Renewal/History/before-loop-polish.
+Lobby/deck bytes are unchanged. Exact recipe, hashes and decoded PCM measurements
+are in Tools/Audio/Renewal/polish-loops.py and loop-polish-manifest.json.
 An exact historical game patch or a complete original soundtrack is unverified.
 
 Original copyrights remain with their respective creators/rightsholders.

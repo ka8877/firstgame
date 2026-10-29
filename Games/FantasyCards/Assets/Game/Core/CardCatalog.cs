@@ -8,6 +8,7 @@ namespace FantasyCards.Core
     {
         public const string Version = "fm-classic-0.1.0";
         public static readonly CardDefinition[] All = ClassicCardData.Create();
+        public static bool Contains(string id) => Array.Exists(All, card => card.id == id);
         public static CardDefinition Get(string id)
         {
             var card = Array.Find(All, x => x.id == id);
@@ -36,8 +37,8 @@ namespace FantasyCards.Core
         { return DemoCatalog.GetDeck(opponent ? "tides" : "forest").CopyCards(); }
         public static string KindName(CardKind kind) { return new[] { "지형", "유닛", "마법", "아이템" }[(int)kind]; }
         public static string ElementName(Element element) { return new[] { "빛", "물", "불", "숲", "금속", "대지", "암흑" }[(int)element]; }
-        public static string RarityName(CardRarity rarity) { return new[] { "프리", "커먼", "언커먼", "레어", "스페셜", "업그레이드", "유니크", "이벤트", "레전드", "이카젠", "시크릿", "에픽" }[(int)rarity]; }
-        public static string RarityCode(CardRarity rarity) { return new[] { "F", "C", "UC", "R", "SP", "UP", "U", "E", "L", "IC", "SC", "EP" }[(int)rarity]; }
+        public static string RarityName(CardRarity rarity) { return new[] { "프리", "커먼", "언커먼", "레어", "스페셜", "업그레이드", "유니크", "이벤트", "레전드", "이카젠", "시크릿", "에픽", "미분류" }[(int)rarity]; }
+        public static string RarityCode(CardRarity rarity) { return new[] { "F", "C", "UC", "R", "SP", "UP", "U", "E", "L", "IC", "SC", "EP", "?" }[(int)rarity]; }
         public static string RankName(CardRank rank) { return new[] { "N", "C", "B", "A", "S" }[(int)rank]; }
         public static string CoinText(CoinRule coin)
         {
@@ -52,9 +53,9 @@ namespace FantasyCards.Core
             if (card.kind == CardKind.Terrain) return "LP " + card.landPointCost + " · " + ElementName(card.element) + " " + card.producedColored + " / 총소울 " + card.producedGeneric + " 생산";
             return ElementName(card.element) + " " + card.coloredCost + " · 총소울 " + card.cost + (card.kind == CardKind.Unit ? " · 유지 " + card.genericCost : "");
         }
-        public static int BaseAttack(UnitState unit) { return Get(unit.definitionId).attack + unit.bonusPower + unit.equipment.Sum(c => Get(c.definitionId).attack); }
+        public static int BaseAttack(UnitState unit) { return Get(unit.definitionId).attack + unit.bonusPower + unit.permanentPower + unit.equipment.Sum(c => Get(c.definitionId).attack); }
         public static int BaseDefense(UnitState unit) { return Get(unit.definitionId).defense + unit.armor + unit.equipment.Sum(c => Get(c.definitionId).defense); }
-        public static int BaseHealth(UnitState unit) { return Get(unit.definitionId).health + unit.bonusHealth + unit.equipment.Sum(c => Get(c.definitionId).health); }
+        public static int BaseHealth(UnitState unit) { return Get(unit.definitionId).health + unit.bonusHealth + unit.equipment.Sum(c => Get(c.definitionId).health) + RenewalCardSkills.SynergyHealth(unit); }
         public static int UnitAttack(UnitState unit) { return Math.Max(0, unit.coinsRolled ? unit.rolledAttack : BaseAttack(unit)); }
         public static int UnitDefense(UnitState unit) { return Math.Max(0, unit.coinsRolled ? unit.rolledDefense : BaseDefense(unit)); }
         public static int MaximumHealth(UnitState unit) { return Math.Max(0, unit.coinsRolled ? unit.rolledHealth : BaseHealth(unit)); }

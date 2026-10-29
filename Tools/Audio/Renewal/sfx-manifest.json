@@ -1,0 +1,116 @@
+{
+  "revision": "fm-renewal-2026-10-29",
+  "source": "Original deterministic offline synthesis. No recovered FM sound files, voices or third-party samples.",
+  "generator": "Tools/Audio/Renewal/render-sfx.py",
+  "cues": [
+    {
+      "cue": "coin-head",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/coin-head.wav",
+      "bytes": 88244,
+      "sha256": "1b5e0c3d1f2ea355f395e73d7178aea1e524e248e90517d6d2a995981a85851e",
+      "seconds": 0.5,
+      "peak": 0.53997802734375,
+      "rms": 0.06424103534774755,
+      "dc": -1.0207126470379819e-06,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "coin-tail",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/coin-tail.wav",
+      "bytes": 67076,
+      "sha256": "74d02939c338c8a6520e7ce62c73e0d975f83df223a4c6e952fa62ea1b5e4a74",
+      "seconds": 0.38,
+      "peak": 0.53997802734375,
+      "rms": 0.06560346734670085,
+      "dc": -2.8053663385584496e-06,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "stat-up",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/stat-up.wav",
+      "bytes": 102356,
+      "sha256": "1c28753bf245ad4e67b9b38308e8afc248d1b6344c722c18fc63f8f527567243",
+      "seconds": 0.58,
+      "peak": 0.41998291015625,
+      "rms": 0.08887136797528025,
+      "dc": -3.877634252335992e-07,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "stat-down",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/stat-down.wav",
+      "bytes": 84716,
+      "sha256": "d0613ecdc80420e39edb3e3a75cc1db4948883caea418315f36f421f6957699d",
+      "seconds": 0.48,
+      "peak": 0.41998291015625,
+      "rms": 0.1003087154463787,
+      "dc": -4.1376346002810844e-07,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "card-land",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/card-land.wav",
+      "bytes": 70604,
+      "sha256": "4b1d4e4985d9504acd00c6a428d4d07007eda62bf20dcd4a367afac85ce6368a",
+      "seconds": 0.4,
+      "peak": 0.53997802734375,
+      "rms": 0.05916718759818585,
+      "dc": 2.0414252940759637e-07,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "rare-reveal",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/rare-reveal.wav",
+      "bytes": 218780,
+      "sha256": "fee0a26acbc024165217b24f286d49ee78c1e95bbf8b51240fcd7880a65fca26",
+      "seconds": 1.24,
+      "peak": 0.579986572265625,
+      "rms": 0.08439786216039433,
+      "dc": -2.985682155086497e-08,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "click",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/click.wav",
+      "bytes": 28268,
+      "sha256": "4cb3aaa4e0217aa77e571aea4c93a7a368e3e0aedea24d3e2c0e004e5dc760c0",
+      "seconds": 0.16,
+      "peak": 0.399993896484375,
+      "rms": 0.038972115418166024,
+      "dc": -6.910786877413725e-05,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "card-draw",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/card-draw.wav",
+      "bytes": 54728,
+      "sha256": "498028accc4e209ef10d7ec39e2ed05f4d1996f5ff4f2cc76917addb7739fb31",
+      "seconds": 0.31,
+      "peak": 0.47998046875,
+      "rms": 0.06774218340168488,
+      "dc": 3.460042871315193e-08,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    },
+    {
+      "cue": "card-shuffle",
+      "file": "Games/FantasyCards/Assets/Resources/Audio/FmRenewal/card-shuffle.wav",
+      "bytes": 234656,
+      "sha256": "ce71f323ae35ba064ff3a556eafbcb0d430464fb88bda50f83024bf0f0a592a4",
+      "seconds": 1.33,
+      "peak": 0.54998779296875,
+      "rms": 0.06637986083876808,
+      "dc": 4.8388569478543296e-08,
+      "clippedSamples": 0,
+      "endpointsZero": true
+    }
+  ],
+  "scope": "Decoded PCM file analysis only; actual in-game output is separately verified by Release."
+}

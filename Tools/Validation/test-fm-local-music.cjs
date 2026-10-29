@@ -28,19 +28,47 @@ class Media extends Element {
   pause() { this.paused = true; this.pauseCalls++; }
 }
 function param(clock) {
-  let stored = 0, ramp = null;
-  function actual() {
-    if (!ramp) return stored;
-    const progress = Math.max(0, Math.min(1, (clock() - ramp.start) / (ramp.end - ramp.start)));
-    return ramp.from + (ramp.to - ramp.from) * progress;
+  let stored = 0, automation = null;
+  function actual(at = clock()) {
+    if (!automation || at < automation.start) return stored;
+    if (automation.kind === 'target') {
+      return automation.to + (automation.from - automation.to) *
+        Math.exp(-(at - automation.start) / automation.timeConstant);
+    }
+    const progress = Math.max(0, Math.min(1, (at - automation.start) / (automation.end - automation.start)));
+    if (automation.kind === 'curve') {
+      // WebAudio linearly interpolates neighbouring supplied curve samples;
+      // it does not apply an additional easing function between the points.
+      const position = progress * (automation.values.length - 1);
+      const left = Math.floor(position), right = Math.min(left + 1, automation.values.length - 1);
+      return automation.values[left] + (automation.values[right] - automation.values[left]) * (position - left);
+    }
+    return automation.from + (automation.to - automation.from) * progress;
   }
+  function hold(at = clock()) { stored = actual(at); automation = null; }
   return {
-    get value() { return actual(); }, set value(v) { stored = v; ramp = null; },
-    cancelScheduledValues() { stored = actual(); ramp = null; },
-    cancelAndHoldAtTime() { stored = actual(); ramp = null; },
-    setValueAtTime(v) { stored = v; ramp = null; },
-    setTargetAtTime(v) { stored = v; ramp = null; },
-    linearRampToValueAtTime(v, until) { ramp = { from: actual(), to: v, start: clock(), end: until }; }
+    get value() { return actual(); }, set value(v) { stored = v; automation = null; },
+    cancelScheduledValues(at = clock()) {
+      if (!automation) return;
+      // The controller's legacy fallback explicitly reads/sets the held value.
+      // A future event is removed; an already-started curve remains scheduled.
+      if (automation.start >= at) automation = null;
+    },
+    cancelAndHoldAtTime(at = clock()) { hold(at); },
+    setValueAtTime(v) { stored = v; automation = null; },
+    setTargetAtTime(v, start = clock(), timeConstant = .035) {
+      assert(timeConstant > 0);
+      automation = { kind: 'target', from: actual(), to: v, start, timeConstant };
+    },
+    linearRampToValueAtTime(v, until) {
+      automation = { kind: 'linear', from: actual(), to: v, start: clock(), end: until };
+    },
+    setValueCurveAtTime(values, start, duration) {
+      assert(values.length >= 2 && duration > 0 && start >= 0);
+      assert(Array.from(values).every(Number.isFinite));
+      stored = actual();
+      automation = { kind: 'curve', values: Array.from(values), start, end: start + duration };
+    }
   };
 }
 function setup({ stored = {}, vorbis = true, webAudio = true } = {}) {
@@ -90,8 +118,26 @@ function setup({ stored = {}, vorbis = true, webAudio = true } = {}) {
   const mute = value => receive({ change: 'muted', muted: value });
   return { api, elements, media, contexts, gesture, receive, scene, mute, storage, document, advance };
 }
+const CROSSFADE_MS = 550; // Documented equal-power role transition, not a generous timeout.
+const FALLBACK_SETTLE_MS = 560; // First 16ms fallback tick after the 550ms envelope.
 const flush = () => new Promise(resolve => setImmediate(resolve));
 async function resolve(audio, index = audio.requests.length - 1) { audio.requests[index].resolve(); await flush(); }
+
+test('AudioParam fixture interpolates curve samples and holds an interrupted curve at the current value', () => {
+  let now = 0;
+  const gain = param(() => now);
+  const values = new Float32Array([0, .5, 1]);
+  gain.setValueCurveAtTime(values, 1, 2);
+  values[1] = 0; // WebAudio owns a copy after scheduling.
+  assert.equal(gain.value, 0);
+  now = 1.5; assert.equal(gain.value, .25);
+  now = 2; assert.equal(gain.value, .5);
+  gain.cancelAndHoldAtTime(now);
+  now = 3; assert.equal(gain.value, .5);
+  gain.setValueCurveAtTime(new Float32Array([.5, .25, 0]), now, 2);
+  now = 3.5; assert.equal(gain.value, .375);
+  now = 5.5; assert.equal(gain.value, 0);
+});
 
 test('normal play contains no hosted player/SDK and creates no audio graph before a real gesture', () => {
   assert(!/<iframe\b|w\.soundcloud\.com|api-v2\.soundcloud\.com|SC\.Widget/.test(html));
@@ -134,7 +180,9 @@ test('a first title Continue gesture after full reload also unlocks the selected
 test('ready target crossfades the outgoing track, while same-scene redraw keeps its playhead', async () => {
   const p = setup();
   p.gesture(); await resolve(p.media[0]);
-  p.advance(500);
+  p.advance(CROSSFADE_MS);
+  assert.equal(p.api.getState().fadeOutSeconds, CROSSFADE_MS / 1000);
+  assert.equal(p.api.getState().fadeInSeconds, CROSSFADE_MS / 1000);
   p.media[0].currentTime = 14;
   p.scene('login');
   assert.equal(p.media[0].requests.length, 1);
@@ -147,7 +195,12 @@ test('ready target crossfades the outgoing track, while same-scene redraw keeps 
   p.advance(90);
   assert(p.contexts[0].gains[1].gain.value > 0 && p.contexts[0].gains[1].gain.value < 1);
   assert(p.contexts[0].gains[4].gain.value > 0 && p.contexts[0].gains[4].gain.value < 1);
-  p.advance(100);
+  const outgoingGain = p.contexts[0].gains[1].gain.value;
+  const incomingGain = p.contexts[0].gains[4].gain.value;
+  assert(Math.abs(outgoingGain ** 2 + incomingGain ** 2 - 1) < .001, 'Overlap must avoid the old energy trough');
+  p.advance(CROSSFADE_MS - 90 - 1);
+  assert.equal(p.media[0].paused, false, 'Outgoing tail remains until the documented envelope ends');
+  p.advance(1);
   assert.equal(p.media[0].paused, true);
   assert(p.api.getState().actualSource.endsWith('/battle.ogg'));
   assert.equal(p.media.filter(audio => !audio.paused).length, 1);
@@ -161,7 +214,7 @@ test('late scene promises cannot become audible after rapid scene changes', asyn
   assert.equal(p.media[2].paused, true);
   assert(p.api.getState().actualSource.endsWith('/title.ogg'));
   await resolve(p.media[3]);
-  p.advance(200);
+  p.advance(CROSSFADE_MS);
   assert.equal(p.media.filter(audio => !audio.paused).length, 1);
   assert(p.api.getState().actualSource.endsWith('/battle.ogg'));
 });
@@ -214,7 +267,7 @@ test('returning lobby -> deck -> lobby restarts the lobby recording at zero exac
   assert(p.media[1].paused);
   p.scene('lobby');
   assert.equal(p.media[1].currentTime, 0, 'A real scene return rewinds before play');
-  await resolve(p.media[1]); p.advance(500);
+  await resolve(p.media[1]); p.advance(CROSSFADE_MS);
   const diagnostics = p.api.getDiagnostics().find(track => track.scene === 'lobby');
   assert.equal(diagnostics.restartCount, 2);
   assert.equal(diagnostics.lastStartPosition, 0);
@@ -251,7 +304,9 @@ test('rapid A -> B -> A waits for the audible old A tail before rewinding, with 
   const p = setup(); p.gesture(); await resolve(p.media[0]); p.advance(5000);
   p.scene('deck'); p.scene('login');
   assert.equal(p.media[0].currentTime, 5, 'The old audible tail is not abruptly rewound');
-  p.advance(180);
+  p.advance(CROSSFADE_MS - 1);
+  assert(p.media[0].currentTime > 5, 'The previous recording continues until the last fade millisecond');
+  p.advance(1);
   assert.equal(p.media[0].currentTime, 0, 'The replacement request starts at zero after the fade');
   await resolve(p.media[0]);
   await resolve(p.media[2]); // Previously pending deck is obsolete.
@@ -266,7 +321,7 @@ test('rapid A -> B -> A waits for the audible old A tail before rewinding, with 
 test('outgoing cleanup timers cannot stop a later return to that same track', async () => {
   const p = setup(); p.gesture(); await resolve(p.media[0]); p.advance(2000);
   p.scene('deck'); await resolve(p.media[2]); p.advance(50);
-  p.scene('login'); p.advance(190); await resolve(p.media[0]); p.advance(500);
+  p.scene('login'); p.advance(CROSSFADE_MS); await resolve(p.media[0]); p.advance(CROSSFADE_MS);
   assert.equal(p.media[0].paused, false);
   assert.equal(p.media.filter(audio => !audio.paused).length, 1);
   assert(p.media[0].currentTime < 1);
@@ -279,7 +334,7 @@ test('without WebAudio, the same local media sources fade and scene returns stil
   assert(p.media[3].volume > 0 && p.media[3].volume < .6);
   p.advance(500); assert(p.media[0].paused);
   p.scene('login'); assert.equal(p.media[0].currentTime, 0);
-  await resolve(p.media[0]); p.advance(500);
+  await resolve(p.media[0]); p.advance(FALLBACK_SETTLE_MS);
   assert.equal(p.media.filter(audio => !audio.paused).length, 1);
   assert.equal(p.contexts.length, 0);
 });
@@ -298,7 +353,7 @@ test('fallback volume edits during a transition use the new master level instead
 test('bounded transition diagnostics prove restart-at-zero and ignore same-role redraw requests', async () => {
   const p = setup(); p.scene('lobby'); p.gesture(); await resolve(p.media[1]); p.advance(7000);
   p.scene('deck'); await resolve(p.media[2]); p.advance(1000);
-  p.scene('lobby'); await resolve(p.media[1]); p.advance(500);
+  p.scene('lobby'); await resolve(p.media[1]); p.advance(CROSSFADE_MS);
   const before = p.api.getState().sceneTransitionCount;
   p.scene('lobby'); p.scene('lobby');
   assert.equal(p.api.getState().sceneTransitionCount, before);
@@ -314,7 +369,7 @@ test('bounded transition diagnostics prove restart-at-zero and ignore same-role 
   assert.notEqual(p.api.getTransitions()[0].event, 'tampered');
   for (let i = 0; i < 20; i++) {
     const scene = i % 2 ? 'lobby' : 'deck', audio = i % 2 ? p.media[1] : p.media[2];
-    p.scene(scene); await resolve(audio); p.advance(500);
+    p.scene(scene); await resolve(audio); p.advance(CROSSFADE_MS);
   }
   assert.equal(p.api.getTransitions().length, 24);
   assert.equal(p.contexts.length, 1);

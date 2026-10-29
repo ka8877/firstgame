@@ -1,0 +1,842 @@
+
+<html>
+<head>
+<title>▒ Fantasy masters ▒</title>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<link href="/Common/css/fan.css" rel="stylesheet" type="text/css">
+<script language="JavaScript">
+<!--
+	function searchGo()
+	{
+		if (sForm.searchword.value==""){
+			alert("검색할 단어를 입력 하세요.");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+// -->
+</script>
+</head> 
+<body bgcolor="#e7e7e6"  background="/FM_Image/FM_image/nfm/img/bg_helpdesk_01.jpg" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"  style="background-repeat:repeat-x;background-position:top left;">
+
+<table width="100%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top" background="/FM_Image/FM_image/nfm/img/bg_helpdesk_00.jpg" style="background-repeat:no-repeat;background-position:top center;">
+			<table width="1006" height="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr> 
+					<td height="240" colspan="2" align="right" valign="top">
+						
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<link rel="shortcut icon" type="image/x-icon" href="/FM_Image/FM_image/NFM/img/fm.ico">
+<script language="javascript" src="/common/js/InsertObject.js"></script>
+<script type="text/javascript" src="/common/js/jquery-1.6.4.min.js"></script>
+<style type="text/css">
+body{margin:0;}
+.Gnb_wrap { margin:0 auto; position:relative; width:996px;font-family: "돋움" Times New Roman; font-size:11px; color:#c34a01; -webkit-text-size-adjust:none; top:0px; z-index:3;}
+.Gnb_logo { position:absolute;left:381px;top:21px;}
+.Gnb_sub1 {	position:absolute;left:96px;top:45px;width:90px; }
+.Gnb_sub2 {	position:absolute;left:231px;top:45px;width:90px; }
+.Gnb_sub3 {	position:absolute;left:690px;top:45px;width:90px; }
+.Gnb_sub4 {	position:absolute;left:832px;top:45px;width:90px; }
+.Gnb_sublist { margin:0; padding:0; }
+.Gnb_submenu { display:block; list-style:none; text-align:left; line-height:20px; }
+.Gnb_submenu > a {text-decoration: none; color: #c097b4;background-image:url(/common/menu/img/ar_off.gif);background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+.Gnb_submenu > a:hover {text-decoration:none; color:#f66a9f;background-image:url(/common/menu/img/ar_on.gif); background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+.small2 {
+	font-family: "돋움";
+	font-size: 8.3pt;
+	color: #a16072;
+}
+</style>
+<script type="text/javascript">
+    $(function () {
+        // reck 테두리 제거
+        $("#Maaaaaaaap > area").attr("onfocus", "this.blur()");
+
+        // 메인진입시 보조 메뉴 숨김
+        $(".Gnb_sublist").hide();
+        $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+        $(".Gnb_wrap").attr("style", "top:0px");
+
+        // 메뉴 마우스 오버
+        $(".Gnb_wrap").bind("mouseover", function () {
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+            $(".Gnb_sublist").show();
+            $(".Gnb_wrap").attr("style", "top:0px");
+        });
+
+        // 메뉴 마우스 아웃
+        $(".Gnb_wrap").bind("mouseout", function () {
+            $(".Gnb_sublist").hide();
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            $(".Gnb_wrap").attr("style", "top:0px");
+        });
+
+        // ie 8이하 코드 ( 안넣으면 디자인 틀어짐 )
+        if (navigator.userAgent.indexOf('Trident/4.0') > -1 || navigator.userAgent.indexOf('Trident/5.0') > -1 || navigator.userAgent.indexOf('Trident/6.0') > -1) {
+            $(".Gnb_wrap").attr("style", "top:0px");
+
+            // 메뉴 마우스 오버
+            $(".Gnb_wrap").bind("mouseover", function () {
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+                $(".Gnb_sublist").show();
+            });
+
+            // 메뉴 마우스 아웃
+            $(".Gnb_wrap").bind("mouseout", function () {
+                $(".Gnb_sublist").hide();
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            });
+
+            $(".Gnb_submenu > a").css("color", "#c097b4");
+            $(".Gnb_submenu > a").mouseenter(function () {
+                $(this).css("color", "#f66a9f");
+            });
+
+            $(".Gnb_submenu > a").mouseleave(function () {
+                $(this).css("color", "#c097b4");
+            });
+        }
+
+        // 사이드 바
+        var $doc = $(document);
+        var position = 0;
+        var top = $doc.scrollTop(); //현재 스크롤바 위치  
+        var screenSize = 0;        // 화면크기  
+        var halfScreenSize = 0;    // 화면의 반  
+
+        /*사용자 설정 값 시작*/
+        var pageWidth = 1000; // 페이지 폭, 단위:px  
+        var leftOffet = 510;  // 중앙에서의 폭(왼쪽 -, 오른쪽 +), 단위:px  
+        var leftMargin = 1020; // 페이지 폭보다 화면이 작을때 옵셋, 단위:px, leftOffet과 pageWidth의 반만큼 차이가 난다.  
+        var speed = 1500;     // 따라다닐 속도 : "slow", "normal", or "fast" or numeric(단위:msec)  
+        var easing = 'swing'; // 따라다니는 방법 기본 두가지 linear, swing  
+        var $layer = $('#floating'); // 레이어 셀렉팅  
+        var layerTopOffset = 300;   // 레이어 높이 상한선, 단위:px  
+        $layer.css('z-index', 10);   // 레이어 z-인덱스  
+        /*사용자 설정 값 끝*/
+
+        //좌우 값을 설정하기 위한 함수  
+        function resetXPosition() {
+            $screenSize = $('body').width(); // 화면크기  
+            halfScreenSize = $screenSize / 2; // 화면의 반  
+            xPosition = halfScreenSize + leftOffet;
+            if ($screenSize < pageWidth)
+                xPosition = leftMargin;
+            $layer.css('left', xPosition);
+        }
+
+        // 스크롤 바를 내린 상태에서 리프레시 했을 경우를 위해  
+        if (top > 0)
+            $doc.scrollTop(layerTopOffset + top);
+        else
+            $doc.scrollTop(0);
+
+        // 최초 레이어가 있을 자리 세팅  
+        $layer.css('top', layerTopOffset);
+        resetXPosition();
+
+        //윈도우 크기 변경 이벤트가 발생하면  
+        $(window).resize(resetXPosition);
+
+        //스크롤이벤트가 발생하면  
+        $(window).scroll(function () {
+            yPosition = $doc.scrollTop() + layerTopOffset;
+            $layer.animate({ "top": yPosition }, { duration: speed, easing: easing, queue: false });
+        });
+        // 사이드 바
+
+    });
+</script>
+<div class="Gnb_wrap">
+    <div id="Gnb_option">
+        <img src="/common/menu/img/nav_back_on.png" border="0" usemap="#Maaaaaaaap"/>
+        <map name="Maaaaaaaap" id="Maaaaaaaap">
+            <area shape="rect" coords="360,8,663,151" href="/default.asp" alt="로고"/>
+            <area shape="rect" coords="97,8,181,36" href="/FMNews/Notice/list.asp?bbsid=1" alt="판마소식" />
+            <area shape="rect" coords="242,7,322,34" href="/Community/freeBoard/list.asp" alt="커뮤니티" />
+            <area shape="rect" coords="711,8,763,34" href="/market/cardmarket/list.asp" alt="상점" />
+            <area shape="rect" coords="839,8,917,34" href="/market/booster/list.asp?list_mode=0" alt="콜렉팅" />
+        </map>
+    </div>
+    <div class="Gnb_sub1">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/FMNews/Notice/list.asp?bbsid=1">새소식</a></li>
+            <li class="Gnb_submenu"><a href="/FMNews/EventBoard/list.asp">이벤트</a></li>
+            <li class="Gnb_submenu"><a href="/Download/download.asp">다운로드</a></li>
+            <li class="Gnb_submenu"><a href="/HelpDesk/FAQ_view.asp?faqNo=732">게임가이드</a></li>
+            <li class="Gnb_submenu"><a href="/Hall/CarToon/list.asp">판마카툰</a></li>
+            <!--<li class="Gnb_submenu"><a href="/HelpDesk/list.asp">고객센터</a></li>-->
+        </ul>
+    </div>
+    <div class="Gnb_sub2">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Community/freeBoard/list.asp">자유게시판</a></li>
+            <li class="Gnb_submenu"><a href="/Community/NewThemeDeck/list.asp">덱게시판</a></li>
+            <li class="Gnb_submenu"><a href="/Community/ScreenShot/list.asp">스크린샷</a></li>
+            <li class="Gnb_submenu"><a href="/Guild/Ranking.asp">길드</a></li>
+            <li class="Gnb_submenu"><a href="/Hall/Ranking/p_ranking.asp">명예의전당</a></li>
+        </ul>
+    </div>
+    <div class="Gnb_sub3">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Market/CardMarket/list.asp">카드상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/PointMarket/list.asp">마일리지상점</a></li>
+            <li class="Gnb_submenu"><a href="/Event/Event238/Event238.asp">힐링상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/DeckStore/decklist.asp">덱상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/SkinShop/List.asp">스페셜상점</a></li>
+        </ul>
+    </div>
+    <div class="Gnb_sub4">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Market/Booster/list.asp?list_mode=0">부스터</a></li>
+            <li class="Gnb_submenu"><a href="/Market/ChangeCard/Default.asp">카드변환</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Album/list.asp">앨범</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Upbook/Default.asp">강화북</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Trade/real_img.asp">트레이드</a></li>
+        </ul>
+    </div>
+</div>
+<!--
+<div id="Layer1" style="position:absolute; width=1006; height=240; z-index:2; top:0px; left:50%; margin-left:-503px">
+		<script language="javascript">
+		    InsertObject('<object type="application/x-shockwave-flash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  width="1006" height="240">' +
+						 '<param name="movie" value="/NFM/img/menu.swf">' +
+						 '<param name="wmode" value="transparent">' +
+						 '<embed src="/NFM/img/menu.swf" quality="high" width="1006" height="240" wmode="transparent"></embed>' +
+						 '</object>' ) ;				
+		</script>
+</div>
+-->
+<!--
+<div id="Layer2" style="position:absolute; top:0px; left:59%; z-index:2; padding: 55 0 0 0">
+	<script type="text/javascript" language="javascript">
+	    InsertObject('<object type="application/x-shockwave-flash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="280" height="170">' +
+					 '<param name="movie" value="/img/flash/1220.swf">' +
+					 '<param name="wmode" value="transparent">' +
+					 '<embed src="/img/flash/1220.swf" quality="high" width="280" height="170" wmode="transparent"></embed>' +
+					 '</object>' ) ;				
+	</script>
+</div>
+-->
+
+<!-- 사이드 바 -->
+<div id="floating" style="position:absolute;">
+	<!--<table width="531" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+			<td colspan="2" >
+                <table width="531" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><a href="/helpdesk/faq_view.asp?faqno=1431" onfocus='blur();'><img src="/FM_Image/FM_image/img/2015/popup/0204/pop_01.jpg" width="265" height="183" border="0" style="cursor:hand"></a></td>
+                        <td><a href="/event/event238/event2.asp" onfocus='blur();'><img src="/FM_Image/FM_image/img/2015/popup/0204/pop_02.jpg" width="266" height="183" border="0" style="cursor:hand"></a></td>
+                    </tr>
+                </table>
+            </td>
+		</tr>
+		<tr>
+		    <td width="478"><img src="/FM_Image/FM_image/img/2015/popup/0204/pop_03.jpg" width="478" height="19" border="0" style="cursor:hand" onclick="javascript:notice_closePop();"></td>
+		    <td width="53"><img src="/FM_Image/FM_image/img/2015/popup/0204/pop_04.jpg" width="53" height="19" border="0" style="cursor:hand" onclick="javascript:closePop();"></td>
+		</tr>
+	</table>-->
+    <!--<a href="http://www.fm2tcg.com/Index.aspx" onfocus='blur();'><img src="/FM_Image/FM_image/img/2016/popup/0204/fm2.png" border="0" style="cursor:hand"></a>-->
+</div>
+<!-- 사이드 바 -->
+</body>
+</html>
+
+					</td>
+				</tr>
+				<tr> 
+					<td width="212" align="right" valign="top" background="/FM_Image/FM_image/nfm/img/bg_common_03.jpg">
+					<!--Left Menu : Start-->
+						<table width="212" height="100%" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_image/NFM/img/bg_helpdesk_02.jpg" style="background-repeat:repeat-x;background-position:top left;">
+	<tr> 
+		<td height="110" align="center" valign="bottom" style="padding-left:3">
+			<iframe src="/Common/Menu/login_menu.asp?loginURL=http%3A%2F%2Fwww%2Efantasymasters%2Eco%2Ekr%2FHelpDesk%2FFAQ%5FView%2Easp%3FFaqNo%3D1059&TopNavigation=8" frameborder="0" height="102" width="189" scrolling=no></iframe>
+		</td>
+	</tr>
+	<form name="menuform">
+	<tr> 
+		<td align="center" valign="top" style="padding-left:3">
+			<table width="189" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="left" valign="top">
+                        <img src="/FM_Image/FM_image/NFM/Menu/Mhelp_00.jpg" width="189" height="60">
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/helpdesk/list.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_01.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg">-->
+                            <img  name="submenu" id="submenu01" src="/FM_Image/FM_image/NFM/Menu/Mhelp_01.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/helpdesk/blockinfo.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_02.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg">-->
+                            <img  name="submenu" id="submenu02" src="/FM_Image/FM_image/NFM/Menu/Mhelp_02.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/helpdesk/contract.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_03.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg">-->
+                            <img  name="submenu" id="submenu03" src="/FM_Image/FM_image/NFM/Menu/Mhelp_03.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/helpdesk/helpinfo1.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_04.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg">-->
+                            <img  name="submenu" id="submenu04" src="/FM_Image/FM_image/NFM/Menu/Mhelp_04.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/helpdesk/helpwrite.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_05.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg">-->
+                            <img  name="submenu" id="submenu05" src="/FM_Image/FM_image/NFM/Menu/Mhelp_05.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/Mypage/helpdesk/helplist.asp" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_06.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg">-->
+                            <img  name="submenu" id="submenu06" src="/FM_Image/FM_image/NFM/Menu/Mhelp_06.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+                        <a href="/HelpDesk/FAQ_view.asp?category=106&Nowpage=1&faqNo=966" onfocus='blur()'>
+                            <!--<img  name="submenu" src="/FM_Image/FM_image/NFM/Menu/Mhelp_07.jpg" width="189" height="28" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg">-->
+                            <img  name="submenu" id="submenu07" src="/FM_Image/FM_image/NFM/Menu/Mhelp_07.jpg" width="189" height="28" border="0">
+                        </a>
+                    </td>
+				</tr>
+				<tr>
+					<td height="3" align="left" valign="top">
+                        <img src="/FM_Image/FM_image/NFM/Menu/Menu_end.jpg" width="189" height="3">
+                    </td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	</form>
+    <tr>
+        <td style="height:100%;position:fixed"></td>
+    </tr>
+	<!--<tr> 
+		<td height="27" background="/FM_Image/FM_image/NFM/img/bg_common_02.jpg">&nbsp;</td>
+	</tr>-->
+</table>
+<script type="text/javascript">
+    var secondMenu=Number(6);
+    switch(secondMenu){
+        case 0 : $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg"); break;
+        case 1 : $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg"); break;
+        case 2 : $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg"); break;
+        case 3 : $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg"); break;
+        case 4 : $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg"); break;
+        case 5 : $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg"); break;
+        case 6 : $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg"); break;    
+//		case 0 : document.menuform.elements.submenu[0].src="/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg"; break;
+//		case 1 : document.menuform.elements.submenu[1].src="/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg"; break;
+//		case 2 : document.menuform.elements.submenu[2].src="/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg"; break;
+//		case 3 : document.menuform.elements.submenu[3].src="/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg"; break;
+//		case 4 : document.menuform.elements.submenu[4].src="/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg"; break;
+//		case 5 : document.menuform.elements.submenu[5].src="/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg"; break;
+//		case 6 : document.menuform.elements.submenu[6].src="/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg"; break;	
+		default : break;
+	}
+
+    $(function() {
+        $("#submenu01").mouseover(function(){
+            if (secondMenu == 0) return;
+            $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01_o.jpg");
+        });
+        $("#submenu01").mouseout(function(){
+            if (secondMenu == 0) return;
+            $("#submenu01").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_01.jpg");
+        });
+
+        $("#submenu02").mouseover(function(){
+            if (secondMenu == 1) return;
+            $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02_o.jpg");
+        });
+        $("#submenu02").mouseout(function(){
+            if (secondMenu == 1) return;
+            $("#submenu02").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_02.jpg");
+        });
+
+        $("#submenu03").mouseover(function(){
+            if (secondMenu == 2) return;
+            $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03_o.jpg");
+        });
+        $("#submenu03").mouseout(function(){
+            if (secondMenu == 2) return;
+            $("#submenu03").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_03.jpg");
+        });
+
+        $("#submenu04").mouseover(function(){
+            if (secondMenu == 3) return;
+            $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04_o.jpg");
+        });
+        $("#submenu04").mouseout(function(){
+            if (secondMenu == 3) return;
+            $("#submenu04").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_04.jpg");
+        });
+
+        $("#submenu05").mouseover(function(){
+            if (secondMenu == 4) return;
+            $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05_o.jpg");
+        });
+        $("#submenu05").mouseout(function(){
+            if (secondMenu == 4) return;
+            $("#submenu05").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_05.jpg");
+        });
+
+        $("#submenu06").mouseover(function(){
+            if (secondMenu == 5) return;
+            $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06_o.jpg");
+        });
+        $("#submenu06").mouseout(function(){
+            if (secondMenu == 5) return;
+            $("#submenu06").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_06.jpg");
+        });
+
+        $("#submenu07").mouseover(function(){
+            if (secondMenu == 6) return;
+            $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07_o.jpg");
+        });
+        $("#submenu07").mouseout(function(){
+            if (secondMenu == 6) return;
+            $("#submenu07").attr("src", "/FM_Image/FM_image/NFM/Menu/Mhelp_07.jpg");
+        });
+    });
+</script>
+					<!--Left Menu : End-->
+					</td>
+					<td align="left" valign="top">
+						<table width="794" height="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr align="right" valign="top"> 
+								<td height="50" colspan="4"  style="padding:5 81 0 0"> 
+								<!--Right Menu : Start-->
+									<table width="310" border="0" cellspacing="0" cellpadding="0">
+	<tr><td height="2" colspan="7"></td></tr>
+	<tr> 
+		<td width="72">
+            <a href="/event/allsupport/event.asp" onfocus='blur()'>
+                <!--<img src="/FM_Image/FM_image/NFM/img/btn_quick_05.jpg" name="Image19" width="72" height="13" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/img/btn_quick_05_o.jpg">-->
+                <img src="/FM_Image/FM_image/NFM/img/btn_quick_05.jpg" name="Image19" id="Image19" width="72" height="13" border="0">
+            </a>
+        </td>
+		<td width="24"></td>
+		<td width="58">
+            <a href="/helpDesk/FAQ_view.asp?faqNo=966" onfocus='blur()'>
+                <!--<img src="/FM_Image/FM_image/NFM/img/btn_quick_02.jpg" name="Image20" width="58" height="13" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/img/btn_quick_02_o.jpg">-->
+                <img src="/FM_Image/FM_image/NFM/img/btn_quick_02.jpg" name="Image20" id="Image20" width="58" height="13" border="0">
+            </a>
+        </td>
+		<td width="26"></td>
+		<td width="52">
+            <a href="/HelpDesk/list.asp" onfocus='blur()'>
+                <!--<img src="/FM_Image/FM_image/NFM/img/btn_quick_03.jpg" name="Image21" width="52" height="13" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/img/btn_quick_03_o.jpg">-->
+                <img src="/FM_Image/FM_image/NFM/img/btn_quick_03.jpg" name="Image21" id="Image21" width="52" height="13" border="0">
+            </a>
+        </td>
+		<td width="26"></td>
+		<td width="52">
+            <a href="/Mypage/charge_info.asp" onfocus='blur()'>
+                <!--<img src="/FM_Image/FM_image/NFM/img/btn_quick_04.jpg" name="Image22" width="52" height="13" border="0" onMouseOver='this.org=this.src;this.src=this.onimg' onMouseOut='this.src=this.org' onimg="/FM_Image/FM_image/NFM/img/btn_quick_04_o.jpg">-->
+                <img src="/FM_Image/FM_image/NFM/img/btn_quick_04.jpg" name="Image22" id="Image22" width="52" height="13" border="0">
+            </a>
+        </td>
+	</tr>
+</table>
+
+
+<script language="javascript">
+    $(function() {
+            $("#Image19").mouseover(function() {
+                $("#Image19").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_05_o.jpg");
+            });
+
+            $("#Image19").mouseout(function () {
+                $("#Image19").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_05.jpg");
+            });
+
+            $("#Image20").mouseover(function () {
+                $("#Image20").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_02_o.jpg");
+            });
+
+            $("#Image20").mouseout(function () {
+                $("#Image20").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_02.jpg");
+            });
+
+            $("#Image21").mouseover(function () {
+                $("#Image21").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_03_o.jpg");
+            });
+
+            $("#Image21").mouseout(function () {
+                $("#Image21").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_03.jpg");
+            });
+
+            $("#Image22").mouseover(function () {
+                $("#Image22").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_04_o.jpg");
+            });
+
+            $("#Image22").mouseout(function () {
+                $("#Image22").attr("src", "/FM_Image/FM_image/NFM/img/btn_quick_04.jpg");
+            });
+    });
+</script>
+
+								<!--Right Menu : End-->
+								</td>
+							</tr>
+							<tr> 
+								<td width="18" bgcolor="#FFFFFF">&nbsp;</td>
+								<td width="750" align="left" valign="top" bgcolor="#FFFFFF">
+									<table width="750" border="0" cellspacing="0" cellpadding="0">
+										<tr> 
+											<td align="left" valign="top"><img src="/FM_Image/FM_image/nfm/Title/title_helpdesk_01.jpg" width="750" height="30"></td>
+										</tr>
+										<tr> 
+											<td height="15">&nbsp;</td>
+										</tr>
+										<tr> 
+											<td align="center" valign="top" height="500">  
+											<!--Contents : Start -->
+												<table width="710" cellpadding="0" cellspacing="0" border="0">
+													<tr><td height="30" colspan="2" class="fan"><img src="/FM_Image/FM_image/fm/Newimg/help_title_02.gif" width="66" height="17"></td></td></tr>
+													<tr><td height="2" colspan="2" bgcolor="#02ACD0"></td></tr>
+													<Form name="sForm" action="./searchView.asp" method="get" onsubmit="return searchGo();">
+													<tr> 
+														<td width="410" height="87" align="right" bgcolor="#EFEFEF">
+															<table width="380" border="0" cellpadding="0" cellspacing="0">
+																<tr> 
+																	<td height="30" colspan="3" class="fan"><strong>질문내용을 입력하시면 관련된 답변을 찾아 드립니다. </strong></td>
+														        </tr>
+														        <tr> 
+																	<td width="100"><img src="/FM_Image/FM_image/fm/Newimg/image_search.gif" width="58" height="37"></td>
+																	<td width="280">
+																		<input type="text" name="searchword" size="16" maxlength="50" style="font-size:9pt">
+																		<input type="image" src="/FM_Image/FM_image/fm/Newimg/btn_search.gif" width="48" height="20" align="absmiddle" id=image1 name=image1>
+																	</td>
+														        </tr>
+															</table>
+														</td>
+														<td width="300" valign="bottom" bgcolor="#EFEFEF" align="right"><!--<a href="/Community/QnA/list.asp" onfocus='blur()'><img src="/FM_Image/FM_image/fm/Newimg/image_q&a.gif" width="216" height="70" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;--></td>
+													</tr>	
+													</form>
+													<tr><td height="20" colspan="2"></td></tr>
+													<tr><td height="30" colspan="2" class="fan"><img src="/FM_Image/FM_image/fm/Newimg/help_title_09.gif" width="82" height="17"></td></tr>	
+													<tr> 
+														<td height="60" align="center" colspan="2">
+															<table width="710" border="0" cellpadding="0" cellspacing="0">
+																<tr>
+																	<td width="6"><img src="/FM_Image/FM_image/fm/Newimg/bg_main4_l.gif" width="6" height="51"></td>
+																	<td bgcolor="#EFEFEF">
+																		<table width="698" border="0" cellpadding="0" cellspacing="0">
+																			<tr>
+																				<td width="58"></td>
+																				<td width="160" height="26" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=101">설치/실행</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=102">개인계정</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=103">게임관련</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=104">요금결제</a></td>
+																			</tr>
+																			<tr>
+																				<td width="58"></td>
+																				<td width="160" height="26" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=105">신고관련</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=106">홈페이지</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=107">서비스/운영</a></td>
+																				<td width="160" class="fan">&nbsp;&nbsp;&nbsp;<img src="/FM_Image/FM_image/fm/Newimg/jum.gif" width="4" height="5">&nbsp;<a href="/HelpDesk/FAQ_list.asp?category=108">오류메시지</a></td>
+																			</tr>
+																		</table>
+																	</td>
+																	<td width="6"><img src="/FM_Image/FM_image/fm/Newimg/bg_main4_r.gif" width="6" height="51"></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr><td height="20" colspan="2"></td></tr>
+													
+													<tr> 
+														<td colspan="2">	
+															<table width="710" border="0" cellpadding="0" cellspacing="0">
+																<tr bgcolor="#A3E0ED"> 
+																	<td width="45" height="25"><img src="/FM_Image/FM_image/fm/Newimg/image_q.gif" width="35" height="25"></td>
+																	<td width="665" class="fan"><b>초보자가이드</b></td>
+																</tr>
+																<tr> 
+																    <td height="5" colspan="2" valign="top"></td>
+																</tr>
+																<tr> 
+																    <td height="25" valign="top"><img src="/FM_Image/FM_image/fm/Newimg/image_a.gif" width="35" height="23"></td>
+																     <td class="fan"><center><table width="710" border="0" align=center>
+       
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=727"><img 
+src="/FM_image/FM_image//nfm/menu/manual1.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=734"><img 
+src="/FM_image/FM_image/nfm/menu/manual2.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=722"><img 
+src="/FM_image/FM_image/nfm/menu/manual3.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=741"><img 
+src="/FM_image/FM_image/nfm/menu/manual4.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=740"><img 
+src="/FM_image/FM_image/nfm/menu/manual5.jpg" 
+border="0"></a>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=966"><img 
+src="/FM_image/FM_image/nfm/menu/manual6.jpg" 
+border="0"></a>
+        <a 
+href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=736"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata1.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=735"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata2.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=739"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata3.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=738"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata4.jpg" 
+border="0"></a></td>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=737"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata5.jpg" 
+border="0"></a>
+<a href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=965"><img 
+src="/FM_image/FM_image/nfm/menu/fmdata6.jpg" 
+border="0"></a>
+</table></center><br>
+
+<br><br>
+
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404171547.gif">
+<br>
+<a href="http://afreeca.com/kingseizi">
+<img src="http://www.afreeca.com/images/mybs/logo_afreeca.png" border="0"></a>
+<font color="#282828"><b> < 남만왕비둘기(kingseizi)님의 튜토리얼 투고 ></b></font>
+<br>
+: [PD대정령]님 방송의 매니져 활동을 하고 계신 남만왕비둘기(kingseizi)님이 제작하신 
+초보자가이드 영상입니다. 정성이 가득 담긴 영상이므로 보다 많은 분들이 확인할 수 있도록 
+초보자가이드에 링크를 연결하였습니다.
+<br><br>
+<a href="http://www.youtube.com/watch?v=Lw-1BGche3Y&list=PLqYxws-ffCwqXcAqXpxdXqyHGpuAv98-
+c">
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404091019.jpg" 
+border="0"></a>
+<br>
+※ 상단의 이미지를 클릭하면 남만왕비둘기(kingseizi)님이 투고하신 영상 목록으로 이동합니다.
+
+<br><br>
+
+<a href="http://www.youtube.com/watch?v=Lw-1BGche3Y&list=PLqYxws-ffCwqXcAqXpxdXqyHGpuAv98-
+c"><font color="#282828"><b>☞ 초보입문 영상보기</b></font></a>
+<br>
+<a href="http://www.youtube.com/watch?v=A2o5OIcrQ_E&list=PLqYxws-ffCwqXcAqXpxdXqyHGpuAv98-
+c"><font color="#282828"><b>☞ 카드설명 영상보기</b></font></a>
+<br>
+<a href="http://www.youtube.com/watch?v=AmJIaKZ2CoA&list=PLqYxws-ffCwqXcAqXpxdXqyHGpuAv98-
+c"><font color="#282828"><b>☞ 신규유저팁1 영상보기</b></font></a>
+<br>
+<a href="http://www.youtube.com/watch?v=Gf6B5Qu3S3I&list=PLqYxws-ffCwqXcAqXpxdXqyHGpuAv98-
+c"><font color="#282828"><b>☞ 신규유저팁2 영상보기</b></font></a>
+
+<br><br><br>
+
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404232131.jpg">
+
+<img 
+src="/FM_image/FM_image/fm/images/img_guide_01.gif" width="710" height="230" 
+border="0" usemap="#Maptguide">
+
+<map name="Maptguide">
+<area shape="rect" coords="48,169,228,188" 
+href="http://www.fantasymasters.co.kr/HelpDesk/FAQ_view.asp?
+category=106&Nowpage=1&faqNo=733" target="_self" onfocus='blur()'></map>
+
+<br>
+
+<img src="/FM_image/FM_image/fm/images/img_guide_02.gif" width="710" 
+height="300" border="0" usemap="#Mapstart">
+
+
+<map name="Mapstart">
+<area shape="rect" coords="67,232,178,249" 
+href="http://www.fantasymasters.co.kr/Download/download.asp" onfocus='blur()'>
+<area shape="rect" coords="208,233,319,250" 
+href="http://www.fantasymasters.co.kr/member/register.asp" onfocus='blur()'>
+</map>
+
+
+<br><br>
+
+<font color="#282828"><b>
+① 판타지마스터즈에 오신 것을 환영합니다! 게임을 즐기려면 로그인을 해야겠죠?
+</b></font>
+<br>
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404102359.jpg">
+→
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404211847.jpg">
+
+<br><br>
+
+◇ 아이디 : 가입하실 때 적은 아이디입니다. 영문자가 아닌 한글로도 이용이 가능하며 변경할 
+수 없니다.
+<br>
+◇ 비밀번호 : 가입하실 때 적은 비밀번호입니다. 내정보변경에서 변경하실 수 있습니다.
+<br>
+◇ 구매인증번호 : 아이디 보호를 위한 제2의 비밀번호입니다. 2008년 이전 가입자이고 변경한 
+적이 없다면 비밀번호와 동일합니다.
+
+<br><br>
+
+<font color="#282828"><b>
+② 이제 게임을 설치해봅시다. 로그인 창 바로 밑에 위치한 다운 버튼을 눌러주세요.
+</b></font>
+<br>
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404220012.jpg">
+<img src="/FM_image/FM_image/fm/Newimg/bt_download_01_new.gif">
+<br>
+: [게임가이드] - [다운로드]에서 설치 파일을 받아서 인스톨한 후 바탕화면의 [Fantasy 
+Masters 바로가기]를 실행하면 됩니다.
+
+<br>
+
+[비인스톨 버전]을 받아서 Game.exe를 실행할 수도 있습니다. 만약 게임 실행에 문제가 
+있으신 분들은 
+<a href="http://www.fantasymasters.co.kr/helpDesk/FAQ_view.asp?faqNo=1312">
+<font color="red"><b><u>여기</u></b></font></a>를 누르시길 바랍니다.
+
+<br><br>
+
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201404220013.jpg">
+<img src="/FM_image/FM_image/fm/Newimg/bt_download_02.gif">
+
+<br>
+
+: 최초 실행시 <font color="red"><b>
+클라이언트를 다운받아 수동으로 설치한 후 [GAMESTART]를 눌러주세요.</b></font>
+ 설치되지 않은 상태에서 [GAMESTART]를 누르면 [FantasyMasters.exe 다운로드 중]에서 
+웹런처가 멈춰서 [Alt+F4]로 창을 꺼야 합니다.
+<br>
+※ Active-X가 설치되지 않는 경우에는 
+<a href="http://www.fantasymasters.co.kr/helpDesk/FAQ_view.asp?faqNo=1312">
+<font color="red"><b><u>여기</u></b></font></a>를 눌러서 다운로드 
+페이지의 [FMWebLauncher 파일 받기]을 인스톨하시면 됩니다.
+
+
+<br><br>
+<font color="#282828"><b>
+③ 게임에 접속하면 아래와 같은 창이 표시될 것입니다. [도와줘요!] 클릭 후 [튜토리얼]을 
+진행해보세요.</b></font>
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201509181816.jpg">
+<img src="http://www.fantasymasters.co.kr/Uploads/GuildFile/ScreenShot/201509181815.jpg">
+
+<br><br>
+
+<img src="/FM_image/FM_image/fm/images/img_guide_04.gif">
+<img src="/FM_image/FM_image/fm/images/img_guide_05.gif">
+<img src="/FM_image/FM_image/fm/images/img_guide_06.gif">
+
+<br>
+
+<img src="/FM_image/FM_image/fm/images/img_guide_09.gif">
+<img src="/FM_image/FM_image/fm/images/img_guide_10.gif">
+<img src="/FM_image/FM_image/fm/images/img_guide_11.gif"></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2" align="right"><a href="./list.asp"><img src="/FM_Image/FM_image/fm/Newimg/btn_list.gif" width="48" height="20" border="0"></a></td>
+													</tr>																																															    									
+												</table>
+											<!--Contents : End -->
+											</td>
+										</tr>
+										<tr><td height="15"></td></tr>
+									</table>
+								</td>
+								<td align="center" valign="top" background="/FM_Image/FM_image/nfm/img/bg_common_01.gif" bgcolor="#FFFFFF">
+									<table width="26" border="0" cellspacing="0" cellpadding="0">
+										<tr> 
+											<td height="240" background="/FM_Image/FM_image/nfm/img/bg_helpdesk_04.jpg">&nbsp;</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr> 
+								<td height="27" colspan="3" background="/FM_Image/FM_image/nfm/img/bg_common_01.jpg">&nbsp;</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr> 
+		<td height="145" align="center" valign="top" background="/FM_Image/FM_image/nfm/img/bg_copyright.jpg">
+			<script language="javascript" src="/common/js/common.js"></script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="145" align="center" valign="top" background="/FM_Image/FM_image/nfm/img//bg_copyright.jpg">
+			<table width="1000" border="0" cellspacing="0" cellpadding="0">
+				<div>
+                    <table align="center">
+                        <tr>
+                            <td colspan="3"><img src="/FM_Image/FM_image/nfm/img/foot.png" alt="푸터" border="0" usemap="#foot" /></td>
+                        </tr>
+                    </table>
+                    <map name="foot" id="Map1">
+                        <area shape="rect" coords="25,13,83,86" href="http://www.zeonix.co.kr/" alt="제오닉스" target="_blank" />
+                        <area shape="rect" coords="100,16,147,31" href="/HelpDesk/list.asp" alt="고객센터" target="_blank" />
+                        <area shape="rect" coords="151,16,192,31" href="/helpdesk/contract.asp" alt="이용약관" target="_blank"/>
+                        <area shape="rect" coords="196,16,270,31" href="/helpDesk/policy.asp" alt="개인정보 취급방침" target="_blank"/>
+                        <area shape="rect" coords="274,16,337,31" href="/helpDesk/FAQ_view.asp?faqNo=1505" alt="게임이용등급" />
+                        <area shape="rect" coords="340,16,385,31" href="/helpDesk/FAQ_view.asp?faqNo=966" alt="사이트맵" />
+                        <area shape="rect" coords="730,38,805,86" href="http://www.fm2tcg.com/Index.aspx" target="_blank" alt="판타지마스터즈2" />
+                        <area shape="rect" coords="806,40,880,86" href="http://www.sword-girls.com/default.aspx" target="_blank" alt="소드걸스" />
+                        <area shape="rect" coords="882,38,954,85" href="http://www.schmiddiva.co.kr/default.asp" target="_blank" alt="슈미드디바" />
+                    </map>
+                </div>
+			</table>
+		</td>
+	</tr>
+</table>
+
+		</td>
+	</tr>
+</table>
+</body>
+</html>

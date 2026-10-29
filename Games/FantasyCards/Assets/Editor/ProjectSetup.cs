@@ -280,6 +280,17 @@ namespace FirstGame.Editor
                     AssetDatabase.CreateAsset(asset, path);
                 }
                 asset.SetDefinition(definition);
+                if (definition.artResource.StartsWith("StreamingCards/", StringComparison.Ordinal))
+                {
+                    string stream = StreamedCardPath(definition.artResource);
+                    if (!File.Exists(stream)) throw new InvalidOperationException("Missing streamed original card: " + stream);
+                    asset.streamedIllustration = stream.Substring("Assets/StreamingAssets/".Length);
+                    if (asset.illustration != null)
+                        throw new InvalidOperationException("An existing embedded print must not silently become streamed: " + definition.id);
+                    EditorUtility.SetDirty(asset);
+                    continue;
+                }
+                asset.streamedIllustration = "";
                 var texture = ImportIllustration("Assets/Resources/" + definition.artResource + ".png");
                 var rect = new Rect(0, 0, texture.width, texture.height);
                 if (asset.illustration == null || asset.illustration.texture != texture || asset.illustration.rect != rect)
@@ -306,6 +317,16 @@ namespace FirstGame.Editor
                 rules.contentVersion = FantasyCards.Core.CardCatalog.Version;
                 EditorUtility.SetDirty(rules);
             }
+        }
+
+        static string StreamedCardPath(string resource)
+        {
+            const string prefix = "StreamingCards/";
+            if (!resource.StartsWith(prefix, StringComparison.Ordinal)) throw new InvalidOperationException("Unexpected streamed card prefix.");
+            string name = resource.Substring(prefix.Length);
+            if (string.IsNullOrEmpty(name) || name.IndexOfAny(new[] {'/', '\\', ':'}) >= 0 || name.Contains(".."))
+                throw new InvalidOperationException("Unsafe streamed card filename.");
+            return "Assets/StreamingAssets/Cards/" + name + ".jpg";
         }
 
         static Texture2D ImportIllustration(string path)
@@ -354,16 +375,24 @@ namespace FirstGame.Editor
                     if (GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(transform.gameObject) != 0)
                         throw new InvalidOperationException("Missing script on " + transform.name);
             var cards = Resources.LoadAll<FantasyCards.Data.CardAsset>("Data/Cards");
-            if (cards.Length != FantasyCards.Core.CardCatalog.All.Length || cards.Any(card => card.illustration == null))
-                throw new InvalidOperationException("Each demo card must have its own authored asset and connected illustration.");
+            if (cards.Length != FantasyCards.Core.CardCatalog.All.Length)
+                throw new InvalidOperationException("Each playable card must have its own complete authored asset.");
             for (int i = 0; i < FantasyCards.Core.CardCatalog.All.Length; i++)
             {
                 var definition = FantasyCards.Core.CardCatalog.All[i];
                 var card = cards.Single(c => c.stableId == definition.id);
                 if (JsonUtility.ToJson(card.ToDefinition()) != JsonUtility.ToJson(definition))
                     throw new InvalidOperationException("Card authoring data differs from current content: " + definition.id);
+                if (definition.artResource.StartsWith("StreamingCards/", StringComparison.Ordinal))
+                {
+                    string stream = StreamedCardPath(definition.artResource);
+                    if (!File.Exists(stream) || new FileInfo(stream).Length == 0 ||
+                        card.streamedIllustration != stream.Substring("Assets/StreamingAssets/".Length) || card.illustration != null)
+                        throw new InvalidOperationException("Streamed original card binding differs: " + definition.id);
+                    continue;
+                }
                 var texture = Resources.Load<Texture2D>(definition.artResource);
-                if (texture == null || card.illustration.texture != texture)
+                if (texture == null || card.illustration == null || card.illustration.texture != texture)
                     throw new InvalidOperationException("Original card image is not connected: " + definition.id);
                 if (card.illustration.rect != new Rect(0, 0, texture.width, texture.height))
                     throw new InvalidOperationException("Original card image bounds changed: " + definition.id);

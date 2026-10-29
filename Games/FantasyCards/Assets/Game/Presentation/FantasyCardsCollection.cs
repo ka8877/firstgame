@@ -43,7 +43,7 @@ namespace FantasyCards.Presentation
 
         private void ShowCollection(bool edit)
         {
-            if (edit && !collectionEditorVisited) { collectionEditorVisited = true; collectionListView = true; collectionPage = 0; }
+            if (edit && !collectionEditorVisited) { collectionEditorVisited = true; collectionListView = false; collectionPage = 0; }
             battleScreen = false; redraw = () => ShowCollection(edit); Clear(); FmOriginalMusic.SetScene("deck"); Backdrop(true);
             bool small = canvas.pixelRect.height < 600;
             var cards = FilteredCards(); int pages = Mathf.Max(1, (cards.Length + CollectionPageSize - 1) / CollectionPageSize);
@@ -184,7 +184,7 @@ namespace FantasyCards.Presentation
             ReadableText(root, DetailedCardStats(card), .55f, .42f, .96f, .56f, 25, teal, TextAlignmentOptions.TopLeft);
             ScrollableCardText(CardAbilitySummary(card) + "\n" + card.text, .55f, .23f, .96f, .415f);
             Button(root, "돌아가기", .55f, .065f, .79f, .195f, back, gold, 27);
-            if (OriginalCardTexture(card) != null)
+            if (!string.IsNullOrEmpty(card.artResource))
                 Button(root, "크게 보기", .805f, .065f, .965f, .195f, () => ShowOriginalCard(card, back), slate, 24);
         }
 
@@ -213,22 +213,14 @@ namespace FantasyCards.Presentation
 
         private static Texture2D OriginalCardTexture(CardDefinition card)
         {
-            return Resources.Load<Texture2D>(card.artResource);
+            return FmStreamingCardArt.Peek(card.artResource);
         }
 
         private void ShowOriginalCard(CardDefinition card, Action back)
         {
             redraw = () => ShowOriginalCard(card, back); Clear(); Backdrop(true);
             Text(root, card.name + " · 원본 카드", .05f, .92f, .95f, .99f, 32, ivory, TextAlignmentOptions.Center);
-            var texture = OriginalCardTexture(card);
-            if (texture != null)
-            {
-                var holder = Panel(root, .025f, .15f, .975f, .915f, Color.clear);
-                var image = new GameObject("Original card image", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
-                var rect = (RectTransform)image.transform; rect.SetParent(holder, false); Anchor(rect, 0, 0, 1, 1);
-                image.texture = texture; image.raycastTarget = false;
-                var fit = image.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = (float)texture.width / texture.height;
-            }
+            ArcanaCardFace(root, card, .025f, .15f, .975f, .915f, ArcanaCardMode.Detail);
             Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .078f, .95f, .145f, 20, gold, TextAlignmentOptions.Center);
             Button(root, "능력 설명", .35f, .005f, .65f, .078f, () => ShowDetail(card, back), gold, 25);
         }

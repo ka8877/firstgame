@@ -28,8 +28,8 @@ namespace PathOfDawn.Presentation
             }
         }
         public string CurrentState => Actor ? Actor.CurrentState : "Idle";
-        public float WalkSpeed = 3.1f;
-        public float RunSpeed = 5.6f;
+        public float WalkSpeed = 2.2f;
+        public float RunSpeed = 4.2f;
         public float JumpSpeed = 8.2f;
         public float MinX = -33f;
         public float MaxX = 33f;
@@ -39,7 +39,7 @@ namespace PathOfDawn.Presentation
         CapsuleCollider2D capsule;
         readonly RaycastHit2D[] groundHits = new RaycastHit2D[8];
         bool acceptsInput = true, touchRun, jumpHeld;
-        float touchInput, desiredInput, jumpBuffer, coyote;
+        float touchInput, desiredInput, jumpBuffer, coyote, groundSlope;
 
         void Awake()
         {
@@ -94,7 +94,7 @@ namespace PathOfDawn.Presentation
             }
             desiredInput = acceptsInput ? Mathf.Clamp(keys + touchInput, -1, 1) : 0;
             if (Mathf.Abs(desiredInput) > .08f) Facing = desiredInput < 0 ? -1 : 1;
-            if (Actor) Actor.SetMotion(Velocity, Grounded, Facing);
+            if (Actor) { Actor.SetGroundSlope(groundSlope); Actor.SetMotion(Velocity, Grounded, Facing); }
         }
 
         void FixedUpdate()
@@ -104,13 +104,13 @@ namespace PathOfDawn.Presentation
             Grounded = false;
             for (int i = 0; i < count; i++)
                 if (groundHits[i].normal.y > .55f && groundHits[i].collider.attachedRigidbody != body)
-                { Grounded = true; break; }
+                { Grounded = true; groundSlope = -groundHits[i].normal.x / Mathf.Max(.1f, groundHits[i].normal.y); break; }
             coyote = Grounded ? .12f : Mathf.Max(0, coyote - Time.fixedDeltaTime);
             jumpBuffer = Mathf.Max(0, jumpBuffer - Time.fixedDeltaTime);
             bool run = touchRun || (Keyboard.current != null && (Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed));
             float target = desiredInput * (run ? RunSpeed : WalkSpeed);
             var velocity = body.linearVelocity;
-            float acceleration = Grounded ? (Mathf.Abs(desiredInput) > .01f ? 25 : 36) : 14;
+            float acceleration = Grounded ? (Mathf.Abs(desiredInput) > .01f ? 18 : 24) : 12;
             velocity.x = Mathf.MoveTowards(velocity.x, target, acceleration * Time.fixedDeltaTime);
             if (!acceptsInput) velocity.x = 0;
             if (acceptsInput && jumpBuffer > 0 && coyote > 0)

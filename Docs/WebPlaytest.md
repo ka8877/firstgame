@@ -1,8 +1,28 @@
 # 웹 체험판과 리마스터 배포
 
-## 현재 Gospel 2D Luminous 배포
+## Renewal 작업 상태
 
-현재 개정은 예수님의 길 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. 판타지마스터즈의 현재 공개 `fm-restoration-2026-10-27` 파일과 미리보기는 바이트 그대로 보존한다. 이번에는 Gospel만 새 네이티브·Windows/Web·Desktop720/Mobile844 검사를 진행하며 실제 완료 상태는 [GospelLuminousValidation](GospelLuminousValidation.md)을 따른다.
+새 개정은 두 게임의 `fm-renewal-2026-10-29` / `gospel-renewal-2026-10-29`다. 공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)으로 유지한다. 전체15,350 원본 이미지 확보와 엄격 감사를 마쳤다. **이번 변경을 공개 URL에 올렸다고 표시하지 않는다.** 새 GitHub/Pages 전송은 현재 빌드·실행·원본 검토를 마친 뒤 수행한다. 앞선 일시적인503과 부분 확보 기록은 보존하며 브라우저 로그인/Unity 라이선스 실패로 판단하지 않는다. 실제 진행·원본 결과는 [Renewal 검증](RenewalValidation.md)을 따른다.
+
+전체 배포는 두 게임의 현재 Native/Windows/Web 소스 지문, Core 실행, PC/모바일 일반 입력·오디오·저장, Root가 직접 본 원본과 전체 런타임 해시를 요구한다. 전체15,350 카드 그림 중 하나라도 빠지면 `Tools/Data/Renewal/verify-media.py`와 스테이지 검증이 실패한다. 부분적으로 확보한 그림을 전체 완료로 제공하지 않는다. 전체 사이트는 950MB 미만과 개별 파일100MB 미만을 확인한다.
+
+```bash
+# 모두 현재 소스로 통과·직접 검토하고 소스를 커밋한 뒤 실행한다.
+python3 Tools/Web/stage-renewal.py
+python3 Tools/Web/publish-site.py --site Artifacts/RenewalWebPlaytest
+gh workflow run publish-web.yml --ref main
+# 최초 한 번 HTTP 검증 의존성을 작업 전용 경로에 설치한다.
+python3 -m pip install --target /tmp/firstgame-renewal-python -r Tools/Environment/renewal-http-requirements.txt
+PYTHONPATH="/tmp/firstgame-renewal-python${PYTHONPATH:+:$PYTHONPATH}" python3 Tools/Validation/verify-public-portal.py --stage Artifacts/RenewalWebPlaytest --output Artifacts/Validation/Renewal/PublicPortal --workers 12
+# 실제 공개 파일 전부와 공개 실행을 검증한 뒤 전체 ZIP을 만든다.
+python3 Tools/Build/package-renewal.py
+```
+
+외부 연결이 막힌 동안 예수님 게임만 현재 소스·네이티브·Windows/Web·PC/모바일 실제 입력과 Root 원본 검토를 모두 마치면 `package-renewal-gospel.py`로 명시적인 **로컬 검증용** 플레이어/소스/증거 ZIP을 만들 수 있다. 이 경로는 카드 전체 자료나 공개 배포 완료를 뜻하지 않는다. 각각의 실제 산출물·SHA·완료 여부는 `Artifacts/Validation/Renewal/gospel-partial-deliverables.json`에서 확인한다.
+
+## 이전 검증된 Gospel 2D Luminous 공개 배포
+
+아래는 지난 예수님의 길 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. 판타지마스터즈의 현재 공개 `fm-restoration-2026-10-27` 파일과 미리보기는 바이트 그대로 보존한다. 이번에는 Gospel만 새 네이티브·Windows/Web·Desktop720/Mobile844 검사를 진행하며 실제 완료 상태는 [GospelLuminousValidation](GospelLuminousValidation.md)을 따른다.
 
 새 빌드는 `/tmp/firstgame-luminous-builds`, 공개판 보존본은 `/tmp/firstgame-luminous-preserved-public`, 새 사이트는 기록된 `/tmp/firstgame-luminous-staged-site`와 `Artifacts/LuminousWebPlaytest` 링크를 사용한다. `stage-luminous.py`는 현재 빌드 입력·실제 웹 검사·Root의 원본 검토·전체 런타임 해시를 확인한다. Core와 네이티브 검사는 별도의 현재 결과에 기록한다. 원본 Lost Crypt 안내와 Unity Companion License 전문은 플레이어/사이트 ThirdParty에 함께 배포한다.
 
@@ -16,7 +36,7 @@ gh workflow run publish-web.yml --ref main
 python3 Tools/Validation/verify-public-portal.py --stage Artifacts/LuminousWebPlaytest --output Artifacts/Validation/Luminous/PublicPortal
 ```
 
-공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)으로 유지한다. 공개 파일 일치와 실행은 완료한 뒤 새 결과로 기록한다. 저장·이어하기·인물 이동의 로컬 검증과 공개 실행 확인 범위를 구분한다. 이하 명령과 개정은 이전 배포 이력이다.
+공개 주소는 [ka8877.github.io/firstgame](https://ka8877.github.io/firstgame/)으로 유지한다. 현재 Luminous 배포는 기존 Pages 실행40620774183 성공, 공개42/42파일 일치·포털2화면·공개 모바일 실행9검사를 완료했다. 같은 런타임의 로컬 PC/모바일은 각각16검사와 저장·전체 재로딩·이어하기를 확인했다. 원본·해시·실기기 검증 한계는 현재 검증 문서를 따른다. 이하 명령과 개정은 이전 배포 이력이다.
 
 ## 이전 Restoration 배포
 

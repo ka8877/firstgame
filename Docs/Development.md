@@ -1,10 +1,27 @@
 # 개발과 실행
 
-현재 예수님 게임 개정은 `gospel-luminous-2026-10-28`, 릴리스 프로필은 `luminous`다. `GospelLuminousApp`·실제 URP2D Renderer·다층 숲과 성전 그림·관절 2D 인물·Rigidbody2D 이동·새 UI가 실행 경로다. 새 여정은 곧바로 2D 장면으로 들어가며 말씀 버튼에서 탄생 본문을 선택해 읽는다. 읽지 않은 본문을 자동 완료하지 않는다. 기존 schema1/`gospel-0.1.0`을 유지하고 선택 필드 `presentationSpace`로 이전 3D와 새 2D 좌표를 구분한다. 세부 계약과 실제 완료 상태는 [GospelLuminous](GospelLuminous.md)·[검증 기록](GospelLuminousValidation.md)을 따른다.
+현재 두 게임 개정은 `fm-renewal-2026-10-29` / `gospel-renewal-2026-10-29`, 릴리스 프로필은 `renewal`이다. 판타지마스터즈의 전체 원본 도감 메타데이터는 15,350종이며 실제 지원 기술을 구현한 출전 카드는 2,571종, 기본 덱은 27개다. 전체 원본 JPG는 `StreamingAssets/Cards`에서 필요한 그림만 읽고 기존 605종 Resources 원본과 저장 ID를 보존한다. 원격 자료의 전송 완료 여부와 플레이 가능 여부를 구분하며, 누락된 그림은 제작 검증에서 실패한다. 아직 실행·배포되지 않은 부분을 완료로 표시하지 않는다.
 
-URP의 플레이어 빌드는 파이프라인 에셋의 셰이더 사전 필터와 전역 설정의 활성 리소스 목록을 생성·저장한다. 현재 `luminous-task.sh`는 세 에셋의 제작 원본을 보관하고 Unity 프로세스가 종료된 뒤 정확한 바이트로 복원한다. 각 시도의 `PipelineState`에 변경 전·후와 해시를 남기며, 소스 지문에서 이 파일을 제외하거나 실행 결과를 새 소스에 다시 묶지 않는다.
+예수님의 길은 `GospelLuminousApp`·URP2D·다층 그림·관절 인물·Rigidbody2D 이동을 사용한다. 새 여정은 그림 오프닝 여섯 장 후 열두 살의 시점으로 들어간다. 탄생 세 본문, 여덟 학습 만남, 성전 네 본문을 실제 대화로 읽어 총 15장 말씀 도감을 채운다. 기존 저장 schema1/`gospel-0.1.0`은 유지하며 새 학습 여정 필드를 선택적으로 추가한다. 정확한 직접 인용과 학습용 극화 대화를 분리한다. 현재 계약·미완료 범위는 [Renewal](Renewal.md)·[현재 검증](RenewalValidation.md)을 따른다.
 
-판타지마스터즈는 기존 `fm-restoration-2026-10-27`의 출전605종·20덱·4시나리오·25효과음을 그대로 유지한다. 이번 Gospel 전용 배포는 현재 공개 카드 파일·미리보기를 SHA로 보존하며 카드를 다시 빌드하거나 이전 카드 검사를 새 통과로 합치지 않는다. 이하 이전3D·Restoration 명령/설명은 명시한 경우에만 이력이다.
+실행 소유자는 `/root/renewal_release` 하나다. 현재 생성 플레이어는 `/tmp/firstgame-renewal-builds`, 새 증거는 `Artifacts/Validation/Renewal`에 둔다. `renewal-task.sh`는 URP 세 에셋의 빌드 생성 캐시를 기록한 뒤 에디터 종료 후 제작 원본 바이트로 복원한다. 각 시도의 `PipelineState`와 실제 소스 지문을 보존하며, 과거 판의 통과 기록을 새 실행으로 사용하지 않는다.
+
+```bash
+cd /workspace/firstgame
+source Tools/Environment/activate-shell.sh
+# Core 테스트: 두 게임 규칙·저장·회귀를 실제 실행한다.
+PATH_OF_DAWN_INK="$PWD/Games/PathOfDawn/Assets/Game/Resources/Story/galilee.ink" dotnet test Tools/Validation/CoreValidation.csproj --no-restore --configuration Release --logger "trx;LogFileName=core-tests.trx" --results-directory Artifacts/Validation/Renewal/Core
+# 아래는 한 게임씩 순차 실행한다. 시도 이름을 재사용하지 않는다.
+bash Tools/Build/renewal-task.sh PathOfDawn prepare Prepare01
+python3 Tools/Validation/run-renewal-native.py PathOfDawn Native01
+bash Tools/Build/renewal-task.sh PathOfDawn windows Windows01
+bash Tools/Build/renewal-task.sh PathOfDawn web Web01
+# FantasyCards도 같은 명령에서 게임 이름을 바꾼다.
+```
+
+카드 제작 준비는 15,350종 원본의 실제 다운로드와 개별 경로·해시 검증이 먼저다. 자료가 없는 경우 전체 빌드 검증을 약화시키지 않는다. 개발 중 제한된 네이티브 화면 검사는 별도 `scope.json`에 실제 확인한 카드·한계를 기록하고 최종 릴리스 근거로 승격하지 않는다.
+
+아래 이전 Luminous/Restoration 명령과 수치가 남은 부분은 제작 이력이다. 현재 실행 결과는 반드시 Renewal 검증 문서의 원본 로그·소스 지문·빌드·브라우저 보고서로 확인한다.
 
 ## 고정 도구
 
@@ -86,6 +103,10 @@ Web은 HTTP/HTTPS로 실행하며 `file://`은 지원하지 않는다. `FirstGam
 ## 이전 판의 제작 이력
 
 [PaintedDawn](PaintedDawn.md)·[DawnMotion](DawnMotion.md)의 회화풍 배경·보행 atlas·motion field, [PathOfDawnDesign](PathOfDawnDesign.md)의 여행자·가상 선택·회귀, [Voice](Voice.md)의 창작 대사 20줄은 보존한 이전 판의 문서다. 현재 Boot나 기본 재생성 절차는 아니다. `generate_proxies.py`, 이전 ToonDawn 생성기와 `Painted/build-motion-fields.py`를 새 Gospel 인물·장면의 생성기로 실행하지 않는다. 원본·GUID·기존 저장은 보존한다.
+
+### 원본 카드 전송 파일의 Git 저장 방식
+
+`Games/FantasyCards/Assets/StreamingAssets/Cards/*.jpg`는 원본 WebP에서 만든 작은 JPEG88/4:2:0 전송 사본이다. 이 경로만 일반 Git 바이너리로 저장한다. 약 15,350개 소파일을 개별 LFS 업로드하는 비용을 피하며 원본 픽셀 출처·JPEG 해시·GUID는 매니페스트로 검증한다. 다른 원화와 음원은 기존 LFS를 유지하고 원본 WebP는 별도 해시 검증 백업에 보존한다. 공개 파일은 각각100MB 미만, 전체 사이트950MB 미만을 확인하며 Git push의2GB 제한도 확인한다. 저장 이력을 다시 쓰거나 원본을 삭제하지 않는다.
 
 ## 현재 검사 진입점
 

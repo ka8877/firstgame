@@ -8,7 +8,8 @@ namespace FantasyCards.Tests
 {
     public static class ClassicFixtures
     {
-        public static string Id(string name) => CardCatalog.All.Single(c => c.name == name).id;
+        // The preserved605 definitions remain first; historic name fixtures bind to their original variant.
+        public static string Id(string name) => CardCatalog.All.First(c => c.name == name).id;
         public static BattleEngine Battle(uint seed = 42, RuleSet rules = null)
         {
             rules = rules ?? new RuleSet();
@@ -123,7 +124,7 @@ namespace FantasyCards.Tests
         {
             var card = CardCatalog.Get(ClassicFixtures.Id("크라켄"));
             Assert.That(card.rarity, Is.EqualTo(CardRarity.Common)); Assert.That(card.rank, Is.EqualTo(CardRank.N));
-            Assert.That(Enum.GetValues(typeof(CardRarity)).Length, Is.EqualTo(12));
+            Assert.That(Enum.GetValues(typeof(CardRarity)).Length, Is.EqualTo(13));
             Assert.That(Enum.GetValues(typeof(CardRank)).Cast<CardRank>().Select(CardCatalog.RankName), Is.EqualTo(new[] { "N", "C", "B", "A", "S" }));
             var e = ClassicFixtures.Battle();
             foreach (var item in e.State.events) { item.hasPresentationData = false; item.sourcePlayer = 0; item.sourceLane = 0; item.sourceInstanceId = 0; }
@@ -215,8 +216,8 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(605));
-            Assert.That(CardCatalog.All.GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,453},{CardKind.Spell,26},{CardKind.Equipment,97} }));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2571));
+            Assert.That(CardCatalog.All.Take(605).GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,453},{CardKind.Spell,26},{CardKind.Equipment,97} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
             { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(50)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(element == Element.Forest ? 5 : 4)); }
             foreach (var card in CardCatalog.All) { CardCatalog.ValidateDefinition(card); Assert.That(card.id, Is.EqualTo("fm_" + card.sourceId)); }
@@ -483,6 +484,18 @@ namespace FantasyCards.Tests
             var other=ClassicFixtures.Battle();Assert.True(other.Concede(0));Assert.That(other.State.winner,Is.EqualTo(1));BattleEngine.Validate(other.State);
         }
 #if UNITY_EDITOR
+        [Test] public void UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList()
+        {
+            var a=ClassicFixtures.Battle(318);ClassicFixtures.Unit(a,0,"임프",0);
+            var json=UnityEngine.JsonUtility.ToJson(a.State);
+            Assert.That(json.Contains("\"generatedCards\":[]"),Is.True);
+            var previous=json.Replace(",\"generatedCards\":[]","");
+            Assert.That(previous.Contains("generatedCards"),Is.False);
+            var b=new BattleEngine(UnityEngine.JsonUtility.FromJson<BattleState>(previous));
+            Assert.That(b.State.generatedCards,Is.Empty);
+            ClassicFixtures.Resolve(a);ClassicFixtures.Resolve(b);
+            Assert.That(UnityEngine.JsonUtility.ToJson(a.State),Is.EqualTo(UnityEngine.JsonUtility.ToJson(b.State)));
+        }
         [TestCase("forest")] [TestCase("knights")] [TestCase("tides")] [TestCase("stars")]
         public void UnityJsonPreservesClassicPreparationShuffleAndEntireContinuation(string deckId)
         {

@@ -10,7 +10,7 @@ namespace FirstGame.Validation
     {
         [Test] public void TwentyStarterDecksRetainTheEighteenPriorPresetsAndCoverMonoAndDualElements()
         {
-            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(20));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(7));
+            Assert.That(DemoCatalog.StarterDecks.Length,Is.EqualTo(27));Assert.That(DemoCatalog.Leaders.Length,Is.EqualTo(4));Assert.That(DemoCatalog.Encounters.Length,Is.EqualTo(7));
             foreach(var deck in DemoCatalog.StarterDecks.Take(4))
             {
                 DemoCatalog.ValidatePlayableDeck(deck.cards);
@@ -23,12 +23,12 @@ namespace FirstGame.Validation
             }
             DemoCatalog.ValidatePlayableDeck(DemoCatalog.GetDeck("fidelity").cards);
             Assert.That(DemoCatalog.GetDeck("fidelity").cards.Length,Is.EqualTo(50));
-            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards.OrderBy(id=>id))).Distinct().Count(),Is.EqualTo(20));
+            Assert.That(DemoCatalog.StarterDecks.Select(d=>string.Join(",",d.cards.OrderBy(id=>id))).Distinct().Count(),Is.EqualTo(27));
             Assert.That(DemoCatalog.StarterDecks.SelectMany(d=>d.cards).Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count(),Is.EqualTo(7));
             var mono=DemoCatalog.StarterDecks.Where(d=>d.id.StartsWith("mono-")).ToArray();
             Assert.That(mono.Length,Is.EqualTo(7));
             Assert.That(mono.Select(d=>d.cards.Select(CardCatalog.Get).Select(c=>c.element).Distinct().Single()),Is.EquivalentTo(Enum.GetValues(typeof(Element))));
-            var dual=DemoCatalog.StarterDecks.Where(d=>d.cards.Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count()==2).ToArray();
+            var dual=DemoCatalog.StarterDecks.Take(20).Where(d=>d.cards.Select(CardCatalog.Get).Select(c=>c.element).Distinct().Count()==2).ToArray();
             Assert.That(dual.Length,Is.EqualTo(13));
             Assert.That(dual.Select(d=>string.Join(",",d.cards.Select(CardCatalog.Get).Select(c=>(int)c.element).Distinct().OrderBy(e=>e))).Distinct().Count(),Is.EqualTo(12));
             foreach(var deck in DemoCatalog.StarterDecks.Skip(5).Take(13))

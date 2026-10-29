@@ -1,0 +1,1513 @@
+
+<html>
+<head>
+<title>▒ Fantasy masters ▒</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=ks_c_5601-1987" />
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<link href="/Common/css/fan.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/common/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/common/css/jquery.bxslider.css" />
+<script type="text/javascript" src="/common/js/jquery.bxslider.js"></script>
+<style type="text/css">
+.input {
+	border: 1px solid #000000;
+	background-color: #0b141e;
+	font-family: "돋움";
+	font-size: 8pt;
+	color: #ae4354;
+}
+
+.small2 {
+	font-family: "돋움";
+	font-size: 8pt;
+	color: #a16072;
+}
+.png24 {
+   tmp:expression(setPng24(this));
+}
+
+bx-pager-item > a:hover { text-decoration:underline; color:#000000 !important;}
+.bxslider { width: 100%; height:200px; margin: 0 auto; padding: 0; background:url(/img/bxslider/bx_x.png) repeat-x; padding-top:-10px; }
+.bxslider { text-decoration:underline; margin-top:0px; }
+.bx-wrapper { height: 200px !important; }
+</style>
+<script language="javascript" type="text/javascript" src="/common/js/common.js"></script>
+<script language="javascript" type="text/javascript" src="/Common/js/msover.js"></script>
+<script language="javascript" type="text/javascript" src="/common/js/InsertObject.js"></script>
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function () {
+        slider = $('.bxslider').bxSlider({
+            //********** 슬라이드 추가시 건드릴 필요없음 ********
+
+            // 이미지 갯수에 따른 옵션설정
+            auto: ($(".bxslider li").length > 1) ? true : false,
+
+            // 이미지 바뀌는 시간 5000 = 5초
+            pause: 5000,
+
+            // 양쪽 제어바
+            controls: false,
+
+            // 이미지 바뀌는 모드설정 지우면 default 슬라이드
+            mode: 'fade',
+
+            // 슬라이드 넓이 설정
+            slideWidth: 520
+
+            //********** 슬라이드 추가시 건드릴 필요없음 ********
+        });
+
+        // ie 8이하 코드 ( 안넣으면 디자인 틀어짐 )
+        if (navigator.userAgent.indexOf('Trident/4.0') > -1 || navigator.userAgent.indexOf('Trident/5.0') > -1 || navigator.userAgent.indexOf('Trident/6.0') > -1) {
+            console.log("IE8");
+        } else {
+            $(".bx-pager").css("top", "160px");
+            $(".bx-pager").css("left", "0px");
+        }
+
+        // ie 11
+        if (navigator.userAgent.indexOf('Trident/7.0') > -1) {
+            $(".bx-pager").css("left", "0px");
+        }
+        // ie 11 끝
+
+        $("#img_start").bind("mouseover", function () {
+            $("#img_start > img").attr('src', 'common/menu/img/gamestart_mouseover.png');
+        });
+
+        $("#img_start").bind("mouseout", function () {
+            $("#img_start > img").attr('src', 'common/menu/img/gamestart_normal.png');
+        });
+
+        // 사이드 바
+        var $doc = $(document);
+        var position = 0;
+        var top = $doc.scrollTop(); //현재 스크롤바 위치  
+        var screenSize = 0;        // 화면크기  
+        var halfScreenSize = 0;    // 화면의 반  
+
+        /*사용자 설정 값 시작*/
+        var pageWidth = 1000; // 페이지 폭, 단위:px  
+        var leftOffet = 510;  // 중앙에서의 폭(왼쪽 -, 오른쪽 +), 단위:px  
+        var leftMargin = 1020; // 페이지 폭보다 화면이 작을때 옵셋, 단위:px, leftOffet과 pageWidth의 반만큼 차이가 난다.  
+        var speed = 1500;     // 따라다닐 속도 : "slow", "normal", or "fast" or numeric(단위:msec)  
+        var easing = 'swing'; // 따라다니는 방법 기본 두가지 linear, swing  
+        var $layer = $('#floating'); // 레이어 셀렉팅  
+        var layerTopOffset = 300;   // 레이어 높이 상한선, 단위:px  
+        $layer.css('z-index', 10);   // 레이어 z-인덱스  
+        /*사용자 설정 값 끝*/
+
+        //좌우 값을 설정하기 위한 함수  
+        function resetXPosition() {
+            $screenSize = $('body').width(); // 화면크기  
+            halfScreenSize = $screenSize / 2; // 화면의 반  
+            xPosition = halfScreenSize + leftOffet;
+            if ($screenSize < pageWidth)
+                xPosition = leftMargin;
+            $layer.css('left', xPosition);
+        }
+
+        // 스크롤 바를 내린 상태에서 리프레시 했을 경우를 위해  
+        if (top > 0)
+            $doc.scrollTop(layerTopOffset + top);
+        else
+            $doc.scrollTop(0);
+
+        // 최초 레이어가 있을 자리 세팅  
+        $layer.css('top', layerTopOffset);
+        resetXPosition();
+
+        //윈도우 크기 변경 이벤트가 발생하면  
+        $(window).resize(resetXPosition);
+
+        //스크롤이벤트가 발생하면  
+        $(window).scroll(function () {
+            yPosition = $doc.scrollTop() + layerTopOffset;
+            $layer.animate({ "top": yPosition }, { duration: speed, easing: easing, queue: false });
+        });
+        // 사이드 바
+    });
+
+    function SecretOn(Booster_Attr) {
+        document.location.href="/market/booster/list.asp?s_category=1&s_attr=" + Booster_Attr;
+    }   
+	function Notlogin2(refurl){
+		document.location.href="/loginform.asp?loginURL=" + refurl;
+
+	}
+	
+	function searchGo()
+		{
+			if (sForm.searchword.value==""){
+				alert("검색할 단어를 입력 하세요.");
+				sForm.searchword.focus();
+				return false;
+			}
+			else{
+				document.sForm.submit();
+			}
+		}	
+		
+	function userinfo(userid){	
+		var userid;
+		var Left_P;
+		var Top_P;
+		Left_P = (screen.width - 380) / 2;
+		Top_P  = (screen.height - 600) / 2;
+		window.open("/mypage/UserProfile/Usermain.asp?userid="+userid,"info","height=619,width=380,scrollbars=no,resizable=no,left="+Left_P+",top="+Top_P+"");
+	}
+	
+	function Login(){
+	
+		if (frmlogin.userid.value==""){
+			alert('아이디를 입력하시기 바랍니다.');
+			frmlogin.userid.focus();
+			return false;
+		}
+		if (frmlogin.pwd.value==""){
+			alert('비밀번호를 입력하시기 바랍니다.');
+			frmlogin.pwd.focus();
+			return false;
+		}
+		return true;
+	}
+
+	function eventpop(){	
+		var userid;
+		var Left_P;
+		var Top_P;
+		Left_P = (screen.width - 617) / 2;
+		Top_P  = (screen.height - 520) / 2;
+		window.open("/Season2.htm","info","height=520,width=617,scrollbars=yes,resizable=no,left="+Left_P+",top="+Top_P+"");
+	}
+	
+	function GameStart(){
+		document.gameStartFrm.location.href="./start.asp";
+	}
+	
+//-->
+</script>
+<!-- LayerPopup : Start -->
+<!--<div id="Popup" style="position:absolute;z-index:5;display:none;">
+	<table width="531" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+			<td colspan="2" >
+                <table width="531" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><a href="/helpdesk/faq_view.asp?faqno=1431" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_01.jpg" width="265" height="183" border="0" style="cursor:hand"></a></td>
+                        <td><a href="/event/event238/event2.asp" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_02.jpg" width="266" height="183" border="0" style="cursor:hand"></a></td>
+                    </tr>
+                </table>
+            </td>
+		</tr>
+		<tr>
+		    <td width="478"><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_03.jpg" width="478" height="19" border="0" style="cursor:hand" onclick="javascript:notice_closePop();"></td>
+		    <td width="53"><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_04.jpg" width="53" height="19" border="0" style="cursor:hand" onclick="javascript:closePop();"></td>
+		</tr>
+	</table>
+</div>-->
+<!--<div id="Popup2" style="position:absolute;z-index:5;display:none;">
+	<table width="531" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="2"><a href="/Community/forum/view.asp?idx=48295&fname=0&Nowpage=1&Column=&keyword=" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2014/popup/0613/pop_01.jpg" width="531" height="131" border="0" style="cursor:hand"></a></td>
+        </tr>
+		<tr>
+		    <td width="478"><img src="/FM_Image/FM_Image/img/2014/popup/0613/pop_02.jpg" width="478" height="19" border="0" style="cursor:hand" onclick="javascript:notice_closePop2();"></td>
+		    <td width="53"><img src="/FM_Image/FM_Image/img/2014/popup/0613/pop_03.jpg" width="53" height="19" border="0" style="cursor:hand" onclick="javascript:closePop2();"></td>
+		</tr>
+	</table>
+</div>-->
+<!--<div id="Popup" style="position:absolute;z-index:5; display='none';">
+	<table width="400" height="400" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td colspan="2"><img src="/event/event226/images/pop_01.jpg" width="400" height="370" border="0" style="cursor:hand" onclick="javascript:goEvent();"></td>
+		</tr>
+		<tr>
+		    <td><img src="/event/event226/images/pop_02.jpg" width="300" height="30" border="0" style="cursor:hand" onclick="javascript:notice_closePop();"></td>
+		    <td><img src="/event/event226/images/pop_03.jpg" width="100" height="30" border="0" style="cursor:hand" onclick="javascript:closePop();"></td>
+		</tr>
+	</table>
+</div>-->
+
+<!--<div id="Popup" style="position:absolute;z-index:5;display=none;">
+	<table width="500" height="500" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td rowspan="4"><img src="/FM_Image/FM_Image/img/2011/Frest/pop1.gif" width="184" height="500" /></td>
+        <td><img src="/FM_Image/FM_Image/img/2011/Frest/pop2_1.gif" width="132" height="445" /></td>
+        <td rowspan="4"><a href="/helpdesk/helpwrite.asp" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2011/Frest/pop3.gif" width="184" height="500" border="0"/></a></td>
+      </tr>
+      <tr>
+        <td><a href="javascript:notice_closePop();" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2011/Frest/pop2_2.gif" alt="오늘하루 이 페이지를 열지 않음" width="132" height="13" border="0"/></a></td>
+      </tr>
+      <tr>
+        <td><a href="javascript:closePop();" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2011/Frest/pop2_3.gif" alt="" width="132" height="14" border="0"/></a></td>
+      </tr>
+      <tr>
+        <td><img src="/FM_Image/FM_Image/img/2011/Frest/pop2_4.gif" width="132" height="28" /></td>
+      </tr>
+    </table>
+</div>-->
+
+<script language="javascript" type="text/javascript">
+//    function getCookie(name)
+//    {
+//        cookie  = document.cookie;
+//        name    = name + "=";
+//        idx     = cookie.indexOf(name);
+//        if(cookie && idx >= 0) {        
+//            
+//            tmp     = cookie.substring(idx, cookie.length);
+//            deli    = tmp.indexOf(";");
+//            if(deli > 0) {
+//                return tmp.substring(name.length, deli);
+//            } else {
+//                return tmp.substring(name.length);
+//            }
+//            
+//        }
+//    }
+//    if ( getCookie("Event090708") != "done" )
+//    {
+//        window.open("/Event/popup/pop090708.htm","Event090708","height=450,width=300,scrollbars=no,resizable=no");
+//    }
+    //LayerPopup 
+	function notice_getCookie(name)
+    {
+        cookie  = document.cookie;
+        name    = name + "=";
+        idx     = cookie.indexOf(name);
+        if(cookie && idx >= 0) {        
+            
+            tmp     = cookie.substring(idx, cookie.length);
+            deli    = tmp.indexOf(";");
+            if(deli > 0) {
+                return tmp.substring(name.length, deli);
+            } else {
+                return tmp.substring(name.length);
+            }
+            
+        }
+    }
+	
+	function goEvent(){
+	    location.replace('/event/event226/event.asp'); //대박 이벤트페이지 주소
+    }
+
+	function notice_setCookie( name, value, expiredays ){
+	    var todayDate = new Date();
+	    todayDate.setDate( todayDate.getDate() + expiredays );
+		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+	}
+
+	function notice_closePop() { //하루동안 열지 않음
+	    notice_setCookie( "Notice", "done" , 1);
+	    document.getElementById("Popup").style.display = "none";
+	}
+	function closePop() { //그냥 팝업창 닫기
+	    document.getElementById("Popup").style.display = "none";
+	}
+
+//	if (notice_getCookie("Notice") != "done") {
+//	    document.getElementById("Popup").style.left = (screen.width - 550) / 2;
+//	    document.getElementById("Popup").style.top = (screen.height - 80) / 2; //479
+//	    document.getElementById("Popup").style.display = "";
+//	}
+    
+    function setPng24(obj) {
+        obj.width=obj.height=1;
+        obj.className=obj.className.replace(/\bpng24\b/i,'');
+        obj.style.filter =
+        "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+ obj.src +"',sizingMethod='image');"
+        obj.src='';
+        return '';
+    }
+</script>
+<script type="text/javascript">
+    //이벤트 스크립트
+	function notice_getCookie2(name)
+    {
+        cookie  = document.cookie;
+        name    = name + "=";
+        idx     = cookie.indexOf(name);
+        if(cookie && idx >= 0) {        
+            
+            tmp     = cookie.substring(idx, cookie.length);
+            deli    = tmp.indexOf(";");
+            if(deli > 0) {
+                return tmp.substring(name.length, deli);
+            } else {
+                return tmp.substring(name.length);
+            }
+            
+        }
+    }
+	
+	function goEvent2(){
+        location.replace('./mypage/charge_info.asp');//GP충전 페이지 주소
+    }
+
+	function notice_setCookie2( name, value, expiredays ){
+	    var todayDate = new Date();
+	    todayDate.setDate( todayDate.getDate() + expiredays );
+		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+	}
+
+	function notice_closePop2() { //하루동안 열지 않음
+	    notice_setCookie( "Notice2", "done" , 1);
+	    document.getElementById("Popup2").style.display = "none";
+	}
+    function closePop2() { //그냥 팝업창 닫기
+	    document.getElementById("Popup2").style.display = "none";
+	}
+
+//	if (notice_getCookie("Notice2") != "done") {
+//	    document.getElementById("Popup2").style.left = (screen.width - 550) / 2;
+//	    document.getElementById("Popup2").style.top = (screen.height + 200) / 2;
+//	    document.getElementById("Popup2").style.display = "";
+//	}
+    
+</script>
+<!-- LayerPopup : End -->
+</head>
+<body bgcolor="#e7e7e6" background="/FM_Image/FM_Image/nfm/Main/bg_main_01.jpg" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"  style="background-repeat:repeat-x;background-position:top left;" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+<!-- 사이드 바 -->
+<div id="floating" style="position:absolute;">
+	<!--<table width="531" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+			<td colspan="2" >
+                <table width="531" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><a href="/helpdesk/faq_view.asp?faqno=1431" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_01.jpg" width="265" height="183" border="0" style="cursor:hand"></a></td>
+                        <td><a href="/event/event238/event2.asp" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_02.jpg" width="266" height="183" border="0" style="cursor:hand"></a></td>
+                    </tr>
+                </table>
+            </td>
+		</tr>
+		<tr>
+		    <td width="478"><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_03.jpg" width="478" height="19" border="0" style="cursor:hand" onclick="javascript:notice_closePop();"></td>
+		    <td width="53"><img src="/FM_Image/FM_Image/img/2015/popup/0204/pop_04.jpg" width="53" height="19" border="0" style="cursor:hand" onclick="javascript:closePop();"></td>
+		</tr>
+	</table>-->
+    <!--<a href="http://www.fm2tcg.com/Index.aspx" onfocus='blur();'><img src="/FM_Image/FM_Image/img/2016/popup/0204/fm2.png" border="0" style="cursor:hand"></a>-->
+</div>
+<!-- 사이드 바 -->
+
+<iframe name="gameStartFrm" id="gameStartFrm" width="0" height="0" scrolling="auto"></iframe>
+<table width="100%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr> 
+		<td align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_main_00_new.jpg" style="background-repeat:no-repeat;background-position:top center;">
+			<table width="1006" height="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr> 
+					<td height="240" colspan="3" align="left" style="position:relative; top: 0px; left: 0px;">
+					   <!-- top menu : start-->
+<link rel="shortcut icon" type="image/x-icon" href="/FM_Image/FM_image/NFM/img/fm.ico">
+<style type="text/css">
+body{margin:0;}
+.Gnb_wrap { margin:0 auto; position:relative; width:996px;font-family: "돋움" Times New Roman; font-size:11px; color:#c34a01; -webkit-text-size-adjust:none; top:-43px; z-index:3;}
+.Gnb_logo { position:absolute;left:381px;top:21px;}
+.Gnb_sub1 {	position:absolute;left:96px;top:45px;width:90px; z-index:4;}
+.Gnb_sub2 {	position:absolute;left:231px;top:45px;width:90px; z-index:5;}
+.Gnb_sub3 {	position:absolute;left:690px;top:45px;width:90px; z-index:6;}
+.Gnb_sub4 {	position:absolute;left:832px;top:45px;width:90px; z-index:7;}
+.Gnb_sublist { margin:0; padding:0; }
+.Gnb_submenu { display:block; list-style:none; text-align:left; line-height:20px; }
+.Gnb_submenu > a {text-decoration: none; color: #c097b4;background-image:url(/common/menu/img/ar_off.gif);background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+.Gnb_submenu > a:hover {text-decoration:none; color:#f66a9f;background-image:url(/common/menu/img/ar_on.gif); background-repeat:no-repeat; background-position:center left;padding-left:7px; }
+</style>
+<script type="text/javascript">
+    $(function () {
+        // reck 테두리 제거
+        $("#Maaap > area").attr("onfocus", "this.blur()");
+
+        // ie 8이하 코드 ( 안넣으면 디자인 틀어짐 )
+        if (navigator.userAgent.indexOf('Trident/4.0') > -1 || navigator.userAgent.indexOf('Trident/5.0') > -1 || navigator.userAgent.indexOf('Trident/6.0') > -1) {
+            // 메인진입시 보조 메뉴 숨김
+            $(".Gnb_sublist").hide();
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            $(".Gnb_wrap").attr("style", "top:-105px");
+
+            // 메뉴 마우스 오버
+            $(".Gnb_wrap").bind("mouseover", function () {
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+                $(".Gnb_sublist").show();
+                $(".Gnb_wrap").attr("style", "top:-54px");
+            });
+
+            // 메뉴 마우스 아웃
+            $(".Gnb_wrap").bind("mouseout", function () {
+                $(".Gnb_sublist").hide();
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+                $(".Gnb_wrap").attr("style", "top:-105px");
+            });
+
+            $(".Gnb_submenu > a").css("color", "#c097b4");
+            $(".Gnb_submenu > a").mouseenter(function () {
+                $(this).css("color", "#f66a9f");
+            });
+
+            $(".Gnb_submenu > a").mouseleave(function () {
+                $(this).css("color", "#c097b4");
+            });
+        }
+        else {
+            // 메인진입시 보조 메뉴 숨김
+            $(".Gnb_sublist").hide();
+            $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+            $(".Gnb_wrap").attr("style", "top:-94px");
+
+            // 메뉴 마우스 오버
+            $(".Gnb_wrap").bind("mouseover", function () {
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_on.png");
+                $(".Gnb_sublist").show();
+                $(".Gnb_wrap").attr("style", "top:-43px");
+            });
+
+            // 메뉴 마우스 아웃
+            $(".Gnb_wrap").bind("mouseout", function () {
+                $(".Gnb_sublist").hide();
+                $("#Gnb_option > img").attr("src", "/common/menu/img/nav_back_off.png");
+                $(".Gnb_wrap").attr("style", "top:-94px");
+            });
+        }
+    });
+</script>
+<div class="Gnb_wrap">
+    <div id="Gnb_option">
+        <img src="/common/menu/img/nav_back_on.png" border="0" usemap="#Maaap"/>
+        <map name="Maaap" id="Maaap">
+            <area shape="rect" coords="360,8,663,151" href="javascript:void(0);" alt="로고"/>
+            <area shape="rect" coords="97,8,181,36" href="/FMNews/Notice/list.asp?bbsid=1" alt="판마소식" />
+            <area shape="rect" coords="242,7,322,34" href="/Community/freeBoard/list.asp" alt="커뮤니티" />
+            <area shape="rect" coords="711,8,763,34" href="/market/cardmarket/list.asp" alt="상점" />
+            <area shape="rect" coords="839,8,917,34" href="/market/booster/list.asp?list_mode=0" alt="콜렉팅" />
+        </map>
+    </div>
+    <div class="Gnb_sub1">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/FMNews/Notice/list.asp?bbsid=1">새소식</a></li>
+            <li class="Gnb_submenu"><a href="/FMNews/EventBoard/list.asp">이벤트</a></li>
+            <li class="Gnb_submenu"><a href="/Download/download.asp">다운로드</a></li>
+            <li class="Gnb_submenu"><a href="/HelpDesk/FAQ_view.asp?faqNo=732">게임가이드</a></li>
+            <li class="Gnb_submenu"><a href="/Hall/CarToon/list.asp">판마카툰</a></li>
+            <!--<li class="Gnb_submenu"><a href="/HelpDesk/list.asp">고객센터</a></li>-->
+        </ul>
+    </div>
+    <div class="Gnb_sub2">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Community/freeBoard/list.asp">자유게시판</a></li>
+            <li class="Gnb_submenu"><a href="/Community/NewThemeDeck/list.asp">덱게시판</a></li>
+            <li class="Gnb_submenu"><a href="/Community/ScreenShot/list.asp">스크린샷</a></li>
+            <li class="Gnb_submenu"><a href="/Guild/Ranking.asp">길드</a></li>
+            <li class="Gnb_submenu"><a href="/Hall/Ranking/p_ranking.asp">명예의전당</a></li>
+        </ul>
+    </div>
+    <div class="Gnb_sub3">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Market/CardMarket/list.asp">카드상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/PointMarket/list.asp">마일리지상점</a></li>
+            <li class="Gnb_submenu"><a href="/Event/Event238/Event238.asp">힐링상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/DeckStore/decklist.asp">덱상점</a></li>
+            <li class="Gnb_submenu"><a href="/Market/SkinShop/List.asp">스페셜상점</a></li>
+        </ul>
+    </div>
+    <div class="Gnb_sub4">
+        <ul class="Gnb_sublist">
+            <li class="Gnb_submenu"><a href="/Market/Booster/list.asp?list_mode=0">부스터</a></li>
+            <li class="Gnb_submenu"><a href="/Market/ChangeCard/Default.asp">카드변환</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Album/list.asp">앨범</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Upbook/Default.asp">강화북</a></li>
+            <li class="Gnb_submenu"><a href="/Market/Trade/real_img.asp">트레이드</a></li>
+        </ul>
+    </div>
+</div>
+<!--Gnb_wrap-->
+<!--<div id="Layer1" style="position:absolute; width=1006; height=240; z-index:2; top:0px; left:50%; margin-left:-503px">
+		<script language="javascript" type="text/javascript">
+		    InsertObject('<object type="application/x-shockwave-flash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1006" height="240">' +
+						 '<param name="movie" value="/img/flash/menu.swf">' +
+						 '<param name="wmode" value="transparent">' +
+						 '<embed src="/img/flash/menu.swf" quality="high" width="1006" height="240" wmode="transparent"></embed>' +
+						 '</object>' ) ;
+		</script>
+</div>-->
+<!--style="z-index:1; padding: 55 0 0 0"-->
+<!--<div id="Layer2" style="position:absolute; width=280; height=170; z-index:1; top:55px; left:15%; margin-left:223px">
+	<script language="javascript" type="text/javascript">
+	    InsertObject('<object type="application/x-shockwave-flash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="280" height="170">' +
+					 '<param name="movie" value="/img/flash/bnr_event.swf">' +
+					 '<param name="wmode" value="transparent">' +
+					 '<embed src="/img/flash/bnr_event.swf" quality="high" width="280" height="170" wmode="transparent"></embed>' +
+					 '</object>' ) ;		
+	</script>
+</div>-->
+
+<!--<div id="Layer3" style="position:absolute;width:223;height:182; z-index:1; top:58; left:-26px;">
+     <a href="/event/event150610/event.asp" onfocus="this.blur();"><img src="/FM_Image/FM_image/img/2014/MainBnr/bnr-main_15.jpg" border="0" alt="0" /></a> 
+</div>
+<div id="Div1" style="position:absolute; width:223; height:172; z-index:2; top:59; left:784px;">
+    <a href="/event/event238/event.asp" onfocus="this.blur();"><img src="/FM_Image/FM_image/img/2014/MainBnr/bnr-main_10.jpg" border="0" alt="0" /></a>
+</div>
+--><!-- 메인 배너 2개 -->
+
+
+
+
+
+<!--<div id="Div1" style="position:absolute; width=223; height=182; z-index:1; top:60; left:780;">
+    <a href="http://www.fantasymasters.co.kr/helpDesk/FAQ_view.asp?faqNo=992" onfocus="this.blur();"><img src="/FM_Image/FM_image/img/2012/0801/Main2_17.jpg" onfocus="blur();" border="0"></a>
+</div>-->
+<!--<div id="Div2" style="position:absolute;width=148;height=84;z-index:1;top:231px;left:271px;">
+    <script language="javascript">
+        function eventpops2() {
+            NewWindow('/recruit.html', 'pop', '600', '800', 'yes');
+        }
+    </script>
+    <a href="javascript:eventpops2();" onfocus="this.blur();"><img src="/FM_Image/FM_image/img/2011/recruit/zeo_incrut(271X231).jpg" onfocus="blur();" border="0"></a>
+</div>-->
+<!--<div id="Div1" style="position:absolute;width=235;height=67;z-index:1;top:231px;left:418px;">
+    <script language="javascript">
+        function eventpops() {
+            NewWindow('/Event/popup/EventRebirth.asp', 'pop', '710', '1050', 'yes');
+        }
+    </script>
+    <a href="javascript:eventpops();" onfocus="this.blur();"><img src="/FM_Image/FM_image/img/2011/recruit/reberth(418X231).jpg" onfocus="blur();" border="0"></a>
+</div>--><!-- top menu : end-->
+                       <!--메인화면 설명-->
+                       <style type="text/css">
+                       .small2 {
+	                        font-family: "돋움";
+	                        font-size: 8.3pt;
+	                        color: #a16072;
+                        }
+                       </style>
+                        <!--메인화면 스티커-->
+                        <!-- 올인원서포트 -->
+                       <div style="padding: 0px 2px; position:absolute; z-index:1;
+                           top:210px;
+                           left:222px;
+                           width:121px;
+                           height:104px;
+                           text-align:center; right: 490px;">
+                           <a href="/event/allsupport/event.asp" onfocus="this.blur();"><img src="/FM_Image/FM_Image/img/2016/mainbnr/main_01.jpg" onfocus="blur();" border="0"></a>
+                       </div>
+                       <!-- 올인원서포트 -->
+                      
+                       <!-- 와르르 -->
+                       <div style="padding: 0px 2px; position:absolute; z-index:1;
+                           top:220px;
+                           left:320px;
+                           width:110px;
+                           height:90px;
+                           text-align:center; right: 490px;">
+                           <a href="/Event/Event161208/event.asp" onfocus="this.blur();"><img src="/FM_Image/FM_Image/img/2016/mainbnr/bn.png" onfocus="blur();" border="0"></a>
+                       </div>
+                       <!-- 와르르 -->
+                       
+                       <!-- 대륙탐험 -->
+                       <div style="position:absolute; z-index:1;
+                           top:198px;
+                           left:400px;
+                           width:132px;
+                           height:104px;
+                           padding-top:0px; padding-bottom:0px;
+                           padding-left:2px; padding-right:2px;
+                           text-align:center;">
+                           
+                           <a href="/Hall/MiniGame/Main.asp" onfocus="this.blur();"><img src="/FM_Image/FM_Image/img/2016/mainbnr/main_05.jpg" onfocus="blur();" border="0"></a>
+                       </div>
+                       <!-- 대륙탐험 -->
+                       <!--메인화면 스티커-->   
+					</td>
+				</tr>
+				<tr> 
+					<td width="223" align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_main_left.jpg">
+						<table width="223" height="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr> 
+								<td align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_main_left_2_new.jpg" style="background-repeat:repeat-x;background-position:top left; padding-left:3">
+									<table width="208" height="100%" border="0" cellpadding="0" cellspacing="0">
+										<tr> 
+											<td height="110" align="center" valign="top" style="padding : 8 10 0 0">
+											
+												<table width="189" height="102" border="0" cellpadding="0" cellspacing="0">
+													<form name="frmlogin" method="post" target="_parent" action="/login.asp?loginURL=http%3A%2F%2Fwww%2Efantasymasters%2Eco%2Ekr%2FDefault%2Easp" onsubmit="return Login()">
+													<tr> 
+														<td height="70" align="right" valign="middle" style="position:absolute">
+															<div style="z-index:200; position:absolute; left:5; top:10;">
+															<table width="184" height="60" border="0" cellpadding="0" cellspacing="0">
+																<tr> 
+																	<td width="110" height="20" align="left" valign="top" class="fan"><input name="userid" type="text" class="input" style='width:110px; height:18px; vertical-align:middle;background-image:url(/FM_Image/FM_Image/nfm/img/img_login_01.gif);background-repeat:no-repeat;background-position:center;font-size:11px;' tabindex="1" onFocus='this.style.backgroundImage="";'></td>
+																	<td width="75" rowspan="3" align="right" valign="bottom" class="fan"><a href="#" onFocus='blur()' ><input type="image" src="/FM_Image/FM_Image/nfm/img/btn_login.jpg" width="70" height="38" border="0" tabindex="4" onfocus="blur()" maxlength="12"></td>
+																</tr>
+																<tr> 
+																	<td height="20" align="left" valign="middle" class="fan"><input name="pwd" type="password" class="input" maxlength="12" style='width:110px; height:18px; vertical-align:middle;background-image:url(/FM_Image/FM_Image/nfm/img/img_login_02.gif);background-repeat:no-repeat;background-position:center;font-size:12px;' tabindex="2" onFocus='this.style.backgroundImage="";' ></td>
+																</tr>
+																<tr> 
+																	<td height="18" align="left" valign="bottom" class="fan"><input name="ShopPwd" type="password" class="input" maxlength="12" style='width:110px; height:18px; vertical-align:middle;background-image:url(/FM_Image/FM_Image/nfm/img/img_login_03.gif);background-repeat:no-repeat;background-position:center;font-size:12px;' tabindex="3" onFocus='this.style.backgroundImage="";'></td>
+																</tr>
+															</table>
+															</div>
+														</td>
+													</tr>
+													</form>
+													<tr><td height="3"></td></tr>
+													<tr> 
+														<td height="24" align="center" valign="top" class="fan">
+															<table width="177" border="0" cellspacing="0" cellpadding="0">
+																<tr>
+																	<td><a href="https://www.fantasymasters.co.kr/member/find_id.asp" target="_parent" onfocus='blur()'><img src="/FM_Image/FM_Image/nfm/img/btn_idpw.jpg" width="113" height="15" border="0"></a></td>
+																	<td width="10" class="fan"></td>
+																	<td align="right"><a href="https://www.fantasymasters.co.kr/member/register.asp" target="_parent" onfocus='blur()'><img src="/FM_Image/FM_Image/nfm/img/btn_join.jpg" width="54" height="15" border="0"></a></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											
+											</td>
+										</tr>
+                                       <tr> 
+											<td height="140" align="left" valign="top">
+											<!-- FMTip : Start -->
+												<!-- 이벤트 -->
+<table width="208" border="0" cellpadding="0" cellspacing="0">
+	<tr height="140">
+		<td class="fan">
+						
+		    <a href="/download/download.asp"><img src="/FM_Image/FM_image/img/images/left_banner1.png" style="cursor:hand"></a>
+			<a href="/helpDesk/FAQ_view.asp?faqNo=1587"><img src="/FM_Image/FM_image/img/images/left_banner2.png" style="cursor:hand"></a>
+            			
+		</td>					
+	</tr>
+    <tr>
+        <td style="height:100%;position:fixed"></td>
+    </tr>
+</table>
+											<!-- FMTip : End -->
+											</td>
+										</tr>
+                                        <tr> 
+                                          <td height="8"> </td>
+                                        </tr>
+										<tr> 
+                                          <td height="54" align="center" valign="top"><a href="/Event/Event238/event2.asp" onfocus='blur()'><img src="/FM_Image/FM_Image/img/2009/03/btn_main_download.png" ></a></td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="8"> </td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="35" align="center" valign="top"><a href="/mypage/charge_info.asp" onfocus='blur()'><img src="/FM_Image/FM_Image/img/2009/03/btn_main_cash.jpg" width="208" height="35" border="0"></a></td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="8"> </td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="35" align="center" valign="top"><a href="/event/popup/Secondpop.asp" onfocus='blur()' ><img src="/FM_Image/FM_Image/img/2016/01/btn_avatarid.png" border="0"></a></td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="8"> </td>
+                                        </tr>
+                                        <tr> 
+                                          <td height="35" align="center" valign="top"><a href="/HelpDesk/FAQ_View.asp?FaqNo=1059" onfocus='blur()'><img src="/FM_Image/FM_Image/img/2009/03/btn_main_guide.jpg" width="208" height="35" border="0"></a></td>
+                                        </tr>
+										
+										
+										<tr><td height="3"></td></tr>
+									
+	                               <!--<tr> 
+											<td height="151" align="center" valign="top">-->
+												<!-- League : Start -->
+												<!--	<iframe src="/common/LeagueScroll.asp" frameborder="0" height="151" width="208" scrolling=no></iframe>-->
+												<!-- League : End -->
+					                   <!--</td>
+										</tr>-->
+										<tr> 
+											<td height="7"></td>
+										</tr>
+										<tr> 
+											<td height="191" align="center" valign="top">
+												<table width="208" height="191" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_ranking.jpg">
+													<tr> 
+														<td height="53"></td>
+													</tr>
+													<tr> 
+														<td height="124" align="center" valign="top">
+															<table width="175" border="0" cellspacing="0" cellpadding="0">
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																
+																<tr> 
+																	<td height="24" align="center" class="small2">
+								      									
+																			<img src="/FM_Image/FM_Image/fm/newimg/crown1.gif" width="18" height="18" align="absmiddle">
+																		
+																	</td>
+																	<td align="center" class="small2">										
+																		
+																			<font color="#57647B">-</font>
+																		
+																	</td>
+																	<td class="small2"><img src="/FM_Image/FM_Image/img/level/lv241.gif" width="18" height="18" align="absmiddle"><font color="#417ec6">Help</font></td>
+																	<td class="small2"><font color="#0360ce">63</font></td>
+																</tr>
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																			
+																<tr> 
+																	<td height="24" align="center" class="small2">
+								      									
+																			<img src="/FM_Image/FM_Image/fm/newimg/crown2.gif" width="18" height="18" align="absmiddle">
+																		
+																	</td>
+																	<td align="center" class="small2">										
+																		
+																			<font color="#57647B">-</font>
+																		
+																	</td>
+																	<td class="small2"><img src="/FM_Image/FM_Image/img/level/lv231.gif" width="18" height="18" align="absmiddle"><font color="#417ec6">jgsang</font></td>
+																	<td class="small2"><font color="#0360ce">65</font></td>
+																</tr>
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																			
+																<tr> 
+																	<td height="24" align="center" class="small2">
+								      									
+																			<img src="/FM_Image/FM_Image/fm/newimg/crown3.gif" width="18" height="18" align="absmiddle">
+																		
+																	</td>
+																	<td align="center" class="small2">										
+																		
+																			<font color="#57647B">-</font>
+																		
+																	</td>
+																	<td class="small2"><img src="/FM_Image/FM_Image/img/level/lv217.gif" width="18" height="18" align="absmiddle"><font color="#417ec6">아스트라바인</font></td>
+																	<td class="small2"><font color="#0360ce">55</font></td>
+																</tr>
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																			
+																<tr> 
+																	<td height="24" align="center" class="small2">
+								      									
+																			<font color="#CC9900">4</font>
+																		
+																	</td>
+																	<td align="center" class="small2">										
+																		
+																			<font color="#57647B">-</font>
+																		
+																	</td>
+																	<td class="small2"><img src="/FM_Image/FM_Image/img/level/lv201.gif" width="18" height="18" align="absmiddle"><font color="#417ec6">jilion</font></td>
+																	<td class="small2"><font color="#0360ce">58</font></td>
+																</tr>
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																			
+																<tr> 
+																	<td height="24" align="center" class="small2">
+								      									
+																			<font color="#CC9900">5</font>
+																		
+																	</td>
+																	<td align="center" class="small2">										
+																		
+																			<font color="#57647B">-</font>
+																		
+																	</td>
+																	<td class="small2"><img src="/FM_Image/FM_Image/img/level/lv200.gif" width="18" height="18" align="absmiddle"><font color="#417ec6">신짱님</font></td>
+																	<td class="small2"><font color="#0360ce">64</font></td>
+																</tr>
+																<tr bgcolor="#22293c"> 
+																	<td height="1" colspan="4"></td>
+																</tr>
+																			
+															</table>
+														</td>
+													</tr>
+													<tr> 
+														<td height="13"></td>
+													</tr>
+												</table>
+                                                <tr> 
+                                                    <td height="8"> </td>
+                                                </tr>
+                                                <!-- 페이스북 바로가기 -->
+                                                <tr>
+                                                    <td height="13"><a href="https://www.facebook.com/fantasymasters0/" onfocus='blur()'><img src="/FM_Image/FM_Image/img/2016/01/btn_facebook_go.png" border="0"></a></td>
+                                                </tr>
+                                                <!-- 페이스북 바로가기 -->
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td width="560" align="left" valign="top">
+						<table width="560" height="100%" border="0" cellpadding="0" cellspacing="0" class="fan" >
+							<tr> 
+								<td height="110" align="center" valign="bottom" style="padding : 0 0 13 0">
+									<table width="360" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td height="18" align="center">
+												<iframe src="/Common/event_neonsign.asp" frameborder="0" height="18" width="360" scrolling=no></iframe>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr> 
+								<td height="20" background="/FM_Image/FM_Image/nfm/Main/bg_main_center_01.jpg"></td>
+							</tr>
+							<tr> 
+								<td height="125" align="center" valign="top" bgcolor="#FFFFFF">
+									<table width="530" border="0" cellspacing="0" cellpadding="0">
+										<tr> 
+											<td colspan="3"><img src="/FM_Image/FM_Image/nfm/Main/title_main_01.jpg" width="530" height="24" border="0" usemap="#Map"></td>
+										</tr>
+										<tr> 
+											<td height="9" colspan="3"></td>
+										</tr>
+                                        
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr>
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/Newimg/notice.gif" width="33" height="14"/></td>
+											<td width="387" class="fan" align="left">
+                                                <a href="/FMNews/Notice/board_view.asp?NoticeNo=88&Scode=N">★ 실행안되는 분들은 game.exe를 다운받아 교체해주세요.</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2016.10.21&nbsp;18:03]</font></td>
+										</tr>
+												
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr>
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/Newimg/notice.gif" width="33" height="14"/></td>
+											<td width="387" class="fan" align="left">
+                                                <a href="/FMNews/Notice/board_view.asp?NoticeNo=83&Scode=N">★ 유닛 전투시 게임이 멈추면 필독 (AMD 그래픽 드라이버)</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2016.09.13&nbsp;15:44]</font></td>
+										</tr>
+												
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr> 
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/newimg/icon_Update.gif" width="33" height="14"></td>
+											<td width="387" class="fan" align="left">
+												<a href="/FMnews/notice/view.asp?AnnoID=867&bbsid=1">3월 30일(목) 점검 종료, 마일리지 상점 초기화 안내</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2017.03.30&nbsp;11:15]</font></td>
+										</tr>
+												
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr> 
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/newimg/icon_Update.gif" width="33" height="14"></td>
+											<td width="387" class="fan" align="left">
+												<a href="/FMnews/notice/view.asp?AnnoID=865&bbsid=1">3월 16일(수) 미라클대박부스터 접수, 이벤트 종료 안내</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2017.03.16&nbsp;12:22]</font></td>
+										</tr>
+												
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr> 
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/newimg/icon_notice.gif" width="33" height="14"></td>
+											<td width="387" class="fan" align="left">
+												<a href="/FMnews/notice/view.asp?AnnoID=3352&bbsid=0">3월 16일 9시 30분 점검 예고</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2017.03.15&nbsp;16:19]</font></td>
+										</tr>
+												
+										<tr bgcolor="#e5e5e5"> 
+										  <td height="1" colspan="3"></td>
+										</tr>
+										<tr> 
+											<td width="43" height="18" align="center" valign="middle"><img src="/FM_Image/FM_Image/fm/newimg/icon_notice.gif" width="33" height="14"></td>
+											<td width="387" class="fan" align="left">
+												<a href="/FMnews/notice/view.asp?AnnoID=3351&bbsid=0">유저 여러분께 드리는 예정 안내 공지입니다.</a>
+												
+											</td>
+											<td width="100" class="fan"><font color="#a9a8a8">[2017.01.04&nbsp;17:02]</font></td>
+										</tr>
+												
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="10" align="center" valign="top" bgcolor="#FFFFFF"></td>
+							</tr>
+							<tr>
+								<td height="200" align="center" valign="top" bgcolor="#FFFFFF">
+									<table width="530" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td align="left" valign="top"><img src="/common/menu/img/title_event.jpg" width="530" height="24" border="0" usemap="#MapMap"></td>
+										</tr>
+										
+                                        <tr>
+                                            <td>
+                                                <!-- 메인 슬라이드 영역 -->
+                                                <ul class="bxslider">
+                                                  
+
+                                                   <!--<li class="bxli" style="float: left; list-style: none; position: relative; width: 520px;"> 										
+                                                      <a href="/helpDesk/FAQ_view.asp?faqNo=1567">
+                                                            <img src="/img/MainSlider/Event161129.jpg" style="border:0; width:100%;"/>
+                                                      </a>
+                                                  </li>-->
+
+                                                  
+                                                    <li class="bxli" style="float: left; list-style: none; position: relative; width: 520px;"> 										
+                                                        <a href="/Event/Event161208/Event.asp">
+                                                            <img src="/img/mainSlider/Event161208.jpg" style="border:0; width:100%;"/>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li class="bxli" style="float: left; list-style: none; position: relative; width: 520px;"> 										
+                                                        <a href="/Event/Event261/event.asp">
+                                                            <img src="/img/mainSlider/05.jpg" style="border:0; width:100%;"/>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li class="bxli" style="float: left; list-style: none; position: relative; width: 520px;"> 										
+                                                        <a href="/Event/Event238/event.asp">
+                                                            <img src="/img/mainSlider/07.jpg" style="border:0; width:100%;"/>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                </ul>
+                                                <!-- 메인 슬라이드 영역 끝 -->
+                                            </td>
+                                        </tr>
+										<tr>
+											<td align="left" valign="top">
+                                            <!--<table width="530" height="176" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_newcard.jpg">
+													<tr> 
+														<td height="13" colspan="9"> </td>
+													</tr>
+													<tr> 
+														<td width="23" height="142"></td>-->
+														
+													<!--</tr>
+													<tr> 
+														<td height="21" colspan="9"></td>
+													</tr>
+													<script>
+													    function viewCard(card_kind,card_no){
+														    document.cvform.card_kind.value=card_kind;
+														    document.cvform.card_no.value=card_no;
+														    document.cvform.submit();
+													    }
+													</script>
+													    <form name="cvform" action="/market/cardmarket/cardview.asp" method="post">
+														    <input type="hidden" name="card_kind">
+														    <input type="hidden" name="card_no">
+													    </form> 
+										                
+                                                   <script>
+													    function viewCard2(card_kind,card_no){
+														    document.cvform2.card_kind.value=card_kind;
+														    document.cvform2.card_no.value=card_no;
+														    document.cvform2.submit();
+													    }
+													</script>
+										                <form name="cvform2" action="/market/cardmarket/cardview.asp" method="post">
+														    <input type="hidden" name="card_kind">
+														    <input type="hidden" name="card_no">
+													    </form>
+												</table>-->
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="20" align="center" valign="top" bgcolor="#FFFFFF"></td>
+							</tr>
+                            <tr>
+								<td align="center" style="background-color:White;"><img src="/FM_Image/FM_Image/nfm/Main/title_main_03.jpg" width="530" height="24" border="0" usemap="#Map2"></td>
+							</tr>
+							<tr>
+								<td height="152" align="center" valign="top" bgcolor="#FFFFFF">
+									<table width="530" height="128" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_trade.gif">
+                                                    
+													<tr> 
+														<td height="26"></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													
+													<tr align="center" valign="middle"> 
+														<td width="61" height="51" class="small2"><a href="/market/trade/real_view.asp?tradeNo=334633" onfocus="blur()"><font color="#666666">334633</font></a></td>
+														<td width="90">
+															<table width="90" border="0" cellspacing="0" cellpadding="0">
+																<tr> 
+																	<td height="15" align="center" class="small2"><font color="#5975ae">전설의반지</font></td>
+																</tr>
+																<tr> 
+																	<td height="15" align="center" class="small2"><font color="#5975ae"></font></td>
+																</tr>
+																<tr> 
+																	<td height="15" align="center" class="small2"><font color="#5975ae"></font></td>
+																</tr>
+															</table>
+														</td>
+														<td width="50" class="small2">
+                                                            100
+                                                        </td>
+														<td width="55" class="small2"><font color="#5975ae">1</font></td>
+														<td width="90">
+															<table width="90" border="0" cellspacing="0" cellpadding="0">
+																<tr> 
+																	<td height="14" align="center" class="small2">애머시스트</td>
+																</tr>
+																<tr> 
+																	<td height="14" align="center" class="small2"></td>
+																</tr>
+																<tr> 
+																	<td height="14" align="center" class="small2"></td>
+																</tr>
+															</table>
+														</td>
+														<td width="51" class="small2">
+                                                            10
+                                                        </td>
+														<td width="53" class="small2">1</td>
+														<td width="80" class="small2"><font color="#666666">2017.12.16<br>19:32</font></td>
+													</tr>
+														
+													<tr align="center" valign="middle"> 
+														<td width="61" height="51" class="small2"></td>
+														<td width="90">
+															<table width="90" border="0" cellspacing="0" cellpadding="0">
+																<tr> 
+																	<td height="15" align="center" class="small2"></td>
+																</tr>
+																<tr> 
+																	<td height="15" align="center" class="small2"></td>
+																</tr>
+																<tr> 
+																	<td height="15" align="center" class="small2"></td>
+																</tr>
+															</table>
+														</td>
+														<td width="50" class="small2"></td>
+														<td width="55" class="small2"></td>
+														<td width="90">
+															<table width="90" border="0" cellspacing="0" cellpadding="0">
+																<tr> 
+																	<td height="14" align="center" class="small2"></td>
+																</tr>
+																<tr> 
+																	<td height="14" align="center" class="small2"></td>
+																</tr>
+																<tr> 
+																	<td height="14" align="center" class="small2"></td>
+																</tr>
+															</table>
+														</td>
+														<td width="51" class="small2"></td>
+														<td width="53" class="small2"></td>
+														<td width="80" class="small2"></td>
+													</tr>
+													
+												</table>
+                                    <!--<table width="530" height="152" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td height="24"><img src="/FM_Image/FM_Image/nfm/Main/S_Market_title.jpg" width="530" height="24" border="0"></td>
+										</tr>
+										<tr>
+											<td height="128" align="left" valign="top">
+												<table width="530" height="128" border="0" cellpadding="0" cellspacing="0">
+													<tr> 
+														<td><a href="/Market/SkinShop/List.asp"><img src="/FM_Image/FM_Image/FM/shop/images/SkinShop_Open_06.jpg" border="0" /></a></td>
+														<td><a href="/market/pointmarket/list.asp"><img src="/FM_Image/FM_Image/FM/shop/images/SkinShop_Open_07.jpg" border="0" /></a></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>-->
+								</td>
+							</tr>
+							<tr> 
+								<td height="14" background="/FM_Image/FM_Image/nfm/Main/bg_main_center_02.jpg"></td>
+							</tr>
+						</table>
+					</td>
+					<td width="223" align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_main_right.jpg">
+						<table width="223" height="100%" border="0" cellpadding="0" cellspacing="0" valign="top">
+							<tr> 
+								<td align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_main_right_2_new.jpg" style="background-repeat:repeat-x;background-position:top left; padding-right:3">
+									<table width="208" height="100%" border="0" cellpadding="0" cellspacing="0">
+										<tr> 
+											<td height="110" align="center" valign="top">
+                                            <!--<div id="img_start" onclick="javascript:GameStart();" style="cursor:pointer;"><img src="/common/menu/img/gamestart_normal.png" /></div>-->
+                                            <div id="img_start" onclick="location.href='/download/download.asp'" style="cursor:pointer;"><img src="/common/menu/img/gamestart_normal.png" /></div>
+												<!--<script language="javascript">
+													InsertObject('<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="208" height="110" id=ShockwaveFlash1>' +
+																 '<param name="movie" value="/img/flash/start.swf">' +
+																 '<param name="wmode" value="transparent">' +
+																 '<embed src="/img/flash/start.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="208" height="110"></embed></object>' +
+																 '</object>' ) ;	
+												</script>-->
+											</td>
+										</tr>
+										<tr> 
+                                            <td height="130" align="center" valign="top">
+											<!-- LetfBanner : Start -->
+												<!-- 이벤트 -->
+<table width="208" border="0" cellpadding="0" cellspacing="0">
+	<tr height="140">
+		<td class="fan">
+			
+		    <a href="/helpDesk/FAQ_view.asp?faqNo=1588"><img src="/FM_Image/FM_image/img/images/right_banner1.png" style="cursor:hand"></a>
+			<a href="/helpDesk/FAQ_view.asp?faqNo=1589"><img src="/FM_Image/FM_image/img/images/right_banner2.png" style="cursor:hand"></a>
+						
+		</td>					
+	</tr>
+    <tr>
+        <td style="height:100%;position:fixed"></td>
+    </tr>
+</table>
+											<!-- LetfBanner : End -->
+								            </td>
+										</tr>
+										<tr> 
+											<td height="5"> </td>
+										</tr>
+										<!-- TotalSearch : Start -->
+										
+										<tr> 
+											<td height="63" align="left" valign="top">
+												<table width="208" height="63" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_search.jpg">
+													<tr> 
+														<td align="center" valign="bottom">
+															<table width="208" border="0" cellspacing="0" cellpadding="0">
+															<form name="sForm" action="./helpDesk/searchView.asp" method="get">
+																<tr> 
+																	<td align="right"><input name="searchword" type="text" value="NCS"style="background-color:#ffffff; border-width:1pt; border-color:#c6ccd1; border-style:solid; font-size:12px; font-color=#646464" onfocus="javascript:document.sForm.searchword.value='';"></td>
+																	<td width="5" class="fan"></td>
+																	<td width="57" align="left"><img src="/FM_Image/FM_Image/nfm/Main/btn_main_search.jpg" width="46" height="19" border="0" align="absmiddle" onfocus='blur()' style="cursor:hand" onclick="javascript:searchGo();"></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+                                                    <tr>
+                                                        <td height="12"></td>
+                                                    </tr>
+												</table>
+											</td>
+										</tr>
+										<!-- TotalSearch : End -->
+										<tr> 
+											<td height="5"></td>
+										</tr>
+										<tr> 
+											<td height="85" align="center" valign="top">
+											
+												<!--SP 게이지 : 시작-->
+												<table width="208" height="85" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_sp.jpg">
+                                                    <tr>
+                                                        <td height="39"></td>
+                                                    </tr>
+													<tr>
+														<td align="center" valign="bottom">
+															<table width="166" border="0" cellspacing="0" cellpadding="0">
+															    <tr> 
+																	<td height="14" background="/FM_Image/FM_Image/nfm/Main/bg_main_SPgage.gif">
+																		<table width="166" height="14" border="0" cellpadding="0" cellspacing="0">
+																			<tr>
+                                                                                <td width="2"></td>
+																				<td width="162" align="left"><img src="/FM_Image/FM_Image/nfm/Main/img_main_SPgage.gif" width="16.6%" height="14"></td>
+																				<td width="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr> 
+																	<td height="20" align="center" valign="bottom" class="fan"><font color="#6059b9">16.6%</font></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+                                                    <tr>
+                                                        <td height="12"></td>
+                                                    </tr>
+												</table>
+												<!--SP 게이지 : 종료-->
+												<!-- 대륙전쟁 종료 -->
+												<!--
+												<table width="208" height="85" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/img/bg_continent.jpg">
+													<tr> 
+														<td align="center" valign="top">
+															<table width="208" border="0" cellspacing="0" cellpadding="0">
+																<tr> 
+																	<td align="right"><img src="/FM_Image/FM_Image/nfm/img/title_continent.jpg" width="56" height="27"></td>
+																</tr>
+																<tr> 
+																	<td height="17" align="right">
+																		<table width="166" height="14" border="0" cellpadding="0" cellspacing="0">
+																			<tr> 
+																				<td width="2"></td>
+																				<td width="54" height="17" align="center" valign="bottom"><img src="/FM_Image/FM_Image/nfm/img/ico_continent.jpg" width="15" height="13"></td>
+																				<td width="54" height="17" align="center" valign="bottom"><img src="/FM_Image/FM_Image/nfm/img/ico_continent.jpg" width="15" height="13"></td>
+																				<td width="54" height="17" align="center" valign="bottom"><img src="/FM_Image/FM_Image/nfm/img/ico_continent.jpg" width="15" height="13"></td>
+																				<td width="2"></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr> 
+																	<td height="14" align="center">
+																		<table width="166" height="14" border="0" cellpadding="0" cellspacing="0">
+																			<tr> 
+																				<td height="14" background="/FM_Image/FM_Image/nfm/img/bg_gage_continent.jpg">
+																					<table width="166" height="14" border="0" cellpadding="0" cellspacing="0">
+																						<tr> 
+																							<td width="1"></td>
+																							<td width="164"><img src="/FM_Image/FM_Image/nfm/Main/img_main_SPgage.gif" width="16.6%" height="14"></td>
+																							<td width="1"></td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+																<tr> 
+																	<td height="18" align="center" valign="bottom" class="fan"><font color="#6059b9">16.6%</font></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+												-->
+												<!-- 대륙전쟁 종료 -->
+											</td>
+										</tr>
+										<tr> 
+											<td height="229" align="center" valign="top">
+												<table width="208" height="229" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_secret.jpg">
+                                                    <tr>
+                                                        <td height="34"></td>
+                                                    </tr>
+													<tr>
+														<td align="center" valign="bottom"> 
+															<table width="170" border="0" cellpadding="0" cellspacing="0">
+																<form name="SCform">
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage01.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG1"><img src=/NFM/Main/img_main_SCgage01.gif width=24% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG1" align="Center" class="fan"><font color=#586497>24%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage02.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG2"><img src=/NFM/Main/img_main_SCgage02.gif width=1% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG2" align="Center" class="fan"><font color=#586497>1%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage03.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG3"><img src=/NFM/Main/img_main_SCgage03.gif width=54% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG3" align="Center" class="fan"><font color=#586497>54%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage04.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG4"><img src=/NFM/Main/img_main_SCgage04.gif width=56% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG4" align="Center" class="fan"><font color=#586497>56%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage05.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG5"><img src=/NFM/Main/img_main_SCgage05.gif width=5% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG5" align="Center" class="fan"><font color=#586497>5%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage06.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG6"><img src=/NFM/Main/img_main_SCgage06.gif width=53% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG6" align="Center" class="fan"><font color=#586497>53%</font></td>
+				                                                </tr>
+																
+																 <tr> 
+					                                                <td height="24">
+						                                                <table width="135" height="24" border="0" cellpadding="0" cellspacing="0" background="/FM_Image/FM_Image/nfm/Main/bg_main_SCgage07.gif">
+							                                                <tr> 
+								                                                <td align="right" valign="middle" style="padding:0 1 0 0"> 
+									                                                <table width="120" border="0" cellspacing="0" cellpadding="0">
+										                                                <tr> 
+											                                                <td height="6" align="left" id="SCPMSG7"><img src=/NFM/Main/img_main_SCgage07.gif width=11% height=6 align=absmiddle></td>
+										                                                </tr>
+									                                                </table>
+								                                                </td>
+							                                                </tr>
+						                                                </table>
+					                                                </td>
+					                                                <td id="SCMSG7" align="Center" class="fan"><font color=#586497>11%</font></td>
+				                                                </tr>
+																
+																</form>
+															</table>
+														</td>
+													</tr>
+                                                    <tr>
+                                                        <td height="27"></td>
+                                                    </tr>
+												</table>
+                                                <tr> 
+                                                    <td height="8"> </td>
+                                                </tr>
+                                                <!-- 시크릿부스터 바로가기 -->
+                                                <tr>
+                                                   <td height="27"><a href="/Market/Booster/list.asp?s_category=1" onfocus='blur()'><img src="/FM_Image/FM_Image/img/2016/01/btn_secret_go.png" border="0"></a></td>
+                                                </tr>
+                                                <!-- 시크릿부스터 바로가기 -->
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr> 
+					<td height="17" colspan="3" background="/FM_Image/FM_Image/nfm/Main/bg_main_06.jpg"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr> 
+		<td height="145" align="center" valign="top" background="/FM_Image/FM_Image/nfm/Main/bg_copyright.jpg">
+			<script language="javascript" src="/common/js/common.js"></script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="145" align="center" valign="top" background="/FM_Image/FM_image/nfm/img//bg_copyright.jpg">
+			<table width="1000" border="0" cellspacing="0" cellpadding="0">
+				<div>
+                    <table align="center">
+                        <tr>
+                            <td colspan="3"><img src="/FM_Image/FM_image/nfm/img/foot.png" alt="푸터" border="0" usemap="#foot" /></td>
+                        </tr>
+                    </table>
+                    <map name="foot" id="Map1">
+                        <area shape="rect" coords="25,13,83,86" href="http://www.zeonix.co.kr/" alt="제오닉스" target="_blank" />
+                        <area shape="rect" coords="100,16,147,31" href="/HelpDesk/list.asp" alt="고객센터" target="_blank" />
+                        <area shape="rect" coords="151,16,192,31" href="/helpdesk/contract.asp" alt="이용약관" target="_blank"/>
+                        <area shape="rect" coords="196,16,270,31" href="/helpDesk/policy.asp" alt="개인정보 취급방침" target="_blank"/>
+                        <area shape="rect" coords="274,16,337,31" href="/helpDesk/FAQ_view.asp?faqNo=1505" alt="게임이용등급" />
+                        <area shape="rect" coords="340,16,385,31" href="/helpDesk/FAQ_view.asp?faqNo=966" alt="사이트맵" />
+                        <area shape="rect" coords="730,38,805,86" href="http://www.fm2tcg.com/Index.aspx" target="_blank" alt="판타지마스터즈2" />
+                        <area shape="rect" coords="806,40,880,86" href="http://www.sword-girls.com/default.aspx" target="_blank" alt="소드걸스" />
+                        <area shape="rect" coords="882,38,954,85" href="http://www.schmiddiva.co.kr/default.asp" target="_blank" alt="슈미드디바" />
+                    </map>
+                </div>
+			</table>
+		</td>
+	</tr>
+</table>
+
+		</td>
+	</tr>
+</table>
+<map name="Map">
+	<area shape="rect" coords="500,15,529,26" href="/FMNews/Notice/list.asp?bbsid=0" onfocus='blur()'>
+</map>
+<map name="MapMap">
+	<area shape="rect" coords="498,16,529,26" href="/FMNews/EventBoard/list.asp" onfocus='blur()'>
+</map>
+<map name="Map2">
+	<area shape="rect" coords="498,16,528,26" href="/market/trade/real_img.asp" onfocus='blur()'>
+</map>
+<!--<iframe name="SCgageFrm" id="SCgageFrm" width="0" height="0" scrolling="auto" src="./SCgage.asp"></iframe>
+--></body>
+</html>

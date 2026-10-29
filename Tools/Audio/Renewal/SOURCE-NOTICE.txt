@@ -1,0 +1,16 @@
+Fantasy Masters remaster sound presentation — fm-renewal-2026-10-29
+
+Nine new sound effects are deterministic original synthesis created for this project.
+Generator: Tools/Audio/Renewal/render-sfx.py
+Manifest: Tools/Audio/Renewal/sfx-manifest.json
+They use filtered noise, damped oscillators, paper textures and early reflections.
+They are not extracted Fantasy Masters client recordings and include no speech,
+third-party samples, remote audio service or gameplay random-number use.
+
+Original publisher source recordings remain unchanged under Tools/Audio/FmFidelity.
+The active title and battle files additionally trim their low-energy edges and
+bake a short equal-power circular overlap for looping. Previous runtime files
+are preserved in History/before-loop-polish. See polish-loops.py and the exact
+loop-polish-manifest.json for source hashes, intervals, output hashes and PCM
+measurements. Lobby/deck are unchanged. This edit does not recover missing music
+or establish an exact final-game-patch soundtrack.

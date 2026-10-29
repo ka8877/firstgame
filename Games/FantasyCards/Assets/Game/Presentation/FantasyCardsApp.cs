@@ -270,6 +270,8 @@ namespace FantasyCards.Presentation
         }
         private void Artwork(Transform parent, CardDefinition d, float x0, float y0, float x1, float y1)
         {
+            if (FmStreamingCardArt.IsStreamed(d.artResource))
+            { RenewalSourcePrint(parent, d.artResource, x0, y0, x1, y1, "Original streamed illustration", new Rect(.13f, .36f, .805f, .56f)); return; }
             if (!string.IsNullOrEmpty(d.artResource) && d.artResource.StartsWith("Art/ClassicCards/", StringComparison.Ordinal))
             {
                 var original = Resources.Load<Texture2D>(d.artResource);

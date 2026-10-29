@@ -22,3 +22,8 @@ Tools/Art/Gospel3D/Source/*.txt -text -whitespace
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
 Games/PathOfDawn/Assets/Resources/Art/Painted/traveler-motion.bytes filter=lfs diff=lfs merge=lfs -text
+# Retain fetched reference pages/scripts/text byte-for-byte with their source hashes.
+Tools/Research/FmRenewal/* -text -whitespace
+# Small generated delivery derivatives: one ordinary Git pack avoids 15,350
+# separate LFS uploads. Exact source images and all other art retain LFS above.
+Games/FantasyCards/Assets/StreamingAssets/Cards/*.jpg -filter -diff -merge -text

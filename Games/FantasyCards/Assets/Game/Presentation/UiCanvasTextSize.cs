@@ -11,7 +11,7 @@ namespace FantasyCards.Presentation
         TMP_Text label;
         Canvas canvas;
         float authoredSize;
-        bool physicalFloor, singleLine;
+        bool physicalFloor, singleLine, boundedCardText;
         Vector2 lastCanvas = new Vector2(-1, -1), lastBox = new Vector2(-1, -1);
 
         public void Configure(float size, bool keepPhysicalFloor = false, bool oneLine = false)
@@ -19,6 +19,14 @@ namespace FantasyCards.Presentation
             authoredSize = size; physicalFloor = keepPhysicalFloor; singleLine = oneLine;
             label = GetComponent<TMP_Text>(); canvas = GetComponentInParent<Canvas>()?.rootCanvas;
             lastCanvas = new Vector2(-1, -1); Refresh();
+        }
+
+        // A miniature card's line box may be shorter than the general UI's
+        // 12px floor. Fit within that box instead of making TMP Ellipsis drop
+        // the entire line. Other labels keep their existing sizing contract.
+        public void ConfigureCard(float size)
+        {
+            boundedCardText = true; Configure(size, false, true);
         }
 
         void LateUpdate() { Refresh(); }
@@ -40,7 +48,9 @@ namespace FantasyCards.Presentation
             {
                 var face = label.font.faceInfo;
                 float lineRatio = Mathf.Max(1, (face.ascentLine - face.descentLine) / Mathf.Max(1, face.pointSize));
-                maximum = Mathf.Min(maximum, box.y / lineRatio * .98f);
+                float available = box.y / lineRatio * (boundedCardText ? .92f : .98f);
+                maximum = Mathf.Min(maximum, available);
+                if (boundedCardText) floor = Mathf.Min(8f / scale, available);
             }
             maximum = Mathf.Max(maximum, floor);
             label.fontSizeMin = Mathf.Min(maximum, Mathf.Max(maximum * .8f, floor));

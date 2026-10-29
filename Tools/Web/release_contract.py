@@ -50,7 +50,18 @@ LUMINOUS = {
 }
 
 
+RENEWAL = {
+    'name': 'renewal',
+    'revisions': {'FantasyCards': 'fm-renewal-2026-10-29', 'PathOfDawn': 'gospel-renewal-2026-10-29'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Renewal' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': []
+}
+
+
 def contract(name):
+    if name == 'renewal':
+        return RENEWAL
     if name == 'luminous':
         return LUMINOUS
     if name == 'restoration':

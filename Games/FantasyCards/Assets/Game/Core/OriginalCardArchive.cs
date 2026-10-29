@@ -8,6 +8,8 @@ namespace FantasyCards.Core
         public CardRarity rarity;
         public Element element;
         public int level;
+        public int categoryCode, sourceRarityCode, rankCode, releaseDate, attack, defense, health;
+        public bool playable;
         public OriginalArchiveCard(string id, string name, string artResource, string sourceUrl,
             string sourceRules, string unsupportedReason, CardRarity rarity, Element element, int level)
         {
@@ -17,8 +19,8 @@ namespace FantasyCards.Core
         }
     }
 
-    // Separate from CardCatalog: view-only originals never become playable by
-    // silently dropping their actual special rules, limits or costs.
+    // Complete source catalog. A positive playable flag is backed by CardCatalog;
+    // unsupported originals retain their rules and never enter decks silently.
     public static class OriginalCardArchive
     {
         public static readonly OriginalArchiveCard[] All = OriginalArchiveData.Create();

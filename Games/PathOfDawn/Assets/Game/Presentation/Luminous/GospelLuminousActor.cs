@@ -17,10 +17,15 @@ namespace PathOfDawn.Presentation
             new Rect(25,953,282,272), new Rect(358,949,269,271), new Rect(687,948,242,289), new Rect(1029,953,181,259),
             new Rect(114,661,116,261), new Rect(434,657,107,258), new Rect(740,655,109,254), new Rect(1040,662,99,254),
             new Rect(103,366,147,273), new Rect(418,370,184,263), new Rect(715,369,160,260), new Rect(1040,374,180,255),
-            new Rect(56,17,206,339), new Rect(396,132,197,143), new Rect(698,113,209,132), new Rect(1035,76,153,201)
+            new Rect(56,17,206,339), new Rect(396,132,197,143), new Rect(698,113,209,132), new Rect(1035,76,153,201),
+            // Overlapping source windows separate the ankle from the shoe. No source pixels are edited.
+            new Rect(432,438,110,195), new Rect(418,370,184,100),
+            new Rect(1053,442,99,187), new Rect(1040,374,180,102)
         };
         Transform visual, torso, head, hair, nearArm, farArm, nearForearm, farForearm;
-        Transform nearThigh, farThigh, nearCalf, farCalf, pouch;
+        Transform nearThigh, farThigh, nearCalf, farCalf, nearFoot, farFoot, pouch;
+        const float UpperLeg = .38f, LowerLeg = .37f, RestHip = .84f, AnkleHeight = .102f;
+        float groundSlope, runBlend, airBlend, pelvisOffset, torsoAngle;
         Transform skirtRoot, sashRoot;
         GameObject lamp;
         Light2D lampLight;
@@ -101,6 +106,9 @@ namespace PathOfDawn.Presentation
         public void SetMotion(Vector2 measuredVelocity, bool onGround, int direction)
         { velocity = measuredVelocity; grounded = onGround; facing = direction < 0 ? -1 : 1; }
 
+        /// <summary>Measured ground normal from the controller; presentation does not move the body.</summary>
+        public void SetGroundSlope(float slope) => groundSlope = Mathf.Clamp(slope, -.35f, .35f);
+
         public void SetLamp(bool equipped)
         { if (lamp) lamp.SetActive(equipped); }
 
@@ -170,25 +178,29 @@ namespace PathOfDawn.Presentation
             clothMaterial = new Material(meshShader) { name = "Luminous mesh-safe flowing linen" };
             TextureBindings(clothMaterial,atlas);
             visual = Node("Joint rig", transform, Vector2.zero);
-            farThigh = Node("Far hip", visual, new Vector2(-.075f,.64f));
-            SpritePart("Far upper leg",10,farThigh,Vector2.zero,.35f,new Vector2(.5f,.94f),16,.16f);
-            farCalf = Node("Far knee",farThigh,new Vector2(0,-.27f));
-            SpritePart("Far calf and sandal",11,farCalf,Vector2.zero,.40f,new Vector2(.40f,.93f),17,.25f);
-            nearThigh = Node("Near hip", visual,new Vector2(.07f,.64f));
-            SpritePart("Near upper leg",8,nearThigh,Vector2.zero,.35f,new Vector2(.5f,.94f),18,.16f);
-            nearCalf = Node("Near knee",nearThigh,new Vector2(0,-.27f));
-            SpritePart("Near calf and sandal",9,nearCalf,Vector2.zero,.40f,new Vector2(.40f,.93f),19,.25f);
+            farThigh = Node("Far hip", visual, new Vector2(-.035f, RestHip));
+            SpritePart("Far upper leg",10,farThigh,Vector2.zero,.435f,new Vector2(.5f,.94f),16,.15f);
+            farCalf = Node("Far knee",farThigh,new Vector2(0,-UpperLeg));
+            SpritePart("Far shin",18,farCalf,Vector2.zero,.405f,new Vector2(.52f,.96f),17,.135f);
+            farFoot = Node("Far ankle",farCalf,new Vector2(0,-LowerLeg));
+            SpritePart("Far leather sandal",19,farFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),17,.255f);
+            nearThigh = Node("Near hip", visual,new Vector2(.035f,RestHip));
+            SpritePart("Near upper leg",8,nearThigh,Vector2.zero,.435f,new Vector2(.5f,.94f),18,.15f);
+            nearCalf = Node("Near knee",nearThigh,new Vector2(0,-UpperLeg));
+            SpritePart("Near shin",16,nearCalf,Vector2.zero,.405f,new Vector2(.52f,.96f),19,.145f);
+            nearFoot = Node("Near ankle",nearCalf,new Vector2(0,-LowerLeg));
+            SpritePart("Near leather sandal",17,nearFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),20,.255f);
             torso = Node("Chest",visual,new Vector2(0,.88f));
             farArm = Node("Far shoulder",torso,new Vector2(-.15f,.43f));
             SpritePart("Far sleeve",6,farArm,Vector2.zero,.34f,new Vector2(.5f,.90f),18,.15f);
             farForearm = Node("Far elbow",farArm,new Vector2(0,-.24f));
             SpritePart("Far forearm and hand",7,farForearm,Vector2.zero,.33f,new Vector2(.42f,.94f),18,.14f);
             skirtRoot = Node("Waist linen anchor",torso,new Vector2(0,.09f));
-            skirtMesh = Cloth("Deforming ivory linen",2,skirtRoot,.63f,.77f,21,out skirtRest);
+            skirtMesh = Cloth("Deforming ivory linen",2,skirtRoot,.56f,.74f,21,out skirtRest);
             skirtVertices = new Vector3[skirtRest.Length];
-            SpritePart("Ivory upper tunic",1,torso,new Vector2(0,.03f),.58f,new Vector2(.5f,.06f),22,.53f);
-            sashRoot = Node("Sash anchor",torso,new Vector2(-.18f,.38f));
-            sashMesh = Cloth("Trailing blue sash",12,sashRoot,.20f,.69f,20,out sashRest);
+            SpritePart("Ivory upper tunic",1,torso,new Vector2(0,.03f),.58f,new Vector2(.5f,.06f),22,.49f);
+            sashRoot = Node("Sash anchor",torso,new Vector2(-.16f,.38f));
+            sashMesh = Cloth("Trailing blue sash",12,sashRoot,.18f,.69f,20,out sashRest);
             sashVertices = new Vector3[sashRest.Length];
             pouch = SpritePart("Belt pouch",15,torso,new Vector2(.16f,.02f),.19f,new Vector2(.5f,.85f),25,.14f);
             nearArm = Node("Near shoulder",torso,new Vector2(.16f,.43f));
@@ -196,8 +208,8 @@ namespace PathOfDawn.Presentation
             nearForearm = Node("Near elbow",nearArm,new Vector2(0,-.24f));
             SpritePart("Near forearm and hand",5,nearForearm,Vector2.zero,.33f,new Vector2(.42f,.94f),25,.14f);
             head = Node("Neck",torso,new Vector2(.015f,.56f));
-            hair = SpritePart("Trailing hair",3,head,new Vector2(-.12f,.24f),.34f,new Vector2(.5f,.94f),23,.17f);
-            SpritePart("Face and wavy hair",0,head,Vector2.zero,.43f,new Vector2(.48f,.10f),26,.45f);
+            hair = SpritePart("Trailing hair",3,head,new Vector2(-.10f,.22f),.29f,new Vector2(.5f,.94f),23,.14f);
+            SpritePart("Face and wavy hair",0,head,Vector2.zero,.40f,new Vector2(.48f,.10f),26,.40f);
             var hand = Node("Right hand lamp socket",nearForearm,new Vector2(.035f,-.285f));
             lamp = new GameObject("Held clay oil lamp"); lamp.transform.SetParent(hand,false);
             SpritePart("Clay lamp and flame",13,lamp.transform,new Vector2(.02f,.01f),.14f,new Vector2(.2f,.2f),29,.22f);
@@ -218,42 +230,114 @@ namespace PathOfDawn.Presentation
         void LateUpdate()
         {
             if (!visual) return;
-            float dt = Time.deltaTime; time += dt;
-            float speed = Mathf.Abs(velocity.x); speedBlend = Mathf.MoveTowards(speedBlend,Mathf.Clamp01(speed / 3.1f),dt * 6);
-            bool running = speed > 4.0f;
+            float dt = Mathf.Max(0, Time.deltaTime); time += dt;
+            float speed = Mathf.Abs(velocity.x);
+            float ease = 1f - Mathf.Exp(-12f * dt);
+            speedBlend = Mathf.Lerp(speedBlend, Mathf.Clamp01(speed / 1.65f), ease);
+            runBlend = Mathf.Lerp(runBlend, Mathf.InverseLerp(2.4f, 4.1f, speed), ease);
+            airBlend = Mathf.Lerp(airBlend, grounded ? 0f : 1f, 1f - Mathf.Exp(-15f * dt));
+            bool running = speed > 2.8f;
             CurrentState = !grounded ? (velocity.y > .5f ? "Jump" : "Fall") : speed > .15f ? (running ? "Run" : "Walk") : "Idle";
-            phase += speed * dt * (running ? 3.1f : 3.8f);
-            float stride = Mathf.Sin(phase), opposite = Mathf.Sin(phase + Mathf.PI);
-            float breathe = Mathf.Sin(time * 1.65f);
-            visual.localScale = new Vector3(facing,1,1);
-            float bob = grounded ? Mathf.Abs(Mathf.Sin(phase * 2)) * (running ? .045f : .021f) * speedBlend : .018f;
-            visual.localPosition = new Vector3(0,bob + breathe * .006f,0);
-            torso.localRotation = Quaternion.Euler(0,0,!grounded ? -Mathf.Clamp(velocity.y,-7,7) * .5f : -(running ? 5 : 1.8f) * speedBlend);
-            torso.localScale = new Vector3(1 + breathe * .0035f,1 + breathe * .004f,1);
-            head.localRotation = Quaternion.Euler(0,0,breathe * .9f - stride * speedBlend * .7f);
-            hair.localRotation = Quaternion.Euler(0,0,Mathf.Sin(phase - .7f) * speedBlend * 7 + Mathf.Sin(time * 1.3f) * 2);
-            float swing = running ? 40 : 24;
-            nearThigh.localRotation = Quaternion.Euler(0,0,grounded ? stride * swing * speedBlend : 30);
-            farThigh.localRotation = Quaternion.Euler(0,0,grounded ? opposite * swing * speedBlend : -24);
-            nearCalf.localRotation = Quaternion.Euler(0,0,grounded ? -Mathf.Max(0,-stride) * (running ? 58 : 28) * speedBlend : -55);
-            farCalf.localRotation = Quaternion.Euler(0,0,grounded ? -Mathf.Max(0,-opposite) * (running ? 58 : 28) * speedBlend : -30);
-            nearArm.localRotation = Quaternion.Euler(0,0,grounded ? opposite * (running ? 35 : 20) * speedBlend - 3 : -35);
-            farArm.localRotation = Quaternion.Euler(0,0,grounded ? stride * (running ? 35 : 20) * speedBlend + 3 : 25);
-            nearForearm.localRotation = Quaternion.Euler(0,0,12 + (running ? 32 : 8) * speedBlend + Mathf.Max(0,stride) * 8 * speedBlend);
-            farForearm.localRotation = Quaternion.Euler(0,0,10 + (running ? 28 : 7) * speedBlend + Mathf.Max(0,opposite) * 8 * speedBlend);
-            if (LampEquipped) nearForearm.localRotation = Quaternion.Euler(0,0,20 + opposite * speedBlend * 8);
-            Deform(skirtMesh,skirtRest,skirtVertices,.77f,.024f,.045f);
-            Deform(sashMesh,sashRest,sashVertices,.69f,.07f,.10f);
+
+            // Advance by actual travelled distance. The stance foot travels backwards by
+            // that same distance, unlike a time-driven leg pendulum which skates over the path.
+            float span = Mathf.Lerp(.36f, .46f, runBlend);
+            float stance = Mathf.Lerp(.58f, .48f, runBlend);
+            float cycleDistance = span * 2f / stance;
+            if (grounded) phase = Mathf.Repeat(phase + speed * dt / cycleDistance * Mathf.PI * 2f, Mathf.PI * 2f);
+            float cycle = phase / (Mathf.PI * 2f);
+            var near = Step(cycle, span, stance, out float nearPitch);
+            var far = Step(Mathf.Repeat(cycle + .5f, 1f), span, stance, out float farPitch);
+            near = Vector2.Lerp(new Vector2(.035f, AnkleHeight), near, speedBlend);
+            far = Vector2.Lerp(new Vector2(-.035f, AnkleHeight), far, speedBlend);
+            near.y += near.x * groundSlope * facing;
+            far.y += far.x * groundSlope * facing;
+
+            // A low, reachable pelvis at heel contact keeps knees anatomical and soles
+            // on the actual ground plane. The torso follows it instead of stretching a leg.
+            float hip = Mathf.Min(RestHip, Mathf.Min(ReachableHip(near, .035f), ReachableHip(far, -.035f)));
+            hip = Mathf.Lerp(hip, RestHip - .035f, airBlend);
+            pelvisOffset = hip - RestHip;
+            near = Vector2.Lerp(near, new Vector2(.20f, .24f + Mathf.Clamp01(velocity.y / 8f) * .09f), airBlend);
+            far = Vector2.Lerp(far, new Vector2(-.18f, .16f), airBlend);
+            nearThigh.localPosition = new Vector3(.035f, RestHip + pelvisOffset, 0);
+            farThigh.localPosition = new Vector3(-.035f, RestHip + pelvisOffset, 0);
+            SolveLeg(nearThigh, nearCalf, nearFoot, near, Mathf.Lerp(nearPitch * speedBlend, 12, airBlend));
+            SolveLeg(farThigh, farCalf, farFoot, far, Mathf.Lerp(farPitch * speedBlend, -10, airBlend));
+
+            float stride = Mathf.Sin(phase), breathe = Mathf.Sin(time * 1.65f);
+            visual.localScale = new Vector3(facing, 1, 1);
+            visual.localPosition = Vector3.zero;
+            torso.localPosition = new Vector3(0, .88f + pelvisOffset + breathe * .0035f, 0);
+            float lean = Mathf.Lerp(-2.3f, -7.2f, runBlend) * speedBlend;
+            torsoAngle = Mathf.Lerp(torsoAngle, Mathf.Lerp(lean, -Mathf.Clamp(velocity.y, -7, 7) * .45f, airBlend), ease);
+            torso.localRotation = Quaternion.Euler(0, 0, torsoAngle);
+            torso.localScale = new Vector3(1 + breathe * .002f, 1 + breathe * .002f, 1);
+            // Counter-rotation stabilises the gaze; hair trails softly instead of whipping.
+            SmoothAngle(head, -torsoAngle * .65f + breathe * .45f - stride * speedBlend * .45f, 12, dt);
+            SmoothAngle(hair, Mathf.Sin(phase - .8f) * speedBlend * 2.8f + Mathf.Sin(time * 1.3f) * .8f, 8, dt);
+            float armSwing = Mathf.Lerp(14f, 29f, runBlend) * speedBlend;
+            SmoothAngle(nearArm, Mathf.Lerp(-stride * armSwing - 2f, -19f, airBlend), 14, dt);
+            SmoothAngle(farArm, Mathf.Lerp(stride * armSwing + 2f, 17f, airBlend), 14, dt);
+            float elbow = Mathf.Lerp(7f, 43f, runBlend) * speedBlend + 5f;
+            SmoothAngle(nearForearm, LampEquipped ? 31f + stride * speedBlend * 3f : elbow + Mathf.Max(0, stride) * 5f * speedBlend, 14, dt);
+            SmoothAngle(farForearm, elbow + Mathf.Max(0, -stride) * 5f * speedBlend, 14, dt);
+            Deform(skirtMesh, skirtRest, skirtVertices, .74f, .008f, .028f, false);
+            Deform(sashMesh, sashRest, sashVertices, .69f, .016f, .046f, true);
             if (lampLight) lampLight.intensity = .72f + Mathf.Sin(time * 13) * .045f + Mathf.Sin(time * 19.2f) * .025f;
         }
 
-        void Deform(Mesh mesh, Vector3[] rest, Vector3[] output, float height, float idle, float moving)
+        Vector2 Step(float cycle, float span, float stance, out float footPitch)
         {
-            for (int i=0;i<rest.Length;i++)
+            if (cycle < stance)
+            {
+                float t = cycle / stance;
+                // Mostly flat support, small heel roll only at the two ends.
+                footPitch = Mathf.Lerp(7f, 0f, Mathf.Clamp01(t / .16f)) - Mathf.SmoothStep(0, 10f, (t - .8f) / .2f);
+                return new Vector2(Mathf.Lerp(span, -span, t), AnkleHeight);
+            }
+            float swing = (cycle - stance) / (1f - stance);
+            float travel = swing * swing * (3f - 2f * swing);
+            float lift = Mathf.Sin(swing * Mathf.PI) * Mathf.Lerp(.105f, .205f, runBlend);
+            footPitch = Mathf.Lerp(-10f, 7f, travel);
+            return new Vector2(Mathf.Lerp(-span, span, travel), AnkleHeight + lift);
+        }
+
+        static float ReachableHip(Vector2 ankle, float hipX)
+        {
+            float dx = ankle.x - hipX, reach = (UpperLeg + LowerLeg) * .985f;
+            return ankle.y + Mathf.Sqrt(Mathf.Max(.01f, reach * reach - dx * dx));
+        }
+
+        static void SolveLeg(Transform thigh, Transform calf, Transform foot, Vector2 ankle, float footPitch)
+        {
+            Vector2 target = ankle - (Vector2)thigh.localPosition;
+            float distance = Mathf.Clamp(target.magnitude, .08f, UpperLeg + LowerLeg - .002f);
+            float hipOffset = Mathf.Acos(Mathf.Clamp((UpperLeg * UpperLeg + distance * distance - LowerLeg * LowerLeg) / (2f * UpperLeg * distance), -1f, 1f)) * Mathf.Rad2Deg;
+            float thighAngle = Mathf.Atan2(target.x, -target.y) * Mathf.Rad2Deg + hipOffset;
+            float calfAngle = -Mathf.Acos(Mathf.Clamp((distance * distance - UpperLeg * UpperLeg - LowerLeg * LowerLeg) / (2f * UpperLeg * LowerLeg), -1f, 1f)) * Mathf.Rad2Deg;
+            thigh.localRotation = Quaternion.Euler(0, 0, thighAngle);
+            calf.localRotation = Quaternion.Euler(0, 0, calfAngle);
+            // Sandals retain ground orientation independently from the shin angle.
+            foot.localRotation = Quaternion.Euler(0, 0, footPitch - thighAngle - calfAngle);
+        }
+
+        static void SmoothAngle(Transform bone, float degrees, float rate, float dt)
+        {
+            bone.localRotation = Quaternion.Slerp(bone.localRotation, Quaternion.Euler(0, 0, degrees), 1f - Mathf.Exp(-rate * dt));
+        }
+
+        void Deform(Mesh mesh, Vector3[] rest, Vector3[] output, float height, float idle, float moving, bool trailing)
+        {
+            for (int i = 0; i < rest.Length; i++)
             {
                 var p = rest[i]; float down = -p.y / height;
-                p.x += (Mathf.Sin(time * 2.1f - down * 2.6f) * idle + Mathf.Sin(phase - down * 2) * speedBlend * moving) * down * down;
-                p.y += Mathf.Cos(phase - down) * speedBlend * .013f * down;
+                // Top rows stay sewn to the waist/shoulder. Cloth follows the moving
+                // legs subtly; asymmetric trailing cloth responds to the actual speed.
+                float hem = down * down;
+                float drift = trailing ? -Mathf.Abs(velocity.x) * .008f : 0;
+                p.x += (Mathf.Sin(time * 1.8f - down * 2.6f) * idle + Mathf.Sin(phase - down * 1.5f) * speedBlend * moving + drift) * hem;
+                p.y += Mathf.Cos(phase * 2f - down) * speedBlend * .006f * hem;
                 output[i] = p;
             }
             mesh.vertices = output; mesh.RecalculateBounds();
