@@ -47,6 +47,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('game', choices=REVISIONS)
     parser.add_argument('--post-build-caches', action='store_true')
+    parser.add_argument('--player-data-caches', action='store_true',
+                        help='Only inactive generated PlayerDataCache and BuildPlayerData regular files; preserve all roots/imported assets/packages.')
     args = parser.parse_args()
     processes = [line.split(None, 3) for line in subprocess.check_output(['ps', '-eo', 'pid=,stat=,comm=,args='], text=True).splitlines()]
     active = []
@@ -62,7 +64,11 @@ def main():
         active.append({'pid': int(pid), 'process': name, 'cwd': str(actual_cwd), 'scope': 'Unrelated project; its cache is untouched'})
     assert (BUILD / args.game / 'Web/BuildEvidence.txt').is_file(), 'Successful current Web evidence is required'
     bee = Path('/tmp/firstgame-luminous-generated-cache') / args.game / 'Library/Bee'
-    if args.post_build_caches:
+    assert not (args.post_build_caches and args.player_data_caches), 'Choose one bounded cache scope'
+    if args.player_data_caches:
+        folders = [Path('/tmp/firstgame-arcana-generated-cache') / args.game / 'PlayerDataCache',
+                   Path('/tmp/firstgame-luminous-generated-cache') / args.game / 'Library/BuildPlayerData']
+    elif args.post_build_caches:
         folders = [bee] + [Path('/tmp/firstgame-arcana-generated-cache') / args.game / name for name in ('BurstCache', 'ShaderCache')]
     else:
         folders = [bee / 'artifacts/WebGL' / name for name in ('il2cppOutput', 'GameAssembly')]
