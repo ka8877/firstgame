@@ -47,7 +47,7 @@ def inputs():
 def notes(game,target):
  folder=BUILD/game/target
  launch=f'압축을 모두 풀고 {game}.exe를 실행하세요. 데이터 폴더와 DLL도 함께 필요합니다.' if target=='Windows' else '전체 폴더를 HTTP/HTTPS 서버로 실행하세요. file:// 직접 실행은 지원하지 않습니다.'
- text='카드 원본 도감과 실제 출전 가능한 카드는 구분됩니다. 미지원 기술이 있는 원본은 설명과 함께 도감에서 살펴보세요.\n게임 시작 → AI 방 → 덱 선택 → 대전 시작. 카드 클릭/드래그로 배치합니다.' if game=='FantasyCards' else '탄생 도입에서 열두 살 성전 여정으로 이어지는 첫 장입니다.\nA/D 이동, Shift 달리기, Space 점프, E 대화, 휠 줌, I 인물, B 가방, M 말씀 도감, Esc 메뉴. 모바일은 화면 버튼을 사용합니다.'
+ text='카드 원본 도감과 실제 출전 가능한 카드는 구분됩니다. 미지원 기술이 있는 원본은 설명과 함께 도감에서 살펴보세요.\n게임 시작 → AI 방 → 덱 선택 → 대전 시작. 카드 클릭/드래그로 배치합니다.' if game=='FantasyCards' else '탄생 도입에서 열두 살 성전 여정으로 이어지는 첫 장입니다.\n새 15개 말씀 여정은 타이틀의 새 여정으로 시작하세요. 이전 저장의 이어하기는 기존 경로를 유지합니다.\nA/D 이동, Shift 달리기, Space 점프, E 대화, 휠 줌, I 인물, B 가방, M 말씀 도감, Esc 메뉴. 모바일은 화면 버튼을 사용합니다.'
  (folder/'README.txt').write_text(REVISIONS[game]+'\nUnity6000.3.26f1\n\n'+launch+'\n'+text+'\n음악은 첫 클릭/터치 이후 재생됩니다. 실제 검증 범위는 RenewalValidation.md를 확인하세요.\n')
  shutil.copyfile(ROOT/'Docs/RenewalValidation.md',folder/'RenewalValidation.md')
  notice=folder/'ThirdParty';notice.mkdir(exist_ok=True)
@@ -73,9 +73,12 @@ def evidence():
    for name in ('BuildInputs.json','BuildEvidence.txt','LegacyResourceExclusions.json'):
     p=BUILD/game/target/name
     if p.is_file():rows[f'Builds/{game}/{target}/{name}']=p
- for relative in ('Docs/RenewalValidation.md','Tools/Environment/validation.json','Tools/Build/package-renewal.py','Tools/Build/package-modern.py','Tools/Build/renewal-task.sh','Tools/Build/renewal-pipeline-state.py','Tools/Validation/renewal_release_evidence.py','Tools/Validation/summarize-renewal-release.py','Tools/Validation/renewal_player_payload.py','Tools/Validation/run-renewal-native.py','Tools/Validation/renewal-web-smoke.py','Tools/Validation/renewal-smoke-plans.json','Tools/Validation/renewal-public-plans.json','Tools/Validation/verify-public-portal.py','Tools/Web/stage-renewal.py','Tools/Web/release_contract.py'):
+ for relative in ('Docs/RenewalValidation.md','Tools/Environment/validation.json','Tools/Build/package-renewal.py','Tools/Build/package-modern.py','Tools/Build/renewal-task.sh','Tools/Build/renewal-pipeline-state.py','Tools/Validation/renewal_release_evidence.py','Tools/Validation/summarize-renewal-release.py','Tools/Validation/renewal_player_payload.py','Tools/Validation/run-renewal-native.py','Tools/Validation/renewal-web-smoke.py','Tools/Validation/renewal-smoke-plans.json','Tools/Validation/renewal-public-plans.json','Tools/Validation/verify-public-portal.py','Tools/Validation/recover-public-portal.py','Tools/Web/stage-renewal.py','Tools/Web/release_contract.py'):
   p=ROOT/relative
   if p.is_file():rows[relative]=p
+ for relative in ('fm-local-media-errors.py','test-fm-local-media-errors.py','Fixtures/fm-inactive-preloads-48739.json','Fixtures/fm-public-pregesture-ranges.json','Fixtures/fm-public-recovered-ranges.json','Fixtures/fm-renewal-public-range.json'):
+  p=ROOT/'Tools/Validation'/relative
+  if p.is_file():rows[p.relative_to(ROOT).as_posix()]=p
  return rows
 
 def main():

@@ -1,7 +1,7 @@
 {
   "releaseProfile": "renewal",
   "date": "2026-10-29",
-  "updatedUtc": "2026-10-29T05:42:23.975432+00:00",
+  "updatedUtc": "2026-10-29T06:15:52.545594+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-renewal-2026-10-29",
     "PathOfDawn": "gospel-renewal-2026-10-29"
@@ -177,6 +177,18 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 20
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 34,
+        "report": {
+          "file": "Artifacts/Validation/Renewal/PublicMobile844/FantasyCards/report.json",
+          "sha256": "b33f021f7f65207e9d6c0b686cdb3cad24366376c70a8f2964bdc58e729dc66e",
+          "bytes": 17777108
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 2
       }
     },
     "PathOfDawn": {
@@ -203,13 +215,36 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 11
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 20,
+        "report": {
+          "file": "Artifacts/Validation/Renewal/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "2730fa6ec44947b8b7ac815a006b67b0f7686cc448faa4f53806ce86a4e806a5",
+          "bytes": 63201
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
       }
     }
   },
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
+    "stageManifest": {
+      "file": "/tmp/firstgame-renewal-staged-site/build-manifest.json",
+      "sha256": "34e400b9fa5ca8714ca0df32d5d7d22ef6c43a198641e80a2c3aba4ba09419ee",
+      "bytes": 2105885
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Renewal/PublicPortal/report.json",
+      "sha256": "8956303054dadfe324dec8e6f207e3d4c486a4fbb258557be08af625724adf38",
+      "bytes": 10221246
+    },
+    "verifiedFiles": 15393,
+    "scope": "Every staged file fetched and hashed; actual portal originals reviewed by Root."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",

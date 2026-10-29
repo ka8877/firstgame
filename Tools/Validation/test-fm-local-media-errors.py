@@ -116,4 +116,36 @@ class ActualPublicRecoveredRanges(unittest.TestCase):
             a=copy.deepcopy(self.args(self.raw['failures'][-1]));a[key]=[];self.assertIsNone(m.recovered_public_range_cancellation(**a))
 
 
+class ActualRenewalPublicRange(unittest.TestCase):
+    def setUp(self):
+        self.raw=json.loads(Path(__file__).with_name('Fixtures').joinpath('fm-renewal-public-range.json').read_text())
+
+    def args(self):
+        return copy.deepcopy({k:self.raw[k] for k in ('game','revision','suite','failure','game_url','runtime_files','observations','windows','responses','delivered')})
+
+    def test_actual_unused_deck_range_decodes_without_changing_failed_original(self):
+        self.assertEqual(self.raw['provenance']['sourceReportStatus'],'failed')
+        proof=m.recovered_public_range_cancellation(**self.args())
+        self.assertEqual(proof['lifecycle']['category'],'startup-decoded-range')
+        self.assertFalse(proof['lifecycle']['initialPlayer']['active'])
+        self.assertGreaterEqual(proof['lifecycle']['decodedPlayer']['readyState'],2)
+        self.assertEqual(proof['http206Responses'],3)
+
+    def test_bad_delivery_missing_decode_ranges_pcm_or_other_revision_still_fail(self):
+        for key in ('delivered','responses','windows','observations'):
+            with self.subTest(key=key):
+                a=self.args();a[key]=[];self.assertIsNone(m.recovered_public_range_cancellation(**a))
+        for key,value in [('status',503),('sha256','0'*64),('bytes',0)]:
+            a=self.args()
+            for row in a['delivered']:
+                if row['url']==a['failure']['url']:row[key]=value
+            self.assertIsNone(m.recovered_public_range_cancellation(**a))
+        a=self.args();a['revision']='unknown-release';self.assertIsNone(m.recovered_public_range_cancellation(**a))
+        a=self.args()
+        for row in a['observations']:
+            for player in row['players']:
+                if player['source']==a['failure']['url']:player['readyState']=0
+        self.assertIsNone(m.recovered_public_range_cancellation(**a))
+
+
 if __name__=='__main__':unittest.main()
