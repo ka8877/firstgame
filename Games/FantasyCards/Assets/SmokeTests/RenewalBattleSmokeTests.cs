@@ -39,7 +39,7 @@ namespace FantasyCards.SmokeTests
                 && image.texture.name == System.IO.Path.GetFileName(terrainDefinition.artResource)), Is.True,
                 "The backfield must show the deployed original terrain artwork, not just a resource pip.");
             Assert.That(backfield.GetComponent<Button>(), Is.Not.Null);
-            backfield.GetComponent<Button>().onClick.Invoke(); yield return null;
+            backfield.GetComponent<Button>().onClick.Invoke();
             Assert.That(SmokeUi.FindButton("돌아가기"), Is.Null, "A single public-card click now selects instead of opening detail.");
             GameObject.Find("Backfield 0 0").GetComponent<Button>().onClick.Invoke(); yield return null;
             Assert.That(SmokeUi.HasText(terrainDefinition.name), Is.True);
@@ -51,7 +51,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(dragEngine.State.players[0].AtLane(2).instanceId, Is.EqualTo(unit.instanceId));
             Assert.That(dragEngine.State.players[0].genericSoul, Is.EqualTo(soul - CardCatalog.Get(unit.definitionId).cost));
             BattleEngine.Validate(dragEngine.State);
-            yield return SmokeUi.Capture("FantasyCards", "polish-" + attempt + "-critical-deployed-field", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "chronicle-" + attempt + "-critical-deployed-field", 1280, 720);
 
             // Native-only legal deterministic fixture. Browser checks use ordinary
             // pointer/touch input and never inject this state.
@@ -59,6 +59,13 @@ namespace FantasyCards.SmokeTests
             Assert.That(engine.ConfirmOpeningHand(0, out _), Is.True);
             engine.State.activePlayer = 1;
             for (int side = 0; side < 2; side++) FixtureSouls(engine, side);
+            for (int side = 0; side < 2; side++)
+            for (int land = 0; land < 3; land++)
+            {
+                var actualTerrain = engine.State.players[side].deck.First(c => CardCatalog.Get(c.definitionId).kind == CardKind.Terrain);
+                engine.State.players[side].deck.Remove(actualTerrain);
+                engine.State.players[side].terrain.Add(actualTerrain);
+            }
             FixtureUnit(engine, 0, 0, 0);
             FixtureUnit(engine, 1, 0, 30);
             FixtureUnit(engine, 1, 2, 30);
@@ -82,15 +89,41 @@ namespace FantasyCards.SmokeTests
             var expectedChangedCoin=expected.State.events.Skip(previousEvents).First(e=>e.kind=="coin"&&e.hasStatTransition&&(e.beforeAttack!=e.afterAttack||e.beforeDefense!=e.afterDefense||e.beforeHealth!=e.afterHealth));
             yield return SmokeUi.WaitUntil(() => app.BattlePlaybackEventKind == "coin" && app.LastBattlePlaybackEvents.LastOrDefault(e=>e.kind=="coin") is BattleEvent e && e.sourceInstanceId==expectedChangedCoin.sourceInstanceId && e.coinIndex==expectedChangedCoin.coinIndex,
                 20, "A real coin that changes this card's stats must be visible in sequence.");
-            Assert.That(UnityEngine.Object.FindObjectsByType<RectTransform>(FindObjectsSortMode.None)
-                .Any(view => view.gameObject.activeInHierarchy && view.gameObject.name == "Central actual coin tray"), Is.True);
+            Assert.That(app.ChronicleVisibleCoinPanels, Is.EqualTo(2), "An actual two-unit clash must show both source-style result windows.");
             var shownCoin = app.LastBattlePlaybackEvents.Last(item => item.kind == "coin");
-            Assert.That(GameObject.Find("Integrated live card values " + shownCoin.sourceInstanceId), Is.Not.Null,
-                "Resolved values must belong to the actual card surface rather than a separate status pane.");
-            Assert.That(SmokeUi.HasText("C" + shownCoin.coinIndex + " · " + (shownCoin.coinHeads ? "앞면" : "뒷면")), Is.True,
-                "The original-style horizontal tray must display this exact Core result.");
-            yield return SmokeUi.Capture("FantasyCards","polish-"+attempt+"-on-card-coin-result",1280,720,settleSeconds:0f);
-            yield return SmokeUi.Capture("FantasyCards","polish-"+attempt+"-on-card-coin-result-mobile",844,390,settleSeconds:0f);
+            string[] statLabels = { "AP", "DP", "HP" };
+            int[] expectedValues = { shownCoin.afterAttack, shownCoin.afterDefense, Math.Max(0, shownCoin.afterHealth) };
+            for (int stat = 0; stat < 3; stat++)
+            {
+                var printed = GameObject.Find("Card live " + statLabels[stat] + " " + shownCoin.sourceInstanceId);
+                Assert.That(printed, Is.Not.Null);
+                Assert.That(printed.GetComponent<TMP_Text>().text, Is.EqualTo(expectedValues[stat].ToString()),
+                    "The actual source numeral area must update to the real transition; no extra AP/DP/HP bars.");
+                var rect = printed.GetComponent<RectTransform>();
+                Assert.That(rect.anchorMin.x, Is.GreaterThan(.85f));
+                Assert.That(rect.anchorMax.y, Is.LessThan(.24f));
+            }
+            for (int owner = 0; owner < 2; owner++)
+            {
+                var slots = UnityEngine.Object.FindObjectsByType<RectTransform>(FindObjectsSortMode.None)
+                    .Where(view => view.gameObject.activeInHierarchy && view.name.StartsWith("Coin slot " + owner + " ")).ToArray();
+                Assert.That(slots.Length, Is.EqualTo(5), "Each real side window retains all five outlined source slots.");
+                Assert.That(GameObject.Find("Actual coin chance " + owner), Is.Not.Null);
+            }
+            var face = GameObject.Find("Resolved coin " + shownCoin.sourcePlayer + " " + shownCoin.coinIndex + (shownCoin.coinHeads ? " heads" : " tails"));
+            Assert.That(face, Is.Not.Null, "The round token must show this exact resolved face from Core.");
+            Assert.That(GameObject.Find("Chronicle battle terrain strip"), Is.Not.Null, "Focused battle shows actual own full terrain instead of the preparation hand.");
+            Action inspectLiveLayers = () =>
+            {
+                Assert.That(app.ChronicleVisibleCoinPanels, Is.EqualTo(2));
+                Assert.That(UnityEngine.Object.FindObjectsByType<RectTransform>(FindObjectsSortMode.None)
+                    .Count(v => v.gameObject.activeInHierarchy && v.name.StartsWith("Chronicle coin result ")), Is.EqualTo(2),
+                    "Both actual coin windows must survive viewport setup through camera submission.");
+                Assert.That(GameObject.Find("Chronicle battle terrain strip").GetComponentsInChildren<RawImage>().Length,
+                    Is.GreaterThanOrEqualTo(3), "The fixture has three actual full terrain prints, not an empty placeholder.");
+            };
+            yield return SmokeUi.Capture("FantasyCards","chronicle-"+attempt+"-on-card-coin-result",1280,720,inspect:inspectLiveLayers,settleSeconds:0f);
+            yield return SmokeUi.Capture("FantasyCards","chronicle-"+attempt+"-on-card-coin-result-mobile",844,390,inspect:inspectLiveLayers,settleSeconds:0f);
             ActiveButtons("Battle playback skip").Single().onClick.Invoke();
             yield return SmokeUi.WaitUntil(() => !app.IsBattlePlaybackActive, 8, "Skip changes only presentation time.");
             var events = app.LastBattlePlaybackEvents.ToArray();

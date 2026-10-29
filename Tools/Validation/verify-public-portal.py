@@ -23,6 +23,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import requests
+from chronicle_storage import authorize_output
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'Web'))
 from release_contract import manifest_contract
@@ -101,16 +102,16 @@ def resolve_stage(value):
     # This exception is deliberately not a general permission to stage in /tmp
     # or to trust an arbitrary ledger-supplied destination.
     lexical = Path(os.path.abspath(value))
-    renewal = lexical == ROOT / "Artifacts/PolishWebPlaytest"
+    renewal = lexical == ROOT / "Artifacts/ChronicleWebPlaytest"
     luminous = lexical == ROOT / "Artifacts/LuminousWebPlaytest"
     restoration = lexical == ROOT / "Artifacts/RestorationWebPlaytest"
-    allowed_link = ROOT / ("Artifacts/PolishWebPlaytest" if renewal else "Artifacts/LuminousWebPlaytest" if luminous else "Artifacts/RestorationWebPlaytest" if restoration else "Artifacts/WebPlaytest")
-    allowed_root = Path("/tmp/firstgame-polish-staged-site" if renewal else "/tmp/firstgame-luminous-staged-site" if luminous else "/tmp/firstgame-restoration-staged-site" if restoration else "/tmp/firstgame-arcana-staged-site")
-    ledger_path = ROOT / ("Artifacts/Validation/Polish/generated-stage-storage.json" if renewal else "Artifacts/Validation/Luminous/generated-stage-storage.json" if luminous else "Artifacts/Validation/Restoration/generated-stage-storage.json" if restoration else "Artifacts/Validation/Arcana/generated-stage-storage.json")
+    allowed_link = ROOT / ("Artifacts/ChronicleWebPlaytest" if renewal else "Artifacts/LuminousWebPlaytest" if luminous else "Artifacts/RestorationWebPlaytest" if restoration else "Artifacts/WebPlaytest")
+    allowed_root = Path("/tmp/firstgame-chronicle-staged-site" if renewal else "/tmp/firstgame-luminous-staged-site" if luminous else "/tmp/firstgame-restoration-staged-site" if restoration else "/tmp/firstgame-arcana-staged-site")
+    ledger_path = ROOT / ("Artifacts/Validation/Chronicle/generated-stage-storage.json" if renewal else "Artifacts/Validation/Luminous/generated-stage-storage.json" if luminous else "Artifacts/Validation/Restoration/generated-stage-storage.json" if restoration else "Artifacts/Validation/Arcana/generated-stage-storage.json")
     require(lexical == allowed_link and lexical.is_symlink() and stage == allowed_root
             and stage.is_dir(), "Stage must be inside Artifacts or use the exact recorded Arcana staging link")
     require(ledger_path.is_file() and not ledger_path.is_symlink()
-            and ledger_path.resolve().is_relative_to(artifact_root), "Missing regular Arcana staging storage ledger")
+            and authorize_output(ledger_path.parent) == ledger_path.parent, "Missing regular task staging storage ledger")
     ledger = json.loads(ledger_path.read_text())
     require(ledger.get("status") == "prepared" and ledger.get("artifactPath") == str(allowed_link)
             and ledger.get("actualRoot") == str(allowed_root), "Arcana staging link does not match its storage ledger")
@@ -281,11 +282,11 @@ def main():
     parser.add_argument("--workers", type=int, default=8, help="Bounded independent HTTPS file checks, 1–12 workers.")
     args = parser.parse_args()
     require(1 <= args.workers <= 12, "HTTP workers must be between1 and12")
-    base_url, output = root_url(args.base_url), args.output.resolve()
+    base_url, output = root_url(args.base_url), authorize_output(args.output)
     stage, lexical_stage, stage_authorization = resolve_stage(args.stage)
     artifact_root = (ROOT / "Artifacts").resolve()
-    require(output.is_relative_to(artifact_root) and output != artifact_root and not stage.is_relative_to(output)
-            and not output.is_relative_to(stage), "Report output must be a separate Artifacts subdirectory")
+    require(output != artifact_root and not stage.is_relative_to(output.resolve())
+            and not output.resolve().is_relative_to(stage), "Report output must be separate from stage")
     require(args.timeout > 0, "Timeout must be positive")
     manifest, expected = staged_manifest(stage)
     previous = archive_previous(output)

@@ -32,7 +32,7 @@ def main():
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', args.attempt):
         parser.error('A task-owned unique attempt is required.')
     FILES = GOSPEL_FILES if args.game == 'PathOfDawn' else tuple('Games/FantasyCards/' + part for part in ('Assets/Settings/DesktopURP.asset', 'Assets/Settings/WebURP.asset', 'Assets/UniversalRenderPipelineGlobalSettings.asset'))
-    folder = ROOT / 'Artifacts/Validation/Polish' / args.game / args.attempt / 'PipelineState' / args.profile
+    folder = ROOT / 'Artifacts/Validation/Chronicle' / args.game / args.attempt / 'PipelineState' / args.profile
     record = folder / 'record.json'
     if args.action == 'snapshot':
         if folder.exists():

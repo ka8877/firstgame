@@ -6,7 +6,7 @@ from datetime import datetime,timezone
 import xml.etree.ElementTree as ET
 from restoration_source_binding import ROOT,capture,verify,digest
 p=argparse.ArgumentParser();p.add_argument('game',choices=('FantasyCards','PathOfDawn'));p.add_argument('attempt');a=p.parse_args()
-out=ROOT/'Artifacts/Validation/Polish';stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'NativeAttempts'/a.game/stamp;attempt.mkdir(parents=True)
+out=ROOT/'Artifacts/Validation/Chronicle';stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'NativeAttempts'/a.game/stamp;attempt.mkdir(parents=True)
 def fonts():
  return [{'file':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':digest(p)} for name in ('Korean','Display') for p in [ROOT/f'Games/{a.game}/Assets/Resources/Fonts/{name}.asset']]
 font_before=fonts()

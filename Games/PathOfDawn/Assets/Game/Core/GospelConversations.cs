@@ -9,9 +9,10 @@ namespace PathOfDawn.Core
         public string PortraitKey { get; }
         public string Text { get; }
         public bool IsVerbatim { get; }
-        public string Label => IsVerbatim ? "성경 직접 인용 · 개역한글" : "학습 안내 · 본문 요약";
-        public GospelDialogueTurn(string speaker, string portrait, string text, bool verbatim = false)
-        { Speaker = speaker; PortraitKey = portrait; Text = text; IsVerbatim = verbatim; }
+        public bool IsDramatized { get; }
+        public string Label => IsVerbatim ? "성경 직접 인용 · 개역한글" : IsDramatized ? "게임을 위한 극화 · 성경 직접 인용 아님" : "학습 안내 · 본문 요약";
+        public GospelDialogueTurn(string speaker, string portrait, string text, bool verbatim = false, bool dramatized = false)
+        { Speaker = speaker; PortraitKey = portrait; Text = text; IsVerbatim = verbatim; IsDramatized = !verbatim&&dramatized; }
     }
 
     /// <summary>Quoted speech is extracted from the existing verified passage, never invented.</summary>

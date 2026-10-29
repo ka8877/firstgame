@@ -20,6 +20,8 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--site", type=Path, default=ROOT / "Artifacts/WebPlaytest")
 parser.add_argument("--repository", default="ka8877/firstgame")
 parser.add_argument("--branch", default="gh-pages")
+parser.add_argument("--link-immutable-stage", action="store_true",
+                    help="Link already verified immutable stage files into the disposable same-filesystem checkout; verify stage hashes again after push.")
 args = parser.parse_args()
 if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.repository):
     parser.error("Expected owner/repository.")
@@ -28,6 +30,7 @@ site = args.site.resolve()
 if not (site / ".firstgame-web-output").is_file() or not (site / "build-manifest.json").is_file():
     parser.error("Stage the complete site with stage-site.py first.")
 manifest = json.loads((site / "build-manifest.json").read_text())
+manifest_sha = hashlib.sha256((site / "build-manifest.json").read_bytes()).hexdigest()
 if manifest.get("publishReady") is not True:
     parser.error("Stage with --require-browser-reports after the required per-game browser checks pass.")
 try:
@@ -36,6 +39,8 @@ except ValueError as error:
     parser.error(str(error))
 if manifest.get("sourceDirty") is not False:
     parser.error("A verified stage from a clean source commit is required.")
+if any(path.is_symlink() for path in site.rglob('*')):
+    parser.error("The complete public stage must contain no file or directory symlinks.")
 current = {str(p.relative_to(site)): p for p in site.rglob("*")
            if p.is_file() and p.name not in {".firstgame-web-output", "build-manifest.json"}}
 if set(current) != set(manifest.get("files", {})):
@@ -65,15 +70,26 @@ with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as tem
     if refs:
         git("fetch", "--depth=1", "origin", args.branch)
         git("reset", "--soft", "FETCH_HEAD")
+    def copy_public(source, destination):
+        source = Path(source)
+        if args.link_immutable_stage:
+            if source.is_symlink() or not source.is_file() or not source.resolve().is_relative_to(site):
+                raise SystemExit("Only verified regular staged files may be linked.")
+            try:
+                os.link(source, destination)
+                return destination
+            except OSError:
+                pass  # A different filesystem safely retains ordinary copy behavior.
+        return shutil.copyfile(source, destination)
     for source in site.iterdir():
         if source.name == ".firstgame-web-output":
             continue
         if source.is_symlink():
             raise SystemExit("Symlinks are not permitted in the public site.")
         if source.is_dir():
-            shutil.copytree(source, checkout / source.name)
+            shutil.copytree(source, checkout / source.name, copy_function=copy_public)
         else:
-            shutil.copyfile(source, checkout / source.name)
+            copy_public(source, checkout / source.name)
     git("add", "--all")
     changed = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=checkout).returncode
     if changed == 1:
@@ -81,5 +97,8 @@ with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as tem
         git("push", "origin", f"HEAD:refs/heads/{args.branch}")
     elif changed != 0:
         raise SystemExit(changed)
+    if (hashlib.sha256((site / "build-manifest.json").read_bytes()).hexdigest() != manifest_sha
+            or any(hashlib.sha256(path.read_bytes()).hexdigest() != manifest['files'][name] for name, path in current.items())):
+        raise SystemExit("Staged bytes changed during publication.")
     print(f"Published build branch: {args.repository}:{args.branch}")
     print("The Pages site must still be enabled and its deployment verified.")

@@ -38,6 +38,9 @@ namespace FantasyCards.Presentation
         {
             locked = battlePlaybackActive = true; battleSkipRequested = false;
             battlePlaybackIndex = 0; battlePlaybackCount = frames.Count; polishClashPair = "";
+            chronicleCoinTotals.Clear();
+            foreach (var group in frames.Where(frame => frame.item.kind == "coin").GroupBy(frame => frame.item.sourceInstanceId))
+                chronicleCoinTotals[group.Key] = group.Max(frame => frame.item.coinIndex);
             battlePresentedEvents.Clear(); battleRevealedSpells.Clear(); battleCoinResults.Clear(); battleCardTransitions.Clear(); battlePlaybackCaption = "전투 진행";
             battleVisualState = before; ShowBattle();
             // All events are retained. Speed and skip only shorten presentation, never reroll a coin.
@@ -54,6 +57,7 @@ namespace FantasyCards.Presentation
                 {
                     if (!battleCoinResults.TryGetValue(item.sourceInstanceId, out var faces))
                     { faces = new List<bool>(); battleCoinResults[item.sourceInstanceId] = faces; }
+                    if (item.coinIndex == 1) faces.Clear();
                     faces.Add(item.coinHeads);
                 }
                 if (item.hasStatTransition && item.sourceInstanceId >= 0 && (item.kind == "coin" || item.kind == "power"))
@@ -134,8 +138,8 @@ namespace FantasyCards.Presentation
             if (battleClashContext != null)
             {
                 // The 2017 original moves the pair into a central duel. These are visual copies only.
-                Panel(layer, .025f, .660f, .805f, .910f, new Color(.01f, .025f, .02f, .73f));
-                Panel(layer, .025f, .365f, .805f, .615f, new Color(.01f, .025f, .02f, .73f));
+                ChroniclePanel(layer, .025f, .660f, .805f, .910f, new Color(.004f, .011f, .035f, .62f), false);
+                ChroniclePanel(layer, .025f, .365f, .805f, .615f, new Color(.004f, .011f, .035f, .62f), false);
                 var copies = new Dictionary<int, RectTransform>();
                 AddClashCard(layer, battleClashContext.sourcePlayer, battleClashContext.sourceInstanceId, copies);
                 AddClashCard(layer, battleClashContext.targetPlayer, battleClashContext.targetInstanceId, copies);
@@ -171,18 +175,11 @@ namespace FantasyCards.Presentation
             Quaternion sourceRotation = source != null ? source.localRotation : Quaternion.identity;
             CanvasGroup sourceOpacity = null;
             Color tint = EventColor(item);
-            FmPolishTargetGraphic trace = null;
-            if ((attack || spell) && (sourcePoint - targetPoint).sqrMagnitude > .001f)
-            {
-                trace = new GameObject("Actual event target trace", typeof(RectTransform), typeof(FmPolishTargetGraphic)).GetComponent<FmPolishTargetGraphic>();
-                trace.transform.SetParent(layer, false); Anchor((RectTransform)trace.transform, 0, 0, 1, 1);
-                trace.Source = sourcePoint; trace.Target = targetPoint; trace.Tint = tint;
-                trace.transform.SetSiblingIndex(battleClashContext != null ? 2 : 0);
-            }
+            coinFace = DrawChronicleCoinWindows(layer, item);
 
             if (coin && battleClashContext != null)
             {
-                coinFace = DrawClashCoinTray(layer, item); FmBattleAudio.PlayCoin(item.coinHeads, item.coinIndex, (sourcePoint.x - .415f) * 1.5f);
+                FmBattleAudio.PlayCoin(item.coinHeads, item.coinIndex, (sourcePoint.x - .415f) * 1.5f);
             }
             else if (coin)
             {
@@ -198,9 +195,9 @@ namespace FantasyCards.Presentation
             }
             else if (attack || spell || defeat || burn || play)
             {
-                var style = defeat ? FmBattleFxGraphic.EffectStyle.Defeat : burn ? FmBattleFxGraphic.EffectStyle.Burn :
+                var style = defeat ? FmBattleFxGraphic.EffectStyle.Burn : burn ? FmBattleFxGraphic.EffectStyle.Burn :
                     heal ? FmBattleFxGraphic.EffectStyle.Heal : spell ? FmBattleFxGraphic.EffectStyle.Spell :
-                    play ? FmBattleFxGraphic.EffectStyle.Summon : item.amount <= 0 && hit ? FmBattleFxGraphic.EffectStyle.Shield : FmBattleFxGraphic.EffectStyle.Slash;
+                    play ? FmBattleFxGraphic.EffectStyle.Impact : item.amount <= 0 && hit ? FmBattleFxGraphic.EffectStyle.Shield : FmBattleFxGraphic.EffectStyle.Slash;
                 effect = CreateBattleFx(layer, style, targetPoint, tint);
                 if (item.kind == "direct") effect.Style = FmBattleFxGraphic.EffectStyle.Impact;
                 if (play && !terrainPlay) { targetPoint = sourcePoint; PositionBattleFx(effect, targetPoint); }
@@ -224,7 +221,6 @@ namespace FantasyCards.Presentation
             }
             else if (item.kind == "power")
             {
-                effect = CreateBattleFx(layer, FmBattleFxGraphic.EffectStyle.Summon, sourcePoint, gold);
                 if (item.hasStatTransition)
                 {
                     int change = item.afterAttack + item.afterDefense + item.afterHealth - item.beforeAttack - item.beforeDefense - item.beforeHealth;
@@ -247,7 +243,6 @@ namespace FantasyCards.Presentation
             {
                 float p = Mathf.Clamp01(elapsed / duration);
                 if (effect != null) { effect.Progress = attack ? Mathf.InverseLerp(.34f, 1, p) : p; effect.SetAllDirty(); }
-                if (trace != null) { trace.Progress = p; trace.SetAllDirty(); }
                 foreach (var arrival in arrivals)
                     if (arrival.Key != null) arrival.Key.localPosition = Vector3.Lerp(arrival.Value, arrivalDestinations[arrival.Key], Mathf.SmoothStep(0, 1, p / .32f));
                 if (coinFace != null)
@@ -310,6 +305,13 @@ namespace FantasyCards.Presentation
         }
         private Vector2 BackfieldCardCenter(int owner, int index)
         {
+            if (owner == 1)
+            {
+                int position = Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1);
+                int rows = Mathf.Max(2, (BattleDisplayState.rules.terrainLimit + 4) / 5);
+                return new Vector2(.49f + .315f * (.305f + position % 5 * .15f),
+                    .919f + .076f * (.96f - ((position / 5) * .92f + .44f) / rows));
+            }
             float slot = .81f / Mathf.Max(1, BattleDisplayState.rules.terrainLimit);
             return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3215f : .957f);
         }
@@ -330,30 +332,11 @@ namespace FantasyCards.Presentation
             // No opponent hand or unrevealed reserved spell is ever materialized here.
             if (unit == null) return;
             var definition = CardCatalog.Get(unit.definitionId); var point = ClashCenter(owner);
-            var card = ArcanaCardFace(parent, definition, point.x - .115f, point.y - .148f, point.x + .115f, point.y + .148f,
+            var card = ArcanaCardFace(parent, definition, point.x - .115f, point.y - .1375f, point.x + .115f, point.y + .1375f,
                 ArcanaCardMode.Duel, false, unit);
             card.gameObject.name = "Central duel card " + instanceId;
             copies[instanceId] = card.GetComponentInChildren<FmArcanaCardSurface>().GetComponent<RectTransform>();
 
-        }
-        private RectTransform DrawClashCoinTray(Transform parent, BattleEvent item)
-        {
-            Panel(parent, .025f, .930f, .805f, .995f, new Color(.02f, .035f, .025f, .99f));
-            Text(parent, "코인 판정", .035f, .935f, .23f, .99f, 25, gold, TextAlignmentOptions.Center);
-            var tray = Panel(parent, .24f, .931f, .61f, .994f, new Color(.035f, .05f, .035f, .99f));
-            tray.gameObject.name = "Central actual coin tray"; Frame(tray, gold, 1.5f);
-            RectTransform current = null;
-            var faces = battleCoinResults[item.sourceInstanceId];
-            for (int i = 0; i < faces.Count; i++)
-            {
-                var cell = Panel(tray, .025f + i * .19f, .08f, .195f + i * .19f, .92f, faces[i] ? gold : new Color(.24f, .30f, .29f));
-                cell.GetComponent<UiRoundedImage>().Radius = 1000;
-                var fit = cell.gameObject.AddComponent<AspectRatioFitter>(); fit.aspectMode = AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio = 1;
-                Text(cell, faces[i] ? "앞" : "뒤", .03f, .03f, .97f, .97f, 25, faces[i] ? ink : ivory, TextAlignmentOptions.Center);
-                Frame(cell, ivory, 1); current = cell;
-            }
-            Text(parent, "C" + item.coinIndex + " · " + (item.coinHeads ? "앞면" : "뒷면"), .62f, .935f, .79f, .99f, 24, gold, TextAlignmentOptions.Center);
-            return current;
         }
         private FmBattleFxGraphic CreateBattleFx(Transform parent, FmBattleFxGraphic.EffectStyle style, Vector2 point, Color tint)
         {
@@ -375,7 +358,7 @@ namespace FantasyCards.Presentation
         private Color EventColor(BattleEvent item)
         {
             if (item.kind == "burn" || item.kind == "defeat") return new Color(1, .53f, .24f);
-            if (item.kind == "attack" || item.kind == "counter") return item.amount == 0 ? new Color(.62f, .87f, 1) : new Color(1, .78f, .42f);
+            if (item.kind == "attack" || item.kind == "counter") return item.amount == 0 ? new Color(.62f, .87f, 1) : new Color(1, .32f, .20f);
             if (!string.IsNullOrEmpty(item.sourceDefinitionId))
             {
                 var card = CardCatalog.Get(item.sourceDefinitionId);

@@ -52,10 +52,11 @@ LUMINOUS = {
 
 RENEWAL = {
     'name': 'renewal',
-    'revisions': {'FantasyCards': 'fm-polish-2026-10-29', 'PathOfDawn': 'gospel-radiance-2026-10-29'},
+    'revisions': {'FantasyCards': 'fm-chronicle-2026-10-29', 'PathOfDawn': 'gospel-chronicle-2026-10-29'},
     'contents': dict(MODERN['contents']),
-    'reportRoots': {game: 'Artifacts/Validation/Polish' for game in ('FantasyCards', 'PathOfDawn')},
-    'preservedGames': []
+    'reportRoots': {game: 'Artifacts/Validation/Chronicle' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
 }
 
 
@@ -81,6 +82,8 @@ def manifest_contract(manifest):
     value = contract(manifest.get('releaseProfile', 'modern'))
     if manifest.get('gameRevisions') != value['revisions'] or manifest.get('contentVersions') != value['contents']:
         raise ValueError('Manifest revisions/content differ from its explicit release profile')
+    if value.get('currentTargets') and manifest.get('currentTargets') != value['currentTargets']:
+        raise ValueError('Manifest targets differ from the current explicit Web-only release')
     return value
 
 

@@ -159,8 +159,9 @@ namespace FantasyCards.Presentation
 
         private void DrawTerrainBackfield(PlayerState player, int owner, float bottom, float top)
         {
+            if (owner == 1) { DrawChronicleEnemyTerrain(player); return; }
             bool mine = owner == 0, small = canvas.pixelRect.height < 600;
-            var strip = Panel(root, .025f, bottom, .805f, top, new Color(.025f, .055f, .042f, .98f));
+            var strip = ChroniclePanel(root, .025f, bottom, .805f, top, new Color(.012f, .025f, .045f, .95f));
             strip.gameObject.name = mine ? "Terrain drop band" : "Opponent terrain backfield";
             strip.GetComponent<Image>().raycastTarget = true;
             Frame(strip, new Color(.58f, .50f, .31f, .65f), 1);
@@ -171,7 +172,7 @@ namespace FantasyCards.Presentation
             for (int i = 0; i < limit; i++)
             {
                 float left = .18f + i * width;
-                var tile = Panel(strip, left, .07f, left + width - .004f, .93f, new Color(.06f, .095f, .065f));
+                var tile = ChroniclePanel(strip, left, .07f, left + width - .004f, .93f, new Color(.012f, .027f, .045f), false);
                 tile.gameObject.name = "Backfield " + owner + " " + i;
                 if (i >= player.terrain.Count)
                 {

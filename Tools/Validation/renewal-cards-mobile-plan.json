@@ -1,19 +1,11 @@
 {
   "FantasyCards": {
-    "revision": "fm-polish-2026-10-29",
+    "revision": "fm-chronicle-2026-10-29",
     "suite": "modern-real-input-v1",
     "coordinates": "normalized canvas top-left origin",
     "requiredCheckpoints": [
       "title",
-      "sound-settings",
       "lobby",
-      "profile",
-      "playable-high-grades",
-      "rare-playable-filter",
-      "archive-originals",
-      "playable-gallery",
-      "new-special-detail",
-      "new-special-original-print",
       "opening-original-hand",
       "backfield-terrain",
       "original-hand-and-field",
@@ -22,26 +14,14 @@
       "local-practice-note",
       "terrain-detail",
       "terrain-detail-closed",
-      "ready-resolution-01",
-      "ready-resolution-02",
-      "ready-resolution-03",
-      "ready-resolution-04",
-      "ready-resolution-05",
-      "ready-resolution-06",
-      "ready-resolution-07",
-      "ready-resolution-08",
-      "ready-resolution-09",
-      "ready-resolution-10",
-      "ready-resolution-11",
-      "ready-resolution-12",
+      "chronicle-preparation-01",
+      "chronicle-resolved-01",
+      "chronicle-preparation-02",
+      "chronicle-resolved-02",
       "post-ready-field",
       "resolved-battle-event-feed",
       "saved-battle",
-      "continued-battle",
-      "continued-profile",
-      "save-transfer",
-      "invalid-transfer-rejected",
-      "continued-after-invalid-transfer"
+      "continued-battle"
     ],
     "steps": [
       {
@@ -52,160 +32,6 @@
       {
         "type": "audio",
         "label": "title-original"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.78,
-          0.885
-        ],
-        "label": "소리 설정",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "sound-settings",
-        "expected": "효과음 별도 켜기/끄기·음량·전투 효과 듣기와 배경 음악 설정 경로가 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.318,
-          0.739
-        ],
-        "label": "배경 음악 설정",
-        "settleMs": 900
-      },
-      {
-        "type": "audio",
-        "label": "after-first-gesture"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.3446,
-          0.5035
-        ],
-        "label": "음악 끄기",
-        "settleMs": 1800
-      },
-      {
-        "type": "audio",
-        "label": "muted"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.9175
-        ],
-        "label": "효과음 설정으로",
-        "settleMs": 900
-      },
-      {
-        "type": "wait",
-        "ms": 1000
-      },
-      {
-        "type": "sfx_audio",
-        "label": "audible-ui-combat-cues",
-        "actions": [
-          {
-            "type": "click",
-            "point": [
-              0.744,
-              0.488
-            ],
-            "label": "실제 전투 효과 듣기",
-            "settleMs": 700,
-            "repeat": 4
-          }
-        ]
-      },
-      {
-        "type": "click",
-        "point": [
-          0.686,
-          0.359
-        ],
-        "label": "효과음 끄기",
-        "settleMs": 1200
-      },
-      {
-        "type": "sfx_audio",
-        "label": "independent-effects-muted",
-        "expectSilent": true,
-        "actions": [
-          {
-            "type": "click",
-            "point": [
-              0.254,
-              0.488
-            ],
-            "label": "음소거 중 실제 효과음 줄이기",
-            "settleMs": 650,
-            "repeat": 2
-          },
-          {
-            "type": "click",
-            "point": [
-              0.498,
-              0.488
-            ],
-            "label": "음소거 중 실제 효과음 원음량 복원",
-            "settleMs": 650,
-            "repeat": 2
-          }
-        ]
-      },
-      {
-        "type": "click",
-        "point": [
-          0.686,
-          0.359
-        ],
-        "label": "효과음 켜기",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.318,
-          0.739
-        ],
-        "label": "배경 음악 설정",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.3446,
-          0.5035
-        ],
-        "label": "음악 켜기",
-        "settleMs": 1800
-      },
-      {
-        "type": "audio",
-        "label": "unmuted"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.9175
-        ],
-        "label": "효과음 설정으로",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.686,
-          0.739
-        ],
-        "label": "타이틀로",
-        "settleMs": 900
       },
       {
         "type": "click",
@@ -224,245 +50,6 @@
       {
         "type": "audio",
         "label": "lobby-instrumental"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.87,
-          0.49
-        ],
-        "label": "실제 로컬 프로필",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.55,
-          0.2975
-        ],
-        "label": "닉네임 입력",
-        "settleMs": 900
-      },
-      {
-        "type": "key",
-        "key": "Control+a",
-        "label": "이름 전체 선택"
-      },
-      {
-        "type": "text",
-        "text": "SoulTester",
-        "label": "실제 닉네임 입력"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.855,
-          0.2975
-        ],
-        "label": "이름 저장",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.2445,
-          0.755
-        ],
-        "label": "원작 카드 아바타 선택",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "profile",
-        "expected": "입력한SoulTester이름과 선택한 원작 카드 아바타·실제 로컬 전적·기기 저장 안내가 보인다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.165,
-          0.9325
-        ],
-        "label": "프로필에서 대기실",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.532,
-          0.909
-        ],
-        "label": "상위 등급",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "playable-high-grades",
-        "expected": "스페셜·유니크·레전드·시크릿 네 출전 등급의 대표 원본과 실제 개수가 보이며 전체 원본 도감 버튼과 구분된다."
-      },
-      {
-        "type": "audio",
-        "label": "premium-deck-instrumental"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.855,
-          0.1425
-        ],
-        "label": "원작 레어 출전카드49종",
-        "settleMs": 550
-      },
-      {
-        "type": "checkpoint",
-        "name": "rare-playable-filter",
-        "expected": "원작 레어49종 필터가 실제 출전도감에 적용되고 전체2646종과 검색결과49종이 구분된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9,
-          0.071
-        ],
-        "label": "레어 도감에서 대기실",
-        "settleMs": 550
-      },
-      {
-        "type": "click",
-        "point": [
-          0.532,
-          0.909
-        ],
-        "label": "상위 등급",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.843
-        ],
-        "label": "전체 원본 도감",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "archive-originals",
-        "expected": "현재 전체 원본 메타데이터 수·검색 결과 수·이름/번호/능력 검색·등급·속성 필터와 원래 세로 비율의 전체 카드가 보인다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.13,
-          0.942
-        ],
-        "label": "대기실",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.532,
-          0.909
-        ],
-        "label": "출전 도감으로 가는 상위 등급 화면",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.94
-        ],
-        "label": "출전 카드 도감",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "playable-gallery",
-        "expected": "실제 출전2646종 도감; 특수능력 구현된 원작카드만 포함한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.25,
-          0.201
-        ],
-        "label": "카드 이름 검색 입력",
-        "settleMs": 1000
-      },
-      {
-        "type": "text",
-        "text": "14010827215",
-        "label": "신규 스페셜 원작 ID 검색"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.599,
-          0.201
-        ],
-        "label": "카드 검색 실행",
-        "settleMs": 1000
-      },
-      {
-        "type": "checkpoint",
-        "name": "new-special-search-result",
-        "expected": "실제 원작 ID14010827215 검색 결과1종과 매의부족샤먼 이름을 확인한 뒤 상세를 연다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.146,
-          0.6035
-        ],
-        "label": "검색된 실제 스페셜 카드 상세",
-        "settleMs": 1000
-      },
-      {
-        "type": "checkpoint",
-        "name": "new-special-detail",
-        "expected": "이번에 실제 기술을 구현한 스페셜 매의부족샤먼의 원본/코스트/기술이 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.885,
-          0.87
-        ],
-        "label": "원본 인쇄 카드 보기",
-        "settleMs": 1000
-      },
-      {
-        "type": "checkpoint",
-        "name": "new-special-original-print",
-        "expected": "동일한 신규 스페셜 원본 인쇄 전체를 원래비율로 확대한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.9585
-        ],
-        "label": "능력 설명으로 돌아가기",
-        "settleMs": 1000
-      },
-      {
-        "type": "click",
-        "point": [
-          0.67,
-          0.87
-        ],
-        "label": "카드 상세에서 도감",
-        "settleMs": 1000
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9,
-          0.071
-        ],
-        "label": "도감에서 대기실",
-        "settleMs": 1000
       },
       {
         "type": "click",
@@ -499,7 +86,7 @@
       {
         "type": "review_input",
         "name": "mobile-actual-hand-deployment",
-        "expected": "현재 원본 손패를 보고 합법적인 지형과 유닛을 실제로 낸다. 필요하면 화면의 비용/LP/소울과 준비 완료/다음 턴을 사용한다. 소유 지형1장 이상과 살아 있는 아군 유닛1장 이상이 보이며 내 준비 단계에서 입력 가능한 상태일 때 continue한다. 지형 띠는(.4,.6785), 아군 첫 전열은(.099,.51), compact Ready는(.898,0.769154)다. 일반 입력만 허용한다."
+        "expected": "현재 원본 손패를 보고 합법적인 지형과 유닛을 실제로 낸다. 필요하면 화면의 비용/LP/소울과 준비 완료/다음 턴을 사용한다. 소유 지형1장 이상과 살아 있는 아군 유닛1장 이상이 보이며 내 준비 단계에서 입력 가능한 상태일 때 continue한다. 지형 띠는(.4,.6785), 아군 첫 전열은(.099,.51), compact Ready는(.898,0.86404)다. 일반 입력만 허용한다. 실제 준비 손패와 카드 인쇄 숫자가 보이는지 확인한다. 양측 두 창의 증거가 필요하므로 실제 상대 유닛이 있는 전열에 합법적으로 아군을 마주 배치하고 참여 카드의 실제 C 코인 수치를 확인한다. 필요하면 일반 Ready/턴 진행으로 실제 상대 유닛이 나온 뒤 배치한다. 직접 공격 하나의 창을 양측 창 증거로 처리하지 않는다."
       },
       {
         "type": "checkpoint",
@@ -513,7 +100,7 @@
       {
         "type": "checkpoint",
         "name": "original-hand-and-field",
-        "expected": "모바일에서 일반 입력으로 실제 배치한 유닛의 이름·AP/DP/HP가 카드 안에서 읽히며 손패의 이름/비용/수치가 빈 검은 패널로 사라지지 않는다. 카드 비율과 실제 지형·소울 상태가 유지된다."
+        "expected": "실제 원본 카드 전체와 원래 인쇄 숫자 위치의 현재 AP/DP/HP가 보인다. 원본 일러스트/틀/이름을 보존하며 임의의 별도 검은 손패 이름·비용·능력치 패널은 없다. 짙은 남색 사각 전장과 자신의 준비 손패·지형·전열을 구분한다."
       },
       {
         "type": "click",
@@ -563,7 +150,7 @@
       },
       {
         "type": "text",
-        "text": "Check terrain and coin before attack",
+        "text": "Chronicle practice note 2026",
         "label": "실제 개인 메모 작성"
       },
       {
@@ -619,130 +206,66 @@
         "expected": "실제 Esc/돌아가기 입력으로 원래 전열·지형·손패·준비완료 버튼으로 복귀한다."
       },
       {
+        "type": "checkpoint",
+        "name": "chronicle-preparation-01",
+        "expected": "내 준비 단계의 실제 손패/지형/5전열, 원본 인쇄 카드 수치, 짙은 남색 사각 전장 UI를 확인한다."
+      },
+      {
         "type": "click",
         "point": [
           0.898,
           0.86404
         ],
-        "label": "실제 준비 완료로 공방 진행",
-        "settleMs": 250
+        "label": "후기 판마 양측 코인 창 실제 공방 1",
+        "settleMs": 0,
+        "captureCompositorBurst": true,
+        "captureLabel": "late-clash-01",
+        "captureMs": 12000
+      },
+      {
+        "type": "wait",
+        "ms": 18000
       },
       {
         "type": "checkpoint",
-        "name": "ready-resolution-01",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-02",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-03",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-04",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-05",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-06",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-07",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-08",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-09",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-10",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-11",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "checkpoint",
-        "name": "ready-resolution-12",
-        "expected": "실제 Ready 이후 일반 공방 중간 원본. 직접 검토하여 현재 준비/코인/능력/공격/피해 단계를 판별한다. 코인 프레임에서는 카드 내 현재값과 +/− 변화량 및 중앙 앞뒤 동전이 일치해야 하며 ×속도/끝까지 아래 준비 완료 글자가 비쳐서는 안 된다."
-      },
-      {
-        "type": "wait",
-        "ms": 850
-      },
-      {
-        "type": "wait",
-        "ms": 30000
+        "name": "chronicle-resolved-01",
+        "expected": "직전 ordinary Ready 입력으로 남긴 모든 원본 코미포지터 프레임을 보존한다. 실제 두 전체 카드/양측5슬롯 코인 창/인쇄 수치 변화/전투 중 지형 띠를 직접 판별하고, 공방 후 손패가 돌아오는지 확인한다. 창이 없는 프레임을 코인 증거로 소개하지 않는다. 명확히 보이는 원본에서 금색 앞면/인물 뒷면의 차이, 판정된 칸의 실제 능력 기호, 실제 Coin:N%를 확인한다. 카드에는 현재 숫자만, 부호 있는 변화량은 각 결과 창/배너에 표시되어야 한다."
       },
       {
         "type": "review_input",
-        "name": "mobile-resolution-before-save",
-        "expected": "앞선 실제 원본 연속 캡처를 확인한다. 코인/현재값과 +/− 변화량의 실제 화면이 필요한 경우 일반 준비 완료와 화면상 합법 배치로 계속 진행하고 원본을 남긴다. 준비 완료/속도/끝까지/범례가 겹치지 않는지 살핀다. 저장하기 전에 실제 전장이 내 준비 단계로 돌아와 메뉴 버튼이 입력 가능한 상태인지 확인한다. 손패·RNG·저장·엔진 상태 접근이나 주입을 사용하지 않는다."
+        "name": "mobile-next-preparation-01",
+        "expected": "현재 실제 화면과 직전 코미포지터 원본들을 보고 합법적 지형/유닛을 배치한다. 다음 공방 전 내 준비 단계에 살아있는 유닛/지형을 유지한다. 필요하면 실제 화면의 일반 클릭/드래그/대기만 사용한다. 상태/손패/RNG/저장/게임 메서드 접근 금지. 다음 공방 버튼이 입력 가능한 준비 단계에서 continue. 양측 두 창의 증거가 필요하므로 실제 상대 유닛이 있는 전열에 합법적으로 아군을 마주 배치하고 참여 카드의 실제 C 코인 수치를 확인한다. 필요하면 일반 Ready/턴 진행으로 실제 상대 유닛이 나온 뒤 배치한다. 직접 공격 하나의 창을 양측 창 증거로 처리하지 않는다."
+      },
+      {
+        "type": "checkpoint",
+        "name": "chronicle-preparation-02",
+        "expected": "내 준비 단계의 실제 손패/지형/5전열, 원본 인쇄 카드 수치, 짙은 남색 사각 전장 UI를 확인한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.86404
+        ],
+        "label": "후기 판마 양측 코인 창 실제 공방 2",
+        "settleMs": 0,
+        "captureCompositorBurst": true,
+        "captureLabel": "late-clash-02",
+        "captureMs": 12000
+      },
+      {
+        "type": "wait",
+        "ms": 18000
+      },
+      {
+        "type": "checkpoint",
+        "name": "chronicle-resolved-02",
+        "expected": "직전 ordinary Ready 입력으로 남긴 모든 원본 코미포지터 프레임을 보존한다. 실제 두 전체 카드/양측5슬롯 코인 창/인쇄 수치 변화/전투 중 지형 띠를 직접 판별하고, 공방 후 손패가 돌아오는지 확인한다. 창이 없는 프레임을 코인 증거로 소개하지 않는다. 명확히 보이는 원본에서 금색 앞면/인물 뒷면의 차이, 판정된 칸의 실제 능력 기호, 실제 Coin:N%를 확인한다. 카드에는 현재 숫자만, 부호 있는 변화량은 각 결과 창/배너에 표시되어야 한다."
+      },
+      {
+        "type": "review_input",
+        "name": "mobile-next-preparation-02",
+        "expected": "현재 실제 화면과 직전 코미포지터 원본들을 보고 합법적 지형/유닛을 배치한다. 다음 공방 전 내 준비 단계에 살아있는 유닛/지형을 유지한다. 필요하면 실제 화면의 일반 클릭/드래그/대기만 사용한다. 상태/손패/RNG/저장/게임 메서드 접근 금지. 다음 공방 버튼이 입력 가능한 준비 단계에서 continue. 양측 두 창의 증거가 필요하므로 실제 상대 유닛이 있는 전열에 합법적으로 아군을 마주 배치하고 참여 카드의 실제 C 코인 수치를 확인한다. 필요하면 일반 Ready/턴 진행으로 실제 상대 유닛이 나온 뒤 배치한다. 직접 공격 하나의 창을 양측 창 증거로 처리하지 않는다."
       },
       {
         "type": "checkpoint",
@@ -833,112 +356,6 @@
       {
         "type": "audio",
         "label": "continued-original"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.898,
-          0.66462
-        ],
-        "label": "전투 기록 메뉴",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.67,
-          0.51
-        ],
-        "label": "대기실",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.87,
-          0.49
-        ],
-        "label": "저장된 프로필 확인",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "continued-profile",
-        "expected": "전장저장및전체새로고침후SoulTester이름과선택아바타가그대로보인다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.43,
-          0.935
-        ],
-        "label": "프로필 저장 옮기기",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "save-transfer",
-        "expected": "실제프로필경로에서전투저장옮기기화면을열었다. 내보내기/검증후가져오기/돌아가기와저장안내가읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.52
-        ],
-        "label": "가져오기 입력란",
-        "settleMs": 300
-      },
-      {
-        "type": "text",
-        "text": "invalid-transfer-payload",
-        "label": "잘못된 저장 문자열 실제입력"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.445,
-          0.785
-        ],
-        "label": "잘못된 저장 검증 후 가져오기",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "invalid-transfer-rejected",
-        "expected": "입력한잘못된저장문자열이거부되었다는가져오기실패안내가보인다. 정상저장슬롯을지우고새게임으로대신하지않는다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.805,
-          0.785
-        ],
-        "label": "저장 옮기기에서 프로필로",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.165,
-          0.9325
-        ],
-        "label": "프로필에서 로비로",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.87,
-          0.693
-        ],
-        "label": "유효한 이전 전장 이어하기",
-        "settleMs": 1800
-      },
-      {
-        "type": "checkpoint",
-        "name": "continued-after-invalid-transfer",
-        "expected": "잘못된저장가져오기를거부한뒤에도앞서저장한실제전장·백필드·손패·LP/소울이이어하기로복원된다."
       }
     ],
     "intendedViewport": {
@@ -947,13 +364,9 @@
       "scope": "Landscape touch-emulated browser; normalized coordinates are relative to the actual616x346Unity canvas inside the844x390viewport."
     },
     "reviewNotes": [
-      "Mobile plan retains title/lobby/archive/deck/profile/save/audio flows from the current desktop plan. This is an authored plan, not execution evidence.",
-      "At review_input inspect the actual original screenshot; respond only with normal logged click/drag/pointer_hold/wait. Never read or inject Unity/Core/hand/seed/save state. Maximum20 bounded actions per response,12 iterations enforced by the harness.",
-      "First deployment review must reach a visible own terrain and unit through normal play and return to an unlocked own preparation. Do not assume randomized hand order or deploy unavailable cards.",
-      "Before save, inspect current actual resolution evidence. If needed continue ordinary Ready turns to obtain a real coin/result capture and an unlocked battlefield; retain all attempted original frames. A blank/nonblank canvas or idle field is not proof of coin animation.",
-      "Whole media catalog remains a separate strict gate; missing artwork is not accepted as recovered original art.",
-      "Compact menu/Ready positions are calculated from actual DrawCompactBattleRail pixel-row geometry at346px canvas height. If canvas height differs, recompute before execution; normalized x alone does not fix pixel-anchored row positions.",
-      "Compact rail coordinates were corrected after observing the actual616x346canvas. Browser viewport height390 is not canvas height. Preserve the interrupted first run and verify ordinary initial/selected/coin/settled labels again."
+      "새 원본 코미포지터 PNG를 직접 확인한다. 두 전체 카드/양측5슬롯 결과창/실제확률/앞뒤결과/참여능력/인쇄현재수치가 실제 동시에 보이는 프레임을 선택한다.",
+      "인쇄 숫자 칸은 현재 숫자만 표시한다. 부호 있는 변화량은 결과 창과 배너에 있다. 삭제한 손패 이름/비용 검은 패널이나 on-card delta를 기대하지 않는다.",
+      "한쪽 직접공격/공방 후 화면을 두 코인 창 증거로 오인하지 않는다. 원본은 전체 보존하고 비해당 프레임은 명시적으로 구분한다."
     ],
     "compactRailGeometry": {
       "canvasHeight": 346,
@@ -1022,6 +435,6 @@
         0.59814
       ]
     },
-    "scope": "Current Polish focused real input: premium/Rare/new Special, actual deck battle, opponent/events/localnote, doubleclick/longtouch, music; optionalOSvisibilitypath unit-testedonly, save/reload; unchanged full archive covered by exact data/media audit."
+    "scope": "Focused current late-reference battle: actual normal deployment/two-sided clashing cards/printed numerals/5slot coin panels, desk/note, actual detail gesture, normal music PCM and save/fullreload. Unchanged settings/profile/catalog breadth was exercised separately in retained failed fixture; it is not repeated or substituted for this current battle proof."
   }
 }

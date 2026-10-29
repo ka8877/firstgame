@@ -157,7 +157,7 @@ namespace FantasyCards.Presentation
             rail.gameObject.name = "Battle resource rail";
             if (canvas.pixelRect.height < 600 && canvas.pixelRect.width < 900)
             { DrawCompactBattleRail(rail); return; }
-            ClientBrand(rail, .04f, .91f, .96f, .984f);
+            DrawChronicleBattleBrand(rail, .04f, .91f, .96f, .984f);
             var phase = Panel(rail, .04f, .837f, .96f, .905f, new Color(.11f, .17f, .22f));
             ReadableText(phase, BattleDisplayState.turn + "턴 · " + (locked ? "공방 판정 중" : engine.PreparingPlayer == 1 ? "상대 준비 중" : PhaseName(BattleDisplayState.phase)), .02f, .06f, .98f, .94f, 23, gold, TextAlignmentOptions.Center);
             var lp = Panel(rail, .04f, .758f, .485f, .828f, new Color(.085f, .16f, .18f)); Frame(lp, new Color(.36f, .43f, .29f), 1);
@@ -223,10 +223,7 @@ namespace FantasyCards.Presentation
 
             // The 616x346 game canvas leaves a 100px-wide rail. Reserve real
             // line height and give text the icon space, keeping all full names.
-            var brand = Label(Plate(Row()), "Fantasy Masters", "brand", tint: gold); brand.fontStyle = FontStyles.Normal;
-            // Keep the synthetic italic/SDF fringe inside the narrow wordmark.
-            float brandInset = 2 / canvas.scaleFactor;
-            brand.margin = new Vector4(brandInset, 0, brandInset, 0);
+            var brandRow = Row(); DrawChronicleBattleBrand(rail, .03f, brandRow.x, .97f, brandRow.y);
             Label(Plate(Row()), BattleDisplayState.turn + "턴 · " + (locked ? "공방 판정 중" : engine.PreparingPlayer == 1 ? "상대 준비 중" : PhaseName(BattleDisplayState.phase)), "phase", tint: gold);
             var points = Row();
             var lp = Plate(points, .03f, .49f); Label(lp, "LP" + player.levelPoints, "LP", tint: teal);

@@ -1,0 +1,973 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-chronicle-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "scope": "Bounded actualtouch23quest/19page route; firstBibleunlock, physicalchild/adultNPCs, touchBGM andcompletedfullsave/reload. Native+Desktopalreadyprove allposephases andpendingquote reload; those are not repeated here. Offline235-passed catalog onlyauthorsnormalinput timing; no liveinspection/injection.",
+    "requiredCheckpoints": [
+      "title",
+      "birth-prologue",
+      "book-unopened",
+      "book-first-discovery",
+      "temple-chapter",
+      "child-world",
+      "temple-npc-dialogue",
+      "baptism-chapter",
+      "adult-jordan-world",
+      "adult-john-dialogue",
+      "journey-complete",
+      "continued-complete-world",
+      "book-nineteen-discovered"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current actual touch-compatible title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.172,
+          0.832
+        ],
+        "label": "새 생애 여정",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-prologue",
+        "expected": "Actual birthrecord, no infantwalking."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7484,
+          0.0778
+        ],
+        "label": "발견 전 성경",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-unopened",
+        "expected": "Actual emptyphysicalbook0/19; no futuretitle/body/art."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7484,
+          0.0778
+        ],
+        "label": "첫 발견 성경",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-first-discovery",
+        "expected": "Actual oneunlockedScripture and18lockedpages afterrealreadingcompletion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-chapter",
+        "expected": "Actual11birthrecords completed; age12chaptercard."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1941,
+          0.8236
+        ],
+        "label": "열두 살 이야기 속으로",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-world",
+        "expected": "Actual child/fullHUD,currentquest11 and11/19 discoveries; no shortcutfixture."
+      },
+      {
+        "type": "audio",
+        "label": "journey-instrumental"
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1444,
+        "label": "실제 방향 버튼으로 유월절 길을 준비하며",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-11",
+        "expected": "Actual currentobjective MUST be 유월절 길을 준비하며 / joseph. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 11",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6898,
+        "label": "실제 방향 버튼으로 함께 오르는 길",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-12",
+        "expected": "Actual currentobjective MUST be 함께 오르는 길 / mary. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 12",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6444,
+        "label": "실제 방향 버튼으로 예루살렘의 절기",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-13",
+        "expected": "Actual currentobjective MUST be 예루살렘의 절기 / temple-guide. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 13",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-npc-dialogue",
+        "expected": "Actual currentNPCreading/citation/learningdialogue; ifstillworld doNOTclaimdialogue."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 4171,
+        "label": "실제 방향 버튼으로 듣고 묻는 자리",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-14",
+        "expected": "Actual currentobjective MUST be 듣고 묻는 자리 / teacher-listening. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 14",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3262,
+        "label": "실제 방향 버튼으로 선생들 가운데",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-15",
+        "expected": "Actual currentobjective MUST be 선생들 가운데 / teacher-reading. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 15",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3262,
+        "label": "실제 방향 버튼으로 근심 끝의 만남",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-16",
+        "expected": "Actual currentobjective MUST be 근심 끝의 만남 / mary. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 16",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3716,
+        "label": "실제 방향 버튼으로 나사렛으로 함께",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-17",
+        "expected": "Actual currentobjective MUST be 나사렛으로 함께 / joseph. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 17",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "baptism-chapter",
+        "expected": "Actualage12quest11–17completed15/19; adultJordan chaptercard."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1941,
+          0.8236
+        ],
+        "label": "성인 요단강 이야기 속으로",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-jordan-world",
+        "expected": "ActualadultJesus/newbody/river/currentquest18 and15/19."
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1898,
+        "label": "실제 방향 버튼으로 요단으로 향하는 길",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-18",
+        "expected": "Actual currentobjective MUST be 요단으로 향하는 길 / jordan-guide. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 18",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6444,
+        "label": "실제 방향 버튼으로 요단에서 들리는 외침",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-19",
+        "expected": "Actual currentobjective MUST be 요단에서 들리는 외침 / john-baptist. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 19",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-john-dialogue",
+        "expected": "Actual currentNPCreading/citation/learningdialogue; ifstillworld doNOTclaimdialogue."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6444,
+        "label": "실제 방향 버튼으로 모든 의를 이루는 길",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-20",
+        "expected": "Actual currentobjective MUST be 모든 의를 이루는 길 / john-baptist. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 20",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 7807,
+        "label": "실제 방향 버튼으로 물에서 올라오시다",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-21",
+        "expected": "Actual currentobjective MUST be 물에서 올라오시다 / jordan-witness. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 21",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6444,
+        "label": "실제 방향 버튼으로 공생애의 문턱",
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-22",
+        "expected": "Actual currentobjective MUST be 공생애의 문턱 / journey-narrator. ApproachNPCcenter withordinarytouch (notjustfleetingboundaryE); confirmactual대화prompt thencontinue. No gamefield/save/method inspection/injection. Ifearlierdialoguedidnotcomplete, correctordinaryUI first."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 22",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "journey-complete",
+        "expected": "Actual23quests completed throughordinarywalk/talk/read;19discoveries."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.929,
+          0.075
+        ],
+        "label": "메뉴",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.5528
+        ],
+        "label": "완료 여정 저장",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.4319
+        ],
+        "label": "여정으로",
+        "settleMs": 500
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.378,
+          0.832
+        ],
+        "label": "전체 새로고침 후 실제 이어하기",
+        "settleMs": 700
+      },
+      {
+        "type": "wait",
+        "ms": 3500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-complete-world",
+        "expected": "Actualsavedadultcompletedjourney restored; no stateinjection."
+      },
+      {
+        "type": "review_input",
+        "name": "continued-adult-visibility",
+        "expected": "Afteractual3.5s worldsettle, visuallyconfirmadultHero ispresentatcompletedlocation. Ifabsent, useONEordinaryshorttouchmove andcapture1neworiginal, reportactualcamera/playerresult. NoGamefield/saveinspection. DoNOTclaimhero restore fromHUD alone."
+      },
+      {
+        "type": "audio",
+        "label": "continued-journey-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.23,
+          0.075
+        ],
+        "label": "발견을 채운 성경",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-nineteen-discovered",
+        "expected": "Actualphysicalbook19/19 andlastdiscoveredcitation, notanunlockedmocklist."
+      }
+    ]
+  }
+}

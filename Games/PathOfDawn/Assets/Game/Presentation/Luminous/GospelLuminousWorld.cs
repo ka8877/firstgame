@@ -42,6 +42,9 @@ namespace PathOfDawn.Presentation
         VolumeProfile profile;
         PhysicsMaterial2D groundMaterial;
         float objectiveX;
+        readonly List<Transform> forestChapterLayers = new List<Transform>();
+        Transform jordanChapter;
+        public string ChronicleChapter { get; private set; } = "temple";
 
         struct ParallaxPlane { public Transform transform; public Vector3 origin; public float amount; }
         struct LeafMotion { public Transform transform; public Quaternion rest; public float phase; public float amount; }
@@ -79,6 +82,26 @@ namespace PathOfDawn.Presentation
             BuildLight();
             BuildMotes();
             BuildObjective();
+            foreach (Transform layer in content)
+                if (layer.name.StartsWith("0") && !layer.name.StartsWith("08")) forestChapterLayers.Add(layer);
+        }
+
+        public void SetChronicleChapter(string chapter)
+        {
+            if (content == null) return;
+            bool jordan = chapter == "baptism";
+            ChronicleChapter = jordan ? "baptism" : "temple";
+            if (jordan && jordanChapter == null)
+            {
+                // This far panorama follows the camera closely enough to cover
+                // the whole path once. Mirrored repeats produced a conspicuous
+                // symmetrical reed wall in the real close-zoom Native01 frame.
+                jordanChapter = Layer("Chronicle · Jordan river valley", .97f);
+                Paint(jordanChapter, "Art/GospelChronicle/World/jordan-river", SpawnX, 6f, 18.5f, -140,
+                    Color.white, false);
+            }
+            if (jordanChapter != null) jordanChapter.gameObject.SetActive(jordan);
+            foreach (var layer in forestChapterLayers) if (layer != null) layer.gameObject.SetActive(!jordan);
         }
 
         Transform Layer(string name, float parallax)
@@ -515,7 +538,7 @@ namespace PathOfDawn.Presentation
             if (focus == null) return;
             Vector3 position = focus.transform.position;
             float left = position.x - .62f, right = position.x + .62f;
-            float bottom = position.y + .03f, top = position.y + GospelLuminousActor.Height + .16f;
+            float bottom = position.y + .03f, top = position.y + (focus.Actor != null ? focus.Actor.CurrentHeight : GospelLuminousActor.Height) + .16f;
             float ease = 1f - Mathf.Exp(-13f * Time.deltaTime);
             foreach (var item in foregroundOccluders)
             {

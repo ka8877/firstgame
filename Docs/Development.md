@@ -1,5 +1,11 @@
 # 개발과 실행
 
+현재 개정은 `fm-chronicle-2026-10-29` / `gospel-chronicle-2026-10-29`이며 [구현 안내](Chronicle.md)와 [실제 검증](ChronicleValidation.md)을 따른다. 실행 소유자는 `/root/polish_audio_research` 하나다. 이번 클라우드는 Web을 대상으로 하며, 새 플레이어·스테이지·4개 ZIP은 `/tmp/firstgame-chronicle-*`, 증거는 `Artifacts/Validation/Chronicle`에서 가리키는 전용 tmp 디렉터리에 둔다. 이전 Polish와 아래 이전 명령·수치는 제작 이력이다. 원본·이전 고유 ZIP·기존 저장을 보존하고 새 결과를 이전 통과로 대체하지 않는다.
+
+새 Gospel은 `GospelChronicle`이 순서 있는23목표·19본문과 발견·저장을 소유하며 App/UI/Actor는 이를 표시한다. M성경/J여정기록과 실제E목적지·대화, 전신 그림에 연결된 연속 관절, 소년/성인 전환·요단강·잠긴 책 면의 정보 숨김을 새 실행으로 확인한다. 기존7/15말씀 저장은 원래 흐름을 유지한다. 카드 현재 수는2,646/27덱/도감15,350이며 이번 변경은 후기 원작 배치·인쇄 숫자 위치·실제 양측 코인 판정창이다. 실행 전 현재 소스와 새 attempt를 확인하고 이미 통과한 검사를 이유 없이 반복하지 않는다.
+
+다음은 **이전 Polish 환경 기록**이다.
+
 현재 소스 개정은 `fm-polish-2026-10-29` / `gospel-radiance-2026-10-29`이며 배포 프로필 이름은 기존 `renewal`을 사용한다. 이번 출력과 실행 증거는 **Polish** 전용 경로이며, 아래 이전 Renewal/Luminous 명령·수치는 해당 판 제작 이력이다. 현재 [구현 안내](Polish.md)와 [실제 검증·공개 상태](PolishValidation.md)를 따른다.
 
 실행 소유자는 `/root/polish_audio_research` 하나다. 새 플레이어는 `/tmp/firstgame-polish-builds`, 웹 스테이지는 `/tmp/firstgame-polish-staged-site`, ZIP은 `/tmp/firstgame-polish-deliverables`, 새 증거는 `Artifacts/Validation/Polish`에 둔다. 기존 Renewal 원본·고유 ZIP·보고서를 덮어쓰지 않는다. 일반 사용자 환경에서는 Unity6000.3.26f1로 두 독립 프로젝트를 열고 `FirstGame > Prepare First Slice` 후 Boot 씬을 실행한다.

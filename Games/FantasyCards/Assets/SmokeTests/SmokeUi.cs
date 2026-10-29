@@ -259,7 +259,11 @@ namespace FantasyCards.SmokeTests
                     var app = UnityEngine.Object.FindFirstObjectByType<FantasyCardsApp>();
                     var redraw = app == null ? null : typeof(FantasyCardsApp).GetField("redraw",
                         System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.GetValue(app) as Action;
-                    redraw?.Invoke();
+                    // Rebuilding the live battle here would Clear() the actual
+                    // transient coin/focus layer immediately before rendering.
+                    // During playback production already defers resize redraw
+                    // while locked; capture must preserve that same live layer.
+                    if (app == null || !app.IsBattlePlaybackActive) redraw?.Invoke();
                 }
                 Canvas.ForceUpdateCanvases();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
@@ -271,11 +275,12 @@ namespace FantasyCards.SmokeTests
                 pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0);
                 pixels.Apply();
                 var directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                    "../../../Artifacts/Screenshots", game));
+                    name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
                 System.IO.Directory.CreateDirectory(directory);
                 var path = System.IO.Path.Combine(directory, name + ".png");
                 var png = pixels.EncodeToPNG();
                 Assert.That(png.Length, Is.GreaterThan(10000), "Capture contains unexpectedly little image data.");
+                if (name.StartsWith("chronicle-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Chronicle original capture names must be unique and preserved.");
                 System.IO.File.WriteAllBytes(path, png);
                 System.IO.File.WriteAllText(path + ".txt", "Native Unity URP scene capture\n" +
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +

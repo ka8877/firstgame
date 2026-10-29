@@ -13,19 +13,17 @@ namespace FantasyCards.Presentation
         {
             battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("battle");
             var state = BattleDisplayState; var player = state.players[0]; var enemy = state.players[1];
-            battleUnitViews.Clear();
-            Backdrop(false);
-            var field = Panel(root, .025f, .365f, .805f, .910f, new Color(.065f, .14f, .115f, .99f));
-            var stone = new GameObject("Late-era blue aether field", typeof(RectTransform), typeof(FmBattleStoneGraphic)).GetComponent<RectTransform>();
-            stone.SetParent(field, false); Anchor(stone, 0, 0, 1, 1);
-            Frame(field, new Color(.59f, .49f, .29f, .85f), 2); Ornament(field, gold);
+            battleUnitViews.Clear(); ChronicleVisibleCoinPanels = 0;
+            DrawChronicleBackdrop();
             DrawLanes(1, .660f, .910f); DrawLanes(0, .365f, .615f);
-            var messagePanel = Panel(root, .025f, .618f, .805f, .656f, new Color(.06f, .10f, .15f, .96f));
+            var messagePanel = ChroniclePanel(root, .025f, .618f, .805f, .656f, new Color(.012f, .024f, .045f, .96f), false);
             ReadableText(messagePanel, battlePlaybackActive ? battlePlaybackIndex + "/" + battlePlaybackCount + " · " + battlePlaybackCaption : locked ? "전투 준비 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", battlePlaybackActive ? battlePlaybackCaption : StatusMessage());
             DrawTerrainBackfield(enemy, 1, .919f, .995f);
-            DrawTerrainBackfield(player, 0, .285f, .358f);
-            DrawRevivalBattleRail(); DrawScrollableHand();
+            DrawChronicleLocalFeed();
+            if (!ChronicleFocusedBattle) DrawTerrainBackfield(player, 0, .285f, .358f);
+            DrawRevivalBattleRail(); StyleChronicleBattleRail();
+            if (ChronicleFocusedBattle) DrawChronicleBattleTerrain(); else DrawScrollableHand();
             DrawBattlePlaybackControls();
             if (!battlePlaybackActive && state.phase == BattlePhase.Complete) ShowResult();
         }
@@ -67,7 +65,7 @@ namespace FantasyCards.Presentation
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);
                 float left = start + lane * span / state.rules.unitLanes, right = left + span / state.rules.unitLanes - .008f;
                 bool target = IsLegalLane(owner, lane);
-                var panel = Panel(root, left, bottom, right, top, new Color(.015f, .025f, .08f, .20f));
+                var panel = ChroniclePanel(root, left, bottom, right, top, new Color(.005f, .013f, .055f, .28f), false);
                 panel.gameObject.name = "Lane " + owner + " " + lane;
                 panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
                 const float cardBottom = .025f, cardTop = .975f, cardRight = .985f;

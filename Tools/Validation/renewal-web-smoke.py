@@ -29,6 +29,7 @@ import urllib.parse
 import urllib.request
 
 from PIL import Image, ImageStat
+from chronicle_storage import authorize_output
 
 SPEC = importlib.util.spec_from_file_location("revival_web_helpers", Path(__file__).with_name("web-smoke.py"))
 BASE = importlib.util.module_from_spec(SPEC)
@@ -70,7 +71,7 @@ REVISIONS = {"FantasyCards": "fm-remaster-2026-10-26", "PathOfDawn": "gospel-rem
 MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospel-modern-2026-10-26"}
 FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
 DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
-RENEWAL_REVISIONS = {"FantasyCards": "fm-polish-2026-10-29", "PathOfDawn": "gospel-radiance-2026-10-29"}
+RENEWAL_REVISIONS = {"FantasyCards": "fm-chronicle-2026-10-29", "PathOfDawn": "gospel-chronicle-2026-10-29"}
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -700,6 +701,11 @@ class JourneySmoke:
             self.page.wait_for_timeout(action.get("settleMs", 450))
         if kind in ("click", "double_click") and self.args.profile != "mobile-landscape":
             # Keep the release over the button until Unity has consumed it.
+            # settleMs=0 is needed for transient captures, but moving away in
+            # that case can make Unity see mouse-up at the new position before
+            # its next Update. Observe real frames before the ordinary move.
+            self.page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+            record["releaseRenderFramesBeforePointerLeave"] = 2
             self.page.mouse.move(*self.point(.005, .005))
         self.persist()
 
@@ -817,10 +823,17 @@ class JourneySmoke:
             if not isinstance(actions, list) or len(actions) > 20:
                 raise ValueError('At most20 ordinary input actions per observed frame')
             for action in actions:
-                if action.get('type') not in ('click', 'drag', 'pointer_hold', 'wait') or 'repeat' in action or action.get('captureCompositorBurst'):
-                    raise ValueError('Review response accepts ordinary click/drag/pointer_hold/wait only')
+                if action.get('type') not in ('click', 'drag', 'pointer_hold', 'wait', 'key', 'hold', 'wheel', 'text') or 'repeat' in action or action.get('captureCompositorBurst'):
+                    raise ValueError('Review response accepts ordinary pointer/keyboard input only')
                 if action.get('ms', 0) > 20000 or action.get('settleMs', 0) > 20000 or action.get('durationMs', 0) > 20000:
                     raise ValueError('Review input wait must be bounded')
+                required = {'click': ('point',), 'drag': ('start', 'end'), 'pointer_hold': ('point', 'ms'),
+                            'wait': ('ms',), 'key': ('key',), 'hold': ('keys', 'ms'), 'wheel': ('point', 'deltaY'), 'text': ('text',)}[action['type']]
+                if any(key not in action for key in required):
+                    raise ValueError('Review input missing required fields: ' + str(required))
+            key_errors = self.review_key_errors(actions)
+            if key_errors: raise ValueError('; '.join(key_errors))
+            for action in actions:
                 self.input(action)
             request.update(status='ordinary-input-applied', responseSha256=digest(response), continuePlan=answer.get('continue') is True)
             self.persist()
@@ -836,7 +849,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29'):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -847,7 +860,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29')) and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29')) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -858,7 +871,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29'):
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -885,15 +898,15 @@ class JourneySmoke:
         files = []
         expected_files = list(self.report["buildFingerprint"]["files"])
         image_files = [row for row in expected_files if row['file'].startswith('StreamingAssets/Cards/')]
-        if self.report['revision'] == 'fm-polish-2026-10-29' and len(image_files) > 1000:
+        if self.report['revision'] == 'fm-chronicle-2026-10-29' and len(image_files) > 1000:
             # The full portal verifier already GETs/hashes every image. Bind
             # that complete current audit, then freshly verify the live
             # manifest and all executable/audio files for this real game run.
-            audit_path = ROOT / 'Artifacts/Validation/Polish/PublicPortal/report.json'
+            audit_path = ROOT / 'Artifacts/Validation/Chronicle/PublicPortal/report.json'
             audit = json.loads(audit_path.read_text())
             from renewal_release_evidence import verify_portal_review
             verify_portal_review(audit)
-            stage_path = Path('/tmp/firstgame-polish-staged-site/build-manifest.json')
+            stage_path = Path('/tmp/firstgame-chronicle-staged-site/build-manifest.json')
             staged = json.loads(stage_path.read_text())
             prefix = 'games/fantasy-cards/'
             if not (audit.get('status') == 'passed' and audit.get('sourceCommit') == staged.get('sourceCommit')
@@ -961,7 +974,7 @@ class JourneySmoke:
         return observations
 
     def network_check(self):
-        expected, unexpected, external, local_cancellations, preload_cancellations, recovered_ranges, decoded_ranges = [], [], [], [], [], [], []
+        expected, unexpected, external, local_cancellations, preload_cancellations, recovered_ranges, decoded_ranges, local_reload_ranges = [], [], [], [], [], [], [], []
         observations = self.local_media_timeline()
         for failed in self.report["failedRequests"]:
             nav, url = failed["navigation"], failed["url"]
@@ -994,6 +1007,13 @@ class JourneySmoke:
             if recovered:
                 decoded_ranges.append(recovered)
                 continue
+            recovered = LOCAL_ERRORS.recovered_loopback_reload_pregesture_range_cancellation(self.args.game, self.report["revision"], self.report["suite"],
+                failed, self.game_url, self.report["buildFingerprint"]["files"], observations,
+                self.report["audioEvidence"]["windows"], self.report["networkResponses"],
+                self.report.get("verifiedLocalMediaDelivery", {}).get("files", []))
+            if recovered:
+                local_reload_ranges.append(recovered)
+                continue
             exact = any(c.get("navigation") == nav and c.get("dataUrl") == url for c in self.report["unityConfigurations"])
             http304 = any(r["navigation"] == nav and r["url"] == url and r["status"] == 304 for r in self.report["networkResponses"])
             marker = "[UnityCache] '" + url + "' successfully revalidated and served from the browser cache"
@@ -1014,6 +1034,7 @@ class JourneySmoke:
         diagnostic = {"verifiedUnityCacheRevalidationAborts": expected, "verifiedInactiveLocalMediaCancellations": local_cancellations,
                       "verifiedInactiveLocalPreloadCancellations": preload_cancellations, "verifiedRecoveredPublicPregestureRanges": recovered_ranges,
                       "verifiedRecoveredPublicRanges": decoded_ranges, "unexpectedFailures": unexpected,
+                      "verifiedLoopbackReloadPregestureRanges": local_reload_ranges,
                       "externalMusicServiceFailures": external}
         self.report["networkDiagnostic"] = diagnostic
         self.check(not unexpected, "No unexpected failed requests; exact proved cache/local-media cancellations retained", diagnostic)
@@ -1028,6 +1049,23 @@ class JourneySmoke:
         try:
             if self.args.base_url:
                 self.public_bytes(url)
+            elif self.modern and self.args.game == "FantasyCards":
+                # Separate full HTTP GETs bind local media before navigation.
+                # A decoded preload/range cancellation is classified only with
+                # these actual bytes plus its own observed lifecycle and PCM.
+                delivered = []
+                for expected in self.report["buildFingerprint"]["files"]:
+                    if not expected["file"].startswith(LOCAL_ERRORS.PREFIX) or Path(expected["file"]).name not in LOCAL_ERRORS.FILENAMES:
+                        continue
+                    request = urllib.request.Request(urllib.parse.urljoin(url, expected["file"]), headers={"Accept-Encoding": "identity"})
+                    with urllib.request.urlopen(request, timeout=self.args.timeout) as response:
+                        body = response.read()
+                        row = {"file": expected["file"], "url": response.url, "status": response.status,
+                               "bytes": len(body), "sha256": hashlib.sha256(body).hexdigest()}
+                    self.check(row["status"] == 200 and row["bytes"] == expected["bytes"] and row["sha256"] == expected["sha256"],
+                               "Full local bundled media GET matches current runtime: " + expected["file"], row)
+                    delivered.append(row)
+                self.report["verifiedLocalMediaDelivery"] = {"status": "passed", "files": delivered}
             self.page.goto(url, wait_until="domcontentloaded", timeout=self.args.timeout * 1000)
             if self.args.game == "FantasyCards":
                 if self.modern:
@@ -1100,12 +1138,10 @@ def main():
     parser.add_argument("--provider-timeout", type=int, default=15)
     parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
     args = parser.parse_args()
-    args.output = args.output.resolve()
+    args.output = authorize_output(args.output)
     args.build_root = args.build_root.resolve()
     args.plan = args.plan.resolve()
     artifact_root = (ROOT / "Artifacts").resolve()
-    if not args.output.resolve().is_relative_to(artifact_root) or args.output.resolve() == artifact_root:
-        parser.error("--output must be a separate directory inside Artifacts")
     if not (args.build_root / args.game / "Web/index.html").is_file():
         parser.error("A successful final local Web build is required, including for public verification")
     plans = json.loads(args.plan.read_text())

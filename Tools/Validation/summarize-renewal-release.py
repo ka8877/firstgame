@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import json
 import xml.etree.ElementTree as ET
-from renewal_release_evidence import ROOT, OUT, BUILD, REVISIONS, read, ref, runtime, verify_browser, verify_native_review, verify_portal_review
+from renewal_release_evidence import ROOT, OUT, BUILD, REVISIONS, CURRENT_TARGETS, read, ref, runtime, verify_browser, verify_native_review, verify_portal_review
 
 def optional(path):
     return read(path) if path.is_file() else None
@@ -14,8 +14,9 @@ def main():
         'releaseProfile': 'renewal', 'date': '2026-10-29',
         'updatedUtc': datetime.now(timezone.utc).isoformat(),
         'gameRevisions': REVISIONS,
+        'currentTargets': list(CURRENT_TARGETS),
         'contentVersions': {'FantasyCards': 'fm-classic-0.1.0', 'PathOfDawn': 'gospel-0.1.0'},
-        'scope': 'Current Polish/Radiance revisions through the existing renewal release profile. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.',
+        'scope': 'Current Web-only Chronicle revisions through the existing renewal release profile. No current Windows build is claimed; prior Windows ZIPs are historical. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.',
         'core': {}, 'native': {}, 'builds': {}, 'browser': {},
         'publication': {'status': 'pending', 'url': 'https://ka8877.github.io/firstgame/', 'scope': 'No new publication is claimed until current staged/public bytes and Root portal review are verified.'},
         'limitations': [
@@ -47,7 +48,7 @@ def main():
                 record['native'][game]['rootReview'] = {'status': 'not-release-approved', 'reason': str(error)}
                 if review.is_file(): record['native'][game]['rootReview']['evidence'] = ref(review)
         record['builds'][game] = {}
-        for target in ('Windows', 'Web'):
+        for target in CURRENT_TARGETS:
             folder = BUILD / game / target
             path = folder / 'BuildEvidence.txt'
             if not path.is_file(): continue
@@ -83,7 +84,7 @@ def main():
         record['supplementalCardNoteProof'] = {'mechanicalStatus': read(notes)['status'],
             'report': ref(notes), 'rootReview': ref(notes_review),
             'scope': 'Ordinary ASCII note entry on the same frozen runtime; the empty automated Korean-note input is not successful note proof. Immediate-return capture is not a settled-font legibility claim.'}
-    stage = Path('/tmp/firstgame-polish-staged-site/build-manifest.json')
+    stage = Path('/tmp/firstgame-chronicle-staged-site/build-manifest.json')
     public = OUT / 'PublicPortal/report.json'
     if stage.is_file() and public.is_file():
         try:

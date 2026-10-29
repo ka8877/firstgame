@@ -1,8 +1,8 @@
-"""Fail-closed evidence for an inactive, previously playing bundled media fetch cancellation.
+"""Fail-closed lifecycle evidence for bundled-media fetch cancellation.
 
 This is not a music URL exception. The exact media GET abort must coincide with
-an observed active-to-paused transition, and later isolated advancing PCM from
-another current bundled source must be verified in the same navigation.
+an observed active-to-paused transition, or exact verified range/decode recovery.
+Later isolated advancing PCM must be verified in the same navigation.
 """
 from __future__ import annotations
 import math
@@ -11,7 +11,7 @@ from urllib.parse import urljoin, urlsplit
 
 FILENAMES={name+extension for name in ('title','lobby','deck','battle') for extension in ('.ogg','.mp3')}
 PREFIX='StreamingAssets/Audio/ModernCard/'
-SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29'}
+SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'}
 
 
 def _number(value):
@@ -160,6 +160,54 @@ def recovered_public_pregesture_range_cancellation(game,revision,suite,failure,g
         return {'request':failure,'reason':'Initial public HTTP206 media range was cancelled before any audio unlock; exact bytes verified, same element decoded another range while paused, then isolated bundled PCM advanced.',
             'firstObservedEpochMs':initial['epochMs'],'decodedBeforeUnlockEpochMs':loaded['epochMs'],'http206Responses':len(ranges),
             'verifiedPublicSha256':expected.get('sha256'),'subsequentPcm':{k:pcm.get(k) for k in ('label','rawEvidence','sha256','sourceUrls','mediaProgressSeconds','medianRms')}}
+    return None
+
+
+def recovered_loopback_reload_pregesture_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
+    """Loopback reload only: full exact GET, pre-unlock decode, later actual PCM.
+
+    The public-startup category stays unchanged. This requires separately
+    verified full local HTTP bytes, not a filename or an assumed cache hit.
+    """
+    nav=failure.get('navigation')
+    if not isinstance(nav,int) or isinstance(nav,bool) or nav<=0:return None
+    if (game!='FantasyCards' or revision not in SUPPORTED_LOCAL_REVISIONS or suite!='modern-real-input-v1'
+            or failure.get('resourceType')!='media' or failure.get('method')!='GET'
+            or failure.get('error')!='net::ERR_ABORTED'):return None
+    origin=urlsplit(game_url)
+    if origin.scheme!='http' or origin.hostname not in ('127.0.0.1','localhost') or not origin.port or origin.username or origin.password or origin.query or origin.fragment:return None
+    files={r.get('file'):r for r in runtime_files}
+    allowed={urljoin(game_url.rstrip('/')+'/',PREFIX+n):files[PREFIX+n] for n in FILENAMES if PREFIX+n in files}
+    url=failure.get('url');when=failure.get('observedEpochMs')
+    if url not in allowed or not _number(when):return None
+    expected=allowed[url]
+    if not any(d.get('url')==url and d.get('status')==200 and d.get('sha256')==expected.get('sha256')
+               and d.get('bytes')==expected.get('bytes') for d in delivered):return None
+    ranges=[r for r in responses if r.get('url')==url and r.get('navigation')==nav and r.get('method')=='GET' and r.get('status')==206]
+    if len(ranges)<2:return None
+    rows=sorted((r for r in observations if r.get('navigation')==nav and _number(r.get('epochMs'))),key=lambda r:r['epochMs'])
+    if not rows or not when<=rows[0]['epochMs']<=when+1000:return None
+    initial=rows[0];state=initial.get('state',{})
+    if not(state.get('unlocked') is False and state.get('contextState')=='not-created'
+            and state.get('actualSource') is None and state.get('actualPaused') is True):return None
+    old=next((p for p in initial.get('players',[]) if p.get('source')==url),{})
+    if not(old.get('active') is False and old.get('paused') is True and old.get('pending') is False and old.get('currentTime')==0):return None
+    loaded=next((row for row in rows if when<=row['epochMs']<=when+2000
+        and row.get('state',{}).get('unlocked') is False and row.get('state',{}).get('contextState')=='not-created'
+        and any(p.get('source')==url and p.get('active') is False and p.get('paused') is True
+            and p.get('pending') is False and p.get('currentTime')==0 and p.get('readyState',0)>=2 for p in row.get('players',[]))),None)
+    if loaded is None:return None
+    for pcm in windows:
+        sources=pcm.get('sourceUrls',[])
+        if (pcm.get('navigation')!=nav or len(sources)!=1 or sources[0] not in allowed
+                or not all(_number(pcm.get(k)) for k in ('startedEpochMs','sampleCount','medianRms','audibleSampleFraction','mediaProgressSeconds'))
+                or pcm['startedEpochMs']<loaded['epochMs'] or pcm['sampleCount']<6 or pcm['medianRms']<=1e-5
+                or pcm['audibleSampleFraction']<.5 or pcm['mediaProgressSeconds']<=.5
+                or pcm.get('allContextsRunning') is not True or pcm.get('isolatedMusicRoute') is not True
+                or len(pcm.get('sourceIdentities',[]))!=1 or pcm.get('nonfiniteSamples')!=0 or pcm.get('observerErrors')!=[]):continue
+        return {'request':failure,'reason':'Initial loopback reload HTTP206 media range was cancelled before any audio unlock; exact bytes verified, same element decoded another range while paused, then isolated bundled PCM advanced.',
+            'firstObservedEpochMs':initial['epochMs'],'decodedBeforeUnlockEpochMs':loaded['epochMs'],'http206Responses':len(ranges),
+            'verifiedLocalGetSha256':expected.get('sha256'),'subsequentPcm':{k:pcm.get(k) for k in ('label','rawEvidence','sha256','sourceUrls','mediaProgressSeconds','medianRms')}}
     return None
 
 

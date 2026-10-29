@@ -3,7 +3,7 @@
 from datetime import datetime,timezone
 from pathlib import Path
 import argparse,hashlib,json,re
-ROOT=Path(__file__).resolve().parents[2];BUILD=Path('/tmp/firstgame-polish-builds')
+ROOT=Path(__file__).resolve().parents[2];BUILD=Path('/tmp/firstgame-chronicle-builds')
 p=argparse.ArgumentParser();p.add_argument('game',choices=['FantasyCards','PathOfDawn']);p.add_argument('target',choices=['Windows','Web']);p.add_argument('attempt');a=p.parse_args()
 assert re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}',a.attempt)
 source=BUILD/a.game/a.target
@@ -20,6 +20,6 @@ for f in sorted(source.rglob('*')):
 assert rows,'Empty player directory needs explicit diagnosis'
 stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');dest=BUILD/'Previous'/(a.game+'-'+a.target+'-before-'+a.attempt+'-'+stamp)
 record={'state':'planned','source':str(source),'destination':str(dest),'files':rows,'createdUtc':datetime.now(timezone.utc).isoformat()}
-ledger=ROOT/'Artifacts/Validation/Polish'/a.game/a.attempt/('previous-'+a.target.lower()+'-player.json');ledger.parent.mkdir(parents=True,exist_ok=True);assert not ledger.exists()
+ledger=ROOT/'Artifacts/Validation/Chronicle'/a.game/a.attempt/('previous-'+a.target.lower()+'-player.json');ledger.parent.mkdir(parents=True,exist_ok=True);assert not ledger.exists()
 ledger.write_text(json.dumps(record,indent=2)+'\n');dest.parent.mkdir(exist_ok=True);source.rename(dest)
 record['state']='archived';ledger.write_text(json.dumps(record,indent=2)+'\n');print('Previous generated player retained:',dest)

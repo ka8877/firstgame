@@ -11,9 +11,10 @@ namespace PathOfDawn.Core
         public string Text { get; }
         public string Context { get; }
         public string Translation => "개역한글";
-        public string SourceUrl => GospelCatalog.ScriptureSource;
-        public GospelReading(string id, string title, string reference, string text, string context)
-        { Id = id; Title = title; Reference = reference; Text = text; Context = context; }
+        readonly string sourceUrl;
+        public string SourceUrl => string.IsNullOrEmpty(sourceUrl) ? GospelCatalog.ScriptureSource : sourceUrl;
+        public GospelReading(string id, string title, string reference, string text, string context, string sourceUrl = null)
+        { Id = id; Title = title; Reference = reference; Text = text; Context = context; this.sourceUrl = sourceUrl; }
     }
 
     public sealed class GospelObjective

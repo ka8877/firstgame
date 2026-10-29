@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FantasyCards.Core;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FantasyCards.Presentation
 {
@@ -12,59 +13,50 @@ namespace FantasyCards.Presentation
         {
             var label = MiniCardText(parent, value, x0, y0, x1, y1, size, tint, name);
             label.GetComponent<UiCanvasTextSize>().ConfigureCard(size);
-            label.overflowMode = TextOverflowModes.Ellipsis; return label;
+            label.overflowMode = TextOverflowModes.Overflow; return label;
         }
         private readonly Dictionary<int, BattleEvent> battleCardTransitions = new Dictionary<int, BattleEvent>();
+
+        private void ChronicleValues(UnitState unit, out int[] before, out int[] current)
+        {
+            current = new[] { CardCatalog.UnitAttack(unit), CardCatalog.UnitDefense(unit), Math.Max(0, CardCatalog.UnitHealth(unit)) };
+            before = (int[])current.Clone();
+            if (battlePlaybackActive && battleCardTransitions.TryGetValue(unit.instanceId, out var change) && change.hasStatTransition)
+            {
+                current = new[] { change.afterAttack, change.afterDefense, Math.Max(0, change.afterHealth) };
+                before = new[] { change.beforeAttack, change.beforeDefense, Math.Max(0, change.beforeHealth) };
+            }
+        }
+
         private void DrawRenewalCardValues(RectTransform surface, CardDefinition card, UnitState unit, bool selected)
         {
-            Color grade = RarityColor(card.rarity);
-            Frame(surface, selected ? gold : new Color(grade.r, grade.g, grade.b, .88f), selected ? 3 : 1.4f);
-            var heading = Panel(surface, .018f, .83f, .982f, .985f, new Color(.025f, .035f, .085f, .96f));
-            RenewalValueText(heading, card.name, .025f, .03f, .975f, .97f, 23, ivory, "Playable card name");
-            if (unit != null)
+            // Hands retain the entire original print. Live units replace only
+            // the three printed numeral areas; no name/art/rules/stat bars.
+            if (unit == null) return;
+            ChronicleValues(unit, out var before, out var current);
+            var container = Panel(surface, 0, 0, 1, 1, Color.clear);
+            container.gameObject.name = "Integrated live card values " + unit.instanceId;
+            string[] labels = { "AP", "DP", "HP" };
+            float[] bottoms = { .1753f, .1136f, .0469f }, tops = { .2272f, .1605f, .0988f };
+            for (int i = 0; i < 3; i++)
             {
-                BattleEvent transition = null;
-                if (battlePlaybackActive) battleCardTransitions.TryGetValue(unit.instanceId, out transition);
-                int[] current = { CardCatalog.UnitAttack(unit), CardCatalog.UnitDefense(unit), Math.Max(0, CardCatalog.UnitHealth(unit)) };
-                int[] before = (int[])current.Clone();
-                if (transition != null && transition.hasStatTransition)
-                {
-                    current = new[] { transition.afterAttack, transition.afterDefense, Math.Max(0, transition.afterHealth) };
-                    before = new[] { transition.beforeAttack, transition.beforeDefense, Math.Max(0, transition.beforeHealth) };
-                }
-                var plate = Panel(surface, .018f, .025f, .982f, .44f, new Color(.018f, .035f, .075f, .98f));
-                plate.gameObject.name = "Integrated live card values " + unit.instanceId;
-                string[] labels = { "AP", "DP", "HP" };
-                for (int i = 0; i < 3; i++)
-                {
-                    float y0 = (2 - i) / 3f, y1 = (3 - i) / 3f;
-                    var row = Panel(plate, .025f, y0 + .008f, .975f, y1 - .008f, i == 2 ? new Color(.065f, .16f, .17f, .95f) : new Color(.055f, .08f, .14f, .95f));
-                    int delta = current[i] - before[i];
-                    // Keep a single readable row on small cards: current value plus
-                    // signed change. The battle banner carries before→after.
-                    string value = current[i].ToString() + (delta == 0 ? "" : " " + (delta > 0 ? "+" : "−") + Math.Abs(delta));
-                    RenewalValueText(row, labels[i], .025f, .01f, .30f, .99f, 21, i == 2 ? teal : gold, "Card stat label " + labels[i]);
-                    RenewalValueText(row, value, .30f, .01f, .975f, .99f, 24,
-                        delta > 0 ? new Color(.59f, 1, .75f) : delta < 0 ? new Color(1, .47f, .40f) : ivory,
-                        "Card live " + labels[i] + " " + unit.instanceId);
-                }
-                if (battlePlaybackActive && battleCoinResults.TryGetValue(unit.instanceId, out var faces))
-                {
-                    var strip = Panel(surface, .02f, .45f, .98f, .59f, new Color(.025f, .04f, .08f, .94f));
-                    strip.gameObject.name = "On-card resolved coin row " + unit.instanceId;
-                    RenewalValueText(strip, string.Join(" ", faces.ConvertAll(head => head ? "●" : "○")), .03f, .02f, .97f, .98f, 23, gold, "Actual coin faces");
-                }
-                if (unit.equipment.Count > 0)
-                    RenewalValueText(surface, "+" + unit.equipment.Count, .72f, .72f, .96f, .85f, 20, gold, "Card equipment count");
-            }
-            else
-            {
-                var footer = Panel(surface, .018f, .025f, .982f, .345f, new Color(.018f, .035f, .075f, .97f));
-                string cost = card.kind == CardKind.Terrain ? "LP " + card.landPointCost : "Lv" + card.level + " · " + CardCatalog.ElementName(card.element) + card.coloredCost + "/" + card.cost;
-                RenewalValueText(footer, cost, .025f, .49f, .975f, .98f, 21, gold, "Hand card playable cost");
-                string lower = card.kind == CardKind.Unit ? card.attack + CardCatalog.CoinText(card.attackCoin) + " / " + card.defense + CardCatalog.CoinText(card.defenseCoin) + " / " + card.health + CardCatalog.CoinText(card.healthCoin)
-                    : CardCatalog.KindName(card.kind) + " · " + CardCatalog.RarityCode(card.rarity);
-                RenewalValueText(footer, lower, .025f, .02f, .975f, .49f, 20, ivory, "Hand card stats or type");
+                // The blank 3px strip alongside each source numeral preserves
+                // both legacy paper and later dark slots. Source bytes stay intact.
+                var patch = new GameObject("Printed " + labels[i] + " numeral background", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
+                patch.transform.SetParent(container, false);
+                Anchor((RectTransform)patch.transform, .8632f, bottoms[i], .9649f, tops[i]);
+                patch.uvRect = new Rect(246f / 285f, bottoms[i], 3f / 285f, tops[i] - bottoms[i]);
+                patch.texture = OriginalCardTexture(card); patch.raycastTarget = false;
+                FmStreamingCardArt.Bind(patch, card.artResource);
+                int delta = current[i] - before[i];
+                var label = RenewalValueText(container, current[i].ToString(), .862f, bottoms[i], .969f, tops[i], 32,
+                    delta > 0 ? new Color(.60f, 1, .66f) : delta < 0 ? new Color(1, .40f, .32f) : ivory,
+                    "Card live " + labels[i] + " " + unit.instanceId);
+                label.alignment = TextAlignmentOptions.MidlineRight;
+                label.fontStyle = FontStyles.Bold | FontStyles.Italic;
+                label.outlineWidth = .14f; label.outlineColor = new Color32(8, 12, 18, 255);
+                if (current[i].ToString().Length > 2)
+                    label.transform.localScale = new Vector3(2.2f / current[i].ToString().Length, 1, 1);
             }
         }
     }

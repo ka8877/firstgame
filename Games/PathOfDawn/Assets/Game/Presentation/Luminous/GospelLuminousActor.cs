@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 namespace PathOfDawn.Presentation
 {
     /// <summary>Painted, joint-articulated character with independently deforming linen and trailing cloth.</summary>
-    public sealed class GospelLuminousActor : MonoBehaviour
+    public sealed partial class GospelLuminousActor : MonoBehaviour
     {
         public string CurrentState { get; private set; } = "Idle";
         public float Phase => phase;
@@ -115,8 +115,8 @@ namespace PathOfDawn.Presentation
             var obj = new GameObject("Painted Jesus · articulated 2D");
             obj.transform.SetParent(parent, false);
             var result = obj.AddComponent<GospelLuminousActor>();
+            result.adultStage = adult;
             result.Create();
-            if (adult) Debug.LogWarning("The Luminous opening currently uses the twelve-year-old character; adult artwork is not implemented.");
             return result;
         }
 
@@ -182,6 +182,7 @@ namespace PathOfDawn.Presentation
 
         void Create()
         {
+            if (TryCreateChronicleRig()) return;
             atlas = Resources.Load<Texture2D>("Art/GospelRadiance/Actors/jesus-parts");
             UsesRadiancePainting = atlas != null;
             activeParts = UsesRadiancePainting ? RadianceParts : Parts;
@@ -271,6 +272,7 @@ namespace PathOfDawn.Presentation
 
         void LateUpdate()
         {
+            if (UsesContinuousLimbRig) { UpdateChronicleRig(); return; }
             if (!visual) return;
             float dt = Mathf.Max(0, Time.deltaTime); time += dt;
             float speed = Mathf.Abs(velocity.x);
@@ -397,6 +399,7 @@ namespace PathOfDawn.Presentation
 
         void OnDestroy()
         {
+            DestroyChronicleMeshes();
             foreach (var sprite in generatedSprites) if (sprite) Destroy(sprite);
             if (skirtMesh) Destroy(skirtMesh);
             if (sashMesh) Destroy(sashMesh);

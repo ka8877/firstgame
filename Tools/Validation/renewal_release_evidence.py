@@ -3,11 +3,12 @@ from datetime import datetime
 from pathlib import Path, PurePosixPath
 import hashlib, importlib.util, json, re, subprocess, sys, urllib.parse, xml.etree.ElementTree as ET
 from restoration_source_binding import ROOT, verify, digest
-from renewal_player_payload import verify_windows_payload
-REVISIONS={'FantasyCards':'fm-polish-2026-10-29','PathOfDawn':'gospel-radiance-2026-10-29'}
-OUT=ROOT/'Artifacts/Validation/Polish'
-BUILD=Path('/tmp/firstgame-polish-builds')
-STAGE=Path('/tmp/firstgame-polish-staged-site')
+from chronicle_storage import validate_evidence_root
+REVISIONS={'FantasyCards':'fm-chronicle-2026-10-29','PathOfDawn':'gospel-chronicle-2026-10-29'}
+CURRENT_TARGETS={'Web':'WebGL'}
+OUT=ROOT/'Artifacts/Validation/Chronicle'
+BUILD=Path('/tmp/firstgame-chronicle-builds')
+STAGE=Path('/tmp/firstgame-chronicle-staged-site')
 PUBLIC_BASE='https://ka8877.github.io/firstgame/'
 GAME_SLUGS={'FantasyCards':'fantasy-cards','PathOfDawn':'path-of-dawn'}
 
@@ -38,9 +39,9 @@ def verify_portal_review(report=None):
  manifest_path=STAGE/'build-manifest.json'
  require(STAGE.is_dir() and not STAGE.is_symlink() and manifest_path.is_file() and not manifest_path.is_symlink(),'Current regular staged manifest required')
  manifest=read(manifest_path);manifest_ref=ref(manifest_path)
- require(manifest.get('releaseProfile')=='renewal' and manifest.get('publishReady') is True and manifest.get('sourceDirty') is False and manifest.get('gameRevisions')==REVISIONS and manifest.get('contentVersions')=={'FantasyCards':'fm-classic-0.1.0','PathOfDawn':'gospel-0.1.0'},'Current clean Renewal manifest required')
+ require(manifest.get('releaseProfile')=='renewal' and manifest.get('currentTargets')==list(CURRENT_TARGETS) and manifest.get('publishReady') is True and manifest.get('sourceDirty') is False and manifest.get('gameRevisions')==REVISIONS and manifest.get('contentVersions')=={'FantasyCards':'fm-classic-0.1.0','PathOfDawn':'gospel-0.1.0'},'Current clean Web-only Chronicle manifest required')
  require(re.fullmatch(r'[0-9a-f]{40}',manifest.get('sourceCommit','')) and report.get('sourceCommit')==manifest['sourceCommit'] and report.get('gameRevisions')==REVISIONS,'Portal source/revisions differ from current stage')
- require(report.get('manifest',{}).get('file')=='Artifacts/PolishWebPlaytest/build-manifest.json' and report['manifest'].get('sha256')==manifest_ref['sha256'],'Portal manifest differs from current stage')
+ require(report.get('manifest',{}).get('file')=='Artifacts/ChronicleWebPlaytest/build-manifest.json' and report['manifest'].get('sha256')==manifest_ref['sha256'],'Portal manifest differs from current stage')
  files=manifest.get('files',{})
  require(isinstance(files,dict) and 'index.html' in files and 'site.css' in files and 'build-manifest.json' not in files,'Complete staged public file map required')
  expected={**files,'build-manifest.json':manifest_ref['sha256']};audited=file_rows(report.get('files',[]),'Public audit')
@@ -86,9 +87,10 @@ def verify_native_review(game,binding,native):
  shots=review.get('screenshots',[]);require(len(shots)>=2,'Root native review needs actual title/gameplay originals')
  for shot in shots:
   p=ROOT/shot.get('file',shot.get('path',''))
-  require(p.resolve().is_relative_to((ROOT/'Artifacts/Screenshots'/game).resolve()) and p.is_file() and not p.is_symlink() and digest(p)==shot['sha256'],'Root native original changed: '+game)
+  require(p.resolve().is_relative_to((OUT/'Screenshots'/game).resolve()) and p.is_file() and not p.is_symlink() and digest(p)==shot['sha256'],'Root native original changed: '+game)
  return ref(path)
 def verify_builds():
+ validate_evidence_root()
  subprocess.run([sys.executable,str(ROOT/'Tools/Data/Renewal/verify-media.py')],cwd=ROOT,check=True)
  authoring_path=OUT/'card-authoring-final.json'
  authoring=json.loads(subprocess.check_output([sys.executable,str(ROOT/'Tools/Validation/verify-card-authoring.py')],cwd=ROOT,text=True))
@@ -101,7 +103,7 @@ def verify_builds():
   xml=ET.parse(native/'native.xml').getroot()
   require(xml.get('result')=='Passed' and int(xml.get('passed','0'))>0 and xml.get('skipped')=='0' and xml.get('failed')=='0','Fresh native tests must pass without skip')
   targets={}
-  for target,platform in [('Windows','StandaloneWindows64'),('Web','WebGL')]:
+  for target,platform in CURRENT_TARGETS.items():
    folder=BUILD/game/target
    ep,ip=folder/'BuildEvidence.txt',folder/'BuildInputs.json'
    e=dict(l.split(': ',1) for l in ep.read_text().splitlines() if ': ' in l);i=read(ip)
@@ -109,15 +111,14 @@ def verify_builds():
    require(i['game']==game and verify(i)==e.get('SourceFingerprint')==binding['sourceFingerprint'],'Native/current/player source inputs differ: '+game+'/'+target)
    if game=='PathOfDawn':require(e.get('LegacyResourcesRestored')=='true','Gospel legacy originals must be restored')
    targets[target]={'evidence':ref(ep),'inputs':ref(ip),'sourceFingerprint':i['fingerprint']}
-  require((BUILD/game/'Windows'/f'{game}.exe').is_file(),'Windows executable missing: '+game)
-  result[game]={'native':ref(native/'binding.json'),'nativeResults':ref(native/'native.xml'),'nativeRootReview':verify_native_review(game,binding,native),'targets':targets,'windowsPayload':verify_windows_payload(game)}
+  result[game]={'native':ref(native/'binding.json'),'nativeResults':ref(native/'native.xml'),'nativeRootReview':verify_native_review(game,binding,native),'targets':targets}
  core=OUT/'Core/core-tests.trx';t=ET.parse(core).getroot();c=t.find('.//{http://microsoft.com/schemas/VisualStudio/TeamTest/2010}Counters')
  require(c is not None and int(c.get('passed','0'))>=170 and c.get('failed')=='0' and c.get('notExecuted')=='0','Current Core results must pass without skipped tests')
  binding=read(OUT/'Core/binding.json')
  require(binding.get('status')=='passed' and binding.get('sourceChangedDuringRun') is False and binding['results']['sha256']==digest(core),'Current immutable Core result binding required')
  spec=importlib.util.spec_from_file_location('renewal_core_inputs',ROOT/'Tools/Validation/run-renewal-core.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
  require(module.verify_current(binding),'Core source changed since tested inputs')
- return {'games':result,'core':ref(core),'authoring':ref(authoring_path)}
+ return {'currentTargets':list(CURRENT_TARGETS),'games':result,'core':ref(core),'authoring':ref(authoring_path)}
 def verify_browser(game,profile):
  p=OUT/profile/game/'report.json';r=read(p)
  require(r.get('game')==game and r.get('revision')==REVISIONS[game] and r.get('status')=='passed' and r.get('checks') and all(c.get('passed') is True for c in r['checks']),'Fresh successful actual browser report required: '+game+'/'+profile)

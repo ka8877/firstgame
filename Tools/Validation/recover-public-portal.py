@@ -24,7 +24,7 @@ def main():
     args = parser.parse_args()
     stage, lexical, authorization = PORTAL.resolve_stage(args.stage)
     manifest, expected = PORTAL.staged_manifest(stage)
-    output = args.output.resolve()
+    output = PORTAL.authorize_output(args.output)
     PORTAL.require(output.is_relative_to(PORTAL.ROOT / 'Artifacts/Validation'), 'Evidence output must be under Artifacts/Validation')
     path = output / 'report.json'
     raw = path.read_bytes()

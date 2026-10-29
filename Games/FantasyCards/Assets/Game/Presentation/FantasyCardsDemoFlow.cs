@@ -172,7 +172,7 @@ namespace FantasyCards.Presentation
         private void DrawScrollableHand()
         {
             var hand = BattleDisplayState.players[0].hand;
-            var viewport = Panel(root, .025f, .012f, .805f, .277f, new Color(.045f, .075f, .11f, .98f));
+            var viewport = ChroniclePanel(root, .025f, .012f, .805f, .277f, new Color(.008f, .017f, .035f, .92f));
             viewport.gameObject.name = "Scrollable hand"; viewport.GetComponent<Image>().raycastTarget = true;
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Hand content", typeof(RectTransform)).GetComponent<RectTransform>();

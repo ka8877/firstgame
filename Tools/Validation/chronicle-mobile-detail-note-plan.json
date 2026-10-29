@@ -1,0 +1,158 @@
+{
+  "FantasyCards": {
+    "revision": "fm-chronicle-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "scope": "One bounded freshprofile ordinarytouch correction, no reuse/inspection/injection of savedgame. MainMobile alreadyproves actualclash/save/reload/audio; this supplements only normalboard→680mshold→detail→Back and actualdeskASCII note. Allcurrentruntimeidentities independentlybound.",
+    "requiredCheckpoints": [
+      "title",
+      "board-before-hold",
+      "actual-terrain-longhold-detail",
+      "normal-board-after-detail",
+      "actual-opponent-desk",
+      "actual-empty-local-notes",
+      "actual-ascii-note",
+      "actual-returned-board"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current exactruntime title; standalone supplementary ordinarytouch proof, no saveinjection."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "settleMs": 600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.39,
+          0.383
+        ],
+        "settleMs": 600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.627,
+          0.7625
+        ],
+        "settleMs": 600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7925,
+          0.925
+        ],
+        "settleMs": 600
+      },
+      {
+        "type": "review_input",
+        "name": "mobile-corrected-one-land",
+        "expected": "Actual normalboard only. Select an actually visible legalterrain fromhand then tap rightprimary지형전개(.898,.73109); use normalopening/shuffle/Ready onlyifneeded. Noinspection/injection. Verifyterraincount≥1 andnormalboard beforecontinue; doNOTtap primaryCardDetail withoutactualhandterrainselection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "board-before-hold",
+        "expected": "Actual normalboard and firstownterrain visible; no detail/desk/modal. This is the prerequisite for the next680ms hold."
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.197,
+          0.6785
+        ],
+        "ms": 680,
+        "settleMs": 700
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-terrain-longhold-detail",
+        "expected": "Actualheldterrain originalfront/title andLv0/terrainrule detail opened FROM precedingnormalboard; identifyactualname ratherthanassumeflowerbed."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "settleMs": 700
+      },
+      {
+        "type": "checkpoint",
+        "name": "normal-board-after-detail",
+        "expected": "ActualdetailBack restoresnormalboard/terrain/hand and labels."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.53167
+        ],
+        "settleMs": 700
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-opponent-desk",
+        "expected": "Actual대전데스크 withtabs/publicAIinformation, notunitdetail."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.808,
+          0.235
+        ],
+        "settleMs": 600
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-empty-local-notes",
+        "expected": "Actual나만의연습메모 input/recordcontrols andno fakeonlinechat."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.415,
+          0.75
+        ],
+        "settleMs": 500
+      },
+      {
+        "type": "text",
+        "text": "Chronicle mobile correction",
+        "label": "Actual ASCII note"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8675,
+          0.75
+        ],
+        "settleMs": 700
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-ascii-note",
+        "expected": "Actualvisiblelist contains exactlythe typedASCIIpractice note; screenshotmustnotbeunitdetail."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.845,
+          0.945
+        ],
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-returned-board",
+        "expected": "Actualboardreturn withsettledLP/7attributes labels/hand/terrain. No battle/save/musicscope claimed beyondseparateMainMobile."
+      }
+    ]
+  }
+}

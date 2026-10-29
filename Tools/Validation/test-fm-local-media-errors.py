@@ -148,4 +148,48 @@ class ActualRenewalPublicRange(unittest.TestCase):
         self.assertIsNone(m.recovered_public_range_cancellation(**a))
 
 
+class AuthoredLoopbackReloadPregestureTests(unittest.TestCase):
+    # Authored domain/navigation projection for classifier contracts only.
+    # These assertions are not evidence that an old browser did a full GET.
+    def setUp(self):
+        raw=json.loads(Path(__file__).with_name('Fixtures').joinpath('fm-public-pregesture-ranges.json').read_text())
+        self.raw=json.loads(json.dumps(raw).replace(raw['game_url'],BASE))
+        self.raw['revision']='fm-chronicle-2026-10-29'
+        def project(value):
+            if isinstance(value,dict):
+                if 'navigation' in value:value['navigation']=1
+                for item in value.values():project(item)
+            elif isinstance(value,list):
+                for item in value:project(item)
+        project(self.raw)
+    def args(self):return {k:copy.deepcopy(self.raw[k]) for k in ('game','revision','suite','game_url','runtime_files','observations','windows','responses','delivered')}|{'failure':copy.deepcopy(self.raw['failures'][0])}
+    def test_authored_reload_needs_full_get_decode_and_later_pcm(self):
+        a=self.args();proof=m.recovered_loopback_reload_pregesture_range_cancellation(**a)
+        self.assertIsNotNone(proof);self.assertEqual(proof['request']['navigation'],1)
+        self.assertIsNone(m.recovered_public_pregesture_range_cancellation(**a))
+    def test_nonloopback_initial_unknown_or_failed_request_is_rejected(self):
+        for update in [{'navigation':0},{'navigation':True},{'navigation':-1},{'error':'net::ERR_FAILED'},{'method':'POST'},{'resourceType':'fetch'},{'url':'http://127.0.0.1:8000/private.ogg'}]:
+            a=self.args();a['failure'].update(update);self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+        for origin in ['http://evil.invalid/FantasyCards/Web/','https://localhost:8000/FantasyCards/Web/',BASE+'?token=x']:
+            a=self.args();a['game_url']=origin;self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+    def test_missing_or_wrong_get_range_or_pcm_is_rejected(self):
+        for key in ('delivered','responses','windows'):
+            a=self.args();a[key]=[];self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+        for field,value in [('sha256','wrong'),('bytes',-1),('status',404)]:
+            a=self.args()
+            for row in a['delivered']:row[field]=value
+            self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+        for field,value in [('navigation',0),('status',404)]:
+            a=self.args()
+            for row in a['responses']:row[field]=value
+            self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+    def test_unlocked_playing_or_cross_navigation_evidence_is_rejected(self):
+        for field,value in [('unlocked',True),('contextState','running'),('actualPaused',False)]:
+            a=self.args();a['observations'][0]['state'][field]=value
+            self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+        a=self.args()
+        for row in a['windows']:row['navigation']=0
+        self.assertIsNone(m.recovered_loopback_reload_pregesture_range_cancellation(**a))
+
+
 if __name__=='__main__':unittest.main()

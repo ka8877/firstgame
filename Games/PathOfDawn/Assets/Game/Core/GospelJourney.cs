@@ -25,6 +25,8 @@ namespace PathOfDawn.Core
         public bool studyJourney, openingFinished, studyReadingOpen;
         public int openingPage, studyDialoguePage;
         public List<string> studyReadings = new List<string>();
+        // Optional schema-1 extension; absent payload keeps the original journey.
+        public GospelChronicleSave chronicle;
 
         public GospelSave Copy() => new GospelSave
         {
@@ -35,7 +37,8 @@ namespace PathOfDawn.Core
             equippedUtility = equippedUtility, presentationSpace = presentationSpace,
             studyJourney=studyJourney, openingFinished=openingFinished, openingPage=openingPage,
             studyReadingOpen=studyReadingOpen, studyDialoguePage=studyDialoguePage,
-            studyReadings=studyReadings==null?null:new List<string>(studyReadings)
+            studyReadings=studyReadings==null?null:new List<string>(studyReadings),
+            chronicle=chronicle==null?null:chronicle.Copy()
         };
     }
 
@@ -48,10 +51,20 @@ namespace PathOfDawn.Core
         public const string SaveSlot = "gospel-journey-v1";
         public const string LuminousSpace = "luminous-side-v1";
         GospelSave state;
+        GospelChronicle chronicle;
 
         GospelJourney() { state = new GospelSave { schemaVersion = SchemaVersion,
             contentVersion = ContentVersion, phase = GospelPhase.Prologue, playerZ = -9f }; }
         public static GospelJourney New() => new GospelJourney();
+        public static GospelJourney NewChronicleJourney() { var result=New(); result.EnableChronicle(); return result; }
+        public GospelChronicle Chronicle => state.chronicle == null ? null : chronicle??(chronicle=new GospelChronicle(state.chronicle));
+        public void EnableChronicle()
+        {
+            if(state.chronicle!=null)return;
+            var inherited=new List<string>(state.collectedReadings);
+            if(state.studyReadings!=null)inherited.AddRange(state.studyReadings);
+            state.chronicle=GospelChronicle.Import(inherited, state.phase==GospelPhase.Completed);
+        }
         public static GospelJourney NewStudyJourney() {var result=New();result.state.studyJourney=true;return result;}
         public bool HasStudyJourney => state.studyJourney;
         public bool OpeningFinished => !HasStudyJourney || state.openingFinished;
@@ -61,19 +74,19 @@ namespace PathOfDawn.Core
         public int StudyCount => state.studyReadings==null?0:state.studyReadings.Count;
         public GospelStudyEncounter CurrentStudy => StudyCount<GospelStudyCatalog.Encounters.Count ? GospelStudyCatalog.Encounters[StudyCount] : null;
         public bool StudyPending => HasStudyJourney && Phase==GospelPhase.Exploring && ObjectiveIndex==0 && CurrentStudy!=null;
-        public int CodexCount => CollectedReadings.Count+StudyCount;
-        public int CodexTotal => HasStudyJourney ? GospelStudyCatalog.AllReadings.Count : GospelCatalog.Readings.Count;
-        public bool HasReading(string id) => state.collectedReadings.Contains(id)||(state.studyReadings!=null&&state.studyReadings.Contains(id));
+        public int CodexCount => Chronicle != null ? Chronicle.DiscoveredCount : CollectedReadings.Count+StudyCount;
+        public int CodexTotal => Chronicle != null ? Chronicle.TotalReadings : HasStudyJourney ? GospelStudyCatalog.AllReadings.Count : GospelCatalog.Readings.Count;
+        public bool HasReading(string id) => state.collectedReadings.Contains(id)||(state.studyReadings!=null&&state.studyReadings.Contains(id))||(Chronicle!=null&&Chronicle.HasReading(id));
         public void AdvanceOpening() {if(!HasStudyJourney||state.openingFinished)return;state.openingPage++;if(state.openingPage>=GospelStudyCatalog.Opening.Count){state.openingPage=GospelStudyCatalog.Opening.Count;state.openingFinished=true;}}
         public void FinishOpening() {if(!HasStudyJourney)return;state.openingPage=GospelStudyCatalog.Opening.Count;state.openingFinished=true;}
         public bool TryStudyEncounter(string id)
         {
-            if(!OpeningFinished||!StudyPending||StudyReadingOpen||CurrentStudy.Reading.Id!=id)return false;
+            if(Chronicle!=null||!OpeningFinished||!StudyPending||StudyReadingOpen||CurrentStudy.Reading.Id!=id)return false;
             state.studyReadingOpen=true;state.studyDialoguePage=0;return true;
         }
         public bool AdvanceStudyDialogue()
         {
-            if(!StudyPending||!StudyReadingOpen)return false;
+            if(Chronicle!=null||!StudyPending||!StudyReadingOpen)return false;
             if(state.studyDialoguePage+1<CurrentStudy.Turns.Count){state.studyDialoguePage++;return true;}
             state.studyReadings.Add(CurrentStudy.Reading.Id);state.studyDialoguePage=0;state.studyReadingOpen=false;return true;
         }
@@ -83,7 +96,7 @@ namespace PathOfDawn.Core
         public int DialogueIndex => state.dialoguePage;
         public int DialogueCount => GospelConversations.ForReading(CurrentReading.Id).Count;
         public GospelDialogueTurn CurrentDialogue => GospelConversations.ForReading(CurrentReading.Id)[state.dialoguePage];
-        public bool IsComplete => Phase == GospelPhase.Completed;
+        public bool IsComplete => Chronicle!=null?Chronicle.IsComplete:Phase == GospelPhase.Completed;
         public float PlayerX => state.playerX;
         public float PlayerY => state.playerY;
         public float PlayerZ => state.playerZ;
@@ -109,16 +122,16 @@ namespace PathOfDawn.Core
             ? GospelCatalog.PrologueReadings[state.prologuePage]
             : GospelCatalog.GetReading(GospelCatalog.Objectives[Math.Min(state.objectiveIndex,
                 GospelCatalog.Objectives.Count - 1)].ReadingId);
-        public string ProgressText => Phase == GospelPhase.Prologue
+        public string ProgressText => Chronicle!=null ? Chronicle.AgeLabel+" · "+Math.Min(Chronicle.QuestIndex+1,Chronicle.QuestCount)+"/"+Chronicle.QuestCount : Phase == GospelPhase.Prologue
             ? "탄생 · " + (state.prologuePage + 1) + "/" + GospelCatalog.PrologueReadings.Count
             : IsComplete ? "첫 여정 완료 · 나사렛으로"
             : "성전의 소년 · " + (state.objectiveIndex + 1) + "/" + GospelCatalog.Objectives.Count;
 
-        public bool IsEpisodeUnlocked(string id) => id == "birth" || (id == "temple" && Phase != GospelPhase.Prologue);
+        public bool IsEpisodeUnlocked(string id) => Chronicle!=null ? id=="birth"||(id=="temple"&&Chronicle.ChapterId!="birth")||(id=="baptism"&&Chronicle.IsAdult) : id == "birth" || (id == "temple" && Phase != GospelPhase.Prologue);
 
         public bool AdvanceDialogue()
         {
-            if (!OpeningFinished || StudyReadingOpen || (Phase != GospelPhase.Prologue && Phase != GospelPhase.Reading)) return false;
+            if (Chronicle!=null || !OpeningFinished || StudyReadingOpen || (Phase != GospelPhase.Prologue && Phase != GospelPhase.Reading)) return false;
             if (state.dialoguePage + 1 < DialogueCount) { state.dialoguePage++; return true; }
             return AdvanceReading();
         }
@@ -126,7 +139,7 @@ namespace PathOfDawn.Core
         /// <summary>Acknowledges the displayed Scripture reading; never invents a narrative branch.</summary>
         public bool AdvanceReading()
         {
-            if(!OpeningFinished || StudyReadingOpen)return false;
+            if(Chronicle!=null || !OpeningFinished || StudyReadingOpen)return false;
             if (Phase == GospelPhase.Prologue)
             {
                 state.dialoguePage = 0;
@@ -146,6 +159,7 @@ namespace PathOfDawn.Core
 
         public bool TryInteract(string landmarkId, out string message)
         {
+            if(Chronicle!=null) {message="현재 생애 여정의 목적지에서 사람을 만나세요.";return false;}
             if (!OpeningFinished || StudyPending)
             { message="먼저 빛나는 만남에서 어린 시절의 기록을 읽어 주세요."; return false; }
             if (Phase != GospelPhase.Exploring)
@@ -176,7 +190,7 @@ namespace PathOfDawn.Core
         public static GospelJourney FromSave(GospelSave save)
         { var result = New(); result.RestoreSave(save); return result; }
         public void RestoreSave(GospelSave save)
-        { ValidateSave(save); state = save.Copy(); }
+        { ValidateSave(save); state = save.Copy(); chronicle=null; }
 
         public void ValidateSave(GospelSave save)
         {
@@ -188,6 +202,12 @@ namespace PathOfDawn.Core
             if (!ValidPresentationSpace(save.presentationSpace))
                 throw new ArgumentException("저장된 화면 좌표 공간을 확인할 수 없습니다. 기존 파일을 보존해 주세요.");
             ValidateStudySave(save);
+            if(save.chronicle!=null)
+            {
+                var inherited=new List<string>(save.collectedReadings??new List<string>());
+                if(save.studyReadings!=null)inherited.AddRange(save.studyReadings);
+                GospelChronicle.Validate(save.chronicle,inherited,save.phase==GospelPhase.Completed);
+            }
             if (!Enum.IsDefined(typeof(GospelPhase), save.phase) || save.prologuePage < 0
                 || save.prologuePage > GospelCatalog.PrologueReadings.Count || save.objectiveIndex < 0
                 || save.objectiveIndex > GospelCatalog.Objectives.Count)

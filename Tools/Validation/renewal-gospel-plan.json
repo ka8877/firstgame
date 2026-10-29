@@ -1,32 +1,52 @@
 {
   "PathOfDawn": {
-    "revision": "gospel-radiance-2026-10-29",
+    "revision": "gospel-chronicle-2026-10-29",
     "suite": "modern-real-input-v1",
-    "coordinates": "normalized actual 16:9 canvas top-left origin",
+    "coordinates": "normalized actual canvas top-left",
+    "scope": "Current actual23quest/19Scripture RPG route, hidden book/discovery, bothages/walk/jump/scenic, mid-dialogue save/fullreload and completecontinue. Offline catalog authored counts; no live game fields/Unity calls/save injection.",
     "requiredCheckpoints": [
       "title",
-      "opening-birth",
-      "opening-childhood",
-      "opening-age-twelve",
-      "world-idle",
-      "radiance-scenic-spawn",
-      "radiance-restored-hud",
-      "codex-locked",
+      "birth-prologue",
+      "book-unopened",
+      "birth-pending-quotation",
+      "continued-prologue-quotation",
+      "book-first-discovery",
+      "book-next-locked",
+      "temple-chapter",
+      "child-world",
+      "child-scenic",
+      "child-walk-right",
+      "child-walk-left",
+      "child-jump-land",
       "illustrated-items",
-      "jump-and-landing",
-      "character-lamp",
-      "birth-1",
-      "first-reading-collected",
-      "saved-first-reading",
-      "continued-radiance-world",
-      "codex-one-collected"
+      "npc-dialogue-11",
+      "npc-dialogue-12",
+      "npc-dialogue-13",
+      "continued-temple-dialogue",
+      "npc-dialogue-14",
+      "npc-dialogue-15",
+      "npc-dialogue-16",
+      "npc-dialogue-17",
+      "baptism-chapter",
+      "adult-jordan-world",
+      "adult-jordan-scenic",
+      "adult-walk-right",
+      "adult-walk-left",
+      "adult-jump-land",
+      "npc-dialogue-18",
+      "npc-dialogue-19",
+      "npc-dialogue-20",
+      "npc-dialogue-21",
+      "npc-dialogue-22",
+      "journey-complete",
+      "continued-complete-world",
+      "book-nineteen-discovered"
     ],
-    "scope": "Current Radiance visual/motion/NPC/first-reading/save real input; unchanged15-entry story contract is covered by current215Core tests, not a repeated timed human playthrough.",
     "steps": [
       {
         "type": "checkpoint",
         "name": "title",
-        "expected": "그림 타이틀에 열두 살 여정 안내·새 여정·이어하기가 읽히고 얼굴과 제목이 겹치지 않는다."
+        "expected": "현재 생애 RPG의 타이틀, 새 여정/이어하기가 읽힌다."
       },
       {
         "type": "click",
@@ -35,271 +55,35 @@
           0.832
         ],
         "label": "새 여정 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "opening-birth",
-        "expected": "탄생 원화와 기록에 근거한 오프닝, 학습용 극화 안내가 표시된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 두 번째 장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 세 번째 장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 열두 살",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "opening-childhood",
-        "expected": "도입4/6 나사렛 유년기, 누가복음2:39–40 요약을 정확하게 표시한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "열두 살 성전 도입",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "opening-age-twelve",
-        "expected": "실제 도입5/6 열두 살 성전 방문 설명을 표시한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 여섯 번째 장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "열두 살 여정으로",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "world-idle",
-        "expected": "2D 다층 숲에 예수님 전신·걷기 목표·도감 0/15와 실제 NPC가 표시된다."
-      },
-      {
-        "type": "key",
-        "key": "h",
-        "label": "실제 H키 풍경보기",
-        "profile": "desktop",
-        "settleMs": 650
-      },
-      {
-        "type": "click",
-        "point": [
-          0.875,
-          0.1653
-        ],
-        "label": "풍경 보기 터치",
-        "settleMs": 550,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "checkpoint",
-        "name": "radiance-scenic-spawn",
-        "expected": "새 원화 숲의 푸른안개/발광수관/깊이와 지면이 읽히며 독립 복귀버튼이 남는다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.875,
-          0.1653
-        ],
-        "label": "풍경보기에서 게임HUD복귀",
         "settleMs": 550
       },
       {
         "type": "checkpoint",
-        "name": "radiance-restored-hud",
-        "expected": "정상 버튼으로 목표/도감/이동·대화UI가 복구된다."
-      },
-      {
-        "type": "audio",
-        "label": "journey-instrumental"
+        "name": "birth-prologue",
+        "expected": "걷는 아기를 만들지 않고 그림·기록·출처가 있는 탄생 이야기 대화를 시작한다."
       },
       {
         "type": "click",
         "point": [
-          0.23,
-          0.075
+          0.7484,
+          0.0778
         ],
-        "label": "획득 전 도감 열기",
-        "settleMs": 500
+        "label": "발견 전 성경",
+        "settleMs": 550
       },
       {
         "type": "checkpoint",
-        "name": "codex-locked",
-        "expected": "도감 0/15, 탄생부터 순서대로 잠긴 말씀과 획득 방법이 표시된다."
+        "name": "book-unopened",
+        "expected": "발견0/19, 가죽 표지와 마주 보는 빈 종이. 미래 제목/구절/그림을 노출하지 않는다."
       },
       {
         "type": "click",
         "point": [
-          0.824,
-          0.819
+          0.8406,
+          0.9208
         ],
-        "label": "여정 복귀",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.874,
-          0.075
-        ],
-        "label": "소지품 열기",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.629,
-          0.819
-        ],
-        "label": "등잔 장착",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "illustrated-items",
-        "expected": "정사각형 원화 아이템과 설명, 실제 장착 상태가 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.835,
-          0.819
-        ],
-        "label": "소지품 닫기",
-        "settleMs": 500
-      },
-      {
-        "type": "key",
-        "key": "Space",
-        "label": "실제 키 점프",
-        "settleMs": 0,
-        "captureCompositorBurst": true,
-        "captureLabel": "jump-air",
-        "captureMs": 1100,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.829,
-          0.886
-        ],
-        "label": "실제 터치 점프",
-        "settleMs": 500,
-        "captureCompositorBurst": true,
-        "captureLabel": "jump-air",
-        "captureMs": 1100,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "checkpoint",
-        "name": "jump-and-landing",
-        "expected": "보존된 원본 연속 프레임에 실제 점프·착지 전신이 보이고 목각처럼 분리된 관절이 없다."
-      },
-      {
-        "type": "wheel",
-        "point": [
-          0.5,
-          0.5
-        ],
-        "deltaY": -360,
-        "label": "실제 휠 확대",
-        "profile": "desktop",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "character-lamp",
-        "expected": "등잔이 실제 손에 장착되고 인물 전경 가림이 완화된다. 데스크톱은 휠 확대가 반영된다."
-      },
-      {
-        "type": "wheel",
-        "point": [
-          0.5,
-          0.5
-        ],
-        "deltaY": 360,
-        "label": "기본 시야 복귀",
-        "profile": "desktop",
-        "settleMs": 500
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "d"
-        ],
-        "ms": 1833,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1833,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "review_input",
-        "name": "radiance-inspect-first-npc",
-        "reason": "첫 목표에 실제 이동한 원본을 보고 필요할 때만 정상 방향버튼/키로 보정한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "birth-1",
-        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
+        "label": "읽던 대화로 복귀",
+        "settleMs": 550
       },
       {
         "type": "click",
@@ -307,23 +91,22 @@
           0.8477,
           0.8986
         ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 1
+        "label": "실제 다음 말씀",
+        "settleMs": 450
       },
       {
         "type": "checkpoint",
-        "name": "first-reading-collected",
-        "expected": "첫 정상 NPC대화를 완료해 말씀1/15를 획득한다."
+        "name": "birth-pending-quotation",
+        "expected": "첫 대화 중간: 말씀을 아직 획득하지 않고 실제 직접 인용과 극화 라벨이 구분된다."
       },
       {
         "type": "click",
         "point": [
-          0.929,
-          0.075
+          0.895,
+          0.0778
         ],
-        "label": "쉼표 메뉴",
-        "settleMs": 500
+        "label": "대화 중 메뉴",
+        "settleMs": 550
       },
       {
         "type": "click",
@@ -331,8 +114,8 @@
           0.2742,
           0.5528
         ],
-        "label": "첫 말씀 획득 상태 저장",
-        "settleMs": 500
+        "label": "현재 여정 저장",
+        "settleMs": 550
       },
       {
         "type": "click",
@@ -340,13 +123,8 @@
           0.2742,
           0.4319
         ],
-        "label": "저장 후 여정 계속",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "saved-first-reading",
-        "expected": "실제 첫 말씀1항목과 등잔 상태를 저장한 뒤 정상 여정HUD로 돌아간다."
+        "label": "대화 재개",
+        "settleMs": 550
       },
       {
         "type": "reload"
@@ -357,13 +135,1453 @@
           0.378,
           0.832
         ],
-        "label": "브라우저 새로고침 후 이어하기",
-        "settleMs": 500
+        "label": "전체 새로고침 후 실제 이어하기",
+        "settleMs": 650
       },
       {
         "type": "checkpoint",
-        "name": "continued-radiance-world",
-        "expected": "실제 완전새로고침 후 같은 소지품/등잔/첫 말씀/새 원화월드에서 이어한다."
+        "name": "continued-prologue-quotation",
+        "expected": "같은 실제 대화 페이지와 발견 상태에서 이어한다. 저장/RNG/퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7484,
+          0.0778
+        ],
+        "label": "첫 발견 후 성경",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-first-discovery",
+        "expected": "처음 발견한 한 말씀과 정확한 출처/본문/기억 그림이 실제 책의 두 면에 채워졌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4242,
+          0.9222
+        ],
+        "label": "아직 발견하지 않은 다음 면",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-next-locked",
+        "expected": "이미 획득한 면과 아직 숨겨진 다음 면이 구분되며 미래 제목/본문/그림이 보이지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "실제 진행 대화로 복귀",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-chapter",
+        "expected": "탄생11기록 뒤 실제 열두 살 성전 여정 장과 조작 설명을 표시한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1941,
+          0.8236
+        ],
+        "label": "이야기 속으로: 열두 살",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-world",
+        "expected": "실제 아역·성전 숲길·현재 목표·성경 발견11/19가 연결된다."
+      },
+      {
+        "type": "audio",
+        "label": "journey-instrumental"
+      },
+      {
+        "type": "key",
+        "key": "h",
+        "profile": "desktop",
+        "label": "실제 H 풍경 보기",
+        "settleMs": 600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "profile": "mobile-landscape",
+        "label": "실제 풍경 보기 터치",
+        "settleMs": 600
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-scenic",
+        "expected": "현재 child 인물과 실제 장면을 HUD를 숨겨 확인하며 독립 복귀 버튼이 남는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "label": "독립 게임으로 복귀 버튼",
+        "settleMs": 600
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": -360,
+        "profile": "desktop",
+        "label": "실제 휠 근접 확대",
+        "settleMs": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d"
+        ],
+        "ms": 220,
+        "releaseAfterCapture": true,
+        "profile": "desktop",
+        "label": "실제 child right 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-walk-right",
+        "captureMs": 500,
+        "settleMs": 250
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 700,
+        "profile": "mobile-landscape",
+        "label": "실제 child right 터치 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-touch-walk-right",
+        "captureMs": 350,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-walk-right",
+        "expected": "모든 원본 compositor 프레임을 보존한 실제 child right 걷기. 인물·팔·무릎·발·그림자를 직접 검토한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "a"
+        ],
+        "ms": 220,
+        "releaseAfterCapture": true,
+        "profile": "desktop",
+        "label": "실제 child left 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-walk-left",
+        "captureMs": 500,
+        "settleMs": 250
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.0523,
+          0.886
+        ],
+        "ms": 700,
+        "profile": "mobile-landscape",
+        "label": "실제 child left 터치 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-touch-walk-left",
+        "captureMs": 350,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-walk-left",
+        "expected": "모든 원본 compositor 프레임을 보존한 실제 child left 걷기. 인물·팔·무릎·발·그림자를 직접 검토한다."
+      },
+      {
+        "type": "key",
+        "key": "Space",
+        "profile": "desktop",
+        "label": "실제 child 점프",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-jump",
+        "captureMs": 1000,
+        "settleMs": 250
+      },
+      {
+        "type": "click",
+        "point": [
+          0.829,
+          0.886
+        ],
+        "profile": "mobile-landscape",
+        "label": "실제 child 터치 점프",
+        "captureCompositorBurst": true,
+        "captureLabel": "child-touch-jump",
+        "captureMs": 1000,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-jump-land",
+        "expected": "실제 child 점프/착지 원본 프레임을 확인한다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": 360,
+        "profile": "desktop",
+        "label": "기본 시야 복귀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.874,
+          0.075
+        ],
+        "label": "여행 가방",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.629,
+          0.819
+        ],
+        "label": "실제 등잔 장착",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "illustrated-items",
+        "expected": "실제 아이템 그림/설명/등잔 장착 상태가 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.835,
+          0.819
+        ],
+        "label": "여행 가방 닫기",
+        "settleMs": 550
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 714,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 11",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1364,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 11",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-11",
+        "expected": "현재 실제 목표 유월절 길을 준비하며 / joseph 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 11",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-11",
+        "expected": "실제 유월절 길을 준비하며 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 3571,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 12",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6818,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 12",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-12",
+        "expected": "현재 실제 목표 함께 오르는 길 / mary 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 12",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-12",
+        "expected": "실제 함께 오르는 길 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 3333,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 13",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6364,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 13",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-13",
+        "expected": "현재 실제 목표 예루살렘의 절기 / temple-guide 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 13",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-13",
+        "expected": "실제 예루살렘의 절기 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.895,
+          0.0778
+        ],
+        "label": "대화 중 메뉴",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.5528
+        ],
+        "label": "현재 여정 저장",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.4319
+        ],
+        "label": "대화 재개",
+        "settleMs": 550
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.378,
+          0.832
+        ],
+        "label": "전체 새로고침 후 실제 이어하기",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-temple-dialogue",
+        "expected": "같은 실제 대화 페이지와 발견 상태에서 이어한다. 저장/RNG/퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 2143,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 14",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 4091,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 14",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-14",
+        "expected": "현재 실제 목표 듣고 묻는 자리 / teacher-listening 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 14",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-14",
+        "expected": "실제 듣고 묻는 자리 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 1667,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 15",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3182,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 15",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-15",
+        "expected": "현재 실제 목표 선생들 가운데 / teacher-reading 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 15",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-15",
+        "expected": "실제 선생들 가운데 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 1667,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 16",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3182,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 16",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-16",
+        "expected": "현재 실제 목표 근심 끝의 만남 / mary 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 16",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-16",
+        "expected": "실제 근심 끝의 만남 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 1905,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 17",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 3636,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 17",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-17",
+        "expected": "현재 실제 목표 나사렛으로 함께 / joseph 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 17",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-17",
+        "expected": "실제 나사렛으로 함께 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "checkpoint",
+        "name": "baptism-chapter",
+        "expected": "열두 살 뒤 성인 예수님의 요단강 세례 장으로 시간과 나이가 명확하게 전환된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1941,
+          0.8236
+        ],
+        "label": "이야기 속으로: 요단강",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-jordan-world",
+        "expected": "실제 성인 예수님·요단강·현재 목표·발견15/19가 연결된다."
+      },
+      {
+        "type": "key",
+        "key": "h",
+        "profile": "desktop",
+        "label": "실제 H 풍경 보기",
+        "settleMs": 600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "profile": "mobile-landscape",
+        "label": "실제 풍경 보기 터치",
+        "settleMs": 600
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-jordan-scenic",
+        "expected": "현재 adult-jordan 인물과 실제 장면을 HUD를 숨겨 확인하며 독립 복귀 버튼이 남는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "label": "독립 게임으로 복귀 버튼",
+        "settleMs": 600
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": -360,
+        "profile": "desktop",
+        "label": "실제 휠 근접 확대",
+        "settleMs": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d"
+        ],
+        "ms": 220,
+        "releaseAfterCapture": true,
+        "profile": "desktop",
+        "label": "실제 adult right 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-walk-right",
+        "captureMs": 500,
+        "settleMs": 250
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 700,
+        "profile": "mobile-landscape",
+        "label": "실제 adult right 터치 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-touch-walk-right",
+        "captureMs": 350,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-walk-right",
+        "expected": "모든 원본 compositor 프레임을 보존한 실제 adult right 걷기. 인물·팔·무릎·발·그림자를 직접 검토한다."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "a"
+        ],
+        "ms": 220,
+        "releaseAfterCapture": true,
+        "profile": "desktop",
+        "label": "실제 adult left 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-walk-left",
+        "captureMs": 500,
+        "settleMs": 250
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.0523,
+          0.886
+        ],
+        "ms": 700,
+        "profile": "mobile-landscape",
+        "label": "실제 adult left 터치 걷기",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-touch-walk-left",
+        "captureMs": 350,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-walk-left",
+        "expected": "모든 원본 compositor 프레임을 보존한 실제 adult left 걷기. 인물·팔·무릎·발·그림자를 직접 검토한다."
+      },
+      {
+        "type": "key",
+        "key": "Space",
+        "profile": "desktop",
+        "label": "실제 adult 점프",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-jump",
+        "captureMs": 1000,
+        "settleMs": 250
+      },
+      {
+        "type": "click",
+        "point": [
+          0.829,
+          0.886
+        ],
+        "profile": "mobile-landscape",
+        "label": "실제 adult 터치 점프",
+        "captureCompositorBurst": true,
+        "captureLabel": "adult-touch-jump",
+        "captureMs": 1000,
+        "settleMs": 250
+      },
+      {
+        "type": "checkpoint",
+        "name": "adult-jump-land",
+        "expected": "실제 adult 점프/착지 원본 프레임을 확인한다."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.5,
+          0.5
+        ],
+        "deltaY": 360,
+        "profile": "desktop",
+        "label": "기본 시야 복귀",
+        "settleMs": 500
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 952,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 18",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 1818,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 18",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-18",
+        "expected": "현재 실제 목표 요단으로 향하는 길 / jordan-guide 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 18",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-18",
+        "expected": "실제 요단으로 향하는 길 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 3333,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 19",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6364,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 19",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-19",
+        "expected": "현재 실제 목표 요단에서 들리는 외침 / john-baptist 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 19",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-19",
+        "expected": "실제 요단에서 들리는 외침 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 3333,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 20",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6364,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 20",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-20",
+        "expected": "현재 실제 목표 모든 의를 이루는 길 / john-baptist 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 20",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-20",
+        "expected": "실제 모든 의를 이루는 길 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 4048,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 21",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 7727,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 21",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-21",
+        "expected": "현재 실제 목표 물에서 올라오시다 / jordan-witness 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 21",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-21",
+        "expected": "실제 물에서 올라오시다 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d",
+          "Shift"
+        ],
+        "ms": 3333,
+        "profile": "desktop",
+        "label": "현재 NPC까지 실제 달리기 22",
+        "settleMs": 350
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
+          0.1227,
+          0.886
+        ],
+        "ms": 6364,
+        "profile": "mobile-landscape",
+        "label": "현재 NPC까지 실제 방향 누르기 22",
+        "settleMs": 350
+      },
+      {
+        "type": "review_input",
+        "name": "chronicle-arrive-22",
+        "expected": "현재 실제 목표 공생애의 문턱 / journey-narrator 근처 원본을 보고 E·대화가 활성화된 경우만 계속한다. 거리는 실제 일반 키/방향 버튼으로 보정한다. 필드·저장·퀘스트를 주입하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9195,
+          0.8889
+        ],
+        "label": "실제 NPC 대화 22",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "npc-dialogue-22",
+        "expected": "실제 공생애의 문턱 대화와 출처/성경 인용/학습용 극화 구분이 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 다음 말씀",
+        "settleMs": 450
+      },
+      {
+        "type": "checkpoint",
+        "name": "journey-complete",
+        "expected": "실제23개 여정과19개 발견을 마친 요단강 장의 정상 HUD를 확인한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.929,
+          0.075
+        ],
+        "label": "최종 메뉴",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2742,
+          0.5528
+        ],
+        "label": "실제 완료 여정 저장",
+        "settleMs": 550
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.378,
+          0.832
+        ],
+        "label": "저장 후 전체 새로고침 이어하기",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-complete-world",
+        "expected": "완전 새로 로딩한 실제 성인 인물/요단강/등잔/완료 여정을 확인한다."
       },
       {
         "type": "click",
@@ -371,22 +1589,32 @@
           0.23,
           0.075
         ],
-        "label": "획득 전 도감 열기",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "codex-one-collected",
-        "expected": "첫 획득 말씀과 나머지 미획득 항목이 구분된다."
+        "label": "수집 성경 펼치기",
+        "settleMs": 550
       },
       {
         "type": "click",
         "point": [
-          0.824,
-          0.819
+          0.4242,
+          0.9222
         ],
-        "label": "여정 복귀",
-        "settleMs": 500
+        "label": "발견한 성경 마지막 면까지 정상 넘기기",
+        "settleMs": 200,
+        "repeat": 18
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-nineteen-discovered",
+        "expected": "실제 발견19/19와 마지막 세례 본문이 책에 채워졌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "성경에서 여정 복귀",
+        "settleMs": 550
       }
     ]
   }

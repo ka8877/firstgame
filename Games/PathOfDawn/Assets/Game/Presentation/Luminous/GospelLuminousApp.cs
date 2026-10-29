@@ -12,7 +12,7 @@ using UnityEngine.Rendering.Universal;
 namespace PathOfDawn.Presentation
 {
     /// <summary>Painted 2D presentation; the existing Gospel core owns all Scripture progression.</summary>
-    public sealed class GospelLuminousApp : MonoBehaviour
+    public sealed partial class GospelLuminousApp : MonoBehaviour
     {
         public TMP_FontAsset KoreanFont;
         public GospelJourney Journey { get; private set; }
@@ -74,8 +74,8 @@ namespace PathOfDawn.Presentation
             Ui.OnSave = () => Save();
             Ui.OnInventory = ShowInventory;
             Ui.OnStatus = ShowStatus;
-            Ui.OnJournal = ShowJournal;
-            Ui.OnRead = ShowJournal;
+            Ui.OnJournal = ShowQuestLog;
+            Ui.OnRead = ShowBible;
             Ui.OnOpeningReplay = () => ShowOpening(0, true);
             Ui.OnSettings = ShowSettings;
             Ui.OnExit = () => { if (inGame) Save(false); ShowTitle(); };
@@ -102,7 +102,8 @@ namespace PathOfDawn.Presentation
                 if (keyboard.escapeKey.wasPressedThisFrame) { if (IsModal) Resume(); else Pause(); }
                 else if (keyboard.iKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowStatus(); }
                 else if (keyboard.bKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowInventory(); }
-                else if (keyboard.mKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowJournal(); }
+                else if (keyboard.mKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowBible(); }
+                else if (keyboard.jKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowQuestLog(); }
                 else if (keyboard.hKey.wasPressedThisFrame && !IsModal) Ui.ToggleScenicView();
             }
             if (Player.Enabled == IsModal) Player.Enabled = !IsModal;
@@ -113,9 +114,12 @@ namespace PathOfDawn.Presentation
                 float scroll = Mouse.current.scroll.ReadValue().y;
                 if (Mathf.Abs(scroll) > .1f) zoom = Mathf.Clamp(zoom - Mathf.Sign(scroll) * .35f, 3f, 6.4f);
             }
-            string nearby = CanInteract ? ObjectiveName : "";
-            Ui.UpdateHud(ObjectiveName, VisualReading.Reference, FirstLine(VisualReading.Text),
-                Journey.CodexCount, Journey.CodexTotal, nearby, CanInteract);
+            string nearby = CanInteract ? Chronicle != null ? Chronicle.CurrentQuest.NpcName : ObjectiveName : "";
+            Ui.UpdateHud(ObjectiveName, HudReference, HudVerse,
+                FoundReadingCount, AvailableReadingCount, nearby, CanInteract);
+            if (Chronicle != null && !Chronicle.IsComplete)
+                Ui.SetChronicleNavigation(CanInteract ? (DawnPlatformInput.UseTouchControls ? "대화 · " : "E · ") + Chronicle.CurrentQuest.NpcName
+                    : (Player.Position.x < ObjectiveX ? "→  " : "←  ") + Chronicle.CurrentQuest.NpcName + "에게 가기");
             saveClock += Time.deltaTime;
             if (saveClock >= 25) { Save(false); saveClock = 0; }
         }
@@ -131,13 +135,14 @@ namespace PathOfDawn.Presentation
         }
 
         GospelReading VisualReading => Journey.StudyPending ? Journey.CurrentStudy.Reading : Journey.CurrentReading;
-        public string ObjectiveName => Journey==null ? "성전의 뜰" : !Journey.OpeningFinished ? "여정의 시작" : Journey.StudyPending
+        public string ObjectiveName => Chronicle != null ? Chronicle.IsComplete ? "요단강의 여정 완료" : Chronicle.CurrentQuest.Title : Journey==null ? "성전의 뜰" : !Journey.OpeningFinished ? "여정의 시작" : Journey.StudyPending
             ? "기억의 길 · "+Journey.CurrentStudy.Reading.Title : Journey.Phase==GospelPhase.Prologue
             ? Journey.CurrentReading.Title : Journey.IsComplete ? "첫 여정 완료 · 나사렛으로" : Journey.CurrentObjective.Title;
         public float ObjectiveX
         {
             get
             {
+                if (Chronicle != null) return Chronicle.CurrentQuest != null ? Chronicle.CurrentQuest.X : 34f;
                 if(Journey!=null&&Journey.StudyPending)return Journey.CurrentStudy.X;
                 if(Journey!=null&&Journey.Phase==GospelPhase.Prologue&&Journey.HasStudyJourney)
                     return new[]{-26f,-18f,-10f}[Journey.ProloguePage];
@@ -150,7 +155,8 @@ namespace PathOfDawn.Presentation
                 }
             }
         }
-        public bool CanInteract => Journey!=null && Journey.OpeningFinished && !Journey.IsComplete &&
+        public bool CanInteract => Chronicle != null ? !Chronicle.IsComplete && !Chronicle.CurrentQuest.IsPrologue
+            && Mathf.Abs(Player.Position.x - ObjectiveX) <= InteractionRadius : Journey!=null && Journey.OpeningFinished && !Journey.IsComplete &&
             ((!Journey.HasStudyJourney&&Journey.Phase==GospelPhase.Prologue) || Mathf.Abs(Player.Position.x-ObjectiveX)<=InteractionRadius);
 
         public void ShowTitle()
@@ -164,13 +170,14 @@ namespace PathOfDawn.Presentation
             activeSlot = PersistentSaves.Exists(GospelJourney.SaveSlot)
                 ? GospelJourney.SaveSlot + "-" + DateTime.UtcNow.Ticks : GospelJourney.SaveSlot;
             PlayerPrefs.SetString(ActiveSlotKey, activeSlot);
-            Journey = GospelJourney.NewStudyJourney();
+            Journey = GospelJourney.NewChronicleJourney();
+            Ui.FocusBiblePage(0);
             Journey.SetPresentationSpace(GospelJourney.LuminousSpace);
             Player.SetPose(new Vector2(-30, World.HeightAt(-30) + .06f));
             saveClock = 0;
             inGame = true;
             Save(false);
-            ShowOpening();
+            ResumeChronicle(true);
         }
         public void ContinueGame()
         {
@@ -179,7 +186,7 @@ namespace PathOfDawn.Presentation
             { Ui.Toast("저장을 열 수 없습니다. " + error); return; }
             try
             {
-                var saved = GospelJourney.FromSave(JsonUtility.FromJson<GospelSave>(payload));
+                var saved = GospelJourney.FromSave(GospelSaveCodec.Decode(payload));
                 // Legacy 3D coordinates are never treated as side-view coordinates or overwritten on read.
                 float x = saved.PresentationSpace == GospelJourney.LuminousSpace ? saved.PlayerX : LegacyResumeX(saved);
                 float y = saved.PresentationSpace == GospelJourney.LuminousSpace ? saved.PlayerY : World.HeightAt(x) + .06f;
@@ -187,8 +194,10 @@ namespace PathOfDawn.Presentation
                 Player.SetPose(new Vector2(Mathf.Clamp(x, -33, 33), y), saved.PlayerYaw > 90 ? -1 : 1);
                 saveClock = 0;
                 inGame = true;
+                renderedChronicleChapter = Journey.Chronicle?.ChapterId;
                 Resume();
-                if (!Journey.OpeningFinished) ShowOpening();
+                if (Chronicle != null) Ui.Toast("성경과 여정의 기록을 이어갑니다.");
+                else if (!Journey.OpeningFinished) ShowOpening();
                 else if(Journey.StudyReadingOpen) ShowStudyReading();
                 else if (Journey.Phase == GospelPhase.Reading) ShowCurrentReading();
                 else Ui.Toast("저장한 말씀과 여정에서 이어갑니다.");
@@ -206,7 +215,7 @@ namespace PathOfDawn.Presentation
             Journey.SetPresentationSpace(GospelJourney.LuminousSpace);
             Journey.SetPlayerPose(Player.Position.x, Player.Position.y, 0, Player.Facing < 0 ? 180 : 0);
             bool ok = PersistentSaves.TrySave(activeSlot, GospelJourney.GameId, GospelJourney.SchemaVersion,
-                GospelJourney.ContentVersion, JsonUtility.ToJson(Journey.CaptureSave()), out var error);
+                GospelJourney.ContentVersion, GospelSaveCodec.Encode(Journey.CaptureSave()), out var error);
             if (ok) PlayerPrefs.Save();
             if (showNotice || !ok) Ui.Toast(ok ? "현재 위치와 말씀 기록을 저장했습니다." : "저장하지 못했습니다. " + error);
             return ok;
@@ -214,6 +223,12 @@ namespace PathOfDawn.Presentation
         public void Resume()
         {
             if (!inGame || Journey == null) { ShowTitle(); return; }
+            if (Chronicle != null) { ResumeChronicle(); return; }
+            World.SetChronicleChapter("temple");
+            Player.Actor.SetAdult(false);
+            Player.Actor.SetLamp(Journey.LampEquipped);
+            if (chronicleNpcRoot != null) chronicleNpcRoot.gameObject.SetActive(false);
+            foreach (var person in meetingRoots) person.gameObject.SetActive(true);
             if(!Journey.OpeningFinished){ShowOpening();return;}
             RefreshPeople();
             inGame = true;
@@ -229,6 +244,14 @@ namespace PathOfDawn.Presentation
         {
             if (Journey == null) return;
             Player.Enabled = false;
+            if (Chronicle != null)
+            {
+                Ui.ShowStatus("예수님\n" + Chronicle.AgeLabel + "\n\n현재 여정  " + ObjectiveName
+                    + "\n현재 목표  " + ChronicleObjective + "\n발견한 말씀  " + FoundReadingCount + " / " + AvailableReadingCount
+                    + "\n장착 도구  " + (Journey.LampEquipped ? "토기 등잔" : "없음")
+                    + "\n\n탄생의 서막 → 성전 방문 → 요단강의 세례", "예수님 · " + Chronicle.AgeLabel);
+                return;
+            }
             Ui.ShowStatus("예수님\n열두 살 · 성전의 소년\n\n현재 여정  " + ObjectiveName + "\n읽은 말씀  "
                 + Journey.CodexCount + " / " + Journey.CodexTotal + "\n장착 도구  "
                 + (Journey.LampEquipped ? "토기 등잔" : "없음") + "\n\n현재 구간: 탄생의 말씀 / 누가복음 2장 성전 방문");
@@ -285,6 +308,7 @@ namespace PathOfDawn.Presentation
         public void Interact()
         {
             if(!inGame||IsModal||Journey==null)return;
+            if (Chronicle != null) { InteractChronicle(); return; }
             if(!CanInteract){Ui.Toast("빛이 머무는 만남으로 걸어가 대화를 시작하세요.");return;}
             if(Journey.StudyPending)
             {
@@ -348,6 +372,7 @@ namespace PathOfDawn.Presentation
         void OnDestroy()
         {
             if (Player != null) Player.InteractRequested -= Interact;
+            if (johnSprite != null) Destroy(johnSprite);
         }
     }
 }

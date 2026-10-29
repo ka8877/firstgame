@@ -1,6 +1,6 @@
 {
   "FantasyCards": {
-    "revision": "fm-polish-2026-10-29",
+    "revision": "fm-chronicle-2026-10-29",
     "suite": "modern-real-input-v1",
     "coordinates": "normalized canvas top-left origin",
     "scope": "Public exact-runtime launch and output check; full local current-source route is separate.",
@@ -39,21 +39,22 @@
     ]
   },
   "PathOfDawn": {
-    "revision": "gospel-radiance-2026-10-29",
+    "revision": "gospel-chronicle-2026-10-29",
     "suite": "modern-real-input-v1",
     "coordinates": "normalized canvas top-left origin",
-    "scope": "Public exact-runtime launch and output check; full local current-source route is separate.",
+    "scope": "Short public current-runtime birth/hidden-book→realchildchapter launch and audible music. Full23quest/19page saves/physicalroute are separate current local proofs.",
     "requiredCheckpoints": [
       "title",
-      "opening-birth",
-      "opening-childhood",
+      "birth-prologue",
+      "book-unopened",
+      "temple-chapter",
       "world-idle"
     ],
     "steps": [
       {
         "type": "checkpoint",
         "name": "title",
-        "expected": "그림 타이틀에 열두 살 여정 안내·새 여정·이어하기가 읽히고 얼굴과 제목이 겹치지 않는다."
+        "expected": "현재 생애 RPG 타이틀이 현재 공개 런타임에서 실행된다."
       },
       {
         "type": "click",
@@ -61,77 +62,253 @@
           0.172,
           0.832
         ],
-        "label": "새 여정 시작",
+        "label": "새 생애 여정",
         "settleMs": 500
       },
       {
         "type": "checkpoint",
-        "name": "opening-birth",
-        "expected": "탄생 원화와 기록에 근거한 오프닝, 학습용 극화 안내가 표시된다."
+        "name": "birth-prologue",
+        "expected": "아기 이동 없이 탄생 기록/그림/정확한 인용과 극화 라벨을 표시한다."
       },
       {
         "type": "click",
         "point": [
-          0.182,
-          0.861
+          0.7484,
+          0.0778
         ],
-        "label": "오프닝 두 번째 장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 세 번째 장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.182,
-          0.861
-        ],
-        "label": "오프닝 네 번째 장: 나사렛 유년기",
+        "label": "발견 전 성경",
         "settleMs": 500
       },
       {
         "type": "checkpoint",
-        "name": "opening-childhood",
-        "expected": "실제 도입4/6 나사렛 유년기와 누가복음2:39–40 요약을 표시한다. 실제5/6 열두 살 장면은 별도 전체 로컬 검사에서 확인한다."
+        "name": "book-unopened",
+        "expected": "실제 빈 두 면과 발견0/19; 미래 제목/본문/그림이 보이지 않는다."
       },
       {
         "type": "click",
         "point": [
-          0.182,
-          0.861
+          0.8406,
+          0.9208
         ],
-        "label": "오프닝 다섯 번째 장",
+        "label": "이야기로",
         "settleMs": 500
       },
       {
         "type": "click",
         "point": [
-          0.182,
-          0.861
+          0.8477,
+          0.8986
         ],
-        "label": "오프닝 여섯 번째 장",
+        "label": "정상 탄생 이야기 다음 말씀",
         "settleMs": 500
       },
       {
         "type": "click",
         "point": [
-          0.182,
-          0.861
+          0.8477,
+          0.8986
         ],
-        "label": "열두 살 여정으로",
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "정상 탄생 이야기 다음 말씀",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "temple-chapter",
+        "expected": "열두 살 장과 정상 조작 안내가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1941,
+          0.8236
+        ],
+        "label": "실제 이야기 속으로",
         "settleMs": 500
       },
       {
         "type": "checkpoint",
         "name": "world-idle",
-        "expected": "2D 다층 숲에 예수님 전신·걷기 목표·도감 0/15와 실제 NPC가 표시된다."
+        "expected": "현재 공개 숲길에 실제 새 아역 리그/목표/성경11/19가 연결된다."
       },
       {
         "type": "audio",
