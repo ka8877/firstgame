@@ -74,7 +74,7 @@
       var context = null, master = null, graphUnavailable = false;
       var muted = false, volume = .6, hasMutedPreference = false, hasVolumePreference = false;
       var requestedAt = performance.now();
-      var fadeOutSeconds = .18, fadeInSeconds = .42;
+      var fadeOutSeconds = .55, fadeInSeconds = .55;
       var sceneTransitionCount = 0, sameRoleMessages = 0, transitions = [];
       function recordTransition(entry) {
         entry.atMs = performance.now();
@@ -117,7 +117,16 @@
             parameter.cancelScheduledValues(now);
             parameter.setValueAtTime(held, now);
           }
-          parameter.linearRampToValueAtTime(value, now + seconds);
+          // Equal-power overlap retains energy through scene changes. A curve
+          // starts at the held instantaneous gain, so interrupted transitions
+          // and rapid returns do not jump back to an obsolete envelope.
+          var fromGain = parameter.value;
+          var curve = new Float32Array(48);
+          for (var point = 0; point < curve.length; point++) {
+            var mix = point / (curve.length - 1);
+            curve[point] = Math.sqrt(fromGain * fromGain * (1 - mix) + value * value * mix);
+          }
+          parameter.setValueCurveAtTime(curve, now, seconds);
           if (complete) player.fadeTimer = window.setTimeout(function () {
             if (player.fadeEpoch !== epoch) return;
             player.fadeTimer = null;
@@ -131,7 +140,7 @@
         function step() {
           if (player.fadeEpoch !== epoch) return;
           var progress = Math.min(1, (performance.now() - started) / duration);
-          player.fadeWeight = from + (value - from) * progress;
+          player.fadeWeight = Math.sqrt(from * from * (1 - progress) + value * value * progress);
           player.audio.volume = (muted ? 0 : volume) * player.fadeWeight;
           if (progress < 1) player.fadeTimer = window.setTimeout(step, 16);
           else { player.fadeTimer = null; if (complete) complete(); }
@@ -436,12 +445,12 @@
       }
     }
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/8e6f9c6c5d3a2cf7bbd6b31c8f8ba2c0.loader.js";
+    var loaderUrl = buildUrl + "/a4867b85992aee1f879625bf8f72f284.loader.js";
     var config = {
       arguments: [],
-      dataUrl: buildUrl + "/e3786c8d768b3235bc8efe93c654ac88.data.unityweb",
-      frameworkUrl: buildUrl + "/f7dfc603dd44743984a07f372ee93382.framework.js.unityweb",
-      codeUrl: buildUrl + "/ddeef99742a9d62600ac79e9cb37e5dd.wasm.unityweb",
+      dataUrl: buildUrl + "/513d813dd3ccafa3b4d97c5b4c955714.data.unityweb",
+      frameworkUrl: buildUrl + "/2edca9df5d857f60aefd695ac4bc9c7a.framework.js.unityweb",
+      codeUrl: buildUrl + "/0d28990ad6ab7ae9e33b1de541161a1c.wasm.unityweb",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "FirstGame",
       productName: "FantasyCards",
