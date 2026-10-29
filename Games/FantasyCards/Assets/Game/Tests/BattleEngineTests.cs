@@ -216,7 +216,7 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(2571));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2646));
             Assert.That(CardCatalog.All.Take(605).GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,453},{CardKind.Spell,26},{CardKind.Equipment,97} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
             { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(50)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(element == Element.Forest ? 5 : 4)); }
@@ -489,10 +489,13 @@ namespace FantasyCards.Tests
             var a=ClassicFixtures.Battle(318);ClassicFixtures.Unit(a,0,"임프",0);
             var json=UnityEngine.JsonUtility.ToJson(a.State);
             Assert.That(json.Contains("\"generatedCards\":[]"),Is.True);
-            var previous=json.Replace(",\"generatedCards\":[]","");
+            Assert.That(json.Contains("\"nextColoredSoulBonus\":[0,0,0,0,0,0,0]"),Is.True);
+            var previous=json.Replace(",\"generatedCards\":[]","").Replace(",\"nextColoredSoulBonus\":[0,0,0,0,0,0,0]","");
             Assert.That(previous.Contains("generatedCards"),Is.False);
+            Assert.That(previous.Contains("nextColoredSoulBonus"),Is.False);
             var b=new BattleEngine(UnityEngine.JsonUtility.FromJson<BattleState>(previous));
             Assert.That(b.State.generatedCards,Is.Empty);
+            foreach(var player in b.State.players)Assert.That(player.nextColoredSoulBonus,Is.EqualTo(new int[7]));
             ClassicFixtures.Resolve(a);ClassicFixtures.Resolve(b);
             Assert.That(UnityEngine.JsonUtility.ToJson(a.State),Is.EqualTo(UnityEngine.JsonUtility.ToJson(b.State)));
         }

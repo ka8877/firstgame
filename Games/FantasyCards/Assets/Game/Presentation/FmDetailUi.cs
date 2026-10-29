@@ -191,13 +191,13 @@ namespace FantasyCards.Presentation
                     var mark = Panel(tile, .025f, .02f, .33f, .38f, new Color(.02f, .04f, .03f, .90f));
                     ElementIcon(mark, card.element, .05f, .05f, .95f, .95f);
                 }
-                Frame(tile, ElementColor(card.element), 1.5f);
+                Frame(tile, selectedAttacker == instance.instanceId ? gold : ElementColor(card.element), selectedAttacker == instance.instanceId ? 3 : 1.5f);
                 tile.GetComponent<Image>().raycastTarget = true;
                 BindCardHelp(tile.gameObject, card, () => ShowDetail(card, ShowBattle));
                 tile.GetComponent<UiCardHover>().HoverScale = 1.02f;
                 var button = tile.gameObject.AddComponent<Button>(); button.targetGraphic = tile.GetComponent<Image>(); button.interactable = !locked;
-                button.onClick.AddListener(() => { if (!locked) ShowDetail(card, ShowBattle); });
-                BindTooltip(tile.gameObject, card.name + " · 백필드 지형", CardCatalog.CostText(card) + "\n" + card.text + "\n클릭하거나 길게 눌러 원본 카드와 정보를 봅니다.");
+                button.onClick.AddListener(() => SelectPolishPublicCard(owner, instance.instanceId, card, "terrain"));
+                BindTooltip(tile.gameObject, card.name + " · 백필드 지형", CardCatalog.CostText(card) + "\n" + card.text + "\n한 번 선택 · 두 번 / 길게 누르기로 원본 상세");
             }
             if (mine)
             {

@@ -1,44 +1,27 @@
 {
   "PathOfDawn": {
-    "revision": "gospel-renewal-2026-10-29",
+    "revision": "gospel-radiance-2026-10-29",
     "suite": "modern-real-input-v1",
     "coordinates": "normalized actual 16:9 canvas top-left origin",
     "requiredCheckpoints": [
       "title",
       "opening-birth",
+      "opening-childhood",
       "opening-age-twelve",
       "world-idle",
+      "radiance-scenic-spawn",
+      "radiance-restored-hud",
       "codex-locked",
       "illustrated-items",
       "jump-and-landing",
       "character-lamp",
       "birth-1",
-      "birth-2",
-      "birth-3",
-      "study-dialogue",
-      "jesus-dialogue-portrait",
-      "optional-question",
-      "birth-memory-before-birth-clarified",
-      "saved-study",
-      "continued-study",
-      "study-complete-1",
-      "study-complete-2",
-      "study-complete-3",
-      "study-complete-4",
-      "study-complete-5",
-      "study-complete-6",
-      "study-complete-7",
-      "study-complete-8",
-      "temple-dialogue-1",
-      "temple-dialogue-2",
-      "temple-dialogue-3",
-      "temple-dialogue-4",
-      "journey-complete",
-      "codex-complete",
-      "codex-final-page",
-      "continued-complete-codex"
+      "first-reading-collected",
+      "saved-first-reading",
+      "continued-radiance-world",
+      "codex-one-collected"
     ],
-    "scope": "Ordinary keyboard/mouse or touch: illustrated opening, 15 actual encounter readings, inventory, optional question, persistent save/full reload; original visual state checks require Root review, precise rules/state assertions are separately native.",
+    "scope": "Current Radiance visual/motion/NPC/first-reading/save real input; unchanged15-entry story contract is covered by current215Core tests, not a repeated timed human playthrough.",
     "steps": [
       {
         "type": "checkpoint",
@@ -88,8 +71,8 @@
       },
       {
         "type": "checkpoint",
-        "name": "opening-age-twelve",
-        "expected": "열두 살 예수님과 성전 방문 소개가 실제 그림과 함께 표시된다."
+        "name": "opening-childhood",
+        "expected": "도입4/6 나사렛 유년기, 누가복음2:39–40 요약을 정확하게 표시한다."
       },
       {
         "type": "click",
@@ -97,8 +80,13 @@
           0.182,
           0.861
         ],
-        "label": "오프닝 다섯 번째 장",
+        "label": "열두 살 성전 도입",
         "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-age-twelve",
+        "expected": "실제 도입5/6 열두 살 성전 방문 설명을 표시한다."
       },
       {
         "type": "click",
@@ -122,6 +110,42 @@
         "type": "checkpoint",
         "name": "world-idle",
         "expected": "2D 다층 숲에 예수님 전신·걷기 목표·도감 0/15와 실제 NPC가 표시된다."
+      },
+      {
+        "type": "key",
+        "key": "h",
+        "label": "실제 H키 풍경보기",
+        "profile": "desktop",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "label": "풍경 보기 터치",
+        "settleMs": 550,
+        "profile": "mobile-landscape"
+      },
+      {
+        "type": "checkpoint",
+        "name": "radiance-scenic-spawn",
+        "expected": "새 원화 숲의 푸른안개/발광수관/깊이와 지면이 읽히며 독립 복귀버튼이 남는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.875,
+          0.1653
+        ],
+        "label": "풍경보기에서 게임HUD복귀",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "radiance-restored-hud",
+        "expected": "정상 버튼으로 목표/도감/이동·대화UI가 복구된다."
       },
       {
         "type": "audio",
@@ -259,6 +283,11 @@
         "profile": "mobile-landscape"
       },
       {
+        "type": "review_input",
+        "name": "radiance-inspect-first-npc",
+        "reason": "첫 목표에 실제 이동한 원본을 보고 필요할 때만 정상 방향버튼/키로 보정한다."
+      },
+      {
         "type": "click",
         "point": [
           0.9195,
@@ -283,234 +312,9 @@
         "repeat": 1
       },
       {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
         "type": "checkpoint",
-        "name": "birth-2",
-        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 1
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "birth-3",
-        "expected": "현재 NPC와 탄생 기록 본문이 연결되고 정확한 성경 구절이 아래 표시된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 1
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "a"
-        ],
-        "ms": 3840,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.0523,
-          0.886
-        ],
-        "ms": 3840,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-dialogue",
-        "expected": "요셉과 열두 살 예수님의 실제 학습 대화와 출처 구절이 분리되어 표시된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 1
-      },
-      {
-        "type": "checkpoint",
-        "name": "jesus-dialogue-portrait",
-        "expected": "대답하는 열두 살 예수님의 올바른 얼굴 초상과 자연스러운 대화가 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.117,
-          0.91
-        ],
-        "label": "궁금한 내용 질문하기",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5,
-          0.401
-        ],
-        "label": "현재 주제 첫 질문",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "optional-question",
-        "expected": "곁가지 질문과 답이 표시되며 말씀 획득이나 대화 순서를 건너뛰지 않는다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.815,
-          0.819
-        ],
-        "label": "원래 대화로",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 1
-      },
-      {
-        "type": "checkpoint",
-        "name": "birth-memory-before-birth-clarified",
-        "expected": "요셉의 회상에서 당시 예수님이 아직 태어나기 전이었다고 명확히 읽히며 누가복음2장 본문과 구분된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 6
+        "name": "first-reading-collected",
+        "expected": "첫 정상 NPC대화를 완료해 말씀1/15를 획득한다."
       },
       {
         "type": "click",
@@ -527,7 +331,7 @@
           0.2742,
           0.5528
         ],
-        "label": "첫 학습 완료 상태 저장",
+        "label": "첫 말씀 획득 상태 저장",
         "settleMs": 500
       },
       {
@@ -541,8 +345,8 @@
       },
       {
         "type": "checkpoint",
-        "name": "saved-study",
-        "expected": "첫 학습까지 4/15 획득과 등잔·현재 장소가 표시된다."
+        "name": "saved-first-reading",
+        "expected": "실제 첫 말씀1항목과 등잔 상태를 저장한 뒤 정상 여정HUD로 돌아간다."
       },
       {
         "type": "reload"
@@ -558,646 +362,8 @@
       },
       {
         "type": "checkpoint",
-        "name": "continued-study",
-        "expected": "실제 지속 저장에서 4/15 수집과 위치·등잔·다음 목표가 유지된다."
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-1",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-2",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-3",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1697,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1697,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-4",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-5",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1697,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1697,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-6",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-7",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1697,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1697,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 8
-      },
-      {
-        "type": "checkpoint",
-        "name": "study-complete-8",
-        "expected": "실제 걸어 도착한 NPC와 여덟 번 대화를 마친 후 새 말씀 한 장을 획득한다."
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "a"
-        ],
-        "ms": 8840,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.0523,
-          0.886
-        ],
-        "ms": 8840,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "temple-dialogue-1",
-        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 2
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 3601,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 3601,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "temple-dialogue-2",
-        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 4
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 2649,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 2649,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "review_input",
-        "name": "inspect-temple-three",
-        "profile": "mobile-landscape",
-        "scope": "Actual original screenshot followed only by logged ordinary touch correction if necessary; no engine or save state access."
-      },
-      {
-        "type": "checkpoint",
-        "name": "temple-dialogue-3",
-        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 4
-      },
-      {
-        "type": "hold",
-        "keys": [
-          "Shift",
-          "d"
-        ],
-        "ms": 1935,
-        "label": "실제 좌우 이동",
-        "settleMs": 350,
-        "profile": "desktop"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.185,
-          0.894
-        ],
-        "label": "터치 달리기 켜기",
-        "settleMs": 500,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "pointer_hold",
-        "point": [
-          0.1227,
-          0.886
-        ],
-        "ms": 1935,
-        "label": "터치 방향 버튼 계속 누르기",
-        "settleMs": 350,
-        "profile": "mobile-landscape"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.9195,
-          0.8889
-        ],
-        "label": "현재 만남 대화 시작",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "temple-dialogue-4",
-        "expected": "누가복음 성전 장면의 현재 인물 대화·직접 인용 본문이 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8477,
-          0.8986
-        ],
-        "label": "실제 대화 다음 말씀",
-        "settleMs": 500,
-        "repeat": 3
-      },
-      {
-        "type": "review_input",
-        "name": "inspect-complete-journey",
-        "profile": "mobile-landscape",
-        "scope": "Actual original screenshot followed only by logged ordinary touch correction if necessary; no engine or save state access."
-      },
-      {
-        "type": "checkpoint",
-        "name": "journey-complete",
-        "expected": "탄생 3·배움 8·성전 4 본문 총 15/15를 실제 대화로 모은 완료 안내가 표시된다."
+        "name": "continued-radiance-world",
+        "expected": "실제 완전새로고침 후 같은 소지품/등잔/첫 말씀/새 원화월드에서 이어한다."
       },
       {
         "type": "click",
@@ -1205,36 +371,13 @@
           0.23,
           0.075
         ],
-        "label": "완성된 도감",
+        "label": "획득 전 도감 열기",
         "settleMs": 500
       },
       {
         "type": "checkpoint",
-        "name": "codex-complete",
-        "expected": "획득 15/15와 실제 개역한글 본문·출처가 표시된다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.307,
-          0.819
-        ],
-        "label": "도감 두 번째 페이지",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.307,
-          0.819
-        ],
-        "label": "도감 성전 페이지",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "codex-final-page",
-        "expected": "마지막 성전 본문 네 장 모두 획득 표시이며 전체 3페이지와 정확한 구절이 보인다."
+        "name": "codex-one-collected",
+        "expected": "첫 획득 말씀과 나머지 미획득 항목이 구분된다."
       },
       {
         "type": "click",
@@ -1244,59 +387,6 @@
         ],
         "label": "여정 복귀",
         "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.929,
-          0.075
-        ],
-        "label": "완료 저장 메뉴",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.2742,
-          0.5528
-        ],
-        "label": "전체 여정 저장",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.2742,
-          0.4319
-        ],
-        "label": "저장 후 계속",
-        "settleMs": 500
-      },
-      {
-        "type": "reload"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.378,
-          0.832
-        ],
-        "label": "완료 저장 이어하기",
-        "settleMs": 500
-      },
-      {
-        "type": "click",
-        "point": [
-          0.23,
-          0.075
-        ],
-        "label": "재접속 후 도감",
-        "settleMs": 500
-      },
-      {
-        "type": "checkpoint",
-        "name": "continued-complete-codex",
-        "expected": "브라우저 완전 재로딩 뒤에도 획득15/15와 실제 본문이 유지된다."
       }
     ]
   }

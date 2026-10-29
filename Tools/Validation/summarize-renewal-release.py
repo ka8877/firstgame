@@ -15,13 +15,14 @@ def main():
         'updatedUtc': datetime.now(timezone.utc).isoformat(),
         'gameRevisions': REVISIONS,
         'contentVersions': {'FantasyCards': 'fm-classic-0.1.0', 'PathOfDawn': 'gospel-0.1.0'},
-        'scope': 'Current two-game Renewal work. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.',
+        'scope': 'Current Polish/Radiance revisions through the existing renewal release profile. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.',
         'core': {}, 'native': {}, 'builds': {}, 'browser': {},
         'publication': {'status': 'pending', 'url': 'https://ka8877.github.io/firstgame/', 'scope': 'No new publication is claimed until current staged/public bytes and Root portal review are verified.'},
         'limitations': [
             'Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.',
             'Native save fixtures and real browser storage/full reload are separate checks.',
             'Actual WebAudio route/PCM evidence is not human speaker listening.',
+            'Actual OS/tab visibility pause was not measurable in this virtual Chromium; controller regressions and normal-focus PCM are separate evidence.',
             'Root original-image review is not user aesthetic approval.',
             'Original archive metadata/media and implemented playable abilities are separate scopes.'
         ]
@@ -73,7 +74,16 @@ def main():
     if media.is_file(): record['cardMediaLastAudit'] = {**read(media), 'evidence': ref(media), 'scope': 'Last retained audit; in-progress download counts are not a complete media release pass.'}
     loops = OUT / 'AudioClipLoops/report.json'
     if loops.is_file(): record['sourceClipLoopOutput'] = {'status': read(loops)['status'], 'scope': read(loops)['scope'], 'report': ref(loops)}
-    stage = Path('/tmp/firstgame-renewal-staged-site/build-manifest.json')
+    visibility = OUT / 'Audio/visibility-environment-limit.json'
+    if visibility.is_file():
+        record['actualOsVisibility'] = {'status': read(visibility)['status'], 'report': ref(visibility)}
+    notes = OUT / 'NotesCorrection/FantasyCards/report.json'
+    notes_review = OUT / 'Root/cards-notes-correction-review.json'
+    if notes.is_file() and notes_review.is_file():
+        record['supplementalCardNoteProof'] = {'mechanicalStatus': read(notes)['status'],
+            'report': ref(notes), 'rootReview': ref(notes_review),
+            'scope': 'Ordinary ASCII note entry on the same frozen runtime; the empty automated Korean-note input is not successful note proof. Immediate-return capture is not a settled-font legibility claim.'}
+    stage = Path('/tmp/firstgame-polish-staged-site/build-manifest.json')
     public = OUT / 'PublicPortal/report.json'
     if stage.is_file() and public.is_file():
         try:

@@ -10,6 +10,7 @@ namespace PathOfDawn.Presentation
         public string CurrentState { get; private set; } = "Idle";
         public float Phase => phase;
         public bool LampEquipped => lamp && lamp.activeSelf;
+        public bool UsesRadiancePainting { get; private set; }
         public const float Height = 1.84f;
 
         // Tight, read-only source rectangles measured from the original RGBA atlas, bottom-left coordinates.
@@ -22,6 +23,17 @@ namespace PathOfDawn.Presentation
             new Rect(432,438,110,195), new Rect(418,370,184,100),
             new Rect(1053,442,99,187), new Rect(1040,374,180,102)
         };
+        // New original 1254px RGBA source: dominant alpha components were measured
+        // read-only, with feathered padding retained. Source pixels are never edited.
+        static readonly Rect[] RadianceParts = {
+            new Rect(24,955,267,287), new Rect(337,947,276,296), new Rect(642,951,282,303), new Rect(961,959,262,282),
+            new Rect(62,666,165,279), new Rect(422,642,131,301), new Rect(723,666,161,269), new Rect(1029,638,126,308),
+            new Rect(70,328,180,299), new Rect(388,332,215,288), new Rect(688,328,186,305), new Rect(1002,344,220,280),
+            new Rect(32,7,281,308), new Rect(342,64,266,248), new Rect(689,45,176,247), new Rect(969,26,252,276),
+            new Rect(414,431,112,188), new Rect(389,332,216,140),
+            new Rect(1037,440,108,183), new Rect(1002,344,220,140)
+        };
+        Rect[] activeParts;
         Transform visual, torso, head, hair, nearArm, farArm, nearForearm, farForearm;
         Transform nearThigh, farThigh, nearCalf, farCalf, nearFoot, farFoot, pouch;
         const float UpperLeg = .38f, LowerLeg = .37f, RestHip = .84f, AnkleHeight = .102f;
@@ -36,6 +48,9 @@ namespace PathOfDawn.Presentation
         bool grounded = true;
         int facing = 1;
         Material material, clothMaterial;
+        Material shadowMaterial;
+        SpriteRenderer contactShadow;
+        GospelLuminousWorld world;
         Texture2D atlas;
         static Texture2D flatNormal;
         readonly List<Sprite> generatedSprites = new List<Sprite>();
@@ -54,13 +69,15 @@ namespace PathOfDawn.Presentation
             obj.transform.SetParent(parent,false);
             var renderer = obj.AddComponent<SpriteRenderer>();
             renderer.sprite = Sprite.Create(texture,rect,new Vector2(.5f,0),rect.height / height,0,SpriteMeshType.FullRect);
-            var shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
+            var shader = Resources.Load<Shader>("Art/GospelRadiance/Rendering/RadianceSprite2D");
+            if (!shader) shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
             if (!shader) shader = Shader.Find("Sprites/Default");
             var npcMaterial = new Material(shader) { name = "Luminous original NPC painting" };
             TextureBindings(npcMaterial,texture);
             renderer.sharedMaterial = npcMaterial;
             TextureBindings(renderer,texture);
             renderer.sortingOrder = 19;
+            obj.AddComponent<GospelRadianceNpcBreath>();
             return renderer;
         }
 
@@ -121,7 +138,7 @@ namespace PathOfDawn.Presentation
         Transform SpritePart(string name, int index, Transform parent, Vector2 anchor, float height, Vector2 pivot, int order, float width = 0)
         {
             var node = Node(name, parent, anchor);
-            var rect = Parts[index];
+            var rect = activeParts[index];
             var sprite = Sprite.Create(atlas, rect, pivot, rect.height / height, 0, SpriteMeshType.FullRect);
             generatedSprites.Add(sprite);
             sprite.name = "Painted " + name;
@@ -140,7 +157,7 @@ namespace PathOfDawn.Presentation
             var vertices = new Vector3[(columns + 1) * (rows + 1)];
             var uv = new Vector2[vertices.Length]; var colours = new Color[vertices.Length];
             var normals = new Vector3[vertices.Length]; var tangents = new Vector4[vertices.Length];
-            var triangles = new int[columns * rows * 6]; var rect = Parts[index];
+            var triangles = new int[columns * rows * 6]; var rect = activeParts[index];
             for (int y = 0; y <= rows; y++) for (int x = 0; x <= columns; x++)
             {
                 int k = y * (columns + 1) + x; float u = x / (float)columns, v = y / (float)rows;
@@ -165,13 +182,20 @@ namespace PathOfDawn.Presentation
 
         void Create()
         {
-            atlas = Resources.Load<Texture2D>("Art/GospelLuminous/Actors/jesus-parts");
+            atlas = Resources.Load<Texture2D>("Art/GospelRadiance/Actors/jesus-parts");
+            UsesRadiancePainting = atlas != null;
+            activeParts = UsesRadiancePainting ? RadianceParts : Parts;
+            if (!atlas) atlas = Resources.Load<Texture2D>("Art/GospelLuminous/Actors/jesus-parts");
             if (!atlas) { Debug.LogError("Missing original Luminous character atlas."); return; }
-            var shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
+            if (UsesRadiancePainting && (atlas.width != 1254 || atlas.height != 1254))
+                throw new System.InvalidOperationException("Radiance source rectangles require the exact original1254x1254painting.");
+            var shader = Resources.Load<Shader>("Art/GospelRadiance/Rendering/RadianceSprite2D");
+            if (!shader) shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Lit-Default");
             if (!shader) shader = Shader.Find("Sprites/Default");
             material = new Material(shader) { name = "Luminous painted character", mainTexture = atlas };
             TextureBindings(material,atlas);
-            var meshShader = Resources.Load<Shader>("Art/GospelLuminous/Actors/LuminousCloth2D");
+            var meshShader = Resources.Load<Shader>("Art/GospelRadiance/Rendering/RadianceCloth2D");
+            if (!meshShader) meshShader = Resources.Load<Shader>("Art/GospelLuminous/Actors/LuminousCloth2D");
             if (!meshShader) meshShader = Shader.Find("Universal Render Pipeline/2D/Mesh2D-Lit-Default");
             if (!meshShader) meshShader = Shader.Find("Universal Render Pipeline/2D/Mesh2D-Unlit-Default");
             if (!meshShader) meshShader = Shader.Find("Sprites/Default");
@@ -183,24 +207,24 @@ namespace PathOfDawn.Presentation
             farCalf = Node("Far knee",farThigh,new Vector2(0,-UpperLeg));
             SpritePart("Far shin",18,farCalf,Vector2.zero,.405f,new Vector2(.52f,.96f),17,.135f);
             farFoot = Node("Far ankle",farCalf,new Vector2(0,-LowerLeg));
-            SpritePart("Far leather sandal",19,farFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),17,.255f);
+            SpritePart("Far leather sandal",19,farFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),17,.235f);
             nearThigh = Node("Near hip", visual,new Vector2(.035f,RestHip));
             SpritePart("Near upper leg",8,nearThigh,Vector2.zero,.435f,new Vector2(.5f,.94f),18,.15f);
             nearCalf = Node("Near knee",nearThigh,new Vector2(0,-UpperLeg));
             SpritePart("Near shin",16,nearCalf,Vector2.zero,.405f,new Vector2(.52f,.96f),19,.145f);
             nearFoot = Node("Near ankle",nearCalf,new Vector2(0,-LowerLeg));
-            SpritePart("Near leather sandal",17,nearFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),20,.255f);
+            SpritePart("Near leather sandal",17,nearFoot,Vector2.zero,.144f,new Vector2(.30f,.71f),20,.235f);
             torso = Node("Chest",visual,new Vector2(0,.88f));
             farArm = Node("Far shoulder",torso,new Vector2(-.15f,.43f));
             SpritePart("Far sleeve",6,farArm,Vector2.zero,.34f,new Vector2(.5f,.90f),18,.15f);
             farForearm = Node("Far elbow",farArm,new Vector2(0,-.24f));
             SpritePart("Far forearm and hand",7,farForearm,Vector2.zero,.33f,new Vector2(.42f,.94f),18,.14f);
             skirtRoot = Node("Waist linen anchor",torso,new Vector2(0,.09f));
-            skirtMesh = Cloth("Deforming ivory linen",2,skirtRoot,.56f,.74f,21,out skirtRest);
+            skirtMesh = Cloth("Deforming ivory linen",2,skirtRoot,.53f,.74f,21,out skirtRest);
             skirtVertices = new Vector3[skirtRest.Length];
-            SpritePart("Ivory upper tunic",1,torso,new Vector2(0,.03f),.58f,new Vector2(.5f,.06f),22,.49f);
-            sashRoot = Node("Sash anchor",torso,new Vector2(-.16f,.38f));
-            sashMesh = Cloth("Trailing blue sash",12,sashRoot,.18f,.69f,20,out sashRest);
+            SpritePart("Ivory upper tunic",1,torso,new Vector2(0,.03f),.58f,new Vector2(.5f,.06f),22,.46f);
+            sashRoot = Node("Sash anchor",torso,new Vector2(-.16f,.22f));
+            sashMesh = Cloth("Trailing blue sash",12,sashRoot,.20f,.62f,20,out sashRest);
             sashVertices = new Vector3[sashRest.Length];
             pouch = SpritePart("Belt pouch",15,torso,new Vector2(.16f,.02f),.19f,new Vector2(.5f,.85f),25,.14f);
             nearArm = Node("Near shoulder",torso,new Vector2(.16f,.43f));
@@ -208,8 +232,10 @@ namespace PathOfDawn.Presentation
             nearForearm = Node("Near elbow",nearArm,new Vector2(0,-.24f));
             SpritePart("Near forearm and hand",5,nearForearm,Vector2.zero,.33f,new Vector2(.42f,.94f),25,.14f);
             head = Node("Neck",torso,new Vector2(.015f,.56f));
-            hair = SpritePart("Trailing hair",3,head,new Vector2(-.10f,.22f),.29f,new Vector2(.5f,.94f),23,.14f);
-            SpritePart("Face and wavy hair",0,head,Vector2.zero,.40f,new Vector2(.48f,.10f),26,.40f);
+            hair = UsesRadiancePainting
+                ? SpritePart("Soft rear hair silhouette",3,head,new Vector2(-.025f,.035f),.35f,new Vector2(.5f,.10f),23,.34f)
+                : SpritePart("Trailing hair",3,head,new Vector2(-.10f,.22f),.29f,new Vector2(.5f,.94f),23,.14f);
+            SpritePart("Face and wavy hair",0,head,Vector2.zero,.38f,new Vector2(.48f,.10f),26,.35f);
             var hand = Node("Right hand lamp socket",nearForearm,new Vector2(.035f,-.285f));
             lamp = new GameObject("Held clay oil lamp"); lamp.transform.SetParent(hand,false);
             SpritePart("Clay lamp and flame",13,lamp.transform,new Vector2(.02f,.01f),.14f,new Vector2(.2f,.2f),29,.22f);
@@ -225,6 +251,22 @@ namespace PathOfDawn.Presentation
             lampLight.color = new Color(1,.64f,.20f); lampLight.intensity = .7f;
             lampLight.shadowsEnabled = false; lampLight.shadowIntensity = 0;
             lamp.SetActive(false);
+            BuildContactShadow();
+        }
+
+        void BuildContactShadow()
+        {
+            var app = GetComponentInParent<GospelLuminousApp>();
+            world = app != null ? app.World : null;
+            var texture = Resources.Load<Texture2D>("Art/GospelLuminous/World/SoftGlow");
+            if (texture == null) return;
+            var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(.5f, .5f), 100);
+            generatedSprites.Add(sprite);
+            var obj = new GameObject("Soft contact shadow on actual ground"); obj.transform.SetParent(transform, false);
+            contactShadow = obj.AddComponent<SpriteRenderer>(); contactShadow.sprite = sprite;
+            shadowMaterial = new Material(Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default"));
+            contactShadow.sharedMaterial = shadowMaterial; contactShadow.sortingOrder = 15;
+            contactShadow.color = new Color(.015f, .027f, .045f, .45f);
         }
 
         void LateUpdate()
@@ -283,8 +325,18 @@ namespace PathOfDawn.Presentation
             SmoothAngle(nearForearm, LampEquipped ? 31f + stride * speedBlend * 3f : elbow + Mathf.Max(0, stride) * 5f * speedBlend, 14, dt);
             SmoothAngle(farForearm, elbow + Mathf.Max(0, -stride) * 5f * speedBlend, 14, dt);
             Deform(skirtMesh, skirtRest, skirtVertices, .74f, .008f, .028f, false);
-            Deform(sashMesh, sashRest, sashVertices, .69f, .016f, .046f, true);
+            Deform(sashMesh, sashRest, sashVertices, .62f, .016f, .046f, true);
             if (lampLight) lampLight.intensity = .72f + Mathf.Sin(time * 13) * .045f + Mathf.Sin(time * 19.2f) * .025f;
+            if (contactShadow != null)
+            {
+                float ground = world != null ? world.HeightAt(transform.position.x) : transform.position.y;
+                float altitude = Mathf.Max(0, transform.position.y - ground);
+                float spread = 1f + Mathf.Min(1f, altitude) * .35f;
+                contactShadow.transform.position = new Vector3(transform.position.x, ground + .035f, 0);
+                contactShadow.transform.localScale = new Vector3(.66f * spread / contactShadow.sprite.bounds.size.x,
+                    .095f * spread / contactShadow.sprite.bounds.size.y, 1);
+                contactShadow.color = new Color(.015f, .027f, .045f, .45f / (1f + altitude * 1.3f));
+            }
         }
 
         Vector2 Step(float cycle, float span, float stance, out float footPitch)
@@ -350,6 +402,38 @@ namespace PathOfDawn.Presentation
             if (sashMesh) Destroy(sashMesh);
             if (material) Destroy(material);
             if (clothMaterial) Destroy(clothMaterial);
+            if (shadowMaterial) Destroy(shadowMaterial);
+        }
+    }
+
+    /// <summary>Quiet breathing on the actual NPC painting; no simulated dialogue or movement.</summary>
+    public sealed class GospelRadianceNpcBreath : MonoBehaviour
+    {
+        Vector3 restPosition, restScale;
+        Sprite ownedPainting;
+        Material ownedMaterial;
+        float phase;
+        void Awake()
+        {
+            var renderer = GetComponent<SpriteRenderer>();
+            ownedPainting = renderer != null ? renderer.sprite : null;
+            ownedMaterial = renderer != null ? renderer.sharedMaterial : null;
+        }
+        void Start()
+        {
+            restPosition = transform.localPosition; restScale = transform.localScale;
+            phase = Mathf.Repeat(transform.position.x * 1.73f, Mathf.PI * 2f);
+        }
+        void LateUpdate()
+        {
+            float breath = Mathf.Sin(Time.time * 1.35f + phase);
+            transform.localPosition = restPosition + new Vector3(0, breath * .003f, 0);
+            transform.localScale = new Vector3(restScale.x * (1f - breath * .0015f), restScale.y * (1f + breath * .002f), restScale.z);
+        }
+        void OnDestroy()
+        {
+            if (ownedPainting != null) Destroy(ownedPainting);
+            if (ownedMaterial != null) Destroy(ownedMaterial);
         }
     }
 }

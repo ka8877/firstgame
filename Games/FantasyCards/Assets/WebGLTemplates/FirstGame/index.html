@@ -76,6 +76,7 @@
       var requestedAt = performance.now();
       var fadeOutSeconds = .55, fadeInSeconds = .55;
       var sceneTransitionCount = 0, sameRoleMessages = 0, transitions = [];
+      var suspendedByVisibility = document.hidden === true;
       function recordTransition(entry) {
         entry.atMs = performance.now();
         transitions.push(entry);
@@ -169,6 +170,7 @@
         status.dataset.requestedTrackId = "modern-" + tracks[scene].file;
         status.dataset.requestedAtMs = String(requestedAt);
         status.dataset.contextState = context ? context.state : "not-created";
+        status.dataset.suspendedByVisibility = String(suspendedByVisibility);
         if (active && !active.audio.paused) {
           status.dataset.trackId = "modern-" + active.file;
           status.dataset.trackTitle = active.label;
@@ -176,7 +178,7 @@
           status.dataset.positionMs = String(Math.round(active.audio.currentTime * 1000));
           status.dataset.playback = muted ? "paused" : context && context.state !== "running" ? "waiting" : "playing";
         } else {
-          status.dataset.playback = muted ? "paused" : unlocked ? "loading" : "gesture-required";
+          status.dataset.playback = muted || suspendedByVisibility ? "paused" : unlocked ? "loading" : "gesture-required";
         }
       }
       function render() {
@@ -184,7 +186,7 @@
         var audibleTrack = active || tracks[scene];
         if (credit) credit.textContent = audibleTrack.credit;
         if (sourceLink) sourceLink.href = audibleTrack.url;
-        status.textContent = tracks[scene].label + " · " + (muted ? "음소거" :
+        status.textContent = tracks[scene].label + " · " + (muted ? "음소거" : suspendedByVisibility ? "돌아오면 이어서 재생" :
           status.dataset.playback === "playing" ? "배경 음악" : unlocked ? "음악 준비 중" : "시작하면 음악 재생");
         button.textContent = muted ? "음악 켜기" : status.dataset.playback === "playing" ? "음악 끄기" : "음악 시작";
         button.setAttribute("aria-pressed", String(!muted));
@@ -250,10 +252,10 @@
         }
       }
       function promote(player, epoch, version) {
-        if (muted || !unlocked || tracks[scene] !== player || version !== generation || player.epoch !== epoch) {
+        if (muted || suspendedByVisibility || !unlocked || tracks[scene] !== player || version !== generation || player.epoch !== epoch) {
           // A cancelled play promise must not pause a later request on this same
           // element. Only silence it if it is no longer the selected request.
-          if (tracks[scene] !== player || muted || !unlocked) silence(player);
+          if (tracks[scene] !== player || muted || suspendedByVisibility || !unlocked) silence(player);
           return;
         }
         if (player.audio.paused) return;
@@ -279,14 +281,14 @@
         render();
       }
       function requestTarget() {
-        if (!unlocked || muted) { render(); return; }
+        if (!unlocked || muted || suspendedByVisibility) { render(); return; }
         var player = tracks[scene];
         if (active === player && !player.audio.paused && !player.restartNeeded) { render(); return; }
         if (player.pending) { render(); return; }
         player.pending = true;
         var epoch = ++player.epoch, version = generation;
         function begin() {
-          if (muted || !unlocked || tracks[scene] !== player || player.epoch !== epoch || version !== generation) return;
+          if (muted || suspendedByVisibility || !unlocked || tracks[scene] !== player || player.epoch !== epoch || version !== generation) return;
           cancelFade(player);
           setGain(player.gain, 0, false);
           if (!player.gain) player.audio.volume = 0;
@@ -378,7 +380,8 @@
         },
         getState: function () {
           return { scene: scene, muted: muted, volume: volume, hasMutedPreference: hasMutedPreference,
-            hasVolumePreference: hasVolumePreference, unlocked: unlocked, sourceKind: "bundled-instrumental",
+            hasVolumePreference: hasVolumePreference, unlocked: unlocked, suspendedByVisibility: suspendedByVisibility,
+            sourceKind: "bundled-instrumental",
             actualSource: active ? active.audio.currentSrc || active.audio.src : null,
             actualPosition: active ? active.audio.currentTime : null,
             actualPaused: active ? active.audio.paused : true, contextState: context ? context.state : "not-created",
@@ -411,6 +414,14 @@
       });
       ["pointerdown", "pointerup", "touchend", "keydown"].forEach(function (type) {
         document.addEventListener(type, trustedGesture, true);
+      });
+      document.addEventListener("visibilitychange", function () {
+        var hidden = document.hidden === true;
+        if (hidden === suspendedByVisibility) return;
+        suspendedByVisibility = hidden;
+        if (hidden) { ++generation; pauseAll(); }
+        else requestTarget();
+        render();
       });
       document.getElementById("fm-loading-start").addEventListener("click", function (event) {
         trustedGesture(event);

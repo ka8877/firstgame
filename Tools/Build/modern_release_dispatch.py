@@ -10,7 +10,7 @@ def dispatch(root, part):
     record=root/'Tools/Environment/validation.json'
     if not record.is_file():return
     revisions=json.loads(record.read_text()).get('gameRevisions')
-    if revisions=={'FantasyCards':'fm-renewal-2026-10-29','PathOfDawn':'gospel-renewal-2026-10-29'}:
+    if revisions=={'FantasyCards':'fm-polish-2026-10-29','PathOfDawn':'gospel-radiance-2026-10-29'}:
         result=subprocess.run([sys.executable,str(root/'Tools/Build/package-renewal.py'),'--part','verify' if part=='verify' else 'all'],cwd=root)
         raise SystemExit(result.returncode)
     if revisions=={'FantasyCards':'fm-restoration-2026-10-27','PathOfDawn':'gospel-toon-2026-10-27'}:

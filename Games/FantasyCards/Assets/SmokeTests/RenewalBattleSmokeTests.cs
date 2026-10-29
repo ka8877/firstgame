@@ -40,6 +40,8 @@ namespace FantasyCards.SmokeTests
                 "The backfield must show the deployed original terrain artwork, not just a resource pip.");
             Assert.That(backfield.GetComponent<Button>(), Is.Not.Null);
             backfield.GetComponent<Button>().onClick.Invoke(); yield return null;
+            Assert.That(SmokeUi.FindButton("돌아가기"), Is.Null, "A single public-card click now selects instead of opening detail.");
+            GameObject.Find("Backfield 0 0").GetComponent<Button>().onClick.Invoke(); yield return null;
             Assert.That(SmokeUi.HasText(terrainDefinition.name), Is.True);
             SmokeUi.Click("돌아가기"); yield return null;
             var unit = dragEngine.State.players[0].hand.First(card => CardCatalog.Get(card.definitionId).kind == CardKind.Unit);
@@ -49,7 +51,7 @@ namespace FantasyCards.SmokeTests
             Assert.That(dragEngine.State.players[0].AtLane(2).instanceId, Is.EqualTo(unit.instanceId));
             Assert.That(dragEngine.State.players[0].genericSoul, Is.EqualTo(soul - CardCatalog.Get(unit.definitionId).cost));
             BattleEngine.Validate(dragEngine.State);
-            yield return SmokeUi.Capture("FantasyCards", "renewal-" + attempt + "-critical-deployed-field", 1280, 720);
+            yield return SmokeUi.Capture("FantasyCards", "polish-" + attempt + "-critical-deployed-field", 1280, 720);
 
             // Native-only legal deterministic fixture. Browser checks use ordinary
             // pointer/touch input and never inject this state.
@@ -87,8 +89,8 @@ namespace FantasyCards.SmokeTests
                 "Resolved values must belong to the actual card surface rather than a separate status pane.");
             Assert.That(SmokeUi.HasText("C" + shownCoin.coinIndex + " · " + (shownCoin.coinHeads ? "앞면" : "뒷면")), Is.True,
                 "The original-style horizontal tray must display this exact Core result.");
-            yield return SmokeUi.Capture("FantasyCards","renewal-"+attempt+"-on-card-coin-result",1280,720,settleSeconds:0f);
-            yield return SmokeUi.Capture("FantasyCards","renewal-"+attempt+"-on-card-coin-result-mobile",844,390,settleSeconds:0f);
+            yield return SmokeUi.Capture("FantasyCards","polish-"+attempt+"-on-card-coin-result",1280,720,settleSeconds:0f);
+            yield return SmokeUi.Capture("FantasyCards","polish-"+attempt+"-on-card-coin-result-mobile",844,390,settleSeconds:0f);
             ActiveButtons("Battle playback skip").Single().onClick.Invoke();
             yield return SmokeUi.WaitUntil(() => !app.IsBattlePlaybackActive, 8, "Skip changes only presentation time.");
             var events = app.LastBattlePlaybackEvents.ToArray();

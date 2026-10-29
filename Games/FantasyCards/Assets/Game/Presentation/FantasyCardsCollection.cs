@@ -175,7 +175,7 @@ namespace FantasyCards.Presentation
 
         private void ShowDetail(CardDefinition card, Action back)
         {
-            redraw = () => ShowDetail(card, back); Clear(); Backdrop(true);
+            battleScreen = false; redraw = () => ShowDetail(card, back); Clear(); polishBack = back; ResetPolishTap(); Backdrop(true);
             var portraitFrame = ArcanaCardFace(root, card, .025f, .06f, .515f, .945f, ArcanaCardMode.Detail);
             portraitFrame.gameObject.name = "Detailed original printed card " + card.id;
             Text(root, CardGradeSummary(card) + "\n" + CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · 덱 " + card.deckLimit + "장까지", .55f, .82f, .965f, .94f, 26, RarityColor(card.rarity));
@@ -218,7 +218,7 @@ namespace FantasyCards.Presentation
 
         private void ShowOriginalCard(CardDefinition card, Action back)
         {
-            redraw = () => ShowOriginalCard(card, back); Clear(); Backdrop(true);
+            battleScreen = false; redraw = () => ShowOriginalCard(card, back); Clear(); polishBack = () => ShowDetail(card, back); ResetPolishTap(); Backdrop(true);
             Text(root, card.name + " · 원본 카드", .05f, .92f, .95f, .99f, 32, ivory, TextAlignmentOptions.Center);
             ArcanaCardFace(root, card, .025f, .15f, .975f, .915f, ArcanaCardMode.Detail);
             Text(root, "원본 인쇄 정보와 현재 DB 수치는 버전에 따라 다를 수 있습니다.", .05f, .078f, .95f, .145f, 20, gold, TextAlignmentOptions.Center);

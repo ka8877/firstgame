@@ -3,7 +3,7 @@
 import collections,hashlib,html,json,re,subprocess,sys,uuid
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3];HERE=Path(__file__).resolve().parent;CORE=ROOT/'Games/FantasyCards/Assets/Game/Core';DATA=ROOT/'Tools/Data/ClassicCards'
-REV='fm-renewal-2026-10-29'
+REV='fm-polish-2026-10-29'
 SKILLS={9,11,42,49,106,135,188,224,243,245,249,339,365,447,450,454,482,508,533,568,570,572,576,643,767,788}
 SPECIAL={'3061320561':136,'5112322065':245,'5112322068':135}
 DOUBLE={str(15100741649+i)for i in range(7)};COPY={str(15112541671+i)for i in range(7)};SYNERGY={'13061941464','4031940424'}
@@ -68,6 +68,8 @@ def main():
  if not baseline.exists():write(baseline,{'cards':[{'sourceId':c['sourceId'],'canonicalRowSha256':canonical(c)}for c in old]})
  for c,b in zip(old,json.loads(baseline.read_text())['cards']):assert c['sourceId']==b['sourceId']and canonical(c)==b['canonicalRowSha256']
  premium={c['sourceId']:c['effect']for c in json.loads((HERE/'premium-admissions.json').read_text())['cards']}if(HERE/'premium-admissions.json').exists()else{}
+ polish=HERE.parent/'Polish/premium-admissions.json'
+ if polish.exists():premium.update({c['sourceId']:c['effect']for c in json.loads(polish.read_text())['cards']})
  rows=observed['cards'];oldids={c['sourceId']for c in old};added=[];reasons={}
  for r in rows:
   f=r['fields'];i=f['ID']
@@ -79,6 +81,10 @@ def main():
   added.append({'sourceId':i,'name':f['Name'],'sourceUrl':'https://fmlunatic.com/card/'+i,'imageUrl':f"https://storage.googleapis.com/fmdb-bcb70.appspot.com/cardlist/{folder}/large/{f['KIND']//1000:02d}/{prefix}{f['KIND']:05d}L.webp",'artResource':'StreamingCards/fm_'+i,'fields':f,'effect':effect})
  added.sort(key=lambda c:(-c['fields'].get('ReleaseDate',0),c['sourceId']))
  cards=old+added;selection.update(revision=REV,cards=cards,expectedCount=len(cards),counts={str(k):v for k,v in collections.Counter(c['fields']['Category']for c in cards).items()},renewalExpansion={'preserved':605,'addedPlayable':len(added),'fullSourceCount':len(rows),'source':'Tools/Data/Renewal/complete-observations.json','sourceSha256':digest((HERE/'complete-observations.json').read_bytes()),'scope':'Complete current community source retrieval, verified supported combat subset; all15350 originals remain searchable. Unsupported states/auras/costs are not silently deleted.'})
+ if polish.exists():
+  preserved=json.loads((HERE.parent/'Polish/compatibility-baseline-2571.json').read_text())['cards'];byid={c['sourceId']:c for c in cards}
+  for previous in preserved:assert canonical(byid[previous['sourceId']])==previous['canonicalRowSha256'],previous['sourceId']
+  selection['polishExpansion']={'preserved':len(preserved),'addedPlayable':len(cards)-len(preserved),'admissions':'Tools/Data/Polish/premium-admissions.json','admissionsSha256':digest(polish.read_bytes())}
  write(DATA/'selection.json',selection);write(HERE/'supported-records.json',{'revision':REV,'count':len(added),'cards':added})
  q=lambda x:json.dumps(str(x),ensure_ascii=False)
  supported={c['sourceId']:c for c in cards};existingarch={c['fields']['ID']for c in json.loads((ROOT/'Tools/Data/Restoration/archive-records.json').read_text())['cards']}

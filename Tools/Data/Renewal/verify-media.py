@@ -72,9 +72,15 @@ def main():
         total_bytes += len(data)
     check(count == manifest["available"] == manifest["materialized"], "Declared media count mismatch")
     check(total_bytes == manifest["deliveryBytes"], "Declared media size mismatch")
-    report = {"revision": "fm-renewal-2026-10-29", "releaseReady": not missing, "inventoryOnly": args.inventory,
+    selection = json.loads((HERE.parent / "ClassicCards/selection.json").read_text())
+    playable = {c["sourceId"] for c in selection["cards"]}
+    embedded = {c["sourceId"] for c in selection["cards"] if not c["artResource"].startswith("StreamingCards/")}
+    available = {c["sourceId"] for c in cards if c["status"] == "available"}
+    coverage = {"total": len(playable), "embeddedPreserved": len(embedded), "streamedAvailable": len((playable - embedded) & available), "artAvailable": len(embedded | (playable & available)), "missing": len(playable - embedded - available)}
+    check(coverage == manifest["playableCoverage"], "Declared playable coverage differs from the current catalog")
+    report = {"revision": selection["revision"], "releaseReady": not missing, "inventoryOnly": args.inventory,
               "sourceRecords": len(source_by_id), "verifiedStreamedImages": count, "missingStreamedImages": len(missing),
-              "deliveryBytes": total_bytes, "playableCoverage": manifest["playableCoverage"],
+              "deliveryBytes": total_bytes, "playableCoverage": coverage,
               "archiveCoverage": manifest["archiveCoverage"], "missingIdLedger": "Tools/Data/Renewal/missing-media.json"}
     print(json.dumps(report, ensure_ascii=False, indent=2))
     if missing and not args.inventory:

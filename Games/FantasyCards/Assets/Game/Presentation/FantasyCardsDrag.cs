@@ -13,6 +13,7 @@ namespace FantasyCards.Presentation
                 () => !locked && battleScreen && engine != null && engine.IsPreparing(0) && !engine.State.openingHandOpen,
                 () =>
                 {
+                    ResetPolishTap();
                     selectedCard = instanceId; inspectedId = definition.id; HideTooltip();
                     message = definition.kind == CardKind.Terrain ? "지형 카드를 아래 지형·소울 띠에 놓으세요." : "빛나는 전열 또는 대상 유닛에 놓으세요.";
                 },

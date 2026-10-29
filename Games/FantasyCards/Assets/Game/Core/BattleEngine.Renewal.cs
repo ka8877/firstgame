@@ -8,7 +8,8 @@ namespace FantasyCards.Core
         // from AP. This method never turns a +damage technique into permanent AP.
         int RenewalStrike(UnitState source, UnitState target, int owner, int other, string kind)
         {
-            if (ApplyPremiumDefense(target, source, other, owner)) return 0;
+            if (ApplyPremiumDefense(target, source, other, owner)) { RecordPolishLethalSource(target, source); return 0; }
+            var livingBefore = new System.Collections.Generic.HashSet<int>(State.players[other].units.Where(u => CardCatalog.UnitHealth(u) > 0).Select(u => u.instanceId));
             int code = RenewalCardSkills.AttackCode(source.definitionId);
             int originalAp = CardCatalog.UnitAttack(source), originalDp = CardCatalog.UnitDefense(source), originalHp = CardCatalog.UnitHealth(source);
             int ap = originalAp, extra = 0;
@@ -56,14 +57,16 @@ namespace FantasyCards.Core
                 // Long range, curse and vampire have post-strike conditions.
             }
             extra += ApplyPremiumBeforeStrike(source, target, owner, other);
+            PolishBeforeStrike(source, target, owner, other);
+            extra += ApplyPolishBeforeStrike(source, target, owner, other);
             ignoreDefense |= PremiumIgnoresDefense(source.definitionId);
-            if (code != 0 && code != 489 && (extra != 0 || ignoreDefense || CardCatalog.UnitAttack(source) != originalAp || CardCatalog.UnitDefense(source) != originalDp || CardCatalog.UnitHealth(source) != originalHp || CardCatalog.UnitAttack(target) != targetAp || CardCatalog.UnitDefense(target) != targetDp || CardCatalog.UnitHealth(target) != targetHp) && !RenewalPremiumCode(code))
+            if (code != 0 && code != 489 && code != 179 && code != 666 && (extra != 0 || ignoreDefense || CardCatalog.UnitAttack(source) != originalAp || CardCatalog.UnitDefense(source) != originalDp || CardCatalog.UnitHealth(source) != originalHp || CardCatalog.UnitAttack(target) != targetAp || CardCatalog.UnitDefense(target) != targetDp || CardCatalog.UnitHealth(target) != targetHp) && !RenewalPremiumCode(code) && !IsPolishAttackCode(code))
                 Log("skill", CardCatalog.Get(source.definitionId).name + " · " + CardCatalog.Get(source.definitionId).text,
                     extra, owner, source: source, sourceOwner: owner, target: target, targetOwner: other,
                     hasStatTransition: true, beforeAttack: originalAp, beforeDefense: originalDp, beforeHealth: originalHp, additionalAttackDamage: extra);
             bool evaded = RestorationCardSkills.EvadesBeast(target, source);
             int incoming = Math.Max(0, CardCatalog.UnitAttack(source) + extra - (ignoreDefense ? 0 : CardCatalog.UnitDefense(target)));
-            int damage = evaded ? 0 : incoming;
+            int damage = evaded ? 0 : Math.Max(0, incoming - PolishDefenseReduction(target, source, other, incoming));
             if (evaded) Log("skill", "투우사 · 야수회피 · 공격 피해 무효", 0, other, source: target, sourceOwner: other, target: source, targetOwner: owner);
             int hpBeforeDamage = CardCatalog.UnitHealth(target);
             target.damage += damage;
@@ -74,6 +77,9 @@ namespace FantasyCards.Core
             if ((active && code == 576) || (active && code == 788 && damage > 0))
                 Log("skill", CardCatalog.Get(source.definitionId).name + " · 공격 후 기술", damage, owner, source: source, sourceOwner: owner, target: target, targetOwner: other);
             AfterPremiumStrike(source, target, owner, other, hpBeforeDamage, damage);
+            AfterPolishStrike(source, target, owner, other, hpBeforeDamage, damage);
+            PolishAfterStrike(source, target, owner, other, hpBeforeDamage);
+            RecordPolishStrikeDeaths(source, other, livingBefore);
             return damage;
         }
 

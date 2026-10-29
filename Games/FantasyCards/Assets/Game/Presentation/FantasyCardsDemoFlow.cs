@@ -84,7 +84,7 @@ namespace FantasyCards.Presentation
         private void BeginSelectedBattle()
         {
             if (useCustomDeck && !ValidDeck(customDeck)) { message = "편집 덱의 50장 구성을 확인하세요."; ShowCollection(true); return; }
-            RememberDemoSelection();
+            RememberDemoSelection(); ResetPolishSession();
             // Only a new-match seed is selected here. All shuffle, redraw and combat randomness belongs to the core.
             uint seed = unchecked((uint)DateTime.UtcNow.Ticks); if (seed == 0) seed = 1;
             engine = DemoCatalog.CreateBattle(seed, selectedDeckId, selectedLeaderId, selectedEncounter, useCustomDeck ? customDeck : null, authoredRules);
@@ -164,6 +164,7 @@ namespace FantasyCards.Presentation
 
         private void SelectHandCard(int instanceId, CardDefinition card)
         {
+            if (PolishDoubleTap("hand:" + instanceId, card)) return;
             selectedCard = instanceId; selectedAttacker = -1; inspectedId = card.id;
             message = CardPlayHint(card); ShowBattle();
         }
@@ -263,7 +264,7 @@ namespace FantasyCards.Presentation
         {
             BindTooltip(target, card.name + " · " + CardGradeSummary(card),
                 CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · Lv " + card.level + "\n" + CardCatalog.CostText(card) + "\n" +
-                (card.kind == CardKind.Unit || card.kind == CardKind.Equipment ? CardCatalog.StatsText(card) + "\n" : "") + CardAbilitySummary(card) + "\n" + card.text + "\n길게 누르면 원본과 상세 보기");
+                (card.kind == CardKind.Unit || card.kind == CardKind.Equipment ? CardCatalog.StatsText(card) + "\n" : "") + CardAbilitySummary(card) + "\n" + card.text + "\n전투: 한 번 선택 · 두 번 / 길게 누르기 상세");
             target.GetComponent<UiCardHover>().LongPress = () => { if (!battleScreen || !locked) detail(); };
         }
 

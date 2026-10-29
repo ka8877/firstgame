@@ -74,7 +74,7 @@ namespace FantasyCards.Presentation
                 if (unit != null)
                 {
                     var card = CardCatalog.Get(unit.definitionId);
-                    var visual = ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field, target, unit);
+                    var visual = ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field, target || selectedAttacker == unit.instanceId, unit);
                     battleUnitViews[unit.instanceId] = visual.GetComponentInChildren<FmArcanaCardSurface>().GetComponent<RectTransform>();
                     BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                     var hover = panel.GetComponent<UiCardHover>();
@@ -84,7 +84,7 @@ namespace FantasyCards.Presentation
                 {
                     if (owner == 0 || battleRevealedSpells.Contains(spell.instanceId))
                     {
-                        var card = CardCatalog.Get(spell.definitionId); ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field);
+                        var card = CardCatalog.Get(spell.definitionId); ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field, selectedAttacker == spell.instanceId);
                         // Reserved magic stays a card. Its reveal marker is integrated on its face.
                         BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                     }
@@ -120,14 +120,20 @@ namespace FantasyCards.Presentation
             if (unit != null) inspectedId = unit.definitionId;
             if (!IsLegalLane(owner, lane))
             {
-                if (unit != null) ShowDetail(CardCatalog.Get(unit.definitionId), ShowBattle);
-                else { message = "손패에서 카드를 고른 뒤 빛나는 전열을 선택하세요."; ShowBattle(); }
+                if (unit != null) SelectPolishPublicCard(owner, unit.instanceId, CardCatalog.Get(unit.definitionId), "field");
+                else
+                {
+                    var spell = engine.State.players[owner].SpellAtLane(lane);
+                    if (spell != null && (owner == 0 || battleRevealedSpells.Contains(spell.instanceId)))
+                        SelectPolishPublicCard(owner, spell.instanceId, CardCatalog.Get(spell.definitionId), "spell");
+                    else { message = "손패에서 카드를 고른 뒤 빛나는 전열을 선택하세요."; ShowBattle(); }
+                }
                 return;
             }
             Play(lane);
         }
-        private void Play(int lane) { int id = selectedCard; Act(() => engine.Play(0, id, lane, out message)); }
-        private void EndTurn() { Act(() => engine.CompletePreparation(0, out message)); }
+        private void Play(int lane) { ResetPolishTap(); int id = selectedCard; Act(() => engine.Play(0, id, lane, out message)); }
+        private void EndTurn() { ResetPolishTap(); Act(() => engine.CompletePreparation(0, out message)); }
         private string Hint()
         {
             if (engine.State.phase == BattlePhase.Complete) return "결투가 끝났습니다.";
@@ -136,10 +142,7 @@ namespace FantasyCards.Presentation
         }
         private void ShowBattleLog()
         {
-            redraw = ShowBattleLog; Clear(); Backdrop(true);
-            Text(root, "전투 기록", .055f, .84f, .945f, .96f, 42, gold);
-            Text(root, string.Join("\n", engine.State.events.Skip(Math.Max(0, engine.State.events.Count - 12)).Select(item => item.text)), .06f, .19f, .94f, .82f, 23, ivory, TextAlignmentOptions.TopLeft);
-            Button(root, "돌아가기", .35f, .025f, .65f, .145f, ShowBattle, gold, 26);
+            ShowPolishBattleDesk(1);
         }
     }
 }

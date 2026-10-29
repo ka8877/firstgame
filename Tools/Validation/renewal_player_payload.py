@@ -7,8 +7,8 @@ import hashlib
 import json
 
 ROOT = Path(__file__).resolve().parents[2]
-BUILD = Path('/tmp/firstgame-renewal-builds')
-OUT = ROOT / 'Artifacts/Validation/Renewal/Payloads'
+BUILD = Path('/tmp/firstgame-polish-builds')
+OUT = ROOT / 'Artifacts/Validation/Polish/Payloads'
 
 def digest(path):
     value = hashlib.sha256()

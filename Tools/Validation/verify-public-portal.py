@@ -101,12 +101,12 @@ def resolve_stage(value):
     # This exception is deliberately not a general permission to stage in /tmp
     # or to trust an arbitrary ledger-supplied destination.
     lexical = Path(os.path.abspath(value))
-    renewal = lexical == ROOT / "Artifacts/RenewalWebPlaytest"
+    renewal = lexical == ROOT / "Artifacts/PolishWebPlaytest"
     luminous = lexical == ROOT / "Artifacts/LuminousWebPlaytest"
     restoration = lexical == ROOT / "Artifacts/RestorationWebPlaytest"
-    allowed_link = ROOT / ("Artifacts/RenewalWebPlaytest" if renewal else "Artifacts/LuminousWebPlaytest" if luminous else "Artifacts/RestorationWebPlaytest" if restoration else "Artifacts/WebPlaytest")
-    allowed_root = Path("/tmp/firstgame-renewal-staged-site" if renewal else "/tmp/firstgame-luminous-staged-site" if luminous else "/tmp/firstgame-restoration-staged-site" if restoration else "/tmp/firstgame-arcana-staged-site")
-    ledger_path = ROOT / ("Artifacts/Validation/Renewal/generated-stage-storage.json" if renewal else "Artifacts/Validation/Luminous/generated-stage-storage.json" if luminous else "Artifacts/Validation/Restoration/generated-stage-storage.json" if restoration else "Artifacts/Validation/Arcana/generated-stage-storage.json")
+    allowed_link = ROOT / ("Artifacts/PolishWebPlaytest" if renewal else "Artifacts/LuminousWebPlaytest" if luminous else "Artifacts/RestorationWebPlaytest" if restoration else "Artifacts/WebPlaytest")
+    allowed_root = Path("/tmp/firstgame-polish-staged-site" if renewal else "/tmp/firstgame-luminous-staged-site" if luminous else "/tmp/firstgame-restoration-staged-site" if restoration else "/tmp/firstgame-arcana-staged-site")
+    ledger_path = ROOT / ("Artifacts/Validation/Polish/generated-stage-storage.json" if renewal else "Artifacts/Validation/Luminous/generated-stage-storage.json" if luminous else "Artifacts/Validation/Restoration/generated-stage-storage.json" if restoration else "Artifacts/Validation/Arcana/generated-stage-storage.json")
     require(lexical == allowed_link and lexical.is_symlink() and stage == allowed_root
             and stage.is_dir(), "Stage must be inside Artifacts or use the exact recorded Arcana staging link")
     require(ledger_path.is_file() and not ledger_path.is_symlink()

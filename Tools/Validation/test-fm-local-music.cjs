@@ -116,7 +116,8 @@ function setup({ stored = {}, vorbis = true, webAudio = true } = {}) {
   const receive = message => api.receive(message);
   const scene = name => receive({ change: 'scene', scene: name });
   const mute = value => receive({ change: 'muted', muted: value });
-  return { api, elements, media, contexts, gesture, receive, scene, mute, storage, document, advance };
+  const visibility = hidden => { document.hidden = hidden; document.fire('visibilitychange'); };
+  return { api, elements, media, contexts, gesture, receive, scene, mute, visibility, storage, document, advance };
 }
 const CROSSFADE_MS = 550; // Documented equal-power role transition, not a generous timeout.
 const FALLBACK_SETTLE_MS = 560; // First 16ms fallback tick after the 550ms envelope.
@@ -374,4 +375,50 @@ test('bounded transition diagnostics prove restart-at-zero and ignore same-role 
   assert.equal(p.api.getTransitions().length, 24);
   assert.equal(p.contexts.length, 1);
   assert.equal(p.media.length, 4);
+});
+
+test('a hidden tab pauses playback and resumes the same role at its saved playhead', async () => {
+  const p = setup(); p.gesture(); await resolve(p.media[0]); p.advance(7000);
+  const saved = p.media[0].currentTime;
+  p.visibility(true); p.advance(12000);
+  assert.equal(p.media[0].paused, true);
+  assert.equal(p.media[0].currentTime, saved);
+  assert.equal(p.api.getState().suspendedByVisibility, true);
+  assert.equal(p.api.getState().muted, false);
+  p.visibility(false); await resolve(p.media[0]); p.advance(CROSSFADE_MS);
+  assert(p.media[0].currentTime >= saved);
+  assert.equal(p.api.getDiagnostics()[0].restartCount, 1);
+  assert.equal(p.api.getState().sceneTransitionCount, 0);
+});
+
+test('role changes in a hidden tab defer playback and start only the final role at zero', async () => {
+  const p = setup(); p.gesture(); await resolve(p.media[0]); p.advance(1000);
+  p.visibility(true); p.scene('deck'); p.scene('lobby'); p.advance(1000);
+  assert.deepEqual(p.media.map(audio => audio.requests.length), [1, 0, 0, 0]);
+  p.visibility(false); await resolve(p.media[1]);
+  assert.equal(p.api.getState().scene, 'lobby');
+  assert.equal(p.api.getDiagnostics()[1].lastStartPosition, 0);
+  assert.equal(p.api.getDiagnostics()[2].restartCount, 0);
+});
+
+test('a delayed play promise cannot make a hidden tab audible or override an explicit mute', async () => {
+  const p = setup(); p.gesture(); p.visibility(true); await resolve(p.media[0]);
+  assert.equal(p.media[0].paused, true);
+  assert.equal(p.api.getState().actualPaused, true);
+  p.mute(true); p.visibility(false);
+  assert.equal(p.api.getState().muted, true);
+  assert.equal(p.media[0].requests.length, 1);
+  assert.equal(p.contexts[0].gains[0].gain.value, 0);
+});
+
+test('visibility changes cannot unlock autoplay, including direct-media fallback', async () => {
+  const p = setup({ webAudio: false }); p.visibility(true); p.visibility(false);
+  assert.equal(p.api.getState().unlocked, false);
+  assert(p.media.every(audio => audio.requests.length === 0));
+  p.gesture(); await resolve(p.media[0]); p.advance(1000);
+  const saved = p.media[0].currentTime;
+  p.visibility(true); p.advance(1000); p.visibility(false); await resolve(p.media[0]);
+  assert.equal(p.media[0].currentTime, saved);
+  p.advance(FALLBACK_SETTLE_MS);
+  assert(Math.abs(p.media[0].volume - .6) < .001);
 });

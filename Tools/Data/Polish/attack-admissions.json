@@ -1,0 +1,372 @@
+{
+  "sourceSha256": "5c820a6c6be09850cd933fc8dc57a14f85d5761325126ccccc64f03ab5f66aac",
+  "safeAttackCards": [
+    {
+      "sourceId": "10020324679",
+      "name": "아메시타",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격\n\nAP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효)",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10020324681",
+      "name": "호기심요정",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 484,
+        "description": "연합공격\n\nAP 1이상으로 공격시, 아군 필드내 자신과 동일한 능력의 유닛수만큼 AP에추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10020324682",
+      "name": "낭만기사",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10020324684",
+      "name": "남방왕의현자",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 274,
+        "description": "분기공격\n\nAP1이상으로 공격시, 상대 유닛이 DP1이상이면, AP+2/HP+1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10031724759",
+      "name": "글로리로즈",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 225,
+        "description": "무기제압\n\nAP1이상으로 공격시 상대가 장비면 공격 후 상대 AP,DP=0,HP=1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10080425087",
+      "name": "은룡섬의주인",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 701,
+        "description": "투척공격\n\n적 1파괴시, 적 필드 행동가능 다음 유닛 AP/DP/HP -1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10080425089",
+      "name": "검은바다의용",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10080425090",
+      "name": "작은요정",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 43,
+        "description": "공격이용\n\n공격시 자신의 AP수치 반만큼(올림) 적 AP를 감소시키고, 감소된 수치만큼 자신의 AP에 더한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines411–413 calls the stolen AP amount additional damage. Preserve source AP rather than storing that damage bonus as AP."
+      }
+    },
+    {
+      "sourceId": "10080425092",
+      "name": "늙은지니",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격 : AP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "10080425093",
+      "name": "스쿨핸디맨",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 372,
+        "description": "솔버스트\n\n준비턴에 남은 무소울만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines186–188 explicitly consumes all own remaining generic souls. The source card omits this detail; resolve as bonus attack damage while preserving the original description."
+      }
+    },
+    {
+      "sourceId": "12020126134",
+      "name": "손책백부",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 43,
+        "description": "공격이용\n\n공격시 자신의 AP수치 반만큼(올림) 적 AP를 감소시키고, 감소된 수치만큼 자신의 AP에 더한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines411–413 calls the stolen AP amount additional damage. Preserve source AP rather than storing that damage bonus as AP."
+      }
+    },
+    {
+      "sourceId": "13100227067",
+      "name": "유아브카트렌",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 13,
+        "description": "강한방어이용 : AP 1 이상 공격시, 상대 DP를 더한 수치만큼 추가 데미지를 준 후 상대의 DP를 0으로 변경시킨다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "13100227068",
+      "name": "지아오비",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 402,
+        "description": "시간차공격 : AP1이상으로 공격시, Turn의 1의자리수 만큼 추가 데미지",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "14010827215",
+      "name": "매의부족샤먼",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 4,
+        "description": "가치감정 : AP 1 이상 공격시, 상대 등급에 따라 추가데미지를 준다.\n★ 등급별 데미지 :\n레전드, 에픽, 시크릿, 아레나 : +1.\n이벤트, 스페셜, 레어 : +2.\n언커먼, 커먼 : +3",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "14073026942",
+      "name": "나나이",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "7070423103",
+      "name": "카룸무",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격\n\nAP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효)",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "7070423108",
+      "name": "실렌",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 372,
+        "description": "솔버스트\n\n준비턴에 남은 무소울만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines186–188 explicitly consumes all own remaining generic souls. The source card omits this detail; resolve as bonus attack damage while preserving the original description."
+      }
+    },
+    {
+      "sourceId": "8070223547",
+      "name": "듀드티",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 639,
+        "description": "초음파공격\n\nAP 1 이상 공격시, 적 행동가능 다음 유닛은 AP, DP-3.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "8070223548",
+      "name": "아츠카에삭",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 15,
+        "description": "강한은폐공격\n\n공격시 자신의 DP+2.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "8070223551",
+      "name": "게르던",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 375,
+        "description": "솔카운터\n\n아군적군 준비턴에 남은 무소울의 합만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9060324091",
+      "name": "에론",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9080524202",
+      "name": "은룡",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9080524204",
+      "name": "해룡",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 535,
+        "description": "음파공격\n\nAP 1이상으로 공격시, 적군 필드 다음 유닛 AP/DP -2.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9080524221",
+      "name": "고블린",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9090224321",
+      "name": "대지의예언자",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 654,
+        "description": "컨슘\n\nLv2 이하의 적 파괴시, 상대 유닛 HP 흡수.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9090224329",
+      "name": "익스텐드윙",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "9120224507",
+      "name": "켄타우르스",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 391,
+        "description": "숲의연합\n\nAP1 이상 공격시, 자신제외한 아군필드 숲 속성 유닛수 만큼 자신의 AP/HP 증가 후 공격.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    }
+  ],
+  "counts": {
+    "5": 21,
+    "4": 6
+  },
+  "conditionalAttackCards": [
+    {
+      "sourceId": "12110726454",
+      "name": "가르젠티탄",
+      "rarityCode": 5,
+      "skill2": 1,
+      "requiresIntegration": "Second upgrade: each soul-cost stage produce own colored soul1 and generic soul1. Do not admit unless this separate passive is implemented.",
+      "effect": {
+        "sourceSkillCode": 487,
+        "description": "연환공격: AP 1이상으로 공격시, 아군 필드 다음 유닛 AP +1.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    },
+    {
+      "sourceId": "12110726456",
+      "name": "카르티나",
+      "rarityCode": 5,
+      "skill2": 1,
+      "requiresIntegration": "Second upgrade: each soul-cost stage produce own colored soul1 and generic soul1. Do not admit unless this separate passive is implemented.",
+      "effect": {
+        "sourceSkillCode": 247,
+        "description": "방어지원 : AP 1이상으로 공격시, 자신을 제외한 아군 필드 유닛 수=DP가 된다.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      }
+    }
+  ],
+  "excludedConflicts": [
+    {
+      "skillCode": 367,
+      "db": "AP/HP increase",
+      "lateManual": "AP/DP increase"
+    }
+  ]
+}

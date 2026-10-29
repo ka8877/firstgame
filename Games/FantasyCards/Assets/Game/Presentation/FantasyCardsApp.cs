@@ -89,11 +89,12 @@ namespace FantasyCards.Presentation
             { lastViewport = canvas.pixelRect.size; redraw(); }
             if (!locked && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
-                if (battleScreen) LeaveBattle(ShowTitle); else ShowTitle();
+                HandlePolishBack();
             }
         }
         private void Clear()
         {
+            polishBack = null; IsBattleDeskOpen = false;
             HideTooltip();
             musicToggleLabel = musicVolumeLabel = null;
             foreach (Transform child in root) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
@@ -144,6 +145,7 @@ namespace FantasyCards.Presentation
         private void StartBattle(uint seed)
         {
             if (!ValidDeck(customDeck)) { message = "50장 덱과 속성별 지형 구성을 확인하세요."; ShowCollection(true); return; }
+            ResetPolishSession();
             engine = new BattleEngine(seed, authoredRules, playerDeck: CardCatalog.DefaultDeck()); selectedCard = selectedAttacker = -1;
             engine.ConfirmOpeningHand(0, out _);
             message = "지형과 유닛을 준비하고 준비 완료를 누르세요. 전열 순서대로 자동 전투합니다.";
@@ -176,6 +178,7 @@ namespace FantasyCards.Presentation
         private void Act(Func<bool> action)
         {
             if (locked) return;
+            ResetPolishTap();
             var before = engine.State.Copy(); List<BattlePlaybackFrame> frames;
             bool changed;
             engine.BeginPlaybackCapture();

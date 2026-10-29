@@ -14,7 +14,7 @@ def inputs():
  return [{'file':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':sha(p)} for p in sorted(files)]
 def verify_current(record):return record['inputs']==inputs()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--verify',action='store_true');a=p.parse_args();out=ROOT/'Artifacts/Validation/Renewal/Core';out.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--verify',action='store_true');a=p.parse_args();out=ROOT/'Artifacts/Validation/Polish/Core';out.mkdir(parents=True,exist_ok=True)
  if a.verify:
   r=json.loads((out/'binding.json').read_text());assert r['status']=='passed' and verify_current(r) and sha(out/'core-tests.trx')==r['results']['sha256'];print('Current Core source/results binding verified');return
  stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'Attempts'/stamp;attempt.mkdir(parents=True)

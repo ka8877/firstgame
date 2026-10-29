@@ -52,9 +52,9 @@ LUMINOUS = {
 
 RENEWAL = {
     'name': 'renewal',
-    'revisions': {'FantasyCards': 'fm-renewal-2026-10-29', 'PathOfDawn': 'gospel-renewal-2026-10-29'},
+    'revisions': {'FantasyCards': 'fm-polish-2026-10-29', 'PathOfDawn': 'gospel-radiance-2026-10-29'},
     'contents': dict(MODERN['contents']),
-    'reportRoots': {game: 'Artifacts/Validation/Renewal' for game in ('FantasyCards', 'PathOfDawn')},
+    'reportRoots': {game: 'Artifacts/Validation/Polish' for game in ('FantasyCards', 'PathOfDawn')},
     'preservedGames': []
 }
 

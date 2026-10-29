@@ -14,7 +14,7 @@ sys.path.insert(0,str(ROOT/'Tools/Validation'))
 from restoration_source_binding import capture,verify
 SOURCE=ROOT/'Games/FantasyCards/Assets/Resources/Data/Cards'
 STORE=Path('/tmp/firstgame-renewal-draft-authoring')
-JOURNAL=ROOT/'Artifacts/Validation/Renewal/CardDraftRelocation.json'
+JOURNAL=ROOT/'Artifacts/Validation/Polish/CardDraftRelocation.json'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def rows(folder):return [{'file':str(p.relative_to(folder)),'sha256':sha(p),'bytes':p.stat().st_size}for p in sorted(folder.rglob('*'))if p.is_file()]
 def save(r):JOURNAL.parent.mkdir(parents=True,exist_ok=True);temporary=JOURNAL.with_suffix('.tmp');temporary.write_text(json.dumps(r,indent=2)+'\n');temporary.replace(JOURNAL)
@@ -37,7 +37,7 @@ def main():
  subprocess.run([sys.executable,str(ROOT/'Tools/Environment/assert-runtime-idle.py')],check=True)
  assert a.attempt and a.attempt.replace('-','').replace('_','').isalnum()
  if JOURNAL.exists():assert json.loads(JOURNAL.read_text())['state']=='restored','Restore previous attempt first'
- out=ROOT/'Artifacts/Validation/Renewal/FantasyCards'/a.attempt;out.mkdir(parents=True,exist_ok=True);assert not(out/'native.log').exists()
+ out=ROOT/'Artifacts/Validation/Polish/FantasyCards'/a.attempt;out.mkdir(parents=True,exist_ok=True);assert not(out/'native.log').exists()
  STORE.mkdir(exist_ok=True);assert not(STORE/'Cards').exists()
  before=capture('FantasyCards');(out/'inputs-before-relocation.json').write_text(json.dumps(before,indent=2)+'\n')
  r={'state':'planned','attempt':a.attempt,'source':str(SOURCE),'temporary':str(STORE),'files':rows(SOURCE),'folderMetaSha256':sha(SOURCE.with_suffix('.meta')),'scope':'Development-only current Core/UI with incomplete media. No generated authoring, shipping build, full archive, or final validation claim.'};save(r)

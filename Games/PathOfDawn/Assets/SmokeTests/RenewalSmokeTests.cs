@@ -15,7 +15,7 @@ using UnityEngine.UI;
 namespace PathOfDawn.SmokeTests
 {
     /// <summary>Actual current UI/physical input; no scene-pose or story-state injection.</summary>
-    public sealed class RenewalSmokeTests
+    public sealed partial class RenewalSmokeTests
     {
         IDisposable storage; MemorySaveBackend backend; Keyboard keyboard; Mouse mouse;
         InputSettings previousInputs,testInputs; string previousSlot,attempt;bool hadSlot;
@@ -43,7 +43,7 @@ namespace PathOfDawn.SmokeTests
             // Destroy the isolated clone only after that restoration has completed.
             if(testInputs!=null && InputSystem.settings!=testInputs)UnityEngine.Object.DestroyImmediate(testInputs);
         }
-        IEnumerator Shot(string name)=>SmokeUi.Capture("PathOfDawn","renewal-"+attempt+"-"+name,1280,720);
+        IEnumerator Shot(string name)=>SmokeUi.Capture("PathOfDawn","polish-"+attempt+"-"+name,1280,720);
         IEnumerator Key(Key key)
         {InputSystem.QueueStateEvent(keyboard,new KeyboardState(key));yield return null;InputSystem.QueueStateEvent(keyboard,new KeyboardState());yield return null;}
         IEnumerator MoveTo(float goal)
@@ -86,15 +86,15 @@ namespace PathOfDawn.SmokeTests
         {
             yield return BeginJourney();yield return MoveTo(-20);float x=App.Player.Position.x;
             InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.D));yield return new WaitForSecondsRealtime(.25f);
-            for(int i=0;i<3;i++){yield return SmokeUi.Capture("PathOfDawn","renewal-"+attempt+"-walk-right-"+i,1280,720,settleSeconds:0f);yield return new WaitForSecondsRealtime(.13f);}
+            for(int i=0;i<3;i++){yield return SmokeUi.Capture("PathOfDawn","polish-"+attempt+"-walk-right-"+i,1280,720,settleSeconds:0f);yield return new WaitForSecondsRealtime(.13f);}
             InputSystem.QueueStateEvent(keyboard,new KeyboardState());yield return null;Assert.That(App.Player.Position.x-x,Is.GreaterThan(.5f));
             InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.A));yield return new WaitForSecondsRealtime(.25f);
-            for(int i=0;i<3;i++){yield return SmokeUi.Capture("PathOfDawn","renewal-"+attempt+"-walk-left-"+i,1280,720,settleSeconds:0f);yield return new WaitForSecondsRealtime(.13f);}
+            for(int i=0;i<3;i++){yield return SmokeUi.Capture("PathOfDawn","polish-"+attempt+"-walk-left-"+i,1280,720,settleSeconds:0f);yield return new WaitForSecondsRealtime(.13f);}
             InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.D,UnityEngine.InputSystem.Key.LeftShift));yield return new WaitForSecondsRealtime(.35f);yield return Shot("run-right");
             InputSystem.QueueStateEvent(keyboard,new KeyboardState(UnityEngine.InputSystem.Key.A,UnityEngine.InputSystem.Key.LeftShift));yield return new WaitForSecondsRealtime(.35f);yield return Shot("run-left");
             InputSystem.QueueStateEvent(keyboard,new KeyboardState());yield return new WaitForSecondsRealtime(.2f);
             float ground=App.Player.Position.y;yield return Key(UnityEngine.InputSystem.Key.Space);yield return new WaitForSecondsRealtime(.10f);
-            Assert.That(App.Player.Position.y,Is.GreaterThan(ground+.12f));yield return SmokeUi.Capture("PathOfDawn","renewal-"+attempt+"-jump",1280,720,settleSeconds:0f);
+            Assert.That(App.Player.Position.y,Is.GreaterThan(ground+.12f));yield return SmokeUi.Capture("PathOfDawn","polish-"+attempt+"-jump",1280,720,settleSeconds:0f);
             yield return new WaitForSecondsRealtime(1.2f);Assert.That(App.Player.Position.y,Is.EqualTo(ground).Within(.18f));yield return Shot("landed");
             for(int i=0;i<4;i++){InputSystem.QueueDeltaStateEvent(mouse.scroll,new Vector2(0,120));yield return null;}
             yield return new WaitForSecondsRealtime(.6f);Assert.That(App.Zoom,Is.EqualTo(3f).Within(.05f));yield return Shot("close-character");

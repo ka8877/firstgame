@@ -61,6 +61,8 @@ namespace FantasyCards.Presentation
         }
         void Update()
         {
+            // Some cards bind help before attaching their selectable Button.
+            if (button == null) button = GetComponent<Button>();
             if (pendingEnter && hovered && Time.unscaledTime >= enterAt) { pendingEnter = false; Enter?.Invoke(enterPosition); }
             if (pressing && !longPressed && Time.unscaledTime - pressedAt >= .48f)
             {

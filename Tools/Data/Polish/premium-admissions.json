@@ -1,0 +1,973 @@
+{
+  "revision": "fm-polish-2026-10-29",
+  "count": 75,
+  "cards": [
+    {
+      "sourceId": "15100728142",
+      "name": "불꽃의화신",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "2624f7d7b8108e72afa68742b166bd2b8d40ae9c7a03d138eaabbc4a2f529ce7"
+    },
+    {
+      "sourceId": "15100728143",
+      "name": "푸른안개술사",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "acc4aec1cb74abe33c096fb1bce76e553c7e87c90c518c7e8a0510d3ea1c4147"
+    },
+    {
+      "sourceId": "15100728144",
+      "name": "기적의세계수",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "b87ba126d245d8dc06680ad5bfcf65d881184c68bdc61bafa97ae217f46a9935"
+    },
+    {
+      "sourceId": "15100728145",
+      "name": "클락파일럿",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "f19763a99e6f1fa850f335f6ae55d1b81d4c20f2d03d17ce540c9726be5353d2"
+    },
+    {
+      "sourceId": "15100728146",
+      "name": "묘실의수호자",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "7d1364881e416666e702912a420fbb64ef461ac04d603d6a836d6cae99902247"
+    },
+    {
+      "sourceId": "15100728147",
+      "name": "유니코니아",
+      "rarityCode": 11,
+      "effect": {
+        "sourceSkillCode": 493,
+        "description": "영혼의사슬 : 자신 파괴시, 아군 소각장 맨 위에 위치한 유닛을 최대 2개의 유닛을 아군 핸드 빈공간으로 이동시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "ad3f1a904f928a5890dd705a17618493d66feefabae0990846d073c780a5f99c"
+    },
+    {
+      "sourceId": "15051327932",
+      "name": "포넨",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "기선제압\n\n방어시, 상대의 레벨 수치가 자신 레벨 수치 이하이면 자신이 받는 데미지를 1 감소시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "15440a0f60b238e653c3f108a409b954ca4076dcedd816c681b6d1ae108d42ee"
+    },
+    {
+      "sourceId": "15050627918",
+      "name": "리자드제너럴",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 654,
+        "description": "컨슘\n\n적 1 파괴시, 파괴시킨 상대의 레벨 수치가 2 이하이면 공격 전 상대 유닛의 HP 만큼 자신의 HP를 증가시킨다.\n\n기선제압\n\n방어시, 상대의 레벨 수치가 자신 레벨 수치 이하이면 자신이 받는 데미지를 1 감소시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "7720f6aa6303035ccda2d13d956523bc9f26637bbb78557f32d41b1cd6756ca9"
+    },
+    {
+      "sourceId": "15050627919",
+      "name": "베스더레인져",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 49,
+        "description": "공포공격\n\n공격시, 상대 레벨 수치가 자신 레벨 수치 이하이면 추가 1 데미지를 준다.\n\n기선제압\n\n방어시, 상대의 레벨 수치가 자신 레벨 수치 이하이면 자신이 받는 데미지를 1 감소시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "95d6cd3fb0f1512fe4a6dddca6812bb0ba151a395035d6c1cf57760b01776543"
+    },
+    {
+      "sourceId": "15050627920",
+      "name": "젊은메이드장",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 487,
+        "description": "연환공격\n\nAP 1 이상 공격시, 아군 필드 다음 유닛 AP를 1 증가시킨다.\n\n기선제압\n\n방어시, 상대의 레벨 수치가 자신 레벨 수치 이하이면 자신이 받는 데미지를 1 감소시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "08e3a74fd8a2ad0c69b9557f9dbb81d90cd9d4961d8e8c72002517c90ceda578"
+    },
+    {
+      "sourceId": "15050627921",
+      "name": "바일로",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 339,
+        "description": "석화공격\n\nAP 1 이상 공격시, 상대의 AP를 0으로 변경하고, 상대의 DP를 1 증가시킨다.\n\n기선제압\n\n방어시, 상대의 레벨 수치가 자신 레벨 수치 이하이면 자신이 받는 데미지를 1 감소시킨다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "009f62ef86d0024a58f4208f7df883fa4080215eb077b0f97e72657adcff3873"
+    },
+    {
+      "sourceId": "15010727783",
+      "name": "커즈드위치",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 576,
+        "description": "저주공격 : AP 1 이상으로 공격시 상대 AP-2 , DP-2.\n\n▶ 만능능력 : 3차 강화 카드는 만능능력 유닛입니다.\n▶ 아이템 착용에 있어서 제한이 전혀 없는 특징을 갖고 있는 유닛입니다.\n◈ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "58d936a355caf824958f3e03de9edb4fd1be36962ced39c3163880432da079c6"
+    },
+    {
+      "sourceId": "15010727788",
+      "name": "놀스쿼드",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 만능능력 : 3차 강화 카드는 만능능력 유닛입니다.\n▶ 아이템 착용에 있어서 제한이 전혀 없는 특징을 갖고 있는 유닛입니다.\n◈ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "0b47d33bd1be98721294eae49661e58574dc7ca38b6749e29ad050d81c96ce89"
+    },
+    {
+      "sourceId": "15010727789",
+      "name": "워엔젤",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 135,
+        "description": "돌진공격 : 상대를 공격시 자신의 AP에 DP를 더해 공격.\n\n▶ 만능능력 : 3차 강화 카드는 만능능력 유닛입니다.\n▶ 아이템 착용에 있어서 제한이 전혀 없는 특징을 갖고 있는 유닛입니다.\n◈ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "212aea90a6316ea7ef99d15d40882a8eacfe55fe11b3f24bc56ac0f133941b21"
+    },
+    {
+      "sourceId": "14073026942",
+      "name": "나나이",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "ed18cae7a7468a50675787cc682452d53326c7513c1282e878ace541ad889f4e"
+    },
+    {
+      "sourceId": "14010827215",
+      "name": "매의부족샤먼",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 4,
+        "description": "가치감정 : AP 1 이상 공격시, 상대 등급에 따라 추가데미지를 준다.\n★ 등급별 데미지 :\n레전드, 에픽, 시크릿, 아레나 : +1.\n이벤트, 스페셜, 레어 : +2.\n언커먼, 커먼 : +3",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "c5ff916a8df3e69d01c6bc1a27450cadf095dfd84dc960bdf241375d10f1d3d2"
+    },
+    {
+      "sourceId": "13110627110",
+      "name": "살육의전사",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 669,
+        "description": "코인플레임\n\n자신 파괴시, 자신의 코인 앞면수로 적전투 유닛제외 적군전체 HP 데미지.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "52585dc0e8a3844d9a1e7c5974cd8d378b57e50e2b2712acf07b6b9b8fb17868"
+    },
+    {
+      "sourceId": "13110627111",
+      "name": "히어로슬라임",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 473,
+        "description": "에코카피\n\n자신 파괴시, 자신lv 이하 상대방 핸드 유닛 1을 아군 필드 다음 위치에 복사.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "f2077193bb2f0e94c20ef69a0ef1f01e9d3c3bdd5cd1af498ddbae5fb0a75a2c"
+    },
+    {
+      "sourceId": "13110627115",
+      "name": "동아리회장",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 755,
+        "description": "행운훔치기\n\nAP 1 이상으로 공격시 적전체 코인확률 -20%, 아군전체 코인확률+20%.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "80450e812fb063972b88f33d5aab70b6e99590f19b00a7449243a15417201e6b"
+    },
+    {
+      "sourceId": "13100227067",
+      "name": "유아브카트렌",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 13,
+        "description": "강한방어이용 : AP 1 이상 공격시, 상대 DP를 더한 수치만큼 추가 데미지를 준 후 상대의 DP를 0으로 변경시킨다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "24093f3554c6a1f6b69995689240f275585d6f4b5c5dc1d256c5f092b68f431f"
+    },
+    {
+      "sourceId": "13100227068",
+      "name": "지아오비",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 402,
+        "description": "시간차공격 : AP1이상으로 공격시, Turn의 1의자리수 만큼 추가 데미지",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "2667fdfe01393d2bc0aba72a8c8074267db24efeae1fe30ec2fda9669988581f"
+    },
+    {
+      "sourceId": "13100227071",
+      "name": "루요",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 49,
+        "description": "공포공격 : 자신보다 낮거나 같은 레벨을 공격시 자신의 AP+1\n\n프레셔 : 방어시, 아군 필드 빈공간수 절반(내림) 만큼 받은 데미지를 감소시킨다",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 166
+      },
+      "sourceFieldsSha256": "0c5e267d9f079018c7f73a01739a7b039b75f8272244f8e7aec6760bcbdde437"
+    },
+    {
+      "sourceId": "13090427047",
+      "name": "타락한대군주",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 666,
+        "description": "코인예측 : AP 1 이상 공격시, 자신의 코인이 모두 뒷면일 경우 적 AP=0\n\n▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "c2380743c209ecb388fea794c309193c78a0eca3f60fefee897f6bd9cd4ebedc"
+    },
+    {
+      "sourceId": "12110726451",
+      "name": "크롬카인",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격 : AP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효)\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "cb14af574fc364e16a53704f77408cee6ce1541ceeba93cb0b9b3c950cf02087"
+    },
+    {
+      "sourceId": "12110726454",
+      "name": "가르젠티탄",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 487,
+        "description": "연환공격: AP 1이상으로 공격시, 아군 필드 다음 유닛 AP +1.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "41a2c26e16413399cb504fd1c5b9e70d9e28ed6a98a48cc8a117e8357d033e39"
+    },
+    {
+      "sourceId": "12110726455",
+      "name": "사스크리에",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "기선제압 : 적군이 아군보다 이하 레벨일 경우 데미지를 1 덜 받는다.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18,
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "15754ab89bd759623a2e9b1e947dd35e54c8ce423c516fa4a0df90045ba67899"
+    },
+    {
+      "sourceId": "12110726456",
+      "name": "카르티나",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 247,
+        "description": "방어지원 : AP 1이상으로 공격시, 자신을 제외한 아군 필드 유닛 수=DP가 된다.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "f0415a1850dcc732c36124ea17eca04dec7eef76c892096abfc5f378d2002bb1"
+    },
+    {
+      "sourceId": "12020126134",
+      "name": "손책백부",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 43,
+        "description": "공격이용\n\n공격시 자신의 AP수치 반만큼(올림) 적 AP를 감소시키고, 감소된 수치만큼 자신의 AP에 더한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines411–413 calls the stolen AP amount additional damage. Preserve source AP rather than storing that damage bonus as AP."
+      },
+      "sourceFieldsSha256": "3765697f0e9d503ffcc25b5af2fbd309716859f68119059fc0c547e6df379060"
+    },
+    {
+      "sourceId": "11101925989",
+      "name": "본드래곤",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "1b6dd0c3a6f692b56e384ea0e5ae97e3212d772ab4c0c1018c3131a055fe729a"
+    },
+    {
+      "sourceId": "11101925990",
+      "name": "히드라",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "2fcb4785e311e240338dc7748191e0a0dc061c81bc6253a3ac439e6fac112f83"
+    },
+    {
+      "sourceId": "11101925991",
+      "name": "시서펜트",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "68ed7f80c9cf3cf3d1806ffeedebac84c17827d94417d1c323a2a66a5c7eecaa"
+    },
+    {
+      "sourceId": "11101925992",
+      "name": "포레스트웜",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "65e58de418d89fc8c06fbb93c833b0877cd4a87d6fec564e2c82e96f80380890"
+    },
+    {
+      "sourceId": "11101925993",
+      "name": "드래곤나이트",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "04b88c7a80d4a41b8da2849c411374434c9244d7f9a60af262621d9934036dd7"
+    },
+    {
+      "sourceId": "11101925994",
+      "name": "샌드웜",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "6bb159a9da2767751ff01d8acd1d98274b114d350c4457be342790f0e81419c9"
+    },
+    {
+      "sourceId": "11101925995",
+      "name": "람히르",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "▶ 3차 강화 카드는 만능능력 유닛으로 아이템 착용에 있어서 제한이 없습니다.\n▶ 3차 강화 카드는 자기 레벨 미만의 아이템을 장착할 때 소울을 지불하지 않습니다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "freeEquipmentBelowLevel": true
+      },
+      "sourceFieldsSha256": "09af7e27790625a28dcfdc3a37bbdb3fb5e439291d98f166016d9ad50cf2685f"
+    },
+    {
+      "sourceId": "10080425087",
+      "name": "은룡섬의주인",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 701,
+        "description": "투척공격\n\n적 1파괴시, 적 필드 행동가능 다음 유닛 AP/DP/HP -1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "a01989a71fe7654c15961a54e488d28d69bf15fabd9fe2c9999e981d1f133eff"
+    },
+    {
+      "sourceId": "10080425089",
+      "name": "검은바다의용",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "326e552c0cee1989c883161796055b4cadf429c8d8ec010ef938d65f2099df77"
+    },
+    {
+      "sourceId": "10080425090",
+      "name": "작은요정",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 43,
+        "description": "공격이용\n\n공격시 자신의 AP수치 반만큼(올림) 적 AP를 감소시키고, 감소된 수치만큼 자신의 AP에 더한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines411–413 calls the stolen AP amount additional damage. Preserve source AP rather than storing that damage bonus as AP."
+      },
+      "sourceFieldsSha256": "cf11201b68f05ae2a3bcdf2264c64bf85862fc8c9e67499d7c3341feb2efc68a"
+    },
+    {
+      "sourceId": "10080425092",
+      "name": "늙은지니",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격 : AP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "e9c23d8733c15d7f9f817fcce08886e94854ce9fbae64c32dbbbed958795f727"
+    },
+    {
+      "sourceId": "10080425093",
+      "name": "스쿨핸디맨",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 372,
+        "description": "솔버스트\n\n준비턴에 남은 무소울만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines186–188 explicitly consumes all own remaining generic souls. The source card omits this detail; resolve as bonus attack damage while preserving the original description."
+      },
+      "sourceFieldsSha256": "168680416a6a35d2e149886590242bfc340712a7bda61d3ed771676642cb890d"
+    },
+    {
+      "sourceId": "10070724960",
+      "name": "디스트로이어",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "ba48c2ba190c4cb8b9d00e8f73cb4e036ed6a42ddb02a648c08ff15c233166f0"
+    },
+    {
+      "sourceId": "10070724968",
+      "name": "플레임메이커",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "a21ca193767f261f7b3ba7aa64e52d837196b9d75a6a1cc53cdb0683b6d9a5df"
+    },
+    {
+      "sourceId": "10070724975",
+      "name": "수병",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "ced1527ded05d8f12845ae3542c52e9671683ed12f6d954b91cfe32c87e9681a"
+    },
+    {
+      "sourceId": "10070724982",
+      "name": "추방자",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "afd570e5bf9cce2fb50f93631bc995bdb139ebba7df24e01697b6c604a12598b"
+    },
+    {
+      "sourceId": "10070724988",
+      "name": "샤프슈터",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "7b382ce906515998a89341d231edf4179bfc689258e8a27b4a18ddbc5e1bac69"
+    },
+    {
+      "sourceId": "10070724997",
+      "name": "사막의안내자",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "ed6f71040d14716404c4cc416bd73b46b7338aaf2372fb332c0c6c3f1a4148cf"
+    },
+    {
+      "sourceId": "10070725004",
+      "name": "신성의전사",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 662,
+        "description": "코인디펜스\n\n방어시, 자신의 코인 앞면 수 만큼 받는 데미지 감소.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 662
+      },
+      "sourceFieldsSha256": "28fef20869f6f5dd3653404dad2e7bd6821db7aa30bf295d537d8ad2489b8cf0"
+    },
+    {
+      "sourceId": "10050424848",
+      "name": "갑판원",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 535,
+        "description": "음파공격\n\nAP 1이상으로 공격시, 적군 필드 다음 유닛 AP/DP -2.\n\n기선제압\n\n적군이 아군보다 이하 레벨인 경우 상대 AP로 인한 데미지를 1 덜 받는다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "dbcdc77233fde911c8f6d16e031d7b2b1fe32069c7799b6123953849da52a2fd"
+    },
+    {
+      "sourceId": "10031724759",
+      "name": "글로리로즈",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 225,
+        "description": "무기제압\n\nAP1이상으로 공격시 상대가 장비면 공격 후 상대 AP,DP=0,HP=1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "6b8a162e2d61c2b728b33d41b5e30730b308ac68b8c44ec72b5b7d77d763b06c"
+    },
+    {
+      "sourceId": "10022424695",
+      "name": "본드래곤",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 11,
+        "description": "강한공포 : 자신보다 낮거나 같은 레벨을 공격시 AP+2.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "1c4965ba30157adb107639ef7e0a8c0eedd069dd99cef5537f9a56f658b7216e"
+    },
+    {
+      "sourceId": "10022424696",
+      "name": "히드라",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격 : AP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효).\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "1d8f57dc663b4a57675b253f3ebb24449a2a338ccca496293f96f6cbff55d462"
+    },
+    {
+      "sourceId": "10022424699",
+      "name": "드래곤나이트",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 188,
+        "description": "마법숙련 : AP1 이상 공격시, 공격 당한 유닛이 마법이면 +2추가 데미지를 준다.\n\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "ab3a0534ea85f882c183f4a9e3a6bd7eaea73250b03bcdf7fa6f7721961307ff"
+    },
+    {
+      "sourceId": "10022424700",
+      "name": "샌드웜",
+      "rarityCode": 5,
+      "effect": {
+        "sourceSkillCode": 274,
+        "description": "분기공격 : AP1이상으로 공격시, 상대 유닛이 DP1이상이면, AP+2/HP+1.\n▶ 해당 카드는 2차 강화능력을 가지고 있습니다.\n▶ 2차강화능력 : 소울코스트시 해당 유닛의 속성 유소울 1과 무소울1 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "upgradeProduction": true
+      },
+      "sourceFieldsSha256": "e38ce1d6fbbf7644d807bbb0baf92bc6084c64537b6ad360f8d7147776d16edd"
+    },
+    {
+      "sourceId": "10020324679",
+      "name": "아메시타",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격\n\nAP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효)",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "eb7e1d41439c6d1b17af15f1aeb5a5e1eb8fe31e9fe791a17849156921ae7632"
+    },
+    {
+      "sourceId": "10020324681",
+      "name": "호기심요정",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 484,
+        "description": "연합공격\n\nAP 1이상으로 공격시, 아군 필드내 자신과 동일한 능력의 유닛수만큼 AP에추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "9adb16037fd7131fd70e397cebbef092efa5ff86661f74afbc1c59e1d44a6512"
+    },
+    {
+      "sourceId": "10020324682",
+      "name": "낭만기사",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "ccde28ca31d810cc275a0d591196a5b3eebf294b1fc3f3aa5ba8cfdc8c818188"
+    },
+    {
+      "sourceId": "10020324684",
+      "name": "남방왕의현자",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 274,
+        "description": "분기공격\n\nAP1이상으로 공격시, 상대 유닛이 DP1이상이면, AP+2/HP+1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "94b93e397246572a72b2991169a70c5b97580436069754efb0242a2e833375dd"
+    },
+    {
+      "sourceId": "9120224507",
+      "name": "켄타우르스",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 391,
+        "description": "숲의연합\n\nAP1 이상 공격시, 자신제외한 아군필드 숲 속성 유닛수 만큼 자신의 AP/HP 증가 후 공격.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "c384551529dcfc837879095276cd144f741d4fb25b7172d2ed9d63ebb317e0f2"
+    },
+    {
+      "sourceId": "9090224321",
+      "name": "대지의예언자",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 654,
+        "description": "컨슘\n\nLv2 이하의 적 파괴시, 상대 유닛 HP 흡수.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "929cba26d294a7988e55ea77132762244956877afd6805227999a3b158a750a3"
+    },
+    {
+      "sourceId": "9090224329",
+      "name": "익스텐드윙",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "55dfc583ee3f82a5c1f07f6ef0981e8f9bb6848989784d81ba09461a5c4ab691"
+    },
+    {
+      "sourceId": "9080524202",
+      "name": "은룡",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "13153b171209715826654bae14f2195c71ff1499627a6daa7de1a006cd4fb38b"
+    },
+    {
+      "sourceId": "9080524204",
+      "name": "해룡",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 535,
+        "description": "음파공격\n\nAP 1이상으로 공격시, 적군 필드 다음 유닛 AP/DP -2.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "70d9782e6ca89ea4d46bab8de35b3984fa1b5b4e47876d3dc89e5b7c0c3fa3ab"
+    },
+    {
+      "sourceId": "9080524221",
+      "name": "고블린",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 209,
+        "description": "멀티어택\n\nAP1이상으로 공격시, 적 다음 유닛 HP-1.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "f9b55d503c26c1cb6766dbdfec1b8c3a9d4c227ee8285f1cb0256981fc486b4a"
+    },
+    {
+      "sourceId": "9070124178",
+      "name": "수호천사",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 374,
+        "description": "솔생성\n\nAP1 이상으로 공격시 자신의 속성 소울 1개를 다음턴에 추가한다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "6f72e42bc5bdffa00d07864c3f257e65c5bc488b5487a544c61589c25874f16b"
+    },
+    {
+      "sourceId": "9060324063",
+      "name": "파이어뮤지션",
+      "rarityCode": 4,
+      "effect": {
+        "sourceSkillCode": 1,
+        "description": "기선제압\n\n적군이 아군보다 이하 레벨일 경우 데미지를 1 덜 받는다.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "sourceDefenseSkillCode": 18
+      },
+      "sourceFieldsSha256": "86f70bdd58e2bb79e016d5193b978c04de144ec87b661e8232085c10a049b7b1"
+    },
+    {
+      "sourceId": "9060324091",
+      "name": "에론",
+      "rarityCode": 4,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 453,
+        "description": "약탈공격\n\nAP 1이상으로 공격시, 자신과 상대의 코인 수 차이만큼 추가데미지.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "c252e562d27fb48730440e21ef156ac7038d1b4d994ee20267caabfaa313b870"
+    },
+    {
+      "sourceId": "8070223547",
+      "name": "듀드티",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 639,
+        "description": "초음파공격\n\nAP 1 이상 공격시, 적 행동가능 다음 유닛은 AP, DP-3.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "21f4d12def16d406f2f50051511595c878d4c223fc1c80f342ea962be3b5f3e9"
+    },
+    {
+      "sourceId": "8070223548",
+      "name": "아츠카에삭",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 15,
+        "description": "강한은폐공격\n\n공격시 자신의 DP+2.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "3aa7dc3de2c9a380101e7ca8351d1e452013e2e36a3bc4d2fcf0453bc2f0ea1d"
+    },
+    {
+      "sourceId": "8070223551",
+      "name": "게르던",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 375,
+        "description": "솔카운터\n\n아군적군 준비턴에 남은 무소울의 합만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "fa576e91baf1b3486dc59a2500b66553b36f48c0a4fb27875dc8c32e272eec4f"
+    },
+    {
+      "sourceId": "7070423103",
+      "name": "카룸무",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 775,
+        "description": "화염공격\n\nAP1 이상으로 공격시 상대는 DP-1, HP-1(DP에 막힐 시 무효)",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "502fd2e3d1d9f6913b457eb66398d6f24797410c5a2b1d04ac372f1c66616665"
+    },
+    {
+      "sourceId": "7070423108",
+      "name": "실렌",
+      "rarityCode": 5,
+      "skill2": 1,
+      "effect": {
+        "sourceSkillCode": 372,
+        "description": "솔버스트\n\n준비턴에 남은 무소울만큼 자신의 AP에 더하여 공격한다.",
+        "premiumImplementation": "BattleEngine.PolishAttack.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt",
+        "lateManualNote": "Late official FAQ736 lines186–188 explicitly consumes all own remaining generic souls. The source card omits this detail; resolve as bonus attack damage while preserving the original description."
+      },
+      "sourceFieldsSha256": "4ac01d31d6acaede3c4fc221a920d5477a552c342483fc115274a08ac849446b"
+    },
+    {
+      "sourceId": "4021320946",
+      "name": "리크리에이터",
+      "rarityCode": 7,
+      "effect": {
+        "sourceSkillCode": 179,
+        "description": "리크리에이트\nAP 1 이상으로 공격시 아군 소각장 맨 위 아이템 1을 자신에게 장착한다.\n▶ 소각장에 위치한 아이템을 원래의 능력치로 이용합니다.(기호제외)",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "6c96deefaa69394a685e19e45383710280c72f3f1c28a8df733dae932f017c56"
+    },
+    {
+      "sourceId": "3061320558",
+      "name": "머메프린스",
+      "rarityCode": 7,
+      "effect": {
+        "sourceSkillCode": 368,
+        "description": "소울회수\n\n상대를 소멸시키면 다음턴 소울 생성시 소멸유닛의 소환소울 추가.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "294823005bd4f919330d9aa6a503e479505912853eae713ddda8f2f6ed1b95aa"
+    },
+    {
+      "sourceId": "3041120436",
+      "name": "카오스마스터",
+      "rarityCode": 7,
+      "effect": {
+        "sourceSkillCode": 131,
+        "description": "데스미로잉\n\n자신 파괴시, 파괴시킨 유닛이 자신 레벨 미만이면 다음 위치에 해당 카드 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "cdba0199dc90a64b2f377666c0a5eaac92fb89d1aee98c2529c606100cfe123a"
+    },
+    {
+      "sourceId": "3022820396",
+      "name": "스파클러",
+      "rarityCode": 7,
+      "effect": {
+        "sourceSkillCode": 371,
+        "description": "솔리스톨\n\n자신 파괴시, 자신의 소환소울만큼 아군 다음턴 소울 생성.",
+        "premiumImplementation": "BattleEngine.Polish.cs",
+        "lateManual": "Tools/Research/FmRenewal/faq736-text.txt"
+      },
+      "sourceFieldsSha256": "9b230f87013d05666bee3c9ce37a725f08daf71168fff4682348fee4067c5af1"
+    }
+  ],
+  "scope": "Explicit complete premium abilities; original metadata, stats, art and IDs retained. Unsupported aura/status/fixed-symbol/hero rules remain view-only."
+}

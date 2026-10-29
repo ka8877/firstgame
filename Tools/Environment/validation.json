@@ -1,29 +1,29 @@
 {
   "releaseProfile": "renewal",
   "date": "2026-10-29",
-  "updatedUtc": "2026-10-29T06:15:52.545594+00:00",
+  "updatedUtc": "2026-10-29T10:04:42.039964+00:00",
   "gameRevisions": {
-    "FantasyCards": "fm-renewal-2026-10-29",
-    "PathOfDawn": "gospel-renewal-2026-10-29"
+    "FantasyCards": "fm-polish-2026-10-29",
+    "PathOfDawn": "gospel-radiance-2026-10-29"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "scope": "Current two-game Renewal work. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
+  "scope": "Current Polish/Radiance revisions through the existing renewal release profile. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
   "core": {
-    "passed": 170,
+    "passed": 215,
     "failed": 0,
     "notExecuted": 0,
     "results": {
-      "file": "Artifacts/Validation/Renewal/Core/core-tests.trx",
-      "sha256": "ff76a6ebd244c39f3587e2ee53762d8bc9830a872ec617afbb263e99ffe6f670",
-      "bytes": 232290
+      "file": "Artifacts/Validation/Polish/Core/core-tests.trx",
+      "sha256": "5e0be37b5fa1d0b1669a3c72dc3dadacd9c6369483f8a131d50fe12931638acd",
+      "bytes": 288654
     },
     "binding": {
-      "file": "Artifacts/Validation/Renewal/Core/binding.json",
-      "sha256": "6420c53b001b1920b974f90cf755745ab5b56d83c4e36e50e76a3ba5db8c1720",
-      "bytes": 32814
+      "file": "Artifacts/Validation/Polish/Core/binding.json",
+      "sha256": "a08e5307244ae26c092d5400f25c4c82e08877dcc4fa7ef9c52be75749a8c80c",
+      "bytes": 33753
     }
   },
   "native": {
@@ -32,23 +32,23 @@
       "failed": 0,
       "skipped": 0,
       "mechanicalStatus": "passed",
-      "sourceFingerprint": "8818343d56284aa4ce13b3297849df72295a2907c362c69aefbc226e4930de7e",
+      "sourceFingerprint": "3c3ea6bde86fd039d43afd4af0a825b802aea48687686656cea1f2e11b2c1532",
       "binding": {
-        "file": "Artifacts/Validation/Renewal/Native/FantasyCards/binding.json",
-        "sha256": "50b4073292ebec0ad538e32175c5fa9fc3660a9bf94b81a66a728e7a038711bf",
-        "bytes": 588
+        "file": "Artifacts/Validation/Polish/Native/FantasyCards/binding.json",
+        "sha256": "733b12b954c5254a08ae6c94d2219ecf9fc877c42f164fcea7769945340b3e87",
+        "bytes": 587
       },
       "results": {
-        "file": "Artifacts/Validation/Renewal/Native/FantasyCards/native.xml",
-        "sha256": "b21d91a3f0e345b92b97c10783a9f606dfd3d74b58e39d8bcb86a1bf70d5d3ac",
-        "bytes": 12285
+        "file": "Artifacts/Validation/Polish/Native/FantasyCards/native.xml",
+        "sha256": "934eacc589cdac5af0f872ac38a8c1f9bfde46f3ee5660473dda5bfdaa5f7c01",
+        "bytes": 12284
       },
       "rootReview": {
         "status": "approved",
         "evidence": {
-          "file": "Artifacts/Validation/Renewal/Root/cards-native-review.json",
-          "sha256": "115908c48fb6c87450a207a970f3495525c3d1ce55944895873bb01f47f5a779",
-          "bytes": 9471
+          "file": "Artifacts/Validation/Polish/Root/cards-native-review.json",
+          "sha256": "dfcba347b46793f2fd1c1d1af938132de8706c3ad7b5a1600a63f815ef5718ac",
+          "bytes": 4795
         }
       }
     },
@@ -57,23 +57,23 @@
       "failed": 0,
       "skipped": 0,
       "mechanicalStatus": "passed",
-      "sourceFingerprint": "7dac7a4a040c329778e6224c9bf53c79dcccb6114147401180a65c3ef77dabb3",
+      "sourceFingerprint": "0ac9dece22521a074add4b521ce1a52aefde938893d0fff9e9b3ecb30a4224ab",
       "binding": {
-        "file": "Artifacts/Validation/Renewal/Native/PathOfDawn/binding.json",
-        "sha256": "b96cffc27bcf9ba904595fe3ad33f29e9c1bc18e54938555e0bff670f522542f",
-        "bytes": 584
+        "file": "Artifacts/Validation/Polish/Native/PathOfDawn/binding.json",
+        "sha256": "b803eaa7ef69784f0b989aaa970d64e62a18eacbc42d15fcebdf461364f8a637",
+        "bytes": 583
       },
       "results": {
-        "file": "Artifacts/Validation/Renewal/Native/PathOfDawn/native.xml",
-        "sha256": "00ec1aecc32ae2fa30b98e9b4f3a80d948660d821601d6da79b2e0c6c8409d20",
-        "bytes": 6237
+        "file": "Artifacts/Validation/Polish/Native/PathOfDawn/native.xml",
+        "sha256": "8669ff27e20e100e2dc1598a76785d3ed9ac3066eb78efcab61319ef868484c7",
+        "bytes": 6224
       },
       "rootReview": {
         "status": "approved",
         "evidence": {
-          "file": "Artifacts/Validation/Renewal/Root/gospel-native-review.json",
-          "sha256": "67c5c0cb4cb58a3e8395e74b412a10ca588fcce37325630a025e39a83a9096b7",
-          "bytes": 5268
+          "file": "Artifacts/Validation/Polish/Root/gospel-native-review.json",
+          "sha256": "5b5e6290e63b79ced760a65cbb45eee61493fe63b6ac5376297b85423c4d9132",
+          "bytes": 5203
         }
       }
     }
@@ -82,73 +82,73 @@
     "FantasyCards": {
       "Windows": {
         "result": "Succeeded",
-        "revision": "fm-renewal-2026-10-29",
-        "sourceFingerprint": "8818343d56284aa4ce13b3297849df72295a2907c362c69aefbc226e4930de7e",
+        "revision": "fm-polish-2026-10-29",
+        "sourceFingerprint": "3c3ea6bde86fd039d43afd4af0a825b802aea48687686656cea1f2e11b2c1532",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-renewal-builds/FantasyCards/Windows/BuildEvidence.txt",
-          "sha256": "2ad8c1a2cae686178da3060e2ae44691c4cd6464d967d1a9d979f32b19a32dcd",
-          "bytes": 275
+          "file": "/tmp/firstgame-polish-builds/FantasyCards/Windows/BuildEvidence.txt",
+          "sha256": "6e746453844aaef21309896109f58fd0d6a746683492265d188409d32675b6d1",
+          "bytes": 274
         },
         "inputs": {
-          "file": "/tmp/firstgame-renewal-builds/FantasyCards/Windows/BuildInputs.json",
-          "sha256": "e218bf199bc5320cd19f3502f620db2691bb663512ef0e542aec0817fcaedc6c",
-          "bytes": 8064602
+          "file": "/tmp/firstgame-polish-builds/FantasyCards/Windows/BuildInputs.json",
+          "sha256": "25d8df16c242b5472ddcfd35fc8a405ac432eb4bc34750ca1ce6b60663451eaf",
+          "bytes": 8084230
         }
       },
       "Web": {
         "result": "Succeeded",
-        "revision": "fm-renewal-2026-10-29",
-        "sourceFingerprint": "8818343d56284aa4ce13b3297849df72295a2907c362c69aefbc226e4930de7e",
+        "revision": "fm-polish-2026-10-29",
+        "sourceFingerprint": "3c3ea6bde86fd039d43afd4af0a825b802aea48687686656cea1f2e11b2c1532",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-renewal-builds/FantasyCards/Web/BuildEvidence.txt",
-          "sha256": "ba86765334d7b568cc28de00e440a113ec5f36a41c3fb5242ddc11268646689e",
-          "bytes": 260
+          "file": "/tmp/firstgame-polish-builds/FantasyCards/Web/BuildEvidence.txt",
+          "sha256": "9bcf0c3e047e9d7bf87e35c3f74d6b4a8b7a8407bfbcf1729d2b8020db2e8f05",
+          "bytes": 259
         },
         "inputs": {
-          "file": "/tmp/firstgame-renewal-builds/FantasyCards/Web/BuildInputs.json",
-          "sha256": "64d808522f3277275fa18ff83022ceb24ff45d9271e37629775b30726248b459",
-          "bytes": 8064602
+          "file": "/tmp/firstgame-polish-builds/FantasyCards/Web/BuildInputs.json",
+          "sha256": "0c738367c9ab1f1eaff690963c9b92f9829dcbc16b2710d8b6effb16df808a0a",
+          "bytes": 8084230
         },
         "runtimeFiles": 15365,
-        "runtimeBytes": 862432534
+        "runtimeBytes": 862483045
       }
     },
     "PathOfDawn": {
       "Windows": {
         "result": "Succeeded",
-        "revision": "gospel-renewal-2026-10-29",
-        "sourceFingerprint": "7dac7a4a040c329778e6224c9bf53c79dcccb6114147401180a65c3ef77dabb3",
+        "revision": "gospel-radiance-2026-10-29",
+        "sourceFingerprint": "0ac9dece22521a074add4b521ce1a52aefde938893d0fff9e9b3ecb30a4224ab",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-renewal-builds/PathOfDawn/Windows/BuildEvidence.txt",
-          "sha256": "f478ddb967591096ffd045fd10fed32aa4777e2bbfa4c9ed84984ddd412584aa",
+          "file": "/tmp/firstgame-polish-builds/PathOfDawn/Windows/BuildEvidence.txt",
+          "sha256": "5c67e6dcd8a8ec590fc364674e9a17fc405a3ac30d03635bdfd1800bd3f4bfab",
           "bytes": 434
         },
         "inputs": {
-          "file": "/tmp/firstgame-renewal-builds/PathOfDawn/Windows/BuildInputs.json",
-          "sha256": "438318b1ac19361956690f7b7630db9d4c8030e9e296b8e3b219da6330cde348",
-          "bytes": 342806
+          "file": "/tmp/firstgame-polish-builds/PathOfDawn/Windows/BuildInputs.json",
+          "sha256": "343e21956db6a97bff83ac8329186067f62894394dd619b1ffdbb184d5e7f37b",
+          "bytes": 347548
         }
       },
       "Web": {
         "result": "Succeeded",
-        "revision": "gospel-renewal-2026-10-29",
-        "sourceFingerprint": "7dac7a4a040c329778e6224c9bf53c79dcccb6114147401180a65c3ef77dabb3",
+        "revision": "gospel-radiance-2026-10-29",
+        "sourceFingerprint": "0ac9dece22521a074add4b521ce1a52aefde938893d0fff9e9b3ecb30a4224ab",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-renewal-builds/PathOfDawn/Web/BuildEvidence.txt",
-          "sha256": "f8d737ff56276ec9d89e5c5d3d468c98967ad3d5f81215d000bb0518fdb5ca87",
+          "file": "/tmp/firstgame-polish-builds/PathOfDawn/Web/BuildEvidence.txt",
+          "sha256": "fde811e97094281f5f4a2d13aec342d44203d0ed2393ddac82ac4a82849c3547",
           "bytes": 411
         },
         "inputs": {
-          "file": "/tmp/firstgame-renewal-builds/PathOfDawn/Web/BuildInputs.json",
-          "sha256": "5071c25af86dc731aaa2c472fbf2f9ea952e72e21548ab436083fe392af09cb0",
-          "bytes": 342806
+          "file": "/tmp/firstgame-polish-builds/PathOfDawn/Web/BuildInputs.json",
+          "sha256": "720f9a0423ce08e038d2ba3f3fc974d09a358f74a5caaeebfaf8aa377df3d277",
+          "bytes": 347548
         },
         "runtimeFiles": 5,
-        "runtimeBytes": 55870584
+        "runtimeBytes": 65314498
       }
     }
   },
@@ -156,105 +156,71 @@
     "FantasyCards": {
       "Desktop720": {
         "mechanicalStatus": "passed",
-        "checks": 92,
+        "checks": 86,
         "report": {
-          "file": "Artifacts/Validation/Renewal/Desktop720/FantasyCards/report.json",
-          "sha256": "ec0ec6feeca490cbd8adf3e46253b90de39364d84d7ff0f9057610b379c4df2f",
-          "bytes": 12457331
+          "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/report.json",
+          "sha256": "ac7a27e518e9695a13ce3b5e565d2226f15628d1270f8d189270c386040d7131",
+          "bytes": 12386017
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 21
+        "approvedOriginals": 15
       },
       "Mobile844": {
         "mechanicalStatus": "passed",
-        "checks": 95,
+        "checks": 86,
         "report": {
-          "file": "Artifacts/Validation/Renewal/Mobile844/FantasyCards/report.json",
-          "sha256": "86f11957cb7d38b5728d44c436acd3cd5ceed345d8bb542a532f2b6c15a0786e",
-          "bytes": 12467120
+          "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/report.json",
+          "sha256": "36e4a197437368ee533e28705c15d2c382b59e847b2eed6d6029eebdd5ff1829",
+          "bytes": 12381192
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 20
-      },
-      "PublicMobile844": {
-        "mechanicalStatus": "passed",
-        "checks": 34,
-        "report": {
-          "file": "Artifacts/Validation/Renewal/PublicMobile844/FantasyCards/report.json",
-          "sha256": "b33f021f7f65207e9d6c0b686cdb3cad24366376c70a8f2964bdc58e729dc66e",
-          "bytes": 17777108
-        },
-        "visualReview": "approved",
-        "status": "verified",
-        "approvedOriginals": 2
+        "approvedOriginals": 12
       }
     },
     "PathOfDawn": {
       "Desktop720": {
         "mechanicalStatus": "passed",
-        "checks": 48,
+        "checks": 30,
         "report": {
-          "file": "Artifacts/Validation/Renewal/Desktop720/PathOfDawn/report.json",
-          "sha256": "83786185dcdfa82bcf29d7a3b947ef0d1d3b92576cf9ccfb6788b57b341b4537",
-          "bytes": 245658
+          "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/report.json",
+          "sha256": "814ae8d6567ba0a7191b283601522c66682d17fd7993a017c61fee5152c0f38a",
+          "bytes": 143235
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 12
+        "approvedOriginals": 8
       },
       "Mobile844": {
         "mechanicalStatus": "passed",
-        "checks": 61,
+        "checks": 32,
         "report": {
-          "file": "Artifacts/Validation/Renewal/Mobile844/PathOfDawn/report.json",
-          "sha256": "b1be1247897bfd75577c1c55ba9bf03f97a035b6014a0f84f6e2ecec9e40f0ac",
-          "bytes": 378789
+          "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/report.json",
+          "sha256": "22c6d211706776a10c35dd1a52425c8db415cac1edaec35a1f4db75e4df8da56",
+          "bytes": 215831
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 11
-      },
-      "PublicMobile844": {
-        "mechanicalStatus": "passed",
-        "checks": 20,
-        "report": {
-          "file": "Artifacts/Validation/Renewal/PublicMobile844/PathOfDawn/report.json",
-          "sha256": "2730fa6ec44947b8b7ac815a006b67b0f7686cc448faa4f53806ce86a4e806a5",
-          "bytes": 63201
-        },
-        "visualReview": "approved",
-        "status": "verified",
-        "approvedOriginals": 4
+        "approvedOriginals": 6
       }
     }
   },
   "publication": {
-    "status": "verified",
+    "status": "pending",
     "url": "https://ka8877.github.io/firstgame/",
-    "stageManifest": {
-      "file": "/tmp/firstgame-renewal-staged-site/build-manifest.json",
-      "sha256": "34e400b9fa5ca8714ca0df32d5d7d22ef6c43a198641e80a2c3aba4ba09419ee",
-      "bytes": 2105885
-    },
-    "publicReport": {
-      "file": "Artifacts/Validation/Renewal/PublicPortal/report.json",
-      "sha256": "8956303054dadfe324dec8e6f207e3d4c486a4fbb258557be08af625724adf38",
-      "bytes": 10221246
-    },
-    "verifiedFiles": 15393,
-    "scope": "Every staged file fetched and hashed; actual portal originals reviewed by Root."
+    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
     "Native save fixtures and real browser storage/full reload are separate checks.",
     "Actual WebAudio route/PCM evidence is not human speaker listening.",
+    "Actual OS/tab visibility pause was not measurable in this virtual Chromium; controller regressions and normal-focus PCM are separate evidence.",
     "Root original-image review is not user aesthetic approval.",
     "Original archive metadata/media and implemented playable abilities are separate scopes."
   ],
   "cardMediaLastAudit": {
-    "revision": "fm-renewal-2026-10-29",
+    "revision": "fm-polish-2026-10-29",
     "releaseReady": true,
     "inventoryOnly": false,
     "sourceRecords": 15350,
@@ -262,10 +228,10 @@
     "missingStreamedImages": 0,
     "deliveryBytes": 749704026,
     "playableCoverage": {
-      "total": 2571,
+      "total": 2646,
       "embeddedPreserved": 605,
-      "streamedAvailable": 1966,
-      "artAvailable": 2571,
+      "streamedAvailable": 2041,
+      "artAvailable": 2646,
       "missing": 0
     },
     "archiveCoverage": {
@@ -276,18 +242,31 @@
     "missingIdLedger": "Tools/Data/Renewal/missing-media.json",
     "evidence": {
       "file": "Tools/Data/Renewal/media-verification.json",
-      "sha256": "c5d2df3aeb28c6dd3776daeb8c4ab2ba7095b7a658b14a0383d80ea5e4b0c5df",
-      "bytes": 546
+      "sha256": "f6377c3df8c0dc88973082ca6c10c2f186549897d97db063d89d7ffb22830509",
+      "bytes": 545
     },
     "scope": "Last retained audit; in-progress download counts are not a complete media release pass."
   },
-  "sourceClipLoopOutput": {
-    "status": "passed",
-    "scope": "Media-only actual browser output of current source OGG/MP3 clips. No Unity player, game music-controller transitions, SFX integration, human listening or public deployment claim. Natural playback from zero through first wrap; never seeks.",
+  "actualOsVisibility": {
+    "status": "not-measured-in-this-environment",
     "report": {
-      "file": "Artifacts/Validation/Renewal/AudioClipLoops/report.json",
-      "sha256": "d676ed0c1b46f832b5dced733869211b163c3a48e2be9726fe4f6cd4e89db05b",
-      "bytes": 28678
+      "file": "Artifacts/Validation/Polish/Audio/visibility-environment-limit.json",
+      "sha256": "4ca29f4c0c646d817025c996dd0a86ffa7238091cfd055852a3c69a6937c330f",
+      "bytes": 4341
     }
+  },
+  "supplementalCardNoteProof": {
+    "mechanicalStatus": "passed",
+    "report": {
+      "file": "Artifacts/Validation/Polish/NotesCorrection/FantasyCards/report.json",
+      "sha256": "29dff4a7bdd42f55105b97f6185b3dd64e80a4314e7ae332827c38ce4ca833ed",
+      "bytes": 8018142
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Polish/Root/cards-notes-correction-review.json",
+      "sha256": "71f2e4584f7c23c5ffa5f65b78c692fc90cd09ac8c8d812950ef65c332769fe9",
+      "bytes": 3573687
+    },
+    "scope": "Ordinary ASCII note entry on the same frozen runtime; the empty automated Korean-note input is not successful note proof. Immediate-return capture is not a settled-font legibility claim."
   }
 }

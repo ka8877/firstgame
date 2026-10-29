@@ -98,7 +98,9 @@ namespace FantasyCards.Presentation
                 if (index < 0) return;
             }
             var source = voices[index]; source.Stop(); source.clip = clip;
-            float level = cue == "ui-hover" ? .62f : cue == "click" ? .86f : 1;
+            // Interface movement stays behind the card, coin and impact layers.
+            // Preserve a cue's balance when the user adjusts the global slider.
+            float level = MixLevel(cue);
             if (variation < 0) { variations.TryGetValue(cue, out variation); variations[cue] = variation + 1; }
             // Small deterministic timbre variations do not touch gameplay RNG.
             bool vary = cue.StartsWith("card-") || cue.StartsWith("coin") || cue == "hit" || cue == "attack" || cue == "counter";
@@ -119,6 +121,22 @@ namespace FantasyCards.Presentation
             if (cue == "ui-hover") return 0;
             if (cue == "click" || cue == "card-select" || cue == "card-pick" || cue == "cancel") return 1;
             return 2;
+        }
+        private static float MixLevel(string cue)
+        {
+            switch (cue)
+            {
+                case "ui-hover": return .30f;
+                case "click": return .70f;
+                case "card-select": return .68f;
+                case "card-pick": return .82f;
+                case "cancel": return .72f;
+                case "card-draw": return .88f;
+                case "card-land": return .84f;
+                case "stat-up": case "stat-down": return .78f;
+                case "coin-head": case "coin-tail": return .92f;
+                default: return 1;
+            }
         }
         private static string ResolveCue(string cue)
         {

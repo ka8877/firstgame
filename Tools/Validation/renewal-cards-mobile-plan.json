@@ -1,6 +1,6 @@
 {
   "FantasyCards": {
-    "revision": "fm-renewal-2026-10-29",
+    "revision": "fm-polish-2026-10-29",
     "suite": "modern-real-input-v1",
     "coordinates": "normalized canvas top-left origin",
     "requiredCheckpoints": [
@@ -8,25 +8,20 @@
       "sound-settings",
       "lobby",
       "profile",
-      "scenario-list",
-      "multiplayer-preparation",
-      "mono-decks",
-      "mono-decks-last-page",
-      "dual-decks",
-      "all-decks-last-page",
       "playable-high-grades",
+      "rare-playable-filter",
       "archive-originals",
-      "late-secret-search",
-      "late-secret-original-detail",
-      "all-original-grades",
-      "secret-originals",
-      "original-card-gallery",
-      "secret-card-detail",
-      "original-printed-card",
+      "playable-gallery",
+      "new-special-detail",
+      "new-special-original-print",
       "opening-original-hand",
       "backfield-terrain",
       "original-hand-and-field",
+      "opponent-info",
+      "battle-event-feed",
+      "local-practice-note",
       "terrain-detail",
+      "terrain-detail-closed",
       "ready-resolution-01",
       "ready-resolution-02",
       "ready-resolution-03",
@@ -40,6 +35,7 @@
       "ready-resolution-11",
       "ready-resolution-12",
       "post-ready-field",
+      "resolved-battle-event-feed",
       "saved-battle",
       "continued-battle",
       "continued-profile",
@@ -292,140 +288,6 @@
       {
         "type": "click",
         "point": [
-          0.398,
-          0.189
-        ],
-        "label": "SCENARIO 탭",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "scenario-list",
-        "expected": "새싱글시나리오4과제가추천덱과순차잠금상태로보인다. 첫과제입장이실제가능하고완료하지않은다음과제는잠겨있다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.634,
-          0.189
-        ],
-        "label": "MULTI 탭",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "multiplayer-preparation",
-        "expected": "멀티플레이 대기실은 준비 중으로 명시되고 현재AI싱글 제공과 추후 방/초대/매칭 안내가 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.162,
-          0.189
-        ],
-        "label": "ROOM 탭",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.112,
-          0.909
-        ],
-        "label": "기본 덱",
-        "settleMs": 900
-      },
-      {
-        "type": "audio",
-        "label": "deck-role-instrumental"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.3225,
-          0.244
-        ],
-        "label": "단일 속성 필터",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "mono-decks",
-        "expected": "현재 덱 실제 카드 구성에 따른 단일 속성 필터가 적용된다. 새 시크릿 단일 덱과 기존 덱을 포함하며, 옛 7개라는 고정 수를 요구하지 않는다."
-      },
-      {
-        "type": "audio",
-        "label": "deck-same-role-instrumental"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.895,
-          0.8875
-        ],
-        "label": "현재 단일 속성 덱의 마지막 페이지",
-        "settleMs": 900,
-        "repeat": 3
-      },
-      {
-        "type": "checkpoint",
-        "name": "mono-decks-last-page",
-        "expected": "단일 속성 필터의 마지막 페이지이며 다음 버튼이 비활성이다. 각 덱은 실제 50장이고 표시한 속성과 일치한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.5125,
-          0.244
-        ],
-        "label": "듀얼 속성 필터",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "dual-decks",
-        "expected": "듀얼 필터에서 실제 두 속성을 사용하는 덱만 보인다. 단일 시크릿 덱이 듀얼로 잘못 분류되지 않는다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.1325,
-          0.244
-        ],
-        "label": "전체 기본 덱",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.895,
-          0.8875
-        ],
-        "label": "기본 덱 마지막 페이지",
-        "settleMs": 650,
-        "repeat": 6
-      },
-      {
-        "type": "checkpoint",
-        "name": "all-decks-last-page",
-        "expected": "전체 기본 덱 목록의 마지막 페이지에 도달한다. 마지막 카드 구성과 실제 전체 덱 수가 맞고 다음 버튼은 비활성이다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.155,
-          0.963
-        ],
-        "label": "덱에서 대기실",
-        "settleMs": 900
-      },
-      {
-        "type": "audio",
-        "label": "lobby-return-instrumental"
-      },
-      {
-        "type": "click",
-        "point": [
           0.532,
           0.909
         ],
@@ -436,6 +298,42 @@
         "type": "checkpoint",
         "name": "playable-high-grades",
         "expected": "스페셜·유니크·레전드·시크릿 네 출전 등급의 대표 원본과 실제 개수가 보이며 전체 원본 도감 버튼과 구분된다."
+      },
+      {
+        "type": "audio",
+        "label": "premium-deck-instrumental"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.855,
+          0.1425
+        ],
+        "label": "원작 레어 출전카드49종",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "rare-playable-filter",
+        "expected": "원작 레어49종 필터가 실제 출전도감에 적용되고 전체2646종과 검색결과49종이 구분된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9,
+          0.071
+        ],
+        "label": "레어 도감에서 대기실",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.532,
+          0.909
+        ],
+        "label": "상위 등급",
+        "settleMs": 900
       },
       {
         "type": "click",
@@ -450,94 +348,6 @@
         "type": "checkpoint",
         "name": "archive-originals",
         "expected": "현재 전체 원본 메타데이터 수·검색 결과 수·이름/번호/능력 검색·등급·속성 필터와 원래 세로 비율의 전체 카드가 보인다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.25,
-          0.225
-        ],
-        "label": "전체 원본 검색 입력",
-        "settleMs": 900
-      },
-      {
-        "type": "text",
-        "text": "16051128346",
-        "label": "2016년 원작 시크릿 테오 번호 검색"
-      },
-      {
-        "type": "click",
-        "point": [
-          0.62,
-          0.225
-        ],
-        "label": "원본 검색 실행",
-        "settleMs": 1800
-      },
-      {
-        "type": "checkpoint",
-        "name": "late-secret-search",
-        "expected": "원작 번호16051128346 테오가 실제 원본 도감에서 검색되고 시크릿과 지원 상태가 표시된다. 원본 카드가 실제로 불러와져야 한다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.1535,
-          0.565
-        ],
-        "label": "후기 시크릿 원본 상세",
-        "settleMs": 1200
-      },
-      {
-        "type": "checkpoint",
-        "name": "late-secret-original-detail",
-        "expected": "테오의 원본 전체 인쇄·시크릿 등급·원작 번호·원문 설명·전투 지원 상태가 읽힌다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.635,
-          0.895
-        ],
-        "label": "원본 상세에서 도감으로",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.515,
-          0.3115
-        ],
-        "label": "검색 초기화",
-        "settleMs": 900
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8225,
-          0.225
-        ],
-        "label": "전체 등급 선택 열기",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "all-original-grades",
-        "expected": "현재 원본 등급별 개수와 스페셜·유니크·레전드·시크릿·에픽·이카젠 등을 선택할 수 있다."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.8,
-          0.634
-        ],
-        "label": "시크릿 원본 필터",
-        "settleMs": 900
-      },
-      {
-        "type": "checkpoint",
-        "name": "secret-originals",
-        "expected": "현재 전체 원본 중 시크릿으로 실제 필터링된다. 원작 카드 이름·전체 인쇄·등급과 원본 도감의 의미가 읽히며 미디어 누락을 성공으로 간주하지 않는다."
       },
       {
         "type": "click",
@@ -568,8 +378,8 @@
       },
       {
         "type": "checkpoint",
-        "name": "original-card-gallery",
-        "expected": "현재 실제 출전 카탈로그의 카드가 원본 전체 인쇄·세로 비율로 보이고 검색·속성·종류·비용·등급·랭크·능력 필터가 연결된다. 원본 도감 전체 수와 혼동하지 않는다."
+        "name": "playable-gallery",
+        "expected": "실제 출전2646종 도감; 특수능력 구현된 원작카드만 포함한다."
       },
       {
         "type": "click",
@@ -582,8 +392,8 @@
       },
       {
         "type": "text",
-        "text": "차원의충격파",
-        "label": "실제 시크릿 카드 이름 검색"
+        "text": "14010827215",
+        "label": "신규 스페셜 원작 ID 검색"
       },
       {
         "type": "click",
@@ -595,18 +405,23 @@
         "settleMs": 1000
       },
       {
+        "type": "checkpoint",
+        "name": "new-special-search-result",
+        "expected": "실제 원작 ID14010827215 검색 결과1종과 매의부족샤먼 이름을 확인한 뒤 상세를 연다."
+      },
+      {
         "type": "click",
         "point": [
           0.146,
           0.6035
         ],
-        "label": "실제 시크릿 카드 상세",
+        "label": "검색된 실제 스페셜 카드 상세",
         "settleMs": 1000
       },
       {
         "type": "checkpoint",
-        "name": "secret-card-detail",
-        "expected": "실제시크릿 차원의충격파의 원본인쇄전체·원작프레임·실제등급과 오른쪽현재지원효과/코스트·조건이함께보인다."
+        "name": "new-special-detail",
+        "expected": "이번에 실제 기술을 구현한 스페셜 매의부족샤먼의 원본/코스트/기술이 읽힌다."
       },
       {
         "type": "click",
@@ -619,8 +434,8 @@
       },
       {
         "type": "checkpoint",
-        "name": "original-printed-card",
-        "expected": "동일한차원의충격파의전체원본인쇄가원래세로비율로확대되며원작이름·수치·프레임을자르거나재배치하지않는다."
+        "name": "new-special-original-print",
+        "expected": "동일한 신규 스페셜 원본 인쇄 전체를 원래비율로 확대한다."
       },
       {
         "type": "click",
@@ -703,16 +518,91 @@
       {
         "type": "click",
         "point": [
+          0.898,
+          0.53167
+        ],
+        "label": "실제 AI 상대 정보",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "opponent-info",
+        "expected": "실제 AI/덱/공개 필드 수와 비공개 손패 안내; 온라인 상대를 꾸미지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.235
+        ],
+        "label": "실제 전투기록 탭",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "battle-event-feed",
+        "expected": "실제 Core 사건의 발신과 설명이 스크롤패널 안에 읽힌다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.808,
+          0.235
+        ],
+        "label": "나만의 연습 메모 탭",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.415,
+          0.75
+        ],
+        "label": "개인 메모 입력",
+        "settleMs": 550
+      },
+      {
+        "type": "text",
+        "text": "Check terrain and coin before attack",
+        "label": "실제 개인 메모 작성"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8675,
+          0.75
+        ],
+        "label": "연습메모 기록",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "local-practice-note",
+        "expected": "사용자가 입력한 메모와 개인세션/전송안함 안내가 표시된다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.845,
+          0.945
+        ],
+        "label": "대전 데스크에서 전장 복귀",
+        "settleMs": 550
+      },
+      {
+        "type": "pointer_hold",
+        "point": [
           0.197,
           0.6785
         ],
-        "label": "전개한 첫 백필드 지형 상세",
-        "settleMs": 1000
+        "label": "전개한 실제 지형 원본 상세",
+        "settleMs": 1000,
+        "ms": 680
       },
       {
         "type": "checkpoint",
         "name": "terrain-detail",
-        "expected": "일반입력으로전개한실제백필드지형을클릭하여동일원본전체카드와현재LP/색소울/총소울생산설명을보인다."
+        "expected": "데스크톱 실제 더블클릭/모바일 길게누르기로 전개한 지형의 전체원본 상세를 연다."
       },
       {
         "type": "click",
@@ -722,6 +612,11 @@
         ],
         "label": "지형 상세에서 전장 복귀",
         "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "terrain-detail-closed",
+        "expected": "실제 Esc/돌아가기 입력으로 원래 전열·지형·손패·준비완료 버튼으로 복귀한다."
       },
       {
         "type": "click",
@@ -853,6 +748,38 @@
         "type": "checkpoint",
         "name": "post-ready-field",
         "expected": "실제 공방이 끝난 전장. 살아남은 카드 현재HP/소각/덱/다음 준비 단계를 확인한다. 카드 수치가 이전 코인 미리보기로 고정되지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.53167
+        ],
+        "label": "공방 후 실제 상대정보",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.235
+        ],
+        "label": "공방 후 전투기록",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "resolved-battle-event-feed",
+        "expected": "같은 Core 코인/공격/피해/결과가 실제 사건기록으로 남는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.845,
+          0.945
+        ],
+        "label": "전장 복귀",
+        "settleMs": 550
       },
       {
         "type": "click",
@@ -1094,6 +1021,7 @@
         0.937,
         0.59814
       ]
-    }
+    },
+    "scope": "Current Polish focused real input: premium/Rare/new Special, actual deck battle, opponent/events/localnote, doubleclick/longtouch, music; optionalOSvisibilitypath unit-testedonly, save/reload; unchanged full archive covered by exact data/media audit."
   }
 }

@@ -31,7 +31,7 @@ def evidence():
  builds={}
  for target,platform in [('Windows','StandaloneWindows64'),('Web','WebGL')]:
   f=BUILD/game/target;e=dict(line.split(': ',1)for line in(f/'BuildEvidence.txt').read_text().splitlines()if ': 'in line)
-  require(e['Revision']=='gospel-renewal-2026-10-29' and e['Result']=='Succeeded' and e['Errors']=='0' and e['Target']==platform and e.get('LegacyResourcesRestored')=='true','Current successful Gospel player required')
+  require(e['Revision']=='gospel-radiance-2026-10-29' and e['Result']=='Succeeded' and e['Errors']=='0' and e['Target']==platform and e.get('LegacyResourcesRestored')=='true','Current successful Gospel player required')
   require(verify(read(f/'BuildInputs.json'))==e['SourceFingerprint']==b['sourceFingerprint'],'Gospel player/current/native source differ');builds[target]=ref(f/'BuildEvidence.txt')
  subprocess.run([sys.executable,str(ROOT/'Tools/Validation/run-renewal-core.py'),'--verify'],cwd=ROOT,check=True)
  return {'windowsPayload':verify_windows_payload(game),'native':ref(native/'binding.json'),'nativeRootReview':ref(OUT/'Root/gospel-native-review.json'),'sourceFingerprint':b['sourceFingerprint'],'builds':builds,'core':ref(OUT/'Core/binding.json'),'browser':[verify_browser(game,p)for p in('Desktop720','Mobile844')]}
@@ -45,7 +45,7 @@ def player(target):
   if target=='Windows' and not(BASE.shipping(rel)or(p.name=='settings.map'and'MonoBleedingEdge'in p.parts)):continue
   rows['PathOfDawn-'+target+'/'+str(rel)]=p
  notes=DEST/'Notes';notes.mkdir(exist_ok=True)
- text='gospel-renewal-2026-10-29 · 로컬 검증용 예수님의 길\n\n'
+ text='gospel-radiance-2026-10-29 · 로컬 검증용 예수님의 길\n\n'
  text+=('압축을 전부 풀고 PathOfDawn.exe를 실행합니다. 데이터 폴더/DLL을 함께 두세요.\n'if target=='Windows'else'전체 폴더를 HTTP/HTTPS 서버로 실행하세요. file://로 직접 열기는 지원하지 않습니다.\n')
  text+='새 여정 → 그림 도입 → 열두 살 시점 → 대화로 말씀 15장 수집.\nA/D 이동 · Shift 달리기 · Space 점프 · E 대화 · 휠 줌 · B 소지품 · M 도감 · Esc 저장 메뉴.\n이 파일은 새 Gospel 로컬 플레이어입니다. 카드 전체자료/새 공개 URL 배포 완료를 뜻하지 않습니다.\n'
  p=notes/(target+'-README.txt');p.write_text(text);rows['PathOfDawn-'+target+'/README.txt']=p
@@ -61,7 +61,7 @@ def sources():
    p=Path(parent)/n
    if p.suffix.lower()in{'.log','.pyc','.ulf','.alf','.pem','.key'}or n.startswith('.env'):continue
    BASE.safe(p);rows['FirstGame/'+str(p.relative_to(ROOT))]=p
- for name in ['.gitattributes','Docs/GospelRenewalStory.md','Docs/GospelRenewalCharacter.md','Docs/RenewalValidation.md','Tools/Art/GospelAuthoredProps/material-spec.json','Tools/Art/GospelWell/material-spec.json']:
+ for name in ['.gitattributes','Docs/GospelRenewalStory.md','Docs/GospelRenewalCharacter.md','Docs/PolishValidation.md','Tools/Art/GospelAuthoredProps/material-spec.json','Tools/Art/GospelWell/material-spec.json']:
   p=ROOT/name;rows['FirstGame/'+name]=p
  for directory in ['Tools/Data/GospelRenewal','Tools/Art/GospelRenewal']:
   for p in (ROOT/directory).rglob('*'):
@@ -83,7 +83,7 @@ def local_evidence():
  for target in ['Windows','Web']:
   for name in ['BuildEvidence.txt','BuildInputs.json','LegacyResourceExclusions.json']:
    p=BUILD/'PathOfDawn'/target/name;rows['Builds/PathOfDawn/'+target+'/'+name]=p
- for name in ['Docs/RenewalValidation.md','Tools/Validation/renewal-web-smoke.py','Tools/Validation/renewal-gospel-plan.json','Tools/Validation/renewal_release_evidence.py','Tools/Validation/run-renewal-native.py','Tools/Validation/run-renewal-core.py','Tools/Build/renewal-task.sh','Tools/Build/package-renewal-gospel.py','Tools/Environment/assert-runtime-idle.py','Tools/Build/archive-renewal-player.py','Tools/Build/renewal-pipeline-state.py']:
+ for name in ['Docs/PolishValidation.md','Tools/Validation/renewal-web-smoke.py','Tools/Validation/renewal-gospel-plan.json','Tools/Validation/renewal_release_evidence.py','Tools/Validation/run-renewal-native.py','Tools/Validation/run-renewal-core.py','Tools/Build/renewal-task.sh','Tools/Build/package-renewal-gospel.py','Tools/Environment/assert-runtime-idle.py','Tools/Build/archive-renewal-player.py','Tools/Build/renewal-pipeline-state.py']:
   p=ROOT/name;rows[name]=p
  return rows
 
@@ -95,6 +95,6 @@ def main():
  else:LINK.symlink_to(DEST,target_is_directory=True)
  sets={'PathOfDawn-Windows.zip':player('Windows'),'PathOfDawn-Web.zip':player('Web'),'PathOfDawn-UnitySources.zip':sources(),'PathOfDawn-RenewalEvidence.zip':local_evidence()}
  records=[BASE.verify(DEST/n,r)if a.verify else BASE.write_archive(n,r)for n,r in sets.items()]
- result={'status':'passed','scope':'Four verified Gospel-only local player/source/evidence archives. No complete cards/public Pages/push claim. Each ZIP exact file set/CRC/SHA and resolved LFS bytes verified.','revision':'gospel-renewal-2026-10-29','checkedUtc':datetime.now(timezone.utc).isoformat(),'sourceCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'sourceDirty':bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True)),'artifactPath':str(LINK),'actualRoot':str(DEST),**bound,'archives':records}
+ result={'status':'passed','scope':'Four verified Gospel-only local player/source/evidence archives. No complete cards/public Pages/push claim. Each ZIP exact file set/CRC/SHA and resolved LFS bytes verified.','revision':'gospel-radiance-2026-10-29','checkedUtc':datetime.now(timezone.utc).isoformat(),'sourceCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'sourceDirty':bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True)),'artifactPath':str(LINK),'actualRoot':str(DEST),**bound,'archives':records}
  (OUT/'gospel-partial-deliverables.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');(DEST/'Deliverables.sha256').write_text(''.join(r['sha256']+'  '+r['archive']+'\n'for r in records));print(json.dumps(result,ensure_ascii=False))
 if __name__=='__main__':main()

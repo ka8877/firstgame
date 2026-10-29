@@ -19,6 +19,7 @@ namespace PathOfDawn.Presentation
         public Vector2 Bounds => new Vector2(MinX, MaxX);
         public Vector2 Spawn => new Vector2(SpawnX, HeightAt(SpawnX));
         public int PaintedSpriteCount { get; private set; }
+        public bool UsesRadianceVista { get; private set; }
         public int ParallaxLayerCount => planes.Count;
         public EdgeCollider2D GroundCollider { get; private set; }
 
@@ -29,6 +30,7 @@ namespace PathOfDawn.Presentation
         readonly List<LeafMotion> leaves = new List<LeafMotion>();
         readonly List<Mote> motes = new List<Mote>();
         readonly List<ForegroundOccluder> foregroundOccluders = new List<ForegroundOccluder>();
+        readonly List<AtmosphereDrift> atmosphere = new List<AtmosphereDrift>();
         GospelLuminousController focus;
         Camera view;
         Transform content, objective;
@@ -45,6 +47,7 @@ namespace PathOfDawn.Presentation
         struct LeafMotion { public Transform transform; public Quaternion rest; public float phase; public float amount; }
         struct Mote { public Transform transform; public SpriteRenderer renderer; public Vector3 origin; public float phase; public float travel; public bool goal; }
         struct ForegroundOccluder { public SpriteRenderer renderer; public Color original; public float minimumAlpha; }
+        struct AtmosphereDrift { public Transform transform; public Vector3 origin; public float phase; public float travel; }
 
         public float HeightAt(float x)
         {
@@ -69,6 +72,7 @@ namespace PathOfDawn.Presentation
             flatNormal.SetPixels(new[] { n, n, n, n }); flatNormal.Apply(false, true);
             spriteProperties = new MaterialPropertyBlock();
             BuildBackground();
+            BuildRadiantAtmosphere();
             BuildTrees();
             BuildGround();
             BuildForeground();
@@ -87,24 +91,36 @@ namespace PathOfDawn.Presentation
 
         void BuildBackground()
         {
-            var sky = Layer("01 · open blue sky", 1f);
-            var s = Paint(sky, "Sky", 0f, 7f, 36f, -150, new Color(.22f, .48f, .59f, 1f), false);
+            var sky = Layer("01 · midnight indigo sky", 1f);
+            var s = Paint(sky, "Sky", 0f, 7f, 36f, -150, new Color(.055f, .15f, .27f, 1f), false);
             s.transform.localScale = new Vector3(s.transform.localScale.x * 2.2f, s.transform.localScale.y, 1f);
+
+            // The original panorama is a far scenic plane only. Real ground,
+            // roots, foliage, light, parallax and the hero remain separate objects.
+            const string vistaResource = "Art/GospelRadiance/World/forest-vista";
+            UsesRadianceVista = Resources.Load<Texture2D>(vistaResource) != null;
+            if (UsesRadianceVista)
+            {
+                var vista = Layer("02 · original luminous forest panorama", .91f);
+                for (int i = -1; i <= 1; i++)
+                    Paint(vista, vistaResource, SpawnX - 2.5f + i * 29f, 3.8f, 14.8f, -142,
+                        new Color(.70f, .86f, 1f, 1f), false, i != 0);
+            }
 
             var air = Layer("02 · distant cloud and valley atmosphere", .94f);
             // The source cloud bank has an opaque bottom row. Keep that edge
             // below the actual walking bank, not suspended above it as a band.
-            Paint(air, "CloudHorizon", SpawnX, .5f, 7f, -130, new Color(.40f, .66f, .70f, .34f), false);
+            Paint(air, "CloudHorizon", SpawnX, .5f, 7f, -130, new Color(.10f, .42f, .65f, .22f), false);
             for (int i = -2; i <= 2; i++)
             {
                 Paint(air, i % 2 == 0 ? "Cloud1" : "Cloud2", i * 25f + 5f, 7.8f, 4f, -125,
-                    new Color(.75f, .88f, .81f, .28f), false);
+                    new Color(.30f, .70f, .92f, .14f), false);
             }
 
             var silhouettes = Layer("03 · blue distant grove", .86f);
             for (int i = -3; i <= 3; i++)
                 Paint(silhouettes, i % 2 == 0 ? "Trees1" : "Trees2", i * 19f, 2.9f,
-                    7.7f + (i % 2 == 0 ? 1.1f : 0f), -110, new Color(.28f, .59f, .62f, .68f), false, i % 2 == 0);
+                    7.7f + (i % 2 == 0 ? 1.1f : 0f), -110, new Color(.11f, .36f, .54f, .36f), false, i % 2 == 0);
 
             var far = Layer("04 · soft far trunks", .67f);
             float[] xs = { -48f, -34f, -21f, -5f, 10f, 25f, 41f, 54f };
@@ -112,7 +128,7 @@ namespace PathOfDawn.Presentation
             {
                 var height = 11.5f + (i % 3) * 1.5f;
                 Paint(far, "Tree" + (i % 3 + 1), xs[i], height * .5f - .7f, height,
-                    -90, new Color(.20f, .43f, .45f, .82f), false, i % 2 == 0);
+                    -90, new Color(.08f, .24f, .36f, .55f), false, i % 2 == 0);
             }
 
             var middle = Layer("05 · layered green grove", .38f);
@@ -121,7 +137,32 @@ namespace PathOfDawn.Presentation
             {
                 var height = 10.8f + (i % 2) * 1.4f;
                 Paint(middle, "Tree" + (i % 3 + 1), middleXs[i], height * .5f - .5f, height,
-                    -65, new Color(.43f, .64f, .51f, .91f), false, i % 2 == 1);
+                    -65, new Color(.11f, .32f, .36f, .76f), false, i % 2 == 1);
+            }
+        }
+
+        void BuildRadiantAtmosphere()
+        {
+            var distantAir = Layer("04b · drifting cyan valley mist", .77f);
+            var nearAir = Layer("06b · low silver mist between roots", .20f);
+            for (int i = 0; i < 7; i++)
+            {
+                float x = -42f + i * 15f;
+                var fog = Paint(i % 2 == 0 ? distantAir : nearAir, "SoftGlow", x,
+                    i % 2 == 0 ? 3.4f : .85f, i % 2 == 0 ? 5f : 2.7f, i % 2 == 0 ? -75 : -24,
+                    new Color(.11f, .67f, .94f, i % 2 == 0 ? .16f : .075f), false);
+                fog.transform.localScale = new Vector3(fog.transform.localScale.x * 4.8f, fog.transform.localScale.y, 1);
+                atmosphere.Add(new AtmosphereDrift { transform = fog.transform, origin = fog.transform.localPosition,
+                    phase = i * 1.72f, travel = 1.3f + .2f * (i % 3) });
+            }
+            var shafts = Layer("06c · moonlight through organic canopy gaps", .28f);
+            for (int i = 0; i < 5; i++)
+            {
+                var shaft = Paint(shafts, "LightShafts", -29f + i * 15.5f, 4.8f, 14f, -20,
+                    new Color(.28f, .74f, 1f, .17f), false, i % 2 == 0);
+                shaft.transform.localRotation = Quaternion.Euler(0, 0, -18f + i * 2f);
+                atmosphere.Add(new AtmosphereDrift { transform = shaft.transform, origin = shaft.transform.localPosition,
+                    phase = i * 2.1f, travel = .22f });
             }
         }
 
@@ -137,7 +178,7 @@ namespace PathOfDawn.Presentation
 
             var architecture = Layer("07 · warm temple garden gateway", .025f);
             Paint(architecture, "TempleGateway", 23.4f, 3.18f, 7.1f, -12,
-                new Color(.90f, .96f, .93f, 1f), false);
+                new Color(.72f, .85f, .92f, 1f), false);
             // The architecture is an illustrative game location, not a measured reconstruction.
         }
 
@@ -145,14 +186,14 @@ namespace PathOfDawn.Presentation
         {
             float ground = HeightAt(x) - .25f;
             Paint(layer, flip ? "Trunk2" : "Trunk1", x, ground + height * .5f, height, -35,
-                new Color(.78f, .87f, .72f, 1f), true, flip);
+                new Color(.42f, .61f, .62f, 1f), true, flip);
             for (int i = 0; i < 5; i++)
             {
                 float dx = (i - 2f) * height * .145f;
                 float y = ground + height * (.70f + .055f * Mathf.Sin(i * 1.7f));
                 var canopy = Paint(layer, "Foliage" + (i % 3 + 1), x + dx, y,
                     height * (.42f + .035f * (i % 2)), -32 + (i % 2),
-                    new Color(.82f, .94f, .70f, 1f), true, (i % 2 == 0) ^ flip);
+                    new Color(.34f, .64f, .53f, 1f), true, (i % 2 == 0) ^ flip);
                 leaves.Add(new LeafMotion { transform = canopy.transform,
                     rest = canopy.transform.localRotation, phase = phase + i * .9f, amount = .25f + i * .025f });
             }
@@ -191,15 +232,15 @@ namespace PathOfDawn.Presentation
             {
                 float x = rockX[i], h = rockHeight[i];
                 var rock = Paint(ground, "Rock" + ((i * 3 + 1) % 4 + 1), x,
-                    HeightAt(x) - h * .55f - .1f - (i % 3) * .05f,
-                    h, 12, new Color(.75f, .84f, .71f, 1f), true, i % 2 == 1);
+                    HeightAt(x) - h * .35f - .05f - (i % 3) * .04f,
+                    h, 12, new Color(.48f, .66f, .86f, 1f), false, i % 2 == 1);
                 rock.transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(i * 1.17f) * 8f);
             }
             for (int i = 0; i < 53; i++)
             {
                 float x = MinX - 1f + i * 1.35f;
                 var grass = Paint(ground, "GrassEdge", x, HeightAt(x) + .04f, .50f,
-                    16, new Color(.92f, 1f, .70f, 1f), true, i % 3 == 0);
+                    16, new Color(.44f, .95f, .69f, 1f), true, i % 3 == 0);
                 leaves.Add(new LeafMotion { transform = grass.transform, rest = grass.transform.localRotation,
                     phase = i * .78f, amount = .35f });
             }
@@ -207,7 +248,7 @@ namespace PathOfDawn.Presentation
             {
                 float x = MinX + .4f + i * 2.5f;
                 var flowers = Paint(ground, "Flowers", x, HeightAt(x) + .08f, .33f,
-                    25, new Color(.94f, 1f, .78f, 1f), true, i % 2 == 0);
+                    25, new Color(.47f, 1.5f, 1.7f, 1f), true, i % 2 == 0);
                 leaves.Add(new LeafMotion { transform = flowers.transform,
                     rest = flowers.transform.localRotation, phase = i * 1.1f, amount = .45f });
             }
@@ -215,24 +256,32 @@ namespace PathOfDawn.Presentation
 
         void BuildEarthRibbon(Transform parent, Vector2[] surface)
         {
+            const int rows = 4;
             int count = surface.Length;
-            var vertices = new Vector3[count * 2];
-            var uvs = new Vector2[count * 2];
-            var colors = new Color[count * 2];
-            var triangles = new int[(count - 1) * 6];
+            var vertices = new Vector3[count * rows];
+            var uvs = new Vector2[count * rows];
+            var colors = new Color[count * rows];
+            var triangles = new int[(count - 1) * (rows - 1) * 6];
+            float[] depths = { .04f, .55f, 1.7f, 7f };
+            Color[] strata = { new Color(.82f,.91f,1f,1), new Color(.74f,.84f,1f,1),
+                new Color(.48f,.64f,.88f,1), new Color(.07f,.12f,.24f,1) };
             for (int i = 0; i < count; i++)
             {
                 float x = surface[i].x;
-                vertices[i * 2] = new Vector3(x, surface[i].y - .04f, 0f);
-                vertices[i * 2 + 1] = new Vector3(x, -7f, 0f);
-                uvs[i * 2] = new Vector2(x / 5f, 1f);
-                uvs[i * 2 + 1] = new Vector2(x / 5f, 0f);
-                colors[i * 2] = new Color(.65f, .75f, .55f, 1f);
-                colors[i * 2 + 1] = new Color(.09f, .17f, .19f, 1f);
+                for (int row = 0; row < rows; row++)
+                {
+                    int k = i * rows + row;
+                    vertices[k] = new Vector3(x, row == rows - 1 ? -7f : surface[i].y - depths[row], 0);
+                    uvs[k] = new Vector2(x / 7.2f, 1f - depths[row] / 2.8f);
+                    colors[k] = strata[row];
+                }
                 if (i == count - 1) continue;
-                int t = i * 6, a = i * 2;
-                triangles[t] = a; triangles[t + 1] = a + 2; triangles[t + 2] = a + 1;
-                triangles[t + 3] = a + 2; triangles[t + 4] = a + 3; triangles[t + 5] = a + 1;
+                for (int row = 0; row < rows - 1; row++)
+                {
+                    int t = (i * (rows - 1) + row) * 6, a = i * rows + row;
+                    triangles[t] = a; triangles[t + 1] = a + rows; triangles[t + 2] = a + 1;
+                    triangles[t + 3] = a + rows; triangles[t + 4] = a + rows + 1; triangles[t + 5] = a + 1;
+                }
             }
             var mesh = new Mesh { name = "Painted earth continuous contour" };
             mesh.vertices = vertices; mesh.uv = uvs; mesh.colors = colors; mesh.triangles = triangles;
@@ -241,12 +290,14 @@ namespace PathOfDawn.Presentation
             go.transform.SetParent(parent, false);
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
             var renderer = go.AddComponent<MeshRenderer>();
-            // Mesh2D's official shader uses mesh constants and its own stencil.
-            // The Sprite shader relies on SpriteRenderer per-draw data instead.
-            var material = OwnMaterial("Universal Render Pipeline/2D/Mesh2D-Unlit-Default");
-            material.name = "Repeated original Lost Crypt earth paint";
-            material.mainTexture = Resources.Load<Texture2D>(ResourceRoot + "GrassFill");
-            material.SetColor("_White", new Color(.36f, .51f, .39f, 1f));
+            // The stock Mesh2D unlit pass ignores vertex COLOR. This explicit
+            // mesh shader really renders the four-row indigo depth gradient.
+            var shader = Resources.Load<Shader>("Art/GospelRadiance/Rendering/RadianceGround2D");
+            if (shader == null) throw new System.InvalidOperationException("Missing Radiance ground-gradient shader.");
+            var material = new Material(shader) { name = "Painted soil grain and actual indigo strata" };
+            materials.Add(material);
+            material.mainTexture = Resources.Load<Texture2D>("Art/GospelRadiance/World/earth-bank");
+            if (material.mainTexture == null) throw new System.InvalidOperationException("Missing original Radiance painted earth bank.");
             renderer.sharedMaterial = material; renderer.sortingOrder = 10;
         }
 
@@ -258,13 +309,13 @@ namespace PathOfDawn.Presentation
             {
                 // Only low edges and occasional side trunks frame the view; never hide the route.
                 var f = Paint(frame, "Foliage" + (i % 3 + 1), xs[i], -1.25f, 3.5f + .3f * (i % 2),
-                    65, new Color(.15f, .31f, .28f, .94f), false, i % 2 == 0);
+                    65, new Color(.035f, .095f, .13f, .94f), false, i % 2 == 0);
                 leaves.Add(new LeafMotion { transform = f.transform, rest = f.transform.localRotation,
                     phase = i * 2.1f, amount = .18f });
                 foregroundOccluders.Add(new ForegroundOccluder { renderer = f, original = f.color, minimumAlpha = .18f });
             }
             var side = Paint(frame, "Trunk2", -34.6f, 6.4f, 15.8f, 70,
-                new Color(.12f, .25f, .24f, .96f), false, true);
+                new Color(.025f, .07f, .10f, .96f), false, true);
             side.transform.localRotation = Quaternion.Euler(0f, 0f, -4f);
             foregroundOccluders.Add(new ForegroundOccluder { renderer = side, original = side.color, minimumAlpha = .09f });
         }
@@ -276,30 +327,30 @@ namespace PathOfDawn.Presentation
             var ambient = new GameObject("Cool global garden light").AddComponent<Light2D>();
             ambient.transform.SetParent(lightRoot, false);
             ambient.lightType = Light2D.LightType.Global;
-            ambient.color = new Color(.68f, .83f, .87f); ambient.intensity = .66f;
+            ambient.color = new Color(.38f, .65f, .91f); ambient.intensity = .50f;
             RadialLight(lightRoot, "Warm garden opening", -16.5f, 4.5f, 10f,
-                new Color(1f, .86f, .53f), 1.15f);
+                new Color(.88f, .95f, 1f), 1.13f);
             RadialLight(lightRoot, "Blue depth at ancient trees", -28f, 4.5f, 10f,
-                new Color(.35f, .70f, 1f), .5f);
+                new Color(.26f, .58f, 1f), .88f);
             RadialLight(lightRoot, "Sun across the middle clearing", 2f, 5.5f, 12f,
-                new Color(.92f, .98f, .66f), 1.0f);
+                new Color(.40f, 1f, .88f), 1.10f);
             RadialLight(lightRoot, "Temple honey light", 23.5f, 4.5f, 11f,
-                new Color(1f, .78f, .44f), 1.15f);
+                new Color(1f, .72f, .38f), 1.35f);
 
             float[] rays = { -18f, -1f, 21f };
             for (int i = 0; i < rays.Length; i++)
             {
                 var shaft = Paint(lightRoot, "LightShafts", rays[i], 4.8f, 10.5f, 5,
-                    new Color(.91f, 1f, .70f, .105f), false, i % 2 == 0);
+                    new Color(.42f, .84f, 1f, .14f), false, i % 2 == 0);
                 shaft.transform.localRotation = Quaternion.Euler(0f, 0f, -15f);
             }
             var volume = new GameObject("Subtle bloom and filmic garden palette").AddComponent<Volume>();
             volume.transform.SetParent(lightRoot, false); volume.isGlobal = true; volume.priority = 2f;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); volume.sharedProfile = profile;
             var bloom = profile.Add<Bloom>(); bloom.active = true;
-            bloom.threshold.Override(1.05f); bloom.intensity.Override(.22f); bloom.scatter.Override(.56f);
+            bloom.threshold.Override(.94f); bloom.intensity.Override(.46f); bloom.scatter.Override(.68f);
             var grade = profile.Add<ColorAdjustments>(); grade.active = true;
-            grade.contrast.Override(7f); grade.saturation.Override(-3f);
+            grade.contrast.Override(12f); grade.saturation.Override(3f);
         }
 
         Light2D RadialLight(Transform parent, string name, float x, float y, float radius, Color color, float intensity)
@@ -332,7 +383,7 @@ namespace PathOfDawn.Presentation
                 float x = MinX + .5f + i * .91f;
                 float y = .6f + Mathf.Repeat(i * 1.713f, 4.8f);
                 var sprite = Paint(particles, "SoftGlow", x, y, .065f + (i % 3) * .025f, 42,
-                    new Color(1f, .92f, .52f, .6f), false);
+                    i % 5 == 0 ? new Color(2.3f, 1.7f, .56f, .72f) : new Color(.32f, 2.2f, 3.2f, .70f), false);
                 motes.Add(new Mote { transform = sprite.transform, renderer = sprite,
                     origin = sprite.transform.localPosition, phase = i * 1.73f, travel = .12f + (i % 4) * .035f });
             }
@@ -391,7 +442,8 @@ namespace PathOfDawn.Presentation
         Sprite SpriteFor(string resource)
         {
             if (sprites.TryGetValue(resource, out var cached)) return cached;
-            var texture = Resources.Load<Texture2D>(ResourceRoot + resource);
+            var sourcePath = resource.IndexOf('/') >= 0 ? resource : ResourceRoot + resource;
+            var texture = Resources.Load<Texture2D>(sourcePath);
             if (texture == null) { Debug.LogError("Missing luminous world texture: " + resource); return null; }
             var rect = new Rect(0, 0, texture.width, texture.height);
             // Address the original SpriteShape-strip padding with UVs; source pixels remain intact.
@@ -430,6 +482,10 @@ namespace PathOfDawn.Presentation
             foreach (var leaf in leaves)
                 if (leaf.transform != null) leaf.transform.localRotation = leaf.rest *
                     Quaternion.Euler(0f, 0f, Mathf.Sin(time * .85f + leaf.phase) * leaf.amount);
+            foreach (var mist in atmosphere)
+                if (mist.transform != null) mist.transform.localPosition = mist.origin + new Vector3(
+                    Mathf.Sin(time * .075f + mist.phase) * mist.travel,
+                    Mathf.Sin(time * .13f + mist.phase) * .12f, 0);
             foreach (var mote in motes)
             {
                 if (mote.transform == null) continue;

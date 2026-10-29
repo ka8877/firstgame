@@ -167,6 +167,7 @@ namespace FantasyCards.Core
                 if (enemy != null)
                 {
                     int physical = Math.Max(0, CardCatalog.UnitAttack(source) - CardCatalog.UnitDefense(enemy)); enemy.damage += physical;
+                    RecordPolishLethalSource(source, enemy);
                     PremiumNotice(source, owner, enemy, other, "크로스카운트 · 다음 행동가능 적 물리 피해 " + physical, physical);
                 }
             }
@@ -174,7 +175,7 @@ namespace FantasyCards.Core
             {
                 int heads = State.events.Count(e => e.turn == State.turn && e.kind == "coin" && e.sourceInstanceId == source.instanceId && e.coinHeads);
                 int enemyBattleUnit = combatUnitIds[other];
-                foreach (var enemy in State.players[other].units.Where(u => CardCatalog.UnitHealth(u) > 0 && u.instanceId != enemyBattleUnit)) enemy.damage += heads;
+                foreach (var enemy in State.players[other].units.Where(u => CardCatalog.UnitHealth(u) > 0 && u.instanceId != enemyBattleUnit)) { enemy.damage += heads; RecordPolishLethalSource(source, enemy); }
                 PremiumNotice(source, owner, null, other, "코인플레임 · 전투 상대 외 적 HP 피해 " + heads, heads);
             }
             if (code == 473)

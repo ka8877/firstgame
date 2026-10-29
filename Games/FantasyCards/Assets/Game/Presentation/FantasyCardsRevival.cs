@@ -179,7 +179,10 @@ namespace FantasyCards.Presentation
             }
             ReadableText(rail, "지형 " + player.terrain.Count + " / " + BattleDisplayState.rules.terrainLimit, .525f, .515f, .955f, .568f, 19, teal, TextAlignmentOptions.Center);
             var decks = Panel(rail, .04f, .365f, .96f, .507f, new Color(.075f, .12f, .16f)); Frame(decks, new Color(.43f, .35f, .20f), 1);
-            ReadableText(decks, "상대 덱 " + enemy.deck.Count + " · 소각 " + enemy.discard.Count, .04f, .53f, .96f, .98f, 23, ivory, TextAlignmentOptions.Center);
+            var opponent = Button(decks, "상대 정보 · 덱 " + enemy.deck.Count, .025f, .53f, .975f, .98f,
+                () => ShowPolishBattleDesk(), slate, 21, !locked);
+            opponent.gameObject.name = "Opponent information and battle desk";
+            BindTooltip(opponent.gameObject, "상대 정보 · 전투 기록 · 연습 메모", "AI 상대의 공개 정보와 실제 전투 기록을 확인하고 개인 메모를 남깁니다.");
             ReadableText(decks, "내 덱 " + player.deck.Count, .025f, .035f, .515f, .485f, 24, ivory, TextAlignmentOptions.Center);
             var discard = Button(decks, "소각 " + player.discard.Count, .53f, .035f, .975f, .485f, () => { battleArchivePage = 0; ShowBattleArchive(0); }, slate, 23, !locked);
             BindDiscardDrop((RectTransform)discard.transform);
@@ -250,7 +253,7 @@ namespace FantasyCards.Presentation
                     else Label(cell, "지형" + player.terrain.Count + "/" + BattleDisplayState.rules.terrainLimit, "terrain", .01f, .99f, teal);
                 }
             }
-            Label(Plate(Row(1)), "상대 덱 " + enemy.deck.Count + " · 소각 " + enemy.discard.Count, "enemy deck");
+            ActionButton("상대 정보 · " + enemy.deck.Count, Row(1), () => ShowPolishBattleDesk(), slate, !locked);
             var zoneRow = Row(1);
             Label(Plate(zoneRow, .03f, .49f), "덱 " + player.deck.Count, "player deck");
             var discard = Button(rail, "소각 " + player.discard.Count, .51f, zoneRow.x, .97f, zoneRow.y,
@@ -276,7 +279,7 @@ namespace FantasyCards.Presentation
 
         private void ShowRevivalBattleMenu()
         {
-            redraw = ShowRevivalBattleMenu; Clear(); Backdrop(true);
+            battleScreen = false; redraw = ShowRevivalBattleMenu; Clear(); polishBack = ShowBattle; ResetPolishTap(); Backdrop(true);
             Text(root, "전투 메뉴", .07f, .81f, .93f, .95f, 43, gold, TextAlignmentOptions.Center);
             Button(root, "전투 기록", .18f, .61f, .48f, .75f, ShowBattleLog, slate, 27);
             Button(root, "음악", .52f, .61f, .82f, .75f, () => ShowSoundSettings(ShowRevivalBattleMenu), slate, 27);

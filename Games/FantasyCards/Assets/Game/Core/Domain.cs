@@ -146,6 +146,9 @@ namespace FantasyCards.Core
         // Optional schema-3 field. Older saves deserialize to zero; consumed by
         // exactly one subsequent soul-cost stage, never by UI or audio.
         public int nextGenericSoulBonus;
+        // Optional schema-3 data; null in old Unity JSON means no queued
+        // colored production. Entries follow the stable Element enum.
+        public int[] nextColoredSoulBonus = new int[7];
         public int fatigue, terrainPlayed;
         public List<CardInstance> deck = new List<CardInstance>(), hand = new List<CardInstance>(), terrain = new List<CardInstance>(), discard = new List<CardInstance>();
         public List<UnitState> units = new List<UnitState>();
@@ -162,7 +165,7 @@ namespace FantasyCards.Core
         public PreparedSpellState SpellAtLane(int lane) { return preparedSpells.Find(x => x.lane == lane); }
         public PlayerState Copy()
         {
-            var c = (PlayerState)MemberwiseClone(); c.deck = deck.ConvertAll(x => x.Copy()); c.hand = hand.ConvertAll(x => x.Copy()); c.terrain = terrain.ConvertAll(x => x.Copy()); c.discard = discard.ConvertAll(x => x.Copy()); c.units = units.ConvertAll(x => x.Copy()); c.preparedSpells = preparedSpells.ConvertAll(x => x.Copy()); return c;
+            var c = (PlayerState)MemberwiseClone(); c.nextColoredSoulBonus = nextColoredSoulBonus == null ? new int[7] : (int[])nextColoredSoulBonus.Clone(); c.deck = deck.ConvertAll(x => x.Copy()); c.hand = hand.ConvertAll(x => x.Copy()); c.terrain = terrain.ConvertAll(x => x.Copy()); c.discard = discard.ConvertAll(x => x.Copy()); c.units = units.ConvertAll(x => x.Copy()); c.preparedSpells = preparedSpells.ConvertAll(x => x.Copy()); return c;
         }
     }
 

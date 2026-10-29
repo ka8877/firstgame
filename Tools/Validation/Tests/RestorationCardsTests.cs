@@ -10,10 +10,10 @@ namespace FirstGame.Validation
     {
         [Test] public void CompleteOriginalArchiveSeparatesSupportedRulesFromUnsupportedSources()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(2571));
-            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Unique), Is.EqualTo(23));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2646));
+            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Unique), Is.EqualTo(27));
             Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Legend), Is.EqualTo(4));
-            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Secret), Is.EqualTo(15));
+            Assert.That(CardCatalog.All.Count(c=>c.rarity==CardRarity.Secret), Is.EqualTo(21));
             Assert.That(OriginalCardArchive.All.Length, Is.EqualTo(15350));
             Assert.That(OriginalCardArchive.All.Select(c=>c.id).Distinct().Count(), Is.EqualTo(15350));
             Assert.That(OriginalCardArchive.All.Count(c=>c.rarity==CardRarity.Uncatalogued), Is.EqualTo(23));

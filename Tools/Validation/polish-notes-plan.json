@@ -1,0 +1,125 @@
+{
+  "FantasyCards": {
+    "revision": "fm-polish-2026-10-29",
+    "suite": "modern-real-input-v1",
+    "coordinates": "normalized canvas top-left origin",
+    "intendedViewport": {
+      "width": 1280,
+      "height": 720,
+      "scope": "Desktop draft. Compact mobile right rail has different vertical positions; release owner must adapt from actual originals."
+    },
+    "scope": "Focused correction for Unity Web Unicode keyboard driver limitation. Actual ASCII user key events, same frozen current runtime. The full Desktop run remains separate and its empty Korean-note capture is not successful note proof.",
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Same frozen Card runtime title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 900
+      },
+      {
+        "type": "click",
+        "point": [
+          0.39,
+          0.383
+        ],
+        "label": "첫 AI 연습방",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.627,
+          0.7625
+        ],
+        "label": "대전 시작",
+        "settleMs": 1600
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7925,
+          0.925
+        ],
+        "label": "시작 손패 확정",
+        "settleMs": 1600
+      },
+      {
+        "type": "audio",
+        "label": "battle-original"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.52546
+        ],
+        "label": "실제 AI 상대 정보",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.808,
+          0.235
+        ],
+        "label": "나만의 연습 메모 탭",
+        "settleMs": 550
+      },
+      {
+        "type": "click",
+        "point": [
+          0.415,
+          0.75
+        ],
+        "label": "개인 메모 입력",
+        "settleMs": 550
+      },
+      {
+        "type": "text",
+        "text": "Check terrain and coin before attack",
+        "label": "Ordinary ASCII practice note; no IME emulation"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8675,
+          0.75
+        ],
+        "label": "연습메모 기록",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-ascii-note",
+        "expected": "The actual user-typed ASCII note appears in the current-session list, with personal-only/no-transmission notice."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.845,
+          0.945
+        ],
+        "label": "대전 데스크에서 전장 복귀",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "notes-returned-to-board",
+        "expected": "Ordinary back input returns to the unchanged actual opening board."
+      }
+    ],
+    "requiredCheckpoints": [
+      "title",
+      "actual-ascii-note",
+      "notes-returned-to-board"
+    ]
+  }
+}

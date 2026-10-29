@@ -18,20 +18,22 @@ namespace PathOfDawn.Presentation
         public Action<bool> OnRun, OnMusicMute;
         public bool IsModal { get; private set; }
         public string CurrentView { get; private set; } = "none";
+        public bool ScenicView { get; private set; }
         public Canvas CanvasView { get; private set; }
         public RectTransform Frame => frame;
 
-        static readonly Color Ink = new Color(.035f, .085f, .115f, .91f);
-        static readonly Color LightInk = new Color(.075f, .16f, .19f, .87f);
+        static readonly Color Ink = new Color(.018f, .052f, .09f, .91f);
+        static readonly Color LightInk = new Color(.045f, .12f, .18f, .83f);
         static readonly Color Cream = new Color(.97f, .95f, .85f, 1);
         static readonly Color Quiet = new Color(.69f, .80f, .79f, 1);
         static readonly Color Gold = new Color(.94f, .80f, .48f, 1);
-        static readonly Color Mint = new Color(.56f, .91f, .81f, 1);
+        static readonly Color Mint = new Color(.48f, .91f, .96f, 1);
         TMP_FontAsset font, display;
         RectTransform frame, modal, hud, touch, notification, pinnedScripture;
         TextMeshProUGUI objectiveText, referenceText, verseText, nearbyText, noticeText;
         Image[] progress;
         Button interact;
+        Button scenicToggle;
         Image runImage;
         bool leftHeld, rightHeld, running;
         float noticeUntil;
@@ -80,6 +82,8 @@ namespace PathOfDawn.Presentation
         void StartModal(string view, bool backdrop = true)
         {
             ReleaseMovement();
+            ScenicView = false;
+            if (scenicToggle != null) scenicToggle.gameObject.SetActive(false);
             if (modal != null) { modal.gameObject.SetActive(false); Destroy(modal.gameObject); }
             modal = Rect(frame, "Luminous " + view, 0, 0, 1280, 720);
             if (hud != null) hud.gameObject.SetActive(false);
@@ -96,7 +100,24 @@ namespace PathOfDawn.Presentation
             if (modal != null) { modal.gameObject.SetActive(false); Destroy(modal.gameObject); modal = null; }
             IsModal = false; CurrentView = "journey";
             if (hud != null) hud.gameObject.SetActive(true);
+            if (scenicToggle != null) { scenicToggle.gameObject.SetActive(true); SetButtonLabel(scenicToggle, "풍경 보기 · H"); }
             notification?.SetAsLastSibling();
+        }
+
+        public void ToggleScenicView()
+        {
+            if (IsModal || hud == null) return;
+            ReleaseMovement();
+            ScenicView = !ScenicView;
+            hud.gameObject.SetActive(!ScenicView);
+            SetButtonLabel(scenicToggle, ScenicView ? "게임으로 · H" : "풍경 보기 · H");
+        }
+
+        static void SetButtonLabel(Button button, string value)
+        {
+            if (button == null) return;
+            var label = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (label != null) label.text = value;
         }
 
         public void ShowTitle(bool canContinue)
@@ -178,6 +199,8 @@ namespace PathOfDawn.Presentation
             }); runImage = run.GetComponent<Image>();
             Button(touch, "", "jump", 1022, 599, 78, 78, () => OnJump?.Invoke());
             interact = Button(hud, "대화", "spark", 1116, 606, 122, 68, () => OnInteract?.Invoke(), false);
+            scenicToggle = Button(frame, "풍경 보기 · H", "", 1024, 98, 192, 42, ToggleScenicView);
+            scenicToggle.GetComponent<Image>().color = new Color(.018f, .052f, .09f, .48f);
         }
 
         void StoryArt(Transform parent,string key)

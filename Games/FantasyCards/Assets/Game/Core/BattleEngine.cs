@@ -61,6 +61,7 @@ namespace FantasyCards.Core
                 var p = s.players[player];
                 if (p == null || p.deck == null || p.hand == null || p.terrain == null || p.discard == null || p.units == null || p.preparedSpells == null || p.units.Count + p.preparedSpells.Count > s.rules.unitLanes || p.terrain.Count > s.rules.terrainLimit || p.hand.Count > s.rules.handLimit || p.levelPoints < 0 || p.levelPoints > s.rules.maximumTurns + 1 || p.genericSoul < 0 || p.genericSoul > s.rules.maximumResource || p.nextGenericSoulBonus < 0 || p.nextGenericSoulBonus > s.rules.maximumResource || p.health > s.rules.startingHealth || p.health < -10000 || p.fatigue < 0 || p.terrainPlayed < 0 || p.terrainPlayed > s.rules.terrainPerTurn || p.leaderSkillUses != 0 || p.lastLeaderSkillTurn != 0 || p.lastShuffleTurn < 0 || p.lastShuffleTurn > s.turn) throw new ArgumentException("잘못된 플레이어 상태입니다.");
                 foreach (Element element in Enum.GetValues(typeof(Element))) if (p.Resource(element) < 0 || p.Resource(element) > s.rules.maximumResource) throw new ArgumentException("잘못된 소울 상태입니다.");
+                if (p.nextColoredSoulBonus != null && (p.nextColoredSoulBonus.Length != 7 || p.nextColoredSoulBonus.Any(n => n < 0 || n > s.rules.maximumResource))) throw new ArgumentException("잘못된 다음 턴 속성 소울입니다.");
                 if (s.phase != BattlePhase.Complete && (s.rules.victoryRule == VictoryRule.Deck ? p.deck.Count == 0 : p.health <= 0)) throw new ArgumentException("패배한 전투를 진행 상태로 저장할 수 없습니다.");
                 DemoCatalog.GetLeader(p.leaderId); if (p.deckId != "custom") DemoCatalog.GetDeck(p.deckId);
                 if (p.playedThisPreparation != s.events.Any(e => e.kind == "play" && e.actor == player && e.turn == s.turn)) throw new ArgumentException("이번 준비의 카드 사용 기록이 다릅니다.");
@@ -199,6 +200,18 @@ namespace FantasyCards.Core
                 foreach (Element element in Enum.GetValues(typeof(Element))) p.SetResource(element, 0);
                 p.genericSoul = 0;
                 foreach (var card in p.terrain) AddProduction(p, CardCatalog.Get(card.definitionId));
+                foreach (var unit in p.units.Where(u => PolishCardSkills.UpgradeProduction(u.definitionId)))
+                {
+                    var card = CardCatalog.Get(unit.definitionId);
+                    p.SetResource(card.element, Math.Min(State.rules.maximumResource, p.Resource(card.element) + 1));
+                    p.genericSoul = Math.Min(State.rules.maximumResource, p.genericSoul + 1);
+                }
+                if (p.nextColoredSoulBonus != null)
+                    foreach (Element element in Enum.GetValues(typeof(Element)))
+                    {
+                        p.SetResource(element, Math.Min(State.rules.maximumResource, p.Resource(element) + p.nextColoredSoulBonus[(int)element]));
+                        p.nextColoredSoulBonus[(int)element] = 0;
+                    }
                 p.genericSoul = Math.Min(State.rules.maximumResource, p.genericSoul + p.nextGenericSoulBonus);
                 p.nextGenericSoulBonus = 0;
             }
@@ -389,6 +402,7 @@ namespace FantasyCards.Core
                 finally
                 {
                     combatUnitIds[0] = combatUnitIds[1] = 0;
+                    polishLethalSources.Clear();
                 }
             }
             RefreshSouls();
@@ -552,6 +566,7 @@ namespace FantasyCards.Core
                     p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment);
                     Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player);
                     OnPremiumDeath(unit, player);
+                    OnPolishDeath(unit, player);
                     if (unit.definitionId == RestorationCardSkills.LandRuin)
                     {
                         var opponent = State.players[1 - player]; int lost = opponent.levelPoints > 0 ? 1 : 0;

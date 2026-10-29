@@ -1,0 +1,7 @@
+Radiance painted character rendering
+
+The sprite and deforming-cloth shaders are adapted from Unity Technologies URP17 Sprite-Lit-Default / Mesh2D-Lit-Default shader contracts. Copyright Unity Technologies. Unity Companion License applies to the Unity-dependent implementation. The preserved full license is Art/GospelLuminous/Actors/UnityCompanionLicense.txt.
+
+Changes: directional alpha-edge color, a restrained painted-midtone floor, and shared color treatment for sprites and cloth. Real URP2D dynamic lighting, normal pass, transparency, sprite flipping and skeletal vertex contract remain. These are original presentation changes, not recovered Ori code or assets.
+
+RadianceGround2D.shader is an original small unlit mesh pass using the Unity URP Core include. It reads actual mesh vertex colors, repeats the new original Radiance earth-bank painting through shader UVs, and preserves its soil, root and rock colors with restrained vertex depth tint. It does not modify shared source texture pixels or import settings.

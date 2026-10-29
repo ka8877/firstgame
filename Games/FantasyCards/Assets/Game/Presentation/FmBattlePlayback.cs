@@ -22,6 +22,7 @@ namespace FantasyCards.Presentation
         private readonly HashSet<int> battleRevealedSpells = new HashSet<int>();
         private readonly Dictionary<int, List<bool>> battleCoinResults = new Dictionary<int, List<bool>>();
         private BattleEvent battleClashContext;
+        private string polishClashPair = "";
         private BattleState BattleDisplayState => battleVisualState ?? engine.State;
 
         // Read-only observations for native/browser verification. Playback never owns battle state.
@@ -36,7 +37,7 @@ namespace FantasyCards.Presentation
         private IEnumerator ReplayBattleFrames(BattleState before, List<BattlePlaybackFrame> frames)
         {
             locked = battlePlaybackActive = true; battleSkipRequested = false;
-            battlePlaybackIndex = 0; battlePlaybackCount = frames.Count;
+            battlePlaybackIndex = 0; battlePlaybackCount = frames.Count; polishClashPair = "";
             battlePresentedEvents.Clear(); battleRevealedSpells.Clear(); battleCoinResults.Clear(); battleCardTransitions.Clear(); battlePlaybackCaption = "전투 진행";
             battleVisualState = before; ShowBattle();
             // All events are retained. Speed and skip only shorten presentation, never reroll a coin.
@@ -108,7 +109,7 @@ namespace FantasyCards.Presentation
             bool healingSpell = item.kind == "spell" && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
                 (CardCatalog.Get(item.sourceDefinitionId).effect == Effect.Heal || CardCatalog.Get(item.sourceDefinitionId).effect == Effect.HealAll);
             bool heal = spell && (healingSpell || (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0);
-            float duration = coin ? .58f : attack ? .65f : defeat ? .54f : burn ? .40f : spell ? .54f : play ? .4f : item.kind == "power" ? .46f : .25f;
+            float duration = coin ? .78f : attack ? .82f : defeat ? .72f : burn ? .48f : spell ? .60f : play ? .44f : item.kind == "power" ? .52f : .25f;
 
             RectTransform source = null, target = null;
             if (item.sourceInstanceId >= 0) battleUnitViews.TryGetValue(item.sourceInstanceId, out source);
@@ -128,6 +129,8 @@ namespace FantasyCards.Presentation
 
             var layer = new GameObject("Battle event " + item.sequence + " " + item.kind, typeof(RectTransform)).GetComponent<RectTransform>();
             layer.SetParent(root, false); Anchor(layer, 0, 0, 1, 1);
+            var arrivals = new Dictionary<RectTransform, Vector3>();
+            var arrivalDestinations = new Dictionary<RectTransform, Vector3>();
             if (battleClashContext != null)
             {
                 // The 2017 original moves the pair into a central duel. These are visual copies only.
@@ -136,6 +139,21 @@ namespace FantasyCards.Presentation
                 var copies = new Dictionary<int, RectTransform>();
                 AddClashCard(layer, battleClashContext.sourcePlayer, battleClashContext.sourceInstanceId, copies);
                 AddClashCard(layer, battleClashContext.targetPlayer, battleClashContext.targetInstanceId, copies);
+                string pair = Mathf.Min(battleClashContext.sourceInstanceId, battleClashContext.targetInstanceId) + ":" +
+                    Mathf.Max(battleClashContext.sourceInstanceId, battleClashContext.targetInstanceId);
+                if (pair != polishClashPair && (coin || item.kind == "power"))
+                {
+                    foreach (var entry in copies)
+                    {
+                        if (!battleUnitViews.TryGetValue(entry.Key, out var original)) continue;
+                        int owner = entry.Key == battleClashContext.sourceInstanceId ? battleClashContext.sourcePlayer : battleClashContext.targetPlayer;
+                        Vector2 offset = BattleViewCenter(original) - ClashCenter(owner);
+                        Vector3 displacement = entry.Value.parent.InverseTransformVector(root.TransformVector(new Vector3(offset.x * root.rect.width, offset.y * root.rect.height, 0)));
+                        arrivals[entry.Value] = entry.Value.localPosition + displacement;
+                        arrivalDestinations[entry.Value] = entry.Value.localPosition;
+                    }
+                }
+                polishClashPair = pair;
                 if (copies.TryGetValue(item.sourceInstanceId, out var centralSource))
                 { source = centralSource; sourcePoint = ClashCenter(item.sourcePlayer); }
                 if (copies.TryGetValue(item.targetInstanceId, out var centralTarget))
@@ -153,6 +171,14 @@ namespace FantasyCards.Presentation
             Quaternion sourceRotation = source != null ? source.localRotation : Quaternion.identity;
             CanvasGroup sourceOpacity = null;
             Color tint = EventColor(item);
+            FmPolishTargetGraphic trace = null;
+            if ((attack || spell) && (sourcePoint - targetPoint).sqrMagnitude > .001f)
+            {
+                trace = new GameObject("Actual event target trace", typeof(RectTransform), typeof(FmPolishTargetGraphic)).GetComponent<FmPolishTargetGraphic>();
+                trace.transform.SetParent(layer, false); Anchor((RectTransform)trace.transform, 0, 0, 1, 1);
+                trace.Source = sourcePoint; trace.Target = targetPoint; trace.Tint = tint;
+                trace.transform.SetSiblingIndex(battleClashContext != null ? 2 : 0);
+            }
 
             if (coin && battleClashContext != null)
             {
@@ -186,8 +212,8 @@ namespace FantasyCards.Presentation
                 string playCue = terrainPlay ? "terrain" : play && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
                     CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Equipment ? "equip" :
                     play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Spell ? "card-draw" : "summon";
-                FmBattleAudio.Play(defeat ? "destroy" : burn ? "burn" : heal ? "heal" : spell ? "spell" :
-                    attack ? item.kind == "counter" ? "counter" : "attack" : playCue);
+                FmBattleAudio.PlayAt(defeat ? "destroy" : burn ? "burn" : heal ? "heal" : spell ? "spell" :
+                    attack ? item.kind == "counter" ? "counter" : "attack" : playCue, (sourcePoint.x - .415f) * 1.5f);
                 if (defeat && source != null)
                 {
                     sourceOpacity = source.GetComponent<CanvasGroup>();
@@ -219,30 +245,44 @@ namespace FantasyCards.Presentation
             bool impactPlayed = false;
             for (float elapsed = 0; elapsed < duration && !battleSkipRequested; elapsed += Time.unscaledDeltaTime * battlePlaybackSpeed)
             {
-                float p = Mathf.Clamp01(elapsed / duration), punch = Mathf.Sin(Mathf.PI * Mathf.Clamp01(p * 1.5f));
-                if (effect != null) { effect.Progress = p; effect.SetAllDirty(); }
+                float p = Mathf.Clamp01(elapsed / duration);
+                if (effect != null) { effect.Progress = attack ? Mathf.InverseLerp(.34f, 1, p) : p; effect.SetAllDirty(); }
+                if (trace != null) { trace.Progress = p; trace.SetAllDirty(); }
+                foreach (var arrival in arrivals)
+                    if (arrival.Key != null) arrival.Key.localPosition = Vector3.Lerp(arrival.Value, arrivalDestinations[arrival.Key], Mathf.SmoothStep(0, 1, p / .32f));
                 if (coinFace != null)
                 {
-                    float flip = p < .74f ? Mathf.Max(.075f, Mathf.Abs(Mathf.Cos(p * Mathf.PI * 5))) : Mathf.SmoothStep(.15f, 1, (p - .74f) / .26f);
+                    float flip = p < .62f ? Mathf.Max(.075f, Mathf.Abs(Mathf.Cos(p * Mathf.PI * 5))) : Mathf.SmoothStep(.15f, 1, (p - .62f) / .12f);
                     coinFace.localScale = new Vector3(flip, 1, 1);
                 }
                 if (source != null && attack)
                 {
                     Vector3 direction = source.parent.InverseTransformVector(root.TransformVector(new Vector3((targetPoint.x - sourcePoint.x) * root.rect.width, (targetPoint.y - sourcePoint.y) * root.rect.height, 0))).normalized;
-                    source.localPosition = sourcePosition + direction * Mathf.Min(root.rect.height * .06f, 64) * punch;
-                    source.localScale = sourceScale * (1 + punch * .055f);
+                    // Wind up, strike, hold the impact briefly, then return.
+                    float movement = p < .20f ? -.22f * Mathf.SmoothStep(0, 1, p / .20f) :
+                        p < .42f ? Mathf.Lerp(-.22f, 1, Mathf.SmoothStep(0, 1, (p - .20f) / .22f)) :
+                        p < .50f ? 1 : 1 - Mathf.SmoothStep(0, 1, (p - .50f) / .50f);
+                    source.localPosition = sourcePosition + direction * Mathf.Min(root.rect.height * .065f, 70) * movement;
+                    source.localScale = sourceScale * (1 + Mathf.Max(0, movement) * .045f);
+                    source.localRotation = sourceRotation * Quaternion.Euler(0, 0, movement * (item.sourcePlayer == 0 ? -2.5f : 2.5f));
                 }
-                if (target != null && hit && p >= .30f)
-                    target.localPosition = targetPosition + Vector3.right * Mathf.Sin(p * 70) * (1 - p) * (item.amount > 0 ? 8 : 3);
+                if (target != null && hit && p >= .42f)
+                    target.localPosition = targetPosition + Vector3.right * Mathf.Sin((p - .42f) * 74) * (1 - p) * (item.amount > 0 ? 10 : 3);
                 if (source != null && defeat)
                 {
-                    source.localScale = sourceScale * (1 - p * .62f); source.localRotation = Quaternion.Euler(0, 0, -p * 16);
-                    if (sourceOpacity != null) sourceOpacity.alpha = 1 - p;
+                    Vector2 end = GraveyardCenter(item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor);
+                    Vector2 offset = (end - sourcePoint) * Mathf.SmoothStep(0, 1, p);
+                    Vector3 travel = root.TransformVector(new Vector3(offset.x * root.rect.width,
+                        offset.y * root.rect.height + Mathf.Sin(p * Mathf.PI) * root.rect.height * .06f, 0));
+                    source.localPosition = sourcePosition + source.parent.InverseTransformVector(travel);
+                    source.localScale = sourceScale * (1 - p * .80f); source.localRotation = sourceRotation * Quaternion.Euler(0, 0, -p * 24);
+                    if (sourceOpacity != null) sourceOpacity.alpha = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.42f, 1, p));
                 }
+                if (source != null && item.kind == "power") source.localScale = sourceScale * (1 + Mathf.Sin(p * Mathf.PI) * .04f);
                 if (number != null)
                 {
                     number.rectTransform.anchoredPosition = Vector2.up * (Mathf.SmoothStep(0, 1, p) * 28);
-                    var c = number.color; c.a = Mathf.Clamp01((1 - p) * 4); number.color = c;
+                    var c = number.color; c.a = attack && p < .42f ? 0 : Mathf.Clamp01((1 - p) * 4); number.color = c;
                 }
                 if (flyingCard != null)
                 {
@@ -253,8 +293,8 @@ namespace FantasyCards.Presentation
                 }
                 if (play && p >= .52f && !impactPlayed)
                 { impactPlayed = true; FmBattleAudio.Play("card-land"); }
-                if (attack && p >= .34f && !impactPlayed)
-                { impactPlayed = true; FmBattleAudio.Play(audioSource, hit && item.amount <= 0 ? "shield" : "hit"); }
+                if (attack && p >= .42f && !impactPlayed)
+                { impactPlayed = true; FmBattleAudio.PlayAt(hit && item.amount <= 0 ? "shield" : "hit", (targetPoint.x - .415f) * 1.5f); }
                 yield return null;
             }
             if (source != null) { source.localPosition = sourcePosition; source.localScale = sourceScale; source.localRotation = sourceRotation; }
@@ -274,8 +314,14 @@ namespace FantasyCards.Presentation
             return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3215f : .957f);
         }
         private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .785f : .490f);
-        private static Vector2 DeckCenter(int owner) => new Vector2(.90f, owner == 1 ? .49f : .42f);
-        private static Vector2 GraveyardCenter(int owner) => new Vector2(.90f, owner == 1 ? .43f : .37f);
+        private Vector2 DeckCenter(int owner)
+        {
+            bool small = canvas.pixelRect.height < 600 && canvas.pixelRect.width < 900;
+            float y = small ? .977f - (15 + 23 * (owner == 1 ? 7 : 8)) / canvas.pixelRect.height : owner == 1 ? .47454f : .40763f;
+            return new Vector2(owner == 1 ? .898f : .862f, y);
+        }
+        private Vector2 GraveyardCenter(int owner)
+        { var point = DeckCenter(owner); point.x = .937f; return point; }
         private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .785f : .490f);
         private void AddClashCard(Transform parent, int owner, int instanceId, Dictionary<int, RectTransform> copies)
         {

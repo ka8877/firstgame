@@ -103,6 +103,7 @@ namespace PathOfDawn.Presentation
                 else if (keyboard.iKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowStatus(); }
                 else if (keyboard.bKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowInventory(); }
                 else if (keyboard.mKey.wasPressedThisFrame) { if (IsModal) Resume(); else ShowJournal(); }
+                else if (keyboard.hKey.wasPressedThisFrame && !IsModal) Ui.ToggleScenicView();
             }
             if (Player.Enabled == IsModal) Player.Enabled = !IsModal;
             Player.Actor.SetLamp(Journey != null && Journey.LampEquipped);

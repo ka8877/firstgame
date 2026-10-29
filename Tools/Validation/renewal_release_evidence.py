@@ -4,10 +4,10 @@ from pathlib import Path, PurePosixPath
 import hashlib, importlib.util, json, re, subprocess, sys, urllib.parse, xml.etree.ElementTree as ET
 from restoration_source_binding import ROOT, verify, digest
 from renewal_player_payload import verify_windows_payload
-REVISIONS={'FantasyCards':'fm-renewal-2026-10-29','PathOfDawn':'gospel-renewal-2026-10-29'}
-OUT=ROOT/'Artifacts/Validation/Renewal'
-BUILD=Path('/tmp/firstgame-renewal-builds')
-STAGE=Path('/tmp/firstgame-renewal-staged-site')
+REVISIONS={'FantasyCards':'fm-polish-2026-10-29','PathOfDawn':'gospel-radiance-2026-10-29'}
+OUT=ROOT/'Artifacts/Validation/Polish'
+BUILD=Path('/tmp/firstgame-polish-builds')
+STAGE=Path('/tmp/firstgame-polish-staged-site')
 PUBLIC_BASE='https://ka8877.github.io/firstgame/'
 GAME_SLUGS={'FantasyCards':'fantasy-cards','PathOfDawn':'path-of-dawn'}
 
@@ -40,7 +40,7 @@ def verify_portal_review(report=None):
  manifest=read(manifest_path);manifest_ref=ref(manifest_path)
  require(manifest.get('releaseProfile')=='renewal' and manifest.get('publishReady') is True and manifest.get('sourceDirty') is False and manifest.get('gameRevisions')==REVISIONS and manifest.get('contentVersions')=={'FantasyCards':'fm-classic-0.1.0','PathOfDawn':'gospel-0.1.0'},'Current clean Renewal manifest required')
  require(re.fullmatch(r'[0-9a-f]{40}',manifest.get('sourceCommit','')) and report.get('sourceCommit')==manifest['sourceCommit'] and report.get('gameRevisions')==REVISIONS,'Portal source/revisions differ from current stage')
- require(report.get('manifest',{}).get('file')=='Artifacts/RenewalWebPlaytest/build-manifest.json' and report['manifest'].get('sha256')==manifest_ref['sha256'],'Portal manifest differs from current stage')
+ require(report.get('manifest',{}).get('file')=='Artifacts/PolishWebPlaytest/build-manifest.json' and report['manifest'].get('sha256')==manifest_ref['sha256'],'Portal manifest differs from current stage')
  files=manifest.get('files',{})
  require(isinstance(files,dict) and 'index.html' in files and 'site.css' in files and 'build-manifest.json' not in files,'Complete staged public file map required')
  expected={**files,'build-manifest.json':manifest_ref['sha256']};audited=file_rows(report.get('files',[]),'Public audit')
@@ -92,7 +92,7 @@ def verify_builds():
  subprocess.run([sys.executable,str(ROOT/'Tools/Data/Renewal/verify-media.py')],cwd=ROOT,check=True)
  authoring_path=OUT/'card-authoring-final.json'
  authoring=json.loads(subprocess.check_output([sys.executable,str(ROOT/'Tools/Validation/verify-card-authoring.py')],cwd=ROOT,text=True))
- require(authoring.get('status')=='passed' and authoring.get('completeDefinitions')==2571 and read(authoring_path)==authoring,'Current complete generated CardAsset semantics differ from final authoring verification')
+ require(authoring.get('status')=='passed' and authoring.get('completeDefinitions')==read(ROOT/'Tools/Data/ClassicCards/selection.json')['expectedCount'] and authoring.get('streamedOriginals')==read(ROOT/'Tools/Data/Renewal/supported-records.json')['count'] and read(authoring_path)==authoring,'Current complete generated CardAsset semantics differ from final authoring verification')
  result={}
  for game,revision in REVISIONS.items():
   native=OUT/'Native'/game

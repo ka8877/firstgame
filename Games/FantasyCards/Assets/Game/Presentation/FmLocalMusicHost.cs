@@ -13,7 +13,7 @@ namespace FantasyCards.Presentation
         private readonly float[] weights = new float[4];
         private const float FadeOutSeconds = .55f, FadeInSeconds = .55f;
         private int selected, active = -1;
-        private bool muted, restartRequested = true;
+        private bool muted, restartRequested = true, applicationPaused;
         private float volume;
         private AudioListener outputListener;
 
@@ -83,7 +83,7 @@ namespace FantasyCards.Presentation
         private void Update()
         {
             EnsureOutputListener();
-            if (muted) return;
+            if (muted || applicationPaused) return;
             var target = sources[selected];
             if (target != null && target.clip != null && target.clip.loadState == AudioDataLoadState.Loaded)
             {
@@ -132,6 +132,19 @@ namespace FantasyCards.Presentation
             if (outputListener != null) return;
             outputListener = Object.FindFirstObjectByType<AudioListener>();
             if (outputListener == null) outputListener = gameObject.AddComponent<AudioListener>();
+        }
+        private void OnApplicationPause(bool paused)
+        {
+            applicationPaused = paused;
+            if (!paused) return;
+            // OS suspension pauses the current recording instead of treating
+            // returning to the game as a new role or a mute preference change.
+            for (int i = 0; i < sources.Length; i++)
+            {
+                if (sources[i] != null) { sources[i].Pause(); sources[i].volume = 0; }
+                weights[i] = 0;
+            }
+            active = -1;
         }
         private void OnDestroy()
         {

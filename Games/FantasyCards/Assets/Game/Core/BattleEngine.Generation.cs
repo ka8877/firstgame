@@ -33,7 +33,8 @@ namespace FantasyCards.Core
                     || proof.reason == "id-copy" && RenewalCardSkills.IdCopy(proof.sourceDefinitionId) && definition.kind == CardKind.Unit && definition.level <= 2
                     || proof.reason == "premium-stone" && code == 397 && proof.definitionId == "fm_2050330032"
                     || proof.reason == "premium-echo" && code == 473 && definition.kind == CardKind.Unit && definition.level <= CardCatalog.Get(proof.sourceDefinitionId).level
-                    || proof.reason == "premium-wood" && code == 518 && proof.definitionId == "fm_2042920052";
+                    || proof.reason == "premium-wood" && code == 518 && proof.definitionId == "fm_2042920052"
+                    || proof.reason == "polish-death-mirror" && code == 131 && definition.kind == CardKind.Unit && definition.level < CardCatalog.Get(proof.sourceDefinitionId).level;
                 if (!allowed) throw new ArgumentException("원본 기술에서 지원하지 않는 카드 생성입니다.");
             }
             if (!seen.SetEquals(instances.Keys.Where(id => id >= firstGenerated))) throw new ArgumentException("생성 카드 출처 기록이 누락되었습니다.");

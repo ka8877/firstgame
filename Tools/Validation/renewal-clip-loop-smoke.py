@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 import hashlib,http.server,importlib.util,json,math,subprocess,sys,threading,time,urllib.parse,urllib.request
 from playwright.sync_api import sync_playwright
-ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'Artifacts/Validation/Renewal/AudioClipLoops';MEDIA=ROOT/'Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard'
+ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'Artifacts/Validation/Polish/AudioClipLoops';MEDIA=ROOT/'Games/FantasyCards/Assets/StreamingAssets/Audio/ModernCard'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def now():return datetime.now(timezone.utc).isoformat()
 spec=importlib.util.spec_from_file_location('renewal_loop_observer_helpers',ROOT/'Tools/Validation/web-smoke.py');BASE=importlib.util.module_from_spec(spec);spec.loader.exec_module(BASE)

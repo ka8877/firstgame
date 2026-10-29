@@ -19,7 +19,10 @@ namespace FantasyCards.Presentation
         {
             battleScreen = false; redraw = ShowRestorationPremiumHub; Clear(); FmOriginalMusic.SetScene("deck"); RestorationBackdrop();
             Text(root, "상위 등급 카드", .045f, .90f, .955f, .98f, 42, ivory);
-            Text(root, "원작 인쇄 카드 · 등급별 전투 카드와 전체 원본을 확인하세요.", .045f, .818f, .955f, .90f, 25, gold);
+            Text(root, "원작 인쇄 카드 · 등급별 전투 카드와 전체 원본", .045f, .818f, .73f, .90f, 25, gold);
+            int rareCount = CardCatalog.All.Count(card => card.rarity == CardRarity.Rare);
+            RestorationButton(root, "레어 · " + rareCount + "종", .755f, .821f, .955f, .894f,
+                () => { ResetCollectionFilters(); collectionRarity = (int)CardRarity.Rare; ShowCollection(false); });
             CardRarity[] grades = { CardRarity.Special, CardRarity.Unique, CardRarity.Legend, CardRarity.Secret };
             for (int i = 0; i < grades.Length; i++)
             {
@@ -119,7 +122,7 @@ namespace FantasyCards.Presentation
 
         private void ShowRestorationArchiveDetail(OriginalArchiveCard card)
         {
-            battleScreen = false; redraw = () => ShowRestorationArchiveDetail(card); Clear(); RestorationBackdrop();
+            battleScreen = false; redraw = () => ShowRestorationArchiveDetail(card); Clear(); polishBack = ShowRestorationOriginalArchive; RestorationBackdrop();
             RenewalSourcePrint(root, card.artResource, .035f, .075f, .49f, .94f, "Archive enlarged complete print " + card.id);
             var playable = ArchivePlayable(card);
             Text(root, CardCatalog.RarityCode(card.rarity) + " · " + CardCatalog.RarityName(card.rarity) + (playable != null ? " / 출전 지원" : " / 원본 보관"), .535f, .82f, .96f, .94f, 28, RarityColor(card.rarity));
