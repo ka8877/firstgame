@@ -1,25 +1,28 @@
 {
   "releaseProfile": "renewal",
-  "createdUtc": "2026-10-29T10:06:50.378944+00:00",
+  "currentTargets": [
+    "Web"
+  ],
+  "createdUtc": "2026-10-29T17:25:35.471951+00:00",
   "publishReady": true,
   "gameRevisions": {
-    "FantasyCards": "fm-polish-2026-10-29",
-    "PathOfDawn": "gospel-radiance-2026-10-29"
+    "FantasyCards": "fm-chronicle-2026-10-29",
+    "PathOfDawn": "gospel-chronicle-2026-10-29"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommit": "cac1b8f6a2c5813b778175b760810143b983e275",
+  "sourceCommit": "c7e41d91afdd60b92663f90eb11fd114f816ac2c",
   "sourceDirty": false,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "art/fantasy-cards.png": "f289a25dcbcf5aca30ba0e0a7aa774fc4b843ffeb3a03c8ffc09bbc10142a7f9",
-    "art/path-of-dawn.png": "38888cfa6f020273209c39c9b3a36141d68f9aebf3442c905fce677679c50b52",
-    "games/fantasy-cards/Build/5c62047f53e825b2ef08f911e7c8654b.wasm.unityweb": "b46742a404df82d9be26f2ef04461df805667709059f6251cf509d2e513371ad",
+    "art/fantasy-cards.png": "4a0557e09de2c4f7951b54f77f3a52faf263d196161c2220afea275ee69d1ca5",
+    "art/path-of-dawn.png": "cb02fae9e79c1af66246106f840c3b475ac5f33a5b9df570dbe85f9067a08204",
+    "games/fantasy-cards/Build/178ff1ce5a0229c718129994246e7a85.data.unityweb": "bdd1ad9acad879d3a86b0617e76e5ba2dfbe4f1694fe1793795edd7f10bf6ce5",
+    "games/fantasy-cards/Build/6376c7397fcd031d99308d413cb6b541.framework.js.unityweb": "03627247970b3f19193812f047d9df692b4551bc7630f3c96a9df0ed6e8348b3",
+    "games/fantasy-cards/Build/6852ad8d44949a2e64e9fa048273c3a5.wasm.unityweb": "d30c759aed548925fa44ff45960ca7ce37d5089586b361ec977e37d23c1838fd",
     "games/fantasy-cards/Build/a4867b85992aee1f879625bf8f72f284.loader.js": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7",
-    "games/fantasy-cards/Build/da77ee477fe0aa0ba4d125c55a75c78a.data.unityweb": "c4ce90738805684d9282a59b10f8e83da782653c0444def38809e684b5c2bdce",
-    "games/fantasy-cards/Build/e2fc6a9ad41abb9de7276a1a604a3cf8.framework.js.unityweb": "4da36d39af5746dfef666003b2a90cef72b01f498e3cea0f073169fc3edfbb9e",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/SOURCE-NOTICE.txt": "d4551366cd804b52e32ac9dabf9da6bec0d10af78960166be875a75889c04aeb",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.mp3": "e711038037f8081fa9d72f06294199a456c616d06cd8909cdd62ec6724368e8c",
     "games/fantasy-cards/StreamingAssets/Audio/ModernCard/battle.ogg": "67d70ddc22dc6d768aeedfb6540ebeb04d22c8b6044186c9ecb917669d60fc96",
@@ -15388,11 +15391,12 @@
     "games/fantasy-cards/ThirdParty/Renewal-Audio-SOURCE-NOTICE.txt": "0e4ef51a81e33017db350b7008f0c65d823ecd6230bee19bb63058b9d4088a13",
     "games/fantasy-cards/ThirdParty/Restoration-SOURCE-NOTICE.txt": "3dc8cf85a5d6dca3292050650dc6faa3f6588a10c7a4ede6ae33efcb302f5073",
     "games/fantasy-cards/ThirdParty/Revival-SOURCE-NOTICE.txt": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73",
-    "games/fantasy-cards/index.html": "92f221b59aaf820ef4bf86b5083ac0f0e94ecf66f945272bc1395f170b8694c4",
-    "games/path-of-dawn/Build/9a5559925b6ce8e8c997e08b2b356747.framework.js.unityweb": "5c0f1bed8717bfe30538e560e0fca676e19030ed169f67638f075bc289be20aa",
-    "games/path-of-dawn/Build/d8bf4c14b9f0d40598945899b992279e.loader.js": "2ecd1ad7e3c4af896ea64ed97ee1709ff1083b2d303104b24946f55fec25d591",
-    "games/path-of-dawn/Build/f3f33ec5ee520a4864a5fcf5e4c97b46.data.unityweb": "a16fa325aa2fe89b3d3b7844724194d2fc327e596ae5875724fb869fe7e102c4",
-    "games/path-of-dawn/Build/f8d13f0c3a4f89bb287a1b43790bf422.wasm.unityweb": "0a2d3acf3c3ac038f5ff9877e30c757f6f7626ade13396a3663ec5af8a67ef62",
+    "games/fantasy-cards/index.html": "0ed72a1a8f60f4fb063da7cd2d62c3095ce46c219ce5ece01902e86526ec7378",
+    "games/path-of-dawn/Build/043346513c41e5e99167f064afc705e4.framework.js.unityweb": "2ad84bc78d3efae7d288804d235762d0e848d509e7bb8ccf5a1746056bd630da",
+    "games/path-of-dawn/Build/04a4124edd5b79ddf109178adcd76553.wasm.unityweb": "6eff9389851475bf9818879712c2e99b6e5f16eb50f99b790813d7c7df1567ca",
+    "games/path-of-dawn/Build/5d8c19101c2e6d393635af69aa06cef9.data.unityweb": "94c69dda274a2f0936a3e4a8510720a97be1dbe5383f94caff71403e3a005050",
+    "games/path-of-dawn/Build/a4867b85992aee1f879625bf8f72f284.loader.js": "963d44ada485f7a51b0836a33f4bccec4351721a4cec6c83ce3417f6462e42d7",
+    "games/path-of-dawn/ThirdParty/Chronicle-Art-SOURCE-NOTICE.txt": "8f4a438279a775af010e493c2d97e65bbf099b675772f788718b1d7c11678386",
     "games/path-of-dawn/ThirdParty/FirstGameKorean-OFL.txt": "a93334c1f1f4995de0a8d4b3212bf91a5925007d02aa3c20b1de83d9e64fe464",
     "games/path-of-dawn/ThirdParty/Ink-LICENCE.md": "ccdb47efceb80452798d5d0d14ab26a11c5edb6267bcd90a4035912937675a29",
     "games/path-of-dawn/ThirdParty/LiberationSans-OFL.txt": "37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48",
@@ -15400,13 +15404,15 @@
     "games/path-of-dawn/ThirdParty/LuminousActors-SOURCE-NOTICE.txt": "0d0e50558592b81dbe511cfc779307da2c043bc0811ea38f0694dc0130dacc8a",
     "games/path-of-dawn/ThirdParty/LuminousActors-UnityCompanionLicense.txt": "d141f38cb99ffb9f2b75f2f6162e85564c69466dfdff7c78a368f0bb74a11919",
     "games/path-of-dawn/ThirdParty/Music-NOTICE.txt": "fdfa0b80f08308d1816c690bd8d8b10cb9f4f8080e6a2a473a11490884659016",
+    "games/path-of-dawn/ThirdParty/NewtonsoftJson-LICENSE.md": "a5177bfecfea04d225e4a26a631db86721a03b4080350867847e71dc26b44f85",
+    "games/path-of-dawn/ThirdParty/NewtonsoftJson-ThirdPartyNotices.md": "f07d2ea4af53fd1c9800b345bb4fbfa3ab0181d8c87625d6c265cd65142df097",
     "games/path-of-dawn/ThirdParty/Pretendard-OFL.txt": "85fce85e25260b03777bf10373d3bd9363b9da96d9e0ca86a280dd37ed7667a0",
     "games/path-of-dawn/ThirdParty/Radiance-Art-SOURCE-NOTICE.txt": "cba84fbb882fdb196babb0a032c5562b24a5cd34120c4982327a3723db04038e",
     "games/path-of-dawn/ThirdParty/Radiance-Rendering-SOURCE-NOTICE.txt": "117ed7808d229905c7f63bb5114bd8613e271fb26c3635203629afd7a726dd00",
     "games/path-of-dawn/ThirdParty/Radiance-Shaders-UnityCompanionLicense.txt": "d141f38cb99ffb9f2b75f2f6162e85564c69466dfdff7c78a368f0bb74a11919",
     "games/path-of-dawn/ThirdParty/Scripture-NOTICE.txt": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a",
-    "games/path-of-dawn/index.html": "fdca9dafefdf3f3e33916a75ba61e9c54d60df21b11ff3ef79f3581591e8b38d",
-    "index.html": "a1f6ef70fede1a4c7674b2786060ca1dc2036596ac3a42565df28aaaf19eabc7",
+    "games/path-of-dawn/index.html": "5982018e9a78c4f50276d85c88070575729f2e66bdca0d078b5f63a4bc79d9ce",
+    "index.html": "abeddfea95dff5c4c4fb480077d753021bc0cee6986b25f6a7b2a4ea4214c711",
     "site.css": "0db62e51c8c98f814848719084d979b834c3afd9fcb977f30a2bafbec2305e57"
   },
   "browserProfiles": [
@@ -15424,123 +15430,86 @@
     ]
   },
   "browserReportRootsByGame": {
-    "FantasyCards": "Artifacts/Validation/Polish",
-    "PathOfDawn": "Artifacts/Validation/Polish"
+    "FantasyCards": "Artifacts/Validation/Chronicle",
+    "PathOfDawn": "Artifacts/Validation/Chronicle"
   },
   "currentBuilds": {
+    "currentTargets": [
+      "Web"
+    ],
     "games": {
       "FantasyCards": {
         "native": {
-          "file": "Artifacts/Validation/Polish/Native/FantasyCards/binding.json",
-          "sha256": "733b12b954c5254a08ae6c94d2219ecf9fc877c42f164fcea7769945340b3e87",
-          "bytes": 587
+          "file": "Artifacts/Validation/Chronicle/Native/FantasyCards/binding.json",
+          "sha256": "1eb03afa2db1c4979a76d678db22ae1836f820974242496f983b953342006a2b",
+          "bytes": 590
         },
         "nativeResults": {
-          "file": "Artifacts/Validation/Polish/Native/FantasyCards/native.xml",
-          "sha256": "934eacc589cdac5af0f872ac38a8c1f9bfde46f3ee5660473dda5bfdaa5f7c01",
-          "bytes": 12284
+          "file": "Artifacts/Validation/Chronicle/Native/FantasyCards/native.xml",
+          "sha256": "710e45a7b60efda994392fe995e2d597e67d2f312eb0bb85f8845ef9725803c4",
+          "bytes": 12342
         },
         "nativeRootReview": {
-          "file": "Artifacts/Validation/Polish/Root/cards-native-review.json",
-          "sha256": "dfcba347b46793f2fd1c1d1af938132de8706c3ad7b5a1600a63f815ef5718ac",
-          "bytes": 4795
+          "file": "Artifacts/Validation/Chronicle/Root/cards-native-review.json",
+          "sha256": "141e0230a28bac6fb3ae79a990ea76e553e3af704f19c36d7e107daaaacd3659",
+          "bytes": 4584
         },
         "targets": {
-          "Windows": {
-            "evidence": {
-              "file": "/tmp/firstgame-polish-builds/FantasyCards/Windows/BuildEvidence.txt",
-              "sha256": "6e746453844aaef21309896109f58fd0d6a746683492265d188409d32675b6d1",
-              "bytes": 274
-            },
-            "inputs": {
-              "file": "/tmp/firstgame-polish-builds/FantasyCards/Windows/BuildInputs.json",
-              "sha256": "25d8df16c242b5472ddcfd35fc8a405ac432eb4bc34750ca1ce6b60663451eaf",
-              "bytes": 8084230
-            },
-            "sourceFingerprint": "3c3ea6bde86fd039d43afd4af0a825b802aea48687686656cea1f2e11b2c1532"
-          },
           "Web": {
             "evidence": {
-              "file": "/tmp/firstgame-polish-builds/FantasyCards/Web/BuildEvidence.txt",
-              "sha256": "9bcf0c3e047e9d7bf87e35c3f74d6b4a8b7a8407bfbcf1729d2b8020db2e8f05",
-              "bytes": 259
+              "file": "/tmp/firstgame-chronicle-builds/FantasyCards/Web/BuildEvidence.txt",
+              "sha256": "4acc88af01026ce405687dbf1d5aed6d43dd4e3f076c788f5444478956561617",
+              "bytes": 262
             },
             "inputs": {
-              "file": "/tmp/firstgame-polish-builds/FantasyCards/Web/BuildInputs.json",
-              "sha256": "0c738367c9ab1f1eaff690963c9b92f9829dcbc16b2710d8b6effb16df808a0a",
-              "bytes": 8084230
+              "file": "/tmp/firstgame-chronicle-builds/FantasyCards/Web/BuildInputs.json",
+              "sha256": "b8ae6a597addee7e3593f8af9a8e25bec885ec5694a0a4e400379cf96e4b633f",
+              "bytes": 8085614
             },
-            "sourceFingerprint": "3c3ea6bde86fd039d43afd4af0a825b802aea48687686656cea1f2e11b2c1532"
+            "sourceFingerprint": "5d73253c00fc815d2eca13cdacb340bb39b8775aa61f3a1d58049ce113c26344"
           }
-        },
-        "windowsPayload": {
-          "file": "Artifacts/Validation/Polish/Payloads/FantasyCards-Windows.json",
-          "bytes": 3005301,
-          "sha256": "12ac31fdab7f1624172660b81c34433a047811c8e4bc8a566fd3748fe5d5f45e",
-          "runtimeFiles": 15534,
-          "runtimeBytes": 1113311359
         }
       },
       "PathOfDawn": {
         "native": {
-          "file": "Artifacts/Validation/Polish/Native/PathOfDawn/binding.json",
-          "sha256": "b803eaa7ef69784f0b989aaa970d64e62a18eacbc42d15fcebdf461364f8a637",
-          "bytes": 583
+          "file": "Artifacts/Validation/Chronicle/Native/PathOfDawn/binding.json",
+          "sha256": "e898ba9386d50f243b60e7859cacdac99073612b6f771c3c073695888808221a",
+          "bytes": 586
         },
         "nativeResults": {
-          "file": "Artifacts/Validation/Polish/Native/PathOfDawn/native.xml",
-          "sha256": "8669ff27e20e100e2dc1598a76785d3ed9ac3066eb78efcab61319ef868484c7",
-          "bytes": 6224
+          "file": "Artifacts/Validation/Chronicle/Native/PathOfDawn/native.xml",
+          "sha256": "c38cb6d34f919bc669be75674355826aa02b3b2495cd7b3b6877a25d2fdfb34f",
+          "bytes": 7429
         },
         "nativeRootReview": {
-          "file": "Artifacts/Validation/Polish/Root/gospel-native-review.json",
-          "sha256": "5b5e6290e63b79ced760a65cbb45eee61493fe63b6ac5376297b85423c4d9132",
-          "bytes": 5203
+          "file": "Artifacts/Validation/Chronicle/Root/gospel-native-review.json",
+          "sha256": "d804bc52818e9010998a587453145385c184ccc304cd573061cad0e4a3e79390",
+          "bytes": 6398
         },
         "targets": {
-          "Windows": {
-            "evidence": {
-              "file": "/tmp/firstgame-polish-builds/PathOfDawn/Windows/BuildEvidence.txt",
-              "sha256": "5c67e6dcd8a8ec590fc364674e9a17fc405a3ac30d03635bdfd1800bd3f4bfab",
-              "bytes": 434
-            },
-            "inputs": {
-              "file": "/tmp/firstgame-polish-builds/PathOfDawn/Windows/BuildInputs.json",
-              "sha256": "343e21956db6a97bff83ac8329186067f62894394dd619b1ffdbb184d5e7f37b",
-              "bytes": 347548
-            },
-            "sourceFingerprint": "0ac9dece22521a074add4b521ce1a52aefde938893d0fff9e9b3ecb30a4224ab"
-          },
           "Web": {
             "evidence": {
-              "file": "/tmp/firstgame-polish-builds/PathOfDawn/Web/BuildEvidence.txt",
-              "sha256": "fde811e97094281f5f4a2d13aec342d44203d0ed2393ddac82ac4a82849c3547",
-              "bytes": 411
+              "file": "/tmp/firstgame-chronicle-builds/PathOfDawn/Web/BuildEvidence.txt",
+              "sha256": "8250d80aa8627c805d9c9a683dab2b88a11985a80418bf066d6d66ceeff8bfa9",
+              "bytes": 415
             },
             "inputs": {
-              "file": "/tmp/firstgame-polish-builds/PathOfDawn/Web/BuildInputs.json",
-              "sha256": "720f9a0423ce08e038d2ba3f3fc974d09a358f74a5caaeebfaf8aa377df3d277",
-              "bytes": 347548
+              "file": "/tmp/firstgame-chronicle-builds/PathOfDawn/Web/BuildInputs.json",
+              "sha256": "1fe6106512102460f79a01353aeb19715c88b44daf439484a10e28eb060504f0",
+              "bytes": 354674
             },
-            "sourceFingerprint": "0ac9dece22521a074add4b521ce1a52aefde938893d0fff9e9b3ecb30a4224ab"
+            "sourceFingerprint": "ee16042b520f5df08dee4dda183a4bb0809b15fd66dbdc8e21aa22fd0a8c5b9a"
           }
-        },
-        "windowsPayload": {
-          "file": "Artifacts/Validation/Polish/Payloads/PathOfDawn-Windows.json",
-          "bytes": 33717,
-          "sha256": "9d1278ec597e8d734f04a17595fbcb86c0ce3007737185d622bf34356709bdbf",
-          "runtimeFiles": 176,
-          "runtimeBytes": 255356443
         }
       }
     },
     "core": {
-      "file": "Artifacts/Validation/Polish/Core/core-tests.trx",
-      "sha256": "5e0be37b5fa1d0b1669a3c72dc3dadacd9c6369483f8a131d50fe12931638acd",
-      "bytes": 288654
+      "file": "Artifacts/Validation/Chronicle/Core/core-tests.trx",
+      "sha256": "011c0e4ba740b5c4a037fe138d1e96318c0e72392ed985faddb3f978e2274659",
+      "bytes": 313886
     },
     "authoring": {
-      "file": "Artifacts/Validation/Polish/card-authoring-final.json",
+      "file": "Artifacts/Validation/Chronicle/card-authoring-final.json",
       "sha256": "d7fb313cf19eb5b36e27d156ec26451fb5dd5e4367d09e4d5d5db91361ff8da8",
       "bytes": 1124
     }
@@ -15551,70 +15520,50 @@
         "game": "FantasyCards",
         "profile": "Desktop720",
         "report": {
-          "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/report.json",
-          "sha256": "ac7a27e518e9695a13ce3b5e565d2226f15628d1270f8d189270c386040d7131",
-          "bytes": 12386017
+          "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/report.json",
+          "sha256": "f1c77e4adf2616536532566ba9bf1aa8cc83f14b1bf7627579fb8d50361801ca",
+          "bytes": 13180767
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/title.png",
-            "sha256": "fa75a8b0b2116689af174636906d6d1db252e9529e8950898b132a1c0c90d8c7"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/late-clash-01-compositor-0-050.png",
+            "sha256": "40ca1719fb6e0a2d26f9a09dae6bd3f846213b0691c881ee4c830b5bc1c7acc5"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/playable-high-grades.png",
-            "sha256": "f289a25dcbcf5aca30ba0e0a7aa774fc4b843ffeb3a03c8ffc09bbc10142a7f9"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/late-clash-01-compositor-0-070.png",
+            "sha256": "dc3786c75f703a3a93f91b65de1e93fec25c0f529808af041640f3f3c1a1dd04"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/rare-playable-filter.png",
-            "sha256": "3a1966dd6089b664e6dd87ee67f63425ad66fb8ca9d19b86c2ccf71af8b8cb40"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/late-clash-02-compositor-1-050.png",
+            "sha256": "ebec8ff77d297c23ab247599b48732df45eaf0d515901692f4d7d4a8f8ec653a"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/new-special-detail.png",
-            "sha256": "96961b701078e1d48344e892d3654a430b44fa1fca19660942828b29e8bedbe3"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/late-clash-02-compositor-1-065.png",
+            "sha256": "4a0557e09de2c4f7951b54f77f3a52faf263d196161c2220afea275ee69d1ca5"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/new-special-original-print.png",
-            "sha256": "f0b4e05e9739ebb016b53856dd7ed4ab7c75f527b15af8bfa3fd6869939ffd09"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/original-hand-and-field.png",
+            "sha256": "332037b0b44fb1deaf239cd02c65a12e5d5a208c9fa1b8b31b8a37694f680e04"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/opponent-info.png",
-            "sha256": "5376465a8066dd1795e0205075b2d4c875b2a7c864391308d874227dd50b291e"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/terrain-detail.png",
+            "sha256": "ee478cc0f8544cb04e0b508ccaec703a96a69ec5fc1c0d968dfada8886b9e04b"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/terrain-detail.png",
-            "sha256": "045c499538a8a40de176aa3d108a6107a8020793b60aa12ac58f5a6d32302391"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/terrain-detail-closed.png",
+            "sha256": "986bad3a5c89209d60318c18339f7be63d321423b99847f0f4bf4e6af9377a32"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/terrain-detail-closed.png",
-            "sha256": "2b3a1e924645ccfb0ee4189684aad8b5bf4b62dbe3dbb1b2c45d63bca6f421a7"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/local-practice-note.png",
+            "sha256": "292d8214742985bf63d3fb1884adad9758d8d2b7ea201edb5948f1c85c61fc32"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/ready-resolution-02.png",
-            "sha256": "e423a9dcb46a27d3fc79a47909f3b30e6c484821c2ce2cbb73b87c28fb39afc1"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/continued-battle.png",
+            "sha256": "a9e5f63279c9374504888ccc5143b924847279a6c78f3e7472e9b6574166c528"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/ready-resolution-03.png",
-            "sha256": "ed4545988b74e6eb05f3088e1c0ee5ad951c3cda8111b78db4ebab7abe2a58b3"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/ready-resolution-04.png",
-            "sha256": "5b0cb4172cecf130771618a18f81b96810322d80ef4a66b1a0ceac1d39c40b60"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/ready-resolution-06.png",
-            "sha256": "7c811250e78004e9e96fc32209511dcd71130e32526e143e27f95f2e647bb039"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/resolved-battle-event-feed.png",
-            "sha256": "a31aad57203855e68670ddf1fa23575fc0759ff907a0722b06c3536a4e5a2bda"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/continued-battle.png",
-            "sha256": "fd9e4a685c46060de14dedb1dce84927695cfa5bbea9b9b4505106ae6bbeaa20"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Desktop720/FantasyCards/continued-after-invalid-transfer.png",
-            "sha256": "a5fc31f150bce71c48496da06d3df080baa3271c056002d51a667ad5a6b70897"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/FantasyCards/resolved-battle-event-feed.png",
+            "sha256": "405201fb28b8ff4fd60c4b83eaa989ed7d587b5777ce365c36facbb9b539a139"
           }
         ]
       },
@@ -15622,58 +15571,34 @@
         "game": "FantasyCards",
         "profile": "Mobile844",
         "report": {
-          "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/report.json",
-          "sha256": "36e4a197437368ee533e28705c15d2c382b59e847b2eed6d6029eebdd5ff1829",
-          "bytes": 12381192
+          "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/report.json",
+          "sha256": "1dfb91e461033a896edbcc1d011602bdbdfafc9b06458a9f5a4fbefd23af8efe",
+          "bytes": 14474587
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/title.png",
-            "sha256": "0dd36960265a55ddb8ca6ee1ee87db589cbf1c6f6b3c981e3042a6916572932b"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/late-clash-01-compositor-0-080.png",
+            "sha256": "f683132313a5928e39370f4a159e1e547e8d38775c45faab0288770efbc612cf"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/playable-high-grades.png",
-            "sha256": "30f256cfcdf297972ac31bd06311d1753dc7987fb7c02a27e4a1e12b55265b96"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/late-clash-01-compositor-0-140.png",
+            "sha256": "fc04ef9d6cffb24a00c40ec6028015c383cd47089fafe9bd37566f3db1972d02"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/rare-playable-filter.png",
-            "sha256": "24ed41ab9f84a9aebf7826085d2217e343d4515005993e9a16621a635e532674"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/terrain-detail.png",
+            "sha256": "9dcb26f02e884291b960f9515444b2ed58c91619b2715a16b910b5b684e65785"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/new-special-detail.png",
-            "sha256": "d1bf10937f1e54905b2074af3ccdf346fb4d2e8a0e7cdba9fdc63da7b6955ed6"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/terrain-detail-closed.png",
+            "sha256": "b823b5e30ca777336ee0eb1496360d121a3dd684a12a0967ce63b748e5457342"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/opponent-info.png",
-            "sha256": "d1bea87fa912cd3d4f517399e5e573f738af5cd7c98f71e2fb450384e7b63967"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/continued-battle.png",
+            "sha256": "c537ed2c03615a84f730f8b98e34688d012c63a778e792bb1b4f230651776ddb"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/local-practice-note.png",
-            "sha256": "b3d951de2d6ec9423deadeadd76a228f3a07d2b7bb7aa6b4001b400da2a9118e"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/terrain-detail.png",
-            "sha256": "ddcd1a51cbfca8338d3e4979a23d364e6df8a4f26e25ff4a5830d223ebc5dd58"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/terrain-detail-closed.png",
-            "sha256": "7c786f2c242ea1d99d0d6207b63f870af11fafb2bf78a27944ecf3cfa9a6bb31"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/ready-resolution-03.png",
-            "sha256": "87307ef098b9fbc53e61fef2aee5848cb2946ad9bcdc9dcd0361a222e4473ff8"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/post-ready-field.png",
-            "sha256": "3072b87dd281799e7806e0b0eee8c5939565fd46de9a2c059e6f81dbfe79f990"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/continued-battle.png",
-            "sha256": "da70f62e90a0cc2bb8c13e2cae2da8681c88ec6899f23084203c2b257e503613"
-          },
-          {
-            "file": "Artifacts/Validation/Polish/Mobile844/FantasyCards/continued-after-invalid-transfer.png",
-            "sha256": "da70f62e90a0cc2bb8c13e2cae2da8681c88ec6899f23084203c2b257e503613"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/FantasyCards/post-ready-field.png",
+            "sha256": "5426f1577a051f3a636ccafc355aee3e26de190aba8ec9e46625fe3a8813b2b9"
           }
         ]
       }
@@ -15683,42 +15608,70 @@
         "game": "PathOfDawn",
         "profile": "Desktop720",
         "report": {
-          "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/report.json",
-          "sha256": "814ae8d6567ba0a7191b283601522c66682d17fd7993a017c61fee5152c0f38a",
-          "bytes": 143235
+          "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/report.json",
+          "sha256": "6fde4646ab3b22b8ef3278ac3ce3b98eca20ee4f02ed036588159d3d96256788",
+          "bytes": 446816
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/world-idle.png",
-            "sha256": "4f38a1b35279a9801d86884630bceefc994ebcd240a19b13081f65dd6ad39159"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/book-unopened.png",
+            "sha256": "612b3cf018b5f343fc27be91a870b46b8ddfcfeaf64ecf1e5b163d9ae39f25a9"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/radiance-scenic-spawn.png",
-            "sha256": "38888cfa6f020273209c39c9b3a36141d68f9aebf3442c905fce677679c50b52"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/book-first-discovery.png",
+            "sha256": "c37f986c00d9aaaa85632d85716e084e0147bbcd46e2dd4b3c5395ff68eedabb"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/radiance-restored-hud.png",
-            "sha256": "b019d7ef02404747d33ea09b57b873016d07887e72fb43ed8f1e70497cde2dd7"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/child-scenic.png",
+            "sha256": "575842b6fe6abb994fcd009f945c42ce14269efddba2d60bf6f725ff5ab397d5"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/illustrated-items.png",
-            "sha256": "19398f1b38e1f258bff284983ff7a1f8a2e088f488b17e9f81c896a85d03c29b"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/npc-dialogue-14.png",
+            "sha256": "f5198a446429d344e35c69cb86207c5849989ef3d06cc2ed3330c632d731396c"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/jump-air-compositor-0-002.png",
-            "sha256": "cfba853469db3214943f5d8e004a3d89507e12a210b72c3e523506ad6ff6f216"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/baptism-chapter.png",
+            "sha256": "cb02fae9e79c1af66246106f840c3b475ac5f33a5b9df570dbe85f9067a08204"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/birth-1.png",
-            "sha256": "d2e91199889d19e87dd9c8f1c1b95750f0c5885fcc6275ceae7b4b8e64fccea2"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/adult-jordan-scenic.png",
+            "sha256": "5cc52b3dc5a3faea573400e874fe7c55fbe945d1609f24dd476b1bab3d095a7d"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/continued-radiance-world.png",
-            "sha256": "da8edcc633fafd84b2abeb0512c06b51888449a8d0dec85e001907896e5d9da4"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/adult-walk-right-compositor-3-005.png",
+            "sha256": "2bcbe6abd3ce83f67d4bb6f68f1a247b33cb9ac4272d875b5c341bf199c89a43"
           },
           {
-            "file": "Artifacts/Validation/Polish/Desktop720/PathOfDawn/codex-one-collected.png",
-            "sha256": "1fd4faafb985cc6f52507bb2ac505a4053ef7f6d327a14860502ddeedd0e3ead"
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/adult-walk-left-compositor-4-005.png",
+            "sha256": "d81b9894ef320e63ee2e3ae74d60417104edc16fabb170c959be05fcb05e2ede"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/adult-jump-compositor-5-005.png",
+            "sha256": "57f26a96021deb43f352ae71b4dd56390029317bce1a02a7fdccafde79a3c92a"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/adult-jordan-world.png",
+            "sha256": "b39d0964212f0c18c8a8b9af7c1b64051724779684dddec65ce9c3384417640a"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/npc-dialogue-19.png",
+            "sha256": "5a1b028df8e206b42d582b38f61e2e3d9978e649e035824a88e1ec9ef0663b50"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/npc-dialogue-21.png",
+            "sha256": "e047cda2022131cdecb1fe4983a4b5fd9defd6577653737919510e4a4f9eeb75"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/journey-complete.png",
+            "sha256": "1031e3c25089fefa2684c7cf791c344ea8d561c92b9074062a842065f81527c1"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/continued-complete-world.png",
+            "sha256": "b2376517cfb47e968f797fadddacea97fc4b0c25044685f468641388f7de4840"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Desktop720/PathOfDawn/book-nineteen-discovered.png",
+            "sha256": "1956d6c5a3f80dd1aef6a81c16784082411fdf3d29b9db1ee9d50ed961c8bc9f"
           }
         ]
       },
@@ -15726,34 +15679,42 @@
         "game": "PathOfDawn",
         "profile": "Mobile844",
         "report": {
-          "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/report.json",
-          "sha256": "22c6d211706776a10c35dd1a52425c8db415cac1edaec35a1f4db75e4df8da56",
-          "bytes": 215831
+          "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/report.json",
+          "sha256": "7caf04ebfdaef2cf82b351528c4b035ca3d25a7f0f943d312819e5e2f052d32e",
+          "bytes": 175672
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/world-idle.png",
-            "sha256": "6730b24708458ba0bceb619b92ff726c7d48c618f38cb736762fedf65fa9a5f1"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/book-unopened.png",
+            "sha256": "da7cfe9394391492973b0354154f752d59fe868d9621378893da09c6ac1bf317"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/radiance-scenic-spawn.png",
-            "sha256": "1b80a0275ca0ae4452e9141137def774d7f538230b23257a1d646b961dfb92eb"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/book-first-discovery.png",
+            "sha256": "6f5f6c7d0c09d84f8b38e33f12524400f6f9d1e68f6c1be9780e4000c6f2bdb4"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/radiance-restored-hud.png",
-            "sha256": "b9e8ff2f0c7be4a86614701d4b7804fbc96ce9f4ce12a0649689d37f31c07ef0"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/adult-john-dialogue.png",
+            "sha256": "3897ab17c051a66a770655d9cef931107c8632c9f56dd1d0503c36b31234b039"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/illustrated-items.png",
-            "sha256": "2b5f148e3e7c619a8e0bf438b0ba73896a30c4205ffd88ea47b1c425ead7661a"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/child-world.png",
+            "sha256": "c188c13ed09de702c2f3bc2f23ad89fd49220aaaf85d164da50c32451049344b"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/birth-1.png",
-            "sha256": "6bcbb9c4f072e487850d6f5e502fd2b531cd4b4b981a449dc54e6daee026cee6"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/journey-complete.png",
+            "sha256": "afebd3b9776339e9d59243b30d2355dad0732a064d872acf1da872daef3a0269"
           },
           {
-            "file": "Artifacts/Validation/Polish/Mobile844/PathOfDawn/codex-one-collected.png",
-            "sha256": "a4313ca1fb0608055ea29209cc49b5d33d1894834834e9f30f14bf9520915871"
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/continued-complete-world.png",
+            "sha256": "5a22cd0d74eb2a28b135f72a99123fb009f34ae9b3617e668b1c44fe9ac5c4d5"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/continued-adult-visibility-0.png",
+            "sha256": "93cef3067e740f0ed64dfad4b6cc9c32f59bc7edfa8bfbbdf7f8937b8f60d547"
+          },
+          {
+            "file": "Artifacts/Validation/Chronicle/Mobile844/PathOfDawn/book-nineteen-discovered.png",
+            "sha256": "82ea9d250305020867b9f1f1195d05185abcc9caba4e366afe0f7c78a949e5dd"
           }
         ]
       }
