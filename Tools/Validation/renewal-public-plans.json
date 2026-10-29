@@ -46,7 +46,7 @@
     "requiredCheckpoints": [
       "title",
       "opening-birth",
-      "opening-age-twelve",
+      "opening-childhood",
       "world-idle"
     ],
     "steps": [
@@ -93,13 +93,13 @@
           0.182,
           0.861
         ],
-        "label": "오프닝 열두 살",
+        "label": "오프닝 네 번째 장: 나사렛 유년기",
         "settleMs": 500
       },
       {
         "type": "checkpoint",
-        "name": "opening-age-twelve",
-        "expected": "열두 살 예수님과 성전 방문 소개가 실제 그림과 함께 표시된다."
+        "name": "opening-childhood",
+        "expected": "실제 도입4/6 나사렛 유년기와 누가복음2:39–40 요약을 표시한다. 실제5/6 열두 살 장면은 별도 전체 로컬 검사에서 확인한다."
       },
       {
         "type": "click",

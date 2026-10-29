@@ -1,7 +1,7 @@
 {
   "releaseProfile": "renewal",
   "date": "2026-10-29",
-  "updatedUtc": "2026-10-29T10:04:42.039964+00:00",
+  "updatedUtc": "2026-10-29T10:21:43.493145+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-polish-2026-10-29",
     "PathOfDawn": "gospel-radiance-2026-10-29"
@@ -177,6 +177,18 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 12
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 34,
+        "report": {
+          "file": "Artifacts/Validation/Polish/PublicMobile844/FantasyCards/report.json",
+          "sha256": "0fb89f4f19ff62ebd693b5f229c07accd0f3c54623077dccebb75bc73b286517",
+          "bytes": 17785962
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 2
       }
     },
     "PathOfDawn": {
@@ -203,13 +215,36 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 6
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 20,
+        "report": {
+          "file": "Artifacts/Validation/Polish/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "49d7df4761c2fd47e28e29908b01609cc389d271a7398308f0178eb65b4fa8bd",
+          "bytes": 60996
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 2
       }
     }
   },
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
+    "stageManifest": {
+      "file": "/tmp/firstgame-polish-staged-site/build-manifest.json",
+      "sha256": "06b797c6e8b5dcf953680f83f16382ecd69c21e818cbadd8aa019030178f2df1",
+      "bytes": 2101338
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Polish/PublicPortal/report.json",
+      "sha256": "3e4c6b8562deffccd9b04a1973e4cda711d74ec4ede6ecd0704d327ac95d9df7",
+      "bytes": 10220620
+    },
+    "verifiedFiles": 15396,
+    "scope": "Every staged file fetched and hashed; actual portal originals reviewed by Root."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
