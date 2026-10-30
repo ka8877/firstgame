@@ -1,5 +1,11 @@
 # 개발과 실행
 
+최신 개정은 `fm-quest-2026-10-30` / `gospel-journey-2026-10-30`, 프로필은 `quest`, 실행 소유자는 `/root/quest_release`다. 아래 Chronicle 이하 명령·개정은 이전 기록이다. 새 구현은 [Quest](Quest.md), 실제 결과는 [QuestValidation](QuestValidation.md)를 따른다. 현재 명령은 `python3 Tools/Validation/run-quest-core.py`, `Tools/Build/quest-task.sh <Game> prepare|native|web <UniqueAttempt>`다. 새 증거는 `Artifacts/Validation/Quest`, 캐시는 저장 공간 검증과 복구 ledger가 있는 `Artifacts/QuestWork`, 플레이어는 `/tmp/firstgame-quest-builds`다. Unity·브라우저를 한 소유자가 순서대로 실행한다.
+
+기존 클론은 `FirstGame > Prepare First Slice`로 새 `GospelPilgrimageApp`·`PilgrimageProjectSetup`의 `QuestRenderer`/`QuestDesktopURP`/`QuestWebURP`를 준비한다. 과거 Luminous2D 렌더러·씬 소스는 이력으로 보존한다. 카드의 별도 SP/보유 저장과 실제 NPC의 X/Z 근접, 이전 저장의 새 슬롯 분기·본문 보존을 검사한다. 이미 통과한253개 Core 검사는 해당 입력이 바뀌지 않는 한 반복하지 않는다. 이전 고유16ZIP과 원본은 보존하며 이번에 새 대형ZIP4개를 무조건 복제하지 않는다. GitHub의 새 소스와 Pages의 실제 새 빌드·검증 기록이 현재 결과물이다.
+
+다음은 **이전 Chronicle 환경 기록**이다.
+
 현재 개정은 `fm-chronicle-2026-10-29` / `gospel-chronicle-2026-10-29`이며 [구현 안내](Chronicle.md)와 [실제 검증](ChronicleValidation.md)을 따른다. 실행 소유자는 `/root/polish_audio_research` 하나다. 이번 클라우드는 Web을 대상으로 하며, 새 플레이어·스테이지·4개 ZIP은 `/tmp/firstgame-chronicle-*`, 증거는 `Artifacts/Validation/Chronicle`에서 가리키는 전용 tmp 디렉터리에 둔다. 이전 Polish와 아래 이전 명령·수치는 제작 이력이다. 원본·이전 고유 ZIP·기존 저장을 보존하고 새 결과를 이전 통과로 대체하지 않는다.
 
 새 Gospel은 `GospelChronicle`이 순서 있는23목표·19본문과 발견·저장을 소유하며 App/UI/Actor는 이를 표시한다. M성경/J여정기록과 실제E목적지·대화, 전신 그림에 연결된 연속 관절, 소년/성인 전환·요단강·잠긴 책 면의 정보 숨김을 새 실행으로 확인한다. 기존7/15말씀 저장은 원래 흐름을 유지한다. 카드 현재 수는2,646/27덱/도감15,350이며 이번 변경은 후기 원작 배치·인쇄 숫자 위치·실제 양측 코인 판정창이다. 실행 전 현재 소스와 새 attempt를 확인하고 이미 통과한 검사를 이유 없이 반복하지 않는다.

@@ -1,0 +1,226 @@
+{
+  "FantasyCards": {
+    "revision": "fm-quest-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh current public HTTPS launch, actual touch starter/owned original cards/solo field and BGM; full financial/save flow separately proved on identical local runtime. Complete unchanged card images use explicit priorGET+sameGitobjects proof, never claimed as new fullGET.",
+    "requiredCheckpoints": [
+      "title",
+      "public-owned-lobby",
+      "public-owned-card",
+      "public-owned-field"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7525,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-lobby",
+        "expected": "Actual600SP/50owned starter on current public game."
+      },
+      {
+        "type": "audio",
+        "label": "public-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3335,
+          0.915
+        ],
+        "label": "보유 카드",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-card",
+        "expected": "Original current owned-card art delivered on HTTPS, neutral current collection UI."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0995,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.395,
+          0.41
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.218,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "click",
+        "point": [
+          0.792,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-field",
+        "expected": "Actual current public owned-deck battle and six hand cards."
+      }
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-journey-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh current public HTTPS executable/HD-2D field launch and actual2axis touch controls/NPC-accessible field, current Bible and BGM. Full23/19physicalrouteNative and boundedordinarysaveflow are separately bound to identical runtime; no physical-phone performance claim. Use actual normalizedcanvas coordinates without viewport Expand compensation.",
+    "requiredCheckpoints": [
+      "title",
+      "public-birth-reading",
+      "public-free-field",
+      "public-character-status",
+      "public-after-two-axis-touch"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current HD-2D title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.166,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-birth-reading",
+        "expected": "Actual current first birth Scripture."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "공개 실제 도입 본문 다음 말씀",
+        "repeat": 22,
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.829
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-free-field",
+        "expected": "Current actual HD-2D child/3Dcourt/trail field over HTTPS."
+      },
+      {
+        "type": "audio",
+        "label": "public-field"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.70278
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.04297,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.12966,
+          0.7292
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-after-two-axis-touch",
+        "expected": "Actual touch forward/lateral/diagonal field movement on the public player."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1617,
+          0.0667
+        ],
+        "label": "소년예수님 상태",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-character-status",
+        "expected": "Current actual age/portrait/Scriptureprogress and status with no staleHUDtoast."
+      }
+    ],
+    "intendedViewport": {
+      "width": 844,
+      "height": 390,
+      "coordinateSpace": "normalized measured unchanged16:9shippingcanvas within originalviewport"
+    }
+  }
+}

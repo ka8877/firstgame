@@ -1,0 +1,173 @@
+{
+  "FantasyCards": {
+    "revision": "fm-quest-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Bounded actual starter→SP shop→sealed fullreload→open→owneddeck→singleboard/shuffle→battle fullreload. Native proves natural standard50card victory/rewardonce and UnityJson. No runtime/save/seed injection.",
+    "requiredCheckpoints": [
+      "title",
+      "starter-granted",
+      "shop",
+      "pack-offer",
+      "sealed-pack",
+      "sealed-after-reload",
+      "five-card-reveal",
+      "owned-deck-fifty",
+      "owned-solo-board",
+      "after-original-shuffle",
+      "saved-quest-battle",
+      "continued-quest-battle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current Quest title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 800
+      },
+      {
+        "type": "review_input",
+        "name": "starter-choice",
+        "expected": "Choose one actual free mono starter from current visible screen. No save/state/seed inspection or injection. Stop at granted starter/lobby with 600SP and50owned."
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-granted",
+        "expected": "One selected starter, 600SP and50owned in actual HUD; no paid GP."
+      },
+      {
+        "type": "audio",
+        "label": "starter-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2165,
+          0.915
+        ],
+        "label": "카드 상점",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "shop",
+        "expected": "Current booster offers/SP wallet."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.216,
+          0.4585
+        ],
+        "label": "클래식 부스터",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "pack-offer",
+        "expected": "400SP price and actual odds / source classification note."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5295,
+          0.825
+        ],
+        "label": "400 SP 구매",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "sealed-pack",
+        "expected": "200SP, saved sealed booster before opening."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "review_input",
+        "name": "sealed-reload",
+        "expected": "Enter existing account and navigate to the already purchased unopened pack. Do not select another starter or buy again."
+      },
+      {
+        "type": "checkpoint",
+        "name": "sealed-after-reload",
+        "expected": "Actual sealed booster survives a full navigation and200SP."
+      },
+      {
+        "type": "review_input",
+        "name": "open-owned-pack",
+        "expected": "Open the existing purchased sealed pack through the visible button, wait for reveal, no duplicate purchase."
+      },
+      {
+        "type": "checkpoint",
+        "name": "five-card-reveal",
+        "expected": "Five actual prints, quantity/owned neutral footer; source printed classifications retained."
+      },
+      {
+        "type": "review_input",
+        "name": "owned-deck",
+        "expected": "Navigate to owned collection and deck editor, inspect55owned cards and actual50starter deck, then save unchanged valid deck."
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-deck-fifty",
+        "expected": "Actual owned-card/deck editor with50cards and55owned."
+      },
+      {
+        "type": "review_input",
+        "name": "start-owned-solo",
+        "expected": "Navigate through actual singleplayer and choose first roots encounter using the owned starter deck. Complete visible opening hand. Stop in preparation, no battle state injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-board",
+        "expected": "Actual owned-deck normal single field and50card deck/hand; multiplayer is future notice."
+      },
+      {
+        "type": "review_input",
+        "name": "normal-shuffle",
+        "expected": "Use actual board hand shuffle through visible control. Stop after it has settled."
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-original-shuffle",
+        "expected": "Actual hand after whole-hand board shuffle."
+      },
+      {
+        "type": "review_input",
+        "name": "save-quest-battle",
+        "expected": "Use visible record/menu save then return to actual field; record current board before reload."
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-quest-battle",
+        "expected": "Current actual battle after normal save."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "review_input",
+        "name": "continue-quest-battle",
+        "expected": "Use actual title 전투 이어하기 to restore owned-deck battle/ticket. No hidden game data."
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-quest-battle",
+        "expected": "Full browser navigation restored same battle, wallet/ownership and hand."
+      },
+      {
+        "type": "audio",
+        "label": "continued-battle"
+      }
+    ]
+  }
+}

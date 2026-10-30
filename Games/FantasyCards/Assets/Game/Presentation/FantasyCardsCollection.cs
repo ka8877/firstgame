@@ -175,6 +175,7 @@ namespace FantasyCards.Presentation
 
         private void ShowDetail(CardDefinition card, Action back)
         {
+            QuestCurrentScreen = "card-detail";
             battleScreen = false; redraw = () => ShowDetail(card, back); Clear(); polishBack = back; ResetPolishTap(); Backdrop(true);
             var portraitFrame = ArcanaCardFace(root, card, .025f, .06f, .515f, .945f, ArcanaCardMode.Detail);
             portraitFrame.gameObject.name = "Detailed original printed card " + card.id;

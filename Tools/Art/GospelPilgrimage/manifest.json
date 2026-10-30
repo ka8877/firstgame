@@ -1,0 +1,112 @@
+{
+  "revision": "gospel-journey-2026-10-30",
+  "producer": "OpenAI image generation; distinct original Jesus and NPC designs",
+  "ownership": "Original game artwork, not extracted FINAL FANTASY character files or source code.",
+  "rasterEdits": false,
+  "sourceOriginalsRetained": true,
+  "assets": [
+    {
+      "id": "jesus-adult",
+      "original": "/workspace/generated_images/exec-29264d11-3058-42e0-a5ec-b37b61b0f677.png",
+      "adopted": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-adult.png",
+      "sha256": "4965b10c371e1d2231a88733d6c315702df575e9714898fa5d7eb3c2e1a9ffe8",
+      "bytes": 1256394,
+      "layout": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-adult-layout.json",
+      "layoutSha256": "b5be344ce2228c2b66f72bb401b4fbfc7ee1d75ff3d3bf8a603e8f9491af1bdb",
+      "importer": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-adult.png.meta",
+      "filter": "Point",
+      "measurements": {
+        "mode": "RGBA",
+        "width": 1086,
+        "height": 1448,
+        "alphaMinimum": 0,
+        "alphaMaximum": 255,
+        "principalComponents": 12,
+        "totalAlphaComponents": 12,
+        "referenceHeight": 332.5
+      }
+    },
+    {
+      "id": "jesus-child",
+      "original": "/workspace/generated_images/exec-64d7bf9a-e488-472b-8609-78696c7ed627.png",
+      "adopted": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-child.png",
+      "sha256": "f055760fbd99c6fa87ee98ae9e2d4d3cfbadeaefeb479e203be07a29c3e1b40e",
+      "bytes": 1000670,
+      "layout": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-child-layout.json",
+      "layoutSha256": "85c421d0f9d735a78762cb23e525283420e5efded716271360fbcaedf772ba44",
+      "importer": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-child.png.meta",
+      "filter": "Point",
+      "measurements": {
+        "mode": "RGBA",
+        "width": 1086,
+        "height": 1448,
+        "alphaMinimum": 0,
+        "alphaMaximum": 255,
+        "principalComponents": 12,
+        "totalAlphaComponents": 16,
+        "referenceHeight": 326.0
+      }
+    },
+    {
+      "id": "npcs",
+      "original": "/workspace/generated_images/exec-ca0f48a4-0746-46b8-a256-8d040337b64e.png",
+      "adopted": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/npcs.png",
+      "sha256": "b0b2cf9283512b6fe9cfd8fcade31f611f5d0381e7a31d69ee46fadb5113c96d",
+      "bytes": 1541636,
+      "layout": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/npcs-layout.json",
+      "layoutSha256": "49e42f23dfad00ef057ab9fd5b93e9cfc401646eb9026e3a3e9ca815eaf1a442",
+      "importer": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/npcs.png.meta",
+      "filter": "Point",
+      "measurements": {
+        "mode": "RGBA",
+        "width": 1774,
+        "height": 887,
+        "alphaMinimum": 0,
+        "alphaMaximum": 255,
+        "principalComponents": 4,
+        "totalAlphaComponents": 5,
+        "referenceHeight": 750.5
+      }
+    },
+    {
+      "id": "portraits",
+      "original": "/workspace/generated_images/exec-a1502d61-5b49-47fd-896b-feabdbf7c95b.png",
+      "adopted": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/portraits.png",
+      "sha256": "3a640637f80a3c0f7abe37aac4d2089a3892f7ae372de37d8f5366a69031d2b6",
+      "bytes": 2857113,
+      "layout": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/portraits-layout.json",
+      "layoutSha256": "1cbc5c288694e5181bcbbd5da8f020a65b29d83015bc3c09119ae06b26862df7",
+      "importer": "Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/portraits.png.meta",
+      "filter": "Bilinear",
+      "measurements": {
+        "mode": "RGBA",
+        "width": 1536,
+        "height": 1024,
+        "alphaMinimum": 0,
+        "alphaMaximum": 254
+      }
+    }
+  ],
+  "historicalOriginals": [
+    {
+      "original": "/workspace/generated_images/exec-480636ab-22c3-4cb0-9a46-fdbd3ace6e00.png",
+      "sha256": "f012199837955ca4506fa722af2f719f5b13c74cf9639a67f2836e9b279a7cea",
+      "adopted": false,
+      "reason": "Earlier proportion study retained; not used by this runtime."
+    },
+    {
+      "original": "/workspace/generated_images/exec-c24cbc49-4623-420f-b11c-a83b336c5b99.png",
+      "sha256": "035d2e8bdaeebbd0cd484d4dfeb722a62820f273cee7508aaa8b274c04ae25d7",
+      "adopted": false,
+      "reason": "Earlier proportion study retained; not used by this runtime."
+    }
+  ],
+  "measurement": {
+    "tool": "Tools/Art/GospelPilgrimage/measure-actor-atlases.py",
+    "principalAlphaThreshold": 32,
+    "pixelMargin": 4,
+    "anchor": "Upper-third alpha median X; each support edge Y; common median height per sheet.",
+    "poseLimit": "Source walk-a/b are distinct authored poses; exact alternating anatomical feet are not guaranteed. No raster correction is applied."
+  },
+  "verification": "Source-byte copy and read-only measurements only. Actual Unity/Browser rendering and movement require current run evidence."
+}

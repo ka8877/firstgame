@@ -61,7 +61,7 @@ namespace FantasyCards.Presentation
 
         private void ShowLobby()
         {
-            ShowDetailLobby();
+            if (questFreePracticeView) ShowDetailLobby(); else ShowQuestEntry();
         }
 
         private void ShowRevivalRoom()

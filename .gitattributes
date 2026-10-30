@@ -27,3 +27,24 @@ Tools/Research/FmRenewal/* -text -whitespace
 # Small generated delivery derivatives: one ordinary Git pack avoids 15,350
 # separate LFS uploads. Exact source images and all other art retain LFS above.
 Games/FantasyCards/Assets/StreamingAssets/Cards/*.jpg -filter -diff -merge -text
+# Unity regenerated six empty-field trailing spaces in the verified TMP caches.
+# Preserve those generated YAML bytes; source fonts/metas and other checks stay strict.
+Games/FantasyCards/Assets/Resources/Fonts/Display.asset -whitespace
+Games/FantasyCards/Assets/Resources/Fonts/Korean.asset -whitespace
+
+# Retain fetched Quest research bytes and verified Unity serialized empty fields.
+Tools/Research/Quest/* -text -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-adult.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/jesus-child.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/npcs.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Actors/portraits.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Rendering/QuestLit.mat -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Rendering/QuestLit.mat.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Rendering/QuestUnlit.mat -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelPilgrimage/Rendering/QuestUnlit.mat.meta -whitespace
+Games/PathOfDawn/Assets/Settings/QuestDesktopURP.asset -whitespace
+Games/PathOfDawn/Assets/Settings/QuestDesktopURP.asset.meta -whitespace
+Games/PathOfDawn/Assets/Settings/QuestRenderer.asset -whitespace
+Games/PathOfDawn/Assets/Settings/QuestRenderer.asset.meta -whitespace
+Games/PathOfDawn/Assets/Settings/QuestWebURP.asset -whitespace
+Games/PathOfDawn/Assets/Settings/QuestWebURP.asset.meta -whitespace

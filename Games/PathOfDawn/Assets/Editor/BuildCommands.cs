@@ -30,7 +30,8 @@ namespace FirstGame.Editor
             string buildEvidencePath = null;
             try
             {
-                var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/Settings/Luminous" + (target == BuildTarget.WebGL ? "Web" : "Desktop") + "URP.asset");
+                var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/Settings/Quest" + (target == BuildTarget.WebGL ? "Web" : "Desktop") + "URP.asset");
+                if (pipeline == null) throw new BuildFailedException("Current Quest 3D pipeline is missing.");
                 GraphicsSettings.defaultRenderPipeline = pipeline; QualitySettings.renderPipeline = pipeline;
                 QualitySettings.globalTextureMipmapLimit = 0;
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
@@ -52,7 +53,7 @@ namespace FirstGame.Editor
                 });
                 buildEvidencePath = Path.Combine(output, "BuildEvidence.txt");
                 File.WriteAllText(buildEvidencePath,
-                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: " + LuminousProjectSetup.Revision + "\nTarget: " + target + "\nResult: " + report.summary.result +
+                    "Engine: " + Application.unityVersion + "\nContent: " + PathOfDawn.Core.GospelJourney.ContentVersion + "\nRevision: " + PilgrimageProjectSetup.Revision + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nLegacyResourceExclusions: " + excludedResources.EvidencePath + "\nExcludedLegacyAssets: " + excludedResources.ExcludedAssets +
                     "\nSourceFingerprint: " + sourceFingerprint + "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings + "\n");

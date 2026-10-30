@@ -1,0 +1,218 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-journey-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Bounded ordinary firstScripture/real3D XZ controls+physicalNPC/lamp/status/save/fullreload/Bible. Native separately proves complete23/19route/fourfacings/legacyfork. Browser checks are software inputs, not physical-phone performance. Mobile input coordinates are derived from the actual centered1280x720 Expand design frame, within untouched844x390 shippingcanvas; screenshot review still uses actual originals.",
+    "requiredCheckpoints": [
+      "title",
+      "birth-reading",
+      "book-unopened",
+      "book-first-discovery",
+      "child-free-field",
+      "after-free-two-axis",
+      "actual-npc-reading",
+      "lamp-equipped-field",
+      "actual-status",
+      "saved-xyz-field",
+      "continued-xyz-field",
+      "continued-bible"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current HD-2D title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.225624,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-reading",
+        "expected": "Historical birth record in current Book UI."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.704057,
+          0.0778
+        ],
+        "label": "발견 전 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-unopened",
+        "expected": "Locked physical Bible0/19, no future text/title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.779798,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.78563,
+          0.8986
+        ],
+        "label": "다음 말씀",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.78563,
+          0.8986
+        ],
+        "label": "다음 말씀",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.704057,
+          0.0778
+        ],
+        "label": "첫 발견 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-first-discovery",
+        "expected": "Only actual first Scripture unlocked1/19."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.779798,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.78563,
+          0.8986
+        ],
+        "label": "실제 도입 본문의 다음 말씀",
+        "repeat": 20,
+        "settleMs": 650
+      },
+      {
+        "type": "review_input",
+        "name": "birth-to-field",
+        "expected": "Advance remaining actual birth/introduction readings using next button; enter twelve-year-old chapter through 이야기 속으로. Do not skip actual story state or inspect game fields."
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-free-field",
+        "expected": "New HD-2D directional child in real3D court/trail, current waypoint."
+      },
+      {
+        "type": "audio",
+        "label": "field"
+      },
+      {
+        "type": "review_input",
+        "name": "free-two-axis",
+        "expected": "Use ordinary WASD or real2axis touchpad to move laterally/depth/diagonal. Observe current pixel facing, camera and XZ destination. Stop on normal field."
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-free-two-axis",
+        "expected": "Visible changed position/facing under real field/camera; pixelfeet/contactshadow."
+      },
+      {
+        "type": "review_input",
+        "name": "npc-proximity",
+        "expected": "Physically walk to first visible waypoint (not just its X); wait until E prompt active then interact normally. No teleport or game method."
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-npc-reading",
+        "expected": "Real XZ-proximate NPC dialogue/Scripture."
+      },
+      {
+        "type": "review_input",
+        "name": "read-and-inventory",
+        "expected": "Complete actual reading and return field. Open actual inventory and equip travel lamp using visible button; return field."
+      },
+      {
+        "type": "checkpoint",
+        "name": "lamp-equipped-field",
+        "expected": "Real held lamp outside upright sprite; actual obtained firstNPC Bibleprogress."
+      },
+      {
+        "type": "review_input",
+        "name": "status-save",
+        "expected": "Open actual status from hero header, inspect actual age/location/discoveredcount/equipment. Leave status visible."
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-status",
+        "expected": "Current status without staleHUDtoast, childportraitcorrect."
+      },
+      {
+        "type": "review_input",
+        "name": "save-before-reload",
+        "expected": "Return field, open menu and press actual save, return field. No save-file inspection/edit."
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-xyz-field",
+        "expected": "Current physical XYZ and equipped lamp before full navigation."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "review_input",
+        "name": "continue-xyz",
+        "expected": "Use visible 이어하기, let field settle. No runtime inspection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-xyz-field",
+        "expected": "Actual full navigation restores same physical XYZ/lamp/progress and camera."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.706357,
+          0.0708
+        ],
+        "label": "발견한 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-bible",
+        "expected": "Only genuinely read Bible pages are unlocked after reload."
+      }
+    ],
+    "intendedViewport": {
+      "width": 844,
+      "height": 390,
+      "designFrame": {
+        "width": 1280,
+        "height": 720,
+        "mode": "Expand centered"
+      },
+      "xNormalizedOffset": 0.08925750394944709,
+      "xNormalizedWidth": 0.8214849921011058
+    }
+  }
+}

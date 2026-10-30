@@ -31,8 +31,8 @@ namespace FantasyCards.SmokeTests
         public static IDisposable PreserveDemoPreferences() => new DemoPreferenceScope();
         sealed class DemoPreferenceScope : IDisposable
         {
-            readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck", "FC.profile.name", "FC.profile.avatar" };
-            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2", "FC.demo.won.3", "FC.demo.won.4", "FC.demo.won.5", "FC.demo.won.6", "FC.profile.wins", "FC.profile.losses", "FC.profile.draws", "FC.effects.muted", "FC.originalMusic.muted", "FC.scenario.won.roots", "FC.scenario.won.tides", "FC.scenario.won.forge", "FC.scenario.won.relic" };
+            readonly string[] stringKeys = { "FC.demo.leader", "FC.demo.deck", "FC.profile.name", "FC.profile.avatar", "FC.quest.battleTicket" };
+            readonly string[] intKeys = { "FC.demo.encounter", "FC.demo.won.0", "FC.demo.won.1", "FC.demo.won.2", "FC.demo.won.3", "FC.demo.won.4", "FC.demo.won.5", "FC.demo.won.6", "FC.profile.wins", "FC.profile.losses", "FC.profile.draws", "FC.effects.muted", "FC.originalMusic.muted", "FC.scenario.won.roots", "FC.scenario.won.tides", "FC.scenario.won.forge", "FC.scenario.won.relic", "FC.quest.lastBattleMode" };
             readonly string[] floatKeys = { "FC.effects.volume", "FC.originalMusic.volume" };
             readonly Dictionary<string,float> floats = new Dictionary<string,float>();
             readonly Dictionary<string, string> strings = new Dictionary<string, string>();
@@ -263,7 +263,7 @@ namespace FantasyCards.SmokeTests
                     // transient coin/focus layer immediately before rendering.
                     // During playback production already defers resize redraw
                     // while locked; capture must preserve that same live layer.
-                    if (app == null || !app.IsBattlePlaybackActive) redraw?.Invoke();
+                    if (app == null || (!app.IsBattlePlaybackActive && !app.IsClientShuffleActive)) redraw?.Invoke();
                 }
                 Canvas.ForceUpdateCanvases();
                 var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest { destination = target };
@@ -275,12 +275,12 @@ namespace FantasyCards.SmokeTests
                 pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0);
                 pixels.Apply();
                 var directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                    name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
+                    name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
                 System.IO.Directory.CreateDirectory(directory);
                 var path = System.IO.Path.Combine(directory, name + ".png");
                 var png = pixels.EncodeToPNG();
                 Assert.That(png.Length, Is.GreaterThan(10000), "Capture contains unexpectedly little image data.");
-                if (name.StartsWith("chronicle-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Chronicle original capture names must be unique and preserved.");
+                if (name.StartsWith("chronicle-", StringComparison.Ordinal) || name.StartsWith("quest-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Current original capture names must be unique and preserved.");
                 System.IO.File.WriteAllBytes(path, png);
                 System.IO.File.WriteAllText(path + ".txt", "Native Unity URP scene capture\n" +
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +

@@ -37,7 +37,7 @@ namespace FirstGame.Editor
         {
             if (!File.Exists(Journal)) return;
             var record = JsonUtility.FromJson<Record>(File.ReadAllText(Journal));
-            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != LuminousProjectSetup.Revision) || record.moves == null || record.files == null)
+            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
                 throw new BuildFailedException("Invalid legacy resource recovery journal; retained for inspection.");
             Restore(record, "recovered-after-interruption");
             Debug.Log("FIRSTGAME_LEGACY_RESOURCES_RECOVERED " + record.moves.Length);
@@ -62,11 +62,16 @@ namespace FirstGame.Editor
             RecoverInterrupted();
             var candidates = new List<string> {
                 "Assets/Resources/Art/Painted", "Assets/Resources/Voice",
-                "Assets/Resources/Art/Gospel3D", "Assets/Resources/Art/GospelRemaster",
-                "Assets/Resources/Art/GospelAuthoredProps", "Assets/Resources/Art/GospelWell"
+                "Assets/Resources/Art/GospelRemaster", "Assets/Resources/Art/GospelRadiance",
+                "Assets/Resources/Art/GospelLuminous/Rendering"
             };
-            // The current 2D app owns GospelLuminous. All previous 3D/observer
-            // resources stay editable without being embedded in the new player.
+            // The HD-2D field retains authored 3D props/well/temple materials,
+            // current pixel sprites, the reading illustrations and SoftGlow.
+            // Old full humanoids and the unused lateral Lost Crypt world stay
+            // byte-for-byte editable but do not inflate the current Web player.
+            AddChildrenExcept(candidates, "Assets/Resources/Art/Gospel3D", "TempleMaterials");
+            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png");
+            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
             candidates.AddRange(Directory.GetFiles("Assets/Resources/Art", "*", SearchOption.TopDirectoryOnly)
                 .Where(path => !path.EndsWith(".meta", StringComparison.Ordinal) &&
                     (path.EndsWith(".png", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".mat", StringComparison.OrdinalIgnoreCase)))
@@ -99,7 +104,7 @@ namespace FirstGame.Editor
             string root = Environment.GetEnvironmentVariable("FIRSTGAME_BUILD_ROOT");
             if (string.IsNullOrEmpty(root)) root = Path.GetFullPath("../../Artifacts/Builds");
             var evidence = Path.Combine(root, "PathOfDawn", target, "LegacyResourceExclusions.json");
-            var record = new Record { revision = LuminousProjectSetup.Revision, target = target,
+            var record = new Record { revision = PilgrimageProjectSetup.Revision, target = target,
                 startedUtc = DateTime.UtcNow.ToString("o"), status = "journaled-before-mutation", evidencePath = evidence,
                 moves = moves, files = files.ToArray() };
             Directory.CreateDirectory("Library");
@@ -123,6 +128,19 @@ namespace FirstGame.Editor
                 return new Scope(record);
             }
             catch { Restore(record, "restored-after-exclusion-error"); throw; }
+        }
+
+        static void AddChildrenExcept(List<string> candidates, string directory, params string[] retainedNames)
+        {
+            if (!Directory.Exists(directory)) return;
+            var retained = new HashSet<string>(retainedNames, StringComparer.Ordinal);
+            foreach (var entry in Directory.GetFileSystemEntries(directory))
+            {
+                string name = Path.GetFileName(entry);
+                if (name.EndsWith(".meta", StringComparison.Ordinal) || name.EndsWith(".txt", StringComparison.OrdinalIgnoreCase)
+                    || name.EndsWith(".md", StringComparison.OrdinalIgnoreCase) || retained.Contains(name)) continue;
+                candidates.Add(entry.Replace('\\', '/'));
+            }
         }
 
         static void Restore(Record record, string status)

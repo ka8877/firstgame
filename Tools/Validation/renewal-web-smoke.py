@@ -72,6 +72,8 @@ MODERN_REVISIONS = {"FantasyCards": "fm-modern-2026-10-26", "PathOfDawn": "gospe
 FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "gospel-modern-2026-10-26"}
 DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
 RENEWAL_REVISIONS = {"FantasyCards": "fm-chronicle-2026-10-29", "PathOfDawn": "gospel-chronicle-2026-10-29"}
+QUEST_REVISIONS = {"FantasyCards": "fm-quest-2026-10-30", "PathOfDawn": "gospel-journey-2026-10-30"}
+CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values())
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -265,7 +267,7 @@ class JourneySmoke:
 
     def canvas_box(self):
         """Read ordinary DOM geometry once per unchanged shipping canvas."""
-        if self.report["revision"] not in RENEWAL_REVISIONS.values():
+        if self.report["revision"] not in CURRENT_GUARDED_REVISIONS:
             return self.page.locator("#unity-canvas").bounding_box()
         expected_viewport = self.report["interactionViewport"]
         if self.page.viewport_size != expected_viewport:
@@ -339,7 +341,7 @@ class JourneySmoke:
             # Reuse the already captured canvas bounds. Playwright screenshot
             # preparation can span an entire real-time jump on a software GPU.
             # CDP reads original compositor pixels without font/layout waits.
-            if self.report["revision"] in RENEWAL_REVISIONS.values():
+            if self.report["revision"] in CURRENT_GUARDED_REVISIONS:
                 box = self.canvas_box()
             else:
                 box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
@@ -372,6 +374,14 @@ class JourneySmoke:
                 path.write_bytes(base64.b64decode(capture["data"]))
             finally:
                 if session is not self.raw_capture_session: session.detach()
+                # A requested movement capture must release its ordinary keys
+                # for every Gospel original, not only jump-air names.
+                for key in reversed(self.capture_keys):
+                    self.page.keyboard.up(key)
+                if self.capture_keys:
+                    self.report["input"].append({"type": "key-release-after-original-capture", "keys": self.capture_keys,
+                        "navigation": self.navigation, "atUtc": now()})
+                    self.capture_keys = []
         else:
             box = self.canvas_box()
             self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
@@ -823,12 +833,12 @@ class JourneySmoke:
             if not isinstance(actions, list) or len(actions) > 20:
                 raise ValueError('At most20 ordinary input actions per observed frame')
             for action in actions:
-                if action.get('type') not in ('click', 'drag', 'pointer_hold', 'wait', 'key', 'hold', 'wheel', 'text') or 'repeat' in action or action.get('captureCompositorBurst'):
+                if action.get('type') not in ('click', 'drag', 'pointer_hold', 'touch_hold', 'wait', 'key', 'hold', 'wheel', 'text') or 'repeat' in action or action.get('captureCompositorBurst'):
                     raise ValueError('Review response accepts ordinary pointer/keyboard input only')
                 if action.get('ms', 0) > 20000 or action.get('settleMs', 0) > 20000 or action.get('durationMs', 0) > 20000:
                     raise ValueError('Review input wait must be bounded')
                 required = {'click': ('point',), 'drag': ('start', 'end'), 'pointer_hold': ('point', 'ms'),
-                            'wait': ('ms',), 'key': ('key',), 'hold': ('keys', 'ms'), 'wheel': ('point', 'deltaY'), 'text': ('text',)}[action['type']]
+                            'touch_hold': ('start', 'end', 'ms'), 'wait': ('ms',), 'key': ('key',), 'hold': ('keys', 'ms'), 'wheel': ('point', 'deltaY'), 'text': ('text',)}[action['type']]
                 if any(key not in action for key in required):
                     raise ValueError('Review input missing required fields: ' + str(required))
             key_errors = self.review_key_errors(actions)
@@ -849,7 +859,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-quest-2026-10-30'):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -860,7 +870,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29')) and label not in ("before-first-gesture", "muted"):
+        if self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-quest-2026-10-30')) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -871,7 +881,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'):
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-quest-2026-10-30'):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -898,19 +908,21 @@ class JourneySmoke:
         files = []
         expected_files = list(self.report["buildFingerprint"]["files"])
         image_files = [row for row in expected_files if row['file'].startswith('StreamingAssets/Cards/')]
-        if self.report['revision'] == 'fm-chronicle-2026-10-29' and len(image_files) > 1000:
-            # The full portal verifier already GETs/hashes every image. Bind
-            # that complete current audit, then freshly verify the live
-            # manifest and all executable/audio files for this real game run.
-            audit_path = ROOT / 'Artifacts/Validation/Chronicle/PublicPortal/report.json'
+        quest = self.report['revision'] == QUEST_REVISIONS['FantasyCards']
+        if self.report['revision'] in ('fm-chronicle-2026-10-29', QUEST_REVISIONS['FantasyCards']) and len(image_files) > 1000:
+            # Bind the complete current portal audit. Quest explicitly retains
+            # prior image GETs with identical old/new deployed Git blobs; other
+            # profiles use their retained full GET audit. Freshly verify the
+            # live manifest and executable/audio files for this game run.
+            audit_path = ROOT / ('Artifacts/Validation/Quest/PublicPortal/report.json' if quest else 'Artifacts/Validation/Chronicle/PublicPortal/report.json')
             audit = json.loads(audit_path.read_text())
-            from renewal_release_evidence import verify_portal_review
+            verify_portal_review = __import__('quest_release_evidence' if quest else 'renewal_release_evidence').verify_portal_review
             verify_portal_review(audit)
-            stage_path = Path('/tmp/firstgame-chronicle-staged-site/build-manifest.json')
+            stage_path = ROOT/'Artifacts/QuestWork/staged-site/build-manifest.json' if quest else Path('/tmp/firstgame-chronicle-staged-site/build-manifest.json')
             staged = json.loads(stage_path.read_text())
             prefix = 'games/fantasy-cards/'
             if not (audit.get('status') == 'passed' and audit.get('sourceCommit') == staged.get('sourceCommit')
-                    and audit.get('gameRevisions') == RENEWAL_REVISIONS
+                    and audit.get('gameRevisions') == (QUEST_REVISIONS if quest else RENEWAL_REVISIONS)
                     and audit.get('visualReview', {}).get('status') == 'approved'
                     and audit.get('manifest', {}).get('sha256') == digest(stage_path)
                     and urllib.parse.urljoin(audit['baseUrl'], prefix) == url
@@ -931,11 +943,13 @@ class JourneySmoke:
                         and row.get('resolvedUrl') == urllib.parse.urljoin(url, expected['file'])):
                     raise AssertionError('Public image audit differs from current runtime: ' + expected['file'])
                 files.append({'file': expected['file'], 'url': row['resolvedUrl'], 'status': 200,
-                    'bytes': row['bytes'], 'sha256': row['sha256'], 'verificationSource': 'complete-current-public-GET-audit'})
+                    'bytes': row['bytes'], 'sha256': row['sha256'],
+                    'verificationSource': 'current-root-reviewed-public-byte-identity-audit' if quest else 'complete-current-public-GET-audit',
+                    **({'inheritedGet': row.get('inheritedGet')} if quest and row.get('inheritedGet') else {})})
             self.report['completePublicImageAudit'] = {'file': str(audit_path.relative_to(ROOT)), 'sha256': digest(audit_path),
                 'manifestSha256': digest(stage_path), 'images': len(image_files),
-                'scope': 'Every image was individually fetched and hashed in the exact current full-site audit; live manifest freshly rechecked. Executables/audio are fetched again below.'}
-            self.check(True, 'All streamed card images match the complete current public GET audit and unchanged live manifest', self.report['completePublicImageAudit'])
+                'scope': ('Every image retains its explicitly dated prior actual GET proof plus identical old/new deployed Git blobs; no new full-image GET is claimed. Live manifest freshly rechecked; executables/audio fetched again below.' if quest else 'Every image was individually fetched and hashed in the exact current full-site audit; live manifest freshly rechecked. Executables/audio are fetched again below.')}
+            self.check(True, 'All streamed card images match the current Root-reviewed public byte audit and unchanged live manifest', self.report['completePublicImageAudit'])
             image_names = {row['file'] for row in image_files}
             expected_files = [row for row in expected_files if row['file'] not in image_names]
         for expected in expected_files:
@@ -1128,7 +1142,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal"), default="renewal")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "quest"), default="renewal")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -1148,7 +1162,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "quest": QUEST_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:

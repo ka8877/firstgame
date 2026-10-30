@@ -50,6 +50,7 @@ namespace PathOfDawn.Core
         public const string GameId = "gospel-journey";
         public const string SaveSlot = "gospel-journey-v1";
         public const string LuminousSpace = "luminous-side-v1";
+        public const string PilgrimageSpace = "pilgrimage-field-v1";
         GospelSave state;
         GospelChronicle chronicle;
 
@@ -266,7 +267,7 @@ namespace PathOfDawn.Core
             else if(save.studyDialoguePage!=0)throw new ArgumentException("닫힌 대화의 위치가 잘못되었습니다.");
         }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
-        static bool ValidPresentationSpace(string space) => string.IsNullOrEmpty(space) || space == LuminousSpace;
+        static bool ValidPresentationSpace(string space) => string.IsNullOrEmpty(space) || space == LuminousSpace || space == PilgrimageSpace;
         static bool ValidPosition(float x, float y, float z) => Finite(x) && Finite(y) && Finite(z)
             && Math.Abs(x) <= 100f && Math.Abs(z) <= 100f && y >= -5f && y <= 30f;
     }

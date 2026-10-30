@@ -71,7 +71,7 @@ namespace FantasyCards.Presentation
             audioSource = gameObject.AddComponent<AudioSource>(); audioSource.playOnAwake = false; audioSource.volume = .24f;
             coinSound = MakeTone(960f, .13f); playSound = MakeTone(260f, .15f);
             inspectedId = CardCatalog.All.First(card => card.kind == CardKind.Unit).id;
-            SetupWorld(); LoadDeck(); LoadDemoSelection(); ShowTitle();
+            SetupWorld(); LoadDeck(); LoadDemoSelection(); InitializeQuestProfile(); ShowTitle();
             FmBattleAudio.Initialize();
         }
         private void Update()
@@ -145,6 +145,7 @@ namespace FantasyCards.Presentation
         private void StartBattle(uint seed)
         {
             if (!ValidDeck(customDeck)) { message = "50장 덱과 속성별 지형 구성을 확인하세요."; ShowCollection(true); return; }
+            ActivatePracticeBattle();
             ResetPolishSession();
             engine = new BattleEngine(seed, authoredRules, playerDeck: CardCatalog.DefaultDeck()); selectedCard = selectedAttacker = -1;
             engine.ConfirmOpeningHand(0, out _);
@@ -159,14 +160,27 @@ namespace FantasyCards.Presentation
         }
         private void Continue()
         {
-            if (!PersistentSaves.TryLoad(Slot, GameId, 1, CardCatalog.Version, out string payload, out string error)) { message = "불러오기 실패: " + error; ShowTitle(); return; }
-            try { engine = new BattleEngine(JsonUtility.FromJson<BattleState>(payload)); selectedCard = selectedAttacker = -1; RestoreDemoSelection(); message = "저장한 전투와 다음 코인 상태를 복원했습니다."; if (engine.State.openingHandOpen) ShowOpeningHand(); else { ShowBattle(); PumpAi(); } }
-            catch (Exception e) { message = "저장을 보존했습니다. 불러오기 실패: " + e.Message; ShowTitle(); }
+            bool priorMode = questBattleMode; string priorTicket = questBattleTicket;
+            RestoreQuestBattleMode();
+            try
+            {
+                if (!PersistentSaves.TryLoad(ActiveBattleSlot, GameId, 1, CardCatalog.Version, out string payload, out string error)) throw new ArgumentException(error);
+                var restored = new BattleEngine(JsonUtility.FromJson<BattleState>(payload));
+                ValidateQuestContinuedBattle(restored.State); engine = restored;
+                selectedCard = selectedAttacker = -1; RestoreDemoSelection(); message = "저장한 전투와 다음 코인 상태를 복원했습니다.";
+                if (engine.State.openingHandOpen) ShowOpeningHand(); else { ShowBattle(); PumpAi(); }
+            }
+            catch (Exception e)
+            {
+                questBattleMode = priorMode; questBattleTicket = priorTicket;
+                message = "저장을 보존했습니다. 불러오기 실패: " + e.Message;
+                ShowQuestSimpleNotice("전투 저장 확인", message, ShowTitle);
+            }
         }
         private bool Save()
         {
             if (engine == null) return true;
-            if (!PersistentSaves.TrySave(Slot, GameId, 1, CardCatalog.Version, JsonUtility.ToJson(engine.State), out string error)) { saveError = "저장 실패: " + error; return false; }
+            if (!PersistentSaves.TrySave(ActiveBattleSlot, GameId, 1, CardCatalog.Version, JsonUtility.ToJson(engine.State), out string error)) { saveError = "저장 실패: " + error; return false; }
             saveError = "";
             return true;
         }
@@ -224,29 +238,32 @@ namespace FantasyCards.Presentation
         {
             var s = engine.State;
             RecordLocalBattleResult();
+            ResolveQuestResult();
             var shade = Panel(root, 0, 0, 1, 1, new Color(.01f, .02f, .04f, .73f)); shade.GetComponent<Image>().raycastTarget = true;
             var panel = Panel(root, Compact ? .10f : .275f, Compact ? .16f : .30f, Compact ? .90f : .79f, Compact ? .84f : .77f, new Color(.025f, .045f, .085f, .99f));
             Frame(panel, gold, 1); panel.gameObject.AddComponent<UiPanelEntrance>();
             string result = s.winner == 0 ? "승리하였습니다" : s.winner == 1 ? "패배하였습니다" : "무승부입니다";
-            Text(panel, result, .06f, .66f, .94f, .87f, 42, gold, TextAlignmentOptions.Center);
-            Text(panel, (s.winner == 0 ? "승리" : s.winner == 1 ? "패배" : "무승부") + " · " + s.turn + "턴\n지형과 유닛의 균형, 방어에 남길 동료를 다시 생각해 보세요.", .08f, .38f, .92f, .64f, 24, Color.white, TextAlignmentOptions.Center);
+            Text(panel, result, .06f, .72f, .94f, .94f, 42, gold, TextAlignmentOptions.Center);
+            Text(panel, (s.winner == 0 ? "승리" : s.winner == 1 ? "패배" : "무승부") + " · " + s.turn + "턴", .08f, .57f, .92f, .71f, 26, Color.white, TextAlignmentOptions.Center);
+            Text(panel, QuestResultText(), .08f, .30f, .92f, .56f, 25, questBattleMode ? gold : ivory, TextAlignmentOptions.Center);
             if (s.winner == 0) RecordDemoVictory();
-            Button(panel, FmScenarioCatalog.StageForBattle(s) != null ? (s.winner == 0 ? "시나리오 계속" : "다시 도전") : s.winner == 0 && s.encounterIndex >= 0 && s.encounterIndex < 2 ? "다음 결투" : "다시 도전", .09f, .10f, .48f, .28f,
-                RestorationNextBattle, gold, 24, !locked);
-            Button(panel, "대기실로", .53f, .10f, .91f, .28f, () => LeaveBattle(ShowLobby), teal, 24, !locked);
+            Button(panel, questBattleMode ? "싱글 대기실" : FmScenarioCatalog.StageForBattle(s) != null ? (s.winner == 0 ? "시나리오 계속" : "다시 도전") : s.winner == 0 && s.encounterIndex >= 0 && s.encounterIndex < 2 ? "다음 결투" : "다시 도전", .09f, .07f, .48f, .27f,
+                questBattleMode ? (Action)(() => LeaveBattle(ShowQuestLobby)) : RestorationNextBattle, gold, 24, !locked);
+            Button(panel, questBattleMode ? "카드 상점" : "대기실로", .53f, .07f, .91f, .27f,
+                () => LeaveBattle(questBattleMode ? (Action)ShowQuestShop : ShowLobby), teal, 24, !locked);
         }
         private void ShowTransfer()
         {
             battleScreen = false; redraw = null; Clear(); Backdrop(true); Panel(root, .06f, .06f, .94f, .94f, ink);
-            Text(root, "전투 저장 옮기기", .09f, .82f, .85f, .90f, 42, gold);
-            Text(root, "웹에서 내보낸 저장 문자열을 PC에서도 가져올 수 있습니다.\n아래 내용을 파일로 보관하거나, 다른 기기에서 복사해 붙여넣으세요.", .09f, .69f, .89f, .81f, 26, Color.white);
+            Text(root, "자유 연습 전투 저장 옮기기", .09f, .82f, .85f, .90f, 42, gold);
+            Text(root, "자유 연습 전투를 다른 기기로 옮길 수 있습니다.\n싱글 플레이의 보유 카드·SP·카드팩은 현재 기기에 따로 보관됩니다.", .09f, .69f, .89f, .81f, 26, Color.white);
             var area = Panel(root, .09f, .30f, .91f, .66f, new Color(.08f, .12f, .18f));
             area.GetComponent<Image>().raycastTarget = true;
             var input = area.gameObject.AddComponent<TMP_InputField>(); var viewport = Panel(area, .02f, .02f, .98f, .98f, Color.clear); viewport.gameObject.AddComponent<RectMask2D>();
             var text = Text(viewport, "", 0, 0, 1, 1, 18, Color.white, TextAlignmentOptions.TopLeft); input.textViewport = viewport; input.textComponent = text; input.lineType = TMP_InputField.LineType.MultiLineNewline;
-            var status = Text(root, "저장을 가져오면 현재 전투 저장이 교체됩니다. 유효하지 않은 저장은 거부합니다.", .09f, .08f, .91f, .14f, 22, teal);
+            var status = Text(root, "가져오면 자유 연습 전투가 교체됩니다. 싱글 보유 카드·SP는 별도로 보관됩니다.", .09f, .08f, .91f, .14f, 22, teal);
             Button(root, "내보내기", .09f, .15f, .28f, .28f, () => { if (PersistentSaves.TryExport(Slot, out string data, out string error)) { input.text = data; status.text = "저장 내용을 표시했습니다. 전체 선택 후 복사하세요."; } else status.text = error; }, gold);
-            Button(root, "검증 후 가져오기", .31f, .15f, .58f, .28f, () => { bool ok = PersistentSaves.TryImport(Slot, GameId, 1, CardCatalog.Version, input.text, ValidatePayload, out string error); if (ok) engine = null; status.text = ok ? "가져오기 완료. 타이틀에서 이어하기를 누르세요." : "가져오기 실패: " + error; }, teal);
+            Button(root, "검증 후 가져오기", .31f, .15f, .58f, .28f, () => { bool ok = PersistentSaves.TryImport(Slot, GameId, 1, CardCatalog.Version, input.text, ValidatePayload, out string error); if (ok && !questBattleMode) engine = null; status.text = ok ? "가져오기 완료. 자유 연습에서 ‘연습 이어하기’를 누르세요." : "가져오기 실패: " + error; }, teal);
             Button(root, "돌아가기", .70f, .15f, .91f, .28f, profileTransferReturn ?? ShowTitle, new Color(.2f, .25f, .34f));
         }
         private static bool ValidatePayload(string payload) { try { BattleEngine.Validate(JsonUtility.FromJson<BattleState>(payload)); return true; } catch { return false; } }

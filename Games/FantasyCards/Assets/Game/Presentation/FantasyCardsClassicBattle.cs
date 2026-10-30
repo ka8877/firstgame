@@ -11,13 +11,14 @@ namespace FantasyCards.Presentation
     {
         private void ShowBattle()
         {
+            QuestCurrentScreen = questBattleMode ? "quest-battle" : "practice-battle";
             battleScreen = true; redraw = ShowBattle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("battle");
             var state = BattleDisplayState; var player = state.players[0]; var enemy = state.players[1];
             battleUnitViews.Clear(); ChronicleVisibleCoinPanels = 0;
             DrawChronicleBackdrop();
             DrawLanes(1, .660f, .910f); DrawLanes(0, .365f, .615f);
             var messagePanel = ChroniclePanel(root, .025f, .618f, .805f, .656f, new Color(.012f, .024f, .045f, .96f), false);
-            ReadableText(messagePanel, battlePlaybackActive ? battlePlaybackIndex + "/" + battlePlaybackCount + " · " + battlePlaybackCaption : locked ? "전투 준비 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
+            ReadableText(messagePanel, battlePlaybackActive ? battlePlaybackIndex + "/" + battlePlaybackCount + " · " + battlePlaybackCaption : IsClientShuffleActive ? "손패 → 덱 회수 · 셔플 · 순서대로 받기" : locked ? "전투 준비 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", battlePlaybackActive ? battlePlaybackCaption : StatusMessage());
             DrawTerrainBackfield(enemy, 1, .919f, .995f);
             DrawChronicleLocalFeed();

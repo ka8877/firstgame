@@ -1,0 +1,376 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-journey-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Bounded ordinary firstScripture/real3D XZ controls+physicalNPC/lamp/status/save/fullreload/Bible. Native separately proves complete23/19route/fourfacings/legacyfork. Browser checks are software inputs, not physical-phone performance. Final lamp-corrected runtime: actual preauthored next-button input completes the unchanged11prologue readings; no scene/pose/save injection. General movement captures now release requested keys after the actual original PNG. Coordinates for unchanged Book/menu/inventory/status were authored from retained actual desktop originals; only physical NPC proximity requires adaptive screenshot-guided input. First Joseph meeting advances12/23goals without awarding a Scripturepage (11/19 remains); no false firstNPC-page claim. Actualtouch844x390viewport with unchanged letterboxed16:9shippingcanvas. All coordinates are normalized to measured canvas, without a second viewport/Expand conversion. Keyboard movement/status are replaced by actualtouch.",
+    "requiredCheckpoints": [
+      "title",
+      "birth-reading",
+      "book-unopened",
+      "book-first-discovery",
+      "child-free-field",
+      "after-first-forward-touch",
+      "after-free-two-axis",
+      "actual-npc-reading",
+      "inventory-before-equipping",
+      "lamp-equipped-field",
+      "actual-status",
+      "saved-xyz-field",
+      "continued-xyz-field",
+      "continued-bible"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current HD-2D title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.166,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-reading",
+        "expected": "Historical birth record in current Book UI."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7484,
+          0.0778
+        ],
+        "label": "발견 전 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-unopened",
+        "expected": "Locked physical Bible0/19, no future text/title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "다음 말씀",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "다음 말씀",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7484,
+          0.0778
+        ],
+        "label": "첫 발견 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "book-first-discovery",
+        "expected": "Only actual first Scripture unlocked1/19."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8406,
+          0.9208
+        ],
+        "label": "이야기로",
+        "settleMs": 800
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 도입 본문 다음 말씀",
+        "repeat": 20,
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.829
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-free-field",
+        "expected": "New HD-2D directional child in real3D court/trail, current waypoint."
+      },
+      {
+        "type": "audio",
+        "label": "field"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.70278
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-first-forward-touch",
+        "expected": "Actual first forward pad touch changes worlddepth/facing and visible goal distance; untouched letterboxed canvas, no keyboard/game injection."
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.88333
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.04297,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.14453,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.12966,
+          0.7292
+        ],
+        "ms": 200,
+        "settleMs": 300
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-free-two-axis",
+        "expected": "Visible changed position/facing under real field/camera; pixelfeet/contactshadow."
+      },
+      {
+        "type": "review_input",
+        "name": "npc-proximity",
+        "expected": "Physically walk to first visible waypoint (not just its X); wait until E prompt active then interact normally. No teleport or game method."
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-npc-reading",
+        "expected": "Real XZ-proximate NPC dialogue/Scripture."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8477,
+          0.8986
+        ],
+        "label": "실제 대화 다음",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8855,
+          0.0708
+        ],
+        "label": "가방",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "inventory-before-equipping",
+        "expected": "Current actual item artwork/description/equipment before normal equip."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.57,
+          0.772
+        ],
+        "label": "등잔 장착",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.823,
+          0.772
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "lamp-equipped-field",
+        "expected": "Real held lamp outside upright sprite; actual obtained firstNPC Bibleprogress."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1617,
+          0.0667
+        ],
+        "label": "소년예수님 상태",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-status",
+        "expected": "Current status without staleHUDtoast, childportraitcorrect."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8766,
+          0.9194
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9527,
+          0.0708
+        ],
+        "label": "메뉴",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6684,
+          0.298
+        ],
+        "label": "현재 여정 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3285,
+          0.298
+        ],
+        "label": "여정 계속하기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-xyz-field",
+        "expected": "Current physical XYZ and equipped lamp before full navigation."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.374,
+          0.8
+        ],
+        "label": "이어하기",
+        "settleMs": 1400
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-xyz-field",
+        "expected": "Actual full navigation restores same physical XYZ/lamp/progress and camera."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7512,
+          0.0708
+        ],
+        "label": "발견한 성경",
+        "settleMs": 800
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-bible",
+        "expected": "Only genuinely read Bible pages are unlocked after reload."
+      }
+    ],
+    "intendedViewport": {
+      "width": 844,
+      "height": 390,
+      "coordinateSpace": "normalized untouched measured shippingcanvas; letterboxing is template-owned"
+    }
+  }
+}

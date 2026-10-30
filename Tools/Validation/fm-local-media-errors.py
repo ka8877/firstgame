@@ -11,7 +11,7 @@ from urllib.parse import urljoin, urlsplit
 
 FILENAMES={name+extension for name in ('title','lobby','deck','battle') for extension in ('.ogg','.mp3')}
 PREFIX='StreamingAssets/Audio/ModernCard/'
-SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29', 'fm-chronicle-2026-10-29'}
+SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29', 'fm-chronicle-2026-10-29','fm-quest-2026-10-30'}
 
 
 def _number(value):

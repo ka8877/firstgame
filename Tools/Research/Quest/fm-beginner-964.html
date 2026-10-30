@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- 💡 1. 브라우저 탭 & 구글 검색용 타이틀 -->
+<title>판타지 마스터즈 - 초보자를 위한 매뉴얼 | GG게임 온라인공략</title>
+
+<!-- 💡 2. 구글 검색 결과 텍스트 (ENT_COMPAT 적용으로 소스코드에서도 ' 노출) -->
+<meta name="description" content="GG게임 온라인게임 공략 - 판타지 마스터즈 - 초보자를 위한 매뉴얼! 먼저 판타지 마스터즈에는 시작 하면 프리카드란게 주어집니다. 프리카드는 제일 기초의 카드로서 프 리카드는 맨 처음 주어지는거 말고도 여러가지 카드 들이 있습니다. 프리카드란 말 답게 GP 즉.. 캐 시 없이도 가능합... 핵심 팁과 육성 노하우를 지금 바로 확인하세요.">
+
+<!-- 💡 3. 마법의 키워드 (검색 엔진 타겟팅 최적화) -->
+<meta name="keywords" content="온라인게임 공략, 판타지 마스터즈 - 초보자를 위한 매뉴얼, PC온라인 공략, 게임 육성법, 게임 노하우, GG게임">
+
+<!-- 💡 4. 캐노니컬 및 OG 태그 (중복 트래픽 방지 및 SNS 최적화) -->
+<link rel="canonical" href="https://www.ggemguide.com/guides/online/964/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="판타지 마스터즈 - 초보자를 위한 매뉴얼 | GG게임 온라인공략">
+<meta property="og:description" content="[온라인 공략] 먼저 판타지 마스터즈에는 시작 하면 프리카드란게 주어집니다. 프리카드는 제일 기초의 카드로서 프 리카드는 맨 처음 주어지는거 말고도 여러가지 카...">
+<meta property="og:image" content="https://www.ggemguide.com/images/og_thumb.jpg">
+<meta property="og:url" content="https://www.ggemguide.com/guides/online/964/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="GG게임">
+
+<!-- 💡 브라우저 탭 및 스마트폰 바탕화면용 아이콘 (파비콘 완벽 세트) -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/favicon-180.png" sizes="180x180">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167519074-1"></script>
+<style>
+/* 🎨 디자인 시스템 완벽 이식 */
+:root { 
+    --bg-color: #f1f3f5; /* 눈부심 방지 배경색 */
+    --main-color: #0b1b34; 
+    --point-color: #E53935; 
+    --text-color: #212529; 
+    --light-text: #6c757d; 
+    --border-color: #dee2e6; 
+    --box-bg: #ffffff; 
+    --max-width: 900px; /* 밀도 최적화 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", sans-serif; background-color: var(--bg-color); color: var(--text-color); font-size: 15px; line-height: 1.6; }
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+a:hover { color: var(--point-color); }
+ul { list-style: none; } /* 점 제거 동기화 */
+
+.main-wrapper { 
+    width: 100%; 
+    max-width: var(--max-width); 
+    margin: 0 auto; 
+    background-color: var(--box-bg); 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* 입체감 부여 */
+    padding-bottom: 30px; 
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+/* 헤더 & 네비 */
+.header { background-color: var(--main-color); color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+.header .logo a { font-size: 28px; font-weight: bold; color: #fff; }
+.header .user-menu { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.header .user-menu a.login-btn { border: 1px solid rgba(255,255,255,0.5); padding: 4px 10px; border-radius: 4px; color: #fff; }
+
+.nav { background-color: #fff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
+.nav-list { display: flex; width: 100%; justify-content: space-around; max-width: 800px; margin: 0 auto; }
+.nav-list li a { display: block; padding: 15px 10px; font-weight: bold; font-size: 16px; border-bottom: 3px solid transparent; }
+.nav-list li a.active { border-bottom-color: var(--main-color); color: var(--main-color); }
+
+/* 📍 서브메뉴 활성화 스타일 */
+.submenu { background-color: #fafafa; border-bottom: 1px solid #eee; padding: 12px 10px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.submenu a { font-size: 13px; color: #555; padding: 5px 12px; border-radius: 20px; border: 1px solid #ddd; background: #fff; transition: all 0.2s;}
+.submenu a:hover { background-color: #eee; }
+.submenu a.active { background-color: var(--main-color); color: #fff; border-color: var(--main-color); font-weight: bold; }
+
+.container { padding: 25px 12px; } /* 📱 모바일: 좌우 여백을 12px로 줄여서 이미지를 큼직하게 꽉 채움! */
+@media (min-width: 768px) {
+    .container { padding: 30px 35px; } /* 💻 PC: 좌우 여백을 시원하게 확보 */
+}
+.logo-menu-wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+}
+
+.top-recommend-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.top-recommend-menu a {
+    color: rgba(255,255,255,0.9);
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+}
+
+.top-recommend-menu a:hover {
+    color: #ffca28;
+}
+
+.top-recommend-menu span {
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+}
+/* 본문 스타일 */
+.view-header { border-bottom: 2px solid var(--main-color); padding-bottom: 15px; margin-bottom: 20px; }
+.view-title { font-size: 26px; font-weight: bold; color: #111; margin-bottom: 10px; line-height: 1.4; }
+.view-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--light-text); }
+.view-content { font-size: 17px; line-height: 1.9; color: #333; width: 100%; max-width: 800px; margin: 0 auto 40px; min-height: 300px; word-break: break-all; }
+.view-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; }
+
+.view-content iframe,
+.view-content embed,
+.view-content object {
+    display: block !important;
+    width: 100% !important;
+    max-width: 760px !important;
+    aspect-ratio: 16 / 9;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 22px auto !important;
+    border: 0 !important;
+}
+.view-content video {
+    display: block !important;
+    width: auto !important;
+    max-width: min(100%, 760px) !important;
+    height: auto !important;
+    margin: 22px auto !important;
+}
+@media (max-width: 767px) {
+    .view-content iframe,
+    .view-content embed,
+    .view-content object,
+    .view-content video {
+        max-width: 100% !important;
+        margin: 16px auto !important;
+    }
+}
+
+/* 하단 목록 & 페이징 스타일 */
+.related-list { margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+.post-item { padding: 12px 10px; border-bottom: 1px solid #f0f0f0; transition: background 0.2s;}
+.post-item:hover { background-color: #f8f9fa; }
+.post-item.selected-post { background-color: #f0f4ff; border-left: 4px solid var(--main-color); padding-left: 10px; }
+.post-item a { color:#333; }
+
+.pagination { display: flex; justify-content: center; gap: 5px; margin: 30px 0; flex-wrap: wrap; }
+.pagination a { padding: 6px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; color: #666; background: #fff;}
+.pagination a:hover { background-color: #f5f5f5; }
+.pagination a.active { background: var(--main-color); color: #fff; border-color: var(--main-color); font-weight: bold; }
+
+/* 💰 인피드 광고 영역 통합 디자인 */
+.in-feed-ad { 
+    margin: 25px auto; 
+    padding: 10px 0; 
+    background-color: #fafafa; 
+    border-radius: 6px; 
+    text-align: center; 
+    overflow: hidden; 
+    width: 100%; 
+    position: relative;
+}
+
+.in-feed-ad ins { display: block; margin: 0 auto; max-width: 100%; }
+
+.side-ad-right { 
+    display: none; 
+}
+
+@media (min-width: 1560px) {
+    .side-ad-right {
+        display: block;
+        position: fixed;
+        top: 110px;
+        width: 300px;
+        height: 600px;
+        z-index: 999;
+        left: 50%;
+        margin-left: 470px;
+        border: 1px solid #ddd;
+        background: #fff;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+}
+.footer { background-color: var(--main-color); color: rgba(255,255,255,0.7); text-align: center; padding: 30px 20px; font-size: 13px; margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); }
+.footer strong { color: #fff; }
+
+/* 광고: 모바일 고정형 / PC 반응형 / 1560px 이상 우측 300x600 */
+.ad-slot-container {
+    margin: 15px auto;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clear: both;
+}
+.ad-slot-container.top-ad {
+    min-height: 100px; height: 100px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+@media (min-width: 768px) {
+    .ad-slot-container.top-ad { min-height: 220px; height: 220px; }
+}
+
+.ad-slot-container.mid-ad {
+    min-height: 250px; height: 250px;
+    margin-top: 18px;
+    margin-bottom: 24px;
+    clear: both;
+    position: relative;
+}
+@media (min-width: 768px) {
+    .ad-slot-container.mid-ad { min-height: 220px; height: 220px; }
+}
+
+@media (max-width: 767px) {
+    .mobile-top-ad {
+        display: block !important;
+        width: 320px !important;
+        height: 100px !important;
+        margin: 0 auto !important;
+    }
+
+    .mobile-mid-ad {
+        display: block !important;
+        width: 300px !important;
+        height: 250px !important;
+        margin: 0 auto !important;
+    }
+}
+
+</style>
+<link rel="stylesheet" href="/guide_editor.css?v=1">
+</head>
+<body>
+<div class="main-wrapper">
+    <header class="header">
+        <div class="logo-menu-wrap">
+        <div class="logo"><a href="https://www.ggemguide.com/">GG게임</a></div>
+
+        <nav class="top-recommend-menu">
+            <a href="/recommend/category/anticipated/">기대작</a>
+        </nav>
+    </div>
+        <div class="user-menu">
+                            <a href="https://www.ggemguide.com/m_login.htm" class="login-btn">로그인</a>
+                    </div>
+    </header>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="/news/">뉴스</a></li>
+            <li><a href="/mobile/">모바일</a></li>
+            <li><a href="/pc/">PC게임</a></li> 
+            <li><a href="/online/">온라인</a></li>
+            <li><a href="/community/" class="active">커뮤니티</a></li> 
+        </ul>
+    </nav>
+
+    <div class="submenu">
+        <a href="/guides/pc/">PC공략</a>
+        <a href="/guides/mobile/">모바일공략</a>
+        <a href="/guides/video/">비디오공략</a>
+        <a href="/guides/online/" class="active">온라인공략</a>
+    </div>
+
+    <main class="container">
+        
+        
+
+<div class="ad-slot-container top-ad" id="ad-top-wrapper" aria-label="광고"></div>
+        <article>
+            <header class="view-header">
+                <h1 class="view-title">판타지 마스터즈 - 초보자를 위한 매뉴얼</h1>
+                <div class="view-meta">
+                    <span>
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='3508점'>
+        <span style='font-size:11px;'>🌿</span>
+        <span>입문자 Lv.36</span>
+    </span> <strong>ArmSlave</strong></span>
+                    <span>2006.04.02 | 조회 2,270</span>
+                </div>
+            </header>
+            <div class="view-content">
+                먼저 판타지 마스터즈에는 시작 하면 프리카드란게 주어집니다. 프리카드는 제일 기초의 카드로서 프<br />
+리카드는 맨 처음 주어지는거 말고도 여러가지 카드 들이 있습니다. 프리카드란 말 답게 GP 즉.. 캐<br />
+시 <br />
+없이도 가능합니다! 아.. GP .AP 같은건 조금 후에 설명 할게요<br />
+<br />
+카드의 종류는 프리 커먼 언커먼 레어 스폐셜 유니크 이벤트 외에 몇가지 더 있는데요 그건 트레이드<br />
+나 그 외에 잡다한데 쓰는 것이니 그렇게 상관할 필요는 없습니다.<br />
+<br />
+맨 처음 게임을 해보면 공격턴,방어턴이라는게 주어 지는데요. 공격턴이라면 선공을 하고 방어턴이라<br />
+면 방어를 합니다. 공격,방어도 여러가지 마법을 이용해 위력을 넓힐수있습니다. 그리고 아까 설명하<br />
+다 만 [xP]를 설명할게요. 쉽게 줄로 설명해드릴게요<br />
+<br />
+AP : 공격력<br />
+DP : 방어력<br />
+HP : 체력<br />
+SP : 판타지마스터에서 사용하는 돈<br />
+GP : 캐시<br />
+<br />
+이런 종류들이 있는데요. 몬스터 왼쪽에 보시면 공격력 , 방어력 , 체력 순으로 내려갑니다<br />
+그리고 뜬금 없지만 스폐셜,유니크 는 구하기가 힘듭니다. 그러니까 앨범이나 카드조합 상점 (을)를 <br />
+통<br />
+해 얻어야 합니다. 트레이드[교환]이 왜 안돼냐면 스폐셜,유니크는 교환 불가기 때문에 상점에서 사거<br />
+나 해야합니다 앗참 - _- 저작권 있습니다 ㅇㅅㅇ 심장의 고동 귓하고 퍼가세요<br />
+<br />
+그리고 설명 할것은 인터페이스 조작법 등인데요. 일단 게임을 시작하면 몬스터는 아무것도 올릴수 없<br />
+을 거에요. 그건 왜 냐! 지형 카드을 올려야 하기 때문이죠. 지형 카드도 기본적으로 사람들이 제일 많<br />
+이쓰는 프리 카드 [처음 주어지죠 ^^] <br />
+<br />
+그리고 듀얼 분들이 많이쓰는 언커먼 지형 카드!<br />
+언커먼 지형 카드는 보통 지형 카드와는 다르게 왼쪽에 소울 2가지가 있습니다 아 .. 소울을 설명 안 <br />
+했<br />
+네요. 소울이란 기본적으로 LP라고 말하지만 앞쪽에는 LP를 설명 안 했습니다. 이유는 LP라고 말하<br />
+는 분들이 거의 없기 때문이죠 = ㅁ=;; 다들 솔[소울]이라고 부릅니다 소울은 프리 지형카드를 올리면<br />
+1씩 생깁니다 그 생긴걸로 몬스터를 뽑는 건데요. 유소울 , 무소울이 있습니다<br />
+<br />
+기본적으로 몬스터 왼쪽에 원이 6개가 있고 빈게 2개가 있으면 그건 무소울 입니다 빈 것이 나와있는 <br />
+몬스터가 있으면 그 몬스터가 죽을때까지 소울이 2개가 깍여있는 상태 인겁니다. <br />
+<br />
+이제 설명할게 아! 인터페이스군요. <br />
+일단 Alt + T 를 누르시면 팀 채팅이 &#46093;니다 이건 2-2 때 유용한건데요. 팀에게만 들립니다.<br />
+요즘엔 패치도 됐다죠.. 팀전에서도 관전을 할수있게 관전 모드는 옆에 깃발로 자신의 팀을 고를때<br />
+몇번 더 누르면 눈이 보이는데요 눈 빨간색은 빨간팀 카드를 관전 파란색은 파란팀 카드를 관전 하는 <br />
+겁니다.<br />
+<br />
+일단 옵션이 보이실건데요. 저도 잘 영어를 못하는 관계로.. 한글로 설명하죠. 일단 덱 모드가 있는데<br />
+요. 카드를 쓸때 다음턴이 지나고 채워질때 카드수가 답니다. 그리고 적 몬스터가 자신을 직접공격하<br />
+면 카드수가 달구요. 소울의 갯수에 따라 카드수가 다르게 답니다. 덱 모드는 채워질때 카드수가 다는 <br />
+것과 직접공격할때 다는 것을 합쳐놓은게 덱 모드입니다.  <br />
+<br />
+그리고 라이프 모드란게 있습니다. 라이프 모드는 채워질때 카드수가 다는 것과 직접공격할때 다는 것<br />
+을 2가지로 분해 해놓은 겁니다. 라이프 모드가 더 오래가니까 라이프 모드가 더 돈과 경험치를 얻기 <br />
+쉽겠죠? <br />
+<br />
+그리고 그 밑에는 기본적으로 맨처음엔 뒤에 4가 붙어있는 모드가 있을겁니다. 4가 붙어있으면 4턴까<br />
+지 셔플 = 카드 6장을 안 쓴 상태에서 랜덤 교체 하는 것을 할수 있구요 8턴까지면 8턴까지 구요 그런<br />
+식으로 이해 하시고 넘기다 보면 리셔플이라는 모드가 눈에 띄일 겁니다. 리셔플은 리 라는 말에서 알<br />
+수 있듯이 무한 셔플을 할수 있습니다. 턴에 상관없이 셔플을 할수 있는 거지요. 카드가 말릴때에 딱 <br />
+좋은 카드입니다. 그럼 인터페이스는 거의 다 배운거지요;;<br />
+<br />
+나머지는 코인 그러니까 가운데에 AP 2X     5가 있으면 만약 코인 2개라면 2개가 뜬다면 2x5 10이 공<br />
+격력이 되는거죠. 숫자가 나와있는 곳이 떳다고 말하는 곳이구요. 숫자가 안나와 있는 곳이 안 떳다고 <br />
+말하는 곳입니다. 기본적으로 뜨는 것이 유리하지만 가끔씩은 안뜨는게 유리한 카드도 존재합니다.<br />
+[손 아프네요 - ㅅ-ㅎㅎ;]<br />
+<br />
+그리고 플립 이란게 있습니다 자신이 카드를 다 냈으면 Alt + R 을 눌르면 레디가 돼구요 Alt + F 를 누<br />
+르시면 플립이 됩니다. 플립은 자신의 계급을 룰렛을 통해 맞추는 건데요. 자신의 계급이 나오면 1개<br />
+가 나온다면 100SP, 2개가 나오면 1000SP 3개가 나오면 10000SP가 나오면서 공지에 XXX님이 올 X<br />
+가 뜨셨습니다.            </div>
+
+            <div class="ad-slot-container mid-ad" id="ad-mid-wrapper" aria-label="광고"></div>
+
+                    </article>
+
+        
+
+
+        <section class="related-list">
+            <h3 style="font-size:18px; margin-bottom:15px; border-bottom:2px solid #333; padding-bottom:10px;">온라인게임 공략 최신목록</h3>
+                        <div class="post-item ">
+                <a href="/guides/online/991/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    서든어택 공략집                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='471점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.5</span>
+    </span> 黑風 | 2006-05-11 | 조회 4352                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/990/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [프리스타일] 용슛 공략                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='17102점'>
+        <span style='font-size:11px;'>🏍️</span>
+        <span>모험가 Lv.172</span>
+    </span> 에스와이엔젤 | 2006-05-10 | 조회 4156                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/989/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [카르페디엠]궁수육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='17092점'>
+        <span style='font-size:11px;'>🏍️</span>
+        <span>모험가 Lv.171</span>
+    </span> 에스와이엔젤 | 2006-05-10 | 조회 3352                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/988/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    이터널시티 도케 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='1808점'>
+        <span style='font-size:11px;'>🐥</span>
+        <span>입문자 Lv.19</span>
+    </span> gg쥐쥐게임 | 2006-05-10 | 조회 5740                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/987/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [겟앰프드]초보도 고수가된다! -격투가편 1장-                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='50점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.1</span>
+    </span> 긱스 | 2006-05-10 | 조회 4906                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/986/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [십이지천] 정파 육성마스터                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='325점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.4</span>
+    </span> 명예롭게 | 2006-05-09 | 조회 3312                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/985/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [카르페디엠]다크어쌔신 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='4342점'>
+        <span style='font-size:11px;'>🍀</span>
+        <span>입문자 Lv.44</span>
+    </span> 몽마 | 2006-05-07 | 조회 5595                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/984/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    던전앤 파이터 소울 브링어 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='1117점'>
+        <span style='font-size:11px;'>🐥</span>
+        <span>입문자 Lv.12</span>
+    </span> ∑게임™♡ | 2006-05-07 | 조회 5601                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/982/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [던파] 메카닉 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='3687점'>
+        <span style='font-size:11px;'>🌿</span>
+        <span>입문자 Lv.37</span>
+    </span> Shrek2 | 2006-05-06 | 조회 4929                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/981/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [위드2fc] 헌터육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='2996점'>
+        <span style='font-size:11px;'>🌱</span>
+        <span>입문자 Lv.30</span>
+    </span> 레드베레모 | 2006-05-05 | 조회 10760                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/980/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [거상]돈없을때 그나마 돈버는법,...                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='16797점'>
+        <span style='font-size:11px;'>🚲</span>
+        <span>모험가 Lv.168</span>
+    </span> 에스와이엔젤 | 2006-05-05 | 조회 7027                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/979/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [거상] 이순신&gt;&gt;거북차 만들기 공략!!                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='16787점'>
+        <span style='font-size:11px;'>🚲</span>
+        <span>모험가 Lv.168</span>
+    </span> 에스와이엔젤 | 2006-05-05 | 조회 3932                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/975/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    미끄마끄 온라인 전사 스킬                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='503점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.6</span>
+    </span> 중복게임 | 2006-04-20 | 조회 3213                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/974/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    다크에덴 총슬 레벨1~60까지 육성                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='10점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.1</span>
+    </span> bumprd | 2006-04-18 | 조회 6856                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/973/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [엑스틸] 쌩초보를 위한 무작정 따라하기                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='386점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.4</span>
+    </span> wpdhkd | 2006-04-15 | 조회 2207                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/972/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    개발팀이 밝히는 카트라이더 승리 비법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='17012점'>
+        <span style='font-size:11px;'>🏍️</span>
+        <span>모험가 Lv.171</span>
+    </span> DarkKigh | 2006-04-10 | 조회 2144                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/971/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [니다온라인] 팁입니다 솬사,마공 100넘기기                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='10점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.1</span>
+    </span> 세나클로즈 | 2006-04-08 | 조회 3046                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/970/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [씰온라인] -홀리기사-편!!                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='13491점'>
+        <span style='font-size:11px;'>⛺</span>
+        <span>모험가 Lv.135</span>
+    </span> 테리우스™ | 2006-04-08 | 조회 5214                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/969/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [샤이야] 기본 등급 가이드                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='14613점'>
+        <span style='font-size:11px;'>🔦</span>
+        <span>모험가 Lv.147</span>
+    </span> 에스와이엔젤 | 2006-04-03 | 조회 2855                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/968/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [아크로드] 전사 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='14603점'>
+        <span style='font-size:11px;'>🔦</span>
+        <span>모험가 Lv.147</span>
+    </span> 에스와이엔젤 | 2006-04-03 | 조회 4880                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/967/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    트릭스터 기본 tip                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='6075점'>
+        <span style='font-size:11px;'>🌻</span>
+        <span>입문자 Lv.61</span>
+    </span> 十二指踐 | 2006-04-02 | 조회 3740                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/966/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    다크에덴 검슬vs도슬vs인챈vs총슬vs힐슬  [다덴]                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='6065점'>
+        <span style='font-size:11px;'>🌻</span>
+        <span>입문자 Lv.61</span>
+    </span> 十二指踐 | 2006-04-02 | 조회 13724                </div>
+            </div>
+                        <div class="post-item selected-post">
+                <a href="/guides/online/964/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    판타지 마스터즈 - 초보자를 위한 매뉴얼                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='3508점'>
+        <span style='font-size:11px;'>🌿</span>
+        <span>입문자 Lv.36</span>
+    </span> ArmSlave | 2006-04-02 | 조회 2271                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/963/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [붉은보석] 허리&amp;딜레이 전사                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='11750점'>
+        <span style='font-size:11px;'>🎒</span>
+        <span>모험가 Lv.118</span>
+    </span> 라비 | 2006-04-01 | 조회 3762                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/962/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [붉은보석] 모든 케릭터 육성법                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='11740점'>
+        <span style='font-size:11px;'>🎒</span>
+        <span>모험가 Lv.118</span>
+    </span> 라비 | 2006-04-01 | 조회 15753                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/959/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    [실크로드] 스텟에 알맞은 무기                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='13346점'>
+        <span style='font-size:11px;'>⛺</span>
+        <span>모험가 Lv.134</span>
+    </span> 테리우스™ | 2006-04-01 | 조회 2777                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/958/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    시티레이서 돈벌기 팁 !!                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#708090; line-height:1.2;' title='13336점'>
+        <span style='font-size:11px;'>⛺</span>
+        <span>모험가 Lv.134</span>
+    </span> 테리우스™ | 2006-04-01 | 조회 6890                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/957/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    일랜시아 어빌별사냥터                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='124점'>
+        <span style='font-size:11px;'>🐣</span>
+        <span>입문자 Lv.2</span>
+    </span> 고니시친구다 | 2006-03-31 | 조회 11257                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/954/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    천상의문 - 초보자들 렙업 빨리하기 꼼수 강좌                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='2692점'>
+        <span style='font-size:11px;'>🌱</span>
+        <span>입문자 Lv.27</span>
+    </span> ArmSlave | 2006-03-29 | 조회 3003                </div>
+            </div>
+                        <div class="post-item ">
+                <a href="/guides/online/953/?dpage=129" style="font-weight:bold; display:block; margin-bottom:5px;">
+                    스톤에이지 - 초보자를 위한 팁                 </a>
+                <div style="font-size:12px; color:#999; margin-top:3px;">
+                    
+    <span style='display:inline-flex; align-items:center; gap:4px; background-color:#f5f5f5; border:1px solid #e0e0e0; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:600; color:#8B4513; line-height:1.2;' title='2682점'>
+        <span style='font-size:11px;'>🌱</span>
+        <span>입문자 Lv.27</span>
+    </span> ArmSlave | 2006-03-29 | 조회 3751                </div>
+            </div>
+                    </section>
+
+        <div class="pagination">
+    <a href='/guides/online/'>1</a><a href='/guides/online/page/125/'>◀</a><a href='/guides/online/page/126/'>126</a><a href='/guides/online/page/127/'>127</a><a href='/guides/online/page/128/'>128</a><a class='active' style='cursor:default;'>129</a><a href='/guides/online/page/130/'>130</a><a href='/guides/online/page/131/'>▶</a></div>
+
+        <div style="text-align:center; margin-top:20px;">
+            <a href="/guides/online/page/129/" style="display:inline-block; padding:10px 25px; background:#f0f0f0; border-radius:4px; font-weight:bold; color:#333; border:1px solid #ddd; transition:background 0.2s;">목록으로 돌아가기</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div style="margin-bottom:10px;"><a href="/about.htm" style="color:#fff;">사이트 소개</a> | <a href="/terms.htm" style="color:#fff;">이용약관</a> | <a href="/privacy.htm" style="color:#fff;">개인정보처리방침</a></div>
+        <div>Since 2004 <strong>GG게임</strong>. All rights reserved.</div>
+    </footer>
+</div>
+
+<div class="side-ad-right" id="side-ad-box" aria-label="광고"></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const isWidePC = window.matchMedia('(min-width: 1560px)').matches;
+
+    const topWrap = document.getElementById('ad-top-wrapper');
+    const midWrap = document.getElementById('ad-mid-wrapper');
+    const sideWrap = document.getElementById('side-ad-box');
+
+    if (topWrap) {
+        if (isMobile) {
+            topWrap.innerHTML = `
+                <ins class="adsbygoogle mobile-top-ad"
+                     style="display:block;"
+                     data-ad-client="ca-pub-6371658782761560"
+                     data-ad-slot="6074307308"></ins>`;
+        } else {
+            topWrap.innerHTML = `
+                <ins class="adsbygoogle"
+                     style="display:block;width:100%;height:220px"
+                     data-ad-client="ca-pub-6371658782761560"
+                     data-ad-slot="9812011681"></ins>`;
+        }
+    }
+
+
+    if (midWrap) {
+        if (isMobile) {
+            midWrap.innerHTML = `
+                <ins class="adsbygoogle mobile-mid-ad"
+                     style="display:block;"
+                     data-ad-client="ca-pub-6371658782761560"
+                     data-ad-slot="9062552083"></ins>`;
+        } else {
+            midWrap.innerHTML = `
+                <ins class="adsbygoogle"
+                     style="display:block;width:100%;height:220px"
+                     data-ad-client="ca-pub-6371658782761560"
+                     data-ad-slot="9062552083"></ins>`;
+        }
+    }
+
+    if (isWidePC && sideWrap) {
+        sideWrap.innerHTML = `
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:600px"
+                 data-ad-client="ca-pub-6371658782761560"
+                 data-ad-slot="1449167596"></ins>`;
+    }
+
+    function pushCreatedAds() {
+        const ads = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+        ads.forEach(function () {
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.error('AdSense push error:', e);
+            }
+        });
+    }
+
+    const existingScript = document.querySelector(
+        'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
+    );
+
+    if (existingScript) {
+        if (window.adsbygoogle) {
+            pushCreatedAds();
+        } else {
+            existingScript.addEventListener('load', pushCreatedAds, { once: true });
+        }
+        return;
+    }
+
+    const adScript = document.createElement('script');
+    adScript.async = true;
+    adScript.crossOrigin = 'anonymous';
+    adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6371658782761560';
+    adScript.addEventListener('load', pushCreatedAds, { once: true });
+    document.head.appendChild(adScript);
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const viewContent = document.querySelector('.view-content');
+    if (!viewContent) return;
+    viewContent.innerHTML = viewContent.innerHTML
+        .replace(/(<br\s*\/?>\s*){3,}/gi, '<br><br>')
+        .replace(/<(p|div|span)[^>]*>(&nbsp;|\s|<br\s*\/?>)*<\/\1>/gi, '')
+        .replace(/^\s*(?:<br\s*\/?>\s*)+|(?:<br\s*\/?>\s*)+$/gi, '')
+        .trim();
+});
+</script>
+
+</body>
+</html>

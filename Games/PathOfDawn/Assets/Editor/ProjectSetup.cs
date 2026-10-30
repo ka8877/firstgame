@@ -45,7 +45,7 @@ namespace FirstGame.Editor
         [MenuItem("FirstGame/Prepare First Slice")]
         public static void Ensure()
         {
-            LuminousProjectSetup.Ensure();
+            PilgrimageProjectSetup.Ensure();
         }
 
         // The previous 3D construction remains editable history. The latest user
@@ -807,7 +807,7 @@ namespace FirstGame.Editor
         [MenuItem("FirstGame/Validate First Slice")]
         public static void Validate()
         {
-            LuminousProjectSetup.Validate();
+            PilgrimageProjectSetup.Validate();
         }
 
         public static void ValidateLegacy()

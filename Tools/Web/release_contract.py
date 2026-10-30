@@ -59,8 +59,19 @@ RENEWAL = {
     'currentTargets': ['Web']
 }
 
+QUEST = {
+    'name': 'quest',
+    'revisions': {'FantasyCards': 'fm-quest-2026-10-30', 'PathOfDawn': 'gospel-journey-2026-10-30'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Quest' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'quest':
+        return QUEST
     if name == 'renewal':
         return RENEWAL
     if name == 'luminous':

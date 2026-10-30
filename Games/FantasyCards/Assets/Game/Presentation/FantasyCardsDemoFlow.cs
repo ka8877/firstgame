@@ -84,6 +84,7 @@ namespace FantasyCards.Presentation
         private void BeginSelectedBattle()
         {
             if (useCustomDeck && !ValidDeck(customDeck)) { message = "편집 덱의 50장 구성을 확인하세요."; ShowCollection(true); return; }
+            ActivatePracticeBattle();
             RememberDemoSelection(); ResetPolishSession();
             // Only a new-match seed is selected here. All shuffle, redraw and combat randomness belongs to the core.
             uint seed = unchecked((uint)DateTime.UtcNow.Ticks); if (seed == 0) seed = 1;
@@ -94,39 +95,12 @@ namespace FantasyCards.Presentation
 
         private IEnumerator ShuffleAndDeal(bool opening = true)
         {
-            FmBattleAudio.Play("card-shuffle");
-            battleScreen = false; redraw = null; Clear(); Backdrop(true);
-            Text(root, "판타지마스터즈", .1f, .82f, .9f, .94f, 43, gold, TextAlignmentOptions.Center);
-            Text(root, "덱 셔플", .1f, .18f, .9f, .30f, 36, ivory, TextAlignmentOptions.Center);
-            Text(root, opening ? authoredRules.deckSize + "장의 순서를 섞고 시작 손패를 나눕니다." : "손패 전체를 덱에 넣어 다시 섞고 6장을 뽑습니다.", .1f, .075f, .9f, .17f, 25, teal, TextAlignmentOptions.Center);
-            var backs = new List<RectTransform>();
-            for (int i = 0; i < 10; i++)
-            {
-                var card = Panel(root, .43f, .34f, .57f, .77f, new Color(.14f + i * .003f, .15f, .29f));
-                card.gameObject.name = "Shuffle card " + i; Frame(card, gold, 2); Ornament(card, gold, true);
-                var back = Resources.Load<Texture2D>("Art/ClassicCards/Decor/card-back");
-                if (back != null) FittedImage(card, back, new Rect(0, 0, 1, 1), 0, 0, 1, 1, "Original shuffled card back");
-                else Text(card, "FM", .15f, .3f, .85f, .7f, 45, gold, TextAlignmentOptions.Center);
-                Frame(card, gold, 2); backs.Add(card);
-            }
-            const float duration = 1.45f;
-            for (float elapsed = 0; elapsed < duration; elapsed += Time.unscaledDeltaTime)
-            {
-                float phase = elapsed / duration;
-                for (int i = 0; i < backs.Count; i++)
-                {
-                    float offset = Mathf.Sin(phase * Mathf.PI * 6 + i * .45f) * Mathf.Sin(phase * Mathf.PI);
-                    backs[i].anchoredPosition = new Vector2(offset * root.rect.width * .18f, Mathf.Cos(phase * Mathf.PI * 6 + i * .45f) * 14);
-                    backs[i].localRotation = Quaternion.Euler(0, 0, offset * 15);
-                }
-                yield return null;
-            }
-            FmBattleAudio.Play("card-draw");
-            locked = false; if (opening) ShowOpeningHand(); else ShowBattle();
+            yield return AnimateClientShuffle(opening, !opening);
         }
 
         private void ShowOpeningHand()
         {
+            QuestCurrentScreen = "opening-hand";
             battleScreen = false; redraw = ShowOpeningHand; Clear(); Backdrop(true);
             bool small = canvas.pixelRect.height < 600;
             Text(root, "시작 손패 확인", .04f, .85f, .96f, .97f, 44, ivory);
@@ -143,8 +117,11 @@ namespace FantasyCards.Presentation
             bool canReplace = engine.CanMulligan(0, out string reason);
             Text(root, canReplace ? "교체하면 모든 손패를 덱에 넣어 다시 섞고 6장을 뽑습니다." : "전체 손패 교체를 사용했습니다. 준비가 되면 시작하세요.", .04f, .15f, .96f, .25f, 24, ivory);
             Button(root, "전체 손패 교체", .035f, .015f, .43f, .135f,
-                () => { if (engine.MulliganWholeHand(0, out message)) FmBattleAudio.Play("card-shuffle");
-                    else FmBattleAudio.Play("error"); Save(); ShowOpeningHand(); }, slate, 25, canReplace);
+                () =>
+                {
+                    if (!engine.MulliganWholeHand(0, out message)) { FmBattleAudio.Play("error"); ShowOpeningHand(); return; }
+                    Save(); locked = true; StartCoroutine(AnimateClientShuffle(true, true));
+                }, slate, 25, canReplace);
             Button(root, "이대로 시작", .62f, .015f, .965f, .135f, ConfirmOpeningHand, gold, 26);
         }
 

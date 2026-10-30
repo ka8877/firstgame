@@ -22,6 +22,8 @@ parser.add_argument("--repository", default="ka8877/firstgame")
 parser.add_argument("--branch", default="gh-pages")
 parser.add_argument("--link-immutable-stage", action="store_true",
                     help="Link already verified immutable stage files into the disposable same-filesystem checkout; verify stage hashes again after push.")
+parser.add_argument("--checkout-root", type=Path, default=Path('/tmp'),
+                    help="Existing writable task directory for the disposable checkout; use the stage filesystem to avoid duplicate verified binaries.")
 args = parser.parse_args()
 if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", args.repository):
     parser.error("Expected owner/repository.")
@@ -50,7 +52,9 @@ for name, staged in current.items():
             or hashlib.sha256(staged.read_bytes()).hexdigest() != manifest["files"][name]):
         parser.error("Staged file changed: " + name)
 remote = f"https://github.com/{args.repository}.git"
-with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as temporary:
+if not args.checkout_root.is_dir() or args.checkout_root.is_symlink():
+    parser.error("The disposable checkout root must be an existing regular task directory.")
+with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir=args.checkout_root) as temporary:
     checkout = Path(temporary)
     def git(*commands, capture=False):
         return subprocess.run(["git", *commands], cwd=checkout, check=True,
@@ -66,9 +70,15 @@ with tempfile.TemporaryDirectory(prefix="firstgame-publish-", dir="/tmp") as tem
     # Avoid an incidental duplicate repack in this disposable checkout.
     git("config", "gc.auto", "0")
     git("config", "maintenance.auto", "false")
+    if args.link_immutable_stage:
+        # The immutable task stage already contains all current blobs. Retain
+        # remote commit/tree ancestry without downloading a second historical
+        # 900MB player before adding the current files.
+        git("config", "remote.origin.promisor", "true")
+        git("config", "remote.origin.partialclonefilter", "blob:none")
     refs = git("ls-remote", "origin", f"refs/heads/{args.branch}", capture=True).stdout.strip()
     if refs:
-        git("fetch", "--depth=1", "origin", args.branch)
+        git("fetch", "--depth=1", *(["--filter=blob:none"] if args.link_immutable_stage else []), "origin", args.branch)
         git("reset", "--soft", "FETCH_HEAD")
     def copy_public(source, destination):
         source = Path(source)

@@ -68,7 +68,7 @@ namespace FantasyCards.Presentation
             var state = engine.State; var enemy = state.players[1];
             var encounter = DemoCatalog.GetEncounter(Mathf.Clamp(state.encounterIndex, 0, DemoCatalog.Encounters.Length - 1));
             Text(root, "대전 데스크", .045f, .895f, .72f, .98f, 40, ivory);
-            Text(root, "싱글 연습전 · " + encounter.name, .045f, .825f, .955f, .895f, 24, gold);
+            Text(root, (questBattleMode ? "싱글 플레이 · " : "자유 연습전 · ") + encounter.name, .045f, .825f, .955f, .895f, 24, gold);
             string[] tabs = { "상대 정보", "전투 기록", "연습 메모" };
             for (int i = 0; i < tabs.Length; i++)
             {

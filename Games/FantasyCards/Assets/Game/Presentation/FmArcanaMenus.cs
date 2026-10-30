@@ -32,23 +32,24 @@ namespace FantasyCards.Presentation
 
         private void ShowArcanaTitle()
         {
+            QuestCurrentScreen = "title";
             battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login");
             RenewalBackdrop(false);
             var edition = Text(root, "FANTASY MASTERS", .28f, .80f, .72f, .935f, 54, ivory, TextAlignmentOptions.Center);
             edition.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font; edition.characterSpacing = 1.8f;
-            Text(root, "REMASTER  ·  일곱 소울의 귀환", .29f, .735f, .71f, .805f, 22, gold, TextAlignmentOptions.Center);
+            Text(root, "REMASTER  ·  싱글 플레이", .29f, .735f, .71f, .805f, 22, gold, TextAlignmentOptions.Center);
             var title = Text(root, "판타지마스터즈", .15f, .515f, .85f, .68f, 70, ivory, TextAlignmentOptions.Center);
             title.gameObject.name = "Remaster title logo"; title.fontStyle = FontStyles.Bold;
             Text(root, "카드를 펼치고, 코인의 운명에 도전하세요.", .20f, .435f, .80f, .51f, 26, new Color(.79f, .86f, 1), TextAlignmentOptions.Center);
-            var play = Button(root, "게임 시작", .34f, .28f, .66f, .405f, ShowLobby, gold, 32);
+            var play = Button(root, "게임 시작", .34f, .28f, .66f, .405f, EnterQuestGame, gold, 32);
             play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
-            Button(root, "이어하기", .34f, .18f, .66f, .26f, Continue, new Color(.08f, .12f, .23f, .97f), 26, PersistentSaves.Exists(Slot));
+            Button(root, "전투 이어하기", .34f, .18f, .66f, .26f, Continue, new Color(.08f, .12f, .23f, .97f), 26, HasAnyBattleSave);
             Button(root, "출전 카드", .10f, .075f, .34f, .155f, () => ShowCollection(false), slate, 24);
             Button(root, "전체 원본 도감", .38f, .075f, .62f, .155f, ShowRestorationOriginalArchive, slate, 24);
             Button(root, "소리 설정", .66f, .075f, .90f, .155f, () => ShowSoundSettings(ShowTitle), slate, 24);
-            int grades = CardCatalog.All.Select(card => card.rarity).Distinct().Count();
-            Text(root, "출전 " + CardCatalog.All.Length + "종 · " + grades + "등급 · 기본 덱 " + DemoCatalog.StarterDecks.Length + "개  /  원본 도감 " + OriginalCardArchive.All.Length + "종",
-                .065f, .012f, .935f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
+            Text(root, "출전 " + CardCatalog.All.Length + "종 · 원본 도감 " + OriginalCardArchive.All.Length + "종",
+                .04f, .012f, .50f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
+            Text(root, "첫 기본 덱 무료 · SP 카드팩 수집", .51f, .012f, .96f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
             var featured = CardCatalog.All.Where(card => card.rarity == CardRarity.Unique || card.rarity == CardRarity.Secret).GroupBy(card => card.rarity).Select(group => group.Last()).Take(2).ToArray();
             for (int i = 0; i < featured.Length; i++)
             {
@@ -109,25 +110,26 @@ namespace FantasyCards.Presentation
 
         private void ShowArcanaLobby()
         {
+            QuestCurrentScreen = "free-practice";
             battleScreen = false; redraw = ShowLobby; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("lobby");
             RestorationBackdrop();
             Text(root, "FANTASY MASTERS", .055f, .918f, .74f, .975f, 34, new Color(.94f, .84f, .62f));
             Text(root, "일곱 소울의 대기실", .055f, .865f, .44f, .92f, 27, ivory);
-            Text(root, "로컬 싱글 플레이", .46f, .865f, .745f, .92f, 23, new Color(.74f, .70f, .61f), TextAlignmentOptions.MidlineRight);
+            RestorationButton(root, "내 카드 대기실로", .46f, .865f, .745f, .92f, EnterQuestGame);
             string[] tabs = { "ROOM · 연습", "SCENARIO · 시나리오", "MULTI · 멀티플레이" };
             for (int i = 0; i < tabs.Length; i++)
             {
                 int tab = i; float x = .048f + i * .236f;
                 RestorationButton(root, tabs[i], x, .773f, x + .225f, .849f,
-                    () => { restorationLobbyMode = tab; ShowLobby(); }, restorationLobbyMode == i);
+                    () => { if (tab == 2) ShowQuestSimpleNotice("멀티플레이 · 추후 추가 예정", "현재는 싱글 플레이와 AI 자유 연습을 즐길 수 있습니다.\n온라인 대전·매칭은 이후 추가됩니다.", ShowFreePracticeLobby); else { restorationLobbyMode = tab; ShowLobby(); } }, restorationLobbyMode == i);
             }
             var roomList = RestorationPanel(root, .048f, .308f, .744f, .759f, RestorationLeather, "Classic live room list");
             if (restorationLobbyMode == 0) DrawRestorationPracticeRooms(roomList);
             else if (restorationLobbyMode == 1) DrawRestorationScenarioRooms(roomList);
-            else DrawRestorationMultiplayer(roomList);
+            else DrawRestorationPracticeRooms(roomList);
             var notices = RestorationPanel(root, .048f, .151f, .744f, .291f, new Color(.025f, .04f, .075f, .95f), "Local notice and record panel");
             int mono = DemoCatalog.StarterDecks.Count(deck => ArcanaDeckElements(deck).Length == 1);
-            Text(notices, "NOTICE  /  내 기록", .025f, .63f, .975f, .95f, 21, gold);
+            Text(notices, "자유 연습  /  SP 보상 없음", .025f, .63f, .975f, .95f, 21, gold);
             Text(notices, "카드 " + CardCatalog.All.Length + "종 · 단일 " + mono + "덱 / 듀얼 " + (DemoCatalog.StarterDecks.Length - mono) + "덱 · 원본 인쇄 카드 표시", .025f, .32f, .975f, .67f, 22, ivory);
             Text(notices, "이 기기 전적  " + LocalProfileWins + "승 " + LocalProfileLosses + "패 " + LocalProfileDraws + "무  ·  " + (useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name), .025f, .025f, .975f, .36f, 21, new Color(.72f, .76f, .66f));
             RestorationButton(root, "기본 덱", .048f, .051f, .176f, .132f, ShowDeckSelection);
@@ -207,7 +209,7 @@ namespace FantasyCards.Presentation
             Text(profile.transform, LocalProfileName, .38f, .50f, .97f, .94f, 24, ivory);
             Text(profile.transform, "LOCAL PLAYER", .38f, .08f, .97f, .50f, 17, RestorationMetal);
             Text(rail, LocalProfileWins + "승  " + LocalProfileLosses + "패  " + LocalProfileDraws + "무", .065f, .33f, .935f, .405f, 23, new Color(.74f, .82f, .65f), TextAlignmentOptions.Center);
-            RestorationButton(rail, "이어하기", .08f, .245f, .92f, .325f, Continue, false, PersistentSaves.Exists(Slot));
+            RestorationButton(rail, "연습 이어하기", .08f, .245f, .92f, .325f, ContinuePracticeBattle, false, PersistentSaves.Exists(Slot));
             RestorationButton(rail, "프로필", .08f, .165f, .92f, .235f, () => ShowLocalProfile(redraw ?? ShowLobby));
             RestorationButton(rail, "음악 / 효과음", .08f, .09f, .92f, .16f, () => ShowSoundSettings(redraw ?? ShowLobby));
             RestorationButton(rail, "돌아가기", .08f, .015f, .92f, .085f, back);

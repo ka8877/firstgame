@@ -1,0 +1,370 @@
+{
+  "FantasyCards": {
+    "revision": "fm-quest-2026-10-30",
+    "suite": "modern-real-input-v1",
+    "scope": "Actual normal starter→400SPpurchase→sealed fullreload→fiveoriginals/55owned→49disabledsave/50saveddeck→ownedsolo/wholehandshuffle→battle fullreload/BGM. Every coordinate authored from retained actual originals; no Unityfields/save/seed injection. Native separately proves legalstandard50cardvictory and450SPrewardonce. continued-sealed-* explicitly names actual reload restoration for strict UnityCache304proof; no network condition relaxed.",
+    "requiredCheckpoints": [
+      "title",
+      "starter-choice",
+      "starter-granted",
+      "shop",
+      "pack-offer",
+      "sealed-pack",
+      "continued-sealed-pack",
+      "continued-sealed-graphic",
+      "five-card-reveal",
+      "owned-fifty-five",
+      "deck-fifty-before",
+      "deck-forty-nine-save-disabled",
+      "deck-save-confirmed",
+      "owned-deck-fifty",
+      "owned-solo-preview",
+      "opening-six-originals",
+      "owned-solo-board",
+      "after-original-shuffle",
+      "saved-quest-battle",
+      "continued-quest-battle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-choice",
+        "expected": "Seven-element starter selector, one free choice."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7525,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-granted",
+        "expected": "Actual600SP/GP0/50owned starter."
+      },
+      {
+        "type": "audio",
+        "label": "starter-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2165,
+          0.915
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "shop",
+        "expected": "Actual booster prices/SP wallet."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.216,
+          0.4585
+        ],
+        "label": "클래식 부스터",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "pack-offer",
+        "expected": "Actual400SP/odds and sourceclassificationnote."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5295,
+          0.825
+        ],
+        "label": "400SP 구매",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "sealed-pack",
+        "expected": "Actual200SP/sealed5card pack saved before opening."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "기존 게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2165,
+          0.915
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.582,
+          0.827
+        ],
+        "label": "구매한 카드팩 1개 대기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-pack",
+        "expected": "Full navigation restored200SP/one saved unopened pack; actual original binds this reload."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.653,
+          0.31
+        ],
+        "label": "보관팩 개봉하기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-graphic",
+        "expected": "Original sealed graphic from same saved purchase, no new charge."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.552,
+          0.825
+        ],
+        "label": "이미 구매한 카드팩 개봉",
+        "settleMs": 2200
+      },
+      {
+        "type": "checkpoint",
+        "name": "five-card-reveal",
+        "expected": "Five original printed fronts and neutralacquired/ownedfooter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.897
+        ],
+        "label": "보유 카드 보기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-fifty-five",
+        "expected": "Actual55owned/27distinct and200SP after one opening."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4505,
+          0.915
+        ],
+        "label": "보유 덱 편집",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-fifty-before",
+        "expected": "Valid50/50owned deck."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.069,
+          0.772
+        ],
+        "label": "지형 한장 빼기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-forty-nine-save-disabled",
+        "expected": "Actual49/50 disables normal save; no invaliddeck persisted."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.189,
+          0.772
+        ],
+        "label": "보유지형 다시넣기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.666,
+          0.836
+        ],
+        "label": "정상50장덱 저장",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-save-confirmed",
+        "expected": "Actual saved50owned deck confirmation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4505,
+          0.915
+        ],
+        "label": "저장한덱 다시보기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-deck-fifty",
+        "expected": "Actual50/50owneddeck and55collection unchanged."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0995,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.395,
+          0.41
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-preview",
+        "expected": "Actual50cardowneddeck composition/stage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.218,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-six-originals",
+        "expected": "Actual six original opening cards."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.792,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-board",
+        "expected": "Actual owneddeck battle44remaining/6hand/preparation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.821
+        ],
+        "label": "actual-whole-hand-shuffle",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-original-shuffle",
+        "expected": "Whole six cards returned/dealt through actual board control; actualchangedhand/message."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "actual-battle-menu",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33,
+          0.51
+        ],
+        "label": "실제 소유전투 저장",
+        "settleMs": 950
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.705
+        ],
+        "label": "전투로",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-quest-battle",
+        "expected": "Actual savedhand/deck/LP/phase before fullreload."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.78
+        ],
+        "label": "전투 이어하기",
+        "settleMs": 1500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-quest-battle",
+        "expected": "Actual same savedhand/deck44/phase and validcollectionticket restored."
+      },
+      {
+        "type": "audio",
+        "label": "continued-battle"
+      }
+    ]
+  }
+}
