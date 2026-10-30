@@ -2,7 +2,7 @@
   "FantasyCards": {
     "revision": "fm-quest-2026-10-30",
     "suite": "modern-real-input-v1",
-    "scope": "Fresh current public HTTPS launch, actual touch starter/owned original cards/solo field and BGM; full financial/save flow separately proved on identical local runtime. Complete unchanged card images use explicit priorGET+sameGitobjects proof, never claimed as new fullGET.",
+    "scope": "Fresh current public HTTPS launch, actual touch starter/owned original cards/solo field and BGM; full financial/save flow separately proved on identical local runtime. Complete unchanged card images use explicit priorGET+sameGitobjects proof, never claimed as new fullGET. Current plan explicitly observes title/lobby/battle PCM to prove same-element startup and role range recovery without weakening network predicates.",
     "requiredCheckpoints": [
       "title",
       "public-owned-lobby",
@@ -14,6 +14,19 @@
         "type": "checkpoint",
         "name": "title",
         "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.05,
+          0.5
+        ],
+        "label": "실제 빈 타이틀 배경 touch로 음악 잠금해제",
+        "settleMs": 500
+      },
+      {
+        "type": "audio",
+        "label": "public-title"
       },
       {
         "type": "click",
@@ -96,6 +109,10 @@
         "type": "checkpoint",
         "name": "public-owned-field",
         "expected": "Actual current public owned-deck battle and six hand cards."
+      },
+      {
+        "type": "audio",
+        "label": "public-battle"
       }
     ]
   },

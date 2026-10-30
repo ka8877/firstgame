@@ -1,7 +1,7 @@
 {
   "releaseProfile": "quest",
   "date": "2026-10-30",
-  "updatedUtc": "2026-10-30T06:07:26.792638+00:00",
+  "updatedUtc": "2026-10-30T06:32:32.344131+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-quest-2026-10-30",
     "PathOfDawn": "gospel-journey-2026-10-30"
@@ -148,6 +148,18 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 10
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 39,
+        "report": {
+          "file": "Artifacts/Validation/Quest/PublicMobile844/FantasyCards/report.json",
+          "sha256": "46471c4302eec57216aa09927b5b1b9f65c44f204692acf6d71624e9868b216d",
+          "bytes": 22295518
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
       }
     },
     "PathOfDawn": {
@@ -174,13 +186,36 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 12
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 21,
+        "report": {
+          "file": "Artifacts/Validation/Quest/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "c32088591698a4047e823203453d555810fc29ff929ad31d84f267ddde2b2b40",
+          "bytes": 78298
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 5
       }
     }
   },
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
+    "stageManifest": {
+      "file": "Artifacts/QuestWork/staged-site/build-manifest.json",
+      "sha256": "07db63c9912224b6e51169cbb37eac153d76b8d6c02071fd754b1d08b288341c",
+      "bytes": 2100640
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Quest/PublicPortal/report.json",
+      "sha256": "ff227c4e11ba8f3903f45d647923932561a6c716cad94a4871273ea29b3b7694",
+      "bytes": 15673683
+    },
+    "verifiedFiles": 15402,
+    "scope": "All changed files freshly fetched; unchanged card images bound to prior actual GETs and matching old/new deployed Git objects. Current portal originals reviewed by Root."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
