@@ -1,7 +1,7 @@
 {
   "releaseProfile": "restage",
   "date": "2026-11-02",
-  "updatedUtc": "2026-11-02T08:11:19.672874+00:00",
+  "updatedUtc": "2026-11-02T08:29:04.466198+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-restage-2026-11-02",
     "PathOfDawn": "gospel-canopy-2026-11-02"
@@ -148,6 +148,18 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 4
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 41,
+        "report": {
+          "file": "Artifacts/Validation/Restage/PublicMobile844/FantasyCards/report.json",
+          "sha256": "54e79aa131fe1b6803462b6c95badccf55279fe81842a6a4838f4d216d06a351",
+          "bytes": 22308341
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
       }
     },
     "PathOfDawn": {
@@ -174,13 +186,36 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 8
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 25,
+        "report": {
+          "file": "Artifacts/Validation/Restage/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "91da665f42216d4b10cc27aae94252933f3c49506add4a097b4c0c7bc731cce1",
+          "bytes": 102666
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 5
       }
     }
   },
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
+    "stageManifest": {
+      "file": "/tmp/firstgame-restage-staged-site/build-manifest.json",
+      "sha256": "8fa48f49b50d4d8315884cebe30e1e583fc0c28db5c0a448efe118841b4fb359",
+      "bytes": 2099209
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Restage/PublicPortal/report.json",
+      "sha256": "7ee4947594fb74a23f8af8fc1bfa9a4eb9760d4b8375c6f1924da4e65df8e1f0",
+      "bytes": 16923510
+    },
+    "verifiedFiles": 15409,
+    "scope": "Every non-image file freshly fetched after this deployment; only15350 unchanged JPEG byte identities inherit the explicitly dated earlier Reprise actual GETs and Root-approved publication through pinned preserved inputs/producer snapshots plus equal before/new deployed Git blobs. No previous game test is a new pass. Current portal originals reviewed by Root."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
