@@ -44,8 +44,8 @@ namespace FantasyCards.Presentation
             var play = Button(root, "게임 시작", .34f, .28f, .66f, .405f, EnterQuestGame, gold, 32);
             play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
             Button(root, "전투 이어하기", .34f, .18f, .66f, .26f, Continue, new Color(.08f, .12f, .23f, .97f), 26, HasAnyBattleSave);
-            Button(root, "출전 카드", .10f, .075f, .34f, .155f, () => ShowCollection(false), slate, 24);
-            Button(root, "전체 원본 도감", .38f, .075f, .62f, .155f, ShowRestorationOriginalArchive, slate, 24);
+            Button(root, "카드 앨범", .10f, .075f, .34f, .155f, ShowRestorationOriginalArchive, slate, 24);
+            Button(root, "자유 연습", .38f, .075f, .62f, .155f, ShowFreePracticeLobby, slate, 24);
             Button(root, "소리 설정", .66f, .075f, .90f, .155f, () => ShowSoundSettings(ShowTitle), slate, 24);
             Text(root, "출전 " + CardCatalog.All.Length + "종 · 원본 도감 " + OriginalCardArchive.All.Length + "종",
                 .04f, .012f, .50f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
@@ -134,8 +134,8 @@ namespace FantasyCards.Presentation
             Text(notices, "이 기기 전적  " + LocalProfileWins + "승 " + LocalProfileLosses + "패 " + LocalProfileDraws + "무  ·  " + (useCustomDeck ? "내 편집 덱" : DemoCatalog.GetDeck(selectedDeckId).name), .025f, .025f, .975f, .36f, 21, new Color(.72f, .76f, .66f));
             RestorationButton(root, "기본 덱", .048f, .051f, .176f, .132f, ShowDeckSelection);
             RestorationButton(root, "덱 편집", .188f, .051f, .316f, .132f, () => ShowCollection(true));
-            RestorationButton(root, "전체 원본", .328f, .051f, .456f, .132f, ShowRestorationOriginalArchive);
-            RestorationButton(root, "상위 등급", .468f, .051f, .596f, .132f, ShowRestorationPremiumHub);
+            RestorationButton(root, "카드 앨범", .328f, .051f, .456f, .132f, ShowRestorationOriginalArchive);
+            RestorationButton(root, "출전 카드", .468f, .051f, .596f, .132f, () => ShowCollection(false));
             RestorationButton(root, "게임 방법", .608f, .051f, .744f, .132f, () => ShowRulesHelp(ShowLobby));
             DrawRestorationProfileRail(ShowTitle, "대기실");
         }

@@ -12,12 +12,12 @@ namespace PathOfDawn.Presentation
     /// <summary>
     /// A field-first JRPG interface. The two bars are discovered Scripture and
     /// completed story goals, not invented health, mana or character levels.
-    /// Scripture pages and quoted dialogue retain the established book renderer.
+    /// Story events record passages into the physical two-leaf Scripture book.
     /// </summary>
-    public sealed class GospelPilgrimageUi : MonoBehaviour
+    public sealed partial class GospelPilgrimageUi : MonoBehaviour
     {
         public Action OnStart, OnContinue, OnResume, OnPause, OnSave, OnExit, OnStatus,
-            OnInventory, OnRead, OnJournal, OnSettings, OnLampToggle, OnInteract, OnJump, OnUserGesture;
+            OnInventory, OnRead, OnJournal, OnSettings, OnLampToggle, OnInteract, OnJump, OnDash, OnPageTurn, OnUiClick, OnUserGesture;
         public Action<Vector2> OnMove;
         public Action<bool> OnRun, OnMusicMute;
         public Action<float> OnMusicVolume;
@@ -104,7 +104,7 @@ namespace PathOfDawn.Presentation
         void OnDisable() => ReleaseMovement();
         void OnApplicationFocus(bool focused) { if (!focused) ReleaseMovement(); }
         void Gesture() => OnUserGesture?.Invoke();
-        void Invoke(Action action) { Gesture(); action?.Invoke(); }
+        void Invoke(Action action) { Gesture(); if (action != null) { OnUiClick?.Invoke(); action(); } }
 
         void ReleaseMovement()
         {
@@ -140,6 +140,7 @@ namespace PathOfDawn.Presentation
         public void ShowTitle(bool hasSave)
         {
             Begin("title", true, false);
+            PaintStoryScene(layer, "birth-road", "Title story illustration", 0, 0, 1280, 720, true);
             Panel(layer, "Title legibility veil", 0, 0, 678, 720, new Color(.012f, .032f, .052f, .86f));
             Line(layer, 68, 116, 445, Gold);
             Text(layer, "THE GOSPEL JOURNEY", 72, 137, 620, 42, 30, Gold, TextAlignmentOptions.TopLeft, true).characterSpacing = 3;
@@ -150,9 +151,7 @@ namespace PathOfDawn.Presentation
             B(layer, "이어하기", 365, 544, 226, 64, OnContinue, hasSave);
             B(layer, "소리 설정", 75, 625, 190, 47, OnSettings);
             Text(layer, "탄생 서막 · 열두 살 성전 · 요단강의 세례", 283, 638, 900, 28, 20, Quiet);
-            var art = Panel(layer, "Portrait title inset", 791, 126, 354, 470, new Color(.025f, .075f, .10f, .64f), true);
-            PaintPortrait(art, false, 2, 2, 350, 466);
-            Text(layer, "THE FIRST JOURNEY", 802, 618, 344, 33, 21, Gold, TextAlignmentOptions.Center, true).characterSpacing = 3;
+            Text(layer, "THE FIRST JOURNEY", 818, 618, 344, 33, 21, Gold, TextAlignmentOptions.Center, true).characterSpacing = 3;
         }
 
         public void ShowHud(GospelJourney journey, Sprite character)
@@ -192,8 +191,9 @@ namespace PathOfDawn.Presentation
             });
             runTint = run.GetComponent<Image>();
             B(touch, "점프", 1136, 552, 118, 64, OnJump);
+            B(touch, "대시", 1003, 552, 118, 64, OnDash);
             if (!DawnPlatformInput.UseTouchControls)
-                Text(layer, "W A S D 이동   Shift 달리기   Space 점프   E 대화   I 인물   B 가방   M 성경   J 기록", 28, 700, 990, 18, 15, Quiet);
+                Text(layer, "W A S D 이동   Shift 달리기   Ctrl 대시   Space 점프   E 대화   I 인물   B 가방   M 성경", 28, 700, 1040, 18, 15, Quiet);
             scenicButton = B(frame, "풍경 보기", 1141, 164, 111, 39, ToggleScenicView).GetComponent<RectTransform>();
             notice.SetAsLastSibling();
             progressText.text = "성경 " + journey.CodexCount + " / " + journey.CodexTotal + "    여정 " + Completed(journey) + " / " + GoalCount(journey);
@@ -410,9 +410,6 @@ namespace PathOfDawn.Presentation
             }
         }
 
-        public void ShowBible(IReadOnlyList<GospelBookPage> pages, int found)
-        { BeginBook(); book.ShowBible(pages, found); }
-        public void FocusBiblePage(int page) { if (book != null) book.FocusBiblePage(page); }
         public void Toast(string message)
         {
             if (usingBook) { book.Toast(message); return; }

@@ -1,5 +1,9 @@
 # 말씀을 따라 예수님의 길
 
+## 최신 이야기 성경책 개정
+
+루트의 2026-11-02 지침과 현재 사용자 요청이 우선한다. 탄생부터 사건과 대화로 진행하고 완료한 사건의 정확한 본문을 빈 성경책의 면에 채운다. 미발견 본문은 숨기며 별도 읽기 완료를 진행 조건으로 삼지 않는다. 기존23목표·19본문·저장 원본·방향별 인물·XZ 자유 이동을 보존하고 빛/식생/물/이동 반응과 짧은 탐험 대시를 보강한다. App/Core는 reprise_gospel_story, UI/책은 루트, 월드/인물/모터는 reprise_gospel_visual, 오디오는 reprise_audio, 실제 실행·배포는 remaster_release만 맡는다. 새 근거는 Reprise다.
+
 ## 최신 자유 이동 HD-2D 개정
 
 루트의 2026-10-30 지침이 이전 개정보다 우선한다. `gospel-journey-2026-10-30`은 FINAL FANTASY RESONANCE의 방향별 픽셀 인물과 3D 필드를 참고해 자유 이동 RPG로 전환한다. 가로 이동·이전 회화 인물 고정은 이번 요청에 적용하지 않는다. 기존23목표·19본문·성경책 해금과 이전 저장 원본을 보존한다. 새 진입점은 GospelPilgrimageApp, 새 경로는 Presentation/Pilgrimage다. root App/UI, quest_gospel_world 월드/모터/카메라, quest_gospel_character 인물, quest_release만 실제 실행을 소유한다. 기존 원화와 인물/2D 소스는 제작 이력으로 보존한다.

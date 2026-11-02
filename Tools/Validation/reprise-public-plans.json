@@ -1,0 +1,328 @@
+{
+  "FantasyCards": {
+    "revision": "fm-reprise-2026-11-02",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh current public HTTPS title/lobby/owned originals/solo field and three PCM roles. Full owned economy and unified original album separately proved by the same final local runtime. Complete unchanged card JPEGs retain dated prior real GET plus equal old/new Git objects, not a fresh full-image download.",
+    "requiredCheckpoints": [
+      "title",
+      "public-owned-lobby",
+      "public-owned-card",
+      "public-owned-field"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.05,
+          0.5
+        ],
+        "label": "실제 빈 타이틀 배경 touch로 음악 잠금해제",
+        "settleMs": 500
+      },
+      {
+        "type": "audio",
+        "label": "public-title"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.6575
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7525,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-lobby",
+        "expected": "Actual600SP/50owned starter on current public game."
+      },
+      {
+        "type": "audio",
+        "label": "public-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3335,
+          0.915
+        ],
+        "label": "보유 카드",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-card",
+        "expected": "Original current owned-card art delivered on HTTPS, neutral current collection UI."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0995,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.395,
+          0.41
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.218,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "click",
+        "point": [
+          0.792,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-field",
+        "expected": "Actual current public owned-deck battle and six hand cards."
+      },
+      {
+        "type": "audio",
+        "label": "public-battle"
+      }
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-storybook-2026-11-02",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh public HTTPS story0→1 acquired physical Bible, birth/growth narrative, actual XZ touch controls/dash/status/PCM. Full23/19 story/save/collision and broader PC/touch routes are separate exact-runtime local/native evidence. No Unity methods/fields, RNG seeds or save payloads are read or injected. Software touch browser, not physical-device certification.",
+    "requiredCheckpoints": [
+      "title",
+      "public-birth-story",
+      "public-empty-bible",
+      "public-first-acquired-book",
+      "public-first-inscribed-and-blank",
+      "public-child-field",
+      "public-after-two-axis-touch",
+      "public-after-dash",
+      "public-character-status"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current public storybook title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.166,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-birth-story",
+        "expected": "Birth begins as a dialogue-led scene, without asking the player to read a full passage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "빈 성경 펼치기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-empty-bible",
+        "expected": "Both physical leaves start blank at0/19 and hide future passage metadata."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8602,
+          0.9278
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.83,
+          0.91
+        ],
+        "label": "첫 이야기 다음 대화",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.83,
+          0.91
+        ],
+        "label": "첫 이야기 완료",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-first-acquired-book",
+        "expected": "Actual completed first event inscribes the full first passage once and visibly shows1/19."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.154,
+          0.9278
+        ],
+        "label": "성경 펼치기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-first-inscribed-and-blank",
+        "expected": "The acquired left page is inscribed while the future right page remains blank."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8602,
+          0.9278
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.83,
+          0.91
+        ],
+        "label": "탄생과 성장의 사건을 순서대로 진행",
+        "settleMs": 600,
+        "repeat": 30
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.8292
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 1600
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-child-field",
+        "expected": "The actual current world and child character after11 completed prologue events."
+      },
+      {
+        "type": "audio",
+        "label": "public-storybook-field"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.70278
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 forward"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.04297,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 left"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.12966,
+          0.7292
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 diagonal"
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-after-two-axis-touch",
+        "expected": "Actual forward/left/diagonal touch movement in the original shipping canvas."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8297,
+          0.8111
+        ],
+        "label": "실제 대시",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-after-dash",
+        "expected": "Actual dash button and visible physical displacement, with no Unity/game state injection."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1078,
+          0.0736
+        ],
+        "label": "현재 인물 상태",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-character-status",
+        "expected": "Actual child/11 discovered passages/11 completed goals; this short public run does not claim NPC or save coverage."
+      }
+    ]
+  }
+}

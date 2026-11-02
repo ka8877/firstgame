@@ -8,24 +8,28 @@ namespace PathOfDawn.Presentation
     /// <summary>High oblique HD2D framing: no side-scroll constraint and no orbit-induced sprite flip.</summary>
     public sealed class GospelPilgrimageCamera : MonoBehaviour
     {
-        public const float MinimumZoom = 5.5f, MaximumZoom = 12f;
+        public const float MinimumZoom = 5.0f, MaximumZoom = 12f;
         public Camera View { get; private set; }
         public float Zoom => zoom;
         public float Zoom01 => Mathf.InverseLerp(MinimumZoom, MaximumZoom, zoom);
         public bool InputEnabled { get; set; } = true;
         public Transform Target { get; private set; }
-        float zoom = 7.2f, zoomVelocity;
+        float zoom = 6.4f, zoomVelocity;
         Vector3 velocity;
         public void Initialize(Camera camera, Transform target)
         {
             View = camera; Target = target;
             View.orthographic = true; View.orthographicSize = zoom; View.nearClipPlane = .15f; View.farClipPlane = 130;
-            View.allowHDR = true; View.clearFlags = CameraClearFlags.SolidColor; View.backgroundColor = new Color(.67f, .73f, .61f);
+            View.allowHDR = true; View.clearFlags = CameraClearFlags.SolidColor; View.backgroundColor = new Color(.41f, .62f, .61f);
             var data = View.GetUniversalAdditionalCameraData(); data.renderPostProcessing = true;
+            // Source materials must already be finite. This retained URP guard
+            // additionally prevents an unrelated invalid pixel from spreading
+            // through bloom on graphics drivers with different NaN handling.
+            data.stopNaN = true;
             // Pixel source edges must stay crisp; environment depth and lighting
             // supply the smoothing instead of post-process edge AA on sprites.
             data.antialiasing = AntialiasingMode.None;
-            View.transform.rotation = Quaternion.Euler(48f, 0, 0); Snap();
+            View.transform.rotation = Quaternion.Euler(43f, 0, 0); Snap();
         }
         public void SetTarget(Transform target) { Target = target; Snap(); }
         public void SetZoom01(float value) => SetZoom(Mathf.Lerp(MinimumZoom, MaximumZoom, Mathf.Clamp01(value)));

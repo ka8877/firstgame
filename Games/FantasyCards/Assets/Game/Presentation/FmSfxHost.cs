@@ -13,7 +13,7 @@ namespace FantasyCards.Presentation
             "ui-hover", "click", "confirm", "cancel", "error", "card-select", "card-pick", "card-draw", "card-shuffle",
             "summon", "terrain", "equip", "spell", "heal", "coin", "attack", "counter", "hit", "shield",
             "destroy", "burn", "turn", "victory", "loss", "save",
-            "coin-head", "coin-tail", "stat-up", "stat-down", "card-land", "rare-reveal"
+            "coin-head", "coin-tail", "stat-up", "stat-down", "card-land", "rare-reveal", "hit-heavy"
         };
         private readonly Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
         private readonly Dictionary<string, double> lastStarts = new Dictionary<string, double>();
@@ -49,7 +49,8 @@ namespace FantasyCards.Presentation
             if (initialized) return; initialized = true;
             foreach (string cue in Cues)
             {
-                var clip = Resources.Load<AudioClip>("Audio/FmRenewal/" + cue)
+                var clip = Resources.Load<AudioClip>("Audio/FmReprise/" + cue)
+                    ?? Resources.Load<AudioClip>("Audio/FmRenewal/" + cue)
                     ?? Resources.Load<AudioClip>("Audio/FmRestoration/" + cue);
                 if (clip == null) { Debug.LogWarning("Missing FM remaster sound effect: " + cue); continue; }
                 clip.LoadAudioData(); clips[cue] = clip;
@@ -103,7 +104,7 @@ namespace FantasyCards.Presentation
             float level = MixLevel(cue);
             if (variation < 0) { variations.TryGetValue(cue, out variation); variations[cue] = variation + 1; }
             // Small deterministic timbre variations do not touch gameplay RNG.
-            bool vary = cue.StartsWith("card-") || cue.StartsWith("coin") || cue == "hit" || cue == "attack" || cue == "counter";
+            bool vary = cue.StartsWith("card-") || cue.StartsWith("coin") || cue == "hit" || cue == "hit-heavy" || cue == "attack" || cue == "counter";
             source.volume = FmBattleAudio.Volume * level;
             source.pitch = vary ? 1 + ((variation % 3) - 1) * .025f : 1;
             source.panStereo = Mathf.Clamp(pan, -.28f, .28f);
@@ -135,6 +136,9 @@ namespace FantasyCards.Presentation
                 case "card-land": return .84f;
                 case "stat-up": case "stat-down": return .78f;
                 case "coin-head": case "coin-tail": return .92f;
+                case "attack": case "counter": return .84f;
+                case "spell": case "heal": return .89f;
+                case "hit-heavy": return 1;
                 default: return 1;
             }
         }

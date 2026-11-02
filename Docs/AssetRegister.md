@@ -100,3 +100,9 @@ blender --background --python Tools/Art/verify_proxies.py -- --root .
 - 원작 카드161종의 원본·변환·이전96종 보존 검증은 `Docs/CardRemaster.md` 및 `Tools/Data/ClassicCards/remaster-verification.json`. 원작 리소스를 새 창작/허가 자산으로 표시하지 않는다.
 - 예수님·마리아·요셉·선생 대화 초상화는 이번에 생성한 창작 재현이다. 원본 atlas와 해시는 `Tools/Art/GospelRemaster/manifest.json`. UI UV로 영역을 선택하며 원본 PNG는 변경하지 않는다.
 - 기존 CC0 인물의 관절 동작 추가와 mesh 결합은 `Tools/Art/Gospel3D/action-upgrade.json`; 기존 기하·보행 보존 검증은 같은 폴더의 `mesh-preservation-verification.json`.
+
+## 2026-11-02 이야기책·빛·효과음 추가
+
+- `Art/GospelStorybook/book.png`와 `scenes.png`는 새 오리지널 생성 원화다. 빈 두 면의 성경책과 탄생 장면4개의 atlas이며 정확한 원본 경로·SHA·UI 사분면 UV는 `Tools/Art/GospelStorybook/sources.json`에 기록한다. 시대에 맞지 않는 도시 돔을 수정하기 전 원본도 `Tools/Art/GospelStorybook/History`에 보존한다. 생성 이미지 원본은 게임에서 바이트 그대로 사용하고 본문/페이지 번호는 UI가 조판한다.
+- `PilgrimageMeadow.shader`·`PilgrimageAtmosphere.shader`와 실제 월드 메시/대시 표현은 자체 제작 코드다. 기존 캐릭터·나무·우물·등잔의 원본 그림·GUID는 유지한다. 표현 범위는 [GospelStorybookVisual.md](GospelStorybookVisual.md)를 따른다.
+- 새 카드 효과음12개, Gospel 장별 음악3곡·환경음3종·효과음8종은 악보·합성 소스로 재현하는 오리지널 제작물이다. `Tools/Audio/Reprise/SOURCE-NOTICE.txt`와 [RepriseAudio.md](RepriseAudio.md)에 출처·파일·재생 범위를 기록한다. 기존 원작 판마 음악은 별도 출처 자산으로 보존한다.

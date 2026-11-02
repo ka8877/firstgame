@@ -59,7 +59,7 @@ namespace FantasyCards.Presentation
                 var outline = halo.GetComponent<UiRoundedImage>(); outline.Fill = false; outline.Radius = 3;
                 outline.BorderWidth = 2; outline.BorderColor = new Color(1, .91f, .58f); outline.raycastTarget = false;
             }
-            if (mode == ArcanaCardMode.Hand || live != null)
+            if (mode != ArcanaCardMode.Detail && mode != ArcanaCardMode.Showcase)
                 DrawRenewalCardValues(surface, card, live, selected);
             return bounds;
         }

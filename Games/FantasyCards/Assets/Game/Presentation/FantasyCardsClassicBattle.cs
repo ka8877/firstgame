@@ -78,6 +78,7 @@ namespace FantasyCards.Presentation
                     BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
                     var hover = panel.GetComponent<UiCardHover>();
                     if (hover != null) { hover.HoverScale = 1.055f; if (locked) hover.enabled = false; }
+                    BindFieldDrag(panel, owner, unit.instanceId, card);
                 }
                 else if (spell != null)
                 {
@@ -86,6 +87,7 @@ namespace FantasyCards.Presentation
                         var card = CardCatalog.Get(spell.definitionId); ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field, selectedAttacker == spell.instanceId);
                         // Reserved magic stays a card. Its reveal marker is integrated on its face.
                         BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
+                        BindFieldDrag(panel, owner, spell.instanceId, card);
                     }
                     else
                     {
@@ -98,7 +100,7 @@ namespace FantasyCards.Presentation
                     Text(panel, new[] { "I", "II", "III", "IV", "V" }[index], .03f, .49f, .97f, .97f, 26, target ? gold : new Color(.48f, .54f, .67f), TextAlignmentOptions.Center);
                     Text(panel, target ? "여기에 배치" : "빈 전열", .03f, .02f, .97f, .50f, 22, target ? ivory : new Color(.55f, .61f, .72f), TextAlignmentOptions.Center);
                 }
-                if (unit == null) Frame(panel, target ? gold : new Color(.24f, .37f, .80f, .38f), target ? 2.5f : 1);
+                if (unit == null || target) Frame(panel, target ? gold : new Color(.24f, .37f, .80f, .38f), target ? 2.5f : 1);
                 panel.GetComponent<Image>().raycastTarget = true;
                 var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, index));
                 BindLaneDrop(panel, owner, lane);
@@ -107,6 +109,7 @@ namespace FantasyCards.Presentation
         private bool IsLegalLane(int owner, int lane)
         {
             if (locked || !engine.IsPreparing(0)) return false;
+            if (selectedCard < 0 && CanRepositionField(selectedAttacker, owner, lane)) return true;
             var instance = engine.State.players[0].hand.Find(card => card.instanceId == selectedCard); if (instance == null) return false;
             var definition = CardCatalog.Get(instance.definitionId);
             int targetOwner = TargetsEnemy(definition) ? 1 : 0;
@@ -115,6 +118,8 @@ namespace FantasyCards.Presentation
         private void LaneClick(int owner, int lane)
         {
             if (locked) return;
+            if (selectedCard < 0 && CanRepositionField(selectedAttacker, owner, lane))
+            { RepositionField(selectedAttacker, lane); return; }
             var unit = engine.State.players[owner].AtLane(lane);
             if (unit != null) inspectedId = unit.definitionId;
             if (!IsLegalLane(owner, lane))

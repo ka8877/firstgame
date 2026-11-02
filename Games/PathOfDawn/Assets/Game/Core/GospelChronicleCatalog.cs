@@ -39,7 +39,7 @@ namespace PathOfDawn.Core
         static GospelChronicleQuest Birth(string id,string summary,string portrait="mary")
         {
             var r=Reading(id);
-            return new GospelChronicleQuest("birth-"+id,"birth",r.Title,"그림과 기록을 읽고 첫 페이지를 간직하세요.","narrator","복음서의 이야기",portrait,0,r,Summary(summary,portrait),Quote(r,portrait));
+            return new GospelChronicleQuest("birth-"+id,"birth",r.Title,"탄생에서 이어지는 이야기를 따라가세요.","narrator","복음서의 이야기",portrait,0,r,Summary(summary,portrait),Quote(r,portrait));
         }
         static GospelChronicleQuest World(string id,string chapter,string title,string objective,string npc,string name,string portrait,float x,string reading,params GospelDialogueTurn[] dialogue)
             => new GospelChronicleQuest(id,chapter,title,objective,npc,name,portrait,x,reading==null?null:Reading(reading),dialogue);
@@ -66,10 +66,10 @@ namespace PathOfDawn.Core
                 Summary("절기에 예루살렘으로 올라온 기록을 읽습니다. 절기의 날들이 지난 뒤, 부모는 예수님이 예루살렘에 머무셨다는 것을 알지 못하고 돌아갑니다."),
                 Quote(Reading("temple-passover")),
                 Summary("다음 장면은 절기가 지난 뒤의 성전입니다. 누가는 부모가 동행 중에 있는 줄로 생각했다가 예수님을 찾으러 돌아왔다고 전합니다.")),
-            World("listening-court","temple","듣고 묻는 자리","회랑에서 성전의 선생을 만나 조용히 이야기를 들어 보세요.","teacher-listening","성전의 선생","teacher",11,null,
+            World("listening-court","temple","듣고 묻는 자리","회랑에서 성전의 선생을 만나 대화하세요.","teacher-listening","성전의 선생","teacher",11,null,
                 Direction("성전의 선생","teacher","먼저 이야기를 듣고, 기록에 어떤 말이 남아 있는지 함께 살펴봅시다. 안쪽 선생들이 있는 자리로 오세요."),
                 Summary("예수님이 구체적으로 어떤 질문을 하셨는지는 이 본문에 적혀 있지 않습니다. 새 질문을 예수님의 실제 말씀으로 대신하지 않고, 누가가 기록한 행동을 따라갑니다.")),
-            World("teachers-circle","temple","선생들 가운데","안쪽 뜰의 율법 선생과 성전에서 발견된 장면을 읽으세요.","teacher-reading","율법 선생","teacher",18,"temple-teachers",
+            World("teachers-circle","temple","선생들 가운데","안쪽 뜰의 율법 선생을 만나 성전의 이야기를 이어가세요.","teacher-reading","율법 선생","teacher",18,"temple-teachers",
                 Summary("사흘 후 부모는 성전에서 예수님을 만났습니다. 예수님은 선생들 가운데 앉아 듣기도 하시고 묻기도 하셨습니다."),
                 Quote(Reading("temple-teachers")),
                 Summary("듣는 사람들은 그 지혜와 대답을 기이하게 여겼습니다. 이제 부모가 예수님을 찾은 자리로 갑니다.")),
@@ -85,7 +85,7 @@ namespace PathOfDawn.Core
             World("john-calling","baptism","요단에서 들리는 외침","요단 부근에서 세례 요한의 사역에 관한 기록을 들으세요.","john-baptist","세례 요한","teacher",-12,"john-jordan",
                 Summary("누가는 하나님의 말씀이 빈 들에서 요한에게 임했다고 기록합니다. 요한은 요단강 부근에서 회개의 세례를 전파합니다."),
                 Quote(Reading("john-jordan"))),
-            World("baptism-request","baptism","모든 의를 이루는 길","세례 자리에서 요한과 예수님의 기록된 대화를 읽으세요.","john-baptist","세례 요한","teacher",2,"baptism-request",
+            World("baptism-request","baptism","모든 의를 이루는 길","세례 자리에서 요한을 만나 이야기를 이어가세요.","john-baptist","세례 요한","teacher",2,"baptism-request",
                 Summary("요한은 자신이 예수님께 세례를 받아야 한다고 말하며 만류합니다. 예수님의 대답과 요한의 허락을 마태복음의 문장 그대로 읽습니다."),
                 Quote(Reading("baptism-request"),"jesus")),
             World("baptism-water","baptism","물에서 올라오시다","강가의 다음 만남에서 세례 후의 기록을 살펴보세요.","jordan-witness","강가의 기록 안내자","teacher",19,"baptism-water",

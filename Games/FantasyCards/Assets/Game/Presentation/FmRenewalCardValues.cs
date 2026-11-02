@@ -30,33 +30,34 @@ namespace FantasyCards.Presentation
 
         private void DrawRenewalCardValues(RectTransform surface, CardDefinition card, UnitState unit, bool selected)
         {
-            // Hands retain the entire original print. Live units replace only
-            // the three printed numeral areas; no name/art/rules/stat bars.
-            if (unit == null) return;
-            ChronicleValues(unit, out var before, out var current);
+            // The original paper/foil can be white or gold: sampling that
+            // paper underneath ivory digits made several entire sets illegible.
+            // Replace only the numeral column with opaque ink plates. Names,
+            // art, grade, rules and the printed stat icons remain source pixels.
+            if (card.kind != CardKind.Unit) return;
+            int[] before, current;
+            if (unit != null) ChronicleValues(unit, out before, out current);
+            else { current = new[] { card.attack, card.defense, card.health }; before = (int[])current.Clone(); }
             var container = Panel(surface, 0, 0, 1, 1, Color.clear);
-            container.gameObject.name = "Integrated live card values " + unit.instanceId;
+            string identity = unit == null ? "base " + card.id : unit.instanceId.ToString();
+            container.gameObject.name = "Integrated live card values " + identity;
             string[] labels = { "AP", "DP", "HP" };
-            float[] bottoms = { .1753f, .1136f, .0469f }, tops = { .2272f, .1605f, .0988f };
+            float[] bottoms = { .171f, .106f, .040f }, tops = { .233f, .168f, .102f };
             for (int i = 0; i < 3; i++)
             {
-                // The blank 3px strip alongside each source numeral preserves
-                // both legacy paper and later dark slots. Source bytes stay intact.
-                var patch = new GameObject("Printed " + labels[i] + " numeral background", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
-                patch.transform.SetParent(container, false);
-                Anchor((RectTransform)patch.transform, .8632f, bottoms[i], .9649f, tops[i]);
-                patch.uvRect = new Rect(246f / 285f, bottoms[i], 3f / 285f, tops[i] - bottoms[i]);
-                patch.texture = OriginalCardTexture(card); patch.raycastTarget = false;
-                FmStreamingCardArt.Bind(patch, card.artResource);
+                var patch = Panel(container, .851f, bottoms[i], .983f, tops[i], new Color(.014f, .020f, .032f, 1));
+                patch.gameObject.name = "Opaque " + labels[i] + " numeral plate " + identity;
+                var plate = patch.GetComponent<UiRoundedImage>();
+                plate.Radius = 1; plate.TopTint = plate.BottomTint = Color.white;
+                plate.BorderWidth = .5f; plate.BorderColor = new Color(.57f, .59f, .65f, .75f);
                 int delta = current[i] - before[i];
-                var label = RenewalValueText(container, current[i].ToString(), .862f, bottoms[i], .969f, tops[i], 32,
-                    delta > 0 ? new Color(.60f, 1, .66f) : delta < 0 ? new Color(1, .40f, .32f) : ivory,
-                    "Card live " + labels[i] + " " + unit.instanceId);
-                label.alignment = TextAlignmentOptions.MidlineRight;
-                label.fontStyle = FontStyles.Bold | FontStyles.Italic;
-                label.outlineWidth = .14f; label.outlineColor = new Color32(8, 12, 18, 255);
-                if (current[i].ToString().Length > 2)
-                    label.transform.localScale = new Vector3(2.2f / current[i].ToString().Length, 1, 1);
+                var label = RenewalValueText(container, current[i].ToString(), .856f, bottoms[i], .978f, tops[i], 34,
+                    delta > 0 ? new Color(.66f, 1, .75f) : delta < 0 ? new Color(1, .63f, .54f) : Color.white,
+                    "Card live " + labels[i] + " " + identity);
+                label.alignment = TextAlignmentOptions.Center; label.fontStyle = FontStyles.Bold;
+                label.outlineWidth = .07f; label.outlineColor = new Color32(0, 0, 0, 255);
+                label.enableAutoSizing = true; label.overflowMode = TextOverflowModes.Overflow;
+                if (label.text.Length > 2) label.rectTransform.localScale = new Vector3(2.2f / label.text.Length, 1, 1);
             }
         }
     }

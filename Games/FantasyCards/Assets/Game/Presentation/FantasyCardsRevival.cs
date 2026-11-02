@@ -186,13 +186,14 @@ namespace FantasyCards.Presentation
             ReadableText(decks, "내 덱 " + player.deck.Count, .025f, .035f, .515f, .485f, 24, ivory, TextAlignmentOptions.Center);
             var discard = Button(decks, "소각 " + player.discard.Count, .53f, .035f, .975f, .485f, () => { battleArchivePage = 0; ShowBattleArchive(0); }, slate, 23, !locked);
             BindDiscardDrop((RectTransform)discard.transform);
-            BindTooltip(discard.gameObject, "소각장 · 손패 소각", "눌러 소각장을 봅니다. 준비 중 손패 카드를 이곳으로 끌어놓아 소각할 수 있습니다. 업그레이드 카드는 소각 시 총소울 +1을 얻습니다.");
+            BindTooltip(discard.gameObject, "소각장 · 손패 / 필드 소각", "눌러 소각장을 봅니다. 준비 중 손패·아군 유닛·예약 마법을 드래그해 소각합니다. 유닛의 장비도 함께 소각되며 사용 비용은 반환되지 않습니다. 손패 업그레이드는 총소울 +1입니다.");
             Button(rail, "기록 / 메뉴", .04f, .286f, .96f, .354f, ShowRevivalBattleMenu, slate, 21, !locked);
             var selected = player.hand.Find(card => card.instanceId == selectedCard);
             var definition = selected == null ? null : CardCatalog.Get(selected.definitionId);
             bool myPreparation = engine.IsPreparing(0);
-            string action = definition != null && definition.kind == CardKind.Terrain ? "지형 전개" : definition != null && definition.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(definition) ? "마법 예약" : "카드 상세";
-            Button(rail, action, .04f, .207f, .96f, .275f, () => { if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, 22, !locked && myPreparation);
+            bool fieldDiscard = selected == null && !locked && engine.CanDiscardField(0, selectedAttacker, out _);
+            string action = fieldDiscard ? "선택 카드 소각" : definition != null && definition.kind == CardKind.Terrain ? "지형 전개" : definition != null && definition.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(definition) ? "마법 예약" : "카드 상세";
+            Button(rail, action, .04f, .207f, .96f, .275f, () => { if (fieldDiscard) DiscardSelectedField(selectedAttacker); else if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, 22, !locked && myPreparation);
             bool canShuffle = engine.CanShuffleHand(0, out string shuffleReason);
             var shuffle = Button(rail, "손패 셔플", .04f, .128f, .96f, .196f, () =>
             {
@@ -256,13 +257,14 @@ namespace FantasyCards.Presentation
             var discard = Button(rail, "소각 " + player.discard.Count, .51f, zoneRow.x, .97f, zoneRow.y,
                 () => { battleArchivePage = 0; ShowBattleArchive(0); }, slate, 23, !locked);
             BindDiscardDrop((RectTransform)discard.transform);
-            BindTooltip(discard.gameObject, "소각장 · 손패 소각", "눌러 소각장을 보거나, 준비 중 손패를 끌어놓아 소각합니다. 업그레이드 소각은 총소울 +1입니다.");
+            BindTooltip(discard.gameObject, "소각장 · 손패 / 필드 소각", "준비 중 손패·아군 전열을 드래그해 소각합니다. 유닛 장비도 함께 소각되며 비용 반환은 없습니다. 손패 업그레이드는 총소울 +1입니다.");
             ActionButton("기록 / 메뉴", Row(), ShowRevivalBattleMenu, slate, !locked);
             var selected = player.hand.Find(card => card.instanceId == selectedCard);
             var definition = selected == null ? null : CardCatalog.Get(selected.definitionId);
             bool myPreparation = engine.IsPreparing(0);
-            string action = definition != null && definition.kind == CardKind.Terrain ? "지형 전개" : definition != null && definition.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(definition) ? "마법 예약" : "카드 상세";
-            ActionButton(action, Row(), () => { if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, !locked && myPreparation);
+            bool fieldDiscard = selected == null && !locked && engine.CanDiscardField(0, selectedAttacker, out _);
+            string action = fieldDiscard ? "선택 카드 소각" : definition != null && definition.kind == CardKind.Terrain ? "지형 전개" : definition != null && definition.kind == CardKind.Spell && !CardCatalog.RequiresUnitTarget(definition) ? "마법 예약" : "카드 상세";
+            ActionButton(action, Row(), () => { if (fieldDiscard) DiscardSelectedField(selectedAttacker); else if (action == "카드 상세") ShowDetail(CardCatalog.Get(inspectedId), ShowBattle); else Play(-1); }, slate, !locked && myPreparation);
             bool canShuffle = engine.CanShuffleHand(0, out string shuffleReason);
             ActionButton("손패 셔플", Row(), () =>
             {

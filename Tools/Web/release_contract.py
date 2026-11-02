@@ -69,7 +69,19 @@ QUEST = {
 }
 
 
+REPRISE = {
+    'name': 'reprise',
+    'revisions': {'FantasyCards': 'fm-reprise-2026-11-02', 'PathOfDawn': 'gospel-storybook-2026-11-02'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Reprise' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'reprise':
+        return REPRISE
     if name == 'quest':
         return QUEST
     if name == 'renewal':

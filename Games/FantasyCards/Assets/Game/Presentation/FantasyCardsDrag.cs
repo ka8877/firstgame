@@ -14,7 +14,7 @@ namespace FantasyCards.Presentation
                 () =>
                 {
                     ResetPolishTap();
-                    selectedCard = instanceId; inspectedId = definition.id; HideTooltip();
+                    selectedCard = instanceId; selectedAttacker = -1; inspectedId = definition.id; HideTooltip();
                     message = definition.kind == CardKind.Terrain ? "지형 카드를 아래 지형·소울 띠에 놓으세요." : "빛나는 전열 또는 대상 유닛에 놓으세요.";
                 },
                 () => { if (!locked && battleScreen && engine != null) ShowBattle(); });
@@ -36,8 +36,9 @@ namespace FantasyCards.Presentation
         private void BindLaneDrop(RectTransform view, int owner, int lane)
         {
             var target = view.gameObject.AddComponent<FmCardDropTarget>();
-            target.Configure(id => CanDropCard(id, owner, lane, false), id =>
+            target.Configure(id => CanDropCard(id, owner, lane, false) || CanRepositionField(id, owner, lane), id =>
             {
+                if (CanRepositionField(id, owner, lane)) { RepositionField(id, lane); return; }
                 selectedCard = id;
                 var instance = engine.State.players[0].hand.Find(card => card.instanceId == id);
                 if (instance == null) return;
@@ -57,8 +58,35 @@ namespace FantasyCards.Presentation
         private void BindDiscardDrop(RectTransform view)
         {
             var target = view.gameObject.AddComponent<FmCardDropTarget>();
-            target.Configure(id => !locked && battleScreen && engine != null && engine.CanDiscardHand(0, id, out _),
-                id => { selectedCard = id; Act(() => engine.DiscardHand(0, id, out message)); });
+            target.Configure(id => !locked && battleScreen && engine != null &&
+                (engine.CanDiscardHand(0, id, out _) || engine.CanDiscardField(0, id, out _)), id =>
+                {
+                    if (engine.CanDiscardField(0, id, out _)) { DiscardSelectedField(id); return; }
+                    selectedCard = id; Act(() => engine.DiscardHand(0, id, out message));
+                });
+        }
+
+        private bool CanRepositionField(int instanceId, int owner, int lane) =>
+            !locked && battleScreen && engine != null && owner == 0 && engine.CanMoveFieldCard(0, instanceId, lane, out _);
+
+        private void RepositionField(int instanceId, int lane)
+        { ResetPolishTap(); Act(() => engine.MoveFieldCard(0, instanceId, lane, out message)); }
+
+        private void DiscardSelectedField(int instanceId)
+        { ResetPolishTap(); Act(() => engine.DiscardField(0, instanceId, out message)); }
+
+        private void BindFieldDrag(RectTransform panel, int owner, int instanceId, CardDefinition definition)
+        {
+            if (owner != 0) return;
+            var drag = panel.gameObject.AddComponent<FmCardDragDrop>();
+            drag.Configure(instanceId,
+                () => !locked && battleScreen && engine != null && engine.IsPreparing(0) && !engine.State.openingHandOpen,
+                () =>
+                {
+                    ResetPolishTap(); selectedCard = -1; selectedAttacker = instanceId; inspectedId = definition.id; HideTooltip();
+                    message = "아군 전열로 드래그해 순서를 바꾸세요. 찬 칸은 교환, 소각장은 카드와 장비를 소각합니다.";
+                },
+                () => { if (!locked && battleScreen && engine != null) ShowBattle(); });
         }
     }
 }

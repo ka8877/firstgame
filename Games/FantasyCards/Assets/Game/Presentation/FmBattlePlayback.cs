@@ -109,11 +109,14 @@ namespace FantasyCards.Presentation
             bool defeat = item.kind == "defeat";
             bool burn = item.kind == "burn";
             bool play = item.kind == "play";
+            bool reposition = item.kind == "reposition";
+            bool fieldDiscard = item.kind == "discard-field";
+            bool summon = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Unit;
             bool terrainPlay = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Terrain;
             bool healingSpell = item.kind == "spell" && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
                 (CardCatalog.Get(item.sourceDefinitionId).effect == Effect.Heal || CardCatalog.Get(item.sourceDefinitionId).effect == Effect.HealAll);
             bool heal = spell && (healingSpell || (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0);
-            float duration = coin ? .78f : attack ? .82f : defeat ? .72f : burn ? .48f : spell ? .60f : play ? .44f : item.kind == "power" ? .52f : .25f;
+            float duration = coin ? .78f : attack ? .92f : defeat || fieldDiscard ? .74f : burn ? .48f : spell ? .72f : summon ? .68f : play ? .48f : reposition ? .48f : item.kind == "power" ? .52f : .25f;
 
             RectTransform source = null, target = null;
             if (item.sourceInstanceId >= 0) battleUnitViews.TryGetValue(item.sourceInstanceId, out source);
@@ -121,7 +124,9 @@ namespace FantasyCards.Presentation
             Vector2 sourcePoint = source != null ? BattleViewCenter(source) : LaneCenter(item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor, item.sourceLane);
             Vector2 targetPoint = target != null ? BattleViewCenter(target) : LaneCenter(item.targetPlayer, item.targetLane);
             if (item.kind == "direct" || burn) targetPoint = DeckCenter(item.targetPlayer >= 0 ? item.targetPlayer : item.actor);
-            if (defeat) targetPoint = sourcePoint;
+            if (defeat || fieldDiscard) targetPoint = sourcePoint;
+            if (reposition) targetPoint = LaneCenter(item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor, item.targetLane);
+            Vector2 summonOrigin = new Vector2(sourcePoint.x, item.actor == 0 ? .105f : .965f);
             if (item.kind == "spell" && target == null) targetPoint = sourcePoint;
             if (terrainPlay)
             {
@@ -165,7 +170,29 @@ namespace FantasyCards.Presentation
                 if (defeat) targetPoint = sourcePoint;
             }
             var group = layer.gameObject.AddComponent<CanvasGroup>(); group.blocksRaycasts = group.interactable = false;
-            FmBattleFxGraphic effect = null;
+            var hiddenOriginals = new Dictionary<CanvasGroup, float>();
+            if (reposition || defeat || fieldDiscard)
+            {
+                // Moving inside a lane's stencil clips the card at the edge.
+                // Use public visual copies on the event layer, then restore the
+                // untouched lane views before applying the next real snapshot.
+                void Hide(RectTransform original)
+                {
+                    if (original == null) return;
+                    var opacity = original.GetComponent<CanvasGroup>();
+                    if (opacity == null) opacity = original.gameObject.AddComponent<CanvasGroup>();
+                    hiddenOriginals[opacity] = opacity.alpha; opacity.alpha = 0;
+                }
+                Hide(source);
+                source = BattleFieldCopy(layer, item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor,
+                    item.sourceInstanceId, item.sourceDefinitionId, sourcePoint);
+                if (reposition && target != null && item.targetInstanceId >= 0)
+                {
+                    Hide(target);
+                    target = BattleFieldCopy(layer, item.targetPlayer, item.targetInstanceId, item.targetDefinitionId, targetPoint);
+                }
+            }
+            FmBattleFxGraphic effect = null, impactEffect = null;
             TMP_Text number = null;
             RectTransform flyingCard = null, coinFace = null;
             Vector3 sourcePosition = source != null ? source.localPosition : Vector3.zero;
@@ -193,25 +220,31 @@ namespace FantasyCards.Presentation
                 Text(layer, "C" + item.coinIndex, sourcePoint.x - .05f, sourcePoint.y - .086f, sourcePoint.x + .05f, sourcePoint.y - .038f, 23, ivory, TextAlignmentOptions.Center);
                 FmBattleAudio.PlayCoin(item.coinHeads, item.coinIndex, (sourcePoint.x - .415f) * 1.5f);
             }
-            else if (attack || spell || defeat || burn || play)
+            else if (attack || spell || defeat || fieldDiscard || burn || play)
             {
-                var style = defeat ? FmBattleFxGraphic.EffectStyle.Burn : burn ? FmBattleFxGraphic.EffectStyle.Burn :
+                var style = defeat || fieldDiscard ? FmBattleFxGraphic.EffectStyle.Defeat : burn ? FmBattleFxGraphic.EffectStyle.Burn :
                     heal ? FmBattleFxGraphic.EffectStyle.Heal : spell ? FmBattleFxGraphic.EffectStyle.Spell :
-                    play ? FmBattleFxGraphic.EffectStyle.Impact : item.amount <= 0 && hit ? FmBattleFxGraphic.EffectStyle.Shield : FmBattleFxGraphic.EffectStyle.Slash;
+                    summon ? FmBattleFxGraphic.EffectStyle.Summon : play ? FmBattleFxGraphic.EffectStyle.Impact : item.amount <= 0 && hit ? FmBattleFxGraphic.EffectStyle.Shield : FmBattleFxGraphic.EffectStyle.Slash;
                 effect = CreateBattleFx(layer, style, targetPoint, tint);
+                if (attack && item.amount > 0) impactEffect = CreateBattleFx(layer, FmBattleFxGraphic.EffectStyle.Impact, targetPoint, new Color(1, .79f, .40f));
                 if (item.kind == "direct") effect.Style = FmBattleFxGraphic.EffectStyle.Impact;
                 if (play && !terrainPlay) { targetPoint = sourcePoint; PositionBattleFx(effect, targetPoint); }
                 if (terrainPlay) flyingCard = BattleMovingCard(layer, item.sourceDefinitionId, sourcePoint, false);
-                string amount = defeat ? "소각장" : burn ? "소각 −1" : hit ? item.amount == 0 ? "방어" : "−" + item.amount :
+                if (summon) flyingCard = BattleMovingCard(layer, item.sourceDefinitionId, summonOrigin, false);
+                string amount = defeat || fieldDiscard ? "소각장" : burn ? "소각 −1" : hit ? item.amount == 0 ? "방어" : "−" + item.amount :
                     item.kind == "spell-target" ? (item.amount >= 0 ? "+" : "") + item.amount : "";
                 if (!string.IsNullOrEmpty(amount))
-                    number = Text(layer, amount, targetPoint.x - .10f, targetPoint.y - .025f, targetPoint.x + .10f, targetPoint.y + .08f, 40, tint, TextAlignmentOptions.Center);
+                {
+                    number = Text(layer, amount, targetPoint.x - .10f, targetPoint.y - .025f, targetPoint.x + .10f, targetPoint.y + .08f, hit && item.amount >= 6 ? 58 : 46, hit ? Color.white : tint, TextAlignmentOptions.Center);
+                    number.fontStyle = FontStyles.Bold; number.outlineWidth = .24f;
+                    number.outlineColor = hit && item.amount > 0 ? new Color32(115, 20, 8, 255) : new Color32(6, 15, 24, 255);
+                }
                 string playCue = terrainPlay ? "terrain" : play && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
                     CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Equipment ? "equip" :
                     play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Spell ? "card-draw" : "summon";
-                FmBattleAudio.PlayAt(defeat ? "destroy" : burn ? "burn" : heal ? "heal" : spell ? "spell" :
+                FmBattleAudio.PlayAt(defeat || fieldDiscard ? "destroy" : burn ? "burn" : heal ? "heal" : spell ? "spell" :
                     attack ? item.kind == "counter" ? "counter" : "attack" : playCue, (sourcePoint.x - .415f) * 1.5f);
-                if (defeat && source != null)
+                if ((defeat || fieldDiscard) && source != null)
                 {
                     sourceOpacity = source.GetComponent<CanvasGroup>();
                     if (sourceOpacity == null) sourceOpacity = source.gameObject.AddComponent<CanvasGroup>();
@@ -219,6 +252,7 @@ namespace FantasyCards.Presentation
                 if (burn && !string.IsNullOrEmpty(item.targetDefinitionId))
                     flyingCard = BattleMovingCard(layer, item.targetDefinitionId, targetPoint, false);
             }
+            else if (reposition) FmBattleAudio.Play("card-pick");
             else if (item.kind == "power")
             {
                 if (item.hasStatTransition)
@@ -242,7 +276,8 @@ namespace FantasyCards.Presentation
             for (float elapsed = 0; elapsed < duration && !battleSkipRequested; elapsed += Time.unscaledDeltaTime * battlePlaybackSpeed)
             {
                 float p = Mathf.Clamp01(elapsed / duration);
-                if (effect != null) { effect.Progress = attack ? Mathf.InverseLerp(.34f, 1, p) : p; effect.SetAllDirty(); }
+                if (effect != null) { effect.Progress = attack ? Mathf.InverseLerp(.34f, 1, p) : summon ? Mathf.InverseLerp(.22f, 1, p) : p; effect.SetAllDirty(); }
+                if (impactEffect != null) { impactEffect.Progress = Mathf.InverseLerp(.42f, .93f, p); impactEffect.SetAllDirty(); }
                 foreach (var arrival in arrivals)
                     if (arrival.Key != null) arrival.Key.localPosition = Vector3.Lerp(arrival.Value, arrivalDestinations[arrival.Key], Mathf.SmoothStep(0, 1, p / .32f));
                 if (coinFace != null)
@@ -263,7 +298,7 @@ namespace FantasyCards.Presentation
                 }
                 if (target != null && hit && p >= .42f)
                     target.localPosition = targetPosition + Vector3.right * Mathf.Sin((p - .42f) * 74) * (1 - p) * (item.amount > 0 ? 10 : 3);
-                if (source != null && defeat)
+                if (source != null && (defeat || fieldDiscard))
                 {
                     Vector2 end = GraveyardCenter(item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor);
                     Vector2 offset = (end - sourcePoint) * Mathf.SmoothStep(0, 1, p);
@@ -273,6 +308,15 @@ namespace FantasyCards.Presentation
                     source.localScale = sourceScale * (1 - p * .80f); source.localRotation = sourceRotation * Quaternion.Euler(0, 0, -p * 24);
                     if (sourceOpacity != null) sourceOpacity.alpha = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.42f, 1, p));
                 }
+                if (source != null && reposition)
+                {
+                    Vector2 offset = (targetPoint - sourcePoint) * Mathf.SmoothStep(0, 1, p);
+                    source.localPosition = sourcePosition + source.parent.InverseTransformVector(root.TransformVector(new Vector3(offset.x * root.rect.width,
+                        offset.y * root.rect.height + Mathf.Sin(p * Mathf.PI) * root.rect.height * .035f, 0)));
+                    if (target != null)
+                        target.localPosition = targetPosition + target.parent.InverseTransformVector(root.TransformVector(new Vector3(-offset.x * root.rect.width,
+                            -offset.y * root.rect.height - Mathf.Sin(p * Mathf.PI) * root.rect.height * .025f, 0)));
+                }
                 if (source != null && item.kind == "power") source.localScale = sourceScale * (1 + Mathf.Sin(p * Mathf.PI) * .04f);
                 if (number != null)
                 {
@@ -281,21 +325,37 @@ namespace FantasyCards.Presentation
                 }
                 if (flyingCard != null)
                 {
-                    Vector2 position = item.kind == "draw" || terrainPlay ? Vector2.Lerp(sourcePoint, targetPoint, Mathf.SmoothStep(0, 1, p)) :
+                    Vector2 position = summon ? Vector2.Lerp(summonOrigin, targetPoint, Mathf.SmoothStep(0, 1, Mathf.Clamp01(p / .66f))) :
+                        item.kind == "draw" || terrainPlay ? Vector2.Lerp(sourcePoint, targetPoint, Mathf.SmoothStep(0, 1, p)) :
                         Vector2.Lerp(targetPoint, GraveyardCenter(item.targetPlayer >= 0 ? item.targetPlayer : item.actor), Mathf.SmoothStep(0, 1, p));
-                    Anchor(flyingCard, position.x - .024f, position.y - .05f, position.x + .024f, position.y + .05f);
-                    flyingCard.localRotation = Quaternion.Euler(0, 0, p * (burn ? 30 : -6));
+                    float halfWidth = summon ? .066f : .024f, halfHeight = summon ? .127f : .05f;
+                    Anchor(flyingCard, position.x - halfWidth, position.y - halfHeight, position.x + halfWidth, position.y + halfHeight);
+                    flyingCard.localRotation = Quaternion.Euler(0, 0, summon ? (1 - Mathf.Clamp01(p / .66f)) * (item.actor == 0 ? -9 : 9) : p * (burn ? 30 : -6));
                 }
-                if (play && p >= .52f && !impactPlayed)
+                if (play && p >= (summon ? .66f : .52f) && !impactPlayed)
                 { impactPlayed = true; FmBattleAudio.Play("card-land"); }
                 if (attack && p >= .42f && !impactPlayed)
-                { impactPlayed = true; FmBattleAudio.PlayAt(hit && item.amount <= 0 ? "shield" : "hit", (targetPoint.x - .415f) * 1.5f); }
+                { impactPlayed = true; FmBattleAudio.PlayImpact(hit ? item.amount : Mathf.Max(1, item.amount), (targetPoint.x - .415f) * 1.5f); }
                 yield return null;
             }
             if (source != null) { source.localPosition = sourcePosition; source.localScale = sourceScale; source.localRotation = sourceRotation; }
             if (target != null) { target.localPosition = targetPosition; target.localScale = targetScale; }
             if (sourceOpacity != null) sourceOpacity.alpha = 1;
+            foreach (var original in hiddenOriginals) if (original.Key != null) original.Key.alpha = original.Value;
             if (layer != null) Destroy(layer.gameObject);
+        }
+
+        private RectTransform BattleFieldCopy(Transform parent, int owner, int instance, string definitionId, Vector2 point)
+        {
+            if (owner < 0 || owner > 1 || string.IsNullOrEmpty(definitionId)) return null;
+            var definition = CardCatalog.Get(definitionId);
+            if (owner == 1 && definition.kind == CardKind.Spell && !battleRevealedSpells.Contains(instance))
+                return BattleMovingCard(parent, definitionId, point, true);
+            var live = battleVisualState.players[owner].units.Find(unit => unit.instanceId == instance);
+            var copy = ArcanaCardFace(parent, definition, point.x - .073f, point.y - .119f,
+                point.x + .073f, point.y + .119f, ArcanaCardMode.Field, false, live);
+            copy.gameObject.name = "Unclipped field card " + instance;
+            return copy;
         }
 
         private Vector2 BattleViewCenter(RectTransform view)
@@ -344,7 +404,7 @@ namespace FantasyCards.Presentation
             fx.transform.SetParent(parent, false); fx.Style = style; fx.Tint = tint; PositionBattleFx(fx, point); return fx;
         }
         private static void PositionBattleFx(FmBattleFxGraphic effect, Vector2 point)
-        { Anchor((RectTransform)effect.transform, point.x - .078f, point.y - .12f, point.x + .078f, point.y + .12f); }
+        { Anchor((RectTransform)effect.transform, point.x - .105f, point.y - .17f, point.x + .105f, point.y + .17f); }
         private RectTransform BattleMovingCard(Transform parent, string definition, Vector2 point, bool hidden)
         {
             if (!hidden && !string.IsNullOrEmpty(definition))
@@ -357,7 +417,7 @@ namespace FantasyCards.Presentation
         }
         private Color EventColor(BattleEvent item)
         {
-            if (item.kind == "burn" || item.kind == "defeat") return new Color(1, .53f, .24f);
+            if (item.kind == "burn" || item.kind == "defeat" || item.kind == "discard-field") return new Color(1, .53f, .24f);
             if (item.kind == "attack" || item.kind == "counter") return item.amount == 0 ? new Color(.62f, .87f, 1) : new Color(1, .32f, .20f);
             if (!string.IsNullOrEmpty(item.sourceDefinitionId))
             {
@@ -387,6 +447,8 @@ namespace FantasyCards.Presentation
                 case "power": return "능력 확정 · " + item.text;
                 case "burn": return "덱 소각 · " + item.text;
                 case "defeat": return "전장 이탈 · " + item.text;
+                case "discard-field": return "필드 소각 · " + item.text;
+                case "reposition": return "전열 재배치 · " + item.text;
                 default: return item.text;
             }
         }

@@ -38,7 +38,9 @@ namespace FantasyCards.Presentation
             FmBattleAudio.Play("card-select");
             if (PolishDoubleTap(zone + owner + ":" + instance, card)) return;
             selectedCard = -1; selectedAttacker = instance; inspectedId = card.id;
-            message = card.name + " 선택 · 두 번 누르기 / 길게 누르기로 원본 상세 · Esc로 선택 해제";
+            message = owner == 0 && (zone == "field" || zone == "spell") && engine.IsPreparing(0)
+                ? card.name + " · 다른 아군 전열을 누르거나 드래그해 이동/교환 · 소각은 우측 소각장으로 드래그"
+                : card.name + " 선택 · 두 번 누르기 / 길게 누르기로 원본 상세 · Esc로 선택 해제";
             ShowBattle();
         }
 

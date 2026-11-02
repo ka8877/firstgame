@@ -32,7 +32,7 @@ namespace FantasyCards.Presentation
             var rail = RestorationPanel(root, .77f, .045f, .96f, .957f, new Color(.015f, .027f, .064f, .98f), "Quest wallet and profile rail");
             Text(rail, "FANTASY\nMASTERS", .04f, .85f, .96f, .98f, 31, gold, TextAlignmentOptions.Center);
             var orb = Panel(rail, .29f, .72f, .71f, .86f, Color.clear); RestorationTrim(orb, true);
-            Text(rail, LocalProfileName, .04f, .65f, .96f, .73f, 24, ivory, TextAlignmentOptions.Center);
+            RestorationButton(rail, LocalProfileName, .04f, .65f, .96f, .73f, () => ShowLocalProfile(redraw ?? ShowLobby));
             var wallet = Panel(rail, .06f, .51f, .94f, .64f, new Color(.08f, .095f, .15f));
             wallet.gameObject.name = "Quest actual SP balance";
             Text(wallet, "SP · 게임머니", .05f, .56f, .95f, .98f, 20, RestorationMetal, TextAlignmentOptions.Center);
@@ -41,7 +41,7 @@ namespace FantasyCards.Presentation
             cash.gameObject.name = "Quest GP future payments notice";
             BindTooltip(cash.gameObject, "GP · 유료 캐시", "GP 결제와 유료 상품은 추후 추가됩니다. 현재는 SP로 카드팩을 구입할 수 있습니다.");
             Text(rail, "보유 " + QuestOwnedTotal.ToString("N0") + "장\n" + (questEconomy == null ? 0 : CardCatalog.All.Count(card => questEconomy.OwnedCount(card.id) > 0)) + "종", .05f, .315f, .95f, .41f, 22, teal, TextAlignmentOptions.Center);
-            RestorationButton(rail, "프로필", .06f, .235f, .94f, .31f, () => ShowLocalProfile(redraw ?? ShowLobby));
+            RestorationButton(rail, "카드 앨범", .06f, .235f, .94f, .31f, ShowRestorationOriginalArchive);
             RestorationButton(rail, "음악 / 효과음", .06f, .155f, .94f, .228f, () => ShowSoundSettings(redraw ?? ShowLobby));
             RestorationButton(rail, "타이틀", .06f, .065f, .94f, .145f, ShowTitle);
             Text(rail, "싱글 플레이", .03f, .003f, .97f, .06f, 18, RestorationMetal, TextAlignmentOptions.Center);

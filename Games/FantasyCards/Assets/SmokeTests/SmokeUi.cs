@@ -275,7 +275,7 @@ namespace FantasyCards.SmokeTests
                 pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0);
                 pixels.Apply();
                 var directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                    name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
+                    name.StartsWith("reprise-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Reprise/Screenshots" : name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
                 System.IO.Directory.CreateDirectory(directory);
                 var path = System.IO.Path.Combine(directory, name + ".png");
                 var png = pixels.EncodeToPNG();

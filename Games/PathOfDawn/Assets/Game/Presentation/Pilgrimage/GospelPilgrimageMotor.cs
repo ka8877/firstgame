@@ -13,14 +13,22 @@ namespace PathOfDawn.Presentation
         public float FacingYaw { get; private set; } = 180;
         public float MeasuredSpeed { get; private set; }
         public bool IsGrounded { get; private set; }
+        public bool IsDashing => acceptsInput && (dashPending || dashRemaining > 0);
+        public int DashSequence { get; private set; }
+        public bool DashReady => acceptsInput && !neutralRequired && !dashPending && dashRemaining <= 0 && Time.time >= dashReadyAt;
+        public float DashCooldown01 => dashPending ? 1 : Mathf.Clamp01((dashReadyAt - Time.time) / DashCooldown);
         public CharacterController Controller { get; private set; }
         public Rect Bounds { get; private set; } = new Rect(-34f, -15f, 74f, 35f);
         public event Action InteractRequested;
         public float WalkSpeed = 3.25f, RunSpeed = 5.4f;
+        public const float DashDuration = .19f, DashCooldown = .88f, DashSpeed = 11.2f;
         bool acceptsInput = true, touchRun, neutralRequired;
         Vector2 touchInput;
         Vector3 planar, smoothVelocity;
         float vertical, jumpUntil = -1, lastGround = -100, jumpStart = -100;
+        float dashRemaining, dashReadyAt = -1;
+        bool dashPending;
+        Vector3 dashDirection;
         int jumpFrame = -100;
         Camera view;
         Vector3 safePosition;
@@ -32,7 +40,7 @@ namespace PathOfDawn.Presentation
             {
                 if (acceptsInput == value) return;
                 acceptsInput = value;
-                if (!value) { touchInput = Vector2.zero; touchRun = false; planar = smoothVelocity = Vector3.zero; jumpUntil = -1; jumpFrame = -100; }
+                if (!value) { touchInput = Vector2.zero; touchRun = false; planar = smoothVelocity = Vector3.zero; jumpUntil = -1; dashRemaining = 0; dashPending = false; jumpFrame = -100; }
                 else neutralRequired = true;
             }
         }
@@ -61,17 +69,30 @@ namespace PathOfDawn.Presentation
             Controller.enabled = was; Physics.SyncTransforms(); safePosition = transform.position;
             vertical = -1f; planar = smoothVelocity = Velocity = Vector3.zero; touchInput = Vector2.zero; touchRun = false;
             FacingYaw = lastFacing = Mathf.Repeat(yaw, 360); jumpUntil = -1; jumpFrame = -100; lastGround = -100; IsGrounded = false;
+            dashRemaining = 0; dashReadyAt = -1; dashPending = false;
         }
         public void SetTouchInput(Vector2 input) => touchInput = Finite(input.x) && Finite(input.y) ? Vector2.ClampMagnitude(input, 1) : Vector2.zero;
         public void SetRun(bool held) => touchRun = held;
         public void RequestJump() { if (acceptsInput && !neutralRequired) { jumpUntil = Time.time + .15f; jumpFrame = Time.frameCount; } }
         public void RequestInteract() { if (acceptsInput && !neutralRequired) InteractRequested?.Invoke(); }
+        /// <summary>A short, collision-respecting exploration step; no invulnerability or combat effect.</summary>
+        public void RequestDash()
+        {
+            if (!DashReady) return;
+            float yaw = FacingYaw * Mathf.Deg2Rad;
+            dashDirection = new Vector3(Mathf.Sin(yaw), 0, Mathf.Cos(yaw));
+            // UI/EventSystem requests may arrive after this frame's motor update.
+            // Keep the request until movement really consumes it; a slow render
+            // frame must not spend the whole short dash before its first step.
+            dashPending = true;
+        }
 
         void Update()
         {
             EnsureController(); if (!Controller.enabled) return;
             float dt = Mathf.Min(Time.deltaTime, Time.maximumDeltaTime); if (dt <= 0) return;
             var keyboard = Keyboard.current;
+            bool requestedDash = false;
             Vector2 keys = Vector2.zero;
             if (keyboard != null)
             {
@@ -86,6 +107,7 @@ namespace PathOfDawn.Presentation
             {
                 if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame || Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame) RequestJump();
                 if (keyboard != null && keyboard.eKey.wasPressedThisFrame || Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame) RequestInteract();
+                requestedDash = keyboard != null && (keyboard.leftCtrlKey.wasPressedThisFrame || keyboard.rightCtrlKey.wasPressedThisFrame) || Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame;
             }
             bool run = acceptsInput && (touchRun || keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed) || Gamepad.current != null && Gamepad.current.leftStickButton.isPressed);
             // Fixed isometric camera: screen-right is +X, screen-up is +Z.
@@ -100,9 +122,29 @@ namespace PathOfDawn.Presentation
             Vector3 desired = wish * (run ? RunSpeed : WalkSpeed);
             if (wish.sqrMagnitude > .002f) lastFacing = Mathf.Atan2(wish.x, wish.z) * Mathf.Rad2Deg;
             FacingYaw = Mathf.Repeat(lastFacing, 360);
+            if (requestedDash) RequestDash();
+            if (dashPending)
+            {
+                dashPending = false; dashRemaining = DashDuration;
+                dashReadyAt = Time.time + DashCooldown; DashSequence++;
+            }
+            if (dashRemaining > 0) FacingYaw = Mathf.Repeat(Mathf.Atan2(dashDirection.x, dashDirection.z) * Mathf.Rad2Deg, 360);
             Vector3 before = transform.position;
             int count = Mathf.Max(1, Mathf.CeilToInt(dt / .04f)); float step = dt / count;
-            for (int i = 0; i < count; i++) Step(desired, input.sqrMagnitude > .001f, step, Time.time - dt + (i + 1) * step);
+            for (int i = 0; i < count; i++)
+            {
+                float now = Time.time - dt + (i + 1) * step;
+                float burst = Mathf.Min(step, dashRemaining);
+                if (burst > .000001f)
+                {
+                    Step(dashDirection * DashSpeed, true, burst, now - step + burst);
+                    dashRemaining = Mathf.Max(0, dashRemaining - burst);
+                }
+                // Only the actual 0.19-second movement interval uses dash speed,
+                // even when one rendered frame is longer than the whole dash.
+                float ordinary = step - burst;
+                if (ordinary > .000001f) Step(desired, input.sqrMagnitude > .001f, ordinary, now);
+            }
             Velocity = (transform.position - before) / dt;
             MeasuredSpeed = new Vector2(Velocity.x, Velocity.z).magnitude;
             if (IsGrounded && transform.position.y > -1.5f) safePosition = transform.position;
@@ -117,7 +159,7 @@ namespace PathOfDawn.Presentation
             {
                 vertical = Mathf.Sqrt(2 * 23f * 1.05f); lastGround = -100; jumpStart = now; jumpUntil = -1; jumpFrame = -100; grounded = false;
             }
-            planar = Vector3.SmoothDamp(planar, desired, ref smoothVelocity, acceptsInput ? moving ? .105f : .075f : .045f, 65, dt);
+            planar = Vector3.SmoothDamp(planar, desired, ref smoothVelocity, IsDashing ? .028f : acceptsInput ? moving ? .105f : .075f : .045f, 65, dt);
             if (desired.sqrMagnitude < .001f && planar.sqrMagnitude < .001f) planar = smoothVelocity = Vector3.zero;
             vertical = Mathf.Max(-24, vertical - 23f * dt);
             Controller.stepOffset = grounded && vertical <= 0 ? .26f : 0;
@@ -131,6 +173,6 @@ namespace PathOfDawn.Presentation
             if (IsGrounded) { lastGround = now; vertical = -2; }
         }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
-        void OnDisable() { touchInput = Vector2.zero; planar = smoothVelocity = Velocity = Vector3.zero; touchRun = false; }
+        void OnDisable() { touchInput = Vector2.zero; planar = smoothVelocity = Velocity = Vector3.zero; touchRun = false; dashRemaining = 0; dashPending = false; }
     }
 }

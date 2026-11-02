@@ -46,7 +46,7 @@ namespace PathOfDawn.Core
     }
 
     /// <summary>Ordered story objectives. Visiting or opening a conversation is
-    /// not scripture discovery: only completing its actual reading awards it.</summary>
+    /// not scripture discovery: completing the event records its passage.</summary>
     public sealed class GospelChronicle
     {
         public const float InteractionRadius=2.25f;
@@ -64,6 +64,8 @@ namespace PathOfDawn.Core
         public int DialogueCount => CurrentQuest==null?0:CurrentQuest.Dialogue.Count;
         public GospelDialogueTurn CurrentDialogue => Stage==GospelQuestStage.Reading?CurrentQuest.Dialogue[state.dialoguePage]:null;
         public GospelReading CurrentReading => Stage==GospelQuestStage.Reading?CurrentQuest.Reading:null;
+        public GospelStorybookScene CurrentStoryScene => IsComplete?null:GospelStorybookCatalog.GetScene(CurrentQuest);
+        public GospelDialogueTurn CurrentStoryBeat => GospelStorybookCatalog.GetBeat(this);
         public int DiscoveredCount => state.discoveredReadings.Count;
         public int TotalReadings => GospelChronicleCatalog.Readings.Count;
         public bool HasReading(string id) => !string.IsNullOrEmpty(id)&&state.discoveredReadings.Contains(id);
@@ -117,6 +119,18 @@ namespace PathOfDawn.Core
             var reading=CurrentQuest.Reading;
             if(reading!=null&&!HasReading(reading.Id))state.discoveredReadings.Add(reading.Id);
             state.questIndex++;SelectNextQuest();return true;
+        }
+
+        /// <summary>The story-completion boundary. The returned acquisition is
+        /// new exactly once; displaying/opening the Bible never calls this API.</summary>
+        public bool AdvanceStory(out GospelReading acquired)
+        {
+            acquired=null;
+            var reading=CurrentReading;
+            bool alreadyFound=reading!=null&&HasReading(reading.Id);
+            if(!AdvanceDialogue())return false;
+            if(reading!=null&&!alreadyFound&&HasReading(reading.Id))acquired=reading;
+            return true;
         }
 
         internal static void Validate(GospelChronicleSave save,IReadOnlyList<string> inherited,bool completedLegacy)

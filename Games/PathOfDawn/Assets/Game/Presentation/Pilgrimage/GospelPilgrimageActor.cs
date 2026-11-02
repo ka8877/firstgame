@@ -64,6 +64,11 @@ namespace PathOfDawn.Presentation
         bool grounded = true, adult, npc;
         int npcFrame, direction;
         float phase, facingYaw = 180f, npcHeight = 1.76f;
+        readonly SpriteRenderer[] dashEchoes = new SpriteRenderer[4];
+        readonly Vector3[] echoPositions = new Vector3[4];
+        readonly float[] echoUntil = new float[4];
+        float nextEcho;
+        int echoIndex;
 
         public bool IsAdult => adult;
         public string CurrentState { get; private set; } = "Idle";
@@ -94,6 +99,7 @@ namespace PathOfDawn.Presentation
             actor.UseSheet(adult ? "jesus-adult" : "jesus-child", actor.VisualHeight, PlayerFrames);
             actor.BuildShadow();
             actor.BuildLamp();
+            actor.BuildDashEchoes();
             actor.RefreshFrame();
             return actor;
         }
@@ -141,6 +147,42 @@ namespace PathOfDawn.Presentation
         public void SetLamp(bool equipped)
         {
             if (lamp != null) lamp.SetActive(equipped);
+        }
+
+        void BuildDashEchoes()
+        {
+            var trail = Material(spriteMaterial.shader, "Exploration dash · short soft echo", Color.white, true);
+            trail.SetFloat("_UseVertexColor", 1);
+            for (int i = 0; i < dashEchoes.Length; i++)
+            {
+                var obj = new GameObject("Short exploration dash echo " + i);
+                obj.transform.SetParent(transform, false);
+                var echo = obj.AddComponent<SpriteRenderer>();
+                echo.sharedMaterial = trail; echo.shadowCastingMode = ShadowCastingMode.Off;
+                echo.receiveShadows = false; echo.enabled = false; dashEchoes[i] = echo;
+            }
+        }
+
+        void UpdateDashEchoes()
+        {
+            if (npc) return;
+            if (movement != null && movement.IsDashing && Time.time >= nextEcho)
+            {
+                int i = echoIndex++ % dashEchoes.Length;
+                var echo = dashEchoes[i];
+                echo.sprite = sprite.sprite; echo.transform.rotation = billboard.rotation;
+                echoPositions[i] = billboard.position; echoUntil[i] = Time.time + .17f;
+                nextEcho = Time.time + .045f;
+            }
+            for (int i = 0; i < dashEchoes.Length; i++)
+            {
+                var echo = dashEchoes[i]; if (echo == null) continue;
+                float remaining = echoUntil[i] - Time.time;
+                echo.enabled = remaining > 0;
+                if (!echo.enabled) continue;
+                echo.transform.position = echoPositions[i];
+                echo.color = new Color(.69f, .89f, .82f, .24f * remaining / .17f);
+            }
         }
 
         void CreateRenderer()
@@ -322,7 +364,7 @@ namespace PathOfDawn.Presentation
                 bool moving = planarSpeed > .12f;
                 float runThreshold = movement != null ? (movement.WalkSpeed + movement.RunSpeed) * .5f : 4.2f;
                 bool running = planarSpeed > runThreshold;
-                CurrentState = !grounded ? measuredVelocity.y > .1f ? "Jump" : "Fall" : moving ? running ? "Run" : "Walk" : "Idle";
+                CurrentState = movement != null && movement.IsDashing ? "Dash" : !grounded ? measuredVelocity.y > .1f ? "Jump" : "Fall" : moving ? running ? "Run" : "Walk" : "Idle";
                 if (grounded && moving)
                 {
                     phase = Mathf.Repeat(phase + planarSpeed * Mathf.Max(0, Time.deltaTime) / (running ? 2.2f : 1.6f), 1f);
@@ -331,6 +373,7 @@ namespace PathOfDawn.Presentation
                 else { CurrentFrame = 0; phase = 0; }
             }
             RefreshFrame();
+            UpdateDashEchoes();
             UpdateShadow();
             if (lamp != null)
             {

@@ -17,6 +17,8 @@ namespace PathOfDawn.Presentation
         public int AuthoredPropCount { get; private set; }
         public int ArchitecturalMeshCount { get; private set; }
         public int GroundTriangleCount { get; private set; }
+        public int LivingGrassClumpCount { get; private set; }
+        public int WildflowerCount { get; private set; }
         public Transform TempleRoot { get; private set; }
         public Transform JordanRoot { get; private set; }
 
@@ -51,11 +53,11 @@ namespace PathOfDawn.Presentation
             chalk = Stone("Sunlit carved stone", "limestone", new Color(.99f, .94f, .79f));
             trimStone = Stone("Carved amber coping", "limestone", new Color(.69f, .57f, .38f));
             paving = Stone("Courtyard paving", "paving", new Color(.94f, .86f, .69f));
-            soil = Mat("Warm footpath", new Color(.52f, .39f, .23f), .12f);
-            grass = Mat("Olive meadow", new Color(.30f, .38f, .19f), .06f);
+            soil = Mat("Warm footpath", new Color(.63f, .53f, .36f), .12f);
+            grass = Mat("Olive meadow", new Color(.26f, .40f, .28f), .06f);
             soil.SetTexture("_BaseMap", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/limestone-albedo"));
             grass.SetTexture("_BaseMap", MeadowTexture());
-            foliage = Mat("Meadow leaf detail", new Color(.43f, .49f, .22f), .05f);
+            foliage = Mat("Meadow leaf detail", new Color(.36f, .52f, .31f), .05f);
             cedar = Mat("Cedar doors", new Color(.29f, .15f, .065f), .19f);
             var cedarTexture = Resources.Load<Texture2D>("Art/GospelWell/cedar-albedo");
             if (cedarTexture != null) cedar.SetTexture("_BaseMap", cedarTexture);
@@ -118,6 +120,10 @@ namespace PathOfDawn.Presentation
             if (river) BuildRiver(root);
             else { BuildDepartureCourt(root); BuildTemple(root); }
             BuildGarden(root, river);
+            BuildBorderGroves(root, river);
+            var atmosphere = root.gameObject.AddComponent<GospelPilgrimageAtmosphere>();
+            atmosphere.Build(river, (x, z) => TerrainHeight(x, z, river), p => NearRoute(p, 1.25f));
+            LivingGrassClumpCount += atmosphere.GrassClumpCount; WildflowerCount += atmosphere.FlowerCount;
             BuildBoundary(root, river);
             CombineArchitecture(root);
         }
@@ -186,7 +192,7 @@ namespace PathOfDawn.Presentation
             {
                 Vector3 a = points[section], b = points[section + 1];
                 Vector3 side = Vector3.Cross((b - a).normalized, Vector3.up);
-                const int segments = 12; var v = new Vector3[(segments + 1) * 2]; var uv = new Vector2[v.Length]; var t = new int[segments * 6];
+                const int segments = 12; var v = new Vector3[(segments + 1) * 2]; var uv = new Vector2[v.Length]; var t = new List<int>();
                 for (int i = 0; i <= segments; i++)
                 {
                     Vector3 center = Vector3.Lerp(a, b, i / (float)segments);
@@ -198,12 +204,24 @@ namespace PathOfDawn.Presentation
                     }
                     // side=Cross(forward,up): across then forward gives +Y.
                     // The opposite winding culled the entire trail from above.
-                    if (i < segments) { int k = i * 6, n = i * 2; t[k] = n; t[k + 1] = n + 1; t[k + 2] = n + 2; t[k + 3] = n + 1; t[k + 4] = n + 3; t[k + 5] = n + 2; }
+                    if (i < segments)
+                    {
+                        // A dirt path stops at the paving. Previously it was
+                        // drawn over the first stone court as a broad brown
+                        // stripe, hiding the dressed courtyard and its joints.
+                        Vector3 middle = Vector3.Lerp(a, b, (i + .5f) / segments);
+                        if (!river && OnPavedCourt(new Vector2(middle.x, middle.z))) continue;
+                        int n = i * 2; t.Add(n); t.Add(n + 1); t.Add(n + 2); t.Add(n + 1); t.Add(n + 3); t.Add(n + 2);
+                    }
                 }
-                var mesh = Own(new Mesh { name = "Worn pilgrim trail" }); mesh.vertices = v; mesh.uv = uv; mesh.triangles = t; mesh.RecalculateNormals(); mesh.RecalculateTangents();
+                if (t.Count == 0) continue;
+                var mesh = Own(new Mesh { name = "Worn pilgrim trail" }); mesh.vertices = v; mesh.uv = uv; mesh.triangles = t.ToArray(); mesh.RecalculateNormals(); mesh.RecalculateTangents();
                 MeshObject("Continuous trail " + section, root, mesh, Vector3.zero, soil, false);
             }
         }
+
+        static bool OnPavedCourt(Vector2 p) => new Rect(-3, -5, 36, 23).Contains(p)
+            || new Rect(-16, -11, 8, 7).Contains(p) || new Rect(-34, -11.5f, 13, 10).Contains(p);
 
         void BuildDepartureCourt(Transform root)
         {
@@ -231,8 +249,13 @@ namespace PathOfDawn.Presentation
             }
             Arch(root, new Vector3(-27f, TerrainHeight(-27f, -2.4f, false) + 1.65f, -2.4f), 3.5f, .34f, .85f);
 
-            var tree = props.AddTree(root, new Vector3(-33f, TerrainHeight(-33f, -2.4f, false), -2.4f), 4.2f, 31, 1);
+            var tree = props.AddTree(root, new Vector3(-33f, TerrainHeight(-33f, -2.4f, false), -2.4f), 5.3f, 31, 1);
             treeCrowns.Add(tree.transform); treeRest.Add(tree.transform.localRotation); AuthoredPropCount++;
+            foreach (var p in new[] { new Vector2(-36.7f, -11.3f), new Vector2(-21.6f, -13.8f), new Vector2(-22f, 2.7f) })
+            {
+                var borderTree = props.AddTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, false), p.y), 5.7f, p.x * 15, 1);
+                treeCrowns.Add(borderTree.transform); treeRest.Add(borderTree.transform.localRotation); AuthoredPropCount++;
+            }
             Vector3 planter = new Vector3(-32.8f, TerrainHeight(-32.8f, -6.2f, false), -6.2f);
             props.AddClayPlanter(root, planter, .63f, 17); AuthoredPropCount++;
             props.AddShrub(root, planter + Vector3.up * .43f, .86f, 32, 0); AuthoredPropCount++;
@@ -270,7 +293,32 @@ namespace PathOfDawn.Presentation
                 Box("Pilgrim gateway jamb", root, new Vector3(x, 1.5f, -3.4f), new Vector3(.8f, 3f, 1.2f), limestone, true, .085f);
             Arch(root, new Vector3(2f, 3f, -3.4f), 5.4f, .48f, 1.2f);
             Box("Gateway crest coping", root, new Vector3(2f, 6.02f, -3.4f), new Vector3(7.2f, .22f, 1.55f), chalk, false, .07f);
-            props.AddWell(root, new Vector3(-9.2f, TerrainHeight(-9.2f, -4.2f, false), -4.2f), 24); AuthoredPropCount++;
+            var well = props.AddWell(root, new Vector3(-9.2f, TerrainHeight(-9.2f, -4.2f, false), -4.2f), 24); AuthoredPropCount++;
+            // Controlled HDR probes isolated invalid pixels to the cedar
+            // texture-sampling path. Preserve the source PNG/tint/mesh, but use
+            // finite world UVs and explicit LOD in this retained runtime shader.
+            Material finiteCedar = null;
+            foreach (var renderer in well.GetComponentsInChildren<Renderer>())
+            {
+                var row = renderer.sharedMaterials; bool changed = false;
+                for (int i = 0; i < row.Length; i++)
+                {
+                    var source = row[i]; if (source == null || source.name != "Well_Cedar") continue;
+                    if (finiteCedar == null)
+                    {
+                        var shader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageCedar");
+                        if (shader == null) throw new InvalidOperationException("Missing retained finite well shader.");
+                        finiteCedar = new Material(shader) { name = "Well_Cedar" };
+                        finiteCedar.SetTexture("_BaseMap", source.GetTexture("_BaseMap"));
+                        finiteCedar.SetTextureScale("_BaseMap", source.GetTextureScale("_BaseMap"));
+                        finiteCedar.SetTextureOffset("_BaseMap", source.GetTextureOffset("_BaseMap"));
+                        finiteCedar.SetColor("_BaseColor", source.GetColor("_BaseColor"));
+                        materials.Add(finiteCedar);
+                    }
+                    row[i] = finiteCedar; changed = true;
+                }
+                if (changed) renderer.sharedMaterials = row;
+            }
             props.AddBasin(root, new Vector3(21.4f, TerrainHeight(21.4f, 8.2f, false), 8.2f), 2.4f, 13); AuthoredPropCount++;
             foreach (var p in new[] { new Vector3(-13.8f, 0, -3f), new Vector3(5, 0, 5.5f), new Vector3(26.8f, 0, 10.2f), new Vector3(11.4f, 0, -3.5f) })
             {
@@ -374,6 +422,38 @@ namespace PathOfDawn.Presentation
                 Rock(root, new Vector3(x, TerrainHeight(x, z, river), z), 1.4f + (i % 3) * .38f, i + 40);
             }
         }
+
+        void BuildBorderGroves(Transform root, bool river)
+        {
+            // These broad silhouettes dress the real camera's empty margins.
+            // Shrubs and the new rocks have no colliders; all existing physical
+            // boundaries, courts, NPCs and walking routes remain unchanged.
+            var groups = river ? new[] {
+                new Vector2(-39,-10), new Vector2(-38,-1), new Vector2(-27,-17),
+                new Vector2(-28,2), new Vector2(-19,7), new Vector2(-4,-17),
+                new Vector2(18,-17), new Vector2(35,-17)
+            } : new[] {
+                new Vector2(-40,-11), new Vector2(-39,-5), new Vector2(-39,2),
+                new Vector2(-30,-16), new Vector2(-21,-16), new Vector2(-23,3),
+                new Vector2(-7,24), new Vector2(13,24), new Vector2(32,24)
+            };
+            for (int group = 0; group < groups.Length; group++)
+            {
+                var center = groups[group];
+                for (int i = 0; i < 4; i++)
+                {
+                    float angle = i * 2.11f + group * .7f;
+                    Vector2 p = center + new Vector2(Mathf.Cos(angle) * (i == 0 ? .3f : 1.25f), Mathf.Sin(angle) * 1.35f);
+                    if (NearRoute(p, 3.2f) || !river && OnPavedCourt(p)) continue;
+                    float height = i == 0 ? 1.85f : i == 1 ? 1.35f : i == 2 ? 1.65f : 1.10f;
+                    props.AddShrub(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), height, group * 37 + i * 73, i);
+                    AuthoredPropCount++;
+                }
+                Vector2 stone = center + new Vector2(-1.2f, -.55f);
+                if (!NearRoute(stone, 3.2f))
+                    Rock(root, new Vector3(stone.x, TerrainHeight(stone.x, stone.y, river), stone.y), 1.05f + group % 3 * .18f, group + 80, false);
+            }
+        }
         bool NearRoute(Vector2 p, float radius)
         {
             for (int i = 0; i < route.Count; i++)
@@ -399,7 +479,7 @@ namespace PathOfDawn.Presentation
             }
             MeshObject("Meadow individual grass blades", root, FlatMesh("Crossed grass blades", v.ToArray(), t.ToArray()), position, foliage, false);
         }
-        void Rock(Transform root, Vector3 position, float size, int seed)
+        void Rock(Transform root, Vector3 position, float size, int seed, bool collision = true)
         {
             const int sides = 9; var v = new Vector3[sides * 3 + 2]; var t = new List<int>();
             v[0] = Vector3.zero; int top = v.Length - 1; v[top] = new Vector3(.12f * size, size * .76f, -.04f * size);
@@ -412,7 +492,7 @@ namespace PathOfDawn.Presentation
                 if (ring < 2) { t.Add(k); t.Add(next); t.Add(next + sides); t.Add(k); t.Add(next + sides); t.Add(k + sides); }
                 else { t.Add(k); t.Add(next); t.Add(top); }
             }
-            MeshObject("Weathered river limestone", root, FlatMesh("Irregular faceted limestone", v, t.ToArray()), position, seed % 3 == 0 ? chalk : limestone, size > .5f);
+            MeshObject("Weathered river limestone", root, FlatMesh("Irregular faceted limestone", v, t.ToArray()), position, seed % 3 == 0 ? chalk : limestone, size > .5f && collision);
         }
         void BuildBoundary(Transform root, bool river)
         {
@@ -430,21 +510,21 @@ namespace PathOfDawn.Presentation
         void ConfigureLight()
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(.51f, .63f, .70f);
-            RenderSettings.ambientEquatorColor = new Color(.43f, .46f, .32f);
-            RenderSettings.ambientGroundColor = new Color(.23f, .26f, .18f);
+            RenderSettings.ambientSkyColor = new Color(.43f, .62f, .72f);
+            RenderSettings.ambientEquatorColor = new Color(.31f, .43f, .39f);
+            RenderSettings.ambientGroundColor = new Color(.16f, .25f, .24f);
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.ExponentialSquared;
-            RenderSettings.fogColor = new Color(.67f, .73f, .61f); RenderSettings.fogDensity = .0105f;
+            RenderSettings.fogColor = new Color(.41f, .62f, .61f); RenderSettings.fogDensity = .013f;
             var sunObject = Node("Late afternoon sun", transform); sunObject.rotation = Quaternion.Euler(48, -29, 0);
             var sun = sunObject.gameObject.AddComponent<Light>(); sun.type = LightType.Directional; sun.color = new Color(1, .89f, .65f);
-            sun.intensity = 1.60f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
+            sun.intensity = 1.48f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
             RenderSettings.sun = sun;
             var volume = Node("HD2D daylight and distance grade", transform).gameObject.AddComponent<Volume>(); volume.isGlobal = true;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); volume.profile = profile;
             profile.Add<Tonemapping>().mode.Override(TonemappingMode.ACES);
-            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(9); color.saturation.Override(5); color.postExposure.Override(.04f);
-            var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.12f); bloom.threshold.Override(1.08f); bloom.scatter.Override(.48f);
-            var vignette = profile.Add<Vignette>(); vignette.intensity.Override(.16f); vignette.smoothness.Override(.55f);
+            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(7); color.saturation.Override(7); color.postExposure.Override(.12f);
+            var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.23f); bloom.threshold.Override(1.10f); bloom.scatter.Override(.58f);
+            var vignette = profile.Add<Vignette>(); vignette.intensity.Override(.19f); vignette.smoothness.Override(.65f);
             var depth = profile.Add<DepthOfField>(); depth.mode.Override(DepthOfFieldMode.Gaussian);
             depth.gaussianStart.Override(23f); depth.gaussianEnd.Override(42f); depth.gaussianMaxRadius.Override(.65f);
         }
@@ -477,15 +557,20 @@ namespace PathOfDawn.Presentation
         }
         Texture2D MeadowTexture()
         {
-            var texture = new Texture2D(128, 128, TextureFormat.RGBA32, true, false) {
-                name = "Pilgrimage runtime meadow grain", wrapMode = TextureWrapMode.Repeat, filterMode = FilterMode.Bilinear
+            const int side = 256;
+            var texture = new Texture2D(side, side, TextureFormat.RGBA32, true, false) {
+                name = "Storybook soft olive meadow grain", wrapMode = TextureWrapMode.Repeat, filterMode = FilterMode.Trilinear
             };
-            var pixels = new Color[128 * 128]; var random = new System.Random(20261030);
-            for (int y = 0; y < 128; y++) for (int x = 0; x < 128; x++)
+            var pixels = new Color[side * side]; var random = new System.Random(20261102);
+            for (int y = 0; y < side; y++) for (int x = 0; x < side; x++)
             {
-                float grain = .85f + (float)random.NextDouble() * .24f;
-                float patch = .96f + Mathf.Sin(x * .16f + Mathf.Sin(y * .13f)) * .045f;
-                pixels[y * 128 + x] = new Color(grain * patch, grain * patch, grain * .92f * patch, 1);
+                // Low-contrast coherent variation replaces the old harsh
+                // pixel noise. Fine detail comes from the actual windblown
+                // grass, while this texture stays quiet beneath the actors.
+                float broad = Mathf.PerlinNoise(x * .022f, y * .022f);
+                float fine = Mathf.PerlinNoise(x * .18f + 7, y * .18f + 3);
+                float grain = .91f + broad * .16f + fine * .055f + (float)random.NextDouble() * .035f;
+                pixels[y * side + x] = new Color(grain * .95f, grain, grain * .96f, 1);
             }
             texture.SetPixels(pixels); texture.Apply(true, true); textures.Add(texture); return texture;
         }

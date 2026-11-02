@@ -1,0 +1,256 @@
+{
+  "releaseProfile": "quest",
+  "date": "2026-10-30",
+  "updatedUtc": "2026-10-30T06:32:32.344131+00:00",
+  "gameRevisions": {
+    "FantasyCards": "fm-quest-2026-10-30",
+    "PathOfDawn": "gospel-journey-2026-10-30"
+  },
+  "currentTargets": [
+    "Web"
+  ],
+  "contentVersions": {
+    "FantasyCards": "fm-classic-0.1.0",
+    "PathOfDawn": "gospel-0.1.0"
+  },
+  "scope": "Current Quest Web-only economy and free-field revisions through the quest release profile. No current Windows build is claimed; prior Windows ZIPs are historical. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
+  "core": {
+    "passed": 253,
+    "failed": 0,
+    "notExecuted": 0,
+    "results": {
+      "file": "Artifacts/Validation/Quest/Core/core-tests.trx",
+      "sha256": "a1b881ad22da6d7e4428e2159b13814ae597a40d6141adb2b1ab73a99b9c980f",
+      "bytes": 336418
+    },
+    "binding": {
+      "file": "Artifacts/Validation/Quest/Core/binding.json",
+      "sha256": "f23b79544778d74f2bd0b1f4b3afc778189706ad2580b20baa65e772ecfbb954",
+      "bytes": 35836
+    }
+  },
+  "native": {
+    "FantasyCards": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "mechanicalStatus": "passed",
+      "sourceFingerprint": "fd212a90b672536bb502debd0c69f254657dc9c9ab3076d9b1e5ae2ec684763d",
+      "binding": {
+        "file": "Artifacts/Validation/Quest/Native/FantasyCards/binding.json",
+        "sha256": "be6f0f5b38fa17dfa94f751e29099720270b3b119f7bb57aadb88971107b80bf",
+        "bytes": 586
+      },
+      "results": {
+        "file": "Artifacts/Validation/Quest/Native/FantasyCards/native.xml",
+        "sha256": "07738ba7531c8498d0e1b8ae0a5327afb9a003583da8655b0288ed6e6d00e127",
+        "bytes": 6682
+      },
+      "rootReview": {
+        "status": "approved",
+        "evidence": {
+          "file": "Artifacts/Validation/Quest/Root/cards-native-review.json",
+          "sha256": "ea54018e27326e97e89738e90100c2cfdb44579b58f2e81d1d931df120859f4b",
+          "bytes": 3170
+        }
+      }
+    },
+    "PathOfDawn": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "mechanicalStatus": "passed",
+      "sourceFingerprint": "cd016e9abd2c502b66f657af3d7726dbc3604da411688f910e8abe3373bfdbe4",
+      "binding": {
+        "file": "Artifacts/Validation/Quest/Native/PathOfDawn/binding.json",
+        "sha256": "bf9a2ec920fe7934688b3594eeedc108f454c7900307616cc98a9385bc82bffc",
+        "bytes": 582
+      },
+      "results": {
+        "file": "Artifacts/Validation/Quest/Native/PathOfDawn/native.xml",
+        "sha256": "7408c35a3d5da3cc0288bcce3bd059ab9eefde7c3e242cd7786c5f6909628fb3",
+        "bytes": 4260
+      },
+      "rootReview": {
+        "status": "approved",
+        "evidence": {
+          "file": "Artifacts/Validation/Quest/Root/gospel-native-review.json",
+          "sha256": "fc36dda7337e7627b5ed1a3e4bb2f04829e3d0c9d44c7344640c8f3f1140e81b",
+          "bytes": 3016
+        }
+      }
+    }
+  },
+  "builds": {
+    "FantasyCards": {
+      "Web": {
+        "result": "Succeeded",
+        "revision": "fm-quest-2026-10-30",
+        "sourceFingerprint": "fd212a90b672536bb502debd0c69f254657dc9c9ab3076d9b1e5ae2ec684763d",
+        "errors": "0",
+        "evidence": {
+          "file": "/tmp/firstgame-quest-builds/FantasyCards/Web/BuildEvidence.txt",
+          "sha256": "d1eb7094fa3406e3c6e821a80a68c358e6e6b4a7d4f923f7dd3e1db83910a0a4",
+          "bytes": 258
+        },
+        "inputs": {
+          "file": "/tmp/firstgame-quest-builds/FantasyCards/Web/BuildInputs.json",
+          "sha256": "1ae1656f5d2db0dc2fd05658005a7a5e8c06b2ca2ae758411dc3ef8356bc5dfb",
+          "bytes": 8088697
+        },
+        "runtimeFiles": 15365,
+        "runtimeBytes": 862567714
+      }
+    },
+    "PathOfDawn": {
+      "Web": {
+        "result": "Succeeded",
+        "revision": "gospel-journey-2026-10-30",
+        "sourceFingerprint": "cd016e9abd2c502b66f657af3d7726dbc3604da411688f910e8abe3373bfdbe4",
+        "errors": "0",
+        "evidence": {
+          "file": "/tmp/firstgame-quest-builds/PathOfDawn/Web/BuildEvidence.txt",
+          "sha256": "459d4906de5a6814d59d7da0106e7b4ec3c6ed69ddf2dcaf2aea00cffee83570",
+          "bytes": 410
+        },
+        "inputs": {
+          "file": "/tmp/firstgame-quest-builds/PathOfDawn/Web/BuildInputs.json",
+          "sha256": "6da7083d88cf3760ba585c0c95d6907de39d9edd75d4396964c77cbe164dec15",
+          "bytes": 366382
+        },
+        "runtimeFiles": 5,
+        "runtimeBytes": 69499882
+      }
+    }
+  },
+  "browser": {
+    "FantasyCards": {
+      "Desktop720": {
+        "mechanicalStatus": "passed",
+        "checks": 47,
+        "report": {
+          "file": "Artifacts/Validation/Quest/Desktop720/FantasyCards/report.json",
+          "sha256": "19fddc3c45bfd8f37a482ab36993cc7bf0c65686b6fc038de091b3463899761d",
+          "bytes": 12413707
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 10
+      },
+      "Mobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 50,
+        "report": {
+          "file": "Artifacts/Validation/Quest/Mobile844/FantasyCards/report.json",
+          "sha256": "41acc44d9d9cd9d323bacc2057a8bcffff0ece5df855cdb0a36aaf0d78358e2e",
+          "bytes": 12414845
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 10
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 39,
+        "report": {
+          "file": "Artifacts/Validation/Quest/PublicMobile844/FantasyCards/report.json",
+          "sha256": "46471c4302eec57216aa09927b5b1b9f65c44f204692acf6d71624e9868b216d",
+          "bytes": 22295518
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
+      }
+    },
+    "PathOfDawn": {
+      "Desktop720": {
+        "mechanicalStatus": "passed",
+        "checks": 27,
+        "report": {
+          "file": "Artifacts/Validation/Quest/Desktop720/PathOfDawn/report.json",
+          "sha256": "78d06aa092b8a4e5dba3f1283357e20d6d194c508d159910d781bfe68a09f90f",
+          "bytes": 137820
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 11
+      },
+      "Mobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 31,
+        "report": {
+          "file": "Artifacts/Validation/Quest/Mobile844/PathOfDawn/report.json",
+          "sha256": "980f6dae76ae5ddce2e21717de0ce7737d39206383bfe09d36624d65c3d1b174",
+          "bytes": 147208
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 12
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 21,
+        "report": {
+          "file": "Artifacts/Validation/Quest/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "c32088591698a4047e823203453d555810fc29ff929ad31d84f267ddde2b2b40",
+          "bytes": 78298
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 5
+      }
+    }
+  },
+  "publication": {
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "stageManifest": {
+      "file": "Artifacts/QuestWork/staged-site/build-manifest.json",
+      "sha256": "07db63c9912224b6e51169cbb37eac153d76b8d6c02071fd754b1d08b288341c",
+      "bytes": 2100640
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Quest/PublicPortal/report.json",
+      "sha256": "ff227c4e11ba8f3903f45d647923932561a6c716cad94a4871273ea29b3b7694",
+      "bytes": 15673683
+    },
+    "verifiedFiles": 15402,
+    "scope": "All changed files freshly fetched; unchanged card images bound to prior actual GETs and matching old/new deployed Git objects. Current portal originals reviewed by Root."
+  },
+  "limitations": [
+    "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
+    "Native save fixtures and real browser storage/full reload are separate checks.",
+    "Actual WebAudio route/PCM evidence is not human speaker listening.",
+    "Actual OS/tab visibility pause was not measurable in this virtual Chromium; controller regressions and normal-focus PCM are separate evidence.",
+    "Root original-image review is not user aesthetic approval.",
+    "Original archive metadata/media and implemented playable abilities are separate scopes."
+  ],
+  "cardMediaLastAudit": {
+    "revision": "fm-polish-2026-10-29",
+    "releaseReady": true,
+    "inventoryOnly": false,
+    "sourceRecords": 15350,
+    "verifiedStreamedImages": 15350,
+    "missingStreamedImages": 0,
+    "deliveryBytes": 749704026,
+    "playableCoverage": {
+      "total": 2646,
+      "embeddedPreserved": 605,
+      "streamedAvailable": 2041,
+      "artAvailable": 2646,
+      "missing": 0
+    },
+    "archiveCoverage": {
+      "total": 15350,
+      "artAvailableIncludingPreservedResources": 15350,
+      "missing": 0
+    },
+    "missingIdLedger": "Tools/Data/Renewal/missing-media.json",
+    "evidence": {
+      "file": "Tools/Data/Renewal/media-verification.json",
+      "sha256": "f6377c3df8c0dc88973082ca6c10c2f186549897d97db063d89d7ffb22830509",
+      "bytes": 545
+    },
+    "scope": "Last retained audit; in-progress download counts are not a complete media release pass."
+  }
+}

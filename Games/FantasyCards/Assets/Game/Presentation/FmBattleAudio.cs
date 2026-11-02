@@ -43,6 +43,11 @@ namespace FantasyCards.Presentation
             Initialize();
             host.Play(heads ? "coin-head" : "coin-tail", pan, coinIndex);
         }
+        /// <summary>Audible weight follows the already resolved damage, never a second roll.</summary>
+        public static void PlayImpact(int actualDamage, float pan = 0)
+        {
+            PlayAt(actualDamage <= 0 ? "shield" : actualDamage >= 6 ? "hit-heavy" : "hit", pan);
+        }
         public static void SetMuted(bool value)
         {
             PlayerPrefs.SetInt(MutedKey, value ? 1 : 0); PlayerPrefs.Save();

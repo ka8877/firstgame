@@ -26,6 +26,7 @@ namespace PathOfDawn.Presentation
         public string MigratedSourceSlot { get; private set; } = "";
         public bool InGame { get; private set; }
         public bool IsModal => Ui != null && Ui.IsModal;
+        public GospelReading LastAcquiredReading { get; private set; }
         public float Zoom => CameraRig != null ? CameraRig.Zoom : 7.2f;
         public Vector3 ObjectivePosition => Chronicle?.CurrentQuest != null
             ? World.PositionForQuest(Chronicle.CurrentQuest) : new Vector3(34, World.HeightAt(34, 7), 7);
@@ -39,7 +40,7 @@ namespace PathOfDawn.Presentation
         const string ActiveSlotKey = "GOSPEL.activeSlot";
         string activeSlot, renderedChapter, renderedNpcQuest;
         Transform npcRoot;
-        BgmPlayer music;
+        GospelStorybookAudio music;
         float saveClock;
 
         void Start()
@@ -68,10 +69,11 @@ namespace PathOfDawn.Presentation
             CameraRig.InputEnabled = false;
             Player.InteractRequested += Interact;
             activeSlot = PlayerPrefs.GetString(ActiveSlotKey, GospelJourney.SaveSlot);
-            music = BgmPlayer.Attach(gameObject, "Audio/dawn-on-galilee", "GOSPEL.music", .5f);
+            music = GospelStorybookAudio.Attach(gameObject, Player);
             Ui = gameObject.AddComponent<GospelPilgrimageUi>();
             Ui.Build(KoreanFont != null ? KoreanFont : Resources.Load<TMP_FontAsset>("Fonts/Korean"));
             Ui.OnUserGesture = music.NotifyUserGesture;
+            Ui.OnUiClick = () => music.Play("ui");
             Ui.OnStart = StartNew;
             Ui.OnContinue = ContinueGame;
             Ui.OnResume = Resume;
@@ -87,7 +89,9 @@ namespace PathOfDawn.Presentation
             Ui.OnMove = Player.SetTouchInput;
             Ui.OnRun = Player.SetRun;
             Ui.OnJump = Player.RequestJump;
+            Ui.OnDash = Player.RequestDash;
             Ui.OnInteract = Interact;
+            Ui.OnPageTurn = () => music.Play("page");
             Ui.OnMusicVolume = music.SetVolume;
             Ui.OnMusicMute = music.SetMuted;
             ShowTitle();
@@ -107,7 +111,7 @@ namespace PathOfDawn.Presentation
                 else if (keys.iKey.wasPressedThisFrame) { if (Ui.CurrentView == "status") Resume(); else ShowStatus(); }
                 else if (keys.bKey.wasPressedThisFrame) { if (Ui.CurrentView == "inventory") Resume(); else ShowInventory(); }
                 else if (keys.mKey.wasPressedThisFrame) { if (Ui.CurrentView == "bible") Resume(); else ShowBible(); }
-                else if (keys.jKey.wasPressedThisFrame) { if (Ui.CurrentView == "journal") Resume(); else ShowQuestLog(); }
+                else if (keys.jKey.wasPressedThisFrame) { if (Ui.CurrentView == "quests") Resume(); else ShowQuestLog(); }
                 else if (keys.hKey.wasPressedThisFrame && !IsModal) Ui.ToggleScenicView();
             }
             Player.Enabled = !IsModal;
@@ -123,10 +127,11 @@ namespace PathOfDawn.Presentation
             InGame = false;
             Player.Enabled = false;
             CameraRig.InputEnabled = false;
+            music.SetChapter("birth");
             Ui.ShowTitle(PersistentSaves.Exists(activeSlot));
         }
 
-        static string NewSlot() => GospelJourney.SaveSlot + "-pilgrimage-" + DateTime.UtcNow.Ticks;
+        static string NewSlot() => GospelJourney.SaveSlot + "-storybook-" + DateTime.UtcNow.Ticks;
 
         public void StartNew()
         {
@@ -134,6 +139,7 @@ namespace PathOfDawn.Presentation
             Journey.SetPresentationSpace(GospelJourney.PilgrimageSpace);
             activeSlot = NewSlot();
             MigratedSourceSlot = "";
+            LastAcquiredReading = null;
             renderedChapter = null;
             InGame = true;
             saveClock = 0;
@@ -155,6 +161,7 @@ namespace PathOfDawn.Presentation
             {
                 var load = GospelPilgrimageSave.Prepare(GospelSaveCodec.Decode(payload));
                 Journey = load.Journey;
+                LastAcquiredReading = null;
                 MigratedSourceSlot = load.RequiresFork ? sourceSlot : "";
                 activeSlot = load.RequiresFork ? NewSlot() : sourceSlot;
                 InGame = true;
@@ -197,6 +204,7 @@ namespace PathOfDawn.Presentation
         void ConfigureChapter(string chapter, bool relocate)
         {
             World.SetChapter(chapter);
+            music?.SetChapter(chapter == "baptism" ? "jordan" : chapter);
             Player.SetBounds(World.Bounds);
             Actor.SetAdult(Chronicle != null && Chronicle.IsAdult);
             Actor.SetLamp(Journey != null && Journey.LampEquipped);
@@ -228,7 +236,7 @@ namespace PathOfDawn.Presentation
                 }
             }
             RefreshNpc();
-            if (Chronicle.Stage == GospelQuestStage.Reading) { ShowReading(); return; }
+            if (Chronicle.Stage == GospelQuestStage.Reading) { ShowStory(); return; }
             Ui.ShowHud(Journey, Actor.CurrentSprite);
             World.SetObjective(ObjectivePosition, !Chronicle.IsComplete);
             Player.Enabled = true;
@@ -248,24 +256,35 @@ namespace PathOfDawn.Presentation
             if (Chronicle.Stage == GospelQuestStage.Talk && !Chronicle.TryTalk(quest.NpcId, out var response))
             { Ui.Toast(response); return; }
             Save(false);
-            if (Chronicle.Stage == GospelQuestStage.Reading) ShowReading();
+            if (Chronicle.Stage == GospelQuestStage.Reading) ShowStory();
         }
 
-        void ShowReading()
+        void ShowStory()
         {
             Player.Enabled = false;
             CameraRig.InputEnabled = false;
-            Ui.ShowDialogue(Chronicle, () =>
+            int eventIndex = Chronicle.QuestIndex, beatIndex = Chronicle.DialogueIndex;
+            var openedStory = Chronicle;
+            Ui.ShowStory(Chronicle, () =>
             {
-                int before = Chronicle.DiscoveredCount;
-                var reading = Chronicle.CurrentReading;
-                Chronicle.AdvanceDialogue();
-                if (Chronicle.DiscoveredCount > before)
+                // A replaced/double-clicked scene callback cannot skip the next
+                // beat, award a later event or mutate a newly loaded story.
+                if (!InGame || !ReferenceEquals(Chronicle, openedStory) || Chronicle.Stage != GospelQuestStage.Reading ||
+                    Chronicle.QuestIndex != eventIndex || Chronicle.DialogueIndex != beatIndex) return;
+                if (!Chronicle.AdvanceStory(out var acquired)) return;
+                music.Play("dialogue");
+                LastAcquiredReading = acquired;
+                if (acquired != null)
                 {
                     var pages = Chronicle.BookPages;
                     for (int i = 0; i < pages.Count; i++)
-                        if (pages[i].ReadingId == reading.Id) { Ui.FocusBiblePage(i); break; }
-                    Ui.Toast("성경에 새 말씀이 기록되었습니다 · " + reading.Title);
+                        if (pages[i].ReadingId == acquired.Id) { Ui.FocusBiblePage(i); break; }
+                    // Completion owns the discovery. The reward and Bible are
+                    // presentations of an already saved page, never read gates.
+                    Save(false);
+                    music.Play("scripture");
+                    Ui.ShowStoryReward(acquired, Chronicle.DiscoveredCount, Chronicle.TotalReadings, Resume);
+                    return;
                 }
                 Save(false);
                 Resume();
@@ -289,7 +308,7 @@ namespace PathOfDawn.Presentation
         }
 
         public void ShowBible()
-        { if (Journey == null) return; Player.Enabled = false; Ui.ShowBible(Chronicle.BookPages, Chronicle.DiscoveredCount); }
+        { if (Journey == null) return; Player.Enabled = false; CameraRig.InputEnabled = false; music.Play("page"); Ui.ShowBible(Chronicle.BookPages, Chronicle.DiscoveredCount); }
         public void ShowStatus()
         { if (Journey == null) return; Player.Enabled = false; Ui.ShowStatus(Journey, Actor.CurrentSprite, Player.MeasuredSpeed); }
         public void ShowInventory()

@@ -563,17 +563,25 @@ namespace FantasyCards.Core
                 {
                     if (!p.units.Contains(unit)) continue;
                     if (++removals > 256) throw new InvalidOperationException("카드 파괴 연쇄가 안전 한도를 넘었습니다.");
-                    p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment);
-                    Log("defeat", CardCatalog.Get(unit.definitionId).name + " 전장 이탈", 0, player, source: unit, sourceOwner: player);
-                    OnPremiumDeath(unit, player);
-                    OnPolishDeath(unit, player);
-                    if (unit.definitionId == RestorationCardSkills.LandRuin)
-                    {
-                        var opponent = State.players[1 - player]; int lost = opponent.levelPoints > 0 ? 1 : 0;
-                        opponent.levelPoints -= lost;
-                        Log("skill", "랜드트랩퍼 · 랜드루인 · 상대 LP -" + lost, lost, player, source: unit, sourceOwner: player, targetOwner: 1 - player);
-                    }
+                    RemoveUnitToDiscard(player, unit, "defeat");
                 }
+            }
+        }
+        void RemoveUnitToDiscard(int player, UnitState unit, string kind)
+        {
+            var p = State.players[player];
+            p.units.Remove(unit); p.discard.Add(new CardInstance(unit.instanceId, unit.definitionId)); p.discard.AddRange(unit.equipment);
+            Log(kind, CardCatalog.Get(unit.definitionId).name + (kind == "discard-field" ? " · 유닛과 장착 아이템 소각" : " 전장 이탈"),
+                kind == "discard-field" ? 1 + unit.equipment.Count : 0, player, source: unit, sourceOwner: player);
+            // Voluntary field destruction uses the same printed destruction
+            // abilities and stable instances as a combat or spell destruction.
+            OnPremiumDeath(unit, player);
+            OnPolishDeath(unit, player);
+            if (unit.definitionId == RestorationCardSkills.LandRuin)
+            {
+                var opponent = State.players[1 - player]; int lost = opponent.levelPoints > 0 ? 1 : 0;
+                opponent.levelPoints -= lost;
+                Log("skill", "랜드트랩퍼 · 랜드루인 · 상대 LP -" + lost, lost, player, source: unit, sourceOwner: player, targetOwner: 1 - player);
             }
         }
         void DamagePlayer(int player, int amount, string cause, UnitState source = null, int sourceOwner = -1)
@@ -605,11 +613,12 @@ namespace FantasyCards.Core
             UnitState source = null, int sourceOwner = -1, UnitState target = null, int targetOwner = -1,
             CardInstance card = null, int lane = -1, CardInstance targetCard = null,
             int coinIndex = 0, bool coinHeads = false, string stat = null,
-            bool hasStatTransition = false, int beforeAttack = 0, int beforeDefense = 0, int beforeHealth = 0, int additionalAttackDamage = 0)
+            bool hasStatTransition = false, int beforeAttack = 0, int beforeDefense = 0, int beforeHealth = 0, int additionalAttackDamage = 0,
+            int destinationLane = -1)
         {
             var item = new BattleEvent { sequence = State.events.Count + 1, turn = State.turn, kind = kind, text = text,
                 amount = amount, actor = actor, hasPresentationData = true, sourcePlayer = sourceOwner,
-                targetPlayer = targetOwner, coinIndex = coinIndex, coinHeads = coinHeads, stat = stat,
+                targetPlayer = targetOwner, targetLane = destinationLane, coinIndex = coinIndex, coinHeads = coinHeads, stat = stat,
                 hasStatTransition = hasStatTransition, beforeAttack = beforeAttack, beforeDefense = beforeDefense, beforeHealth = beforeHealth, additionalAttackDamage = additionalAttackDamage };
             if (source != null)
             {

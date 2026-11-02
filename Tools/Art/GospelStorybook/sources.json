@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-02",
+  "origin": "OpenAI image generation; original game illustrations, artistic depiction of recorded events, not historical photographs.",
+  "assets": [
+    {
+      "asset": "Games/PathOfDawn/Assets/Resources/Art/GospelStorybook/book.png",
+      "original": "/workspace/generated_images/exec-67e53e2c-67ce-465f-81fb-bf29d71417fa.png",
+      "sha256": "0310440a6227b2b88c5d175088b7adadacf94a5859563b5ee107536831a2327f",
+      "bytes": 2178570,
+      "method": "Byte-identical copy. No source raster edit; UI selects atlas UV at runtime."
+    },
+    {
+      "asset": "Games/PathOfDawn/Assets/Resources/Art/GospelStorybook/scenes.png",
+      "original": "/workspace/generated_images/exec-149e893f-a091-4edf-b6a3-f28740598b64.png",
+      "sha256": "19d81df25b444369b7a6b56c65b46d3c98ba358d218aaf06874f9b091e930003",
+      "bytes": 2721907,
+      "method": "Byte-identical copy of image-generation correction to remove anachronistic domes/minarets in original city skyline. Earlier full original preserved in generated_images. Runtime UV only."
+    }
+  ],
+  "atlasUVs": {
+    "birth-road": [
+      0,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "birth-manger": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "birth-shepherds": [
+      0,
+      0,
+      0.5,
+      0.5
+    ],
+    "birth-temple": [
+      0.5,
+      0,
+      0.5,
+      0.5
+    ]
+  },
+  "supersededOriginals": [
+    {
+      "asset": "Games/PathOfDawn/Assets/Resources/Art/GospelStorybook/scenes.png",
+      "original": "/workspace/generated_images/exec-896519e0-af78-43d5-aa49-3632d125d694.png",
+      "sha256": "31a175576d6cdf1e4e8e0745d8fe8340c25eb851704783462c827a91851adf60",
+      "bytes": 2983269,
+      "method": "Byte-identical copy. No source raster edit; UI selects atlas UV at runtime.",
+      "preservedArchive": "Tools/Art/GospelStorybook/History/scenes-before-first-century-skyline.png"
+    }
+  ]
+}
