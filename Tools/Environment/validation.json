@@ -1,7 +1,7 @@
 {
   "releaseProfile": "nativity",
   "date": "2026-11-02",
-  "updatedUtc": "2026-11-02T11:32:14.901323+00:00",
+  "updatedUtc": "2026-11-02T12:15:45.931183+00:00",
   "gameRevisions": {
     "FantasyCards": "fm-nativity-2026-11-02",
     "PathOfDawn": "gospel-nativity-2026-11-02"
@@ -148,6 +148,18 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 4
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 41,
+        "report": {
+          "file": "Artifacts/Validation/Nativity/PublicMobile844/FantasyCards/report.json",
+          "sha256": "3d8d9e04d34603121fd97032ea76e616b03896ec7b49fb5a3ebd55341227549d",
+          "bytes": 22296715
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
       }
     },
     "PathOfDawn": {
@@ -174,13 +186,36 @@
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 8
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 47,
+        "report": {
+          "file": "Artifacts/Validation/Nativity/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "cbc406d76fdd035d01ee0f9bd7939044bd1ce07475f78b6caebd71e7b16b2a3e",
+          "bytes": 280513
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 6
       }
     }
   },
   "publication": {
-    "status": "pending",
+    "status": "verified",
     "url": "https://ka8877.github.io/firstgame/",
-    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
+    "stageManifest": {
+      "file": "/tmp/firstgame-nativity-staged-site/build-manifest.json",
+      "sha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+      "bytes": 2100655
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+      "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+      "bytes": 16927726
+    },
+    "verifiedFiles": 15413,
+    "scope": "Every non-image file freshly fetched after this deployment; only15350 unchanged JPEG byte identities inherit the explicitly dated earlier Reprise actual GETs and Root-approved publication through pinned preserved inputs/producer snapshots plus equal before/new deployed Git blobs. No previous game test is a new pass. Current portal originals reviewed by Root."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
