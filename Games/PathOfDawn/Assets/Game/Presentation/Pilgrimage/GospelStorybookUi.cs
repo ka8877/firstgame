@@ -30,7 +30,10 @@ namespace PathOfDawn.Presentation
             int spreadCount = Mathf.Max(1, (scripturePages.Count + 1) / 2);
             scriptureSpread = Mathf.Clamp(spread, 0, spreadCount - 1);
             Begin("bible", true, false);
-            var binding = OpenBook("이야기로 채워 가는 성경", scriptureFound + " / " + scripturePages.Count + " 말씀");
+            var binding = OpenBook("성경전서", scriptureFound + " / " + scripturePages.Count + " 말씀");
+            Text(layer, "신약 · 복음서의 기록", 283, 27, 431, 25, 18, Quiet);
+            B(layer, "표지", 748, 18, 74, 38, ShowBibleCover);
+            B(layer, "차례", 834, 18, 74, 38, ShowBibleContents);
             for (int side = 0; side < 2; side++)
             {
                 int index = scriptureSpread * 2 + side;
@@ -61,7 +64,7 @@ namespace PathOfDawn.Presentation
             Text(layer, progress, 925, 24, 283, 29, 21, Gold, TextAlignmentOptions.Right);
             var binding = Rect(layer, "Open Scripture binding", 70, 60, 1140, 641.25f);
             var art = binding.gameObject.AddComponent<RawImage>();
-            art.texture = Resources.Load<Texture2D>("Art/GospelStorybook/book"); art.raycastTarget = false;
+            art.texture = Resources.Load<Texture2D>("Art/GospelNativity/book-spread") ?? Resources.Load<Texture2D>("Art/GospelStorybook/book"); art.raycastTarget = false;
             if (art.texture == null) art.color = new Color(.96f, .92f, .82f);
             return binding;
         }
@@ -72,18 +75,69 @@ namespace PathOfDawn.Presentation
         void Inscribe(RectTransform leaf, GospelReading reading, int page)
         {
             if (reading == null) { BlankLeaf(leaf, page); return; }
-            Text(leaf, "복음서의 기록", 0, 0, 417, 24, 16, PageQuiet);
-            var title = Text(leaf, reading.Title, 0, 35, 417, 65, 28, PageInk);
-            title.enableAutoSizing = true; title.fontSizeMin = 22; title.fontSizeMax = 28;
-            Text(leaf, reading.Reference, 0, 105, 417, 31, 22, new Color(.43f, .29f, .11f));
-            Line(leaf, 0, 144, 417, new Color(.39f, .30f, .14f, .30f));
-            var body = Scroll(leaf, reading.Text, 0, 163, 417, 231, 24, PageInk);
+            int space = reading.Reference.IndexOf(' ');
+            string bookName = space > 0 ? reading.Reference.Substring(0, space) : "복음서";
+            Text(leaf, bookName, 0, 0, 417, 33, 27, PageInk, TextAlignmentOptions.Center, true);
+            Text(leaf, reading.Reference, 0, 43, 417, 27, 19, new Color(.43f, .29f, .11f), TextAlignmentOptions.Center);
+            Line(leaf, 0, 79, 417, new Color(.39f, .30f, .14f, .30f));
+            var body = Scroll(leaf, reading.Text, 0, 96, 417, 295, 24, PageInk);
             body.gameObject.name = "Discovered Scripture text " + reading.Id;
             body.lineSpacing = 8;
             // Recalculate the actual scrolling content after changing typography.
-            ResizeScroll(body, 417, 231);
-            Text(leaf, "개역한글 · 본문은 위아래로 읽기", 0, 419, 337, 24, 16, PageQuiet);
-            Text(leaf, page.ToString(), 357, 417, 60, 27, 19, PageQuiet, TextAlignmentOptions.Right);
+            ResizeScroll(body, 417, 295);
+            Text(leaf, reading.Title, 0, 404, 337, 23, 16, PageQuiet);
+            Text(leaf, "개역한글 · 본문은 위아래로 읽기", 0, 431, 337, 21, 14, PageQuiet);
+            Text(leaf, page.ToString(), 357, 427, 60, 27, 18, PageQuiet, TextAlignmentOptions.Right);
+        }
+
+        public void ShowBibleCover()
+        {
+            if (scripturePages == null) return;
+            Begin("bible-cover", true, false);
+            Panel(layer, "Quiet Bible table", 0, 0, 1280, 720, new Color(.018f, .035f, .039f));
+            var cover = Panel(layer, "Leather Scripture cover", 365, 43, 550, 590, new Color(.16f, .065f, .047f), true);
+            Rule(cover, 23, 24, 2, 540, new Color(.52f, .35f, .20f, .8f));
+            Rule(cover, 42, 24, 466, 1, new Color(.67f, .49f, .27f, .75f));
+            Rule(cover, 42, 564, 466, 1, new Color(.67f, .49f, .27f, .75f));
+            Text(cover, "성경전서", 60, 157, 430, 75, 54, new Color(.88f, .76f, .49f), TextAlignmentOptions.Center, true).characterSpacing = 12;
+            Text(cover, "신약 · 복음서", 60, 251, 430, 37, 25, new Color(.81f, .71f, .53f), TextAlignmentOptions.Center);
+            Text(cover, "개역한글", 60, 301, 430, 28, 18, new Color(.71f, .62f, .49f), TextAlignmentOptions.Center);
+            Text(cover, "지나온 이야기에서 만난 말씀이\n이 책의 빈 면에 기록됩니다.", 60, 412, 430, 78, 22,
+                new Color(.80f, .76f, .65f), TextAlignmentOptions.Center);
+            B(layer, "차례", 72, 640, 179, 56, ShowBibleContents);
+            B(layer, "성경 펼치기", 392, 640, 280, 56, () => ShowScriptureSpread(scriptureSpread, false), true, true);
+            B(layer, "여정으로", 994, 640, 214, 56, OnResume);
+        }
+
+        public void ShowBibleContents()
+        {
+            if (scripturePages == null) return;
+            Begin("bible-contents", true, false);
+            var binding = OpenBook("성경 · 차례", scriptureFound + " / " + scripturePages.Count + " 말씀");
+            for (int side = 0; side < 2; side++)
+            {
+                var leaf = BookLeaf(binding, side);
+                Text(leaf, side == 0 ? "복음서" : "복음서 · 이어서", 0, 0, 417, 35, 27, PageInk, TextAlignmentOptions.Center, true);
+                Line(leaf, 0, 44, 417, new Color(.39f, .30f, .14f, .30f));
+                for (int row = 0; row < 10; row++)
+                {
+                    int index = side * 10 + row;
+                    if (index >= scripturePages.Count) break;
+                    var page = scripturePages[index];
+                    if (!page.IsDiscovered) { Text(leaf, "—  —  —", 0, 58 + row * 32, 417, 29, 18, PageQuiet); continue; }
+                    var hit = Rect(leaf, "Discovered contents link " + page.ReadingId, 0, 54 + row * 32, 417, 32);
+                    var target = hit.gameObject.AddComponent<Image>(); target.color = new Color(.45f, .33f, .13f, .025f);
+                    var link = hit.gameObject.AddComponent<Button>(); link.targetGraphic = target;
+                    Text(hit, page.Reference, 0, 2, 345, 28, 18, PageInk);
+                    Text(hit, (index + 1).ToString(), 350, 2, 67, 28, 18, PageQuiet, TextAlignmentOptions.Right);
+                    int selected = index;
+                    link.onClick.AddListener(() => Invoke(() => ShowScriptureSpread(selected / 2, true)));
+                }
+                Text(leaf, "기록된 본문을 누르면 해당 면을 펼칩니다.", 0, 410, 417, 34, 16, PageQuiet);
+            }
+            B(layer, "표지", 72, 640, 179, 56, ShowBibleCover);
+            B(layer, "성경 펼치기", 392, 640, 280, 56, () => ShowScriptureSpread(scriptureSpread, false));
+            B(layer, "여정으로", 994, 640, 214, 56, OnResume, true, true);
         }
 
         void BlankLeaf(RectTransform leaf, int page)
@@ -108,16 +162,17 @@ namespace PathOfDawn.Presentation
             Text(layer, scene.Title, 49, 69, 930, 46, 32, White);
             B(layer, "성경", 1082, 28, 145, 52, OnRead);
 
-            var dialogue = Panel(layer, "Story dialogue", 36, 444, 1208, 244, new Color(.017f, .039f, .044f, .91f), true);
-            Rule(dialogue, 12, 22, 2, 200, new Color(.89f, .79f, .52f, .62f));
+            var dialogue = Panel(layer, "Story dialogue", 36, 424, 1208, 264, new Color(.017f, .039f, .044f, .88f), true);
+            dialogue.gameObject.AddComponent<GospelUiMotion>();
+            Rule(dialogue, 12, 22, 2, 220, new Color(.52f, .79f, .80f, .62f));
             Text(dialogue, turn.Speaker, 27, 19, 785, 37, 28, White, TextAlignmentOptions.TopLeft, true);
             Text(dialogue, turn.IsVerbatim ? "성경 직접 인용" : turn.IsDramatized ? "극화 대화" : "이야기",
                 877, 21, 300, 29, 18, Gold, TextAlignmentOptions.Right);
-            var spoken = Scroll(dialogue, turn.Text, 27, 70, 1139, 104, 29, White);
+            var spoken = Scroll(dialogue, turn.Text, 27, 65, 1139, 134, 29, White);
             spoken.gameObject.name = "Current story dialogue text";
-            Text(dialogue, (story.DialogueIndex + 1) + " / " + story.DialogueCount,
-                28, 191, 178, 28, 19, Quiet);
-            B(dialogue, "이야기 계속", 881, 179, 295, 50, next, true, true);
+            Text(dialogue, story.CurrentStoryReference,
+                28, 207, 821, 40, 16, Quiet);
+            B(dialogue, "이야기 계속", 881, 201, 295, 50, next, true, true);
         }
 
         public void ShowStoryReward(GospelReading acquired, int count, int total, Action continueStory)
@@ -152,7 +207,18 @@ namespace PathOfDawn.Presentation
             int slash = key.LastIndexOf('/'); if (slash >= 0) key = key.Substring(slash + 1);
             Texture2D texture;
             Rect uv = new Rect(0, 0, 1, 1);
-            if (key.StartsWith("birth-", StringComparison.Ordinal))
+            if (key.StartsWith("nativity-", StringComparison.Ordinal))
+            {
+                texture = Resources.Load<Texture2D>("Art/GospelNativity/opening-scenes");
+                switch (key)
+                {
+                    case "nativity-annunciation": uv = new Rect(0, .5f, .5f, .5f); break;
+                    case "nativity-visitation": uv = new Rect(.5f, .5f, .5f, .5f); break;
+                    case "nativity-joseph": uv = new Rect(0, 0, .5f, .5f); break;
+                    default: uv = new Rect(.5f, 0, .5f, .5f); break;
+                }
+            }
+            else if (key.StartsWith("birth-", StringComparison.Ordinal))
             {
                 texture = Resources.Load<Texture2D>("Art/GospelStorybook/scenes");
                 switch (key)
@@ -173,7 +239,13 @@ namespace PathOfDawn.Presentation
             if (aspect > target)
             { float w = uv.width * target / aspect; uv = new Rect(uv.center.x - w / 2, uv.y, w, uv.height); }
             else
-            { float h = uv.height * aspect / target; uv = new Rect(uv.x, uv.center.y - h / 2, uv.width, h); }
+            {
+                float h = uv.height * aspect / target;
+                float center = uv.center.y;
+                if (key == "nativity-annunciation" || key == "nativity-visitation") center += uv.height * .12f;
+                else if (key == "nativity-joseph") center -= uv.height * .10f;
+                uv = new Rect(uv.x, Mathf.Clamp(center - h / 2, uv.y, uv.yMax - h), uv.width, h);
+            }
             // A small inset prevents bilinear sampling across the atlas seam.
             uv = new Rect(uv.x + .0006f, uv.y + .0006f, uv.width - .0012f, uv.height - .0012f);
             raw.uvRect = uv;

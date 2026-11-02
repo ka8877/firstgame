@@ -1,0 +1,40 @@
+{
+  "formatVersion": 1,
+  "revision": "gospel-nativity-2026-11-02",
+  "title": "The Quiet of Bethlehem",
+  "provider": "Original composition rendered locally with FluidR3 GM MIT instrument samples",
+  "historicalScope": "Modern illustrative Nativity music, not reconstructed ancient music or a borrowed Christmas recording.",
+  "soundfontSha256": "74594e8f4250680adf590507a306655a299935343583256f3b722c48a1bc1cb0",
+  "sampleLicense": "Tools/Audio/FluidR3-LICENSE.txt",
+  "generator": {
+    "file": "Tools/Audio/Nativity/render-birth.py",
+    "sha256": "9da433c97818dc71e642a7cf51e0ab7ad5dc32798fac9682a8fe79eb209941ce"
+  },
+  "baseRenderer": {
+    "file": "Tools/Audio/compose-soundtracks.py",
+    "sha256": "6c33c0cc4076d3a12f1c25ebe682e9ab8d5331205b091b426ec7c7755d7d759b"
+  },
+  "seconds": 84.70587301587301,
+  "sampleRate": 44100,
+  "channels": 2,
+  "loop": true,
+  "loopMethod": "Second complete musical cycle retains reverb tails; no inserted silence; three-millisecond endpoint ramps.",
+  "peakDbfs": -11.888561248779297,
+  "rmsDbfs": -25.92109239665431,
+  "clip": {
+    "file": "Games/PathOfDawn/Assets/Resources/Audio/GospelNativity/music-birth.ogg",
+    "bytes": 1071765,
+    "sha256": "42053527bafcff50207a99099bb70c6abfc3782b8457e187c66206b00469ee2d"
+  },
+  "midi": {
+    "file": "Tools/Audio/Nativity/the-quiet-of-bethlehem.mid",
+    "sha256": "f4edb411085c8e66bf1f7c9e3cdc0fad970d11e00f3dcba636cbae03d13234d1"
+  },
+  "score": {
+    "file": "Tools/Audio/Nativity/the-quiet-of-bethlehem.json",
+    "sha256": "4393191a50694c0b01166cfdb38fa587d3556f9a37ae6d869e0bb354cbc0c968"
+  },
+  "limits": [
+    "Decoded signal/loop verification is separate from human listening and acting approval."
+  ]
+}

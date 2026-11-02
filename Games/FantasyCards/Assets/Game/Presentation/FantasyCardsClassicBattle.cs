@@ -77,7 +77,7 @@ namespace FantasyCards.Presentation
                     var card = CardCatalog.Get(unit.definitionId);
                     var visual = ArcanaCardFace(panel, card, .015f, cardBottom, cardRight, cardTop, ArcanaCardMode.Field, target || selectedAttacker == unit.instanceId, unit);
                     battleUnitViews[unit.instanceId] = visual.GetComponentInChildren<FmArcanaCardSurface>().GetComponent<RectTransform>();
-                    BindCardHelp(panel.gameObject, card, () => ShowDetail(card, ShowBattle));
+                    BindCardHelp(panel.gameObject, card, () => ShowNativityUnitEquipment(owner, unit.instanceId));
                     var hover = panel.GetComponent<UiCardHover>();
                     if (hover != null) { hover.HoverScale = 1.055f; if (locked) hover.enabled = false; }
                     BindFieldDrag(panel, owner, unit.instanceId, card);

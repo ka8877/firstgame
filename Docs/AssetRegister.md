@@ -1,5 +1,9 @@
 # 자산 출처와 교체 장부
 
+## 2026-11-02 Nativity
+
+절제된 펼친 성경책과 수태고지·엘리사벳 방문·요셉의 꿈·박사 방문의4장면 atlas는 새 오리지널 생성 삽화다. 성경 기록을 참고한 미술적 해석이며 역사적 얼굴·건축·방문 인원수나 사건 간격의 복원이 아니다. `Tools/Art/Nativity`에 두 원본 PNG·런타임과 동일한 복사본·프롬프트·SHA·UV 계약을 보존한다. 원본 픽셀과 기존 자산/GUID를 수정하지 않는다. 새 탄생 BGM과 한국어 AI 음성은 [NativityAudio](NativityAudio.md)의 독립 악보·샘플·모델·문안·변환·실제 검증 범위를 따른다. 이전20줄 음성·기존 음악과 모든 원본은 보존한다. [현재 개정](Nativity.md), [실행·배포 상태](NativityValidation.md)를 구분한다.
+
 ## 2026-11-02 Restage / Canopy
 
 새 타이틀 성역과4종 지면 atlas, 소년/성인32프레임 원화는 image_gen으로 제작한 프로젝트 원화다. 실제 보존 PNG·참조·바이트·SHA는 `Tools/Art/Restage/manifest.json`과 `SOURCE-NOTICE.txt`, 인물 측정/layout·손 위치는 `Tools/Art/GospelCanopy/actors-manifest.json`을 따른다. 생성 원본과 runtime PNG는 바이트가 같고 원본 픽셀/투명도를 편집하지 않았다. 상품별 포장은 실제 상품 ID를 시드로 한 UI 벡터 도형이며 원작 포장 복구로 표시하지 않는다.

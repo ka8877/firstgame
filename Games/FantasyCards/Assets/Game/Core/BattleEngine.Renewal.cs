@@ -58,6 +58,12 @@ namespace FantasyCards.Core
             }
             extra += ApplyPremiumBeforeStrike(source, target, owner, other);
             PolishBeforeStrike(source, target, owner, other);
+            // An automatic equipment restoration can lower the bearer's HP to
+            // zero before the hit. The original HP rule destroys that unit;
+            // it must not use the restored AP to deliver a posthumous strike.
+            // The caller resolves the normal destruction chain and equipment
+            // disposal, just as after lethal preemptive defense.
+            if (CardCatalog.UnitHealth(source) <= 0) return 0;
             extra += ApplyPolishBeforeStrike(source, target, owner, other);
             ignoreDefense |= PremiumIgnoresDefense(source.definitionId);
             if (code != 0 && code != 489 && code != 179 && code != 666 && (extra != 0 || ignoreDefense || CardCatalog.UnitAttack(source) != originalAp || CardCatalog.UnitDefense(source) != originalDp || CardCatalog.UnitHealth(source) != originalHp || CardCatalog.UnitAttack(target) != targetAp || CardCatalog.UnitDefense(target) != targetDp || CardCatalog.UnitHealth(target) != targetHp) && !RenewalPremiumCode(code) && !IsPolishAttackCode(code))

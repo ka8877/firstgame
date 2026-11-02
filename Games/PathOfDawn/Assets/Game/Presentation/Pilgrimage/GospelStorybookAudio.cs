@@ -25,8 +25,9 @@ namespace PathOfDawn.Presentation
         GospelPilgrimageMotor player;
         int selected, active = -1, nextVoice, stepIndex, observedDashSequence;
         bool initialized, hasUserGesture, applicationPaused, motionInitialized, wasGrounded, hasGroundContact;
+        bool narrationActive;
         Vector3 previousPosition;
-        float stepDistance, nextStepAt;
+        float stepDistance, nextStepAt, narrationGain = 1;
 
         public float Volume { get; private set; }
         public bool Muted { get; private set; }
@@ -38,6 +39,11 @@ namespace PathOfDawn.Presentation
         public string LastCue { get; private set; } = "";
         public int FootstepCount { get; private set; }
         public int ChapterTransitionCount { get; private set; }
+        public bool OpeningCinematic { get; private set; }
+        public int SuppressedCinematicCueCount { get; private set; }
+        public bool CanPlayNarration => initialized && hasUserGesture && !applicationPaused && !Muted && Volume > 0;
+        public float NarrationMusicGain => narrationGain;
+        public event Action PlaybackSettingsChanged;
 
         [Serializable]
         public sealed class CueObservation
@@ -71,7 +77,10 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < Chapters.Length; i++)
             {
                 music[i] = CreateSource(true, 64);
-                music[i].clip = Resources.Load<AudioClip>("Audio/GospelStorybook/music-" + Chapters[i]);
+                // Keep the previous original recording intact as a fallback.
+                music[i].clip = i == 0 ? Resources.Load<AudioClip>("Audio/GospelNativity/music-birth") : null;
+                if (music[i].clip == null)
+                    music[i].clip = Resources.Load<AudioClip>("Audio/GospelStorybook/music-" + Chapters[i]);
                 environment[i] = CreateSource(true, 110);
                 environment[i].clip = Resources.Load<AudioClip>("Audio/GospelStorybook/ambience-" + Chapters[i]);
                 music[i].clip?.LoadAudioData(); environment[i].clip?.LoadAudioData();
@@ -100,6 +109,26 @@ namespace PathOfDawn.Presentation
         /// <summary>Called from the existing real pointer/key UI path.</summary>
         public void NotifyUserGesture() => hasUserGesture = true;
 
+        public void SetNarrationActive(bool value) => narrationActive = value;
+
+        /// <summary>The opening is a story, with no UI/reward/page chimes between its lines.</summary>
+        public void SetOpeningCinematic(bool value)
+        {
+            if (OpeningCinematic == value) return;
+            OpeningCinematic = value;
+            if (!value) return;
+            foreach (var effect in effects)
+                if (effect != null && effect.isPlaying && IsCinematicCue(effect.clip)) effect.Stop();
+        }
+
+        bool IsCinematicCue(AudioClip clip)
+        {
+            if (clip == null) return false;
+            foreach (string cue in new[] { "ui", "dialogue", "scripture", "page" })
+                if (clips.TryGetValue(cue, out var candidate) && candidate == clip) return true;
+            return false;
+        }
+
         public void SetChapter(string chapter)
         {
             if (chapter == "baptism") chapter = "jordan";
@@ -114,6 +143,7 @@ namespace PathOfDawn.Presentation
         {
             Volume = Mathf.Clamp01(value);
             PlayerPrefs.SetFloat(Prefix + ".volume", Volume); PlayerPrefs.Save(); ApplyLevels();
+            PlaybackSettingsChanged?.Invoke();
         }
 
         public void SetMuted(bool value)
@@ -122,10 +152,13 @@ namespace PathOfDawn.Presentation
             PlayerPrefs.SetInt(Prefix + ".muted", value ? 1 : 0); PlayerPrefs.Save();
             if (value) SuspendVoices();
             ApplyLevels();
+            PlaybackSettingsChanged?.Invoke();
         }
 
         void Update()
         {
+            narrationGain = Mathf.MoveTowards(narrationGain, narrationActive ? .32f : 1,
+                Time.unscaledDeltaTime / (narrationActive ? .12f : .60f));
             if (!initialized || applicationPaused || !hasUserGesture || Muted || Volume <= 0) return;
             // A loading chapter does not silence the currently audible one.
             var target = music[selected];
@@ -168,8 +201,8 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < Chapters.Length; i++)
             {
                 float weight = Mathf.Sqrt(weights[i]);
-                if (music[i] != null) music[i].volume = level * weight * .83f;
-                if (environment[i] != null) environment[i].volume = level * weight * .22f;
+                if (music[i] != null) music[i].volume = level * weight * .83f * narrationGain;
+                if (environment[i] != null) environment[i].volume = level * weight * .22f * narrationGain;
             }
             for (int i = 0; i < effects.Length; i++)
                 if (effects[i] != null) effects[i].volume = level * voiceLevels[i];
@@ -207,6 +240,8 @@ namespace PathOfDawn.Presentation
 
         public void Play(string cue)
         {
+            if (OpeningCinematic && (cue == "ui" || cue == "dialogue" || cue == "scripture" || cue == "page"))
+            { SuppressedCinematicCueCount++; return; }
             if (!initialized || !hasUserGesture || applicationPaused || Muted || Volume <= 0 ||
                 string.IsNullOrEmpty(cue) || !clips.TryGetValue(cue, out var clip)) return;
             if (clip.loadState != AudioDataLoadState.Loaded) { clip.LoadAudioData(); return; }

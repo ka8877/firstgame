@@ -1,0 +1,19 @@
+NATIVITY KEY DIALOGUE — GENERIC KOREAN AI NARRATION
+
+Generated locally and offline with the already pinned MeloTTS Korean model,
+one supported generic KR speaker. No real person's voice is copied, no speaker
+is impersonated, and no paid speech API or live service is required by the game.
+Character dialogue is read by the same narrator; the production does not claim
+different character actors created by pitch shifting.
+
+MeloTTS source commit: 209145371cff8fc3bd60d7be902ea69cbdb7965a
+Korean model revision: 0207e5adfc90129a51b6b03d89be6d84360ed323
+Existing source/model notices are retained in Tools/Voice/Licenses.
+
+The curated dialogue-lines.json stores each exact visible line, speaker and
+stable quest/beat key. The runtime accepts a clip only when key, speaker and
+visible text match. Source and recording hashes, settings and sizes are kept in
+production.json. Old opening voices and their original manifests remain intact.
+
+Clips are 32 kHz mono Vorbis. Signal analysis and independent Korean ASR are
+intelligibility checks, not a claim of human listening or voice-acting approval.

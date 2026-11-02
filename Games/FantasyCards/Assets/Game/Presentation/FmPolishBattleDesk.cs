@@ -21,12 +21,12 @@ namespace FantasyCards.Presentation
 
         // This survives the UI rebuild after the first selection. It is a new
         // remaster convenience, not the original client's Shadow activation.
-        private bool PolishDoubleTap(string key, CardDefinition card)
+        private bool PolishDoubleTap(string key, CardDefinition card, Action detail = null)
         {
             bool twice = key == polishLastTap && Time.unscaledTime - polishLastTapAt < .38f;
             polishLastTap = key; polishLastTapAt = Time.unscaledTime;
             if (!twice) return false;
-            ResetPolishTap(); ShowDetail(card, ShowBattle); return true;
+            ResetPolishTap(); if (detail != null) detail(); else ShowDetail(card, ShowBattle); return true;
         }
         private void ResetPolishTap() { polishLastTap = ""; polishLastTapAt = -10; }
         private void ResetPolishSession()
@@ -36,14 +36,15 @@ namespace FantasyCards.Presentation
         {
             if (locked) return;
             FmBattleAudio.Play("card-select");
-            if (PolishDoubleTap(zone + owner + ":" + instance, card)) return;
+            if (PolishDoubleTap(zone + owner + ":" + instance, card,
+                zone == "field" ? (Action)(() => ShowNativityUnitEquipment(owner, instance)) : null)) return;
             selectedCard = -1; selectedAttacker = instance; inspectedId = card.id;
             message = owner == 0 && zone == "terrain" && engine.IsPreparing(0)
                 ? (engine.CanDiscardField(0, instance, out string terrainReason)
                     ? card.name + " · 미사용 지형 소각 가능 · 남은 생산 소울도 제거되며 LP는 반환되지 않습니다."
                     : card.name + " · " + terrainReason)
                 : owner == 0 && (zone == "field" || zone == "spell") && engine.IsPreparing(0)
-                ? card.name + " · 다른 아군 전열을 누르거나 드래그해 이동/교환 · 소각은 우측 소각장으로 드래그"
+                ? card.name + " · 전열을 눌러 이동/교환 · 두 번/길게 누르기로 현재 장비·상세 · 소각장으로 드래그해 소각"
                 : card.name + " 선택 · 두 번 누르기 / 길게 누르기로 원본 상세 · Esc로 선택 해제";
             ShowBattle();
         }

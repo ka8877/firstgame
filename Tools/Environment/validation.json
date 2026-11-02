@@ -1,10 +1,10 @@
 {
-  "releaseProfile": "restage",
+  "releaseProfile": "nativity",
   "date": "2026-11-02",
-  "updatedUtc": "2026-11-02T08:29:04.466198+00:00",
+  "updatedUtc": "2026-11-02T11:32:14.901323+00:00",
   "gameRevisions": {
-    "FantasyCards": "fm-restage-2026-11-02",
-    "PathOfDawn": "gospel-canopy-2026-11-02"
+    "FantasyCards": "fm-nativity-2026-11-02",
+    "PathOfDawn": "gospel-nativity-2026-11-02"
   },
   "currentTargets": [
     "Web"
@@ -13,70 +13,70 @@
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "scope": "Current Restage Web-only live on-card equipment/coin/damage values, specific product packaging, fantasy title and field identities, plus Canopy painted scenery, expanded whole-body animation and modern story/Bible UI. No current Windows build is claimed; prior Windows ZIPs are historical. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
+  "scope": "Current Nativity Web-only actual attached-equipment inspection/disposal and lethal pre-strike guards; deeper accurate 51-turn nativity opening, quiet Scripture acquisition, physical Bible cover/contents/discovered pages, new birth music and 28 generic Korean narration lines, and planted dash stops. Retained live card values, painted scenery and whole-body animation remain part of the current tested runtime. No current Windows build is claimed; prior Windows ZIPs are historical. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
   "core": {
-    "passed": 277,
+    "passed": 285,
     "failed": 0,
     "notExecuted": 0,
     "results": {
-      "file": "Artifacts/Validation/Restage/Core/core-tests.trx",
-      "sha256": "f098ea4fbda0989686f0d9b23aa83f6a172711c62b98d1929b39329c335b4c87",
-      "bytes": 367095
+      "file": "Artifacts/Validation/Nativity/Core/core-tests.trx",
+      "sha256": "fbae8b997fb993cf93e282da8a127cc4574e6da2a9bc281afc48c6528d4e313e",
+      "bytes": 377286
     },
     "binding": {
-      "file": "Artifacts/Validation/Restage/Core/binding.json",
-      "sha256": "ba41e1e63d166638b369a4a3051e021bd5f8cf1ca902fbd0dd4ecdd02b45caac",
-      "bytes": 37155
+      "file": "Artifacts/Validation/Nativity/Core/binding.json",
+      "sha256": "2555a938b355632d8672000cb8cbdba5add357df9bfd14765c42ba05ee0f23ec",
+      "bytes": 37520
     }
   },
   "native": {
     "FantasyCards": {
-      "passed": 4,
+      "passed": 6,
       "failed": 0,
       "skipped": 0,
       "mechanicalStatus": "passed",
-      "sourceFingerprint": "472b47118f747f4163f25f44f71f7363750c1b375a206d34dcedcb763bce92a4",
+      "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c",
       "binding": {
-        "file": "Artifacts/Validation/Restage/Native/FantasyCards/binding.json",
-        "sha256": "ce6d8697c956cb72eaf295b4f1e02ce07aa502ead81cf09b852873919c19f125",
-        "bytes": 588
+        "file": "Artifacts/Validation/Nativity/Native/FantasyCards/binding.json",
+        "sha256": "5431804cbd5dfb800ea18867fe84aea49483b1145cde3bee24c43624f1ce3ee7",
+        "bytes": 589
       },
       "results": {
-        "file": "Artifacts/Validation/Restage/Native/FantasyCards/native.xml",
-        "sha256": "aca08329dfebc5baa23673cd533642666dc4422178553ad9bb67c9ca67cdb967",
-        "bytes": 9428
+        "file": "Artifacts/Validation/Nativity/Native/FantasyCards/native.xml",
+        "sha256": "09d4d189034bf1cc50ad4673ea0fb4698cca60f81ba092704ece0d86e1875fd9",
+        "bytes": 10847
       },
       "rootReview": {
         "status": "approved",
         "evidence": {
-          "file": "Artifacts/Validation/Restage/Root/cards-native-review.json",
-          "sha256": "a40974f66ac21639fe4b2320d825f898e79b58211005df5388b2b8eec20063c5",
-          "bytes": 4641
+          "file": "Artifacts/Validation/Nativity/Root/cards-native-review.json",
+          "sha256": "072e0f2baddaffe43697aa40f991a62e37a0f35651cd40d6cb20cab8603c2aa5",
+          "bytes": 4179
         }
       }
     },
     "PathOfDawn": {
-      "passed": 7,
+      "passed": 10,
       "failed": 0,
       "skipped": 0,
       "mechanicalStatus": "passed",
-      "sourceFingerprint": "2020d030fe93a04df6cf9cbc1195d53e1ff89ec8b08fc17015218b917b249a76",
+      "sourceFingerprint": "e27a919909204c4753bd404cf3f778e223379fadb223d2e3e28816c291fd4bbf",
       "binding": {
-        "file": "Artifacts/Validation/Restage/Native/PathOfDawn/binding.json",
-        "sha256": "24f484ddc271860cd5ed99dfd3d17480d8650ab96429acfc7d917aa4f3cdff3a",
-        "bytes": 584
+        "file": "Artifacts/Validation/Nativity/Native/PathOfDawn/binding.json",
+        "sha256": "d3540c467e17298de8ac97978a40f2b5d11d8d0b84136949e76d7a5ccab45380",
+        "bytes": 1157
       },
       "results": {
-        "file": "Artifacts/Validation/Restage/Native/PathOfDawn/native.xml",
-        "sha256": "1de17e802df25a3a0673c1d00efa10838dcec76ff6fb240d3024754451f68235",
-        "bytes": 13109
+        "file": "Artifacts/Validation/Nativity/Native/PathOfDawn/native.xml",
+        "sha256": "18213ab26c54efa3ea3af171110967a51ba3965a4aa9b85f5be7ba30368df7fe",
+        "bytes": 65001
       },
       "rootReview": {
         "status": "approved",
         "evidence": {
-          "file": "Artifacts/Validation/Restage/Root/gospel-native-review.json",
-          "sha256": "1914f98d83ab2030328e8ccc8f3a87346238a664d74240c3a925dedb02572c16",
-          "bytes": 5055
+          "file": "Artifacts/Validation/Nativity/Root/gospel-native-review.json",
+          "sha256": "200d6f7a7cc784be53eed6c2103d7eb415185b6fb49a36871c0a94475af272e8",
+          "bytes": 6353
         }
       }
     }
@@ -85,41 +85,41 @@
     "FantasyCards": {
       "Web": {
         "result": "Succeeded",
-        "revision": "fm-restage-2026-11-02",
-        "sourceFingerprint": "472b47118f747f4163f25f44f71f7363750c1b375a206d34dcedcb763bce92a4",
+        "revision": "fm-nativity-2026-11-02",
+        "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-restage-builds/FantasyCards/Web/BuildEvidence.txt",
-          "sha256": "05d4d99945b13a51cad2a29133eeb58e2337479a456042909706d8419d6e8e38",
-          "bytes": 260
+          "file": "/tmp/firstgame-nativity-builds/FantasyCards/Web/BuildEvidence.txt",
+          "sha256": "2fe45b9d5eb74782be52bdb019152c1152d3b574563c19faf18f9c02db99e5a8",
+          "bytes": 262
         },
         "inputs": {
-          "file": "/tmp/firstgame-restage-builds/FantasyCards/Web/BuildInputs.json",
-          "sha256": "90a0e2c92eb6e2a42a57ee6acddbadc337de60cdbfb34e36b077971ee21e325b",
-          "bytes": 8099485
+          "file": "/tmp/firstgame-nativity-builds/FantasyCards/Web/BuildInputs.json",
+          "sha256": "18e26606cf7f5fa4a775b69cf66e76c6b838fea8e755c374df6bca5116ea512c",
+          "bytes": 8101750
         },
         "runtimeFiles": 15365,
-        "runtimeBytes": 867852214
+        "runtimeBytes": 867851880
       }
     },
     "PathOfDawn": {
       "Web": {
         "result": "Succeeded",
-        "revision": "gospel-canopy-2026-11-02",
-        "sourceFingerprint": "2020d030fe93a04df6cf9cbc1195d53e1ff89ec8b08fc17015218b917b249a76",
+        "revision": "gospel-nativity-2026-11-02",
+        "sourceFingerprint": "e27a919909204c4753bd404cf3f778e223379fadb223d2e3e28816c291fd4bbf",
         "errors": "0",
         "evidence": {
-          "file": "/tmp/firstgame-restage-builds/PathOfDawn/Web/BuildEvidence.txt",
-          "sha256": "aeecbb5a5e8cd59c28824887f2673c58cb49a38e22c5e9a16f75d5a98616a466",
-          "bytes": 410
+          "file": "/tmp/firstgame-nativity-builds/PathOfDawn/Web/BuildEvidence.txt",
+          "sha256": "73bdd88f70d8722a2c9fb41bc760f9e565b30a60daea2889df20bcb7aa40ab79",
+          "bytes": 414
         },
         "inputs": {
-          "file": "/tmp/firstgame-restage-builds/PathOfDawn/Web/BuildInputs.json",
-          "sha256": "82fe048ead3785a94319c7ed4fd10107bb1fddfc8b842e80bfe2299a605aee25",
-          "bytes": 386323
+          "file": "/tmp/firstgame-nativity-builds/PathOfDawn/Web/BuildInputs.json",
+          "sha256": "c8623bfb1f44bfdc0083d257e2fd2fdd766c0b6ee4eb632d00aa155707436b63",
+          "bytes": 407227
         },
         "runtimeFiles": 5,
-        "runtimeBytes": 92671270
+        "runtimeBytes": 109619006
       }
     }
   },
@@ -127,35 +127,23 @@
     "FantasyCards": {
       "Desktop720": {
         "mechanicalStatus": "passed",
-        "checks": 57,
+        "checks": 60,
         "report": {
-          "file": "Artifacts/Validation/Restage/Desktop720/FantasyCards/report.json",
-          "sha256": "112e0b095a4942d82a826c935cc6a65e48b613cabb7d2c8db560c11a79ab1207",
-          "bytes": 12463520
+          "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/report.json",
+          "sha256": "511c8db418c7aeed418eb3ed77bf0d24fb6f9f41efa771bee1ced50b6cd6c9fa",
+          "bytes": 12485813
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 10
+        "approvedOriginals": 6
       },
       "Mobile844": {
         "mechanicalStatus": "passed",
-        "checks": 60,
+        "checks": 63,
         "report": {
-          "file": "Artifacts/Validation/Restage/Mobile844/FantasyCards/report.json",
-          "sha256": "fb6a403eecc982a25bd32f82ee60d61b06a4378cd1b9d142305c5b6448786d9f",
-          "bytes": 12455832
-        },
-        "visualReview": "approved",
-        "status": "verified",
-        "approvedOriginals": 4
-      },
-      "PublicMobile844": {
-        "mechanicalStatus": "passed",
-        "checks": 41,
-        "report": {
-          "file": "Artifacts/Validation/Restage/PublicMobile844/FantasyCards/report.json",
-          "sha256": "54e79aa131fe1b6803462b6c95badccf55279fe81842a6a4838f4d216d06a351",
-          "bytes": 22308341
+          "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/report.json",
+          "sha256": "6daf0f5d6b47f5f3dfab3f257a10554096750984db6242033127111f2ff3b0be",
+          "bytes": 12481610
         },
         "visualReview": "approved",
         "status": "verified",
@@ -165,57 +153,34 @@
     "PathOfDawn": {
       "Desktop720": {
         "mechanicalStatus": "passed",
-        "checks": 43,
+        "checks": 59,
         "report": {
-          "file": "Artifacts/Validation/Restage/Desktop720/PathOfDawn/report.json",
-          "sha256": "7d71fdcd23b2814d4e22f3b99e0d3106de6b14d23f2c538856a18610dfdc1566",
-          "bytes": 201653
+          "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/report.json",
+          "sha256": "5c1a92f868a373040eb28de5ca776bff577c34049a5ce4cd0ab2efa2d15f2d7c",
+          "bytes": 368355
         },
         "visualReview": "approved",
         "status": "verified",
-        "approvedOriginals": 9
+        "approvedOriginals": 12
       },
       "Mobile844": {
         "mechanicalStatus": "passed",
-        "checks": 40,
+        "checks": 58,
         "report": {
-          "file": "Artifacts/Validation/Restage/Mobile844/PathOfDawn/report.json",
-          "sha256": "e69e44cf5ef92cadee3efe8e3291c15b71415b9c7bcc58766b495cf944abdd49",
-          "bytes": 191296
+          "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/report.json",
+          "sha256": "6c4bdf382a1589151123abf19c80f1979ac49dde360b656be204cbbd14f6e4c5",
+          "bytes": 362563
         },
         "visualReview": "approved",
         "status": "verified",
         "approvedOriginals": 8
-      },
-      "PublicMobile844": {
-        "mechanicalStatus": "passed",
-        "checks": 25,
-        "report": {
-          "file": "Artifacts/Validation/Restage/PublicMobile844/PathOfDawn/report.json",
-          "sha256": "91da665f42216d4b10cc27aae94252933f3c49506add4a097b4c0c7bc731cce1",
-          "bytes": 102666
-        },
-        "visualReview": "approved",
-        "status": "verified",
-        "approvedOriginals": 5
       }
     }
   },
   "publication": {
-    "status": "verified",
+    "status": "pending",
     "url": "https://ka8877.github.io/firstgame/",
-    "stageManifest": {
-      "file": "/tmp/firstgame-restage-staged-site/build-manifest.json",
-      "sha256": "8fa48f49b50d4d8315884cebe30e1e583fc0c28db5c0a448efe118841b4fb359",
-      "bytes": 2099209
-    },
-    "publicReport": {
-      "file": "Artifacts/Validation/Restage/PublicPortal/report.json",
-      "sha256": "7ee4947594fb74a23f8af8fc1bfa9a4eb9760d4b8375c6f1924da4e65df8e1f0",
-      "bytes": 16923510
-    },
-    "verifiedFiles": 15409,
-    "scope": "Every non-image file freshly fetched after this deployment; only15350 unchanged JPEG byte identities inherit the explicitly dated earlier Reprise actual GETs and Root-approved publication through pinned preserved inputs/producer snapshots plus equal before/new deployed Git blobs. No previous game test is a new pass. Current portal originals reviewed by Root."
+    "scope": "No new publication is claimed until current staged/public bytes and Root portal review are verified."
   },
   "limitations": [
     "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
@@ -223,8 +188,26 @@
     "Actual WebAudio route/PCM evidence is not human speaker listening.",
     "Actual OS/tab visibility pause was not measurable in this virtual Chromium; controller regressions and normal-focus PCM are separate evidence.",
     "Root original-image review is not user aesthetic approval.",
-    "Original archive metadata/media and implemented playable abilities are separate scopes."
+    "Original archive metadata/media and implemented playable abilities are separate scopes.",
+    "Historical Reprise GET imported-helper execution hashes were not separately recorded; preserved published-source helper blobs do not independently prove those executed dependency bytes."
   ],
+  "currentSourceAudio": {
+    "birth": {
+      "file": "Artifacts/Validation/Nativity/Audio/birth.json",
+      "sha256": "f8549dd9676c4c75b78d2e040c82dcd872e0b5a085688731dd30e568808e7891",
+      "bytes": 1454
+    },
+    "voice": {
+      "file": "Artifacts/Validation/Nativity/Audio/voice.json",
+      "sha256": "339697daf0a87b3df19cbbd1938ae2c9ac9dac68ab873be9a88fe95b9feac2a0",
+      "bytes": 49492
+    },
+    "scope": "Current source audio/voice assets only; actual Native/app/browser playback and human listening are separate.",
+    "voiceLines": 28,
+    "newlySynthesizedLines": 6,
+    "preservedIdenticalLines": 22,
+    "asrScope": "Fresh six-line ASR plus explicitly dated identical-clip base22 ASR; Native and actual browser narration observations/PCM are separate."
+  },
   "cardMediaLastAudit": {
     "revision": "fm-polish-2026-10-29",
     "releaseReady": true,

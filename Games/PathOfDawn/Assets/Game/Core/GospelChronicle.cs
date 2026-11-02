@@ -9,12 +9,15 @@ namespace PathOfDawn.Core
     [Serializable] public sealed class GospelChronicleSave
     {
         public int version, questIndex, dialoguePage;
+        // Optional presentation cursor. Older schema-one JSON omits it and
+        // resumes at the first detail of the same saved legacy dialogue page.
+        public int storyDetailPage;
         public GospelQuestStage stage = GospelQuestStage.Reading;
         public bool importedCompletedJourney;
         public List<string> inheritedReadings = new List<string>();
         public List<string> discoveredReadings = new List<string>();
         public GospelChronicleSave Copy() => new GospelChronicleSave {
-            version=version,questIndex=questIndex,dialoguePage=dialoguePage,stage=stage,
+            version=version,questIndex=questIndex,dialoguePage=dialoguePage,storyDetailPage=storyDetailPage,stage=stage,
             importedCompletedJourney=importedCompletedJourney,
             inheritedReadings=inheritedReadings==null?null:new List<string>(inheritedReadings),
             discoveredReadings=discoveredReadings==null?null:new List<string>(discoveredReadings)
@@ -62,9 +65,14 @@ namespace PathOfDawn.Core
         public string AgeLabel => ChapterId=="birth"?"탄생과 아기 때의 기록":IsAdult?"공생애 시작 · 삼십세쯤":"열두 살 · 유월절의 여정";
         public int DialogueIndex => state.dialoguePage;
         public int DialogueCount => CurrentQuest==null?0:CurrentQuest.Dialogue.Count;
+        public int StoryDetailIndex => state.storyDetailPage;
+        public int StoryBeatIndex => IsComplete?0:GospelStorybookCatalog.GetStoryBeatIndex(CurrentQuest,DialogueIndex,StoryDetailIndex);
+        public int StoryBeatCount => IsComplete?0:GospelStorybookCatalog.GetStoryBeatCount(CurrentQuest);
+        public string StoryVoiceKey => IsComplete?"":CurrentQuest.Id+":"+StoryBeatIndex;
+        public string CurrentStoryReference => IsComplete?"":GospelStorybookCatalog.GetDetail(CurrentQuest,DialogueIndex,StoryDetailIndex).Reference;
         public GospelDialogueTurn CurrentDialogue => Stage==GospelQuestStage.Reading?CurrentQuest.Dialogue[state.dialoguePage]:null;
         public GospelReading CurrentReading => Stage==GospelQuestStage.Reading?CurrentQuest.Reading:null;
-        public GospelStorybookScene CurrentStoryScene => IsComplete?null:GospelStorybookCatalog.GetScene(CurrentQuest);
+        public GospelStorybookScene CurrentStoryScene => IsComplete?null:GospelStorybookCatalog.GetCurrentScene(this);
         public GospelDialogueTurn CurrentStoryBeat => GospelStorybookCatalog.GetBeat(this);
         public int DiscoveredCount => state.discoveredReadings.Count;
         public int TotalReadings => GospelChronicleCatalog.Readings.Count;
@@ -93,6 +101,7 @@ namespace PathOfDawn.Core
                 else break;
             }
             state.dialoguePage=0;
+            state.storyDetailPage=0;
             state.stage=IsComplete?GospelQuestStage.Complete:CurrentQuest.IsPrologue?GospelQuestStage.Reading:GospelQuestStage.Travel;
         }
 
@@ -109,12 +118,13 @@ namespace PathOfDawn.Core
         {
             if(IsComplete||Stage!=GospelQuestStage.Talk) {message="먼저 현재 목적지에 도착해야 합니다.";return false;}
             if(npcId!=CurrentQuest.NpcId) {message=CurrentQuest.NpcName+"와 현재 여정을 이야기하세요.";return false;}
-            state.stage=GospelQuestStage.Reading;state.dialoguePage=0;message=CurrentQuest.Title;return true;
+            state.stage=GospelQuestStage.Reading;state.dialoguePage=0;state.storyDetailPage=0;message=CurrentQuest.Title;return true;
         }
 
         public bool AdvanceDialogue()
         {
             if(IsComplete||Stage!=GospelQuestStage.Reading)return false;
+            state.storyDetailPage=0;
             if(state.dialoguePage+1<DialogueCount) {state.dialoguePage++;return true;}
             var reading=CurrentQuest.Reading;
             if(reading!=null&&!HasReading(reading.Id))state.discoveredReadings.Add(reading.Id);
@@ -126,6 +136,10 @@ namespace PathOfDawn.Core
         public bool AdvanceStory(out GospelReading acquired)
         {
             acquired=null;
+            if(IsComplete||Stage!=GospelQuestStage.Reading)return false;
+            var details=GospelStorybookCatalog.GetDetails(CurrentQuest,DialogueIndex);
+            if(state.storyDetailPage+1<details.Count)
+            {state.storyDetailPage++;return true;}
             var reading=CurrentReading;
             bool alreadyFound=reading!=null&&HasReading(reading.Id);
             if(!AdvanceDialogue())return false;
@@ -154,11 +168,14 @@ namespace PathOfDawn.Core
             bool finished=save.questIndex==GospelChronicleCatalog.Quests.Count;
             if(finished!=(save.stage==GospelQuestStage.Complete))throw new ArgumentException("생애 여정의 완료 상태가 일치하지 않습니다.");
             if(finished)
-            {if(save.dialoguePage!=0)throw new ArgumentException("완료한 여정에 열린 대화가 있습니다.");return;}
+            {if(save.dialoguePage!=0||save.storyDetailPage!=0)throw new ArgumentException("완료한 여정에 열린 대화가 있습니다.");return;}
             var quest=GospelChronicleCatalog.Quests[save.questIndex];
             if(quest.IsPrologue&&save.stage!=GospelQuestStage.Reading)throw new ArgumentException("탄생 도입의 장면 상태가 잘못되었습니다.");
             if(save.dialoguePage<0||(save.stage==GospelQuestStage.Reading?save.dialoguePage>=quest.Dialogue.Count:save.dialoguePage!=0))
                 throw new ArgumentException("생애 여정의 대화 위치가 잘못되었습니다.");
+            if(save.storyDetailPage<0||(save.stage==GospelQuestStage.Reading?
+                save.storyDetailPage>=GospelStorybookCatalog.GetDetails(quest,save.dialoguePage).Count:save.storyDetailPage!=0))
+                throw new ArgumentException("이야기의 세부 장면 위치가 잘못되었습니다.");
         }
     }
 }

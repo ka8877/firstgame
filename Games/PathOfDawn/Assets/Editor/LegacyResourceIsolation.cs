@@ -61,7 +61,7 @@ namespace FirstGame.Editor
         {
             RecoverInterrupted();
             var candidates = new List<string> {
-                "Assets/Resources/Art/Painted", "Assets/Resources/Voice",
+                "Assets/Resources/Art/Painted",
                 "Assets/Resources/Art/GospelRemaster", "Assets/Resources/Art/GospelRadiance",
                 "Assets/Resources/Art/GospelLuminous/Rendering"
             };
@@ -71,6 +71,9 @@ namespace FirstGame.Editor
             // Old full humanoids and the unused lateral Lost Crypt world stay
             // byte-for-byte editable but do not inflate the current Web player.
             AddChildrenExcept(candidates, "Assets/Resources/Art/Gospel3D", "TempleMaterials");
+            // Preserve earlier narration sources while shipping the current
+            // exact Nativity key-line clips and manifest in this player.
+            AddChildrenExcept(candidates, "Assets/Resources/Voice", "GospelNativity");
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
                 "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");

@@ -1,0 +1,562 @@
+{
+  "FantasyCards": {
+    "revision": "fm-nativity-2026-11-02",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh current public HTTPS title/lobby/owned originals/solo field and three PCM roles. Full owned economy and unified original album separately proved by the same final local runtime. Complete unchanged card JPEGs retain dated prior real GET plus equal old/new Git objects, not a fresh full-image download. Current Nativity title, distinct actual products and all five acquisition slots retain the same starter/economy flow; real field evidence keeps own/opponent boundaries visible. Native separately compares real on-card TMP at equipment, heads-coin and damage commit frames against Core. The earlier wrong-pointer run was visually rejected and archived. Fresh early ordinary-input visual gates require a real starter-choice screen and then50owned/600SP before the longer flow.",
+    "requiredCheckpoints": [
+      "title",
+      "public-owned-lobby",
+      "public-owned-card",
+      "public-owned-field"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.05,
+          0.5
+        ],
+        "label": "실제 빈 타이틀 배경 touch로 음악 잠금해제",
+        "settleMs": 500
+      },
+      {
+        "type": "audio",
+        "label": "public-title"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.256,
+          0.662
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-entry-review",
+        "expected": "Directly verify that actual ordinary input entered the seven-starter choice, not the title. Confirm by viewing the original. Correct only through ordinary input, never state injection."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7525,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-wallet-review",
+        "expected": "Directly verify the actual owned lobby with50cards and600SP after the free starter. A generic nonblank image is not a semantic flow assertion."
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-lobby",
+        "expected": "Actual600SP/50owned starter on current public game."
+      },
+      {
+        "type": "audio",
+        "label": "public-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3335,
+          0.915
+        ],
+        "label": "보유 카드",
+        "settleMs": 900
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-card",
+        "expected": "Original current owned-card art delivered on HTTPS, neutral current collection UI."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0995,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.395,
+          0.41
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.218,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "click",
+        "point": [
+          0.792,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-owned-field",
+        "expected": "Actual current public owned-deck battle: five fronts fit in the narrow visible hand region with a horizontal ScrollRect; six simultaneously visible fronts or a new swipe test are not claimed."
+      },
+      {
+        "type": "audio",
+        "label": "public-battle"
+      }
+    ]
+  },
+  "PathOfDawn": {
+    "revision": "gospel-nativity-2026-11-02",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh public HTTPS ordinary input covers actualkey0/sourceclock/cliptextSHA→playing Bible stop→key1/sourceclock withseparatePCM; real51openingturns/quiet1acquisition/newBiblecover/contents/discoveredlink/fournewsceneimages, then boundedtouchfield/dash/status. FullNPC/save/physicalcollision/exactdashdistance are separately approved same-runtime local/Native evidence. No debug or save injection. Software touch is not physicalphone certification.",
+    "requiredCheckpoints": [
+      "title",
+      "birth-story-first",
+      "bible-empty-zero",
+      "bible-empty-cover",
+      "bible-empty-contents",
+      "bible-empty-second-spread",
+      "annunciation-second-turn",
+      "visitation-current-story",
+      "joseph-dream-current-story",
+      "first-scripture-quiet-notice",
+      "first-inscribed-second-blank",
+      "first-passage-scrolled",
+      "bible-first-discovered-contents",
+      "contents-opens-earned-passage",
+      "unseen-after-first-event",
+      "magi-house-current-story",
+      "child-chapter",
+      "child-free-field",
+      "public-after-two-axis-touch",
+      "public-after-dash",
+      "public-character-status"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current Nativity title; original source captures need actual review."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.166,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 400
+      },
+      {
+        "type": "audio",
+        "label": "narration-initial-current-line"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "빈 성경 펼치기",
+        "settleMs": 250
+      },
+      {
+        "type": "audio",
+        "label": "narration-book-stopped"
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-zero",
+        "expected": "Physical Bible starts0/19, both leaves blank and unknown titles/references hidden."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.613,
+          0.051
+        ],
+        "label": "표지",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-cover",
+        "expected": "A physical Bible cover is available before any discovery; no invented contents."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "차례",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-contents",
+        "expected": "Before acquisition the contents do not disclose future Scripture titles/references."
+      },
+      {
+        "type": "review_input",
+        "name": "empty-bible-contents",
+        "expected": "Directly inspect actual cover/contents originals and no future metadata before acknowledging ordinary-input continuation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.416,
+          0.928
+        ],
+        "label": "성경 펼치기",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.376,
+          0.928
+        ],
+        "label": "다음 면",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-second-spread",
+        "expected": "Undiscovered spread remains blank."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "이전 면",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.86,
+          0.928
+        ],
+        "label": "여정으로",
+        "settleMs": 400
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-story-first",
+        "expected": "Actual first voiced Nazareth introduction, exact summary reference; no future12yo scene before birth."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 대화",
+        "settleMs": 400
+      },
+      {
+        "type": "audio",
+        "label": "narration-after-book-next-line"
+      },
+      {
+        "type": "checkpoint",
+        "name": "annunciation-second-turn",
+        "expected": "Actual next voiced turn uses key1; old intro is stopped, raw references remain below dialogue."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "마리아의 방문까지 이야기 계속",
+        "settleMs": 650,
+        "repeat": 2
+      },
+      {
+        "type": "checkpoint",
+        "name": "visitation-current-story",
+        "expected": "Actual Elizabeth visitation panel reached at firstquestbeat3."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉의 기록으로 이야기 계속",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "joseph-dream-current-story",
+        "expected": "Actual Joseph dream panel reached at firstquestbeat4."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "첫 열 대화 마치기",
+        "settleMs": 650,
+        "repeat": 6
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-scripture-quiet-notice",
+        "expected": "After10actualturns firstpassage1/19 is added quietly: small exactnotice and nextmangerstory, no rewardmodal/autoBook/chime."
+      },
+      {
+        "type": "review_input",
+        "name": "quiet-first-award",
+        "expected": "Inspect first-scripture-quiet-notice original plus current nextmangerstory1/19. Acknowledge only real quiet boundary, never inject a cursor/save."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "기록된 성경",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-inscribed-second-blank",
+        "expected": "Exactly first passage inscribed on actualleftleaf, secondleaf remains blank."
+      },
+      {
+        "type": "drag",
+        "start": [
+          0.34,
+          0.64
+        ],
+        "end": [
+          0.34,
+          0.38
+        ],
+        "durationMs": 900,
+        "settleMs": 700,
+        "label": "획득한 성경 본문 실제 터치 스크롤"
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-passage-scrolled",
+        "expected": "Actual long Scripture page can scroll within its book leaf."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.68,
+          0.051
+        ],
+        "label": "발견한 말씀의 차례",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-first-discovered-contents",
+        "expected": "Only earned reference appears in contents; undiscovered future metadata hidden."
+      },
+      {
+        "type": "review_input",
+        "name": "discovered-bible-contents",
+        "expected": "Directly inspect the actual first earned contents row before the exact ordinary link click."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.30195,
+          0.26944
+        ],
+        "label": "첫 발견 본문 바로 열기",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "contents-opens-earned-passage",
+        "expected": "Actual discovered contents link opens the exact earned raw passage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.376,
+          0.928
+        ],
+        "label": "다음 면",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "unseen-after-first-event",
+        "expected": "Future leaves remain blank after one real discovery."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "이전 면",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.86,
+          0.928
+        ],
+        "label": "여정으로",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 서른네 대화",
+        "settleMs": 650,
+        "repeat": 34
+      },
+      {
+        "type": "checkpoint",
+        "name": "magi-house-current-story",
+        "expected": "Matthew house/Magi panel occurs later in its distinct sourced account, not same-night shepherd manger."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 나사렛 성장 일곱 대화",
+        "settleMs": 650,
+        "repeat": 7
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-chapter",
+        "expected": "Exactly51openingturns across11stablequests lead into age12chapter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.8292
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-free-field",
+        "expected": "Current real child, physical forest floor and compactHUD after11/23goals and11/19passages."
+      },
+      {
+        "type": "audio",
+        "label": "public-storybook-field"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.70278
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 forward"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.04297,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 left"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.12966,
+          0.7292
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 diagonal"
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-after-two-axis-touch",
+        "expected": "Actual forward/left/diagonal touch movement in the original shipping canvas."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8297,
+          0.8111
+        ],
+        "label": "실제 대시",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-after-dash",
+        "expected": "Actual dash button and visible physical displacement, with no Unity/game state injection."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1078,
+          0.0736
+        ],
+        "label": "현재 인물 상태",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "public-character-status",
+        "expected": "Actual child/11 discovered passages/11 completed goals; this short public run does not claim NPC or save coverage."
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "createdUtc": "2026-11-02T08:54:52.464100+00:00",
+  "scope": "Original generated development illustrations for the Nativity revision. Not Ori assets, not recovered historical photographs or original game assets. Original generated PNG pixels are preserved byte-for-byte; only engine UV/layout/import settings may adapt presentation.",
+  "files": [
+    {
+      "id": "book-spread",
+      "tool": "image_gen",
+      "generatedFile": "/workspace/generated_images/exec-6937ab94-95d7-4dbe-8e9e-d3049f17d9fd.png",
+      "preservedSource": "Tools/Art/Nativity/Sources/book-spread.png",
+      "runtimeFile": "Games/PathOfDawn/Assets/Resources/Art/GospelNativity/book-spread.png",
+      "sha256": "be6affa26138406b0cbaed9fe8eb5708e55b1ae498cce5bb6d3eb760a9951897",
+      "bytes": 2478459,
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "brief": "Restrained overhead open physical Bible with dark oxblood leather, fine empty cream pages, sewn center and red ribbon; no fantasy ornament or baked text. Clear engine-overlay writing areas at left9.5–46%, right52.6–89.5%, y10–80.5%. The modern reading interface is not an archaeological claim about a first-century book.",
+      "requestedTransparentBackground": false,
+      "pixelEdits": "none; byte-exact copies",
+      "unityGuid": "2c53f4102cb654ea97b7ccb3a44d0d2f"
+    },
+    {
+      "id": "opening-scenes",
+      "tool": "image_gen",
+      "generatedFile": "/workspace/generated_images/exec-eb20b6b9-3efe-4191-839b-8a2c48fcfab6.png",
+      "preservedSource": "Tools/Art/Nativity/Sources/opening-scenes.png",
+      "runtimeFile": "Games/PathOfDawn/Assets/Resources/Art/GospelNativity/opening-scenes.png",
+      "sha256": "761897f6e7232e36e0e81ccd5650bd2f6a25d029046dff74d8fccfc4f255d17f",
+      "bytes": 2900093,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "brief": "2x2 interpretive biblical illustration atlas: top-left Mary in Nazareth at the annunciation with no infant; top-right Mary greeting elderly Elizabeth with no babies; bottom-left Joseph asleep in humble workshop; bottom-right visible Magi visitors with Mary and a young child inside a house, not the same-night shepherd/manger scene. No baked text or UI.",
+      "requestedTransparentBackground": false,
+      "pixelEdits": "none; byte-exact copies; runtime samples four preserved quadrants",
+      "unityGuid": "b4f0bde4a89c581f8e8ac6ba7ba68f35",
+      "panels": {
+        "nativity-annunciation": {
+          "quadrant": "top-left",
+          "uv": [
+            0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "nativity-visitation": {
+          "quadrant": "top-right",
+          "uv": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "nativity-joseph": {
+          "quadrant": "bottom-left",
+          "uv": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        "nativity-magi": {
+          "quadrant": "bottom-right",
+          "uv": [
+            0.5,
+            0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      "limits": [
+        "Interpretive illustrations, not verified historical photographs or evidence for architectural details, people count, physical appearance, exact visit timing or sleeping arrangement.",
+        "Some upper-panel faces sit above the center band; UI aspect cropping should prefer the upper content or show the complete quadrant. No pixel crop has been baked into this file."
+      ]
+    }
+  ],
+  "generationRequests": "Tools/Art/Nativity/generation-requests.json"
+}

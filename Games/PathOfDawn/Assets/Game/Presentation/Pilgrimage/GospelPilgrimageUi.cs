@@ -19,7 +19,7 @@ namespace PathOfDawn.Presentation
         public Action OnStart, OnContinue, OnResume, OnPause, OnSave, OnExit, OnStatus,
             OnInventory, OnRead, OnJournal, OnSettings, OnLampToggle, OnInteract, OnJump, OnDash, OnPageTurn, OnUiClick, OnUserGesture;
         public Action<Vector2> OnMove;
-        public Action<bool> OnRun, OnMusicMute;
+        public Action<bool> OnRun, OnMusicMute, OnVoiceEnabled;
         public Action<float> OnMusicVolume;
 
         public string CurrentView => usingBook ? book.CurrentView : currentView;
@@ -27,6 +27,8 @@ namespace PathOfDawn.Presentation
         public Canvas CanvasView => usingBook ? book.CanvasView : canvas;
         public RectTransform Frame => usingBook ? book.Frame : frame;
         public bool ScenicView { get; private set; }
+        public bool IsScriptureNoticeVisible => scriptureNotice != null && scriptureNotice.gameObject.activeInHierarchy;
+        public int ScriptureNoticeCount { get; private set; }
 
         static readonly Color Ink = new Color(.018f, .037f, .044f, .92f);
         static readonly Color Glass = new Color(.031f, .071f, .077f, .88f);
@@ -39,7 +41,7 @@ namespace PathOfDawn.Presentation
 
         TMP_FontAsset font, display;
         Canvas canvas;
-        RectTransform frame, layer, notice, scenicButton;
+        RectTransform frame, layer, notice, scenicButton, scriptureNotice;
         GospelLuminousUi book;
         bool usingBook, modal = true, running;
         string currentView = "none";
@@ -48,7 +50,7 @@ namespace PathOfDawn.Presentation
         Button interact;
         DawnPointerPad movementPad;
         Vector2 lastMove;
-        float noticeUntil, nextHudUpdate;
+        float noticeUntil, nextHudUpdate, scriptureNoticeUntil;
         Rect youngPortraitUv = new Rect(0, 0, .455f, 1);
         Rect adultPortraitUv = new Rect(.5f, 0, .5f, 1);
         static Sprite solidSprite;
@@ -81,6 +83,11 @@ namespace PathOfDawn.Presentation
             notice = Panel(frame, "Journey notice", 350, 118, 580, 52, Ink, true);
             noticeText = Text(notice, "", 18, 10, 544, 33, 23, White, TextAlignmentOptions.Center);
             notice.gameObject.SetActive(false);
+            scriptureNotice = Rect(frame, "Quiet Scripture addition notice", 828, 127, 400, 36);
+            Text(scriptureNotice, "성경에 말씀이 추가되었습니다.", 0, 0, 400, 36, 18,
+                new Color(.90f, .87f, .70f), TextAlignmentOptions.MidlineRight);
+            scriptureNotice.gameObject.AddComponent<CanvasGroup>().blocksRaycasts = false;
+            scriptureNotice.gameObject.SetActive(false);
 
             var bookObject = new GameObject("Preserved Scripture book and dialogue");
             bookObject.transform.SetParent(transform, false);
@@ -96,6 +103,12 @@ namespace PathOfDawn.Presentation
         void Update()
         {
             if (notice != null) notice.gameObject.SetActive(!usingBook && Time.unscaledTime < noticeUntil);
+            if (scriptureNotice != null)
+            {
+                bool visible = !usingBook && Time.unscaledTime < scriptureNoticeUntil;
+                scriptureNotice.gameObject.SetActive(visible);
+                if (visible) scriptureNotice.GetComponent<CanvasGroup>().alpha = Mathf.Clamp01((scriptureNoticeUntil - Time.unscaledTime) / .45f);
+            }
             if (usingBook || modal || movementPad == null || !movementPad.gameObject.activeInHierarchy) return;
             var value = movementPad.Value;
             if ((value - lastMove).sqrMagnitude > .00001f)
@@ -119,18 +132,22 @@ namespace PathOfDawn.Presentation
         {
             ReleaseMovement(); usingBook = false; ScenicView = false;
             if (isModal) { noticeUntil = 0; notice.gameObject.SetActive(false); }
+            if (view != "story" && view != "chapter") scriptureNoticeUntil = 0;
             if (book != null) book.CanvasView.gameObject.SetActive(false);
             canvas.gameObject.SetActive(true);
             if (layer != null) { layer.gameObject.SetActive(false); Destroy(layer.gameObject); }
             if (scenicButton != null) { scenicButton.gameObject.SetActive(false); Destroy(scenicButton.gameObject); scenicButton = null; }
             layer = Rect(frame, "Pilgrimage " + view, 0, 0, 1280, 720);
             currentView = view; modal = isModal;
-            if (isModal) layer.gameObject.AddComponent<GospelUiMotion>();
+            // Story illustrations remain opaque during every dialogue change.
+            // Fading the entire layer exposed the future exploration field.
+            if (isModal && view != "story") layer.gameObject.AddComponent<GospelUiMotion>();
             movementPad = null; runTint = null;
             objective = navigation = progressText = ageText = helpText = null;
             scriptureFill = objectiveFill = null; interact = null;
             if (veil) Panel(layer, "Atmospheric menu shade", 0, 0, 1280, 720, new Color(.008f, .022f, .039f, .76f));
             notice.SetAsLastSibling();
+            scriptureNotice.SetAsLastSibling();
         }
 
         void BeginBook()
@@ -366,22 +383,28 @@ namespace PathOfDawn.Presentation
             Footer();
         }
 
-        public void ShowSettings(float volume, bool muted)
+        public void ShowSettings(float volume, bool muted, bool voiceEnabled = true)
         {
             Begin("settings"); Header("SOUND", "여정의 소리");
-            var box = Panel(layer, "Sound settings", 110, 165, 1060, 383, Glass, true);
-            Text(box, "배경 음악", 35, 28, 720, 46, 30, White);
+            var box = Panel(layer, "Sound settings", 110, 145, 1060, 445, Glass, true);
+            Text(box, "전체 음량", 35, 28, 720, 46, 30, White);
             var value = Text(box, Mathf.RoundToInt(Mathf.Clamp01(volume) * 100) + "%", 813, 35, 210, 39, 28, Gold, TextAlignmentOptions.Right);
             var slider = VolumeSlider(box, 35, 119, 987, Mathf.Clamp01(volume));
             slider.onValueChanged.AddListener(v => { Gesture(); value.text = Mathf.RoundToInt(v * 100) + "%"; OnMusicVolume?.Invoke(v); });
-            var mute = B(box, muted ? "음악 켜기" : "음악 끄기", 35, 222, 458, 65, null);
+            var mute = B(box, muted ? "소리 켜기" : "소리 끄기", 35, 213, 458, 58, null);
             mute.onClick.AddListener(() => {
                 muted = !muted;
-                mute.GetComponentInChildren<TextMeshProUGUI>().text = muted ? "음악 켜기" : "음악 끄기";
+                mute.GetComponentInChildren<TextMeshProUGUI>().text = muted ? "소리 켜기" : "소리 끄기";
                 OnMusicMute?.Invoke(muted);
             });
-            B(box, "돌아가기", 545, 222, 477, 65, OnResume, true, true);
-            Text(box, "처음 클릭하거나 터치하면 음악이 시작됩니다.", 36, 325, 988, 31, 21, Quiet);
+            var voiceToggle = B(box, voiceEnabled ? "대사 음성 · 켜짐" : "대사 음성 · 꺼짐", 545, 213, 477, 58, null);
+            voiceToggle.onClick.AddListener(() => {
+                Gesture(); voiceEnabled = !voiceEnabled;
+                voiceToggle.GetComponentInChildren<TextMeshProUGUI>().text = voiceEnabled ? "대사 음성 · 켜짐" : "대사 음성 · 꺼짐";
+                OnVoiceEnabled?.Invoke(voiceEnabled);
+            });
+            B(box, "돌아가기", 545, 300, 477, 62, OnResume, true, true);
+            Text(box, "핵심 장면에는 한국어 음성이 재생됩니다.\n처음 클릭하거나 터치하면 소리가 시작됩니다.", 36, 306, 480, 81, 19, Quiet);
         }
 
         public void ShowChapter(string title, string age, string summary, Action enter)
@@ -420,6 +443,16 @@ namespace PathOfDawn.Presentation
             if (notice == null) return;
             noticeText.text = message; noticeUntil = Time.unscaledTime + 3.5f;
             notice.SetAsLastSibling(); notice.gameObject.SetActive(true);
+        }
+
+        public void NotifyScriptureAdded()
+        {
+            if (scriptureNotice == null) return;
+            ScriptureNoticeCount++;
+            scriptureNoticeUntil = Time.unscaledTime + 2.8f;
+            scriptureNotice.GetComponent<CanvasGroup>().alpha = 1;
+            scriptureNotice.SetAsLastSibling();
+            scriptureNotice.gameObject.SetActive(true);
         }
 
         void Header(string english, string korean)

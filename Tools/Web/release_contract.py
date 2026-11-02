@@ -89,7 +89,19 @@ RESTAGE = {
 }
 
 
+NATIVITY = {
+    'name': 'nativity',
+    'revisions': {'FantasyCards':'fm-nativity-2026-11-02','PathOfDawn':'gospel-nativity-2026-11-02'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game:'Artifacts/Validation/Nativity' for game in ('FantasyCards','PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'nativity':
+        return NATIVITY
     if name == 'restage':
         return RESTAGE
     if name == 'reprise':

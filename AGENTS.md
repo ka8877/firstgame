@@ -1,5 +1,13 @@
 # 두 독립 Unity 게임
 
+## 현재 탄생 이야기·말씀 성경책·주요 대사 음성 개정 — Nativity
+
+현재 요청은 `fm-nativity-2026-11-02` / `gospel-nativity-2026-11-02`, Web 프로필 `nativity`다. 카드게임은 확인 가능한 후기 원작 근거에 따라 누락 규칙을 추가하며 기존 카드·ID·소유·재화·저장 호환과 실제 카드 내부 수치 갱신을 보존한다. 확인한 기능과 재구성한 부분을 구분한다.
+
+예수님의 길은 성경 기록에 정확한 탄생 도입, 실제 성경책처럼 발견한 면을 채우는 UI, 초반 이야기를 끊지 않는 작은 말씀 획득 안내와 조용한 처리, 탄생에 어울리는 음악, Ori를 참고한 간결한 UI/이동 감각을 개선한다. 주요 대사에는 자연스러운 한국어 AI 음성을 추가하되 일반 합성 화자를 사용하고 특정 인물의 목소리를 복제하지 않는다. 본문 인용·기록 요약·극화 대사를 구분하고 기존23사건/19본문·안정ID·저장·자유 XZ·원본/GUID·finite Cedar 회귀를 보존한다.
+
+소유권: `/root/restage_card_rules` 카드 Core/규칙과 대응 테스트, `/root/nativity_story` Gospel story Core, `/root/nativity_audio` 오디오/음성 코드·문안 manifest·생성기 소스, `/root/restage_gospel_world` 월드/이동, 루트 Gospel App/UI/책·새 원화·통합·원본 검토다. **로컬 생성기 실행·모델 추론·모든 테스트·Unity/Editor/Scene/Font·브라우저·빌드·저장 공간·Git/기존 Pages 배포는 `/root/remaster_release`만 수행한다.** 생성기는 문안/스크립트가 확정된 뒤 그 소유자가 실행하며 제품 검증은 전체 관련 소스 동결 뒤 수행한다. 새 근거는 `Artifacts/Validation/Nativity`, 생성물은 `/tmp/firstgame-nativity-*`다. 이전 Restage 및 모든 과거 원본·승인/실패 근거·고유 ZIP을 보존하며 이전 검사 통과를 새 구현의 통과로 바꾸지 않는다. 공개 파일은 이번 Nativity에 한해 manifest를 포함해 실제985MB 미만을 검증하고 기존 승인된 GitHub/Pages URL에 배포한다.
+
 ## 현재 타이틀·상점·실시간 카드 수치·회화형 필드 개정 — Restage
 
 현재 사용자 요청은 `fm-restage-2026-11-02` / `gospel-canopy-2026-11-02`, Web 프로필 `restage`다. 아래 Reprise는 이전 성공판이다. 판마는 후기 원작 자료와 실제 Core를 대조해 누락 규칙을 보완하고, 코인·장비·피해의 실제 적용 시점에 카드 내부 AP/DP/HP가 바뀌도록 수정한다. 원본 카드·ID·전체 앨범·소유 카드·재화·저장 호환을 보존한다. 타이틀·상점·실제 상품별 포장/뒷면·양측 정보 경계·글꼴을 현대적인 판타지 스타일로 개선한다. 새 상품 표현을 원작 확인 기능으로 소개하지 않는다.

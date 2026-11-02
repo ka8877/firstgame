@@ -1,0 +1,618 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-nativity-2026-11-02",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh current Nativity ordinary input: voiced introduction actual-source start/bookstop/nextkey+PCM, accurately sourced51openingturns, quiet acquisition without reward interruption, physical blank/earned Bible cover/contents/rawleaf privacy and real newfour-scene atlas. Existing local field/NPC/lamp/save paths and bounded public field scope remain separate. No Unity/debug/save injection; exact voice text/clip and all28 resources have separate source/Native proof. Root must directly review current originals.",
+    "requiredCheckpoints": [
+      "title",
+      "birth-story-first",
+      "bible-empty-zero",
+      "bible-empty-cover",
+      "bible-empty-contents",
+      "bible-empty-second-spread",
+      "annunciation-second-turn",
+      "visitation-current-story",
+      "joseph-dream-current-story",
+      "first-scripture-quiet-notice",
+      "first-inscribed-second-blank",
+      "first-passage-scrolled",
+      "bible-first-discovered-contents",
+      "contents-opens-earned-passage",
+      "unseen-after-first-event",
+      "magi-house-current-story",
+      "child-chapter",
+      "child-free-field",
+      "field-after-forward",
+      "field-after-backward",
+      "field-after-left",
+      "field-after-right",
+      "field-after-diagonal",
+      "after-exploration-dash",
+      "actual-joseph-story",
+      "after-first-npc",
+      "mary-well-finite-lighting",
+      "illustrated-inventory",
+      "lamp-equipped-field",
+      "actual-status",
+      "saved-xyz-field",
+      "continued-xyz-field",
+      "continued-physical-bible"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current Nativity title; original source captures need actual review."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.166,
+          0.8
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 400
+      },
+      {
+        "type": "audio",
+        "label": "narration-initial-current-line"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "빈 성경 펼치기",
+        "settleMs": 250
+      },
+      {
+        "type": "audio",
+        "label": "narration-book-stopped"
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-zero",
+        "expected": "Physical Bible starts0/19, both leaves blank and unknown titles/references hidden."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.613,
+          0.051
+        ],
+        "label": "표지",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-cover",
+        "expected": "A physical Bible cover is available before any discovery; no invented contents."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "차례",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-contents",
+        "expected": "Before acquisition the contents do not disclose future Scripture titles/references."
+      },
+      {
+        "type": "review_input",
+        "name": "empty-bible-contents",
+        "expected": "Directly inspect actual cover/contents originals and no future metadata before acknowledging ordinary-input continuation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.416,
+          0.928
+        ],
+        "label": "성경 펼치기",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.376,
+          0.928
+        ],
+        "label": "다음 면",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-empty-second-spread",
+        "expected": "Undiscovered spread remains blank."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "이전 면",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.86,
+          0.928
+        ],
+        "label": "여정으로",
+        "settleMs": 400
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-story-first",
+        "expected": "Actual first voiced Nazareth introduction, exact summary reference; no future12yo scene before birth."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 대화",
+        "settleMs": 400
+      },
+      {
+        "type": "audio",
+        "label": "narration-after-book-next-line"
+      },
+      {
+        "type": "checkpoint",
+        "name": "annunciation-second-turn",
+        "expected": "Actual next voiced turn uses key1; old intro is stopped, raw references remain below dialogue."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "마리아의 방문까지 이야기 계속",
+        "settleMs": 650,
+        "repeat": 2
+      },
+      {
+        "type": "checkpoint",
+        "name": "visitation-current-story",
+        "expected": "Actual Elizabeth visitation panel reached at firstquestbeat3."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉의 기록으로 이야기 계속",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "joseph-dream-current-story",
+        "expected": "Actual Joseph dream panel reached at firstquestbeat4."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "첫 열 대화 마치기",
+        "settleMs": 650,
+        "repeat": 6
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-scripture-quiet-notice",
+        "expected": "After10actualturns firstpassage1/19 is added quietly: small exactnotice and nextmangerstory, no rewardmodal/autoBook/chime."
+      },
+      {
+        "type": "review_input",
+        "name": "quiet-first-award",
+        "expected": "Inspect first-scripture-quiet-notice original plus current nextmangerstory1/19. Acknowledge only real quiet boundary, never inject a cursor/save."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "기록된 성경",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-inscribed-second-blank",
+        "expected": "Exactly first passage inscribed on actualleftleaf, secondleaf remains blank."
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.34,
+          0.56
+        ],
+        "deltaY": 420,
+        "settleMs": 700,
+        "label": "본문 실제 스크롤"
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-passage-scrolled",
+        "expected": "Actual long Scripture page can scroll within its book leaf."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.68,
+          0.051
+        ],
+        "label": "발견한 말씀의 차례",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "bible-first-discovered-contents",
+        "expected": "Only earned reference appears in contents; undiscovered future metadata hidden."
+      },
+      {
+        "type": "review_input",
+        "name": "discovered-bible-contents",
+        "expected": "Directly inspect the actual first earned contents row before the exact ordinary link click."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.30195,
+          0.26944
+        ],
+        "label": "첫 발견 본문 바로 열기",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "contents-opens-earned-passage",
+        "expected": "Actual discovered contents link opens the exact earned raw passage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.376,
+          0.928
+        ],
+        "label": "다음 면",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "unseen-after-first-event",
+        "expected": "Future leaves remain blank after one real discovery."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.126,
+          0.928
+        ],
+        "label": "이전 면",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.86,
+          0.928
+        ],
+        "label": "여정으로",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 서른네 대화",
+        "settleMs": 650,
+        "repeat": 34
+      },
+      {
+        "type": "checkpoint",
+        "name": "magi-house-current-story",
+        "expected": "Matthew house/Magi panel occurs later in its distinct sourced account, not same-night shepherd manger."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 나사렛 성장 일곱 대화",
+        "settleMs": 650,
+        "repeat": 7
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-chapter",
+        "expected": "Exactly51openingturns across11stablequests lead into age12chapter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.8292
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-free-field",
+        "expected": "Current real child, physical forest floor and compactHUD after11/23goals and11/19passages."
+      },
+      {
+        "type": "audio",
+        "label": "nativity-temple-field"
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w"
+        ],
+        "ms": 450,
+        "releaseAfterCapture": true,
+        "settleMs": 100
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-forward",
+        "expected": "Real physical keyboard XZ movement and facing; requested keys are released after the actual original capture."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "s"
+        ],
+        "ms": 450,
+        "releaseAfterCapture": true,
+        "settleMs": 100
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-backward",
+        "expected": "Real physical keyboard XZ movement and facing; requested keys are released after the actual original capture."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "a"
+        ],
+        "ms": 450,
+        "releaseAfterCapture": true,
+        "settleMs": 100
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-left",
+        "expected": "Real physical keyboard XZ movement and facing; requested keys are released after the actual original capture."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "d"
+        ],
+        "ms": 450,
+        "releaseAfterCapture": true,
+        "settleMs": 100
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-right",
+        "expected": "Real physical keyboard XZ movement and facing; requested keys are released after the actual original capture."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "w",
+          "d"
+        ],
+        "ms": 450,
+        "releaseAfterCapture": true,
+        "settleMs": 100
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-diagonal",
+        "expected": "Real physical keyboard XZ movement and facing; requested keys are released after the actual original capture."
+      },
+      {
+        "type": "hold",
+        "keys": [
+          "Control"
+        ],
+        "ms": 100,
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-exploration-dash",
+        "expected": "A short collision-respecting dash is available as a separate action; movement remains within the real field."
+      },
+      {
+        "type": "review_input",
+        "name": "npc-proximity",
+        "expected": "Walk physically to the visible Joseph waypoint until the touch/E interaction is active; then interact using normal input. No pose/game/save injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-joseph-story",
+        "expected": "The actual nearby NPC opens narrative dialogue with a historical/source distinction, rather than a read-to-advance passage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉과 다음 대화",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉과 대화 마치기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-first-npc",
+        "expected": "The first meeting advances the real goal from11 to12/23 without falsely awarding a twelfth Scripture passage."
+      },
+      {
+        "type": "review_input",
+        "name": "mary-well-route",
+        "expected": "Walk using ordinary keys/touch to the visible Mary and stone well area (east from Joseph), where the previous Web player produced a giant white rendering spread. Capture the actual final location with well and Mary in view. No pose/game/save injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "mary-well-finite-lighting",
+        "expected": "Actual final shipping Web rendering at the previously rejected Mary/well location has no white spread or black NaN silhouette, while character, architecture and lighting remain visible."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8855,
+          0.0708
+        ],
+        "label": "가방",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "illustrated-inventory",
+        "expected": "Real illustrated travel belongings and descriptions."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.57,
+          0.772
+        ],
+        "label": "등잔 장착",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.823,
+          0.772
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "lamp-equipped-field",
+        "expected": "The preserved authored oil lamp is physically small and equipped on the current character."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1078,
+          0.0736
+        ],
+        "label": "인물 상태",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-status",
+        "expected": "The current child,11/19 passages,12/23 goals and real equipped lamp appear in the status menu."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8766,
+          0.9194
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9527,
+          0.0708
+        ],
+        "label": "메뉴",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6684,
+          0.298
+        ],
+        "label": "현재 여정 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3285,
+          0.298
+        ],
+        "label": "여정 계속하기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-xyz-field",
+        "expected": "Actual field position and equipment immediately before full navigation."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.374,
+          0.8
+        ],
+        "label": "이어하기",
+        "settleMs": 1400
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-xyz-field",
+        "expected": "A real full reload and Continue restore the same physical position, progress and lamp."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7512,
+          0.0708
+        ],
+        "label": "기록된 성경",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-physical-bible",
+        "expected": "The actual earned pages remain inscribed after full browser reload; future leaves stay blank."
+      }
+    ]
+  }
+}

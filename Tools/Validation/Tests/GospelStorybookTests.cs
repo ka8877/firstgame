@@ -62,7 +62,7 @@ namespace FirstGame.Validation
             var story = journey.Chronicle;
             string firstId = story.CurrentQuest.ReadingId;
             Assert.That(story.BookPages.All(p => !p.IsDiscovered && p.Reading == null), Is.True);
-            for (int i = 0; i < story.DialogueCount - 1; i++)
+            for (int i = 0; i < story.StoryBeatCount - 1; i++)
             {
                 Assert.That(story.CurrentStoryBeat, Is.Not.Null);
                 Assert.That(story.AdvanceStory(out var notYet), Is.True);

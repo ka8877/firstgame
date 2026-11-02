@@ -1,0 +1,256 @@
+{
+  "releaseProfile": "restage",
+  "date": "2026-11-02",
+  "updatedUtc": "2026-11-02T08:29:04.466198+00:00",
+  "gameRevisions": {
+    "FantasyCards": "fm-restage-2026-11-02",
+    "PathOfDawn": "gospel-canopy-2026-11-02"
+  },
+  "currentTargets": [
+    "Web"
+  ],
+  "contentVersions": {
+    "FantasyCards": "fm-classic-0.1.0",
+    "PathOfDawn": "gospel-0.1.0"
+  },
+  "scope": "Current Restage Web-only live on-card equipment/coin/damage values, specific product packaging, fantasy title and field identities, plus Canopy painted scenery, expanded whole-body animation and modern story/Bible UI. No current Windows build is claimed; prior Windows ZIPs are historical. Pending, failed, rejected and approved evidence remain distinct; metadata is not a substitute for strict release gates.",
+  "core": {
+    "passed": 277,
+    "failed": 0,
+    "notExecuted": 0,
+    "results": {
+      "file": "Artifacts/Validation/Restage/Core/core-tests.trx",
+      "sha256": "f098ea4fbda0989686f0d9b23aa83f6a172711c62b98d1929b39329c335b4c87",
+      "bytes": 367095
+    },
+    "binding": {
+      "file": "Artifacts/Validation/Restage/Core/binding.json",
+      "sha256": "ba41e1e63d166638b369a4a3051e021bd5f8cf1ca902fbd0dd4ecdd02b45caac",
+      "bytes": 37155
+    }
+  },
+  "native": {
+    "FantasyCards": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "mechanicalStatus": "passed",
+      "sourceFingerprint": "472b47118f747f4163f25f44f71f7363750c1b375a206d34dcedcb763bce92a4",
+      "binding": {
+        "file": "Artifacts/Validation/Restage/Native/FantasyCards/binding.json",
+        "sha256": "ce6d8697c956cb72eaf295b4f1e02ce07aa502ead81cf09b852873919c19f125",
+        "bytes": 588
+      },
+      "results": {
+        "file": "Artifacts/Validation/Restage/Native/FantasyCards/native.xml",
+        "sha256": "aca08329dfebc5baa23673cd533642666dc4422178553ad9bb67c9ca67cdb967",
+        "bytes": 9428
+      },
+      "rootReview": {
+        "status": "approved",
+        "evidence": {
+          "file": "Artifacts/Validation/Restage/Root/cards-native-review.json",
+          "sha256": "a40974f66ac21639fe4b2320d825f898e79b58211005df5388b2b8eec20063c5",
+          "bytes": 4641
+        }
+      }
+    },
+    "PathOfDawn": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "mechanicalStatus": "passed",
+      "sourceFingerprint": "2020d030fe93a04df6cf9cbc1195d53e1ff89ec8b08fc17015218b917b249a76",
+      "binding": {
+        "file": "Artifacts/Validation/Restage/Native/PathOfDawn/binding.json",
+        "sha256": "24f484ddc271860cd5ed99dfd3d17480d8650ab96429acfc7d917aa4f3cdff3a",
+        "bytes": 584
+      },
+      "results": {
+        "file": "Artifacts/Validation/Restage/Native/PathOfDawn/native.xml",
+        "sha256": "1de17e802df25a3a0673c1d00efa10838dcec76ff6fb240d3024754451f68235",
+        "bytes": 13109
+      },
+      "rootReview": {
+        "status": "approved",
+        "evidence": {
+          "file": "Artifacts/Validation/Restage/Root/gospel-native-review.json",
+          "sha256": "1914f98d83ab2030328e8ccc8f3a87346238a664d74240c3a925dedb02572c16",
+          "bytes": 5055
+        }
+      }
+    }
+  },
+  "builds": {
+    "FantasyCards": {
+      "Web": {
+        "result": "Succeeded",
+        "revision": "fm-restage-2026-11-02",
+        "sourceFingerprint": "472b47118f747f4163f25f44f71f7363750c1b375a206d34dcedcb763bce92a4",
+        "errors": "0",
+        "evidence": {
+          "file": "/tmp/firstgame-restage-builds/FantasyCards/Web/BuildEvidence.txt",
+          "sha256": "05d4d99945b13a51cad2a29133eeb58e2337479a456042909706d8419d6e8e38",
+          "bytes": 260
+        },
+        "inputs": {
+          "file": "/tmp/firstgame-restage-builds/FantasyCards/Web/BuildInputs.json",
+          "sha256": "90a0e2c92eb6e2a42a57ee6acddbadc337de60cdbfb34e36b077971ee21e325b",
+          "bytes": 8099485
+        },
+        "runtimeFiles": 15365,
+        "runtimeBytes": 867852214
+      }
+    },
+    "PathOfDawn": {
+      "Web": {
+        "result": "Succeeded",
+        "revision": "gospel-canopy-2026-11-02",
+        "sourceFingerprint": "2020d030fe93a04df6cf9cbc1195d53e1ff89ec8b08fc17015218b917b249a76",
+        "errors": "0",
+        "evidence": {
+          "file": "/tmp/firstgame-restage-builds/PathOfDawn/Web/BuildEvidence.txt",
+          "sha256": "aeecbb5a5e8cd59c28824887f2673c58cb49a38e22c5e9a16f75d5a98616a466",
+          "bytes": 410
+        },
+        "inputs": {
+          "file": "/tmp/firstgame-restage-builds/PathOfDawn/Web/BuildInputs.json",
+          "sha256": "82fe048ead3785a94319c7ed4fd10107bb1fddfc8b842e80bfe2299a605aee25",
+          "bytes": 386323
+        },
+        "runtimeFiles": 5,
+        "runtimeBytes": 92671270
+      }
+    }
+  },
+  "browser": {
+    "FantasyCards": {
+      "Desktop720": {
+        "mechanicalStatus": "passed",
+        "checks": 57,
+        "report": {
+          "file": "Artifacts/Validation/Restage/Desktop720/FantasyCards/report.json",
+          "sha256": "112e0b095a4942d82a826c935cc6a65e48b613cabb7d2c8db560c11a79ab1207",
+          "bytes": 12463520
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 10
+      },
+      "Mobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 60,
+        "report": {
+          "file": "Artifacts/Validation/Restage/Mobile844/FantasyCards/report.json",
+          "sha256": "fb6a403eecc982a25bd32f82ee60d61b06a4378cd1b9d142305c5b6448786d9f",
+          "bytes": 12455832
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 41,
+        "report": {
+          "file": "Artifacts/Validation/Restage/PublicMobile844/FantasyCards/report.json",
+          "sha256": "54e79aa131fe1b6803462b6c95badccf55279fe81842a6a4838f4d216d06a351",
+          "bytes": 22308341
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 4
+      }
+    },
+    "PathOfDawn": {
+      "Desktop720": {
+        "mechanicalStatus": "passed",
+        "checks": 43,
+        "report": {
+          "file": "Artifacts/Validation/Restage/Desktop720/PathOfDawn/report.json",
+          "sha256": "7d71fdcd23b2814d4e22f3b99e0d3106de6b14d23f2c538856a18610dfdc1566",
+          "bytes": 201653
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 9
+      },
+      "Mobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 40,
+        "report": {
+          "file": "Artifacts/Validation/Restage/Mobile844/PathOfDawn/report.json",
+          "sha256": "e69e44cf5ef92cadee3efe8e3291c15b71415b9c7bcc58766b495cf944abdd49",
+          "bytes": 191296
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 8
+      },
+      "PublicMobile844": {
+        "mechanicalStatus": "passed",
+        "checks": 25,
+        "report": {
+          "file": "Artifacts/Validation/Restage/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "91da665f42216d4b10cc27aae94252933f3c49506add4a097b4c0c7bc731cce1",
+          "bytes": 102666
+        },
+        "visualReview": "approved",
+        "status": "verified",
+        "approvedOriginals": 5
+      }
+    }
+  },
+  "publication": {
+    "status": "verified",
+    "url": "https://ka8877.github.io/firstgame/",
+    "stageManifest": {
+      "file": "/tmp/firstgame-restage-staged-site/build-manifest.json",
+      "sha256": "8fa48f49b50d4d8315884cebe30e1e583fc0c28db5c0a448efe118841b4fb359",
+      "bytes": 2099209
+    },
+    "publicReport": {
+      "file": "Artifacts/Validation/Restage/PublicPortal/report.json",
+      "sha256": "7ee4947594fb74a23f8af8fc1bfa9a4eb9760d4b8375c6f1924da4e65df8e1f0",
+      "bytes": 16923510
+    },
+    "verifiedFiles": 15409,
+    "scope": "Every non-image file freshly fetched after this deployment; only15350 unchanged JPEG byte identities inherit the explicitly dated earlier Reprise actual GETs and Root-approved publication through pinned preserved inputs/producer snapshots plus equal before/new deployed Git blobs. No previous game test is a new pass. Current portal originals reviewed by Root."
+  },
+  "limitations": [
+    "Software GPU and Chromium touch emulation; no physical mobile/Windows hardware execution or FPS claim.",
+    "Native save fixtures and real browser storage/full reload are separate checks.",
+    "Actual WebAudio route/PCM evidence is not human speaker listening.",
+    "Actual OS/tab visibility pause was not measurable in this virtual Chromium; controller regressions and normal-focus PCM are separate evidence.",
+    "Root original-image review is not user aesthetic approval.",
+    "Original archive metadata/media and implemented playable abilities are separate scopes."
+  ],
+  "cardMediaLastAudit": {
+    "revision": "fm-polish-2026-10-29",
+    "releaseReady": true,
+    "inventoryOnly": false,
+    "sourceRecords": 15350,
+    "verifiedStreamedImages": 15350,
+    "missingStreamedImages": 0,
+    "deliveryBytes": 749704026,
+    "playableCoverage": {
+      "total": 2646,
+      "embeddedPreserved": 605,
+      "streamedAvailable": 2041,
+      "artAvailable": 2646,
+      "missing": 0
+    },
+    "archiveCoverage": {
+      "total": 15350,
+      "artAvailableIncludingPreservedResources": 15350,
+      "missing": 0
+    },
+    "missingIdLedger": "Tools/Data/Renewal/missing-media.json",
+    "evidence": {
+      "file": "Tools/Data/Renewal/media-verification.json",
+      "sha256": "f6377c3df8c0dc88973082ca6c10c2f186549897d97db063d89d7ffb22830509",
+      "bytes": 545
+    },
+    "scope": "Last retained audit; in-progress download counts are not a complete media release pass."
+  }
+}

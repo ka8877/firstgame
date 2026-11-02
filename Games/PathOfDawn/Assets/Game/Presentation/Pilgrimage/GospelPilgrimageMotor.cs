@@ -142,6 +142,13 @@ namespace PathOfDawn.Presentation
                 {
                     Step(dashDirection * DashSpeed, true, burst, now - step + burst);
                     dashRemaining = Mathf.Max(0, dashRemaining - burst);
+                    if (dashRemaining <= .000001f)
+                    {
+                        // The exploration burst owns only its stated interval.
+                        // Resume the current stick/key intent at its end so a
+                        // released control cannot inherit dash-speed skating.
+                        dashRemaining = 0; planar = desired; smoothVelocity = Vector3.zero;
+                    }
                 }
                 // Only the actual 0.19-second movement interval uses dash speed,
                 // even when one rendered frame is longer than the whole dash.
