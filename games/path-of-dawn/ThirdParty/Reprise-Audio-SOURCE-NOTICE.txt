@@ -1,0 +1,30 @@
+FirstGame Reprise audio — 2026-11-02
+
+All new sound-design layers and all three new musical scores were authored for
+this project. No Ori, Final Fantasy, Fantasy Masters commercial recording,
+existing MIDI/melody, voice, actor imitation or third-party sound-effect sample
+was used in these new files.
+
+Generator: Tools/Audio/Reprise/render-audio.py
+Exact files / source scores / PCM measurements: Tools/Audio/Reprise/manifest.json
+Musical notation and MIDI: Tools/Audio/Reprise/storybook-{birth,temple,jordan}.*
+
+Orchestral instrumental samples used to perform the three scores:
+FluidR3 GM, Copyright (C) 2000-2002, 2008 Frank Wen; 2008 Toby Smithe.
+MIT license.
+The full preserved license is Tools/Audio/FluidR3-LICENSE.txt.
+The existing reproducible download is Tools/Audio/download-soundfont.py.
+SoundFont SHA256:
+74594e8f4250680adf590507a306655a299935343583256f3b722c48a1bc1cb0
+
+Small effects and environmental wind/water/bird textures use deterministic
+offline synthesis and do not use recorded animal or environmental samples.
+No gameplay RNG is used by the generator or runtime sound presentation.
+
+The pre-existing original Fantasy Masters BGM files and their portfolio /
+recording / loop-edit provenance remain unchanged. This notice describes only
+the new Reprise files, not those original-game music recordings.
+
+The previous Gospel soundtrack and all previous effects remain preserved in
+their existing source paths. New resources are loaded from Audio/FmReprise and
+Audio/GospelStorybook; this is an explicitly new arrangement, not recovered OST.
