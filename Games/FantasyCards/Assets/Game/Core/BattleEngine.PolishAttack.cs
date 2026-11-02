@@ -79,7 +79,7 @@ namespace FantasyCards.Core
                     break;
                 case 372:
                     extra = State.players[owner].genericSoul;
-                    State.players[owner].genericSoul = 0;
+                    SpendSouls(State.players[owner], Element.Dawn, 0, extra);
                     notice = "솔버스트 · 남은 무소울 " + extra + " 소각 / 추가 피해 " + extra;
                     break;
                 case 375:

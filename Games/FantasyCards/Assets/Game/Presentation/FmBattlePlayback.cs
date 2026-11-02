@@ -41,17 +41,15 @@ namespace FantasyCards.Presentation
             chronicleCoinTotals.Clear();
             foreach (var group in frames.Where(frame => frame.item.kind == "coin").GroupBy(frame => frame.item.sourceInstanceId))
                 chronicleCoinTotals[group.Key] = group.Max(frame => frame.item.coinIndex);
-            battlePresentedEvents.Clear(); battleRevealedSpells.Clear(); battleCoinResults.Clear(); battleCardTransitions.Clear(); battlePlaybackCaption = "전투 진행";
+            battlePresentedEvents.Clear(); battleRevealedSpells.Clear(); battleCoinResults.Clear(); battlePlaybackCaption = "전투 진행";
             battleVisualState = before; ShowBattle();
             // All events are retained. Speed and skip only shorten presentation, never reroll a coin.
             for (int i = 0; i < frames.Count; i++)
             {
                 var frame = frames[i]; var item = frame.item;
+                liveCardImpactFrame = frame; BattlePlaybackStatsCommitted = false;
                 battlePlaybackIndex = i + 1; battlePlaybackKind = item.kind;
                 battlePresentedEvents.Add(item.Copy());
-                // Coin previews are scoped to resolution. A later damage frame
-                // must show the actual health snapshot, not a stale coin value.
-                if (item.kind != "coin" && item.kind != "power") battleCardTransitions.Clear();
                 if (item.kind == "spell" && item.sourceInstanceId >= 0) battleRevealedSpells.Add(item.sourceInstanceId);
                 if (item.kind == "coin" && item.sourceInstanceId >= 0)
                 {
@@ -60,8 +58,6 @@ namespace FantasyCards.Presentation
                     if (item.coinIndex == 1) faces.Clear();
                     faces.Add(item.coinHeads);
                 }
-                if (item.hasStatTransition && item.sourceInstanceId >= 0 && (item.kind == "coin" || item.kind == "power"))
-                    battleCardTransitions[item.sourceInstanceId] = item;
                 if (item.kind == "coin" || item.kind == "power")
                     battleClashContext = frames.Skip(i).Select(next => next.item).FirstOrDefault(next =>
                         (next.kind == "attack" || next.kind == "counter" || next.kind == "direct") &&
@@ -79,6 +75,7 @@ namespace FantasyCards.Presentation
                 battleVisualState.phase = frame.phase; battleVisualState.winner = frame.winner;
             }
             battleVisualState = null; battlePlaybackCaption = ""; battlePlaybackKind = ""; battleClashContext = null;
+            liveCardImpactFrame = null; BattlePlaybackStatsCommitted = false;
             battlePlaybackActive = false; locked = false; message = Hint();
             ShowBattle(); PumpAi();
         }
@@ -113,6 +110,7 @@ namespace FantasyCards.Presentation
             bool fieldDiscard = item.kind == "discard-field";
             bool summon = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Unit;
             bool terrainPlay = play && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Terrain;
+            bool terrainDiscard = fieldDiscard && !string.IsNullOrEmpty(item.sourceDefinitionId) && CardCatalog.Get(item.sourceDefinitionId).kind == CardKind.Terrain;
             bool healingSpell = item.kind == "spell" && !string.IsNullOrEmpty(item.sourceDefinitionId) &&
                 (CardCatalog.Get(item.sourceDefinitionId).effect == Effect.Heal || CardCatalog.Get(item.sourceDefinitionId).effect == Effect.HealAll);
             bool heal = spell && (healingSpell || (item.stat == "Health" || item.stat == "Heal") && item.amount >= 0);
@@ -121,6 +119,12 @@ namespace FantasyCards.Presentation
             RectTransform source = null, target = null;
             if (item.sourceInstanceId >= 0) battleUnitViews.TryGetValue(item.sourceInstanceId, out source);
             if (item.targetInstanceId >= 0) battleUnitViews.TryGetValue(item.targetInstanceId, out target);
+            if (terrainDiscard)
+            {
+                int owner = item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor;
+                int position = battleVisualState.players[owner].terrain.FindIndex(c => c.instanceId == item.sourceInstanceId);
+                source = root.GetComponentsInChildren<RectTransform>().FirstOrDefault(view => view.name == "Backfield " + owner + " " + position);
+            }
             Vector2 sourcePoint = source != null ? BattleViewCenter(source) : LaneCenter(item.sourcePlayer >= 0 ? item.sourcePlayer : item.actor, item.sourceLane);
             Vector2 targetPoint = target != null ? BattleViewCenter(target) : LaneCenter(item.targetPlayer, item.targetLane);
             if (item.kind == "direct" || burn) targetPoint = DeckCenter(item.targetPlayer >= 0 ? item.targetPlayer : item.actor);
@@ -272,10 +276,17 @@ namespace FantasyCards.Presentation
             else if (item.kind == "discard") FmBattleAudio.Play("burn");
             else if (item.kind == "result") FmBattleAudio.Play(item.amount == 0 ? "victory" : item.amount == 1 ? "loss" : "turn");
 
+            DrawRestageFactionHeaders(layer);
+
             bool impactPlayed = false;
             for (float elapsed = 0; elapsed < duration && !battleSkipRequested; elapsed += Time.unscaledDeltaTime * battlePlaybackSpeed)
             {
                 float p = Mathf.Clamp01(elapsed / duration);
+                // Keep positions and card visibility at the pre-event state
+                // for movement/destruction. Commit only the numeric views at
+                // the actual coin settle, equipment landing or damage impact.
+                float statImpact = coin ? .62f : attack ? .42f : play ? .52f : spell ? .45f : 0;
+                if (!BattlePlaybackStatsCommitted && p >= statImpact) CommitLiveCardImpact();
                 if (effect != null) { effect.Progress = attack ? Mathf.InverseLerp(.34f, 1, p) : summon ? Mathf.InverseLerp(.22f, 1, p) : p; effect.SetAllDirty(); }
                 if (impactEffect != null) { impactEffect.Progress = Mathf.InverseLerp(.42f, .93f, p); impactEffect.SetAllDirty(); }
                 foreach (var arrival in arrivals)
@@ -338,6 +349,7 @@ namespace FantasyCards.Presentation
                 { impactPlayed = true; FmBattleAudio.PlayImpact(hit ? item.amount : Mathf.Max(1, item.amount), (targetPoint.x - .415f) * 1.5f); }
                 yield return null;
             }
+            if (!BattlePlaybackStatsCommitted) CommitLiveCardImpact();
             if (source != null) { source.localPosition = sourcePosition; source.localScale = sourceScale; source.localRotation = sourceRotation; }
             if (target != null) { target.localPosition = targetPosition; target.localScale = targetScale; }
             if (sourceOpacity != null) sourceOpacity.alpha = 1;
@@ -375,7 +387,7 @@ namespace FantasyCards.Presentation
             float slot = .81f / Mathf.Max(1, BattleDisplayState.rules.terrainLimit);
             return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3215f : .957f);
         }
-        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, owner == 1 ? .785f : .490f);
+        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, RestageLaneCenterY(owner));
         private Vector2 DeckCenter(int owner)
         {
             bool small = canvas.pixelRect.height < 600 && canvas.pixelRect.width < 900;
@@ -384,7 +396,7 @@ namespace FantasyCards.Presentation
         }
         private Vector2 GraveyardCenter(int owner)
         { var point = DeckCenter(owner); point.x = .937f; return point; }
-        private static Vector2 ClashCenter(int owner) => new Vector2(.416f, owner == 1 ? .785f : .490f);
+        private Vector2 ClashCenter(int owner) => new Vector2(.416f, RestageLaneCenterY(owner));
         private void AddClashCard(Transform parent, int owner, int instanceId, Dictionary<int, RectTransform> copies)
         {
             if (owner < 0 || owner > 1 || instanceId < 0 || copies.ContainsKey(instanceId)) return;
@@ -392,7 +404,8 @@ namespace FantasyCards.Presentation
             // No opponent hand or unrevealed reserved spell is ever materialized here.
             if (unit == null) return;
             var definition = CardCatalog.Get(unit.definitionId); var point = ClashCenter(owner);
-            var card = ArcanaCardFace(parent, definition, point.x - .115f, point.y - .1375f, point.x + .115f, point.y + .1375f,
+            float halfHeight = Mathf.Min(.125f, (RestageLaneTop(owner) - (owner == 1 ? .660f : .365f)) * .49f);
+            var card = ArcanaCardFace(parent, definition, point.x - .115f, point.y - halfHeight, point.x + .115f, point.y + halfHeight,
                 ArcanaCardMode.Duel, false, unit);
             card.gameObject.name = "Central duel card " + instanceId;
             copies[instanceId] = card.GetComponentInChildren<FmArcanaCardSurface>().GetComponent<RectTransform>();

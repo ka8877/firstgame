@@ -21,30 +21,37 @@ namespace FantasyCards.Presentation
             battleScreen = false; redraw = draw; Clear(); UpdateWorld(); FmOriginalMusic.SetScene(name == "collection" || name == "deck" ? "deck" : "lobby");
             polishBack = name == "lobby" ? (Action)ShowTitle : ShowQuestLobby;
             RestorationBackdrop();
-            Text(root, "FANTASY MASTERS", .045f, .92f, .74f, .975f, 33, gold);
-            Text(root, title, .045f, .836f, .74f, .918f, 35, ivory);
-            Text(root, subtitle, .045f, .765f, .744f, .835f, 23, new Color(.75f, .80f, .90f));
+            RestageText(root, "FANTASY MASTERS  /  REMASTER", .045f, .925f, .74f, .978f, 24, gold, "Restage client masthead", true).characterSpacing = 1.4f;
+            RestageText(root, title, .045f, .838f, .74f, .925f, 40, ivory, "Restage screen title", true);
+            RestageText(root, subtitle, .045f, .771f, .744f, .836f, 23, new Color(.75f, .83f, .88f), "Restage screen subtitle");
+            RestageHairline(root, .045f, .760f, .744f, new Color(.45f, .66f, .72f, .45f));
             DrawQuestRail();
         }
 
         private void DrawQuestRail()
         {
-            var rail = RestorationPanel(root, .77f, .045f, .96f, .957f, new Color(.015f, .027f, .064f, .98f), "Quest wallet and profile rail");
-            Text(rail, "FANTASY\nMASTERS", .04f, .85f, .96f, .98f, 31, gold, TextAlignmentOptions.Center);
-            var orb = Panel(rail, .29f, .72f, .71f, .86f, Color.clear); RestorationTrim(orb, true);
-            RestorationButton(rail, LocalProfileName, .04f, .65f, .96f, .73f, () => ShowLocalProfile(redraw ?? ShowLobby));
-            var wallet = Panel(rail, .06f, .51f, .94f, .64f, new Color(.08f, .095f, .15f));
-            wallet.gameObject.name = "Quest actual SP balance";
-            Text(wallet, "SP · 게임머니", .05f, .56f, .95f, .98f, 20, RestorationMetal, TextAlignmentOptions.Center);
-            Text(wallet, QuestSp.ToString("N0"), .03f, .01f, .97f, .57f, 35, gold, TextAlignmentOptions.Center);
-            var cash = RestorationButton(rail, "GP  " + QuestGp + " · 준비 중", .06f, .415f, .94f, .495f, ShowQuestPaidInformation);
-            cash.gameObject.name = "Quest GP future payments notice";
-            BindTooltip(cash.gameObject, "GP · 유료 캐시", "GP 결제와 유료 상품은 추후 추가됩니다. 현재는 SP로 카드팩을 구입할 수 있습니다.");
-            Text(rail, "보유 " + QuestOwnedTotal.ToString("N0") + "장\n" + (questEconomy == null ? 0 : CardCatalog.All.Count(card => questEconomy.OwnedCount(card.id) > 0)) + "종", .05f, .315f, .95f, .41f, 22, teal, TextAlignmentOptions.Center);
-            RestorationButton(rail, "카드 앨범", .06f, .235f, .94f, .31f, ShowRestorationOriginalArchive);
-            RestorationButton(rail, "음악 / 효과음", .06f, .155f, .94f, .228f, () => ShowSoundSettings(redraw ?? ShowLobby));
-            RestorationButton(rail, "타이틀", .06f, .065f, .94f, .145f, ShowTitle);
-            Text(rail, "싱글 플레이", .03f, .003f, .97f, .06f, 18, RestorationMetal, TextAlignmentOptions.Center);
+            var rail=RestagePanel(root,.77f,.045f,.96f,.957f,new Color(.014f,.031f,.056f,.98f),"Quest wallet and profile rail",new Color(.70f,.65f,.48f,.55f));
+            RestageText(rail,"MY COLLECTION",.08f,.916f,.92f,.975f,21,gold,"Restage profile heading",true,TextAlignmentOptions.Center).characterSpacing=1.3f;
+            var profile=Button(rail,"",.08f,.705f,.92f,.902f,()=>ShowLocalProfile(redraw??ShowLobby),new Color(.036f,.074f,.098f),23);
+            profile.name="Restage profile and avatar";
+            var avatar=LocalProfileAvatar();Artwork(profile.transform,avatar,.035f,.07f,.39f,.93f);
+            var profileName=RestageText(profile.transform,LocalProfileName,.415f,.43f,.99f,.90f,23,ivory,"Restage profile name",true);
+            profileName.textWrappingMode=TextWrappingModes.NoWrap;profileName.overflowMode=TextOverflowModes.Ellipsis;
+            profileName.GetComponent<UiCanvasTextSize>().ConfigureCard(23);
+            var profileLink=RestageText(profile.transform,"프로필 보기",.415f,.07f,.99f,.43f,18,new Color(.65f,.80f,.83f),"Restage profile link");
+            profileLink.textWrappingMode=TextWrappingModes.NoWrap;profileLink.overflowMode=TextOverflowModes.Ellipsis;
+            profileLink.GetComponent<UiCanvasTextSize>().ConfigureCard(18);
+            var wallet=RestagePanel(rail,.08f,.53f,.92f,.68f,new Color(.055f,.095f,.125f),"Quest actual SP balance",new Color(.77f,.67f,.42f,.7f));
+            RestageText(wallet,"SP · 게임머니",.09f,.60f,.91f,.95f,20,new Color(.76f,.78f,.73f),"Restage wallet label");
+            RestageText(wallet,QuestSp.ToString("N0"),.08f,.04f,.92f,.66f,40,gold,"Restage wallet actual balance",true,TextAlignmentOptions.Right);
+            var cash=Button(rail,"GP  "+QuestGp+" · 준비 중",.08f,.438f,.92f,.512f,ShowQuestPaidInformation,new Color(.03f,.06f,.095f),22);
+            cash.name="Quest GP future payments notice";BindTooltip(cash.gameObject,"GP · 유료 캐시","GP 결제와 유료 상품은 추후 추가됩니다. 현재는 SP로 카드팩을 구입할 수 있습니다.");
+            RestageText(rail,"보유 "+QuestOwnedTotal.ToString("N0")+"장 / "+(questEconomy==null?0:CardCatalog.All.Count(card=>questEconomy.OwnedCount(card.id)>0))+"종",.08f,.355f,.92f,.425f,22,teal,"Restage owned collection count",false,TextAlignmentOptions.Center);
+            RestageHairline(rail,.09f,.348f,.91f,new Color(.5f,.64f,.72f,.35f));
+            RestorationButton(rail,"카드 앨범",.08f,.252f,.92f,.326f,ShowRestorationOriginalArchive);
+            RestorationButton(rail,"음악 / 효과음",.08f,.163f,.92f,.237f,()=>ShowSoundSettings(redraw??ShowLobby));
+            RestorationButton(rail,"타이틀",.08f,.074f,.92f,.148f,ShowTitle);
+            RestageText(rail,"SINGLE PLAYER",.08f,.008f,.92f,.062f,17,new Color(.55f,.68f,.76f),"Restage offline mode",true,TextAlignmentOptions.Center).characterSpacing=1;
         }
 
         private void QuestNavigation()
@@ -91,9 +98,12 @@ namespace FantasyCards.Presentation
                     float top = .96f - i * .238f;
                     var row = RestorationButton(list, "", .025f, top - .213f, .975f, top, () => ShowQuestStage(stage.id), won, available);
                     row.gameObject.name = "Quest scenario " + stage.id;
-                    Text(row.transform, stage.tier.ToString("00"), .015f, .05f, .11f, .95f, 28, gold, TextAlignmentOptions.Center);
-                    Text(row.transform, stage.name, .13f, .44f, .79f, .96f, 27, ivory);
-                    Text(row.transform, won ? "다시 승리하면 SP를 받습니다." : "승리 SP + 첫 클리어 보너스", .13f, .03f, .79f, .47f, 21, RestorationMetal);
+                    var encounter = DemoCatalog.GetEncounter(stage.encounterIndex);
+                    var featured = DemoCatalog.GetDeck(encounter.deckId).cards.Select(CardCatalog.Get).First(card => card.kind == CardKind.Unit);
+                    ArcanaCardFace(row.transform, featured, .012f, .045f, .14f, .955f, ArcanaCardMode.Showcase);
+                    Text(row.transform, stage.tier.ToString("00"), .15f, .05f, .23f, .95f, 28, gold, TextAlignmentOptions.Center);
+                    Text(row.transform, stage.name, .25f, .44f, .79f, .96f, 27, ivory);
+                    Text(row.transform, won ? "다시 승리하면 SP를 받습니다." : "승리 SP + 첫 클리어 보너스", .25f, .03f, .79f, .47f, 21, RestorationMetal);
                     Text(row.transform, won ? "완료 · 입장" : available ? "입장" : "잠김", .80f, .05f, .98f, .95f, 23, available ? gold : RestorationMetal, TextAlignmentOptions.Center);
                     BindTooltip(row.gameObject, stage.name, available ? stage.description : "앞선 시나리오에서 승리하면 열립니다.");
                 }
@@ -107,8 +117,10 @@ namespace FantasyCards.Presentation
                     var entry = practice[i]; float top = .96f - i * .32f;
                     var row = RestorationButton(list, "", .025f, top - .29f, .975f, top,
                         () => ShowQuestEncounter(entry.index), false);
-                    Text(row.transform, entry.encounter.name, .04f, .43f, .79f, .95f, 28, ivory);
-                    Text(row.transform, "내 보유 덱으로 도전 · 대전 보상 SP", .04f, .04f, .79f, .45f, 21, RestorationMetal);
+                    var featured = DemoCatalog.GetDeck(entry.encounter.deckId).cards.Select(CardCatalog.Get).First(card => card.kind == CardKind.Unit);
+                    ArcanaCardFace(row.transform, featured, .012f, .05f, .17f, .95f, ArcanaCardMode.Showcase);
+                    Text(row.transform, entry.encounter.name, .20f, .43f, .79f, .95f, 28, ivory);
+                    Text(row.transform, "내 보유 덱으로 도전 · 대전 보상 SP", .20f, .04f, .79f, .45f, 21, RestorationMetal);
                     Text(row.transform, "입장", .81f, .06f, .98f, .94f, 25, gold, TextAlignmentOptions.Center);
                 }
             }

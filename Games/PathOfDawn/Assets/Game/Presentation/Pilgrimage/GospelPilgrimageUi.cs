@@ -28,8 +28,8 @@ namespace PathOfDawn.Presentation
         public RectTransform Frame => usingBook ? book.Frame : frame;
         public bool ScenicView { get; private set; }
 
-        static readonly Color Ink = new Color(.015f, .037f, .063f, .91f);
-        static readonly Color Glass = new Color(.040f, .104f, .146f, .87f);
+        static readonly Color Ink = new Color(.018f, .037f, .044f, .92f);
+        static readonly Color Glass = new Color(.031f, .071f, .077f, .88f);
         static readonly Color Teal = new Color(.31f, .63f, .69f, .80f);
         static readonly Color LineColor = new Color(.50f, .74f, .75f, .45f);
         static readonly Color White = new Color(.91f, .96f, .96f);
@@ -52,6 +52,7 @@ namespace PathOfDawn.Presentation
         Rect youngPortraitUv = new Rect(0, 0, .455f, 1);
         Rect adultPortraitUv = new Rect(.5f, 0, .5f, 1);
         static Sprite solidSprite;
+        readonly DawnUi canopySkin = new DawnUi { ModernStyle = true };
 
         public void SetPortraitRegions(Rect youngUv, Rect adultUv)
         { youngPortraitUv = youngUv; adultPortraitUv = adultUv; }
@@ -124,6 +125,7 @@ namespace PathOfDawn.Presentation
             if (scenicButton != null) { scenicButton.gameObject.SetActive(false); Destroy(scenicButton.gameObject); scenicButton = null; }
             layer = Rect(frame, "Pilgrimage " + view, 0, 0, 1280, 720);
             currentView = view; modal = isModal;
+            if (isModal) layer.gameObject.AddComponent<GospelUiMotion>();
             movementPad = null; runTint = null;
             objective = navigation = progressText = ageText = helpText = null;
             scriptureFill = objectiveFill = null; interact = null;
@@ -141,10 +143,12 @@ namespace PathOfDawn.Presentation
         {
             Begin("title", true, false);
             PaintStoryScene(layer, "birth-road", "Title story illustration", 0, 0, 1280, 720, true);
-            Panel(layer, "Title legibility veil", 0, 0, 678, 720, new Color(.012f, .032f, .052f, .86f));
-            Line(layer, 68, 116, 445, Gold);
-            Text(layer, "THE GOSPEL JOURNEY", 72, 137, 620, 42, 30, Gold, TextAlignmentOptions.TopLeft, true).characterSpacing = 3;
-            Text(layer, "말씀을 따라,\n길 위의 여정", 68, 209, 614, 157, 57, White);
+            var titleShade = Rect(layer, "Title legibility gradient", 0, 0, 1050, 720).gameObject.AddComponent<DawnGradient>();
+            titleShade.left = new Color(.012f, .032f, .040f, .96f);
+            titleShade.right = new Color(.012f, .032f, .040f, 0); titleShade.raycastTarget = false;
+            Line(layer, 72, 116, 132, Gold);
+            Text(layer, "THE GOSPEL JOURNEY", 72, 144, 620, 36, 23, Gold, TextAlignmentOptions.TopLeft, true).characterSpacing = 4;
+            Text(layer, "말씀을 따라,\n길 위의 여정", 68, 209, 614, 157, 57, White, TextAlignmentOptions.TopLeft, true);
             Text(layer, "예수님의 길", 74, 381, 560, 52, 34, White);
             Text(layer, "탄생과 성전의 만남, 요단강의 기록.\n사람들과 이야기하며 성경을 채워 보세요.", 75, 443, 590, 71, 24, Quiet);
             B(layer, "새 여정 시작", 75, 544, 275, 64, OnStart, true, true);
@@ -157,29 +161,28 @@ namespace PathOfDawn.Presentation
         public void ShowHud(GospelJourney journey, Sprite character)
         {
             Begin("journey", false, false);
-            var hero = Panel(layer, "Character identity", 24, 22, 288, 118, new Color(.018f, .058f, .087f, .86f), true);
+            // A small identity/goal strip leaves the painted field open. These
+            // are Scripture/story records, never invented health or mana bars.
+            var hero = Panel(layer, "Character identity", 24, 20, 288, 74, new Color(.018f, .045f, .049f, .72f), true);
             hero.GetComponent<Image>().raycastTarget = true;
             var identityHit = hero.gameObject.AddComponent<Button>();
             identityHit.targetGraphic = hero.GetComponent<Image>();
             identityHit.onClick.AddListener(() => Invoke(OnStatus));
-            PaintPortrait(hero, Adult(journey), 4, 4, 78, 110);
-            var identity = B(hero, Adult(journey) ? "예수님" : "소년 예수님", 87, 7, 193, 38, OnStatus);
-            identity.GetComponent<Image>().color = new Color(.08f, .22f, .27f, .35f);
-            ageText = Text(hero, Age(journey), 95, 50, 180, 42, 18, Quiet);
-            scriptureFill = Bar(hero, "Discovered Scripture", 96, 97, 170, 4, Mint, Fraction(journey.CodexCount, journey.CodexTotal));
-            var goal = Panel(layer, "Current story goal", 345, 24, 548, 88, new Color(.018f, .058f, .087f, .82f), true);
-            Text(goal, "CURRENT JOURNEY", 17, 9, 480, 22, 15, Gold, TextAlignmentOptions.TopLeft, true).characterSpacing = 2;
-            objective = Text(goal, GoalTitle(journey), 17, 36, 514, 40, 25, White);
+            PaintPortrait(hero, Adult(journey), 7, 5, 58, 64);
+            var identity = B(hero, Adult(journey) ? "예수님" : "소년 예수님", 73, 3, 203, 34, OnStatus);
+            identity.GetComponent<Image>().color = new Color(.06f, .16f, .17f, .12f);
+            ageText = Text(hero, Age(journey), 84, 41, 187, 24, 16, Quiet);
+            var goal = Panel(layer, "Current story goal", 330, 20, 564, 74, new Color(.018f, .045f, .049f, .65f), true);
+            Text(goal, "지금의 이야기", 18, 10, 140, 18, 14, Gold);
+            objective = Text(goal, GoalTitle(journey), 18, 32, 529, 31, 24, White, TextAlignmentOptions.TopLeft, true);
             B(layer, "성경", 923, 25, 77, 52, OnRead);
             B(layer, "기록", 1009, 25, 77, 52, OnJournal);
             B(layer, "가방", 1095, 25, 77, 52, OnInventory);
             B(layer, "메뉴", 1181, 25, 77, 52, OnPause);
-            var record = Panel(layer, "Scripture and story progress", 944, 90, 310, 56, new Color(.014f, .046f, .069f, .73f), true);
-            progressText = Text(record, "", 13, 9, 283, 23, 18, Quiet, TextAlignmentOptions.Right);
-            objectiveFill = Bar(record, "Completed story goals", 14, 41, 282, 3, Gold, Fraction(Completed(journey), GoalCount(journey)));
-            var prompt = Panel(layer, "Current destination", 340, 619, 593, 77, new Color(.018f, .058f, .087f, .86f), true);
-            navigation = Text(prompt, "", 18, 10, 557, 29, 22, Gold);
-            helpText = Text(prompt, GoalDescription(journey), 18, 43, 557, 24, 19, White);
+            progressText = Text(layer, "", 936, 89, 318, 25, 17, White, TextAlignmentOptions.Right);
+            var prompt = Panel(layer, "Current destination", 317, 626, 610, 65, new Color(.018f, .045f, .049f, .72f), true);
+            navigation = Text(prompt, "", 17, 8, 576, 27, 22, Gold);
+            helpText = Text(prompt, GoalDescription(journey), 17, 38, 576, 22, 17, White);
             interact = B(layer, "대화", 1080, 632, 174, 64, OnInteract, false, true);
             var touch = Rect(layer, "Two axis touch movement", 0, 0, 1280, 720);
             touch.gameObject.SetActive(DawnPlatformInput.UseTouchControls);
@@ -194,7 +197,7 @@ namespace PathOfDawn.Presentation
             B(touch, "대시", 1003, 552, 118, 64, OnDash);
             if (!DawnPlatformInput.UseTouchControls)
                 Text(layer, "W A S D 이동   Shift 달리기   Ctrl 대시   Space 점프   E 대화   I 인물   B 가방   M 성경", 28, 700, 1040, 18, 15, Quiet);
-            scenicButton = B(frame, "풍경 보기", 1141, 164, 111, 39, ToggleScenicView).GetComponent<RectTransform>();
+            scenicButton = B(frame, "풍경 보기", 1141, 124, 111, 38, ToggleScenicView).GetComponent<RectTransform>();
             notice.SetAsLastSibling();
             progressText.text = "성경 " + journey.CodexCount + " / " + journey.CodexTotal + "    여정 " + Completed(journey) + " / " + GoalCount(journey);
             navigation.text = journey.IsComplete ? CompletedTitle(journey) : "다음 만남을 향해 걸어 보세요.";
@@ -203,16 +206,17 @@ namespace PathOfDawn.Presentation
 
         void BuildMovementPad(Transform parent)
         {
-            var pad = Panel(parent, "Omnidirectional movement pad", 30, 481, 180, 180, new Color(.018f, .058f, .087f, .63f), true);
+            var pad = Panel(parent, "Omnidirectional movement pad", 30, 481, 180, 180, new Color(.018f, .045f, .049f, .42f), true);
+            canopySkin.Round(pad, 90);
             pad.pivot = new Vector2(.5f, .5f); pad.anchoredPosition = new Vector2(120, -571);
             pad.GetComponent<Image>().raycastTarget = true;
             Glyph(pad, "left", 13, 77, 25, 25, Quiet);
             Glyph(pad, "right", 142, 77, 25, 25, Quiet);
             var up = Glyph(pad, "right", 77, 13, 25, 25, Quiet); up.localRotation = Quaternion.Euler(0, 0, 90);
             var down = Glyph(pad, "right", 77, 142, 25, 25, Quiet); down.localRotation = Quaternion.Euler(0, 0, -90);
-            var thumb = Panel(pad, "Movement thumb", 0, 0, 38, 38, new Color(.53f, .81f, .81f, .82f), true);
+            var thumb = Panel(pad, "Movement thumb", 0, 0, 38, 38, new Color(.66f, .85f, .77f, .82f), true);
+            canopySkin.Round(thumb, 19);
             thumb.anchorMin = thumb.anchorMax = thumb.pivot = new Vector2(.5f, .5f); thumb.anchoredPosition = Vector2.zero;
-            thumb.localRotation = Quaternion.Euler(0, 0, 45);
             movementPad = pad.gameObject.AddComponent<DawnPointerPad>(); movementPad.joystick = true;
             movementPad.thumb = thumb; movementPad.radius = 65;
             var events = pad.gameObject.AddComponent<EventTrigger>();
@@ -420,9 +424,9 @@ namespace PathOfDawn.Presentation
 
         void Header(string english, string korean)
         {
-            Text(layer, english, 36, 23, 1190, 55, 40, White, TextAlignmentOptions.TopLeft, true);
-            Text(layer, korean, 39, 84, 1180, 29, 20, Quiet);
-            Line(layer, 35, 115, 1209, LineColor);
+            Text(layer, english, 39, 25, 1180, 22, 14, Gold, TextAlignmentOptions.TopLeft, true).characterSpacing = 3;
+            Text(layer, korean, 36, 57, 1190, 49, 34, White, TextAlignmentOptions.TopLeft, true);
+            Line(layer, 35, 115, 1209, new Color(.68f, .77f, .69f, .20f));
         }
 
         void Footer()
@@ -506,13 +510,14 @@ namespace PathOfDawn.Presentation
 
         RectTransform Panel(Transform parent, string name, float x, float y, float width, float height, Color color, bool border = false)
         {
-            var r = Rect(parent, name, x, y, width, height);
-            var image = r.gameObject.AddComponent<Image>(); image.color = color; image.raycastTarget = false;
             if (border)
             {
-                Line(r, 0, 0, width, LineColor); Line(r, 0, height - 1, width, LineColor);
-                Rule(r, 0, 0, 1, height, LineColor); Rule(r, width - 1, 0, 1, height, LineColor);
+                var rounded = canopySkin.Card(parent, name, x, y, width, height, color);
+                rounded.GetComponent<Image>().raycastTarget = false;
+                return rounded;
             }
+            var r = Rect(parent, name, x, y, width, height);
+            var image = r.gameObject.AddComponent<Image>(); image.color = color; image.raycastTarget = false;
             return r;
         }
 
@@ -528,7 +533,7 @@ namespace PathOfDawn.Presentation
         Button B(Transform parent, string label, float x, float y, float width, float height, Action action, bool enabled = true, bool primary = false)
         {
             var r = Panel(parent, string.IsNullOrEmpty(label) ? "Item selection" : label, x, y, width, height,
-                primary ? new Color(.13f, .37f, .43f, .96f) : Glass, true);
+                primary ? new Color(.13f, .32f, .29f, .96f) : Glass, true);
             var image = r.GetComponent<Image>(); image.raycastTarget = true;
             var b = r.gameObject.AddComponent<Button>(); b.targetGraphic = image; b.interactable = enabled;
             var colors = b.colors; colors.normalColor = Color.white;
@@ -536,7 +541,7 @@ namespace PathOfDawn.Presentation
             colors.pressedColor = new Color(.40f, .70f, .79f); colors.disabledColor = new Color(.47f, .56f, .60f, .6f);
             colors.fadeDuration = .12f; b.colors = colors;
             if (!string.IsNullOrEmpty(label))
-                Text(r, label, 12, 0, width - 24, height, Mathf.Min(24, height * .46f), White, TextAlignmentOptions.Midline);
+                Text(r, label, 12, 0, width - 24, height, Mathf.Min(24, height * .46f), White, TextAlignmentOptions.Midline, true);
             b.onClick.AddListener(() => Invoke(action)); return b;
         }
 

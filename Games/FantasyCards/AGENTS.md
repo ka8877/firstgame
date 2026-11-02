@@ -1,5 +1,9 @@
 # 판타지마스터즈 리마스터
 
+## 현재 Restage 개정
+
+루트 Restage 지침과 최신 사용자 요청이 우선한다. 후기 원작 근거에 따른 누락 규칙, 실제 코인/장비/피해 시점의 카드 내부 능력치, 새 타이틀/상점·상품별 포장/양측 정보 경계/글꼴을 개선한다. 원본2646출전·15350아카이브·27연습덱·재화·schema3/슬롯을 보존한다. Core와 `FmRenewalCardValues`는 restage_card_rules, 나머지 카드 Presentation은 reprise_card_ui, 조사 restage_research, 실행/테스트/Editor/빌드/배포는 remaster_release만 소유한다. 새 증거는 Restage이며 이전 Reprise 통과는 이력이다.
+
 ## 최신 Reprise 개정
 
 루트의 2026-11-02 지침과 현재 사용자 요청이 우선한다. 원본 카드 위의 불투명 능력치 판·확인된 전열 재배치/필드 소각·실판정 소환/명중/파괴·통합 도감을 개선한다. 별도 상위 등급 도감은 원작 근거가 없어 입구를 제거하며 보존 원본·등급 필터·수집 진행은 유지한다. 소스는 reprise_card_core/reprise_card_ui/reprise_audio, 실행은 remaster_release 한 소유자만 맡는다. 새 근거는 Reprise다.

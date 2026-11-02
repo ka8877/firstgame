@@ -108,8 +108,12 @@ namespace FantasyCards.Core
     {
         public int instanceId;
         public string definitionId;
+        // Optional schema3 terrain provenance. Missing old-save fields mean
+        // unknown usage, never permission to dispose of a possibly spent land.
+        public bool hasSoulProductionRecord, terrainSoulUsed;
+        public int remainingColoredProduction, remainingGenericProduction;
         public CardInstance(int instanceId, string definitionId) { this.instanceId = instanceId; this.definitionId = definitionId; }
-        public CardInstance Copy() { return new CardInstance(instanceId, definitionId); }
+        public CardInstance Copy() { return (CardInstance)MemberwiseClone(); }
     }
 
     [Serializable] public sealed class UnitState

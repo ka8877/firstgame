@@ -19,6 +19,8 @@ namespace PathOfDawn.Presentation
         public int GroundTriangleCount { get; private set; }
         public int LivingGrassClumpCount { get; private set; }
         public int WildflowerCount { get; private set; }
+        public int PaintedSceneryCount { get; private set; }
+        public int SceneryBatchCount { get; private set; }
         public Transform TempleRoot { get; private set; }
         public Transform JordanRoot { get; private set; }
 
@@ -33,14 +35,24 @@ namespace PathOfDawn.Presentation
         readonly List<Mesh> meshes = new List<Mesh>();
         readonly List<Texture2D> textures = new List<Texture2D>();
         readonly List<MeshFilter> architecture = new List<MeshFilter>();
-        readonly List<Transform> treeCrowns = new List<Transform>();
-        readonly List<Quaternion> treeRest = new List<Quaternion>();
         readonly List<Vector3> route = new List<Vector3>();
+        readonly List<Vector2> trail = new List<Vector2>();
+        Rect trailMaskArea;
+        readonly Dictionary<string, Material> paintedMaterials = new Dictionary<string, Material>();
+        readonly Dictionary<Material, PaintedGeometry> paintedGeometry = new Dictionary<Material, PaintedGeometry>();
         GospelAuthoredProps props;
         Material limestone, chalk, trimStone, paving, soil, grass, cedar, bronze, water, foam, foliage;
         Transform marker;
         VolumeProfile profile;
         bool built;
+
+        sealed class PaintedGeometry
+        {
+            public readonly List<Vector3> Vertices = new List<Vector3>();
+            public readonly List<Vector2> Uv = new List<Vector2>();
+            public readonly List<Color> Colors = new List<Color>();
+            public readonly List<int> Triangles = new List<int>();
+        }
 
         public void Build(Transform parent = null)
         {
@@ -62,9 +74,10 @@ namespace PathOfDawn.Presentation
             var cedarTexture = Resources.Load<Texture2D>("Art/GospelWell/cedar-albedo");
             if (cedarTexture != null) cedar.SetTexture("_BaseMap", cedarTexture);
             bronze = Mat("Old bronze", new Color(.64f, .43f, .15f), .35f, .62f);
-            water = Mat("Jordan moving reflected water", new Color(.17f, .48f, .48f), .86f, .19f);
+            var waterShader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageWater");
+            if (waterShader == null) throw new InvalidOperationException("Missing painted Jordan shader.");
+            water = new Material(waterShader) { name = "Jordan quiet jade reflections" }; materials.Add(water);
             water.SetTexture("_BaseMap", WaterTexture());
-            water.SetTextureScale("_BaseMap", new Vector2(3f, 2f));
             foam = Mat("Shore reflected light", new Color(.78f, .89f, .75f), .60f);
             props = gameObject.AddComponent<GospelAuthoredProps>(); props.Initialize();
             ConfigureLight();
@@ -111,16 +124,18 @@ namespace PathOfDawn.Presentation
 
         void BuildChapter(Transform root, bool river)
         {
-            architecture.Clear(); route.Clear();
+            architecture.Clear(); route.Clear(); trail.Clear(); paintedGeometry.Clear();
             foreach (var quest in GospelChronicleCatalog.Quests)
                 if (!quest.IsPrologue && (quest.ChapterId == "baptism") == river)
                     route.Add(PositionForQuest(quest));
+            BuildTrail(river);
             BuildTerrain(root, river);
-            BuildTrail(root, river);
             if (river) BuildRiver(root);
             else { BuildDepartureCourt(root); BuildTemple(root); }
             BuildGarden(root, river);
             BuildBorderGroves(root, river);
+            BuildPaintedDepth(root, river);
+            CombinePaintedScenery(root);
             var atmosphere = root.gameObject.AddComponent<GospelPilgrimageAtmosphere>();
             atmosphere.Build(river, (x, z) => TerrainHeight(x, z, river), p => NearRoute(p, 1.25f));
             LivingGrassClumpCount += atmosphere.GrassClumpCount; WildflowerCount += atmosphere.FlowerCount;
@@ -159,65 +174,83 @@ namespace PathOfDawn.Presentation
             }
             var mesh = Own(new Mesh { name = river ? "Sculpted Jordan banks" : "Sculpted hill and courtyard ground" });
             mesh.vertices = v; mesh.uv = uv; mesh.triangles = triangles; mesh.RecalculateNormals(); mesh.RecalculateTangents(); mesh.RecalculateBounds();
-            MeshObject("Continuous walkable terrain", root, mesh, Vector3.zero, grass, true, false);
+            MeshObject("Continuous painted walkable terrain", root, mesh, Vector3.zero, GroundMaterial(river), true, false);
             GroundTriangleCount += triangles.Length / 3;
-            if (!river)
-            {
-                // Paving follows the actual floor instead of hundreds of cube
-                // colliders. The fine joints are in the authored paving texture.
-                SurfacePatch("Temple outer paving", root, new Rect(-3, -5, 36, 23), paving, false);
-                SurfacePatch("Nazareth spring paving", root, new Rect(-16, -11, 8, 7), limestone, false);
-                SurfacePatch("Nazareth departure stone court", root, new Rect(-34, -11.5f, 13, 10), paving, false);
-            }
         }
-        void SurfacePatch(string name, Transform root, Rect rect, Material mat, bool river)
+        Material GroundMaterial(bool river)
         {
-            const int cols = 14, rows = 10;
-            var v = new Vector3[(cols + 1) * (rows + 1)]; var uv = new Vector2[v.Length]; var t = new int[cols * rows * 6];
-            for (int z = 0; z <= rows; z++) for (int x = 0; x <= cols; x++)
+            var shader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageGround");
+            if (shader == null) throw new InvalidOperationException("Missing painted pilgrimage ground shader.");
+            var material = new Material(shader) { name = river ? "Jordan painted bank and winding trail" : "Nazareth moss, worn stone and pilgrim earth" };
+            material.SetTexture("_GrassMap", grass.GetTexture("_BaseMap"));
+            material.SetTexture("_StoneMap", paving.GetTexture("_BaseMap"));
+            material.SetTexture("_EarthMap", soil.GetTexture("_BaseMap"));
+            var atlas = Resources.Load<Texture2D>("Art/GospelPilgrimage/World/ground-atlas");
+            if (atlas != null) { material.SetTexture("_PaintedAtlas", atlas); material.SetFloat("_UsePainted", 1); }
+            const int width = 512, height = 384;
+            var blend = new Texture2D(width, height, TextureFormat.RGBA32, false, true) {
+                name = river ? "Jordan world blend mask" : "Courtyard world blend mask", wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear
+            };
+            var pixels = new Color[width * height];
+            for (int z = 0; z < height; z++) for (int x = 0; x < width; x++)
             {
-                float px = Mathf.Lerp(rect.xMin, rect.xMax, x / (float)cols), pz = Mathf.Lerp(rect.yMin, rect.yMax, z / (float)rows);
-                int k = z * (cols + 1) + x; v[k] = new Vector3(px, TerrainHeight(px, pz, river) + .018f, pz); uv[k] = new Vector2(px, pz) * .43f;
+                var p = new Vector2(Mathf.Lerp(-64, 72, x / (float)(width - 1)), Mathf.Lerp(-48, 54, z / (float)(height - 1)));
+                float noise = (Mathf.PerlinNoise(p.x * .42f + 31, p.y * .42f + 17) - .5f) * .85f;
+                float distance = DistanceToTrail(p);
+                float path = 1 - Feather(.62f, 1.85f, distance + noise);
+                float court = river ? 0 : CourtCoverage(p, noise);
+                // Planted banks are broad value shapes, not scatter over a flat green sheet.
+                float grove = Mathf.PerlinNoise(p.x * .055f + 4, p.y * .065f + 9) * .45f;
+                grove += (1 - Feather(1.9f, 5.6f, Mathf.Abs(p.y + 13))) * .48f;
+                if (!river) grove += (1 - Feather(1.1f, 5f, Mathf.Abs(p.y - 1.9f))) * (1 - Feather(-18,-3,p.x)) * .45f;
+                grove *= 1 - path * .77f; grove *= 1 - court * .86f;
+                float shore = river ? Feather(5.5f, 13.5f, p.y + noise) : 0;
+                pixels[z * width + x] = new Color(path, court, Mathf.Clamp01(grove), shore);
             }
-            int at = 0;
-            for (int z = 0; z < rows; z++) for (int x = 0; x < cols; x++)
-            { int a = z * (cols + 1) + x, b = a + 1, c = a + cols + 1, d = c + 1; t[at++] = a; t[at++] = c; t[at++] = b; t[at++] = b; t[at++] = c; t[at++] = d; }
-            var mesh = Own(new Mesh { name = name }); mesh.vertices = v; mesh.uv = uv; mesh.triangles = t; mesh.RecalculateNormals(); mesh.RecalculateTangents();
-            MeshObject(name, root, mesh, Vector3.zero, mat, false);
+            blend.SetPixels(pixels); blend.Apply(false, true); textures.Add(blend);
+            material.SetTexture("_BlendMap", blend); materials.Add(material); return material;
         }
-        void BuildTrail(Transform root, bool river)
+        static float CourtCoverage(Vector2 p, float noise)
         {
-            var points = new List<Vector3> { new Vector3(-34f, 0, river ? -8f : -7f) }; points.AddRange(route);
+            float d = Mathf.Min(RoundedCourtDistance(p, new Rect(-3, -5, 36, 23), 1.2f),
+                Mathf.Min(RoundedCourtDistance(p, new Rect(-16, -11, 8, 7), 2.2f), RoundedCourtDistance(p, new Rect(-34,-11.5f,13,10), 2.1f)));
+            return 1 - Feather(-.55f, .85f, d + noise);
+        }
+        static float Feather(float from, float to, float value) => Mathf.SmoothStep(0,1,Mathf.InverseLerp(from,to,value));
+        static float RoundedCourtDistance(Vector2 p, Rect rect, float radius)
+        {
+            var q = new Vector2(Mathf.Abs(p.x - rect.center.x), Mathf.Abs(p.y - rect.center.y)) - rect.size * .5f + Vector2.one * radius;
+            return new Vector2(Mathf.Max(q.x,0),Mathf.Max(q.y,0)).magnitude + Mathf.Min(Mathf.Max(q.x,q.y),0) - radius;
+        }
+        void BuildTrail(bool river)
+        {
+            var points = new List<Vector2> { new Vector2(-37, river ? -8 : -7) };
+            foreach (var p in route) points.Add(new Vector2(p.x,p.z));
             for (int section = 0; section + 1 < points.Count; section++)
             {
-                Vector3 a = points[section], b = points[section + 1];
-                Vector3 side = Vector3.Cross((b - a).normalized, Vector3.up);
-                const int segments = 12; var v = new Vector3[(segments + 1) * 2]; var uv = new Vector2[v.Length]; var t = new List<int>();
-                for (int i = 0; i <= segments; i++)
+                Vector2 a=points[Mathf.Max(0,section-1)], b=points[section], c=points[section+1], d=points[Mathf.Min(points.Count-1,section+2)];
+                for (int i = 0; i < 12; i++)
                 {
-                    Vector3 center = Vector3.Lerp(a, b, i / (float)segments);
-                    float width = 1.15f + Mathf.Sin(i * .63f + section) * .10f;
-                    for (int j = 0; j < 2; j++)
-                    {
-                        Vector3 p = center + side * (j == 0 ? -width : width);
-                        p.y = TerrainHeight(p.x, p.z, river) + .031f; v[i * 2 + j] = p; uv[i * 2 + j] = new Vector2(j, i / 2f);
-                    }
-                    // side=Cross(forward,up): across then forward gives +Y.
-                    // The opposite winding culled the entire trail from above.
-                    if (i < segments)
-                    {
-                        // A dirt path stops at the paving. Previously it was
-                        // drawn over the first stone court as a broad brown
-                        // stripe, hiding the dressed courtyard and its joints.
-                        Vector3 middle = Vector3.Lerp(a, b, (i + .5f) / segments);
-                        if (!river && OnPavedCourt(new Vector2(middle.x, middle.z))) continue;
-                        int n = i * 2; t.Add(n); t.Add(n + 1); t.Add(n + 2); t.Add(n + 1); t.Add(n + 3); t.Add(n + 2);
-                    }
+                    float t=i/12f, t2=t*t, t3=t2*t;
+                    trail.Add(.5f*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t2+(-a+3*b-3*c+d)*t3));
                 }
-                if (t.Count == 0) continue;
-                var mesh = Own(new Mesh { name = "Worn pilgrim trail" }); mesh.vertices = v; mesh.uv = uv; mesh.triangles = t.ToArray(); mesh.RecalculateNormals(); mesh.RecalculateTangents();
-                MeshObject("Continuous trail " + section, root, mesh, Vector3.zero, soil, false);
             }
+            trail.Add(points[points.Count-1]);
+            Vector2 min=trail[0], max=trail[0];
+            foreach(var p in trail) { min=Vector2.Min(min,p); max=Vector2.Max(max,p); }
+            trailMaskArea=Rect.MinMaxRect(min.x-3,min.y-3,max.x+3,max.y+3);
+        }
+        float DistanceToTrail(Vector2 p)
+        {
+            if(!trailMaskArea.Contains(p)) return 10;
+            float best = float.MaxValue;
+            for (int i=1;i<trail.Count;i++)
+            {
+                Vector2 a=trail[i-1], d=trail[i]-a;
+                float t=d.sqrMagnitude<.0001f?0:Mathf.Clamp01(Vector2.Dot(p-a,d)/d.sqrMagnitude);
+                best=Mathf.Min(best,(p-a-d*t).sqrMagnitude);
+            }
+            return Mathf.Sqrt(best);
         }
 
         static bool OnPavedCourt(Vector2 p) => new Rect(-3, -5, 36, 23).Contains(p)
@@ -249,16 +282,14 @@ namespace PathOfDawn.Presentation
             }
             Arch(root, new Vector3(-27f, TerrainHeight(-27f, -2.4f, false) + 1.65f, -2.4f), 3.5f, .34f, .85f);
 
-            var tree = props.AddTree(root, new Vector3(-33f, TerrainHeight(-33f, -2.4f, false), -2.4f), 5.3f, 31, 1);
-            treeCrowns.Add(tree.transform); treeRest.Add(tree.transform.localRotation); AuthoredPropCount++;
+            PaintedTree(root, new Vector3(-33f, TerrainHeight(-33f, -2.4f, false), -2.4f), 6.3f, 31);
             foreach (var p in new[] { new Vector2(-36.7f, -11.3f), new Vector2(-21.6f, -13.8f), new Vector2(-22f, 2.7f) })
             {
-                var borderTree = props.AddTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, false), p.y), 5.7f, p.x * 15, 1);
-                treeCrowns.Add(borderTree.transform); treeRest.Add(borderTree.transform.localRotation); AuthoredPropCount++;
+                PaintedTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, false), p.y), 6.8f, (int)(p.x * 15));
             }
             Vector3 planter = new Vector3(-32.8f, TerrainHeight(-32.8f, -6.2f, false), -6.2f);
             props.AddClayPlanter(root, planter, .63f, 17); AuthoredPropCount++;
-            props.AddShrub(root, planter + Vector3.up * .43f, .86f, 32, 0); AuthoredPropCount++;
+            PaintedShrub(root, planter + Vector3.up * .43f, .86f, 32);
             foreach (var p in new[] { new Vector3(-32.4f, 0, -10.1f), new Vector3(-24.1f, 0, -1.9f) })
             {
                 props.AddCeramicVessel(root, new Vector3(p.x, TerrainHeight(p.x, p.z, false), p.z), .77f, p.x * 8);
@@ -399,13 +430,12 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < positions.Length; i++)
             {
                 Vector2 p = positions[i]; float h = 5.0f + (i % 4) * .60f;
-                var tree = props.AddTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), h, i * 53, i % 2);
-                AuthoredPropCount++; treeCrowns.Add(tree.transform); treeRest.Add(tree.transform.localRotation);
+                PaintedTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), h * 1.13f, i * 53);
                 for (int j = 0; j < 2; j++)
                 {
                     Vector2 q = p + new Vector2((j == 0 ? -1 : 1) * 1.2f, .75f);
                     if (NearRoute(q, 2.2f)) continue;
-                    props.AddShrub(root, new Vector3(q.x, TerrainHeight(q.x, q.y, river), q.y), .55f + j * .16f, i * 11, j); AuthoredPropCount++;
+                    PaintedShrub(root, new Vector3(q.x, TerrainHeight(q.x, q.y, river), q.y), .70f + j * .16f, i * 11+j);
                 }
             }
             for (int i = 0; i < 64; i++)
@@ -446,8 +476,7 @@ namespace PathOfDawn.Presentation
                     Vector2 p = center + new Vector2(Mathf.Cos(angle) * (i == 0 ? .3f : 1.25f), Mathf.Sin(angle) * 1.35f);
                     if (NearRoute(p, 3.2f) || !river && OnPavedCourt(p)) continue;
                     float height = i == 0 ? 1.85f : i == 1 ? 1.35f : i == 2 ? 1.65f : 1.10f;
-                    props.AddShrub(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), height, group * 37 + i * 73, i);
-                    AuthoredPropCount++;
+                    PaintedShrub(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), height, group * 37 + i * 73);
                 }
                 Vector2 stone = center + new Vector2(-1.2f, -.55f);
                 if (!NearRoute(stone, 3.2f))
@@ -481,18 +510,92 @@ namespace PathOfDawn.Presentation
         }
         void Rock(Transform root, Vector3 position, float size, int seed, bool collision = true)
         {
-            const int sides = 9; var v = new Vector3[sides * 3 + 2]; var t = new List<int>();
-            v[0] = Vector3.zero; int top = v.Length - 1; v[top] = new Vector3(.12f * size, size * .76f, -.04f * size);
-            for (int ring = 0; ring < 3; ring++) for (int i = 0; i < sides; i++)
+            Paint("Rock" + (seed % 2 == 0 ? "1" : "3"), position, size * 1.05f,
+                new Color(1.12f, 1.08f, .92f), seed % 3 == 0, .96f);
+            if (size <= .5f || !collision) return;
+            var blocker = Node("Painted limestone collision", root); blocker.position = position + Vector3.up * size * .30f;
+            var sphere = blocker.gameObject.AddComponent<SphereCollider>(); sphere.radius = size * .65f;
+        }
+        void PaintedTree(Transform root, Vector3 position, float height, int seed, bool collision = true, Color? tint = null)
+        {
+            Paint("Tree" + (Mathf.Abs(seed) % 3 + 1), position, height, tint ?? new Color(.69f, 1.04f, 1.12f), seed % 2 == 0);
+            AuthoredPropCount++;
+            if (!collision) return;
+            var blocker = Node("Painted grove real trunk collision", root); blocker.position = position;
+            var capsule = blocker.gameObject.AddComponent<CapsuleCollider>();
+            capsule.height = height * .34f; capsule.radius = height * .037f; capsule.center = Vector3.up * capsule.height * .5f;
+        }
+        void PaintedShrub(Transform root, Vector3 position, float height, int seed)
+        {
+            Paint("Foliage1", position, height, new Color(.63f, .93f, 1.03f), seed % 2 == 0, 1.4f);
+            AuthoredPropCount++;
+        }
+        void Paint(string source, Vector3 foot, float height, Color tint, bool flip, float widthScale = 1)
+        {
+            if (!paintedMaterials.TryGetValue(source,out var material))
             {
-                float angle = i * Mathf.PI * 2 / sides, r = size * (ring == 1 ? 1 : .76f) * (1 + Mathf.Sin(i * 5.9f + seed) * .17f);
-                int k = 1 + ring * sides + i; v[k] = new Vector3(Mathf.Sin(angle) * r, ring * size * .27f, Mathf.Cos(angle) * r * .77f);
-                int next = 1 + ring * sides + (i + 1) % sides;
-                if (ring == 0) { t.Add(0); t.Add(next); t.Add(k); }
-                if (ring < 2) { t.Add(k); t.Add(next); t.Add(next + sides); t.Add(k); t.Add(next + sides); t.Add(k + sides); }
-                else { t.Add(k); t.Add(next); t.Add(top); }
+                var shader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageScenery");
+                var texture = Resources.Load<Texture2D>("Art/GospelLuminous/World/" + source);
+                if (shader == null || texture == null) throw new InvalidOperationException("Missing preserved painted scenery: " + source);
+                material = new Material(shader) { name = "Lost Crypt painted " + source };
+                material.SetTexture("_BaseMap", texture); material.SetFloat("_Wind", source.StartsWith("Rock") ? 0 : .045f);
+                paintedMaterials.Add(source,material); materials.Add(material);
             }
-            MeshObject("Weathered river limestone", root, FlatMesh("Irregular faceted limestone", v, t.ToArray()), position, seed % 3 == 0 ? chalk : limestone, size > .5f && collision);
+            if (!paintedGeometry.TryGetValue(material,out var geometry)) { geometry=new PaintedGeometry(); paintedGeometry.Add(material,geometry); }
+            var map=material.GetTexture("_BaseMap");
+            float width=height*map.width/map.height*widthScale;
+            Vector3 right=Vector3.right*width*.5f, up=Quaternion.Euler(43,0,0)*Vector3.up*height;
+            int n=geometry.Vertices.Count;
+            geometry.Vertices.Add(foot-right); geometry.Vertices.Add(foot+right); geometry.Vertices.Add(foot+right+up); geometry.Vertices.Add(foot-right+up);
+            geometry.Uv.Add(new Vector2(flip?1:0,0)); geometry.Uv.Add(new Vector2(flip?0:1,0));
+            geometry.Uv.Add(new Vector2(flip?0:1,1)); geometry.Uv.Add(new Vector2(flip?1:0,1));
+            for(int i=0;i<4;i++) geometry.Colors.Add(tint);
+            geometry.Triangles.Add(n); geometry.Triangles.Add(n+1); geometry.Triangles.Add(n+2);
+            geometry.Triangles.Add(n); geometry.Triangles.Add(n+2); geometry.Triangles.Add(n+3);
+            PaintedSceneryCount++;
+        }
+        void BuildPaintedDepth(Transform root, bool river)
+        {
+            // These banks have their own actual XZ positions. Camera travel
+            // reveals parallax naturally and the center remains freely walkable.
+            for(int i=0;i<11;i++)
+            {
+                float x=-52+i*11.5f, z=river?34+(i%3)*1.8f:34+(i%3)*2.1f;
+                PaintedTree(root,new Vector3(x,TerrainHeight(x,z,river),z),13+(i%3)*1.5f,i*17,false,new Color(.40f,.76f,.91f));
+            }
+            var foreground=river?new[] { new Vector2(-39,-16),new Vector2(-20,-20),new Vector2(5,-21),new Vector2(28,-20),new Vector2(47,-15) }
+                :new[] { new Vector2(-39,-16),new Vector2(-18,-20),new Vector2(4,-22),new Vector2(27,-22),new Vector2(48,-14) };
+            for(int i=0;i<foreground.Length;i++)
+            {
+                var p=foreground[i];
+                PaintedTree(root,new Vector3(p.x,TerrainHeight(p.x,p.y,river),p.y),8.4f+i%2,i*23,false,new Color(.29f,.60f,.65f));
+                PaintedShrub(root,new Vector3(p.x+1.3f,TerrainHeight(p.x+1.3f,p.y,river),p.y),1.8f,i*13);
+            }
+            // Mary and the first courtyard gain coherent planted islands,
+            // broad leaf shapes and small stone clusters instead of isolated props.
+            var islands=river?new[] {new Vector2(-33,-1),new Vector2(-22,5),new Vector2(-7,7),new Vector2(9,8),new Vector2(24,8)}
+                :new[] {new Vector2(-35,-10),new Vector2(-24,1),new Vector2(-19,-12),new Vector2(-17,-1),new Vector2(-7,1)};
+            foreach(var center in islands) for(int i=0;i<5;i++)
+            {
+                var p=center+new Vector2(Mathf.Sin(i*2.4f)*1.25f,Mathf.Cos(i*2.4f)*.8f);
+                if(NearRoute(p,1.7f) || !river && OnPavedCourt(p)) continue;
+                PaintedShrub(root,new Vector3(p.x,TerrainHeight(p.x,p.y,river),p.y),.8f+(i%3)*.24f,i*7);
+                if(i%2==0) Rock(root,new Vector3(p.x+.5f,TerrainHeight(p.x+.5f,p.y,river),p.y),.42f,i,false);
+            }
+        }
+        void CombinePaintedScenery(Transform root)
+        {
+            foreach(var pair in paintedGeometry)
+            {
+                var g=pair.Value;
+                var mesh=Own(new Mesh {name="Painted grove batch · "+pair.Key.name,indexFormat=IndexFormat.UInt32});
+                mesh.SetVertices(g.Vertices); mesh.SetUVs(0,g.Uv); mesh.SetColors(g.Colors); mesh.SetTriangles(g.Triangles,0);
+                mesh.RecalculateBounds(); var bounds=mesh.bounds; bounds.Expand(.3f); mesh.bounds=bounds;
+                var obj=MeshObject(mesh.name,root,mesh,Vector3.zero,pair.Key,false,false);
+                obj.GetComponent<MeshRenderer>().shadowCastingMode=ShadowCastingMode.Off;
+                SceneryBatchCount++;
+            }
+            paintedGeometry.Clear();
         }
         void BuildBoundary(Transform root, bool river)
         {
@@ -517,12 +620,12 @@ namespace PathOfDawn.Presentation
             RenderSettings.fogColor = new Color(.41f, .62f, .61f); RenderSettings.fogDensity = .013f;
             var sunObject = Node("Late afternoon sun", transform); sunObject.rotation = Quaternion.Euler(48, -29, 0);
             var sun = sunObject.gameObject.AddComponent<Light>(); sun.type = LightType.Directional; sun.color = new Color(1, .89f, .65f);
-            sun.intensity = 1.48f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
+            sun.intensity = 1.32f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
             RenderSettings.sun = sun;
             var volume = Node("HD2D daylight and distance grade", transform).gameObject.AddComponent<Volume>(); volume.isGlobal = true;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); volume.profile = profile;
             profile.Add<Tonemapping>().mode.Override(TonemappingMode.ACES);
-            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(7); color.saturation.Override(7); color.postExposure.Override(.12f);
+            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(9); color.saturation.Override(3); color.postExposure.Override(.08f);
             var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.23f); bloom.threshold.Override(1.10f); bloom.scatter.Override(.58f);
             var vignette = profile.Add<Vignette>(); vignette.intensity.Override(.19f); vignette.smoothness.Override(.65f);
             var depth = profile.Add<DepthOfField>(); depth.mode.Override(DepthOfFieldMode.Gaussian);
@@ -657,11 +760,7 @@ namespace PathOfDawn.Presentation
         }
         void Update()
         {
-            if (water != null) water.SetTextureOffset("_BaseMap", new Vector2(Time.time * .008f, Time.time * .012f));
             if (marker != null && marker.gameObject.activeSelf) marker.localScale = Vector3.one * (1 + Mathf.Sin(Time.time * 2.5f) * .035f);
-            for (int i = 0; i < treeCrowns.Count; i++)
-                if (treeCrowns[i] != null && treeCrowns[i].gameObject.activeInHierarchy)
-                    treeCrowns[i].localRotation = treeRest[i] * Quaternion.Euler(Mathf.Sin(Time.time * .62f + i) * .19f, 0, Mathf.Sin(Time.time * .49f + i * 1.8f) * .24f);
         }
         void OnDestroy()
         {

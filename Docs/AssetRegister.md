@@ -1,5 +1,11 @@
 # 자산 출처와 교체 장부
 
+## 2026-11-02 Restage / Canopy
+
+새 타이틀 성역과4종 지면 atlas, 소년/성인32프레임 원화는 image_gen으로 제작한 프로젝트 원화다. 실제 보존 PNG·참조·바이트·SHA는 `Tools/Art/Restage/manifest.json`과 `SOURCE-NOTICE.txt`, 인물 측정/layout·손 위치는 `Tools/Art/GospelCanopy/actors-manifest.json`을 따른다. 생성 원본과 runtime PNG는 바이트가 같고 원본 픽셀/투명도를 편집하지 않았다. 상품별 포장은 실제 상품 ID를 시드로 한 UI 벡터 도형이며 원작 포장 복구로 표시하지 않는다.
+
+현재 회화형 숲은 이미 보존된 공식 Unity Lost Crypt 나무/수풀/바위 원본6개를 실제 사용한다. 기존 Unity Companion License와 출처 안내를 배포에 유지한다. 사용자 Ori 페이지와2015 판마 실제 화면의 새 조사 자료는 [RestageSources](Research/RestageSources.md)에 있으며, 참고 스크린샷을 실제 게임 배경 UI로 붙이지 않는다. 새 실행/화면 승인은 [RestageValidation](RestageValidation.md)에서 구분한다.
+
 ## 2026-10-27 세로 카드·서브컬처·제작된 환경 개정
 
 현재 `fm-arcana-2026-10-27` / `gospel-authored-2026-10-27`이다. 원작 카드250종의 데이터·원본 픽셀·GUID를 보존하고 검증한350종을 더해600종으로 늘린다. 카드 프레임의 등급 색·문양은 원작 인쇄의 버전/속성 차이와 구분한 새 리마스터 UI다. 원작 전체 인쇄는 상세에서 보존하며 런타임 압축은 고품질 GPU 형식으로 별도 관리한다. 새 성인 엘프·기사 인물 원화는 오리지널 생성 일러스트이며 원작 카드로 소개하지 않는다. `Tools/Art/FmArcana`와 `Docs/FmArcanaArt.md`, 카드 출처는 `Docs/FmArcanaCards.md`를 따른다.

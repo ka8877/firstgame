@@ -47,18 +47,19 @@ namespace FantasyCards.Core
         }
 
         // The official offline rules allow disposal before READY, except for
-        // spent terrain. Terrain spending is not tracked per instance in these
-        // saves, so terrain disposal is deliberately not exposed by this API.
+        // spent terrain. Optional per-instance records now distinguish unused
+        // production; older unknown records stay locked until a soul refresh.
         public bool CanDiscardField(int player, int instanceId, out string reason)
         {
             reason = "";
             if (!IsPreparing(player)) return Fail("자신의 준비 단계에서만 필드 카드를 소각할 수 있습니다.", out reason);
             if (State.openingHandOpen) return Fail("시작 손패를 먼저 확정하세요.", out reason);
             var p = State.players[player];
-            if (p.terrain.Any(c => c.instanceId == instanceId)) return Fail("지형의 소울 사용 여부를 확인할 수 없어 지형 소각은 지원하지 않습니다.", out reason);
+            var terrain = p.terrain.Find(c => c.instanceId == instanceId);
+            if (terrain != null) return CanDiscardTerrain(p, terrain, out reason);
             if (!p.units.Any(u => u.instanceId == instanceId || u.equipment.Any(c => c.instanceId == instanceId)) &&
                 !p.preparedSpells.Any(s => s.instanceId == instanceId))
-                return Fail("필드의 아군 유닛·장착 아이템·예고 마법을 선택하세요.", out reason);
+                return Fail("필드의 아군 지형·유닛·장착 아이템·예고 마법을 선택하세요.", out reason);
             return true;
         }
 
@@ -66,6 +67,8 @@ namespace FantasyCards.Core
         {
             if (!CanDiscardField(player, instanceId, out reason)) return false;
             var p = State.players[player];
+            var terrain = p.terrain.Find(c => c.instanceId == instanceId);
+            if (terrain != null) { DiscardTerrain(player, terrain); CheckVictory(); return true; }
             var unit = p.units.Find(u => u.instanceId == instanceId);
             if (unit != null) RemoveUnitToDiscard(player, unit, "discard-field");
             else

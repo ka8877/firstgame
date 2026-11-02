@@ -18,7 +18,7 @@ namespace FantasyCards.Presentation
         private void ShowQuestShop()
         {
             if (questEconomy == null || !questEconomy.HasStarter) { ShowQuestEntry(); return; }
-            QuestScreen("shop", ShowQuestShop, "카드 상점", "싱글 플레이로 모은 SP를 사용하세요. 상품을 누르면 구성과 확률을 확인할 수 있습니다.");
+            QuestScreen("shop", ShowQuestShop, "카드 상점", "상품별 구성과 확률을 확인하고 SP로 카드를 모으세요.");
             string[] filters = { "SP 부스터", "매일 무료 A/B/C", "속성 기본 덱" };
             for (int i = 0; i < filters.Length; i++)
             {
@@ -33,15 +33,18 @@ namespace FantasyCards.Presentation
             {
                 var offer = offers[questShopPage * 4 + i];
                 float left = i % 2 == 0 ? .045f : .402f, bottom = i < 2 ? .443f : .231f;
-                var tile = RestorationButton(root, "", left, bottom, left + .342f, bottom + .197f, () => ShowQuestOffer(offer.id));
+                var tile = Button(root, "", left, bottom, left + .342f, bottom + .197f, () => ShowQuestOffer(offer.id), new Color(.035f, .068f, .101f, .99f), 24);
+                var tileShape = tile.GetComponent<UiRoundedImage>(); tileShape.Radius = 14; tileShape.TopTint = new Color(1.13f, 1.13f, 1.17f);
+                tileShape.BottomTint = new Color(.81f, .86f, .94f);
+                Frame((RectTransform)tile.transform, new Color(RestagePackAccent(offer).r, RestagePackAccent(offer).g, RestagePackAccent(offer).b, .65f), 1);
                 tile.gameObject.name = "Quest shop offer " + offer.id;
-                QuestPackPicture(tile.transform, offer, .02f, .10f, .29f, .94f);
-                Text(tile.transform, offer.name, .305f, .58f, .975f, .98f, 27, ivory);
-                Text(tile.transform, offer.cardCount + "장 · " + (offer.priceSp == 0 ? "하루 한 종류 무료" : offer.priceSp.ToString("N0") + " SP"),
-                    .305f, .32f, .975f, .61f, 24, gold);
+                QuestPackPicture(tile.transform, offer, .025f, .065f, .29f, .95f);
+                RestageText(tile.transform, offer.name, .315f, .58f, .968f, .96f, 27, ivory, "Shop actual product name " + offer.id, true);
+                RestageText(tile.transform, offer.cardCount + "장 · " + (offer.priceSp == 0 ? "오늘 무료" : offer.priceSp.ToString("N0") + " SP"),
+                    .315f, .30f, .968f, .58f, 25, RestagePackAccent(offer), "Shop actual product price " + offer.id, true);
                 bool available = questEconomy.CanBuyPack(offer.id, QuestCalendarDay, out var reason);
-                Text(tile.transform, available ? offer.deckId.Length > 0 ? "50장 확정 구성 보기" : "구성 / 확률 보기" : reason,
-                    .305f, .035f, .975f, .34f, 20, available ? teal : RestorationMetal);
+                RestageText(tile.transform, available ? offer.deckId.Length > 0 ? "50장 확정 구성 보기" : "구성 · 확률 확인" : reason,
+                    .315f, .045f, .968f, .305f, 20, available ? teal : RestorationMetal, "Shop actual product availability " + offer.id);
                 BindTooltip(tile.gameObject, offer.name, offer.guaranteeText + "\n" + offer.description);
             }
             Button(root, "이전", .045f, .135f, .16f, .209f, () => { questShopPage--; ShowQuestShop(); }, slate, 22, questShopPage > 0);
@@ -53,21 +56,7 @@ namespace FantasyCards.Presentation
 
         private void QuestPackPicture(Transform parent, FmQuestPackOffer offer, float x0, float y0, float x1, float y1)
         {
-            var bounds = Panel(parent, x0, y0, x1, y1, new Color(.018f, .035f, .065f));
-            bounds.gameObject.name = "Original FM booster presentation " + offer.id;
-            if (offer.deckId.Length > 0)
-            {
-                var card = DemoCatalog.GetDeck(offer.deckId).cards.Select(CardCatalog.Get).First(c => c.kind == CardKind.Unit);
-                ArcanaCardFace(bounds, card, .03f, .03f, .97f, .97f, ArcanaCardMode.Album);
-            }
-            else
-            {
-                ArcanaHiddenBack(bounds, .08f, .02f, .80f, .88f);
-                ArcanaHiddenBack(bounds, .20f, .08f, .92f, .98f);
-                if (offer.element >= 0) ElementIcon(bounds, (Element)offer.element, .38f, .36f, .76f, .65f);
-                else Text(bounds, offer.dailyOneChoice ? "FREE" : offer.id == "premium" ? "RARE +" : "BOOSTER",
-                    .08f, .38f, .98f, .62f, 24, gold, TextAlignmentOptions.Center);
-            }
+            RestagePackCover(parent, offer, x0, y0, x1, y1);
         }
 
         private void ShowQuestOffer(string offerId)
@@ -121,7 +110,7 @@ namespace FantasyCards.Presentation
         private void ShowQuestPurchases()
         {
             if (questEconomy == null || !questEconomy.HasStarter) { ShowQuestEntry(); return; }
-            QuestScreen("purchases", ShowQuestPurchases, "구매한 카드팩", "받거나 구입한 상품은 저장됩니다. 개봉한 카드는 보유 카드와 덱 편집에서 사용할 수 있습니다.");
+            QuestScreen("purchases", ShowQuestPurchases, "구매한 카드팩", "구입한 카드팩은 저장됩니다. 열어 얻은 카드는 보유 덱에 사용합니다.");
             var purchases = questEconomy.PackPurchases.Reverse().ToArray();
             int pages = Mathf.Max(1, (purchases.Length + 3) / 4); questPurchasePage = Mathf.Clamp(questPurchasePage, 0, pages - 1);
             for (int i = 0; i < 4 && questPurchasePage * 4 + i < purchases.Length; i++)
@@ -131,8 +120,9 @@ namespace FantasyCards.Presentation
                 var row = RestorationButton(root, "", .045f, top - .118f, .744f, top,
                     () => { if (purchase.opened) ShowQuestPackReveal(purchase.id); else ShowQuestSealedPack(purchase.id); }, !purchase.opened);
                 row.gameObject.name = "Quest purchased pack " + purchase.id;
-                Text(row.transform, offer.name, .03f, .45f, .75f, .98f, 26, ivory);
-                Text(row.transform, offer.cardCount + "장 · " + (purchase.priceSp == 0 ? "무료" : purchase.priceSp + " SP"), .03f, .025f, .75f, .48f, 21, RestorationMetal);
+                QuestPackPicture(row.transform, offer, .018f, .055f, .12f, .95f);
+                Text(row.transform, offer.name, .14f, .45f, .75f, .98f, 26, ivory);
+                Text(row.transform, offer.cardCount + "장 · " + (purchase.priceSp == 0 ? "무료" : purchase.priceSp + " SP"), .14f, .025f, .75f, .48f, 21, RestorationMetal);
                 Text(row.transform, purchase.opened ? "결과 보기" : "개봉하기", .76f, .08f, .98f, .92f, 24, gold, TextAlignmentOptions.Center);
             }
             if (purchases.Length == 0) Text(root, "아직 받은 카드팩이 없습니다.\n상점에서 SP 부스터나 오늘의 무료 카드팩을 골라 보세요.", .07f, .37f, .72f, .64f, 29, ivory, TextAlignmentOptions.Center);
@@ -149,7 +139,11 @@ namespace FantasyCards.Presentation
             if (purchase.opened) { ShowQuestPackReveal(purchaseId); return; }
             var offer = FmQuestCatalog.GetOffer(purchase.offerId);
             QuestScreen("sealed-pack", () => ShowQuestSealedPack(purchaseId), offer.name, "아직 열지 않은 카드팩 · " + offer.cardCount + "장");
-            QuestPackPicture(root, offer, .24f, .31f, .56f, .74f);
+            var stage = RestagePanel(root, .045f, .335f, .744f, .753f, new Color(.023f, .052f, .079f), "Restage sealed product stage", new Color(.50f, .63f, .71f, .45f));
+            QuestPackPicture(stage, offer, .02f, .06f, .39f, .94f);
+            RestageText(stage, "SEALED BOOSTER", .43f, .72f, .96f, .91f, 22, RestagePackAccent(offer), "Sealed product label", true).characterSpacing = 1.2f;
+            RestageText(stage, offer.deckId.Length > 0 ? "기본 덱 50장" : "원본 카드 5장", .43f, .46f, .96f, .73f, 36, ivory, "Sealed product contents", true);
+            RestageText(stage, offer.guaranteeText, .43f, .12f, .96f, .45f, 23, new Color(.78f, .84f, .87f), "Sealed product guarantee");
             Text(root, "개봉하면 보유 카드에 추가됩니다.\n지금 나가도 카드팩은 보관함에 남습니다.", .06f, .215f, .74f, .32f, 25, ivory, TextAlignmentOptions.Center);
             Button(root, "나중에 열기", .045f, .135f, .34f, .215f, ShowQuestPurchases, slate, 25);
             Button(root, "카드팩 개봉", .36f, .135f, .744f, .215f, () => OpenQuestPack(purchaseId), gold, 28);
@@ -168,28 +162,43 @@ namespace FantasyCards.Presentation
 
         private IEnumerator RevealQuestPack(string purchaseId)
         {
-            QuestCurrentScreen = "pack-opening"; battleScreen = false; redraw = null; Clear(); RestorationBackdrop();
-            Text(root, "카드팩 개봉", .06f, .82f, .94f, .95f, 43, gold, TextAlignmentOptions.Center);
-            var offer = FmQuestCatalog.GetOffer(questEconomy.PackPurchases.First(p => p.id == purchaseId).offerId);
-            int count = Mathf.Min(5, offer.cardCount);
-            var cards = new RectTransform[count];
-            for (int i = 0; i < count; i++)
+            QuestCurrentScreen="pack-opening";battleScreen=false;redraw=null;Clear();RestorationBackdrop();
+            var purchase=questEconomy.PackPurchases.First(p=>p.id==purchaseId);
+            var offer=FmQuestCatalog.GetOffer(purchase.offerId);
+            RestageText(root,"카드팩 개봉",.045f,.85f,.955f,.97f,44,ivory,"Restage opening title",true,TextAlignmentOptions.Center);
+            RestageText(root,offer.name+" · "+purchase.cardIds.Count+"장",.045f,.775f,.955f,.85f,25,RestagePackAccent(offer),"Restage opening actual product",false,TextAlignmentOptions.Center);
+            int count=Mathf.Min(5,purchase.cardIds.Count);
+            var backs=new RectTransform[count];var fronts=new RectTransform[count];var flipped=new bool[count];
+            for(int i=0;i<count;i++)
             {
-                float x = .045f + i * (.91f / count);
-                cards[i] = Panel(root, x, .28f, x + .91f / count - .012f, .76f, Color.clear);
-                ArcanaHiddenBack(cards[i], 0, 0, 1, 1);
+                float left=.045f+i*.183f,right=left+.168f;
+                backs[i]=RestagePackCover(root,offer,left,.245f,right,.755f,true);
+                var card=CardCatalog.Get(purchase.cardIds[i]);
+                fronts[i]=ArcanaCardFace(root,card,left,.245f,right,.755f,ArcanaCardMode.Album);
+                fronts[i].name="Opening actual result slot "+i;fronts[i].gameObject.SetActive(false);
             }
-            const float duration = .62f;
-            for (float elapsed = 0; elapsed < duration; elapsed += Time.unscaledDeltaTime)
+            restageSkipPackAnimation=false;
+            Button(root,"바로 보기",.38f,.075f,.62f,.17f,()=>restageSkipPackAnimation=true,slate,25);
+            const float duration=1.28f;
+            for(float elapsed=0;elapsed<duration&&!restageSkipPackAnimation;elapsed+=Time.unscaledDeltaTime)
             {
-                for (int i = 0; i < count; i++)
+                for(int i=0;i<count;i++)
                 {
-                    float phase = Mathf.Clamp01((elapsed - i * .055f) / .34f);
-                    cards[i].localScale = new Vector3(Mathf.Max(.04f, Mathf.Cos(phase * Mathf.PI * .5f)), 1, 1);
+                    float phase=Mathf.Clamp01((elapsed-i*.13f)/.61f);
+                    bool faceUp=phase>=.5f;
+                    backs[i].gameObject.SetActive(!faceUp);fronts[i].gameObject.SetActive(faceUp);
+                    if(faceUp&&!flipped[i])
+                    {
+                        flipped[i]=true;var rarity=CardCatalog.Get(purchase.cardIds[i]).rarity;
+                        FmBattleAudio.PlayAt(rarity==CardRarity.Unique||rarity==CardRarity.Legend||rarity==CardRarity.Secret||rarity==CardRarity.Epic?"rare-reveal":"card-draw",(i-2)*.11f);
+                    }
+                    var active=faceUp?fronts[i]:backs[i];
+                    active.localScale=new Vector3(Mathf.Max(.035f,Mathf.Abs(Mathf.Cos(phase*Mathf.PI))),1,1);
+                    active.localRotation=Quaternion.Euler(0,0,(1-phase)*(i-2)*2.5f);
                 }
                 yield return null;
             }
-            locked = false; FmBattleAudio.Play("card-draw"); ShowQuestPackReveal(purchaseId);
+            locked=false;ShowQuestPackReveal(purchaseId);
         }
 
         private void ShowQuestPackReveal(string purchaseId)
@@ -201,20 +210,21 @@ namespace FantasyCards.Presentation
             battleScreen = false; redraw = () => ShowQuestPackReveal(purchaseId); Clear(); RestorationBackdrop();
             Text(root, "카드 획득", .045f, .87f, .955f, .98f, 44, gold);
             Text(root, offer.name + " · " + purchase.cardIds.Count + "장 · 보유 카드에 반영됨", .045f, .79f, .955f, .87f, 26, ivory);
-            var entries = purchase.cardIds.GroupBy(id => id).Select(group => new { card = CardCatalog.Get(group.Key), count = group.Count() }).ToArray();
-            int perPage = 5, pages = Mathf.Max(1, (entries.Length + perPage - 1) / perPage); questPackPage = Mathf.Clamp(questPackPage, 0, pages - 1);
-            for (int i = 0; i < perPage && questPackPage * perPage + i < entries.Length; i++)
+            // Show the five actual sealed draw positions, including duplicates.
+            // Fixed50-card sets use ten pages; no result is silently omitted.
+            var entries=purchase.cardIds.Select(CardCatalog.Get).ToArray();
+            int perPage=5,pages=Mathf.Max(1,(entries.Length+perPage-1)/perPage);questPackPage=Mathf.Clamp(questPackPage,0,pages-1);
+            for(int i=0;i<perPage&&questPackPage*perPage+i<entries.Length;i++)
             {
-                var entry = entries[questPackPage * perPage + i]; float left = .045f + i * .183f, right = left + .168f;
-                var glow = Panel(root, left, .245f, right, .765f, new Color(.025f, .04f, .08f));
-                glow.gameObject.name = "Quest acquired card " + entry.card.id;
-                Frame(glow, new Color(.55f, .60f, .70f, .60f), 1);
-                DrawCard(glow, entry.card, .02f, .18f, .98f, .98f, false,
-                    () => ShowDetail(entry.card, () => ShowQuestPackReveal(purchaseId)), true);
-                Text(glow, entry.card.name, .025f, .075f, .975f, .18f, 22, ivory, TextAlignmentOptions.Center);
-                var quantity = MiniCardText(glow, "획득 ×" + entry.count + " · 보유 " + questEconomy.OwnedCount(entry.card.id),
-                    .025f, .005f, .975f, .08f, 19, ivory, "Quest acquired and owned quantity");
-                quantity.GetComponent<UiCanvasTextSize>().ConfigureCard(19);
+                int position=questPackPage*perPage+i;var card=entries[position];float left=.045f+i*.183f,right=left+.168f;
+                var glow=RestagePanel(root,left,.245f,right,.765f,new Color(.025f,.048f,.077f),"Quest acquired card "+card.id+" slot "+position,
+                    Color.Lerp(RarityColor(card.rarity),Color.white,.24f));
+                var descriptor=glow.gameObject.AddComponent<FmRestageAcquiredCard>();descriptor.CardId=card.id;descriptor.SlotIndex=position;descriptor.OwnedCount=questEconomy.OwnedCount(card.id);
+                DrawCard(glow,card,.02f,.205f,.98f,.985f,false,()=>ShowDetail(card,()=>ShowQuestPackReveal(purchaseId)),true);
+                var title=MiniCardText(glow,card.name,.025f,.09f,.975f,.205f,23,ivory,"Quest acquired actual card name "+position);
+                title.GetComponent<UiCanvasTextSize>().ConfigureCard(23);
+                var quantity=MiniCardText(glow,"보유 "+questEconomy.OwnedCount(card.id)+"장",.025f,.012f,.975f,.09f,20,new Color(.76f,.85f,.89f),"Quest acquired and owned quantity");
+                quantity.GetComponent<UiCanvasTextSize>().ConfigureCard(20);
             }
             if (pages > 1)
             {
@@ -222,7 +232,7 @@ namespace FantasyCards.Presentation
                 Text(root, (questPackPage + 1) + "/" + pages, .42f, .165f, .58f, .235f, 24, gold, TextAlignmentOptions.Center);
                 Button(root, "다음", .59f, .165f, .75f, .235f, () => { questPackPage++; ShowQuestPackReveal(purchaseId); }, slate, 24, questPackPage + 1 < pages);
             }
-            else Text(root, "같은 카드는 합쳐서 획득 수량을 표시합니다.", .045f, .165f, .955f, .235f, 23, RestorationMetal, TextAlignmentOptions.Center);
+            else Text(root, "봉인된 뽑기 순서대로 표시합니다. 중복 카드도 각각 획득합니다.", .045f, .165f, .955f, .235f, 23, RestorationMetal, TextAlignmentOptions.Center);
             Button(root, "보유 카드 보기", .045f, .055f, .335f, .15f, () => EnterQuestAcquiredCards(false), gold, 26);
             Button(root, "덱 편집", .355f, .055f, .645f, .15f, () => EnterQuestAcquiredCards(true), slate, 26);
             Button(root, "상점으로", .665f, .055f, .955f, .15f, ShowQuestShop, slate, 26);

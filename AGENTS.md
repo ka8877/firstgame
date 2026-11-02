@@ -1,5 +1,13 @@
 # 두 독립 Unity 게임
 
+## 현재 타이틀·상점·실시간 카드 수치·회화형 필드 개정 — Restage
+
+현재 사용자 요청은 `fm-restage-2026-11-02` / `gospel-canopy-2026-11-02`, Web 프로필 `restage`다. 아래 Reprise는 이전 성공판이다. 판마는 후기 원작 자료와 실제 Core를 대조해 누락 규칙을 보완하고, 코인·장비·피해의 실제 적용 시점에 카드 내부 AP/DP/HP가 바뀌도록 수정한다. 원본 카드·ID·전체 앨범·소유 카드·재화·저장 호환을 보존한다. 타이틀·상점·실제 상품별 포장/뒷면·양측 정보 경계·글꼴을 현대적인 판타지 스타일로 개선한다. 새 상품 표현을 원작 확인 기능으로 소개하지 않는다.
+
+예수님의 길은 사용자가 지정한 https://pickledchili.tistory.com/3 의 실제 Ori 사진을 조사해 명암·깊이·유기적 지형·간결한 UI를 참고한다. 현재23사건·19본문·발견형 성경책·저장·자유 XZ 이동을 유지하며 회화형 바닥과 다층 숲·부드러운 인물 보행·작은 HUD를 개선한다. 기존 원화/모델/메타·원본 리소스와 우물 finite Cedar 셰이더 회귀를 보존한다. 상용 Ori 소스·자산·동일 품질을 복구했다고 주장하지 않는다.
+
+소유권: `/root/restage_card_rules`는 카드 Core/실시간 수치 및 `FmRenewalCardValues`와 대응 테스트, `/root/reprise_card_ui`는 그 외 카드 Presentation/상점/타이틀, `/root/restage_research`는 조사 자료, `/root/restage_gospel_world`는 Gospel World/Atmosphere/Camera/Motor, `/root/restage_gospel_character`는 Actor/보행 atlas·layout, 루트는 Gospel UI/책·새 원화·통합·원본 검토다. **모든 실행·테스트·Unity·브라우저·빌드·Editor/Scene/Font 생성·스토리지·Git/기존 Pages 배포는 `/root/remaster_release` 한 소유자만 수행한다.** 소스 동결 전 실행하지 않는다. 새 근거는 `Artifacts/Validation/Restage`, 작업 생성물은 새 `/tmp/firstgame-restage-*`이며 기존 원본·고유 ZIP·이전 승인 근거는 보존한다. 이전 통과를 새 구현의 통과로 대신하지 않는다. 실제 새 원본과 입력을 검토한 뒤 이미 승인된 기존 GitHub/Pages로 자동 배포한다.
+
 ## 최신 가독성·원작 준비 조작·이야기 성경책 개정 — 2026-11-02
 
 현재 요청은 `fm-reprise-2026-11-02` / `gospel-storybook-2026-11-02`, Web 프로필 `reprise`다. 카드의 원본·종횡비·능력치 위치는 보존하면서 밝은 인쇄 위 실제 수치의 가독성을 높이고, 실제 판정에 연결된 소환·공격·피격·파괴를 개선한다. 공개 매뉴얼로 확인한 준비 단계 재배치·필드 소각을 구현한다. 원작 근거가 없는 별도 상위 등급 도감 진입을 없애고 원본 전체 접근과 기존 등급 필터를 유지한다. 기존 카드·원본·덱·재화·저장은 보존한다.

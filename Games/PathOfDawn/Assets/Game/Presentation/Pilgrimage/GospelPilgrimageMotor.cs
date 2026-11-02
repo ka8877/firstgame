@@ -101,6 +101,9 @@ namespace PathOfDawn.Presentation
             }
             Vector2 input = Vector2.ClampMagnitude(keys + touchInput, 1);
             if (Gamepad.current != null) input = Vector2.ClampMagnitude(input + Gamepad.current.leftStick.ReadValue(), 1);
+            // Touch sticks must return to a calm, planted idle instead of
+            // creeping and repeatedly changing the selected directional pose.
+            if (input.sqrMagnitude < .01f) input = Vector2.zero;
             if (neutralRequired) { if (input.sqrMagnitude < .001f) neutralRequired = false; input = Vector2.zero; }
             if (!acceptsInput) input = Vector2.zero;
             if (acceptsInput && !neutralRequired)
@@ -159,7 +162,15 @@ namespace PathOfDawn.Presentation
             {
                 vertical = Mathf.Sqrt(2 * 23f * 1.05f); lastGround = -100; jumpStart = now; jumpUntil = -1; jumpFrame = -100; grounded = false;
             }
-            planar = Vector3.SmoothDamp(planar, desired, ref smoothVelocity, IsDashing ? .028f : acceptsInput ? moving ? .105f : .075f : .045f, 65, dt);
+            // A bounded acceleration has no long exponential skating tail.
+            // Reversals can plant a foot promptly and the measured speed still
+            // drives animation, including a real stop against a wall.
+            if (IsDashing) planar = desired;
+            else
+            {
+                float acceleration = !acceptsInput || !moving ? 34f : Vector3.Dot(planar,desired) < 0 ? 43f : desired.magnitude > WalkSpeed ? 30f : 25f;
+                planar = Vector3.MoveTowards(planar,desired,acceleration*dt);
+            }
             if (desired.sqrMagnitude < .001f && planar.sqrMagnitude < .001f) planar = smoothVelocity = Vector3.zero;
             vertical = Mathf.Max(-24, vertical - 23f * dt);
             Controller.stepOffset = grounded && vertical <= 0 ? .26f : 0;

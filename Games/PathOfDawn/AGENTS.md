@@ -1,5 +1,9 @@
 # 말씀을 따라 예수님의 길
 
+## 현재 Canopy/Restage 개정
+
+루트 Restage 지침과 최신 사용자 요청이 우선한다. 사용자 Ori 사진의 실제 명암/깊이/작은 HUD를 참고해 회화형 바닥과 다층 환경·자연스러운 보행·간결한 UI를 구현한다.23사건/19본문·발견형 성경책·본문/극화 구분·저장·자유 XZ를 보존한다. World/Atmosphere/Camera/Motor는 restage_gospel_world, Actor/인물atlas는 restage_gospel_character, UI/책과 원화는 루트, 조사 restage_research, 실행/테스트/Editor/빌드/배포는 remaster_release만 소유한다. 기존 원본/메타/GUID·finite Cedar 수정과 회귀·이전 승인 근거를 보존한다. 새 증거는 Restage다.
+
 ## 최신 이야기 성경책 개정
 
 루트의 2026-11-02 지침과 현재 사용자 요청이 우선한다. 탄생부터 사건과 대화로 진행하고 완료한 사건의 정확한 본문을 빈 성경책의 면에 채운다. 미발견 본문은 숨기며 별도 읽기 완료를 진행 조건으로 삼지 않는다. 기존23목표·19본문·저장 원본·방향별 인물·XZ 자유 이동을 보존하고 빛/식생/물/이동 반응과 짧은 탐험 대시를 보강한다. App/Core는 reprise_gospel_story, UI/책은 루트, 월드/인물/모터는 reprise_gospel_visual, 오디오는 reprise_audio, 실제 실행·배포는 remaster_release만 맡는다. 새 근거는 Reprise다.

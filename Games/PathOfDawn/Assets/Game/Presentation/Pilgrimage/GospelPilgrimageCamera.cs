@@ -14,11 +14,12 @@ namespace PathOfDawn.Presentation
         public float Zoom01 => Mathf.InverseLerp(MinimumZoom, MaximumZoom, zoom);
         public bool InputEnabled { get; set; } = true;
         public Transform Target { get; private set; }
-        float zoom = 6.4f, zoomVelocity;
-        Vector3 velocity;
+        float zoom = 5.7f, zoomVelocity, groundedHeight;
+        Vector3 velocity, lookAhead;
+        GospelPilgrimageMotor motor;
         public void Initialize(Camera camera, Transform target)
         {
-            View = camera; Target = target;
+            View = camera; Target = target; motor = target != null ? target.GetComponent<GospelPilgrimageMotor>() : null;
             View.orthographic = true; View.orthographicSize = zoom; View.nearClipPlane = .15f; View.farClipPlane = 130;
             View.allowHDR = true; View.clearFlags = CameraClearFlags.SolidColor; View.backgroundColor = new Color(.41f, .62f, .61f);
             var data = View.GetUniversalAdditionalCameraData(); data.renderPostProcessing = true;
@@ -31,14 +32,22 @@ namespace PathOfDawn.Presentation
             data.antialiasing = AntialiasingMode.None;
             View.transform.rotation = Quaternion.Euler(43f, 0, 0); Snap();
         }
-        public void SetTarget(Transform target) { Target = target; Snap(); }
+        public void SetTarget(Transform target) { Target = target; motor = target != null ? target.GetComponent<GospelPilgrimageMotor>() : null; Snap(); }
         public void SetZoom01(float value) => SetZoom(Mathf.Lerp(MinimumZoom, MaximumZoom, Mathf.Clamp01(value)));
         public void SetZoom(float value) { if (!float.IsNaN(value) && !float.IsInfinity(value)) zoom = Mathf.Clamp(value, MinimumZoom, MaximumZoom); }
         public void ZoomBy(float delta) => SetZoom(zoom + delta);
-        Vector3 DesiredPosition() => Target.position + Vector3.up * .8f + View.transform.rotation * (Vector3.back * 18f);
+        Vector3 DesiredPosition()
+        {
+            var focus = Target.position;
+            // Keep the landscape steady through a jump. The character travels
+            // in the composition while the view retains its ground reference.
+            focus.y = groundedHeight + .78f + Mathf.Clamp(Target.position.y - groundedHeight, 0, 2) * .10f;
+            return focus + lookAhead + View.transform.rotation * (Vector3.back * 18f);
+        }
         public void Snap()
         {
             if (View == null || Target == null) return;
+            groundedHeight = Target.position.y; lookAhead = Vector3.zero;
             View.transform.position = DesiredPosition(); View.orthographicSize = zoom;
             velocity = Vector3.zero; zoomVelocity = 0;
         }
@@ -53,7 +62,14 @@ namespace PathOfDawn.Presentation
         {
             if (View == null || Target == null) return;
             float dt = Mathf.Min(Time.deltaTime, Time.maximumDeltaTime);
-            View.transform.position = Vector3.SmoothDamp(View.transform.position, DesiredPosition(), ref velocity, .13f, Mathf.Infinity, dt);
+            if (dt <= 0) return;
+            if (motor == null || motor.IsGrounded)
+                groundedHeight = Mathf.Lerp(groundedHeight, Target.position.y, 1 - Mathf.Exp(-dt * 12));
+            Vector3 travel = motor != null && InputEnabled ? motor.Velocity : Vector3.zero;
+            travel.y = 0;
+            Vector3 lead = Vector3.ClampMagnitude(travel * .17f, 1.05f);
+            lookAhead = Vector3.Lerp(lookAhead, lead, 1 - Mathf.Exp(-dt * 5.4f));
+            View.transform.position = Vector3.SmoothDamp(View.transform.position, DesiredPosition(), ref velocity, motor != null && motor.IsDashing ? .105f : .16f, Mathf.Infinity, dt);
             View.orthographicSize = Mathf.SmoothDamp(View.orthographicSize, zoom, ref zoomVelocity, .14f, Mathf.Infinity, dt);
         }
     }

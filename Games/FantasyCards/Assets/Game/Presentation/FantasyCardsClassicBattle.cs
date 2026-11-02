@@ -17,6 +17,7 @@ namespace FantasyCards.Presentation
             battleUnitViews.Clear(); ChronicleVisibleCoinPanels = 0;
             DrawChronicleBackdrop();
             DrawLanes(1, .660f, .910f); DrawLanes(0, .365f, .615f);
+            DrawRestageFactionHeaders();
             var messagePanel = ChroniclePanel(root, .025f, .618f, .805f, .656f, new Color(.012f, .024f, .045f, .96f), false);
             ReadableText(messagePanel, battlePlaybackActive ? battlePlaybackIndex + "/" + battlePlaybackCount + " · " + battlePlaybackCaption : IsClientShuffleActive ? "손패 → 덱 회수 · 셔플 · 순서대로 받기" : locked ? "전투 준비 중" : StatusMessage(), .012f, .02f, .988f, .98f, 22, gold);
             BindTooltip(messagePanel.gameObject, "전장 안내", battlePlaybackActive ? battlePlaybackCaption : StatusMessage());
@@ -66,7 +67,8 @@ namespace FantasyCards.Presentation
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);
                 float left = start + lane * span / state.rules.unitLanes, right = left + span / state.rules.unitLanes - .008f;
                 bool target = IsLegalLane(owner, lane);
-                var panel = ChroniclePanel(root, left, bottom, right, top, new Color(.005f, .013f, .055f, .28f), false);
+                Color sideTint = owner == 0 ? new Color(.02f, .085f, .11f, .48f) : new Color(.10f, .027f, .045f, .42f);
+                var panel = ChroniclePanel(root, left, bottom, right, RestageLaneTop(owner), sideTint, false);
                 panel.gameObject.name = "Lane " + owner + " " + lane;
                 panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
                 const float cardBottom = .025f, cardTop = .975f, cardRight = .985f;
@@ -100,7 +102,8 @@ namespace FantasyCards.Presentation
                     Text(panel, new[] { "I", "II", "III", "IV", "V" }[index], .03f, .49f, .97f, .97f, 26, target ? gold : new Color(.48f, .54f, .67f), TextAlignmentOptions.Center);
                     Text(panel, target ? "여기에 배치" : "빈 전열", .03f, .02f, .97f, .50f, 22, target ? ivory : new Color(.55f, .61f, .72f), TextAlignmentOptions.Center);
                 }
-                if (unit == null || target) Frame(panel, target ? gold : new Color(.24f, .37f, .80f, .38f), target ? 2.5f : 1);
+                Frame(panel, target ? gold : new Color(owner == 0 ? RestageOwn.r : RestageEnemy.r,
+                    owner == 0 ? RestageOwn.g : RestageEnemy.g, owner == 0 ? RestageOwn.b : RestageEnemy.b, .48f), target ? 2.5f : 1);
                 panel.GetComponent<Image>().raycastTarget = true;
                 var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, index));
                 BindLaneDrop(panel, owner, lane);

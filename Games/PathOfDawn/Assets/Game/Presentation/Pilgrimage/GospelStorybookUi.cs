@@ -101,14 +101,16 @@ namespace PathOfDawn.Presentation
             var scene = story.CurrentStoryScene;
             Begin("story", true, false);
             PaintStoryScene(layer, scene.ArtKey, "Story scene illustration", 0, 0, 1280, 720, true);
-            Panel(layer, "Story location contrast", 0, 0, 1280, 132, new Color(.013f, .030f, .045f, .70f));
+            var locationShade = Rect(layer, "Story location gradient", 0, 0, 1280, 156).gameObject.AddComponent<DawnGradient>();
+            locationShade.vertical = true; locationShade.left = new Color(.013f, .030f, .039f, 0);
+            locationShade.right = new Color(.013f, .030f, .039f, .84f); locationShade.raycastTarget = false;
             Text(layer, scene.TimeLabel + "  /  " + scene.Location, 51, 28, 990, 31, 20, Gold);
             Text(layer, scene.Title, 49, 69, 930, 46, 32, White);
             B(layer, "성경", 1082, 28, 145, 52, OnRead);
 
-            var dialogue = Panel(layer, "Story dialogue", 36, 444, 1208, 244, new Color(.017f, .039f, .053f, .97f), true);
-            Rule(dialogue, 0, 0, 4, 244, Gold);
-            Text(dialogue, turn.Speaker, 27, 19, 785, 37, 28, White);
+            var dialogue = Panel(layer, "Story dialogue", 36, 444, 1208, 244, new Color(.017f, .039f, .044f, .91f), true);
+            Rule(dialogue, 12, 22, 2, 200, new Color(.89f, .79f, .52f, .62f));
+            Text(dialogue, turn.Speaker, 27, 19, 785, 37, 28, White, TextAlignmentOptions.TopLeft, true);
             Text(dialogue, turn.IsVerbatim ? "성경 직접 인용" : turn.IsDramatized ? "극화 대화" : "이야기",
                 877, 21, 300, 29, 18, Gold, TextAlignmentOptions.Right);
             var spoken = Scroll(dialogue, turn.Text, 27, 70, 1139, 104, 29, White);

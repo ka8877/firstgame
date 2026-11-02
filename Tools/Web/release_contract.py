@@ -79,7 +79,19 @@ REPRISE = {
 }
 
 
+RESTAGE = {
+    'name': 'restage',
+    'revisions': {'FantasyCards': 'fm-restage-2026-11-02', 'PathOfDawn': 'gospel-canopy-2026-11-02'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/Restage' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'restage':
+        return RESTAGE
     if name == 'reprise':
         return REPRISE
     if name == 'quest':

@@ -21,46 +21,16 @@ namespace FantasyCards.Presentation
 
         private void RenewalBackdrop(bool quiet)
         {
-            Panel(root, 0, 0, 1, 1, new Color(.018f, .027f, .065f));
+            Panel(root, 0, 0, 1, 1, new Color(.012f, .024f, .043f));
             var art = Resources.Load<Texture2D>("Art/FmRenewal/late-official");
             if (art != null) ImageFrame(root, art, new Rect(.245f, .45f, .51f, .55f), 0, .35f, 1, 1, new Vector2(.5f, .54f));
             Gradient(root, 0, .30f, 1, .72f, new Color(.018f, .027f, .065f, 1), Color.clear);
-            if (quiet) Panel(root, 0, 0, 1, 1, new Color(.012f, .02f, .055f, .78f));
+            if (quiet) Panel(root, 0, 0, 1, 1, new Color(.010f, .023f, .044f, .78f));
             var border = Panel(root, .018f, .025f, .982f, .975f, Color.clear);
             Frame(border, new Color(.66f, .73f, .91f, .42f), 1);
         }
 
-        private void ShowArcanaTitle()
-        {
-            QuestCurrentScreen = "title";
-            battleScreen = false; redraw = ShowTitle; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("login");
-            RenewalBackdrop(false);
-            var edition = Text(root, "FANTASY MASTERS", .28f, .80f, .72f, .935f, 54, ivory, TextAlignmentOptions.Center);
-            edition.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font; edition.characterSpacing = 1.8f;
-            Text(root, "REMASTER  ·  싱글 플레이", .29f, .735f, .71f, .805f, 22, gold, TextAlignmentOptions.Center);
-            var title = Text(root, "판타지마스터즈", .15f, .515f, .85f, .68f, 70, ivory, TextAlignmentOptions.Center);
-            title.gameObject.name = "Remaster title logo"; title.fontStyle = FontStyles.Bold;
-            Text(root, "카드를 펼치고, 코인의 운명에 도전하세요.", .20f, .435f, .80f, .51f, 26, new Color(.79f, .86f, 1), TextAlignmentOptions.Center);
-            var play = Button(root, "게임 시작", .34f, .28f, .66f, .405f, EnterQuestGame, gold, 32);
-            play.gameObject.AddComponent<UiPanelEntrance>().Delay = .05f;
-            Button(root, "전투 이어하기", .34f, .18f, .66f, .26f, Continue, new Color(.08f, .12f, .23f, .97f), 26, HasAnyBattleSave);
-            Button(root, "카드 앨범", .10f, .075f, .34f, .155f, ShowRestorationOriginalArchive, slate, 24);
-            Button(root, "자유 연습", .38f, .075f, .62f, .155f, ShowFreePracticeLobby, slate, 24);
-            Button(root, "소리 설정", .66f, .075f, .90f, .155f, () => ShowSoundSettings(ShowTitle), slate, 24);
-            Text(root, "출전 " + CardCatalog.All.Length + "종 · 원본 도감 " + OriginalCardArchive.All.Length + "종",
-                .04f, .012f, .50f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
-            Text(root, "첫 기본 덱 무료 · SP 카드팩 수집", .51f, .012f, .96f, .065f, 20, new Color(.72f, .80f, .93f), TextAlignmentOptions.Center);
-            var featured = CardCatalog.All.Where(card => card.rarity == CardRarity.Unique || card.rarity == CardRarity.Secret).GroupBy(card => card.rarity).Select(group => group.Last()).Take(2).ToArray();
-            for (int i = 0; i < featured.Length; i++)
-            {
-                float x = i == 0 ? .105f : .755f;
-                var face = ArcanaCardFace(root, featured[i], x, .185f, x + .14f, .425f, ArcanaCardMode.Showcase);
-                face.localRotation = Quaternion.Euler(0, 0, i == 0 ? 7 : -7);
-                face.GetComponent<Image>().raycastTarget = true;
-                var button = face.gameObject.AddComponent<Button>(); var selected = featured[i];
-                button.onClick.AddListener(() => ShowDetail(selected, ShowTitle)); BindCardHelp(face.gameObject, selected, () => ShowDetail(selected, ShowTitle));
-            }
-        }
+        private void ShowArcanaTitle() => DrawRestageTitle();
 
         private void DrawArcanaTitleFan()
         {

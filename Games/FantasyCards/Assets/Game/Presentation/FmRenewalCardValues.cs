@@ -15,17 +15,38 @@ namespace FantasyCards.Presentation
             label.GetComponent<UiCanvasTextSize>().ConfigureCard(size);
             label.overflowMode = TextOverflowModes.Overflow; return label;
         }
-        private readonly Dictionary<int, BattleEvent> battleCardTransitions = new Dictionary<int, BattleEvent>();
+        private BattlePlaybackFrame liveCardImpactFrame;
+        public bool BattlePlaybackStatsCommitted { get; private set; }
+        public IReadOnlyList<PlayerState> BattlePlaybackResolvedStatsSnapshot => liveCardImpactFrame == null ? null : liveCardImpactFrame.players.ConvertAll(p => p.Copy()).AsReadOnly();
+
+        private void CommitLiveCardImpact()
+        {
+            if (liveCardImpactFrame == null || root == null) return;
+            foreach (var view in root.GetComponentsInChildren<FmLiveCardValues>())
+            {
+                UnitState before = null, after = null;
+                for (int owner = 0; owner < 2; owner++)
+                {
+                    if (before == null) before = BattleDisplayState.players[owner].units.Find(u => u.instanceId == view.InstanceId);
+                    if (after == null) after = liveCardImpactFrame.players[owner].units.Find(u => u.instanceId == view.InstanceId);
+                }
+                // A dying card remains visible until its real destruction
+                // event. Its last damage frame still contains HP zero.
+                if (after == null) continue;
+                before = before ?? after;
+                view.Present(CardCatalog.UnitAttack(before), CardCatalog.UnitDefense(before), CardCatalog.UnitHealth(before),
+                    CardCatalog.UnitAttack(after), CardCatalog.UnitDefense(after), CardCatalog.UnitHealth(after));
+            }
+            BattlePlaybackStatsCommitted = true;
+        }
 
         private void ChronicleValues(UnitState unit, out int[] before, out int[] current)
         {
             current = new[] { CardCatalog.UnitAttack(unit), CardCatalog.UnitDefense(unit), Math.Max(0, CardCatalog.UnitHealth(unit)) };
             before = (int[])current.Clone();
-            if (battlePlaybackActive && battleCardTransitions.TryGetValue(unit.instanceId, out var change) && change.hasStatTransition)
-            {
-                current = new[] { change.afterAttack, change.afterDefense, Math.Max(0, change.afterHealth) };
-                before = new[] { change.beforeAttack, change.beforeDefense, Math.Max(0, change.beforeHealth) };
-            }
+            // Event metadata describes the acting unit only. Using it as a
+            // substitute for the snapshot missed equipment bearers and skill
+            // targets. Exact before/after frames now drive every live view.
         }
 
         private void DrawRenewalCardValues(RectTransform surface, CardDefinition card, UnitState unit, bool selected)
@@ -43,6 +64,7 @@ namespace FantasyCards.Presentation
             container.gameObject.name = "Integrated live card values " + identity;
             string[] labels = { "AP", "DP", "HP" };
             float[] bottoms = { .171f, .106f, .040f }, tops = { .233f, .168f, .102f };
+            var values = new TMP_Text[3];
             for (int i = 0; i < 3; i++)
             {
                 var patch = Panel(container, .851f, bottoms[i], .983f, tops[i], new Color(.014f, .020f, .032f, 1));
@@ -58,6 +80,15 @@ namespace FantasyCards.Presentation
                 label.outlineWidth = .07f; label.outlineColor = new Color32(0, 0, 0, 255);
                 label.enableAutoSizing = true; label.overflowMode = TextOverflowModes.Overflow;
                 if (label.text.Length > 2) label.rectTransform.localScale = new Vector3(2.2f / label.text.Length, 1, 1);
+                values[i] = label;
+            }
+            if (unit != null)
+            {
+                var binding = container.gameObject.AddComponent<FmLiveCardValues>();
+                binding.Configure(unit.instanceId, values, null, true, printed: new[] { card.attack, card.defense, card.health });
+                // Persistent item/stat changes stay visibly distinct from the
+                // printed base after playback, as well as during its impact.
+                binding.Present(card.attack, card.defense, card.health, current[0], current[1], current[2]);
             }
         }
     }

@@ -1,0 +1,1467 @@
+
+
+
+
+                                                                                
+
+                
+if (!window.T) { window.T = {} }
+window.T.config = {"TOP_SSL_URL":"https://www.tistory.com","PREVIEW":false,"ROLE":"guest","PREV_PAGE":"","NEXT_PAGE":"","BLOG":{"id":4654446,"name":"pickledchili","title":"🄶🄰🄼🄴 🄸🅃","isDormancy":false,"nickName":"테크좋아게임좋아","status":"open","profileStatus":"normal"},"NEED_COMMENT_LOGIN":false,"COMMENT_LOGIN_CONFIRM_MESSAGE":"","LOGIN_URL":"https://www.tistory.com/auth/login/?redirectUrl=https://pickledchili.tistory.com/3","DEFAULT_URL":"https://pickledchili.tistory.com","USER":{"name":null,"homepage":null,"id":0,"profileImage":null},"SUBSCRIPTION":{"status":"none","isConnected":false,"isPending":false,"isWait":false,"isProcessing":false,"isNone":true},"IS_LOGIN":false,"HAS_BLOG":false,"IS_SUPPORT":false,"IS_SCRAPABLE":false,"TOP_URL":"http://www.tistory.com","JOIN_URL":"https://www.tistory.com/member/join","PHASE":"prod","ROLE_GROUP":"visitor"};
+window.T.entryInfo = {"entryId":3,"isAuthor":false,"categoryId":886993,"categoryLabel":"게임 리뷰 및 잡담"};
+window.appInfo = {"domain":"tistory.com","topUrl":"https://www.tistory.com","loginUrl":"https://www.tistory.com/auth/login","logoutUrl":"https://www.tistory.com/auth/logout"};
+window.initData = {};
+
+window.TistoryBlog = {
+    basePath: "",
+    url: "https://pickledchili.tistory.com",
+    tistoryUrl: "https://pickledchili.tistory.com",
+    manageUrl: "https://pickledchili.tistory.com/manage",
+    token: "Z5wMgOaJmPy25xyEsSIor10H0slB0dP6V8rIU5tZwYzuYVqkBAHj4AyUgccByW30"
+};
+var servicePath = "";
+var blogURL = "";
+
+
+                
+                
+                
+                        
+
+        
+            
+
+
+            
+function switchFold(entryId) {
+    var businessLayer = document.getElementById("businessInfoLayer_" + entryId);
+
+    if (businessLayer) {
+        if (businessLayer.className.indexOf("unfold_license") > 0) {
+            businessLayer.className = "business_license_layer";
+        } else {
+            businessLayer.className = "business_license_layer unfold_license";
+        }
+    }
+}
+
+
+
+        
+        
+
+        
+
+        
+#daumSearchBox {
+    height: 21px;
+    background-image: url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bg_search2_2.gif);
+    margin: 5px auto;
+    padding: 0;
+}
+
+#daumSearchBox input {
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#daumSearchBox #daumLogo {
+    width: 34px;
+    height: 21px;
+    float: left;
+    margin-right: 5px;
+    background-image: url(//i1.daumcdn.net/img-media/tistory/img/bg_search1_2_2010ci.gif);
+}
+
+#daumSearchBox #show_q {
+    background-color: transparent;
+    border: none;
+    font: 12px Gulim, Sans-serif;
+    color: #555;
+    margin-top: 4px;
+    margin-right: 15px;
+    float: left;
+}
+
+#daumSearchBox #show_btn {
+    background-image: url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bt_search_2.gif);
+    width: 37px;
+    height: 21px;
+    float: left;
+    margin: 0;
+    cursor: pointer;
+    text-indent: -1000em;
+}
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+
+        
+
+
+
+
+        
+
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function() {
+    var tjQuery = jQuery.noConflict(true);
+    window.tjQuery = tjQuery;
+    window.orgjQuery = window.jQuery; window.jQuery = tjQuery;
+    window.jQuery = window.orgjQuery; delete window.orgjQuery;
+})()
+
+
+
+
+
+
+                
+  
+[게임 리뷰] 오리와 도깨비불 :: 🄶🄰🄼🄴 🄸🅃
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+
+  
+
+  
+
+
+                
+                
+                
+.another_category {
+    border: 1px solid #E5E5E5;
+    padding: 10px 10px 5px;
+    margin: 10px 0;
+    clear: both;
+}
+
+.another_category h4 {
+    font-size: 12px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #E5E5E5 !important;
+    padding: 2px 0 6px !important;
+}
+
+.another_category h4 a {
+    font-weight: bold !important;
+}
+
+.another_category table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100% !important;
+    margin-top: 10px !important;
+}
+
+* html .another_category table {
+    width: auto !important;
+}
+
+*:first-child + html .another_category table {
+    width: auto !important;
+}
+
+.another_category th, .another_category td {
+    padding: 0 0 4px !important;
+}
+
+.another_category th {
+    text-align: left;
+    font-size: 12px !important;
+    font-weight: normal;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+.another_category td {
+    text-align: right;
+    width: 80px;
+    font-size: 11px;
+}
+
+.another_category th a {
+    font-weight: normal;
+    text-decoration: none;
+    border: none !important;
+}
+
+.another_category th a.current {
+    font-weight: bold;
+    text-decoration: none !important;
+    border-bottom: 1px solid !important;
+}
+
+.another_category th span {
+    font-weight: normal;
+    text-decoration: none;
+    font: 10px Tahoma, Sans-serif;
+    border: none !important;
+}
+
+.another_category_color_gray, .another_category_color_gray h4 {
+    border-color: #E5E5E5 !important;
+}
+
+.another_category_color_gray * {
+    color: #909090 !important;
+}
+
+.another_category_color_gray th a.current {
+    border-color: #909090 !important;
+}
+
+.another_category_color_gray h4, .another_category_color_gray h4 a {
+    color: #737373 !important;
+}
+
+.another_category_color_red, .another_category_color_red h4 {
+    border-color: #F6D4D3 !important;
+}
+
+.another_category_color_red * {
+    color: #E86869 !important;
+}
+
+.another_category_color_red th a.current {
+    border-color: #E86869 !important;
+}
+
+.another_category_color_red h4, .another_category_color_red h4 a {
+    color: #ED0908 !important;
+}
+
+.another_category_color_green, .another_category_color_green h4 {
+    border-color: #CCE7C8 !important;
+}
+
+.another_category_color_green * {
+    color: #64C05B !important;
+}
+
+.another_category_color_green th a.current {
+    border-color: #64C05B !important;
+}
+
+.another_category_color_green h4, .another_category_color_green h4 a {
+    color: #3EA731 !important;
+}
+
+.another_category_color_blue, .another_category_color_blue h4 {
+    border-color: #C8DAF2 !important;
+}
+
+.another_category_color_blue * {
+    color: #477FD6 !important;
+}
+
+.another_category_color_blue th a.current {
+    border-color: #477FD6 !important;
+}
+
+.another_category_color_blue h4, .another_category_color_blue h4 a {
+    color: #1960CA !important;
+}
+
+.another_category_color_violet, .another_category_color_violet h4 {
+    border-color: #E1CEEC !important;
+}
+
+.another_category_color_violet * {
+    color: #9D64C5 !important;
+}
+
+.another_category_color_violet th a.current {
+    border-color: #9D64C5 !important;
+}
+
+.another_category_color_violet h4, .another_category_color_violet h4 a {
+    color: #7E2CB5 !important;
+}
+
+
+
+                
+                
+
+
+
+
+
+
+
+
+    {"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@id":"https://pickledchili.tistory.com/3","name":null},"url":"https://pickledchili.tistory.com/3","headline":"[게임 리뷰] 오리와 도깨비불","description":"( 그 구간 ) 해보신 분들은 공감 하실듯 전작도 하드모드로 했었고 이번작도 하드모드로 했습니다. 하면서 느낀 점 몇개를 적어보자면 우선 맵이 넓어졌습니다. 근데 플탐은 엄청 많이 늘어나진 않았네요. 전반적으로 게임이 편해졌습니다. 1편은 하드모드 하면 한대 맞으면 찍 하고 죽었는데 이번 작은 좀 난이도를 낮춰준 것도 있고 여러 이동기도 생겨서 편해졌습니다. 그 구간 빼고는 보스도 어려운게 없습니다. 1편 해보신 분들은 같은 제작사 맞나 의심 하실듯 비쥬얼이 미쳤습니다. 그냥 지나다니면서 보이는 풍경만 감상해도 값어치는 충분히 할 듯 음악은 여전히 좋았습니다. 개인적으로 1편 긴소나무 탈출 음악이 제일 좋았는데 또 나오더라구요. 아쉬운 건 번역이 조금 어색하고 폰트도 게임 분위기랑 안맞습니다 이거 말곤 ..","author":{"@type":"Person","name":"테크좋아게임좋아","logo":null},"image":{"@type":"ImageObject","url":"https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbrtCoe%2Fbtq1caOvDCu%2FAAAAAAAAAAAAAAAAAAAAAGBW64KY2l1ftd1r1vBJBzRK9cAobfElorlfNTNnOMZa%2Fimg.jpg%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1796050799%26allow_ip%3D%26allow_referer%3D%26signature%3DaJJBSM%252BFfFQVWWy%252BACyKew5aofU%253D","width":"800px","height":"800px"},"datePublished":"2021-03-27T20:22:05+09:00","dateModified":"2021-03-30T21:30:38+09:00","publisher":{"@type":"Organization","name":"TISTORY","logo":{"@type":"ImageObject","url":"https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png","width":"800px","height":"800px"}}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+                
+
+
+                                                
+
+                
+                
+                
+  
+    
+
+    
+
+
+      
+
+      
+
+
+        
+
+          
+
+  
+홈
+
+  
+태그
+
+  
+방명록
+
+
+
+          
+ 분류 전체보기 
+(26)
+ 
+
+  
+ IT 관련 정보 
+(11)
+ 
+
+
+ IT 제품 리뷰, 추천 
+(4)
+ 
+
+
+ 게임 리뷰 및 잡담 
+(3)
+ 
+
+
+ 일상 잡담 
+(1)
+ 
+
+
+ 게임 정보 
+(7)
+ 
+
+
+
+
+
+
+
+
+        
+
+
+        
+
+          
+
+            
+
+            
+
+              
+
+            
+
+          
+
+          
+
+
+          
+
+          
+
+            
+
+              
+ABOUT ME
+
+              
+-
+
+            
+
+          
+
+        
+
+
+        
+
+          
+          
+            
+트위터
+
+          
+          
+            
+인스타그램
+
+          
+        
+
+
+        
+
+          
+
+            
+Today
+
+            
+-
+
+          
+
+          
+
+            
+Yesterday
+
+            
+-
+
+          
+
+          
+
+            
+Total
+
+            
+-
+
+          
+
+        
+
+      
+
+      
+
+
+      
+
+      
+
+        
+
+          
+
+            
+
+              
+
+                
+🄶🄰🄼🄴 🄸🅃
+
+                
+                  
+🄶🄰🄼🄴 🄸🅃
+
+                
+              
+
+            
+
+            
+메뉴
+
+            
+검색
+
+
+            
+
+            
+
+              
+
+                
+컨텐츠 검색
+
+                
+                  
+블로그 내 검색
+
+                  
+
+                
+                
+
+              
+
+            
+
+
+          
+
+        
+
+
+        
+
+          
+          
+
+          
+
+            
+
+            
+
+            
+
+
+            
+
+              
+
+                    
+        
+      
+
+      
+        
+
+          
+
+          
+
+
+            
+
+            
+
+              
+
+                
+
+                  
+[게임 리뷰] 오리와 도깨비불
+
+                
+
+                
+
+                  
+게임 리뷰 및 잡담
+
+                  
+2021. 3. 27. 20:22
+
+                  
+                
+
+              
+
+
+              
+
+              
+
+                            
+
+
+
+
+
+            
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+( 그 구간 )
+해보신 분들은 공감 하실듯
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+전작도 하드모드로 했었고 이번작도 하드모드로 했습니다.
+
+
+하면서 느낀 점 몇개를 적어보자면
+
+
+ 
+
+
+우선 맵이 넓어졌습니다
+. 근데 플탐은 엄청 많이 늘어나진 않았네요. 
+
+
+ 
+
+
+전반적으로 게임이 편해졌습니다.
+ 
+1편은 하드모드 하면 한대 맞으면 찍 하고 죽었는데
+
+
+이번 작은 좀 난이도를 낮춰준 것도 있고 여러 이동기도 생겨서 편해졌습니다.
+
+
+그 구간
+ 
+빼고는 보스도 어려운게 없습니다. 1편 해보신 분들은 같은 제작사 맞나 의심 하실듯
+
+
+ 
+
+
+비쥬얼이 미쳤습니다.
+ 
+그냥 지나다니면서 보이는 풍경만 감상해도 값어치는 충분히 할 듯
+
+
+ 
+
+
+음악은 여전히 좋았습니다.
+ 
+개인적으로 1편 긴소나무 탈출 음악이 제일 좋았는데 또 나오더라구요.
+
+
+ 
+
+
+아쉬운 건 번역이 조금 어색하고 폰트도 게임 분위기랑 안맞습니다 이거 말곤 아쉬울건 없는듯
+
+
+ 
+
+
+새롭게 생긴 패시브 조각이랑 액티브 스킬들 써보는 것도 재밌었습니다.
+
+
+ 
+
+
+오리 시리즈를 안해보신 분들은 꼭 해보시는 걸 추천합니다.
+
+
+2편 출시 기념으로 1편도 세일해서 5천원대이니 1편 하시고 2편도 꼭 해보세요
+
+
+갓겜입니다
+.
+
+
+ 
+
+
+ 
+
+
+ 
+
+
+ 
+
+            
+
+
+
+
+
+                    
+
+  
+window.ReactionButtonType = 'reaction';
+window.ReactionApiUrl = '//pickledchili.tistory.com/reaction';
+window.ReactionReqBody = {
+    entryId: 3
+}
+
+
+공유하기
+
+  
+
+
+게시글 관리
+
+  
+
+
+
+
+🄶🄰🄼🄴 🄸🅃
+  
+
+
+
+
+                    
+
+
+
+  
+'
+게임 리뷰 및 잡담
+' 카테고리의 다른 글
+
+  
+
+    
+
+      
+[게임 리뷰] 엔터 더 건전, Enter the Gungeon
+  
+(0)
+
+      
+2021.03.30
+
+    
+
+    
+
+      
+레드 데드 리뎀션2 잡다한 사진 모음
+  
+(0)
+
+      
+2021.03.27
+
+    
+
+  
+
+
+
+
+
+
+
+              
+
+
+              
+                
+
+                
+
+                  
+TAG
+
+                  
+스팀
+, 
+오리와 눈먼숲
+, 
+오리와 도깨비불
+, 
+인디게임
+
+                
+
+                
+
+              
+
+
+              
+                
+
+                
+
+                  
+관련글 
+관련글 더보기
+
+                  
+
+                    
+                      
+
+                        
+
+                          
+
+                          
+[게임 리뷰] 엔터 더 건전, Enter the Gungeon
+
+                        
+
+                      
+
+                    
+                      
+
+                        
+
+                          
+
+                          
+레드 데드 리뎀션2 잡다한 사진 모음
+
+                        
+
+                      
+
+                    
+                  
+
+                
+
+                
+
+              
+
+              
+
+              
+
+                
+
+                  
+
+
+                
+
+
+loadedComments[3]=true;
+findFragmentAndHighlight(3);
+
+
+              
+
+              
+
+
+            
+
+            
+
+
+          
+
+        
+
+      
+    
+        
+    
+              
+
+            
+
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+
+          
+
+          
+
+
+        
+
+
+        
+
+        
+
+          
+
+            
+                
+
+                
+
+                  
+
+                    
+인기포스트
+
+                    
+
+                      
+                        
+
+                          
+
+                            
+
+                            
+굿노트 자동 백업 활용하기 (feat. 구글 드라이브,⋯
+
+                          
+
+                        
+
+                      
+                        
+
+                          
+
+                            
+
+                            
+[게임 리뷰] 오리와 도깨비불
+
+                          
+
+                        
+
+                      
+                        
+
+                          
+
+                            
+
+                            
+Razer, 레이저 게이밍 빨대 출시?!
+
+                          
+
+                        
+
+                      
+                        
+
+                          
+
+                            
+
+                            
+가성비 무선 키마 조합 추천, BW-KB1, 로지텍 G⋯
+
+                          
+
+                        
+
+                      
+                    
+
+                  
+
+                
+
+              
+                
+
+                
+
+                  
+
+                    
+
+                      
+ABOUT ME
+
+                      
+IT 및 게임을 좋아하는 블로거입니다.
+
+                    
+
+                  
+
+                
+
+              
+                
+
+                
+
+                  
+
+                    
+LINK
+
+                    
+                  
+
+                
+
+              
+                
+
+                
+
+                  
+
+                    
+ADMIN
+
+                    
+admin
+
+                    
+글쓰기
+
+                  
+
+                
+
+              
+                
+
+                
+
+                  
+
+                    
+9,232
+
+                    
+3
+
+                    
+0
+
+                  
+
+                
+
+              
+          
+
+        
+
+        
+
+
+        
+
+        
+        
+
+          Designed by Tistory.
+        
+
+        
+
+
+      
+
+      
+
+
+    
+
+    
+
+  
+
+
+
+  
+티스토리툴바
+
+
+
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+
+                
+                
+
+
+
+
+                
+                
+window.tiara = {"svcDomain":"user.tistory.com","section":"글뷰","trackPage":"글뷰_보기","page":"글뷰","key":"4654446-3","customProps":{"userId":"0","blogId":"4654446","entryId":"3","role":"guest","trackPage":"글뷰_보기","filterTarget":false},"entry":{"entryId":"3","entryTitle":"[게임 리뷰] 오리와 도깨비불","entryType":"POST","categoryName":"게임 리뷰 및 잡담","categoryId":"886993","serviceCategoryName":"게임","serviceCategoryId":403,"author":"4839430","authorNickname":"테크좋아게임좋아","blogNmae":"🄶🄰🄼🄴 🄸🅃","image":"kage@brtCoe/btq1caOvDCu/iq5d6XEVJlNFofAIi1STY1","plink":"/3","tags":["스팀","오리와 눈먼숲","오리와 도깨비불","인디게임"]},"kakaoAppKey":"3e6ddd834b023f24221217e370daed18","appUserId":"null","thirdProvideAgree":null}
+
+
+
+
+
+
+
+
+                
+
+

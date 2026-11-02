@@ -1,0 +1,834 @@
+{
+  "width": 1536,
+  "height": 1024,
+  "referenceHeight": 232.0,
+  "coordinateSystem": "frame rect bottom-left pixels; alpha box top-left exclusive maxima",
+  "framesPerDirection": 8,
+  "idleFrame": 0,
+  "airFrame": 7,
+  "strideLength": 1.8,
+  "walkSequence": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "walkDurations": [
+    0.23,
+    0.1,
+    0.17,
+    0.23,
+    0.1,
+    0.17
+  ],
+  "smoothFiltering": true,
+  "threshold": 32,
+  "connectivity": 8,
+  "margin": 4,
+  "totalAlphaComponents": 32,
+  "principalComponents": 32,
+  "frames": [
+    {
+      "name": "front-idle",
+      "x": 71,
+      "y": 772,
+      "w": 126,
+      "h": 235,
+      "pivotX": 0.492063492,
+      "pivotY": 0.017021277,
+      "alphaBoxTopLeft": [
+        75,
+        21,
+        193,
+        248
+      ],
+      "alphaPixels": 19510,
+      "bodyAnchorX": 133.0,
+      "feetBaselineTopLeft": 248,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.184482759,
+      "lampAnchorY": 0.350431034,
+      "lampAnchorSourcePixels": [
+        90.2,
+        166.7
+      ]
+    },
+    {
+      "name": "front-left-contact",
+      "x": 269,
+      "y": 767,
+      "w": 121,
+      "h": 240,
+      "pivotX": 0.462809917,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        273,
+        21,
+        386,
+        253
+      ],
+      "alphaPixels": 18918,
+      "bodyAnchorX": 325.0,
+      "feetBaselineTopLeft": 253,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.131034483,
+      "lampAnchorY": 0.418103448,
+      "lampAnchorSourcePixels": [
+        294.6,
+        156.0
+      ]
+    },
+    {
+      "name": "front-left-down",
+      "x": 453,
+      "y": 767,
+      "w": 128,
+      "h": 234,
+      "pivotX": 0.4921875,
+      "pivotY": 0.017094017,
+      "alphaBoxTopLeft": [
+        457,
+        27,
+        577,
+        253
+      ],
+      "alphaPixels": 19102,
+      "bodyAnchorX": 516.0,
+      "feetBaselineTopLeft": 253,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.200431034,
+      "lampAnchorY": 0.375431034,
+      "lampAnchorSourcePixels": [
+        469.5,
+        165.9
+      ]
+    },
+    {
+      "name": "front-left-passing",
+      "x": 645,
+      "y": 767,
+      "w": 121,
+      "h": 244,
+      "pivotX": 0.487603306,
+      "pivotY": 0.016393443,
+      "alphaBoxTopLeft": [
+        649,
+        17,
+        762,
+        253
+      ],
+      "alphaPixels": 18629,
+      "bodyAnchorX": 704.0,
+      "feetBaselineTopLeft": 253,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.165517241,
+      "lampAnchorY": 0.445258621,
+      "lampAnchorSourcePixels": [
+        665.6,
+        149.7
+      ]
+    },
+    {
+      "name": "front-right-contact",
+      "x": 825,
+      "y": 768,
+      "w": 132,
+      "h": 236,
+      "pivotX": 0.5,
+      "pivotY": 0.016949153,
+      "alphaBoxTopLeft": [
+        829,
+        24,
+        953,
+        252
+      ],
+      "alphaPixels": 19540,
+      "bodyAnchorX": 891.0,
+      "feetBaselineTopLeft": 252,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.224568966,
+      "lampAnchorY": 0.37112069,
+      "lampAnchorSourcePixels": [
+        838.9,
+        165.9
+      ]
+    },
+    {
+      "name": "front-right-down",
+      "x": 1016,
+      "y": 767,
+      "w": 132,
+      "h": 232,
+      "pivotX": 0.477272727,
+      "pivotY": 0.017241379,
+      "alphaBoxTopLeft": [
+        1020,
+        29,
+        1144,
+        253
+      ],
+      "alphaPixels": 19197,
+      "bodyAnchorX": 1079.0,
+      "feetBaselineTopLeft": 253,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.201293103,
+      "lampAnchorY": 0.352155172,
+      "lampAnchorSourcePixels": [
+        1032.3,
+        171.3
+      ]
+    },
+    {
+      "name": "front-right-passing",
+      "x": 1201,
+      "y": 767,
+      "w": 137,
+      "h": 242,
+      "pivotX": 0.503649635,
+      "pivotY": 0.016528926,
+      "alphaBoxTopLeft": [
+        1205,
+        19,
+        1334,
+        253
+      ],
+      "alphaPixels": 19742,
+      "bodyAnchorX": 1270.0,
+      "feetBaselineTopLeft": 253,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.218534483,
+      "lampAnchorY": 0.441810345,
+      "lampAnchorSourcePixels": [
+        1219.3,
+        150.5
+      ]
+    },
+    {
+      "name": "front-air",
+      "x": 1370,
+      "y": 783,
+      "w": 151,
+      "h": 226,
+      "pivotX": 0.503311258,
+      "pivotY": 0.017699115,
+      "alphaBoxTopLeft": [
+        1374,
+        19,
+        1517,
+        237
+      ],
+      "alphaPixels": 19590,
+      "bodyAnchorX": 1446.0,
+      "feetBaselineTopLeft": 237,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.256896552,
+      "lampAnchorY": 0.382327586,
+      "lampAnchorSourcePixels": [
+        1386.4,
+        148.3
+      ]
+    },
+    {
+      "name": "back-idle",
+      "x": 68,
+      "y": 530,
+      "w": 136,
+      "h": 237,
+      "pivotX": 0.492647059,
+      "pivotY": 0.016877637,
+      "alphaBoxTopLeft": [
+        72,
+        261,
+        200,
+        490
+      ],
+      "alphaPixels": 20315,
+      "bodyAnchorX": 135.0,
+      "feetBaselineTopLeft": 490,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.231465517,
+      "lampAnchorY": 0.376293103,
+      "lampAnchorSourcePixels": [
+        188.7,
+        402.7
+      ]
+    },
+    {
+      "name": "back-left-contact",
+      "x": 260,
+      "y": 524,
+      "w": 138,
+      "h": 242,
+      "pivotX": 0.5,
+      "pivotY": 0.016528926,
+      "alphaBoxTopLeft": [
+        264,
+        262,
+        394,
+        496
+      ],
+      "alphaPixels": 20437,
+      "bodyAnchorX": 329.0,
+      "feetBaselineTopLeft": 496,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.230603448,
+      "lampAnchorY": 0.397413793,
+      "lampAnchorSourcePixels": [
+        382.5,
+        403.8
+      ]
+    },
+    {
+      "name": "back-left-down",
+      "x": 449,
+      "y": 524,
+      "w": 138,
+      "h": 241,
+      "pivotX": 0.507246377,
+      "pivotY": 0.01659751,
+      "alphaBoxTopLeft": [
+        453,
+        263,
+        583,
+        496
+      ],
+      "alphaPixels": 19961,
+      "bodyAnchorX": 519.0,
+      "feetBaselineTopLeft": 496,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.219396552,
+      "lampAnchorY": 0.405603448,
+      "lampAnchorSourcePixels": [
+        569.9,
+        401.9
+      ]
+    },
+    {
+      "name": "back-left-passing",
+      "x": 633,
+      "y": 526,
+      "w": 135,
+      "h": 240,
+      "pivotX": 0.525925926,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        637,
+        262,
+        764,
+        494
+      ],
+      "alphaPixels": 19270,
+      "bodyAnchorX": 704.0,
+      "feetBaselineTopLeft": 494,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.1875,
+      "lampAnchorY": 0.525,
+      "lampAnchorSourcePixels": [
+        747.5,
+        372.2
+      ]
+    },
+    {
+      "name": "back-right-contact",
+      "x": 826,
+      "y": 526,
+      "w": 137,
+      "h": 240,
+      "pivotX": 0.510948905,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        830,
+        262,
+        959,
+        494
+      ],
+      "alphaPixels": 20089,
+      "bodyAnchorX": 896.0,
+      "feetBaselineTopLeft": 494,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.218965517,
+      "lampAnchorY": 0.395258621,
+      "lampAnchorSourcePixels": [
+        946.8,
+        402.3
+      ]
+    },
+    {
+      "name": "back-right-down",
+      "x": 1009,
+      "y": 528,
+      "w": 147,
+      "h": 237,
+      "pivotX": 0.503401361,
+      "pivotY": 0.016877637,
+      "alphaBoxTopLeft": [
+        1013,
+        263,
+        1152,
+        492
+      ],
+      "alphaPixels": 20849,
+      "bodyAnchorX": 1083.0,
+      "feetBaselineTopLeft": 492,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.246551724,
+      "lampAnchorY": 0.371982759,
+      "lampAnchorSourcePixels": [
+        1140.2,
+        405.7
+      ]
+    },
+    {
+      "name": "back-right-passing",
+      "x": 1201,
+      "y": 525,
+      "w": 145,
+      "h": 240,
+      "pivotX": 0.524137931,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        1205,
+        263,
+        1342,
+        495
+      ],
+      "alphaPixels": 20171,
+      "bodyAnchorX": 1277.0,
+      "feetBaselineTopLeft": 495,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.165948276,
+      "lampAnchorY": 0.496982759,
+      "lampAnchorSourcePixels": [
+        1315.5,
+        379.7
+      ]
+    },
+    {
+      "name": "back-air",
+      "x": 1378,
+      "y": 544,
+      "w": 151,
+      "h": 222,
+      "pivotX": 0.503311258,
+      "pivotY": 0.018018018,
+      "alphaBoxTopLeft": [
+        1382,
+        262,
+        1525,
+        476
+      ],
+      "alphaPixels": 19547,
+      "bodyAnchorX": 1454.0,
+      "feetBaselineTopLeft": 476,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.268534483,
+      "lampAnchorY": 0.370258621,
+      "lampAnchorSourcePixels": [
+        1516.3,
+        390.1
+      ]
+    },
+    {
+      "name": "left-idle",
+      "x": 79,
+      "y": 281,
+      "w": 120,
+      "h": 235,
+      "pivotX": 0.525,
+      "pivotY": 0.017021277,
+      "alphaBoxTopLeft": [
+        83,
+        512,
+        195,
+        739
+      ],
+      "alphaPixels": 18764,
+      "bodyAnchorX": 142.0,
+      "feetBaselineTopLeft": 739,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.064224138,
+      "lampAnchorY": 0.339224138,
+      "lampAnchorSourcePixels": [
+        127.1,
+        660.3
+      ]
+    },
+    {
+      "name": "left-left-contact",
+      "x": 258,
+      "y": 283,
+      "w": 155,
+      "h": 234,
+      "pivotX": 0.509677419,
+      "pivotY": 0.017094017,
+      "alphaBoxTopLeft": [
+        262,
+        511,
+        409,
+        737
+      ],
+      "alphaPixels": 20992,
+      "bodyAnchorX": 337.0,
+      "feetBaselineTopLeft": 737,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.234913793,
+      "lampAnchorY": 0.421551724,
+      "lampAnchorSourcePixels": [
+        282.5,
+        639.2
+      ]
+    },
+    {
+      "name": "left-left-down",
+      "x": 453,
+      "y": 281,
+      "w": 139,
+      "h": 231,
+      "pivotX": 0.539568345,
+      "pivotY": 0.017316017,
+      "alphaBoxTopLeft": [
+        457,
+        516,
+        588,
+        739
+      ],
+      "alphaPixels": 19842,
+      "bodyAnchorX": 528.0,
+      "feetBaselineTopLeft": 739,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.190948276,
+      "lampAnchorY": 0.371551724,
+      "lampAnchorSourcePixels": [
+        483.7,
+        652.8
+      ]
+    },
+    {
+      "name": "left-left-passing",
+      "x": 631,
+      "y": 291,
+      "w": 160,
+      "h": 225,
+      "pivotX": 0.5125,
+      "pivotY": 0.017777778,
+      "alphaBoxTopLeft": [
+        635,
+        512,
+        787,
+        729
+      ],
+      "alphaPixels": 20520,
+      "bodyAnchorX": 713.0,
+      "feetBaselineTopLeft": 729,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.240517241,
+      "lampAnchorY": 0.412068966,
+      "lampAnchorSourcePixels": [
+        657.2,
+        633.4
+      ]
+    },
+    {
+      "name": "left-right-contact",
+      "x": 831,
+      "y": 283,
+      "w": 156,
+      "h": 232,
+      "pivotX": 0.525641026,
+      "pivotY": 0.017241379,
+      "alphaBoxTopLeft": [
+        835,
+        513,
+        983,
+        737
+      ],
+      "alphaPixels": 21136,
+      "bodyAnchorX": 913.0,
+      "feetBaselineTopLeft": 737,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.260775862,
+      "lampAnchorY": 0.380603448,
+      "lampAnchorSourcePixels": [
+        852.5,
+        648.7
+      ]
+    },
+    {
+      "name": "left-right-down",
+      "x": 1026,
+      "y": 281,
+      "w": 147,
+      "h": 233,
+      "pivotX": 0.517006803,
+      "pivotY": 0.017167382,
+      "alphaBoxTopLeft": [
+        1030,
+        514,
+        1169,
+        739
+      ],
+      "alphaPixels": 20943,
+      "bodyAnchorX": 1102.0,
+      "feetBaselineTopLeft": 739,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.237068966,
+      "lampAnchorY": 0.406896552,
+      "lampAnchorSourcePixels": [
+        1047.0,
+        644.6
+      ]
+    },
+    {
+      "name": "left-right-passing",
+      "x": 1215,
+      "y": 286,
+      "w": 158,
+      "h": 228,
+      "pivotX": 0.493670886,
+      "pivotY": 0.01754386,
+      "alphaBoxTopLeft": [
+        1219,
+        514,
+        1369,
+        734
+      ],
+      "alphaPixels": 20498,
+      "bodyAnchorX": 1293.0,
+      "feetBaselineTopLeft": 734,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.212068966,
+      "lampAnchorY": 0.407758621,
+      "lampAnchorSourcePixels": [
+        1243.8,
+        639.4
+      ]
+    },
+    {
+      "name": "left-air",
+      "x": 1391,
+      "y": 296,
+      "w": 139,
+      "h": 226,
+      "pivotX": 0.517985612,
+      "pivotY": 0.017699115,
+      "alphaBoxTopLeft": [
+        1395,
+        506,
+        1526,
+        724
+      ],
+      "alphaPixels": 18691,
+      "bodyAnchorX": 1463.0,
+      "feetBaselineTopLeft": 724,
+      "hasLampAnchor": true,
+      "lampAnchorX": -0.237931034,
+      "lampAnchorY": 0.456034483,
+      "lampAnchorSourcePixels": [
+        1407.8,
+        618.2
+      ]
+    },
+    {
+      "name": "right-idle",
+      "x": 69,
+      "y": 31,
+      "w": 123,
+      "h": 245,
+      "pivotX": 0.447154472,
+      "pivotY": 0.016326531,
+      "alphaBoxTopLeft": [
+        73,
+        752,
+        188,
+        989
+      ],
+      "alphaPixels": 19971,
+      "bodyAnchorX": 124.0,
+      "feetBaselineTopLeft": 989,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.031465517,
+      "lampAnchorY": 0.356465517,
+      "lampAnchorSourcePixels": [
+        131.3,
+        906.3
+      ]
+    },
+    {
+      "name": "right-left-contact",
+      "x": 242,
+      "y": 33,
+      "w": 157,
+      "h": 243,
+      "pivotX": 0.484076433,
+      "pivotY": 0.016460905,
+      "alphaBoxTopLeft": [
+        246,
+        752,
+        395,
+        987
+      ],
+      "alphaPixels": 22361,
+      "bodyAnchorX": 318.0,
+      "feetBaselineTopLeft": 987,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.223706897,
+      "lampAnchorY": 0.410775862,
+      "lampAnchorSourcePixels": [
+        369.9,
+        891.7
+      ]
+    },
+    {
+      "name": "right-left-down",
+      "x": 439,
+      "y": 34,
+      "w": 144,
+      "h": 240,
+      "pivotX": 0.465277778,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        443,
+        754,
+        579,
+        986
+      ],
+      "alphaPixels": 21367,
+      "bodyAnchorX": 506.0,
+      "feetBaselineTopLeft": 986,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.230172414,
+      "lampAnchorY": 0.429741379,
+      "lampAnchorSourcePixels": [
+        559.4,
+        886.3
+      ]
+    },
+    {
+      "name": "right-left-passing",
+      "x": 616,
+      "y": 39,
+      "w": 159,
+      "h": 241,
+      "pivotX": 0.496855346,
+      "pivotY": 0.01659751,
+      "alphaBoxTopLeft": [
+        620,
+        748,
+        771,
+        981
+      ],
+      "alphaPixels": 22582,
+      "bodyAnchorX": 695.0,
+      "feetBaselineTopLeft": 981,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.251293103,
+      "lampAnchorY": 0.437931034,
+      "lampAnchorSourcePixels": [
+        753.3,
+        879.4
+      ]
+    },
+    {
+      "name": "right-right-contact",
+      "x": 810,
+      "y": 36,
+      "w": 153,
+      "h": 240,
+      "pivotX": 0.464052288,
+      "pivotY": 0.016666667,
+      "alphaBoxTopLeft": [
+        814,
+        752,
+        959,
+        984
+      ],
+      "alphaPixels": 22132,
+      "bodyAnchorX": 881.0,
+      "feetBaselineTopLeft": 984,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.229310345,
+      "lampAnchorY": 0.403017241,
+      "lampAnchorSourcePixels": [
+        934.2,
+        890.5
+      ]
+    },
+    {
+      "name": "right-right-down",
+      "x": 998,
+      "y": 33,
+      "w": 155,
+      "h": 241,
+      "pivotX": 0.503225806,
+      "pivotY": 0.01659751,
+      "alphaBoxTopLeft": [
+        1002,
+        754,
+        1149,
+        987
+      ],
+      "alphaPixels": 22097,
+      "bodyAnchorX": 1076.0,
+      "feetBaselineTopLeft": 987,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.229741379,
+      "lampAnchorY": 0.430603448,
+      "lampAnchorSourcePixels": [
+        1129.3,
+        887.1
+      ]
+    },
+    {
+      "name": "right-right-passing",
+      "x": 1185,
+      "y": 33,
+      "w": 165,
+      "h": 242,
+      "pivotX": 0.478787879,
+      "pivotY": 0.016528926,
+      "alphaBoxTopLeft": [
+        1189,
+        753,
+        1346,
+        987
+      ],
+      "alphaPixels": 22971,
+      "bodyAnchorX": 1264.0,
+      "feetBaselineTopLeft": 987,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.24612069,
+      "lampAnchorY": 0.454310345,
+      "lampAnchorSourcePixels": [
+        1321.1,
+        881.6
+      ]
+    },
+    {
+      "name": "right-air",
+      "x": 1374,
+      "y": 42,
+      "w": 134,
+      "h": 232,
+      "pivotX": 0.485074627,
+      "pivotY": 0.017241379,
+      "alphaBoxTopLeft": [
+        1378,
+        754,
+        1504,
+        978
+      ],
+      "alphaPixels": 19183,
+      "bodyAnchorX": 1439.0,
+      "feetBaselineTopLeft": 978,
+      "hasLampAnchor": true,
+      "lampAnchorX": 0.215948276,
+      "lampAnchorY": 0.468103448,
+      "lampAnchorSourcePixels": [
+        1489.1,
+        869.4
+      ]
+    }
+  ]
+}

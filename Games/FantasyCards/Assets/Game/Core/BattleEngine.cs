@@ -79,6 +79,7 @@ namespace FantasyCards.Core
                 var originalCards = AllInstances(p).Where(c => c.instanceId < firstGeneratedId).ToArray();
                 if (originalCards.GroupBy(c => c.definitionId).Any(group => group.Count() > CardCatalog.Get(group.Key).deckLimit)) throw new ArgumentException("동일 원본 카드 한도를 초과했습니다.");
                 if (p.terrain.Any(c => CardCatalog.Get(c.definitionId).kind != CardKind.Terrain) || originalCards.Length != s.rules.deckSize) throw new ArgumentException("플레이어의 원본 카드 수가 보존되지 않았습니다.");
+                ValidateTerrainProduction(p);
                 if (p.deckId != "custom" && !originalCards.Select(c => c.definitionId).OrderBy(x => x).SequenceEqual(DemoCatalog.GetDeck(p.deckId).cards.OrderBy(x => x))) throw new ArgumentException("선택한 기본 덱과 저장 원본 카드 구성이 다릅니다.");
             }
             if (ids.Count != s.nextInstanceId - 1 || ids.Any(x => x >= s.nextInstanceId)) throw new ArgumentException("원본·생성 카드 보존 검증에 실패했습니다.");
@@ -199,7 +200,7 @@ namespace FantasyCards.Core
             {
                 foreach (Element element in Enum.GetValues(typeof(Element))) p.SetResource(element, 0);
                 p.genericSoul = 0;
-                foreach (var card in p.terrain) AddProduction(p, CardCatalog.Get(card.definitionId));
+                foreach (var card in p.terrain) AddTerrainProduction(p, card);
                 foreach (var unit in p.units.Where(u => PolishCardSkills.UpgradeProduction(u.definitionId)))
                 {
                     var card = CardCatalog.Get(unit.definitionId);
@@ -316,11 +317,11 @@ namespace FantasyCards.Core
             var p = State.players[player]; var card = p.hand.Find(x => x.instanceId == instanceId); var d = CardCatalog.Get(card.definitionId);
             p.hand.Remove(card); p.playedThisPreparation = true;
             if (d.kind == CardKind.Terrain)
-            { p.levelPoints -= d.landPointCost; p.terrain.Add(card); p.terrainPlayed++; AddProduction(p, d); }
+            { p.levelPoints -= d.landPointCost; p.terrain.Add(card); p.terrainPlayed++; AddTerrainProduction(p, card); }
             else
             {
                 if (!FreeEquipment(p, d, lane))
-                { p.SetResource(d.element, p.Resource(d.element) - d.coloredCost); p.genericSoul -= d.cost; }
+                { SpendSouls(p, d.element, d.coloredCost, d.cost); }
                 if (d.kind == CardKind.Unit) p.units.Add(new UnitState { instanceId = card.instanceId, definitionId = d.id, lane = lane });
                 else if (d.kind == CardKind.Equipment) p.AtLane(lane).equipment.Add(card);
                 else p.preparedSpells.Add(new PreparedSpellState { instanceId = card.instanceId, definitionId = d.id, lane = reservationLane >= 0 ? reservationLane : FirstEmptyLane(p), targetLane = CardCatalog.RequiresUnitTarget(d) ? lane : -1, targetPlayer = CardCatalog.RequiresUnitTarget(d) ? TargetPlayer(d, player) : -1 });
@@ -409,7 +410,7 @@ namespace FantasyCards.Core
             for (int player = 0; player < 2; player++)
             {
                 var p = State.players[player]; int upkeep = p.units.Sum(u => CardCatalog.Get(u.definitionId).genericCost);
-                int deficit = Math.Max(0, upkeep - p.genericSoul); p.genericSoul = Math.Max(0, p.genericSoul - upkeep);
+                int deficit = Math.Max(0, upkeep - p.genericSoul); SpendSouls(p, Element.Dawn, 0, Math.Min(upkeep, p.genericSoul));
                 Log("upkeep", Owner(player) + " · 소울 회복 후 유지비 " + upkeep + (deficit > 0 ? " · 부족 " + deficit : " 지불"), upkeep, player);
                 if (deficit > 0) DamagePlayer(player, deficit, "유지비 부족");
             }

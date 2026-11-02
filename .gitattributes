@@ -48,3 +48,10 @@ Games/PathOfDawn/Assets/Settings/QuestRenderer.asset -whitespace
 Games/PathOfDawn/Assets/Settings/QuestRenderer.asset.meta -whitespace
 Games/PathOfDawn/Assets/Settings/QuestWebURP.asset -whitespace
 Games/PathOfDawn/Assets/Settings/QuestWebURP.asset.meta -whitespace
+
+# Preserve current reference downloads byte-for-byte, including original CRLF.
+Tools/Research/Restage/** -text -whitespace
+
+# Keep the two verified Canopy Unity importer metadata files byte-for-byte.
+Games/PathOfDawn/Assets/Resources/Art/GospelCanopy/Actors/jesus-adult.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelCanopy/Actors/jesus-child.png.meta -whitespace

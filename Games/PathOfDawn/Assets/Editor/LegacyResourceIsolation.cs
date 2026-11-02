@@ -66,11 +66,13 @@ namespace FirstGame.Editor
                 "Assets/Resources/Art/GospelLuminous/Rendering"
             };
             // The HD-2D field retains authored 3D props/well/temple materials,
-            // current pixel sprites, the reading illustrations and SoftGlow.
+            // current pixel sprites, the reading illustrations, SoftGlow and the six
+            // original Lost Crypt canopy sprites actively batched by the new field.
             // Old full humanoids and the unused lateral Lost Crypt world stay
             // byte-for-byte editable but do not inflate the current Web player.
             AddChildrenExcept(candidates, "Assets/Resources/Art/Gospel3D", "TempleMaterials");
-            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png");
+            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
+                "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
             candidates.AddRange(Directory.GetFiles("Assets/Resources/Art", "*", SearchOption.TopDirectoryOnly)
                 .Where(path => !path.EndsWith(".meta", StringComparison.Ordinal) &&

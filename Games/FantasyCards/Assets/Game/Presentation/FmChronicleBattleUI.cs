@@ -43,10 +43,10 @@ namespace FantasyCards.Presentation
             if (rail == null) return;
             foreach (var shape in rail.GetComponentsInChildren<UiRoundedImage>())
             {
-                shape.Radius = 1;
+                shape.Radius = 7;
                 shape.TopTint = new Color(1.06f, 1.06f, 1.06f);
                 shape.BottomTint = new Color(.86f, .88f, .93f);
-                if (!shape.Fill) shape.BorderColor = new Color(.55f, .56f, .56f, .7f);
+                if (!shape.Fill) shape.BorderColor = new Color(.57f, .66f, .73f, .55f);
                 shape.SetAllDirty();
             }
         }
@@ -194,19 +194,23 @@ namespace FantasyCards.Presentation
             }
             ChronicleValues(unit, out var before, out var values);
             string[] labels = { "AP", "DP", "HP" };
+            var liveLabels = new TMP_Text[3]; var deltaLabels = new TMP_Text[3];
             for (int i = 0; i < 3; i++)
             {
                 float x = .025f + i * .32f;
                 var stat = ChroniclePanel(panel, x, .025f, x + .31f, .405f, new Color(.025f, .037f, .055f), false);
                 var icon = new GameObject("Printed stat symbol " + labels[i], typeof(RectTransform), typeof(FmChronicleStatGraphic)).GetComponent<FmChronicleStatGraphic>();
                 icon.transform.SetParent(stat, false); Anchor((RectTransform)icon.transform, .025f, .52f, .20f, .95f); icon.Stat = i;
-                RenewalValueText(stat, labels[i] + " " + values[i], .23f, .50f, .99f, .97f, 24, ivory, "Coin result " + owner + " " + labels[i]);
+                liveLabels[i] = RenewalValueText(stat, labels[i] + " " + values[i], .23f, .50f, .99f, .97f, 24, ivory, "Coin result " + owner + " " + labels[i]);
                 int delta = values[i] - before[i];
                 string result = delta == 0 ? "유지" : before[i] + "→" + values[i] + " " + (delta > 0 ? "+" : "−") + Mathf.Abs(delta);
-                RenewalValueText(stat, result, .02f, .025f, .99f, .49f, 20,
+                deltaLabels[i] = RenewalValueText(stat, result, .02f, .025f, .99f, .49f, 20,
                     delta > 0 ? new Color(.55f, .96f, .64f) : delta < 0 ? new Color(1, .46f, .36f) : new Color(.61f, .65f, .71f),
                     "Coin result change " + owner + " " + labels[i]);
             }
+            var binding = panel.gameObject.AddComponent<FmLiveCardValues>();
+            binding.Configure(unit.instanceId, liveLabels, deltaLabels, false, new[] { "AP ", "DP ", "HP " });
+            binding.Present(before[0], before[1], before[2], values[0], values[1], values[2]);
             return current;
         }
     }

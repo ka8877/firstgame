@@ -87,7 +87,8 @@ namespace PathOfDawn.Presentation
                 }
             }
             Render("Living meadow · anchored wind and wildflowers", garden, meadow, true);
-            BuildGroundMasses(lightShader, river, groundHeight);
+            // The continuous opaque ground shader owns planted value masses.
+            // Avoid another broad transparent floor layer over the painted earth.
             BuildLight(lightShader, random, river, groundHeight);
         }
 
