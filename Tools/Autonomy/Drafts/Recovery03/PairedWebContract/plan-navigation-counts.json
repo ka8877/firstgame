@@ -1,0 +1,247 @@
+{
+  "kind": "source-only-plan-and-navigation-counts",
+  "runtimeExecuted": false,
+  "countMeaning": "jsonStepCount counts authored loop objects, not all pointer/key events or initial page.goto. Each review_input may dispatch additional ordinary actions, not counted as proven runtime actions.",
+  "existingPlans": [
+    {
+      "lane": "desktop",
+      "v1": {
+        "file": "Tools/Autonomy/g2_desktop_plan.json",
+        "sha256": "9a0b2152721e1dd44c5e85d3d016d629b6ed0f22fbdcb5b6f02d58280d65f851",
+        "bytes": 27512,
+        "jsonStepCount": 116,
+        "required": 47
+      },
+      "v2": {
+        "file": "Tools/Autonomy/g2_desktop_plan_v2.json",
+        "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+        "bytes": 28196,
+        "jsonStepCount": 117,
+        "required": 48,
+        "typeCounts": {
+          "wait": 1,
+          "checkpoint": 48,
+          "click": 44,
+          "audio": 4,
+          "review_input": 11,
+          "wheel": 1,
+          "hold": 6,
+          "reload": 2
+        },
+        "fixedStepsDispatchedToInputMethod": 51,
+        "reviewInputSteps": 11,
+        "actualReviewInputActionCount": "unknown until actual runtime; each real response retained",
+        "profileConditionalSteps": 0
+      },
+      "difference": "Exactly one continued-g2-reading actual checkpoint and one required name; not initial navigation or index convention.",
+      "inverseBytesEqualV1": true,
+      "inverseSha256": "9a0b2152721e1dd44c5e85d3d016d629b6ed0f22fbdcb5b6f02d58280d65f851",
+      "initialNavigateOutsidePlan": 1,
+      "actualReloadObjects": [
+        {
+          "zeroBasedPlanIndex": 71,
+          "step": {
+            "type": "reload"
+          }
+        },
+        {
+          "zeroBasedPlanIndex": 111,
+          "step": {
+            "type": "reload"
+          }
+        }
+      ],
+      "actualReloadCalls": 2,
+      "loadedCallsIfComplete": 3,
+      "expectedNavigationValuesIfComplete": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "lane": "mobile",
+      "v1": {
+        "file": "Tools/Autonomy/g2_mobile_plan.json",
+        "sha256": "c14b620a77a16a097edc44adf7a814276453451ca4cf08f8a4a61132f0a0b519",
+        "bytes": 21868,
+        "jsonStepCount": 85,
+        "required": 33
+      },
+      "v2": {
+        "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+        "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+        "bytes": 22552,
+        "jsonStepCount": 86,
+        "required": 34,
+        "typeCounts": {
+          "wait": 1,
+          "checkpoint": 34,
+          "click": 32,
+          "audio": 4,
+          "touch_hold": 5,
+          "review_input": 8,
+          "reload": 2
+        },
+        "fixedStepsDispatchedToInputMethod": 37,
+        "reviewInputSteps": 8,
+        "actualReviewInputActionCount": "unknown until actual runtime; each real response retained",
+        "profileConditionalSteps": 0
+      },
+      "difference": "Exactly one continued-g2-reading actual checkpoint and one required name; not initial navigation or index convention.",
+      "inverseBytesEqualV1": true,
+      "inverseSha256": "c14b620a77a16a097edc44adf7a814276453451ca4cf08f8a4a61132f0a0b519",
+      "initialNavigateOutsidePlan": 1,
+      "actualReloadObjects": [
+        {
+          "zeroBasedPlanIndex": 40,
+          "step": {
+            "type": "reload"
+          }
+        },
+        {
+          "zeroBasedPlanIndex": 80,
+          "step": {
+            "type": "reload"
+          }
+        }
+      ],
+      "actualReloadCalls": 2,
+      "loadedCallsIfComplete": 3,
+      "expectedNavigationValuesIfComplete": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "lane": "public",
+      "v1": {
+        "file": "Tools/Autonomy/g2_public_plan.json",
+        "sha256": "c14b620a77a16a097edc44adf7a814276453451ca4cf08f8a4a61132f0a0b519",
+        "bytes": 21868,
+        "jsonStepCount": 85,
+        "required": 33
+      },
+      "v2": {
+        "file": "Tools/Autonomy/g2_public_plan_v2.json",
+        "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+        "bytes": 22552,
+        "jsonStepCount": 86,
+        "required": 34,
+        "typeCounts": {
+          "wait": 1,
+          "checkpoint": 34,
+          "click": 32,
+          "audio": 4,
+          "touch_hold": 5,
+          "review_input": 8,
+          "reload": 2
+        },
+        "fixedStepsDispatchedToInputMethod": 37,
+        "reviewInputSteps": 8,
+        "actualReviewInputActionCount": "unknown until actual runtime; each real response retained",
+        "profileConditionalSteps": 0
+      },
+      "difference": "Exactly one continued-g2-reading actual checkpoint and one required name; not initial navigation or index convention.",
+      "inverseBytesEqualV1": true,
+      "inverseSha256": "c14b620a77a16a097edc44adf7a814276453451ca4cf08f8a4a61132f0a0b519",
+      "initialNavigateOutsidePlan": 1,
+      "actualReloadObjects": [
+        {
+          "zeroBasedPlanIndex": 40,
+          "step": {
+            "type": "reload"
+          }
+        },
+        {
+          "zeroBasedPlanIndex": 80,
+          "step": {
+            "type": "reload"
+          }
+        }
+      ],
+      "actualReloadCalls": 2,
+      "loadedCallsIfComplete": 3,
+      "expectedNavigationValuesIfComplete": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "sourceLines": {
+    "initialPageGoto": "Tools/Validation/nativity-web-smoke.py:1087",
+    "initialLoadedCall": "Tools/Validation/nativity-web-smoke.py:1095",
+    "stepLoop": "Tools/Validation/nativity-web-smoke.py:1096",
+    "actualReloadDispatch": "Tools/Validation/nativity-web-smoke.py:1107",
+    "actualPageReloadAndNavIncrement": "Tools/Validation/nativity-web-smoke.py:244"
+  },
+  "originalComparisonLedger": {
+    "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/PlansV2/comparison-ledger.json",
+    "sha256": "b72bca3364cf72f5424731df32b385826d14b0a2b7d486974fd53a9b4fbc6197",
+    "bytes": 3762
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "pcCompletedBookCandidate": {
+    "plan": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json",
+      "sha256": "1db5e4e2a8d6f3258cd9b70564c199937de9daf2831bbc23379a36d6e317ed46",
+      "bytes": 50060
+    },
+    "appendOnlyLedger": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger-v2.json",
+      "sha256": "5e2d1e41e7d2d12b582f3aa1650004d365f01dedb0855a99e8e922126029cbfe",
+      "bytes": 27461
+    },
+    "jsonStepCount": 154,
+    "required": 63,
+    "typeCounts": {
+      "wait": 4,
+      "checkpoint": 63,
+      "click": 53,
+      "audio": 4,
+      "review_input": 20,
+      "wheel": 1,
+      "hold": 6,
+      "reload": 3
+    },
+    "fixedStepsDispatchedToInputMethod": 60,
+    "reviewInputSteps": 20,
+    "actualReviewInputActionCount": "unknown until actual execution",
+    "appendedSteps": 37,
+    "appendedRequired": 15,
+    "initialNavigateOutsidePlan": 1,
+    "actualReloadObjects": [
+      {
+        "zeroBasedPlanIndex": 71,
+        "step": {
+          "type": "reload"
+        }
+      },
+      {
+        "zeroBasedPlanIndex": 111,
+        "step": {
+          "type": "reload"
+        }
+      },
+      {
+        "zeroBasedPlanIndex": 148,
+        "step": {
+          "type": "reload"
+        }
+      }
+    ],
+    "actualReloadCallsIfComplete": 3,
+    "loadedCallsIfComplete": 4,
+    "expectedNavigationValuesIfComplete": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "removingSuffixReproducesOriginalBytes": true,
+    "runtimeExecuted": false
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "status": "source-only-append-plan-proposal-unexecuted",
+  "createdUtc": "2026-11-03T16:05:29.226779+00:00",
+  "original": {
+    "file": "Tools/Autonomy/g2_desktop_plan_v2.json",
+    "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+    "bytes": 28196
+  },
+  "proposal": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed.json",
+    "sha256": "96e3eddc05cf67c89f58b019074702943549b759f7a3011dd9cea08d61dbcd90",
+    "bytes": 49905
+  },
+  "newCounts": {
+    "steps": 154,
+    "required": 63,
+    "appendedSteps": 37,
+    "appendedRequired": 15,
+    "audioSteps": 4,
+    "reloadSteps": 3
+  },
+  "exactInverse": {
+    "removeStepSuffixFrom": 117,
+    "removeRequiredSuffixFrom": 48,
+    "restoredByteLength": 28196,
+    "restoredSha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+    "matchesOriginalBytes": true
+  },
+  "allExistingObjectsOrderAndTopLevelValuesUnchanged": true,
+  "existingAudioSteps": [
+    {
+      "type": "audio",
+      "label": "narration-initial-current-line"
+    },
+    {
+      "type": "audio",
+      "label": "narration-book-stopped"
+    },
+    {
+      "type": "audio",
+      "label": "narration-after-book-next-line"
+    },
+    {
+      "type": "audio",
+      "label": "nativity-temple-field"
+    }
+  ],
+  "existingReloadsRetained": 2,
+  "newReloadOnlyAfterExistingNavigation2": true,
+  "newRequiredCheckpoints": [
+    "pc-completed-book-route-start",
+    "pc-complete-listening-court",
+    "pc-complete-teachers-circle",
+    "pc-complete-parents-reunite",
+    "pc-complete-nazareth-return",
+    "pc-complete-adult-jordan-road",
+    "pc-complete-john-calling",
+    "pc-complete-baptism-request",
+    "pc-complete-baptism-water",
+    "pc-complete-ministry-beginning",
+    "pc-completed-bible-19-settled",
+    "pc-completed-bible-last-spread",
+    "pc-completed-save-before-reload",
+    "continued-pc-completed-journey",
+    "continued-pc-completed-bible-19"
+  ],
+  "appendedSteps": [
+    {
+      "type": "click",
+      "point": [
+        0.860156,
+        0.927778
+      ],
+      "label": "PC 완성책 확장 · 이어한 실제 성경에서 여정으로",
+      "settleMs": 750
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-completed-book-route-start",
+      "expected": "After closing the already captured continued-physical-bible at actual navigation2, the live current temple journey remains at12/19 Scripture and14/23 goals with the listening-court destination. This starts new ordinary play after all original G2 steps; it does not skip or replace them. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-listening-court",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 성전의 선생 NPC에게 직접 이동·상호작용해 listening-court / 듣고 묻는 자리 사건을 마칩니다. 선생과의 모든 현재 대화/요약을 마치고 다음 선생들 자리의 실제 목적지를 확인하세요. 이 사건에는 새본문이 없으므로 성경12/19를 유지합니다. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 12/19 · 여정 15/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-listening-court",
+      "expected": "After actual ordinary play completes listening-court (듣고 묻는 자리), inspect the visible current field HUD showing Scripture12/19 and goals15/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-teachers-circle",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 율법 선생 NPC에게 직접 이동·상호작용해 teachers-circle / 선생들 가운데 사건을 마칩니다. 안쪽 뜰의 율법 선생을 실제로 찾아 성경 직접인용/기록 요약을 끝까지 진행하고 temple-teachers 본문획득 화면을 확인한 뒤 일반 이야기 계속으로 필드에 복귀하세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 13/19 · 여정 16/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-teachers-circle",
+      "expected": "After actual ordinary play completes teachers-circle (선생들 가운데), inspect the visible current field HUD showing Scripture13/19 and goals16/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-parents-reunite",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 마리아 NPC에게 직접 이동·상호작용해 parents-reunite / 근심 끝의 만남 사건을 마칩니다. 성전의 마리아에게 실제로 접근하여 부모와의 대화 전체와 temple-parents 획득을 마친 뒤 필드로 돌아오세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 14/19 · 여정 17/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-parents-reunite",
+      "expected": "After actual ordinary play completes parents-reunite (근심 끝의 만남), inspect the visible current field HUD showing Scripture14/19 and goals17/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-nazareth-return",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 요셉 NPC에게 직접 이동·상호작용해 nazareth-return / 나사렛으로 함께 사건을 마칩니다. 귀향길의 요셉에게 실제로 걸어가 temple-nazareth 기록과 성장/삼십세쯤의 전환 안내까지 마치세요. 새 장 삽화가 뜨면 보이는 일반 계속 버튼으로 요단 필드까지 진행하세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 15/19 · 여정 18/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-nazareth-return",
+      "expected": "After actual ordinary play completes nazareth-return (나사렛으로 함께), inspect the visible current field HUD showing Scripture15/19 and goals18/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-adult-jordan-road",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 요단 길잡이 NPC에게 직접 이동·상호작용해 adult-jordan-road / 요단으로 향하는 길 사건을 마칩니다. 성인 모습의 실제 요단 필드에서 길잡이를 찾아 첫 안내 사건 전체를 마치세요. 새본문이 없는 이동 안내이므로 성경15/19를 유지합니다. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 15/19 · 여정 19/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-adult-jordan-road",
+      "expected": "After actual ordinary play completes adult-jordan-road (요단으로 향하는 길), inspect the visible current field HUD showing Scripture15/19 and goals19/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-john-calling",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 세례 요한 NPC에게 직접 이동·상호작용해 john-calling / 요단에서 들리는 외침 사건을 마칩니다. 강가의 세례 요한에게 실제로 걸어가 요한 사역의 기록/직접인용을 마치고 john-jordan 본문을 획득한 후 필드로 복귀하세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 16/19 · 여정 20/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-john-calling",
+      "expected": "After actual ordinary play completes john-calling (요단에서 들리는 외침), inspect the visible current field HUD showing Scripture16/19 and goals20/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-baptism-request",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 세례 요한 NPC에게 직접 이동·상호작용해 baptism-request / 모든 의를 이루는 길 사건을 마칩니다. 현재 세례 자리의 요한을 실제로 만나 마태복음에 기록된 요청/응답 사건을 끝까지 진행하고 baptism-request 본문을 획득한 뒤 필드로 돌아오세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 17/19 · 여정 21/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-baptism-request",
+      "expected": "After actual ordinary play completes baptism-request (모든 의를 이루는 길), inspect the visible current field HUD showing Scripture17/19 and goals21/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-baptism-water",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 강가의 기록 안내자 NPC에게 직접 이동·상호작용해 baptism-water / 물에서 올라오시다 사건을 마칩니다. 강가의 다음 안내자를 실제로 만나 세례 후 기록을 마치고 baptism-water 본문을 획득한 뒤 필드로 돌아오세요. 서로 다른 복음서의 음성을 새로 섞거나 대사를 만들어 넣지 않습니다. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 18/19 · 여정 22/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-baptism-water",
+      "expected": "After actual ordinary play completes baptism-water (물에서 올라오시다), inspect the visible current field HUD showing Scripture18/19 and goals22/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "pc-complete-quest-ministry-beginning",
+      "expected": "현재다음만남 안내와 실제 화면의 인물/지형을 보고 여정의 기록자 NPC에게 직접 이동·상호작용해 ministry-beginning / 공생애의 문턱 사건을 마칩니다. 길 끝의 여정 기록자에게 실제로 걸어가 ministry-thirty 본문과 현재 체험 구간이 끝났다는 마지막 요약까지 마치세요. 마지막 획득/대화 화면에서는 보이는 일반 이야기 계속으로 실제 완료 필드에 돌아와19/19 및23/23을 확인하세요. 여기서는 이 한 사건만 완료하고 다음 사건으로 임의 진행하지 마세요. 실제 HUD가 성경 19/19 · 여정 23/23이고 다음 목적지 또는 마지막완료 상태가 보일 때만 계속을 승인하세요. Use current screenshot-guided ordinary pointer/keyboard movement and visible UI only. Do not read or inject Unity/JavaScript/save/random/pose state. Keep the inherited12 review rounds/20 ordinary actions per response and existing action/wait bounds. If the actual target is not reached, stop as incomplete; do not acknowledge success from this authored description."
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-complete-ministry-beginning",
+      "expected": "After actual ordinary play completes ministry-beginning (공생애의 문턱), inspect the visible current field HUD showing Scripture19/19 and goals23/23 with the actual next destination/complete state. Acquisition-bearing events must have shown the actual earned page before returning; title/preview alone is not completion. Stable source/save state was not injected. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "click",
+      "point": [
+        0.7512,
+        0.0708
+      ],
+      "label": "PC 실제19말씀 완료 성경 열기",
+      "settleMs": 750
+    },
+    {
+      "type": "wait",
+      "ms": 1500
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-completed-bible-19-settled",
+      "expected": "Open the physical Bible from the actual completed23/23 field using the ordinary Scripture control, then wait1500ms in addition to the click settle. Inspect19/19 discovered Scripture with genuinely rendered verse/reference ink. This covers the current19-reading/23-event demo, not the whole Bible or Jesus entire lifetime. A whole blank/faded book is not accepted from a counter alone. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "click",
+      "point": [
+        0.596875,
+        0.927778
+      ],
+      "label": "PC 완료 성경 최근 말씀으로 실제 마지막 펼침 보기",
+      "settleMs": 750
+    },
+    {
+      "type": "wait",
+      "ms": 1500
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-completed-bible-last-spread",
+      "expected": "Use the visible Recent Scripture button and wait1500ms. Inspect the actual last spread10/10 with page19/ministry-thirty and its genuine Luke3:23 reference/body while the book header remains19/19. There are19 readings, so the twentieth physical leaf is intentionally blank; distinguish that one expected blank from an unreadable/faded whole spread. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "click",
+      "point": [
+        0.860156,
+        0.927778
+      ],
+      "label": "PC 완성 성경에서 실제 여정으로",
+      "settleMs": 750
+    },
+    {
+      "type": "click",
+      "point": [
+        0.9527,
+        0.0708
+      ],
+      "label": "PC 완료 여정 일반 메뉴",
+      "settleMs": 750
+    },
+    {
+      "type": "click",
+      "point": [
+        0.6684,
+        0.298
+      ],
+      "label": "PC 완성 상태 · 현재 여정 저장",
+      "settleMs": 1000
+    },
+    {
+      "type": "click",
+      "point": [
+        0.3285,
+        0.298
+      ],
+      "label": "PC 저장한 완료 여정 계속하기",
+      "settleMs": 750
+    },
+    {
+      "type": "checkpoint",
+      "name": "pc-completed-save-before-reload",
+      "expected": "After the ordinary menu Current Journey Save and normal return to the field, inspect actual19/19 Scripture and23/23 goals plus the same physical completed state immediately before the additional third full browser reload. This independent save occurs at navigation2 after the original early0→1 and late1→2 paths. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "reload"
+    },
+    {
+      "type": "click",
+      "point": [
+        0.374,
+        0.8
+      ],
+      "label": "PC 세번째 실제 재접속 뒤 완료 여정 이어하기",
+      "settleMs": 2000
+    },
+    {
+      "type": "checkpoint",
+      "name": "continued-pc-completed-journey",
+      "expected": "This is a newly captured real continued-prefix original after the additional actual full browser reload2→3 and normal Continue with2000ms settle. Inspect the restored completed19/19/23/23 live state/position/equipment. It must belong to navigation3, not be a renamed earlier continued frame or injected save. Numeric exact pose/raw bytes remain separate Native evidence. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    },
+    {
+      "type": "click",
+      "point": [
+        0.7512,
+        0.0708
+      ],
+      "label": "PC 세번째 이어하기 뒤 실제 완성 성경 열기",
+      "settleMs": 750
+    },
+    {
+      "type": "wait",
+      "ms": 1500
+    },
+    {
+      "type": "checkpoint",
+      "name": "continued-pc-completed-bible-19",
+      "expected": "After navigation3 actual Continue, open the Bible by ordinary UI and wait1500ms beyond click settle. Inspect actual19/19 and rendered current last-earned Scripture. This fresh original and continued-pc-completed-journey prove the same independent third reload; previous11/12-book originals remain separately mandatory. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion."
+    }
+  ],
+  "remainingQuestOrder": [
+    "listening-court",
+    "teachers-circle",
+    "parents-reunite",
+    "nazareth-return",
+    "adult-jordan-road",
+    "john-calling",
+    "baptism-request",
+    "baptism-water",
+    "ministry-beginning"
+  ],
+  "newReviewInputCount": 9,
+  "reviewInputLimits": {
+    "roundsPerStep": 12,
+    "actionsPerResponse": 20,
+    "unchanged": true
+  },
+  "newExpectedNavigation": {
+    "originalJosephBefore": 0,
+    "originalJosephAfter": 1,
+    "originalLateManualSave": 1,
+    "originalLateContinue": 2,
+    "completedManualSave": 2,
+    "completedContinue": 3,
+    "completedBible": 3
+  },
+  "mobile": {
+    "original": {
+      "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    "copy": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_mobile_plan.unchanged.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    "steps": 86,
+    "required": 34,
+    "bytesExact": true
+  },
+  "public": {
+    "original": {
+      "file": "Tools/Autonomy/g2_public_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    "copy": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_public_plan.unchanged.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    "steps": 86,
+    "required": 34,
+    "bytesExact": true
+  },
+  "sources": [
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Core/GospelChronicleCatalog.cs",
+      "sha256": "9bbfd2334ad9f93ca69904fe33b94f114d88e688b25610750fa07add18ae9266",
+      "bytes": 12497
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageApp.cs",
+      "sha256": "ea1855137cdbfca328c26976d3d081f6c9b49af1c86e459f90523a1d8dccfb1c",
+      "bytes": 18640
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageUi.cs",
+      "sha256": "8b281699a8b0991a47d47ec1327e970618923ea528ea865aaa02ee342ae19369",
+      "bytes": 42688
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelStorybookUi.cs",
+      "sha256": "4cbf1e559a2e23069f3ed70cdbf02c8d03ecd9b20cbf88d000651a02f2be9b34",
+      "bytes": 17988
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/GospelUiMotion.cs",
+      "sha256": "bc95dbb04490baa4b6102a13060aaa0d90491129c0006bedbb999f879d37393e",
+      "bytes": 906
+    },
+    {
+      "file": "Tools/Validation/nativity-web-smoke.py",
+      "sha256": "22ad10be9a41386b8ba14cc1ca2238bbaf9c72a469ee4cb1d55e21d75c32cb84",
+      "bytes": 85355
+    }
+  ],
+  "timingSourceBasis": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/timing-source-basis.json",
+    "sha256": "072b52caf69bcca96d5e14f6c85de026a8b81b54160f0654a4942f2f62c95332",
+    "bytes": 2865
+  },
+  "futureExecution": {
+    "revision": null,
+    "profile": null,
+    "sourceCommit": null,
+    "native": null,
+    "webBuild": null,
+    "browserReport": null,
+    "rootCompleteBookApproval": null
+  },
+  "identityWarning": "The original G2 revision/scope remain untouched basis placeholders; this is not an installed executable paired contract. Future owner must bind the actual explicit identity and exact new SHA/counts before running.",
+  "risk": "Nine additional screenshot-guided journeys and one full reload materially extend the PC run. The45min lease/command limit and current12/20 limits remain unchanged. Actual duration is unmeasured. No automatic time extension, scope deletion or premature19-book approval is allowed.",
+  "publishReady": false,
+  "baselineReady": false,
+  "completedBookApproved": false
+}

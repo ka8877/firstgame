@@ -1,0 +1,236 @@
+{
+  "kind": "paired-web-design-draft-completion-ledger",
+  "createdUtc": "2026-11-03T16:11:13.062305+00:00",
+  "owner": "/root/release_recovery/c1_pipeline_audit",
+  "scope": "source-only-contract-mapping-schema-plan-draft",
+  "status": "design-delivered-not-installed-or-executed",
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "legacyProfilesRemainFailClosed": true,
+  "minimumContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+    "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+    "bytes": 11037
+  },
+  "selectedProposedDesign": {
+    "README.md": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/README.md",
+      "sha256": "4d3f1aedaba2ea0d84b9d60d8b5015ab447d9f3401e3f327cede039b0f5706d7",
+      "bytes": 17037
+    },
+    "gate-mapping.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/gate-mapping.json",
+      "sha256": "470584b954ca7785877d504e45b9fdc9aca4c94c5e702b6835cdd9a77dfb6fde",
+      "bytes": 15790
+    },
+    "paired-web-contract.template.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-contract.template.json",
+      "sha256": "fadec4dfdfac1e3258e66d09b3f6b11677207d244b7ae68f30097e74d2a75ac1",
+      "bytes": 32931
+    },
+    "paired-web-execution-contract.schema.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+      "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+      "bytes": 43563
+    },
+    "observed-records.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/observed-records.json",
+      "sha256": "873c0fa7f4387ea192756cea301dfe8679e7662b08e4bc74cf6facdf8a4aae0e",
+      "bytes": 43003
+    },
+    "plan-navigation-counts.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/plan-navigation-counts.json",
+      "sha256": "59c68525fa3005443eb2daff886841fcaab8dca15312c486b17eda8ecba9af66",
+      "bytes": 7700
+    },
+    "c1-audio-method.source.txt": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/c1-audio-method.source.txt",
+      "sha256": "9c92ff461951534b8396e96da2e8b7e5d24e2d002c4b95ff46b98ee522b575bd",
+      "bytes": 4994
+    },
+    "PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json",
+      "sha256": "1db5e4e2a8d6f3258cd9b70564c199937de9daf2831bbc23379a36d6e317ed46",
+      "bytes": 50060
+    },
+    "PCCompletedBookPlanDraft/append-ledger-v2.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger-v2.json",
+      "sha256": "5e2d1e41e7d2d12b582f3aa1650004d365f01dedb0855a99e8e922126029cbfe",
+      "bytes": 27461
+    },
+    "PCCompletedBookPlanDraft/README-v2.md": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/README-v2.md",
+      "sha256": "5c923c2de1f8b29c4540730624b4eae08e5cd02831f17677bfb735a129d411b9",
+      "bytes": 6082
+    },
+    "PCCompletedBookPlanDraft/REVIEW-FINAL.md": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/REVIEW-FINAL.md",
+      "sha256": "f562753774628baec1a703387bec78ce0967d8dabe4c15da93596e88ccc28bd6",
+      "bytes": 3343
+    },
+    "IndependentGateRead/REPORT-v2-fixed-source.md": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/REPORT-v2-fixed-source.md",
+      "sha256": "8fd7878dcc31bd4acee50e79a7b000b8e479ce849cee5221eb0736fe9d2543e2",
+      "bytes": 12097
+    }
+  },
+  "staticChecksOnly": {
+    "rootJsonParsed": true,
+    "localSchemaRefsPresent": 75,
+    "minimumGateCount": 16,
+    "sourcePinsRecheckedUnchanged": 18,
+    "minimumPinUnchanged": true,
+    "oldPlanInverseBytesEqual": true,
+    "pcCandidateInverseBytesEqual": true,
+    "independentNarrowStaticReview": "No remaining static blocker in reviewed changes; actual implementation/evidence intentionally incomplete."
+  },
+  "notPerformed": [
+    "producer import or execution",
+    "Unity/Native/build/browser",
+    "network/Git",
+    "Tools/Game/Docs edits",
+    "actual JSON Schema runtime validation",
+    "Root visual approval",
+    "publish or baseline sealing"
+  ],
+  "files": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/REPORT-v2-fixed-source.md",
+      "sha256": "8fd7878dcc31bd4acee50e79a7b000b8e479ce849cee5221eb0736fe9d2543e2",
+      "bytes": 12097
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/REPORT.md",
+      "sha256": "6c582c168ad94d9443f51e2ba5da26ffd0d67e96499cfe4b26b09a0e09213f1b",
+      "bytes": 9729
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/observed-records-v2.json",
+      "sha256": "451f6b709f984c0945ccbd2eab0f7134179f3dbd7e346e5cf7102bc562b74f01",
+      "bytes": 19219
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/observed-records.json",
+      "sha256": "2217663a60c135d6b132ebe6deb7daa6c1d888ca2582c823de1f17f0a9e3a605",
+      "bytes": 16966
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/v2-revision-ledger.json",
+      "sha256": "86d74e663f77b2bd58809358bbd522054bbae98e4aeee93f03dc343a0d428f34",
+      "bytes": 1343
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/README-v2.md",
+      "sha256": "5c923c2de1f8b29c4540730624b4eae08e5cd02831f17677bfb735a129d411b9",
+      "bytes": 6082
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/README.md",
+      "sha256": "427a6f4520c8c088e85853221ba493d760a12725e917d351648be9be5d0f3275",
+      "bytes": 5430
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/REVIEW-FINAL.md",
+      "sha256": "f562753774628baec1a703387bec78ce0967d8dabe4c15da93596e88ccc28bd6",
+      "bytes": 3343
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger-v2.json",
+      "sha256": "5e2d1e41e7d2d12b582f3aa1650004d365f01dedb0855a99e8e922126029cbfe",
+      "bytes": 27461
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger.json",
+      "sha256": "41f99e83eca5f9e658e8e86446090f1758bc861c2fcb79534fa7e23c6ba991ca",
+      "bytes": 26781
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/base/g2_desktop_plan_v2.json",
+      "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+      "bytes": 28196
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/base/g2_mobile_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/base/g2_public_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_mobile_plan.unchanged.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json",
+      "sha256": "1db5e4e2a8d6f3258cd9b70564c199937de9daf2831bbc23379a36d6e317ed46",
+      "bytes": 50060
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed.json",
+      "sha256": "96e3eddc05cf67c89f58b019074702943549b759f7a3011dd9cea08d61dbcd90",
+      "bytes": 49905
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_public_plan.unchanged.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/timing-source-basis.json",
+      "sha256": "072b52caf69bcca96d5e14f6c85de026a8b81b54160f0654a4942f2f62c95332",
+      "bytes": 2865
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/v2-revision-ledger.json",
+      "sha256": "c580ce10040e7c217e8cd4beac765f48811a093e6a4d0f8c00d0c977fa2c03d8",
+      "bytes": 3985
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/README.md",
+      "sha256": "4d3f1aedaba2ea0d84b9d60d8b5015ab447d9f3401e3f327cede039b0f5706d7",
+      "bytes": 17037
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/c1-audio-method.source.txt",
+      "sha256": "9c92ff461951534b8396e96da2e8b7e5d24e2d002c4b95ff46b98ee522b575bd",
+      "bytes": 4994
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/gate-mapping.json",
+      "sha256": "470584b954ca7785877d504e45b9fdc9aca4c94c5e702b6835cdd9a77dfb6fde",
+      "bytes": 15790
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/observed-records.json",
+      "sha256": "873c0fa7f4387ea192756cea301dfe8679e7662b08e4bc74cf6facdf8a4aae0e",
+      "bytes": 43003
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-contract.template.json",
+      "sha256": "fadec4dfdfac1e3258e66d09b3f6b11677207d244b7ae68f30097e74d2a75ac1",
+      "bytes": 32931
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+      "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+      "bytes": 43563
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/plan-navigation-counts.json",
+      "sha256": "59c68525fa3005443eb2daff886841fcaab8dca15312c486b17eda8ecba9af66",
+      "bytes": 7700
+    }
+  ],
+  "fileCountExcludingThisLedger": 26,
+  "remainingActualWork": [
+    "Separate typed adapter/consumer/stage/fullsite producer implementation and independent adoption/source freeze by sole execution owner.",
+    "Select genuine current both Native and original Root evidence; execute fresh builds and genuine after-success durability step for both.",
+    "Actual PC/touch plus PC19 completed-book originals, current source/Core/CI/fullstage985MB, protected publication/new fullHTTPS+portalRoot, both actual public game inputs+Root.",
+    "Distinct final receipt and independent Rootseal with persistent raw originals and exact normal ownership closure."
+  ]
+}

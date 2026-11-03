@@ -1,0 +1,107 @@
+{
+  "kind": "source-only-consumer-draft-observations",
+  "installed": false,
+  "executed": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+    "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+    "bytes": 84786
+  },
+  "pins": {
+    "PINNED_SCHEMA": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+      "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+      "bytes": 43563
+    },
+    "PINNED_LEDGER": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/FINAL-LEDGER.json",
+      "sha256": "c70af45fc10858addd27e859ad9a2faf0dd2d94877ca68980373c6e21c70a19b",
+      "bytes": 12113
+    },
+    "PINNED_NATIVE_ROOTS": {
+      "FantasyCards": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+        "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+        "bytes": 6148
+      },
+      "PathOfDawn": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+        "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+        "bytes": 13673
+      }
+    },
+    "PINNED_CARD_GRADE": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-grade-original-review.json",
+      "sha256": "3b08f5fcdcc630b7c36e9f07ba7914af924d0fb6b1e20138c63487f3b9560ed5",
+      "bytes": 2235
+    },
+    "PINNED_CORE_SOURCE": {
+      "file": "Tools/Validation/run-nativity-core.py",
+      "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+      "bytes": 3538
+    },
+    "PINNED_ADDITIONAL_SOURCES": {
+      "Tools/Validation/nativity_storage.py": {
+        "file": "Tools/Validation/nativity_storage.py",
+        "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+        "bytes": 1914
+      },
+      "Tools/Environment/assert-runtime-idle.py": {
+        "file": "Tools/Environment/assert-runtime-idle.py",
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+        "bytes": 966
+      },
+      "Tools/Validation/run-nativity-core.py": {
+        "file": "Tools/Validation/run-nativity-core.py",
+        "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+        "bytes": 3538
+      }
+    }
+  },
+  "strictAudio": {
+    "originalFile": {
+      "file": "Tools/Autonomy/c1_web_smoke.py",
+      "sha256": "4639418e857eea27b0f7b6124cb2ccb58e141851117cbb5ec54e82e9c2a543d7",
+      "bytes": 30049
+    },
+    "normalization": "remove exactly four leading nesting spaces from copied method lines; no other bytes changed",
+    "bytes": 4994,
+    "sha256": "9c92ff461951534b8396e96da2e8b7e5d24e2d002c4b95ff46b98ee522b575bd"
+  },
+  "staticOnly": {
+    "astParsed": true,
+    "projectImportsOrExecution": false,
+    "jsonSchemaRuntimeValidation": false,
+    "forbiddenLegacyDirectCalls": []
+  },
+  "currentActualProofAvailability": "Native04 exact8 and GospelNative01 exact16/Root refs exist; actual fresh Web/current afterproof/PC/touch/public/CI/fullstage proof is not generated or selected by this draft. Missing refs block execution.",
+  "independentStaticReview": {
+    "current": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW-v2.md",
+      "sha256": "2e2c321cda3fe9a556a9f7cccc83f1cfc3e6aa5f69461ded94bfc75396297f5a",
+      "bytes": 3290
+    },
+    "firstCandidateReviewPreserved": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW.md",
+      "sha256": "7cca557cb35ac2cd5cd92fc76ce6e32ae5c5022a5a2282a4bda80fd4a4b829c9",
+      "bytes": 7708
+    },
+    "result": "No remaining confirmed static blocker in reviewed candidate/diff; not runtime verification."
+  },
+  "sourceRevisions": [
+    {
+      "sha256": "cfd4997045b4d2f07216e0d7be54eb910a100e56a80bf344f39cdef25d5a4554",
+      "bytes": 82968,
+      "scope": "first independently reviewed candidate, exact source and report retained"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+      "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+      "bytes": 84786,
+      "scope": "narrow v2 splits optional dated-chain dependencies from byte rollback and validates every old ordinary Git blob; all runtime/Native/build/source/PCM/Root gates preserved"
+    }
+  ]
+}

@@ -1,0 +1,492 @@
+{
+  "kind": "source-only-independent-paired-gospel-gate-mapping-v2-fixed-source",
+  "createdUtc": "2026-11-03T15:52:24.439791+00:00",
+  "scope": "Read-only source/JSON/XML observations. No project import, producer/validator/test/Unity/browser/network/Git execution, source edits or current Native04/Gospel run writes. Only this owned proposal directory was written.",
+  "sources": [
+    {
+      "file": "Tools/Autonomy/g2_evidence.py",
+      "sha256": "769904aa93a36d4dbf3c1a402538c4046ec96d8803aa334ff4e7e9a8721fd9ce",
+      "bytes": 28996
+    },
+    {
+      "file": "Tools/Autonomy/g2_web_smoke.py",
+      "sha256": "a31f4ed925838c455bf54950c7700a0b6672e60251b0e4d6877626f510aafe48",
+      "bytes": 2370
+    },
+    {
+      "file": "Tools/Autonomy/g2_desktop_plan_v2.json",
+      "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+      "bytes": 28196
+    },
+    {
+      "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Tools/Autonomy/g2_public_plan_v2.json",
+      "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+      "bytes": 22552
+    },
+    {
+      "file": "Tools/Validation/nativity-web-smoke.py",
+      "sha256": "22ad10be9a41386b8ba14cc1ca2238bbaf9c72a469ee4cb1d55e21d75c32cb84",
+      "bytes": 85355
+    },
+    {
+      "file": "Tools/Validation/nativity_narration_evidence.py",
+      "sha256": "5356870b71e53c1ca56bb855deea11bd26520e238b5911440441dfcd43cea9ee",
+      "bytes": 3242
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Closure/close-g2.py",
+      "sha256": "9b0bab4b1bdcf596d98f16a48af339b0ac2ad52d8f41f54577c96ec251f16082",
+      "bytes": 10493
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+      "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+      "bytes": 11037
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/native.xml",
+      "sha256": "6fa8950d783d4be630d0839feb887ff28d3ff4b473528eeadef9b5b762d7c3fd",
+      "bytes": 147877
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+      "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+      "bytes": 363712
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/binding.json",
+      "sha256": "74b02a233f409758d9bd416a964d181841ba087deeb73ca5e4ed80f42175ff07",
+      "bytes": 1199
+    }
+  ],
+  "minimumContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+    "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+    "bytes": 11037
+  },
+  "minimumGateIds": [
+    "ownership",
+    "rollback",
+    "historical-loss",
+    "gospel-source",
+    "gospel-runtime",
+    "card-native",
+    "gospel-native",
+    "core-ci",
+    "builds",
+    "local-browser",
+    "browser-integrity",
+    "new-baseline-audit",
+    "dated-images",
+    "stage",
+    "public",
+    "seal-durability"
+  ],
+  "gospelNativeContract": {
+    "expectedCount": 16,
+    "expectedMethodNames": [
+      "AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload",
+      "CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+      "ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+      "DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes",
+      "EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState",
+      "ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+      "FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload",
+      "IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible",
+      "ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet",
+      "LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue",
+      "NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+      "PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor",
+      "RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+      "RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump",
+      "ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds",
+      "TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition"
+    ],
+    "expectedFullNames": [
+      "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState",
+      "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload",
+      "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible",
+      "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition",
+      "PathOfDawn.SmokeTests.GospelFacingSmokeTests.AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload",
+      "PathOfDawn.SmokeTests.GospelFacingSmokeTests.LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue",
+      "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+      "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+      "PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests.ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet",
+      "PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests.CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+      "PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests.ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+      "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes",
+      "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+      "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor",
+      "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump",
+      "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds"
+    ],
+    "freshBinding": null,
+    "freshXml": null,
+    "freshCurrentSourceFingerprint": null,
+    "nativeRootReview": null,
+    "extraFixtureRequirement": [
+      {
+        "file": "Tools/Voice/Nativity/production.json",
+        "preservedFile": "Artifacts/Validation/Autonomy/G2-2026-11-03/NativeAttempts/PathOfDawn/20261103T075323642170Z/FixtureInputs/Tools/Voice/Nativity/production.json",
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+        "bytes": 35716
+      }
+    ],
+    "oldSourceRows": {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+      "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+      "bytes": 363712
+    },
+    "oldFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "fixedSourcePolicy": {
+      "sourceChangesAllowed": false,
+      "inputRows": {
+        "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+        "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+        "bytes": 363712
+      },
+      "expectedRows": 1707,
+      "expectedFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+      "comparison": "Exact full ordered file/bytes/sha256 rows and fixed fingerprint; current collection and genuine fresh Native/BuildInput rows must all equal the retained1707-row reference.",
+      "newExclusionsOrAllowlistAllowed": false,
+      "fingerprintUpdateAllowed": false,
+      "editorChangesAllowed": false,
+      "shellWrapperChangesAllowed": false
+    }
+  },
+  "plans": {
+    "Desktop720": {
+      "retainedOriginal": {
+        "file": "Tools/Autonomy/g2_desktop_plan_v2.json",
+        "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+        "bytes": 28196
+      },
+      "steps": 117,
+      "requiredCount": 48,
+      "requiredCheckpoints": [
+        "title",
+        "birth-story-first",
+        "bible-empty-zero",
+        "bible-empty-cover",
+        "bible-empty-contents",
+        "bible-empty-second-spread",
+        "annunciation-second-turn",
+        "visitation-current-story",
+        "joseph-dream-current-story",
+        "first-scripture-quiet-notice",
+        "first-inscribed-second-blank",
+        "first-passage-scrolled",
+        "bible-first-discovered-contents",
+        "contents-opens-earned-passage",
+        "unseen-after-first-event",
+        "magi-house-current-story",
+        "child-chapter",
+        "child-free-field",
+        "field-after-forward",
+        "field-after-backward",
+        "field-after-left",
+        "field-after-right",
+        "field-after-diagonal",
+        "after-exploration-dash",
+        "actual-joseph-story",
+        "after-first-npc",
+        "mary-well-finite-lighting",
+        "illustrated-inventory",
+        "lamp-equipped-field",
+        "actual-status",
+        "saved-xyz-field",
+        "continued-xyz-field",
+        "continued-physical-bible",
+        "g1-field-dialogue",
+        "g1-guidance",
+        "g1-mary-field-dialogue",
+        "g1-temple-field-dialogue",
+        "g1-field-scripture-recorded",
+        "g1-saved",
+        "g1-continued",
+        "g2-planted-facing",
+        "g2-reading-bible",
+        "g2-book-return-reading",
+        "g2-reading-before-reload",
+        "g2-continued-reading",
+        "g2-continued-reading-bible",
+        "g2-continued-reading-return",
+        "continued-g2-reading"
+      ],
+      "audioSteps": [
+        {
+          "type": "audio",
+          "label": "narration-initial-current-line"
+        },
+        {
+          "type": "audio",
+          "label": "narration-book-stopped"
+        },
+        {
+          "type": "audio",
+          "label": "narration-after-book-next-line"
+        },
+        {
+          "type": "audio",
+          "label": "nativity-temple-field"
+        }
+      ],
+      "reloadSteps": [
+        {
+          "type": "reload"
+        },
+        {
+          "type": "reload"
+        }
+      ],
+      "newPairedPlan": null,
+      "newPairedPlanSha256": null,
+      "newRevision": null,
+      "mustPreserveAllStepObjectsAndOrder": true
+    },
+    "Mobile844": {
+      "retainedOriginal": {
+        "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+        "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+        "bytes": 22552
+      },
+      "steps": 86,
+      "requiredCount": 34,
+      "requiredCheckpoints": [
+        "title",
+        "g1-opening-book-stop",
+        "birth-story-first",
+        "first-scripture-quiet-notice",
+        "magi-house-current-story",
+        "child-chapter",
+        "child-free-field",
+        "field-after-forward",
+        "field-after-diagonal",
+        "after-exploration-dash",
+        "actual-joseph-story",
+        "g1-field-dialogue",
+        "after-first-npc",
+        "g1-guidance",
+        "mary-well-finite-lighting",
+        "g1-mary-field-dialogue",
+        "g1-temple-field-dialogue",
+        "g1-field-scripture-recorded",
+        "illustrated-inventory",
+        "lamp-equipped-field",
+        "actual-status",
+        "saved-xyz-field",
+        "g1-saved",
+        "continued-xyz-field",
+        "g1-continued",
+        "continued-physical-bible",
+        "g2-planted-facing",
+        "g2-reading-bible",
+        "g2-book-return-reading",
+        "g2-reading-before-reload",
+        "g2-continued-reading",
+        "g2-continued-reading-bible",
+        "g2-continued-reading-return",
+        "continued-g2-reading"
+      ],
+      "audioSteps": [
+        {
+          "type": "audio",
+          "label": "narration-initial-current-line"
+        },
+        {
+          "type": "audio",
+          "label": "narration-book-stopped"
+        },
+        {
+          "type": "audio",
+          "label": "narration-after-book-next-line"
+        },
+        {
+          "type": "audio",
+          "label": "nativity-temple-field"
+        }
+      ],
+      "reloadSteps": [
+        {
+          "type": "reload"
+        },
+        {
+          "type": "reload"
+        }
+      ],
+      "newPairedPlan": null,
+      "newPairedPlanSha256": null,
+      "newRevision": null,
+      "mustPreserveAllStepObjectsAndOrder": true
+    },
+    "PublicMobile844": {
+      "retainedOriginal": {
+        "file": "Tools/Autonomy/g2_public_plan_v2.json",
+        "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+        "bytes": 22552
+      },
+      "steps": 86,
+      "requiredCount": 34,
+      "requiredCheckpoints": [
+        "title",
+        "g1-opening-book-stop",
+        "birth-story-first",
+        "first-scripture-quiet-notice",
+        "magi-house-current-story",
+        "child-chapter",
+        "child-free-field",
+        "field-after-forward",
+        "field-after-diagonal",
+        "after-exploration-dash",
+        "actual-joseph-story",
+        "g1-field-dialogue",
+        "after-first-npc",
+        "g1-guidance",
+        "mary-well-finite-lighting",
+        "g1-mary-field-dialogue",
+        "g1-temple-field-dialogue",
+        "g1-field-scripture-recorded",
+        "illustrated-inventory",
+        "lamp-equipped-field",
+        "actual-status",
+        "saved-xyz-field",
+        "g1-saved",
+        "continued-xyz-field",
+        "g1-continued",
+        "continued-physical-bible",
+        "g2-planted-facing",
+        "g2-reading-bible",
+        "g2-book-return-reading",
+        "g2-reading-before-reload",
+        "g2-continued-reading",
+        "g2-continued-reading-bible",
+        "g2-continued-reading-return",
+        "continued-g2-reading"
+      ],
+      "audioSteps": [
+        {
+          "type": "audio",
+          "label": "narration-initial-current-line"
+        },
+        {
+          "type": "audio",
+          "label": "narration-book-stopped"
+        },
+        {
+          "type": "audio",
+          "label": "narration-after-book-next-line"
+        },
+        {
+          "type": "audio",
+          "label": "nativity-temple-field"
+        }
+      ],
+      "reloadSteps": [
+        {
+          "type": "reload"
+        },
+        {
+          "type": "reload"
+        }
+      ],
+      "newPairedPlan": null,
+      "newPairedPlanSha256": null,
+      "newRevision": null,
+      "mustPreserveAllStepObjectsAndOrder": true
+    }
+  },
+  "requiredAudioLabelsInExactOrder": [
+    "narration-initial-current-line",
+    "narration-book-stopped",
+    "narration-after-book-next-line",
+    "nativity-temple-field"
+  ],
+  "originalRootRequiredNamedBrowserShots": [
+    "title",
+    "g1-field-dialogue",
+    "g1-guidance",
+    "g1-continued",
+    "g2-planted-facing",
+    "g2-reading-bible",
+    "g2-book-return-reading",
+    "g2-reading-before-reload",
+    "g2-continued-reading",
+    "g2-continued-reading-bible",
+    "g2-continued-reading-return",
+    "continued-g2-reading"
+  ],
+  "recommendedAdjacentRoleShots": [
+    "g1-mary-field-dialogue",
+    "g1-temple-field-dialogue",
+    "g1-field-scripture-recorded",
+    "continued-physical-bible"
+  ],
+  "futureIdentities": {
+    "pairedKind": null,
+    "workId": null,
+    "sourceCommit": null,
+    "revisions": null,
+    "selectedGospelNative": null,
+    "selectedCardNative": null,
+    "gospelWebBuild": null,
+    "cardWebBuild": null,
+    "localRootReviews": null,
+    "currentCI": null,
+    "currentStage": null,
+    "newPortalAuditRoot": null,
+    "newPublicRuntimeWitnesses": null,
+    "pagesRun": null,
+    "finalBaselineReceipt": null,
+    "finalRootSeal": null
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "executionReady": false,
+  "criticalFindings": [
+    "The preserved Gospel plans have4 actual PCM steps, not only3 narration-labelled windows.",
+    "g2_evidence.browser lacks final-runtime-check existence, raw-report-only-visualReview equality and exact Root fullrow/sourceFP closure guards; old close-g2 added them and the new lane must preserve them.",
+    "This chosen lane fixes Gospel current source to all1707 retained authored rows/fingerprint255e. The genuine common durability change is an external after-success Tools step only; no source-diff/allowlist/fingerprint-update route exists in the executable mapping.",
+    "Do not require final public gameplay/Root receipt before starting local browser; use staged readiness without accepting oldmissingRoot fallback.",
+    "Current Native04 may be selected only if its exact full current source and executed-tool/input/XML bindings remain unchanged; any authored/helper change after it requires a new current attempt."
+  ],
+  "historicalUseOnly": [
+    "G1/G2 old seals/stages/build metadata/archived Card proof are not current paired proof.",
+    "The original Native16 XML here supplies retained case identities only; it is not a new passing run.",
+    "The v1 report generic Editor-diff discussion is retained history only. It does not authorize this fixed-source lane to change an Editor, shell wrapper or authored row."
+  ],
+  "supersedesExecutionAdvice": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/REPORT.md",
+      "sha256": "6c582c168ad94d9443f51e2ba5da26ffd0d67e96499cfe4b26b09a0e09213f1b",
+      "bytes": 9729
+    },
+    "observations": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/IndependentGateRead/observed-records.json",
+      "sha256": "2217663a60c135d6b132ebe6deb7daa6c1d888ca2582c823de1f17f0a9e3a605",
+      "bytes": 16966
+    },
+    "reason": "Latest explicit parent direction selects after-success external Tools proof preservation only. No Editor/.sh/Gospel authored changes; the earlier generic source-diff path is not an executable option for this lane."
+  },
+  "externalCommonImprovement": {
+    "kind": "after-success-independent-proof-preservation-step",
+    "file": "Tools/Validation/preserve-completed-build-proof.py",
+    "executionRef": null,
+    "sourceRef": null,
+    "approvedEffects": "Read already completed genuine build/Native outputs and preserve exact bytes/provenance to durable Artifacts. No authored input, Editor or .sh changes; no regenerated Succeeded/BuildInputs/Evidence and no runtime mutation."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "kind": "paired-web-consumer-source-draft-completion-ledger",
+  "createdUtc": "2026-11-03T16:43:30.019189+00:00",
+  "owner": "/root/release_recovery/c1_pipeline_audit",
+  "status": "source-only-implemented-and-independently-statically-reviewed",
+  "installed": false,
+  "executed": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+    "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+    "bytes": 84786
+  },
+  "schema": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+    "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+    "bytes": 43563
+  },
+  "designLedger": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/FINAL-LEDGER.json",
+    "sha256": "c70af45fc10858addd27e859ad9a2faf0dd2d94877ca68980373c6e21c70a19b",
+    "bytes": 12113
+  },
+  "independentReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW-v2.md",
+    "sha256": "2e2c321cda3fe9a556a9f7cccc83f1cfc3e6aa5f69461ded94bfc75396297f5a",
+    "bytes": 3290
+  },
+  "independentFirstReviewPreserved": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW.md",
+    "sha256": "7cca557cb35ac2cd5cd92fc76ce6e32ae5c5022a5a2282a4bda80fd4a4b829c9",
+    "bytes": 7708
+  },
+  "staticChecksOnly": {
+    "astParsed": true,
+    "allDraftJsonParsed": true,
+    "sourcePinsRecheckedUnchanged": true,
+    "strictAudio4994And9c92": true,
+    "legacyDirectCalls": 0,
+    "schemaRuntimeValidation": false,
+    "producerImports": false,
+    "actualRuntime": false
+  },
+  "files": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW-v2.md",
+      "sha256": "2e2c321cda3fe9a556a9f7cccc83f1cfc3e6aa5f69461ded94bfc75396297f5a",
+      "bytes": 3290
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW.md",
+      "sha256": "7cca557cb35ac2cd5cd92fc76ce6e32ae5c5022a5a2282a4bda80fd4a4b829c9",
+      "bytes": 7708
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-observed-records-v2.json",
+      "sha256": "5fa1943f00ca816d1f8d1795ffdb6d9eae37f3ccdabd9ba43ff03a58ac464f4a",
+      "bytes": 4132
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-observed-records.json",
+      "sha256": "b8c60ef772c358472a95f0b5617e11daa839891433c55e50e85197c3ac8d855f",
+      "bytes": 7329
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/HOOK-REVIEW.md",
+      "sha256": "f154cb9f6422475d7c5b1c0349b8ef4c68d0ccd9b4725bf7e41c617dc9f8e3d1",
+      "bytes": 5891
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/observed-source-pins.json",
+      "sha256": "59b549c3df827211c03b3c7e386de539971d2d9125757e07dcedf91190780c2a",
+      "bytes": 2536
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/reviewed-source-40ed1f54.py.txt",
+      "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+      "bytes": 84786
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/reviewed-source-cfd49970.py.txt",
+      "sha256": "cfd4997045b4d2f07216e0d7be54eb910a100e56a80bf344f39cdef25d5a4554",
+      "bytes": 82968
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/source-diff-cfd49970-to-40ed1f54.txt",
+      "sha256": "fa370d3a6fa982f943a47c171c75ded7790c1b53b202051a37ff2aaf84bdf983",
+      "bytes": 5720
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/README.md",
+      "sha256": "df4e4223ddad340d3ab938b43458f469eb19fae343509a3278b067e130ee6c18",
+      "bytes": 18265
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/execution-contract.template.json",
+      "sha256": "7df9075387c6b296829ee6e567462556d259ce321074cf94324a0f0870108b3c",
+      "bytes": 14767
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/observed-records.json",
+      "sha256": "56ee49959cc71d73c4d246a18077b33a900f74f602edfd3b91e5f60c1703e05b",
+      "bytes": 4830
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+      "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+      "bytes": 84786
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/root-review.template.json",
+      "sha256": "489b48c05f226e62aa41b73af80b9b76051591aeb73fbdca5642d14ff99c064b",
+      "bytes": 534
+    }
+  ],
+  "fileCountExcludingThisLedger": 14,
+  "remainingActualOwnerWork": [
+    "Independent adoption/installation/source freeze and actual syntax/runtime/schema verification by execution owner only.",
+    "Actual both fresh Web builds/durability proofs and genuine current post-proof observations; current incomplete refs must remain null until real completion.",
+    "Fill distinct per-attempt execution contracts and new absent persistent outputs under bounded exact-owner lease.",
+    "Actual PC/touch plus Gospel PC19 normal-story route, independent Root original/raw review, clean current source/Core/CI/stage/public typed producer evidence, actual public browser input/Root.",
+    "Publication and final distinct baseline seal remain entirely outside this consumer."
+  ],
+  "boundary": "All helper work was source text/AST/JSON reads and writes inside assigned draft directories. Tools/Game/Docs/network/Git/Unity/Native/Web/browser/project imports/tests were not executed or modified."
+}
