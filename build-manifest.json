@@ -1,19 +1,19 @@
 {
-  "releaseProfile": "nativity",
+  "releaseProfile": "autonomy-g1",
   "currentTargets": [
     "Web"
   ],
-  "createdUtc": "2026-11-02T11:52:25.320580+00:00",
+  "createdUtc": "2026-11-03T07:11:26.734701+00:00",
   "publishReady": true,
   "gameRevisions": {
     "FantasyCards": "fm-nativity-2026-11-02",
-    "PathOfDawn": "gospel-nativity-2026-11-02"
+    "PathOfDawn": "gospel-encounter-2026-11-03"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommit": "e5fe6574b496b840a8be17cc18b2d13ed856618b",
+  "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
   "sourceDirty": false,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -15396,10 +15396,10 @@
     "games/fantasy-cards/ThirdParty/Restoration-SOURCE-NOTICE.txt": "3dc8cf85a5d6dca3292050650dc6faa3f6588a10c7a4ede6ae33efcb302f5073",
     "games/fantasy-cards/ThirdParty/Revival-SOURCE-NOTICE.txt": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73",
     "games/fantasy-cards/index.html": "981bec6e884191eeee65dd34d0b579ca407460956ff7b64ac51e158f019856d0",
-    "games/path-of-dawn/Build/1312664ea2de0c60030b90830979be17.loader.js": "aa34296a7521b96ed11995bc96eb4d94a3e440d53b151c062b0cf1143ca58dac",
-    "games/path-of-dawn/Build/8579835944007203b8a2cd61ac5d56cd.data.unityweb": "e49a1c36904627870d4ed9e0a42f0272cd8c5e9a9671ffb61589b728596fef98",
-    "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb": "9574725a2737158c381313d94af05b239d475fc3e9656ffb5a75e57f64ffc51b",
-    "games/path-of-dawn/Build/a5adf3d58b1a0a5d90350f692ed7e96f.wasm.unityweb": "a5c5cfe7c5619becd32bb0eb43cab877e957cbea6093b79fb57355cb413fc5db",
+    "games/path-of-dawn/Build/55597dc2dcd4f8029f086cb41e195b3b.wasm.unityweb": "da0f707d52c6c529467afecd26694dbdfaf6aa39573a6688a53df3059a84c19a",
+    "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb": "bffd4b9ef072a2fa3793952653fc0e5dfc54c18da57855cadd6a48dd7fa8324c",
+    "games/path-of-dawn/Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js": "8c635f5247c4e4e356e8109a3b49c1a7f7081141040e64b36bb6a34ec6ca6b17",
+    "games/path-of-dawn/Build/cb818fbe472e5788a863f7e68ee8d566.data.unityweb": "da87b30a7afa975774f3f4945493ee8e00a508dbad5798c70b57e1cbdd4858a5",
     "games/path-of-dawn/ThirdParty/AuthoredProps-SOURCE-NOTICE.txt": "0c1ee3598af0de87c1d02d11242f16f4bbf2573589e8e46249853ecde5485ea3",
     "games/path-of-dawn/ThirdParty/Chronicle-Art-SOURCE-NOTICE.txt": "8f4a438279a775af010e493c2d97e65bbf099b675772f788718b1d7c11678386",
     "games/path-of-dawn/ThirdParty/FirstGameKorean-OFL.txt": "a93334c1f1f4995de0a8d4b3212bf91a5925007d02aa3c20b1de83d9e64fe464",
@@ -15425,7 +15425,7 @@
     "games/path-of-dawn/ThirdParty/Scripture-NOTICE.txt": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a",
     "games/path-of-dawn/ThirdParty/Storybook-Art-SOURCE-NOTICE.txt": "d4f3dfb215a62a1ee3fe638b1c44a6157a851d39407be82bcd4ee993ef0e99a8",
     "games/path-of-dawn/ThirdParty/Well-Props-SOURCE-NOTICE.txt": "74e0260b6e641802e7dddce4bfbe3232d46921105e16b69d57bb8e238b8b5772",
-    "games/path-of-dawn/index.html": "ed7295105c4d80666f3cff9c4f19fb4b4a7d430e77cac33fa41f748929388c0c",
+    "games/path-of-dawn/index.html": "ee556614411e270506e47e00761601086f1ab0e4509684b7d1d48dd3eaf5f2d4",
     "index.html": "42a6916c7ce51e313c64aad8161b2cb8ee56b267d17706d85c6c486d82e255ae",
     "site.css": "bd46d8a18f3c9b7417b448e289d6ca909e462bbfcbe44c3d07530ca0211dd3ea"
   },
@@ -15445,7 +15445,7 @@
   },
   "browserReportRootsByGame": {
     "FantasyCards": "Artifacts/Validation/Nativity",
-    "PathOfDawn": "Artifacts/Validation/Nativity"
+    "PathOfDawn": "Artifacts/Validation/Autonomy/G1-2026-11-03"
   },
   "currentBuilds": {
     "currentTargets": [
@@ -15453,20 +15453,13 @@
     ],
     "games": {
       "FantasyCards": {
+        "preserved": true,
+        "revision": "fm-nativity-2026-11-02",
+        "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c",
         "native": {
           "file": "Artifacts/Validation/Nativity/Native/FantasyCards/binding.json",
           "sha256": "5431804cbd5dfb800ea18867fe84aea49483b1145cde3bee24c43624f1ce3ee7",
           "bytes": 589
-        },
-        "nativeResults": {
-          "file": "Artifacts/Validation/Nativity/Native/FantasyCards/native.xml",
-          "sha256": "09d4d189034bf1cc50ad4673ea0fb4698cca60f81ba092704ece0d86e1875fd9",
-          "bytes": 10847
-        },
-        "nativeRootReview": {
-          "file": "Artifacts/Validation/Nativity/Root/cards-native-review.json",
-          "sha256": "072e0f2baddaffe43697aa40f991a62e37a0f35651cd40d6cb20cab8603c2aa5",
-          "bytes": 4179
         },
         "targets": {
           "Web": {
@@ -15482,71 +15475,158 @@
             },
             "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c"
           }
-        }
+        },
+        "browserReports": [
+          {
+            "game": "FantasyCards",
+            "profile": "Desktop720",
+            "report": {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/report.json",
+              "sha256": "511c8db418c7aeed418eb3ed77bf0d24fb6f9f41efa771bee1ced50b6cd6c9fa",
+              "bytes": 12485813
+            },
+            "approvedOriginals": [
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/title.png",
+                "sha256": "322ae9c525bae7476c87706695beabcb93ec453b196222659593a389097bc405"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/shop.png",
+                "sha256": "a0a225d270909b58ed665e707adabae6a3ce88bc9e57fc7a58e5be1db7662eae"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/five-card-reveal.png",
+                "sha256": "9d2f75f01ebc529be274bb8a2075107630217c1b7c0aa0134dea2ce822918b91"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/continued-quest-battle.png",
+                "sha256": "217707d8f74a753e4a6222061c4cb8ed0bdf27ebcb5be6a3f7a9d63c3c5f7d70"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/deck-forty-nine-save-disabled.png",
+                "sha256": "18c3b28641b888c6ae87d9e617edc1e5359720bb12fd8cdc36e2424d71e937d4"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/owned-fifty-five.png",
+                "sha256": "2eedf984037d0935f81f8533120c103a70c4ea17b6f7e9751a85565d6b322741"
+              }
+            ]
+          },
+          {
+            "game": "FantasyCards",
+            "profile": "Mobile844",
+            "report": {
+              "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/report.json",
+              "sha256": "6daf0f5d6b47f5f3dfab3f257a10554096750984db6242033127111f2ff3b0be",
+              "bytes": 12481610
+            },
+            "approvedOriginals": [
+              {
+                "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/title.png",
+                "sha256": "241b7b8ec01d00a1e5a7a2aa75ac165d567d0109251abb04a863a0df61ce270b"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/shop.png",
+                "sha256": "fccb8f7258ad36c67f9dffec68ca3b6f2108bd1912e2be4a946d02de37f8c65f"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/five-card-reveal.png",
+                "sha256": "a4bd6855117f35285d51c36d5d78f735c39af38bec7b5b59d0ee942b4a415aef"
+              },
+              {
+                "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/continued-quest-battle.png",
+                "sha256": "0298b513a18a552dae0f5691b84260c5eda274f5c136334043d706e9d67974ae"
+              }
+            ]
+          }
+        ],
+        "priorPublicProof": {
+          "report": {
+            "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+            "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+            "bytes": 16927726
+          },
+          "manifest": {
+            "file": "/tmp/firstgame-nativity-staged-site/build-manifest.json",
+            "sha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+            "bytes": 2100655
+          },
+          "baseUrl": "https://ka8877.github.io/firstgame/",
+          "verifiedFiles": 15413,
+          "approvedOriginals": [
+            {
+              "file": "Artifacts/Validation/Nativity/PublicPortal/landing-1440.png",
+              "sha256": "c7d17684238ccc253132e7c734f1452cf0c99e88364fa076251eb5bb72ca734d",
+              "captureKind": "original-full-page",
+              "viewport": {
+                "width": 1440,
+                "height": 1050
+              }
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/PublicPortal/landing-390.png",
+              "sha256": "97192247b788f63f30b4a22b59575c54da7105ca7f112c79e34f5e491ab87ebe",
+              "captureKind": "original-full-page",
+              "viewport": {
+                "width": 390,
+                "height": 844
+              }
+            }
+          ],
+          "reviewedUtc": "2026-11-02T12:00:12.890416+00:00"
+        },
+        "scope": "Actual prior Cards results and byte-identical last successful runtime, explicitly retained; not a new Cards execution."
       },
       "PathOfDawn": {
         "native": {
-          "file": "Artifacts/Validation/Nativity/Native/PathOfDawn/binding.json",
-          "sha256": "d3540c467e17298de8ac97978a40f2b5d11d8d0b84136949e76d7a5ccab45380",
-          "bytes": 1157
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Native/PathOfDawn/binding.json",
+          "sha256": "4dab7371a35df6938ea447054441064c1e35f24a502776df02fc42a834b2def9",
+          "bytes": 1199
         },
         "nativeResults": {
-          "file": "Artifacts/Validation/Nativity/Native/PathOfDawn/native.xml",
-          "sha256": "18213ab26c54efa3ea3af171110967a51ba3965a4aa9b85f5be7ba30368df7fe",
-          "bytes": 65001
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Native/PathOfDawn/native.xml",
+          "sha256": "6c55e6419c67b5ac457828742fa903c968bf222c4855da35d7072d098ae87967",
+          "bytes": 108352
         },
         "nativeRootReview": {
-          "file": "Artifacts/Validation/Nativity/Root/gospel-native-review.json",
-          "sha256": "200d6f7a7cc784be53eed6c2103d7eb415185b6fb49a36871c0a94475af272e8",
-          "bytes": 6353
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/gospel-native-review.json",
+          "sha256": "c4e0453d2e00cfd1304566b73409fa2172125385ba5bc0da118076bb8c080652",
+          "bytes": 2187
         },
         "targets": {
           "Web": {
             "evidence": {
-              "file": "/tmp/firstgame-nativity-builds/PathOfDawn/Web/BuildEvidence.txt",
-              "sha256": "73bdd88f70d8722a2c9fb41bc760f9e565b30a60daea2889df20bcb7aa40ab79",
-              "bytes": 414
+              "file": "/tmp/firstgame-g1-fix01-builds/PathOfDawn/Web/BuildEvidence.txt",
+              "sha256": "6ef9130f9143518ff047f8926ecf8d473f888666222ed023921c9625a5ed6402",
+              "bytes": 415
             },
             "inputs": {
-              "file": "/tmp/firstgame-nativity-builds/PathOfDawn/Web/BuildInputs.json",
-              "sha256": "c8623bfb1f44bfdc0083d257e2fd2fdd766c0b6ee4eb632d00aa155707436b63",
-              "bytes": 407227
+              "file": "/tmp/firstgame-g1-fix01-builds/PathOfDawn/Web/BuildInputs.json",
+              "sha256": "d4f98270235bb5e8555a8354ca128a3523a8cacc402c4c08c1b73f46e4db99c7",
+              "bytes": 407679
             },
-            "sourceFingerprint": "e27a919909204c4753bd404cf3f778e223379fadb223d2e3e28816c291fd4bbf"
+            "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf"
           }
+        },
+        "core": {
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Core/core-tests.trx",
+          "sha256": "2c2898c7d2af227e7a7e9b7a323213855f37e2a1a95a52611de1c7b9824dd5fb",
+          "bytes": 377286
+        },
+        "audioAssets": {
+          "birth": {
+            "file": "Artifacts/Validation/Nativity/Audio/birth.json",
+            "sha256": "f8549dd9676c4c75b78d2e040c82dcd872e0b5a085688731dd30e568808e7891",
+            "bytes": 1454
+          },
+          "voice": {
+            "file": "Artifacts/Validation/Nativity/Audio/voice.json",
+            "sha256": "339697daf0a87b3df19cbbd1938ae2c9ac9dac68ab873be9a88fe95b9feac2a0",
+            "bytes": 49492
+          },
+          "scope": "Current source audio/voice assets only; actual Native/app/browser playback and human listening are separate."
         }
       }
-    },
-    "core": {
-      "file": "Artifacts/Validation/Nativity/Core/core-tests.trx",
-      "sha256": "fbae8b997fb993cf93e282da8a127cc4574e6da2a9bc281afc48c6528d4e313e",
-      "bytes": 377286
-    },
-    "authoring": {
-      "file": "Artifacts/Validation/Nativity/card-authoring-final.json",
-      "sha256": "d7fb313cf19eb5b36e27d156ec26451fb5dd5e4367d09e4d5d5db91361ff8da8",
-      "bytes": 1124
-    },
-    "audioAssets": {
-      "birth": {
-        "file": "Artifacts/Validation/Nativity/Audio/birth.json",
-        "sha256": "f8549dd9676c4c75b78d2e040c82dcd872e0b5a085688731dd30e568808e7891",
-        "bytes": 1454
-      },
-      "voice": {
-        "file": "Artifacts/Validation/Nativity/Audio/voice.json",
-        "sha256": "339697daf0a87b3df19cbbd1938ae2c9ac9dac68ab873be9a88fe95b9feac2a0",
-        "bytes": 49492
-      },
-      "scope": "Current source audio/voice assets only; actual Native/app/browser playback and human listening are separate."
-    },
-    "unchangedRuntimeAfterTransportExperiment": {
-      "report": {
-        "file": "Artifacts/Validation/Nativity/TransportGzip/report.json",
-        "sha256": "24b9001b30774e1d5977d94738f297ed77f387741b7b83a954665f3aa5facfda",
-        "bytes": 5247
-      },
-      "scope": "All six final compressed runtime files equal their preserved successful Unity originals byte-for-byte. No recompression candidate was adopted."
     }
   },
   "currentBrowserReports": {
@@ -15619,108 +15699,583 @@
         "game": "PathOfDawn",
         "profile": "Desktop720",
         "report": {
-          "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/report.json",
-          "sha256": "5c1a92f868a373040eb28de5ca776bff577c34049a5ce4cd0ab2efa2d15f2d7c",
-          "bytes": 368355
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
+          "sha256": "a2940b764b6d6fa77fd879401c9b90728d92442429945f69f83986c5939e3faa",
+          "bytes": 407227
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/title.png",
-            "sha256": "6e42b0140ac2abfb20676a30f38be43921dc2c0017c27435b90424bcfeaa9cda"
+            "name": "title",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/title.png",
+            "sha256": "b70de6308e9dbe35f550e19d232982f60b72be66a6219644739fbc6c6c238bc8",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              51.73637751854999,
+              39.57968665811552,
+              42.537062369437315
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:39:29.202650+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/birth-story-first.png",
-            "sha256": "0204120ee5a767b514d7b03ecd39bb519e55ca5b2a5d44584b1b9180b7da91d6"
+            "name": "first-scripture-quiet-notice",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/first-scripture-quiet-notice.png",
+            "sha256": "731ae14e60f1c62649d7b8a9f8aca6146821519d72dbdb0816237c1b4fd4e290",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              52.951908540207114,
+              37.357286728793035,
+              32.32444688777812
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:41:31.595142+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/first-scripture-quiet-notice.png",
-            "sha256": "f4274734b7a85031014ac49dfb56cf1115171365dc78c8b2eec7873ef6e06e5d"
+            "name": "g1-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-dialogue.png",
+            "sha256": "5babbd4dffbb5ac71f8ef0fefaac99e0e3f131412d94d213558b449bfb9b364e",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.623834510942714,
+              38.158133460230125,
+              28.99924172802714
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:47:26.121617+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/bible-empty-cover.png",
-            "sha256": "40a42f6abe2b1e8c3aa042fbfc1a4ba1e9a259da020d21b877ac14fe68597d6f"
+            "name": "g1-guidance",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-guidance.png",
+            "sha256": "cb115f0a8bf302c3a1ad07175d6a3fd0aff5dfa48ce5b855b28334ee897283ae",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              54.91228414742393,
+              38.044020819771596,
+              26.96276889682586
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:47:38.084227+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/bible-empty-contents.png",
-            "sha256": "526077dff1ab0fe68cc47c0fc71cbd6372babf4aad3ed4dc1bbfa65de1d82c4a"
+            "name": "g1-mary-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-mary-field-dialogue.png",
+            "sha256": "bf1c151399d2a12b3d20803cdd0b497b1f0ae77812a4daa25181ae37967eccb1",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              45.59386527825644,
+              35.4745904771683,
+              27.95795189332564
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:49:38.409777+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/first-inscribed-second-blank.png",
-            "sha256": "dc098d44472e96ad7eef512372b078bf3371cc6c2db620d06f9c2f3394824a98"
+            "name": "g1-temple-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
+            "sha256": "1d1f64007a59672fc0f7c770d7a2431844f5381f3a77683e60d3a814eac7fc12",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              54.90945743408573,
+              42.30509315912952,
+              31.510557763766066
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:51:49.375068+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/continued-xyz-field.png",
-            "sha256": "7fe14b810c04b3d06aee0fd5f5bfdf71200dd278967a32735515828215bf51f2"
+            "name": "g1-field-scripture-recorded",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-scripture-recorded.png",
+            "sha256": "e238af6b1beb57a81ed12bcec694af34ef7e127a6b4ae5e02aaa5e22532c055a",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              100.92615193292167,
+              91.65776020751932,
+              83.25909365307356
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:52:02.413616+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/magi-house-current-story.png",
-            "sha256": "9a5fd50620aa3fb740668d187309b211fd860488651cb0df4ce7e5c77723892e"
+            "name": "g1-continued",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-continued.png",
+            "sha256": "4d3783ed125d2bec325b699e1d526e62e90bf4dff9c5f3adb2525fc96513ddd6",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              51.7476100185083,
+              37.1093076003077,
+              28.16189523946733
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:53:44.862100+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/bible-first-discovered-contents.png",
-            "sha256": "552821b393ff1d63c8190712a24a699b59fae2f24f0fa98fec44826f45adc599"
-          },
-          {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/actual-joseph-story.png",
-            "sha256": "e6c31b85b9d8bb284822611df44d480ecbcc9e344d78c73479a8b43ff3ee8281"
-          },
-          {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/continued-physical-bible.png",
-            "sha256": "b966f69a1572157c20aa2a5726a49579c5ad3c6eb795df162a117827a8088d3b"
-          },
-          {
-            "file": "Artifacts/Validation/Nativity/Desktop720/PathOfDawn/first-passage-scrolled.png",
-            "sha256": "89fc8d47438deb4729075ccc514e50f7f1fbe48db705f611ae66f035351f1315"
+            "name": "continued-physical-bible",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/continued-physical-bible.png",
+            "sha256": "473725b4da7a486612e5e90293a9cee3c8f5d4f5071b936d13e728396bdada9e",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              101.32785980231735,
+              92.54861532610238,
+              84.0825229628504
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:53:52.184106+00:00"
           }
-        ]
+        ],
+        "scope": "Fresh changed-game actual input and exact-source runtime; physical device and human audio approval are separate."
       },
       {
         "game": "PathOfDawn",
         "profile": "Mobile844",
         "report": {
-          "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/report.json",
-          "sha256": "6c4bdf382a1589151123abf19c80f1979ac49dde360b656be204cbbd14f6e4c5",
-          "bytes": 362563
+          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/report.json",
+          "sha256": "f59b7603d2d26cc6a66385da7464d68e3493d710f6ba1a482a23751b21cb9aca",
+          "bytes": 363797
         },
         "approvedOriginals": [
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/birth-story-first.png",
-            "sha256": "ed9ebc229b93386a43fd259f898b8c699a9b1690b8a6ec693be147772d9c36d7"
+            "name": "title",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/title.png",
+            "sha256": "30297d2ef0dcefedaa59ebbe50d1876ab914b0084f07d5b498f51a318e15f8b2",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              50.88826794571026,
+              38.60610304103516,
+              41.72563042874076
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:54:34.980042+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/first-scripture-quiet-notice.png",
-            "sha256": "5a5aaa80c69e1b98f7a617f60d3bb24f85da5517bf3b727d2eac316331aaa5df"
+            "name": "first-scripture-quiet-notice",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/first-scripture-quiet-notice.png",
+            "sha256": "3d31c181c2c2e560d0f7fa62edabe5aadb9613b0e5d0e534438ee31227f6ff42",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              52.03020230166251,
+              36.351836483314045,
+              31.482430794169854
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T06:55:24.359595+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/first-inscribed-second-blank.png",
-            "sha256": "7de18cfb9bb3653a6d202782810abb6f5104abe398c8c075a0f32d4d41f18cbe"
+            "name": "g1-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-field-dialogue.png",
+            "sha256": "e52e0cba77db5039f286b2deff4a6708fdc067118ec2bbb3f1fa22b5308d6022",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              48.97186642729489,
+              37.09824823114009,
+              27.625261469668757
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:01:01.765338+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/first-passage-scrolled.png",
-            "sha256": "0bf3fc10e5011d490d2ea75cadb7759e611a7a480685e76c4142cabe0496ba24"
+            "name": "g1-guidance",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-guidance.png",
+            "sha256": "f47137bac097239ba2e7b999681cbc68295f57e0ad988cb08c5c9bac76c41072",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              53.82909660126901,
+              36.65020045140186,
+              26.155879491491557
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:01:09.167206+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/bible-first-discovered-contents.png",
-            "sha256": "9d9f128db4eef20ed18bb658a35311500d7960e1b7ca93410f6acbec2562f872"
+            "name": "g1-mary-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-mary-field-dialogue.png",
+            "sha256": "c834b2d2b61fd077912e6817ebf7e8fe1ba4eaa7039044c90afe22f562ad081f",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              45.211507029718746,
+              34.26613944615435,
+              26.955288714186015
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:03:28.499299+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/continued-xyz-field.png",
-            "sha256": "afbf3f044e8d3ad0e675f4e11cacd09c95e9b8c6af7208330f970e1951d9a3a0"
+            "name": "g1-temple-field-dialogue",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-temple-field-dialogue.png",
+            "sha256": "c5c433a55c2089f2155f64c140468bceed154a12d722c19026b1846120076521",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              52.45672233896385,
+              40.40064921941082,
+              31.076981900775024
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:05:27.160661+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/actual-status.png",
-            "sha256": "a2b2c50750776c40fcfcc7f961539301454df12515b86ffbcebc6e1fc882503e"
+            "name": "g1-field-scripture-recorded",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-field-scripture-recorded.png",
+            "sha256": "4bdedc4c4fca50f51d7fe2c1f060625d5e6ff51799894878d9197b2260aeddb0",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              99.1259736118905,
+              90.13009669125877,
+              81.93035024441883
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:05:36.494416+00:00"
           },
           {
-            "file": "Artifacts/Validation/Nativity/Mobile844/PathOfDawn/continued-physical-bible.png",
-            "sha256": "d5f3a65ba2aa5498466909e96f8be4e6e449ba66c358c06576055e4c4d750ffa"
+            "name": "g1-continued",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-continued.png",
+            "sha256": "43688b94469ee15e0d38946ef0ad6e70ade92221a0690397d7bec32476ebd6bd",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              50.680738425701016,
+              36.896034482386355,
+              28.79435451426261
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:07:01.713890+00:00"
+          },
+          {
+            "name": "continued-physical-bible",
+            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/continued-physical-bible.png",
+            "sha256": "1e5529726b077519d371e4669a895593d1de8c5f7ece076c1add9262ded4d2b2",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              99.4453704153593,
+              90.93222908233075,
+              82.66580178489997
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T07:07:06.338366+00:00"
           }
-        ]
+        ],
+        "scope": "Fresh changed-game actual input and exact-source runtime; physical device and human audio approval are separate."
       }
     ]
   },
+  "reusedBrowserEvidence": [
+    {
+      "preserved": true,
+      "revision": "fm-nativity-2026-11-02",
+      "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c",
+      "native": {
+        "file": "Artifacts/Validation/Nativity/Native/FantasyCards/binding.json",
+        "sha256": "5431804cbd5dfb800ea18867fe84aea49483b1145cde3bee24c43624f1ce3ee7",
+        "bytes": 589
+      },
+      "targets": {
+        "Web": {
+          "evidence": {
+            "file": "/tmp/firstgame-nativity-builds/FantasyCards/Web/BuildEvidence.txt",
+            "sha256": "2fe45b9d5eb74782be52bdb019152c1152d3b574563c19faf18f9c02db99e5a8",
+            "bytes": 262
+          },
+          "inputs": {
+            "file": "/tmp/firstgame-nativity-builds/FantasyCards/Web/BuildInputs.json",
+            "sha256": "18e26606cf7f5fa4a775b69cf66e76c6b838fea8e755c374df6bca5116ea512c",
+            "bytes": 8101750
+          },
+          "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c"
+        }
+      },
+      "browserReports": [
+        {
+          "game": "FantasyCards",
+          "profile": "Desktop720",
+          "report": {
+            "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/report.json",
+            "sha256": "511c8db418c7aeed418eb3ed77bf0d24fb6f9f41efa771bee1ced50b6cd6c9fa",
+            "bytes": 12485813
+          },
+          "approvedOriginals": [
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/title.png",
+              "sha256": "322ae9c525bae7476c87706695beabcb93ec453b196222659593a389097bc405"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/shop.png",
+              "sha256": "a0a225d270909b58ed665e707adabae6a3ce88bc9e57fc7a58e5be1db7662eae"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/five-card-reveal.png",
+              "sha256": "9d2f75f01ebc529be274bb8a2075107630217c1b7c0aa0134dea2ce822918b91"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/continued-quest-battle.png",
+              "sha256": "217707d8f74a753e4a6222061c4cb8ed0bdf27ebcb5be6a3f7a9d63c3c5f7d70"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/deck-forty-nine-save-disabled.png",
+              "sha256": "18c3b28641b888c6ae87d9e617edc1e5359720bb12fd8cdc36e2424d71e937d4"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Desktop720/FantasyCards/owned-fifty-five.png",
+              "sha256": "2eedf984037d0935f81f8533120c103a70c4ea17b6f7e9751a85565d6b322741"
+            }
+          ]
+        },
+        {
+          "game": "FantasyCards",
+          "profile": "Mobile844",
+          "report": {
+            "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/report.json",
+            "sha256": "6daf0f5d6b47f5f3dfab3f257a10554096750984db6242033127111f2ff3b0be",
+            "bytes": 12481610
+          },
+          "approvedOriginals": [
+            {
+              "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/title.png",
+              "sha256": "241b7b8ec01d00a1e5a7a2aa75ac165d567d0109251abb04a863a0df61ce270b"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/shop.png",
+              "sha256": "fccb8f7258ad36c67f9dffec68ca3b6f2108bd1912e2be4a946d02de37f8c65f"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/five-card-reveal.png",
+              "sha256": "a4bd6855117f35285d51c36d5d78f735c39af38bec7b5b59d0ee942b4a415aef"
+            },
+            {
+              "file": "Artifacts/Validation/Nativity/Mobile844/FantasyCards/continued-quest-battle.png",
+              "sha256": "0298b513a18a552dae0f5691b84260c5eda274f5c136334043d706e9d67974ae"
+            }
+          ]
+        }
+      ],
+      "priorPublicProof": {
+        "report": {
+          "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+          "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+          "bytes": 16927726
+        },
+        "manifest": {
+          "file": "/tmp/firstgame-nativity-staged-site/build-manifest.json",
+          "sha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+          "bytes": 2100655
+        },
+        "baseUrl": "https://ka8877.github.io/firstgame/",
+        "verifiedFiles": 15413,
+        "approvedOriginals": [
+          {
+            "file": "Artifacts/Validation/Nativity/PublicPortal/landing-1440.png",
+            "sha256": "c7d17684238ccc253132e7c734f1452cf0c99e88364fa076251eb5bb72ca734d",
+            "captureKind": "original-full-page",
+            "viewport": {
+              "width": 1440,
+              "height": 1050
+            }
+          },
+          {
+            "file": "Artifacts/Validation/Nativity/PublicPortal/landing-390.png",
+            "sha256": "97192247b788f63f30b4a22b59575c54da7105ca7f112c79e34f5e491ab87ebe",
+            "captureKind": "original-full-page",
+            "viewport": {
+              "width": 390,
+              "height": 844
+            }
+          }
+        ],
+        "reviewedUtc": "2026-11-02T12:00:12.890416+00:00"
+      },
+      "scope": "Actual prior Cards results and byte-identical last successful runtime, explicitly retained; not a new Cards execution."
+    }
+  ],
   "incompleteBrowserRuns": [],
   "adjudicatedBrowserReports": [],
-  "reusedBrowserEvidence": [],
-  "siteBudgetBytesIncludingManifest": 985000000
+  "siteBudgetBytesIncludingManifest": 985000000,
+  "preservedPublic": {
+    "manifest": {
+      "file": "/tmp/firstgame-nativity-staged-site/build-manifest.json",
+      "sha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+      "bytes": 2100655
+    },
+    "audit": {
+      "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+      "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+      "bytes": 16927726
+    },
+    "scope": "Prior complete stage retained byte-for-byte except changed Gospel runtime. Existing hero/notices/site CSS and Card files unchanged."
+  }
 }
