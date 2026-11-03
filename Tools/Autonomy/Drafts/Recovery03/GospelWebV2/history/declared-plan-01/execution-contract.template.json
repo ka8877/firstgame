@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "status": "template-missing-future-current-native-refs-and-actual-launcher-review",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "game": "PathOfDawn",
+  "revision": "gospel-facing-2026-11-03",
+  "contentVersion": "gospel-0.1.0",
+  "engine": "6000.3.26f1",
+  "expectedSourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+  "attempt": "GospelWeb01",
+  "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/WebRuns/GospelWeb01",
+  "buildRoot": "/tmp/firstgame-c1-recovery02-gospelweb01-builds",
+  "buildFolder": "/tmp/firstgame-c1-recovery02-gospelweb01-builds/PathOfDawn/Web",
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+    "sha256": "5bdd527f935dce6629eb738396b664833628b49fe77f7c3e218b65ee0a44347c",
+    "bytes": 5865
+  },
+  "actualFreshNative": {
+    "binding": null,
+    "xml": null,
+    "inputManifest": null,
+    "productSummary": null,
+    "rootReview": null,
+    "requirements": [
+      "Fill only with actual newly completed current Gospel Native exact16 original references; no historical G2 result substitution.",
+      "Actual all16 XML Passed/no duplicate or omission/failed0/skipped0; current binding passed exit0/sourceChangedDuringRun=false/FP255e/XML and inputSHA exact.",
+      "Product summary scope product-native-only/statuspassed/publishReadyfalse and actual original capture set retained.",
+      "Explicit Root review follows actual completed Native, binds the same XML/binding/input/source and original captures."
+    ]
+  },
+  "nativeReferenceForOriginalRestorer": {
+    "destination": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/WebRuns/GospelWeb01/Native/PathOfDawn/inputs-before.json",
+    "operation": "Before common build, copy the original bytes of actualFreshNative.inputManifest into a new absent destination and verify fullref SHA/bytes equality.",
+    "purpose": "Original restore-nativity-build-additions.py requires validationRoot/Native/PathOfDawn/inputs-before.json. This is a copied current Native source reference, not a new Native execution."
+  },
+  "executionSources": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/repair-generated-cache-links.py",
+      "sha256": "968e0e39f230b2981805353210a3b85ee9dd60d04f43b35ad5ff9e14f10d0d56",
+      "bytes": 1015
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildCommands.cs",
+      "sha256": "33ad184566e522054a544628eea2e5f8b23a8e7fcc11cf0e5267ee70c22edce9",
+      "bytes": 5341
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/LegacyResourceIsolation.cs",
+      "sha256": "8c6bcd9d9c1815494c6c42f3c6c447b1ad2ea339d48278a60037e9493620f816",
+      "bytes": 13677
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/ProjectSetup.cs",
+      "sha256": "b02390801fa32fe76f6fd06d9f3822bebfed72661a8f73cbd6aa88bdd155ef8b",
+      "bytes": 59512
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/PilgrimageProjectSetup.cs",
+      "sha256": "3fabb43aceaf80197d456660bec6cd76a435eb96dceafa394df896169aaa41f8",
+      "bytes": 9159
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/ProjectVersion.txt",
+      "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+      "bytes": 85
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/FirstGameSetup.version",
+      "sha256": "2bdad1f4fbbc215d1f209e796245c5fc2bbfebba3d0134a141bef00226638b81",
+      "bytes": 37
+    }
+  ],
+  "existingTrustedGuard": {
+    "file": "Tools/Autonomy/cycle_guard.py",
+    "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+    "bytes": 15866
+  },
+  "afterSuccessProof": {
+    "originalDraftSource": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/DurableBuildProofDraft/preserve_completed_build_proof.py",
+      "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+      "bytes": 16139
+    },
+    "expectedInstalledFile": "Tools/Validation/preserve-completed-build-proof.py",
+    "expectedInstalledSha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+    "expectedInstalledBytes": 16139,
+    "mustRunAfterEntireBuildAndRestorationExit0": true,
+    "copyCoreRuntime": true
+  },
+  "oldRuntimeComparison": {
+    "manifest": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    },
+    "restorationReport": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+      "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+      "bytes": 29882757
+    },
+    "oldSiteRoot": "/tmp/firstgame-recovery-g2-site-20261103",
+    "oldRuntimeRoot": "/tmp/firstgame-recovery-g2-site-20261103/games/path-of-dawn",
+    "core5": [
+      {
+        "role": "data",
+        "publicFile": "games/path-of-dawn/Build/4523bdd68d479bc9f4a24570a8b10cae.data.unityweb",
+        "runtimeFile": "Build/4523bdd68d479bc9f4a24570a8b10cae.data.unityweb",
+        "sha256": "3c65b1fb530463026308cfa36790b45ab13a7517448259c795f4b95d2fb9c56f",
+        "bytes": 93688564,
+        "originalGitBlob": "3504f546ef739d049e090715c3de5586b091810a",
+        "datedRestoreGetUtc": "2026-11-03T15:42:47.018767+00:00"
+      },
+      {
+        "role": "wasm",
+        "publicFile": "games/path-of-dawn/Build/5e3595463619393234912cd0c67502c5.wasm.unityweb",
+        "runtimeFile": "Build/5e3595463619393234912cd0c67502c5.wasm.unityweb",
+        "sha256": "3d67d55f15ecb1e35d750503bdb8d6d3b77403bd11cffcfe6925da4e23ef8d28",
+        "bytes": 15785046,
+        "originalGitBlob": "ca80d145e7bec6a1f98ff854eab0fc3954cf76e6",
+        "datedRestoreGetUtc": "2026-11-03T15:42:41.673648+00:00"
+      },
+      {
+        "role": "framework",
+        "publicFile": "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb",
+        "runtimeFile": "Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb",
+        "sha256": "5a1ce7c1cda220177c6f165e2c0b75d168b9f8d01a436abb41ac7c289d8cabae",
+        "bytes": 92792,
+        "originalGitBlob": "92b8979685200ced7415b6879d50c5af51e750a6",
+        "datedRestoreGetUtc": "2026-11-03T15:42:40.006202+00:00"
+      },
+      {
+        "role": "loader",
+        "publicFile": "games/path-of-dawn/Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js",
+        "runtimeFile": "Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js",
+        "sha256": "8c635f5247c4e4e356e8109a3b49c1a7f7081141040e64b36bb6a34ec6ca6b17",
+        "bytes": 47867,
+        "originalGitBlob": "543be10879450cc2b4eb20ca236d8435b72c919e",
+        "datedRestoreGetUtc": "2026-11-03T15:42:40.151289+00:00"
+      },
+      {
+        "role": "index",
+        "publicFile": "games/path-of-dawn/index.html",
+        "runtimeFile": "index.html",
+        "sha256": "eb3e1b5998d0a6bd458e84b403532001d939fc1c40513a786fd67dbb337c04b8",
+        "bytes": 7333,
+        "originalGitBlob": "7a4801c5503b6edd3c9571c77d39920b4377b04f",
+        "datedRestoreGetUtc": "2026-11-03T15:42:41.919534+00:00"
+      }
+    ],
+    "actualComparisonRequired": "Read actual restored old and actual new five core files; compare each role full raw byte stream plus SHA256/bytes. Verify old actual files against original pinned manifest and restored GET rows before and after. Also compare exact whole runtime file set to original manifest runtime scope; old public ThirdParty notices are a separate staging scope.",
+    "coreByteEqualRequires": [
+      "exact five roles",
+      "all actual old bytes equal original manifest SHA/restoration bytes",
+      "new and old actual raw byte streams equal",
+      "same relative runtime filename set",
+      "new complete runtime scope exactly equals old core5 (no unreported extra runtime files)"
+    ],
+    "ifEqual": "Record exact-runtime-witness candidate; this only supplies new actual build provenance for identical retained runtime. Native/Web/browser/Root/public/CI/current source/whole-site paired gates still required.",
+    "ifDifferent": "Record actual per-role differences and fresh runtime unchanged-current-source. Keep old whole-site rollback and all old bytes/metadata intact; do not attach new BuildInputs/Evidence to old runtime or claim byte preservation. Follow Root-authorized paired recovery with both games fresh validation.",
+    "neverDo": [
+      "Rewrite missing historical BuildInputs/BuildEvidence/seal/audit",
+      "Treat old manifest historical publishReady=true as current publication approval",
+      "Publish or overwrite old site from this build-only lane"
+    ]
+  },
+  "requiredRestorationEvidence": {
+    "pipelineRecord": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/WebRuns/GospelWeb01/PathOfDawn/GospelWeb01/PipelineState/web/record.json",
+    "generatedAdditionsRecord": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/WebRuns/GospelWeb01/PathOfDawn/GospelWeb01/GeneratedProjectAdditions/record.json",
+    "gospelLegacyJournal": "/tmp/firstgame-c1-recovery02-gospelweb01-builds/PathOfDawn/Web/LegacyResourceExclusions.json",
+    "requirements": [
+      "Common shell actual exit0 after Unity and both Python restorers.",
+      "Pipeline record status restored and all three Before/After originals retained; current three assets byte equal Before snapshots.",
+      "GeneratedProjectAdditions record status restored-approved-inputs and sourceFingerprint exact255e, with moved generated extras retained.",
+      "Actual BuildEvidence Succeeded/errors0/WebGL/current revision/content/engine/FP; actual LegacyResourcesRestored:true.",
+      "Actual LegacyResourceExclusions targetWeb/revisioncurrent/statusrestored/move count match and all isolated source files/meta/GUID-restoration witness retained.",
+      "Entire current authored rows exact to fresh Native and actual new BuildInputs except original timestamp/scope metadata differences; source verified before and after.",
+      "No unresolved Library/FirstGameLegacyResourceBuild.json at start or successful end; if present preserve journal and stop for explicit owned recovery."
+    ]
+  },
+  "boundedExecution": {
+    "owner": "/root/release_recovery",
+    "sourceAndInvocationMustBePreserved": true,
+    "privateChildProcessGroup": true,
+    "sharedTotalBudgetSecondsMaximum": 900,
+    "leaseReserveSeconds": 60,
+    "latestGuardRule": "After each actual remote guard returns, recompute safeEnd=min(originalBatchStart+900, leaseDeadline-60); require positive sufficient remaining before each child and do not reset batch start.",
+    "timeoutRule": "Use the shorter remaining safeEnd budget; stop only the process group created by this invocation; preserve actual exit/timeout/interrupt and all outputs.",
+    "noAutoAcquireReleaseExtendRetry": true,
+    "guardRunIsNotAnExistingLeaseLauncher": "cycle_guard.py run acquires its own lease; do not invoke it over a currently held lease. Only owner chooses and implements current controlled launch.",
+    "cleanupOutsideActualCommandBudget": "Common shell/Unity and after-success child work share <=900 actual execution seconds and lease-60 safeEnd. Only own-group cleanup may take its bounded additional wait, within the reserved60 seconds; never extend actual Unity time."
+  },
+  "generatedEnvironmentLimits": {
+    "uniqueBuildRootUnderTmp": true,
+    "persistentValidationAndProof": true,
+    "newEmptyChildPycache": true,
+    "existingCommonTmpdir": "/tmp/firstgame-nativity-temp",
+    "existingUpmCache": "/tmp/firstgame-reprise-upm-cache",
+    "note": "nativity-task.sh sets its common generated TMPDIR/UPM_CACHE_ROOT itself. No claim of unique shared caches, no HOME/credential/proxy/TLS change."
+  },
+  "failurePolicy": [
+    "Preserve partial unique build, logs, pipeline Before/After, isolation Library journal and generated-addition originals. Never delete or overwrite failed attempts.",
+    "Timeout may interrupt isolation/restoration; do not call proof helper or claim source restored. Owner inspects actual process idleness, journal and source before any explicit supported recovery.",
+    "No automatic re-run or source repair from this plan; owner tracks same-cause retry bound and next attempts use unique paths.",
+    "Original shell has no external-timeout trap, so Unity timeout/KILL can skip Python restore steps and C# finally. Record pending-restoration/false readiness, preserve actual journal/source state, and follow only conditional original ownerRecoveryAfterFailureOnly entries; never infer that finally ran.",
+    "Original pipeline restore requires a new After directory. A snapshotted record with existing After is partial restoration and cannot be resumed by re-running that command; preserve and stop for explicit owner diagnosis."
+  ],
+  "finalStillRequired": [
+    "Actual current Gospel Native16/Root and current CardNative checks",
+    "Both games fresh Web and actual PC/touch/public normal-input source/runtime/current rules/save/audio/reload evidence",
+    "Direct Root original review",
+    "Current clean source Core/CI/Pages evidence",
+    "Complete SHA-bound whole-site <985000000 bytes, exact rollback and distinct final paired recovery seal"
+  ],
+  "requiredPreflight": {
+    "actualOwnerAndLease": "Sole owner rechecks actual environment/disk/license/current refs/process idle and runs existing guard check using the actual acquired unchanged lease record; record raw request/result and immutable lease snapshot. No acquire/release/steal/extension here.",
+    "absenceAndRegularity": "Before creating anything, require new buildRoot, validation runRoot, task attempt output and BuildProof output all absent, no symlink at any parent; preserve previous successful or partial outputs. Custom build-root protection must be supplied by owner because the original .sh only guards default-root BuildEvidence.",
+    "recordBeforeBuild": "Create only the declared new persistent run; copy raw contract/command-plan, fresh Native references/Root review, original manifest/restore report, actual launcher source+SHA and pinned source originals; preserve argv/environment whitelist/start/actual exit/log references without secrets.",
+    "pythonSourcePolicy": "Use the same new absent empty run/GeneratedPythonCache and PYTHONDONTWRITEBYTECODE=1/PYTHONOPTIMIZE=0 for build/restorers/proof; no old cache substitution or disabling asserts.",
+    "inputComparison": "Fresh Native and new BuildInputs original JSON are separately retained; compare complete files array and fingerprint, not whole JSON byte identity because actual startedUtc/scope differ.",
+    "source": "Require current full authored files/FP exact to fresh Native before actual build. After entire shell exit0, recheck current full authored files/FP exact and all pinned producer/helper source files unchanged before proof."
+  }
+}

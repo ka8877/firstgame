@@ -1,0 +1,126 @@
+from pathlib import Path
+import hashlib
+import json
+import tempfile
+import time
+import traceback
+
+REPO = Path('/workspace/firstgame')
+OUT = REPO / 'Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/ToolJournalTests'
+SOURCE = REPO / 'Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py'
+EXPECTED = '6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7'
+raw = SOURCE.read_bytes()
+assert hashlib.sha256(raw).hexdigest() == EXPECTED
+namespace = {'__name__': 'isolated_recovery_journal_test', '__file__': str(SOURCE)}
+exec(compile(raw, str(SOURCE), 'exec', dont_inherit=True, optimize=0), namespace)
+assert namespace['JOURNAL_LEAF'] == 'FirstGameLegacyResourceBuild.json'
+fixture = Path(tempfile.mkdtemp(prefix='firstgame-isolated-web-journal-'))
+results = []
+
+
+def setup(name):
+    root = fixture / name
+    logical = root / 'Games/PathOfDawn/Library'
+    target = root / 'PhysicalCache/Library'
+    logical.parent.mkdir(parents=True)
+    target.mkdir(parents=True)
+    logical.symlink_to(target, target_is_directory=True)
+    namespace['ROOT'] = root
+    namespace['LIBRARY_TARGET'] = str(target)
+    return root, logical, target, root / 'Artifacts/Validation/Attempt'
+
+
+def verify(name, function):
+    try:
+        details = function()
+        results.append({'name': name, 'status': 'passed', 'details': details})
+    except BaseException as error:
+        results.append({'name': name, 'status': 'failed', 'error': str(error), 'traceback': traceback.format_exc()})
+
+
+def absent():
+    root, logical, target, run = setup('absent')
+    a = namespace['preserve_library_journal'](run, time.monotonic() + 5)
+    b = namespace['preserve_library_journal'](run, time.monotonic() + 5, temporary=True)
+    assert a['captureComplete'] and b['captureComplete']
+    assert a['status'] == b['status'] == 'absent-verified-known-alias'
+    assert not run.exists()
+    return {'primaryStatus': a['status'], 'temporaryStatus': b['status']}
+
+
+def primary():
+    root, logical, target, run = setup('primary')
+    data = '{"status":"excluded","note":"원문 보존"}\n'.encode()
+    (target / namespace['JOURNAL_LEAF']).write_bytes(data)
+    assert namespace['regular'](logical / namespace['JOURNAL_LEAF']) is False
+    a = namespace['preserve_library_journal'](run, time.monotonic() + 5)
+    saved = root / a['preserved']['file']
+    assert a['captureComplete'] and a['status'] == 'preserved-exact-resolved-journal'
+    assert saved.read_bytes() == data == (target / namespace['JOURNAL_LEAF']).read_bytes()
+    assert a['preserved']['sha256'] == hashlib.sha256(data).hexdigest()
+    return {'oldLogicalRegularCheckReproducedFalse': True, 'preservedSha256': a['preserved']['sha256']}
+
+
+def temporary():
+    root, logical, target, run = setup('temporary')
+    data = b'{"status":"pre-move-temporary","moves":["unchanged"]}\n'
+    (target / (namespace['JOURNAL_LEAF'] + '.tmp')).write_bytes(data)
+    a = namespace['preserve_library_journal'](run, time.monotonic() + 5, temporary=True)
+    assert a['captureComplete'] and a['journalKind'] == 'pre-move-temporary'
+    assert (root / a['preserved']['file']).read_bytes() == data
+    assert not (target / namespace['JOURNAL_LEAF']).exists()
+    return {'preservedSha256': a['preserved']['sha256'], 'onlyExactTemporaryLeafRead': True}
+
+
+def unknown_alias():
+    root, logical, target, run = setup('unknown-alias')
+    other = root / 'OtherCache'
+    other.mkdir()
+    (other / namespace['JOURNAL_LEAF']).write_text('MUST NOT COPY')
+    logical.unlink()
+    logical.symlink_to(other, target_is_directory=True)
+    a = namespace['preserve_library_journal'](run, time.monotonic() + 5)
+    assert not a['captureComplete'] and not a['mappingVerified']
+    assert not run.exists() and 'preserved' not in a and 'resolvedSource' not in a
+    return {'status': a['status'], 'mappingVerified': a['mappingVerified']}
+
+
+def linked_leaf():
+    root, logical, target, run = setup('linked-leaf')
+    outside = root / 'UnacceptedFile'
+    outside.write_text('MUST NOT COPY')
+    (target / namespace['JOURNAL_LEAF']).symlink_to(outside)
+    a = namespace['preserve_library_journal'](run, time.monotonic() + 5)
+    assert not a['captureComplete'] and a['mappingVerified']
+    assert not run.exists() and 'preserved' not in a and 'resolvedSource' not in a
+    return {'status': a['status'], 'leafSymlinkRejected': True}
+
+
+def deadline():
+    root, logical, target, run = setup('deadline')
+    data = b'unchanged real bytes\n'
+    source = target / namespace['JOURNAL_LEAF']
+    source.write_bytes(data)
+    a = namespace['preserve_library_journal'](run, time.monotonic() - 1)
+    assert not a['captureComplete'] and 'deadline' in a['diagnostic']
+    assert source.read_bytes() == data and not run.exists()
+    return {'status': a['status'], 'originalUnchanged': True}
+
+
+for name, function in [('absent-known-alias', absent), ('primary-exact-copy-reproduces-old-bug', primary),
+                       ('temporary-exact-copy', temporary), ('unknown-alias-refused', unknown_alias),
+                       ('journal-leaf-symlink-refused', linked_leaf), ('expired-budget-refused', deadline)]:
+    verify(name, function)
+
+assert SOURCE.read_bytes() == raw
+(OUT / 'executed-wrapper.original.py').write_bytes(raw)
+record = {'scope': 'isolated-tool-function-tests-only-not-product-Web-or-Root-approval',
+          'source': str(SOURCE.relative_to(REPO)), 'sourceSha256': EXPECTED,
+          'fixtureRoot': str(fixture), 'fakeRootAndLibraryTargetOverriddenInMemoryOnly': True,
+          'actualProjectLibraryOrAssetsModified': False, 'mainInvoked': False,
+          'UnityNetworkGitOrBrowserInvoked': False, 'publishReady': False, 'baselineReady': False,
+          'passed': sum(x['status'] == 'passed' for x in results), 'failed': sum(x['status'] == 'failed' for x in results),
+          'tests': results}
+(OUT / 'result.json').write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({'passed': record['passed'], 'failed': record['failed'], 'report': str((OUT / 'result.json').relative_to(REPO))}))
+raise SystemExit(1 if record['failed'] else 0)

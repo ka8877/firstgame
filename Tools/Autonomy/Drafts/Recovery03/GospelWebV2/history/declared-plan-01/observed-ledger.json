@@ -1,0 +1,187 @@
+{
+  "status": "source-only-declarative-plan-independently-reviewed-unexecuted",
+  "observedUtc": "2026-11-03T15:49:36.846268+00:00",
+  "publishReady": false,
+  "baselineReady": false,
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+    "sha256": "5bdd527f935dce6629eb738396b664833628b49fe77f7c3e218b65ee0a44347c",
+    "bytes": 5865
+  },
+  "contractTemplate": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+    "sha256": "513b6fc43f6dddc3c336e0bd8f46226f505c4fdf542329aa91798b28f37a2e18",
+    "bytes": 16544
+  },
+  "independentStaticReview": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/REPORT.md",
+      "sha256": "4337d94dae19e36d195cf5132f610c016cd457ce46b673db192124acc3d5b089",
+      "bytes": 5937
+    },
+    "observedRecords": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/observed-records.json",
+      "sha256": "28c6310a819264cff89835897e263cfaf042a8997959c338425584cc9f602cbb",
+      "bytes": 15488
+    },
+    "status": "no-remaining-defect-in-declared-plan-scope"
+  },
+  "existingSourcePinsObservedAgain": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/repair-generated-cache-links.py",
+      "sha256": "968e0e39f230b2981805353210a3b85ee9dd60d04f43b35ad5ff9e14f10d0d56",
+      "bytes": 1015
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildCommands.cs",
+      "sha256": "33ad184566e522054a544628eea2e5f8b23a8e7fcc11cf0e5267ee70c22edce9",
+      "bytes": 5341
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/LegacyResourceIsolation.cs",
+      "sha256": "8c6bcd9d9c1815494c6c42f3c6c447b1ad2ea339d48278a60037e9493620f816",
+      "bytes": 13677
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/ProjectSetup.cs",
+      "sha256": "b02390801fa32fe76f6fd06d9f3822bebfed72661a8f73cbd6aa88bdd155ef8b",
+      "bytes": 59512
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/PilgrimageProjectSetup.cs",
+      "sha256": "3fabb43aceaf80197d456660bec6cd76a435eb96dceafa394df896169aaa41f8",
+      "bytes": 9159
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/ProjectVersion.txt",
+      "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+      "bytes": 85
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/FirstGameSetup.version",
+      "sha256": "2bdad1f4fbbc215d1f209e796245c5fc2bbfebba3d0134a141bef00226638b81",
+      "bytes": 37
+    },
+    {
+      "file": "Tools/Autonomy/cycle_guard.py",
+      "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+      "bytes": 15866
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/DurableBuildProofDraft/preserve_completed_build_proof.py",
+      "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+      "bytes": 16139
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+      "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+      "bytes": 29882757
+    }
+  ],
+  "outputs": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/REPORT.md",
+      "sha256": "4337d94dae19e36d195cf5132f610c016cd457ce46b673db192124acc3d5b089",
+      "bytes": 5937
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/observed-records.json",
+      "sha256": "28c6310a819264cff89835897e263cfaf042a8997959c338425584cc9f602cbb",
+      "bytes": 15488
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/source-chain-observations.json",
+      "sha256": "c17769d25a8a3ea6bf0e3b888aa365ebecf4971f73cdd78f87bb5804c649ce78",
+      "bytes": 6228
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/README.md",
+      "sha256": "969f0dd21713c48a921e65b245203b2e9a8f1748482f38de5cd3c5a6c6a2f389",
+      "bytes": 12296
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+      "sha256": "5bdd527f935dce6629eb738396b664833628b49fe77f7c3e218b65ee0a44347c",
+      "bytes": 5865
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+      "sha256": "513b6fc43f6dddc3c336e0bd8f46226f505c4fdf542329aa91798b28f37a2e18",
+      "bytes": 16544
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/source-observations.json",
+      "sha256": "027b2526d9bc47f520f7961aa6f8dfdc8957142af77a7db4d42dcede7030716d",
+      "bytes": 6737
+    }
+  ],
+  "executionStillBlockedUntil": [
+    "Actual fresh GospelNative16 original binding/XML/input/summary and Root review references filled and reviewed",
+    "Actual owner controlled launcher code/argv/environment/log/exit provenance reviewed and preserved",
+    "Actual unique root absence/regularity/current ownership/idleness/license/disk/source preflight done"
+  ],
+  "staticChecks": [
+    "JSON parsed only, no project/helper imports",
+    "Native source input copy requirement of original additions-restorer explicitly planned",
+    "Original entire shell exit0 plus source/restoration checks precede separate exact helper c597 invocation",
+    "Actual command/proof share bounded900 and lease-60 safeEnd with isolated owned group cleanup",
+    "Core5 actual bytes copied by explicit flag and old/new raw byte/name/size/SHA comparison required but not performed",
+    "Timeout shell trap gap and partial After/additions state preserved as pending-restoration, not blindly re-executed"
+  ],
+  "limits": [
+    "No actual launcher/wrapper implemented or installed by this draft task",
+    "No Native/Web/build/compile/project test/Unity/browser/network/Git execution",
+    "No old/new runtime byte comparison or new public approval",
+    "Only this allowed GospelWebRunDraft folder written; current Native freeze and actual Tools/Game/Docs unchanged"
+  ]
+}
