@@ -241,7 +241,7 @@ namespace PathOfDawn.Presentation
             entry.callback.AddListener(_ => Gesture()); events.triggers.Add(entry);
         }
 
-        public void UpdateHud(GospelJourney journey, Vector3 player, Vector3 target, bool canInteract)
+        public void UpdateHud(GospelJourney journey, Vector3 player, Vector3 target, bool canInteract, Camera view = null)
         {
             if (usingBook || currentView != "journey" || objective == null) return;
             if (interact != null) interact.interactable = canInteract || journey.IsComplete;
@@ -256,9 +256,27 @@ namespace PathOfDawn.Presentation
             { navigation.text = CompletedTitle(journey); helpText.text = "성경을 펼쳐 발견한 말씀을 다시 읽어 보세요."; return; }
             string npc = story?.CurrentQuest?.NpcName ?? "다음 만남";
             float distance = new Vector2(target.x - player.x, target.z - player.z).magnitude;
-            navigation.text = canInteract ? (DawnPlatformInput.UseTouchControls ? "대화 · " : "E · ") + npc
-                : npc + "에게 가기  ·  " + distance.ToString("0.0") + "m";
+            var offset = new Vector2(target.x - player.x, target.z - player.z);
+            if (view != null)
+            {
+                var from = view.WorldToViewportPoint(player);
+                var to = view.WorldToViewportPoint(target);
+                offset = new Vector2(to.x - from.x, to.y - from.y);
+            }
+            navigation.color = canInteract ? Mint : Gold;
+            navigation.text = canInteract
+                ? npc + " · 대화 가능  " + (DawnPlatformInput.UseTouchControls ? "[대화]" : "[E]")
+                : npc + " · " + EncounterDirection(offset) + "  " + distance.ToString("0.0") + "m";
             helpText.text = GoalDescription(journey);
+        }
+
+        static string EncounterDirection(Vector2 screenOffset)
+        {
+            if (screenOffset.sqrMagnitude < .000001f) return "바로 앞";
+            var direction = screenOffset.normalized;
+            string horizontal = Mathf.Abs(direction.x) >= .45f ? (direction.x > 0 ? "오른쪽" : "왼쪽") : "";
+            string vertical = Mathf.Abs(direction.y) >= .45f ? (direction.y > 0 ? "위쪽" : "아래쪽") : "";
+            return "화면 " + horizontal + (horizontal.Length > 0 && vertical.Length > 0 ? " " : "") + vertical;
         }
 
         public void ToggleScenicView()

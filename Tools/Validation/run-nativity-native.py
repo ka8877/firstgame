@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Run one current native suite, retaining each attempt and binding exact per-game inputs."""
-import argparse,json,shutil,subprocess,sys
+import argparse,json,shutil,subprocess,sys,os
 from pathlib import Path
 from datetime import datetime,timezone
 import xml.etree.ElementTree as ET
 from restoration_source_binding import ROOT,capture,verify,digest
 p=argparse.ArgumentParser();p.add_argument('game',choices=('FantasyCards','PathOfDawn'));p.add_argument('attempt');a=p.parse_args()
-out=ROOT/'Artifacts/Validation/Nativity';stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'NativeAttempts'/a.game/stamp;attempt.mkdir(parents=True)
+out=Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', ROOT/'Artifacts/Validation/Nativity')).resolve()
+assert out.is_relative_to((ROOT/'Artifacts').resolve()),'Evidence output must stay under repository Artifacts'
+stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');attempt=out/'NativeAttempts'/a.game/stamp;attempt.mkdir(parents=True)
 def fonts():
  return [{'file':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':digest(p)} for name in ('Korean','Display') for p in [ROOT/f'Games/{a.game}/Assets/Resources/Fonts/{name}.asset']]
 font_before=fonts()

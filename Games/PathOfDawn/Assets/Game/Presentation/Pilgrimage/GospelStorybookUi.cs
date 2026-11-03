@@ -154,12 +154,28 @@ namespace PathOfDawn.Presentation
             var turn = story.CurrentStoryBeat;
             var scene = story.CurrentStoryScene;
             Begin("story", true, false);
-            PaintStoryScene(layer, scene.ArtKey, "Story scene illustration", 0, 0, 1280, 720, true);
-            var locationShade = Rect(layer, "Story location gradient", 0, 0, 1280, 156).gameObject.AddComponent<DawnGradient>();
-            locationShade.vertical = true; locationShade.left = new Color(.013f, .030f, .039f, 0);
-            locationShade.right = new Color(.013f, .030f, .039f, .84f); locationShade.raycastTarget = false;
-            Text(layer, scene.TimeLabel + "  /  " + scene.Location, 51, 28, 990, 31, 20, Gold);
-            Text(layer, scene.Title, 49, 69, 930, 46, 32, White);
+            if (story.CurrentQuest.IsPrologue)
+            {
+                // The birth account is an illustrated opening. Keep its opaque
+                // scene and established framing through every opening turn.
+                PaintStoryScene(layer, scene.ArtKey, "Story scene illustration", 0, 0, 1280, 720, true);
+                var locationShade = Rect(layer, "Story location gradient", 0, 0, 1280, 156).gameObject.AddComponent<DawnGradient>();
+                locationShade.vertical = true; locationShade.left = new Color(.013f, .030f, .039f, 0);
+                locationShade.right = new Color(.013f, .030f, .039f, .84f); locationShade.raycastTarget = false;
+                Text(layer, scene.TimeLabel + "  /  " + scene.Location, 51, 28, 990, 31, 20, Gold);
+                Text(layer, scene.Title, 49, 69, 930, 46, 32, White);
+            }
+            else
+            {
+                // A field conversation belongs to the place the player just
+                // reached. Leave that live world, player and NPC in view rather
+                // than replacing them with a full-screen story illustration.
+                var context = Panel(layer, "Field conversation context", 36, 24, 974, 101,
+                    new Color(.017f, .039f, .044f, .82f), true);
+                Rule(context, 0, 12, 2, 77, new Color(.89f, .79f, .52f, .72f));
+                Text(context, scene.TimeLabel + "  /  " + scene.Location, 18, 10, 935, 26, 18, Quiet);
+                Text(context, scene.Title, 17, 42, 935, 44, 28, White, TextAlignmentOptions.TopLeft, true);
+            }
             B(layer, "성경", 1082, 28, 145, 52, OnRead);
 
             var dialogue = Panel(layer, "Story dialogue", 36, 424, 1208, 264, new Color(.017f, .039f, .044f, .88f), true);

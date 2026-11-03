@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T04:29:25.321382+00:00",
+  "updatedUtc": "2026-11-03T05:08:03.240139+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -11,7 +11,45 @@
     "scope": "Long-term charter, baseline, prerequisites, coordination guard, first milestones and scheduling verification. No game feature or new public release in this setup.",
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
-  "activeWork": null,
+  "activeWork": {
+    "id": "G1",
+    "status": "implementation-complete-validation-in-progress",
+    "branch": "codex/g1-field-encounters-2026-11-03",
+    "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/lease.json",
+    "productChanges": [
+      "Keep physical field visible during NPC story dialogue, preserve painted birth opening.",
+      "Add camera-relative NPC direction and explicit talk-ready hint."
+    ],
+    "currentChecks": {
+      "Core": {
+        "passed": 285,
+        "failed": 0,
+        "sourceChanged": false
+      },
+      "UnityPrepare": "Prepare01 new fixture compile API failure preserved; Prepare02 succeeded after same renderer enabled+active check correction.",
+      "Native": {
+        "passed": 13,
+        "failed": 0,
+        "sourceChanged": false,
+        "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24"
+      },
+      "Web": {
+        "build": "Succeeded",
+        "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24",
+        "runtimeValidation": "in-progress",
+        "deployed": false
+      }
+    },
+    "publicStill": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
+    "candidateRevision": "gospel-encounter-2026-11-03",
+    "evidenceStorage": {
+      "nativeCaptures": "/tmp/firstgame-g1-original-captures",
+      "originalPathLink": "Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
+      "ledger": "Artifacts/Validation/Autonomy/G1-2026-11-03/capture-storage-relocation.json",
+      "bytes": 38770368,
+      "scope": "Only current G1 native originals were copied and every SHA verified before linking their original path. Prior evidence untouched. Native capture move actually recovered38.7MB; inactive official SDK cache move preserved bytes but did not recover overlay space."
+    }
+  },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
     "dirtyPathsBeforeSetup": [],
@@ -90,7 +128,7 @@
   "nextRun": {
     "id": "G1",
     "game": "PathOfDawn",
-    "status": "ready",
+    "status": "in-progress",
     "representativeSlice": {
       "fromQuest": "nazareth-departure",
       "throughQuest": "nazareth-return",

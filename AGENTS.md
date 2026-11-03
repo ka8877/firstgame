@@ -2,7 +2,7 @@
 
 ## 현재 개발 규약 — Autonomy · 2026-11-03
 
-작업을 시작할 때 [규약](Docs/Autonomy/CHARTER.md), [진행 상태](Docs/Autonomy/STATE.json), [로드맵](Docs/Autonomy/ROADMAP.md), [최신 보고](Docs/Autonomy/REPORT.md)를 먼저 읽는다. 사용자가 제공한 장기 규약이 아래 과거 회차의 지침보다 우선한다. 현재 정상 제품은 Nativity이며 처음부터 다시 만들지 않는다.
+작업을 시작할 때 [규약](Docs/Autonomy/CHARTER.md), [진행 상태](Docs/Autonomy/STATE.json), [로드맵](Docs/Autonomy/ROADMAP.md), [최신 보고](Docs/Autonomy/REPORT.md)를 먼저 읽는다. 사용자가 제공한 장기 규약이 아래 과거 회차의 지침보다 우선한다. 정상 소스·공개 버전은 STATE를 확인하며 처음부터 다시 만들지 않는다.
 
 이번 초기 설정의 단일 실행·통합·Git 담당은 실제 활성 `/root`다. 이후에는 원격 잠금을 실제 취득한 실행 담당 하나가 Unity·모델/대형 자산 생성·테스트·브라우저·빌드·배포를 순서대로 소유한다. 아래 `/root/remaster_release` 등의 이름은 **지난 회차 소유권**이며 존재한다고 가정하지 않는다. 소스 보조 작업은 파일 소유권을 나누고 같은 씬/파일을 동시에 수정하지 않는다.
 

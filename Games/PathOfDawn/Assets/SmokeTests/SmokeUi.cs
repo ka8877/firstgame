@@ -159,13 +159,32 @@ namespace PathOfDawn.SmokeTests
                 pixels = new Texture2D(width, height, TextureFormat.RGB24, false);
                 pixels.ReadPixels(new Rect(0, 0, width, height), 0, 0);
                 pixels.Apply();
-                var directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
-                    name.StartsWith("nativity-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Nativity/Screenshots" : name.StartsWith("restage-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Restage/Screenshots" : name.StartsWith("reprise-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Reprise/Screenshots" : name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
+                var configuredCaptureRoot = Environment.GetEnvironmentVariable("FIRSTGAME_NATIVE_CAPTURE_ROOT");
+                var configuredValidationRoot = Environment.GetEnvironmentVariable("FIRSTGAME_VALIDATION_ROOT");
+                bool configuredOutput = !string.IsNullOrEmpty(configuredCaptureRoot) || !string.IsNullOrEmpty(configuredValidationRoot);
+                string directory;
+                if (configuredOutput)
+                {
+                    string captureRoot = !string.IsNullOrEmpty(configuredCaptureRoot) ? configuredCaptureRoot :
+                        System.IO.Path.Combine(configuredValidationRoot, "Screenshots");
+                    var artifacts = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, "../../../Artifacts"));
+                    Assert.That(System.IO.Path.IsPathRooted(captureRoot), Is.True, "A configured capture root must be absolute.");
+                    captureRoot = System.IO.Path.GetFullPath(captureRoot);
+                    Assert.That(captureRoot.StartsWith(artifacts + System.IO.Path.DirectorySeparatorChar, StringComparison.Ordinal), Is.True,
+                        "Configured native originals must remain in the repository Artifacts tree.");
+                    if (!string.IsNullOrEmpty(configuredCaptureRoot) && !string.IsNullOrEmpty(configuredValidationRoot))
+                        Assert.That(captureRoot, Is.EqualTo(System.IO.Path.GetFullPath(System.IO.Path.Combine(configuredValidationRoot, "Screenshots"))),
+                            "Configured capture and validation roots must describe the same originals.");
+                    directory = System.IO.Path.Combine(captureRoot, game);
+                }
+                else
+                    directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
+                        name.StartsWith("nativity-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Nativity/Screenshots" : name.StartsWith("restage-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Restage/Screenshots" : name.StartsWith("reprise-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Reprise/Screenshots" : name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
                 System.IO.Directory.CreateDirectory(directory);
                 var path = System.IO.Path.Combine(directory, name + ".png");
                 var png = pixels.EncodeToPNG();
                 Assert.That(png.Length, Is.GreaterThan(10000), "Capture contains unexpectedly little image data.");
-                if (name.StartsWith("chronicle-", StringComparison.Ordinal) || name.StartsWith("quest-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Current original capture names must be unique and preserved.");
+                if (configuredOutput || name.StartsWith("chronicle-", StringComparison.Ordinal) || name.StartsWith("quest-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Current original capture names must be unique and preserved.");
                 System.IO.File.WriteAllBytes(path, png);
                 System.IO.File.WriteAllText(path + ".txt", "Native Unity URP scene capture\n" +
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +

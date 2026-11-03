@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Retain and remove only newly generated Unity build resources/empty holding metas."""
 from pathlib import Path
-import argparse,json,shutil,sys
+import argparse,json,shutil,sys,os
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'Tools/Validation'))
 from restoration_source_binding import files,verify,digest
 p=argparse.ArgumentParser();p.add_argument('game',choices=('FantasyCards','PathOfDawn'));p.add_argument('attempt');a=p.parse_args()
-reference=json.loads((ROOT/'Artifacts/Validation/Nativity/Native'/a.game/'inputs-before.json').read_text())
+evidence=Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', ROOT/'Artifacts/Validation/Nativity')).resolve()
+assert evidence.is_relative_to((ROOT/'Artifacts').resolve()),'Evidence output must stay under repository Artifacts'
+reference=json.loads((evidence/'Native'/a.game/'inputs-before.json').read_text())
 old={r['file']:r for r in reference['files']};current={r['file']:r for r in files(a.game)}
 changed=[k for k in old if old[k]!=current.get(k)]
 assert not changed,('Authored inputs changed; no restoration permitted',changed)
@@ -15,7 +17,7 @@ base='Games/'+a.game+'/Assets/'
 holding=base+'Art/Archive/BuildExcludedLegacy'
 allowed={'PerformanceTestRunInfo.json','PerformanceTestRunInfo.json.meta','PerformanceTestRunSettings.json','PerformanceTestRunSettings.json.meta'}
 assert all((k.startswith(holding) and k.endswith('.meta')) or (k.startswith(base+'Resources/PerformanceTestRun') and k.rsplit('/',1)[1] in allowed) for k in extra),list(extra)
-out=ROOT/'Artifacts/Validation/Nativity'/a.game/a.attempt/'GeneratedProjectAdditions';assert not out.exists();out.mkdir(parents=True)
+out=evidence/a.game/a.attempt/'GeneratedProjectAdditions';assert not out.exists();out.mkdir(parents=True)
 record={'status':'prepared','scope':'Only newly generated performance resources and empty resource-isolation holding metas absent from approved Native inputs. Every byte retained here; authored inputs remain exact.','files':list(extra.values())}
 (out/'record.json').write_text(json.dumps(record,indent=2)+'\n')
 for k,row in extra.items():

@@ -13,7 +13,8 @@ export TMPDIR="/tmp/firstgame-nativity-temp"
 mkdir -p "$TMPDIR"
 source Tools/Environment/activate-shell.sh
 python3 Tools/Environment/assert-runtime-idle.py
-output="$repository_root/Artifacts/Validation/Nativity/$game/$attempt"
+export FIRSTGAME_VALIDATION_ROOT="${FIRSTGAME_VALIDATION_ROOT:-$repository_root/Artifacts/Validation/Nativity}"
+output="$FIRSTGAME_VALIDATION_ROOT/$game/$attempt"
 mkdir -p "$output"
 log="$output/$task.log"
 [[ ! -e "$log" ]] || { echo 'Existing attempt log is preserved; choose another attempt.'; exit 2; }

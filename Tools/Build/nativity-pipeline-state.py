@@ -7,6 +7,7 @@ never filtered or rebound: both prior and generated files are retained as proof.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 
@@ -32,7 +33,10 @@ def main():
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', args.attempt):
         parser.error('A task-owned unique attempt is required.')
     FILES = GOSPEL_FILES if args.game == 'PathOfDawn' else tuple('Games/FantasyCards/' + part for part in ('Assets/Settings/DesktopURP.asset', 'Assets/Settings/WebURP.asset', 'Assets/UniversalRenderPipelineGlobalSettings.asset'))
-    folder = ROOT / 'Artifacts/Validation/Nativity' / args.game / args.attempt / 'PipelineState' / args.profile
+    evidence = Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', ROOT / 'Artifacts/Validation/Nativity')).resolve()
+    if not evidence.is_relative_to((ROOT / 'Artifacts').resolve()):
+        raise SystemExit('Evidence output must remain inside repository Artifacts.')
+    folder = evidence / args.game / args.attempt / 'PipelineState' / args.profile
     record = folder / 'record.json'
     if args.action == 'snapshot':
         if folder.exists():

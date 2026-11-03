@@ -120,7 +120,7 @@ namespace PathOfDawn.Presentation
             Player.Enabled = !IsModal;
             CameraRig.InputEnabled = !IsModal;
             if (IsModal) return;
-            Ui.UpdateHud(Journey, Player.Position, ObjectivePosition, CanInteract);
+            Ui.UpdateHud(Journey, Player.Position, ObjectivePosition, CanInteract, SceneCamera);
             saveClock += Time.deltaTime;
             if (saveClock >= 25) { Save(false); saveClock = 0; }
         }
