@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T07:09:47.096325+00:00",
+  "updatedUtc": "2026-11-03T07:38:10.388073+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -12,153 +12,32 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
-    "id": "G1",
-    "status": "source-integration-and-publication-in-progress",
-    "reason": "Current1ab5 source passed Native14, Web02, Desktop74 and focused actual-touch59; Root directly reviewed9 originals each. Source integration/stage/publication and fresh public checks remain pending.",
-    "resumeBranch": "codex/g1-field-encounters-2026-11-03",
-    "candidateCommit": "313fc78280dec044f669a29adb5f9abc2603f78f",
-    "candidateRevision": "gospel-encounter-2026-11-03",
-    "sourceChanges": [
-      "Live physical-field NPC dialogue preserving painted opening.",
-      "Camera-relative direction, distance and talk-ready HUD.",
-      "Guide presentation depth1→-1 passed Native14 actual coping/head visibility and old Reading XYZ regression; current Web02/PC74/touch59 and Root originals passed. Source integration/stage/publication/fresh public gates remain pending."
-    ],
-    "requiredNativeCases": 14,
-    "currentCandidateValidated": false,
-    "beforeCorrectionEvidence": {
-      "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24",
-      "Core": {
-        "passed": 285,
-        "failed": 0,
-        "stillCurrentCoreInputs": true
-      },
-      "Native": {
-        "passed": 13,
-        "failed": 0,
-        "sourceChanged": false
-      },
-      "Web": {
-        "status": "Succeeded",
-        "root": "/tmp/firstgame-g1-builds"
-      },
-      "Desktop": {
-        "mechanicalChecks": 74,
-        "status": "passed",
-        "actualNPCs": [
-          "Joseph",
-          "Mary",
-          "temple guide"
-        ],
-        "scriptureCount": 12,
-        "goalCount": 14,
-        "saveAndFullReload": true,
-        "visualReview": "changes-requested",
-        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/report.json",
-        "sha256": "e62b2245810d76bc3039cd1ef58a3650569dd6186d03f82a03cb17ac3d774986"
-      }
+    "id": "G2",
+    "game": "PathOfDawn",
+    "status": "selected-not-started",
+    "applied": false,
+    "reason": "Actual public G1 Joseph frame confirms player can face away on dialogue entry. Improve planted stop/target facing while preserving old Reading pose/cursor/bytes.",
+    "baseProductSource": "5e5a9dea94870674904b5e0eaf22682644354092",
+    "baseDeployment": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
+    "targetRevision": "gospel-facing-2026-11-03",
+    "evidenceRoot": "Artifacts/Validation/Autonomy/G2-2026-11-03",
+    "draft": {
+      "status": "uncompiled-unexecuted-draft-outside-repository",
+      "path": "/tmp/firstgame-g2-draft/g2-conversation-facing.patch",
+      "sha256": "fc9e084e3a154326f42090c0808d60fabb1adf52926b8e4a9abf008ea9a9bf79",
+      "baseLedger": "/tmp/firstgame-g2-draft/base-ledger.json",
+      "rootStaticReview": "Motor/App and two actual-input Native cases inspected; no obvious API issue. This is not passing product evidence.",
+      "constraint": "Only consider application after all G1 local/public gates close; compare current production base hashes and absent new files first. Preserve previous14 and add both exact Native cases for16 total; fresh Web/PC/touch/public needed."
     },
-    "blockingFinding": {
-      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
-      "issue": "The actual live temple conversation hides the guide head behind the gateway crest. Root rejected release visual approval.",
-      "sourceCause": "World QuestDepth festival-courtyard z1 lies behind gateway atz-3.4 under fixed43degree camera. Combined architecture means disabling the original renderer alone does not remove it.",
-      "candidateFix": "Presentation depth only z=-1; Core ID/X, old player save XYZ, quest/passages/voice unchanged. Native14, current Web02, PC74/touch59 and directly viewed originals pass. Fresh public visual/runtime delivery is pending.",
-      "status": "historical-rejection-locally-resolved-publication-pending"
-    },
-    "notPerformedForCurrentCandidate": [
-      "Stage985MB complete-site check",
-      "Compliant source integration with required CI",
-      "Pages deployment and fresh public runtime/input/visual verification"
-    ],
-    "evidenceRoot": "Artifacts/Validation/Autonomy/G1-2026-11-03",
-    "nativeOriginalStorage": "/tmp/firstgame-g1-original-captures linked at Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
-    "captureStorageLedger": "Artifacts/Validation/Autonomy/G1-2026-11-03/capture-storage-relocation.json",
-    "normalPublicPreserved": {
-      "commit": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
-      "manifestSha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
-      "checkedUtc": "2026-11-03T05:28:05.817225+00:00"
-    },
+    "nativeRequiredCases": 16,
+    "sourceOwner": "Assign after G1 publication owner finishes metadata/CI and owned CAS release; actual current lease must be queried.",
     "resumeSteps": [
-      "Finish strict local consumer/current source checks, save checkpoint and CAS-release current owned lease before its deadline. Do not extend or steal it.",
-      "For the next publication batch, recheck actual idle/current remote/source/runtime/environment and existing actual limits, then acquire a distinct bounded lease.",
-      "Inspect/preserve and restore only generated Boot identifier drift; commit intended source/docs, normal source integration and required CI without bypass.",
-      "Stage whole exact site under985MB while keeping Cards and prior normal stage byte-identical. Publish via existing Pages only with time for public checks.",
-      "Fresh public file/runtime/caps/input/voice/book/save/full-reload and direct original visual review must close G1 before applying any G2 or Card draft."
-    ],
-    "validationStages": {
-      "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf",
-      "Native": {
-        "attempt": "Native02",
-        "passed": 14,
-        "failed": 0,
-        "skipped": 0,
-        "sourceChanged": false,
-        "xmlSha256": "6c55e6419c67b5ac457828742fa903c968bf222c4855da35d7072d098ae87967",
-        "rootReview": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/gospel-native-review.json",
-        "rootReviewSha256": "c4e0453d2e00cfd1304566b73409fa2172125385ba5bc0da118076bb8c080652"
-      },
-      "Web": {
-        "attempt": "Web02",
-        "status": "Succeeded",
-        "root": "/tmp/firstgame-g1-fix01-builds",
-        "errors": 0,
-        "legacyResourcesRestored": true,
-        "runtimeFiles": 5,
-        "runtimeBytes": 109619261
-      },
-      "browser": "Desktop74 and focused actual-touch59 passed; Root9 original views each. Current public run pending.",
-      "stage": "pending",
-      "public": "unchanged-normal-baseline",
-      "Desktop720": {
-        "status": "passed",
-        "checks": 74,
-        "failed": 0,
-        "rootApprovedOriginals": 9,
-        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
-        "sha256": "a2940b764b6d6fa77fd879401c9b90728d92442429945f69f83986c5939e3faa",
-        "rawReportSha256": "62ac939f79a06917f8a11b532e8c42f20fe40d7da24b051e722da4ecefa8bb55",
-        "actualEncounters": [
-          "Joseph",
-          "Mary",
-          "temple guide"
-        ],
-        "scriptures": 12,
-        "quests": 14,
-        "fullBrowserReload": true,
-        "voiceBookStopAndNextSource": true,
-        "scope": "Actual cloud desktop keyboard/ordinary UI and directly inspected original frames; not physical device, human acting/aesthetic or whole-animation video approval."
-      },
-      "Mobile844": {
-        "status": "passed",
-        "checks": 59,
-        "failed": 0,
-        "rootApprovedOriginals": 9,
-        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/report.json",
-        "sha256": "f59b7603d2d26cc6a66385da7464d68e3493d710f6ba1a482a23751b21cb9aca",
-        "rawReportSha256": "57b7f1acb577369bde9a7dc606f7b602199755280179f281272c1860939a2d0a",
-        "planSteps": 69,
-        "requiredCaptures": 26,
-        "maxTouchPoints": 1,
-        "coarse": true,
-        "actualTouch": true,
-        "fullBrowserReload": true,
-        "scriptures": 12,
-        "quests": 14,
-        "scope": "Preselected focused plan; detailed opening/privacy/contents/scroll covered separately by Desktop74/Native14. Touch emulation, not a physical phone. Mary silhouette overlap retained as nonblocking quality finding."
-      }
-    },
-    "executionOwner": "/root/continuous_release",
-    "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-lease-01.json",
-    "leaseDeadlineUtc": "2026-11-03T07:54:03.979211+00:00",
-    "localCandidateValidated": true,
-    "validationBatch": {
-      "status": "completed-and-owned-CAS-released",
-      "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/continue-lease-01.json",
-      "deadlineUtc": "2026-11-03T07:14:56.348689+00:00",
-      "releasedUtc": "2026-11-03T07:08:30Z",
-      "receipt": "Artifacts/Validation/Autonomy/G1-2026-11-03/local-validation-complete.json",
-      "receiptSha256": "d62f4be8c06f3b67b87bc0888e6ce7bcfb13c1cb1396217443201eb521b9986a"
-    },
-    "leaseOwner": "18c5806f-a0e5-40a4-8c7a-8f35c7ff326d"
+      "Confirm G1 receipt/root-review/stage/public immutable SHA and actual prior owner idle/released; check source/main/dirty files/runtime/storage and acquire a distinct bounded G2 lease.",
+      "Compare draft base SHA; apply only App/Motor/new Native test/meta on a new G2 branch. Set actual Editor revision before source freeze. No Card draft application.",
+      "Reuse existing algorithms with unique G2 output/build/stage/profile and exact old14+new2 Native16/currentCore285. Follow /tmp/firstgame-g2-draft/G2-release-adaptation-audit.md; do not call G1.current_build as a historical validator after source changes.",
+      "Fresh Native/Web/ordinary PC+touch including new dialogue-facing Book/reload and existing encounters/Scripture/save, direct Root originals and runtime binding. Keep failed attempts/source histories and public G1 until all gates pass.",
+      "Normal source/CI/existing Pages/public delivery+input+Root verification and immutable receipt before marking G2 complete. Then Card capability UI with independent original enum fixtures; keep unknown fixed-DP rules open."
+    ]
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -178,20 +57,22 @@
   },
   "games": {
     "PathOfDawn": {
-      "revision": "gospel-nativity-2026-11-02",
+      "revision": "gospel-encounter-2026-11-03",
       "quests": 23,
       "passages": 19,
       "openingStoryScreens": 51,
       "keyVoiceLines": 28,
-      "nextMilestone": "G1",
-      "lastCompleteProductValidation": "Nativity historical: Core/native/Web/6browser profiles and live release; see Docs/NativityValidation.md. Not rerun as complete gameplay in this setup."
+      "nextMilestone": "G2",
+      "lastCompleteProductValidation": "G1 sealed current Core285/Native14/PC74/localTouch59/publicTouch62/Root originals/public files/tree/CI; see lastCompletedWork.receipt.",
+      "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+      "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf"
     },
     "FantasyCards": {
       "revision": "fm-nativity-2026-11-02",
       "supportedCards": 2646,
       "originalArchiveCards": 15350,
       "unsupportedArchiveCards": 12704,
-      "nextMilestone": "C1",
+      "nextMilestone": "C1 capability labels/filter correction; fixed-DP rule priority remains unresolved",
       "rarityCounts": {
         "Free": 393,
         "Common": 1339,
@@ -205,40 +86,47 @@
         "Secret": 21
       },
       "fidelityBaseline": "2016 preserved official FAQ and date-verified 2017 screens; old2005 manual explicitly supplemental, final pre-shutdown patch identity not proven.",
-      "assetRedistributionStatus": "Existing blanket permission unconfirmed; no new third-party public assets authorized without verification."
+      "assetRedistributionStatus": "Existing blanket permission unconfirmed; no new third-party public assets authorized without verification.",
+      "sourceCommit": "9e780c5e82250873fc9b341368b9981166316d2b",
+      "sourceFingerprint": "f906b1fe5a68e6ac7dac106af82940056631a451b513def6c42dfbaea06bb66c"
     }
   },
   "lastCompletedWork": {
-    "id": "A0",
-    "kind": "initialization",
-    "status": "completed",
-    "productFeature": false,
-    "evidenceRoot": "Artifacts/Validation/Autonomy/2026-11-03-setup",
-    "currentObservedChecks": {
-      "guardOfflineCases": 15,
-      "guardAlsoPassedPythonOptimizedMode": true,
-      "actualRemoteAcquireAndCheck": true,
-      "actualSecondAcquireSkippedExit": 75,
-      "unityVersion": "6000.3.26f1",
-      "dotnetVersion": "8.0.426",
-      "chromiumVersion": "154.0.8037.57",
-      "unityLicenseReady": true,
-      "unityCliAccountSessionReady": false,
-      "freshPublicEntryFiles": 4,
-      "publicUnityEntries": 2,
-      "publicEntriesRootReviewed": 2,
-      "runtimePageErrors": 0,
-      "runtimeConsoleErrors": 0,
-      "publicReportSha256": "29b92ef15fbc66ae856c41cc9ee43e3789cde9a0b4508956116522552d2ccd30",
-      "scope": "Current prerequisite checks, real remote contention, HTTP manifest/HTML and actual ordinary desktop entry only. No new complete native/build/gameplay/save/touch/PCM/performance pass.",
-      "titleCaptureLimit": "Two prematurely named title frames are Unity splash diagnostics, not approved game title screenshots.",
-      "freshCoreCiPassed": 285
-    }
+    "id": "G1",
+    "kind": "product",
+    "game": "PathOfDawn",
+    "status": "verified-published",
+    "completedUtc": "2026-11-03T07:35:28.739518+00:00",
+    "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+    "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf",
+    "deployedCommit": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/release-receipt.json",
+      "sha256": "d9e8a370fb3c04dd164241c0dccc2638f17dc7779f153c190e8ed11dbc0006ab",
+      "bytes": 32782
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/g1-release-receipt-review.json",
+      "sha256": "9008854997f7df326197917bf9d6ae47ce5b51f363d5fcf5d41f754e213b8e9a"
+    },
+    "checks": {
+      "Core": 285,
+      "Native": 14,
+      "Desktop720": 74,
+      "Mobile844": 59,
+      "PublicMobile844": 62,
+      "currentBrowserOriginalsRootReviewed": 27,
+      "portalOriginalsRootReviewed": 2,
+      "nativeOriginalsRootReviewed": 4,
+      "freshPublicHttpsGets": 63,
+      "inheritedIdenticalJpegs": 15350
+    },
+    "scope": "One published milestone, not completion of either whole game or the long-term goal."
   },
   "nextRun": {
-    "id": "G1",
+    "id": "G2",
     "game": "PathOfDawn",
-    "status": "resume-incomplete-G1",
+    "status": "selected-not-started",
     "representativeSlice": {
       "fromQuest": "nazareth-departure",
       "throughQuest": "nazareth-return",
@@ -250,12 +138,12 @@
       "durationMeasured": false
     },
     "tasks": [
-      "Minimally parameterize existing source-bound runner output paths for unique evidence; check storage and budget first.",
-      "Keep nativity opening; replace full-screen field NPC story painting with in-place dialogue preserving citation, voice and save semantics.",
-      "Clarify next encounter direction/distance/talk-ready state for Joseph, Mary and temple."
+      "Plant and face actual NPC only on newly accepted dialogue before saving.",
+      "Discard pre-callback input/dash intent after synchronous interaction locks the motor.",
+      "Native old Reading heading/XYZ/raw bytes and actual-input facing+Book/reload, then source-bound PC/touch/public verification."
     ],
-    "acceptance": "Actual movement through first three encounters, first field passage, book entry, save and full reconnect to identical place/dialogue. Core/native + new PC/touch Web/visual/input/reload checks before same-site publication.",
-    "resumeAt": "Complete G1 publication from current1ab5 local-validated source. G2/Card /tmp drafts remain uncompiled and unapplied until G1 public gates close."
+    "acceptance": "New accepted conversation stops immediately and faces NPC without residual XZ/dash. New heading survives Book/full reload. Old Reading heading/XYZ/cursor/raw bytes and rejected far interaction remain unchanged. Current content/art/audio/Card outputs retained.",
+    "resumeAt": "Read activeWork and completed G1 sealed evidence. Actual G2 draft is only /tmp and uncompiled; verify existence/base SHA before application."
   },
   "rotation": {
     "pattern": [
@@ -263,9 +151,8 @@
       "PathOfDawn",
       "FantasyCards"
     ],
-    "completedProductCycles": 0,
+    "completedProductCycles": 1,
     "nextSequence": [
-      "G1",
       "G2",
       "C1"
     ],
@@ -286,7 +173,14 @@
     "wholeInteractiveAgentDeadlineEnforced": false,
     "limitsNote": "run enforces its child process group only. A scheduled task runner must separately enforce entire agent time/usage/concurrency. Never raise limits or disable stops automatically.",
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
-    "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit."
+    "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
+    "currentBatchAtReport": {
+      "id": "G1-publication",
+      "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-lease-01.json",
+      "owner": "18c5806f-a0e5-40a4-8c7a-8f35c7ff326d",
+      "deadlineUtc": "2026-11-03T07:54:03.979211+00:00",
+      "status": "Product closure passed; owner completes metadata commit/CI and owned CAS release. Query live guard, this is not a current-lock token."
+    }
   },
   "environment": {
     "managedCloudObservedRunning": true,
@@ -320,22 +214,25 @@
       }
     },
     "pendingActualEditorCompile": false,
-    "note": "Initial prerequisite setup required no product compile. Subsequent G1 continuation performed fresh Native14/Editor compilation and Web02 with current exact source; PC74/touch59 actual browser runs passed. Initial auth/license probe remains historical, with licenseReady true and CLI authReady false."
+    "note": "G1 fresh Native14/Editor and Web02/PC74/localTouch59/publicTouch62 passed. Existing licensed runtime reused; no reinstall. Native/browser diagnostics are not physical-device performance. Initial prerequisite auth/license observations remain dated history."
   },
   "capacity": {
     "fileCount": 15413,
-    "totalBytes": 981781001,
+    "totalBytes": 981801334,
     "largestBytes": 98106234,
     "publishReady": true,
-    "sourceCommit": "e5fe6574b496b840a8be17cc18b2d13ed856618b",
-    "profile": "nativity",
-    "basis": "Actual stat of all staged files; unchanged public manifest exact SHA. Not a new full GET audit.",
+    "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+    "profile": "autonomy-g1",
+    "basis": "Actual complete G1 stage stat/full SHA plus current public audit/tree and sealed receipt.63 fresh non-image HTTPS GET;15350 unchanged JPEGs retain dated old response and equal new deployed Git blob identity.",
     "budgetBytesIncludingManifest": 985000000,
     "decimalPlatformBytes": 1000000000,
-    "marginBytes": 18218999,
+    "marginBytes": 18198666,
     "duplicateNoticeBytesOnly": 31622,
     "duplicateCardJpegs": 0,
-    "largeAssetGate": "Inspect BuildReport and actual unused Resources, preserve originals/GUID/ledger and quality; measure candidate build+all content before adoption. No assumed savings from lazy loading or JPEG/gzip recompression."
+    "largeAssetGate": "Inspect BuildReport and actual unused Resources, preserve originals/GUID/ledger and quality; measure candidate build+all content before adoption. No assumed savings from lazy loading or JPEG/gzip recompression.",
+    "budgetMarginBytes": 3198666,
+    "previousNativityBytes": 981781001,
+    "changeBytes": 20333
   },
   "automation": {
     "scheduleConfigured": false,
@@ -367,7 +264,7 @@
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
   "knownIssues": [
-    "G1 local Native14/Web02/PC74/touch59 and Root18browser originals passed; source integration/stage/Pages/fresh public validation remain pending. Old rejected PC originals are retained in History.",
+    "G1 is verified and public, but conversation facing, NPC personal spacing/continuity and general architecture/canopy occlusion remain quality work. G2 draft only addresses new-dialogue stopping/facing.",
     "General character/architecture occlusion is not solved: player head can still be behind the gateway beam at a special legacy saved pose.",
     "Mobile actual Mary approach can stop with overlapping player/NPC silhouettes; faces remain visible, but personal-space collision and comfortable stopping are not solved by G1 or the queued facing-only G2 draft. Preserve old Reading XYZ if addressing it.",
     "Current public site is near1GB; large asset expansion gated by measured capacity plan.",
@@ -439,5 +336,230 @@
       "rootStaticReview": "Product mapping, independent DB/ID assertions, existing fixture expectation correction and actual UI filter callbacks inspected. No compile or passing evidence.",
       "constraint": "Apply only after G1/G2 closure and Card ownership transfer; check current base SHA and absent new files. Keep fixture correction separate with independent original enum evidence; retain all existing cases and assertions. New Native uses callback UI only and no screenshot writer; fresh output path/source-bound Web/PC/touch/public checks still required."
     }
+  },
+  "workHistory": {
+    "G1": {
+      "id": "G1",
+      "status": "verified-published",
+      "reason": "All current source/native/build/local/public/Root/CI/file/tree gates passed and the immutable G1 receipt was separately reviewed by Root.",
+      "resumeBranch": "codex/g1-field-encounters-2026-11-03",
+      "candidateCommit": "313fc78280dec044f669a29adb5f9abc2603f78f",
+      "candidateRevision": "gospel-encounter-2026-11-03",
+      "sourceChanges": [
+        "Live physical-field NPC dialogue preserving painted opening.",
+        "Camera-relative direction, distance and talk-ready HUD.",
+        "Guide presentation depth1→-1 passed Native14 actual coping/head visibility and old Reading XYZ regression; current Web02/PC74/touch59 and Root originals passed. Source integration/stage/publication/fresh public gates remain pending."
+      ],
+      "requiredNativeCases": 14,
+      "currentCandidateValidated": true,
+      "beforeCorrectionEvidence": {
+        "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24",
+        "Core": {
+          "passed": 285,
+          "failed": 0,
+          "stillCurrentCoreInputs": true
+        },
+        "Native": {
+          "passed": 13,
+          "failed": 0,
+          "sourceChanged": false
+        },
+        "Web": {
+          "status": "Succeeded",
+          "root": "/tmp/firstgame-g1-builds"
+        },
+        "Desktop": {
+          "mechanicalChecks": 74,
+          "status": "passed",
+          "actualNPCs": [
+            "Joseph",
+            "Mary",
+            "temple guide"
+          ],
+          "scriptureCount": 12,
+          "goalCount": 14,
+          "saveAndFullReload": true,
+          "visualReview": "changes-requested",
+          "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/report.json",
+          "sha256": "e62b2245810d76bc3039cd1ef58a3650569dd6186d03f82a03cb17ac3d774986"
+        }
+      },
+      "blockingFinding": {
+        "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
+        "issue": "The actual live temple conversation hides the guide head behind the gateway crest. Root rejected release visual approval.",
+        "sourceCause": "World QuestDepth festival-courtyard z1 lies behind gateway atz-3.4 under fixed43degree camera. Combined architecture means disabling the original renderer alone does not remove it.",
+        "candidateFix": "Presentation depth only z=-1; Core ID/X, old player save XYZ, quest/passages/voice unchanged. Native14, current Web02, PC74/touch59 and directly viewed originals pass. Fresh public visual/runtime delivery is pending.",
+        "status": "historical-rejection-resolved-and-published"
+      },
+      "notPerformedForCurrentCandidate": [],
+      "evidenceRoot": "Artifacts/Validation/Autonomy/G1-2026-11-03",
+      "nativeOriginalStorage": "/tmp/firstgame-g1-original-captures linked at Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
+      "captureStorageLedger": "Artifacts/Validation/Autonomy/G1-2026-11-03/capture-storage-relocation.json",
+      "normalPublicPreserved": {
+        "commit": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
+        "manifestSha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+        "checkedUtc": "2026-11-03T05:28:05.817225+00:00"
+      },
+      "resumeSteps": [
+        "Completed G1. Preserve receipt and every original/history. Do not rerun old G1 current_build against changed G2 source. See activeWork G2."
+      ],
+      "validationStages": {
+        "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf",
+        "Native": {
+          "attempt": "Native02",
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "sourceChanged": false,
+          "xmlSha256": "6c55e6419c67b5ac457828742fa903c968bf222c4855da35d7072d098ae87967",
+          "rootReview": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/gospel-native-review.json",
+          "rootReviewSha256": "c4e0453d2e00cfd1304566b73409fa2172125385ba5bc0da118076bb8c080652"
+        },
+        "Web": {
+          "attempt": "Web02",
+          "status": "Succeeded",
+          "root": "/tmp/firstgame-g1-fix01-builds",
+          "errors": 0,
+          "legacyResourcesRestored": true,
+          "runtimeFiles": 5,
+          "runtimeBytes": 109619261
+        },
+        "browser": "PC74/local touch59/public touch62 passed, Root9 current originals each.",
+        "stage": {
+          "status": "passed",
+          "bytesIncludingManifest": 981801334,
+          "fileCount": 15413,
+          "manifest": {
+            "file": "/tmp/firstgame-g1-staged-site/build-manifest.json",
+            "sha256": "177b1809f9dad9e4bbe00a6397300db719f30f03b5accf9c48c0ff556e6b1560",
+            "bytes": 2120733
+          }
+        },
+        "public": {
+          "status": "verified-published",
+          "checks": 62,
+          "rootApprovedOriginals": 9,
+          "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/PublicMobile844/PathOfDawn/report.json",
+          "sha256": "5a72a4bc736b54dded50ae74b8a0c5fcf9c6405b11344b43adf69db3cea514b5",
+          "portalReportSha256": "d1b19ae80483e461f2f284cd7665fedd147e1a13d0d727c5afae07510387ef9d"
+        },
+        "Desktop720": {
+          "status": "passed",
+          "checks": 74,
+          "failed": 0,
+          "rootApprovedOriginals": 9,
+          "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
+          "sha256": "a2940b764b6d6fa77fd879401c9b90728d92442429945f69f83986c5939e3faa",
+          "rawReportSha256": "62ac939f79a06917f8a11b532e8c42f20fe40d7da24b051e722da4ecefa8bb55",
+          "actualEncounters": [
+            "Joseph",
+            "Mary",
+            "temple guide"
+          ],
+          "scriptures": 12,
+          "quests": 14,
+          "fullBrowserReload": true,
+          "voiceBookStopAndNextSource": true,
+          "scope": "Actual cloud desktop keyboard/ordinary UI and directly inspected original frames; not physical device, human acting/aesthetic or whole-animation video approval."
+        },
+        "Mobile844": {
+          "status": "passed",
+          "checks": 59,
+          "failed": 0,
+          "rootApprovedOriginals": 9,
+          "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/report.json",
+          "sha256": "f59b7603d2d26cc6a66385da7464d68e3493d710f6ba1a482a23751b21cb9aca",
+          "rawReportSha256": "57b7f1acb577369bde9a7dc606f7b602199755280179f281272c1860939a2d0a",
+          "planSteps": 69,
+          "requiredCaptures": 26,
+          "maxTouchPoints": 1,
+          "coarse": true,
+          "actualTouch": true,
+          "fullBrowserReload": true,
+          "scriptures": 12,
+          "quests": 14,
+          "scope": "Preselected focused plan; detailed opening/privacy/contents/scroll covered separately by Desktop74/Native14. Touch emulation, not a physical phone. Mary silhouette overlap retained as nonblocking quality finding."
+        }
+      },
+      "executionOwner": "/root/continuous_release",
+      "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-lease-01.json",
+      "leaseDeadlineUtc": "2026-11-03T07:54:03.979211+00:00",
+      "localCandidateValidated": true,
+      "validationBatch": {
+        "status": "completed-and-owned-CAS-released",
+        "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/continue-lease-01.json",
+        "deadlineUtc": "2026-11-03T07:14:56.348689+00:00",
+        "releasedUtc": "2026-11-03T07:08:30Z",
+        "receipt": "Artifacts/Validation/Autonomy/G1-2026-11-03/local-validation-complete.json",
+        "receiptSha256": "d62f4be8c06f3b67b87bc0888e6ce7bcfb13c1cb1396217443201eb521b9986a"
+      },
+      "leaseOwner": "18c5806f-a0e5-40a4-8c7a-8f35c7ff326d",
+      "releaseReceipt": {
+        "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/release-receipt.json",
+        "sha256": "d9e8a370fb3c04dd164241c0dccc2638f17dc7779f153c190e8ed11dbc0006ab",
+        "bytes": 32782
+      },
+      "rootReceiptReview": {
+        "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/g1-release-receipt-review.json",
+        "sha256": "9008854997f7df326197917bf9d6ae47ce5b51f363d5fcf5d41f754e213b8e9a"
+      }
+    },
+    "A0": {
+      "id": "A0",
+      "kind": "initialization",
+      "status": "completed",
+      "productFeature": false,
+      "evidenceRoot": "Artifacts/Validation/Autonomy/2026-11-03-setup",
+      "currentObservedChecks": {
+        "guardOfflineCases": 15,
+        "guardAlsoPassedPythonOptimizedMode": true,
+        "actualRemoteAcquireAndCheck": true,
+        "actualSecondAcquireSkippedExit": 75,
+        "unityVersion": "6000.3.26f1",
+        "dotnetVersion": "8.0.426",
+        "chromiumVersion": "154.0.8037.57",
+        "unityLicenseReady": true,
+        "unityCliAccountSessionReady": false,
+        "freshPublicEntryFiles": 4,
+        "publicUnityEntries": 2,
+        "publicEntriesRootReviewed": 2,
+        "runtimePageErrors": 0,
+        "runtimeConsoleErrors": 0,
+        "publicReportSha256": "29b92ef15fbc66ae856c41cc9ee43e3789cde9a0b4508956116522552d2ccd30",
+        "scope": "Current prerequisite checks, real remote contention, HTTP manifest/HTML and actual ordinary desktop entry only. No new complete native/build/gameplay/save/touch/PCM/performance pass.",
+        "titleCaptureLimit": "Two prematurely named title frames are Unity splash diagnostics, not approved game title screenshots.",
+        "freshCoreCiPassed": 285
+      }
+    }
+  },
+  "currentDeployment": {
+    "status": "verified",
+    "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+    "deployedCommit": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
+    "manifest": {
+      "file": "/tmp/firstgame-g1-staged-site/build-manifest.json",
+      "sha256": "177b1809f9dad9e4bbe00a6397300db719f30f03b5accf9c48c0ff556e6b1560",
+      "bytes": 2120733
+    },
+    "url": "https://ka8877.github.io/firstgame/",
+    "gameRevisions": {
+      "FantasyCards": "fm-nativity-2026-11-02",
+      "PathOfDawn": "gospel-encounter-2026-11-03"
+    },
+    "siteBytesIncludingManifest": 981801334,
+    "fileCountIncludingManifest": 15413,
+    "stageRoot": "/tmp/firstgame-g1-staged-site",
+    "gospelBuildRoot": "/tmp/firstgame-g1-fix01-builds",
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/release-receipt.json",
+      "sha256": "d9e8a370fb3c04dd164241c0dccc2638f17dc7779f153c190e8ed11dbc0006ab",
+      "bytes": 32782
+    },
+    "rootReceiptReview": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/g1-release-receipt-review.json",
+      "sha256": "9008854997f7df326197917bf9d6ae47ce5b51f363d5fcf5d41f754e213b8e9a"
+    },
+    "priorNormalDeploymentPreserved": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
+    "metadataCommitNote": "Later STATE/REPORT/ROADMAP-only checkpoint commits do not rebuild or change these game/runtime/manifest identities."
   }
 }
