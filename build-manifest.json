@@ -1,19 +1,19 @@
 {
-  "releaseProfile": "autonomy-g1",
+  "releaseProfile": "autonomy-g2",
   "currentTargets": [
     "Web"
   ],
-  "createdUtc": "2026-11-03T07:11:26.734701+00:00",
+  "createdUtc": "2026-11-03T10:06:47.699220+00:00",
   "publishReady": true,
   "gameRevisions": {
     "FantasyCards": "fm-nativity-2026-11-02",
-    "PathOfDawn": "gospel-encounter-2026-11-03"
+    "PathOfDawn": "gospel-facing-2026-11-03"
   },
   "contentVersions": {
     "FantasyCards": "fm-classic-0.1.0",
     "PathOfDawn": "gospel-0.1.0"
   },
-  "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+  "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
   "sourceDirty": false,
   "files": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -15396,10 +15396,10 @@
     "games/fantasy-cards/ThirdParty/Restoration-SOURCE-NOTICE.txt": "3dc8cf85a5d6dca3292050650dc6faa3f6588a10c7a4ede6ae33efcb302f5073",
     "games/fantasy-cards/ThirdParty/Revival-SOURCE-NOTICE.txt": "9e866ded1e765e57d0ccbc0f0cf128e5708f2fa96cb72a0464b7520fb808fe73",
     "games/fantasy-cards/index.html": "981bec6e884191eeee65dd34d0b579ca407460956ff7b64ac51e158f019856d0",
-    "games/path-of-dawn/Build/55597dc2dcd4f8029f086cb41e195b3b.wasm.unityweb": "da0f707d52c6c529467afecd26694dbdfaf6aa39573a6688a53df3059a84c19a",
-    "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb": "bffd4b9ef072a2fa3793952653fc0e5dfc54c18da57855cadd6a48dd7fa8324c",
+    "games/path-of-dawn/Build/4523bdd68d479bc9f4a24570a8b10cae.data.unityweb": "3c65b1fb530463026308cfa36790b45ab13a7517448259c795f4b95d2fb9c56f",
+    "games/path-of-dawn/Build/5e3595463619393234912cd0c67502c5.wasm.unityweb": "3d67d55f15ecb1e35d750503bdb8d6d3b77403bd11cffcfe6925da4e23ef8d28",
+    "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb": "5a1ce7c1cda220177c6f165e2c0b75d168b9f8d01a436abb41ac7c289d8cabae",
     "games/path-of-dawn/Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js": "8c635f5247c4e4e356e8109a3b49c1a7f7081141040e64b36bb6a34ec6ca6b17",
-    "games/path-of-dawn/Build/cb818fbe472e5788a863f7e68ee8d566.data.unityweb": "da87b30a7afa975774f3f4945493ee8e00a508dbad5798c70b57e1cbdd4858a5",
     "games/path-of-dawn/ThirdParty/AuthoredProps-SOURCE-NOTICE.txt": "0c1ee3598af0de87c1d02d11242f16f4bbf2573589e8e46249853ecde5485ea3",
     "games/path-of-dawn/ThirdParty/Chronicle-Art-SOURCE-NOTICE.txt": "8f4a438279a775af010e493c2d97e65bbf099b675772f788718b1d7c11678386",
     "games/path-of-dawn/ThirdParty/FirstGameKorean-OFL.txt": "a93334c1f1f4995de0a8d4b3212bf91a5925007d02aa3c20b1de83d9e64fe464",
@@ -15425,7 +15425,7 @@
     "games/path-of-dawn/ThirdParty/Scripture-NOTICE.txt": "cc04cb27d6af8bb715237356dc9a28a85a82000dd8fde077e69c10399fa0640a",
     "games/path-of-dawn/ThirdParty/Storybook-Art-SOURCE-NOTICE.txt": "d4f3dfb215a62a1ee3fe638b1c44a6157a851d39407be82bcd4ee993ef0e99a8",
     "games/path-of-dawn/ThirdParty/Well-Props-SOURCE-NOTICE.txt": "74e0260b6e641802e7dddce4bfbe3232d46921105e16b69d57bb8e238b8b5772",
-    "games/path-of-dawn/index.html": "ee556614411e270506e47e00761601086f1ab0e4509684b7d1d48dd3eaf5f2d4",
+    "games/path-of-dawn/index.html": "eb3e1b5998d0a6bd458e84b403532001d939fc1c40513a786fd67dbb337c04b8",
     "index.html": "42a6916c7ce51e313c64aad8161b2cb8ee56b267d17706d85c6c486d82e255ae",
     "site.css": "bd46d8a18f3c9b7417b448e289d6ca909e462bbfcbe44c3d07530ca0211dd3ea"
   },
@@ -15445,7 +15445,7 @@
   },
   "browserReportRootsByGame": {
     "FantasyCards": "Artifacts/Validation/Nativity",
-    "PathOfDawn": "Artifacts/Validation/Autonomy/G1-2026-11-03"
+    "PathOfDawn": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2"
   },
   "currentBuilds": {
     "currentTargets": [
@@ -15579,39 +15579,53 @@
       },
       "PathOfDawn": {
         "native": {
-          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Native/PathOfDawn/binding.json",
-          "sha256": "4dab7371a35df6938ea447054441064c1e35f24a502776df02fc42a834b2def9",
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/binding.json",
+          "sha256": "74b02a233f409758d9bd416a964d181841ba087deeb73ca5e4ed80f42175ff07",
           "bytes": 1199
         },
         "nativeResults": {
-          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Native/PathOfDawn/native.xml",
-          "sha256": "6c55e6419c67b5ac457828742fa903c968bf222c4855da35d7072d098ae87967",
-          "bytes": 108352
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/native.xml",
+          "sha256": "6fa8950d783d4be630d0839feb887ff28d3ff4b473528eeadef9b5b762d7c3fd",
+          "bytes": 147877
         },
         "nativeRootReview": {
-          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/gospel-native-review.json",
-          "sha256": "c4e0453d2e00cfd1304566b73409fa2172125385ba5bc0da118076bb8c080652",
-          "bytes": 2187
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Root/gospel-native-review.json",
+          "sha256": "7975793877469c22bcab958e95f68f54fb7e3e9f54d0d163e5d0da6b1584ac32",
+          "bytes": 2431
         },
         "targets": {
           "Web": {
             "evidence": {
-              "file": "/tmp/firstgame-g1-fix01-builds/PathOfDawn/Web/BuildEvidence.txt",
-              "sha256": "6ef9130f9143518ff047f8926ecf8d473f888666222ed023921c9625a5ed6402",
-              "bytes": 415
+              "file": "/tmp/firstgame-g2-builds/PathOfDawn/Web/BuildEvidence.txt",
+              "sha256": "a444c60494d2d69e0f6cbe779b904375054bdac9632c6195d8ad7f3787ddc550",
+              "bytes": 406
             },
             "inputs": {
-              "file": "/tmp/firstgame-g1-fix01-builds/PathOfDawn/Web/BuildInputs.json",
-              "sha256": "d4f98270235bb5e8555a8354ca128a3523a8cacc402c4c08c1b73f46e4db99c7",
-              "bytes": 407679
+              "file": "/tmp/firstgame-g2-builds/PathOfDawn/Web/BuildInputs.json",
+              "sha256": "730bb9b602e5fe05a322a988184efe115cfc4b06311717d0734a745d11e8b94e",
+              "bytes": 408125
             },
-            "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf"
+            "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026"
           }
         },
         "core": {
           "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Core/core-tests.trx",
           "sha256": "2c2898c7d2af227e7a7e9b7a323213855f37e2a1a95a52611de1c7b9824dd5fb",
           "bytes": 377286
+        },
+        "coreEvidence": {
+          "results": {
+            "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Core/core-tests.trx",
+            "sha256": "2c2898c7d2af227e7a7e9b7a323213855f37e2a1a95a52611de1c7b9824dd5fb",
+            "bytes": 377286
+          },
+          "binding": {
+            "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Core/binding.json",
+            "sha256": "68714a90f78eb2080342130137b45438a31efd8c14d053eddfb7431dda916726",
+            "bytes": 37132
+          },
+          "reusedPreviousActualRun": true,
+          "scope": "Actual earlier G1 run with byte-identical current Core inputs; not a new G2 execution."
         },
         "audioAssets": {
           "birth": {
@@ -15699,23 +15713,23 @@
         "game": "PathOfDawn",
         "profile": "Desktop720",
         "report": {
-          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
-          "sha256": "a2940b764b6d6fa77fd879401c9b90728d92442429945f69f83986c5939e3faa",
-          "bytes": 407227
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/report.json",
+          "sha256": "3d8715b0aa01dfda04d4e7ad03d3c011873830435274dc101da0d9b20348b23d",
+          "bytes": 493384
         },
         "approvedOriginals": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/title.png",
-            "sha256": "b70de6308e9dbe35f550e19d232982f60b72be66a6219644739fbc6c6c238bc8",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/title.png",
+            "sha256": "265d6bf2515088ea6f82230bd381fbe8b7573eb2dba73c5e9e5ab10745d66ca4",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              51.73637751854999,
-              39.57968665811552,
-              42.537062369437315
+              51.74480002783488,
+              39.58186401115102,
+              42.53953570508567
             ],
             "canvas": {
               "x": 0,
@@ -15725,43 +15739,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:39:29.202650+00:00"
-          },
-          {
-            "name": "first-scripture-quiet-notice",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/first-scripture-quiet-notice.png",
-            "sha256": "731ae14e60f1c62649d7b8a9f8aca6146821519d72dbdb0816237c1b4fd4e290",
-            "size": [
-              1280,
-              720
-            ],
-            "channelStddev": [
-              52.951908540207114,
-              37.357286728793035,
-              32.32444688777812
-            ],
-            "canvas": {
-              "x": 0,
-              "y": 0,
-              "width": 1280,
-              "height": 720
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:41:31.595142+00:00"
+            "capturedUtc": "2026-11-03T09:10:09.108137+00:00"
           },
           {
             "name": "g1-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-dialogue.png",
-            "sha256": "5babbd4dffbb5ac71f8ef0fefaac99e0e3f131412d94d213558b449bfb9b364e",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-field-dialogue.png",
+            "sha256": "47dc46e35f1292c66458cd41dbedafe6c639745f6e7ab725cef046fce5bee2ee",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              48.623834510942714,
-              38.158133460230125,
-              28.99924172802714
+              48.87016247994906,
+              38.64773764062331,
+              29.463836667270126
             ],
             "canvas": {
               "x": 0,
@@ -15771,20 +15762,204 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:47:26.121617+00:00"
+            "capturedUtc": "2026-11-03T09:18:35.715783+00:00"
+          },
+          {
+            "name": "g2-planted-facing",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-planted-facing.png",
+            "sha256": "48fe387821d1089e384494e04a78870ac8ed3e9bb0011f1a15919f1f75e674e1",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.88526844221004,
+              38.6640200277857,
+              29.47267242938399
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:18:38.173831+00:00"
+          },
+          {
+            "name": "g2-reading-bible",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-reading-bible.png",
+            "sha256": "2d5a88cd84013b395870ec29f139c2be33c044072b658da66b94e4c7a45847b8",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              102.96635156916345,
+              92.99243560902438,
+              84.1180338239882
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:19:17.697470+00:00"
+          },
+          {
+            "name": "g2-book-return-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-book-return-reading.png",
+            "sha256": "51ad591b45ca5249269c70d6c41c1c654f9d54ff4cb0d30f53d3d42f7a524ea6",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.87560176593333,
+              38.65126752997384,
+              29.4627269202404
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:19:24.986260+00:00"
+          },
+          {
+            "name": "g2-reading-before-reload",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-reading-before-reload.png",
+            "sha256": "ab40760d12929e50f3b00a4925e659fc6a14c989f7e6a56de078651df0868d12",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.887839942630436,
+              38.65628388751405,
+              29.46743308227376
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:19:29.146077+00:00"
+          },
+          {
+            "name": "g2-continued-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-continued-reading.png",
+            "sha256": "cfeaf99c638f757296359919c9a2cb4c77a13fcefcf188907bbb9cf5915b184d",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.086155861378565,
+              38.17481073457016,
+              29.847162233967687
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:20:09.359216+00:00"
+          },
+          {
+            "name": "continued-g2-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/continued-g2-reading.png",
+            "sha256": "4ff5da62bd5a303d666e25ffae33ce96392f8956a7d0db2eb5019e2934fad077",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.888070938849296,
+              38.64923416957261,
+              29.458695047468865
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:20:13.220444+00:00"
+          },
+          {
+            "name": "g2-continued-reading-bible",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-continued-reading-bible.png",
+            "sha256": "db3efd3e5fb6449569b0ad240c27b628d03381760506d29d69206b9b23e0b764",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              102.9691501414772,
+              92.99368483923554,
+              84.11809990584983
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:20:23.004751+00:00"
+          },
+          {
+            "name": "g2-continued-reading-return",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g2-continued-reading-return.png",
+            "sha256": "9e4fd0e64994eefd5f2f7529f4a2704b214bdeff841310e8ac875854df1e0c16",
+            "size": [
+              1280,
+              720
+            ],
+            "channelStddev": [
+              48.87808593080893,
+              38.65593216362055,
+              29.4607127564285
+            ],
+            "canvas": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:20:30.723499+00:00"
           },
           {
             "name": "g1-guidance",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-guidance.png",
-            "sha256": "cb115f0a8bf302c3a1ad07175d6a3fd0aff5dfa48ce5b855b28334ee897283ae",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-guidance.png",
+            "sha256": "667f307084b03429e3c04893a268d27ecb25e7d2ba081972197f4b4f027d78ec",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              54.91228414742393,
-              38.044020819771596,
-              26.96276889682586
+              53.89362820631462,
+              37.50749129510054,
+              26.827808137728447
             ],
             "canvas": {
               "x": 0,
@@ -15792,22 +15967,22 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:47:38.084227+00:00"
+            "capturedUtc": "2026-11-03T09:21:16.893415+00:00"
           },
           {
-            "name": "g1-mary-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-mary-field-dialogue.png",
-            "sha256": "bf1c151399d2a12b3d20803cdd0b497b1f0ae77812a4daa25181ae37967eccb1",
+            "name": "g1-mary-talk-2",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-mary-talk-2.png",
+            "sha256": "0ac5c79e221eb2749d70b04dcc12bb27112937a8e8ecda11daec2e62f4349e11",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              45.59386527825644,
-              35.4745904771683,
-              27.95795189332564
+              41.43442176238758,
+              33.381269892050994,
+              27.61313909735029
             ],
             "canvas": {
               "x": 0,
@@ -15815,22 +15990,22 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:49:38.409777+00:00"
+            "capturedUtc": "2026-11-03T09:23:31.104716+00:00"
           },
           {
-            "name": "g1-temple-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
-            "sha256": "1d1f64007a59672fc0f7c770d7a2431844f5381f3a77683e60d3a814eac7fc12",
+            "name": "g1-temple-guide-route-3",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-temple-guide-route-3.png",
+            "sha256": "ca33035299f2b0bf14bc669d04198cf0507977e34831fb66a72cb06a4fd29fe8",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              54.90945743408573,
-              42.30509315912952,
-              31.510557763766066
+              54.070246230282926,
+              41.82020355122318,
+              31.39163714120717
             ],
             "canvas": {
               "x": 0,
@@ -15838,22 +16013,22 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:51:49.375068+00:00"
+            "capturedUtc": "2026-11-03T09:25:53.788143+00:00"
           },
           {
             "name": "g1-field-scripture-recorded",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-scripture-recorded.png",
-            "sha256": "e238af6b1beb57a81ed12bcec694af34ef7e127a6b4ae5e02aaa5e22532c055a",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-field-scripture-recorded.png",
+            "sha256": "9ea64482bd28c0b7db06311f31617867ba4047cd3995928684800f6cdf92d606",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              100.92615193292167,
-              91.65776020751932,
-              83.25909365307356
+              100.8149517643312,
+              91.63708532125781,
+              83.2563095523791
             ],
             "canvas": {
               "x": 0,
@@ -15861,22 +16036,22 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:52:02.413616+00:00"
+            "capturedUtc": "2026-11-03T09:26:34.273322+00:00"
           },
           {
             "name": "g1-continued",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-continued.png",
-            "sha256": "4d3783ed125d2bec325b699e1d526e62e90bf4dff9c5f3adb2525fc96513ddd6",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/g1-continued.png",
+            "sha256": "087fb9354ae8327db3213faf1d2743175da3bafdb692a57dd0e97e68f3fd5120",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              51.7476100185083,
-              37.1093076003077,
-              28.16189523946733
+              51.04161140408643,
+              36.74979555989492,
+              28.09046410632542
             ],
             "canvas": {
               "x": 0,
@@ -15884,22 +16059,22 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 1,
+            "navigation": 2,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:53:44.862100+00:00"
+            "capturedUtc": "2026-11-03T09:28:13.125291+00:00"
           },
           {
             "name": "continued-physical-bible",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/continued-physical-bible.png",
-            "sha256": "473725b4da7a486612e5e90293a9cee3c8f5d4f5071b936d13e728396bdada9e",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/continued-physical-bible.png",
+            "sha256": "dcfffefa5454345c7808f8f0255b46cb16132538080b200a074048292bffe20c",
             "size": [
               1280,
               720
             ],
             "channelStddev": [
-              101.32785980231735,
-              92.54861532610238,
-              84.0825229628504
+              101.2085027621422,
+              92.52383826245287,
+              84.0775339281557
             ],
             "canvas": {
               "x": 0,
@@ -15907,34 +16082,34 @@
               "width": 1280,
               "height": 720
             },
-            "navigation": 1,
+            "navigation": 2,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:53:52.184106+00:00"
+            "capturedUtc": "2026-11-03T09:28:21.270332+00:00"
           }
         ],
-        "scope": "Fresh changed-game actual input and exact-source runtime; physical device and human audio approval are separate."
+        "scope": "Fresh G2 actual input and exact current runtime. Browser originals show facing; Native separately proves exact yaw/XYZ/cursor/save bytes. Physical-device and human audio approval are separate."
       },
       {
         "game": "PathOfDawn",
         "profile": "Mobile844",
         "report": {
-          "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/report.json",
-          "sha256": "f59b7603d2d26cc6a66385da7464d68e3493d710f6ba1a482a23751b21cb9aca",
-          "bytes": 363797
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/report.json",
+          "sha256": "8ab17bb04a8900be5fa90a27909dbff995102feeac46e599c315ef28123ed72c",
+          "bytes": 451882
         },
         "approvedOriginals": [
           {
             "name": "title",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/title.png",
-            "sha256": "30297d2ef0dcefedaa59ebbe50d1876ab914b0084f07d5b498f51a318e15f8b2",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/title.png",
+            "sha256": "eb1579eed140a552c93f1cbaa91e3f1175a5a8ea560f88bfa69024e1557dfaa0",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              50.88826794571026,
-              38.60610304103516,
-              41.72563042874076
+              50.87665713181865,
+              38.59894764382559,
+              41.718207200338355
             ],
             "canvas": {
               "x": 75.328125,
@@ -15944,43 +16119,20 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:54:34.980042+00:00"
-          },
-          {
-            "name": "first-scripture-quiet-notice",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/first-scripture-quiet-notice.png",
-            "sha256": "3d31c181c2c2e560d0f7fa62edabe5aadb9613b0e5d0e534438ee31227f6ff42",
-            "size": [
-              693,
-              390
-            ],
-            "channelStddev": [
-              52.03020230166251,
-              36.351836483314045,
-              31.482430794169854
-            ],
-            "canvas": {
-              "x": 75.328125,
-              "y": 0,
-              "width": 693.328125,
-              "height": 390
-            },
-            "navigation": 0,
-            "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T06:55:24.359595+00:00"
+            "capturedUtc": "2026-11-03T09:36:47.774444+00:00"
           },
           {
             "name": "g1-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-field-dialogue.png",
-            "sha256": "e52e0cba77db5039f286b2deff4a6708fdc067118ec2bbb3f1fa22b5308d6022",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-field-dialogue.png",
+            "sha256": "cee912b8e840f395a3645d1e5ec8a784856b013143098691bc12ce2b2fe55e26",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              48.97186642729489,
-              37.09824823114009,
-              27.625261469668757
+              47.68393218921388,
+              36.84274170483652,
+              27.963109190902205
             ],
             "canvas": {
               "x": 75.328125,
@@ -15990,20 +16142,204 @@
             },
             "navigation": 0,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:01:01.765338+00:00"
+            "capturedUtc": "2026-11-03T09:42:04.308894+00:00"
+          },
+          {
+            "name": "g2-planted-facing",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-planted-facing.png",
+            "sha256": "4e041854e76f906264d542c90d0b38b47fd0c15af2ba144c73c13a3000e81dd7",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.68208431272253,
+              36.84689561144094,
+              27.9639910164346
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:42:06.067728+00:00"
+          },
+          {
+            "name": "g2-reading-bible",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-reading-bible.png",
+            "sha256": "36dd368b0b9b4fb9cd2b9654615e45556b5185287c165fd19856371593a41c77",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              101.26819346724308,
+              91.42371278506363,
+              82.71427476293854
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:42:46.782591+00:00"
+          },
+          {
+            "name": "g2-book-return-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-book-return-reading.png",
+            "sha256": "952442195b50e20097d446bf3e271865ae53e02c8f4ca0e2d747a2600251d42c",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.68088927020323,
+              36.848806647299426,
+              27.964604084501136
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:42:50.123106+00:00"
+          },
+          {
+            "name": "g2-reading-before-reload",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-reading-before-reload.png",
+            "sha256": "7e4382e3cd8a4b3d6d68ddd2bb4b793672ee3341f5573a9f6fc3b8e221ea951f",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.684505752752486,
+              36.853086698840805,
+              27.96426253592183
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 0,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:42:51.442251+00:00"
+          },
+          {
+            "name": "g2-continued-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-continued-reading.png",
+            "sha256": "49d061e901b2a8417f9b892ca4137a8b856573fd6c64b9a415d72b220eb4467c",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.572011197165935,
+              36.98720794794111,
+              28.69483062708144
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:43:48.268687+00:00"
+          },
+          {
+            "name": "continued-g2-reading",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/continued-g2-reading.png",
+            "sha256": "354ebf6abe35c075c85bd23033fb25d78c1757fadd999cc56c7e0f97b900bd2d",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.72974227569296,
+              36.87355333902696,
+              27.967693931073047
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:43:49.719506+00:00"
+          },
+          {
+            "name": "g2-continued-reading-bible",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-continued-reading-bible.png",
+            "sha256": "d5558f1a09cdbc1280d774537456a139d431a3d28ca6cd97cbd12ff1aaa76f3c",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              101.26986128363734,
+              91.42486178753751,
+              82.71481711022547
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:43:53.676968+00:00"
+          },
+          {
+            "name": "g2-continued-reading-return",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g2-continued-reading-return.png",
+            "sha256": "c21adcfdae5f427f14bc042553d5606376d0159dd34d873366c22145cfda3fa4",
+            "size": [
+              693,
+              390
+            ],
+            "channelStddev": [
+              47.70716808414069,
+              36.86566064014348,
+              27.963934962416023
+            ],
+            "canvas": {
+              "x": 75.328125,
+              "y": 0,
+              "width": 693.328125,
+              "height": 390
+            },
+            "navigation": 1,
+            "captureKind": "original-browser-canvas-cdp",
+            "capturedUtc": "2026-11-03T09:43:58.140364+00:00"
           },
           {
             "name": "g1-guidance",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-guidance.png",
-            "sha256": "f47137bac097239ba2e7b999681cbc68295f57e0ad988cb08c5c9bac76c41072",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-guidance.png",
+            "sha256": "73d48f4b35504501b08e3d3020e529bb53e7eceba37e0b5804d98ab89a17de28",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              53.82909660126901,
-              36.65020045140186,
-              26.155879491491557
+              53.05392433524303,
+              36.63550450420067,
+              26.581729206671177
             ],
             "canvas": {
               "x": 75.328125,
@@ -16011,22 +16347,22 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:01:09.167206+00:00"
+            "capturedUtc": "2026-11-03T09:44:47.419286+00:00"
           },
           {
-            "name": "g1-mary-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-mary-field-dialogue.png",
-            "sha256": "c834b2d2b61fd077912e6817ebf7e8fe1ba4eaa7039044c90afe22f562ad081f",
+            "name": "g1-mary-talk-2",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-mary-talk-2.png",
+            "sha256": "c163446db2cb5af6955a1e1a986ea66ec13b36081fa8c4d17c854a999f4697ad",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              45.211507029718746,
-              34.26613944615435,
-              26.955288714186015
+              44.403091674742015,
+              34.104454472429495,
+              27.16535922953598
             ],
             "canvas": {
               "x": 75.328125,
@@ -16034,22 +16370,22 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:03:28.499299+00:00"
+            "capturedUtc": "2026-11-03T09:47:53.009416+00:00"
           },
           {
-            "name": "g1-temple-field-dialogue",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-temple-field-dialogue.png",
-            "sha256": "c5c433a55c2089f2155f64c140468bceed154a12d722c19026b1846120076521",
+            "name": "g1-temple-guide-route-5",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-temple-guide-route-5.png",
+            "sha256": "50fd0bf1b0b269895b359ed748d68114e06bdccf97d38e290bbfc03b756f67ce",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              52.45672233896385,
-              40.40064921941082,
-              31.076981900775024
+              52.42797378375067,
+              40.41382202030412,
+              30.897619387950055
             ],
             "canvas": {
               "x": 75.328125,
@@ -16057,22 +16393,22 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:05:27.160661+00:00"
+            "capturedUtc": "2026-11-03T09:52:43.379348+00:00"
           },
           {
             "name": "g1-field-scripture-recorded",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-field-scripture-recorded.png",
-            "sha256": "4bdedc4c4fca50f51d7fe2c1f060625d5e6ff51799894878d9197b2260aeddb0",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-field-scripture-recorded.png",
+            "sha256": "57ba2b9ef49a3edfc3d996994102acf23b2949b0f454be054319cff60e8b8bcb",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              99.1259736118905,
-              90.13009669125877,
-              81.93035024441883
+              99.14175327795601,
+              90.13666709693423,
+              81.92946582277848
             ],
             "canvas": {
               "x": 75.328125,
@@ -16080,22 +16416,22 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 0,
+            "navigation": 1,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:05:36.494416+00:00"
+            "capturedUtc": "2026-11-03T09:53:34.249045+00:00"
           },
           {
             "name": "g1-continued",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/g1-continued.png",
-            "sha256": "43688b94469ee15e0d38946ef0ad6e70ade92221a0690397d7bec32476ebd6bd",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/g1-continued.png",
+            "sha256": "c8570592ed53a82eb249f4f73dd3170a0fe3909a714d14080de784a90f2f47d9",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              50.680738425701016,
-              36.896034482386355,
-              28.79435451426261
+              50.472515696502505,
+              36.720450322706604,
+              28.631948512246037
             ],
             "canvas": {
               "x": 75.328125,
@@ -16103,22 +16439,22 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 1,
+            "navigation": 2,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:07:01.713890+00:00"
+            "capturedUtc": "2026-11-03T09:55:11.810990+00:00"
           },
           {
             "name": "continued-physical-bible",
-            "path": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/continued-physical-bible.png",
-            "sha256": "1e5529726b077519d371e4669a895593d1de8c5f7ece076c1add9262ded4d2b2",
+            "path": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/continued-physical-bible.png",
+            "sha256": "000526af4919ea739341c85898f58e70e0cebed623e61ee732c45aa1f3c020b6",
             "size": [
               693,
               390
             ],
             "channelStddev": [
-              99.4453704153593,
-              90.93222908233075,
-              82.66580178489997
+              99.46626744542067,
+              90.94155633217834,
+              82.66516893863417
             ],
             "canvas": {
               "x": 75.328125,
@@ -16126,12 +16462,12 @@
               "width": 693.328125,
               "height": 390
             },
-            "navigation": 1,
+            "navigation": 2,
             "captureKind": "original-browser-canvas-cdp",
-            "capturedUtc": "2026-11-03T07:07:06.338366+00:00"
+            "capturedUtc": "2026-11-03T09:55:17.445942+00:00"
           }
         ],
-        "scope": "Fresh changed-game actual input and exact-source runtime; physical device and human audio approval are separate."
+        "scope": "Fresh G2 actual input and exact current runtime. Browser originals show facing; Native separately proves exact yaw/XYZ/cursor/save bytes. Physical-device and human audio approval are separate."
       }
     ]
   },
@@ -16267,15 +16603,42 @@
   "siteBudgetBytesIncludingManifest": 985000000,
   "preservedPublic": {
     "manifest": {
-      "file": "/tmp/firstgame-nativity-staged-site/build-manifest.json",
-      "sha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
-      "bytes": 2100655
+      "file": "/tmp/firstgame-g1-staged-site/build-manifest.json",
+      "sha256": "177b1809f9dad9e4bbe00a6397300db719f30f03b5accf9c48c0ff556e6b1560",
+      "bytes": 2120733
     },
     "audit": {
-      "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
-      "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
-      "bytes": 16927726
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/PublicPortal/report.json",
+      "sha256": "d1b19ae80483e461f2f284cd7665fedd147e1a13d0d727c5afae07510387ef9d",
+      "bytes": 23912174
     },
-    "scope": "Prior complete stage retained byte-for-byte except changed Gospel runtime. Existing hero/notices/site CSS and Card files unchanged."
+    "gitTree": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/PublicGitObjects/current-gh-pages.json",
+      "sha256": "4eb6a2b070a9a52131a413a039127357470f3492fb0014e56d2deaec7b6f00fe",
+      "bytes": 2473156
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/release-receipt.json",
+      "sha256": "d9e8a370fb3c04dd164241c0dccc2638f17dc7779f153c190e8ed11dbc0006ab",
+      "bytes": 32782
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/g1-release-receipt-review.json",
+      "sha256": "9008854997f7df326197917bf9d6ae47ce5b51f363d5fcf5d41f754e213b8e9a",
+      "bytes": 3291
+    },
+    "publicTouch": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/PublicMobile844/PathOfDawn/report.json",
+      "sha256": "5a72a4bc736b54dded50ae74b8a0c5fcf9c6405b11344b43adf69db3cea514b5",
+      "bytes": 365933
+    },
+    "relocationLedger": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/public-portal-relocation-ledger.json",
+      "sha256": "9b7c58dd0fea85499f6a2887635f94a88445f29c9ada36f59f94d2131a6a7d03",
+      "bytes": 1845
+    },
+    "sourceCommit": "5e5a9dea94870674904b5e0eaf22682644354092",
+    "deployedCommit": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
+    "scope": "Immutable completed G1 stage/publication, checked by sealed identities; no historical Gospel run is re-executed or relabelled current."
   }
 }
