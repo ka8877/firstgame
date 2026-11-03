@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T09:31:48.837351+00:00",
+  "updatedUtc": "2026-11-03T09:58:08.217202+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -14,7 +14,7 @@
   "activeWork": {
     "id": "G2",
     "game": "PathOfDawn",
-    "status": "pc-v2-passed-touch-pending",
+    "status": "local-validation-complete-source-integration-pending",
     "applied": true,
     "reason": "Actual public G1 Joseph frame confirms player can face away on dialogue entry. Improve planted stop/target facing while preserving old Reading pose/cursor/bytes.",
     "baseProductSource": "5e5a9dea94870674904b5e0eaf22682644354092",
@@ -32,17 +32,18 @@
     "nativeRequiredCases": 16,
     "sourceOwner": "/root/gospel_quality_audit: only Motor/App/new Facing Native test+meta; release owner: actual Editor Revision/G2 tools/preset/plans/ALL execution and Git; Root: Docs and direct evidence review.",
     "resumeSteps": [
-      "Preserve new PC02 pass/raw/Root/strict-consumer plus immutable first PC01 failure. Finish current bounded WIP tools/plans/Docs checkpoint, CI/main resume pointer and owned CAS release before09:50:20.",
-      "For touch, check actual idle/remote/currentsource/storage and acquire distinct bounded lease. Execute fixed86/34 v2 plan in empty BrowserV2 Mobile844 with actual touch caps. No source/harness/plan change.",
-      "Root directly reviews current title/encounters/guidance/continued and all8 Reading/recovery/book/reload originals; all actual86step gates/network/finalruntime/voice/save must pass.",
-      "Only then source/CI/stage fullsite<985MB/existing Pages and freshpublic86/34 profile/Root/immutable receipt. G1 remains public until allG2 local gates pass. Card code stays unapplied until G2 closes."
+      "Owner finishes strict local consumers/current source and immutable local closure; preserve firstPCfailure and allv2 originals. Normal source merge/WIP/main CI can finish in currentTouch bounded lease with enough cleanup time. No G2 public claim.",
+      "Seal/checkpoint current local validation/source work and owned CASrelease before actual currentdeadline; next publication batch independently checks idle/remote/source/runtime/storage and acquires fresh bounded lease.",
+      "Stage exact fullsite below985MB with unchanged Cards and sealed G1 predecessor; all source/runtime/Root/CI proofs must match current255e. Normal existing Pages publication only.",
+      "Actual fresh public63non-image GET/15350unchangedJpeg Gitidentity/portal2Root and newpublic86/34touch plan with all8Reading and twoindependent reloads/voice/finalruntime; Root directly reviews current originals.",
+      "Seal exact G2 source/deployed/manifest/CI/file/tree/public/Root receipt before markingG2 complete or applying Card draft. Existing knownspacing/framing/canopy remain tracked."
     ],
     "executionOwner": "/root/continuous_release",
     "branch": "codex/g2-conversation-facing-2026-11-03",
     "baseMain": "56888dc6300879f9d85f1339946200999710dfe7",
-    "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/desktop-v2-lease-01.json",
-    "leaseOwner": "465843d4-a6b3-4563-808c-4eead3b7bdc3",
-    "leaseDeadlineUtc": "2026-11-03T09:50:20.344890+00:00",
+    "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/touch-v2-lease-01.json",
+    "leaseOwner": "c9f3490d-9ef7-435c-a0ca-75342d5c7715",
+    "leaseDeadlineUtc": "2026-11-03T10:21:03.613291+00:00",
     "sourceAmendment": "Preserve original fc9e draft; apply reviewed fallback currentFacingYaw and always synchronize both yaw/lastFacing even for coincident target. No existing Native case changes.",
     "applicationLedger": "/tmp/firstgame-g2-draft/application-note-2026-11-03-01.json",
     "appliedFiles": [
@@ -152,14 +153,40 @@
           "finalRuntimeUnchangedGate": "actually-executed-and-passed",
           "scope": "Actual cloud keyboard browser and direct current16-original review; precise XYZ/yaw/raw bytes separately Native16. First PC01 remains failed, never reclassified."
         },
-        "Mobile844": "not-started",
+        "Mobile844": {
+          "status": "passed",
+          "checks": 76,
+          "failed": 0,
+          "planSteps": 86,
+          "requiredCaptures": 34,
+          "rootReviewedOriginals": 16,
+          "actualInputCapabilities": {
+            "viewport": {
+              "width": 844,
+              "height": 390
+            },
+            "maxTouchPoints": 1,
+            "coarse": true
+          },
+          "report": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Mobile844/PathOfDawn/report.json",
+          "sha256": "8ab17bb04a8900be5fa90a27909dbff995102feeac46e599c315ef28123ed72c",
+          "rawReportSha256": "c1dbace26a5212c68bc5f3589a6ed0055ab2981092376e51a2bd1c3ff90b3aa4",
+          "rootReview": "Artifacts/Validation/Autonomy/G2-2026-11-03/Root/mobile-v2-visual-review.json",
+          "rootReviewSha256": "914243c446cd583ba9652a3ace2c902749f4afc6c0b4b7ff94ddab6a73cb57e7",
+          "earlyReadingReload": "0→1, additional actual continued-g2-reading atnav1",
+          "lateManualSaveReload": "actual manualSave1→2",
+          "network": "Both exact shared cache recovery conditions passed; unexpectedFailures empty. Final runtime-unchanged actually executed and passed.",
+          "scope": "Fresh cloud Chromium touch/16direct current originals, not a physical phone or exact numeric pose; precise pose/cursor/bytes separately Native16."
+        },
         "scope": "Actual fixed116/85step plans; Native/Web source255e and complete5 runtime files, no source/harness/plan mutation after first execution."
       },
-      "public": "G1 remains current",
+      "public": "G1 still verified public; G2 fresh audit/input/Root remains not-started",
       "Core": {
         "passed": 285,
         "scope": "Explicitly retained actual previous run; unchanged current Core inputs and sealed TRX verified. Not a fresh local execution."
-      }
+      },
+      "sourceIntegration": "pending-normal-merge-and-required-CI",
+      "stage": "not-started"
     },
     "browserPlan": {
       "version": "v2",
@@ -195,10 +222,10 @@
       "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/native-web-binding.json",
       "sha256": "d9705b2ff4ab81855aeed948dfcb629170a62151bd58b92e228155449de92672"
     },
-    "localCandidateValidated": false,
+    "localCandidateValidated": true,
     "currentCandidateValidated": false,
-    "candidateCommit": "202c60d570879b9cb328b3f0ec51f98612548dc9",
-    "mainResumePointerCommit": "6ec61136123627ee626f03ed11d28898c8d83bad",
+    "candidateCommit": "030e17f97033dbbbcf45abd0f7263a66b0ca2b7a",
+    "mainResumePointerCommit": "f035a66f4c78670aa1fe16673f6867ae89b9f040",
     "nativeWebBatch": {
       "status": "completed-and-owned-CAS-released",
       "releasedUtc": "2026-11-03T08:21:20Z",
@@ -234,6 +261,18 @@
       "sha256": "ac25891b37205ad8ad62faece4b66a76a758205fa7fbe3947a6221c0aeee7924",
       "wipMetadata": "c97408b2fab4f1a1063b8d8d8fecdd3dcf00ad43",
       "mainResumeMetadata": "8487d314c9e7eaee617f801b85ad746a4fa0f45a"
+    },
+    "pc02CompletedBatch": {
+      "status": "normal-completed-and-owned-CAS-released",
+      "releasedUtc": "2026-11-03T09:35:12Z",
+      "receipt": "Artifacts/Validation/Autonomy/G2-2026-11-03/pc02-local-ui-batch-complete.json",
+      "sha256": "e3b36466fbebab8a6dcd5740d717cc177897857dba81a3648a81f2981b846059"
+    },
+    "localValidationReceipt": {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/local-validation-complete.json",
+      "sha256": "6d57c6eed1f7f594292ebcc0d0fcce2051510adb2f2e5c01dba19f416df7ea3f",
+      "bytes": 34533,
+      "scope": "Actual strict Native/Web255e, PC89/touch76 current Root16 each, complete5 runtime, unchanged current Core285 reuse, unchanged Cards and sealedG1 predecessor; not a public G2 release receipt."
     }
   },
   "baseline": {
@@ -323,7 +362,7 @@
   "nextRun": {
     "id": "G2",
     "game": "PathOfDawn",
-    "status": "continue-g2-touch-after-pc02-checkpoint",
+    "status": "finish-g2-source-integration-then-publication",
     "representativeSlice": {
       "fromQuest": "nazareth-departure",
       "throughQuest": "nazareth-return",
@@ -340,7 +379,7 @@
       "Native old Reading heading/XYZ/raw bytes and actual-input facing+Book/reload, then source-bound PC/touch/public verification."
     ],
     "acceptance": "New accepted conversation stops immediately and faces NPC without residual XZ/dash. New heading survives Book/full reload. Old Reading heading/XYZ/cursor/raw bytes and rejected far interaction remain unchanged. Current content/art/audio/Card outputs retained.",
-    "resumeAt": "G2 Native16/Web255e/PC02 89 current checks passed; firstPC01 failed preserved. Finish bounded PC checkpoint and resume Mobile844 v2 in new lease. Public still G1."
+    "resumeAt": "Native16/Web255e/PC89/Touch76 with32browser Root originals passed. Normal source/CI and G2 site/publication proof remain. FirstPCfailed02df remains failed."
   },
   "rotation": {
     "pattern": [
@@ -372,11 +411,11 @@
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
-      "id": "G2-PC02-v2",
-      "owner": "465843d4-a6b3-4563-808c-4eead3b7bdc3",
-      "deadlineUtc": "2026-11-03T09:50:20.344890+00:00",
-      "status": "Actual fresh PC02 running. No previous failed run was relabelled.",
-      "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/desktop-v2-lease-01.json"
+      "id": "G2-Touch-v2",
+      "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/touch-v2-lease-01.json",
+      "owner": "c9f3490d-9ef7-435c-a0ca-75342d5c7715",
+      "deadlineUtc": "2026-11-03T10:21:03.613291+00:00",
+      "status": "Actual fresh touch running; not an extension of preceding PC lease."
     },
     "lastCompletedBatch": {
       "id": "G2-native-web",
