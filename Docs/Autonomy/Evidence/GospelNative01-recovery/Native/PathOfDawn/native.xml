@@ -1,0 +1,1281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="16" result="Passed" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.8476921">
+  <test-suite type="TestSuite" id="1000" name="PathOfDawn" fullname="PathOfDawn" runstate="Runnable" testcasecount="62" result="Passed" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.847692" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1092" name="PathOfDawn.SmokeTests.dll" fullname="/workspace/firstgame/Games/PathOfDawn/Library/ScriptAssemblies/PathOfDawn.SmokeTests.dll" runstate="Runnable" testcasecount="54" result="Passed" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.701735" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25096" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1093" name="PathOfDawn" fullname="PathOfDawn" runstate="Runnable" testcasecount="54" result="Passed" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.700940" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1094" name="SmokeTests" fullname="PathOfDawn.SmokeTests" runstate="Runnable" testcasecount="54" result="Passed" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.699921" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1042" name="GospelEncounterSmokeTests" fullname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" classname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-03 15:48:11Z" end-time="2026-11-03 15:48:27Z" duration="15.744581" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1046" name="EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState" fullname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests.EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState" methodname="EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState" classname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" runstate="Runnable" seed="1211380494" result="Passed" start-time="2026-11-03 15:47:32Z" end-time="2026-11-03 15:47:40Z" duration="8.266514" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1044" name="FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload" fullname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests.FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload" methodname="FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload" classname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" runstate="Runnable" seed="1638701578" result="Passed" start-time="2026-11-03 15:47:40Z" end-time="2026-11-03 15:47:58Z" duration="17.792734" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:6 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:4 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-anna-thanksgiving:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1043" name="IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible" fullname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests.IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible" methodname="IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible" classname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" runstate="Runnable" seed="1196338622" result="Passed" start-time="2026-11-03 15:47:58Z" end-time="2026-11-03 15:48:07Z" duration="8.615772" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:0 clip=road-bethlehem-00-d9014226250f textSha256=d9014226250f8f19f3455cd15ff6fb1f44e887bfc0e6c52a3fab4f91d409345e seconds=11.100 sourceTime=0.021 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=bible hadPlaying=True hadPending=False sourceTime=2.069
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=component-disabled hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1045" name="TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition" fullname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests.TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition" methodname="TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition" classname="PathOfDawn.SmokeTests.GospelEncounterSmokeTests" runstate="Runnable" seed="1253097817" result="Passed" start-time="2026-11-03 15:48:07Z" end-time="2026-11-03 15:48:27Z" duration="19.949040" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:6 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:1 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-anna-thanksgiving:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1047" name="GospelFacingSmokeTests" fullname="PathOfDawn.SmokeTests.GospelFacingSmokeTests" classname="PathOfDawn.SmokeTests.GospelFacingSmokeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-03 15:48:43Z" end-time="2026-11-03 15:48:53Z" duration="9.647663" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1048" name="AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload" fullname="PathOfDawn.SmokeTests.GospelFacingSmokeTests.AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload" methodname="AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload" classname="PathOfDawn.SmokeTests.GospelFacingSmokeTests" runstate="Runnable" seed="1979343266" result="Passed" start-time="2026-11-03 15:48:27Z" end-time="2026-11-03 15:48:39Z" duration="12.764585" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:6 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.021
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-anna-thanksgiving:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1049" name="LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue" fullname="PathOfDawn.SmokeTests.GospelFacingSmokeTests.LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue" methodname="LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue" classname="PathOfDawn.SmokeTests.GospelFacingSmokeTests" runstate="Runnable" seed="41797519" result="Passed" start-time="2026-11-03 15:48:40Z" end-time="2026-11-03 15:48:53Z" duration="13.417057" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:6 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-anna-thanksgiving:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1053" name="GospelNativityAudioSmokeTests" fullname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests" classname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-03 15:49:01Z" end-time="2026-11-03 15:49:04Z" duration="2.613927" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1054" name="ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback" fullname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback" methodname="ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback" classname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests" runstate="Runnable" seed="1906863767" result="Passed" start-time="2026-11-03 15:48:53Z" end-time="2026-11-03 15:48:58Z" duration="4.612167" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[GOSPEL_NATIVITY_IMPORTED_VOICE productionSha256=635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869 dspOutputHz=48000
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-road-bethlehem:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=14.4 importedSeconds=14.4 mono=true sourceSha256=6bc281da9eafcc8b501750129e0d892d6dd013d84d22138c52bfc6b5165e9207
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-road-bethlehem:2 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=13.30003 importedSeconds=13.30003125 mono=true sourceSha256=e88a2e6aa35ec3a975dcf60496b596aeff3dd6318cc23ca0eaaebdc0a4509fea
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-road-bethlehem:5 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=16.40003 importedSeconds=16.40003125 mono=true sourceSha256=82d52182909e5603c754ebee59e51affda2f43247ffe49528b41d95705657581
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-road-bethlehem:6 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=12.7 importedSeconds=12.7 mono=true sourceSha256=b9115e412312b227b2dcd917266fcf0817b1ed81405706e7217da6f64ae5b197
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-manger:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=14.1 importedSeconds=14.1 mono=true sourceSha256=f2fa476cd0a058b0f6478d0ba484f015d0661005424b659ca935c6a0cff707bc
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-manger:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=13.10003 importedSeconds=13.10003125 mono=true sourceSha256=58b4610537de7d478087d1fe76e9cc9ec39bc7cc1cfcf892d234aa46440f96b5
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-night-shepherds:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=12.6 importedSeconds=12.6 mono=true sourceSha256=98a474cd9db585523f9603a35a6783f20b2d075cc246ae6d4e29985118bff521
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-good-news:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=6.7 importedSeconds=6.7 mono=true sourceSha256=a5de6a0064cf89e61dc402364f4cb3efad9416cd025c746bf0df337b8013a868
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-good-news:2 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=6.400031 importedSeconds=6.40003125 mono=true sourceSha256=a807bc27493406908df53b0ed4143d6ac29600667e52250b2c9a4ed0d8d3a49a
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-good-news:3 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=9.400031 importedSeconds=9.40003125 mono=true sourceSha256=a1c5acac043e4aa27175d71f532db32f2493eb4906b2fc56b6b660b87320d4d3
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-good-news:4 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=13.8 importedSeconds=13.8 mono=true sourceSha256=a307c502af39a2574c71d746b8280abb18a8b2b1b1936ea5643b9a0e3963a661
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-manger-witnesses:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=6.2 importedSeconds=6.2 mono=true sourceSha256=3df65783aef47a04ca33e65634ff8818ce15adbf66991038a694fd17c4c74480
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-birth-remembered:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=11.9 importedSeconds=11.9 mono=true sourceSha256=76f5a10f02785c0efb3241f1301805717ecb75b98267939e617bffe70e238537
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-name-jesus:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=11.9 importedSeconds=11.9 mono=true sourceSha256=d61988fe084cf3b37d113b4d91e08cfe20ece961f815a105694ab5fae40e6ecc
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-temple-dedication:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=13.2 importedSeconds=13.2 mono=true sourceSha256=f309d61557d1da3bd6c1b04fdbb70661cbe0fe14c80d3ed97b7a97265d6a5e5e
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-simeon-peace:2 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=5.2 importedSeconds=5.2 mono=true sourceSha256=e52aebb2df125db35532a0fcf09129957697b289ae13a9228bebbf2fecb7bcf0
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-simeon-peace:3 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=3.294219 importedSeconds=3.29021875 mono=true sourceSha256=d16708b48bbb897ce830ad90c69d94ffa5f8e34918e436880f3a014b40fa6761
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-simeon-peace:5 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=5 importedSeconds=5 mono=true sourceSha256=28b0e612b2fc453bfc6d782c4b3dcc1b46dc874602c7c7930d57044f01dfa982
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-anna-thanksgiving:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=10.8 importedSeconds=10.8 mono=true sourceSha256=4ec4bb82a95fd7ac59b138c79133b8b8b5aee79bb354d1a806768c67343e3840
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-nazareth-growth:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=15.9 importedSeconds=15.9 mono=true sourceSha256=69a2b76a03f37e1bb222cb47bfbf94d8164e82a7450acb68aafc68353fa96058
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-nazareth-growth:3 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=15.7 importedSeconds=15.7 mono=true sourceSha256=723eb8313f14dc4fa4bb00301e244aa40f9cd5443bfadd805fe6e7bd71b75f0c
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-nazareth-growth:4 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=15.3 importedSeconds=15.3 mono=true sourceSha256=d94cce3b899ac0fc4dceaa5dbcf616a58c68c621f03d7882ae95fa45063b4395
+GOSPEL_NATIVITY_IMPORTED_VOICE key=birth-road-bethlehem:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=11.1 importedSeconds=11.1 mono=true sourceSha256=dc94f4edddacd39c16085341d50bc0b7109bd13880086b71914b37651017abe7
+GOSPEL_NATIVITY_IMPORTED_VOICE key=parents-reunite:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=7 importedSeconds=7 mono=true sourceSha256=21836bfcc347c412c6fca0899dbd8201bdc967eaf06dc2fc38def4563cea4124
+GOSPEL_NATIVITY_IMPORTED_VOICE key=parents-reunite:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=6.9 importedSeconds=6.9 mono=true sourceSha256=4406b4d4d46ea469999da72ccbde63be7fbc4fc00948ec2d607536e1cbefee79
+GOSPEL_NATIVITY_IMPORTED_VOICE key=baptism-request:0 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=5.7 importedSeconds=5.7 mono=true sourceSha256=8fb03946b726942914cf42df983d20dbffb907fb5e8c171ebf9a52c2be72031d
+GOSPEL_NATIVITY_IMPORTED_VOICE key=baptism-request:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=5.7 importedSeconds=5.7 mono=true sourceSha256=feea9d2e3e6341006851d85df15c6c3a0fac217b14a4907834a1e9d0c75e6d1e
+GOSPEL_NATIVITY_IMPORTED_VOICE key=baptism-water:1 sourceHz=32000 importedHz=32000 importPolicy=PreserveSampleRate configuredOverrideHz=32000 sourceSeconds=4.2 importedSeconds=4.2 mono=true sourceSha256=ec7a1e4bd55aaf17313e7c4f472afa191bc30b4c3e08a4c67773d4f7b3c79467
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:1 clip=road-bethlehem-01-4e2070800a44 textSha256=4e2070800a448bcc9f40eba425498ecbd4ad02af34a7ef7eb2f6d0cfcda9a8e9 seconds=14.400 sourceTime=0.021 sourceGain=0.421
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=native-real-navigation hadPlaying=True hadPending=False sourceTime=0.149
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=native-navigation-before-resource-completed hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=audio-settings hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=audio-settings hadPlaying=True hadPending=False sourceTime=0.000
+GOSPEL_NATIVITY_VOICE exact-current-lines=28 real-playing-source=true stale-text-rejected=true navigation-cancel=true master-mute-zero-stop=true no-stale-unmute=true generic-single-speaker-pitch=1
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1055" name="NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration" fullname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration" methodname="NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration" classname="PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests" runstate="Runnable" seed="1181622718" result="Passed" start-time="2026-11-03 15:48:58Z" end-time="2026-11-03 15:49:04Z" duration="6.080937" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:1 clip=road-bethlehem-01-4e2070800a44 textSha256=4e2070800a448bcc9f40eba425498ecbd4ad02af34a7ef7eb2f6d0cfcda9a8e9 seconds=14.400 sourceTime=0.021 sourceGain=0.421
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=native-end-of-visible-line hadPlaying=True hadPending=False sourceTime=0.192
+GOSPEL_NATIVITY_MIX new-birth-seconds=84.70587 opening-ui-dialogue-scripture-page-cues=0 actual-voice-duck=.32 recovered-gain=1 exploration-cue-retained=true
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1056" name="GospelNativityCharacterSmokeTests" fullname="PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests" classname="PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-03 15:49:07Z" end-time="2026-11-03 15:49:09Z" duration="1.906525" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1057" name="ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet" fullname="PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests.ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet" methodname="ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet" classname="PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests" runstate="Runnable" seed="977027727" result="Passed" start-time="2026-11-03 15:49:04Z" end-time="2026-11-03 15:49:09Z" duration="5.561863" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1058" name="GospelNativityFiniteRenderingTests" fullname="PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests" classname="PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-03 15:49:13Z" end-time="2026-11-03 15:49:21Z" duration="8.358648" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1059" name="CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan" fullname="PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests.CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan" methodname="CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan" classname="PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests" runstate="Runnable" seed="1335758758" result="Passed" start-time="2026-11-03 15:49:09Z" end-time="2026-11-03 15:49:21Z" duration="11.929619" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_RESTAGE_CEDAR_MESH name=StoneWell_Well_Cedar vertices=4104 readable=False normalAttribute=True tangentAttribute=True
+GOSPEL_RESTAGE_FINITE_HDR fixture=fixed-render-pose-not-navigation location=mary-well rawPost=false rawStopNaN=false pixels=230400 invalid=0 peak=1.069336 position=(-15.00, 0.02, -8.00) graphics=llvmpipe (LLVM 19.1.7, 256 bits)
+GOSPEL_RESTAGE_FINITE_HDR fixture=fixed-render-pose-not-navigation location=jordan-water rawPost=false rawStopNaN=false pixels=230400 invalid=0 peak=1.000000 position=(-1.00, 0.02, 4.00) graphics=llvmpipe (LLVM 19.1.7, 256 bits)
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1060" name="GospelNativityMovementAudioSmokeTests" fullname="PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests" classname="PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-03 15:49:25Z" end-time="2026-11-03 15:49:30Z" duration="5.646008" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1061" name="ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources" fullname="PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests.ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources" methodname="ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources" classname="PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests" runstate="Runnable" seed="837035947" result="Passed" start-time="2026-11-03 15:49:21Z" end-time="2026-11-03 15:49:30Z" duration="9.191240" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[GOSPEL_NATIVITY_MOVEMENT_AUDIO chapters=3 ambience=3 cues=8 actualMovementSteps=3 physicalJumpLandingDash=true settingsRestoredByTearDown=true
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1062" name="GospelNativityStorySmokeTests" fullname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests" classname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-03 15:51:10Z" end-time="2026-11-03 15:51:15Z" duration="5.013136" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1063" name="DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes" fullname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes" methodname="DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes" classname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests" runstate="Runnable" seed="2120986546" result="Passed" start-time="2026-11-03 15:49:30Z" end-time="2026-11-03 15:51:07Z" duration="96.463100" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:0 clip=road-bethlehem-00-d9014226250f textSha256=d9014226250f8f19f3455cd15ff6fb1f44e887bfc0e6c52a3fab4f91d409345e seconds=11.100 sourceTime=0.021 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=bible hadPlaying=True hadPending=False sourceTime=1.472
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:0 clip=road-bethlehem-00-d9014226250f textSha256=d9014226250f8f19f3455cd15ff6fb1f44e887bfc0e6c52a3fab4f91d409345e seconds=11.100 sourceTime=0.021 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.043
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-road-bethlehem:1 clip=road-bethlehem-01-4e2070800a44 textSha256=4e2070800a448bcc9f40eba425498ecbd4ad02af34a7ef7eb2f6d0cfcda9a8e9 seconds=14.400 sourceTime=0.021 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=component-disabled hadPlaying=True hadPending=False sourceTime=0.043
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:5 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-road-bethlehem:6 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-birth-manger:0 clip=birth-manger-00-04fa0bea6bd6 textSha256=04fa0bea6bd657c2c2d478e0801fe92043858d520b0c8263c0b306722cb49af9 seconds=14.100 sourceTime=1.408 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=bible hadPlaying=True hadPending=False sourceTime=2.197
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-manger:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-night-shepherds:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-good-news:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-manger-witnesses:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-birth-remembered:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.021
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-name-jesus:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-temple-dedication:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:2 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-simeon-peace:5 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-anna-thanksgiving:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=bible hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION actual-start key=birth-nazareth-growth:0 clip=nazareth-growth-00-09d3c8017d36 textSha256=09d3c8017d36daf67661c7f3864d3c523c819653b967ea52f7bf0464edab080b seconds=15.900 sourceTime=0.021 sourceGain=0.490
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:0 reason=advance hadPlaying=True hadPending=False sourceTime=1.600
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:3 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=birth-nazareth-growth:4 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=parents-reunite:0 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=parents-reunite:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=baptism-request:0 reason=advance hadPlaying=False hadPending=True sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=baptism-request:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+GOSPEL_NATIVITY_NARRATION stop key=baptism-water:1 reason=advance hadPlaying=True hadPending=False sourceTime=0.000
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+            <test-case id="1064" name="RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes" fullname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes" methodname="RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes" classname="PathOfDawn.SmokeTests.GospelNativityStorySmokeTests" runstate="Runnable" seed="1107013967" result="Passed" start-time="2026-11-03 15:51:07Z" end-time="2026-11-03 15:51:15Z" duration="8.460297" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1065" name="GospelNativityVisualSmokeTests" fullname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests" classname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-03 15:51:30Z" end-time="2026-11-03 15:51:32Z" duration="1.656097" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1066" name="PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor" fullname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor" methodname="PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor" classname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests" runstate="Runnable" seed="970680057" result="Passed" start-time="2026-11-03 15:51:15Z" end-time="2026-11-03 15:51:20Z" duration="4.921514" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[GOSPEL_NATIVITY_WORLD physical-encounters=true free-XZ-bounds=true painted-props=383 scene-batches=12
+]]></output>
+            </test-case>
+            <test-case id="1067" name="RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump" fullname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump" methodname="RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump" classname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests" runstate="Runnable" seed="1231602629" result="Passed" start-time="2026-11-03 15:51:20Z" end-time="2026-11-03 15:51:27Z" duration="6.516733" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[GOSPEL_NATIVITY_TOUCH_DIAGNOSTIC start=(-31.00, 0.02, -7.00) end=(-30.35, 0.03, -6.35) velocity=(2.30, 0.04, 2.30) speed=3.250212 facing=45 grounded=True inputEnabled=True componentEnabled=True realElapsed=0.3424802 simulationElapsed=0.3454472 dt=0.0005012684 scale=1 initialContacts= collisionContacts=
+GOSPEL_NATIVITY_MOTION real-touch-XZ=true stop-speed=0 jump-rise=1.049187 camera-rise=0.09202957
+]]></output>
+            </test-case>
+            <test-case id="1068" name="ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds" fullname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds" methodname="ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds" classname="PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests" runstate="Runnable" seed="639856519" result="Passed" start-time="2026-11-03 15:51:27Z" end-time="2026-11-03 15:51:32Z" duration="5.126247" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[GOSPEL_NATIVITY_RELEASED_DASH physical-distance=2.128021 post-burst-drift=0 stopped-speed=0 sequence=1
+Saving results to: /home/agent/.config/unity3d/FirstGame/PathOfDawn/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

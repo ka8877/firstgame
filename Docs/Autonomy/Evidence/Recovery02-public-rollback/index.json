@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-11-03T16:02:12.884974+00:00",
+  "scope": "complete-actual-Restore01-report-lossless-gzip-plus-original-MF-subset-backup",
+  "publishReady": false,
+  "baselineReady": false,
+  "compressed": {
+    "file": "Docs/Autonomy/Evidence/Recovery02-public-rollback/restore01-report.original.json.gz",
+    "bytes": 2021374,
+    "sha256": "c49ff5aec1771d2cbd40233fdcb5174eb6934b625570f0c480c0138b945f6934"
+  },
+  "original": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+    "bytes": 29882757,
+    "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8"
+  },
+  "verifiedDecompressedSha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+  "verifiedDecompressedBytes": 29882757,
+  "manifest": {
+    "original": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "bytes": 2134182,
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8"
+    },
+    "preserved": {
+      "file": "Docs/Autonomy/Evidence/Recovery02-public-rollback/restored-public-manifest.original.json",
+      "bytes": 2134182,
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8"
+    }
+  },
+  "limits": "Report complete raw bytes are losslessly preserved. This backup does not contain all Restore01 HTTP bodies/API/control files, original oldG2 missing Root/build proof, or complete981817124-byte site; those full sets remain mandatory and separately preserved in persistent Artifacts or reconstructable rollback stage.",
+  "preservedControlOriginals": [
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/RecordedSources/recover_current_public_site.py",
+        "bytes": 42246,
+        "sha256": "4ec469321606468801495cc44f73075b466488f28a98c054d62d6ba4430892ce"
+      },
+      "preserved": {
+        "file": "Docs/Autonomy/Evidence/Recovery02-public-rollback/RecordedControls/recover_current_public_site.py",
+        "bytes": 42246,
+        "sha256": "4ec469321606468801495cc44f73075b466488f28a98c054d62d6ba4430892ce"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentRestoreProducerAudit/REPORT.md",
+        "bytes": 4511,
+        "sha256": "a034a5b11b0aa68ab9cf8e61af95a135a4fea01723c8d6184985a439bd407a31"
+      },
+      "preserved": {
+        "file": "Docs/Autonomy/Evidence/Recovery02-public-rollback/RecordedControls/REPORT.md",
+        "bytes": 4511,
+        "sha256": "a034a5b11b0aa68ab9cf8e61af95a135a4fea01723c8d6184985a439bd407a31"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentRestoreProducerAudit/observed-records.json",
+        "bytes": 12894,
+        "sha256": "9d7d0ae86010917d98344efe05f4820abdd7454259450100dc6aca165d197041"
+      },
+      "preserved": {
+        "file": "Docs/Autonomy/Evidence/Recovery02-public-rollback/RecordedControls/observed-records.json",
+        "bytes": 12894,
+        "sha256": "9d7d0ae86010917d98344efe05f4820abdd7454259450100dc6aca165d197041"
+      }
+    }
+  ]
+}

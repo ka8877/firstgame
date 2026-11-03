@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "status": "frozen-product-native-only-recovery-contract",
+  "scope": "product-native-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "game": "PathOfDawn",
+  "revision": "gospel-facing-2026-11-03",
+  "expectedSourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+  "attempt": "GospelNative01",
+  "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01",
+  "buildRoot": "/tmp/firstgame-gospel-recovery-builds",
+  "historicalNativeXml": {
+    "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/native.xml",
+    "sha256": "6fa8950d783d4be630d0839feb887ff28d3ff4b473528eeadef9b5b762d7c3fd",
+    "bytes": 147877
+  },
+  "unchangedAuthoredInputs": {
+    "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+    "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+    "bytes": 363712
+  },
+  "expectedFullNames": [
+    "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState",
+    "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload",
+    "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible",
+    "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition",
+    "PathOfDawn.SmokeTests.GospelFacingSmokeTests.AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload",
+    "PathOfDawn.SmokeTests.GospelFacingSmokeTests.LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue",
+    "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+    "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+    "PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests.ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet",
+    "PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests.CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+    "PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests.ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+    "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes",
+    "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+    "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor",
+    "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump",
+    "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds"
+  ],
+  "voiceProduction": {
+    "file": "Tools/Voice/Nativity/production.json",
+    "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+    "bytes": 35716
+  },
+  "executionFiles": [
+    {
+      "file": "Tools/Validation/run-nativity-native.py",
+      "sha256": "834e54887c7292de546e567ba5cfdbc883ad34b805cda5b94249086987fcfa38",
+      "bytes": 4455
+    },
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/activate-display.sh",
+      "sha256": "e0112076aa3834aa9154cdd19a2959bf925fec3513c781cf2bf153359d1d6dec",
+      "bytes": 523
+    },
+    {
+      "file": "Tools/Environment/recover-quest-display.py",
+      "sha256": "66987936c30a94cca8e33967badb43f97a125f97021ae1432988c8cf831b768f",
+      "bytes": 1862
+    },
+    {
+      "file": "Tools/Environment/start-display.sh",
+      "sha256": "c65ebf6f649ce4ab264a8482ccf4cb526a53fe034add60e912ba7ed9a63b7d32",
+      "bytes": 932
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/SmokeUi.cs",
+      "sha256": "ddfa221099f03902d6ff09593a3a668437ac1967564c920e7a4f70fcb74a8c52",
+      "bytes": 14949
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildCommands.cs",
+      "sha256": "33ad184566e522054a544628eea2e5f8b23a8e7fcc11cf0e5267ee70c22edce9",
+      "bytes": 5341
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelEncounterSmokeTests.cs",
+      "sha256": "94f7c8eb32dc80f2f33fff17a54890c28a4c547aeac4a36319f0442e6f9e37df",
+      "bytes": 20705
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelFacingSmokeTests.cs",
+      "sha256": "21ebcc9805e6a09702599eda0687a6a1a209987a697e6ae7977cb9891414e7bc",
+      "bytes": 16055
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityAudioSmokeTests.cs",
+      "sha256": "8c3bfacb7f21a19f048c3cd39803c676b98e0cb8de221c9a4dd68a0911991b4e",
+      "bytes": 14489
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityCharacterSmokeTests.cs",
+      "sha256": "3e7550329a7b710271d29a6cf1e0bd36e3756bb7ca4ba3a7d4d08d47cd5befc1",
+      "bytes": 5764
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityFiniteRenderingTests.cs",
+      "sha256": "69b804395aaa57a883042dba333b2395319190b01e7381d8d95a658ecc28e08e",
+      "bytes": 9450
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityMovementAudioSmokeTests.cs",
+      "sha256": "4ea0fe4f9b28544b8455b4a9cf7385af68cad11a94e493acd2a2d842f08a5b4f",
+      "bytes": 10884
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityStorySmokeTests.cs",
+      "sha256": "77306b190546c606c6c786c8e2f8754e8d6c5c940b7074c16012e2a13cc06a04",
+      "bytes": 30801
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNativityVisualSmokeTests.cs",
+      "sha256": "dcdea58dac9baf3a75aabf6c22a62b1e810a6689b20310f30b4a445a0599a76e",
+      "bytes": 10951
+    }
+  ],
+  "releaseRestriction": "Only fresh source/native product evidence. Missing historical G2 seal/audit/build output provenance is not waived, recreated or marked restored. Fresh Web build, ordinary-input PC/touch/public, direct Root and paired public recovery remain separate.",
+  "reviewedRunnerSha256": "dbd8ebf16aa63760d0b4cb6eb370d9935424e04e9e533d2d574ca6aa09744a2e"
+}
