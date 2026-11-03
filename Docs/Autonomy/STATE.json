@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T15:19:32.248537+00:00",
+  "updatedUtc": "2026-11-03T15:26:49.491629+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -45,7 +45,7 @@
     "leaseOwner": "8a989b2b-6823-45fe-891c-84f1a068dfe5",
     "leaseDeadlineUtc": "2026-11-03T15:37:25.979589+00:00",
     "resumeSteps": [
-      "Preserve all current source/evidence and commit/push safe WIP on its existing isolated branch; restore missing dated proof bytes only from exact matching copies, never reconstruct claimed observations.",
+      "First fetch/inspect remote WIP codex/c1-capability-2026-11-03 at aa857332f030f91d37853f4cdaf0f833ee0aa5ca and compare current workspace. Main carries a resume pointer only, not C1 product changes. Preserve all dirty/current files and restore only exact indexed original bytes if canonical artifacts are absent.",
       "Apply only the minimal13-grade-grid layout fix after source/process/lease checks, freeze source and run complete8 in a new unique attempt. Preserve Native01 mechanical pass and actual visual rejection. If using product-only verification while release baseline is unavailable, clearly separate it from release readiness.",
       "Restore the last normal site exactly and complete fresh equivalent recovery proof if dated originals cannot be restored. Only then complete fresh C1 Web/PC/touch/public/Root/CI/source/fullSHA/985MB closure preserving Gospel. Existing publish gates stay strict."
     ],
@@ -185,7 +185,26 @@
       "Reclaim only verified inactive generated cache space using lossless persistent archive and exact restoration ledger.",
       "Restore exact normal site rollback. Locate original build witness if present; otherwise freshGospelbuild required. If bytes differ from original, use explicit common-build-proof/pipeline paired recovery and validate both games fully with new evidence. Never attach new build metadata to old runtime.",
       "Complete currentC1Card Web/PC/touch/public, fresh/currentGospel native/build/input/public and newRoot seals/CI/fullsite/985MB before publication. Continue remaining approved roadmap afterward."
-    ]
+    ],
+    "sourceBranch": "codex/c1-capability-2026-11-03",
+    "candidateCommit": "aa857332f030f91d37853f4cdaf0f833ee0aa5ca",
+    "appliedInCurrentMain": false,
+    "appliedInCandidateWorkspace": true,
+    "sourceCommitNote": "Candidate aa857 contains current C1 implementation and compact actual Native evidence. Remote main currently00335 contains G2 code and earlier metadata only. Later Docs-only pointer commits do not deploy C1 or change published runtime.",
+    "sourceCi": {
+      "runId": 41663162726,
+      "sourceCommit": "aa857332f030f91d37853f4cdaf0f833ee0aa5ca",
+      "statusAtObservation": "completed",
+      "url": "https://github.com/ka8877/firstgame/actions/runs/41663162726",
+      "conclusion": "success",
+      "completedSuccessConfirmed": true
+    },
+    "compactRecoveryEvidence": {
+      "native01": "Docs/Autonomy/Evidence/C1-Native01-recovery/index.json",
+      "native04": "Docs/Autonomy/Evidence/C1-Native04-recovery/index.json",
+      "gradePlan": "Docs/Autonomy/Evidence/C1-GradeBrowserPlan-recovery",
+      "scope": "Actual selected original bytes with complete index remain on WIP ref aa857. These compact copies are not the entire64-file Native04 or missing G2 historical proof."
+    }
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -284,7 +303,7 @@
       "Restore equivalent last-normal baseline and continue actual C1 Web/input/save/audio/public closure; do not publish from Native-only results."
     ],
     "acceptance": "Independent original capability mapping and all original IDs/masks/deck/wallet/save bytes retained; every grade label/count/footer readable in Native/PC/touch; strict original/current proof and complete source/runtime/public binding required.",
-    "resumeAt": "Native04 actual8 and grade originals approved for product only. See current Recovery01 lease and independent recovery-baseline mapping. Publication remains blocked until full equivalent recovery baseline and actual Web/input/public gates."
+    "resumeAt": "Read activeWork.sourceBranch/candidateCommit first. C1 source and compact proof are on WIP aa857; main code/public remain G2. Verify actual processes/remote ownership/environment, then complete current Native/Web recovery gates."
   },
   "rotation": {
     "pattern": [
