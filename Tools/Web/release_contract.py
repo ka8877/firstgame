@@ -107,8 +107,19 @@ ENCOUNTER = {
     'currentTargets': ['Web']
 }
 
+FACING = {
+    'name': 'autonomy-g2',
+    'revisions': {'FantasyCards': 'fm-nativity-2026-11-02', 'PathOfDawn': 'gospel-facing-2026-11-03'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {'FantasyCards': 'Artifacts/Validation/Nativity', 'PathOfDawn': 'Artifacts/Validation/Autonomy/G2-2026-11-03'},
+    'preservedGames': ['FantasyCards'],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'autonomy-g2':
+        return FACING
     if name == 'autonomy-g1':
         return ENCOUNTER
     if name == 'nativity':

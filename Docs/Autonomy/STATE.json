@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T07:38:10.388073+00:00",
+  "updatedUtc": "2026-11-03T08:08:16.558516+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -14,8 +14,8 @@
   "activeWork": {
     "id": "G2",
     "game": "PathOfDawn",
-    "status": "selected-not-started",
-    "applied": false,
+    "status": "native-web-passed-local-browser-pending",
+    "applied": true,
     "reason": "Actual public G1 Joseph frame confirms player can face away on dialogue entry. Improve planted stop/target facing while preserving old Reading pose/cursor/bytes.",
     "baseProductSource": "5e5a9dea94870674904b5e0eaf22682644354092",
     "baseDeployment": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
@@ -30,14 +30,137 @@
       "constraint": "Only consider application after all G1 local/public gates close; compare current production base hashes and absent new files first. Preserve previous14 and add both exact Native cases for16 total; fresh Web/PC/touch/public needed."
     },
     "nativeRequiredCases": 16,
-    "sourceOwner": "Assign after G1 publication owner finishes metadata/CI and owned CAS release; actual current lease must be queried.",
+    "sourceOwner": "/root/gospel_quality_audit: only Motor/App/new Facing Native test+meta; release owner: actual Editor Revision/G2 tools/preset/plans/ALL execution and Git; Root: Docs and direct evidence review.",
     "resumeSteps": [
-      "Confirm G1 receipt/root-review/stage/public immutable SHA and actual prior owner idle/released; check source/main/dirty files/runtime/storage and acquire a distinct bounded G2 lease.",
-      "Compare draft base SHA; apply only App/Motor/new Native test/meta on a new G2 branch. Set actual Editor revision before source freeze. No Card draft application.",
-      "Reuse existing algorithms with unique G2 output/build/stage/profile and exact old14+new2 Native16/currentCore285. Follow /tmp/firstgame-g2-draft/G2-release-adaptation-audit.md; do not call G1.current_build as a historical validator after source changes.",
-      "Fresh Native/Web/ordinary PC+touch including new dialogue-facing Book/reload and existing encounters/Scripture/save, direct Root originals and runtime binding. Keep failed attempts/source histories and public G1 until all gates pass.",
-      "Normal source/CI/existing Pages/public delivery+input+Root verification and immutable receipt before marking G2 complete. Then Card capability UI with independent original enum fixtures; keep unknown fixed-DP rules open."
-    ]
+      "Finish current Native16/Web binding, generatedBoot identifier-only cleanup/facing stamp preservation, safe WIP source/docs commit and owned CAS release. G1 remains the published normal build.",
+      "For local PC/touch validation, inspect actual idle/source/main/dirty/storage/runtime and remote lock, then acquire a distinct bounded lease.",
+      "Use the preselected116/85-step G2 plans with47/33 required captures, exactcurrent Web source255e and runtime5; preserve allG1 conditions and newReading Bible/autosave/fullreload/facing originals.",
+      "Root directly reviews current title/encounters/guidance/continued plus all7 newReading Book/reload checkpoints and binds complete current runtime after every passed run. Keep failed attempts and do not edit plans after execution.",
+      "Only after current local gates pass, normal source/CI/fullsite<985MB stage/existing Pages and freshpublic85-step33-capture62+newconditions/Root/immutable receipt. Card draft stays unapplied until G2 closes."
+    ],
+    "executionOwner": "/root/continuous_release",
+    "branch": "codex/g2-conversation-facing-2026-11-03",
+    "baseMain": "56888dc6300879f9d85f1339946200999710dfe7",
+    "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/implementation-lease-01.json",
+    "leaseOwner": "b30ea463-9c39-4ef1-afa8-42fd2101b614",
+    "leaseDeadlineUtc": "2026-11-03T08:30:26.478173+00:00",
+    "sourceAmendment": "Preserve original fc9e draft; apply reviewed fallback currentFacingYaw and always synchronize both yaw/lastFacing even for coincident target. No existing Native case changes.",
+    "applicationLedger": "/tmp/firstgame-g2-draft/application-note-2026-11-03-01.json",
+    "appliedFiles": [
+      {
+        "path": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageMotor.cs",
+        "baseSha256": "1408353448891b0757c0099542b7983fb754556a2896c44f5cdab5e6a379ee2d",
+        "draftSha256": "9630dd125bfaf4479c5f03619ca23a446c73e1c69d8afbab9c0d757cac9e3522",
+        "appliedSha256": "abe7f036ec6260a9b083dc2fbc317519fd47268c0216d05feab829089dbbc2bb",
+        "bytes": 13245
+      },
+      {
+        "path": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageApp.cs",
+        "baseSha256": "d24054c9709f6a8073df9d49bf83080b063ffdcc97e2cf0444955d68bb8fe7a0",
+        "draftSha256": "ea1855137cdbfca328c26976d3d081f6c9b49af1c86e459f90523a1d8dccfb1c",
+        "appliedSha256": "ea1855137cdbfca328c26976d3d081f6c9b49af1c86e459f90523a1d8dccfb1c",
+        "bytes": 18640
+      },
+      {
+        "path": "Games/PathOfDawn/Assets/SmokeTests/GospelFacingSmokeTests.cs",
+        "baseSha256": null,
+        "draftSha256": "21ebcc9805e6a09702599eda0687a6a1a209987a697e6ae7977cb9891414e7bc",
+        "appliedSha256": "21ebcc9805e6a09702599eda0687a6a1a209987a697e6ae7977cb9891414e7bc",
+        "bytes": 16055
+      },
+      {
+        "path": "Games/PathOfDawn/Assets/SmokeTests/GospelFacingSmokeTests.cs.meta",
+        "baseSha256": null,
+        "draftSha256": "3ce90e981d9fff87d4f12e7be1578ea7d060427e41a10f0a9e4437a36ba4aecd",
+        "appliedSha256": "3ce90e981d9fff87d4f12e7be1578ea7d060427e41a10f0a9e4437a36ba4aecd",
+        "bytes": 60
+      }
+    ],
+    "sourceFreeze": "All current authored Gospel inputs and actual revision bound to passed16-case Native fingerprint. Web is in progress; source author stays frozen. Existing14 unchanged.",
+    "validationStages": {
+      "Prepare01": {
+        "status": "passed",
+        "exitCode": 0,
+        "versionStamp": "6000.3.26f1:gospel-facing-2026-11-03"
+      },
+      "Native01": {
+        "status": "passed",
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "xmlSha256": "6fa8950d783d4be630d0839feb887ff28d3ff4b473528eeadef9b5b762d7c3fd",
+        "rootReview": "Artifacts/Validation/Autonomy/G2-2026-11-03/Root/gospel-native-review.json",
+        "rootReviewSha256": "7975793877469c22bcab958e95f68f54fb7e3e9f54d0d163e5d0da6b1584ac32",
+        "rootOriginals": 4
+      },
+      "Web": {
+        "attempt": "Web01",
+        "status": "Succeeded",
+        "errors": 0,
+        "warnings": 4,
+        "legacyResourcesRestored": true,
+        "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+        "root": "/tmp/firstgame-g2-builds",
+        "runtimeFiles": [
+          {
+            "file": "Build/4523bdd68d479bc9f4a24570a8b10cae.data.unityweb",
+            "bytes": 93688564,
+            "sha256": "3c65b1fb530463026308cfa36790b45ab13a7517448259c795f4b95d2fb9c56f"
+          },
+          {
+            "file": "Build/5e3595463619393234912cd0c67502c5.wasm.unityweb",
+            "bytes": 15785046,
+            "sha256": "3d67d55f15ecb1e35d750503bdb8d6d3b77403bd11cffcfe6925da4e23ef8d28"
+          },
+          {
+            "file": "Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb",
+            "bytes": 92792,
+            "sha256": "5a1ce7c1cda220177c6f165e2c0b75d168b9f8d01a436abb41ac7c289d8cabae"
+          },
+          {
+            "file": "Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js",
+            "bytes": 47867,
+            "sha256": "8c635f5247c4e4e356e8109a3b49c1a7f7081141040e64b36bb6a34ec6ca6b17"
+          },
+          {
+            "file": "index.html",
+            "bytes": 7333,
+            "sha256": "eb3e1b5998d0a6bd458e84b403532001d939fc1c40513a786fd67dbb337c04b8"
+          }
+        ],
+        "runtimeBytes": 109621602
+      },
+      "localBrowser": "not-started",
+      "public": "G1 remains current",
+      "Core": {
+        "passed": 285,
+        "scope": "Explicitly retained actual previous run; unchanged current Core inputs and sealed TRX verified. Not a fresh local execution."
+      }
+    },
+    "browserPlan": {
+      "status": "fixed-before-first-execution",
+      "Desktop720": {
+        "steps": 116,
+        "requiredCaptures": 47
+      },
+      "Mobile844": {
+        "steps": 85,
+        "requiredCaptures": 33
+      },
+      "PublicMobile844": {
+        "steps": 85,
+        "requiredCaptures": 33
+      },
+      "scope": "Retains every G1 step/required checkpoint plus actual Interact autosave Reading→Bible return→full browser reload/Continue→same dialogue/facing. No nonexistent manual-save UI or game/save injection."
+    },
+    "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "nativeWebBinding": {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/native-web-binding.json",
+      "sha256": "d9705b2ff4ab81855aeed948dfcb629170a62151bd58b92e228155449de92672"
+    },
+    "localCandidateValidated": false,
+    "currentCandidateValidated": false
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -175,11 +298,20 @@
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
+      "id": "G2-implementation",
+      "leaseRecord": "Artifacts/Validation/Autonomy/G2-2026-11-03/implementation-lease-01.json",
+      "owner": "b30ea463-9c39-4ef1-afa8-42fd2101b614",
+      "deadlineUtc": "2026-11-03T08:30:26.478173+00:00",
+      "status": "Active at last report; query actual remote guard before operations. Not an extension of the completed G1 leases."
+    },
+    "lastCompletedBatch": {
       "id": "G1-publication",
-      "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-lease-01.json",
-      "owner": "18c5806f-a0e5-40a4-8c7a-8f35c7ff326d",
-      "deadlineUtc": "2026-11-03T07:54:03.979211+00:00",
-      "status": "Product closure passed; owner completes metadata commit/CI and owned CAS release. Query live guard, this is not a current-lock token."
+      "status": "normal-completed-and-owned-CAS-released",
+      "releasedUtc": "2026-11-03T07:42:13Z",
+      "metadataCommit": "56888dc6300879f9d85f1339946200999710dfe7",
+      "metadataCi": 41597781446,
+      "receipt": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-batch-complete.json",
+      "sha256": "47477e9f068ed5b752e655656323ea3ee187332f9b9ea44a02ff3d29f8e1c72d"
     }
   },
   "environment": {
