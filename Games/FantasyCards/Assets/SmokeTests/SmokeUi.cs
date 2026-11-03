@@ -276,16 +276,37 @@ namespace FantasyCards.SmokeTests
                 pixels.Apply();
                 var directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
                     name.StartsWith("nativity-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Nativity/Screenshots" : name.StartsWith("restage-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Restage/Screenshots" : name.StartsWith("reprise-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Reprise/Screenshots" : name.StartsWith("quest-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Quest/Screenshots" : name.StartsWith("chronicle-", StringComparison.Ordinal) ? "../../../Artifacts/Validation/Chronicle/Screenshots" : "../../../Artifacts/Screenshots", game));
+                var c1CaptureRoot = Environment.GetEnvironmentVariable("FIRSTGAME_C1_NATIVE_CAPTURE_ROOT");
+                bool isolatedC1Capture = !string.IsNullOrEmpty(c1CaptureRoot);
+                if (isolatedC1Capture) directory = C1CaptureDirectory(c1CaptureRoot, game, name);
                 System.IO.Directory.CreateDirectory(directory);
                 var path = System.IO.Path.Combine(directory, name + ".png");
+                if (isolatedC1Capture)
+                {
+                    Assert.That(System.IO.File.Exists(path), Is.False, "C1 original PNG must never be overwritten.");
+                    Assert.That(System.IO.File.Exists(path + ".txt"), Is.False, "C1 original sidecar must never be overwritten.");
+                }
                 var png = pixels.EncodeToPNG();
                 Assert.That(png.Length, Is.GreaterThan(10000), "Capture contains unexpectedly little image data.");
                 if (name.StartsWith("chronicle-", StringComparison.Ordinal) || name.StartsWith("quest-", StringComparison.Ordinal)) Assert.That(System.IO.File.Exists(path), Is.False, "Current original capture names must be unique and preserved.");
-                System.IO.File.WriteAllBytes(path, png);
-                System.IO.File.WriteAllText(path + ".txt", "Native Unity URP scene capture\n" +
+                if (isolatedC1Capture)
+                {
+                    using (var output = new System.IO.FileStream(path, System.IO.FileMode.CreateNew,
+                        System.IO.FileAccess.Write, System.IO.FileShare.Read)) output.Write(png, 0, png.Length);
+                    using (var output = new System.IO.StreamWriter(new System.IO.FileStream(path + ".txt",
+                        System.IO.FileMode.CreateNew, System.IO.FileAccess.Write, System.IO.FileShare.Read))) output.Write("Native Unity URP scene capture\n" +
                     "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +
                     "\nScene " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().path +
                     "\nGraphics " + SystemInfo.graphicsDeviceName + "\nOverlay UI included through temporary camera canvas mode.\n");
+                }
+                else
+                {
+                    System.IO.File.WriteAllBytes(path, png);
+                    System.IO.File.WriteAllText(path + ".txt", "Native Unity URP scene capture\n" +
+                    "Unity " + Application.unityVersion + "\nResolution " + width + "x" + height +
+                    "\nScene " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().path +
+                    "\nGraphics " + SystemInfo.graphicsDeviceName + "\nOverlay UI included through temporary camera canvas mode.\n");
+                }
                 // Preserve the actual failing image before a layout assertion throws.
                 inspect?.Invoke();
             }
@@ -306,6 +327,33 @@ namespace FantasyCards.SmokeTests
                 Canvas.ForceUpdateCanvases();
             }
             yield return null;
+        }
+        // C1 test-only opt-in. The historical routing above is unchanged when
+        // FIRSTGAME_C1_NATIVE_CAPTURE_ROOT is absent. Never configure this for Gospel.
+        static string C1CaptureDirectory(string configured, string game, string name)
+        {
+            Assert.That(game, Is.EqualTo("FantasyCards"), "C1 capture override belongs only to the Card fixture.");
+            var attempt = Environment.GetEnvironmentVariable("FIRSTGAME_NATIVE_ATTEMPT");
+            var validation = Environment.GetEnvironmentVariable("FIRSTGAME_VALIDATION_ROOT");
+            Assert.That(!string.IsNullOrEmpty(attempt) && System.Text.RegularExpressions.Regex.IsMatch(attempt,
+                "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"), Is.True, "Safe explicit C1 attempt is required.");
+            Assert.That(!string.IsNullOrEmpty(validation) && System.IO.Path.IsPathRooted(validation)
+                && System.IO.Path.IsPathRooted(configured), Is.True, "Absolute explicit C1 roots are required.");
+            var artifacts = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,
+                "../../../Artifacts/Validation/Autonomy"));
+            var validationRoot = System.IO.Path.GetFullPath(validation);
+            var directory = System.IO.Path.GetFullPath(configured);
+            Assert.That(validationRoot.StartsWith(artifacts + System.IO.Path.DirectorySeparatorChar,
+                StringComparison.Ordinal), Is.True, "C1 Native run must stay under Autonomy evidence.");
+            Assert.That(directory, Is.EqualTo(System.IO.Path.Combine(validationRoot,
+                "Screenshots", "FantasyCards", attempt)), "C1 capture root must bind its exact validation run and attempt.");
+            Assert.That(name, Is.EqualTo(System.IO.Path.GetFileName(name)), "Capture name must be an ordinary leaf.");
+            Assert.That(!name.Contains("/") && !name.Contains("\\") && name != "." && name != "..",
+                Is.True, "Capture name must not escape the attempt.");
+            for (var item = new System.IO.DirectoryInfo(directory); item != null; item = item.Parent)
+                if (item.Exists) Assert.That((item.Attributes & System.IO.FileAttributes.ReparsePoint) == 0,
+                    Is.True, "C1 capture parents must remain regular directories.");
+            return directory;
         }
         public static void AssertNoMissingScripts()
         {

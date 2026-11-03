@@ -1,6 +1,8 @@
 # 지속 개발 로드맵과 재개 지점
 
-**G1/G2는 실제 공개 검증과 봉인을 완료했고, 현재는 C1을 준비한다**. 제품을 처음부터 다시 만들지 않는다. 장기 방향은 [CHARTER.md](CHARTER.md), 현재 사실은 [STATE.json](STATE.json)을 따른다.
+**G1/G2는 당시 공개 검증과 봉인을 마쳤고, 현재는 C1 소스·검증 복구와 등급 안내 보정을 진행한다**. 제품을 처음부터 다시 만들지 않는다. 장기 방향은 [CHARTER.md](CHARTER.md), 현재 사실은 [STATE.json](STATE.json)을 따른다.
+
+복구 관측: `/workspace`의 C1 소스·Native01은 남았으나 이전 `/tmp` stage/build와 G2 Root/PublicPortal 연결 대상이 없다. 아래 완료 이력을 삭제하거나 누락 원문을 새로 쓰지 않는다. 현재 가용성·정확한 복구 단계는 STATE의 `activeWork.interruptionRecovery`를 먼저 따르며, 배포 전에 정확한 복원 또는 별도 동등한 현재 정상판 재검증이 필요하다.
 
 ## 회차 운영
 

@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "product-native-only",
+  "publishReady": false,
+  "historicalReleasePrerequisitesRestored": false,
+  "createdUtc": "2026-11-03T15:09:15.252623+00:00",
+  "game": "FantasyCards",
+  "revision": "fm-capability-2026-11-03",
+  "attempt": "Native04",
+  "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04",
+  "buildRoot": "/tmp/firstgame-c1-recovery-builds",
+  "sourceFiles": {
+    "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs": "8c0098766b492be37ea74cc342413d11ccd353c31890b2f88c48cf9e299c2510",
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs": "3d74488bde6bc91415f7d19853fae82f874473f6729eb6fc7b6e98a1943d6882",
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs": "f0450c7c5338561f6b75260b569fb0735f0801461fe8d594189121180bded9a6",
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs.meta": "6e54e1a45e79fae7867a9be95faa242edb5de80d4b492c299b7a38d80a5eea2a",
+    "Games/FantasyCards/Assets/SmokeTests/SmokeUi.cs": "78be97279a3218bf7cad0486dca4a21e250ad5bf2886ee29f6faf860d109f0f7",
+    "Games/FantasyCards/Assets/Editor/BuildCommands.cs": "0e547e0027683b155e8ef2285a4c28f0055493b7a2228fee449fc923c7dc99a9",
+    "Tools/Validation/run-nativity-native.py": "834e54887c7292de546e567ba5cfdbc883ad34b805cda5b94249086987fcfa38",
+    "Tools/Build/nativity-task.sh": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+    "Tools/Autonomy/c1-native-contract.json": "7c389d4f53062d652cc58d0fd2391cd37ea0e22b9e386101516ed8ab025fcbb0"
+  },
+  "nativeContractSha256": "7c389d4f53062d652cc58d0fd2391cd37ea0e22b9e386101516ed8ab025fcbb0",
+  "expectedFullNames": [
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+    "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+    "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+    "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+    "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+  ],
+  "missingHistoricalG2Prerequisites": [
+    "Root seal c030c692 remains missing",
+    "PublicPortal audit81a448 remains missing",
+    "old build outputs/Native captures and stage remain missing; public manifest is separately restored byte-exact"
+  ],
+  "sourceReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/grade-grid-source-review.json",
+    "sha256": "d6bf27cc3cfba9ac23b3ef97871b15e73ec59e8e168859ffe1b238e001129dc6"
+  },
+  "releaseRestriction": "This independent Native execution cannot satisfy old c1_native_runner release preflight or publishReady. A fresh fully verified public baseline is still required.",
+  "retryOf": "Native03",
+  "retryReason": "Exact preserved official package tarballs verified against existing pinned SHA1/version, restored into missing generated package caches. Second conservative retry for cold-cache recovery; no further same-cause retries if this fails."
+}

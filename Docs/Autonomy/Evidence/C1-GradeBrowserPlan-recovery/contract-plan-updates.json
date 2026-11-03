@@ -1,0 +1,32 @@
+{
+  "file": "Tools/Autonomy/c1-contract.json",
+  "plans": {
+    "desktop": {
+      "file": "Tools/Autonomy/capability_desktop_plan.json",
+      "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "steps": 162,
+      "required": 48,
+      "pcmLabels": [
+        "nativity-title",
+        "starter-lobby",
+        "continued-sealed-lobby",
+        "continued-battle"
+      ],
+      "reloads": 2
+    },
+    "mobile-landscape": {
+      "file": "Tools/Autonomy/capability_mobile_plan.json",
+      "sha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+      "steps": 163,
+      "required": 47,
+      "pcmLabels": [
+        "nativity-title",
+        "starter-lobby",
+        "continued-sealed-lobby",
+        "continued-battle"
+      ],
+      "reloads": 2
+    }
+  },
+  "preserveEveryOtherKeyAndSourceGate": true
+}

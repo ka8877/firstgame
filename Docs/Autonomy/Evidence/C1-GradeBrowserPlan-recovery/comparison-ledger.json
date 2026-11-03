@@ -1,0 +1,186 @@
+{
+  "status": "unexecuted-static-draft-only",
+  "createdUtc": "2026-11-03T14:52:21.618386+00:00",
+  "repositoryUnchangedByThisAgent": true,
+  "scope": "Five normal-input steps and two required original captures, inserted only after the existing actual catalog-entry checkpoint. No existing step/value/order, scope text, audio/reload or required checkpoint is changed.",
+  "plans": {
+    "capability_desktop_plan.json": {
+      "baseSha256": "12e4e1d3b82bba7951e7223da4a51b70202f419e69dc5e681e7850483da7d27f",
+      "baseBytes": 33480,
+      "baseSteps": 157,
+      "baseRequired": 46,
+      "proposedSha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "proposedBytes": 35770,
+      "proposedSteps": 162,
+      "proposedRequired": 48,
+      "insertionIndex": 8,
+      "addedSteps": 5,
+      "addedRequired": 2,
+      "allOriginalValuesAndOrderRetained": true,
+      "originalBytesReconstructedExactly": true,
+      "audioWindowsRetainedExactly": [
+        "nativity-title",
+        "starter-lobby",
+        "continued-sealed-lobby",
+        "continued-battle"
+      ],
+      "reloadStepsRetainedExactly": 2
+    },
+    "capability_mobile_plan.json": {
+      "baseSha256": "031920c47ec4b10fc81b6c417dfef664d5eab645527168f906ec37bf24635829",
+      "baseBytes": 33107,
+      "baseSteps": 158,
+      "baseRequired": 45,
+      "proposedSha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+      "proposedBytes": 35397,
+      "proposedSteps": 163,
+      "proposedRequired": 47,
+      "insertionIndex": 8,
+      "addedSteps": 5,
+      "addedRequired": 2,
+      "allOriginalValuesAndOrderRetained": true,
+      "originalBytesReconstructedExactly": true,
+      "audioWindowsRetainedExactly": [
+        "nativity-title",
+        "starter-lobby",
+        "continued-sealed-lobby",
+        "continued-battle"
+      ],
+      "reloadStepsRetainedExactly": 2
+    }
+  },
+  "addedSteps": [
+    {
+      "type": "click",
+      "point": [
+        0.6185,
+        0.374
+      ],
+      "label": "출전 카드 도감의 실제 등급 / 랭크 안내",
+      "settleMs": 850
+    },
+    {
+      "type": "checkpoint",
+      "name": "capability-grade-guide-all-thirteen",
+      "expected": "현재 카드 등급 · 랭크 안내의 기존13개 분류가 모두 캔버스 안에 보인다. 미분류의 명칭과 수록0종까지 읽히고 마지막 행은 전체 카드 앨범/돌아가기 푸터와 겹치지 않는다. 각 분류 이름/원작 코드/현재 수록 수, 상단 설명과 두 푸터가 읽혀야 한다. 원작의 등급13개를 새로 확정하는 검사가 아니다. Root must directly inspect this current original; checkpoint.expected is not an automated semantic or overlap assertion."
+    },
+    {
+      "type": "review_input",
+      "name": "capability-grade-guide-review",
+      "expected": "현재 grade-guide 원본을 직접 보고 기존13개 항목과 마지막 미분류 명칭/수록 수, 전체 카드 앨범 및 돌아가기 푸터의 분리·가독성을 확인한다. 잘렸거나 푸터에 가려지면 통과로 취급하지 않는다. 일반 포인터/터치 입력으로만 현재 UI를 확인하며 Unity fields, saved payloads, random seeds or JavaScript game state are never injected. This acknowledgment is not Root visual approval."
+    },
+    {
+      "type": "click",
+      "point": [
+        0.7475,
+        0.9435
+      ],
+      "label": "등급 안내의 실제 돌아가기로 같은 출전 카드 도감 복귀",
+      "settleMs": 850
+    },
+    {
+      "type": "checkpoint",
+      "name": "capability-grade-guide-return-catalog",
+      "expected": "등급 안내를 닫은 실제 출전 카드 도감이다. 검색 입력은 비어 있고 기존 전체2646종/검색 결과2646종 및 능력·전체와 카드가 보인다. 소유 도감/15350원본 앨범/스타터 수령 화면으로 바뀌지 않는다. 다음 원래의 원작번호 검색 입력을 이어간다. Root must inspect this current original; checkpoint.expected is not an automated semantic assertion."
+    }
+  ],
+  "addedRequiredCheckpoints": [
+    "capability-grade-guide-all-thirteen",
+    "capability-grade-guide-return-catalog"
+  ],
+  "coordinates": [
+    {
+      "point": [
+        0.6185,
+        0.374
+      ],
+      "meaning": "Current catalog grade/rank guide button center",
+      "source": "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs:75",
+      "unityRect": [
+        0.509,
+        0.598,
+        0.728,
+        0.654
+      ],
+      "conversion": "[(left+right)/2, 1-(bottom+top)/2]"
+    },
+    {
+      "point": [
+        0.7475,
+        0.9435
+      ],
+      "meaning": "Grade guide footer Back center; null back returns to ShowCollection(edit)",
+      "source": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs:203",
+      "unityRect": [
+        0.55,
+        0.018,
+        0.945,
+        0.095
+      ],
+      "conversion": "[(left+right)/2, 1-(bottom+top)/2]"
+    }
+  ],
+  "limitations": [
+    "No product code import, tests, Unity, browser, network, Git or repository mutation was performed.",
+    "Coordinates are source-derived and not actually hit-tested. Current ordinary screenshot-guided review_input may correct normal input; no state injection.",
+    "Current existing13 classifications include Uncatalogued; this does not establish13 historical original grades.",
+    "Screenshot semantic/overlap approval remains pending direct Root original review in both current PC and touch profiles.",
+    "Native01 8-pass result and old clipped grade original remain historical; these proposed browser plans do not reclassify them.",
+    "The release owner must bind actual selected Native02/current Web/source/G2-preservation/public/Root evidence separately."
+  ],
+  "observedSources": [
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs",
+      "sha256": "43815a843e89bd770337461a592c748fb33bdb20beeada9991ca199a5f28bf9a",
+      "bytes": 19976
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+      "sha256": "a4900f3d5b3d05b0300e44720810f3eeca5809af039b28954c84eced3a34ad1b",
+      "bytes": 20788
+    },
+    {
+      "file": "Tools/Autonomy/c1_web_smoke.py",
+      "sha256": "4639418e857eea27b0f7b6124cb2ccb58e141851117cbb5ec54e82e9c2a543d7",
+      "bytes": 30049
+    },
+    {
+      "file": "Tools/Autonomy/c1-contract.json",
+      "sha256": "ab6ee2f0ee3f014cd67f65c28fbf5dd15f6249394e8c52654c2ae0e077880c3e",
+      "bytes": 5962
+    }
+  ],
+  "contractRequiredUpdates": {
+    "file": "Tools/Autonomy/c1-contract.json",
+    "plans": {
+      "desktop": {
+        "file": "Tools/Autonomy/capability_desktop_plan.json",
+        "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+        "steps": 162,
+        "required": 48,
+        "pcmLabels": [
+          "nativity-title",
+          "starter-lobby",
+          "continued-sealed-lobby",
+          "continued-battle"
+        ],
+        "reloads": 2
+      },
+      "mobile-landscape": {
+        "file": "Tools/Autonomy/capability_mobile_plan.json",
+        "sha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+        "steps": 163,
+        "required": 47,
+        "pcmLabels": [
+          "nativity-title",
+          "starter-lobby",
+          "continued-sealed-lobby",
+          "continued-battle"
+        ],
+        "reloads": 2
+      }
+    },
+    "preserveEveryOtherKeyAndSourceGate": true
+  },
+  "wrapperChangesRequired": "No new wrapper code is necessary for these steps: existing c1_web_smoke.py reads plan count/SHA/required dynamically from the contract and checks every required checkpoint. Preserve all other logic. Owner final closure must require both new names in Root actual original approval and pin the executed plan/contract/harness."
+}

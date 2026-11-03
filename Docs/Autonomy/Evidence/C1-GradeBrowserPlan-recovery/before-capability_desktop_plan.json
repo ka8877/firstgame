@@ -1,0 +1,1163 @@
+{
+  "FantasyCards": {
+    "revision": "fm-capability-2026-11-03",
+    "suite": "modern-real-input-v1",
+    "scope": "Current real-pointer original card album, grade/support/large-card viewing and preserved owned starter/shop/deck/solo/shuffle/full reload flow. The Native suite separately binds bright/gold stat geometry, legal field reorder/disposal, real Core-event effects and damage-specific sound sources. No Unity fields/save payloads or random seeds are injected. Each original capture requires Root review. Current Nativity title, distinct actual products and all five acquisition slots retain the same starter/economy flow; real field evidence keeps own/opponent boundaries visible. Native separately compares real on-card TMP at equipment, heads-coin and damage commit frames against Core. The earlier wrong-pointer run was visually rejected and archived. Fresh early ordinary-input visual gates require a real starter-choice screen and then50owned/600SP before the longer flow. Proposed unexecuted capability append-only detour after the existing title PCM: original source-ID explanations and actual ability-filter membership; every pre-existing required checkpoint, step and audio role remains unchanged. Exact semantic screenshots require Root approval. Gospel retains the eventual G2 closure; no old Gospel plan is substituted.",
+    "requiredCheckpoints": [
+      "title",
+      "starter-choice",
+      "starter-granted",
+      "unified-original-album",
+      "album-real-grade-filters",
+      "album-unique-cards",
+      "supported-large-original-cards",
+      "album-complete-original-detail",
+      "shop",
+      "pack-offer",
+      "sealed-pack",
+      "continued-sealed-pack",
+      "continued-sealed-graphic",
+      "five-card-reveal",
+      "owned-fifty-five",
+      "deck-fifty-before",
+      "deck-forty-nine-save-disabled",
+      "deck-save-confirmed",
+      "owned-deck-fifty",
+      "owned-solo-preview",
+      "opening-six-originals",
+      "owned-solo-board",
+      "after-original-shuffle",
+      "saved-quest-battle",
+      "continued-quest-battle",
+      "capability-free-practice-entry",
+      "capability-catalog-entry",
+      "capability-swarm-hover",
+      "capability-rabi-hover",
+      "capability-death-hand-hover",
+      "capability-long-sword-hover",
+      "capability-long-sword-detail",
+      "capability-all-hover",
+      "capability-beast-swarm-positive",
+      "capability-gear-swarm-negative",
+      "capability-gear-rabi-positive",
+      "capability-magic-rabi-negative",
+      "capability-magic-death-hand-positive",
+      "capability-beast-death-hand-negative",
+      "capability-beast-all-positive",
+      "capability-gear-all-positive",
+      "capability-magic-all-positive",
+      "capability-all-all-positive",
+      "capability-all-swarm-negative",
+      "capability-reset-and-return",
+      "capability-returned-title"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.05,
+          0.5
+        ],
+        "label": "실제 빈 타이틀 입력",
+        "settleMs": 850
+      },
+      {
+        "type": "audio",
+        "label": "nativity-title"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2595,
+          0.879
+        ],
+        "label": "기존 타이틀의 자유 연습",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-free-practice-entry",
+        "expected": "실제 일곱 소울의 대기실이며 ‘출전 카드’ 입구가 보인다. 기본 덱 수령/보유 카드/상점 화면으로 잘못 들어가면 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "review_input",
+        "name": "capability-entry-review",
+        "expected": "원본을 열어 실제 자유 연습 대기실 진입을 확인한다. source/saves/Unity fields/JS 상태를 주입하지 말고 일반 입력으로만 교정한다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.532,
+          0.9085
+        ],
+        "label": "자유 연습의 출전 카드",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-catalog-entry",
+        "expected": "전체2646종의 기존 출전 카드 도감과 이름·효과·등급·원작번호 검색 입력, 능력·전체가 보인다. 소유 도감이나15350 원본 앨범과 구분한다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042920028",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042920028",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042920028 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "deltaY": 0,
+        "label": "기존 wheel 입력의 마우스 이동으로 원본 카드 hover; 스크롤 없음",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-swarm-hover",
+        "expected": "검색 입력 2042920028, 결과1종과 스웜 원본 카드, hover의 정확한 설명 ‘유닛 능력 · 야수 / 랭크 N’가 보인다. 잘못 회전된 능력 명칭을 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2062120091",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2062120091",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2062120091 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "deltaY": 0,
+        "label": "기존 wheel 입력의 마우스 이동으로 원본 카드 hover; 스크롤 없음",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-rabi-hover",
+        "expected": "검색 입력 2062120091, 결과1종과 라비원숭이 원본 카드, hover의 정확한 설명 ‘유닛 능력 · 장비 / 랭크 N’가 보인다. 잘못 회전된 능력 명칭을 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042920002",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042920002",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042920002 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "deltaY": 0,
+        "label": "기존 wheel 입력의 마우스 이동으로 원본 카드 hover; 스크롤 없음",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-death-hand-hover",
+        "expected": "검색 입력 2042920002, 결과1종과 데스핸드 원본 카드, hover의 정확한 설명 ‘유닛 능력 · 마법 / 랭크 N’가 보인다. 잘못 회전된 능력 명칭을 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042940039",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042940039",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042940039 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "deltaY": 0,
+        "label": "기존 wheel 입력의 마우스 이동으로 원본 카드 hover; 스크롤 없음",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-long-sword-hover",
+        "expected": "검색 입력 2042940039, 결과1종과 롱소드 원본 카드, hover의 정확한 설명 ‘장착 조건 · 장비 · 마법’가 보인다. 잘못 회전된 능력 명칭을 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "label": "롱소드 실제 상세",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-long-sword-detail",
+        "expected": "원본 롱소드 전체와 정확한 복합 조건 ‘장착 조건 · 장비 · 마법’가 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.87
+        ],
+        "label": "기존 상세에서 도감으로 돌아가기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 5112322069",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "5112322069",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 5112322069 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "wheel",
+        "point": [
+          0.146,
+          0.6035
+        ],
+        "deltaY": 0,
+        "label": "기존 wheel 입력의 마우스 이동으로 원본 카드 hover; 스크롤 없음",
+        "settleMs": 550
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-all-hover",
+        "expected": "검색 입력 5112322069, 결과1종과 킹핀사이클롭 원본 카드, hover의 정확한 설명 ‘유닛 능력 · 만능 / 랭크 N’가 보인다. 잘못 회전된 능력 명칭을 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.59
+        ],
+        "label": "실제 야수 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042920028",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042920028",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042920028 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-beast-swarm-positive",
+        "expected": "입력 원작번호 2042920028, 실제 능력 필터 야수, 검색 결과1종과 스웜 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.802,
+          0.4
+        ],
+        "label": "실제 장비 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-gear-swarm-negative",
+        "expected": "입력 원작번호 2042920028, 실제 능력 필터 장비, 검색 결과0종과 ‘이 조건에 맞는 카드가 없습니다.’가 함께 보인다. 다른 카드로 대체되어 있으면 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2062120091",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2062120091",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2062120091 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-gear-rabi-positive",
+        "expected": "입력 원작번호 2062120091, 실제 능력 필터 장비, 검색 결과1종과 라비원숭이 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.59
+        ],
+        "label": "실제 마법 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-magic-rabi-negative",
+        "expected": "입력 원작번호 2062120091, 실제 능력 필터 마법, 검색 결과0종과 ‘이 조건에 맞는 카드가 없습니다.’가 함께 보인다. 다른 카드로 대체되어 있으면 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042920002",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042920002",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042920002 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-magic-death-hand-positive",
+        "expected": "입력 원작번호 2042920002, 실제 능력 필터 마법, 검색 결과1종과 데스핸드 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.59
+        ],
+        "label": "실제 야수 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-beast-death-hand-negative",
+        "expected": "입력 원작번호 2042920002, 실제 능력 필터 야수, 검색 결과0종과 ‘이 조건에 맞는 카드가 없습니다.’가 함께 보인다. 다른 카드로 대체되어 있으면 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 5112322069",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "5112322069",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 5112322069 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-beast-all-positive",
+        "expected": "입력 원작번호 5112322069, 실제 능력 필터 야수, 검색 결과1종과 킹핀사이클롭 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.802,
+          0.4
+        ],
+        "label": "실제 장비 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-gear-all-positive",
+        "expected": "입력 원작번호 5112322069, 실제 능력 필터 장비, 검색 결과1종과 킹핀사이클롭 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.59
+        ],
+        "label": "실제 마법 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-magic-all-positive",
+        "expected": "입력 원작번호 5112322069, 실제 능력 필터 마법, 검색 결과1종과 킹핀사이클롭 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3815,
+          0.374
+        ],
+        "label": "능력 필터 열기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.4
+        ],
+        "label": "실제 만능 능력 필터 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-all-all-positive",
+        "expected": "입력 원작번호 5112322069, 실제 능력 필터 만능, 검색 결과1종과 킹핀사이클롭 원본 카드가 함께 보인다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.284,
+          0.201
+        ],
+        "label": "원작번호 검색 입력 2042920028",
+        "settleMs": 300
+      },
+      {
+        "type": "key",
+        "key": "ControlOrMeta+A",
+        "settleMs": 120
+      },
+      {
+        "type": "text",
+        "text": "2042920028",
+        "settleMs": 150
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5965,
+          0.201
+        ],
+        "label": "원작번호 2042920028 실제 검색",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-all-swarm-negative",
+        "expected": "입력 원작번호 2042920028, 실제 능력 필터 만능, 검색 결과0종과 ‘이 조건에 맞는 카드가 없습니다.’가 함께 보인다. 다른 카드로 대체되어 있으면 승인하지 않는다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.195,
+          0.9285
+        ],
+        "label": "기존 검색 / 필터 초기화",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-reset-and-return",
+        "expected": "검색이 비어 있고 능력·전체와 전체2646종이 복구된다. 덱 편집·저장·팩 구매·전투 시작을 하지 않았다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.9,
+          0.071
+        ],
+        "label": "기존 도감의 대기실",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8635,
+          0.904
+        ],
+        "label": "자유 연습 우측 프로필 레일의 돌아가기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "capability-returned-title",
+        "expected": "현재 타이틀의 게임 시작·자유 연습 버튼으로 돌아왔다. 이어지는 기존 무료 기본 덱/600SP/소유50장 검증을 그대로 진행해야 한다. Root must inspect the current original; this expected string is not an automated membership assertion."
+      },
+      {
+        "type": "review_input",
+        "name": "capability-return-title-review",
+        "expected": "원본에서 실제 타이틀 복귀를 확인한 뒤에만 기존 게임 시작 입력을 계속한다. 이후 Nativity 기본 덱·경제·셔플·저장/full reload·PCM 조건을 생략하지 않는다."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.256,
+          0.662
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-entry-review",
+        "expected": "Directly verify that actual ordinary input entered the seven-starter choice, not the title. Confirm by viewing the original. Correct only through ordinary input, never state injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-choice",
+        "expected": "Seven-element starter selector, one free choice."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7525,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-wallet-review",
+        "expected": "Directly verify the actual owned lobby with50cards and600SP after the free starter. A generic nonblank image is not a semantic flow assertion."
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-granted",
+        "expected": "Actual600SP/GP0/50owned starter."
+      },
+      {
+        "type": "audio",
+        "label": "starter-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.865,
+          0.7065
+        ],
+        "label": "단일 카드 앨범",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "unified-original-album",
+        "expected": "One original-card album, real15350 records, desktop12/touch4-large cards and grade filter; no separate premium hub."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.83,
+          0.206
+        ],
+        "label": "앨범 등급 선택",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "album-real-grade-filters",
+        "expected": "Original archive rarity counts in the same album filter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5,
+          0.504
+        ],
+        "label": "유니크 등급",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "album-unique-cards",
+        "expected": "Unique grade original cards visible in the unified album."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1125,
+          0.9325
+        ],
+        "label": "초기화",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.625,
+          0.2925
+        ],
+        "label": "출전 지원 카드",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8525,
+          0.2925
+        ],
+        "label": "큰 카드 보기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "supported-large-original-cards",
+        "expected": "Four large complete original cards from the actual2646 supported definitions."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.16,
+          0.51
+        ],
+        "label": "첫 원본 카드 상세",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "album-complete-original-detail",
+        "expected": "Complete uncropped original print, original source rules and actual supported/unsupported status."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.635,
+          0.895
+        ],
+        "label": "도감으로",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.87,
+          0.064
+        ],
+        "label": "대기실",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2165,
+          0.915
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "shop",
+        "expected": "Actual booster prices/SP wallet."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.216,
+          0.4585
+        ],
+        "label": "클래식 부스터",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "pack-offer",
+        "expected": "Actual400SP/odds and sourceclassificationnote."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5295,
+          0.825
+        ],
+        "label": "400SP 구매",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "sealed-pack",
+        "expected": "Actual200SP/sealed5card pack saved before opening."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.256,
+          0.662
+        ],
+        "label": "기존 게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2165,
+          0.915
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.582,
+          0.827
+        ],
+        "label": "구매한 카드팩 1개 대기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-pack",
+        "expected": "Full navigation restored200SP/one saved unopened pack; actual original binds this reload."
+      },
+      {
+        "type": "audio",
+        "label": "continued-sealed-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.653,
+          0.31
+        ],
+        "label": "보관팩 개봉하기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-graphic",
+        "expected": "Original sealed graphic from same saved purchase, no new charge."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.552,
+          0.825
+        ],
+        "label": "이미 구매한 카드팩 개봉",
+        "settleMs": 2200
+      },
+      {
+        "type": "checkpoint",
+        "name": "five-card-reveal",
+        "expected": "Five original printed fronts and neutralacquired/ownedfooter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.19,
+          0.897
+        ],
+        "label": "보유 카드 보기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-fifty-five",
+        "expected": "Actual55owned/27distinct and200SP after one opening."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4505,
+          0.915
+        ],
+        "label": "보유 덱 편집",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-fifty-before",
+        "expected": "Valid50/50owned deck."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.069,
+          0.772
+        ],
+        "label": "지형 한장 빼기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-forty-nine-save-disabled",
+        "expected": "Actual49/50 disables normal save; no invaliddeck persisted."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.189,
+          0.772
+        ],
+        "label": "보유지형 다시넣기",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.666,
+          0.836
+        ],
+        "label": "정상50장덱 저장",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "deck-save-confirmed",
+        "expected": "Actual saved50owned deck confirmation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4505,
+          0.915
+        ],
+        "label": "저장한덱 다시보기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-deck-fifty",
+        "expected": "Actual50/50owneddeck and55collection unchanged."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.0995,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.395,
+          0.41
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-preview",
+        "expected": "Actual50cardowneddeck composition/stage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.218,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-six-originals",
+        "expected": "Actual six original opening cards."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.792,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-board",
+        "expected": "Actual owneddeck battle44remaining/6hand/preparation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.821
+        ],
+        "label": "actual-whole-hand-shuffle",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-original-shuffle",
+        "expected": "Whole six cards returned/dealt through actual board control; actualchangedhand/message."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.898,
+          0.67
+        ],
+        "label": "actual-battle-menu",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.33,
+          0.51
+        ],
+        "label": "실제 소유전투 저장",
+        "settleMs": 950
+      },
+      {
+        "type": "click",
+        "point": [
+          0.67,
+          0.705
+        ],
+        "label": "전투로",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-quest-battle",
+        "expected": "Actual savedhand/deck/LP/phase before fullreload."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.256,
+          0.7745
+        ],
+        "label": "전투 이어하기",
+        "settleMs": 1500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-quest-battle",
+        "expected": "Actual same savedhand/deck44/phase and validcollectionticket restored."
+      },
+      {
+        "type": "audio",
+        "label": "continued-battle"
+      }
+    ]
+  }
+}

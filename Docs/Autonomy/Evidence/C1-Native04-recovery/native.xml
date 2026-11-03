@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.4347632">
+  <test-suite type="TestSuite" id="1000" name="FantasyCards" fullname="FantasyCards" runstate="Runnable" testcasecount="89" result="Passed" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.434763" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1049" name="FantasyCards.SmokeTests.dll" fullname="/workspace/firstgame/Games/FantasyCards/Library/ScriptAssemblies/FantasyCards.SmokeTests.dll" runstate="Runnable" testcasecount="38" result="Passed" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.300699" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14270" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1050" name="FantasyCards" fullname="FantasyCards" runstate="Runnable" testcasecount="38" result="Passed" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.299618" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1051" name="SmokeTests" fullname="FantasyCards.SmokeTests" runstate="Runnable" testcasecount="38" result="Passed" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.298660" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="FantasyCardsRevivalSmokeTests" fullname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests" classname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-03 15:12:26Z" end-time="2026-11-03 15:12:33Z" duration="6.801390" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1005" name="FidelityGradeGuideAndRankCapabilityFiltersUseActualCards" fullname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards" methodname="FidelityGradeGuideAndRankCapabilityFiltersUseActualCards" classname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests" runstate="Runnable" seed="708500713" result="Passed" start-time="2026-11-03 15:12:06Z" end-time="2026-11-03 15:12:22Z" duration="16.388833" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves" fullname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves" methodname="OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves" classname="FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests" runstate="Runnable" seed="585486035" result="Passed" start-time="2026-11-03 15:12:22Z" end-time="2026-11-03 15:12:33Z" duration="10.939188" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1025" name="NativitySmokeTests" fullname="FantasyCards.SmokeTests.NativitySmokeTests" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-03 15:13:54Z" end-time="2026-11-03 15:14:18Z" duration="23.269418" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1027" name="ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules" fullname="FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules" methodname="ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" seed="1300214517" result="Passed" start-time="2026-11-03 15:12:33Z" end-time="2026-11-03 15:12:47Z" duration="14.087605" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+            <test-case id="1028" name="AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent" fullname="FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent" methodname="AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" seed="870124154" result="Passed" start-time="2026-11-03 15:12:47Z" end-time="2026-11-03 15:13:04Z" duration="16.622488" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+            <test-case id="1029" name="FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging" fullname="FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging" methodname="FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" seed="1776593741" result="Passed" start-time="2026-11-03 15:13:04Z" end-time="2026-11-03 15:13:30Z" duration="26.772330" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce" fullname="FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce" methodname="ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" seed="1952452875" result="Passed" start-time="2026-11-03 15:13:30Z" end-time="2026-11-03 15:13:50Z" duration="19.620973" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts" fullname="FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts" methodname="RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts" classname="FantasyCards.SmokeTests.NativitySmokeTests" runstate="Runnable" seed="953072656" result="Passed" start-time="2026-11-03 15:13:50Z" end-time="2026-11-03 15:14:18Z" duration="27.688592" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1107" name="FantasyCards.Tests.dll" fullname="/workspace/firstgame/Games/FantasyCards/Library/ScriptAssemblies/FantasyCards.Tests.dll" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-11-03 15:14:18Z" end-time="2026-11-03 15:14:18Z" duration="0.053139" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14270" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1108" name="FantasyCards" fullname="FantasyCards" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-11-03 15:14:18Z" end-time="2026-11-03 15:14:18Z" duration="0.046099" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1109" name="Tests" fullname="FantasyCards.Tests" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-11-03 15:14:18Z" end-time="2026-11-03 15:14:18Z" duration="0.037829" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1052" name="BattleEngineTests" fullname="FantasyCards.Tests.BattleEngineTests" classname="FantasyCards.Tests.BattleEngineTests" runstate="Runnable" testcasecount="51" result="Passed" start-time="2026-11-03 15:14:18Z" end-time="2026-11-03 15:14:18Z" duration="0.032502" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1101" name="UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList" fullname="FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList" methodname="UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList" classname="FantasyCards.Tests.BattleEngineTests" runstate="Runnable" seed="1850743421" result="Passed" start-time="2026-11-03 15:14:18Z" end-time="2026-11-03 15:14:18Z" duration="0.011466" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /home/agent/.config/unity3d/FirstGame/FantasyCards/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

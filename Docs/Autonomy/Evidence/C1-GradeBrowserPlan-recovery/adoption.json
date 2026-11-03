@@ -1,0 +1,24 @@
+{
+  "status": "adopted-unexecuted-grade-addition",
+  "updatedUtc": "2026-11-03T15:02:54.382753+00:00",
+  "plans": [
+    {
+      "mode": "desktop",
+      "file": "Tools/Autonomy/capability_desktop_plan.json",
+      "beforeSha256": "12e4e1d3b82bba7951e7223da4a51b70202f419e69dc5e681e7850483da7d27f",
+      "afterSha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "steps": 162,
+      "required": 48
+    },
+    {
+      "mode": "mobile-landscape",
+      "file": "Tools/Autonomy/capability_mobile_plan.json",
+      "beforeSha256": "031920c47ec4b10fc81b6c417dfef664d5eab645527168f906ec37bf24635829",
+      "afterSha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+      "steps": 163,
+      "required": 47
+    }
+  ],
+  "contractSha256": "1f3f2b6e160c511794f26ebc889cb8b37c765f80cdbd5647acc8433c89b0511e",
+  "limits": "Only five ordinary UI steps/two checkpoints added per profile; actual Web hit testing/direct Root originals not yet performed. Existing old/capability steps, PCM4/reload2 remain preserved by the pinned independent comparison. No historical G2 pin was changed."
+}
