@@ -29,9 +29,12 @@ import g1_evidence as G1
 # configuration section. All old five remain mandatory in every new profile.
 G1_CHECKPOINTS={'title','g1-field-dialogue','g1-guidance','g1-saved','g1-continued'}
 G2_CHECKPOINTS={'g2-planted-facing','g2-reading-bible','g2-book-return-reading','g2-reading-before-reload','g2-continued-reading','g2-continued-reading-bible','g2-continued-reading-return'}
-CHECKPOINTS=G1_CHECKPOINTS|G2_CHECKPOINTS
-PLAN_FILES={'Desktop720':'Tools/Autonomy/g2_desktop_plan.json','Mobile844':'Tools/Autonomy/g2_mobile_plan.json','PublicMobile844':'Tools/Autonomy/g2_public_plan.json'}
-PLAN_SCOPE={'Desktop720':(116,47),'Mobile844':(85,33),'PublicMobile844':(85,33)}
+RECOVERY_CHECKPOINT='continued-g2-reading'
+CHECKPOINTS=G1_CHECKPOINTS|G2_CHECKPOINTS|{RECOVERY_CHECKPOINT}
+BROWSER_OUTPUT=OUT/'BrowserV2'
+PLAN_FILES={'Desktop720':'Tools/Autonomy/g2_desktop_plan_v2.json','Mobile844':'Tools/Autonomy/g2_mobile_plan_v2.json','PublicMobile844':'Tools/Autonomy/g2_public_plan_v2.json'}
+PLAN_SCOPE={'Desktop720':(117,48),'Mobile844':(86,34),'PublicMobile844':(86,34)}
+PLAN_SHA256={'Desktop720': '671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6', 'Mobile844': '4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d', 'PublicMobile844': '4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d'}
 NEW_CASES={'AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload','LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue'}
 RETAINED_CASES={'CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan','ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources','DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes','EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState','ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback','FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload','IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible','ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet','NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration','PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor','RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes','RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump','ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds','TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition'}
 EXPECTED_CASES=RETAINED_CASES|NEW_CASES
@@ -106,7 +109,7 @@ def current_build():
  core=core_evidence()
  return {'native':ref(native/'binding.json'),'nativeResults':ref(native/'native.xml'),'nativeRootReview':ref(review_path),'targets':{'Web':{'evidence':ref(evidence),'inputs':ref(player/'BuildInputs.json'),'sourceFingerprint':binding['sourceFingerprint']}},'core':core['results'],'coreEvidence':core,'audioAssets':OLD.verify_audio_assets()}
 def browser(profile):
- p=OUT/profile/'PathOfDawn/report.json';r=read(p);mode,width,height={'Desktop720':('desktop',1280,720),'Mobile844':('mobile-landscape',844,390),'PublicMobile844':('mobile-landscape',844,390)}[profile]
+ p=BROWSER_OUTPUT/profile/'PathOfDawn/report.json';r=read(p);mode,width,height={'Desktop720':('desktop',1280,720),'Mobile844':('mobile-landscape',844,390),'PublicMobile844':('mobile-landscape',844,390)}[profile]
  require(r.get('game')=='PathOfDawn' and r.get('revision')==REVISION and r.get('releaseProfile')==PROFILE and r.get('suite')=='modern-real-input-v1' and r.get('status')=='passed' and r.get('checks') and all(c.get('passed') is True for c in r['checks']),'Every fresh G2 real-input check must pass')
  caps=r.get('browserInputCapabilities',{});require(r.get('profile')==mode and r.get('interactionViewport')=={'width':width,'height':height} and caps.get('width')==width and caps.get('height')==height,'Exact actual interaction viewport required')
  require((caps.get('maxTouchPoints',0)>0 and caps.get('coarse') is True)if mode=='mobile-landscape'else(caps.get('maxTouchPoints')==0 and caps.get('coarse') is False),'Actual desktop/touch context required')
@@ -116,12 +119,13 @@ def browser(profile):
  require(isinstance(late_saved,int) and isinstance(late_continued,int) and late_continued>late_saved,'The retained field manual Save must have its own subsequent full browser reload, independently of early Reading reconnect')
  before=checkpoints['g2-reading-before-reload'].get('navigation');after=checkpoints['g2-continued-reading'].get('navigation')
  require(isinstance(before,int) and isinstance(after,int) and after>before and all(checkpoints[n].get('navigation')==after for n in ('g2-continued-reading-bible','g2-continued-reading-return')),'Fresh complete reload must precede same-Reading post-reconnect Book originals')
+ require(checkpoints[RECOVERY_CHECKPOINT].get('navigation')==after,'Actual continued-g2-reading recovery original must belong to the early restored Reading navigation')
  current=rows(BUILD/'PathOfDawn/Web');require([identity(x)for x in r['buildFingerprint']['files']]==[identity(x)for x in current],'Every current runtime byte must match the actual browser')
  from nativity_narration_evidence import narration_evidence
  classifier=ROOT/'Tools/Validation/nativity_narration_evidence.py';harness=r.get('harness',{})
  require(r.get('narrationEvidence')==narration_evidence(r.get('console',[])) and harness.get('narrationClassifier')=={'file':str(classifier.relative_to(ROOT)),'sha256':digest(classifier)},'Retained exact narration source start/Book stop/next key and classifier SHA required')
  wrapper=harness.get('g2Wrapper',{});require(wrapper.get('file')=='Tools/Autonomy/g2_web_smoke.py' and digest(ROOT/wrapper['file'])==digest(ROOT/wrapper['preservedFile'])==wrapper.get('sha256'),'Exact executed G2 revision adapter must be preserved')
- plan_path=ROOT/PLAN_FILES[profile];require(Path(harness.get('plan','')).resolve()==plan_path.resolve() and digest(plan_path)==harness.get('planSha256'),'Exact current authored G2 plan must match actual execution')
+ plan_path=ROOT/PLAN_FILES[profile];require(Path(harness.get('plan','')).resolve()==plan_path.resolve() and digest(plan_path)==harness.get('planSha256')==PLAN_SHA256[profile],'Exact current authored G2 plan must match actual execution')
  plan=read(plan_path)['PathOfDawn'];require(plan.get('revision')==REVISION and plan.get('suite')=='modern-real-input-v1' and CHECKPOINTS.issubset(plan['requiredCheckpoints']) and set(plan['requiredCheckpoints']).issubset(checkpoints),'Every complete authored G2 checkpoint must remain captured')
  require((len(plan['steps']),len(plan['requiredCheckpoints']))==PLAN_SCOPE[profile],'Complete retained G1 and additional G2 authored scope required')
  captured=harness.get('capturedSources',[]);required_sources={'Tools/Validation/nativity-web-smoke.py','Tools/Validation/web-smoke.py','Tools/Validation/fm-provider-errors.py','Tools/Validation/fm-local-media-errors.py','Tools/Validation/webaudio-observer.js','Tools/Validation/fm-local-media-observer.js','Tools/Environment/assert-runtime-idle.py','Tools/Validation/nativity_narration_evidence.py',PLAN_FILES[profile]}
@@ -137,7 +141,7 @@ def browser(profile):
  review=r.get('visualReview',{});require(review.get('status')=='approved' and review.get('reviewer') in ('root','/root') and review.get('reviewedUtc'),'Fresh direct Root review required')
  require([identity(x)for x in review.get('runtimeFiles',[])]==[identity(x)for x in current],'Root review must bind complete current runtime')
  originals=r.get('screenshots',[]);approved=review.get('screenshots',[]);approved_names={s.get('name')for s in approved}
- require(({'title','g1-field-dialogue','g1-guidance','g1-continued'}|G2_CHECKPOINTS).issubset(approved_names),'Root must view retained originals and every changed Reading/facing/Book/reconnect original')
+ require(({'title','g1-field-dialogue','g1-guidance','g1-continued'}|G2_CHECKPOINTS|{RECOVERY_CHECKPOINT}).issubset(approved_names),'Root must view retained originals and every changed Reading/facing/Book/reconnect original')
  for shot in approved:
   original=ROOT/shot.get('file',shot.get('path',''));require(original.resolve().is_relative_to(p.parent.resolve()) and original.is_file() and not original.is_symlink() and digest(original)==shot['sha256'] and any(s.get('sha256')==shot['sha256'] and s.get('path',s.get('file'))==shot.get('path',shot.get('file'))for s in originals),'Review must name exact current unchanged original capture')
  if profile=='PublicMobile844':

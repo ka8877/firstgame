@@ -111,7 +111,7 @@ FACING = {
     'name': 'autonomy-g2',
     'revisions': {'FantasyCards': 'fm-nativity-2026-11-02', 'PathOfDawn': 'gospel-facing-2026-11-03'},
     'contents': dict(MODERN['contents']),
-    'reportRoots': {'FantasyCards': 'Artifacts/Validation/Nativity', 'PathOfDawn': 'Artifacts/Validation/Autonomy/G2-2026-11-03'},
+    'reportRoots': {'FantasyCards': 'Artifacts/Validation/Nativity', 'PathOfDawn': 'Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2'},
     'preservedGames': ['FantasyCards'],
     'currentTargets': ['Web']
 }
