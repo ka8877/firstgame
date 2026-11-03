@@ -1,0 +1,54 @@
+{
+  "scope": "source-only-v2-route-correction-confirmed-not-runtime-approval",
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview_v2.py",
+    "sha256": "7c58a728fe298e01980a8c6c3cacf4654b9a9d6df9aa9f345b8e554103d47f43",
+    "bytes": 11664
+  },
+  "plan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/visual-plan-v2.template.json",
+    "sha256": "4272b5ec7b2cb4ac83e6f4c08a62dd9672a24253deb16e0fd46e91a1de2d8713",
+    "bytes": 3729
+  },
+  "correction": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/route-correction-01.json",
+    "sha256": "272830a5a9c019d7ed2f68d3f10d6ba2cdb7e6da1266de4a5953009fe11cafd4",
+    "bytes": 1463
+  },
+  "routeSourcesMatched": [
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmRestageUi.cs",
+      "bytes": 10074,
+      "sha256": "bfe8085f46149bf37801d992aedeb5f84dd3f87d313463ada415950a26c02ba4"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmQuestClient.cs",
+      "bytes": 11432,
+      "sha256": "62f341f50869561582a09d2d1827bd0ad3354ebe641a18c8e2d2fde6cd0d887f"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmArcanaMenus.cs",
+      "bytes": 19048,
+      "sha256": "7970ef49a2a13db70c57fe2d7ab513bd5217d2f2c179dad3122ff77ef2376fc8"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs",
+      "bytes": 19976,
+      "sha256": "43815a843e89bd770337461a592c748fb33bdb20beeada9991ca199a5f28bf9a"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+      "bytes": 21065,
+      "sha256": "8c0098766b492be37ea74cc342413d11ccd353c31890b2f88c48cf9e299c2510"
+    }
+  ],
+  "configuredCapturesPerProfile": 5,
+  "configuredTotalCaptures": 10,
+  "actualBrowserRuns": 0,
+  "requiredBuildSummary": null,
+  "RootVisualApproval": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "remaining": "Genuine successful CardWeb02 summary, actual settled title/grade/footer originals and owner/Root review; fullC1 plans/PCM/reloads/public remain separate."
+}

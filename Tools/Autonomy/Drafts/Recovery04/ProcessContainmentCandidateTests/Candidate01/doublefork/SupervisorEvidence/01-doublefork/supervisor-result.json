@@ -1,0 +1,32 @@
+{
+  "version": "owned-descendants-v1",
+  "mode": "isolation-test",
+  "status": "containment-unproven",
+  "publishReady": false,
+  "baselineReady": false,
+  "helperSha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+  "startedUtc": "2026-11-03T17:34:23.107061+00:00",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+    "doublefork",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/DummyOutputs",
+    "owned-doublefork-Candidate01"
+  ],
+  "executionEndMonotonic": 19082.162109876,
+  "productionInvocation": false,
+  "root": {
+    "spawned": false
+  },
+  "error": "FileNotFoundError: [Errno 2] No such file or directory: '/proc/self/task/52980/children'",
+  "timedOut": false,
+  "interrupted": false,
+  "cleanup": {
+    "complete": false,
+    "kernelEchild": false,
+    "error": "No proved root/tracker boundary established"
+  },
+  "outcomeExitCode": 125,
+  "finishedUtc": "2026-11-03T17:34:23.107291+00:00",
+  "signalTargetScope": "held pidfds for proven non-baseline descendants only"
+}

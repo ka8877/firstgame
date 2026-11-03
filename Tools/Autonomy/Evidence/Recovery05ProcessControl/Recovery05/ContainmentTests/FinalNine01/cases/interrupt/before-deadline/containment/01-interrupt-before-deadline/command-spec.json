@@ -1,0 +1,39 @@
+{
+  "version": "owned-descendants-v1",
+  "mode": "isolation-test",
+  "repositoryRoot": "/workspace/firstgame",
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "policy": {
+    "helperPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/helper.py",
+    "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "evidenceRoot": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment",
+    "fixturePath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+    "fixtureSha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+    "fixtureOutputRoot": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01"
+  },
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+    "sleep",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/fixture",
+    "bc8add4c6dcb42bd9e33f5ec59ce5301"
+  ],
+  "cwd": "/workspace/firstgame",
+  "stdoutPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/actual-command.stdout.log",
+  "executionEndMonotonic": 20710.638437143,
+  "cleanupSeconds": 10,
+  "parentIdentity": {
+    "pid": 57318,
+    "ppid": 456,
+    "pgid": 57318,
+    "sid": 57318,
+    "state": "R",
+    "startTicks": 2070147,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  }
+}

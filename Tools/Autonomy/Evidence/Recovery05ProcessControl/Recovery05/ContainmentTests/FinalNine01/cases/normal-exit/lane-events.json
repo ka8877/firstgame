@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "normal",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/fixture",
+      "b57fc2ecdce041de95b0ab0ddee90b86"
+    ],
+    "cleanupAndReportReservedSeconds": 12,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "bytes": 17494,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/supervisor-result.json",
+      "sha256": "37c309d9a5badc8e9debd8b3161739df1f48d0d86a99ba3d0d2d3e304f652a83"
+    },
+    "cwd": "/workspace/firstgame",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "exitCode": 0,
+    "finishedUtc": "2026-11-03T18:01:23.619755+00:00",
+    "label": "normal-exit",
+    "log": {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/actual-command.stdout.log",
+      "sha256": "00aadabf96ef7ef4300c58f5e54fb05cd21e4af0394748c210461a84f09b10ac"
+    },
+    "pid": 57322,
+    "privateProcessGroup": true,
+    "processContainment": "owned-descendants-v1",
+    "sharedSafeEndMonotonic": 20718.555959501,
+    "startedUtc": "2026-11-03T18:01:23.511442+00:00",
+    "supervisorIdentity": {
+      "pgid": 57321,
+      "pid": 57321,
+      "ppid": 57318,
+      "sid": 57321,
+      "startTicks": 2070155,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "timeoutSeconds": 1.9995702350024658
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-11-03T17:50:00+00:00",
+  "scope": "owner-standalone-currentCard-grade-visual-capture-only-not-full-C1-acceptance-or-Root-approval",
+  "requiredBuildSummary": null,
+  "requiredBuildStatus": "completed-build-and-witness-only",
+  "requiredSourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+  "profiles": [
+    {
+      "name": "PC-preview",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "hasTouch": false
+    },
+    {
+      "name": "touch-preview",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true
+    }
+  ],
+  "ordinaryCanvasActions": [
+    {
+      "capture": "title",
+      "settleMs": 1500
+    },
+    {
+      "click": [
+        0.12,
+        0.88
+      ],
+      "source": "actualNative04title cardalbum ordinaryUI",
+      "capture": "catalog",
+      "settleMs": 1000
+    },
+    {
+      "click": [
+        0.6185,
+        0.374
+      ],
+      "source": "FantasyCardsCollection.cs75 existinggradeguidebutton",
+      "capture": "grade-guide-all-current13-footer",
+      "settleMs": 1000
+    },
+    {
+      "click": [
+        0.7475,
+        0.9435
+      ],
+      "source": "FmFidelityUi.cs207 existingfooterback",
+      "capture": "catalog-return",
+      "settleMs": 1000
+    }
+  ],
+  "runtimeVerification": "Genuine successful currentNative8/Root0d/sourcebound build/durableproof plus exact5core/runtime manifest before and after; no G2/Gospel prerequisite is claimed passed.",
+  "sourceAuthority": "Owner normal-input visual inspection only. No JavaScript game/save/pose/RNG/state injection. DOM readiness/canvas geometry and screenshots only.",
+  "preservedAcceptance": "Existing exactCardPC162/48 andtouch163/47 fullplans,PCM4/reload2/currentrules/save/Root/public/fullsite gates remain untouched and still required. This short preview must not replace any of them.",
+  "audioOrPerformancePass": false,
+  "RootVisualApproval": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "sourceBindingHelper": {
+    "file": "Tools/Validation/restoration_source_binding.py",
+    "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+    "bytes": 2356
+  },
+  "requiredNativeRoot": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+    "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+    "bytes": 6148
+  }
+}

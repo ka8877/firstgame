@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "spawn-ignore-term",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture",
+      "6e21fca1ec6844408571b3311591990d"
+    ],
+    "cleanupAndReportReservedSeconds": 12,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "bytes": 18358,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor-result.json",
+      "sha256": "82b37f045205c7a51724b71cd3102796c161b5a753b27e27aaaf1beb2aca8990"
+    },
+    "cwd": "/workspace/firstgame",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "exitCode": 124,
+    "finishedUtc": "2026-11-03T18:01:30.531899+00:00",
+    "label": "ignore-term",
+    "log": {
+      "bytes": 514,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/actual-command.stdout.log",
+      "sha256": "630256bcbdd96e221ebbdd4b6f005d1318ff211a4e39ba036bd09926cfaa0ccc"
+    },
+    "pid": 57341,
+    "privateProcessGroup": true,
+    "processContainment": "owned-descendants-v1",
+    "sharedSafeEndMonotonic": 20723.163150162,
+    "startedUtc": "2026-11-03T18:01:28.114584+00:00",
+    "supervisorIdentity": {
+      "pgid": 57340,
+      "pid": 57340,
+      "ppid": 57318,
+      "sid": 57340,
+      "startTicks": 2070616,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "timeoutSeconds": 1.9996961679971719
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "createdUtc": "2026-11-03T17:52:52.543315+00:00",
+  "scope": "owner-standalone-currentCard-grade-visual-capture-only-not-full-C1-acceptance-or-Root-approval",
+  "requiredBuildSummary": null,
+  "requiredBuildStatus": "completed-build-and-witness-only",
+  "requiredSourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+  "profiles": [
+    {
+      "name": "PC-preview",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "hasTouch": false
+    },
+    {
+      "name": "touch-preview",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true
+    }
+  ],
+  "ordinaryCanvasActions": [
+    {
+      "capture": "title",
+      "settleMs": 1500
+    },
+    {
+      "click": [
+        0.2595,
+        0.879
+      ],
+      "source": "FmRestageUi.cs53 ShowFreePracticeLobby; original C1 normal-input capability plan",
+      "capture": "free-practice-lobby",
+      "settleMs": 1000
+    },
+    {
+      "click": [
+        0.532,
+        0.9085
+      ],
+      "source": "FmArcanaMenus.cs108 ShowCollection(false)",
+      "capture": "catalog",
+      "settleMs": 1000
+    },
+    {
+      "click": [
+        0.6185,
+        0.374
+      ],
+      "source": "FantasyCardsCollection.cs75 ShowCardGradeGuide(edit)",
+      "capture": "grade-guide-all-current13-footer",
+      "settleMs": 1000
+    },
+    {
+      "click": [
+        0.7475,
+        0.9435
+      ],
+      "source": "FmFidelityUi.cs207 existingfooterback",
+      "capture": "catalog-return",
+      "settleMs": 1000
+    }
+  ],
+  "runtimeVerification": "Genuine successful currentNative8/Root0d/sourcebound build/durableproof plus exact5core/runtime manifest before and after; no G2/Gospel prerequisite is claimed passed.",
+  "sourceAuthority": "Owner normal-input visual inspection only. No JavaScript game/save/pose/RNG/state injection. DOM readiness/canvas geometry and screenshots only.",
+  "preservedAcceptance": "Existing exactCardPC162/48 andtouch163/47 fullplans,PCM4/reload2/currentrules/save/Root/public/fullsite gates remain untouched and still required. This short preview must not replace any of them.",
+  "audioOrPerformancePass": false,
+  "RootVisualApproval": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "sourceBindingHelper": {
+    "file": "Tools/Validation/restoration_source_binding.py",
+    "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+    "bytes": 2356
+  },
+  "requiredNativeRoot": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+    "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+    "bytes": 6148
+  },
+  "routeSourceFiles": [
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmRestageUi.cs",
+      "bytes": 10074,
+      "sha256": "bfe8085f46149bf37801d992aedeb5f84dd3f87d313463ada415950a26c02ba4"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmQuestClient.cs",
+      "bytes": 11432,
+      "sha256": "62f341f50869561582a09d2d1827bd0ad3354ebe641a18c8e2d2fde6cd0d887f"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmArcanaMenus.cs",
+      "bytes": 19048,
+      "sha256": "7970ef49a2a13db70c57fe2d7ab513bd5217d2f2c179dad3122ff77ef2376fc8"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs",
+      "bytes": 19976,
+      "sha256": "43815a843e89bd770337461a592c748fb33bdb20beeada9991ca199a5f28bf9a"
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+      "bytes": 21065,
+      "sha256": "8c0098766b492be37ea74cc342413d11ccd353c31890b2f88c48cf9e299c2510"
+    }
+  ]
+}

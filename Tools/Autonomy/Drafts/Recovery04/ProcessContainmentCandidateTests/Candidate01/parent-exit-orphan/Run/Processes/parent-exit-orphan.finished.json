@@ -1,0 +1,31 @@
+{
+  "label": "parent-exit-orphan",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+    "parent-exit-orphan",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/DummyOutputs",
+    "owned-parent-exit-orphan-Candidate01"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01",
+  "startedUtc": "2026-11-03T17:34:23.194874+00:00",
+  "timeoutSeconds": 0.9994737849992816,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 125,
+  "containmentProvedEmpty": false,
+  "cleanupIncomplete": true,
+  "containmentEvidence": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan",
+  "containmentReceipt": {
+    "file": "parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+    "sha256": "c8707a6c474de6c96a6dd0be7e88e04bdbb0b2be8911b9a9faf4df15d46fc330",
+    "bytes": 1285
+  },
+  "containmentError": "ValueError: Owned descendants not proved empty; no success/restore may be inferred",
+  "finishedUtc": "2026-11-03T17:34:23.259724+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "checkedUtc": "2026-11-03T17:22:10.023126+00:00",
+  "scope": "temporary-fail-closed-hold-on-known-incomplete-process-containment-caller",
+  "historicalFailedVersion": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+  "heldSourceSha256": "6c0f470be33f8c261651b40a1151ef70760a69a39226210ae019d0582e69f598",
+  "hold": "CLI exits before main(), no process or Unity invocation. Existing contract SHA also mismatches and cannot silently run this held file.",
+  "originalSourceRetained": "Actual failed RecordedHarness and Git ed827d2a retain original exacta6bc bytes; no failed evidence overwritten.",
+  "clearCondition": "Only independently reviewed and isolated setsid/doublefork-tested descendant-containment revision with a new exact source/contract, fresh lease and restored full source may replace this hold.",
+  "publishReady": false,
+  "baselineReady": false
+}

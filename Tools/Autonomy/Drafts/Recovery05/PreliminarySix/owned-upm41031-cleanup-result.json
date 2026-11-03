@@ -1,0 +1,53 @@
+{
+  "observedUtc": "2026-11-03T17:46:10.882874+00:00",
+  "scope": "exact-own-failed-CardWeb01-UPM-child-only",
+  "parentBefore": {
+    "pid": 41019,
+    "ppid": 1,
+    "pgid": 41019,
+    "sid": 41019,
+    "state": "Z",
+    "startTicks": 1685570,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "before": {
+    "pid": 41031,
+    "ppid": 1,
+    "pgid": 41019,
+    "sid": 41019,
+    "state": "S",
+    "startTicks": 1685588,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "signals": [
+    "SIGTERM-through-held-pidfd"
+  ],
+  "publishReady": false,
+  "baselineReady": false,
+  "heldPidfdExited": true,
+  "after": {
+    "pid": 41031,
+    "ppid": 1,
+    "pgid": 41019,
+    "sid": 41019,
+    "state": "Z",
+    "startTicks": 1685588,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "completedUtc": "2026-11-03T17:46:10.896848+00:00"
+}

@@ -1,0 +1,31 @@
+{
+  "label": "doublefork",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+    "doublefork",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/DummyOutputs",
+    "owned-doublefork-Candidate01"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01",
+  "startedUtc": "2026-11-03T17:34:23.060322+00:00",
+  "timeoutSeconds": 0.9996289990012883,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 125,
+  "containmentProvedEmpty": false,
+  "cleanupIncomplete": true,
+  "containmentEvidence": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork",
+  "containmentReceipt": {
+    "file": "doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+    "sha256": "7caab8fbc1aaabb42284711fbe16ee6334688531b51b0c3bbc9aa27e1515a90e",
+    "bytes": 1261
+  },
+  "containmentError": "ValueError: Owned descendants not proved empty; no success/restore may be inferred",
+  "finishedUtc": "2026-11-03T17:34:23.125516+00:00"
+}

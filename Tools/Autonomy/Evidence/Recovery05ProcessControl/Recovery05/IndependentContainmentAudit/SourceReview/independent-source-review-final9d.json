@@ -1,0 +1,36 @@
+{
+  "status": "reviewed-source-only",
+  "scope": "isolated-process-containment-source-static-review-only",
+  "reviewer": "/root/release_recovery/c1_pipeline_audit/containment_source_review",
+  "reviewedUtc": "2026-11-03T17:59:53.887763+00:00",
+  "noRemainingStaticBlocker": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "actualExecutionPerformed": false,
+  "executedSources": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs01/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs01/runner.py",
+      "sha256": "aadcb08ee7d462b2fa2e44da8312a873b8885315ea77f9bae40c35032f45adea",
+      "bytes": 39757
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs01/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    }
+  },
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/SOURCE-REPORT-final9d.md",
+    "sha256": "67cae2fff6ec74eb4cd27aa7719582b1c7d53c8003019d191c7539b53fc3fc99",
+    "bytes": 7064
+  },
+  "actualFinalNineCaseRunCountObservedAtSourceReview": 0,
+  "acceptanceReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "limits": "Source inspection only. Actual exact9-case result, sole-operator acceptance and product Native/Gospel/public Root gates remain separate. No replacement or new product Root gate is introduced."
+}

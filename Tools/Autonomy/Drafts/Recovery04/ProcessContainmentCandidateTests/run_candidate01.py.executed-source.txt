@@ -1,0 +1,127 @@
+from pathlib import Path
+from datetime import datetime, timezone, timedelta
+import hashlib
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+import traceback
+import types
+
+REPO = Path('/workspace/firstgame')
+OUT = REPO / 'Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01'
+assert not OUT.exists()
+OUT.mkdir()
+SOURCE = REPO / 'Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32/owned_process_containment.py'
+raw = SOURCE.read_bytes()
+assert hashlib.sha256(raw).hexdigest() == 'cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32'
+helper = OUT / 'owned_process_containment.py'
+helper.write_bytes(raw)
+fixture = OUT / 'process_fixture.py'
+fixture.write_bytes((OUT.parent / 'Inputs/process_fixture.py').read_bytes())
+assert hashlib.sha256(fixture.read_bytes()).hexdigest() == '62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3'
+module = types.ModuleType('isolated_candidate_containment')
+module.__file__ = str(helper)
+sys.modules[module.__name__] = module
+exec(compile(raw, str(helper), 'exec', dont_inherit=True, optimize=0), module.__dict__)
+
+
+class Lane:
+    def __init__(self, folder):
+        self.started = time.monotonic()
+        self.safe_end = self.started + 90
+        self.deadline = datetime.now(timezone.utc) + timedelta(seconds=180)
+        self.events, self.logs, self.env = [], [], dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0')
+        self.run = folder / 'Run'
+        self.run.mkdir(parents=True)
+
+    def remaining(self):
+        remaining = min(self.safe_end - time.monotonic(), (self.deadline - datetime.now(timezone.utc)).total_seconds() - 60)
+        if remaining <= 0:
+            raise TimeoutError('Isolated test budget exhausted')
+        return remaining
+
+
+def current(pid):
+    p = Path('/proc') / str(pid)
+    raw = (p / 'stat').read_text().rsplit(') ', 1)[1].split()
+    return {'state': raw[0], 'startTicks': int(raw[19]), 'uid': p.stat().st_uid}
+
+
+def live(row):
+    try:
+        actual = current(row['pid'])
+        return actual['state'] not in ('Z', 'X') and actual['startTicks'] == row['startTicks'] and actual['uid'] == row['uid']
+    except (FileNotFoundError, ProcessLookupError):
+        return False
+
+
+def cleanup_fixture_rows(folder, token):
+    cleaned = []
+    for p in folder.glob('*.json'):
+        row = json.loads(p.read_text())
+        if row.get('token') != token or not live(row):
+            continue
+        cmd = (Path('/proc') / str(row['pid']) / 'cmdline').read_bytes()
+        assert str(fixture).encode() in cmd and token.encode() in cmd
+        fd = os.pidfd_open(row['pid'])
+        try:
+            assert live(row)
+            signal.pidfd_send_signal(fd, signal.SIGKILL)
+            cleaned.append(row)
+        finally:
+            os.close(fd)
+    return cleaned
+
+
+results = []
+sentinel_dir = OUT / 'Sentinel'
+sentinel_token = 'unrelated-baseline-sentinel-Candidate01'
+sentinel = subprocess.Popen([sys.executable, str(fixture), 'sentinel', str(sentinel_dir), sentinel_token])
+time.sleep(.2)
+try:
+    for mode, expected in [('normal', 0), ('exit-seven', 7), ('spawn-setsid', 124), ('doublefork', 124),
+                           ('spawn-ignore-term', 124), ('parent-exit-orphan', 0)]:
+        case = OUT / mode
+        case.mkdir()
+        data_dir, token = case / 'DummyOutputs', 'owned-' + mode + '-Candidate01'
+        lane = Lane(case)
+        policy = {'helperPath': str(helper), 'helperSha256': hashlib.sha256(raw).hexdigest(),
+                  'evidenceRoot': str(case / 'SupervisorEvidence'), 'fixturePath': str(fixture),
+                  'fixtureSha256': hashlib.sha256(fixture.read_bytes()).hexdigest()}
+        event = None
+        try:
+            controller = module.Controller(policy, OUT, test_mode=True)
+            event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)
+            identities = [json.loads(p.read_text()) for p in data_dir.glob('*.json')]
+            assert identities, 'Actual dummy identity records required'
+            assert event['exitCode'] == expected, str(event)
+            assert event['containmentProvedEmpty'] is True
+            assert all(not live(row) for row in identities), 'A proved-owned dummy remains alive'
+            assert sentinel.poll() is None, 'Unrelated pre-existing sibling was stopped'
+            results.append({'mode': mode, 'status': 'passed', 'event': event, 'dummyIdentities': identities,
+                            'unrelatedSiblingStillAlive': True})
+        except BaseException as error:
+            cleaned = cleanup_fixture_rows(data_dir, token)
+            results.append({'mode': mode, 'status': 'failed', 'error': str(error), 'traceback': traceback.format_exc(),
+                            'event': event, 'ownerSafetyCleanupOfExactDummyOnly': cleaned,
+                            'unrelatedSiblingStillAlive': sentinel.poll() is None})
+        if sentinel.poll() is not None:
+            break
+finally:
+    if sentinel.poll() is None:
+        sentinel.terminate()
+        sentinel.wait(timeout=5)
+
+report = {'scope': 'isolated-real-process-candidate-only-not-production-or-Root-approval',
+          'helperSource': str(SOURCE), 'helperSha256': hashlib.sha256(raw).hexdigest(),
+          'fixtureSha256': hashlib.sha256(fixture.read_bytes()).hexdigest(),
+          'UnityGameBrowserNetworkGitTouched': False,
+          'passed': sum(x['status'] == 'passed' for x in results), 'failed': sum(x['status'] == 'failed' for x in results),
+          'tests': results, 'publishReady': False, 'baselineReady': False,
+          'limits': 'This is the first immutable cdb13 candidate only. Any later source SHA requires fresh tests; no Root acceptance or product build pass is granted.'}
+(OUT / 'result.json').write_text(json.dumps(report, indent=2) + '\n')
+print(json.dumps({'passed': report['passed'], 'failed': report['failed'], 'report': str(OUT / 'result.json')}))
+raise SystemExit(1 if report['failed'] else 0)

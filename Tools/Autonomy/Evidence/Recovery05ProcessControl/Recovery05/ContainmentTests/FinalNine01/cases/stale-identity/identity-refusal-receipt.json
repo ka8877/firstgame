@@ -1,0 +1,154 @@
+{
+  "actualSignalCallsDuringRefusals": [],
+  "aliveAfterRefusals": true,
+  "aliveBefore": true,
+  "attempts": [
+    {
+      "changedField": "startTicks",
+      "declaredIdentity": {
+        "pgid": 57363,
+        "pid": 57363,
+        "ppid": 57318,
+        "sid": 57363,
+        "startTicks": 2071386,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "reason": "Signal refused: changed startTicks/UID or unresolved identity",
+      "refused": true
+    },
+    {
+      "changedField": "uids",
+      "declaredIdentity": {
+        "pgid": 57363,
+        "pid": 57363,
+        "ppid": 57318,
+        "sid": 57363,
+        "startTicks": 2071385,
+        "state": "R",
+        "uids": [
+          1001,
+          1001,
+          1001,
+          1001
+        ]
+      },
+      "reason": "Signal refused: changed startTicks/UID or unresolved identity",
+      "refused": true
+    }
+  ],
+  "cleanupComplete": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "hostPidReuseClaimed": false,
+  "identity": {
+    "pgid": 57363,
+    "pid": 57363,
+    "ppid": 57318,
+    "sid": 57363,
+    "startTicks": 2071385,
+    "state": "R",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "kind": "real-dummy-identity-refusal",
+  "metadataMismatchOnly": true,
+  "ownerCleanup": {
+    "cleanupComplete": true,
+    "exitCode": -15,
+    "identity": {
+      "pgid": 57363,
+      "pid": 57363,
+      "ppid": 57318,
+      "sid": 57363,
+      "startTicks": 2071385,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "scope": "separate-actual-owner-exact-direct-dummy-cleanup",
+    "signals": [
+      {
+        "identity": {
+          "pgid": 57363,
+          "pid": 57363,
+          "ppid": 57318,
+          "sid": 57363,
+          "startTicks": 2071385,
+          "state": "S",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sent": true,
+        "signal": 15
+      }
+    ]
+  },
+  "ready": {
+    "identity": {
+      "pgid": 57363,
+      "pid": 57363,
+      "ppid": 57318,
+      "sid": 57363,
+      "startTicks": 2071385,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": false,
+    "initialIdentity": null,
+    "kind": "sentinel",
+    "label": "actual-sentinel-ready",
+    "pgid": 57363,
+    "pid": 57363,
+    "ppid": 57318,
+    "readyMonotonic": 20713.895080555,
+    "rootIdentity": {
+      "pgid": 57363,
+      "pid": 57363,
+      "ppid": 57318,
+      "sid": 57363,
+      "startTicks": 2071385,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57363,
+    "startTicks": 2071385,
+    "state": "R",
+    "token": "9223c6c8647c4cc7942d2b0b82238c6f",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "signalsSentDuringRefusals": 0,
+  "startTicksMismatchRefused": true,
+  "uidMismatchRefused": true
+}

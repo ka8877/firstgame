@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "spawn-setsid",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture",
+      "e5d92545d85748cca4149ef532486995"
+    ],
+    "cleanupAndReportReservedSeconds": 12,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "bytes": 18344,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor-result.json",
+      "sha256": "05a885d6d05ce0e236dde69e271fc471182e5ee2957fd743577588ceff3c8075"
+    },
+    "cwd": "/workspace/firstgame",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "exitCode": 124,
+    "finishedUtc": "2026-11-03T18:01:25.810805+00:00",
+    "label": "setsid-timeout",
+    "log": {
+      "bytes": 509,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/actual-command.stdout.log",
+      "sha256": "0ef30b6dd2a65dccc5a349db3d797dc534a88770cc12d4ef748b88d91b56b493"
+    },
+    "pid": 57327,
+    "privateProcessGroup": true,
+    "processContainment": "owned-descendants-v1",
+    "sharedSafeEndMonotonic": 20718.842674561,
+    "startedUtc": "2026-11-03T18:01:23.787763+00:00",
+    "supervisorIdentity": {
+      "pgid": 57326,
+      "pid": 57326,
+      "ppid": 57318,
+      "sid": 57326,
+      "startTicks": 2070184,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "timeoutSeconds": 1.9994314819996362
+  }
+]

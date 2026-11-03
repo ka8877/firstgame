@@ -1,0 +1,46 @@
+{
+  "status": "reviewed-source-only",
+  "scope": "isolated-process-containment-source-static-review-only",
+  "reviewer": "/root/release_recovery/c1_pipeline_audit/containment_source_review",
+  "reviewedUtc": "2026-11-03T18:01:06.578285+00:00",
+  "noRemainingStaticBlocker": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "actualExecutionPerformed": false,
+  "executedSources": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    }
+  },
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/SOURCE-REPORT-final9d-runner317b.md",
+    "sha256": "38daa69e29e243c39e301bdf6e605890359b65b84bd739afb8fb9e8ba2f84d0b",
+    "bytes": 3198
+  },
+  "supersedesBeforeExecution": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d.json",
+    "sha256": "bf687b4219efb7acae0ec26da545212dd81163bdf76a54bbf4daddbd311ec7f0",
+    "bytes": 1754
+  },
+  "preservedFullSourceReport": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/SOURCE-REPORT-final9d.md",
+    "sha256": "67cae2fff6ec74eb4cd27aa7719582b1c7d53c8003019d191c7539b53fc3fc99",
+    "bytes": 7064
+  },
+  "actualFinalNineCaseRunCountObservedAtSourceReview": 0,
+  "acceptanceReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "limits": "New exact runner317b source review only. Actual exact9-case results and sole-operator acceptance remain required; no Native/Gospel/public product Root replacement or new product Root gate."
+}

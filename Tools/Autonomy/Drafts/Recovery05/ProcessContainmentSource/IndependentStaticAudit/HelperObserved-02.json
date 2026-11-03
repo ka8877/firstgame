@@ -1,0 +1,166 @@
+{
+  "status": "reviewed-source-only",
+  "noRemainingStaticBlocker": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "actualExecutionPerformed": false,
+  "reviewedUtc": "2026-11-03T18:03:20.782868+00:00",
+  "executedSources": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    }
+  },
+  "sourceFieldMeaning": "Required reviewed source-set byte binding label; reviewer executed none of these files. Actual test producer paths may differ only with identical SHA/bytes.",
+  "originalSourceReferences": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    }
+  },
+  "sourceFreeze": "Explicit immutable helper9d, fixtured029 and runner317b checked before/after, with exact frozen audit copies. Mutable helper path was not used as review target.",
+  "callers": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+      "sha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+      "bytes": 40547
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+      "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+      "bytes": 54692
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-contract.template.json",
+      "sha256": "faa703d721d6b15e543ece0974df20e809c429ed35113c521d80f8068d5e7f30",
+      "bytes": 10224
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-command-plan.json",
+      "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909",
+      "bytes": 2889
+    }
+  ],
+  "existingGates": {
+    "cardCriticalAstUnchanged": {
+      "actual_native": true,
+      "current_source": true,
+      "source_rows": true,
+      "compare_runtime": true,
+      "failure_state": true,
+      "finalize": true,
+      "runtime_paths": true,
+      "role_map": true,
+      "fingerprint": true
+    },
+    "gospelCriticalAstUnchanged": {
+      "full_source": true,
+      "failure_state": true,
+      "library_journal_target": true,
+      "preserve_library_journal": true,
+      "exact_xml": true,
+      "role_map": true,
+      "runtime_paths": true
+    },
+    "cardNativeRefsUnchanged": true,
+    "executionSourcesUnchanged": true,
+    "mediaInputsUnchanged": true,
+    "actualHeldCard": {
+      "file": "Tools/Autonomy/recovery-card-web.py",
+      "sha256": "6c0f470be33f8c261651b40a1151ef70760a69a39226210ae019d0582e69f598",
+      "bytes": 43337
+    },
+    "holdRecord": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/09-card-web-known-caller-hold.json",
+      "sha256": "a9b4c0203b26effba53e5759f2bbf6d37e9c59bc294bcd1273074e6a6b3f46e9",
+      "bytes": 887
+    },
+    "actualNative6fb": {
+      "file": "Tools/Autonomy/recovery-product-native.py",
+      "sha256": "6fb091d41eda91669aceccea0020a211517f4906534671a4450e452c8b603a26",
+      "bytes": 6982
+    },
+    "historicalFailedA6Original": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/01-recovery-card-web.py",
+      "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+      "bytes": 43017
+    }
+  },
+  "productionState": {
+    "actualAcceptanceReferences": {
+      "report": null,
+      "independentReview": null,
+      "operatorReview": null
+    },
+    "allActualRefsNull": true,
+    "productionStillBlocked": true,
+    "operatorAcceptanceNotCreatedByReviewer": true
+  },
+  "closedFindings": [
+    "Per-command living subreaper + pidfd identity/lineage/adoption + exact kernel ECHILD replaces original group-only containment assumption.",
+    "Root numeric-PID branch only while original root is unreaped; later PID reuse follows adopted-child exact wait.",
+    "poll plus terminal-FD identity tombstones avoids select descriptor limit/accumulated FD leak.",
+    "Bytes metadata parsing and discovery-error-independent known-target cleanup; final live/prctl/close errors preserve unproven receipt.",
+    "Gate requires exact helper/fixture/runner source3, actual9case raw supervisor/spec/lineage/stdouts/receipt, escapeACK/bystander/dualinterrupt/live-dummy refusal, independent source review and actual operator acceptance.",
+    "Before-deadline SIGINT proof includes successful-syscall completion upper bound<deadline; prior aadcb source remains historical.",
+    "Card02 Unity log and descendant-scope metadata corrected; mandatory raw-byte Controller loader handles pre-run aux receipt and main run with no uncontained fallback."
+  ],
+  "helperReview": [
+    "Subreaper SET/GET and default SIGCHLD before one root; initial ECHILD and parent-death identity/cancel recheck. Existing outer caller is never made subreaper.",
+    "Current parent edge/live pidfd parent/adoption + PID/startTicks/UID and baseline identity; only held pidfd signals, no PID/group/name/session fallback.",
+    "Single exact root waitpid and non-consuming WNOWAIT/__WALL adopted peek/exact wait. None is not empty. Root status/ECHILD/no-live-pidfd/no-unresolved errors all required.",
+    "Execution reserves cleanup10/report2 inside original safeEnd and900/lease60; outer requests cleanup and never kills supervisor group first. Timeout124/interrupt130 remain failure.",
+    "Pre-run persistent auxiliary source/spec/lineage/log/receipt survives lane.run=None and later main-run raw bytecopy; missing/unproved receipt fails closed.",
+    "D-state/permission change/external supervisor SIGKILL/OS I/O failure cannot be guaranteed away; no success/restore/idle inferred from missing proof."
+  ],
+  "testReview": [
+    "All9 cases and both interrupt subcases AND, no production invocation, no baseline signals, no unresolved children; unproved containment aborts later cases as false/not-run.",
+    "Live established setsid/doublefork escape and actual observer ACK before teardown, orphan adoption/session transition and root-exit orphan proof.",
+    "Bystander same identity remains alive and non-targeted with separate direct-owner cleanup; stale live dummy proves both metadata refusals with forwarding signal-call counter and separate cleanup.",
+    "Before-phase successful-send completion<deadline. Late phase proves actual timeout followed by supervisor cancellation before final receipt; it does not additionally assert a descendant was alive at the exact late signal instant.",
+    "cap+15 shared test Lane contains cap plus cleanup10/report2/setup margin; outer helper raw compile-exec; main scripts use frozen pinned path bytes. No hostile mid-run file-rewrite/restore immutability guarantee claimed."
+  ],
+  "limitations": {
+    "liveProcRead": false,
+    "signalsOrPrctl": false,
+    "ctypesOrProjectImportOrRun": false,
+    "executableCompileOrTests": false,
+    "UnityBrowserNetworkGit": false,
+    "actualKernelBehaviorVerified": false,
+    "actual9casePassVerified": false,
+    "publishReady": false,
+    "baselineReady": false,
+    "notes": "Static source only. UID checks are pre-signal observations, not atomic credential freezing. External broker IPC work is not guessed as owned and caller idle gates remain. Actual isolated results and operator acceptance plus product/release gates stay separate."
+  },
+  "invalidated01": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/invalidated-review01-index.json",
+    "sha256": "f63d4aceaaa87bb07adb169d3ef7f8a353e8ab12f6162a87c087dbc3e550a0b9",
+    "bytes": 1927
+  },
+  "concept": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/CONCEPT-01.md",
+    "sha256": "cece4e8bc164ca20bfb0bb5b3e8c04825ad97a1a8aa48cd4bea7d6a010a3f220",
+    "bytes": 7086
+  }
+}

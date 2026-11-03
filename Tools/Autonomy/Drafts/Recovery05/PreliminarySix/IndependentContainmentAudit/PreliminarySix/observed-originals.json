@@ -1,0 +1,844 @@
+{
+  "kind": "read-only-independent-preliminary-six-result-audit",
+  "checkedUtc": "2026-11-03T17:51:24.866026+00:00",
+  "scope": "Actual immutable Candidate03 originals only; not acceptance, source finality or a production/product pass",
+  "result": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/result.json",
+    "sha256": "dfd3f961f58f3cd6dfecc629371adb98f80cdcacd7c4f67685b09777ca1f26bc",
+    "bytes": 12713
+  },
+  "driver": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/run_candidate03.py",
+    "sha256": "f322fd1854d2bdeb77a18b2382d874ea42442284390e72cad5dd8c3035e07edd",
+    "bytes": 6150
+  },
+  "helper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/owned_process_containment.py",
+    "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+    "bytes": 38591
+  },
+  "fixture": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+    "sha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3",
+    "bytes": 1933
+  },
+  "reportedPassed": 6,
+  "reportedFailed": 0,
+  "mechanicalOriginalsConsistent": true,
+  "observations": [
+    {
+      "mode": "normal",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/normal/SupervisorEvidence/01-normal/supervisor-result.json",
+        "sha256": "c7816f4869885a2edad6d044d4b480dc7606e1dcde4f8aed73c36377480ff875",
+        "bytes": 17432
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/normal/Run/Containment/01-normal/supervisor-result.json",
+        "sha256": "c7816f4869885a2edad6d044d4b480dc7606e1dcde4f8aed73c36377480ff875",
+        "bytes": 17432
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/normal/SupervisorEvidence/01-normal/lineage-events.jsonl",
+        "sha256": "e397056be0a728d109aff9b4e9f0e36e9babe1eb073b0726ab5c80968134f037",
+        "bytes": 259
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/normal/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 0,
+      "eventActualExit": 0,
+      "receiptOutcome": 0,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.0022412299986172,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 1,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54619,
+            "ppid": 54618,
+            "pgid": 54619,
+            "sid": 54619,
+            "state": "R",
+            "startTicks": 1981429,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54619,
+          "exitCode": 0,
+          "waitpidStatus": 0,
+          "root": true
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "normal",
+          "token": "owned-normal-Candidate03",
+          "pid": 54619,
+          "ppid": 54618,
+          "pgid": 54619,
+          "sid": 54619,
+          "uid": 1000,
+          "startTicks": 1981429
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 1,
+      "lineageKinds": [
+        "owned-admission"
+      ],
+      "timedOut": false,
+      "interrupted": false,
+      "productionInvocation": false
+    },
+    {
+      "mode": "exit-seven",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+        "sha256": "83813ab0c03f833d1b0b83ab9ccc9304e9f8c3bcd4e2d4fddf7dde10fd33a541",
+        "bytes": 17462
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/exit-seven/Run/Containment/01-exit-seven/supervisor-result.json",
+        "sha256": "83813ab0c03f833d1b0b83ab9ccc9304e9f8c3bcd4e2d4fddf7dde10fd33a541",
+        "bytes": 17462
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/exit-seven/SupervisorEvidence/01-exit-seven/lineage-events.jsonl",
+        "sha256": "a3e8fe57bebfb83f7d4d0957402df50867dfedcf8cb524d4b69256ce72c3976c",
+        "bytes": 259
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/exit-seven/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 7,
+      "eventActualExit": 7,
+      "receiptOutcome": 7,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.0023801220013410784,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 1,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54621,
+            "ppid": 54620,
+            "pgid": 54621,
+            "sid": 54621,
+            "state": "R",
+            "startTicks": 1981445,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54621,
+          "exitCode": 7,
+          "waitpidStatus": 1792,
+          "root": true
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "exit-seven",
+          "token": "owned-exit-seven-Candidate03",
+          "pid": 54621,
+          "ppid": 54620,
+          "pgid": 54621,
+          "sid": 54621,
+          "uid": 1000,
+          "startTicks": 1981445
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 1,
+      "lineageKinds": [
+        "owned-admission"
+      ],
+      "timedOut": false,
+      "interrupted": false,
+      "productionInvocation": false
+    },
+    {
+      "mode": "spawn-setsid",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+        "sha256": "3a2b168132f4a65f344c1c0cede6478c07891195defda03b58d05694886e07a0",
+        "bytes": 18037
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-setsid/Run/Containment/01-spawn-setsid/supervisor-result.json",
+        "sha256": "3a2b168132f4a65f344c1c0cede6478c07891195defda03b58d05694886e07a0",
+        "bytes": 18037
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-setsid/SupervisorEvidence/01-spawn-setsid/lineage-events.jsonl",
+        "sha256": "f2387984a9de25a83f088d12437c2cc5ca200a3107100cdd8b9de99a620eaba2",
+        "bytes": 1294
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-setsid/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 124,
+      "eventActualExit": 124,
+      "receiptOutcome": 124,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.032158719001017744,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 2,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54623,
+            "ppid": 54622,
+            "pgid": 54623,
+            "sid": 54623,
+            "state": "R",
+            "startTicks": 1981457,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 54624,
+            "ppid": 54623,
+            "pgid": 54623,
+            "sid": 54623,
+            "state": "R",
+            "startTicks": 1981460,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54623,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 54624,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 54624,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-spawn-setsid-Candidate03",
+          "pid": 54623,
+          "ppid": 54622,
+          "pgid": 54623,
+          "sid": 54623,
+          "uid": 1000,
+          "startTicks": 1981457
+        },
+        {
+          "label": "owned-setsid-leaf",
+          "token": "owned-spawn-setsid-Candidate03",
+          "pid": 54624,
+          "ppid": 54623,
+          "pgid": 54624,
+          "sid": 54624,
+          "uid": 1000,
+          "startTicks": 1981460
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 4,
+      "lineageKinds": [
+        "owned-admission",
+        "owned-signal"
+      ],
+      "timedOut": true,
+      "interrupted": false,
+      "productionInvocation": false
+    },
+    {
+      "mode": "doublefork",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+        "sha256": "109f087a068c8c55dfcac276975a09280231e4bfdcdd32b4566a97c0f2075952",
+        "bytes": 18553
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/doublefork/Run/Containment/01-doublefork/supervisor-result.json",
+        "sha256": "109f087a068c8c55dfcac276975a09280231e4bfdcdd32b4566a97c0f2075952",
+        "bytes": 18553
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/doublefork/SupervisorEvidence/01-doublefork/lineage-events.jsonl",
+        "sha256": "313b90fe0f9b4f42aa0a438f5e5e08896c2bf15b76ce3544a95b6d52c9a8329c",
+        "bytes": 1560
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/doublefork/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 124,
+      "eventActualExit": 124,
+      "receiptOutcome": 124,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.03163076400232967,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 3,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54626,
+            "ppid": 54625,
+            "pgid": 54626,
+            "sid": 54626,
+            "state": "R",
+            "startTicks": 1981565,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 54627,
+            "ppid": 54626,
+            "pgid": 54627,
+            "sid": 54627,
+            "state": "Z",
+            "startTicks": 1981569,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": []
+        },
+        {
+          "identity": {
+            "pid": 54628,
+            "ppid": 54625,
+            "pgid": 54627,
+            "sid": 54627,
+            "state": "S",
+            "startTicks": 1981569,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-or-kernel-adopted-child",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54626,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 54628,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 54628,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        },
+        {
+          "pid": 54627,
+          "exitCode": 0,
+          "root": false,
+          "waitid": {
+            "pid": 54627,
+            "uid": 1000,
+            "code": 1,
+            "status": 0
+          }
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-doublefork-Candidate03",
+          "pid": 54626,
+          "ppid": 54625,
+          "pgid": 54626,
+          "sid": 54626,
+          "uid": 1000,
+          "startTicks": 1981565
+        },
+        {
+          "label": "owned-doublefork-adopted",
+          "token": "owned-doublefork-Candidate03",
+          "pid": 54628,
+          "ppid": 54625,
+          "pgid": 54627,
+          "sid": 54627,
+          "uid": 1000,
+          "startTicks": 1981569
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 5,
+      "lineageKinds": [
+        "owned-admission",
+        "owned-signal"
+      ],
+      "timedOut": true,
+      "interrupted": false,
+      "productionInvocation": false
+    },
+    {
+      "mode": "spawn-ignore-term",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+        "sha256": "fff5dca0e00837ed98c8e50f7d83c1b12a3501f5c84431b3e491ebd0a7ba1e98",
+        "bytes": 18074
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-ignore-term/Run/Containment/01-spawn-ignore-term/supervisor-result.json",
+        "sha256": "fff5dca0e00837ed98c8e50f7d83c1b12a3501f5c84431b3e491ebd0a7ba1e98",
+        "bytes": 18074
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/lineage-events.jsonl",
+        "sha256": "5fb0a09974c3cd827042e2a093337afe4de2c7cb4acb3ce3c224cfeeec139954",
+        "bytes": 1681
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-ignore-term/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 124,
+      "eventActualExit": 124,
+      "receiptOutcome": 124,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.44064855900069233,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 2,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54631,
+            "ppid": 54630,
+            "pgid": 54631,
+            "sid": 54631,
+            "state": "R",
+            "startTicks": 1981672,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 54632,
+            "ppid": 54631,
+            "pgid": 54631,
+            "sid": 54631,
+            "state": "R",
+            "startTicks": 1981675,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15,
+            9
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54631,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 54632,
+          "exitCode": -9,
+          "root": false,
+          "waitid": {
+            "pid": 54632,
+            "uid": 1000,
+            "code": 2,
+            "status": 9
+          }
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "owned-ignore-term-leaf",
+          "token": "owned-spawn-ignore-term-Candidate03",
+          "pid": 54632,
+          "ppid": 54631,
+          "pgid": 54632,
+          "sid": 54632,
+          "uid": 1000,
+          "startTicks": 1981675
+        },
+        {
+          "label": "owned-parent",
+          "token": "owned-spawn-ignore-term-Candidate03",
+          "pid": 54631,
+          "ppid": 54630,
+          "pgid": 54631,
+          "sid": 54631,
+          "uid": 1000,
+          "startTicks": 1981672
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 5,
+      "lineageKinds": [
+        "owned-admission",
+        "owned-signal"
+      ],
+      "timedOut": true,
+      "interrupted": false,
+      "productionInvocation": false
+    },
+    {
+      "mode": "parent-exit-orphan",
+      "resultRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+        "sha256": "0e74adf5d88344f1139b0757076703f98d55a259b31440da549e9d2ecd658527",
+        "bytes": 18049
+      },
+      "mirroredReceiptRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/Run/Containment/01-parent-exit-orphan/supervisor-result.json",
+        "sha256": "0e74adf5d88344f1139b0757076703f98d55a259b31440da549e9d2ecd658527",
+        "bytes": 18049
+      },
+      "lineageRef": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/lineage-events.jsonl",
+        "sha256": "19061e6a032cb70f03849b4f9d9b2644e378cb3281e62f63c7a7a316a219ccb9",
+        "bytes": 906
+      },
+      "helperRecordedSource": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/Run/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+        "bytes": 38591
+      },
+      "eventExpectedExit": 0,
+      "eventActualExit": 0,
+      "receiptOutcome": 0,
+      "eventContainmentProvedEmpty": true,
+      "receiptStatus": "owned-descendants-proved-empty",
+      "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "subreaperBeforeSpawn": true,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.030057649997615954,
+        "maximumSeconds": 10.0
+      },
+      "ownedCount": 2,
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 54634,
+            "ppid": 54633,
+            "pgid": 54634,
+            "sid": 54634,
+            "state": "R",
+            "startTicks": 1981819,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        },
+        {
+          "identity": {
+            "pid": 54635,
+            "ppid": 54634,
+            "pgid": 54634,
+            "sid": 54634,
+            "state": "R",
+            "startTicks": 1981822,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 54634,
+          "exitCode": 0,
+          "waitpidStatus": 0,
+          "root": true
+        },
+        {
+          "pid": 54635,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 54635,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        }
+      ],
+      "recordedDummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-parent-exit-orphan-Candidate03",
+          "pid": 54634,
+          "ppid": 54633,
+          "pgid": 54634,
+          "sid": 54634,
+          "uid": 1000,
+          "startTicks": 1981819
+        },
+        {
+          "label": "owned-setsid-leaf",
+          "token": "owned-parent-exit-orphan-Candidate03",
+          "pid": 54635,
+          "ppid": 54634,
+          "pgid": 54635,
+          "sid": 54635,
+          "uid": 1000,
+          "startTicks": 1981822
+        }
+      ],
+      "dummyIDsMatchOwnedUidAndStart": true,
+      "allOwnedIDsHaveReapedRecords": true,
+      "signalledOwnedAndBaselineIntersection": [],
+      "baselineCount": 67,
+      "sentinelInBaseline": true,
+      "recordedSentinelSurvivedCase": true,
+      "lineageEventCount": 3,
+      "lineageKinds": [
+        "owned-admission",
+        "owned-signal"
+      ],
+      "timedOut": false,
+      "interrupted": false,
+      "productionInvocation": false
+    }
+  ],
+  "earlierFailuresPreserved": [
+    {
+      "result": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/result.json",
+        "sha256": "7f949db2482572ce04d70d4ff404c39bf3039c74141b62684b8058a98ae55073",
+        "bytes": 8171
+      },
+      "helperSha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+      "passed": 0,
+      "failed": 6
+    },
+    {
+      "result": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/result.json",
+        "sha256": "150c218a2bdf9494fe06854c94615bd6431eb3682b4f74cf0eb418bb6b85b91c",
+        "bytes": 8171
+      },
+      "helperSha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+      "passed": 0,
+      "failed": 6
+    }
+  ],
+  "notCovered": [
+    "actual interrupt130 before deadline",
+    "actual interrupt after timeout during cleanup",
+    "UID mismatch signal refusal",
+    "startTicks mismatch signal refusal",
+    "final immutable helper SHA9case with owner acceptance/schema",
+    "actual Unity/Native/Web/browser production invocation"
+  ],
+  "acceptanceReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "actionsPerformed": "Only file/text/JSON/hash reads and writes in this assigned audit folder. No candidate/fixture import, test execution, live process inspection, signals, network, Git or Unity."
+}

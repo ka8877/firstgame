@@ -1,0 +1,102 @@
+{
+  "beforeAnyOwnedSignal": true,
+  "commandSpecPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/command-spec.json",
+  "escapedIdentity": {
+    "pgid": 57342,
+    "pid": 57342,
+    "ppid": 57341,
+    "sid": 57342,
+    "startTicks": 2070624,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "escapedPidfdAlive": true,
+  "interruptPhase": null,
+  "observedAlive": true,
+  "observedMonotonic": 20706.28656478,
+  "observedUtc": "2026-11-03T18:01:28.184404+00:00",
+  "pidfdIdentityChecked": true,
+  "ready": {
+    "identity": {
+      "pgid": 57342,
+      "pid": 57342,
+      "ppid": 57341,
+      "sid": 57342,
+      "startTicks": 2070624,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": true,
+    "initialIdentity": null,
+    "kind": "setsid",
+    "label": "actual-setsid-ready",
+    "pgid": 57342,
+    "pid": 57342,
+    "ppid": 57341,
+    "readyMonotonic": 20706.281109109,
+    "rootIdentity": {
+      "pgid": 57341,
+      "pid": 57341,
+      "ppid": 57340,
+      "sid": 57341,
+      "startTicks": 2070621,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57342,
+    "startTicks": 2070624,
+    "state": "R",
+    "token": "6e21fca1ec6844408571b3311591990d",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "rootIdentity": {
+    "pgid": 57341,
+    "pid": 57341,
+    "ppid": 57340,
+    "sid": 57341,
+    "startTicks": 2070621,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentity": {
+    "pgid": 57340,
+    "pid": 57340,
+    "ppid": 57318,
+    "sid": 57340,
+    "startTicks": 2070616,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentityOriginal": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor-identity.json",
+  "token": "6e21fca1ec6844408571b3311591990d"
+}

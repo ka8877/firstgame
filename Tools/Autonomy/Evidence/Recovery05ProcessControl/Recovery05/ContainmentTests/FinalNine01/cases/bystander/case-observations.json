@@ -1,0 +1,153 @@
+{
+  "bystanderAfter": {
+    "aliveSameIdentity": true,
+    "identity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "S",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    }
+  },
+  "bystanderBefore": {
+    "alive": true,
+    "identity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ready": {
+      "identity": {
+        "pgid": 57358,
+        "pid": 57358,
+        "ppid": 57318,
+        "sid": 57358,
+        "startTicks": 2071173,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "ignoresSigterm": false,
+      "initialIdentity": null,
+      "kind": "sentinel",
+      "label": "actual-sentinel-ready",
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "readyMonotonic": 20711.767566292,
+      "rootIdentity": {
+        "pgid": 57358,
+        "pid": 57358,
+        "ppid": 57318,
+        "sid": 57358,
+        "startTicks": 2071173,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "R",
+      "token": "da5ed320f2c44f4c926e936fd33c8925",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    }
+  },
+  "bystanderReceipt": {
+    "bytes": 2731,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander-receipt.json",
+    "sha256": "de7441dc49d8ec66368868c1754dfcdc1038ba82de1d3ff0ba3cc360b215fd08"
+  },
+  "containmentReceipt": {
+    "bytes": 18559,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-result.json",
+    "sha256": "6a6a8d57cbb946696ae99e5ac9bf0cff287d652500e4529107812d5a833eb741"
+  },
+  "escapeAck": {
+    "bytes": 2205,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/observer-ack.json",
+    "sha256": "c21b0b3602a2a04581a204c59d3571f775b6eb24af994ea93a6db14b94a19652"
+  },
+  "escapeEvidence": {
+    "bytes": 600,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/escape-ready.json",
+    "sha256": "02d26b9bb2c47e7fefaabd0e916de644df3550c2b4f5bec89a518825ccce925f"
+  },
+  "expectedExitCode": 124,
+  "fixtureMode": "spawn-setsid",
+  "interruptPhase": null,
+  "ownerCleanup": {
+    "cleanupComplete": true,
+    "exitCode": -15,
+    "identity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "scope": "separate-actual-owner-exact-direct-dummy-cleanup",
+    "signals": [
+      {
+        "identity": {
+          "pgid": 57358,
+          "pid": 57358,
+          "ppid": 57318,
+          "sid": 57358,
+          "startTicks": 2071173,
+          "state": "S",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sent": true,
+        "signal": 15
+      }
+    ]
+  },
+  "passed": true,
+  "readyObservation": {
+    "bytes": 2205,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/ready-observation.json",
+    "sha256": "c21b0b3602a2a04581a204c59d3571f775b6eb24af994ea93a6db14b94a19652"
+  },
+  "token": "c37e568e3eaf487085f7067bc52e70bb"
+}

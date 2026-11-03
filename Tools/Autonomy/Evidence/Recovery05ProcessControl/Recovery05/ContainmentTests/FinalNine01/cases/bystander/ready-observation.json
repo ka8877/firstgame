@@ -1,0 +1,102 @@
+{
+  "beforeAnyOwnedSignal": true,
+  "commandSpecPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/command-spec.json",
+  "escapedIdentity": {
+    "pgid": 57362,
+    "pid": 57362,
+    "ppid": 57361,
+    "sid": 57362,
+    "startTicks": 2071184,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "escapedPidfdAlive": true,
+  "interruptPhase": null,
+  "observedAlive": true,
+  "observedMonotonic": 20711.886813735,
+  "observedUtc": "2026-11-03T18:01:33.784654+00:00",
+  "pidfdIdentityChecked": true,
+  "ready": {
+    "identity": {
+      "pgid": 57362,
+      "pid": 57362,
+      "ppid": 57361,
+      "sid": 57362,
+      "startTicks": 2071184,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": false,
+    "initialIdentity": null,
+    "kind": "setsid",
+    "label": "actual-setsid-ready",
+    "pgid": 57362,
+    "pid": 57362,
+    "ppid": 57361,
+    "readyMonotonic": 20711.881132333,
+    "rootIdentity": {
+      "pgid": 57361,
+      "pid": 57361,
+      "ppid": 57360,
+      "sid": 57361,
+      "startTicks": 2071181,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57362,
+    "startTicks": 2071184,
+    "state": "R",
+    "token": "c37e568e3eaf487085f7067bc52e70bb",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "rootIdentity": {
+    "pgid": 57361,
+    "pid": 57361,
+    "ppid": 57360,
+    "sid": 57361,
+    "startTicks": 2071181,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentity": {
+    "pgid": 57360,
+    "pid": 57360,
+    "ppid": 57318,
+    "sid": 57360,
+    "startTicks": 2071177,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentityOriginal": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-identity.json",
+  "token": "c37e568e3eaf487085f7067bc52e70bb"
+}

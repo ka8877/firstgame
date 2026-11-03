@@ -1,0 +1,115 @@
+{
+  "beforeAnyOwnedSignal": true,
+  "commandSpecPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/command-spec.json",
+  "escapedIdentity": {
+    "pgid": 57337,
+    "pid": 57338,
+    "ppid": 57335,
+    "sid": 57337,
+    "startTicks": 2070607,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "escapedPidfdAlive": true,
+  "interruptPhase": null,
+  "observedAlive": true,
+  "observedMonotonic": 20706.089814391,
+  "observedUtc": "2026-11-03T18:01:27.987653+00:00",
+  "pidfdIdentityChecked": true,
+  "ready": {
+    "identity": {
+      "pgid": 57337,
+      "pid": 57338,
+      "ppid": 57335,
+      "sid": 57337,
+      "startTicks": 2070607,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": false,
+    "initialIdentity": {
+      "pgid": 57337,
+      "pid": 57338,
+      "ppid": 57337,
+      "sid": 57337,
+      "startTicks": 2070607,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "kind": "doublefork",
+    "label": "actual-doublefork-ready",
+    "pgid": 57337,
+    "pid": 57338,
+    "ppid": 57335,
+    "readyMonotonic": 20706.086363169,
+    "rootIdentity": {
+      "pgid": 57336,
+      "pid": 57336,
+      "ppid": 57335,
+      "sid": 57336,
+      "startTicks": 2070604,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57337,
+    "startTicks": 2070607,
+    "state": "R",
+    "token": "2ae03badf22e4374874bb6f3afa23565",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "rootIdentity": {
+    "pgid": 57336,
+    "pid": 57336,
+    "ppid": 57335,
+    "sid": 57336,
+    "startTicks": 2070604,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentity": {
+    "pgid": 57335,
+    "pid": 57335,
+    "ppid": 57318,
+    "sid": 57335,
+    "startTicks": 2070599,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentityOriginal": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/supervisor-identity.json",
+  "token": "2ae03badf22e4374874bb6f3afa23565"
+}

@@ -1,0 +1,7 @@
+# Preview v2 route correction — narrow read-only check
+
+Source7c58a728fe298e01980a8c6c3cacf4654b9a9d6df9aa9f345b8e554103d47f43 /11664B and plan4272b5ec7b2cb4ac83e6f4c08a62dd9672a24253deb16e0fd46e91a1de2d8713 /3729B were read as text/JSON only. The correction now preserves the ordinary title→free-practice→playable-catalog→grade-guide→catalog-return route. SourceUI53/108/75/207 and the preserved C1 capability plan provide the coordinate basis. All5 routeSourceFiles matched their exact current fullrefs.
+
+There are5 configured captures per profile, hence10 intended original frames rather than8. V1 source59/oldplan are retained as unexecuted route-rejected originals; route-correction-01 records this honestly. No state/JS/save/pose/RNG shortcut was introduced. Existing currentNative04/Root0d/currentfp42b, actualnewbuild+containment+proof/source/runtime checks and allreadyfalse remain.
+
+This confirms only the source-level route correction. Actual browser0, successful CardWeb02 summarynull, settled title/grade/footer appearance and Rootapproval remain unproved. The unchanged initial1500ms settle has not been validated against actual Personal splash/runtime; named captures are still intended stages, not semantic UI proof. The full162/163 plans, PCM4/reload2/currentrules/save/public/CI/whole-site gates are not replaced. No candidate/preview import, run, signal, network, Git or source mutation was performed.

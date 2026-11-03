@@ -1,0 +1,26 @@
+{
+  "status": "invalidated-source-changed-during-finalization",
+  "noRemainingStaticBlocker": false,
+  "helperSha256": "400d63e77e6a782dbe6fe51cc77db6fa3fc64a4c1f4aacaa9c16ae790413837e",
+  "actualExecutionPerformed": false,
+  "reviewer": "/root/release_recovery/gospel_product_native_draft/independent_static_review",
+  "reviewedUtc": "2026-11-03T17:53:00.111504+00:00",
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/REPORT-01.md",
+    "sha256": "c190aaa82ee05f15e2e63aa56d720f32262c08c81ae39cef0c674f1e4b4b71cc",
+    "bytes": 5184
+  },
+  "observations": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-01.json",
+    "sha256": "12a5093c287f0eeb17032af57a596c5eecf9d9964d4d5e3fe6565aef147c788e",
+    "bytes": 12782
+  },
+  "limits": "Static source review only. No real process tests, production invocation, operator acceptance or release approval.",
+  "invalidationReason": "Active helper changed during draft finalization (05c reviewed delta; current400d63e7 not yet reviewed; proposal/contract pins did not match). No approval or acceptance may be based on this draft.",
+  "invalidatedUtc": "2026-11-03T17:53:25.262140+00:00",
+  "originalDraft": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/InvalidatedReview01/independent-review-01.json",
+    "sha256": "1728458adfffc6ae51fbb7b2b633c769a8a6a9d6756241ac2d0e27407403b39a",
+    "bytes": 989
+  }
+}

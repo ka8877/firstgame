@@ -1,0 +1,31 @@
+{
+  "label": "spawn-setsid",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+    "spawn-setsid",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/DummyOutputs",
+    "owned-spawn-setsid-Candidate01"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01",
+  "startedUtc": "2026-11-03T17:34:22.993406+00:00",
+  "timeoutSeconds": 0.9987874339967675,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 125,
+  "containmentProvedEmpty": false,
+  "cleanupIncomplete": true,
+  "containmentEvidence": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid",
+  "containmentReceipt": {
+    "file": "spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+    "sha256": "dc5c50ebe659265e20c65bf2232d40c8b49bfdfd152dbf6ab47fd1e3c75d6577",
+    "bytes": 1267
+  },
+  "containmentError": "ValueError: Owned descendants not proved empty; no success/restore may be inferred",
+  "finishedUtc": "2026-11-03T17:34:23.058096+00:00"
+}
