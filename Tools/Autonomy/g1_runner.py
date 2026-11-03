@@ -5,7 +5,7 @@ import argparse, importlib.util, json, os, re, shutil, subprocess, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'Artifacts/Validation/Autonomy/G1-2026-11-03'
-BUILD=Path('/tmp/firstgame-g1-builds')
+BUILD=Path(os.environ.get('FIRSTGAME_G1_BUILD_ROOT','/tmp/firstgame-g1-builds'))
 FILTER=';'.join('PathOfDawn.SmokeTests.'+name for name in ('GospelNativityStorySmokeTests','GospelNativityVisualSmokeTests','GospelNativityCharacterSmokeTests','GospelNativityAudioSmokeTests','GospelNativityMovementAudioSmokeTests','GospelNativityFiniteRenderingTests','GospelEncounterSmokeTests'))
 
 def main():

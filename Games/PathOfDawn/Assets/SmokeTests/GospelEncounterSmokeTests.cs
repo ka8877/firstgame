@@ -194,6 +194,88 @@ namespace PathOfDawn.SmokeTests
             Assert.That(backend.Read("g1-preserved-player"), Is.EqualTo("original player bytes"));
         }
 
+        IEnumerator FinishNonAwardingEncounter(string questId)
+        {
+            Assert.That(App.Chronicle.CurrentQuest.Id, Is.EqualTo(questId));
+            yield return ReachNpc(); App.Interact(); yield return null; yield return null;
+            int guard = 0;
+            while (App.Chronicle.CurrentQuest.Id == questId && guard++ < 12)
+            {
+                Assert.That(App.Ui.CurrentView, Is.EqualTo("story"));
+                yield return Click("이야기 계속");
+            }
+            Assert.That(App.Chronicle.CurrentQuest.Id, Is.Not.EqualTo(questId));
+        }
+
+        void AssertGuideHeadClearsActualGatewayCoping()
+        {
+            var encounter = GameObject.Find("Encounter · " + App.Chronicle.CurrentQuest.NpcName);
+            Assert.That(encounter, Is.Not.Null);
+            var person = encounter.GetComponentInChildren<GospelPilgrimageActor>();
+            Assert.That(person, Is.Not.Null); Assert.That(person.Renderer.sprite, Is.Not.Null);
+            var coping = GameObject.Find("Gateway crest coping"); Assert.That(coping, Is.Not.Null);
+            var mesh = coping.GetComponent<MeshFilter>(); Assert.That(mesh, Is.Not.Null);
+            // Original source renderers are disabled after architecture batching.
+            // Use the exact source mesh/transform, not an unrelated physics collider
+            // (the production coping intentionally has no collision component).
+            var probe = new GameObject("G1 exact coping occlusion probe");
+            try
+            {
+                probe.transform.SetPositionAndRotation(coping.transform.position, coping.transform.rotation);
+                probe.transform.localScale = coping.transform.lossyScale;
+                var collision = probe.AddComponent<MeshCollider>(); collision.sharedMesh = mesh.sharedMesh;
+                Physics.SyncTransforms();
+                var bounds = person.Renderer.sprite.bounds;
+                foreach (float y in new[] { .76f, .84f, .92f })
+                foreach (float x in new[] { -.08f, 0f, .08f })
+                {
+                    var local = new Vector3(bounds.center.x + bounds.size.x * x,
+                        bounds.min.y + bounds.size.y * y, 0);
+                    var face = person.Renderer.transform.TransformPoint(local);
+                    var viewport = App.SceneCamera.WorldToViewportPoint(face);
+                    Assert.That(viewport.z, Is.GreaterThan(0));
+                    Assert.That(viewport.x, Is.InRange(.02f, .98f));
+                    Assert.That(viewport.y, Is.InRange(.02f, .98f));
+                    var ray = App.SceneCamera.ViewportPointToRay(viewport);
+                    float depth = Vector3.Dot(face - ray.origin, ray.direction);
+                    Assert.That(collision.Raycast(ray, out var hit, depth - .01f), Is.False,
+                        "The actual foreground gateway coping must not cover the guide's upper face in the shipping camera.");
+                }
+            }
+            finally { UnityEngine.Object.DestroyImmediate(probe); }
+        }
+
+        [UnityTest] public IEnumerator TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition()
+        {
+            yield return ReachFirstField();
+            yield return FinishNonAwardingEncounter("nazareth-departure");
+            yield return FinishNonAwardingEncounter("pilgrim-spring");
+            Assert.That(App.Chronicle.CurrentQuest.Id, Is.EqualTo("festival-courtyard"));
+            yield return ReachNpc(); App.Interact(); yield return new WaitForSecondsRealtime(.4f);
+            AssertFieldPresentation(); AssertGuideHeadClearsActualGatewayCoping();
+            yield return Shot("temple-guide-unobscured");
+            string key = App.Chronicle.StoryVoiceKey; int found = App.Chronicle.DiscoveredCount;
+            Assert.That(App.Save(false), Is.True); string slot = App.ActiveSaveSlot;
+            // Isolated compatibility fixture: same actual event/cursor, but the
+            // original guide-area pose. Never relocate an existing player's save.
+            var legacy = App.Journey.CaptureSave(); legacy.playerX = 2f; legacy.playerZ = 1f;
+            legacy.playerY = App.World.HeightAt(legacy.playerX, legacy.playerZ);
+            Assert.That(PersistentSaves.TrySave(slot, GospelJourney.GameId, GospelJourney.SchemaVersion,
+                GospelJourney.ContentVersion, GospelSaveCodec.Encode(legacy), out var error), Is.True, error);
+            string original = backend.Read(slot);
+            yield return SmokeUi.LoadBoot(); Audio.NotifyUserGesture(); yield return Click("이어하기");
+            Assert.That(App.Chronicle.CurrentQuest.Id, Is.EqualTo("festival-courtyard"));
+            Assert.That(App.Chronicle.StoryVoiceKey, Is.EqualTo(key));
+            Assert.That(App.Chronicle.DiscoveredCount, Is.EqualTo(found));
+            Assert.That(App.Journey.PlayerX, Is.EqualTo(legacy.playerX));
+            Assert.That(App.Journey.PlayerY, Is.EqualTo(legacy.playerY));
+            Assert.That(App.Journey.PlayerZ, Is.EqualTo(legacy.playerZ));
+            Assert.That(Planar(App.Player.Position, new Vector3(legacy.playerX, legacy.playerY, legacy.playerZ)), Is.LessThan(.10f));
+            Assert.That(backend.Read(slot), Is.EqualTo(original));
+            AssertGuideHeadClearsActualGatewayCoping();
+            yield return Shot("temple-guide-legacy-pose-reloaded");
+        }
+
         [UnityTest] public IEnumerator EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState()
         {
             var journey = GospelJourney.NewChronicleJourney();

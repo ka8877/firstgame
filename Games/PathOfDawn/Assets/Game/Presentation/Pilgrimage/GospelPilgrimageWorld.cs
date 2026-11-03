@@ -26,7 +26,7 @@ namespace PathOfDawn.Presentation
 
         static readonly Dictionary<string, float> QuestDepth = new Dictionary<string, float> {
             { "nazareth-departure", -5 }, { "pilgrim-spring", -8 },
-            { "festival-courtyard", 1 }, { "listening-court", 10 },
+            { "festival-courtyard", -1 }, { "listening-court", 10 },
             { "teachers-circle", 4 }, { "parents-reunite", 0 }, { "nazareth-return", -7 },
             { "adult-jordan-road", -6 }, { "john-calling", 1 },
             { "baptism-request", 5 }, { "baptism-water", -2 }, { "ministry-beginning", 7 }

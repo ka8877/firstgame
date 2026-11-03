@@ -1,17 +1,17 @@
 """Strict source/runtime/original-frame gates for the changed Gospel and retained Cards."""
 from datetime import datetime,timezone
 from pathlib import Path
-import hashlib,importlib.util,json,sys,xml.etree.ElementTree as ET
+import hashlib,importlib.util,json,os,sys,xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'Artifacts/Validation/Autonomy/G1-2026-11-03'
-BUILD=Path('/tmp/firstgame-g1-builds')
+BUILD=Path(os.environ.get('FIRSTGAME_G1_BUILD_ROOT','/tmp/firstgame-g1-builds'))
 STAGE=Path('/tmp/firstgame-g1-staged-site')
 PRIOR=Path('/tmp/firstgame-nativity-staged-site')
 REVISION='gospel-encounter-2026-11-03'
 sys.path.insert(0,str(ROOT/'Tools/Validation'))
 from restoration_source_binding import capture,verify,digest
 import nativity_release_evidence as OLD
-NEW_CASES={'IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible','FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload','EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState'}
+NEW_CASES={'IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible','FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload','EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState','TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition'}
 CHECKPOINTS={'title','g1-field-dialogue','g1-guidance','g1-saved','g1-continued'}
 def require(ok,message):
  if not ok:raise ValueError(message)
