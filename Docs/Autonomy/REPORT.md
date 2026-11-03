@@ -1,3 +1,27 @@
+# G1 미완료 체크포인트 · 공개 정상판 유지
+
+이번 회차는 배포 완료가 아니다. 작업 브랜치 `codex/g1-field-encounters-2026-11-03`, 소스 후보 `313fc78280dec044f669a29adb5f9abc2603f78f`에 현장 대화·화면 방향/대화 가능 안내와 성전 NPC 가림 보완을 보존했다. 공개는 여전히 `623de27d`, fresh manifest SHA가 기존값과 일치한다. 카드게임은 바꾸지 않았다.
+
+수정 전 지문 `3c540940…`에서 Core285/Native13/새 Web 빌드와 PC74개 기계 검사가 통과했다. 실제 요셉→마리아→성전 길잡이를 걸어 만나12/19말씀·14/23여정을 기록하고 저장/완전 재접속했다. 그러나 처마가 길잡이 얼굴을 가리는 실제 원본을 발견해 Root가 시각 배포 승인을 거부했다. 이 성공 결과는 후속 보완 소스의 통과가 아니다.
+
+World의 길잡이 표현 깊이만1→-1로 옮기고 얼굴-처마 실제 메쉬 가림/이전 읽기 저장XYZ 보존 회귀를 추가했다. 현재 후보는 **미컴파일·미검증**이며 Native14개 전체를 새로 통과해야 한다. 실행45분 한도에서 새 Native/Web/PC·터치/공개 검증까지 마칠 수 없어 공개를 교체하지 않았다. 검증을 줄이거나 publishReady를 바꾸지 않았다. 사용자 결정은 필요하지 않으며 다음 회차는 STATE의 activeWork.resumeSteps부터 G1을 끝낸다.
+
+확인할 원본: `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-dialogue.png`(요셉 현장 대화), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-guidance.png`(다음 만남), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png`(가림 문제), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-continued.png`(실제 저장 복귀). Native 새 원본82파일은 전체 SHA를 확인하고 `/tmp/firstgame-g1-original-captures`에 보존·원래 경로를 연결했다. 기존 Nativity 원본/고유ZIP/저장/플레이어는 유지했다. 공식 SDK 캐시도 동일 바이트를 보존했지만 overlay 절감0이므로 절감으로 계산하지 않는다.
+
+---
+
+## 아래는 이 회차와 초기 설정의 진행 이력
+
+# G1 진행 중 · 현장 대화와 만남 안내
+
+현재 작업 브랜치는 `codex/g1-field-encounters-2026-11-03`이며 아직 공개하지 않았다. 탄생 삽화는 유지하고 필드 NPC 대화에는 실제 장소·인물을 보이며, HUD는 화면 방향·거리·대화 가능 상태를 안내한다. 새 그림/원작 자산은 추가하지 않았다.
+
+Core285/Unity13개와 새 Web 빌드가 통과했고 Native/Web의 전체 소스 지문 `3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24`가 같다. Prepare01의 새 fixture SpriteRenderer API 컴파일 실패를 보존한 뒤 동일한 enabled+active 검사로 바로잡아 Prepare02/Native01이 통과했다. 현재 실제 PC·터치 입력/저장/reload와 공개 반영은 진행 중이다. 정상 공개판 `623de27d`를 유지한다.
+
+새 Native 캡처만 모든 파일 해시를 확인하고 별도 임시 공간에 보존·기존 경로를 연결해 실제38.7MB를 확보했다. 기존 자료는 옮기거나 지우지 않았다. 공식 SDK 다운로드 캐시 이동은 동일 바이트를 보존했지만 overlay 공간을 늘리지 못했으며 이를 용량 절감으로 계산하지 않는다. 자세한 경로/재개점은 STATE를 따른다.
+
+---
+
 # 지속 개발 초기 설정 · 2026-11-03
 
 사용자의 장기 개발 규약을 저장하고 다음 제품 회차의 재개점을 정했다. **이번 회차는 운영 초기 설정이며 게임 기능·그림·공개 빌드를 변경하지 않았다.** 첫 제품 작업은 G1이다.
