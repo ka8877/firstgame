@@ -1,3 +1,17 @@
+# G1 미완료 체크포인트 · 공개 정상판 유지
+
+이번 회차는 배포 완료가 아니다. 작업 브랜치 `codex/g1-field-encounters-2026-11-03`, 소스 후보 `313fc78280dec044f669a29adb5f9abc2603f78f`에 현장 대화·화면 방향/대화 가능 안내와 성전 NPC 가림 보완을 보존했다. 공개는 여전히 `623de27d`, fresh manifest SHA가 기존값과 일치한다. 카드게임은 바꾸지 않았다.
+
+수정 전 지문 `3c540940…`에서 Core285/Native13/새 Web 빌드와 PC74개 기계 검사가 통과했다. 실제 요셉→마리아→성전 길잡이를 걸어 만나12/19말씀·14/23여정을 기록하고 저장/완전 재접속했다. 그러나 처마가 길잡이 얼굴을 가리는 실제 원본을 발견해 Root가 시각 배포 승인을 거부했다. 이 성공 결과는 후속 보완 소스의 통과가 아니다.
+
+World의 길잡이 표현 깊이만1→-1로 옮기고 얼굴-처마 실제 메쉬 가림/이전 읽기 저장XYZ 보존 회귀를 추가했다. 현재 후보는 **미컴파일·미검증**이며 Native14개 전체를 새로 통과해야 한다. 실행45분 한도에서 새 Native/Web/PC·터치/공개 검증까지 마칠 수 없어 공개를 교체하지 않았다. 검증을 줄이거나 publishReady를 바꾸지 않았다. 사용자 결정은 필요하지 않으며 다음 회차는 STATE의 activeWork.resumeSteps부터 G1을 끝낸다.
+
+확인할 원본: `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-field-dialogue.png`(요셉 현장 대화), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-guidance.png`(다음 만남), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png`(가림 문제), `Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-continued.png`(실제 저장 복귀). Native 새 원본82파일은 전체 SHA를 확인하고 `/tmp/firstgame-g1-original-captures`에 보존·원래 경로를 연결했다. 기존 Nativity 원본/고유ZIP/저장/플레이어는 유지했다. 공식 SDK 캐시도 동일 바이트를 보존했지만 overlay 절감0이므로 절감으로 계산하지 않는다.
+
+---
+
+## 아래는 이 회차와 초기 설정의 진행 이력
+
 # G1 진행 중 · 현장 대화와 만남 안내
 
 현재 작업 브랜치는 `codex/g1-field-encounters-2026-11-03`이며 아직 공개하지 않았다. 탄생 삽화는 유지하고 필드 NPC 대화에는 실제 장소·인물을 보이며, HUD는 화면 방향·거리·대화 가능 상태를 안내한다. 새 그림/원작 자산은 추가하지 않았다.

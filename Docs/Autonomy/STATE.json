@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T05:08:03.240139+00:00",
+  "updatedUtc": "2026-11-03T05:28:05.817225+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,42 +13,79 @@
   },
   "activeWork": {
     "id": "G1",
-    "status": "implementation-complete-validation-in-progress",
-    "branch": "codex/g1-field-encounters-2026-11-03",
-    "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/lease.json",
-    "productChanges": [
-      "Keep physical field visible during NPC story dialogue, preserve painted birth opening.",
-      "Add camera-relative NPC direction and explicit talk-ready hint."
+    "status": "blocked-before-release",
+    "reason": "The45-minute execution window does not allow fresh Native/Web/PC/touch/public validation of a visibility defect discovered during the real PC run. No limits or release checks were raised or bypassed.",
+    "resumeBranch": "codex/g1-field-encounters-2026-11-03",
+    "candidateCommit": "313fc78280dec044f669a29adb5f9abc2603f78f",
+    "candidateRevision": "gospel-encounter-2026-11-03",
+    "sourceChanges": [
+      "Live physical-field NPC dialogue preserving painted opening.",
+      "Camera-relative direction, distance and talk-ready HUD.",
+      "Unverified correction: temple guide depth1→-1 with a new actual coping/head-camera visibility and legacy XYZ/save regression."
     ],
-    "currentChecks": {
+    "requiredNativeCases": 14,
+    "currentCandidateValidated": false,
+    "beforeCorrectionEvidence": {
+      "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24",
       "Core": {
         "passed": 285,
         "failed": 0,
-        "sourceChanged": false
+        "stillCurrentCoreInputs": true
       },
-      "UnityPrepare": "Prepare01 new fixture compile API failure preserved; Prepare02 succeeded after same renderer enabled+active check correction.",
       "Native": {
         "passed": 13,
         "failed": 0,
-        "sourceChanged": false,
-        "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24"
+        "sourceChanged": false
       },
       "Web": {
-        "build": "Succeeded",
-        "sourceFingerprint": "3c540940e88505f998377b93bc451522a7b99eeadfe0cf5a69684dae56c44d24",
-        "runtimeValidation": "in-progress",
-        "deployed": false
+        "status": "Succeeded",
+        "root": "/tmp/firstgame-g1-builds"
+      },
+      "Desktop": {
+        "mechanicalChecks": 74,
+        "status": "passed",
+        "actualNPCs": [
+          "Joseph",
+          "Mary",
+          "temple guide"
+        ],
+        "scriptureCount": 12,
+        "goalCount": 14,
+        "saveAndFullReload": true,
+        "visualReview": "changes-requested",
+        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
+        "sha256": "e62b2245810d76bc3039cd1ef58a3650569dd6186d03f82a03cb17ac3d774986"
       }
     },
-    "publicStill": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
-    "candidateRevision": "gospel-encounter-2026-11-03",
-    "evidenceStorage": {
-      "nativeCaptures": "/tmp/firstgame-g1-original-captures",
-      "originalPathLink": "Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
-      "ledger": "Artifacts/Validation/Autonomy/G1-2026-11-03/capture-storage-relocation.json",
-      "bytes": 38770368,
-      "scope": "Only current G1 native originals were copied and every SHA verified before linking their original path. Prior evidence untouched. Native capture move actually recovered38.7MB; inactive official SDK cache move preserved bytes but did not recover overlay space."
-    }
+    "blockingFinding": {
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
+      "issue": "The actual live temple conversation hides the guide head behind the gateway crest. Root rejected release visual approval.",
+      "sourceCause": "World QuestDepth festival-courtyard z1 lies behind gateway atz-3.4 under fixed43degree camera. Combined architecture means disabling the original renderer alone does not remove it.",
+      "candidateFix": "Presentation depth only z=-1; Core ID/X, existing player save XYZ, quest/passages and voice keys unchanged. Not tested after this correction."
+    },
+    "notPerformedForCurrentCandidate": [
+      "Fresh Unity compilation/14Native",
+      "New source-bound Web",
+      "Fresh PC/touch ordinary input and visual approval",
+      "Stage985MB check",
+      "Pages deployment and new-public gameplay validation"
+    ],
+    "evidenceRoot": "Artifacts/Validation/Autonomy/G1-2026-11-03",
+    "nativeOriginalStorage": "/tmp/firstgame-g1-original-captures linked at Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
+    "captureStorageLedger": "Artifacts/Validation/Autonomy/G1-2026-11-03/capture-storage-relocation.json",
+    "normalPublicPreserved": {
+      "commit": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
+      "manifestSha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+      "checkedUtc": "2026-11-03T05:28:05.817225+00:00"
+    },
+    "resumeSteps": [
+      "Acquire fresh remote lease after actual prior owner exits; inspect current main/dirty files and this pending branch.",
+      "Switch to the saved G1 branch without reset/clean and merge latest main metadata preserving work.",
+      "Verify all temporary evidence/player/cache paths and exact before-correction SHA; do not promote13 Native/old Web as current14-case passes.",
+      "Use FIRSTGAME_G1_BUILD_ROOT=/tmp/firstgame-g1-fix01-builds for runner/evidence/stage and explicit matching browser --build-root; preserve old successful player.",
+      "Run prepare/native14/new Web and actual PC/touch route; directly compare temple guide face against coping, oldsaveXYZ/reading cursor, first field Scripture and full reconnect.",
+      "Only after all current gates/Root review pass, preserve Cards unchanged, stage<985MB, compliant integration to main, existing Pages deployment and fresh public validation."
+    ]
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -128,7 +165,7 @@
   "nextRun": {
     "id": "G1",
     "game": "PathOfDawn",
-    "status": "in-progress",
+    "status": "resume-incomplete-G1",
     "representativeSlice": {
       "fromQuest": "nazareth-departure",
       "throughQuest": "nazareth-return",
@@ -145,7 +182,7 @@
       "Clarify next encounter direction/distance/talk-ready state for Joseph, Mary and temple."
     ],
     "acceptance": "Actual movement through first three encounters, first field passage, book entry, save and full reconnect to identical place/dialogue. Core/native + new PC/touch Web/visual/input/reload checks before same-site publication.",
-    "resumeAt": "Read these four files, inspect actual remote/current dirty work and active owners, acquire remote lease; verify runtime/licensing/storage; begin G1 tasks without asking routine preferences."
+    "resumeAt": "Read activeWork.resumeSteps and complete the pending G1 before G2 or C1. Current candidate313fc782 is unverified; normal public623de27d unchanged."
   },
   "rotation": {
     "pattern": [
@@ -233,7 +270,9 @@
     "githubHostedUnityRunnerConfigured": false,
     "existingPagesConcurrencyPreserved": true,
     "onceUserSetup": "When creating a future recurring task, attach firstgame and the same managed Unity environment. Start by reading root AGENTS and STATE. Its first actual run must verify runtime/license/Git/lease and configured agent time/usage limits. Do not replace with a paid/self-hosted service without approval.",
-    "currentAvailableScope": "Autonomous work in active chat using current installed tools and existing Git/Pages procedures; actual new product changes require full current scope-appropriate checks."
+    "currentAvailableScope": "Autonomous work in active chat using current installed tools and existing Git/Pages procedures; actual new product changes require full current scope-appropriate checks.",
+    "goalExecutionObserved": true,
+    "sameUnityEnvironmentGoalRunObserved": true
   },
   "permissions": {
     "authorized": [
@@ -254,11 +293,11 @@
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
   "knownIssues": [
+    "G1 release blocked by temple guide head occlusion; source correction/regression is saved but unverified. Touch/public deployment remains unperformed.",
     "Current public site is near1GB; large asset expansion gated by measured capacity plan.",
     "Workspace had about208MB free at prerequisite probe; large build/evidence preflight required, no cleanup performed.",
     "Scheduled reuse of this Unity/cloud/ephemeral storage is unverified, not enabled.",
     "New Gospel chapters must migrate old completed23-quest saves before appending catalog entries.",
-    "Field NPC scene masking and one-NPC replacement are G1/G2 product work, not fixed by this initialization.",
     "Existing original-card/OST blanket redistribution permission remains unconfirmed; no new third-party assets published."
   ],
   "controlValidation": {
