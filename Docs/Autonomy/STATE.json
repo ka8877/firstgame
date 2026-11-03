@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T05:28:05.817225+00:00",
+  "updatedUtc": "2026-11-03T07:09:47.096325+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,15 +13,15 @@
   },
   "activeWork": {
     "id": "G1",
-    "status": "blocked-before-release",
-    "reason": "The45-minute execution window does not allow fresh Native/Web/PC/touch/public validation of a visibility defect discovered during the real PC run. No limits or release checks were raised or bypassed.",
+    "status": "source-integration-and-publication-in-progress",
+    "reason": "Current1ab5 source passed Native14, Web02, Desktop74 and focused actual-touch59; Root directly reviewed9 originals each. Source integration/stage/publication and fresh public checks remain pending.",
     "resumeBranch": "codex/g1-field-encounters-2026-11-03",
     "candidateCommit": "313fc78280dec044f669a29adb5f9abc2603f78f",
     "candidateRevision": "gospel-encounter-2026-11-03",
     "sourceChanges": [
       "Live physical-field NPC dialogue preserving painted opening.",
       "Camera-relative direction, distance and talk-ready HUD.",
-      "Unverified correction: temple guide depth1→-1 with a new actual coping/head-camera visibility and legacy XYZ/save regression."
+      "Guide presentation depth1→-1 passed Native14 actual coping/head visibility and old Reading XYZ regression; current Web02/PC74/touch59 and Root originals passed. Source integration/stage/publication/fresh public gates remain pending."
     ],
     "requiredNativeCases": 14,
     "currentCandidateValidated": false,
@@ -53,22 +53,21 @@
         "goalCount": 14,
         "saveAndFullReload": true,
         "visualReview": "changes-requested",
-        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
+        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/report.json",
         "sha256": "e62b2245810d76bc3039cd1ef58a3650569dd6186d03f82a03cb17ac3d774986"
       }
     },
     "blockingFinding": {
-      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
+      "file": "Artifacts/Validation/Autonomy/G1-2026-11-03/History/BeforeTempleFix/Desktop720/PathOfDawn/g1-temple-field-dialogue.png",
       "issue": "The actual live temple conversation hides the guide head behind the gateway crest. Root rejected release visual approval.",
       "sourceCause": "World QuestDepth festival-courtyard z1 lies behind gateway atz-3.4 under fixed43degree camera. Combined architecture means disabling the original renderer alone does not remove it.",
-      "candidateFix": "Presentation depth only z=-1; Core ID/X, existing player save XYZ, quest/passages and voice keys unchanged. Not tested after this correction."
+      "candidateFix": "Presentation depth only z=-1; Core ID/X, old player save XYZ, quest/passages/voice unchanged. Native14, current Web02, PC74/touch59 and directly viewed originals pass. Fresh public visual/runtime delivery is pending.",
+      "status": "historical-rejection-locally-resolved-publication-pending"
     },
     "notPerformedForCurrentCandidate": [
-      "Fresh Unity compilation/14Native",
-      "New source-bound Web",
-      "Fresh PC/touch ordinary input and visual approval",
-      "Stage985MB check",
-      "Pages deployment and new-public gameplay validation"
+      "Stage985MB complete-site check",
+      "Compliant source integration with required CI",
+      "Pages deployment and fresh public runtime/input/visual verification"
     ],
     "evidenceRoot": "Artifacts/Validation/Autonomy/G1-2026-11-03",
     "nativeOriginalStorage": "/tmp/firstgame-g1-original-captures linked at Artifacts/Validation/Autonomy/G1-2026-11-03/Screenshots",
@@ -79,13 +78,87 @@
       "checkedUtc": "2026-11-03T05:28:05.817225+00:00"
     },
     "resumeSteps": [
-      "Acquire fresh remote lease after actual prior owner exits; inspect current main/dirty files and this pending branch.",
-      "Switch to the saved G1 branch without reset/clean and merge latest main metadata preserving work.",
-      "Verify all temporary evidence/player/cache paths and exact before-correction SHA; do not promote13 Native/old Web as current14-case passes.",
-      "Use FIRSTGAME_G1_BUILD_ROOT=/tmp/firstgame-g1-fix01-builds for runner/evidence/stage and explicit matching browser --build-root; preserve old successful player.",
-      "Run prepare/native14/new Web and actual PC/touch route; directly compare temple guide face against coping, oldsaveXYZ/reading cursor, first field Scripture and full reconnect.",
-      "Only after all current gates/Root review pass, preserve Cards unchanged, stage<985MB, compliant integration to main, existing Pages deployment and fresh public validation."
-    ]
+      "Finish strict local consumer/current source checks, save checkpoint and CAS-release current owned lease before its deadline. Do not extend or steal it.",
+      "For the next publication batch, recheck actual idle/current remote/source/runtime/environment and existing actual limits, then acquire a distinct bounded lease.",
+      "Inspect/preserve and restore only generated Boot identifier drift; commit intended source/docs, normal source integration and required CI without bypass.",
+      "Stage whole exact site under985MB while keeping Cards and prior normal stage byte-identical. Publish via existing Pages only with time for public checks.",
+      "Fresh public file/runtime/caps/input/voice/book/save/full-reload and direct original visual review must close G1 before applying any G2 or Card draft."
+    ],
+    "validationStages": {
+      "sourceFingerprint": "1ab5e6426631fab37c103ee02187bce114ad335cedc4d838f95acabde0737acf",
+      "Native": {
+        "attempt": "Native02",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChanged": false,
+        "xmlSha256": "6c55e6419c67b5ac457828742fa903c968bf222c4855da35d7072d098ae87967",
+        "rootReview": "Artifacts/Validation/Autonomy/G1-2026-11-03/Root/gospel-native-review.json",
+        "rootReviewSha256": "c4e0453d2e00cfd1304566b73409fa2172125385ba5bc0da118076bb8c080652"
+      },
+      "Web": {
+        "attempt": "Web02",
+        "status": "Succeeded",
+        "root": "/tmp/firstgame-g1-fix01-builds",
+        "errors": 0,
+        "legacyResourcesRestored": true,
+        "runtimeFiles": 5,
+        "runtimeBytes": 109619261
+      },
+      "browser": "Desktop74 and focused actual-touch59 passed; Root9 original views each. Current public run pending.",
+      "stage": "pending",
+      "public": "unchanged-normal-baseline",
+      "Desktop720": {
+        "status": "passed",
+        "checks": 74,
+        "failed": 0,
+        "rootApprovedOriginals": 9,
+        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Desktop720/PathOfDawn/report.json",
+        "sha256": "a2940b764b6d6fa77fd879401c9b90728d92442429945f69f83986c5939e3faa",
+        "rawReportSha256": "62ac939f79a06917f8a11b532e8c42f20fe40d7da24b051e722da4ecefa8bb55",
+        "actualEncounters": [
+          "Joseph",
+          "Mary",
+          "temple guide"
+        ],
+        "scriptures": 12,
+        "quests": 14,
+        "fullBrowserReload": true,
+        "voiceBookStopAndNextSource": true,
+        "scope": "Actual cloud desktop keyboard/ordinary UI and directly inspected original frames; not physical device, human acting/aesthetic or whole-animation video approval."
+      },
+      "Mobile844": {
+        "status": "passed",
+        "checks": 59,
+        "failed": 0,
+        "rootApprovedOriginals": 9,
+        "report": "Artifacts/Validation/Autonomy/G1-2026-11-03/Mobile844/PathOfDawn/report.json",
+        "sha256": "f59b7603d2d26cc6a66385da7464d68e3493d710f6ba1a482a23751b21cb9aca",
+        "rawReportSha256": "57b7f1acb577369bde9a7dc606f7b602199755280179f281272c1860939a2d0a",
+        "planSteps": 69,
+        "requiredCaptures": 26,
+        "maxTouchPoints": 1,
+        "coarse": true,
+        "actualTouch": true,
+        "fullBrowserReload": true,
+        "scriptures": 12,
+        "quests": 14,
+        "scope": "Preselected focused plan; detailed opening/privacy/contents/scroll covered separately by Desktop74/Native14. Touch emulation, not a physical phone. Mary silhouette overlap retained as nonblocking quality finding."
+      }
+    },
+    "executionOwner": "/root/continuous_release",
+    "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/publication-lease-01.json",
+    "leaseDeadlineUtc": "2026-11-03T07:54:03.979211+00:00",
+    "localCandidateValidated": true,
+    "validationBatch": {
+      "status": "completed-and-owned-CAS-released",
+      "leaseRecord": "Artifacts/Validation/Autonomy/G1-2026-11-03/continue-lease-01.json",
+      "deadlineUtc": "2026-11-03T07:14:56.348689+00:00",
+      "releasedUtc": "2026-11-03T07:08:30Z",
+      "receipt": "Artifacts/Validation/Autonomy/G1-2026-11-03/local-validation-complete.json",
+      "receiptSha256": "d62f4be8c06f3b67b87bc0888e6ce7bcfb13c1cb1396217443201eb521b9986a"
+    },
+    "leaseOwner": "18c5806f-a0e5-40a4-8c7a-8f35c7ff326d"
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -182,7 +255,7 @@
       "Clarify next encounter direction/distance/talk-ready state for Joseph, Mary and temple."
     ],
     "acceptance": "Actual movement through first three encounters, first field passage, book entry, save and full reconnect to identical place/dialogue. Core/native + new PC/touch Web/visual/input/reload checks before same-site publication.",
-    "resumeAt": "Read activeWork.resumeSteps and complete the pending G1 before G2 or C1. Current candidate313fc782 is unverified; normal public623de27d unchanged."
+    "resumeAt": "Complete G1 publication from current1ab5 local-validated source. G2/Card /tmp drafts remain uncompiled and unapplied until G1 public gates close."
   },
   "rotation": {
     "pattern": [
@@ -212,7 +285,8 @@
     "modelUsageEnforced": false,
     "wholeInteractiveAgentDeadlineEnforced": false,
     "limitsNote": "run enforces its child process group only. A scheduled task runner must separately enforce entire agent time/usage/concurrency. Never raise limits or disable stops automatically.",
-    "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files."
+    "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
+    "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit."
   },
   "environment": {
     "managedCloudObservedRunning": true,
@@ -245,8 +319,8 @@
         "free": 5587804160
       }
     },
-    "pendingActualEditorCompile": true,
-    "note": "Editor version/license are current; no fresh compile or full game test was needed for documentation/guard-only initialization."
+    "pendingActualEditorCompile": false,
+    "note": "Initial prerequisite setup required no product compile. Subsequent G1 continuation performed fresh Native14/Editor compilation and Web02 with current exact source; PC74/touch59 actual browser runs passed. Initial auth/license probe remains historical, with licenseReady true and CLI authReady false."
   },
   "capacity": {
     "fileCount": 15413,
@@ -293,7 +367,9 @@
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
   "knownIssues": [
-    "G1 release blocked by temple guide head occlusion; source correction/regression is saved but unverified. Touch/public deployment remains unperformed.",
+    "G1 local Native14/Web02/PC74/touch59 and Root18browser originals passed; source integration/stage/Pages/fresh public validation remain pending. Old rejected PC originals are retained in History.",
+    "General character/architecture occlusion is not solved: player head can still be behind the gateway beam at a special legacy saved pose.",
+    "Mobile actual Mary approach can stop with overlapping player/NPC silhouettes; faces remain visible, but personal-space collision and comfortable stopping are not solved by G1 or the queued facing-only G2 draft. Preserve old Reading XYZ if addressing it.",
     "Current public site is near1GB; large asset expansion gated by measured capacity plan.",
     "Workspace had about208MB free at prerequisite probe; large build/evidence preflight required, no cleanup performed.",
     "Scheduled reuse of this Unity/cloud/ephemeral storage is unverified, not enabled.",
@@ -315,6 +391,53 @@
       "Tools/Autonomy/cycle_guard.py": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
       "Tools/Autonomy/test_cycle_guard.py": "c6d0aa9a9a1b188fdbcbbb6de3e82106af2e008933d5e3fe1134949ce57d03d9",
       ".github/workflows/core-tests.yml": "0244604dd44ceddd7124558a12ce36e89e5631a3740adb226e2b12c7515f935c"
+    }
+  },
+  "continuationPolicy": {
+    "status": "active-long-term-development",
+    "smallBatchIsNotGoalCompletion": true,
+    "continueAfterG1": "Close current source-bound release gates, then select substantive G2 work. Do not treat one to three improvements or a fixed execution count as completion of both games.",
+    "limits": "Preserve actual usage, command and remote-lease limits; no automatic extension or lock stealing. No recurring schedule or goal creation has been configured."
+  },
+  "cardNextVerifiedCandidate": {
+    "status": "read-only-confirmed-not-implemented",
+    "problem": "Presentation capability labels/filter names rotate bits1/2/4; preserved DB/generator map them as Beast/Equipment/Magic but UI shows Equipment/Magic/Beast.",
+    "source": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs:102-127",
+    "independentEvidence": [
+      "Tools/Data/Restoration/enumtable-observation.json:76",
+      "Tools/Data/ClassicCards/generate-catalog.py:12",
+      "Games/FantasyCards/Assets/Game/Core/ClassicCardData.cs:91",
+      "Tools/Research/Restage/guide-2015-text.txt:143"
+    ],
+    "examples": {
+      "Swarm_mask1": "야수",
+      "RabiMonkey_mask2": "장비",
+      "DeathHand_mask4": "마법",
+      "LongSword_mask6": "장비·마법"
+    },
+    "acceptance": "Fix labels and actual filter predicates together; detail/hover and PC/small-screen return flow; existing Core masks/equipment/save/cards/assets unchanged. Current G1/Card source frozen until release closes.",
+    "equipmentRuleStatus": "DPfixed candidate remains unresolved for general stacking/coin/symbol priority. Do not silently substitute or count research as implemented."
+  },
+  "nextWorkDrafts": {
+    "G2": {
+      "status": "uncompiled-unexecuted-draft-outside-repository",
+      "path": "/tmp/firstgame-g2-draft/g2-conversation-facing.patch",
+      "sha256": "fc9e084e3a154326f42090c0808d60fabb1adf52926b8e4a9abf008ea9a9bf79",
+      "baseLedger": "/tmp/firstgame-g2-draft/base-ledger.json",
+      "rootStaticReview": "Motor/App and two actual-input Native cases inspected; no obvious API issue. This is not passing product evidence.",
+      "constraint": "Only consider application after all G1 local/public gates close; compare current production base hashes and absent new files first. Preserve previous14 and add both exact Native cases for16 total; fresh Web/PC/touch/public needed."
+    },
+    "CardCapability": {
+      "status": "uncompiled-unexecuted-draft-outside-repository",
+      "directory": "/tmp/firstgame-card-capability-draft",
+      "baseLedger": "/tmp/firstgame-card-capability-draft/base-sha256.json",
+      "patches": {
+        "01-product.patch": "f022e9f85d7ea3aee4e5d3ea7acefdddcdc7fa0de7c83bd0c78c21c1248ed2ef",
+        "02-existing-fixture-expectation.patch": "cabaac645b2b26ba014e5506db19a08bdd663bd5dd9355bf48f3ef92a3d1ad55",
+        "03-new-native-regression.patch": "3da1f58cd3c40d237aae3b5c965bd849fb56abe65e9f88ab9ac803f293f09a62"
+      },
+      "rootStaticReview": "Product mapping, independent DB/ID assertions, existing fixture expectation correction and actual UI filter callbacks inspected. No compile or passing evidence.",
+      "constraint": "Apply only after G1/G2 closure and Card ownership transfer; check current base SHA and absent new files. Keep fixture correction separate with independent original enum evidence; retain all existing cases and assertions. New Native uses callback UI only and no screenshot writer; fresh output path/source-bound Web/PC/touch/public checks still required."
     }
   }
 }
