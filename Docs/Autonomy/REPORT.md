@@ -1,3 +1,9 @@
+# G2 첫 PC 실행 실패 · 재개 포인터
+
+최신 WIP는 `codex/g2-conversation-facing-2026-11-03` / `c97408b2fab4f1a1063b8d8d8fecdd3dcf00ad43`다. Native16/Web255e 통과는 유지되지만 실제 PC116 실행은86검사 중85통과/1실패였고 마지막 runtime-unchanged 검사는 예외로 미실행이다. raw `02df4bde…`·전체99파일·실행계획/harness/요청·캐시·원본은 실패 상태로 보존했다. PC 통과/Root 최종승인으로 바꾸지 않았다.
+
+원인은 기존 분류기가 요구하는 `continued-` 복구원본 이름과 새 early Reading 이름의 불일치다. 공통/G1 검사와 실행된 기존계획은 변경하지 않는다. 다음 독립 묶음에서 새 v2 계획 경로에 실제 복구원본1개/필수1개만 추가·사전고정해 별도출력에서 PC 전체를 다시 실행해야 한다. v2·재시도·Touch·공개는 아직 미수행이다. 이 main 변경은 STATE/REPORT 포인터뿐이며 Game/Tools와 실제 공개G1 `683b0700`은 그대로다. 실제 잠금 조회/새 bounded lease와 정확한 WIP로 재개한다.
+
 # G2 미완료 작업 브랜치 재개 포인터
 
 G2 소스·도구는 `codex/g2-conversation-facing-2026-11-03`의 `202c60d570879b9cb328b3f0ec51f98612548dc9`에 보존했다. 실제 Native16/실패0·Root4원본과 Web01 오류0/경고4/원본복구true는 현재 입력255e2d75에 묶여 통과했고, Core285는 동일 입력의 이전 실제 실행 재사용이다. WIP CI41601790583도 통과했다. PC116단계·터치85단계·공개85단계는 아직 실행하지 않았다.
