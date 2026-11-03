@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "source-only-ast-comparison-no-execution",
+  "publishReady": false,
+  "baselineReady": false,
+  "observedUtc": "2026-11-03T18:19:07.844844+00:00",
+  "base": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Base/recovery-gospel-web.b365.py",
+    "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+    "bytes": 54692
+  },
+  "caller": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+    "sha256": "cfe661216581886adff3ef07b03f89f54e0354383edae9afb763e1e1f3d0f547",
+    "bytes": 57482
+  },
+  "unchangedTopLevelFunctionAndClassBodies": [
+    "JournalAliasError",
+    "Lane",
+    "checked",
+    "configure_containment",
+    "exact_xml",
+    "failure_state",
+    "full_source",
+    "get_path",
+    "library_journal_target",
+    "no_links",
+    "observed_runtime_idle",
+    "preserve_library_journal",
+    "raw_checked",
+    "ref",
+    "regular",
+    "relative",
+    "require",
+    "role_map",
+    "runtime_paths",
+    "same_root_ref",
+    "sha",
+    "stamp",
+    "utc",
+    "write_json",
+    "write_raw"
+  ],
+  "changedTopLevelBodies": [
+    "main"
+  ],
+  "reason": "Only main adds a fail-closed independent Root-source approval envelope, exact Recovery06 output prefixes, and raw envelope/approval preservation; all contained Lane, alias/journal, XML16, full-source, failure state and runtime helper implementations remain byte-equivalent AST.",
+  "modulesImportedOrRun": false
+}

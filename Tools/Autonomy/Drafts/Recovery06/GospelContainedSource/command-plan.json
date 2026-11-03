@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "status": "source-only-unexecuted-recovery06-root-source-approval-held",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "cwd": "/workspace/firstgame",
+  "commonBuild": {
+    "argv": [
+      "bash",
+      "Tools/Build/nativity-task.sh",
+      "PathOfDawn",
+      "web",
+      "GospelWeb01"
+    ],
+    "environmentOverrides": {
+      "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01",
+      "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery06-gospelweb01-builds",
+      "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/GeneratedPythonCache",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "stdoutStderr": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/launcher-build.log",
+    "unityLog": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/PathOfDawn/GospelWeb01/web.log"
+  },
+  "afterSuccessOnly": {
+    "argv": [
+      "python3",
+      "Tools/Validation/preserve-completed-build-proof.py",
+      "--repository-root",
+      "/workspace/firstgame",
+      "--game",
+      "PathOfDawn",
+      "--revision",
+      "gospel-facing-2026-11-03",
+      "--expected-source-fingerprint",
+      "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+      "--build-folder",
+      "/tmp/firstgame-c1-recovery06-gospelweb01-builds/PathOfDawn/Web",
+      "--output",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/BuildProof/PathOfDawn-Web01",
+      "--build-exit-code",
+      "0",
+      "--copy-core-runtime"
+    ],
+    "stdoutStderr": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/launcher-proof.log",
+    "usesSameControlledChildEnvironment": true,
+    "precondition": "actual entire commonBuild exit0 including pipeline and generated-addition restoration, explicit restored source/journals and all current pins exact"
+  },
+  "ownerRecoveryAfterFailureOnly": {
+    "status": "conditional-manual-owned-restoration-plan-not-a-success-retry",
+    "first": "After accepted owned-descendant cleanup with actual ECHILD/held-identity proof and actual idle, preserve exact Library journal, pipeline record/Before/After, additions record/files, all logs and observed full current-source state. Record pending-restoration with both readiness flagsfalse.",
+    "sameOriginalEnvironment": {
+      "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01",
+      "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery06-gospelweb01-builds",
+      "pythonSourcePolicy": "same fresh prefix/dontwrite1/optimize0"
+    },
+    "legacyIfActualJournalExists": {
+      "argv": [
+        "<current approved UNITY_EDITOR absolute path>",
+        "-batchmode",
+        "-nographics",
+        "-projectPath",
+        "Games/PathOfDawn",
+        "-executeMethod",
+        "FirstGame.Editor.LegacyResourceIsolation.RecoverInterrupted",
+        "-quit",
+        "-logFile",
+        "<new unique persistent owner recovery log>"
+      ],
+      "preconditions": "Actual journal accepted by existing RecoverInterrupted revision/move/file rules and no simultaneous Unity/browser. Use a separately owned bounded invocation; preserve and stop on ambiguity. Never rerun original build to trigger recovery blindly."
+    },
+    "pipelineIfActualRecordStillSnapshotted": {
+      "argv": [
+        "python3",
+        "Tools/Build/nativity-pipeline-state.py",
+        "restore",
+        "PathOfDawn",
+        "GospelWeb01",
+        "web"
+      ],
+      "preconditions": "Unity fully exited; inspect original record status=snapshotted and every exact Before original exists; After directory must still be absent. Do not call this again if already restored or After exists in a partial/prepared state: preserve record/Before/After/current source and stop for explicit owner diagnosis, with no overwrite/delete/re-run."
+    },
+    "generatedAdditionsIfNoPriorOutputYet": {
+      "argv": [
+        "python3",
+        "Tools/Build/restore-nativity-build-additions.py",
+        "PathOfDawn",
+        "GospelWeb01"
+      ],
+      "preconditions": "Legacy and pipeline original bytes/GUID state recovered first; original fresh Native reference retained; GeneratedProjectAdditions absent, every changed old input absent and all extras fit existing original allowlist. If existing prepared/partial output, preserve it and stop for explicit owner diagnosis instead of rerun/overwrite."
+    },
+    "then": "Independently recheck entire authored files/FP and original GUID/journal restoration state. Keep original failed/timeout build result failed; source recovery is not new build success. No proof helper until a separate actual successful full build exists; no retry limit reset."
+  },
+  "launcherPolicy": {
+    "owner": "/root/release_recovery",
+    "sourceAndInvocationMustBePreserved": true,
+    "privateChildProcessGroup": true,
+    "sharedTotalBudgetSecondsMaximum": 900,
+    "leaseReserveSeconds": 60,
+    "latestGuardRule": "After each actual remote guard returns, recompute safeEnd=min(originalBatchStart+900, leaseDeadline-60); require positive sufficient remaining before each child and do not reset batch start.",
+    "timeoutRule": "Dedicated accepted Linux subreaper tracks only owned UID/startTicks/pidfd descendants across setsid/doublefork; execution ends no later than safeEnd-12, cleanup10+outer2 stays inside shared900/lease-60; ECHILD plus exact held-identity terminal/reap proofs required. Preserve actual timeout/interrupt/exit; never infer completion from an empty root group.",
+    "noAutoAcquireReleaseExtendRetry": true,
+    "guardRunIsNotAnExistingLeaseLauncher": "cycle_guard.py run acquires its own lease; do not invoke it over a currently held lease. Only owner chooses and implements current controlled launch.",
+    "installFile": "Tools/Autonomy/recovery-gospel-web.py",
+    "status": "source-only-draft-wrapper-proposed-not-installed-or-executed",
+    "wrapperSource": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+    "ownedDescendantContainmentRequired": true,
+    "cleanupReserveInsideSharedBudgetSeconds": 12,
+    "rootSourceApprovalRequiredBeforeAnyChild": true
+  }
+}

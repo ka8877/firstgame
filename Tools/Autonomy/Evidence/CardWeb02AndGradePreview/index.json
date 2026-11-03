@@ -1,0 +1,754 @@
+{
+  "preservedUtc": "2026-11-03T18:18:47.318726+00:00",
+  "scope": "actualCardWeb02build-and-witness-and-short-grade-visual-originals-only",
+  "sourceCommitAtActualBuild": "1b466ad60979bd9d2f7bc2911b2ca62997810a3e",
+  "CI": {
+    "run": 41690698385,
+    "status": "completed",
+    "conclusion": "success",
+    "actualTRXPassed": 285,
+    "actualTRXFailed": 0
+  },
+  "rawBytes": 35230531,
+  "preservedBytes": 11763978,
+  "files": [
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/CI/actual-trx-counters.json",
+        "bytes": 802,
+        "sha256": "dedc9f8f77bb6d819e2e31e83ea0556c0419145c7830717bc4cbe19587409c0b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/CI/actual-trx-counters.json",
+        "bytes": 802,
+        "sha256": "dedc9f8f77bb6d819e2e31e83ea0556c0419145c7830717bc4cbe19587409c0b"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/CI/core-results/core-tests.trx",
+        "bytes": 387280,
+        "sha256": "f03b89c36625479a0a5d1fad29814f0986332a7fd119c28d8adc0d6ec0833dcd"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/CI/core-results/core-tests.trx",
+        "bytes": 387280,
+        "sha256": "f03b89c36625479a0a5d1fad29814f0986332a7fd119c28d8adc0d6ec0833dcd"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/CI/run-41690698385-success.json",
+        "bytes": 1326,
+        "sha256": "03522fd5c60d79ae72a7e14495c4e20c0ab87d01a06efc803fddbd5f351610b2"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/CI/run-41690698385-success.json",
+        "bytes": 1326,
+        "sha256": "03522fd5c60d79ae72a7e14495c4e20c0ab87d01a06efc803fddbd5f351610b2"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-catalog-return.json",
+        "bytes": 605,
+        "sha256": "f57b0535e8c53842536981af793ef1dd9a5096407a475ae6218de334ac8f5296"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-catalog-return.json",
+        "bytes": 605,
+        "sha256": "f57b0535e8c53842536981af793ef1dd9a5096407a475ae6218de334ac8f5296"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-catalog-return.png",
+        "bytes": 618800,
+        "sha256": "edfb38c44dafedbe7c20e9edaa452346419b3dcc19bc4799bce94c4fb67f579d"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-catalog-return.png",
+        "bytes": 618800,
+        "sha256": "edfb38c44dafedbe7c20e9edaa452346419b3dcc19bc4799bce94c4fb67f579d"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-catalog.json",
+        "bytes": 591,
+        "sha256": "ce237abf42cf272c582c6af894089d04b08ad820f259e81fb714345f4f665e80"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-catalog.json",
+        "bytes": 591,
+        "sha256": "ce237abf42cf272c582c6af894089d04b08ad820f259e81fb714345f4f665e80"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-catalog.png",
+        "bytes": 618800,
+        "sha256": "edfb38c44dafedbe7c20e9edaa452346419b3dcc19bc4799bce94c4fb67f579d"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-catalog.png",
+        "bytes": 618800,
+        "sha256": "edfb38c44dafedbe7c20e9edaa452346419b3dcc19bc4799bce94c4fb67f579d"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-free-practice-lobby.json",
+        "bytes": 615,
+        "sha256": "8b59266433047dcd462913517b0366ca3583c8bcbc134d8e48630320cdd708b3"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-free-practice-lobby.json",
+        "bytes": 615,
+        "sha256": "8b59266433047dcd462913517b0366ca3583c8bcbc134d8e48630320cdd708b3"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-free-practice-lobby.png",
+        "bytes": 311741,
+        "sha256": "49ee175b61748ea543a91eefa53580affa041673f0fae94af8a82aafe942cea9"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-free-practice-lobby.png",
+        "bytes": 311741,
+        "sha256": "49ee175b61748ea543a91eefa53580affa041673f0fae94af8a82aafe942cea9"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-grade-guide-all-current13-footer.json",
+        "bytes": 641,
+        "sha256": "ccb40a3ceb45e19e0dd1ef7b379da945f578b438d041dadd733b38238a53a540"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-grade-guide-all-current13-footer.json",
+        "bytes": 641,
+        "sha256": "ccb40a3ceb45e19e0dd1ef7b379da945f578b438d041dadd733b38238a53a540"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-grade-guide-all-current13-footer.png",
+        "bytes": 279329,
+        "sha256": "7346d0d9df1255097eb260d8f8a842bf75282833ae2eca67d3fc00af2c4a7b84"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-grade-guide-all-current13-footer.png",
+        "bytes": 279329,
+        "sha256": "7346d0d9df1255097eb260d8f8a842bf75282833ae2eca67d3fc00af2c4a7b84"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-title.json",
+        "bytes": 588,
+        "sha256": "18894911b16bed8d98afea9636d61d1c816a7d07708de8b1cc6d5f8944f1f0a1"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-title.json",
+        "bytes": 588,
+        "sha256": "18894911b16bed8d98afea9636d61d1c816a7d07708de8b1cc6d5f8944f1f0a1"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/PC-preview-title.png",
+        "bytes": 1171440,
+        "sha256": "0e1a95a14aa23316fb0ec84901a08dc025a63efb1a9c88fcd9fdb957417fa3ee"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/PC-preview-title.png",
+        "bytes": 1171440,
+        "sha256": "0e1a95a14aa23316fb0ec84901a08dc025a63efb1a9c88fcd9fdb957417fa3ee"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/build-summary-ref.json",
+        "bytes": 210,
+        "sha256": "4eb3c96a40e7c84b4f839e3fde2fb5a3f88f1806cd3176064be5f4a5800bdad7"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/build-summary-ref.json",
+        "bytes": 210,
+        "sha256": "4eb3c96a40e7c84b4f839e3fde2fb5a3f88f1806cd3176064be5f4a5800bdad7"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/executed-harness.py",
+        "bytes": 11664,
+        "sha256": "7c58a728fe298e01980a8c6c3cacf4654b9a9d6df9aa9f345b8e554103d47f43"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/executed-harness.py",
+        "bytes": 11664,
+        "sha256": "7c58a728fe298e01980a8c6c3cacf4654b9a9d6df9aa9f345b8e554103d47f43"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/executed-plan.json",
+        "bytes": 4140,
+        "sha256": "0141ced91a761df51378b3e7f2eb948f5c591f56658ee261233fc9a53dddb3ed"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/executed-plan.json",
+        "bytes": 4140,
+        "sha256": "0141ced91a761df51378b3e7f2eb948f5c591f56658ee261233fc9a53dddb3ed"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/report.json",
+        "bytes": 8654,
+        "sha256": "3f52c4b5585080b1dfb45e7dde211a6af66b7212e34c434c5ef7b9315647e93e"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/report.json",
+        "bytes": 8654,
+        "sha256": "3f52c4b5585080b1dfb45e7dde211a6af66b7212e34c434c5ef7b9315647e93e"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-catalog-return.json",
+        "bytes": 604,
+        "sha256": "dc634cf609a7068bac4ace1f890e72a64ba158f3c1fae3168ed457da977c3965"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-catalog-return.json",
+        "bytes": 604,
+        "sha256": "dc634cf609a7068bac4ace1f890e72a64ba158f3c1fae3168ed457da977c3965"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-catalog-return.png",
+        "bytes": 221083,
+        "sha256": "d21597fc12480a8bd65951aed456aba745ecb25c1b45acb5acc9129854bf2a49"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-catalog-return.png",
+        "bytes": 221083,
+        "sha256": "d21597fc12480a8bd65951aed456aba745ecb25c1b45acb5acc9129854bf2a49"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-catalog.json",
+        "bytes": 590,
+        "sha256": "501e64830150c9ee331edbb2e9763929210918df7ba9d45066d0a3aebdc69350"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-catalog.json",
+        "bytes": 590,
+        "sha256": "501e64830150c9ee331edbb2e9763929210918df7ba9d45066d0a3aebdc69350"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-catalog.png",
+        "bytes": 221083,
+        "sha256": "d21597fc12480a8bd65951aed456aba745ecb25c1b45acb5acc9129854bf2a49"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-catalog.png",
+        "bytes": 221083,
+        "sha256": "d21597fc12480a8bd65951aed456aba745ecb25c1b45acb5acc9129854bf2a49"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-free-practice-lobby.json",
+        "bytes": 614,
+        "sha256": "7d9b5689bf810ec2560e208dc80917fa2511609ed127449aaf337209cca07433"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-free-practice-lobby.json",
+        "bytes": 614,
+        "sha256": "7d9b5689bf810ec2560e208dc80917fa2511609ed127449aaf337209cca07433"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-free-practice-lobby.png",
+        "bytes": 149456,
+        "sha256": "e15080ceedb071529727844ac96a96aee5b7095cb12dea62567c1acfe342d130"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-free-practice-lobby.png",
+        "bytes": 149456,
+        "sha256": "e15080ceedb071529727844ac96a96aee5b7095cb12dea62567c1acfe342d130"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-grade-guide-all-current13-footer.json",
+        "bytes": 640,
+        "sha256": "f693c46aae81bfc40f33450406104e07c87f92b043780db9e974135c64cd7c12"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-grade-guide-all-current13-footer.json",
+        "bytes": 640,
+        "sha256": "f693c46aae81bfc40f33450406104e07c87f92b043780db9e974135c64cd7c12"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-grade-guide-all-current13-footer.png",
+        "bytes": 135753,
+        "sha256": "2763cda83af8966a4da3b502dd62bf22247e386e51c099c4a88651f7cc1875ef"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-grade-guide-all-current13-footer.png",
+        "bytes": 135753,
+        "sha256": "2763cda83af8966a4da3b502dd62bf22247e386e51c099c4a88651f7cc1875ef"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-title.json",
+        "bytes": 586,
+        "sha256": "3fb652702cd0fc54eec8fcfb2d595acacbd3d62dbf6f577787513135cfc5f43a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-title.json",
+        "bytes": 586,
+        "sha256": "3fb652702cd0fc54eec8fcfb2d595acacbd3d62dbf6f577787513135cfc5f43a"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01/touch-preview-title.png",
+        "bytes": 350720,
+        "sha256": "2203c387c1cdf4fc0ff2163410f2eef14c1adbb89653f0685c4b04394de0ba57"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreview01/touch-preview-title.png",
+        "bytes": 350720,
+        "sha256": "2203c387c1cdf4fc0ff2163410f2eef14c1adbb89653f0685c4b04394de0ba57"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewControl01/control-result.json",
+        "bytes": 2255,
+        "sha256": "c95246590a15099cf595a270aae3664cd1369517e7f0a8a46f26db01be4dffad"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreviewControl01/control-result.json",
+        "bytes": 2255,
+        "sha256": "c95246590a15099cf595a270aae3664cd1369517e7f0a8a46f26db01be4dffad"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewControl01/driver.executed.py",
+        "bytes": 2780,
+        "sha256": "4257648f83b6616e76775d8762b630d177e8255768f7bd61c5a2b95e692aafa5"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/GradePreviewControl01/driver.executed.py",
+        "bytes": 2780,
+        "sha256": "4257648f83b6616e76775d8762b630d177e8255768f7bd61c5a2b95e692aafa5"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/grade-web-originals-owner-observation.json",
+        "bytes": 5216,
+        "sha256": "0250fa4c34ee52673750a6365da374c70158e60648a45876eaf4891f442e7ca4"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/OperatorReview/grade-web-originals-owner-observation.json",
+        "bytes": 5216,
+        "sha256": "0250fa4c34ee52673750a6365da374c70158e60648a45876eaf4891f442e7ca4"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/PreviewContracts/card-web02-grade-visual-plan.json",
+        "bytes": 4140,
+        "sha256": "0141ced91a761df51378b3e7f2eb948f5c591f56658ee261233fc9a53dddb3ed"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/PreviewContracts/card-web02-grade-visual-plan.json",
+        "bytes": 4140,
+        "sha256": "0141ced91a761df51378b3e7f2eb948f5c591f56658ee261233fc9a53dddb3ed"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/BuildEvidence.txt",
+        "bytes": 263,
+        "sha256": "c607e26540e87d5a6a7ca128e2bbc0c8e8aa8f4f001aad440e170ac7ab029409"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/BuildEvidence.txt",
+        "bytes": 263,
+        "sha256": "c607e26540e87d5a6a7ca128e2bbc0c8e8aa8f4f001aad440e170ac7ab029409"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/BuildInputs.json",
+        "bytes": 8102219,
+        "sha256": "e887b7ed1aa9fe654b02b9b607387cd440b3729082fc89d39b5db1a81ab09353"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/BuildInputs.json.gz",
+        "bytes": 1633133,
+        "sha256": "3846a45010616e1f3eef836ed773b498eb344b0c1c1a63ca92f40b2de60537b8"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/build-proof-index.json",
+        "bytes": 2701299,
+        "sha256": "e76fc8ed0a0364c9051f9f12166d0b5a6b845f4f7f8321f06b41ddc0b4ba7995"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/build-proof-index.json.gz",
+        "bytes": 733415,
+        "sha256": "c058782fc21a56d7c63010fd16c712329be6e0db734fd37d5bccd5a4259916f8"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/GeneratedProjectAdditions/record.json",
+        "bytes": 341,
+        "sha256": "4d34ba4ca9fdc061f6e7c437ea4d6d9730a27f0d66cb45eacebf2ab23b15155c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/GeneratedProjectAdditions/record.json",
+        "bytes": 341,
+        "sha256": "4d34ba4ca9fdc061f6e7c437ea4d6d9730a27f0d66cb45eacebf2ab23b15155c"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/DesktopURP.asset",
+        "bytes": 4689,
+        "sha256": "4bc9f68e228fa932fd03f3bfaf4314ccfc2f6c96f8513675b8984b0fc7c49703"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/DesktopURP.asset",
+        "bytes": 4689,
+        "sha256": "4bc9f68e228fa932fd03f3bfaf4314ccfc2f6c96f8513675b8984b0fc7c49703"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/UniversalRenderPipelineGlobalSettings.asset",
+        "bytes": 25900,
+        "sha256": "32b04c42d9e4343a4c83f7e127f04b616dd46ae4feba7d5e1625841504a5cbc7"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/UniversalRenderPipelineGlobalSettings.asset",
+        "bytes": 25900,
+        "sha256": "32b04c42d9e4343a4c83f7e127f04b616dd46ae4feba7d5e1625841504a5cbc7"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/WebURP.asset",
+        "bytes": 4687,
+        "sha256": "f4cdba88dc13edfa4b0ffec5503c051ae8e01b184dbbb2b2fe3d8ea504536ebb"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/After/WebURP.asset",
+        "bytes": 4687,
+        "sha256": "f4cdba88dc13edfa4b0ffec5503c051ae8e01b184dbbb2b2fe3d8ea504536ebb"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/DesktopURP.asset",
+        "bytes": 4689,
+        "sha256": "4bc9f68e228fa932fd03f3bfaf4314ccfc2f6c96f8513675b8984b0fc7c49703"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/DesktopURP.asset",
+        "bytes": 4689,
+        "sha256": "4bc9f68e228fa932fd03f3bfaf4314ccfc2f6c96f8513675b8984b0fc7c49703"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/UniversalRenderPipelineGlobalSettings.asset",
+        "bytes": 25900,
+        "sha256": "32b04c42d9e4343a4c83f7e127f04b616dd46ae4feba7d5e1625841504a5cbc7"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/UniversalRenderPipelineGlobalSettings.asset",
+        "bytes": 25900,
+        "sha256": "32b04c42d9e4343a4c83f7e127f04b616dd46ae4feba7d5e1625841504a5cbc7"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/WebURP.asset",
+        "bytes": 4687,
+        "sha256": "f4cdba88dc13edfa4b0ffec5503c051ae8e01b184dbbb2b2fe3d8ea504536ebb"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/Before/WebURP.asset",
+        "bytes": 4687,
+        "sha256": "f4cdba88dc13edfa4b0ffec5503c051ae8e01b184dbbb2b2fe3d8ea504536ebb"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/record.json",
+        "bytes": 1146,
+        "sha256": "47836ed7953dad3ab065f5917e25ee25fd3418193d87598496e26ed489624d0a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/FantasyCards/CardWeb02/PipelineState/web/record.json",
+        "bytes": 1146,
+        "sha256": "47836ed7953dad3ab065f5917e25ee25fd3418193d87598496e26ed489624d0a"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/command-plan.executed.json",
+        "bytes": 2889,
+        "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/command-plan.executed.json",
+        "bytes": 2889,
+        "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/complete-runtime-manifest.json",
+        "bytes": 2696135,
+        "sha256": "2aaf58f1f6a0110717a8061664a3906d44757236a652a0ce0e40f16006f121cc"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/complete-runtime-manifest.json.gz",
+        "bytes": 735742,
+        "sha256": "5845809221826937c5938ea5757194dab5022e1c6ac1a238b03d002f48d7ec9d"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/contract.executed.json",
+        "bytes": 11214,
+        "sha256": "ed983ff27bdb36593884f5b55d343d36cd928f59e6e4a6300102b1f83c778478"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/contract.executed.json",
+        "bytes": 11214,
+        "sha256": "ed983ff27bdb36593884f5b55d343d36cd928f59e6e4a6300102b1f83c778478"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/current-source-after-common.json",
+        "bytes": 7183332,
+        "sha256": "4896f1e56ceeb7ac9ee4e4bdb21beafa0742985556ece8ccae3a2cfcf086855b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/current-source-after-common.json.gz",
+        "bytes": 1629954,
+        "sha256": "5952bab470d68eca46420330209889f51a748bfe49146fcbe60c10909d3202d3"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/current-source-after-proof.json",
+        "bytes": 7183332,
+        "sha256": "af411644e2f7fe1fc8bcd0544d2f8e05f51f8fe75c3877f07be6d177e1caaed8"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/current-source-after-proof.json.gz",
+        "bytes": 1629954,
+        "sha256": "3f5dcd1d0a46096064f50406c7c6c0d2189a53fae9eb80870923157517f862a3"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/owned-lease.executed.json",
+        "bytes": 489,
+        "sha256": "47374aa58874292bfa93d1113ea2defeae018e467305e4467dcf2826478c7a6e"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/owned-lease.executed.json",
+        "bytes": 489,
+        "sha256": "47374aa58874292bfa93d1113ea2defeae018e467305e4467dcf2826478c7a6e"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/runtime-identity-comparison.json",
+        "bytes": 2699495,
+        "sha256": "959248323957c83ce939cc1f5e0ada06cf6baf82f61783192f2ebcb1f866ab2b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/runtime-identity-comparison.json.gz",
+        "bytes": 737061,
+        "sha256": "5e14faa0d40e704256b3fab6b280a4c236bfe45e03aa75e27593571c4ba4b8de"
+      },
+      "encoding": "gzip-exact-raw-bytes"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/source-before.json",
+        "bytes": 457,
+        "sha256": "2ed873cdda78e8509229292ca6770759cbebb508f47e1215debe8ccb3f8f777c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/source-before.json",
+        "bytes": 457,
+        "sha256": "2ed873cdda78e8509229292ca6770759cbebb508f47e1215debe8ccb3f8f777c"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/web-build-summary.json",
+        "bytes": 25610,
+        "sha256": "6eec8b760f07e8366704c7ced727b2710d6e8d89a685ce20dfd387aef92cb995"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/web-build-summary.json",
+        "bytes": 25610,
+        "sha256": "6eec8b760f07e8366704c7ced727b2710d6e8d89a685ce20dfd387aef92cb995"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/whole-attempt-before-summary.json",
+        "bytes": 34228,
+        "sha256": "6a6d93c17b5172e85cf07a019b968fda282af2a72fdc6a0e98badeffcac2faba"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/WebRuns/CardWeb02/whole-attempt-before-summary.json",
+        "bytes": 34228,
+        "sha256": "6a6d93c17b5172e85cf07a019b968fda282af2a72fdc6a0e98badeffcac2faba"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/card-web02-preflight.json",
+        "bytes": 2004,
+        "sha256": "dfd86d6663579e5abbd153400ee466e8dbc045f5f5c00d2c3720f562cf908d9a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/card-web02-preflight.json",
+        "bytes": 2004,
+        "sha256": "dfd86d6663579e5abbd153400ee466e8dbc045f5f5c00d2c3720f562cf908d9a"
+      },
+      "encoding": "identity"
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/run_grade_preview01.py",
+        "bytes": 2780,
+        "sha256": "4257648f83b6616e76775d8762b630d177e8255768f7bd61c5a2b95e692aafa5"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Evidence/CardWeb02AndGradePreview/run_grade_preview01.py",
+        "bytes": 2780,
+        "sha256": "4257648f83b6616e76775d8762b630d177e8255768f7bd61c5a2b95e692aafa5"
+      },
+      "encoding": "identity"
+    }
+  ],
+  "durableCore5InWorkspaceNotDuplicatedInGit": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/Runtime/Build/3245ecf59abf5e01d49e7086b384cb36.loader.js",
+      "bytes": 47867,
+      "sha256": "4bfc4c2d948506f162b86e6437118c9bba3388d54893f1701ef0dd9ff755e420"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/Runtime/Build/952a73483296497aa4a61391fc92163a.wasm.unityweb",
+      "bytes": 14162792,
+      "sha256": "e61c904b6d49c96703c0348f14a5c49b87c3895b0e5e2c1478f19182f3591bf8"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/Runtime/Build/d50ead22c129aa9741a8e9798b9a5773.data.unityweb",
+      "bytes": 98106980,
+      "sha256": "a4047ea9d3f653f81f62973826486f0297b95d32a82055d26423c8e0939daa49"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/Runtime/Build/f440403d9992dadcd404be761d5409bb.framework.js.unityweb",
+      "bytes": 91478,
+      "sha256": "27e743127178494aade2d7cdecc370a6c7adaa48bb32cbeff6d755869d1f23af"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02/Runtime/index.html",
+      "bytes": 28443,
+      "sha256": "2dd1e883e5977b9fc486541c379fd5026595d4156c281d063c860aa989390a06"
+    }
+  ],
+  "binaryCopyStatus": "All5rawcorefiles are actual verified persistentworkspace originals underBuildProof; this compact Gitset stores theirSHArefs only,notbinarybytes. Complete15365 runtime remainscustom/tmp+unchangedsourceStreamingAssets; no claimthiscompactsetiswholeattemptorwholepublicsite.",
+  "excluded": "Private Unity/launcher logs and other wholeattemptleaves remain original regularworkspacefiles. They are not replaced by this compact selection. Do not infer restoredwholeattempt fromselectionalone.",
+  "decompression": "For gzip-exact-raw-bytes entries, verify preservedSHA/size then decompress and verify originalSHA/size before recreating only an absenttarget. Preserve originals and failures.",
+  "visual": "10actualviewportPNGs; ownerdirectreview4 only;Rootreviewpending.",
+  "preservedRemainingGates": "FullC1PC162/touch163/PCM4/reload2/currentrules-save;GospelcurrentWeb/Rootsourceapproval;paired/public/sourceCI/fullsiteSHA/985MB/newRootseal remain separate.",
+  "publishReady": false,
+  "baselineReady": false,
+  "fullC1Acceptance": false,
+  "RootVisualApproval": false
+}

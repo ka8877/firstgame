@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "status": "actual-isolated9-reviewed-and-accepted-currentCard-build-only",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "game": "FantasyCards",
+  "revision": "fm-capability-2026-11-03",
+  "expectedSourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+  "expectedFullNames": [
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+    "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+    "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+    "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+    "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+  ],
+  "reviewedWrapperSha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+  "wrapperInstallFile": "Tools/Autonomy/recovery-card-web.py",
+  "attempt": "CardWeb02",
+  "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02",
+  "buildRoot": "/tmp/firstgame-c1-recovery05-cardweb02-builds",
+  "buildFolder": "/tmp/firstgame-c1-recovery05-cardweb02-builds/FantasyCards/Web",
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/Contracts/card-web02-command-plan.json",
+    "bytes": 2889,
+    "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909"
+  },
+  "selectedNative": {
+    "summary": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
+      "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
+      "bytes": 15211
+    },
+    "binding": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
+      "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
+      "bytes": 900
+    },
+    "xml": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
+      "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
+      "bytes": 10572
+    },
+    "inputsBefore": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/inputs-before.json",
+      "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff",
+      "bytes": 7183504
+    },
+    "executedContract": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-contract.executed.json",
+      "sha256": "85cb42d00c143b4c951261690cb0a2d0bf5f2c571c4b33e82052ec3337891204",
+      "bytes": 3609
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+      "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+      "bytes": 6148
+    }
+  },
+  "executionSources": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/repair-generated-cache-links.py",
+      "sha256": "968e0e39f230b2981805353210a3b85ee9dd60d04f43b35ad5ff9e14f10d0d56",
+      "bytes": 1015
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Tools/Data/Renewal/verify-media.py",
+      "sha256": "88ad2091040d87a3ab56959206c62013e742cadc96a7472ab77dd7c956c826ea",
+      "bytes": 5609
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/BuildCommands.cs",
+      "sha256": "0e547e0027683b155e8ef2285a4c28f0055493b7a2228fee449fc923c7dc99a9",
+      "bytes": 4421
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/ProjectSetup.cs",
+      "sha256": "b75f23a10417d0709d8f5f5d901b12d2e0b3e451da642ee93f892c1a93b49ab2",
+      "bytes": 26644
+    },
+    {
+      "file": "Games/FantasyCards/ProjectSettings/ProjectVersion.txt",
+      "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+      "bytes": 85
+    },
+    {
+      "file": "Games/FantasyCards/ProjectSettings/FirstGameSetup.version",
+      "sha256": "d5fb09aacd1ee9b9b6733deed54b16259ca61bceefd879f19f8dc8817af90f1d",
+      "bytes": 26
+    }
+  ],
+  "mediaInputs": [
+    {
+      "file": "Tools/Data/Renewal/complete-observations.json",
+      "sha256": "5c820a6c6be09850cd933fc8dc57a14f85d5761325126ccccc64f03ab5f66aac",
+      "bytes": 26089198
+    },
+    {
+      "file": "Tools/Data/Renewal/media-manifest.json",
+      "sha256": "c659c64b2061f820cc3c91e78c9b8c18102522d0f231b041bf2baaee790fe427",
+      "bytes": 13152798
+    },
+    {
+      "file": "Tools/Data/ClassicCards/selection.json",
+      "sha256": "4019c5ca2f97b5ef27b5380bf511484c7cacb4e811d40738e51212d94f9e2121",
+      "bytes": 4736034
+    }
+  ],
+  "proofHelper": {
+    "file": "Tools/Validation/preserve-completed-build-proof.py",
+    "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+    "bytes": 16139
+  },
+  "guard": {
+    "file": "Tools/Autonomy/cycle_guard.py",
+    "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+    "bytes": 15866
+  },
+  "rollback": {
+    "stage": "/tmp/firstgame-recovery-g2-site-20261103",
+    "manifest": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    },
+    "restoreReport": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+      "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+      "bytes": 29882757
+    },
+    "scope": "Read-only actual old Card/runtime comparison; no old seal fallback or publisher invocation"
+  },
+  "diskEstimate": {
+    "streamingNativeInputBytesNoMeta": 755415131,
+    "oldCoreBytesForCapacityOnly": 112436749,
+    "metadataReserveBytes": 64000000,
+    "sameFilesystemMinimumEstimateBytes": 1044288629,
+    "actualCoreCopyReserveAfterBuildBytes": 32000000,
+    "limit": "Estimate only; generated Unity compiler/import cache expansion is not guaranteed. Actual capacity checked before build and corecopy."
+  },
+  "nativeSchemaLimits": [
+    "Actual older Native04 summary has no inputManifest/wholeAttemptIndex/baselineReady fields. Bind actual input through binding.inputManifestSha256 and current Root0d/summary instead of inventing fields.",
+    "Root0d product review approves exact8/13-grade Native layout; actual PC/touch/public grade/ordinary-input and full paired release gates remain separate."
+  ],
+  "callerConsumerShape": [
+    "commonBuild/proofProcess events are the same objects in processEvents with actual argv/environmentOverrides/start/finish/exit/log refs",
+    "contract/commandPlan/wrapper under RecordedHarness plus complete wholeAttemptIndex/proof/comparison/runtimeIdentity retained",
+    "current-source-after-proof.json has actual game/fullfiles/fingerprint/observedUtc after proof completion; actual no historical Native-after reconstruction"
+  ],
+  "finalStillRequired": [
+    "Actual owner source review/installation/invocation and real fresh Web execution",
+    "Gospel caller/Root/static/Native16 requirements remain unchanged and independent",
+    "Both games actual PC/touch/public normal-input/rules/save/audio/2reload/Root validation and current Core/CI/full SHA/source/985MB/rollback/paired seal",
+    "Never publish or mark historical missing G2/C1 sealed gates completed from this lane"
+  ],
+  "processContainment": {
+    "helper": {
+      "file": "Tools/Environment/owned-process-containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "evidenceRoot": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentControls/CardWeb02",
+    "acceptance": {
+      "report": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+        "bytes": 69227,
+        "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+      },
+      "independentReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+        "bytes": 2324,
+        "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+      },
+      "operatorReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+        "bytes": 3316,
+        "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+      }
+    }
+  },
+  "supersedesFailedAttempt": "CardWeb01 remains failed/pending-restoration. Old late successful bytes are not a new completed caller. New source, inputs, build, proof, logs and runtime all belong to CardWeb02 only.",
+  "templateOriginal": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-contract.template.json",
+    "bytes": 10224,
+    "sha256": "faa703d721d6b15e543ece0974df20e809c429ed35113c521d80f8068d5e7f30"
+  }
+}
