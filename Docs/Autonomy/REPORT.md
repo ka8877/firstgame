@@ -1,3 +1,13 @@
+# G2 PC02 전체 통과 · 터치/공개는 대기
+
+정확한 재개 브랜치는 `codex/g2-conversation-facing-2026-11-03`, WIP 커밋은 `030e17f97033dbbbcf45abd0f7263a66b0ca2b7a`다. Native16/Web 지문255e 검증을 유지하며, 별도 BrowserV2 PC02에서117단계/필수48원본·실제89검사 전부와 마지막 runtime-unchanged 검사를 완료했다. Root가 이번16원본을 직접 검토했고 strict 소비자62f7도 통과했다. early Reading 재접속0→1과 후반 실제 수동저장→재접속1→2를 각각 확인했다.
+
+첫PC 실패 raw02df/85통과·1실패와 당시 마지막runtime검사 미실행은 실패 이력으로 그대로 보존했다. 이번v2는 기존계획을 바꾸지 않고 별도파일에 실제continued-g2-reading 원본1개/필수1개만 추가했으며 공유분류기는 그대로다. Mary 하단패널 겹침·전경가림과 초반일시알림 미관찰 범위도 그대로 남긴다.
+
+main의 게임/도구와 공개 G1 `683b0700`은 바꾸지 않았다. 다음은 실제 idle/원격잠금/저장공간을 다시 확인한 뒤 별도 bounded lease로 고정된86단계/34필수 터치계획을 실행하는 것이다. 터치·G2소스통합·완전사이트/Pages·공개검증은 아직 미수행이며, 이번PC통과를 장기개발 전체완료로 세지 않는다.
+
+---
+
 # G2 첫 PC 실행 실패 · 재개 포인터
 
 최신 WIP는 `codex/g2-conversation-facing-2026-11-03` / `c97408b2fab4f1a1063b8d8d8fecdd3dcf00ad43`다. Native16/Web255e 통과는 유지되지만 실제 PC116 실행은86검사 중85통과/1실패였고 마지막 runtime-unchanged 검사는 예외로 미실행이다. raw `02df4bde…`·전체99파일·실행계획/harness/요청·캐시·원본은 실패 상태로 보존했다. PC 통과/Root 최종승인으로 바꾸지 않았다.

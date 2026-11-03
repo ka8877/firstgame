@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T09:02:06.174795+00:00",
+  "updatedUtc": "2026-11-03T09:33:21.100880+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -14,9 +14,9 @@
   "activeWork": {
     "id": "G2",
     "game": "PathOfDawn",
-    "status": "first-pc-run-failed-cache-proof-prefix-unresolved",
+    "status": "native-web-desktop-v2-validated-touch-public-pending",
     "applied": false,
-    "reason": "Native16/Web255e remain validated on isolated WIP. First actual PC116 run failed the strict cache-proof gate:86 recorded checks85pass/1fail; no final runtime-unchanged driver gate ran after the exception. No PC pass/Root approval. Main games and G1public683b are unchanged. New versioned plans with one actually captured continued-* recovery original and a fresh full PC run are required; v2 not authored/executed yet.",
+    "reason": "Isolated WIP now validates Native16/Web255e and the entire fresh PC02 v2 run89/89 including actual final runtime gate and16 directly Root-reviewed originals. First failed PC raw02df remains failed and its final runtime gate remains unexecuted. Local touch/public/integration remain pending; main games and G1public683b are unchanged.",
     "baseProductSource": "5e5a9dea94870674904b5e0eaf22682644354092",
     "baseDeployment": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
     "targetRevision": "gospel-facing-2026-11-03",
@@ -32,15 +32,15 @@
     "nativeRequiredCases": 16,
     "sourceOwner": "Code is frozen on the exact resume branch; actual executing owner must acquire the common lease before further runtime/Git work.",
     "resumeSteps": [
-      "Query actual runtime/remote lock/storage; preserve failed raw/harness/plan/99 originals and normal G1 release. Acquire a distinct bounded remediation/rerun lease only after prior owner exits/releases.",
-      "Switch normally to codex/g2-conversation-facing-2026-11-03 currentc97408b2; do not discard failure metadata or reset to pre-failure202c. Source Game255e/Native16/Web are unchanged.",
-      "Preserve executed old116/85 plan files byte-for-byte. Author separate v2 plan paths adding exactly one actually captured continued-* checkpoint/required after early restored Reading; keep every original step/required/new7, strictG2 versioned path/count matching and all common/G1 checks. No abort blanket ignore or old-report reclassification.",
-      "Static scope comparison and source/plan freeze precede new full PC execution in separate output with all originals and final runtime gate. Only after real PC then touch/Root/source/CI/site/public gates pass can G2 be integrated/deployed; G1public683b remains live."
+      "Check actual idle Unity/browser, managed runtime readiness, remote main/WIP/common lock and disk space. Historical released/acquired records do not authorize execution; acquire a fresh bounded touch lease only after normal prior CAS release. Never extend or steal a lease.",
+      "Switch normally to codex/g2-conversation-facing-2026-11-03 exact030e17f97033dbbbcf45abd0f7263a66b0ca2b7a. Preserve existing Native16/WebFP255e, complete PC02 current report/Root/consumer62f7, rawfailed02df, all v1/v2 plans and original leaf files.",
+      "Use unchanged frozen g2_mobile_plan_v2.json86steps/34required and BrowserV2/Mobile844 fresh output for actual touch. Preserve all old opening/audio/reload and newReading/facing/Book checkpoints plus actual continued-g2-reading mandatory original. Do not rerun a passed PC without a new reason.",
+      "Root must directly review fresh touch originals and full current runtime. Only after strict touch/Root/source CI/site-budget/public delivery/touch gates pass can G2 be integrated and published. Main product source5e5 and live G1deployment683b remain unchanged until then."
     ],
     "appliedInCurrentMain": false,
     "appliedInResumeBranch": true,
     "resumeBranch": "codex/g2-conversation-facing-2026-11-03",
-    "candidateCommit": "c97408b2fab4f1a1063b8d8d8fecdd3dcf00ad43",
+    "candidateCommit": "030e17f97033dbbbcf45abd0f7263a66b0ca2b7a",
     "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
     "localCandidateValidated": false,
     "nativeWebValidated": true,
@@ -61,11 +61,10 @@
       "wipCIConclusion": "success"
     },
     "notPerformed": [
-      "G2 complete passing fresh PCv2 run and final runtime gate/Root review",
       "G2 local touch and public touch",
-      "G2 stage/main Game-Tools integration/Pages publication"
+      "G2 main Game/Tools integration, complete stage/Pages/public audit/immutable release receipt"
     ],
-    "leasePolicy": "Historical lease record is not authority to run. Check actual remote lease and runtime idle, then acquire a new bounded local-UI lease. Never extend or steal a lease.",
+    "leasePolicy": "Always query the actual common remote lease and live processes; this metadata pointer is not execution authority. Current PC phase must release its own CAS record normally; next touch uses a separate bounded lease without extension or stealing.",
     "failedDesktop01": {
       "report": "Artifacts/Validation/Autonomy/G2-2026-11-03/Desktop720/PathOfDawn/report.json",
       "sha256": "02df4bdea3581f25a1939da3c1efe77343decb3e14e626d11f5a489e514bc8c2",
@@ -81,6 +80,39 @@
       "responseTimestampsCaptured": false,
       "cacheBodyShaCaptured": false,
       "retriesExecuted": 0
+    },
+    "desktopValidated": true,
+    "desktopCheckpoint": {
+      "report": "Artifacts/Validation/Autonomy/G2-2026-11-03/BrowserV2/Desktop720/PathOfDawn/report.json",
+      "sha256": "3d8715b0aa01dfda04d4e7ad03d3c011873830435274dc101da0d9b20348b23d",
+      "rawSha256": "71961e991fb47d589115b7f557115b18d1ad124c9e084756c2cc5dddf4261a93",
+      "status": "passed",
+      "checks": 89,
+      "passed": 89,
+      "failed": 0,
+      "authoredSteps": 117,
+      "requiredOriginals": 48,
+      "rootDirectOriginals": 16,
+      "earlyNavigation": [
+        0,
+        1
+      ],
+      "lateManualSaveNavigation": [
+        1,
+        2
+      ],
+      "finalRuntimeGateExecuted": true,
+      "strictConsumer": "Artifacts/Validation/Autonomy/G2-2026-11-03/pc02-current-consumer.json",
+      "strictConsumerSha256": "62f7f8cfa23978cb942eef57c3a9775b2dd59baa2bf6de9622fcf74ec46862a0",
+      "originalsLedger": "Artifacts/Validation/Autonomy/G2-2026-11-03/pc02-originals-ledger.json",
+      "originalsLedgerSha256": "04a109cbbb8467e70fcdb98c680cbe2b97f293b1f47c5b8e4bf65eaf577877c9",
+      "retryExecutions": 1,
+      "scopeLimits": [
+        "Mary lower body behind existing dialogue panel",
+        "Foreground canopy still obscures player lower body",
+        "Initial temporary toast not observed in these actual captures",
+        "Not physical-device or human art/audio approval"
+      ]
     }
   },
   "baseline": {
