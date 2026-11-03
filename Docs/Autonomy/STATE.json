@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T04:25:40.724004+00:00",
+  "updatedUtc": "2026-11-03T04:29:25.321382+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -83,7 +83,8 @@
       "runtimeConsoleErrors": 0,
       "publicReportSha256": "29b92ef15fbc66ae856c41cc9ee43e3789cde9a0b4508956116522552d2ccd30",
       "scope": "Current prerequisite checks, real remote contention, HTTP manifest/HTML and actual ordinary desktop entry only. No new complete native/build/gameplay/save/touch/PCM/performance pass.",
-      "titleCaptureLimit": "Two prematurely named title frames are Unity splash diagnostics, not approved game title screenshots."
+      "titleCaptureLimit": "Two prematurely named title frames are Unity splash diagnostics, not approved game title screenshots.",
+      "freshCoreCiPassed": 285
     }
   },
   "nextRun": {
@@ -223,10 +224,20 @@
     "Existing original-card/OST blanket redistribution permission remains unconfirmed; no new third-party assets published."
   ],
   "controlValidation": {
-    "status": "awaiting-first-control-commit-ci",
-    "workflow": "Deterministic core and saves",
-    "guardTestsAdded": true,
+    "status": "passed",
+    "sourceCommit": "920155b40c9f0c4f9ab33f9314d38b851c548ba0",
+    "ciRunId": 41578204465,
+    "url": "https://github.com/ka8877/firstgame/actions/runs/41578204465",
+    "completedUtc": "2026-11-03T04:28:27Z",
+    "guardTests": 15,
+    "coreTests": 285,
     "existingCoreAndPagesGatesPreserved": true,
-    "productBuildRequiredForThisSetup": false
+    "productBuildRequiredForThisSetup": false,
+    "followupScope": "Subsequent STATE/REPORT-only commit records this validated code result; game code, guard code and workflows remain unchanged.",
+    "codeSha256": {
+      "Tools/Autonomy/cycle_guard.py": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+      "Tools/Autonomy/test_cycle_guard.py": "c6d0aa9a9a1b188fdbcbbb6de3e82106af2e008933d5e3fe1134949ce57d03d9",
+      ".github/workflows/core-tests.yml": "0244604dd44ceddd7124558a12ce36e89e5631a3740adb226e2b12c7515f935c"
+    }
   }
 }
