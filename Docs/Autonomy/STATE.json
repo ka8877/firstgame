@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-03T07:38:10.388073+00:00",
+  "updatedUtc": "2026-11-03T08:18:09.955848+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -14,9 +14,9 @@
   "activeWork": {
     "id": "G2",
     "game": "PathOfDawn",
-    "status": "selected-not-started",
+    "status": "native-web-validated-in-isolated-work-branch",
     "applied": false,
-    "reason": "Actual public G1 Joseph frame confirms player can face away on dialogue entry. Improve planted stop/target facing while preserving old Reading pose/cursor/bytes.",
+    "reason": "G2 code and tools are preserved only on the exact work branch. Actual Native16 and Web01 passed at255e with Root Native originals. Main game source and actual public683b remain the completed G1 release; G2 PC/touch/public and source integration are still pending.",
     "baseProductSource": "5e5a9dea94870674904b5e0eaf22682644354092",
     "baseDeployment": "683b0700c8fbeaf2a07172a5f81c5cd0c6a6e6ee",
     "targetRevision": "gospel-facing-2026-11-03",
@@ -30,14 +30,42 @@
       "constraint": "Only consider application after all G1 local/public gates close; compare current production base hashes and absent new files first. Preserve previous14 and add both exact Native cases for16 total; fresh Web/PC/touch/public needed."
     },
     "nativeRequiredCases": 16,
-    "sourceOwner": "Assign after G1 publication owner finishes metadata/CI and owned CAS release; actual current lease must be queried.",
+    "sourceOwner": "Code is frozen on the exact resume branch; actual executing owner must acquire the common lease before further runtime/Git work.",
     "resumeSteps": [
-      "Confirm G1 receipt/root-review/stage/public immutable SHA and actual prior owner idle/released; check source/main/dirty files/runtime/storage and acquire a distinct bounded G2 lease.",
-      "Compare draft base SHA; apply only App/Motor/new Native test/meta on a new G2 branch. Set actual Editor revision before source freeze. No Card draft application.",
-      "Reuse existing algorithms with unique G2 output/build/stage/profile and exact old14+new2 Native16/currentCore285. Follow /tmp/firstgame-g2-draft/G2-release-adaptation-audit.md; do not call G1.current_build as a historical validator after source changes.",
-      "Fresh Native/Web/ordinary PC+touch including new dialogue-facing Book/reload and existing encounters/Scripture/save, direct Root originals and runtime binding. Keep failed attempts/source histories and public G1 until all gates pass.",
-      "Normal source/CI/existing Pages/public delivery+input+Root verification and immutable receipt before marking G2 complete. Then Card capability UI with independent original enum fixtures; keep unknown fixed-DP rules open."
-    ]
+      "Query actual runtime/remote lock/storage and preserve normal G1 release; acquire a distinct bounded local-UI lease after prior owner exits/releases.",
+      "Switch normally to codex/g2-conversation-facing-2026-11-03 at202c60d570879b9cb328b3f0ec51f98612548dc9; do not reset/clean or promote its untested UI/public status. Main metadata and WIP are intentionally preserved on parallel branches.",
+      "On the work branch, verify current Native/Web255e binding, unchanged frozen116/85 plans and all actual source/runtime bytes before desktop then touch input, Reading autosave/Book/fullreload/facing and original late manual Save/reload.",
+      "Finish exact-source Root UI review, normal source/CI integration, unchanged Cards and<985MB stage, existing Pages/fresh public gates before completing G2; published G1 stays unchanged until those pass."
+    ],
+    "appliedInCurrentMain": false,
+    "appliedInResumeBranch": true,
+    "resumeBranch": "codex/g2-conversation-facing-2026-11-03",
+    "candidateCommit": "202c60d570879b9cb328b3f0ec51f98612548dc9",
+    "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "localCandidateValidated": false,
+    "nativeWebValidated": true,
+    "validationCheckpoint": {
+      "report": "Artifacts/Validation/Autonomy/G2-2026-11-03/native-web-binding.json",
+      "sha256": "d9705b2ff4ab81855aeed948dfcb629170a62151bd58b92e228155449de92672",
+      "nativePassed": 16,
+      "nativeFailed": 0,
+      "nativeSkipped": 0,
+      "web": "Succeeded",
+      "webErrors": 0,
+      "webWarnings": 4,
+      "legacyResourcesRestored": true,
+      "core": "285 previous actual run explicitly reused only after identical current Core inputs were verified",
+      "runtimeFiles": 5,
+      "runtimeBytes": 109621602,
+      "wipCI": "https://github.com/ka8877/firstgame/actions/runs/41601790583",
+      "wipCIConclusion": "success"
+    },
+    "notPerformed": [
+      "G2 actual116-step desktop and85-step touch Web input with Root review",
+      "G2 stage and source integration to main",
+      "G2 Pages publication and fresh public85-step touch/portal proof"
+    ],
+    "leasePolicy": "Historical lease record is not authority to run. Check actual remote lease and runtime idle, then acquire a new bounded local-UI lease. Never extend or steal a lease."
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -264,6 +292,7 @@
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
   "knownIssues": [
+    "G2 Native16/Web255e exists only on the exact isolated work branch202c60d5. Main game source and public683b are still G1; G2 desktop/touch/public are not yet executed.",
     "G1 is verified and public, but conversation facing, NPC personal spacing/continuity and general architecture/canopy occlusion remain quality work. G2 draft only addresses new-dialogue stopping/facing.",
     "General character/architecture occlusion is not solved: player head can still be behind the gateway beam at a special legacy saved pose.",
     "Mobile actual Mary approach can stop with overlapping player/NPC silhouettes; faces remain visible, but personal-space collision and comfortable stopping are not solved by G1 or the queued facing-only G2 draft. Preserve old Reading XYZ if addressing it.",
