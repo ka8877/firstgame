@@ -71,6 +71,19 @@ namespace PathOfDawn.Presentation
             FacingYaw = lastFacing = Mathf.Repeat(yaw, 360); jumpUntil = -1; jumpFrame = -100; lastGround = -100; IsGrounded = false;
             dashRemaining = 0; dashReadyAt = -1; dashPending = false;
         }
+        /// <summary>Plant a new conversation without moving or reinitializing the physical capsule.</summary>
+        public void StopAndFace(Vector3 target)
+        {
+            if (!Finite(target.x) || !Finite(target.y) || !Finite(target.z)) throw new ArgumentOutOfRangeException(nameof(target));
+            Enabled = false;
+            planar = smoothVelocity = Velocity = Vector3.zero;
+            MeasuredSpeed = 0;
+            var delta = target - Position; delta.y = 0;
+            float yaw = FacingYaw;
+            if (delta.sqrMagnitude > .0001f)
+                yaw = Mathf.Atan2(delta.x, delta.z) * Mathf.Rad2Deg;
+            FacingYaw = lastFacing = Mathf.Repeat(yaw, 360);
+        }
         public void SetTouchInput(Vector2 input) => touchInput = Finite(input.x) && Finite(input.y) ? Vector2.ClampMagnitude(input, 1) : Vector2.zero;
         public void SetRun(bool held) => touchRun = held;
         public void RequestJump() { if (acceptsInput && !neutralRequired) { jumpUntil = Time.time + .15f; jumpFrame = Time.frameCount; } }
@@ -112,6 +125,10 @@ namespace PathOfDawn.Presentation
                 if (keyboard != null && keyboard.eKey.wasPressedThisFrame || Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame) RequestInteract();
                 requestedDash = keyboard != null && (keyboard.leftCtrlKey.wasPressedThisFrame || keyboard.rightCtrlKey.wasPressedThisFrame) || Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame;
             }
+            // InteractRequested runs synchronously. A successful encounter can
+            // lock input after this update sampled held movement and dash keys.
+            // Discard that old intent before it can undo the planted facing.
+            if (!acceptsInput) { input = Vector2.zero; requestedDash = false; }
             bool run = acceptsInput && (touchRun || keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed) || Gamepad.current != null && Gamepad.current.leftStickButton.isPressed);
             // Fixed isometric camera: screen-right is +X, screen-up is +Z.
             // A future camera yaw still uses flattened camera bases coherently.

@@ -262,8 +262,14 @@ namespace PathOfDawn.Presentation
             if (Chronicle.Stage == GospelQuestStage.Travel &&
                 !Chronicle.TryArrive(quest.LandmarkId, Player.Position.x, out var arrival))
             { Ui.Toast(arrival); return; }
-            if (Chronicle.Stage == GospelQuestStage.Talk && !Chronicle.TryTalk(quest.NpcId, out var response))
-            { Ui.Toast(response); return; }
+            if (Chronicle.Stage == GospelQuestStage.Talk)
+            {
+                if (!Chronicle.TryTalk(quest.NpcId, out var response))
+                { Ui.Toast(response); return; }
+                // Only a newly accepted encounter turns the traveler. Book
+                // returns and old Reading saves keep their recorded heading.
+                Player.StopAndFace(ObjectivePosition);
+            }
             Save(false);
             if (Chronicle.Stage == GospelQuestStage.Reading) ShowStory();
         }
