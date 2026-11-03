@@ -1,0 +1,80 @@
+{
+  "checkedUtc": "2026-11-03T17:16:22.132490+00:00",
+  "scope": "pre-owner-restoration-preservation-for-failed-CardWeb01",
+  "originalAttemptStillFailed": true,
+  "postFinalizationDifferences": [
+    {
+      "atFinalization": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FantasyCards/CardWeb01/web.log",
+        "sha256": "96a8c2c7dac5613a942902632a0d7c92cab28fcc643d3b918788645b1d9cd6ef",
+        "bytes": 3676847
+      },
+      "current": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FantasyCards/CardWeb01/web.log",
+        "bytes": 4046280,
+        "sha256": "d0a2a15f578f3518de176d151aab59b44a616ecbd1e81fdf430a763f7f78237e"
+      }
+    }
+  ],
+  "exactRecoveredFinalizationPrefixes": [
+    {
+      "recordedOriginal": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FantasyCards/CardWeb01/web.log",
+        "sha256": "96a8c2c7dac5613a942902632a0d7c92cab28fcc643d3b918788645b1d9cd6ef",
+        "bytes": 3676847
+      },
+      "byteExactPrefixCopy": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/RecoveredFinalizationPrefixes/web.log",
+        "bytes": 3676847,
+        "sha256": "96a8c2c7dac5613a942902632a0d7c92cab28fcc643d3b918788645b1d9cd6ef"
+      },
+      "scope": "Recovered actual raw prefix from append-only later file; hash/size exact, no text/timestamp reconstruction."
+    }
+  ],
+  "pipelineMirrorRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/ValidationRoot",
+  "mirrorBeforeStatus": "snapshotted",
+  "originalPipelineRecord": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FantasyCards/CardWeb01/PipelineState/web/record.json",
+    "bytes": 756,
+    "sha256": "ee8e3d88f0361852b323600a841176e52fa26364ec7fa9493fa6b56891f1e321"
+  },
+  "mirroredPipelineRecord": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/ValidationRoot/FantasyCards/CardWeb01/PipelineState/web/record.json",
+    "bytes": 756,
+    "sha256": "ee8e3d88f0361852b323600a841176e52fa26364ec7fa9493fa6b56891f1e321"
+  },
+  "NativeReference": {
+    "original": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/Native/FantasyCards/inputs-before.json",
+      "bytes": 7183504,
+      "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff"
+    },
+    "mirror": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/ValidationRoot/Native/FantasyCards/inputs-before.json",
+      "bytes": 7183504,
+      "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff"
+    }
+  },
+  "lateBuildWitnessNotAccepted": [
+    {
+      "originalAbsolutePath": "/tmp/firstgame-c1-recovery04-cardweb01-builds/FantasyCards/Web/BuildInputs.json",
+      "preserved": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/LateUnacceptedBuildWitness/BuildInputs.json",
+        "bytes": 8102219,
+        "sha256": "7c661bc1754aed7ecea53455a95276277b81b11eb905ff4339ca95ceae02b813"
+      }
+    },
+    {
+      "originalAbsolutePath": "/tmp/firstgame-c1-recovery04-cardweb01-builds/FantasyCards/Web/BuildEvidence.txt",
+      "preserved": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/LateUnacceptedBuildWitness/BuildEvidence.txt",
+        "bytes": 263,
+        "sha256": "e00c6b420ba6ce4ebc2d5eb3db64ee324fdda94e368dcbfe78948d08108fdeb6"
+      }
+    }
+  ],
+  "publisherOrBuildProofHelperInvoked": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "reason": "Owned Unity escaped original session after timeout and appended log before exiting. Failed original summary/index/record remain untouched; only a separate exact mirror will be restored by the original restorer."
+}

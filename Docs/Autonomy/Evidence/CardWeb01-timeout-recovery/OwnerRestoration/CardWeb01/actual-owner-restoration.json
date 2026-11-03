@@ -1,0 +1,50 @@
+{
+  "checkedUtc": "2026-11-03T17:16:56.059072+00:00",
+  "scope": "owner-original-helper-restoration-on-exact-separate-mirror-only",
+  "events": [
+    {
+      "label": "pipeline",
+      "argv": [
+        "python3",
+        "Tools/Build/nativity-pipeline-state.py",
+        "restore",
+        "FantasyCards",
+        "CardWeb01",
+        "web"
+      ],
+      "startedUtc": "2026-11-03T17:16:47.031680+00:00",
+      "finishedUtc": "2026-11-03T17:16:47.174320+00:00",
+      "exitCode": 0,
+      "log": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/pipeline.log"
+    },
+    {
+      "label": "generated-additions",
+      "argv": [
+        "python3",
+        "Tools/Build/restore-nativity-build-additions.py",
+        "FantasyCards",
+        "CardWeb01"
+      ],
+      "startedUtc": "2026-11-03T17:16:47.174677+00:00",
+      "finishedUtc": "2026-11-03T17:16:56.058699+00:00",
+      "exitCode": 0,
+      "log": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/OwnerRestoration/CardWeb01/generated-additions.log"
+    }
+  ],
+  "sources": [
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    }
+  ],
+  "originalFailedRunRecordUntouched": true,
+  "automaticFailedAttemptReclassified": false,
+  "publishReady": false,
+  "baselineReady": false
+}

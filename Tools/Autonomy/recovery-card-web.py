@@ -593,6 +593,12 @@ def finalize(run, result, lane):
 
 
 if __name__ == '__main__':
+    raise SystemExit(
+        'This caller is temporarily blocked: CardWeb01 showed that Unity can '
+        'escape its original process group. Preserve the failed run and use '
+        'only a separately reviewed, isolated-tested descendant-containment '
+        'revision; do not retry this historical caller.'
+    )
     try:
         raise SystemExit(main())
     except (Exception, KeyboardInterrupt) as error:
