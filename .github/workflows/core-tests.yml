@@ -3,6 +3,8 @@ on:
   push:
     branches-ignore:
       - gh-pages
+      # This fixed coordination ref has the unchanged main tree, no game changes.
+      - codex/autonomy-lock
   pull_request:
 permissions:
   contents: read
@@ -14,6 +16,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.426
+      - name: Test development lease ownership and failure handling
+        run: python3 -m unittest discover -s Tools/Autonomy -p test_cycle_guard.py -v
       - name: Test actual C# game rules, Ink and portable saves
         run: bash Tools/Validation/run-core-tests.sh
       - uses: actions/upload-artifact@v4

@@ -1,3 +1,9 @@
+# 현재 지속 개발 진입점 — 2026-11-03
+
+[규약](Autonomy/CHARTER.md) · [재개 상태](Autonomy/STATE.json) · [로드맵/명령](Autonomy/ROADMAP.md) · [최신 보고](Autonomy/REPORT.md)를 먼저 읽는다. 마지막 정상 제품은 Nativity다. 아래 Quest/Restoration 및 회차별 실행자·경로는 당시 이력이며 현재 작업에 맹목적으로 적용하지 않는다. 기존 runner를 재사용하되 새 회차 출력은 고유 경로로 분리하고 과거 원본/검증을 덮지 않는다. 설치된 환경이 정상인 경우 재설치하지 않는다.
+
+---
+
 # 개발과 실행
 
 최신 개정은 `fm-quest-2026-10-30` / `gospel-journey-2026-10-30`, 프로필은 `quest`, 실행 소유자는 `/root/quest_release`다. 아래 Chronicle 이하 명령·개정은 이전 기록이다. 새 구현은 [Quest](Quest.md), 실제 결과는 [QuestValidation](QuestValidation.md)를 따른다. 현재 명령은 `python3 Tools/Validation/run-quest-core.py`, `Tools/Build/quest-task.sh <Game> prepare|native|web <UniqueAttempt>`다. 새 증거는 `Artifacts/Validation/Quest`, 캐시는 저장 공간 검증과 복구 ledger가 있는 `Artifacts/QuestWork`, 플레이어는 `/tmp/firstgame-quest-builds`다. Unity·브라우저를 한 소유자가 순서대로 실행한다.

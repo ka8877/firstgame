@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "charterVersion": "autonomy-2026-11-03",
+  "updatedUtc": "2026-11-03T04:25:40.724004+00:00",
+  "displayTimezone": "Asia/Seoul",
+  "repository": "ka8877/firstgame",
+  "initialization": {
+    "status": "completed",
+    "productChanged": false,
+    "currentRunId": "setup-2026-11-03",
+    "scope": "Long-term charter, baseline, prerequisites, coordination guard, first milestones and scheduling verification. No game feature or new public release in this setup.",
+    "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
+  },
+  "activeWork": null,
+  "baseline": {
+    "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
+    "dirtyPathsBeforeSetup": [],
+    "gameImplementationCommit": "9e780c5e82250873fc9b341368b9981166316d2b",
+    "portalSourceCommit": "e5fe6574b496b840a8be17cc18b2d13ed856618b",
+    "deployedCommit": "623de27d53bd0b5eea3c16c6eeca6c4956a2eefa",
+    "liveManifestSha256": "e430af1dc64ee0a8cecd3fd9f7613d09e9bd0f15601ece1ce68280144dfa33cd",
+    "liveUrl": "https://ka8877.github.io/firstgame/",
+    "localPlayerRoot": "/tmp/firstgame-nativity-builds",
+    "localStageRoot": "/tmp/firstgame-nativity-staged-site",
+    "historicalReceipt": {
+      "file": "Artifacts/Validation/Nativity/final-receipt.json",
+      "sha256": "c55d6c323ccc04e5d2d70fdaae426e999a703c1b358d64d728fecdb0bec133e7"
+    },
+    "portability": "Remote normal source/gh-pages commits and manifest are the durable restore anchors. Temporary players and ignored raw Artifacts must be checked for existence; never assume a new environment retains them."
+  },
+  "games": {
+    "PathOfDawn": {
+      "revision": "gospel-nativity-2026-11-02",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "nextMilestone": "G1",
+      "lastCompleteProductValidation": "Nativity historical: Core/native/Web/6browser profiles and live release; see Docs/NativityValidation.md. Not rerun as complete gameplay in this setup."
+    },
+    "FantasyCards": {
+      "revision": "fm-nativity-2026-11-02",
+      "supportedCards": 2646,
+      "originalArchiveCards": 15350,
+      "unsupportedArchiveCards": 12704,
+      "nextMilestone": "C1",
+      "rarityCounts": {
+        "Free": 393,
+        "Common": 1339,
+        "Uncommon": 585,
+        "Rare": 49,
+        "Special": 64,
+        "Upgrade": 5,
+        "Unique": 27,
+        "Event": 159,
+        "Legend": 4,
+        "Secret": 21
+      },
+      "fidelityBaseline": "2016 preserved official FAQ and date-verified 2017 screens; old2005 manual explicitly supplemental, final pre-shutdown patch identity not proven.",
+      "assetRedistributionStatus": "Existing blanket permission unconfirmed; no new third-party public assets authorized without verification."
+    }
+  },
+  "lastCompletedWork": {
+    "id": "A0",
+    "kind": "initialization",
+    "status": "completed",
+    "productFeature": false,
+    "evidenceRoot": "Artifacts/Validation/Autonomy/2026-11-03-setup",
+    "currentObservedChecks": {
+      "guardOfflineCases": 15,
+      "guardAlsoPassedPythonOptimizedMode": true,
+      "actualRemoteAcquireAndCheck": true,
+      "actualSecondAcquireSkippedExit": 75,
+      "unityVersion": "6000.3.26f1",
+      "dotnetVersion": "8.0.426",
+      "chromiumVersion": "154.0.8037.57",
+      "unityLicenseReady": true,
+      "unityCliAccountSessionReady": false,
+      "freshPublicEntryFiles": 4,
+      "publicUnityEntries": 2,
+      "publicEntriesRootReviewed": 2,
+      "runtimePageErrors": 0,
+      "runtimeConsoleErrors": 0,
+      "publicReportSha256": "29b92ef15fbc66ae856c41cc9ee43e3789cde9a0b4508956116522552d2ccd30",
+      "scope": "Current prerequisite checks, real remote contention, HTTP manifest/HTML and actual ordinary desktop entry only. No new complete native/build/gameplay/save/touch/PCM/performance pass.",
+      "titleCaptureLimit": "Two prematurely named title frames are Unity splash diagnostics, not approved game title screenshots."
+    }
+  },
+  "nextRun": {
+    "id": "G1",
+    "game": "PathOfDawn",
+    "status": "ready",
+    "representativeSlice": {
+      "fromQuest": "nazareth-departure",
+      "throughQuest": "nazareth-return",
+      "events": 7,
+      "durationTargetMinutes": [
+        5,
+        10
+      ],
+      "durationMeasured": false
+    },
+    "tasks": [
+      "Minimally parameterize existing source-bound runner output paths for unique evidence; check storage and budget first.",
+      "Keep nativity opening; replace full-screen field NPC story painting with in-place dialogue preserving citation, voice and save semantics.",
+      "Clarify next encounter direction/distance/talk-ready state for Joseph, Mary and temple."
+    ],
+    "acceptance": "Actual movement through first three encounters, first field passage, book entry, save and full reconnect to identical place/dialogue. Core/native + new PC/touch Web/visual/input/reload checks before same-site publication.",
+    "resumeAt": "Read these four files, inspect actual remote/current dirty work and active owners, acquire remote lease; verify runtime/licensing/storage; begin G1 tasks without asking routine preferences."
+  },
+  "rotation": {
+    "pattern": [
+      "PathOfDawn",
+      "PathOfDawn",
+      "FantasyCards"
+    ],
+    "completedProductCycles": 0,
+    "nextSequence": [
+      "G1",
+      "G2",
+      "C1"
+    ],
+    "overrides": [
+      "Urgent errors/save/deployment recovery",
+      "Continue unfinished work before starting an unrelated milestone"
+    ]
+  },
+  "execution": {
+    "singleOwnerPolicy": "Current root was active and acquired real lease. Future runs use the actual lease holder, not historical agent names.",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "lockStatus": "Query live at each run; STATE.json is not a live lock or permission token.",
+    "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
+    "childCommandLimitSeconds": 2700,
+    "sameCauseMaxRetries": 2,
+    "modelUsageEnforced": false,
+    "wholeInteractiveAgentDeadlineEnforced": false,
+    "limitsNote": "run enforces its child process group only. A scheduled task runner must separately enforce entire agent time/usage/concurrency. Never raise limits or disable stops automatically.",
+    "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files."
+  },
+  "environment": {
+    "managedCloudObservedRunning": true,
+    "networkPolicy": "unrestricted/enforced/current",
+    "vpnConfigured": false,
+    "installedWebGLModule": true,
+    "installedWindowsModule": true,
+    "browserPython": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "existingRequestsPathForBrowser": "/workspace/tools/voice-venv/lib/python3.12/site-packages",
+    "pythonNote": "Default Python lacks requests. Initial probe reused existing installed requests via command-scoped PYTHONPATH; no install. Check actual availability on each environment.",
+    "runtimeRetry": {
+      "observedUtc": "2026-11-03T04:25:40.724004+00:00",
+      "source": "Observed normal official CLI status result from the bounded elevated check-runtime.py retry; credential values never read or emitted.",
+      "exitCode": 0,
+      "authReady": false,
+      "licenseReady": true,
+      "runtimeEditorReady": true,
+      "diagnosticErrors": [],
+      "retainedInitialFailure": "runtime-probe.json unity-license exit6 LOCAL_STORE_UNWRITABLE; no failure converted to pass"
+    },
+    "storageFreeAtProbe": {
+      "/workspace/firstgame": {
+        "total": 33770192896,
+        "used": 31827214336,
+        "free": 208216064
+      },
+      "/tmp": {
+        "total": 17871872000,
+        "used": 12284067840,
+        "free": 5587804160
+      }
+    },
+    "pendingActualEditorCompile": true,
+    "note": "Editor version/license are current; no fresh compile or full game test was needed for documentation/guard-only initialization."
+  },
+  "capacity": {
+    "fileCount": 15413,
+    "totalBytes": 981781001,
+    "largestBytes": 98106234,
+    "publishReady": true,
+    "sourceCommit": "e5fe6574b496b840a8be17cc18b2d13ed856618b",
+    "profile": "nativity",
+    "basis": "Actual stat of all staged files; unchanged public manifest exact SHA. Not a new full GET audit.",
+    "budgetBytesIncludingManifest": 985000000,
+    "decimalPlatformBytes": 1000000000,
+    "marginBytes": 18218999,
+    "duplicateNoticeBytesOnly": 31622,
+    "duplicateCardJpegs": 0,
+    "largeAssetGate": "Inspect BuildReport and actual unused Resources, preserve originals/GUID/ledger and quality; measure candidate build+all content before adoption. No assumed savings from lazy loading or JPEG/gzip recompression."
+  },
+  "automation": {
+    "scheduleConfigured": false,
+    "scheduleCreationToolExposed": false,
+    "sameUnityEnvironmentScheduledReuseVerified": false,
+    "githubHostedUnityRunnerConfigured": false,
+    "existingPagesConcurrencyPreserved": true,
+    "onceUserSetup": "When creating a future recurring task, attach firstgame and the same managed Unity environment. Start by reading root AGENTS and STATE. Its first actual run must verify runtime/license/Git/lease and configured agent time/usage limits. Do not replace with a paid/self-hosted service without approval.",
+    "currentAvailableScope": "Autonomous work in active chat using current installed tools and existing Git/Pages procedures; actual new product changes require full current scope-appropriate checks."
+  },
+  "permissions": {
+    "authorized": [
+      "Code and original/licensed asset improvements within charter",
+      "Relevant tests and preserved save migrations",
+      "Normal branches/commits/push and compliant integration",
+      "Verified builds to existing firstgame Pages",
+      "Restore last verified public build"
+    ],
+    "notAuthorizedWithoutSeparateApproval": [
+      "New paid infrastructure/API fees/asset purchases/real payments",
+      "New repositories or source split",
+      "Engine replacement or large genre change",
+      "Delete originals/unique assets/saves/evidence",
+      "Disable security/branch/release checks",
+      "Publish new third-party assets with unconfirmed rights"
+    ],
+    "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
+  },
+  "knownIssues": [
+    "Current public site is near1GB; large asset expansion gated by measured capacity plan.",
+    "Workspace had about208MB free at prerequisite probe; large build/evidence preflight required, no cleanup performed.",
+    "Scheduled reuse of this Unity/cloud/ephemeral storage is unverified, not enabled.",
+    "New Gospel chapters must migrate old completed23-quest saves before appending catalog entries.",
+    "Field NPC scene masking and one-NPC replacement are G1/G2 product work, not fixed by this initialization.",
+    "Existing original-card/OST blanket redistribution permission remains unconfirmed; no new third-party assets published."
+  ],
+  "controlValidation": {
+    "status": "awaiting-first-control-commit-ci",
+    "workflow": "Deterministic core and saves",
+    "guardTestsAdded": true,
+    "existingCoreAndPagesGatesPreserved": true,
+    "productBuildRequiredForThisSetup": false
+  }
+}
