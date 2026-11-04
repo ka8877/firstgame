@@ -1,0 +1,79 @@
+{
+  "observedUtc": "2026-11-04T05:44:13.873576+00:00",
+  "runOrigin": "Explicit user request to resume in this chat; no existing goal or schedule was created or resumed by API.",
+  "recoveredSourceCommit": "f88e56bff69b1a3f7c7a0ecfcddf3b5d02846484",
+  "sourceBranch": "codex/c1-resume-2026-11-04",
+  "previousThreadStatus": "idle",
+  "currentGoalCardState": "not-directly-queryable-with-available-tools",
+  "scheduledAutomationsObserved": 0,
+  "previousOwnedLeaseNormallyReleased": true,
+  "restoredExactControlFiles": 308,
+  "remainingLfsGamePointers": 0,
+  "Core": {
+    "passed": 285,
+    "failed": 0,
+    "skipped": 0,
+    "sourceChangedDuringRun": false
+  },
+  "GospelNative": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "actualPngOriginals": 47,
+    "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "containmentProvedEmpty": true,
+    "summary": "Artifacts/Validation/Autonomy/C1-resume-2026-11-04/Native02/fresh-native-summary.json"
+  },
+  "initialNativeAttempt": {
+    "status": "interrupted-failed",
+    "exitCode": 130,
+    "cause": "Original texture/audio LFS pointers were present; no source/assets were changed while Unity ran. Restored exact907 game originals, then made a separate current run.",
+    "containmentProvedEmpty": true
+  },
+  "livePublic": {
+    "httpStatus": 200,
+    "manifestSha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+    "deployedCommit": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
+    "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
+    "scope": "Fresh manifest GET and five unchanged Gospel runtime bodies; full current public interaction not repeated yet."
+  },
+  "fullC1Acceptance": false,
+  "publishReady": false,
+  "next": "Recover current Card Native8 with all real originals; create appropriately reviewed fresh Card Web controls; finish both games PC/touch/PCM/reload/public/currentCI/full-site/paired release gates. Existing goal-card state/resume API remains unavailable.",
+  "verifiedGameLfsFiles": 907,
+  "lfsCountMeaning": "907 tracked game LFS files were verified materialized after pull; this does not count individual transfers.",
+  "GospelWeb": {
+    "status": "completed-build-and-witness-only",
+    "errors": 0,
+    "warnings": 1,
+    "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "currentSourceByteIdentity": true,
+    "runtimeIdentity": "paired-recovery-required",
+    "actualCore5RuntimeBytesPreserved": true,
+    "summary": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/web-build-summary.json",
+      "bytes": 27982,
+      "sha256": "7430e26aae2c356cef5cde283e4d0d2a329d58f1828064f942fcc4d2294d5e5d"
+    },
+    "proof": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/BuildProof/PathOfDawn-Web01/build-proof-index.json",
+      "bytes": 6314,
+      "sha256": "1994ee146f9f2bd7e8300139eeea24fe07c82b0b446ce15d0b3ee808a71672ae"
+    }
+  },
+  "durableEvidence": {
+    "nativeIndex": {
+      "file": "Docs/Autonomy/Evidence/Resume20261104/index.json",
+      "bytes": 54923,
+      "sha256": "8c5a35034219c5645c7b1f325547a6417a471ffc0ee06dbd97a0045189ff4dde"
+    },
+    "webIndex": {
+      "file": "Docs/Autonomy/Evidence/Resume20261104/web-index.json",
+      "bytes": 37799,
+      "sha256": "f96cb9a53dde8704db8908a76de3838376df7c6997360025703f22b29947df05"
+    },
+    "nativeOriginals": 209,
+    "webOriginals": 140,
+    "allArchiveMembersHashVerified": true
+  }
+}
