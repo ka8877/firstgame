@@ -1,3 +1,28 @@
+# 네 로컬 브라우저 검증·Root 원본 검토 완료 · 공개 절차 준비
+
+환경은 다시 연결됐습니다. 초기화된 `/tmp`에는 남아 있던 정확한 보존 원문으로 양게임 runtime15,370파일을 복원했습니다. 예수님5파일105,432,320B, 카드15,365파일867,853,409B이며 새 빌드로 계산하지 않습니다. [복원 원문 목록](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json)과 기존 Native·실제 빌드·현재 runtime 결합을 유지했습니다. 이전 자기 잠금은 실제 유휴와 정확한 소유권을 확인한 뒤11월10일01:35 KST에 정상 CAS 해제했고, 새 `CanonPublishResume-2026-11-10` 소유 회차로 이어갑니다.
+
+현재 Core311, 카드 Native8, 예수님 Native21, 음성28개 신규 독립ASR과 양게임 최종 Web 빌드는 통과 상태입니다. 네 로컬 브라우저 실행도 모두 완료했고, Root가 각 필수 원본을 직접 보고 실제 완료 뒤 검토를 기록했습니다.
+
+| 실제 로컬 실행 | 통과 검사 | 원본PNG | 필수 Root 검토 원본 |
+|---|---:|---:|---:|
+| 예수님 PC Browser05 | 90 | 69 | 53 |
+| 카드 PC Browser02 | 98 | 65 | 52 |
+| 예수님 터치 Browser01 | 82 | 58 | 39 |
+| 카드 터치 Browser01 | 101 | 65 | 51 |
+
+각 실제 wrapper는 성공했고 guardAfter0·소유 후손 정리·전체 재접속2회를 확인했습니다. 예수님 PC는 정확한 runtime 복원 뒤 엄격 검증을 다시 통과했고 카드 PC도 엄격 검증을 통과했습니다. 네 로컬 결과의 최종 stage 검사는 이어서 수행합니다. 성전 E 입력을 빠뜨린 Browser04와 중단된 카드 PC01은 부분·실패 이력으로 보존합니다. 생성 Boot의3개 fileID만 정확한 추적 원문으로 복원했으며 변경 전 원문·diff도 남겼습니다.
+
+[Checkpoint02](Evidence/CanonDialogue20261109/Checkpoint02/index.json)에 실제1,145파일을12조각으로 보존했습니다. 결합378,942,231B의 전체SHA `9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1`, 모든 member의SHA와 현재 원문 불변을 실제 확인했습니다. 네 로컬 report·Root 원본·PCM·wrapper, 카드 Web01의 proof/실행파일5개와 선택한 실패·복구 원문을 포함합니다. 기존 Gospel Web·Core·음성·Native 원문은 Checkpoint01에 그대로 있습니다.
+
+현재 공개판은 기존 G2이고 PR #2는 초안입니다. 공개 포털용 그림은 Root가 승인한 PC 원본의 정확한 복사본까지 준비했습니다. 다음은 최종 소스 커밋의 실제CI, PR 준비·정상 병합·main CI, manifest 포함985MB 미만 stage, 기존 Pages 반영과 명시적 workflow 실행, 전체 freshHTTPSGET·포털 원본 검토·양게임 공개 터치·최종 gate입니다. 새 stage·CI·배포·공개 검증 완료를 아직 주장하지 않습니다.
+
+명령 전 `source Tools/Validation/CanonArt/activate-current.sh`를 읽은 뒤 CONTROL만 새 회차로 지정합니다. final build 경로와 기존 `CanonDialogueRelease-2026-11-09/BuildProof`는 유지합니다. 새 잠금의 정확한 소유자·SHA·11월10일07:35:39 KST 마감은 STATE에 기록했습니다. 예약 자동실행은 마지막 조회0개이며 현재 목표 카드 활성 상태는 직접 확인하지 않았습니다. 판마 출전2649종과 원본15350개를 구분하고 멀티플레이는 비활성·추후 업데이트입니다. 다음598 조롱공격 자료는 제안만 있으며 구현·검사 완료가 아닙니다.
+
+아래는 시점별 이력입니다. 당시의 연결·실행·미완료 표현은 현재 상태를 대신하지 않습니다.
+
+---
+
 # 클라우드 연결 중단 · 예수님 PC90통과 관측, 카드 PC 미완료
 
 2026-11-09T08:55:44Z에 선택한 관리형 환경이 unavailable/offline으로 바뀌고 exec-server 재연결이 실패했다. 계정 사용량·결제 쿼터 오류는 관측되지 않았다. 기본 개별1시간·명시적6시간 소유 잠금으로 작업하던 중 발생한 환경 연결 문제이며 원인은 확정하지 않았다.

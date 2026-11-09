@@ -1,5 +1,17 @@
 # 두 독립 Unity 게임
 
+## 현재 공개 마무리 · CanonPublishResume-2026-11-10
+
+현재 환경에 다시 연결했고 `/tmp` 초기화 뒤 두 게임 runtime15,370파일을 정확히 복원했다. Gospel5파일105,432,320B, Card15,365파일867,853,409B이며 복구 ledger는 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json`이다. Core311, Gospel Native21, Card Native8, 음성28개 신규 ASR와 두 최종 Web 빌드는 통과했다.
+
+네 로컬 브라우저 실행과 Root의 모든 필수 현재 원본 검토도 완료했다. 수치는 검사/원본PNG/필수원본 순서로 Gospel PC Browser05 **90/69/53**, Card PC Browser02 **98/65/52**, Gospel Mobile Browser01 **82/58/39**, Card Mobile Browser01 **101/65/51**이다. 모두 wrapper 통과·최종 guard exit0·소유 후손 정리·실제 재접속2회를 확인했다. 포털용 대표 원본도 Root가 승인한 현재 PC PNG의 정확한 사본으로 준비했다.
+
+단일 실행 담당은 `/root`이며 새 소유 잠금은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json`이다. 이전 자기 잠금은 실제 유휴 확인 뒤 정상 해제했다. 저장소 루트에서 `source Tools/Validation/CanonArt/activate-current.sh` 후 `FIRSTGAME_CONTROL_ROOT`만 새 잠금 폴더로 덮어쓴다. build는 `/tmp/firstgame-canon-final-20261109-builds`, proof는 **기존** `Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof`를 그대로 사용한다. 복원된 정상 runtime을 다시 만들지 않는다. 자세한 소유 기록과 재개 순서는 최신 ROADMAP/STATE를 따른다.
+
+현재 공개는 이전 G2이며 PR #2는 draft다. 다음은 현재 소스 커밋·정확한 CI, PR ready/병합·main CI, manifest 포함985MB 미만 stage, 기존 게시·명시 Pages 실행, 전체 새 HTTPS GET·포털 Root 검토·두 게임 공개 터치·최종 gate다. stage·배포·공개검증·새 CI 완료로 표시하지 않는다. `Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json`에 실제 선택 근거1,145파일을 보존했고12개 분할 압축본과 모든 member의 SHA·현재 파일 불변을 확인했다. 네 로컬 실행·Root 원본/PCM/wrapper와 Card Web01 proof/core5, 선택한 실패 이력·현재 복구 근거를 포함하며 Gospel Web·Core·Voice·Native는 Checkpoint01을 참조한다. 예약 자동실행은 최근 조회0개이고 기존 목표 카드의 활성 상태는 직접 확인하지 못했다. 출전2649종과 원본 그림15350개를 구분하며 원작 충실도는 미완료다. `Docs/Research/CanonNextTaunt598.md`는 다음 작업 제안일 뿐 구현·검증 완료가 아니다.
+
+아래의 이전 “현재” 소유 경로·현황은 당시 기록으로 보존한다. 충돌할 때는 이 메모와 최신 STATE/REPORT를 우선한다.
+
 ## 현재 사용자 피드백 · CanonArt
 
 판타지마스터즈는 확인 가능한 서비스 후기 자료를 기준으로 빠진 단독 플레이·규칙·카드 기능을 계속 채운다. 멀티플레이는 비활성화하고 추후 업데이트로 표시한다. 원본 그림 전체와 실제 규칙 지원 카드를 구분하며 원작 충실도 차이는 `Docs/Research/FantasyMastersParity.md`에 남긴다. 이번 코드는 확인된 주문봉쇄·매료공격·광분공격과 대표 원본3장을 추가해 출전2649종을 목표로 한다.

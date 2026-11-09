@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-09T08:55:44Z",
+  "updatedUtc": "2026-11-09T17:43:24.151293+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,14 +13,39 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "runtime-disconnected-after-GospelPC90passed-CardPCpartial-no-new-public",
+    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
-    "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
       "FantasyCards": "fm-canon-2026-11-09",
       "PathOfDawn": "gospel-canon-2026-11-09"
+    },
+    "currentLocalValidation": {
+      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "everyWrapperPassed": true,
+      "everyGuardAfterExitCode": 0,
+      "everyContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "everyRequiredOriginalRootDirectlyViewed": true,
+      "publishReady": false
+    },
+    "currentRuntimeRecovery": {
+      "environment": "connected",
+      "controlRoot": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "leaseCommit": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "oldOwnedLeaseReleasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
+      "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
+      "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
+      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
     },
     "changes": [
       "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
@@ -64,8 +89,8 @@
         "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
         "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
       },
-      "Web": "Both final current Webs actually passed; later CardWeb01 raw proof is not in remote Checkpoint01 and must be verified or regenerated after disconnect.",
-      "Browser": "GospelDesktop Browser05 actual90pass +Root53required originals observed; CardDesktop Browser01 partial18, local/public touch notrun.",
+      "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
+      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
       "public": "unchanged-G2",
       "GospelNative02": {
         "passed": 21,
@@ -116,7 +141,8 @@
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
       "GospelPC": {
-        "status": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
@@ -138,8 +164,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Not yet invoked after annotation; must verify actual raw files/current runtime on resume.",
-        "portability": "Later local originals not included in remote Checkpoint01; availability unconfirmed after runtime disconnect. Missing raw data cannot be replaced by this observed summary."
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
       },
       "GospelPC03": {
         "status": "intentionally-stopped-before-final-gates",
@@ -191,7 +217,8 @@
       },
       "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
       "finalGospelPC": {
-        "status": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
@@ -213,8 +240,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Not yet invoked after annotation; must verify actual raw files/current runtime on resume.",
-        "portability": "Later local originals not included in remote Checkpoint01; availability unconfirmed after runtime disconnect. Missing raw data cannot be replaced by this observed summary."
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
       },
       "preDialogueCore309": {
         "passed": 309,
@@ -243,7 +270,7 @@
         "lastImageToolError": "exec-server transport closed",
         "processCleanup": "Unknown after disconnect; no release/idle claim."
       },
-      "currentCi": {
+      "lastObservedCiBeforeReleaseCommit": {
         "status": "completed",
         "conclusion": "success",
         "head": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
@@ -253,7 +280,16 @@
       }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
+    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
     "next": [
+      "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
+      "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
+      "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
+      "Publish through existing Pages and explicitly dispatch its workflow; verify actual successful completion and fresh full-site HTTPS GET.",
+      "Root-review current desktop/mobile portal originals; complete both publictouch plans and final full release gate before claiming deployment acceptance.",
+      "After this release, assess original skill598 proposal in Docs/Research/CanonNextTaunt598.md; it is not implemented or tested."
+    ],
+    "nextAtRuntimeInterruption": [
       "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
       "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
       "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
@@ -265,7 +301,7 @@
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
     "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
     "userExecutionAuthorization": {
       "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
@@ -283,16 +319,19 @@
       "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
-      "status": "14newclips-and28freshASR-Core311-Native21-finalWeb03-PC90passed-observed;rawavailability-recheck-required-after-disconnect"
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
     },
     "finalRuntimePaths": {
       "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
       "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
       "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
       "stageRoot": "Artifacts/CanonArtWebPlaytest"
     },
     "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
     "runtimeInterruption": {
+      "historical": true,
+      "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
       "observedUtc": "2026-11-09T08:55:44Z",
       "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
       "status": "runtime-unavailable-connectivity-offline",
@@ -416,8 +455,16 @@
   },
   "nextRun": {
     "id": "CanonArt",
-    "status": "blocked-on-selected-runtime-connectivity-continue-existing-work-after-recovery",
+    "status": "all-four-local-lanes-complete-release-source-ci-stage-public-pending",
     "tasks": [
+      "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
+      "Commit exact final source, verify its CI, update draftPR2 from actual completed local results, mark ready, normal merge and verify mainCI.",
+      "source Tools/Validation/CanonArt/activate-current.sh then override only FIRSTGAME_CONTROL_ROOT to the current CanonPublishResume-2026-11-10 owner; keep finalBUILD and CanonDialogueRelease BuildProof paths.",
+      "Verify complete clean source-bound stage below985MB, publish through existing Pages and explicitly dispatch/verify its workflow.",
+      "Complete fullfreshHTTPSGET, current desktop/mobile portal Root review and both publictouch plans, then final full release gate.",
+      "Continue parity after release; Docs/Research/CanonNextTaunt598.md remains a proposal, not implemented/tested."
+    ],
+    "tasksAtRuntimeInterruption": [
       "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
       "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
       "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
@@ -450,16 +497,26 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "exact-owned-remote-lease-confirmed-runtime-offline-descendants-unknown-no-release-or-renewal",
+    "lockStatus": "CanonPublishResume-2026-11-10-acquired-after-normal-exact-old-owner-release-and-actual-idle",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
-    "childCommandLimitSeconds": 2700,
+    "childCommandLimitSeconds": 3600,
+    "defaultGuardLimitSeconds": 2700,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
     "sameCauseMaxRetries": 2,
     "modelUsageEnforced": false,
     "wholeInteractiveAgentDeadlineEnforced": false,
-    "limitsNote": "run enforces its child process group only. A scheduled task runner must separately enforce entire agent time/usage/concurrency. Never raise limits or disable stops automatically.",
+    "limitsNote": "User explicitly authorized longer work: current supervised command window3600s and explicitly authorized owned lease21600s. Guard default2700s remains. Actual child/lease cleanup boundaries are enforced separately; no model/account quota or whole-agent budget is inferred.",
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
+      "id": "CanonPublishResume-2026-11-10",
+      "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "deadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+      "commitSha": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "status": "Owned current release preparation; four local lanes completed. Exact source/CI, stage and public acceptance remain pending."
+    },
+    "historicalBatchAtReport": {
       "id": "C1-resume-2026-11-04",
       "leaseRecord": "/tmp/firstgame-resume-2026-11-04/lease.json",
       "owner": "a60785ea-6993-4726-bb81-4c1c8701c455",
@@ -468,6 +525,12 @@
       "status": "Work and portable checkpoint complete; normal owned CAS release is the final boundary after source preservation. Live remote ref is authoritative."
     },
     "lastCompletedBatch": {
+      "id": "CanonDialogueRelease-2026-11-09",
+      "status": "normal-owned-CAS-release-after-actual-idle-and-exact-owner-verification",
+      "releasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json"
+    },
+    "historicalCompletedBatch": {
       "id": "C1-Recovery01",
       "status": "normal-completed-and-owned-CAS-released",
       "releasedUtc": "2026-11-03T15:33:55Z",
@@ -477,11 +540,13 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
-    "liveLeaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00"
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00"
   },
   "environment": {
     "managedCloudObservedRunning": true,
+    "currentConnectionStatus": "connected-after-reconnect",
+    "currentRecovery": "Retained workspace originals verified; exact15370 final Web runtime files restored to original /tmp paths. See CanonPublishResume runtime-restoration.json. Historical disconnect below is preserved as a dated event.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
     "installedWebGLModule": true,
@@ -519,6 +584,8 @@
       "ledger": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/historical-runtime-exact-hardlink-preservation.json"
     },
     "latestRuntimeInterruption": {
+      "historical": true,
+      "resolvedBy": "Current environment connected; exact runtime restored and four local suites completed after reconnect.",
       "observedUtc": "2026-11-09T08:55:44Z",
       "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
       "status": "runtime-unavailable-connectivity-offline",
@@ -598,6 +665,7 @@
     "currentGoalCardState": "not-directly-queryable",
     "currentChatRunOrigin": "explicit-user-request",
     "lastAutomationQueryCount": 0,
+    "lastAutomationQueryMeaning": "Last observed query only; no recurring scheduler configured and no current live goal-card activation inspection claimed.",
     "goalExecutionObservedMeaning": "Historical actual goal runs are recorded; this does not establish current goal-card active/paused/stalled status."
   },
   "permissions": {
@@ -618,6 +686,7 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
+  "knownIssuesScope": "The following retained issues describe historical G2/C1 scopes and the unchanged public G2. Current CanonArt local results are recorded in activeWork.currentLocalValidation; historical unverified wording must not override those completed checks.",
   "knownIssues": [
     "HistoricalG2Root/audit/build witness are still missing aftertmp loss, while current oldsite bytes and freshGospel16 have been recovered separately. Web/public recovery is unfinished.",
     "Fresh Native Bible19 capture opens afteroneframe and is nearly transparent; it is not a legible completed-book proof. SettledPC completed19book and mandatoryPC/touch/public book/Continue originals remain required.",
@@ -1732,14 +1801,39 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "runtime-disconnected-after-GospelPC90passed-CardPCpartial-no-new-public",
+    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
-    "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
       "FantasyCards": "fm-canon-2026-11-09",
       "PathOfDawn": "gospel-canon-2026-11-09"
+    },
+    "currentLocalValidation": {
+      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "everyWrapperPassed": true,
+      "everyGuardAfterExitCode": 0,
+      "everyContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "everyRequiredOriginalRootDirectlyViewed": true,
+      "publishReady": false
+    },
+    "currentRuntimeRecovery": {
+      "environment": "connected",
+      "controlRoot": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "leaseCommit": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "oldOwnedLeaseReleasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
+      "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
+      "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
+      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
     },
     "changes": [
       "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
@@ -1783,8 +1877,8 @@
         "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
         "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
       },
-      "Web": "Both final current Webs actually passed; later CardWeb01 raw proof is not in remote Checkpoint01 and must be verified or regenerated after disconnect.",
-      "Browser": "GospelDesktop Browser05 actual90pass +Root53required originals observed; CardDesktop Browser01 partial18, local/public touch notrun.",
+      "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
+      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
       "public": "unchanged-G2",
       "GospelNative02": {
         "passed": 21,
@@ -1835,7 +1929,8 @@
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
       "GospelPC": {
-        "status": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
@@ -1857,8 +1952,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Not yet invoked after annotation; must verify actual raw files/current runtime on resume.",
-        "portability": "Later local originals not included in remote Checkpoint01; availability unconfirmed after runtime disconnect. Missing raw data cannot be replaced by this observed summary."
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
       },
       "GospelPC03": {
         "status": "intentionally-stopped-before-final-gates",
@@ -1910,7 +2005,8 @@
       },
       "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
       "finalGospelPC": {
-        "status": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
@@ -1932,8 +2028,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Not yet invoked after annotation; must verify actual raw files/current runtime on resume.",
-        "portability": "Later local originals not included in remote Checkpoint01; availability unconfirmed after runtime disconnect. Missing raw data cannot be replaced by this observed summary."
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
       },
       "preDialogueCore309": {
         "passed": 309,
@@ -1962,7 +2058,7 @@
         "lastImageToolError": "exec-server transport closed",
         "processCleanup": "Unknown after disconnect; no release/idle claim."
       },
-      "currentCi": {
+      "lastObservedCiBeforeReleaseCommit": {
         "status": "completed",
         "conclusion": "success",
         "head": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
@@ -1972,7 +2068,16 @@
       }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
+    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
     "next": [
+      "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
+      "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
+      "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
+      "Publish through existing Pages and explicitly dispatch its workflow; verify actual successful completion and fresh full-site HTTPS GET.",
+      "Root-review current desktop/mobile portal originals; complete both publictouch plans and final full release gate before claiming deployment acceptance.",
+      "After this release, assess original skill598 proposal in Docs/Research/CanonNextTaunt598.md; it is not implemented or tested."
+    ],
+    "nextAtRuntimeInterruption": [
       "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
       "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
       "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
@@ -1984,7 +2089,7 @@
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
     "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
     "userExecutionAuthorization": {
       "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
@@ -2002,16 +2107,19 @@
       "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
-      "status": "14newclips-and28freshASR-Core311-Native21-finalWeb03-PC90passed-observed;rawavailability-recheck-required-after-disconnect"
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
     },
     "finalRuntimePaths": {
       "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
       "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
       "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
       "stageRoot": "Artifacts/CanonArtWebPlaytest"
     },
     "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
     "runtimeInterruption": {
+      "historical": true,
+      "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
       "observedUtc": "2026-11-09T08:55:44Z",
       "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
       "status": "runtime-unavailable-connectivity-offline",
