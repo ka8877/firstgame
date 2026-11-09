@@ -1,5 +1,118 @@
 # 지속 개발 로드맵과 재개 지점
 
+## 현재 CanonArt 마일스톤 · 검증6회·봉인·보존·정상 종료 완료
+
+검증 도구 main 커밋 `9dfa4a9cca5aa41976ab784b9b97220cf84e5b30`의 CI `42690129169`는 실제 완료·성공했고 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json`에 원문을 보존했다. 이전3차 커밋 `4133958afdfb3cdf5ace63c8cee819fcb0b84907`의 CI `42688041071` 성공은 같은 Release의 `validator-third-ci.json`,2차 `0c6b990d`의 CI `42684473945` 성공은 `validator-final-ci.json`에 별도 보존한다. 새 단위41개와 기존 회귀20개는 실제 통과했다. `Release/validator-reload-diagnosis04.json`의 이전 예상 밖 요청7/7 조건 부합은 진단 결과이며 원래 raw 실패와 Root 미승인을 통과로 바꾸지 않는다.
+
+동결한4파일은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources04/index.json`을 따른다. helper SHA는 `5859bc66f244b402f76236bfcbd39726cd4e1250d03f42a3811f4a30439c759e`, 단위 검사 소스 SHA는 `01374484b9f07aff6cedd948ad07e8829777b76c3c9249a48ace8e4db30e5f7d`, smoke SHA는 기존 `7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb`다. 처음 관측 때 이미 decode된 경우에도 정확한 loadeddata·재생 이력 없음·ready 회귀 없음·전체 파일 바이트/HTTP206·PCM 근거를 유지한다. smoke의 실제 touchEnd 뒤2RAF 대기도 유지하며 제품 코드는 바꾸지 않았다.
+
+Card Public04와 Public05는 각각107검사 중106통과·network gate1실패였다. 각95파일/65PNG 원문은 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public04`와 `Public05`에 보존하고 현재 control의 `Release/card-public04-relocation.json`·`Release/card-public05-relocation.json`에 정확한 SHA/이동을 결합했다. Root는04의 `continued-sealed-graphic`에서 완전한 팩 그림·버튼과 `owned-fifty-five`의4카드 격자/55장·27종을 실제로 봤다.05에서도 필수51원본과 완전한 팩·격자를 봤지만 network gate 실패 때문에 시각 승인·전체 통과를 부여하지 않았다. 화면 관측과 실패 판정을 구분하고 원래 raw를 유지한다. 이전01/02의 빈 첫 캡처를 지속적인 보관함 제품 오류로 확정하지 않는다.
+
+| 현재 검증 도구의 새 실행 | 현재 상태 | 검사 | PNG | 필수 Root 원본 |
+|---|---|---:|---:|---:|
+| Card Desktop720 Browser04 | 통과·Root 승인 | 98 | 65 | 52 |
+| Gospel Desktop720 Browser06 | 통과·Root 승인 | 89 | 68 | 53 |
+| Card Mobile844 Browser03 | 통과·Root 승인 | 100 | 64 | 51 |
+| Gospel Mobile844 Browser02 | 통과·Root 승인 | 78 | 54 | 39 |
+| Card PublicMobile844 Public06 | 통과·Root 승인 | 108 | 64 | 51 |
+| Gospel PublicMobile844 Public02 | 통과·Root 승인 | 83 | 54 | 39 |
+
+현재 검증기 `9dfa4a9cca5aa41976ab784b9b97220cf84e5b30`의 성공 완료6/6회이며 모든 실제 wrapper·guardAfter exit0·소유 후손 정리·재접속2회와 Root의 전체 필수 원본 검토를 확인했다. Card Desktop Browser04의 Root 확정 report SHA는 `2a2f4da4c6c529d1a0f7691286156eee4a4589fd46b404bb5b0e0014d4bd3edc`, wrapper SHA는 `b656007322fbe73254aaff4ab9271ee172d48158d12d4e08e93125deaa70329b`다. Card Mobile Browser03의 실제 보유55장·26종은 해당 실행의 관측이며 공개 시도의27종을 공통 기대값으로 쓰지 않는다. 제품 source `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest `305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1`의978,000,227B/15,416파일과 Portal 전체 GET·Root 검토는 유지한다. Core311·Native8/21·Web 제품 결합도 유효하며 검증 도구 교정을 제품 재배포로 계산하지 않는다.
+
+앞선 Card Desktop Browser03은11월10일05:37 KST 환경의 starting/ready 전환 중 외부 중단을 관측했다. 이전 supervisor가 PPID1의 zombie이고 Chrome/Xvfb가 없는 상태는 확인했지만, 원래 wrapper 완료·통과/실패·guardAfter 결과는 확인하지 못했다. 별도 `InterruptedDesktopIdle01`의 실제 guard·idle·소유 정리 검사는 통과했으며 이를 원래 wrapper 완료로 계산하지 않는다. 원본57파일/37PNG는 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Desktop720/Browser03`에 보존하고 현재 control의 `Release/card-desktop03-interruption-relocation.json`에 정확히 결합했다. Root가 필수27원본을 봤지만 승인하지 않았다. 이 중단은 공개 Public01~05의 실제 network gate 실패와 별개다.
+
+Card Mobile Browser02도 외부 환경 중단으로 원래 완료 wrapper·통과/실패·guardAfter 판정이 없다. Root가 봤지만 승인하지 않은 필수44원본을 포함한89파일/62PNG를 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Mobile844/Browser02`와 현재 control의 `Release/card-mobile02-interruption-relocation.json`에 보존했다. 별도 유휴·소유 정리 확인은 원래 wrapper의 완료를 대신하지 않으며, 새 Browser03의 전체 통과와 구분한다.
+
+전체 gate는 실제 통과했고 `Artifacts/Validation/CanonArt-2026-11-09/canon-final-seal.json`에61,435B·SHA `fca3fbb37df1ac61a4cde519d6dbfa5d1da622d8aa98f3731a70de6a6e03c938`의 봉인을 보존했다. 실제 실행 wrapper SHA는 `8801b6c09567dbe08048f96832b95e0e6ef10be75977a6a75e906fda285f6a3a`다.
+
+`Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json`은1,679,743B·SHA `1df66a8a10fdb26afd871b87e411927c7c7c040f12efef44442924e3ec76f749`이며 실제3,805파일을11개 압축 조각으로 보존했다. 결합365,475,609B·SHA `dec113102a6655d9d13e841183ebb0e4dd823af824fba4fcd275c48ed1f66cb7`, archive wrapper SHA는 `511914a93d5b911311340a47680b4a7a151190034284a52c822e9165c43082b0`다. Checkpoint03 안의 acquired lease 사본은 역사적 원문이며 현재 소유권이 아니다.
+
+`FinalIdleBeforeRelease01`의 실제4명령 exit0·소유 정리를 확인했다. summary는11,199B·SHA `583b2f0ddc86b36de2db5d6a4796c609691e595b05b17e537550abee9ea3ca69`다. 이후11월10일06:43 KST 자기 owner `cee675c8-5fa8-4d69-9536-1ebe9debf7db`·잠금 commit `2085a3a294671a1b513e263cdf5cd7d103963a7d`를 정상 해제했다. `Release/lease-release.json`은800B·SHA `dd42f4acddcdc68bd165d77a5c213276e8a615450875b38c18096c484b7dc03f`이며 실제 releasedUtc는 `2026-11-09T21:43:16.817803+00:00`다. `Release/lease-status-after.json`의 available은 해당 조회 순간의 관측으로만 기록하며99B·SHA `be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f`다.
+
+`Docs/Autonomy/Evidence/CanonDialogue20261109/Closure01/index.json`에139개 실제 종료 원문을 보존했다. index는67,330B·SHA `0b2b4b3bcad55ec443bf09ab7aeb7f9155d3dd01ce7cd5ecff5942aae316670f`다. 이 종료 문서 작성 시점의 main HEAD는 검증 도구 커밋 `9dfa4a9c`였으며, 해당 종료 문서·증거의 정상 push와 새 CI 완료는 작성 시점에 관측하지 않았다.
+
+이번 공개 마일스톤은 완료했다. 다음 제품 작업은 판마 원작 규칙 지원 확대와 예수님 일반 이동 시야·가림·세로 화면/legacy 개선이며 출전2649종/원본15350개의 전체 원작 충실도는 미완료다. `Docs/Research/CanonNextTaunt598.md`는 제안만 있고 구현·검사 완료가 아니다. 예약은 마지막 조회0개이고 기존 목표 카드 활성 상태는 직접 확인하지 않았다. 이번 소유 회차 종료를 장기 개발 목표 전체 완료나 백그라운드 실행으로 표시하지 않는다.
+
+아래는 이전 검증 도구의 성공·실패·Root 반려·진단과 당시 진행 상태를 보존한 이력이다. 당시 명칭이나 성공 수치를 현재 도구의 통과로 재사용하지 않는다.
+
+---
+
+## 최신 최종 검증기 교정 · 새6회 중 Card Public04 실행 중
+
+검증기 전용 main 커밋 `0c6b990d60240f696d87cb0c0f9a24f683c2bcab`을 push했고 CI `42684473945`는 진행 중이며 성공은 아직 아니다. 이전 검증기 `c949d283`의 CI `42681117516` 성공은 당시 이력으로 보존한다. 새 `PublicRangeUnit02` 단위31개와 `LocalMediaRegression02` 기존 회귀20개는 실제 통과했다. 새 진단은 옛 Public02의 두 abort와 Public03의 한 abort가3/3 조건을 만족함을 확인했지만 원래 raw 실패나 Root 반려를 통과로 바꾸지 않았다.
+
+abort 전 관측이 없던 새 엄격 분기는 이전 관측 전무·실제 재생 이력 없음의 요구0/None 필드·decode·정확한 GET/206 전달·PCM 근거를 모두 요구한다. 없는 before 근거를 재구성하지 않고 명시적인 None으로 보존한다. smoke의 모바일 touchEnd 뒤에는 실제2RAF를 기다려 paint 전 부분 원본 캡처를 피한다. 동결 소스는 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources02/index.json`이며 helper SHA는 `9ac200102eaa67ceb98ef425945202dc78637d007080e6801162715b0b138a26`, smoke SHA는 `7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb`다. 제품 코드 변경은 없다.
+
+Card Public03은107검사 중106통과·network gate1실패였다. navigation2 battle 요청은 첫 관측이 abort 뒤에 있었으며, Root는 `continued-sealed-graphic` 원본의 중앙 팩 그림이 보이지 않는 상태도 반려했다. 원본95파일/65PNG는 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public03`로 옮기고 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public03-relocation.json`과 Root의 Public03 반려 기록에 보존했다. 새 진단이나 교정으로 원래 실패·반려·미승인 상태를 바꾸지 않는다.
+
+Public03의 `owned-fifty-five`에서는 실제4카드 격자가 정상으로 보였다. 이전 Public01/02의 빈 첫 캡처를 지속적인 보관함 제품 오류로 확정하지 않는다. 현재 기능 승인은 새 harness의 실제 새 원본 검토를 기다리며, 일반 이동 가림·세로 화면/legacy·원작 충실도는 별도 미완료 범위로 남긴다.
+
+| 최종 동결 harness에서 필요한 새 실행 | 현재 상태 |
+|---|---|
+| Card PublicMobile844 Public04 | 실제 실행 중·미완료 |
+| Gospel PublicMobile844 Public02 | 대기 |
+| Card Desktop720 Desktop03 | 대기 |
+| Gospel Desktop720 Desktop06 | 대기 |
+| Card Mobile844 Mobile02 | 대기 |
+| Gospel Mobile844 Mobile02 | 대기 |
+
+현재 완료0회이며 나머지5회는 대기다. 제품 source `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest `305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1`의978,000,227B/15,416파일과 기존 Portal 전체 GET·Root 검토는 바뀌지 않았다. Core311·Native8/21·Web의 제품 소스 결합도 유효하다. 새 검증기 CI 완료,6회 전체 브라우저 실행·Root 검토와 최종 gate·봉인은 아직 없다. 검증기 교정 커밋과 제품 배포의 식별자를 구분하고 제품 재배포로 계산하지 않는다.
+
+아래는 이전 harness의 성공·실패·Root 반려·진단과 당시 진행 상태를 보존한 이력이다. 현재 harness의 통과로 재사용하지 않는다.
+
+---
+
+## 최신 검증기 교정 · 전체6회 중 Card Public03 실행 중
+
+이번 변경은 검증 도구 교정이다. 제품 source `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 gh-pages `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest SHA `305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1`과 runtime·stage는 그대로다. manifest 포함978,000,227B/15,416파일의 실제 배포와 PublicPortal02 전체 GET·Root 포털 검증은 계속 유효하다. 검증 도구 커밋은 제품 소스 식별자와 분리하며, 제품 변경이 없는 이번 교정으로 재배포하지 않는다.
+
+`fm-local-media-errors.py`의 엄격 HTTPS 재접속·unlock 전 preload 분류와 `nativity-web-smoke.py` 연결, 새 단위 검사·CI 단계를 추가했다. 분류에는 현재 completeDelivery의 전체200/SHA, 같은 navigation1/2의 HTTP206응답2건 이상, 실제 abort의±1,000ms와 같은 element decode의2,000ms 경계, 분리된 유한 audible PCM과 뒤이은 실제 선택 재생이 모두 필요하다. 실제 `CommandRuns/PublicRangeUnit01`의 새 단위21개와 `CommandRuns/LocalMediaRegression01`의 기존 회귀20개가 통과했다. `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis.json`에서 이전 Public02의 두 abort가2/2 조건을 만족했음을 진단했지만 원래 실패 report·원문·실패 판정은 변경하지 않았다.
+
+실행 전 동결한 소스는 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources/index.json`에 있다. smoke SHA는 `18dcd92ee8b83d23c24aade1851e3c85a09f9acd1cffe010aace5a970f452de6`, helper SHA는 `51688934a39f3a5a78025c2263fff4ac6a3023a61b653e087afc46f307b398ca`다. 기존 로컬4회·Gospel 공개1회 성공과 Card Public02 실패 원문을 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/<game>/<profile>/<attempt>`로 정확히 보존하고 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-source-replay-relocations.json`에 SHA와 원래 경로를 결합했다. 이전5성공은 당시 harness의 유효한 이력이며 새 harness 통과를 대신하지 않는다.
+
+| 새 harness에서 필요한 범위 | 현재 상태 |
+|---|---|
+| Card PublicMobile844 Public03 | 새 harness로 실제 실행 중·미완료 |
+| Gospel PublicMobile844 Public02 | Card 공개 실행 뒤 대기 |
+| Card Desktop720·Mobile844 | 두 로컬 실행 모두 대기 |
+| Gospel Desktop720·Mobile844 | 두 로컬 실행 모두 대기 |
+
+6회 모두 새 harness의 현재 원본·일반 입력·오디오·오류·재접속·Root 검토로 다시 확인한다. 현재 완료0회이며 Card Public03이 실제 실행 중이고 나머지5회는 대기다. 기존 Core·Native·Web 제품 결합과 `BuildsAfterValidatorCorrection01`의 최신 엄격 builds 재검사는 실제 통과했다. 명령exit0·최종 guard0·소유 후손 정리를 확인했으며 실제 summary는11,406B, SHA `c7d7eec3c4fa60297ae6146dd88f6dfe4d15adcfe5e060276ce57dc2beb6b2df`다. 검증기4파일의 main 커밋 `c949d283e4ed16fefeb296b95b6d76cafa859c31`의 push CI `42681117516`은 실제 완료·성공했고 전체 원문은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-ci.json`에 보존했다. 실제 소스와6회 계획은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/current-replay-checkpoint.json`에 기록했다. 새6회 브라우저 검증과 전체 최종 gate·봉인은 미완료다. 기존 배포/전체 GET의 성공과 현재 harness 재검증을 구분한다.
+
+아래의 공개·이전 harness 성공·실패·검토 기록은 시점별 이력이다. 아래의 성공 수치를 새 harness의 현재 통과로 재사용하지 않는다.
+
+---
+
+## 최신 공개 상태 · CanonArt 카드 공개 network gate 검토 중
+
+PR #2를 정상 병합한 제품 main은 `2ebe776c6d37bc6563fa25004536ca2983ce65d4`다. 현재 공개 기준은 새 CanonArt이며 이전 G2는 역사적 정상판으로 보존한다. 완료된 후보·main CI와 실제 게시 경로는 다음과 같다.
+
+| 단계 | 실제 완료 근거 |
+|---|---|
+| 후보 CI | `f4a440c8289dfcaae7c954a52f4606983c43424f`, `42669109399` #114 성공 |
+| 정상 PR 병합·main CI | PR #2 병합, `42669690355` 성공 |
+| stage·게시 | Stage01·PublishSite01 성공, Pages `42670765284` 성공 |
+
+공개 gh-pages는 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest SHA256은 `305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1`이다. manifest 포함978,000,227B·15,416파일로985MB 미만이다. 실제 source/manifest/용량 결합은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/stage-identity.json`, CI·PR·Pages 원문도 같은 Release 폴더를 따른다.
+
+PublicPortal02는 현재 전체15,416파일의 새 GET에서 모두 HTTP200·전체 SHA 일치를 확인했고, Root가 현재 포털 원본2장을 직접 검토한 뒤 엄격 portal 검사도 통과했다. 실제 report SHA는 `7c8f28cd78d9e387a4738f15845e52a2276cc4afa4489176f9cf5ddd3bd2d9af`다. PublicPortal01에서 JPEG2개가503으로 실패한 원문은 그대로 보존하며, 부분 재요청을 전체 성공으로 계산하지 않았다.
+
+| 공개 터치 범위 | 실제 상태 | 검사 | 원본PNG | 필수 Root 원본 |
+|---|---|---:|---:|---:|
+| Gospel Public01 | wrapper·최종 guard0·정리·재접속2회와 Root 검토 통과 | 83 | 54 | 39 |
+| Card Public01 | network gate 실패·최종 통과 및 시각 승인 없음 | 106통과/1실패 | 65 | 미승인 |
+| Card Public02 | network gate 실패·최종 통과 및 시각 승인 없음 | 106통과/1실패 | 원문보존 | 51관측·미승인 |
+
+Gospel Public01의 실제 report SHA는 `ad08fb34bdcbce52a725b6dbcbca3e5606c7d6b72ba3c0067e674207c0fa4186`다. Card Public01은 오디오 `ERR_ABORTED`4건 때문에 network gate가 실패했고 실제 exit1·소유 후손 정리를 확인했다. 원본95파일은 `Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public01`에 보존하고 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public01-relocation.json`에 정확히 결합했다.
+
+Card Public02도107검사 중106통과·network gate1실패로 종료했다. navigation2의 title/lobby 요청2개가 예상 밖 `net::ERR_ABORTED`였고 HTTP오류는0개다. 4PCM·전체 재접속2회·기능검사106개 통과와 최종 network 실패를 구분하며 실제 exit1·소유 후손 정리를 확인했다. raw summary SHA는 `25a5dd0d02f0f3938c53241c3c81a3829ab016b8bd1deee69b60d028baf164d9`이고 canonical `Artifacts/Validation/CanonArt-2026-11-09/PublicMobile844/FantasyCards`는 원문 그대로 남긴다. Root가 필수51원본을 봤지만 시각 승인·최종 통과를 부여하지 않았다. 맹목적 재실행은 멈추고 기존 검증기의 HTTPS reload/preload 오류 분류 조건과 실제 근거를 진단한다. 이를 제품 오류로 단정하거나 network 조건을 완화하지 않는다. 두 게임 전체 최종 gate·봉인은 아직 없다.
+
+`owned-fifty-five`에서 보유55장·27종은 실제 관측했지만 첫 보관함 진입의 중앙 격자가 비어 있어 그 진입의 실제 카드 표시는 미검증이다. 덱 편집 격자는 정상으로 확인했으며 이 관측과 첫 보관함 표시 누락을 구분해 Root 검토 범위에 남긴다. 일반 이동 중 가림과 기존 portrait 관련 차이, 출전2649종/원본 그림15350개의 전체 원작 충실도 미완료도 유지한다. 현재 control `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10`의 단일 담당 `/root`가 보존된 Card Public02 실패와 검증기 분류 조건을 먼저 진단한다. 필요한 엄격 검증과 최종 gate·봉인을 마친 뒤 후속 미완료 작업을 선정한다.
+
+아래는 앞선 재개·검증 이력을 보존한 기록이다. 아래의 “현재 G2/PR draft/CI·stage·공개검증 대기”는 해당 시점의 상태이며 이 최신 공개 상태를 대신하지 않는다.
+
+---
+
 ## 최신 재개 · CanonPublishResume-2026-11-10
 
 현재 연결된 환경에서 CanonArt의 네 로컬 실행과 현재 원본의 Root 검토를 마쳤다. Core311, Gospel Native21·Card Native8, 음성28개 신규 ASR와 최종 Gospel Web03·Card Web01 빌드가 통과했다. 아래 표의 모든 실행은 wrapper 통과, 최종 guard exit0, 소유 후손 정리, 실제 전체 재접속2회를 확인했으며 모든 필수 현재 원본을 Root가 직접 보고 승인 기록에 결합했다.

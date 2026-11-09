@@ -1,0 +1,24 @@
+{
+  "label": "guardAfter",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Autonomy/cycle_guard.py",
+    "check",
+    "--record",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-09T21:41:36.257659+00:00",
+  "timeoutSeconds": 44.99591102100021,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 22322.053613407,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

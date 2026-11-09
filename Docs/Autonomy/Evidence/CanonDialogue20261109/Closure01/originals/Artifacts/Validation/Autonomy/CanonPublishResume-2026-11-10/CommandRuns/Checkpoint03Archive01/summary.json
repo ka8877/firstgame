@@ -1,0 +1,282 @@
+{
+  "status": "command-completed",
+  "scope": "generic-owned-command-only",
+  "label": "Checkpoint03Archive01",
+  "invocation": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/invocation.json",
+    "bytes": 9459,
+    "sha256": "859babbe55f503a76b43718f5eef2531daf15cf3bac34566a195f5f7b587e8f5"
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "automaticRetryOrApproval": false,
+  "guardBefore": {
+    "event": {
+      "label": "guardBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-09T21:41:06.937548+00:00",
+      "timeoutSeconds": 44.9987719760029,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 22322.053613407,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 24506,
+        "ppid": 24503,
+        "pgid": 24506,
+        "sid": 24506,
+        "state": "R",
+        "startTicks": 1910926,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 24507,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/01-guardBefore/supervisor-result.json",
+        "sha256": "72346143a51a99bf06c3706a7f31c730a68ef9db8badbb6db1e216f389c674b7",
+        "bytes": 9143
+      },
+      "finishedUtc": "2026-11-09T21:41:08.567726+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/guardBefore.stdout.log",
+        "sha256": "e94c2d63b588c23902812166ac89ae66b4860a13a56f2d1dbba36e2c5734b9a0",
+        "bytes": 749
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/Processes/guardBefore.finished.json",
+      "bytes": 1913,
+      "sha256": "8f25177c58fb7b7cf965ee0daeb4e6d34bcd1faea5178aa47b04c92848a342ca"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/guardBefore.stdout.log",
+      "bytes": 749,
+      "sha256": "e94c2d63b588c23902812166ac89ae66b4860a13a56f2d1dbba36e2c5734b9a0"
+    }
+  },
+  "idleBefore": {
+    "event": {
+      "label": "idleBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-09T21:41:08.910481+00:00",
+      "timeoutSeconds": 19.998479473997577,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 22322.053613407,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 24538,
+        "ppid": 24503,
+        "pgid": 24538,
+        "sid": 24538,
+        "state": "R",
+        "startTicks": 1911121,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 24539,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/02-idleBefore/supervisor-result.json",
+        "sha256": "3b5f1ab908fe748fe016dcc6364d38919ae87d778f5f129942e79fbe608c69fc",
+        "bytes": 7086
+      },
+      "finishedUtc": "2026-11-09T21:41:09.065200+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/idleBefore.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/Processes/idleBefore.finished.json",
+      "bytes": 1793,
+      "sha256": "eeb1c49ffcb6116a3b3fb7cd5a0adfdff0243e3d4ba089d6a33ca09d0b2b487b"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/idleBefore.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "command": {
+    "event": {
+      "label": "command",
+      "argv": [
+        "python3",
+        "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/preserve-public-checkpoint.py",
+        "--checkpoint-head",
+        "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+        "--validator-source",
+        "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+        "--validator-ci",
+        "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json",
+        "--confirm-completed-public-proof"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-09T21:41:09.384386+00:00",
+      "timeoutSeconds": 3198.337231882,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 22322.053613407,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 24540,
+        "ppid": 24503,
+        "pgid": 24540,
+        "sid": 24540,
+        "state": "R",
+        "startTicks": 1911171,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 24541,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/03-command/supervisor-result.json",
+        "sha256": "0d24a27edc9a63a964c078ec2428c1b082f0f37ddb39911fd73248c9a3a67c96",
+        "bytes": 7684
+      },
+      "finishedUtc": "2026-11-09T21:41:36.156887+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/command.stdout.log",
+        "sha256": "981fefa552d81eb913425ca7ef75348d951d8c0c9e4a1d474cdd36a82466d271",
+        "bytes": 561
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/Processes/command.finished.json",
+      "bytes": 2074,
+      "sha256": "1171c7865fd49673f3b85de822e5b8c13b0a49bf0843f4a5ed08b013be5a5237"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/command.stdout.log",
+      "bytes": 561,
+      "sha256": "981fefa552d81eb913425ca7ef75348d951d8c0c9e4a1d474cdd36a82466d271"
+    }
+  },
+  "guardAfter": {
+    "event": {
+      "label": "guardAfter",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-09T21:41:36.558514+00:00",
+      "timeoutSeconds": 44.99591102100021,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 22322.053613407,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 24542,
+        "ppid": 24503,
+        "pgid": 24542,
+        "sid": 24542,
+        "state": "R",
+        "startTicks": 1913882,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 24543,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/04-guardAfter/supervisor-result.json",
+        "sha256": "04599cee6b22462b014d5463b89342213c7182dc765b25253b6f9b28754e77a7",
+        "bytes": 9144
+      },
+      "finishedUtc": "2026-11-09T21:41:37.978135+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/guardAfter.stdout.log",
+        "sha256": "e94c2d63b588c23902812166ac89ae66b4860a13a56f2d1dbba36e2c5734b9a0",
+        "bytes": 749
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/Processes/guardAfter.finished.json",
+      "bytes": 1911,
+      "sha256": "dbaf6ea8adff737816f8a64c4ee717ddc9f7157e3d2919f2080c355cae4788b5"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/guardAfter.stdout.log",
+      "bytes": 749,
+      "sha256": "e94c2d63b588c23902812166ac89ae66b4860a13a56f2d1dbba36e2c5734b9a0"
+    }
+  },
+  "finishedUtc": "2026-11-09T21:41:37.988980+00:00",
+  "executionLimit": {
+    "maximumSharedSeconds": 3600,
+    "leaseReserveSeconds": 60,
+    "cleanupReserveSeconds": 12,
+    "startedMonotonic": 19109.113229598,
+    "safeEndMonotonic": 22322.053613407
+  }
+}

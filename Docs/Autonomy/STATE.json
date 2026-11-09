@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-09T17:43:24.151293+00:00",
+  "updatedUtc": "2026-11-09T21:55:03.169847+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,9 +13,11 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
-    "branch": "codex/canon-art-2026-11-09",
+    "status": "CanonArt-release-milestone-verified-six-of-six-sealed-checkpointed-owned-lease-released-long-term-work-remains",
+    "branch": "main",
+    "implementationBranch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
+    "executionState": "completed-owned-lease-released",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
@@ -23,11 +25,23 @@
       "PathOfDawn": "gospel-canon-2026-11-09"
     },
     "currentLocalValidation": {
-      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
-      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
-      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
-      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
-      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "status": "all-four-current-local-lanes-passed-and-root-finalized",
+      "GospelDesktop720": {"attempt": "Browser06", "status": "passed-and-root-finalized", "passedChecks": 89, "rawPngCount": 68, "requiredRootOriginals": 53, "reportSha256": "2239dd8d925c0cf1e0e1737acf22b5fcf4567c25a74a57c6ebcd87dac7c6c583", "wrapperSha256": "74edf4ff91ccb4350f345df2322ca4c4c4a21f97626afcd3bf964901e72d2051"},
+      "CardDesktop720": {"attempt": "Browser04", "status": "passed-and-root-finalized", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json", "reportSha256": "2a2f4da4c6c529d1a0f7691286156eee4a4589fd46b404bb5b0e0014d4bd3edc", "wrapperSha256": "b656007322fbe73254aaff4ab9271ee172d48158d12d4e08e93125deaa70329b", "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "GospelMobile844": {"attempt": "Browser02", "status": "passed-and-root-finalized", "passedChecks": 78, "rawPngCount": 54, "requiredRootOriginals": 39, "reportSha256": "9615a99fab2fbd858650c0c18c89db11fb5fa6926b7a04e7ebc2b78bde94beb9", "wrapperSha256": "7757a184428a7d3adc8c46bf88a2df002ceefa694490b987779af1bf486e2121"},
+      "CardMobile844": {"attempt": "Browser03", "status": "passed-and-root-finalized", "passedChecks": 100, "rawPngCount": 64, "requiredRootOriginals": 51, "reportSha256": "ec99688f6fea7c726500cb71d0693d720695913ad8142abf54ccacec7e8338f5", "wrapperSha256": "0d4aead1bbf944ef0e71a1df400a6d0a43ebf0b39acc58096a8e79323086e0c8", "observedOwnedCards": 55, "observedOwnedSpecies": 26, "ownershipScope": "Actual run-specific duplicate pack result; not a global27-species invariant"},
+      "allCurrentWrappersPassed": true,
+      "allGuardAfterExitCodes": 0,
+      "allContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "previousResults": "historicalLocalValidationBeforeValidatorCorrection; genuine completed old-source evidence, not current corrected-harness passes"
+    },
+    "historicalLocalValidationBeforeValidatorCorrection": {
+      "scope": "Genuine completed previous-validator local runs and Root reviews, preserved byte-exact in BrowserHistory. These are historical successes, not passes for the corrected current harness.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGateAtOriginalExecution": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGateAtOriginalExecution": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Desktop720/Browser02/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Mobile844/Browser01/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Mobile844/Browser01/report.json"},
       "everyWrapperPassed": true,
       "everyGuardAfterExitCode": 0,
       "everyContainmentProvedEmpty": true,
@@ -44,8 +58,166 @@
       "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
       "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
       "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
-      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "portalHeroes": "Exact current Root-approved PC originals used by the deployed stage; PublicPortal02 desktop/mobile original Root review and strict portal gate passed.",
       "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
+    },
+    "validatorCorrection": {
+      "revision": 4,
+      "scope": "Validation-only strict media-range evidence correction; existing touchEnd two-frame capture retained. Product/runtime/stage/Portal unchanged.",
+      "sourceCommit": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+      "ci": {"runId": 42690129169, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json"},
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources04/index.json",
+      "helperSha256": "5859bc66f244b402f76236bfcbd39726cd4e1250d03f42a3811f4a30439c759e",
+      "unitTestSha256": "01374484b9f07aff6cedd948ad07e8829777b76c3c9249a48ace8e4db30e5f7d",
+      "smokeSha256": "7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb",
+      "evidenceScope": "Narrow observed range forms, including pending-to-selected same-source advancement and initial already-decoded paused never-played preload. Exact loadeddata/no-ready-regression, complete delivered bytes/GET/HTTP206 and finite isolated PCM remain required; absent before evidence remains explicit None/null.",
+      "newUnitTests": {"passed": 41, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit04/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression04/summary.json"},
+      "diagnosisOnly": {"qualifies": 7, "cases": 7, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis04.json", "rawFailuresUnchanged": true, "notRootApproval": true},
+      "productBindings": "Existing Core311/NativeCard8/Gospel21/Web source/runtime remain valid; no product version or redeployment change.",
+      "requiredFreshBrowserRuns": 6,
+      "completedFreshBrowserRuns": 6,
+      "currentPlan": {"CardPublic06": "passed-root-finalized", "GospelPublic02": "passed-root-finalized", "CardDesktop04": "passed-root-finalized", "GospelDesktop06": "passed-root-finalized", "CardMobile03": "passed-root-finalized", "GospelMobile02": "passed-root-finalized"},
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "passed; see releaseCompletion.finalGate"
+    },
+    "validatorCorrection03History": {
+      "sourceCommit": "4133958afdfb3cdf5ace63c8cee819fcb0b84907",
+      "ci": {"runId": 42688041071, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-third-ci.json"},
+      "scope": "Previous validation-only correction; preserved separately from current revision04. Not a new deployed product version."
+    },
+    "validatorCorrection02History": {
+      "revision": 2,
+      "scope": "Validation-only pre-observation-abort and actual post-touch render-frame corrections; product/runtime/stage/approved portal unchanged.",
+      "sourceCommit": "0c6b990d60240f696d87cb0c0f9a24f683c2bcab",
+      "ci": {"runId": 42684473945, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-final-ci.json"},
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources02/index.json",
+      "helperSha256": "9ac200102eaa67ceb98ef425945202dc78637d007080e6801162715b0b138a26",
+      "smokeSha256": "7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb",
+      "newStrictBranch": "No observations at all before the actual abort; exact never-played/zero/None element fields, actual decode, complete verified GET/HTTP206 and finite isolated audible PCM remain mandatory. Missing before evidence is explicitly None/null, never invented.",
+      "mobileCapture": "After actual touchEnd, observe two real requestAnimationFrame callbacks before capturing to avoid a pre-paint partial frame; game code unchanged.",
+      "newUnitTests": {"passed": 31, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit02/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression02/summary.json"},
+      "diagnosisOnly": {"qualifies": 3, "cases": 3, "inputs": "Two oldPublic02 cases plus one Public03 case", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis02.json", "rawFailuresAndRootRejectionUnchanged": true},
+      "productBindings": "Existing Core311/NativeCard8/Gospel21/Web source/runtime bindings remain valid; this is not a product revision or redeployment.",
+      "requiredFreshBrowserRuns": 6,
+      "completedFreshBrowserRuns": 0,
+      "currentPlan": {"CardPublic04": "running-not-yet-passed", "GospelPublic02": "pending", "CardDesktop03": "pending", "GospelDesktop06": "pending", "CardMobile02": "pending", "GospelMobile02": "pending"},
+      "previousReplayCheckpointScope": "Release/current-replay-checkpoint.json still records validator01/c949/Public03; use this explicit validator02 plan for current work.",
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "pending"
+    },
+    "validatorCorrection01History": {
+      "scope": "Validation-only HTTPS reload-before-unlock classification and smoke integration/unit tests/CI step; product source, runtime, stage and portal bytes unchanged.",
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources/index.json",
+      "smokeSha256": "18dcd92ee8b83d23c24aade1851e3c85a09f9acd1cffe010aace5a970f452de6",
+      "helperSha256": "51688934a39f3a5a78025c2263fff4ac6a3023a61b653e087afc46f307b398ca",
+      "requiredEvidence": "Complete current delivered-file set with exact SHA/HTTP200; same navigation1/2 and at least2 HTTP206s; actual abort bounded by before/after1000ms observations, same element decode within2000ms; finite isolated audible PCM and later selected playback.",
+      "newUnitTests": {"passed": 21, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit01/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression01/summary.json"},
+      "actualOldPublic02Diagnosis": {"qualifies": 2, "cases": 2, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis.json", "originalFailedStatusUnchanged": true},
+      "originalRelocationLedger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-source-replay-relocations.json",
+      "originalHistoryScope": "Five successful previous-source browser suites and failed CardPublic02 retained byte-exact under BrowserHistory/GAME/PROFILE/ATTEMPT; no old raw pass/failure is relabelled.",
+      "newValidationCommit": "c949d283e4ed16fefeb296b95b6d76cafa859c31",
+      "newValidationCommitCi": {"runId": 42681117516, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-ci.json"},
+      "currentBuildBindingRecheck": {"status": "passed", "attempt": "BuildsAfterValidatorCorrection01", "actualCommandExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/BuildsAfterValidatorCorrection01/summary.json", "bytes": 11406, "sha256": "c7d7eec3c4fa60297ae6146dd88f6dfe4d15adcfe5e060276ce57dc2beb6b2df", "productCoreNativeWebFingerprintsUnchanged": true},
+      "requiredNewBrowserReplays": 6,
+      "completedNewBrowserReplays": 0,
+      "plannedOrder": ["CardPublic03-running", "GospelPublic02-pending", "four-new-local-Desktop720-and-Mobile844-runs-pending"],
+      "currentReplayCheckpoint": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/current-replay-checkpoint.json",
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "pending"
+    },
+    "currentRelease": {
+      "completionRecord": "releaseCompletion; completed milestone, long-term development remains",
+      "sourceCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4",
+      "candidateCi": {"sourceCommit": "f4a440c8289dfcaae7c954a52f4606983c43424f", "runId": 42669109399, "runNumber": 114, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/candidate-ci.json"},
+      "mainCi": {"runId": 42669690355, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/main-ci.json"},
+      "pullRequest": {"number": 2, "state": "merged", "mergeCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4"},
+      "stage": {"status": "passed", "bytesIncludingManifest": 978000227, "filesIncludingManifest": 15416, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/stage-identity.json"},
+      "publication": {"status": "deployed", "ghPagesCommit": "3713229641dd4e4ea6cb66372dd4f8569d2ad0f7", "manifestSha256": "305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1", "pagesRunId": 42670765284, "pagesConclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/pages-deployment.json"},
+      "PublicPortal02": {"status": "passed", "freshFullGets": 15416, "allHttp200AndShaMatched": true, "rootOriginals": 2, "strictPortalGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicPortal/report.json", "reportSha256": "7c8f28cd78d9e387a4738f15845e52a2276cc4afa4489176f9cf5ddd3bd2d9af"},
+      "PublicPortal01": {"status": "failed-two-image-HTTP503-preserved", "supersededByIndependentFullRun": "PublicPortal02"},
+      "currentBrowserAcceptance": {"status": "six-of-six-current-validator04-lanes-passed-root-finalized", "completed": 6, "required": 6, "CardPublic06": "passed-root-finalized", "GospelPublic02": "passed-root-finalized", "CardDesktop04": "passed-root-finalized", "GospelDesktop06": "passed-root-finalized", "CardMobile03": "passed-root-finalized", "GospelMobile02": "passed-root-finalized"},
+      "CardPublic06": {"status": "passed-and-root-finalized", "passedChecks": 108, "rawPngCount": 64, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicMobile844/FantasyCards/report.json", "reportSha256": "68787a8fed7815e207dcc53bf6d03b39bfc9390c9b5ae0efdd802c2141a54c3a", "wrapperSha256": "f2c420742ca6a1f246281730572344c825566223d71658c76a6f65774e7cd8fd", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "GospelPublic02": {"status": "passed-and-root-finalized", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicMobile844/PathOfDawn/report.json", "reportSha256": "314b473601f100145ea53985231e729ae89c797c2e73a3cc00f6d73f3e916159", "wrapperSha256": "40e44abb03d4e73cda13dc1925208f6952669a4361cedc1f4eb6b87861f11e51", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "CardDesktop04": {"status": "passed-and-root-finalized", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json", "reportSha256": "2a2f4da4c6c529d1a0f7691286156eee4a4589fd46b404bb5b0e0014d4bd3edc", "wrapperSha256": "b656007322fbe73254aaff4ab9271ee172d48158d12d4e08e93125deaa70329b", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "CardDesktop03Interruption": {"status": "external-environment-interruption-no-complete-verdict", "originalReportStatus": "running", "actualCompletedWrapperExists": false, "rootViewedRequired": 27, "rootFinalApproval": false, "rawPngCount": 37, "preservedFiles": 57, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Desktop720/Browser03", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-desktop03-interruption-relocation.json", "oldSupervisor": {"pid": 18262, "startTicks": 1488450, "state": "Z", "parent": 1}, "completionScope": "No pass/fail verdict, completed wrapper or guardAfter is invented; separate from previous public network-gate failures.", "independentRecoveryCheck": {"attempt": "InterruptedDesktopIdle01", "status": "passed-guard-idle-cleanup", "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/InterruptedDesktopIdle01/summary.json", "scope": "Independent actual recovery check; does not complete the interrupted Browser03."}},
+      "GospelPublic01": {"status": "historical-passed-previous-validator-root-finalized", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/PublicMobile844/Public01/report.json", "reportSha256": "ad08fb34bdcbce52a725b6dbcbca3e5606c7d6b72ba3c0067e674207c0fa4186"},
+      "CardPublic01": {"status": "failed-not-root-approved", "passedChecks": 106, "failedChecks": 1, "failure": "Network gate:four actual audio ERR_ABORTED requests", "rawPngCount": 65, "preservedFiles": 95, "actualExitCode": 1, "containmentProvedEmpty": true, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public01", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public01-relocation.json"},
+      "CardPublic02": {"status": "historical-failed-previous-validator-raw-unchanged", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "unexpectedMediaAborts": 2, "failure": "Navigation2 title/lobby net::ERR_ABORTED; HTTP errors0", "allFourPcmWindowsPassed": true, "actualFullReloads": 2, "actualExitCode": 1, "containmentProvedEmpty": true, "requiredRootOriginalsSeen": 51, "rootFinalApproval": false, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public02", "wrapperSummarySha256": "25a5dd0d02f0f3938c53241c3c81a3829ab016b8bd1deee69b60d028baf164d9", "currentDiagnosisOnly": "Both2cases qualify under tested narrow correction; this does not change the original failed result. Six fresh browser runs remain required."},
+      "finalAllScopeGateAndSeal": "passed; see releaseCompletion.finalGate",
+      "CardPublic03": {"status": "historical-failed-and-root-rejected", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "failure": "Navigation2 battle abort firstObservedAfterAbort", "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public03", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public03-relocation.json", "rootRejection": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Root/FantasyCards-PublicMobile844-Public03-rejected.json", "rejectedCheckpoint": "continued-sealed-graphic central pack body not displayed", "ownedFiftyFiveObservation": "Actual four-card grid rendered normally", "finalApproval": false},
+      "CardPublic04": {"status": "historical-failed-network-gate-not-approved", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public04", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public04-relocation.json", "rootViews": "Full sealed-pack art/buttons and actual four-card owned grid observed", "finalApproval": false},
+      "CardPublic05": {"status": "historical-failed-network-gate-not-approved", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public05", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public05-relocation.json", "requiredRootOriginalsSeen": 51, "rootViews": "Full sealed-pack and actual four-card owned grid observed", "finalApproval": false},
+      "rootReviewScopeLimit": "All six current validator04 suites completed actual wrappers and explicit Root reviews of every required current original. Current pack/grid and representative dialogue/temple views are approved. General movement occlusion, portrait/legacy conditions and full original-game parity remain incomplete. Historical failed Public01-05 and externally interrupted Desktop03/Mobile02 remain unchanged and unapproved.",
+      "rootReviewScopeAtPublic03": "Actual four-card owned grid normal; central sealed-pack body screenshot separately rejected and preserved.",
+      "rootReviewScopeAtPublic02": "owned-fifty-five confirmed55owned/27kinds but an initial central grid was blank; recorded as unverified, not full feature approval.",
+      "GospelDesktop06": {
+        "attempt": "Browser06",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 89,
+        "rawPngCount": 68,
+        "requiredRootOriginals": 53,
+        "reportSha256": "2239dd8d925c0cf1e0e1737acf22b5fcf4567c25a74a57c6ebcd87dac7c6c583",
+        "wrapperSha256": "74edf4ff91ccb4350f345df2322ca4c4c4a21f97626afcd3bf964901e72d2051",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "CardMobile03": {
+        "attempt": "Browser03",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 100,
+        "rawPngCount": 64,
+        "requiredRootOriginals": 51,
+        "reportSha256": "ec99688f6fea7c726500cb71d0693d720695913ad8142abf54ccacec7e8338f5",
+        "wrapperSha256": "0d4aead1bbf944ef0e71a1df400a6d0a43ebf0b39acc58096a8e79323086e0c8",
+        "observedOwnedCards": 55,
+        "observedOwnedSpecies": 26,
+        "ownershipScope": "Actual run-specific duplicate pack result; not a global27-species invariant",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "GospelMobile02": {
+        "attempt": "Browser02",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 78,
+        "rawPngCount": 54,
+        "requiredRootOriginals": 39,
+        "reportSha256": "9615a99fab2fbd858650c0c18c89db11fb5fa6926b7a04e7ebc2b78bde94beb9",
+        "wrapperSha256": "7757a184428a7d3adc8c46bf88a2df002ceefa694490b987779af1bf486e2121",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "CardMobile02Interruption": {
+        "status": "external-environment-interruption-no-complete-verdict",
+        "originalReportStatus": "running",
+        "actualCompletedWrapperExists": false,
+        "rootViewedRequired": 44,
+        "rootFinalApproval": false,
+        "rawPngCount": 62,
+        "preservedFiles": 89,
+        "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Mobile844/Browser02",
+        "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-mobile02-interruption-relocation.json",
+        "independentRecoveryCheck": {
+          "attempt": "InterruptedMobileIdle01",
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/InterruptedMobileIdle01/summary.json",
+            "bytes": 11161,
+            "sha256": "b715d49d2f7a3e9abcfb2a3c119eb67cd3cdfcf5cf34cd448db0c583bdfe9663"
+          },
+          "scope": "Separate actual recovery check; no verdict or cleanup is invented for the interrupted browser."
+        }
+      }
     },
     "changes": [
       "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
@@ -90,8 +262,9 @@
         "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
       },
       "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
-      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
-      "public": "unchanged-G2",
+      "Browser": "All six current validator04 suites passed and Root-finalized: CardDesktop04 98/65/52;GospelDesktop06 89/68/53;CardMobile03 100/64/51;GospelMobile02 78/54/39;CardPublic06 108/64/51;GospelPublic02 83/54/39 (checks/PNG/required originals). Full all gate passed. External interruptions retain no complete verdict.",
+      "public": "CanonArt-deployed-six-current-browser-suites-root-approved-full-gate-sealed",
+      "publicAtLocalCompletion": "unchanged-G2",
       "GospelNative02": {
         "passed": 21,
         "failed": 0,
@@ -141,13 +314,13 @@
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
       "GospelPC": {
-        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "status": "historical-pass-previous-validator-after-exact-runtime-restoration",
         "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
         "requiredRootOriginals": 53,
-        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05",
         "wrapperSummary": {
           "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
           "bytes": 12282,
@@ -164,8 +337,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
-        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+        "strictCombinedBrowserGate": "Passed under the previous validator after exact runtime restoration; not acceptance for the corrected current harness.",
+        "portability": "Historical exact report/originals preserved in Checkpoint02 and replay relocation ledger; current corrected-source replay remains required."
       },
       "GospelPC03": {
         "status": "intentionally-stopped-before-final-gates",
@@ -217,13 +390,13 @@
       },
       "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
       "finalGospelPC": {
-        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "status": "historical-pass-previous-validator-after-exact-runtime-restoration",
         "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
         "requiredRootOriginals": 53,
-        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05",
         "wrapperSummary": {
           "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
           "bytes": 12282,
@@ -240,8 +413,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
-        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+        "strictCombinedBrowserGate": "Passed under the previous validator after exact runtime restoration; not acceptance for the corrected current harness.",
+        "portability": "Historical exact report/originals preserved in Checkpoint02 and replay relocation ledger; current corrected-source replay remains required."
       },
       "preDialogueCore309": {
         "passed": 309,
@@ -280,8 +453,15 @@
       }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
-    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
+    "releasePreparation": {"status": "completed-release-milestone-owned-lease-released", "public": "CanonArt-product-unchanged", "pullRequestState": "merged", "productSourceCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4", "validationSourceCommit": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30", "validationCi": "42690129169-completed-success", "publicAcceptance": "all-six-current-browser-lanes-root-approved-full-gate-and-seal-passed", "closureRecord": "releaseCompletion", "finalDocsProofCommitAtWriting": "pending; no future push or CI claimed"},
+    "releasePreparationBeforePublish": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
     "next": [
+      "Preserve the completed CanonArt six-lane release, full gate/seal, Checkpoint03 and actual released-lease Closure01 originals; no browser or seal step remains pending for this milestone.",
+      "Select the next substantive original-rule parity task from verified evidence; original skill598 remains a proposal, not implemented/tested.",
+      "Continue representative graphics work on ordinary movement occlusion and portrait/legacy conditions; current approval is not full original-game restoration.",
+      "Any later runtime work must inspect actual environment/idle/remote ownership and acquire a new unique bounded lease; this completed control record is released, not an active automation."
+    ],
+    "nextAtLocalCompletion": [
       "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
       "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
       "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
@@ -301,7 +481,9 @@
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "completedLeaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "leaseState": "released",
+    "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
     "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
     "userExecutionAuthorization": {
       "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
@@ -319,16 +501,17 @@
       "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
-      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-Web03-product-bindings-valid",
+      "historicalBrowserValidationStatus": "Both local browser profiles passed and were Root-reviewed under the earlier harness; these are preserved historical results, not current validator04 acceptance."
     },
     "finalRuntimePaths": {
       "activation": "Tools/Validation/CanonArt/activate-current.sh",
-      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
+      "controlOverrideAfterActivation": "Completed-run inspection only: CanonPublishResume-2026-11-10 is released. Later execution requires a new unique acquired control/lease; retained final BUILD and old CanonDialogueRelease PROOF paths remain evidence.",
       "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
       "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
       "stageRoot": "Artifacts/CanonArtWebPlaytest"
     },
-    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json",
     "runtimeInterruption": {
       "historical": true,
       "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
@@ -364,8 +547,82 @@
         "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
         "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
       ]
-    }
+    },
+    "releaseCompletion": {
+      "status": "completed-current-release-milestone-not-full-original-parity",
+      "finalGate": {
+        "status": "passed",
+        "check": "all",
+        "seal": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/canon-final-seal.json",
+          "bytes": 61435,
+          "sha256": "fca3fbb37df1ac61a4cde519d6dbfa5d1da622d8aa98f3731a70de6a6e03c938"
+        },
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalSeal01/summary.json",
+          "bytes": 10940,
+          "sha256": "8801b6c09567dbe08048f96832b95e0e6ef10be75977a6a75e906fda285f6a3a"
+        },
+        "exactEnvelopeExtraction": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/final-seal-extraction.json",
+          "bytes": 2385,
+          "sha256": "fdd31d021e535daf5138e9b90f5dc4259bf5efa8d3a453a907945ac5094aab79"
+        }
+      },
+      "checkpoint03": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json",
+          "bytes": 1679743,
+          "sha256": "1df66a8a10fdb26afd871b87e411927c7c7c040f12efef44442924e3ec76f749"
+        },
+        "selectedFiles": 3805,
+        "parts": 11,
+        "joinedBytes": 365475609,
+        "joinedSha256": "dec113102a6655d9d13e841183ebb0e4dd823af824fba4fcd275c48ed1f66cb7",
+        "everyMemberAndPartShaVerified": true,
+        "acquiredLeaseScope": "Historical snapshot at archive creation; current ownership has been normally released."
+      },
+      "closure01": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Closure01/index.json",
+          "bytes": 67330,
+          "sha256": "0b2b4b3bcad55ec443bf09ab7aeb7f9155d3dd01ce7cd5ecff5942aae316670f"
+        },
+        "files": 139,
+        "scope": "Actual completed archive, independent final idle and released-lease/status originals; all copy SHAs verified."
+      },
+      "finalIdle": {
+        "status": "command-completed-all-four-exits-zero-owned-descendants-empty",
+        "summary": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+          "bytes": 11199,
+          "sha256": "583b2f0ddc86b36de2db5d6a4796c609691e595b05b17e537550abee9ea3ca69"
+        }
+      },
+      "leaseRelease": {
+        "state": "released",
+        "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
+        "actualExitCode": 0,
+        "record": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-release.json",
+          "bytes": 800,
+          "sha256": "dd42f4acddcdc68bd165d77a5c213276e8a615450875b38c18096c484b7dc03f"
+        },
+        "statusAfter": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-status-after.json",
+          "bytes": 99,
+          "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+        },
+        "statusAfterMeaning": "Available at the actual command observation only; not an ongoing ownership or scheduler claim."
+      },
+      "documentationAtWriting": {
+        "parentHead": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+        "commitPushAndSubsequentCi": "not-yet-observed-at-writing; product and validator CI are recorded separately"
+      }
+    },
+    "previousPortableCheckpoint01": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
+  "baselineScope": "Historical G2 starting baseline preserved below; the current deployed CanonArt identity and completed final acceptance are recorded in currentDeployment and activeWork.currentRelease.",
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
     "dirtyPathsBeforeSetup": [],
@@ -454,9 +711,15 @@
     "evidenceAvailabilityAtRecovery": "G2 was verified/published at its recorded completion; after offline recovery some /tmp-backed proof originals are missing. Preserve historical result while treating original-proof availability separately."
   },
   "nextRun": {
-    "id": "CanonArt",
-    "status": "all-four-local-lanes-complete-release-source-ci-stage-public-pending",
+    "id": "next-product-parity-and-graphics",
+    "status": "CanonArt-release-complete-next-product-work-not-started",
     "tasks": [
+      "Keep the verified CanonArt public product and all six current Root-approved browser reports, full seal, Checkpoint03 and Closure01 as the completed baseline.",
+      "Select the next meaningful original-rule parity or graphics task from verified evidence; skill598 is proposal-only and full parity is incomplete.",
+      "Continue ordinary movement occlusion and portrait/legacy review without replacing this completed milestone's historical successes, failures or external interruptions.",
+      "Before any later runtime batch, check actual idle/environment/remote state and acquire a new unique bounded owner lease. No recurring automation or live goal-card state is inferred."
+    ],
+    "tasksAtLocalCompletion": [
       "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
       "Commit exact final source, verify its CI, update draftPR2 from actual completed local results, mark ready, normal merge and verify mainCI.",
       "source Tools/Validation/CanonArt/activate-current.sh then override only FIRSTGAME_CONTROL_ROOT to the current CanonPublishResume-2026-11-10 owner; keep finalBUILD and CanonDialogueRelease BuildProof paths.",
@@ -475,7 +738,8 @@
       "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
-    "rule": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
+    "rule": "CanonArt is one completed verified release milestone: six current source-bound browser runs, full gate/seal, preserved evidence and actual owned release are complete. Long-term parity/graphics work remains; no historical failure or external interruption is relabelled as a pass.",
+    "ruleBeforePublication": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
   },
   "rotation": {
     "pattern": [
@@ -497,7 +761,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "CanonPublishResume-2026-11-10-acquired-after-normal-exact-old-owner-release-and-actual-idle",
+    "lockStatus": "CanonPublishResume-2026-11-10-normal-owned-release-completed; available observed once by actual status command",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 3600,
     "defaultGuardLimitSeconds": 2700,
@@ -514,7 +778,9 @@
       "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
       "deadlineUtc": "2026-11-09T22:35:39.484202+00:00",
       "commitSha": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
-      "status": "Owned current release preparation; four local lanes completed. Exact source/CI, stage and public acceptance remain pending."
+      "status": "Completed six current browser runs and Root reviews, full gate/seal, Checkpoint03, final independent idle and normal own-lease release; Closure01 preserved. This is a completed milestone, not a current background execution.",
+      "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
+      "closureRecord": "releaseCompletion"
     },
     "historicalBatchAtReport": {
       "id": "C1-resume-2026-11-04",
@@ -525,6 +791,13 @@
       "status": "Work and portable checkpoint complete; normal owned CAS release is the final boundary after source preservation. Live remote ref is authoritative."
     },
     "lastCompletedBatch": {
+      "id": "CanonPublishResume-2026-11-10",
+      "status": "release-verified-and-normal-owned-CAS-released",
+      "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
+      "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+      "closureRecord": "releaseCompletion"
+    },
+    "previousCompletedBatch": {
       "id": "CanonDialogueRelease-2026-11-09",
       "status": "normal-owned-CAS-release-after-actual-idle-and-exact-owner-verification",
       "releasedUtc": "2026-11-09T16:35:13.335254+00:00",
@@ -540,12 +813,15 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
-    "liveLeaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00"
+    "liveLeaseRecord": null,
+    "liveLeaseDeadlineUtc": null,
+    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+    "statusObservationScope": "Actual available response is a preserved point observation, not a perpetual availability claim."
   },
   "environment": {
     "managedCloudObservedRunning": true,
     "currentConnectionStatus": "connected-after-reconnect",
+    "latestBrowserExecutionInterruption": {"scope": "External environment starting/ready transition interrupted CardDesktopBrowser03; not a product/network failure", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-desktop03-interruption-relocation.json", "originalReportStatus": "running", "actualCompletedWrapperExists": false, "independentIdleCheck": "InterruptedDesktopIdle01 passed ownership/idle/cleanup separately; not a Browser03 completion", "replacement": "CardDesktopBrowser04 actual passed and Root-finalized"},
     "currentRecovery": "Retained workspace originals verified; exact15370 final Web runtime files restored to original /tmp paths. See CanonPublishResume runtime-restoration.json. Historical disconnect below is preserved as a dated event.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
@@ -686,8 +962,17 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
-  "knownIssuesScope": "The following retained issues describe historical G2/C1 scopes and the unchanged public G2. Current CanonArt local results are recorded in activeWork.currentLocalValidation; historical unverified wording must not override those completed checks.",
+  "knownIssuesScope": "Current deployed CanonArt limitations are below. Historical G2/C1 issues are preserved separately and must not override completed current checks.",
   "knownIssues": [
+    "Historical CardPublic01-05 failures remain unchanged; diagnosis7of7 does not reclassify raw failures. All six current validator04 suites are approved and final all gate/seal passed; preserve their exact originals.",
+    "Current approved CardPublic06 and CardDesktop04 include required pack/grid originals. Earlier blank first captures did not establish a persistent storage product bug. Approval covers the tested current checkpoints, not every untested feature or full parity.",
+    "CardDesktopBrowser03 was externally interrupted, with57files37PNG and27required Root views retained but no completed wrapper/pass/fail/guardAfter. Independent InterruptedDesktopIdle01 recovery succeeded; replacementBrowser04 passed. This interruption is separate from historical public network-gate failures.",
+    "Ordinary movement occlusion and portrait/legacy conditions remain separate visual/compatibility work beyond representative approved checkpoints.",
+    "Original Fantasy Masters parity is partial:2649 supported definitions versus15350 original images, with multiplayer disabled for a future update.",
+    "Long-term development continues; the original skill598 proposal remains unimplemented/untested. Last automation query was0 and no direct current goal-card status inspection is claimed.",
+    "CardMobileBrowser02 was externally interrupted with89files/62PNG/44required Root views and no complete wrapper/verdict; independent recovery check and later successful Browser03 remain separate."
+  ],
+  "historicalKnownIssues": [
     "HistoricalG2Root/audit/build witness are still missing aftertmp loss, while current oldsite bytes and freshGospel16 have been recovered separately. Web/public recovery is unfinished.",
     "Fresh Native Bible19 capture opens afteroneframe and is nearly transparent; it is not a legible completed-book proof. SettledPC completed19book and mandatoryPC/touch/public book/Continue originals remain required.",
     "C1 grade clipping is resolved in actualNative04 844x390 original and exact8 passed; PC/touch Web viewports and release/public recovery are still unverified.",
@@ -717,7 +1002,7 @@
     }
   },
   "continuationPolicy": {
-    "status": "current-turn-CanonArt-development-active-recurring-scheduler-not-configured",
+    "status": "CanonArt-milestone-complete-long-term-work-remains-recurring-scheduler-not-configured",
     "smallBatchIsNotGoalCompletion": true,
     "continueAfterG1": "G1 and G2 are sealed; continue C1, then G3 and substantive story work. Small batches or a fixed execution count never mean the whole goal is complete.",
     "limits": "Preserve actual usage, command and remote-lease limits; no automatic extension or lock stealing. No recurring schedule or goal creation has been configured."
@@ -1668,6 +1953,120 @@
     }
   },
   "currentDeployment": {
+    "status": "CanonArt-deployed-six-current-browser-suites-root-approved-full-gate-sealed-owned-lease-released",
+    "sourceCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4",
+    "deployedCommit": "3713229641dd4e4ea6cb66372dd4f8569d2ad0f7",
+    "manifest": {"file": "Artifacts/CanonArtWebPlaytest/build-manifest.json", "sha256": "305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1"},
+    "url": "https://ka8877.github.io/firstgame/",
+    "gameRevisions": {"FantasyCards": "fm-canon-2026-11-09", "PathOfDawn": "gospel-canon-2026-11-09"},
+    "siteBytesIncludingManifest": 978000227,
+    "fileCountIncludingManifest": 15416,
+    "stageRoot": "Artifacts/CanonArtWebPlaytest",
+    "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
+    "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+    "pages": {"runId": 42670765284, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/pages-deployment.json"},
+    "publicPortal": {"attempt": "PublicPortal02", "status": "passed", "freshGets": 15416, "rootOriginals": 2, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicPortal/report.json", "sha256": "7c8f28cd78d9e387a4738f15845e52a2276cc4afa4489176f9cf5ddd3bd2d9af"},
+    "validationSourceCommit": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "validationCi": {"runId": 42690129169, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json"},
+    "validator01History": {"sourceCommit": "c949d283e4ed16fefeb296b95b6d76cafa859c31", "ciRunId": 42681117516, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-ci.json"},
+    "validator02History": {"sourceCommit": "0c6b990d60240f696d87cb0c0f9a24f683c2bcab", "ciRunId": 42684473945, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-final-ci.json"},
+    "validator03History": {"sourceCommit": "4133958afdfb3cdf5ace63c8cee819fcb0b84907", "ciRunId": 42688041071, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-third-ci.json"},
+    "GospelPublic": {"attempt": "Public02", "status": "passed-and-root-finalized", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "reportSha256": "314b473601f100145ea53985231e729ae89c797c2e73a3cc00f6d73f3e916159", "wrapperSha256": "40e44abb03d4e73cda13dc1925208f6952669a4361cedc1f4eb6b87861f11e51"},
+    "CardPublic": {"attempt": "Public06", "status": "passed-and-root-finalized", "passedChecks": 108, "rawPngCount": 64, "requiredRootOriginals": 51, "reportSha256": "68787a8fed7815e207dcc53bf6d03b39bfc9390c9b5ae0efdd802c2141a54c3a", "wrapperSha256": "f2c420742ca6a1f246281730572344c825566223d71658c76a6f65774e7cd8fd"},
+    "historicalGospelPublic01": {"status": "passed-under-previous-validator", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "reportSha256": "ad08fb34bdcbce52a725b6dbcbca3e5606c7d6b72ba3c0067e674207c0fa4186"},
+    "historicalCardPublic02": {"status": "failed-raw-unchanged", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "unexpectedMediaAborts": 2, "httpErrors": 0, "allFourPcmWindowsPassed": true, "actualFullReloads": 2, "actualExitCode": 1, "containmentProvedEmpty": true, "requiredRootOriginalsSeen": 51, "rootFinalApproval": false, "wrapperSummarySha256": "25a5dd0d02f0f3938c53241c3c81a3829ab016b8bd1deee69b60d028baf164d9", "priorPublic01": "Preserved failed network gate,106passed/1failed; no final visual approval."},
+    "historicalCardPublic03": {"status": "failed-and-root-rejected", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "failure": "NAV2 battle firstObservedAfterAbort", "rawPngCount": 65, "preservedFiles": 95, "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public03-relocation.json", "rootRejection": "continued-sealed-graphic central pack body not displayed", "ownedGrid": "Actual four cards normally visible"},
+    "historicalCardPublic04And05": "Both107checks/106passed/1networkfailure; each95files65PNG preserved with relocation ledgers. Full pack/grid observed and Public05all51seen, but neither approved. See activeWork.currentRelease.CardPublic04/CardPublic05.",
+    "currentSixRunAcceptance": {
+      "status": "six-of-six-current-validator04-lanes-passed-root-finalized",
+      "completed": 6,
+      "required": 6,
+      "CardPublic06": "passed-root-finalized",
+      "GospelPublic02": "passed-root-finalized",
+      "CardDesktop04": "passed-root-finalized",
+      "GospelDesktop06": "passed-root-finalized",
+      "CardMobile03": "passed-root-finalized",
+      "GospelMobile02": "passed-root-finalized",
+      "interruptedDesktop03": "Historical external interruption, no complete verdict",
+      "interruptedMobile02": "Historical external interruption, no complete verdict"
+    },
+    "redeploymentRequired": false,
+    "finalAllScopeGateAndSeal": "passed; activeWork.releaseCompletion.finalGate",
+    "scope": "Product2ebe, gh-pages3713, manifest305a and complete15416-file HTTPS delivery remain the deployed identity. All six current validator04 suites and explicit Root original reviews passed, followed by the full all gate, Checkpoint03 and actual released-lease Closure01. Full original parity and general movement/portrait/legacy quality remain incomplete.",
+    "releaseCompletion": {
+      "status": "completed-current-release-milestone-not-full-original-parity",
+      "finalGate": {
+        "status": "passed",
+        "check": "all",
+        "seal": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/canon-final-seal.json",
+          "bytes": 61435,
+          "sha256": "fca3fbb37df1ac61a4cde519d6dbfa5d1da622d8aa98f3731a70de6a6e03c938"
+        },
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalSeal01/summary.json",
+          "bytes": 10940,
+          "sha256": "8801b6c09567dbe08048f96832b95e0e6ef10be75977a6a75e906fda285f6a3a"
+        },
+        "exactEnvelopeExtraction": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/final-seal-extraction.json",
+          "bytes": 2385,
+          "sha256": "fdd31d021e535daf5138e9b90f5dc4259bf5efa8d3a453a907945ac5094aab79"
+        }
+      },
+      "checkpoint03": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json",
+          "bytes": 1679743,
+          "sha256": "1df66a8a10fdb26afd871b87e411927c7c7c040f12efef44442924e3ec76f749"
+        },
+        "selectedFiles": 3805,
+        "parts": 11,
+        "joinedBytes": 365475609,
+        "joinedSha256": "dec113102a6655d9d13e841183ebb0e4dd823af824fba4fcd275c48ed1f66cb7",
+        "everyMemberAndPartShaVerified": true,
+        "acquiredLeaseScope": "Historical snapshot at archive creation; current ownership has been normally released."
+      },
+      "closure01": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Closure01/index.json",
+          "bytes": 67330,
+          "sha256": "0b2b4b3bcad55ec443bf09ab7aeb7f9155d3dd01ce7cd5ecff5942aae316670f"
+        },
+        "files": 139,
+        "scope": "Actual completed archive, independent final idle and released-lease/status originals; all copy SHAs verified."
+      },
+      "finalIdle": {
+        "status": "command-completed-all-four-exits-zero-owned-descendants-empty",
+        "summary": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+          "bytes": 11199,
+          "sha256": "583b2f0ddc86b36de2db5d6a4796c609691e595b05b17e537550abee9ea3ca69"
+        }
+      },
+      "leaseRelease": {
+        "state": "released",
+        "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
+        "actualExitCode": 0,
+        "record": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-release.json",
+          "bytes": 800,
+          "sha256": "dd42f4acddcdc68bd165d77a5c213276e8a615450875b38c18096c484b7dc03f"
+        },
+        "statusAfter": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-status-after.json",
+          "bytes": 99,
+          "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+        },
+        "statusAfterMeaning": "Available at the actual command observation only; not an ongoing ownership or scheduler claim."
+      },
+      "documentationAtWriting": {
+        "parentHead": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+        "commitPushAndSubsequentCi": "not-yet-observed-at-writing; product and validator CI are recorded separately"
+      }
+    }
+  },
+  "previousG2Deployment": {
     "status": "last-release-verified-public-reference-local-proof-now-incomplete",
     "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
     "deployedCommit": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
@@ -1801,9 +2200,11 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
-    "branch": "codex/canon-art-2026-11-09",
+    "status": "CanonArt-release-milestone-verified-six-of-six-sealed-checkpointed-owned-lease-released-long-term-work-remains",
+    "branch": "main",
+    "implementationBranch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
+    "executionState": "completed-owned-lease-released",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
@@ -1811,11 +2212,23 @@
       "PathOfDawn": "gospel-canon-2026-11-09"
     },
     "currentLocalValidation": {
-      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
-      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
-      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
-      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
-      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "status": "all-four-current-local-lanes-passed-and-root-finalized",
+      "GospelDesktop720": {"attempt": "Browser06", "status": "passed-and-root-finalized", "passedChecks": 89, "rawPngCount": 68, "requiredRootOriginals": 53, "reportSha256": "2239dd8d925c0cf1e0e1737acf22b5fcf4567c25a74a57c6ebcd87dac7c6c583", "wrapperSha256": "74edf4ff91ccb4350f345df2322ca4c4c4a21f97626afcd3bf964901e72d2051"},
+      "CardDesktop720": {"attempt": "Browser04", "status": "passed-and-root-finalized", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json", "reportSha256": "2a2f4da4c6c529d1a0f7691286156eee4a4589fd46b404bb5b0e0014d4bd3edc", "wrapperSha256": "b656007322fbe73254aaff4ab9271ee172d48158d12d4e08e93125deaa70329b", "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "GospelMobile844": {"attempt": "Browser02", "status": "passed-and-root-finalized", "passedChecks": 78, "rawPngCount": 54, "requiredRootOriginals": 39, "reportSha256": "9615a99fab2fbd858650c0c18c89db11fb5fa6926b7a04e7ebc2b78bde94beb9", "wrapperSha256": "7757a184428a7d3adc8c46bf88a2df002ceefa694490b987779af1bf486e2121"},
+      "CardMobile844": {"attempt": "Browser03", "status": "passed-and-root-finalized", "passedChecks": 100, "rawPngCount": 64, "requiredRootOriginals": 51, "reportSha256": "ec99688f6fea7c726500cb71d0693d720695913ad8142abf54ccacec7e8338f5", "wrapperSha256": "0d4aead1bbf944ef0e71a1df400a6d0a43ebf0b39acc58096a8e79323086e0c8", "observedOwnedCards": 55, "observedOwnedSpecies": 26, "ownershipScope": "Actual run-specific duplicate pack result; not a global27-species invariant"},
+      "allCurrentWrappersPassed": true,
+      "allGuardAfterExitCodes": 0,
+      "allContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "previousResults": "historicalLocalValidationBeforeValidatorCorrection; genuine completed old-source evidence, not current corrected-harness passes"
+    },
+    "historicalLocalValidationBeforeValidatorCorrection": {
+      "scope": "Genuine completed previous-validator local runs and Root reviews, preserved byte-exact in BrowserHistory. These are historical successes, not passes for the corrected current harness.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGateAtOriginalExecution": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGateAtOriginalExecution": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Desktop720/Browser02/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Mobile844/Browser01/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Mobile844/Browser01/report.json"},
       "everyWrapperPassed": true,
       "everyGuardAfterExitCode": 0,
       "everyContainmentProvedEmpty": true,
@@ -1832,8 +2245,166 @@
       "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
       "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
       "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
-      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "portalHeroes": "Exact current Root-approved PC originals used by the deployed stage; PublicPortal02 desktop/mobile original Root review and strict portal gate passed.",
       "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
+    },
+    "validatorCorrection": {
+      "revision": 4,
+      "scope": "Validation-only strict media-range evidence correction; existing touchEnd two-frame capture retained. Product/runtime/stage/Portal unchanged.",
+      "sourceCommit": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+      "ci": {"runId": 42690129169, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json"},
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources04/index.json",
+      "helperSha256": "5859bc66f244b402f76236bfcbd39726cd4e1250d03f42a3811f4a30439c759e",
+      "unitTestSha256": "01374484b9f07aff6cedd948ad07e8829777b76c3c9249a48ace8e4db30e5f7d",
+      "smokeSha256": "7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb",
+      "evidenceScope": "Narrow observed range forms, including pending-to-selected same-source advancement and initial already-decoded paused never-played preload. Exact loadeddata/no-ready-regression, complete delivered bytes/GET/HTTP206 and finite isolated PCM remain required; absent before evidence remains explicit None/null.",
+      "newUnitTests": {"passed": 41, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit04/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression04/summary.json"},
+      "diagnosisOnly": {"qualifies": 7, "cases": 7, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis04.json", "rawFailuresUnchanged": true, "notRootApproval": true},
+      "productBindings": "Existing Core311/NativeCard8/Gospel21/Web source/runtime remain valid; no product version or redeployment change.",
+      "requiredFreshBrowserRuns": 6,
+      "completedFreshBrowserRuns": 6,
+      "currentPlan": {"CardPublic06": "passed-root-finalized", "GospelPublic02": "passed-root-finalized", "CardDesktop04": "passed-root-finalized", "GospelDesktop06": "passed-root-finalized", "CardMobile03": "passed-root-finalized", "GospelMobile02": "passed-root-finalized"},
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "passed; see releaseCompletion.finalGate"
+    },
+    "validatorCorrection03History": {
+      "sourceCommit": "4133958afdfb3cdf5ace63c8cee819fcb0b84907",
+      "ci": {"runId": 42688041071, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-third-ci.json"},
+      "scope": "Previous validation-only correction; preserved separately from current revision04. Not a new deployed product version."
+    },
+    "validatorCorrection02History": {
+      "revision": 2,
+      "scope": "Validation-only pre-observation-abort and actual post-touch render-frame corrections; product/runtime/stage/approved portal unchanged.",
+      "sourceCommit": "0c6b990d60240f696d87cb0c0f9a24f683c2bcab",
+      "ci": {"runId": 42684473945, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-final-ci.json"},
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources02/index.json",
+      "helperSha256": "9ac200102eaa67ceb98ef425945202dc78637d007080e6801162715b0b138a26",
+      "smokeSha256": "7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb",
+      "newStrictBranch": "No observations at all before the actual abort; exact never-played/zero/None element fields, actual decode, complete verified GET/HTTP206 and finite isolated audible PCM remain mandatory. Missing before evidence is explicitly None/null, never invented.",
+      "mobileCapture": "After actual touchEnd, observe two real requestAnimationFrame callbacks before capturing to avoid a pre-paint partial frame; game code unchanged.",
+      "newUnitTests": {"passed": 31, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit02/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression02/summary.json"},
+      "diagnosisOnly": {"qualifies": 3, "cases": 3, "inputs": "Two oldPublic02 cases plus one Public03 case", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis02.json", "rawFailuresAndRootRejectionUnchanged": true},
+      "productBindings": "Existing Core311/NativeCard8/Gospel21/Web source/runtime bindings remain valid; this is not a product revision or redeployment.",
+      "requiredFreshBrowserRuns": 6,
+      "completedFreshBrowserRuns": 0,
+      "currentPlan": {"CardPublic04": "running-not-yet-passed", "GospelPublic02": "pending", "CardDesktop03": "pending", "GospelDesktop06": "pending", "CardMobile02": "pending", "GospelMobile02": "pending"},
+      "previousReplayCheckpointScope": "Release/current-replay-checkpoint.json still records validator01/c949/Public03; use this explicit validator02 plan for current work.",
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "pending"
+    },
+    "validatorCorrection01History": {
+      "scope": "Validation-only HTTPS reload-before-unlock classification and smoke integration/unit tests/CI step; product source, runtime, stage and portal bytes unchanged.",
+      "frozenSourceIndex": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ValidatorCorrectionSources/index.json",
+      "smokeSha256": "18dcd92ee8b83d23c24aade1851e3c85a09f9acd1cffe010aace5a970f452de6",
+      "helperSha256": "51688934a39f3a5a78025c2263fff4ac6a3023a61b653e087afc46f307b398ca",
+      "requiredEvidence": "Complete current delivered-file set with exact SHA/HTTP200; same navigation1/2 and at least2 HTTP206s; actual abort bounded by before/after1000ms observations, same element decode within2000ms; finite isolated audible PCM and later selected playback.",
+      "newUnitTests": {"passed": 21, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/PublicRangeUnit01/summary.json"},
+      "oldMediaRegressions": {"passed": 20, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/LocalMediaRegression01/summary.json"},
+      "actualOldPublic02Diagnosis": {"qualifies": 2, "cases": 2, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis.json", "originalFailedStatusUnchanged": true},
+      "originalRelocationLedger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-source-replay-relocations.json",
+      "originalHistoryScope": "Five successful previous-source browser suites and failed CardPublic02 retained byte-exact under BrowserHistory/GAME/PROFILE/ATTEMPT; no old raw pass/failure is relabelled.",
+      "newValidationCommit": "c949d283e4ed16fefeb296b95b6d76cafa859c31",
+      "newValidationCommitCi": {"runId": 42681117516, "status": "completed", "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-ci.json"},
+      "currentBuildBindingRecheck": {"status": "passed", "attempt": "BuildsAfterValidatorCorrection01", "actualCommandExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/BuildsAfterValidatorCorrection01/summary.json", "bytes": 11406, "sha256": "c7d7eec3c4fa60297ae6146dd88f6dfe4d15adcfe5e060276ce57dc2beb6b2df", "productCoreNativeWebFingerprintsUnchanged": true},
+      "requiredNewBrowserReplays": 6,
+      "completedNewBrowserReplays": 0,
+      "plannedOrder": ["CardPublic03-running", "GospelPublic02-pending", "four-new-local-Desktop720-and-Mobile844-runs-pending"],
+      "currentReplayCheckpoint": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/current-replay-checkpoint.json",
+      "redeploymentRequired": false,
+      "finalAllScopeGateAndSeal": "pending"
+    },
+    "currentRelease": {
+      "completionRecord": "releaseCompletion; completed milestone, long-term development remains",
+      "sourceCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4",
+      "candidateCi": {"sourceCommit": "f4a440c8289dfcaae7c954a52f4606983c43424f", "runId": 42669109399, "runNumber": 114, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/candidate-ci.json"},
+      "mainCi": {"runId": 42669690355, "conclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/main-ci.json"},
+      "pullRequest": {"number": 2, "state": "merged", "mergeCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4"},
+      "stage": {"status": "passed", "bytesIncludingManifest": 978000227, "filesIncludingManifest": 15416, "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/stage-identity.json"},
+      "publication": {"status": "deployed", "ghPagesCommit": "3713229641dd4e4ea6cb66372dd4f8569d2ad0f7", "manifestSha256": "305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1", "pagesRunId": 42670765284, "pagesConclusion": "success", "record": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/pages-deployment.json"},
+      "PublicPortal02": {"status": "passed", "freshFullGets": 15416, "allHttp200AndShaMatched": true, "rootOriginals": 2, "strictPortalGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicPortal/report.json", "reportSha256": "7c8f28cd78d9e387a4738f15845e52a2276cc4afa4489176f9cf5ddd3bd2d9af"},
+      "PublicPortal01": {"status": "failed-two-image-HTTP503-preserved", "supersededByIndependentFullRun": "PublicPortal02"},
+      "currentBrowserAcceptance": {"status": "six-of-six-current-validator04-lanes-passed-root-finalized", "completed": 6, "required": 6, "CardPublic06": "passed-root-finalized", "GospelPublic02": "passed-root-finalized", "CardDesktop04": "passed-root-finalized", "GospelDesktop06": "passed-root-finalized", "CardMobile03": "passed-root-finalized", "GospelMobile02": "passed-root-finalized"},
+      "CardPublic06": {"status": "passed-and-root-finalized", "passedChecks": 108, "rawPngCount": 64, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicMobile844/FantasyCards/report.json", "reportSha256": "68787a8fed7815e207dcc53bf6d03b39bfc9390c9b5ae0efdd802c2141a54c3a", "wrapperSha256": "f2c420742ca6a1f246281730572344c825566223d71658c76a6f65774e7cd8fd", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "GospelPublic02": {"status": "passed-and-root-finalized", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/PublicMobile844/PathOfDawn/report.json", "reportSha256": "314b473601f100145ea53985231e729ae89c797c2e73a3cc00f6d73f3e916159", "wrapperSha256": "40e44abb03d4e73cda13dc1925208f6952669a4361cedc1f4eb6b87861f11e51", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "CardDesktop04": {"status": "passed-and-root-finalized", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json", "reportSha256": "2a2f4da4c6c529d1a0f7691286156eee4a4589fd46b404bb5b0e0014d4bd3edc", "wrapperSha256": "b656007322fbe73254aaff4ab9271ee172d48158d12d4e08e93125deaa70329b", "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2},
+      "CardDesktop03Interruption": {"status": "external-environment-interruption-no-complete-verdict", "originalReportStatus": "running", "actualCompletedWrapperExists": false, "rootViewedRequired": 27, "rootFinalApproval": false, "rawPngCount": 37, "preservedFiles": 57, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Desktop720/Browser03", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-desktop03-interruption-relocation.json", "oldSupervisor": {"pid": 18262, "startTicks": 1488450, "state": "Z", "parent": 1}, "completionScope": "No pass/fail verdict, completed wrapper or guardAfter is invented; separate from previous public network-gate failures.", "independentRecoveryCheck": {"attempt": "InterruptedDesktopIdle01", "status": "passed-guard-idle-cleanup", "summary": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/InterruptedDesktopIdle01/summary.json", "scope": "Independent actual recovery check; does not complete the interrupted Browser03."}},
+      "GospelPublic01": {"status": "historical-passed-previous-validator-root-finalized", "passedChecks": 83, "rawPngCount": 54, "requiredRootOriginals": 39, "actualExitCode": 0, "guardAfterExitCode": 0, "containmentProvedEmpty": true, "actualFullReloads": 2, "report": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/PublicMobile844/Public01/report.json", "reportSha256": "ad08fb34bdcbce52a725b6dbcbca3e5606c7d6b72ba3c0067e674207c0fa4186"},
+      "CardPublic01": {"status": "failed-not-root-approved", "passedChecks": 106, "failedChecks": 1, "failure": "Network gate:four actual audio ERR_ABORTED requests", "rawPngCount": 65, "preservedFiles": 95, "actualExitCode": 1, "containmentProvedEmpty": true, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public01", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public01-relocation.json"},
+      "CardPublic02": {"status": "historical-failed-previous-validator-raw-unchanged", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "unexpectedMediaAborts": 2, "failure": "Navigation2 title/lobby net::ERR_ABORTED; HTTP errors0", "allFourPcmWindowsPassed": true, "actualFullReloads": 2, "actualExitCode": 1, "containmentProvedEmpty": true, "requiredRootOriginalsSeen": 51, "rootFinalApproval": false, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public02", "wrapperSummarySha256": "25a5dd0d02f0f3938c53241c3c81a3829ab016b8bd1deee69b60d028baf164d9", "currentDiagnosisOnly": "Both2cases qualify under tested narrow correction; this does not change the original failed result. Six fresh browser runs remain required."},
+      "finalAllScopeGateAndSeal": "passed; see releaseCompletion.finalGate",
+      "CardPublic03": {"status": "historical-failed-and-root-rejected", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "failure": "Navigation2 battle abort firstObservedAfterAbort", "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public03", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public03-relocation.json", "rootRejection": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Root/FantasyCards-PublicMobile844-Public03-rejected.json", "rejectedCheckpoint": "continued-sealed-graphic central pack body not displayed", "ownedFiftyFiveObservation": "Actual four-card grid rendered normally", "finalApproval": false},
+      "CardPublic04": {"status": "historical-failed-network-gate-not-approved", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public04", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public04-relocation.json", "rootViews": "Full sealed-pack art/buttons and actual four-card owned grid observed", "finalApproval": false},
+      "CardPublic05": {"status": "historical-failed-network-gate-not-approved", "totalChecks": 107, "passedChecks": 106, "failedChecks": 1, "rawPngCount": 65, "preservedFiles": 95, "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/PublicMobile844/Public05", "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public05-relocation.json", "requiredRootOriginalsSeen": 51, "rootViews": "Full sealed-pack and actual four-card owned grid observed", "finalApproval": false},
+      "rootReviewScopeLimit": "All six current validator04 suites completed actual wrappers and explicit Root reviews of every required current original. Current pack/grid and representative dialogue/temple views are approved. General movement occlusion, portrait/legacy conditions and full original-game parity remain incomplete. Historical failed Public01-05 and externally interrupted Desktop03/Mobile02 remain unchanged and unapproved.",
+      "rootReviewScopeAtPublic03": "Actual four-card owned grid normal; central sealed-pack body screenshot separately rejected and preserved.",
+      "rootReviewScopeAtPublic02": "owned-fifty-five confirmed55owned/27kinds but an initial central grid was blank; recorded as unverified, not full feature approval.",
+      "GospelDesktop06": {
+        "attempt": "Browser06",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 89,
+        "rawPngCount": 68,
+        "requiredRootOriginals": 53,
+        "reportSha256": "2239dd8d925c0cf1e0e1737acf22b5fcf4567c25a74a57c6ebcd87dac7c6c583",
+        "wrapperSha256": "74edf4ff91ccb4350f345df2322ca4c4c4a21f97626afcd3bf964901e72d2051",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "CardMobile03": {
+        "attempt": "Browser03",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 100,
+        "rawPngCount": 64,
+        "requiredRootOriginals": 51,
+        "reportSha256": "ec99688f6fea7c726500cb71d0693d720695913ad8142abf54ccacec7e8338f5",
+        "wrapperSha256": "0d4aead1bbf944ef0e71a1df400a6d0a43ebf0b39acc58096a8e79323086e0c8",
+        "observedOwnedCards": 55,
+        "observedOwnedSpecies": 26,
+        "ownershipScope": "Actual run-specific duplicate pack result; not a global27-species invariant",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "GospelMobile02": {
+        "attempt": "Browser02",
+        "status": "passed-and-root-finalized",
+        "passedChecks": 78,
+        "rawPngCount": 54,
+        "requiredRootOriginals": 39,
+        "reportSha256": "9615a99fab2fbd858650c0c18c89db11fb5fa6926b7a04e7ebc2b78bde94beb9",
+        "wrapperSha256": "7757a184428a7d3adc8c46bf88a2df002ceefa694490b987779af1bf486e2121",
+        "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json",
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "actualFullReloads": 2
+      },
+      "CardMobile02Interruption": {
+        "status": "external-environment-interruption-no-complete-verdict",
+        "originalReportStatus": "running",
+        "actualCompletedWrapperExists": false,
+        "rootViewedRequired": 44,
+        "rootFinalApproval": false,
+        "rawPngCount": 62,
+        "preservedFiles": 89,
+        "retained": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/FantasyCards/Mobile844/Browser02",
+        "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-mobile02-interruption-relocation.json",
+        "independentRecoveryCheck": {
+          "attempt": "InterruptedMobileIdle01",
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/InterruptedMobileIdle01/summary.json",
+            "bytes": 11161,
+            "sha256": "b715d49d2f7a3e9abcfb2a3c119eb67cd3cdfcf5cf34cd448db0c583bdfe9663"
+          },
+          "scope": "Separate actual recovery check; no verdict or cleanup is invented for the interrupted browser."
+        }
+      }
     },
     "changes": [
       "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
@@ -1878,8 +2449,9 @@
         "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
       },
       "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
-      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
-      "public": "unchanged-G2",
+      "Browser": "All six current validator04 suites passed and Root-finalized: CardDesktop04 98/65/52;GospelDesktop06 89/68/53;CardMobile03 100/64/51;GospelMobile02 78/54/39;CardPublic06 108/64/51;GospelPublic02 83/54/39 (checks/PNG/required originals). Full all gate passed. External interruptions retain no complete verdict.",
+      "public": "CanonArt-deployed-six-current-browser-suites-root-approved-full-gate-sealed",
+      "publicAtLocalCompletion": "unchanged-G2",
       "GospelNative02": {
         "passed": 21,
         "failed": 0,
@@ -1929,13 +2501,13 @@
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
       "GospelPC": {
-        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "status": "historical-pass-previous-validator-after-exact-runtime-restoration",
         "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
         "requiredRootOriginals": 53,
-        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05",
         "wrapperSummary": {
           "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
           "bytes": 12282,
@@ -1952,8 +2524,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
-        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+        "strictCombinedBrowserGate": "Passed under the previous validator after exact runtime restoration; not acceptance for the corrected current harness.",
+        "portability": "Historical exact report/originals preserved in Checkpoint02 and replay relocation ledger; current corrected-source replay remains required."
       },
       "GospelPC03": {
         "status": "intentionally-stopped-before-final-gates",
@@ -2005,13 +2577,13 @@
       },
       "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
       "finalGospelPC": {
-        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "status": "historical-pass-previous-validator-after-exact-runtime-restoration",
         "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
         "passedChecks": 90,
         "failedChecks": 0,
         "rawPngCount": 69,
         "requiredRootOriginals": 53,
-        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser05",
         "wrapperSummary": {
           "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
           "bytes": 12282,
@@ -2028,8 +2600,8 @@
           "equipment/manualsave/secondfullreload",
           "current narration/PCM and source/runtime controls"
         ],
-        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
-        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+        "strictCombinedBrowserGate": "Passed under the previous validator after exact runtime restoration; not acceptance for the corrected current harness.",
+        "portability": "Historical exact report/originals preserved in Checkpoint02 and replay relocation ledger; current corrected-source replay remains required."
       },
       "preDialogueCore309": {
         "passed": 309,
@@ -2068,8 +2640,15 @@
       }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
-    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
+    "releasePreparation": {"status": "completed-release-milestone-owned-lease-released", "public": "CanonArt-product-unchanged", "pullRequestState": "merged", "productSourceCommit": "2ebe776c6d37bc6563fa25004536ca2983ce65d4", "validationSourceCommit": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30", "validationCi": "42690129169-completed-success", "publicAcceptance": "all-six-current-browser-lanes-root-approved-full-gate-and-seal-passed", "closureRecord": "releaseCompletion", "finalDocsProofCommitAtWriting": "pending; no future push or CI claimed"},
+    "releasePreparationBeforePublish": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
     "next": [
+      "Preserve the completed CanonArt six-lane release, full gate/seal, Checkpoint03 and actual released-lease Closure01 originals; no browser or seal step remains pending for this milestone.",
+      "Select the next substantive original-rule parity task from verified evidence; original skill598 remains a proposal, not implemented/tested.",
+      "Continue representative graphics work on ordinary movement occlusion and portrait/legacy conditions; current approval is not full original-game restoration.",
+      "Any later runtime work must inspect actual environment/idle/remote ownership and acquire a new unique bounded lease; this completed control record is released, not an active automation."
+    ],
+    "nextAtLocalCompletion": [
       "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
       "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
       "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
@@ -2089,7 +2668,9 @@
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "completedLeaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "leaseState": "released",
+    "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
     "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
     "userExecutionAuthorization": {
       "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
@@ -2107,16 +2688,17 @@
       "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
-      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-Web03-product-bindings-valid",
+      "historicalBrowserValidationStatus": "Both local browser profiles passed and were Root-reviewed under the earlier harness; these are preserved historical results, not current validator04 acceptance."
     },
     "finalRuntimePaths": {
       "activation": "Tools/Validation/CanonArt/activate-current.sh",
-      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
+      "controlOverrideAfterActivation": "Completed-run inspection only: CanonPublishResume-2026-11-10 is released. Later execution requires a new unique acquired control/lease; retained final BUILD and old CanonDialogueRelease PROOF paths remain evidence.",
       "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
       "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
       "stageRoot": "Artifacts/CanonArtWebPlaytest"
     },
-    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json",
     "runtimeInterruption": {
       "historical": true,
       "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
@@ -2152,10 +2734,83 @@
         "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
         "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
       ]
-    }
+    },
+    "releaseCompletion": {
+      "status": "completed-current-release-milestone-not-full-original-parity",
+      "finalGate": {
+        "status": "passed",
+        "check": "all",
+        "seal": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/canon-final-seal.json",
+          "bytes": 61435,
+          "sha256": "fca3fbb37df1ac61a4cde519d6dbfa5d1da622d8aa98f3731a70de6a6e03c938"
+        },
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalSeal01/summary.json",
+          "bytes": 10940,
+          "sha256": "8801b6c09567dbe08048f96832b95e0e6ef10be75977a6a75e906fda285f6a3a"
+        },
+        "exactEnvelopeExtraction": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/final-seal-extraction.json",
+          "bytes": 2385,
+          "sha256": "fdd31d021e535daf5138e9b90f5dc4259bf5efa8d3a453a907945ac5094aab79"
+        }
+      },
+      "checkpoint03": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint03/index.json",
+          "bytes": 1679743,
+          "sha256": "1df66a8a10fdb26afd871b87e411927c7c7c040f12efef44442924e3ec76f749"
+        },
+        "selectedFiles": 3805,
+        "parts": 11,
+        "joinedBytes": 365475609,
+        "joinedSha256": "dec113102a6655d9d13e841183ebb0e4dd823af824fba4fcd275c48ed1f66cb7",
+        "everyMemberAndPartShaVerified": true,
+        "acquiredLeaseScope": "Historical snapshot at archive creation; current ownership has been normally released."
+      },
+      "closure01": {
+        "index": {
+          "file": "Docs/Autonomy/Evidence/CanonDialogue20261109/Closure01/index.json",
+          "bytes": 67330,
+          "sha256": "0b2b4b3bcad55ec443bf09ab7aeb7f9155d3dd01ce7cd5ecff5942aae316670f"
+        },
+        "files": 139,
+        "scope": "Actual completed archive, independent final idle and released-lease/status originals; all copy SHAs verified."
+      },
+      "finalIdle": {
+        "status": "command-completed-all-four-exits-zero-owned-descendants-empty",
+        "summary": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+          "bytes": 11199,
+          "sha256": "583b2f0ddc86b36de2db5d6a4796c609691e595b05b17e537550abee9ea3ca69"
+        }
+      },
+      "leaseRelease": {
+        "state": "released",
+        "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
+        "actualExitCode": 0,
+        "record": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-release.json",
+          "bytes": 800,
+          "sha256": "dd42f4acddcdc68bd165d77a5c213276e8a615450875b38c18096c484b7dc03f"
+        },
+        "statusAfter": {
+          "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/lease-status-after.json",
+          "bytes": 99,
+          "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+        },
+        "statusAfterMeaning": "Available at the actual command observation only; not an ongoing ownership or scheduler claim."
+      },
+      "documentationAtWriting": {
+        "parentHead": "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+        "commitPushAndSubsequentCi": "not-yet-observed-at-writing; product and validator CI are recorded separately"
+      }
+    },
+    "previousPortableCheckpoint01": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "mainDocumentationIntegration": {
     "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",
-    "scope": "Previously approved docs-only PR1, preserved as this merge parent. Current CanonArt product work remains on feature branch."
+    "scope": "PR1's approved docs-only merge parent5662 is retained historically. CanonArt PR2 was normally merged as2ebe776c6d37bc6563fa25004536ca2983ce65d4 on main; validator source9dfa is separate. At this closure-document writing, the final proof/docs commit, its push and its subsequent CI have not yet been observed."
   }
 }

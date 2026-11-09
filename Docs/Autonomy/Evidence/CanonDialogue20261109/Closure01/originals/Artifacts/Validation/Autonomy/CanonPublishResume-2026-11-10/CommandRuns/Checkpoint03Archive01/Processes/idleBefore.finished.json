@@ -1,0 +1,50 @@
+{
+  "label": "idleBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-09T21:41:08.910481+00:00",
+  "timeoutSeconds": 19.998479473997577,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 22322.053613407,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 24538,
+    "ppid": 24503,
+    "pgid": 24538,
+    "sid": 24538,
+    "state": "R",
+    "startTicks": 1911121,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 24539,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/02-idleBefore/supervisor-result.json",
+    "sha256": "3b5f1ab908fe748fe016dcc6364d38919ae87d778f5f129942e79fbe608c69fc",
+    "bytes": 7086
+  },
+  "finishedUtc": "2026-11-09T21:41:09.065200+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/idleBefore.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

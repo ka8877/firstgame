@@ -1,0 +1,211 @@
+{
+  "scope": "generic-owned-command-only",
+  "label": "Checkpoint03Archive01",
+  "requestedArgv": [
+    "python3",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/preserve-public-checkpoint.py",
+    "--checkpoint-head",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-source",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-ci",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json",
+    "--confirm-completed-public-proof"
+  ],
+  "executedArgv": [
+    "python3",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/preserve-public-checkpoint.py",
+    "--checkpoint-head",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-source",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-ci",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json",
+    "--confirm-completed-public-proof"
+  ],
+  "display": false,
+  "liveLeasePath": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+  "ownedLeaseSnapshot": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/owned-lease.executed.json",
+    "bytes": 827,
+    "sha256": "5372ea04e0886f9ba2aa6041fef1d5521cc19b81d237931556cdd3b5998f2dca"
+  },
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+    "FIRSTGAME_PROOF_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+    "FIRSTGAME_STAGE_ROOT": "/workspace/firstgame/Artifacts/CanonArtWebPlaytest",
+    "FIRSTGAME_CONTROL_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache"
+  },
+  "maximumSharedSeconds": 3600,
+  "leaseReserveSeconds": 60,
+  "cleanupReserveSeconds": 12,
+  "executionSources": [
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/run-owned-command.py",
+        "bytes": 10914,
+        "sha256": "f7b35e026a8fc3fdbae871e336fcd3ed5e75b92d3a69efa7e844cf8d78b0631c"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/run-owned-command.py",
+        "bytes": 10914,
+        "sha256": "f7b35e026a8fc3fdbae871e336fcd3ed5e75b92d3a69efa7e844cf8d78b0631c"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/run-canon-native.py",
+        "bytes": 7364,
+        "sha256": "09e79a9f1f7277febcaf8ccfb6890f609603a2d45d3861e5187b17e03ffbb30c"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 7364,
+        "sha256": "09e79a9f1f7277febcaf8ccfb6890f609603a2d45d3861e5187b17e03ffbb30c"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/release_contract.py",
+        "bytes": 6846,
+        "sha256": "f410c41ae5b46da8fb14fafeae7973f4aca15ee67bbf4b9788ab5ec9b7c2da52"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 6846,
+        "sha256": "f410c41ae5b46da8fb14fafeae7973f4aca15ee67bbf4b9788ab5ec9b7c2da52"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/canon_release_evidence.py",
+        "bytes": 40003,
+        "sha256": "f370fb1105d418be582e0af18607634143d8153871549026d6a10a5f6312b882"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 40003,
+        "sha256": "f370fb1105d418be582e0af18607634143d8153871549026d6a10a5f6312b882"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      }
+    }
+  ],
+  "supervisorAcceptance": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+      "bytes": 69227,
+      "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+    },
+    "independentReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+      "bytes": 2324,
+      "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+    },
+    "operatorReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+      "bytes": 3316,
+      "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+    }
+  },
+  "publishReady": false,
+  "baselineReady": false
+}

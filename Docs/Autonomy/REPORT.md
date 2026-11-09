@@ -1,3 +1,84 @@
+# CanonArt 신규 버전 공개 · 검증·보존 완료
+
+두 게임의 CanonArt 신규 버전을 기존 테스트 사이트에 공개했습니다. 제품 소스는 `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 gh-pages는 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`입니다. 실제 Pages 실행 `42670765284`가 성공했고 전체15,416파일의 새 HTTPS GET·HTTP200·크기·SHA 검사를 통과했습니다. 두 게임은 [테스트 페이지](https://ka8877.github.io/firstgame/)에서 실행할 수 있습니다.
+
+검증 도구 커밋 `9dfa4a9cca5aa41976ab784b9b97220cf84e5b30`의 CI `42690129169`도 실제 성공했습니다. 검증기 수정은 제품 배포 식별자와 구분합니다. 새 단위41개·기존 음악 회귀20개와 현재 소스의 아래6회 검사가 모두 통과했고, Root가 모든 필수 현재 원본을 직접 확인했습니다. 모두 실제 재접속2회·최종 guard exit0·소유 후손 정리를 확인했습니다.
+
+| 승인 실행 | 검사 | PNG | 필수 Root 원본 |
+|---|---:|---:|---:|
+| Card Desktop Browser04 | 98 | 65 | 52 |
+| Gospel Desktop Browser06 | 89 | 68 | 53 |
+| Card Mobile Browser03 | 100 | 64 | 51 |
+| Gospel Mobile Browser02 | 78 | 54 | 39 |
+| Card Public06 | 108 | 64 | 51 |
+| Gospel Public02 | 83 | 54 | 39 |
+
+전체 gate도 통과했고 실제 마지막 JSON 출력 원문을 `canon-final-seal.json`으로 보존했습니다(SHA `fca3fbb37df1ac61a4cde519d6dbfa5d1da622d8aa98f3731a70de6a6e03c938`). [Checkpoint03](Evidence/CanonDialogue20261109/Checkpoint03/index.json)은 실제 원본3,805개·11개 분할본·365,475,609B를 보존하며 내부 member와 분할/결합 SHA를 모두 확인했습니다. 결합 SHA는 `dec113102a6655d9d13e841183ebb0e4dd823af824fba4fcd275c48ed1f66cb7`입니다. [Closure01](Evidence/CanonDialogue20261109/Closure01/index.json)은 실제 archive·최종 유휴·잠금 해제 원문139개를 보존합니다.
+
+11월10일06:43 KST에 실제 최종 유휴·후손 정리를 확인한 뒤 이번 회차의 자기 잠금을 정상 해제했습니다. available은 그때의 원격 조회 결과이며 Checkpoint03의 acquired 사본은 과거 원문입니다. 종료 문서 작성 시점의 main HEAD는 `9dfa4a9c`이고, 이 문서·증거 커밋의 push 및 뒤이은 CI는 작성 시점 미관측입니다.
+
+Public01~05의 실제 network gate 실패와 Public03의 팩 화면 반려는 원문 그대로 유지합니다. Desktop Browser03은57파일/37PNG·필수27원본 관찰, Mobile Browser02는89파일/62PNG·필수44원본 관찰 상태에서 외부 실행 환경 전환으로 중단됐습니다. 두 시도에는 완료 wrapper·통과/실패·guardAfter·정리 성공을 새로 부여하지 않았습니다. 각각의 별도 유휴 복구 검사는 원래 실행의 완료 판정을 대신하지 않습니다. 이후 독립적인 Desktop04·Mobile03이 통과했습니다. Card Mobile03의 보유55장/26종은 그 실행의 중복 팩 결과이며 다른 실행의27종과 구분합니다.
+
+이번 공개 마일스톤은 완료했습니다. 판타지마스터즈는 멀티플레이를 비활성화했고 출전2,649종·원본 그림15,350개이며 전체 원작 복원은 미완료입니다. 예수님의 길은 인물·배경·대화·성경 화면을 개선했지만 일반 이동 가림과 일부 기존 초상화·세로 화면/legacy 과제가 남아 있습니다. 다음 제품 작업은 이 그래픽 과제와 확인된 원작 규칙 지원 확대입니다. 기술598은 아직 제안·미구현·미검증입니다. 예약 자동실행은 마지막 조회0개이고 목표 카드의 현재 활성 상태는 직접 확인하지 못했습니다. 이번 회차 종료를 장기 목표 전체 완료나 상시 백그라운드 실행으로 표시하지 않습니다.
+
+아래는 이전 시점의 기록입니다.
+
+---
+
+# 검증기 최종 보완31개 검사 통과 · 카드 공개04 실행 중
+
+11월10일 KST 기준 검증 도구 최종 커밋 `0c6b990d60240f696d87cb0c0f9a24f683c2bcab`을 main에 push했고 CI `42684473945`는 진행 중입니다. 첫 검증기 커밋 `c949d283`의 CI `42681117516` 성공은 이력으로 보존합니다. 게임 제품 source `2ebe776c…`, 공개 `37132296…`, manifest `305a6f2d…`,978,000,227B/15,416파일과 승인된 Portal02는 그대로이며 Core311·Native8/21·Web의 제품 결합도 유효합니다. 검증기 변경을 새 제품 배포로 계산하지 않습니다.
+
+새31개 단위 검사와 기존20개 음악 회귀 검사가 실제 통과했습니다. 새 엄격 분기는 취소 전 관측이 전혀 없는 경우에만 실제 never-played·0·None 필드, decode, GET/HTTP206과 격리된 유한 음악PCM 근거를 요구합니다. 없는 before 근거는 None으로 명시합니다. 모바일 touchEnd 뒤에는 실제 requestAnimationFrame2회를 관측해 화면 그리기 전 부분 프레임 캡처를 피하도록 보완했습니다. 제품 코드는 바꾸지 않았습니다. 동결 원문은 `ValidatorCorrectionSources02/index.json`, helper SHA는 `9ac200102eaa67ceb98ef425945202dc78637d007080e6801162715b0b138a26`, smoke SHA는 `7710623b53398776c88c69e5bae3864669419d4af2d85993eed6f07480725bfb`입니다.
+
+옛 Public02의2건과 Public03의1건이 새 규칙에3/3 부합한다는 진단을 `Release/validator-reload-diagnosis02.json`에 남겼지만 실패 원문이나 Root 승인을 대체하지 않습니다. Public03은107검사 중106통과·네트워크 gate1실패였고, navigation2 battle 취소를 처음 관측한 시점이 취소 뒤였습니다. Root는 `continued-sealed-graphic`의 중앙 팩 그림이 없는 원본도 별도로 반려했습니다. 실제95파일/65PNG와 반려 기록을 `BrowserHistory/FantasyCards/PublicMobile844/Public03` 및 `Release/card-public03-relocation.json`에 보존했습니다.
+
+한편 Public03의 `owned-fifty-five`에서는 실제4카드 격자가 정상 표시됐습니다. 앞선01/02의 빈 첫 캡처만으로 지속적인 보관함 제품 버그를 확정하지 않으며, 팩 그림 반려와 정상 보관함 관측을 구분합니다. 현재 기능·화면 승인은 새 프레임 직접 검토를 기다립니다.
+
+**새 최종 harness의6회 중 Card Public04가 실제 실행 중이며 완료0회입니다.** Gospel Public02, Card Desktop03, Gospel Desktop06, Card Mobile02, Gospel Mobile02는 대기입니다. 검사 수를 미리 채우거나 옛5회 성공을 새 통과로 계산하지 않습니다. 최종 전체 gate·봉인은 아직 없고 일반 이동 가림·세로 화면/legacy·원작 충실도 차이는 남아 있습니다. 출전2649종과 원본15350개, 비활성 멀티플레이와 예약 마지막 조회0개·목표 카드 직접 미확인을 유지합니다.
+
+아래는 각 시점의 이전 기록입니다.
+
+---
+
+# 검증기 보완·회귀 검사 완료 · 새6회 중 카드 공개 실행 중
+
+11월10일 KST 기준 게임 제품 source `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 commit `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest `305a6f2d…`와978,000,227B/15,416파일·승인된 PublicPortal02는 그대로입니다. 제품 코드·runtime·stage를 바꾸지 않고 HTTPS 재접속 전 preload 취소를 판정하는 검증기와 smoke 통합·단위 검사·CI 단계만 보완했습니다. 이 검증 도구 커밋은 새 제품 버전이나 재배포가 아닙니다.
+
+새 분류는 현재 전체 전달 파일의 정확한 SHA·HTTP200, 같은 navigation1/2의 HTTP206 최소2회, 실제 취소 전후1000ms 관측과 같은 요소의2000ms 이내 decode, 유한한 격리 음악PCM 및 후속 선택 재생이 모두 있어야 적용됩니다. 새21개 단위 검사와 기존20개 음악 회귀 검사가 실제 통과했습니다. 옛 Card Public02의 실제2건도 새 좁은 조건에2/2 부합한다는 [진단 원문](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-reload-diagnosis.json)을 남겼지만, 그 실패 report와 exit 상태는 그대로입니다.
+
+현재 Core·Native·Web 소스 결합도 `BuildsAfterValidatorCorrection01`에서 실제 엄격 재검사를 통과했고 명령·최종 guard exit0·소유 후손 정리를 확인했습니다. summary는11,406B, SHA `c7d7eec3c4fa60297ae6146dd88f6dfe4d15adcfe5e060276ce57dc2beb6b2df`입니다. 보완 소스는 `ValidatorCorrectionSources/index.json`에 동결했습니다. smoke SHA는 `18dcd92ee8b83d23c24aade1851e3c85a09f9acd1cffe010aace5a970f452de6`, helper SHA는 `51688934a39f3a5a78025c2263fff4ac6a3023a61b653e087afc46f307b398ca`입니다.
+
+검증기 전용4파일 커밋 `c949d283e4ed16fefeb296b95b6d76cafa859c31`을 main에 반영·push했고 CI `42681117516`의 실제 완료·성공을 [원문](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-ci.json)으로 확인했습니다. 실행 소스 결합 규약에 따라 양게임의 Desktop720·Mobile844·PublicMobile844 새6회를 모두 수행해야 합니다. **현재 Card Public03이 새 harness로 실제 실행 중이고 완료0회, 나머지5회는 대기입니다.** 다음은 Gospel Public02와 새 로컬4회이며 [현재 실행 계획](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/current-replay-checkpoint.json)을 따릅니다.
+
+이전5개 성공은 당시의 실제 통과 이력이며 보완된 검증기의 현재 통과로 세지 않습니다. 해당 원문과 실패 Card Public02는 [정확한 이동 목록](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-source-replay-relocations.json)에 따라 `BrowserHistory/GAME/PROFILE/ATTEMPT`로 옮겨 바이트 불변을 확인했습니다. 기존 Portal01·Card Public01 실패도 보존합니다. 새6회와 Root 원본 검토·최종 전체 gate·봉인은 미완료이며, 보관함 첫 진입 카드 격자·일반 이동 가림·세로 화면/legacy·원작 충실도 차이도 남아 있습니다. 출전2649종·원본15350개와 비활성 멀티플레이를 유지하며 예약은 마지막 조회0개, 목표 카드의 현재 활성 상태는 직접 확인하지 않았습니다.
+
+아래는 각 시점의 이전 기록입니다.
+
+---
+
+# 새 CanonArt 공개 반영 완료 · 카드 공개 검증 조건 진단 중
+
+11월10일 KST 기준 새 두 게임을 기존 공개 주소에 실제 반영했습니다. 후보 `f4a440c8`의 CI `42669109399`(#114)와 PR #2 정상 병합 후 main `2ebe776c6d37bc6563fa25004536ca2983ce65d4`의 CI `42669690355`가 성공했습니다. Stage01은 manifest 포함978,000,227B/15,416파일로985MB 한도 안에서 통과했고, PublishSite01과 명시적으로 실행한 Pages `42670765284`도 성공했습니다. 공개 commit은 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`, manifest SHA는 `305a6f2d54a749e3c43415ee64232ab70243d5834af838317f50c11768afe3f1`입니다.
+
+PublicPortal02는 공개15,416파일 전체를 새로 GET해 모두 HTTP200·전체SHA를 확인했고, Root가 PC·모바일 원본2장을 직접 검토한 뒤 엄격 포털 검증도 통과했습니다. 앞선 Portal01의 JPEG2개 HTTP503 실패는 보존하고 전체를 새로 실행한 결과입니다. 현재 포털 report SHA는 `7c8f28cd78d9e387a4738f15845e52a2276cc4afa4489176f9cf5ddd3bd2d9af`입니다.
+
+| 현재 공개 조작 검증 | 실제 결과 | 원본PNG / 필수 Root 원본 |
+|---|---|---:|
+| 예수님 Public01 | 83검사 통과·Root 검토 완료 | 54 / 39 |
+| 카드 Public01 | 106통과·네트워크 gate1실패·최종 미승인 | 65 / 미승인 |
+| 카드 Public02 | 107검사 중106통과·네트워크 gate1실패 | 필수51장 관찰·최종 미승인 |
+
+예수님 공개 실행은 wrapper·guard exit0, 소유 후손 정리와 실제 재접속2회를 확인했습니다. 최종 report SHA는 `ad08fb34bdcbce52a725b6dbcbca3e5606c7d6b72ba3c0067e674207c0fa4186`입니다. 카드 Public01은 실제 오디오 요청4개의 `ERR_ABORTED` 때문에 실패했고 exit1·정리 완료로 보존했습니다. 원문95파일을 `BrowserHistory/FantasyCards/PublicMobile844/Public01`로 옮긴 정확한 [보존 목록](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-public01-relocation.json)을 남겼으며 시각 승인이나 최종 통과로 계산하지 않습니다.
+
+카드 Public02도 마지막 재접속 navigation2의 title/lobby 요청2개 `net::ERR_ABORTED`가 남아 네트워크 gate에서 실패했습니다. HTTP 오류0, PCM4개와 재접속2회 및 나머지106개 검사는 통과했지만 전체 통과는 아닙니다. 실제 exit1·소유 후손 정리를 확인했고 canonical 공개 원문은 그대로 보존했습니다. wrapper summary SHA는 `25a5dd0d02f0f3938c53241c3c81a3829ab016b8bd1deee69b60d028baf164d9`입니다. Root가 필수51장을 봤지만 최종 시각 승인이나 전체 봉인은 하지 않았습니다. 무작정 재실행하는 것을 중단하고 기존 검증기의 HTTPS 재접속·preload 분류 조건을 실제 요청·재생 근거와 대조하고 있습니다. 제품이나 검증기 버그로 단정하거나 네트워크 조건을 완화하지 않습니다.
+
+추가로 보관함의 보유55장/27종 표시는 확인했지만, 첫 진입 중앙 카드 격자가 비어 있어 실제 카드 표시 완료는 확인하지 못했습니다. 덱 편집 격자는 정상 표시됐습니다. 보유 수 확인을 보관함 기능 전체 승인으로 바꾸지 않으며 후속 차이와 Root 검토 범위에 남깁니다. 일반 이동 중 가림·세로 화면/legacy 조건, 원작 전체 충실도도 별도 개선 범위입니다. 출전2649종과 원본15350개를 구분하고 멀티플레이는 비활성·추후 업데이트로 유지합니다.
+
+현재 새 공개판의 파일 전달·포털·예수님 공개 검증 성공은 그대로입니다. 카드 공개 검증 조건의 근거 진단과 최종 전체 gate·봉인은 미완료입니다. 이전 G2와 두 카드 공개 실패 원문은 이력으로 보존합니다. 예약 자동실행은 마지막 조회0개이며 현재 목표 카드 활성 상태는 직접 확인하지 않았습니다. 아래는 각 시점의 이전 기록입니다.
+
+---
+
 # 네 로컬 브라우저 검증·Root 원본 검토 완료 · 공개 절차 준비
 
 환경은 다시 연결됐습니다. 초기화된 `/tmp`에는 남아 있던 정확한 보존 원문으로 양게임 runtime15,370파일을 복원했습니다. 예수님5파일105,432,320B, 카드15,365파일867,853,409B이며 새 빌드로 계산하지 않습니다. [복원 원문 목록](../../Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json)과 기존 Native·실제 빌드·현재 runtime 결합을 유지했습니다. 이전 자기 잠금은 실제 유휴와 정확한 소유권을 확인한 뒤11월10일01:35 KST에 정상 CAS 해제했고, 새 `CanonPublishResume-2026-11-10` 소유 회차로 이어갑니다.

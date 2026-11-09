@@ -1,0 +1,53 @@
+{
+  "label": "guardBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Autonomy/cycle_guard.py",
+    "check",
+    "--record",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-09T21:41:06.937548+00:00",
+  "timeoutSeconds": 44.9987719760029,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 22322.053613407,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 24506,
+    "ppid": 24503,
+    "pgid": 24506,
+    "sid": 24506,
+    "state": "R",
+    "startTicks": 1910926,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 24507,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/01-guardBefore/supervisor-result.json",
+    "sha256": "72346143a51a99bf06c3706a7f31c730a68ef9db8badbb6db1e216f389c674b7",
+    "bytes": 9143
+  },
+  "finishedUtc": "2026-11-09T21:41:08.567726+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/guardBefore.stdout.log",
+    "sha256": "e94c2d63b588c23902812166ac89ae66b4860a13a56f2d1dbba36e2c5734b9a0",
+    "bytes": 749
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/preserve-public-checkpoint.py",
+    "--checkpoint-head",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-source",
+    "9dfa4a9cca5aa41976ab784b9b97220cf84e5b30",
+    "--validator-ci",
+    "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/validator-fourth-ci.json",
+    "--confirm-completed-public-proof"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-09T21:41:09.384386+00:00",
+  "timeoutSeconds": 3198.337231882,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 22322.053613407,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/CanonArt-2026-11-09",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-canon-final-20261109-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 24540,
+    "ppid": 24503,
+    "pgid": 24540,
+    "sid": 24540,
+    "state": "R",
+    "startTicks": 1911171,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 24541,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/ContainedCommands/Checkpoint03Archive01/03-command/supervisor-result.json",
+    "sha256": "0d24a27edc9a63a964c078ec2428c1b082f0f37ddb39911fd73248c9a3a67c96",
+    "bytes": 7684
+  },
+  "finishedUtc": "2026-11-09T21:41:36.156887+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/CommandRuns/Checkpoint03Archive01/command.stdout.log",
+    "sha256": "981fefa552d81eb913425ca7ef75348d951d8c0c9e4a1d474cdd36a82466d271",
+    "bytes": 561
+  }
+}
