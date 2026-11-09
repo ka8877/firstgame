@@ -117,13 +117,17 @@ def main():
         '--review-timeout', str(args.review_timeout), '--renderer', args.renderer, '--chromium', args.chromium]
     if args.profile == 'PublicMobile844':
         argv += ['--base-url', PUBLIC_BASE]
+    if args.renderer == 'x11-mesa':
+        setup = 'bash Tools/Environment/start-display.sh\nsource Tools/Environment/activate-display.sh\nexec \"$@\"'
+        argv = ['bash', '-c', setup, 'canon-browser-display', *argv]
     sources = [Path(__file__).resolve(), ROOT / 'Tools/Validation/run-canon-native.py',
         ROOT / 'Tools/Validation/canon_release_evidence.py', ROOT / 'Tools/Validation/restoration_source_binding.py',
         ROOT / 'Tools/Validation/nativity-web-smoke.py', ROOT / 'Tools/Validation/web-smoke.py',
         ROOT / 'Tools/Validation/fm-local-media-errors.py', ROOT / 'Tools/Validation/fm-provider-errors.py',
         ROOT / 'Tools/Validation/nativity_narration_evidence.py',
         ROOT / 'Tools/Validation/webaudio-observer.js', ROOT / 'Tools/Validation/fm-local-media-observer.js',
-        ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Autonomy/cycle_guard.py', helper, plan_path]
+        ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Environment/start-display.sh',
+        ROOT / 'Tools/Environment/activate-display.sh', ROOT / 'Tools/Autonomy/cycle_guard.py', helper, plan_path]
     pins = []
     for source in sources:
         destination = run / 'RecordedHarness' / source.relative_to(ROOT)

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-09T06:30:15.515301+00:00",
+  "updatedUtc": "2026-11-09T06:54:16.889865+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,7 +13,7 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "Core309-and-GospelNative21-passed-GospelWeb-building-CardCaptureRouting-retest-next",
+    "status": "Core309-Native8and21-GospelWeb02-passed-GospelPC-running-CardWeb-next",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
@@ -81,13 +81,38 @@
         "streamedOriginals": 15350,
         "missing": 0,
         "path": "Artifacts/Validation/CanonArt-2026-11-09/media-verification.json"
-      }
+      },
+      "CardNative03": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "GospelWeb01": {
+        "status": "failed-timeout885s-at-final-link",
+        "actualExitCode": 124,
+        "containmentProvedEmpty": true,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web01",
+        "recovery": "LegacyResourceIsolation recovered all; exact Native-hash Git originals restored GraphicsSettings/QualitySettings. Native fingerprint007bf... reverified. Partialplayer preserved as /tmp/firstgame-canon-20261109-builds/PathOfDawn/Web.failed-Web01; all logs/recovery receipts under control/Web01Recovery*."
+      },
+      "GospelWeb02": {
+        "status": "passed",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web02",
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "actualBuildAndRestorationExit": 0,
+        "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
+      },
+      "GospelPC": "Browser01 failed before launch:DISPLAY missing. Fixed newwrapper only to start/activate established display inside owned supervisor. Browser02 actualPC ordinaryinput running."
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Correct two meaningful UI test fixtures, rerun complete21 Gospel Native",
-      "Actual Card prepare,authoring verifier,complete8 Native",
-      "Build current two Web runtimes with owned supervisor and source binding;desktop/touch,current PNG,4PCM/two reloads,985MB and fresh public checks"
+      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Build current CardWeb bound to Card03 Native8",
+      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
+      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
     ],
     "backgroundScheduler": "not-configured",
     "leaseDeadlineUtc": "2026-11-09T06:58:36.077286+00:00",
@@ -184,9 +209,10 @@
     "id": "CanonArt",
     "status": "continue-current-implementation-through-actual-Web-browser-public-validation",
     "tasks": [
-      "Correct two meaningful UI test fixtures, rerun complete21 Gospel Native",
-      "Actual Card prepare,authoring verifier,complete8 Native",
-      "Build current two Web runtimes with owned supervisor and source binding;desktop/touch,current PNG,4PCM/two reloads,985MB and fresh public checks"
+      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Build current CardWeb bound to Card03 Native8",
+      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
+      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
     ],
     "rule": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
   },
@@ -1458,7 +1484,7 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "Core309-and-GospelNative21-passed-GospelWeb-building-CardCaptureRouting-retest-next",
+    "status": "Core309-Native8and21-GospelWeb02-passed-GospelPC-running-CardWeb-next",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
@@ -1526,13 +1552,38 @@
         "streamedOriginals": 15350,
         "missing": 0,
         "path": "Artifacts/Validation/CanonArt-2026-11-09/media-verification.json"
-      }
+      },
+      "CardNative03": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "GospelWeb01": {
+        "status": "failed-timeout885s-at-final-link",
+        "actualExitCode": 124,
+        "containmentProvedEmpty": true,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web01",
+        "recovery": "LegacyResourceIsolation recovered all; exact Native-hash Git originals restored GraphicsSettings/QualitySettings. Native fingerprint007bf... reverified. Partialplayer preserved as /tmp/firstgame-canon-20261109-builds/PathOfDawn/Web.failed-Web01; all logs/recovery receipts under control/Web01Recovery*."
+      },
+      "GospelWeb02": {
+        "status": "passed",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web02",
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "actualBuildAndRestorationExit": 0,
+        "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
+      },
+      "GospelPC": "Browser01 failed before launch:DISPLAY missing. Fixed newwrapper only to start/activate established display inside owned supervisor. Browser02 actualPC ordinaryinput running."
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Correct two meaningful UI test fixtures, rerun complete21 Gospel Native",
-      "Actual Card prepare,authoring verifier,complete8 Native",
-      "Build current two Web runtimes with owned supervisor and source binding;desktop/touch,current PNG,4PCM/two reloads,985MB and fresh public checks"
+      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Build current CardWeb bound to Card03 Native8",
+      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
+      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
     ],
     "backgroundScheduler": "not-configured",
     "leaseDeadlineUtc": "2026-11-09T06:58:36.077286+00:00",
