@@ -129,6 +129,69 @@ def initial_after_abort_fixture(navigation=2):
     return case
 
 
+def pending_selection_fixture(navigation=0):
+    """Authored Public04 lobby pending-to-selected transition projection."""
+    case = fixture('lobby.ogg', navigation)
+    case['failure']['observedEpochMs'] = 1794252919627.6228
+    state = {'sourceKind': 'bundled-instrumental', 'actualSource': url('title.ogg'),
+             'actualPaused': False, 'contextState': 'running', 'unlocked': True,
+             'muted': False, 'volume': 0.6000000238418579}
+    old = player('title.ogg', ready=4)
+    old.update(active=True, paused=False, currentTime=2.80712,
+               restartNeeded=False, restartCount=1, lastStartAtMs=265.09999999962747,
+               lastStartPosition=0, lastStartRoleSerial=0, lastPromotionPosition=0,
+               fadeTarget=1, contextState='running')
+    pending = player('lobby.ogg', ready=4)
+    pending.update(paused=False, pending=True, currentTime=0.00622,
+                   restartNeeded=False, restartCount=1, lastStartAtMs=20544.89999999851,
+                   lastStartPosition=0, lastStartRoleSerial=1,
+                   lastPromotionPosition=None, fadeTarget=0, contextState='running')
+    before = {'navigation': navigation, 'epochMs': 1794252919595,
+              'reason': 'media-playing:fm-local-audio-lobby',
+              'state': state, 'players': [old, pending]}
+    after = copy.deepcopy(before)
+    after.update(epochMs=1794252919669, reason='sample')
+    after['state']['actualSource'] = url('lobby.ogg')
+    after['players'][0].update(active=False, currentTime=2.879274, fadeTarget=0)
+    after['players'][1].update(active=True, pending=False, currentTime=0.078367,
+                                lastPromotionPosition=0.006686, fadeTarget=1)
+    later = copy.deepcopy(after)
+    later['epochMs'] = 1794252923500
+    later['players'][1]['currentTime'] = 3.909
+    window = case['windows'][0]
+    window.update(sourceUrls=[url('lobby.ogg')], startedEpochMs=1794252924000.0,
+                  finishedEpochMs=1794252926300.0,
+                  rawEvidence=f'audio-{navigation}-starter-lobby.json')
+    window['rolePlayback'] = {'state': copy.deepcopy(later['state']),
+                              'players': copy.deepcopy(later['players'])}
+    case['observations'] = [before, after, later]
+    return case
+
+
+def decoded_before_abort_fixture(navigation=2):
+    """Authored Public04 never-played deck decoded before its range abort."""
+    case = fixture(navigation=navigation)
+    case['failure'].update(url=url('deck.ogg'), observedEpochMs=1794253557243.9106)
+    before = observation(1794253557145, navigation, 'deck.ogg', decoded=True,
+                         reason='media-loadeddata:fm-local-audio-deck')
+    after = observation(1794253557322, navigation, 'deck.ogg', decoded=True,
+                        reason='media-loadeddata:fm-local-audio-lobby')
+    for row in (before, after):
+        for item in row['players']:
+            item.update(restartNeeded=True, restartCount=0, lastStartAtMs=None,
+                        lastStartPosition=None, lastStartRoleSerial=None,
+                        lastPromotionPosition=None, fadeTarget=0,
+                        contextState='not-created')
+    window = case['windows'][0]
+    window.update(startedEpochMs=1794253577000.0, finishedEpochMs=1794253579300.0)
+    later = copy.deepcopy(case['observations'][3])
+    later['epochMs'] = window['startedEpochMs'] - 100
+    case['observations'] = [before, after, later]
+    case['responses'] = [{'url': url('deck.ogg'), 'method': 'GET', 'status': 206,
+                          'navigation': navigation} for _ in range(3)]
+    return case
+
+
 def cancelled_player(case, row_index):
     return next(item for item in case['observations'][row_index]['players']
                 if item['source'] == case['failure']['url'])
@@ -560,6 +623,159 @@ class CanonInitialPublicReloadRangesTests(unittest.TestCase):
             ('cross-navigation-pcm', lambda case: case['windows'][0].update(navigation=1)),
             ('silent-pcm', lambda case: case['windows'][0].update(medianRms=0)),
             ('no-passive-selected-source', lambda case: case['observations'].pop(5)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
+
+
+class CanonPendingSelectionRangesTests(unittest.TestCase):
+    def prove(self, case):
+        return MEDIA.recovered_public_reload_pregesture_range_cancellation(**case)
+
+    def rejects(self, mutate):
+        case = pending_selection_fixture()
+        mutate(case)
+        self.assertIsNone(self.prove(case))
+
+    def test_observed_pending_promotion_requires_the_same_later_audible_source(self):
+        for navigation in (0, 1, 2):
+            case = pending_selection_fixture(navigation)
+            original = copy.deepcopy(case)
+            proof = self.prove(case)
+            with self.subTest(navigation=navigation):
+                self.assertIsInstance(proof, dict)
+                self.assertEqual(proof['category'], 'public-pending-selection-range')
+                self.assertEqual(proof['request'], case['failure'])
+                self.assertEqual(proof['verifiedPublicSha256'], SOURCES['lobby.ogg'][1])
+                self.assertEqual(proof['subsequentPcm']['sourceUrls'], [url('lobby.ogg')])
+                self.assertEqual(proof['subsequentPcm']['navigation'], navigation)
+                self.assertEqual(case, original)
+
+    def test_reset_seek_new_serial_or_missing_promotion_cannot_be_recovered(self):
+        changes = [('restartCount', 2), ('restartNeeded', True),
+                   ('lastStartAtMs', 20545.0), ('lastStartPosition', 1),
+                   ('lastStartRoleSerial', 2), ('lastPromotionPosition', None),
+                   ('lastPromotionPosition', 0), ('lastPromotionPosition', 0.1),
+                   ('currentTime', 0.005), ('fadeTarget', 0)]
+        for key, value in changes:
+            with self.subTest(key=key, value=value):
+                self.rejects(lambda case: cancelled_player(case, 1).update({key: value}))
+        self.rejects(lambda case: cancelled_player(case, 0).update(lastPromotionPosition=0))
+        self.rejects(lambda case: cancelled_player(case, 0).update(lastStartRoleSerial=True))
+
+    def test_active_pending_pause_or_unobserved_source_transitions_are_rejected(self):
+        for index, updates in [(0, {'active': True}), (0, {'pending': False}),
+                               (0, {'paused': True}), (0, {'readyState': 1}),
+                               (1, {'active': False}), (1, {'pending': True}),
+                               (1, {'paused': True}), (1, {'readyState': 0})]:
+            with self.subTest(index=index, updates=updates):
+                self.rejects(lambda case: cancelled_player(case, index).update(updates))
+        self.rejects(lambda case: case['observations'][0]['state'].update(actualSource=url('lobby.ogg')))
+        self.rejects(lambda case: case['observations'][1]['state'].update(actualSource=url('title.ogg')))
+        case = pending_selection_fixture()
+        contradiction = copy.deepcopy(case['observations'][0])
+        contradiction['epochMs'] = case['failure']['observedEpochMs'] + 1
+        next(item for item in contradiction['players'] if item['source'] == url('lobby.ogg'))['paused'] = True
+        case['observations'].insert(1, contradiction)
+        self.assertIsNone(self.prove(case))
+
+    def test_promotion_brackets_must_be_recent_and_in_the_failed_navigation(self):
+        mutations = [
+            ('no-before', lambda case: case['observations'].pop(0)),
+            ('old-before', lambda case: case['observations'][0].update(
+                epochMs=case['failure']['observedEpochMs'] - 1001)),
+            ('late-after', lambda case: case['observations'][1].update(
+                epochMs=case['failure']['observedEpochMs'] + 1001)),
+            ('cross-navigation-before', lambda case: case['observations'][0].update(navigation=1)),
+            ('cross-navigation-after', lambda case: case['observations'][1].update(navigation=1)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
+
+    def test_promotion_retains_full_delivery_range_and_selected_pcm_guards(self):
+        mutations = [
+            ('unknown-old-source', lambda case: case['observations'][0]['state'].update(actualSource=GAME_URL + 'private.ogg')),
+            ('old-source-not-fresh', lambda case: delivered_row(case, 'title.ogg').update(inheritedGet=True)),
+            ('no-ranges', lambda case: case.update(responses=[])),
+            ('wrong-delivery-sha', lambda case: delivered_row(case, 'lobby.ogg').update(sha256='0' * 64)),
+            ('no-pcm', lambda case: case.update(windows=[])),
+            ('silent-pcm', lambda case: case['windows'][0].update(medianRms=0)),
+            ('wrong-navigation-pcm', lambda case: case['windows'][0].update(navigation=1)),
+            ('no-selected-passive-sample', lambda case: case['observations'].pop(2)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
+        case = pending_selection_fixture()
+        case['windows'][0]['sourceUrls'] = [url('battle.ogg')]
+        for target in (case['observations'][2], case['windows'][0]['rolePlayback']):
+            target['state']['actualSource'] = url('battle.ogg')
+            selected = player('battle.ogg', ready=4)
+            selected.update(active=True, paused=False, currentTime=3.909)
+            target['players'] = [selected]
+        self.assertIsNone(self.prove(case))
+
+
+class CanonDecodedPregestureRangesTests(unittest.TestCase):
+    def prove(self, case):
+        return MEDIA.recovered_public_reload_pregesture_range_cancellation(**case)
+
+    def rejects(self, mutate):
+        case = decoded_before_abort_fixture()
+        mutate(case)
+        self.assertIsNone(self.prove(case))
+
+    def test_already_decoded_unused_preload_requires_an_observed_prior_loadeddata(self):
+        for navigation in (1, 2):
+            case = decoded_before_abort_fixture(navigation)
+            original = copy.deepcopy(case)
+            proof = self.prove(case)
+            with self.subTest(navigation=navigation):
+                self.assertIsInstance(proof, dict)
+                self.assertEqual(proof['category'], 'public-reload-decoded-pregesture-range')
+                self.assertEqual(proof['decodedBeforeUnlockEpochMs'], 1794253557145)
+                self.assertLess(proof['decodedBeforeUnlockEpochMs'], case['failure']['observedEpochMs'])
+                self.assertIs(proof['observedBeforeAbort'], True)
+                self.assertEqual(proof['verifiedPublicSha256'], SOURCES['deck.ogg'][1])
+                self.assertEqual(case, original)
+
+    def test_no_before_or_only_loaded_samples_do_not_prove_prior_decode(self):
+        mutations = [
+            ('no-before', lambda case: case['observations'].pop(0)),
+            ('only-sample', lambda case: case['observations'][0].update(reason='sample')),
+            ('wrong-loaded-event', lambda case: case['observations'][0].update(reason='media-loadeddata:fm-local-audio-title')),
+            ('old-loaded-event', lambda case: case['observations'][0].update(
+                epochMs=case['failure']['observedEpochMs'] - 1001)),
+            ('not-loaded-before', lambda case: cancelled_player(case, 0).update(readyState=0)),
+            ('not-loaded-after', lambda case: cancelled_player(case, 1).update(readyState=0)),
+            ('wrong-navigation-before', lambda case: case['observations'][0].update(navigation=1)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
+
+    def test_every_bracket_sample_must_remain_never_played_and_pre_unlock(self):
+        for index in (0, 1):
+            for key, value in [('restartNeeded', False), ('restartCount', 1),
+                               ('lastStartAtMs', 0), ('lastStartPosition', 0),
+                               ('lastStartRoleSerial', 0), ('lastPromotionPosition', 0),
+                               ('contextState', 'running'), ('fadeTarget', 1),
+                               ('currentTime', 0.1), ('pending', True), ('active', True)]:
+                with self.subTest(index=index, key=key, value=value):
+                    self.rejects(lambda case: cancelled_player(case, index).update({key: value}))
+            self.rejects(lambda case: cancelled_player(case, index).pop('lastStartAtMs'))
+            self.rejects(lambda case: case['observations'][index]['state'].update(unlocked=True))
+
+    def test_prior_decode_does_not_replace_full_get_ranges_or_selected_pcm(self):
+        mutations = [
+            ('no-delivery', lambda case: case['delivered'].update(files=[])),
+            ('inherited-audio', lambda case: delivered_row(case, 'deck.ogg').update(inheritedGet=True)),
+            ('no-ranges', lambda case: case.update(responses=[])),
+            ('wrong-navigation-ranges', lambda case: [row.update(navigation=1) for row in case['responses']]),
+            ('no-pcm', lambda case: case.update(windows=[])),
+            ('silent-pcm', lambda case: case['windows'][0].update(medianRms=0)),
         ]
         for name, mutate in mutations:
             with self.subTest(name=name):

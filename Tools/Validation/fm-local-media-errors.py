@@ -266,15 +266,15 @@ def recovered_public_range_cancellation(game,revision,suite,failure,game_url,run
 
 
 def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
-    """Prove a Canon HTTPS reload preload decoded after its pre-unlock abort.
+    """Prove exact Canon HTTPS range lifecycle with complete public byte proof.
 
     ``delivered`` is the complete successful publicDelivery object, including
     its gameUrl and files, rather than the file list used by older classifiers.
     Fresh full audio GETs bind both the cancelled and subsequently selected
-    source. Recorded pre/post state, or the first never-played initialization
-    observation when no prior observation exists, must precede an exact
-    loadeddata event. Same-navigation HTTP206 and selected-source PCM are
-    mandatory in either case.
+    source. A stable pending-to-selected start, or a never-played preload with
+    exact decoded state around its abort, must be observed. The first-observation
+    initialization case remains separate and strict. Same-navigation HTTP206
+    and selected-source PCM are mandatory for every lifecycle.
     This proves decode recovery and later selected playback, not uninterrupted
     playback or audibility of the cancelled inactive preload. No input is edited.
     """
@@ -285,7 +285,7 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
             or failure.get('error')!='net::ERR_ABORTED'):
         return None
     nav=failure.get('navigation');when=failure.get('observedEpochMs')
-    if type(nav) is not int or nav not in (1,2) or not _number(when):return None
+    if type(nav) is not int or nav not in (0,1,2) or not _number(when):return None
     if not all(isinstance(value,list) for value in (runtime_files,observations,windows,responses)):return None
     if (not isinstance(delivered,dict) or delivered.get('status')!='passed'
             or delivered.get('gameUrl')!=public_url or not isinstance(delivered.get('files'),list)):
@@ -348,24 +348,6 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
                 and _number(old.get('currentTime')) and old['currentTime']==0
                 and type(old.get('readyState')) is int and 0<=old['readyState']<=4)
 
-    before=[row for row in rows if when-1000<=row['epochMs']<when]
-    after=[row for row in rows if when<row['epochMs']<=when+1000]
-    if not after:return None
-    first=before[-1] if before else None
-    initial=None
-    if first is not None:
-        last=after[0]
-        if not pre_unlock(first) or not pre_unlock(last):return None
-    else:
-        # This is not a fallback for a missing/old bracket. No earlier current-
-        # navigation observation may exist, including one outside the window.
-        current=[row for row in observations if isinstance(row,dict) and row.get('navigation')==nav]
-        if (not rows or any(not same_nav(row) or not _number(row.get('epochMs')) for row in current)
-                or any(row['epochMs']<=when for row in rows)):
-            return None
-        initial=last=rows[0]
-        if not when<initial['epochMs']<=when+1000:return None
-
     def never_played(row):
         old=player(row,url)
         return (pre_unlock(row) and old.get('restartNeeded') is True
@@ -373,17 +355,6 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
                 and old.get('contextState')=='not-created' and _number(old.get('fadeTarget')) and old['fadeTarget']==0
                 and all(key in old and old[key] is None for key in
                     ('lastStartAtMs','lastStartPosition','lastStartRoleSerial','lastPromotionPosition')))
-
-    if initial is not None and (not never_played(initial) or player(initial,url)['readyState'] not in (0,1)):
-        return None
-    media_name=url.rsplit('/',1)[-1].rsplit('.',1)[0]
-    loaded=next((row for row in rows if when<row['epochMs']<=when+2000
-        and row.get('reason')=='media-loadeddata:fm-local-audio-'+media_name and pre_unlock(row)
-        and player(row,url)['readyState']>=2),None)
-    if loaded is None or loaded['epochMs']<last['epochMs']:return None
-    start=first if first is not None else initial
-    initial_state=pre_unlock if first is not None else never_played
-    if any(not initial_state(row) for row in rows if start['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
 
     def selected_playing(row,source):
         state=row.get('state');selected=player(row,source)
@@ -395,15 +366,111 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
                 and selected.get('pending') is False and type(selected.get('readyState')) is int
                 and 2<=selected['readyState']<=4 and _number(selected.get('currentTime')) and selected['currentTime']>=0)
 
+    before=[row for row in rows if when-1000<=row['epochMs']<when]
+    after=[row for row in rows if when<row['epochMs']<=when+1000]
+    if not after:return None
+    first=before[-1] if before else None
+    last=after[0]
+    initial=loaded=promotion=None
+    category=reason=None
+
+    def stable_pending_promotion():
+        if first is None:return None
+        state=first.get('state')
+        if not isinstance(state,dict):return None
+        prior=state.get('actualSource')
+        a,b=player(first,url),player(last,url)
+        if (not isinstance(prior,str) or prior not in allowed or prior==url or not fresh_audio(prior) or a is None or b is None
+                or not selected_playing(first,prior) or not selected_playing(last,url)
+                or a.get('pending') is not True or a.get('active') is not False or a.get('paused') is not False
+                or a.get('lastPromotionPosition','missing') is not None
+                or not _number(a.get('currentTime')) or a['currentTime']<=0
+                or not _number(b.get('currentTime')) or b['currentTime']<=a['currentTime']
+                or type(a.get('restartCount')) is not int or a['restartCount']!=1
+                or not _number(a.get('lastStartAtMs')) or a['lastStartAtMs']<0
+                or not _number(a.get('lastStartPosition')) or a['lastStartPosition']!=0
+                or type(a.get('lastStartRoleSerial')) is not int or a['lastStartRoleSerial']<0):return None
+        identity={key:a[key] for key in ('restartCount','lastStartAtMs','lastStartPosition','lastStartRoleSerial')}
+        promoted=False;position=a['currentTime'];promotion_position=None
+        for row in rows:
+            if not first['epochMs']<=row['epochMs']<=last['epochMs']:continue
+            current=player(row,url)
+            if (current is None or any(current.get(key)!=value or type(current.get(key)) is not type(value)
+                    for key,value in identity.items()) or current.get('restartNeeded') is not False
+                    or current.get('paused') is not False or current.get('contextState')!='running'
+                    or type(current.get('readyState')) is not int or not 2<=current['readyState']<=4
+                    or not _number(current.get('currentTime')) or current['currentTime']<position):return None
+            position=current['currentTime']
+            if current.get('pending') is True and current.get('active') is False:
+                if (promoted or not selected_playing(row,prior) or current.get('lastPromotionPosition','missing') is not None
+                        or not _number(current.get('fadeTarget')) or current['fadeTarget']!=0):return None
+            elif current.get('pending') is False and current.get('active') is True:
+                at=current.get('lastPromotionPosition')
+                if (not selected_playing(row,url) or not _number(at) or not a['currentTime']<=at<=current['currentTime']
+                        or not _number(current.get('fadeTarget')) or current['fadeTarget']!=1
+                        or (promotion_position is not None and at!=promotion_position)):return None
+                promoted=True;promotion_position=at
+            else:return None
+        if not promoted or any(same_nav(row) and row.get('url')==prior and row.get('method')=='GET'
+                and _number(row.get('status')) and row['status']>=400 for row in responses):return None
+        return {**identity,'previousSource':prior,'promotionPosition':promotion_position,
+                'positionsSeconds':[a['currentTime'],b['currentTime']]}
+
+    promotion=stable_pending_promotion()
+    if promotion is not None:
+        category='public-pending-selection-range'
+        reason='The same verified public element advanced from pending playback to the selected source with unchanged start identity and increasing recorded positions; subsequent same-source isolated PCM advanced.'
+        phase_end=last
+    else:
+        if nav not in (1,2):return None
+        if first is not None:
+            if not pre_unlock(first) or not pre_unlock(last):return None
+        else:
+            # An old or malformed observation cannot become an initialization
+            # exception simply because no recent pre-abort bracket was found.
+            current=[row for row in observations if isinstance(row,dict) and row.get('navigation')==nav]
+            if (not rows or any(not same_nav(row) or not _number(row.get('epochMs')) for row in current)
+                    or any(row['epochMs']<=when for row in rows)):return None
+            initial=last=rows[0]
+            if (not when<initial['epochMs']<=when+1000 or not never_played(initial)
+                    or player(initial,url)['readyState'] not in (0,1)):return None
+        media_name=url.rsplit('/',1)[-1].rsplit('.',1)[0]
+        event='media-loadeddata:fm-local-audio-'+media_name
+        loaded=next((row for row in rows if when<row['epochMs']<=when+2000
+            and row.get('reason')==event and pre_unlock(row) and player(row,url)['readyState']>=2),None)
+        if loaded is not None:
+            if loaded['epochMs']<last['epochMs']:return None
+            start=first if first is not None else initial
+            initial_state=pre_unlock if first is not None else never_played
+            if any(not initial_state(row) for row in rows if start['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
+            category=('public-reload-pregesture-decoded-range' if first is not None
+                      else 'public-reload-initial-pregesture-decoded-range')
+            reason=('Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.' if first is not None
+                    else 'The first observation shortly after the public reload abort proves a never-played pre-unlock element, which then decoded; later same-navigation selected bundled PCM advanced. No pre-abort observation is claimed.')
+            phase_end=loaded
+        else:
+            if (first is None or not never_played(first) or not never_played(last)
+                    or player(first,url)['readyState']<2 or player(last,url)['readyState']<2):return None
+            prior=[row for row in rows if when-1000<=row['epochMs']<=first['epochMs']
+                   and row.get('reason')==event and never_played(row) and player(row,url)['readyState']>=2]
+            if not prior:return None
+            loaded=prior[-1]
+            if any(not never_played(row) or player(row,url)['readyState']<2
+                   for row in rows if loaded['epochMs']<=row['epochMs']<=last['epochMs']):return None
+            category='public-reload-decoded-pregesture-range'
+            reason='Exact loadeddata preceded the reload abort; the never-played element stayed decoded, paused and inactive at zero across it, and later same-navigation selected bundled PCM advanced.'
+            phase_end=last
+
     for pcm in windows:
         if not same_nav(pcm):continue
         sources=pcm.get('sourceUrls')
         if (not isinstance(sources,list) or len(sources)!=1
                 or not isinstance(sources[0],str) or sources[0] not in allowed):continue
         selected=sources[0]
+        if promotion is not None and selected!=url:continue
         if allowed[selected]['bytes']<=0 or not fresh_audio(selected):continue
         if (not all(_number(pcm.get(key)) for key in ('startedEpochMs','sampleCount','medianRms','audibleSampleFraction','mediaProgressSeconds'))
-                or pcm['startedEpochMs']<=loaded['epochMs'] or type(pcm['sampleCount']) is not int or pcm['sampleCount']<6
+                or pcm['startedEpochMs']<=phase_end['epochMs'] or type(pcm['sampleCount']) is not int or pcm['sampleCount']<6
                 or pcm['medianRms']<=1e-5 or not .5<=pcm['audibleSampleFraction']<=1
                 or pcm['mediaProgressSeconds']<=.5 or pcm.get('allContextsRunning') is not True
                 or pcm.get('isolatedMusicRoute') is not True or type(pcm.get('nonfiniteSamples')) is not int or pcm['nonfiniteSamples']!=0
@@ -416,25 +483,25 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
                 or len(identities[0])!=2 or any(type(item) is not int or item<=0 for item in identities[0])):continue
         playback=pcm.get('rolePlayback')
         if not isinstance(playback,dict) or not selected_playing(playback,selected):continue
-        playing=next((row for row in rows if loaded['epochMs']<row['epochMs']<=pcm['startedEpochMs']
+        playing=next((row for row in rows if phase_end['epochMs']<row['epochMs']<=pcm['startedEpochMs']
                       and selected_playing(row,selected)),None)
         if playing is None:continue
         if any(same_nav(row) and row.get('url')==selected and row.get('method')=='GET'
                and _number(row.get('status')) and row['status']>=400 for row in responses):continue
-        return {'request':dict(failure),'category':('public-reload-pregesture-decoded-range' if first is not None
-                else 'public-reload-initial-pregesture-decoded-range'),'navigation':nav,
-            'reason':('Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.' if first is not None
-                else 'The first observation shortly after the public reload abort proves a never-played pre-unlock element, which then decoded; later same-navigation selected bundled PCM advanced. No pre-abort observation is claimed.'),
+        return {'request':dict(failure),'category':category,'navigation':nav,'reason':reason,
             'observedBeforeAbort':first is not None,
             'initialObservedEpochMs':initial['epochMs'] if initial is not None else None,
             'beforeEpochMs':first['epochMs'] if first is not None else None,'afterEpochMs':last['epochMs'],
-            'decodedBeforeUnlockEpochMs':loaded['epochMs'],'selectedPlayingEpochMs':playing['epochMs'],
+            'decodedBeforeUnlockEpochMs':loaded['epochMs'] if loaded is not None else None,
+            'decodeObservedBeforeAbort':loaded is not None and loaded['epochMs']<when,
+            'startIdentity':promotion,'lifecycleProvedThroughEpochMs':phase_end['epochMs'],
+            'selectedPlayingEpochMs':playing['epochMs'],
             'cancelledSource':url,'selectedSource':selected,'http206Responses':len(ranges),
             'http206Evidence':[dict(row) for row in ranges],
             'beforeState':dict(first['state']) if first is not None else None,'afterState':dict(last['state']),
-            'decodedState':dict(loaded['state']),'selectedState':dict(playing['state']),
+            'decodedState':dict(loaded['state']) if loaded is not None else None,'selectedState':dict(playing['state']),
             'beforePlayer':dict(player(first,url)) if first is not None else None,'afterPlayer':dict(player(last,url)),
-            'decodedPlayer':dict(player(loaded,url)),'selectedPlayer':dict(player(playing,selected)),
+            'decodedPlayer':dict(player(loaded,url)) if loaded is not None else None,'selectedPlayer':dict(player(playing,selected)),
             'verifiedPublicSha256':allowed[url]['sha256'],'verifiedPublicBytes':allowed[url]['bytes'],
             'verifiedSelectedPublicSha256':allowed[selected]['sha256'],
             'fullPublicAudioGets':[dict(actual[allowed[source]['file']]) for source in dict.fromkeys((url,selected))],
