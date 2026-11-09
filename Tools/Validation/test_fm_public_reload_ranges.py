@@ -593,7 +593,7 @@ class CanonInitialPublicReloadRangesTests(unittest.TestCase):
                 with self.subTest(index=index, key=key, value=value):
                     self.rejects(lambda case: case['observations'][index]['state'].update({key: value}))
 
-    def test_already_loaded_or_sample_rows_do_not_replace_the_exact_target_loadeddata(self):
+    def test_loaded_initial_cannot_regress_and_samples_do_not_replace_target_loadeddata(self):
         for ready_state in (2, 4):
             case = initial_after_abort_fixture()
             cancelled_player(case, 0)['readyState'] = ready_state
@@ -610,6 +610,24 @@ class CanonInitialPublicReloadRangesTests(unittest.TestCase):
         self.rejects(lambda case: case['observations'][2].update(reason='sample'))
         self.rejects(lambda case: case['observations'][2].update(
             reason='media-loadeddata:fm-local-audio-title'))
+
+    def test_first_observation_may_already_be_decoded_but_still_needs_own_loadeddata(self):
+        for navigation in (1, 2):
+            for ready_state in (2, 3, 4):
+                case = initial_after_abort_fixture(navigation)
+                for index in (0, 1):
+                    cancelled_player(case, index)['readyState'] = ready_state
+                original = copy.deepcopy(case)
+                proof = self.prove(case)
+                with self.subTest(navigation=navigation, ready_state=ready_state):
+                    self.assertIsInstance(proof, dict)
+                    self.assertIs(proof['observedBeforeAbort'], False)
+                    self.assertIsNone(proof['beforeEpochMs'])
+                    self.assertEqual(proof['afterPlayer']['readyState'], ready_state)
+                    self.assertGreaterEqual(proof['decodedBeforeUnlockEpochMs'], proof['initialObservedEpochMs'])
+                    self.assertEqual(case, original)
+                case['observations'].pop(2)
+                self.assertIsNone(self.prove(case))
 
     def test_initial_branch_still_requires_full_delivery_ranges_and_selected_pcm(self):
         mutations = [

@@ -432,8 +432,7 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
             if (not rows or any(not same_nav(row) or not _number(row.get('epochMs')) for row in current)
                     or any(row['epochMs']<=when for row in rows)):return None
             initial=last=rows[0]
-            if (not when<initial['epochMs']<=when+1000 or not never_played(initial)
-                    or player(initial,url)['readyState'] not in (0,1)):return None
+            if not when<initial['epochMs']<=when+1000 or not never_played(initial):return None
         media_name=url.rsplit('/',1)[-1].rsplit('.',1)[0]
         event='media-loadeddata:fm-local-audio-'+media_name
         loaded=next((row for row in rows if when<row['epochMs']<=when+2000
@@ -443,10 +442,16 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
             start=first if first is not None else initial
             initial_state=pre_unlock if first is not None else never_played
             if any(not initial_state(row) for row in rows if start['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
+            # A cached element may already be decoded at the first passive
+            # observation. Its own prompt loadeddata event is still mandatory,
+            # and no observed loss of decoded state may be hidden in between.
+            if (initial is not None and player(initial,url)['readyState']>=2
+                    and any(player(row,url)['readyState']<2 for row in rows
+                            if initial['epochMs']<=row['epochMs']<=loaded['epochMs'])):return None
             category=('public-reload-pregesture-decoded-range' if first is not None
                       else 'public-reload-initial-pregesture-decoded-range')
             reason=('Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.' if first is not None
-                    else 'The first observation shortly after the public reload abort proves a never-played pre-unlock element, which then decoded; later same-navigation selected bundled PCM advanced. No pre-abort observation is claimed.')
+                    else 'The first observation shortly after the public reload abort proves a never-played pre-unlock element, followed by its exact loadeddata observation; later same-navigation selected bundled PCM advanced. No pre-abort observation is claimed.')
             phase_end=loaded
         else:
             if (first is None or not never_played(first) or not never_played(last)
