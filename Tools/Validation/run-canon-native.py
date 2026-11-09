@@ -22,6 +22,9 @@ CONTROL = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(ROOT / 'Artifacts/Va
 assert CONTROL.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy')
 OUT = ROOT / 'Artifacts/Validation/CanonArt-2026-11-09'
 HELPER_SHA = '9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad'
+# User explicitly authorized sustained work without the previous short cutoff.
+EXECUTION_LIMIT_SECONDS = int(os.environ.get('FIRSTGAME_EXECUTION_LIMIT_SECONDS', '3600'))
+assert 900 <= EXECUTION_LIMIT_SECONDS <= 21600
 
 
 def sha(raw):
@@ -62,7 +65,7 @@ def gospel_names():
 class Lane:
     def __init__(self, run, lease):
         self.started = time.monotonic()
-        self.safe_end = self.started + 900
+        self.safe_end = self.started + EXECUTION_LIMIT_SECONDS
         self.deadline = datetime.fromisoformat(lease['lease']['deadlineUtc'])
         self.run, self.events, self.logs = run, [], []
         self.env = dict(os.environ)
@@ -119,13 +122,13 @@ def main():
     assert controller.child(lane, 'guard', guard, cap=45)['exitCode'] == 0
     if args.prepare:
         preparation = controller.child(lane, 'prepare', ['bash', 'Tools/Build/nativity-task.sh',
-            args.game, 'prepare', args.attempt + 'Prepare'], cap=600)
+            args.game, 'prepare', args.attempt + 'Prepare'], cap=EXECUTION_LIMIT_SECONDS)
         if preparation['exitCode'] != 0:
             write(run / 'summary.json', {'status': 'prepare-failed', 'execution': preparation,
                 'publishReady': False, 'scope': 'current-product-native-only'})
             return 1
     result = controller.child(lane, 'native', [sys.executable, 'Tools/Validation/run-nativity-native.py',
-        args.game, args.attempt], cap=900)
+        args.game, args.attempt], cap=EXECUTION_LIMIT_SECONDS)
     summary = {'status': 'failed', 'game': args.game, 'attempt': args.attempt,
         'scope': 'current-product-native-only', 'publishReady': False,
         'execution': result, 'finishedUtc': datetime.now(timezone.utc).isoformat()}

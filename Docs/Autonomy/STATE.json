@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-09T06:58:05.459545+00:00",
+  "updatedUtc": "2026-11-09T07:27:32.914465+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,10 +13,10 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "GospelWeb02-Native8and21-Core309-passed-PC-incomplete-owned-lease-deadline",
+    "status": "current-Core311-and-voice28ASR-passed-GospelNative03-running",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
-    "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
       "FantasyCards": "fm-canon-2026-11-09",
@@ -105,18 +105,60 @@
         "actualBuildAndRestorationExit": 0,
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
-      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed."
+      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed.",
+      "GospelPC03": {
+        "status": "intentionally-stopped-before-final-gates",
+        "cause": "Actual current screenshot exposed remaining prologue lecture text, despite natural temple dialogue. Stopped owned supervisor to complete user requirement before release.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser03",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser03",
+        "scope": "Confirmed actual first reload retains Joseph firstline/heading/place; no completePC/Root/current rewritten-source/publicpass."
+      },
+      "previousGospelEvidence": "Core309/GospelNative21/GospelWeb02 are actual successful PRE-prologue-rewrite source, retained as history. They do not validate current rewritten Core/new14voices. Card03Native8 remains current product inputs.",
+      "currentCore": {
+        "status": "passed",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
+      },
+      "currentVoice": {
+        "status": "passed",
+        "newlySynthesized": 14,
+        "retainedExact": 14,
+        "freshIndependentAsrPassed": 28,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
+        "activeBytes": 1541702
+      }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
-      "Build current CardWeb bound to Card03 Native8",
-      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
-      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
+      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
+      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
+      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T06:58:36.077286+00:00",
-    "pullRequest": "https://github.com/ka8877/firstgame/pull/2"
+    "leaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
+    "userExecutionAuthorization": {
+      "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
+      "effect": "User overrides old short execution limits: default per-command window3600s, explicit6h owned lease, sustained goal not ended by short batch; cleanup/foreign ownership/data protection remain."
+    },
+    "currentStoryRewrite": {
+      "source": "Docs/Research/CanonDialogueVoiceImpact.json",
+      "changedVoiceLines": 14,
+      "retainedOriginalVoiceLines": 14,
+      "preservedKeys": 28,
+      "events": 23,
+      "passages": 19,
+      "storyDetails": 51,
+      "changes": "All source-discourse removed from actual story detail text, legacy dialogue and HUD objectives; actual scene dialogue added with provenance internal; exact existing Scripture quotations unchanged.",
+      "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
+      "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
+      "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
+      "status": "14newclips-and28freshASR-passed-current-Core311-passed-Native21-running"
+    }
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -209,10 +251,10 @@
     "id": "CanonArt",
     "status": "continue-current-implementation-through-actual-Web-browser-public-validation",
     "tasks": [
-      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
-      "Build current CardWeb bound to Card03 Native8",
-      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
-      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
+      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
+      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
+      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "rule": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
   },
@@ -236,7 +278,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "checkpoint-before-normal-owned-release",
+    "lockStatus": "owned-long-cycle-explicit-user-authorized",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 2700,
     "sameCauseMaxRetries": 2,
@@ -263,8 +305,8 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
-    "liveLeaseDeadlineUtc": "2026-11-09T06:58:36.077286+00:00"
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00"
   },
   "environment": {
     "managedCloudObservedRunning": true,
@@ -1484,10 +1526,10 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "GospelWeb02-Native8and21-Core309-passed-PC-incomplete-owned-lease-deadline",
+    "status": "current-Core311-and-voice28ASR-passed-GospelNative03-running",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
-    "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
     "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
     "targetRevisions": {
       "FantasyCards": "fm-canon-2026-11-09",
@@ -1576,18 +1618,60 @@
         "actualBuildAndRestorationExit": 0,
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
-      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed."
+      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed.",
+      "GospelPC03": {
+        "status": "intentionally-stopped-before-final-gates",
+        "cause": "Actual current screenshot exposed remaining prologue lecture text, despite natural temple dialogue. Stopped owned supervisor to complete user requirement before release.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser03",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser03",
+        "scope": "Confirmed actual first reload retains Joseph firstline/heading/place; no completePC/Root/current rewritten-source/publicpass."
+      },
+      "previousGospelEvidence": "Core309/GospelNative21/GospelWeb02 are actual successful PRE-prologue-rewrite source, retained as history. They do not validate current rewritten Core/new14voices. Card03Native8 remains current product inputs.",
+      "currentCore": {
+        "status": "passed",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
+      },
+      "currentVoice": {
+        "status": "passed",
+        "newlySynthesized": 14,
+        "retainedExact": 14,
+        "freshIndependentAsrPassed": 28,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
+        "activeBytes": 1541702
+      }
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
-      "Build current CardWeb bound to Card03 Native8",
-      "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
-      "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
+      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
+      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
+      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "backgroundScheduler": "not-configured",
-    "leaseDeadlineUtc": "2026-11-09T06:58:36.077286+00:00",
-    "pullRequest": "https://github.com/ka8877/firstgame/pull/2"
+    "leaseDeadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
+    "userExecutionAuthorization": {
+      "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
+      "effect": "User overrides old short execution limits: default per-command window3600s, explicit6h owned lease, sustained goal not ended by short batch; cleanup/foreign ownership/data protection remain."
+    },
+    "currentStoryRewrite": {
+      "source": "Docs/Research/CanonDialogueVoiceImpact.json",
+      "changedVoiceLines": 14,
+      "retainedOriginalVoiceLines": 14,
+      "preservedKeys": 28,
+      "events": 23,
+      "passages": 19,
+      "storyDetails": 51,
+      "changes": "All source-discourse removed from actual story detail text, legacy dialogue and HUD objectives; actual scene dialogue added with provenance internal; exact existing Scripture quotations unchanged.",
+      "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
+      "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
+      "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
+      "status": "14newclips-and28freshASR-passed-current-Core311-passed-Native21-running"
+    }
   },
   "mainDocumentationIntegration": {
     "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",

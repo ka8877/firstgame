@@ -14,6 +14,60 @@ namespace FirstGame.Validation
         static GospelChronicleQuest Quest(string id)
             => GospelChronicleCatalog.Quests.Single(q => q.Id == id);
 
+        static void AssertSceneLanguage(string text, string context)
+        {
+            foreach (string lecture in new[] {
+                "누가는", "누가복음은", "마태는", "마태복음은", "마태복음에는", "마태복음에서는",
+                "복음서는", "복음서가 전하는", "누가와 마태", "이번 장", "다음 장", "여러분",
+                "학습", "게임을 위한", "기록되지 않은", "임의의 사건", "구분되는 기록",
+                "같은 분입니다", "이름을 얻는 이야기"
+            })
+                Assert.That(text, Does.Not.Contain(lecture), context + " must describe the scene rather than explain its sources or the game.");
+        }
+
+        [Test]
+        public void EveryVisibleStoryDetailAndLegacyObjectiveStaysInsideTheScene()
+        {
+            foreach (var quest in GospelChronicleCatalog.Quests)
+            {
+                AssertSceneLanguage(quest.Objective, quest.Id + " objective");
+                foreach (var legacy in quest.Dialogue) AssertSceneLanguage(legacy.Text, quest.Id + " legacy dialogue");
+                foreach (var beat in GospelStorybookCatalog.GetBeats(quest)) AssertSceneLanguage(beat.Text, quest.Id + " story beat");
+                for (int legacy = 0; legacy < quest.Dialogue.Count; legacy++)
+                    foreach (var detail in GospelStorybookCatalog.GetDetails(quest, legacy))
+                    {
+                        AssertSceneLanguage(detail.Turn.Text, quest.Id + " visible detail");
+                        Assert.That(detail.Reference, Is.Not.Empty, "Sources stay available internally.");
+                        if (detail.Scene == null) continue;
+                        AssertSceneLanguage(detail.Scene.Title, quest.Id + " scene title");
+                        AssertSceneLanguage(detail.Scene.Location, quest.Id + " scene location");
+                        AssertSceneLanguage(detail.Scene.TimeLabel, quest.Id + " scene time");
+                        AssertSceneLanguage(detail.Scene.Cue, quest.Id + " scene cue");
+                    }
+            }
+        }
+
+        [Test]
+        public void AnnunciationAndJosephDreamUseCharacterSpeechWithoutClaimingNewVerbatimBibleText()
+        {
+            var quest = Quest("birth-road-bethlehem");
+            var turns = GospelStorybookCatalog.GetDetails(quest, 0);
+            foreach (var item in new[] {
+                new { Index = 1, Speaker = "가브리엘", Source = "누가복음 1:28–35" },
+                new { Index = 2, Speaker = "마리아", Source = "누가복음 1:38" },
+                new { Index = 5, Speaker = "주의 사자", Source = "마태복음 1:20–21" }
+            })
+            {
+                var detail = turns[item.Index];
+                Assert.That(detail.Turn.Speaker, Is.EqualTo(item.Speaker));
+                Assert.That(detail.Turn.IsDramatized, Is.True);
+                Assert.That(detail.Turn.IsVerbatim, Is.False, "A scene paraphrase must not impersonate an exact HAN quotation.");
+                Assert.That(detail.Reference, Does.StartWith(item.Source));
+                Assert.That(GospelStorybookCatalog.GetStoryBeatIndex(quest, 0, item.Index), Is.EqualTo(item.Index));
+            }
+            Assert.That(GospelStorybookCatalog.GetStoryBeatCount(quest), Is.EqualTo(10));
+        }
+
         [Test]
         public void TempleConversationsStayInsideTheSceneAndKeepTheirSourceClassification()
         {

@@ -162,7 +162,7 @@ def main():
         'attempt': args.attempt, 'sourceFingerprint': fingerprint, 'selectedNative': native_refs,
         'buildArgv': build_argv, 'proofArgv': proof_argv, 'buildFolder': str(build), 'proofFolder': str(proof),
         'liveLeasePath': str(lease_path), 'ownedLeaseSnapshot': ref(run / 'owned-lease.executed.json'),
-        'maximumSharedSeconds': 900, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
+        'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'environmentOverrides': {key: lane.env[key] for key in ('FIRSTGAME_VALIDATION_ROOT', 'FIRSTGAME_BUILD_ROOT',
             'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'executionSources': pins, 'supervisorAcceptance': acceptance, 'publishReady': False, 'baselineReady': False}
@@ -181,7 +181,7 @@ def main():
             require(ref(ROOT / row['file']) == row, 'Selected actual Native reference changed')
         lane.remaining()
 
-    def child(label, argv, cap=900):
+    def child(label, argv, cap=native_driver.EXECUTION_LIMIT_SECONDS):
         controls()
         log = run / (label + '.stdout.log')
         event = controller.child(lane, label, argv, cap=cap, log=log)
@@ -231,7 +231,7 @@ def main():
             summary['sourceAfterFailureError'] = type(capture_error).__name__
         summary['automaticRetryOrRestoration'] = False
     summary.update(finishedUtc=datetime.now(timezone.utc).isoformat(),
-        executionLimit={'maximumSharedSeconds': 900, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
+        executionLimit={'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
             'startedMonotonic': lane.started, 'safeEndMonotonic': lane.safe_end},
         executedDriver=next(pin['recorded'] for pin in pins if pin['source']['file'] == str(Path(__file__).resolve().relative_to(ROOT))))
     write(run / 'summary.json', summary)

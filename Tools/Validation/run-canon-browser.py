@@ -61,12 +61,12 @@ def main():
     parser.add_argument('profile', choices=tuple(PROFILES))
     parser.add_argument('attempt')
     parser.add_argument('--timeout', type=int, default=180)
-    parser.add_argument('--review-timeout', type=int, default=180)
+    parser.add_argument('--review-timeout', type=int, default=600)
     parser.add_argument('--renderer', choices=('x11-mesa', 'swiftshader'), default='x11-mesa')
     parser.add_argument('--chromium', default=os.environ.get('CHROMIUM_BINARY', '/usr/bin/chromium'))
     args = parser.parse_args()
     need(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', args.attempt), 'New safe browser attempt required')
-    need(1 <= args.timeout <= 180 and 1 <= args.review_timeout <= 600, 'Bounded per-control/review timeouts required; shared900 remains unchanged')
+    need(1 <= args.timeout <= 180 and 1 <= args.review_timeout <= 600, 'Bounded per-control/review timeouts required; the user-authorized longer shared execution window still applies')
     native_driver = source_module('canon_browser_native_dependency', ROOT / 'Tools/Validation/run-canon-native.py')
     binding = source_module('restoration_source_binding', ROOT / 'Tools/Validation/restoration_source_binding.py')
     evidence = source_module('canon_browser_current_evidence', ROOT / 'Tools/Validation/canon_release_evidence.py')
@@ -145,7 +145,7 @@ def main():
         'ownedLeaseSnapshot': ref(run / 'owned-lease.executed.json'), 'executionSources': pins,
         'environmentOverrides': {key: lane.env[key] for key in ('FIRSTGAME_VALIDATION_ROOT', 'FIRSTGAME_BUILD_ROOT',
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
-        'maximumSharedSeconds': 900, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
+        'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
     write(run / 'invocation.json', invocation)
     summary = {'status': 'failed', 'scope': 'current-canon-browser-only', 'game': args.game,
@@ -176,7 +176,7 @@ def main():
         need(summary['guardBefore']['event']['exitCode'] == 0, 'Actual current owned guard failed')
         summary['idleBefore'] = child('idle-before', [sys.executable, 'Tools/Environment/assert-runtime-idle.py'], 20)
         need(summary['idleBefore']['event']['exitCode'] == 0, 'Another Unity/browser is active')
-        summary['execution'] = child('browser', argv, 900)
+        summary['execution'] = child('browser', argv, native_driver.EXECUTION_LIMIT_SECONDS)
         report_path = game_output / 'report.json'
         if report_path.is_file():
             with (run / 'report.executed.json').open('xb') as stream:
@@ -203,7 +203,7 @@ def main():
         summary['error'] = type(error).__name__ + ': ' + str(error)
         summary['automaticRetryOrApproval'] = False
     summary.update(finishedUtc=datetime.now(timezone.utc).isoformat(),
-        executionLimit={'maximumSharedSeconds': 900, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
+        executionLimit={'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
             'startedMonotonic': lane.started, 'safeEndMonotonic': lane.safe_end})
     write(run / 'summary.json', summary)
     print(json.dumps({'status': summary['status'], 'summary': ref(run / 'summary.json'),

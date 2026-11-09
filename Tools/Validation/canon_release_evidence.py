@@ -266,6 +266,12 @@ def verify_web_execution(game, proof_path, source_fingerprint):
     require(lease.get('state') == 'acquired', 'Actual acquired execution lease snapshot required')
     helper_sha = '9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad'
 
+    limits = summary.get('executionLimit', {})
+    maximum = limits.get('maximumSharedSeconds')
+    require(isinstance(maximum, int) and 900 <= maximum <= 21600
+            and invocation.get('maximumSharedSeconds') == maximum,
+            'Exact recorded user-authorized execution window required')
+
     def execution(key, expected_argv=None):
         record = summary[key]
         event = read(checked(record['receipt']))
@@ -290,7 +296,7 @@ def verify_web_execution(game, proof_path, source_fingerprint):
                 'Actual supervisor command/log specification differs: ' + key)
         start, end = timestamp(event['startedUtc']), timestamp(event['finishedUtc'])
         require(timestamp(lease['lease']['startedUtc']) <= start <= end <= timestamp(summary['finishedUtc']) <= deadline
-                and 0 < event.get('timeoutSeconds', 0) <= 900 and event.get('cleanupAndReportReservedSeconds') == 12,
+                and 0 < event.get('timeoutSeconds', 0) <= maximum and event.get('cleanupAndReportReservedSeconds') == 12,
                 'Actual execution timestamp/budget differs: ' + key)
         return event
 
@@ -302,11 +308,11 @@ def verify_web_execution(game, proof_path, source_fingerprint):
             <= timestamp(built['finishedUtc']) <= timestamp(proof['startedUtc'])
             <= timestamp(proof['finishedUtc']) <= timestamp(after['startedUtc']), 'Guard/build/restoration/proof/final guard ordering required')
     limits = summary.get('executionLimit', {})
-    require(limits.get('maximumSharedSeconds') == 900 and limits.get('leaseReserveSeconds') == 60
-            and limits.get('cleanupReserveSeconds') == 12 and 0 < limits['safeEndMonotonic'] - limits['startedMonotonic'] <= 900
-            and (timestamp(summary['finishedUtc']) - timestamp(before['startedUtc'])).total_seconds() <= 900
+    require(limits.get('maximumSharedSeconds') == maximum and limits.get('leaseReserveSeconds') == 60
+            and limits.get('cleanupReserveSeconds') == 12 and 0 < limits['safeEndMonotonic'] - limits['startedMonotonic'] <= maximum
+            and (timestamp(summary['finishedUtc']) - timestamp(before['startedUtc'])).total_seconds() <= maximum
             and (deadline - timestamp(summary['finishedUtc'])).total_seconds() >= 60,
-            'Original shared900/lease60/cleanup12 limit must remain enforced')
+            'Recorded extended execution window, owned lease and cleanup reservations must remain enforced')
     return {'summary': ref(actual_path), 'preservedSummary': ref(sidecar), 'invocation': summary['invocation']}
 
 

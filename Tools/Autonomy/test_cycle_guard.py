@@ -177,6 +177,114 @@ class GuardTests(unittest.TestCase):
             guard.acquire(self.backend, self.record, "too-long", 2701, now=lambda: NOW)
         self.assertFalse(self.fake.calls)
 
+    def test_default_duration_and_lease_schema_remain_unchanged(self):
+        lease = self.acquire()["lease"]
+        self.assertEqual(guard.MAX_SECONDS, 2700)
+        self.assertEqual(guard.parse_time(lease["deadlineUtc"]) - guard.parse_time(lease["startedUtc"]),
+                         timedelta(seconds=2700))
+        self.assertNotIn("executionAuthorization", lease)
+
+    def test_explicit_authorization_records_six_hour_scope_and_preserves_owned_release(self):
+        record = guard.acquire(self.backend, self.record, "authorized-long", 21600, now=lambda: NOW,
+                               extended_authorized=True)
+        lease = record["lease"]
+        self.assertEqual(guard.parse_time(lease["deadlineUtc"]) - guard.parse_time(lease["startedUtc"]),
+                         timedelta(hours=6))
+        self.assertEqual(lease["executionAuthorization"], guard.EXTENDED_AUTHORIZATION)
+        self.assertEqual(lease["executionAuthorization"]["userInstruction"],
+                         "한도없이 해도된다. 무슨한도때문에멈춘거니?")
+        self.assertEqual(guard.check(self.backend, self.record,
+                                     now=lambda: NOW + timedelta(seconds=21599))["lease"], lease)
+        with self.assertRaises(guard.GuardError):
+            guard.check(self.backend, self.record, now=lambda: NOW + timedelta(seconds=21600))
+        guard.release(self.backend, self.record)
+        self.assertIsNone(self.fake.ref)
+        self.assertEqual(guard.load_record(self.record)["state"], "released")
+
+    def test_extended_bounds_fail_before_any_remote_request(self):
+        for seconds, authorized in ((0, True), (21601, True), (21600, False), (2701, False)):
+            with self.subTest(seconds=seconds, extended_authorized=authorized):
+                with self.assertRaises(guard.GuardError):
+                    guard.acquire(self.backend, self.record, "invalid-extended", seconds, now=lambda: NOW,
+                                  extended_authorized=authorized)
+                self.assertFalse(self.fake.calls)
+                self.assertFalse(self.record.exists())
+
+    def test_long_lease_cannot_omit_or_weaken_its_recorded_authorization(self):
+        lease = self.acquire()["lease"]
+        lease["deadlineUtc"] = guard.stamp(NOW + timedelta(seconds=21600))
+        with self.assertRaises(guard.GuardError):
+            guard.validate_lease(lease)
+        lease["executionAuthorization"] = dict(guard.EXTENDED_AUTHORIZATION)
+        self.assertEqual(guard.validate_lease(lease), lease)
+        lease["executionAuthorization"]["scope"] = "Unbounded background work"
+        with self.assertRaises(guard.GuardError):
+            guard.validate_lease(lease)
+
+    def test_extended_authorization_cannot_steal_an_expired_remote_lease(self):
+        self.acquire()
+        other = self.record.with_name("extended-other.json")
+        with self.assertRaises(guard.GuardError):
+            guard.acquire(self.backend, other, "not-a-takeover", 21600,
+                          now=lambda: NOW + timedelta(days=1), extended_authorized=True)
+        self.assertFalse(other.exists())
+        self.assertEqual(self.fake.ref, CREATED)
+        self.assertFalse(any(call[0] == "git" for call in self.fake.calls))
+
+    def test_extended_run_passes_its_recorded_deadline_to_the_child(self):
+        class Child:
+            pid = 123456
+            waits = []
+            def wait(self, timeout):
+                self.waits.append(timeout)
+                return 0
+        child = Child()
+        with patch.object(guard.os, "killpg"):
+            code = guard.run_cycle(self.backend, self.record, "authorized-run", 21600, ["fake-command"],
+                                   now=lambda: NOW, popen=lambda *a, **k: child, extended_authorized=True)
+        self.assertEqual(code, 0)
+        self.assertEqual(child.waits, [21600, 10])
+        self.assertIsNone(self.fake.ref)
+        self.assertEqual(guard.load_record(self.record)["lease"]["executionAuthorization"],
+                         guard.EXTENDED_AUTHORIZATION)
+
+    def test_cli_requires_explicit_flag_before_remote_access(self):
+        for action in ("acquire", "run"):
+            with self.subTest(action=action):
+                with patch.object(guard, "Backend") as backend, patch("sys.stderr"):
+                    with self.assertRaises(SystemExit) as error:
+                        guard.main([action, "--record", str(self.record), "--run-id", "cli-unapproved",
+                                    "--timeout-seconds", "2701"])
+                self.assertEqual(error.exception.code, 2)
+                backend.assert_not_called()
+
+    def test_cli_extended_flag_is_limited_to_acquire_and_run(self):
+        for action in ("check", "release"):
+            with self.subTest(action=action):
+                with patch.object(guard, "Backend") as backend, patch("sys.stderr"):
+                    with self.assertRaises(SystemExit) as error:
+                        guard.main([action, "--record", str(self.record), "--extended-authorized"])
+                self.assertEqual(error.exception.code, 2)
+                backend.assert_not_called()
+
+    def test_cli_dispatches_authorized_acquire_and_run(self):
+        for action in ("acquire", "run"):
+            with self.subTest(action=action):
+                target = "acquire" if action == "acquire" else "run_cycle"
+                result = {"state": "acquired"} if action == "acquire" else 0
+                arguments = [action, "--record", str(self.record), "--run-id", "cli-authorized",
+                             "--timeout-seconds", "21600", "--extended-authorized"]
+                if action == "run":
+                    arguments += ["--", "fake-command"]
+                with patch.object(guard, "Backend", return_value=self.backend), \
+                     patch.object(guard, "local_mutex"), patch.object(guard, target, return_value=result) as dispatch, \
+                     patch("builtins.print"):
+                    self.assertEqual(guard.main(arguments), 0)
+                expected = [self.backend, self.record, "cli-authorized", 21600]
+                if action == "run":
+                    expected.append(["fake-command"])
+                dispatch.assert_called_once_with(*expected, extended_authorized=True)
+
     def test_local_mutex_rejects_concurrent_holder(self):
         path = Path(self.directory.name) / "mutex"
         with guard.local_mutex(path):

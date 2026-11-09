@@ -1,6 +1,6 @@
 {
   "formatVersion": 1,
-  "revision": "gospel-nativity-voice-2026-11-02",
+  "revision": "canon-dialogue-2026-11-09",
   "provider": "Offline MeloTTS Korean",
   "speakerDescription": "One generic Korean AI narrator; not character actors or a cloned person.",
   "speakerId": 0,
@@ -13,15 +13,18 @@
   "modelCheckpointSha256": "48e3ff3fd0b5348e095f0468e60ae727507564100f58142ef3a922ead6e0a4d0",
   "input": {
     "file": "Tools/Voice/Nativity/dialogue-lines.json",
-    "sha256": "a84aed30864b9347306f0365811b0664612abf1115e51220369c156c88eba8dc"
+    "bytes": 8248,
+    "sha256": "8033005b839bdfb728eb9afc2b0f910f4b78fe45734389d7d7e0566924cd4629"
   },
   "storySource": {
     "file": "Games/PathOfDawn/Assets/Game/Core/GospelStorybookCatalog.cs",
-    "sha256": "0972723224dcdd031330cd1d89b6405dde20318f6cdd1e0c3fb76abf4892a23b"
+    "bytes": 37235,
+    "sha256": "2d98ab5d1951327ab75225c8d2791f04b096c0465046f891ce55f4fb760f8c14"
   },
   "generator": {
-    "file": "Tools/Voice/Nativity/render-voice.py",
-    "sha256": "66ec09da5664e68ef23f1d66f9b3d860a0861549af54360d26719be122688847"
+    "file": "Tools/Voice/CanonArt/render-changed.py",
+    "bytes": 15759,
+    "sha256": "c67763d0f9dea13a9fec5e15235d1963040f10adbe45f57bad6cb407fa10659f"
   },
   "settings": {
     "speed": 0.98,
@@ -42,124 +45,125 @@
   },
   "manifest": {
     "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nativity-voice.json",
-    "sha256": "a6458e8a4fe16803d6a848fcfe6a37dc61725d13b8a57817dbde44106a3be6c4"
+    "bytes": 16829,
+    "sha256": "e5061a2610ae38c00ae226f96018295bfd2c6f239cb414c960cce71d8b443615"
   },
-  "totalBytes": 1975891,
-  "totalSeconds": 287.894374,
+  "totalBytes": 1541702,
+  "totalSeconds": 224.894343,
   "lines": [
     {
       "key": "birth-road-bethlehem:1",
       "questId": "birth-road-bethlehem",
       "beatIndex": 1,
-      "speaker": "이야기",
-      "text": "누가복음은 천사 가브리엘이 마리아를 찾아왔다고 전합니다. 태어날 아들의 이름은 예수이며, 지극히 높으신 이의 아들이라 불리고 그 나라가 끝이 없으리라는 소식이었습니다.",
-      "speechText": "누가복음은 천사 가브리엘이 마리아를 찾아왔다고 전합니다. 태어날 아들의 이름은 예수이며, 지극히 높으신 이의 아들이라 불리고 그 나라가 끝이 없으리라는 소식이었습니다.",
-      "resourcePath": "Voice/GospelNativity/road-bethlehem-01-4e2070800a44",
-      "textSha256": "4e2070800a448bcc9f40eba425498ecbd4ad02af34a7ef7eb2f6d0cfcda9a8e9",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-01-4e2070800a44.ogg",
-      "bytes": 98538,
-      "sha256": "6bc281da9eafcc8b501750129e0d892d6dd013d84d22138c52bfc6b5165e9207",
-      "seconds": 14.4,
+      "speaker": "가브리엘",
+      "text": "마리아여, 두려워하지 마라. 네가 아들을 낳을 것이니 그 이름을 예수라 하여라. 그분은 지극히 높으신 이의 아들이라 불릴 것이며, 그 나라는 끝이 없을 것이다.",
+      "speechText": "마리아여, 두려워하지 마라. 네가 아들을 낳을 것이니 그 이름을 예수라 하여라. 그분은 지극히 높으신 이의 아들이라 불릴 것이며, 그 나라는 끝이 없을 것이다.",
+      "resourcePath": "Voice/GospelNativity/road-bethlehem-01-fa37471ec8a3",
+      "textSha256": "fa37471ec8a3dcb23790a1a31eda9be6e4ee6b1ea42be80c2e496585b9a419ae",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-01-fa37471ec8a3.ogg",
+      "bytes": 94709,
+      "sha256": "4e89949e1feaa559fa4c8209366d2e9f8127f523aadeb318a029a51c0ad7b1e0",
+      "seconds": 14.600031,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/road-bethlehem-01-4e2070800a44.wav",
-      "rawSha256": "2c3e6f734244f32b756d23ab22eeead3f84f9ba802e8d321892c3e0a24fc000c",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/road-bethlehem-01-fa37471ec8a3.wav",
+      "rawSha256": "7a466f0dbc7947582c922a01ff57e8c83f7fd1e4a655f90f0f7ebe7170cc920e",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-road-bethlehem:2",
       "questId": "birth-road-bethlehem",
       "beatIndex": 2,
-      "speaker": "이야기",
-      "text": "마리아는 어떻게 이런 일이 있을지 물었습니다. 성령이 임하시리라는 말을 들은 뒤, 자신을 주의 여종이라 하며 그 말씀대로 이루어지기를 받아들였습니다.",
-      "speechText": "마리아는 어떻게 이런 일이 있을지 물었습니다. 성령이 임하시리라는 말을 들은 뒤, 자신을 주의 여종이라 하며 그 말씀대로 이루어지기를 받아들였습니다.",
-      "resourcePath": "Voice/GospelNativity/road-bethlehem-02-b55f762034ef",
-      "textSha256": "b55f762034efa69295677d4cb914f3bfef1d84f6be89e81d81d3863dbec19808",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-02-b55f762034ef.ogg",
-      "bytes": 88358,
-      "sha256": "e88a2e6aa35ec3a975dcf60496b596aeff3dd6318cc23ca0eaaebdc0a4509fea",
-      "seconds": 13.300031,
+      "speaker": "마리아",
+      "text": "저는 주의 여종입니다. 말씀하신 대로 제게 이루어지기를 바랍니다.",
+      "speechText": "저는 주의 여종입니다. 말씀하신 대로 제게 이루어지기를 바랍니다.",
+      "resourcePath": "Voice/GospelNativity/road-bethlehem-02-b3a8696991a0",
+      "textSha256": "b3a8696991a09f3cb2d65214a63701a5a48389754aa6718ac95fc7442665c064",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-02-b3a8696991a0.ogg",
+      "bytes": 43927,
+      "sha256": "4389d646c9f423e014aace74d11adf8ec0bd6765b33395dd5ddd0c7e2766890d",
+      "seconds": 6.700031,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/road-bethlehem-02-b55f762034ef.wav",
-      "rawSha256": "9a2cf15c172c751aa3a7574b72ea78e5491b1af9a80874e4717b67460ba3d012",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/road-bethlehem-02-b3a8696991a0.wav",
+      "rawSha256": "d18312b4287c18da4f0d479d2f2560b1025ea829b8eb8003f4d79f694463f7b8",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-road-bethlehem:5",
       "questId": "birth-road-bethlehem",
       "beatIndex": 5,
-      "speaker": "이야기",
-      "text": "그때 요셉의 꿈에 주의 사자가 나타납니다. 마리아에게 잉태된 이는 성령으로 된 것이라고 알리고, 아들의 이름을 예수라 하라고 합니다. 그가 자기 백성을 죄에서 구원할 이이기 때문입니다.",
-      "speechText": "그때 요셉의 꿈에 주의 사자가 나타납니다. 마리아에게 잉태된 이는 성령으로 된 것이라고 알리고, 아들의 이름을 예수라 하라고 합니다. 그가 자기 백성을 죄에서 구원할 이이기 때문입니다.",
-      "resourcePath": "Voice/GospelNativity/road-bethlehem-05-553bb24e4d6f",
-      "textSha256": "553bb24e4d6f5ee47b5136450df5950ea8aa4d8a5dfc8a1ebbce4bbfab215422",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-05-553bb24e4d6f.ogg",
-      "bytes": 107708,
-      "sha256": "82d52182909e5603c754ebee59e51affda2f43247ffe49528b41d95705657581",
-      "seconds": 16.400031,
+      "speaker": "주의 사자",
+      "text": "다윗의 자손 요셉아, 마리아를 맞아들이기를 두려워하지 마라. 그에게 잉태된 이는 성령으로 된 것이다. 아들의 이름을 예수라 하여라. 그가 자기 백성을 죄에서 구원할 것이다.",
+      "speechText": "다윗의 자손 요셉아, 마리아를 맞아들이기를 두려워하지 마라. 그에게 잉태된 이는 성령으로 된 것이다. 아들의 이름을 예수라 하여라. 그가 자기 백성을 죄에서 구원할 것이다.",
+      "resourcePath": "Voice/GospelNativity/road-bethlehem-05-9965532da77e",
+      "textSha256": "9965532da77e55183b95b051986aa03773007d0c1fb8019aeeb62dbcd8eb1d45",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-05-9965532da77e.ogg",
+      "bytes": 103374,
+      "sha256": "19494bc38bf2c0304638bcf733bc6954abd004f1f4ed51564c28d5846fbe8846",
+      "seconds": 16.4,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/road-bethlehem-05-553bb24e4d6f.wav",
-      "rawSha256": "cb4970344cb2a184851384f86a463de169c9ff6bf5b11f9dd3b1d29508eea888",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/road-bethlehem-05-9965532da77e.wav",
+      "rawSha256": "9d4527a7d8ad9a6834a35dcfff9e562b6941d60298cd92ca5882e2568213f45a",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-road-bethlehem:6",
       "questId": "birth-road-bethlehem",
       "beatIndex": 6,
       "speaker": "이야기",
-      "text": "요셉은 잠에서 깨어 주의 사자가 분부한 대로 마리아를 아내로 맞아들였습니다. 누가와 마태가 전하는 두 이야기는 이 아기의 탄생을 각자의 자리에서 비춥니다.",
-      "speechText": "요셉은 잠에서 깨어 주의 사자가 분부한 대로 마리아를 아내로 맞아들였습니다. 누가와 마태가 전하는 두 이야기는 이 아기의 탄생을 각자의 자리에서 비춥니다.",
-      "resourcePath": "Voice/GospelNativity/road-bethlehem-06-9ab3cadc556a",
-      "textSha256": "9ab3cadc556aaa476f1f5299ab8e2b61003748b69d31b71631947dd14530365b",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-06-9ab3cadc556a.ogg",
-      "bytes": 91016,
-      "sha256": "b9115e412312b227b2dcd917266fcf0817b1ed81405706e7217da6f64ae5b197",
-      "seconds": 12.7,
+      "text": "요셉은 잠에서 깨어 주의 사자가 분부한 대로 마리아를 아내로 맞아들였습니다.",
+      "speechText": "요셉은 잠에서 깨어 주의 사자가 분부한 대로 마리아를 아내로 맞아들였습니다.",
+      "resourcePath": "Voice/GospelNativity/road-bethlehem-06-db17db69e2a7",
+      "textSha256": "db17db69e2a700d715eb3ba6e71cb9e7425e6b9032f2d1846fcbb7c498dcf835",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-06-db17db69e2a7.ogg",
+      "bytes": 46011,
+      "sha256": "4f8f945d14856c4607c2440f8ebfa1550dd66476c4a0b911fd6cf4b5e45c0ecc",
+      "seconds": 6.2,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/road-bethlehem-06-9ab3cadc556a.wav",
-      "rawSha256": "2fa061c430663fac9e5ca48ff5c730e6f258d52bd2a189ed6890dd37259720af",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/road-bethlehem-06-db17db69e2a7.wav",
+      "rawSha256": "13f3b972d8e91d159e291b728ae0b6353e80ce8cff5f0a4186f54543f7d4e5bc",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-birth-manger:0",
       "questId": "birth-birth-manger",
       "beatIndex": 0,
       "speaker": "이야기",
-      "text": "그들이 베들레헴에 있을 때, 마리아가 해산할 날이 찼습니다. 마리아는 첫아들을 낳았습니다. 기다리던 소식은 이제 품에 안을 수 있는 아기로 다가왔습니다.",
-      "speechText": "그들이 베들레헴에 있을 때, 마리아가 해산할 날이 찼습니다. 마리아는 첫아들을 낳았습니다. 기다리던 소식은 이제 품에 안을 수 있는 아기로 다가왔습니다.",
-      "resourcePath": "Voice/GospelNativity/birth-manger-00-04fa0bea6bd6",
-      "textSha256": "04fa0bea6bd657c2c2d478e0801fe92043858d520b0c8263c0b306722cb49af9",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-manger-00-04fa0bea6bd6.ogg",
-      "bytes": 91847,
-      "sha256": "f2fa476cd0a058b0f6478d0ba484f015d0661005424b659ca935c6a0cff707bc",
-      "seconds": 14.1,
+      "text": "베들레헴에서 마리아가 해산할 날이 찼습니다. 마리아는 첫아들을 낳았습니다.",
+      "speechText": "베들레헴에서 마리아가 해산할 날이 찼습니다. 마리아는 첫아들을 낳았습니다.",
+      "resourcePath": "Voice/GospelNativity/birth-manger-00-83ef0c24dff9",
+      "textSha256": "83ef0c24dff999e040bc1ffba2654a93927d4f526eea47da32e07d6ca0b7871b",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-manger-00-83ef0c24dff9.ogg",
+      "bytes": 48333,
+      "sha256": "0048661b81dec2c5cab852d416d361ee388a4cb357d6d8e2bb05663a1b3ef7ce",
+      "seconds": 7.1,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/birth-manger-00-04fa0bea6bd6.wav",
-      "rawSha256": "05c4d18c9f81b63dc6174348ea42bdde3c8b8a94de785150973dfb9bc475469e",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/birth-manger-00-83ef0c24dff9.wav",
+      "rawSha256": "32da3a612277ecc1be75521f13b633e7e7506a3663ffa3bb167428ea3f695a3e",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-birth-manger:1",
       "questId": "birth-birth-manger",
       "beatIndex": 1,
       "speaker": "이야기",
-      "text": "마리아는 아기를 강보로 싸서 구유에 뉘었습니다. 누가는 사관에 머물 곳이 없었다고 기록합니다. 구유는 뒤에 목자들이 아기를 알아볼 표적이 됩니다.",
-      "speechText": "마리아는 아기를 강보로 싸서 구유에 뉘었습니다. 누가는 사관에 머물 곳이 없었다고 기록합니다. 구유는 뒤에 목자들이 아기를 알아볼 표적이 됩니다.",
-      "resourcePath": "Voice/GospelNativity/birth-manger-01-32f79e6b275c",
-      "textSha256": "32f79e6b275ca59b5567ad5db7fb568d047be646ed859791a274934010e48b26",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-manger-01-32f79e6b275c.ogg",
-      "bytes": 88278,
-      "sha256": "58b4610537de7d478087d1fe76e9cc9ec39bc7cc1cfcf892d234aa46440f96b5",
-      "seconds": 13.100031,
+      "text": "사관에는 머물 곳이 없었습니다. 마리아는 아기를 강보로 싸서 구유에 뉘었습니다.",
+      "speechText": "사관에는 머물 곳이 없었습니다. 마리아는 아기를 강보로 싸서 구유에 뉘었습니다.",
+      "resourcePath": "Voice/GospelNativity/birth-manger-01-3e61e2261a78",
+      "textSha256": "3e61e2261a780acd6e54b5559c16a105467bb9ae761390baf697f313705d6856",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-manger-01-3e61e2261a78.ogg",
+      "bytes": 52587,
+      "sha256": "3cf66c04a37ae162008e09370f0d848b72cc2df386663eff297dc2eea2e0ca1d",
+      "seconds": 7.8,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/birth-manger-01-32f79e6b275c.wav",
-      "rawSha256": "490125f58ab5f8e0d4640dac499ac2ed935f44d7deda937650e4308ff277b354",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/birth-manger-01-3e61e2261a78.wav",
+      "rawSha256": "d9c9ee628fd5d3733d51037291f3c02c014c7038e4a49ab31324ea055983e414",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-night-shepherds:0",
@@ -178,7 +182,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/night-shepherds-00-3fda8f1d2dc2.wav",
       "rawSha256": "c918524a17cf855a114e10d94d4c165041552e8d5c62e13187ce88f3578ded1e",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-birth-good-news:1",
@@ -197,7 +206,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/birth-good-news-01-d22366959279.wav",
       "rawSha256": "04cb5f8b66094efb96d05e6c1860a7a64d973e3688dec4ce63b18e7228509371",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-birth-good-news:2",
@@ -216,45 +230,50 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/birth-good-news-02-2f261065156d.wav",
       "rawSha256": "5d8c8c914f54001063e8424957717b7583d21267b8f451cf6e9430719f9ec0a9",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-birth-good-news:3",
       "questId": "birth-birth-good-news",
       "beatIndex": 3,
-      "speaker": "이야기",
-      "text": "천사는 강보에 싸여 구유에 누인 아기를 보게 될 것이라고 말합니다. 그것이 목자들에게 주어진 표적이었습니다.",
-      "speechText": "천사는 강보에 싸여 구유에 누인 아기를 보게 될 것이라고 말합니다. 그것이 목자들에게 주어진 표적이었습니다.",
-      "resourcePath": "Voice/GospelNativity/birth-good-news-03-eb27b5ac77eb",
-      "textSha256": "eb27b5ac77ebe3a4b45b96ab01082cae2f8bd648f6939625cbeb116ba546950d",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-good-news-03-eb27b5ac77eb.ogg",
-      "bytes": 65878,
-      "sha256": "a1c5acac043e4aa27175d71f532db32f2493eb4906b2fc56b6b660b87320d4d3",
-      "seconds": 9.400031,
+      "speaker": "천사",
+      "text": "강보에 싸여 구유에 누인 아기를 찾을 것이다. 그것이 너희에게 표적이 될 것이다.",
+      "speechText": "강보에 싸여 구유에 누인 아기를 찾을 것이다. 그것이 너희에게 표적이 될 것이다.",
+      "resourcePath": "Voice/GospelNativity/birth-good-news-03-6e1da0dfa95e",
+      "textSha256": "6e1da0dfa95e419e532aa837b7fd5ece9bd4519f769a84a096ad093dcfb19763",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-good-news-03-6e1da0dfa95e.ogg",
+      "bytes": 49797,
+      "sha256": "8e11bdd1a9d65f97afe61a50a36b70ee0d973c77594351dfb992cb7d027157a7",
+      "seconds": 7.4,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/birth-good-news-03-eb27b5ac77eb.wav",
-      "rawSha256": "0fe40953e8e355ed2baf8802f486f7ca5c48a25684f3b9dd96fc3133c58c9516",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/birth-good-news-03-6e1da0dfa95e.wav",
+      "rawSha256": "32b56e458f4497e0c8787e164b8f2cbd5745c3b1253bd901e9a61b19017dd3d0",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-birth-good-news:4",
       "questId": "birth-birth-good-news",
       "beatIndex": 4,
-      "speaker": "이야기",
-      "text": "홀연히 많은 천군이 그 천사와 함께 하나님을 찬송합니다. 지극히 높은 곳의 하나님께 영광을, 땅에는 하나님이 기뻐하신 사람들 중의 평화를 선포했습니다.",
-      "speechText": "홀연히 많은 천군이 그 천사와 함께 하나님을 찬송합니다. 지극히 높은 곳의 하나님께 영광을, 땅에는 하나님이 기뻐하신 사람들 중의 평화를 선포했습니다.",
-      "resourcePath": "Voice/GospelNativity/birth-good-news-04-99631d135b7e",
-      "textSha256": "99631d135b7ed5e94bb823cb92ea0ddcab1c9a5c8d55d80fa0d5c3181e82ec68",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-good-news-04-99631d135b7e.ogg",
-      "bytes": 94200,
-      "sha256": "a307c502af39a2574c71d746b8280abb18a8b2b1b1936ea5643b9a0e3963a661",
-      "seconds": 13.8,
+      "speaker": "천군",
+      "text": "지극히 높은 곳에서는 하나님께 영광! 땅에서는 하나님이 기뻐하시는 사람들에게 평화!",
+      "speechText": "지극히 높은 곳에서는 하나님께 영광! 땅에서는 하나님이 기뻐하시는 사람들에게 평화!",
+      "resourcePath": "Voice/GospelNativity/birth-good-news-04-17822656e72c",
+      "textSha256": "17822656e72c07a6c1bbb8c1b6ef21bceb0fc0a46413dad6ffb10129e7b6a581",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/birth-good-news-04-17822656e72c.ogg",
+      "bytes": 56720,
+      "sha256": "83b2b1b8598c75e050df0c1a60fb94d61de6253f988b452ecd0eccd30e5de856",
+      "seconds": 8.3,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/birth-good-news-04-99631d135b7e.wav",
-      "rawSha256": "32e114608e7cba976658d3a5cf3c731b43bd2a577a2195b47bd7126bb686abbc",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/birth-good-news-04-17822656e72c.wav",
+      "rawSha256": "a70d47b44e9794f3137742b399751b2da9a7ef6a6867c1d747fcc7d02ce90d4d",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-manger-witnesses:0",
@@ -273,7 +292,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/manger-witnesses-00-a5dbd99a6db2.wav",
       "rawSha256": "ba4b60a23b00b60d02673b0727f27ae34a1e79a3ec5b89f96f8be96f12cfa385",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-birth-remembered:0",
@@ -292,45 +316,50 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/birth-remembered-00-3dd516201b7b.wav",
       "rawSha256": "a5599594efdcab2bae489036a2a1d394e5cffd6ec2cddb90d23000c521449539",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-name-jesus:0",
       "questId": "birth-name-jesus",
       "beatIndex": 0,
       "speaker": "이야기",
-      "text": "할례할 팔 일이 되었습니다. 아기의 이름을 예수라 하였습니다. 누가는 이 이름이 수태하기 전에 천사가 일컬었던 이름이라고 기록합니다.",
-      "speechText": "할례할 팔 일이 되었습니다. 아기의 이름을 예수라 하였습니다. 누가는 이 이름이 수태하기 전에 천사가 일컬었던 이름이라고 기록합니다.",
-      "resourcePath": "Voice/GospelNativity/name-jesus-00-3025e5380f0b",
-      "textSha256": "3025e5380f0b76a022a1d40451ff587f4787900beb8c5bb82c56d841b2e63309",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/name-jesus-00-3025e5380f0b.ogg",
-      "bytes": 78274,
-      "sha256": "d61988fe084cf3b37d113b4d91e08cfe20ece961f815a105694ab5fae40e6ecc",
-      "seconds": 11.9,
+      "text": "할례할 팔 일이 되었습니다. 아기의 이름을 예수라 하였습니다. 수태하기 전에 천사가 일러 준 이름입니다.",
+      "speechText": "할례할 팔 일이 되었습니다. 아기의 이름을 예수라 하였습니다. 수태하기 전에 천사가 일러 준 이름입니다.",
+      "resourcePath": "Voice/GospelNativity/name-jesus-00-4afc7973695f",
+      "textSha256": "4afc7973695f46bf9a19b23e5e5bddc1e43d18048ddb8213c72568ea0293f7b4",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/name-jesus-00-4afc7973695f.ogg",
+      "bytes": 62722,
+      "sha256": "cbc536e69dfadfae26b762ffad02b36388b6dfdfa263ef27586f22e10a55a932",
+      "seconds": 9.9,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/name-jesus-00-3025e5380f0b.wav",
-      "rawSha256": "7f900e13c69c85d478524833e64c0af62a1a6716cdfd88e10b172f14183585a9",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/name-jesus-00-4afc7973695f.wav",
+      "rawSha256": "b42fe157ab650e131fab78a6719ca4d61d0534f584a6ff6905d02b1ce16ddf03",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-temple-dedication:0",
       "questId": "birth-temple-dedication",
       "beatIndex": 0,
       "speaker": "이야기",
-      "text": "모세의 법대로 결례의 날이 찼을 때, 부모는 아기를 데리고 예루살렘으로 올라갔습니다. 팔 일의 이름 짓기와 이 성전 방문은 서로 구분되는 기록입니다.",
-      "speechText": "모세의 법대로 결례의 날이 찼을 때, 부모는 아기를 데리고 예루살렘으로 올라갔습니다. 팔 일의 이름 짓기와 이 성전 방문은 서로 구분되는 기록입니다.",
-      "resourcePath": "Voice/GospelNativity/temple-dedication-00-a200fd42be34",
-      "textSha256": "a200fd42be3497b81692d8f9b0ae7c27210add7eda6863d1e2c21013a93b9283",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/temple-dedication-00-a200fd42be34.ogg",
-      "bytes": 87908,
-      "sha256": "f309d61557d1da3bd6c1b04fdbb70661cbe0fe14c80d3ed97b7a97265d6a5e5e",
-      "seconds": 13.2,
+      "text": "모세의 법대로 결례의 날이 차자, 부모는 아기를 데리고 예루살렘으로 올라갔습니다.",
+      "speechText": "모세의 법대로 결례의 날이 차자, 부모는 아기를 데리고 예루살렘으로 올라갔습니다.",
+      "resourcePath": "Voice/GospelNativity/temple-dedication-00-cd9bc9612973",
+      "textSha256": "cd9bc9612973169eb9b5da8e9ffb273e4df95a212380f79b054d5cfa1a93af21",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/temple-dedication-00-cd9bc9612973.ogg",
+      "bytes": 50848,
+      "sha256": "59b5d3cc189d856211a2db236fa64d2c78f55722674f0a2acc96eb2d77d71bff",
+      "seconds": 7.7,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/temple-dedication-00-a200fd42be34.wav",
-      "rawSha256": "5fc56296a036c6d0a0b58f92be865db8be12327bcfdfbd27c0cb04a4d8f49716",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/temple-dedication-00-cd9bc9612973.wav",
+      "rawSha256": "81d50d5c319fd8580546cd8d82a2f5ecb278d724caea97e17ed1364c0c867aef",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-simeon-peace:2",
@@ -349,7 +378,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/simeon-peace-02-286a39639608.wav",
       "rawSha256": "4bf7f32ca36edc08897ddc4e8b14be2796652a561f2346270c1d60b58d3a09a5",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-simeon-peace:3",
@@ -368,7 +402,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/simeon-peace-03-ace5ffd6fce4.wav",
       "rawSha256": "c9e9f3fdbac0b07157637d1df5c3766eda7d776c681fea40162fc84b112f16ab",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-simeon-peace:5",
@@ -387,7 +426,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/simeon-peace-05-5bb9a1bc6ece.wav",
       "rawSha256": "4b86873bb274e5ae8ed765e8a49a641ebc0a2a38512b9b5c404dafe2e3623f25",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-anna-thanksgiving:1",
@@ -406,82 +450,87 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice/anna-thanksgiving-01-4c72dd0997b1.wav",
       "rawSha256": "84d143e0b1385675af940468bfeed4562b739b32c7c0f0ac8d9ed4200fef043f",
-      "generationSource": "preserved-base22-same-clip"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "birth-nazareth-growth:0",
       "questId": "birth-nazareth-growth",
       "beatIndex": 0,
       "speaker": "이야기",
-      "text": "마태복음에는 탄생 뒤의 또 다른 기록이 있습니다. 동방에서 온 박사들이 아기와 마리아가 있는 집에 들어가 경배하고 예물을 드렸습니다. 누가는 목자들을, 마태는 이 방문을 전합니다.",
-      "speechText": "마태복음에는 탄생 뒤의 또 다른 기록이 있습니다. 동방에서 온 박사들이 아기와 마리아가 있는 집에 들어가 경배하고 예물을 드렸습니다. 누가는 목자들을, 마태는 이 방문을 전합니다.",
-      "resourcePath": "Voice/GospelNativity/nazareth-growth-00-09d3c8017d36",
-      "textSha256": "09d3c8017d36daf67661c7f3864d3c523c819653b967ea52f7bf0464edab080b",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-00-09d3c8017d36.ogg",
-      "bytes": 108943,
-      "sha256": "69a2b76a03f37e1bb222cb47bfbf94d8164e82a7450acb68aafc68353fa96058",
-      "seconds": 15.9,
+      "text": "동방에서 온 박사들이 아기와 마리아가 있는 집에 들어가 경배하고 예물을 드렸습니다.",
+      "speechText": "동방에서 온 박사들이 아기와 마리아가 있는 집에 들어가 경배하고 예물을 드렸습니다.",
+      "resourcePath": "Voice/GospelNativity/nazareth-growth-00-185b6266a89e",
+      "textSha256": "185b6266a89e5d94dab3c134c7ebb11fdc21d56350a3500e34c797da2ebda30c",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-00-185b6266a89e.ogg",
+      "bytes": 49889,
+      "sha256": "ebd8e914184cdb34e4116a81491201124154e0be896c3f85b1c06693936f0fdb",
+      "seconds": 6.8,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/nazareth-growth-00-09d3c8017d36.wav",
-      "rawSha256": "16eb20462dfa827d1ec3af96880196a9c76eb2df44a528a0450fc8d31b980185",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/nazareth-growth-00-185b6266a89e.wav",
+      "rawSha256": "642404dad89c398c8fab5f033e476e9639e7f0e0b7386e2d3b59d2500895bfb8",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-nazareth-growth:3",
       "questId": "birth-nazareth-growth",
       "beatIndex": 3,
       "speaker": "이야기",
-      "text": "헤롯이 죽은 뒤, 요셉은 아기와 그 어머니를 데리고 돌아옵니다. 유대로 가기를 두려워한 그는 꿈의 지시를 따라 갈릴리로 물러가 나사렛에 살았습니다. 이것이 마태가 전하는 귀향입니다.",
-      "speechText": "헤롯이 죽은 뒤, 요셉은 아기와 그 어머니를 데리고 돌아옵니다. 유대로 가기를 두려워한 그는 꿈의 지시를 따라 갈릴리로 물러가 나사렛에 살았습니다. 이것이 마태가 전하는 귀향입니다.",
-      "resourcePath": "Voice/GospelNativity/nazareth-growth-03-2359dbd7f874",
-      "textSha256": "2359dbd7f874ca72b9467ee6cf9cc9b92240676ea3cddbcd58831a2638898c3d",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-03-2359dbd7f874.ogg",
-      "bytes": 106112,
-      "sha256": "723eb8313f14dc4fa4bb00301e244aa40f9cd5443bfadd805fe6e7bd71b75f0c",
-      "seconds": 15.7,
+      "text": "헤롯이 죽은 뒤, 요셉은 아기와 그 어머니를 데리고 돌아옵니다. 유대로 가기를 두려워한 그는 꿈의 지시를 따라 갈릴리로 물러가 나사렛에 살았습니다.",
+      "speechText": "헤롯이 죽은 뒤, 요셉은 아기와 그 어머니를 데리고 돌아옵니다. 유대로 가기를 두려워한 그는 꿈의 지시를 따라 갈릴리로 물러가 나사렛에 살았습니다.",
+      "resourcePath": "Voice/GospelNativity/nazareth-growth-03-cb2595204f03",
+      "textSha256": "cb2595204f03f2e7e17852d3e928aab29781d0fffe3651e7867e6baad392b201",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-03-cb2595204f03.ogg",
+      "bytes": 84259,
+      "sha256": "dc871079d653388fac455658cb7f6bb7b80904e2a9d7c50435b75d789481308d",
+      "seconds": 12.200031,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/nazareth-growth-03-2359dbd7f874.wav",
-      "rawSha256": "f8f0a563198c7e372a63c7f7f418778bd017c954d1636b280ea914621b83fd73",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/nazareth-growth-03-cb2595204f03.wav",
+      "rawSha256": "cb70fccffc2fb9fc366a18f912885d0f5bc1a70aec78bd6100921af9505888f9",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-nazareth-growth:4",
       "questId": "birth-nazareth-growth",
       "beatIndex": 4,
       "speaker": "이야기",
-      "text": "누가는 나사렛에서 아기가 자라며 강하여지고 지혜가 충족하며, 하나님의 은혜가 그 위에 있었다고 기록합니다. 탄생을 지켜본 사람들의 이야기는 자라시는 예수님에게로 이어집니다.",
-      "speechText": "누가는 나사렛에서 아기가 자라며 강하여지고 지혜가 충족하며, 하나님의 은혜가 그 위에 있었다고 기록합니다. 탄생을 지켜본 사람들의 이야기는 자라시는 예수님에게로 이어집니다.",
-      "resourcePath": "Voice/GospelNativity/nazareth-growth-04-e9667fb10585",
-      "textSha256": "e9667fb105853a28ca3b9b7479ade23ceae78777786f4165dec16da9f84d0ced",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-04-e9667fb10585.ogg",
-      "bytes": 105657,
-      "sha256": "d94cce3b899ac0fc4dceaa5dbcf616a58c68c621f03d7882ae95fa45063b4395",
-      "seconds": 15.3,
+      "text": "나사렛에서 아기가 자라며 강하여지고 지혜가 충족했습니다. 하나님의 은혜가 그 위에 있었습니다.",
+      "speechText": "나사렛에서 아기가 자라며 강하여지고 지혜가 충족했습니다. 하나님의 은혜가 그 위에 있었습니다.",
+      "resourcePath": "Voice/GospelNativity/nazareth-growth-04-10904202c7c9",
+      "textSha256": "10904202c7c9c447572e7164e0626bd8153fc6b8f1442a980b48153afa28f197",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nazareth-growth-04-10904202c7c9.ogg",
+      "bytes": 59248,
+      "sha256": "c2b0a2de703b12ace35f43561eaee140a2e14038c0087d79ce198a76fcb23a88",
+      "seconds": 8.7,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice/nazareth-growth-04-e9667fb10585.wav",
-      "rawSha256": "f23f0530fec4f3652a0223d0d17cb07e7ba6a4928ca11508cd8f26bb846ced47",
-      "generationSource": "preserved-base22-same-clip"
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/nazareth-growth-04-10904202c7c9.wav",
+      "rawSha256": "fbc039dc66c4fb6f6ccf0b9b2625c865c833dd4d5ce36dc99477fdcb249ecb8b",
+      "generationSource": "new-local-offline-synthesis"
     },
     {
       "key": "birth-road-bethlehem:0",
       "questId": "birth-road-bethlehem",
       "beatIndex": 0,
       "speaker": "이야기",
-      "text": "이야기는 갈릴리의 작은 동네, 나사렛에서 시작됩니다. 마리아는 다윗의 집안 사람 요셉과 정혼한 처녀였습니다.",
-      "speechText": "이야기는 갈릴리의 작은 동네, 나사렛에서 시작됩니다. 마리아는 다윗의 집안 사람 요셉과 정혼한 처녀였습니다.",
-      "resourcePath": "Voice/GospelNativity/road-bethlehem-00-d9014226250f",
-      "textSha256": "d9014226250f8f19f3455cd15ff6fb1f44e887bfc0e6c52a3fab4f91d409345e",
-      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-00-d9014226250f.ogg",
-      "bytes": 73328,
-      "sha256": "dc94f4edddacd39c16085341d50bc0b7109bd13880086b71914b37651017abe7",
-      "seconds": 11.1,
+      "text": "갈릴리 나사렛. 마리아는 다윗의 집안 사람 요셉과 정혼한 처녀였습니다.",
+      "speechText": "갈릴리 나사렛. 마리아는 다윗의 집안 사람 요셉과 정혼한 처녀였습니다.",
+      "resourcePath": "Voice/GospelNativity/road-bethlehem-00-2e586e8e428c",
+      "textSha256": "2e586e8e428cde01d872189d3e484fe3a20c0bf2204741bf6c8b83aafd32ab9b",
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/road-bethlehem-00-2e586e8e428c.ogg",
+      "bytes": 49432,
+      "sha256": "45e93047a418e8f91bbd6c139dbc5d140edd5de5f23f0c32fc61e8f46759a9ca",
+      "seconds": 7.5,
       "sampleRate": 32000,
       "channels": 1,
-      "rawFile": "/tmp/firstgame-nativity-voice6/road-bethlehem-00-d9014226250f.wav",
-      "rawSha256": "ee3c82222788d26b94654f24f04000597fe7f99775bd9b08815dc90536243753",
+      "rawFile": "/tmp/firstgame-canon-dialogue-20261109/road-bethlehem-00-2e586e8e428c.wav",
+      "rawSha256": "c70797523818a0e0067b4efcd326a68ced762056e7f219c5880221af3d4c685e",
       "generationSource": "new-local-offline-synthesis"
     },
     {
@@ -501,7 +550,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice6/parents-reunite-00-d23b88835379.wav",
       "rawSha256": "7da528f8d70ccc61091bcbee96d5efcaa8b00183cd69e124a33a0ffbd2e9b70d",
-      "generationSource": "new-local-offline-synthesis"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "parents-reunite:1",
@@ -520,7 +574,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice6/parents-reunite-01-1d4ab74951fe.wav",
       "rawSha256": "3a31532f9de239a5b47eab8776a5e6131637d7beaa575450ba05d7029670e0f1",
-      "generationSource": "new-local-offline-synthesis"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "baptism-request:0",
@@ -539,7 +598,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice6/baptism-request-00-86acca118e50.wav",
       "rawSha256": "d0bf51da00d5a6f542ac7acda3234d1f742dd9f5d5b389aa4c190cd50e340076",
-      "generationSource": "new-local-offline-synthesis"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "baptism-request:1",
@@ -558,7 +622,12 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice6/baptism-request-01-f2e5acfb5d9c.wav",
       "rawSha256": "e654ce7a450a6773e0854a12157967a0fc4e41e1e745c3881046f416afc74883",
-      "generationSource": "new-local-offline-synthesis"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     },
     {
       "key": "baptism-water:1",
@@ -577,24 +646,134 @@
       "channels": 1,
       "rawFile": "/tmp/firstgame-nativity-voice6/baptism-water-01-81e85fd90c68.wav",
       "rawSha256": "48b5db816053cc0fb2e6f35b23372492aee56914e3cc9f9e7defd8feb668ae8f",
-      "generationSource": "new-local-offline-synthesis"
+      "generationSource": "preserved-current28-same-text-speaker-key-and-clip",
+      "priorProduction": {
+        "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+        "bytes": 35716,
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+      }
     }
   ],
   "baseGeneration": {
-    "file": "Artifacts/Validation/Nativity/AudioVoice/base22-closure.json",
-    "sha256": "3a748c3102cb7ed2d0128340a484c8a17494afb250a04d1b032cd97a2942b2f5",
-    "finishedUtc": "2026-11-02T09:16:10.086513+00:00",
-    "production": {
-      "file": "Tools/Voice/Nativity/production.json",
-      "preservedFile": "Artifacts/Validation/Nativity/AudioVoice/Base22/Tools/Voice/Nativity/production.json",
-      "sha256": "996293e83ca96880723e0efd29e2e141770c2366f1365b96b7338bb7eeed1e4e",
-      "bytes": 27337
+    "ledger": {
+      "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
+      "bytes": 25533,
+      "sha256": "4f4c556f32e555f52386b7fc62a503618a1e3f334f127e486f277bc177fd2c57"
     },
-    "scope": "Exactly22 preserved same-text/same-speaker/same-key/same-SHA clips reused; only six new exact lines synthesized."
+    "production": {
+      "file": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/Before/Tools/Voice/Nativity/production.json",
+      "bytes": 35716,
+      "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869"
+    },
+    "scope": "Only identical stable-key/speaker/text/OGG-SHA recordings are reused; old originals remain unchanged."
   },
-  "reusedLineCount": 22,
-  "newlySynthesizedLineCount": 6,
+  "reusedLineCount": 14,
+  "newlySynthesizedLineCount": 14,
   "limits": [
     "Independent ASR and signal checks are separate from human pronunciation or acting approval."
-  ]
+  ],
+  "renderer": {
+    "file": "Tools/Voice/Nativity/render-voice.py",
+    "bytes": 11472,
+    "sha256": "66ec09da5664e68ef23f1d66f9b3d860a0861549af54360d26719be122688847"
+  },
+  "runtimeModels": {
+    "file": "Tools/Voice/models.json",
+    "bytes": 2068,
+    "sha256": "96520eef661f9dc12ae23727d287ba918777cc0b05a08d33d1c669e32890cc60"
+  },
+  "changedKeys": [
+    "birth-road-bethlehem:1",
+    "birth-road-bethlehem:2",
+    "birth-road-bethlehem:5",
+    "birth-road-bethlehem:6",
+    "birth-birth-manger:0",
+    "birth-birth-manger:1",
+    "birth-birth-good-news:3",
+    "birth-birth-good-news:4",
+    "birth-name-jesus:0",
+    "birth-temple-dedication:0",
+    "birth-nazareth-growth:0",
+    "birth-nazareth-growth:3",
+    "birth-nazareth-growth:4",
+    "birth-road-bethlehem:0"
+  ],
+  "generationInputs": {
+    "file": "/tmp/firstgame-canon-dialogue-20261109/run-inputs.json",
+    "bytes": 1639,
+    "sha256": "5774872a1ddc52e9127e66d9b5012cc8d3ea2e133863113c77d6ab8121938972"
+  },
+  "changedLineResults": [
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/road-bethlehem-01-fa37471ec8a3.json",
+      "bytes": 2649,
+      "sha256": "a907983466f240284d7da1406ce0060b78a0ad181f4e45726e7179191291b1f8"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/road-bethlehem-02-b3a8696991a0.json",
+      "bytes": 2398,
+      "sha256": "8089964d5423b030d567e93bdedd6a0c7591be7c4904202ed26d9cba7ba0abaa"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/road-bethlehem-05-9965532da77e.json",
+      "bytes": 2689,
+      "sha256": "8d14a422133318049990a70cd20fa236e6f98e4fb798e87ddbd984b4fae1aced"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/road-bethlehem-06-db17db69e2a7.json",
+      "bytes": 2425,
+      "sha256": "931fbc776b6e4a6809d11f7909d01c79c29d5ef705a9cdb9eaddafce4af04207"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/birth-manger-00-83ef0c24dff9.json",
+      "bytes": 2401,
+      "sha256": "6280d2e63cee0f58f943bf1a129acfd6deb6b903c9a04239e7dedd17a630f7bf"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/birth-manger-01-3e61e2261a78.json",
+      "bytes": 2411,
+      "sha256": "b415dce54bbe986b487f2364ce68d98626554c8c078f434a3dd021fa678eb0fa"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/birth-good-news-03-6e1da0dfa95e.json",
+      "bytes": 2439,
+      "sha256": "e7fd8beedd79647304116e8bd62180710ef812a679a045c1c95ac83c5aadef46"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/birth-good-news-04-17822656e72c.json",
+      "bytes": 2453,
+      "sha256": "4b86cf6b554e9c2764e12da60b7a51efa4c034e556181980e64a190a85fb04d0"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/name-jesus-00-4afc7973695f.json",
+      "bytes": 2453,
+      "sha256": "9a71466c175f281ed3c66bf8a9d6d8a53830fe06ac917c9523a372cc829f50cf"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/temple-dedication-00-cd9bc9612973.json",
+      "bytes": 2472,
+      "sha256": "ccaa7e8476b27e6764e152143b3be63fa4ad6b0588867ecf9534b25df165dd52"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/nazareth-growth-00-185b6266a89e.json",
+      "bytes": 2456,
+      "sha256": "930d3f071ccfbec65ae8f718292e4121d611bac1f17f64ab2ecfe0f88c9b70f3"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/nazareth-growth-03-cb2595204f03.json",
+      "bytes": 2635,
+      "sha256": "70b5ae8d9969339f95b056eb7c07c1a5895f7ee976138bb6cbbd3234acfab258"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/nazareth-growth-04-10904202c7c9.json",
+      "bytes": 2488,
+      "sha256": "b6c71b1f9881ea3d075a1fc8b5aa0e2fbbc79bf83cb04480e896170a017ef5dd"
+    },
+    {
+      "file": "/tmp/firstgame-canon-dialogue-20261109/results/road-bethlehem-00-2e586e8e428c.json",
+      "bytes": 2407,
+      "sha256": "7c2ebe879523832344cfd4561e6c23fb956e5a616f1ed6f9df7d27fdf2d553be"
+    }
+  ],
+  "verificationStatus": "pending-independent-full28-asr-and-current-native-web"
 }

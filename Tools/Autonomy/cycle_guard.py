@@ -3,7 +3,9 @@
 
 This guards execution, not model/API spending. Standalone acquire/check cannot
 stop an unrelated shell; use run for an enforced child-process deadline. An
-expired remote lease is never stolen. No main/gh-pages ref is written.
+expired remote lease is never stolen. The default stays 45 minutes; an explicit
+user-authorized acquire/run can record a deadline up to six hours. No
+main/gh-pages ref is written.
 """
 import argparse
 import contextlib
@@ -25,6 +27,13 @@ LOCK_REF = "refs/heads/codex/autonomy-lock"
 REMOTE_URL = "https://github.com/ka8877/firstgame.git"
 LOCAL_LOCK = Path("/tmp/firstgame-autonomy-ka8877-firstgame.lock")
 MAX_SECONDS = 2700
+EXTENDED_MAX_SECONDS = 21600
+EXTENDED_AUTHORIZATION = {
+    "mode": "explicit-user-authorized",
+    "userInstruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
+    "scope": "One owned firstgame development cycle with a fixed deadline; no renewal, stale-lock takeover, foreign release or background continuation.",
+    "maximumSeconds": EXTENDED_MAX_SECONDS,
+}
 PREFIX = "firstgame-autonomy-lease-v1\n"
 ROOT = Path(__file__).resolve().parents[2]
 SHA = re.compile(r"[0-9a-f]{40}\Z")
@@ -66,8 +75,15 @@ def validate_lease(value):
             raise GuardError("Invalid lease run identity")
         if str(uuid.UUID(value["owner"])) != value["owner"] or not SHA.fullmatch(value["baseMain"]):
             raise GuardError("Invalid lease owner or base identity")
+        maximum = MAX_SECONDS
+        if "executionAuthorization" in value:
+            authorization = value["executionAuthorization"]
+            if (not isinstance(authorization, dict) or authorization != EXTENDED_AUTHORIZATION
+                    or type(authorization.get("maximumSeconds")) is not int):
+                raise GuardError("Invalid explicit extended execution authorization")
+            maximum = EXTENDED_MAX_SECONDS
         duration = (parse_time(value["deadlineUtc"]) - parse_time(value["startedUtc"])).total_seconds()
-        if not 0 < duration <= MAX_SECONDS:
+        if not 0 < duration <= maximum:
             raise GuardError("Lease duration exceeds the permitted bounded deadline")
     except (KeyError, TypeError, ValueError, AttributeError):
         raise GuardError("Invalid lease identity or bounded deadline")
@@ -227,9 +243,13 @@ def verify_owned(backend, record):
     return lease
 
 
-def acquire(backend, path, run_id, seconds=MAX_SECONDS, now=utcnow):
-    if not 1 <= seconds <= MAX_SECONDS:
-        raise GuardError("Cycle deadline must be between 1 and 2700 seconds")
+def acquire(backend, path, run_id, seconds=MAX_SECONDS, now=utcnow, *, extended_authorized=False):
+    if type(extended_authorized) is not bool:
+        raise GuardError("Explicit extended execution authorization must be a boolean")
+    maximum = EXTENDED_MAX_SECONDS if extended_authorized else MAX_SECONDS
+    if type(seconds) is not int or not 1 <= seconds <= maximum:
+        raise GuardError("Cycle deadline must be between 1 and " + str(maximum) + " seconds"
+                         + ("; longer cycles require --extended-authorized" if not extended_authorized else ""))
     if Path(path).exists() or Path(path).is_symlink():
         raise GuardError("Preserve the existing ownership record and use a unique path")
     try:
@@ -242,9 +262,12 @@ def acquire(backend, path, run_id, seconds=MAX_SECONDS, now=utcnow):
     base = backend.ref("refs/heads/main")
     commit = backend.commit(base)
     start = now()
-    lease = validate_lease({"schema": 1, "repository": REPOSITORY, "ref": LOCK_REF,
-                            "runId": run_id, "owner": str(uuid.uuid4()), "baseMain": base,
-                            "startedUtc": stamp(start), "deadlineUtc": stamp(start + timedelta(seconds=seconds))})
+    lease = {"schema": 1, "repository": REPOSITORY, "ref": LOCK_REF,
+             "runId": run_id, "owner": str(uuid.uuid4()), "baseMain": base,
+             "startedUtc": stamp(start), "deadlineUtc": stamp(start + timedelta(seconds=seconds))}
+    if extended_authorized:
+        lease["executionAuthorization"] = dict(EXTENDED_AUTHORIZATION)
+    validate_lease(lease)
     tree = commit.get("tree", {}).get("sha", "")
     if not SHA.fullmatch(tree):
         raise GuardError("Main commit has no valid tree identity")
@@ -289,10 +312,10 @@ def status(backend, now=utcnow):
             "expired": now() >= parse_time(lease["deadlineUtc"]), "automaticStealAllowed": False}
 
 
-def run_cycle(backend, path, run_id, seconds, command, now=utcnow, popen=subprocess.Popen):
+def run_cycle(backend, path, run_id, seconds, command, now=utcnow, popen=subprocess.Popen, *, extended_authorized=False):
     if not command:
         raise GuardError("run requires a command after --")
-    record = acquire(backend, path, run_id, seconds, now)
+    record = acquire(backend, path, run_id, seconds, now, extended_authorized=extended_authorized)
     process = None
     exit_code = 1
     previous = {}
@@ -335,11 +358,11 @@ def main(argv=None):
     def bounded_seconds(value):
         try:
             seconds = int(value)
-            if not 1 <= seconds <= MAX_SECONDS:
+            if not 1 <= seconds <= EXTENDED_MAX_SECONDS:
                 raise ValueError()
             return seconds
         except ValueError:
-            raise argparse.ArgumentTypeError("timeout must be between 1 and 2700 seconds")
+            raise argparse.ArgumentTypeError("timeout must be between 1 and 21600 seconds; values above 2700 require --extended-authorized")
 
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="action", required=True)
@@ -349,11 +372,16 @@ def main(argv=None):
         if action in ("acquire", "run"):
             sub.add_argument("--run-id", required=True)
             sub.add_argument("--timeout-seconds", type=bounded_seconds, default=MAX_SECONDS,
-                             metavar="1..2700")
+                             metavar="1..21600")
+            sub.add_argument("--extended-authorized", action="store_true",
+                             help="Record the explicit current user authorization for this bounded cycle, allowing up to six hours; default remains 45 minutes")
         if action == "run":
             sub.add_argument("command", nargs=argparse.REMAINDER)
     commands.add_parser("status")
     args = parser.parse_args(argv)
+    if (args.action in ("acquire", "run") and args.timeout_seconds > MAX_SECONDS
+            and not args.extended_authorized):
+        parser.error("timeout above 2700 seconds requires --extended-authorized")
     backend = Backend()
     try:
         if args.action == "status":
@@ -361,14 +389,16 @@ def main(argv=None):
         else:
             with local_mutex():
                 if args.action == "acquire":
-                    result = acquire(backend, args.record, args.run_id, args.timeout_seconds)
+                    result = acquire(backend, args.record, args.run_id, args.timeout_seconds,
+                                     extended_authorized=args.extended_authorized)
                 elif args.action == "check":
                     result = check(backend, args.record)
                 elif args.action == "release":
                     result = release(backend, args.record)
                 else:
                     command = args.command[1:] if args.command[:1] == ["--"] else args.command
-                    code = run_cycle(backend, args.record, args.run_id, args.timeout_seconds, command)
+                    code = run_cycle(backend, args.record, args.run_id, args.timeout_seconds, command,
+                                     extended_authorized=args.extended_authorized)
                     print(json.dumps({"status": "finished", "childExitCode": code}))
                     return code
         print(json.dumps(result, ensure_ascii=False))
