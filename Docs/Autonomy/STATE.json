@@ -13,7 +13,7 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "current-Core311-and-voice28ASR-passed-GospelNative03-running",
+    "status": "both-final-Webs-Core311-Native8and21-Voice28-passed-current-PC-input-running",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
@@ -129,13 +129,38 @@
         "freshIndependentAsrPassed": 28,
         "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
         "activeBytes": 1541702
-      }
+      },
+      "GospelNative03": {
+        "status": "passed",
+        "passed": 21,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel03",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "GospelWeb03": {
+        "status": "passed",
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web03",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/PathOfDawn-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "CardWeb01": {
+        "status": "passed",
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/FantasyCards/Web01",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/FantasyCards-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
+      "finalGospelPC": "Browser04 currently running actual final-source ordinary-input plan; no full browser pass or visual approval yet"
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
-      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
-      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Finish current finalGospelDesktop720 Browser04 with all53originals/currentRootreview",
+      "Complete CardPC and both touch lanes with full4PCM/two reloads/requiredRootoriginals",
       "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "backgroundScheduler": "not-configured",
@@ -158,7 +183,14 @@
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
       "status": "14newclips-and28freshASR-passed-current-Core311-passed-Native21-running"
-    }
+    },
+    "finalRuntimePaths": {
+      "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
+      "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+      "stageRoot": "Artifacts/CanonArtWebPlaytest"
+    },
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
@@ -251,9 +283,8 @@
     "id": "CanonArt",
     "status": "continue-current-implementation-through-actual-Web-browser-public-validation",
     "tasks": [
-      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
-      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
-      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Finish current finalGospelDesktop720 Browser04 with all53originals/currentRootreview",
+      "Complete CardPC and both touch lanes with full4PCM/two reloads/requiredRootoriginals",
       "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "rule": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
@@ -1526,7 +1557,7 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "current-Core311-and-voice28ASR-passed-GospelNative03-running",
+    "status": "both-final-Webs-Core311-Native8and21-Voice28-passed-current-PC-input-running",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json",
@@ -1642,13 +1673,38 @@
         "freshIndependentAsrPassed": 28,
         "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
         "activeBytes": 1541702
-      }
+      },
+      "GospelNative03": {
+        "status": "passed",
+        "passed": 21,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel03",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "GospelWeb03": {
+        "status": "passed",
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web03",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/PathOfDawn-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "CardWeb01": {
+        "status": "passed",
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/FantasyCards/Web01",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/FantasyCards-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
+      "finalGospelPC": "Browser04 currently running actual final-source ordinary-input plan; no full browser pass or visual approval yet"
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Finish actual14newclips +28freshASR, currentfullCore311+ and retained21Native",
-      "Build final currentGospel and Card Webs bound to exactcurrentNative; preservepre-rewrite runtimes/proofs/PNGs",
-      "FullPC/touch, actual narration+4CardPCM+two reloads+all required Root originals",
+      "Finish current finalGospelDesktop720 Browser04 with all53originals/currentRootreview",
+      "Complete CardPC and both touch lanes with full4PCM/two reloads/requiredRootoriginals",
       "Clean source/CI,regular stage985MB,existingPages/fullfreshpublicGET/bothpublictouch/Rootfinal"
     ],
     "backgroundScheduler": "not-configured",
@@ -1671,7 +1727,14 @@
       "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
       "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
       "status": "14newclips-and28freshASR-passed-current-Core311-passed-Native21-running"
-    }
+    },
+    "finalRuntimePaths": {
+      "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
+      "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+      "stageRoot": "Artifacts/CanonArtWebPlaytest"
+    },
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "mainDocumentationIntegration": {
     "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",

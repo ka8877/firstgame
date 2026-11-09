@@ -1,3 +1,5 @@
+현재 대사 보강 후 실행은 저장소 루트에서 `source Tools/Validation/CanonArt/activate-current.sh`로 경로를 설정한다. 최종 Web은 `/tmp/firstgame-canon-final-20261109-builds`, proof는 현재 긴 실행 잠금의 `BuildProof`다. 아래 첫 회차의 이전 build/proof 기본값은 역사로 보존하며 최신 산출물과 혼동하지 않는다.
+
 ## 사용자 시간 제한 해제 승인
 
 사용자가 기존 짧은 시간 제한 때문에 작업을 끊지 말라고 명시했다. 현재 driver는 개별 실행에 기본1시간을 허용하며, 실제 소유한 긴 잠금 안에서 실행한다. `FIRSTGAME_EXECUTION_LIMIT_SECONDS`로900~21600초를 명시할 수 있다. 전체 개발 목표를 이 시간으로 종료하지 않는다. 응답 없는 명령의 정리·동시 실행 방지·실패 보존은 유지한다. 아래 과거900초 설명은 당시 설정이며 현재 실행 metadata가 실제 한도를 기록한다.

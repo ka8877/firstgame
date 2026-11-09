@@ -60,3 +60,7 @@ Tools/Autonomy/Drafts/Recovery03/PairedWebConsumer/IndependentStaticReview/sourc
 # Preserve literal context markers in these two archived, unapplied source diffs.
 Tools/Autonomy/Drafts/Recovery05/ProcessContainmentSource/card-contained-lane.patch -text -whitespace
 Tools/Autonomy/Drafts/Recovery05/ProcessContainmentSource/gospel-contained-lane.patch -text -whitespace
+
+# Preserve Unity importer empty fields for the new canonical illustration resources.
+Games/PathOfDawn/Assets/Resources/Art/GospelCanon.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelCanon/**.meta -whitespace
