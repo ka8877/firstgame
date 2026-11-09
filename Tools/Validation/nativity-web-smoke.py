@@ -74,7 +74,8 @@ FIDELITY_REVISIONS = {"FantasyCards": "fm-fidelity-2026-10-27", "PathOfDawn": "g
 DETAIL_REVISIONS = {"FantasyCards": "fm-detail-2026-10-27", "PathOfDawn": "gospel-natural-2026-10-27"}
 RENEWAL_REVISIONS = {"FantasyCards": "fm-chronicle-2026-10-29", "PathOfDawn": "gospel-chronicle-2026-10-29"}
 QUEST_REVISIONS = {"FantasyCards": "fm-nativity-2026-11-02", "PathOfDawn": "gospel-nativity-2026-11-02"}
-CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values())
+CANON_REVISIONS = {"FantasyCards": "fm-canon-2026-11-09", "PathOfDawn": "gospel-canon-2026-11-09"}
+CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values())
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -863,7 +864,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02'):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards']):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -874,7 +875,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02')) and label not in ("before-first-gesture", "muted"):
+        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'])) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -885,7 +886,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02'):
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards']):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -912,6 +913,40 @@ class JourneySmoke:
         files = []
         expected_files = list(self.report["buildFingerprint"]["files"])
         image_files = [row for row in expected_files if row['file'].startswith('StreamingAssets/Cards/')]
+        if self.report['revision'] == CANON_REVISIONS['FantasyCards']:
+            # The current generic full-site GET audit supplies every card image
+            # byte. Canon does not inherit the historical Nativity/G2 delta seal.
+            from canon_release_evidence import OUT as canon_out, STAGE as canon_stage, verify_portal_review
+            audit_path = canon_out / 'PublicPortal/report.json'
+            audit = json.loads(audit_path.read_text())
+            portal = verify_portal_review(audit)
+            stage_path = canon_stage / 'build-manifest.json'
+            staged = json.loads(stage_path.read_text())
+            prefix = 'games/fantasy-cards/'
+            if urllib.parse.urljoin(audit['baseUrl'], prefix) != url:
+                raise AssertionError('Current canon audit URL differs from the actual public game')
+            request = urllib.request.Request(urllib.parse.urljoin(audit['baseUrl'], 'build-manifest.json'),
+                headers={'Accept-Encoding': 'identity', 'Cache-Control': 'no-cache'})
+            with urllib.request.urlopen(request, timeout=self.args.timeout) as response:
+                body = response.read()
+                if response.status != 200 or response.headers.get('Content-Encoding', 'identity').lower() not in ('identity', '') or hashlib.sha256(body).hexdigest() != digest(stage_path):
+                    raise AssertionError('Live canon manifest changed after its complete GET audit')
+            audited = {row['file']: row for row in audit['files']}
+            for expected in image_files:
+                name = prefix + expected['file']; row = audited.get(name, {})
+                if not (row.get('passed') is True and row.get('status') == 200
+                        and row.get('bytes') == expected['bytes']
+                        and row.get('sha256') == expected['sha256'] == staged['files'].get(name)
+                        and row.get('resolvedUrl') == urllib.parse.urljoin(url, expected['file'])):
+                    raise AssertionError('Current canon public image byte audit differs: ' + expected['file'])
+                files.append({'file': expected['file'], 'url': row['resolvedUrl'], 'status': 200,
+                    'bytes': row['bytes'], 'sha256': row['sha256'],
+                    'verificationSource': 'current-canon-full-GET-audit'})
+            self.report['completePublicImageAudit'] = {'file': str(audit_path.relative_to(ROOT)),
+                'sha256': portal['report']['sha256'], 'manifestSha256': digest(stage_path),
+                'images': len(image_files), 'scope': 'Every image was freshly fetched in the current full-site HTTPS audit. The live manifest is freshly rechecked; no historical G2 seal or dated GET is reused.'}
+            self.check(True, 'All current canon card images match the complete fresh HTTPS audit', self.report['completePublicImageAudit'])
+            expected_files = [row for row in expected_files if row not in image_files]
         quest = self.report['revision'] == QUEST_REVISIONS['FantasyCards']
         if self.report['revision'] in ('fm-chronicle-2026-10-29', QUEST_REVISIONS['FantasyCards']) and len(image_files) > 1000:
             # Bind the complete current portal audit. Quest explicitly retains
@@ -1150,7 +1185,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity"), default="renewal")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art"), default="renewal")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -1170,7 +1205,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:

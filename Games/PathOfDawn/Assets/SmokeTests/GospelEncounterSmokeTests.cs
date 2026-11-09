@@ -127,7 +127,10 @@ namespace PathOfDawn.SmokeTests
             Assert.That(GameObject.Find("Story location gradient"), Is.Null);
             Assert.That(GameObject.Find("Atmospheric menu shade"), Is.Null);
             Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryBeat.Text), Is.True);
-            Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryReference), Is.True);
+            Assert.That(App.Chronicle.CurrentStoryReference, Is.Not.Empty, "The source remains in the story model.");
+            Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryReference), Is.False,
+                "The player's conversation must not be interrupted by source/explanation labels.");
+            Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryBeat.Speaker), Is.True);
             var fullCover = App.Ui.CanvasView.GetComponentsInChildren<Graphic>()
                 .Where(g => g.gameObject.activeInHierarchy && g.color.a > .15f &&
                     g.rectTransform.rect.width >= 1100 && g.rectTransform.rect.height >= 600).ToArray();

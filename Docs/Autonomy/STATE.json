@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-04T05:44:13.873576+00:00",
+  "updatedUtc": "2026-11-09T06:12:52.513323+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -1374,5 +1374,55 @@
       "If fresh Gospel runtime differs from oldexactrollback, explicitcommonpairedrecovery using bothgames fresh scopes; no claim of oldbyte preservation.",
       "Current C1 CardfreshWeb/PC/touch/public and Gospel PC/touch/public/settledbookUI, Root original approvals, currentCI/Pages/fullsite985MB+SHA and final newseals."
     ]
+  },
+  "activeCanonArt": {
+    "id": "CanonArt",
+    "status": "source-implemented-Core309-passed-Native19of21-failed-current-Web-not-built",
+    "branch": "codex/canon-art-2026-11-09",
+    "executionOwner": "/root",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/lease.json",
+    "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
+    "targetRevisions": {
+      "FantasyCards": "fm-canon-2026-11-09",
+      "PathOfDawn": "gospel-canon-2026-11-09"
+    },
+    "changes": [
+      "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
+      "Multiplayer buttons disabled with future-update label",
+      "Natural-proportion child/adult32frame atlases and Mary/Joseph/teacher/John; temple/camera composition",
+      "Natural in-scene conversations without per-line provenance badges;23events19passages28voice keys retained",
+      "Physical book artwork,two-column Korean serif Scripture,exact original text"
+    ],
+    "actualValidation": {
+      "Core": {
+        "passed": 309,
+        "failed": 0,
+        "skipped": 0,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core"
+      },
+      "GospelNative01": {
+        "passed": 19,
+        "failed": 2,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "fixPending": [
+          "Test mistook narrator speaker for removed metadata badge",
+          "Standalone UI screenshot fixture had no scene camera"
+        ],
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel01"
+      },
+      "CardAuthoring": "Catalog regenerated but actual Unity Card prepare required for3 authored assets; verifier correctly refused stale authored set",
+      "CardNative": "not-run-current",
+      "Web": "not-built-current",
+      "Browser": "not-run-current",
+      "public": "unchanged-G2"
+    },
+    "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
+    "next": [
+      "Correct two meaningful UI test fixtures, rerun complete21 Gospel Native",
+      "Actual Card prepare,authoring verifier,complete8 Native",
+      "Build current two Web runtimes with owned supervisor and source binding;desktop/touch,current PNG,4PCM/two reloads,985MB and fresh public checks"
+    ],
+    "backgroundScheduler": "not-configured"
   }
 }

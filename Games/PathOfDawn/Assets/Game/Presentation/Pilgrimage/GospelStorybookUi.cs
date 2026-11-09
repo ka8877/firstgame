@@ -10,8 +10,8 @@ namespace PathOfDawn.Presentation
 {
     public sealed partial class GospelPilgrimageUi
     {
-        static readonly Color PageInk = new Color(.15f, .18f, .17f, 1);
-        static readonly Color PageQuiet = new Color(.40f, .35f, .24f, 1);
+        static readonly Color PageInk = new Color(.20f, .18f, .14f, 1);
+        static readonly Color PageQuiet = new Color(.43f, .36f, .25f, 1);
         IReadOnlyList<GospelBookPage> scripturePages;
         int scriptureFound, scriptureSpread;
 
@@ -31,7 +31,6 @@ namespace PathOfDawn.Presentation
             scriptureSpread = Mathf.Clamp(spread, 0, spreadCount - 1);
             Begin("bible", true, false);
             var binding = OpenBook("성경전서", scriptureFound + " / " + scripturePages.Count + " 말씀");
-            Text(layer, "신약 · 복음서의 기록", 283, 27, 431, 25, 18, Quiet);
             B(layer, "표지", 748, 18, 74, 38, ShowBibleCover);
             B(layer, "차례", 834, 18, 74, 38, ShowBibleContents);
             for (int side = 0; side < 2; side++)
@@ -59,12 +58,20 @@ namespace PathOfDawn.Presentation
 
         RectTransform OpenBook(string title, string progress)
         {
-            Panel(layer, "Book table shadow", 0, 0, 1280, 720, new Color(.015f, .030f, .044f, .97f));
-            Text(layer, title, 72, 18, 850, 37, 28, White);
-            Text(layer, progress, 925, 24, 283, 29, 21, Gold, TextAlignmentOptions.Right);
+            // Keep the printed page legible immediately. Only the leaf turns;
+            // a menu-wide fade made freshly opened Scripture briefly invisible.
+            var entrance = layer.GetComponent<GospelUiMotion>();
+            if (entrance != null) entrance.enabled = false;
+            var entranceGroup = layer.GetComponent<CanvasGroup>();
+            if (entranceGroup != null) entranceGroup.alpha = 1;
+            Panel(layer, "Book table shadow", 0, 0, 1280, 720, new Color(.025f, .030f, .027f, .98f));
+            Text(layer, title, 72, 20, 630, 33, 24, new Color(.87f, .82f, .68f));
+            Text(layer, progress, 925, 27, 283, 25, 17, new Color(.69f, .66f, .55f), TextAlignmentOptions.Right);
             var binding = Rect(layer, "Open Scripture binding", 70, 60, 1140, 641.25f);
             var art = binding.gameObject.AddComponent<RawImage>();
-            art.texture = Resources.Load<Texture2D>("Art/GospelNativity/book-spread") ?? Resources.Load<Texture2D>("Art/GospelStorybook/book"); art.raycastTarget = false;
+            art.texture = Resources.Load<Texture2D>("Art/GospelCanon/book-spread")
+                ?? Resources.Load<Texture2D>("Art/GospelNativity/book-spread") ?? Resources.Load<Texture2D>("Art/GospelStorybook/book");
+            art.raycastTarget = false;
             if (art.texture == null) art.color = new Color(.96f, .92f, .82f);
             return binding;
         }
@@ -77,17 +84,54 @@ namespace PathOfDawn.Presentation
             if (reading == null) { BlankLeaf(leaf, page); return; }
             int space = reading.Reference.IndexOf(' ');
             string bookName = space > 0 ? reading.Reference.Substring(0, space) : "복음서";
-            Text(leaf, bookName, 0, 0, 417, 33, 27, PageInk, TextAlignmentOptions.Center, true);
-            Text(leaf, reading.Reference, 0, 43, 417, 27, 19, new Color(.43f, .29f, .11f), TextAlignmentOptions.Center);
-            Line(leaf, 0, 79, 417, new Color(.39f, .30f, .14f, .30f));
-            var body = Scroll(leaf, reading.Text, 0, 96, 417, 295, 24, PageInk);
-            body.gameObject.name = "Discovered Scripture text " + reading.Id;
-            body.lineSpacing = 8;
-            // Recalculate the actual scrolling content after changing typography.
-            ResizeScroll(body, 417, 295);
-            Text(leaf, reading.Title, 0, 404, 337, 23, 16, PageQuiet);
-            Text(leaf, "개역한글 · 본문은 위아래로 읽기", 0, 431, 337, 21, 14, PageQuiet);
-            Text(leaf, page.ToString(), 357, 427, 60, 27, 18, PageQuiet, TextAlignmentOptions.Right);
+            var head = Text(leaf, bookName, 0, 0, 417, 30, 25, PageInk, TextAlignmentOptions.Center, true);
+            head.characterSpacing = 5;
+            Text(leaf, reading.Reference, 0, 37, 417, 25, 17, PageQuiet, TextAlignmentOptions.Center);
+            Line(leaf, 6, 69, 405, new Color(.39f, .30f, .14f, .23f));
+            ScriptureColumns(leaf, reading);
+            Line(leaf, 6, 408, 405, new Color(.39f, .30f, .14f, .18f));
+            Text(leaf, reading.Title, 3, 414, 342, 19, 14, PageQuiet);
+            Text(leaf, reading.Translation + " · 대한성서공회", 3, 436, 342, 15, 12, PageQuiet);
+            Text(leaf, page.ToString(), 357, 426, 57, 25, 17, PageQuiet, TextAlignmentOptions.Right);
+        }
+
+        void ScriptureColumns(RectTransform leaf, GospelReading reading)
+        {
+            const float width = 417, column = 196, viewportHeight = 318;
+            var holder = Rect(leaf, "Scripture reading columns " + reading.Id, 0, 80, width, viewportHeight);
+            var scroll = holder.gameObject.AddComponent<ScrollRect>();
+            var viewport = Rect(holder, "Scripture paper viewport", 0, 0, width, viewportHeight);
+            viewport.gameObject.AddComponent<RectMask2D>();
+            var touchSurface = viewport.gameObject.AddComponent<Image>();
+            touchSurface.color = new Color(.96f, .92f, .82f, .001f);
+            var content = Rect(viewport, "Scripture column flow", 0, 0, width, viewportHeight);
+            var first = Text(content, reading.Text, 0, 0, column, viewportHeight, 22, PageInk);
+            var second = Text(content, reading.Text, 221, 0, column, viewportHeight, 22, PageInk);
+            first.gameObject.name = "Discovered Scripture text " + reading.Id;
+            second.gameObject.name = "Discovered Scripture continuation " + reading.Id;
+            foreach (var body in new[] { first, second })
+            {
+                body.font = GospelScriptureTypeface.ForReading(body.font);
+                body.lineSpacing = 5;
+                body.paragraphSpacing = 8;
+                body.characterSpacing = .15f;
+                body.richText = false; // The exact source, including verse numbers and line breaks, is retained.
+                body.gameObject.AddComponent<GospelScriptureVerseInk>();
+            }
+            float fullHeight = first.GetPreferredValues(reading.Text, column, 0).y;
+            float flowHeight = Mathf.Max(52, Mathf.Ceil(fullHeight * .5f) + 22);
+            first.rectTransform.sizeDelta = second.rectTransform.sizeDelta = new Vector2(column, flowHeight);
+            content.sizeDelta = new Vector2(width, Mathf.Max(viewportHeight, flowHeight));
+            first.overflowMode = TextOverflowModes.Linked;
+            first.linkedTextComponent = second;
+            second.overflowMode = TextOverflowModes.Overflow;
+            first.ForceMeshUpdate();
+            second.ForceMeshUpdate();
+            scroll.viewport = viewport; scroll.content = content;
+            scroll.horizontal = false; scroll.vertical = flowHeight > viewportHeight;
+            scroll.movementType = ScrollRect.MovementType.Clamped;
+            scroll.scrollSensitivity = 28;
+            scroll.inertia = true; scroll.decelerationRate = .10f;
         }
 
         public void ShowBibleCover()
@@ -102,8 +146,6 @@ namespace PathOfDawn.Presentation
             Text(cover, "성경전서", 60, 157, 430, 75, 54, new Color(.88f, .76f, .49f), TextAlignmentOptions.Center, true).characterSpacing = 12;
             Text(cover, "신약 · 복음서", 60, 251, 430, 37, 25, new Color(.81f, .71f, .53f), TextAlignmentOptions.Center);
             Text(cover, "개역한글", 60, 301, 430, 28, 18, new Color(.71f, .62f, .49f), TextAlignmentOptions.Center);
-            Text(cover, "지나온 이야기에서 만난 말씀이\n이 책의 빈 면에 기록됩니다.", 60, 412, 430, 78, 22,
-                new Color(.80f, .76f, .65f), TextAlignmentOptions.Center);
             B(layer, "차례", 72, 640, 179, 56, ShowBibleContents);
             B(layer, "성경 펼치기", 392, 640, 280, 56, () => ShowScriptureSpread(scriptureSpread, false), true, true);
             B(layer, "여정으로", 994, 640, 214, 56, OnResume);
@@ -133,7 +175,7 @@ namespace PathOfDawn.Presentation
                     int selected = index;
                     link.onClick.AddListener(() => Invoke(() => ShowScriptureSpread(selected / 2, true)));
                 }
-                Text(leaf, "기록된 본문을 누르면 해당 면을 펼칩니다.", 0, 410, 417, 34, 16, PageQuiet);
+                Text(leaf, side == 0 ? "신약성경" : "개역한글", 0, 429, 417, 24, 14, PageQuiet, TextAlignmentOptions.Center);
             }
             B(layer, "표지", 72, 640, 179, 56, ShowBibleCover);
             B(layer, "성경 펼치기", 392, 640, 280, 56, () => ShowScriptureSpread(scriptureSpread, false));
@@ -143,8 +185,8 @@ namespace PathOfDawn.Presentation
         void BlankLeaf(RectTransform leaf, int page)
         {
             // A physical blank page, with no title, verse, reference, future art or hidden full text.
-            Text(leaf, "이야기가 이 면에 남게 됩니다.", 36, 206, 345, 45, 21,
-                new Color(.45f, .39f, .27f, .65f), TextAlignmentOptions.Center);
+            Text(leaf, "—", 36, 206, 345, 45, 21,
+                new Color(.45f, .39f, .27f, .38f), TextAlignmentOptions.Center);
             if (page > 0) Text(leaf, page.ToString(), 357, 417, 60, 27, 19, PageQuiet, TextAlignmentOptions.Right);
         }
 
@@ -170,25 +212,23 @@ namespace PathOfDawn.Presentation
                 // A field conversation belongs to the place the player just
                 // reached. Leave that live world, player and NPC in view rather
                 // than replacing them with a full-screen story illustration.
-                var context = Panel(layer, "Field conversation context", 36, 24, 974, 101,
-                    new Color(.017f, .039f, .044f, .82f), true);
-                Rule(context, 0, 12, 2, 77, new Color(.89f, .79f, .52f, .72f));
-                Text(context, scene.TimeLabel + "  /  " + scene.Location, 18, 10, 935, 26, 18, Quiet);
-                Text(context, scene.Title, 17, 42, 935, 44, 28, White, TextAlignmentOptions.TopLeft, true);
+                var context = Panel(layer, "Field conversation context", 36, 24, 724, 47,
+                    new Color(.017f, .039f, .044f, .56f), true);
+                Text(context, scene.Location, 18, 10, 688, 28, 19, Quiet);
             }
             B(layer, "성경", 1082, 28, 145, 52, OnRead);
 
-            var dialogue = Panel(layer, "Story dialogue", 36, 424, 1208, 264, new Color(.017f, .039f, .044f, .88f), true);
+            var dialogue = Panel(layer, "Story dialogue", 72, 470, 1136, 218, new Color(.017f, .033f, .036f, .92f), true);
             dialogue.gameObject.AddComponent<GospelUiMotion>();
-            Rule(dialogue, 12, 22, 2, 220, new Color(.52f, .79f, .80f, .62f));
-            Text(dialogue, turn.Speaker, 27, 19, 785, 37, 28, White, TextAlignmentOptions.TopLeft, true);
-            Text(dialogue, turn.IsVerbatim ? "성경 직접 인용" : turn.IsDramatized ? "극화 대화" : "이야기",
-                877, 21, 300, 29, 18, Gold, TextAlignmentOptions.Right);
-            var spoken = Scroll(dialogue, turn.Text, 27, 65, 1139, 134, 29, White);
+            Rule(dialogue, 0, 23, 2, 150, new Color(.78f, .69f, .43f, .63f));
+            Text(dialogue, turn.Speaker, 27, 17, 782, 33, 25, Gold, TextAlignmentOptions.TopLeft, true);
+            var spoken = Scroll(dialogue, turn.Text, 27, 61, 1082, 101, 28, White);
             spoken.gameObject.name = "Current story dialogue text";
-            Text(dialogue, story.CurrentStoryReference,
-                28, 207, 821, 40, 16, Quiet);
-            B(dialogue, "이야기 계속", 881, 201, 295, 50, next, true, true);
+            spoken.lineSpacing = 6;
+            ResizeScroll(spoken, 1082, 101);
+            // Provenance stays in the Chronicle and the discovered Bible. The
+            // conversation itself presents the speaker's actual words.
+            B(dialogue, "이야기 계속", 892, 170, 217, 39, next, true, true);
         }
 
         public void ShowStoryReward(GospelReading acquired, int count, int total, Action continueStory)
@@ -270,15 +310,68 @@ namespace PathOfDawn.Presentation
 
         IEnumerator SettleStorybook(RectTransform binding, bool turn)
         {
+            RectTransform sheet = null;
+            CanvasGroup paper = null;
+            if (turn)
+            {
+                sheet = Panel(binding, "Turning Scripture leaf", 600, 64, 417, 451, new Color(.95f, .90f, .78f));
+                sheet.pivot = new Vector2(0, .5f);
+                sheet.anchoredPosition = new Vector2(600, -289.5f);
+                paper = sheet.gameObject.AddComponent<CanvasGroup>();
+                paper.blocksRaycasts = false;
+                Rule(sheet, 8, 0, 1, 451, new Color(.46f, .35f, .19f, .14f));
+            }
             float elapsed = 0;
-            while (binding != null && elapsed < .22f)
+            while (binding != null && elapsed < .32f)
             {
                 elapsed += Time.unscaledDeltaTime;
-                float t = 1 - Mathf.Pow(1 - Mathf.Clamp01(elapsed / .22f), 3);
-                binding.localScale = new Vector3(Mathf.Lerp(turn ? .965f : .99f, 1, t), Mathf.Lerp(.99f, 1, t), 1);
+                float progress = Mathf.Clamp01(elapsed / .32f);
+                float t = 1 - Mathf.Pow(1 - progress, 3);
+                binding.localScale = new Vector3(Mathf.Lerp(.995f, 1, t), Mathf.Lerp(.995f, 1, t), 1);
+                if (sheet != null)
+                {
+                    sheet.localRotation = Quaternion.Euler(0, -170 * t, 0);
+                    paper.alpha = 1 - Mathf.SmoothStep(.35f, 1, progress);
+                }
                 yield return null;
             }
+            if (sheet != null) Destroy(sheet.gameObject);
             if (binding != null) binding.localScale = Vector3.one;
+        }
+    }
+
+    /// <summary>Give printed verse numbers their own ink without editing a single source character.</summary>
+    public sealed class GospelScriptureVerseInk : MonoBehaviour
+    {
+        TextMeshProUGUI text;
+        void OnEnable()
+        {
+            text = GetComponent<TextMeshProUGUI>();
+            if (text != null) text.OnPreRenderText += ApplyVerseInk;
+        }
+        void OnDisable() { if (text != null) text.OnPreRenderText -= ApplyVerseInk; }
+        void ApplyVerseInk(TMP_TextInfo info)
+        {
+            string source = text.text;
+            for (int i = 0; i < info.characterCount; i++)
+            {
+                var character = info.characterInfo[i];
+                int index = character.index;
+                if (!character.isVisible || index >= source.Length || source[index] < '0' || source[index] > '9') continue;
+                int line = index;
+                while (line > 0 && source[line - 1] != '\n') line--;
+                bool verseNumber = true;
+                for (int j = line; j < index; j++) if (source[j] < '0' || source[j] > '9') verseNumber = false;
+                if (!verseNumber) continue;
+                var mesh = info.meshInfo[character.materialReferenceIndex];
+                var origin = new Vector3(character.bottomLeft.x, character.baseLine, 0);
+                for (int j = 0; j < 4; j++)
+                {
+                    int vertex = character.vertexIndex + j;
+                    mesh.colors32[vertex] = new Color32(139, 100, 47, 255);
+                    mesh.vertices[vertex] = origin + (mesh.vertices[vertex] - origin) * .79f + new Vector3(0, 3, 0);
+                }
+            }
         }
     }
 

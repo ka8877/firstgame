@@ -44,7 +44,7 @@ namespace PathOfDawn.Presentation
         Material limestone, chalk, trimStone, paving, soil, grass, cedar, bronze, water, foam, foliage;
         Transform marker;
         VolumeProfile profile;
-        bool built;
+        bool built, buildingRiver;
 
         sealed class PaintedGeometry
         {
@@ -61,10 +61,10 @@ namespace PathOfDawn.Presentation
             built = true;
             if (Shader.Find("Universal Render Pipeline/Lit") == null)
                 throw new InvalidOperationException("Pilgrimage requires the URP 3D forward renderer and Lit shader.");
-            limestone = Stone("Honey limestone", "limestone", new Color(.88f, .80f, .62f));
-            chalk = Stone("Sunlit carved stone", "limestone", new Color(.99f, .94f, .79f));
-            trimStone = Stone("Carved amber coping", "limestone", new Color(.69f, .57f, .38f));
-            paving = Stone("Courtyard paving", "paving", new Color(.94f, .86f, .69f));
+            limestone = Stone("Honey limestone", "limestone", new Color(.86f, .80f, .69f));
+            chalk = Stone("Sunlit carved stone", "limestone", new Color(.97f, .94f, .84f));
+            trimStone = Stone("Carved amber coping", "limestone", new Color(.66f, .59f, .47f));
+            paving = Stone("Courtyard paving", "paving", new Color(.88f, .83f, .73f));
             soil = Mat("Warm footpath", new Color(.63f, .53f, .36f), .12f);
             grass = Mat("Olive meadow", new Color(.26f, .40f, .28f), .06f);
             soil.SetTexture("_BaseMap", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/limestone-albedo"));
@@ -73,7 +73,7 @@ namespace PathOfDawn.Presentation
             cedar = Mat("Cedar doors", new Color(.29f, .15f, .065f), .19f);
             var cedarTexture = Resources.Load<Texture2D>("Art/GospelWell/cedar-albedo");
             if (cedarTexture != null) cedar.SetTexture("_BaseMap", cedarTexture);
-            bronze = Mat("Old bronze", new Color(.64f, .43f, .15f), .35f, .62f);
+            bronze = Mat("Old bronze", new Color(.48f, .34f, .16f), .29f, .50f);
             var waterShader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageWater");
             if (waterShader == null) throw new InvalidOperationException("Missing painted Jordan shader.");
             water = new Material(waterShader) { name = "Jordan quiet jade reflections" }; materials.Add(water);
@@ -124,6 +124,7 @@ namespace PathOfDawn.Presentation
 
         void BuildChapter(Transform root, bool river)
         {
+            buildingRiver = river;
             architecture.Clear(); route.Clear(); trail.Clear(); paintedGeometry.Clear();
             foreach (var quest in GospelChronicleCatalog.Quests)
                 if (!quest.IsPrologue && (quest.ChapterId == "baptism") == river)
@@ -282,10 +283,13 @@ namespace PathOfDawn.Presentation
             }
             Arch(root, new Vector3(-27f, TerrainHeight(-27f, -2.4f, false) + 1.65f, -2.4f), 3.5f, .34f, .85f);
 
-            PaintedTree(root, new Vector3(-33f, TerrainHeight(-33f, -2.4f, false), -2.4f), 6.3f, 31);
+            // A close, source-textured tree and crafted vessels give the first
+            // meeting a human scale. The real central gate remains open.
+            DisableNewScenicColliders(props.AddTree(root, new Vector3(-32.6f, TerrainHeight(-32.6f, -1.6f, false), -1.6f), 4.8f, 28, 0));
+            AuthoredPropCount++;
             foreach (var p in new[] { new Vector2(-36.7f, -11.3f), new Vector2(-21.6f, -13.8f), new Vector2(-22f, 2.7f) })
             {
-                PaintedTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, false), p.y), 6.8f, (int)(p.x * 15));
+                PaintedTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, false), p.y), 5.1f, (int)(p.x * 15));
             }
             Vector3 planter = new Vector3(-32.8f, TerrainHeight(-32.8f, -6.2f, false), -6.2f);
             props.AddClayPlanter(root, planter, .63f, 17); AuthoredPropCount++;
@@ -299,25 +303,43 @@ namespace PathOfDawn.Presentation
 
         void BuildTemple(Transform root)
         {
-            // Open colonnades, a real recessed door, fluted columns and stone
-            // voussoirs provide architectural silhouettes rather than a block facade.
-            foreach (float side in new[] { 7f, 30f })
+            // The old long roof slabs projected across the route and covered
+            // the boy even though their supports were beside him. Keep a thin,
+            // open northern portico and give the hall separate receding masses.
+            // No encounter, saved position or continuous floor is relocated.
+            foreach (float side in new[] { 5.2f, 31.8f })
             {
-                for (int i = 0; i < 6; i++) Column(root, new Vector3(side, 0, -3f + i * 3.3f), 3.7f, .34f);
-                Box("Portico carved lower cornice", root, new Vector3(side, 3.95f, 5.25f), new Vector3(2.8f, .30f, 19.7f), chalk, false, .08f);
-                Box("Portico layered coping", root, new Vector3(side, 4.16f, 5.25f), new Vector3(3f, .13f, 20f), trimStone, false, .045f);
-                for (int beam = 0; beam < 10; beam++) Box("Portico exposed cedar beam", root, new Vector3(side, 3.70f, -3.3f + beam * 1.9f), new Vector3(2.6f, .12f, .14f), cedar, false, .025f);
+                for (int i = 0; i < 4; i++)
+                    Column(root, new Vector3(side, 0, 9.2f + i * 3.3f), 3.7f, .32f, false);
+                Box("Open portico narrow architrave", root, new Vector3(side, 3.88f, 14.1f), new Vector3(.72f, .24f, 10.9f), chalk, false, .055f);
+                Box("Open portico stepped cornice", root, new Vector3(side, 4.04f, 14.1f), new Vector3(.94f, .09f, 11.1f), trimStone, false, .025f);
+                for (int beam = 0; beam < 7; beam++)
+                    Box("Open portico short cedar rafter", root, new Vector3(side, 3.70f, 9f + beam * 1.7f), new Vector3(1.15f, .10f, .11f), cedar, false, .02f);
             }
-            Box("Temple rear limestone hall", root, new Vector3(18.5f, 3.7f, 18f), new Vector3(21f, 7.4f, 7f), limestone, true, .14f);
-            Box("Recessed sanctuary opening", root, new Vector3(18.5f, 3.1f, 14.42f), new Vector3(4.1f, 5.7f, .09f), cedar, false, .08f);
+
+            Box("Sanctuary central recessed hall", root, new Vector3(18.5f, 3.35f, 24.6f), new Vector3(10.2f, 6.7f, 6f), limestone, true, .16f);
+            foreach (float side in new[] { 10.2f, 26.8f })
+            {
+                Box("Lower sanctuary side wing", root, new Vector3(side, 2.55f, 25.4f), new Vector3(6.1f, 5.1f, 6.8f), limestone, true, .13f);
+                Box("Side wing stone stringcourse", root, new Vector3(side, 3.70f, 21.93f), new Vector3(6.25f, .14f, .23f), trimStone, false, .035f);
+                Box("Side wing cornice shadow course", root, new Vector3(side, 5.04f, 25.4f), new Vector3(6.4f, .20f, 7.1f), chalk, false, .055f);
+                Column(root, new Vector3(side, 0, 21.7f), 4.85f, .30f, false);
+            }
+            Box("Recessed sanctuary opening", root, new Vector3(18.5f, 2.8f, 21.51f), new Vector3(4.5f, 5.2f, .10f), cedar, false, .07f);
             for (int panel = 0; panel < 8; panel++)
-                Box("Cedar door panel", root, new Vector3(16.8f + panel * .48f, 2.95f, 14.34f), new Vector3(.42f, 5.15f, .09f), cedar, false, .02f);
-            Arch(root, new Vector3(18.5f, 2.1f, 14.20f), 4.5f, .40f, .75f);
-            foreach (float x in new[] { 14f, 23f }) Column(root, new Vector3(x, 0, 14.1f), 6.3f, .47f);
-            Box("Hall stepped entablature", root, new Vector3(18.5f, 6.8f, 14.35f), new Vector3(22f, .65f, 1.6f), chalk, false, .11f);
-            Box("Hall crown molding", root, new Vector3(18.5f, 7.3f, 17.8f), new Vector3(22.5f, .28f, 8.1f), trimStone, false, .09f);
-            for (int i = 0; i < 19; i++) Box("Bronze frieze tablet", root, new Vector3(9.3f + i, 6.83f, 13.47f), new Vector3(.23f, .27f, .055f), bronze, false, .02f);
-            for (int i = 0; i < 7; i++) Box("Carved facade stone course", root, new Vector3(18.5f, .8f + i * .8f, 14.47f), new Vector3(20.6f, .027f, .045f), trimStone, false, .01f);
+                Box("Recessed cedar door panel", root, new Vector3(16.63f + panel * .535f, 2.64f, 21.43f), new Vector3(.46f, 4.95f, .08f), cedar, false, .02f);
+            Arch(root, new Vector3(18.5f, 2.35f, 21.20f), 4.5f, .36f, .72f);
+            foreach (float x in new[] { 14.2f, 22.8f }) Column(root, new Vector3(x, 0, 20.6f), 6.1f, .43f, false);
+            Box("Sanctuary architrave shadow", root, new Vector3(18.5f, 6.18f, 20.8f), new Vector3(10.6f, .19f, 1.05f), trimStone, false, .045f);
+            Box("Sanctuary layered entablature", root, new Vector3(18.5f, 6.40f, 20.8f), new Vector3(11.0f, .25f, 1.24f), chalk, false, .065f);
+            Pediment(root, new Vector3(18.5f, 6.55f, 20.8f), 11.3f, 1.65f, 1.08f, chalk);
+            Pediment(root, new Vector3(18.5f, 6.78f, 20.21f), 8.55f, 1.15f, .06f, limestone);
+            for (int i = 0; i < 11; i++)
+                Box("Small bronze frieze relief", root, new Vector3(13.5f + i, 6.4f, 20.14f), new Vector3(.16f, .17f, .045f), bronze, false, .012f);
+            for (int i = 0; i < 6; i++)
+                Box("Sanctuary recessed stone joint", root, new Vector3(18.5f, .82f + i * .84f, 21.55f), new Vector3(10.0f, .018f, .035f), trimStone, false, .004f);
+            for (int step = 0; step < 3; step++)
+                Box("Northern sanctuary shallow threshold", root, new Vector3(18.5f, .05f + step * .075f, 20.2f + step * .30f), new Vector3(8.5f - step * .3f, .10f + step * .15f, .70f), paving, false, .025f);
             // The small travel gate is an open arch through which the player
             // can actually walk, with a shaded inner thickness.
             foreach (float x in new[] { -1.1f, 5.1f })
@@ -356,8 +378,46 @@ namespace PathOfDawn.Presentation
                 props.AddCeramicVessel(root, new Vector3(p.x, TerrainHeight(p.x, p.z, false), p.z), .85f, p.x * 9); AuthoredPropCount++;
                 props.AddClayPlanter(root, new Vector3(p.x + .85f, TerrainHeight(p.x + .85f, p.z, false), p.z), .48f, 23); AuthoredPropCount++;
             }
+            DressSpringCourt(root);
         }
-        void Column(Transform root, Vector3 position, float height, float radius)
+
+        void DressSpringCourt(Transform root)
+        {
+            // These existing CC0 meshes sit north of the meeting. Their real
+            // trunk/ceramic silhouettes replace an isolated prop on open turf;
+            // they never substitute a new position for Mary's saved encounter.
+            DisableNewScenicColliders(props.AddTree(root, new Vector3(-16.6f, TerrainHeight(-16.6f, -.6f, false), -.6f), 4.6f, -24, 1));
+            AuthoredPropCount++;
+            DisableNewScenicColliders(props.AddClayPlanter(root, new Vector3(-15.2f, TerrainHeight(-15.2f, -5.6f, false), -5.6f), .63f, 37));
+            DisableNewScenicColliders(props.AddCeramicVessel(root, new Vector3(-14.4f, TerrainHeight(-14.4f, -5.2f, false), -5.2f), .42f, -18));
+            AuthoredPropCount += 2;
+            for (int i = 0; i < 15; i++)
+            {
+                float angle = i * Mathf.PI * 2 / 15;
+                float x = -9.2f + Mathf.Sin(angle) * 1.96f, z = -4.2f + Mathf.Cos(angle) * 1.96f;
+                var stone = Box("Worn spring curb sett", root, new Vector3(x, TerrainHeight(x, z, false) + .017f, z),
+                    new Vector3(.47f, .035f, .28f), i % 4 == 0 ? trimStone : paving, false, .008f);
+                stone.transform.localRotation = Quaternion.Euler(0, angle * Mathf.Rad2Deg, 0);
+            }
+        }
+
+        void Pediment(Transform root, Vector3 position, float width, float rise, float depth, Material material)
+        {
+            float x = width * .5f, z = depth * .5f;
+            var vertices = new[] {
+                new Vector3(-x,0,-z),new Vector3(x,0,-z),new Vector3(0,rise,-z),
+                new Vector3(-x,0,z),new Vector3(x,0,z),new Vector3(0,rise,z)
+            };
+            MeshObject("Carved triangular sanctuary pediment", root, FlatMesh("Solid profiled pediment", vertices,
+                new[] { 0,2,1, 3,4,5, 0,1,4,0,4,3, 1,2,5,1,5,4, 2,0,3,2,3,5 }), position, material, false);
+        }
+        static void DisableNewScenicColliders(GameObject model)
+        {
+            // New dressing cannot eject an existing freely saved position on
+            // Continue. Established well, boundary and route collisions remain.
+            foreach (var collider in model.GetComponentsInChildren<Collider>()) collider.enabled = false;
+        }
+        void Column(Transform root, Vector3 position, float height, float radius, bool collision = true)
         {
             position.y = TerrainHeight(position.x, position.z, false);
             MeshObject("Fluted limestone column", root, Lathe(new[] {
@@ -365,6 +425,7 @@ namespace PathOfDawn.Presentation
                 new Vector2(radius, .34f), new Vector2(radius * .86f, height * .46f), new Vector2(radius * .80f, height - .42f),
                 new Vector2(radius * 1.16f, height - .30f), new Vector2(radius * 1.36f, height - .18f), new Vector2(radius * 1.36f, height)
             }, 24, .018f), position, chalk, false);
+            if (!collision) return;
             var c = Node("Column collision", root); c.position = position + Vector3.up * height * .5f;
             var capsule = c.gameObject.AddComponent<CapsuleCollider>(); capsule.height = height; capsule.radius = radius * 1.04f;
         }
@@ -510,15 +571,16 @@ namespace PathOfDawn.Presentation
         }
         void Rock(Transform root, Vector3 position, float size, int seed, bool collision = true)
         {
-            Paint("Rock" + (seed % 2 == 0 ? "1" : "3"), position, size * 1.05f,
-                new Color(1.12f, 1.08f, .92f), seed % 3 == 0, .96f);
+            if (!Paint("Rock" + (seed % 2 == 0 ? "1" : "3"), position, size * 1.05f,
+                new Color(1.06f, 1.03f, .95f), seed % 3 == 0, .96f)) return;
             if (size <= .5f || !collision) return;
             var blocker = Node("Painted limestone collision", root); blocker.position = position + Vector3.up * size * .30f;
             var sphere = blocker.gameObject.AddComponent<SphereCollider>(); sphere.radius = size * .65f;
         }
         void PaintedTree(Transform root, Vector3 position, float height, int seed, bool collision = true, Color? tint = null)
         {
-            Paint("Tree" + (Mathf.Abs(seed) % 3 + 1), position, height, tint ?? new Color(.69f, 1.04f, 1.12f), seed % 2 == 0);
+            if (!Paint("Tree" + (Mathf.Abs(seed) % 3 + 1), position, height,
+                tint ?? new Color(.94f, 1.02f, .93f), seed % 2 == 0)) return;
             AuthoredPropCount++;
             if (!collision) return;
             var blocker = Node("Painted grove real trunk collision", root); blocker.position = position;
@@ -527,23 +589,28 @@ namespace PathOfDawn.Presentation
         }
         void PaintedShrub(Transform root, Vector3 position, float height, int seed)
         {
-            Paint("Foliage1", position, height, new Color(.63f, .93f, 1.03f), seed % 2 == 0, 1.4f);
+            if (!Paint("Foliage1", position, height, new Color(.86f, 1f, .85f), seed % 2 == 0, 1.4f)) return;
             AuthoredPropCount++;
         }
-        void Paint(string source, Vector3 foot, float height, Color tint, bool flip, float widthScale = 1)
+        bool Paint(string source, Vector3 foot, float height, Color tint, bool flip, float widthScale = 1)
         {
+            var texture = Resources.Load<Texture2D>("Art/GospelLuminous/World/" + source);
+            if (texture == null) throw new InvalidOperationException("Missing preserved painted scenery: " + source);
+            float width = height * texture.width / texture.height * widthScale;
+            // Merely keeping tree trunks off the path did not keep their tall
+            // pictures off the player. Reserve the projected body corridor as
+            // well, using the same fixed 43-degree camera and real route. This
+            // changes scenic placement, never sorting, alpha or actor depth.
+            if (CoversTravelView(foot, width, height)) return false;
             if (!paintedMaterials.TryGetValue(source,out var material))
             {
                 var shader = Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageScenery");
-                var texture = Resources.Load<Texture2D>("Art/GospelLuminous/World/" + source);
-                if (shader == null || texture == null) throw new InvalidOperationException("Missing preserved painted scenery: " + source);
+                if (shader == null) throw new InvalidOperationException("Missing painted scenery shader.");
                 material = new Material(shader) { name = "Lost Crypt painted " + source };
                 material.SetTexture("_BaseMap", texture); material.SetFloat("_Wind", source.StartsWith("Rock") ? 0 : .045f);
                 paintedMaterials.Add(source,material); materials.Add(material);
             }
             if (!paintedGeometry.TryGetValue(material,out var geometry)) { geometry=new PaintedGeometry(); paintedGeometry.Add(material,geometry); }
-            var map=material.GetTexture("_BaseMap");
-            float width=height*map.width/map.height*widthScale;
             Vector3 right=Vector3.right*width*.5f, up=Quaternion.Euler(43,0,0)*Vector3.up*height;
             int n=geometry.Vertices.Count;
             geometry.Vertices.Add(foot-right); geometry.Vertices.Add(foot+right); geometry.Vertices.Add(foot+right+up); geometry.Vertices.Add(foot-right+up);
@@ -553,6 +620,26 @@ namespace PathOfDawn.Presentation
             geometry.Triangles.Add(n); geometry.Triangles.Add(n+1); geometry.Triangles.Add(n+2);
             geometry.Triangles.Add(n); geometry.Triangles.Add(n+2); geometry.Triangles.Add(n+3);
             PaintedSceneryCount++;
+            return true;
+        }
+        bool CoversTravelView(Vector3 foot, float width, float height)
+        {
+            const float sinPitch = .68199836f, cosPitch = .73135370f;
+            float left = foot.x - width * .5f - .34f, right = foot.x + width * .5f + .34f;
+            float bottom = foot.z * sinPitch + foot.y * cosPitch, top = bottom + height;
+            float sceneryDepth = foot.z * cosPitch - foot.y * sinPitch;
+            foreach (var point in trail)
+            {
+                if (point.x < left || point.x > right) continue;
+                float ground = TerrainHeight(point.x, point.y, buildingRiver);
+                float bodyDepth = point.y * cosPitch - ground * sinPitch;
+                // A background tree may overlap the silhouette in screen space
+                // while normal depth correctly leaves the actor in front.
+                if (sceneryDepth >= bodyDepth - .05f) continue;
+                float feet = point.y * sinPitch + ground * cosPitch;
+                if (top > feet + .14f && bottom < feet + 1.96f) return true;
+            }
+            return false;
         }
         void BuildPaintedDepth(Transform root, bool river)
         {
@@ -561,14 +648,14 @@ namespace PathOfDawn.Presentation
             for(int i=0;i<11;i++)
             {
                 float x=-52+i*11.5f, z=river?34+(i%3)*1.8f:34+(i%3)*2.1f;
-                PaintedTree(root,new Vector3(x,TerrainHeight(x,z,river),z),13+(i%3)*1.5f,i*17,false,new Color(.40f,.76f,.91f));
+                PaintedTree(root,new Vector3(x,TerrainHeight(x,z,river),z),13+(i%3)*1.5f,i*17,false,new Color(.68f,.79f,.84f));
             }
             var foreground=river?new[] { new Vector2(-39,-16),new Vector2(-20,-20),new Vector2(5,-21),new Vector2(28,-20),new Vector2(47,-15) }
                 :new[] { new Vector2(-39,-16),new Vector2(-18,-20),new Vector2(4,-22),new Vector2(27,-22),new Vector2(48,-14) };
             for(int i=0;i<foreground.Length;i++)
             {
                 var p=foreground[i];
-                PaintedTree(root,new Vector3(p.x,TerrainHeight(p.x,p.y,river),p.y),8.4f+i%2,i*23,false,new Color(.29f,.60f,.65f));
+                PaintedTree(root,new Vector3(p.x,TerrainHeight(p.x,p.y,river),p.y),8.4f+i%2,i*23,false,new Color(.37f,.45f,.37f));
                 PaintedShrub(root,new Vector3(p.x+1.3f,TerrainHeight(p.x+1.3f,p.y,river),p.y),1.8f,i*13);
             }
             // Mary and the first courtyard gain coherent planted islands,
@@ -613,23 +700,23 @@ namespace PathOfDawn.Presentation
         void ConfigureLight()
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(.43f, .62f, .72f);
-            RenderSettings.ambientEquatorColor = new Color(.31f, .43f, .39f);
-            RenderSettings.ambientGroundColor = new Color(.16f, .25f, .24f);
+            RenderSettings.ambientSkyColor = new Color(.48f, .57f, .64f);
+            RenderSettings.ambientEquatorColor = new Color(.43f, .45f, .38f);
+            RenderSettings.ambientGroundColor = new Color(.26f, .25f, .21f);
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.ExponentialSquared;
-            RenderSettings.fogColor = new Color(.41f, .62f, .61f); RenderSettings.fogDensity = .013f;
+            RenderSettings.fogColor = new Color(.60f, .69f, .70f); RenderSettings.fogDensity = .0095f;
             var sunObject = Node("Late afternoon sun", transform); sunObject.rotation = Quaternion.Euler(48, -29, 0);
-            var sun = sunObject.gameObject.AddComponent<Light>(); sun.type = LightType.Directional; sun.color = new Color(1, .89f, .65f);
-            sun.intensity = 1.32f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
+            var sun = sunObject.gameObject.AddComponent<Light>(); sun.type = LightType.Directional; sun.color = new Color(1, .91f, .75f);
+            sun.intensity = 1.14f; sun.shadows = LightShadows.Soft; sun.shadowBias = .035f; sun.shadowNormalBias = .25f;
             RenderSettings.sun = sun;
             var volume = Node("HD2D daylight and distance grade", transform).gameObject.AddComponent<Volume>(); volume.isGlobal = true;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); volume.profile = profile;
             profile.Add<Tonemapping>().mode.Override(TonemappingMode.ACES);
-            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(9); color.saturation.Override(3); color.postExposure.Override(.08f);
-            var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.23f); bloom.threshold.Override(1.10f); bloom.scatter.Override(.58f);
+            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(6); color.saturation.Override(-3); color.postExposure.Override(.10f);
+            var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.16f); bloom.threshold.Override(1.18f); bloom.scatter.Override(.52f);
             var vignette = profile.Add<Vignette>(); vignette.intensity.Override(.19f); vignette.smoothness.Override(.65f);
             var depth = profile.Add<DepthOfField>(); depth.mode.Override(DepthOfFieldMode.Gaussian);
-            depth.gaussianStart.Override(23f); depth.gaussianEnd.Override(42f); depth.gaussianMaxRadius.Override(.65f);
+            depth.gaussianStart.Override(25f); depth.gaussianEnd.Override(44f); depth.gaussianMaxRadius.Override(.40f);
         }
         Material Mat(string name, Color color, float smoothness, float metallic = 0)
         {

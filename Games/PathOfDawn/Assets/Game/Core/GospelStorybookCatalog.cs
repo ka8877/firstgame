@@ -243,26 +243,37 @@ namespace PathOfDawn.Core
                         };
                     }
                     else details = new[] {
-                        Detail(Narrate("복음서는 그 사이 모든 날을 적지 않았습니다. 기록되지 않은 어린 시절의 사건이나 말씀을 만들어 채우지 않고, 다음으로 기록된 만남을 따라갑니다."), "누가복음 2:40–42 · 기록 범위 안내"),
-                        Detail(Narrate("이제 여러분이 직접 움직일 예수님은 열두 살입니다. 부모와 함께 유월절에 예루살렘으로 올라가는 길에서, 다음 이야기가 시작됩니다.", "joseph"), "누가복음 2:41–42 · 다음 장면 안내")
+                        Detail(Narrate("나사렛에서 세월이 흘렀습니다. 예수님은 자라며 강하여지고 지혜가 충족하셨습니다."), "누가복음 2:40–42 · 본문 연결 요약"),
+                        Detail(Narrate("열두 살이 된 예수님은 부모와 함께 유월절을 지키러 예루살렘으로 올라갑니다.", "joseph"), "누가복음 2:41–42 · 본문 요약")
                     };
                     break;
                 default:
-                    details = new[] { Detail(GetBeats(quest)[legacyIndex], ReferenceForWorldQuest(quest)) };
+                    details = new[] { Detail(GetBeats(quest)[legacyIndex], ReferenceForWorldQuest(quest, legacyIndex)) };
                     break;
             }
             return Array.AsReadOnly(details);
         }
 
-        static string ReferenceForWorldQuest(GospelChronicleQuest quest)
+        static string ReferenceForWorldQuest(GospelChronicleQuest quest, int legacyIndex)
         {
-            if (quest.Reading != null) return quest.Reading.Reference;
             switch (quest.Id)
             {
                 case "nazareth-departure": case "pilgrim-spring": return "누가복음 2:41–42 · 길 안내 대화는 극화";
+                case "festival-courtyard":
+                    return legacyIndex == 0 ? "누가복음 2:41–42의 순례 · 길 안내 대화는 극화" :
+                        legacyIndex == 1 ? "누가복음 2:42–43 · 본문 요약" : "누가복음 2:43–46 · 본문 연결 요약";
                 case "listening-court": return "누가복음 2:46 · 길 안내 대화는 극화";
+                case "teachers-circle":
+                    return legacyIndex == 0 ? "누가복음 2:46 · 본문 요약" :
+                        legacyIndex == 1 ? "누가복음 2:47의 반응 · 대화는 극화" : "누가복음 2:46, 48 · 본문 요약";
+                case "parents-reunite":
+                    return legacyIndex < 2 ? "누가복음 2:" + (48 + legacyIndex) + " · 개역한글 직접 인용" :
+                        legacyIndex == 2 ? "누가복음 2:50 · 본문 요약" : "누가복음 2:51 · 본문 요약";
+                case "nazareth-return":
+                    return legacyIndex == 0 ? "누가복음 2:51의 귀향 · 대화는 극화" :
+                        legacyIndex == 1 ? "누가복음 2:51–52 · 본문 요약" : "마태복음 3:13 · 본문 연결 요약";
                 case "adult-jordan-road": return "마태복음 3:13 · 길 안내 대화는 극화";
-                default: return "복음서의 기록을 따른 이야기";
+                default: return quest.Reading != null ? quest.Reading.Reference : "복음서의 기록을 따른 이야기";
             }
         }
 
@@ -305,33 +316,36 @@ namespace PathOfDawn.Core
                     Narrate("서로 다른 사람들이 아기를 만났습니다. 가족은 율법을 따라 행할 일을 마치고, 갈릴리 나사렛으로 돌아갑니다.", "joseph") }; break;
                 case "birth-nazareth-growth": turns = new[] {
                     Narrate("나사렛의 날들이 흐릅니다. 아기는 자라며 강하여지고 지혜가 충족하며, 하나님의 은혜가 그 위에 있었습니다.", "mary"),
-                    Narrate("누가는 그 사이의 모든 날을 적지 않았습니다. 이야기는 기록이 남아 있는 다음 만남으로 이어집니다. 이제 여러분이 움직이는 예수님은 열두 살입니다.", "joseph") }; break;
+                    Narrate("열두 살이 된 예수님은 부모와 함께 유월절을 지키러 예루살렘으로 올라갑니다.", "joseph") }; break;
+                // These short family/wayfinding exchanges stay inside the
+                // recorded journey. Their exact wording remains dramatized,
+                // never newly attributed Scripture or an invented Jesus saying.
                 case "nazareth-departure": turns = new[] {
-                    Dramatic("요셉", "joseph", "예루살렘으로 갈 준비가 되었니? 함께 걷는 이들을 살피며 출발하자."),
-                    Dramatic("요셉", "joseph", "샘가 길목에 마리아가 있단다. 먼저 가서 만나 보렴.") }; break;
+                    Dramatic("요셉", "joseph", "유월절 길을 떠날 채비가 되었니? 예루살렘까지 함께 가자."),
+                    Dramatic("요셉", "joseph", "샘가에 마리아가 기다리고 있단다. 먼저 가서 만나 보렴.") }; break;
                 case "pilgrim-spring": turns = new[] {
-                    Dramatic("마리아", "mary", "우리는 유월절을 지키러 예루살렘으로 올라간단다. 길을 잘 살피며 함께 가자."),
-                    Narrate("누가는 부모가 해마다 유월절에 예루살렘으로 갔다고 기록합니다. 길과 샘가의 배치는 이 여정을 걸어 보기 위한 표현입니다.", "mary") }; break;
+                    Dramatic("마리아", "mary", "왔구나. 유월절을 지키러 예루살렘으로 올라가자."),
+                    Dramatic("마리아", "mary", "이 길을 따라 성전 뜰로 가자. 내 곁으로 오렴.") }; break;
                 case "festival-courtyard": turns = new[] {
-                    Dramatic("성전 길잡이", "teacher", "성전 뜰에 오셨군요. 유월절을 맞아 예루살렘으로 올라오는 이들이 있습니다."),
-                    Narrate("예수님이 열두 살이 되던 해에도 가족은 절기의 전례를 따라 올라왔습니다. 이곳에서 그 날들을 보냈습니다.", "jesus"),
-                    Narrate("절기가 끝났습니다. 부모는 동행 중에 계신 줄 알고 길을 떠났지만, 예수님은 예루살렘에 머무셨습니다. 찾지 못한 부모는 예루살렘으로 돌아옵니다.", "mary") }; break;
+                    Dramatic("성전 길잡이", "teacher", "유월절을 지키러 오셨군요. 성전 뜰은 이쪽입니다."),
+                    Narrate("예수님은 부모와 함께 예루살렘에서 절기를 보냈습니다.", "jesus"),
+                    Narrate("절기가 끝난 뒤, 예수님은 예루살렘에 머무셨습니다. 부모는 동행 중에 계신 줄 알고 길을 떠났다가, 예수님을 찾으러 돌아옵니다.", "mary") }; break;
                 case "listening-court": turns = new[] {
-                    Dramatic("성전의 선생", "teacher", "안쪽에 선생들이 모여 있습니다. 회랑을 따라 들어오세요."),
-                    Narrate("성경에는 이 자리에서 오간 질문의 내용이 남아 있지 않습니다. 그 말을 새로 만들어 예수님의 발언으로 대신하지 않습니다. 기록된 만남을 따라 안쪽 뜰로 갑니다.") }; break;
+                    Dramatic("성전의 선생", "teacher", "이야기를 듣고 싶으냐? 안쪽에 선생들이 모여 있단다."),
+                    Dramatic("성전의 선생", "teacher", "회랑을 따라 들어오렴. 함께 앉을 자리가 있단다.") }; break;
                 case "teachers-circle": turns = new[] {
-                    Narrate("사흘 후, 부모는 성전에서 예수님을 찾았습니다. 예수님은 선생들 가운데 앉아, 듣기도 하시고 묻기도 하셨습니다.", "jesus"),
-                    Narrate("듣는 사람들은 그 지혜와 대답을 기이하게 여겼습니다. 누가가 남긴 것은 이 만남과 사람들의 반응입니다."),
-                    Narrate("이제 부모가 가까이 옵니다. 마리아는 근심하며 아들을 찾았던 마음을 말합니다.", "mary") }; break;
+                    Narrate("예수님은 선생들 가운데 앉아, 듣기도 하시고 묻기도 하셨습니다.", "jesus"),
+                    Dramatic("율법 선생", "teacher", "어린 네게서 이런 대답을 듣다니, 놀랍구나."),
+                    Narrate("사흘 만에 성전으로 찾아온 부모가 예수님을 보고 놀랍니다. 마리아가 가까이 다가옵니다.", "mary") }; break;
                 case "parents-reunite": turns = new[] {
                     Speech(r, 48, "마리아", "mary", "그 모친은 가로되 "),
                     Speech(r, 49, "예수님", "jesus", "예수께서 가라사대 ", " 하시니"),
                     Narrate("양친은 그 하신 말씀을 깨닫지 못했습니다.", "joseph"),
                     Narrate("예수님은 부모와 함께 나사렛으로 내려갑니다. 마리아는 이 모든 말을 마음에 둡니다.", "mary") }; break;
                 case "nazareth-return": turns = new[] {
-                    Dramatic("요셉", "joseph", "함께 나사렛으로 돌아가자. 집으로 내려갈 때에도 서로 곁을 살피자꾸나."),
+                    Dramatic("요셉", "joseph", "이제 나사렛으로 돌아가자. 내 곁으로 오렴."),
                     Narrate("예수님은 부모에게 순종하여 받드셨습니다. 지혜와 키가 자라가며 하나님과 사람에게 더 사랑스러워 가셨습니다.", "jesus"),
-                    Narrate("기록은 모든 해를 자세히 잇지 않습니다. 다음 이야기는 성인이 된 예수님이 요단강으로 향하는 때로 이어집니다.") }; break;
+                    Narrate("세월이 흘렀습니다. 장성한 예수님은 갈릴리를 떠나 요단강으로 향하십니다.", "jesus") }; break;
                 case "adult-jordan-road": turns = new[] {
                     Narrate("이제 성인이 된 예수님입니다. 마태는 예수님이 갈릴리에서 요단강으로 와서 요한에게 세례를 받으려 하셨다고 전합니다.", "jesus"),
                     Dramatic("요단 길잡이", "teacher", "나무 그늘을 지나 강가로 가 보세요. 그곳에 요한이 있습니다.") }; break;

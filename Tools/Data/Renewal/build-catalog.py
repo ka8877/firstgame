@@ -6,6 +6,14 @@ ROOT=Path(__file__).resolve().parents[3];HERE=Path(__file__).resolve().parent;CO
 REV='fm-polish-2026-10-29'
 SKILLS={9,11,42,49,106,135,188,224,243,245,249,339,365,447,450,454,482,508,533,568,570,572,576,643,767,788}
 SPECIAL={'3061320561':136,'5112322065':245,'5112322068':135}
+# Whole source records reviewed against the late official FAQ736. Admit one
+# exact N-rank representative per restored technique; other variants retain
+# their existing unsupported status, including any extra aura/status text.
+CANONICAL_SKILLS={
+ '11070625788':(602,'9406e0018808c2873e7b91555ba7612cf4f0cf79a10bf56a1759a1b5b9ac9b89'),
+ '16070628420':(198,'db547a55be4732c6a21bb175edc1dc854e230bbc2ef201eae30a45706dc36c26'),
+ '14100127645':(54,'838e6318db26bcf3878627402a9fc577a5ccf5f424977f5af03236ecaa6463d4'),
+}
 DOUBLE={str(15100741649+i)for i in range(7)};COPY={str(15112541671+i)for i in range(7)};SYNERGY={'13061941464','4031940424'}
 E={1:'Darkness',2:'Fire',3:'Tide',4:'Forest',5:'Metal',6:'Earth',7:'Dawn'}
 RARITY=['Free','Common','Uncommon','Rare','Special','Upgrade','Unique','Event','Legend','Icajen','Secret','Epic']
@@ -32,6 +40,10 @@ def admit(f):
   skill=f.get('Skill1');special=f['ID']in SPECIAL
   if skill==1:
    if extra:return None
+  elif f['ID']in CANONICAL_SKILLS:
+   expected_skill,expected_sha=CANONICAL_SKILLS[f['ID']]
+   assert skill==expected_skill and canonical(f)==expected_sha,f['ID']
+   assert f['RankType']==1 and base=='' and extra,f['ID']
   elif special:
    assert skill==SPECIAL[f['ID']]
    if f['ID']in('5112322065','5112322068'):effect['freeEquipmentBelowLevel']=True

@@ -77,6 +77,22 @@ namespace FirstGame.Editor
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
                 "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
+            // Current Canon originals replace these atlases and reading artwork.
+            // Keep every original/GUID editable for Native and exact restoration,
+            // while avoiding two generations of inactive textures in the Web player.
+            string canon = "Assets/Resources/Art/GospelCanon/";
+            if (File.Exists(canon + "Actors/jesus-child.png") && File.Exists(canon + "Actors/jesus-adult.png") &&
+                File.Exists(canon + "Actors/npcs.png") && File.Exists(canon + "book-spread.png"))
+            {
+                candidates.Add("Assets/Resources/Art/GospelCanopy/Actors");
+                foreach (string name in new[] { "jesus-child", "jesus-adult", "npcs" })
+                {
+                    candidates.Add("Assets/Resources/Art/GospelPilgrimage/Actors/" + name + ".png");
+                    candidates.Add("Assets/Resources/Art/GospelPilgrimage/Actors/" + name + "-layout.json");
+                }
+                candidates.Add("Assets/Resources/Art/GospelNativity/book-spread.png");
+                candidates.Add("Assets/Resources/Art/GospelStorybook/book.png");
+            }
             candidates.AddRange(Directory.GetFiles("Assets/Resources/Art", "*", SearchOption.TopDirectoryOnly)
                 .Where(path => !path.EndsWith(".meta", StringComparison.Ordinal) &&
                     (path.EndsWith(".png", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".mat", StringComparison.OrdinalIgnoreCase)))

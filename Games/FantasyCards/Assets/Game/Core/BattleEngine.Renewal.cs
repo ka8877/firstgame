@@ -27,6 +27,12 @@ namespace FantasyCards.Core
                 case 11: if (otherLevel <= ownLevel) extra = 2; break;
                 case 42: if (active) { extra = targetAp - ap; ignoreDefense = true; } break;
                 case 49: if (otherLevel <= ownLevel) extra = 1; break;
+                case 54:
+                    // FAQ736's 3/0/3 example is AP3 + damage2, never AP5.
+                    // Use remaining HP (including wounds), retain the wound
+                    // record, and do not resurrect an already defeated unit.
+                    if (originalHp > 0) { extra = originalHp - 1; source.rolledHealth = source.damage + 1; }
+                    break;
                 case 106: if (active) target.rolledAttack = Math.Max(0, targetAp - 2); break;
                 case 135: extra = originalDp; break;
                 case 136:
@@ -52,9 +58,10 @@ namespace FantasyCards.Core
                 case 533: source.rolledDefense++; break;
                 case 570: if (active && (trait & 2) != 0) extra = 2; break;
                 case 572: source.rolledHealth++; break;
+                case 602: if (active && (trait & 4) != 0) { target.rolledAttack = 0; target.rolledDefense = 0; } break;
                 case 643: if (active) target.rolledHealth = target.damage + 1; break;
                 case 767: if (active) { target.rolledAttack = targetHp; target.rolledHealth = target.damage + targetAp; } break;
-                // Long range, curse and vampire have post-strike conditions.
+                // Charm, long range, curse and vampire have post-strike conditions.
             }
             extra += ApplyPremiumBeforeStrike(source, target, owner, other);
             PolishBeforeStrike(source, target, owner, other);
@@ -78,6 +85,16 @@ namespace FantasyCards.Core
             target.damage += damage;
             Log(kind, CardCatalog.Get(source.definitionId).name + " → " + CardCatalog.Get(target.definitionId).name + " · 피해 " + damage,
                 damage, owner, source: source, sourceOwner: owner, target: target, targetOwner: other, additionalAttackDamage: extra);
+            if (code == 198 && damage == 0)
+            {
+                // The late manual says "on attack", without AP >= 1. Resolve
+                // actual HP damage first so a blocked/zero-AP hit still charms,
+                // and the changed AP is already in force for a counterattack.
+                int lostAttack = CardCatalog.UnitAttack(target);
+                target.rolledAttack = 0;
+                Log("skill", CardCatalog.Get(source.definitionId).name + " · 매료공격 · 피해 없음 / 상대 AP=0", lostAttack, owner,
+                    source: source, sourceOwner: owner, target: target, targetOwner: other);
+            }
             if (active && code == 576) { target.rolledAttack = Math.Max(0, CardCatalog.UnitAttack(target) - 2); target.rolledDefense = Math.Max(0, CardCatalog.UnitDefense(target) - 2); }
             if (active && code == 788 && damage > 0) source.rolledHealth += (Math.Min(hpBeforeDamage, damage) + 1) / 2;
             if ((active && code == 576) || (active && code == 788 && damage > 0))
