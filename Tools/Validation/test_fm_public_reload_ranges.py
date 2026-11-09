@@ -95,6 +95,40 @@ def fixture(cancelled='title.ogg', navigation=2):
                                     for row in files]}}
 
 
+def initial_after_abort_fixture(navigation=2):
+    """Authored Public03 battle projection with no pre-abort observation."""
+    case = fixture(navigation=navigation)
+    case['failure'].update(url=url('battle.ogg'), observedEpochMs=1794252222425.9592)
+    case['responses'] = [{'url': url('battle.ogg'), 'method': 'GET', 'status': 206,
+                          'navigation': navigation} for _ in range(3)]
+    initial_rows = []
+    for index, (at, reason) in enumerate([
+            (1794252222469, 'media-loadeddata:fm-local-audio-lobby'),
+            (1794252222472, 'media-loadeddata:fm-local-audio-deck'),
+            (1794252222515, 'media-loadeddata:fm-local-audio-battle'),
+            (1794252222554, 'media-loadeddata:fm-local-audio-title'),
+            (1794252222560, 'sample')]):
+        row = observation(at, navigation, 'battle.ogg', decoded=index >= 2, reason=reason)
+        for item in row['players']:
+            filename = item['source'].rsplit('/', 1)[-1]
+            item['readyState'] = (4 if filename == 'lobby.ogg' or index >= 3
+                                  or filename == 'deck.ogg' and index >= 1
+                                  or filename == 'battle.ogg' and index >= 2
+                                  else 1 if filename == 'deck.ogg' else 0)
+            item.update(restartNeeded=True, restartCount=0, lastStartAtMs=None,
+                        lastStartPosition=None, lastStartRoleSerial=None,
+                        lastPromotionPosition=None, fadeTarget=0,
+                        contextState='not-created')
+        initial_rows.append(row)
+    window = case['windows'][0]
+    window['startedEpochMs'] = 1794252240000.0
+    window['finishedEpochMs'] = 1794252242300.0
+    selected_row = copy.deepcopy(case['observations'][3])
+    selected_row['epochMs'] = window['startedEpochMs'] - 100
+    case['observations'] = [*initial_rows, selected_row]
+    return case
+
+
 def cancelled_player(case, row_index):
     return next(item for item in case['observations'][row_index]['players']
                 if item['source'] == case['failure']['url'])
@@ -396,6 +430,140 @@ class CanonPublicReloadRangesTests(unittest.TestCase):
         for update in updates:
             with self.subTest(update=update):
                 self.rejects(lambda case: case['windows'][0].update(update))
+
+
+class CanonInitialPublicReloadRangesTests(unittest.TestCase):
+    def prove(self, case):
+        return MEDIA.recovered_public_reload_pregesture_range_cancellation(**case)
+
+    def rejects(self, mutate):
+        case = initial_after_abort_fixture()
+        mutate(case)
+        self.assertIsNone(self.prove(case))
+
+    def test_actual_initial_after_abort_shape_has_explicit_observation_limit(self):
+        case = initial_after_abort_fixture()
+        original = copy.deepcopy(case)
+        proof = self.prove(case)
+        self.assertIsInstance(proof, dict)
+        self.assertEqual(proof['category'], 'public-reload-initial-pregesture-decoded-range')
+        self.assertEqual(proof['request'], case['failure'])
+        self.assertIs(proof['observedBeforeAbort'], False)
+        self.assertIsNone(proof['beforeEpochMs'])
+        self.assertIsNone(proof['beforeState'])
+        self.assertIsNone(proof['beforePlayer'])
+        self.assertEqual(proof['initialObservedEpochMs'], 1794252222469)
+        self.assertEqual(proof['decodedBeforeUnlockEpochMs'], 1794252222515)
+        self.assertEqual(proof['verifiedPublicSha256'], SOURCES['battle.ogg'][1])
+        self.assertEqual(proof['subsequentPcm']['navigation'], 2)
+        self.assertEqual(case, original)
+
+    def test_first_reload_and_an_older_other_navigation_do_not_invent_a_prior_sample(self):
+        case = initial_after_abort_fixture(navigation=1)
+        unrelated = copy.deepcopy(case['observations'][0])
+        unrelated.update(navigation=0, epochMs=case['failure']['observedEpochMs'] - 5000)
+        case['observations'].insert(0, unrelated)
+        proof = self.prove(case)
+        self.assertIsInstance(proof, dict)
+        self.assertEqual(proof['category'], 'public-reload-initial-pregesture-decoded-range')
+        self.assertIs(proof['observedBeforeAbort'], False)
+        self.assertEqual(proof['subsequentPcm']['navigation'], 1)
+
+    def test_every_initial_cancelled_player_needs_all_never_played_fields(self):
+        fields = ['restartNeeded', 'restartCount', 'lastStartAtMs', 'lastStartPosition',
+                  'lastStartRoleSerial', 'lastPromotionPosition', 'fadeTarget', 'contextState']
+        for index in range(3):
+            for field in fields:
+                with self.subTest(index=index, missing=field):
+                    self.rejects(lambda case: cancelled_player(case, index).pop(field))
+
+    def test_restart_or_any_prior_start_marker_is_not_an_initial_unused_preload(self):
+        changes = [('restartNeeded', False), ('restartCount', 1), ('restartCount', True),
+                   ('lastStartAtMs', 0), ('lastStartPosition', 0), ('lastStartRoleSerial', 0),
+                   ('lastPromotionPosition', 0), ('fadeTarget', 1), ('fadeTarget', False),
+                   ('contextState', 'running'), ('currentTime', 0.1),
+                   ('pending', True), ('active', True), ('paused', False)]
+        for index in range(3):
+            for key, value in changes:
+                with self.subTest(index=index, key=key, value=value):
+                    self.rejects(lambda case: cancelled_player(case, index).update({key: value}))
+
+    def test_old_or_exact_abort_time_same_navigation_observation_blocks_the_new_branch(self):
+        for age in (0, 1001, 5000):
+            case = initial_after_abort_fixture()
+            earlier = copy.deepcopy(case['observations'][0])
+            earlier['epochMs'] = case['failure']['observedEpochMs'] - age
+            case['observations'].insert(0, earlier)
+            with self.subTest(age=age):
+                self.assertIsNone(self.prove(case))
+
+    def test_unknown_timestamp_cannot_hide_an_earlier_current_navigation_observation(self):
+        for timestamp in (None, True, float('nan')):
+            case = initial_after_abort_fixture()
+            unknown = copy.deepcopy(case['observations'][0])
+            unknown['epochMs'] = timestamp
+            case['observations'].insert(0, unknown)
+            with self.subTest(timestamp=timestamp):
+                self.assertIsNone(self.prove(case))
+
+    def test_initial_and_decode_observations_must_be_prompt_and_same_navigation(self):
+        mutations = [
+            ('no-initial-rows', lambda case: case.update(observations=case['observations'][5:])),
+            ('late-first-observation', lambda case: [row.update(epochMs=row['epochMs'] + 1100)
+                                                    for row in case['observations'][:5]]),
+            ('late-target-decode', lambda case: case['observations'][2].update(
+                epochMs=case['failure']['observedEpochMs'] + 2001)),
+            ('target-decode-at-abort', lambda case: case['observations'][2].update(
+                epochMs=case['failure']['observedEpochMs'])),
+            ('other-navigation', lambda case: [row.update(navigation=1)
+                                               for row in case['observations'][:5]]),
+            ('target-decode-other-navigation', lambda case: case['observations'][2].update(navigation=1)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
+
+    def test_initial_state_through_decode_cannot_unlock_or_select_any_source(self):
+        for index in range(3):
+            for key, value in [('unlocked', True), ('contextState', 'running'),
+                               ('actualSource', url('battle.ogg')), ('actualPaused', False)]:
+                with self.subTest(index=index, key=key, value=value):
+                    self.rejects(lambda case: case['observations'][index]['state'].update({key: value}))
+
+    def test_already_loaded_or_sample_rows_do_not_replace_the_exact_target_loadeddata(self):
+        for ready_state in (2, 4):
+            case = initial_after_abort_fixture()
+            cancelled_player(case, 0)['readyState'] = ready_state
+            with self.subTest(initial_ready_state=ready_state):
+                self.assertIsNone(self.prove(case))
+        for loaded_initial in (False, True):
+            case = initial_after_abort_fixture()
+            case['observations'].pop(2)
+            if loaded_initial:
+                for index in (0, 1):
+                    cancelled_player(case, index)['readyState'] = 4
+            with self.subTest(loaded_initial=loaded_initial):
+                self.assertIsNone(self.prove(case))
+        self.rejects(lambda case: case['observations'][2].update(reason='sample'))
+        self.rejects(lambda case: case['observations'][2].update(
+            reason='media-loadeddata:fm-local-audio-title'))
+
+    def test_initial_branch_still_requires_full_delivery_ranges_and_selected_pcm(self):
+        mutations = [
+            ('no-delivery', lambda case: case['delivered'].update(files=[])),
+            ('wrong-delivery-hash', lambda case: delivered_row(case, 'battle.ogg').update(sha256='0' * 64)),
+            ('no-ranges', lambda case: case.update(responses=[])),
+            ('cross-navigation-ranges', lambda case: [row.update(navigation=1) for row in case['responses']]),
+            ('http-error', lambda case: case['responses'].append(
+                {'url': url('battle.ogg'), 'method': 'GET', 'status': 503, 'navigation': 2})),
+            ('no-pcm', lambda case: case.update(windows=[])),
+            ('cross-navigation-pcm', lambda case: case['windows'][0].update(navigation=1)),
+            ('silent-pcm', lambda case: case['windows'][0].update(medianRms=0)),
+            ('no-passive-selected-source', lambda case: case['observations'].pop(5)),
+        ]
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                self.rejects(mutate)
 
 
 if __name__ == '__main__':

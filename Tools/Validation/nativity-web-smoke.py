@@ -592,6 +592,11 @@ class JourneySmoke:
                     session.detach()
                 record["touchDurationMs"] = 180
                 record["additionalRenderedFramesBeforeRelease"] = 2
+                # Observe consumption of the real finger release before the
+                # next action or capture. A wall-clock delay alone can end
+                # before Unity paints the newly opened panel on a software GPU.
+                self.page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                record["additionalRenderedFramesAfterRelease"] = 2
             else:
                 self.page.mouse.click(px, py, delay=180)
         elif kind == "double_click":

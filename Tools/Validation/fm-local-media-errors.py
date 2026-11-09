@@ -271,8 +271,10 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
     ``delivered`` is the complete successful publicDelivery object, including
     its gameUrl and files, rather than the file list used by older classifiers.
     Fresh full audio GETs bind both the cancelled and subsequently selected
-    source. Recorded pre/post state, repeated same-navigation HTTP206, a later
-    exact loadeddata event and isolated selected-source PCM are all mandatory.
+    source. Recorded pre/post state, or the first never-played initialization
+    observation when no prior observation exists, must precede an exact
+    loadeddata event. Same-navigation HTTP206 and selected-source PCM are
+    mandatory in either case.
     This proves decode recovery and later selected playback, not uninterrupted
     playback or audibility of the cancelled inactive preload. No input is edited.
     """
@@ -348,15 +350,40 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
 
     before=[row for row in rows if when-1000<=row['epochMs']<when]
     after=[row for row in rows if when<row['epochMs']<=when+1000]
-    if not before or not after:return None
-    first,last=before[-1],after[0]
-    if not pre_unlock(first) or not pre_unlock(last):return None
+    if not after:return None
+    first=before[-1] if before else None
+    initial=None
+    if first is not None:
+        last=after[0]
+        if not pre_unlock(first) or not pre_unlock(last):return None
+    else:
+        # This is not a fallback for a missing/old bracket. No earlier current-
+        # navigation observation may exist, including one outside the window.
+        current=[row for row in observations if isinstance(row,dict) and row.get('navigation')==nav]
+        if (not rows or any(not same_nav(row) or not _number(row.get('epochMs')) for row in current)
+                or any(row['epochMs']<=when for row in rows)):
+            return None
+        initial=last=rows[0]
+        if not when<initial['epochMs']<=when+1000:return None
+
+    def never_played(row):
+        old=player(row,url)
+        return (pre_unlock(row) and old.get('restartNeeded') is True
+                and type(old.get('restartCount')) is int and old['restartCount']==0
+                and old.get('contextState')=='not-created' and _number(old.get('fadeTarget')) and old['fadeTarget']==0
+                and all(key in old and old[key] is None for key in
+                    ('lastStartAtMs','lastStartPosition','lastStartRoleSerial','lastPromotionPosition')))
+
+    if initial is not None and (not never_played(initial) or player(initial,url)['readyState'] not in (0,1)):
+        return None
     media_name=url.rsplit('/',1)[-1].rsplit('.',1)[0]
     loaded=next((row for row in rows if when<row['epochMs']<=when+2000
         and row.get('reason')=='media-loadeddata:fm-local-audio-'+media_name and pre_unlock(row)
         and player(row,url)['readyState']>=2),None)
     if loaded is None or loaded['epochMs']<last['epochMs']:return None
-    if any(not pre_unlock(row) for row in rows if first['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
+    start=first if first is not None else initial
+    initial_state=pre_unlock if first is not None else never_played
+    if any(not initial_state(row) for row in rows if start['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
 
     def selected_playing(row,source):
         state=row.get('state');selected=player(row,source)
@@ -394,15 +421,19 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
         if playing is None:continue
         if any(same_nav(row) and row.get('url')==selected and row.get('method')=='GET'
                and _number(row.get('status')) and row['status']>=400 for row in responses):continue
-        return {'request':dict(failure),'category':'public-reload-pregesture-decoded-range','navigation':nav,
-            'reason':'Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.',
-            'beforeEpochMs':first['epochMs'],'afterEpochMs':last['epochMs'],
+        return {'request':dict(failure),'category':('public-reload-pregesture-decoded-range' if first is not None
+                else 'public-reload-initial-pregesture-decoded-range'),'navigation':nav,
+            'reason':('Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.' if first is not None
+                else 'The first observation shortly after the public reload abort proves a never-played pre-unlock element, which then decoded; later same-navigation selected bundled PCM advanced. No pre-abort observation is claimed.'),
+            'observedBeforeAbort':first is not None,
+            'initialObservedEpochMs':initial['epochMs'] if initial is not None else None,
+            'beforeEpochMs':first['epochMs'] if first is not None else None,'afterEpochMs':last['epochMs'],
             'decodedBeforeUnlockEpochMs':loaded['epochMs'],'selectedPlayingEpochMs':playing['epochMs'],
             'cancelledSource':url,'selectedSource':selected,'http206Responses':len(ranges),
             'http206Evidence':[dict(row) for row in ranges],
-            'beforeState':dict(first['state']),'afterState':dict(last['state']),
+            'beforeState':dict(first['state']) if first is not None else None,'afterState':dict(last['state']),
             'decodedState':dict(loaded['state']),'selectedState':dict(playing['state']),
-            'beforePlayer':dict(player(first,url)),'afterPlayer':dict(player(last,url)),
+            'beforePlayer':dict(player(first,url)) if first is not None else None,'afterPlayer':dict(player(last,url)),
             'decodedPlayer':dict(player(loaded,url)),'selectedPlayer':dict(player(playing,selected)),
             'verifiedPublicSha256':allowed[url]['sha256'],'verifiedPublicBytes':allowed[url]['bytes'],
             'verifiedSelectedPublicSha256':allowed[selected]['sha256'],
