@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-09T06:54:16.889865+00:00",
+  "updatedUtc": "2026-11-09T06:58:05.459545+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,7 +13,7 @@
   },
   "activeWork": {
     "id": "CanonArt",
-    "status": "Core309-Native8and21-GospelWeb02-passed-GospelPC-running-CardWeb-next",
+    "status": "GospelWeb02-Native8and21-Core309-passed-PC-incomplete-owned-lease-deadline",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
@@ -105,11 +105,11 @@
         "actualBuildAndRestorationExit": 0,
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
-      "GospelPC": "Browser01 failed before launch:DISPLAY missing. Fixed newwrapper only to start/activate established display inside owned supervisor. Browser02 actualPC ordinaryinput running."
+      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed."
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
       "Build current CardWeb bound to Card03 Native8",
       "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
       "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
@@ -209,7 +209,7 @@
     "id": "CanonArt",
     "status": "continue-current-implementation-through-actual-Web-browser-public-validation",
     "tasks": [
-      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
       "Build current CardWeb bound to Card03 Native8",
       "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
       "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
@@ -236,7 +236,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "owned-current-verification-batch-query-live-before-resuming",
+    "lockStatus": "checkpoint-before-normal-owned-release",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 2700,
     "sameCauseMaxRetries": 2,
@@ -1484,7 +1484,7 @@
   },
   "activeCanonArt": {
     "id": "CanonArt",
-    "status": "Core309-Native8and21-GospelWeb02-passed-GospelPC-running-CardWeb-next",
+    "status": "GospelWeb02-Native8and21-Core309-passed-PC-incomplete-owned-lease-deadline",
     "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
     "leaseRecord": "Artifacts/Validation/Autonomy/CanonArtVerify-2026-11-09/lease.json",
@@ -1576,11 +1576,11 @@
         "actualBuildAndRestorationExit": 0,
         "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
-      "GospelPC": "Browser01 failed before launch:DISPLAY missing. Fixed newwrapper only to start/activate established display inside owned supervisor. Browser02 actualPC ordinaryinput running."
+      "GospelPC": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed."
     },
     "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
     "next": [
-      "Finish current GospelPC and actual all required Root originals; preserve any failures separately",
+      "Use fresh full900-second owned lane for complete GospelPC (Browser03), all original steps/2reloads/audio unchanged; then Rootallrequiredoriginal review",
       "Build current CardWeb bound to Card03 Native8",
       "Run both touch lanes and CardPC with actual4PCM/two reloads; source/runtime unchanged",
       "Commit final source,requiredCI,regularstage/985MB,existingPages/full freshpublicGET/bothpublictouch/Root"
