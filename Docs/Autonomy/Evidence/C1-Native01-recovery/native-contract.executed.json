@@ -1,0 +1,59 @@
+{
+  "status": "exact-proposed-contract-not-test-results",
+  "retainedNativityCases": [
+    {
+      "fullname": "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+      "methodname": "ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+      "historicalResult": "Passed"
+    },
+    {
+      "fullname": "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+      "methodname": "AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+      "historicalResult": "Passed"
+    },
+    {
+      "fullname": "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+      "methodname": "FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+      "historicalResult": "Passed"
+    },
+    {
+      "fullname": "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+      "methodname": "ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+      "historicalResult": "Passed"
+    },
+    {
+      "fullname": "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+      "methodname": "RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+      "historicalResult": "Passed"
+    },
+    {
+      "fullname": "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList",
+      "methodname": "UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList",
+      "historicalResult": "Passed"
+    }
+  ],
+  "correctedExistingCase": "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+  "newCase": "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+  "expectedFullNames": [
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+    "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+    "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+    "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+    "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+  ],
+  "counts": {
+    "retainedNativity": 6,
+    "correctedExisting": 1,
+    "new": 1,
+    "total": 8
+  },
+  "historicalXml": {
+    "file": "Artifacts/Validation/Nativity/Native/FantasyCards/native.xml",
+    "sha256": "09d4d189034bf1cc50ad4673ea0fb4698cca60f81ba092704ece0d86e1875fd9",
+    "bytes": 10847
+  },
+  "scope": "Old6 plus new1 alone is7; selected C1 contract adds the touched existing Fidelity case for exact8. No source case/assertion removed. Exact full-name XML equality, Passed8/failed0/skipped0/no duplicates required."
+}

@@ -1,0 +1,31 @@
+{
+  "label": "spawn-ignore-term",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+    "spawn-ignore-term",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/DummyOutputs",
+    "owned-spawn-ignore-term-Candidate01"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01",
+  "startedUtc": "2026-11-03T17:34:23.128056+00:00",
+  "timeoutSeconds": 0.9992717729983269,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 125,
+  "containmentProvedEmpty": false,
+  "cleanupIncomplete": true,
+  "containmentEvidence": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term",
+  "containmentReceipt": {
+    "file": "spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+    "sha256": "00ba0805dc58815e79707ede0ef80df1413fd079e9a9b514dce8d6422436eb8c",
+    "bytes": 1282
+  },
+  "containmentError": "ValueError: Owned descendants not proved empty; no success/restore may be inferred",
+  "finishedUtc": "2026-11-03T17:34:23.192800+00:00"
+}

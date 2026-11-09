@@ -1,0 +1,164 @@
+{
+  "kind": "paired-recovery-gate-mapping-draft",
+  "status": "source-only-not-installed-or-executed",
+  "publishReady": false,
+  "baselineReady": false,
+  "minimumContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+    "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+    "bytes": 11037
+  },
+  "legacyProfilesRemainFailClosed": true,
+  "gates": [
+    {
+      "gate": "ownership",
+      "originalMinimumCondition": "Preserve recovery exact-owner release, actual idle/current environment and fresh common lease; each step within existing45min limit. No stealing/extension or concurrent Unity/browser/publication.",
+      "applies": "every actual phase",
+      "newEquivalentCondition": "Exact owner/common bounded lease/current idle; no timeout theft or extension. Every attempt independent; release on completion; new lease when needed."
+    },
+    {
+      "gate": "rollback",
+      "originalMinimumCondition": "Restore original G2 full15413-path regular site from947890/current exact manifest0a9767, verify every expected SHA/size/file set/ordinary mode and total981817124B. Store recoverable exact rollback bytes/remote commit; this proves recovery bytes, not fresh execution or missing historical Root seal.",
+      "applies": "before first local Web",
+      "newEquivalentCondition": "Recheck actual Restore01 regular stage15413/981817124, complete SHA+size+path+Git mode/blob and MF0a9767/947890. New rollback witness never authorizes missing old seal."
+    },
+    {
+      "gate": "historical-loss",
+      "originalMinimumCondition": "Preserve every remaining old original and receipt9665 unchanged. Keep missing refs explicitly missing. Do not rewrite oldpaths/status/hash or generate old observations. New baseline has a distinct kind/workId/date and its own actual proof refs/Root seal.",
+      "applies": "all phases/final",
+      "newEquivalentCondition": "Keep receipt9665 and every surviving old original unchanged; explicitly missing c030/81a/730bb/a444 stay missing. Distinct current baseline type/workId/receipt/seal."
+    },
+    {
+      "gate": "gospel-source",
+      "originalMinimumCondition": "Exact old input/evidence copies may be restored only by byte-match. Otherwise fresh unchanged-Gospel build must generate actual BuildInputs/BuildEvidence and full source/runtime binding; old Native inputs363712B are not the missing old BuildInputs408125B. Current authored fingerprint must remain255e and IDs/save/content unchanged.",
+      "applies": "Native/build/local/stage/public",
+      "newEquivalentCondition": "All1707 full authored rows exactly historical fdf2aa, fixed255e before/after/current Native/current fresh BuildInputs. No allowlist/diff/FP-upgrade route; Editor/.sh unchanged."
+    },
+    {
+      "gate": "gospel-runtime",
+      "originalMinimumCondition": "Compare all five actual fresh-build runtime files to original manifest. If bit-equal, preserve original normal runtime and attach the new genuine build witness. If unequal, never pair oldbinary with newmetadata; use Root-approved real common pipeline/proof-durability paired recovery revision with fresh evidence for both games, preserving original exact rollback and reporting every runtime difference.",
+      "applies": "build then stage/final",
+      "newEquivalentCondition": "Compare all5 actual fresh core runtime bytes to rollback. Classify each exact equal/changed. If any changed require genuine paired common-proof durability, both-game current evidence; do not claim preserved old runtime."
+    },
+    {
+      "gate": "card-native",
+      "originalMinimumCondition": "Use new unique current attempt after grade fix, exact8 fullname set/allPassed/0fail/0skip/no duplicates, current source-before+after/XML/SHA binding, independent known-ID/mask/save assertions and Root actual grade/current originals. Native01 acd70 8pass/visual rejection remains historical, not selected current release proof.",
+      "applies": "before local Web",
+      "newEquivalentCondition": "Explicitly select current actual exact8 unique fullnames/Passed/failed0/skipped0 current source/tool/helper/contract/XML. Native04 remains candidate until rechecked. Root original grade13 approval mandatory; old failures preserved."
+    },
+    {
+      "gate": "gospel-native",
+      "originalMinimumCondition": "Fresh full current16 set, unchanged authored source255e, voice production extraFixture identity, actual original planted/reloaded and legacy heading/bytes controls, all source/result/SHA binding and Root original review. Do not call historical current_build then relabel oldresults.",
+      "applies": "before local Web",
+      "newEquivalentCondition": "Fresh fixed-source exact16 unique fullnames/Passed/0fail/0skip, voice production fixture and full source before/after/XML binding. Root scope separates Core19/facing/new head from unproved fade/book/legacy visibility."
+    },
+    {
+      "gate": "core-ci",
+      "originalMinimumCondition": "Actual current Core inputs+successful results; explicit exact-input historical reuse only if all raw/binding originals remain and reuse is declared. Paired recovery must run both Native/build/browser scopes and current clean source CI/Core+guard; no fallback from a partial/failed new Core run.",
+      "applies": "current Core before stage, clean source CI before publish/final",
+      "newEquivalentCondition": "Actual current complete Core/save tests+source input binding; explicit historical reuse only if exact inputs and raw/binding originals exist. No partial/failed current-run fallback. Final normal clean main/CI/guard protected flow."
+    },
+    {
+      "gate": "builds",
+      "originalMinimumCondition": "Fresh successful Card and Gospel build on paired-recovery branch, zero build errors, current per-game authored rows/native/build FP equality, correct exact revisions/content/targets, full five runtime identities, original/GUID/legacy-isolation restored ledger and current warnings retained. A source-copy/reconstructed Succeeded line is insufficient.",
+      "applies": "before local Web",
+      "newEquivalentCondition": "Both genuine fresh existing build invocations/log/exit0/BuildReport originals, full input/source/native equality, target/revision/content/errors0, restored resource/GUID/legacy ledgers. After success actually run pinned c597 durable-proof helper for both, retaining raw originals, not fabricated history."
+    },
+    {
+      "gate": "local-browser",
+      "originalMinimumCondition": "Both games get fresh PC1280x720 and actual touch844x390 context checks with current explicit plans/pinned harnesses, all previous mandatory scopes. Card retains original25+capability21/20+newgrade2, PCM4 and two actual independent reloads. Gospel retains G2 complete plans/newReading8 and both early/late reloads/source narration/Book-stop-next PCM. No injected game/save/random state.",
+      "applies": "before stage",
+      "newEquivalentCondition": "Both PC1280x720 and actual touch844x390. Card162/48 and163/47; Gospel117/48 and86/34 preserved. All PCM4 and original2reloads unchanged. GospelPC19 completion adds ordinary UI tail only; mobile/public no immediate23-event repeat."
+    },
+    {
+      "gate": "browser-integrity",
+      "originalMinimumCondition": "Require exact final runtime gate exists once/passed, no runtime/unexpected request errors, strict unchanged exact cache/media classifier, full required checkpoints, actual nav relationships, raw report SHA/size/pre-review checkpoint and visualReview-only equality. Every approved shot equals exact full row/name/path/hash/nav/canvas of current originals; Root binds complete current runtime and sourceFP. Software/FPS/human aesthetics remain separate.",
+      "applies": "each current browser attempt/Root/final",
+      "newEquivalentCondition": "Exactly1 finalruntime check true; no unexpected errors/requests under unchanged strict classifier. Full required rows, actual navs, raw report pre-review SHA+bytes, visualReview-only equality, Root current sourceFP/runtime and every approved full screenshot row equality/regular originals."
+    },
+    {
+      "gate": "new-baseline-audit",
+      "originalMinimumCondition": "Fresh current63 non-image HTTPS body GETs including manifest with canonical URLs/status200/identity body SHA/size, fresh current deployed tree/modes/blobs and complete local file set. New current portal desktop1440x1050+mobile390x844 actual full-page originals/checks/Root/raw equality. No missing oldportal substitute labelled historical.",
+      "applies": "postpublish before public game input",
+      "newEquivalentCondition": "Fresh deployed fulltree/truncatedfalse/mode100644/exactset, complete current MF plus63 nonimage canonical TLS GET/status200/identity/bodySHA/size/resolvedURL; new portal desktop1440x1050/mobile390x844 originals+Root/raw equality."
+    },
+    {
+      "gate": "dated-images",
+      "originalMinimumCondition": "Surviving original f8e4 GET body rows, Root9222/history/Nativity8c7 chain may be reused only with exact ref bytes/hash, all15350 original bytes/hash/URL/status/identity/time, current matching manifest+fresh Git blobs+all local JPEG hashes. Preserve original old freshGet=true raw; aggregate new rows freshGet=false/inherited with old timestamps. If any raw/root chain or exact identity is absent, require fresh full15350 GET instead.",
+      "applies": "stage/public full audit",
+      "newEquivalentCondition": "Exactly15350 JPEGs. Full strict original8c7→f8e4 chain/Root/history/source rows and actual local currentMF/currentGitblobs must agree. Reused rows freshGetfalse with historical timestamps; preserve old raw freshGettrue. Missing any original chain→fresh15350 actual GET, never synthesize."
+    },
+    {
+      "gate": "stage",
+      "originalMinimumCondition": "New explicit recovery+C1 profile preserves exact rollback and all unmodified site/ThirdParty/JPEG bytes. All changes are an allowlisted complete two-game runtime difference set when paired; no card/art/save/ID deletion. Actual full regular site+manifest below985000000B, exact manifest/source/native/build/browser/root pins, clean merged source and required current CI; no LFS/symlink placeholders.",
+      "applies": "prepublish",
+      "newEquivalentCondition": "Current complete regular exact15413-path site, no LFS/symlinks/placeholders; total includingMF strictly<985000000. Explicit per-file diff only actual two-game runtime outputs+newMF; all JPEG/ThirdParty/unmodified site byte-equal rollback. Both local+Root/Native/build/Core/current cleanCI/source bound. No final-public receipt dependency."
+    },
+    {
+      "gate": "public",
+      "originalMinimumCondition": "Normal protected merge and existing Pages workflow full SHA/LFS/size gates. After publication actual current full manifest/tree/delivery plus fresh public touch inputs/Root for both games, both reload paths and each finalruntime gate. CI/head/Pages/deployed/ref identities exact; deployment command success alone is insufficient. Roll back exact lastnormal if fatal regression.",
+      "applies": "after normal protected publish",
+      "newEquivalentCondition": "Exact merged source/CI/Pages/deployedCommit/MF/tree; new fullHTTPS+portalRoot first, then both games fresh public touch inputs+Root/PCM4/original2reloads/finalruntime. Commands success alone insufficient. Exact rollback on fatal regression."
+    },
+    {
+      "gate": "seal-durability",
+      "originalMinimumCondition": "New uniquely named current-baseline/final receipt and independent Root seal pin every actual source/runtime/native/build/Core/browser/raw/portal/tree/CI/lease/original ledger. Real common proof-durability pipeline must preserve recoverable exact control evidence including BuildInputs/Evidence/Root/raw, not only hashes or /tmp aliases. Retain observed loss/unknowns and original Native01/PC01 failure histories without rewriting.",
+      "applies": "final only",
+      "newEquivalentCondition": "New distinct receipt+independent Rootseal after current both-game public/Root/fullsite/currentCI/source/lease close. Persistent exact raw controls, XML/build inputs/evidence/raw reports/Root/screenshots/producer sources; retain failures and unresolved historical loss. Hashes-only or /tmp alias does not close controls."
+    }
+  ],
+  "c1FunctionMapping": [
+    {
+      "oldPart": "sealed_g2(c), lines47-66",
+      "reuse": "none as a preflight; retain its historical meaning unchanged",
+      "replacement": "typed exact rollback + fresh both-game native/build/local/public/Root closure; missing old Root/portal/build originals remain missing",
+      "mustNotDo": [
+        "call old sealed_g2",
+        "construct fake _sealed",
+        "satisfy missing old refs with a new report",
+        "relabel old success as current"
+      ]
+    },
+    {
+      "oldPart": "current_card_build(c), lines67-77",
+      "reuse": "exact XML8, current Native/source/BuildInputs/BuildEvidence and current revision/content/target/Succeeded/errors0 predicates",
+      "replacement": "typed selected Native04 candidate product-native-summary/binding/XML/current contract, validated exact current producer/helper/source snapshots; no hardcoded c1-native-exact-contract.json filename"
+    },
+    {
+      "oldPart": "config/current_public, lines78-107",
+      "reuse": "exact refs/file set/modes/SHA, whole-site budget, canonical HTTPS identity and Root portal checks",
+      "replacement": "distinct paired profile; both currentBuilds; rollback byte witness separate from new baseline; phase-specific new complete public audit and explicit per-game runtime differences"
+    },
+    {
+      "oldPart": "build_adapter, lines108-123",
+      "reuse": "subclass unchanged JourneySmoke, exact plans, explicit game revisions, unchanged current cache/media error classifiers and harness capture",
+      "replacement": "new separate adapter directly constructs JourneySmoke subclass and binds typed config; permit both games explicitly; never invoke C1 config/build_adapter with fake old state"
+    },
+    {
+      "oldPart": "audio, lines125-179",
+      "reuse": "copy exact current C1 audio AST/source body with its three Card revision-list admissions; four labels/order/raw PCM/current observer source identity remain strict",
+      "replacement": "none to audio predicates; Gospel narration manifest start/Book-stop/next-line is separately required"
+    },
+    {
+      "oldPart": "public_bytes, lines180-200",
+      "reuse": "actual canonical TLS runtime GET/hash/size/status/identity/resolvedURL; strict current audit for inherited JPEG optimization",
+      "replacement": "current new whole-site MF/tree/portal Root, current selected builds for both games; no old G2/Nativity approval fallback"
+    },
+    {
+      "oldPart": "run, lines201-213",
+      "reuse": "actual viewport/touch caps, all required checkpoints, ordered PCM4, both original full reloads and continued-* originals",
+      "replacement": "strengthen exact one finalruntime gate true, raw pre-review SHA/bytes and visualReview-only equality, Root full-row equality/sourceFP, immutable original leaves; extra PC19 tail separately typed"
+    }
+  ],
+  "phaseOrder": [
+    "fresh-both-Native",
+    "fresh-both-build-and-after-success-proof",
+    "local-PC-touch-with-Root",
+    "current-clean-source-Core-CI-whole-stage",
+    "protected-publish",
+    "new-current-whole-HTTPS-tree-portal-with-Root",
+    "fresh-both-public-game-input-with-Root",
+    "new-distinct-final-receipt-independent-Root-seal"
+  ],
+  "phaseCycleRule": "Future public game result/final receipt is not a prerequisite for local execution or prepublish readiness. Current public full audit+portal Root is prerequisite for public_bytes only."
+}

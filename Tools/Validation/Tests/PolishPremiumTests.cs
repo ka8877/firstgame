@@ -28,7 +28,7 @@ namespace FirstGame.Validation
 
         [Test] public void PremiumExpansionAddsRealPlayableGradesAndKeepsArchiveCompleteness()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(2646));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2649));
             Assert.That(CardCatalog.All.Count(c => c.rarity == CardRarity.Rare), Is.EqualTo(49));
             Assert.That(CardCatalog.All.Count(c => c.rarity == CardRarity.Special), Is.EqualTo(64));
             Assert.That(CardCatalog.All.Count(c => c.rarity == CardRarity.Unique), Is.EqualTo(27));

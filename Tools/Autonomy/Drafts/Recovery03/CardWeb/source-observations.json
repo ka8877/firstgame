@@ -1,0 +1,153 @@
+{
+  "status": "source-only-read-observations-not-executed",
+  "observedUtc": "2026-11-03T16:44:27.906670+00:00",
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/CardWebRunDraft/recovery-card-web.py",
+    "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+    "bytes": 43017
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/CardWebRunDraft/execution-contract.template.json",
+    "sha256": "674a3a9bf2783bf1a3182cf956fe288a94305cace14534c908bb33cd0e9ff092",
+    "bytes": 9509
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/CardWebRunDraft/command-plan.json",
+    "sha256": "8df5ace5af87b07896e329da71b8ef8246e7a1ab4c3035937ed0224f8c73df7b",
+    "bytes": 2700
+  },
+  "selectedNative": {
+    "summary": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
+      "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
+      "bytes": 15211
+    },
+    "binding": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
+      "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
+      "bytes": 900
+    },
+    "xml": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
+      "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
+      "bytes": 10572
+    },
+    "inputsBefore": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/inputs-before.json",
+      "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff",
+      "bytes": 7183504
+    },
+    "executedContract": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-contract.executed.json",
+      "sha256": "85cb42d00c143b4c951261690cb0a2d0bf5f2c571c4b33e82052ec3337891204",
+      "bytes": 3609
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+      "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+      "bytes": 6148
+    }
+  },
+  "executionSources": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/repair-generated-cache-links.py",
+      "sha256": "968e0e39f230b2981805353210a3b85ee9dd60d04f43b35ad5ff9e14f10d0d56",
+      "bytes": 1015
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Tools/Data/Renewal/verify-media.py",
+      "sha256": "88ad2091040d87a3ab56959206c62013e742cadc96a7472ab77dd7c956c826ea",
+      "bytes": 5609
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/BuildCommands.cs",
+      "sha256": "0e547e0027683b155e8ef2285a4c28f0055493b7a2228fee449fc923c7dc99a9",
+      "bytes": 4421
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/ProjectSetup.cs",
+      "sha256": "b75f23a10417d0709d8f5f5d901b12d2e0b3e451da642ee93f892c1a93b49ab2",
+      "bytes": 26644
+    },
+    {
+      "file": "Games/FantasyCards/ProjectSettings/ProjectVersion.txt",
+      "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+      "bytes": 85
+    },
+    {
+      "file": "Games/FantasyCards/ProjectSettings/FirstGameSetup.version",
+      "sha256": "d5fb09aacd1ee9b9b6733deed54b16259ca61bceefd879f19f8dc8817af90f1d",
+      "bytes": 26
+    }
+  ],
+  "mediaInputs": [
+    {
+      "file": "Tools/Data/Renewal/complete-observations.json",
+      "sha256": "5c820a6c6be09850cd933fc8dc57a14f85d5761325126ccccc64f03ab5f66aac",
+      "bytes": 26089198
+    },
+    {
+      "file": "Tools/Data/Renewal/media-manifest.json",
+      "sha256": "c659c64b2061f820cc3c91e78c9b8c18102522d0f231b041bf2baaee790fe427",
+      "bytes": 13152798
+    },
+    {
+      "file": "Tools/Data/ClassicCards/selection.json",
+      "sha256": "4019c5ca2f97b5ef27b5380bf511484c7cacb4e811d40738e51212d94f9e2121",
+      "bytes": 4736034
+    }
+  ],
+  "nativeInputRowCount": 35334,
+  "nativeInputFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+  "nativeOriginalCount": 46,
+  "scopeLimits": [
+    "No actual Native/Web/helper/project import/test/compile/Unity/browser/network/Git or wrapper run",
+    "Source-only parsed actual preserved Native JSON/XML, Root/source code and SHA; did not rehash entire current1GB Assets during concurrent owner work",
+    "Only allowed Recovery03/CardWebRunDraft files written; no actual Recovery04 outputs created"
+  ]
+}

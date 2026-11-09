@@ -1,0 +1,20 @@
+{
+  "scope": "two-raw-archival-unified-diff-data-files-only",
+  "observedCachedDiffCheckExitCode": 2,
+  "reason": "Single-space context/blank lines are required raw unified-diff bytes. Preserve exact source-draft SHA rather than edit archival data.",
+  "proposedAttributes": "Exactlythese2paths -text -whitespace; no executable source/test/release gate exemption.",
+  "files": [
+    {
+      "file": "Tools/Autonomy/Drafts/Recovery05/ProcessContainmentSource/card-contained-lane.patch",
+      "bytes": 8332,
+      "sha256": "708d1649fa464952c3a6e329867711be82dcacf212bdeea044f2f998711e3ae9"
+    },
+    {
+      "file": "Tools/Autonomy/Drafts/Recovery05/ProcessContainmentSource/gospel-contained-lane.patch",
+      "bytes": 6893,
+      "sha256": "f8ba5de65962d8b41e437dfeee3e720f050a85b72f3542c9719558ba618f47fd"
+    }
+  ],
+  "publishReady": false,
+  "baselineReady": false
+}

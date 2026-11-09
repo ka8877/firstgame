@@ -1,0 +1,42 @@
+{
+  "status": "source-frozen-unexecuted-not-an-acceptance",
+  "frozenUtc": "2026-11-03T18:00:25.098081+00:00",
+  "publishReady": false,
+  "baselineReady": false,
+  "sources": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    }
+  },
+  "frozenCopies": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    }
+  },
+  "actualTestsPerformedByDraftAuthors": false,
+  "limit": "Owner must run final actual9 cases in a new uniqueR5 output; prior candidate results are historical only."
+}

@@ -1,0 +1,61 @@
+{
+  "scope": "bounded-product-visual-capture-only",
+  "event": {
+    "label": "grade-preview-normal-input",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview_v2.py",
+      "--repository-root",
+      "/workspace/firstgame",
+      "--plan",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/PreviewContracts/card-web02-grade-visual-plan.json",
+      "--build-summary",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/web-build-summary.json",
+      "--output",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreview01"
+    ],
+    "cwd": "/workspace/firstgame",
+    "startedUtc": "2026-11-03T18:12:11.112268+00:00",
+    "timeoutSeconds": 887.8840169430005,
+    "privateProcessGroup": true,
+    "sharedSafeEndMonotonic": 22248.993355891,
+    "cleanupAndReportReservedSeconds": 12,
+    "processContainment": "owned-descendants-v1",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "supervisorIdentity": {
+      "pid": 59544,
+      "ppid": 59508,
+      "pgid": 59544,
+      "sid": 59544,
+      "state": "R",
+      "startTicks": 2134910,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "exitCode": 0,
+    "pid": 59545,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentControls/GradePreview01/01-grade-preview-normal-input/supervisor-result.json",
+      "sha256": "c6006c141409b599aeb13c4190bdff5cd0c2803d7653e81eb10cb3646f8ce357",
+      "bytes": 31139
+    },
+    "finishedUtc": "2026-11-03T18:13:02.532725+00:00",
+    "log": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewControl01/preview.stdout.log",
+      "sha256": "2011ee2b84384d4102dd21406532d6b7cc090c9817e4b2da3eef9778d8df1850",
+      "bytes": 276
+    }
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "fullC1Acceptance": false
+}

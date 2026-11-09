@@ -1,0 +1,79 @@
+--- cfd49970
++++ 40ed1f54
+@@ -494,6 +494,15 @@
+     return expected, actual, total
+ 
+ 
++def git_blob(path):
++    path = regular(path)
++    h = hashlib.sha1(); h.update(('blob '+str(path.stat().st_size)+'\0').encode())
++    with path.open('rb') as stream:
++        for block in iter(lambda:stream.read(1024*1024),b''):
++            h.update(block)
++    return h.hexdigest()
++
++
+ def guard(c):
+     original = checked(c['ownership']['commonLease']); record = read(original); lease = record['lease']
+     require(record.get('state') == 'acquired' and lease['owner'] == c['ownership']['ownerToken']
+@@ -593,11 +602,7 @@
+     require(tree.get('commit') == public['deployedCommit'] and tree.get('truncated') is False and set(tree['files']) == set(expected), 'Current full nontruncated deployed tree required')
+     for name, row in tree['files'].items():
+         require(row.get('mode') == '100644' and re.fullmatch('[0-9a-f]{40}', row.get('gitBlob', '')), 'Ordinary current Git blob required')
+-        h = hashlib.sha1(); h.update(('blob ' + str(actual[name].stat().st_size) + '\0').encode())
+-        with actual[name].open('rb') as stream:
+-            for chunk in iter(lambda:stream.read(1024*1024),b''):
+-                h.update(chunk)
+-        require(h.hexdigest() == row['gitBlob'], 'Current deployed Git blob differs from actual stage bytes')
++        require(git_blob(actual[name]) == row['gitBlob'], 'Current deployed Git blob differs from actual stage bytes')
+     path = checked(public['wholePublicAudit']); audit = read(path)
+     require(audit.get('status') == 'passed' and audit.get('sourceCommit') == manifest['sourceCommit']
+             and audit.get('deployedCommit') == public['deployedCommit'] and audit.get('manifest') == public['manifest']
+@@ -708,12 +713,34 @@
+     restore_path = checked(c['rollback']['restoreReport']); restore = read(restore_path)
+     require(restore.get('status') == 'restored-exact-rollback-bytes-not-release-approved' and restore.get('publishReady') is False
+             and restore.get('stage') == c['rollback']['stage'], 'Actual exact rollback restoration required')
+-    for row in restore['pinnedInputs'].values():
+-        checked(row)
++    # The rollback is a byte witness, not a replacement historical approval.
++    # Missing dated-chain originals require the separate actual fresh-all lane;
++    # they must not silently pass the inherited lane or prevent that alternative.
++    essential = {'proposal','recordedManifest','originalG2Receipt','recordedG2Tree'}
++    require(essential.issubset(restore['pinnedInputs']), 'Exact rollback base controls required')
++    historical = {}
++    for name,row in restore['pinnedInputs'].items():
++        if name in essential:
++            checked(row)
++            historical[name] = {'expected':row,'status':'present-byte-matching','requiredForRollback':True}
++        else:
++            try:
++                checked(row)
++                historical[name] = {'expected':row,'status':'present-byte-matching','requiredForRollback':False}
++            except (ValueError,OSError):
++                historical[name] = {'expected':row,'status':'missing-or-changed-unverified','requiredForRollback':False,
++                                    'effect':'No inherited image approval; actual fresh-all image GETs required for public.'}
++    c['_historicalRefsCurrent'] = historical
+     oldfolder = lexical(c['rollback']['stage']); oldmanifest = read(oldfolder / 'build-manifest.json')
+     require(digest(oldfolder / 'build-manifest.json') == c['rollback']['manifestSha256'], 'Actual original MF0a9767 rollback required')
+-    _, _, total = full_stage(oldfolder, oldmanifest)
++    expected, actual, total = full_stage(oldfolder, oldmanifest)
+     require(total == c['rollback']['siteBytesIncludingManifest'] == 981817124, 'Exact original rollback whole bytes required')
++    oldtree = read(checked(restore['pinnedInputs']['recordedG2Tree']))
++    require(oldmanifest.get('sourceCommit') == c['rollback']['sourceCommit']
++            and oldtree.get('commit') == c['rollback']['deployedCommit'] == '947890cc46e1e60b070ca42b23ec9c5c62d0d549'
++            and set(oldtree['files']) == set(expected), 'Original source/commit947890/complete rollback tree required')
++    for name,row in oldtree['files'].items():
++        require(row.get('mode') == '100644' and git_blob(actual[name]) == row.get('gitBlob'), 'Original ordinary Git blob must equal actual rollback bytes')
+     checked(c['rollback']['actualFullRecheck']); checked(c['historicalLossLedger']); checked(c['ownership']['actualIdleRecheck'])
+     c['_rollback'] = restore
+     c['_native'] = {game:verify_native(c, game) for game in SLUG}
+@@ -877,7 +904,8 @@
+               'executedContract':c['_contractRef'],'sourceFingerprints':c['fixedSource']['expectedFingerprints'],
+               'selectedNative':c['selectedNative'],'freshBuilds':c['freshBuilds'],'plan':c['plan'],
+               'historicalProofReconstructed':False,'scope':'ordinary-browser-input-only-not-publication-or-baseline',
+-              'initialNavigateOutsidePlan':1,'authoredReloads':c['plan']['totalReloads']}
++              'initialNavigateOutsidePlan':1,'authoredReloads':c['plan']['totalReloads'],
++              'historicalReferencesObservedNow':c['_historicalRefsCurrent']}
+           saved = write_new(self.output / 'contract.executed.json', c['_contractRaw'])
+           require(saved['sha256'] == c['_contractRef']['sha256'] and saved['bytes'] == c['_contractRef']['bytes'], 'Executed contract raw bytes must be preserved')
+           self.report['pairedRecovery']['ownedLeaseSnapshot'] = write_new(self.output/'owned-lease.executed.json',checked(c['ownership']['commonLease']).read_bytes())

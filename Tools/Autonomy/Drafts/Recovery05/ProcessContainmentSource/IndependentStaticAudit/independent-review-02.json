@@ -1,0 +1,36 @@
+{
+  "status": "reviewed-source-only",
+  "noRemainingStaticBlocker": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "actualExecutionPerformed": false,
+  "executedSources": {
+    "helper": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    "fixture": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    "runner": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    }
+  },
+  "reviewer": "/root/release_recovery/gospel_product_native_draft/independent_static_review",
+  "reviewedUtc": "2026-11-03T18:03:20.785347+00:00",
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/REPORT-02.md",
+    "sha256": "61776ecf554631d5dfc982f86d677fec7f5c766ed131ff521b8462031e3c0891",
+    "bytes": 5249
+  },
+  "observations": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-02.json",
+    "sha256": "220aa09fd7f08625030b7db243ccb43a5c8c03a161c4879c926b50c367c7398a",
+    "bytes": 9613
+  },
+  "limits": "Source bytes reviewed only. executedSources is a binding label, not reviewer execution. Actual9case/operator acceptance/production and publication remain separate and unapproved."
+}

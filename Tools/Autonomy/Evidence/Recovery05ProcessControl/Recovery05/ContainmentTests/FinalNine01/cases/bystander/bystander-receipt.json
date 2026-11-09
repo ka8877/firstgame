@@ -1,0 +1,102 @@
+{
+  "afterIdentity": {
+    "pgid": 57358,
+    "pid": 57358,
+    "ppid": 57318,
+    "sid": 57358,
+    "startTicks": 2071173,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "aliveAfter": true,
+  "aliveBefore": true,
+  "beforeIdentity": {
+    "pgid": 57358,
+    "pid": 57358,
+    "ppid": 57318,
+    "sid": 57358,
+    "startTicks": 2071173,
+    "state": "R",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "cleanupComplete": true,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "kind": "real-preexisting-bystander",
+  "originals": [
+    {
+      "bytes": 604,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/escape-ready.json",
+      "sha256": "7446ad18ccca839845eff9e585545ae987a59d3dae90274f74e38a12f15d06cf"
+    },
+    {
+      "bytes": 209,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/root.json",
+      "sha256": "43dc0f81ada1d8380aa0a887346ec5b9357bcaa4a04d54d205ed7945cc76b413"
+    },
+    {
+      "bytes": 265,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/unrelated-baseline-sentinel-57358.json",
+      "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+    },
+    {
+      "bytes": 265,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-dummy.stdout.log",
+      "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+    },
+    {
+      "bytes": 653,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-cleanup.json",
+      "sha256": "5c0fbfb8ec52be0d249f5cc45661ab4b31fc34de56b8bb4e12d2a44710b9a924"
+    }
+  ],
+  "ownerCleanup": {
+    "cleanupComplete": true,
+    "exitCode": -15,
+    "identity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "scope": "separate-actual-owner-exact-direct-dummy-cleanup",
+    "signals": [
+      {
+        "identity": {
+          "pgid": 57358,
+          "pid": 57358,
+          "ppid": 57318,
+          "sid": 57358,
+          "startTicks": 2071173,
+          "state": "S",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sent": true,
+        "signal": 15
+      }
+    ]
+  },
+  "protectedFromSignals": true
+}

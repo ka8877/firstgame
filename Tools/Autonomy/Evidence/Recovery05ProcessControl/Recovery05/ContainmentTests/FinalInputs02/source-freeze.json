@@ -1,0 +1,26 @@
+{
+  "recordedUtc": "2026-11-03T18:00:12.841630+00:00",
+  "scope": "isolated-test-source-only",
+  "files": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    }
+  ],
+  "executionPerformed": false,
+  "supersedesUnexecuted": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs01/source-freeze.json",
+  "reason": "runner verifies before-deadline SIGINT syscall completion is also before actual executionEnd; independent final read pending exact317b",
+  "publishReady": false,
+  "baselineReady": false
+}

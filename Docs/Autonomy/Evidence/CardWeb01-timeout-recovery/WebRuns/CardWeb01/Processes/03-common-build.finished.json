@@ -1,0 +1,32 @@
+{
+  "label": "03-common-build",
+  "argv": [
+    "bash",
+    "Tools/Build/nativity-task.sh",
+    "FantasyCards",
+    "web",
+    "CardWeb01"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-03T16:57:01.699448+00:00",
+  "timeoutSeconds": 887.0674523000016,
+  "privateProcessGroup": true,
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "pid": 40999,
+  "actualWaitBudgetSecondsAfterSpawn": 887.0667263249998,
+  "ownedGroupMembersAfterCleanup": [],
+  "ownedGroupObservedEmpty": true,
+  "exitCode": 124,
+  "finishedUtc": "2026-11-03T17:11:48.773730+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/launcher-build.log",
+    "sha256": "f46c9388fe556b38de1218e0c711671a70fc2cf68084aaf60d4e0095f4119c7a",
+    "bytes": 598
+  }
+}

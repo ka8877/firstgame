@@ -1,0 +1,322 @@
+{
+  "status": "read-only-reviewed-no-static-blocker-found",
+  "observedUtc": "2026-11-03T15:38:08.465954+00:00",
+  "observedSeoul": "2026-11-04T00:38:08.466075+09:00",
+  "scope": "Only full source/README/ledger reads, AST inspection and literal existing-pin SHA/size/stat comparison. Producer was never imported/executed; no network/Git/browser/Unity or source/cache modification. Only this dedicated audit directory is written.",
+  "readSources": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreDraft/recover_current_public_site.py",
+      "sha256": "4ec469321606468801495cc44f73075b466488f28a98c054d62d6ba4430892ce",
+      "bytes": 42246
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreDraft/README.md",
+      "sha256": "ebfa05e0d092573f4ee3800bbbb6777b1042c38b07669f83931a398aa2cf9200",
+      "bytes": 7758
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreDraft/draft-ledger.json",
+      "sha256": "016aebb8ee3ad5e169f32d1572880b567ce4f612b0a0dd8e1c4e55070f98fdd2",
+      "bytes": 1101
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreDraft/source-static-readback.json",
+      "sha256": "5088bdc76785f143a5b5a6011599689ffdac47a539acea6aa2bb2413e4259b28",
+      "bytes": 5473
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreDraft/final-static-readback.json",
+      "sha256": "8fcb291f95c99d61c71f6ab6cf973452bba891d5fb88ef16343d9fd680361920",
+      "bytes": 6321
+    }
+  ],
+  "all16PinsExact": true,
+  "pins": [
+    {
+      "key": "proposal",
+      "expected": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+        "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+        "bytes": 11037
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+        "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+        "bytes": 11037
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "independentObservations",
+      "expected": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/observed-records.json",
+        "sha256": "4a69f8dd7b49a44a6e2aa36f103d007daecedc47ce1977596a80f0bda0621b16",
+        "bytes": 12929
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/observed-records.json",
+        "sha256": "4a69f8dd7b49a44a6e2aa36f103d007daecedc47ce1977596a80f0bda0621b16",
+        "bytes": 12929
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "recordedManifest",
+      "expected": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+        "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+        "bytes": 2134182
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+        "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+        "bytes": 2134182
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "originalG2Receipt",
+      "expected": {
+        "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/release-receipt.json",
+        "sha256": "9665b3c4556cb7ce0cd21fbdeb875c33be433d929e79b5bb95d9193aa4a86cb0",
+        "bytes": 59872
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/release-receipt.json",
+        "sha256": "9665b3c4556cb7ce0cd21fbdeb875c33be433d929e79b5bb95d9193aa4a86cb0",
+        "bytes": 59872
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "recordedG2Tree",
+      "expected": {
+        "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/PublicGitObjects/current-gh-pages.json",
+        "sha256": "99c5703e5c3f9db65330712f9ed5fd5e0bbc29fc38ccf61a1bb80732cb697c6f",
+        "bytes": 2473156
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/PublicGitObjects/current-gh-pages.json",
+        "sha256": "99c5703e5c3f9db65330712f9ed5fd5e0bbc29fc38ccf61a1bb80732cb697c6f",
+        "bytes": 2473156
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "nativityAudit",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+        "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+        "bytes": 16927726
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/PublicPortal/report.json",
+        "sha256": "8c7c8cff8d355ea61130d5ba5489367933b45aecc211ed1bb0dd5b21e7f42ccf",
+        "bytes": 16927726
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "priorAudit",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicImages/report.json",
+        "sha256": "f8e4c1802a203280c8d21caceb1c7cd0c55e5ab51038a008a00de76677e2be1f",
+        "bytes": 12133632
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicImages/report.json",
+        "sha256": "f8e4c1802a203280c8d21caceb1c7cd0c55e5ab51038a008a00de76677e2be1f",
+        "bytes": 12133632
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "priorRootReview",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/Root/public-images-review.json",
+        "sha256": "9222cbc41084762ea23f150687e2673294f56ffef3220505a0ff92e10f6dddc8",
+        "bytes": 732
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/Root/public-images-review.json",
+        "sha256": "9222cbc41084762ea23f150687e2673294f56ffef3220505a0ff92e10f6dddc8",
+        "bytes": 732
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "priorPublicAudit",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicPortal/report.json",
+        "sha256": "e90e660a6916c00387f53c753d14d88201c371f327c78dfb7bb4543c052c0e49",
+        "bytes": 16752480
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicPortal/report.json",
+        "sha256": "e90e660a6916c00387f53c753d14d88201c371f327c78dfb7bb4543c052c0e49",
+        "bytes": 16752480
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "historySnapshot",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/manifest.json",
+        "sha256": "1c932b69fa32102fa262194d985ca3820029d90a6ffcf06545dfc514ad14975c",
+        "bytes": 11445
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/manifest.json",
+        "sha256": "1c932b69fa32102fa262194d985ca3820029d90a6ffcf06545dfc514ad14975c",
+        "bytes": 11445
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "baselinePublication",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Restage/manifest.json",
+        "sha256": "f725e2f22e272d12b9c770839d0b471e1b713f6c3d59279995328b393a82126c",
+        "bytes": 12362
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Restage/manifest.json",
+        "sha256": "f725e2f22e272d12b9c770839d0b471e1b713f6c3d59279995328b393a82126c",
+        "bytes": 12362
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "historicalDependencySource",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/PublishedRepriseDependencies/manifest.json",
+        "sha256": "7496e25d43983b2801c59d206d1d37daffdd33f1a205c474330eaa11b6943497",
+        "bytes": 2120
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/PublishedRepriseDependencies/manifest.json",
+        "sha256": "7496e25d43983b2801c59d206d1d37daffdd33f1a205c474330eaa11b6943497",
+        "bytes": 2120
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "priorGitTree",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/PublicGitObjects/prior-gh-pages.json",
+        "sha256": "edb074a8905113d53aaf79a77b2bbc9a981ef150b57b3310dd4d76d620f79a52",
+        "bytes": 2472549
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/PublicGitObjects/prior-gh-pages.json",
+        "sha256": "edb074a8905113d53aaf79a77b2bbc9a981ef150b57b3310dd4d76d620f79a52",
+        "bytes": 2472549
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "currentGitTree",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/PublicGitObjects/current-gh-pages.json",
+        "sha256": "217f08eedb1141791c9f72f1dac0e4530f0bf83d3fb064d476607c032c594538",
+        "bytes": 2473199
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/PublicGitObjects/current-gh-pages.json",
+        "sha256": "217f08eedb1141791c9f72f1dac0e4530f0bf83d3fb064d476607c032c594538",
+        "bytes": 2473199
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "reprisePriorTree",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicGitObjects/prior-gh-pages.json",
+        "sha256": "713d31d5e4dfed4c06d8cf3b3550e344b2d6f7def5ca5a121f0dbb48c28d0c24",
+        "bytes": 2471439
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicGitObjects/prior-gh-pages.json",
+        "sha256": "713d31d5e4dfed4c06d8cf3b3550e344b2d6f7def5ca5a121f0dbb48c28d0c24",
+        "bytes": 2471439
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    },
+    {
+      "key": "repriseCurrentTree",
+      "expected": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicGitObjects/current-gh-pages.json",
+        "sha256": "0e93e45f86eb189cb80a2be9455f0b336c4009e9d86dccf385d1567c9c492860",
+        "bytes": 2472228
+      },
+      "actual": {
+        "file": "Artifacts/Validation/Nativity/History/Reprise/repo/Artifacts/Validation/Reprise/PublicGitObjects/current-gh-pages.json",
+        "sha256": "0e93e45f86eb189cb80a2be9455f0b336c4009e9d86dccf385d1567c9c492860",
+        "bytes": 2472228
+      },
+      "regularLeaf": true,
+      "symlinkAncestors": [],
+      "matches": true
+    }
+  ],
+  "originalJpegRoot": {
+    "file": "Games/FantasyCards/Assets/StreamingAssets/Cards",
+    "isDirectory": true,
+    "isSymlink": false
+  },
+  "freeBytesAtStaticProbe": {
+    "/workspace": 221126656,
+    "/tmp": 13700947968
+  },
+  "actualOperationsNotPerformed": [
+    "Fresh remote heads/Git API/tree requests",
+    "Current HTTPS63 body GETs and manifest reGET",
+    "All15350 local JPEG body/blob verification or restoration",
+    "Entire15413 file SHA/size stage verification",
+    "Producer deadline/concurrency/interrupt execution",
+    "Native/build/browser/portal Root/CI/Pages/baseline release"
+  ],
+  "criticalReadinessSeparation": {
+    "originalManifestPublishReady": true,
+    "newProducerPublishReady": false,
+    "newProducerReleaseReady": false,
+    "newProducerBaselineReady": false,
+    "oldG2RootAuditBuildInputsMissingStillUnresolved": true
+  },
+  "operationalConditions": [
+    "Owner fresh idle/storage/network/remote pin and valid fresh bounded lease before actual invocation;900s must fit the acquired lease.",
+    "A complete report requires actual exit0 plus complete regular outputs/journal/full hashes. Partial or deadline outputs never count as success.",
+    "Treat restored stage hardlinked JPEGs as immutable rollback bytes; a later writable C1 stage must not modify those original-linked JPEG inodes.",
+    "This report is not Root visual approval or a substitute for any absent old proof."
+  ]
+}

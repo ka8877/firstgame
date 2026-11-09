@@ -86,12 +86,12 @@ namespace FantasyCards.Presentation
             Text(root, "FANTASY MASTERS", .055f, .918f, .74f, .975f, 34, new Color(.94f, .84f, .62f));
             Text(root, "일곱 소울의 대기실", .055f, .865f, .44f, .92f, 27, ivory);
             RestorationButton(root, "내 카드 대기실로", .46f, .865f, .745f, .92f, EnterQuestGame);
-            string[] tabs = { "ROOM · 연습", "SCENARIO · 시나리오", "MULTI · 멀티플레이" };
+            string[] tabs = { "ROOM · 연습", "SCENARIO · 시나리오", "MULTI · 추후 업데이트" };
             for (int i = 0; i < tabs.Length; i++)
             {
                 int tab = i; float x = .048f + i * .236f;
                 RestorationButton(root, tabs[i], x, .773f, x + .225f, .849f,
-                    () => { if (tab == 2) ShowQuestSimpleNotice("멀티플레이 · 추후 추가 예정", "현재는 싱글 플레이와 AI 자유 연습을 즐길 수 있습니다.\n온라인 대전·매칭은 이후 추가됩니다.", ShowFreePracticeLobby); else { restorationLobbyMode = tab; ShowLobby(); } }, restorationLobbyMode == i);
+                    () => { if (tab == 2) ShowQuestMultiplayerNotice(); else { restorationLobbyMode = tab; ShowLobby(); } }, restorationLobbyMode == i, tab != 2);
             }
             var roomList = RestorationPanel(root, .048f, .308f, .744f, .759f, RestorationLeather, "Classic live room list");
             if (restorationLobbyMode == 0) DrawRestorationPracticeRooms(roomList);

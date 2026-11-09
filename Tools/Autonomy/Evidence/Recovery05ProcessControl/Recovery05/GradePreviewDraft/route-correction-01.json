@@ -1,0 +1,31 @@
+{
+  "recordedUtc": "2026-11-03T17:52:52.543913+00:00",
+  "status": "unexecuted-v1-route-rejected-v2-source-only",
+  "v1Source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview.py",
+    "bytes": 11402,
+    "sha256": "59f685353bdd4d0d10498c084dc26bb8afb16c0044c44a93f8d9c6c450ddbce1"
+  },
+  "v1Plan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/visual-plan.template.json",
+    "bytes": 2472,
+    "sha256": "24804f9982e3b5c11d82423834dad4a9a6a72c04a34cf9ae71e8ba45bd41ca19"
+  },
+  "v1Executed": false,
+  "finding": "The title album enters original15350 archive, not ShowCollection with grade button. No browser run or grade visibility claim occurred.",
+  "v2Source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview_v2.py",
+    "bytes": 11664,
+    "sha256": "7c58a728fe298e01980a8c6c3cacf4654b9a9d6df9aa9f345b8e554103d47f43"
+  },
+  "v2Plan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/visual-plan-v2.template.json",
+    "bytes": 3729,
+    "sha256": "4272b5ec7b2cb4ac83e6f4c08a62dd9672a24253deb16e0fd46e91a1de2d8713"
+  },
+  "newNormalRoute": "title Free practice -> lobby playable catalog -> grade guide -> catalog return; five originals each profile",
+  "v2Executed": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false
+}

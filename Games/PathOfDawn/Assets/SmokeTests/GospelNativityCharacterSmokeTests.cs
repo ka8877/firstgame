@@ -43,7 +43,9 @@ namespace PathOfDawn.SmokeTests
         [UnityTest]
         public IEnumerator ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet()
         {
-            Assert.That(actor.UsesExpandedAnimation, Is.True, "The new release must use its reviewed original Canopy atlas.");
+            Assert.That(actor.UsesExpandedAnimation, Is.True, "The release must retain the full authored gait.");
+            Assert.That(actor.OriginalAtlasResource, Does.StartWith("Art/GospelCanon/Actors/"),
+                "The new natural-proportion original must actually be used in the player.");
             Assert.That(actor.UsesMeasuredLayout, Is.True);
             Assert.That(actor.FramesPerDirectionCount, Is.EqualTo(8));
             Assert.That(actor.AnimationFrameCount, Is.EqualTo(32));

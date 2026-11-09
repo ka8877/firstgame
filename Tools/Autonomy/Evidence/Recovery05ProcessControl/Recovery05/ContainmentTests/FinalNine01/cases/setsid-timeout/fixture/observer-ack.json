@@ -1,0 +1,102 @@
+{
+  "beforeAnyOwnedSignal": true,
+  "commandSpecPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/command-spec.json",
+  "escapedIdentity": {
+    "pgid": 57328,
+    "pid": 57328,
+    "ppid": 57327,
+    "sid": 57328,
+    "startTicks": 2070192,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "escapedPidfdAlive": true,
+  "interruptPhase": null,
+  "observedAlive": true,
+  "observedMonotonic": 20701.961521216,
+  "observedUtc": "2026-11-03T18:01:23.859361+00:00",
+  "pidfdIdentityChecked": true,
+  "ready": {
+    "identity": {
+      "pgid": 57328,
+      "pid": 57328,
+      "ppid": 57327,
+      "sid": 57328,
+      "startTicks": 2070192,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": false,
+    "initialIdentity": null,
+    "kind": "setsid",
+    "label": "actual-setsid-ready",
+    "pgid": 57328,
+    "pid": 57328,
+    "ppid": 57327,
+    "readyMonotonic": 20701.957931006,
+    "rootIdentity": {
+      "pgid": 57327,
+      "pid": 57327,
+      "ppid": 57326,
+      "sid": 57327,
+      "startTicks": 2070189,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57328,
+    "startTicks": 2070192,
+    "state": "R",
+    "token": "e5d92545d85748cca4149ef532486995",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "rootIdentity": {
+    "pgid": 57327,
+    "pid": 57327,
+    "ppid": 57326,
+    "sid": 57327,
+    "startTicks": 2070189,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentity": {
+    "pgid": 57326,
+    "pid": 57326,
+    "ppid": 57318,
+    "sid": 57326,
+    "startTicks": 2070184,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentityOriginal": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor-identity.json",
+  "token": "e5d92545d85748cca4149ef532486995"
+}

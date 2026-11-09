@@ -14,6 +14,7 @@ namespace PathOfDawn.Presentation
     {
         const string ActorRoot = "Art/GospelPilgrimage/Actors/";
         const string CanopyActorRoot = "Art/GospelCanopy/Actors/";
+        const string CanonActorRoot = "Art/GospelCanon/Actors/";
         const string ShaderResource = "Art/GospelPilgrimage/Rendering/PilgrimageSprite";
         const int PlayerFrames = 12;
         const float ChildHeight = 1.64f;
@@ -144,7 +145,9 @@ namespace PathOfDawn.Presentation
             actor.npcFrame = frame;
             actor.npcHeight = height;
             actor.CreateRenderer();
-            actor.UseSheet(ActorRoot + "npcs", height, 4, false);
+            string npcResource = Resources.Load<Texture2D>(CanonActorRoot + "npcs") != null
+                ? CanonActorRoot + "npcs" : ActorRoot + "npcs";
+            actor.UseSheet(npcResource, height, 4, false);
             actor.BuildShadow();
             actor.RefreshFrame();
             return actor;
@@ -167,6 +170,17 @@ namespace PathOfDawn.Presentation
         }
 
         public void SetGroundSampler(Func<float, float, float> sample) => groundSampler = sample;
+
+        public void FaceConversationPartner(Vector3 partnerPosition)
+        {
+            if (!npc || sprite == null || sceneCamera == null || ownerRoot == null) return;
+            Vector3 right = sceneCamera.transform.right; right.y = 0;
+            Vector3 delta = partnerPosition - ownerRoot.position; delta.y = 0;
+            float side = Vector3.Dot(delta, right.normalized);
+            // All four authored NPCs face camera-right. Reflect only their
+            // artwork; physical feet, shadow, saved position and player yaw stay intact.
+            sprite.flipX = side < -.025f;
+        }
 
         public void SetLamp(bool equipped)
         {
@@ -231,6 +245,13 @@ namespace PathOfDawn.Presentation
         void UsePlayerSheet()
         {
             string name = adult ? "jesus-adult" : "jesus-child";
+            string canonResource = CanonActorRoot + name;
+            if (Resources.Load<Texture2D>(canonResource) != null &&
+                Resources.Load<TextAsset>(canonResource + "-layout") != null)
+            {
+                UseSheet(canonResource, VisualHeight, 0, true);
+                return;
+            }
             string expandedResource = CanopyActorRoot + name;
             var expandedTexture = Resources.Load<Texture2D>(expandedResource);
             var expandedLayout = Resources.Load<TextAsset>(expandedResource + "-layout");

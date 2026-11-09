@@ -15,6 +15,7 @@ namespace FantasyCards.Core
     case "fm_16080328458": return 572;
     case "fm_16070628418": return 576;
     case "fm_16070628419": return 576;
+    case "fm_16070628420": return 198;
     case "fm_16070628422": return 568;
     case "fm_16060128366": return 576;
     case "fm_16060128367": return 135;
@@ -73,6 +74,7 @@ namespace FantasyCards.Core
     case "fm_14110527691": return 135;
     case "fm_14100127642": return 643;
     case "fm_14100127643": return 135;
+    case "fm_14100127645": return 54;
     case "fm_14100127646": return 643;
     case "fm_14091727606": return 106;
     case "fm_14091727608": return 135;
@@ -228,6 +230,7 @@ namespace FantasyCards.Core
     case "fm_11080325835": return 42;
     case "fm_11070625780": return 243;
     case "fm_11070625782": return 788;
+    case "fm_11070625788": return 602;
     case "fm_11070625790": return 450;
     case "fm_11070625791": return 224;
     case "fm_11070625792": return 42;

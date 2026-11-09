@@ -1,0 +1,36 @@
+{
+  "scope": "actualCardWeb02-warning-observation-not-clearance",
+  "buildEvidenceWarnings": 1,
+  "buildEvidenceErrors": 0,
+  "actualLog": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/web.log",
+    "bytes": 3095167,
+    "sha256": "7117a6e17387e2fe9870656fda74215e6fef20ae538156f80dd97c06bfaf7886"
+  },
+  "caseInsensitiveWarningLines": [
+    {
+      "line": 251,
+      "text": "Warning: Disk space low. The project is on a drive with diskspace below 1.00 GB. Please free up some space for Unity to work correctly."
+    },
+    {
+      "line": 423,
+      "text": "UnityEngine.Debug:LogWarning (object)"
+    },
+    {
+      "line": 438,
+      "text": "UnityEngine.Debug:LogWarning (object)"
+    },
+    {
+      "line": 3259,
+      "text": "UnityEngine.Debug:LogWarning (object)"
+    },
+    {
+      "line": 25000,
+      "text": " 0.1 kb\t 0.0% Packages/com.unity.burst/Runtime/CompilerServices/IgnoreWarningAttribute.cs"
+    }
+  ],
+  "compilerWarningCSOrShaderCount": 0,
+  "limit": "Warning-count1 is preserved. This is a sanitized observation of existing log messages, not a claim all runtime behavior or warnings are approved.",
+  "publishReady": false,
+  "baselineReady": false
+}

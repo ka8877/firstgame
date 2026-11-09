@@ -50,7 +50,7 @@ namespace FirstGame.Editor
                     "Engine: " + Application.unityVersion + "\nTarget: " + target + "\nResult: " + report.summary.result +
                     "\nBytes: " + report.summary.totalSize + "\nDuration: " + report.summary.totalTime +
                     "\nSourceFingerprint: " + sourceFingerprint + "\nErrors: " + report.summary.totalErrors + "\nWarnings: " + report.summary.totalWarnings +
-                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\nRevision: fm-nativity-2026-11-02\n");
+                    "\nContent: " + FantasyCards.Core.CardCatalog.Version + "\nRevision: fm-canon-2026-11-09\n");
                 if (report.summary.result != BuildResult.Succeeded) throw new BuildFailedException("Build failed: " + report.summary.result);
                 Debug.Log("FIRSTGAME_BUILD_OK " + output);
             }

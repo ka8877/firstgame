@@ -1,0 +1,27 @@
+{
+  "recordedUtc": "2026-11-03T17:58:31.613580+00:00",
+  "scope": "clarification-of-expired-Recovery04-boundary-not-new-approval",
+  "oldDeadlineUtc": "2026-11-03T17:40:32.480137+00:00",
+  "actualOwnCASReleaseUtc": "2026-11-03T17:45:04.127369+00:00",
+  "newLeaseUtc": "2026-11-03T17:45:34.594253+00:00",
+  "noNewOperationalExecutionBetweenDeadlineAndRelease": "Owner resumed at17:44:39 and released exact-own CAS at17:45:04; no new Unity/browser/test invocation, Git mutation or signals in that period.",
+  "sourceOnlyDraftActivity": "Read-only/static helper work and unapplied draft-source writes continued across the old deadline while context was compacted. These are not a product change or a validated/approved execution. This is disclosed separately rather than claiming all agent activity stopped at the deadline.",
+  "observedCandidateOriginalsWithMtimeInsideExpiredWindow": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4/owned_process_containment.py",
+      "bytes": 38591,
+      "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "observedFileMtimeUtc": "2026-11-03T17:41:58.002872+00:00"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/bbc891a210190ac51b2ad0816e735f540e112866c5e60964d5ee3db47d1b055e/owned_process_containment.py",
+      "bytes": 37707,
+      "sha256": "bbc891a210190ac51b2ad0816e735f540e112866c5e60964d5ee3db47d1b055e",
+      "observedFileMtimeUtc": "2026-11-03T17:40:55.225430+00:00"
+    }
+  ],
+  "boundsLimit": "Filesystem mtimes are observed metadata, not a complete execution history. Standalone guard does not enforce model or helper lifetime.",
+  "future": "Use new acquired R5 lease for all actual tests and adoption; no old lease extension/steal; all failures and original drafts retained.",
+  "publishReady": false,
+  "baselineReady": false
+}

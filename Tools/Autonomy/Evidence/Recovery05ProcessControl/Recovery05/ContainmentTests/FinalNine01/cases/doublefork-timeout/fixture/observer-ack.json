@@ -1,0 +1,115 @@
+{
+  "beforeAnyOwnedSignal": true,
+  "commandSpecPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/command-spec.json",
+  "escapedIdentity": {
+    "pgid": 57332,
+    "pid": 57333,
+    "ppid": 57330,
+    "sid": 57332,
+    "startTicks": 2070399,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "escapedPidfdAlive": true,
+  "interruptPhase": null,
+  "observedAlive": true,
+  "observedMonotonic": 20704.015082995,
+  "observedUtc": "2026-11-03T18:01:25.912923+00:00",
+  "pidfdIdentityChecked": true,
+  "ready": {
+    "identity": {
+      "pgid": 57332,
+      "pid": 57333,
+      "ppid": 57330,
+      "sid": 57332,
+      "startTicks": 2070399,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "ignoresSigterm": false,
+    "initialIdentity": {
+      "pgid": 57332,
+      "pid": 57333,
+      "ppid": 57332,
+      "sid": 57332,
+      "startTicks": 2070399,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "kind": "doublefork",
+    "label": "actual-doublefork-ready",
+    "pgid": 57332,
+    "pid": 57333,
+    "ppid": 57330,
+    "readyMonotonic": 20704.009593605,
+    "rootIdentity": {
+      "pgid": 57331,
+      "pid": 57331,
+      "ppid": 57330,
+      "sid": 57331,
+      "startTicks": 2070396,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "sid": 57332,
+    "startTicks": 2070399,
+    "state": "R",
+    "token": "dd2e1bddea40437795f530bdbd547832",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "rootIdentity": {
+    "pgid": 57331,
+    "pid": 57331,
+    "ppid": 57330,
+    "sid": 57331,
+    "startTicks": 2070396,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentity": {
+    "pgid": 57330,
+    "pid": 57330,
+    "ppid": 57318,
+    "sid": 57330,
+    "startTicks": 2070391,
+    "state": "S",
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorIdentityOriginal": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor-identity.json",
+  "token": "dd2e1bddea40437795f530bdbd547832"
+}

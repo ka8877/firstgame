@@ -78,7 +78,9 @@ namespace FantasyCards.Presentation
             QuestScreen("lobby", ShowQuestLobby, "싱글 플레이 대기실", "기본 덱으로 시작하고, 대전 보상으로 카드를 모으세요.");
             RestorationButton(root, "시나리오", .045f, .672f, .27f, .752f, () => { questLobbyTab = 0; ShowQuestLobby(); }, questLobbyTab == 0);
             RestorationButton(root, "AI 대전", .285f, .672f, .51f, .752f, () => { questLobbyTab = 1; ShowQuestLobby(); }, questLobbyTab == 1);
-            RestorationButton(root, "멀티플레이", .525f, .672f, .744f, .752f, ShowQuestMultiplayerNotice);
+            var multiplayer = RestorationButton(root, "멀티플레이 · 추후 업데이트", .525f, .672f, .744f, .752f,
+                ShowQuestMultiplayerNotice, false, false);
+            BindTooltip(multiplayer.gameObject, "멀티플레이 · 추후 업데이트 예정", "온라인 대전과 매칭은 추후 업데이트 예정입니다.");
             var list = RestorationPanel(root, .045f, .215f, .744f, .655f, RestorationLeather, "Quest single player stage table");
             if (!string.IsNullOrEmpty(questEconomy.ActiveBattleTicketId))
             {
@@ -303,7 +305,7 @@ namespace FantasyCards.Presentation
         }
 
         private void ShowQuestMultiplayerNotice()
-        { ShowQuestSimpleNotice("멀티플레이 · 추후 추가 예정", "현재는 싱글 플레이를 즐길 수 있습니다.\n온라인 대전과 매칭은 이후에 추가됩니다.", ShowQuestLobby); }
+        { ShowQuestSimpleNotice("멀티플레이 · 추후 업데이트 예정", "현재는 싱글 플레이를 즐길 수 있습니다.\n온라인 대전과 매칭은 추후 업데이트 예정입니다.", ShowQuestLobby); }
 
         private void ShowQuestPaidInformation()
         { var back = redraw ?? ShowLobby; ShowQuestSimpleNotice("GP · 추후 추가 예정", "유료 캐시 GP와 결제 기능은 아직 제공하지 않습니다.\n싱글 플레이에서 얻은 SP로 카드팩을 구입하세요.", back); }

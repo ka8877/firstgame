@@ -1,0 +1,226 @@
+{
+  "status": "applied-source-only-frozen-uncompiled-unexecuted",
+  "appliedUtc": "2026-11-03T11:01:40.988686+00:00",
+  "owner": "/root/continuous_release/c1_source_application",
+  "branch": "codex/c1-capability-2026-11-03",
+  "baseCommitAsProvided": "00335b1b079bd41922b2a3d89c0c2f7eca17cc5c",
+  "branchFileObservation": "ref: refs/heads/codex/c1-capability-2026-11-03",
+  "leaseOwnerObserved": "b3d279c6-705f-4654-8c76-4a47975babe9",
+  "baseFiles": {
+    "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs": "54f612133bcc7f9dfacd22160693b9de27c5280018033d0d5f3e9a63c4fccc2d",
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs": "4b33a8a7788a3f48d0bf53fca3a429a5afc070e1fe6a15777ebf0f0bca2601ad",
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs": null,
+    "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs.meta": null,
+    "Games/FantasyCards/Assets/SmokeTests/SmokeUi.cs": "084434cc1046a9f741d3c671a3bd93b4b2625c6f2e46f3245ac24f669dc847d4"
+  },
+  "applicationOrder": [
+    {
+      "patch": "upstream-originals/01-product.patch",
+      "scope": "Card UI label/filter bit mapping only",
+      "sha256": "f022e9f85d7ea3aee4e5d3ea7acefdddcdc7fa0de7c83bd0c78c21c1248ed2ef",
+      "bytes": 1443,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+          "beforeSha256": "54f612133bcc7f9dfacd22160693b9de27c5280018033d0d5f3e9a63c4fccc2d",
+          "afterSha256": "a4900f3d5b3d05b0300e44720810f3eeca5809af039b28954c84eced3a34ad1b",
+          "hunks": [
+            {
+              "oldStart": 103,
+              "oldLines": 8,
+              "newLines": 8
+            },
+            {
+              "oldStart": 124,
+              "oldLines": 7,
+              "newLines": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patch": "upstream-originals/02-existing-fixture-expectation.patch",
+      "scope": "Two existing mask expectations; preserve case/assertions",
+      "sha256": "cabaac645b2b26ba014e5506db19a08bdd663bd5dd9355bf48f3ef92a3d1ad55",
+      "bytes": 1174,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs",
+          "beforeSha256": "4b33a8a7788a3f48d0bf53fca3a429a5afc070e1fe6a15777ebf0f0bca2601ad",
+          "afterSha256": "c044b234e301fef265963892a3393467f8d26f9324a491b38fd11a0708029b44",
+          "hunks": [
+            {
+              "oldStart": 49,
+              "oldLines": 9,
+              "newLines": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patch": "upstream-originals/03-new-native-regression.patch",
+      "scope": "One new Native partial-class method plus meta",
+      "sha256": "3da1f58cd3c40d237aae3b5c965bd849fb56abe65e9f88ab9ac803f293f09a62",
+      "bytes": 8000,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs",
+          "beforeSha256": null,
+          "afterSha256": "f0450c7c5338561f6b75260b569fb0735f0801461fe8d594189121180bded9a6",
+          "hunks": [
+            {
+              "oldStart": 0,
+              "oldLines": 0,
+              "newLines": 116
+            }
+          ]
+        },
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs.meta",
+          "beforeSha256": null,
+          "afterSha256": "6e54e1a45e79fae7867a9be95faa242edb5de80d4b492c299b7a38d80a5eea2a",
+          "hunks": [
+            {
+              "oldStart": 0,
+              "oldLines": 0,
+              "newLines": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patch": "04-c1-capture-isolation.patch",
+      "scope": "Card SmokeUi only; explicit C1 root/attempt opt-in; historical default untouched",
+      "sha256": "75b0e8dd3e2c38f0354bb68f2fcfd971ffa1913c2560c718255910153291103c",
+      "bytes": 6361,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/SmokeUi.cs",
+          "beforeSha256": "084434cc1046a9f741d3c671a3bd93b4b2625c6f2e46f3245ac24f669dc847d4",
+          "afterSha256": "78be97279a3218bf7cad0486dca4a21e250ad5bf2886ee29f6faf860d109f0f7",
+          "hunks": [
+            {
+              "oldStart": 276,
+              "oldLines": 16,
+              "newLines": 37
+            },
+            {
+              "oldStart": 306,
+              "oldLines": 6,
+              "newLines": 33
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patch": "05-fidelity-route-only.patch",
+      "scope": "Existing Fidelity first callback only: game start→free practice",
+      "sha256": "ae51a1f2ddcae0315ceb34dfb0545570a3eaaf031fbfb670dad167af4ee77e6d",
+      "bytes": 612,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs",
+          "beforeSha256": "c044b234e301fef265963892a3393467f8d26f9324a491b38fd11a0708029b44",
+          "afterSha256": "ec73ae3fcfefc59e1328f0361e04b66866036e2bbb68755e5426fb0d2c26f0e6",
+          "hunks": [
+            {
+              "oldStart": 17,
+              "oldLines": 7,
+              "newLines": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "patch": "fixture-guide-count/03-fixture-guide-count.patch",
+      "scope": "Separate approved current guide contract12→13; no product changes",
+      "sha256": "06f6b29f8b089f8eb2a6c641cf027ab9543f6820548bcc2acbc3900d4cfc387d",
+      "bytes": 848,
+      "files": [
+        {
+          "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs",
+          "beforeSha256": "ec73ae3fcfefc59e1328f0361e04b66866036e2bbb68755e5426fb0d2c26f0e6",
+          "afterSha256": "3d74488bde6bc91415f7d19853fae82f874473f6729eb6fc7b6e98a1943d6882",
+          "hunks": [
+            {
+              "oldStart": 21,
+              "oldLines": 7,
+              "newLines": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finalFiles": [
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+      "sha256": "a4900f3d5b3d05b0300e44720810f3eeca5809af039b28954c84eced3a34ad1b",
+      "bytes": 20788
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs",
+      "sha256": "f0450c7c5338561f6b75260b569fb0735f0801461fe8d594189121180bded9a6",
+      "bytes": 7597
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs.meta",
+      "sha256": "6e54e1a45e79fae7867a9be95faa242edb5de80d4b492c299b7a38d80a5eea2a",
+      "bytes": 60
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs",
+      "sha256": "3d74488bde6bc91415f7d19853fae82f874473f6729eb6fc7b6e98a1943d6882",
+      "bytes": 14598
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/SmokeUi.cs",
+      "sha256": "78be97279a3218bf7cad0486dca4a21e250ad5bf2886ee29f6faf860d109f0f7",
+      "bytes": 25987
+    }
+  ],
+  "diff": {
+    "file": "/tmp/firstgame-c1-source-application/final-source.diff",
+    "sha256": "fc65f33d74e7c5a1f06a02460d6dbd28401ed7d608b976f94528199eca4b8bf9",
+    "bytes": 17921
+  },
+  "existingFixtureAssertionCounts": {
+    "Assert.ThatBefore": 46,
+    "Assert.ThatAfter": 46,
+    "LogAssertBefore": 2,
+    "LogAssertAfter": 2
+  },
+  "authoringValidation": {
+    "firstAttempt": "Stopped before any file write because my textual Assert. count included two LogAssert. calls:48 instead of intended46. All five source base SHA/absence remained unchanged.",
+    "correction": "Count exact Assert.That46 and separately preserve LogAssert2; no product/assertion was changed to satisfy the guard.",
+    "scope": "Static file-edit validation only, not compilation or an actual test failure."
+  },
+  "scope": [
+    "UI capability bit-label/filter correction only",
+    "Separate two fixture gear-mask expectations",
+    "New source-ID Native callback regression plus meta",
+    "Opt-in C1 capture-root/attempt protection with unchanged historical default",
+    "Separate existing fixture free-practice route",
+    "Separate current13-grade fixture expectation; not a product grade addition or original-game13-grade claim"
+  ],
+  "notPerformed": [
+    "Git commands",
+    "consumer/tool imports",
+    "Unity",
+    "compilation",
+    "tests",
+    "browser",
+    "network",
+    "model generation"
+  ],
+  "knownUnverified": [
+    "Native exact8 has not run",
+    "Grade13 bottom-row layout remains unchanged and needs real Native/Root visual review",
+    "All five owned source files frozen for release owner validation"
+  ]
+}

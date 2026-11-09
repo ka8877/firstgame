@@ -17,11 +17,11 @@ namespace FantasyCards.SmokeTests
         [UnityTest]
         public IEnumerator FidelityGradeGuideAndRankCapabilityFiltersUseActualCards()
         {
-            SmokeUi.Click("게임 시작"); yield return null;
+            SmokeUi.Click("자유 연습"); yield return null;
             SmokeUi.Click("게임 방법"); yield return null;
             SmokeUi.Click("카드 등급 / 랭크"); yield return null;
             var guide = ActiveButtons("Grade guide ");
-            Assert.That(guide.Length, Is.EqualTo(12), "Every documented grade must remain visible, including explicitly unsupplied grades.");
+            Assert.That(guide.Length, Is.EqualTo(13), "Every documented grade must remain visible, including explicitly unsupplied grades.");
             foreach (CardRarity rarity in Enum.GetValues(typeof(CardRarity)))
             {
                 var tile = guide.Single(button => button.gameObject.name == "Grade guide " + rarity);
@@ -49,9 +49,9 @@ namespace FantasyCards.SmokeTests
                 Assert.That(identity.UsesFullPrint,Is.True,"The source's printed grade is preserved, rather than recreated as an overlay label.");
             }
             SmokeUi.Click("능력 · 전체"); yield return null;
-            int equipment = CardCatalog.All.Count(card => card.kind == CardKind.Unit && (card.capabilityMask & 1) != 0);
+            int equipment = CardCatalog.All.Count(card => card.kind == CardKind.Unit && (card.capabilityMask & 2) != 0);
             SmokeUi.Click("장비 · " + equipment + "종"); yield return null;
-            Assert.That(VisibleCards().All(card => card.kind == CardKind.Unit && (card.capabilityMask & 1) != 0), Is.True);
+            Assert.That(VisibleCards().All(card => card.kind == CardKind.Unit && (card.capabilityMask & 2) != 0), Is.True);
             SmokeUi.Click("검색 / 필터 초기화"); yield return null;
             SmokeUi.Click("대기실"); yield return null;
             SmokeUi.Click("덱 편집"); yield return null;

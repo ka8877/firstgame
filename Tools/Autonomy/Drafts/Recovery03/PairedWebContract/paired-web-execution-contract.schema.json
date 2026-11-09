@@ -1,0 +1,1386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:firstgame:paired-recovery-web-execution-contract:proposal:1",
+  "title": "Proposed paired-recovery current Web input contract (not installed)",
+  "description": "Structural requirements only. Every referenced original and all listed semantic gates must be validated by the new separate consumer. This schema is not approval or an implementation. An unfilled draft is invalid.",
+  "type": "object",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "workId",
+    "releaseProfile",
+    "profileConfirmedByRoot",
+    "phase",
+    "game",
+    "profile",
+    "output",
+    "executionPublishReady",
+    "executionBaselineReady",
+    "minimumContract",
+    "fixedSource",
+    "forbidOldSealedFallback",
+    "ownership",
+    "rollback",
+    "historicalLossLedger",
+    "sourceSnapshot",
+    "selectedNative",
+    "freshBuilds",
+    "plan",
+    "frozenSourceFiles"
+  ],
+  "properties": {
+    "kind": {
+      "const": "paired-recovery-web-execution-contract"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "workId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "releaseProfile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profileConfirmedByRoot": {
+      "const": true
+    },
+    "phase": {
+      "enum": [
+        "local-browser",
+        "public-browser"
+      ]
+    },
+    "game": {
+      "enum": [
+        "FantasyCards",
+        "PathOfDawn"
+      ]
+    },
+    "profile": {
+      "enum": [
+        "desktop",
+        "mobile-landscape"
+      ]
+    },
+    "output": {
+      "type": "string",
+      "pattern": "^Artifacts/[^\\\\]+$"
+    },
+    "executionPublishReady": {
+      "const": false
+    },
+    "executionBaselineReady": {
+      "const": false
+    },
+    "minimumContract": {
+      "const": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+        "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+        "bytes": 11037
+      }
+    },
+    "fixedSource": {
+      "const": {
+        "expectedFingerprints": {
+          "FantasyCards": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+          "PathOfDawn": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026"
+        },
+        "gospelFullAuthoredRows": 1707,
+        "gospelHistoricalInputs": {
+          "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+          "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+          "bytes": 363712
+        },
+        "gospelAuthoredChangesAllowed": false,
+        "expectedGameRevisions": {
+          "FantasyCards": "fm-capability-2026-11-03",
+          "PathOfDawn": "gospel-facing-2026-11-03"
+        },
+        "contentVersions": {
+          "FantasyCards": "fm-classic-0.1.0",
+          "PathOfDawn": "gospel-0.1.0"
+        }
+      }
+    },
+    "forbidOldSealedFallback": {
+      "const": true
+    },
+    "ownership": {
+      "$ref": "#/$defs/lease"
+    },
+    "rollback": {
+      "$ref": "#/$defs/rollback"
+    },
+    "historicalLossLedger": {
+      "$ref": "#/$defs/persistentRef"
+    },
+    "sourceSnapshot": {
+      "type": "object",
+      "required": [
+        "sourceCommit",
+        "sourceDirty",
+        "fullCurrentAuthoredInputs",
+        "fullCurrentProducerSources"
+      ],
+      "properties": {
+        "sourceCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "sourceDirty": {
+          "type": "boolean"
+        },
+        "fullCurrentAuthoredInputs": {
+          "type": "object",
+          "required": [
+            "FantasyCards",
+            "PathOfDawn"
+          ],
+          "properties": {
+            "FantasyCards": {
+              "$ref": "#/$defs/persistentRef"
+            },
+            "PathOfDawn": {
+              "$ref": "#/$defs/persistentRef"
+            }
+          },
+          "additionalProperties": false
+        },
+        "fullCurrentProducerSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/persistentRef"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "selectedNative": {
+      "type": "object",
+      "required": [
+        "FantasyCards",
+        "PathOfDawn"
+      ],
+      "properties": {
+        "FantasyCards": {
+          "$ref": "#/$defs/nativeFantasyCards"
+        },
+        "PathOfDawn": {
+          "$ref": "#/$defs/nativePathOfDawn"
+        }
+      },
+      "additionalProperties": false
+    },
+    "freshBuilds": {
+      "type": "object",
+      "required": [
+        "FantasyCards",
+        "PathOfDawn"
+      ],
+      "properties": {
+        "FantasyCards": {
+          "$ref": "#/$defs/buildFantasyCards"
+        },
+        "PathOfDawn": {
+          "$ref": "#/$defs/buildPathOfDawn"
+        }
+      },
+      "additionalProperties": false
+    },
+    "plan": {
+      "$ref": "#/$defs/plan"
+    },
+    "frozenSourceFiles": {
+      "const": {
+        "Tools/Validation/nativity-web-smoke.py": {
+          "file": "Tools/Validation/nativity-web-smoke.py",
+          "sha256": "22ad10be9a41386b8ba14cc1ca2238bbaf9c72a469ee4cb1d55e21d75c32cb84",
+          "bytes": 85355
+        },
+        "Tools/Validation/web-smoke.py": {
+          "file": "Tools/Validation/web-smoke.py",
+          "sha256": "389434c604ce7661405383fb3e2919c410a22ce3d1bc9ce03a7a19c52d64ffc6",
+          "bytes": 112599
+        },
+        "Tools/Validation/fm-local-media-errors.py": {
+          "file": "Tools/Validation/fm-local-media-errors.py",
+          "sha256": "ae81735c104c923b8e27f32b75c8ea85bdd7ff41c650730f835c4a5b2606be06",
+          "bytes": 21502
+        },
+        "Tools/Validation/fm-provider-errors.py": {
+          "file": "Tools/Validation/fm-provider-errors.py",
+          "sha256": "b2bc8a667a8fb2763eeb8caff28997ff18a3e0b1e04a014e182b7a57adc31b62",
+          "bytes": 2143
+        },
+        "Tools/Validation/webaudio-observer.js": {
+          "file": "Tools/Validation/webaudio-observer.js",
+          "sha256": "b6ac9834dd3ad5557453aa7bfd6a0920038dbf4659396a1505bc9e1cc1ddaaba",
+          "bytes": 8328
+        },
+        "Tools/Validation/fm-local-media-observer.js": {
+          "file": "Tools/Validation/fm-local-media-observer.js",
+          "sha256": "a419e0958837951ff684afbd959d134d3a48cb7ad90537a25594b61c0212c82f",
+          "bytes": 1068
+        },
+        "Tools/Audio/FmFidelity/runtime-manifest.json": {
+          "file": "Tools/Audio/FmFidelity/runtime-manifest.json",
+          "sha256": "bce9cc350a55070669756955af194476315fc1b68fade5690ff468256a62bb8a",
+          "bytes": 5204
+        },
+        "Tools/Validation/run-nativity-native.py": {
+          "file": "Tools/Validation/run-nativity-native.py",
+          "sha256": "834e54887c7292de546e567ba5cfdbc883ad34b805cda5b94249086987fcfa38",
+          "bytes": 4455
+        },
+        "Tools/Build/nativity-task.sh": {
+          "file": "Tools/Build/nativity-task.sh",
+          "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+          "bytes": 3509
+        },
+        "Tools/Autonomy/c1_web_smoke.py": {
+          "file": "Tools/Autonomy/c1_web_smoke.py",
+          "sha256": "4639418e857eea27b0f7b6124cb2ccb58e141851117cbb5ec54e82e9c2a543d7",
+          "bytes": 30049
+        },
+        "Tools/Validation/nativity_narration_evidence.py": {
+          "file": "Tools/Validation/nativity_narration_evidence.py",
+          "sha256": "5356870b71e53c1ca56bb855deea11bd26520e238b5911440441dfcd43cea9ee",
+          "bytes": 3242
+        },
+        "Tools/Voice/Nativity/production.json": {
+          "file": "Tools/Voice/Nativity/production.json",
+          "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+          "bytes": 35716
+        },
+        "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nativity-voice.json": {
+          "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nativity-voice.json",
+          "sha256": "a6458e8a4fe16803d6a848fcfe6a37dc61725d13b8a57817dbde44106a3be6c4",
+          "bytes": 18971
+        },
+        "Tools/Validation/restoration_source_binding.py": {
+          "file": "Tools/Validation/restoration_source_binding.py",
+          "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+          "bytes": 2356
+        },
+        "Tools/Validation/preserve-completed-build-proof.py": {
+          "file": "Tools/Validation/preserve-completed-build-proof.py",
+          "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+          "bytes": 16139
+        },
+        "Tools/Autonomy/cycle_guard.py": {
+          "file": "Tools/Autonomy/cycle_guard.py",
+          "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+          "bytes": 15866
+        },
+        "Tools/Web/release_contract.py": {
+          "file": "Tools/Web/release_contract.py",
+          "sha256": "4b46e0cc20ea4c4751655739d610b93d1ac3a7bb4e7332d85cabc272f4149996",
+          "bytes": 6439
+        },
+        "Tools/Autonomy/recovery-gospel-native.py": {
+          "file": "Tools/Autonomy/recovery-gospel-native.py",
+          "sha256": "dbd8ebf16aa63760d0b4cb6eb370d9935424e04e9e533d2d574ca6aa09744a2e",
+          "bytes": 20837
+        }
+      }
+    },
+    "publicReady": {
+      "$ref": "#/$defs/publicReady"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "local-browser"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "profile": {
+            "enum": [
+              "desktop",
+              "mobile-landscape"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "publicReady"
+              ]
+            },
+            {
+              "required": [
+                "stageReady"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "phase": {
+            "const": "public-browser"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "publicReady"
+        ],
+        "properties": {
+          "profile": {
+            "const": "mobile-landscape"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "game": {
+            "const": "FantasyCards"
+          },
+          "profile": {
+            "const": "desktop"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "plan": {
+                "const": {
+                  "file": "Tools/Autonomy/capability_desktop_plan.json",
+                  "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+                  "bytes": 35770
+                }
+              },
+              "originalPlan": {
+                "const": {
+                  "file": "Tools/Autonomy/capability_desktop_plan.json",
+                  "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+                  "bytes": 35770
+                }
+              },
+              "steps": {
+                "const": 162
+              },
+              "required": {
+                "const": 48
+              },
+              "pcmLabels": {
+                "const": [
+                  "nativity-title",
+                  "starter-lobby",
+                  "continued-sealed-lobby",
+                  "continued-battle"
+                ]
+              },
+              "originalReloads": {
+                "const": 2
+              },
+              "totalReloads": {
+                "const": 2
+              },
+              "appendOnlyLedger": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "game": {
+            "const": "FantasyCards"
+          },
+          "profile": {
+            "const": "mobile-landscape"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "plan": {
+                "const": {
+                  "file": "Tools/Autonomy/capability_mobile_plan.json",
+                  "sha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+                  "bytes": 35397
+                }
+              },
+              "originalPlan": {
+                "const": {
+                  "file": "Tools/Autonomy/capability_mobile_plan.json",
+                  "sha256": "7710518fbd05f335973b6ce15512e4fe7817ea933001e920949bc52d13b6fb26",
+                  "bytes": 35397
+                }
+              },
+              "steps": {
+                "const": 163
+              },
+              "required": {
+                "const": 47
+              },
+              "pcmLabels": {
+                "const": [
+                  "nativity-title",
+                  "starter-lobby",
+                  "continued-sealed-lobby",
+                  "continued-battle"
+                ]
+              },
+              "originalReloads": {
+                "const": 2
+              },
+              "totalReloads": {
+                "const": 2
+              },
+              "appendOnlyLedger": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "game": {
+            "const": "PathOfDawn"
+          },
+          "profile": {
+            "const": "mobile-landscape"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "plan": {
+                "enum": [
+                  {
+                    "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+                    "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+                    "bytes": 22552
+                  },
+                  {
+                    "file": "Tools/Autonomy/g2_public_plan_v2.json",
+                    "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+                    "bytes": 22552
+                  }
+                ]
+              },
+              "originalPlan": {
+                "enum": [
+                  {
+                    "file": "Tools/Autonomy/g2_mobile_plan_v2.json",
+                    "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+                    "bytes": 22552
+                  },
+                  {
+                    "file": "Tools/Autonomy/g2_public_plan_v2.json",
+                    "sha256": "4b3ad486ed81d99a9e1256dda06036a140d4902d8af4b772c7c699943f91258d",
+                    "bytes": 22552
+                  }
+                ]
+              },
+              "steps": {
+                "const": 86
+              },
+              "required": {
+                "const": 34
+              },
+              "pcmLabels": {
+                "const": [
+                  "narration-initial-current-line",
+                  "narration-book-stopped",
+                  "narration-after-book-next-line",
+                  "nativity-temple-field"
+                ]
+              },
+              "totalReloads": {
+                "const": 2
+              },
+              "appendOnlyLedger": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "game": {
+            "const": "PathOfDawn"
+          },
+          "profile": {
+            "const": "desktop"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "plan": {
+            "properties": {
+              "originalPlan": {
+                "const": {
+                  "file": "Tools/Autonomy/g2_desktop_plan_v2.json",
+                  "sha256": "671bc149f43d57a477874ce9e78c8c3a08fbd35862423eb60716c8658dcc1ee6",
+                  "bytes": 28196
+                }
+              },
+              "steps": {
+                "const": 154
+              },
+              "required": {
+                "const": 63
+              },
+              "pcmLabels": {
+                "const": [
+                  "narration-initial-current-line",
+                  "narration-book-stopped",
+                  "narration-after-book-next-line",
+                  "nativity-temple-field"
+                ]
+              },
+              "totalReloads": {
+                "const": 3
+              },
+              "appendOnlyLedger": {
+                "const": {
+                  "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger-v2.json",
+                  "sha256": "5e2d1e41e7d2d12b582f3aa1650004d365f01dedb0855a99e8e922126029cbfe",
+                  "bytes": 27461
+                }
+              },
+              "plan": {
+                "const": {
+                  "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json",
+                  "sha256": "1db5e4e2a8d6f3258cd9b70564c199937de9daf2831bbc23379a36d6e317ed46",
+                  "bytes": 50060
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "persistentRef": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "^Artifacts/[^\\\\]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "fileRow": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "successfulInvocation": {
+      "type": "object",
+      "required": [
+        "argv",
+        "startedUtc",
+        "completedUtc",
+        "exitCode",
+        "originalLog",
+        "callerResult"
+      ],
+      "properties": {
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "startedUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exitCode": {
+          "const": 0
+        },
+        "originalLog": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "callerResult": {
+          "$ref": "#/$defs/persistentRef"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lease": {
+      "type": "object",
+      "required": [
+        "commonLease",
+        "ownerToken",
+        "actualIdleRecheck",
+        "acquiredUtc",
+        "deadlineUtc",
+        "limitSeconds",
+        "forceOrExtensionUsed"
+      ],
+      "properties": {
+        "commonLease": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "ownerToken": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actualIdleRecheck": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "acquiredUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deadlineUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "limitSeconds": {
+          "const": 2700
+        },
+        "forceOrExtensionUsed": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "rollback": {
+      "type": "object",
+      "required": [
+        "restoreReport",
+        "actualFullRecheck",
+        "stage",
+        "sourceCommit",
+        "deployedCommit",
+        "manifestSha256",
+        "fileCountIncludingManifest",
+        "siteBytesIncludingManifest",
+        "scope"
+      ],
+      "properties": {
+        "restoreReport": {
+          "const": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+            "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+            "bytes": 29882757
+          }
+        },
+        "actualFullRecheck": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "stage": {
+          "const": "/tmp/firstgame-recovery-g2-site-20261103"
+        },
+        "sourceCommit": {
+          "const": "5c97eeb124d9e295c7748a268bacd8d2852569ba"
+        },
+        "deployedCommit": {
+          "const": "947890cc46e1e60b070ca42b23ec9c5c62d0d549"
+        },
+        "manifestSha256": {
+          "const": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8"
+        },
+        "fileCountIncludingManifest": {
+          "const": 15413
+        },
+        "siteBytesIncludingManifest": {
+          "const": 981817124
+        },
+        "scope": {
+          "const": "byte-exact-rollback-only-not-old-seal"
+        }
+      },
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "required": [
+        "plan",
+        "originalPlan",
+        "steps",
+        "required",
+        "pcmLabels",
+        "originalReloads",
+        "totalReloads",
+        "appendOnlyLedger",
+        "humanReviewInput"
+      ],
+      "properties": {
+        "plan": {
+          "$ref": "#/$defs/ref"
+        },
+        "originalPlan": {
+          "$ref": "#/$defs/ref"
+        },
+        "steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pcmLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "originalReloads": {
+          "const": 2
+        },
+        "totalReloads": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 3
+        },
+        "appendOnlyLedger": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/persistentRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "humanReviewInput": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stageReady": {
+      "type": "object",
+      "required": [
+        "stageRoot",
+        "manifest",
+        "wholeStageAudit",
+        "explicitRuntimeDiff",
+        "currentCore",
+        "currentCleanCI",
+        "currentSourceCommit",
+        "sourceDirty",
+        "siteBudgetBytesIncludingManifest",
+        "siteBytesIncludingManifest",
+        "fileCountIncludingManifest",
+        "bothGameLocalRootBundle",
+        "gospelPC19CompletedBookRoot",
+        "publishScope"
+      ],
+      "properties": {
+        "stageRoot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "wholeStageAudit": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "explicitRuntimeDiff": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "currentCore": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "currentCleanCI": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "currentSourceCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "sourceDirty": {
+          "const": false
+        },
+        "siteBudgetBytesIncludingManifest": {
+          "const": 985000000
+        },
+        "siteBytesIncludingManifest": {
+          "type": "integer",
+          "maximum": 984999999,
+          "minimum": 1
+        },
+        "fileCountIncludingManifest": {
+          "const": 15413
+        },
+        "bothGameLocalRootBundle": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "gospelPC19CompletedBookRoot": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "publishScope": {
+          "const": "prepublish-stage-only-not-final-baseline"
+        }
+      },
+      "additionalProperties": false
+    },
+    "publicReady": {
+      "type": "object",
+      "required": [
+        "stageReady",
+        "deployedCommit",
+        "currentPagesRun",
+        "currentGitTree",
+        "manifest",
+        "wholePublicAudit",
+        "portalRootReview",
+        "portalMechanicalRaw",
+        "freshNonImageGets",
+        "baseUrl",
+        "readinessScope",
+        "imageDeliveryMode",
+        "inheritedJpegs",
+        "freshImageGets",
+        "freshHttpsGets"
+      ],
+      "properties": {
+        "stageReady": {
+          "$ref": "#/$defs/stageReady"
+        },
+        "deployedCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "currentPagesRun": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "currentGitTree": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "manifest": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "wholePublicAudit": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "portalRootReview": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "portalMechanicalRaw": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "freshNonImageGets": {
+          "const": 63
+        },
+        "baseUrl": {
+          "const": "https://ka8877.github.io/firstgame/"
+        },
+        "readinessScope": {
+          "const": "current-public-bytes-and-portal-not-final-game-public-results"
+        },
+        "imageDeliveryMode": {
+          "enum": [
+            "inherited-strict-chain",
+            "fresh-all-images"
+          ]
+        },
+        "datedImagesChain": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "freshImagesAudit": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "inheritedJpegs": {
+          "enum": [
+            0,
+            15350
+          ]
+        },
+        "freshImageGets": {
+          "enum": [
+            0,
+            15350
+          ]
+        },
+        "freshHttpsGets": {
+          "enum": [
+            63,
+            15413
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "datedImagesChain"
+          ],
+          "properties": {
+            "imageDeliveryMode": {
+              "const": "inherited-strict-chain"
+            },
+            "inheritedJpegs": {
+              "const": 15350
+            },
+            "freshImageGets": {
+              "const": 0
+            },
+            "freshHttpsGets": {
+              "const": 63
+            }
+          },
+          "not": {
+            "required": [
+              "freshImagesAudit"
+            ]
+          }
+        },
+        {
+          "required": [
+            "freshImagesAudit"
+          ],
+          "properties": {
+            "imageDeliveryMode": {
+              "const": "fresh-all-images"
+            },
+            "inheritedJpegs": {
+              "const": 0
+            },
+            "freshImageGets": {
+              "const": 15350
+            },
+            "freshHttpsGets": {
+              "const": 15413
+            }
+          },
+          "not": {
+            "required": [
+              "datedImagesChain"
+            ]
+          }
+        }
+      ]
+    },
+    "nativeFantasyCards": {
+      "type": "object",
+      "required": [
+        "summary",
+        "binding",
+        "xml",
+        "inputsBefore",
+        "inputsAfter",
+        "executedContract",
+        "recordedHarness",
+        "rootReview",
+        "sourceFingerprint",
+        "expectedFullNames",
+        "passed",
+        "failed",
+        "skipped",
+        "sourceChangedDuringRun"
+      ],
+      "properties": {
+        "summary": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "binding": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "xml": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "inputsBefore": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "inputsAfter": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "executedContract": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "recordedHarness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/persistentRef"
+          },
+          "minItems": 1
+        },
+        "rootReview": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceFingerprint": {
+          "const": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90"
+        },
+        "expectedFullNames": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+              "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+              "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+              "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+              "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+              "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+              "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+              "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+            ]
+          }
+        },
+        "passed": {
+          "const": 8
+        },
+        "failed": {
+          "const": 0
+        },
+        "skipped": {
+          "const": 0
+        },
+        "sourceChangedDuringRun": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "nativePathOfDawn": {
+      "type": "object",
+      "required": [
+        "summary",
+        "binding",
+        "xml",
+        "inputsBefore",
+        "inputsAfter",
+        "executedContract",
+        "recordedHarness",
+        "rootReview",
+        "sourceFingerprint",
+        "expectedFullNames",
+        "passed",
+        "failed",
+        "skipped",
+        "sourceChangedDuringRun",
+        "voiceProductionFixture"
+      ],
+      "properties": {
+        "summary": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "binding": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "xml": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "inputsBefore": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "inputsAfter": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "executedContract": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "recordedHarness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/persistentRef"
+          },
+          "minItems": 1
+        },
+        "rootReview": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceFingerprint": {
+          "const": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026"
+        },
+        "expectedFullNames": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState",
+              "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload",
+              "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible",
+              "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition",
+              "PathOfDawn.SmokeTests.GospelFacingSmokeTests.AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload",
+              "PathOfDawn.SmokeTests.GospelFacingSmokeTests.LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue",
+              "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+              "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+              "PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests.ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet",
+              "PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests.CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+              "PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests.ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+              "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes",
+              "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+              "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor",
+              "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump",
+              "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds"
+            ]
+          }
+        },
+        "passed": {
+          "const": 16
+        },
+        "failed": {
+          "const": 0
+        },
+        "skipped": {
+          "const": 0
+        },
+        "sourceChangedDuringRun": {
+          "const": false
+        },
+        "voiceProductionFixture": {
+          "$ref": "#/$defs/persistentRef"
+        }
+      },
+      "additionalProperties": false
+    },
+    "buildFantasyCards": {
+      "type": "object",
+      "required": [
+        "game",
+        "buildRoot",
+        "invocation",
+        "inputs",
+        "evidence",
+        "sourceFingerprint",
+        "runtimeCoreFiles",
+        "completeRuntimeManifest",
+        "durableProofIndex",
+        "durabilityInvocation",
+        "resourceRestorationLedger",
+        "sourceBeforeAfterLedger",
+        "warningLedger",
+        "runtimeDiffAgainstRollback"
+      ],
+      "properties": {
+        "game": {
+          "const": "FantasyCards"
+        },
+        "buildRoot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "invocation": {
+          "$ref": "#/$defs/successfulInvocation"
+        },
+        "inputs": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "evidence": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceFingerprint": {
+          "const": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90"
+        },
+        "runtimeCoreFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fileRow"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "completeRuntimeManifest": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "durableProofIndex": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "durabilityInvocation": {
+          "$ref": "#/$defs/successfulInvocation"
+        },
+        "resourceRestorationLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceBeforeAfterLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "warningLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "runtimeDiffAgainstRollback": {
+          "$ref": "#/$defs/persistentRef"
+        }
+      },
+      "additionalProperties": false
+    },
+    "buildPathOfDawn": {
+      "type": "object",
+      "required": [
+        "game",
+        "buildRoot",
+        "invocation",
+        "inputs",
+        "evidence",
+        "sourceFingerprint",
+        "runtimeCoreFiles",
+        "completeRuntimeManifest",
+        "durableProofIndex",
+        "durabilityInvocation",
+        "resourceRestorationLedger",
+        "sourceBeforeAfterLedger",
+        "warningLedger",
+        "runtimeDiffAgainstRollback"
+      ],
+      "properties": {
+        "game": {
+          "const": "PathOfDawn"
+        },
+        "buildRoot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "invocation": {
+          "$ref": "#/$defs/successfulInvocation"
+        },
+        "inputs": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "evidence": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceFingerprint": {
+          "const": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026"
+        },
+        "runtimeCoreFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fileRow"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "completeRuntimeManifest": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "durableProofIndex": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "durabilityInvocation": {
+          "$ref": "#/$defs/successfulInvocation"
+        },
+        "resourceRestorationLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "sourceBeforeAfterLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "warningLedger": {
+          "$ref": "#/$defs/persistentRef"
+        },
+        "runtimeDiffAgainstRollback": {
+          "$ref": "#/$defs/persistentRef"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "x-semanticObligations": [
+    "Every ref must resolve to a same-sized regular non-symlink in authorized storage and exact SHA; copied raw controls persist in Artifacts, never only /tmp aliases. No ref may be filled by rebuilding missing historical success.",
+    "Each actual step/attempt has its own exact owner token and original2700s bound; earlier selected evidence retains its own bounded ownership ledger. Current execution may not steal or automatically extend a lease. Different attempts/outputs never overwrite.",
+    "Strict source fixed-point: current Native before+after, current source, fresh BuildInputs and full row enumeration are identical per game; Gospel1707/fdf2aa/fixed255e. Current authored/helper/tool/contract/XML equality is required to select a Native candidate.",
+    "Successful invocation refs must be genuine caller execution/log/exit after actual existing Unity build and restoration. Durable proof c597 runs only after exit0, captures originals/complete manifests and records true optional runtime-copy flag; it does not witness Unity by itself.",
+    "Core runtime exact5 unique rows and complete scope match actual build/stage/browser bytes. Both builds are fresh even if unchanged Gospel binary happens to match old bytewise. Explicit old/new diff record never asserts oldbinary/newmetadata equivalence.",
+    "Load unchanged base JourneySmoke and exact audio body from current C1 with only already-present three Card admissions. Do not fake _sealed/import old C1 config or call historical current_build. Preserve exact audio/cache/media/error predicates, observer and narration sources.",
+    "Plan game identity/revision/whole bytes must match adopted exact pin. Card desktop162/48 and touch/public163/47; Gospel original PC117/48 + separately reviewed append-only PC19 tail, mobile/public86/34. All original full step objects/order/checkpoints remain, exactly four original audio roles; first two reload paths unchanged. Only PC completion tail may add third reload.",
+    "Desktop1280x720 caps0/coarsefalse; touch/public844x390 true touch caps>0/coarsetrue. Ordinary real pointer/key/touch only. No game/field/save/random-state injection; review_input remains bounded12iterations/20actions.",
+    "Exactly one Current runtime files did not change during the browser session gate must exist and pass; never all(empty). All original required checkpoints and PCM4 order/data must exist. Each actual reload produces its own later continued-* screenshot with correct navigation.",
+    "PCM finite, >=6samples, AudioContext running, isolated music, exactly1current source, audibleFraction>=.5, medianRms>1e-5, advancing bundled URL and per-role Card diagnostics. Gospel voice manifest28 actual initial key0→playing Book stop→nextkey1 is separate; measured music is not voice acting approval.",
+    "Root review binds current sourceFP and runtime5, immutable pre-review raw report SHA/bytes, full approved screenshot rows including name/nav/canvas/time/path/SHA, original regular leaves; changing only visualReview yields reviewed report exactly. Finalruntime exists exactly1true and no unexpected errors/requests under unchanged classifiers.",
+    "Existing Gospel settled11/12 Bible and Continue actual originals remain required for all3profiles. PC only additionally completes remaining story through23events/19passages then settled full Book/lastspread/save/reload/Continue/Book originals. NativeCore19 acquisition does not prove completed-book readability.",
+    "Prepublish stage requires actual both-game PC/touch Root, PC19 Root, current Core/clean sourceCI, unchanged rollback/siteJPEG/ThirdParty, explicit two-runtime diff only, exact15413 regular files and totalincludingmanifest<985000000. No finalpublic receipt precondition.",
+    "Postpublish public_bytes requires new source/Pages/deployed/MF/tree exact identity, actual63nonimage TLS200 canonical/resolved URL/identity/bodySHA+size and strict15350datedGET chain or fresh15350GET. Fresh current portal2 +Root raw equality precedes gamepublic input. Never oldmissingRoot fallback.",
+    "Final distinct receipt/Rootseal is separate after BOTH current game-public attempts+Root, wholeSHA/storage/CI/source/Pages/ownership closure. This execution contract always has publishReady/baselineReadyfalse; it cannot create final baseline status.",
+    "Whole-public image delivery is explicit oneOf: inherited-strict-chain has63newGET/15350inherited historical rows; fresh-all-images has15413newGET/0inherited rows and actual full JPEG GET originals. No automatic missing-chain pass or historical timestamps on fresh rows."
+  ]
+}

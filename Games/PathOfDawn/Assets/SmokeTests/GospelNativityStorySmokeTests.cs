@@ -163,7 +163,10 @@ namespace PathOfDawn.SmokeTests
             {
                 Assert.That(App.Ui.CurrentView, Is.EqualTo("story"));
                 Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryBeat.Text), Is.True);
-                Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryReference), Is.True);
+                Assert.That(App.Chronicle.CurrentStoryReference, Is.Not.Empty);
+                Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryReference), Is.False,
+                    "Source metadata stays internal while the actual speaker and speech remain visible.");
+                Assert.That(SmokeUi.HasText(App.Chronicle.CurrentStoryBeat.Speaker), Is.True);
                 string key = App.Chronicle.CurrentQuest.Id + ":" + App.Chronicle.StoryBeatIndex;
                 Assert.That(App.Chronicle.StoryVoiceKey, Is.EqualTo(key));
                 if (key == "birth-road-bethlehem:3")

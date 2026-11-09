@@ -1,0 +1,88 @@
+{
+  "kind": "source-duration-comparison-not-runtime-approval",
+  "sourceFade": {
+    "reference": {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/GospelUiMotion.cs",
+      "sha256": "bc95dbb04490baa4b6102a13060aaa0d90491129c0006bedbb999f879d37393e",
+      "bytes": 906
+    },
+    "lines": [
+      {
+        "line": 17,
+        "source": "            group.alpha = 0;"
+      },
+      {
+        "line": 23,
+        "source": "            elapsed += Time.unscaledDeltaTime;"
+      },
+      {
+        "line": 24,
+        "source": "            float t = Mathf.Clamp01(elapsed / .18f);"
+      },
+      {
+        "line": 25,
+        "source": "            group.alpha = t * t * (3 - 2 * t);"
+      },
+      {
+        "line": 26,
+        "source": "            if (t >= 1) enabled = false;"
+      }
+    ]
+  },
+  "bookSettle": {
+    "reference": {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelStorybookUi.cs",
+      "sha256": "4cbf1e559a2e23069f3ed70cdbf02c8d03ecd9b20cbf88d000651a02f2be9b34",
+      "bytes": 17988
+    },
+    "lines": [
+      {
+        "line": 50,
+        "source": "            B(layer, \"최근 말씀\", 663, 640, 202, 56, () => {"
+      },
+      {
+        "line": 55,
+        "source": "            B(layer, \"여정으로\", 994, 640, 214, 56, OnResume, true, true);"
+      },
+      {
+        "line": 57,
+        "source": "            StartCoroutine(SettleStorybook(binding, turn));"
+      },
+      {
+        "line": 109,
+        "source": "            B(layer, \"여정으로\", 994, 640, 214, 56, OnResume);"
+      },
+      {
+        "line": 140,
+        "source": "            B(layer, \"여정으로\", 994, 640, 214, 56, OnResume, true, true);"
+      },
+      {
+        "line": 207,
+        "source": "            StartCoroutine(SettleStorybook(binding, true));"
+      },
+      {
+        "line": 274,
+        "source": "            while (binding != null && elapsed < .22f)"
+      },
+      {
+        "line": 277,
+        "source": "                float t = 1 - Mathf.Pow(1 - Mathf.Clamp01(elapsed / .22f), 3);"
+      },
+      {
+        "line": 281,
+        "source": "            if (binding != null) binding.localScale = Vector3.one;"
+      }
+    ]
+  },
+  "originalExpectedBookClickSettleMs": 750,
+  "originalContinueSettleMs": 1400,
+  "newAdditionalBookWaitMs": 1500,
+  "newThirdContinueSettleMs": 2000,
+  "theory": "750ms and1400ms are longer than the source .18s unscaled fade and .22s book settle. New1500/2000ms waits are also longer. Wall-clock waits do not prove actual rendered glyphs/compositor/source completion on a slow software browser. Every relevant fresh Root original remains mandatory.",
+  "notVerified": [
+    "Actual execution/render completion",
+    "Actual no-blank completed19 book",
+    "ActualSave/thirdReload/Continue",
+    "Ability to finish within existing45min lease"
+  ]
+}

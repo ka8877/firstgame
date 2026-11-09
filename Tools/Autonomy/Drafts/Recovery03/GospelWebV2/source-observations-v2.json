@@ -1,0 +1,37 @@
+{
+  "status": "v2-read-only-source-and-known-alias-observations-not-executed",
+  "observedUtc": "2026-11-03T16:21:21.332121+00:00",
+  "logicalLibrary": "Games/PathOfDawn/Library",
+  "logicalIsSymlink": true,
+  "literalLinkTarget": "/tmp/firstgame-reprise-cache/PathOfDawn/Library",
+  "resolvedLibrary": "/tmp/firstgame-reprise-cache/PathOfDawn/Library",
+  "expectedTarget": "/tmp/firstgame-reprise-cache/PathOfDawn/Library",
+  "targetIsSymlink": false,
+  "targetIsDirectory": true,
+  "journalExists": false,
+  "historicalV1": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/preservation-index.json",
+    "sha256": "b29633abdd124caf704a6c905b7548a1afbbd4dfbb6e7b0a806c241a1e7bfeb1",
+    "bytes": 3646
+  },
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+    "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+    "bytes": 57195
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+    "sha256": "bf64a3f7cf32e18cf0f2f53cd2d0631e863a4f871ed2730ced3fcd8f3f2f4b8c",
+    "bytes": 21256
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+    "sha256": "3c6cc6fefdc9f644b2c7fb0eba4fa6ee28dc3a3c58bdb360712dd775c8cd846c",
+    "bytes": 6122
+  },
+  "limits": [
+    "Source-only standard AST/JSON/SHA/readlink/stat; no actual helper/project import, tests, Unity, network, Git or wrapper execution",
+    "Only this allowed Recovery02/GospelWebRunDraft folder written; actual R3 output paths not created"
+  ],
+  "temporaryJournalExists": false
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "spawn-setsid",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture",
+      "c37e568e3eaf487085f7067bc52e70bb"
+    ],
+    "cleanupAndReportReservedSeconds": 12,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "bytes": 18559,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-result.json",
+      "sha256": "6a6a8d57cbb946696ae99e5ac9bf0cff287d652500e4529107812d5a833eb741"
+    },
+    "cwd": "/workspace/firstgame",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "exitCode": 124,
+    "finishedUtc": "2026-11-03T18:01:35.744688+00:00",
+    "label": "bystander",
+    "log": {
+      "bytes": 509,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/actual-command.stdout.log",
+      "sha256": "9bdd90b3c7c25ef66172860a759b6615dc698a66eb590e429ee98adccbba785d"
+    },
+    "pid": 57361,
+    "privateProcessGroup": true,
+    "processContainment": "owned-descendants-v1",
+    "sharedSafeEndMonotonic": 20728.736052419,
+    "startedUtc": "2026-11-03T18:01:33.715800+00:00",
+    "supervisorIdentity": {
+      "pgid": 57360,
+      "pid": 57360,
+      "ppid": 57318,
+      "sid": 57360,
+      "startTicks": 2071177,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "timeoutSeconds": 1.99977116700029
+  }
+]

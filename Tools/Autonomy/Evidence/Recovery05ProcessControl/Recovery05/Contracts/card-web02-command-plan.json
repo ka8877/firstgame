@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "status": "source-only-contained-cardweb02-plan-production-blocked-until-real-isolated-tests",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "commonBuild": {
+    "argv": [
+      "bash",
+      "Tools/Build/nativity-task.sh",
+      "FantasyCards",
+      "web",
+      "CardWeb02"
+    ],
+    "environmentOverrides": {
+      "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02",
+      "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery05-cardweb02-builds",
+      "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/GeneratedPythonCache",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "stdoutStderr": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/launcher-build.log",
+    "unityLog": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/web.log"
+  },
+  "afterSuccessOnly": {
+    "argv": [
+      "python3",
+      "Tools/Validation/preserve-completed-build-proof.py",
+      "--repository-root",
+      "/workspace/firstgame",
+      "--game",
+      "FantasyCards",
+      "--revision",
+      "fm-capability-2026-11-03",
+      "--expected-source-fingerprint",
+      "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+      "--build-folder",
+      "/tmp/firstgame-c1-recovery05-cardweb02-builds/FantasyCards/Web",
+      "--output",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/BuildProof/FantasyCards-Web02",
+      "--build-exit-code",
+      "0",
+      "--copy-core-runtime"
+    ],
+    "stdoutStderr": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/launcher-proof.log"
+  },
+  "limits": {
+    "sharedExecutionSeconds": 900,
+    "leaseReserveSeconds": 60,
+    "noAutomaticAcquireReleaseExtendRetryRestoreOrPublish": true,
+    "completionProof": "Dedicated living subreaper + exact wait/reap + kernel ECHILD + all held identities exited; PGID empty is not proof.",
+    "provenOwnedDescendantsOnly": true
+  },
+  "manualFailureRecoveryOnly": [
+    "Preserve actual source/new build/pipeline Before/After/additions originals and pending/false result first.",
+    "After actual owner idle and explicit diagnosis, original pipeline restore is usable only for snapshotted+exactBefore+absentAfter. PartialAfter is blocked, never re-run/overwrite/delete.",
+    "Original additions restore requires absent prior GeneratedProjectAdditions and original current Native input; existing prepared/partial output is blocked for owner diagnosis.",
+    "No Gospel isolation journal/voice/Props/Library alias action belongs to this Card lane."
+  ]
+}

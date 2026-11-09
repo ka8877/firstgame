@@ -1,0 +1,303 @@
+{
+  "kind": "paired-recovery-web-execution-contract",
+  "schemaVersion": 1,
+  "workId": null,
+  "releaseProfile": null,
+  "profileConfirmedByRoot": false,
+  "phase": "local-browser",
+  "game": "FantasyCards",
+  "profile": "desktop",
+  "output": null,
+  "executionPublishReady": false,
+  "executionBaselineReady": false,
+  "minimumContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/IndependentBaselineAudit/minimum-contract-proposal.json",
+    "sha256": "015f660d53802718b177cab3a8e2cbc386bddb8318f0a28574df4fa3248d2151",
+    "bytes": 11037
+  },
+  "fixedSource": {
+    "expectedFingerprints": {
+      "FantasyCards": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+      "PathOfDawn": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026"
+    },
+    "gospelFullAuthoredRows": 1707,
+    "gospelHistoricalInputs": {
+      "file": "Artifacts/Validation/Autonomy/G2-2026-11-03/Native/PathOfDawn/inputs-before.json",
+      "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+      "bytes": 363712
+    },
+    "gospelAuthoredChangesAllowed": false,
+    "expectedGameRevisions": {
+      "FantasyCards": "fm-capability-2026-11-03",
+      "PathOfDawn": "gospel-facing-2026-11-03"
+    },
+    "contentVersions": {
+      "FantasyCards": "fm-classic-0.1.0",
+      "PathOfDawn": "gospel-0.1.0"
+    }
+  },
+  "forbidOldSealedFallback": true,
+  "ownership": null,
+  "rollback": {
+    "restoreReport": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+      "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+      "bytes": 29882757
+    },
+    "actualFullRecheck": null,
+    "stage": "/tmp/firstgame-recovery-g2-site-20261103",
+    "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
+    "deployedCommit": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
+    "manifestSha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+    "fileCountIncludingManifest": 15413,
+    "siteBytesIncludingManifest": 981817124,
+    "scope": "byte-exact-rollback-only-not-old-seal"
+  },
+  "historicalLossLedger": null,
+  "sourceSnapshot": null,
+  "selectedNative": {
+    "FantasyCards": {
+      "summary": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
+        "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
+        "bytes": 15211
+      },
+      "binding": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
+        "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
+        "bytes": 900
+      },
+      "xml": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
+        "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
+        "bytes": 10572
+      },
+      "inputsBefore": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/inputs-before.json",
+        "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff",
+        "bytes": 7183504
+      },
+      "inputsAfter": null,
+      "executedContract": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-contract.executed.json",
+        "sha256": "85cb42d00c143b4c951261690cb0a2d0bf5f2c571c4b33e82052ec3337891204",
+        "bytes": 3609
+      },
+      "recordedHarness": [
+        {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/RecordedHarness/Tools/Autonomy/recovery-product-native.py",
+          "sha256": "6fb091d41eda91669aceccea0020a211517f4906534671a4450e452c8b603a26",
+          "bytes": 6982
+        }
+      ],
+      "rootReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+        "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+        "bytes": 6148
+      },
+      "sourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+      "expectedFullNames": [
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+        "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+        "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+        "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+        "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+        "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+        "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+        "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+      ],
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "sourceChangedDuringRun": false
+    },
+    "PathOfDawn": {
+      "summary": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-native-summary.json",
+        "sha256": "2cad207f26fe38a55aaca9d9499a04fb707a5a71425039c3837733f257b3face",
+        "bytes": 40208
+      },
+      "binding": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/binding.json",
+        "sha256": "c8f88180d8626dbfd0b7cb4bf0f5ec2e8cb9087e3c4859d1cc46100ce96c7f0c",
+        "bytes": 1328
+      },
+      "xml": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/native.xml",
+        "sha256": "de2a605ffe19fd3072683316e69ea0c8dc94e618e1d268ed710f72bae85bfae1",
+        "bytes": 146237
+      },
+      "inputsBefore": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
+        "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+        "bytes": 363712
+      },
+      "inputsAfter": null,
+      "executedContract": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-contract.executed.json",
+        "sha256": "af8a6765e3166f012145faa3ca5a1d95284437cb48e6b51826024e0b63c6cbaa",
+        "bytes": 6971
+      },
+      "recordedHarness": [
+        {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/RecordedHarness/Tools/Autonomy/recovery-gospel-native.py",
+          "sha256": "dbd8ebf16aa63760d0b4cb6eb370d9935424e04e9e533d2d574ca6aa09744a2e",
+          "bytes": 20837
+        }
+      ],
+      "rootReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+        "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+        "bytes": 13673
+      },
+      "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+      "expectedFullNames": [
+        "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.EncounterHudDirectionUsesTheActualCameraAndKeepsInteractionState",
+        "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.FieldConversationPreservesItsPhysicalEncounterAndSaveCursorAcrossBookAndReload",
+        "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.IllustratedBirthStillRetainsItsVoicedLineAcrossTheBible",
+        "PathOfDawn.SmokeTests.GospelEncounterSmokeTests.TempleGuideHeadRemainsVisibleAndLegacyEncounterSaveKeepsItsPosition",
+        "PathOfDawn.SmokeTests.GospelFacingSmokeTests.AcceptedKeyboardEncounterPlantsFacingBeforeSavingAndKeepsItAcrossBookAndReload",
+        "PathOfDawn.SmokeTests.GospelFacingSmokeTests.LegacyReadingHeadingPositionAndOriginalBytesSurviveBookAndRepeatedContinue",
+        "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+        "PathOfDawn.SmokeTests.GospelNativityAudioSmokeTests.NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+        "PathOfDawn.SmokeTests.GospelNativityCharacterSmokeTests.ImportedWholeBodyCyclesBothStepsFacesFourWaysAndSettlesAtActualFeet",
+        "PathOfDawn.SmokeTests.GospelNativityFiniteRenderingTests.CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+        "PathOfDawn.SmokeTests.GospelNativityMovementAudioSmokeTests.ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+        "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.DetailedOpeningResumesQuietlyAndTheEntirePhysicalBibleStillAcquiresNineteenTimes",
+        "PathOfDawn.SmokeTests.GospelNativityStorySmokeTests.RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+        "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.PaintedChaptersKeepEveryEncounterOnTheContinuousPhysicalFloor",
+        "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.RealTouchAxesPlantAtRestAndTheCameraKeepsTheLandscapeSteadyThroughAJump",
+        "PathOfDawn.SmokeTests.GospelNativityVisualSmokeTests.ReleasedExplorationDashPlantsWhenThePhysicalBurstEnds"
+      ],
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "sourceChangedDuringRun": false,
+      "voiceProductionFixture": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/NativeAttempts/PathOfDawn/20261103T154531492744Z/FixtureInputs/Tools/Voice/Nativity/production.json",
+        "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+        "bytes": 35716
+      }
+    }
+  },
+  "freshBuilds": {
+    "FantasyCards": null,
+    "PathOfDawn": null
+  },
+  "plan": {
+    "plan": {
+      "file": "Tools/Autonomy/capability_desktop_plan.json",
+      "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "bytes": 35770
+    },
+    "originalPlan": {
+      "file": "Tools/Autonomy/capability_desktop_plan.json",
+      "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "bytes": 35770
+    },
+    "steps": 162,
+    "required": 48,
+    "pcmLabels": [
+      "nativity-title",
+      "starter-lobby",
+      "continued-sealed-lobby",
+      "continued-battle"
+    ],
+    "originalReloads": 2,
+    "totalReloads": 2,
+    "appendOnlyLedger": null,
+    "humanReviewInput": true
+  },
+  "frozenSourceFiles": {
+    "Tools/Validation/nativity-web-smoke.py": {
+      "file": "Tools/Validation/nativity-web-smoke.py",
+      "sha256": "22ad10be9a41386b8ba14cc1ca2238bbaf9c72a469ee4cb1d55e21d75c32cb84",
+      "bytes": 85355
+    },
+    "Tools/Validation/web-smoke.py": {
+      "file": "Tools/Validation/web-smoke.py",
+      "sha256": "389434c604ce7661405383fb3e2919c410a22ce3d1bc9ce03a7a19c52d64ffc6",
+      "bytes": 112599
+    },
+    "Tools/Validation/fm-local-media-errors.py": {
+      "file": "Tools/Validation/fm-local-media-errors.py",
+      "sha256": "ae81735c104c923b8e27f32b75c8ea85bdd7ff41c650730f835c4a5b2606be06",
+      "bytes": 21502
+    },
+    "Tools/Validation/fm-provider-errors.py": {
+      "file": "Tools/Validation/fm-provider-errors.py",
+      "sha256": "b2bc8a667a8fb2763eeb8caff28997ff18a3e0b1e04a014e182b7a57adc31b62",
+      "bytes": 2143
+    },
+    "Tools/Validation/webaudio-observer.js": {
+      "file": "Tools/Validation/webaudio-observer.js",
+      "sha256": "b6ac9834dd3ad5557453aa7bfd6a0920038dbf4659396a1505bc9e1cc1ddaaba",
+      "bytes": 8328
+    },
+    "Tools/Validation/fm-local-media-observer.js": {
+      "file": "Tools/Validation/fm-local-media-observer.js",
+      "sha256": "a419e0958837951ff684afbd959d134d3a48cb7ad90537a25594b61c0212c82f",
+      "bytes": 1068
+    },
+    "Tools/Audio/FmFidelity/runtime-manifest.json": {
+      "file": "Tools/Audio/FmFidelity/runtime-manifest.json",
+      "sha256": "bce9cc350a55070669756955af194476315fc1b68fade5690ff468256a62bb8a",
+      "bytes": 5204
+    },
+    "Tools/Validation/run-nativity-native.py": {
+      "file": "Tools/Validation/run-nativity-native.py",
+      "sha256": "834e54887c7292de546e567ba5cfdbc883ad34b805cda5b94249086987fcfa38",
+      "bytes": 4455
+    },
+    "Tools/Build/nativity-task.sh": {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    "Tools/Autonomy/c1_web_smoke.py": {
+      "file": "Tools/Autonomy/c1_web_smoke.py",
+      "sha256": "4639418e857eea27b0f7b6124cb2ccb58e141851117cbb5ec54e82e9c2a543d7",
+      "bytes": 30049
+    },
+    "Tools/Validation/nativity_narration_evidence.py": {
+      "file": "Tools/Validation/nativity_narration_evidence.py",
+      "sha256": "5356870b71e53c1ca56bb855deea11bd26520e238b5911440441dfcd43cea9ee",
+      "bytes": 3242
+    },
+    "Tools/Voice/Nativity/production.json": {
+      "file": "Tools/Voice/Nativity/production.json",
+      "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+      "bytes": 35716
+    },
+    "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nativity-voice.json": {
+      "file": "Games/PathOfDawn/Assets/Resources/Voice/GospelNativity/nativity-voice.json",
+      "sha256": "a6458e8a4fe16803d6a848fcfe6a37dc61725d13b8a57817dbde44106a3be6c4",
+      "bytes": 18971
+    },
+    "Tools/Validation/restoration_source_binding.py": {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    "Tools/Validation/preserve-completed-build-proof.py": {
+      "file": "Tools/Validation/preserve-completed-build-proof.py",
+      "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+      "bytes": 16139
+    },
+    "Tools/Autonomy/cycle_guard.py": {
+      "file": "Tools/Autonomy/cycle_guard.py",
+      "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+      "bytes": 15866
+    },
+    "Tools/Web/release_contract.py": {
+      "file": "Tools/Web/release_contract.py",
+      "sha256": "4b46e0cc20ea4c4751655739d610b93d1ac3a7bb4e7332d85cabc272f4149996",
+      "bytes": 6439
+    },
+    "Tools/Autonomy/recovery-gospel-native.py": {
+      "file": "Tools/Autonomy/recovery-gospel-native.py",
+      "sha256": "dbd8ebf16aa63760d0b4cb6eb370d9935424e04e9e533d2d574ca6aa09744a2e",
+      "bytes": 20837
+    }
+  }
+}

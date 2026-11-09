@@ -1,0 +1,277 @@
+{
+  "status": "passed",
+  "finishedUtc": "2026-11-03T11:07:58.034587+00:00",
+  "exitCode": 0,
+  "revision": "fm-capability-2026-11-03",
+  "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01",
+  "captureRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01",
+  "expectedFullNames": [
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.FidelityGradeGuideAndRankCapabilityFiltersUseActualCards",
+    "FantasyCards.SmokeTests.FantasyCardsRevivalSmokeTests.OriginalCapabilityLabelsAndBrowseFiltersPreserveKnownCardsAndSaves",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ActualAttachedItemsCanBeInspectedAndDisposedWithOwnershipPreparationAndHealthRules",
+    "FantasyCards.SmokeTests.NativitySmokeTests.AutomaticLethalEquipmentRestorationShowsZeroHealthAndNeverHitsTheOpponent",
+    "FantasyCards.SmokeTests.NativitySmokeTests.FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging",
+    "FantasyCards.SmokeTests.NativitySmokeTests.ProductBackSurvivesSealedReloadAndRevealsAllFiveActualDrawSlotsOnce",
+    "FantasyCards.SmokeTests.NativitySmokeTests.RealEquipmentHeadsCoinAndDamageChangePhysicalCardNumeralsAtTheirActualImpacts",
+    "FantasyCards.Tests.BattleEngineTests.UnityJsonAcceptsPreviousSchemaThreeWithoutGeneratedCardList"
+  ],
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/RecordedHarness/Tools/Autonomy/c1_native_runner.py",
+    "sha256": "94e20277ddc81c623fbabeeb673948088ed68eb25de5c41a0d58d2ee36128e55",
+    "bytes": 8485
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/c1-contract.executed.json",
+    "sha256": "ab6ee2f0ee3f014cd67f65c28fbf5dd15f6249394e8c52654c2ae0e077880c3e",
+    "bytes": 5962
+  },
+  "exactContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/native-contract.executed.json",
+    "sha256": "7c389d4f53062d652cc58d0fd2391cd37ea0e22b9e386101516ed8ab025fcbb0",
+    "bytes": 3550
+  },
+  "scope": "Fresh exact8 C1 Card execution only if all unchanged common input/result gates and added exact-set gate pass. Earlier Nativity6 evidence remains historical.",
+  "binding": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/binding.json",
+    "sha256": "3571c336e25cbdc0bf5acda87e867a1a826c0a7463e30fc040617efba3afb977",
+    "bytes": 900
+  },
+  "nativeXml": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/native.xml",
+    "sha256": "85711d0bf86c46dfbbeff2f6f5f2bfbcc83fe1bdaf07bea0ca3b5c461cba7297",
+    "bytes": 12715
+  },
+  "sourceFingerprint": "acd70be6bb9ec9f4e5b79ca9430a7dac2520b5239468f450396f2f27baf091bb",
+  "originals": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-attached-original-equipment-touch.png",
+      "sha256": "5d44c1bea5908eac77546e6fb671d5271af657708381d5920c50e549d71aaeff",
+      "bytes": 234139
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-attached-original-equipment-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-attached-original-equipment.png",
+      "sha256": "07b6a1368365edb524827b65468c70b88995c577ca1d1fdfbd9b7d4d2dcc23db",
+      "bytes": 789374
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-attached-original-equipment.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-automatic-equipment-hp-zero-touch.png",
+      "sha256": "5e7aa5b31d178581f82fdd0a6bc507244a68f50ecda467da2103965bdfb3f75c",
+      "bytes": 183758
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-automatic-equipment-hp-zero-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-automatic-equipment-hp-zero.png",
+      "sha256": "fb812472f1e56b13559cee1a27daf6d990d86a89aa473ccd17961708cb6c3f83",
+      "bytes": 577905
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-automatic-equipment-hp-zero.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-continued-specific-sealed-product-touch.png",
+      "sha256": "3653548fd8736260ffec9bb173bd3bce7eae9b35080e88255d9c46eda1d9adeb",
+      "bytes": 141696
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-continued-specific-sealed-product-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-damage-on-actual-card-touch.png",
+      "sha256": "3c1c5e4f157cc01a485910d4e980a0dc985992f1730092f87eb950ae074ca343",
+      "bytes": 144560
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-damage-on-actual-card-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-damage-on-actual-card.png",
+      "sha256": "c1c688e13ebb4affe2e591c355774c999caab56c0f0fdc6aeaba2d7f3d925fcb",
+      "bytes": 409057
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-damage-on-actual-card.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-distinct-product-shop-touch.png",
+      "sha256": "93294b993a5767fcc5a4e35715fc935f4e5aff409f0d59de7704c5ad30ca8904",
+      "bytes": 180983
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-distinct-product-shop-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-distinct-product-shop.png",
+      "sha256": "9eb6c8e9299a7edd2211d14f7815e68a727747080d3b43f32bf8cdd6fecfc4cd",
+      "bytes": 486533
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-distinct-product-shop.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-fantasy-title-touch.png",
+      "sha256": "2b4ffb82ab5a773df4ef62d9887639fcee173d5419d7ad5717322e5fb6d3af18",
+      "bytes": 377196
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-fantasy-title-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-fantasy-title.png",
+      "sha256": "f5f2fc8dde693c14256daa0844850ad9bcd974cd0a6382beb2f3bbc0b9e9b09f",
+      "bytes": 1437622
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-fantasy-title.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-first-heads-actual-card-touch.png",
+      "sha256": "c493770fe8e1999634bb000f98513654a21efc3d95ef5f784f8988ff8d5e8328",
+      "bytes": 130198
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-first-heads-actual-card-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-first-heads-actual-card.png",
+      "sha256": "12ee52998976eb52674adba71f3e95bfcacb44a527477c5cf58db9d08475d356",
+      "bytes": 355994
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-first-heads-actual-card.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-actual-card-draw-slots-touch.png",
+      "sha256": "f041ff61d2f80230179a5aa596a920b27042056597eda93cf49ec4b6f9229c33",
+      "bytes": 266849
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-actual-card-draw-slots-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-actual-card-draw-slots.png",
+      "sha256": "acb4d966217ddde1ab616d895a3e5437be0ffd07dcfece733d3d8118b0628131",
+      "bytes": 946385
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-actual-card-draw-slots.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-product-backs-opening.png",
+      "sha256": "e7f29c5c5802c12cb5d82ddfa01ed0e411fe60d235b9be9ec303ea9bb0d70600",
+      "bytes": 668550
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-five-product-backs-opening.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-owned-lobby-touch.png",
+      "sha256": "a01494b1ad2f934072a59fdb03d6595ce2ad02e23dd0ebc9c293622b372d82bd",
+      "bytes": 163116
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-owned-lobby-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-owned-lobby.png",
+      "sha256": "484fe8860e03f719d600dd26647e72476651896e52c710dea9f133cd33428c8d",
+      "bytes": 458682
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-owned-lobby.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-premium-product-odds.png",
+      "sha256": "82817b12adba718590c7dcab7218035bcde2895ed8c4b9894259651dbf6f9a28",
+      "bytes": 478398
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-premium-product-odds.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-real-equipment-on-card-touch.png",
+      "sha256": "ce24f6b741971d24d153cc9765846b135f43a6f3b4e23fe18b8e8740374258d7",
+      "bytes": 181461
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-real-equipment-on-card-touch.png.txt",
+      "sha256": "26a3ee8693d5b5e684ace844b690119440e7d6fce83031c248d9f4ca0f7ee5d8",
+      "bytes": 199
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-real-equipment-on-card.png",
+      "sha256": "a7b70a6929d27a5e4b67512c41cdaaa859d4b02149abab971e386e2707e26009",
+      "bytes": 579310
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-real-equipment-on-card.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-specific-sealed-product.png",
+      "sha256": "6c34ba92e2ca386de373cd53bb472157466a4ebb8256e3a1c2b0e8091bfb837a",
+      "bytes": 387158
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/nativity-Native01-specific-sealed-product.png.txt",
+      "sha256": "a1100a496da94aa2c4a22dbc814e15b147bbc72b0261fcb41191b24dcffdf554",
+      "bytes": 200
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/restoration-grade-guide.png",
+      "sha256": "f2a4c0f9ea68e8a219e2ce6a5885d369fe34c91047ee0564389d108f4de47b8e",
+      "bytes": 181576
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Screenshots/FantasyCards/Native01/restoration-grade-guide.png.txt",
+      "sha256": "4ea986ac62acffb01d7c3c92e32c2c994bd960e6cb5850ea79247f2bf64a84db",
+      "bytes": 199
+    }
+  ]
+}

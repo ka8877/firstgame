@@ -117,7 +117,19 @@ FACING = {
 }
 
 
+CANON_ART = {
+    'name': 'canon-art',
+    'revisions': {'FantasyCards': 'fm-canon-2026-11-09', 'PathOfDawn': 'gospel-canon-2026-11-09'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/CanonArt-2026-11-09' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'canon-art':
+        return CANON_ART
     if name == 'autonomy-g2':
         return FACING
     if name == 'autonomy-g1':

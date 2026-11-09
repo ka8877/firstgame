@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "doublefork",
+      "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture",
+      "dd2e1bddea40437795f530bdbd547832"
+    ],
+    "cleanupAndReportReservedSeconds": 12,
+    "containmentProvedEmpty": true,
+    "containmentReceipt": {
+      "bytes": 19144,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor-result.json",
+      "sha256": "82bec308f28fa04be66868d3c09124e2fbc63f7d4822d4f5c9ca14fe8aa06499"
+    },
+    "cwd": "/workspace/firstgame",
+    "environmentOverrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "exitCode": 124,
+    "finishedUtc": "2026-11-03T18:01:27.884965+00:00",
+    "label": "doublefork-timeout",
+    "log": {
+      "bytes": 1060,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/actual-command.stdout.log",
+      "sha256": "a5ef881a13a331920e4ca3e15e0baf59d95cfc6a47887e05eb1c4b9233b4512e"
+    },
+    "pid": 57331,
+    "privateProcessGroup": true,
+    "processContainment": "owned-descendants-v1",
+    "sharedSafeEndMonotonic": 20720.916956437,
+    "startedUtc": "2026-11-03T18:01:25.863606+00:00",
+    "supervisorIdentity": {
+      "pgid": 57330,
+      "pid": 57330,
+      "ppid": 57318,
+      "sid": 57330,
+      "startTicks": 2070391,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "supervisorStillAlive": false,
+    "timeoutSeconds": 1.9996915060000902
+  }
+]

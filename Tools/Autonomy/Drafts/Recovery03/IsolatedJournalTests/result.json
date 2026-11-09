@@ -1,0 +1,64 @@
+{
+  "scope": "isolated-tool-function-tests-only-not-product-Web-or-Root-approval",
+  "source": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+  "sourceSha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+  "fixtureRoot": "/tmp/firstgame-isolated-web-journal-e2llb58x",
+  "fakeRootAndLibraryTargetOverriddenInMemoryOnly": true,
+  "actualProjectLibraryOrAssetsModified": false,
+  "mainInvoked": false,
+  "UnityNetworkGitOrBrowserInvoked": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "passed": 6,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "absent-known-alias",
+      "status": "passed",
+      "details": {
+        "primaryStatus": "absent-verified-known-alias",
+        "temporaryStatus": "absent-verified-known-alias"
+      }
+    },
+    {
+      "name": "primary-exact-copy-reproduces-old-bug",
+      "status": "passed",
+      "details": {
+        "oldLogicalRegularCheckReproducedFalse": true,
+        "preservedSha256": "7a41a44e624f9d5b11cc7680e3523422a570a14c38ffae4b84cf6d1fdf3db22e"
+      }
+    },
+    {
+      "name": "temporary-exact-copy",
+      "status": "passed",
+      "details": {
+        "preservedSha256": "d0f889cf1f898f210782247b6c605f2281779e372db4a850014dd3230d6a9ede",
+        "onlyExactTemporaryLeafRead": true
+      }
+    },
+    {
+      "name": "unknown-alias-refused",
+      "status": "passed",
+      "details": {
+        "status": "blocked-or-partial",
+        "mappingVerified": false
+      }
+    },
+    {
+      "name": "journal-leaf-symlink-refused",
+      "status": "passed",
+      "details": {
+        "status": "blocked-or-partial",
+        "leafSymlinkRejected": true
+      }
+    },
+    {
+      "name": "expired-budget-refused",
+      "status": "passed",
+      "details": {
+        "status": "blocked-or-partial",
+        "originalUnchanged": true
+      }
+    }
+  ]
+}

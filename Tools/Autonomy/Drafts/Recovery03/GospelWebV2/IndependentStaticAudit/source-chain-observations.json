@@ -1,0 +1,116 @@
+{
+  "status": "source-chain-reading-only-before-declarative-plan-review",
+  "observedUtc": "2026-11-03T15:46:09.153600+00:00",
+  "sourceRows": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildCommands.cs",
+      "sha256": "33ad184566e522054a544628eea2e5f8b23a8e7fcc11cf0e5267ee70c22edce9",
+      "bytes": 5341
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/LegacyResourceIsolation.cs",
+      "sha256": "8c6bcd9d9c1815494c6c42f3c6c447b1ad2ea339d48278a60037e9493620f816",
+      "bytes": 13677
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/preserve-completed-build-proof.py",
+      "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+      "bytes": 16139
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    }
+  ],
+  "observedFlow": [
+    "owner fresh Native actual files verified/copied into new validation/Native/PathOfDawn before Web launch",
+    "nativity-task.sh PathOfDawn web safeattempt sources existing environment and checks idle",
+    "pipeline-state snapshot retains current three authored URP assets before Unity",
+    "Unity -batchmode -nographics -buildTarget WebGL -executeMethod FirstGame.Editor.BuildCommands.Web",
+    "BuildCommands: legacy recovery, ProjectSetup.Ensure, URP selection, BuildSourceBinding.Capture, journaled GUID-preserving LegacyResourceIsolation.Begin, strict BuildPlayer, actual BuildEvidence, isolation.Dispose and graphics restoration",
+    "after actual Unity exit: pipeline-state restore (Before/After original bytes) then restore-nativity-build-additions (fresh native reference, strict old inputs unchanged, only allowed additions retained/moved)",
+    "only actual entire build/restoration exit0 permits durable proof helper with copy-core-runtime",
+    "new actual runtime identity compared against exact retained G2 manifest/localbytes; any difference requires explicit paired recovery, no old-runtime/new-proof mixture"
+  ],
+  "freshNativeDependency": {
+    "consumer": "Tools/Build/restore-nativity-build-additions.py",
+    "exactPathRule": "FIRSTGAME_VALIDATION_ROOT/Native/PathOfDawn/inputs-before.json",
+    "requirement": "Original fresh actual Native inputs, binding/XML16/voice/source/fresh Root references separately preserved. Copy source bytes unchanged; never substitute historical G2 passed XML for a new Native result."
+  },
+  "oldG2RuntimeReference": {
+    "manifest": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    },
+    "gameRevision": "gospel-facing-2026-11-03",
+    "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
+    "coreCount": 5,
+    "core5": {
+      "games/path-of-dawn/Build/4523bdd68d479bc9f4a24570a8b10cae.data.unityweb": "3c65b1fb530463026308cfa36790b45ab13a7517448259c795f4b95d2fb9c56f",
+      "games/path-of-dawn/Build/5e3595463619393234912cd0c67502c5.wasm.unityweb": "3d67d55f15ecb1e35d750503bdb8d6d3b77403bd11cffcfe6925da4e23ef8d28",
+      "games/path-of-dawn/Build/95d79a5dda25f0f3e221598dfcacb3e6.framework.js.unityweb": "5a1ce7c1cda220177c6f165e2c0b75d168b9f8d01a436abb41ac7c289d8cabae",
+      "games/path-of-dawn/Build/96e4cbae9fca486e9e51d3cf5a7068c5.loader.js": "8c635f5247c4e4e356e8109a3b49c1a7f7081141040e64b36bb6a34ec6ca6b17",
+      "games/path-of-dawn/index.html": "eb3e1b5998d0a6bd458e84b403532001d939fc1c40513a786fd67dbb337c04b8"
+    },
+    "scope": "Only a static retained-manifest observation, not a new HTTP/public/byte-copy/build proof."
+  },
+  "planChecksRequired": [
+    "custom build/output/Proof paths absent and no symlink since .sh successful-output guard is default-root-only",
+    "all Python build/restore/proof commands use consistent fresh cache prefix plus dontwrite to avoid unbound cached project code",
+    "Native JSON and Web BuildInputs preserve their own original metadata/timestamps; compare complete files rows and fingerprint rather than entire JSON bytes",
+    "owner bounded launch must bind actual argv/env/log/exit and lease/deadline guard, proof helper does not witness Unity",
+    "all restoration steps exit0 before helper; partial/failure source/journal/evidence preserved without blind overwrite/retry",
+    "copy-core-runtime explicit; exact5 file names/set/hash/bytes and full runtime snapshots required",
+    "publishReady/baselineReady remain false until full independent recovery gate"
+  ],
+  "limits": {
+    "projectImport": false,
+    "compile": false,
+    "runnerExecution": false,
+    "testsOrUnity": false,
+    "networkOrGit": false,
+    "newNativeOrBuildSuccessObserved": false
+  }
+}

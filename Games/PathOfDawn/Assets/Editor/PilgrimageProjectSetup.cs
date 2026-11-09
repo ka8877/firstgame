@@ -11,7 +11,7 @@ namespace FirstGame.Editor
     /// <summary>Current free-field HD-2D entry. All old renderer assets remain as history.</summary>
     public static class PilgrimageProjectSetup
     {
-        public const string Revision = "gospel-facing-2026-11-03";
+        public const string Revision = "gospel-canon-2026-11-09";
         public const string AppType = "PathOfDawn.Presentation.GospelPilgrimageApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool preparing;

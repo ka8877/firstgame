@@ -116,7 +116,7 @@ namespace FirstGame.Validation
         }
 
         [Test]
-        public void AnnunciationAndJosephPrecedeTheCensusAndOtherGospelAccountIsExplicit()
+        public void AnnunciationAndJosephPrecedeTheCensusAndOtherGospelSourcesRemainInternal()
         {
             var story = GospelJourney.NewChronicleJourney().Chronicle;
             var references = new List<string>();
@@ -136,7 +136,7 @@ namespace FirstGame.Validation
             var growth = GospelChronicleCatalog.Quests.Single(q => q.Id == "birth-nazareth-growth");
             var matthew = GospelStorybookCatalog.GetDetails(growth, 0).Take(4).ToArray();
             Assert.That(matthew.All(s => s.Reference.StartsWith("마태복음 2:", StringComparison.Ordinal)), Is.True);
-            Assert.That(matthew.All(s => s.Scene.TimeLabel == "또 다른 복음서의 시선"), Is.True);
+            Assert.That(matthew.All(s => s.Scene.TimeLabel == "탄생 뒤"), Is.True);
             Assert.That(matthew[0].Turn.Text, Does.Contain("집에 들어가"));
             Assert.That(matthew[0].Turn.Text, Does.Not.Contain("세 명"));
         }

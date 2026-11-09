@@ -1,0 +1,46 @@
+{
+  "observedUtc": "2026-11-03T17:13:06.002093+00:00",
+  "pid": 41019,
+  "ppid": 1,
+  "pgid": 41019,
+  "sid": 41019,
+  "state": "R",
+  "startTicks": 1685570,
+  "uid": 1000,
+  "argv": [
+    "/workspace/tools/unity-editors/6000.3.26f1/Editor/Unity",
+    "-batchmode",
+    "-nographics",
+    "-projectPath",
+    "Games/FantasyCards",
+    "-buildTarget",
+    "WebGL",
+    "-executeMethod",
+    "FirstGame.Editor.BuildCommands.Web",
+    "-quit",
+    "-logFile",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FantasyCards/CardWeb01/web.log"
+  ],
+  "ownCommonBuildEvent": {
+    "label": "03-common-build",
+    "argv": [
+      "bash",
+      "Tools/Build/nativity-task.sh",
+      "FantasyCards",
+      "web",
+      "CardWeb01"
+    ],
+    "cwd": "/workspace/firstgame",
+    "startedUtc": "2026-11-03T16:57:01.699448+00:00",
+    "timeoutSeconds": 887.0674523000016,
+    "privateProcessGroup": true,
+    "environmentOverrides": {
+      "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+      "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+      "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    }
+  },
+  "cwdObservation": "PermissionError; not inferred"
+}

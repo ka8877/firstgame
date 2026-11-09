@@ -1,0 +1,74 @@
+{
+  "status": "unexecuted-template-not-acceptance",
+  "mode": "isolated-no-production",
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "productionInvocationCount": 0,
+  "baselineSignalsSent": null,
+  "unresolvedOwnedChildren": null,
+  "sourceLoadPolicy": "compile-exec-exact-hashed-bytes-no-pyc",
+  "executedSources": {
+    "helper": null,
+    "fixture": null,
+    "runner": null
+  },
+  "cases": {
+    "normal-exit": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null
+    },
+    "nonzero-exit": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null
+    },
+    "setsid-timeout": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "escapeEvidence": null
+    },
+    "doublefork-timeout": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "escapeEvidence": null
+    },
+    "root-exit-orphan": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "escapeEvidence": null
+    },
+    "ignore-term": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "escapeEvidence": null
+    },
+    "interrupt": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "afterTimeoutReceipt": null
+    },
+    "bystander": {
+      "passed": false,
+      "originals": [],
+      "containmentReceipt": null,
+      "escapeEvidence": null,
+      "bystanderReceipt": null
+    },
+    "stale-identity": {
+      "passed": false,
+      "originals": [],
+      "identityRefusalReceipt": null
+    }
+  },
+  "finishedUtc": null,
+  "publishReady": false,
+  "baselineReady": false,
+  "testNameCount": 9,
+  "actualSupervisorInvocationCount": null,
+  "actualDummyInvocationCount": null
+}

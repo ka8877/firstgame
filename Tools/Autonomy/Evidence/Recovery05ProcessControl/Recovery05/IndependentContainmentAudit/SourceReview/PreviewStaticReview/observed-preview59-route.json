@@ -1,0 +1,89 @@
+{
+  "kind": "source-only-grade-preview-route-finding",
+  "checkedUtc": "2026-11-03T17:53:24.917910+00:00",
+  "scope": "narrow ordinaryUI route audit; not runtime or complete preview approval",
+  "refs": {
+    "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview.py": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/capture_grade_preview.py",
+      "sha256": "59f685353bdd4d0d10498c084dc26bb8afb16c0044c44a93f8d9c6c450ddbce1",
+      "bytes": 11402
+    },
+    "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/visual-plan.template.json": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GradePreviewDraft/visual-plan.template.json",
+      "sha256": "24804f9982e3b5c11d82423834dad4a9a6a72c04a34cf9ae71e8ba45bd41ca19",
+      "bytes": 2472
+    },
+    "Games/FantasyCards/Assets/Game/Presentation/FmRestageUi.cs": {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmRestageUi.cs",
+      "sha256": "bfe8085f46149bf37801d992aedeb5f84dd3f87d313463ada415950a26c02ba4",
+      "bytes": 10074
+    },
+    "Games/FantasyCards/Assets/Game/Presentation/FmArcanaMenus.cs": {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmArcanaMenus.cs",
+      "sha256": "7970ef49a2a13db70c57fe2d7ab513bd5217d2f2c179dad3122ff77ef2376fc8",
+      "bytes": 19048
+    },
+    "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs": {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FantasyCardsCollection.cs",
+      "sha256": "43815a843e89bd770337461a592c748fb33bdb20beeada9991ca199a5f28bf9a",
+      "bytes": 19976
+    },
+    "Games/FantasyCards/Assets/Game/Presentation/FmRestorationOriginalArchive.cs": {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmRestorationOriginalArchive.cs",
+      "sha256": "c5e749f99f82cafd584ef2bcfe6b048ce1e0fb335be1d581e578211c3b55645a",
+      "bytes": 13586
+    },
+    "Tools/Autonomy/capability_desktop_plan.json": {
+      "file": "Tools/Autonomy/capability_desktop_plan.json",
+      "sha256": "8ba3e59daa539ac2207bba1c19fed506a88fe5ee389b70030e443449daf75e37",
+      "bytes": 35770
+    },
+    "Tools/Validation/nativity-web-smoke.py": {
+      "file": "Tools/Validation/nativity-web-smoke.py",
+      "sha256": "22ad10be9a41386b8ba14cc1ca2238bbaf9c72a469ee4cb1d55e21d75c32cb84",
+      "bytes": 85355
+    }
+  },
+  "sourceModified": false,
+  "actualExecution": false,
+  "rootVisualApproval": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "routeBlocked": true,
+  "reason": "Title click(.12,.88) opens OriginalArchive via FmRestageUi52. Next(.6185,.374) belongs to ShowCollection grade button, absent in OriginalArchive.",
+  "proposedOrdinaryRouteOnly": [
+    {
+      "screen": "title",
+      "click": [
+        0.2595,
+        0.879
+      ],
+      "purpose": "Free practice lobby"
+    },
+    {
+      "screen": "lobby",
+      "click": [
+        0.532,
+        0.9085
+      ],
+      "purpose": "Playable catalog ShowCollection(false)"
+    },
+    {
+      "screen": "catalog",
+      "click": [
+        0.6185,
+        0.374
+      ],
+      "purpose": "Actual grade guide"
+    },
+    {
+      "screen": "grade",
+      "click": [
+        0.7475,
+        0.9435
+      ],
+      "purpose": "Back to catalog"
+    }
+  ],
+  "observedScopePreservation": "Script/plan keep product-visual-only scope and all full162/163/PCM4/reload2/currentrules/save/public/Root gates outstanding; allreadyfalse. They do not make a wrong named capture into a visual pass."
+}

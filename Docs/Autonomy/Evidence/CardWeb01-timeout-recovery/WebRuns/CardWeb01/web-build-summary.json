@@ -1,0 +1,247 @@
+{
+  "status": "pending-restoration",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "startedUtc": "2026-11-03T16:56:59.516654+00:00",
+  "historicalProofReconstructed": false,
+  "automaticRetryOrRestoration": false,
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/RecordedHarness/Tools/Autonomy/recovery-card-web.py",
+    "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+    "bytes": 43017
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/contract.executed.json",
+    "sha256": "674a3a9bf2783bf1a3182cf956fe288a94305cace14534c908bb33cd0e9ff092",
+    "bytes": 9509
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/command-plan.executed.json",
+    "sha256": "8df5ace5af87b07896e329da71b8ef8246e7a1ab4c3035937ed0224f8c73df7b",
+    "bytes": 2700
+  },
+  "leaseSnapshot": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/owned-lease.executed.json",
+    "sha256": "c04dfe555cb4ebc01053d6b55d1b66ce4b50f513913a393dc291ae9b592f06d9",
+    "bytes": 481
+  },
+  "selectedNative": {
+    "summary": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
+      "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
+      "bytes": 15211
+    },
+    "binding": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
+      "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
+      "bytes": 900
+    },
+    "xml": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
+      "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
+      "bytes": 10572
+    },
+    "inputsBefore": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/inputs-before.json",
+      "sha256": "f2cae7db1f4add1d4cbc1644c063fe65e29db25b9e532b3697ad16fe26ee2eff",
+      "bytes": 7183504
+    },
+    "executedContract": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-contract.executed.json",
+      "sha256": "85cb42d00c143b4c951261690cb0a2d0bf5f2c571c4b33e82052ec3337891204",
+      "bytes": 3609
+    },
+    "rootReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+      "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+      "bytes": 6148
+    }
+  },
+  "commonBuild": {
+    "label": "03-common-build",
+    "argv": [
+      "bash",
+      "Tools/Build/nativity-task.sh",
+      "FantasyCards",
+      "web",
+      "CardWeb01"
+    ],
+    "cwd": "/workspace/firstgame",
+    "startedUtc": "2026-11-03T16:57:01.699448+00:00",
+    "timeoutSeconds": 887.0674523000016,
+    "privateProcessGroup": true,
+    "environmentOverrides": {
+      "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+      "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+      "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONOPTIMIZE": "0"
+    },
+    "pid": 40999,
+    "actualWaitBudgetSecondsAfterSpawn": 887.0667263249998,
+    "ownedGroupMembersAfterCleanup": [],
+    "ownedGroupObservedEmpty": true,
+    "exitCode": 124,
+    "finishedUtc": "2026-11-03T17:11:48.773730+00:00",
+    "log": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/launcher-build.log",
+      "sha256": "f46c9388fe556b38de1218e0c711671a70fc2cf68084aaf60d4e0095f4119c7a",
+      "bytes": 598
+    }
+  },
+  "error": "ValueError: Actual common media/build/restoration did not exit0",
+  "failureState": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/FailureState/state.json",
+    "sha256": "d19ba5edeeada4c333caa434b76be7740a98a18c2a3f39154e80ef995a73fe74",
+    "bytes": 7185610
+  },
+  "finishedUtc": "2026-11-03T17:11:59.726466+00:00",
+  "processEvents": [
+    {
+      "label": "00-initial-guard",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/firstgame/Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-03T16:56:57.586811+00:00",
+      "timeoutSeconds": 45,
+      "privateProcessGroup": true,
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "pid": 40935,
+      "actualWaitBudgetSecondsAfterSpawn": 45,
+      "ownedGroupMembersAfterCleanup": [],
+      "ownedGroupObservedEmpty": true,
+      "exitCode": 0,
+      "finishedUtc": "2026-11-03T16:56:59.391517+00:00"
+    },
+    {
+      "label": "01-initial-idle",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/firstgame/Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-03T16:56:59.391632+00:00",
+      "timeoutSeconds": 30,
+      "privateProcessGroup": true,
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "pid": 40966,
+      "actualWaitBudgetSecondsAfterSpawn": 30,
+      "ownedGroupMembersAfterCleanup": [],
+      "ownedGroupObservedEmpty": true,
+      "exitCode": 0,
+      "finishedUtc": "2026-11-03T16:56:59.496214+00:00"
+    },
+    {
+      "label": "02-before-build-guard",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/firstgame/Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-03T16:56:59.521596+00:00",
+      "timeoutSeconds": 45,
+      "privateProcessGroup": true,
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "pid": 40967,
+      "actualWaitBudgetSecondsAfterSpawn": 45,
+      "ownedGroupMembersAfterCleanup": [],
+      "ownedGroupObservedEmpty": true,
+      "exitCode": 0,
+      "finishedUtc": "2026-11-03T16:57:01.556825+00:00"
+    },
+    {
+      "label": "02b-before-build-idle",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/firstgame/Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-03T16:57:01.597669+00:00",
+      "timeoutSeconds": 30,
+      "privateProcessGroup": true,
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "pid": 40998,
+      "actualWaitBudgetSecondsAfterSpawn": 30,
+      "ownedGroupMembersAfterCleanup": [],
+      "ownedGroupObservedEmpty": true,
+      "exitCode": 0,
+      "finishedUtc": "2026-11-03T16:57:01.698897+00:00"
+    },
+    {
+      "label": "03-common-build",
+      "argv": [
+        "bash",
+        "Tools/Build/nativity-task.sh",
+        "FantasyCards",
+        "web",
+        "CardWeb01"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-03T16:57:01.699448+00:00",
+      "timeoutSeconds": 887.0674523000016,
+      "privateProcessGroup": true,
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-c1-recovery04-cardweb01-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "pid": 40999,
+      "actualWaitBudgetSecondsAfterSpawn": 887.0667263249998,
+      "ownedGroupMembersAfterCleanup": [],
+      "ownedGroupObservedEmpty": true,
+      "exitCode": 124,
+      "finishedUtc": "2026-11-03T17:11:48.773730+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/launcher-build.log",
+        "sha256": "f46c9388fe556b38de1218e0c711671a70fc2cf68084aaf60d4e0095f4119c7a",
+        "bytes": 598
+      }
+    }
+  ],
+  "executionLimit": {
+    "sharedMaximumSeconds": 900,
+    "leaseReserveSeconds": 60,
+    "originalMonotonicBatchStart": 16826.869044437,
+    "finalMonotonicSafeEnd": 17726.869044437
+  },
+  "wholeAttemptIndex": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/WebRuns/CardWeb01/whole-attempt-before-summary.json",
+    "sha256": "7349d52523f2353bc8b0c53f15f03a7cb6e182bab36c8f0f1c4e0fbf6e348a0a",
+    "bytes": 12526
+  }
+}

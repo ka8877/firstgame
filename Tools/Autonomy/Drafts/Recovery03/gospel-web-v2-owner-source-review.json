@@ -1,0 +1,31 @@
+{
+  "checkedUtc": "2026-11-03T16:25:54.658355+00:00",
+  "reviewer": "/root/release_recovery",
+  "scope": "owner-static-delta-and-syntax-only-not-Root-approval",
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+    "bytes": 57195,
+    "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7"
+  },
+  "syntaxCompileOnly": true,
+  "moduleImported": false,
+  "installedAtExecutableToolsPath": false,
+  "actualRun": false,
+  "deltaChecked": [
+    "single exact Library alias logical/readlink/resolved mapping",
+    "only primary journal and exact .json.tmp raw preservation/recheck",
+    "no asset backup or automatic restoration",
+    "strict absence of both journal leaves before/after",
+    "Recovery03 exact output roots",
+    "unchanged Native16/Root/FP255e/27 source pins/full136/copycore5 and shared900/lease60"
+  ],
+  "actualKnownLibrary": {
+    "logical": "Games/PathOfDawn/Library",
+    "isSymlink": true,
+    "readlink": "/tmp/firstgame-reprise-cache/PathOfDawn/Library",
+    "resolved": "/tmp/firstgame-reprise-cache/PathOfDawn/Library"
+  },
+  "requiredRootFinalStaticReview": "pending-parent-currently-completed-no-substitution",
+  "publishReady": false,
+  "baselineReady": false
+}

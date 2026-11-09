@@ -1,0 +1,29 @@
+{
+  "label": "parent-exit-orphan",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+    "parent-exit-orphan",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/DummyOutputs",
+    "owned-parent-exit-orphan-Candidate03"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+  "startedUtc": "2026-11-03T17:46:40.096243+00:00",
+  "timeoutSeconds": 0.9992845239976305,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 54634,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+    "sha256": "0e74adf5d88344f1139b0757076703f98d55a259b31440da549e9d2ecd658527",
+    "bytes": 18049
+  },
+  "finishedUtc": "2026-11-03T17:46:40.415000+00:00"
+}

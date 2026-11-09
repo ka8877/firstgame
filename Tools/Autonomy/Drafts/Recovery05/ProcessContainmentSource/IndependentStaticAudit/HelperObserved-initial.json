@@ -1,0 +1,47 @@
+{
+  "status": "source-only-first-candidate-review-open-findings",
+  "observedUtc": "2026-11-03T17:37:10.446090+00:00",
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/owned_process_containment.py",
+    "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+    "bytes": 31860
+  },
+  "scope": "AST/source/file SHA only. No live proc read, signals, prctl/ctypes or project import/execute, tests, Unity, network or Git.",
+  "positiveStaticFindings": [
+    "Dedicated supervisor sets/verifies subreaper before the single root spawn and normalizes SIGCHLD.",
+    "WNOWAIT peek None does not mean empty; ECHILD only establishes echild when actual root exit is known.",
+    "Root exact waitpid single-consumer; adopted peek child is exact-waited without global waitpid status theft.",
+    "Signals use held pidfds with identity/UID/baseline checks; no numeric PID or process-group fallback.",
+    "Outer sends only cancellation TERM to its verified sentinel then waits; no PGID KILL that destroys the reaper first.",
+    "Pre-run persistent auxiliary evidence supports lane.run=None with later bytecopy; production default acceptance null is blocked."
+  ],
+  "openFindings": [
+    {
+      "id": "ROOT-PID-REUSE-01",
+      "class": "bounded-cleanup-liveness",
+      "location": "Tracker.reap_and_check root numeric-PID branch",
+      "reason": "After original root has been reaped, an adopted descendant may reuse that numeric PID; root branch repeatedly returns instead of exact-reaping the new child.",
+      "fix": "Use root-only branch while root_exit is None; after root reaping, same numeric PID is ordinary adopted child."
+    },
+    {
+      "id": "ACCEPTANCE-SOURCE-SET-02",
+      "class": "production-admission-proof-binding",
+      "location": "validate_acceptance",
+      "reason": "Checks helperSHA/high-level9 passed cases and Root but does not require actual fixture/driver executed source fullrefs; case originals may be absent.",
+      "fix": "Pin executed helper/fixture/runner sources and actual receipt/spec/lineage/stdout originals per required case, and Root-bind that exact source set/report."
+    },
+    {
+      "id": "PIDFD-RESOURCE-03",
+      "class": "long-churn-resource-and-receipt-loss",
+      "location": "pidfd_exited/select.select and Tracker record lifecycle",
+      "reason": "Exited/reaped FDs retained until final close can exhaust descriptors; select.select additionally rejects FD>=FD_SETSIZE, including unguarded final tracker.live call.",
+      "fix": "Use poll and retire verified exited FDs while retaining identity tombstones, with failure-safe final receipt."
+    }
+  ],
+  "documentedBoundary": "Pre-signal UID observation and kernel permission check do not atomically freeze target credentials. pidfd prevents PID reuse mis-targeting; no hostile credential-changing containment guarantee claimed.",
+  "runtimeClaims": {
+    "actualCounterexampleReproduced": false,
+    "actualKernelSemanticsVerified": false,
+    "productionApproved": false
+  }
+}

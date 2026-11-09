@@ -1,0 +1,41 @@
+{
+  "adoptedUtc": "2026-11-03T18:04:16.118510+00:00",
+  "scope": "CardWeb02-current-product-build-only-owned-process-control",
+  "installed": [
+    {
+      "file": "Tools/Environment/owned-process-containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Tools/Autonomy/recovery-card-web.py",
+      "sha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+      "bytes": 40547
+    }
+  ],
+  "heldPredecessor": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/Adoption/held-card-web-predecessor.py",
+    "sha256": "6c0f470be33f8c261651b40a1151ef70760a69a39226210ae019d0582e69f598",
+    "bytes": 43337
+  },
+  "actualProcessTestReport": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+    "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6",
+    "bytes": 69227
+  },
+  "independentSourceReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+    "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd",
+    "bytes": 2324
+  },
+  "operatorReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+    "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab",
+    "bytes": 3316
+  },
+  "newUnityInvocations": 0,
+  "GospelWeb": "No installation or execution; finalRootsource review remains pending.",
+  "publishReady": false,
+  "baselineReady": false,
+  "sourceProductChange": "None. Current Card35334/FP42b and Gospel255e will remain independently bound; existing Native/source/restore/Root/browser/public gates preserved."
+}

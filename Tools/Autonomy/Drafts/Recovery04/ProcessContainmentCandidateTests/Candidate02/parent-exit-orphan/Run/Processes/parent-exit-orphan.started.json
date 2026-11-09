@@ -1,0 +1,19 @@
+{
+  "label": "parent-exit-orphan",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/process_fixture.py",
+    "parent-exit-orphan",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/DummyOutputs",
+    "owned-parent-exit-orphan-Candidate02"
+  ],
+  "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02",
+  "startedUtc": "2026-11-03T17:35:34.409904+00:00",
+  "timeoutSeconds": 0.9995459599995229,
+  "privateProcessGroup": true,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

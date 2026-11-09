@@ -276,6 +276,11 @@ namespace PathOfDawn.Presentation
 
         void ShowStory()
         {
+            if (npcRoot != null)
+            {
+                var partner = npcRoot.GetComponentInChildren<GospelPilgrimageActor>();
+                if (partner != null) partner.FaceConversationPartner(Player.Position);
+            }
             Player.Enabled = false;
             CameraRig.InputEnabled = false;
             int eventIndex = Chronicle.QuestIndex;

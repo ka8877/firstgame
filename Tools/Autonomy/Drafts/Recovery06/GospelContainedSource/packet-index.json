@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "status": "frozen-source-only-independently-reviewed-held-for-actual-root-source-approval",
+  "scope": "gospel-contained-recovery06-review-packet",
+  "publishReady": false,
+  "baselineReady": false,
+  "actualRootSourceApproval": null,
+  "productionHeld": true,
+  "actualGospelBuildInvocations": 0,
+  "frozenUtc": "2026-11-03T18:21:51.034932+00:00",
+  "draftAuthor": "/root/release_recovery/gospel_product_native_draft",
+  "soleExecutionOwner": "/root/release_recovery",
+  "permittedWriteScope": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft",
+  "futureOutputRunRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01",
+  "futureBuildRoot": "/tmp/firstgame-c1-recovery06-gospelweb01-builds",
+  "caller": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+    "sha256": "cfe661216581886adff3ef07b03f89f54e0354383edae9afb763e1e1f3d0f547",
+    "bytes": 57482
+  },
+  "sourceContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/source-contract.json",
+    "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1",
+    "bytes": 23287
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/command-plan.json",
+    "sha256": "05d32b9e2b80e22d946aec94a75815ed3f560a7ad18e55f59f74ecfd0a225b5b",
+    "bytes": 6563
+  },
+  "heldExecutionEnvelopeTemplate": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/execution-contract.template.json",
+    "sha256": "c626d2d5ac4492120abc5f333104cc7ac8dd84c331f4ac5b56c58eae0b1632ee",
+    "bytes": 466
+  },
+  "independentStaticReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/independent-source-packet-review-01.json",
+    "sha256": "68c9bb0ac189653cac17a697144cfe0286754ae5a785b1ee736d69400811f06b",
+    "bytes": 2069
+  },
+  "rawBaseCaller": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Base/recovery-gospel-web.b365.py",
+    "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+    "bytes": 54692
+  },
+  "fullDiff": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/caller.diff",
+    "sha256": "93ceefff962ce6cc9127eef35c5eaf3c982a1f12f5955c321597b07aa834dfe8",
+    "bytes": 9026
+  },
+  "fileCount": 17,
+  "totalIndexedBytes": 285314,
+  "excludes": [
+    "packet-index.json (self)"
+  ],
+  "files": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Base/recovery-gospel-web.b365.py",
+      "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+      "bytes": 54692
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/REPORT-01.md",
+      "sha256": "b5684408df2263cb6cd4e5eacfcb20a27c91c55b3dc01a8399572c496e42700c",
+      "bytes": 3553
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/ReviewedSource01/command-plan.json",
+      "sha256": "05d32b9e2b80e22d946aec94a75815ed3f560a7ad18e55f59f74ecfd0a225b5b",
+      "bytes": 6563
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/ReviewedSource01/execution-contract.template.json",
+      "sha256": "c626d2d5ac4492120abc5f333104cc7ac8dd84c331f4ac5b56c58eae0b1632ee",
+      "bytes": 466
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/ReviewedSource01/recovery-gospel-web.py",
+      "sha256": "cfe661216581886adff3ef07b03f89f54e0354383edae9afb763e1e1f3d0f547",
+      "bytes": 57482
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/ReviewedSource01/source-contract.json",
+      "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1",
+      "bytes": 23287
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/independent-source-packet-review-01.json",
+      "sha256": "68c9bb0ac189653cac17a697144cfe0286754ae5a785b1ee736d69400811f06b",
+      "bytes": 2069
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/IndependentStaticAudit/observed-records-01.json",
+      "sha256": "3cfeaa6aba3eb1cd4e608ddbe2fe0a95da6a652297feddabd5ced151b25b8955",
+      "bytes": 16314
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+      "sha256": "cfe661216581886adff3ef07b03f89f54e0354383edae9afb763e1e1f3d0f547",
+      "bytes": 57482
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/README.md",
+      "sha256": "a9214f2fd8ffaeb50fc579208c63bcac3c2859b61e3d3ff6bf5ce1f861a1d989",
+      "bytes": 7524
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/ast-comparison.json",
+      "sha256": "47a43702efba225de3ebcc59eb738ba220ddbd7779687075bd4063f64a39b46c",
+      "bytes": 1584
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/caller.diff",
+      "sha256": "93ceefff962ce6cc9127eef35c5eaf3c982a1f12f5955c321597b07aa834dfe8",
+      "bytes": 9026
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/command-plan.json",
+      "sha256": "05d32b9e2b80e22d946aec94a75815ed3f560a7ad18e55f59f74ecfd0a225b5b",
+      "bytes": 6563
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/execution-contract.template.json",
+      "sha256": "c626d2d5ac4492120abc5f333104cc7ac8dd84c331f4ac5b56c58eae0b1632ee",
+      "bytes": 466
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/root-source-approval.NOT-APPROVED.template.json",
+      "sha256": "0b3343f128b459318477d9f641b936e8bc848f778f4add24673a8f3d9c2171fe",
+      "bytes": 2411
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/source-contract.json",
+      "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1",
+      "bytes": 23287
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/source-pin-ledger.json",
+      "sha256": "983d4aa096445d9e5fce49c4435f6ce0ccfcf36cef595cffc09250faa5006770",
+      "bytes": 12545
+    }
+  ],
+  "limits": [
+    "This immutable source packet is not actual Root Gospel source approval, a build, a test, or permission to publish.",
+    "Outer rootApproval remains null. The proposed source refuses before any controlled child.",
+    "dc24 explicitly accepted CardWeb02 use; its exact unchanged-helper tool evidence is retained, without expanding historical scope. Actual Root must review Gospel application of it separately.",
+    "Only after actual Root source approval and a fresh Recovery06 bounded lease may sole owner choose installation and actual run.",
+    "Original Native16, full source/voice pins, physical journal alias/temporary leaf, all restoration/runtime/raw proof gates, unchanged accepted9d budget900/lease60/cleanup12 and all final paired/native/browser/public/Root/Core/CI/SHA/985MB/rollback requirements remain separate."
+  ]
+}

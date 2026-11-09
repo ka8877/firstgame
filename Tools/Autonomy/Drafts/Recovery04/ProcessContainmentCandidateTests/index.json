@@ -1,0 +1,866 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-11-03T17:36:27.641692+00:00",
+  "scope": "two-actual-isolated-failed-candidate-process-tests-not-production-or-acceptance",
+  "candidateSha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+  "fixtureSha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3",
+  "Candidate01": {
+    "normalSandbox": true,
+    "passed": 0,
+    "failed": 6
+  },
+  "Candidate02": {
+    "productionExecutionPermissions": true,
+    "passed": 0,
+    "failed": 6
+  },
+  "observedFailure": "Fresh supervisor refused before dummy-root spawn because /proc/self/task/<pid>/children was not found. Both runs remain failed; root cause not inferred from permission alone.",
+  "unrelatedSentinelSurvivedAllCases": true,
+  "UnityGameBrowserNetworkGitInvokedByTests": false,
+  "files": [
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/Sentinel/unrelated-baseline-sentinel-52975.json",
+        "bytes": 186,
+        "sha256": "81c24be21bfa4ead16015ae45cd4423132acb384e5ca75ddaae92bab2288bd7a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/Sentinel/unrelated-baseline-sentinel-52975.json",
+        "bytes": 186,
+        "sha256": "81c24be21bfa4ead16015ae45cd4423132acb384e5ca75ddaae92bab2288bd7a"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/Run/Processes/doublefork.finished.json",
+        "bytes": 1496,
+        "sha256": "7d30aec74983f6e0f0143085cc7f1b8f51530399fb20cda76f41782e7c286b4e"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/doublefork/Run/Processes/doublefork.finished.json",
+        "bytes": 1496,
+        "sha256": "7d30aec74983f6e0f0143085cc7f1b8f51530399fb20cda76f41782e7c286b4e"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/Run/Processes/doublefork.started.json",
+        "bytes": 829,
+        "sha256": "c88b5b75b48fe189bba83ce28b43f4453d4dfc1565d5613f4e5bd108342494c1"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/doublefork/Run/Processes/doublefork.started.json",
+        "bytes": 829,
+        "sha256": "c88b5b75b48fe189bba83ce28b43f4453d4dfc1565d5613f4e5bd108342494c1"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/command-spec.json",
+        "bytes": 1946,
+        "sha256": "2e4171dbd6866d90bf42d89788d8071be6c52c8d6c8fa399b59b3891ead0bdb0"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/command-spec.json",
+        "bytes": 1946,
+        "sha256": "2e4171dbd6866d90bf42d89788d8071be6c52c8d6c8fa399b59b3891ead0bdb0"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+        "bytes": 1261,
+        "sha256": "7caab8fbc1aaabb42284711fbe16ee6334688531b51b0c3bbc9aa27e1515a90e"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+        "bytes": 1261,
+        "sha256": "7caab8fbc1aaabb42284711fbe16ee6334688531b51b0c3bbc9aa27e1515a90e"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/doublefork/SupervisorEvidence/01-doublefork/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/exit-seven/Run/Processes/exit-seven.finished.json",
+        "bytes": 1496,
+        "sha256": "9c57ac6b8074de111ed493dc748b88235b7f0cf496b964a87cb4a478d3bc09be"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/exit-seven/Run/Processes/exit-seven.finished.json",
+        "bytes": 1496,
+        "sha256": "9c57ac6b8074de111ed493dc748b88235b7f0cf496b964a87cb4a478d3bc09be"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/exit-seven/Run/Processes/exit-seven.started.json",
+        "bytes": 829,
+        "sha256": "e384e2e78df90c1e960369753de30d41a98af66314964ab546e98a6761f60b12"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/exit-seven/Run/Processes/exit-seven.started.json",
+        "bytes": 829,
+        "sha256": "e384e2e78df90c1e960369753de30d41a98af66314964ab546e98a6761f60b12"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/command-spec.json",
+        "bytes": 1945,
+        "sha256": "e3d886793097d44978965f96be58ade39ce57be648c8403720bec2993c8444ad"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/command-spec.json",
+        "bytes": 1945,
+        "sha256": "e3d886793097d44978965f96be58ade39ce57be648c8403720bec2993c8444ad"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+        "bytes": 1260,
+        "sha256": "f3a249ce667e7807ca6f08df086afc1016a37d95b05ed2d95d32b540d7ab98a3"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+        "bytes": 1260,
+        "sha256": "f3a249ce667e7807ca6f08df086afc1016a37d95b05ed2d95d32b540d7ab98a3"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/exit-seven/SupervisorEvidence/01-exit-seven/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/normal/Run/Processes/normal.finished.json",
+        "bytes": 1464,
+        "sha256": "0322e6e3674625b4cea6b174046057082874be9c856fd9fb87e37bfb35fffb6b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/normal/Run/Processes/normal.finished.json",
+        "bytes": 1464,
+        "sha256": "0322e6e3674625b4cea6b174046057082874be9c856fd9fb87e37bfb35fffb6b"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/normal/Run/Processes/normal.started.json",
+        "bytes": 813,
+        "sha256": "23719ae9439c9957761673ed78f5cba380fc4dacb426818ee99103644cede90a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/normal/Run/Processes/normal.started.json",
+        "bytes": 813,
+        "sha256": "23719ae9439c9957761673ed78f5cba380fc4dacb426818ee99103644cede90a"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/normal/SupervisorEvidence/01-normal/command-spec.json",
+        "bytes": 1922,
+        "sha256": "177e7240732e44aa94a5e027fb19ee1b07b4b8d949625e94c901c1d20d9a84b9"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/normal/SupervisorEvidence/01-normal/command-spec.json",
+        "bytes": 1922,
+        "sha256": "177e7240732e44aa94a5e027fb19ee1b07b4b8d949625e94c901c1d20d9a84b9"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/normal/SupervisorEvidence/01-normal/supervisor-result.json",
+        "bytes": 1249,
+        "sha256": "c82dea5d6ec1b0d158abdabfd65fab48c70f442295a536c37129b667b6c224b0"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/normal/SupervisorEvidence/01-normal/supervisor-result.json",
+        "bytes": 1249,
+        "sha256": "c82dea5d6ec1b0d158abdabfd65fab48c70f442295a536c37129b667b6c224b0"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/normal/SupervisorEvidence/01-normal/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/normal/SupervisorEvidence/01-normal/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py",
+        "bytes": 31860,
+        "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/owned_process_containment.py",
+        "bytes": 31860,
+        "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/Run/Processes/parent-exit-orphan.finished.json",
+        "bytes": 1560,
+        "sha256": "248a4280671441880198325cb308b3b3633b690b814714d0951712aa4e08a754"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/parent-exit-orphan/Run/Processes/parent-exit-orphan.finished.json",
+        "bytes": 1560,
+        "sha256": "248a4280671441880198325cb308b3b3633b690b814714d0951712aa4e08a754"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/Run/Processes/parent-exit-orphan.started.json",
+        "bytes": 861,
+        "sha256": "fd3a50be1f3a190e8f2f94c541feedc7c26346890030ffea9a0cca4192f2aab2"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/parent-exit-orphan/Run/Processes/parent-exit-orphan.started.json",
+        "bytes": 861,
+        "sha256": "fd3a50be1f3a190e8f2f94c541feedc7c26346890030ffea9a0cca4192f2aab2"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/command-spec.json",
+        "bytes": 1994,
+        "sha256": "01f883bfea6dcf5b4c32e50bcc2e43ff60c7819b169190e16c8f410d247cff0a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/command-spec.json",
+        "bytes": 1994,
+        "sha256": "01f883bfea6dcf5b4c32e50bcc2e43ff60c7819b169190e16c8f410d247cff0a"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+        "bytes": 1285,
+        "sha256": "c8707a6c474de6c96a6dd0be7e88e04bdbb0b2be8911b9a9faf4df15d46fc330"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+        "bytes": 1285,
+        "sha256": "c8707a6c474de6c96a6dd0be7e88e04bdbb0b2be8911b9a9faf4df15d46fc330"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/process_fixture.py",
+        "bytes": 1933,
+        "sha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/process_fixture.py",
+        "bytes": 1933,
+        "sha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/result.json",
+        "bytes": 8171,
+        "sha256": "7f949db2482572ce04d70d4ff404c39bf3039c74141b62684b8058a98ae55073"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/result.json",
+        "bytes": 8171,
+        "sha256": "7f949db2482572ce04d70d4ff404c39bf3039c74141b62684b8058a98ae55073"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/Run/Processes/spawn-ignore-term.finished.json",
+        "bytes": 1552,
+        "sha256": "453f6a4b170fade42144698343ea6cc09af2ab2172b5ae3531df93dac3f68339"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-ignore-term/Run/Processes/spawn-ignore-term.finished.json",
+        "bytes": 1552,
+        "sha256": "453f6a4b170fade42144698343ea6cc09af2ab2172b5ae3531df93dac3f68339"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/Run/Processes/spawn-ignore-term.started.json",
+        "bytes": 857,
+        "sha256": "681f05242ca065491f0850a6073b9cb6d96af1cc70c825dc443a9bf5bd0c2240"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-ignore-term/Run/Processes/spawn-ignore-term.started.json",
+        "bytes": 857,
+        "sha256": "681f05242ca065491f0850a6073b9cb6d96af1cc70c825dc443a9bf5bd0c2240"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/command-spec.json",
+        "bytes": 1988,
+        "sha256": "ea63846794adcb32d1cb0f6f296cdb16e51bed2149d6362398256e6033450900"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/command-spec.json",
+        "bytes": 1988,
+        "sha256": "ea63846794adcb32d1cb0f6f296cdb16e51bed2149d6362398256e6033450900"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+        "bytes": 1282,
+        "sha256": "00ba0805dc58815e79707ede0ef80df1413fd079e9a9b514dce8d6422436eb8c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+        "bytes": 1282,
+        "sha256": "00ba0805dc58815e79707ede0ef80df1413fd079e9a9b514dce8d6422436eb8c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/Run/Processes/spawn-setsid.finished.json",
+        "bytes": 1512,
+        "sha256": "5e77140176cdf4760ba5fa3a533a9387353436687253d611f0c6b226f87a38d7"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-setsid/Run/Processes/spawn-setsid.finished.json",
+        "bytes": 1512,
+        "sha256": "5e77140176cdf4760ba5fa3a533a9387353436687253d611f0c6b226f87a38d7"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/Run/Processes/spawn-setsid.started.json",
+        "bytes": 837,
+        "sha256": "1615cfd40a882587dc8124c13ab102f6fd72b6d98667aab0fcfa72fafba781a6"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-setsid/Run/Processes/spawn-setsid.started.json",
+        "bytes": 837,
+        "sha256": "1615cfd40a882587dc8124c13ab102f6fd72b6d98667aab0fcfa72fafba781a6"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/command-spec.json",
+        "bytes": 1958,
+        "sha256": "b83161a3a090cc0ed5a7a95d152d5fa5ff6c59d4bbcb03e232ad75a26d3a5aff"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/command-spec.json",
+        "bytes": 1958,
+        "sha256": "b83161a3a090cc0ed5a7a95d152d5fa5ff6c59d4bbcb03e232ad75a26d3a5aff"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+        "bytes": 1267,
+        "sha256": "dc5c50ebe659265e20c65bf2232d40c8b49bfdfd152dbf6ab47fd1e3c75d6577"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+        "bytes": 1267,
+        "sha256": "dc5c50ebe659265e20c65bf2232d40c8b49bfdfd152dbf6ab47fd1e3c75d6577"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate01/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/Sentinel/unrelated-baseline-sentinel-53318.json",
+        "bytes": 186,
+        "sha256": "7c550a22ba2598f3c6991902a71e1b35fa4411734d27a16c8620a1f78fc1d38c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/Sentinel/unrelated-baseline-sentinel-53318.json",
+        "bytes": 186,
+        "sha256": "7c550a22ba2598f3c6991902a71e1b35fa4411734d27a16c8620a1f78fc1d38c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/doublefork/Run/Processes/doublefork.finished.json",
+        "bytes": 1496,
+        "sha256": "bcb613542ab54f472f1e7732b8166771281d68c95e29454a303f739a963513d9"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/doublefork/Run/Processes/doublefork.finished.json",
+        "bytes": 1496,
+        "sha256": "bcb613542ab54f472f1e7732b8166771281d68c95e29454a303f739a963513d9"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/doublefork/Run/Processes/doublefork.started.json",
+        "bytes": 829,
+        "sha256": "77a6de8eeb9c794b62410e5d1ac13b81bf61b2a9e1811b38ed4491e38b17c17c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/doublefork/Run/Processes/doublefork.started.json",
+        "bytes": 829,
+        "sha256": "77a6de8eeb9c794b62410e5d1ac13b81bf61b2a9e1811b38ed4491e38b17c17c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/command-spec.json",
+        "bytes": 1944,
+        "sha256": "fe0991944562dfd439976fc2df7fd30fd7e9dd1bb8390d5c3b961970ca86476e"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/command-spec.json",
+        "bytes": 1944,
+        "sha256": "fe0991944562dfd439976fc2df7fd30fd7e9dd1bb8390d5c3b961970ca86476e"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+        "bytes": 1261,
+        "sha256": "f830141c4125e5f9eadff920578e4190273b7516cae53f1724c95808f57b50ac"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+        "bytes": 1261,
+        "sha256": "f830141c4125e5f9eadff920578e4190273b7516cae53f1724c95808f57b50ac"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/doublefork/SupervisorEvidence/01-doublefork/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/exit-seven/Run/Processes/exit-seven.finished.json",
+        "bytes": 1496,
+        "sha256": "9a27013bc2af00c1e47a790555d5af24e88054e3e290653d246d80e56cabc20c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/exit-seven/Run/Processes/exit-seven.finished.json",
+        "bytes": 1496,
+        "sha256": "9a27013bc2af00c1e47a790555d5af24e88054e3e290653d246d80e56cabc20c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/exit-seven/Run/Processes/exit-seven.started.json",
+        "bytes": 829,
+        "sha256": "facccbdd6983b99538c854ac4ff7d3a28bd9f1db51b2234aca28b0fc4df0ad7c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/exit-seven/Run/Processes/exit-seven.started.json",
+        "bytes": 829,
+        "sha256": "facccbdd6983b99538c854ac4ff7d3a28bd9f1db51b2234aca28b0fc4df0ad7c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/command-spec.json",
+        "bytes": 1943,
+        "sha256": "2a0f3c15d27dcb49edf70d9dced8652f796f539699975c3a27ea740f0b619f3d"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/command-spec.json",
+        "bytes": 1943,
+        "sha256": "2a0f3c15d27dcb49edf70d9dced8652f796f539699975c3a27ea740f0b619f3d"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+        "bytes": 1260,
+        "sha256": "8ea96fb863964c47f229306dcd77ffe7f24b75a2faae125adcaee201db26fac2"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+        "bytes": 1260,
+        "sha256": "8ea96fb863964c47f229306dcd77ffe7f24b75a2faae125adcaee201db26fac2"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/exit-seven/SupervisorEvidence/01-exit-seven/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/normal/Run/Processes/normal.finished.json",
+        "bytes": 1464,
+        "sha256": "be663097f91cb2b861aa60faac6e8df3edac00df3c45c1096e8fb39319398c70"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/normal/Run/Processes/normal.finished.json",
+        "bytes": 1464,
+        "sha256": "be663097f91cb2b861aa60faac6e8df3edac00df3c45c1096e8fb39319398c70"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/normal/Run/Processes/normal.started.json",
+        "bytes": 813,
+        "sha256": "4aae7cd984af8d82fc9e4db67eaf9e461fb5a742ebdaa1b30a182b814d0251a0"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/normal/Run/Processes/normal.started.json",
+        "bytes": 813,
+        "sha256": "4aae7cd984af8d82fc9e4db67eaf9e461fb5a742ebdaa1b30a182b814d0251a0"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/normal/SupervisorEvidence/01-normal/command-spec.json",
+        "bytes": 1920,
+        "sha256": "a9d3bee94cc10863e934f7c8e15d0d87f0252fbdb796a3d72628bf7a17820674"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/normal/SupervisorEvidence/01-normal/command-spec.json",
+        "bytes": 1920,
+        "sha256": "a9d3bee94cc10863e934f7c8e15d0d87f0252fbdb796a3d72628bf7a17820674"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/normal/SupervisorEvidence/01-normal/supervisor-result.json",
+        "bytes": 1249,
+        "sha256": "1877911a2e8d1ea71e3a5be7a77f7d4b9627ddb5385b979b31a59637a349ca4b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/normal/SupervisorEvidence/01-normal/supervisor-result.json",
+        "bytes": 1249,
+        "sha256": "1877911a2e8d1ea71e3a5be7a77f7d4b9627ddb5385b979b31a59637a349ca4b"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/normal/SupervisorEvidence/01-normal/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/normal/SupervisorEvidence/01-normal/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/owned_process_containment.py",
+        "bytes": 31860,
+        "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/owned_process_containment.py",
+        "bytes": 31860,
+        "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/Run/Processes/parent-exit-orphan.finished.json",
+        "bytes": 1560,
+        "sha256": "5de94ad36f725b58bd8b417a55f9afc91691806e53eacd5448cf5cc776773e28"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/parent-exit-orphan/Run/Processes/parent-exit-orphan.finished.json",
+        "bytes": 1560,
+        "sha256": "5de94ad36f725b58bd8b417a55f9afc91691806e53eacd5448cf5cc776773e28"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/Run/Processes/parent-exit-orphan.started.json",
+        "bytes": 861,
+        "sha256": "9ffeabb9e04837cffd19b71538247df382bb136d9c96f022066ff3d70ddbaf21"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/parent-exit-orphan/Run/Processes/parent-exit-orphan.started.json",
+        "bytes": 861,
+        "sha256": "9ffeabb9e04837cffd19b71538247df382bb136d9c96f022066ff3d70ddbaf21"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/command-spec.json",
+        "bytes": 1991,
+        "sha256": "b3fca91be8cd7497be01078902a56d3b0a52711f49180b29d5eb88c0ef3eafd8"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/command-spec.json",
+        "bytes": 1991,
+        "sha256": "b3fca91be8cd7497be01078902a56d3b0a52711f49180b29d5eb88c0ef3eafd8"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+        "bytes": 1284,
+        "sha256": "223b2302189bc7f5c6b5a714c4a231a0f077650ad732c63ebbc723d24984e304"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+        "bytes": 1284,
+        "sha256": "223b2302189bc7f5c6b5a714c4a231a0f077650ad732c63ebbc723d24984e304"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/process_fixture.py",
+        "bytes": 1933,
+        "sha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/process_fixture.py",
+        "bytes": 1933,
+        "sha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/result.json",
+        "bytes": 8171,
+        "sha256": "150c218a2bdf9494fe06854c94615bd6431eb3682b4f74cf0eb418bb6b85b91c"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/result.json",
+        "bytes": 8171,
+        "sha256": "150c218a2bdf9494fe06854c94615bd6431eb3682b4f74cf0eb418bb6b85b91c"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-ignore-term/Run/Processes/spawn-ignore-term.finished.json",
+        "bytes": 1552,
+        "sha256": "b8d06ae97dbe045cece6ed2a4662830e181b3ca4a6bf044cd9d4ae9b57574aa2"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-ignore-term/Run/Processes/spawn-ignore-term.finished.json",
+        "bytes": 1552,
+        "sha256": "b8d06ae97dbe045cece6ed2a4662830e181b3ca4a6bf044cd9d4ae9b57574aa2"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-ignore-term/Run/Processes/spawn-ignore-term.started.json",
+        "bytes": 857,
+        "sha256": "4b9c0ea8bc05c90b7650c7c1233148fb26db13d80e0cd00ecb3d8568037069d6"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-ignore-term/Run/Processes/spawn-ignore-term.started.json",
+        "bytes": 857,
+        "sha256": "4b9c0ea8bc05c90b7650c7c1233148fb26db13d80e0cd00ecb3d8568037069d6"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/command-spec.json",
+        "bytes": 1986,
+        "sha256": "3b0e7e518ddf50857b8477ea6e122ca748a040df2943c9cbe8a6a6db2742b67a"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/command-spec.json",
+        "bytes": 1986,
+        "sha256": "3b0e7e518ddf50857b8477ea6e122ca748a040df2943c9cbe8a6a6db2742b67a"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+        "bytes": 1282,
+        "sha256": "5745ef037881878acbb8b4773c9c86048ef93d17b70385324e5b56e8f6c89ed0"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+        "bytes": 1282,
+        "sha256": "5745ef037881878acbb8b4773c9c86048ef93d17b70385324e5b56e8f6c89ed0"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-setsid/Run/Processes/spawn-setsid.finished.json",
+        "bytes": 1511,
+        "sha256": "47789f5144da8c1742822ea46c4650c2cfcb35cbe5ef4c6456eb9b5a5d884a22"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-setsid/Run/Processes/spawn-setsid.finished.json",
+        "bytes": 1511,
+        "sha256": "47789f5144da8c1742822ea46c4650c2cfcb35cbe5ef4c6456eb9b5a5d884a22"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-setsid/Run/Processes/spawn-setsid.started.json",
+        "bytes": 836,
+        "sha256": "a2f17b8ea52e08ad04cf46306bd1a5382b08cd1b39f405d406b2e59aa612931b"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-setsid/Run/Processes/spawn-setsid.started.json",
+        "bytes": 836,
+        "sha256": "a2f17b8ea52e08ad04cf46306bd1a5382b08cd1b39f405d406b2e59aa612931b"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/command-spec.json",
+        "bytes": 1956,
+        "sha256": "188d4ea447570d9c7e15461a8e178bc989f2859e4a0ef94c5b56ae7104a27b37"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/command-spec.json",
+        "bytes": 1956,
+        "sha256": "188d4ea447570d9c7e15461a8e178bc989f2859e4a0ef94c5b56ae7104a27b37"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+        "bytes": 1267,
+        "sha256": "42a2bc3e6c21f2d1ca9cc4a70f7f4d7c865cccef061abbd746e65bd4529a3cfc"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+        "bytes": 1267,
+        "sha256": "42a2bc3e6c21f2d1ca9cc4a70f7f4d7c865cccef061abbd746e65bd4529a3cfc"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/Candidate02/spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py",
+        "bytes": 6116,
+        "sha256": "ea386b7fd30186668272396f4b54de74b6af9319ad46fc1130271d754c9550da"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/run_candidate01.py.executed-source.txt",
+        "bytes": 6116,
+        "sha256": "ea386b7fd30186668272396f4b54de74b6af9319ad46fc1130271d754c9550da"
+      }
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate02.py",
+        "bytes": 6116,
+        "sha256": "fcb3d624cf18787f665c82e82d0cc00732c4311648de4477d7b96b88e0419359"
+      },
+      "preserved": {
+        "file": "Tools/Autonomy/Drafts/Recovery04/ProcessContainmentCandidateTests/run_candidate02.py.executed-source.txt",
+        "bytes": 6116,
+        "sha256": "fcb3d624cf18787f665c82e82d0cc00732c4311648de4477d7b96b88e0419359"
+      }
+    }
+  ],
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "next": "New reviewed candidate with supported child-identity observation and fresh isolated tests; do not repeat this candidate unchanged."
+}

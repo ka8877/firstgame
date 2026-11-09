@@ -216,7 +216,7 @@ namespace FantasyCards.Tests
         }
         [Test] public void OriginalCatalogHasExactKindsSevenElementsAndSeparateSoulCosts()
         {
-            Assert.That(CardCatalog.All.Length, Is.EqualTo(2646));
+            Assert.That(CardCatalog.All.Length, Is.EqualTo(2649));
             Assert.That(CardCatalog.All.Take(605).GroupBy(c => c.kind).ToDictionary(g => g.Key, g => g.Count()), Is.EquivalentTo(new Dictionary<CardKind,int> { {CardKind.Terrain,29},{CardKind.Unit,453},{CardKind.Spell,26},{CardKind.Equipment,97} }));
             foreach (Element element in Enum.GetValues(typeof(Element)))
             { Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Unit), Is.GreaterThanOrEqualTo(50)); Assert.That(CardCatalog.All.Count(c => c.element == element && c.kind == CardKind.Terrain), Is.EqualTo(element == Element.Forest ? 5 : 4)); }

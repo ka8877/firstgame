@@ -1,0 +1,105 @@
+{
+  "status": "source-only-wrapper-initial-review-two-open-control-preservation-findings",
+  "observedUtc": "2026-11-03T16:00:09.680920+00:00",
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+    "sha256": "c4008f7af1fa71c9c44a840a950476d99a38bdda5916e43d98d5fcd652f8f5fb",
+    "bytes": 47862
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+    "sha256": "e3bc43e41b2fb35b93cf0e0b2d6a8a0805e23f6ce96e9c20610436c7b3d50ea1",
+    "bytes": 20659
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+    "sha256": "96b89ef92d69c33cdc522198c89c54b35fde91af83b02deb8d100d2a97c0a42e",
+    "bytes": 6112
+  },
+  "nativeRefs": {
+    "binding": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/binding.json",
+        "sha256": "c8f88180d8626dbfd0b7cb4bf0f5ec2e8cb9087e3c4859d1cc46100ce96c7f0c",
+        "bytes": 1328
+      },
+      "currentMatches": true
+    },
+    "xml": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/native.xml",
+        "sha256": "de2a605ffe19fd3072683316e69ea0c8dc94e618e1d268ed710f72bae85bfae1",
+        "bytes": 146237
+      },
+      "currentMatches": true
+    },
+    "inputManifest": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
+        "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+        "bytes": 363712
+      },
+      "currentMatches": true
+    },
+    "productSummary": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-native-summary.json",
+        "sha256": "2cad207f26fe38a55aaca9d9499a04fb707a5a71425039c3837733f257b3face",
+        "bytes": 40208
+      },
+      "currentMatches": true
+    },
+    "rootReview": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+        "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+        "bytes": 13673
+      },
+      "currentMatches": true
+    },
+    "completeOriginalsLedger": {
+      "ref": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/gospel-native01-complete-originals.json",
+        "sha256": "b50dc69863fc35a397f8245606995f876e7f3b08fa92299802cdb21aba2f8ce6",
+        "bytes": 40009
+      },
+      "currentMatches": true
+    }
+  },
+  "actualRetainedNativeFileObservations": {
+    "xmlResult": "Passed",
+    "passed": "16",
+    "failed": "0",
+    "skipped": "0",
+    "caseCount": 16,
+    "bindingSourceChanged": false,
+    "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+    "summaryStatus": "passed",
+    "summaryFinishedUtc": "2026-11-03T15:51:39.445117+00:00",
+    "summaryOriginals": 94,
+    "wholeIndexCount": 134,
+    "wholeIndexAllFullrefsCurrentMatch": true,
+    "rootStatus": "approved",
+    "rootReviewedUtc": "2026-11-03T15:56:20.120817+00:00",
+    "completeLedgerCount": 136,
+    "completeLedgerAllFullrefsCurrentMatch": true
+  },
+  "openFindings": [
+    {
+      "id": "WRAPPER-FINAL-INTERRUPT-01",
+      "finding": "Final leaf hashing/summary outside main execution preservation handler catches Exception only; SIGINT/SIGTERM handler raises KeyboardInterrupt and can bypass partial index/pending summary."
+    },
+    {
+      "id": "WRAPPER-GROUP-CLEANUP-02",
+      "finding": "Private group receives SIGKILL, but only group leader is waited for; absence of remaining non-zombie members/actual runtime idle is not verified before failure source snapshot or proof progression."
+    }
+  ],
+  "runtimeClaims": {
+    "projectImport": false,
+    "compile": false,
+    "wrapperExecution": false,
+    "UnityOrTestsRun": false,
+    "networkOrGit": false,
+    "publicApproval": false
+  }
+}

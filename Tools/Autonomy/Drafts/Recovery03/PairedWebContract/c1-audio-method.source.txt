@@ -1,0 +1,55 @@
+  def audio(self, label):
+      started_epoch_ms = time.time() * 1000
+      # The software renderer can delay main-thread timer snapshots. Keep the
+      # six-sample PCM predicate and observe longer instead of lowering it.
+      # Opening narration needs a bounded PCM window shorter than the11.1s
+      # first line so ordinary book input can prove interruption while playing.
+      # The existing six-sample signal predicate remains unchanged.
+      window_ms = 3500 if label.startswith('narration-') else (8000 if self.modern and self.args.game == "PathOfDawn" and label not in ("before-first-gesture", "muted") else 2200)
+      snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
+      local_media = self.modern and self.args.game == "FantasyCards"
+      minimum_duration = 30
+      if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', 'fm-capability-2026-11-03'):
+          # The verified publisher excerpts are18.53/19.55s, not the earlier
+          # invented60s loops. Their exact URLs, looping source and advancing
+          # isolated PCM still have to pass the normal source checks below.
+          manifest = json.loads((ROOT / 'Tools/Audio/FmFidelity/runtime-manifest.json').read_text())
+          minimum_duration = min(track['seconds'] for track in manifest['tracks']) - .1
+      summary = media_audio_summary(snapshots, minimum_duration) if local_media else BASE.music_audio_summary(snapshots)
+      acquisition_windows = [window_ms]
+      # Keep every sample and every predicate. A busy software renderer can
+      # produce fewer than six observations in eight seconds; extend passive
+      # acquisition, bounded to 24 requested seconds, rather than infer sound.
+      if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', 'fm-capability-2026-11-03')) and label not in ("before-first-gesture", "muted"):
+          while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
+              snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
+              acquisition_windows.append(4000)
+              summary = media_audio_summary(snapshots, minimum_duration) if local_media else BASE.music_audio_summary(snapshots)
+      path = self.output / ("audio-" + str(self.navigation) + "-" + label + ".json")
+      path.write_text(json.dumps({"label": label, "requestedWindowMs": sum(acquisition_windows),
+          "acquisitionWindowsMs": acquisition_windows, "snapshots": snapshots, "summary": summary}, indent=2) + "\n")
+      evidence = {k: v for k, v in summary.items() if k != "frames"}
+      evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
+                      startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
+      if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', 'fm-capability-2026-11-03'):
+          evidence["rolePlayback"] = self.page.evaluate("""() => ({
+              state: window.FirstGameLocalMusic.getState(),
+              players: window.FirstGameLocalMusic.getDiagnostics(),
+              transitions: window.FirstGameLocalMusic.getTransitions(), observedAtMs:performance.now()
+          })""")
+      self.report["audioEvidence"]["windows"].append(evidence)
+      self.check(not evidence["observerErrors"] and evidence["nonfiniteSamples"] == 0,
+                 "Passive audio observer captured valid PCM: " + label, evidence)
+      if label == "before-first-gesture":
+          self.check(evidence["maximumRms"] < 1e-5, "No music output before first user gesture", evidence)
+      elif label == "muted":
+          self.check(evidence["maximumRms"] < 1e-5, "Actual mute control silences output", evidence)
+      else:
+          self.check(evidence["sampleCount"] >= 6 and evidence["allContextsRunning"]
+                     and evidence["isolatedMusicRoute"] and len(evidence["sourceIdentities"]) == 1
+                     and evidence["audibleSampleFraction"] >= .5 and evidence["medianRms"] > 1e-5,
+                     "Actual looping BGM is audible after user input: " + label, evidence)
+          if local_media:
+              self.check(evidence["mediaProgressSeconds"] > .5 and evidence["sourceUrls"]
+                         and all("/StreamingAssets/Audio/ModernCard/" in url for url in evidence["sourceUrls"]),
+                         "Audible BGM comes from advancing bundled instrumental media: " + label, evidence)

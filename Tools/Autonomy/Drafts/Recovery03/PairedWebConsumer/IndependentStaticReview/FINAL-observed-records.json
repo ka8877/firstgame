@@ -1,0 +1,296 @@
+{
+  "kind": "independent-static-source-review",
+  "reviewedUtc": "2026-11-03T16:38:38.916041+00:00",
+  "reviewer": "/root/release_recovery/c1_pipeline_audit/typed_consumer_review",
+  "scope": "source-text-JSON-AST-only-no-producer-import-run-or-installation",
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+    "sha256": "cfd4997045b4d2f07216e0d7be54eb910a100e56a80bf344f39cdef25d5a4554",
+    "bytes": 82968
+  },
+  "sourceLines": 1056,
+  "astParsed": true,
+  "literalPinnedReferencesChecked": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+      "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+      "bytes": 43563
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/FINAL-LEDGER.json",
+      "sha256": "c70af45fc10858addd27e859ad9a2faf0dd2d94877ca68980373c6e21c70a19b",
+      "bytes": 12113
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+      "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+      "bytes": 6148
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+      "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+      "bytes": 13673
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-grade-original-review.json",
+      "sha256": "3b08f5fcdcc630b7c36e9f07ba7914af924d0fb6b1e20138c63487f3b9560ed5",
+      "bytes": 2235
+    },
+    {
+      "file": "Tools/Validation/run-nativity-core.py",
+      "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+      "bytes": 3538
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Validation/run-nativity-core.py",
+      "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+      "bytes": 3538
+    }
+  ],
+  "literalPinnedReferenceCount": 9,
+  "audio": {
+    "functionLines": [
+      894,
+      948
+    ],
+    "nestingIndentShiftOnly": 4,
+    "normalizedBytes": 4994,
+    "sha256": "9c92ff461951534b8396e96da2e8b7e5d24e2d002c4b95ff46b98ee522b575bd",
+    "matchesCurrentC1ExactAudio": true
+  },
+  "forbiddenLegacyDirectCalls": [],
+  "functions": [
+    {
+      "function": "require",
+      "startLine": 45,
+      "endLine": 47
+    },
+    {
+      "function": "utc",
+      "startLine": 50,
+      "endLine": 51
+    },
+    {
+      "function": "stamp",
+      "startLine": 54,
+      "endLine": 58
+    },
+    {
+      "function": "relative",
+      "startLine": 61,
+      "endLine": 67
+    },
+    {
+      "function": "lexical",
+      "startLine": 70,
+      "endLine": 74
+    },
+    {
+      "function": "no_links",
+      "startLine": 77,
+      "endLine": 79
+    },
+    {
+      "function": "regular",
+      "startLine": 82,
+      "endLine": 85
+    },
+    {
+      "function": "digest",
+      "startLine": 88,
+      "endLine": 98
+    },
+    {
+      "function": "ref",
+      "startLine": 101,
+      "endLine": 104
+    },
+    {
+      "function": "checked",
+      "startLine": 107,
+      "endLine": 113
+    },
+    {
+      "function": "read",
+      "startLine": 116,
+      "endLine": 117
+    },
+    {
+      "function": "decode_json",
+      "startLine": 120,
+      "endLine": 127
+    },
+    {
+      "function": "rows_map",
+      "startLine": 130,
+      "endLine": 137
+    },
+    {
+      "function": "identities",
+      "startLine": 140,
+      "endLine": 142
+    },
+    {
+      "function": "write_new",
+      "startLine": 145,
+      "endLine": 151
+    },
+    {
+      "function": "validate_schema",
+      "startLine": 154,
+      "endLine": 210
+    },
+    {
+      "function": "load_raw",
+      "startLine": 213,
+      "endLine": 221
+    },
+    {
+      "function": "runtime_rows",
+      "startLine": 224,
+      "endLine": 239
+    },
+    {
+      "function": "core_rows",
+      "startLine": 242,
+      "endLine": 251
+    },
+    {
+      "function": "verify_invocation",
+      "startLine": 254,
+      "endLine": 273
+    },
+    {
+      "function": "verify_native",
+      "startLine": 276,
+      "endLine": 346
+    },
+    {
+      "function": "verify_build",
+      "startLine": 349,
+      "endLine": 436
+    },
+    {
+      "function": "current_source",
+      "startLine": 439,
+      "endLine": 470
+    },
+    {
+      "function": "committed_source",
+      "startLine": 473,
+      "endLine": 476
+    },
+    {
+      "function": "full_stage",
+      "startLine": 479,
+      "endLine": 494
+    },
+    {
+      "function": "guard",
+      "startLine": 497,
+      "endLine": 509
+    },
+    {
+      "function": "get_body",
+      "startLine": 512,
+      "endLine": 528
+    },
+    {
+      "function": "portal_root",
+      "startLine": 531,
+      "endLine": 546
+    },
+    {
+      "function": "typed_public",
+      "startLine": 549,
+      "endLine": 691
+    },
+    {
+      "function": "preflight",
+      "startLine": 694,
+      "endLine": 740
+    },
+    {
+      "function": "mechanical",
+      "startLine": 743,
+      "endLine": 823
+    },
+    {
+      "function": "verify_reviewed",
+      "startLine": 826,
+      "endLine": 856
+    },
+    {
+      "function": "build_adapter",
+      "startLine": 859,
+      "endLine": 1006
+    },
+    {
+      "function": "main",
+      "startLine": 1009,
+      "endLine": 1047
+    },
+    {
+      "function": "unique",
+      "startLine": 121,
+      "endLine": 126
+    },
+    {
+      "function": "matches",
+      "startLine": 195,
+      "endLine": 200
+    },
+    {
+      "function": "arg",
+      "startLine": 1032,
+      "endLine": 1034
+    },
+    {
+      "function": "__init__",
+      "startLine": 871,
+      "endLine": 892
+    },
+    {
+      "function": "audio",
+      "startLine": 894,
+      "endLine": 948
+    },
+    {
+      "function": "public_bytes",
+      "startLine": 950,
+      "endLine": 974
+    },
+    {
+      "function": "run",
+      "startLine": 976,
+      "endLine": 1004
+    },
+    {
+      "function": "deadline",
+      "startLine": 1023,
+      "endLine": 1024
+    }
+  ],
+  "actualExecution": false,
+  "actualSchemaValidation": false,
+  "installed": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "remainingActualPrerequisites": [
+    "Sole owner independently adopts/installs/freezes source and genuine typed current contract.",
+    "Actual fresh both-game Web builds, genuine current Native-after observations, successful invocation/warning/resource/source-after/durable-proof originals; Gospel Web remains unexecuted at this review.",
+    "Both PC/touch current ordinary UI/PCM/reload and PC19 completedBook/lastspread/Continue originals; independent later Root attachments.",
+    "Current protected integrated source/Core/CI/stage/wholeHTTPS/tree/portal/public/final approval remain actual owner workflow; this wrapper never publishes or seals."
+  ]
+}

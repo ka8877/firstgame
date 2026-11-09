@@ -103,8 +103,8 @@ namespace FantasyCards.Presentation
         {
             if (mask == 7) return "만능";
             if (mask == 0) return "없음";
-            return string.Join(" · ", new[] { (mask & 1) != 0 ? "장비" : null,
-                (mask & 2) != 0 ? "마법" : null, (mask & 4) != 0 ? "야수" : null }.Where(value => value != null));
+            return string.Join(" · ", new[] { (mask & 2) != 0 ? "장비" : null,
+                (mask & 4) != 0 ? "마법" : null, (mask & 1) != 0 ? "야수" : null }.Where(value => value != null));
         }
 
         private static string CardAbilitySummary(CardDefinition card)
@@ -124,7 +124,9 @@ namespace FantasyCards.Presentation
         private static bool CardMatchesCapability(CardDefinition card, int value)
         {
             if (card.kind != CardKind.Unit) return false;
-            return value == 0 ? card.capabilityMask == 7 : (card.capabilityMask & (1 << (value - 1))) != 0;
+            // Keep the displayed order (gear, magic, beast); source bits are beast=1, gear=2, magic=4.
+            int mask = value == 1 ? 2 : value == 2 ? 4 : value == 3 ? 1 : 0;
+            return value == 0 ? card.capabilityMask == 7 : (card.capabilityMask & mask) != 0;
         }
 
         private void DrawCardGradeBadges(RectTransform panel, CardDefinition card, float artBottom, float artTop, bool small)
@@ -185,11 +187,15 @@ namespace FantasyCards.Presentation
             Text(root, "카드 등급 · 랭크", .055f, .88f, .945f, .975f, 42, ivory);
             Text(root, "등급은 카드 분류이며 전투력 순서가 아닙니다. 유닛 랭크 N / C / B / A / S와 별도로 읽습니다.\n각 항목을 누르면 실제 수록 카드로 이동합니다. 0종은 이번 수록 범위에 없는 등급입니다.", .055f, .77f, .945f, .875f, 23, gold, TextAlignmentOptions.TopLeft);
             var grades = Enum.GetValues(typeof(CardRarity)).Cast<CardRarity>().ToArray();
+            int rows = Mathf.Max(1, (grades.Length + 2) / 3);
+            const float gridTop = .75f, gridBottom = .115f, rowGap = .013f;
+            float tileHeight = (gridTop - gridBottom - rowGap * (rows - 1)) / rows;
             for (int i = 0; i < grades.Length; i++)
             {
                 var rarity = grades[i]; int col = i % 3, row = i / 3;
-                float x = .055f + col * .302f, y = .605f - row * .166f;
-                var button = Button(root, "", x, y, x + .286f, y + .148f,
+                float x = .055f + col * .302f;
+                float y = gridTop - (row + 1) * tileHeight - row * rowGap;
+                var button = Button(root, "", x, y, x + .286f, y + tileHeight,
                     () => { collectionRarity = (int)rarity; collectionRank = collectionCapability = -1; collectionPage = 0; ShowCollection(edit); }, slate, 24);
                 button.gameObject.name = "Grade guide " + rarity;
                 Text(button.transform, CardCatalog.RarityCode(rarity), .04f, .13f, .24f, .91f, 28, RarityColor(rarity), TextAlignmentOptions.Center);

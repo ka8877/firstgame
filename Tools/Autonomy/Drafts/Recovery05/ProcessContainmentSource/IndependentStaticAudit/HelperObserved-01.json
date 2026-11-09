@@ -1,0 +1,252 @@
+{
+  "status": "invalidated-source-changed-during-finalization",
+  "noRemainingStaticBlocker": false,
+  "helperSha256": "400d63e77e6a782dbe6fe51cc77db6fa3fc64a4c1f4aacaa9c16ae790413837e",
+  "actualExecutionPerformed": false,
+  "observedUtc": "2026-11-03T17:53:00.110210+00:00",
+  "scope": "Static helper/caller patch/config analysis only. No live proc read, signals, prctl, ctypes/project import or execution, executable compile, tests, Unity/browser/network/Git. Only this audit directory written.",
+  "reviewedSources": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/owned_process_containment.py",
+      "sha256": "400d63e77e6a782dbe6fe51cc77db6fa3fc64a4c1f4aacaa9c16ae790413837e",
+      "bytes": 44281
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+      "sha256": "659c4b0bc30ed1db96b2277960649f69b3cf337242e948903cd6940ca67b6888",
+      "bytes": 40547
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+      "sha256": "a49754874422e254b2378240c713645c50c6723d859396baee8fbaaea804afd8",
+      "bytes": 54692
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-contract.template.json",
+      "sha256": "8d9cf67b579c62342a862edfb345cf76c0db88e14946b82beea768d149db8f19",
+      "bytes": 10224
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-command-plan.json",
+      "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909",
+      "bytes": 2889
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/isolated-acceptance.template.json",
+      "sha256": "287b7faaa04ae525a676add6edb8fc3c6a2fc6c7b1fca377edf5c59edb75a233",
+      "bytes": 1500
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/DESIGN.md",
+      "sha256": "28487eca9d2af573bb9738cb557c1a7dc2c59451d4bb1e969c6ff214aed3f13b",
+      "bytes": 5398
+    }
+  ],
+  "proposedHelperMatchesActive": false,
+  "originalPreservationIndex": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/original-preservation-index.json",
+    "sha256": "82d0e26a8c6bc9e49d1ca42706556e17ca084d4632c1b745a9942a92e28907d7",
+    "bytes": 3529
+  },
+  "originalsObserved": [
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/01-recovery-card-web.py",
+        "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+        "bytes": 43017
+      },
+      "expectedSha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/02-execution-contract.template.json",
+        "sha256": "674a3a9bf2783bf1a3182cf956fe288a94305cace14534c908bb33cd0e9ff092",
+        "bytes": 9509
+      },
+      "expectedSha256": "674a3a9bf2783bf1a3182cf956fe288a94305cace14534c908bb33cd0e9ff092",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/03-command-plan.json",
+        "sha256": "8df5ace5af87b07896e329da71b8ef8246e7a1ab4c3035937ed0224f8c73df7b",
+        "bytes": 2700
+      },
+      "expectedSha256": "8df5ace5af87b07896e329da71b8ef8246e7a1ab4c3035937ed0224f8c73df7b",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/04-CardWrapperREPORT-01.md",
+        "sha256": "17b4dfd0a5c4bfc718d7b9be99a8d5dffd55c77935d4d17b15f38259c204c5ed",
+        "bytes": 5350
+      },
+      "expectedSha256": "17b4dfd0a5c4bfc718d7b9be99a8d5dffd55c77935d4d17b15f38259c204c5ed",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/05-recovery-gospel-web.py",
+        "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+        "bytes": 57195
+      },
+      "expectedSha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/06-CardWeb01-escaped-unity-observation.json",
+        "sha256": "ec363bbd1d3a28d1a29fc56e053c3ceabac716e354cc74eaae00860722b7fb7b",
+        "bytes": 1460
+      },
+      "expectedSha256": "ec363bbd1d3a28d1a29fc56e053c3ceabac716e354cc74eaae00860722b7fb7b",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/07-CardWeb01-post-timeout-idle-observation.json",
+        "sha256": "9c1775a9136e088402d8317fae93193f5096005146dce40c7c9ee1cb40bd9383",
+        "bytes": 712
+      },
+      "expectedSha256": "9c1775a9136e088402d8317fae93193f5096005146dce40c7c9ee1cb40bd9383",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/08-web-build-summary.json",
+        "sha256": "410b042a70885722fd0b18daf34ae93b247ab77420e224edf4f4686cd0cd9f5a",
+        "bytes": 10749
+      },
+      "expectedSha256": "410b042a70885722fd0b18daf34ae93b247ab77420e224edf4f4686cd0cd9f5a",
+      "matches": true
+    },
+    {
+      "actual": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/09-card-web-known-caller-hold.json",
+        "sha256": "a9b4c0203b26effba53e5759f2bbf6d37e9c59bc294bcd1273074e6a6b3f46e9",
+        "bytes": 887
+      },
+      "expectedSha256": "a9b4c0203b26effba53e5759f2bbf6d37e9c59bc294bcd1273074e6a6b3f46e9",
+      "matches": true
+    }
+  ],
+  "unchangedNativeAndProductGates": {
+    "cardCriticalAst": {
+      "actual_native": true,
+      "current_source": true,
+      "source_rows": true,
+      "compare_runtime": true,
+      "failure_state": true,
+      "finalize": true,
+      "runtime_paths": true,
+      "role_map": true,
+      "fingerprint": true
+    },
+    "gospelCriticalAst": {
+      "full_source": true,
+      "failure_state": true,
+      "library_journal_target": true,
+      "preserve_library_journal": true,
+      "exact_xml": true,
+      "role_map": true,
+      "runtime_paths": true
+    },
+    "cardNativeRefsUnchanged": true,
+    "cardExecutionSourcesUnchanged": true,
+    "cardMediaInputsUnchanged": true,
+    "actualHeldFiles": {
+      "Tools/Autonomy/recovery-card-web.py": {
+        "file": "Tools/Autonomy/recovery-card-web.py",
+        "sha256": "6c0f470be33f8c261651b40a1151ef70760a69a39226210ae019d0582e69f598",
+        "bytes": 43337
+      },
+      "Tools/Autonomy/recovery-gospel-web.py": null,
+      "Tools/Autonomy/recovery-product-native.py": {
+        "file": "Tools/Autonomy/recovery-product-native.py",
+        "sha256": "6fb091d41eda91669aceccea0020a211517f4906534671a4450e452c8b603a26",
+        "bytes": 6982
+      }
+    }
+  },
+  "productionBlock": {
+    "acceptance": {
+      "report": null,
+      "independentReview": null,
+      "operatorReview": null
+    },
+    "allActualAcceptanceRefsNull": true,
+    "isolatedTemplateStatus": "unexecuted-template-not-acceptance",
+    "noProductionApprovalFromThisReview": true
+  },
+  "callerPlan": {
+    "runRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02",
+    "buildRoot": "/tmp/firstgame-c1-recovery05-cardweb02-builds",
+    "attempt": "CardWeb02",
+    "unityLog": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/WebRuns/CardWeb02/FantasyCards/CardWeb02/web.log",
+    "unityLogMatchesAttempt": true,
+    "planFullref": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-command-plan.json",
+      "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909",
+      "bytes": 2889
+    },
+    "planPinMatches": true,
+    "wrapperPinMatches": true,
+    "helperPinMatches": false,
+    "futureGospelBatchNotSelected": true
+  },
+  "closedFindings": [
+    {
+      "id": "ROOT-PID-REUSE-01",
+      "resolution": "Only an unreaped original root enters the root numeric-PID branch; after root_exit known, reused numeric PID is handled as another waitable adopted child."
+    },
+    {
+      "id": "ACCEPTANCE-SOURCE-SET-02",
+      "resolution": "Acceptance requires actual executed helper/fixture/runner fullrefs, same-source independent static review and actual operator acceptance, all9 cases, nonempty originals, actual supervisor/spec/lineage/commandstdout/controlstdout, expected outcomes and ECHILD/pidfd/identity proof; no source-only substitute."
+    },
+    {
+      "id": "PIDFD-RESOURCE-03",
+      "resolution": "poll replaces select FD_SETSIZE limit; verified terminal FDs close with identity tombstones. Final live/prctl/close errors preserve false/unproven receipt."
+    },
+    {
+      "id": "DISCOVERY-FAILURE-CLEANUP-04",
+      "resolution": "Kernel metadata parses bytes with only ASCII numeric/state suffix. Discovery exceptions are recorded but do not skip attempts against already-proven held targets; unknown targets are not signalled."
+    },
+    {
+      "id": "CARD02-PLAN-PATH-05",
+      "resolution": "Card02 Unity log now matches actual attempt02; descendant scope metadata corrected."
+    }
+  ],
+  "ownershipAndLifecycleConditions": [
+    "New dedicated single-thread supervisor per actual command; SIGCHLD default; SET/GET subreaper before root; parent-death signal with post-setup and pre-spawn identity/cancel checks. Existing caller itself is not made a subreaper.",
+    "PPID/current pidfd-parent lineage or kernel-adopted child proof with startTicks/UID around pidfd_open; baseline identity excludes outsiders. SID/PGID/name/new-PID resemblance is not ownership.",
+    "One exact root waitpid consumer plus non-consuming WNOWAIT/__WALL peek for exact adopted waitpid; None is not empty. Completion needs living verified subreaper, actual root status, kernel ECHILD, no live held pidfds, no ownership/discovery error.",
+    "Signals only held pidfds of proven non-baseline identities after current checks; no numeric PID/group/name fallback. Credential checks are pre-signal observations, not atomic immutability against hostile credential changes.",
+    "Execution uses original shared safeEnd; separate cleanup<=10 within60reserve. Outer requests cancellation and waits for receipt; no early supervisor group SIGKILL. Unknown residuals/missing receipt stay pending; finite kill completion/hostile SIGKILL survival not guaranteed.",
+    "Pre-run lane.run=None uses new persistent auxiliary root. Accepted original specs/receipts/logs are later byte-copied with helper raw source into main run; originals retained. Actual argv/env/log/exit shapes preserved with added containment receipt.",
+    "Lane.child has mandatory Controller and exact raw helper compile/exec loader with production test_mode=False. No old private-group fallback. Card fresh R5/CardWeb02, failed R4/CardWeb01 remains untouched; Gospel successor still awaits fresh batch/acceptance."
+  ],
+  "limits": [
+    "No isolated fixture was executed by reviewer; actual Linux wait/clone/pidfd/adoption/signal behavior remains an operator test requirement.",
+    "No dummy test source/runner audit or actual acceptance report approval is implied; acceptance refs remain null.",
+    "No current Unity/process idleness, restoration, Native/Web/PC/touch/public/save/audio/CI/site/rollback/seal approval.",
+    "Baseline/process names are not a hostile-code security sandbox; external IPC broker spawned work remains unattributed and caller runtime-idle checks must reject it.",
+    "OS I/O failure may prevent a final receipt; the Controller rejects missing/unproven data and does not infer cleanup or success."
+  ],
+  "initialCandidateObservation": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-initial.json",
+    "sha256": "16806eb19a03a5d509fc1781087eac05261690bdae494f8ed07e700a45664184",
+    "bytes": 3065
+  },
+  "conceptReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/CONCEPT-01.md",
+    "sha256": "cece4e8bc164ca20bfb0bb5b3e8c04825ad97a1a8aa48cd4bea7d6a010a3f220",
+    "bytes": 7086
+  },
+  "invalidationReason": "Active helper changed during draft finalization (05c reviewed delta; current400d63e7 not yet reviewed; proposal/contract pins did not match). No approval or acceptance may be based on this draft.",
+  "originalDraft": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/InvalidatedReview01/HelperObserved-01.json",
+    "sha256": "12a5093c287f0eeb17032af57a596c5eecf9d9964d4d5e3fe6565aef147c788e",
+    "bytes": 12782
+  }
+}

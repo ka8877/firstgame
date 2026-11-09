@@ -1,0 +1,2484 @@
+{
+  "kind": "read-only-independent-actual-isolated-result-audit",
+  "checkedUtc": "2026-11-03T18:04:40.020677+00:00",
+  "status": "reviewed-actual-isolated-results-consistent",
+  "scope": "FinalNine01 actual owner-run dummy process originals; not sole-operator acceptance, Native/game/build/browser/public approval",
+  "actualExecutionPerformedByAuditor": false,
+  "ownerActualRunObserved": true,
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+    "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6",
+    "bytes": 69227
+  },
+  "sourceFreeze": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/source-freeze.json",
+    "sha256": "dad8667ee31ebb519e87b9e47aea3ac6225f766408c856ec046d298a7c4855df",
+    "bytes": 1172
+  },
+  "independentSourceReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+    "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd",
+    "bytes": 2324
+  },
+  "executedSources": {
+    "fixture": {
+      "bytes": 5568,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760"
+    },
+    "helper": {
+      "bytes": 44980,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+    },
+    "runner": {
+      "bytes": 40202,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7"
+    }
+  },
+  "actualNineCaseGroups": 9,
+  "actualSupervisorReceipts": 9,
+  "actualNegativeRefusalReceiptFiles": 1,
+  "actualNegativeRefusalAttempts": 2,
+  "distinctCaseOriginalReferencesVerified": 139,
+  "sourceCopyReferencesVerified": [
+    {
+      "bytes": 5568,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/source-copies/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760"
+    },
+    {
+      "bytes": 44980,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/source-copies/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+    },
+    {
+      "bytes": 40202,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/source-copies/runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7"
+    }
+  ],
+  "allDeclaredCaseResultsAndOriginalsConsistent": true,
+  "helperReportedAndRecordedProductionInvocations": 0,
+  "helperJournalBaselineSignalsDerived": 0,
+  "unresolvedOwnedChildrenReported": 0,
+  "supervisorResults": [
+    {
+      "case": "bystander",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 18559,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-result.json",
+        "sha256": "6a6a8d57cbb946696ae99e5ac9bf0cff287d652500e4529107812d5a833eb741"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/command-spec.json",
+        "sha256": "9981bda15746a5aab23857a1d2a53d5fe53d4d6633d78942c65f2c42aacfc7fc",
+        "bytes": 1856
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/lineage-events.jsonl",
+        "sha256": "24edf0b0b71e95183746e6035b67a78e8f1edf130c0f809008e087be463bf259",
+        "bytes": 2251
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/lane-events.json",
+        "sha256": "c6c3ebbe692425a26b566c75745c2e093cd51fa239cc9afb1047d4addf94baf2",
+        "bytes": 1855
+      },
+      "outcome": 124,
+      "timedOut": true,
+      "interrupted": false,
+      "rootExitCode": -15,
+      "ownedCount": 2,
+      "reapedCount": 2,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.031750056998134824,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57361,
+            "ppid": 57360,
+            "pgid": 57361,
+            "sid": 57361,
+            "state": "R",
+            "startTicks": 2071181,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57361,
+            "ppid": 57360,
+            "pgid": 57361,
+            "sid": 57361,
+            "state": "R",
+            "startTicks": 2071181,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 57362,
+            "ppid": 57361,
+            "pgid": 57361,
+            "sid": 57361,
+            "state": "R",
+            "startTicks": 2071184,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57362,
+            "ppid": 57360,
+            "pgid": 57362,
+            "sid": 57362,
+            "state": "Z",
+            "startTicks": 2071184,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57361,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 57362,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 57362,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        }
+      ],
+      "ownedSignalCount": 2,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 67,
+      "originalCommonSafeEnd": 20728.736052419,
+      "executionEnd": 20713.773885144,
+      "hardEnd": 20725.773885144,
+      "cleanupReserve": 12,
+      "establishedEscape": {
+        "identity": {
+          "pgid": 57362,
+          "pid": 57362,
+          "ppid": 57361,
+          "sid": 57362,
+          "startTicks": 2071184,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "ignoresSigterm": false,
+        "initialIdentity": null,
+        "kind": "setsid",
+        "label": "actual-setsid-ready",
+        "pgid": 57362,
+        "pid": 57362,
+        "ppid": 57361,
+        "readyMonotonic": 20711.881132333,
+        "rootIdentity": {
+          "pgid": 57361,
+          "pid": 57361,
+          "ppid": 57360,
+          "sid": 57361,
+          "startTicks": 2071181,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sid": 57362,
+        "startTicks": 2071184,
+        "state": "R",
+        "token": "c37e568e3eaf487085f7067bc52e70bb",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      }
+    },
+    {
+      "case": "doublefork-timeout",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 19144,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor-result.json",
+        "sha256": "82bec308f28fa04be66868d3c09124e2fbc63f7d4822d4f5c9ca14fe8aa06499"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/command-spec.json",
+        "sha256": "59a201f06c6a3466c74a445648034c58b44ee92c21363a8ced0275677842071e",
+        "bytes": 1881
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/lineage-events.jsonl",
+        "sha256": "e5055c3b9dd4fbff5223f7427b7d60e6c27a1a2012c2d00df1f86933803caf3b",
+        "bytes": 2151
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/lane-events.json",
+        "sha256": "8933ebe8b9c93372792632922cb99e417fb25b9613d2871725eec28964de8a22",
+        "bytes": 1901
+      },
+      "outcome": 124,
+      "timedOut": true,
+      "interrupted": false,
+      "rootExitCode": -15,
+      "ownedCount": 3,
+      "reapedCount": 3,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.0306957329994475,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57331,
+            "ppid": 57330,
+            "pgid": 57331,
+            "sid": 57331,
+            "state": "R",
+            "startTicks": 2070396,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57331,
+            "ppid": 57330,
+            "pgid": 57331,
+            "sid": 57331,
+            "state": "R",
+            "startTicks": 2070396,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 57332,
+            "ppid": 57331,
+            "pgid": 57332,
+            "sid": 57332,
+            "state": "Z",
+            "startTicks": 2070399,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57332,
+            "ppid": 57330,
+            "pgid": 57332,
+            "sid": 57332,
+            "state": "Z",
+            "startTicks": 2070399,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": []
+        },
+        {
+          "identity": {
+            "pid": 57333,
+            "ppid": 57330,
+            "pgid": 57332,
+            "sid": 57332,
+            "state": "S",
+            "startTicks": 2070399,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57333,
+            "ppid": 57330,
+            "pgid": 57332,
+            "sid": 57332,
+            "state": "S",
+            "startTicks": 2070399,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-or-kernel-adopted-child",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57331,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 57333,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 57333,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        },
+        {
+          "pid": 57332,
+          "exitCode": 0,
+          "root": false,
+          "waitid": {
+            "pid": 57332,
+            "uid": 1000,
+            "code": 1,
+            "status": 0
+          }
+        }
+      ],
+      "ownedSignalCount": 2,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20720.916956437,
+      "executionEnd": 20705.917594004,
+      "hardEnd": 20717.917594004,
+      "cleanupReserve": 12,
+      "establishedEscape": {
+        "identity": {
+          "pgid": 57332,
+          "pid": 57333,
+          "ppid": 57330,
+          "sid": 57332,
+          "startTicks": 2070399,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "ignoresSigterm": false,
+        "initialIdentity": {
+          "pgid": 57332,
+          "pid": 57333,
+          "ppid": 57332,
+          "sid": 57332,
+          "startTicks": 2070399,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "kind": "doublefork",
+        "label": "actual-doublefork-ready",
+        "pgid": 57332,
+        "pid": 57333,
+        "ppid": 57330,
+        "readyMonotonic": 20704.009593605,
+        "rootIdentity": {
+          "pgid": 57331,
+          "pid": 57331,
+          "ppid": 57330,
+          "sid": 57331,
+          "startTicks": 2070396,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sid": 57332,
+        "startTicks": 2070399,
+        "state": "R",
+        "token": "dd2e1bddea40437795f530bdbd547832",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      }
+    },
+    {
+      "case": "ignore-term",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 18358,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor-result.json",
+        "sha256": "82b37f045205c7a51724b71cd3102796c161b5a753b27e27aaaf1beb2aca8990"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/command-spec.json",
+        "sha256": "6cb82d9194eeea489412f671fa4ef9a1e3e63a02798a5efc67604521400afabe",
+        "bytes": 1867
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/lineage-events.jsonl",
+        "sha256": "fff901b8a746b66a2b2e79bd9fcac8a4375cdb57778c72bdb7599e13ac016327",
+        "bytes": 2638
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/lane-events.json",
+        "sha256": "cbf13a7168e4a4370eccb9cb4d982bf7dbd82d8c8434a0d48ecd65e1143f7605",
+        "bytes": 1872
+      },
+      "outcome": 124,
+      "timedOut": true,
+      "interrupted": false,
+      "rootExitCode": -15,
+      "ownedCount": 2,
+      "reapedCount": 2,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.44184891400072956,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57341,
+            "ppid": 57340,
+            "pgid": 57341,
+            "sid": 57341,
+            "state": "R",
+            "startTicks": 2070621,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57341,
+            "ppid": 57340,
+            "pgid": 57341,
+            "sid": 57341,
+            "state": "R",
+            "startTicks": 2070621,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 57342,
+            "ppid": 57341,
+            "pgid": 57341,
+            "sid": 57341,
+            "state": "R",
+            "startTicks": 2070624,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57342,
+            "ppid": 57340,
+            "pgid": 57342,
+            "sid": 57342,
+            "state": "S",
+            "startTicks": 2070624,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15,
+            9
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57341,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 57342,
+          "exitCode": -9,
+          "root": false,
+          "waitid": {
+            "pid": 57342,
+            "uid": 1000,
+            "code": 2,
+            "status": 9
+          }
+        }
+      ],
+      "ownedSignalCount": 3,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20723.163150162,
+      "executionEnd": 20708.163828012,
+      "hardEnd": 20720.163828012,
+      "cleanupReserve": 12,
+      "establishedEscape": {
+        "identity": {
+          "pgid": 57342,
+          "pid": 57342,
+          "ppid": 57341,
+          "sid": 57342,
+          "startTicks": 2070624,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "ignoresSigterm": true,
+        "initialIdentity": null,
+        "kind": "setsid",
+        "label": "actual-setsid-ready",
+        "pgid": 57342,
+        "pid": 57342,
+        "ppid": 57341,
+        "readyMonotonic": 20706.281109109,
+        "rootIdentity": {
+          "pgid": 57341,
+          "pid": 57341,
+          "ppid": 57340,
+          "sid": 57341,
+          "startTicks": 2070621,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sid": 57342,
+        "startTicks": 2070624,
+        "state": "R",
+        "token": "6e21fca1ec6844408571b3311591990d",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      }
+    },
+    {
+      "case": "interrupt",
+      "subcase": "before-deadline",
+      "receipt": {
+        "bytes": 17550,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/supervisor-result.json",
+        "sha256": "97b79dcff290ded210b32321641a2a1de6ee42ea69d3aaadcd0aa4fc86336a17"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/command-spec.json",
+        "sha256": "b226c0e3aed318376ec79b9d21e9dcbdec265461cf25708340792b5a2b0136b8",
+        "bytes": 1897
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/lineage-events.jsonl",
+        "sha256": "46607fd17305d7a6eaa9f2412023635e6ac862827e18047e23314c13579af6ac",
+        "bytes": 1259
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/lane-events.json",
+        "sha256": "f6dc936e61ed279c0ddf76dc0a180e27ce5aa8657f69048e147c2db7237287c9",
+        "bytes": 1930
+      },
+      "outcome": 130,
+      "timedOut": false,
+      "interrupted": true,
+      "rootExitCode": -9,
+      "ownedCount": 1,
+      "reapedCount": 1,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.4468976210009714,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57354,
+            "ppid": 57353,
+            "pgid": 57354,
+            "sid": 57354,
+            "state": "R",
+            "startTicks": 2070869,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57354,
+            "ppid": 57353,
+            "pgid": 57354,
+            "sid": 57354,
+            "state": "R",
+            "startTicks": 2070869,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15,
+            9
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57354,
+          "exitCode": -9,
+          "waitpidStatus": 9,
+          "root": true
+        }
+      ],
+      "ownedSignalCount": 2,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20725.637876881,
+      "executionEnd": 20710.638437143,
+      "hardEnd": 20722.638437143,
+      "cleanupReserve": 12,
+      "establishedEscape": null
+    },
+    {
+      "case": "interrupt",
+      "subcase": "after-timeout-during-cleanup",
+      "receipt": {
+        "bytes": 17575,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/supervisor-result.json",
+        "sha256": "9d877e74a709faee64344aa09c65a6c63d51f002545b7acbb243ce65cf8d3122"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/command-spec.json",
+        "sha256": "e108421d32c95f2ca088b2417f59dde5405630a5e677858b31617e0422857f89",
+        "bytes": 1936
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/lineage-events.jsonl",
+        "sha256": "62bf26e209718f4da6aa31ee6308102ecc846b1d5dc08f0cedca20ff74ad7c99",
+        "bytes": 1259
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/lane-events.json",
+        "sha256": "3799afc19c6eb40fb6503fa843e4250cdacb83eb19a3add772da653d04a168a8",
+        "bytes": 1965
+      },
+      "outcome": 130,
+      "timedOut": true,
+      "interrupted": true,
+      "rootExitCode": -9,
+      "ownedCount": 1,
+      "reapedCount": 1,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.4408169430025737,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57357,
+            "ppid": 57356,
+            "pgid": 57357,
+            "sid": 57357,
+            "state": "R",
+            "startTicks": 2070931,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57357,
+            "ppid": 57356,
+            "pgid": 57357,
+            "sid": 57357,
+            "state": "R",
+            "startTicks": 2070931,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15,
+            9
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57357,
+          "exitCode": -9,
+          "waitpidStatus": 9,
+          "root": true
+        }
+      ],
+      "ownedSignalCount": 2,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20726.259824255,
+      "executionEnd": 20711.260494409,
+      "hardEnd": 20723.260494409,
+      "cleanupReserve": 12,
+      "establishedEscape": null
+    },
+    {
+      "case": "nonzero-exit",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 17508,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/supervisor-result.json",
+        "sha256": "84d83bee7b5153fb59f46288e1601da2f733dfa27623909e014177489d52da40"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/command-spec.json",
+        "sha256": "65eb5e971af6911da487a8b660cc2b827c181961de8d003b7be4eb63848ecca2",
+        "bytes": 1863
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/lineage-events.jsonl",
+        "sha256": "67b0ae31c55e0fac0740c244087d0325748b404193fa9caf9d27e65ad7fe3a9a",
+        "bytes": 482
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/lane-events.json",
+        "sha256": "de5c2ec587e1b87050dc3bef93a17aff5ef65a5f309efbe7e76d2e9006785902",
+        "bytes": 1866
+      },
+      "outcome": 7,
+      "timedOut": false,
+      "interrupted": false,
+      "rootExitCode": 7,
+      "ownedCount": 1,
+      "reapedCount": 1,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.0025787020022107754,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57324,
+            "ppid": 57323,
+            "pgid": 57324,
+            "sid": 57324,
+            "state": "R",
+            "startTicks": 2070177,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57324,
+            "ppid": 57323,
+            "pgid": 57324,
+            "sid": 57324,
+            "state": "R",
+            "startTicks": 2070177,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57324,
+          "exitCode": 7,
+          "waitpidStatus": 1792,
+          "root": true
+        }
+      ],
+      "ownedSignalCount": 0,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20718.72462187,
+      "executionEnd": 20703.724896591,
+      "hardEnd": 20715.724896591,
+      "cleanupReserve": 12,
+      "establishedEscape": null
+    },
+    {
+      "case": "normal-exit",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 17494,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/supervisor-result.json",
+        "sha256": "37c309d9a5badc8e9debd8b3161739df1f48d0d86a99ba3d0d2d3e304f652a83"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/command-spec.json",
+        "sha256": "7b03631dff8dbcb3c69b4a5454f863bd79dd022b281cfa8916b437567829d291",
+        "bytes": 1856
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/lineage-events.jsonl",
+        "sha256": "f78f597d76bc623dbe78dc84fcae489d9c42eb6e0ad4e8a4df4fb556a6c6400a",
+        "bytes": 482
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/lane-events.json",
+        "sha256": "536fcd0fa9fe3d3c15d5326984da961380591c1b8187ab2521849491aa0e7102",
+        "bytes": 1859
+      },
+      "outcome": 0,
+      "timedOut": false,
+      "interrupted": false,
+      "rootExitCode": 0,
+      "ownedCount": 1,
+      "reapedCount": 1,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.002172521999455057,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57322,
+            "ppid": 57321,
+            "pgid": 57322,
+            "sid": 57322,
+            "state": "R",
+            "startTicks": 2070161,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57322,
+            "ppid": 57321,
+            "pgid": 57322,
+            "sid": 57322,
+            "state": "R",
+            "startTicks": 2070161,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57322,
+          "exitCode": 0,
+          "waitpidStatus": 0,
+          "root": true
+        }
+      ],
+      "ownedSignalCount": 0,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20718.555959501,
+      "executionEnd": 20703.556412778,
+      "hardEnd": 20715.556412778,
+      "cleanupReserve": 12,
+      "establishedEscape": null
+    },
+    {
+      "case": "root-exit-orphan",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 19141,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/supervisor-result.json",
+        "sha256": "3b94383d71454fe64b9dcb5460bcb66d9d8f7329424a3680b3b8901d105de117"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/command-spec.json",
+        "sha256": "3931ad090b92dd98b57032d7c2df70918a3933554af3c2f8cb15cae49f466897",
+        "bytes": 1883
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/lineage-events.jsonl",
+        "sha256": "9320c1d3ba9df2df1b578e06c5f41621deb694f50ce0e29fbfb9612afee23a96",
+        "bytes": 1402
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/lane-events.json",
+        "sha256": "b26eca0f1e0ec01f10e5a13331f115285be4bee307f5035ed8ca96b9b081f662",
+        "bytes": 1896
+      },
+      "outcome": 0,
+      "timedOut": false,
+      "interrupted": false,
+      "rootExitCode": 0,
+      "ownedCount": 3,
+      "reapedCount": 3,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.030216957999073202,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57336,
+            "ppid": 57335,
+            "pgid": 57336,
+            "sid": 57336,
+            "state": "R",
+            "startTicks": 2070604,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57336,
+            "ppid": 57335,
+            "pgid": 57336,
+            "sid": 57336,
+            "state": "R",
+            "startTicks": 2070604,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": []
+        },
+        {
+          "identity": {
+            "pid": 57337,
+            "ppid": 57335,
+            "pgid": 57337,
+            "sid": 57337,
+            "state": "Z",
+            "startTicks": 2070607,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57337,
+            "ppid": 57335,
+            "pgid": 57337,
+            "sid": 57337,
+            "state": "Z",
+            "startTicks": 2070607,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-or-kernel-adopted-child",
+          "signals": []
+        },
+        {
+          "identity": {
+            "pid": 57338,
+            "ppid": 57335,
+            "pgid": 57337,
+            "sid": 57337,
+            "state": "S",
+            "startTicks": 2070607,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57338,
+            "ppid": 57335,
+            "pgid": 57337,
+            "sid": 57337,
+            "state": "S",
+            "startTicks": 2070607,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-or-kernel-adopted-child",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57336,
+          "exitCode": 0,
+          "waitpidStatus": 0,
+          "root": true
+        },
+        {
+          "pid": 57337,
+          "exitCode": 0,
+          "root": false,
+          "waitid": {
+            "pid": 57337,
+            "uid": 1000,
+            "code": 1,
+            "status": 0
+          }
+        },
+        {
+          "pid": 57338,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 57338,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        }
+      ],
+      "ownedSignalCount": 1,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20722.991847027,
+      "executionEnd": 20707.992425612,
+      "hardEnd": 20719.992425612,
+      "cleanupReserve": 12,
+      "establishedEscape": {
+        "identity": {
+          "pgid": 57337,
+          "pid": 57338,
+          "ppid": 57335,
+          "sid": 57337,
+          "startTicks": 2070607,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "ignoresSigterm": false,
+        "initialIdentity": {
+          "pgid": 57337,
+          "pid": 57338,
+          "ppid": 57337,
+          "sid": 57337,
+          "startTicks": 2070607,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "kind": "doublefork",
+        "label": "actual-doublefork-ready",
+        "pgid": 57337,
+        "pid": 57338,
+        "ppid": 57335,
+        "readyMonotonic": 20706.086363169,
+        "rootIdentity": {
+          "pgid": 57336,
+          "pid": 57336,
+          "ppid": 57335,
+          "sid": 57336,
+          "startTicks": 2070604,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sid": 57337,
+        "startTicks": 2070607,
+        "state": "R",
+        "token": "2ae03badf22e4374874bb6f3afa23565",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      }
+    },
+    {
+      "case": "setsid-timeout",
+      "subcase": "single",
+      "receipt": {
+        "bytes": 18344,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor-result.json",
+        "sha256": "05a885d6d05ce0e236dde69e271fc471182e5ee2957fd743577588ceff3c8075"
+      },
+      "commandSpec": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/command-spec.json",
+        "sha256": "258792776eb4bf1854301ed1ba7d2f4306dfd02903d9aa6b367591b72b4ea242",
+        "bytes": 1871
+      },
+      "lineage": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/lineage-events.jsonl",
+        "sha256": "c0b9bae4ae7444702a2d029914a38c85a0a67d430514f289fdf6a0b7277c0de3",
+        "bytes": 2251
+      },
+      "laneEvents": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/lane-events.json",
+        "sha256": "a06ccfea1d38c5a365ca2207f73ce6c2486a40cf5e6f9adcda6b48a730c30fd3",
+        "bytes": 1882
+      },
+      "outcome": 124,
+      "timedOut": true,
+      "interrupted": false,
+      "rootExitCode": -15,
+      "ownedCount": 2,
+      "reapedCount": 2,
+      "cleanup": {
+        "complete": true,
+        "kernelEchild": true,
+        "heldPidfdsExited": true,
+        "subreaperVerifiedAtCompletion": true,
+        "discoveryErrors": [],
+        "liveOwnedIdentities": [],
+        "violations": [],
+        "error": null,
+        "seconds": 0.0310048370010918,
+        "maximumSeconds": 10.0
+      },
+      "ownedIdentities": [
+        {
+          "identity": {
+            "pid": 57327,
+            "ppid": 57326,
+            "pgid": 57327,
+            "sid": 57327,
+            "state": "R",
+            "startTicks": 2070189,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57327,
+            "ppid": 57326,
+            "pgid": 57327,
+            "sid": 57327,
+            "state": "R",
+            "startTicks": 2070189,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "direct-root-popen-child",
+          "signals": [
+            15
+          ]
+        },
+        {
+          "identity": {
+            "pid": 57328,
+            "ppid": 57327,
+            "pgid": 57327,
+            "sid": 57327,
+            "state": "R",
+            "startTicks": 2070192,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "lastIdentity": {
+            "pid": 57328,
+            "ppid": 57326,
+            "pgid": 57328,
+            "sid": 57328,
+            "state": "Z",
+            "startTicks": 2070192,
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "origin": "live-pidfd-owned-parent",
+          "signals": [
+            15
+          ]
+        }
+      ],
+      "reaped": [
+        {
+          "pid": 57327,
+          "exitCode": -15,
+          "waitpidStatus": 15,
+          "root": true
+        },
+        {
+          "pid": 57328,
+          "exitCode": -15,
+          "root": false,
+          "waitid": {
+            "pid": 57328,
+            "uid": 1000,
+            "code": 2,
+            "status": 15
+          }
+        }
+      ],
+      "ownedSignalCount": 2,
+      "baselineSignalCountDerived": 0,
+      "baselineCount": 66,
+      "originalCommonSafeEnd": 20718.842674561,
+      "executionEnd": 20703.843482176,
+      "hardEnd": 20715.843482176,
+      "cleanupReserve": 12,
+      "establishedEscape": {
+        "identity": {
+          "pgid": 57328,
+          "pid": 57328,
+          "ppid": 57327,
+          "sid": 57328,
+          "startTicks": 2070192,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "ignoresSigterm": false,
+        "initialIdentity": null,
+        "kind": "setsid",
+        "label": "actual-setsid-ready",
+        "pgid": 57328,
+        "pid": 57328,
+        "ppid": 57327,
+        "readyMonotonic": 20701.957931006,
+        "rootIdentity": {
+          "pgid": 57327,
+          "pid": 57327,
+          "ppid": 57326,
+          "sid": 57327,
+          "startTicks": 2070189,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "sid": 57328,
+        "startTicks": 2070192,
+        "state": "R",
+        "token": "e5d92545d85748cca4149ef532486995",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      }
+    }
+  ],
+  "interruptPhaseObservations": [
+    {
+      "late": false,
+      "observation": {
+        "bytes": 2809,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/ready-observation.json",
+        "sha256": "4e4812e2288647783b9acf425394c4199548c9fc62bbe0e5b7e6d81ab15e7480"
+      },
+      "requestMonotonic": 20708.731353079,
+      "successfulSendCompletionMonotonic": 20708.731434862,
+      "executionEndMonotonic": 20710.638437143,
+      "outcome130Verified": true,
+      "timedOutFlag": false
+    },
+    {
+      "late": true,
+      "observation": {
+        "bytes": 3125,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/ready-observation.json",
+        "sha256": "06a88d73581932f5f19a7650e59203453ca9594ee714ff93e6e85175e6f67da7"
+      },
+      "requestMonotonic": 20711.262755213,
+      "successfulSendCompletionMonotonic": 20711.262906937,
+      "executionEndMonotonic": 20711.260494409,
+      "outcome130Verified": true,
+      "timedOutFlag": true
+    }
+  ],
+  "bystanderReceipt": {
+    "bytes": 2731,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander-receipt.json",
+    "sha256": "de7441dc49d8ec66368868c1754dfcdc1038ba82de1d3ff0ba3cc360b215fd08"
+  },
+  "bystanderOriginalData": {
+    "afterIdentity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "S",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "aliveAfter": true,
+    "aliveBefore": true,
+    "beforeIdentity": {
+      "pgid": 57358,
+      "pid": 57358,
+      "ppid": 57318,
+      "sid": 57358,
+      "startTicks": 2071173,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "cleanupComplete": true,
+    "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "kind": "real-preexisting-bystander",
+    "originals": [
+      {
+        "bytes": 604,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/escape-ready.json",
+        "sha256": "7446ad18ccca839845eff9e585545ae987a59d3dae90274f74e38a12f15d06cf"
+      },
+      {
+        "bytes": 209,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/root.json",
+        "sha256": "43dc0f81ada1d8380aa0a887346ec5b9357bcaa4a04d54d205ed7945cc76b413"
+      },
+      {
+        "bytes": 265,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/unrelated-baseline-sentinel-57358.json",
+        "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+      },
+      {
+        "bytes": 265,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-dummy.stdout.log",
+        "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+      },
+      {
+        "bytes": 653,
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-cleanup.json",
+        "sha256": "5c0fbfb8ec52be0d249f5cc45661ab4b31fc34de56b8bb4e12d2a44710b9a924"
+      }
+    ],
+    "ownerCleanup": {
+      "cleanupComplete": true,
+      "exitCode": -15,
+      "identity": {
+        "pgid": 57358,
+        "pid": 57358,
+        "ppid": 57318,
+        "sid": 57358,
+        "startTicks": 2071173,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "scope": "separate-actual-owner-exact-direct-dummy-cleanup",
+      "signals": [
+        {
+          "identity": {
+            "pgid": 57358,
+            "pid": 57358,
+            "ppid": 57318,
+            "sid": 57358,
+            "startTicks": 2071173,
+            "state": "S",
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "sent": true,
+          "signal": 15
+        }
+      ]
+    },
+    "protectedFromSignals": true
+  },
+  "identityRefusalReceipt": {
+    "bytes": 3117,
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/identity-refusal-receipt.json",
+    "sha256": "60b687842655aa1f93bda7c896b95017998c5a38ab511b43d98c0227033db74d"
+  },
+  "identityRefusalOriginalData": {
+    "actualSignalCallsDuringRefusals": [],
+    "aliveAfterRefusals": true,
+    "aliveBefore": true,
+    "attempts": [
+      {
+        "changedField": "startTicks",
+        "declaredIdentity": {
+          "pgid": 57363,
+          "pid": 57363,
+          "ppid": 57318,
+          "sid": 57363,
+          "startTicks": 2071386,
+          "state": "R",
+          "uids": [
+            1000,
+            1000,
+            1000,
+            1000
+          ]
+        },
+        "reason": "Signal refused: changed startTicks/UID or unresolved identity",
+        "refused": true
+      },
+      {
+        "changedField": "uids",
+        "declaredIdentity": {
+          "pgid": 57363,
+          "pid": 57363,
+          "ppid": 57318,
+          "sid": 57363,
+          "startTicks": 2071385,
+          "state": "R",
+          "uids": [
+            1001,
+            1001,
+            1001,
+            1001
+          ]
+        },
+        "reason": "Signal refused: changed startTicks/UID or unresolved identity",
+        "refused": true
+      }
+    ],
+    "cleanupComplete": true,
+    "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "hostPidReuseClaimed": false,
+    "identity": {
+      "pgid": 57363,
+      "pid": 57363,
+      "ppid": 57318,
+      "sid": 57363,
+      "startTicks": 2071385,
+      "state": "R",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "kind": "real-dummy-identity-refusal",
+    "metadataMismatchOnly": true,
+    "ownerCleanup": {
+      "cleanupComplete": true,
+      "exitCode": -15,
+      "identity": {
+        "pgid": 57363,
+        "pid": 57363,
+        "ppid": 57318,
+        "sid": 57363,
+        "startTicks": 2071385,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "scope": "separate-actual-owner-exact-direct-dummy-cleanup",
+      "signals": [
+        {
+          "identity": {
+            "pgid": 57363,
+            "pid": 57363,
+            "ppid": 57318,
+            "sid": 57363,
+            "startTicks": 2071385,
+            "state": "S",
+            "uids": [
+              1000,
+              1000,
+              1000,
+              1000
+            ]
+          },
+          "sent": true,
+          "signal": 15
+        }
+      ]
+    },
+    "ready": {
+      "identity": {
+        "pgid": 57363,
+        "pid": 57363,
+        "ppid": 57318,
+        "sid": 57363,
+        "startTicks": 2071385,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "ignoresSigterm": false,
+      "initialIdentity": null,
+      "kind": "sentinel",
+      "label": "actual-sentinel-ready",
+      "pgid": 57363,
+      "pid": 57363,
+      "ppid": 57318,
+      "readyMonotonic": 20713.895080555,
+      "rootIdentity": {
+        "pgid": 57363,
+        "pid": 57363,
+        "ppid": 57318,
+        "sid": 57363,
+        "startTicks": 2071385,
+        "state": "R",
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "sid": 57363,
+      "startTicks": 2071385,
+      "state": "R",
+      "token": "9223c6c8647c4cc7942d2b0b82238c6f",
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    "signalsSentDuringRefusals": 0,
+    "startTicksMismatchRefused": true,
+    "uidMismatchRefused": true
+  },
+  "limits": [
+    "Stale identity is an actual live dummy with two deliberately wrong metadata declarations. It is not a real host UID change or host PID reuse experiment.",
+    "Baseline helper protection is separated from the test owner later terminating its own bystander/negative fixture with proven identity.",
+    "SIGINT before-deadline proof bounds successful send completion; it does not independently timestamp kernel handler execution.",
+    "This audit read and hashed recorded kernel/held-pidfd/ECHILD/reaped evidence; it did not repeat signals or inspect current live processes.",
+    "Preliminary b5six/failedcdb histories and superseded pre-execution aadcb source reports remain separate."
+  ],
+  "soleOperatorAcceptanceCreated": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "files": [
+    {
+      "bytes": 509,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/actual-command.stdout.log",
+      "sha256": "9bdd90b3c7c25ef66172860a759b6615dc698a66eb590e429ee98adccbba785d"
+    },
+    {
+      "bytes": 239,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander-after.json",
+      "sha256": "87d2d66180087b225487045793d643f0ea9b2ecdda966e85fc36cafc17125ba0"
+    },
+    {
+      "bytes": 1113,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander-before.json",
+      "sha256": "8d35147313ef78407ca54c081f18aff01d40858e877f72aba43781b3aa4c6d00"
+    },
+    {
+      "bytes": 2731,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander-receipt.json",
+      "sha256": "de7441dc49d8ec66368868c1754dfcdc1038ba82de1d3ff0ba3cc360b215fd08"
+    },
+    {
+      "bytes": 604,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/escape-ready.json",
+      "sha256": "7446ad18ccca839845eff9e585545ae987a59d3dae90274f74e38a12f15d06cf"
+    },
+    {
+      "bytes": 209,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/root.json",
+      "sha256": "43dc0f81ada1d8380aa0a887346ec5b9357bcaa4a04d54d205ed7945cc76b413"
+    },
+    {
+      "bytes": 265,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/bystander/unrelated-baseline-sentinel-57358.json",
+      "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+    },
+    {
+      "bytes": 3816,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/case-observations.json",
+      "sha256": "5ebf7e530d9ffc756547394dad5767898af3481a63dc9b40d7215c9ddfca8cde"
+    },
+    {
+      "bytes": 1856,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/command-spec.json",
+      "sha256": "9981bda15746a5aab23857a1d2a53d5fe53d4d6633d78942c65f2c42aacfc7fc"
+    },
+    {
+      "bytes": 2251,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/lineage-events.jsonl",
+      "sha256": "24edf0b0b71e95183746e6035b67a78e8f1edf130c0f809008e087be463bf259"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-identity.json",
+      "sha256": "af5b3ba518481e932025e999c38bb83a9de4c9e0c07da3df1fc3531af6d5c7f0"
+    },
+    {
+      "bytes": 18559,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor-result.json",
+      "sha256": "6a6a8d57cbb946696ae99e5ac9bf0cff287d652500e4529107812d5a833eb741"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/containment/01-bystander/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 600,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/escape-ready.json",
+      "sha256": "02d26b9bb2c47e7fefaabd0e916de644df3550c2b4f5bec89a518825ccce925f"
+    },
+    {
+      "bytes": 2205,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/observer-ack.json",
+      "sha256": "c21b0b3602a2a04581a204c59d3571f775b6eb24af994ea93a6db14b94a19652"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/owned-parent-57361.json",
+      "sha256": "882dd10c17847ec28189d7887ca56d0bb0f51e0984de9def76e6fd497c1ce73d"
+    },
+    {
+      "bytes": 257,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/owned-setsid-leaf-57362.json",
+      "sha256": "c72fdecffcaf5424426b09da44b4cf37ad4bfef70a19c30d0987b3e8650725ed"
+    },
+    {
+      "bytes": 213,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/fixture/root.json",
+      "sha256": "2f5b6825c560505e20e819ea052cdc0e4f2310f70fef8fc4279af9d23cd9e32a"
+    },
+    {
+      "bytes": 1855,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/lane-events.json",
+      "sha256": "c6c3ebbe692425a26b566c75745c2e093cd51fa239cc9afb1047d4addf94baf2"
+    },
+    {
+      "bytes": 653,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-cleanup.json",
+      "sha256": "5c0fbfb8ec52be0d249f5cc45661ab4b31fc34de56b8bb4e12d2a44710b9a924"
+    },
+    {
+      "bytes": 265,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/owner-dummy.stdout.log",
+      "sha256": "5b6d6ae76581038c976616b55166e6b5e639db18c50f112e6935ee1fedcd8dfa"
+    },
+    {
+      "bytes": 2205,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/bystander/ready-observation.json",
+      "sha256": "c21b0b3602a2a04581a204c59d3571f775b6eb24af994ea93a6db14b94a19652"
+    },
+    {
+      "bytes": 1060,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/actual-command.stdout.log",
+      "sha256": "a5ef881a13a331920e4ca3e15e0baf59d95cfc6a47887e05eb1c4b9233b4512e"
+    },
+    {
+      "bytes": 1289,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/case-observations.json",
+      "sha256": "377e2ea06e9ae16fdacfd70afd7f2fbb75398d7b841dc7cf1031099f7ca3f587"
+    },
+    {
+      "bytes": 1881,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/command-spec.json",
+      "sha256": "59a201f06c6a3466c74a445648034c58b44ee92c21363a8ced0275677842071e"
+    },
+    {
+      "bytes": 2151,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/lineage-events.jsonl",
+      "sha256": "e5055c3b9dd4fbff5223f7427b7d60e6c27a1a2012c2d00df1f86933803caf3b"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor-identity.json",
+      "sha256": "9d965f2751f70cdb8bfeaeb15bd0b6b4cf510d3012e2f7da0a7fcf0f31be091b"
+    },
+    {
+      "bytes": 19144,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor-result.json",
+      "sha256": "82bec308f28fa04be66868d3c09124e2fbc63f7d4822d4f5c9ca14fe8aa06499"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/containment/01-doublefork-timeout/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 733,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/escape-ready.json",
+      "sha256": "81ae10f91ddc99bbe8d77ff132376cc3dc546830bdb8b37be906329b4daa1bf9"
+    },
+    {
+      "bytes": 189,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/grandchild-initial.json",
+      "sha256": "fa923dbdb9969ef738173d58dc40f3a8e05a81ea4a43d48d2ed7d14a210d7100"
+    },
+    {
+      "bytes": 208,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/intermediate-exit.json",
+      "sha256": "5ab1a9b6cd93fcdecfa0baefd5e07f6ba305f7d1efd08aa654aace2fa5da4b05"
+    },
+    {
+      "bytes": 2462,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/observer-ack.json",
+      "sha256": "d74a704d53198b02f37ed36a07bfcd7212d29b1d0d0db99df25487bfa949b21b"
+    },
+    {
+      "bytes": 264,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/owned-doublefork-adopted-57333.json",
+      "sha256": "455dd78b058c55fd89e6a145b00c6136a13c4b5066e03b1f5149908723f087f6"
+    },
+    {
+      "bytes": 275,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/owned-doublefork-grandchild-initial-57333.json",
+      "sha256": "48f319917427c2dedff5fef575f11700965e5a82c423459a461ae141a643d915"
+    },
+    {
+      "bytes": 269,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/owned-doublefork-intermediate-57332.json",
+      "sha256": "fae29d08186f4f8a8a67e15ee215e8c09c94e6b4e111b19d042fb0847647df20"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/owned-parent-57331.json",
+      "sha256": "84464ee17c325a3a2a8e2366d2c514e29679ae2fbb3f271a9e109b5b8e36055c"
+    },
+    {
+      "bytes": 211,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/fixture/root.json",
+      "sha256": "7f7e4e0f53579d6dfd7c97ede6a4c4f1d174bc5243b5b4fb60d1e8a7e6cc8f4c"
+    },
+    {
+      "bytes": 1901,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/lane-events.json",
+      "sha256": "8933ebe8b9c93372792632922cb99e417fb25b9613d2871725eec28964de8a22"
+    },
+    {
+      "bytes": 2462,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/doublefork-timeout/ready-observation.json",
+      "sha256": "d74a704d53198b02f37ed36a07bfcd7212d29b1d0d0db99df25487bfa949b21b"
+    },
+    {
+      "bytes": 514,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/actual-command.stdout.log",
+      "sha256": "630256bcbdd96e221ebbdd4b6f005d1318ff211a4e39ba036bd09926cfaa0ccc"
+    },
+    {
+      "bytes": 1261,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/case-observations.json",
+      "sha256": "03a50a947add7425a02581f8ae51080731b65a0b87837e6812672462653c4a42"
+    },
+    {
+      "bytes": 1867,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/command-spec.json",
+      "sha256": "6cb82d9194eeea489412f671fa4ef9a1e3e63a02798a5efc67604521400afabe"
+    },
+    {
+      "bytes": 2638,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/lineage-events.jsonl",
+      "sha256": "fff901b8a746b66a2b2e79bd9fcac8a4375cdb57778c72bdb7599e13ac016327"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor-identity.json",
+      "sha256": "acea93d2f43e39189b29edbde78afcc3fb03a8647df8040cffc8611ce7b420cc"
+    },
+    {
+      "bytes": 18358,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor-result.json",
+      "sha256": "82b37f045205c7a51724b71cd3102796c161b5a753b27e27aaaf1beb2aca8990"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/containment/01-ignore-term/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 599,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture/escape-ready.json",
+      "sha256": "9a274a5730beb8183a99554d011120c9bcf231195ad7b5f4a71774e44fd35822"
+    },
+    {
+      "bytes": 2211,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture/observer-ack.json",
+      "sha256": "88c738515c65ec892578a423075ea26bda40df5a3db9a30f11d8b224c13ae7e6"
+    },
+    {
+      "bytes": 262,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture/owned-ignore-term-leaf-57342.json",
+      "sha256": "6e8d13db0bdcd6070eedc7393a38c2479b5614bfc2baedde31f8d737a105fe32"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture/owned-parent-57341.json",
+      "sha256": "374913d92096045368b63453376a7c926a6bddfdb61dd19e67f493a3ecd7d46f"
+    },
+    {
+      "bytes": 218,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/fixture/root.json",
+      "sha256": "45367c72d3def15ebf76ae5c98d94f2733bac83079d8a36c6f3bace06656c9cb"
+    },
+    {
+      "bytes": 1872,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/lane-events.json",
+      "sha256": "cbf13a7168e4a4370eccb9cb4d982bf7dbd82d8c8434a0d48ecd65e1143f7605"
+    },
+    {
+      "bytes": 2211,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/ignore-term/ready-observation.json",
+      "sha256": "88c738515c65ec892578a423075ea26bda40df5a3db9a30f11d8b224c13ae7e6"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/actual-command.stdout.log",
+      "sha256": "2b700451b89c6014ef36c475c0d1c51c760828a5924f4fc1f8808d3d650fa1e8"
+    },
+    {
+      "bytes": 1395,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/case-observations.json",
+      "sha256": "3b12f1aaad172925cdf84b98818ee2bd91047609997482768e54d41774c3fcf3"
+    },
+    {
+      "bytes": 1936,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/command-spec.json",
+      "sha256": "e108421d32c95f2ca088b2417f59dde5405630a5e677858b31617e0422857f89"
+    },
+    {
+      "bytes": 1259,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/lineage-events.jsonl",
+      "sha256": "62bf26e209718f4da6aa31ee6308102ecc846b1d5dc08f0cedca20ff74ad7c99"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/supervisor-identity.json",
+      "sha256": "c2ab7b3de744e65b5276f45f9a53c5a484940c82f5b86ab574c28b5cb4627db5"
+    },
+    {
+      "bytes": 17575,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/supervisor-result.json",
+      "sha256": "9d877e74a709faee64344aa09c65a6c63d51f002545b7acbb243ce65cf8d3122"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/containment/01-interrupt-after-timeout/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 607,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/fixture/escape-ready.json",
+      "sha256": "971a8a6eaf3db7b82f59f53df8723154acc7757adaca034a4b4122a2073b463b"
+    },
+    {
+      "bytes": 2324,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/fixture/observer-ack.json",
+      "sha256": "8169018163f28c2019efe2a66f3b56d70226c6b64bf85e6ffdb2510819970194"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/fixture/owned-parent-57357.json",
+      "sha256": "2b700451b89c6014ef36c475c0d1c51c760828a5924f4fc1f8808d3d650fa1e8"
+    },
+    {
+      "bytes": 206,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/fixture/root.json",
+      "sha256": "b6d4b049ada4622760df2e9eb617817538800e3a7fbe88b25f42e692f7781369"
+    },
+    {
+      "bytes": 1965,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/lane-events.json",
+      "sha256": "3799afc19c6eb40fb6503fa843e4250cdacb83eb19a3add772da653d04a168a8"
+    },
+    {
+      "bytes": 3125,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/after-timeout-during-cleanup/ready-observation.json",
+      "sha256": "06a88d73581932f5f19a7650e59203453ca9594ee714ff93e6e85175e6f67da7"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/actual-command.stdout.log",
+      "sha256": "650e24eab34da8014662be800c3edae19e42276aa65df02b91243918e8eaa78b"
+    },
+    {
+      "bytes": 1332,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/case-observations.json",
+      "sha256": "040be1af95f87e0f45e31821f3b27ff4cdc70719b1cfc92eb7c52e97a661177f"
+    },
+    {
+      "bytes": 1897,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/command-spec.json",
+      "sha256": "b226c0e3aed318376ec79b9d21e9dcbdec265461cf25708340792b5a2b0136b8"
+    },
+    {
+      "bytes": 1259,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/lineage-events.jsonl",
+      "sha256": "46607fd17305d7a6eaa9f2412023635e6ac862827e18047e23314c13579af6ac"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/supervisor-identity.json",
+      "sha256": "0279a33d2ea8783c4c19b4089f0ef9f9a662b102b6ee2dcf4d7c97dabfaafb19"
+    },
+    {
+      "bytes": 17550,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/supervisor-result.json",
+      "sha256": "97b79dcff290ded210b32321641a2a1de6ee42ea69d3aaadcd0aa4fc86336a17"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/containment/01-interrupt-before-deadline/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 607,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/fixture/escape-ready.json",
+      "sha256": "2f4767217c715e603739a4be0a954427ff20dfd9901a389257f6f3e0141ee68d"
+    },
+    {
+      "bytes": 2289,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/fixture/observer-ack.json",
+      "sha256": "76c8d783b60784bab25b80ee22bda1eedc214f05c054ed1593b7cc84d1e35737"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/fixture/owned-parent-57354.json",
+      "sha256": "650e24eab34da8014662be800c3edae19e42276aa65df02b91243918e8eaa78b"
+    },
+    {
+      "bytes": 206,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/fixture/root.json",
+      "sha256": "9cb8db65508b65aeb8226324a2a1896590b01d42d3af1b5369363df9b2826ad5"
+    },
+    {
+      "bytes": 1930,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/lane-events.json",
+      "sha256": "f6dc936e61ed279c0ddf76dc0a180e27ce5aa8657f69048e147c2db7237287c9"
+    },
+    {
+      "bytes": 2809,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/interrupt/before-deadline/ready-observation.json",
+      "sha256": "4e4812e2288647783b9acf425394c4199548c9fc62bbe0e5b7e6d81ab15e7480"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/actual-command.stdout.log",
+      "sha256": "f942dd43d6ec7e24a0633e346c0cdc39f9313c140ece779def59352855025592"
+    },
+    {
+      "bytes": 451,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/case-observations.json",
+      "sha256": "46a1158248ec71276d82da5d5820913457dd392122dc6591535e2ca44baf62d8"
+    },
+    {
+      "bytes": 1863,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/command-spec.json",
+      "sha256": "65eb5e971af6911da487a8b660cc2b827c181961de8d003b7be4eb63848ecca2"
+    },
+    {
+      "bytes": 482,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/lineage-events.jsonl",
+      "sha256": "67b0ae31c55e0fac0740c244087d0325748b404193fa9caf9d27e65ad7fe3a9a"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/supervisor-identity.json",
+      "sha256": "69df74e0c81e6b6645edd234aa67dd6d952a2964f7a0c5980889d6b25fcd5092"
+    },
+    {
+      "bytes": 17508,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/supervisor-result.json",
+      "sha256": "84d83bee7b5153fb59f46288e1601da2f733dfa27623909e014177489d52da40"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/containment/01-nonzero-exit/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/fixture/owned-parent-57324.json",
+      "sha256": "f942dd43d6ec7e24a0633e346c0cdc39f9313c140ece779def59352855025592"
+    },
+    {
+      "bytes": 211,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/fixture/root.json",
+      "sha256": "d98bbad3169997568e337de3a5b3c95350b9fd35bb86f2e0a361fdad925f4ffd"
+    },
+    {
+      "bytes": 1866,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/nonzero-exit/lane-events.json",
+      "sha256": "de5c2ec587e1b87050dc3bef93a17aff5ef65a5f309efbe7e76d2e9006785902"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/actual-command.stdout.log",
+      "sha256": "00aadabf96ef7ef4300c58f5e54fb05cd21e4af0394748c210461a84f09b10ac"
+    },
+    {
+      "bytes": 445,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/case-observations.json",
+      "sha256": "1004cf88bccdce816466e34e0491a31e27d9e4d1a8acb78ef9cf8f69adb9ff29"
+    },
+    {
+      "bytes": 1856,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/command-spec.json",
+      "sha256": "7b03631dff8dbcb3c69b4a5454f863bd79dd022b281cfa8916b437567829d291"
+    },
+    {
+      "bytes": 482,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/lineage-events.jsonl",
+      "sha256": "f78f597d76bc623dbe78dc84fcae489d9c42eb6e0ad4e8a4df4fb556a6c6400a"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/supervisor-identity.json",
+      "sha256": "3afe5497b53bf505fbdcd5753f1766aa91186feaad7e7e111da21ae44f42fddc"
+    },
+    {
+      "bytes": 17494,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/supervisor-result.json",
+      "sha256": "37c309d9a5badc8e9debd8b3161739df1f48d0d86a99ba3d0d2d3e304f652a83"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/containment/01-normal-exit/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/fixture/owned-parent-57322.json",
+      "sha256": "00aadabf96ef7ef4300c58f5e54fb05cd21e4af0394748c210461a84f09b10ac"
+    },
+    {
+      "bytes": 207,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/fixture/root.json",
+      "sha256": "47a0ebb573c101746ab3352799d70a997dadd637644b7265b671119ec0dcd784"
+    },
+    {
+      "bytes": 1859,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/normal-exit/lane-events.json",
+      "sha256": "536fcd0fa9fe3d3c15d5326984da961380591c1b8187ab2521849491aa0e7102"
+    },
+    {
+      "bytes": 1060,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/actual-command.stdout.log",
+      "sha256": "103698c97768cf194433150af6bd8092c5e9a95789e430a73e418438abf8cdb1"
+    },
+    {
+      "bytes": 1285,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/case-observations.json",
+      "sha256": "06d833b2c0fd85632aede02ff6a06910a6d968722489212a18178d7b31e21a22"
+    },
+    {
+      "bytes": 1883,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/command-spec.json",
+      "sha256": "3931ad090b92dd98b57032d7c2df70918a3933554af3c2f8cb15cae49f466897"
+    },
+    {
+      "bytes": 1402,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/lineage-events.jsonl",
+      "sha256": "9320c1d3ba9df2df1b578e06c5f41621deb694f50ce0e29fbfb9612afee23a96"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/supervisor-identity.json",
+      "sha256": "24f808fd14329dbe3adc9b13aec98e891e7ac7914c1b565d47177b2608de7f51"
+    },
+    {
+      "bytes": 19141,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/supervisor-result.json",
+      "sha256": "3b94383d71454fe64b9dcb5460bcb66d9d8f7329424a3680b3b8901d105de117"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/containment/01-root-exit-orphan/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 733,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/escape-ready.json",
+      "sha256": "34fe23b052d1cb4682a1efd2d511a69e2b0e7b9e6f5dfde9b12230514a76f83c"
+    },
+    {
+      "bytes": 189,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/grandchild-initial.json",
+      "sha256": "f4931c615c163a6cbae9289b246b579818a1f19abfa5b6b7262dc25b606b2369"
+    },
+    {
+      "bytes": 208,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/intermediate-exit.json",
+      "sha256": "c59c41bf7a2938b3a2082683e4ca93f4c9ce315c31f51b471617e060d8eb2920"
+    },
+    {
+      "bytes": 2454,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/observer-ack.json",
+      "sha256": "087db7500bb621ccc92c6b188ff516f8b0085db6648db03cf968dac137e315ce"
+    },
+    {
+      "bytes": 264,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/owned-doublefork-adopted-57338.json",
+      "sha256": "dfa6508923f5f2fe715a3b66d6e891130fdf76a7a7e4c4765faff88391b557d4"
+    },
+    {
+      "bytes": 275,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/owned-doublefork-grandchild-initial-57338.json",
+      "sha256": "684c2efe2f89bc164f84f9669fc638ca868dbd427a1e305ade2b923f453a1795"
+    },
+    {
+      "bytes": 269,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/owned-doublefork-intermediate-57337.json",
+      "sha256": "d800137648c808bd6e62674141874fa2bf539de897a43d4297c977de893f2f2b"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/owned-parent-57336.json",
+      "sha256": "b2814ebad7a739008546a5c3b3d625a82424595cca596de7016389cae4c75971"
+    },
+    {
+      "bytes": 204,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/root-exit-after-ack.json",
+      "sha256": "9bde20b4018b5ddded5f3b35349f8b89cf85f71de5704c439462f09cc4e7f329"
+    },
+    {
+      "bytes": 219,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/fixture/root.json",
+      "sha256": "2a0dc9a722c44237030778b3287d8c6a034b2dd7e139095dcbd8e29b0709d00a"
+    },
+    {
+      "bytes": 1896,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/lane-events.json",
+      "sha256": "b26eca0f1e0ec01f10e5a13331f115285be4bee307f5035ed8ca96b9b081f662"
+    },
+    {
+      "bytes": 2454,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/root-exit-orphan/ready-observation.json",
+      "sha256": "087db7500bb621ccc92c6b188ff516f8b0085db6648db03cf968dac137e315ce"
+    },
+    {
+      "bytes": 509,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/actual-command.stdout.log",
+      "sha256": "0ef30b6dd2a65dccc5a349db3d797dc534a88770cc12d4ef748b88d91b56b493"
+    },
+    {
+      "bytes": 1271,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/case-observations.json",
+      "sha256": "13d6dd6554074f83d3a62f2cbfc778afd74a595bea5912d7657b88eb23ed074e"
+    },
+    {
+      "bytes": 1871,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/command-spec.json",
+      "sha256": "258792776eb4bf1854301ed1ba7d2f4306dfd02903d9aa6b367591b72b4ea242"
+    },
+    {
+      "bytes": 2251,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/lineage-events.jsonl",
+      "sha256": "c0b9bae4ae7444702a2d029914a38c85a0a67d430514f289fdf6a0b7277c0de3"
+    },
+    {
+      "bytes": 560,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor-identity.json",
+      "sha256": "39ffabfd4e69e0742549017d1f7fe96f641acd6f95f198e6e06b51a5d96d885a"
+    },
+    {
+      "bytes": 18344,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor-result.json",
+      "sha256": "05a885d6d05ce0e236dde69e271fc471182e5ee2957fd743577588ceff3c8075"
+    },
+    {
+      "bytes": 0,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/containment/01-setsid-timeout/supervisor.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 600,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture/escape-ready.json",
+      "sha256": "becb0fb37c79af960e1ea947c76c828a9f2257b4dd71e9538c9b5fe55c746a3e"
+    },
+    {
+      "bytes": 2225,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture/observer-ack.json",
+      "sha256": "787dbb427e289e50d2dafdb9d4fc30c27b43f16a4cc5c426899e44d3905ccc22"
+    },
+    {
+      "bytes": 252,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture/owned-parent-57327.json",
+      "sha256": "fff8ab8a6ea61abc1c9fce6821071e9c2264f03414b3bf1da88f3e5a2a3ee22b"
+    },
+    {
+      "bytes": 257,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture/owned-setsid-leaf-57328.json",
+      "sha256": "0bba1eceeebd31c72577438703b11d6808f9168a04ed8202adb9878bb6e5131a"
+    },
+    {
+      "bytes": 213,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/fixture/root.json",
+      "sha256": "1c6d2d5b645550dbb2e5f4c17f0bf5ce4f9328cc1e3a76922a7625736c81dafc"
+    },
+    {
+      "bytes": 1882,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/lane-events.json",
+      "sha256": "a06ccfea1d38c5a365ca2207f73ce6c2486a40cf5e6f9adcda6b48a730c30fd3"
+    },
+    {
+      "bytes": 2225,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/setsid-timeout/ready-observation.json",
+      "sha256": "787dbb427e289e50d2dafdb9d4fc30c27b43f16a4cc5c426899e44d3905ccc22"
+    },
+    {
+      "bytes": 604,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/fixture/escape-ready.json",
+      "sha256": "cd2e9b98a140b5679bfd7c55d5f5cb7ddb59d01f8eefdc1e0e29458fcd23ce7a"
+    },
+    {
+      "bytes": 209,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/fixture/root.json",
+      "sha256": "d9afa34ced9a33e5d627ba23aba00ce7f00ba71e8aa1d46c96a732b6e2e37047"
+    },
+    {
+      "bytes": 267,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/fixture/unrelated-baseline-sentinel-57363.json",
+      "sha256": "ecba24efb3effc006c54eb99384a68c7cd1a713e5b46acd641e925ea5c2b0ae5"
+    },
+    {
+      "bytes": 3117,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/identity-refusal-receipt.json",
+      "sha256": "60b687842655aa1f93bda7c896b95017998c5a38ab511b43d98c0227033db74d"
+    },
+    {
+      "bytes": 653,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/owner-cleanup.json",
+      "sha256": "94710233e437c3e4c610e6ff397a3d987a5e43a06d53511038dfcfe1f54f6f49"
+    },
+    {
+      "bytes": 267,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/cases/stale-identity/owner-dummy.stdout.log",
+      "sha256": "ecba24efb3effc006c54eb99384a68c7cd1a713e5b46acd641e925ea5c2b0ae5"
+    }
+  ]
+}

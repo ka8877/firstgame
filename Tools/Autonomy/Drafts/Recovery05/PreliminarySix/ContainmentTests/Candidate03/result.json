@@ -1,0 +1,330 @@
+{
+  "scope": "isolated-real-process-candidate-only-not-production-or-Root-approval",
+  "helperSource": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4/owned_process_containment.py",
+  "helperSha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+  "fixtureSha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3",
+  "UnityGameBrowserNetworkGitTouched": false,
+  "passed": 6,
+  "failed": 0,
+  "tests": [
+    {
+      "mode": "normal",
+      "status": "passed",
+      "event": {
+        "label": "normal",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "normal",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/normal/DummyOutputs",
+          "owned-normal-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:36.195998+00:00",
+        "timeoutSeconds": 0.9982338189984148,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 0,
+        "pid": 54619,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "normal/SupervisorEvidence/01-normal/supervisor-result.json",
+          "sha256": "c7816f4869885a2edad6d044d4b480dc7606e1dcde4f8aed73c36377480ff875",
+          "bytes": 17432
+        },
+        "finishedUtc": "2026-11-03T17:46:36.309345+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "normal",
+          "token": "owned-normal-Candidate03",
+          "pid": 54619,
+          "ppid": 54618,
+          "pgid": 54619,
+          "sid": 54619,
+          "uid": 1000,
+          "startTicks": 1981429
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "exit-seven",
+      "status": "passed",
+      "event": {
+        "label": "exit-seven",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "exit-seven",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/exit-seven/DummyOutputs",
+          "owned-exit-seven-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:36.356925+00:00",
+        "timeoutSeconds": 0.9991363679982896,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 7,
+        "pid": 54621,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "exit-seven/SupervisorEvidence/01-exit-seven/supervisor-result.json",
+          "sha256": "83813ab0c03f833d1b0b83ab9ccc9304e9f8c3bcd4e2d4fddf7dde10fd33a541",
+          "bytes": 17462
+        },
+        "finishedUtc": "2026-11-03T17:46:36.428876+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "exit-seven",
+          "token": "owned-exit-seven-Candidate03",
+          "pid": 54621,
+          "ppid": 54620,
+          "pgid": 54621,
+          "sid": 54621,
+          "uid": 1000,
+          "startTicks": 1981445
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "spawn-setsid",
+      "status": "passed",
+      "event": {
+        "label": "spawn-setsid",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "spawn-setsid",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-setsid/DummyOutputs",
+          "owned-spawn-setsid-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:36.477284+00:00",
+        "timeoutSeconds": 0.9992286509987025,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 124,
+        "pid": 54623,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "spawn-setsid/SupervisorEvidence/01-spawn-setsid/supervisor-result.json",
+          "sha256": "3a2b168132f4a65f344c1c0cede6478c07891195defda03b58d05694886e07a0",
+          "bytes": 18037
+        },
+        "finishedUtc": "2026-11-03T17:46:37.502292+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-spawn-setsid-Candidate03",
+          "pid": 54623,
+          "ppid": 54622,
+          "pgid": 54623,
+          "sid": 54623,
+          "uid": 1000,
+          "startTicks": 1981457
+        },
+        {
+          "label": "owned-setsid-leaf",
+          "token": "owned-spawn-setsid-Candidate03",
+          "pid": 54624,
+          "ppid": 54623,
+          "pgid": 54624,
+          "sid": 54624,
+          "uid": 1000,
+          "startTicks": 1981460
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "doublefork",
+      "status": "passed",
+      "event": {
+        "label": "doublefork",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "doublefork",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/doublefork/DummyOutputs",
+          "owned-doublefork-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:37.554292+00:00",
+        "timeoutSeconds": 0.9990044049991411,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 124,
+        "pid": 54626,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "doublefork/SupervisorEvidence/01-doublefork/supervisor-result.json",
+          "sha256": "109f087a068c8c55dfcac276975a09280231e4bfdcdd32b4566a97c0f2075952",
+          "bytes": 18553
+        },
+        "finishedUtc": "2026-11-03T17:46:38.573808+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-doublefork-Candidate03",
+          "pid": 54626,
+          "ppid": 54625,
+          "pgid": 54626,
+          "sid": 54626,
+          "uid": 1000,
+          "startTicks": 1981565
+        },
+        {
+          "label": "owned-doublefork-adopted",
+          "token": "owned-doublefork-Candidate03",
+          "pid": 54628,
+          "ppid": 54625,
+          "pgid": 54627,
+          "sid": 54627,
+          "uid": 1000,
+          "startTicks": 1981569
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "spawn-ignore-term",
+      "status": "passed",
+      "event": {
+        "label": "spawn-ignore-term",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "spawn-ignore-term",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/spawn-ignore-term/DummyOutputs",
+          "owned-spawn-ignore-term-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:38.620610+00:00",
+        "timeoutSeconds": 0.9993747560001793,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 124,
+        "pid": 54631,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "spawn-ignore-term/SupervisorEvidence/01-spawn-ignore-term/supervisor-result.json",
+          "sha256": "fff5dca0e00837ed98c8e50f7d83c1b12a3501f5c84431b3e491ebd0a7ba1e98",
+          "bytes": 18074
+        },
+        "finishedUtc": "2026-11-03T17:46:40.045303+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "owned-ignore-term-leaf",
+          "token": "owned-spawn-ignore-term-Candidate03",
+          "pid": 54632,
+          "ppid": 54631,
+          "pgid": 54632,
+          "sid": 54632,
+          "uid": 1000,
+          "startTicks": 1981675
+        },
+        {
+          "label": "owned-parent",
+          "token": "owned-spawn-ignore-term-Candidate03",
+          "pid": 54631,
+          "ppid": 54630,
+          "pgid": 54631,
+          "sid": 54631,
+          "uid": 1000,
+          "startTicks": 1981672
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "parent-exit-orphan",
+      "status": "passed",
+      "event": {
+        "label": "parent-exit-orphan",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/process_fixture.py",
+          "parent-exit-orphan",
+          "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03/parent-exit-orphan/DummyOutputs",
+          "owned-parent-exit-orphan-Candidate03"
+        ],
+        "cwd": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/Candidate03",
+        "startedUtc": "2026-11-03T17:46:40.096243+00:00",
+        "timeoutSeconds": 0.9992845239976305,
+        "privateProcessGroup": true,
+        "processContainment": "owned-descendants-v1",
+        "environmentOverrides": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONOPTIMIZE": "0"
+        },
+        "supervisorStillAlive": false,
+        "exitCode": 0,
+        "pid": 54634,
+        "containmentProvedEmpty": true,
+        "containmentReceipt": {
+          "file": "parent-exit-orphan/SupervisorEvidence/01-parent-exit-orphan/supervisor-result.json",
+          "sha256": "0e74adf5d88344f1139b0757076703f98d55a259b31440da549e9d2ecd658527",
+          "bytes": 18049
+        },
+        "finishedUtc": "2026-11-03T17:46:40.415000+00:00"
+      },
+      "dummyIdentities": [
+        {
+          "label": "owned-parent",
+          "token": "owned-parent-exit-orphan-Candidate03",
+          "pid": 54634,
+          "ppid": 54633,
+          "pgid": 54634,
+          "sid": 54634,
+          "uid": 1000,
+          "startTicks": 1981819
+        },
+        {
+          "label": "owned-setsid-leaf",
+          "token": "owned-parent-exit-orphan-Candidate03",
+          "pid": 54635,
+          "ppid": 54634,
+          "pgid": 54635,
+          "sid": 54635,
+          "uid": 1000,
+          "startTicks": 1981822
+        }
+      ],
+      "unrelatedSiblingStillAlive": true
+    }
+  ],
+  "publishReady": false,
+  "baselineReady": false,
+  "limits": "This is the immutable b5b8 candidate with no optional proc children interface only. Any later source SHA requires fresh tests; no Root acceptance or product build pass is granted."
+}

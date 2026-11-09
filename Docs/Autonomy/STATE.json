@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-04T05:48:51.278889+00:00",
+  "updatedUtc": "2026-11-09T17:43:24.151293+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -12,334 +12,358 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
-    "id": "C1",
-    "game": "FantasyCards",
-    "status": "recovery-current-gospel-native16-web-witness-completed-card-and-paired-public-gates-pending",
-    "applied": true,
-    "reason": "Preserved original DB/generator confirm beast1/equipment2/magic4, while presentation labels and capability filter rotate the three bits. Correct the names and actual membership together. Fixed-DP stacking/coin priority remains unproved and unsupported.",
-    "baseProductSource": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
-    "baseDeployment": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
-    "targetRevision": "fm-capability-2026-11-03",
-    "evidenceRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03",
-    "draft": {
-      "status": "applied-source-and-Native01-passed-but-not-visual-approved-or-web-validated",
-      "directory": "/tmp/firstgame-card-capability-draft",
-      "baseLedger": "/tmp/firstgame-card-capability-draft/base-sha256.json",
-      "patches": {
-        "01-product.patch": "f022e9f85d7ea3aee4e5d3ea7acefdddcdc7fa0de7c83bd0c78c21c1248ed2ef",
-        "02-existing-fixture-expectation.patch": "cabaac645b2b26ba014e5506db19a08bdd663bd5dd9355bf48f3ef92a3d1ad55",
-        "03-new-native-regression.patch": "3da1f58cd3c40d237aae3b5c965bd849fb56abe65e9f88ab9ac803f293f09a62"
-      },
-      "rootStaticReview": "Product mapping, independent DB/ID assertions, existing fixture expectation correction and actual UI filter callbacks inspected. No compile or passing evidence.",
-      "constraint": "Apply only after G1/G2 closure and Card ownership transfer; check current base SHA and absent new files. Keep fixture correction separate with independent original enum evidence; retain all existing cases and assertions. New Native uses callback UI only and no screenshot writer; fresh output path/source-bound Web/PC/touch/public checks still required."
-    },
-    "nativeRequiredCases": 8,
-    "nativeScope": "Retain all6 Nativity Card cases, execute the existing modified FidelityGradeGuideAndRankCapabilityFiltersUseActualCards case, and add1 independent capability regression. No deletion/subset substitute.",
-    "fixtureCorrections": "Separate independent-source mask expectation correction (&1→&2), current free-practice route correction, and stale guide count12→13 correction with existing Domain/Core13 evidence. Keep all assertions and original patches; no failed execution is invented from static mismatch.",
-    "captureSafety": "Applied opt-in C1 strict capture helper isolates all original Native01 captures under its unique attempt. Existing default helper remains unchanged; every new attempt needs unique root/attempt.",
-    "browserDraft": "Grade-screen5steps/2required added with byte-exact base preservation: PC162/48 and touch163/47. Current contract oldG2release pins remain; no actual Web/input/public pass yet. Before/after snapshots and ledger preserved at Docs/Autonomy/Evidence/C1-GradeBrowserPlan-recovery.",
-    "releaseToolDraft": "Current Tools/Autonomy C1 runner/adapter/contracts installed and independently statically reviewed; old /tmp source drafts currently absent. Pinned historical G2 proof prerequisites are missing and must not be bypassed for publication.",
-    "sourceOwner": "/root",
+    "id": "CanonArt",
+    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
+    "branch": "codex/canon-art-2026-11-09",
     "executionOwner": "/root",
-    "leaseRecord": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/lease.json",
-    "leaseOwner": "dad93236-28bf-40f5-8efb-5ac5369c6b28",
-    "leaseDeadlineUtc": "2026-11-03T16:20:16.506894+00:00",
-    "resumeSteps": [
-      "First fetch/inspect remote WIP codex/c1-capability-2026-11-03 at aa857332f030f91d37853f4cdaf0f833ee0aa5ca and compare current workspace. Main carries a resume pointer only, not C1 product changes. Preserve all dirty/current files and restore only exact indexed original bytes if canonical artifacts are absent.",
-      "Apply only the minimal13-grade-grid layout fix after source/process/lease checks, freeze source and run complete8 in a new unique attempt. Preserve Native01 mechanical pass and actual visual rejection. If using product-only verification while release baseline is unavailable, clearly separate it from release readiness.",
-      "Restore the last normal site exactly and complete fresh equivalent recovery proof if dated originals cannot be restored. Only then complete fresh C1 Web/PC/touch/public/Root/CI/source/fullSHA/985MB closure preserving Gospel. Existing publish gates stay strict."
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+    "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
+    "targetRevisions": {
+      "FantasyCards": "fm-canon-2026-11-09",
+      "PathOfDawn": "gospel-canon-2026-11-09"
+    },
+    "currentLocalValidation": {
+      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "everyWrapperPassed": true,
+      "everyGuardAfterExitCode": 0,
+      "everyContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "everyRequiredOriginalRootDirectlyViewed": true,
+      "publishReady": false
+    },
+    "currentRuntimeRecovery": {
+      "environment": "connected",
+      "controlRoot": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "leaseCommit": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "oldOwnedLeaseReleasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
+      "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
+      "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
+      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
+    },
+    "changes": [
+      "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
+      "Multiplayer buttons disabled with future-update label",
+      "Natural-proportion child/adult32frame atlases and Mary/Joseph/teacher/John; temple/camera composition",
+      "Natural in-scene conversations without per-line provenance badges;23events19passages28voice keys retained",
+      "Physical book artwork,two-column Korean serif Scripture,exact original text"
     ],
-    "branch": "codex/c1-resume-2026-11-04",
-    "resumeBranch": "codex/c1-resume-2026-11-04",
-    "sourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
-    "validationStages": {
-      "Prepare01": {
-        "status": "passed",
-        "exitCode": 0,
-        "scope": "Historical actual C1 compile/prepare; readonly database stderr retained in original checkpoint."
-      },
-      "Native01": {
-        "status": "mechanically-passed-visual-changes-requested",
-        "passed": 8,
-        "failed": 0,
-        "sourceChangedDuringRun": false,
-        "sourceFingerprint": "acd70be6bb9ec9f4e5b79ca9430a7dac2520b5239468f450396f2f27baf091bb",
-        "binding": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/binding.json",
-          "sha256": "3571c336e25cbdc0bf5acda87e867a1a826c0a7463e30fc040617efba3afb977",
-          "bytes": 900
-        },
-        "xml": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/native.xml",
-          "sha256": "85711d0bf86c46dfbbeff2f6f5f2bfbcc83fe1bdaf07bea0ca3b5c461cba7297",
-          "bytes": 12715
-        },
-        "visualFinding": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Root/native01-grade-visual-finding.json",
-          "sha256": "11d3fe98a0dba2e922014ed24f9ac1dd845134cc53ae2719194964f4a405bd98",
-          "bytes": 1665
-        },
-        "scope": "Existing6 plus corrected existingFidelity1 and independent newCapability1 passed. Actual13th grade tile is clipped; not visual approval or release readiness."
-      },
-      "Native02": {
-        "status": "failed-before-tests",
-        "exitCode": 139,
-        "cause": "Actual Library target path missing/SourceAssetDB ENOENT. No8-test pass or XML claimed.",
-        "summary": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native02/product-native-summary.json",
-          "sha256": "b176c5f2169eda96bab4265d985bd2f8567abdae7ecf4e4d7f7c0d12fc197b3b",
-          "bytes": 1741
-        }
-      },
-      "Web": {
-        "status": "not-run-fresh-recovery-web-launcher-source-only-reviewed-pending-owner-install"
-      },
-      "browser": {
-        "status": "not-run"
-      },
-      "public": {
-        "status": "not-published-current-public-remains-G2"
-      },
-      "Native03": {
-        "status": "failed-before-tests",
-        "exitCode": 1,
-        "cause": "Package Manager reported Cinemachine/InputSystem aborted. Precise TLS/permission/network root cause is not established.",
-        "summary": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native03/product-native-summary.json",
-          "sha256": "9d2248bbd32b96b00762dbae6a71156acccb305c6ea1d17e5e6d3b11b456af38",
-          "bytes": 1741
-        }
-      },
-      "Native04": {
-        "status": "product-native-only-passed-root-approved",
-        "scope": "product-native-only",
-        "passed": 8,
-        "failed": 0,
-        "skipped": 0,
-        "sourceChangedDuringRun": false,
-        "sourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
-        "summary": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
-          "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
-          "bytes": 15211
-        },
-        "binding": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
-          "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
-          "bytes": 900
-        },
-        "nativeXml": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
-          "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
-          "bytes": 10572
-        },
-        "rootReview": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
-          "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
-          "bytes": 6148
-        },
-        "gradeComparison": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-grade-original-review.json",
-          "sha256": "3b08f5fcdcc630b7c36e9f07ba7914af924d0fb6b1e20138c63487f3b9560ed5",
-          "bytes": 2235
-        },
-        "currentGradeOriginal": "Actual844x390 all13 categories and count labels readable above footer.",
-        "adjacentNativeOriginalLimit": "Title/equipment filename suffix touch has actual616x346, not actual Web/mobile input evidence.",
-        "publishReady": false
-      },
-      "GospelNativeRecovery": {
-        "status": "actual-fresh16-passed-root-product-approved",
-        "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
-        "passed": 16,
-        "failed": 0,
-        "skipped": 0,
-        "summary": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-native-summary.json",
-          "sha256": "2cad207f26fe38a55aaca9d9499a04fb707a5a71425039c3837733f257b3face",
-          "bytes": 40208
-        },
-        "binding": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/binding.json",
-          "sha256": "c8f88180d8626dbfd0b7cb4bf0f5ec2e8cb9087e3c4859d1cc46100ce96c7f0c",
-          "bytes": 1328
-        },
-        "nativeXml": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/native.xml",
-          "sha256": "de2a605ffe19fd3072683316e69ea0c8dc94e618e1d268ed710f72bae85bfae1",
-          "bytes": 146237
-        },
-        "inputManifest": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
-          "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
-          "bytes": 363712
-        },
-        "voiceFixture": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/NativeAttempts/PathOfDawn/20261103T154531492744Z/FixtureInputs/Tools/Voice/Nativity/production.json",
-          "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
-          "bytes": 35716
-        },
-        "wholeAttemptIndex": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/complete-regular-files-before-summary.json",
-          "sha256": "c357f2a480dfe9dd8ce2a79bd4eb948c139ac2ecf852822cddb421cec5a72091",
-          "bytes": 39337
-        },
-        "complete136Originals": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/gospel-native01-complete-originals.json",
-          "sha256": "b50dc69863fc35a397f8245606995f876e7f3b08fa92299802cdb21aba2f8ce6",
-          "bytes": 40009
-        },
-        "rootReview": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
-          "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
-          "bytes": 13673
-        },
-        "actualSourceUnchanged": true,
-        "scope": "Fresh product Native only, not Web or public approval."
-      }
-    },
-    "interruptionRecovery": {
-      "status": "source-native-and-rollback-file-recovery-succeeded-web-provenance-recovery-active",
-      "observedUtc": "2026-11-03T14:55:22.193133+00:00",
-      "observation": {
-        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/observation.json",
-        "sha256": "5ebec363939dd785bb9bb91cc8a0e6e0807fe1f78d07d796776dd8cef7235449",
-        "bytes": 3946
-      },
-      "previousOwnedLease": {
-        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/previous-owned-lease.json",
-        "sha256": "c0e2fb27352e451ca32926694f3ea06908875b7b642ec46400840d65fd16cdc9",
-        "bytes": 478
-      },
-      "previousOwnerRelease": "Normal guard exact-owner/SHA CAS release confirmed2026-11-03T14:52:04Z after actual idle/record/remote verification. No expired lock was stolen.",
-      "freshLease": {
-        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/lease.json",
-        "sha256": "aa3dc7272b1ab582fe7a1b38bb110aa629a84bd96e26e8961bfeaa08915a1195",
-        "bytes": 469
-      },
-      "sourceAtRecovery": "13 uncommitted files preserved; UIa4900f3d… is still pre-grade-fix. No Native02/Web started before interruption.",
-      "missing": "/tmp G2 current build/stage, Nativity build, old release/G3 drafts and targets of preserved G2 Root/PublicPortal directory aliases are absent. Existing historical hashes are references, not proof that missing original bytes still exist.",
-      "cloudFailureCause": "Prior execution returned No usable execution environment is available. Current controlplane reports connected/running; diagnostics history not_found. Root cause not established.",
-      "required": "Find byte-exact preserved copies first; keep old receipts unchanged. If unavailable, require a separately documented fresh current-public recovery baseline of equivalent source/runtime/native/browser/public/Root strength before any publication. No fallback may mark lost historical proofs present.",
-      "cacheRecovery": "Missing generated Library targets recreated. Existing pinned officialInputSystem1.20.1/Cinemachine3.1.7 tarballs restored exactly into missing generated cache entries; manifests/lock/Assets/original archives unchanged. Native04 then reached and passed all8 cases. Original errors and package root-cause uncertainty preserved.",
-      "conservativeCacheRetryCount": 2,
-      "currentRollbackReport": {
-        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
-        "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
-        "bytes": 29882757
-      },
-      "oldMissingNotRecreated": "Historical c030Root seal/81aPortal and oldGospelBuildInputs/Evidence still absent; fresh Native16+exactoldsite restoration are separately observed new facts."
-    },
-    "nativeProductValidated": true,
-    "publishReady": false,
-    "productChanges": [
-      "Corrected independent original capability names/filter bits1=야수2=장비4=마법 without changing Core masks, rules, IDs or save data.",
-      "Fitted existing13-grade guide into5 readable rows above unchanged footer; category data/labels/counts/button callbacks retained."
-    ],
-    "nextActions": [
-      "Read latest codex/c1-resume-2026-11-04 checkpoint and portable Docs/Autonomy/Evidence/Resume20261104 archives; restore only exact absent original paths.",
-      "Keep current GospelNative16/all47PNG and GospelWeb01 core5/raw build witness; paired-recovery-required is not public approval.",
-      "Recover current CardNative8 with full actual original bytes and appropriately reviewed fresh Card Web controls; retain old fixed-Native04 historical proof rather than pretending missing originals exist.",
-      "Complete Card/Gospel PC-touch-rules-save-audioPCM-two-reload/public/currentCI/whole-site985MB/paired Root seals before publishing."
-    ],
-    "sourceBranch": "codex/c1-resume-2026-11-04",
-    "candidateCommit": "4b8accd1362fc2485add29a8a5dde5792e18fd89",
-    "appliedInCurrentMain": false,
-    "appliedInCandidateWorkspace": true,
-    "sourceCommitNote": "Latest recovery candidate4b8 retains C1 product code and full actual Native/Web originals. This pointer change retains G2 product code on main.",
-    "sourceCi": {
-      "runId": 41781140167,
-      "sourceCommit": "4b8accd1362fc2485add29a8a5dde5792e18fd89",
-      "statusAtObservation": "completed",
-      "conclusion": "success",
-      "completedSuccessConfirmed": true,
-      "url": "https://github.com/ka8877/firstgame/actions/runs/41781140167"
-    },
-    "compactRecoveryEvidence": {
-      "native01": "Docs/Autonomy/Evidence/C1-Native01-recovery/index.json",
-      "native04": "Docs/Autonomy/Evidence/C1-Native04-recovery/index.json",
-      "gradePlan": "Docs/Autonomy/Evidence/C1-GradeBrowserPlan-recovery",
-      "scope": "Actual selected original bytes with complete index remain on WIP ref aa857. These compact copies are not the entire64-file Native04 or missing G2 historical proof.",
-      "gospelNative": "Docs/Autonomy/Evidence/GospelNative01-recovery/index.json",
-      "rollback": "Docs/Autonomy/Evidence/Recovery02-public-rollback/index.json"
-    },
-    "resume20261104": {
-      "observedUtc": "2026-11-04T05:44:13.873576+00:00",
-      "runOrigin": "Explicit user request to resume in this chat; no existing goal or schedule was created or resumed by API.",
-      "recoveredSourceCommit": "f88e56bff69b1a3f7c7a0ecfcddf3b5d02846484",
-      "sourceBranch": "codex/c1-resume-2026-11-04",
-      "previousThreadStatus": "idle",
-      "currentGoalCardState": "not-directly-queryable-with-available-tools",
-      "scheduledAutomationsObserved": 0,
-      "previousOwnedLeaseNormallyReleased": true,
-      "restoredExactControlFiles": 308,
-      "remainingLfsGamePointers": 0,
+    "actualValidation": {
       "Core": {
-        "passed": 285,
+        "status": "passed",
+        "passed": 311,
         "failed": 0,
         "skipped": 0,
-        "sourceChangedDuringRun": false
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
       },
-      "GospelNative": {
-        "passed": 16,
+      "GospelNative01": {
+        "passed": 19,
+        "failed": 2,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "fixPending": [
+          "Test mistook narrator speaker for removed metadata badge",
+          "Standalone UI screenshot fixture had no scene camera"
+        ],
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel01"
+      },
+      "CardAuthoring": {
+        "status": "passed",
+        "cards": 2649,
+        "originalArtworkBindings": 2649,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/card-authoring-verification.txt"
+      },
+      "CardNative": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
+      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
+      "public": "unchanged-G2",
+      "GospelNative02": {
+        "passed": 21,
         "failed": 0,
         "skipped": 0,
-        "actualPngOriginals": 47,
-        "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel02",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "CardNative02": {
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7c5e89e0654cbe791921b16fbf4b60bc1b698565e794202614ddfc860ea7345e",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card02",
+        "limitation": "Actual 8 passed before test-helper routing fix; root generic capture env had been ignored. Original raw results kept; complete8 newsource/review required after strict capture helper added."
+      },
+      "media": {
+        "status": "passed",
+        "streamedOriginals": 15350,
+        "missing": 0,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/media-verification.json"
+      },
+      "CardNative03": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "GospelWeb01": {
+        "status": "failed-timeout885s-at-final-link",
+        "actualExitCode": 124,
         "containmentProvedEmpty": true,
-        "summary": "Artifacts/Validation/Autonomy/C1-resume-2026-11-04/Native02/fresh-native-summary.json"
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web01",
+        "recovery": "LegacyResourceIsolation recovered all; exact Native-hash Git originals restored GraphicsSettings/QualitySettings. Native fingerprint007bf... reverified. Partialplayer preserved as /tmp/firstgame-canon-20261109-builds/PathOfDawn/Web.failed-Web01; all logs/recovery receipts under control/Web01Recovery*."
       },
-      "initialNativeAttempt": {
-        "status": "interrupted-failed",
-        "exitCode": 130,
-        "cause": "Original texture/audio LFS pointers were present; no source/assets were changed while Unity ran. Restored exact907 game originals, then made a separate current run.",
-        "containmentProvedEmpty": true
+      "GospelWeb02": {
+        "status": "passed",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web02",
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "actualBuildAndRestorationExit": 0,
+        "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
       },
-      "livePublic": {
-        "httpStatus": 200,
-        "manifestSha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
-        "deployedCommit": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
-        "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
-        "scope": "Fresh manifest GET and five unchanged Gospel runtime bodies; full current public interaction not repeated yet."
-      },
-      "fullC1Acceptance": false,
-      "publishReady": false,
-      "next": "Recover current Card Native8 with all real originals; create appropriately reviewed fresh Card Web controls; finish both games PC/touch/PCM/reload/public/currentCI/full-site/paired release gates. Existing goal-card state/resume API remains unavailable.",
-      "verifiedGameLfsFiles": 907,
-      "lfsCountMeaning": "907 tracked game LFS files were verified materialized after pull; this does not count individual transfers.",
-      "GospelWeb": {
-        "status": "completed-build-and-witness-only",
-        "errors": 0,
-        "warnings": 1,
-        "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
-        "currentSourceByteIdentity": true,
-        "runtimeIdentity": "paired-recovery-required",
-        "actualCore5RuntimeBytesPreserved": true,
-        "summary": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/web-build-summary.json",
-          "bytes": 27982,
-          "sha256": "7430e26aae2c356cef5cde283e4d0d2a329d58f1828064f942fcc4d2294d5e5d"
+      "GospelPC": {
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "passedChecks": 90,
+        "failedChecks": 0,
+        "rawPngCount": 69,
+        "requiredRootOriginals": 53,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "wrapperSummary": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
+          "bytes": 12282,
+          "sha256": "7b16d4c76653d739f41045e71d27731a6894fc34981d6592500dae03eb8cb828"
         },
-        "proof": {
-          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/BuildProof/PathOfDawn-Web01/build-proof-index.json",
-          "bytes": 6314,
-          "sha256": "1994ee146f9f2bd7e8300139eeea24fe07c82b0b446ce15d0b3ee808a71672ae"
-        }
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "rootAnnotation": "Actual Root annotation written after the successful completed wrapper; all53required originals directly viewed,69totaloriginals directly viewed. Raw executed report preserved separately before annotation.",
+        "scopes": [
+          "sameJosephReading acrossBible-return/fullreload",
+          "actualMary/well/templeguide",
+          "12/19Scripture and14/23events",
+          "equipment/manualsave/secondfullreload",
+          "current narration/PCM and source/runtime controls"
+        ],
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
       },
-      "durableEvidence": {
-        "nativeIndex": {
-          "file": "Docs/Autonomy/Evidence/Resume20261104/index.json",
-          "bytes": 54923,
-          "sha256": "8c5a35034219c5645c7b1f325547a6417a471ffc0ee06dbd97a0045189ff4dde"
+      "GospelPC03": {
+        "status": "intentionally-stopped-before-final-gates",
+        "cause": "Actual current screenshot exposed remaining prologue lecture text, despite natural temple dialogue. Stopped owned supervisor to complete user requirement before release.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser03",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser03",
+        "scope": "Confirmed actual first reload retains Joseph firstline/heading/place; no completePC/Root/current rewritten-source/publicpass."
+      },
+      "previousGospelEvidence": "Core309/GospelNative21/GospelWeb02 are actual successful PRE-prologue-rewrite source, retained as history. They do not validate current rewritten Core/new14voices. Card03Native8 remains current product inputs.",
+      "currentCore": {
+        "status": "passed",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
+      },
+      "currentVoice": {
+        "status": "passed",
+        "newlySynthesized": 14,
+        "retainedExact": 14,
+        "freshIndependentAsrPassed": 28,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
+        "activeBytes": 1541702
+      },
+      "GospelNative03": {
+        "status": "passed",
+        "passed": 21,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel03",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "GospelWeb03": {
+        "status": "passed",
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web03",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/PathOfDawn-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "CardWeb01": {
+        "status": "passed",
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/FantasyCards/Web01",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/FantasyCards-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
+      "finalGospelPC": {
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "passedChecks": 90,
+        "failedChecks": 0,
+        "rawPngCount": 69,
+        "requiredRootOriginals": 53,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "wrapperSummary": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
+          "bytes": 12282,
+          "sha256": "7b16d4c76653d739f41045e71d27731a6894fc34981d6592500dae03eb8cb828"
         },
-        "webIndex": {
-          "file": "Docs/Autonomy/Evidence/Resume20261104/web-index.json",
-          "bytes": 37799,
-          "sha256": "f96cb9a53dde8704db8908a76de3838376df7c6997360025703f22b29947df05"
-        },
-        "nativeOriginals": 209,
-        "webOriginals": 140,
-        "allArchiveMembersHashVerified": true
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "rootAnnotation": "Actual Root annotation written after the successful completed wrapper; all53required originals directly viewed,69totaloriginals directly viewed. Raw executed report preserved separately before annotation.",
+        "scopes": [
+          "sameJosephReading acrossBible-return/fullreload",
+          "actualMary/well/templeguide",
+          "12/19Scripture and14/23events",
+          "equipment/manualsave/secondfullreload",
+          "current narration/PCM and source/runtime controls"
+        ],
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+      },
+      "preDialogueCore309": {
+        "passed": 309,
+        "failed": 0,
+        "skipped": 0,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core"
+      },
+      "GospelPCHistoryAtEarlierCheckpoint": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed.",
+      "GospelPC04": {
+        "status": "root-rejected-partial-and-normally-interrupted",
+        "reason": "Root acknowledged temple proximity without actual E interaction, so required dialogue/reward checkpoints showed Exploring. Test input omission, no product bug inferred.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser04",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser04",
+        "actualExitCode": 130,
+        "containmentProvedEmpty": true,
+        "preservedFiles": 93,
+        "wrapperSummarySha256": "c0297cdd9a357efd7334199483ce9f7888b5be1a476b5cc4add1215cc9377fe0"
+      },
+      "CardPC01": {
+        "status": "interrupted-by-runtime-unavailable-no-complete-pass",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards",
+        "execution": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/FantasyCards/Desktop720/Browser01",
+        "lastObservedChecks": 18,
+        "lastObservedPause": "capability-entry-review iteration0",
+        "rootImagesViewed": 0,
+        "lastImageToolError": "exec-server transport closed",
+        "processCleanup": "Unknown after disconnect; no release/idle claim."
+      },
+      "lastObservedCiBeforeReleaseCommit": {
+        "status": "completed",
+        "conclusion": "success",
+        "head": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
+        "runId": 42584966290,
+        "runNumber": 106,
+        "workflow": "Deterministic core and saves"
       }
+    },
+    "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
+    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
+    "next": [
+      "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
+      "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
+      "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
+      "Publish through existing Pages and explicitly dispatch its workflow; verify actual successful completion and fresh full-site HTTPS GET.",
+      "Root-review current desktop/mobile portal originals; complete both publictouch plans and final full release gate before claiming deployment acceptance.",
+      "After this release, assess original skill598 proposal in Docs/Research/CanonNextTaunt598.md; it is not implemented or tested."
+    ],
+    "nextAtRuntimeInterruption": [
+      "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+      "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+      "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+      "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+      "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+      "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+      "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+      "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+      "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+    ],
+    "backgroundScheduler": "not-configured",
+    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
+    "userExecutionAuthorization": {
+      "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
+      "effect": "User overrides old short execution limits: default per-command window3600s, explicit6h owned lease, sustained goal not ended by short batch; cleanup/foreign ownership/data protection remain."
+    },
+    "currentStoryRewrite": {
+      "source": "Docs/Research/CanonDialogueVoiceImpact.json",
+      "changedVoiceLines": 14,
+      "retainedOriginalVoiceLines": 14,
+      "preservedKeys": 28,
+      "events": 23,
+      "passages": 19,
+      "storyDetails": 51,
+      "changes": "All source-discourse removed from actual story detail text, legacy dialogue and HUD objectives; actual scene dialogue added with provenance internal; exact existing Scripture quotations unchanged.",
+      "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
+      "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
+      "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
+    },
+    "finalRuntimePaths": {
+      "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
+      "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
+      "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+      "stageRoot": "Artifacts/CanonArtWebPlaytest"
+    },
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+    "runtimeInterruption": {
+      "historical": true,
+      "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
+      "observedUtc": "2026-11-09T08:55:44Z",
+      "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
+      "status": "runtime-unavailable-connectivity-offline",
+      "observedPhase": "running",
+      "desiredPhase": "running",
+      "executionError": "exec-server transport disconnected; failed to resume exec-server session: recovery timed out after45s",
+      "noObservedAccountQuotaError": true,
+      "rootCause": "Not established by the available diagnostics.",
+      "lastLocalHead": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
+      "localDirtyGeneratedScene": "Games/PathOfDawn/Assets/Scenes/Boot.unity: generated bootstrap fileIDs only (8insertions/8deletions observed); preserve bytes before restoring exact matching tracked original after review.",
+      "remoteLease": {
+        "ref": "refs/heads/codex/autonomy-lock",
+        "sha": "d5ee52f8acea673d7d41a371e3ab8e85e46bfd63",
+        "owner": "2baaaece-f4fd-4b04-a36b-ac6790a0ff2a",
+        "runId": "CanonDialogueRelease-2026-11-09",
+        "deadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+        "status": "Exact remote owner/SHA/deadline reread via GitHub during interruption. No release or renewal attempted; Card browser descendants cannot currently be checked."
+      },
+      "originalAvailability": "No local files can currently be read. New GospelPC05/CardWeb01 raw originals remain unconfirmed after disconnect; this checkpoint is an observed status record, never reconstructed raw proof.",
+      "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+      "portableScope": "Existing remote archive532 originals +12Card native receipts supplements. Includes actual Core311, Voice14new/28freshASR, Card03 Native8/Gospel03 Native21 and final GospelWeb03. Does not include later CardWeb01/GospelPC05 originals.",
+      "resume": [
+        "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+        "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+        "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+        "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+        "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+        "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+        "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+        "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+        "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+      ]
     }
   },
   "baseline": {
@@ -430,17 +454,28 @@
     "evidenceAvailabilityAtRecovery": "G2 was verified/published at its recorded completion; after offline recovery some /tmp-backed proof originals are missing. Preserve historical result while treating original-proof availability separately."
   },
   "nextRun": {
-    "id": "C1",
-    "game": "FantasyCards",
-    "status": "current-gospel-native-and-web-witness-complete-card-and-paired-input-public-pending",
+    "id": "CanonArt",
+    "status": "all-four-local-lanes-complete-release-source-ci-stage-public-pending",
     "tasks": [
-      "Read latest codex/c1-resume-2026-11-04 checkpoint and portable Docs/Autonomy/Evidence/Resume20261104 archives; restore only exact absent original paths.",
-      "Keep current GospelNative16/all47PNG and GospelWeb01 core5/raw build witness; paired-recovery-required is not public approval.",
-      "Recover current CardNative8 with full actual original bytes and appropriately reviewed fresh Card Web controls; retain old fixed-Native04 historical proof rather than pretending missing originals exist.",
-      "Complete Card/Gospel PC-touch-rules-save-audioPCM-two-reload/public/currentCI/whole-site985MB/paired Root seals before publishing."
+      "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
+      "Commit exact final source, verify its CI, update draftPR2 from actual completed local results, mark ready, normal merge and verify mainCI.",
+      "source Tools/Validation/CanonArt/activate-current.sh then override only FIRSTGAME_CONTROL_ROOT to the current CanonPublishResume-2026-11-10 owner; keep finalBUILD and CanonDialogueRelease BuildProof paths.",
+      "Verify complete clean source-bound stage below985MB, publish through existing Pages and explicitly dispatch/verify its workflow.",
+      "Complete fullfreshHTTPSGET, current desktop/mobile portal Root review and both publictouch plans, then final full release gate.",
+      "Continue parity after release; Docs/Research/CanonNextTaunt598.md remains a proposal, not implemented/tested."
     ],
-    "acceptance": "Independent original capability mapping and all original IDs/masks/deck/wallet/save bytes retained; every grade label/count/footer readable in Native/PC/touch; strict original/current proof and complete source/runtime/public binding required.",
-    "resumeAt": "Latest resume branch and portable evidence summary; verify actual remote idle/lease and game LFS originals before current Card Native/Web."
+    "tasksAtRuntimeInterruption": [
+      "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+      "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+      "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+      "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+      "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+      "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+      "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+      "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+      "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+    ],
+    "rule": "Existing G2 is historical/current public until the new independently source-bound two-game release passes. Do not demand a missing old dated seal for this new user-feedback revision; do preserve originals and all equivalent strict current gates."
   },
   "rotation": {
     "pattern": [
@@ -462,16 +497,26 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "checkpoint-before-normal-owned-release; query live ref before assuming a lock or owner is active",
+    "lockStatus": "CanonPublishResume-2026-11-10-acquired-after-normal-exact-old-owner-release-and-actual-idle",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
-    "childCommandLimitSeconds": 2700,
+    "childCommandLimitSeconds": 3600,
+    "defaultGuardLimitSeconds": 2700,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
     "sameCauseMaxRetries": 2,
     "modelUsageEnforced": false,
     "wholeInteractiveAgentDeadlineEnforced": false,
-    "limitsNote": "run enforces its child process group only. A scheduled task runner must separately enforce entire agent time/usage/concurrency. Never raise limits or disable stops automatically.",
+    "limitsNote": "User explicitly authorized longer work: current supervised command window3600s and explicitly authorized owned lease21600s. Guard default2700s remains. Actual child/lease cleanup boundaries are enforced separately; no model/account quota or whole-agent budget is inferred.",
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
+      "id": "CanonPublishResume-2026-11-10",
+      "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "deadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+      "commitSha": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "status": "Owned current release preparation; four local lanes completed. Exact source/CI, stage and public acceptance remain pending."
+    },
+    "historicalBatchAtReport": {
       "id": "C1-resume-2026-11-04",
       "leaseRecord": "/tmp/firstgame-resume-2026-11-04/lease.json",
       "owner": "a60785ea-6993-4726-bb81-4c1c8701c455",
@@ -480,6 +525,12 @@
       "status": "Work and portable checkpoint complete; normal owned CAS release is the final boundary after source preservation. Live remote ref is authoritative."
     },
     "lastCompletedBatch": {
+      "id": "CanonDialogueRelease-2026-11-09",
+      "status": "normal-owned-CAS-release-after-actual-idle-and-exact-owner-verification",
+      "releasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "leaseRecord": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/lease.json"
+    },
+    "historicalCompletedBatch": {
       "id": "C1-Recovery01",
       "status": "normal-completed-and-owned-CAS-released",
       "releasedUtc": "2026-11-03T15:33:55Z",
@@ -488,10 +539,14 @@
         "sha256": "b16213212c58ea253d0463c91afdb78ff003aa33b5a4f3cc2bb4690d1382d142",
         "bytes": 2222
       }
-    }
+    },
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00"
   },
   "environment": {
     "managedCloudObservedRunning": true,
+    "currentConnectionStatus": "connected-after-reconnect",
+    "currentRecovery": "Retained workspace originals verified; exact15370 final Web runtime files restored to original /tmp paths. See CanonPublishResume runtime-restoration.json. Historical disconnect below is preserved as a dated event.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
     "installedWebGLModule": true,
@@ -527,6 +582,42 @@
       "reportedCurrentFreeBytes": 529317888,
       "scope": "Afteractual sameFS preservation of3groups/7immutableinactivegeneratedruntimepayloads; all logical regularfile bytes retained. Reported physical savings302690304B. Not source, asset, proofPNG/JSON, ZIP, currentruntime or activeLibrary deletion.",
       "ledger": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/historical-runtime-exact-hardlink-preservation.json"
+    },
+    "latestRuntimeInterruption": {
+      "historical": true,
+      "resolvedBy": "Current environment connected; exact runtime restored and four local suites completed after reconnect.",
+      "observedUtc": "2026-11-09T08:55:44Z",
+      "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
+      "status": "runtime-unavailable-connectivity-offline",
+      "observedPhase": "running",
+      "desiredPhase": "running",
+      "executionError": "exec-server transport disconnected; failed to resume exec-server session: recovery timed out after45s",
+      "noObservedAccountQuotaError": true,
+      "rootCause": "Not established by the available diagnostics.",
+      "lastLocalHead": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
+      "localDirtyGeneratedScene": "Games/PathOfDawn/Assets/Scenes/Boot.unity: generated bootstrap fileIDs only (8insertions/8deletions observed); preserve bytes before restoring exact matching tracked original after review.",
+      "remoteLease": {
+        "ref": "refs/heads/codex/autonomy-lock",
+        "sha": "d5ee52f8acea673d7d41a371e3ab8e85e46bfd63",
+        "owner": "2baaaece-f4fd-4b04-a36b-ac6790a0ff2a",
+        "runId": "CanonDialogueRelease-2026-11-09",
+        "deadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+        "status": "Exact remote owner/SHA/deadline reread via GitHub during interruption. No release or renewal attempted; Card browser descendants cannot currently be checked."
+      },
+      "originalAvailability": "No local files can currently be read. New GospelPC05/CardWeb01 raw originals remain unconfirmed after disconnect; this checkpoint is an observed status record, never reconstructed raw proof.",
+      "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+      "portableScope": "Existing remote archive532 originals +12Card native receipts supplements. Includes actual Core311, Voice14new/28freshASR, Card03 Native8/Gospel03 Native21 and final GospelWeb03. Does not include later CardWeb01/GospelPC05 originals.",
+      "resume": [
+        "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+        "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+        "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+        "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+        "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+        "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+        "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+        "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+        "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+      ]
     }
   },
   "capacity": {
@@ -574,6 +665,7 @@
     "currentGoalCardState": "not-directly-queryable",
     "currentChatRunOrigin": "explicit-user-request",
     "lastAutomationQueryCount": 0,
+    "lastAutomationQueryMeaning": "Last observed query only; no recurring scheduler configured and no current live goal-card activation inspection claimed.",
     "goalExecutionObservedMeaning": "Historical actual goal runs are recorded; this does not establish current goal-card active/paused/stalled status."
   },
   "permissions": {
@@ -594,6 +686,7 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
+  "knownIssuesScope": "The following retained issues describe historical G2/C1 scopes and the unchanged public G2. Current CanonArt local results are recorded in activeWork.currentLocalValidation; historical unverified wording must not override those completed checks.",
   "knownIssues": [
     "HistoricalG2Root/audit/build witness are still missing aftertmp loss, while current oldsite bytes and freshGospel16 have been recovered separately. Web/public recovery is unfinished.",
     "Fresh Native Bible19 capture opens afteroneframe and is nearly transparent; it is not a legible completed-book proof. SettledPC completed19book and mandatoryPC/touch/public book/Continue originals remain required.",
@@ -624,7 +717,7 @@
     }
   },
   "continuationPolicy": {
-    "status": "long-term-development-pending-next-bounded-run-goal-card-state-not-queryable",
+    "status": "current-turn-CanonArt-development-active-recurring-scheduler-not-configured",
     "smallBatchIsNotGoalCompletion": true,
     "continueAfterG1": "G1 and G2 are sealed; continue C1, then G3 and substantive story work. Small batches or a fixed execution count never mean the whole goal is complete.",
     "limits": "Preserve actual usage, command and remote-lease limits; no automatic extension or lock stealing. No recurring schedule or goal creation has been configured."
@@ -1241,6 +1334,337 @@
         "bytes": 2140
       },
       "leaseStatus": "normal-owned-CAS-released-2026-11-03T10:49:08.254417+00:00"
+    },
+    "C1-before-CanonArt": {
+      "id": "C1",
+      "game": "FantasyCards",
+      "status": "recovery-current-gospel-native16-web-witness-completed-card-and-paired-public-gates-pending",
+      "applied": true,
+      "reason": "Preserved original DB/generator confirm beast1/equipment2/magic4, while presentation labels and capability filter rotate the three bits. Correct the names and actual membership together. Fixed-DP stacking/coin priority remains unproved and unsupported.",
+      "baseProductSource": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
+      "baseDeployment": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
+      "targetRevision": "fm-capability-2026-11-03",
+      "evidenceRoot": "Artifacts/Validation/Autonomy/C1-2026-11-03",
+      "draft": {
+        "status": "applied-source-and-Native01-passed-but-not-visual-approved-or-web-validated",
+        "directory": "/tmp/firstgame-card-capability-draft",
+        "baseLedger": "/tmp/firstgame-card-capability-draft/base-sha256.json",
+        "patches": {
+          "01-product.patch": "f022e9f85d7ea3aee4e5d3ea7acefdddcdc7fa0de7c83bd0c78c21c1248ed2ef",
+          "02-existing-fixture-expectation.patch": "cabaac645b2b26ba014e5506db19a08bdd663bd5dd9355bf48f3ef92a3d1ad55",
+          "03-new-native-regression.patch": "3da1f58cd3c40d237aae3b5c965bd849fb56abe65e9f88ab9ac803f293f09a62"
+        },
+        "rootStaticReview": "Product mapping, independent DB/ID assertions, existing fixture expectation correction and actual UI filter callbacks inspected. No compile or passing evidence.",
+        "constraint": "Apply only after G1/G2 closure and Card ownership transfer; check current base SHA and absent new files. Keep fixture correction separate with independent original enum evidence; retain all existing cases and assertions. New Native uses callback UI only and no screenshot writer; fresh output path/source-bound Web/PC/touch/public checks still required."
+      },
+      "nativeRequiredCases": 8,
+      "nativeScope": "Retain all6 Nativity Card cases, execute the existing modified FidelityGradeGuideAndRankCapabilityFiltersUseActualCards case, and add1 independent capability regression. No deletion/subset substitute.",
+      "fixtureCorrections": "Separate independent-source mask expectation correction (&1→&2), current free-practice route correction, and stale guide count12→13 correction with existing Domain/Core13 evidence. Keep all assertions and original patches; no failed execution is invented from static mismatch.",
+      "captureSafety": "Applied opt-in C1 strict capture helper isolates all original Native01 captures under its unique attempt. Existing default helper remains unchanged; every new attempt needs unique root/attempt.",
+      "browserDraft": "Grade-screen5steps/2required added with byte-exact base preservation: PC162/48 and touch163/47. Current contract oldG2release pins remain; no actual Web/input/public pass yet. Before/after snapshots and ledger preserved at Docs/Autonomy/Evidence/C1-GradeBrowserPlan-recovery.",
+      "releaseToolDraft": "Current Tools/Autonomy C1 runner/adapter/contracts installed and independently statically reviewed; old /tmp source drafts currently absent. Pinned historical G2 proof prerequisites are missing and must not be bypassed for publication.",
+      "sourceOwner": "/root",
+      "executionOwner": "/root",
+      "leaseRecord": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/lease.json",
+      "leaseOwner": "dad93236-28bf-40f5-8efb-5ac5369c6b28",
+      "leaseDeadlineUtc": "2026-11-03T16:20:16.506894+00:00",
+      "resumeSteps": [
+        "First fetch/inspect remote WIP codex/c1-capability-2026-11-03 at aa857332f030f91d37853f4cdaf0f833ee0aa5ca and compare current workspace. Main carries a resume pointer only, not C1 product changes. Preserve all dirty/current files and restore only exact indexed original bytes if canonical artifacts are absent.",
+        "Apply only the minimal13-grade-grid layout fix after source/process/lease checks, freeze source and run complete8 in a new unique attempt. Preserve Native01 mechanical pass and actual visual rejection. If using product-only verification while release baseline is unavailable, clearly separate it from release readiness.",
+        "Restore the last normal site exactly and complete fresh equivalent recovery proof if dated originals cannot be restored. Only then complete fresh C1 Web/PC/touch/public/Root/CI/source/fullSHA/985MB closure preserving Gospel. Existing publish gates stay strict."
+      ],
+      "branch": "codex/c1-capability-2026-11-03",
+      "resumeBranch": "codex/c1-resume-2026-11-04",
+      "sourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+      "validationStages": {
+        "Prepare01": {
+          "status": "passed",
+          "exitCode": 0,
+          "scope": "Historical actual C1 compile/prepare; readonly database stderr retained in original checkpoint."
+        },
+        "Native01": {
+          "status": "mechanically-passed-visual-changes-requested",
+          "passed": 8,
+          "failed": 0,
+          "sourceChangedDuringRun": false,
+          "sourceFingerprint": "acd70be6bb9ec9f4e5b79ca9430a7dac2520b5239468f450396f2f27baf091bb",
+          "binding": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/binding.json",
+            "sha256": "3571c336e25cbdc0bf5acda87e867a1a826c0a7463e30fc040617efba3afb977",
+            "bytes": 900
+          },
+          "xml": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native01/Native/FantasyCards/native.xml",
+            "sha256": "85711d0bf86c46dfbbeff2f6f5f2bfbcc83fe1bdaf07bea0ca3b5c461cba7297",
+            "bytes": 12715
+          },
+          "visualFinding": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Root/native01-grade-visual-finding.json",
+            "sha256": "11d3fe98a0dba2e922014ed24f9ac1dd845134cc53ae2719194964f4a405bd98",
+            "bytes": 1665
+          },
+          "scope": "Existing6 plus corrected existingFidelity1 and independent newCapability1 passed. Actual13th grade tile is clipped; not visual approval or release readiness."
+        },
+        "Native02": {
+          "status": "failed-before-tests",
+          "exitCode": 139,
+          "cause": "Actual Library target path missing/SourceAssetDB ENOENT. No8-test pass or XML claimed.",
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native02/product-native-summary.json",
+            "sha256": "b176c5f2169eda96bab4265d985bd2f8567abdae7ecf4e4d7f7c0d12fc197b3b",
+            "bytes": 1741
+          }
+        },
+        "Web": {
+          "status": "not-run-fresh-recovery-web-launcher-source-only-reviewed-pending-owner-install"
+        },
+        "browser": {
+          "status": "not-run"
+        },
+        "public": {
+          "status": "not-published-current-public-remains-G2"
+        },
+        "Native03": {
+          "status": "failed-before-tests",
+          "exitCode": 1,
+          "cause": "Package Manager reported Cinemachine/InputSystem aborted. Precise TLS/permission/network root cause is not established.",
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native03/product-native-summary.json",
+            "sha256": "9d2248bbd32b96b00762dbae6a71156acccb305c6ea1d17e5e6d3b11b456af38",
+            "bytes": 1741
+          }
+        },
+        "Native04": {
+          "status": "product-native-only-passed-root-approved",
+          "scope": "product-native-only",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "sourceChangedDuringRun": false,
+          "sourceFingerprint": "42b885cd0de22b88a6ba6732cd89a6961cb30ae74a3cf165b4c8e472f75e2d90",
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/product-native-summary.json",
+            "sha256": "6fd90c2d37bc4bf6b5181e11244c6015f85240a9203983bdf89a44cdd4534683",
+            "bytes": 15211
+          },
+          "binding": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/binding.json",
+            "sha256": "62a2807ca94041b72b3bd4910a6fcf3229ee86b5b07f3b5a9805a3503feefd44",
+            "bytes": 900
+          },
+          "nativeXml": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/NativeRuns/Native04/Native/FantasyCards/native.xml",
+            "sha256": "bb5d87f58c2b4a7903fcb52ad75d15e08963aa9acc4d6bee8ee5ed81ea4cbe8a",
+            "bytes": 10572
+          },
+          "rootReview": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+            "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+            "bytes": 6148
+          },
+          "gradeComparison": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-grade-original-review.json",
+            "sha256": "3b08f5fcdcc630b7c36e9f07ba7914af924d0fb6b1e20138c63487f3b9560ed5",
+            "bytes": 2235
+          },
+          "currentGradeOriginal": "Actual844x390 all13 categories and count labels readable above footer.",
+          "adjacentNativeOriginalLimit": "Title/equipment filename suffix touch has actual616x346, not actual Web/mobile input evidence.",
+          "publishReady": false
+        },
+        "GospelNativeRecovery": {
+          "status": "actual-fresh16-passed-root-product-approved",
+          "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-native-summary.json",
+            "sha256": "2cad207f26fe38a55aaca9d9499a04fb707a5a71425039c3837733f257b3face",
+            "bytes": 40208
+          },
+          "binding": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/binding.json",
+            "sha256": "c8f88180d8626dbfd0b7cb4bf0f5ec2e8cb9087e3c4859d1cc46100ce96c7f0c",
+            "bytes": 1328
+          },
+          "nativeXml": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/native.xml",
+            "sha256": "de2a605ffe19fd3072683316e69ea0c8dc94e618e1d268ed710f72bae85bfae1",
+            "bytes": 146237
+          },
+          "inputManifest": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
+            "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+            "bytes": 363712
+          },
+          "voiceFixture": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/NativeAttempts/PathOfDawn/20261103T154531492744Z/FixtureInputs/Tools/Voice/Nativity/production.json",
+            "sha256": "635008782a6a364b79f0b607a27c43cc8a37545d42a21eafa41e85af0f19d869",
+            "bytes": 35716
+          },
+          "wholeAttemptIndex": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/complete-regular-files-before-summary.json",
+            "sha256": "c357f2a480dfe9dd8ce2a79bd4eb948c139ac2ecf852822cddb421cec5a72091",
+            "bytes": 39337
+          },
+          "complete136Originals": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/gospel-native01-complete-originals.json",
+            "sha256": "b50dc69863fc35a397f8245606995f876e7f3b08fa92299802cdb21aba2f8ce6",
+            "bytes": 40009
+          },
+          "rootReview": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+            "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+            "bytes": 13673
+          },
+          "actualSourceUnchanged": true,
+          "scope": "Fresh product Native only, not Web or public approval."
+        }
+      },
+      "interruptionRecovery": {
+        "status": "source-native-and-rollback-file-recovery-succeeded-web-provenance-recovery-active",
+        "observedUtc": "2026-11-03T14:55:22.193133+00:00",
+        "observation": {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/observation.json",
+          "sha256": "5ebec363939dd785bb9bb91cc8a0e6e0807fe1f78d07d796776dd8cef7235449",
+          "bytes": 3946
+        },
+        "previousOwnedLease": {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/previous-owned-lease.json",
+          "sha256": "c0e2fb27352e451ca32926694f3ea06908875b7b642ec46400840d65fd16cdc9",
+          "bytes": 478
+        },
+        "previousOwnerRelease": "Normal guard exact-owner/SHA CAS release confirmed2026-11-03T14:52:04Z after actual idle/record/remote verification. No expired lock was stolen.",
+        "freshLease": {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/lease.json",
+          "sha256": "aa3dc7272b1ab582fe7a1b38bb110aa629a84bd96e26e8961bfeaa08915a1195",
+          "bytes": 469
+        },
+        "sourceAtRecovery": "13 uncommitted files preserved; UIa4900f3d… is still pre-grade-fix. No Native02/Web started before interruption.",
+        "missing": "/tmp G2 current build/stage, Nativity build, old release/G3 drafts and targets of preserved G2 Root/PublicPortal directory aliases are absent. Existing historical hashes are references, not proof that missing original bytes still exist.",
+        "cloudFailureCause": "Prior execution returned No usable execution environment is available. Current controlplane reports connected/running; diagnostics history not_found. Root cause not established.",
+        "required": "Find byte-exact preserved copies first; keep old receipts unchanged. If unavailable, require a separately documented fresh current-public recovery baseline of equivalent source/runtime/native/browser/public/Root strength before any publication. No fallback may mark lost historical proofs present.",
+        "cacheRecovery": "Missing generated Library targets recreated. Existing pinned officialInputSystem1.20.1/Cinemachine3.1.7 tarballs restored exactly into missing generated cache entries; manifests/lock/Assets/original archives unchanged. Native04 then reached and passed all8 cases. Original errors and package root-cause uncertainty preserved.",
+        "conservativeCacheRetryCount": 2,
+        "currentRollbackReport": {
+          "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+          "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+          "bytes": 29882757
+        },
+        "oldMissingNotRecreated": "Historical c030Root seal/81aPortal and oldGospelBuildInputs/Evidence still absent; fresh Native16+exactoldsite restoration are separately observed new facts."
+      },
+      "nativeProductValidated": true,
+      "publishReady": false,
+      "productChanges": [
+        "Corrected independent original capability names/filter bits1=야수2=장비4=마법 without changing Core masks, rules, IDs or save data.",
+        "Fitted existing13-grade guide into5 readable rows above unchanged footer; category data/labels/counts/button callbacks retained."
+      ],
+      "nextActions": [
+        "Read latest codex/c1-resume-2026-11-04 checkpoint and portable Docs/Autonomy/Evidence/Resume20261104 archives; restore only exact absent original paths.",
+        "Keep current GospelNative16/all47PNG and GospelWeb01 core5/raw build witness; paired-recovery-required is not public approval.",
+        "Recover current CardNative8 with full actual original bytes and appropriately reviewed fresh Card Web controls; retain old fixed-Native04 historical proof rather than pretending missing originals exist.",
+        "Complete Card/Gospel PC-touch-rules-save-audioPCM-two-reload/public/currentCI/whole-site985MB/paired Root seals before publishing."
+      ],
+      "sourceBranch": "codex/c1-resume-2026-11-04",
+      "candidateCommit": "f88e56bff69b1a3f7c7a0ecfcddf3b5d02846484",
+      "appliedInCurrentMain": false,
+      "appliedInCandidateWorkspace": true,
+      "sourceCommitNote": "Candidate aa857 contains current C1 implementation and compact actual Native evidence. Remote main currently00335 contains G2 code and earlier metadata only. Later Docs-only pointer commits do not deploy C1 or change published runtime.",
+      "sourceCi": {
+        "runId": 41663162726,
+        "sourceCommit": "aa857332f030f91d37853f4cdaf0f833ee0aa5ca",
+        "statusAtObservation": "completed",
+        "url": "https://github.com/ka8877/firstgame/actions/runs/41663162726",
+        "conclusion": "success",
+        "completedSuccessConfirmed": true
+      },
+      "compactRecoveryEvidence": {
+        "native01": "Docs/Autonomy/Evidence/C1-Native01-recovery/index.json",
+        "native04": "Docs/Autonomy/Evidence/C1-Native04-recovery/index.json",
+        "gradePlan": "Docs/Autonomy/Evidence/C1-GradeBrowserPlan-recovery",
+        "scope": "Actual selected original bytes with complete index remain on WIP ref aa857. These compact copies are not the entire64-file Native04 or missing G2 historical proof.",
+        "gospelNative": "Docs/Autonomy/Evidence/GospelNative01-recovery/index.json",
+        "rollback": "Docs/Autonomy/Evidence/Recovery02-public-rollback/index.json"
+      },
+      "resume20261104": {
+        "observedUtc": "2026-11-04T05:44:13.873576+00:00",
+        "runOrigin": "Explicit user request to resume in this chat; no existing goal or schedule was created or resumed by API.",
+        "recoveredSourceCommit": "f88e56bff69b1a3f7c7a0ecfcddf3b5d02846484",
+        "sourceBranch": "codex/c1-resume-2026-11-04",
+        "previousThreadStatus": "idle",
+        "currentGoalCardState": "not-directly-queryable-with-available-tools",
+        "scheduledAutomationsObserved": 0,
+        "previousOwnedLeaseNormallyReleased": true,
+        "restoredExactControlFiles": 308,
+        "remainingLfsGamePointers": 0,
+        "Core": {
+          "passed": 285,
+          "failed": 0,
+          "skipped": 0,
+          "sourceChangedDuringRun": false
+        },
+        "GospelNative": {
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "actualPngOriginals": 47,
+          "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+          "containmentProvedEmpty": true,
+          "summary": "Artifacts/Validation/Autonomy/C1-resume-2026-11-04/Native02/fresh-native-summary.json"
+        },
+        "initialNativeAttempt": {
+          "status": "interrupted-failed",
+          "exitCode": 130,
+          "cause": "Original texture/audio LFS pointers were present; no source/assets were changed while Unity ran. Restored exact907 game originals, then made a separate current run.",
+          "containmentProvedEmpty": true
+        },
+        "livePublic": {
+          "httpStatus": 200,
+          "manifestSha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+          "deployedCommit": "947890cc46e1e60b070ca42b23ec9c5c62d0d549",
+          "sourceCommit": "5c97eeb124d9e295c7748a268bacd8d2852569ba",
+          "scope": "Fresh manifest GET and five unchanged Gospel runtime bodies; full current public interaction not repeated yet."
+        },
+        "fullC1Acceptance": false,
+        "publishReady": false,
+        "next": "Recover current Card Native8 with all real originals; create appropriately reviewed fresh Card Web controls; finish both games PC/touch/PCM/reload/public/currentCI/full-site/paired release gates. Existing goal-card state/resume API remains unavailable.",
+        "verifiedGameLfsFiles": 907,
+        "lfsCountMeaning": "907 tracked game LFS files were verified materialized after pull; this does not count individual transfers.",
+        "GospelWeb": {
+          "status": "completed-build-and-witness-only",
+          "errors": 0,
+          "warnings": 1,
+          "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+          "currentSourceByteIdentity": true,
+          "runtimeIdentity": "paired-recovery-required",
+          "actualCore5RuntimeBytesPreserved": true,
+          "summary": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/web-build-summary.json",
+            "bytes": 27982,
+            "sha256": "7430e26aae2c356cef5cde283e4d0d2a329d58f1828064f942fcc4d2294d5e5d"
+          },
+          "proof": {
+            "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery06/WebRuns/GospelWeb01/BuildProof/PathOfDawn-Web01/build-proof-index.json",
+            "bytes": 6314,
+            "sha256": "1994ee146f9f2bd7e8300139eeea24fe07c82b0b446ce15d0b3ee808a71672ae"
+          }
+        },
+        "durableEvidence": {
+          "nativeIndex": {
+            "file": "Docs/Autonomy/Evidence/Resume20261104/index.json",
+            "bytes": 54923,
+            "sha256": "8c5a35034219c5645c7b1f325547a6417a471ffc0ee06dbd97a0045189ff4dde"
+          },
+          "webIndex": {
+            "file": "Docs/Autonomy/Evidence/Resume20261104/web-index.json",
+            "bytes": 37799,
+            "sha256": "f96cb9a53dde8704db8908a76de3838376df7c6997360025703f22b29947df05"
+          },
+          "nativeOriginals": 209,
+          "webOriginals": 140,
+          "allArchiveMembersHashVerified": true
+        }
+      }
     }
   },
   "currentDeployment": {
@@ -1375,16 +1799,363 @@
       "Current C1 CardfreshWeb/PC/touch/public and Gospel PC/touch/public/settledbookUI, Root original approvals, currentCI/Pages/fullsite985MB+SHA and final newseals."
     ]
   },
-  "mainPointerUpdate": {
-    "scope": "Entry rules and Docs/Autonomy only; no C1 product integration or deployment.",
-    "candidateCommit": "4b8accd1362fc2485add29a8a5dde5792e18fd89",
-    "candidateBranch": "codex/c1-resume-2026-11-04",
-    "previousMain": "808d8d1e1eeed908d8925398f80c7173653ef364",
-    "sourceCi": {
-      "conclusion": "success",
-      "headSha": "4b8accd1362fc2485add29a8a5dde5792e18fd89",
-      "status": "completed",
-      "url": "https://github.com/ka8877/firstgame/actions/runs/41781140167"
+  "activeCanonArt": {
+    "id": "CanonArt",
+    "status": "connected-all-four-local-browser-lanes-root-reviewed-release-source-ci-stage-public-pending",
+    "branch": "codex/canon-art-2026-11-09",
+    "executionOwner": "/root",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
+    "evidenceRoot": "Artifacts/Validation/CanonArt-2026-11-09",
+    "targetRevisions": {
+      "FantasyCards": "fm-canon-2026-11-09",
+      "PathOfDawn": "gospel-canon-2026-11-09"
+    },
+    "currentLocalValidation": {
+      "scope": "Actual completed current local browser runs; all required originals directly viewed and annotated by Root. Does not establish stage, CI, deployment or public acceptance.",
+      "GospelDesktop720": {"attempt": "Browser05", "passedChecks": 90, "rawPngCount": 69, "requiredRootOriginals": 53, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn/report.json"},
+      "CardDesktop720": {"attempt": "Browser02", "passedChecks": 98, "rawPngCount": 65, "requiredRootOriginals": 52, "strictGate": "passed", "report": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards/report.json"},
+      "GospelMobile844": {"attempt": "Browser01", "passedChecks": 82, "rawPngCount": 58, "requiredRootOriginals": 39, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/PathOfDawn/report.json"},
+      "CardMobile844": {"attempt": "Browser01", "passedChecks": 101, "rawPngCount": 65, "requiredRootOriginals": 51, "report": "Artifacts/Validation/CanonArt-2026-11-09/Mobile844/FantasyCards/report.json"},
+      "everyWrapperPassed": true,
+      "everyGuardAfterExitCode": 0,
+      "everyContainmentProvedEmpty": true,
+      "actualFullReloadsPerLane": 2,
+      "everyRequiredOriginalRootDirectlyViewed": true,
+      "publishReady": false
+    },
+    "currentRuntimeRecovery": {
+      "environment": "connected",
+      "controlRoot": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10",
+      "owner": "cee675c8-5fa8-4d69-9536-1ebe9debf7db",
+      "leaseCommit": "2085a3a294671a1b513e263cdf5cd7d103963a7d",
+      "oldOwnedLeaseReleasedUtc": "2026-11-09T16:35:13.335254+00:00",
+      "oldReleaseBasis": "Actual idle and exact ownership verified; normal own-SHA CAS release, no renewal or takeover.",
+      "restoredRuntime": {"files": 15370, "GospelFiles": 5, "GospelBytes": 105432320, "CardFiles": 15365, "CardBytes": 867853409, "rebuild": false, "ledger": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json"},
+      "generatedScene": "Only3 generated Boot fileIDs restored to exact tracked bytes; before/original/diff retained in current control GeneratedSceneOriginals/restoration.json.",
+      "portalHeroes": "Prepared byte-exact copies of current Root-approved PC originals; no staged or public portal result yet.",
+      "checkpoint02": {"index": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json", "selectedActualFiles": 1145, "parts": 12, "joinedBytes": 378942231, "joinedSha256": "9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1", "everyArchiveMemberShaVerified": true, "currentOriginalsUnchanged": true, "scope": "Four local browser suites/Root images/PCM/wrappers, CardWeb01 proof/core5 and selected failure/recovery originals; GospelWeb/Core/Voice/Native remain in Checkpoint01. No public pass."}
+    },
+    "changes": [
+      "Three independently source-reviewed attack skills and exact3 cards:2649 supported;15350 archived originals unchanged",
+      "Multiplayer buttons disabled with future-update label",
+      "Natural-proportion child/adult32frame atlases and Mary/Joseph/teacher/John; temple/camera composition",
+      "Natural in-scene conversations without per-line provenance badges;23events19passages28voice keys retained",
+      "Physical book artwork,two-column Korean serif Scripture,exact original text"
+    ],
+    "actualValidation": {
+      "Core": {
+        "status": "passed",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
+      },
+      "GospelNative01": {
+        "passed": 19,
+        "failed": 2,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "fixPending": [
+          "Test mistook narrator speaker for removed metadata badge",
+          "Standalone UI screenshot fixture had no scene camera"
+        ],
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel01"
+      },
+      "CardAuthoring": {
+        "status": "passed",
+        "cards": 2649,
+        "originalArtworkBindings": 2649,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/card-authoring-verification.txt"
+      },
+      "CardNative": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "Web": "Both final current Webs passed; all15370 exact retained runtime files restored without rebuilding and current source/runtime bindings reverified.",
+      "Browser": "All four local desktop/touch lanes completed and Root-annotated: GospelPC90/69PNG/53required;CardPC98/65/52;GospelTouch82/58/39;CardTouch101/65/51. Public touch remains pending.",
+      "public": "unchanged-G2",
+      "GospelNative02": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel02",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "CardNative02": {
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7c5e89e0654cbe791921b16fbf4b60bc1b698565e794202614ddfc860ea7345e",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card02",
+        "limitation": "Actual 8 passed before test-helper routing fix; root generic capture env had been ignored. Original raw results kept; complete8 newsource/review required after strict capture helper added."
+      },
+      "media": {
+        "status": "passed",
+        "streamedOriginals": 15350,
+        "missing": 0,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/media-verification.json"
+      },
+      "CardNative03": {
+        "passed": 8,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "rawPngCount": 23,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/FantasyCards/Card03",
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/cards-native-review.json"
+      },
+      "GospelWeb01": {
+        "status": "failed-timeout885s-at-final-link",
+        "actualExitCode": 124,
+        "containmentProvedEmpty": true,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web01",
+        "recovery": "LegacyResourceIsolation recovered all; exact Native-hash Git originals restored GraphicsSettings/QualitySettings. Native fingerprint007bf... reverified. Partialplayer preserved as /tmp/firstgame-canon-20261109-builds/PathOfDawn/Web.failed-Web01; all logs/recovery receipts under control/Web01Recovery*."
+      },
+      "GospelWeb02": {
+        "status": "passed",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web02",
+        "sourceFingerprint": "007bf962b73dd5a698ae265fe5c04946cdf0f5be2efbe46b44bb4ddaca97e364",
+        "actualBuildAndRestorationExit": 0,
+        "actualProofCore5": "Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof/PathOfDawn-Web"
+      },
+      "GospelPC": {
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "passedChecks": 90,
+        "failedChecks": 0,
+        "rawPngCount": 69,
+        "requiredRootOriginals": 53,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "wrapperSummary": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
+          "bytes": 12282,
+          "sha256": "7b16d4c76653d739f41045e71d27731a6894fc34981d6592500dae03eb8cb828"
+        },
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "rootAnnotation": "Actual Root annotation written after the successful completed wrapper; all53required originals directly viewed,69totaloriginals directly viewed. Raw executed report preserved separately before annotation.",
+        "scopes": [
+          "sameJosephReading acrossBible-return/fullreload",
+          "actualMary/well/templeguide",
+          "12/19Scripture and14/23events",
+          "equipment/manualsave/secondfullreload",
+          "current narration/PCM and source/runtime controls"
+        ],
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+      },
+      "GospelPC03": {
+        "status": "intentionally-stopped-before-final-gates",
+        "cause": "Actual current screenshot exposed remaining prologue lecture text, despite natural temple dialogue. Stopped owned supervisor to complete user requirement before release.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser03",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser03",
+        "scope": "Confirmed actual first reload retains Joseph firstline/heading/place; no completePC/Root/current rewritten-source/publicpass."
+      },
+      "previousGospelEvidence": "Core309/GospelNative21/GospelWeb02 are actual successful PRE-prologue-rewrite source, retained as history. They do not validate current rewritten Core/new14voices. Card03Native8 remains current product inputs.",
+      "currentCore": {
+        "status": "passed",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "sourceChangedDuringRun": false,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core/Attempts/20261109T073410758495Z"
+      },
+      "currentVoice": {
+        "status": "passed",
+        "newlySynthesized": 14,
+        "retainedExact": 14,
+        "freshIndependentAsrPassed": 28,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/voice.json",
+        "activeBytes": 1541702
+      },
+      "GospelNative03": {
+        "status": "passed",
+        "passed": 21,
+        "failed": 0,
+        "sourceChangedDuringRun": false,
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/NativeRuns/PathOfDawn/Gospel03",
+        "rawPngCount": 49,
+        "rootReview": "Artifacts/Validation/CanonArt-2026-11-09/Root/gospel-native-review.json"
+      },
+      "GospelWeb03": {
+        "status": "passed",
+        "sourceFingerprint": "2979185e3c2f566e2947caaa22b738115c476204b774970e8e22280507c62609",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/PathOfDawn/Web03",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/PathOfDawn-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "CardWeb01": {
+        "status": "passed",
+        "sourceFingerprint": "7fdd4422acbc5eb5a46d52f706a74f8476317b1ae1ab7d0ad82d92bbd2f61a6a",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/WebRuns/FantasyCards/Web01",
+        "proof": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof/FantasyCards-Web",
+        "actualWholeCommandAndRestorationExit": 0
+      },
+      "currentCombinedBuildGate": "passed actual canon_release_evidence.py --check builds after both final players: Core311,Native8/21,current exact source/runtime,2649authoring,15350media,actual supervised builds/proofs/audio hashes",
+      "finalGospelPC": {
+        "status": "passed-root-reviewed-and-strict-gate-revalidated-after-exact-runtime-restoration",
+        "previousObservedStatus": "actual-complete-pass-and-root53-original-review-observed-before-runtime-disconnect",
+        "passedChecks": 90,
+        "failedChecks": 0,
+        "rawPngCount": 69,
+        "requiredRootOriginals": 53,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/PathOfDawn",
+        "wrapperSummary": {
+          "file": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser05/summary.json",
+          "bytes": 12282,
+          "sha256": "7b16d4c76653d739f41045e71d27731a6894fc34981d6592500dae03eb8cb828"
+        },
+        "actualExitCode": 0,
+        "guardAfterExitCode": 0,
+        "containmentProvedEmpty": true,
+        "rootAnnotation": "Actual Root annotation written after the successful completed wrapper; all53required originals directly viewed,69totaloriginals directly viewed. Raw executed report preserved separately before annotation.",
+        "scopes": [
+          "sameJosephReading acrossBible-return/fullreload",
+          "actualMary/well/templeguide",
+          "12/19Scripture and14/23events",
+          "equipment/manualsave/secondfullreload",
+          "current narration/PCM and source/runtime controls"
+        ],
+        "strictCombinedBrowserGate": "Passed against retained actual report, all69 current originals/53required, Root annotation and exact restored current runtime.",
+        "portability": "Actual raw originals retained and verified after reconnect; preserved in verified Checkpoint02 with current local reports, images, PCM and wrappers."
+      },
+      "preDialogueCore309": {
+        "passed": 309,
+        "failed": 0,
+        "skipped": 0,
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Core"
+      },
+      "GospelPCHistoryAtEarlierCheckpoint": "Browser01 failed before launch due missingDISPLAY. Browser02 actual ordinary input confirmed rendered serif book, exact1/19 contents, physicalJoseph meeting/firstline without metadata and planted facing; incomplete at owned lease deadline. Raw archived BrowserHistory/PathOfDawn/Desktop720/Browser02, summary under BrowserRuns/.../Browser02. Full15min fresh PC attempt required, no pass/Rootapproval/public claimed.",
+      "GospelPC04": {
+        "status": "root-rejected-partial-and-normally-interrupted",
+        "reason": "Root acknowledged temple proximity without actual E interaction, so required dialogue/reward checkpoints showed Exploring. Test input omission, no product bug inferred.",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/PathOfDawn/Desktop720/Browser04",
+        "originals": "Artifacts/Validation/CanonArt-2026-11-09/BrowserHistory/PathOfDawn/Desktop720/Browser04",
+        "actualExitCode": 130,
+        "containmentProvedEmpty": true,
+        "preservedFiles": 93,
+        "wrapperSummarySha256": "c0297cdd9a357efd7334199483ce9f7888b5be1a476b5cc4add1215cc9377fe0"
+      },
+      "CardPC01": {
+        "status": "interrupted-by-runtime-unavailable-no-complete-pass",
+        "path": "Artifacts/Validation/CanonArt-2026-11-09/Desktop720/FantasyCards",
+        "execution": "Artifacts/Validation/CanonArt-2026-11-09/BrowserRuns/FantasyCards/Desktop720/Browser01",
+        "lastObservedChecks": 18,
+        "lastObservedPause": "capability-entry-review iteration0",
+        "rootImagesViewed": 0,
+        "lastImageToolError": "exec-server transport closed",
+        "processCleanup": "Unknown after disconnect; no release/idle claim."
+      },
+      "lastObservedCiBeforeReleaseCommit": {
+        "status": "completed",
+        "conclusion": "success",
+        "head": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
+        "runId": 42584966290,
+        "runNumber": 106,
+        "workflow": "Deterministic core and saves"
+      }
+    },
+    "parity": "Partial reconstruction;12701 original records remain unsupported. See Docs/Research/FantasyMastersParity.md",
+    "releasePreparation": {"public": "unchanged-G2", "pullRequestState": "draft", "finalSourceCommit": "pending", "exactCommitCi": "pending", "mainCi": "pending", "stage": "not-yet-validated", "publicAcceptance": "pending"},
+    "next": [
+      "Verified Checkpoint02 now preserves1145 selected actual originals; retain it, Checkpoint01 and rejected/partial histories unchanged during release.",
+      "Commit the final release source and verify CI on that exact commit; update PR2 from actual local results, mark ready, normal merge and verify main CI.",
+      "Use final build/proof paths, stage the complete site below985000000bytes including manifest, and verify its clean source/runtime/original-image bindings.",
+      "Publish through existing Pages and explicitly dispatch its workflow; verify actual successful completion and fresh full-site HTTPS GET.",
+      "Root-review current desktop/mobile portal originals; complete both publictouch plans and final full release gate before claiming deployment acceptance.",
+      "After this release, assess original skill598 proposal in Docs/Research/CanonNextTaunt598.md; it is not implemented or tested."
+    ],
+    "nextAtRuntimeInterruption": [
+      "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+      "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+      "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+      "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+      "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+      "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+      "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+      "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+      "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+    ],
+    "backgroundScheduler": "not-configured",
+    "leaseDeadlineUtc": "2026-11-09T22:35:39.484202+00:00",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/2",
+    "userExecutionAuthorization": {
+      "instruction": "한도없이 해도된다. 무슨한도때문에멈춘거니?",
+      "effect": "User overrides old short execution limits: default per-command window3600s, explicit6h owned lease, sustained goal not ended by short batch; cleanup/foreign ownership/data protection remain."
+    },
+    "currentStoryRewrite": {
+      "source": "Docs/Research/CanonDialogueVoiceImpact.json",
+      "changedVoiceLines": 14,
+      "retainedOriginalVoiceLines": 14,
+      "preservedKeys": 28,
+      "events": 23,
+      "passages": 19,
+      "storyDetails": 51,
+      "changes": "All source-discourse removed from actual story detail text, legacy dialogue and HUD objectives; actual scene dialogue added with provenance internal; exact existing Scripture quotations unchanged.",
+      "voiceBeforeLedger": "Artifacts/Validation/CanonArt-2026-11-09/VoiceRewrite01/before-ledger.json",
+      "generationWork": "/tmp/firstgame-canon-dialogue-20261109",
+      "actualSupervisor": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/VoiceProduction01",
+      "status": "14newclips-14exactretained-28freshASR-Core311-Native21-finalWeb03-and-both-local-browser-profiles-passed-root-reviewed"
+    },
+    "finalRuntimePaths": {
+      "activation": "Tools/Validation/CanonArt/activate-current.sh",
+      "controlOverrideAfterActivation": "FIRSTGAME_CONTROL_ROOT=$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10; keep the activation's existing final BUILD and old CanonDialogueRelease PROOF paths unchanged.",
+      "buildRoot": "/tmp/firstgame-canon-final-20261109-builds",
+      "proofRoot": "Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof",
+      "stageRoot": "Artifacts/CanonArtWebPlaytest"
+    },
+    "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+    "runtimeInterruption": {
+      "historical": true,
+      "resolvedBy": "currentRuntimeRecovery; current environment connected, exact runtime restored and all four local lanes completed",
+      "observedUtc": "2026-11-09T08:55:44Z",
+      "environmentId": "ccarenv_b64_Y2NhcmVudl9kNGEzYjdhNjM4Nzg4MTkxYTZiZTU3ZWE1YmRjZTRjYw",
+      "status": "runtime-unavailable-connectivity-offline",
+      "observedPhase": "running",
+      "desiredPhase": "running",
+      "executionError": "exec-server transport disconnected; failed to resume exec-server session: recovery timed out after45s",
+      "noObservedAccountQuotaError": true,
+      "rootCause": "Not established by the available diagnostics.",
+      "lastLocalHead": "02d416c5224ec03c8a341c5f788ae6ff2151736a",
+      "localDirtyGeneratedScene": "Games/PathOfDawn/Assets/Scenes/Boot.unity: generated bootstrap fileIDs only (8insertions/8deletions observed); preserve bytes before restoring exact matching tracked original after review.",
+      "remoteLease": {
+        "ref": "refs/heads/codex/autonomy-lock",
+        "sha": "d5ee52f8acea673d7d41a371e3ab8e85e46bfd63",
+        "owner": "2baaaece-f4fd-4b04-a36b-ac6790a0ff2a",
+        "runId": "CanonDialogueRelease-2026-11-09",
+        "deadlineUtc": "2026-11-09T13:23:31.668110+00:00",
+        "status": "Exact remote owner/SHA/deadline reread via GitHub during interruption. No release or renewal attempted; Card browser descendants cannot currently be checked."
+      },
+      "originalAvailability": "No local files can currently be read. New GospelPC05/CardWeb01 raw originals remain unconfirmed after disconnect; this checkpoint is an observed status record, never reconstructed raw proof.",
+      "portableCheckpoint": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json",
+      "portableScope": "Existing remote archive532 originals +12Card native receipts supplements. Includes actual Core311, Voice14new/28freshASR, Card03 Native8/Gospel03 Native21 and final GospelWeb03. Does not include later CardWeb01/GospelPC05 originals.",
+      "resume": [
+        "When same runtime becomes available, read STATE and this interruption record; inspect actual current processes/owned controller receipts before modifying execution state. Do not infer that offline means idle.",
+        "Verify exact owned lease bytes/current remote SHA/deadline. Never renew or steal expired/foreign lock. Release only when exact ownership and empty owned descendants are proven; then acquire a new unique lease if needed.",
+        "Preserve all current raw files and rejected Browser04 originals/relocation ledger. Verify Gospel Browser05 summary SHA/bytes, all69 originals including required53 and Root annotation/runtime binding; run strict browser gate. If any raw proof is missing, recover exact originals or perform a new complete current run.",
+        "Inspect Card Desktop720 Browser01 actual status/request. Last seen18checks/capability-entry-review iteration0 awaiting input; root never viewed its first card image because transport failed. No Card PC pass or visual approval.",
+        "source Tools/Validation/CanonArt/activate-current.sh before every current command. Final buildroot /tmp/firstgame-canon-final-20261109-builds; current proofroot Autonomy/CanonDialogueRelease-2026-11-09/BuildProof.",
+        "If files/runtime are missing, restore verified absent files only from Checkpoint01 and normal source/LFS. Do not manufacture vanished raw proofs. Rebuild absent current Card Web bound to current Native; preserve previous pass as history.",
+        "Complete CardPC and both local Mobile844 plans: actual ordinary input, four CardPCM windows, two full reloads, every required original Root-reviewed; then clean exact source/CI and normal985MB stage.",
+        "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
+        "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
+      ]
     }
+  },
+  "mainDocumentationIntegration": {
+    "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",
+    "scope": "Previously approved docs-only PR1, preserved as this merge parent. Current CanonArt product work remains on feature branch."
   }
 }

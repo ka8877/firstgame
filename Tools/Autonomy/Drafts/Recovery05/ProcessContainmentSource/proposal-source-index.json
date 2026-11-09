@@ -1,0 +1,27 @@
+{
+  "status": "source-only-proposals-uninstalled-unexecuted",
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "proposals": [
+    {
+      "game": "card",
+      "base": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/CardWebRunDraft/recovery-card-web.py",
+      "baseSha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+      "proposed": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+      "proposedSha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+      "bytes": 40547,
+      "installed": false,
+      "executed": false
+    },
+    {
+      "game": "gospel",
+      "base": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+      "baseSha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+      "proposed": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+      "proposedSha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+      "bytes": 54692,
+      "installed": false,
+      "executed": false
+    }
+  ],
+  "gospelRestriction": "Gospel retains its old batch prefix in this source-only follow-up and lacks production acceptance refs. Owner must select/review a fresh Gospel batch before any installation/run; actual existing Gospel is not changed."
+}

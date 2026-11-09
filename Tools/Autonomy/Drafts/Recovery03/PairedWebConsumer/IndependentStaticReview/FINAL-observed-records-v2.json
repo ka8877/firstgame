@@ -1,0 +1,97 @@
+{
+  "kind": "independent-narrow-static-v2-follow-up",
+  "reviewedUtc": "2026-11-03T16:41:36.136989+00:00",
+  "source": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/recovery_web_smoke.py",
+    "sha256": "40ed1f54ff2b29e5b8fc8907e1ef2723297c7d0185c7082b0d48a79699062242",
+    "bytes": 84786
+  },
+  "sourceLines": 1084,
+  "priorReviewedSource": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/reviewed-source-cfd49970.py.txt",
+    "sha256": "cfd4997045b4d2f07216e0d7be54eb910a100e56a80bf344f39cdef25d5a4554",
+    "bytes": 82968
+  },
+  "priorReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery03/PairedWebConsumerDraft/IndependentStaticReview/FINAL-REVIEW.md",
+    "sha256": "7cca557cb35ac2cd5cd92fc76ce6e32ae5c5022a5a2282a4bda80fd4a4b829c9",
+    "bytes": 7708
+  },
+  "scope": "Only changed rollback historical-dependency/mode logic and deduplicated Git blob helper; no actual execution/import/schema-validation/installation",
+  "minimumGateJudgment": "No weakening: minimum015f explicitly permits actual fresh15350 GET when inherited raw/root chain unavailable; local rollback byte proof is independent of historical image approval. Historical loss remains explicit and legacy profiles fail closed.",
+  "unchangedFunctionAstBodies": [
+    "validate_schema",
+    "verify_invocation",
+    "verify_native",
+    "verify_build",
+    "current_source",
+    "committed_source",
+    "full_stage",
+    "guard",
+    "get_body",
+    "portal_root",
+    "mechanical",
+    "verify_reviewed",
+    "main",
+    "audio",
+    "public_bytes",
+    "run"
+  ],
+  "normalizedAudioBytes": 4994,
+  "normalizedAudioSha256": "9c92ff461951534b8396e96da2e8b7e5d24e2d002c4b95ff46b98ee522b575bd",
+  "forbiddenLegacyDirectCalls": [],
+  "literalPinnedReferencesRechecked": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/paired-web-execution-contract.schema.json",
+      "sha256": "0fbb4c690eeedb64a8871741b6d2fcb211245a227db4f4df5c592ddb80525b6c",
+      "bytes": 43563
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/FINAL-LEDGER.json",
+      "sha256": "c70af45fc10858addd27e859ad9a2faf0dd2d94877ca68980373c6e21c70a19b",
+      "bytes": 12113
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-product-review.json",
+      "sha256": "0d0cf8c38d5887284a07df3cd541ee310047ac38e50dbb406cf42092291ec4a7",
+      "bytes": 6148
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+      "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+      "bytes": 13673
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/Root/native04-grade-original-review.json",
+      "sha256": "3b08f5fcdcc630b7c36e9f07ba7914af924d0fb6b1e20138c63487f3b9560ed5",
+      "bytes": 2235
+    },
+    {
+      "file": "Tools/Validation/run-nativity-core.py",
+      "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+      "bytes": 3538
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Validation/run-nativity-core.py",
+      "sha256": "c579d678c5fa47de043aaa900597bbdfb9196713968ea529727c0488211fa359",
+      "bytes": 3538
+    }
+  ],
+  "actualExecution": false,
+  "actualSchemaValidation": false,
+  "installed": false,
+  "executionReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "remainingActualPrerequisites": "Unchanged from FINAL-observed-records.json: genuine both current builds/after/invocation/proofs and owner adoption, actual input/audio/Root/public/CI/fullsite/final gates remain mandatory."
+}

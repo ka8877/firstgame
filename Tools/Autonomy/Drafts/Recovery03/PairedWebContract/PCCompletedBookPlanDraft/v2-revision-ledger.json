@@ -1,0 +1,66 @@
+{
+  "status": "source-only-unexecuted-wording-correction",
+  "createdUtc": "2026-11-03T16:08:52.847583+00:00",
+  "priorPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed.json",
+    "sha256": "96e3eddc05cf67c89f58b019074702943549b759f7a3011dd9cea08d61dbcd90",
+    "bytes": 49905
+  },
+  "currentPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/gospel_pc_completed_book_plan.proposed-v2.json",
+    "sha256": "1db5e4e2a8d6f3258cd9b70564c199937de9daf2831bbc23379a36d6e317ed46",
+    "bytes": 50060
+  },
+  "priorLedger": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger.json",
+    "sha256": "41f99e83eca5f9e658e8e86446090f1758bc861c2fcb79534fa7e23c6ba991ca",
+    "bytes": 26781
+  },
+  "currentLedger": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/append-ledger-v2.json",
+    "sha256": "5e2d1e41e7d2d12b582f3aa1650004d365f01dedb0855a99e8e922126029cbfe",
+    "bytes": 27461
+  },
+  "currentReadme": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/PairedWebContractDraft/PCCompletedBookPlanDraft/README-v2.md",
+    "sha256": "5c923c2de1f8b29c4540730624b4eae08e5cd02831f17677bfb735a129d411b9",
+    "bytes": 6082
+  },
+  "changedCheckpoint": "continued-pc-completed-bible-19",
+  "priorExpected": "After navigation3 actual Continue, open the Bible by ordinary UI and wait1500ms beyond click settle. Inspect actual19/19 and rendered current last-earned Scripture. This fresh original and continued-pc-completed-journey prove the same independent third reload; previous11/12-book originals remain separately mandatory. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion.",
+  "currentExpected": "After navigation3 actual Continue, open the Bible by ordinary UI and wait1500ms beyond click settle. Inspect actual19/19 and genuinely rendered discovered Scripture. This fresh original and continued-pc-completed-journey prove the same independent third reload; previous11/12-book originals remain separately mandatory. Root must directly inspect this current original. checkpoint.expected is not an automated text, progress or save assertion. The earlier actual last-spread checkpoint is separately retained; this reload check does not assert restoration of a non-persisted book-spread UI cursor.",
+  "onlyExpectedFieldChanged": true,
+  "sourceBasis": [
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageApp.cs",
+      "sha256": "ea1855137cdbfca328c26976d3d081f6c9b49af1c86e459f90523a1d8dccfb1c",
+      "bytes": 18640
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelStorybookUi.cs",
+      "sha256": "4cbf1e559a2e23069f3ed70cdbf02c8d03ecd9b20cbf88d000651a02f2be9b34",
+      "bytes": 17988
+    }
+  ],
+  "sourceObservation": "ContinueGame at GospelPilgrimageApp.cs:160-197 prepares/loads Journey, configures chapter, restores pose, snaps camera and Resume; it does not call FocusBiblePage. FocusBiblePage is only called for new game and newly acquired reading. ShowBible uses the current UI scriptureSpread, not a restored save field. A new UI may therefore show an earlier discovered page after actual full reload. No runtime behavior was tested.",
+  "counts": {
+    "steps": 154,
+    "required": 63,
+    "appendedSteps": 37,
+    "appendedRequired": 15,
+    "audioSteps": 4,
+    "reloadSteps": 3
+  },
+  "futureExecution": {
+    "revision": null,
+    "profile": null,
+    "sourceCommit": null,
+    "native": null,
+    "webBuild": null,
+    "browserReport": null,
+    "rootCompleteBookApproval": null
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "completedBookApproved": false
+}

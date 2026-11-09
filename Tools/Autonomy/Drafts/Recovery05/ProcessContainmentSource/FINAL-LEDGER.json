@@ -1,0 +1,416 @@
+{
+  "status": "source-proposals-frozen-independently-statically-reviewed-actual-isolation-results-owned-by-release-owner",
+  "recordedUtc": "2026-11-03T18:04:23.354722+00:00",
+  "publishReady": false,
+  "baselineReady": false,
+  "helper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad/owned_process_containment.py",
+    "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "bytes": 44980
+  },
+  "runner": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/isolated_containment_runner.py",
+    "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+    "bytes": 40202
+  },
+  "fixture": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/process_fixture_successor.py",
+    "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+    "bytes": 5568
+  },
+  "cardSuccessor": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+    "sha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+    "bytes": 40547
+  },
+  "gospelFollowup": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+    "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+    "bytes": 54692
+  },
+  "cardContractTemplate": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-contract.template.json",
+    "sha256": "faa703d721d6b15e543ece0974df20e809c429ed35113c521d80f8068d5e7f30",
+    "bytes": 10224
+  },
+  "cardCommandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-command-plan.json",
+    "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909",
+    "bytes": 2889
+  },
+  "independentSourceReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/independent-review-02.json",
+    "sha256": "4845e2d535e700a55f4fd6efc2959e0443e8f6f7fa64f3d066ff77cb046e6f09",
+    "bytes": 1976
+  },
+  "independentReport": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/REPORT-02.md",
+    "sha256": "61776ecf554631d5dfc982f86d677fec7f5c766ed131ff521b8462031e3c0891",
+    "bytes": 5249
+  },
+  "actualOwnerTestReportObserved": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+    "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6",
+    "bytes": 69227
+  },
+  "actualOwnerTestScope": {
+    "statusObserved": "passed",
+    "productionInvocationCountObserved": 0,
+    "meaning": "Owner-produced real dummy isolation result only. Draft authors did not run/query/signal/import it; this does not approve product/Web/public gates."
+  },
+  "originalPreservationIndex": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/original-preservation-index.json",
+    "sha256": "82d0e26a8c6bc9e49d1ca42706556e17ca084d4632c1b745a9942a92e28907d7",
+    "bytes": 3529
+  },
+  "originalFailureNeverReclassified": true,
+  "protectedNativeSource9CurrentFullrefs": [
+    {
+      "file": "Games/FantasyCards/Assets/Game/Presentation/FmFidelityUi.cs",
+      "sha256": "8c0098766b492be37ea74cc342413d11ccd353c31890b2f88c48cf9e299c2510",
+      "bytes": 21065
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsFidelitySmokeTests.cs",
+      "sha256": "3d74488bde6bc91415f7d19853fae82f874473f6729eb6fc7b6e98a1943d6882",
+      "bytes": 14598
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs",
+      "sha256": "f0450c7c5338561f6b75260b569fb0735f0801461fe8d594189121180bded9a6",
+      "bytes": 7597
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/FantasyCardsCapabilitySmokeTests.cs.meta",
+      "sha256": "6e54e1a45e79fae7867a9be95faa242edb5de80d4b492c299b7a38d80a5eea2a",
+      "bytes": 60
+    },
+    {
+      "file": "Games/FantasyCards/Assets/SmokeTests/SmokeUi.cs",
+      "sha256": "78be97279a3218bf7cad0486dca4a21e250ad5bf2886ee29f6faf860d109f0f7",
+      "bytes": 25987
+    },
+    {
+      "file": "Games/FantasyCards/Assets/Editor/BuildCommands.cs",
+      "sha256": "0e547e0027683b155e8ef2285a4c28f0055493b7a2228fee449fc923c7dc99a9",
+      "bytes": 4421
+    },
+    {
+      "file": "Tools/Validation/run-nativity-native.py",
+      "sha256": "834e54887c7292de546e567ba5cfdbc883ad34b805cda5b94249086987fcfa38",
+      "bytes": 4455
+    },
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Autonomy/c1-native-contract.json",
+      "sha256": "7c389d4f53062d652cc58d0fd2391cd37ea0e22b9e386101516ed8ab025fcbb0",
+      "bytes": 3550
+    }
+  ],
+  "changes": [
+    "A new dedicated verified subreaper per command catches setsid/doublefork orphans; held-pidfd identity/lineage/baseline control replaces original-group emptiness",
+    "Only non-consuming kernel ECHILD plus exact root/adopted reaping and exited held pidfds can prove empty; unknown/missing receipt remains pending",
+    "Root exit/timeout/cancel/cleanup are separate; cancel130 has precedence and no late success repairs old124 failure",
+    "Command+cleanup10+outer2 stays within original shared900/lease-60 via safeEnd-12 before-spawn cap",
+    "Final9 source-only runner preserves actual escape/adoption/bystander/refusal and twointerrupt phases; beforephase verifies syscall completion deadline",
+    "Production still requires exact real tests, independent same-source3 review and actual sole-operator acceptance; template refs remain null",
+    "Card02 uses only newR5 output; Gospel source patch remains uninstalled with freshbatch/Rootstatic still required; Native6fb and project inputs unchanged"
+  ],
+  "authorshipLimits": [
+    "Only this allowed ProcessContainmentDraft tree written by this task; no actual Tools/Game/Native mutation by draft authors",
+    "No live process query, signal, helper/project import, test/run, Unity, network or Git executed by draft authors",
+    "Actual source/test/install/signal actions discussed were performed by the sole release owner and remain separately authored evidence",
+    "Old cdb failures, b5 preliminarysix and CardWeb01 failed/late runtime/UPM observations remain original history; none is promoted to product success"
+  ],
+  "outputs": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/API.md",
+      "sha256": "8353862063c579c20261d039f4062e58813c27b458c81f2c5a268d3d78e01630",
+      "bytes": 5232
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/05c78fedef21ffce9594a364a545c2c0d6eadda0e7fe8cf128d3d0b5456ba36f/owned_process_containment.py",
+      "sha256": "05c78fedef21ffce9594a364a545c2c0d6eadda0e7fe8cf128d3d0b5456ba36f",
+      "bytes": 39188
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/2ee275e6ac76d57f9fb16b0f991c0bca9583b9e7610e36d3e6c8d85df6be862f/owned_process_containment.py",
+      "sha256": "2ee275e6ac76d57f9fb16b0f991c0bca9583b9e7610e36d3e6c8d85df6be862f",
+      "bytes": 36729
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/400d63e77e6a782dbe6fe51cc77db6fa3fc64a4c1f4aacaa9c16ae790413837e/owned_process_containment.py",
+      "sha256": "400d63e77e6a782dbe6fe51cc77db6fa3fc64a4c1f4aacaa9c16ae790413837e",
+      "bytes": 44281
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4/owned_process_containment.py",
+      "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+      "bytes": 38591
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/bbc891a210190ac51b2ad0816e735f540e112866c5e60964d5ee3db47d1b055e/owned_process_containment.py",
+      "sha256": "bbc891a210190ac51b2ad0816e735f540e112866c5e60964d5ee3db47d1b055e",
+      "bytes": 37707
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32/owned_process_containment.py",
+      "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+      "bytes": 31860
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/DESIGN.md",
+      "sha256": "ee826e1daf954db43e7d15260b7cfe6cbc0e95d14ba007e1e025adc4c4b801ac",
+      "bytes": 5712
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/FrozenSource/9d9082-317b7-d029/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/CONCEPT-01.md",
+      "sha256": "cece4e8bc164ca20bfb0bb5b3e8c04825ad97a1a8aa48cd4bea7d6a010a3f220",
+      "bytes": 7086
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-01.json",
+      "sha256": "441c8bc830321492bd085a6ce431c7af841f25818deae22810b58677bcf57a2c",
+      "bytes": 13319
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-02.json",
+      "sha256": "220aa09fd7f08625030b7db243ccb43a5c8c03a161c4879c926b50c367c7398a",
+      "bytes": 9613
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/HelperObserved-initial.json",
+      "sha256": "16806eb19a03a5d509fc1781087eac05261690bdae494f8ed07e700a45664184",
+      "bytes": 3065
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/InvalidatedReview01/HelperObserved-01.json",
+      "sha256": "12a5093c287f0eeb17032af57a596c5eecf9d9964d4d5e3fe6565aef147c788e",
+      "bytes": 12782
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/InvalidatedReview01/REPORT-01.md",
+      "sha256": "c190aaa82ee05f15e2e63aa56d720f32262c08c81ae39cef0c674f1e4b4b71cc",
+      "bytes": 5184
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/InvalidatedReview01/independent-review-01.json",
+      "sha256": "1728458adfffc6ae51fbb7b2b633c769a8a6a9d6756241ac2d0e27407403b39a",
+      "bytes": 989
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/REPORT-01.md",
+      "sha256": "1cee25dba2b866f02c64a53ecf541dd4f99e8faad07e71ddac0172ca16a2dc4c",
+      "bytes": 389
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/REPORT-02.md",
+      "sha256": "61776ecf554631d5dfc982f86d677fec7f5c766ed131ff521b8462031e3c0891",
+      "bytes": 5249
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02/isolated_containment_runner.py",
+      "sha256": "aadcb08ee7d462b2fa2e44da8312a873b8885315ea77f9bae40c35032f45adea",
+      "bytes": 39757
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/ReviewedBundle02Final/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/Source-cdb13-first-candidate.py",
+      "sha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+      "bytes": 31860
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/independent-review-01.json",
+      "sha256": "2bbf8d64f3ed8d045a04af11be8dfa4f3ea2a622a7086a2966a6e47a2ec9ff0e",
+      "bytes": 1584
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/independent-review-02.json",
+      "sha256": "4845e2d535e700a55f4fd6efc2959e0443e8f6f7fa64f3d066ff77cb046e6f09",
+      "bytes": 1976
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/IndependentStaticAudit/invalidated-review01-index.json",
+      "sha256": "f63d4aceaaa87bb07adb169d3ef7f8a353e8ab12f6162a87c087dbc3e550a0b9",
+      "bytes": 1927
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/01-recovery-card-web.py",
+      "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+      "bytes": 43017
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/02-execution-contract.template.json",
+      "sha256": "674a3a9bf2783bf1a3182cf956fe288a94305cace14534c908bb33cd0e9ff092",
+      "bytes": 9509
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/03-command-plan.json",
+      "sha256": "8df5ace5af87b07896e329da71b8ef8246e7a1ab4c3035937ed0224f8c73df7b",
+      "bytes": 2700
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/04-CardWrapperREPORT-01.md",
+      "sha256": "17b4dfd0a5c4bfc718d7b9be99a8d5dffd55c77935d4d17b15f38259c204c5ed",
+      "bytes": 5350
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/05-recovery-gospel-web.py",
+      "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+      "bytes": 57195
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/06-CardWeb01-escaped-unity-observation.json",
+      "sha256": "ec363bbd1d3a28d1a29fc56e053c3ceabac716e354cc74eaae00860722b7fb7b",
+      "bytes": 1460
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/07-CardWeb01-post-timeout-idle-observation.json",
+      "sha256": "9c1775a9136e088402d8317fae93193f5096005146dce40c7c9ee1cb40bd9383",
+      "bytes": 712
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/08-web-build-summary.json",
+      "sha256": "410b042a70885722fd0b18daf34ae93b247ab77420e224edf4f4686cd0cd9f5a",
+      "bytes": 10749
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/09-card-web-known-caller-hold.json",
+      "sha256": "a9b4c0203b26effba53e5759f2bbf6d37e9c59bc294bcd1273074e6a6b3f46e9",
+      "bytes": 887
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+      "sha256": "e5ccccc18f0ada598d4659ffc381201140ffb0d8b2e335ff1c0b04e33330b716",
+      "bytes": 40547
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+      "sha256": "b36514be4ef93806bb47f4cef9973781c6d10489123c5b67cd867d85034e63a5",
+      "bytes": 54692
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Environment/owned-process-containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/README.md",
+      "sha256": "70e515efaa1b37ff2b35b1abccc770a7c1b4ad863355897669c1863bf98cc4e8",
+      "bytes": 7733
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/history/aadcb08ee7d462b2fa2e44da8312a873b8885315ea77f9bae40c35032f45adea/isolated_containment_runner.py",
+      "sha256": "aadcb08ee7d462b2fa2e44da8312a873b8885315ea77f9bae40c35032f45adea",
+      "bytes": 39757
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/isolated_containment_runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7",
+      "bytes": 40202
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/ProposedTests/process_fixture_successor.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760",
+      "bytes": 5568
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-contained-lane.patch",
+      "sha256": "708d1649fa464952c3a6e329867711be82dcacf212bdeea044f2f998711e3ae9",
+      "bytes": 8332
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-command-plan.json",
+      "sha256": "edd6ad106d60cc266005e58551fb51c85a41ddc486bcc01467250cd856f1c909",
+      "bytes": 2889
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/card-web02-contract.template.json",
+      "sha256": "faa703d721d6b15e543ece0974df20e809c429ed35113c521d80f8068d5e7f30",
+      "bytes": 10224
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/final-source-candidate-index.json",
+      "sha256": "f668ce800e368035913b8d7a087fbf952c7e67ffe9797794b29467339d846433",
+      "bytes": 2092
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/gospel-contained-lane.patch",
+      "sha256": "f8ba5de65962d8b41e437dfeee3e720f050a85b72f3542c9719558ba618f47fd",
+      "bytes": 6893
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/isolated-acceptance.template.json",
+      "sha256": "0184da1738d7477d2054e81bf22c7b28f179867b9f808e78b37774c07cadbda3",
+      "bytes": 1820
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/operator-acceptance.template.json",
+      "sha256": "6c830e2c00a34156b949eb954df714feac0bcba0ff4bc4dd279f6bcbf59abddb",
+      "bytes": 438
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/original-preservation-index.json",
+      "sha256": "82d0e26a8c6bc9e49d1ca42706556e17ca084d4632c1b745a9942a92e28907d7",
+      "bytes": 3529
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/owned_process_containment.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+      "bytes": 44980
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/proposal-source-index.json",
+      "sha256": "0efbebec62ea52be0b2c234ce08bcfb08520803fb2868b32d7acd01c7544722e",
+      "bytes": 1504
+    }
+  ]
+}

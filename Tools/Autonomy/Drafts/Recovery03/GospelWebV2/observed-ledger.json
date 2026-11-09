@@ -1,0 +1,349 @@
+{
+  "status": "v2-source-only-wrapper-statically-reviewed-not-installed-imported-compiled-or-executed",
+  "observedUtc": "2026-11-03T16:24:46.110370+00:00",
+  "scope": "fresh-build-and-witness-only",
+  "publishReady": false,
+  "baselineReady": false,
+  "wrapper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+    "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+    "bytes": 57195
+  },
+  "contract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+    "sha256": "bf64a3f7cf32e18cf0f2f53cd2d0631e863a4f871ed2730ced3fcd8f3f2f4b8c",
+    "bytes": 21256
+  },
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+    "sha256": "3c6cc6fefdc9f644b2c7fb0eba4fa6ee28dc3a3c58bdb360712dd775c8cd846c",
+    "bytes": 6122
+  },
+  "independentWrapperReview": {
+    "status": "no-remaining-static-blocker-in-declared-scope",
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperREPORT-02.md",
+      "sha256": "e3d93aad169a5a2676af3143c38a36e36da9dad3f335cac1df68381d03170770",
+      "bytes": 4320
+    },
+    "observedRecords": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperObserved-02.json",
+      "sha256": "b262144bf9c57d735b5d0929b372adb0168befb127449266e8299d772b635fb3",
+      "bytes": 23680
+    }
+  },
+  "v1PreservationIndex": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/preservation-index.json",
+    "sha256": "b29633abdd124caf704a6c905b7548a1afbbd4dfbb6e7b0a806c241a1e7bfeb1",
+    "bytes": 3646
+  },
+  "v1AuditOriginal": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/IndependentStaticAudit/WrapperREPORT-01.md",
+    "sha256": "f11a60912429d7e1af4aae790e878e152886eca8f103993448f66070424759e8",
+    "bytes": 5387
+  },
+  "sourceAndCurrentNativeRootFullrefs": [
+    {
+      "file": "Tools/Build/nativity-task.sh",
+      "sha256": "e727b5aafe80939ec063aef764cd621e37bb306cdbe22bb21697995da4ef59fd",
+      "bytes": 3509
+    },
+    {
+      "file": "Tools/Build/nativity-pipeline-state.py",
+      "sha256": "205d7e05e4533e4c752c2a4a96ebf97352495ba18b161eafb15a0dfae66ff575",
+      "bytes": 4034
+    },
+    {
+      "file": "Tools/Build/restore-nativity-build-additions.py",
+      "sha256": "961ccb66abc14cb7153addb532ba86a0784a7f9a9b76ae30751a8f6c3ee838a9",
+      "bytes": 2550
+    },
+    {
+      "file": "Tools/Environment/activate-shell.sh",
+      "sha256": "6f2cbb0c2191db5c225cdc070d13f7769007f118e1d1f0c84ba9cfd033d7fd68",
+      "bytes": 1068
+    },
+    {
+      "file": "Tools/Environment/assert-runtime-idle.py",
+      "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16",
+      "bytes": 966
+    },
+    {
+      "file": "Tools/Environment/repair-generated-cache-links.py",
+      "sha256": "968e0e39f230b2981805353210a3b85ee9dd60d04f43b35ad5ff9e14f10d0d56",
+      "bytes": 1015
+    },
+    {
+      "file": "Tools/Validation/restoration_source_binding.py",
+      "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+      "bytes": 2356
+    },
+    {
+      "file": "Tools/Validation/nativity_release_evidence.py",
+      "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+      "bytes": 23552
+    },
+    {
+      "file": "Tools/Validation/nativity_storage.py",
+      "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+      "bytes": 1914
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildCommands.cs",
+      "sha256": "33ad184566e522054a544628eea2e5f8b23a8e7fcc11cf0e5267ee70c22edce9",
+      "bytes": 5341
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/BuildSourceBinding.cs",
+      "sha256": "304411cd36971637c372240fb10d862c3e08bb6b9d188cbdb498cb949a684dcc",
+      "bytes": 2617
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/LegacyResourceIsolation.cs",
+      "sha256": "8c6bcd9d9c1815494c6c42f3c6c447b1ad2ea339d48278a60037e9493620f816",
+      "bytes": 13677
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/ProjectSetup.cs",
+      "sha256": "b02390801fa32fe76f6fd06d9f3822bebfed72661a8f73cbd6aa88bdd155ef8b",
+      "bytes": 59512
+    },
+    {
+      "file": "Games/PathOfDawn/Assets/Editor/PilgrimageProjectSetup.cs",
+      "sha256": "3fabb43aceaf80197d456660bec6cd76a435eb96dceafa394df896169aaa41f8",
+      "bytes": 9159
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/ProjectVersion.txt",
+      "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+      "bytes": 85
+    },
+    {
+      "file": "Games/PathOfDawn/ProjectSettings/FirstGameSetup.version",
+      "sha256": "2bdad1f4fbbc215d1f209e796245c5fc2bbfebba3d0134a141bef00226638b81",
+      "bytes": 37
+    },
+    {
+      "file": "Tools/Autonomy/cycle_guard.py",
+      "sha256": "2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f",
+      "bytes": 15866
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/DurableBuildProofDraft/preserve_completed_build_proof.py",
+      "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+      "bytes": 16139
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/restored-public-manifest.json",
+      "sha256": "0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8",
+      "bytes": 2134182
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery01/PublicRestoreRuns/Restore01/report.json",
+      "sha256": "165e40d80cfb3698dfdf0bb0150a68aa74d1e82f7670f2f7c2f134a31eed19f8",
+      "bytes": 29882757
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/binding.json",
+      "sha256": "c8f88180d8626dbfd0b7cb4bf0f5ec2e8cb9087e3c4859d1cc46100ce96c7f0c",
+      "bytes": 1328
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/native.xml",
+      "sha256": "de2a605ffe19fd3072683316e69ea0c8dc94e618e1d268ed710f72bae85bfae1",
+      "bytes": 146237
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
+      "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+      "bytes": 363712
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/product-native-summary.json",
+      "sha256": "2cad207f26fe38a55aaca9d9499a04fb707a5a71425039c3837733f257b3face",
+      "bytes": 40208
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+      "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+      "bytes": 13673
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/gospel-native01-complete-originals.json",
+      "sha256": "b50dc69863fc35a397f8245606995f876e7f3b08fa92299802cdb21aba2f8ce6",
+      "bytes": 40009
+    }
+  ],
+  "knownAliasObservation": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/source-observations-v2.json",
+    "sha256": "3d413b6c762f89bfb15df2bde707af454d7613cd6e07e566569b261be4165c24",
+    "bytes": 1765
+  },
+  "outputs": [
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/REPORT.md",
+      "sha256": "4337d94dae19e36d195cf5132f610c016cd457ce46b673db192124acc3d5b089",
+      "bytes": 5937
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperObserved-01.json",
+      "sha256": "b4f2a987e9ba83631ca67eb80b29d769e50ca83cb695eb7ace249c489a4e52bf",
+      "bytes": 20375
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperObserved-02.json",
+      "sha256": "b262144bf9c57d735b5d0929b372adb0168befb127449266e8299d772b635fb3",
+      "bytes": 23680
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperObserved-initial.json",
+      "sha256": "a85121608aed97000453420766be54d6eb560d1293d55d1a3e05bc8b2e7bed3d",
+      "bytes": 4195
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperREPORT-01.md",
+      "sha256": "f11a60912429d7e1af4aae790e878e152886eca8f103993448f66070424759e8",
+      "bytes": 5387
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperREPORT-02.md",
+      "sha256": "e3d93aad169a5a2676af3143c38a36e36da9dad3f335cac1df68381d03170770",
+      "bytes": 4320
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/WrapperSource-c4008-before-control-fixes.py",
+      "sha256": "c4008f7af1fa71c9c44a840a950476d99a38bdda5916e43d98d5fcd652f8f5fb",
+      "bytes": 47862
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/observed-records.json",
+      "sha256": "28c6310a819264cff89835897e263cfaf042a8997959c338425584cc9f602cbb",
+      "bytes": 15488
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/IndependentStaticAudit/source-chain-observations.json",
+      "sha256": "c17769d25a8a3ea6bf0e3b888aa365ebecf4971f73cdd78f87bb5804c649ce78",
+      "bytes": 6228
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/README.md",
+      "sha256": "609af5cc51888ee4e12e8fa85da792d526bc43756152c1ebd91c4560fdd83b4d",
+      "bytes": 17358
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/command-plan.json",
+      "sha256": "3c6cc6fefdc9f644b2c7fb0eba4fa6ee28dc3a3c58bdb360712dd775c8cd846c",
+      "bytes": 6122
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/execution-contract.template.json",
+      "sha256": "bf64a3f7cf32e18cf0f2f53cd2d0631e863a4f871ed2730ced3fcd8f3f2f4b8c",
+      "bytes": 21256
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/declared-plan-01/README.md",
+      "sha256": "969f0dd21713c48a921e65b245203b2e9a8f1748482f38de5cd3c5a6c6a2f389",
+      "bytes": 12296
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/declared-plan-01/command-plan.json",
+      "sha256": "5bdd527f935dce6629eb738396b664833628b49fe77f7c3e218b65ee0a44347c",
+      "bytes": 5865
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/declared-plan-01/execution-contract.template.json",
+      "sha256": "513b6fc43f6dddc3c336e0bd8f46226f505c4fdf542329aa91798b28f37a2e18",
+      "bytes": 16544
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/declared-plan-01/observed-ledger.json",
+      "sha256": "b1a1564e8b87c00d5045f35b7273c1d9c0c02e799a654fe1d1d1f3ea7b262e0b",
+      "bytes": 8124
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/IndependentStaticAudit/WrapperObserved-01.json",
+      "sha256": "b4f2a987e9ba83631ca67eb80b29d769e50ca83cb695eb7ace249c489a4e52bf",
+      "bytes": 20375
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/IndependentStaticAudit/WrapperObserved-initial.json",
+      "sha256": "a85121608aed97000453420766be54d6eb560d1293d55d1a3e05bc8b2e7bed3d",
+      "bytes": 4195
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/IndependentStaticAudit/WrapperREPORT-01.md",
+      "sha256": "f11a60912429d7e1af4aae790e878e152886eca8f103993448f66070424759e8",
+      "bytes": 5387
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/README.md",
+      "sha256": "7ed10ec6342959db4ee6047f2bfa7a8e4702c25236a6a3073a547c4d8cca63f6",
+      "bytes": 14777
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/command-plan.json",
+      "sha256": "96b89ef92d69c33cdc522198c89c54b35fde91af83b02deb8d100d2a97c0a42e",
+      "bytes": 6112
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/execution-contract.template.json",
+      "sha256": "7d7c53e7f22fbfc2e220f752b81a27c250973a361bd9426d2b613c2c8a64e15e",
+      "bytes": 20659
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/observed-ledger.json",
+      "sha256": "14c1cfff8638c0ff4090c8e5bdfeda2f8a6eeba5307822c36f5a071688ec7603",
+      "bytes": 13183
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/preservation-index.json",
+      "sha256": "b29633abdd124caf704a6c905b7548a1afbbd4dfbb6e7b0a806c241a1e7bfeb1",
+      "bytes": 3646
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/recovery-gospel-web.py",
+      "sha256": "5f4603c15166a699ec052b8d7cd27c10e576e0e37732f4f617ede1d8dada0c10",
+      "bytes": 52040
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/history/wrapper-v1/source-observations.json",
+      "sha256": "027b2526d9bc47f520f7961aa6f8dfdc8957142af77a7db4d42dcede7030716d",
+      "bytes": 6737
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py",
+      "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+      "bytes": 57195
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/source-observations-v2.json",
+      "sha256": "3d413b6c762f89bfb15df2bde707af454d7613cd6e07e566569b261be4165c24",
+      "bytes": 1765
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/source-observations.json",
+      "sha256": "027b2526d9bc47f520f7961aa6f8dfdc8957142af77a7db4d42dcede7030716d",
+      "bytes": 6737
+    }
+  ],
+  "v2ChangesOnly": [
+    "Single exact logical/readlink/resolved Library mapping is pinned and checked before actual known physical journal reads",
+    "Only primary FirstGameLegacyResourceBuild.json and exact pre-move .json.tmp leaf raw bytes/SHA/size are preserved; physical parents/leaf remain regular/no-link",
+    "Unknown alias/missing target/leaf-link/partial capture is pending with false readiness and incomplete diagnostic, with no automatic repair/restore/delete",
+    "SourceCaptureComplete and journal captureComplete are distinct; successful source hash capture cannot hide missing journal evidence",
+    "Actual Web forced run/build/output prefix moved to Recovery03; Native/Root/draft actual refs remain original Recovery02/RecoveryBaseline paths"
+  ],
+  "unchangedChecks": [
+    "Exact16/Native134/Root136 full original references and all27 source/current Native Root pins",
+    "Current authored1707 rows/FP255e and exact source/helper/guard provenance",
+    "900 shared safeEnd/lease-60, own-process-group cleanup and interrupt/failure original preservation",
+    "Original shell/source restoration, after-success c597 explicit core5 copy and actual old/new/saved raw stream/name/size/SHA comparisons",
+    "No reconstruction of old missing build/seal/audit, no public or baseline approval"
+  ],
+  "limits": [
+    "Source-only standard AST/JSON/SHA/readlink/stat; no actual helper/project import, tests, Unity, browser, network, Git, wrapper run or alias failure experiment",
+    "Only allowed Recovery02/GospelWebRunDraft files written; no actual Tools/Game/Editor/Native freeze/Assets changes or R3 output creation",
+    "V1 was never installed/executed and all9 selected V1 originals remain byte-exact in history",
+    "Actual install/controlled execution and final Root/paired Web/browser/public/Core/CI/fullsite gates are release-owner responsibilities"
+  ]
+}

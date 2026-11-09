@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "status": "TEMPLATE-NOT-APPROVED",
+  "reviewer": null,
+  "scope": "gospel-contained-web-source",
+  "publishReady": false,
+  "baselineReady": false,
+  "sourceFingerprint": "255e2d75bcae088f33f6f2134d44da36296aee85614d726189f79e3c941b8026",
+  "sourceContract": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/source-contract.json",
+    "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1",
+    "bytes": 23287
+  },
+  "callerSha256": "cfe661216581886adff3ef07b03f89f54e0354383edae9afb763e1e1f3d0f547",
+  "commandPlan": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/GospelContainedRecovery06Draft/command-plan.json",
+    "sha256": "05d32b9e2b80e22d946aec94a75815ed3f560a7ad18e55f59f74ecfd0a225b5b",
+    "bytes": 6563
+  },
+  "containmentHelper": {
+    "file": "Tools/Environment/owned-process-containment.py",
+    "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "bytes": 44980
+  },
+  "containmentAcceptance": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+      "bytes": 69227,
+      "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+    },
+    "independentReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+      "bytes": 2324,
+      "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+    },
+    "operatorReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+      "bytes": 3316,
+      "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+    }
+  },
+  "nativeRootReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/Root/gospel-native01-product-review.json",
+    "sha256": "bbbe5fe8f84db31b8f787bbf331383e677b8bd0b66fd2d3acc80fd0a56146b0b",
+    "bytes": 13673
+  },
+  "nativeInput": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/RecoveryBaseline/NativeRuns/GospelNative01/Native/PathOfDawn/inputs-before.json",
+    "sha256": "fdf2aa11045a86f7b1fa8ebee1eb00f81bbc77f4258d73a0c121819babe55286",
+    "bytes": 363712
+  },
+  "reviewedUtc": null
+}

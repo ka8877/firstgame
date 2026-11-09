@@ -1,0 +1,137 @@
+--- Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery02/GospelWebRunDraft/recovery-gospel-web.py
++++ Proposed/Tools/Autonomy/recovery-gospel-web.py
+@@ -26,6 +26,7 @@
+ MANIFEST_SHA = '0a9767bc92a48147bd38765608d1d8ea17f1ebeb6a788928d39bcf4eeb0754f8'
+ PROOF_SHA = 'c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106'
+ GUARD_SHA = '2207d7c20da4eea5c17be87409991e09fd57c6427248695dedf1b6decd46f39f'
++CONTAINMENT_SHA = '9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad'
+ LIBRARY_LOGICAL = 'Games/PathOfDawn/Library'
+ LIBRARY_TARGET = '/tmp/firstgame-reprise-cache/PathOfDawn/Library'
+ JOURNAL_LEAF = 'FirstGameLegacyResourceBuild.json'
+@@ -277,18 +278,6 @@
+     return result
+ 
+ 
+-def live_group_members(group):
+-    result = []
+-    for folder in Path('/proc').iterdir():
+-        if not folder.name.isdigit():
+-            continue
+-        try:
+-            values = (folder / 'stat').read_text().rsplit(') ', 1)[1].split()
+-            if int(values[2]) == group and values[0] not in ('Z', 'X'):
+-                result.append({'pid': int(folder.name), 'state': values[0], 'processGroup': group})
+-        except (FileNotFoundError, ProcessLookupError, PermissionError, IndexError, ValueError):
+-            continue
+-    return result
+ 
+ 
+ def observed_runtime_idle(stop):
+@@ -330,74 +319,8 @@
+         return value
+ 
+     def child(self, label, argv, cap=900, log=None):
+-        budget = min(cap, self.remaining())
+-        event = {'label': label, 'argv': argv, 'cwd': str(ROOT), 'startedUtc': utc(),
+-                 'timeoutSeconds': budget, 'privateProcessGroup': True,
+-                 'environmentOverrides': {key: self.env[key] for key in ('FIRSTGAME_VALIDATION_ROOT', 'FIRSTGAME_BUILD_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE') if key in self.env}}
+-        self.events.append(event)
+-        if self.run:
+-            write_json(self.run / 'Processes' / (label + '.started.json'), event)
+-        process, stream, raw, code = None, None, b'', 127
+-        try:
+-            if log:
+-                stream = log.open('xb')
+-            self.remaining()
+-            process = subprocess.Popen(argv, cwd=ROOT, env=self.env, start_new_session=True,
+-                                       stdout=stream if stream else subprocess.PIPE, stderr=subprocess.STDOUT)
+-            event['pid'] = process.pid
+-            budget = min(budget, self.remaining())
+-            event['actualWaitBudgetSecondsAfterSpawn'] = budget
+-            if stream:
+-                code = process.wait(timeout=budget)
+-            else:
+-                raw = process.communicate(timeout=budget)[0]
+-                code = process.returncode
+-        except subprocess.TimeoutExpired:
+-            code = 124
+-        except KeyboardInterrupt:
+-            code = 130
+-        except ValueError as error:
+-            code = 124 if process is not None else 127
+-            event['executionError'] = str(error)
+-        except OSError as error:
+-            event['launchError'] = type(error).__name__
+-        finally:
+-            if process is not None:
+-                cleanup_stop = time.monotonic() + 10
+-                try:
+-                    os.killpg(process.pid, signal.SIGKILL)
+-                except ProcessLookupError:
+-                    pass
+-                try:
+-                    if stream:
+-                        process.wait(timeout=max(.01, cleanup_stop - time.monotonic()))
+-                    else:
+-                        tail = process.communicate(timeout=max(.01, cleanup_stop - time.monotonic()))[0]
+-                        if not raw:
+-                            raw = tail
+-                except subprocess.TimeoutExpired:
+-                    event['cleanupIncomplete'] = True
+-                members = live_group_members(process.pid)
+-                while members and time.monotonic() < cleanup_stop:
+-                    time.sleep(min(.03, max(0, cleanup_stop - time.monotonic())))
+-                    members = live_group_members(process.pid)
+-                event['ownedGroupMembersAfterCleanup'] = members
+-                event['ownedGroupObservedEmpty'] = not members
+-                if members:
+-                    event['cleanupIncomplete'] = True
+-            if stream:
+-                stream.close()
+-        event.update(exitCode=code, finishedUtc=utc())
+-        if log:
+-            event['log'] = ref(log)
+-        else:
+-            self.logs.append((label + '.log', raw))
+-        if self.run:
+-            write_json(self.run / 'Processes' / (label + '.finished.json'), event)
+-            if not log:
+-                write_raw(self.run / 'Controls' / (label + '.log'), raw)
+-        require(not event.get('cleanupIncomplete'), 'Own child group did not finish bounded cleanup')
+-        return event
++        require(hasattr(self, 'containment'), 'Verified process containment is required before any child')
++        return self.containment.child(self, label, argv, cap=cap, log=log)
+ 
+     def guard(self, label):
+         require(self.lease_path.read_bytes() == self.lease_bytes, 'Lease raw bytes changed')
+@@ -483,6 +406,22 @@
+     return ref(run / 'FailureState/state.json')
+ 
+ 
++def configure_containment(lane, contract, planned_run):
++    row = contract.get('processContainment', {}).get('helper')
++    require(isinstance(row, dict) and row.get('file') == 'Tools/Environment/owned-process-containment.py'
++            and row.get('sha256') == CONTAINMENT_SHA, 'Exact reviewed containment helper is mandatory')
++    helper_path, raw = raw_checked(row, lane.safe_end)
++    policy = contract['processContainment']
++    expected = planned_run.parent.parent / 'ContainmentControls' / planned_run.name
++    require(policy.get('evidenceRoot') == str(expected), 'Exact fresh batch containment evidence path required')
++    module = types.ModuleType('firstgame_owned_process_containment')
++    module.__file__ = str(helper_path)
++    sys.modules[module.__name__] = module
++    exec(compile(raw, str(helper_path), 'exec', dont_inherit=True, optimize=0), module.__dict__)
++    lane.containment = module.Controller({'helperPath': str(helper_path), 'helperSha256': CONTAINMENT_SHA,
++        'evidenceRoot': str(expected), 'acceptance': policy.get('acceptance')}, ROOT, test_mode=False)
++
++
+ def main():
+     def interrupted(signum, frame):
+         raise KeyboardInterrupt()
+@@ -519,6 +458,7 @@
+             and str(build_root) == '/tmp/firstgame-c1-recovery03-' + attempt.lower() + '-builds', 'Use exact unique current run/build roots')
+     build = build_root / 'PathOfDawn/Web'
+     require(contract.get('buildFolder') == str(build), 'Declared build folder differs')
++    configure_containment(lane, contract, run)
+     for path in (run, build_root):
+         no_links(path)
+         require(not path.exists(), 'Previous outputs must be preserved; use new unique paths')

@@ -1,12 +1,48 @@
 # 지속 개발 로드맵과 재개 지점
 
-**G1/G2는 실제 공개 검증과 봉인을 완료했고, 현재는 C1을 준비한다**. 제품을 처음부터 다시 만들지 않는다. 장기 방향은 [CHARTER.md](CHARTER.md), 현재 사실은 [STATE.json](STATE.json)을 따른다.
+## 최신 재개 · CanonPublishResume-2026-11-10
+
+현재 연결된 환경에서 CanonArt의 네 로컬 실행과 현재 원본의 Root 검토를 마쳤다. Core311, Gospel Native21·Card Native8, 음성28개 신규 ASR와 최종 Gospel Web03·Card Web01 빌드가 통과했다. 아래 표의 모든 실행은 wrapper 통과, 최종 guard exit0, 소유 후손 정리, 실제 전체 재접속2회를 확인했으며 모든 필수 현재 원본을 Root가 직접 보고 승인 기록에 결합했다.
+
+| 현재 로컬 범위 | 실행 | 검사 | 원본PNG | 필수 현재 원본 |
+|---|---|---:|---:|---:|
+| Gospel PC | Browser05 | 90 | 69 | 53 |
+| Card PC | Browser02 | 98 | 65 | 52 |
+| Gospel Mobile | Browser01 | 82 | 58 | 39 |
+| Card Mobile | Browser01 | 101 | 65 | 51 |
+
+재연결 뒤 `/tmp`가 초기화됐지만 재빌드하지 않고 정확한 runtime15,370파일을 복원했다. Gospel5파일105,432,320B와 Card15,365파일867,853,409B를 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/runtime-restoration.json`에 결합했다. 추적 Boot의3개 식별자 차이는 원문·diff를 보존한 뒤 기존 정확한 바이트로 복원했다. 포털 대표 그림은 Root가 승인한 현재 PC 원본의 정확한 사본으로 준비했다.
+
+`Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint02/index.json`에 실제 선택 근거1,145파일을 보존했다. 최대32MiB씩12개로 분할한 압축본의 결합 크기는378,942,231B, SHA256은 `9146d2e846984ed1cf52ccec250cfa241ffa29713770f045ef5cfecf5f70dfa1`이다. 압축본을 다시 열어 모든 member의 SHA와 현재 파일 불변을 확인했다. 네 로컬 report·모든 Root 검토 원본·PCM·wrapper, 보존된 Card Web01 proof/core5, 선택한 Browser04·Card PC01 실패 이력과 현재 복구 근거를 포함한다. Gospel Web·Core·Voice·Native의 기존 정확한 원본은 Checkpoint01을 계속 참조한다. 이 근거 보존은 stage·CI·배포·공개검증 완료를 뜻하지 않는다.
+
+이전 자기 잠금은11월10일01:35 KST 실제 유휴 확인 뒤 정상 해제했다. 현재 control은 `Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10`, 소유자는 `cee675c8-5fa8-4d69-9536-1ebe9debf7db`, 원격 잠금 commit은 `2085a3a294671a1b513e263cdf5cd7d103963a7d`, deadline은 `2026-11-09T22:35:39.484202Z`다. 단일 실행 담당 `/root`가 각 단계 전 실제 소유권과 잔여 시간을 확인한다. 경로 이름만으로 새 잠금을 취득했거나 과거 잠금을 연장했다고 추정하지 않는다.
+
+현재 경로 설정은 저장소 루트에서 아래와 같이 한다. `activate-current.sh`가 설정한 `FIRSTGAME_PROOF_ROOT`는 기존 완료 빌드의 proof 경로이므로 새 control 아래로 바꾸지 않는다.
+
+```sh
+source Tools/Validation/CanonArt/activate-current.sh
+export FIRSTGAME_CONTROL_ROOT="$PWD/Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10"
+```
+
+build는 `/tmp/firstgame-canon-final-20261109-builds`, proof는 `Artifacts/Validation/Autonomy/CanonDialogueRelease-2026-11-09/BuildProof`, 제품 근거는 `Artifacts/Validation/CanonArt-2026-11-09`다. 복원 runtime과 기존 실행 원본을 유지하고 현재 소스·승인·완전한 runtime 결합을 확인한 뒤 다음 공개 절차로 간다.
+
+현재 공개는 이전 G2이고 PR #2는 draft다. 남은 순서는 현재 소스 커밋과 그 정확한 CI → PR ready·병합과 main CI → manifest 포함985MB 미만 stage → 기존 게시와 명시 Pages 실행 → 전체 현재 파일의 새 HTTPS GET와 포털 Root 검토 → 두 게임 공개 터치 → 최종 gate다. 아직 stage·새 CI·배포·공개검증 완료를 주장하지 않는다. 예약 자동실행은 최근 조회0개이고 기존 목표 카드의 활성 상태는 직접 확인하지 못했다. 출전2649종과 원본 그림15350개를 구분하며 전체 원작 재현은 미완료다. `Docs/Research/CanonNextTaunt598.md`는 후속 조사·구현 제안이며 현재 제품 완료 범위에 포함하지 않는다.
+
+아래는 이전 로드맵을 보존한 이력이다. 아래 “현재”의 소유 경로·검사·복구 상태는 각 회차 당시의 기록이며, 충돌 시 이 최신 재개 메모와 STATE/REPORT를 따른다.
+
+---
+
+**G1/G2는 당시 공개 검증과 봉인을 마쳤고, 현재는 C1 소스·검증 복구와 등급 안내 보정을 진행한다**. 제품을 처음부터 다시 만들지 않는다. 장기 방향은 [CHARTER.md](CHARTER.md), 현재 사실은 [STATE.json](STATE.json)을 따른다.
+
+복구 관측: `/workspace`의 C1 소스·Native01은 남았으나 이전 `/tmp` stage/build와 G2 Root/PublicPortal 연결 대상이 없다. 아래 완료 이력을 삭제하거나 누락 원문을 새로 쓰지 않는다. 현재 가용성·정확한 복구 단계는 STATE의 `activeWork.interruptionRecovery`를 먼저 따르며, 배포 전에 정확한 복원 또는 별도 동등한 현재 정상판 재검증이 필요하다.
 
 ## 회차 운영
 
 초기 배분은 **Gospel → Gospel → Cards**다. 초기 설정·검사만 한 회차는 게임 개선 횟수로 세지 않는다. 긴급 오류/저장/배포 복구와 미완료 진행 작업이 우선이다. 회차마다 완료 조건을 갖춘1~3개 작업만 선택하고, 실패 원인이 같으면 재시도는2번까지다. 진행한 척하기 위한 변경은 하지 않는다.
 
 단일 명령 묶음은 최대2,700초(45분)다. 이 값은 이번 운영 기본값이며 자동으로 늘리지 않는다. `run`은 자식 프로세스 그룹의 시간을 강제한다. 대화형 에이전트 전체의 시간/모델 사용량, 클라우드 수명, 예약 횟수는 현재 도구가 강제하지 못하므로 실행기 설정이 별도로 필요하다. 한도 도달 시 미완료 소스/실패/재개점을 작업 브랜치와 STATE에 남기고 정상 공개판을 유지한다. 회차 작업 수나 고정 실행 횟수를 장기 목표의 완료 조건으로 바꾸지 않는다. G1이 끝나면 다음 미완료 마일스톤을 구체화한다.
+
+2026-11-09 후속 사용자 승인 “한도없이 해도된다. 무슨한도때문에멈춘거니?”에 따른 예외: `acquire` 또는 `run`에 `--extended-authorized`를 명시하면 현재 채팅의 허용된 게임 구현·검증·기존 공개 절차에 한해 최대21,600초(6시간)를 지정할 수 있다. 새 lease에는 승인 문구와 적용 범위를 기록한다. 기본2,700초와 과거 실행 기록은 유지하며, 기존 잠금을 연장하거나 갱신하지 않는다. 실행과 소유 후손이 종료된 뒤 자기 잠금을 정상 해제하고 새 고유 회차를 취득한다. 만료 잠금 탈취·타인 해제·무기한 백그라운드 실행은 금지하고 실제 환경·사용량·개별 명령 supervisor 제한은 별도로 따른다. 목표 카드·예약 실행의 동작 여부는 이 승인으로 확인되거나 바뀌지 않는다.
 
 ## 현재 정상판과 보존한 초기 복구 기준
 
@@ -111,6 +147,8 @@ python3 Tools/Autonomy/cycle_guard.py run --record Artifacts/Validation/Autonomy
 ```
 
 대화형 회차는 `acquire --record <고유 경로> --run-id <고유 ID>` 후 각 실행/통합 전 `check --record <같은 경로>`, 종료 때 `release --record <같은 경로>`다. 이미 취득한 동안 중첩 `run`을 시작하지 않는다. 원격 생성은 원자적이고 삭제는 자기 SHA에 한정한 CAS다. 다른 소유자/불명확한 권한/만료 잠금이면 건너뛰며 대기 작업을 쌓지 않는다. 소유 기록을 잃거나 종료된 실행의 잠금이 남으면 먼저 실제 실행/기록을 확인한다. 시간 경과만으로 타인 잠금을 지우지 않는다.
+
+위 사용자 승인에 따른 새 긴 회차는 같은 `acquire` 또는 `run`에 `--extended-authorized --timeout-seconds 21600`을 명시한다. 기존 lease의 deadline을 수정하는 명령이 아니며, 그 회차의 실제 승인 기록과 고유 소유권이 필요하다. 이 문서 변경 자체가 현재 잠금의 연장이나 새 실행의 취득을 뜻하지 않는다.
 
 기존 Pages의 `concurrency: pages`, publishReady/전체 SHA/LFS 포인터 검사는 유지한다. 새 guard branch만 실제 제품 코드가 없는 조정용 ref로 분리하고, 실제 소스 브랜치의 기존 Core 검사와 새 guard15회귀를 계속 실행한다.
 

@@ -1,0 +1,61 @@
+{
+  "status": "accepted",
+  "scope": "isolated-process-containment-tests",
+  "reviewer": "/root/release_recovery",
+  "reviewedUtc": "2026-11-03T18:03:39.212772+00:00",
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "report": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+    "bytes": 69227,
+    "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+  },
+  "executedSources": {
+    "fixture": {
+      "bytes": 5568,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/fixture.py",
+      "sha256": "d029f1f374e2f36a2daf4ec71e06316a1248f916d48a471bbe01bf39861a9760"
+    },
+    "helper": {
+      "bytes": 44980,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/helper.py",
+      "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+    },
+    "runner": {
+      "bytes": 40202,
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalInputs02/runner.py",
+      "sha256": "317b7d42af72d74826ff160be1612aae16ebcd9e3cda6b13ca47f0280d5dfac7"
+    }
+  },
+  "independentReview": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+    "bytes": 2324,
+    "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "acceptedFor": "The exact9d helper may contain fresh bounded CardWeb02 subprocesses. This accepts real dummy-process handling only.",
+  "method": [
+    "Read exact frozen helper b5-to9d full diff and actual fixture/runner command/observer/refusal/report sources; read317b interruption completion delta.",
+    "Read all9 actual groups,9 raw supervisor receipts includingtwo130 interruption phases, and two actual live UID/startrefusals.",
+    "Read-only fullref verification of139 unique per-case originals; actual owner source triplet equality; every owned identity reaped; no baseline-owned intersection or unowned signal.",
+    "Post-run actual original idle script exit0 and exact-own CAS check exit0. No Unity/browser/game/network/Git invoked by the isolated runner."
+  ],
+  "outcomes": {
+    "groupsPassed": 9,
+    "groupsFailed": 0,
+    "controlledSupervisorReceipts": 9,
+    "actualBeforeDeadlineInterruptExit": 130,
+    "actualAfterTimeoutInterruptExit": 130,
+    "uidAndStartRefusalCount": 2,
+    "actualSignalCallsDuringRefusals": 0,
+    "baselineSignalsSentByContainment": 0,
+    "unresolvedOwnedChildren": 0,
+    "productionInvocationCount": 0
+  },
+  "preservedFailures": "Old cdbCandidate01/02 failed, b5Candidate03 preliminary6pass, supersededunexecutedFinalInputs01 and failedCardWeb01 remain unchanged.",
+  "limits": [
+    "No product Native/Root/source gate is replaced by this process acceptance. Native04exact8/Root0d and Gospel16/Rootbbbe remain required.",
+    "C1fullPC162/touch163,PCM4,reload2,currentrules/save,currentCI/source/fullsiteSHA985MB and paired/public/Rootseal remain mandatory.",
+    "GospelWebV2/containedsuccessor remains uninstalled and pending actual finalRootsource review."
+  ]
+}

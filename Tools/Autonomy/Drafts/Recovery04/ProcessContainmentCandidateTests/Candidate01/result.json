@@ -1,0 +1,68 @@
+{
+  "scope": "isolated-real-process-candidate-only-not-production-or-Root-approval",
+  "helperSource": "/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32/owned_process_containment.py",
+  "helperSha256": "cdb13a09154d85d79d02c04884dea29cbbcf8e8b7325991eeb02ca10a7e85a32",
+  "fixtureSha256": "62b7b3596c7d2d233632fac8cbddc7c9e6930b2e3eba857a14f6756a5b4054f3",
+  "UnityGameBrowserNetworkGitTouched": false,
+  "passed": 0,
+  "failed": 6,
+  "tests": [
+    {
+      "mode": "normal",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "exit-seven",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "spawn-setsid",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "doublefork",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "spawn-ignore-term",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    },
+    {
+      "mode": "parent-exit-orphan",
+      "status": "failed",
+      "error": "Process containment unproven; preserve originals and stop",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/run_candidate01.py\", line 97, in <module>\n    event = controller.child(lane, mode, [sys.executable, str(fixture), mode, str(data_dir), token], cap=1.0)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 590, in child\n    need(event.get('containmentProvedEmpty') is True, 'Process containment unproven; preserve originals and stop')\n  File \"/workspace/firstgame/Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ContainmentTests/Candidate01/owned_process_containment.py\", line 31, in need\n    raise ValueError(message)\nValueError: Process containment unproven; preserve originals and stop\n",
+      "event": null,
+      "ownerSafetyCleanupOfExactDummyOnly": [],
+      "unrelatedSiblingStillAlive": true
+    }
+  ],
+  "publishReady": false,
+  "baselineReady": false,
+  "limits": "This is the first immutable cdb13 candidate only. Any later source SHA requires fresh tests; no Root acceptance or product build pass is granted."
+}

@@ -1,0 +1,155 @@
+{
+  "kind": "read-only-source-audit-preliminary-not-acceptance",
+  "checkedUtc": "2026-11-03T17:51:03.295007+00:00",
+  "owner": "/root/release_recovery/c1_pipeline_audit/containment_source_review",
+  "helper": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Candidates/b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4/owned_process_containment.py",
+    "sha256": "b5b8ec620af79e4bbd9b74f0c3db5cf36938f25850887c211e2b9c9d0056dfd4",
+    "bytes": 38591
+  },
+  "mutableSourceObservedAtRead": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/owned_process_containment.py",
+    "sha256": "05c78fedef21ffce9594a364a545c2c0d6eadda0e7fe8cf128d3d0b5456ba36f",
+    "bytes": 39188
+  },
+  "proposedSourceObservedAtRead": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Environment/owned-process-containment.py",
+    "sha256": "05c78fedef21ffce9594a364a545c2c0d6eadda0e7fe8cf128d3d0b5456ba36f",
+    "bytes": 39188
+  },
+  "acceptanceTemplate": {
+    "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/isolated-acceptance.template.json",
+    "sha256": "287b7faaa04ae525a676add6edb8fc3c6a2fc6c7b1fca377edf5c59edb75a233",
+    "bytes": 1500
+  },
+  "adapterAstChanges": [
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/01-recovery-card-web.py",
+        "sha256": "a6bc743af5dc47fadf43f79e9306ec9f59d4f57fd2729349e12bc376c84bf69d",
+        "bytes": 43017
+      },
+      "proposal": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-card-web.py",
+        "sha256": "659c4b0bc30ed1db96b2277960649f69b3cf337242e948903cd6940ca67b6888",
+        "bytes": 40547
+      },
+      "changedFunctions": [
+        "Lane.child",
+        "main"
+      ],
+      "removedFunctions": [
+        "live_group_members"
+      ],
+      "addedFunctions": [
+        "configure_containment"
+      ],
+      "unchangedFunctions": [
+        "Lane.__init__",
+        "Lane.guard",
+        "Lane.remaining",
+        "actual_native",
+        "checked",
+        "compare_runtime",
+        "current_source",
+        "failure_state",
+        "finalize",
+        "fingerprint",
+        "no_links",
+        "observed_runtime_idle",
+        "raw_checked",
+        "ref",
+        "regular",
+        "relative",
+        "require",
+        "role_map",
+        "runtime_paths",
+        "runtime_rows",
+        "sha",
+        "source_rows",
+        "stamp",
+        "utc",
+        "write_json",
+        "write_raw"
+      ]
+    },
+    {
+      "original": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Originals/05-recovery-gospel-web.py",
+        "sha256": "6bf95594b926edab7257481cf6b2fd1ed9790f4f0ba999310e5b923df5eec1d7",
+        "bytes": 57195
+      },
+      "proposal": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery04/ProcessContainmentDraft/Proposed/Tools/Autonomy/recovery-gospel-web.py",
+        "sha256": "a49754874422e254b2378240c713645c50c6723d859396baee8fbaaea804afd8",
+        "bytes": 54692
+      },
+      "changedFunctions": [
+        "Lane.child",
+        "main"
+      ],
+      "removedFunctions": [
+        "live_group_members"
+      ],
+      "addedFunctions": [
+        "configure_containment"
+      ],
+      "unchangedFunctions": [
+        "JournalAliasError.__init__",
+        "Lane.__init__",
+        "Lane.guard",
+        "Lane.remaining",
+        "checked",
+        "exact_xml",
+        "failure_state",
+        "full_source",
+        "get_path",
+        "library_journal_target",
+        "no_links",
+        "observed_runtime_idle",
+        "preserve_library_journal",
+        "raw_checked",
+        "ref",
+        "regular",
+        "relative",
+        "require",
+        "role_map",
+        "runtime_paths",
+        "same_root_ref",
+        "sha",
+        "stamp",
+        "utc",
+        "write_json",
+        "write_raw"
+      ]
+    }
+  ],
+  "actualTestsRunByThisAuditor": 0,
+  "candidateImported": false,
+  "signalsSent": 0,
+  "networkGitUnityOperations": false,
+  "acceptanceReady": false,
+  "publishReady": false,
+  "baselineReady": false,
+  "pending": [
+    "Final helper/fixture/runner/schema9case immutable refs and fresh actual9case owner outputs.",
+    "Interrupt130 boundary and per-case actualfixture/escape/baseline/refusal semantics must be independently checked in final producer/acceptance."
+  ],
+  "findings": [
+    {
+      "kind": "positive-source-control",
+      "lines": "114-148,153-172,203-240,264-290,493-507,659-663",
+      "text": "Held-pidfd signaling requires owned/nonbaseline key and stable startTicks/UID; dedicated verified subreaper ECHILD plus exited-held-pidfds/0violations independently gates completion. No numericPID/name/PGID kill fallback."
+    },
+    {
+      "kind": "boundary-to-clarify",
+      "lines": "513-516",
+      "text": "timedOut is classified before interrupted. Cancellation arriving during timeout cleanup can produce interrupted=true with outcome124. Ordinary pretimeout interrupt is130; final acceptance needs precise treatment."
+    },
+    {
+      "kind": "acceptance-semantic-binding-gap-in-b5",
+      "lines": "349-385",
+      "text": "Case names/outcomes/source/Root/receipt pointers are checked but case-name→fixture mode argv[2] and actual setsid/doublefork/rootexit/bystander fixture acknowledgments are not directly cross-bound. Nine passed booleans alone must not be treated as proving required exercise."
+    }
+  ]
+}
