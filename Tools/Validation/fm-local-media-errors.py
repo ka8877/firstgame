@@ -6,7 +6,7 @@ Later isolated advancing PCM must be verified in the same navigation.
 """
 from __future__ import annotations
 import math
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import quote, urljoin, urlsplit
 
 
 FILENAMES={name+extension for name in ('title','lobby','deck','battle') for extension in ('.ogg','.mp3')}
@@ -262,4 +262,152 @@ def recovered_public_range_cancellation(game,revision,suite,failure,game_url,run
         return {'request':failure,'reason':'Exact verified public media bytes and repeated HTTP206 ranges; actual element decoded at startup or continued advancing across the cancellation; subsequent isolated PCM verified.',
             'lifecycle':proof,'http206Responses':len(ranges),'verifiedPublicSha256':expected.get('sha256'),
             'subsequentPcm':{k:pcm.get(k) for k in ('label','rawEvidence','sha256','sourceUrls','mediaProgressSeconds','medianRms')}}
+    return None
+
+
+def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,failure,game_url,runtime_files,observations,windows,responses,delivered):
+    """Prove a Canon HTTPS reload preload decoded after its pre-unlock abort.
+
+    ``delivered`` is the complete successful publicDelivery object, including
+    its gameUrl and files, rather than the file list used by older classifiers.
+    Fresh full audio GETs bind both the cancelled and subsequently selected
+    source. Recorded pre/post state, repeated same-navigation HTTP206, a later
+    exact loadeddata event and isolated selected-source PCM are all mandatory.
+    This proves decode recovery and later selected playback, not uninterrupted
+    playback or audibility of the cancelled inactive preload. No input is edited.
+    """
+    public_url='https://ka8877.github.io/firstgame/games/fantasy-cards/'
+    if (game!='FantasyCards' or revision!='fm-canon-2026-11-09' or suite!='modern-real-input-v1'
+            or game_url!=public_url or not isinstance(failure,dict)
+            or failure.get('method')!='GET' or failure.get('resourceType')!='media'
+            or failure.get('error')!='net::ERR_ABORTED'):
+        return None
+    nav=failure.get('navigation');when=failure.get('observedEpochMs')
+    if type(nav) is not int or nav not in (1,2) or not _number(when):return None
+    if not all(isinstance(value,list) for value in (runtime_files,observations,windows,responses)):return None
+    if (not isinstance(delivered,dict) or delivered.get('status')!='passed'
+            or delivered.get('gameUrl')!=public_url or not isinstance(delivered.get('files'),list)):
+        return None
+
+    def valid_sha(value):
+        return isinstance(value,str) and len(value)==64 and all(c in '0123456789abcdef' for c in value)
+
+    def relative_name(value):
+        return (isinstance(value,str) and bool(value) and not value.startswith('/') and '\\' not in value and '\0' not in value
+                and all(part not in ('','.','..') for part in value.split('/')))
+
+    files={}
+    for row in runtime_files:
+        if (not isinstance(row,dict) or not relative_name(row.get('file')) or row['file'] in files
+                or type(row.get('bytes')) is not int or row['bytes']<0 or not valid_sha(row.get('sha256'))):return None
+        files[row['file']]=row
+    if not files:return None
+    actual={}
+    for row in delivered['files']:
+        if (not isinstance(row,dict) or not relative_name(row.get('file'))
+                or row['file'] not in files or row['file'] in actual):return None
+        expected=files[row['file']]
+        if (type(row.get('status')) is not int or row['status']!=200
+                or row.get('url')!=urljoin(public_url,quote(row['file'],safe='/'))
+                or type(row.get('bytes')) is not int or row['bytes']!=expected['bytes']
+                or row.get('sha256')!=expected['sha256']
+                or row.get('contentEncoding','identity') not in ('','identity') or row.get('error')):return None
+        actual[row['file']]=row
+    if set(actual)!=set(files):return None
+    allowed={urljoin(public_url,PREFIX+name):files[PREFIX+name] for name in FILENAMES if PREFIX+name in files}
+    url=failure.get('url')
+    if not isinstance(url,str) or url not in allowed or allowed[url]['bytes']<=0:return None
+
+    def fresh_audio(source):
+        row=actual[allowed[source]['file']]
+        return not any(key in row for key in ('verificationSource','inheritedGet','error'))
+
+    if not fresh_audio(url):return None
+    same_nav=lambda row:isinstance(row,dict) and type(row.get('navigation')) is int and row['navigation']==nav
+    ranges=[row for row in responses if same_nav(row) and row.get('url')==url
+            and row.get('method')=='GET' and type(row.get('status')) is int and row['status']==206]
+    if len(ranges)<2:return None
+    if any(same_nav(row) and row.get('url')==url and row.get('method')=='GET'
+           and _number(row.get('status')) and row['status']>=400 for row in responses):return None
+    rows=sorted((row for row in observations if same_nav(row) and _number(row.get('epochMs'))),key=lambda row:row['epochMs'])
+
+    def player(row,source):
+        players=row.get('players',[])
+        if not isinstance(players,list):return None
+        matches=[item for item in players if isinstance(item,dict) and item.get('source')==source]
+        return matches[0] if len(matches)==1 else None
+
+    def pre_unlock(row):
+        state=row.get('state');old=player(row,url)
+        return (isinstance(state,dict) and old is not None and state.get('unlocked') is False
+                and state.get('contextState')=='not-created' and state.get('sourceKind')=='bundled-instrumental'
+                and state.get('actualSource') is None and state.get('actualPaused') is True
+                and old.get('paused') is True and old.get('active') is False and old.get('pending') is False
+                and _number(old.get('currentTime')) and old['currentTime']==0
+                and type(old.get('readyState')) is int and 0<=old['readyState']<=4)
+
+    before=[row for row in rows if when-1000<=row['epochMs']<when]
+    after=[row for row in rows if when<row['epochMs']<=when+1000]
+    if not before or not after:return None
+    first,last=before[-1],after[0]
+    if not pre_unlock(first) or not pre_unlock(last):return None
+    media_name=url.rsplit('/',1)[-1].rsplit('.',1)[0]
+    loaded=next((row for row in rows if when<row['epochMs']<=when+2000
+        and row.get('reason')=='media-loadeddata:fm-local-audio-'+media_name and pre_unlock(row)
+        and player(row,url)['readyState']>=2),None)
+    if loaded is None or loaded['epochMs']<last['epochMs']:return None
+    if any(not pre_unlock(row) for row in rows if first['epochMs']<=row['epochMs']<=loaded['epochMs']):return None
+
+    def selected_playing(row,source):
+        state=row.get('state');selected=player(row,source)
+        return (isinstance(state,dict) and selected is not None and state.get('actualSource')==source
+                and state.get('sourceKind')=='bundled-instrumental' and state.get('unlocked') is True
+                and state.get('contextState')=='running' and state.get('actualPaused') is False
+                and state.get('muted') is False and _number(state.get('volume')) and state['volume']>0
+                and selected.get('active') is True and selected.get('paused') is False
+                and selected.get('pending') is False and type(selected.get('readyState')) is int
+                and 2<=selected['readyState']<=4 and _number(selected.get('currentTime')) and selected['currentTime']>=0)
+
+    for pcm in windows:
+        if not same_nav(pcm):continue
+        sources=pcm.get('sourceUrls')
+        if (not isinstance(sources,list) or len(sources)!=1
+                or not isinstance(sources[0],str) or sources[0] not in allowed):continue
+        selected=sources[0]
+        if allowed[selected]['bytes']<=0 or not fresh_audio(selected):continue
+        if (not all(_number(pcm.get(key)) for key in ('startedEpochMs','sampleCount','medianRms','audibleSampleFraction','mediaProgressSeconds'))
+                or pcm['startedEpochMs']<=loaded['epochMs'] or type(pcm['sampleCount']) is not int or pcm['sampleCount']<6
+                or pcm['medianRms']<=1e-5 or not .5<=pcm['audibleSampleFraction']<=1
+                or pcm['mediaProgressSeconds']<=.5 or pcm.get('allContextsRunning') is not True
+                or pcm.get('isolatedMusicRoute') is not True or type(pcm.get('nonfiniteSamples')) is not int or pcm['nonfiniteSamples']!=0
+                or pcm.get('observerErrors')!=[] or not relative_name(pcm.get('rawEvidence'))
+                or not pcm['rawEvidence'].endswith('.json') or not valid_sha(pcm.get('sha256'))):continue
+        if 'maximumRms' in pcm and (not _number(pcm['maximumRms']) or pcm['maximumRms']<pcm['medianRms']):continue
+        if 'finishedEpochMs' in pcm and (not _number(pcm['finishedEpochMs']) or pcm['finishedEpochMs']<=pcm['startedEpochMs']):continue
+        identities=pcm.get('sourceIdentities')
+        if (not isinstance(identities,list) or len(identities)!=1 or not isinstance(identities[0],(list,tuple))
+                or len(identities[0])!=2 or any(type(item) is not int or item<=0 for item in identities[0])):continue
+        playback=pcm.get('rolePlayback')
+        if not isinstance(playback,dict) or not selected_playing(playback,selected):continue
+        playing=next((row for row in rows if loaded['epochMs']<row['epochMs']<=pcm['startedEpochMs']
+                      and selected_playing(row,selected)),None)
+        if playing is None:continue
+        if any(same_nav(row) and row.get('url')==selected and row.get('method')=='GET'
+               and _number(row.get('status')) and row['status']>=400 for row in responses):continue
+        return {'request':dict(failure),'category':'public-reload-pregesture-decoded-range','navigation':nav,
+            'reason':'Exact public reload media range aborted before unlock while paused/inactive at zero, then that element decoded; later same-navigation selected bundled PCM advanced.',
+            'beforeEpochMs':first['epochMs'],'afterEpochMs':last['epochMs'],
+            'decodedBeforeUnlockEpochMs':loaded['epochMs'],'selectedPlayingEpochMs':playing['epochMs'],
+            'cancelledSource':url,'selectedSource':selected,'http206Responses':len(ranges),
+            'http206Evidence':[dict(row) for row in ranges],
+            'beforeState':dict(first['state']),'afterState':dict(last['state']),
+            'decodedState':dict(loaded['state']),'selectedState':dict(playing['state']),
+            'beforePlayer':dict(player(first,url)),'afterPlayer':dict(player(last,url)),
+            'decodedPlayer':dict(player(loaded,url)),'selectedPlayer':dict(player(playing,selected)),
+            'verifiedPublicSha256':allowed[url]['sha256'],'verifiedPublicBytes':allowed[url]['bytes'],
+            'verifiedSelectedPublicSha256':allowed[selected]['sha256'],
+            'fullPublicAudioGets':[dict(actual[allowed[source]['file']]) for source in dict.fromkeys((url,selected))],
+            'subsequentPcm':{key:pcm.get(key) for key in ('label','navigation','rawEvidence','sha256','sourceUrls',
+                'startedEpochMs','finishedEpochMs','sampleCount','sourceIdentities','allContextsRunning',
+                'isolatedMusicRoute','audibleSampleFraction','mediaProgressSeconds','medianRms','nonfiniteSamples','observerErrors')}}
     return None

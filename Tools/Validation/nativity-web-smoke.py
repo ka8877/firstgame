@@ -1027,7 +1027,7 @@ class JourneySmoke:
         return observations
 
     def network_check(self):
-        expected, unexpected, external, local_cancellations, preload_cancellations, recovered_ranges, decoded_ranges, local_reload_ranges = [], [], [], [], [], [], [], []
+        expected, unexpected, external, local_cancellations, preload_cancellations, recovered_ranges, decoded_ranges, local_reload_ranges, public_reload_ranges = [], [], [], [], [], [], [], [], []
         observations = self.local_media_timeline()
         for failed in self.report["failedRequests"]:
             nav, url = failed["navigation"], failed["url"]
@@ -1067,6 +1067,13 @@ class JourneySmoke:
             if recovered:
                 local_reload_ranges.append(recovered)
                 continue
+            recovered = LOCAL_ERRORS.recovered_public_reload_pregesture_range_cancellation(self.args.game, self.report["revision"], self.report["suite"],
+                failed, self.game_url, self.report["buildFingerprint"]["files"], observations,
+                self.report["audioEvidence"]["windows"], self.report["networkResponses"],
+                self.report.get("publicDelivery", {}))
+            if recovered:
+                public_reload_ranges.append(recovered)
+                continue
             exact = any(c.get("navigation") == nav and c.get("dataUrl") == url for c in self.report["unityConfigurations"])
             http304 = any(r["navigation"] == nav and r["url"] == url and r["status"] == 304 for r in self.report["networkResponses"])
             marker = "[UnityCache] '" + url + "' successfully revalidated and served from the browser cache"
@@ -1088,6 +1095,7 @@ class JourneySmoke:
                       "verifiedInactiveLocalPreloadCancellations": preload_cancellations, "verifiedRecoveredPublicPregestureRanges": recovered_ranges,
                       "verifiedRecoveredPublicRanges": decoded_ranges, "unexpectedFailures": unexpected,
                       "verifiedLoopbackReloadPregestureRanges": local_reload_ranges,
+                      "verifiedPublicReloadPregestureRanges": public_reload_ranges,
                       "externalMusicServiceFailures": external}
         self.report["networkDiagnostic"] = diagnostic
         self.check(not unexpected, "No unexpected failed requests; exact proved cache/local-media cancellations retained", diagnostic)
