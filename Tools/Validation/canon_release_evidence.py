@@ -212,6 +212,104 @@ def hashlib_sha(value):
     return hashlib.sha256(value).hexdigest()
 
 
+def verify_web_execution(game, proof_path, source_fingerprint):
+    """The preservation helper is not an execution witness; check the real run."""
+    sidecar = proof_path.parent / 'run-canon-web-summary.json'
+    summary = read(sidecar)
+    actual_path = ROOT / summary.get('summaryFile', '')
+    require(actual_path.is_relative_to(OUT / 'WebRuns' / game) and regular(actual_path).read_bytes() == regular(sidecar).read_bytes(), 'Proof must retain the exact actual Web driver summary')
+    require(summary.get('status') == 'passed' and summary.get('scope') == 'current-canon-web-build-only'
+            and summary.get('game') == game and summary.get('revision') == REVISIONS[game]
+            and summary.get('sourceFingerprint') == source_fingerprint
+            and summary.get('publishReady') is False and summary.get('baselineReady') is False, 'Actual successful current Web execution required')
+    invocation = read(checked(summary['invocation']))
+    require(invocation.get('game') == game and invocation.get('revision') == REVISIONS[game]
+            and invocation.get('sourceFingerprint') == source_fingerprint and invocation.get('selectedNative') == summary['selectedNative'], 'Actual Web invocation/Native selection differs')
+    native = summary['selectedNative']
+    selected_summary = read(checked(native['summary']))
+    selected_binding = read(checked(native['binding']))
+    require(selected_summary.get('status') == 'passed' and selected_summary.get('game') == game
+            and selected_summary.get('scope') == 'current-product-native-only' and selected_summary.get('binding') == selected_binding
+            and selected_summary['execution'].get('exitCode') == 0 and selected_summary['execution'].get('containmentProvedEmpty') is True,
+            'Selected Native must be an actual complete current run')
+    for key, filename in (('binding', 'binding.json'), ('inputs', 'inputs-before.json'), ('xml', 'native.xml')):
+        source = checked(native[key])
+        require(source.read_bytes() == regular(OUT / 'Native' / game / filename).read_bytes(), 'Canonical Native must be the exact selected passed run')
+    require(selected_binding.get('sourceFingerprint') == source_fingerprint, 'Selected Native fingerprint differs')
+    driver_path = ROOT / 'Tools/Validation/run-canon-web.py'
+    driver = checked(summary['executedDriver'])
+    require(driver.read_bytes() == regular(driver_path).read_bytes(), 'Exact current Web driver source required')
+    pins = invocation.get('executionSources', [])
+    require(pins and any(pin['source']['file'] == str(driver_path.relative_to(ROOT)) for pin in pins), 'Executed driver/source snapshots required')
+    for pin in pins:
+        require(checked(pin['source']).read_bytes() == checked(pin['recorded']).read_bytes(), 'Recorded/current Web producer source differs')
+    build = BUILD / game / 'Web'
+    require(summary.get('buildInputs') == ref(build / 'BuildInputs.json')
+            and summary.get('buildEvidence') == ref(build / 'BuildEvidence.txt')
+            and summary.get('proofIndex') == ref(proof_path), 'Actual execution must bind these exact new build and proof originals')
+    attempt = summary.get('attempt')
+    require(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', str(attempt)), 'Safe actual Web attempt required')
+    build_argv = ['bash', 'Tools/Build/nativity-task.sh', game, 'web', attempt]
+    proof_argv = invocation.get('proofArgv', [])
+    require(invocation.get('buildArgv') == build_argv and len(proof_argv) > 1 and Path(proof_argv[0]).is_absolute()
+            and proof_argv[1:] == ['Tools/Validation/preserve-completed-build-proof.py', '--repository-root', str(ROOT),
+                '--game', game, '--revision', REVISIONS[game], '--expected-source-fingerprint', source_fingerprint,
+                '--build-folder', str(build), '--output', str(proof_path.parent), '--build-exit-code', '0', '--copy-core-runtime'],
+            'Actual exact current Web and after-success argv required')
+    environment = invocation.get('environmentOverrides', {})
+    run = actual_path.parent
+    require(environment.get('FIRSTGAME_VALIDATION_ROOT') == str(run) and environment.get('FIRSTGAME_BUILD_ROOT') == str(BUILD)
+            and environment.get('PYTHONDONTWRITEBYTECODE') == '1' and environment.get('PYTHONOPTIMIZE') == '0'
+            and environment.get('PYTHONPYCACHEPREFIX') == str(run / 'GeneratedPythonCache'), 'Actual controlled execution environment differs')
+    lease = read(checked(invocation['ownedLeaseSnapshot']))
+    deadline = timestamp(lease['lease']['deadlineUtc'])
+    require(lease.get('state') == 'acquired', 'Actual acquired execution lease snapshot required')
+    helper_sha = '9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad'
+
+    def execution(key, expected_argv=None):
+        record = summary[key]
+        event = read(checked(record['receipt']))
+        require(event == record['event'] and event.get('exitCode') == 0 and event.get('containmentProvedEmpty') is True
+                and event.get('supervisorStillAlive') is False and event.get('processContainment') == 'owned-descendants-v1', 'Actual command exit and owned cleanup receipt required: ' + key)
+        if expected_argv is not None:
+            require(event.get('argv') == expected_argv, 'Actual command argv differs: ' + key)
+        log = checked(record['stdout'])
+        require(event.get('log') == record['stdout'], 'Actual command stdout binding differs: ' + key)
+        receipt = checked(event['containmentReceipt'])
+        observed = read(receipt)
+        cleanup = observed.get('cleanup', {})
+        require(observed.get('helperSha256') == helper_sha and observed.get('mode') == 'production-caller'
+                and observed.get('argv') == event.get('argv') and observed.get('outcomeExitCode') == 0
+                and observed.get('root', {}).get('exitCode') == 0 and cleanup.get('complete') is True
+                and cleanup.get('kernelEchild') is True and cleanup.get('heldPidfdsExited') is True
+                and cleanup.get('subreaperVerifiedAtCompletion') is True and not cleanup.get('liveOwnedIdentities')
+                and not cleanup.get('violations'), 'Actual exact supervisor/descendant completion required: ' + key)
+        spec = read(receipt.parent / 'command-spec.json')
+        require(spec.get('argv') == event['argv'] and spec.get('cwd') == str(ROOT)
+                and spec.get('stdoutPath') == str(log) and spec.get('helperSha256') == helper_sha,
+                'Actual supervisor command/log specification differs: ' + key)
+        start, end = timestamp(event['startedUtc']), timestamp(event['finishedUtc'])
+        require(timestamp(lease['lease']['startedUtc']) <= start <= end <= timestamp(summary['finishedUtc']) <= deadline
+                and 0 < event.get('timeoutSeconds', 0) <= 900 and event.get('cleanupAndReportReservedSeconds') == 12,
+                'Actual execution timestamp/budget differs: ' + key)
+        return event
+
+    guard_argv = [proof_argv[0], 'Tools/Autonomy/cycle_guard.py', 'check', '--record', invocation.get('liveLeasePath')]
+    before, built, proof, after = (execution('guardBefore', guard_argv), execution('build', build_argv),
+                                   execution('proof', proof_argv), execution('guardAfter', guard_argv))
+    execution('idleBefore', [proof_argv[0], 'Tools/Environment/assert-runtime-idle.py'])
+    require(timestamp(before['finishedUtc']) <= timestamp(built['startedUtc'])
+            <= timestamp(built['finishedUtc']) <= timestamp(proof['startedUtc'])
+            <= timestamp(proof['finishedUtc']) <= timestamp(after['startedUtc']), 'Guard/build/restoration/proof/final guard ordering required')
+    limits = summary.get('executionLimit', {})
+    require(limits.get('maximumSharedSeconds') == 900 and limits.get('leaseReserveSeconds') == 60
+            and limits.get('cleanupReserveSeconds') == 12 and 0 < limits['safeEndMonotonic'] - limits['startedMonotonic'] <= 900
+            and (timestamp(summary['finishedUtc']) - timestamp(before['startedUtc'])).total_seconds() <= 900
+            and (deadline - timestamp(summary['finishedUtc'])).total_seconds() >= 60,
+            'Original shared900/lease60/cleanup12 limit must remain enforced')
+    return {'summary': ref(actual_path), 'preservedSummary': ref(sidecar), 'invocation': summary['invocation']}
+
+
 def verify_builds():
     require(OUT.is_absolute() and OUT.resolve().is_relative_to((ROOT / 'Artifacts').resolve()) and not OUT.is_symlink(), 'Dedicated current evidence root under Artifacts required')
     core = verify_core()
@@ -250,7 +348,8 @@ def verify_builds():
             if name == 'index.html' or name.startswith('Build/'):
                 path = regular(proof_root / name)
                 require(digest(path) == row['sha256'] and path.stat().st_size == row['bytes'], 'Retained successful core runtime differs')
-        result[game] = {'native': native, 'evidence': ref(evidence_path), 'inputs': ref(input_path), 'proof': ref(proof_path)}
+        execution = verify_web_execution(game, proof_path, native['sourceFingerprint'])
+        result[game] = {'native': native, 'evidence': ref(evidence_path), 'inputs': ref(input_path), 'proof': ref(proof_path), 'execution': execution}
     return {'currentTargets': ['Web'], 'games': result, 'core': core, 'authoring': authoring, 'audioAssets': audio}
 
 

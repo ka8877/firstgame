@@ -93,7 +93,7 @@
       {
         "type": "checkpoint",
         "name": "canon-multiplayer-disabled",
-        "expected": "The real multiplayer control reads 멀티플레이 · 추후 업데이트 and is visibly disabled. This is a single-player build, with no invented online rooms or users. Native/source review separately binds interactable=false; do not try to enter a multiplayer flow."
+        "expected": "The real free-practice multiplayer control reads MULTI · 추후 업데이트 and is visibly disabled. This is a single-player build, with no invented online rooms or users. Native/source review separately binds interactable=false; do not try to enter a multiplayer flow."
       },
       {
         "type": "review_input",
@@ -1417,7 +1417,7 @@
       {
         "type": "checkpoint",
         "name": "birth-story-first",
-        "expected": "Actual first voiced Nazareth introduction, exact summary reference; no future12yo scene before birth."
+        "expected": "Actual first voiced Nazareth introduction shows the speaker and exact authored words without per-line editorial metadata; source provenance remains internal to Core/Native. No future12yo scene before birth."
       },
       {
         "type": "click",
@@ -1435,7 +1435,7 @@
       {
         "type": "checkpoint",
         "name": "annunciation-second-turn",
-        "expected": "Actual next voiced turn uses key1; old intro is stopped, raw references remain below dialogue."
+        "expected": "Actual next voiced turn uses key1; old intro is stopped, and the exact authored dialogue is shown without per-line editorial metadata. Source provenance remains internal to Core/Native."
       },
       {
         "type": "click",
@@ -1725,12 +1725,12 @@
       {
         "type": "checkpoint",
         "name": "actual-joseph-story",
-        "expected": "The actual nearby NPC opens narrative dialogue with a historical/source distinction, rather than a read-to-advance passage."
+        "expected": "The actual nearby Joseph speaks the exact authored dialogue with the speaker and physical people/place visible. Per-line editorial category/reference metadata is not displayed; quotation/summary/dramatization provenance remains internally preserved by Core/Native."
       },
       {
         "type": "checkpoint",
         "name": "g1-field-dialogue",
-        "expected": "The actual physical player, nearby Joseph and world remain visible during sourced dialogue. No full-screen replacement painting; same original raw text and Scripture control."
+        "expected": "The actual physical player, nearby Joseph and world remain visible during dialogue. No full-screen replacement painting; retain the exact speaker, authored words and Scripture control without per-line editorial metadata. Internal provenance remains covered by Core/Native."
       },
       {
         "type": "checkpoint",
@@ -1740,12 +1740,12 @@
       {
         "type": "checkpoint",
         "name": "g2-planted-facing",
-        "expected": "The actual Joseph Reading encounter keeps the live player, Joseph and local field visible. Compare the current entry originals: the player is planted and visually faces the actual nearby Joseph; retain the exact speaker, raw dialogue and source/reference. Numeric speed/XYZ/yaw and same-frame movement cancellation are separate Native assertions."
+        "expected": "The actual Joseph Reading encounter keeps the live player, Joseph and local field visible. Compare the current entry originals: the player is planted and visually faces the actual nearby Joseph; retain the exact speaker and authored words without a per-line editorial overlay. Source provenance remains internal to Core/Native. Numeric speed/XYZ/yaw and same-frame movement cancellation are separate Native assertions."
       },
       {
         "type": "review_input",
         "name": "g2-planted-facing-review",
-        "expected": "Directly inspect actual-joseph-story, g1-field-dialogue, g2-planted-facing and this current original. Compare the physical player/nearby Joseph, visible facing, planted pose, current speaker/raw dialogue/source and local field. Screenshot-guided ordinary input only; bounded wait is allowed. Do not advance the story, move the player, inject game/pose/JavaScript/save state or infer exact numeric XYZ/yaw. Continue only when the actual Joseph Reading frame has been observed; this input acknowledgment is not Root visual approval."
+        "expected": "Directly inspect actual-joseph-story, g1-field-dialogue, g2-planted-facing and this current original. Compare the physical player/nearby Joseph, visible facing, planted pose, current speaker, exact authored dialogue and local field without per-line editorial metadata. Source provenance remains internal to Core/Native. Screenshot-guided ordinary input only; bounded wait is allowed. Do not advance the story, move the player, inject game/pose/JavaScript/save state or infer exact numeric XYZ/yaw. Continue only when the actual Joseph Reading frame has been observed; this input acknowledgment is not Root visual approval."
       },
       {
         "type": "click",
@@ -1778,17 +1778,17 @@
       {
         "type": "checkpoint",
         "name": "g2-book-return-reading",
-        "expected": "After the ordinary Bible return, compare g2-planted-facing: the same live Joseph Reading speaker, raw dialogue, source/reference and local field return without advancing the turn. The player remains at the visually same position and facing Joseph. Exact numeric pose/cursor preservation is separately required by Native16."
+        "expected": "After the ordinary Bible return, compare g2-planted-facing: the same live Joseph Reading speaker, exact authored dialogue and local field return without advancing the turn or showing per-line editorial metadata. Source provenance remains internal to Core/Native. The player remains at the visually same position and facing Joseph. Exact numeric pose/cursor preservation is separately required by Native16."
       },
       {
         "type": "checkpoint",
         "name": "g2-reading-before-reload",
-        "expected": "Current original immediately before full browser reload: actual Joseph Reading, same raw dialogue/source, player/Joseph/local geometry and visual facing after Bible return. The accepted Interact already performed its real Save(false) before showing this Reading; this checkpoint does not claim a nonexistent Reading manual-save button. Discovery remains11/19 and the first field encounter has not been completed."
+        "expected": "Current original immediately before full browser reload: actual Joseph Reading, same speaker and exact authored dialogue, player/Joseph/local geometry and visual facing after Bible return, without per-line editorial metadata. Source provenance remains internal to Core/Native. The accepted Interact already performed its real Save(false) before showing this Reading; this checkpoint does not claim a nonexistent Reading manual-save button. Discovery remains11/19 and the first field encounter has not been completed."
       },
       {
         "type": "review_input",
         "name": "g2-reading-before-reload-review",
-        "expected": "Observe this actual Joseph Reading original before the authored full browser reload. Compare g2-book-return-reading and g2-reading-before-reload for the same visible dialogue/source, physical field position and Joseph-facing pose. Use only screenshot-guided ordinary input or bounded wait, and do not advance the conversation or move. No Reading manual-save UI exists; the reload intentionally exercises the existing accepted Interact autosave. No save/JavaScript/runtime access or state injection is allowed. This acknowledgment does not approve the visual result."
+        "expected": "Observe this actual Joseph Reading original before the authored full browser reload. Compare g2-book-return-reading and g2-reading-before-reload for the same visible speaker and exact authored dialogue, physical field position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. Use only screenshot-guided ordinary input or bounded wait, and do not advance the conversation or move. No Reading manual-save UI exists; the reload intentionally exercises the existing accepted Interact autosave. No save/JavaScript/runtime access or state injection is allowed. This acknowledgment does not approve the visual result."
       },
       {
         "type": "reload"
@@ -1805,12 +1805,12 @@
       {
         "type": "checkpoint",
         "name": "g2-continued-reading",
-        "expected": "A real full browser reload and actual title Continue restore the same Joseph Reading before either original Joseph advance click. Compare g2-reading-before-reload for the same speaker/raw dialogue/source, local player/Joseph/world geometry and visual position/facing; no state/save injection. This is restored Reading, not a newly accepted interaction. Exact XYZ/yaw/cursor/original bytes are separately proven by Native16."
+        "expected": "A real full browser reload and actual title Continue restore the same Joseph Reading before either original Joseph advance click. Compare g2-reading-before-reload for the same speaker and exact authored dialogue, local player/Joseph/world geometry and visual position/facing without per-line editorial metadata; source provenance remains internal to Core/Native. No state/save injection. This is restored Reading, not a newly accepted interaction. Exact XYZ/yaw/cursor/original bytes are separately proven by Native16."
       },
       {
         "type": "checkpoint",
         "name": "continued-g2-reading",
-        "expected": "Retain a fresh actual current-run original immediately after the early full browser reload and actual title Continue. The visible Joseph Reading must still match g2-reading-before-reload: same speaker, raw dialogue/source, live player/Joseph/local field and visual position/facing, before any Joseph advance input. This checkpoint creates its own real browser capture in the current navigation; no screenshot alias, copied original, state injection or numeric pose claim. Exact XYZ/yaw/cursor/original bytes remain separate Native16 assertions."
+        "expected": "Retain a fresh actual current-run original immediately after the early full browser reload and actual title Continue. The visible Joseph Reading must still match g2-reading-before-reload: same speaker, exact authored dialogue, live player/Joseph/local field and visual position/facing, before any Joseph advance input, without per-line editorial metadata. Source provenance remains internal to Core/Native. This checkpoint creates its own real browser capture in the current navigation; no screenshot alias, copied original, state injection or numeric pose claim. Exact XYZ/yaw/cursor/original bytes remain separate Native16 assertions."
       },
       {
         "type": "click",
@@ -1838,12 +1838,12 @@
       {
         "type": "checkpoint",
         "name": "g2-continued-reading-return",
-        "expected": "After the second ordinary Bible return, the restored Joseph Reading still matches g2-reading-before-reload and g2-continued-reading: same speaker, raw dialogue/source, live local field, visual player position and Joseph-facing pose. The original two Joseph advance inputs follow this checkpoint unchanged."
+        "expected": "After the second ordinary Bible return, the restored Joseph Reading still matches g2-reading-before-reload and g2-continued-reading: same speaker, exact authored dialogue, live local field, visual player position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. The original two Joseph advance inputs follow this checkpoint unchanged."
       },
       {
         "type": "review_input",
         "name": "g2-reading-restored-review",
-        "expected": "Directly compare current original and the seven G2 required originals, especially g2-reading-before-reload versus g2-continued-reading and g2-continued-reading-return. Inspect same raw Joseph turn/source, earned11/19 Scripture and visual field position/facing. Only screenshot-guided ordinary input is allowed. Do not advance Joseph yet, move the player, use runtime/JavaScript/save inspection or claim exact numeric XYZ/yaw. Continue only once the actual restored Reading is observed. This input acknowledgment is not Root visual approval; retain separate current-run Root hash review and Native16 numeric/cursor/byte evidence."
+        "expected": "Directly compare current original and the seven G2 required originals, especially g2-reading-before-reload versus g2-continued-reading and g2-continued-reading-return. Inspect the same speaker and exact authored Joseph turn, earned11/19 Scripture and visual field position/facing without per-line editorial metadata. Source provenance remains internal to Core/Native. Only screenshot-guided ordinary input is allowed. Do not advance Joseph yet, move the player, use runtime/JavaScript/save inspection or claim exact numeric XYZ/yaw. Continue only once the actual restored Reading is observed. This input acknowledgment is not Root visual approval; retain separate current-run Root hash review and Native16 numeric/cursor/byte evidence."
       },
       {
         "type": "click",
@@ -1891,7 +1891,7 @@
       {
         "type": "checkpoint",
         "name": "g1-mary-field-dialogue",
-        "expected": "Mary, well, actual child and real field visible while dialogue remains modal with its source."
+        "expected": "Mary, the well, actual child and real field remain visible during modal dialogue with the actual speaker and exact authored words. No per-line editorial category/reference metadata is displayed; source provenance remains internal to Core/Native."
       },
       {
         "type": "click",
