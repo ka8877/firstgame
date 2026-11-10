@@ -1,22 +1,35 @@
 # 지속 개발 로드맵과 재개 지점
 
-## 현재 RPG·원작 UI 개선 — LivingRpgClassic-2026-11-10
+## 현재 LivingRpgClassic 공개·전체 검증 완료, 보존·정상 종료 진행
 
-사용자의 새 요청은 예수님의 길의 대화 후 인물 삭제를 고치고 주변 사람·미니맵 등 RPG 요소와 두 게임의 그래픽·UI를 개선하는 것이다. 판마는 새 창작 판타지 화면보다 날짜가 확인되는 후기 원작의 로그인·대기실·전투·프로필·상점 구조를 우선한다. 새 프로필 `living-classic`, 브랜치 `codex/living-rpg-classic-2026-11-10`, 시작 main `6d6abc4b…`이며 이전 CanonArt 공개는 현재 정상 기준으로 보존한다.
+판마5화면의 후기 원작 기반 UI와 예수님의 길의 대화 후 인물 유지·실제 이동·주변 사람·미니맵/전체 지도·초상화/RPG UI를 공개했습니다. 선택 후보 `773f3ee3d1573f47531639dfd2334d6e38edf920`, 제품 main `60a58c5d262ac6507924e110d87d20cb9cf22aca`, 공개 `9e34c3b9a3fe46d09f14fb722975c9f666924f47`입니다. PR #5 정상 병합 뒤 후보 Core/helper CI42767146792/42767147120·main CI42767496119/42767496440과 Pages42768236864가 실제 성공했습니다. `Release/*03.json`이 선택 원문이며 앞선 *01/*02는 이력입니다.
 
-1. 판마 `LivingWeb01`의 실제 전체 빌드·proof 통과를 보존한다. Native `Living02` 9통과·31PNG·선택 원본9장 Root 승인과 같은 소스 지문이며 Unity 보고 build755,443,574B와 실제 runtime15,365파일·868,590,764B를 구분한다. summary SHA `c6f0b22aa172964290ac082fadcafb0c37f0265b7dc431705e1e335486576171`, proof index SHA `0a4371d63cf3a0d22f64a0dcad1b04c5ed4eb03d31929e6075027b6df6991316`다.
-2. Gospel `Living04` 전체25통과·실패0·스킵0과57PNG를 보존한다. 실행 중 소스 변경은 없고 Root가 선택 원본8장을 직접 검토·승인했다. 소스 지문 `4f2c40c11975f23c6a85c8ddb0b237ca861cae4a96f159ebac8e855d0b42b774`, XML SHA `aa21d93e09eccaa9444f77b4725bf011bf64b4dbd5508a9a2b9fca50d11de8a3`, 검토 SHA `0d82eeff978a2f9ea525582e66a461617bc504b7d595f3fdcc69eddede868a41`다. 나머지 Native 원본까지 모두 직접 검토한 것으로 계산하지 않는다.
-3. Gospel `LivingWeb01` 전체 빌드·proof 통과를 보존한다. summary SHA `c971e02a5c013fd63f1ea102c7c72660337ccca028b291473331f51870751eef`, proof index SHA `930154f9a1e536651d560e15f2acbfd2fc4f15856abdb402b1579eba3f0fd993`이며 실제 runtime5파일·110,157,229B다. data94,181,727B·wasm15,827,418B·framework92,891B·loader47,860B·index7,333B를 구분하고 Unity 요약 Bytes를 전체 payload로 사용하지 않는다.
-4. 현재 소스·Native·Web·전체 proof·Core·media·authoring의 실제 `CurrentBuilds01` 통과(SHA `1dfa6a4c6a345d34c97e9377ccc6ffd5f20171946e45eccad53017c6c88f629b`)를 기록한다. feature 소스·문서를 커밋하고 draft PR·해당 소스 CI를 실제 확인한다. 작성 시점에 미래 CI 성공을 미리 채우지 않는다.
-5. 로컬4회·전체6회의 PC·터치·공개 주소 입력·음악·저장/재접속·필수 현재 원본 검토와 엄격한 결합 검사를 완료한다. 새 전체 stage/site 용량·Pages·전체 전달은 아직 측정·통과하지 않았으며, 이 결과까지 실제 확인한 뒤 새 공개 식별자를 기록한다.
+Stage03과 새 전체 공개 GET은 manifest 포함15,417파일·982,794,532B를 확인했습니다. 모두HTTP200·크기·SHA가 일치했고 현재 포털 원본2장을 Root가 승인했습니다. manifest는 `ff9e0a253cc956a334c0d6e5e953cc9b057fc15b9d8013b27d83f0c642112382`, 포털 확정 보고서는 `79ff1d92e16045e35326eaedf4cda0c52976795c820e6d0ac0d8cb46d063dab1`입니다.985,000,000B 제한을 유지하며 제외 로컬 표식47B는 공개 수치에 넣지 않습니다.
 
-Core311/0/0·공개 오디오 요청 분류 단위82개 통과는 유지한다. 두 게임 Native는 현재 전체 통과했지만 Root의 직접 검토 범위는 Card9장·Gospel8장에 한정한다. 이전 실패·준비 exit139·실행 전 `ENAMETOOLONG`·집중 진단 원문은 후속 통과로 바꾸지 않는다. 이름 있는 이야기 인물은 기존 고정 자세 그림에 실제 이동·절제한 모션을 사용하며 모든 named NPC의 새 완전한 보행 atlas를 구현했다고 하지 않는다.
+| 승인 실행 | 검사 | 보존 PNG | 필수 Root 원본 |
+|---|---:|---:|---:|
+| Card Desktop720 LivingBrowser01 | 102 | 69 | 55 |
+| Gospel Desktop720 LivingBrowser01 | 99 | 78 | 60 |
+| Card Mobile844 LivingBrowser01 | 104 | 68 | 54 |
+| Gospel Mobile844 LivingBrowser01 | 86 | 62 | 46 |
+| Card PublicMobile844 LivingPublic01 | 112 | 68 | 54 |
+| Gospel PublicMobile844 LivingPublic03 | 92 | 63 | 46 |
 
-현재 공개는 기존 CanonArt다. 출전2649종·원본15350개와 기존 저장·GUID, Gospel23사건/19본문·51화면·28음성을 보존한다. 새 주민은 성경의 새 사실이나 발언으로 추가하지 않는다. 상점의 정확한 후기 원본 배치와 원작 전체 복원은 미확인·미완료 범위다.
+전체6회와 모든 필수 현재 원본 Root 검토를 완료했습니다. 마지막 Gospel 공개는 새 SwiftShader 실행·재접속2회·context-lost/pageErrors0입니다. 단위82·Core311/0/0·CardNative9/GospelNative25·두 전체 Web proof·CurrentBuilds01·Pages helper Node89도 실제 통과했습니다. Native 직접 검토는 선택 Card9/Gospel8장으로 한정하고 소프트웨어 터치/SwiftShader를 실제 휴대전화/하드웨어 GPU 성능으로 소개하지 않습니다.
 
-실제 소유 기록은 `Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json`, 새 근거는 `Artifacts/Validation/LivingRpgClassic-2026-11-10`, 빌드는 `/tmp/firstgame-living-classic-20261110-builds`, proof는 현재 control의 `BuildProof`, stage는 `Artifacts/LivingRpgClassicWebPlaytest`를 사용한다.11월10일11:19~17:19 KST의 고정 자기 잠금이며 이전 released 회차를 재사용하지 않는다. 예약 마지막 조회0개·목표 카드 활성 직접 미확인은 그대로이고 장기 목표 전체 완료나24시간 백그라운드 실행을 뜻하지 않는다.
+엄격한 전체 gate도 통과했습니다. 실제 마지막 JSON 줄을 보존한 `Artifacts/Validation/LivingRpgClassic-2026-11-10/living-final-seal.json`은69,713B·SHA `61d9d7df413072ff6932990f5c690413b1b693316f42a91606c98351c3b29722`입니다. 명령exit0·최종 guard0·소유 후손 정리를 확인했고 일반 wrapper의 command-completed와 제품 gate의 passed를 구분합니다.
 
-아래는 이전 CanonArt 완료와 과거 회차의 근거·진행 이력이다. 새 개정의 실행 통과는 별도 실제 근거를 따른다.
+1. 실제 제품 head `60a58c5d…` 기준 [Checkpoint01](Evidence/LivingRpgClassic20261110/Checkpoint01/index.json) 보존을11월10일16:44:02 KST에 완료했습니다. 실제6,309파일·16조각·결합515,774,702B, index SHA `b23715cee04984de46c6feafc69b69cba320e09f5bded2adf5e030934a28083b`·결합 SHA `73c9879b579becc96512534281a6e48f05980481f68044fc529cac2d17b1200e`입니다. 모든 member/readback·조각·소스/파일 집합 불변과 명령exit0/최종 guard0/정리를 확인했습니다. 첫 Archive01의 보존 스키마 실패는 그대로 보존했고 V2 검토·집중6개 통과 뒤 독립 Archive02가 완료했습니다. 이제 checkpoint와 Docs3의 첫 결합 커밋·정확한 push/CI를 확인합니다. 그 커밋/CI는 작성 시점 미관측이며 archive 안 acquired 잠금은 역사적 사본입니다.
+2. 독립 최종 유휴·소유 후손 정리와 정확한 자기 잠금 원문/원격 상태를 확인하고 정상 자기 해제를 수행합니다. 이어 실제 종료 원문을 Closure01에 보존하고 두 번째 최종 문서 커밋·CI를 확인합니다. 이 단계는 아직 미완료이며 미래 성공을 미리 기록하지 않습니다. 자기 잠금은11월10일11:19~17:19 KST의 고정 회차로 연장·탈취하지 않습니다.
+3. 다음 제품 묶음에서 Gospel의 이름 있는 인물 보행·시야/가림·주변 동선/배경 품질과 판마의 검증된 원작 규칙/로그인·상점 충실도를 개선합니다. 전체 원작 복원은 미완료이고 기술598은 제안만 있습니다. 새 현재 검증·실제 공개를 이어가며 이번 마일스톤을 장기 개발 전체 완료로 표시하지 않습니다.
+
+실패·중단은 별도로 보존합니다. Native/집중 진단 실패와 검사 전ENAMETOOLONG, Pages4실패(두600000ms취소·산출물 중복·PR4 입력의 공식 상한), HTTP401 관찰/guard 오류·새 세션 인증 회복, PublicPortal01의 GET 전 requests 누락을 후속 통과로 바꾸지 않았습니다. PR5의 실제 공식API/OIDC·현재 산출물/소스·succeed 확인·30분 한정 대기/취소와 Node89근거가 새 성공에 결합됩니다. 긴 서버 동기화나 이전 인증 무효 원인은 미확인입니다.
+
+Gospel PublicLiving01은 실제 파란 그라데이션/CONTEXT_LOST_WEBGL·GPU crash1을 관측해 반려했고44파일을 보존했습니다. 근본 원인·성경 화면 인과관계는 미확인입니다. SwiftShader PublicLiving02는 도구 세션 소실로 완료 summary 없이 중단됐으며18파일·실제 supervisor중단/정리 결과를 보존했습니다. 부모 소실 원인은 미확인이고 오류 미기록은 통과가 아닙니다. 독립적인 PublicLiving03만 현재 성공으로 계산하며46개 현재 원본을 새로 검토했습니다. 정확한 ledger는 현재 control의 `Release/gospel-public01-context-loss-and-preservation.json`·`gospel-public02-interruption-preservation.json`입니다.
+
+Card 출전2649종/원본15350개·기존ID/GUID/소유/덱/재화/schema3와 Gospel23사건/19본문·51세부·28음성을 보존했습니다. 멀티플레이는 비활성·추후 업데이트입니다. 이름 있는 인물의 완전한 새 보행 atlas나 사용자 미적 승인은 주장하지 않으며 주변 사람을 새 성경 사실/발언으로 소개하지 않습니다. 실제 runtime Card15,365파일·868,590,764B/Gospel5파일·110,157,229B와 Unity 요약 Bytes를 구분합니다.
+
+현재 control `Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10`, 증거 `Artifacts/Validation/LivingRpgClassic-2026-11-10`, build `/tmp/firstgame-living-classic-20261110-builds`, 현재 control의 `BuildProof`, stage `Artifacts/LivingRpgClassicWebPlaytest`를 사용합니다. 현재 실제 자동화 조회0개·목표 카드 활성 미확인이고 상시 백그라운드 실행을 주장하지 않습니다. 아래는 이전 CanonArt 완료와 과거 회차 이력이며 현재 완료를 대신하지 않습니다.
 
 ---
 

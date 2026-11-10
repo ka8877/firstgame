@@ -123,6 +123,25 @@ def same_bytes(row, path):
     return regular(path)
 
 
+def runtime_identity(rows):
+    """Compare byte identity while retaining the original observation metadata."""
+    need(isinstance(rows, list) and rows, 'Complete runtime rows required')
+    result = {}
+    for row in rows:
+        need(isinstance(row, dict) and isinstance(row.get('file'), str), 'Runtime file identity required')
+        name = row['file']
+        relative = PurePosixPath(name)
+        need(name and not relative.is_absolute() and '..' not in relative.parts and '\\' not in name
+             and str(relative) == name and name not in result, 'Runtime file paths must be safe and unique')
+        need(type(row.get('bytes')) is int and row['bytes'] >= 0
+             and isinstance(row.get('sha256'), str) and re.fullmatch(r'[0-9a-f]{64}', row['sha256']),
+             'Exact runtime size and SHA256 required')
+        if 'modifiedUtc' in row:
+            stamp(row['modifiedUtc'])
+        result[name] = {key: row[key] for key in ('file', 'bytes', 'sha256')}
+    return result
+
+
 def encoded(value):
     return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
 
@@ -461,13 +480,11 @@ def checkpoint_preconditions(facts_path):
         for key, filename in (('binding', 'binding.json'), ('inputs', 'inputs-before.json'), ('xml', 'native.xml')):
             need(checked(selected[key]).read_bytes() == regular(OUT / 'Native' / game / filename).read_bytes(), 'Actual selected/canonical Native differs')
         runtime_rows = proof.get('completeRuntimeFiles', [])
-        need(runtime_rows and len({item['file'] for item in runtime_rows}) == len(runtime_rows),
-             'Complete unique current runtime hashes required')
-        runtime = {item['file']: item for item in runtime_rows}
+        runtime = runtime_identity(runtime_rows)
         for profile in PROFILES:
             browser = read(OUT / profile / game / 'report.json')
             recorded = browser.get('buildFingerprint', {}).get('files', [])
-            need(len(recorded) == len(runtime) and {item['file']: item for item in recorded} == runtime,
+            need(len(recorded) == len(runtime) and runtime_identity(recorded) == runtime,
                  'Every browser suite must bind the complete exact successful runtime')
         games[game] = {'native': native, 'proof': reference(proof_path), 'web': reference(web_path), 'passed': expected_count}
     portal_path = checked(facts['portalReport'])
