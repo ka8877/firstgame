@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -18,6 +19,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - name: Get verified public build files
         uses: actions/checkout@v4
@@ -52,8 +54,22 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
+      - name: Get deployment helper at the exact workflow source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: .deployment-source
+          persist-credentials: false
+          lfs: false
+          sparse-checkout: |
+            Tools/Web/deploy-pages-wait.cjs
+          sparse-checkout-cone-mode: false
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        timeout-minutes: 32
+        uses: actions/github-script@v7
         with:
-          timeout: '1800000'
+          script: |
+            const path = require('node:path');
+            const {deployPages} = require(path.join(process.env.GITHUB_WORKSPACE, '.deployment-source/Tools/Web/deploy-pages-wait.cjs'));
+            await deployPages({github, context, core});
