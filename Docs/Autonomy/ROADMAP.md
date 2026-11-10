@@ -1,6 +1,6 @@
 # 지속 개발 로드맵과 재개 지점
 
-## 현재 LivingRpgClassic 공개·전체 검증 완료, 보존·정상 종료 진행
+## 현재 LivingRpgClassic 공개·전체 검증·보존·정상 종료 완료
 
 판마5화면의 후기 원작 기반 UI와 예수님의 길의 대화 후 인물 유지·실제 이동·주변 사람·미니맵/전체 지도·초상화/RPG UI를 공개했습니다. 선택 후보 `773f3ee3d1573f47531639dfd2334d6e38edf920`, 제품 main `60a58c5d262ac6507924e110d87d20cb9cf22aca`, 공개 `9e34c3b9a3fe46d09f14fb722975c9f666924f47`입니다. PR #5 정상 병합 뒤 후보 Core/helper CI42767146792/42767147120·main CI42767496119/42767496440과 Pages42768236864가 실제 성공했습니다. `Release/*03.json`이 선택 원문이며 앞선 *01/*02는 이력입니다.
 
@@ -19,8 +19,8 @@ Stage03과 새 전체 공개 GET은 manifest 포함15,417파일·982,794,532B를
 
 엄격한 전체 gate도 통과했습니다. 실제 마지막 JSON 줄을 보존한 `Artifacts/Validation/LivingRpgClassic-2026-11-10/living-final-seal.json`은69,713B·SHA `61d9d7df413072ff6932990f5c690413b1b693316f42a91606c98351c3b29722`입니다. 명령exit0·최종 guard0·소유 후손 정리를 확인했고 일반 wrapper의 command-completed와 제품 gate의 passed를 구분합니다.
 
-1. 실제 제품 head `60a58c5d…` 기준 [Checkpoint01](Evidence/LivingRpgClassic20261110/Checkpoint01/index.json) 보존을11월10일16:44:02 KST에 완료했습니다. 실제6,309파일·16조각·결합515,774,702B, index SHA `b23715cee04984de46c6feafc69b69cba320e09f5bded2adf5e030934a28083b`·결합 SHA `73c9879b579becc96512534281a6e48f05980481f68044fc529cac2d17b1200e`입니다. 모든 member/readback·조각·소스/파일 집합 불변과 명령exit0/최종 guard0/정리를 확인했습니다. 첫 Archive01의 보존 스키마 실패는 그대로 보존했고 V2 검토·집중6개 통과 뒤 독립 Archive02가 완료했습니다. 이제 checkpoint와 Docs3의 첫 결합 커밋·정확한 push/CI를 확인합니다. 그 커밋/CI는 작성 시점 미관측이며 archive 안 acquired 잠금은 역사적 사본입니다.
-2. 독립 최종 유휴·소유 후손 정리와 정확한 자기 잠금 원문/원격 상태를 확인하고 정상 자기 해제를 수행합니다. 이어 실제 종료 원문을 Closure01에 보존하고 두 번째 최종 문서 커밋·CI를 확인합니다. 이 단계는 아직 미완료이며 미래 성공을 미리 기록하지 않습니다. 자기 잠금은11월10일11:19~17:19 KST의 고정 회차로 연장·탈취하지 않습니다.
+1. 실제 제품 head `60a58c5d…` 기준 [Checkpoint01](Evidence/LivingRpgClassic20261110/Checkpoint01/index.json) 보존을11월10일16:44:02 KST에 완료했습니다. 실제6,309파일·16조각·결합515,774,702B, index SHA `b23715cee04984de46c6feafc69b69cba320e09f5bded2adf5e030934a28083b`·결합 SHA `73c9879b579becc96512534281a6e48f05980481f68044fc529cac2d17b1200e`입니다. 모든 member/readback·조각·소스/파일 집합 불변과 명령exit0/최종 guard0/정리를 확인했습니다. 첫 Archive01의 보존 스키마 실패는 그대로 보존했고 V2 검토·집중6개 통과 뒤 독립 Archive02가 완료했습니다. 첫 결합 커밋 `04ff1e1214abe82e927ed128d310649c31796235`는 실제 push됐고 Core42778148735·helper42778148418이 성공했습니다. 커밋된16조각의 실제 바이트도 재검증했습니다. archive 안 acquired 잠금은 역사적 사본입니다.
+2. 독립 최종 유휴·명령exit0·최종 guard0·소유 후손 정리를 확인했고11월10일16:57:47 KST에 정확한 자기 잠금을 정상 해제했습니다. available은 그 조회 순간의 상태입니다. [Closure01](Evidence/LivingRpgClassic20261110/Closure01/index.json)은 실제 늦은 원본553개를 보존했으며 index263,087B·SHA `9941d11149a4297ed14085d46b78fa591a75915ea701f33b7d8f1f601fb1e5da`입니다. 앞선6,309원본은 의도한 acquired→released 자기 lease 전환 외 모두 불변이고 압축 조각·새 원본을 검증했습니다. 이제 Closure01·최종 Docs3를 저장한 정확한 후속 commit/push/Core+helper CI를 작성 후 관측합니다. closure가 미래의 자기 저장 커밋·CI를 포함할 수 없으므로 성공을 미리 기록하지 않습니다. 다음 실행은 실제 환경/프로세스/원격 상태를 확인한 뒤 새 고유 자기 잠금을 정상 취득해야 하며 이전 released 회차나 archive 사본은 소유권을 주지 않습니다.
 3. 다음 제품 묶음에서 Gospel의 이름 있는 인물 보행·시야/가림·주변 동선/배경 품질과 판마의 검증된 원작 규칙/로그인·상점 충실도를 개선합니다. 전체 원작 복원은 미완료이고 기술598은 제안만 있습니다. 새 현재 검증·실제 공개를 이어가며 이번 마일스톤을 장기 개발 전체 완료로 표시하지 않습니다.
 
 실패·중단은 별도로 보존합니다. Native/집중 진단 실패와 검사 전ENAMETOOLONG, Pages4실패(두600000ms취소·산출물 중복·PR4 입력의 공식 상한), HTTP401 관찰/guard 오류·새 세션 인증 회복, PublicPortal01의 GET 전 requests 누락을 후속 통과로 바꾸지 않았습니다. PR5의 실제 공식API/OIDC·현재 산출물/소스·succeed 확인·30분 한정 대기/취소와 Node89근거가 새 성공에 결합됩니다. 긴 서버 동기화나 이전 인증 무효 원인은 미확인입니다.
