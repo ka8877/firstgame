@@ -1,0 +1,25 @@
+name: Pages deployment completion helper
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+      - codex/autonomy-lock
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pages-helper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test actual Pages completion, bounded waits and cancellation
+        run: node --test Tools/Web/deploy-pages-wait.test.cjs
