@@ -1,0 +1,56 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/preserve-release-proof-v2.py",
+    "checkpoint",
+    "--facts",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/checkpoint-facts02.json",
+    "--reviewed-source",
+    "/workspace/firstgame/Tools/Validation/LivingRpgClassic/preserve-checkpoint-proposal.py",
+    "--confirm-completed-proof"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-10T07:43:04.052832+00:00",
+  "timeoutSeconds": 2101.491612703001,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 57339.919195836,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/Checkpoint01Archive02/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 67901,
+    "ppid": 67863,
+    "pgid": 67901,
+    "sid": 67901,
+    "state": "R",
+    "startTicks": 5522642,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 67902,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/Checkpoint01Archive02/03-command/supervisor-result.json",
+    "sha256": "673c56bf2cece98cdf2ec4b90bb38dd6c89d66c183c707bd5de3b49c4e49c348",
+    "bytes": 9677
+  },
+  "finishedUtc": "2026-11-10T07:44:23.328189+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/Checkpoint01Archive02/command.stdout.log",
+    "sha256": "2e6657064f1a0cfc71ad29a0924a96dba323bf3d42b79fbde3a9357117315e67",
+    "bytes": 499
+  }
+}

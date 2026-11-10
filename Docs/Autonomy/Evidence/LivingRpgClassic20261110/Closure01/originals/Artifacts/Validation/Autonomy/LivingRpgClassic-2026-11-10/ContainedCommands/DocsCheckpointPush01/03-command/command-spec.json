@@ -1,0 +1,52 @@
+{
+  "version": "owned-descendants-v1",
+  "mode": "production-caller",
+  "repositoryRoot": "/workspace/firstgame",
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "policy": {
+    "helperPath": "/workspace/firstgame/Tools/Environment/owned-process-containment.py",
+    "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+    "evidenceRoot": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/DocsCheckpointPush01",
+    "acceptance": {
+      "report": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+        "bytes": 69227,
+        "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+      },
+      "independentReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+        "bytes": 2324,
+        "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+      },
+      "operatorReview": {
+        "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+        "bytes": 3316,
+        "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+      }
+    }
+  },
+  "argv": [
+    "git",
+    "push",
+    "origin",
+    "main"
+  ],
+  "cwd": "/workspace/firstgame",
+  "stdoutPath": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/command.stdout.log",
+  "executionEndMonotonic": 57327.919194309,
+  "cleanupSeconds": 10,
+  "parentIdentity": {
+    "pid": 68323,
+    "ppid": 448,
+    "pgid": 68323,
+    "sid": 68323,
+    "state": "R",
+    "startTicks": 5556497,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  }
+}

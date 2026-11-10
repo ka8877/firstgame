@@ -1,0 +1,277 @@
+{
+  "status": "command-completed",
+  "scope": "generic-owned-command-only",
+  "label": "DocsCheckpointPush01",
+  "invocation": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/invocation.json",
+    "bytes": 9249,
+    "sha256": "40812ad030b49fa93e02418c9b24d7e7c2131b038d09a4ec219368a66330e1a7"
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "automaticRetryOrApproval": false,
+  "guardBefore": {
+    "event": {
+      "label": "guardBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-10T07:48:44.129139+00:00",
+      "timeoutSeconds": 44.99874343499687,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 57339.919194309,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 68364,
+        "ppid": 68323,
+        "pgid": 68364,
+        "sid": 68364,
+        "state": "R",
+        "startTicks": 5556647,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 68365,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/DocsCheckpointPush01/01-guardBefore/supervisor-result.json",
+        "sha256": "42f4c6664f59b5541975a45cc84d04d17fe4a2d7c1b4f725b0b1be73f5077638",
+        "bytes": 11111
+      },
+      "finishedUtc": "2026-11-10T07:48:45.674264+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/guardBefore.stdout.log",
+        "sha256": "e565fa9c6aef3a7a9de2c5f885caa10fea788b88e1f8bd874a2567576bc16351",
+        "bytes": 747
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/Processes/guardBefore.finished.json",
+      "bytes": 1915,
+      "sha256": "9e4e56f6bde8e94dc5adf436a163fa61e7e31c17d708b19cd30209936e252a99"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/guardBefore.stdout.log",
+      "bytes": 747,
+      "sha256": "e565fa9c6aef3a7a9de2c5f885caa10fea788b88e1f8bd874a2567576bc16351"
+    }
+  },
+  "idleBefore": {
+    "event": {
+      "label": "idleBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-10T07:48:45.968225+00:00",
+      "timeoutSeconds": 19.997885127995687,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 57339.919194309,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 68396,
+        "ppid": 68323,
+        "pgid": 68396,
+        "sid": 68396,
+        "state": "R",
+        "startTicks": 5556831,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 68397,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/DocsCheckpointPush01/02-idleBefore/supervisor-result.json",
+        "sha256": "f87ce3c363c47f599b3305bba1fb36da9fad95d41b38cd0d3aac29e9bfd5d2e6",
+        "bytes": 9057
+      },
+      "finishedUtc": "2026-11-10T07:48:46.114360+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/idleBefore.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/Processes/idleBefore.finished.json",
+      "bytes": 1795,
+      "sha256": "5064bf854b1f73e0241f61e32c333dce722ff36b78f33ba925429773dbffbb6a"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/idleBefore.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "command": {
+    "event": {
+      "label": "command",
+      "argv": [
+        "git",
+        "push",
+        "origin",
+        "main"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-10T07:48:46.421616+00:00",
+      "timeoutSeconds": 1759.1613520159954,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 57339.919194309,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 68398,
+        "ppid": 68323,
+        "pgid": 68398,
+        "sid": 68398,
+        "state": "R",
+        "startTicks": 5556875,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 68399,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/DocsCheckpointPush01/03-command/supervisor-result.json",
+        "sha256": "b03dcdf9ebea14e0937dcbccc59a499d4b02207d4ee084c4aa078aa3a6e5f8bb",
+        "bytes": 14962
+      },
+      "finishedUtc": "2026-11-10T07:50:47.533623+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/command.stdout.log",
+        "sha256": "22a8d7ecbc10a91bdbb55d7913a829fe697cfc188ddf803bccf6a33456c3bded",
+        "bytes": 79
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/Processes/command.finished.json",
+      "bytes": 1708,
+      "sha256": "087908c6f4c24f0108a72bf9829e2cbfb3d0aa4d3a201651f6fc501643000de5"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/command.stdout.log",
+      "bytes": 79,
+      "sha256": "22a8d7ecbc10a91bdbb55d7913a829fe697cfc188ddf803bccf6a33456c3bded"
+    }
+  },
+  "guardAfter": {
+    "event": {
+      "label": "guardAfter",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-10T07:50:47.800793+00:00",
+      "timeoutSeconds": 44.99696393799968,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 57339.919194309,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 68467,
+        "ppid": 68323,
+        "pgid": 68467,
+        "sid": 68467,
+        "state": "R",
+        "startTicks": 5569016,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 68468,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/ContainedCommands/DocsCheckpointPush01/04-guardAfter/supervisor-result.json",
+        "sha256": "bfc22cc656dad35050d2943e5d7b7eb1360f6c69c7ac2a8eb6ccb3181fc41f12",
+        "bytes": 11112
+      },
+      "finishedUtc": "2026-11-10T07:50:49.220096+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/guardAfter.stdout.log",
+        "sha256": "e565fa9c6aef3a7a9de2c5f885caa10fea788b88e1f8bd874a2567576bc16351",
+        "bytes": 747
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/Processes/guardAfter.finished.json",
+      "bytes": 1912,
+      "sha256": "c23560d34372657bb94fdba423a115004c74bee5b62d5981b5560f5e4ff5520d"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointPush01/guardAfter.stdout.log",
+      "bytes": 747,
+      "sha256": "e565fa9c6aef3a7a9de2c5f885caa10fea788b88e1f8bd874a2567576bc16351"
+    }
+  },
+  "finishedUtc": "2026-11-10T07:50:49.233490+00:00",
+  "executionLimit": {
+    "maximumSharedSeconds": 3600,
+    "leaseReserveSeconds": 60,
+    "cleanupReserveSeconds": 12,
+    "startedMonotonic": 55566.338014089,
+    "safeEndMonotonic": 57339.919194309
+  }
+}

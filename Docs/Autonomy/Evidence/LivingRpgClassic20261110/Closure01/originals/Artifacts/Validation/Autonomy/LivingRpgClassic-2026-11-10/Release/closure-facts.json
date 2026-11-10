@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "releaseProfile": "living-classic",
+  "checkpoint": {
+    "file": "Docs/Autonomy/Evidence/LivingRpgClassic20261110/Checkpoint01/index.json",
+    "bytes": 2812001,
+    "sha256": "b23715cee04984de46c6feafc69b69cba320e09f5bded2adf5e030934a28083b"
+  },
+  "archiveWrapper": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/Checkpoint01Archive02/summary.json",
+    "bytes": 11515,
+    "sha256": "2e377f1fbfa26b1dc1866dadce9148b8ec08f13360da5a2519dd827aef97e478"
+  },
+  "finalIdleWrapper": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+    "bytes": 11193,
+    "sha256": "19ff927d6ed76bb15d69a9af2769ecef43b70e79fc3608fa4e4b4f522b6c5f36"
+  },
+  "releasedLease": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
+    "bytes": 878,
+    "sha256": "f6aed7790de2f71e2f1133f45ae01062323350ae5ef9b4780ec17d06dd002af4"
+  },
+  "releaseStdout": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/lease-release.json",
+    "bytes": 798,
+    "sha256": "000a79321b8933e91ae97ab640928d936e3448598d9aab35d9371f33c3234578"
+  },
+  "statusStdout": {
+    "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/lease-status-after.json",
+    "bytes": 99,
+    "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+  },
+  "documentationCi": [
+    {
+      "commit": "04ff1e1214abe82e927ed128d310649c31796235",
+      "runId": 42778148735,
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/checkpoint-documentation-ci01.json",
+        "bytes": 1494,
+        "sha256": "24930f9973a62beae34dffdc353dc4f96fd796ca3317dbba40314699ddefc136"
+      }
+    }
+  ],
+  "lateOriginals": [
+    {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/checkpoint-documentation-helper-ci01.json",
+      "bytes": 1188,
+      "sha256": "e5e1812e2cdb1437a6c8d4779a59a29dda4a6db84bdca24da4f62bd4c579ea7a"
+    },
+    {
+      "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/checkpoint-commit-byte-verification.json",
+      "bytes": 4011,
+      "sha256": "0d965fad4d3e6a053e535da08d1136fd55128ea9a313825b0b31236cbaf9c873"
+    }
+  ]
+}

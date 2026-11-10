@@ -1,0 +1,21 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-10T07:56:47.653727+00:00",
+  "timeoutSeconds": 1277.696038966009,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 57339.91919409201,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/FinalIdleBeforeRelease01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

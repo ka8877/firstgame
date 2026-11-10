@@ -1,0 +1,32 @@
+{
+  "label": "command",
+  "argv": [
+    "gh",
+    "run",
+    "list",
+    "--repo",
+    "ka8877/firstgame",
+    "--commit",
+    "04ff1e1214abe82e927ed128d310649c31796235",
+    "--event",
+    "push",
+    "--limit",
+    "10",
+    "--json",
+    "databaseId,headSha,status,conclusion,event,url,workflowName"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-10T07:51:49.544298+00:00",
+  "timeoutSeconds": 1575.805446339,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 57339.919193848,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/LivingRpgClassic-2026-11-10",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-living-classic-20261110-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/CommandRuns/DocsCheckpointCiDiscovery01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}
