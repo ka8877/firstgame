@@ -30,9 +30,17 @@ namespace FantasyCards.SmokeTests
         }
         [UnityTest] public IEnumerator FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging()
         {
-            var title=GameObject.Find("Restage fantasy title artwork");Assert.That(title,Is.Not.Null);
-            var artwork=Resources.Load<Texture2D>("Art/FmRestage/title-sanctum");Assert.That(artwork,Is.Not.Null,"The new title art must actually be imported, not only a fallback source path.");
-            Assert.That(title.GetComponent<RawImage>().texture,Is.EqualTo(artwork));
+            Assert.That(GameObject.Find("Classic FM client wordmark"),Is.Not.Null);
+            var logo=GameObject.Find("Original red-wing FM logo").GetComponent<RawImage>();
+            Assert.That(logo.texture,Is.EqualTo(Resources.Load<Texture2D>("Art/FmClassic/late-client-reference")));
+            Assert.That(logo.uvRect,Is.EqualTo(new Rect(0,497f/555,236f/740,58f/555)),"Use only the retained original logo; old client controls and player names stay outside the sampled region.");
+            Assert.That(GameObject.Find("Restage fantasy title artwork"),Is.Null,"The user-rejected invented sanctuary must not be used by the classic client.");
+            foreach(string tile in new[]{"02","04","06","08"})
+            {
+                var artwork=Resources.Load<Texture2D>("Art/Revival/login-"+tile);Assert.That(artwork,Is.Not.Null,"Original FM web portrait tile must actually be imported.");
+                var actual=UnityEngine.Object.FindObjectsByType<RawImage>(FindObjectsSortMode.None).Single(image=>image.gameObject.activeInHierarchy&&image.name=="Original FM character tile "+artwork.name);
+                Assert.That(actual.texture,Is.EqualTo(artwork));Assert.That(actual.uvRect,Is.EqualTo(new Rect(0,0,1,1)),"Every original tile stays complete; no screenshot chrome is substituted for controls.");
+            }
             Assert.That(SmokeUi.FindButton("게임 시작"),Is.Not.Null);
             yield return Shot("fantasy-title");yield return Shot("fantasy-title-touch",616,346);
             yield return ReceiveStarter();yield return Shot("owned-lobby");yield return Shot("owned-lobby-touch",616,346);

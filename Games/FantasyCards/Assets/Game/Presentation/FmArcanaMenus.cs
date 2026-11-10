@@ -21,13 +21,7 @@ namespace FantasyCards.Presentation
 
         private void RenewalBackdrop(bool quiet)
         {
-            Panel(root, 0, 0, 1, 1, new Color(.012f, .024f, .043f));
-            var art = Resources.Load<Texture2D>("Art/FmRenewal/late-official");
-            if (art != null) ImageFrame(root, art, new Rect(.245f, .45f, .51f, .55f), 0, .35f, 1, 1, new Vector2(.5f, .54f));
-            Gradient(root, 0, .30f, 1, .72f, new Color(.018f, .027f, .065f, 1), Color.clear);
-            if (quiet) Panel(root, 0, 0, 1, 1, new Color(.010f, .023f, .044f, .78f));
-            var border = Panel(root, .018f, .025f, .982f, .975f, Color.clear);
-            Frame(border, new Color(.66f, .73f, .91f, .42f), 1);
+            ClassicDesktop();
         }
 
         private void ShowArcanaTitle() => DrawRestageTitle();
@@ -46,9 +40,9 @@ namespace FantasyCards.Presentation
         }
 
         private int restorationLobbyMode;
-        private static readonly Color RestorationLeather = new Color(.035f, .052f, .095f, .94f);
-        private static readonly Color RestorationMetal = new Color(.72f, .72f, .65f);
-        private static readonly Color RestorationButtonColor = new Color(.075f, .105f, .18f);
+        private static readonly Color RestorationLeather = new Color(.030f, .025f, .027f, .98f);
+        private static readonly Color RestorationMetal = new Color(.66f, .65f, .59f);
+        private static readonly Color RestorationButtonColor = new Color(.082f, .082f, .079f);
 
         private void RestorationTrim(RectTransform parent, bool orb = false)
         {
@@ -60,14 +54,14 @@ namespace FantasyCards.Presentation
         private RectTransform RestorationPanel(Transform parent, float x0, float y0, float x1, float y1, Color tint, string name)
         {
             var panel = Panel(parent, x0, y0, x1, y1, tint); panel.gameObject.name = name;
-            panel.GetComponent<UiRoundedImage>().Radius = 10; RestorationTrim(panel); return panel;
+            panel.GetComponent<UiRoundedImage>().Radius = 1; RestorationTrim(panel); return panel;
         }
 
         private Button RestorationButton(Transform parent, string text, float x0, float y0, float x1, float y1, Action action, bool selected = false, bool enabled = true)
         {
             var button = Button(parent, text, x0, y0, x1, y1, action,
-                selected ? new Color(.22f, .23f, .30f) : RestorationButtonColor, 24, enabled);
-            button.GetComponent<UiRoundedImage>().Radius = 8;
+                selected ? new Color(.24f, .13f, .12f) : RestorationButtonColor, 24, enabled);
+            button.GetComponent<UiRoundedImage>().Radius = 3;
             Frame((RectTransform)button.transform, selected ? gold : RestorationMetal, selected ? 2.5f : 1);
             return button;
         }
@@ -75,10 +69,14 @@ namespace FantasyCards.Presentation
         private void RestorationBackdrop()
         {
             RenewalBackdrop(true);
-            RestorationPanel(root, .014f, .018f, .986f, .982f, Color.clear, "Late-era remaster lobby outer frame");
         }
 
         private void ShowArcanaLobby()
+        {
+            DrawClassicLobby(false);
+        }
+
+        private void DrawArchivedRestorationLobby()
         {
             QuestCurrentScreen = "free-practice";
             battleScreen = false; redraw = ShowLobby; Clear(); UpdateWorld(); FmOriginalMusic.SetScene("lobby");

@@ -18,9 +18,13 @@ import types
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTROL = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(ROOT / 'Artifacts/Validation/Autonomy/CanonArt-2026-11-09'))).resolve()
+if str(ROOT / 'Tools/Validation') not in sys.path:
+    sys.path.insert(0, str(ROOT / 'Tools/Validation'))
+from LivingRpgClassic import profile as RELEASE
+
+CONTROL = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(RELEASE.CONTROL))).resolve()
 assert CONTROL.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy')
-OUT = ROOT / 'Artifacts/Validation/CanonArt-2026-11-09'
+OUT = RELEASE.OUT
 HELPER_SHA = '9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad'
 # User explicitly authorized sustained work without the previous short cutoff.
 EXECUTION_LIMIT_SECONDS = int(os.environ.get('FIRSTGAME_EXECUTION_LIMIT_SECONDS', '3600'))
@@ -99,11 +103,17 @@ def main():
         'acceptance': old['processContainment']['acceptance']}, ROOT)
     lane = Lane(run, lease)
     lane.env.update(FIRSTGAME_VALIDATION_ROOT=str(run),
-        FIRSTGAME_BUILD_ROOT='/tmp/firstgame-canon-20261109-builds',
+        FIRSTGAME_BUILD_ROOT=str(RELEASE.BUILD),
         FIRSTGAME_NATIVE_CAPTURE_ROOT=str(run / 'Screenshots'),
         FIRSTGAME_NATIVE_ATTEMPT=args.attempt, PYTHONDONTWRITEBYTECODE='1',
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'))
-    if args.game == 'PathOfDawn':
+    if RELEASE.IS_LIVING:
+        lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
+    if RELEASE.IS_LIVING:
+        from canon_release_evidence import REQUIRED_NATIVE_TESTS
+        names = list(REQUIRED_NATIVE_TESTS[args.game])
+        expected = len(names)
+    elif args.game == 'PathOfDawn':
         names = gospel_names()
         # These two current suites add three book/conversation and two real
         # courtyard/composition checks without removing the retained sixteen.
@@ -115,8 +125,15 @@ def main():
         names = json.loads(native.read_bytes())['expectedFullNames']; expected = 8
     lane.env['FIRSTGAME_NATIVE_FILTER'] = ';'.join(names)
     shutil.copyfile(__file__, run / 'executed-driver.py')
+    profile_copy = run / 'RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py'
+    profile_copy.parent.mkdir(parents=True, exist_ok=True)
+    with profile_copy.open('xb') as stream:
+        stream.write(RELEASE.SOURCE.read_bytes())
     write(run / 'invocation.json', {'scope': 'current-product-native-only', 'game': args.game,
         'attempt': args.attempt, 'filter': names, 'expectedCount': expected,
+        'releaseProfile': RELEASE.NAME,
+        'releaseConfiguration': {'source': str(RELEASE.SOURCE.relative_to(ROOT)),
+            'recorded': str(profile_copy.relative_to(ROOT)), 'sha256': sha(profile_copy.read_bytes())},
         'lease': lease, 'supervisorSha256': HELPER_SHA, 'publishReady': False})
     guard = [sys.executable, str(ROOT / 'Tools/Autonomy/cycle_guard.py'), 'check', '--record', str(lease_path)]
     assert controller.child(lane, 'guard', guard, cap=45)['exitCode'] == 0

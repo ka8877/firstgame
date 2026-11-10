@@ -17,12 +17,13 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 
 from restoration_source_binding import ROOT, digest, verify
+from LivingRpgClassic import profile as RELEASE
 
-OUT = Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', str(ROOT / 'Artifacts/Validation/CanonArt-2026-11-09')))
-BUILD = Path(os.environ.get('FIRSTGAME_BUILD_ROOT', '/tmp/firstgame-canon-20261109-builds'))
-STAGE = Path(os.environ.get('FIRSTGAME_STAGE_ROOT', str(ROOT / 'Artifacts/CanonArtWebPlaytest')))
-PROOF_ROOT = Path(os.environ.get('FIRSTGAME_PROOF_ROOT', str(ROOT / 'Artifacts/Validation/Autonomy/CanonArt-2026-11-09/BuildProof')))
-REVISIONS = {'FantasyCards': 'fm-canon-2026-11-09', 'PathOfDawn': 'gospel-canon-2026-11-09'}
+OUT = Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', str(RELEASE.OUT)))
+BUILD = Path(os.environ.get('FIRSTGAME_BUILD_ROOT', str(RELEASE.BUILD)))
+STAGE = Path(os.environ.get('FIRSTGAME_STAGE_ROOT', str(RELEASE.STAGE)))
+PROOF_ROOT = Path(os.environ.get('FIRSTGAME_PROOF_ROOT', str(RELEASE.CONTROL / 'BuildProof')))
+REVISIONS = RELEASE.REVISIONS
 CONTENTS = {'FantasyCards': 'fm-classic-0.1.0', 'PathOfDawn': 'gospel-0.1.0'}
 SLUGS = {'FantasyCards': 'fantasy-cards', 'PathOfDawn': 'path-of-dawn'}
 BUDGET = 985_000_000
@@ -62,7 +63,8 @@ GOSPEL_NATIVE = (
     'PathOfDawn.SmokeTests.GospelCourtyardCompositionSmokeTests.SavedMeetingsKeepTheirCoordinatesAndAnOpenArchitecturalBodySightline',
     'PathOfDawn.SmokeTests.GospelCourtyardCompositionSmokeTests.DefaultViewMakesTheWholeFigureReadableWithoutChangingScreenRelativeDirections',
 )
-REQUIRED_NATIVE_TESTS = {'FantasyCards': CARD_NATIVE, 'PathOfDawn': GOSPEL_NATIVE}
+REQUIRED_NATIVE_TESTS = {game: base + RELEASE.ADDITIONAL_NATIVE[game]
+                         for game, base in {'FantasyCards': CARD_NATIVE, 'PathOfDawn': GOSPEL_NATIVE}.items()}
 
 
 def require(value, message):
@@ -134,7 +136,7 @@ def verify_core():
     result = regular(folder / 'core-tests.trx')
     root = ET.parse(result).getroot()
     counts = root.find('.//{http://microsoft.com/schemas/VisualStudio/TeamTest/2010}Counters')
-    require(counts is not None and int(counts.get('passed', '0')) >= 309 and counts.get('failed') == counts.get('notExecuted') == '0', 'Current full Core309+ without failures or skips required')
+    require(counts is not None and int(counts.get('passed', '0')) >= (311 if RELEASE.IS_LIVING else 309) and counts.get('failed') == counts.get('notExecuted') == '0', 'Current full Core' + ('311' if RELEASE.IS_LIVING else '309') + '+ without failures or skips required')
     require(binding.get('status') == 'passed' and binding.get('sourceChangedDuringRun') is False and binding['results']['sha256'] == digest(result), 'Current immutable Core source/result binding required')
     spec = importlib.util.spec_from_file_location('canon_core_inputs', ROOT / 'Tools/Validation/run-nativity-core.py')
     module = importlib.util.module_from_spec(spec)
@@ -261,6 +263,9 @@ def verify_web_execution(game, proof_path, source_fingerprint):
     require(environment.get('FIRSTGAME_VALIDATION_ROOT') == str(run) and environment.get('FIRSTGAME_BUILD_ROOT') == str(BUILD)
             and environment.get('PYTHONDONTWRITEBYTECODE') == '1' and environment.get('PYTHONOPTIMIZE') == '0'
             and environment.get('PYTHONPYCACHEPREFIX') == str(run / 'GeneratedPythonCache'), 'Actual controlled execution environment differs')
+    if RELEASE.IS_LIVING:
+        require(environment.get('FIRSTGAME_RELEASE_PROFILE') == RELEASE.NAME,
+                'Actual new release profile must be recorded in the executed environment')
     lease = read(checked(invocation['ownedLeaseSnapshot']))
     deadline = timestamp(lease['lease']['deadlineUtc'])
     require(lease.get('state') == 'acquired', 'Actual acquired execution lease snapshot required')
@@ -463,7 +468,7 @@ def verify_portal_review(report=None):
     report = current
     manifest_path = STAGE / 'build-manifest.json'
     manifest = read(manifest_path)
-    require(manifest.get('releaseProfile') == 'canon-art' and manifest.get('gameRevisions') == REVISIONS
+    require(manifest.get('releaseProfile') == RELEASE.NAME and manifest.get('gameRevisions') == REVISIONS
             and manifest.get('contentVersions') == CONTENTS and manifest.get('currentTargets') == ['Web']
             and manifest.get('publishReady') is True and manifest.get('sourceDirty') is False
             and re.fullmatch(r'[0-9a-f]{40}', manifest.get('sourceCommit', '')), 'Current clean source-bound Canon manifest required')
@@ -529,7 +534,7 @@ def main():
     else:
         result = {'builds': verify_builds(), 'portal': verify_portal_review(),
                   'browser': {game: {profile: verify_browser(game, profile) for profile in ('Desktop720', 'Mobile844', 'PublicMobile844')} for game in REVISIONS}}
-    print(json.dumps({'status': 'passed', 'releaseProfile': 'canon-art', 'check': args.check, 'evidence': result}, ensure_ascii=False))
+    print(json.dumps({'status': 'passed', 'releaseProfile': RELEASE.NAME, 'check': args.check, 'evidence': result}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

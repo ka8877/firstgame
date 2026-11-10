@@ -150,7 +150,9 @@ namespace FantasyCards.Presentation
             return label;
         }
 
-        private void DrawRevivalBattleRail()
+        private void DrawRevivalBattleRail() => DrawClassicBattleRail();
+
+        private void DrawArchivedRevivalBattleRail()
         {
             var player = BattleDisplayState.players[0]; var enemy = BattleDisplayState.players[1];
             var rail = Panel(root, .817f, .025f, .979f, .977f, new Color(.05f, .08f, .12f, .98f)); Frame(rail, gold, 2); Ornament(rail, gold);

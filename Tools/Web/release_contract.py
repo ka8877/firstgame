@@ -126,8 +126,19 @@ CANON_ART = {
     'currentTargets': ['Web']
 }
 
+LIVING_CLASSIC = {
+    'name': 'living-classic',
+    'revisions': {'FantasyCards': 'fm-classic-ui-2026-11-10', 'PathOfDawn': 'gospel-living-rpg-2026-11-10'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/LivingRpgClassic-2026-11-10' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'living-classic':
+        return LIVING_CLASSIC
     if name == 'canon-art':
         return CANON_ART
     if name == 'autonomy-g2':

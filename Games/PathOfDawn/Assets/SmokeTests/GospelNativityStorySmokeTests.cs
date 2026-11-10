@@ -220,13 +220,27 @@ namespace PathOfDawn.SmokeTests
             yield return ShowActualAcquiredPage(acquired, captureFirst);
         }
 
-        IEnumerator MoveTo(Vector3 target)
+        IEnumerator MoveTo(Vector3 target) => MoveTo(() => target);
+
+        IEnumerator MoveTo(Func<Vector3> targetProvider, bool requireInteraction = false)
         {
             Assert.That(App.IsModal, Is.False); yield return null;
             float deadline = Time.realtimeSinceStartup + 35, stuck = Time.realtimeSinceStartup;
             Vector3 previous = App.Player.Position;
-            while (Planar(App.Player.Position, target) > .78f && Time.realtimeSinceStartup < deadline)
+            while (Time.realtimeSinceStartup < deadline)
             {
+                Vector3 target = targetProvider();
+                bool close = Planar(App.Player.Position, target) <= .78f;
+                if (close && (!requireInteraction || App.CanInteract)) break;
+                if (close)
+                {
+                    // A real person can still be walking toward the authored
+                    // meeting. Wait alongside them, then follow their live
+                    // position; never steer into their body or bypass Core X.
+                    Keys(); yield return new WaitForSecondsRealtime(.075f);
+                    stuck = Time.realtimeSinceStartup; previous = App.Player.Position;
+                    continue;
+                }
                 Vector3 d = target - App.Player.Position;
                 var keys = new System.Collections.Generic.List<Key> { Key.LeftShift };
                 if (Mathf.Abs(d.x) > .32f) keys.Add(d.x > 0 ? Key.D : Key.A);
@@ -240,7 +254,16 @@ namespace PathOfDawn.SmokeTests
                 }
             }
             Keys(); yield return new WaitForSecondsRealtime(.14f);
-            Assert.That(Planar(App.Player.Position, target), Is.LessThan(1.5f), "Actual XZ steering did not reach the physical NPC.");
+            Vector3 finalTarget = targetProvider();
+            if (Planar(App.Player.Position, finalTarget) >= 1.5f)
+            {
+                Debug.Log("FIRSTGAME_LIVING_STORY_TRAVEL steering-failed quest=" + App.Chronicle.CurrentQuest?.Id +
+                    " index=" + App.Chronicle.QuestIndex + " player=" + App.Player.Position.ToString("F4") +
+                    " target=" + finalTarget.ToString("F4") + " live=" + App.ObjectivePosition.ToString("F4") +
+                    " canInteract=" + App.CanInteract + " npcWalking=" + App.People?.CurrentPerson?.IsWalking);
+                yield return Shot("living-steering-failed-" + App.Chronicle.CurrentQuest?.Id);
+            }
+            Assert.That(Planar(App.Player.Position, finalTarget), Is.LessThan(1.5f), "Actual XZ steering did not reach the physical NPC.");
         }
 
         IEnumerator Hold(Key key, string face, string name)
@@ -360,7 +383,18 @@ namespace PathOfDawn.SmokeTests
             while (!App.Chronicle.IsComplete && guard++ < 18)
             {
                 if (App.Ui.CurrentView == "chapter") { Assert.That(App.Actor.IsAdult, Is.True); yield return Click("이야기 속으로"); }
-                yield return MoveTo(App.ObjectivePosition); Assert.That(App.CanInteract, Is.True);
+                Vector3 capturedTarget = App.ObjectivePosition;
+                Debug.Log("FIRSTGAME_LIVING_STORY_TRAVEL before quest=" + App.Chronicle.CurrentQuest.Id +
+                    " index=" + App.Chronicle.QuestIndex + " player=" + App.Player.Position.ToString("F4") +
+                    " captured=" + capturedTarget.ToString("F4") + " live=" + App.ObjectivePosition.ToString("F4") +
+                    " npcWalking=" + App.People?.CurrentPerson?.IsWalking);
+                yield return MoveTo(() => App.ObjectivePosition, requireInteraction: true);
+                Debug.Log("FIRSTGAME_LIVING_STORY_TRAVEL after quest=" + App.Chronicle.CurrentQuest.Id +
+                    " index=" + App.Chronicle.QuestIndex + " player=" + App.Player.Position.ToString("F4") +
+                    " captured=" + capturedTarget.ToString("F4") + " live=" + App.ObjectivePosition.ToString("F4") +
+                    " canInteract=" + App.CanInteract + " npcWalking=" + App.People?.CurrentPerson?.IsWalking);
+                if (!App.CanInteract) yield return Shot("living-cannot-interact-" + App.Chronicle.CurrentQuest.Id);
+                Assert.That(App.CanInteract, Is.True);
                 if (App.Actor.IsAdult && !adultCaptured) { adultCaptured = true; yield return Shot("adult-field"); }
                 App.Interact(); yield return null; Assert.That(App.Ui.CurrentView, Is.EqualTo("story"));
                 if (!dialogueResumed)

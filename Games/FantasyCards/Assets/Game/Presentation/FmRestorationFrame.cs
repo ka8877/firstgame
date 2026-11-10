@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace FantasyCards.Presentation
 {
-    /// <summary>Resolution independent engraved metal and leather trim, based on
-    /// the hierarchy of the archived official lobby; no screenshot labels/users.</summary>
+    /// <summary>Resolution independent etched steel and dark-red client trim.
+    /// No screenshot labels, archived players or chat are part of this mesh.</summary>
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class FmRestorationFrame : MaskableGraphic
     {
@@ -34,7 +34,7 @@ namespace FantasyCards.Presentation
                 Ring(mesh, c, radius * 1.44f, .6f * scale, new Color(.65f, .54f, .35f, .45f));
                 return;
             }
-            Color dark = new Color(.17f, .14f, .105f, .95f), metal = color;
+            Color dark = new Color(.22f, .045f, .041f, .95f), metal = color;
             for (int border = 0; border < 3; border++)
             {
                 float inset = (2 + border * 3.5f) * scale;
@@ -45,25 +45,27 @@ namespace FantasyCards.Presentation
                 Line(mesh, b, new Vector2(b.x, a.y), scale, tint);
                 Line(mesh, new Vector2(b.x, a.y), a, scale, tint);
             }
+            if (Mathf.Min(r.width, r.height) < 55) return;
             for (int corner = 0; corner < 4; corner++)
             {
                 float sx = (corner & 1) == 0 ? 1 : -1, sy = (corner & 2) == 0 ? 1 : -1;
                 Vector2 c = new Vector2(sx > 0 ? r.xMin : r.xMax, sy > 0 ? r.yMin : r.yMax);
                 Vector2 P(float x, float y) => c + new Vector2(x * sx, y * sy) * scale;
-                // Mirrored curls and a cut gemstone replace low-resolution
-                // stretched screenshot ornaments with clean vector geometry.
-                Vector2 previous = P(10, 41);
-                for (int i = 0; i <= 30; i++)
+                // Pointed layered steel follows the late client's narrow
+                // mechanical corners, without enlarging screenshot fragments.
+                Vector2 previous = P(8, 48);
+                for (int i = 0; i < 7; i++)
                 {
-                    float t = i / 30f, angle = (t * 285 - 80) * Mathf.Deg2Rad;
-                    float rad = 12 * (1 - t * .65f);
-                    Vector2 next = P(22 + Mathf.Cos(angle) * rad, 22 + Mathf.Sin(angle) * rad);
-                    Line(mesh, previous, next, 1.05f * scale, metal); previous = next;
+                    float t = i / 6f;
+                    Vector2 next = P(10 + t * 34, 10 + (1 - t) * 25 + (i % 2 == 0 ? 5 : 0));
+                    Line(mesh, previous, next, 2.2f * scale, new Color(.055f, .060f, .061f));
+                    Line(mesh, previous + Vector2.one * scale, next + Vector2.one * scale, .7f * scale, metal);
+                    previous = next;
                 }
-                Line(mesh, P(12, 12), P(46, 12), scale, metal);
-                Line(mesh, P(12, 12), P(12, 46), scale, metal);
-                Line(mesh, P(5, 5), P(15, 5), 1.2f * scale, metal);
-                Diamond(mesh, P(10, 10), 3 * scale, Color.Lerp(metal, Color.white, .35f));
+                Line(mesh, P(8, 8), P(51, 8), 1.5f * scale, dark);
+                Line(mesh, P(8, 8), P(8, 51), 1.5f * scale, dark);
+                Line(mesh, P(9, 9), P(36, 9), .7f * scale, metal);
+                Diamond(mesh, P(11, 11), 2.3f * scale, Color.Lerp(metal, Color.white, .18f));
             }
         }
         static void Line(VertexHelper mesh, Vector2 a, Vector2 b, float width, Color tint)
