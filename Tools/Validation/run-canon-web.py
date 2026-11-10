@@ -16,6 +16,9 @@ import types
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT / 'Tools/Validation') not in sys.path:
+    sys.path.insert(0, str(ROOT / 'Tools/Validation'))
+from LivingRpgClassic import profile as RELEASE
 
 
 def require(value, message):
@@ -67,7 +70,7 @@ def main():
     parser.add_argument('--native-run', type=Path, required=True, help='The actual passed OUT/NativeRuns/<game>/<attempt> directory.')
     args = parser.parse_args()
     require(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', args.attempt), 'A new safe Web attempt is required')
-    control = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(ROOT / 'Artifacts/Validation/Autonomy/CanonArt-2026-11-09'))).absolute()
+    control = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(RELEASE.CONTROL))).absolute()
     require(control.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy') and control.resolve() == control
             and not any(path.is_symlink() for path in (control, *control.parents)), 'Explicit regular owned control root required')
     binding_module = source_module('restoration_source_binding', ROOT / 'Tools/Validation/restoration_source_binding.py')
@@ -132,8 +135,10 @@ def main():
     lane = native_driver.Lane(run, lease)
     lane.env.update(FIRSTGAME_VALIDATION_ROOT=str(run), FIRSTGAME_BUILD_ROOT=str(build_root),
                     PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'), PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0')
+    if RELEASE.IS_LIVING:
+        lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write = native_driver.write
-    sources = [Path(__file__).resolve(), ROOT / 'Tools/Validation/run-canon-native.py', ROOT / 'Tools/Validation/canon_release_evidence.py',
+    sources = [Path(__file__).resolve(), RELEASE.SOURCE, ROOT / 'Tools/Validation/run-canon-native.py', ROOT / 'Tools/Validation/canon_release_evidence.py',
         ROOT / 'Tools/Validation/restoration_source_binding.py', ROOT / 'Tools/Validation/preserve-completed-build-proof.py', helper,
         ROOT / 'Tools/Autonomy/cycle_guard.py', ROOT / 'Tools/Build/nativity-task.sh', ROOT / 'Tools/Build/nativity-pipeline-state.py',
         ROOT / 'Tools/Build/restore-nativity-build-additions.py', ROOT / 'Tools/Environment/activate-shell.sh',
@@ -166,6 +171,8 @@ def main():
         'environmentOverrides': {key: lane.env[key] for key in ('FIRSTGAME_VALIDATION_ROOT', 'FIRSTGAME_BUILD_ROOT',
             'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'executionSources': pins, 'supervisorAcceptance': acceptance, 'publishReady': False, 'baselineReady': False}
+    if RELEASE.IS_LIVING:
+        invocation['environmentOverrides']['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write(run / 'invocation.json', invocation)
     summary = {'status': 'failed', 'scope': 'current-canon-web-build-only', 'game': args.game,
         'revision': evidence.REVISIONS[args.game], 'attempt': args.attempt, 'sourceFingerprint': fingerprint,

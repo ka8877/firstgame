@@ -16,6 +16,9 @@ import sys
 import types
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT / 'Tools/Validation') not in sys.path:
+    sys.path.insert(0, str(ROOT / 'Tools/Validation'))
+from LivingRpgClassic import profile as RELEASE
 PROFILES = {'Desktop720': ('desktop', 'desktop'), 'Mobile844': ('mobile-landscape', 'mobile'),
             'PublicMobile844': ('mobile-landscape', 'public')}
 PUBLIC_BASE = 'https://ka8877.github.io/firstgame/'
@@ -72,7 +75,7 @@ def main():
     evidence = source_module('canon_browser_current_evidence', ROOT / 'Tools/Validation/canon_release_evidence.py')
     out, build_root = native_driver.OUT, evidence.BUILD.absolute()
     need(evidence.OUT.absolute() == out and out.resolve() == out, 'Use the current common Canon evidence root')
-    control = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(ROOT / 'Artifacts/Validation/Autonomy/CanonArt-2026-11-09'))).absolute()
+    control = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(RELEASE.CONTROL))).absolute()
     need(control.resolve() == control and control.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy')
          and not any(path.is_symlink() for path in (control, *control.parents)), 'Current regular owned control root required')
     output_base = out / args.profile
@@ -82,7 +85,7 @@ def main():
         need(not path.exists() and not path.is_symlink() and not any(parent.is_symlink() for parent in path.parents),
              'Existing attempt/report/originals are immutable; explicitly preserve the failed game directory before a new attempt: ' + str(path))
     mode, plan_name = PROFILES[args.profile]
-    plan_path = ROOT / 'Tools/Validation/CanonArt' / ('canon-' + plan_name + '-plans.json')
+    plan_path = RELEASE.PLAN_DIRECTORY / (RELEASE.PLAN_PREFIX + '-' + plan_name + '-plans.json')
     plan = read(plan_path)[args.game]
     need(plan.get('revision') == evidence.REVISIONS[args.game] and plan.get('suite') == 'modern-real-input-v1', 'Current game/profile plan required')
     inputs_path = build_root / args.game / 'Web/BuildInputs.json'
@@ -108,19 +111,21 @@ def main():
     lane.env.update(FIRSTGAME_VALIDATION_ROOT=str(out), FIRSTGAME_BUILD_ROOT=str(build_root),
         FIRSTGAME_STAGE_ROOT=str(evidence.STAGE.absolute()), FIRSTGAME_PROOF_ROOT=str(evidence.PROOF_ROOT.absolute()),
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'), PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0')
+    if RELEASE.IS_LIVING:
+        lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     controller = module.Controller({'helperPath': str(helper), 'helperSha256': native_driver.HELPER_SHA,
         'evidenceRoot': str(control / 'ContainedBrowser' / args.game / args.profile / args.attempt),
         'acceptance': acceptance}, ROOT)
     argv = [sys.executable, 'Tools/Validation/nativity-web-smoke.py', '--game', args.game,
         '--build-root', str(build_root), '--output', str(output_base), '--plan', str(plan_path),
-        '--release-profile', 'canon-art', '--profile', mode, '--timeout', str(args.timeout),
+        '--release-profile', RELEASE.NAME, '--profile', mode, '--timeout', str(args.timeout),
         '--review-timeout', str(args.review_timeout), '--renderer', args.renderer, '--chromium', args.chromium]
     if args.profile == 'PublicMobile844':
         argv += ['--base-url', PUBLIC_BASE]
     if args.renderer == 'x11-mesa':
         setup = 'bash Tools/Environment/start-display.sh\nsource Tools/Environment/activate-display.sh\nexec \"$@\"'
         argv = ['bash', '-c', setup, 'canon-browser-display', *argv]
-    sources = [Path(__file__).resolve(), ROOT / 'Tools/Validation/run-canon-native.py',
+    sources = [Path(__file__).resolve(), RELEASE.SOURCE, ROOT / 'Tools/Validation/run-canon-native.py',
         ROOT / 'Tools/Validation/canon_release_evidence.py', ROOT / 'Tools/Validation/restoration_source_binding.py',
         ROOT / 'Tools/Validation/nativity-web-smoke.py', ROOT / 'Tools/Validation/web-smoke.py',
         ROOT / 'Tools/Validation/fm-local-media-errors.py', ROOT / 'Tools/Validation/fm-provider-errors.py',
@@ -147,6 +152,8 @@ def main():
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
+    if RELEASE.IS_LIVING:
+        invocation['environmentOverrides']['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write(run / 'invocation.json', invocation)
     summary = {'status': 'failed', 'scope': 'current-canon-browser-only', 'game': args.game,
         'profile': args.profile, 'attempt': args.attempt, 'publishReady': False, 'baselineReady': False,

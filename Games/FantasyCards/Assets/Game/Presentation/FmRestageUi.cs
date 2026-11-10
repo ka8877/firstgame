@@ -9,8 +9,8 @@ namespace FantasyCards.Presentation
 {
     public sealed partial class FantasyCardsApp
     {
-        private static readonly Color RestageEnemy = new Color(.96f,.43f,.37f);
-        private static readonly Color RestageOwn = new Color(.34f,.83f,.82f);
+        private static readonly Color RestageEnemy = new Color(.69f,.48f,.43f);
+        private static readonly Color RestageOwn = new Color(.57f,.63f,.68f);
         private bool restageSkipPackAnimation;
 
         private TMP_Text RestageText(Transform parent,string value,float x,float y,float xx,float yy,float size,Color tint,string role,bool heading=false,TextAlignmentOptions alignment=TextAlignmentOptions.MidlineLeft)
@@ -22,15 +22,17 @@ namespace FantasyCards.Presentation
         private RectTransform RestagePanel(Transform parent,float x,float y,float xx,float yy,Color tint,string name,Color? edge=null)
         {
             var panel=Panel(parent,x,y,xx,yy,tint);panel.name=name;
-            var shape=panel.GetComponent<UiRoundedImage>();shape.Radius=15;
-            shape.TopTint=new Color(1.1f,1.1f,1.13f);shape.BottomTint=new Color(.88f,.91f,.98f);
-            shape.BorderColor=edge??new Color(.57f,.66f,.77f,.36f);shape.BorderWidth=1;
+            var shape=panel.GetComponent<UiRoundedImage>();shape.Radius=2;
+            shape.TopTint=new Color(1.08f,1.07f,1.04f);shape.BottomTint=new Color(.77f,.79f,.80f);
+            shape.BorderColor=edge??new Color(.43f,.43f,.40f,.70f);shape.BorderWidth=1;
             return panel;
         }
         private void RestageHairline(Transform parent,float x,float y,float xx,Color tint)
         {var line=Panel(parent,x,y,xx,y+.002f,tint);line.name="Restage section divider";}
 
-        private void DrawRestageTitle()
+        private void DrawRestageTitle() => DrawClassicTitle();
+
+        private void DrawArchivedRestageTitle()
         {
             QuestCurrentScreen="title";battleScreen=false;redraw=ShowTitle;Clear();UpdateWorld();FmOriginalMusic.SetScene("login");
             Panel(root,0,0,1,1,new Color(.012f,.022f,.042f));
@@ -103,7 +105,7 @@ namespace FantasyCards.Presentation
             void Header(int owner,float bottom,float top)
             {
                 Color accent=owner==0?RestageOwn:RestageEnemy;
-                var panel=RestagePanel(parent,.025f,bottom,.805f,top,new Color(owner==0?.025f:.095f,.039f,.067f,.98f),"Faction header "+owner,accent);
+                var panel=RestagePanel(parent,.025f,bottom,.805f,top,new Color(.021f,.022f,.026f,.83f),"Faction header "+owner,new Color(.32f,.31f,.29f,.6f));
                 var stripe=Panel(panel,0,0,.006f,1,accent);stripe.name="Faction edge "+owner;
                 string label=owner==0?"내 전열":"상대 AI 전열";
                 var text=RenewalValueText(panel,label,.018f,.02f,.34f,.98f,small?20:21,accent,"Faction identity "+owner);

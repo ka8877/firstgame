@@ -1,0 +1,57 @@
+{
+  "scope": "Original generated game art, not historical archaeological likenesses or upstream commercial assets. PNGs copied byte-exact; alpha-only analysis selects runtime UV rectangles, no image raster edits. Background low-alpha pixels are clipped by existing world shader.",
+  "assets": [
+    {
+      "source": "/workspace/generated_images/exec-fa2fc219-0016-402c-ac38-b2207c1d1799.png",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelLiving/portraits.png",
+      "bytes": 2510301,
+      "sha256": "99bf5ab6230dbfe90f5bfd3d64e7e60648023aa549a1b67948a60ee6350592a3",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "rasterEdited": false
+    },
+    {
+      "source": "/workspace/generated_images/exec-2c09a943-5db3-47e7-ae07-88b68651bf36.png",
+      "file": "Games/PathOfDawn/Assets/Resources/Art/GospelRpg/Actors/pilgrims.png",
+      "bytes": 2545958,
+      "sha256": "b06139b5c0ff7ea2a8fae29075d1a61f4a3d0f59998f10d96360fa8b3cb775a1",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "rasterEdited": false
+    }
+  ],
+  "layouts": [
+    "Games/PathOfDawn/Assets/Resources/Art/GospelRpg/Actors/pilgrims-man-layout.json",
+    "Games/PathOfDawn/Assets/Resources/Art/GospelRpg/Actors/pilgrims-woman-layout.json"
+  ],
+  "portraitRegions": {
+    "child": [
+      0,
+      0,
+      0.5,
+      1
+    ],
+    "adult": [
+      0.5,
+      0,
+      0.5,
+      1
+    ]
+  },
+  "ambientDirections": [
+    "front",
+    "back",
+    "left",
+    "right"
+  ],
+  "sourceAtlasGrid": [
+    8,
+    4
+  ]
+}

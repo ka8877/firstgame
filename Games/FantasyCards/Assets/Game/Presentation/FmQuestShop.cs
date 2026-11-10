@@ -15,7 +15,9 @@ namespace FantasyCards.Presentation
         public string QuestRevealedPurchaseId => questRevealedPurchase;
         public int QuestUnopenedPackCount => questEconomy?.PackPurchases.Count(purchase => !purchase.opened) ?? 0;
 
-        private void ShowQuestShop()
+        private void ShowQuestShop() => DrawClassicShop();
+
+        private void DrawArchivedQuestShop()
         {
             if (questEconomy == null || !questEconomy.HasStarter) { ShowQuestEntry(); return; }
             QuestScreen("shop", ShowQuestShop, "카드 상점", "상품별 구성과 확률을 확인하고 SP로 카드를 모으세요.");

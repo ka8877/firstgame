@@ -1,4 +1,41 @@
-# CanonArt 신규 버전 공개 · 검증·보존 완료
+# RPG·원작 UI 검증 진행 — LivingRpgClassic
+
+11월10일 새 사용자 피드백에 따라 두 게임을 개선하고 있습니다. 현재 작업 브랜치는 `codex/living-rpg-classic-2026-11-10`, 시작 main은 `6d6abc4b6a2fa220b89553b03cc0e3ac4d0bb81a`입니다. 새 프로필은 `living-classic`이며 목표 개정은 `fm-classic-ui-2026-11-10` / `gospel-living-rpg-2026-11-10`입니다.
+
+| 현재 항목 | 실제 결과 | 범위 |
+|---|---|---|
+| 공개 오디오 요청 분류 단위 | 82개 통과 | `PublicRangeUnit01` |
+| Core | 311통과·실패0·스킵0, 실행 중 소스 변경 없음 | `Core01` |
+| 판마 Native | `Living02` 전체9개 통과·31PNG | Root는 선택한 현재 원본9장 직접 검토·승인 |
+| 판마 Web | `LivingWeb01` 전체 빌드·proof 통과 | 실제 runtime15,365파일·868,590,764B |
+| Gospel Native | `Living04` 전체25통과·실패0·스킵0·57PNG | Root는 선택 원본8장 직접 검토·승인 |
+| Gospel Web | `LivingWeb01` 전체 빌드·proof 통과 | 실제 runtime5파일·110,157,229B |
+| 현재 build admission | `CurrentBuilds01` 통과 | 현재 소스·Native·Web·proof·Core·media·authoring 결합 |
+| 새 브라우저·공개판 | 대기 | 기존 CanonArt 공개 유지 |
+
+새 원화와 원작 인물 영역의 출처·무손실 사본·UV 사용 범위는 `Tools/Art/GospelLiving/source-and-layouts.json`과 `Tools/Research/LivingClassic/selected-client-art.json`에 기록했습니다. 생성된 주민은 게임 배경 인물이며 새 성경 사건·실제 발언으로 소개하지 않습니다. 후기2017 라이브 화면과2018 회고 게시물, 초기2005/2006 안내·공식 웹 로그인 그림을 구분합니다. 후기 상점의 정확한 원본 배치는 현재 보존 자료에서 확인하지 못했습니다.
+
+판마의 첫 Native `Living01`은 도움말 진입에서 실패했고, 수정 뒤 독립적으로 수행한 `Living02` 전체9개가 통과했습니다. 소스 지문은 `6d33596f59f43de9d9e141ae036380ea37b9f18b7a78683457c2ee69d838760b`, 직접 원본9장 검토 근거는 `Artifacts/Validation/LivingRpgClassic-2026-11-10/Root/cards-native-review.json`입니다. 나머지 Native PNG도 보존하지만 모두 직접 봤다고 하지 않습니다. `LivingWeb01`은 실제 전체 빌드·proof를 통과했습니다. 소스 지문은 Native와 같고 Unity build 보고 값은755,443,574B입니다. 실제 proof의 전체 runtime 합계는15,365파일·868,590,764B이며, summary SHA는 `c6f0b22aa172964290ac082fadcafb0c37f0265b7dc431705e1e335486576171`, proof index SHA는 `0a4371d63cf3a0d22f64a0dcad1b04c5ed4eb03d31929e6075027b6df6991316`입니다. 현재 브라우저·공개 주소 검증은 아직 남아 있습니다.
+
+Gospel의 `Living01` 준비 exit139, `Living02` 전체25개 중20통과·5실패, `PeopleMapDiagnostic02` 4개 중2통과·2실패는 원문 그대로 유지합니다. 실제 `pilgrim-0`의 도자기 겹침과 엄격한 사람 위치 저장 복원 문제를 수정한 뒤, 새 전체 `Living03`은24통과·1실패였으며 새 RPG4개는 모두 통과했습니다. 주변 사람6명이 실제3.29~4.40m 걷고 사람 상태를 복원하는 결과를 확인했습니다. 이 부분 통과로 전체25개 실패 판정을 바꾸지 않습니다.
+
+남은 실패는 움직이는 마리아의 이전 좌표를 잡고 계속 걷던 기존 전체 이야기 fixture에서 발생했습니다. `OneStoryDiagnostic01`은 저장된 목표X5.7634·실제 마리아X12.2382·플레이어X5.7086을 확인한 실제 실패 진단으로 보존했습니다. fixture만 `Func<Vector3>`로 실제 목표를 매번 읽고 일반 이동 입력으로 따라가도록 고쳤으며35초 제한·가까움.78·최종거리1.5미만·엄격한 `CanInteract`/CoreX·19개 성경 조건은 유지했습니다. 제품 진행 조건을 완화하지 않았습니다. 그 뒤 독립적으로 실행한 전체 `Living04`는11월10일12:40:46 KST에25통과·실패0·스킵0으로 완료됐고 실행 중 소스 변경은 없었습니다.57PNG를 보존했고 Root가 명시적으로 고른 원본8장을 직접 검토·승인했습니다. 나머지49장 전체를 직접 검토했다고 하지 않습니다.
+
+현재 Gospel Native 소스 지문은 `4f2c40c11975f23c6a85c8ddb0b237ca861cae4a96f159ebac8e855d0b42b774`, XML SHA는 `aa21d93e09eccaa9444f77b4725bf011bf64b4dbd5508a9a2b9fca50d11de8a3`, 선택 원본 검토 SHA는 `0d82eeff978a2f9ea525582e66a461617bc504b7d595f3fdcc69eddede868a41`입니다. 선택된 실제 Native를 canonical 경로에 정확한 사본으로 보존했고, 이후 `LivingWeb01` 전체 Web 빌드·proof도 실제 통과했습니다. Web summary SHA는 `c971e02a5c013fd63f1ea102c7c72660337ccca028b291473331f51870751eef`, proof index SHA는 `930154f9a1e536651d560e15f2acbfd2fc4f15856abdb402b1579eba3f0fd993`입니다. proof의 `preserved`·`coreRuntimeBytesCopied=true`·`runtimeByteIdentityBeforeAfter=true`를 확인했지만 새 공개는 아직 아닙니다.
+
+검게 나오던 지도 렌더 수정과 실제 저장 PNG의 지형·NPC·길·플레이어 픽셀 검사 통과는 별도 Native UI 근거로 남겼습니다. 당시 부분 검사로 실패를 통과로 바꾸지 않았고, 현재의 전체 Native 통과는 후속 `Living04`의 독립적인25개 결과에 근거합니다. 첫 진단 명령의 `ENAMETOOLONG`은 게임 검사 실행 전 오류로 구분하며, 실패 wrapper에 없는 최종 guard 성공을 만들지 않습니다.
+
+실제 Gospel payload는 data94,181,727B·wasm15,827,418B·framework92,891B·loader47,860B·index7,333B로, proof에 열거된5개 runtime 합계110,157,229B입니다. Unity `BuildEvidence.Bytes`의 작은 요약 값을 전체 runtime 크기로 쓰지 않습니다. 새 두 게임 전체 사이트·stage 용량은 아직 측정·승인하지 않았습니다.
+
+현재 소스·Native·Web·전체 proof·Core·media·authoring을 결합하는 `CurrentBuilds01`도 실제 통과했습니다. wrapper SHA는 `1dfa6a4c6a345d34c97e9377ccc6ffd5f20171946e45eccad53017c6c88f629b`입니다. Core의 실제 TRX SHA는 `28f15d7d9a953270f9d19be0a5b2de3f00a0841a5ca7b7c91beeb0d41b707681`이고 현재 결과 경로는 `Artifacts/Validation/LivingRpgClassic-2026-11-10/Core`입니다. 이제 소스 커밋·새 CI와 로컬4회/전체6회 브라우저·stage 용량·Pages·전체 공개 전달 검증이 남아 있습니다. 현재 공개판은 앞선 CanonArt(`2ebe776c…` / gh-pages `37132296…`)이며 새 구현의 공개판으로 표시하지 않습니다. 이전 main 문서 커밋 `6d6abc4b…`의 CI `42707433731`은 실제 성공한 이전 완료 근거입니다.
+
+새 실행 소유 기록은 `Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json`이며11월10일11:19 KST에 취득한 자기 잠금의 고정 종료 시각은17:19 KST입니다. Root는 현재 검사를 순서대로 수행 중이며, 실패 수정 후 전체 새 원본·실제 결과를 확인한 뒤 기존 Pages 절차로 공개합니다. 예약 마지막 조회0개·목표 카드 직접 미확인 상태는 그대로이며 상시 자동 실행을 주장하지 않습니다.
+
+아래는 이전 완료·실패·중단 시점의 기록입니다. 이전 검사의 통과를 새 개정의 통과로 재사용하지 않습니다.
+
+---
+
+# 이전 CanonArt 신규 버전 공개 · 검증·보존 완료
 
 두 게임의 CanonArt 신규 버전을 기존 테스트 사이트에 공개했습니다. 제품 소스는 `2ebe776c6d37bc6563fa25004536ca2983ce65d4`, 공개 gh-pages는 `3713229641dd4e4ea6cb66372dd4f8569d2ad0f7`입니다. 실제 Pages 실행 `42670765284`가 성공했고 전체15,416파일의 새 HTTPS GET·HTTP200·크기·SHA 검사를 통과했습니다. 두 게임은 [테스트 페이지](https://ka8877.github.io/firstgame/)에서 실행할 수 있습니다.
 

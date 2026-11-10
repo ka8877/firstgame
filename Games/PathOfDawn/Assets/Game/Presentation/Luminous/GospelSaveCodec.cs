@@ -43,6 +43,35 @@ namespace PathOfDawn.Presentation
             return document.ToString(Formatting.None);
         }
 
+        public static string Encode(GospelSave snapshot, GospelPilgrimagePeopleSave people)
+        {
+            var document = Parse(Encode(snapshot));
+            if (people != null)
+                document["pilgrimagePeople"] = Parse(JsonUtility.ToJson(people));
+            return document.ToString(Formatting.None);
+        }
+
+        /// <summary>Old saves omit this optional presentation extension; malformed present data stays an error.</summary>
+        public static GospelPilgrimagePeopleSave DecodePeople(string payload)
+        {
+            var document = Parse(payload);
+            if (!document.TryGetValue("pilgrimagePeople", StringComparison.Ordinal, out var token)) return null;
+            if (!(token is JObject people) || people["version"]?.Type != JTokenType.Integer ||
+                people["questIndex"]?.Type != JTokenType.Integer || people["chapter"]?.Type != JTokenType.String ||
+                !(people["people"] is JArray rows) || rows.Count > 24)
+                throw new ArgumentException("사람들의 위치 저장 형식이 잘못되었습니다. 기존 파일을 보존했습니다.");
+            foreach (var item in rows)
+            {
+                if (!(item is JObject row) || row["id"]?.Type != JTokenType.String ||
+                    row["routePoint"]?.Type != JTokenType.Integer)
+                    throw new ArgumentException("사람들의 여정 저장 형식이 잘못되었습니다. 기존 파일을 보존했습니다.");
+                foreach (string key in new[] { "x", "y", "z", "yaw" })
+                    if (row[key]?.Type != JTokenType.Float && row[key]?.Type != JTokenType.Integer)
+                        throw new ArgumentException("사람들의 좌표 저장 형식이 잘못되었습니다. 기존 파일을 보존했습니다.");
+            }
+            return JsonUtility.FromJson<GospelPilgrimagePeopleSave>(people.ToString(Formatting.None));
+        }
+
         static JObject Parse(string payload)
         {
             if (string.IsNullOrWhiteSpace(payload)) throw new ArgumentException("저장 내용이 없습니다.");

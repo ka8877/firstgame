@@ -67,7 +67,7 @@ namespace FantasyCards.Presentation
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);
                 float left = start + lane * span / state.rules.unitLanes, right = left + span / state.rules.unitLanes - .008f;
                 bool target = IsLegalLane(owner, lane);
-                Color sideTint = owner == 0 ? new Color(.02f, .085f, .11f, .48f) : new Color(.10f, .027f, .045f, .42f);
+                Color sideTint = new Color(.006f, .009f, .018f, .18f);
                 var panel = ChroniclePanel(root, left, bottom, right, RestageLaneTop(owner), sideTint, false);
                 panel.gameObject.name = "Lane " + owner + " " + lane;
                 panel.gameObject.AddComponent<Mask>().showMaskGraphic = true;
@@ -99,11 +99,10 @@ namespace FantasyCards.Presentation
                 }
                 else
                 {
-                    Text(panel, new[] { "I", "II", "III", "IV", "V" }[index], .03f, .49f, .97f, .97f, 26, target ? gold : new Color(.48f, .54f, .67f), TextAlignmentOptions.Center);
-                    Text(panel, target ? "여기에 배치" : "빈 전열", .03f, .02f, .97f, .50f, 22, target ? ivory : new Color(.55f, .61f, .72f), TextAlignmentOptions.Center);
+                    Text(panel, new[] { "I", "II", "III", "IV", "V" }[index], .34f, .03f, .66f, .25f, 21, target ? gold : new Color(.06f, .10f, .48f, .78f), TextAlignmentOptions.Center);
+                    if (target) Text(panel, "배치", .07f, .42f, .93f, .63f, 22, ivory, TextAlignmentOptions.Center);
                 }
-                Frame(panel, target ? gold : new Color(owner == 0 ? RestageOwn.r : RestageEnemy.r,
-                    owner == 0 ? RestageOwn.g : RestageEnemy.g, owner == 0 ? RestageOwn.b : RestageEnemy.b, .48f), target ? 2.5f : 1);
+                Frame(panel, target ? gold : new Color(.19f, .20f, .29f, .55f), target ? 2.5f : 1);
                 panel.GetComponent<Image>().raycastTarget = true;
                 var button = panel.gameObject.AddComponent<Button>(); button.interactable = !locked; button.onClick.AddListener(() => LaneClick(owner, index));
                 BindLaneDrop(panel, owner, lane);

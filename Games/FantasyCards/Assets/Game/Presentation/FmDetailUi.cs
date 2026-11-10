@@ -88,7 +88,9 @@ namespace FantasyCards.Presentation
             return cards;
         }
 
-        private void ShowLocalProfile(Action back)
+        private void ShowLocalProfile(Action back) => DrawClassicProfile(back);
+
+        private void DrawArchivedLocalProfile(Action back)
         {
             battleScreen = false; redraw = () => ShowLocalProfile(back); Clear(); DetailPanorama(true);
             if (profileDraftName == null) profileDraftName = LocalProfileName;

@@ -37,7 +37,7 @@ namespace FirstGame.Editor
         {
             if (!File.Exists(Journal)) return;
             var record = JsonUtility.FromJson<Record>(File.ReadAllText(Journal));
-            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
+            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != "gospel-canon-2026-11-09" && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
                 throw new BuildFailedException("Invalid legacy resource recovery journal; retained for inspection.");
             Restore(record, "recovered-after-interruption");
             Debug.Log("FIRSTGAME_LEGACY_RESOURCES_RECOVERED " + record.moves.Length);

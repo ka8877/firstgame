@@ -43,10 +43,11 @@ namespace FantasyCards.Presentation
             if (rail == null) return;
             foreach (var shape in rail.GetComponentsInChildren<UiRoundedImage>())
             {
-                shape.Radius = 7;
-                shape.TopTint = new Color(1.06f, 1.06f, 1.06f);
-                shape.BottomTint = new Color(.86f, .88f, .93f);
-                if (!shape.Fill) shape.BorderColor = new Color(.57f, .66f, .73f, .55f);
+                var buttonLabel = shape.GetComponent<Button>() != null ? shape.GetComponentInChildren<TMP_Text>() : null;
+                shape.Radius = buttonLabel != null && !string.IsNullOrEmpty(buttonLabel.text) ? 8 : 1;
+                shape.TopTint = new Color(1.12f, 1.10f, 1.05f);
+                shape.BottomTint = new Color(.72f, .74f, .76f);
+                if (!shape.Fill) shape.BorderColor = new Color(.43f, .42f, .39f, .80f);
                 shape.SetAllDirty();
             }
         }

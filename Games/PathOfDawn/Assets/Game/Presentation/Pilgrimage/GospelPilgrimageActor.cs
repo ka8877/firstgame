@@ -81,7 +81,7 @@ namespace PathOfDawn.Presentation
         Light lampLight;
         Func<float, float, float> groundSampler;
         Vector3 measuredVelocity;
-        bool grounded = true, adult, npc;
+        bool grounded = true, adult, npc, directionalNpc;
         int npcFrame, direction;
         float phase, facingYaw = 180f, npcHeight = 1.76f, settleTime;
         bool walking;
@@ -96,7 +96,7 @@ namespace PathOfDawn.Presentation
         public string CurrentFacing => FacingNames[direction];
         public int CurrentFrame { get; private set; }
         public Sprite CurrentSprite => sprite != null ? sprite.sprite : null;
-        public Sprite PortraitSprite => currentSheet == null ? null : currentSheet.Frames[npc ? npcFrame : currentSheet.IdleFrame];
+        public Sprite PortraitSprite => currentSheet == null ? null : currentSheet.Frames[npc && !directionalNpc ? npcFrame : currentSheet.IdleFrame];
         public SpriteRenderer Renderer => sprite;
         public bool LampEquipped => lamp != null && lamp.activeSelf;
         public bool UsesMeasuredLayout => currentSheet != null;
@@ -104,7 +104,7 @@ namespace PathOfDawn.Presentation
         public int AnimationFrameCount => currentSheet == null ? 0 : currentSheet.Frames.Length;
         public int FramesPerDirectionCount => currentSheet == null ? 0 : currentSheet.FramesPerDirection;
         public int WalkPoseCount => currentSheet == null || currentSheet.WalkSequence == null ? 0 : currentSheet.WalkSequence.Length;
-        public bool UsesExpandedAnimation => !npc && FramesPerDirectionCount > 3;
+        public bool UsesExpandedAnimation => (!npc || directionalNpc) && FramesPerDirectionCount > 3;
         public float VisualHeight => npc ? npcHeight : adult ? AdultHeight : ChildHeight;
         public bool IsNpc => npc;
 
@@ -149,6 +149,34 @@ namespace PathOfDawn.Presentation
                 ? CanonActorRoot + "npcs" : ActorRoot + "npcs";
             actor.UseSheet(npcResource, height, 4, false);
             actor.BuildShadow();
+            actor.RefreshFrame();
+            return actor;
+        }
+
+        /// <summary>A background traveler has its own atlas; it never borrows Jesus's face.</summary>
+        public static GospelPilgrimageActor BuildAmbient(Transform parent, Camera camera, string resource,
+            bool woman, float height, Color garmentTint)
+        {
+            string metadata = resource + (woman ? "-woman-layout" : "-man-layout");
+            if (Resources.Load<Texture2D>(resource) == null || Resources.Load<TextAsset>(metadata) == null)
+            {
+                // Old saves and development imports remain usable before the new
+                // optional atlas arrives. Existing distinct townsperson art is
+                // preferable to cloning the playable Jesus character.
+                var fallback = BuildNpc(parent, camera, woman ? "mary" : "pilgrim", height);
+                fallback.Renderer.color = garmentTint;
+                return fallback;
+            }
+            var obj = new GameObject("Pilgrimage passer-by · directional painted traveler");
+            obj.transform.SetParent(parent, false);
+            var actor = obj.AddComponent<GospelPilgrimageActor>();
+            actor.ownerRoot = parent; actor.sceneCamera = camera;
+            actor.npc = actor.adult = actor.directionalNpc = true;
+            actor.npcHeight = height;
+            actor.CreateRenderer();
+            actor.UseSheet(resource, height, 0, true, metadata);
+            actor.BuildShadow();
+            actor.Renderer.color = garmentTint;
             actor.RefreshFrame();
             return actor;
         }
@@ -261,12 +289,12 @@ namespace PathOfDawn.Presentation
                 UseSheet(ActorRoot + name, VisualHeight, PlayerFrames, false);
         }
 
-        void UseSheet(string resource, float height, int expectedFrames, bool expanded)
+        void UseSheet(string resource, float height, int expectedFrames, bool expanded, string metadataResource = null)
         {
             if (!sheets.TryGetValue(resource, out var sheet))
             {
                 var texture = Resources.Load<Texture2D>(resource);
-                var metadata = Resources.Load<TextAsset>(resource + "-layout");
+                var metadata = Resources.Load<TextAsset>(metadataResource ?? resource + "-layout");
                 if (texture == null || metadata == null)
                     throw new InvalidOperationException("Missing original Pilgrimage atlas or measured layout: " + resource);
                 var layout = JsonUtility.FromJson<SheetLayout>(metadata.text);
@@ -274,13 +302,14 @@ namespace PathOfDawn.Presentation
                     !Finite(layout.referenceHeight) || layout.referenceHeight <= 0 || layout.referenceHeight > texture.height ||
                     layout.frames == null || expectedFrames > 0 && layout.frames.Length != expectedFrames)
                     throw new InvalidOperationException("Pilgrimage layout does not match the intact source atlas: " + resource);
-                int perDirection = npc ? 1 : expanded ? layout.framesPerDirection : 3;
+                bool fixedNpc = npc && !directionalNpc;
+                int perDirection = fixedNpc ? 1 : expanded ? layout.framesPerDirection : 3;
                 int idle = expanded ? layout.idleFrame : 0;
                 int air = expanded && layout.airFrame >= 0 ? layout.airFrame : idle;
-                int[] walk = npc ? null : expanded ? layout.walkSequence : LegacyWalkSequence;
-                float[] durations = npc ? null : expanded ? layout.walkDurations : LegacyWalkDurations;
+                int[] walk = fixedNpc ? null : expanded ? layout.walkSequence : LegacyWalkSequence;
+                float[] durations = fixedNpc ? null : expanded ? layout.walkDurations : LegacyWalkDurations;
                 float stride = expanded ? layout.strideLength : 1.8f;
-                if (!npc)
+                if (!fixedNpc)
                 {
                     if (perDirection < 3 || perDirection > 16 || layout.frames.Length != perDirection * 4 ||
                         idle < 0 || idle >= perDirection || air < 0 || air >= perDirection ||
@@ -450,7 +479,7 @@ namespace PathOfDawn.Presentation
             // all movement updates so acceleration and landings use this frame.
             if (movement != null && movement.enabled) SetMotion(movement.Velocity, movement.IsGrounded, movement.FacingYaw);
             float planarSpeed = new Vector2(measuredVelocity.x, measuredVelocity.z).magnitude;
-            if (!npc)
+            if (!npc || directionalNpc)
             {
                 if (planarSpeed > .22f)
                     facingYaw = Mathf.Atan2(measuredVelocity.x, measuredVelocity.z) * Mathf.Rad2Deg;
@@ -486,6 +515,24 @@ namespace PathOfDawn.Presentation
                     settleTime += dt;
                     if (settleTime >= .075f) CurrentFrame = currentSheet.IdleFrame;
                 }
+            }
+            else
+            {
+                // The four named characters retain their authored identities.
+                // Their actual world travel supplies a restrained step rhythm;
+                // no replacement face/Jesus walk sheet is substituted mid-walk.
+                walking = planarSpeed > .08f;
+                CurrentState = walking ? "Walk" : "Idle";
+                phase = walking ? Mathf.Repeat(phase + planarSpeed * Time.deltaTime / 1.65f, 1f) : 0;
+                if (walking)
+                {
+                    Vector3 right = sceneCamera.transform.right; right.y = 0;
+                    float side = Vector3.Dot(measuredVelocity, right.normalized);
+                    if (Mathf.Abs(side) > .025f) sprite.flipX = side < 0;
+                }
+                billboard.localPosition = Vector3.up * (walking ? Mathf.Abs(Mathf.Sin(phase * Mathf.PI * 2)) * .018f : 0);
+                billboard.rotation = sceneCamera.transform.rotation * Quaternion.AngleAxis(
+                    walking ? Mathf.Sin(phase * Mathf.PI * 2) * .9f : 0, Vector3.forward);
             }
             RefreshFrame();
             UpdateDashEchoes();
@@ -542,7 +589,7 @@ namespace PathOfDawn.Presentation
         void RefreshFrame()
         {
             if (sprite == null || currentSheet == null) return;
-            int index = npc ? npcFrame : direction * currentSheet.FramesPerDirection + CurrentFrame;
+            int index = npc && !directionalNpc ? npcFrame : direction * currentSheet.FramesPerDirection + CurrentFrame;
             sprite.sprite = currentSheet.Frames[index];
         }
 

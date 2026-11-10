@@ -20,9 +20,9 @@ namespace FantasyCards.Presentation
     public sealed partial class FantasyCardsApp : MonoBehaviour
     {
         private const string Slot = "fantasy-battle-classic-v3", DeckSlot = "fantasy-deck-classic-v3", GameId = "starlight-oath";
-        private readonly Color ink = new Color(.030f, .040f, .085f, .98f);
-        private readonly Color gold = new Color(.96f, .80f, .48f);
-        private readonly Color teal = new Color(.40f, .86f, .80f);
+        private readonly Color ink = new Color(.025f, .022f, .025f, .98f);
+        private readonly Color gold = new Color(.91f, .76f, .43f);
+        private readonly Color teal = new Color(.62f, .76f, .65f);
         private readonly List<string> customDeck = CardCatalog.DefaultDeck();
         private readonly Dictionary<string, Sprite> authoredIllustrations = new Dictionary<string, Sprite>();
         private BattleEngine engine;
@@ -34,8 +34,8 @@ namespace FantasyCards.Presentation
         private Vector2 lastViewport;
         private int collectionPage;
         private bool Compact => canvas != null && (canvas.pixelRect.width < 1400 || canvas.pixelRect.width / Mathf.Max(1, canvas.pixelRect.height) > 1.95f);
-        private readonly Color ivory = new Color(.96f, .96f, 1f);
-        private readonly Color slate = new Color(.085f, .12f, .215f, .98f);
+        private readonly Color ivory = new Color(.91f, .90f, .84f);
+        private readonly Color slate = new Color(.072f, .082f, .091f, .98f);
         private int selectedCard = -1, selectedAttacker = -1;
         private string inspectedId = "dawn_scout", message = "판타지마스터즈에 오신 것을 환영합니다.";
         private string saveError = "";
@@ -137,10 +137,10 @@ namespace FantasyCards.Presentation
         }
         private void Ornament(Transform parent, Color color, bool card = false)
         {
-            // One quiet accent replaces the old repeated engraved corners.
-            var accent = Panel(parent, card ? .06f : .035f, .982f, card ? .24f : .17f, .987f,
-                new Color(color.r, color.g, color.b, Mathf.Min(.60f, color.a)));
-            accent.gameObject.name = "Modern surface accent";
+            if (card) return; // Preserve the original printed card without a new decorative crop.
+            var trim = new GameObject("Classic client corner engraving", typeof(RectTransform), typeof(FmRestorationFrame)).GetComponent<FmRestorationFrame>();
+            trim.transform.SetParent(parent, false); Anchor((RectTransform)trim.transform, 0, 0, 1, 1);
+            trim.color = new Color(.44f, .43f, .40f, .75f); trim.raycastTarget = false;
         }
         private void StartBattle(uint seed)
         {
@@ -369,7 +369,7 @@ namespace FantasyCards.Presentation
             var go = new GameObject("Panel", typeof(RectTransform), typeof(UiRoundedImage));
             var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
             var image = go.GetComponent<UiRoundedImage>(); image.color = color; image.raycastTarget = false;
-            image.Radius = 18; image.TopTint = new Color(1.025f, 1.035f, 1.045f, 1); image.BottomTint = new Color(.98f, .99f, 1f, 1);
+            image.Radius = 2; image.TopTint = new Color(1.08f, 1.07f, 1.04f, 1); image.BottomTint = new Color(.84f, .85f, .86f, 1);
             return rt;
         }
         private TMP_Text Text(Transform parent, string value, float x0, float y0, float x1, float y1, float size, Color color, TextAlignmentOptions alignment = TextAlignmentOptions.MidlineLeft)
@@ -387,18 +387,18 @@ namespace FantasyCards.Presentation
         private Button Button(Transform parent, string label, float x0, float y0, float x1, float y1, Action action, Color color, float size = 22, bool enabled = true)
         {
             var panel = Panel(parent, x0, y0, x1, y1, color); panel.gameObject.name = "Button " + label; panel.GetComponent<Image>().raycastTarget = true;
-            panel.GetComponent<UiRoundedImage>().Radius = 18;
+            panel.GetComponent<UiRoundedImage>().Radius = 3;
             var b = panel.gameObject.AddComponent<Button>(); b.interactable = enabled;
             var colors = b.colors; colors.fadeDuration = .14f;
             colors.highlightedColor = new Color(1.16f, 1.18f, 1.20f);
             colors.selectedColor = colors.highlightedColor;
             colors.disabledColor = new Color(.43f, .48f, .54f, .65f);
             colors.pressedColor = new Color(.80f, .86f, .90f); b.colors = colors;
-            var shadow = panel.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(.005f, .015f, .035f, .27f); shadow.effectDistance = new Vector2(0, -4);
-            Frame(panel, color == gold ? new Color(1, .94f, .76f, .65f) : new Color(.72f, .84f, .94f, .28f), 1);
+            var shadow = panel.gameObject.AddComponent<Shadow>(); shadow.effectColor = new Color(0, 0, 0, .65f); shadow.effectDistance = new Vector2(1, -2);
+            Frame(panel, color == gold ? new Color(.92f, .78f, .46f, .85f) : new Color(.50f, .50f, .46f, .78f), 1);
             b.onClick.AddListener(() => { music?.NotifyUserGesture(); FmBattleAudio.Play(ButtonCue(label)); action(); });
             FmBattleAudio.AttachHover(panel.gameObject);
-            var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.025f; hover.HoverLift = 3;
+            var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.008f; hover.HoverLift = 0;
             var text = Text(panel, label, .04f, .07f, .96f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
             text.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font;
             text.textWrappingMode = TextWrappingModes.NoWrap;

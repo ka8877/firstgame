@@ -21,14 +21,13 @@ namespace FantasyCards.Presentation
             battleScreen = false; redraw = draw; Clear(); UpdateWorld(); FmOriginalMusic.SetScene(name == "collection" || name == "deck" ? "deck" : "lobby");
             polishBack = name == "lobby" ? (Action)ShowTitle : ShowQuestLobby;
             RestorationBackdrop();
-            RestageText(root, "FANTASY MASTERS  /  REMASTER", .045f, .925f, .74f, .978f, 24, gold, "Restage client masthead", true).characterSpacing = 1.4f;
-            RestageText(root, title, .045f, .838f, .74f, .925f, 40, ivory, "Restage screen title", true);
-            RestageText(root, subtitle, .045f, .771f, .744f, .836f, 23, new Color(.75f, .83f, .88f), "Restage screen subtitle");
-            RestageHairline(root, .045f, .760f, .744f, new Color(.45f, .66f, .72f, .45f));
+            ClassicScreenHeader(title, subtitle);
             DrawQuestRail();
         }
 
-        private void DrawQuestRail()
+        private void DrawQuestRail() => ClassicWalletRail();
+
+        private void DrawArchivedQuestRail()
         {
             var rail=RestagePanel(root,.77f,.045f,.96f,.957f,new Color(.014f,.031f,.056f,.98f),"Quest wallet and profile rail",new Color(.70f,.65f,.48f,.55f));
             RestageText(rail,"MY COLLECTION",.08f,.916f,.92f,.975f,21,gold,"Restage profile heading",true,TextAlignmentOptions.Center).characterSpacing=1.3f;
@@ -72,7 +71,9 @@ namespace FantasyCards.Presentation
             Text(root, value, .045f, .135f, .742f, .205f, 21, new Color(.77f, .83f, .92f));
         }
 
-        private void ShowQuestLobby()
+        private void ShowQuestLobby() => DrawClassicLobby(true);
+
+        private void DrawArchivedQuestLobby()
         {
             if (questEconomy == null || !questEconomy.HasStarter) { ShowQuestEntry(); return; }
             QuestScreen("lobby", ShowQuestLobby, "싱글 플레이 대기실", "기본 덱으로 시작하고, 대전 보상으로 카드를 모으세요.");

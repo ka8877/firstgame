@@ -22,9 +22,11 @@ namespace FantasyCards.Presentation
                 float glow = Mathf.Clamp01(1 - Vector2.Distance(new Vector2(x, y), new Vector2(.48f, .52f)));
                 float cloud = Mathf.Pow(Mathf.Clamp01(.5f + Mathf.Sin(x * 7 + y * 4 + Mathf.Sin(y * 9 + drift) + drift) * .35f), 2);
                 float halo = Mathf.Pow(Mathf.Clamp01(1 - Mathf.Abs(Vector2.Distance(new Vector2(x, y), new Vector2(.48f,.54f)) - .31f) * 30), 3);
-                return new Color(.014f + grain * .005f + cloud * .025f + halo * .022f,
-                    .027f + vein * .022f + cloud * .10f + glow * .024f + halo * .045f,
-                    .075f + vein * .065f + cloud * .31f + glow * .055f + halo * .085f, 1);
+                float rightFlame = Mathf.Pow(Mathf.Clamp01(x), 2.1f);
+                float aether = (cloud * .8f + vein * .24f + halo * .13f) * rightFlame;
+                return new Color(.004f + grain * .002f + aether * .025f,
+                    .007f + aether * .11f + glow * .006f,
+                    .015f + aether * .67f + glow * .012f, 1);
             }
             for (int y = 0; y < rows; y++)
                 for (int x = 0; x < columns; x++)

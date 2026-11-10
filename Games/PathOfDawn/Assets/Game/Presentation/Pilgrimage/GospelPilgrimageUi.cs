@@ -29,13 +29,14 @@ namespace PathOfDawn.Presentation
         public bool ScenicView { get; private set; }
         public bool IsScriptureNoticeVisible => scriptureNotice != null && scriptureNotice.gameObject.activeInHierarchy;
         public int ScriptureNoticeCount { get; private set; }
+        public GospelPilgrimageMapGraphic Minimap => minimap;
 
         static readonly Color Ink = new Color(.018f, .037f, .044f, .92f);
-        static readonly Color Glass = new Color(.031f, .071f, .077f, .88f);
+        static readonly Color Glass = new Color(.036f, .060f, .054f, .91f);
         static readonly Color Teal = new Color(.31f, .63f, .69f, .80f);
-        static readonly Color LineColor = new Color(.50f, .74f, .75f, .45f);
-        static readonly Color White = new Color(.91f, .96f, .96f);
-        static readonly Color Quiet = new Color(.62f, .76f, .79f);
+        static readonly Color LineColor = new Color(.66f, .58f, .39f, .48f);
+        static readonly Color White = new Color(.96f, .95f, .89f);
+        static readonly Color Quiet = new Color(.71f, .77f, .72f);
         static readonly Color Gold = new Color(.89f, .79f, .52f);
         static readonly Color Mint = new Color(.37f, .87f, .74f);
 
@@ -49,15 +50,21 @@ namespace PathOfDawn.Presentation
         Image scriptureFill, objectiveFill, runTint;
         Button interact;
         DawnPointerPad movementPad;
+        GospelPilgrimageMapGraphic minimap;
+        TextMeshProUGUI mapPlace, mapDestination;
         Vector2 lastMove;
         float noticeUntil, nextHudUpdate, scriptureNoticeUntil;
         Rect youngPortraitUv = new Rect(0, 0, .455f, 1);
         Rect adultPortraitUv = new Rect(.5f, 0, .5f, 1);
+        Rect livingYoungPortraitUv = new Rect(0, 0, .5f, 1);
+        Rect livingAdultPortraitUv = new Rect(.5f, 0, .5f, 1);
         static Sprite solidSprite;
         readonly DawnUi canopySkin = new DawnUi { ModernStyle = true };
 
         public void SetPortraitRegions(Rect youngUv, Rect adultUv)
         { youngPortraitUv = youngUv; adultPortraitUv = adultUv; }
+        public void SetLivingPortraitRegions(Rect youngUv, Rect adultUv)
+        { livingYoungPortraitUv = youngUv; livingAdultPortraitUv = adultUv; }
 
         public void Build(TMP_FontAsset koreanFont)
         {
@@ -143,6 +150,7 @@ namespace PathOfDawn.Presentation
             // Fading the entire layer exposed the future exploration field.
             if (isModal && view != "story") layer.gameObject.AddComponent<GospelUiMotion>();
             movementPad = null; runTint = null;
+            minimap = null; mapPlace = mapDestination = null;
             objective = navigation = progressText = ageText = helpText = null;
             scriptureFill = objectiveFill = null; interact = null;
             if (veil) Panel(layer, "Atmospheric menu shade", 0, 0, 1280, 720, new Color(.008f, .022f, .039f, .76f));
@@ -180,7 +188,7 @@ namespace PathOfDawn.Presentation
             Begin("journey", false, false);
             // A small identity/goal strip leaves the painted field open. These
             // are Scripture/story records, never invented health or mana bars.
-            var hero = Panel(layer, "Character identity", 24, 20, 288, 74, new Color(.018f, .045f, .049f, .72f), true);
+            var hero = Panel(layer, "Character identity", 24, 20, 288, 88, new Color(.018f, .045f, .039f, .84f), true);
             hero.GetComponent<Image>().raycastTarget = true;
             var identityHit = hero.gameObject.AddComponent<Button>();
             identityHit.targetGraphic = hero.GetComponent<Image>();
@@ -189,14 +197,19 @@ namespace PathOfDawn.Presentation
             var identity = B(hero, Adult(journey) ? "예수님" : "소년 예수님", 73, 3, 203, 34, OnStatus);
             identity.GetComponent<Image>().color = new Color(.06f, .16f, .17f, .12f);
             ageText = Text(hero, Age(journey), 84, 41, 187, 24, 16, Quiet);
-            var goal = Panel(layer, "Current story goal", 330, 20, 564, 74, new Color(.018f, .045f, .049f, .65f), true);
-            Text(goal, "지금의 이야기", 18, 10, 140, 18, 14, Gold);
+            scriptureFill = Bar(hero, "Discovered Scripture progress", 84, 73, 86, 3, Mint, Fraction(journey.CodexCount, journey.CodexTotal));
+            objectiveFill = Bar(hero, "Journey progress", 180, 73, 92, 3, Gold, Fraction(Completed(journey), GoalCount(journey)));
+            var goal = Panel(layer, "Current story goal", 330, 20, 564, 88, new Color(.018f, .045f, .039f, .80f), true);
+            Rule(goal, 0, 13, 3, 60, Gold);
+            Text(goal, "지금의 만남", 18, 10, 140, 18, 14, Gold);
             objective = Text(goal, GoalTitle(journey), 18, 32, 529, 31, 24, White, TextAlignmentOptions.TopLeft, true);
+            Line(goal, 18, 74, 529, new Color(.66f, .58f, .39f, .20f));
             B(layer, "성경", 923, 25, 77, 52, OnRead);
             B(layer, "기록", 1009, 25, 77, 52, OnJournal);
             B(layer, "가방", 1095, 25, 77, 52, OnInventory);
             B(layer, "메뉴", 1181, 25, 77, 52, OnPause);
             progressText = Text(layer, "", 936, 89, 318, 25, 17, White, TextAlignmentOptions.Right);
+            BuildMinimap();
             var prompt = Panel(layer, "Current destination", 317, 626, 610, 65, new Color(.018f, .045f, .049f, .72f), true);
             navigation = Text(prompt, "", 17, 8, 576, 27, 22, Gold);
             helpText = Text(prompt, GoalDescription(journey), 17, 38, 576, 22, 17, White);
@@ -214,11 +227,65 @@ namespace PathOfDawn.Presentation
             B(touch, "대시", 1003, 552, 118, 64, OnDash);
             if (!DawnPlatformInput.UseTouchControls)
                 Text(layer, "W A S D 이동   Shift 달리기   Ctrl 대시   Space 점프   E 대화   I 인물   B 가방   M 성경", 28, 700, 1040, 18, 15, Quiet);
-            scenicButton = B(frame, "풍경 보기", 1141, 124, 111, 38, ToggleScenicView).GetComponent<RectTransform>();
+            scenicButton = B(frame, "풍경 보기", 1141, 366, 111, 38, ToggleScenicView).GetComponent<RectTransform>();
             notice.SetAsLastSibling();
             progressText.text = "성경 " + journey.CodexCount + " / " + journey.CodexTotal + "    여정 " + Completed(journey) + " / " + GoalCount(journey);
             navigation.text = journey.IsComplete ? CompletedTitle(journey) : "다음 만남을 향해 걸어 보세요.";
             nextHudUpdate = 0;
+        }
+
+        void BuildMinimap()
+        {
+            var app = GetComponent<GospelPilgrimageApp>();
+            var panel = Panel(layer, "Field minimap", 1002, 132, 250, 222,
+                new Color(.021f, .043f, .036f, .94f), true);
+            panel.GetComponent<Image>().raycastTarget = true;
+            var open = panel.gameObject.AddComponent<Button>(); open.targetGraphic = panel.GetComponent<Image>();
+            open.onClick.AddListener(() => Invoke(ShowMap));
+            mapPlace = Text(panel, "여정 지도", 13, 10, 194, 24, 17, Gold, TextAlignmentOptions.MidlineLeft, true);
+            Text(panel, "북", 218, 11, 21, 23, 14, Quiet, TextAlignmentOptions.Center);
+            var area = Rect(panel, "North-up live map", 11, 39, 228, 137);
+            area.gameObject.AddComponent<CanvasRenderer>();
+            minimap = area.gameObject.AddComponent<GospelPilgrimageMapGraphic>(); minimap.Bind(app);
+            mapDestination = Text(panel, "", 13, 181, 224, 22, 16, White, TextAlignmentOptions.MidlineLeft);
+            Text(panel, "나 / 사람 / 만남", 13, 203, 144, 19, 14, Quiet);
+            Text(panel, "지도 펼치기", 157, 203, 80, 19, 14, Gold, TextAlignmentOptions.Right);
+        }
+
+        public void ShowMap()
+        {
+            var app = GetComponent<GospelPilgrimageApp>();
+            if (app == null || app.World == null || app.Player == null || !app.InGame) return;
+            Begin("map"); Header("길과 만남", app.World.Chapter == "baptism" ? "요단강의 길" : "유월절의 길");
+            var page = Panel(layer, "Unfolded field map", 35, 136, 844, 466,
+                new Color(.025f, .055f, .041f, .96f), true);
+            var area = Rect(page, "North-up full live map", 16, 37, 812, 409);
+            area.gameObject.AddComponent<CanvasRenderer>();
+            var graphic = area.gameObject.AddComponent<GospelPilgrimageMapGraphic>(); graphic.Bind(app);
+            Text(page, "북", 778, 6, 46, 26, 18, Gold, TextAlignmentOptions.Center);
+            Text(page, "흰 화살표  내 위치       푸른 점  사람들       금빛 마름모  다음 만남", 20, 8, 730, 22, 16, Quiet);
+            var people = Panel(layer, "People and next meeting", 902, 136, 342, 466, Glass, true);
+            Text(people, "다음 만남", 22, 20, 296, 27, 18, Gold, TextAlignmentOptions.TopLeft, true);
+            string name = app.Chronicle != null && !app.Chronicle.IsComplete ? app.Chronicle.CurrentQuest.NpcName : "여정의 기록";
+            Text(people, name, 22, 57, 296, 42, 30, White, TextAlignmentOptions.TopLeft, true);
+            float distance = Vector2.Distance(new Vector2(app.Player.Position.x, app.Player.Position.z),
+                new Vector2(app.ObjectivePosition.x, app.ObjectivePosition.z));
+            Text(people, app.Chronicle != null && app.Chronicle.IsComplete ? "발견한 말씀을 다시 읽어 보세요." : "지금 있는 곳에서 " + distance.ToString("0.0") + "m",
+                22, 105, 296, 30, 19, Quiet);
+            Rule(people, 22, 151, 296, 1, LineColor);
+            Text(people, "같은 길 위의 사람들", 22, 173, 296, 30, 20, Gold, TextAlignmentOptions.TopLeft, true);
+            int row = 0;
+            if (app.People != null)
+                foreach (var person in app.People.Markers)
+                {
+                    if (row >= 5) break;
+                    Text(people, person.DisplayName, 23, 215 + row * 42, 155, 28, 19, White);
+                    Text(people, person.IsWalking ? "걷는 중" : "머무는 중", 179, 218 + row * 42, 138, 26, 16, Quiet, TextAlignmentOptions.Right);
+                    row++;
+                }
+            B(layer, "여정 기록", 35, 632, 241, 59, OnJournal);
+            B(layer, "성경 펼치기", 293, 632, 241, 59, OnRead);
+            B(layer, "여정으로", 1000, 632, 244, 59, OnResume, true, true);
         }
 
         void BuildMovementPad(Transform parent)
@@ -252,10 +319,22 @@ namespace PathOfDawn.Presentation
             SetFill(scriptureFill, Fraction(journey.CodexCount, journey.CodexTotal));
             SetFill(objectiveFill, Fraction(Completed(journey), GoalCount(journey)));
             var story = journey.Chronicle;
+            if (mapPlace != null) mapPlace.text = story != null && story.IsAdult ? "요단강 주변" : "유월절의 길";
+            if (mapDestination != null)
+            {
+                float mapDistance = Vector2.Distance(new Vector2(player.x, player.z), new Vector2(target.x, target.z));
+                mapDestination.color = canInteract ? Mint : Gold;
+                mapDestination.text = journey.IsComplete ? "발견한 말씀의 여정" : (story?.CurrentQuest?.NpcName ?? "다음 만남") + "  " + mapDistance.ToString("0.0") + "m";
+            }
             if (journey.IsComplete)
             { navigation.text = CompletedTitle(journey); helpText.text = "성경을 펼쳐 발견한 말씀을 다시 읽어 보세요."; return; }
             string npc = story?.CurrentQuest?.NpcName ?? "다음 만남";
             float distance = new Vector2(target.x - player.x, target.z - player.z).magnitude;
+            bool walkingTogether = false;
+            var app = GetComponent<GospelPilgrimageApp>();
+            if (app != null && app.People != null)
+                foreach (var person in app.People.Markers)
+                    if (person.IsCurrentObjective) { walkingTogether = person.IsWalking; break; }
             var offset = new Vector2(target.x - player.x, target.z - player.z);
             if (view != null)
             {
@@ -264,7 +343,9 @@ namespace PathOfDawn.Presentation
                 offset = new Vector2(to.x - from.x, to.y - from.y);
             }
             navigation.color = canInteract ? Mint : Gold;
-            navigation.text = canInteract
+            navigation.text = walkingTogether && !canInteract
+                ? npc + " · 걷는 중  " + distance.ToString("0.0") + "m"
+                : canInteract
                 ? npc + " · 대화 가능  " + (DawnPlatformInput.UseTouchControls ? "[대화]" : "[E]")
                 : npc + " · " + EncounterDirection(offset) + "  " + distance.ToString("0.0") + "m";
             helpText.text = GoalDescription(journey);
@@ -447,11 +528,11 @@ namespace PathOfDawn.Presentation
             // keep their correctly identified original illustrations.
             if (chronicle.CurrentDialogue?.PortraitKey == "jesus")
             {
-                var texture = Resources.Load<Texture2D>("Art/GospelPilgrimage/Actors/portraits");
+                var texture = PortraitTexture(Adult(chronicle), out var portraitUv);
                 if (texture != null)
                     foreach (var art in book.Frame.GetComponentsInChildren<RawImage>())
                         if (art.gameObject.name == "Painted speaker")
-                        { art.texture = texture; art.uvRect = PortraitCrop(texture, Adult(chronicle) ? adultPortraitUv : youngPortraitUv, 164, 216); }
+                        { art.texture = texture; art.uvRect = PortraitCrop(texture, portraitUv, 164, 216); }
             }
         }
 
@@ -490,10 +571,18 @@ namespace PathOfDawn.Presentation
 
         void PaintPortrait(Transform parent, bool adult, float x, float y, float width, float height)
         {
-            var texture = Resources.Load<Texture2D>("Art/GospelPilgrimage/Actors/portraits");
+            var texture = PortraitTexture(adult, out var portraitUv);
             if (texture == null) return;
             var image = Rect(parent, "Illustrated " + (adult ? "adult" : "young") + " Jesus portrait", x, y, width, height).gameObject.AddComponent<RawImage>();
-            image.texture = texture; image.uvRect = PortraitCrop(texture, adult ? adultPortraitUv : youngPortraitUv, width, height); image.raycastTarget = false;
+            image.texture = texture; image.uvRect = PortraitCrop(texture, portraitUv, width, height); image.raycastTarget = false;
+        }
+
+        Texture2D PortraitTexture(bool adult, out Rect uv)
+        {
+            var natural = Resources.Load<Texture2D>("Art/GospelLiving/portraits");
+            if (natural != null) { uv = adult ? livingAdultPortraitUv : livingYoungPortraitUv; return natural; }
+            uv = adult ? adultPortraitUv : youngPortraitUv;
+            return Resources.Load<Texture2D>("Art/GospelPilgrimage/Actors/portraits");
         }
 
         static Rect PortraitCrop(Texture2D texture, Rect source, float width, float height)
@@ -588,8 +677,8 @@ namespace PathOfDawn.Presentation
             var image = r.GetComponent<Image>(); image.raycastTarget = true;
             var b = r.gameObject.AddComponent<Button>(); b.targetGraphic = image; b.interactable = enabled;
             var colors = b.colors; colors.normalColor = Color.white;
-            colors.highlightedColor = new Color(.65f, .95f, 1); colors.selectedColor = new Color(.70f, .95f, .98f);
-            colors.pressedColor = new Color(.40f, .70f, .79f); colors.disabledColor = new Color(.47f, .56f, .60f, .6f);
+            colors.highlightedColor = new Color(1f, .93f, .70f); colors.selectedColor = new Color(.94f, .91f, .77f);
+            colors.pressedColor = new Color(.64f, .72f, .57f); colors.disabledColor = new Color(.47f, .56f, .50f, .6f);
             colors.fadeDuration = .12f; b.colors = colors;
             if (!string.IsNullOrEmpty(label))
                 Text(r, label, 12, 0, width - 24, height, Mathf.Min(24, height * .46f), White, TextAlignmentOptions.Midline, true);

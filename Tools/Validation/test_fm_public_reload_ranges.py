@@ -800,5 +800,37 @@ class CanonDecodedPregestureRangesTests(unittest.TestCase):
                 self.rejects(mutate)
 
 
+class LivingRevisionMixin:
+    """Run the unchanged positive/negative lifecycle cases for the new revision.
+
+    Only the exact prior valid revision is translated. Intentionally wrong
+    revisions in negative cases remain wrong, and caller inputs stay immutable.
+    """
+    def prove(self, case):
+        translated = copy.deepcopy(case)
+        if translated.get('revision') == 'fm-canon-2026-11-09':
+            translated['revision'] = 'fm-classic-ui-2026-11-10'
+        before = copy.deepcopy(translated)
+        result = super().prove(translated)
+        self.assertEqual(translated, before)
+        return result
+
+
+class LivingPublicReloadRangesTests(LivingRevisionMixin, CanonPublicReloadRangesTests):
+    pass
+
+
+class LivingInitialPublicReloadRangesTests(LivingRevisionMixin, CanonInitialPublicReloadRangesTests):
+    pass
+
+
+class LivingPendingSelectionRangesTests(LivingRevisionMixin, CanonPendingSelectionRangesTests):
+    pass
+
+
+class LivingDecodedPregestureRangesTests(LivingRevisionMixin, CanonDecodedPregestureRangesTests):
+    pass
+
+
 if __name__ == '__main__':
     unittest.main()

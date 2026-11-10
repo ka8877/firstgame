@@ -17,6 +17,7 @@ namespace PathOfDawn.Presentation
         public GospelJourney Journey { get; private set; }
         public GospelChronicle Chronicle => Journey?.Chronicle;
         public GospelPilgrimageWorld World { get; private set; }
+        public GospelPilgrimagePeople People { get; private set; }
         public GospelPilgrimageMotor Player { get; private set; }
         public GospelPilgrimageActor Actor { get; private set; }
         public GospelPilgrimageCamera CameraRig { get; private set; }
@@ -29,17 +30,19 @@ namespace PathOfDawn.Presentation
         public GospelReading LastAcquiredReading { get; private set; }
         public GospelNativityVoice Voice { get; private set; }
         public float Zoom => CameraRig != null ? CameraRig.Zoom : 7.2f;
-        public Vector3 ObjectivePosition => Chronicle?.CurrentQuest != null
-            ? World.PositionForQuest(Chronicle.CurrentQuest) : new Vector3(34, World.HeightAt(34, 7), 7);
+        public Vector3 ObjectivePosition => People?.CurrentPerson != null ? People.CurrentPerson.Position
+            : Chronicle?.CurrentQuest != null ? World.PositionForQuest(Chronicle.CurrentQuest)
+            : World != null ? new Vector3(34, World.HeightAt(34, 7), 7) : Vector3.zero;
         public string ObjectiveName => Chronicle == null ? "말씀의 여정" : Chronicle.IsComplete
             ? "요단강의 여정 완료" : Chronicle.CurrentQuest.Title;
         public bool CanInteract => InGame && Chronicle != null && !Chronicle.IsComplete &&
             !Chronicle.CurrentQuest.IsPrologue &&
+            (Chronicle.Stage != GospelQuestStage.Travel || Mathf.Abs(Player.Position.x - Chronicle.CurrentQuest.X) <= GospelChronicle.InteractionRadius) &&
             Vector2.Distance(new Vector2(Player.Position.x, Player.Position.z),
                 new Vector2(ObjectivePosition.x, ObjectivePosition.z)) <= GospelChronicle.InteractionRadius;
 
         const string ActiveSlotKey = "GOSPEL.activeSlot";
-        string activeSlot, renderedChapter, renderedNpcQuest;
+        string activeSlot, renderedChapter;
         Transform npcRoot;
         GospelStorybookAudio music;
         float saveClock;
@@ -65,6 +68,8 @@ namespace PathOfDawn.Presentation
             Player.Enabled = false;
             Actor = GospelPilgrimageActor.Build(root.transform, SceneCamera);
             Actor.SetGroundSampler(World.HeightAt);
+            People = new GameObject("The living pilgrim company").AddComponent<GospelPilgrimagePeople>();
+            People.Initialize(transform, World, SceneCamera, Player);
             CameraRig = SceneCamera.gameObject.AddComponent<GospelPilgrimageCamera>();
             CameraRig.Initialize(SceneCamera, root.transform);
             CameraRig.InputEnabled = false;
@@ -107,6 +112,7 @@ namespace PathOfDawn.Presentation
             if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame ||
                 keys != null && keys.anyKey.wasPressedThisFrame) music.NotifyUserGesture();
             Actor.SetMotion(Player.Velocity, Player.IsGrounded, Player.FacingYaw);
+            People?.Tick(InGame && Journey != null && (Ui.CurrentView == "journey" || Ui.CurrentView == "story"), Time.deltaTime);
             if (!InGame || Journey == null) return;
             if (keys != null)
             {
@@ -120,6 +126,7 @@ namespace PathOfDawn.Presentation
             Player.Enabled = !IsModal;
             CameraRig.InputEnabled = !IsModal;
             if (IsModal) return;
+            World.SetObjective(ObjectivePosition, !Chronicle.IsComplete);
             Ui.UpdateHud(Journey, Player.Position, ObjectivePosition, CanInteract, SceneCamera);
             saveClock += Time.deltaTime;
             if (saveClock >= 25) { Save(false); saveClock = 0; }
@@ -146,6 +153,7 @@ namespace PathOfDawn.Presentation
             activeSlot = NewSlot();
             MigratedSourceSlot = "";
             LastAcquiredReading = null;
+            People.ResetJourney();
             renderedChapter = null;
             InGame = true;
             saveClock = 0;
@@ -167,7 +175,9 @@ namespace PathOfDawn.Presentation
             try
             {
                 var load = GospelPilgrimageSave.Prepare(GospelSaveCodec.Decode(payload));
+                var peopleSave = GospelSaveCodec.DecodePeople(payload);
                 Journey = load.Journey;
+                People.ResetJourney();
                 LastAcquiredReading = null;
                 MigratedSourceSlot = load.RequiresFork ? sourceSlot : "";
                 activeSlot = load.RequiresFork ? NewSlot() : sourceSlot;
@@ -178,6 +188,7 @@ namespace PathOfDawn.Presentation
                 Player.SetPose(load.CanRestorePose
                     ? new Vector3(Journey.PlayerX, Journey.PlayerY, Journey.PlayerZ)
                     : World.SpawnForChapter(Chronicle.ChapterId), load.CanRestorePose ? Journey.PlayerYaw : 180);
+                if (load.CanRestorePose && !load.RequiresFork) People.Restore(peopleSave);
                 CameraRig.Snap();
                 Resume();
                 if (load.RequiresFork)
@@ -189,6 +200,7 @@ namespace PathOfDawn.Presentation
             }
             catch (Exception exception)
             {
+                Debug.Log("FIRSTGAME_PEOPLE_RESTORE_REJECTED stage=load exception=" + exception.GetType().Name + " message=" + exception.Message);
                 activeSlot = sourceSlot;
                 ShowTitle();
                 Ui.Toast("저장 원본을 보존했습니다. " + exception.Message);
@@ -202,7 +214,7 @@ namespace PathOfDawn.Presentation
             var p = Player.Position;
             Journey.SetPlayerPose(p.x, p.y, p.z, Player.FacingYaw);
             bool saved = PersistentSaves.TrySave(activeSlot, GospelJourney.GameId, GospelJourney.SchemaVersion,
-                GospelJourney.ContentVersion, GospelSaveCodec.Encode(Journey.CaptureSave()), out var error);
+                GospelJourney.ContentVersion, GospelSaveCodec.Encode(Journey.CaptureSave(), People?.Capture()), out var error);
             if (saved) { PlayerPrefs.SetString(ActiveSlotKey, activeSlot); PlayerPrefs.Save(); }
             if (showNotice || !saved) Ui.Toast(saved ? "현재 위치와 말씀 기록을 저장했습니다." : "저장하지 못했습니다. " + error);
             return saved;
@@ -270,6 +282,7 @@ namespace PathOfDawn.Presentation
                 // returns and old Reading saves keep their recorded heading.
                 Player.StopAndFace(ObjectivePosition);
             }
+            World.SetObjective(ObjectivePosition, true);
             Save(false);
             if (Chronicle.Stage == GospelQuestStage.Reading) ShowStory();
         }
@@ -324,18 +337,8 @@ namespace PathOfDawn.Presentation
 
         void RefreshNpc()
         {
-            if (Chronicle == null || Chronicle.IsComplete || Chronicle.CurrentQuest.IsPrologue)
-            { if (npcRoot != null) npcRoot.gameObject.SetActive(false); return; }
-            var quest = Chronicle.CurrentQuest;
-            if (renderedNpcQuest == quest.Id && npcRoot != null) { npcRoot.gameObject.SetActive(true); return; }
-            if (npcRoot != null) { npcRoot.gameObject.SetActive(false); Destroy(npcRoot.gameObject); }
-            npcRoot = new GameObject("Encounter · " + quest.NpcName).transform;
-            npcRoot.SetParent(transform, false);
-            npcRoot.position = World.PositionForQuest(quest);
-            var person = GospelPilgrimageActor.BuildNpc(npcRoot, SceneCamera, quest.NpcId,
-                quest.Portrait == "mary" ? 1.63f : 1.78f);
-            person.SetGroundSampler(World.HeightAt);
-            renderedNpcQuest = quest.Id;
+            People.Synchronize(Chronicle);
+            npcRoot = People.CurrentPerson != null ? People.CurrentPerson.RootTransform : null;
         }
 
         public void ShowBible()

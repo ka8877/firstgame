@@ -23,6 +23,15 @@ namespace PathOfDawn.Presentation
         public int SceneryBatchCount { get; private set; }
         public Transform TempleRoot { get; private set; }
         public Transform JordanRoot { get; private set; }
+        public IReadOnlyList<Vector2> MapTrail => Chapter == "baptism" ? jordanTrail : templeTrail;
+        public IReadOnlyList<Rect> MapCourts => Chapter == "baptism" ? noCourts : templeCourts;
+
+        static readonly IReadOnlyList<Rect> templeCourts = Array.AsReadOnly(new[] {
+            new Rect(-3, -5, 36, 23), new Rect(-16, -11, 8, 7), new Rect(-34, -11.5f, 13, 10)
+        });
+        static readonly IReadOnlyList<Rect> noCourts = Array.AsReadOnly(new Rect[0]);
+        IReadOnlyList<Vector2> templeTrail = Array.AsReadOnly(new Vector2[0]);
+        IReadOnlyList<Vector2> jordanTrail = Array.AsReadOnly(new Vector2[0]);
 
         static readonly Dictionary<string, float> QuestDepth = new Dictionary<string, float> {
             { "nazareth-departure", -5 }, { "pilgrim-spring", -8 },
@@ -130,6 +139,10 @@ namespace PathOfDawn.Presentation
                 if (!quest.IsPrologue && (quest.ChapterId == "baptism") == river)
                     route.Add(PositionForQuest(quest));
             BuildTrail(river);
+            // These are the same authored samples that paint the walking path,
+            // retained separately because construction subsequently builds Jordan.
+            if (river) jordanTrail = Array.AsReadOnly(trail.ToArray());
+            else templeTrail = Array.AsReadOnly(trail.ToArray());
             BuildTerrain(root, river);
             if (river) BuildRiver(root);
             else { BuildDepartureCourt(root); BuildTemple(root); }
