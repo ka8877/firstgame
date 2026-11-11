@@ -1091,6 +1091,11 @@
         "settleMs": 850
       },
       {
+        "type": "review_input",
+        "name": "living-owned-art-loaded-review",
+        "expected": "Root가 현재 원본에서 네 카드의 전체 이미지, 보유55장과 SP200을 직접 확인한다. 이미지가 아직 로드되지 않았으면 ordinary wait 후 새 원본을 다시 캡처하여 확인한다. 빈 카드나 그라데이션만 있는 이미지는 승인하지 않는다. 저장 데이터, JavaScript 게임 상태 또는 Unity 필드를 읽거나 주입하지 않고 일반 입력과 대기만 사용한다. 이 확인은 필수 owned-fifty-five 원본의 별도 Root 시각 승인을 대신하지 않는다."
+      },
+      {
         "type": "checkpoint",
         "name": "owned-fifty-five",
         "expected": "Actual55owned/27distinct and200SP after one opening."

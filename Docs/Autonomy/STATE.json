@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-11T05:28:41.912522+00:00",
+  "updatedUtc": "2026-11-11T05:51:28.001476+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,7 +13,7 @@
   },
   "activeWork": {
     "id": "ClientMotion-2026-11-11",
-    "status": "frozen-source-selectedCardWeb01-GospelWeb02-and-Builds02-passed-sourcecommit-CI-browser-public-pending",
+    "status": "source-C-pushed-PR6-open-CardDesktopBrowser01-functional-pass-visually-rejected-relocation-running-Browser02-planned",
     "branch": "codex/client-motion-2026-11-11",
     "baseMainCommit": "80b514a492f53efae661544d1e1a2f0a7ee035aa",
     "executionOwner": "/root",
@@ -44,7 +44,7 @@
     "sourceProgress": {
       "CardUi": "FinalClient06 Native9/0/0/31PNG with11selectedRootoriginals source/build approved; CardWeb01 actualpassed on88c525d0/finalguard0/ownedempty. No fresh browser/fullparity/publicapproval.",
       "Characters": "Motion05Native27/0/0/58PNG/11selectedRootsource-buildoriginals approved. SelectedGospelWeb02 actuallypassed at05:25:25.904869UTC on ea8083bd withmaximum1200/recordedwindow1200.0; currentCardWeb01+GospelWeb02 strictBuilds02 passed. EarlierGospelWeb01/Builds01failure history retained.",
-      "validationTooling": "Native9/27/Core311/media123 and selectedCardWeb01+GospelWeb02 passed. Builds02 actualcheckbuildspassed/commandexit0/finalguard0/ownedempty. Sourcecommit/draftPR/CI/fourlocal/twopublicbrowser/stage/deployment remain unexecuted/planned."
+      "validationTooling": "Actualcandidatee8480a12pushed/PR6createdattached. CardDesktopBrowser01functionalwrapperpassed butRootrejectedfirstowned55fourblankimages; nofinalvisualapproval. Exact92filerelocationrunning; threeCardplansaddoneordinaryreview_inputbeforeowned55, required315/PCM/reloadsunchanged. Product/Core/Native/Web/gate/harnessunchanged; newCIcompletionunobserved."
     },
     "referenceAndLicenseFacts": {
       "clientLogin": {
@@ -387,9 +387,47 @@
         "requiredLocalRuns": 4,
         "requiredOverallRuns": 6,
         "completedCurrentRuns": 0,
-        "status": "pending-fresh-current-source-input-audio-save-reload-and-Root-original-review"
+        "approvedLocalRuns": 0,
+        "approvedOverallRuns": 0,
+        "status": "zero-current-final-approved-runs-CardDesktop01-rejected-Browser02-full-rerun-planned",
+        "retainedAttempts": {
+          "CardDesktopBrowser01": {
+            "attempt": "Browser01",
+            "game": "FantasyCards",
+            "profile": "Desktop720",
+            "functionalStatus": "passed",
+            "finalVisualStatus": "root-rejected-no-final-approval",
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/BrowserRuns/FantasyCards/Desktop720/Browser01/summary.json",
+              "bytes": 12240,
+              "sha256": "d77bccb4b3c5dca591941d076e7fff5ecb28c6e5b9ebdb56f8e783510803d1c3"
+            },
+            "observedIssue": "Actual owned-fifty-five first view had four blank card images. Same four cards appeared normally in other deck shots; persistent product bug not established.",
+            "requiredMarksActuallyRecorded": 47,
+            "additionalOriginalsDirectlyViewed": 4,
+            "ownedFiftyFiveApproved": false,
+            "preservation": {
+              "status": "actual-relocation-running-not-completed",
+              "actualFiles": 92,
+              "destination": "Artifacts/Validation/ClientMotion-2026-11-11/BrowserHistory/FantasyCards/Desktop720/Browser01",
+              "record": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/card-desktop01-visual-rejection-relocation.json",
+              "attempt": "CardDesktop01Relocation01",
+              "executionSessionAtRoot": 17557
+            },
+            "scope": "Mechanical functional pass and direct image observations do not establish final browser/visual acceptance. Root47requiredmarks plus4additionalviews are not a claim of all55approval."
+          }
+        },
+        "nextActualRun": "CardDesktopBrowser02 complete rerun planned after exact plan/docs commit/push; not executed yet."
       },
-      "sourceCi": "pending-no-current-source-CI-result",
+      "sourceCi": {
+        "candidateCommit": "e8480a127d32b65d8beb5702bf64045383db53ae",
+        "pushStatus": "actually-pushed",
+        "pullRequest": 6,
+        "pullRequestUrl": "https://github.com/ka8877/firstgame/pull/6",
+        "pullRequestStatus": "created-attached",
+        "ciCompletion": "not-yet-observed",
+        "additionalPlanDocsCommit": "planned-not-yet-observed"
+      },
       "stagePagesAndPublicDelivery": "pending-no-new-stage-or-deployment",
       "historicalProofScope": "LivingRpgClassic and CanonArt completed proofs/failures remain historical; none is reused as a new ClientMotion pass.",
       "motionAssets": {
@@ -441,7 +479,32 @@
         },
         "GospelMotion03": "Actual failed wrapper retained; laterMotion05 pass does not relabel it.",
         "GospelMotion04": "Actual failed wrapper retained; laterMotion05 pass does not relabel it.",
-        "Builds01": "Actual failed strict aggregate: GospelWeb01 recorded3600.000000000002 beyond3600s. ProducerWebpasses remain original, not wholeWeb acceptance; no source/gate/driver/evidence changes."
+        "Builds01": "Actual failed strict aggregate: GospelWeb01 recorded3600.000000000002 beyond3600s. ProducerWebpasses remain original, not wholeWeb acceptance; no source/gate/driver/evidence changes.",
+        "CardDesktopBrowser01": {
+          "attempt": "Browser01",
+          "game": "FantasyCards",
+          "profile": "Desktop720",
+          "functionalStatus": "passed",
+          "finalVisualStatus": "root-rejected-no-final-approval",
+          "wrapper": {
+            "file": "Artifacts/Validation/ClientMotion-2026-11-11/BrowserRuns/FantasyCards/Desktop720/Browser01/summary.json",
+            "bytes": 12240,
+            "sha256": "d77bccb4b3c5dca591941d076e7fff5ecb28c6e5b9ebdb56f8e783510803d1c3"
+          },
+          "observedIssue": "Actual owned-fifty-five first view had four blank card images. Same four cards appeared normally in other deck shots; persistent product bug not established.",
+          "requiredMarksActuallyRecorded": 47,
+          "additionalOriginalsDirectlyViewed": 4,
+          "ownedFiftyFiveApproved": false,
+          "preservation": {
+            "status": "actual-relocation-running-not-completed",
+            "actualFiles": 92,
+            "destination": "Artifacts/Validation/ClientMotion-2026-11-11/BrowserHistory/FantasyCards/Desktop720/Browser01",
+            "record": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/card-desktop01-visual-rejection-relocation.json",
+            "attempt": "CardDesktop01Relocation01",
+            "executionSessionAtRoot": 17557
+          },
+          "scope": "Mechanical functional pass and direct image observations do not establish final browser/visual acceptance. Root47requiredmarks plus4additionalviews are not a claim of all55approval."
+        }
       },
       "environmentIdle02": {
         "status": "completed-guard0-ownedempty-after-brief-reconnect",
@@ -493,7 +556,7 @@
         "reviewScope": "Root directly viewed all five corrected neutral one-body atlases and11selectedcurrentMotion05Native originals. Source/build approval only; not all58Native images or fresh browser/public approval."
       },
       "browserPlans": {
-        "status": "source-frozen-plans-not-executed",
+        "status": "revised-frozen-ordinary-review-input-added-before-owned55-no-approved-current-run",
         "FantasyCardsRequiredOriginals": {
           "Desktop720": 55,
           "Mobile844": 54,
@@ -507,7 +570,13 @@
         "requiredOriginalsTotal": 315,
         "CardPcmWindows": 4,
         "actualFullReloadsPerRunRequired": 2,
-        "scope": "Planned required current Root originals only; zero completed current browser runs/reviews claimed."
+        "scope": "Frozen current plan requirements, not completed Root reviews. Old functionalpass/rejected raw attempt retained with old binding; full newDesktop02required.",
+        "CardPlanChange": "Exactly one ordinary review_input immediately before owned55 in each of three Card plans; game/Core/Native/Web/gate/harness unchanged. Required315originals/fourCardPCM/twoactualreloads remain.",
+        "FantasyCardsPlanSha256": {
+          "Desktop720": "e02069e35defac3612352f576eb6ea7e62ef535e28570f40833515b675c8e359",
+          "Mobile844": "3895fc5b6a981d2f3dc83050d9ff0f7094ea6297591a0fb5b2d9c5a91d78665d",
+          "PublicMobile844": "37a5d999d376e180dbc53d4a11b9c74fa1ebf9c34af83d7bf5d9e353306e66aa"
+        }
       },
       "CoreBeforeHdMappingChange": {
         "historicalActualAttempt": "Core01",
@@ -572,12 +641,22 @@
     ],
     "currentPublication": "currentDeployment remains verified LivingRpgClassic source60a58c5d/gh-pages9e34c3b9/Pages42768236864. No new ClientMotion deployment claimed.",
     "next": [
-      "Root commits exactfrozen source/currentDocs, createsdraftPR and observes actualcandidateCI; these areplanned until actualreceipts.",
-      "Then execute fourlocalbrowserplans followed bynormalpublicationandtwopublicplans, with315requiredcurrentRootoriginals/fourCardPCM/twoactualreloads each. No currentbrowserrun hasexecuted yet.",
-      "Verify exactsourceCI/cleanstage/sitebudget/Pages/fullfreshGET/portal/finalstrictgate before updatingcurrentDeployment. Public remains priorM3/GH3."
+      "Finish exact92fileCardDesktop01 preservation without changing functionalpass/Rootrejection verdict.",
+      "Root commits/pushes threeordinary-input plan additions andcurrentDocs, observes actualCI, then completely reruns CardDesktopBrowser02 on the frozen game/Core/Native/Web/gate/harness. Planned only until actual receipts.",
+      "Complete fourlocal/twopubliccurrent browser runs with315requiredRootoriginals/fourCardPCM/twoactualreloads each; currently zerofinalapprovedruns.",
+      "Verify exactsourceCI/cleanstage/Pages/fullfreshGET/portal/finalstrictgate before changingcurrentDeployment; currentpublic remains priorM3/GH3."
     ],
     "automationScope": "Explicit active chat request only. Last actual automation query was0 in the previous cycle; no new scheduler or goal-card activation query is claimed and no24-hour background execution is established.",
-    "sourceFrozen": true
+    "sourceFrozen": true,
+    "selectedCandidateCommit": "e8480a127d32b65d8beb5702bf64045383db53ae",
+    "pullRequest": {
+      "number": 6,
+      "url": "https://github.com/ka8877/firstgame/pull/6",
+      "status": "created-and-attached",
+      "candidateSourceCommit": "e8480a127d32b65d8beb5702bf64045383db53ae",
+      "candidatePush": "actual-completed",
+      "newCiCompletion": "not-yet-observed"
+    }
   },
   "activeLivingRpgClassic": {
     "id": "LivingRpgClassic-2026-11-10",
@@ -1694,11 +1773,12 @@
   },
   "nextRun": {
     "id": "ClientMotion-2026-11-11",
-    "status": "ClientMotion-selected-Web-pair-Builds02-passed-sourcecommit-CI-browser-public-pending",
+    "status": "ClientMotion-PR6-created-CardDesktop01-rejected-relocation-running-new-plan-commit-Browser02-pending",
     "tasks": [
-      "Root commits exactfrozen source/currentDocs, createsdraftPR and observes actualcandidateCI; these areplanned until actualreceipts.",
-      "Then execute fourlocalbrowserplans followed bynormalpublicationandtwopublicplans, with315requiredcurrentRootoriginals/fourCardPCM/twoactualreloads each. No currentbrowserrun hasexecuted yet.",
-      "Verify exactsourceCI/cleanstage/sitebudget/Pages/fullfreshGET/portal/finalstrictgate before updatingcurrentDeployment. Public remains priorM3/GH3."
+      "Finish exact92fileCardDesktop01 preservation without changing functionalpass/Rootrejection verdict.",
+      "Root commits/pushes threeordinary-input plan additions andcurrentDocs, observes actualCI, then completely reruns CardDesktopBrowser02 on the frozen game/Core/Native/Web/gate/harness. Planned only until actual receipts.",
+      "Complete fourlocal/twopubliccurrent browser runs with315requiredRootoriginals/fourCardPCM/twoactualreloads each; currently zerofinalapprovedruns.",
+      "Verify exactsourceCI/cleanstage/Pages/fullfreshGET/portal/finalstrictgate before changingcurrentDeployment; currentpublic remains priorM3/GH3."
     ],
     "tasksAtLocalCompletion": [
       "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
@@ -1764,7 +1844,7 @@
       "owner": "e5951a59-3d2d-44a0-bb26-2ed0edf93851",
       "deadlineUtc": "2026-11-11T07:28:01.047343+00:00",
       "commitSha": "9b0705fe36a8462b8977c8b85d514b0975af5107",
-      "status": "Frozen sourceNative9/27/Core311/media123/selectedCardWeb01+GospelWeb02/strictBuilds02passed. OldBuilds01failure andoldGospelWeb01bytes preserved. Sourcecommit/PR/CI andfourlocal/twopublicbrowser/deployment pending.",
+      "status": "Candidatee8480a12pushed/PR6createdattached. Native/Core/media/selectedWeb/Builds02unchanged. FirstCardDesktopfunctionalpassbutRootrejectedowned55; relocationrunning/zeroapprovedbrowserruns. Newplan-doccommit/CI/fullBrowser02pending.",
       "startedUtc": "2026-11-11T01:28:01.047343+00:00"
     },
     "historicalBatchAtReport": {
@@ -1835,7 +1915,7 @@
       "independentIdleCheck": "InterruptedDesktopIdle01 passed ownership/idle/cleanup separately; not a Browser03 completion",
       "replacement": "CardDesktopBrowser04 actual passed and Root-finalized"
     },
-    "currentRecovery": "SelectedGospelWeb02actualpassed with1200.0swindow; Builds02actualbuildsadmissionpassed/exit0/finalguard0/ownedempty. No currentbrowser/sourceCI/newdeploy result.",
+    "currentRecovery": "SelectedNative/Core/media/Web/Builds02results retained. FirstCardDesktopfunctionalpass butRootvisualrejected, exact92filepreservationrunning. No completednewCI/finalbrowserapproval/newdeployment claimed.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
     "installedWebGLModule": true,
@@ -2005,9 +2085,10 @@
     "Card Client06 passed9/0/0 with31PNG and11selectedRootoriginals approved for source/build. Gospel Motion05 passed27/0/0 with58PNG and11selectedRootoriginals approved for source/build. No all31/all58or fresh browser/public visual approval.",
     "Frozen Gospel sourceea8083bd/XML8ccb66f4 preserves2560x1024 imports, common foot anchor with depth-only correction, NPC path start/corner/stall0.7s fixes and actual23story originalCoreX gates.",
     "Fresh Core02 actually passed311/0/0 and PublicRangeUnit02 passed123. Earlier Core/media bindings and failed/rejected preparation, Native and atlas previews remain historical.",
-    "Selected CardWeb01+GospelWeb02 andstrictBuilds02actuallypassed; GospelWeb02 maximum1200/recordedwindow1200.0. Earlier Builds01failure/oldGospelWeb01producer andbyte-identical runtime/proof preserved. Sourcecommit/draftPR/CI, fourlocal/twopublicbrowser andnewdeployment remain planned/unexecuted.",
+    "Candidatee8480a12pushed andPR6createdattached; newCIcompletionunobserved. CardDesktopBrowser01functionalpass butRootrejectedfourblankowned55images; samecarddeckshotsnormal, persistentbugunproved.47requiredmarks/4additionalviews are not all55approval; exact92filepreservationrunning. Zeroapprovedcurrentlocal/browserruns.",
     "Verified public remains priorM3/GH3/Pages42768236864. Full original parity/exact late-client identity/device performance/user aesthetic approval remain incomplete; multiplayer disabled/future update.",
-    "Fixed lease10:28–16:28KST remains acquired and source is frozen; only Docs3 progress updates are authorized here. Last automation0 was the previous query; no24-hour background or current goal activation claim."
+    "Fixed lease10:28–16:28KST remains acquired and source is frozen; only Docs3 progress updates are authorized here. Last automation0 was the previous query; no24-hour background or current goal activation claim.",
+    "ThreeCardplansaddoneordinaryreview_inputbeforeowned55;315requiredoriginals/fourPCM/tworeloads/gate/harness unchanged. Newplan/docscommit/push/fullCardDesktopBrowser02 areplanned, notcomplete."
   ],
   "knownIssuesAtLivingRpgClassicCompletion": [
     "Current LivingRpgClassic deployment, full15417-file HTTPS, six source-bound browser runs/Root reviews, strict all seal, Checkpoint01/D1 Core+helper CI, final idle, normal own release and Closure01 completed. Exact later commit/CI first saving Closure01 must be observed after writing.",
