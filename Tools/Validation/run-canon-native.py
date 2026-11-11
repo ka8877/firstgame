@@ -87,6 +87,12 @@ def main():
     parser.add_argument('attempt')
     parser.add_argument('--prepare', action='store_true')
     args = parser.parse_args()
+    npr_names = None
+    if RELEASE.IS_GOSPEL_NPR:
+        if args.game not in RELEASE.CURRENT_GAMES:
+            raise ValueError('NPR preserves Card; a new Card Native run is outside this release scope')
+        from GospelNpr.contract import native_full_names
+        npr_names = native_full_names()
     restore_controls()
     lease_path = CONTROL / 'lease.json'
     lease = json.loads(lease_path.read_bytes())
@@ -109,7 +115,10 @@ def main():
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'))
     if RELEASE.REQUIRES_EXPLICIT_ENV:
         lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
-    if RELEASE.REQUIRES_EXPLICIT_ENV:
+    if RELEASE.IS_GOSPEL_NPR:
+        names = list(npr_names)
+        expected = len(names)
+    elif RELEASE.REQUIRES_EXPLICIT_ENV:
         from canon_release_evidence import REQUIRED_NATIVE_TESTS
         names = list(REQUIRED_NATIVE_TESTS[args.game])
         expected = len(names)
@@ -129,9 +138,19 @@ def main():
     profile_copy.parent.mkdir(parents=True, exist_ok=True)
     with profile_copy.open('xb') as stream:
         stream.write(RELEASE.SOURCE.read_bytes())
+    extra_sources = []
+    for source in RELEASE.EXTRA_SOURCE_FILES:
+        raw = source.read_bytes()
+        destination = run / 'RecordedHarness' / source.relative_to(ROOT)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open('xb') as stream:
+            stream.write(raw)
+        extra_sources.append({'source': str(source.relative_to(ROOT)), 'recorded': str(destination.relative_to(ROOT)),
+                              'sha256': sha(raw), 'bytes': len(raw)})
     write(run / 'invocation.json', {'scope': 'current-product-native-only', 'game': args.game,
         'attempt': args.attempt, 'filter': names, 'expectedCount': expected,
         'releaseProfile': RELEASE.NAME,
+        **({'extraReleaseSources': extra_sources} if RELEASE.IS_GOSPEL_NPR else {}),
         'releaseConfiguration': {'source': str(RELEASE.SOURCE.relative_to(ROOT)),
             'recorded': str(profile_copy.relative_to(ROOT)), 'sha256': sha(profile_copy.read_bytes())},
         'lease': lease, 'supervisorSha256': HELPER_SHA, 'publishReady': False})
@@ -144,8 +163,12 @@ def main():
             write(run / 'summary.json', {'status': 'prepare-failed', 'execution': preparation,
                 'publishReady': False, 'scope': 'current-product-native-only'})
             return 1
+    for pin in extra_sources:
+        assert sha((ROOT / pin['source']).read_bytes()) == pin['sha256']
     result = controller.child(lane, 'native', [sys.executable, 'Tools/Validation/run-nativity-native.py',
         args.game, args.attempt], cap=EXECUTION_LIMIT_SECONDS)
+    for pin in extra_sources:
+        assert sha((ROOT / pin['source']).read_bytes()) == sha((ROOT / pin['recorded']).read_bytes()) == pin['sha256']
     summary = {'status': 'failed', 'game': args.game, 'attempt': args.attempt,
         'scope': 'current-product-native-only', 'publishReady': False,
         'execution': result, 'finishedUtc': datetime.now(timezone.utc).isoformat()}
@@ -165,3 +188,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

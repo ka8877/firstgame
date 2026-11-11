@@ -1,3 +1,15 @@
+## 실제 카메라 수정 독립 재개 소유권 — 2026-11-11 19:17 UTC
+
+원 NPR·첫 Resume는 각각 실제 독립 FinalIdle·정상 자기 해제·available을 확인한 이력입니다. 현재 실행 CONTROL은 `Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11`이며 owner `147d52c3-115d-489e-bab7-3c025a48e60e`, lock commit `5b19cb80887d5396fbaffd041d303abecfa56f68`, 실제 고정 기간은 2026-11-11T19:17:59.790247Z부터 2026-11-12T01:17:59.790247Z까지입니다. 이전 lease를 갱신하거나 재사용하지 않습니다. 새 `activate-camera-resume.sh`·`run-owned-npr-resume.py`를 사용하며 OUT/build/proof/stage/profile/Card/Root 경로는 원 NPR 기준 그대로입니다. Root만 실행/Git/배포하고 소스 담당은 지정 Draft만 작성합니다. C4 Desktop02의110/66 통과는 보존 이력이며 Mobile01 필수 대시 후 우물 카메라의 Root 시각 거절·중단/실패를 대체하지 않습니다. 현재 카메라397cfa·Smokea661e0·전체 소스3e2583d0의 Native14는15/0/0으로 통과했고 Root가 현재29원본을 직접 검토했습니다. 실제 우물·기둥 자연스러운 측면 시야와 물리·저장 보존을 확인한 제한적 Native 검토이며 AAA 동등·사용자 미적 승인이나 브라우저 승인은 아닙니다. Lifecycle05의 정상/예외/중단복구3경로도 원본·GUID·지문 불변으로 통과했고 Native14에 결합한 Web10 빌드도 통과했습니다. 새 Desktop03은111검사·필수66원본의 Root 직접 검토·오디오4구간·실제 재접속2회와 소유 후손 정리를 완료했습니다. Mobile02도102검사·필수52원본의 Root 직접 검토·오디오4구간·실제 재접속2회와 소유 후손 정리로 통과했습니다. 새 소스의 PC·모바일 검토를 완료했으며 최종 후보 CI·정상 병합·공개 전체 검증과 NPR 새 공개는 아직 남았습니다. Native11 실패·Native12 overhead 거절·Native13 lamp 좌표검사 실패는 그대로 보존합니다. 아래 소유권의 acquired 문구는 당시 이력입니다.
+
+## 실제 NPR 연속 작업 소유권 — 2026-11-11 14:33 UTC
+
+원본 GospelNpr 회차는 실제 FinalIdle과 정상 자기 해제·available 확인을 마쳤다. 새 독립 회차는 `GospelNprResume-2026-11-11`이며 실제 소유권은 `Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/lease.json`에 있다. 원본 잠금을 연장하거나 재사용하지 않는다. 실행은 새 control의 `activate-resume.sh`와 `run-owned-npr-resume.py`를 사용한다. `profile.py`, 원본 NPR OUT/build/proof/stage/CardBaseline/Root 검토 경로는 보존하며, 실제 실행 담당만 명시적인 FIRSTGAME_CONTROL_ROOT로 바뀐다. Root만 실행하고 소스 담당은 지정 파일만 쓴다. 아래 원본 회차 acquired 표기는 이력이다. 아직 NPR 새 공개 배포·사용자 미적 승인은 없으며, 최신 문서의 실제 결과를 따른다.
+
+# 최신 실제 3D NPR 개편 — 2026-11-11
+
+최신 사용자는 기존 그림 기반 인물·배경·UI 전체 품질을 거절했다. 루트의 `GospelNpr-2026-11-11` 지침과 실제 새 자기 잠금을 우선하며 아래 2.5D/atlas 및 old Toon 모델 강제 조건은 보존 이력이다. 사용 허가가 확인된 좋은 애니풍 mesh/face/rig와 실제 보행, NPR 셰이더, 입체 환경·카메라·UI를 함께 바꾼다. 이야기를 새 엔진으로 이식하지 않고 현재 Gospel Core/People/Motor/저장과23사건/19본문·안정ID를 유지한다. Root만 생성/Unity/테스트/브라우저/Git/빌드/배포를 실행한다. 새 소스 담당은 지정된 Presentation 경로만 수정한다.
+
 # 현재 장기 개발 진입점 — 2026-11-03
 
 루트 `AGENTS.md`와 `../../Docs/Autonomy/CHARTER.md`, `STATE.json`, `ROADMAP.md`를 먼저 따른다. 아래 회차별 소유자·“현재” 표기는 보존 이력이다. 실제 활성 담당과 공통 원격 잠금을 확인하며, 현재 Nativity의 23사건/19본문·51화면·28음성·안정ID·저장·원본/GUID를 보존한다. 새 대표 구간은 기존 열두 살 유월절 여정이다. 새 장 추가 전 완료 저장 마이그레이션을 먼저 검증한다.

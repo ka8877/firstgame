@@ -21,9 +21,18 @@ log="$output/$task.log"
 if [[ "$game" == FantasyCards && "$task" != native ]]; then
  python3 Tools/Data/Renewal/verify-media.py
 fi
+editor_graphics=(-nographics)
+if [[ "${FIRSTGAME_RELEASE_PROFILE:-}" == gospel-npr && "$game" == PathOfDawn && "$task" != native ]]; then
+ # Use the same real Editor graphics API as Native. lilToon deliberately
+ # rewrites its retained feature settings when Null/GLCore changes.
+ python3 Tools/Environment/recover-quest-display.py
+ bash Tools/Environment/start-display.sh > "$output/display.txt"
+ source Tools/Environment/activate-display.sh
+ editor_graphics=(-force-glcore)
+fi
 case "$task" in
  prepare)
-  "$UNITY_EDITOR" -batchmode -nographics -projectPath "Games/$game" -executeMethod FirstGame.Editor.ProjectSetup.Ensure -quit -logFile "$log"
+  "$UNITY_EDITOR" -batchmode "${editor_graphics[@]}" -projectPath "Games/$game" -executeMethod FirstGame.Editor.ProjectSetup.Ensure -quit -logFile "$log"
   ;;
  native)
   python3 Tools/Environment/recover-quest-display.py
@@ -48,7 +57,7 @@ case "$task" in
   fi
   python3 Tools/Build/nativity-pipeline-state.py snapshot "$game" "$attempt" "$task"
   build_exit=0
-  "$UNITY_EDITOR" -batchmode -nographics -projectPath "Games/$game" -buildTarget "$target" \
+  "$UNITY_EDITOR" -batchmode "${editor_graphics[@]}" -projectPath "Games/$game" -buildTarget "$target" \
    -executeMethod "FirstGame.Editor.BuildCommands.$method" -quit -logFile "$log" || build_exit=$?
   python3 Tools/Build/nativity-pipeline-state.py restore "$game" "$attempt" "$task"
   python3 Tools/Build/restore-nativity-build-additions.py "$game" "$attempt"

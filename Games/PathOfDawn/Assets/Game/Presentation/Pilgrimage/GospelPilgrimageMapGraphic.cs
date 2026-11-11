@@ -15,13 +15,13 @@ namespace PathOfDawn.Presentation
         public GospelPilgrimageMapGraphic() { useLegacyMeshGeneration = false; }
         public override Texture mainTexture => Texture2D.whiteTexture;
 
-        static readonly Color Ground = new Color(.15f, .22f, .18f);
-        static readonly Color Hill = new Color(.25f, .31f, .23f);
-        static readonly Color PathShade = new Color(.12f, .16f, .12f);
-        static readonly Color PathLight = new Color(.67f, .59f, .39f);
-        static readonly Color Person = new Color(.52f, .80f, .83f);
-        static readonly Color Destination = new Color(1f, .79f, .32f);
-        static readonly Color Traveler = new Color(1f, .97f, .85f);
+        static readonly Color Ground = new Color(.51f, .65f, .56f);
+        static readonly Color Hill = new Color(.75f, .77f, .61f);
+        static readonly Color PathShade = new Color(.35f, .43f, .34f);
+        static readonly Color PathLight = new Color(.95f, .85f, .59f);
+        static readonly Color Person = new Color(.25f, .66f, .77f);
+        static readonly Color Destination = new Color(1f, .78f, .30f);
+        static readonly Color Traveler = new Color(1f, .99f, .89f);
 
         public bool HasLiveWorld => owner != null && owner.World != null && owner.Player != null;
         public bool IsNorthUp => true;
@@ -86,7 +86,7 @@ namespace PathOfDawn.Presentation
         {
             mesh.Clear();
             var area = rectTransform.rect;
-            Quad(mesh, area, new Color(.065f, .105f, .079f));
+            Quad(mesh, area, new Color(.43f, .56f, .50f));
             if (!HasLiveWorld) return;
 
             // The shaded relief samples the same ground-height function used by
@@ -96,17 +96,16 @@ namespace PathOfDawn.Presentation
             const int columns = 28, rows = 14;
             for (int y = 0; y < rows; y++) for (int x = 0; x < columns; x++)
             {
-                float wx = Mathf.Lerp(bounds.xMin, bounds.xMax, (x + .5f) / columns);
-                float wz = Mathf.Lerp(bounds.yMin, bounds.yMax, (y + .5f) / rows);
-                float height = owner.World.HeightAt(wx, wz);
-                var tint = Color.Lerp(Ground, Hill, Mathf.Clamp01((height + .15f) * .8f));
-                foreach (var court in owner.World.MapCourts)
-                    if (court.Contains(new Vector2(wx, wz))) { tint = new Color(.36f, .35f, .25f); break; }
-                Quad(mesh, new Rect(plot.xMin + plot.width * x / columns, plot.yMin + plot.height * y / rows,
-                    plot.width / columns + .15f, plot.height / rows + .15f), tint);
+                float x0 = Mathf.Lerp(bounds.xMin, bounds.xMax, x / (float)columns);
+                float x1 = Mathf.Lerp(bounds.xMin, bounds.xMax, (x + 1f) / columns);
+                float z0 = Mathf.Lerp(bounds.yMin, bounds.yMax, y / (float)rows);
+                float z1 = Mathf.Lerp(bounds.yMin, bounds.yMax, (y + 1f) / rows);
+                Relief(mesh, new Rect(plot.xMin + plot.width * x / columns, plot.yMin + plot.height * y / rows,
+                    plot.width / columns + .15f, plot.height / rows + .15f),
+                    TerrainTint(x0, z0), TerrainTint(x0, z1), TerrainTint(x1, z1), TerrainTint(x1, z0));
             }
 
-            // World.MapTrail retains the exact painted, authored walking trail
+            // World.MapTrail retains the exact authored walking trail
             // for the current chapter, including its curved intermediate points.
             IReadOnlyList<Vector2> trail = owner.World.MapTrail;
             for (int i = 1; i < trail.Count; i++)
@@ -140,11 +139,29 @@ namespace PathOfDawn.Presentation
                 Mathf.Cos(owner.Player.FacingYaw * Mathf.Deg2Rad));
             Arrow(mesh, traveler, forward, 7.2f, new Color(.035f, .075f, .07f));
             Arrow(mesh, traveler, forward, 5.2f, Traveler);
-            var edge = new Color(.70f, .61f, .39f, .42f);
+            var edge = new Color(.96f, .94f, .79f, .47f);
             Stroke(mesh, new Vector2(plot.xMin, plot.yMin), new Vector2(plot.xMax, plot.yMin), .8f, edge);
             Stroke(mesh, new Vector2(plot.xMin, plot.yMax), new Vector2(plot.xMax, plot.yMax), .8f, edge);
             Stroke(mesh, new Vector2(plot.xMin, plot.yMin), new Vector2(plot.xMin, plot.yMax), .8f, edge);
             Stroke(mesh, new Vector2(plot.xMax, plot.yMin), new Vector2(plot.xMax, plot.yMax), .8f, edge);
+        }
+
+        Color TerrainTint(float x, float z)
+        {
+            var tint = Color.Lerp(Ground, Hill, Mathf.Clamp01((owner.World.HeightAt(x, z) + .15f) * .8f));
+            foreach (var court in owner.World.MapCourts)
+                if (court.Contains(new Vector2(x, z))) return new Color(.79f, .78f, .65f);
+            return tint;
+        }
+
+        static void Relief(VertexHelper mesh, Rect area, Color bottomLeft, Color topLeft, Color topRight, Color bottomRight)
+        {
+            int at = mesh.currentVertCount;
+            mesh.AddVert(new Vector2(area.xMin, area.yMin), bottomLeft, WhiteUv);
+            mesh.AddVert(new Vector2(area.xMin, area.yMax), topLeft, WhiteUv);
+            mesh.AddVert(new Vector2(area.xMax, area.yMax), topRight, WhiteUv);
+            mesh.AddVert(new Vector2(area.xMax, area.yMin), bottomRight, WhiteUv);
+            mesh.AddTriangle(at, at + 1, at + 2); mesh.AddTriangle(at, at + 2, at + 3);
         }
 
         static void Quad(VertexHelper mesh, Rect area, Color color)

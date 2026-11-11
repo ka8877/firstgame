@@ -8,11 +8,12 @@ import os
 
 ROOT = Path(__file__).resolve().parents[3]
 NAME = os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art')
-if NAME not in ('canon-art', 'living-classic', 'client-motion'):
+if NAME not in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr'):
     raise ValueError('Choose an explicit supported current release profile')
 IS_LIVING = NAME == 'living-classic'
 IS_CLIENT_MOTION = NAME == 'client-motion'
-REQUIRES_EXPLICIT_ENV = IS_LIVING or IS_CLIENT_MOTION
+IS_GOSPEL_NPR = NAME == 'gospel-npr'
+REQUIRES_EXPLICIT_ENV = IS_LIVING or IS_CLIENT_MOTION or IS_GOSPEL_NPR
 CORE_MINIMUM = 311 if REQUIRES_EXPLICIT_ENV else 309
 REVISIONS = ({'FantasyCards': 'fm-classic-ui-2026-11-10', 'PathOfDawn': 'gospel-living-rpg-2026-11-10'}
              if IS_LIVING else {'FantasyCards': 'fm-canon-2026-11-09', 'PathOfDawn': 'gospel-canon-2026-11-09'})
@@ -58,3 +59,26 @@ if IS_CLIENT_MOTION:
         'PathOfDawn.SmokeTests.GospelCharacterMotionSmokeTests.EveryStoryAndAmbientIdentityUsesEightActualSynchronizedLocomotionDrawings',
         'PathOfDawn.SmokeTests.GospelCharacterMotionSmokeTests.NamedNpcFacesAllEightPartnersStopsItsGaitAndKeepsTheSamePhysicalFeet',
     )
+
+# Existing modes retain their exact two-current-game contract.
+CURRENT_GAMES = ('FantasyCards', 'PathOfDawn')
+PRESERVED_GAMES = ()
+EXTRA_SOURCE_FILES = ()
+if IS_GOSPEL_NPR:
+    REVISIONS = {'FantasyCards': 'fm-client-match-2026-11-11', 'PathOfDawn': 'gospel-npr-2026-11-11'}
+    OUT = ROOT / 'Artifacts/Validation/GospelNpr-2026-11-11'
+    BUILD = Path('/tmp/firstgame-gospel-npr-20261111-builds')
+    CONTROL = ROOT / 'Artifacts/Validation/Autonomy/GospelNpr-2026-11-11'
+    STAGE = ROOT / 'Artifacts/GospelNprWebPlaytest'
+    PLAN_DIRECTORY = ROOT / 'Tools/Validation/GospelNpr'
+    PLAN_PREFIX = 'npr'
+    CURRENT_GAMES = ('PathOfDawn',)
+    PRESERVED_GAMES = ('FantasyCards',)
+    ADDITIONAL_NATIVE = {'FantasyCards': (), 'PathOfDawn': ()}
+    NATIVE_REPLACEMENTS = {}
+    EXTRA_SOURCE_FILES = (
+        ROOT / 'Tools/Validation/GospelNpr/contract.py',
+        ROOT / 'Tools/Validation/GospelNpr/card_baseline.py',
+        ROOT / 'Tools/Validation/GospelNpr/native-contract.json',
+    )
+

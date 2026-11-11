@@ -1,0 +1,20 @@
+// Derived from lilToon 2.4.1, commit e698a2f791bd28dd1aabf227c74f14bedeca3587.
+// Copyright (c) 2020-present lilxyzw. MIT License; see LICENSE.lilToon.txt.
+// Project-owned direct passes: the upstream package remains unchanged.
+Shader "FirstGame/GospelNpr/lilToonCutoutOutline"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultCutout"
+    }
+
+    HLSLINCLUDE
+        #define LIL_RENDER 1
+    ENDHLSL
+
+    lilSubShaderTags {"RenderPipeline" = "UniversalPipeline" "RenderType" = "TransparentCutout" "Queue" = "AlphaTest"}
+    lilSubShaderURP "NprDirectOutline.lilblock"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

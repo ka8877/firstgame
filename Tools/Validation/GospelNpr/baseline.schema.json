@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Actual frozen preserved Card originals (schema only, not evidence)",
+  "type": "object",
+  "required": ["schema", "sourceStatus", "sourceCommit", "publishedCommit", "manifest", "cardBuildInputs", "cardBuildEvidence", "cardBuildProof", "historicalFinalSeal", "historicalPortal", "cardTreeRoot", "cardHero"],
+  "properties": {
+    "schema": {"const": 1},
+    "sourceStatus": {"const": "frozen"},
+    "sourceCommit": {"const": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015"},
+    "publishedCommit": {"const": "47f2e80f369b4c4172d7deee72b09a6f9e760f8e"},
+    "manifest": {"$ref": "#/$defs/ref"},
+    "cardBuildInputs": {"$ref": "#/$defs/ref"},
+    "cardBuildEvidence": {"$ref": "#/$defs/ref"},
+    "cardBuildProof": {"$ref": "#/$defs/ref"},
+    "historicalFinalSeal": {"$ref": "#/$defs/ref"},
+    "historicalPortal": {"$ref": "#/$defs/ref"},
+    "cardHero": {"$ref": "#/$defs/ref"},
+    "cardTreeRoot": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "ref": {
+      "type": "object", "required": ["file", "bytes", "sha256"],
+      "properties": {"file": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 0}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
