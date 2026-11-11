@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-11T09:38:16.606701+00:00",
+  "updatedUtc": "2026-11-11T09:56:57.390333+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,13 +13,13 @@
   },
   "activeWork": {
     "id": "ClientMotion-2026-11-11",
-    "status": "ClientMotion-deployed-six315Root-allsealed-Checkpoint01-preserved-D1saveCI-finalidle-resumerelease-Closure-pending",
+    "status": "ClientMotion-deployed-six315Root-allsealed-Checkpoint01-Closure01-normal-own-release-complete",
     "branch": "main",
     "baseMainCommit": "80b514a492f53efae661544d1e1a2f0a7ee035aa",
     "executionOwner": "/root",
-    "executionState": "owned-resume-cycle-runtime-and-checkpoint-complete-final-save-CI-and-ownedclosure-pending",
+    "executionState": "completed-normal-own-lease-released-no-background-execution",
     "leaseRecord": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
-    "leaseState": "acquired",
+    "leaseState": "released",
     "leaseOwner": "fa5e7cab-cce6-4511-bfc8-448f63541840",
     "leaseCommit": "64dec34fe244fba43a126e57e2a16dcf75d4c72f",
     "startedUtc": "2026-11-11T06:55:55.260682+00:00",
@@ -48,7 +48,7 @@
     "sourceProgress": {
       "CardUi": "CurrentNativeClient06 9/0/0/31PNG with11selectedsource-buildoriginals andcurrentCardWeb01 retained. ActualCardDesktopBrowser02 100checks/67PNG/55requiredapproved andCardMobileBrowser01 102checks/66PNG/54requiredapproved. OldBrowser01Rootblank observation corrected by byte-identical full-card image, without retroactive approval. Current public Browser01 also passed110checks/66PNG/54requiredRoot originals.",
       "Characters": "CurrentMotion05 27/0/0/58PNG with11selectedsource-buildoriginals andGospelWeb02 retained. ActualGospelDesktopBrowser01 102checks/81PNG/60requiredapproved andGospelMobileBrowser01 86checks/62PNG/46requiredapproved. Current public Browser01 also passed91checks/62PNG/46requiredRoot originals.",
-      "validationTooling": "Native9/27/Core311/media123/selectedWeb/Builds02/C2+mainCI/Stage/Pages/Portal03/sixbrowser315Root/allFinalSeal01passed. ArchiveCheckpoint02 actuallypreserved6779files/21parts/684456578B toCheckpoint01 withV3afterretainedArchive01failure. D1savecommitCI/finalidle/normalresumerelease/Closurepending."
+      "validationTooling": "Native9/27/Core311/media123/selectedWeb/Builds02/C2+mainCI/Stage/Pages/Portal03/six315Root/allseal and actualCheckpoint01/Closure01 completed. D1 actualpush/Core+helperCI and25committedblobs verified; independentfinalidle/normalownresumerelease completed. Original failures and corrected observation retained."
     },
     "referenceAndLicenseFacts": {
       "clientLogin": {
@@ -101,7 +101,7 @@
       }
     },
     "validation": {
-      "status": "all-runtime-public-sourceCI-gates-and-Checkpoint01-preservation-passed-D1saveCI-ownedclosurepending",
+      "status": "all-runtime-public-CI-final-gates-preservation-and-normal-owned-closure-completed",
       "environmentIdle": {
         "attempt": "EnvironmentIdle01",
         "status": "completed-command-exit0-guard0",
@@ -598,7 +598,7 @@
         }
       },
       "stagePagesAndPublicDelivery": {
-        "status": "Stage-Publish-Pages-Portal03-six-browser-allseal-and-Checkpoint01-passed-ownedclosurepending",
+        "status": "Stage-Publish-Pages-Portal03-six-browser-allseal-Checkpoint01-Closure01-normal-release-complete",
         "stage": {
           "status": "passed",
           "sourceCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
@@ -770,8 +770,42 @@
           "ownedContainmentProvedEmpty": true,
           "scope": "Actual strict preservation completed with frozenV3 and explicitadditionalOriginals. Generic command-completed wrapper is distinct from actual proof-preserved tool result. This does not claim upcoming D1commit/CI/finalidle/resumerelease/Closure. Archived acquired/released lease history grants no current ownership."
         },
-        "resumeFinalIdleAndNormalRelease": "pending",
-        "closure": "pending"
+        "resumeFinalIdleAndNormalRelease": {
+          "status": "actual-independent-final-idle-and-normal-own-release-completed",
+          "wrapper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+            "bytes": 11210,
+            "sha256": "7c8249b7addc6c81a98189517def9c16420e1d6069706ccc7caa83e51a383c29"
+          },
+          "releasedLease": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+            "bytes": 880,
+            "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+          },
+          "releaseStdout": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json",
+            "bytes": 800,
+            "sha256": "6d93eb61ff504996f401b75b4577e5bb9c6e7ec0b06568bdbcf6e829b06a9a07"
+          },
+          "statusStdout": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json",
+            "bytes": 99,
+            "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+          },
+          "releasedUtc": "2026-11-11T09:48:23.284626+00:00",
+          "statusObservation": "available is the actual saved query result only; no current ownership or observation timestamp is invented."
+        },
+        "closure": {
+          "status": "actual-post-release-originals-preserved",
+          "index": {
+            "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Closure01/index.json",
+            "bytes": 148546,
+            "sha256": "7dc22ceea965b75cc6749ebc72cc0a37fb568dc16211ab9161bd1fabcc30f1c6"
+          },
+          "actualFiles": 302,
+          "createdUtc": "2026-11-11T09:49:15.487879+00:00",
+          "priorOriginalsUnchangedExceptNormalOwnedLeaseRelease": true
+        }
       },
       "historicalProofScope": "LivingRpgClassic and CanonArt completed proofs/failures remain historical; none is reused as a new ClientMotion pass.",
       "motionAssets": {
@@ -1211,11 +1245,12 @@
       "Licensed layered character import/attribution and actual8-direction animation must be verified after Root runs the installer/import; no runtime completion claimed.",
       "No verified2014–18FIRST native login/shop pixels in latest recheck;2014WEBguide andinaccessibleArenaimage do not establish finalnativeappearance."
     ],
-    "currentPublication": "ClientMotionproductM bfa37cbe/P47f2e80f/Pages42981922548deployed; completePortal03freshdelivery/sixbrowser315Root/allsealpassed. Checkpoint01actual6779files/21parts preserved. D1saveCI/finalidle/normalownresumerelease/Closurepending; fulloriginalrestoration unfinished.",
+    "currentPublication": "ProductM bfa37cbe/publicP47f2e80f/Pages42981922548 deployed and verified. Six315Root/allseal/Checkpoint01/Closure01/D1CI/normalownrelease completed. User subsequently rejected overall Gospel visual quality and requested a new real3D NPR direction; this current product is not user aesthetic approval or full original parity.",
     "next": [
-      "Root commits completedCheckpoint01 plus finalD1Docs, verifies exactpushedcommit/bothCI andcommittedarchivepartbytes. D1save/CI notyetobserved atwriting.",
-      "Then actualindependentfinalidle/owneddescendantcleanup, exactnormalownresumerelease andClosure01 preservation. Currentresume remainsacquired; nofuturecleanup/release/closure isclaimed.",
-      "AfteractualClosure, D2records truefinalfacts andobserves actualsavingcommit/CI afterward withoutself-reference. Continue originalrules/UI/Gospelquality aftermilestone; fullparity remainsunfinished."
+      "Save this actualClosure01 and finalDocs3, then verify its exactnormalpush/CI without inventing a future self-referential result.",
+      "After actual environment/process/remote inspection and a newuniqueownedlease, implement a real3D NPR Gospel verticalslice using verified-compatible shader/models/environment and actualskinned animation. Preserve story/Scripture/stableNPCIDs/saves.",
+      "Judge actual playable close-up character/world/lighting/camera/UI quality together; current sprite-based product is not the requested newquality. Use actual license/provenance and source-bound Native/Web/browser checks before publishing replacement.",
+      "Retain multiplayer disabled/future and existing verified Card release. Full originalCard restoration remains a later unfinished goal."
     ],
     "automationScope": "Explicit active chat request only. Last actual automation query was0 in the previous cycle; no new scheduler or goal-card activation query is claimed and no24-hour background execution is established.",
     "sourceFrozen": true,
@@ -1250,7 +1285,7 @@
       "scope": "Old records frozen. New independent owner/ref bytes and bounded deadline; origin acquired/released archives grant no active ownership."
     },
     "releaseCompletion": {
-      "status": "current-release-and-checkpoint-complete-D1saveCI-finalidle-ownedrelease-Closurepending",
+      "status": "completed-public-release-evidence-preserved-normal-own-lease-released",
       "publicPortal": "PublicPortal03completepassedand2Rootoriginalsapproved; earlier01/02fullauditfailuresretained",
       "twoPublicGames": "Card54/Gospel46currentrequiredoriginalsfinalized; sixof6approved315total",
       "finalGateAndSeal": {
@@ -1303,17 +1338,78 @@
         },
         "finalGuardExitCode": 0,
         "ownedContainmentProvedEmpty": true,
-        "scope": "Actual strict preservation completed with frozenV3 and explicitadditionalOriginals. Generic command-completed wrapper is distinct from actual proof-preserved tool result. This does not claim upcoming D1commit/CI/finalidle/resumerelease/Closure. Archived acquired/released lease history grants no current ownership."
+        "scope": "Actual strict V3 preservation of6779originals completed; exact21parts and index subsequently verified from actualD1committed blobs. Original failures and both lease histories remain preserved. Archived lease records grant no ownership."
       },
-      "finalIdleAndNormalResumeLeaseRelease": "pending",
-      "closure": "pending",
+      "finalIdleAndNormalResumeLeaseRelease": {
+        "status": "actual-independent-final-idle-and-normal-own-release-completed",
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+          "bytes": 11210,
+          "sha256": "7c8249b7addc6c81a98189517def9c16420e1d6069706ccc7caa83e51a383c29"
+        },
+        "releasedLease": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+          "bytes": 880,
+          "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+        },
+        "releaseStdout": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json",
+          "bytes": 800,
+          "sha256": "6d93eb61ff504996f401b75b4577e5bb9c6e7ec0b06568bdbcf6e829b06a9a07"
+        },
+        "statusStdout": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json",
+          "bytes": 99,
+          "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+        },
+        "releasedUtc": "2026-11-11T09:48:23.284626+00:00",
+        "statusObservation": "available is the actual saved query result only; no current ownership or observation timestamp is invented."
+      },
+      "closure": {
+        "status": "actual-post-release-originals-preserved",
+        "index": {
+          "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Closure01/index.json",
+          "bytes": 148546,
+          "sha256": "7dc22ceea965b75cc6749ebc72cc0a37fb568dc16211ab9161bd1fabcc30f1c6"
+        },
+        "actualFiles": 302,
+        "createdUtc": "2026-11-11T09:49:15.487879+00:00",
+        "priorOriginalsUnchangedExceptNormalOwnedLeaseRelease": true
+      },
       "documentationAtWriting": {
         "observedProductHead": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
         "candidateCommit": "d6f9a4585b31d54e316dfd09d36326a172a49206",
         "publishedCommit": "47f2e80f369b4c4172d7deee72b09a6f9e760f8e",
         "checkpointHeadCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
-        "D1CombinedCheckpointDocsCommitAndCi": "Must be observed after writing/commit/push; no success invented at writing.",
-        "D2ClosureDocsCommitAndCi": "Finalidle/normalownresumerelease/Closure stillpending. FuturecommitCI firstsavingClosure cannot be included in thatclosure; record actual result afterward."
+        "D1CombinedCheckpointDocsCommitAndCi": {
+          "commit": "b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed",
+          "coreCiRunId": 42997398913,
+          "helperCiRunId": 42997398926,
+          "status": "completed",
+          "conclusion": "success",
+          "core": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json",
+            "bytes": 4561,
+            "sha256": "c26a080766ec224e65c8ec7cabbe8abd742ef856377457c2ec20a0cb8808eb6f"
+          },
+          "helper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-ci01.json",
+            "bytes": 3773,
+            "sha256": "64039858741dbc488cbd2011095b91f250527bed1b425bf9f38b921cc2b6c343"
+          },
+          "committedBlobs": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/committed-checkpoint-blobs01.json",
+            "bytes": 5765,
+            "sha256": "bea2d18d8f1ae88bf5fe66c4be8cffff38864727c792d9ef9520ef6738435eaf"
+          },
+          "committedBlobVerificationWrapper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/summary.json",
+            "bytes": 11711,
+            "sha256": "1ab89a692c70b4b2125b98c0524f6c4d63239770f41786822644296c34db0098"
+          },
+          "scope": "Actual pushed documentation/checkpoint commit and all25committed blobs including21parts independently byte-verified. Product/deployment identities remain M/P."
+        },
+        "D2ClosureDocsCommitAndCi": "This file and Closure01 will first be saved after writing. Their future exact commit/push/CI is not contained in Closure01; observe and preserve the actual result separately without recursive self-reference."
       }
     },
     "additionalPreservationSources": {
@@ -1326,6 +1422,13 @@
       },
       "factsBuilderExecution": "Actualfacts02/builderV2 fedArchiveCheckpoint02; actualCheckpoint01 completed withV3 and explicitnewsource/errorbody/history originals.",
       "scope": "ActualfinalcheckpointmustexplicitlyincludeadditionalOriginals; sourceunitreviews are notcompletedarchive."
+    },
+    "releasedUtc": "2026-11-11T09:48:23.284626+00:00",
+    "latestUserGraphicsFeedback": {
+      "status": "current-Gospel-visual-quality-rejected-by-user",
+      "requestedDirection": "Clean real3D anime/toon rendering comparable in direction to Genshin/StarRail across characters, world, objects, lighting and UI; investigate usable NPR/open sources instead of further sprite-only polish.",
+      "newImplementationStatus": "research-only-at-this-closing-document; no new NPR prototype/test/public result claimed",
+      "preserve": "Existing story, Scripture, stable IDs, movement, dialogue, saves and separate Card release."
     }
   },
   "activeLivingRpgClassic": {
@@ -2359,7 +2462,7 @@
       "sourceCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
       "gameImplementationCommit": "d6f9a4585b31d54e316dfd09d36326a172a49206",
       "sourceFingerprint": "ea8083bdde5df2d3c57270cfa45b0ba14e467a2badb9348069743799bb34a0ca",
-      "currentValidation": "CurrentNative/Core/media/Web/builds/fourlocal/twopublic/Portal03completefreshdelivery andallFinalSeal01 passed withall315requiredRootoriginals. DurableCheckpoint01 actual6779files/21parts preserved. D1saveCI/normalresumerelease/Closurepending."
+      "currentValidation": "Current Native/Core/media/Web/builds/sixbrowser/Portal03/allseal passed with315required Root originals. ActualCheckpoint01/Closure01, D1CI/25committed blobs andnormalownrelease completed. This is technical release evidence; Gospel newNPR userrequest remains new work."
     },
     "FantasyCards": {
       "revision": "fm-client-match-2026-11-11",
@@ -2373,7 +2476,7 @@
       "sourceCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
       "gameImplementationCommit": "d6f9a4585b31d54e316dfd09d36326a172a49206",
       "sourceFingerprint": "88c525d0f00f3c8455cecd92e52bcfe0b6a4e175bd2788443f5acf89de17a413",
-      "currentValidation": "CurrentNative/Core/media/Web/builds/fourlocal/twopublic/Portal03completefreshdelivery andallFinalSeal01 passed withall315requiredRootoriginals. DurableCheckpoint01 actual6779files/21parts preserved. D1saveCI/normalresumerelease/Closurepending."
+      "currentValidation": "Current Native/Core/media/Web/builds/sixbrowser/Portal03/allseal passed with315required Root originals. ActualCheckpoint01/Closure01, D1CI/25committed blobs andnormalownrelease completed. This is technical release evidence; Gospel newNPR userrequest remains new work."
     }
   },
   "previousLivingRpgClassicGames": {
@@ -2441,17 +2544,17 @@
     }
   },
   "lastCompletedWork": {
-    "id": "LivingRpgClassic-2026-11-10",
-    "status": "completed-deployed-release-milestone-normal-own-lease-released-not-full-original-restoration",
-    "productCommit": "60a58c5d262ac6507924e110d87d20cb9cf22aca",
-    "deployedCommit": "9e34c3b9a3fe46d09f14fb722975c9f666924f47",
-    "checkpointSaveCommit": "04ff1e1214abe82e927ed128d310649c31796235",
-    "checkpointCoreCi": 42778148735,
-    "checkpointHelperCi": 42778148418,
-    "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
-    "evidence": "activeLivingRpgClassic.releaseCompletion",
-    "nextGoal": "Continue verified original rules/UI fidelity and natural Gospel RPG/world/character quality; full restoration unfinished.",
-    "finalClosureSaveCi": "Observe actual result after writing; not assumed."
+    "id": "ClientMotion-2026-11-11",
+    "status": "completed-deployed-technical-release-milestone-normal-own-lease-released",
+    "productCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
+    "deployedCommit": "47f2e80f369b4c4172d7deee72b09a6f9e760f8e",
+    "checkpointSaveCommit": "b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed",
+    "checkpointCoreCi": 42997398913,
+    "checkpointHelperCi": 42997398926,
+    "releasedUtc": "2026-11-11T09:48:23.284626+00:00",
+    "evidence": "activeWork.releaseCompletion",
+    "nextGoal": "Prioritize latest user-directed real3D NPR Gospel graphics across characters/world/objects/UI while preserving story and saves. Card full original restoration remains unfinished.",
+    "finalClosureSaveCi": "Observe actual closing commit/push/CI after writing; cannot be contained in its own closure."
   },
   "lastCompletedWorkBeforeLivingRpgClassic": {
     "id": "CanonArt",
@@ -2470,12 +2573,13 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
-    "id": "ClientMotionResume-2026-11-11",
-    "status": "ClientMotion-runtime-and-Checkpoint01-complete-D1saveCI-and-ownedclosurepending",
+    "id": "GospelNpr-2026-11-11",
+    "status": "new-user-direction-research-only-new-owned-cycle-and-implementation-pending",
     "tasks": [
-      "Root commits completedCheckpoint01 plus finalD1Docs, verifies exactpushedcommit/bothCI andcommittedarchivepartbytes. D1save/CI notyetobserved atwriting.",
-      "Then actualindependentfinalidle/owneddescendantcleanup, exactnormalownresumerelease andClosure01 preservation. Currentresume remainsacquired; nofuturecleanup/release/closure isclaimed.",
-      "AfteractualClosure, D2records truefinalfacts andobserves actualsavingcommit/CI afterward withoutself-reference. Continue originalrules/UI/Gospelquality aftermilestone; fullparity remainsunfinished."
+      "Save this actualClosure01 and finalDocs3, then verify its exactnormalpush/CI without inventing a future self-referential result.",
+      "After actual environment/process/remote inspection and a newuniqueownedlease, implement a real3D NPR Gospel verticalslice using verified-compatible shader/models/environment and actualskinned animation. Preserve story/Scripture/stableNPCIDs/saves.",
+      "Judge actual playable close-up character/world/lighting/camera/UI quality together; current sprite-based product is not the requested newquality. Use actual license/provenance and source-bound Native/Web/browser checks before publishing replacement.",
+      "Retain multiplayer disabled/future and existing verified Card release. Full originalCard restoration remains a later unfinished goal."
     ],
     "tasksAtLocalCompletion": [
       "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
@@ -2496,7 +2600,7 @@
       "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
-    "rule": "ActualnewClientMotiondeployment/six315Root/allseal/Checkpoint01preservation complete. D1commit/CI/committedpartreadback andactualfinalidle/normalresumerelease/Closureremainpending. Preserveeveryfailedattempt/correctedRootobservation/twoleasechain.",
+    "rule": "Previous ClientMotion technical milestone is closed with releasedlease and byte-preserved evidence. The latest user requested a new visual implementation direction; static research has begun, but newNPR source/runtime/approval/deployment is not yet claimed. Obtain a fresh owncycle before execution.",
     "ruleBeforePublication": "Historical pre-final-public observation: NewP47f2e80f alreadydeployedviaactualPages42981922548; publicacceptance ispending. PreviousLiving release remains lastfullyverifiedfallback, not currentnewsource proof.",
     "tasksAtLivingRpgClassicCompletion": [
       "After saving Closure01 and these final Docs3, observe the exact final commit push and both required CI results; that future result is not contained in this closure or claimed at writing.",
@@ -2524,7 +2628,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "ClientMotionResume-new-unique-acquired-after-origin-normalrelease-no-renewal",
+    "lockStatus": "released; actual saved post-release query available",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 3600,
     "defaultGuardLimitSeconds": 2700,
@@ -2542,7 +2646,8 @@
       "deadlineUtc": "2026-11-11T12:55:55.260682+00:00",
       "commitSha": "64dec34fe244fba43a126e57e2a16dcf75d4c72f",
       "startedUtc": "2026-11-11T06:55:55.260682+00:00",
-      "status": "Distinctresumeleaseactive. CurrentPages/Portal03/six315Root/allseal/actualCheckpoint01 completed. D1saveCI/independentfinalidle/normalownresumerelease/Closurepending."
+      "status": "completed-normal-own-lease-released; technicalrelease/Checkpoint01/Closure01/D1CI completed; no background process or continuing ownership",
+      "releasedUtc": "2026-11-11T09:48:23.284626+00:00"
     },
     "historicalBatchAtReport": {
       "id": "C1-resume-2026-11-04",
@@ -2553,11 +2658,19 @@
       "status": "Work and portable checkpoint complete; normal owned CAS release is the final boundary after source preservation. Live remote ref is authoritative."
     },
     "lastCompletedBatch": {
-      "id": "LivingRpgClassic-2026-11-10",
-      "status": "release-verified-checkpoint-and-closure-preserved-normal-own-CAS-released",
-      "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
-      "leaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
-      "closureRecord": "activeLivingRpgClassic.releaseCompletion"
+      "id": "ClientMotionResume-2026-11-11",
+      "status": "completed-normal-owned-release",
+      "releasedUtc": "2026-11-11T09:48:23.284626+00:00",
+      "releaseRecord": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+        "bytes": 880,
+        "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+      },
+      "closure": {
+        "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Closure01/index.json",
+        "bytes": 148546,
+        "sha256": "7dc22ceea965b75cc6749ebc72cc0a37fb568dc16211ab9161bd1fabcc30f1c6"
+      }
     },
     "previousCompletedBatch": {
       "id": "CanonPublishResume-2026-11-10",
@@ -2576,10 +2689,10 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
-    "liveLeaseDeadlineUtc": "2026-11-11T12:55:55.260682+00:00",
-    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
-    "statusObservationScope": "Originactualrelease06:55:53Zandnewacquire06:55:55Zare separateboundedcycles. Activeacquiredreceipt/actualwrappers establishcurrentownership atobservations, notrenewal orperpetualavailability.",
+    "liveLeaseRecord": null,
+    "liveLeaseDeadlineUtc": null,
+    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+    "statusObservationScope": "The resume owner was normally released at2026-11-11T09:48:23.284626+00:00 after independent idle. Available is the saved post-release query only. No historical acquired snapshot or released record gives current ownership; newNPR execution requires fresh actual acquisition.",
     "historicalCanonArtBatchAtReport": {
       "id": "CanonPublishResume-2026-11-10",
       "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
@@ -2613,6 +2726,13 @@
       "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/lease-chain-originals.json",
       "bytes": 1792,
       "sha256": "be2fdc1e9ae5a65dda26052750d502a289f4b2315b267550b6f1611c7eeeb2f3"
+    },
+    "lastCompletedBatchBeforeClientMotion": {
+      "id": "LivingRpgClassic-2026-11-10",
+      "status": "release-verified-checkpoint-and-closure-preserved-normal-own-CAS-released",
+      "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
+      "leaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
+      "closureRecord": "activeLivingRpgClassic.releaseCompletion"
     }
   },
   "environment": {
@@ -2808,13 +2928,13 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
-  "knownIssuesScope": "ActualClientMotioncurrentruntime/public/checkpointcomplete; D1saveCI/finalidle/normalresumerelease/Closurepending. Originalfailedattempts andRootobservationcorrection preserved.",
+  "knownIssuesScope": "ClientMotion technical release/CI/evidence/normal owned closure completed. Latest user rejects Gospel overall visual quality and requests a real3D NPR redesign; this new quality objective remains open.",
   "knownIssues": [
-    "ClientMotion actualnewPages/completePortal03delivery/sixbrowser315Root/allFinalSeal01 andCheckpoint01preservation passed. D1savingcommit/CI/committed21partreadback, finalidle/currentresumerelease/Closure pending atwriting.",
+    "ClientMotion technical Pages/Portal03/six315Root/allseal/Checkpoint01/D1CI/committedblobs/finalidle/normalrelease/Closure01 are completed. The user explicitly rejected overall Gospel visual quality; the requested new3D NPR implementation is still research-only.",
     "Checkpoint01 actual6779files/21parts/joined684456578B, index280e37a4…/joined2095589c…. FirstArchive01 pre-destinationargvfailure retained; separateV3review27unit andArchive02actualsuccess do not relabel it.",
     "Portal03 logical15423files/actual15428GETattempts, five503bodies/observedmax2underallowed3 retained. Prior01/02wholeaudit failures/diagnostics andoriginalverifier/rawreports remainunchanged.",
     "Rootowned55initialblankclaimwasobservationerror: byte-identicalimage showsfourfullcards/55owned/200SP. Preserveoldrejection/rawpass/92filehistory, noBrowser01retroapproval; currentBrowser02independentlyapproved.",
-    "Actualoriginfinalidle/normalrelease→newuniqueactiveleasechain preserved, notrenewal. Currentresumelease stillacquired untilactualnormalownrelease; archivedleasecopies grantnoownership.",
+    "Actual origin normal release followed by unique resume acquisition and later normal resume release are preserved as two distinct fixed cycles. Last saved post-release status was available; archived acquired/released records grant no current ownership.",
     "Native selected11+11review/Portal2views/315browserrequiredoriginals areseparate; noall31/58Nativeimageclaim, physicalphone/useraestheticapproval/fullshutdownparity. Multiplayerdisabled/futureupdate; lastautomation0previousquery, goalactivationunknown/no24-hourbackgroundclaim."
   ],
   "knownIssuesAtLivingRpgClassicCompletion": [
@@ -3808,7 +3928,7 @@
     }
   },
   "currentDeployment": {
-    "status": "ClientMotion-deployed-six315Root-Portal03-allsealed-Checkpoint01-preserved-ownedclosurepending",
+    "status": "ClientMotion-deployed-six315Root-Portal03-allsealed-evidence-preserved-normal-release-complete",
     "candidateCommit": "d6f9a4585b31d54e316dfd09d36326a172a49206",
     "sourceCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
     "deployedCommit": "47f2e80f369b4c4172d7deee72b09a6f9e760f8e",
@@ -3993,7 +4113,7 @@
       "scope": "Actualfinalallgatepassed; exactlastemittedJSONline preservedwithoutreserialization. Genericownedwrappercompletion is distinct fromactualgatepass. Doesnotclaimfuturecheckpoint/closure/release."
     },
     "releaseCompletionRef": "activeWork.releaseCompletion",
-    "scope": "Actualnewdeployment/fullfreshdelivery/six315Root/allseal andCheckpoint01preservationverified. D1saveCI/finalidle/currentresumerelease/Closurepending. Currentverifiedproductdone doesnotmeanfulloriginalparity/physicalphone/useraestheticapproval.",
+    "scope": "Actual productM/publicP technical release verified with current six315Root/completefreshdelivery/allseal/Checkpoint01/Closure01 andnormalownrelease. Subsequent user explicitly requests a higher-quality real3D NPR Gospel redesign; no newNPR result or user aesthetic approval is claimed.",
     "lastDurablyClosedRelease": "previousLivingRpgClassicDeployment"
   },
   "previousLivingRpgClassicDeployment": {
@@ -5451,14 +5571,34 @@
   },
   "mainDocumentationIntegration": {
     "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",
-    "scope": "ActualClientMotionC2candidateCI andnormalmergedMmainCIpassed; productM/publicPunchanged. ThisD1recordsactualcompletedCheckpoint01 but itsownsavecommit/CI isnotyetobserved. PreviousD1/CanonArt/Livingdocumentationhistory retained.",
+    "scope": "ClientMotion productM/publicP, technicalrelease and actualCheckpoint01/Closure01 are complete. ActualD1save/Core+helperCI/committedblobs succeeded. This D2closing commit/CI must be observed after writing.",
     "latestCompleted": {
-      "commit": "04ff1e1214abe82e927ed128d310649c31796235",
-      "coreCiRunId": 42778148735,
-      "helperCiRunId": 42778148418,
+      "commit": "b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed",
+      "coreCiRunId": 42997398913,
+      "helperCiRunId": 42997398926,
       "status": "completed",
       "conclusion": "success",
-      "scope": "Actual combined Checkpoint01/Docs3/preservation comparison fix commit;16committed part bytes independently verified. Product/deployment identity remains60a58c5d/9e34c3b9."
+      "core": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json",
+        "bytes": 4561,
+        "sha256": "c26a080766ec224e65c8ec7cabbe8abd742ef856377457c2ec20a0cb8808eb6f"
+      },
+      "helper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-ci01.json",
+        "bytes": 3773,
+        "sha256": "64039858741dbc488cbd2011095b91f250527bed1b425bf9f38b921cc2b6c343"
+      },
+      "committedBlobs": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/committed-checkpoint-blobs01.json",
+        "bytes": 5765,
+        "sha256": "bea2d18d8f1ae88bf5fe66c4be8cffff38864727c792d9ef9520ef6738435eaf"
+      },
+      "committedBlobVerificationWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/summary.json",
+        "bytes": 11711,
+        "sha256": "1ab89a692c70b4b2125b98c0524f6c4d63239770f41786822644296c34db0098"
+      },
+      "scope": "Actual pushed documentation/checkpoint commit and all25committed blobs including21parts independently byte-verified. Product/deployment identities remain M/P."
     },
     "currentProductSource": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
     "currentProductCi": {
@@ -5489,7 +5629,7 @@
       },
       "requiredCoreSteps": "Actual required3steps completed successfully."
     },
-    "pendingDocumentationSequence": "CurrentD1: saveactualClientMotionCheckpoint01+finalDocs3, then observe exactpush/bothCI/committed21partbytes. Actualfinalidle/normalresumerelease/Closurepending; D2savingcommitCI must be observed afterwriting, notinvented.",
+    "pendingDocumentationSequence": "Save actualClosure01+finalDocs3, then verify exactclosingpush/Core+helperCI and preserve actualpostclosure receipt separately. No newNPR product result or background execution is implied.",
     "previousCompletedCanonArtDocumentation": {
       "commit": "6d6abc4b6a2fa220b89553b03cc0e3ac4d0bb81a",
       "ciRunId": 42707433731,
@@ -5498,8 +5638,16 @@
       "scope": "Actual completed CanonArt documentation/evidence commit preceding the new LivingRpgClassic branch; no new product publication claimed."
     },
     "newCycleBaseMain": "80b514a492f53efae661544d1e1a2f0a7ee035aa",
-    "newCycleScope": "ClientMotion source candidateC2 d6f9a458 was normally merged by PR6 as productM bfa37cbe. Actual candidate/main Core+helper CI, Pages42981922548, six browser suites and final seal succeeded. Current D1 checkpoint/docs saving CI and owned closure remain pending.",
-    "previousLivingDocumentationSequence": "D1 actual Core/helper CI succeeded. Actual final idle/normal own release/Closure01 completed. Save final Closure01+Docs3, then observe exact final push/Core+helper CI and preserve actual receipt separately; no self-referential success is invented."
+    "newCycleScope": "Latest user directs a new real3D NPR Gospel graphics redesign. Static shader/model/architecture research is allowed; realimplementation/execution requires freshactualownedcycle. Prior C2/M/P technical evidence remains unchanged.",
+    "previousLivingDocumentationSequence": "D1 actual Core/helper CI succeeded. Actual final idle/normal own release/Closure01 completed. Save final Closure01+Docs3, then observe exact final push/Core+helper CI and preserve actual receipt separately; no self-referential success is invented.",
+    "previousLivingCompleted": {
+      "commit": "04ff1e1214abe82e927ed128d310649c31796235",
+      "coreCiRunId": 42778148735,
+      "helperCiRunId": 42778148418,
+      "status": "completed",
+      "conclusion": "success",
+      "scope": "Actual combined Checkpoint01/Docs3/preservation comparison fix commit;16committed part bytes independently verified. Product/deployment identity remains60a58c5d/9e34c3b9."
+    }
   },
   "lastCompletedWorkBeforeCanonArt": {
     "id": "G2",
@@ -5544,5 +5692,18 @@
     "Original Fantasy Masters parity is partial:2649 supported definitions versus15350 original images, with multiplayer disabled for a future update.",
     "Long-term development continues; the original skill598 proposal remains unimplemented/untested. Last automation query was0 and no direct current goal-card status inspection is claimed.",
     "CardMobileBrowser02 was externally interrupted with89files/62PNG/44required Root views and no complete wrapper/verdict; independent recovery check and later successful Browser03 remain separate."
-  ]
+  ],
+  "lastCompletedWorkBeforeClientMotion": {
+    "id": "LivingRpgClassic-2026-11-10",
+    "status": "completed-deployed-release-milestone-normal-own-lease-released-not-full-original-restoration",
+    "productCommit": "60a58c5d262ac6507924e110d87d20cb9cf22aca",
+    "deployedCommit": "9e34c3b9a3fe46d09f14fb722975c9f666924f47",
+    "checkpointSaveCommit": "04ff1e1214abe82e927ed128d310649c31796235",
+    "checkpointCoreCi": 42778148735,
+    "checkpointHelperCi": 42778148418,
+    "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
+    "evidence": "activeLivingRpgClassic.releaseCompletion",
+    "nextGoal": "Continue verified original rules/UI fidelity and natural Gospel RPG/world/character quality; full restoration unfinished.",
+    "finalClosureSaveCi": "Observe actual result after writing; not assumed."
+  }
 }

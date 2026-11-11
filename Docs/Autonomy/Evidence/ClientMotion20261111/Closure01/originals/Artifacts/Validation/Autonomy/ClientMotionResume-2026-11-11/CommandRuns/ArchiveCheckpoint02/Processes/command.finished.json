@@ -1,0 +1,56 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/preserve-release-proof-v3.py",
+    "checkpoint",
+    "--facts",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/checkpoint-facts02.json",
+    "--reviewed-source",
+    "/workspace/firstgame/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/preserve-two-lease-proposal.py",
+    "--confirm-completed-proof"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:30:42.541671+00:00",
+  "timeoutSeconds": 3585.4092959150003,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 32930.285621684,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 47375,
+    "ppid": 47339,
+    "pgid": 47375,
+    "sid": 47375,
+    "state": "R",
+    "startTicks": 2933287,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 47376,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor-result.json",
+    "sha256": "c02baed78278dc04c34d79c15d69bd336d3b0d79c6c05683a1a60acefc7fe75d",
+    "bytes": 5158
+  },
+  "finishedUtc": "2026-11-11T09:32:20.084689+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/command.stdout.log",
+    "sha256": "71dfb7f2253cb6687d65c3965ad5a02be67ea58c3d5bc67b4a52d2ae8de5ef45",
+    "bytes": 493
+  }
+}

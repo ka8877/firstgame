@@ -1,0 +1,53 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "-c",
+    "import hashlib,sys;from pathlib import Path;p=Path(sys.argv[1]);b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==sys.argv[2];exec(compile(b,str(p),\"exec\",dont_inherit=True,optimize=0),{\"__name__\":\"__main__\",\"__file__\":str(p)})",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/commit-checkpoint-docs01.py",
+    "3d21e6390853b531a026352d8de86a1ef36c1bb61a465eb7a60ac63ed3f1bb3a"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:38:45.358098+00:00",
+  "timeoutSeconds": 3585.2592344509976,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 33412.96791034,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 47873,
+    "ppid": 47838,
+    "pgid": 47873,
+    "sid": 47873,
+    "state": "R",
+    "startTicks": 2981570,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 47874,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor-result.json",
+    "sha256": "e7f8fcc2be770b8bbf8c2aaacfa3dc9e0ce29521b9ce86d4fa1e100310bcafcf",
+    "bytes": 35039
+  },
+  "finishedUtc": "2026-11-11T09:42:13.575416+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/command.stdout.log",
+    "sha256": "5e98dc68cb7a87d39510c0c0f97d703127c5bf131c7a85b01bf8cd43a08f727a",
+    "bytes": 2783
+  }
+}

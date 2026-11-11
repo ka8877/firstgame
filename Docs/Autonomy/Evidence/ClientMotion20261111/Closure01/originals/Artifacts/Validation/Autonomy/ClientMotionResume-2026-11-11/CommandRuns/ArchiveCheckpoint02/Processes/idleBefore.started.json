@@ -1,0 +1,21 @@
+{
+  "label": "idleBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:30:41.870636+00:00",
+  "timeoutSeconds": 19.998562567998306,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 32930.285621684,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

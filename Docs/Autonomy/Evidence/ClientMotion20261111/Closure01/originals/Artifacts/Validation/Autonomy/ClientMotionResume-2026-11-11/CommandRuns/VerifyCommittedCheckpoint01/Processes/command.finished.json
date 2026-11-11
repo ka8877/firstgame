@@ -1,0 +1,53 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "-c",
+    "import hashlib,sys;from pathlib import Path;p=Path(sys.argv[1]);b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==sys.argv[2];exec(compile(b,str(p),\"exec\",dont_inherit=True,optimize=0),{\"__name__\":\"__main__\",\"__file__\":str(p)})",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/verify-committed-checkpoint01.py",
+    "d308ded2a76c6f3eb0a7938417983628f64174cab1edfea37f1bcfcf03dd44c4"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:43:29.721189+00:00",
+  "timeoutSeconds": 3585.3999829520035,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 33697.444686464005,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 48244,
+    "ppid": 48208,
+    "pgid": 48244,
+    "sid": 48244,
+    "state": "R",
+    "startTicks": 3010004,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 48245,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-result.json",
+    "sha256": "a851c54a29bee936dcda3df7e08d41e043c4756a57f7c913e604d337c162b2f2",
+    "bytes": 17895
+  },
+  "finishedUtc": "2026-11-11T09:43:31.889922+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/command.stdout.log",
+    "sha256": "623da83a34c938bf7e1e5e4c69cc925307a2feea0a313a24790961d0530fc0b3",
+    "bytes": 140
+  }
+}

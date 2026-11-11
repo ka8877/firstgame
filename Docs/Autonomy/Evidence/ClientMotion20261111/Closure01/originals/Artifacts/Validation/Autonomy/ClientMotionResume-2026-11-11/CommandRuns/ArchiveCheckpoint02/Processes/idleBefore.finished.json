@@ -1,0 +1,50 @@
+{
+  "label": "idleBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:30:42.090601+00:00",
+  "timeoutSeconds": 19.998562567998306,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 32930.285621684,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 47373,
+    "ppid": 47339,
+    "pgid": 47373,
+    "sid": 47373,
+    "state": "R",
+    "startTicks": 2933240,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 47374,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor-result.json",
+    "sha256": "3a9813f5a97b7879449a37bbc3432f7c42356636b8611dd89d4f0ed122d28122",
+    "bytes": 4486
+  },
+  "finishedUtc": "2026-11-11T09:30:42.236428+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/idleBefore.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

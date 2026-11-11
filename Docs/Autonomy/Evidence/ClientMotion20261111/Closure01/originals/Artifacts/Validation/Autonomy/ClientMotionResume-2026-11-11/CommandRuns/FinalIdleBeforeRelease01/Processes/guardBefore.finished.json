@@ -1,0 +1,53 @@
+{
+  "label": "guardBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Autonomy/cycle_guard.py",
+    "check",
+    "--record",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:47:55.752171+00:00",
+  "timeoutSeconds": 44.99932131899914,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 33965.933470696,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 48341,
+    "ppid": 48340,
+    "pgid": 48341,
+    "sid": 48341,
+    "state": "R",
+    "startTicks": 3036605,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 48342,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor-result.json",
+    "sha256": "5cae49113c105da94d572daedeb6df412a940c72dcde2574d4bfa33f48e35253",
+    "bytes": 6544
+  },
+  "finishedUtc": "2026-11-11T09:47:57.437424+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/guardBefore.stdout.log",
+    "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18",
+    "bytes": 749
+  }
+}

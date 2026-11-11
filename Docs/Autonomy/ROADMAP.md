@@ -2,7 +2,7 @@
 
 ## 현재 ClientMotion — 새 공개·6회315원본·봉인·Checkpoint 완료
 
-실제 C2 `d6f9a458…`/정상PR6병합 M `bfa37cbe…`/공개P `47f2e80f…`, mainCore42981070760/helper42981070867·Pages42981922548이 성공했습니다. stage/전체 fresh 전달은15,423파일·980,207,012B이며 manifestc6e07cae…입니다. Portal03·2Root포털원본과6회브라우저315필수원본/전체FinalSeal01을 통과했고 실제 Checkpoint01 보존을 완료했습니다. D1 저장CI·최종resume해제·Closure는 아직 대기입니다.
+실제 C2 `d6f9a458…`/정상PR6병합 M `bfa37cbe…`/공개P `47f2e80f…`, mainCore42981070760/helper42981070867·Pages42981922548이 성공했습니다. stage/전체 fresh 전달은15,423파일·980,207,012B이며 manifestc6e07cae…입니다. Portal03·2Root포털원본과6회브라우저315필수원본/전체FinalSeal01을 통과했고 실제 Checkpoint01 보존을 완료했습니다. D1 b43dbd35…의 Core42997398913/helper42997398926과25개 실제 커밋 blob 대조도 성공했고,18:48:23 KST 정상 자기해제·18:49:15 KST Closure302원본 보존을 완료했습니다.
 
 | 현재 승인 실행 | 검사 | PNG | 필수 Root 원본 |
 |---|---:|---:|---:|
@@ -13,15 +13,15 @@
 | Card Public Browser01 | 110 | 66 | 54 |
 | Gospel Public Browser01 | 91 | 62 | 46 |
 
-1. 실제 [Checkpoint01](Evidence/ClientMotion20261111/Checkpoint01/index.json)과 이 문서를 함께 저장하고 정확한 push/CI·커밋된21part의 실제 바이트를 확인합니다. 원본6,779개·21조각·결합684,456,578B, index SHA `280e37a403379f06af4ca0a4d0c4367c47717a586238015d7f9e6c0277b34583`·결합 SHA `2095589cac85d55f9d7df37a7a008d91f85767bc0e49a4902d7a347110f356a1`입니다. 새V3 Root리뷰/실제27unit 뒤 ArchiveCheckpoint02가11월11일18:32:21 KST에 완료했고 일반 wrapper와 actual proof-preserved 결과를 구분합니다. 첫 Archive01의 목적지전 argv비교실패·V2/raw는 그대로 보존합니다.
-2. 독립 최종 유휴·소유후손정리·정확한 현재 resume 원격소유권을 확인하고 정상 자기해제를 수행합니다. 이어 실제 늦은 원본을 Closure01로 보존하고 D2의 정확한 저장commit/CI를 작성 후 관측합니다. 현재 이 단계와 D1 저장CI는 미완료이며 미래 자기참조 성공을 만들지 않습니다.
-3. 다음 제품 회차는 실제 환경/소스/프로세스/원격과 새 고유 소유권을 다시 확인합니다. 실제 원작 규칙·UI 충실도와 Gospel 인물/동선 품질을 계속 개선하며 이번 제품 공개를 장기 목표 전체 완료로 표시하지 않습니다.
+1. [Checkpoint01](Evidence/ClientMotion20261111/Checkpoint01/index.json)의6,779원본·21조각·684,456,578B와 D1 실제 커밋 바이트/CI를 확인했고, [Closure01](Evidence/ClientMotion20261111/Closure01/index.json)의 늦은 원본302개·index148,546B/SHA7dc22cee…도 보존했습니다. 최종 유휴와 정상 자기 잠금 해제를 마쳤습니다. 이 최종 문서·Closure를 처음 저장하는 후속 커밋의 실제 push/CI는 작성 후 별도 관측하며 자기 미래 결과를 만들지 않습니다.
+2. 최신 사용자 요청에 따라 예수님의 길을 실제3D NPR 애니풍으로 전환합니다. 호환·사용 조건이 확인된 셰이더와 좋은 모델/배경 자산을 선택하고, 얼굴·체형·관절 동작·조명·카메라·소품·UI가 함께 개선된 플레이 가능한 마을 구역을 만듭니다. 현재 새 방향은 조사 단계이며 새3D 구현/검사/배포를 완료했다고 주장하지 않습니다.
+3. 새 실행 전에 실제 환경·프로세스·원격 상태와 새 고유 소유권을 확인합니다. 기존 이야기/성경본문/안정ID/저장·판마 공개판을 유지하고 현재 소스의 Native/Web/브라우저와 새 화면을 실제 검증한 뒤 갱신합니다. 원작 판마 전체 규칙/UI 복원도 남아 있으며 이번 기술 마일스톤 종료를 장기 목표 전체 완료로 표시하지 않습니다.
 
 Portal03은15,423논리GET/15,428실제시도,5retained503/관측max2(상한3),최종모든200/bytes/SHA와Root2landing승인입니다. 이전Portal01의5/Portal02의다른2HTTP503·로더Diagnostic01/2GETDiagnostic02를 보존했습니다. 새transport-only siblingDraft는18unit/Root리뷰 뒤502/503/504의동일GET만최대3시도하고 모든오류body를남겼으며 원래 verifier/rawreport/제품/sharedTools/oldhelper는 바꾸지 않았습니다. 부분정상응답을 전체성공으로 세지 않습니다.
 
 owned55 빈칸 관찰은 Root 오류로 정정합니다. 과거/새원본 def2e4f2…/363,442B가 동일하며4완전카드/55보유/200SP를 보입니다. correction32f74d28…와최초반려/rawpass/92파일을 남기고 Browser01소급승인하지 않습니다. 독립 Browser02만 현재 승인입니다. Native선택11+11source/build리뷰·315browser필수원본·Portal2뷰는 서로 다른 범위이며 전체Native31/58장·물리폰·사용자미적승인을 주장하지 않습니다.
 
-정상 origin해제15:55:53 KST→새unique취득15:55:55 KST의 두 고정 회차이며 연장이 아닙니다. activecontrol `Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11`, owner `fa5e7cab-cce6-4511-bfc8-448f63541840`, lock `64dec34fe244fba43a126e57e2a16dcf75d4c72f`, 마감21:55:55 KST를 유지합니다. 현재 resume해제/Closure는 아직이고 archived acquired/released 사본은 새 소유권이 아닙니다.
+정상 origin해제15:55:53 KST→새unique취득15:55:55 KST의 두 고정 회차이며 연장이 아닙니다. activecontrol `Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11`, owner `fa5e7cab-cce6-4511-bfc8-448f63541840`, lock `64dec34fe244fba43a126e57e2a16dcf75d4c72f`, 마감21:55:55 KST를 유지합니다. 현재 resume는18:48:23 KST에 정상 해제됐고 Closure01도 실제 완료했습니다. archived acquired/released 사본은 새 소유권이 아닙니다.
 
 2011nativeentry/2017live와2014WEBguide/미접근Arena이미지를 구분하고2014–18native로그인/상점픽셀·종료직전완전동일은 미확인입니다. 카드2649출전/15350원본·기존ID/GUID/저장/재화와Gospel23사건/19본문/51세부/28음성을 보존하며 멀티플레이는 비활성·추후업데이트입니다. 마지막자동화0은 이전조회·목표활성은미확인이고24시간백그라운드나전체원작복원완료를 주장하지 않습니다.
 

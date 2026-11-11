@@ -1,0 +1,24 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "-c",
+    "import hashlib,sys;from pathlib import Path;p=Path(sys.argv[1]);b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==sys.argv[2];exec(compile(b,str(p),\"exec\",dont_inherit=True,optimize=0),{\"__name__\":\"__main__\",\"__file__\":str(p)})",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/commit-checkpoint-docs01.py",
+    "3d21e6390853b531a026352d8de86a1ef36c1bb61a465eb7a60ac63ed3f1bb3a"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T09:38:45.173575+00:00",
+  "timeoutSeconds": 3585.2592344509976,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 33412.96791034,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

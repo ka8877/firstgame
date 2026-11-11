@@ -1,6 +1,6 @@
-# ClientMotion 신규 버전 공개 · 6회 검증·봉인·Checkpoint 완료
+# ClientMotion 공개·검증·보존·정상 종료 완료
 
-판타지마스터즈의 실제 클라이언트 UI와 예수님의 길의 중립 인물 보행을 개선한 새 버전을 [테스트 페이지](https://ka8877.github.io/firstgame/)에 공개했습니다. 후보C2는 `d6f9a4585b31d54e316dfd09d36326a172a49206`, PR #6 정상 병합 제품 소스는 `bfa37cbeac847bcff33b2114dad4a8e5e3a83015`, 공개 gh-pages는 `47f2e80f369b4c4172d7deee72b09a6f9e760f8e`입니다. Pages42981922548과 후보 Core/helper42968585290/42968585230·main42981070760/42981070867은 실제 성공했습니다. 제품 검증·영구 checkpoint는 완료했으며 이번 문서 저장 CI·최종 유휴·현재 resume 잠금 해제·Closure는 아직 대기입니다.
+판타지마스터즈의 실제 클라이언트 UI와 예수님의 길의 중립 인물 보행을 개선한 새 버전을 [테스트 페이지](https://ka8877.github.io/firstgame/)에 공개했습니다. 후보C2는 `d6f9a4585b31d54e316dfd09d36326a172a49206`, PR #6 정상 병합 제품 소스는 `bfa37cbeac847bcff33b2114dad4a8e5e3a83015`, 공개 gh-pages는 `47f2e80f369b4c4172d7deee72b09a6f9e760f8e`입니다. Pages42981922548과 후보 Core/helper42968585290/42968585230·main42981070760/42981070867은 실제 성공했습니다. D1 `b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed`의 Core42997398913/helper42997398926도 실제 성공했고, 최종 유휴·정상 자기 잠금 해제·Closure01 보존을 완료했습니다.
 
 clean Stage와 전체 공개 전달은 manifest 포함15,423파일·980,207,012B로985,000,000B 제한을 통과했습니다. manifest SHA는 `c6e07cae85c3dd64ed783ce6933a752c46c5a9c3b57d65cd70c9cfb8afd99f72`입니다. 이전 gh-pages9e34c3b9…를 부모로 보존한 정상 새 게시이며 기존 원본·저장·실패 이력도 유지합니다.
 
@@ -25,9 +25,11 @@ PublicPortal03은 전체15,423논리파일의 fresh GET에서 최종HTTP200·크
 
 owned55 ‘빈카드4개’는 Root 최초 관찰 오류였습니다. 과거/새원본은363,442B·SHA `def2e4f2d6fc58b291beae0de974210051b1999e0b19dcbc77e798bd8ea7c965`로 byte-identical하고 완전한카드4장·보유55·200SP가 보입니다. correctionreceipt32f74d28…를 보존하고 최초반려/raw기능pass/92파일이력을 지우거나 Browser01을 소급 승인하지 않습니다. 현재 승인은 새 계획 전체를 독립 완료한 Browser02입니다.
 
-원래 회차의 실제 finalidle 뒤15:55:53 KST 정상해제→15:55:55 KST 새 unique lease 취득은 연장이 아닙니다. 현재 control은 `Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11`, owner `fa5e7cab-cce6-4511-bfc8-448f63541840`, commit `64dec34fe244fba43a126e57e2a16dcf75d4c72f`, 고정마감21:55:55 KST입니다. 실제 인계 원문은 `Release/lease-chain-originals.json`에 있습니다. 현재 resume는 아직 acquired이며 독립 최종 유휴·정상 자기해제·Closure는 수행 전입니다. 먼저 실제 checkpoint+이 문서의 저장commit/CI·커밋된21조각을 확인하고, 실제 유휴/해제/Closure 뒤 최종 문서와 그 후속 CI를 관측합니다. 미래의 자기저장commit/CI 성공을 미리 만들지 않습니다.
+원래 회차의 정상 해제 뒤15:55:55 KST에 별도로 취득한 resume 잠금도11월11일18:48:23 KST에 정상 해제했습니다. 독립 FinalIdleBeforeRelease01의 실제 명령·최종guard exit0와 소유 후손 정리를 확인했으며, 실제 release stdout은 released lease와 같고 후속 status는 available이었습니다. available은 저장한 조회 결과이며 현재 소유권이나 상시 실행을 뜻하지 않습니다. D1의 실제 커밋25개 blob과21개 압축 조각을 재대조했습니다. [Closure01](Evidence/ClientMotion20261111/Closure01/index.json)은18:49:15 KST에 늦은 원본302개를 보존했고 index148,546B·SHA `7dc22ceea965b75cc6749ebc72cc0a37fb568dc16211ab9161bd1fabcc30f1c6`입니다. 앞선6,779원본은 의도한 자기 lease의 acquired→released 전환 외 모두 불변입니다. 이 Closure와 최종 문서를 처음 저장하는 후속 커밋·CI는 작성 뒤 실제 결과를 별도로 확인하며, 자기 미래 성공을 Closure 안에 만들지 않습니다.
 
 중립 one-body는 정확한 HD CC-BY3.0 source8830c68b…의5인×8방향×20(idle4/walk8/run8)이며,5PNG/9,093,977B·800cellpadding과 Motion05전체27pass에 결합합니다. 실제2560×1024import·공통footanchor/depth·0.7초재경로·원래23이야기CoreX를 유지했습니다. 이전font/Native/미리보기/atlas/Builds01실패와 oldGospelWeb01byte보존도 남깁니다. 최신2014–18조사에서도 FIRST native로그인/상점픽셀은 미확인이며2014WEBguide·접근불가Arena이미지를 후기 원작화면으로 쓰지 않습니다.2011entry/2017live를 시기별로 구분합니다. 카드2649출전/15350원본·기존ID/GUID/저장/재화와Gospel23사건/19본문/51세부/28음성을 보존하고 멀티플레이는 비활성·추후업데이트입니다. 제품 공개 완료를 완전 원작 동일·물리폰 성능·사용자 미적 승인·24시간 자동실행으로 확대하지 않습니다. 마지막자동화0은 이전조회이며 목표활성은 미확인입니다.
+
+최신 사용자 피드백은 현재 예수님의 길의 인물·배경·사물·UI 전체 품질을 거절하고, 원신·스타레일 방향의 깔끔한 실제3D NPR 그래픽을 요청했습니다. 다음 제품 회차는 셰이더만 덧씌우는 방식 대신 모델·얼굴·관절 애니메이션·배경·조명·카메라·UI를 함께 바꾸는 플레이 가능한 구역을 우선합니다. 현재는 새 소스의 조사만 시작했으며 새3D 구현·검사·배포나 사용자 만족을 완료했다고 표시하지 않습니다. 기존 이야기·본문·저장과 판마 공개판은 보존합니다.
 
 아래는 이전 완료·실패·중단 이력입니다.
 

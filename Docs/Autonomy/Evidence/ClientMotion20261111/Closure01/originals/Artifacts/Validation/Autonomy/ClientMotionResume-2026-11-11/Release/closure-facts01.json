@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "releaseProfile": "client-motion",
+  "createdUtc": "2026-11-11T09:48:50.680691+00:00",
+  "leaseChain": {
+    "schema": 1,
+    "origin": {
+      "controlRoot": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/owned-lease.executed.json",
+        "bytes": 821,
+        "sha256": "eaf5292c2e375aa218bdc9b93660a33e58154fd85b6eb8abf316a400d219d0d7"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+        "bytes": 874,
+        "sha256": "aa9bf9a9740d5389d8763e814643dbe467c3b1fcd9e4bf01f950953c556f5242"
+      },
+      "releaseStdout": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/origin-normal-release.json",
+        "bytes": 794,
+        "sha256": "1d0ae49ef8d15078350b09de354c2dfc494a57188eab43424e0d301e25583fc8"
+      },
+      "statusStdout": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/origin-post-release-status.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "finalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/summary.json",
+        "bytes": 10932,
+        "sha256": "2dfb4f96666b50971db74fa065264535866808c73cb7f06b2f9de2d4f10c22a6"
+      }
+    },
+    "active": {
+      "controlRoot": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ResumeIdle01/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      }
+    }
+  },
+  "checkpoint": {
+    "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Checkpoint01/index.json",
+    "bytes": 2979862,
+    "sha256": "280e37a403379f06af4ca0a4d0c4367c47717a586238015d7f9e6c0277b34583"
+  },
+  "releasedLease": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+    "bytes": 880,
+    "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+  },
+  "releaseStdout": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json",
+    "bytes": 800,
+    "sha256": "6d93eb61ff504996f401b75b4577e5bb9c6e7ec0b06568bdbcf6e829b06a9a07"
+  },
+  "statusStdout": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json",
+    "bytes": 99,
+    "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+  },
+  "archiveWrapper": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/summary.json",
+    "bytes": 11524,
+    "sha256": "ccb0cc47372545cf55c8a6cbf05dbeef120ed3869bd973adf55bff769c65f5f4"
+  },
+  "finalIdleWrapper": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+    "bytes": 11210,
+    "sha256": "7c8249b7addc6c81a98189517def9c16420e1d6069706ccc7caa83e51a383c29"
+  },
+  "documentationCi": [
+    {
+      "commit": "b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed",
+      "runId": 42997398913,
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json",
+        "bytes": 4561,
+        "sha256": "c26a080766ec224e65c8ec7cabbe8abd742ef856377457c2ec20a0cb8808eb6f"
+      }
+    }
+  ],
+  "lateOriginals": []
+}

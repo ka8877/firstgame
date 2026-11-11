@@ -1,0 +1,278 @@
+{
+  "status": "command-completed",
+  "scope": "generic-owned-command-only",
+  "label": "VerifyCommittedCheckpoint01",
+  "invocation": {
+    "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/invocation.json",
+    "bytes": 11927,
+    "sha256": "8ca067db79f99ab4a5096ca9232ab2b39609add334146057bea6062b19668393"
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "automaticRetryOrApproval": false,
+  "guardBefore": {
+    "event": {
+      "label": "guardBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T09:43:27.322943+00:00",
+      "timeoutSeconds": 44.99926440499985,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 33697.444686464005,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 48209,
+        "ppid": 48208,
+        "pgid": 48209,
+        "sid": 48209,
+        "state": "R",
+        "startTicks": 3009756,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 48210,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor-result.json",
+        "sha256": "56b72134003b9a472fe481483bafedd530730a5c4d3c293dbd8f687ffb257491",
+        "bytes": 6544
+      },
+      "finishedUtc": "2026-11-11T09:43:29.003238+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardBefore.stdout.log",
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18",
+        "bytes": 749
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardBefore.finished.json",
+      "bytes": 1941,
+      "sha256": "79e095491e83f9645198c0aaa5e88675fca56452c929ae0d4c7763ba3a0d079d"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardBefore.stdout.log",
+      "bytes": 749,
+      "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+    }
+  },
+  "idleBefore": {
+    "event": {
+      "label": "idleBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T09:43:29.286633+00:00",
+      "timeoutSeconds": 19.998106935996475,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 33697.444686464005,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 48242,
+        "ppid": 48208,
+        "pgid": 48242,
+        "sid": 48242,
+        "state": "R",
+        "startTicks": 3009960,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 48243,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor-result.json",
+        "sha256": "801fca661fdeba09a3f0d79041dae8e8ff41f661a49fba99e9c0c81e2313cb7d",
+        "bytes": 4486
+      },
+      "finishedUtc": "2026-11-11T09:43:29.440707+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/idleBefore.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/idleBefore.finished.json",
+      "bytes": 1820,
+      "sha256": "434926aeed44465ccf76c216f595b0eeaeb4d05f568d242c3d4b6cfa75b914b9"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/idleBefore.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "command": {
+    "event": {
+      "label": "command",
+      "argv": [
+        "python3",
+        "-c",
+        "import hashlib,sys;from pathlib import Path;p=Path(sys.argv[1]);b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==sys.argv[2];exec(compile(b,str(p),\"exec\",dont_inherit=True,optimize=0),{\"__name__\":\"__main__\",\"__file__\":str(p)})",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/verify-committed-checkpoint01.py",
+        "d308ded2a76c6f3eb0a7938417983628f64174cab1edfea37f1bcfcf03dd44c4"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T09:43:29.721189+00:00",
+      "timeoutSeconds": 3585.3999829520035,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 33697.444686464005,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 48244,
+        "ppid": 48208,
+        "pgid": 48244,
+        "sid": 48244,
+        "state": "R",
+        "startTicks": 3010004,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 48245,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-result.json",
+        "sha256": "a851c54a29bee936dcda3df7e08d41e043c4756a57f7c913e604d337c162b2f2",
+        "bytes": 17895
+      },
+      "finishedUtc": "2026-11-11T09:43:31.889922+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/command.stdout.log",
+        "sha256": "623da83a34c938bf7e1e5e4c69cc925307a2feea0a313a24790961d0530fc0b3",
+        "bytes": 140
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/command.finished.json",
+      "bytes": 2151,
+      "sha256": "333ee6259c8caae9010e03d6888963306b7380e58679e7c1ef4bb9a497b7d18d"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/command.stdout.log",
+      "bytes": 140,
+      "sha256": "623da83a34c938bf7e1e5e4c69cc925307a2feea0a313a24790961d0530fc0b3"
+    }
+  },
+  "guardAfter": {
+    "event": {
+      "label": "guardAfter",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T09:43:32.157225+00:00",
+      "timeoutSeconds": 44.996745445998386,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 33697.444686464005,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClientMotion-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-client-motion-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 48272,
+        "ppid": 48208,
+        "pgid": 48272,
+        "sid": 48272,
+        "state": "R",
+        "startTicks": 3010249,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 48273,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor-result.json",
+        "sha256": "ea548d30338a42154d77b247dfe19ed8a962d44d46ffa2418cef690496b3062a",
+        "bytes": 6543
+      },
+      "finishedUtc": "2026-11-11T09:43:33.631348+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardAfter.stdout.log",
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18",
+        "bytes": 749
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardAfter.finished.json",
+      "bytes": 1939,
+      "sha256": "7b399e2aa32a959dc12b3b07e0045015b6971163b4d5c667718e86556eca65c1"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardAfter.stdout.log",
+      "bytes": 749,
+      "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+    }
+  },
+  "finishedUtc": "2026-11-11T09:43:33.647242+00:00",
+  "executionLimit": {
+    "maximumSharedSeconds": 3600,
+    "leaseReserveSeconds": 60,
+    "cleanupReserveSeconds": 12,
+    "startedMonotonic": 30097.444686464,
+    "safeEndMonotonic": 33697.444686464005
+  }
+}

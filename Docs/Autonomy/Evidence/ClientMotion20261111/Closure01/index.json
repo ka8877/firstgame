@@ -1,0 +1,2544 @@
+{
+  "schema": 1,
+  "releaseProfile": "client-motion",
+  "createdUtc": "2026-11-11T09:49:15.487879+00:00",
+  "scope": "Byte-preserved actual completed archive/final idle wrappers, late checks/documentation CI and own released lease/status originals. Prior unchanged originals remain in Checkpoint01. The available status is only the actual saved command observation; no ownership, timestamp, runtime check or approval is invented.",
+  "actualPreconditions": {
+    "facts": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/closure-facts01.json",
+      "bytes": 3674,
+      "sha256": "c8f709bfcbc3f939257a3046c1c1f2543ca3e6e8dfd895ccbcd0b700ad29eb7d"
+    },
+    "checkpoint": {
+      "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Checkpoint01/index.json",
+      "bytes": 2979862,
+      "sha256": "280e37a403379f06af4ca0a4d0c4367c47717a586238015d7f9e6c0277b34583"
+    },
+    "leaseChain": {
+      "facts": {
+        "schema": 1,
+        "origin": {
+          "controlRoot": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11",
+          "acquiredLease": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/owned-lease.executed.json",
+            "bytes": 821,
+            "sha256": "eaf5292c2e375aa218bdc9b93660a33e58154fd85b6eb8abf316a400d219d0d7"
+          },
+          "releasedLease": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+            "bytes": 874,
+            "sha256": "aa9bf9a9740d5389d8763e814643dbe467c3b1fcd9e4bf01f950953c556f5242"
+          },
+          "releaseStdout": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/origin-normal-release.json",
+            "bytes": 794,
+            "sha256": "1d0ae49ef8d15078350b09de354c2dfc494a57188eab43424e0d301e25583fc8"
+          },
+          "statusStdout": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/origin-post-release-status.json",
+            "bytes": 99,
+            "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+          },
+          "finalIdleWrapper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/summary.json",
+            "bytes": 10932,
+            "sha256": "2dfb4f96666b50971db74fa065264535866808c73cb7f06b2f9de2d4f10c22a6"
+          }
+        },
+        "active": {
+          "controlRoot": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11",
+          "acquiredLease": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ResumeIdle01/owned-lease.executed.json",
+            "bytes": 827,
+            "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+          }
+        }
+      },
+      "originAcquired": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/owned-lease.executed.json",
+        "bytes": 821,
+        "sha256": "eaf5292c2e375aa218bdc9b93660a33e58154fd85b6eb8abf316a400d219d0d7"
+      },
+      "originReleased": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+        "bytes": 874,
+        "sha256": "aa9bf9a9740d5389d8763e814643dbe467c3b1fcd9e4bf01f950953c556f5242"
+      },
+      "activeAcquired": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ResumeIdle01/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      },
+      "originFinalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/OriginFinalIdle01/summary.json",
+        "bytes": 10932,
+        "sha256": "2dfb4f96666b50971db74fa065264535866808c73cb7f06b2f9de2d4f10c22a6"
+      }
+    },
+    "sourceCommit": "bfa37cbeac847bcff33b2114dad4a8e5e3a83015",
+    "publishedCommit": "47f2e80f369b4c4172d7deee72b09a6f9e760f8e",
+    "wrappers": {
+      "archiveWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/summary.json",
+        "bytes": 11524,
+        "sha256": "ccb0cc47372545cf55c8a6cbf05dbeef120ed3869bd973adf55bff769c65f5f4"
+      },
+      "finalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+        "bytes": 11210,
+        "sha256": "7c8249b7addc6c81a98189517def9c16420e1d6069706ccc7caa83e51a383c29"
+      }
+    },
+    "releasedLease": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+      "bytes": 880,
+      "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+    },
+    "releaseStdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json",
+      "bytes": 800,
+      "sha256": "6d93eb61ff504996f401b75b4577e5bb9c6e7ec0b06568bdbcf6e829b06a9a07"
+    },
+    "statusStdout": {
+      "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json",
+      "bytes": 99,
+      "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+    },
+    "documentationCi": [
+      {
+        "commit": "b43dbd35d48bfc3f2679ccf21d819eaddf38c3ed",
+        "runId": 42997398913,
+        "receipt": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json",
+          "bytes": 4561,
+          "sha256": "c26a080766ec224e65c8ec7cabbe8abd742ef856377457c2ec20a0cb8808eb6f"
+        }
+      }
+    ],
+    "owner": "fa5e7cab-cce6-4511-bfc8-448f63541840",
+    "commitSha": "64dec34fe244fba43a126e57e2a16dcf75d4c72f",
+    "releasedUtc": "2026-11-11T09:48:23.284626+00:00"
+  },
+  "fileCount": 302,
+  "files": [
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/command-spec.json",
+        "bytes": 2141,
+        "sha256": "692ae8faa417341aa2c925c2aaefd448f8743754f8526f35da53324fb7985c47"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "fb524a28b4b56aa88d597e4fd639e7dce5392e23f273ac1b64b8287c3aedb044"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "73f4698b6a058c978c48e0eb6dd9427bc56aa583a2ac0701f6b0528b815d9d11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "5a366c59b0cf38fc45a772a5453c407a5fbb31a1a95a00571c0b084bb4c69646"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/command-spec.json",
+        "bytes": 2023,
+        "sha256": "12ea338a7765368999b67230f3c0e8bb686ce4218b62d20f903992bac402d564"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "d23e1ca00836d2a75d71d8fb5a0975c8ef2162d2f2ec8f6a46c44667ad6f3962"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "7705b7122abc3abd765fdd4bd90560f7b729524b4029d5d315878160a18679ab"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "3a9813f5a97b7879449a37bbc3432f7c42356636b8611dd89d4f0ed122d28122"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/command-spec.json",
+        "bytes": 2350,
+        "sha256": "bb22728778e462388ddd6699b4cb5d1ecf1d3abb40cb57a8feda4f1687800906"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "252a7344195eec1eb9df1f5587711ab3b8ffbb09a0539eda97a390c7d5ef42d9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "f62ceb61126ab526deea0fa767598b4b45ed8dd52e3394dba26092914de39bc1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor-result.json",
+        "bytes": 5158,
+        "sha256": "c02baed78278dc04c34d79c15d69bd336d3b0d79c6c05683a1a60acefc7fe75d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/command-spec.json",
+        "bytes": 2140,
+        "sha256": "5bf869fc95271b920d62c3c2eb1b5c985ef00850caeea43a1725d09219298cbf"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "a22181234821254eb2bc21e8eccc913811d34b3bf58d0075e5a582460c5b3d19"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "5550922735c1b2dea1874e74e85956eb7a2fea49f3db4601ce77953c374091da"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "cb41fc06cb065b9d6dab6c674c1e2f09db99d064695b68db3a23e364095d1885"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Containment/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/command.finished.json",
+        "bytes": 2116,
+        "sha256": "842dd638da06a9bd61ea0a3bcc62f72ce5aa2fe4aef89070ef92d000b8aeab28"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/command.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/command.started.json",
+        "bytes": 1227,
+        "sha256": "92ad28405fca959d0f4d1d859a349f29f240b2cf3b686db6815b4dd9c98824a4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/command.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardAfter.finished.json",
+        "bytes": 1911,
+        "sha256": "23d515c3e5984ffbf27f679d3b257613db86c11ec2526d31341424548cce801d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardAfter.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardAfter.started.json",
+        "bytes": 1016,
+        "sha256": "833e254da7347d59b06cacf49231108f80a8cc5ad72ff60a1be02d9e62854cfb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardAfter.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardBefore.finished.json",
+        "bytes": 1915,
+        "sha256": "2ad54c2627513737078970fa06d59224be1dec00e8584cf1ddf3e338de1b2a1a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardBefore.started.json",
+        "bytes": 1018,
+        "sha256": "38d6e8dcef69c8fdad1d7134ac7d98f56242073907a3f472175de4c742820c7a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/guardBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/idleBefore.finished.json",
+        "bytes": 1793,
+        "sha256": "ce7110f437722ec452a221ed7a5f7ac8be7ecc7abd44f8331b7478684069e2a9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/idleBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/idleBefore.started.json",
+        "bytes": 900,
+        "sha256": "a257df52d3aa990d980339c17ca34f6fb5b0f761f96afb8a78db067d0fc0c848"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/Processes/idleBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-archive-v3.py",
+        "bytes": 12565,
+        "sha256": "1c990bd0eedd7d74d3b86731c6ee3a0dc109e70de21410666025d4f268eab17f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-archive-v3.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py",
+        "bytes": 68984,
+        "sha256": "960eb6a8d30ad610e17581f45bcdbc13602030fe567ab954cd2602b94021a07d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py",
+        "bytes": 20211,
+        "sha256": "76ed9ae568adb96fcfbe1ea0390ff19dd38a0049a4a4837d5dc2c2f876276b11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/preserve-two-lease-proposal.py",
+        "bytes": 69015,
+        "sha256": "f23e60d6bea65971af7a1bf89199f30f45f5851f459cfd1329aada6b9a53394f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/preserve-two-lease-proposal.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/test_two_lease_preserver.py",
+        "bytes": 22813,
+        "sha256": "26eaeb21a10e5965c20db79916dcd5e4fffb1f3de85d92eecffe39c719fe3811"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/test_two_lease_preserver.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Autonomy/cycle_guard.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Environment/assert-runtime-idle.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Environment/owned-process-containment.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 3814,
+        "sha256": "5f1be92838b4b7eebe563a9f2f4c09f14827b4781a70b910ff9b5a1f71ea11f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 40473,
+        "sha256": "a111956260d04e319c25957f02f8ce79896a382041add64e7832b28d3746bafb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/canon_release_evidence.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/chronicle_storage.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/restoration_source_binding.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 8174,
+        "sha256": "d8672c647fc05666b7b25c3e1336a381c4d4d2dfdcf2e383230dd8cb083c80b4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Validation/run-canon-native.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 7734,
+        "sha256": "9aa189206c525b05c20e682ac6e042478bd37633917a1d450fa76692b7bdd285"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/release_contract.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/stage-canon.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/RecordedHarness/Tools/Web/stage-luminous.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/command.stdout.log",
+        "bytes": 493,
+        "sha256": "71dfb7f2253cb6687d65c3965ad5a02be67ea58c3d5bc67b4a52d2ae8de5ef45"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/command.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/guardAfter.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/guardAfter.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/guardBefore.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/guardBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/idleBefore.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/idleBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/invocation.json",
+        "bytes": 12977,
+        "sha256": "e1d9776a2a444466bc30e732356359ac363cb40614096a1306886509777080e6"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/invocation.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/owned-lease.executed.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/summary.json",
+        "bytes": 11524,
+        "sha256": "ccb0cc47372545cf55c8a6cbf05dbeef120ed3869bd973adf55bff769c65f5f4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/ArchiveCheckpoint02/summary.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/command-spec.json",
+        "bytes": 2151,
+        "sha256": "e6f08ed170a4118331c6f153ab9e3eb7d8b23c6b4df22482f03fb8e0ca2576da"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "b7306a52b07b70d5f9d50c21c581012c8dbf8d67d0ad36275f6c4df1870195ad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "9cd51da780060819a65d14d6668b1a763ea701c05853311010828ae6ece070a7"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "5cae49113c105da94d572daedeb6df412a940c72dcde2574d4bfa33f48e35253"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/command-spec.json",
+        "bytes": 2033,
+        "sha256": "be57b4be12df22974549648c942a12174e47559cc09cfb81f634aaa919dc405a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "7ed746bcad26ee4a65b56d4cc11560f83f607981a35881ecb481aa72bfcb8d0f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "90dfa9bbda674878f52f6e8a5f7026429da85353db66dcfaf7a3a47f81aa2483"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "b66a66347e7da8ceb1911c84e9fdcd406e17805d3de60d82a33c5330915a69f3"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/command-spec.json",
+        "bytes": 1964,
+        "sha256": "f80c32b883216654febc146b9c1b6444e713d50c938a3302eb21759fc14f7104"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "96476f797e4d6838bf4c95763f6d36849b43408ca97f40e1d57efd4feb655046"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "27f41676f3411da37e6a312c0e24bfb1ea40b2159ee5af997309f27f054e049e"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor-result.json",
+        "bytes": 4354,
+        "sha256": "9c23268400c293ed4eb2d707b000c0a9f4acd6027151edc030c931930ba26fe0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/command-spec.json",
+        "bytes": 2150,
+        "sha256": "6fb93328c56a0d0d33d620a9083fe4c8df79bceb62c5713bf319789eab061fe0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1258,
+        "sha256": "2728f8e0717c8bbcbb532e3c4613f5190932ec056e4852e58c6570a196f530bb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "a079ef169c084cbc4bea47dc81e1d90d79664ca4b7de1ed304aa242f7045624f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "2149843853b105d970353d7292cdc967150644f3cf2e26179e1ebe3cdd8738f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Containment/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/command.finished.json",
+        "bytes": 1733,
+        "sha256": "6bc024e6370079a5ae379b4428706c1dba727d1f27d13c5fc6c408376725c7d0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/command.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/command.started.json",
+        "bytes": 836,
+        "sha256": "1ab61348cc2a5d60a2abbd4372340f41a4a38faf21ef7afd58f514b3c16e96db"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/command.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardAfter.finished.json",
+        "bytes": 1927,
+        "sha256": "37db2e0f71f1ce06135eab8b0bf7ec942552496cbe7c14489acf91e457665b57"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardAfter.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardAfter.started.json",
+        "bytes": 1022,
+        "sha256": "7db8dad9341ba2fb186f0a250cccf4f56e1ce7e7ea7f1a09468ec1003e38e72b"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardAfter.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardBefore.finished.json",
+        "bytes": 1929,
+        "sha256": "69f40a9675ad4cb28c363ee02c12f0df130e801513ce55e11d7ab0c1d15f5b8a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardBefore.started.json",
+        "bytes": 1022,
+        "sha256": "9b8f6c2732ea32ae5716c61f29de004754434d03b0e970319cf8e44f8cd8718c"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/guardBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/idleBefore.finished.json",
+        "bytes": 1808,
+        "sha256": "36c46cdf61525338fdd380866ff48d39c7c54ba9eb388e40c87cfc57177de50a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/idleBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/idleBefore.started.json",
+        "bytes": 905,
+        "sha256": "65bcfe8bc6473474c8f8ac2845f43b56516753d4ea395d31c765391acd5ba617"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/Processes/idleBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py",
+        "bytes": 12298,
+        "sha256": "d64699cb96b02f7d3437a719eea6388e77b9b6962caf872ba94af03398e2b539"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py",
+        "bytes": 68984,
+        "sha256": "960eb6a8d30ad610e17581f45bcdbc13602030fe567ab954cd2602b94021a07d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py",
+        "bytes": 20211,
+        "sha256": "76ed9ae568adb96fcfbe1ea0390ff19dd38a0049a4a4837d5dc2c2f876276b11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Autonomy/cycle_guard.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Environment/assert-runtime-idle.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Environment/owned-process-containment.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 3814,
+        "sha256": "5f1be92838b4b7eebe563a9f2f4c09f14827b4781a70b910ff9b5a1f71ea11f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 40473,
+        "sha256": "a111956260d04e319c25957f02f8ce79896a382041add64e7832b28d3746bafb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/canon_release_evidence.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/chronicle_storage.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/restoration_source_binding.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 8174,
+        "sha256": "d8672c647fc05666b7b25c3e1336a381c4d4d2dfdcf2e383230dd8cb083c80b4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Validation/run-canon-native.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 7734,
+        "sha256": "9aa189206c525b05c20e682ac6e042478bd37633917a1d450fa76692b7bdd285"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/release_contract.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/stage-canon.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/RecordedHarness/Tools/Web/stage-luminous.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/command.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/command.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/guardAfter.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/guardAfter.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/guardBefore.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/guardBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/idleBefore.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/idleBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/invocation.json",
+        "bytes": 11064,
+        "sha256": "c6b5e1626e7b6b594fbf78c3f80a094e279952a02cff35eaf80e66a4cf3fb5d9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/invocation.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/owned-lease.executed.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json",
+        "bytes": 11210,
+        "sha256": "7c8249b7addc6c81a98189517def9c16420e1d6069706ccc7caa83e51a383c29"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/FinalIdleBeforeRelease01/summary.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/command-spec.json",
+        "bytes": 2143,
+        "sha256": "ad76e1899260d283fee66d57489ef176976b7448fbb26e0543a9a11a2cfb4a90"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "d8f8e089777f3ea9e0f8acbb9d35f58148d54c5fa3f3fc6db28a2b59108aef67"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "cbb6282e35da3815f74cede447f4c0f81d8ebf03e47bd6ca613c7efc40a1da08"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "39d9b96392a0d8edd48006640b6b1d491ca92a49946c8b723eb1e839bf53767b"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/command-spec.json",
+        "bytes": 2025,
+        "sha256": "e4d4ec9a998d1adbdf0c145a96b7678c3ae196a5a9b0e9db6a7aca6cb17012ba"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/lineage-events.jsonl",
+        "bytes": 481,
+        "sha256": "7491ebfd4389b513e84f1b20de5d7f9923edaee8757521ed894a277175bab055"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "b019fe01918ede624936b3088dbc8226331aac69735ebbdef1b9370018e70f63"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor-result.json",
+        "bytes": 4485,
+        "sha256": "105cea6bff3b1ab05f8945dd321f37086e6010a361b568c978c1f28b6f430b12"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/command-spec.json",
+        "bytes": 2353,
+        "sha256": "008eb63dd42e92ba3bef65c74b877644799e12524d925841b3c9cb82fd7012fb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/lineage-events.jsonl",
+        "bytes": 13179,
+        "sha256": "aa7a6cea36afacac5c13368eaba49c533b6598e532276b24150679963afc10b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "e928f59f467a46604e11e897ad5e72aa5f2f0cd512f41f5473103e695b70a4fd"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor-result.json",
+        "bytes": 35039,
+        "sha256": "e7f8fcc2be770b8bbf8c2aaacfa3dc9e0ce29521b9ce86d4fa1e100310bcafcf"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/command-spec.json",
+        "bytes": 2142,
+        "sha256": "75e7692d220eae978736987f3f735f4d3d102cb87e862e7c931f100e70bcbbc5"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "6b4f5ab758996d1e088a5b0691e7cc0cd9d9d80f0a7658a4e6b43a5c2d1a2c25"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "996ff99ad8b6dfd32dd2058d4ee541ea4cc7ae624191e4cce30bbfa252ef7ce1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "d980716275923e1979d2b2b1515c04c6a581d997dbc2fc09cbfe22713686800d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Containment/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/command.finished.json",
+        "bytes": 2122,
+        "sha256": "b04da64f62f1bf4d0f4fa5bd6ac38b85c3f2c9134e3243af6e21ee00a92f5fb4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/command.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/command.started.json",
+        "bytes": 1229,
+        "sha256": "83c1a93b44a926eaf1b9a289a5afc42d9311dd7147ef854898577cc0b21719c0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/command.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardAfter.finished.json",
+        "bytes": 1913,
+        "sha256": "a5c51108f97fc311da3322aac0d10f730140da9383cf37d914e825beb528d9f9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardAfter.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardAfter.started.json",
+        "bytes": 1016,
+        "sha256": "5af77e9bbcb0ba5451799c9f819ca38bd88a0dcd8ef81e4d0930dfef0edde0cc"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardAfter.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardBefore.finished.json",
+        "bytes": 1915,
+        "sha256": "1b7129a384e682fea24da6d14fa80b01a25bb36d57593c65e222507972004ff9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardBefore.started.json",
+        "bytes": 1016,
+        "sha256": "49d24bb992ae82a3d218e68164888c7c1114ff47d56748c263877066e2713fa6"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/guardBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/idleBefore.finished.json",
+        "bytes": 1795,
+        "sha256": "213a0e56361550943b32b84e6b910a9f942780bddbdd305e3acd6a478236e60d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/idleBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/idleBefore.started.json",
+        "bytes": 900,
+        "sha256": "c2728a9bd9c681bb1b50d96fd37684bcd835beb3222b6863722b064119880c9f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/Processes/idleBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py",
+        "bytes": 12298,
+        "sha256": "d64699cb96b02f7d3437a719eea6388e77b9b6962caf872ba94af03398e2b539"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py",
+        "bytes": 68984,
+        "sha256": "960eb6a8d30ad610e17581f45bcdbc13602030fe567ab954cd2602b94021a07d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py",
+        "bytes": 20211,
+        "sha256": "76ed9ae568adb96fcfbe1ea0390ff19dd38a0049a4a4837d5dc2c2f876276b11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Autonomy/cycle_guard.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Environment/assert-runtime-idle.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Environment/owned-process-containment.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 3814,
+        "sha256": "5f1be92838b4b7eebe563a9f2f4c09f14827b4781a70b910ff9b5a1f71ea11f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 40473,
+        "sha256": "a111956260d04e319c25957f02f8ce79896a382041add64e7832b28d3746bafb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/canon_release_evidence.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/chronicle_storage.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/restoration_source_binding.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 8174,
+        "sha256": "d8672c647fc05666b7b25c3e1336a381c4d4d2dfdcf2e383230dd8cb083c80b4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Validation/run-canon-native.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 7734,
+        "sha256": "9aa189206c525b05c20e682ac6e042478bd37633917a1d450fa76692b7bdd285"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/release_contract.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/stage-canon.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/RecordedHarness/Tools/Web/stage-luminous.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/command.stdout.log",
+        "bytes": 2783,
+        "sha256": "5e98dc68cb7a87d39510c0c0f97d703127c5bf131c7a85b01bf8cd43a08f727a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/command.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/guardAfter.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/guardAfter.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/guardBefore.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/guardBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/idleBefore.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/idleBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/invocation.json",
+        "bytes": 11784,
+        "sha256": "40bdb7e3f43d6237c4a7fd08c84d7bde8bfc77990ad242d969fae74d295ec0c6"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/invocation.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/owned-lease.executed.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/summary.json",
+        "bytes": 11531,
+        "sha256": "6aee15f29ac42f385937fe5f71219348bb2d6a342f690c76084249ac1af4ef0c"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/SaveCheckpointDocs01/summary.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/command-spec.json",
+        "bytes": 2157,
+        "sha256": "f77ed0ec4345a736e0a7fc588e88c1d743f6e0d7aea55d9370d76c92a9bbfc38"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "8907fccb6239be1ea5118ec61284334215d6b98c980acee8f5f14b74d92bccb1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "4a8e518a6ef00d998343978a6c9c68d97d2003c6e678c363ecc62ae172c23c89"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "56b72134003b9a472fe481483bafedd530730a5c4d3c293dbd8f687ffb257491"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/command-spec.json",
+        "bytes": 2039,
+        "sha256": "2c296baf675f6910418729e9280f0636d7b2e1a4ee73ac86881c182fec4459aa"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "55ac8f18d565f38591dd7fec764af45b2dc910e53f64f75d51d7d5889794489a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "4c94b4b8af6be26275576feb43a16f885669ed9413e74e00893765b7bec7e54d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "801fca661fdeba09a3f0d79041dae8e8ff41f661a49fba99e9c0c81e2313cb7d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/command-spec.json",
+        "bytes": 2376,
+        "sha256": "a8fb67fe4fd62c2a3edcd438495d36e8716c220484a7bb148623a937d35743c0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/lineage-events.jsonl",
+        "bytes": 5924,
+        "sha256": "7bff2a3fe1ec5101abc78eeb49452e78bd9fb910c773349912d03c0c97ec8ccb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "fb9d983565a6a4cacb5c535ea26a4b6710e40d8b00ec1a4d2df7a103b54fea0b"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor-result.json",
+        "bytes": 17895,
+        "sha256": "a851c54a29bee936dcda3df7e08d41e043c4756a57f7c913e604d337c162b2f2"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/command-spec.json",
+        "bytes": 2155,
+        "sha256": "901651da34138873b4d93403b1de525560b3831c8f5b90007e4551b74b052c38"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1257,
+        "sha256": "599751fd09916928ade689d95b2fb229086092526f985dc028a3536773ab87c5"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "b66371b36726248fc25f6cb85bcdf9eb11a1289d13626ee547896b74b3883ced"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "ea548d30338a42154d77b247dfe19ed8a962d44d46ffa2418cef690496b3062a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Containment/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/command.finished.json",
+        "bytes": 2151,
+        "sha256": "333ee6259c8caae9010e03d6888963306b7380e58679e7c1ef4bb9a497b7d18d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/command.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/command.started.json",
+        "bytes": 1245,
+        "sha256": "be897c1f6c5077b5a493915e997418c09d2279387fa29fdd327896e0f7f86940"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/command.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardAfter.finished.json",
+        "bytes": 1939,
+        "sha256": "7b399e2aa32a959dc12b3b07e0045015b6971163b4d5c667718e86556eca65c1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardAfter.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardAfter.started.json",
+        "bytes": 1028,
+        "sha256": "ba7a562a3815d4235439200903c879ac597afaa4b28220217debd9f53d1ed72d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardAfter.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardBefore.finished.json",
+        "bytes": 1941,
+        "sha256": "79e095491e83f9645198c0aaa5e88675fca56452c929ae0d4c7763ba3a0d079d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardBefore.started.json",
+        "bytes": 1028,
+        "sha256": "8a0fce2a608c5fea87995f648d9e90783420237f01a455e1b46a04c34765059f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/guardBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/idleBefore.finished.json",
+        "bytes": 1820,
+        "sha256": "434926aeed44465ccf76c216f595b0eeaeb4d05f568d242c3d4b6cfa75b914b9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/idleBefore.finished.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/idleBefore.started.json",
+        "bytes": 911,
+        "sha256": "e874ae405f5b313be2f336f31eaa7112a3812ed3d27a847e0f25df5c6a166cac"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/Processes/idleBefore.started.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py",
+        "bytes": 12298,
+        "sha256": "d64699cb96b02f7d3437a719eea6388e77b9b6962caf872ba94af03398e2b539"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/run-owned-command.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py",
+        "bytes": 68984,
+        "sha256": "960eb6a8d30ad610e17581f45bcdbc13602030fe567ab954cd2602b94021a07d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/preserve-two-lease-proposal.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py",
+        "bytes": 20211,
+        "sha256": "76ed9ae568adb96fcfbe1ea0390ff19dd38a0049a4a4837d5dc2c2f876276b11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSource/test_two_lease_preserver.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Autonomy/cycle_guard.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Environment/assert-runtime-idle.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Environment/owned-process-containment.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 3814,
+        "sha256": "5f1be92838b4b7eebe563a9f2f4c09f14827b4781a70b910ff9b5a1f71ea11f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 40473,
+        "sha256": "a111956260d04e319c25957f02f8ce79896a382041add64e7832b28d3746bafb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/canon_release_evidence.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/chronicle_storage.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/restoration_source_binding.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 8174,
+        "sha256": "d8672c647fc05666b7b25c3e1336a381c4d4d2dfdcf2e383230dd8cb083c80b4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Validation/run-canon-native.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 7734,
+        "sha256": "9aa189206c525b05c20e682ac6e042478bd37633917a1d450fa76692b7bdd285"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/release_contract.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/stage-canon.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/RecordedHarness/Tools/Web/stage-luminous.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/command.stdout.log",
+        "bytes": 140,
+        "sha256": "623da83a34c938bf7e1e5e4c69cc925307a2feea0a313a24790961d0530fc0b3"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/command.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardAfter.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardAfter.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardBefore.stdout.log",
+        "bytes": 749,
+        "sha256": "cd9dd19c9ed88e945f593532d535649b8e72b2fb41e59938728ec3d82ac43c18"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/guardBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/idleBefore.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/idleBefore.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/invocation.json",
+        "bytes": 11927,
+        "sha256": "8ca067db79f99ab4a5096ca9232ab2b39609add334146057bea6062b19668393"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/invocation.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/owned-lease.executed.json",
+        "bytes": 827,
+        "sha256": "2fdc8aa8df0cfbd0f4a046732bc1947b6a4e34df6b6ae84ece3762f7e98aa55f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/owned-lease.executed.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/summary.json",
+        "bytes": 11711,
+        "sha256": "1ab89a692c70b4b2125b98c0524f6c4d63239770f41786822644296c34db0098"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/CommandRuns/VerifyCommittedCheckpoint01/summary.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/command-spec.json",
+        "bytes": 2141,
+        "sha256": "692ae8faa417341aa2c925c2aaefd448f8743754f8526f35da53324fb7985c47"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "fb524a28b4b56aa88d597e4fd639e7dce5392e23f273ac1b64b8287c3aedb044"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "73f4698b6a058c978c48e0eb6dd9427bc56aa583a2ac0701f6b0528b815d9d11"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "5a366c59b0cf38fc45a772a5453c407a5fbb31a1a95a00571c0b084bb4c69646"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/command-spec.json",
+        "bytes": 2023,
+        "sha256": "12ea338a7765368999b67230f3c0e8bb686ce4218b62d20f903992bac402d564"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "d23e1ca00836d2a75d71d8fb5a0975c8ef2162d2f2ec8f6a46c44667ad6f3962"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "7705b7122abc3abd765fdd4bd90560f7b729524b4029d5d315878160a18679ab"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "3a9813f5a97b7879449a37bbc3432f7c42356636b8611dd89d4f0ed122d28122"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/command-spec.json",
+        "bytes": 2350,
+        "sha256": "bb22728778e462388ddd6699b4cb5d1ecf1d3abb40cb57a8feda4f1687800906"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "252a7344195eec1eb9df1f5587711ab3b8ffbb09a0539eda97a390c7d5ef42d9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "f62ceb61126ab526deea0fa767598b4b45ed8dd52e3394dba26092914de39bc1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor-result.json",
+        "bytes": 5158,
+        "sha256": "c02baed78278dc04c34d79c15d69bd336d3b0d79c6c05683a1a60acefc7fe75d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/command-spec.json",
+        "bytes": 2140,
+        "sha256": "5bf869fc95271b920d62c3c2eb1b5c985ef00850caeea43a1725d09219298cbf"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "a22181234821254eb2bc21e8eccc913811d34b3bf58d0075e5a582460c5b3d19"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "5550922735c1b2dea1874e74e85956eb7a2fea49f3db4601ce77953c374091da"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "cb41fc06cb065b9d6dab6c674c1e2f09db99d064695b68db3a23e364095d1885"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/ArchiveCheckpoint02/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/command-spec.json",
+        "bytes": 2151,
+        "sha256": "e6f08ed170a4118331c6f153ab9e3eb7d8b23c6b4df22482f03fb8e0ca2576da"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "b7306a52b07b70d5f9d50c21c581012c8dbf8d67d0ad36275f6c4df1870195ad"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "9cd51da780060819a65d14d6668b1a763ea701c05853311010828ae6ece070a7"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "5cae49113c105da94d572daedeb6df412a940c72dcde2574d4bfa33f48e35253"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/command-spec.json",
+        "bytes": 2033,
+        "sha256": "be57b4be12df22974549648c942a12174e47559cc09cfb81f634aaa919dc405a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "7ed746bcad26ee4a65b56d4cc11560f83f607981a35881ecb481aa72bfcb8d0f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "90dfa9bbda674878f52f6e8a5f7026429da85353db66dcfaf7a3a47f81aa2483"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "b66a66347e7da8ceb1911c84e9fdcd406e17805d3de60d82a33c5330915a69f3"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/command-spec.json",
+        "bytes": 1964,
+        "sha256": "f80c32b883216654febc146b9c1b6444e713d50c938a3302eb21759fc14f7104"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "96476f797e4d6838bf4c95763f6d36849b43408ca97f40e1d57efd4feb655046"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "27f41676f3411da37e6a312c0e24bfb1ea40b2159ee5af997309f27f054e049e"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor-result.json",
+        "bytes": 4354,
+        "sha256": "9c23268400c293ed4eb2d707b000c0a9f4acd6027151edc030c931930ba26fe0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/command-spec.json",
+        "bytes": 2150,
+        "sha256": "6fb93328c56a0d0d33d620a9083fe4c8df79bceb62c5713bf319789eab061fe0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1258,
+        "sha256": "2728f8e0717c8bbcbb532e3c4613f5190932ec056e4852e58c6570a196f530bb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "a079ef169c084cbc4bea47dc81e1d90d79664ca4b7de1ed304aa242f7045624f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "2149843853b105d970353d7292cdc967150644f3cf2e26179e1ebe3cdd8738f8"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/FinalIdleBeforeRelease01/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/command-spec.json",
+        "bytes": 2143,
+        "sha256": "ad76e1899260d283fee66d57489ef176976b7448fbb26e0543a9a11a2cfb4a90"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "d8f8e089777f3ea9e0f8acbb9d35f58148d54c5fa3f3fc6db28a2b59108aef67"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "cbb6282e35da3815f74cede447f4c0f81d8ebf03e47bd6ca613c7efc40a1da08"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "39d9b96392a0d8edd48006640b6b1d491ca92a49946c8b723eb1e839bf53767b"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/command-spec.json",
+        "bytes": 2025,
+        "sha256": "e4d4ec9a998d1adbdf0c145a96b7678c3ae196a5a9b0e9db6a7aca6cb17012ba"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/lineage-events.jsonl",
+        "bytes": 481,
+        "sha256": "7491ebfd4389b513e84f1b20de5d7f9923edaee8757521ed894a277175bab055"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "b019fe01918ede624936b3088dbc8226331aac69735ebbdef1b9370018e70f63"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor-result.json",
+        "bytes": 4485,
+        "sha256": "105cea6bff3b1ab05f8945dd321f37086e6010a361b568c978c1f28b6f430b12"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/command-spec.json",
+        "bytes": 2353,
+        "sha256": "008eb63dd42e92ba3bef65c74b877644799e12524d925841b3c9cb82fd7012fb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/lineage-events.jsonl",
+        "bytes": 13179,
+        "sha256": "aa7a6cea36afacac5c13368eaba49c533b6598e532276b24150679963afc10b1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "e928f59f467a46604e11e897ad5e72aa5f2f0cd512f41f5473103e695b70a4fd"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor-result.json",
+        "bytes": 35039,
+        "sha256": "e7f8fcc2be770b8bbf8c2aaacfa3dc9e0ce29521b9ce86d4fa1e100310bcafcf"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/command-spec.json",
+        "bytes": 2142,
+        "sha256": "75e7692d220eae978736987f3f735f4d3d102cb87e862e7c931f100e70bcbbc5"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "6b4f5ab758996d1e088a5b0691e7cc0cd9d9d80f0a7658a4e6b43a5c2d1a2c25"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "996ff99ad8b6dfd32dd2058d4ee541ea4cc7ae624191e4cce30bbfa252ef7ce1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "d980716275923e1979d2b2b1515c04c6a581d997dbc2fc09cbfe22713686800d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/SaveCheckpointDocs01/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/command-spec.json",
+        "bytes": 2157,
+        "sha256": "f77ed0ec4345a736e0a7fc588e88c1d743f6e0d7aea55d9370d76c92a9bbfc38"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/lineage-events.jsonl",
+        "bytes": 1259,
+        "sha256": "8907fccb6239be1ea5118ec61284334215d6b98c980acee8f5f14b74d92bccb1"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "4a8e518a6ef00d998343978a6c9c68d97d2003c6e678c363ecc62ae172c23c89"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor-result.json",
+        "bytes": 6544,
+        "sha256": "56b72134003b9a472fe481483bafedd530730a5c4d3c293dbd8f687ffb257491"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/01-guardBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/command-spec.json",
+        "bytes": 2039,
+        "sha256": "2c296baf675f6910418729e9280f0636d7b2e1a4ee73ac86881c182fec4459aa"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/lineage-events.jsonl",
+        "bytes": 482,
+        "sha256": "55ac8f18d565f38591dd7fec764af45b2dc910e53f64f75d51d7d5889794489a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "4c94b4b8af6be26275576feb43a16f885669ed9413e74e00893765b7bec7e54d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor-result.json",
+        "bytes": 4486,
+        "sha256": "801fca661fdeba09a3f0d79041dae8e8ff41f661a49fba99e9c0c81e2313cb7d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/02-idleBefore/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/command-spec.json",
+        "bytes": 2376,
+        "sha256": "a8fb67fe4fd62c2a3edcd438495d36e8716c220484a7bb148623a937d35743c0"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/lineage-events.jsonl",
+        "bytes": 5924,
+        "sha256": "7bff2a3fe1ec5101abc78eeb49452e78bd9fb910c773349912d03c0c97ec8ccb"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "fb9d983565a6a4cacb5c535ea26a4b6710e40d8b00ec1a4d2df7a103b54fea0b"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-result.json",
+        "bytes": 17895,
+        "sha256": "a851c54a29bee936dcda3df7e08d41e043c4756a57f7c913e604d337c162b2f2"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/03-command/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/command-spec.json",
+        "bytes": 2155,
+        "sha256": "901651da34138873b4d93403b1de525560b3831c8f5b90007e4551b74b052c38"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/command-spec.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/lineage-events.jsonl",
+        "bytes": 1257,
+        "sha256": "599751fd09916928ade689d95b2fb229086092526f985dc028a3536773ab87c5"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/lineage-events.jsonl"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor-identity.json",
+        "bytes": 560,
+        "sha256": "b66371b36726248fc25f6cb85bcdf9eb11a1289d13626ee547896b74b3883ced"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor-identity.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor-result.json",
+        "bytes": 6543,
+        "sha256": "ea548d30338a42154d77b247dfe19ed8a962d44d46ffa2418cef690496b3062a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/ContainedCommands/VerifyCommittedCheckpoint01/04-guardAfter/supervisor.stdout.log"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/closure-facts01.json",
+        "bytes": 3674,
+        "sha256": "c8f709bfcbc3f939257a3046c1c1f2543ca3e6e8dfd895ccbcd0b700ad29eb7d"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/closure-facts01.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/committed-checkpoint-blobs01.json",
+        "bytes": 5765,
+        "sha256": "bea2d18d8f1ae88bf5fe66c4be8cffff38864727c792d9ef9520ef6738435eaf"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/committed-checkpoint-blobs01.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-checkpoint-commit01.json",
+        "bytes": 5788,
+        "sha256": "99d7a21ddb7f7ecf90146feea634ed75ef50411b4e1112145376e09c89d234f4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-checkpoint-commit01.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci-discovery01.app-result.json",
+        "bytes": 50701,
+        "sha256": "ac2ea057e377826744335a95f24b123f0733c0a8bd9631c658d48d35a20662a3"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci-discovery01.app-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json",
+        "bytes": 4561,
+        "sha256": "c26a080766ec224e65c8ec7cabbe8abd742ef856377457c2ec20a0cb8808eb6f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-ci01.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-core-jobs-final.app-result.json",
+        "bytes": 6506,
+        "sha256": "a39ae0f22ba634b0fadae7153dc32af2b9b01ae4aa9c5200be1627b1823a43b9"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-core-jobs-final.app-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-core-run-final.app-result.json",
+        "bytes": 25529,
+        "sha256": "ec64edf3556a71f753e2aac32916155ea870a665665573761a37e4b2a6a5fe8e"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-core-run-final.app-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-ci01.json",
+        "bytes": 3773,
+        "sha256": "64039858741dbc488cbd2011095b91f250527bed1b425bf9f38b921cc2b6c343"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-ci01.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-jobs-final.app-result.json",
+        "bytes": 5318,
+        "sha256": "77534cc7a40be74fff0e718ec19368ceb7538d9add5fd9ddd2d56910d1fa8134"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-jobs-final.app-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-run-final.app-result.json",
+        "bytes": 25555,
+        "sha256": "2b4cfe26a91b0525bc127db067ffe863c72d5a087eb6870f988ccd33c5f7a8fd"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/documentation-helper-run-final.app-result.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json",
+        "bytes": 800,
+        "sha256": "6d93eb61ff504996f401b75b4577e5bb9c6e7ec0b06568bdbcf6e829b06a9a07"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-normal-release.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/Release/resume-post-release-status.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/commit-checkpoint-docs01.py",
+        "bytes": 2572,
+        "sha256": "3d21e6390853b531a026352d8de86a1ef36c1bb61a465eb7a60ac63ed3f1bb3a"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/commit-checkpoint-docs01.py"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json",
+        "bytes": 880,
+        "sha256": "34789efc4eb66b4e5d4def229678e5b687fd52891845aa0298ae2c234e9b7b5c"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/lease.json"
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/verify-committed-checkpoint01.py",
+        "bytes": 1233,
+        "sha256": "d308ded2a76c6f3eb0a7938417983628f64174cab1edfea37f1bcfcf03dd44c4"
+      },
+      "file": "originals/Artifacts/Validation/Autonomy/ClientMotionResume-2026-11-11/verify-committed-checkpoint01.py"
+    },
+    {
+      "source": {
+        "file": "Docs/Autonomy/Evidence/ClientMotion20261111/Checkpoint01/index.json",
+        "bytes": 2979862,
+        "sha256": "280e37a403379f06af4ca0a4d0c4367c47717a586238015d7f9e6c0277b34583"
+      },
+      "file": "originals/Docs/Autonomy/Evidence/ClientMotion20261111/Checkpoint01/index.json"
+    }
+  ],
+  "publishReady": false,
+  "checkpointChanged": false,
+  "restoration": "Verify every exact copy SHA/size and Checkpoint01 parts/members. Restore absent exact originals only. Historical acquired lease and actual released record grant no ownership. This closure cannot contain the future commit/CI that first saves itself; preserve that later actual GitHub result separately."
+}

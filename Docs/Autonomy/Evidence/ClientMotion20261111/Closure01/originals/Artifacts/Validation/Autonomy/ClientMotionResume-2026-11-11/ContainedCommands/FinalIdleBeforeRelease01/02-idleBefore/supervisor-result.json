@@ -1,0 +1,242 @@
+{
+  "version": "owned-descendants-v1",
+  "mode": "production-caller",
+  "status": "owned-descendants-proved-empty",
+  "publishReady": false,
+  "baselineReady": false,
+  "helperSha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad",
+  "startedUtc": "2026-11-11T09:47:57.711085+00:00",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "executionEndMonotonic": 30388.030978655,
+  "productionInvocation": true,
+  "root": {
+    "spawned": true,
+    "pid": 48374,
+    "startedUtc": "2026-11-11T09:47:57.712034+00:00",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "Tools/Environment/assert-runtime-idle.py"
+    ],
+    "exitCode": 0,
+    "finishedUtc": "2026-11-11T09:47:57.816624+00:00"
+  },
+  "subreaperVerifiedBeforeSpawn": true,
+  "supervisorIdentity": {
+    "pid": 48373,
+    "ppid": 48340,
+    "pgid": 48373,
+    "sid": 48373,
+    "state": "R",
+    "startTicks": 3036803,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "parentIdentity": {
+    "pid": 48340,
+    "ppid": 450,
+    "pgid": 48340,
+    "sid": 48340,
+    "state": "R",
+    "startTicks": 3036571,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "baselineIdentities": [
+    {
+      "pid": 1,
+      "ppid": 0,
+      "pgid": 1,
+      "sid": 1,
+      "state": "S",
+      "startTicks": 29,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 2,
+      "ppid": 1,
+      "pgid": 1,
+      "sid": 1,
+      "state": "S",
+      "startTicks": 38,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 3,
+      "ppid": 2,
+      "pgid": 1,
+      "sid": 1,
+      "state": "S",
+      "startTicks": 42,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 126,
+      "ppid": 1,
+      "pgid": 126,
+      "sid": 126,
+      "state": "S",
+      "startTicks": 562,
+      "uids": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "pid": 178,
+      "ppid": 126,
+      "pgid": 178,
+      "sid": 178,
+      "state": "S",
+      "startTicks": 575,
+      "uids": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "pid": 450,
+      "ppid": 0,
+      "pgid": 450,
+      "sid": 450,
+      "state": "S",
+      "startTicks": 651,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 1643,
+      "ppid": 1,
+      "pgid": 1643,
+      "sid": 1643,
+      "state": "Z",
+      "startTicks": 55340,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 48340,
+      "ppid": 450,
+      "pgid": 48340,
+      "sid": 48340,
+      "state": "S",
+      "startTicks": 3036571,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    },
+    {
+      "pid": 48373,
+      "ppid": 48340,
+      "pgid": 48373,
+      "sid": 48373,
+      "state": "R",
+      "startTicks": 3036803,
+      "uids": [
+        1000,
+        1000,
+        1000,
+        1000
+      ]
+    }
+  ],
+  "timedOut": false,
+  "interrupted": false,
+  "ownedIdentities": [
+    {
+      "identity": {
+        "pid": 48374,
+        "ppid": 48373,
+        "pgid": 48374,
+        "sid": 48374,
+        "state": "R",
+        "startTicks": 3036824,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "lastIdentity": {
+        "pid": 48374,
+        "ppid": 48373,
+        "pgid": 48374,
+        "sid": 48374,
+        "state": "R",
+        "startTicks": 3036824,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "origin": "direct-root-popen-child",
+      "signals": []
+    }
+  ],
+  "reaped": [
+    {
+      "pid": 48374,
+      "exitCode": 0,
+      "waitpidStatus": 0,
+      "root": true
+    }
+  ],
+  "cleanup": {
+    "complete": true,
+    "kernelEchild": true,
+    "heldPidfdsExited": true,
+    "subreaperVerifiedAtCompletion": true,
+    "discoveryErrors": [],
+    "liveOwnedIdentities": [],
+    "violations": [],
+    "error": null,
+    "seconds": 0.0006589030017494224,
+    "maximumSeconds": 10.0
+  },
+  "outcomeExitCode": 0,
+  "finishedUtc": "2026-11-11T09:47:57.817319+00:00",
+  "signalTargetScope": "held pidfds for proven non-baseline descendants only"
+}
