@@ -78,6 +78,7 @@ namespace PathOfDawn.Presentation
             People.Initialize(transform, World, SceneCamera, Player);
             CameraRig = SceneCamera.gameObject.AddComponent<GospelPilgrimageCamera>();
             CameraRig.Initialize(SceneCamera, root.transform);
+            SceneCamera.gameObject.AddComponent<GospelNprNpcCameraOcclusion>().Initialize(this, CameraRig);
             CameraRig.InputEnabled = false;
             Player.InteractRequested += Interact;
             var openingObject = new GameObject("The NPR opening · presentation only");

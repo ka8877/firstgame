@@ -365,6 +365,161 @@ namespace PathOfDawn.SmokeTests
             }
             finally { UnityEngine.Object.Destroy(obstruction); }
             yield return null; rig.Snap(); yield return Shot("perspective-spatial-field");
+            yield return ExerciseNearCameraNpcRendering(rig, camera);
+        }
+
+        IEnumerator ExerciseNearCameraNpcRendering(GospelPilgrimageCamera rig, Camera camera)
+        {
+            // The existing orbit/scenery checks above run on the title. Enter
+            // the real field through all51 opening callbacks before exercising
+            // the field-only NPC render scope.
+            App.Ui.CanvasView.gameObject.SetActive(true); yield return null;
+            yield return ReachFirstField();
+            yield return SmokeUi.WaitUntil(() => App.Player.IsGrounded, 3, "The camera regression traveler did not settle onto the real field.");
+            App.Ui.CanvasView.gameObject.SetActive(false);
+            rig.SetOrbit(47, 18); rig.SetZoom(5.6f); rig.Snap();
+            var masking = camera.GetComponent<GospelNprNpcCameraOcclusion>();
+            Assert.That(masking, Is.Not.Null, "The shipped field camera must own the NPC render scope.");
+            Assert.That(masking.isActiveAndEnabled, Is.True);
+            Vector3 physical = App.Player.Position; float physicalYaw = App.Player.FacingYaw;
+            float zoom = rig.Zoom, yaw = rig.Yaw, pitch = rig.Pitch, distance = rig.ResolvedDistance;
+            int named = App.People.NamedCount, ambient = App.People.AmbientCount, people = App.People.Count;
+            var currentPerson = App.People.CurrentPerson;
+            string slot = App.ActiveSaveSlot, quest = App.Chronicle.CurrentQuest.Id;
+            int discovered = App.Chronicle.DiscoveredCount; var stage = App.Chronicle.Stage;
+            var travelerMeshes = App.Actor.SkinnedRenderers.ToArray();
+            var travelerFlags = travelerMeshes.Select(mesh => mesh.forceRenderingOff).ToArray();
+            Assert.That(travelerMeshes.Any(mesh => mesh.enabled && !mesh.forceRenderingOff), Is.True);
+            var owner = new GameObject("NPR camera regression NPC physical owner").transform;
+            owner.SetParent(App.People.transform, false);
+            GospelPilgrimageActor blocker = null;
+            Action<ScriptableRenderContext, Camera> begin = null, end = null;
+            try
+            {
+                // This is an independent actual NPR visual under the same field
+                // population root, not a registered person, collider or quest.
+                blocker = GospelPilgrimageActor.BuildNpc(owner, camera, "mary");
+                blocker.SetGroundSampler(App.World.HeightAt);
+                blocker.SetMotion(Vector3.zero, true, yaw + 180);
+                var meshes = blocker.SkinnedRenderers.ToArray();
+                var flags = meshes.Select(mesh => mesh.forceRenderingOff).ToArray();
+                var enabled = meshes.Select(mesh => mesh.enabled).ToArray();
+                var materials = meshes.Select(mesh => mesh.sharedMaterials).ToArray();
+                var sourceMeshes = meshes.Select(mesh => mesh.sharedMesh).ToArray();
+                Assert.That(meshes.Any(mesh => mesh.enabled && !mesh.forceRenderingOff), Is.True);
+                var portrait = blocker.GetPortraitTexture() as RenderTexture;
+                Assert.That(portrait, Is.Not.Null);
+                var portraitCamera = blocker.CharacterView.PortraitCamera;
+                Assert.That(portraitCamera, Is.Not.Null);
+                var portraitMeshes = portraitCamera.transform.parent.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+                var portraitFlags = portraitMeshes.Select(mesh => mesh.forceRenderingOff).ToArray();
+                Assert.That(portraitMeshes.Length, Is.GreaterThan(0));
+                Assert.That(portraitMeshes.All(mesh => mesh.gameObject.layer == GospelNprCharacterView.PortraitLayer), Is.True);
+                Assert.That(new HashSet<Mesh>(portraitMeshes.Select(mesh => mesh.sharedMesh)).SetEquals(sourceMeshes), Is.True);
+                bool nearPhase = true, nearNpcMasked = true, movedNpcOriginal = true;
+                bool travelerDrawState = true, portraitDrawState = true, restoredAfterWorld = true;
+                bool observedCorrectWorldScope = true;
+                int nearRenders = 0, movedRenders = 0, portraitRenders = 0, completedWorldRenders = 0;
+                // The camera helper subscribed during scene initialization.
+                // Observe its actual draw flags after its begin handler and its
+                // exact restoration after its end handler, not private geometry.
+                begin = (context, viewed) =>
+                {
+                    if (viewed == camera)
+                    {
+                        observedCorrectWorldScope &= masking.LastViewedCamera == camera
+                            && masking.LastObservedTarget == App.Player.transform;
+                        travelerDrawState &= travelerMeshes.Select((mesh, index) => mesh.forceRenderingOff == travelerFlags[index]).All(value => value);
+                        portraitDrawState &= portraitMeshes.Select((mesh, index) => mesh.forceRenderingOff == portraitFlags[index]).All(value => value);
+                        if (nearPhase)
+                        {
+                            nearRenders++;
+                            nearNpcMasked &= meshes.Select((mesh, index) => !enabled[index] || !mesh.gameObject.activeInHierarchy || mesh.forceRenderingOff).All(value => value)
+                                && masking.LastOccludingNpcCount > 0 && masking.LastMaskedRendererCount > 0
+                                && masking.OwnedRendererCount > 0;
+                        }
+                        else
+                        {
+                            movedRenders++;
+                            movedNpcOriginal &= meshes.Select((mesh, index) => mesh.forceRenderingOff == flags[index]).All(value => value);
+                        }
+                    }
+                    else if (viewed == portraitCamera)
+                    {
+                        portraitRenders++;
+                        portraitDrawState &= portraitMeshes.Select((mesh, index) => mesh.forceRenderingOff == portraitFlags[index]).All(value => value)
+                            && blocker.CharacterView.HasVisiblePortrait;
+                    }
+                };
+                end = (context, viewed) =>
+                {
+                    if (viewed != camera) return;
+                    completedWorldRenders++;
+                    restoredAfterWorld &= meshes.Select((mesh, index) => mesh.forceRenderingOff == flags[index]).All(value => value)
+                        && masking.OwnedRendererCount == 0;
+                };
+                RenderPipelineManager.beginCameraRendering += begin;
+                RenderPipelineManager.endCameraRendering += end;
+                // Reproduce a real skinned robe in the near view. No collider,
+                // camera-wall marker or gameplay owner is moved to solve it.
+                owner.position = camera.transform.position + camera.transform.forward * .85f
+                    - Vector3.up * (blocker.VisualHeight * .54f);
+                Vector3 blockingPose = owner.position; Quaternion ownerRotation = owner.rotation;
+                yield return null; yield return null;
+                AssertInView(camera, App.Actor.CharacterView.Head.position);
+                AssertInView(camera, App.Actor.VisualFootOrigin.position + Vector3.up * .04f);
+                yield return Shot("near-camera-npc-keeps-traveler-visible");
+                Assert.That(nearRenders, Is.GreaterThan(0)); Assert.That(nearNpcMasked, Is.True, "The actual near-camera NPC draw must be masked while the traveler remains visible.");
+                Assert.That(Vector3.Distance(owner.position, blockingPose), Is.LessThan(.0001f), "Render occlusion must not relocate the NPC owner.");
+                Assert.That(Quaternion.Angle(owner.rotation, ownerRotation), Is.LessThan(.001f));
+                Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
+                Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
+                Assert.That(rig.ResolvedDistance, Is.EqualTo(distance).Within(.025f), "A passing NPC must not push the field camera into the player.");
+                Assert.That(blocker.CharacterView.HasVisiblePortrait && portraitCamera.enabled, Is.True);
+                AssertPortraitPixels(portrait);
+                Assert.That(meshes.Select((mesh, index) => mesh.forceRenderingOff == flags[index]).All(value => value), Is.True);
+                Assert.That(masking.OwnedRendererCount, Is.Zero);
+                // Move only this test-owned visual out of the view and prove
+                // that the same renderers recover their original draw state.
+                nearPhase = false;
+                owner.position = camera.transform.position + camera.transform.right * 8
+                    + camera.transform.forward * 2 - Vector3.up * (blocker.VisualHeight * .54f);
+                Vector3 clearPose = owner.position;
+                yield return null; yield return null;
+                AssertInView(camera, App.Actor.CharacterView.Head.position);
+                AssertInView(camera, App.Actor.VisualFootOrigin.position + Vector3.up * .04f);
+                yield return Shot("npc-moved-clear-restores-field-renderers");
+                Assert.That(movedRenders, Is.GreaterThan(0)); Assert.That(movedNpcOriginal, Is.True, "An NPC leaving the view must recover its exact preceding renderer flags.");
+                Assert.That(completedWorldRenders, Is.GreaterThan(0)); Assert.That(restoredAfterWorld, Is.True);
+                Assert.That(travelerDrawState && portraitDrawState && observedCorrectWorldScope, Is.True);
+                Assert.That(portraitRenders, Is.GreaterThan(0)); Assert.That(blocker.CharacterView.HasVisiblePortrait && portraitCamera.enabled, Is.True);
+                AssertPortraitPixels(portrait);
+                Assert.That(Vector3.Distance(owner.position, clearPose), Is.LessThan(.0001f));
+                Assert.That(Quaternion.Angle(owner.rotation, ownerRotation), Is.LessThan(.001f));
+                Assert.That(blocker.Animator.enabled && !blocker.Animator.applyRootMotion, Is.True);
+                for (int index = 0; index < meshes.Length; index++)
+                {
+                    Assert.That(meshes[index].enabled, Is.EqualTo(enabled[index]));
+                    Assert.That(meshes[index].forceRenderingOff, Is.EqualTo(flags[index]));
+                    Assert.That(meshes[index].sharedMesh, Is.SameAs(sourceMeshes[index]));
+                    Assert.That(meshes[index].sharedMaterials, Is.EqualTo(materials[index]));
+                }
+                Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
+                Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
+                Assert.That(rig.Zoom, Is.EqualTo(zoom)); Assert.That(rig.Yaw, Is.EqualTo(yaw)); Assert.That(rig.Pitch, Is.EqualTo(pitch));
+                Assert.That(rig.ResolvedDistance, Is.EqualTo(distance).Within(.025f));
+                Assert.That(App.People.Count, Is.EqualTo(people)); Assert.That(App.People.NamedCount, Is.EqualTo(named)); Assert.That(App.People.AmbientCount, Is.EqualTo(ambient));
+                Assert.That(App.People.CurrentPerson, Is.SameAs(currentPerson)); Assert.That(App.ActiveSaveSlot, Is.EqualTo(slot));
+                Assert.That(App.Chronicle.CurrentQuest.Id, Is.EqualTo(quest)); Assert.That(App.Chronicle.Stage, Is.EqualTo(stage)); Assert.That(App.Chronicle.DiscoveredCount, Is.EqualTo(discovered));
+            }
+            finally
+            {
+                if (begin != null) RenderPipelineManager.beginCameraRendering -= begin;
+                if (end != null) RenderPipelineManager.endCameraRendering -= end;
+                if (blocker != null) { blocker.SetPortraitVisible(false); blocker.CharacterView.ReleasePortrait(); }
+                UnityEngine.Object.Destroy(owner.gameObject);
+            }
+            yield return null;
         }
 
         [UnityTest]

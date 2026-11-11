@@ -27,8 +27,8 @@
   "sourceFiles": [
     {
       "file": "Games/PathOfDawn/Assets/SmokeTests/GospelNprSmokeTests.cs",
-      "bytes": 62387,
-      "sha256": "ca72ee5e3f276835d2b2b20946b43c05e12740f15a537d468ee7010ab1a76c32",
+      "bytes": 74418,
+      "sha256": "e48f3482a45367ce8e9dc39083852d95f40ba0ea479d970c8c85aed581626e82",
       "fullnames": [
         "PathOfDawn.SmokeTests.GospelNprSmokeTests.FiveAuthoredHumanoidsKeepRealSkinsFacesAndControllerOwnedFeet",
         "PathOfDawn.SmokeTests.GospelNprSmokeTests.WalkRunAndConversationAnimateRealJointsWithoutMovingPhysicalOwners",
@@ -106,5 +106,10 @@
       "fullnames": []
     }
   ],
-  "scope": "Root reviewed and selected these exact15 authored cases, including the explicit synthetic Touchscreen fixture and actual 3D opening/physical-pose/night restoration assertions. This is source selection only, without Native execution or art/release approval. Run all15 freshly against final NPR product; browser routes remain separately draft. Root also selected the actual field Sun quaternion restoration assertion after the bounded opening camera/light polish. Root reselected the same15 cases after Native06 failed13/15: this source-only clock correction keeps every motion/direction/jump/drift/dash/save threshold and original UI flow, measures only physical movement windows with Motor-compatible scaled game time, adds an independent8-second wall deadline and raw phase diagnostics, and releases movement in finally. The actual Continue visual-heading race is fixed separately in product code. Native06 remains failed; fresh execution is required."
+  "scope": "Root reviewed and selected these exact15 authored cases, including the explicit synthetic Touchscreen fixture and actual 3D opening/physical-pose/night restoration assertions. This is source selection only, without Native execution or art/release approval. Run all15 freshly against final NPR product; browser routes remain separately draft. Root also selected the actual field Sun quaternion restoration assertion after the bounded opening camera/light polish. Root reselected the same15 cases after Native06 failed13/15: this source-only clock correction keeps every motion/direction/jump/drift/dash/save threshold and original UI flow, measures only physical movement windows with Motor-compatible scaled game time, adds an independent8-second wall deadline and raw phase diagnostics, and releases movement in finally. The actual Continue visual-heading race is fixed separately in product code. Native06 remains failed; fresh execution is required.",
+  "npcCameraRegressionSourceReview": {
+    "reviewer": "/root",
+    "utc": "2026-11-11T17:51:33.170080+00:00",
+    "scope": "Extend the existing Perspective case with actual near/moved NPC rendering, exact state restoration and independent same-model portrait renders. Retain every prior case/assertion/threshold; add2 fresh original captures. No physical/gameplay/rendering quality reduction."
+  }
 }
