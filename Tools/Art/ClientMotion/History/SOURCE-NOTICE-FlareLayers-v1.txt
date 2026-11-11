@@ -1,0 +1,63 @@
+Gospel character motion — original Flare avatar art, 2026-11-11
+
+Author: Clint Bellanger and the Flare contributors. The saved upstream credits
+name Clint Bellanger as the original hero/heroine artist. No commercial game's
+executable, models, textures, or proprietary source are copied.
+
+Original artist pack:
+https://opengameart.org/content/isometric-hero-and-heroine
+Distribution repository:
+https://github.com/flareteam/flare-game
+Updated source-art repository and per-file attribution:
+https://github.com/flareteam/flare-game-art-src
+https://github.com/flareteam/flare-game-art-src/blob/master/CREDITS.txt
+
+Licensing: the flare-game distribution README and LICENSE.txt license its art
+and data under CC-BY-SA 3.0, with later versions permitted. The updated per-file
+credits identify the original hero/heroine art as CC-BY 3.0 by Clint Bellanger;
+we preserve the distributed art/metadata under CC-BY-SA 3.0-or-later here.
+The Flare engine's GPL-3.0-or-later license is separate. Its renderer, game code,
+quests, audio, combat, and engine are not integrated into this Unity game.
+
+License URL: https://creativecommons.org/licenses/by-sa/3.0/
+The original LICENSE, README, project credits, per-file credits, artist page,
+upstream commit/tree, original PNGs and original frame definitions are preserved
+in Tools/Research/ClientMotionCharacters. source-manifest.json records each
+installed PNG and original animation definition, immutable commit URL, original
+Git blob SHA1 and PNG SHA256. Keep this attribution/license with distribution;
+the adapted motion metadata/presentation art remain available under the same
+CC-BY-SA terms. This is an educational artistic adaptation, with no endorsement
+by Flare, the artist, or a historical likeness claim.
+
+Selected original per-file families, under mods/fantasycore:
+ images/avatar/male/{cloth_sandals,mage_skirt,mage_sleeves,mage_vest,
+                     head_short,head_bald}.png
+ images/avatar/female/{cloth_sandals,mage_skirt,mage_sleeves,mage_vest,
+                       head_long,mage_hood}.png
+ animations/avatar/male and female contain the matching .txt definitions.
+No weapon/shield layers or Flare gameplay are selected. Whole unchanged source
+atlases also contain unused action/death drawings; only their stance and run
+rectangles are referenced by the Unity character metadata.
+
+Changes: original PNG bytes are copied unchanged. Original packed rectangles
+and anchor offsets are translated to Unity's coordinate system, preserving all
+five layers on one synchronized authored pose. Alpha is read only to measure
+visible bounds and the common per-pose sole offset; no PNG is cropped, edited,
+recoloured, resampled or composited. A shader colours cloth at runtime, retaining
+original sampled shading. Skin and head pixels retain their original palette.
+Character identities, clothing colours, metre scale and foot-contact metadata
+are project presentation choices. The child uses the same clean short-haired
+avatar at the existing child height; it is not claimed to be a separate authored
+child anatomy model. This requires direct small-scale visual review.
+
+Original directions: SW,W,NW,N,NE,E,SE,S, confirmed by hero_layers.txt and the
+original engine direction convention. Unity's fixed yaw0 camera maps those to
+world yaws 225,270,315,0,45,90,135,180 degrees respectively. The source contains
+four stance poses and eight run poses per direction. Walking and running use
+the authored locomotion cycle at a distance-matched rate; no separate walk take
+is claimed. Flare provides no jump take: actual physical jumps retain selected
+locomotion drawings while the unchanged motor owns flight and landing.
+
+Tools/Art/ClientMotion/install_flare_layers.py performs no image write except
+exact source byte copies, verifies original files against the saved upstream
+tree and records all derived metadata. Only the release owner executes it.

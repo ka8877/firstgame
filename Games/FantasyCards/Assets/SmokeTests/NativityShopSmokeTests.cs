@@ -31,15 +31,31 @@ namespace FantasyCards.SmokeTests
         [UnityTest] public IEnumerator FantasyTitleAndAllNineteenActualProductsHaveDistinctPackaging()
         {
             Assert.That(GameObject.Find("Classic FM client wordmark"),Is.Not.Null);
-            var logo=GameObject.Find("Original red-wing FM logo").GetComponent<RawImage>();
-            Assert.That(logo.texture,Is.EqualTo(Resources.Load<Texture2D>("Art/FmClassic/late-client-reference")));
-            Assert.That(logo.uvRect,Is.EqualTo(new Rect(0,497f/555,236f/740,58f/555)),"Use only the retained original logo; old client controls and player names stay outside the sampled region.");
+            var logo=GameObject.Find("Original native FM login wordmark").GetComponent<RawImage>();
+            var entrySource=Resources.Load<Texture2D>("Art/FmClientMotion/native-entry-reference");
+            Assert.That(entrySource,Is.Not.Null);Assert.That(new Vector2Int(entrySource.width,entrySource.height),Is.EqualTo(new Vector2Int(530,398)));
+            Assert.That(logo.texture,Is.EqualTo(entrySource));
+            Assert.That(logo.uvRect,Is.EqualTo(new Rect(178f/530,355f/398,180f/530,43f/398)),"Use the verified 2011 native client's red-wing wordmark, not the unrelated website portrait.");
             Assert.That(GameObject.Find("Restage fantasy title artwork"),Is.Null,"The user-rejected invented sanctuary must not be used by the classic client.");
-            foreach(string tile in new[]{"02","04","06","08"})
+            var painting=UnityEngine.Object.FindObjectsByType<RawImage>(FindObjectsSortMode.None).Where(image=>image.gameObject.activeInHierarchy&&image.name.StartsWith("Native entry source ")).ToArray();
+            Assert.That(painting.Length,Is.EqualTo(10));
+            var omitted=new[]{new Rect(172f/530,204f/398,188f/530,112f/398),new Rect(463f/530,315f/398,66f/530,82f/398),new Rect(481f/530,1f/398,48f/530,8f/398),new Rect(368f/530,126f/398,24f/530,21f/398)};
+            foreach(var image in painting)
             {
-                var artwork=Resources.Load<Texture2D>("Art/Revival/login-"+tile);Assert.That(artwork,Is.Not.Null,"Original FM web portrait tile must actually be imported.");
-                var actual=UnityEngine.Object.FindObjectsByType<RawImage>(FindObjectsSortMode.None).Single(image=>image.gameObject.activeInHierarchy&&image.name=="Original FM character tile "+artwork.name);
-                Assert.That(actual.texture,Is.EqualTo(artwork));Assert.That(actual.uvRect,Is.EqualTo(new Rect(0,0,1,1)),"Every original tile stays complete; no screenshot chrome is substituted for controls.");
+                Assert.That(image.texture,Is.EqualTo(entrySource));
+                foreach(var region in omitted)Assert.That(image.uvRect.Overlaps(region),Is.False,"Painting sampling must exclude the old credential controls, rating, version and captured cursor: "+image.name);
+            }
+            Assert.That(UnityEngine.Object.FindObjectsByType<RawImage>(FindObjectsSortMode.None).Any(image=>image.gameObject.activeInHierarchy&&image.name.StartsWith("Original FM character tile ")),Is.False);
+            Assert.That(GameObject.Find("Inactive original password row").GetComponent<TMP_InputField>(),Is.Null,"The local client must not collect a web password or authentication code.");
+            Assert.That(GameObject.Find("Native 2011 live window left header ornament").GetComponent<RawImage>().texture,Is.EqualTo(entrySource));
+            Assert.That(GameObject.Find("Native 2011 live window bottom edge").GetComponent<RawImage>().texture,Is.EqualTo(entrySource));
+            Assert.That(GameObject.Find("Native entry source rating omission").GetComponent<FantasyCards.Presentation.FmArtworkFeather>(),Is.Not.Null);
+            Assert.That(GameObject.Find("Native entry source cursor omission").GetComponent<FantasyCards.Presentation.FmArtworkFeather>(),Is.Not.Null);
+            Canvas.ForceUpdateCanvases();
+            foreach(string patchName in new[]{"rating omission","cursor omission"})
+            {
+                var mesh=ReadRenderedUiMesh(GameObject.Find("Native entry source "+patchName).GetComponent<RawImage>());
+                Assert.That(mesh.colors32.Any(c=>c.a==0)&&mesh.colors32.Any(c=>c.a==255)&&mesh.colors32.Any(c=>c.a>0&&c.a<255),Is.True,"The rendered painting composition must have an opaque covering centre and feathered edges: "+patchName);
             }
             Assert.That(SmokeUi.FindButton("게임 시작"),Is.Not.Null);
             yield return Shot("fantasy-title");yield return Shot("fantasy-title-touch",616,346);

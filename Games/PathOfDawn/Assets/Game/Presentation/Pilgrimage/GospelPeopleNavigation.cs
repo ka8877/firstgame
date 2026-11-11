@@ -57,6 +57,8 @@ namespace PathOfDawn.Presentation
         public bool IsClear(Vector3 position, float radius = Radius)
             => ClearanceProblem(position, radius) == null;
 
+        public bool CanTraverse(Vector3 from, Vector3 to) => SegmentClear(from, to);
+
         public string ClearanceProblem(Vector3 position, float radius = Radius)
         {
             float ground = world.HeightAt(position.x, position.z);
@@ -120,6 +122,11 @@ namespace PathOfDawn.Presentation
                         if (n < 0) return false;
                         reverse.Add(n);
                     }
+                    // Nearest validated this connector. Omitting it cuts an
+                    // unchecked corner from the actual actor to its neighbour.
+                    if (Vector2.Distance(new Vector2(from.x, from.z),
+                        new Vector2(points[start].x, points[start].z)) > .02f)
+                        result.Add(points[start]);
                     for (int i = reverse.Count - 1; i >= 0; i--) result.Add(points[reverse[i]]);
                     if (IsClear(target) && SegmentClear(points[goal], target)) result.Add(target);
                     return result.Count > 0;

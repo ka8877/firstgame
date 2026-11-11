@@ -76,7 +76,8 @@ RENEWAL_REVISIONS = {"FantasyCards": "fm-chronicle-2026-10-29", "PathOfDawn": "g
 QUEST_REVISIONS = {"FantasyCards": "fm-nativity-2026-11-02", "PathOfDawn": "gospel-nativity-2026-11-02"}
 CANON_REVISIONS = {"FantasyCards": "fm-canon-2026-11-09", "PathOfDawn": "gospel-canon-2026-11-09"}
 LIVING_REVISIONS = {"FantasyCards": "fm-classic-ui-2026-11-10", "PathOfDawn": "gospel-living-rpg-2026-11-10"}
-CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values())
+CLIENT_MOTION_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-character-motion-2026-11-11"}
+CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values())
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -870,7 +871,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards']):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards']):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -881,7 +882,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'])) and label not in ("before-first-gesture", "muted"):
+        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'])) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -892,7 +893,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards']):
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards']):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -919,7 +920,7 @@ class JourneySmoke:
         files = []
         expected_files = list(self.report["buildFingerprint"]["files"])
         image_files = [row for row in expected_files if row['file'].startswith('StreamingAssets/Cards/')]
-        if self.report['revision'] in (CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards']):
+        if self.report['revision'] in (CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards']):
             # The current generic full-site GET audit supplies every card image
             # byte. Canon does not inherit the historical Nativity/G2 delta seal.
             from canon_release_evidence import OUT as canon_out, STAGE as canon_stage, verify_portal_review
@@ -1199,7 +1200,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic"), default="renewal")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion"), default="renewal")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -1209,7 +1210,7 @@ def main():
     parser.add_argument("--provider-timeout", type=int, default=15)
     parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
     args = parser.parse_args()
-    if args.release_profile in ('canon-art', 'living-classic') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
+    if args.release_profile in ('canon-art', 'living-classic', 'client-motion') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
         parser.error('The selected current release profile must match its explicit environment and evidence roots')
     args.output = authorize_output(args.output)
     args.build_root = args.build_root.resolve()
@@ -1221,7 +1222,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if modern and plan.get("revision") != expected_revisions[args.game]:

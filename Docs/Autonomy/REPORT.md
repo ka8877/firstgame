@@ -1,4 +1,32 @@
-# 두 게임 RPG·원작 UI 신규 버전 공개 · 검증·보존·정상 종료 완료
+# PR #6 생성, Card 첫 PC 검사 시각 반려·재검사 준비 — ClientMotion
+
+후보 소스 `e8480a127d32b65d8beb5702bf64045383db53ae`는 실제 push됐고 [PR #6](https://github.com/ka8877/firstgame/pull/6)을 생성·첨부했습니다. 새CI 완료는 아직 관측하지 않았습니다.
+
+첫 Card Desktop Browser01은 기능 wrapper가 통과했지만 Root가 `owned-fifty-five` 첫 진입의 실제 카드 이미지4개 빈칸을 보고 시각적으로 반려했습니다. 같은4카드가 다른 deck 화면에서는 정상으로 보였으므로 지속적인 제품 버그로 단정하지 않습니다. Root는 필수47mark와 추가4원본을 실제로 봤지만 owned55와 최종 실행 승인은 없습니다. wrapper는12,240B·SHA `d77bccb4b3c5dca591941d076e7fff5ecb28c6e5b9ebdb56f8e783510803d1c3`입니다. 원본92파일은 `BrowserHistory/FantasyCards/Desktop720/Browser01`로 정확히 보존 중이며 `CardDesktop01Relocation01` 완료는 아직 없습니다. 새로 최종 승인된 로컬/전체 browser는0회입니다.
+
+세Card계획은 owned55직전 일반 `review_input`을 각각1개 추가했습니다. 새 SHA는 desktop `e02069e35defac3612352f576eb6ea7e62ef535e28570f40833515b675c8e359`, mobile `3895fc5b6a981d2f3dc83050d9ff0f7094ea6297591a0fb5b2d9c5a91d78665d`, public `37a5d999d376e180dbc53d4a11b9c74fa1ebf9c34af83d7bf5d9e353306e66aa`입니다. 제품/Core/Native/Web/gate/harness와315필수원본·PCM4·재접속2회는 바꾸지 않았습니다. Root가 이계획과문서를 추가commit/push하고 CardDesktopBrowser02전체를 새로 실행할 예정이며 아직 완료로 세지 않습니다.
+
+Gospel `Motion05` 전체 Native는11월11일13:45 KST에 실제 **27통과·실패0·스킵0/58PNG**로 완료했습니다(04:45:21UTC). 지문은 `ea8083bdde5df2d3c57270cfa45b0ba14e467a2badb9348069743799bb34a0ca`, XML SHA는 `8ccb66f4ccb56f489db2fc9e5febada4ece2d9061598516bf94ec60916767945`입니다. 판마 최종 `Client06`도9/0/0·31PNG를 유지합니다. 새 Core02는311/0/0, PublicRangeUnit02는123개 실제 통과했습니다. 소스는 동결했고 CardWeb01은 실제 완료·통과했습니다. GospelWeb01도 약14:19 KST에 실제 완료·통과했습니다. 두 Web producer의 실제 통과·최종guard0/정리는 유지하지만 후속 Builds01 엄격 gate는 실패했습니다. GospelWeb01의 기록된 safeEnd-started가3600.000000000002초로 실제3600초 한계를 넘었기 때문이며 게임 오류나 전체Web수용으로 기록하지 않습니다. 이전 실패 판정은 유지하며 이후 별도 GospelWeb02와 Builds02가 실제 통과했습니다. 새브라우저최종승인·새CI완료·새배포는 아직 없습니다.
+
+Gospel은 다섯 중립 one-body 배우의8방향×20프레임(idle4/walk8/run8), 각160프레임과 별도 walk/run stride를 유지합니다. 현재 bake/install 소스는 `Tools/Art/ClientMotionNeutral/bake_neutral_actors.py`·`install_neutral_actors.py`입니다. Default/WebGL import에서2560×1024 원본이2048로 축소되던 문제를 수정했습니다. 공통 footanchor는 보존하고 지면이 발을 가리던 depth만 보정했습니다. NPC FindPath의 첫 start 연결·코너 shortcut과0.7초 정체 후 재경로를 수정한 뒤 전체23이야기의 원래 CoreX gate를 실제 통과했습니다. Root가 현재 Motion05 원본11장을 실제로 보고 source/build 용도로 한정 승인했습니다(`Root/gospel-native-review.json`, SHA `f1d258d1c9bba36966128f938ea460d513c2f3bfbf6d074ea84d51bd92c32076`). 전체58장이나 새 브라우저 승인은 아닙니다.
+
+판마 Client06 지문 `88c525d0f00f3c8455cecd92e52bcfe0b6a4e175bd2788443f5acf89de17a413`, XML `08d662f1c82a3438cff8bc0ef9dedd1bca7e0e6736e1162bbaa191929d799102`와 선택11원본 Root source/build 승인은 유지합니다. 모든31장·새 브라우저·종료 직전 완전 일치를 승인한 것은 아닙니다. Client01/02의 시각 반려·Client03 source font 참조 누락에 따른 준비 실패는 보존했고, Client04/05의9통과와 static11,406glyph 재사용을 거쳐 최종 footer/bevel을 선택했습니다. TTF5,376,428B는 같은 GUID/SHA2c709890…로 Resources→Editor로 옮겼으며 실제 최종 Web·사이트 절감량은 아직 측정하지 않았습니다.
+
+현재 선택 중립 인물의 정확한 HD 모델 라이선스는 CC-BY3.0이며 이전 CC-BY-SA/12PNG layered combat 자료는 이력입니다. 중립 인물은 HD CC-BY3.0 source `8830c68b420b631e09a459e5b0bf87c0e068a558`에서 제작하고 자산별 원본/크레딧/라이선스를 보존했습니다. pinned SHA의 Blender5.1.2, 다섯 atlas의 Root 직접 검토·전체800셀 alpha≥4px 통과와 NeutralInstall01의5PNG·9,093,977B byte-exact 설치가 새 source 근거입니다. 이전 전투 자세·주먹·그림자 art, Blender4.3/engine enum 실패, preview01/03/04와 첫 Atlas01의 잘림 반려를 후속 성공으로 바꾸지 않습니다. 첫 atlas의 clipped cell은 adult134/child56/Joseph130/Mary73/teacher130이었고 미설치로 보존했습니다.
+
+Gospel Motion01 준비CS0117·Motion02의20/7/0·40PNG와2장 반려, 이후 실패한 Motion03/04 원문도 유지합니다. 독립적인 Motion05 전체27개 성공만 현재 결과로 계산합니다. 이전 Core01/media01은 실제311/123이었어도 HD notices/source 매핑이 달라 현재 binding으로 쓰지 않았고, 이번 Core02/PublicRangeUnit02는 새 실제 통과입니다. 일반 helper wrapper의 command-completed를 제품/배포 승인으로 확대하지 않습니다.
+
+현재 브라우저 계획은 카드55/54/54·Gospel60/46/46=필수315원본, 카드PCM4개·각2회 실제 재접속입니다. 이는 필수검토계획입니다. 첫CardPC기능검사는끝났지만시각반려여서새최종승인browser0회입니다. CardWeb01 summary는16,107B·SHA `ca8f5937b2d7f11c22e66d27f37175e878f551e2b9d086677f44e80c016cdf75`, 소스는88c525d0…이며 BuildEvidenceSucceeded/Errors0·최종guard0/소유후손정리를 확인했습니다. Unity보고755,443,574B를 전체runtime/사이트크기로 쓰지 않습니다. GospelWeb01 summary는16,023B·SHA `c19fe52150c08cb4017ff412763d6f826fefcfda2d610924c5b0bb88adba7af9`, fp는ea8083bd…입니다. Gospel의 Unity보고7,333B를 전체runtime크기로 사용하지 않습니다. Builds01 실패 wrapper는8,231B·SHA `519ca08d3eca5bc9dbc5367870ce114b89e6b8e33e5502f2565e14c47307e7e7`입니다. 이전 GospelWeb01 runtime/proof는 `Release/gospel-web01-relocation.json`과 보존 wrapper11,119B/SHA `b093b46b7e303b2dabdc2d8687b29d830acd33ed804d2bf2ca126a96b07266d6`로 전부 byte-identical하게 보존했습니다. gate/driver/source/과거증거를 바꾸지 않았습니다. 지원되는 `FIRSTGAME_EXECUTION_LIMIT_SECONDS=1200`의 더짧은20분 실제한계로 실행한 GospelWeb02는05:25:25.904869UTC에 실제 통과했습니다. 기록된window는 정확히1200.0초이며 summary16,019B·SHA `a39701017e17e596cf7c615f0b756cba620949bce8e50315a0bf52e6ced283a0`입니다. 선택 CardWeb01+GospelWeb02의 Builds02(`check=builds`)도 약14:27KST에 실제 통과했고 명령exit0·최종guard0·소유후손비어있음을 확인했습니다(wrapper10,762B·SHA `dadaaf2e0a2e61fd92694fd06291c2c999d8ff77cc7bbdf45cc6b461fe4a31f6`). 현재 최초sourcecommit/push와PR6생성은 완료했지만 새CI완료·추가plan/docscommit·새전체로컬승인·공개2회·stage/배포는 대기입니다.
+
+현재 [공개 테스트](https://ka8877.github.io/firstgame/)는 이전 M3 `60a58c5d…`/GH `9e34c3b9…`/Pages42768236864입니다. 브랜치 `codex/client-motion-2026-11-11`·프로필 `client-motion`, control `Artifacts/Validation/Autonomy/ClientMotion-2026-11-11`, owner `e5951a59-3d2d-44a0-bb26-2ed0edf93851`, lock `9b0705fe36a8462b8977c8b85d514b0975af5107`의11월11일10:28~16:28 KST 고정 acquired 회차를 유지합니다. Root만 생성/Unity/테스트/브라우저/Git/배포를 수행하고 동결 소스의 추가 수정을 하지 않습니다.
+
+현재 로그인의 실제2011 자료와 이전2010자료·WEB/FMII를 구분하며 종료 직전 동일성·원작 전체 복원은 미완료입니다. 카드2649출전/15350원본·기존ID/GUID/소유/덱/재화/저장과 Gospel23사건/19본문/51세부/28음성·실제 이동/지도를 보존하고 멀티플레이는 비활성·추후 업데이트입니다. 실제 기기 성능·사용자 미적 승인·상시 자동화를 주장하지 않습니다. 마지막 자동화0은 이전 조회이며 목표 활성은 미확인입니다.
+
+아래는 이전 완료·실패·중단 이력입니다. 당시 통과를 새 소스의 통과로 재사용하지 않습니다.
+
+---
+
+# 이전 LivingRpgClassic 공개 · 검증·보존·정상 종료 완료
 
 판타지마스터즈와 예수님의 길의 새 버전을 [테스트 페이지](https://ka8877.github.io/firstgame/)에 공개했습니다. 판마는 후기 원작 자료를 대조해 로그인·대기실·전투·프로필·상점을 개선했습니다. 예수님의 길은 대화 뒤 인물을 유지하고 실제 이동·주변 사람·실시간 미니맵·전체 지도·인물 초상화와 RPG UI를 추가했습니다. 원작 전체 복원·모든 인물의 완전 보행 atlas·사용자 미적 승인을 완료했다는 뜻은 아닙니다.
 

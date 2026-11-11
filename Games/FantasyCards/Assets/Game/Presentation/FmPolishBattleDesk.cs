@@ -147,7 +147,7 @@ namespace FantasyCards.Presentation
             view.gameObject.AddComponent<RectMask2D>();
             var content = new GameObject("Battle desk conversation", typeof(RectTransform)).GetComponent<RectTransform>();
             content.SetParent(view, false); content.anchorMin = new Vector2(0, 1); content.anchorMax = Vector2.one; content.pivot = new Vector2(.5f, 1);
-            float pixelScale = Mathf.Sqrt(Mathf.Max(1, canvas.pixelRect.width) / 1920f * Mathf.Max(1, canvas.pixelRect.height) / 1080f);
+            float pixelScale = UiCanvasTextSize.ClientPixelScale(canvas);
             float headerHeight = Mathf.Max(30, 18 / pixelScale), padding = Mathf.Max(8, 4 / pixelScale);
             float y = padding, width = root.rect.width * .89f;
             foreach (var entry in entries)

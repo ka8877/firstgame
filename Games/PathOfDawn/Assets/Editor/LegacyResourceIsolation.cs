@@ -77,6 +77,23 @@ namespace FirstGame.Editor
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
                 "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
             AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
+            // The source-bound motion bundle replaces every field character.
+            // Earlier atlas pixels/GUIDs remain editable and are restored after
+            // building; independent Living portraits remain in Resources for UI.
+            string neutral = "Assets/Resources/Art/GospelMotion/Neutral/";
+            bool hasNeutralMotion = new[] { "child", "adult", "mary", "joseph", "teacher" }.All(name =>
+                File.Exists(neutral + name + ".png") && File.Exists(neutral + name + "-layout.json") &&
+                File.Exists(neutral + name + "-manifest.json"));
+            if (hasNeutralMotion)
+                candidates.Add("Assets/Resources/Art/GospelMotion/Layers");
+            if (hasNeutralMotion || (File.Exists("Assets/Resources/Art/GospelMotion/male-layout.json") &&
+                File.Exists("Assets/Resources/Art/GospelMotion/female-layout.json") &&
+                File.Exists("Assets/Resources/Art/GospelMotion/Layers/male-mage-vest.png") &&
+                File.Exists("Assets/Resources/Art/GospelMotion/Layers/female-mage-vest.png")))
+            {
+                candidates.Add("Assets/Resources/Art/GospelCanon/Actors");
+                candidates.Add("Assets/Resources/Art/GospelRpg/Actors");
+            }
             // Current Canon originals replace these atlases and reading artwork.
             // Keep every original/GUID editable for Native and exact restoration,
             // while avoiding two generations of inactive textures in the Web player.

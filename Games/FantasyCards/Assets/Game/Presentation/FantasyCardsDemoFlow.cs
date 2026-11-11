@@ -266,8 +266,9 @@ namespace FantasyCards.Presentation
             float textHeight = measure.GetPreferredValues(body, root.rect.width * width * .89f, float.PositiveInfinity).y;
             measure.gameObject.SetActive(false); Destroy(measure.gameObject);
             float height = Mathf.Clamp((textHeight + 90) / root.rect.height, .30f, .70f);
-            float x = Mathf.Clamp(position.x / Mathf.Max(1, canvas.pixelRect.width) + .018f, .015f, .985f - width);
-            float y = position.y / Mathf.Max(1, canvas.pixelRect.height);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(root, position, null, out var localPoint);
+            float x = Mathf.Clamp((localPoint.x - root.rect.xMin) / root.rect.width + .018f, .015f, .985f - width);
+            float y = (localPoint.y - root.rect.yMin) / root.rect.height;
             y = Mathf.Clamp(y > .55f ? y - height - .035f : y + .04f, .025f, .975f - height);
             tooltip = Panel(root, x, y, x + width, y + height, new Color(.035f, .050f, .115f, .99f));
             tooltip.gameObject.name = "Hover explanation"; Frame(tooltip, gold, 1.5f);

@@ -61,7 +61,9 @@ namespace FantasyCards.Presentation
 
         private void DrawLanes(int owner, float bottom, float top)
         {
-            var state = BattleDisplayState; float start = .025f, span = .78f;
+            // The retained client leaves a narrow empty margin on both sides
+            // of its five card columns; the slots do not fill the field width.
+            var state = BattleDisplayState; float start = .085f, span = .67f;
             for (int lane = 0; lane < state.rules.unitLanes; lane++)
             {
                 int index = lane; var unit = state.players[owner].AtLane(lane); var spell = state.players[owner].SpellAtLane(lane);

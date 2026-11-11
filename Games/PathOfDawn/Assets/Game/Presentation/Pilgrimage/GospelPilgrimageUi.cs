@@ -408,8 +408,9 @@ namespace PathOfDawn.Presentation
                 var pixel = Rect(equipment, "Actual pixel character preview", 25, 372, 81, 94).gameObject.AddComponent<Image>();
                 pixel.sprite = character; pixel.preserveAspect = true; pixel.raycastTarget = false;
             }
-            Text(equipment, "성경을 채우는 발걸음", 123, 374, 440, 34, 24, White);
-            Text(equipment, "만남을 마쳐 발견한 말씀만 성경에 기록됩니다.\n소지품은 학습 여정을 위한 게임 설정입니다.", 124, 419, 440, 49, 19, Quiet);
+            Text(equipment, "여행 차림", 123, 374, 440, 34, 24, White);
+            Text(equipment, journey.LampEquipped ? "토기 등잔을 들고 있습니다." : "토기 등잔은 가방에 보관 중입니다.",
+                124, 419, 440, 49, 19, Quiet);
             Footer();
         }
 
@@ -432,8 +433,8 @@ namespace PathOfDawn.Presentation
                 var item = GospelBelongings.All[index];
                 name.text = index == 4 ? "성경" : item.Name;
                 category.text = item.Category;
-                description.text = item.Description + "\n\n" + item.Detail;
-                if (index == 4) description.text = "여정에서 발견한 말씀으로 채우는 성경책입니다.\n\n아직 만나지 않은 말씀은 감춰져 있고, 실제 대화를 끝낸 본문만 다시 읽을 수 있습니다.";
+                description.text = item.Description + (index == 3 ? "\n\n" + item.Detail : "");
+                if (index == 4) description.text = "여정에서 발견한 말씀을 다시 읽을 수 있습니다.";
                 ResizeScroll(description, 430, 222);
                 if (largeIcon != null) { largeIcon.gameObject.SetActive(false); Destroy(largeIcon.gameObject); }
                 largeIcon = Rect(detail, "Selected illustrated item", 24, 77, 168, 168);
@@ -456,7 +457,6 @@ namespace PathOfDawn.Presentation
             description = Scroll(detail, "", 215, 137, 430, 222, 24, White);
             B(detail, "여정으로", 331, 397, 324, 61, OnResume);
             select(3);
-            Text(layer, "소지품은 학습을 위한 게임 설정이며, 성경에 소유가 기록되었다는 뜻은 아닙니다.", 38, 654, 1190, 32, 20, Quiet);
         }
 
         public void ShowPause()

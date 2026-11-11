@@ -73,12 +73,15 @@ namespace PathOfDawn.Presentation
         SpriteRenderer sprite;
         Material spriteMaterial;
         Sheet currentSheet;
+        GospelMotionLayers motionLayers;
+        Sprite standalonePortrait;
         Mesh shadowMesh;
         Transform shadow;
         MeshRenderer shadowRenderer;
         Material shadowMaterial;
         GameObject lamp;
         Light lampLight;
+        float lampBuiltLongest;
         Func<float, float, float> groundSampler;
         Vector3 measuredVelocity;
         bool grounded = true, adult, npc, directionalNpc;
@@ -93,19 +96,51 @@ namespace PathOfDawn.Presentation
 
         public bool IsAdult => adult;
         public string CurrentState { get; private set; } = "Idle";
-        public string CurrentFacing => FacingNames[direction];
+        public string CurrentFacing => motionLayers != null ? motionLayers.Facing : FacingNames[direction];
         public int CurrentFrame { get; private set; }
-        public Sprite CurrentSprite => sprite != null ? sprite.sprite : null;
-        public Sprite PortraitSprite => currentSheet == null ? null : currentSheet.Frames[npc && !directionalNpc ? npcFrame : currentSheet.IdleFrame];
-        public SpriteRenderer Renderer => sprite;
+        public Sprite CurrentSprite => Renderer != null ? Renderer.sprite : null;
+        public Sprite PortraitSprite
+        {
+            get
+            {
+                if (motionLayers == null) return currentSheet == null ? null
+                    : currentSheet.Frames[npc && !directionalNpc ? npcFrame : currentSheet.IdleFrame];
+                if (npc) return motionLayers.PortraitSprite;
+                if (standalonePortrait == null)
+                {
+                    var texture = Resources.Load<Texture2D>("Art/GospelLiving/portraits");
+                    if (texture == null) return motionLayers.PortraitSprite;
+                    float half = texture.width * .5f;
+                    standalonePortrait = Sprite.Create(texture, new Rect(adult ? half : 0, 0, half, texture.height),
+                        new Vector2(.5f,.5f), 100, 0, SpriteMeshType.FullRect);
+                    standalonePortrait.name = adult ? "Preserved adult standalone portrait" : "Preserved child standalone portrait";
+                }
+                return standalonePortrait;
+            }
+        }
+        public SpriteRenderer Renderer => motionLayers != null ? motionLayers.PrimaryRenderer : sprite;
         public bool LampEquipped => lamp != null && lamp.activeSelf;
-        public bool UsesMeasuredLayout => currentSheet != null;
-        public string OriginalAtlasResource => currentSheet == null ? "" : currentSheet.Resource;
-        public int AnimationFrameCount => currentSheet == null ? 0 : currentSheet.Frames.Length;
-        public int FramesPerDirectionCount => currentSheet == null ? 0 : currentSheet.FramesPerDirection;
-        public int WalkPoseCount => currentSheet == null || currentSheet.WalkSequence == null ? 0 : currentSheet.WalkSequence.Length;
-        public bool UsesExpandedAnimation => (!npc || directionalNpc) && FramesPerDirectionCount > 3;
-        public float VisualHeight => npc ? npcHeight : adult ? AdultHeight : ChildHeight;
+        public bool UsesMeasuredLayout => motionLayers != null || currentSheet != null;
+        public string OriginalAtlasResource => motionLayers != null ? motionLayers.Source : currentSheet == null ? "" : currentSheet.Resource;
+        public int AnimationFrameCount => motionLayers != null ? motionLayers.DirectionCount * motionLayers.FramesPerDirection
+            : currentSheet == null ? 0 : currentSheet.Frames.Length;
+        public int FramesPerDirectionCount => motionLayers != null ? motionLayers.FramesPerDirection : currentSheet == null ? 0 : currentSheet.FramesPerDirection;
+        public int WalkPoseCount => motionLayers != null ? motionLayers.LocomotionFrameCount
+            : currentSheet == null || currentSheet.WalkSequence == null ? 0 : currentSheet.WalkSequence.Length;
+        public int RunPoseCount => motionLayers != null ? motionLayers.RunFrameCount : 0;
+        public int MotionContractVersion => motionLayers != null ? motionLayers.ContractVersion : 0;
+        public float WalkStrideMeters => motionLayers != null ? motionLayers.WalkStrideMeters : currentSheet == null ? 0 : currentSheet.StrideLength;
+        public float RunStrideMeters => motionLayers != null ? motionLayers.RunStrideMeters : 0;
+        public bool UsesExpandedAnimation => motionLayers != null || (!npc || directionalNpc) && FramesPerDirectionCount > 3;
+        public bool UsesLayeredMotion => motionLayers != null;
+        public int MotionDirectionCount => motionLayers != null ? motionLayers.DirectionCount : 4;
+        public int MotionLayerCount => motionLayers != null ? motionLayers.LayerCount : 1;
+        public float VisiblePlaneHeight => motionLayers != null ? motionLayers.VisiblePlaneHeight : CurrentSprite.bounds.size.y;
+        public Transform VisualFootOrigin => motionLayers != null ? motionLayers.FootOrigin : billboard;
+        public Bounds VisualBounds => motionLayers != null ? motionLayers.VisualBounds : sprite.bounds;
+        public IReadOnlyList<SpriteRenderer> MotionRenderers => motionLayers != null ? motionLayers.Renderers
+            : Array.AsReadOnly(new[] { sprite });
+        public float VisualHeight => motionLayers != null ? motionLayers.VisualHeight : npc ? npcHeight : adult ? AdultHeight : ChildHeight;
         public bool IsNpc => npc;
 
         public static GospelPilgrimageActor Build(Transform parent, Camera camera, bool adult = false)
@@ -120,7 +155,7 @@ namespace PathOfDawn.Presentation
             actor.sceneCamera = camera;
             actor.adult = adult;
             actor.CreateRenderer();
-            actor.UsePlayerSheet();
+            if (!actor.UseMotionLayers(adult ? "jesus-adult" : "jesus-child", false, Color.white)) actor.UsePlayerSheet();
             actor.BuildShadow();
             actor.BuildLamp();
             actor.BuildDashEchoes();
@@ -128,7 +163,7 @@ namespace PathOfDawn.Presentation
             return actor;
         }
 
-        /// <summary>Distinct original NPC frames: Mary, Joseph, teacher, John.</summary>
+        /// <summary>Persistent story identities share the complete authored directional avatar system.</summary>
         public static GospelPilgrimageActor BuildNpc(Transform parent, Camera camera, string npcId, float height = 1.76f)
         {
             if (parent == null) throw new ArgumentNullException(nameof(parent));
@@ -145,18 +180,35 @@ namespace PathOfDawn.Presentation
             actor.npcFrame = frame;
             actor.npcHeight = height;
             actor.CreateRenderer();
-            string npcResource = Resources.Load<Texture2D>(CanonActorRoot + "npcs") != null
-                ? CanonActorRoot + "npcs" : ActorRoot + "npcs";
-            actor.UseSheet(npcResource, height, 4, false);
+            if (!actor.UseMotionLayers(npcId, npcId == "mary", Color.white))
+            {
+                string npcResource = Resources.Load<Texture2D>(CanonActorRoot + "npcs") != null
+                    ? CanonActorRoot + "npcs" : ActorRoot + "npcs";
+                actor.UseSheet(npcResource, height, 4, false);
+            }
             actor.BuildShadow();
             actor.RefreshFrame();
             return actor;
         }
 
-        /// <summary>A background traveler has its own atlas; it never borrows Jesus's face.</summary>
+        /// <summary>A background traveler uses the same authored motion family without replacing a story actor.</summary>
         public static GospelPilgrimageActor BuildAmbient(Transform parent, Camera camera, string resource,
             bool woman, float height, Color garmentTint)
         {
+            if (parent == null) throw new ArgumentNullException(nameof(parent));
+            if (camera == null) throw new ArgumentNullException(nameof(camera));
+            if (!Finite(height) || height <= 0) throw new ArgumentOutOfRangeException(nameof(height));
+            if (GospelMotionLayers.IsAvailable)
+            {
+                var motionObject = new GameObject("Pilgrimage passer-by · original eight-direction locomotion");
+                motionObject.transform.SetParent(parent, false);
+                var motionActor = motionObject.AddComponent<GospelPilgrimageActor>();
+                motionActor.ownerRoot = parent; motionActor.sceneCamera = camera;
+                motionActor.npc = motionActor.adult = motionActor.directionalNpc = true;
+                motionActor.npcHeight = height; motionActor.CreateRenderer();
+                motionActor.UseMotionLayers(woman ? "pilgrim-woman" : "pilgrim-man", woman, garmentTint);
+                motionActor.BuildShadow(); return motionActor;
+            }
             string metadata = resource + (woman ? "-woman-layout" : "-man-layout");
             if (Resources.Load<Texture2D>(resource) == null || Resources.Load<TextAsset>(metadata) == null)
             {
@@ -183,11 +235,24 @@ namespace PathOfDawn.Presentation
 
         public void SetAdult(bool value)
         {
-            if (npc || adult == value && currentSheet != null) return;
+            if (npc || adult == value && (currentSheet != null || motionLayers != null)) return;
             adult = value;
+            if (standalonePortrait != null) { Destroy(standalonePortrait); standalonePortrait = null; }
+            if (motionLayers != null)
+            {
+                motionLayers.Dispose(); motionLayers = null;
+                if (!UseMotionLayers(adult ? "jesus-adult" : "jesus-child", false, Color.white))
+                {
+                    UsePlayerSheet(); RefreshFrame();
+                }
+                RefreshLampScale();
+                BuildDashEchoes();
+                return;
+            }
             UsePlayerSheet();
             CurrentFrame = currentSheet.IdleFrame;
             RefreshFrame();
+            RefreshLampScale();
         }
 
         public void SetMotion(Vector3 velocity, bool onGround, float yaw)
@@ -201,7 +266,14 @@ namespace PathOfDawn.Presentation
 
         public void FaceConversationPartner(Vector3 partnerPosition)
         {
-            if (!npc || sprite == null || sceneCamera == null || ownerRoot == null) return;
+            if (!npc || Renderer == null || sceneCamera == null || ownerRoot == null) return;
+            if (motionLayers != null)
+            {
+                measuredVelocity = Vector3.zero; grounded = true;
+                motionLayers.Face(ownerRoot.position, partnerPosition);
+                CurrentState = "Idle"; CurrentFrame = 0;
+                return;
+            }
             Vector3 right = sceneCamera.transform.right; right.y = 0;
             Vector3 delta = partnerPosition - ownerRoot.position; delta.y = 0;
             float side = Vector3.Dot(delta, right.normalized);
@@ -219,6 +291,7 @@ namespace PathOfDawn.Presentation
         {
             var trail = Material(spriteMaterial.shader, "Exploration dash · short soft echo", Color.white, true);
             trail.SetFloat("_UseVertexColor", 1);
+            if (motionLayers != null) { motionLayers.BuildDashEchoes(trail); return; }
             for (int i = 0; i < dashEchoes.Length; i++)
             {
                 var obj = new GameObject("Short exploration dash echo " + i);
@@ -272,6 +345,7 @@ namespace PathOfDawn.Presentation
 
         void UsePlayerSheet()
         {
+            if (sprite == null) CreateRenderer();
             string name = adult ? "jesus-adult" : "jesus-child";
             string canonResource = CanonActorRoot + name;
             if (Resources.Load<Texture2D>(canonResource) != null &&
@@ -287,6 +361,16 @@ namespace PathOfDawn.Presentation
                 UseSheet(expandedResource, VisualHeight, 0, true);
             else
                 UseSheet(ActorRoot + name, VisualHeight, PlayerFrames, false);
+        }
+
+        bool UseMotionLayers(string identity, bool woman, Color tint)
+        {
+            if (!GospelMotionLayers.IsAvailable) return false;
+            motionLayers = new GospelMotionLayers(transform, identity, woman, VisualHeight, tint);
+            // Leave the common transform/material history intact, but do not
+            // leave an empty renderer ahead of the actual complete-body layer.
+            if (sprite != null) { Destroy(sprite); sprite = null; }
+            return true;
         }
 
         void UseSheet(string resource, float height, int expectedFrames, bool expanded, string metadataResource = null)
@@ -418,7 +502,8 @@ namespace PathOfDawn.Presentation
             var bounds = LocalBounds(model.transform, lamp.transform);
             if (bounds.size.y <= .0001f) throw new InvalidOperationException("Authored travel lamp has no measurable mesh.");
             float longest = Mathf.Max(bounds.size.x, Mathf.Max(bounds.size.y, bounds.size.z));
-            float scale = .22f / longest;
+            lampBuiltLongest = LampTargetLongest;
+            float scale = lampBuiltLongest / longest;
             float finalHeight = bounds.size.y * scale;
             model.transform.localScale = importedScale * scale;
             model.transform.localPosition = new Vector3(-bounds.center.x, -bounds.min.y, -bounds.center.z) * scale;
@@ -449,6 +534,17 @@ namespace PathOfDawn.Presentation
             lamp.SetActive(false);
         }
 
+        float LampTargetLongest => !adult && !npc && motionLayers != null && motionLayers.ContractVersion == 2 ? .21f : .22f;
+
+        void RefreshLampScale()
+        {
+            // Preserve this same authored lamp through the child/adult change.
+            // The shorter child carries a 21 cm lamp; every other actor retains
+            // the established 22 cm size without changing its source geometry.
+            if (lamp != null && lampBuiltLongest > 0)
+                lamp.transform.localScale = Vector3.one * (LampTargetLongest / lampBuiltLongest);
+        }
+
         static Bounds LocalBounds(Transform model, Transform coordinates)
         {
             var result = new Bounds();
@@ -471,6 +567,28 @@ namespace PathOfDawn.Presentation
 
         void LateUpdate()
         {
+            if (motionLayers != null)
+            {
+                if (sceneCamera == null) return;
+                if (movement != null && movement.enabled) SetMotion(movement.Velocity, movement.IsGrounded, movement.FacingYaw);
+                float threshold = movement != null ? (movement.WalkSpeed + movement.RunSpeed) * .5f : 4.2f;
+                bool holdIdle = movement != null && !movement.Enabled;
+                // People.Tick consumes at most 120 ms; Motor consumes the
+                // engine maximum interval. Match each physical owner's time.
+                float motionTime = npc ? Mathf.Min(Time.deltaTime, .12f) : Mathf.Min(Time.deltaTime, Time.maximumDeltaTime);
+                motionLayers.Tick(sceneCamera, measuredVelocity, grounded, facingYaw,
+                    holdIdle ? 0 : motionTime,
+                    movement != null && movement.IsDashing, threshold, holdIdle);
+                CurrentState = motionLayers.State; CurrentFrame = motionLayers.CurrentPose;
+                UpdateShadow();
+                if (lamp != null)
+                {
+                    lamp.transform.position = motionLayers.LampGripWorld;
+                    lamp.transform.rotation = Quaternion.identity;
+                    if (lampLight != null) lampLight.intensity = 1.14f + Mathf.Sin(Time.time * 11) * .035f;
+                }
+                return;
+            }
             if (currentSheet == null || sceneCamera == null) return;
             // One coherent sprite is rotated; no torso/arm paper layers, parent
             // rotation, world translation or fake movement is applied here.
@@ -600,6 +718,8 @@ namespace PathOfDawn.Presentation
             float ground = GroundHeight(feet);
             float altitude = Mathf.Max(0, feet.y - ground);
             float size = npc ? .72f : adult ? .76f : .62f;
+            if (motionLayers != null && motionLayers.ContractVersion == 2)
+                size *= VisualHeight / (npc ? npcHeight : adult ? AdultHeight : ChildHeight);
             float spread = 1 + Mathf.Min(1, altitude) * .3f;
             shadow.position = new Vector3(feet.x, ground + .022f, feet.z);
             shadow.rotation = Quaternion.identity;
@@ -626,6 +746,8 @@ namespace PathOfDawn.Presentation
 
         void OnDestroy()
         {
+            motionLayers?.Dispose(); motionLayers = null;
+            if (standalonePortrait != null) Destroy(standalonePortrait);
             foreach (var sheet in sheets.Values)
                 foreach (var frame in sheet.Frames) if (frame != null) Destroy(frame);
             sheets.Clear();

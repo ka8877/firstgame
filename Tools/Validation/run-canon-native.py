@@ -107,9 +107,9 @@ def main():
         FIRSTGAME_NATIVE_CAPTURE_ROOT=str(run / 'Screenshots'),
         FIRSTGAME_NATIVE_ATTEMPT=args.attempt, PYTHONDONTWRITEBYTECODE='1',
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'))
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         from canon_release_evidence import REQUIRED_NATIVE_TESTS
         names = list(REQUIRED_NATIVE_TESTS[args.game])
         expected = len(names)
