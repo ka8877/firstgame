@@ -196,11 +196,14 @@ namespace PathOfDawn.Presentation
             var turn = story.CurrentStoryBeat;
             var scene = story.CurrentStoryScene;
             Begin("story", true, false);
+            portraitAdult = Adult(story);
             if (story.CurrentQuest.IsPrologue)
             {
-                // The birth account is an illustrated opening. Keep its opaque
-                // scene and established framing through every opening turn.
-                PaintStoryScene(layer, scene.ArtKey, "Story scene illustration", 0, 0, 1280, 720, true);
+                // The NPR App has prepared a real spatial set before this UI.
+                // Legacy isolated UI fixtures may still use their archived art;
+                // the current App never uses a painting to hide a missing set.
+                if (!spatialOpeningStageVisible)
+                    PaintStoryScene(layer, scene.ArtKey, "Story scene illustration", 0, 0, 1280, 720, true);
                 var locationShade = Rect(layer, "Story location gradient", 0, 0, 1280, 156).gameObject.AddComponent<DawnGradient>();
                 locationShade.vertical = true; locationShade.left = new Color(.013f, .030f, .039f, 0);
                 locationShade.right = new Color(.013f, .030f, .039f, .84f); locationShade.raycastTarget = false;
@@ -221,11 +224,32 @@ namespace PathOfDawn.Presentation
             var dialogue = Panel(layer, "Story dialogue", 72, 470, 1136, 218, new Color(.017f, .033f, .036f, .92f), true);
             dialogue.gameObject.AddComponent<GospelUiMotion>();
             Rule(dialogue, 0, 23, 2, 150, new Color(.78f, .69f, .43f, .63f));
-            Text(dialogue, turn.Speaker, 27, 17, 782, 33, 25, Gold, TextAlignmentOptions.TopLeft, true);
-            var spoken = Scroll(dialogue, turn.Text, 27, 61, 1082, 101, 28, White);
+            var portrait = ModelPortrait(dialogue, "Actual story speaker model portrait", ModelSpeakerIdentity(turn),
+                portraitAdult, 22, 17, 144, 174);
+            float left = portrait.Available ? 190 : 27;
+            float width = 1136 - left - 27;
+            var speaker = Text(dialogue, turn.Speaker, left, 17, width, 33, 25, Gold, TextAlignmentOptions.TopLeft, true);
+            var spoken = Scroll(dialogue, turn.Text, left, 61, width, 101, 28, White);
             spoken.gameObject.name = "Current story dialogue text";
             spoken.lineSpacing = 6;
-            ResizeScroll(spoken, 1082, 101);
+            ResizeScroll(spoken, width, 101);
+            portrait.AvailabilityChanged = visible => {
+                if (spoken == null || speaker == null) return;
+                var scroll = spoken.GetComponentInParent<ScrollRect>();
+                if (scroll == null) return;
+                float x = visible ? 190 : 27, availableWidth = 1136 - x - 27;
+                speaker.rectTransform.anchoredPosition = new Vector2(x, -17);
+                speaker.rectTransform.sizeDelta = new Vector2(availableWidth, 33);
+                var holder = (RectTransform)scroll.transform;
+                holder.anchoredPosition = new Vector2(x, -61);
+                holder.sizeDelta = new Vector2(availableWidth, 101);
+                scroll.viewport.sizeDelta = new Vector2(availableWidth, 101);
+                var edge = scroll.transform.Find("Thin menu rule") as RectTransform;
+                if (edge != null) edge.anchoredPosition = new Vector2(availableWidth - 4, 0);
+                float readingPosition = scroll.verticalNormalizedPosition;
+                ResizeScroll(spoken, availableWidth, 101);
+                scroll.verticalNormalizedPosition = readingPosition;
+            };
             // Provenance stays in the Chronicle and the discovered Bible. The
             // conversation itself presents the speaker's actual words.
             B(dialogue, "이야기 계속", 892, 170, 217, 39, next, true, true);

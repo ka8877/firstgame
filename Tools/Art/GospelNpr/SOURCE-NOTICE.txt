@@ -1,0 +1,215 @@
+Gospel NPR presentation: sources, terms and modifications
+=======================================================
+
+This notice identifies the source material selected for the GospelNpr-2026-11-11
+presentation. It is a provenance/permission record, not a statement that an
+import, animation, visual review, Web build or release has passed.
+
+The canonical shipped notice is ThirdParty/GospelNpr/SOURCE-NOTICE.txt.
+The original source and adaptation records are source-manifest.json,
+Extracted/C-model.json, Extracted/F-model.json and actor-manifest.json in that
+GospelNpr directory. Paths recorded inside these files identify repository
+assets and retained validation evidence; they are not additional public-file
+links. Provenance/index.json inventories the retained research archive rather
+than the contents of the public distribution. Generated/adapted output must
+not be mislabeled as an unchanged upstream model or as wholly CC0. The
+applicable upstream terms remain attached to the corresponding original and
+derived portions.
+
+1. lilToon shader
+----------------
+Author: lilxyzw; Copyright (c) 2020-present lilxyzw.
+Package: jp.lilxyzw.liltoon 2.4.1, MIT License.
+Repository: https://github.com/lilxyzw/lilToon
+Selected commit: e698a2f791bd28dd1aabf227c74f14bedeca3587
+Upstream Git package subdirectory: Assets/lilToon
+Unity UPM package identity: Packages/jp.lilxyzw.liltoon
+
+The game uses the official package's shader code and source templates with
+source textures, toon shade/outline settings and recorded material color
+adjustments.
+This does not transfer rights to unrelated models pictured in shader demos.
+
+Project-owned NPR shader files adapt the official lilToon URP templates and
+shader code under the MIT License. The adaptations define opaque, cutout and
+one-pass transparent variants, with optional outlines. Their asset folder
+retains the full upstream MIT license; the pinned upstream package is
+unchanged.
+
+The complete MIT license and all package third-party notices must accompany
+copies/substantial portions of this software. Exact preserved copies:
+  Provenance/lilToon-LICENSE.txt
+  Provenance/lilToon-THIRD-PARTY-NOTICES.md
+The MIT text is also reproduced at the end of this notice. The separate full
+Third Party Notices file remains part of this attribution set, including its
+distinction between included components and reference-only materials.
+
+2. Male base: VRoid AvatarSample_C
+--------------------------------
+Source file: Source/Characters/AvatarSample_C.vrm
+Title/author in the selected VRM0 metadata: AvatarSample_C / VRoid.
+Selected public mirror:
+  https://raw.githubusercontent.com/madjin/vrm-samples/e16eb187100149a315ad92c3c9968f1d5baa6c7d/vroid/stable/AvatarSample_C.vrm
+SHA-256: 395d5b04696e888f07bc856ae01bf72a974b7e773132c7443dc59d1688045b8a
+Official sample terms:
+  https://vroid.pixiv.help/hc/ja/articles/4402394424089
+Official AvatarSample_C Hub page identified by those terms:
+  https://hub.vroid.com/characters/1248981995540129234/models/8640547963669442173
+
+Important source distinction: the selected binary is the pinned public mirror.
+Its bytes have NOT been compared with a fresh primary Hub binary download.
+The official sample terms and the mirror's exact source/hash are preserved
+separately; no primary-download byte identity or publisher endorsement is claimed.
+
+This is NOT a CC0 model. Its embedded VRM0 licenseName is "Other" and its
+otherLicenseUrl is empty; those fields alone are not a complete license grant.
+The preserved official AvatarSample A-Z terms explicitly say the samples are
+not CC0. They permit free commercial/noncommercial character use, adaptation
+and the described distribution/sale of original adapted character models;
+credit is not required. They retain conditions, including prohibitions on
+relabeling sample-derived VRM data as CC0, repurposing the data for a character
+creation service, unjustified paid redistribution of the sample data itself,
+misleading claims of pixiv support/endorsement, unlawful/infringing activity,
+discrimination/extremism and promoting cult-like religious or excessive
+political activities. This is a summary; the preserved original terms govern.
+  Provenance/VRoid-sample-terms.html (page states last update 2024-12-26)
+  Extracted/C-model.json (actual selected embedded metadata)
+
+Adapted base for JesusChild, JesusAdult, Joseph and Teacher: original facial
+topology, source expression shapes and rig data are retained where described
+by actor-manifest.json. Proportions, modeled hair/garments, robe/mantle/veil
+and sandals are adapted/added for the game's setting. Source PNG pixels
+remain unchanged; any hue/color adjustment is a recorded material operation.
+These game roles do not imply that VRoid/pixiv supplied biblical characters.
+
+3. Female base: official pixiv VRM1 sample
+----------------------------------------
+Source file: Source/Characters/OfficialFemale.vrm
+Embedded name/version: VRM1_Constraint_Twist_Sample / v1.0.1.
+Embedded author/copyright: pixiv Inc.; (c) 2022 pixiv Inc.
+Official pinned source:
+  https://raw.githubusercontent.com/pixiv/three-vrm/3caf7a21ee68f0d5dfa363ab3d577450bbf60136/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm
+SHA-256: 12c2b97e95e700783a6a550dc0eee2d7880aeedccef9ae67bc4c5a2f0f2631a2
+License: VRM Public License 1.0 with this file's actual embedded settings.
+  https://vrm.dev/licenses/1.0/
+
+The selected embedded settings explicitly include:
+  avatarPermission: everyone
+  commercialUsage: corporation
+  allowPoliticalOrReligiousUsage: true
+  allowRedistribution: true
+  modification: allowModificationRedistribution
+  creditNotation: unnecessary
+  allowAntisocialOrHateUsage: false
+
+These permissions belong to this selected model/settings combination, not to
+every VRM sample. The model license is not replaced by the repository's code
+license. Original rights, restriction settings and the no-endorsement condition
+remain applicable to the adapted portions; this notice grants no broader rights.
+  Provenance/VRM1-license.html (full original license text)
+  Extracted/F-model.json (actual selected embedded settings)
+
+The base is adapted for Mary through proportions, clothing/veil, materials,
+rig/format preparation and retained facial expressions. Source image pixels
+are preserved. This is an adaptation for the game, not an official pixiv role.
+
+4. Quaternius environment assets
+-------------------------------
+Author: Quaternius. Selected source packs: Ultimate Stylized Nature and
+Ultimate Modular Ruins. Their publisher pages identify the assets as CC0 1.0:
+  https://quaternius.com/packs/ultimatestylizednature.html
+  https://quaternius.com/packs/ultimatemodularruins.html
+  https://creativecommons.org/publicdomain/zero/1.0/
+
+Selected spatial models:
+  NormalTree_1, NormalTree_2, PalmTree_1, PalmTree_2, Bush, Grass_Small,
+  Arch_Round, Column_Round, Floor_Standard.
+Selected maps: NormalTree_Bark/Normal, NormalTree_Leaves,
+PalmTree_Trunk/Normal, PalmTree_Leaves, Bush_Leaves and Grass.
+
+Individual selected publisher-linked Drive URLs and exact file hashes are in
+source-manifest.json. Original source files remain in Source/Environment.
+Preparation remaps materials, selects sensible runtime texture resolutions,
+sets appropriate alpha/normal handling and applies a coherent stone palette.
+Spatial placement, sizing and static batching are game presentation changes.
+
+Original notices/evidence:
+  Provenance/nature-License.txt
+  Provenance/ruins-License.txt
+  Provenance/quaternius-ultimate-stylized-nature.html
+The nature notice has an "Ultimate Platformer Pack" header and the ruins notice
+uses a generic "LowPoly Models" header. Those preserved headers are not used
+as proof of the exact pack names; the publisher pages and selected source-file
+links distinguish the packs. No unselected pack character/animation is included
+merely because it appears on a source webpage.
+
+5. Quaternius Universal Animation Library
+----------------------------------------
+Author: Quaternius. License: CC0 1.0 Universal / Public Domain Dedication.
+  https://quaternius.itch.io/universal-animation-library
+  https://creativecommons.org/publicdomain/zero/1.0/
+Original source: ../Gospel3D/Source/Animation-UAL1_Standard.fbx
+Bytes: 23,754,684
+SHA-256: 21b32d912da3cb93426d974fb945e86f5b2e86970acd2ce89905e0fbf9f1dcc2
+Original notices:
+  ../Gospel3D/Source/Animation-License.txt
+  ../Gospel3D/Source/Animation-README.txt
+  Provenance/Quaternius-animation-License.txt
+
+The selected existing takes are Idle_Loop, Walk_Loop, Jog_Fwd_Loop,
+Sprint_Loop, Jump_Start, Jump_Loop and Jump_Land. The donor's actual take
+metadata supplies frame ranges; a new timeline is not presented as source data.
+Humanoid import/retargeting, loop settings, baked root translation/rotation
+and independent .anim assets adapt this motion to the new character rigs while
+the existing game motor retains physical movement authority. The donor is an
+Editor source for motion extraction; its sample body/model is not the current
+character mesh. Successful retargeting/playback still needs actual validation.
+
+6. Poly Haven HDR sky
+--------------------
+Asset: kloppenheim_06_puresky, selected 1k HDR.
+Provider: Poly Haven. Asset license: CC0 1.0.
+  https://polyhaven.com/a/kloppenheim_06_puresky
+  https://polyhaven.com/license
+Selected bytes:
+  https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kloppenheim_06_puresky_1k.hdr
+Source/Lighting/kloppenheim_06_puresky_1k.hdr
+SHA-256: 206c67e3a1b992282821cf06662bdd69bbb4915c1c4444a66338a40d6a7d4e34
+Preserved asset-license page: Provenance/PolyHaven-license.html.
+Runtime panoramic sky material/import settings are game presentation changes.
+The website's separate text/logo/example-render rights are not treated as CC0
+asset permissions.
+
+7. Attribution and scope
+------------------------
+Keep the exact original notices, sample-model terms/settings and this
+modification notice with source distributions and applicable shipped notices.
+No Genshin Impact, Honkai: Star Rail or other HoYoverse model/texture/animation
+was extracted for these assets. Those games are visual references, not suppliers
+of the current source data. Shader availability does not establish identical
+rendering, complete AAA art quality, historical likeness, provider endorsement
+or completed gameplay/release verification.
+
+Full lilToon MIT License
+-----------------------
+MIT License
+
+Copyright (c) 2020-present lilxyzw
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

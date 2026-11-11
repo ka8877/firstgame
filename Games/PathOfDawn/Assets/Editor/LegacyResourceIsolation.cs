@@ -37,7 +37,7 @@ namespace FirstGame.Editor
         {
             if (!File.Exists(Journal)) return;
             var record = JsonUtility.FromJson<Record>(File.ReadAllText(Journal));
-            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != "gospel-canon-2026-11-09" && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
+            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != "gospel-canon-2026-11-09" && record.revision != "gospel-living-2026-11-10" && record.revision != "gospel-character-motion-2026-11-11" && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
                 throw new BuildFailedException("Invalid legacy resource recovery journal; retained for inspection.");
             Restore(record, "recovered-after-interruption");
             Debug.Log("FIRSTGAME_LEGACY_RESOURCES_RECOVERED " + record.moves.Length);
@@ -60,23 +60,38 @@ namespace FirstGame.Editor
         public static Scope Begin(string target)
         {
             RecoverInterrupted();
+            bool npr = PilgrimageProjectSetup.Revision.StartsWith("gospel-npr-", StringComparison.Ordinal);
+            if (npr)
+            {
+                foreach (string identity in new[] { "JesusChild", "JesusAdult", "Mary", "Joseph", "Teacher" })
+                {
+                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Art/GospelNpr/Characters/" + identity + ".prefab");
+                    var animator = prefab ? prefab.GetComponent<Animator>() : null;
+                    if (!animator || !animator.avatar || !animator.avatar.isHuman || !animator.avatar.isValid || !animator.runtimeAnimatorController || prefab.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length == 0)
+                        throw new BuildFailedException("Prepared NPR humanoid required before excluding earlier character artwork: " + identity);
+                }
+            }
             var candidates = new List<string> {
                 "Assets/Resources/Art/Painted",
                 "Assets/Resources/Art/GospelRemaster", "Assets/Resources/Art/GospelRadiance",
                 "Assets/Resources/Art/GospelLuminous/Rendering"
             };
-            // The HD-2D field retains authored 3D props/well/temple materials,
-            // current pixel sprites, the reading illustrations, SoftGlow and the six
-            // original Lost Crypt canopy sprites actively batched by the new field.
-            // Old full humanoids and the unused lateral Lost Crypt world stay
-            // byte-for-byte editable but do not inflate the current Web player.
+            // The current field retains temple props, reading illustrations and
+            // SoftGlow. Earlier source art remains editable and is restored byte
+            // for byte after a build.
             AddChildrenExcept(candidates, "Assets/Resources/Art/Gospel3D", "TempleMaterials");
             // Preserve earlier narration sources while shipping the current
             // exact Nativity key-line clips and manifest in this player.
             AddChildrenExcept(candidates, "Assets/Resources/Voice", "GospelNativity");
-            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
-                "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
-            AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
+            if (npr)
+                AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png");
+            else
+                AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/World", "SoftGlow.png",
+                    "Tree1.png", "Tree2.png", "Tree3.png", "Foliage1.png", "Rock1.png", "Rock3.png");
+            if (npr)
+                AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors");
+            else
+                AddChildrenExcept(candidates, "Assets/Resources/Art/GospelLuminous/Actors", "npcs.png");
             // The source-bound motion bundle replaces every field character.
             // Earlier atlas pixels/GUIDs remain editable and are restored after
             // building; independent Living portraits remain in Resources for UI.
@@ -84,9 +99,23 @@ namespace FirstGame.Editor
             bool hasNeutralMotion = new[] { "child", "adult", "mary", "joseph", "teacher" }.All(name =>
                 File.Exists(neutral + name + ".png") && File.Exists(neutral + name + "-layout.json") &&
                 File.Exists(neutral + name + "-manifest.json"));
-            if (hasNeutralMotion)
+            if (npr)
+            {
+                candidates.Add("Assets/Resources/Art/GospelMotion");
+                candidates.Add("Assets/Resources/Art/GospelLiving");
+                // Runtime NPR portraits/models replace these older resources.
+                // They remain editable and are restored byte-for-byte after builds.
+                candidates.Add("Assets/Resources/Art/GospelPilgrimage/Actors/portraits.png");
+                candidates.Add("Assets/Resources/Art/GospelPilgrimage/Actors/portraits-layout.json");
+                candidates.Add("Assets/Resources/Art/GospelChronicle/Actors");
+                candidates.Add("Assets/Resources/Art/GospelRenewal/Opening/nativity.png");
+                candidates.Add("Assets/Resources/Art/GospelRenewal/Opening/travel-items.png");
+                foreach (string oldTree in new[] { "ShadeTreeA_LOD0", "ShadeTreeA_LOD1", "ShadeTreeB_LOD0", "ShadeTreeB_LOD1", "Shrub" })
+                    candidates.Add("Assets/Resources/Art/GospelAuthoredProps/" + oldTree + ".fbx");
+            }
+            else if (hasNeutralMotion)
                 candidates.Add("Assets/Resources/Art/GospelMotion/Layers");
-            if (hasNeutralMotion || (File.Exists("Assets/Resources/Art/GospelMotion/male-layout.json") &&
+            if (npr || hasNeutralMotion || (File.Exists("Assets/Resources/Art/GospelMotion/male-layout.json") &&
                 File.Exists("Assets/Resources/Art/GospelMotion/female-layout.json") &&
                 File.Exists("Assets/Resources/Art/GospelMotion/Layers/male-mage-vest.png") &&
                 File.Exists("Assets/Resources/Art/GospelMotion/Layers/female-mage-vest.png")))

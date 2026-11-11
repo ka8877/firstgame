@@ -8,10 +8,10 @@ using UnityEngine.Rendering.Universal;
 
 namespace FirstGame.Editor
 {
-    /// <summary>Current free-field HD-2D entry. All old renderer assets remain as history.</summary>
+    /// <summary>Current skinned NPR 3D field. Earlier renderers remain as history.</summary>
     public static class PilgrimageProjectSetup
     {
-        public const string Revision = "gospel-character-motion-2026-11-11";
+        public const string Revision = "gospel-npr-2026-11-11";
         public const string AppType = "PathOfDawn.Presentation.GospelPilgrimageApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool preparing;
@@ -36,18 +36,19 @@ namespace FirstGame.Editor
                 PlayerSettings.colorSpace = ColorSpace.Linear;
                 PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
                 PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.WebGL, ScriptingImplementation.IL2CPP);
+                PreserveRuntimeNprFeatures(UnityEditor.Build.NamedBuildTarget.Standalone);
+                PreserveRuntimeNprFeatures(UnityEditor.Build.NamedBuildTarget.WebGL);
                 var desktop = Pipeline("Desktop");
                 Pipeline("Web");
                 GraphicsSettings.defaultRenderPipeline = desktop;
                 QualitySettings.renderPipeline = desktop;
                 QualitySettings.vSyncCount = 0;
                 PreserveShaders();
-                PrepareSpriteImports();
-                NeutralCharacterImportSetup.Ensure();
+                GospelNprPreparation.Prepare();
                 var font = ProjectSetup.CreateFont();
                 var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
                 var type = Type.GetType(AppType, true);
-                var app = new GameObject("Pilgrimage HD2D Bootstrap").AddComponent(type);
+                var app = new GameObject("Pilgrimage NPR 3D Bootstrap").AddComponent(type);
                 type.GetField("KoreanFont")?.SetValue(app, font);
                 EditorSceneManager.SaveScene(scene, ScenePath);
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
@@ -98,6 +99,17 @@ namespace FirstGame.Editor
             return pipeline;
         }
 
+        static void PreserveRuntimeNprFeatures(UnityEditor.Build.NamedBuildTarget target)
+        {
+            // lilToon's scene-only optimizer cannot discover the models and
+            // materials loaded from Resources by this RPG. Use its supported
+            // build switch while preserving the project's existing defines.
+            const string symbol = "LILTOON_DISABLE_OPTIMIZATION";
+            string current = PlayerSettings.GetScriptingDefineSymbols(target);
+            if (Array.IndexOf(current.Split(';'), symbol) < 0)
+                PlayerSettings.SetScriptingDefineSymbols(target, string.IsNullOrEmpty(current) ? symbol : current + ";" + symbol);
+        }
+
         static void PreserveShaders()
         {
             string[] names = { "Universal Render Pipeline/Lit", "Universal Render Pipeline/Unlit" };
@@ -111,8 +123,6 @@ namespace FirstGame.Editor
                 if (material == null) AssetDatabase.CreateAsset(new Material(shader) { name = files[i] }, path);
                 else { material.shader = shader; EditorUtility.SetDirty(material); }
             }
-            if (Resources.Load<Shader>("Art/GospelPilgrimage/Rendering/PilgrimageSprite") == null)
-                throw new InvalidOperationException("Missing retained HD2D sprite shader.");
         }
 
         static void PrepareSpriteImports()

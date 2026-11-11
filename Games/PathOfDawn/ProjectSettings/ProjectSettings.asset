@@ -595,8 +595,8 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Standalone: INK_RUNTIME;INK_EDITOR
-    WebGL: INK_RUNTIME;INK_EDITOR
+    Standalone: INK_RUNTIME;INK_EDITOR;LILTOON_DISABLE_OPTIMIZATION
+    WebGL: INK_RUNTIME;INK_EDITOR;LILTOON_DISABLE_OPTIMIZATION
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -69,6 +69,8 @@ def main():
     parser.add_argument('attempt')
     parser.add_argument('--native-run', type=Path, required=True, help='The actual passed OUT/NativeRuns/<game>/<attempt> directory.')
     args = parser.parse_args()
+    if RELEASE.IS_GOSPEL_NPR and args.game not in RELEASE.CURRENT_GAMES:
+        raise ValueError('NPR preserves Card; no new Card Web build is admitted')
     require(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', args.attempt), 'A new safe Web attempt is required')
     control = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(RELEASE.CONTROL))).absolute()
     require(control.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy') and control.resolve() == control
@@ -96,7 +98,7 @@ def main():
     xml = ET.parse(regular(native / 'native.xml')).getroot()
     cases = xml.findall('.//test-case')
     names = [case.get('fullname') for case in cases]
-    expected = evidence.REQUIRED_NATIVE_TESTS[args.game]
+    expected = evidence.current_native_names(args.game)
     require(xml.get('result') == 'Passed' and xml.get('failed') == xml.get('skipped') == '0'
             and int(xml.get('passed', '0')) == len(expected) == len(names) == len(set(names))
             and set(names) == set(expected) and all(case.get('result') == 'Passed' for case in cases), 'Complete current Native8/21 set required')
@@ -143,6 +145,7 @@ def main():
         ROOT / 'Tools/Autonomy/cycle_guard.py', ROOT / 'Tools/Build/nativity-task.sh', ROOT / 'Tools/Build/nativity-pipeline-state.py',
         ROOT / 'Tools/Build/restore-nativity-build-additions.py', ROOT / 'Tools/Environment/activate-shell.sh',
         ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Environment/repair-generated-cache-links.py']
+    sources += list(RELEASE.EXTRA_SOURCE_FILES)
     pins = []
     for path in sources:
         destination = run / 'RecordedHarness' / path.relative_to(ROOT)
@@ -254,3 +257,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

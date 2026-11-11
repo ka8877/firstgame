@@ -1,0 +1,6987 @@
+{
+  "prefix": "F",
+  "source": "Tools/Art/GospelNpr/Source/Characters/OfficialFemale.vrm",
+  "sourceSha256": "12c2b97e95e700783a6a550dc0eee2d7880aeedccef9ae67bc4c5a2f0f2631a2",
+  "licenseMetadata": {
+    "allowAntisocialOrHateUsage": false,
+    "allowExcessivelySexualUsage": true,
+    "allowExcessivelyViolentUsage": true,
+    "allowPoliticalOrReligiousUsage": true,
+    "allowRedistribution": true,
+    "authors": [
+      "pixiv Inc."
+    ],
+    "avatarPermission": "everyone",
+    "commercialUsage": "corporation",
+    "copyrightInformation": "(c) 2022 pixiv Inc.",
+    "creditNotation": "unnecessary",
+    "licenseUrl": "https://vrm.dev/licenses/1.0/",
+    "modification": "allowModificationRedistribution",
+    "name": "VRM1_Constraint_Twist_Sample",
+    "thumbnailImage": 18,
+    "version": "v1.0.1"
+  },
+  "humanBones": {
+    "chest": "J_Bip_C_Chest",
+    "head": "J_Bip_C_Head",
+    "hips": "J_Bip_C_Hips",
+    "leftEye": "J_Adj_L_FaceEye",
+    "leftFoot": "J_Bip_L_Foot",
+    "leftHand": "J_Bip_L_Hand",
+    "leftIndexDistal": "J_Bip_L_Index3",
+    "leftIndexIntermediate": "J_Bip_L_Index2",
+    "leftIndexProximal": "J_Bip_L_Index1",
+    "leftLittleDistal": "J_Bip_L_Little3",
+    "leftLittleIntermediate": "J_Bip_L_Little2",
+    "leftLittleProximal": "J_Bip_L_Little1",
+    "leftLowerArm": "J_Bip_L_LowerArm",
+    "leftLowerLeg": "J_Bip_L_LowerLeg",
+    "leftMiddleDistal": "J_Bip_L_Middle3",
+    "leftMiddleIntermediate": "J_Bip_L_Middle2",
+    "leftMiddleProximal": "J_Bip_L_Middle1",
+    "leftRingDistal": "J_Bip_L_Ring3",
+    "leftRingIntermediate": "J_Bip_L_Ring2",
+    "leftRingProximal": "J_Bip_L_Ring1",
+    "leftShoulder": "J_Bip_L_Shoulder",
+    "leftThumbDistal": "J_Bip_L_Thumb3",
+    "leftThumbMetacarpal": "J_Bip_L_Thumb1",
+    "leftThumbProximal": "J_Bip_L_Thumb2",
+    "leftToes": "J_Bip_L_ToeBase",
+    "leftUpperArm": "J_Bip_L_UpperArm",
+    "leftUpperLeg": "J_Bip_L_UpperLeg",
+    "neck": "J_Bip_C_Neck",
+    "rightEye": "J_Adj_R_FaceEye",
+    "rightFoot": "J_Bip_R_Foot",
+    "rightHand": "J_Bip_R_Hand",
+    "rightIndexDistal": "J_Bip_R_Index3",
+    "rightIndexIntermediate": "J_Bip_R_Index2",
+    "rightIndexProximal": "J_Bip_R_Index1",
+    "rightLittleDistal": "J_Bip_R_Little3",
+    "rightLittleIntermediate": "J_Bip_R_Little2",
+    "rightLittleProximal": "J_Bip_R_Little1",
+    "rightLowerArm": "J_Bip_R_LowerArm",
+    "rightLowerLeg": "J_Bip_R_LowerLeg",
+    "rightMiddleDistal": "J_Bip_R_Middle3",
+    "rightMiddleIntermediate": "J_Bip_R_Middle2",
+    "rightMiddleProximal": "J_Bip_R_Middle1",
+    "rightRingDistal": "J_Bip_R_Ring3",
+    "rightRingIntermediate": "J_Bip_R_Ring2",
+    "rightRingProximal": "J_Bip_R_Ring1",
+    "rightShoulder": "J_Bip_R_Shoulder",
+    "rightThumbDistal": "J_Bip_R_Thumb3",
+    "rightThumbMetacarpal": "J_Bip_R_Thumb1",
+    "rightThumbProximal": "J_Bip_R_Thumb2",
+    "rightToes": "J_Bip_R_ToeBase",
+    "rightUpperArm": "J_Bip_R_UpperArm",
+    "rightUpperLeg": "J_Bip_R_UpperLeg",
+    "spine": "J_Bip_C_Spine",
+    "upperChest": "J_Bip_C_UpperChest"
+  },
+  "materials": [
+    {
+      "index": 0,
+      "originalName": "Body_00_SKIN",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_00.png",
+        "bytes": 652855,
+        "sha256": "7bab396a40fa84beff4f47db4503fbd185ff810e9e3785e49c99fbab707ba47b",
+        "index": 0,
+        "originalName": "Body_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.9301109,
+              0.623960435,
+              0.708375931
+            ],
+            "shadeMultiplyTexture": {
+              "index": 0
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Body_00_SKIN",
+        "normalTexture": {
+          "index": 1,
+          "scale": 1,
+          "texCoord": 0
+        },
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 0,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 1,
+      "originalName": "Bottoms_01_CLOTH",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_02.png",
+        "bytes": 125315,
+        "sha256": "5a5a3ad60865dd4ba523fd217407cad833061e9f3804a5f68de88b5d8f351810",
+        "index": 2,
+        "originalName": "Bottoms_01",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.623960435,
+              0.6724432,
+              0.9301109
+            ],
+            "shadeMultiplyTexture": {
+              "index": 2
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Bottoms_01_CLOTH",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 2,
+      "originalName": "Shoes_01_CLOTH",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_03.png",
+        "bytes": 105061,
+        "sha256": "aec034a2cd6f7fa823a6907dda382088234521cac4ba4c1c478c58a70675bc90",
+        "index": 3,
+        "originalName": "Shoes_01",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.623960435,
+              0.6724432,
+              0.9301109
+            ],
+            "shadeMultiplyTexture": {
+              "index": 3
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Shoes_01_CLOTH",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 3,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 3,
+      "originalName": "Tops_01_CLOTH",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_04.png",
+        "bytes": 190081,
+        "sha256": "92ca703041d37301d1ce64c241579c1de8bb4f123c1c708c76c9dbca22bf5d19",
+        "index": 4,
+        "originalName": "Tops_01",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.623960435,
+              0.6724432,
+              0.9301109
+            ],
+            "shadeMultiplyTexture": {
+              "index": 4
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Tops_01_CLOTH",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 4,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 4,
+      "originalName": "HairBack_00_HAIR",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_05.png",
+        "bytes": 141988,
+        "sha256": "e715c2d4f5638ff7b8bc261f108155cf7f11cb0995c7f1aaed00d358aa6e232b",
+        "index": 5,
+        "originalName": "HairBack_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 5
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "HairBack_00_HAIR",
+        "normalTexture": {
+          "index": 6,
+          "scale": 1,
+          "texCoord": 0
+        },
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 5,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 5,
+      "originalName": "FaceMouth_00_FACE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_07.png",
+        "bytes": 40655,
+        "sha256": "1cb8c6d596c1d11f5c2b823ae239294297f44dfd57c7d53c166e74c0e64d962d",
+        "index": 7,
+        "originalName": "FaceMouth_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.9301109,
+              0.623960435,
+              0.708375931
+            ],
+            "shadeMultiplyTexture": {
+              "index": 7
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "FaceMouth_00_FACE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 7,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 6,
+      "originalName": "EyeIris_00_EYE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_08.png",
+        "bytes": 90019,
+        "sha256": "e07ed17eb8b531b5e21141edbd97548efe21e4734679b36b22fc7a58562f596b",
+        "index": 8,
+        "originalName": "EyeIris_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 8
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "EyeIris_00_EYE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 8,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 7,
+      "originalName": "Face_00_SKIN",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_09.png",
+        "bytes": 142098,
+        "sha256": "367fdba7bdcbf63cc05ecb07ca406f1d018d82afafe55dc9b8cac22253eb3893",
+        "index": 9,
+        "originalName": "Face_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "outlineWidthMultiplyTexture": {
+              "index": 10
+            },
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              0.9301109,
+              0.623960435,
+              0.708375931
+            ],
+            "shadeMultiplyTexture": {
+              "index": 9
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Face_00_SKIN",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 9,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 8,
+      "originalName": "EyeWhite_00_EYE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_11.png",
+        "bytes": 118527,
+        "sha256": "539e8e906992087788433a142e920282f56f2919c8bcc833914921053e835c6b",
+        "index": 11,
+        "originalName": "EyeWhite_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 11
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "EyeWhite_00_EYE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 11,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 9,
+      "originalName": "FaceEyeline_00_FACE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_12.png",
+        "bytes": 23964,
+        "sha256": "115b023d7d8e90261af6829854070597a802ce781f3a08bb03d872b4b266d23c",
+        "index": 12,
+        "originalName": "FaceEyeline_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 12
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "FaceEyeline_00_FACE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 12,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 10,
+      "originalName": "FaceBrow_00_FACE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_13.png",
+        "bytes": 4011,
+        "sha256": "fde3eb36bdd78453865087e38e9b1c8ef6d037cc2cb7b3bca12ffb37c29d0b14",
+        "index": 13,
+        "originalName": "FaceBrow_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 13
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "FaceBrow_00_FACE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 13,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 11,
+      "originalName": "EyeHighlight_00_EYE",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_14.png",
+        "bytes": 7926,
+        "sha256": "ccf3baa15c3f42ea547d295e700c7251f563992f0319a16e852709ded62183b7",
+        "index": 14,
+        "originalName": "EyeHighlight_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0,
+          0
+        ],
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 14
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "EyeHighlight_00_EYE",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 14,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    },
+    {
+      "index": 12,
+      "originalName": "Hair_00_HAIR",
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphaMode": "OPAQUE",
+      "alphaCutoff": 0.5,
+      "doubleSided": true,
+      "mainTexture": {
+        "file": "Tools/Art/GospelNpr/Extracted/Textures/F_15.png",
+        "bytes": 131731,
+        "sha256": "53369027156296839f73078bb93ac629a37db3af0f17ef3aa822939d9278d9f4",
+        "index": 15,
+        "originalName": "Hair_00",
+        "mime": "image/png"
+      },
+      "sourceMaterial": {
+        "alphaMode": "OPAQUE",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.70837605,
+          0.254152179,
+          0.0437350422
+        ],
+        "emissiveTexture": {
+          "index": 17,
+          "texCoord": 0
+        },
+        "extensions": {
+          "KHR_materials_unlit": {},
+          "VRMC_materials_mtoon": {
+            "giEqualizationFactor": 0.9,
+            "outlineColorFactor": [
+              0.0612459742,
+              0.0085681,
+              0.0144438017
+            ],
+            "outlineLightingMixFactor": 1,
+            "outlineWidthFactor": 0.0008,
+            "outlineWidthMode": "worldCoordinates",
+            "parametricRimColorFactor": [
+              0,
+              0,
+              0
+            ],
+            "parametricRimFresnelPowerFactor": 5,
+            "parametricRimLiftFactor": 0,
+            "renderQueueOffsetNumber": 0,
+            "rimLightingMixFactor": 1,
+            "shadeColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "shadeMultiplyTexture": {
+              "index": 15
+            },
+            "shadingShiftFactor": -0.05,
+            "shadingToonyFactor": 0.9,
+            "specVersion": "1.0",
+            "transparentWithZWrite": false,
+            "uvAnimationRotationSpeedFactor": 0,
+            "uvAnimationScrollXSpeedFactor": 0,
+            "uvAnimationScrollYSpeedFactor": 0
+          }
+        },
+        "name": "Hair_00_HAIR",
+        "normalTexture": {
+          "index": 16,
+          "scale": 1,
+          "texCoord": 0
+        },
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 15,
+            "texCoord": 0
+          },
+          "metallicFactor": 1,
+          "roughnessFactor": 1
+        }
+      },
+      "vrm0Properties": null
+    }
+  ],
+  "images": [
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_00.png",
+      "bytes": 652855,
+      "sha256": "7bab396a40fa84beff4f47db4503fbd185ff810e9e3785e49c99fbab707ba47b",
+      "index": 0,
+      "originalName": "Body_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_01.png",
+      "bytes": 2958851,
+      "sha256": "a58f6d153c38bae549e815a2cd6e771b2e5adb6d6982df0cb79c63f938cc882d",
+      "index": 1,
+      "originalName": "Body_00_nml",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_02.png",
+      "bytes": 125315,
+      "sha256": "5a5a3ad60865dd4ba523fd217407cad833061e9f3804a5f68de88b5d8f351810",
+      "index": 2,
+      "originalName": "Bottoms_01",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_03.png",
+      "bytes": 105061,
+      "sha256": "aec034a2cd6f7fa823a6907dda382088234521cac4ba4c1c478c58a70675bc90",
+      "index": 3,
+      "originalName": "Shoes_01",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_04.png",
+      "bytes": 190081,
+      "sha256": "92ca703041d37301d1ce64c241579c1de8bb4f123c1c708c76c9dbca22bf5d19",
+      "index": 4,
+      "originalName": "Tops_01",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_05.png",
+      "bytes": 141988,
+      "sha256": "e715c2d4f5638ff7b8bc261f108155cf7f11cb0995c7f1aaed00d358aa6e232b",
+      "index": 5,
+      "originalName": "HairBack_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_06.png",
+      "bytes": 86176,
+      "sha256": "72305db576663cd0118b1e34686ea7acd17807136186205242250fc5d0e347ce",
+      "index": 6,
+      "originalName": "HairBack_00_nml",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_07.png",
+      "bytes": 40655,
+      "sha256": "1cb8c6d596c1d11f5c2b823ae239294297f44dfd57c7d53c166e74c0e64d962d",
+      "index": 7,
+      "originalName": "FaceMouth_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_08.png",
+      "bytes": 90019,
+      "sha256": "e07ed17eb8b531b5e21141edbd97548efe21e4734679b36b22fc7a58562f596b",
+      "index": 8,
+      "originalName": "EyeIris_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_09.png",
+      "bytes": 142098,
+      "sha256": "367fdba7bdcbf63cc05ecb07ca406f1d018d82afafe55dc9b8cac22253eb3893",
+      "index": 9,
+      "originalName": "Face_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_10.png",
+      "bytes": 14650,
+      "sha256": "c709081ad3ccfbde2ae71e0bf494511c2d9f1427e60746aba71d111862d67472",
+      "index": 10,
+      "originalName": "Face_00_outline",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_11.png",
+      "bytes": 118527,
+      "sha256": "539e8e906992087788433a142e920282f56f2919c8bcc833914921053e835c6b",
+      "index": 11,
+      "originalName": "EyeWhite_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_12.png",
+      "bytes": 23964,
+      "sha256": "115b023d7d8e90261af6829854070597a802ce781f3a08bb03d872b4b266d23c",
+      "index": 12,
+      "originalName": "FaceEyeline_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_13.png",
+      "bytes": 4011,
+      "sha256": "fde3eb36bdd78453865087e38e9b1c8ef6d037cc2cb7b3bca12ffb37c29d0b14",
+      "index": 13,
+      "originalName": "FaceBrow_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_14.png",
+      "bytes": 7926,
+      "sha256": "ccf3baa15c3f42ea547d295e700c7251f563992f0319a16e852709ded62183b7",
+      "index": 14,
+      "originalName": "EyeHighlight_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_15.png",
+      "bytes": 131731,
+      "sha256": "53369027156296839f73078bb93ac629a37db3af0f17ef3aa822939d9278d9f4",
+      "index": 15,
+      "originalName": "Hair_00",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_16.png",
+      "bytes": 97368,
+      "sha256": "86426d781334c6a440439db9039a9a47ce8b9f16f82fd805a56c6f0f8047bf52",
+      "index": 16,
+      "originalName": "Hair_00_nml",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_17.png",
+      "bytes": 54645,
+      "sha256": "3acc498938ca7e9ba2cfb39f5237d8c6db48cdfad784a0b75f70d55b63fab34d",
+      "index": 17,
+      "originalName": "Hair_00_spe",
+      "mime": "image/png"
+    },
+    {
+      "file": "Tools/Art/GospelNpr/Extracted/Textures/F_18.png",
+      "bytes": 1243889,
+      "sha256": "95b64ec1f832d0e4e0fee12ed339083e0e8881a3f610798bbbb714a926ed1911",
+      "index": 18,
+      "originalName": "Thumbnail",
+      "mime": "image/png"
+    }
+  ],
+  "thumbnailImage": {
+    "file": "Tools/Art/GospelNpr/Extracted/Textures/F_18.png",
+    "bytes": 1243889,
+    "sha256": "95b64ec1f832d0e4e0fee12ed339083e0e8881a3f610798bbbb714a926ed1911",
+    "index": 18,
+    "originalName": "Thumbnail",
+    "mime": "image/png"
+  },
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Body",
+      "skin": 0
+    },
+    {
+      "mesh": 1,
+      "name": "Face",
+      "skin": 1
+    },
+    {
+      "mesh": 2,
+      "name": "Hair",
+      "skin": 2
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        5,
+        13,
+        21,
+        160,
+        165
+      ],
+      "name": "J_Bip_C_Hips",
+      "rotation": [
+        0.117684364,
+        0,
+        6.01942e-31,
+        0.993051052
+      ],
+      "translation": [
+        0,
+        0.9080763,
+        0.00357606518
+      ]
+    },
+    {
+      "children": [
+        6
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "NegativeY",
+              "source": 161,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_L_UpperLeg",
+      "rotation": [
+        -0.107289694,
+        -1.71052832e-07,
+        -8.93335e-15,
+        0.9942278
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.07715603,
+        -0.0395395942,
+        0.005741533
+      ]
+    },
+    {
+      "children": [
+        7,
+        9,
+        11
+      ],
+      "name": "J_Roll_L_UpperLeg",
+      "rotation": [
+        1.59869451e-08,
+        2.36706491e-14,
+        -8.313639e-17,
+        1
+      ],
+      "translation": [
+        -8.169778e-10,
+        -9.733346e-08,
+        -6.437672e-09
+      ]
+    },
+    {
+      "children": [
+        8
+      ],
+      "name": "J_Sec_L_TopsUpperLegBack",
+      "rotation": [
+        -0.05463426,
+        0.995060146,
+        0.08276395,
+        0.0045437254
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        0.000220406626,
+        0.00139439292,
+        -0.118437245
+      ]
+    },
+    {
+      "name": "J_Sec_L_TopsUpperLegBack_end",
+      "rotation": [
+        1.05796061e-09,
+        6.68374467e-10,
+        4.05505629e-10,
+        1
+      ],
+      "scale": [
+        0.9999998,
+        1.00000012,
+        0.9999999
+      ],
+      "translation": [
+        1.23333366e-05,
+        -0.1230902,
+        1.027034e-05
+      ]
+    },
+    {
+      "children": [
+        10
+      ],
+      "name": "J_Sec_L_TopsUpperLegFront",
+      "rotation": [
+        -0.0183591675,
+        0.00187165081,
+        0.0510824732,
+        0.998523951
+      ],
+      "translation": [
+        0.000466279569,
+        -0.01004812,
+        0.132427871
+      ]
+    },
+    {
+      "name": "J_Sec_L_TopsUpperLegFront_end",
+      "rotation": [
+        -1.3922532e-09,
+        2.6696606e-10,
+        -4.040795e-09,
+        1
+      ],
+      "translation": [
+        1.10752076e-07,
+        -0.112512238,
+        1.64891869e-08
+      ]
+    },
+    {
+      "children": [
+        12
+      ],
+      "name": "J_Sec_L_TopsUpperLegSide",
+      "rotation": [
+        -0.08972452,
+        0.703043,
+        0.08934598,
+        0.6997838
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        0.99999994
+      ],
+      "translation": [
+        0.106020279,
+        -0.008040025,
+        0.000233194281
+      ]
+    },
+    {
+      "name": "J_Sec_L_TopsUpperLegSide_end",
+      "rotation": [
+        -4.214402e-09,
+        1.1345783e-08,
+        1.26469377e-08,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        -8.283788e-09,
+        -0.112131551,
+        1.83105424e-08
+      ]
+    },
+    {
+      "children": [
+        14
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "NegativeY",
+              "source": 166,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_R_UpperLeg",
+      "rotation": [
+        -0.107289694,
+        1.71052832e-07,
+        8.93335e-15,
+        0.9942278
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.07715603,
+        -0.0395395942,
+        0.005741533
+      ]
+    },
+    {
+      "children": [
+        15,
+        17,
+        19
+      ],
+      "name": "J_Roll_R_UpperLeg",
+      "rotation": [
+        1.59869451e-08,
+        -2.36706491e-14,
+        8.313639e-17,
+        1
+      ],
+      "translation": [
+        8.169778e-10,
+        -9.733346e-08,
+        -6.437672e-09
+      ]
+    },
+    {
+      "children": [
+        16
+      ],
+      "name": "J_Sec_R_TopsUpperLegBack",
+      "rotation": [
+        0.05463425,
+        0.995060146,
+        0.08276392,
+        -0.004543757
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        -0.000220406626,
+        0.00139439292,
+        -0.118437245
+      ]
+    },
+    {
+      "name": "J_Sec_R_TopsUpperLegBack_end",
+      "rotation": [
+        -4.48352333e-09,
+        4.51095467e-10,
+        -2.311399e-09,
+        1
+      ],
+      "scale": [
+        0.9999998,
+        1.00000012,
+        0.999999762
+      ],
+      "translation": [
+        -1.23306909e-05,
+        -0.123090148,
+        1.02762824e-05
+      ]
+    },
+    {
+      "children": [
+        18
+      ],
+      "name": "J_Sec_R_TopsUpperLegFront",
+      "rotation": [
+        -0.0183591675,
+        -0.00187165081,
+        -0.0510824732,
+        0.998523951
+      ],
+      "translation": [
+        -0.000466279569,
+        -0.01004812,
+        0.132427871
+      ]
+    },
+    {
+      "name": "J_Sec_R_TopsUpperLegFront_end",
+      "rotation": [
+        -1.3922532e-09,
+        -2.6696606e-10,
+        4.040795e-09,
+        1
+      ],
+      "translation": [
+        -1.10752076e-07,
+        -0.112512238,
+        1.64891869e-08
+      ]
+    },
+    {
+      "children": [
+        20
+      ],
+      "name": "J_Sec_R_TopsUpperLegSide",
+      "rotation": [
+        -0.08972452,
+        -0.703043,
+        -0.08934598,
+        0.6997838
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        0.99999994
+      ],
+      "translation": [
+        -0.106020279,
+        -0.008040025,
+        0.000233194281
+      ]
+    },
+    {
+      "name": "J_Sec_R_TopsUpperLegSide_end",
+      "rotation": [
+        -4.214402e-09,
+        -1.1345783e-08,
+        -1.26469377e-08,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        8.283788e-09,
+        -0.112131551,
+        1.83105424e-08
+      ]
+    },
+    {
+      "children": [
+        22
+      ],
+      "name": "J_Bip_C_Spine",
+      "rotation": [
+        -0.104280166,
+        4.015577e-34,
+        3.72231968e-33,
+        0.994547963
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        0.99999994
+      ],
+      "translation": [
+        -6.40245047e-32,
+        0.05355472,
+        -3.67968056e-08
+      ]
+    },
+    {
+      "children": [
+        23
+      ],
+      "name": "J_Bip_C_Chest",
+      "rotation": [
+        -0.0810161,
+        -1.96460549e-35,
+        1.03198474e-34,
+        0.9967128
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -1.899082e-21,
+        0.113053873,
+        5.205198e-07
+      ]
+    },
+    {
+      "children": [
+        24,
+        88,
+        122,
+        156,
+        158
+      ],
+      "name": "J_Bip_C_UpperChest",
+      "rotation": [
+        -0.07341963,
+        1.86462233e-16,
+        3.65676538e-16,
+        0.997301161
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        0.99999994
+      ],
+      "translation": [
+        -9.118838e-23,
+        0.108634941,
+        -8.576356e-08
+      ]
+    },
+    {
+      "children": [
+        25
+      ],
+      "name": "J_Bip_C_Neck",
+      "rotation": [
+        0.20189546,
+        -1.561893e-17,
+        1.10136822e-16,
+        0.9794071
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -2.77737438e-17,
+        0.137737721,
+        3.25352367e-08
+      ]
+    },
+    {
+      "children": [
+        26,
+        27,
+        28,
+        29,
+        32,
+        35,
+        38,
+        41,
+        48,
+        54,
+        60,
+        66,
+        72,
+        78,
+        83
+      ],
+      "name": "J_Bip_C_Head",
+      "rotation": [
+        0.467958748,
+        0.5301081,
+        0.467958868,
+        0.530108
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        2.25339583e-17,
+        0.07374391,
+        9.32755739e-08
+      ]
+    },
+    {
+      "name": "J_Adj_L_FaceEye",
+      "rotation": [
+        0.5000001,
+        0.49999994,
+        0.5000002,
+        -0.499999762
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000024
+      ],
+      "translation": [
+        0.0626432151,
+        0.0214360766,
+        0.01732161
+      ]
+    },
+    {
+      "name": "J_Adj_R_FaceEye",
+      "rotation": [
+        0.5000001,
+        0.49999994,
+        0.5000002,
+        -0.499999762
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000024
+      ],
+      "translation": [
+        0.06264322,
+        0.0214360859,
+        -0.0173216127
+      ]
+    },
+    {
+      "name": "J_Bip_C_Head_end",
+      "rotation": [
+        -1.5014832e-08,
+        -2.09669775e-08,
+        -6.94373341e-08,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1.00000024,
+        1
+      ],
+      "translation": [
+        0.212644026,
+        -2.76219367e-07,
+        6.67972078e-09
+      ]
+    },
+    {
+      "children": [
+        30
+      ],
+      "name": "J_Sec_Hair1_01",
+      "rotation": [
+        0.5695495,
+        0.7085509,
+        0.305788964,
+        -0.2829527
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1.00000036
+      ],
+      "translation": [
+        0.1292299,
+        0.0764313638,
+        -0.06925585
+      ]
+    },
+    {
+      "children": [
+        31
+      ],
+      "name": "J_Sec_Hair2_01",
+      "rotation": [
+        0.0402764119,
+        0.005326105,
+        0.00142294809,
+        0.9991734
+      ],
+      "scale": [
+        1,
+        0.9999998,
+        0.999999762
+      ],
+      "translation": [
+        1.16364646e-07,
+        -0.05089834,
+        -8.0066016e-08
+      ]
+    },
+    {
+      "name": "J_Sec_Hair2_01_end",
+      "rotation": [
+        -7.164518e-10,
+        2.77488255e-09,
+        5.215626e-09,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        -8.179213e-08,
+        -0.05105087,
+        -1.67574434e-08
+      ]
+    },
+    {
+      "children": [
+        33
+      ],
+      "name": "J_Sec_Hair1_02",
+      "rotation": [
+        0.6134836,
+        0.5018744,
+        0.4764329,
+        -0.380488724
+      ],
+      "scale": [
+        0.9999999,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        0.146304384,
+        0.09625823,
+        -0.03107465
+      ]
+    },
+    {
+      "children": [
+        34
+      ],
+      "name": "J_Sec_Hair2_02",
+      "rotation": [
+        0.09444897,
+        -0.0115441382,
+        0.0639188439,
+        0.993408561
+      ],
+      "scale": [
+        1,
+        1,
+        0.99999994
+      ],
+      "translation": [
+        4.687454e-08,
+        -0.033090245,
+        1.07766468e-07
+      ]
+    },
+    {
+      "name": "J_Sec_Hair2_02_end",
+      "rotation": [
+        1.095791e-09,
+        -7.768003e-09,
+        -5.14122656e-09,
+        1
+      ],
+      "scale": [
+        0.9999999,
+        1,
+        1
+      ],
+      "translation": [
+        8.89491361e-08,
+        -0.0331344977,
+        -6.130282e-08
+      ]
+    },
+    {
+      "children": [
+        36
+      ],
+      "name": "J_Sec_Hair1_03",
+      "rotation": [
+        -0.632796943,
+        -0.3073726,
+        -0.302431226,
+        0.6431373
+      ],
+      "scale": [
+        0.99999994,
+        1.00000024,
+        1.00000036
+      ],
+      "translation": [
+        0.141393676,
+        0.103558049,
+        -0.0001534471
+      ]
+    },
+    {
+      "children": [
+        37
+      ],
+      "name": "J_Sec_Hair2_03",
+      "rotation": [
+        0.228634775,
+        0.0288240537,
+        0.113588408,
+        0.966433167
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        0.9999998
+      ],
+      "translation": [
+        4.5778485e-08,
+        -0.0556438342,
+        2.251681e-09
+      ]
+    },
+    {
+      "name": "J_Sec_Hair2_03_end",
+      "rotation": [
+        -3.37158745e-09,
+        -1.77637016e-10,
+        1.26055939e-08,
+        1
+      ],
+      "translation": [
+        1.21844081e-07,
+        -0.05676246,
+        -1.0565347e-07
+      ]
+    },
+    {
+      "children": [
+        39
+      ],
+      "name": "J_Sec_Hair1_04",
+      "rotation": [
+        -0.2801468,
+        -0.1868978,
+        -0.576898456,
+        0.7441608
+      ],
+      "scale": [
+        1.00000024,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.135142773,
+        0.0787728652,
+        0.06368689
+      ]
+    },
+    {
+      "children": [
+        40
+      ],
+      "name": "J_Sec_Hair2_04",
+      "rotation": [
+        0.0426609255,
+        -0.006886128,
+        -0.000592648343,
+        0.9990657
+      ],
+      "scale": [
+        0.9999998,
+        0.9999999,
+        1
+      ],
+      "translation": [
+        2.18833293e-07,
+        -0.05032017,
+        -3.65184647e-08
+      ]
+    },
+    {
+      "name": "J_Sec_Hair2_04_end",
+      "rotation": [
+        -1.11296492e-08,
+        -2.36404532e-08,
+        5.33551736e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        4.09888568e-10,
+        -0.0505528748,
+        3.6794944e-08
+      ]
+    },
+    {
+      "children": [
+        42
+      ],
+      "name": "J_Sec_Hair1_05",
+      "rotation": [
+        0.166557938,
+        0.261817962,
+        -0.62756,
+        0.7140576
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.0620901436,
+        -0.0269812178,
+        0.107115343
+      ]
+    },
+    {
+      "children": [
+        43
+      ],
+      "name": "J_Sec_Hair2_05",
+      "rotation": [
+        -0.0567314625,
+        0.005426111,
+        0.03914338,
+        0.9976071
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        9.825367e-09,
+        -0.0754519254,
+        1.30175053e-07
+      ]
+    },
+    {
+      "children": [
+        44
+      ],
+      "name": "J_Sec_Hair3_05",
+      "rotation": [
+        -0.03233182,
+        0.0105096847,
+        -0.0144358035,
+        0.9993177
+      ],
+      "scale": [
+        0.9999998,
+        0.9999997,
+        0.99999994
+      ],
+      "translation": [
+        -1.03009086e-07,
+        -0.0755626,
+        3.38779245e-08
+      ]
+    },
+    {
+      "children": [
+        45
+      ],
+      "name": "J_Sec_Hair4_05",
+      "rotation": [
+        0.06485771,
+        -0.000873874349,
+        -0.0848525539,
+        0.99428004
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        1.66091652e-07,
+        -0.0755179748,
+        7.79065843e-08
+      ]
+    },
+    {
+      "children": [
+        46
+      ],
+      "name": "J_Sec_Hair5_05",
+      "rotation": [
+        0.18535316,
+        0.00742281927,
+        -0.0458298,
+        0.981574655
+      ],
+      "scale": [
+        0.9999998,
+        1,
+        0.9999998
+      ],
+      "translation": [
+        1.286574e-07,
+        -0.07534581,
+        -1.80620212e-08
+      ]
+    },
+    {
+      "children": [
+        47
+      ],
+      "name": "J_Sec_Hair6_05",
+      "rotation": [
+        0.313379526,
+        0.1049034,
+        0.0418915078,
+        0.9428859
+      ],
+      "scale": [
+        1.00000036,
+        0.99999994,
+        1.00000024
+      ],
+      "translation": [
+        1.30089717e-09,
+        -0.07440495,
+        2.50094345e-08
+      ]
+    },
+    {
+      "name": "J_Sec_Hair6_05_end",
+      "rotation": [
+        1.18920411e-08,
+        -2.57931276e-09,
+        4.09197227e-08,
+        1
+      ],
+      "scale": [
+        0.9999998,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        -3.75677871e-08,
+        -0.0734615251,
+        1.27302982e-07
+      ]
+    },
+    {
+      "children": [
+        49
+      ],
+      "name": "J_Sec_Hair1_06",
+      "rotation": [
+        0.329985261,
+        0.377406478,
+        -0.5991509,
+        0.624253333
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        0.07255751,
+        -0.09943422,
+        0.06195314
+      ]
+    },
+    {
+      "children": [
+        50
+      ],
+      "name": "J_Sec_Hair2_06",
+      "rotation": [
+        -0.04094864,
+        0.00337638566,
+        -0.0195602253,
+        0.9989641
+      ],
+      "scale": [
+        0.99999994,
+        0.99999994,
+        1.00000012
+      ],
+      "translation": [
+        4.92901764e-09,
+        -0.08990572,
+        1.18973496e-07
+      ]
+    },
+    {
+      "children": [
+        51
+      ],
+      "name": "J_Sec_Hair3_06",
+      "rotation": [
+        -0.0308258068,
+        0.004309568,
+        -0.0194926728,
+        0.9993254
+      ],
+      "scale": [
+        1.0000006,
+        1,
+        1.00000036
+      ],
+      "translation": [
+        1.480333e-08,
+        -0.0899143443,
+        -1.54439519e-08
+      ]
+    },
+    {
+      "children": [
+        52
+      ],
+      "name": "J_Sec_Hair4_06",
+      "rotation": [
+        0.07196215,
+        -0.0049673873,
+        0.0179153588,
+        0.9972341
+      ],
+      "scale": [
+        0.9999997,
+        1,
+        0.9999998
+      ],
+      "translation": [
+        9.76445236e-08,
+        -0.08991508,
+        -1.59423138e-07
+      ]
+    },
+    {
+      "children": [
+        53
+      ],
+      "name": "J_Sec_Hair5_06",
+      "rotation": [
+        0.323286682,
+        0.0510835648,
+        0.146798357,
+        0.9334487
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -3.48141649e-09,
+        -0.08942247,
+        1.58836528e-07
+      ]
+    },
+    {
+      "name": "J_Sec_Hair5_06_end",
+      "rotation": [
+        -2.50580463e-08,
+        -1.5715429e-08,
+        -2.2259087e-08,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        -6.31763939e-08,
+        -0.086552,
+        -8.66593339e-08
+      ]
+    },
+    {
+      "children": [
+        55
+      ],
+      "name": "J_Sec_Hair1_07",
+      "rotation": [
+        0.459898561,
+        0.495376736,
+        -0.510660946,
+        0.5313385
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000036
+      ],
+      "translation": [
+        0.05974,
+        -0.118483312,
+        0.0215989947
+      ]
+    },
+    {
+      "children": [
+        56
+      ],
+      "name": "J_Sec_Hair2_07",
+      "rotation": [
+        -0.0286929589,
+        0.00138763525,
+        -0.0142733837,
+        0.999485433
+      ],
+      "scale": [
+        0.9999998,
+        0.9999999,
+        0.999999642
+      ],
+      "translation": [
+        -8.4885194e-08,
+        -0.08659241,
+        5.32128439e-08
+      ]
+    },
+    {
+      "children": [
+        57
+      ],
+      "name": "J_Sec_Hair3_07",
+      "rotation": [
+        -0.0261701178,
+        0.00273750746,
+        -0.0179912616,
+        0.99949193
+      ],
+      "scale": [
+        1.00000024,
+        0.99999994,
+        1.00000036
+      ],
+      "translation": [
+        1.585098e-08,
+        -0.0865929648,
+        -1.4325957e-07
+      ]
+    },
+    {
+      "children": [
+        58
+      ],
+      "name": "J_Sec_Hair4_07",
+      "rotation": [
+        0.03729983,
+        -0.00468057254,
+        0.03413891,
+        0.998709857
+      ],
+      "scale": [
+        0.9999998,
+        1.00000012,
+        0.99999994
+      ],
+      "translation": [
+        1.347493e-07,
+        -0.0865992755,
+        -8.316612e-08
+      ]
+    },
+    {
+      "children": [
+        59
+      ],
+      "name": "J_Sec_Hair5_07",
+      "rotation": [
+        0.311102867,
+        0.03389349,
+        0.127343684,
+        0.941196
+      ],
+      "scale": [
+        1.00000036,
+        1,
+        1.00000024
+      ],
+      "translation": [
+        -6.00764949e-08,
+        -0.0862439349,
+        6.22043528e-09
+      ]
+    },
+    {
+      "name": "J_Sec_Hair5_07_end",
+      "rotation": [
+        -4.66553161e-08,
+        -2.52316354e-08,
+        -3.22260227e-08,
+        1
+      ],
+      "translation": [
+        1.75197584e-07,
+        -0.08267599,
+        -3.461267e-07
+      ]
+    },
+    {
+      "children": [
+        61
+      ],
+      "name": "J_Sec_Hair1_08",
+      "rotation": [
+        0.6000314,
+        0.623001635,
+        -0.326113343,
+        0.3814204
+      ],
+      "scale": [
+        1.00000024,
+        1.00000012,
+        1.00000048
+      ],
+      "translation": [
+        0.059986677,
+        -0.09850077,
+        -0.06206162
+      ]
+    },
+    {
+      "children": [
+        62
+      ],
+      "name": "J_Sec_Hair2_08",
+      "rotation": [
+        -0.0419789627,
+        -0.00311211147,
+        0.0125506809,
+        0.9990348
+      ],
+      "scale": [
+        0.9999999,
+        1,
+        0.9999996
+      ],
+      "translation": [
+        3.5566817e-08,
+        -0.08758145,
+        1.3782855e-07
+      ]
+    },
+    {
+      "children": [
+        63
+      ],
+      "name": "J_Sec_Hair3_08",
+      "rotation": [
+        -0.0236132145,
+        -0.00280284486,
+        0.008759884,
+        0.9996789
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        1.00000024
+      ],
+      "translation": [
+        1.2098495e-07,
+        -0.08754019,
+        -1.86261559e-07
+      ]
+    },
+    {
+      "children": [
+        64
+      ],
+      "name": "J_Sec_Hair4_08",
+      "rotation": [
+        0.08038845,
+        0.008449724,
+        -0.04147066,
+        0.995864749
+      ],
+      "scale": [
+        1.00000036,
+        0.99999994,
+        1.00000024
+      ],
+      "translation": [
+        -1.89398847e-07,
+        -0.087611,
+        3.66503379e-08
+      ]
+    },
+    {
+      "children": [
+        65
+      ],
+      "name": "J_Sec_Hair5_08",
+      "rotation": [
+        0.3307534,
+        -0.0469733924,
+        -0.09202046,
+        0.9380447
+      ],
+      "scale": [
+        0.9999995,
+        0.9999998,
+        0.9999999
+      ],
+      "translation": [
+        1.609041e-07,
+        -0.08697828,
+        -1.88815278e-07
+      ]
+    },
+    {
+      "name": "J_Sec_Hair5_08_end",
+      "rotation": [
+        1.07987788e-08,
+        -9.380346e-09,
+        -4.115887e-08,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        8.2043e-08,
+        -0.08403271,
+        -1.47076491e-07
+      ]
+    },
+    {
+      "children": [
+        67
+      ],
+      "name": "J_Sec_Hair1_09",
+      "rotation": [
+        0.633199334,
+        0.692493856,
+        -0.210786954,
+        0.274007052
+      ],
+      "scale": [
+        1.00000036,
+        1.00000012,
+        1.00000036
+      ],
+      "translation": [
+        0.06593776,
+        -0.06690938,
+        -0.089399755
+      ]
+    },
+    {
+      "children": [
+        68
+      ],
+      "name": "J_Sec_Hair2_09",
+      "rotation": [
+        -0.05593257,
+        -0.00757900439,
+        0.0278482232,
+        0.9980173
+      ],
+      "scale": [
+        0.99999994,
+        0.9999998,
+        0.9999998
+      ],
+      "translation": [
+        -1.25996351e-08,
+        -0.08923216,
+        1.43118328e-07
+      ]
+    },
+    {
+      "children": [
+        69
+      ],
+      "name": "J_Sec_Hair3_09",
+      "rotation": [
+        -0.0208522286,
+        -0.000428946631,
+        -0.0209211539,
+        0.9995636
+      ],
+      "scale": [
+        0.9999997,
+        0.99999994,
+        0.99999994
+      ],
+      "translation": [
+        -7.21645748e-08,
+        -0.0892364159,
+        -5.807441e-08
+      ]
+    },
+    {
+      "children": [
+        70
+      ],
+      "name": "J_Sec_Hair4_09",
+      "rotation": [
+        0.122403413,
+        0.013222794,
+        -0.0131699434,
+        0.992305
+      ],
+      "scale": [
+        0.9999999,
+        1.00000012,
+        0.9999997
+      ],
+      "translation": [
+        2.53305643e-07,
+        -0.08923768,
+        1.78295124e-07
+      ]
+    },
+    {
+      "children": [
+        71
+      ],
+      "name": "J_Sec_Hair5_09",
+      "rotation": [
+        0.334497124,
+        -0.0426210947,
+        -0.000273387763,
+        0.9414325
+      ],
+      "scale": [
+        1.00000024,
+        1,
+        1
+      ],
+      "translation": [
+        -1.07595049e-07,
+        -0.08860255,
+        -2.85851272e-08
+      ]
+    },
+    {
+      "name": "J_Sec_Hair5_09_end",
+      "rotation": [
+        3.64263686e-09,
+        7.21149362e-09,
+        -2.3377023e-08,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        -1.61596869e-08,
+        -0.08615538,
+        1.62687812e-07
+      ]
+    },
+    {
+      "children": [
+        73
+      ],
+      "name": "J_Sec_Hair1_10",
+      "rotation": [
+        0.6318689,
+        0.740461469,
+        -0.108876675,
+        0.201505318
+      ],
+      "scale": [
+        1.0000006,
+        1.00000012,
+        1.00000036
+      ],
+      "translation": [
+        0.0611930266,
+        -0.0264323149,
+        -0.104768708
+      ]
+    },
+    {
+      "children": [
+        74
+      ],
+      "name": "J_Sec_Hair2_10",
+      "rotation": [
+        -0.0536947735,
+        -0.00713642128,
+        -0.0474704169,
+        0.9974029
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000036
+      ],
+      "translation": [
+        -1.7949732e-07,
+        -0.0904755741,
+        -7.255582e-08
+      ]
+    },
+    {
+      "children": [
+        75
+      ],
+      "name": "J_Sec_Hair3_10",
+      "rotation": [
+        -0.009287765,
+        -0.009077022,
+        0.0612625368,
+        0.9980372
+      ],
+      "scale": [
+        0.9999996,
+        0.9999998,
+        0.9999996
+      ],
+      "translation": [
+        2.02430726e-07,
+        -0.09059524,
+        -1.60406245e-07
+      ]
+    },
+    {
+      "children": [
+        76
+      ],
+      "name": "J_Sec_Hair4_10",
+      "rotation": [
+        0.144783139,
+        0.004272601,
+        0.105214238,
+        0.98384434
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -9.717562e-08,
+        -0.09033254,
+        1.65336989e-08
+      ]
+    },
+    {
+      "children": [
+        77
+      ],
+      "name": "J_Sec_Hair5_10",
+      "rotation": [
+        0.348014951,
+        -0.0924111754,
+        0.0353068374,
+        0.9322549
+      ],
+      "scale": [
+        1,
+        1.00000024,
+        0.99999994
+      ],
+      "translation": [
+        -3.64961537e-08,
+        -0.0894019,
+        -1.87063108e-07
+      ]
+    },
+    {
+      "name": "J_Sec_Hair5_10_end",
+      "rotation": [
+        -2.517665e-08,
+        -3.492629e-08,
+        -1.016304e-08,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        0.9999999
+      ],
+      "translation": [
+        -4.194787e-08,
+        -0.08751091,
+        6.042513e-07
+      ]
+    },
+    {
+      "children": [
+        79
+      ],
+      "name": "J_Sec_Hair1_11",
+      "rotation": [
+        0.7038921,
+        0.5682898,
+        0.342278659,
+        -0.253826857
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        0.0469462574,
+        0.0424832478,
+        -0.100437753
+      ]
+    },
+    {
+      "children": [
+        80
+      ],
+      "name": "J_Sec_Hair2_11",
+      "rotation": [
+        -0.07983376,
+        0.00386053673,
+        0.05187269,
+        0.995450139
+      ],
+      "scale": [
+        0.9999997,
+        0.999999762,
+        0.999999762
+      ],
+      "translation": [
+        1.68174537e-07,
+        -0.09828362,
+        1.00146764e-07
+      ]
+    },
+    {
+      "children": [
+        81
+      ],
+      "name": "J_Sec_Hair3_11",
+      "rotation": [
+        -0.004164687,
+        0.0132468743,
+        -0.0379526839,
+        0.999183059
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        1
+      ],
+      "translation": [
+        -2.18688267e-08,
+        -0.0982778743,
+        -7.66481e-08
+      ]
+    },
+    {
+      "children": [
+        82
+      ],
+      "name": "J_Sec_Hair4_11",
+      "rotation": [
+        0.233067319,
+        -0.042229142,
+        0.04772118,
+        0.9703706
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        0.9999998
+      ],
+      "translation": [
+        -1.495682e-08,
+        -0.09799764,
+        -2.81758084e-09
+      ]
+    },
+    {
+      "name": "J_Sec_Hair4_11_end",
+      "rotation": [
+        7.908074e-09,
+        8.807849e-09,
+        5.788989e-09,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1.00000012
+      ],
+      "translation": [
+        1.86646844e-07,
+        -0.0954532847,
+        1.31947417e-07
+      ]
+    },
+    {
+      "children": [
+        84
+      ],
+      "name": "J_Sec_Hair1_12",
+      "rotation": [
+        -0.342198223,
+        -0.254681557,
+        -0.6980271,
+        0.575148761
+      ],
+      "scale": [
+        1.00000024,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.05833499,
+        0.0408706479,
+        0.09966728
+      ]
+    },
+    {
+      "children": [
+        85
+      ],
+      "name": "J_Sec_Hair2_12",
+      "rotation": [
+        -0.07811555,
+        -0.001675532,
+        -0.0586700924,
+        0.995215058
+      ],
+      "scale": [
+        0.9999997,
+        0.999999762,
+        0.99999994
+      ],
+      "translation": [
+        1.44301069e-07,
+        -0.10116189,
+        8.025148e-08
+      ]
+    },
+    {
+      "children": [
+        86
+      ],
+      "name": "J_Sec_Hair3_12",
+      "rotation": [
+        -0.0134256827,
+        -0.0143669806,
+        0.03382357,
+        0.9992344
+      ],
+      "translation": [
+        1.0555928e-07,
+        -0.101118252,
+        -1.03777992e-07
+      ]
+    },
+    {
+      "children": [
+        87
+      ],
+      "name": "J_Sec_Hair4_12",
+      "rotation": [
+        0.2312125,
+        0.0422113761,
+        -0.0420206971,
+        0.9710784
+      ],
+      "scale": [
+        0.99999994,
+        0.9999999,
+        1
+      ],
+      "translation": [
+        7.992816e-09,
+        -0.100902796,
+        -1.57165374e-07
+      ]
+    },
+    {
+      "name": "J_Sec_Hair4_12_end",
+      "rotation": [
+        -2.849145e-09,
+        3.3847428e-08,
+        1.18026939e-08,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -1.25720561e-07,
+        -0.09813005,
+        1.80220709e-07
+      ]
+    },
+    {
+      "children": [
+        89,
+        91,
+        96
+      ],
+      "name": "J_Bip_L_Shoulder",
+      "rotation": [
+        0.140284359,
+        0.009930938,
+        -0.06991328,
+        0.987589955
+      ],
+      "translation": [
+        0.0223954,
+        0.109852292,
+        0.0006476588
+      ]
+    },
+    {
+      "children": [
+        90
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "PositiveX",
+              "source": 97,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_L_Shoulder",
+      "rotation": [
+        -9.312391e-08,
+        4.116678e-08,
+        0.07061508,
+        0.997503638
+      ],
+      "translation": [
+        0.087049976,
+        -1.5228423e-07,
+        6.502343e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 96,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_L_UpperArm",
+      "rotation": [
+        -8.511192e-11,
+        1.283661e-10,
+        5.78737858e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.119898647,
+        1.537215e-07,
+        -2.96564e-09
+      ]
+    },
+    {
+      "children": [
+        92,
+        94
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "PositiveX",
+              "source": 97,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_L_TopsUpperArm",
+      "rotation": [
+        0.002066343,
+        0.00014620008,
+        0.07061807,
+        0.9975013
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.0870399848,
+        -1.288849e-07,
+        7.806266e-08
+      ]
+    },
+    {
+      "children": [
+        93
+      ],
+      "name": "J_Sec_L_TopsUpperArmInside",
+      "rotation": [
+        0.0003123423,
+        -0.003499976,
+        0.08415336,
+        0.996446669
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.123975389,
+        -0.08227415,
+        -0.00456148433
+      ]
+    },
+    {
+      "name": "J_Sec_L_TopsUpperArmInside_end",
+      "rotation": [
+        -2.0529016e-10,
+        1.89909019e-10,
+        -1.2182114e-08,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        0.99999994
+      ],
+      "translation": [
+        0.116081461,
+        -8.00243143e-08,
+        9.13447e-09
+      ]
+    },
+    {
+      "children": [
+        95
+      ],
+      "name": "J_Sec_L_TopsUpperArmOutside",
+      "rotation": [
+        0.00110584241,
+        -0.0118879015,
+        0.09123167,
+        0.9957582
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.0199030414,
+        0.04522515,
+        -0.0106075872
+      ]
+    },
+    {
+      "name": "J_Sec_L_TopsUpperArmOutside_end",
+      "rotation": [
+        -2.1355806e-11,
+        2.92264679e-09,
+        -1.17662218e-08,
+        1
+      ],
+      "scale": [
+        0.9999999,
+        0.99999994,
+        1.00000012
+      ],
+      "translation": [
+        0.1855957,
+        -5.725472e-07,
+        1.05729931e-08
+      ]
+    },
+    {
+      "children": [
+        97,
+        121
+      ],
+      "name": "J_Bip_L_UpperArm",
+      "rotation": [
+        -9.312391e-08,
+        4.116678e-08,
+        0.07061508,
+        0.997503638
+      ],
+      "translation": [
+        0.08702837,
+        -9.61626441e-08,
+        9.66899449e-08
+      ]
+    },
+    {
+      "children": [
+        98,
+        119,
+        120
+      ],
+      "name": "J_Bip_L_LowerArm",
+      "rotation": [
+        0.0121706976,
+        0.0008723461,
+        -7.37751361e-06,
+        0.999925554
+      ],
+      "scale": [
+        0.9999999,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.219852775,
+        1.5850726e-06,
+        -1.99953636e-08
+      ]
+    },
+    {
+      "children": [
+        99,
+        103,
+        107,
+        111,
+        115
+      ],
+      "name": "J_Bip_L_Hand",
+      "rotation": [
+        -1.8606866e-09,
+        -5.74458259e-11,
+        -1.44699808e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.214685515,
+        7.155232e-07,
+        1.29488086e-07
+      ]
+    },
+    {
+      "children": [
+        100
+      ],
+      "name": "J_Bip_L_Index1",
+      "rotation": [
+        5.35018671e-06,
+        0.0105858063,
+        -5.383228e-06,
+        0.999944
+      ],
+      "translation": [
+        0.0655173957,
+        0.007379187,
+        0.0195422582
+      ]
+    },
+    {
+      "children": [
+        101
+      ],
+      "name": "J_Bip_L_Index2",
+      "rotation": [
+        0.00041970957,
+        0.00955168251,
+        -0.0144422874,
+        0.999850035
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.0332683,
+        -6.7773783e-07,
+        -1.8505024e-07
+      ]
+    },
+    {
+      "children": [
+        102
+      ],
+      "name": "J_Bip_L_Index3",
+      "rotation": [
+        -4.866436e-10,
+        -2.35090436e-09,
+        2.40084064e-09,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        0.02048302,
+        3.04905853e-07,
+        -3.74294942e-08
+      ]
+    },
+    {
+      "name": "J_Bip_L_Index3_end",
+      "rotation": [
+        -2.93456481e-10,
+        -5.10600451e-10,
+        1.62791641e-10,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        0.99999994
+      ],
+      "translation": [
+        0.023368407,
+        -8.568288e-08,
+        -8.91302e-08
+      ]
+    },
+    {
+      "children": [
+        104
+      ],
+      "name": "J_Bip_L_Little1",
+      "rotation": [
+        2.612474e-10,
+        3.62814778e-11,
+        2.59514632e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.061049778,
+        0.007379836,
+        -0.029282432
+      ]
+    },
+    {
+      "children": [
+        105
+      ],
+      "name": "J_Bip_L_Little2",
+      "rotation": [
+        2.612469e-10,
+        -2.81488166e-11,
+        1.0846879e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        0.0314427875,
+        -1.21157325e-06,
+        -3.74367239e-08
+      ]
+    },
+    {
+      "children": [
+        106
+      ],
+      "name": "J_Bip_L_Little3",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.018121697,
+        5.795235e-07,
+        3.47800651e-08
+      ]
+    },
+    {
+      "name": "J_Bip_L_Little3_end",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.0192412212,
+        -2.61162569e-07,
+        -3.07073158e-08
+      ]
+    },
+    {
+      "children": [
+        108
+      ],
+      "name": "J_Bip_L_Middle1",
+      "rotation": [
+        2.612474e-10,
+        3.62814778e-11,
+        2.59514632e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.06637871,
+        0.007379443,
+        0.00193090329
+      ]
+    },
+    {
+      "children": [
+        109
+      ],
+      "name": "J_Bip_L_Middle2",
+      "rotation": [
+        2.612469e-10,
+        -2.81488166e-11,
+        1.0846879e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        0.0370569974,
+        -1.16292824e-06,
+        1.70711836e-08
+      ]
+    },
+    {
+      "children": [
+        110
+      ],
+      "name": "J_Bip_L_Middle3",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.0228609182,
+        -1.18662371e-07,
+        1.62213654e-09
+      ]
+    },
+    {
+      "name": "J_Bip_L_Middle3_end",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.02474327,
+        4.36920033e-07,
+        1.51812589e-08
+      ]
+    },
+    {
+      "children": [
+        112
+      ],
+      "name": "J_Bip_L_Ring1",
+      "rotation": [
+        2.612474e-10,
+        3.62814778e-11,
+        2.59514632e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.06559506,
+        0.00737968367,
+        -0.0137028378
+      ]
+    },
+    {
+      "children": [
+        113
+      ],
+      "name": "J_Bip_L_Ring2",
+      "rotation": [
+        2.612469e-10,
+        -2.81488166e-11,
+        1.0846879e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        0.0343751721,
+        -1.1423009e-06,
+        5.203799e-08
+      ]
+    },
+    {
+      "children": [
+        114
+      ],
+      "name": "J_Bip_L_Ring3",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.0198375527,
+        -7.98324749e-08,
+        -4.20135571e-08
+      ]
+    },
+    {
+      "name": "J_Bip_L_Ring3_end",
+      "rotation": [
+        2.612474e-10,
+        7.16421367e-12,
+        5.86197757e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        0.0208981317,
+        2.448655e-08,
+        4.258938e-08
+      ]
+    },
+    {
+      "children": [
+        116
+      ],
+      "name": "J_Bip_L_Thumb1",
+      "rotation": [
+        0.668767035,
+        -0.259067744,
+        0.229680121,
+        0.6579374
+      ],
+      "scale": [
+        0.99999994,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.00355216046,
+        -0.0100086639,
+        0.0159570463
+      ]
+    },
+    {
+      "children": [
+        117
+      ],
+      "name": "J_Bip_L_Thumb2",
+      "rotation": [
+        -0.000856643252,
+        0.005212459,
+        -0.0219182,
+        0.999745846
+      ],
+      "scale": [
+        1.00000012,
+        0.9999999,
+        0.99999994
+      ],
+      "translation": [
+        0.0465981364,
+        1.15604479e-07,
+        5.91993171e-07
+      ]
+    },
+    {
+      "children": [
+        118
+      ],
+      "name": "J_Bip_L_Thumb3",
+      "rotation": [
+        6.05869e-10,
+        4.448264e-11,
+        8.911694e-09,
+        1
+      ],
+      "translation": [
+        0.0286629777,
+        -7.657345e-09,
+        -4.30553143e-07
+      ]
+    },
+    {
+      "name": "J_Bip_L_Thumb3_end",
+      "rotation": [
+        6.05869e-10,
+        4.448264e-11,
+        8.911694e-09,
+        1
+      ],
+      "translation": [
+        0.0220389981,
+        -8.345795e-08,
+        1.53087626e-07
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 98,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_L_Hand",
+      "rotation": [
+        -1.8606866e-09,
+        -5.74458259e-11,
+        -1.44699808e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.214700356,
+        7.15468047e-07,
+        1.31170225e-07
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 98,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_L_LowerArm",
+      "rotation": [
+        -1.8606866e-09,
+        -5.74458259e-11,
+        -1.44699808e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.11004027,
+        6.760644e-07,
+        7.05325e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "Y",
+              "source": 97,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_L_Elbow",
+      "rotation": [
+        -8.511192e-11,
+        1.283661e-10,
+        5.78737858e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        0.219860077,
+        1.58507271e-06,
+        -1.99953831e-08
+      ]
+    },
+    {
+      "children": [
+        123,
+        125,
+        130
+      ],
+      "name": "J_Bip_R_Shoulder",
+      "rotation": [
+        0.140284359,
+        -0.009930938,
+        0.06991328,
+        0.987589955
+      ],
+      "translation": [
+        -0.0223954,
+        0.109852292,
+        0.0006476588
+      ]
+    },
+    {
+      "children": [
+        124
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "NegativeX",
+              "source": 131,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_R_Shoulder",
+      "rotation": [
+        -9.312391e-08,
+        -4.116678e-08,
+        -0.07061508,
+        0.997503638
+      ],
+      "translation": [
+        -0.087049976,
+        -1.5228423e-07,
+        6.502343e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 130,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_R_UpperArm",
+      "rotation": [
+        -8.511192e-11,
+        -1.283661e-10,
+        -5.78737858e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.119898647,
+        1.537215e-07,
+        -2.96564e-09
+      ]
+    },
+    {
+      "children": [
+        126,
+        128
+      ],
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "aim": {
+              "aimAxis": "NegativeX",
+              "source": 131,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Aim_R_TopsUpperArm",
+      "rotation": [
+        0.002066343,
+        -0.000146201943,
+        -0.07061807,
+        0.9975013
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.0870399848,
+        -1.288849e-07,
+        7.806266e-08
+      ]
+    },
+    {
+      "children": [
+        127
+      ],
+      "name": "J_Sec_R_TopsUpperArmInside",
+      "rotation": [
+        0.000312342483,
+        0.00349997566,
+        -0.08415336,
+        0.996446669
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.123975389,
+        -0.08227415,
+        -0.00456148339
+      ]
+    },
+    {
+      "name": "J_Sec_R_TopsUpperArmInside_end",
+      "rotation": [
+        -1.10049546e-10,
+        -1.7203583e-10,
+        1.21825936e-08,
+        1
+      ],
+      "scale": [
+        1,
+        0.9999999,
+        0.99999994
+      ],
+      "translation": [
+        -0.116081461,
+        -8.00885047e-08,
+        5.162488e-09
+      ]
+    },
+    {
+      "children": [
+        129
+      ],
+      "name": "J_Sec_R_TopsUpperArmOutside",
+      "rotation": [
+        0.0011058423,
+        0.0118878968,
+        -0.09123167,
+        0.9957582
+      ],
+      "scale": [
+        1.00000012,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.0199030414,
+        0.04522515,
+        -0.0106075872
+      ]
+    },
+    {
+      "name": "J_Sec_R_TopsUpperArmOutside_end",
+      "rotation": [
+        -1.9440316e-10,
+        -1.96481742e-09,
+        1.17604877e-08,
+        1
+      ],
+      "scale": [
+        0.9999999,
+        0.99999994,
+        1.00000012
+      ],
+      "translation": [
+        -0.1855957,
+        -5.72620138e-07,
+        1.400135e-08
+      ]
+    },
+    {
+      "children": [
+        131,
+        155
+      ],
+      "name": "J_Bip_R_UpperArm",
+      "rotation": [
+        -9.312391e-08,
+        -4.116678e-08,
+        -0.07061508,
+        0.997503638
+      ],
+      "translation": [
+        -0.0870283842,
+        -9.406342e-08,
+        4.639852e-08
+      ]
+    },
+    {
+      "children": [
+        132,
+        153,
+        154
+      ],
+      "name": "J_Bip_R_LowerArm",
+      "rotation": [
+        0.0121804811,
+        0.0008724168,
+        -1.062297e-05,
+        0.999925435
+      ],
+      "scale": [
+        0.9999999,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.219852731,
+        1.54561e-07,
+        5.26477955e-08
+      ]
+    },
+    {
+      "children": [
+        133,
+        137,
+        141,
+        145,
+        149
+      ],
+      "name": "J_Bip_R_Hand",
+      "rotation": [
+        -1.863489e-09,
+        4.938111e-11,
+        1.31153421e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.214685664,
+        2.25668941e-08,
+        7.685752e-08
+      ]
+    },
+    {
+      "children": [
+        134
+      ],
+      "name": "J_Bip_R_Index1",
+      "rotation": [
+        3.02246644e-06,
+        -0.0105879353,
+        5.44454269e-06,
+        0.999944
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        0.9999999
+      ],
+      "translation": [
+        -0.065517135,
+        0.007379422,
+        0.0195421614
+      ]
+    },
+    {
+      "children": [
+        135
+      ],
+      "name": "J_Bip_R_Index2",
+      "rotation": [
+        0.000417400443,
+        -0.009548976,
+        0.0144418078,
+        0.999850035
+      ],
+      "scale": [
+        1,
+        1,
+        1.00000012
+      ],
+      "translation": [
+        -0.03326858,
+        9.941332e-08,
+        1.41176759e-08
+      ]
+    },
+    {
+      "children": [
+        136
+      ],
+      "name": "J_Bip_R_Index3",
+      "rotation": [
+        1.6487558e-09,
+        5.311479e-10,
+        -1.5961229e-09,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        0.9999999
+      ],
+      "translation": [
+        -0.0204830747,
+        -5.896884e-07,
+        -1.239747e-07
+      ]
+    },
+    {
+      "name": "J_Bip_R_Index3_end",
+      "rotation": [
+        -3.543918e-10,
+        -3.20975468e-10,
+        4.17189061e-10,
+        1
+      ],
+      "translation": [
+        -0.02336889,
+        3.44147878e-07,
+        -5.651744e-08
+      ]
+    },
+    {
+      "children": [
+        138
+      ],
+      "name": "J_Bip_R_Little1",
+      "rotation": [
+        2.59052335e-10,
+        -2.77117218e-12,
+        9.430789e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.0610497,
+        0.00737980241,
+        -0.0292825121
+      ]
+    },
+    {
+      "children": [
+        139
+      ],
+      "name": "J_Bip_R_Little2",
+      "rotation": [
+        2.59052335e-10,
+        -8.972989e-12,
+        1.09390275e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        -0.03144253,
+        3.22466853e-08,
+        -2.47682284e-08
+      ]
+    },
+    {
+      "children": [
+        140
+      ],
+      "name": "J_Bip_R_Little3",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.01812144,
+        1.51615012e-07,
+        -1.00779856e-08
+      ]
+    },
+    {
+      "name": "J_Bip_R_Little3_end",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.0192415,
+        3.319445e-08,
+        2.37697027e-08
+      ]
+    },
+    {
+      "children": [
+        142
+      ],
+      "name": "J_Bip_R_Middle1",
+      "rotation": [
+        2.59052335e-10,
+        -2.77117218e-12,
+        9.430789e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.06637851,
+        0.007379578,
+        0.00193082786
+      ]
+    },
+    {
+      "children": [
+        143
+      ],
+      "name": "J_Bip_R_Middle2",
+      "rotation": [
+        2.59052335e-10,
+        -8.972989e-12,
+        1.09390275e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        -0.03705704,
+        -5.48259266e-07,
+        4.045658e-08
+      ]
+    },
+    {
+      "children": [
+        144
+      ],
+      "name": "J_Bip_R_Middle3",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.0228610188,
+        4.77832955e-08,
+        -1.67264762e-08
+      ]
+    },
+    {
+      "name": "J_Bip_R_Middle3_end",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.02474337,
+        4.83355862e-08,
+        3.57988972e-09
+      ]
+    },
+    {
+      "children": [
+        146
+      ],
+      "name": "J_Bip_R_Ring1",
+      "rotation": [
+        2.59052335e-10,
+        -2.77117218e-12,
+        9.430789e-13,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.06559474,
+        0.00737962732,
+        -0.0137028955
+      ]
+    },
+    {
+      "children": [
+        147
+      ],
+      "name": "J_Bip_R_Ring2",
+      "rotation": [
+        2.59052335e-10,
+        -8.972989e-12,
+        1.09390275e-12,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        1,
+        1
+      ],
+      "translation": [
+        -0.03437539,
+        -2.61125649e-07,
+        1.43522563e-08
+      ]
+    },
+    {
+      "children": [
+        148
+      ],
+      "name": "J_Bip_R_Ring3",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.01983747,
+        -1.42546881e-07,
+        -3.890712e-08
+      ]
+    },
+    {
+      "name": "J_Bip_R_Ring3_end",
+      "rotation": [
+        2.59053945e-10,
+        -2.77117218e-12,
+        3.35842465e-14,
+        1
+      ],
+      "scale": [
+        0.99999994,
+        1,
+        1
+      ],
+      "translation": [
+        -0.0208980478,
+        -1.42142753e-07,
+        1.80485049e-09
+      ]
+    },
+    {
+      "children": [
+        150
+      ],
+      "name": "J_Bip_R_Thumb1",
+      "rotation": [
+        0.668765,
+        0.25906685,
+        -0.2296814,
+        0.657939434
+      ],
+      "scale": [
+        0.99999994,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.00355202868,
+        -0.0100084282,
+        0.0159571171
+      ]
+    },
+    {
+      "children": [
+        151
+      ],
+      "name": "J_Bip_R_Thumb2",
+      "rotation": [
+        -0.000858012761,
+        -0.005212788,
+        0.021918809,
+        0.9997458
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        0.9999998
+      ],
+      "translation": [
+        -0.0465981476,
+        1.42995958e-07,
+        -1.616897e-08
+      ]
+    },
+    {
+      "children": [
+        152
+      ],
+      "name": "J_Bip_R_Thumb3",
+      "rotation": [
+        -7.905634e-10,
+        -2.318699e-09,
+        1.98861336e-08,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.0286629852,
+        -9.064701e-09,
+        -1.257526e-07
+      ]
+    },
+    {
+      "name": "J_Bip_R_Thumb3_end",
+      "rotation": [
+        3.68286068e-10,
+        -2.37835e-09,
+        1.73423551e-08,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.022039067,
+        -7.592897e-08,
+        6.642107e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 132,
+              "weight": 1
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_R_Hand",
+      "rotation": [
+        -1.863489e-09,
+        4.938111e-11,
+        1.31153421e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.2147005,
+        2.29344845e-08,
+        9.1933174e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "X",
+              "source": 132,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_R_LowerArm",
+      "rotation": [
+        -1.863489e-09,
+        4.938111e-11,
+        1.31153421e-11,
+        1
+      ],
+      "scale": [
+        1.00000012,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.1100403,
+        1.99731076e-08,
+        4.32711929e-08
+      ]
+    },
+    {
+      "extensions": {
+        "VRMC_node_constraint": {
+          "constraint": {
+            "roll": {
+              "rollAxis": "Y",
+              "source": 131,
+              "weight": 0.5
+            }
+          },
+          "specVersion": "1.0"
+        }
+      },
+      "name": "J_Roll_R_Elbow",
+      "rotation": [
+        -8.511192e-11,
+        -1.283661e-10,
+        -5.78737858e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -0.219860032,
+        1.54561064e-07,
+        5.26477741e-08
+      ]
+    },
+    {
+      "children": [
+        157
+      ],
+      "name": "J_Sec_L_Bust1",
+      "rotation": [
+        0.08407459,
+        0.230834633,
+        0.04573465,
+        0.968274355
+      ],
+      "translation": [
+        0.0537684038,
+        -0.0261775739,
+        0.06423062
+      ]
+    },
+    {
+      "name": "J_Sec_L_Bust2",
+      "rotation": [
+        1.84596338e-09,
+        -1.23184227e-08,
+        -7.109788e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        -3.84473928e-08,
+        -2.23055665e-07,
+        0.0574183427
+      ]
+    },
+    {
+      "children": [
+        159
+      ],
+      "name": "J_Sec_R_Bust1",
+      "rotation": [
+        0.08407459,
+        -0.230834633,
+        -0.04573465,
+        0.968274355
+      ],
+      "translation": [
+        -0.0537684038,
+        -0.0261775739,
+        0.06423062
+      ]
+    },
+    {
+      "name": "J_Sec_R_Bust2",
+      "rotation": [
+        1.84596338e-09,
+        1.23184227e-08,
+        7.109788e-09,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1.00000012
+      ],
+      "translation": [
+        3.84473928e-08,
+        -2.23055665e-07,
+        0.0574183427
+      ]
+    },
+    {
+      "children": [
+        161
+      ],
+      "name": "J_Bip_L_UpperLeg",
+      "rotation": [
+        -0.107289694,
+        -1.71052832e-07,
+        -8.93335e-15,
+        0.9942278
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        0.07715603,
+        -0.0395266563,
+        0.00574154174
+      ]
+    },
+    {
+      "children": [
+        162
+      ],
+      "name": "J_Bip_L_LowerLeg",
+      "rotation": [
+        0.0195650924,
+        1.70391971e-07,
+        1.50213548e-08,
+        0.9998086
+      ],
+      "translation": [
+        -2.76180834e-09,
+        -0.35298422,
+        -6.74277771e-07
+      ]
+    },
+    {
+      "children": [
+        163
+      ],
+      "name": "J_Bip_L_Foot",
+      "rotation": [
+        -0.0300229378,
+        2.80413527e-14,
+        1.65078548e-15,
+        0.9995492
+      ],
+      "translation": [
+        -2.01227923e-15,
+        -0.415493816,
+        -1.93642137e-07
+      ]
+    },
+    {
+      "children": [
+        164
+      ],
+      "name": "J_Bip_L_ToeBase",
+      "rotation": [
+        3.52937159e-11,
+        -7.647903e-17,
+        -1.0909022e-16,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        7.49400542e-16,
+        -0.06305495,
+        0.110689282
+      ]
+    },
+    {
+      "name": "J_Bip_L_ToeBase_end",
+      "rotation": [
+        -3.469447e-18,
+        0,
+        -1.05879118e-22,
+        1
+      ],
+      "translation": [
+        1.16573418e-15,
+        -9.498145e-12,
+        0.0562780276
+      ]
+    },
+    {
+      "children": [
+        166
+      ],
+      "name": "J_Bip_R_UpperLeg",
+      "rotation": [
+        -0.107289694,
+        1.71052832e-07,
+        8.93335e-15,
+        0.9942278
+      ],
+      "scale": [
+        1,
+        0.99999994,
+        1
+      ],
+      "translation": [
+        -0.07715603,
+        -0.0395266563,
+        0.00574154174
+      ]
+    },
+    {
+      "children": [
+        167
+      ],
+      "name": "J_Bip_R_LowerLeg",
+      "rotation": [
+        0.0195650924,
+        -1.70391971e-07,
+        -1.50213548e-08,
+        0.9998086
+      ],
+      "translation": [
+        2.76180834e-09,
+        -0.35298422,
+        -6.74277771e-07
+      ]
+    },
+    {
+      "children": [
+        168
+      ],
+      "name": "J_Bip_R_Foot",
+      "rotation": [
+        -0.0300229378,
+        -2.80413527e-14,
+        -1.65078548e-15,
+        0.9995492
+      ],
+      "translation": [
+        2.01227923e-15,
+        -0.415493816,
+        -1.93642137e-07
+      ]
+    },
+    {
+      "children": [
+        169
+      ],
+      "name": "J_Bip_R_ToeBase",
+      "rotation": [
+        3.52937159e-11,
+        7.647903e-17,
+        1.0909022e-16,
+        1
+      ],
+      "scale": [
+        1,
+        1.00000012,
+        1
+      ],
+      "translation": [
+        -7.49400542e-16,
+        -0.06305495,
+        0.110689282
+      ]
+    },
+    {
+      "name": "J_Bip_R_ToeBase_end",
+      "rotation": [
+        -3.469447e-18,
+        0,
+        1.05879118e-22,
+        1
+      ],
+      "translation": [
+        -1.16573418e-15,
+        -9.498145e-12,
+        0.0562780276
+      ]
+    },
+    {
+      "name": "secondary"
+    }
+  ],
+  "meshes": [
+    {
+      "extras": {
+        "targetNames": []
+      },
+      "name": "Body",
+      "primitives": [
+        {
+          "attributes": {
+            "JOINTS_0": 4,
+            "NORMAL": 2,
+            "POSITION": 1,
+            "TEXCOORD_0": 3,
+            "WEIGHTS_0": 5
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 10,
+            "NORMAL": 8,
+            "POSITION": 7,
+            "TEXCOORD_0": 9,
+            "WEIGHTS_0": 11
+          },
+          "indices": 6,
+          "material": 1,
+          "mode": 4
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 16,
+            "NORMAL": 14,
+            "POSITION": 13,
+            "TEXCOORD_0": 15,
+            "WEIGHTS_0": 17
+          },
+          "indices": 12,
+          "material": 2,
+          "mode": 4
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 22,
+            "NORMAL": 20,
+            "POSITION": 19,
+            "TEXCOORD_0": 21,
+            "WEIGHTS_0": 23
+          },
+          "indices": 18,
+          "material": 3,
+          "mode": 4
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 28,
+            "NORMAL": 26,
+            "POSITION": 25,
+            "TEXCOORD_0": 27,
+            "WEIGHTS_0": 29
+          },
+          "indices": 24,
+          "material": 4,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "extras": {
+        "targetNames": [
+          "Face_Blendshape.Fcl_ALL_Neutral",
+          "Face_Blendshape.Fcl_ALL_Angry",
+          "Face_Blendshape.Fcl_ALL_Fun",
+          "Face_Blendshape.Fcl_ALL_Joy",
+          "Face_Blendshape.Fcl_ALL_Sorrow",
+          "Face_Blendshape.Fcl_ALL_Surprised",
+          "Face_Blendshape.Fcl_BRW_Angry",
+          "Face_Blendshape.Fcl_BRW_Fun",
+          "Face_Blendshape.Fcl_BRW_Joy",
+          "Face_Blendshape.Fcl_BRW_Sorrow",
+          "Face_Blendshape.Fcl_BRW_Surprised",
+          "Face_Blendshape.Fcl_EYE_Natural",
+          "Face_Blendshape.Fcl_EYE_Close",
+          "Face_Blendshape.Fcl_EYE_Close_L",
+          "Face_Blendshape.Fcl_EYE_Close_R",
+          "Face_Blendshape.Fcl_EYE_Angry",
+          "Face_Blendshape.Fcl_EYE_Fun",
+          "Face_Blendshape.Fcl_EYE_Joy",
+          "Face_Blendshape.Fcl_EYE_Joy_L",
+          "Face_Blendshape.Fcl_EYE_Joy_R",
+          "Face_Blendshape.Fcl_EYE_Sorrow",
+          "Face_Blendshape.Fcl_EYE_Surprised",
+          "Face_Blendshape.Fcl_EYE_HighlightHide",
+          "Face_Blendshape.Fcl_EYE_IrisHide",
+          "Face_Blendshape.Fcl_EYE_Spread",
+          "Face_Blendshape.Fcl_MTH_Neutral",
+          "Face_Blendshape.Fcl_MTH_Close",
+          "Face_Blendshape.Fcl_MTH_Angry",
+          "Face_Blendshape.Fcl_MTH_Fun",
+          "Face_Blendshape.Fcl_MTH_Joy",
+          "Face_Blendshape.Fcl_MTH_Sorrow",
+          "Face_Blendshape.Fcl_MTH_Surprised",
+          "Face_Blendshape.Fcl_MTH_Up",
+          "Face_Blendshape.Fcl_MTH_Down",
+          "Face_Blendshape.Fcl_MTH_Small",
+          "Face_Blendshape.Fcl_MTH_Large",
+          "Face_Blendshape.Fcl_MTH_A",
+          "Face_Blendshape.Fcl_MTH_I",
+          "Face_Blendshape.Fcl_MTH_U",
+          "Face_Blendshape.Fcl_MTH_E",
+          "Face_Blendshape.Fcl_MTH_O",
+          "Face_Blendshape.Fcl_MTH_SkinFung",
+          "Face_Blendshape.Fcl_MTH_SkinFung_L",
+          "Face_Blendshape.Fcl_MTH_SkinFung_R",
+          "Face_Blendshape.Fcl_HA_Fung1",
+          "Face_Blendshape.Fcl_HA_Fung1_Low",
+          "Face_Blendshape.Fcl_HA_Fung1_Up",
+          "Face_Blendshape.Fcl_HA_Fung2",
+          "Face_Blendshape.Fcl_HA_Fung2_Low",
+          "Face_Blendshape.Fcl_HA_Fung2_Up",
+          "Face_Blendshape.Fcl_HA_Fung3",
+          "Face_Blendshape.Fcl_HA_Fung3_Low",
+          "Face_Blendshape.Fcl_HA_Fung3_Up",
+          "Face_Blendshape.Fcl_HA_Hide",
+          "Face_Blendshape.Fcl_HA_Short",
+          "Face_Blendshape.Fcl_HA_ShortLow",
+          "Face_Blendshape.Fcl_HA_ShortUp"
+        ]
+      },
+      "name": "Face",
+      "primitives": [
+        {
+          "attributes": {
+            "JOINTS_0": 34,
+            "NORMAL": 32,
+            "POSITION": 31,
+            "TEXCOORD_0": 33,
+            "WEIGHTS_0": 35
+          },
+          "indices": 30,
+          "material": 5,
+          "mode": 4,
+          "targets": [
+            {
+              "POSITION": 36
+            },
+            {
+              "POSITION": 37
+            },
+            {
+              "POSITION": 38
+            },
+            {
+              "POSITION": 39
+            },
+            {
+              "POSITION": 40
+            },
+            {
+              "POSITION": 41
+            },
+            {
+              "NORMAL": 43,
+              "POSITION": 42
+            },
+            {
+              "NORMAL": 45,
+              "POSITION": 44
+            },
+            {
+              "NORMAL": 47,
+              "POSITION": 46
+            },
+            {
+              "NORMAL": 49,
+              "POSITION": 48
+            },
+            {
+              "NORMAL": 51,
+              "POSITION": 50
+            },
+            {
+              "NORMAL": 53,
+              "POSITION": 52
+            },
+            {
+              "NORMAL": 55,
+              "POSITION": 54
+            },
+            {
+              "NORMAL": 57,
+              "POSITION": 56
+            },
+            {
+              "NORMAL": 59,
+              "POSITION": 58
+            },
+            {
+              "NORMAL": 61,
+              "POSITION": 60
+            },
+            {
+              "NORMAL": 63,
+              "POSITION": 62
+            },
+            {
+              "NORMAL": 65,
+              "POSITION": 64
+            },
+            {
+              "NORMAL": 67,
+              "POSITION": 66
+            },
+            {
+              "NORMAL": 69,
+              "POSITION": 68
+            },
+            {
+              "NORMAL": 71,
+              "POSITION": 70
+            },
+            {
+              "NORMAL": 73,
+              "POSITION": 72
+            },
+            {
+              "NORMAL": 75,
+              "POSITION": 74
+            },
+            {
+              "NORMAL": 77,
+              "POSITION": 76
+            },
+            {
+              "NORMAL": 79,
+              "POSITION": 78
+            },
+            {
+              "POSITION": 80
+            },
+            {
+              "POSITION": 81
+            },
+            {
+              "POSITION": 82
+            },
+            {
+              "POSITION": 83
+            },
+            {
+              "POSITION": 84
+            },
+            {
+              "POSITION": 85
+            },
+            {
+              "POSITION": 86
+            },
+            {
+              "POSITION": 87
+            },
+            {
+              "POSITION": 88
+            },
+            {
+              "POSITION": 89
+            },
+            {
+              "POSITION": 90
+            },
+            {
+              "POSITION": 91
+            },
+            {
+              "POSITION": 92
+            },
+            {
+              "POSITION": 93
+            },
+            {
+              "POSITION": 94
+            },
+            {
+              "POSITION": 95
+            },
+            {
+              "POSITION": 96
+            },
+            {
+              "POSITION": 97
+            },
+            {
+              "POSITION": 98
+            },
+            {
+              "POSITION": 99
+            },
+            {
+              "POSITION": 100
+            },
+            {
+              "POSITION": 101
+            },
+            {
+              "POSITION": 102
+            },
+            {
+              "POSITION": 103
+            },
+            {
+              "POSITION": 104
+            },
+            {
+              "POSITION": 105
+            },
+            {
+              "POSITION": 106
+            },
+            {
+              "POSITION": 107
+            },
+            {
+              "POSITION": 108
+            },
+            {
+              "POSITION": 109
+            },
+            {
+              "POSITION": 110
+            },
+            {
+              "POSITION": 111
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 116,
+            "NORMAL": 114,
+            "POSITION": 113,
+            "TEXCOORD_0": 115,
+            "WEIGHTS_0": 117
+          },
+          "indices": 112,
+          "material": 6,
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 119,
+              "POSITION": 118
+            },
+            {
+              "NORMAL": 121,
+              "POSITION": 120
+            },
+            {
+              "NORMAL": 123,
+              "POSITION": 122
+            },
+            {
+              "NORMAL": 125,
+              "POSITION": 124
+            },
+            {
+              "NORMAL": 127,
+              "POSITION": 126
+            },
+            {
+              "POSITION": 128
+            },
+            {
+              "NORMAL": 130,
+              "POSITION": 129
+            },
+            {
+              "NORMAL": 132,
+              "POSITION": 131
+            },
+            {
+              "NORMAL": 134,
+              "POSITION": 133
+            },
+            {
+              "NORMAL": 136,
+              "POSITION": 135
+            },
+            {
+              "NORMAL": 138,
+              "POSITION": 137
+            },
+            {
+              "NORMAL": 140,
+              "POSITION": 139
+            },
+            {
+              "POSITION": 141
+            },
+            {
+              "POSITION": 142
+            },
+            {
+              "POSITION": 143
+            },
+            {
+              "NORMAL": 145,
+              "POSITION": 144
+            },
+            {
+              "NORMAL": 147,
+              "POSITION": 146
+            },
+            {
+              "NORMAL": 149,
+              "POSITION": 148
+            },
+            {
+              "NORMAL": 151,
+              "POSITION": 150
+            },
+            {
+              "NORMAL": 153,
+              "POSITION": 152
+            },
+            {
+              "NORMAL": 155,
+              "POSITION": 154
+            },
+            {
+              "POSITION": 156
+            },
+            {
+              "NORMAL": 158,
+              "POSITION": 157
+            },
+            {
+              "POSITION": 159
+            },
+            {
+              "NORMAL": 161,
+              "POSITION": 160
+            },
+            {
+              "NORMAL": 163,
+              "POSITION": 162
+            },
+            {
+              "NORMAL": 165,
+              "POSITION": 164
+            },
+            {
+              "NORMAL": 167,
+              "POSITION": 166
+            },
+            {
+              "NORMAL": 169,
+              "POSITION": 168
+            },
+            {
+              "NORMAL": 171,
+              "POSITION": 170
+            },
+            {
+              "NORMAL": 173,
+              "POSITION": 172
+            },
+            {
+              "NORMAL": 175,
+              "POSITION": 174
+            },
+            {
+              "NORMAL": 177,
+              "POSITION": 176
+            },
+            {
+              "NORMAL": 179,
+              "POSITION": 178
+            },
+            {
+              "NORMAL": 181,
+              "POSITION": 180
+            },
+            {
+              "NORMAL": 183,
+              "POSITION": 182
+            },
+            {
+              "NORMAL": 185,
+              "POSITION": 184
+            },
+            {
+              "NORMAL": 187,
+              "POSITION": 186
+            },
+            {
+              "NORMAL": 189,
+              "POSITION": 188
+            },
+            {
+              "NORMAL": 191,
+              "POSITION": 190
+            },
+            {
+              "NORMAL": 193,
+              "POSITION": 192
+            },
+            {
+              "NORMAL": 195,
+              "POSITION": 194
+            },
+            {
+              "NORMAL": 197,
+              "POSITION": 196
+            },
+            {
+              "NORMAL": 199,
+              "POSITION": 198
+            },
+            {
+              "NORMAL": 201,
+              "POSITION": 200
+            },
+            {
+              "NORMAL": 203,
+              "POSITION": 202
+            },
+            {
+              "NORMAL": 205,
+              "POSITION": 204
+            },
+            {
+              "NORMAL": 207,
+              "POSITION": 206
+            },
+            {
+              "NORMAL": 209,
+              "POSITION": 208
+            },
+            {
+              "NORMAL": 211,
+              "POSITION": 210
+            },
+            {
+              "NORMAL": 213,
+              "POSITION": 212
+            },
+            {
+              "NORMAL": 215,
+              "POSITION": 214
+            },
+            {
+              "NORMAL": 217,
+              "POSITION": 216
+            },
+            {
+              "NORMAL": 219,
+              "POSITION": 218
+            },
+            {
+              "NORMAL": 221,
+              "POSITION": 220
+            },
+            {
+              "NORMAL": 223,
+              "POSITION": 222
+            },
+            {
+              "NORMAL": 225,
+              "POSITION": 224
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 230,
+            "NORMAL": 228,
+            "POSITION": 227,
+            "TEXCOORD_0": 229,
+            "WEIGHTS_0": 231
+          },
+          "indices": 226,
+          "material": 7,
+          "mode": 4,
+          "targets": [
+            {
+              "POSITION": 232
+            },
+            {
+              "POSITION": 233
+            },
+            {
+              "POSITION": 234
+            },
+            {
+              "POSITION": 235
+            },
+            {
+              "POSITION": 236
+            },
+            {
+              "POSITION": 237
+            },
+            {
+              "POSITION": 238
+            },
+            {
+              "POSITION": 239
+            },
+            {
+              "POSITION": 240
+            },
+            {
+              "POSITION": 241
+            },
+            {
+              "POSITION": 242
+            },
+            {
+              "NORMAL": 244,
+              "POSITION": 243
+            },
+            {
+              "POSITION": 245
+            },
+            {
+              "POSITION": 246
+            },
+            {
+              "POSITION": 247
+            },
+            {
+              "POSITION": 248
+            },
+            {
+              "POSITION": 249
+            },
+            {
+              "POSITION": 250
+            },
+            {
+              "POSITION": 251
+            },
+            {
+              "POSITION": 252
+            },
+            {
+              "POSITION": 253
+            },
+            {
+              "POSITION": 254
+            },
+            {
+              "POSITION": 255
+            },
+            {
+              "POSITION": 256
+            },
+            {
+              "POSITION": 257
+            },
+            {
+              "POSITION": 258
+            },
+            {
+              "POSITION": 259
+            },
+            {
+              "POSITION": 260
+            },
+            {
+              "POSITION": 261
+            },
+            {
+              "POSITION": 262
+            },
+            {
+              "POSITION": 263
+            },
+            {
+              "POSITION": 264
+            },
+            {
+              "POSITION": 265
+            },
+            {
+              "POSITION": 266
+            },
+            {
+              "POSITION": 267
+            },
+            {
+              "POSITION": 268
+            },
+            {
+              "POSITION": 269
+            },
+            {
+              "POSITION": 270
+            },
+            {
+              "POSITION": 271
+            },
+            {
+              "POSITION": 272
+            },
+            {
+              "POSITION": 273
+            },
+            {
+              "POSITION": 274
+            },
+            {
+              "POSITION": 275
+            },
+            {
+              "POSITION": 276
+            },
+            {
+              "NORMAL": 278,
+              "POSITION": 277
+            },
+            {
+              "POSITION": 279
+            },
+            {
+              "NORMAL": 281,
+              "POSITION": 280
+            },
+            {
+              "NORMAL": 283,
+              "POSITION": 282
+            },
+            {
+              "NORMAL": 285,
+              "POSITION": 284
+            },
+            {
+              "POSITION": 286
+            },
+            {
+              "POSITION": 287
+            },
+            {
+              "POSITION": 288
+            },
+            {
+              "NORMAL": 290,
+              "POSITION": 289
+            },
+            {
+              "NORMAL": 292,
+              "POSITION": 291
+            },
+            {
+              "NORMAL": 294,
+              "POSITION": 293
+            },
+            {
+              "NORMAL": 296,
+              "POSITION": 295
+            },
+            {
+              "NORMAL": 298,
+              "POSITION": 297
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 303,
+            "NORMAL": 301,
+            "POSITION": 300,
+            "TEXCOORD_0": 302,
+            "WEIGHTS_0": 304
+          },
+          "indices": 299,
+          "material": 8,
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 306,
+              "POSITION": 305
+            },
+            {
+              "POSITION": 307
+            },
+            {
+              "POSITION": 308
+            },
+            {
+              "POSITION": 309
+            },
+            {
+              "POSITION": 310
+            },
+            {
+              "POSITION": 311
+            },
+            {
+              "POSITION": 312
+            },
+            {
+              "POSITION": 313
+            },
+            {
+              "POSITION": 314
+            },
+            {
+              "POSITION": 315
+            },
+            {
+              "POSITION": 316
+            },
+            {
+              "NORMAL": 318,
+              "POSITION": 317
+            },
+            {
+              "POSITION": 319
+            },
+            {
+              "POSITION": 320
+            },
+            {
+              "POSITION": 321
+            },
+            {
+              "POSITION": 322
+            },
+            {
+              "POSITION": 323
+            },
+            {
+              "POSITION": 324
+            },
+            {
+              "POSITION": 325
+            },
+            {
+              "POSITION": 326
+            },
+            {
+              "POSITION": 327
+            },
+            {
+              "POSITION": 328
+            },
+            {
+              "POSITION": 329
+            },
+            {
+              "POSITION": 330
+            },
+            {
+              "POSITION": 331
+            },
+            {
+              "NORMAL": 333,
+              "POSITION": 332
+            },
+            {
+              "POSITION": 334
+            },
+            {
+              "NORMAL": 336,
+              "POSITION": 335
+            },
+            {
+              "NORMAL": 338,
+              "POSITION": 337
+            },
+            {
+              "NORMAL": 340,
+              "POSITION": 339
+            },
+            {
+              "POSITION": 341
+            },
+            {
+              "NORMAL": 343,
+              "POSITION": 342
+            },
+            {
+              "NORMAL": 345,
+              "POSITION": 344
+            },
+            {
+              "NORMAL": 347,
+              "POSITION": 346
+            },
+            {
+              "NORMAL": 349,
+              "POSITION": 348
+            },
+            {
+              "NORMAL": 351,
+              "POSITION": 350
+            },
+            {
+              "POSITION": 352
+            },
+            {
+              "POSITION": 353
+            },
+            {
+              "POSITION": 354
+            },
+            {
+              "POSITION": 355
+            },
+            {
+              "POSITION": 356
+            },
+            {
+              "NORMAL": 358,
+              "POSITION": 357
+            },
+            {
+              "NORMAL": 360,
+              "POSITION": 359
+            },
+            {
+              "NORMAL": 362,
+              "POSITION": 361
+            },
+            {
+              "NORMAL": 364,
+              "POSITION": 363
+            },
+            {
+              "POSITION": 365
+            },
+            {
+              "NORMAL": 367,
+              "POSITION": 366
+            },
+            {
+              "NORMAL": 369,
+              "POSITION": 368
+            },
+            {
+              "NORMAL": 371,
+              "POSITION": 370
+            },
+            {
+              "NORMAL": 373,
+              "POSITION": 372
+            },
+            {
+              "NORMAL": 375,
+              "POSITION": 374
+            },
+            {
+              "NORMAL": 377,
+              "POSITION": 376
+            },
+            {
+              "NORMAL": 379,
+              "POSITION": 378
+            },
+            {
+              "NORMAL": 381,
+              "POSITION": 380
+            },
+            {
+              "NORMAL": 383,
+              "POSITION": 382
+            },
+            {
+              "NORMAL": 385,
+              "POSITION": 384
+            },
+            {
+              "NORMAL": 387,
+              "POSITION": 386
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 392,
+            "NORMAL": 390,
+            "POSITION": 389,
+            "TEXCOORD_0": 391,
+            "WEIGHTS_0": 393
+          },
+          "indices": 388,
+          "material": 9,
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 395,
+              "POSITION": 394
+            },
+            {
+              "POSITION": 396
+            },
+            {
+              "POSITION": 397
+            },
+            {
+              "POSITION": 398
+            },
+            {
+              "POSITION": 399
+            },
+            {
+              "POSITION": 400
+            },
+            {
+              "NORMAL": 402,
+              "POSITION": 401
+            },
+            {
+              "NORMAL": 404,
+              "POSITION": 403
+            },
+            {
+              "NORMAL": 406,
+              "POSITION": 405
+            },
+            {
+              "NORMAL": 408,
+              "POSITION": 407
+            },
+            {
+              "NORMAL": 410,
+              "POSITION": 409
+            },
+            {
+              "NORMAL": 412,
+              "POSITION": 411
+            },
+            {
+              "POSITION": 413
+            },
+            {
+              "POSITION": 414
+            },
+            {
+              "POSITION": 415
+            },
+            {
+              "POSITION": 416
+            },
+            {
+              "POSITION": 417
+            },
+            {
+              "POSITION": 418
+            },
+            {
+              "POSITION": 419
+            },
+            {
+              "POSITION": 420
+            },
+            {
+              "POSITION": 421
+            },
+            {
+              "POSITION": 422
+            },
+            {
+              "NORMAL": 424,
+              "POSITION": 423
+            },
+            {
+              "NORMAL": 426,
+              "POSITION": 425
+            },
+            {
+              "POSITION": 427
+            },
+            {
+              "NORMAL": 429,
+              "POSITION": 428
+            },
+            {
+              "NORMAL": 431,
+              "POSITION": 430
+            },
+            {
+              "NORMAL": 433,
+              "POSITION": 432
+            },
+            {
+              "NORMAL": 435,
+              "POSITION": 434
+            },
+            {
+              "NORMAL": 437,
+              "POSITION": 436
+            },
+            {
+              "NORMAL": 439,
+              "POSITION": 438
+            },
+            {
+              "NORMAL": 441,
+              "POSITION": 440
+            },
+            {
+              "NORMAL": 443,
+              "POSITION": 442
+            },
+            {
+              "NORMAL": 445,
+              "POSITION": 444
+            },
+            {
+              "NORMAL": 447,
+              "POSITION": 446
+            },
+            {
+              "NORMAL": 449,
+              "POSITION": 448
+            },
+            {
+              "NORMAL": 451,
+              "POSITION": 450
+            },
+            {
+              "NORMAL": 453,
+              "POSITION": 452
+            },
+            {
+              "NORMAL": 455,
+              "POSITION": 454
+            },
+            {
+              "NORMAL": 457,
+              "POSITION": 456
+            },
+            {
+              "NORMAL": 459,
+              "POSITION": 458
+            },
+            {
+              "NORMAL": 461,
+              "POSITION": 460
+            },
+            {
+              "NORMAL": 463,
+              "POSITION": 462
+            },
+            {
+              "NORMAL": 465,
+              "POSITION": 464
+            },
+            {
+              "NORMAL": 467,
+              "POSITION": 466
+            },
+            {
+              "NORMAL": 469,
+              "POSITION": 468
+            },
+            {
+              "NORMAL": 471,
+              "POSITION": 470
+            },
+            {
+              "NORMAL": 473,
+              "POSITION": 472
+            },
+            {
+              "NORMAL": 475,
+              "POSITION": 474
+            },
+            {
+              "NORMAL": 477,
+              "POSITION": 476
+            },
+            {
+              "NORMAL": 479,
+              "POSITION": 478
+            },
+            {
+              "NORMAL": 481,
+              "POSITION": 480
+            },
+            {
+              "NORMAL": 483,
+              "POSITION": 482
+            },
+            {
+              "NORMAL": 485,
+              "POSITION": 484
+            },
+            {
+              "NORMAL": 487,
+              "POSITION": 486
+            },
+            {
+              "NORMAL": 489,
+              "POSITION": 488
+            },
+            {
+              "NORMAL": 491,
+              "POSITION": 490
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 496,
+            "NORMAL": 494,
+            "POSITION": 493,
+            "TEXCOORD_0": 495,
+            "WEIGHTS_0": 497
+          },
+          "indices": 492,
+          "material": 10,
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 499,
+              "POSITION": 498
+            },
+            {
+              "POSITION": 500
+            },
+            {
+              "POSITION": 501
+            },
+            {
+              "POSITION": 502
+            },
+            {
+              "POSITION": 503
+            },
+            {
+              "POSITION": 504
+            },
+            {
+              "POSITION": 505
+            },
+            {
+              "POSITION": 506
+            },
+            {
+              "POSITION": 507
+            },
+            {
+              "POSITION": 508
+            },
+            {
+              "POSITION": 509
+            },
+            {
+              "NORMAL": 511,
+              "POSITION": 510
+            },
+            {
+              "POSITION": 512
+            },
+            {
+              "POSITION": 513
+            },
+            {
+              "POSITION": 514
+            },
+            {
+              "POSITION": 515
+            },
+            {
+              "NORMAL": 517,
+              "POSITION": 516
+            },
+            {
+              "POSITION": 518
+            },
+            {
+              "POSITION": 519
+            },
+            {
+              "POSITION": 520
+            },
+            {
+              "NORMAL": 522,
+              "POSITION": 521
+            },
+            {
+              "NORMAL": 524,
+              "POSITION": 523
+            },
+            {
+              "NORMAL": 526,
+              "POSITION": 525
+            },
+            {
+              "NORMAL": 528,
+              "POSITION": 527
+            },
+            {
+              "NORMAL": 530,
+              "POSITION": 529
+            },
+            {
+              "NORMAL": 532,
+              "POSITION": 531
+            },
+            {
+              "NORMAL": 534,
+              "POSITION": 533
+            },
+            {
+              "NORMAL": 536,
+              "POSITION": 535
+            },
+            {
+              "NORMAL": 538,
+              "POSITION": 537
+            },
+            {
+              "NORMAL": 540,
+              "POSITION": 539
+            },
+            {
+              "NORMAL": 542,
+              "POSITION": 541
+            },
+            {
+              "NORMAL": 544,
+              "POSITION": 543
+            },
+            {
+              "NORMAL": 546,
+              "POSITION": 545
+            },
+            {
+              "NORMAL": 548,
+              "POSITION": 547
+            },
+            {
+              "NORMAL": 550,
+              "POSITION": 549
+            },
+            {
+              "NORMAL": 552,
+              "POSITION": 551
+            },
+            {
+              "NORMAL": 554,
+              "POSITION": 553
+            },
+            {
+              "NORMAL": 556,
+              "POSITION": 555
+            },
+            {
+              "NORMAL": 558,
+              "POSITION": 557
+            },
+            {
+              "NORMAL": 560,
+              "POSITION": 559
+            },
+            {
+              "NORMAL": 562,
+              "POSITION": 561
+            },
+            {
+              "NORMAL": 564,
+              "POSITION": 563
+            },
+            {
+              "NORMAL": 566,
+              "POSITION": 565
+            },
+            {
+              "NORMAL": 568,
+              "POSITION": 567
+            },
+            {
+              "NORMAL": 570,
+              "POSITION": 569
+            },
+            {
+              "NORMAL": 572,
+              "POSITION": 571
+            },
+            {
+              "NORMAL": 574,
+              "POSITION": 573
+            },
+            {
+              "NORMAL": 576,
+              "POSITION": 575
+            },
+            {
+              "NORMAL": 578,
+              "POSITION": 577
+            },
+            {
+              "NORMAL": 580,
+              "POSITION": 579
+            },
+            {
+              "NORMAL": 582,
+              "POSITION": 581
+            },
+            {
+              "NORMAL": 584,
+              "POSITION": 583
+            },
+            {
+              "NORMAL": 586,
+              "POSITION": 585
+            },
+            {
+              "NORMAL": 588,
+              "POSITION": 587
+            },
+            {
+              "NORMAL": 590,
+              "POSITION": 589
+            },
+            {
+              "NORMAL": 592,
+              "POSITION": 591
+            },
+            {
+              "NORMAL": 594,
+              "POSITION": 593
+            }
+          ]
+        },
+        {
+          "attributes": {
+            "JOINTS_0": 599,
+            "NORMAL": 597,
+            "POSITION": 596,
+            "TEXCOORD_0": 598,
+            "WEIGHTS_0": 600
+          },
+          "indices": 595,
+          "material": 11,
+          "mode": 4,
+          "targets": [
+            {
+              "NORMAL": 602,
+              "POSITION": 601
+            },
+            {
+              "NORMAL": 604,
+              "POSITION": 603
+            },
+            {
+              "NORMAL": 606,
+              "POSITION": 605
+            },
+            {
+              "NORMAL": 608,
+              "POSITION": 607
+            },
+            {
+              "NORMAL": 610,
+              "POSITION": 609
+            },
+            {
+              "POSITION": 611
+            },
+            {
+              "NORMAL": 613,
+              "POSITION": 612
+            },
+            {
+              "NORMAL": 615,
+              "POSITION": 614
+            },
+            {
+              "NORMAL": 617,
+              "POSITION": 616
+            },
+            {
+              "NORMAL": 619,
+              "POSITION": 618
+            },
+            {
+              "NORMAL": 621,
+              "POSITION": 620
+            },
+            {
+              "NORMAL": 623,
+              "POSITION": 622
+            },
+            {
+              "POSITION": 624
+            },
+            {
+              "POSITION": 625
+            },
+            {
+              "POSITION": 626
+            },
+            {
+              "NORMAL": 628,
+              "POSITION": 627
+            },
+            {
+              "NORMAL": 630,
+              "POSITION": 629
+            },
+            {
+              "NORMAL": 632,
+              "POSITION": 631
+            },
+            {
+              "NORMAL": 634,
+              "POSITION": 633
+            },
+            {
+              "NORMAL": 636,
+              "POSITION": 635
+            },
+            {
+              "NORMAL": 638,
+              "POSITION": 637
+            },
+            {
+              "POSITION": 639
+            },
+            {
+              "POSITION": 640
+            },
+            {
+              "POSITION": 641
+            },
+            {
+              "NORMAL": 643,
+              "POSITION": 642
+            },
+            {
+              "NORMAL": 645,
+              "POSITION": 644
+            },
+            {
+              "NORMAL": 647,
+              "POSITION": 646
+            },
+            {
+              "NORMAL": 649,
+              "POSITION": 648
+            },
+            {
+              "NORMAL": 651,
+              "POSITION": 650
+            },
+            {
+              "NORMAL": 653,
+              "POSITION": 652
+            },
+            {
+              "NORMAL": 655,
+              "POSITION": 654
+            },
+            {
+              "NORMAL": 657,
+              "POSITION": 656
+            },
+            {
+              "NORMAL": 659,
+              "POSITION": 658
+            },
+            {
+              "NORMAL": 661,
+              "POSITION": 660
+            },
+            {
+              "NORMAL": 663,
+              "POSITION": 662
+            },
+            {
+              "NORMAL": 665,
+              "POSITION": 664
+            },
+            {
+              "NORMAL": 667,
+              "POSITION": 666
+            },
+            {
+              "NORMAL": 669,
+              "POSITION": 668
+            },
+            {
+              "NORMAL": 671,
+              "POSITION": 670
+            },
+            {
+              "NORMAL": 673,
+              "POSITION": 672
+            },
+            {
+              "NORMAL": 675,
+              "POSITION": 674
+            },
+            {
+              "NORMAL": 677,
+              "POSITION": 676
+            },
+            {
+              "NORMAL": 679,
+              "POSITION": 678
+            },
+            {
+              "NORMAL": 681,
+              "POSITION": 680
+            },
+            {
+              "NORMAL": 683,
+              "POSITION": 682
+            },
+            {
+              "NORMAL": 685,
+              "POSITION": 684
+            },
+            {
+              "NORMAL": 687,
+              "POSITION": 686
+            },
+            {
+              "NORMAL": 689,
+              "POSITION": 688
+            },
+            {
+              "NORMAL": 691,
+              "POSITION": 690
+            },
+            {
+              "NORMAL": 693,
+              "POSITION": 692
+            },
+            {
+              "NORMAL": 695,
+              "POSITION": 694
+            },
+            {
+              "NORMAL": 697,
+              "POSITION": 696
+            },
+            {
+              "NORMAL": 699,
+              "POSITION": 698
+            },
+            {
+              "NORMAL": 701,
+              "POSITION": 700
+            },
+            {
+              "NORMAL": 703,
+              "POSITION": 702
+            },
+            {
+              "NORMAL": 705,
+              "POSITION": 704
+            },
+            {
+              "NORMAL": 707,
+              "POSITION": 706
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "extras": {
+        "targetNames": []
+      },
+      "name": "Hair",
+      "primitives": [
+        {
+          "attributes": {
+            "JOINTS_0": 712,
+            "NORMAL": 710,
+            "POSITION": 709,
+            "TEXCOORD_0": 711,
+            "WEIGHTS_0": 713
+          },
+          "indices": 708,
+          "material": 12,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "skins": [
+    {
+      "inverseBindMatrices": 714,
+      "joints": [
+        19,
+        17,
+        15,
+        14,
+        13,
+        168,
+        167,
+        166,
+        165,
+        11,
+        9,
+        7,
+        6,
+        5,
+        164,
+        163,
+        162,
+        161,
+        160,
+        126,
+        128,
+        123,
+        125,
+        153,
+        154,
+        151,
+        150,
+        149,
+        147,
+        146,
+        145,
+        143,
+        142,
+        141,
+        139,
+        138,
+        137,
+        135,
+        134,
+        133,
+        132,
+        131,
+        130,
+        122,
+        92,
+        89,
+        91,
+        119,
+        120,
+        117,
+        116,
+        115,
+        113,
+        112,
+        111,
+        109,
+        108,
+        107,
+        105,
+        104,
+        101,
+        100,
+        99,
+        98,
+        97,
+        96,
+        88,
+        159,
+        158,
+        157,
+        156,
+        103,
+        94,
+        23,
+        22,
+        21,
+        4,
+        24,
+        25,
+        90,
+        124,
+        121,
+        155
+      ],
+      "skeleton": 4
+    },
+    {
+      "inverseBindMatrices": 715,
+      "joints": [
+        4,
+        21,
+        22,
+        23,
+        156,
+        157,
+        158,
+        159,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        96,
+        92,
+        93,
+        94,
+        95,
+        97,
+        98,
+        99,
+        100,
+        101,
+        103,
+        104,
+        105,
+        107,
+        108,
+        109,
+        111,
+        112,
+        113,
+        115,
+        116,
+        117,
+        122,
+        130,
+        126,
+        127,
+        128,
+        129,
+        131,
+        132,
+        133,
+        134,
+        135,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143,
+        145,
+        146,
+        147,
+        149,
+        150,
+        151,
+        160,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        161,
+        162,
+        163,
+        165,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        166,
+        167,
+        168
+      ],
+      "skeleton": 4
+    },
+    {
+      "inverseBindMatrices": 716,
+      "joints": [
+        4,
+        21,
+        22,
+        23,
+        156,
+        157,
+        158,
+        159,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        96,
+        92,
+        93,
+        94,
+        95,
+        97,
+        98,
+        99,
+        100,
+        101,
+        103,
+        104,
+        105,
+        107,
+        108,
+        109,
+        111,
+        112,
+        113,
+        115,
+        116,
+        117,
+        122,
+        130,
+        126,
+        127,
+        128,
+        129,
+        131,
+        132,
+        133,
+        134,
+        135,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143,
+        145,
+        146,
+        147,
+        149,
+        150,
+        151,
+        160,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        161,
+        162,
+        163,
+        165,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        166,
+        167,
+        168
+      ],
+      "skeleton": 4
+    }
+  ],
+  "scope": "Exact extracted source metadata and unchanged image bytes; no finished character/animation/rendering claim."
+}

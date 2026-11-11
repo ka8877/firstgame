@@ -144,8 +144,19 @@ CLIENT_MOTION = {
     'currentTargets': ['Web']
 }
 
+GOSPEL_NPR = {
+    'name': 'gospel-npr',
+    'revisions': {'FantasyCards': 'fm-client-match-2026-11-11', 'PathOfDawn': 'gospel-npr-2026-11-11'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/GospelNpr-2026-11-11' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': ['FantasyCards'],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'gospel-npr':
+        return GOSPEL_NPR
     if name == 'client-motion':
         return CLIENT_MOTION
     if name == 'living-classic':
@@ -199,3 +210,4 @@ def preserved_public():
                 or hashlib.sha256(path.read_bytes()).hexdigest() != row['sha256']):
             raise ValueError('Preserved Gospel public file changed: ' + row['file'])
     return folder / 'PreservedPublic', record
+

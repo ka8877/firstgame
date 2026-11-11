@@ -1,3 +1,11 @@
+## 실제 NPR 연속 작업 소유권 — 2026-11-11 14:33 UTC
+
+원본 GospelNpr 회차는 실제 FinalIdle과 정상 자기 해제·available 확인을 마쳤다. 새 독립 회차는 `GospelNprResume-2026-11-11`이며 실제 소유권은 `Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/lease.json`에 있다. 원본 잠금을 연장하거나 재사용하지 않는다. 실행은 새 control의 `activate-resume.sh`와 `run-owned-npr-resume.py`를 사용한다. `profile.py`, 원본 NPR OUT/build/proof/stage/CardBaseline/Root 검토 경로는 보존하며, 실제 실행 담당만 명시적인 FIRSTGAME_CONTROL_ROOT로 바뀐다. Root만 실행하고 소스 담당은 지정 파일만 쓴다. 아래 원본 회차 acquired 표기는 이력이다. 아직 NPR 새 공개 배포·사용자 미적 승인은 없으며, 최신 문서의 실제 결과를 따른다.
+
+# 최신 실제 3D NPR 개편 — 2026-11-11
+
+최신 사용자는 기존 그림 기반 인물·배경·UI 전체 품질을 거절했다. 루트의 `GospelNpr-2026-11-11` 지침과 실제 새 자기 잠금을 우선하며 아래 2.5D/atlas 및 old Toon 모델 강제 조건은 보존 이력이다. 사용 허가가 확인된 좋은 애니풍 mesh/face/rig와 실제 보행, NPR 셰이더, 입체 환경·카메라·UI를 함께 바꾼다. 이야기를 새 엔진으로 이식하지 않고 현재 Gospel Core/People/Motor/저장과23사건/19본문·안정ID를 유지한다. Root만 생성/Unity/테스트/브라우저/Git/빌드/배포를 실행한다. 새 소스 담당은 지정된 Presentation 경로만 수정한다.
+
 # 현재 장기 개발 진입점 — 2026-11-03
 
 루트 `AGENTS.md`와 `../../Docs/Autonomy/CHARTER.md`, `STATE.json`, `ROADMAP.md`를 먼저 따른다. 아래 회차별 소유자·“현재” 표기는 보존 이력이다. 실제 활성 담당과 공통 원격 잠금을 확인하며, 현재 Nativity의 23사건/19본문·51화면·28음성·안정ID·저장·원본/GUID를 보존한다. 새 대표 구간은 기존 열두 살 유월절 여정이다. 새 장 추가 전 완료 저장 마이그레이션을 먼저 검증한다.

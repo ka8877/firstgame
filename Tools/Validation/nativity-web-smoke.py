@@ -77,7 +77,8 @@ QUEST_REVISIONS = {"FantasyCards": "fm-nativity-2026-11-02", "PathOfDawn": "gosp
 CANON_REVISIONS = {"FantasyCards": "fm-canon-2026-11-09", "PathOfDawn": "gospel-canon-2026-11-09"}
 LIVING_REVISIONS = {"FantasyCards": "fm-classic-ui-2026-11-10", "PathOfDawn": "gospel-living-rpg-2026-11-10"}
 CLIENT_MOTION_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-character-motion-2026-11-11"}
-CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values())
+GOSPEL_NPR_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-npr-2026-11-11"}
+CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values(), *GOSPEL_NPR_REVISIONS.values())
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -176,7 +177,7 @@ class JourneySmoke:
             "interactionViewport": page.viewport_size, "screenshots": [], "checks": [], "input": [],
             "console": [], "pageErrors": [], "failedRequests": [], "networkResponses": [], "httpErrors": [],
             "unityConfigurations": [], "checkpoints": [], "audioEvidence": {"windows": []},
-            "buildFingerprint": {"files": runtime_files(args.build_root / args.game / "Web")},
+            "buildFingerprint": {"files": runtime_files(args.runtime_root)},
             "harness": {"file": str(Path(__file__).relative_to(ROOT)), "sha256": digest(__file__),
                         "helpersSha256": digest(BASE.__file__), "plan": str(args.plan), "planSha256": digest(args.plan),
                         "pageErrorClassifier": {"file": str(Path(PROVIDER_ERRORS.__file__).relative_to(ROOT)), "sha256": digest(PROVIDER_ERRORS.__file__)}},
@@ -207,8 +208,16 @@ class JourneySmoke:
         # Keep the exact executed harness/plan beside each attempt so a later
         # diagnostic tool edit cannot replace the source behind a raw report SHA.
         captured=[]
-        for source in (Path(__file__),Path(BASE.__file__),Path(PROVIDER_ERRORS.__file__),Path(LOCAL_ERRORS.__file__),
-                       ROOT/"Tools/Validation/webaudio-observer.js",ROOT/"Tools/Validation/fm-local-media-observer.js",ROOT/"Tools/Environment/assert-runtime-idle.py",Path(NARRATION.__file__),args.plan):
+        source_files = [Path(__file__),Path(BASE.__file__),Path(PROVIDER_ERRORS.__file__),Path(LOCAL_ERRORS.__file__),
+                        ROOT/"Tools/Validation/webaudio-observer.js",ROOT/"Tools/Validation/fm-local-media-observer.js",
+                        ROOT/"Tools/Environment/assert-runtime-idle.py",Path(NARRATION.__file__),args.plan]
+        if args.release_profile == 'gospel-npr':
+            from LivingRpgClassic import profile as npr_release
+            source_files += list(npr_release.EXTRA_SOURCE_FILES) + [npr_release.SOURCE]
+            if args.preserved_card_record is not None:
+                source_files.append(args.preserved_card_record)
+            self.report['evidenceRole'] = plan.get('evidenceRole')
+        for source in source_files:
             target=self.output/"RecordedHarness"/source.relative_to(ROOT)
             target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(source.read_bytes())
             captured.append({"source":str(source.relative_to(ROOT)),"file":str(target.relative_to(ROOT)),"sha256":digest(target)})
@@ -1180,7 +1189,7 @@ class JourneySmoke:
                            "Normal play has no external music widget, stream or spoken provider announcement", external)
             self.report['visualReview'] = {'status': 'pending',
                 'method': 'Mechanical input/audio checks complete; current original captures still require direct Root review before staging.'}
-            self.check(runtime_files(self.args.build_root / self.args.game / 'Web') == self.report['buildFingerprint']['files'],
+            self.check(runtime_files(self.args.runtime_root) == self.report['buildFingerprint']['files'],
                 'Current runtime files did not change during the browser session')
             self.report["status"] = "passed"
         except Exception as error:
@@ -1200,7 +1209,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion"), default="renewal")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion", "gospel-npr"), default="renewal")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -1210,21 +1219,36 @@ def main():
     parser.add_argument("--provider-timeout", type=int, default=15)
     parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
     args = parser.parse_args()
-    if args.release_profile in ('canon-art', 'living-classic', 'client-motion') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
+    if args.release_profile in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
         parser.error('The selected current release profile must match its explicit environment and evidence roots')
     args.output = authorize_output(args.output)
     args.build_root = args.build_root.resolve()
     args.plan = args.plan.resolve()
     artifact_root = (ROOT / "Artifacts").resolve()
-    if not (args.build_root / args.game / "Web/index.html").is_file():
+    args.runtime_root = args.build_root / args.game / 'Web'
+    args.preserved_card_record = None
+    if args.release_profile == 'gospel-npr' and args.game == 'FantasyCards':
+        if args.profile != 'mobile-landscape' or args.base_url != 'https://ka8877.github.io/firstgame/':
+            parser.error('Preserved Card admits only the actual existing public mobile regression smoke')
+        from GospelNpr.card_baseline import verify_card_baseline
+        baseline = verify_card_baseline()
+        args.runtime_root = Path(baseline['runtimeRoot'])
+        args.preserved_card_record = ROOT / baseline['record']['file']
+    if not (args.runtime_root / 'index.html').is_file():
         parser.error("A successful final local Web build is required, including for public verification")
     plans = json.loads(args.plan.read_text())
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS, "gospel-npr": GOSPEL_NPR_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
+    if args.release_profile == 'gospel-npr':
+        from GospelNpr.contract import require_browser_plan
+        require_browser_plan(plan, args.game)
+        role = 'preserved-card-regression' if args.game == 'FantasyCards' else 'current-gospel-npr'
+        if plan.get('sourceStatus') != 'frozen' or plan.get('evidenceRole') != role:
+            parser.error('Freeze the actual NPR geometry/ordinary-input plan and its exact evidence role before execution')
     if modern and plan.get("revision") != expected_revisions[args.game]:
         parser.error("The plan revision differs from the explicit current release profile")
     required = set(plan.get("requiredCheckpoints", [])) if modern else REQUIRED_CHECKPOINTS[args.game]
@@ -1276,3 +1300,5 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+

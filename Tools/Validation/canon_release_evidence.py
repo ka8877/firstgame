@@ -127,6 +127,8 @@ def runtime(player):
 
 
 def runtime_rows(game):
+    if RELEASE.IS_GOSPEL_NPR and game == 'FantasyCards':
+        return preserved_card()['runtimeFiles']
     return {name: {'file': name, 'bytes': path.stat().st_size, 'sha256': digest(path)}
             for name, path in runtime(BUILD / game / 'Web').items()}
 
@@ -161,7 +163,21 @@ def verify_native_review(game, binding, native):
     return ref(path)
 
 
+def preserved_card():
+    from GospelNpr.card_baseline import verify_card_baseline
+    return verify_card_baseline()
+
+
+def current_native_names(game):
+    if RELEASE.IS_GOSPEL_NPR:
+        require(game in RELEASE.CURRENT_GAMES, 'NPR preserves Card; no current Card Native proof is admitted')
+        from GospelNpr.contract import native_full_names
+        return native_full_names()
+    return REQUIRED_NATIVE_TESTS[game]
+
+
 def verify_native(game):
+    expected = current_native_names(game)
     native = OUT / 'Native' / game
     binding = read(native / 'binding.json')
     inputs = read(native / 'inputs-before.json')
@@ -171,7 +187,7 @@ def verify_native(game):
     xml = ET.parse(regular(native / 'native.xml')).getroot()
     cases = xml.findall('.//test-case')
     names = [case.get('fullname') for case in cases]
-    expected = REQUIRED_NATIVE_TESTS[game]
+    expected = current_native_names(game)
     require(xml.get('result') == 'Passed' and int(xml.get('passed', '0')) == len(expected)
             and xml.get('failed') == xml.get('skipped') == '0' and len(names) == len(set(names)) == len(expected)
             and set(names) == set(expected) and all(case.get('result') == 'Passed' for case in cases), 'Exact complete Native set required: ' + game)
@@ -239,6 +255,15 @@ def verify_web_execution(game, proof_path, source_fingerprint):
         source = checked(native[key])
         require(source.read_bytes() == regular(OUT / 'Native' / game / filename).read_bytes(), 'Canonical Native must be the exact selected passed run')
     require(selected_binding.get('sourceFingerprint') == source_fingerprint, 'Selected Native fingerprint differs')
+    if RELEASE.IS_GOSPEL_NPR:
+        npr_invocation = read(checked(native['summary']).parent / 'invocation.json')
+        extras = npr_invocation.get('extraReleaseSources', [])
+        require(extras and {row['source'] for row in extras} == {str(path.relative_to(ROOT)) for path in RELEASE.EXTRA_SOURCE_FILES},
+                'Exact NPR Native contract/validator source pins required')
+        for row in extras:
+            require(digest(regular(ROOT / row['source'])) == digest(regular(ROOT / row['recorded'])) == row['sha256'],
+                    'NPR Native source contract changed after execution')
+
     driver_path = ROOT / 'Tools/Validation/run-canon-web.py'
     driver = checked(summary['executedDriver'])
     require(driver.read_bytes() == regular(driver_path).read_bytes(), 'Exact current Web driver source required')
@@ -334,7 +359,8 @@ def verify_builds():
             and authoring.get('streamedOriginals') == supported and authoring.get('cards') == 2649,
             'Current complete2649 authoring semantics and original artwork bindings required')
     result = {}
-    for game, revision in REVISIONS.items():
+    for game in RELEASE.CURRENT_GAMES:
+        revision = REVISIONS[game]
         native = verify_native(game)
         player = BUILD / game / 'Web'
         evidence_path, input_path = player / 'BuildEvidence.txt', player / 'BuildInputs.json'
@@ -362,7 +388,11 @@ def verify_builds():
                 require(digest(path) == row['sha256'] and path.stat().st_size == row['bytes'], 'Retained successful core runtime differs')
         execution = verify_web_execution(game, proof_path, native['sourceFingerprint'])
         result[game] = {'native': native, 'evidence': ref(evidence_path), 'inputs': ref(input_path), 'proof': ref(proof_path), 'execution': execution}
-    return {'currentTargets': ['Web'], 'games': result, 'core': core, 'authoring': authoring, 'audioAssets': audio}
+    observed = {'currentTargets': ['Web'], 'games': result, 'core': core, 'authoring': authoring, 'audioAssets': audio}
+    if RELEASE.IS_GOSPEL_NPR:
+        from GospelNpr.card_baseline import summary as baseline_summary
+        observed['preservedGames'] = {'FantasyCards': baseline_summary(preserved_card())}
+    return observed
 
 
 def load_smoke():
@@ -374,6 +404,9 @@ def load_smoke():
 
 
 def verify_browser(game, profile):
+    if RELEASE.IS_GOSPEL_NPR:
+        require(game == 'PathOfDawn' or (game == 'FantasyCards' and profile == 'PublicMobile844'),
+                'NPR admits three current Gospel suites and one preserved-Card public regression only')
     path = OUT / profile / game / 'report.json'
     report = read(path)
     require(report.get('game') == game and report.get('revision') == REVISIONS[game]
@@ -395,8 +428,13 @@ def verify_browser(game, profile):
     require(plan_path.is_absolute() and plan_path.is_relative_to(ROOT) and digest(regular(plan_path)) == harness['planSha256'], 'Actual current plan source required')
     plan = read(plan_path)[game]
     require(plan.get('revision') == REVISIONS[game], 'Plan revision differs from current release')
-    if RELEASE.IS_CLIENT_MOTION:
+    if RELEASE.IS_CLIENT_MOTION or RELEASE.IS_GOSPEL_NPR:
         require(plan.get('sourceStatus') == 'frozen', 'Current ClientMotion coordinate/checkpoint source must be frozen')
+    if RELEASE.IS_GOSPEL_NPR:
+        from GospelNpr.contract import require_browser_plan
+        require_browser_plan(plan, game)
+        role = 'preserved-card-regression' if game == 'FantasyCards' else 'current-gospel-npr'
+        require(plan.get('evidenceRole') == report.get('evidenceRole') == role, 'NPR evidence role differs')
     for source in harness.get('capturedSources', []):
         require(digest(regular(ROOT / source['source'])) == digest(regular(ROOT / source['file'])) == source['sha256'], 'Recorded browser source changed')
     require(harness.get('capturedSources'), 'Actual executed browser/helper/plan source snapshots required')
@@ -523,7 +561,7 @@ def main():
     parser.add_argument('--native-filter', choices=tuple(REVISIONS))
     args = parser.parse_args()
     if args.native_filter:
-        print(';'.join(REQUIRED_NATIVE_TESTS[args.native_filter]))
+        print(';'.join(current_native_names(args.native_filter)))
         return
     if args.check == 'core': result = verify_core()
     elif args.check == 'native':
@@ -536,9 +574,15 @@ def main():
     elif args.check == 'portal': result = verify_portal_review()
     else:
         result = {'builds': verify_builds(), 'portal': verify_portal_review(),
-                  'browser': {game: {profile: verify_browser(game, profile) for profile in ('Desktop720', 'Mobile844', 'PublicMobile844')} for game in REVISIONS}}
+                  'browser': {game: {profile: verify_browser(game, profile) for profile in ('Desktop720', 'Mobile844', 'PublicMobile844')} for game in RELEASE.CURRENT_GAMES}}
+        if RELEASE.IS_GOSPEL_NPR:
+            from GospelNpr.card_baseline import summary as baseline_summary
+            result['preservedCardIdentity'] = baseline_summary(preserved_card())
+            result['currentCardRegressionSmoke'] = verify_browser('FantasyCards', 'PublicMobile844')
     print(json.dumps({'status': 'passed', 'releaseProfile': RELEASE.NAME, 'check': args.check, 'evidence': result}, ensure_ascii=False))
 
 
 if __name__ == '__main__':
     main()
+
+

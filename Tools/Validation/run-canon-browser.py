@@ -88,10 +88,24 @@ def main():
     plan_path = RELEASE.PLAN_DIRECTORY / (RELEASE.PLAN_PREFIX + '-' + plan_name + '-plans.json')
     plan = read(plan_path)[args.game]
     need(plan.get('revision') == evidence.REVISIONS[args.game] and plan.get('suite') == 'modern-real-input-v1', 'Current game/profile plan required')
-    if RELEASE.IS_CLIENT_MOTION:
+    if RELEASE.IS_CLIENT_MOTION or RELEASE.IS_GOSPEL_NPR:
         need(plan.get('sourceStatus') == 'frozen', 'Freeze actual ClientMotion product coordinates/checkpoints before browser execution')
-    inputs_path = build_root / args.game / 'Web/BuildInputs.json'
-    evidence_path = build_root / args.game / 'Web/BuildEvidence.txt'
+    baseline = None
+    if RELEASE.IS_GOSPEL_NPR:
+        from GospelNpr.contract import require_browser_plan
+        require_browser_plan(plan, args.game)
+        need(args.game == 'PathOfDawn' or (args.game == 'FantasyCards' and args.profile == 'PublicMobile844'),
+             'NPR admits three Gospel suites and one preserved-Card public regression')
+        role = 'preserved-card-regression' if args.game == 'FantasyCards' else 'current-gospel-npr'
+        need(plan.get('evidenceRole') == role, 'Explicit NPR browser evidence role required')
+        if args.game == 'FantasyCards':
+            baseline = evidence.preserved_card()
+    if baseline is not None:
+        inputs_path = ROOT / baseline['buildInputs']['file']
+        evidence_path = ROOT / baseline['buildEvidence']['file']
+    else:
+        inputs_path = build_root / args.game / 'Web/BuildInputs.json'
+        evidence_path = build_root / args.game / 'Web/BuildEvidence.txt'
     inputs = read(inputs_path)
     fields = dict(line.split(': ', 1) for line in regular(evidence_path).read_text().splitlines() if ': ' in line)
     need(inputs.get('game') == args.game and fields.get('Revision') == evidence.REVISIONS[args.game]
@@ -135,6 +149,9 @@ def main():
         ROOT / 'Tools/Validation/webaudio-observer.js', ROOT / 'Tools/Validation/fm-local-media-observer.js',
         ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Environment/start-display.sh',
         ROOT / 'Tools/Environment/activate-display.sh', ROOT / 'Tools/Autonomy/cycle_guard.py', helper, plan_path]
+    sources += list(RELEASE.EXTRA_SOURCE_FILES)
+    if baseline is not None:
+        sources.append(ROOT / baseline['record']['file'])
     pins = []
     for source in sources:
         destination = run / 'RecordedHarness' / source.relative_to(ROOT)
@@ -154,6 +171,10 @@ def main():
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
+    if RELEASE.IS_GOSPEL_NPR:
+        invocation['evidenceRole'] = plan['evidenceRole']
+        if baseline is not None:
+            invocation['preservedCardBaseline'] = baseline['record']
     if RELEASE.REQUIRES_EXPLICIT_ENV:
         invocation['environmentOverrides']['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write(run / 'invocation.json', invocation)
@@ -222,3 +243,5 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
+

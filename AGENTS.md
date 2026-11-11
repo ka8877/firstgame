@@ -1,4 +1,18 @@
+## 실제 NPR 연속 작업 소유권 — 2026-11-11 14:33 UTC
+
+원본 GospelNpr 회차는 실제 FinalIdle과 정상 자기 해제·available 확인을 마쳤다. 새 독립 회차는 `GospelNprResume-2026-11-11`이며 실제 소유권은 `Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/lease.json`에 있다. 원본 잠금을 연장하거나 재사용하지 않는다. 실행은 새 control의 `activate-resume.sh`와 `run-owned-npr-resume.py`를 사용한다. `profile.py`, 원본 NPR OUT/build/proof/stage/CardBaseline/Root 검토 경로는 보존하며, 실제 실행 담당만 명시적인 FIRSTGAME_CONTROL_ROOT로 바뀐다. Root만 실행하고 소스 담당은 지정 파일만 쓴다. 아래 원본 회차 acquired 표기는 이력이다. 아직 NPR 새 공개 배포·사용자 미적 승인은 없으며, 최신 문서의 실제 결과를 따른다.
+
 # 두 독립 Unity 게임
+
+## 최신 예수님의 길 실제 3D NPR 개편 — 2026-11-11
+
+사용자는 ClientMotion의 인물·배경·사물·UI 전체 시각 품질을 거절하고 원신·스타레일 방향의 깔끔한 실제 3D 애니풍 화면을 요청했다. 이번 요청이 아래 그림/atlas/2.5D 유지 지침보다 우선한다. Unity6000.3.26f1·URP17.3.0은 유지하며 좋은 사용 허가 모델, 실제 skinned 관절 애니메이션, NPR 재질, 입체 환경, 조명·카메라·UI를 함께 개선한다. 셰이더 설치·샘플 이미지·기능 통과를 새 화면의 완성도나 사용자 승인으로 바꾸지 않는다.
+
+새 회차는 `GospelNpr-2026-11-11`, 브랜치는 `codex/gospel-npr-2026-11-11`, 실제 자기 잠금은 `Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/lease.json`이다. 직전 ClientMotion 제품 M `bfa37cbe`/공개 P `47f2e80f`는 기술 검증·Checkpoint01·Closure01과 정상 자기해제를 완료한 보존판이며 새 NPR 결과가 아니다. 종료 문서 커밋 `a34ce4f1`의 실제 CI는 별도로 관측한다.
+
+실제 Git·네트워크 대형 다운로드·Blender/생성기·Unity·테스트·브라우저·빌드·배포는 `/root`만 순차 실행한다. 소스 담당은 경로 소유권을 정한 뒤 코드만 작성하며 실행하지 않는다. Root는 모델/재질/패키지·Editor 준비·App 통합·출처와 새 검증을 맡는다. NPR Actor, World/Camera, UI 담당은 각각 해당 Presentation 경로만 수정하고 Core/People/저장·기존 판마를 바꾸지 않는다.
+
+기존23사건/19본문·51세부/28음성·안정ID·저장·실제 NPC 이동/상호작용을 유지한다. 판마 소스와 공개 바이너리는 보존하고 멀티플레이는 비활성·추후 업데이트다. 별도 `Art/GospelNpr` 자원을 사용하며 거절된 old Toon FBX나 sprite atlas를 새 고품질 모델이라고 소개하지 않는다. 상용 킷은 소스 공개와 자유 사용을 혼동하지 않고 구매하지 않는다. 모델별 사용 조건·수정·재배포·출처를 기록하며 원신/스타레일의 추출 자산을 가져오지 않는다.
 
 ## 실제 클라이언트 대조·인물 보행 재개 — 2026-11-11
 

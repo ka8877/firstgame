@@ -1,0 +1,1267 @@
+{
+  "PathOfDawn": {
+    "revision": "gospel-npr-2026-11-11",
+    "suite": "modern-real-input-v1",
+    "scope": "Fresh ordinary-input NPR Gospel route only. Retain the story/Scripture/save/audio/Root-original obligations while replacing old 2D character assertions with a separately authored frozen Native 3D contract. This draft requires prototype/control review before execution; no previous graphical approval or pass is reused.",
+    "requiredCheckpoints": [
+      "title",
+      "g1-opening-book-stop",
+      "birth-story-first",
+      "first-scripture-quiet-notice",
+      "magi-house-current-story",
+      "child-chapter",
+      "child-free-field",
+      "field-after-forward",
+      "field-after-diagonal",
+      "after-exploration-dash",
+      "actual-joseph-story",
+      "g1-field-dialogue",
+      "after-first-npc",
+      "g1-guidance",
+      "mary-well-finite-lighting",
+      "g1-mary-field-dialogue",
+      "g1-temple-field-dialogue",
+      "g1-field-scripture-recorded",
+      "illustrated-inventory",
+      "lamp-equipped-field",
+      "actual-status",
+      "saved-xyz-field",
+      "g1-saved",
+      "continued-xyz-field",
+      "g1-continued",
+      "continued-physical-bible",
+      "g2-planted-facing",
+      "g2-reading-bible",
+      "g2-book-return-reading",
+      "g2-reading-before-reload",
+      "g2-continued-reading",
+      "g2-continued-reading-bible",
+      "g2-continued-reading-return",
+      "continued-g2-reading",
+      "canon-child-actor-and-field",
+      "canon-natural-field-dialogue",
+      "canon-bible-printed-columns",
+      "canon-temple-body-sightline",
+      "canon-bible-after-reload",
+      "living-minimap-live",
+      "living-field-map-expanded",
+      "living-minimap-return",
+      "living-ambient-pilgrims",
+      "living-joseph-after-dialogue",
+      "living-people-after-reload",
+      "living-map-after-reload",
+      "npr-live-skinned-character-field",
+      "npr-orbit-front",
+      "npr-orbit-side",
+      "npr-actual-speaker-portrait",
+      "npr-bible-return-same-3d-encounter",
+      "npr-persisted-3d-people"
+    ],
+    "steps": [
+      {
+        "type": "wait",
+        "ms": 3000
+      },
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current final runtime title before ordinary entry."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.180859375,
+          0.7118055555555556
+        ],
+        "label": "새 여정 시작",
+        "settleMs": 400
+      },
+      {
+        "type": "audio",
+        "label": "narration-initial-current-line"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.902,
+          0.075
+        ],
+        "label": "재생 중 성경 열기",
+        "settleMs": 250
+      },
+      {
+        "type": "audio",
+        "label": "narration-book-stopped"
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-opening-book-stop",
+        "expected": "Actual book0/19 interrupts currently playing exact narration; no future contents are earned."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.86,
+          0.928
+        ],
+        "label": "오프닝 대화로 복귀",
+        "settleMs": 400
+      },
+      {
+        "type": "checkpoint",
+        "name": "birth-story-first",
+        "expected": "Preserved sourced first opening illustration and dialogue resumes."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 대화",
+        "settleMs": 650
+      },
+      {
+        "type": "audio",
+        "label": "narration-after-book-next-line"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 첫 사건 남은 아홉 대화",
+        "settleMs": 650,
+        "repeat": 9
+      },
+      {
+        "type": "checkpoint",
+        "name": "first-scripture-quiet-notice",
+        "expected": "Exact small Scripture acquisition notice, unchanged opening without reward interruption."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 다음 서른네 대화",
+        "settleMs": 650,
+        "repeat": 34
+      },
+      {
+        "type": "checkpoint",
+        "name": "magi-house-current-story",
+        "expected": "Preserved distinct Matthew account, not a new invented event."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "실제 마지막 일곱 대화",
+        "settleMs": 650,
+        "repeat": 7
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-chapter",
+        "expected": "Exactly51ordinary turn advances reach age12chapter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.198,
+          0.8292
+        ],
+        "label": "이야기 속으로",
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "child-free-field",
+        "expected": "Current real child, physical forest floor and compactHUD after11/23goals and11/19passages."
+      },
+      {
+        "type": "checkpoint",
+        "name": "canon-child-actor-and-field",
+        "expected": "Current full-frame child actor, new authored atlas and camera framing are visible on the actual field. Inspect actual feet/body silhouette and ground contact; do not equate a saved image with user art approval."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-live-skinned-character-field",
+        "expected": "Actual current Web3D field: same physical traveler with visible head/feet, genuine skinned humanoid, clean NPR face/hair/tunic, depth/lighting and spatial scenery. Root must view this exact original; tiny old sprite/painted-only/blank-gradient frames are not sufficient. Numerical rig/skin assertions are separate fresh Native proof."
+      },
+      {
+        "type": "review_input",
+        "name": "npr-ordinary-camera-front-review",
+        "expected": "Draft route: use only the actual supported mouse/touch camera-look control to orbit to a clear front view of the stationary live traveler. Keep the same physical feet/location, story/save and active people. No game/JavaScript/save/pose/camera-field injection. Root must first establish the actual control geometry; this acknowledgment is not visual approval."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-orbit-front",
+        "expected": "Actual front perspective view of the same stationary skinned traveler, readable real face/eyes/hair/tunic and visible grounded feet in the same live spatial field. Original requires direct Root review; no inferred numeric camera/pose claim."
+      },
+      {
+        "type": "review_input",
+        "name": "npr-ordinary-camera-side-review",
+        "expected": "Draft route: ordinary supported camera-look input only; orbit to a clear side/three-quarter view, keeping the same stationary traveler, quest and nearby people. Confirm actual input geometry before freezing this route. No hidden state or pose/save injection; no automatic visual approval."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-orbit-side",
+        "expected": "Actual side/three-quarter perspective of that same physical traveler and spatial scene, with real body depth, hair/cloth silhouette and grounded feet. Compare actual front/live-field originals; a single billboard rotated toward the camera is not acceptable."
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-minimap-live",
+        "expected": "Actual player, real named and ambient people and current objective are visible on the live minimap with current physical-field context."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.125,
+          0.175
+        ],
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-field-map-expanded",
+        "expected": "The expanded north-up map displays actual world bounds, place landmarks and live people/player/target coordinates; story/verse counters do not advance."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8766,
+          0.9188
+        ],
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-minimap-return",
+        "expected": "Returning from the map preserves the same real world and progress; the compact map tracks the same people."
+      },
+      {
+        "type": "wait",
+        "ms": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-ambient-pilgrims",
+        "expected": "Distinct nearby background people inhabit the current courtyard and walk naturally without replacing the story actor."
+      },
+      {
+        "type": "audio",
+        "label": "nativity-temple-field"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.70278
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 forward"
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-forward",
+        "expected": "Actual touch changes position, facing and visible distance in the unchanged shipping canvas."
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.09375,
+          0.88333
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 backward"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.04297,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 left"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.14453,
+          0.79306
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 right"
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.09375,
+          0.79306
+        ],
+        "end": [
+          0.12966,
+          0.7292
+        ],
+        "ms": 200,
+        "settleMs": 300,
+        "label": "실제 패드 diagonal"
+      },
+      {
+        "type": "checkpoint",
+        "name": "field-after-diagonal",
+        "expected": "Actual touch changes position, facing and visible distance in the unchanged shipping canvas."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.85078125,
+          0.7625
+        ],
+        "label": "실제 탐험 대시",
+        "settleMs": 500
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-exploration-dash",
+        "expected": "A short collision-respecting dash is available as a separate action; movement remains within the real field."
+      },
+      {
+        "type": "review_input",
+        "name": "npc-proximity",
+        "expected": "Walk physically to the visible Joseph waypoint until the touch/E interaction is active; then interact using normal input. No pose/game/save injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-joseph-story",
+        "expected": "The actual nearby Joseph speaks the exact authored dialogue with the speaker and physical people/place visible. Per-line editorial category/reference metadata is not displayed; quotation/summary/dramatization provenance remains internally preserved by Core/Native."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-field-dialogue",
+        "expected": "The actual physical player, nearby Joseph and world remain visible during dialogue. No full-screen replacement painting; retain the exact speaker, authored words and Scripture control without per-line editorial metadata. Internal provenance remains covered by Core/Native."
+      },
+      {
+        "type": "checkpoint",
+        "name": "canon-natural-field-dialogue",
+        "expected": "Actual field dialogue shows speaker and words cleanly with the physical people/place visible. Editorial reference/category metadata is not repeated as spoken dialogue or a per-line overlay. Internal quotation/summary/dramatization provenance remains covered by Core/Native."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-planted-facing",
+        "expected": "The actual Joseph Reading encounter keeps the live player, Joseph and local field visible. Compare the current entry originals: the player is planted and visually faces the actual nearby Joseph; retain the exact speaker and authored words without a per-line editorial overlay. Source provenance remains internal to Core/Native. Numeric speed/XYZ/yaw and same-frame movement cancellation are separate Native assertions."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-actual-speaker-portrait",
+        "expected": "Actual accepted Joseph encounter with the same visible physical humanoids and current exact speaker/dialogue. The portrait must render the current speaker's actual 3D model; no substitute painted portrait, per-line editorial explanation or blank render texture. Root directly views this original."
+      },
+      {
+        "type": "review_input",
+        "name": "g2-planted-facing-review",
+        "expected": "Directly inspect actual-joseph-story, g1-field-dialogue, g2-planted-facing and this current original. Compare the physical player/nearby Joseph, visible facing, planted pose, current speaker, exact authored dialogue and local field without per-line editorial metadata. Source provenance remains internal to Core/Native. Screenshot-guided ordinary input only; bounded wait is allowed. Do not advance the story, move the player, inject game/pose/JavaScript/save state or infer exact numeric XYZ/yaw. Continue only when the actual Joseph Reading frame has been observed; this input acknowledgment is not Root visual approval."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.901953,
+          0.075
+        ],
+        "label": "G2 요셉 대화 중 실제 성경 열기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-reading-bible",
+        "expected": "The actual Bible opened from Joseph Reading shows the earned opening Scripture and unchanged11/19 discovery count. No Joseph or future Scripture is falsely awarded by opening the book. Inspect the rendered reference/text; no game/save/JavaScript state access."
+      },
+      {
+        "type": "checkpoint",
+        "name": "canon-bible-printed-columns",
+        "expected": "The actual discovered Scripture is printed in two aligned columns within each physical leaf with the new serif font and verse ink. Exact source text, legibility, margins and future-leaf privacy are required. Native separately checks every printed character of all19 passages."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.860156,
+          0.927778
+        ],
+        "label": "G2 성경에서 같은 요셉 대화로 돌아가기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-book-return-reading",
+        "expected": "After the ordinary Bible return, compare g2-planted-facing: the same live Joseph Reading speaker, exact authored dialogue and local field return without advancing the turn or showing per-line editorial metadata. Source provenance remains internal to Core/Native. The player remains at the visually same position and facing Joseph. Exact numeric pose/cursor preservation is separately required by Native16."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-bible-return-same-3d-encounter",
+        "expected": "Returning normally from the real Bible restores the same live 3D encounter, same physical player/NPC, current speaker/portrait and unchanged story cursor. Exact pose/bytes assertions remain separate fresh Native checks; direct original review is mandatory."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-reading-before-reload",
+        "expected": "Current original immediately before full browser reload: actual Joseph Reading, same speaker and exact authored dialogue, player/Joseph/local geometry and visual facing after Bible return, without per-line editorial metadata. Source provenance remains internal to Core/Native. The accepted Interact already performed its real Save(false) before showing this Reading; this checkpoint does not claim a nonexistent Reading manual-save button. Discovery remains11/19 and the first field encounter has not been completed."
+      },
+      {
+        "type": "review_input",
+        "name": "g2-reading-before-reload-review",
+        "expected": "Observe this actual Joseph Reading original before the authored full browser reload. Compare g2-book-return-reading and g2-reading-before-reload for the same visible speaker and exact authored dialogue, physical field position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. Use only screenshot-guided ordinary input or bounded wait, and do not advance the conversation or move. No Reading manual-save UI exists; the reload intentionally exercises the existing accepted Interact autosave. No save/JavaScript/runtime access or state injection is allowed. This acknowledgment does not approve the visual result."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.180859375,
+          0.8229166666666666
+        ],
+        "label": "G2 전체 브라우저 재로드 뒤 실제 이어하기",
+        "settleMs": 1400
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-continued-reading",
+        "expected": "A real full browser reload and actual title Continue restore the same Joseph Reading before either original Joseph advance click. Compare g2-reading-before-reload for the same speaker and exact authored dialogue, local player/Joseph/world geometry and visual position/facing without per-line editorial metadata; source provenance remains internal to Core/Native. No state/save injection. This is restored Reading, not a newly accepted interaction. Exact XYZ/yaw/cursor/original bytes are separately proven by Native16."
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-g2-reading",
+        "expected": "Retain a fresh actual current-run original immediately after the early full browser reload and actual title Continue. The visible Joseph Reading must still match g2-reading-before-reload: same speaker, exact authored dialogue, live player/Joseph/local field and visual position/facing, before any Joseph advance input, without per-line editorial metadata. Source provenance remains internal to Core/Native. This checkpoint creates its own real browser capture in the current navigation; no screenshot alias, copied original, state injection or numeric pose claim. Exact XYZ/yaw/cursor/original bytes remain separate Native16 assertions."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.901953,
+          0.075
+        ],
+        "label": "G2 이어한 요셉 대화에서 실제 성경 재확인",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-continued-reading-bible",
+        "expected": "After the actual browser reload/Continue from Joseph Reading, reopening the Bible retains the earned opening pages, their rendered Scripture/reference and11/19 discovery count compared with g2-reading-bible. Joseph and later field passages remain unearned; merely opening/returning from the book has not advanced the story."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.860156,
+          0.927778
+        ],
+        "label": "G2 재접속 성경에서 같은 요셉 대화로 돌아가기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "g2-continued-reading-return",
+        "expected": "After the second ordinary Bible return, the restored Joseph Reading still matches g2-reading-before-reload and g2-continued-reading: same speaker, exact authored dialogue, live local field, visual player position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. The original two Joseph advance inputs follow this checkpoint unchanged."
+      },
+      {
+        "type": "review_input",
+        "name": "g2-reading-restored-review",
+        "expected": "Directly compare current original and the seven G2 required originals, especially g2-reading-before-reload versus g2-continued-reading and g2-continued-reading-return. Inspect the same speaker and exact authored Joseph turn, earned11/19 Scripture and visual field position/facing without per-line editorial metadata. Source provenance remains internal to Core/Native. Only screenshot-guided ordinary input is allowed. Do not advance Joseph yet, move the player, use runtime/JavaScript/save inspection or claim exact numeric XYZ/yaw. Continue only once the actual restored Reading is observed. This input acknowledgment is not Root visual approval; retain separate current-run Root hash review and Native16 numeric/cursor/byte evidence."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉과 다음 대화",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "요셉과 대화 마치기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-first-npc",
+        "expected": "The first meeting advances the real goal from11 to12/23 without falsely awarding a twelfth Scripture passage."
+      },
+      {
+        "type": "wait",
+        "ms": 1000
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-joseph-after-dialogue",
+        "expected": "The same Joseph remains physically present after the actual completed conversation, walking or waiting naturally as the next quest begins. He is not destroyed/replaced."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-guidance",
+        "expected": "Camera-relative Korean direction, actual distance and next Mary encounter guide walking from the preserved live field."
+      },
+      {
+        "type": "review_input",
+        "name": "mary-well-route",
+        "expected": "Walk using ordinary keys/touch to the visible Mary and stone well area (east from Joseph), where the previous Web player produced a giant white rendering spread. Capture the actual final location with well and Mary in view. No pose/game/save injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "mary-well-finite-lighting",
+        "expected": "Actual final shipping Web rendering at the previously rejected Mary/well location has no white spread or black NaN silhouette, while character, architecture and lighting remain visible."
+      },
+      {
+        "type": "review_input",
+        "name": "g1-mary-talk",
+        "expected": "Using ordinary keys/touch, approach actual Mary until dialogue-ready and interact; acknowledge only after live Mary field dialogue is visible."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-mary-field-dialogue",
+        "expected": "Mary, the well, actual child and real field remain visible during modal dialogue with the actual speaker and exact authored words. No per-line editorial category/reference metadata is displayed; source provenance remains internal to Core/Native."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "마리아의 다음 대화",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "마리아와 대화 마치기",
+        "settleMs": 650
+      },
+      {
+        "type": "review_input",
+        "name": "g1-temple-guide-route",
+        "expected": "Follow actual new camera-relative direction to the temple guide, use ordinary keys/touch and interact only within actual range. No position/save/debug injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-temple-field-dialogue",
+        "expected": "Actual temple guide encounter shows local architecture/player/NPC and exact sourced story."
+      },
+      {
+        "type": "checkpoint",
+        "name": "canon-temple-body-sightline",
+        "expected": "Actual temple encounter shows readable whole figures and an open architectural body sightline; compare current original to the matching pre-change position, not an unrelated camera scene."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "성전 길잡이 다음 대화",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "유월절 본문을 기록하며",
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "성전 길잡이 대화 마치기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-field-scripture-recorded",
+        "expected": "After the third actual field encounter, the earned temple-passover passage is inscribed in the real Bible reward.12/19 Scripture,14/23 events; still-hidden future passages remain unearned."
+      },
+      {
+        "type": "review_input",
+        "name": "g1-field-award-review",
+        "expected": "Directly inspect newly inscribed first field Scripture and progress; acknowledge after actual record only."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.828,
+          0.9278
+        ],
+        "label": "말씀 기록 후 여정으로",
+        "settleMs": 700
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8765625,
+          0.08888888888888889
+        ],
+        "label": "가방",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "illustrated-inventory",
+        "expected": "Real illustrated travel belongings and descriptions."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.57,
+          0.772
+        ],
+        "label": "등잔 장착",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.823,
+          0.772
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "lamp-equipped-field",
+        "expected": "The preserved authored oil lamp is physically small and equipped on the current character."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.498828125,
+          0.9347222222222222
+        ],
+        "label": "인물 상태",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "actual-status",
+        "expected": "After actual Joseph, Mary and temple guide,12/19 passages and14/23 goals with real lamp; no invented quest progress."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8766,
+          0.9194
+        ],
+        "label": "여정으로",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.94453125,
+          0.08888888888888889
+        ],
+        "label": "메뉴",
+        "settleMs": 750
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6684,
+          0.298
+        ],
+        "label": "현재 여정 저장",
+        "settleMs": 1000
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3285,
+          0.298
+        ],
+        "label": "여정 계속하기",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-xyz-field",
+        "expected": "Actual field position and equipment immediately before full navigation."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-saved",
+        "expected": "Exact actual location, lamp and first three field encounter progress immediately before full reconnect."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.180859375,
+          0.8229166666666666
+        ],
+        "label": "이어하기",
+        "settleMs": 1400
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-xyz-field",
+        "expected": "A real full reload and Continue restore the same physical position, progress and lamp."
+      },
+      {
+        "type": "checkpoint",
+        "name": "g1-continued",
+        "expected": "After full browser reload, actual same location/encounter progress/lamp and direction remain; no injected saved state."
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-people-after-reload",
+        "expected": "After the second actual full reload, story actors remain in the chapter with consistent state-derived locations and the player's saved progress is retained."
+      },
+      {
+        "type": "checkpoint",
+        "name": "npr-persisted-3d-people",
+        "expected": "Actual browser reload/continue retains the live 3D traveler, chapter and visible people with natural humanoid presentation in the same spatial field. Inspect current saved/continued originals; no historical image, atlas fallback or generated approval."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.125,
+          0.175
+        ],
+        "settleMs": 650
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-map-after-reload",
+        "expected": "The reopened map after the second real reload reflects the actual saved player and current people/target; no future progress was awarded."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.8766,
+          0.9188
+        ],
+        "settleMs": 650
+      },
+      {
+        "type": "click",
+        "point": [
+          0.740625,
+          0.08888888888888889
+        ],
+        "label": "기록된 성경",
+        "settleMs": 750
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-physical-bible",
+        "expected": "The actual earned pages remain inscribed after full browser reload; future leaves stay blank."
+      },
+      {
+        "type": "checkpoint",
+        "name": "canon-bible-after-reload",
+        "expected": "After both actual save/reload paths, the same discovered Scripture remains readable on the current printed reading surface, with unseen metadata hidden and no extra discovery awarded."
+      }
+    ],
+    "sourcePlan": "Tools/Autonomy/g2_public_plan_v2.json",
+    "sourceStatus": "draft-awaiting-npr-product-and-control-review",
+    "evidenceRole": "current-gospel-npr",
+    "coordinateReview": {
+      "basis": "1280x720 actual Unity frame; normalize to the measured DOM canvas via the existing point() method.",
+      "frozenUiSource": "Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageUi.cs",
+      "newTitleStartPixels": [
+        231.5,
+        512.5
+      ],
+      "newTitleContinuePixels": [
+        231.5,
+        592.5
+      ],
+      "newHudBiblePixels": [
+        948,
+        64
+      ],
+      "newHudBagPixels": [
+        1122,
+        64
+      ],
+      "newHudMenuPixels": [
+        1209,
+        64
+      ],
+      "newStatusIdentityPixels": [
+        638.5,
+        673
+      ],
+      "newMinimapPixels": [
+        160,
+        126
+      ],
+      "newInteractPixels": [
+        1175,
+        656
+      ],
+      "newRunPixels": [
+        1040,
+        656
+      ],
+      "newDashPixels": [
+        1089,
+        549
+      ],
+      "newJumpPixels": [
+        1201,
+        549
+      ],
+      "newScenicPixels": [
+        1187,
+        182.5
+      ],
+      "scope": "Draft coordinates only. Existing story/book geometry remains separate. Camera-look and final 3D world route need Root/source review before sourceStatus may become frozen; no old image approval is reused."
+    },
+    "nprRouteAdmission": {
+      "sourceStatus": "unresolved-camera-relative-route",
+      "requiredNewOriginals": [
+        "npr-live-skinned-character-field",
+        "npr-orbit-front",
+        "npr-orbit-side",
+        "npr-actual-speaker-portrait",
+        "npr-bible-return-same-3d-encounter",
+        "npr-persisted-3d-people"
+      ],
+      "ordinaryControlsOnly": true,
+      "scope": "These are source-authored draft requirements, not observed control geometry or completed screenshots. Root must establish actual camera input and revise old fixed-axis travel/interaction steps from current Web play before sourceStatus can become frozen. Native15 selection never freezes this route."
+    },
+    "sourceDerivedCameraNormalization": {
+      "sourceStatus": "proposal-not-observed-in-working-web-preview",
+      "defaultYawDegrees": 47,
+      "assumedUnityCanvasAspect": "16:9",
+      "onlyValidFromKnownDefaultYaw": true,
+      "desktop": {
+        "type": "drag",
+        "button": "right",
+        "start": [
+          0.85,
+          0.4
+        ],
+        "end": [
+          0.6611607143,
+          0.4
+        ],
+        "durationMs": 700,
+        "settleMs": 750,
+        "formula": "dxNorm=-47/(140*16/9)"
+      },
+      "mobile": {
+        "type": "drag",
+        "start": [
+          0.85,
+          0.4
+        ],
+        "end": [
+          0.6676724138,
+          0.4
+        ],
+        "durationMs": 700,
+        "settleMs": 750,
+        "formula": "dxNorm=-47/(145*16/9); actual UI look input is multiplied by canvas.scaleFactor"
+      },
+      "obligations": [
+        "Actual ordinary-input preview must establish these controls and measured frame geometry before authoring frozen steps.",
+        "If retaining old D/W fixed-world-axis travel segments, normalize from known default yaw before those segments.",
+        "Repeat after every fresh Boot/reload only when interactive field HUD resumes; a modal conversation/book must not be treated as an active camera.",
+        "Front/side orbit reviews also change heading: return to a known reviewed basis with ordinary input before any retained world-axis route; never blindly apply the47-degree correction from an unknown orbit.",
+        "Pending actual3D opening changes require source/route review before freeze. First-frame failed prototype is not accepted geometry or a rendered browser pass."
+      ]
+    }
+  },
+  "FantasyCards": {
+    "revision": "fm-client-match-2026-11-11",
+    "suite": "modern-real-input-v1",
+    "evidenceRole": "preserved-card-regression",
+    "sourceStatus": "draft-awaiting-protected-card-smoke-review",
+    "scope": "Current public ordinary-input regression smoke of the byte-identical P47f Card product. This is not a fresh Card build/Native/full-fidelity-suite claim. Title, starter, shop/owned pack/images, battle, save, four PCM roles and two actual reloads retain current strict source/runtime/fullGET/Root evidence. The historical complete Card suites remain separately bound baseline history.",
+    "requiredCheckpoints": [
+      "title",
+      "starter-choice",
+      "starter-granted",
+      "shop",
+      "living-classic-shop-counter",
+      "pack-offer",
+      "sealed-pack",
+      "continued-sealed-pack",
+      "continued-sealed-graphic",
+      "five-card-reveal",
+      "owned-fifty-five",
+      "owned-solo-preview",
+      "opening-six-originals",
+      "owned-solo-board",
+      "after-original-shuffle",
+      "saved-quest-battle",
+      "continued-quest-battle"
+    ],
+    "steps": [
+      {
+        "type": "checkpoint",
+        "name": "title",
+        "expected": "Current untouched card title."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.1625,
+          0.5
+        ],
+        "label": "실제 빈 타이틀 입력",
+        "settleMs": 850
+      },
+      {
+        "type": "audio",
+        "label": "nativity-title"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.434735849075,
+          0.4497060302
+        ],
+        "label": "게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-entry-review",
+        "expected": "Directly verify that actual ordinary input entered the seven-starter choice, not the title. Confirm by viewing the original. Correct only through ordinary input, never state injection."
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-choice",
+        "expected": "Seven-element starter selector, one free choice."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.689375,
+          0.811
+        ],
+        "label": "선택된 빛 덱을 무료로 받기",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "starter-wallet-review",
+        "expected": "Inspect actual completed starter grant: the current late-client bottom system/record pane shows 50 owned cards and600SP. Do not accept the starter selection screen or invent a right-hand wallet from the old layout. Use ordinary input only; GP remains future/zero in the actual owned state, separately verified by Native."
+      },
+      {
+        "type": "checkpoint",
+        "name": "starter-granted",
+        "expected": "Actual600SP/GP0/50owned starter."
+      },
+      {
+        "type": "audio",
+        "label": "starter-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7044921875,
+          0.034375
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "shop",
+        "expected": "Actual booster prices/SP wallet."
+      },
+      {
+        "type": "checkpoint",
+        "name": "living-classic-shop-counter",
+        "expected": "The actual shop uses the classic client window/counter, four live product rows, distinct current packaging, real prices/current SP and pagination. Original exact late shop artwork is not claimed where no original shop reference exists."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.420875,
+          0.404
+        ],
+        "label": "클래식 부스터",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "pack-offer",
+        "expected": "Actual400SP/odds and sourceclassificationnote."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.522125,
+          0.825
+        ],
+        "label": "400SP 구매",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "sealed-pack",
+        "expected": "Actual200SP/sealed5card pack saved before opening."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.434735849075,
+          0.4497060302
+        ],
+        "label": "기존 게임 시작",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7044921875,
+          0.034375
+        ],
+        "label": "카드 상점",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.5615,
+          0.827
+        ],
+        "label": "구매한 카드팩 1개 대기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-pack",
+        "expected": "Full navigation restored200SP/one saved unopened pack; actual original binds this reload."
+      },
+      {
+        "type": "audio",
+        "label": "continued-sealed-lobby"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.61475,
+          0.31
+        ],
+        "label": "보관팩 개봉하기",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-sealed-graphic",
+        "expected": "Original sealed graphic from same saved purchase, no new charge."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.539,
+          0.825
+        ],
+        "label": "이미 구매한 카드팩 개봉",
+        "settleMs": 2200
+      },
+      {
+        "type": "checkpoint",
+        "name": "five-card-reveal",
+        "expected": "Five original printed fronts and neutralacquired/ownedfooter."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2675,
+          0.897
+        ],
+        "label": "보유 카드 보기",
+        "settleMs": 850
+      },
+      {
+        "type": "review_input",
+        "name": "living-owned-art-loaded-review",
+        "expected": "Root가 현재 원본에서 네 카드의 전체 이미지, 보유55장과 SP200을 직접 확인한다. 이미지가 아직 로드되지 않았으면 ordinary wait 후 새 원본을 다시 캡처하여 확인한다. 빈 카드나 그라데이션만 있는 이미지는 승인하지 않는다. 저장 데이터, JavaScript 게임 상태 또는 Unity 필드를 읽거나 주입하지 않고 일반 입력과 대기만 사용한다. 이 확인은 필수 owned-fifty-five 원본의 별도 Root 시각 승인을 대신하지 않는다."
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-fifty-five",
+        "expected": "Actual55owned/27distinct and200SP after one opening."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.199625,
+          0.915
+        ],
+        "label": "싱글 시나리오",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.4947265625,
+          0.27395833
+        ],
+        "label": "1장 소울의 기초",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-preview",
+        "expected": "Actual50cardowneddeck composition/stage."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.2885,
+          0.825
+        ],
+        "label": "소유덱으로 대전 시작",
+        "settleMs": 1300
+      },
+      {
+        "type": "checkpoint",
+        "name": "opening-six-originals",
+        "expected": "Actual six original opening cards."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.719,
+          0.925
+        ],
+        "label": "이대로 시작",
+        "settleMs": 1200
+      },
+      {
+        "type": "checkpoint",
+        "name": "owned-solo-board",
+        "expected": "Actual owneddeck battle44remaining/6hand/preparation."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7712890625,
+          0.89583333
+        ],
+        "label": "actual-whole-hand-shuffle",
+        "settleMs": 1800
+      },
+      {
+        "type": "checkpoint",
+        "name": "after-original-shuffle",
+        "expected": "Whole six cards returned/dealt through actual board control; actualchangedhand/message."
+      },
+      {
+        "type": "click",
+        "point": [
+          0.7712890625,
+          0.95208333
+        ],
+        "label": "actual-battle-menu",
+        "settleMs": 850
+      },
+      {
+        "type": "click",
+        "point": [
+          0.3725,
+          0.51
+        ],
+        "label": "실제 소유전투 저장",
+        "settleMs": 950
+      },
+      {
+        "type": "click",
+        "point": [
+          0.6275,
+          0.705
+        ],
+        "label": "전투로",
+        "settleMs": 850
+      },
+      {
+        "type": "checkpoint",
+        "name": "saved-quest-battle",
+        "expected": "Actual savedhand/deck/LP/phase before fullreload."
+      },
+      {
+        "type": "reload"
+      },
+      {
+        "type": "click",
+        "point": [
+          0.497919811325,
+          0.4497060302
+        ],
+        "label": "전투 이어하기",
+        "settleMs": 1500
+      },
+      {
+        "type": "checkpoint",
+        "name": "continued-quest-battle",
+        "expected": "Actual same savedhand/deck44/phase and validcollectionticket restored."
+      },
+      {
+        "type": "audio",
+        "label": "continued-battle"
+      }
+    ],
+    "coordinateContract": {
+      "inputSpace": "full-dom-canvas-normalized",
+      "sourceSpace": "centered-4:3-client",
+      "clientReference": [
+        1440,
+        1080
+      ],
+      "shippingCanvasAspect": "16:9",
+      "clientToCanvas": {
+        "xOffset": 0.125,
+        "xScale": 0.75,
+        "yOffset": 0,
+        "yScale": 1
+      },
+      "mappingAppliedOnce": true,
+      "method": "Authored source coordinates only. The unchanged point() method adds the current measured DOM canvas bounds; browser-window letterboxing is not added here."
+    }
+  }
+}

@@ -80,3 +80,36 @@ Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelMotionLayers.cs.meta 
 Games/PathOfDawn/Assets/Resources/Art/GospelMotion.meta -whitespace
 Games/PathOfDawn/Assets/Resources/Art/GospelMotion/**/*.meta -whitespace
 Games/PathOfDawn/Assets/SmokeTests/GospelCharacterMotionSmokeTests.cs.meta -whitespace
+
+# Exact NPR source models and lighting retain binary bytes through Git LFS.
+Tools/Art/GospelNpr/Source/Characters/*.vrm filter=lfs diff=lfs merge=lfs -text
+Tools/Art/GospelNpr/Source/Lighting/*.hdr filter=lfs diff=lfs merge=lfs -text
+Games/PathOfDawn/Assets/Resources/Art/GospelNpr/Lighting/*.hdr filter=lfs diff=lfs merge=lfs -text
+
+# Preserve fetched license originals and verified Unity NPR serialization bytes.
+Tools/Art/GospelNpr/Provenance/** -text -whitespace
+Games/PathOfDawn/Assets/Editor/GospelNpr*.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelNprSource/**.meta -whitespace
+Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelNpr*.meta -whitespace
+Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/Shaders.meta -whitespace
+Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/Shaders/**.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelNpr.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelNpr/** -whitespace
+Games/PathOfDawn/Assets/SmokeTests/GospelNpr*.meta -whitespace
+
+# Keep executed helper byte pins, including their final blank line; check other whitespace.
+Tools/Art/GospelNpr/preview_web.py whitespace=-blank-at-eof
+Tools/Art/GospelNpr/validate_lifecycle.sh whitespace=-blank-at-eof
+Tools/Validation/GospelNpr/contract.py whitespace=-blank-at-eof
+Tools/Validation/GospelNpr/root-review-helper-proposal.py whitespace=-blank-at-eof
+Tools/Validation/GospelNpr/run-owned-command-proposal.py whitespace=-blank-at-eof
+Tools/Validation/GospelNpr/test_contract_and_baseline.py whitespace=-blank-at-eof
+Tools/Validation/GospelNpr/test_scope_admission.py whitespace=-blank-at-eof
+Tools/Validation/LivingRpgClassic/profile.py whitespace=-blank-at-eof
+Tools/Validation/canon_release_evidence.py whitespace=-blank-at-eof
+Tools/Validation/nativity-web-smoke.py whitespace=-blank-at-eof
+Tools/Validation/run-canon-browser.py whitespace=-blank-at-eof
+Tools/Validation/run-canon-native.py whitespace=-blank-at-eof
+Tools/Validation/run-canon-web.py whitespace=-blank-at-eof
+Tools/Web/release_contract.py whitespace=-blank-at-eof
+Tools/Web/stage-gospel-npr.py whitespace=-blank-at-eof

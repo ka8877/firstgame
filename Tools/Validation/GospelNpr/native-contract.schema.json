@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPR Native exact authored15 source-selection contract; no execution result",
+  "type": "object",
+  "required": [
+    "schema",
+    "game",
+    "profile",
+    "revision",
+    "sourceStatus",
+    "count",
+    "newCaseCount",
+    "retainedCurrentSourceCaseCount",
+    "fullnames",
+    "sourceFiles",
+    "scope"
+  ],
+  "properties": {
+    "schema": {
+      "const": 2
+    },
+    "game": {
+      "const": "PathOfDawn"
+    },
+    "profile": {
+      "const": "gospel-npr"
+    },
+    "revision": {
+      "const": "gospel-npr-2026-11-11"
+    },
+    "sourceStatus": {
+      "enum": [
+        "authored-awaiting-root-selection",
+        "frozen"
+      ]
+    },
+    "count": {
+      "const": 15
+    },
+    "newCaseCount": {
+      "const": 9
+    },
+    "retainedCurrentSourceCaseCount": {
+      "const": 6
+    },
+    "fullnames": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^PathOfDawn(?:\\.[A-Za-z_][A-Za-z0-9_]*){2,}$"
+      }
+    },
+    "sourceFiles": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "file",
+        "bytes",
+        "sha256",
+        "fullnames"
+      ],
+      "properties": {
+        "file": {
+          "enum": [
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNprSmokeTests.cs",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNprSmokeTests.cs.meta",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityAudioSmokeTests.cs",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityAudioSmokeTests.cs.meta",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityMovementAudioSmokeTests.cs",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityMovementAudioSmokeTests.cs.meta",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityStorySmokeTests.cs",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelNativityStorySmokeTests.cs.meta",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelScriptureReadingSmokeTests.cs",
+            "Games/PathOfDawn/Assets/SmokeTests/GospelScriptureReadingSmokeTests.cs.meta"
+          ]
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "fullnames": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^PathOfDawn(?:\\.[A-Za-z_][A-Za-z0-9_]*){2,}$"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
