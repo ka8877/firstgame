@@ -832,5 +832,33 @@ class LivingDecodedPregestureRangesTests(LivingRevisionMixin, CanonDecodedPreges
     pass
 
 
+class ClientMotionRevisionMixin:
+    """Retain every original case and predicate for this exact new revision."""
+    def prove(self, case):
+        translated = copy.deepcopy(case)
+        if translated.get('revision') == 'fm-canon-2026-11-09':
+            translated['revision'] = 'fm-client-match-2026-11-11'
+        before = copy.deepcopy(translated)
+        result = super().prove(translated)
+        self.assertEqual(translated, before)
+        return result
+
+
+class ClientMotionPublicReloadRangesTests(ClientMotionRevisionMixin, CanonPublicReloadRangesTests):
+    pass
+
+
+class ClientMotionInitialPublicReloadRangesTests(ClientMotionRevisionMixin, CanonInitialPublicReloadRangesTests):
+    pass
+
+
+class ClientMotionPendingSelectionRangesTests(ClientMotionRevisionMixin, CanonPendingSelectionRangesTests):
+    pass
+
+
+class ClientMotionDecodedPregestureRangesTests(ClientMotionRevisionMixin, CanonDecodedPregestureRangesTests):
+    pass
+
+
 if __name__ == '__main__':
     unittest.main()

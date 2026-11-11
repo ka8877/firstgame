@@ -61,7 +61,13 @@ namespace FantasyCards.Presentation
             {
                 float x = .045f + i * .117f;
                 var action = actions[i];
-                RestorationButton(root, names[i], x, .045f, x + .109f, .125f, () => { questNotice = ""; action(); });
+                var button = RestorationButton(root, names[i], x, .045f, x + .109f, .125f, () => { questNotice = ""; action(); });
+                var skin = AddClassicSkin(button.transform, true);
+                if (skin != null)
+                {
+                    button.GetComponent<UiRoundedImage>().color = Color.clear;
+                    button.targetGraphic = skin;
+                }
             }
         }
 

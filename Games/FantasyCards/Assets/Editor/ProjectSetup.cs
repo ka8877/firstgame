@@ -132,6 +132,7 @@ namespace FirstGame.Editor
             EditorUtility.SetDirty(regular); EditorUtility.SetDirty(display);
             TMP_Settings.defaultFontAsset = regular;
             EditorUtility.SetDirty(TMP_Settings.instance);
+            ClassicPixelFontSetup.Ensure();
             return regular;
         }
 

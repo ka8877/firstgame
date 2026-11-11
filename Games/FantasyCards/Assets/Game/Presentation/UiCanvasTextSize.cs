@@ -14,6 +14,10 @@ namespace FantasyCards.Presentation
         bool physicalFloor, singleLine, boundedCardText;
         Vector2 lastCanvas = new Vector2(-1, -1), lastBox = new Vector2(-1, -1);
 
+        public static float ClientPixelScale(Canvas value) => Mathf.Min(
+            Mathf.Max(1, value.pixelRect.width) / 1440f,
+            Mathf.Max(1, value.pixelRect.height) / 1080f);
+
         public void Configure(float size, bool keepPhysicalFloor = false, bool oneLine = false)
         {
             authoredSize = size; physicalFloor = keepPhysicalFloor; singleLine = oneLine;
@@ -38,9 +42,9 @@ namespace FantasyCards.Presentation
             var pixels = canvas.pixelRect.size; var box = label.rectTransform.rect.size;
             if (pixels == lastCanvas && box == lastBox) return;
             lastCanvas = pixels; lastBox = box;
-            // This is the same geometric-average scale as the app's .5
-            // CanvasScaler. It is valid before CanvasScaler's next update.
-            float scale = Mathf.Sqrt(Mathf.Max(1, pixels.x) / 1920f * Mathf.Max(1, pixels.y) / 1080f);
+            // Text scales with the contained 4:3 client, including pillarbox
+            // layouts, rather than with the outer browser canvas.
+            float scale = ClientPixelScale(canvas);
             bool small = pixels.y < 600 && (pixels.x < 1400 || pixels.x / Mathf.Max(1, pixels.y) > 1.95f);
             float floor = physicalFloor || small ? 12 / scale : 0;
             float maximum = small ? Mathf.Max(authoredSize, 13 / scale) : authoredSize;

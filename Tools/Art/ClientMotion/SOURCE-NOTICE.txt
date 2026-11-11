@@ -1,0 +1,44 @@
+ClientMotion source components — 2026-11-11
+
+Fantasy Cards / Fantasy Masters client reference art
+The native entry painting and unwritten window/button ornaments are sampled
+from an actual Ver5.73 client capture in2011-08-03 renewal coverage:
+http://imgnews.naver.net/image/5053/2011/08/03/20110803161338_3c81e997.jpg
+Independent primary renewal coverage: https://www.ggemguide.com/news/143073/
+The2017 client barmaid portrait and unwritten frame/button ornament strips
+come from the dated live-video frame documented in:
+ Docs/Research/FmChronicleSources.md
+ Tools/Research/ClientMotion/selected-late-client-interface-art.json
+The source PNG/JPEG bytes are unchanged; live controls are rebuilt in Unity.
+Captured credentials, names, chat, room controls, rating badge, version and
+cursor are not presented as live UI. Small painting omissions use runtime UV
+composition; no claim is made that the resulting artwork is a clean original
+painting. Identical2014–18 login art and a late native shop are not established.
+Original artwork/copyright remains with its respective owners. Rights-holder
+redistribution permission is not established; no ownership or license clearance
+is claimed. These are reference fragments for the requested reconstruction.
+Detailed source identity, exact SHA256 and era limitations are preserved in:
+ Tools/Research/ClientMotion/selected-native-entry-art.json
+ Tools/Research/ClientMotion/selected-late-client-interface-art.json
+
+Galmuri11 bitmap UI font
+Galmuri11 v2.40.4 is an independently licensed SIL OFL1.1 alternative, not a
+claim about the original game's font. Exact source TTF remains unchanged under
+Games/FantasyCards/Assets/Editor/Fonts; only the generated static bitmap atlas
+is needed by the player. See the accompanying ClientMotion-FONT-NOTICE.txt for
+copyright, immutable source identity and the full SIL Open Font License.
+
+Gospel neutral characters
+The selected neutral character family consists of direct Blender renders of
+CC-BY3.0 HD human models by Clint Bellanger, with project-authored materials,
+child proportions, facial/hair/garment details and separate idle/walk/run poses.
+See the accompanying Neutral-Characters-SOURCE-NOTICE.txt and modern Flare
+CREDITS/LICENSE documents for the exact model paths, attribution, source URLs
+and adaptation terms. The original Flare engine/gameplay code is not included.
+The earlier combat-stance PNG layers are preserved as development history;
+LegacyResourceIsolation excludes those layers from the selected neutral Web
+build and restores their exact bytes/GUIDs after building. Their original
+notice remains in Tools/Art/ClientMotion/History/SOURCE-NOTICE-FlareLayers-v1.txt.
+
+This notice records source/provenance, not a visual approval, full original
+parity claim, Native/Web pass, or a claim that an unverified build is deployed.

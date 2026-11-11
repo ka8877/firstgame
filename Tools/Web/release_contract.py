@@ -135,8 +135,19 @@ LIVING_CLASSIC = {
     'currentTargets': ['Web']
 }
 
+CLIENT_MOTION = {
+    'name': 'client-motion',
+    'revisions': {'FantasyCards': 'fm-client-match-2026-11-11', 'PathOfDawn': 'gospel-character-motion-2026-11-11'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/ClientMotion-2026-11-11' for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'client-motion':
+        return CLIENT_MOTION
     if name == 'living-classic':
         return LIVING_CLASSIC
     if name == 'canon-art':

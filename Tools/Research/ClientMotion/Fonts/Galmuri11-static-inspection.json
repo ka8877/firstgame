@@ -1,0 +1,647 @@
+{
+  "createdUtc": "2026-11-11T02:04:17.362037+00:00",
+  "scope": "Static TTF table and cmap inspection only. No rendering, installation, conversion, tests, Unity import or product changes.",
+  "library": "fontTools 4.61.1",
+  "releaseTag": "v2.40.4",
+  "releaseCommit": "bdb86ae89466a361eb8df861222736b81ff975ef",
+  "initialInspectionFailure": "fontTools name.toUnicode() raised UnicodeDecodeError for a legacy Macintosh Korean name record. Resumed static analysis retains each per-record decode error while reading supported Unicode name/cmap records. No font bytes were changed.",
+  "fonts": [
+    {
+      "file": "Tools/Research/ClientMotion/Fonts/Galmuri11-v2.40.4.ttf",
+      "bytes": 5376428,
+      "sha256": "2c709890595668f7bdb6df408420fda957dde0288e95b31a1cc17a2ab98b4b4f",
+      "gitBlobSha1": "838b431b201bb80569c5f43a6836cf08627ca7a6",
+      "officialReleaseDistBlobSha1": "838b431b201bb80569c5f43a6836cf08627ca7a6",
+      "sfntVersionHex": "00010000",
+      "tables": [
+        "GlyphOrder",
+        "head",
+        "hhea",
+        "maxp",
+        "OS/2",
+        "hmtx",
+        "cmap",
+        "loca",
+        "glyf",
+        "name",
+        "post",
+        "GPOS",
+        "GSUB"
+      ],
+      "names": {
+        "0": [
+          "Copyright (c) 2019-2025 Lee Minseo (quiple@quiple.dev)"
+        ],
+        "1": [
+          "Galmuri11 Regular"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "3": [
+          "2.403;QPLE;Galmuri11-Regular"
+        ],
+        "4": [
+          "Galmuri11 Regular"
+        ],
+        "5": [
+          "Version 2.403;hotconv 1.1.1;makeotfexe 2.6.0 DEVELOPMENT"
+        ],
+        "6": [
+          "Galmuri11-Regular"
+        ],
+        "8": [],
+        "9": [
+          "Lee Minseo (quiple)",
+          "이민서 (quiple)"
+        ],
+        "11": [
+          "https://quiple.dev"
+        ],
+        "13": [
+          "This font software is licensed under the SIL Open Font License 1.1.",
+          "이 폰트 소프트웨어는 SIL 오픈 폰트 라이선스 1.1에 따라 사용이 허가됩니다."
+        ],
+        "14": [
+          "https://openfontlicense.org"
+        ]
+      },
+      "nameDecodeErrors": [
+        {
+          "nameId": 9,
+          "platformId": 1,
+          "encodingId": 3,
+          "languageId": 23,
+          "error": "'x_mac_korean_ttx' codec can't decode byte 0xc7 in position 0: illegal multibyte sequence",
+          "rawHex": "c73734bb6663c131632028717569706c6529"
+        },
+        {
+          "nameId": 13,
+          "platformId": 1,
+          "encodingId": 3,
+          "languageId": 23,
+          "error": "'x_mac_korean_ttx' codec can't decode byte 0xc7 in position 0: illegal multibyte sequence",
+          "rawHex": "c7373420d36630d2623820c13863d53034d26238c66538c56234b239342053494c20c63234d5303820d36630d2623820b73763c73734c13230c2613420312e31c5643020b53330b7376320c06163c66139c7373420d56338ac3030b43239b26338b265342e"
+        }
+      ],
+      "unitsPerEm": 1200,
+      "numGlyphs": 20968,
+      "bestCmapCodepoints": 20965,
+      "cmapSubtables": [
+        {
+          "platformId": 0,
+          "encodingId": 3,
+          "format": 4,
+          "language": 0,
+          "codepointCount": 20965
+        },
+        {
+          "platformId": 1,
+          "encodingId": 0,
+          "format": 6,
+          "language": 0,
+          "codepointCount": 223
+        },
+        {
+          "platformId": 3,
+          "encodingId": 1,
+          "format": 4,
+          "language": 0,
+          "codepointCount": 20965
+        }
+      ],
+      "modernHangulSyllables": {
+        "range": "U+AC00-U+D7A3",
+        "expectedCount": 11172,
+        "mappedCount": 11172
+      },
+      "hangulCompatibilityJamo": {
+        "range": "U+3131-U+318E",
+        "expectedCount": 94,
+        "mappedCount": 94
+      },
+      "modernJamo": {
+        "range": "U+1100-U+1112,U+1161-U+1175,U+11A8-U+11C2",
+        "expectedCount": 67,
+        "mappedCount": 0
+      },
+      "sampleGlyphs": {
+        "가": {
+          "codepoint": "U+AC00",
+          "glyph": "uniAC00"
+        },
+        "힣": {
+          "codepoint": "U+D7A3",
+          "glyph": "uniD7A3"
+        },
+        "한": {
+          "codepoint": "U+D55C",
+          "glyph": "uniD55C"
+        },
+        "글": {
+          "codepoint": "U+AE00",
+          "glyph": "uniAE00"
+        },
+        "게": {
+          "codepoint": "U+AC8C",
+          "glyph": "uniAC8C"
+        },
+        "임": {
+          "codepoint": "U+C784",
+          "glyph": "uniC784"
+        },
+        "접": {
+          "codepoint": "U+C811",
+          "glyph": "uniC811"
+        },
+        "속": {
+          "codepoint": "U+C18D",
+          "glyph": "uniC18D"
+        },
+        "아": {
+          "codepoint": "U+C544",
+          "glyph": "uniC544"
+        },
+        "이": {
+          "codepoint": "U+C774",
+          "glyph": "uniC774"
+        },
+        "디": {
+          "codepoint": "U+B514",
+          "glyph": "uniB514"
+        },
+        "비": {
+          "codepoint": "U+BE44",
+          "glyph": "uniBE44"
+        },
+        "밀": {
+          "codepoint": "U+BC00",
+          "glyph": "uniBC00"
+        },
+        "번": {
+          "codepoint": "U+BC88",
+          "glyph": "uniBC88"
+        },
+        "호": {
+          "codepoint": "U+D638",
+          "glyph": "uniD638"
+        },
+        "인": {
+          "codepoint": "U+C778",
+          "glyph": "uniC778"
+        },
+        "증": {
+          "codepoint": "U+C99D",
+          "glyph": "uniC99D"
+        },
+        "덱": {
+          "codepoint": "U+B371",
+          "glyph": "uniB371"
+        },
+        "에": {
+          "codepoint": "U+C5D0",
+          "glyph": "uniC5D0"
+        },
+        "터": {
+          "codepoint": "U+D130",
+          "glyph": "uniD130"
+        },
+        "상": {
+          "codepoint": "U+C0C1",
+          "glyph": "uniC0C1"
+        },
+        "점": {
+          "codepoint": "U+C810",
+          "glyph": "uniC810"
+        },
+        "내": {
+          "codepoint": "U+B0B4",
+          "glyph": "uniB0B4"
+        },
+        "정": {
+          "codepoint": "U+C815",
+          "glyph": "uniC815"
+        },
+        "보": {
+          "codepoint": "U+BCF4",
+          "glyph": "uniBCF4"
+        },
+        "저": {
+          "codepoint": "U+C800",
+          "glyph": "uniC800"
+        },
+        "장": {
+          "codepoint": "U+C7A5",
+          "glyph": "uniC7A5"
+        },
+        "취": {
+          "codepoint": "U+CDE8",
+          "glyph": "uniCDE8"
+        },
+        "소": {
+          "codepoint": "U+C18C",
+          "glyph": "uniC18C"
+        },
+        "멀": {
+          "codepoint": "U+BA40",
+          "glyph": "uniBA40"
+        },
+        "플": {
+          "codepoint": "U+D50C",
+          "glyph": "uniD50C"
+        },
+        "레": {
+          "codepoint": "U+B808",
+          "glyph": "uniB808"
+        },
+        "업": {
+          "codepoint": "U+C5C5",
+          "glyph": "uniC5C5"
+        },
+        "데": {
+          "codepoint": "U+B370",
+          "glyph": "uniB370"
+        },
+        "트": {
+          "codepoint": "U+D2B8",
+          "glyph": "uniD2B8"
+        },
+        "예": {
+          "codepoint": "U+C608",
+          "glyph": "uniC608"
+        },
+        "A": {
+          "codepoint": "U+0041",
+          "glyph": "A"
+        },
+        "P": {
+          "codepoint": "U+0050",
+          "glyph": "P"
+        },
+        "D": {
+          "codepoint": "U+0044",
+          "glyph": "D"
+        },
+        "H": {
+          "codepoint": "U+0048",
+          "glyph": "H"
+        },
+        "L": {
+          "codepoint": "U+004C",
+          "glyph": "L"
+        },
+        "1": {
+          "codepoint": "U+0031",
+          "glyph": "one"
+        },
+        "2": {
+          "codepoint": "U+0032",
+          "glyph": "two"
+        },
+        "3": {
+          "codepoint": "U+0033",
+          "glyph": "three"
+        },
+        "5": {
+          "codepoint": "U+0035",
+          "glyph": "five"
+        },
+        "0": {
+          "codepoint": "U+0030",
+          "glyph": "zero"
+        },
+        "%": {
+          "codepoint": "U+0025",
+          "glyph": "percent"
+        },
+        "Ⅰ": {
+          "codepoint": "U+2160",
+          "glyph": "uni2160"
+        },
+        "Ⅱ": {
+          "codepoint": "U+2161",
+          "glyph": "uni2161"
+        },
+        "Ⅲ": {
+          "codepoint": "U+2162",
+          "glyph": "uni2162"
+        },
+        "Ⅳ": {
+          "codepoint": "U+2163",
+          "glyph": "uni2163"
+        },
+        "Ⅴ": {
+          "codepoint": "U+2164",
+          "glyph": "uni2164"
+        }
+      }
+    },
+    {
+      "file": "Tools/Research/ClientMotion/Fonts/Galmuri11Bitmap-Regular-2.40.3.ttf",
+      "bytes": 783424,
+      "sha256": "14fecc36295eee357809540469c8554b32cc070680e1957c214531d317cbef11",
+      "gitBlobSha1": "815612ed66e5157b1ff29c16b99ca9d48041196f",
+      "officialReleaseDistBlobSha1": "815612ed66e5157b1ff29c16b99ca9d48041196f",
+      "sfntVersionHex": "00010000",
+      "tables": [
+        "GlyphOrder",
+        "head",
+        "hhea",
+        "maxp",
+        "OS/2",
+        "hmtx",
+        "cmap",
+        "cvt ",
+        "loca",
+        "glyf",
+        "name",
+        "post",
+        "gasp",
+        "BDF ",
+        "EBDT",
+        "EBLC",
+        "FFTM"
+      ],
+      "names": {
+        "0": [
+          "Copyright (c) 2019–2025 Lee Minseo (quiple@quiple.dev)"
+        ],
+        "1": [
+          "Galmuri11Bitmap"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "3": [
+          "FontForge 2.0 : Galmuri11Bitmap Regular : 13-8-2025"
+        ],
+        "4": [
+          "Galmuri11Bitmap Regular"
+        ],
+        "5": [
+          "Version 2.40.3"
+        ],
+        "6": [
+          "Galmuri11Bitmap-Regular"
+        ],
+        "8": [],
+        "9": [],
+        "11": [],
+        "13": [],
+        "14": []
+      },
+      "nameDecodeErrors": [],
+      "unitsPerEm": 1000,
+      "numGlyphs": 20968,
+      "bestCmapCodepoints": 20965,
+      "cmapSubtables": [
+        {
+          "platformId": 0,
+          "encodingId": 3,
+          "format": 4,
+          "language": 0,
+          "codepointCount": 20965
+        },
+        {
+          "platformId": 1,
+          "encodingId": 0,
+          "format": 6,
+          "language": 0,
+          "codepointCount": 226
+        },
+        {
+          "platformId": 3,
+          "encodingId": 1,
+          "format": 4,
+          "language": 0,
+          "codepointCount": 20965
+        }
+      ],
+      "modernHangulSyllables": {
+        "range": "U+AC00-U+D7A3",
+        "expectedCount": 11172,
+        "mappedCount": 11172
+      },
+      "hangulCompatibilityJamo": {
+        "range": "U+3131-U+318E",
+        "expectedCount": 94,
+        "mappedCount": 94
+      },
+      "modernJamo": {
+        "range": "U+1100-U+1112,U+1161-U+1175,U+11A8-U+11C2",
+        "expectedCount": 67,
+        "mappedCount": 0
+      },
+      "sampleGlyphs": {
+        "가": {
+          "codepoint": "U+AC00",
+          "glyph": "U+AC00"
+        },
+        "힣": {
+          "codepoint": "U+D7A3",
+          "glyph": "U+D7A3"
+        },
+        "한": {
+          "codepoint": "U+D55C",
+          "glyph": "U+D55C"
+        },
+        "글": {
+          "codepoint": "U+AE00",
+          "glyph": "U+AE00"
+        },
+        "게": {
+          "codepoint": "U+AC8C",
+          "glyph": "U+AC8C"
+        },
+        "임": {
+          "codepoint": "U+C784",
+          "glyph": "U+C784"
+        },
+        "접": {
+          "codepoint": "U+C811",
+          "glyph": "U+C811"
+        },
+        "속": {
+          "codepoint": "U+C18D",
+          "glyph": "U+C18D"
+        },
+        "아": {
+          "codepoint": "U+C544",
+          "glyph": "U+C544"
+        },
+        "이": {
+          "codepoint": "U+C774",
+          "glyph": "U+C774"
+        },
+        "디": {
+          "codepoint": "U+B514",
+          "glyph": "U+B514"
+        },
+        "비": {
+          "codepoint": "U+BE44",
+          "glyph": "U+BE44"
+        },
+        "밀": {
+          "codepoint": "U+BC00",
+          "glyph": "U+BC00"
+        },
+        "번": {
+          "codepoint": "U+BC88",
+          "glyph": "U+BC88"
+        },
+        "호": {
+          "codepoint": "U+D638",
+          "glyph": "U+D638"
+        },
+        "인": {
+          "codepoint": "U+C778",
+          "glyph": "U+C778"
+        },
+        "증": {
+          "codepoint": "U+C99D",
+          "glyph": "U+C99D"
+        },
+        "덱": {
+          "codepoint": "U+B371",
+          "glyph": "U+B371"
+        },
+        "에": {
+          "codepoint": "U+C5D0",
+          "glyph": "U+C5D0"
+        },
+        "터": {
+          "codepoint": "U+D130",
+          "glyph": "U+D130"
+        },
+        "상": {
+          "codepoint": "U+C0C1",
+          "glyph": "U+C0C1"
+        },
+        "점": {
+          "codepoint": "U+C810",
+          "glyph": "U+C810"
+        },
+        "내": {
+          "codepoint": "U+B0B4",
+          "glyph": "U+B0B4"
+        },
+        "정": {
+          "codepoint": "U+C815",
+          "glyph": "U+C815"
+        },
+        "보": {
+          "codepoint": "U+BCF4",
+          "glyph": "U+BCF4"
+        },
+        "저": {
+          "codepoint": "U+C800",
+          "glyph": "U+C800"
+        },
+        "장": {
+          "codepoint": "U+C7A5",
+          "glyph": "U+C7A5"
+        },
+        "취": {
+          "codepoint": "U+CDE8",
+          "glyph": "U+CDE8"
+        },
+        "소": {
+          "codepoint": "U+C18C",
+          "glyph": "U+C18C"
+        },
+        "멀": {
+          "codepoint": "U+BA40",
+          "glyph": "U+BA40"
+        },
+        "플": {
+          "codepoint": "U+D50C",
+          "glyph": "U+D50C"
+        },
+        "레": {
+          "codepoint": "U+B808",
+          "glyph": "U+B808"
+        },
+        "업": {
+          "codepoint": "U+C5C5",
+          "glyph": "U+C5C5"
+        },
+        "데": {
+          "codepoint": "U+B370",
+          "glyph": "U+B370"
+        },
+        "트": {
+          "codepoint": "U+D2B8",
+          "glyph": "U+D2B8"
+        },
+        "예": {
+          "codepoint": "U+C608",
+          "glyph": "U+C608"
+        },
+        "A": {
+          "codepoint": "U+0041",
+          "glyph": "U+0041"
+        },
+        "P": {
+          "codepoint": "U+0050",
+          "glyph": "U+0050"
+        },
+        "D": {
+          "codepoint": "U+0044",
+          "glyph": "U+0044"
+        },
+        "H": {
+          "codepoint": "U+0048",
+          "glyph": "U+0048"
+        },
+        "L": {
+          "codepoint": "U+004C",
+          "glyph": "U+004C"
+        },
+        "1": {
+          "codepoint": "U+0031",
+          "glyph": "U+0031"
+        },
+        "2": {
+          "codepoint": "U+0032",
+          "glyph": "U+0032"
+        },
+        "3": {
+          "codepoint": "U+0033",
+          "glyph": "U+0033"
+        },
+        "5": {
+          "codepoint": "U+0035",
+          "glyph": "U+0035"
+        },
+        "0": {
+          "codepoint": "U+0030",
+          "glyph": "U+0030"
+        },
+        "%": {
+          "codepoint": "U+0025",
+          "glyph": "U+0025"
+        },
+        "Ⅰ": {
+          "codepoint": "U+2160",
+          "glyph": "U+2160"
+        },
+        "Ⅱ": {
+          "codepoint": "U+2161",
+          "glyph": "U+2161"
+        },
+        "Ⅲ": {
+          "codepoint": "U+2162",
+          "glyph": "U+2162"
+        },
+        "Ⅳ": {
+          "codepoint": "U+2163",
+          "glyph": "U+2163"
+        },
+        "Ⅴ": {
+          "codepoint": "U+2164",
+          "glyph": "U+2164"
+        }
+      }
+    }
+  ]
+}

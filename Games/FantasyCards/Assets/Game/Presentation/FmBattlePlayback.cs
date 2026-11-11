@@ -387,7 +387,7 @@ namespace FantasyCards.Presentation
             float slot = .81f / Mathf.Max(1, BattleDisplayState.rules.terrainLimit);
             return new Vector2(.025f + .78f * (.18f + slot * (Mathf.Clamp(index, 0, BattleDisplayState.rules.terrainLimit - 1) + .5f)), owner == 0 ? .3215f : .957f);
         }
-        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .025f + (.78f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, RestageLaneCenterY(owner));
+        private Vector2 LaneCenter(int owner, int lane) => new Vector2(lane >= 0 ? .085f + (.67f / engine.State.rules.unitLanes) * (lane + .5f) : .42f, RestageLaneCenterY(owner));
         private Vector2 DeckCenter(int owner)
         {
             bool small = canvas.pixelRect.height < 600 && canvas.pixelRect.width < 900;

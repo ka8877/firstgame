@@ -60,13 +60,21 @@ namespace FantasyCards.Presentation
             if (authored.Length > 0) CardCatalog.ApplyAuthoredDefinitions(authored.Select(asset => asset.ToDefinition()));
             foreach (var asset in authored) if (asset.illustration != null) authoredIllustrations[asset.stableId] = asset.illustration;
             var ruleAsset = Resources.Load<RuleSetAsset>("Data/Rules"); authoredRules = ruleAsset != null ? ruleAsset.CreateRuntimeRules() : new RuleSet();
-            font = Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset;
+            font = Resources.Load<TMP_FontAsset>("Fonts/ClassicPixel") ?? Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset;
             // Bundled instrumental playback is supplied by the cross-platform music bridge.
             music = null; InitializeOriginalMusic();
             var c = new GameObject("Fantasy Masters Client", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvas = c.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 10;
             var scaler = c.GetComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1920, 1080); scaler.matchWidthOrHeight = .5f;
-            root = c.GetComponent<RectTransform>();
+            // The retained FM1 client is a 640:480 window. Keep that geometry
+            // at every browser size instead of widening its panels to 16:9.
+            var matte = new GameObject("Classic client outer matte", typeof(RectTransform), typeof(Image));
+            matte.transform.SetParent(c.transform, false); Anchor((RectTransform)matte.transform, 0, 0, 1, 1);
+            matte.GetComponent<Image>().color = Color.black; matte.GetComponent<Image>().raycastTarget = false;
+            root = new GameObject("Classic 4 by 3 client viewport", typeof(RectTransform)).GetComponent<RectTransform>();
+            root.SetParent(c.transform, false); root.anchorMin = root.anchorMax = root.pivot = new Vector2(.5f, .5f);
+            root.sizeDelta = new Vector2(1440, 1080); root.anchoredPosition = Vector2.zero;
+            Canvas.ForceUpdateCanvases(); UpdateClassicViewport();
             if (FindFirstObjectByType<EventSystem>() == null) new GameObject("UI Input", typeof(EventSystem), typeof(InputSystemUIInputModule));
             audioSource = gameObject.AddComponent<AudioSource>(); audioSource.playOnAwake = false; audioSource.volume = .24f;
             coinSound = MakeTone(960f, .13f); playSound = MakeTone(260f, .15f);
@@ -76,6 +84,7 @@ namespace FantasyCards.Presentation
         }
         private void Update()
         {
+            UpdateClassicViewport();
             if (musicVolumeLabel != null && Time.unscaledTime >= nextMusicSettingsRefresh)
             {
                 nextMusicSettingsRefresh = Time.unscaledTime + .2f;
@@ -91,6 +100,12 @@ namespace FantasyCards.Presentation
             {
                 HandlePolishBack();
             }
+        }
+        private void UpdateClassicViewport()
+        {
+            if (canvas == null || root == null) return;
+            float scale = UiCanvasTextSize.ClientPixelScale(canvas) / Mathf.Max(.0001f, canvas.scaleFactor);
+            root.localScale = new Vector3(scale, scale, 1);
         }
         private void Clear()
         {
@@ -376,11 +391,10 @@ namespace FantasyCards.Presentation
         {
             float authoredSize = size;
             var go = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI)); var rt = go.GetComponent<RectTransform>(); rt.SetParent(parent, false); Anchor(rt, x0, y0, x1, y1);
-            float scale = Mathf.Sqrt(Mathf.Max(1, canvas.pixelRect.width) / 1920f * Mathf.Max(1, canvas.pixelRect.height) / 1080f);
+            float scale = UiCanvasTextSize.ClientPixelScale(canvas);
             bool small = Compact && canvas.pixelRect.height < 600;
-            bool heading = size >= 34; // Font role follows authored hierarchy, not the mobile pixel floor.
             if (small) size = Mathf.Max(size, 13f / scale);
-            var text = go.GetComponent<TextMeshProUGUI>(); text.font = heading ? Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font : font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.fontStyle = FontStyles.Normal; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Truncate;
+            var text = go.GetComponent<TextMeshProUGUI>(); text.font = font; text.text = value; text.fontSize = size; text.color = color; text.alignment = alignment; text.fontStyle = FontStyles.Normal; text.raycastTarget = false; text.enableAutoSizing = true; text.fontSizeMin = small ? Mathf.Max(size * .8f, 12f / scale) : size * .8f; text.fontSizeMax = size; text.overflowMode = TextOverflowModes.Truncate;
             go.AddComponent<UiCanvasTextSize>().Configure(authoredSize);
             return text;
         }
@@ -400,7 +414,7 @@ namespace FantasyCards.Presentation
             FmBattleAudio.AttachHover(panel.gameObject);
             var hover = panel.gameObject.AddComponent<UiCardHover>(); hover.HoverScale = 1.008f; hover.HoverLift = 0;
             var text = Text(panel, label, .04f, .07f, .96f, .93f, size, color == gold || color == teal ? ink : ivory, TextAlignmentOptions.Center);
-            text.font = Resources.Load<TMP_FontAsset>("Fonts/Display") ?? font;
+            text.font = font;
             text.textWrappingMode = TextWrappingModes.NoWrap;
             BindTooltip(panel.gameObject, label, ButtonHelp(label));
             return b;

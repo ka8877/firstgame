@@ -1,0 +1,113 @@
+{
+  "sha": "af6eee6d339ac98011864bfe89da837fe7769c28",
+  "node_id": "C_kwDOAFk6E9oAKGFmNmVlZTZkMzM5YWM5ODAxMTg2NGJmZTg5ZGE4MzdmZTc3NjljMjg",
+  "commit": {
+    "author": {
+      "name": "Justin Jacobs",
+      "email": "jajdorkster@gmail.com",
+      "date": "2026-08-08T01:11:16Z"
+    },
+    "committer": {
+      "name": "Justin Jacobs",
+      "email": "jajdorkster@gmail.com",
+      "date": "2026-08-08T01:11:16Z"
+    },
+    "message": "fantasycore: Add soundfx_close to stash menu",
+    "tree": {
+      "sha": "1bd5f8243169a752e90d9e5ca8cfd51341d5a414",
+      "url": "https://api.github.com/repos/flareteam/flare-game/git/trees/1bd5f8243169a752e90d9e5ca8cfd51341d5a414"
+    },
+    "url": "https://api.github.com/repos/flareteam/flare-game/git/commits/af6eee6d339ac98011864bfe89da837fe7769c28",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/flareteam/flare-game/commits/af6eee6d339ac98011864bfe89da837fe7769c28",
+  "html_url": "https://github.com/flareteam/flare-game/commit/af6eee6d339ac98011864bfe89da837fe7769c28",
+  "comments_url": "https://api.github.com/repos/flareteam/flare-game/commits/af6eee6d339ac98011864bfe89da837fe7769c28/comments",
+  "author": {
+    "login": "dorkster",
+    "id": 913982,
+    "node_id": "MDQ6VXNlcjkxMzk4Mg==",
+    "avatar_url": "https://avatars.githubusercontent.com/u/913982?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dorkster",
+    "html_url": "https://github.com/dorkster",
+    "followers_url": "https://api.github.com/users/dorkster/followers",
+    "following_url": "https://api.github.com/users/dorkster/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dorkster/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dorkster/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dorkster/subscriptions",
+    "organizations_url": "https://api.github.com/users/dorkster/orgs",
+    "repos_url": "https://api.github.com/users/dorkster/repos",
+    "events_url": "https://api.github.com/users/dorkster/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dorkster/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "dorkster",
+    "id": 913982,
+    "node_id": "MDQ6VXNlcjkxMzk4Mg==",
+    "avatar_url": "https://avatars.githubusercontent.com/u/913982?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dorkster",
+    "html_url": "https://github.com/dorkster",
+    "followers_url": "https://api.github.com/users/dorkster/followers",
+    "following_url": "https://api.github.com/users/dorkster/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dorkster/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dorkster/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dorkster/subscriptions",
+    "organizations_url": "https://api.github.com/users/dorkster/orgs",
+    "repos_url": "https://api.github.com/users/dorkster/repos",
+    "events_url": "https://api.github.com/users/dorkster/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dorkster/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "0133bb5985ba1575407d496e0c444a9b19be7da8",
+      "url": "https://api.github.com/repos/flareteam/flare-game/commits/0133bb5985ba1575407d496e0c444a9b19be7da8",
+      "html_url": "https://github.com/flareteam/flare-game/commit/0133bb5985ba1575407d496e0c444a9b19be7da8"
+    }
+  ],
+  "stats": {
+    "total": 3,
+    "additions": 2,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "d04b92d9072abe7323c590fed87c9a2e796711a8",
+      "filename": "mods/fantasycore/menus/stash.txt",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/flareteam/flare-game/blob/af6eee6d339ac98011864bfe89da837fe7769c28/mods%2Ffantasycore%2Fmenus%2Fstash.txt",
+      "raw_url": "https://github.com/flareteam/flare-game/raw/af6eee6d339ac98011864bfe89da837fe7769c28/mods%2Ffantasycore%2Fmenus%2Fstash.txt",
+      "contents_url": "https://api.github.com/repos/flareteam/flare-game/contents/mods%2Ffantasycore%2Fmenus%2Fstash.txt?ref=af6eee6d339ac98011864bfe89da837fe7769c28",
+      "patch": "@@ -2,6 +2,7 @@ pos=0,-35,640,832\n background=images/menus/storage_generic.png\n align=left\n soundfx_open=soundfx/wood_open.ogg\n+soundfx_close=soundfx/inventory/inventory_book.ogg\n \n label_title=320,24,center,center\n currency=320,823,center,bottom"
+    },
+    {
+      "sha": "da6e930e4d417538a730f4c9b2cc8960b4aa7289",
+      "filename": "mods/fantasycore/settings.txt",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/flareteam/flare-game/blob/af6eee6d339ac98011864bfe89da837fe7769c28/mods%2Ffantasycore%2Fsettings.txt",
+      "raw_url": "https://github.com/flareteam/flare-game/raw/af6eee6d339ac98011864bfe89da837fe7769c28/mods%2Ffantasycore%2Fsettings.txt",
+      "contents_url": "https://api.github.com/repos/flareteam/flare-game/contents/mods%2Ffantasycore%2Fsettings.txt?ref=af6eee6d339ac98011864bfe89da837fe7769c28",
+      "patch": "@@ -1,4 +1,4 @@\n description=Isometric generic fantasy assets.\n game=flare-game\n-version=1.15\n+version=1.15.01\n engine_version_min=1.14.280"
+    }
+  ]
+}

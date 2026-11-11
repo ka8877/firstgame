@@ -11,7 +11,7 @@ from urllib.parse import quote, urljoin, urlsplit
 
 FILENAMES={name+extension for name in ('title','lobby','deck','battle') for extension in ('.ogg','.mp3')}
 PREFIX='StreamingAssets/Audio/ModernCard/'
-SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29', 'fm-chronicle-2026-10-29','fm-quest-2026-10-30','fm-reprise-2026-11-02','fm-restage-2026-11-02','fm-nativity-2026-11-02','fm-canon-2026-11-09','fm-classic-ui-2026-11-10'}
+SUPPORTED_LOCAL_REVISIONS={'fm-modern-2026-10-26','fm-fidelity-2026-10-27','fm-detail-2026-10-27','fm-arcana-2026-10-27','fm-restoration-2026-10-27','fm-renewal-2026-10-29','fm-polish-2026-10-29', 'fm-chronicle-2026-10-29','fm-quest-2026-10-30','fm-reprise-2026-11-02','fm-restage-2026-11-02','fm-nativity-2026-11-02','fm-canon-2026-11-09','fm-classic-ui-2026-11-10','fm-client-match-2026-11-11'}
 
 
 def _number(value):
@@ -279,7 +279,7 @@ def recovered_public_reload_pregesture_range_cancellation(game,revision,suite,fa
     playback or audibility of the cancelled inactive preload. No input is edited.
     """
     public_url='https://ka8877.github.io/firstgame/games/fantasy-cards/'
-    if (game!='FantasyCards' or revision not in ('fm-canon-2026-11-09','fm-classic-ui-2026-11-10') or suite!='modern-real-input-v1'
+    if (game!='FantasyCards' or revision not in ('fm-canon-2026-11-09','fm-classic-ui-2026-11-10','fm-client-match-2026-11-11') or suite!='modern-real-input-v1'
             or game_url!=public_url or not isinstance(failure,dict)
             or failure.get('method')!='GET' or failure.get('resourceType')!='media'
             or failure.get('error')!='net::ERR_ABORTED'):

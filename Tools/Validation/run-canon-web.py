@@ -135,7 +135,7 @@ def main():
     lane = native_driver.Lane(run, lease)
     lane.env.update(FIRSTGAME_VALIDATION_ROOT=str(run), FIRSTGAME_BUILD_ROOT=str(build_root),
                     PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'), PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0')
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write = native_driver.write
     sources = [Path(__file__).resolve(), RELEASE.SOURCE, ROOT / 'Tools/Validation/run-canon-native.py', ROOT / 'Tools/Validation/canon_release_evidence.py',
@@ -171,7 +171,7 @@ def main():
         'environmentOverrides': {key: lane.env[key] for key in ('FIRSTGAME_VALIDATION_ROOT', 'FIRSTGAME_BUILD_ROOT',
             'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'executionSources': pins, 'supervisorAcceptance': acceptance, 'publishReady': False, 'baselineReady': False}
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         invocation['environmentOverrides']['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write(run / 'invocation.json', invocation)
     summary = {'status': 'failed', 'scope': 'current-canon-web-build-only', 'game': args.game,

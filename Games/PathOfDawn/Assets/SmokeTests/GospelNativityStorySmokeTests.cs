@@ -42,8 +42,9 @@ namespace PathOfDawn.SmokeTests
             var meshes = carried.GetComponentsInChildren<MeshRenderer>(); Assert.That(meshes.Length, Is.GreaterThan(0));
             var bounds = meshes[0].bounds; foreach (var renderer in meshes.Skip(1)) bounds.Encapsulate(renderer.bounds);
             float longest = Mathf.Max(bounds.size.x, Mathf.Max(bounds.size.y, bounds.size.z));
-            var body = App.Actor.GetComponentInChildren<SpriteRenderer>(); Assert.That(body, Is.Not.Null);
-            Assert.That(longest, Is.InRange(.15f, .23f)); Assert.That(longest, Is.LessThan(body.bounds.size.y * .25f));
+            var body = App.Actor.VisualBounds;
+            Assert.That(body.size.y, Is.GreaterThan(.5f));
+            Assert.That(longest, Is.InRange(.15f, .23f)); Assert.That(longest, Is.LessThan(body.size.y * .25f));
             Assert.That(Vector3.Dot(carried.transform.up, Vector3.up), Is.GreaterThan(.999f));
             var flame = carried.GetComponentInChildren<Light>(); Assert.That(flame, Is.Not.Null);
             Assert.That(flame.transform.localPosition.y, Is.InRange(.03f, .12f));
@@ -280,7 +281,9 @@ namespace PathOfDawn.SmokeTests
             Assert.That(App.SceneCamera.GetUniversalAdditionalCameraData().scriptableRenderer.GetType().Name, Is.EqualTo("UniversalRenderer"));
             Assert.That(App.World.GroundTriangleCount, Is.GreaterThan(1000));
             Assert.That(App.World.AuthoredPropCount, Is.GreaterThan(12)); Assert.That(App.World.ArchitecturalMeshCount, Is.GreaterThan(12));
-            Assert.That(App.Actor.AnimationFrameCount, Is.EqualTo(4 * App.Actor.FramesPerDirectionCount));
+            Assert.That(App.Actor.UsesLayeredMotion, Is.True);
+            Assert.That(App.Actor.MotionDirectionCount, Is.EqualTo(8));
+            Assert.That(App.Actor.AnimationFrameCount, Is.EqualTo(App.Actor.MotionDirectionCount * App.Actor.FramesPerDirectionCount));
             Assert.That(App.Actor.UsesMeasuredLayout, Is.True);
             yield return Shot("title");
             // Native callback fixtures explicitly unlock audio; real pointer/key

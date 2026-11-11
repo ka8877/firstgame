@@ -64,3 +64,19 @@ Tools/Autonomy/Drafts/Recovery05/ProcessContainmentSource/gospel-contained-lane.
 # Preserve Unity importer empty fields for the new canonical illustration resources.
 Games/PathOfDawn/Assets/Resources/Art/GospelCanon.meta -whitespace
 Games/PathOfDawn/Assets/Resources/Art/GospelCanon/**.meta -whitespace
+
+# Preserve newly fetched reference/license originals and their pinned hashes.
+Tools/Research/ClientMotion/** -text -whitespace
+Tools/Research/ClientMotionCharacters/** -text -whitespace
+Tools/Research/ClientMotionNeutralCandidates/** -text -whitespace
+Tools/Art/ClientMotion/History/** -text -whitespace
+# Unity's generated font/importer empty fields retain their verified bytes.
+Games/FantasyCards/Assets/Resources/Fonts/ClassicPixel.asset -whitespace
+Games/FantasyCards/Assets/Editor/Fonts.meta -whitespace
+Games/FantasyCards/Assets/Resources/Art/FmClientMotion.meta -whitespace
+Games/FantasyCards/Assets/Resources/Fonts/ClassicPixel.asset.meta -whitespace
+Games/PathOfDawn/Assets/Editor/NeutralCharacterImportSetup.cs.meta -whitespace
+Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelMotionLayers.cs.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelMotion.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelMotion/**/*.meta -whitespace
+Games/PathOfDawn/Assets/SmokeTests/GospelCharacterMotionSmokeTests.cs.meta -whitespace

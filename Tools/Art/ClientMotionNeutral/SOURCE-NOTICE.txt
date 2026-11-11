@@ -1,0 +1,77 @@
+Gospel neutral character render candidates — 2026-11-11
+
+Original HD human models and selected clothing/head geometry: Clint Bellanger,
+"Isometric Hero and Heroine", CC-BY 3.0.
+https://opengameart.org/content/isometric-hero-and-heroine
+https://creativecommons.org/licenses/by/3.0/
+
+Exact updated HD source repository:
+https://github.com/flareteam/flare-game-art-src
+Immutable source commit: 8830c68b420b631e09a459e5b0bf87c0e068a558
+Selected source models:
+ art_src_hd/characters/hero/hero.blend
+ art_src_hd/characters/heroine/heroine.blend
+Immutable original model URLs:
+https://media.githubusercontent.com/media/flareteam/flare-game-art-src/8830c68b420b631e09a459e5b0bf87c0e068a558/art_src_hd/characters/hero/hero.blend
+https://media.githubusercontent.com/media/flareteam/flare-game-art-src/8830c68b420b631e09a459e5b0bf87c0e068a558/art_src_hd/characters/heroine/heroine.blend
+
+The modern per-file CREDITS.txt explicitly licenses hero/* and heroine/* under
+CC-BY 3.0 and credits Clint Bellanger. Its Justin Jacobs credit applies to the
+kite shield, which is not selected. The iron-buckler CC-BY-SA exception is not
+selected. The older flare-game repository and its generic art license are a
+distinct source generation and do not replace these exact HD component credits.
+
+License/provenance proof:
+ Tools/Research/ClientMotion/flare-hd-source-license-proof.json
+It preserves the exact modern README/CREDITS/LICENSE documents, Git blob and
+LFS pointer identity, actual complete source model bytes, immutable URLs and
+original OGA attribution. The source bodies have Blender 5.1 headers; opening
+them with the earlier Blender 4.3 binary did not constitute a successful import.
+
+Selected geometry only: cloth_sandals, mage_skirt, mage_sleeves, mage_vest, and
+head_short (male) or head_long (female). No weapon, shield, leather-armor texture,
+source ground plane, shadow catcher or baked ground/shadow mask is selected.
+The source's embedded rendering scripts are not executed. The Flare engine,
+quests, combat, code, audio and game are not integrated into this Unity game.
+
+Project adaptations: child/adult/Mary/Joseph/teacher proportions and clothing
+palettes; original facial/garment refinements; relaxed open-handed upright idle;
+project-authored planted-foot walk and a separate longer-stride run. These
+motions and educational depictions are adaptations, not original Flare combat
+clips, historical likenesses, or an endorsement by the artist or Flare team.
+Added project geometry includes small facial features attached to the actual
+head skin. Beard boundaries split the actual head topology along a horizontal
+line below the mouth and assign lower-jaw materials without adding a beard
+object; teacher hair is gray. Mary retains the licensed source long hair.
+The child has shortened limbs, narrower shoulders and a softer unbearded face.
+Rejected preview-only primitive hair, beard and veil additions are not selected
+by the current baker; their earlier render proofs remain preserved.
+
+Tools/Art/ClientMotionNeutral/bake_neutral_actors.py directly renders transparent
+whole-body PNG grids in Blender. Each actor has 8 directions and 20 poses per
+direction: idle4, walk8, run8. The actual 20 poses in all 8 directions determine
+one padded projection scale and one common physical foot anchor per identity,
+including during locomotion. There is no per-frame sole resnapping. Installation
+rejects any candidate whose actual visible alpha enters a cell's 4-pixel border.
+
+Tools/Art/ClientMotionNeutral/install_neutral_actors.py requires explicit
+--candidate-root and --root and is executed only by the release owner after
+visual review. It validates all five direct renders, their index/grid/reports,
+source LFS identities and the exact HD license proof before writing. PNGs are
+copied byte-for-byte; PIL only reads alpha to measure metadata. It does not
+crop, recolour, resample, composite or write image pixels. Portraits select
+head/shoulder UV rectangles from the same original whole-body rendered PNG.
+
+Current runtime installation family:
+ Games/PathOfDawn/Assets/Resources/Art/GospelMotion/Neutral/
+   {child,adult,mary,joseph,teacher}.png
+   corresponding -layout.json and -manifest.json
+The generated source-manifest.json records exact render hashes, source model
+hashes, candidate report/index hashes, scale and separate stride measurements.
+An installation receipt is not a visual approval, Native/Web pass, or deployment
+claim. All earlier original PNGs, layered renderer sources, failed attempts and
+proofs remain preserved as history and are not relabelled as neutral-art passes.
+
+Retain this credit, source links, CC-BY 3.0 link and adaptation notice with any
+distribution of these rendered adaptations. Preserve the original modern
+per-file credits alongside the root repository's generic license document.

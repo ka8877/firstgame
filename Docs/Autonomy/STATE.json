@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-10T07:58:59.185815+00:00",
+  "updatedUtc": "2026-11-11T05:28:41.912522+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -12,6 +12,574 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
+    "id": "ClientMotion-2026-11-11",
+    "status": "frozen-source-selectedCardWeb01-GospelWeb02-and-Builds02-passed-sourcecommit-CI-browser-public-pending",
+    "branch": "codex/client-motion-2026-11-11",
+    "baseMainCommit": "80b514a492f53efae661544d1e1a2f0a7ee035aa",
+    "executionOwner": "/root",
+    "executionState": "owned-active-chat-cycle",
+    "leaseRecord": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+    "leaseState": "acquired",
+    "leaseOwner": "e5951a59-3d2d-44a0-bb26-2ed0edf93851",
+    "leaseCommit": "9b0705fe36a8462b8977c8b85d514b0975af5107",
+    "startedUtc": "2026-11-11T01:28:01.047343+00:00",
+    "deadlineUtc": "2026-11-11T07:28:01.047343+00:00",
+    "releaseProfile": "client-motion",
+    "targetRevisions": {
+      "FantasyCards": "fm-client-match-2026-11-11",
+      "PathOfDawn": "gospel-character-motion-2026-11-11"
+    },
+    "paths": {
+      "controlRoot": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11",
+      "cardReferences": "Tools/Research/ClientMotion",
+      "characterReferences": "Tools/Research/ClientMotionCharacters",
+      "characterInstaller": "Tools/Art/ClientMotionNeutral/install_neutral_actors.py",
+      "evidenceRoot": "Artifacts/Validation/ClientMotion-2026-11-11",
+      "characterBaker": "Tools/Art/ClientMotionNeutral/bake_neutral_actors.py"
+    },
+    "userScope": {
+      "FantasyCards": "Match actual original client login and4:3 lobby/profile/battle structure, small Gothic lettering/sections/buttons; distinguish web artwork and other games. Multiplayer remains disabled/future update.",
+      "PathOfDawn": "Current neutral one-body actors from exact HD CC-BY3.0 models:8directions×20frames, idle4/walk8/run8 per direction, with real travel and preserved story/map/saves. Earlier layered combat stance/run sources are historical."
+    },
+    "sourceProgress": {
+      "CardUi": "FinalClient06 Native9/0/0/31PNG with11selectedRootoriginals source/build approved; CardWeb01 actualpassed on88c525d0/finalguard0/ownedempty. No fresh browser/fullparity/publicapproval.",
+      "Characters": "Motion05Native27/0/0/58PNG/11selectedRootsource-buildoriginals approved. SelectedGospelWeb02 actuallypassed at05:25:25.904869UTC on ea8083bd withmaximum1200/recordedwindow1200.0; currentCardWeb01+GospelWeb02 strictBuilds02 passed. EarlierGospelWeb01/Builds01failure history retained.",
+      "validationTooling": "Native9/27/Core311/media123 and selectedCardWeb01+GospelWeb02 passed. Builds02 actualcheckbuildspassed/commandexit0/finalguard0/ownedempty. Sourcecommit/draftPR/CI/fourlocal/twopublicbrowser/stage/deployment remain unexecuted/planned."
+    },
+    "referenceAndLicenseFacts": {
+      "clientLogin": {
+        "file": "Tools/Research/ClientMotion/blog2010-login.jpg",
+        "scope": "2010 Ver4.95 remains dated historical reference. Current selected Card entry uses actual2011 Ver5.73 native capture/original UV art under selected-native-entry-art.json; identical late/shutdown art is not established.",
+        "previous2010Scope": "Root directly viewed actual2010 Ver4.95 client login reference. This does not establish the final pre-shutdown client appearance; earlier official WEB artwork was not adequate client-login evidence.",
+        "currentSelection": {
+          "file": "Tools/Research/ClientMotion/selected-native-entry-art.json",
+          "bytes": 2120,
+          "sha256": "fc32519d8e2659c6a8560cbf14a2fda2c0275edd3098e64d579f64c4901cfa63"
+        }
+      },
+      "excludedCapture": "Newly located2016 capture was Fantasy Masters II and excluded from original-game reference.",
+      "characterSources": {
+        "scope": "Current selected neutral one-body HD model sources are exact CC-BY3.0 at commit8830c68b420b631e09a459e5b0bf87c0e068a558 with per-file credits/provenance preserved. Earlier CC-BY-SA distribution and12PNG layered combat sources remain historical, not current selected actor licensing.",
+        "installer": "Tools/Art/ClientMotionNeutral/install_neutral_actors.py",
+        "installerExecution": "Current NeutralInstall01 byte-exact installed5neutral one-body PNGs/9093977B. Historical MotionAssets01/02 cover earlier12PNG layered combat sources and are not the current neutral installer.",
+        "targetMotion": "Five neutral one-body actors, each8directions×20frames (idle4/walk8/run8),160frames total, separately calibrated strides. Motion05 functional27/0/0 and11selected current Native originals approved for source/build; fresh browser/public acceptance pending.",
+        "neutralRebake": "Current exactHDCC-BY3.0 neutral one-body rebakes installed. Root reviewed all5atlases and11selectedMotion05Native originals for source/build, not all58Native images or any fresh browser/public originals.",
+        "legacyCombatLayerScope": "Earlier MotionAssets02 exact12PNG success remains historical install evidence; old Flare combat stance/hard-baked-shadow art was rejected for final use.",
+        "hdSourceProof": {
+          "file": "Tools/Research/ClientMotion/flare-hd-source-license-proof.json",
+          "bytes": 8076,
+          "sha256": "0b099bdfa6759480ad9e1d64c02000cd17c88f1de5dfb6549ccfcdf44ea93cc4"
+        },
+        "legacyLayerInstaller": "Tools/Art/ClientMotion/install_flare_layers.py",
+        "baker": "Tools/Art/ClientMotionNeutral/bake_neutral_actors.py"
+      },
+      "rejectedFallback": "Root viewed existing Toon FBX and found poor facial quality; current work has not reverted to it."
+    },
+    "preservedContent": {
+      "FantasyCards": {
+        "supportedCards": 2649,
+        "originalImages": 15350,
+        "multiplayer": "disabled-future-update",
+        "compatibility": "Existing card IDs/GUIDs, ownership/decks/currency and schema3 saves retained."
+      },
+      "PathOfDawn": {
+        "events": 23,
+        "scriptures": 19,
+        "storyDetails": 51,
+        "voiceKeys": 28,
+        "compatibility": "Existing stable IDs, Scripture text and save compatibility retained; ambient villagers do not add claimed Biblical events or quotations."
+      }
+    },
+    "validation": {
+      "status": "Native9-and27-Core311-media123-selectedCardWeb01-GospelWeb02-Builds02-passed-browser-sourceCI-public-pending",
+      "environmentIdle": {
+        "attempt": "EnvironmentIdle01",
+        "status": "completed-command-exit0-guard0",
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/EnvironmentIdle01/summary.json",
+          "bytes": 10886,
+          "sha256": "23f17ef48b302674beb784a05ba3fb7d60332595bab2181946edf36850e2c6eb"
+        }
+      },
+      "executionHarnessSourceReview": {
+        "status": "root-source-reviewed-not-game-approval",
+        "helper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/run-owned-command.py",
+          "bytes": 11816,
+          "sha256": "ebab99bafb38312f567b1faf94cfa57006f1a48dc81a6ba041d53d542f4010a4"
+        },
+        "review": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/helper-source-review.json",
+          "bytes": 1090,
+          "sha256": "726281b99fe6b03c5a821948829233dca5cafaf694995307f541b4ebdf24f99d"
+        }
+      },
+      "Core": {
+        "attempt": "Core02",
+        "status": "passed-fresh-current-source",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/Core02/summary.json",
+          "bytes": 10658,
+          "sha256": "ef6ba57994347f57a89f169afd9fba362dfc16f459c5fdaac3d17bacbab5e421"
+        },
+        "scope": "Fresh run after HD notices/source mapping changed; earlierCore01 actual pass remains history."
+      },
+      "Native": {
+        "status": "CardClient06-final9-and-GospelMotion05-full27-passed",
+        "initialDraftExpectations": {
+          "FantasyCards": 9,
+          "PathOfDawn": 25,
+          "scope": "Earlier draft expectations, not results; actual Motion02 suite contained27 cases."
+        },
+        "countScope": "Card11selected and Gospel11selected Native originals have source/build approval; both full functional Native suites passed. Preserved PNG counts and planned browser reviews are distinct; no all31/all58or fresh browser/public visual approval.",
+        "FantasyCards": {
+          "Client01": {
+            "status": "nine-tests-passed-but-visually-rejected",
+            "passed": 9,
+            "rawPngCount": 31,
+            "rootFinalVisualApproval": false,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client01/summary.json",
+              "bytes": 2860,
+              "sha256": "ad71cceecd061bd0c75325a83c229ec18461e9aa3e0ada56811d3b8b43ce22bb"
+            }
+          },
+          "Client02": {
+            "status": "nine-tests-passed-but-visually-rejected",
+            "passed": 9,
+            "rawPngCount": 31,
+            "rootFinalVisualApproval": false,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client02/summary.json",
+              "bytes": 2869,
+              "sha256": "4b8e96d1e3a7409341c1de8bdb215525b12abb985b30753148553b4ad217d094"
+            },
+            "sourceFingerprintAtRun": "087dc2d61fc2c67efd394eaedd1a3f9969267225bd111408d31902676ba6afc9",
+            "xmlSha256": "605fff4a8a9c8ba75284d76612ec9acdebd79a654e63b5bb9391bcc9f931e5d0",
+            "rootViewedScope": "Title and lobby originals directly reported; visible patches/unornamented black UI rejected."
+          },
+          "currentSource": "SelectedClient06 source9/0/0 approved for build through11current originals; current browser/public acceptance pending.",
+          "Client03": {
+            "status": "prepare-failed-all-Galmuri-glyphs-missing-before-native",
+            "cause": "Static-to-Dynamic missing font reference; later explicit reference/idempotence fix.",
+            "nativeCasesExecuted": false,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client03/summary.json",
+              "bytes": 1716,
+              "sha256": "7532485ac9e45bc3508f2835e6e49ba54d6bbd7a2c6ee1424a7cbf76e67394f0"
+            }
+          },
+          "Client04": {
+            "status": "9-tests-passed-first-good-framed-title-and-lobby-observed",
+            "passed": 9,
+            "rawPngCount": 31,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client04/summary.json",
+              "bytes": 2872,
+              "sha256": "d7357c0386b07cb00f396a46cea9cdab60607eac11fa59f9eb3d82f765a05bcf"
+            },
+            "scope": "Root saw improved title/lobby; final selected source is laterClient06."
+          },
+          "Client05": {
+            "status": "9-tests-passed-static-glyph-reuse",
+            "passed": 9,
+            "rawPngCount": 31,
+            "staticGlyphReuseLogged": 11406,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client05/summary.json",
+              "bytes": 2870,
+              "sha256": "dd5fe104f912cb8a4bf0d41d476d3ee391a4cfbf0bae4d3d59c44363d30b7674"
+            }
+          },
+          "Client06": {
+            "status": "9-tests-passed-and11-selected-originals-root-approved-for-source-build",
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "rawPngCount": 31,
+            "selectedOriginalsDirectlyReviewed": 11,
+            "sourceFingerprintAtRun": "88c525d0f00f3c8455cecd92e52bcfe0b6a4e175bd2788443f5acf89de17a413",
+            "xmlSha256": "08d662f1c82a3438cff8bc0ef9dedd1bca7e0e6736e1162bbaa191929d799102",
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/FantasyCards/Client06/summary.json",
+              "bytes": 2870,
+              "sha256": "771b5507c37d2a620518bc749717685e316a46aa5fc218035ca7f457929ae987"
+            },
+            "rootReview": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/Root/cards-native-review.json",
+              "bytes": 3857,
+              "sha256": "1f523c663a3b3b6154d0cddf4ca6c04d9f0c2591b58f0f49c108316025782996"
+            },
+            "canonicalSelection": "canonicalNative/FantasyCards",
+            "scope": "Selected current source/build approval only; not all31Native originals, exact end-of-service parity, unseen browser images or physical-device/mobile legibility."
+          },
+          "fontSourceMove": {
+            "bytes": 5376428,
+            "sha256": "2c709890595668f7bdb6df408420fda957dde0288e95b31a1cc17a2ab98b4b4f",
+            "sameGuidAndSourceBytes": true,
+            "from": "Games/FantasyCards/Assets/Resources/Fonts/Galmuri11.ttf",
+            "to": "Games/FantasyCards/Assets/Editor/Fonts/Galmuri11.ttf",
+            "record": {
+              "file": "Tools/Art/ClientMotion/editor-font-source-move.json",
+              "bytes": 559,
+              "sha256": "16e1c4195ba562de3c3dcfeebae25976e23729c188b6c1b87aa7223979912897"
+            },
+            "scope": "Static runtime atlas retained; sourceTTF no longer included through Resources. Actual final Web/site savings not yet measured."
+          }
+        },
+        "PathOfDawn": {
+          "Motion01": {
+            "status": "prepare-compile-failed-before-native-tests",
+            "cause": "Root test Is.AnyOf compile error CS0117; fixed before later Motion02.",
+            "nativePassCountClaimed": false,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/PathOfDawn/Motion01/summary.json",
+              "bytes": 1699,
+              "sha256": "9ac6181f93c4c64c68f8e91080d495206896335dda579f9d09dda47ebcaf40be"
+            }
+          },
+          "Motion02": {
+            "status": "failed-27-case-native-run-and-art-rejected",
+            "total": 27,
+            "passed": 20,
+            "failed": 7,
+            "skipped": 0,
+            "rawPngCount": 40,
+            "rootDirectlyViewedOriginals": 2,
+            "rootRejection": "Hunched combat stance/clenched fists and hard-baked shadow unsuitable as final art.",
+            "rootFinalVisualApproval": false,
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/PathOfDawn/Motion02/summary.json",
+              "bytes": 1851,
+              "sha256": "5f0ba34eba262a449fb21a375170f925d93e20dc0ccce41119460c28893272cf"
+            }
+          },
+          "currentSource": "Frozenea8083bd source completedMotion05 full27/0/0; failedMotion03/04 and earlier20/7 unchanged. Web/browser/public checks pending.",
+          "Motion03": {
+            "status": "failed-original-wrapper-retained",
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/PathOfDawn/Motion03/summary.json",
+              "bytes": 1857,
+              "sha256": "5e917d56f11c578dff8a38c341a9714f4385aa6a6a46c041989850ddf36bf132"
+            },
+            "scope": "Actual completed failure retained. Exact case counts not supplied in this update; no counts manufactured or relabeled by later pass."
+          },
+          "Motion04": {
+            "status": "failed-original-wrapper-retained",
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/PathOfDawn/Motion04/summary.json",
+              "bytes": 1853,
+              "sha256": "b1a1c831520c4e3c9b1e7df4d0932955e7a0d39bf5853a5c0c29657722f1d9d4"
+            },
+            "scope": "Actual completed failure retained; later fixes/independentMotion05 pass do not change this verdict."
+          },
+          "Motion05": {
+            "status": "passed27-and11-selected-current-originals-root-approved-for-source-build",
+            "passed": 27,
+            "failed": 0,
+            "skipped": 0,
+            "rawPngCount": 58,
+            "finishedUtc": "2026-11-11T04:45:21.437107+00:00",
+            "sourceFingerprintAtRun": "ea8083bdde5df2d3c57270cfa45b0ba14e467a2badb9348069743799bb34a0ca",
+            "xmlSha256": "8ccb66f4ccb56f489db2fc9e5febada4ece2d9061598516bf94ec60916767945",
+            "wrapper": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/NativeRuns/PathOfDawn/Motion05/summary.json",
+              "bytes": 3242,
+              "sha256": "0902aa0bd690c427661a6b96366029cc05fc1954502624998f062a08196eddbe"
+            },
+            "actualFixes": [
+              "Default/WebGL imports preserve original2560x1024 texture instead of2048 downscale.",
+              "Common foot anchor retained; only depth causing terrain foot occlusion corrected.",
+              "NPC FindPath initial start connection/corner shortcuts and repath after0.7second stall corrected."
+            ],
+            "storyGateScope": "Actual complete23story sequence passed with originalCoreX gates; no progression gate weakening claimed.",
+            "reviewScope": "Root directly viewed11explicitly selected current Native originals and approved source/build only. Other47Native PNGs preserved without all58direct-review claim; fresh browser/public images remain unapproved.",
+            "selectedOriginalsDirectlyReviewed": 11,
+            "rootReview": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/Root/gospel-native-review.json",
+              "bytes": 3803,
+              "sha256": "f1d258d1c9bba36966128f938ea460d513c2f3bfbf6d074ea84d51bd92c32076"
+            }
+          }
+        }
+      },
+      "media": {
+        "attempt": "PublicRangeUnit02",
+        "status": "passed-fresh-current-source",
+        "passed": 123,
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/PublicRangeUnit02/summary.json",
+          "bytes": 10924,
+          "sha256": "4f96c37f97fe6c55ef2eb30322aff42d604321e5e4648ebf3cdd30077e9d3c2d"
+        },
+        "scope": "Actual123tests passed on fresh mapping. Generic wrapper completion is distinct from product/browser/public acceptance."
+      },
+      "Web": {
+        "FantasyCards": {
+          "attempt": "Web01",
+          "label": "CardWeb01",
+          "status": "passed-current-build",
+          "sourceFingerprint": "88c525d0f00f3c8455cecd92e52bcfe0b6a4e175bd2788443f5acf89de17a413",
+          "summary": {
+            "file": "Artifacts/Validation/ClientMotion-2026-11-11/WebRuns/FantasyCards/Web01/summary.json",
+            "bytes": 16107,
+            "sha256": "ca8f5937b2d7f11c22e66d27f37175e878f551e2b9d086677f44e80c016cdf75"
+          },
+          "buildEvidenceSucceeded": true,
+          "buildEvidenceErrors": 0,
+          "unityReportedBuildBytes": 755443574,
+          "finalGuardExitCode": 0,
+          "ownedContainmentProvedEmpty": true,
+          "sizeScope": "755443574B is the Unity BuildEvidence reported value, not a measured complete public site/runtime byte total.",
+          "scope": "Actual completed current Card build; no current browser/newCI/stage/publication approval."
+        },
+        "PathOfDawn": {
+          "label": "GospelWeb02",
+          "status": "passed-current-selected-build",
+          "startedUtc": "2026-11-11T05:23:49Z",
+          "actualExecutionLimitSeconds": 1200,
+          "limitScope": "Supported FIRSTGAME_EXECUTION_LIMIT_SECONDS=1200 gives a shorter20minute real execution limit; no predicate/driver/source relaxation.",
+          "previousAttempt": {
+            "attempt": "Web01",
+            "label": "GospelWeb01",
+            "status": "producer-actually-passed-but-strict-aggregate-rejected-time-envelope",
+            "sourceFingerprint": "ea8083bdde5df2d3c57270cfa45b0ba14e467a2badb9348069743799bb34a0ca",
+            "summary": {
+              "file": "Artifacts/Validation/ClientMotion-2026-11-11/WebRuns/PathOfDawn/Web01/summary.json",
+              "bytes": 16023,
+              "sha256": "c19fe52150c08cb4017ff412763d6f826fefcfda2d610924c5b0bb88adba7af9"
+            },
+            "completedApproximateTime": "2026-11-11 about05:19UTC/14:19KST",
+            "unityReportedBuildBytes": 7333,
+            "finalGuardExitCode": 0,
+            "ownedContainmentProvedEmpty": true,
+            "sizeScope": "UnityGospelBytes7333 is a reported summary field, not the complete runtime payload or public site size.",
+            "scope": "Actual completed current GospelWebbuild; no current browser/newCI/stage/publication approval.",
+            "aggregateScope": "Recorded safeEnd-started=3600.000000000002 exceeded actual3600s bound; no wholeWeb acceptance. Original producer pass and bytes preserved unchanged."
+          },
+          "previousRuntimeAndProofPreservation": {
+            "record": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/Release/gospel-web01-relocation.json",
+            "status": "all-previous-runtime-and-proof-byte-identical-retained",
+            "wrapper": {
+              "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/GospelWeb01Relocation01/summary.json",
+              "bytes": 11119,
+              "sha256": "b093b46b7e303b2dabdc2d8687b29d830acd33ed804d2bf2ca126a96b07266d6"
+            }
+          },
+          "sourceFingerprint": "ea8083bdde5df2d3c57270cfa45b0ba14e467a2badb9348069743799bb34a0ca",
+          "summary": {
+            "file": "Artifacts/Validation/ClientMotion-2026-11-11/WebRuns/PathOfDawn/Web02/summary.json",
+            "bytes": 16019,
+            "sha256": "a39701017e17e596cf7c615f0b756cba620949bce8e50315a0bf52e6ced283a0"
+          },
+          "finishedUtc": "2026-11-11T05:25:25.904869+00:00",
+          "recordedSafeWindowSeconds": 1200.0,
+          "finalGuardExitCode": 0,
+          "ownedContainmentProvedEmpty": true,
+          "scope": "Selected currentGospelWeb02 actuallypassed with valid1200.0s bounded evidence; oldGospelWeb01producer/aggregate rejection remains preserved."
+        },
+        "scope": "SelectedCardWeb01+GospelWeb02 bothactuallypassed andstrictBuilds02admitted them. No currentbrowser/sourceCI/stage/publicacceptance yet."
+      },
+      "DesktopMobileAndPublicBrowsers": {
+        "requiredLocalRuns": 4,
+        "requiredOverallRuns": 6,
+        "completedCurrentRuns": 0,
+        "status": "pending-fresh-current-source-input-audio-save-reload-and-Root-original-review"
+      },
+      "sourceCi": "pending-no-current-source-CI-result",
+      "stagePagesAndPublicDelivery": "pending-no-new-stage-or-deployment",
+      "historicalProofScope": "LivingRpgClassic and CanonArt completed proofs/failures remain historical; none is reused as a new ClientMotion pass.",
+      "motionAssets": {
+        "status": "MotionAssets02-installed-exact12PNG",
+        "pngCount": 12,
+        "totalBytes": 14793508,
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/MotionAssets02/summary.json",
+          "bytes": 10876,
+          "sha256": "5c14446c000d6e2869a6e7d03803c78b134695f675baba82c1891cd8c2cbe9fc"
+        },
+        "retainedFirstAttempt": {
+          "attempt": "MotionAssets01",
+          "status": "strict-upstream-tree-alias-mismatch-before-installation",
+          "gameTest": false,
+          "pngInstallationCompleted": false,
+          "wrapper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/MotionAssets01/summary.json",
+            "bytes": 8340,
+            "sha256": "cd4a57da57ea62ac5202a7c0871bd68a03122be7210ee4ca442b1d7a65ce7f54"
+          },
+          "resolution": "Canonical upstream tree independently fetched; separate MotionAssets02 succeeded. Original failure is not a game-test failure or relabeled as passed."
+        }
+      },
+      "retainedCurrentFailuresAndRejections": {
+        "MotionAssets01": "Strict upstream tree-alias mismatch before installation, not game test.",
+        "GospelMotion01": "CS0117 preparation compile failure, not completed Native pass.",
+        "GospelMotion02": "Actual20passed/7failed/0skipped; two originals Root rejected. Later mechanical edits not rerun.",
+        "CardClient01": "9 mechanical passes/31PNG, visually rejected.",
+        "CardClient02": "9 mechanical passes/31PNG; title/lobby visible patches/black UI rejected; revision pending.",
+        "CardClient03": "Prepare failed: all Galmuri glyphs missing afterStatic-to-Dynamicmissing source reference; noNativecases. Explicit reference/idempotence fixed later.",
+        "BlenderCompatibility": "Earlier4.3file-format failure andengine-enum failure retained; pinned SHA-verified5.1.2 later installed.",
+        "NeutralPreviews": "Preview01 child detached;03 holes/bad veil;04 triangular beard rejected. Child02 coherent and05 jaw boundary acceptable; earlier failed/rejected originals unchanged.",
+        "NeutralAtlas01": {
+          "status": "generic-source-command-completed-but-art-and-alpha-rejected-not-installed",
+          "clippedCells": {
+            "adult": 134,
+            "child": 56,
+            "joseph": 130,
+            "mary": 73,
+            "teacher": 130
+          },
+          "wrapper": {
+            "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/NeutralAtlas01/summary.json",
+            "bytes": 11356,
+            "sha256": "94972874c4573a8ccedb0127f73dfbd0f431927cb6d3e5eecd3d6ba27d36b8b6"
+          },
+          "resolution": "Separate correctedAtlas02direct-review/padding800pass and byte-exactNeutralInstall01completed; originalrejectnotrelabeled."
+        },
+        "GospelMotion03": "Actual failed wrapper retained; laterMotion05 pass does not relabel it.",
+        "GospelMotion04": "Actual failed wrapper retained; laterMotion05 pass does not relabel it.",
+        "Builds01": "Actual failed strict aggregate: GospelWeb01 recorded3600.000000000002 beyond3600s. ProducerWebpasses remain original, not wholeWeb acceptance; no source/gate/driver/evidence changes."
+      },
+      "environmentIdle02": {
+        "status": "completed-guard0-ownedempty-after-brief-reconnect",
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/EnvironmentIdle02/summary.json",
+          "bytes": 10911,
+          "sha256": "d5df8e226ee8ca79b3ea7429913839eb86a7fe14629aafc26ff1ecd2c6bd120d"
+        },
+        "workspaceAndTmp": "Actual Root check found all current files/tmp intact."
+      },
+      "neutralAtlases": {
+        "status": "NeutralAtlas02-root-art-reviewed-padding-pass-NeutralInstall01-complete",
+        "sourceCommit": "8830c68b420b631e09a459e5b0bf87c0e068a558",
+        "sourceLicense": "Exact selected HD neutral model sources CC-BY3.0 with per-file credits preserved; earlier CC-BY-SA12PNGcombat distribution is historical.",
+        "blender": "Pinned SHA-verifiedBlender5.1.2 installed after retained4.3file-format and engine-enum failures.",
+        "actors": [
+          "adult",
+          "child",
+          "joseph",
+          "mary",
+          "teacher"
+        ],
+        "pngCount": 5,
+        "installedBytes": 9093977,
+        "installRoot": "Games/PathOfDawn/Assets/Resources/Art/GospelMotion/Neutral",
+        "install": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/NeutralInstall01/summary.json",
+          "bytes": 11087,
+          "sha256": "8795adf7298dd70052e21226f8c101ff8996c826e135665e0b319eb235d5a3f2"
+        },
+        "correctedAtlas": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/NeutralAtlas02/summary.json",
+          "bytes": 11359,
+          "sha256": "d1a9a6fc6d05685a582510411a010826fc50d4233117cbf88bc89927bc0706c5"
+        },
+        "manifestVersion": 2,
+        "framesPerActor": 160,
+        "directions": 8,
+        "idleFramesPerDirection": 4,
+        "walkFramesPerDirection": 8,
+        "runFramesPerDirection": 8,
+        "projectionCalibration": "Separate actual projected walk/run stride calibration; measured child21cm/adult22cm and same-hook age scaling retained.",
+        "alphaPadding": {
+          "testedCells": 800,
+          "minimumPassedPixels": 4,
+          "construction": "Common anchor and union7pxpadding",
+          "status": "all800passed-actual-check"
+        },
+        "reviewScope": "Root directly viewed all five corrected neutral one-body atlases and11selectedcurrentMotion05Native originals. Source/build approval only; not all58Native images or fresh browser/public approval."
+      },
+      "browserPlans": {
+        "status": "source-frozen-plans-not-executed",
+        "FantasyCardsRequiredOriginals": {
+          "Desktop720": 55,
+          "Mobile844": 54,
+          "PublicMobile844": 54
+        },
+        "PathOfDawnRequiredOriginals": {
+          "Desktop720": 60,
+          "Mobile844": 46,
+          "PublicMobile844": 46
+        },
+        "requiredOriginalsTotal": 315,
+        "CardPcmWindows": 4,
+        "actualFullReloadsPerRunRequired": 2,
+        "scope": "Planned required current Root originals only; zero completed current browser runs/reviews claimed."
+      },
+      "CoreBeforeHdMappingChange": {
+        "historicalActualAttempt": "Core01",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/Core01/summary.json",
+          "bytes": 10681,
+          "sha256": "ecbc036a4215034d120f1b1d27e73942ca4ab045bf2db6c32301569dc9cd1e38"
+        },
+        "currentBindingStatus": "New HD notices mapping changed after run; this source-stage binding is no longer current. Core02 rerun pending."
+      },
+      "mediaBeforeHdMappingChange": {
+        "historicalActualAttempt": "PublicRangeUnit01",
+        "passed": 123,
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/PublicRangeUnit01/summary.json",
+          "bytes": 10920,
+          "sha256": "a7f19b082e62999284e38da395a220fe90546f15643c3cf8b27f4ae04b9a6c6a"
+        },
+        "currentBindingStatus": "New HD notices mapping changed after run; current source-stage binding invalidated. media02 rerun pending.",
+        "scope": "123actual tests passed; generic wrapper command-completed is not current product/publication approval."
+      },
+      "currentBuildAdmission": {
+        "attempt": "Builds02",
+        "status": "passed-current-selected-builds-gate",
+        "check": "builds",
+        "actualCommandExitCode": 0,
+        "finalGuardExitCode": 0,
+        "ownedContainmentProvedEmpty": true,
+        "completedApproximateTime": "2026-11-11 about05:27UTC/14:27KST",
+        "selectedWebAttempts": {
+          "FantasyCards": "Web01",
+          "PathOfDawn": "Web02"
+        },
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/Builds02/summary.json",
+          "bytes": 10762,
+          "sha256": "dadaaf2e0a2e61fd92694fd06291c2c999d8ff77cc7bbdf45cc6b461fe4a31f6"
+        },
+        "scope": "Actual complete currentbuildsadmission passed; not fullbrowser/sourceCI/stage/Pages/publicreleasegate acceptance."
+      },
+      "buildAdmission01History": {
+        "attempt": "Builds01",
+        "status": "failed-actual-strict-aggregate",
+        "wrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/CommandRuns/Builds01/summary.json",
+          "bytes": 8231,
+          "sha256": "519ca08d3eca5bc9dbc5367870ce114b89e6b8e33e5502f2565e14c47307e7e7"
+        },
+        "recordedSafeEndMinusStartedSeconds": "3600.000000000002",
+        "actualMaximumSeconds": 3600,
+        "cause": "Strict aggregate rejected recorded GospelWeb01 command time envelope beyond actual3600s limit. This is not a game failure or completeWeb acceptance.",
+        "evidencePolicy": "No gate/driver/source or historical receipt changed. Exact old runtime/proof retained before supported fresh shorter1200s run."
+      }
+    },
+    "referenceLimits": [
+      "Actual2010Ver4.95 login is not proof of final shutdown client identity.",
+      "Exact late login/shop and complete original-game fidelity remain unverified; unrelated FMII/web artwork is excluded as direct client evidence.",
+      "Licensed layered character import/attribution and actual8-direction animation must be verified after Root runs the installer/import; no runtime completion claimed."
+    ],
+    "currentPublication": "currentDeployment remains verified LivingRpgClassic source60a58c5d/gh-pages9e34c3b9/Pages42768236864. No new ClientMotion deployment claimed.",
+    "next": [
+      "Root commits exactfrozen source/currentDocs, createsdraftPR and observes actualcandidateCI; these areplanned until actualreceipts.",
+      "Then execute fourlocalbrowserplans followed bynormalpublicationandtwopublicplans, with315requiredcurrentRootoriginals/fourCardPCM/twoactualreloads each. No currentbrowserrun hasexecuted yet.",
+      "Verify exactsourceCI/cleanstage/sitebudget/Pages/fullfreshGET/portal/finalstrictgate before updatingcurrentDeployment. Public remains priorM3/GH3."
+    ],
+    "automationScope": "Explicit active chat request only. Last actual automation query was0 in the previous cycle; no new scheduler or goal-card activation query is claimed and no24-hour background execution is established.",
+    "sourceFrozen": true
+  },
+  "activeLivingRpgClassic": {
     "id": "LivingRpgClassic-2026-11-10",
     "status": "completed-deployed-six-runs-approved-full-gate-sealed-checkpoint-and-closure-preserved-own-lease-normally-released",
     "branch": "main",
@@ -1014,7 +1582,7 @@
     },
     "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
   },
-  "baselineScope": "Historical G2 baseline retained below. Latest verified LivingRpgClassic deployment is currentDeployment/activeWork; previousCanonArtDeployment and raw activeCanonArt retain the completed prior release.",
+  "baselineScope": "Historical G2 baseline retained. Verified public LivingRpgClassic remains currentDeployment; its completed proof/normal-release history is activeLivingRpgClassic, prior CanonArt is activeCanonArt, and new unvalidated ClientMotion work is activeWork.",
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
     "dirtyPathsBeforeSetup": [],
@@ -1104,7 +1672,7 @@
     "checkpointCoreCi": 42778148735,
     "checkpointHelperCi": 42778148418,
     "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
-    "evidence": "activeWork.releaseCompletion",
+    "evidence": "activeLivingRpgClassic.releaseCompletion",
     "nextGoal": "Continue verified original rules/UI fidelity and natural Gospel RPG/world/character quality; full restoration unfinished.",
     "finalClosureSaveCi": "Observe actual result after writing; not assumed."
   },
@@ -1125,12 +1693,12 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
-    "id": "LivingRpgClassic-2026-11-10",
-    "status": "current-milestone-complete-normal-owned-release-complete-final-save-CI-to-observe",
+    "id": "ClientMotion-2026-11-11",
+    "status": "ClientMotion-selected-Web-pair-Builds02-passed-sourcecommit-CI-browser-public-pending",
     "tasks": [
-      "After saving Closure01 and these final Docs3, observe the exact final commit push and both required CI results; that future result is not contained in this closure or claimed at writing.",
-      "For later work, inspect actual source/runtime/process/remote status and obtain a new unique bounded own lease only after verifying availability. This completed released cycle and historical acquired archive grant no ownership; never renew or steal expired/foreign leases.",
-      "Continue verified original Fantasy Masters rules/classic UI and Gospel character/world/RPG quality beyond this completed release. Full original restoration remains unfinished; skill598 remains proposal-only."
+      "Root commits exactfrozen source/currentDocs, createsdraftPR and observes actualcandidateCI; these areplanned until actualreceipts.",
+      "Then execute fourlocalbrowserplans followed bynormalpublicationandtwopublicplans, with315requiredcurrentRootoriginals/fourCardPCM/twoactualreloads each. No currentbrowserrun hasexecuted yet.",
+      "Verify exactsourceCI/cleanstage/sitebudget/Pages/fullfreshGET/portal/finalstrictgate before updatingcurrentDeployment. Public remains priorM3/GH3."
     ],
     "tasksAtLocalCompletion": [
       "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
@@ -1151,8 +1719,13 @@
       "Update draft PR2 with verified final results; normal merge/publish through existing Pages only after all gates. Fresh full publicGET, portal Root originals and both publictouch plans remain required.",
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
-    "rule": "Current LivingRpgClassic release, Checkpoint01/D1 CI, independent final idle, normal own release and Closure01 completed. Observe the later exact commit/CI that first saves Closure01; start later product work only through fresh actual ownership. Historical CanonArt task arrays remain unchanged.",
-    "ruleBeforePublication": "LivingRpgClassic source60a58c5d/gh-pages9e34c3b9 is now verified; prior CanonArt/G2 identities remain historical and no old result replaces the current actual gates."
+    "rule": "Current ClientMotion source changes require their own actual execution/source-bound gates and Root original review. LivingRpgClassic/CanonArt completed work and all failed/interrupted raw evidence remain preserved history. Historical task arrays below are earlier recovery/completion phases.",
+    "ruleBeforePublication": "Verified public remains LivingRpgClassic60a58c5d/9e34c3b9 until actual new ClientMotion publication and public acceptance. New source work or draft expected counts are not a deployment/pass.",
+    "tasksAtLivingRpgClassicCompletion": [
+      "After saving Closure01 and these final Docs3, observe the exact final commit push and both required CI results; that future result is not contained in this closure or claimed at writing.",
+      "For later work, inspect actual source/runtime/process/remote status and obtain a new unique bounded own lease only after verifying availability. This completed released cycle and historical acquired archive grant no ownership; never renew or steal expired/foreign leases.",
+      "Continue verified original Fantasy Masters rules/classic UI and Gospel character/world/RPG quality beyond this completed release. Full original restoration remains unfinished; skill598 remains proposal-only."
+    ]
   },
   "rotation": {
     "pattern": [
@@ -1174,7 +1747,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "LivingRpgClassic-normal-owned-release-completed-available-observed-once",
+    "lockStatus": "ClientMotion-own-new-acquired-lease-fixed-deadline-no-release-claimed",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 3600,
     "defaultGuardLimitSeconds": 2700,
@@ -1186,14 +1759,13 @@
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
-      "id": "LivingRpgClassic-2026-11-10",
-      "leaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
-      "owner": "c8562d1f-35d4-4a5b-b021-dc69c1cc506e",
-      "deadlineUtc": "2026-11-10T08:19:17.349785+00:00",
-      "commitSha": "348495074247c62df28cfc506869f2e8a17afd25",
-      "status": "Completed release/all-gate/Checkpoint01/D1 CI, independent final idle, normal own CAS release and Closure01. No background execution or continuing ownership claimed.",
-      "observedUtc": "2026-11-10T07:58:59.185815+00:00",
-      "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
+      "id": "ClientMotion-2026-11-11",
+      "leaseRecord": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+      "owner": "e5951a59-3d2d-44a0-bb26-2ed0edf93851",
+      "deadlineUtc": "2026-11-11T07:28:01.047343+00:00",
+      "commitSha": "9b0705fe36a8462b8977c8b85d514b0975af5107",
+      "status": "Frozen sourceNative9/27/Core311/media123/selectedCardWeb01+GospelWeb02/strictBuilds02passed. OldBuilds01failure andoldGospelWeb01bytes preserved. Sourcecommit/PR/CI andfourlocal/twopublicbrowser/deployment pending.",
+      "startedUtc": "2026-11-11T01:28:01.047343+00:00"
     },
     "historicalBatchAtReport": {
       "id": "C1-resume-2026-11-04",
@@ -1208,7 +1780,7 @@
       "status": "release-verified-checkpoint-and-closure-preserved-normal-own-CAS-released",
       "releasedUtc": "2026-11-10T07:57:47.528375+00:00",
       "leaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
-      "closureRecord": "activeWork.releaseCompletion"
+      "closureRecord": "activeLivingRpgClassic.releaseCompletion"
     },
     "previousCompletedBatch": {
       "id": "CanonPublishResume-2026-11-10",
@@ -1227,10 +1799,10 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": null,
-    "liveLeaseDeadlineUtc": null,
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/ClientMotion-2026-11-11/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-11T07:28:01.047343+00:00",
     "releasedLeaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
-    "statusObservationScope": "Actual available status was observed after normal own release; archive acquired lease is historical and no current ownership or perpetual availability is claimed.",
+    "statusObservationScope": "New own acquired fixed lease remains active; EnvironmentIdle01 completed exit0/guard0. Native failures/rejections are not final acceptance or normal release.",
     "historicalCanonArtBatchAtReport": {
       "id": "CanonPublishResume-2026-11-10",
       "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
@@ -1240,6 +1812,16 @@
       "status": "Completed six current browser runs and Root reviews, full gate/seal, Checkpoint03, final independent idle and normal own-lease release; Closure01 preserved. This is a completed milestone, not a current background execution.",
       "releasedUtc": "2026-11-09T21:43:16.817803+00:00",
       "closureRecord": "releaseCompletion"
+    },
+    "historicalLivingRpgClassicBatchAtReport": {
+      "id": "LivingRpgClassic-2026-11-10",
+      "leaseRecord": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/lease.json",
+      "owner": "c8562d1f-35d4-4a5b-b021-dc69c1cc506e",
+      "deadlineUtc": "2026-11-10T08:19:17.349785+00:00",
+      "commitSha": "348495074247c62df28cfc506869f2e8a17afd25",
+      "status": "Completed release/all-gate/Checkpoint01/D1 CI, independent final idle, normal own CAS release and Closure01. No background execution or continuing ownership claimed.",
+      "observedUtc": "2026-11-10T07:58:59.185815+00:00",
+      "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
     }
   },
   "environment": {
@@ -1253,7 +1835,7 @@
       "independentIdleCheck": "InterruptedDesktopIdle01 passed ownership/idle/cleanup separately; not a Browser03 completion",
       "replacement": "CardDesktopBrowser04 actual passed and Root-finalized"
     },
-    "currentRecovery": "Current LivingRpgClassic source/Native/Web/runtime, six browser suites and full public delivery passed; earlier CanonArt restoration/interruption descriptions remain historical.",
+    "currentRecovery": "SelectedGospelWeb02actualpassed with1200.0swindow; Builds02actualbuildsadmissionpassed/exit0/finalguard0/ownedempty. No currentbrowser/sourceCI/newdeploy result.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
     "installedWebGLModule": true,
@@ -1327,7 +1909,9 @@
       ]
     },
     "historicalRecoveryDescription": "Retained workspace originals verified; exact15370 final Web runtime files restored to original /tmp paths. See CanonPublishResume runtime-restoration.json. Historical disconnect below is preserved as a dated event.",
-    "historicalNote": "G1 fresh Native14/Editor and Web02/PC74/localTouch59/publicTouch62 passed. Existing licensed runtime reused; no reinstall. Native/browser diagnostics are not physical-device performance. Initial prerequisite auth/license observations remain dated history."
+    "historicalNote": "G1 fresh Native14/Editor and Web02/PC74/localTouch59/publicTouch62 passed. Existing licensed runtime reused; no reinstall. Native/browser diagnostics are not physical-device performance. Initial prerequisite auth/license observations remain dated history.",
+    "historicalLivingRpgClassicRecoveryDescription": "Current LivingRpgClassic source/Native/Web/runtime, six browser suites and full public delivery passed; earlier CanonArt restoration/interruption descriptions remain historical.",
+    "browserPythonScope": "Prior LivingRpgClassic interpreter selection is historical; current environment readiness/selected interpreter require actual Root checks."
   },
   "capacity": {
     "profile": "living-classic",
@@ -1416,8 +2000,16 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
-  "knownIssuesScope": "Current LivingRpgClassic verified release and pending owned closure; historical G2/CanonArt limitations are preserved separately.",
+  "knownIssuesScope": "Current ClientMotion pending implementation/validation and unchanged verified public; previous LivingRpgClassic/CanonArt/G2 issues remain historical.",
   "knownIssues": [
+    "Card Client06 passed9/0/0 with31PNG and11selectedRootoriginals approved for source/build. Gospel Motion05 passed27/0/0 with58PNG and11selectedRootoriginals approved for source/build. No all31/all58or fresh browser/public visual approval.",
+    "Frozen Gospel sourceea8083bd/XML8ccb66f4 preserves2560x1024 imports, common foot anchor with depth-only correction, NPC path start/corner/stall0.7s fixes and actual23story originalCoreX gates.",
+    "Fresh Core02 actually passed311/0/0 and PublicRangeUnit02 passed123. Earlier Core/media bindings and failed/rejected preparation, Native and atlas previews remain historical.",
+    "Selected CardWeb01+GospelWeb02 andstrictBuilds02actuallypassed; GospelWeb02 maximum1200/recordedwindow1200.0. Earlier Builds01failure/oldGospelWeb01producer andbyte-identical runtime/proof preserved. Sourcecommit/draftPR/CI, fourlocal/twopublicbrowser andnewdeployment remain planned/unexecuted.",
+    "Verified public remains priorM3/GH3/Pages42768236864. Full original parity/exact late-client identity/device performance/user aesthetic approval remain incomplete; multiplayer disabled/future update.",
+    "Fixed lease10:28–16:28KST remains acquired and source is frozen; only Docs3 progress updates are authorized here. Last automation0 was the previous query; no24-hour background or current goal activation claim."
+  ],
+  "knownIssuesAtLivingRpgClassicCompletion": [
     "Current LivingRpgClassic deployment, full15417-file HTTPS, six source-bound browser runs/Root reviews, strict all seal, Checkpoint01/D1 Core+helper CI, final idle, normal own release and Closure01 completed. Exact later commit/CI first saving Closure01 must be observed after writing.",
     "Complete site15417files/982794532B leaves2205468B under985000000B budget; the excluded local marker47B is not a public file. Runtime/Unity build-summary bytes remain distinct.",
     "Native direct review covered selected Card9/Gospel8 only. Every required current browser original55/60/54/46/54/46 and both portal originals were reviewed; remaining Native PNGs were not all directly viewed.",
@@ -2518,7 +3110,7 @@
       "GospelMobile": "LivingBrowser01",
       "CardPublic": "LivingPublic01",
       "GospelPublic": "LivingPublic03",
-      "reportAndWrapperRefs": "activeWork.validation.DesktopMobileAndPublicBrowsers.runs"
+      "reportAndWrapperRefs": "activeLivingRpgClassic.validation.DesktopMobileAndPublicBrowsers.runs"
     },
     "finalAllScopeGateAndSeal": {
       "status": "passed",
@@ -2549,7 +3141,7 @@
       },
       "wrapperScope": "Generic wrapper status command-completed is distinct from the actual product gate JSON status passed."
     },
-    "releaseCompletionRef": "activeWork.releaseCompletion",
+    "releaseCompletionRef": "activeLivingRpgClassic.releaseCompletion",
     "scope": "Actual deployed/publicly checked milestone, Checkpoint01/D1 Core+helper CI, final idle, normal own release and Closure01 completed. Exact final save commit/CI must be observed after writing. Full original parity, all named walk atlases, physical-device performance and user aesthetic approval are not claimed."
   },
   "previousCanonArtDeployment": {
@@ -3445,7 +4037,9 @@
       "status": "completed",
       "conclusion": "success",
       "scope": "Actual completed CanonArt documentation/evidence commit preceding the new LivingRpgClassic branch; no new product publication claimed."
-    }
+    },
+    "newCycleBaseMain": "80b514a492f53efae661544d1e1a2f0a7ee035aa",
+    "newCycleScope": "Root reported actual current main/base80b514a4 before ClientMotion branch. New product source commit/CI is pending; no new CI result or final prior closure-save CI is inferred from the base identifier alone."
   },
   "lastCompletedWorkBeforeCanonArt": {
     "id": "G2",

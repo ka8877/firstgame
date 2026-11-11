@@ -63,7 +63,8 @@ GOSPEL_NATIVE = (
     'PathOfDawn.SmokeTests.GospelCourtyardCompositionSmokeTests.SavedMeetingsKeepTheirCoordinatesAndAnOpenArchitecturalBodySightline',
     'PathOfDawn.SmokeTests.GospelCourtyardCompositionSmokeTests.DefaultViewMakesTheWholeFigureReadableWithoutChangingScreenRelativeDirections',
 )
-REQUIRED_NATIVE_TESTS = {game: base + RELEASE.ADDITIONAL_NATIVE[game]
+REQUIRED_NATIVE_TESTS = {game: tuple(RELEASE.NATIVE_REPLACEMENTS.get(name, name)
+                                   for name in base + RELEASE.ADDITIONAL_NATIVE[game])
                          for game, base in {'FantasyCards': CARD_NATIVE, 'PathOfDawn': GOSPEL_NATIVE}.items()}
 
 
@@ -136,7 +137,7 @@ def verify_core():
     result = regular(folder / 'core-tests.trx')
     root = ET.parse(result).getroot()
     counts = root.find('.//{http://microsoft.com/schemas/VisualStudio/TeamTest/2010}Counters')
-    require(counts is not None and int(counts.get('passed', '0')) >= (311 if RELEASE.IS_LIVING else 309) and counts.get('failed') == counts.get('notExecuted') == '0', 'Current full Core' + ('311' if RELEASE.IS_LIVING else '309') + '+ without failures or skips required')
+    require(counts is not None and int(counts.get('passed', '0')) >= RELEASE.CORE_MINIMUM and counts.get('failed') == counts.get('notExecuted') == '0', 'Current full Core' + str(RELEASE.CORE_MINIMUM) + '+ without failures or skips required')
     require(binding.get('status') == 'passed' and binding.get('sourceChangedDuringRun') is False and binding['results']['sha256'] == digest(result), 'Current immutable Core source/result binding required')
     spec = importlib.util.spec_from_file_location('canon_core_inputs', ROOT / 'Tools/Validation/run-nativity-core.py')
     module = importlib.util.module_from_spec(spec)
@@ -263,7 +264,7 @@ def verify_web_execution(game, proof_path, source_fingerprint):
     require(environment.get('FIRSTGAME_VALIDATION_ROOT') == str(run) and environment.get('FIRSTGAME_BUILD_ROOT') == str(BUILD)
             and environment.get('PYTHONDONTWRITEBYTECODE') == '1' and environment.get('PYTHONOPTIMIZE') == '0'
             and environment.get('PYTHONPYCACHEPREFIX') == str(run / 'GeneratedPythonCache'), 'Actual controlled execution environment differs')
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         require(environment.get('FIRSTGAME_RELEASE_PROFILE') == RELEASE.NAME,
                 'Actual new release profile must be recorded in the executed environment')
     lease = read(checked(invocation['ownedLeaseSnapshot']))
@@ -394,6 +395,8 @@ def verify_browser(game, profile):
     require(plan_path.is_absolute() and plan_path.is_relative_to(ROOT) and digest(regular(plan_path)) == harness['planSha256'], 'Actual current plan source required')
     plan = read(plan_path)[game]
     require(plan.get('revision') == REVISIONS[game], 'Plan revision differs from current release')
+    if RELEASE.IS_CLIENT_MOTION:
+        require(plan.get('sourceStatus') == 'frozen', 'Current ClientMotion coordinate/checkpoint source must be frozen')
     for source in harness.get('capturedSources', []):
         require(digest(regular(ROOT / source['source'])) == digest(regular(ROOT / source['file'])) == source['sha256'], 'Recorded browser source changed')
     require(harness.get('capturedSources'), 'Actual executed browser/helper/plan source snapshots required')

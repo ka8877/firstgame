@@ -344,7 +344,13 @@ namespace PathOfDawn.Presentation
         public void ShowBible()
         { if (Journey == null) return; Voice?.Stop("bible"); Player.Enabled = false; CameraRig.InputEnabled = false; music.Play("page"); Ui.ShowBible(Chronicle.BookPages, Chronicle.DiscoveredCount); }
         public void ShowStatus()
-        { if (Journey == null) return; Voice?.Stop("status"); Player.Enabled = false; Ui.ShowStatus(Journey, Actor.CurrentSprite, Player.MeasuredSpeed); }
+        {
+            if (Journey == null) return;
+            Voice?.Stop("status"); Player.Enabled = false;
+            var fieldFigure = Actor.UsesLayeredMotion && Actor.MotionLayerCount > 1
+                ? Actor.PortraitSprite : Actor.CurrentSprite;
+            Ui.ShowStatus(Journey, fieldFigure, Player.MeasuredSpeed);
+        }
         public void ShowInventory()
         { if (Journey == null) return; Voice?.Stop("inventory"); Player.Enabled = false; Ui.ShowInventory(Journey.LampEquipped); }
         public void ShowQuestLog()

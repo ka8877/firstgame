@@ -152,7 +152,13 @@ namespace PathOfDawn.SmokeTests
                 if (person.IsAmbient)
                 {
                     var actor = person.RootTransform.GetComponentInChildren<GospelPilgrimageActor>();
-                    Assert.That(actor.OriginalAtlasResource, Is.EqualTo("Art/GospelRpg/Actors/pilgrims"));
+                    Assert.That(actor.OriginalAtlasResource, Is.EqualTo("Art/GospelMotion/Neutral/joseph").Or.EqualTo("Art/GospelMotion/Neutral/mary"));
+                    Assert.That(actor.UsesLayeredMotion, Is.True);
+                    Assert.That(actor.MotionContractVersion, Is.EqualTo(2));
+                    Assert.That(actor.MotionDirectionCount, Is.EqualTo(8));
+                    Assert.That(actor.MotionLayerCount, Is.EqualTo(1));
+                    Assert.That(actor.AnimationFrameCount, Is.EqualTo(160));
+                    Assert.That(actor.WalkPoseCount, Is.EqualTo(8)); Assert.That(actor.RunPoseCount, Is.EqualTo(8));
                     Assert.That(actor.UsesExpandedAnimation, Is.True);
                 }
             }

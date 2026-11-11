@@ -88,6 +88,8 @@ def main():
     plan_path = RELEASE.PLAN_DIRECTORY / (RELEASE.PLAN_PREFIX + '-' + plan_name + '-plans.json')
     plan = read(plan_path)[args.game]
     need(plan.get('revision') == evidence.REVISIONS[args.game] and plan.get('suite') == 'modern-real-input-v1', 'Current game/profile plan required')
+    if RELEASE.IS_CLIENT_MOTION:
+        need(plan.get('sourceStatus') == 'frozen', 'Freeze actual ClientMotion product coordinates/checkpoints before browser execution')
     inputs_path = build_root / args.game / 'Web/BuildInputs.json'
     evidence_path = build_root / args.game / 'Web/BuildEvidence.txt'
     inputs = read(inputs_path)
@@ -111,7 +113,7 @@ def main():
     lane.env.update(FIRSTGAME_VALIDATION_ROOT=str(out), FIRSTGAME_BUILD_ROOT=str(build_root),
         FIRSTGAME_STAGE_ROOT=str(evidence.STAGE.absolute()), FIRSTGAME_PROOF_ROOT=str(evidence.PROOF_ROOT.absolute()),
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'), PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0')
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     controller = module.Controller({'helperPath': str(helper), 'helperSha256': native_driver.HELPER_SHA,
         'evidenceRoot': str(control / 'ContainedBrowser' / args.game / args.profile / args.attempt),
@@ -152,7 +154,7 @@ def main():
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
-    if RELEASE.IS_LIVING:
+    if RELEASE.REQUIRES_EXPLICIT_ENV:
         invocation['environmentOverrides']['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
     write(run / 'invocation.json', invocation)
     summary = {'status': 'failed', 'scope': 'current-canon-browser-only', 'game': args.game,

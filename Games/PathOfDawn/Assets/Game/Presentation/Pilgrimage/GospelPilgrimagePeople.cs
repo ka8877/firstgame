@@ -50,6 +50,8 @@ namespace PathOfDawn.Presentation
             public Vector2[] AmbientRoute;
             public float Speed, Pause;
             public Vector3 Goal;
+            public int ProgressPoint = -1;
+            public float BestWaypointDistance = float.PositiveInfinity, BlockedSeconds;
         }
 
         sealed class Population
@@ -229,6 +231,7 @@ namespace PathOfDawn.Presentation
         {
             person.Goal = goal;
             person.Path.Clear(); person.PathPoint = 0;
+            person.ProgressPoint = -1; person.BestWaypointDistance = float.PositiveInfinity; person.BlockedSeconds = 0;
             if (Planar(person.Marker.Position, goal) < .14f) return;
             current.Navigation.FindPath(person.Marker.Position, goal, person.Path);
         }
@@ -242,6 +245,7 @@ namespace PathOfDawn.Presentation
                 bool talking = person.Marker.IsCurrentObjective && chronicle.Stage == GospelQuestStage.Reading;
                 if (!running || talking || dt <= 0)
                 {
+                    person.BlockedSeconds = 0;
                     person.Marker.IsWalking = false;
                     person.Actor.SetMotion(Vector3.zero, true, person.Marker.FacingYaw);
                     if (talking) person.Actor.FaceConversationPartner(player.Position);
@@ -266,11 +270,37 @@ namespace PathOfDawn.Presentation
                 }
                 Vector3 before = person.Marker.Position;
                 Vector3 delta = person.Path[person.PathPoint] - before; delta.y = 0;
-                if (delta.magnitude < .18f) { person.PathPoint++; continue; }
-                Vector3 direction = delta.normalized;
+                if (delta.magnitude < .18f && (person.PathPoint + 1 >= person.Path.Count ||
+                    current.Navigation.CanTraverse(before, person.Path[person.PathPoint + 1])))
+                { person.PathPoint++; person.ProgressPoint = -1; continue; }
+                if (person.ProgressPoint != person.PathPoint)
+                {
+                    person.ProgressPoint = person.PathPoint;
+                    person.BestWaypointDistance = delta.magnitude; person.BlockedSeconds = 0;
+                }
+                else if (delta.magnitude < person.BestWaypointDistance - .04f)
+                { person.BestWaypointDistance = delta.magnitude; person.BlockedSeconds = 0; }
+                else person.BlockedSeconds += dt;
+                if (person.BlockedSeconds >= .7f)
+                {
+                    Debug.Log("FIRSTGAME_PEOPLE_REPATH id=" + person.Marker.Id + " position=" + before.ToString("F4") +
+                        " waypoint=" + person.Path[person.PathPoint].ToString("F4") + " goal=" + person.Goal.ToString("F4") +
+                        " blocker=" + current.Navigation.ClearanceProblem(before));
+                    SetPath(person, person.Goal);
+                    person.Marker.IsWalking = false; person.Actor.SetMotion(Vector3.zero, true, person.Marker.FacingYaw);
+                    continue;
+                }
+                Vector3 pathDirection = delta.normalized;
+                Vector3 direction = pathDirection;
                 Vector3 avoidance = Avoidance(person, before);
                 direction = (direction + avoidance).normalized;
-                Vector3 step = direction * Mathf.Min(person.Speed * dt, delta.magnitude);
+                float distance = Mathf.Min(person.Speed * dt, delta.magnitude);
+                // Separation must not push a person outside the collision-
+                // checked corridor. Try the original path when only the
+                // avoidance step intersects scenery.
+                if (!current.Navigation.CanTraverse(before, before + direction * distance) &&
+                    current.Navigation.CanTraverse(before, before + pathDirection * distance)) direction = pathDirection;
+                Vector3 step = direction * distance;
                 person.Controller.Move(step + Vector3.down * (2.5f * dt));
                 Vector3 actual = (person.Marker.Position - before) / dt; actual.y = 0;
                 person.Marker.IsWalking = actual.sqrMagnitude > .003f;
