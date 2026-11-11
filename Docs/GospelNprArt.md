@@ -34,6 +34,8 @@ lilToon2.4.1은 commit `e698a2f791bd28dd1aabf227c74f14bedeca3587`의 MIT 코드�
 
 [탐험 카메라](../Games/PathOfDawn/Assets/Game/Presentation/Pilgrimage/GospelPilgrimageCamera.cs)는 기본 yaw47°·pitch18°·zoom5.6, FOV47°다. 도입 연출의 별도 카메라 값을 탐험 기본값으로 덮지 않는다. 인물 크기·옷·소품은 정면/옆면·걷기·달리기·점프·대화에서 함께 확인한다.
 
+카메라의 실제 가림 보정은 애니메이션 bounds 대신 authored `VisualHeight`를 사용하고, 가까운 인물 몸체·우물·기둥을 확인해 가능한 완만한 측면 시야를 먼저 찾는다. 사용자 회전·줌과 실제 보정 시야 기준 이동을 유지한다. 근접 NPC의 카메라 가림 처리는 그리기만 일시 복원하며 People 위치/대화/저장이나 물리 충돌을 바꾸지 않는다. 장식용 항아리와 인물의 물리 겹침 관찰은 해결한 것으로 표시하지 않는다.
+
 UI는 같은 실제 모델의 기본512×512 portrait, RPG HUD/미니맵과 책 형태 성경을 연결한다. 인물 교체 시 얼굴만 그린 별도 그림으로 바꾸지 말고 모델/표정/portrait의 일관성을 확인한다. 기존23사건·19본문·51세부·28음성, 실제 발화·책의 두 단 흐름·발견 상태·안정ID·저장을 보존한다.
 
 ## 다음 아트 작업과 현재 검증 범위
@@ -44,4 +46,6 @@ Native07/Web06의 기술 통과, Mesa Preview04의 피부·머리·옷·실제 p
 
 얼굴 동일 weight setter 생략·hidden portrait 갱신 생략/재표시 sync·visible cache Tick의2CS는 이전 Native08/Root25·Lifecycle02·Web07 기술 통과를 남겼다. Preview07은 정상 종료9179f79c…/runtime 불변/PageErrors0이고 Root가 title·MarySummary·chapter·field·front·side6원본을 봤지만 최종중복7은 보지 않아 전체 승인이 아니다. fieldclick3.53248초·prehoverwheel19.31566초·frontdrag47.43692초·side15.23408초의 input 관측으로 지연 해결을 주장하지 않는다.
 
-현재 C4aff Native10/Root27·Lifecycle04·Web09·기술검사와 Desktop02의110/66·audio4/reload2/error0는 유효한 통과다. 그러나 Mobile01 필수after-exploration-dash의 own-player torso/well scenery camera는 약19:00Z Root거절·Ctrl-C중단/outer실패다.16/52marks만 남았고 diagonal관측미표시·afterDash거절이므로 Mobile/M/P승인은 없다. Pitch-only scenery fallback camera/Native회귀 audit는 아직 초안·미적용이며 Native11/Web10은 없다. 기둥근접 카메라·장식항아리 겹침도 고쳐졌다고 주장하지 않는다. PR7 actual C4 0cbb2b7a…/CI success라도 draft·미병합·P47공개불변이다. 현재 owner는 Resume이고 독립 세 번째 CameraResume는 정상 cleanup/idle/종료 뒤의 계획일 뿐이다. 속도 개선·사용자승인·AAA동등 주장은 없다.
+Native11Story 원인미해결·12&13미재현은 제품Storyfix로 바꾸지 않는다. Native12 overhead거절/27미검토와 Native13 lamp검사 실패/Root2natural 제한 관측을 보존한다. Lamp metric만 actualworldvertices/orientedrotation으로 수정해 모든 numericthreshold·Actor/model/importer/product를 유지한 current3e2583 Native14는15/0/0·Root전체29선정을 완료했다. Lifecycle05의 실제3복원과 Native14 명시 결합 Web10 build/proof도 통과했다. 최종3browser 계획은 모든 단계·필수 원본·음성4·재접속2·CardPublic17을 유지해 Root 승인을 받았다. Desktop03은111검사·Root66전체, Mobile02는102검사·Root52전체를 통과해 확정했고 각 음성4·실제 재접속2와 wrapper/정리도 완료했다. Mobile02 대시 후 실제 전신·길이 보이는 화면과 마리아 대화/이동·성전/성경·장비/저장 NPC를 검토했다. 최종 후보 CI·병합·public은 남았다. 알려진 아트 공백·일부 UI entrancefade·근접 NPC의 일시적인 카메라 그리기 가림을 유지하고 실제 기기 FPS·AAA 동등 품질·사용자 미적 승인을 주장하지 않는다.
+
+Oldruntime/proof35pairs/70paths hardlink는 모든 바이트를 유지하고 metadata 변경을 기록한 보존이며 workspace만764407808B 절약했다. 전용 재생성 Bee cache는 Web10 완료 뒤 전체source·선택 build/proof·LastBuild 불변을 확인해 정리했다. 이 저장 공간 작업으로 제품 승인을 바꾸지 않는다. PR7draftC5/Maina34/P47공개는 그대로다.

@@ -181,7 +181,43 @@ namespace PathOfDawn.SmokeTests
             Assert.That(carried.IsChildOf(actor.CharacterView.RightHand), Is.True, "The lamp belongs to the actual hand bone.");
             var renderers = carried.GetComponentsInChildren<MeshRenderer>(); Assert.That(renderers.Length, Is.GreaterThan(0));
             Bounds bounds = renderers[0].bounds; foreach (var renderer in renderers.Skip(1)) bounds.Encapsulate(renderer.bounds);
-            float longest = Mathf.Max(bounds.size.x, Mathf.Max(bounds.size.y, bounds.size.z));
+            float worldAabbLongest = Mathf.Max(bounds.size.x, Mathf.Max(bounds.size.y, bounds.size.z));
+            // Keep real world metres, but measure in the carried lamp's rotated
+            // axes. InverseTransformPoint would incorrectly remove its scale.
+            Quaternion inverseRotation = Quaternion.Inverse(carried.rotation);
+            Vector3 origin = carried.position;
+            Bounds orientedWorldBounds = default; int vertexCount = 0;
+            foreach (var renderer in renderers)
+            {
+                var filter = renderer.GetComponent<MeshFilter>();
+                Assert.That(filter, Is.Not.Null, "Measure the actual rendered lamp mesh.");
+                Assert.That(filter.sharedMesh, Is.Not.Null);
+                // The preserved FBX is non-readable in player builds. This
+                // Editor-only smoke takes a read-only snapshot without reimport.
+                using (var data = UnityEditor.MeshUtility.AcquireReadOnlyMeshData(filter.sharedMesh))
+                using (var vertices = new Unity.Collections.NativeArray<Vector3>(data[0].vertexCount, Unity.Collections.Allocator.Temp))
+                {
+                    data[0].GetVertices(vertices);
+                    Assert.That(vertices.Length, Is.GreaterThan(0));
+                    for (int index = 0; index < vertices.Length; index++)
+                    {
+                        Vector3 world = filter.transform.TransformPoint(vertices[index]);
+                        Vector3 point = inverseRotation * (world - origin);
+                        if (vertexCount++ == 0) orientedWorldBounds = new Bounds(point, Vector3.zero);
+                        else orientedWorldBounds.Encapsulate(point);
+                    }
+                }
+            }
+            Vector3 size = orientedWorldBounds.size;
+            Assert.That(Finite(size.x) && Finite(size.y) && Finite(size.z), Is.True);
+            float longest = Mathf.Max(size.x, Mathf.Max(size.y, size.z));
+            Debug.Log("FIRSTGAME_NPR_LAMP_WORLD_METRES worldAabbSize=" + bounds.size.ToString("F6")
+                + " worldAabbLongest=" + worldAabbLongest.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " orientedWorldSize=" + size.ToString("F6")
+                + " orientedWorldLongest=" + longest.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " facingYaw=" + actor.FacingYaw.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " carriedWorldYaw=" + carried.eulerAngles.y.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " vertices=" + vertexCount);
             Assert.That(longest, Is.InRange(.18f, .25f));
             Assert.That(longest, Is.LessThan(actor.VisualHeight * .25f));
             Assert.That(Vector3.Dot(carried.up, Vector3.up), Is.GreaterThan(.995f));
@@ -358,7 +394,17 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(rig.ResolvedDistance, Is.EqualTo(baseline).Within(.025f), "An ordinary trigger must not become a camera wall.");
                 obstruction.AddComponent<GospelNprCameraScenery>(); Physics.SyncTransforms(); rig.Snap();
                 Assert.That(rig.IsObstructed, Is.True); Assert.That(rig.ObstructionCount, Is.GreaterThan(0));
-                Assert.That(rig.ResolvedDistance, Is.LessThan(baseline - .15f));
+                Assert.That(rig.DesiredPathDistance, Is.LessThan(baseline - .15f), "The unchanged requested-ray threshold proves the actual marked obstruction.");
+                if (rig.IsAvoidingObstruction)
+                {
+                    Assert.That(rig.ComfortableDistance, Is.GreaterThanOrEqualTo(2.25f));
+                    Assert.That(rig.ResolvedDistance, Is.GreaterThanOrEqualTo(rig.ComfortableDistance));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(rig.EffectivePitch, rig.Pitch)) > .01f
+                        || Mathf.Abs(Mathf.DeltaAngle(rig.EffectiveYaw, rig.Yaw)) > .01f, Is.True);
+                    AssertReadableTraveler(camera);
+                    AssertCameraClearOfActualScenery(camera, new Collider[] { box });
+                }
+                else Assert.That(rig.ResolvedDistance, Is.LessThan(baseline - .15f));
                 Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
                 Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
                 Assert.That(App.World.GetComponentsInChildren<GospelNprCameraScenery>(true).Length, Is.GreaterThan(0), "The shipped world must use the same camera-only clearance mechanism.");
@@ -366,6 +412,151 @@ namespace PathOfDawn.SmokeTests
             finally { UnityEngine.Object.Destroy(obstruction); }
             yield return null; rig.Snap(); yield return Shot("perspective-spatial-field");
             yield return ExerciseNearCameraNpcRendering(rig, camera);
+            yield return ExerciseActualSceneryCameraClearance(rig, camera);
+        }
+
+        IEnumerator ExerciseActualSceneryCameraClearance(GospelPilgrimageCamera rig, Camera camera)
+        {
+            // Controlled Native geometry setup only. Pause through the actual
+            // app so camera queries cannot advance people, input or autosaving.
+            // Public/browser routes still exercise ordinary movement separately.
+            float originalYaw = rig.Yaw, originalPitch = rig.Pitch, originalZoom = rig.Zoom;
+            App.Pause(); yield return null;
+            App.Ui.CanvasView.gameObject.SetActive(false);
+            string slot = App.ActiveSaveSlot, savedOriginal = backend.Read(App.ActiveSaveSlot);
+            string peopleOriginal = JsonUtility.ToJson(App.People.Capture());
+            string coreOriginal = GospelSaveCodec.Encode(App.Journey.CaptureSave());
+            var well = App.World.GetComponentsInChildren<GospelAuthoredPropRoot>(false).Single(prop => prop.Kind == "well");
+            Assert.That(well.transform.position.x, Is.EqualTo(-9.2f).Within(.01f));
+            Assert.That(well.transform.position.z, Is.EqualTo(-4.2f).Within(.01f));
+            Assert.That(well.GetComponentsInChildren<MeshFilter>().Any(filter => filter.sharedMesh != null && filter.sharedMesh.vertexCount > 3), Is.True);
+            var wellTimber = well.GetComponentsInChildren<BoxCollider>().Single(collider => collider.name == "Well timber collision" && collider.transform.localPosition.x > 0);
+            var workshop = App.World.GetComponentsInChildren<Transform>(false).Single(node => node.name == "Open Nazareth cedar and linen workshop");
+            var posts = workshop.GetComponentsInChildren<GospelNprCameraScenery>()
+                .Where(marker => marker.transform.parent.name == "Workshop raised cedar post")
+                .Select(marker => marker.GetComponent<BoxCollider>()).OrderBy(collider => collider.bounds.center.x).ThenBy(collider => collider.bounds.center.z).ToArray();
+            Assert.That(posts.Length, Is.EqualTo(4));
+            Assert.That(posts[0].transform.parent.GetComponent<MeshFilter>().sharedMesh.vertexCount, Is.GreaterThan(0));
+            Vector3 wellForward = Quaternion.Euler(0, 47, 0) * Vector3.forward;
+            Vector3 pillarForward = Quaternion.Euler(0, 227, 0) * Vector3.forward;
+            var cases = new[]
+            {
+                new SceneryCameraCase { Name = "well", Yaw = 47, Foot = wellTimber.bounds.center + wellForward * .85f,
+                    Obstacles = well.GetComponentsInChildren<Collider>() },
+                new SceneryCameraCase { Name = "workshop-pillar", Yaw = 227, Foot = posts[0].bounds.center + pillarForward * 1.15f,
+                    Obstacles = workshop.GetComponentsInChildren<GospelNprCameraScenery>().Select(marker => (Collider)marker.GetComponent<BoxCollider>()).ToArray() }
+            };
+            int cullingMask = camera.cullingMask; float fieldOfView = camera.fieldOfView;
+            var travelerMeshes = App.Actor.SkinnedRenderers.ToArray();
+            var drawFlags = travelerMeshes.Select(mesh => mesh.forceRenderingOff).ToArray();
+            var enabledFlags = travelerMeshes.Select(mesh => mesh.enabled).ToArray();
+            try
+            {
+                foreach (var item in cases)
+                {
+                    // Position only the physical fixture before recording its
+                    // invariant pose. The camera must then solve the real scene
+                    // without moving this owner or writing the saved record.
+                    Vector3 foot = item.Foot; foot.y = App.World.HeightAt(foot.x, foot.z);
+                    App.Player.SetPose(foot, 137); App.Actor.SnapToPhysicalPose(); Physics.SyncTransforms();
+                    yield return SmokeUi.WaitUntil(() => App.Player.IsGrounded, 3, "The scenery camera fixture did not settle onto the real field: " + item.Name);
+                    Vector3 physical = App.Player.Position; float physicalYaw = App.Player.FacingYaw;
+                    rig.SetOrbit(item.Yaw, 18); rig.SetZoom(5.6f); rig.Snap(); yield return null;
+                    Assert.That(rig.IsObstructed, Is.True); Assert.That(rig.ObstructionCount, Is.GreaterThan(0));
+                    Assert.That(rig.DesiredPathDistance, Is.LessThan(rig.ComfortableDistance), "The actual well/pillar must reproduce an unreadable requested camera path.");
+                    Assert.That(rig.IsAvoidingObstruction, Is.True);
+                    Assert.That(rig.ComfortableDistance, Is.GreaterThanOrEqualTo(2.25f));
+                    Assert.That(rig.ResolvedDistance, Is.GreaterThanOrEqualTo(rig.ComfortableDistance));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(rig.EffectivePitch, rig.Pitch)) > .01f
+                        || Mathf.Abs(Mathf.DeltaAngle(rig.EffectiveYaw, rig.Yaw)) > .01f, Is.True, "A safe transient rendering view must differ from the obstructed requested view.");
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(camera.transform.eulerAngles.x, rig.EffectivePitch)), Is.LessThan(.01f));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(camera.transform.eulerAngles.y, rig.EffectiveYaw)), Is.LessThan(.01f));
+                    Assert.That(rig.FinalPathDistance, Is.GreaterThanOrEqualTo(rig.ResolvedDistance));
+                    AssertReadableTraveler(camera);
+                    AssertCameraClearOfActualScenery(camera, item.Obstacles);
+                    yield return Shot("actual-" + item.Name + "-keeps-full-traveler-visible");
+                    AssertReadableTraveler(camera); AssertCameraClearOfActualScenery(camera, item.Obstacles);
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(0, camera.transform.eulerAngles.x)), Is.LessThanOrEqualTo(65f),
+                        "The actual " + item.Name + " view must retain a natural third-person pitch instead of an extreme overhead escape.");
+                    Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
+                    Assert.That(rig.Yaw, Is.EqualTo(item.Yaw)); Assert.That(rig.Pitch, Is.EqualTo(18)); Assert.That(rig.Zoom, Is.EqualTo(5.6f));
+                    // Motor movement follows the actual rendered camera axes.
+                    // A transient yaw escape must report those visible axes,
+                    // while preserving the user's requested orbit separately.
+                    Vector3 forward = Quaternion.Euler(0, rig.EffectiveYaw, 0) * Vector3.forward;
+                    Vector3 right = Quaternion.Euler(0, rig.EffectiveYaw, 0) * Vector3.right;
+                    Assert.That(Vector3.Dot(Flat(camera.transform.forward), forward), Is.GreaterThan(.9999f), "The reported effective view must match the actual movement camera basis.");
+                    Assert.That(Vector3.Dot(Flat(camera.transform.right), right), Is.GreaterThan(.9999f));
+                    Assert.That(camera.cullingMask, Is.EqualTo(cullingMask)); Assert.That(camera.fieldOfView, Is.EqualTo(fieldOfView));
+                    Assert.That(App.ActiveSaveSlot, Is.EqualTo(slot)); Assert.That(backend.Read(slot), Is.EqualTo(savedOriginal));
+                    Assert.That(JsonUtility.ToJson(App.People.Capture()), Is.EqualTo(peopleOriginal));
+                    Assert.That(GospelSaveCodec.Encode(App.Journey.CaptureSave()), Is.EqualTo(coreOriginal));
+                    for (int index = 0; index < travelerMeshes.Length; index++)
+                    {
+                        Assert.That(travelerMeshes[index].enabled, Is.EqualTo(enabledFlags[index]));
+                        Assert.That(travelerMeshes[index].forceRenderingOff, Is.EqualTo(drawFlags[index]));
+                    }
+                    // A deliberately clear view from the other side must
+                    // return to the requested pitch without a physical move.
+                    rig.SetOrbit(Mathf.Repeat(item.Yaw + 180, 360), 18); rig.Snap(); yield return null;
+                    Assert.That(rig.DesiredPathDistance, Is.GreaterThanOrEqualTo(rig.ComfortableDistance));
+                    Assert.That(rig.IsAvoidingObstruction, Is.False);
+                    Assert.That(rig.EffectivePitch, Is.EqualTo(rig.Pitch).Within(.01f));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(rig.EffectiveYaw, rig.Yaw)), Is.LessThan(.01f));
+                    AssertReadableTraveler(camera);
+                    Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
+                    Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
+                    Assert.That(backend.Read(slot), Is.EqualTo(savedOriginal));
+                    Assert.That(JsonUtility.ToJson(App.People.Capture()), Is.EqualTo(peopleOriginal));
+                }
+            }
+            finally { rig.SetOrbit(originalYaw, originalPitch); rig.SetZoom(originalZoom); rig.Snap(); }
+        }
+
+        sealed class SceneryCameraCase
+        {
+            public string Name;
+            public float Yaw;
+            public Vector3 Foot;
+            public Collider[] Obstacles;
+        }
+
+        void AssertReadableTraveler(Camera camera)
+        {
+            Assert.That(camera.orthographic, Is.False);
+            Assert.That(Finite(camera.transform.position.x) && Finite(camera.transform.position.y) && Finite(camera.transform.position.z), Is.True);
+            Vector3 head = camera.WorldToViewportPoint(App.Actor.CharacterView.Head.position);
+            Vector3 feet = camera.WorldToViewportPoint(App.Actor.VisualFootOrigin.position + Vector3.up * .04f);
+            foreach (var point in new[] { head, feet })
+            {
+                Assert.That(point.z, Is.GreaterThan(camera.nearClipPlane));
+                Assert.That(point.x, Is.InRange(.06f, .94f)); Assert.That(point.y, Is.InRange(.06f, .94f));
+            }
+            Assert.That(Mathf.Abs(head.y - feet.y), Is.InRange(.08f, .78f), "The actual traveler must fit with readable head-to-foot separation, not fill the view with a torso.");
+            Assert.That(Vector3.Distance(camera.transform.position, App.Actor.CharacterView.Head.position), Is.GreaterThan(1.2f));
+        }
+
+        void AssertCameraClearOfActualScenery(Camera camera, IReadOnlyList<Collider> obstacles)
+        {
+            var corners = new Vector3[4];
+            camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), camera.nearClipPlane, Camera.MonoOrStereoscopicEye.Mono, corners);
+            var overlaps = Physics.OverlapSphere(camera.transform.position, .20f, ~0, QueryTriggerInteraction.Collide);
+            Assert.That(obstacles.Any(obstacle => obstacle != null && overlaps.Contains(obstacle)), Is.False, "The actual camera endpoint sphere must remain outside scene geometry.");
+            var samples = new List<Vector3> { camera.transform.position };
+            samples.AddRange(corners.Select(point => camera.transform.TransformPoint(point)));
+            foreach (var obstacle in obstacles.Where(collider => collider != null && collider.enabled && collider.gameObject.activeInHierarchy))
+            foreach (var point in samples)
+                Assert.That(Vector3.Distance(point, obstacle.ClosestPoint(point)), Is.GreaterThanOrEqualTo(.04f), "The eye and real near-plane corners need geometric clearance from " + obstacle.name);
+            var hips = App.Actor.Animator.GetBoneTransform(HumanBodyBones.Hips);
+            Assert.That(hips, Is.Not.Null);
+            foreach (var target in new[] { App.Actor.CharacterView.Head.position, hips.position, App.Actor.VisualFootOrigin.position + Vector3.up * .04f })
+            {
+                Vector3 delta = target - camera.transform.position;
+                var ray = new Ray(camera.transform.position, delta.normalized);
+                foreach (var obstacle in obstacles.Where(collider => collider != null && collider.enabled && collider.gameObject.activeInHierarchy))
+                    Assert.That(obstacle.Raycast(ray, out var hit, delta.magnitude - .03f), Is.False, "Actual scene geometry must not hide the traveler's head, hips or feet: " + obstacle.name);
+            }
         }
 
         IEnumerator ExerciseNearCameraNpcRendering(GospelPilgrimageCamera rig, Camera camera)
@@ -383,9 +574,12 @@ namespace PathOfDawn.SmokeTests
             Assert.That(masking.isActiveAndEnabled, Is.True);
             Vector3 physical = App.Player.Position; float physicalYaw = App.Player.FacingYaw;
             float zoom = rig.Zoom, yaw = rig.Yaw, pitch = rig.Pitch, distance = rig.ResolvedDistance;
+            float staticPathDistance = rig.DesiredPathDistance; int staticObstructions = rig.ObstructionCount;
+            bool staticAvoidance = rig.IsAvoidingObstruction;
             int named = App.People.NamedCount, ambient = App.People.AmbientCount, people = App.People.Count;
             var currentPerson = App.People.CurrentPerson;
             string slot = App.ActiveSaveSlot, quest = App.Chronicle.CurrentQuest.Id;
+            string savedOriginal = backend.Read(slot);
             int discovered = App.Chronicle.DiscoveredCount; var stage = App.Chronicle.Stage;
             var travelerMeshes = App.Actor.SkinnedRenderers.ToArray();
             var travelerFlags = travelerMeshes.Select(mesh => mesh.forceRenderingOff).ToArray();
@@ -393,14 +587,24 @@ namespace PathOfDawn.SmokeTests
             var owner = new GameObject("NPR camera regression NPC physical owner").transform;
             owner.SetParent(App.People.transform, false);
             GospelPilgrimageActor blocker = null;
+            CharacterController npcController = null;
             Action<ScriptableRenderContext, Camera> begin = null, end = null;
             try
             {
-                // This is an independent actual NPR visual under the same field
-                // population root, not a registered person, collider or quest.
+                // This is an independent actual NPR actor under the same field
+                // population root, not a registered gameplay person or quest.
                 blocker = GospelPilgrimageActor.BuildNpc(owner, camera, "mary");
                 blocker.SetGroundSampler(App.World.HeightAt);
                 blocker.SetMotion(Vector3.zero, true, yaw + 180);
+                // Real People place CharacterController on the physical owner
+                // and their Actor on a child. Reproduce that ownership shape;
+                // a parent-only Actor query must not turn this NPC into a wall.
+                npcController = owner.gameObject.AddComponent<CharacterController>();
+                npcController.enabled = false;
+                npcController.height = blocker.VisualHeight; npcController.center = Vector3.up * (blocker.VisualHeight * .5f);
+                npcController.radius = .21f; npcController.skinWidth = .025f;
+                npcController.minMoveDistance = 0; npcController.stepOffset = .26f; npcController.slopeLimit = 55;
+                Assert.That(blocker.transform.parent, Is.SameAs(owner)); Assert.That(blocker.transform.localPosition, Is.EqualTo(Vector3.zero));
                 var meshes = blocker.SkinnedRenderers.ToArray();
                 var flags = meshes.Select(mesh => mesh.forceRenderingOff).ToArray();
                 var enabled = meshes.Select(mesh => mesh.enabled).ToArray();
@@ -418,7 +622,8 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(new HashSet<Mesh>(portraitMeshes.Select(mesh => mesh.sharedMesh)).SetEquals(sourceMeshes), Is.True);
                 bool nearPhase = true, nearNpcMasked = true, movedNpcOriginal = true;
                 bool travelerDrawState = true, portraitDrawState = true, restoredAfterWorld = true;
-                bool observedCorrectWorldScope = true;
+                bool observedCorrectWorldScope = true, preservedPeopleDuringRender = true, preservedSaveDuringRender = true;
+                string renderPeoplePose = null, renderSave = null;
                 int nearRenders = 0, movedRenders = 0, portraitRenders = 0, completedWorldRenders = 0;
                 // The camera helper subscribed during scene initialization.
                 // Observe its actual draw flags after its begin handler and its
@@ -427,6 +632,7 @@ namespace PathOfDawn.SmokeTests
                 {
                     if (viewed == camera)
                     {
+                        renderPeoplePose = JsonUtility.ToJson(App.People.Capture()); renderSave = backend.Read(slot);
                         observedCorrectWorldScope &= masking.LastViewedCamera == camera
                             && masking.LastObservedTarget == App.Player.transform;
                         travelerDrawState &= travelerMeshes.Select((mesh, index) => mesh.forceRenderingOff == travelerFlags[index]).All(value => value);
@@ -455,16 +661,25 @@ namespace PathOfDawn.SmokeTests
                 {
                     if (viewed != camera) return;
                     completedWorldRenders++;
+                    preservedPeopleDuringRender &= renderPeoplePose == JsonUtility.ToJson(App.People.Capture());
+                    preservedSaveDuringRender &= renderSave == backend.Read(slot);
                     restoredAfterWorld &= meshes.Select((mesh, index) => mesh.forceRenderingOff == flags[index]).All(value => value)
                         && masking.OwnedRendererCount == 0;
                 };
                 RenderPipelineManager.beginCameraRendering += begin;
                 RenderPipelineManager.endCameraRendering += end;
-                // Reproduce a real skinned robe in the near view. No collider,
-                // camera-wall marker or gameplay owner is moved to solve it.
+                // Arrange this one test-owned NPC and its controller together.
+                // Camera solving must ignore that NPC's gameplay collider while
+                // actual world rendering still masks its near-view robe.
+                npcController.enabled = false;
                 owner.position = camera.transform.position + camera.transform.forward * .85f
                     - Vector3.up * (blocker.VisualHeight * .54f);
+                npcController.enabled = true; Physics.SyncTransforms();
                 Vector3 blockingPose = owner.position; Quaternion ownerRotation = owner.rotation;
+                string beforeCameraPeople = JsonUtility.ToJson(App.People.Capture()); string beforeCameraSave = backend.Read(slot);
+                rig.Snap();
+                Assert.That(JsonUtility.ToJson(App.People.Capture()), Is.EqualTo(beforeCameraPeople));
+                Assert.That(backend.Read(slot), Is.EqualTo(beforeCameraSave));
                 yield return null; yield return null;
                 AssertInView(camera, App.Actor.CharacterView.Head.position);
                 AssertInView(camera, App.Actor.VisualFootOrigin.position + Vector3.up * .04f);
@@ -475,6 +690,9 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(Vector3.Distance(App.Player.Position, physical), Is.LessThan(.001f));
                 Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.001f));
                 Assert.That(rig.ResolvedDistance, Is.EqualTo(distance).Within(.025f), "A passing NPC must not push the field camera into the player.");
+                Assert.That(rig.DesiredPathDistance, Is.EqualTo(staticPathDistance).Within(.025f), "The People-owned NPC controller must not shorten the scenery probe.");
+                Assert.That(rig.ObstructionCount, Is.EqualTo(staticObstructions)); Assert.That(rig.IsAvoidingObstruction, Is.EqualTo(staticAvoidance));
+                Assert.That(npcController.enabled, Is.True);
                 Assert.That(blocker.CharacterView.HasVisiblePortrait && portraitCamera.enabled, Is.True);
                 AssertPortraitPixels(portrait);
                 Assert.That(meshes.Select((mesh, index) => mesh.forceRenderingOff == flags[index]).All(value => value), Is.True);
@@ -482,8 +700,10 @@ namespace PathOfDawn.SmokeTests
                 // Move only this test-owned visual out of the view and prove
                 // that the same renderers recover their original draw state.
                 nearPhase = false;
+                npcController.enabled = false;
                 owner.position = camera.transform.position + camera.transform.right * 8
                     + camera.transform.forward * 2 - Vector3.up * (blocker.VisualHeight * .54f);
+                npcController.enabled = true; Physics.SyncTransforms();
                 Vector3 clearPose = owner.position;
                 yield return null; yield return null;
                 AssertInView(camera, App.Actor.CharacterView.Head.position);
@@ -492,6 +712,7 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(movedRenders, Is.GreaterThan(0)); Assert.That(movedNpcOriginal, Is.True, "An NPC leaving the view must recover its exact preceding renderer flags.");
                 Assert.That(completedWorldRenders, Is.GreaterThan(0)); Assert.That(restoredAfterWorld, Is.True);
                 Assert.That(travelerDrawState && portraitDrawState && observedCorrectWorldScope, Is.True);
+                Assert.That(preservedPeopleDuringRender && preservedSaveDuringRender, Is.True);
                 Assert.That(portraitRenders, Is.GreaterThan(0)); Assert.That(blocker.CharacterView.HasVisiblePortrait && portraitCamera.enabled, Is.True);
                 AssertPortraitPixels(portrait);
                 Assert.That(Vector3.Distance(owner.position, clearPose), Is.LessThan(.0001f));
@@ -510,6 +731,10 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(rig.ResolvedDistance, Is.EqualTo(distance).Within(.025f));
                 Assert.That(App.People.Count, Is.EqualTo(people)); Assert.That(App.People.NamedCount, Is.EqualTo(named)); Assert.That(App.People.AmbientCount, Is.EqualTo(ambient));
                 Assert.That(App.People.CurrentPerson, Is.SameAs(currentPerson)); Assert.That(App.ActiveSaveSlot, Is.EqualTo(slot));
+                Assert.That(backend.Read(slot), Is.EqualTo(savedOriginal));
+                Assert.That(rig.DesiredPathDistance, Is.EqualTo(staticPathDistance).Within(.025f));
+                Assert.That(rig.ObstructionCount, Is.EqualTo(staticObstructions)); Assert.That(rig.IsAvoidingObstruction, Is.EqualTo(staticAvoidance));
+                Assert.That(npcController.enabled, Is.True); Assert.That(blocker.transform.localPosition, Is.EqualTo(Vector3.zero));
                 Assert.That(App.Chronicle.CurrentQuest.Id, Is.EqualTo(quest)); Assert.That(App.Chronicle.Stage, Is.EqualTo(stage)); Assert.That(App.Chronicle.DiscoveredCount, Is.EqualTo(discovered));
             }
             finally
@@ -793,6 +1018,38 @@ namespace PathOfDawn.SmokeTests
             yield return Shot("people-remain-after-dialogue-reload");
         }
 
+        string StoryOpeningStateSnapshot(string phase)
+        {
+            var owner = App;
+            var chronicle = owner != null ? owner.Chronicle : null;
+            var quest = chronicle != null ? chronicle.CurrentQuest : null;
+            var opening = owner != null ? owner.OpeningStage : null;
+            var keys = Keyboard.current;
+            string snapshot = "phase=" + phase + " frame=" + Time.frameCount
+                + " realtime=" + Time.realtimeSinceStartup.ToString("R", System.Globalization.CultureInfo.InvariantCulture)
+                + " appId=" + (owner != null ? owner.GetInstanceID() : 0)
+                + " inGame=" + (owner != null && owner.InGame)
+                + " complete=" + (chronicle != null ? chronicle.IsComplete.ToString() : "<none>")
+                + " prologue=" + (quest != null ? quest.IsPrologue.ToString() : "<none>")
+                + " questId=" + (quest != null ? quest.Id : "<none>")
+                + " stage=" + (chronicle != null ? chronicle.Stage.ToString() : "<none>")
+                + " voiceKey=" + (chronicle != null && !chronicle.IsComplete ? chronicle.StoryVoiceKey : "<none>")
+                + " uiView=" + (owner != null && owner.Ui != null ? owner.Ui.CurrentView : "<none>")
+                + " openingId=" + (opening != null ? opening.GetInstanceID() : 0)
+                + " openingVisible=" + (opening != null && opening.IsVisible)
+                + " openingSet=" + (opening != null ? opening.CurrentSet : "<none>")
+                + " openingActive=" + (opening != null && opening.gameObject.activeInHierarchy)
+                + " openingEnabled=" + (opening != null && opening.enabled)
+                + " actorActive=" + (owner != null && owner.Actor != null && owner.Actor.gameObject.activeInHierarchy)
+                + " rigEnabled=" + (owner != null && owner.CameraRig != null && owner.CameraRig.enabled)
+                + " keyM=" + (keys != null && keys.mKey.wasPressedThisFrame)
+                + " keyI=" + (keys != null && keys.iKey.wasPressedThisFrame)
+                + " keyB=" + (keys != null && keys.bKey.wasPressedThisFrame)
+                + " keyEscape=" + (keys != null && keys.escapeKey.wasPressedThisFrame);
+            Debug.Log("FIRSTGAME_NPR_STORY_OPENING_DIAGNOSTIC " + snapshot);
+            return snapshot;
+        }
+
         [UnityTest]
         public IEnumerator StoryDialogueUsesActualModelPortraitWithoutEditorialMetadata()
         {
@@ -820,11 +1077,20 @@ namespace PathOfDawn.SmokeTests
             Assert.That(source.ModelIdentity, Is.EqualTo("Mary"));
             Assert.That(source, Is.SameAs(App.OpeningStage.ModelFor("mary")), "The portrait must match the actual visible opening performer.");
             var speakerModel = source.ModelResource; Assert.That(speakerModel, Is.EqualTo("Art/GospelNpr/Characters/Mary"));
+            var openingDiagnostics = new List<string>(5);
+            openingDiagnostics.Add(StoryOpeningStateSnapshot("before-shot"));
             yield return Shot("mary-actual-model-dialogue");
+            openingDiagnostics.Add(StoryOpeningStateSnapshot("after-shot-before-show-bible"));
             var physicalRoot = App.Player.transform; int physicalIdentity = physicalRoot.GetInstanceID();
             Vector3 physicalPose = App.Player.Position; float physicalYaw = App.Player.FacingYaw;
-            App.ShowBible(); yield return null; yield return null;
-            Assert.That(App.OpeningStage.IsVisible, Is.True, "Keep the actual opening behind the book and its wide-screen gutters.");
+            App.ShowBible();
+            openingDiagnostics.Add(StoryOpeningStateSnapshot("immediate-after-show-bible"));
+            yield return null;
+            openingDiagnostics.Add(StoryOpeningStateSnapshot("after-existing-yield-1"));
+            yield return null;
+            openingDiagnostics.Add(StoryOpeningStateSnapshot("after-existing-yield-2"));
+            Assert.That(App.OpeningStage.IsVisible, Is.True, "Keep the actual opening behind the book and its wide-screen gutters."
+                + "\n" + string.Join("\n", openingDiagnostics));
             Assert.That(App.OpeningStage.CurrentSet, Is.EqualTo("nazareth"));
             Assert.That(App.Actor.gameObject.activeInHierarchy || App.CameraRig.enabled, Is.False);
             Assert.That(physicalRoot.gameObject.activeInHierarchy && App.Player.Controller.enabled, Is.True);

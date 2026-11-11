@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-11T19:03:32+00:00",
+  "updatedUtc": "2026-11-11T22:01:49.584478+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -12,19 +12,19 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
-    "id": "GospelNprResume-2026-11-11",
+    "id": "GospelNprCameraResume-2026-11-11",
     "sourceWorkId": "GospelNpr-2026-11-11",
-    "status": "NPR-C4-pushed-CI-success-Desktop02-passed-Mobile01-required-camera-visual-rejected-stopped-camera-draft-only-M-P-pending",
+    "status": "NPR-Native14-Root29-Lifecycle05-Web10-Desktop03-Root66-Mobile02-Root52-passed-finalCI-merge-public-pending",
     "branch": "codex/gospel-npr-2026-11-11",
     "baseMainCommit": "a34ce4f1fdfa84db6c776c32bf09a5bdfcc716f6",
     "executionOwner": "/root",
-    "executionState": "new-independent-owned-resume-after-normal-origin-release",
-    "leaseRecord": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/lease.json",
+    "executionState": "third-independent-owned-camera-cycle-after-normal-Resume-release-not-renewal",
+    "leaseRecord": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json",
     "leaseState": "acquired",
-    "leaseOwner": "2e3ece85-66a8-48f3-b3ad-19f5b6f6af9c",
-    "leaseCommit": "4c88b0d447807f834c4926f4d62d232411abe26c",
-    "startedUtc": "2026-11-11T14:33:35.466532+00:00",
-    "deadlineUtc": "2026-11-11T20:33:35.466532+00:00",
+    "leaseOwner": "147d52c3-115d-489e-bab7-3c025a48e60e",
+    "leaseCommit": "5b19cb80887d5396fbaffd041d303abecfa56f68",
+    "startedUtc": "2026-11-11T19:17:59.790247+00:00",
+    "deadlineUtc": "2026-11-12T01:17:59.790247+00:00",
     "plannedReleaseProfile": "gospel-npr",
     "actualToolingBootstrapProfile": "client-motion",
     "currentExecutionProfile": "gospel-npr",
@@ -37,12 +37,14 @@
       "status": "draft-not-merged-not-public",
       "previousCandidate": "C2 d0eab9f353b828ceda28cc408bb830dc9fd72d75",
       "previousC3": "7fdca13641d97878a0809b4b2e3bba5de27c8e5c",
-      "candidate": "C4 0cbb2b7a714007fb0042aad1d2e1e01249763889",
-      "workingCandidate": "C5 failure-checkpoint-docs awaiting normal commit; no product fix applied",
-      "scope": "Actual pushed C4/PR7 Core43076748256/helper43076748306 completedSuccess. Desktop02 passed110/Root66 on aff...; Mobile01 required afterDash was Root-rejected/stopped/failed. PR7 draft/unmerged/public47 unchanged; no M/P."
+      "previousC4": "0cbb2b7a714007fb0042aad1d2e1e01249763889",
+      "candidate": "C5 Docs-only failure checkpoint3af963b51252c053f107b151929bd9835c35e3b2",
+      "workingCandidate": "Native14 actual15pass/source3e2583/all29Rootselected, Lifecycle05 exact3restoration and Web10 explicitly bound toNative14 passed. Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed and finalized, each audio4/reload2 with complete wrappers and owned cleanup. FinalcandidateCI/merge/public pending.",
+      "scope": "PR7draftC5/Maina34/PublicP47 unchanged. Native12 overhead rejection/Native13 lamp failure and bounded2camera views remain history. Current Native14 rendering/preservation and independentDesktop03 Root66 approvals are bounded with artgaps/UIentrancefade, not AAA/deviceFPS/user aesthetic or Mobile/public approval."
     },
     "paths": {
-      "controlRoot": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11",
+      "controlRoot": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11",
+      "previousResumeControlRoot": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11",
       "originControlRoot": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11",
       "evidenceRoot": "Artifacts/Validation/GospelNpr-2026-11-11",
       "buildRoot": "/tmp/firstgame-gospel-npr-20261111-builds",
@@ -70,24 +72,88 @@
       },
       "scope": "Only CONTROL ownership moved to the independent Resume root. OUT/build/proof/stage/profile.py/Card baseline/Root ledgers stay at the original NPR roots; every new invocation must explicitly select the Resume CONTROL. Origin release is not a lease renewal."
     },
-    "plannedCameraHandoff": "Root plans normal cleanup/idle/current Resume closure then an independent third CameraResume. No renewal/bypass or acquired third lease is claimed; current owner/control remain Resume until actual references arrive.",
+    "cameraHandoff": {
+      "status": "actual-normal-Resume-release-available-then-independent-third-acquisition-not-renewal",
+      "references": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/actual-third-cycle-transition-references.json",
+      "oldResumeOwner": "2e3ece85-66a8-48f3-b3ad-19f5b6f6af9c",
+      "oldResumeLock": "4c88b0d447807f834c4926f4d62d232411abe26c",
+      "oldResumeFinalIdle": "actually passed, wrapper SHA prefix9cdbe2a7",
+      "oldResumeReleasedUtc": "2026-11-11T19:14:55.929519+00:00",
+      "oldResumeAvailable": {
+        "bytes": 99,
+        "sha256Prefix": "be8a",
+        "status": "actually-available"
+      },
+      "acquiredSnapshotSha256Prefix": "ac027afd",
+      "activation": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/activate-camera-resume.sh",
+      "admittedHelperSources": {
+        "genericSha256Prefix": "a1031e4a",
+        "publicTypedSha256Prefix": "1d067",
+        "activationSha256Prefix": "d3caf",
+        "scope": "Root installed/read3sources and verified unchanged."
+      },
+      "CameraResumeIdle01": {
+        "status": "passed",
+        "wrapperSha256Prefix": "5d6fadc"
+      },
+      "scope": "Activation sources original NPR then overrides ONLY CONTROL. Original OUT/build/proof/stage/Card/Root remain. No renewal/bypass; older origin-to-Resume handoff above is history."
+    },
+    "thirdCameraSourceProgress": {
+      "camera": "31338B/397cfa prioritizes gentle rise/side/high fallback. Native13 actualpitch<=65/bounded2natural views are history; current Native14/Root29, Web10, Desktop03/Root66 and Mobile02/Root52 passed. ActualMobile02 criticalafterDash fullbody/path clear; Mobile01 rejection remains unchanged history.",
+      "nativeAudit": "Smoke96134B/a661e0 and contract11515B/e283a4 metric-only actualworldvertex/oriented correction preserved thresholds/noActor/model/importer/product change. Native14/Lifecycle05/Web10 and independentDesktop03 actual111checks/Root66 plus Mobile02 actual102checks/Root52 passed; each audio4/reload2. FinalCI/merge/public/deploy pending.",
+      "V3archive": "Actual unit50pass is control/helper evidence only, not game/final archive/closure approval."
+    },
+    "cameraSourceAdmission": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/scenery-camera-source-admission01.json",
+      "bytes": 3733,
+      "sha256Prefix": "ad452134",
+      "scope": "Historical ffeb/e9/contract installation admission; subsequent actual Native11 failed13passed/2failed, no game/Web/browser/public approval."
+    },
+    "stableCameraHeightSourceAdmission": {
+      "sourceBytes": 30187,
+      "sourceSha256Prefix": "fa653bc1",
+      "method": "Existing Actor.VisualHeight instead of animated bounds; no test relaxation.",
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/stable-camera-height-source-admission01.json",
+      "bytes": 1477,
+      "sha256Prefix": "6ba2d6",
+      "status": "historical-admission-followed-by-Native12-technical-pass-but-overhead-Root-rejection"
+    },
+    "currentCameraMetricAdmission": {
+      "sourceFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
+      "Camera": {
+        "bytes": 31338,
+        "sha256Prefix": "397cfa"
+      },
+      "Smoke": {
+        "bytes": 96134,
+        "sha256": "a661e0eb0046ebb27887fae0618826c73f2e1bf19f7181519af9743c39cfe796"
+      },
+      "contract": {
+        "bytes": 11515,
+        "sha256": "e283a4b25c67b9bd92b3634c8e6d70786315be4d1e2f0e64e8b881f72b73809b"
+      },
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/lamp-oriented-world-metric-source-admission01.json",
+      "bytes": 3105,
+      "sha256Prefix": "8f65b5",
+      "scope": "Metric-only actual-world-vertex/oriented correction, exact thresholds/noActor/model/importer/product change/peerblockers0. Native14 passed15/sourceunchanged/Root29; actual adultlamp.220001m/child.210001m, oldworldAABB varies yaw."
+    },
     "userFeedback": {
       "PathOfDawn": "User rejected ClientMotion characters/backgrounds/objects/UI visual quality and strongly requested Genshin/StarRail-direction actual3D anime NPR. Prior technical milestone remains completed history, separate from this aesthetic rejection.",
       "FantasyCards": "Card product/source/public baseline preserved; multiplayer remains disabled/future update."
     },
     "userScope": {
       "PathOfDawn": "Licensed quality mesh/face/rig, actual skinned joint animation, NPR materials, dimensional environment, lighting/camera and UI together on existing Unity6000.3.26f1/URP17.3.0 and existing Core/People/save contracts.",
-      "preservation": "Keep23events/19scriptures/51details/28voice/stableIDs/saves/NPC authority. C4/aff technical passes and Desktop02/110checks/Root66 are valid; Mobile01 required afterDash camera view was rejected/stopped/failed with16of52marks. No applied camera fix/Native11/Web10, Public/M/P pending. Current owner still Resume; no third lease claimed."
+      "preservation": "Keep23events/19scriptures/51details/28voice/stableIDs/saves/NPC authority. Current3e2583 Native14 actual15/0/0/Root29, Lifecycle05 exact3restoration, Web10 explicitly bound toNative14, Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed; both browsers audio4/reload2. Lamp metric-only correction kept all thresholds/noActor/model/importer/product change from13. FinalCI/merge/public pending; earlier rejections retained. No AAA/deviceFPS/user aesthetic claim."
     },
     "sourceProgress": {
-      "currentVisualRejection": "Mobile01 required after-exploration-dash own-player torso/well scenery camera view was Root-rejected around19:00Z and intentionally Ctrl-C stopped. Only16/52required marks; diagonal clear view seen but unmarked, afterDash rejected. Desktop02 C4/aff110pass/Root66 remains valid history. Pitch-only scenery fallback camera draft/new Native audit regression are underway, not applied; no Native11/Web10.",
-      "ActorRenderer": "ActorBake09/7takes/78materials/sixshader IDs remain. C4/aff Native10/Root27/Web09 and Desktop02 passed; Mobile01 required own-player torso/well scenery camera view is Root-rejected. No product change or new Native11/Web10 yet; old Desktop01 rejection remains history.",
-      "WorldCamera": "Nine CC0 spatial models/HDR/procedural village/10opening sets and camera defaults47yaw/18pitch/5.6zoom remain. Prior Web preview observed title/field/front/side, but software input latency remains unresolved and Swift comparison was canceled. Visual SnapFacing/motor authority remain; field culling/AlwaysAnimate are unchanged by the current2CS update.",
-      "Ui": "HUD/minimap/portraits/book/dialogue remain. Desktop02 C4aff110pass/Root66/audio4/reload2/error0 is valid; Mobile01 marks16of52 only, diagonal observed not marked/afterDash rejected. Known tightpillar camera/decorativepot overlap observations remain. No M/P/fullMobile approval.",
-      "RootAssetsAndShader": "Upstream/assets/rig/MPBs/sixsingleSM3.5 and current C4aff product source remain. Desktop02 passes remain valid, Mobile01 Root camera rejection blocks completion. New pitch-only scenery fallback/Native audit are drafts only; no product fix/Native11/Web10. Public47 unchanged."
+      "currentVisualRejection": "Mobile01 afterDash torso/well camera rejection/Ctrl-C/16of52marks remains; diagonal observed unmarked. Desktop02 C4aff110/Root66 is prior-source history. Final Camera397cfa/Smokea661e0/contracte283 passed Native14/Root29/Lifecycle05/Web10 and independentDesktop03 actual111checks/Root66 plus Mobile02 actual102checks/Root52, each audio4/reload2. ActualMobile02 criticalafterDash fullbody/path clear was personally reviewed, without retroactive approval of01. Public pending.",
+      "ActorRenderer": "ActorBake09/7takes/78materials/sixshader IDs unchanged. Native14 metric-only correction passed15/0/0 with29Rootselected originals; all thresholds/noActor/model/importer/product change from13. Bounded Native rendering/preservation only, known artgaps/UIentrancefade/noAAA/deviceFPS/aesthetic approval.",
+      "WorldCamera": "NineCC0/HDR/procedural village/10sets remain. Current camera uses stable authored height and gentler actual body/geometry clearance while retaining user orbit/zoom and view-relative movement. Native14/source3e2583 actual15/0/0/all29Rootselected, Web10, Desktop03/Root66 and Mobile02/Root52 passed. Public pending. Native11Storycause remains unresolved/unreproduced12&13/noStoryproductfix; Native12 overhead rejection/Native13 lamp failure retained.",
+      "Ui": "HUD/minimap/portraits/book/dialogue remain. Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed and finalized, each audio4/reload2. Mary actual dialogue/walkafter, templedialogue, Bibleaward, equipment and savedNPCs reviewed. SomeNPCs temporarily draw-occluded by camera; not allNPCvisibleeveryframe. Desktop02/Mobile01 histories and known meshdetail/decorativepot overlap remain. No newM/P/public approval.",
+      "RootAssetsAndShader": "Upstream/assets/rig/MPBs/sixsingleSM3.5 unchanged. Current3e2583 Native14/Root29/Lifecycle05/Web10 passed. Final3browser plans admitted with all steps/required/audio/reload unchanged. Dedicated regenerable Bee cache was pruned only afterWeb10 with source/proof/LastBuild retained; history hardlinks do not change approval. PriorStorycause unresolved."
     },
     "assetPreparation": {
-      "status": "ActorBake09-C4-technical-and-Desktop02-passed-Mobile01-camera-rejected-new-camera-drafts-only",
+      "status": "ActorBake09-assets-unchanged-Native14-Root29-Lifecycle05-Web10-Desktop03-Root66-Mobile02-Root52-passed-finalplans-admitted",
       "wrapper": {
         "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/CommandRuns/ArtSources01/summary.json",
         "bytes": 10717,
@@ -106,21 +172,141 @@
         "scope": "Source art/rig export is separate from final Native/Web/player approval. Earlier failed and art-rejected candidates remain unchanged. No added beard surface is selected in this candidate."
       },
       "shaderStage": "Actual Unity preparation/import and18-frame prototype sequences exist. No HoYoverse model/texture/animation was extracted, and no commercial kit was purchased.",
-      "buildFeatureControl": "78materials/sixshader IDs/full3D pipeline/assets/MPB remain. Native10/all27Rootselection/Lifecycle04/Web09 technically passed aff.... Current3plans metadata keeps historicale445geometryBasis/affRendering and all steps/required/audio/reload. No fullbrowser/public approval.",
+      "buildFeatureControl": "78materials/sixshader IDs/full3D pipeline/assets/MPB remain. Current3e2583 Native14/Root29/Lifecycle05/Web10, Desktop03/Root66 and Mobile02/Root52 passed. Final3plans metadata distinguishes historicale445geometryBasis/affRendering from currentcamera, retaining all steps/required/audio/reload/rawCard17. Public pending.",
       "source05PreservationAndSizeWork": "All blendshape positions/names, UVs and rig stay; only imported blendshape normals are omitted. NPR-only proven-unused old portraits, ChronicleActors, old Renewal nativity/travel items and5old tree FBXs are excluded while actual reward/book/world illustrations remain. Web-only environment compression preserves originals/character-face RGBA32. Web04's runtime core is approximately94MiB (data approximately79MiB, wasm approximately16MiB); this actual reduction is not Web visual approval."
     },
     "validation": {
-        "c4LocalOutputRelocation": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/local-browser-c4-source-history-relocations.json",
-          "bytes": 32462,
-          "sha256": "8f35005de239515c109ad08ffbcd525f463b889778d8db8babc495c57d2772c6"
+      "c4LocalOutputRelocation": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/local-browser-c4-source-history-relocations.json",
+        "bytes": 32462,
+        "sha256": "8f35005de239515c109ad08ffbcd525f463b889778d8db8babc495c57d2772c6"
+      },
+      "c4MobileStopCleanup": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/CommandRuns/IdleAfterRejectedMobile01/summary.json",
+        "bytes": 11156,
+        "sha256": "d4cb1fda6facb1e698f95623d92ec3c0c796f6e17130c4699fb3a85db0394b1c"
+      },
+      "status": "Native14-Root29-Lifecycle05-Web10-Desktop03-Root66-Mobile02-Root52-passed-finalCI-merge-public-pending-prior-rejections-preserved",
+      "FullDesktopNpr03": {
+        "attempts": [
+          "GospelDesktopNpr03",
+          "BrowserNpr03"
+        ],
+        "status": "passed-Root-all66-directly-reviewed-marked-and-finalized",
+        "sourceFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
+        "checks": 111,
+        "allChecksPassed": true,
+        "originalPngCount": 90,
+        "requiredRootOriginalsReviewed": 66,
+        "requiredTotal": 66,
+        "actualAudioWindows": 4,
+        "actualUnityResolvedReloads": 2,
+        "navigationIds": [
+          0,
+          1,
+          2
+        ],
+        "pageErrors": 0,
+        "httpErrors": 0,
+        "unexpectedFailures": 0,
+        "failedRequests": {
+          "count": 2,
+          "classification": "verifiedUnityCacheRevalidationAborts",
+          "navigationIds": [
+            1,
+            2
+          ]
         },
-        "c4MobileStopCleanup": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/CommandRuns/IdleAfterRejectedMobile01/summary.json",
-          "bytes": 11156,
-          "sha256": "d4cb1fda6facb1e698f95623d92ec3c0c796f6e17130c4699fb3a85db0394b1c"
+        "canonicalReport": {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/Desktop720/PathOfDawn/report.json",
+          "bytes": 902998,
+          "sha256": "0c68f995289bfce0e0a9ce03df30d804d60edc3e97dcc29b0cc2a526d433d7a1"
         },
-      "status": "C4-technical-CI-and-Desktop02-passed-Mobile01-required-visual-rejected-failed-Public-M-P-pending",
+        "executedRawReport": {
+          "bytes": 874591,
+          "sha256": "9a33ef0c737fe7de661d36c739dba1a2057893bc4ad4514818cfb78a2d8d2789"
+        },
+        "actualWrappers": "Outer and inner exit0, owned containment empty and guardAfter0, completed2026-11-11T21:20:18Z.",
+        "scope": "Root personally reviewed all66 required current originals and finalized canonical report after actual complete wrappers. All111 checks/audio4/reload2 passed; two classified cache revalidation aborts are retained, not zero failed requests. No Mobile/public/user aesthetic approval."
+      },
+      "FullMobileNpr02": {
+        "attempts": [
+          "GospelMobileNpr02",
+          "BrowserNpr02"
+        ],
+        "status": "passed-Root-all52-directly-reviewed-marked-and-finalized",
+        "checks": 102,
+        "allChecksPassed": true,
+        "originalPngCount": 78,
+        "requiredRootOriginalsReviewed": 52,
+        "actualAudioWindows": 4,
+        "actualUnityResolvedReloads": 2,
+        "navigationIds": [
+          0,
+          1,
+          2
+        ],
+        "pageErrors": 0,
+        "httpErrors": 0,
+        "unexpectedFailures": 0,
+        "failedRequests": {
+          "count": 2,
+          "classification": "verifiedUnityCacheRevalidationAborts",
+          "navigationIds": [
+            1,
+            2
+          ]
+        },
+        "canonicalReport": {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/Mobile844/PathOfDawn/report.json",
+          "bytes": 875846,
+          "sha256": "5f0216e059e49b808e3fefd9cca292a8fd2b70ef9acba8a45ad5b5927936b87e"
+        },
+        "executedRawReport": {
+          "bytes": 853168,
+          "sha256": "496a63e8cce7412302ddacb206b102510c586395206fd4b317e17aaa293c3127"
+        },
+        "innerWrapper": {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/BrowserRuns/PathOfDawn/Mobile844/BrowserNpr02/summary.json",
+          "bytes": 12381,
+          "sha256": "54986f1ac8b4f47766223fb05dd64912311305055ef7a8818fe4b2484b35dbb6"
+        },
+        "outerWrapper": {
+          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/GospelMobileNpr02/summary.json",
+          "bytes": 11364,
+          "sha256": "facd9ccd2a053e448ec99aebc05a7cd764a752ffdf6ad290caec5502c3eab4cf"
+        },
+        "completedUtc": "2026-11-11T21:57:00.039471Z",
+        "actualCleanup": "All4exitcodes0 and ownedcleanupempty; actual complete outer/inner wrappers.",
+        "scope": "Root personally viewed all52 required current originals. CriticalafterDash fullbody/path clear; Mary actualdialogue/walkafter, templedialogue, Bibleaward, equipment and savedNPCs reviewed. SomeNPCs temporarily camera draw-occluded; no allNPCvisibleeveryframe or physicaldeviceFPS/user aesthetic/public approval claim. EarlierMobile01 rejected attempt unchanged."
+      },
+      "historyRuntimeHardlink01": {
+        "status": "actual-pass-byte-preservation-only",
+        "wrapper": {
+          "bytes": 11374,
+          "sha256Prefix": "79f0aa1"
+        },
+        "byteExactPairs": 35,
+        "retainedPaths": 70,
+        "sharedInodes": true,
+        "metadataChanges": "Honestly recorded in55761B ledger/SHA786b525a; metadata equality not claimed.",
+        "workspaceBytesFreed": 764407808,
+        "scope": "35pairs/70paths retained byte-exact; workspace-only space saving, no approval change. Bee not pruned before Web."
+      },
+      "web09HistoryRelocation": {
+        "status": "actual-byte-exact-runtime-and-proof-history-moved",
+        "ledger": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/web09-passed-output-relocation.json",
+        "bytes": 5651,
+        "sha256Prefix": "03e6fa5b",
+        "scope": "Original Web09/proof history only, no new Web/approval."
+      },
+      "threeCycleArchiveUnits": {
+        "attempt": "NprThreeCycleArchiveUnit01",
+        "status": "passed",
+        "passed": 50,
+        "wrapperReference": "ACTIVE/NprThreeCycleArchiveUnit01 (Root-reported current CameraResume on-disk wrapper)",
+        "scope": "Actual archive/helper unit tests, not game/visual/Web/fullbrowser/real final archive completion."
+      },
       "FullMobileNpr01": {
         "attempt": "GospelMobileNpr01",
         "sourceCommit": "0cbb2b7a714007fb0042aad1d2e1e01249763889",
@@ -132,10 +318,10 @@
         "requiredTotal": 52,
         "partialReview": "Diagonal clear view observed but not marked; afterDash rejected. Partial marks are not full approval.",
         "rejectionRecord": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/mobile-npr01-visual-rejection.json",
-        "scope": "New pitch-only scenery fallback camera proposal/Native regression audit are drafts only. No product fix/Native11/Web10; known pillar/prop observations remain."
+        "scope": "Cameraffeb/Smokee9/contract source subsequently installed with desired controls/actual view-relative Motor and well/pillar assertions. Native11NetworkOwned runs, no pass yet; this Mobile01 failed attempt is not retroactively approved. Web10/browser/public pending and known observations remain."
       },
       "FullDesktopNpr02": {
-        "status": "passed-C4-aff-current-Desktop-and-all66Root-originals",
+        "status": "passed-prior-C4-aff-Desktop-and-all66Root-originals",
         "checks": 110,
         "requiredRootOriginalsReviewed": 66,
         "audio": 4,
@@ -144,11 +330,19 @@
         "rawSha256Prefix": "68554382",
         "canonicalSha256Prefix": "2cef3f3e",
         "outerSha256Prefix": "b9f0f974",
-        "scope": "Valid C4/aff Desktop history; exact relocation pending, not claimed completed here. Does not approve Mobile01/Public or resolve known pillar/prop observations."
+        "scope": "Valid C4/aff Desktop history, now exact-relocated by c4LocalOutputRelocation ledger. Does not approve Mobile01/Public or resolve all prop observations. Independent currentDesktop03 result is recorded separately."
       },
-      "candidateC4Ci": {"sourceCommit": "0cbb2b7a714007fb0042aad1d2e1e01249763889", "status": "actual-Core-and-helper-completedSuccess-technical-only", "CoreRun": 43076748256, "helperRun": 43076748306},
+      "candidateC4Ci": {
+        "sourceCommit": "0cbb2b7a714007fb0042aad1d2e1e01249763889",
+        "status": "actual-Core-and-helper-completedSuccess-technical-only",
+        "CoreRun": 43076748256,
+        "helperRun": 43076748306
+      },
       "FullDesktopNpr01": {
-        "attempts": ["BrowserNpr01", "GospelDesktopNpr01"],
+        "attempts": [
+          "BrowserNpr01",
+          "GospelDesktopNpr01"
+        ],
         "sourceCommit": "7fdca13641d97878a0809b4b2e3bba5de27c8e5c",
         "status": "Root-visual-rejected-intentionally-CtrlC-stopped-failed",
         "rejectedOriginal": "field-after-diagonal.png",
@@ -164,7 +358,10 @@
         "originalRunAndPartialRootLedger": "Original run/partial Root ledger25marks unchanged.",
         "scope": "Rejected C3 run remains unapproved with exact history. A later rendering-only fix was applied and Native10 passed; Web09/fullbrowser reruns are pending and do not retroactively approve this failed attempt."
       },
-      "IdleAfterRejectedDesktop01": {"status": "passed", "wrapperSha256": "ed8fad02a8ebfa22476d933fae7108f6e857137e7583b8cc545a3d87cc669107"},
+      "IdleAfterRejectedDesktop01": {
+        "status": "passed",
+        "wrapperSha256": "ed8fad02a8ebfa22476d933fae7108f6e857137e7583b8cc545a3d87cc669107"
+      },
       "candidateC3Ci": {
         "sourceCommit": "7fdca13641d97878a0809b4b2e3bba5de27c8e5c",
         "status": "actual-exact-push-Core-and-helper-completedSuccess-technical-only",
@@ -190,8 +387,8 @@
         }
       },
       "profileScope": "The earlier client-motion bootstrap is preserved tooling history. Current gospel-npr source/helper admission is separate from actual product results; only PathOfDawn receives a new Native/Web build, while Card remains a protected prior product with a later fresh public regression.",
-      "Unity3DCompile": "C4aff Native10/Root27/Lifecycle04/Web09/fresh311/123/13/18+BuildGate and Desktop02/Root66 passed. Mobile01 visual rejection is separate, not a compile failure/pass. Pitch-only camera/Native regression drafts not applied; Native11/Web10 not run.",
-      "modelAdaptation": "ActorBake09/78refs/sixshader IDs remain. Root directly reviewed and selected all27Native10 originals, reviewSHAa59815c3046836750b702e176120ae384eac8a6c27cf2f805dae3014bfcba804. Prior09 canonical/review exacthistory ledgerd66c0dd082349057c370229f420f48fb155a4b155d1fecee0a329e62ed736f87 preserved. Art guide: Docs/GospelNprArt.md.",
+      "Unity3DCompile": "Native12 overhead rejection and Native13 lamp failure remain. Native14 actual15/0/0/source3e2583 unchanged/all29Rootselected, Lifecycle05 actual3restoration/exit0/noholdingjournal, Web10 explicitly bound toNative14, Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed; both browsers audio4/reload2. Public pending.",
+      "modelAdaptation": "ActorBake09/78refs/sixshader IDs remain. Root directly reviewed and selected all29 currentNative14 originals, with Web10 and independentDesktop03/Root66 passed. PriorNative10 all27 reviewSHAa59815c3046836750b702e176120ae384eac8a6c27cf2f805dae3014bfcba804 and prior09 canonical/review exacthistory ledgerd66c0dd082349057c370229f420f48fb155a4b155d1fecee0a329e62ed736f87 remain historical. Art guide: Docs/GospelNprArt.md.",
       "current3DScreenshots": {
         "Prototype03": "Actual18-frame sequence completed with SRP batching disabled for diagnosis only.",
         "Prototype04": "Actual18-frame sequence completed after per-slot character MPBs with scenery SRP batching restored.",
@@ -216,11 +413,11 @@
       },
       "contractUnits": {
         "attempt": "NprContractUnit04",
-        "status": "passed",
+        "status": "passed-prior-Native07-contract-history",
         "passed": 13,
         "wrapperSha256Prefix": "c185752b",
         "sourceContractSha256Prefix": "269ab272",
-        "scope": "Actual13contract units passed for the current Native07 contract. Not a Web/product/visual result."
+        "scope": "Actual13contract units passed for the then-selected Native07 contract; retained prior-contract history. Current finalcontracte283 Unit07 pass is recorded separately in freshFinal03Checks. Not a Web/product/visual result."
       },
       "retainedContractUnit03": {
         "attempt": "NprContractUnit03",
@@ -247,15 +444,124 @@
         "scope": "Whole protected Card tree and current Card source verified; fresh Card public browser regression remains pending. PreservedCardIdentity01 standalone import failure is retained."
       },
       "Native": {
+        "attempt": "NativeNpr14",
+        "status": "passed-current-source-binding-canonical-all29Rootselected",
+        "sourceFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
+        "sourceChangedDuringRun": false,
+        "xmlResult": {
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0
+        },
+        "originalPngCount": 29,
+        "wrapper": {
+          "bytes": 11036,
+          "sha256": "ccd5d06ddcfb705b3aac95c0ca678ceffdb88a57be73add799c394a620a3f10d"
+        },
+        "xml": {
+          "bytes": 129706,
+          "sha256": "d2738fba495145c423b42e1c561ab64c6ee0df5b6e538bf74a6f282a47aead29"
+        },
+        "RootOriginalReview": {
+          "status": "all29directly-viewed-and-canonical-selected",
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/Root/gospel-native-review.json",
+          "bytes": 8621,
+          "sha256": "fb912d413011a438798962e57591d28d41eb5edacb3c15fef51f624a2ce7aeec"
+        },
+        "actualLampDimensionsMeters": {
+          "adult": 0.220001,
+          "child": 0.210001,
+          "scope": "Same numeric thresholds; oldworldAABB varies yaw."
+        },
+        "oldNative10History": {
+          "directory": "Artifacts/Validation/GospelNpr-2026-11-11/NativeHistory/NativeNpr10",
+          "ledger": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/native10-canonical-relocation.json",
+          "bytes": 12935,
+          "sha256Prefix": "0056221c",
+          "scope": "Exact prior canonical/rawreview history preserved unchanged."
+        },
+        "scope": "Actual15/0/0/sourceunchanged/Root29 selected bounded Native rendering/preservation only. Lifecycle05/Web10 and independentDesktop03/Root66/Mobile02/Root52 passed separately; public pending. Known artgaps/someUIentrancefade remain, noAAA/deviceFPS/user aesthetic approval."
+      },
+      "retainedNativeNpr13": {
+        "status": "technical14passed1failed-27PNG-no-fullRootapproval",
+        "passed": 14,
+        "failed": 1,
+        "originalPngCount": 27,
+        "cameraAndStory": "Perspective including actual well/pillar fixture pitch<=65 and Story passed.",
+        "RootObservation": "Only2natural well/pillar camera views observed good for bounded composition, not full approval.",
+        "failure": "Untouched AssertLamp used world-axis AABB .250610352 versus allowed .18–.25. Static actualFBX yaw projection proven; new correction measures actual vertices in world meters/oriented rotation, same thresholds/no product asset changes.",
+        "observation": {
+          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/native13-actual-lamp-failure-observation01.json",
+          "bytes": 3044,
+          "sha256Prefix": "3a87e340"
+        }
+      },
+      "retainedNativeNpr12": {
+        "status": "technical15passed-29PNG-Root-overhead-rejected-no-artapproval",
+        "passed": 15,
+        "originalPngCount": 29,
+        "wrapper": {
+          "bytes": 11039,
+          "sha256Prefix": "7203b205"
+        },
+        "StoryDiagnostics": "All5actual Story snapshots visibletrue. Earlier Native11 Story cause unresolved/not reproduced; no productStory fix claimed.",
+        "RootObservation": "Only2well/pillar PNGs viewed and rejected as extreme overhead composition; remaining27unreviewed, noartapproval.",
+        "observation": {
+          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/native12-pass-overhead-rejection-observation01.json",
+          "bytes": 11787,
+          "sha256Prefix": "2599786a"
+        }
+      },
+      "retainedNativeNpr11": {
+        "attempt": "NativeNpr11",
+        "status": "failed-actual13passed2failed-noRootapproval",
+        "retainedFirstOuterFailure": "First outerNativeNpr11 guard failed on sandbox network before launching product. Not a game/Native assertion failure and not waived/deleted.",
+        "currentOuter": "NativeNpr11NetworkOwned",
+        "permissionScope": "Root obtained explicit network permission for fresh wrapper; inner attempt is NativeNpr11.",
+        "xmlResult": {
+          "passed": 13,
+          "failed": 2
+        },
+        "originalPngCount": 25,
+        "RootOriginalApproval": false,
+        "failureObservation": {
+          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/native11-actual-failure-observation01.json",
+          "bytes": 9996,
+          "sha256": "f5377c5400ef5996c3cbf2997565482449974c7c7ecd80c981cab9579f512df2"
+        },
+        "failures": [
+          {
+            "case": "Perspective NPC",
+            "actualFinalDistance": 5.326185,
+            "expectedFinalDistance": 5.2951045,
+            "tolerance": 0.025,
+            "coverage": "Actual well/pillar assertions not reached."
+          },
+          {
+            "case": "Story opening after ShowBible",
+            "actual": "Untouched StoryOpeningStage.IsVisible was false after ShowBible.",
+            "scope": "Separate actual failure; cause not inferred or waived."
+          }
+        ],
+        "scope": "Actual NetworkOwned overall failed:13passed/2failed of15 with25PNGs/noRootapproval. Actual well/pillar not reached. Stable-height source admitted; diagnostic-only Smoke snapshots and Native12/Web10/Desktop03/Mobile02 pending."
+      },
+      "retainedNativeNpr10": {
         "attempt": "NativeNpr10",
-        "status": "passed-current-source-binding-all27Root-originals-selected",
+        "status": "passed-prior-C4-source-binding-all27Root-originals-selected",
         "sourceFingerprint": "aff5146161eedc209d26dd35c29747b8c878eeb31423cb2fa1cb89bd525ce1fa",
         "xmlSha256": "d33e33a1aa81f5bf9f04b346df6a1634af4fd12cc94bc1d1cf3ea108da3f9008",
         "wrapperSha256": "bad3f00a4f7b2fad0bb4ec075fa6adb665db76939fb78ad31bbf2091bca36e3a",
-        "xmlResult": {"passed": 15, "failed": 0, "skipped": 0},
+        "xmlResult": {
+          "passed": 15,
+          "failed": 0,
+          "skipped": 0
+        },
         "sourceChangedDuringRun": false,
         "originalPngCount": 27,
-        "RootOriginalReview": {"status": "all27directly-viewed-and-selected", "sha256": "a59815c3046836750b702e176120ae384eac8a6c27cf2f805dae3014bfcba804"},
+        "RootOriginalReview": {
+          "status": "all27directly-viewed-and-selected",
+          "sha256": "a59815c3046836750b702e176120ae384eac8a6c27cf2f805dae3014bfcba804"
+        },
         "prior09CanonicalHistoryLedgerSha256": "d66c0dd082349057c370229f420f48fb155a4b155d1fecee0a329e62ed736f87",
         "scope": "C4aff renderer-only fix actual15/0/0/all27Rootselected/Lifecycle04/Web09 and Desktop02 passed. Mobile01 afterDash camera view rejected; no newer product fix/Native11/Web10. Overall Mobile/Public/M/P unapproved."
       },
@@ -412,7 +718,8 @@
         "sourceChangedDuringRun": false,
         "RootOriginalReview": {
           "status": "all25current-originals-directly-viewed",
-          "file": "Artifacts/Validation/GospelNpr-2026-11-11/Root/gospel-native-review.json",
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/NativeHistory/NativeNpr02/Root/gospel-native-review.json",
+          "bytes": 6910,
           "sha256": "5d53d74c507749ed919db608277a5599b0fbeddbe2edd82b06c824f6b4972064"
         },
         "scope": "Exact15case Native passed unchanged-source binding and Root directly viewed all25originals for that attempt. Subsequent source04 shader/Web texture edits make this prior-source history, not current-source approval. Actual later Web preview was visually rejected. NativeNpr01 remains separately preserved as an overall failure."
@@ -437,8 +744,8 @@
         "subsequentAttempt": "Fresh NativeNpr02 later passed unchanged-source binding and Root directly viewed its25current originals; this failed attempt is not retroactively approved.",
         "scope": "Root-selected source consists of9new NPR cases and6retained fresh audio/book/save cases. This attempt's individual XML15/0/0 did not satisfy the unchanged-source gate. Its failed wrapper/XML/originals remain separate from NativeNpr02."
       },
-      "CoreNativeSaveAndVisualChecks": "C4aff Native10/Root27/Lifecycle04/Web09/fresh311/123/13/18+BuildGate/validDesktop02 pass; Mobile01 required afterDash was Root-rejected/stopped/failed with16of52marks. No fullMobile/Public/M/P approval, no applied new camera fix/Native11/Web10.",
-      "WebBuildAndProof": "C4aff Web09/a8825330... and LastBuild888984B/dce1ee2b... remain valid with Desktop02/110pass/Root66/audio4/reload2/error0. Mobile01 required camera view was rejected/stopped/failed; Public/M/P pending. PR7 actualheadC4/CI success/draft/unmerged/public47unchanged; new camera code remains draft only.",
+      "CoreNativeSaveAndVisualChecks": "Native14/source3e2583 actual15/0/0/Root29 and Lifecycle05 restoration passed. Adultlamp.220001m/child.210001m, oldworldAABB variesyaw, exact thresholds/noActor/model/importer/product change from13. Storycause11 unresolved/noStoryfix. Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed, each audio4/reload2; public pending.",
+      "WebBuildAndProof": "WebNpr10BoundedThreads/innerWebNpr10 explicitly bound toNative14/source3e2583 passed. RawLastBuild/proof/index retained. OldWeb09/proof and Native10canon moved byte-exact history. History hardlinks35pairs/70paths retained allbytes with metadata changes recorded, workspace-only764407808B saved/no approval change. Dedicated regenerable Bee cache pruned only afterWeb10; fullsource and selectedbuild/proof/LastBuild unchanged.",
       "ordinaryWebPreview": {
         "attempt": "Preview08",
         "status": "normally-ended-runtime-unchanged-diagnostic-only",
@@ -574,6 +881,24 @@
         "Source02": "Reflection-only extraction actually succeeded, receipt SHA prefixaa13f3d9; source before/after stayed0b996d8649ef6a71acbc693c9f68a327884d2519067383df56bd813e2ae73c4b.",
         "admission": "Six ordinary singleSM3.5/FallbackOff shaders with same6GUIDs/nativeID4800000/SerializedSubshader1 and78verified authoritative actor material refs. Old containers/templates exactly preserved at Tools/Art/GospelNpr/ShaderSource/ContainerSource06. Earlier81audit includes3unused old JawBeard materials."
       },
+      "LifecycleNpr05": {
+        "status": "actual-passed-source-restoration-only",
+        "wrapper": {
+          "bytes": 11161,
+          "sha256": "58b8e999ff87bb5dcaf05372a61a37be3ed0be8920acf372ad2e32a17715a00e"
+        },
+        "actualRecords": [
+          "normal",
+          "exception",
+          "recovery"
+        ],
+        "sourceBeforeAndAfterFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
+        "completeSourceRestored": true,
+        "journalAbsent": true,
+        "holdingAbsent": true,
+        "exitCode": 0,
+        "scope": "Actual3markers/exact full before-after source restoration. Not fullbrowser/user/public approval."
+      },
       "LifecycleNpr04": {
         "status": "verified-source-restoration-only",
         "wrapperSha256": "ce56df30d24934d3a3576c4cea90972dedf3d8bd0b5c3fc73287abf8feb24ebc",
@@ -585,9 +910,21 @@
         "inputBeforeAndAfterBytes": 480633,
         "inputBeforeAndAfterSha256": "199885fbafabbd37283d7300acfc59bdd29ac0eaba4d140a16f5598b3cec514e",
         "restorationRecords": [
-          {"path": "RestorationLifecycleNormal", "bytes": 681439, "sha256": "14021887d430ee276819632e6feea6a5a656a4996e55ee0a4a5ea9ff57fdfeae"},
-          {"path": "RestorationLifecycleException", "bytes": 681445, "sha256": "8d8801670d43c017ed456329601a36ee89f9bd55944a6460bd5529a29dc3cf68"},
-          {"path": "RestorationLifecycleRecovery", "bytes": 681463, "sha256": "77acdab5e7b43032dedc9c18c9e2d206f52cc01f72e35872442034e796f00466"}
+          {
+            "path": "RestorationLifecycleNormal",
+            "bytes": 681439,
+            "sha256": "14021887d430ee276819632e6feea6a5a656a4996e55ee0a4a5ea9ff57fdfeae"
+          },
+          {
+            "path": "RestorationLifecycleException",
+            "bytes": 681445,
+            "sha256": "8d8801670d43c017ed456329601a36ee89f9bd55944a6460bd5529a29dc3cf68"
+          },
+          {
+            "path": "RestorationLifecycleRecovery",
+            "bytes": 681463,
+            "sha256": "77acdab5e7b43032dedc9c18c9e2d206f52cc01f72e35872442034e796f00466"
+          }
         ],
         "journalAbsent": true,
         "holdingAbsent": true,
@@ -710,7 +1047,38 @@
         "observed": "Initial dialogue actions approximately3–5seconds each versus Mesa approximately1.5seconds; Root canceled comparison with Ctrl-C.",
         "scope": "Partial software-input comparison; no new source-proof completion or product FPS inference."
       },
-      "WebNpr09": {"status": "passed-current-source-technical-build", "sourceFingerprint": "aff5146161eedc209d26dd35c29747b8c878eeb31423cb2fa1cb89bd525ce1fa", "wrapperSha256": "a8825330fa369bac84c462ea4d83fae4bc3717894cc51bda1168fe2177cd4f36", "rawLastBuild": {"file": "Artifacts/Validation/GospelNpr-2026-11-11/BuildReports/PathOfDawn-WebNpr09.buildreport", "bytes": 888984, "sha256": "dce1ee2bb4e6a32ddd80e91e2f50ac9ea180fdf9bf2c18e577373f12e3010d02"}, "scope": "Actual currentaff... technical pass, not Browser02/fullbrowser/public acceptance."},
+      "WebNpr10": {
+        "status": "passed-current-source-technical-build-and-proof",
+        "outer": "WebNpr10BoundedThreads",
+        "inner": "WebNpr10",
+        "explicitNativeRun": "NativeNpr14",
+        "sourceFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
+        "outerWrapper": {
+          "bytes": 11507,
+          "sha256": "6e6905e4e62b9c16ebe43894d45ce2bc0fb52c7a977f7597b27f80ace5175c26"
+        },
+        "proofIndex": {
+          "bytes": 6305,
+          "sha256": "e90118de54f3fd65ea62248546120f7679540387e673c60e88054ab8d5a96400"
+        },
+        "rawLastBuild": {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/BuildReports/PathOfDawn-WebNpr10.buildreport",
+          "bytes": 888981,
+          "sha256": "4874d4646c898562ae2a89ca02182342773599ec75834cd82ea5c7e9256a8a59"
+        },
+        "scope": "Actual unchanged-source build/proof pass, explicitly selectedNative14. Does not replace fullbrowser/Root/mobile/public/user aesthetic checks."
+      },
+      "WebNpr09": {
+        "status": "passed-prior-C4-source-technical-build",
+        "sourceFingerprint": "aff5146161eedc209d26dd35c29747b8c878eeb31423cb2fa1cb89bd525ce1fa",
+        "wrapperSha256": "a8825330fa369bac84c462ea4d83fae4bc3717894cc51bda1168fe2177cd4f36",
+        "rawLastBuild": {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/BuildReports/PathOfDawn-WebNpr09.buildreport",
+          "bytes": 888984,
+          "sha256": "dce1ee2bb4e6a32ddd80e91e2f50ac9ea180fdf9bf2c18e577373f12e3010d02"
+        },
+        "scope": "Prior C4aff technical/runtime proof retained exact history. Current Native14/Lifecycle05/Web10/Desktop03/Mobile02 passed separately; public pending."
+      },
       "WebNpr08": {
         "status": "passed-prior-source-technical-build",
         "session": 94058,
@@ -755,28 +1123,37 @@
         "scope": "Diagnostic preview matches final2RAF/touch8step320ms. Final harness/product criteria remain unchanged."
       },
       "browserPlanSourceAdmission": {
-        "status": "three-plans-metadata-only-rendering-update-admitted-full-suites-unapproved",
+        "status": "current-camera-final-metadata-source-admitted-all-runtime-steps-preserved",
+        "currentAdmissionLedger": {
+          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/browser-plan-final-camera-metadata-source-admission01.json",
+          "bytes": 5949,
+          "sha256": "a3e3432ea22de74d01820e418fd787f9d73d136085b27e1a69353804fcdf0894"
+        },
         "historicalGeometryAdmissionLedger": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/browser-plan-source-admission01.json",
         "geometryBasisSourceFingerprint": "e4453b186b02e5e0115a465e6a9b451e1a229644ea576f05d3d8c6cee68d7e11",
-        "currentRenderingSourceFingerprint": "aff5146161eedc209d26dd35c29747b8c878eeb31423cb2fa1cb89bd525ce1fa",
+        "currentRenderingSourceFingerprint": "3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570",
         "Desktop": {
           "steps": 152,
           "required": 66,
-          "sha256Prefix": "7fcab"
+          "sha256": "c72daf0c8844d1baedbff50d58da02c279a90c29ac662586e07ea04c2a6412ab"
         },
         "Mobile": {
           "steps": 116,
           "required": 52,
-          "sha256Prefix": "3b458"
+          "sha256": "f5a9f2ddc6b1aee1a5e4ebe5d9ebcab4d1053b7bdeff986194e90cb6332625fb"
         },
         "Public": {
           "steps": 116,
           "required": 52,
-          "sha256Prefix": "36e1"
+          "sha256": "0b1cc2b3848d63b6be3d490decad6b51ed1bf6f8c7e850bece525088ec31ad50"
         },
-        "historicalSourceFreeze01PlanSha256Prefixes": {"Desktop": "ad186169", "Mobile": "06604c2c", "Public": "858ff1a9"},
+        "historicalSourceFreeze01PlanSha256Prefixes": {
+          "Desktop": "ad186169",
+          "Mobile": "06604c2c",
+          "Public": "858ff1a9"
+        },
         "retainedCounts": "Card17/audio4/reload2 unchanged; publicCard role status admitted together.",
-        "scope": "Root-admitted metadata-only e445geometryBasis/affcurrentRendering preserves every step/required/audio/reload. Old01 hashes are historical. Desktop01 remains rejected history; Desktop02 passed C4/aff, Mobile01 required afterDash was Root-rejected/stopped/failed. Public/M/P pending."
+        "scope": "Root reviewed metadata-only final-camera update and verified all remaining plan data plus rawCardPublic17 object unchanged. Desktop152/66, Mobile116/52, Public116/52, audio4 and actualreload2 remain. Both public game objects frozen before eitherPublic run. Oldplan hashes and Desktop01/Desktop02/Mobile01 results retain their historical scopes. Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed, each audio4/reload2; public/M/P pending."
       },
       "WebNpr07": {
         "status": "passed-prior-source-technical-build",
@@ -816,17 +1193,60 @@
         "preserverSha256Prefix": "4cf0b7b6",
         "scope": "Two actual ownership cycles are handled by the admitted archive helper/preserver and32unit tests. This is control-plane preservation evidence, not a Gospel rendering result."
       },
-      "browserAndPublicChecks": "Desktop02-C4-aff110pass-Root66-valid-Mobile01-required-visual-rejected-failed-Public-M-P-pending",
-      "newSourceCiStagePages": "candidate-C3-Core-helper-CI-completedSuccess-main-merge-stage-Pages-not-run",
-      "lightFinalChecks": "Historical beforeC3 results retained; current fresh CoreFinal02/rangeFinal02/contract06/transport02 passed311/123/13/18 and BuildGateFinal02 passed. Technical checks only, not fullbrowser approval.",
-      "freshC4Checks": {"CoreFinal02": {"passed": 311, "wrapperSha256": "012f4480e7188a23acaf02a31541df835045053b2639f415e82fc4bc6911c701"}, "PublicRangeFinal02": {"passed": 123, "wrapperSha256": "22f6c93ca2f6b3e8a9d446f3bb7a8615faf98509475a2e18f66db02e3100c84e"}, "NprContractUnit06": {"passed": 13, "wrapperSha256": "15914ca84ac7916f35fa7ba09050cfbf16a64c702a367a1727d420309e6278a0"}, "BuildGateFinal02": {"status": "passed", "wrapperSha256": "d5ad780e9adf3adb1aae866b18f44918761fcb95b052367e41f6ec8574e322b0"}, "transport02": {"passed": 18, "wrapperSha256": "c07d351768f5932101d45932041ee77cdc6d803ae78b3dfcc24346470172d8ab"}},
-      "validationDesign": "Native15/earlier13contract units retained. Historical01 geometry/source plans had ad186169/06604c2c/858ff1a9. Current Root-admitted metadata-only plans use7fcab/3b458/36e1,e445geometryBasis/affcurrentRendering; Desktop152/66,Mobile116/52,Public116/52,Card17/audio4/reload2 unchanged. This is source admission, not Browser02/fullsuite acceptance.",
+      "browserAndPublicChecks": "CurrentDesktop03-111checks-Root66-and-Mobile02-102checks-Root52-each-audio4-reload2-passed-and-finalized-Public-M-P-pending. Desktop02-C4-aff110pass-Root66-valid-history and Mobile01-required-visual-rejected-failed remain distinct.",
+      "newSourceCiStagePages": "PreviousC3/C4 exactpush-Core/helper success retained as history. Finalcandidate-PR-CI/mainmerge/mainCI/cleanstage/Pages remain pending; PR7 draftC5 and existingpublicM/P unchanged.",
+      "lightFinalChecks": "Current CoreFinal03/rangeFinal03/contract07/transport03 passed311/123/13/18 and BuildGateFinal03 passed against finalcontracte283. Previous C4/Core02 checks retained as history. Technical checks only, not fullbrowser approval.",
+      "freshFinal03Checks": {
+        "CoreFinal03": {
+          "passed": 311,
+          "wrapperSha256": "23db97c8b36139be8786c4904437b0c9225213657fa9f7ec2f1c3761bdece968"
+        },
+        "PublicRangeFinal03": {
+          "passed": 123,
+          "wrapperSha256": "b4864b5aab2aa352bfd174deb503119717922fbb1aa85232ec5bb6cd2bc3e227"
+        },
+        "NprContractUnit07": {
+          "passed": 13,
+          "wrapperSha256": "f2279f018cde651a90c0e7347cbe26920edd2e6ab5a1e70bf3e219c549bc799d"
+        },
+        "BuildGateFinal03": {
+          "status": "passed",
+          "wrapperSha256": "3f27e3316c178ef235e432e8407eed6cc8663422e1d1dcf04eb2b9be10859405"
+        },
+        "transport03": {
+          "passed": 18,
+          "wrapperSha256": "37cf48d4a2b53c67a2fe54ca61c548ce239728f1ede14b4951a9ef99e7cc0aa5"
+        }
+      },
+      "freshC4Checks": {
+        "CoreFinal02": {
+          "passed": 311,
+          "wrapperSha256": "012f4480e7188a23acaf02a31541df835045053b2639f415e82fc4bc6911c701"
+        },
+        "PublicRangeFinal02": {
+          "passed": 123,
+          "wrapperSha256": "22f6c93ca2f6b3e8a9d446f3bb7a8615faf98509475a2e18f66db02e3100c84e"
+        },
+        "NprContractUnit06": {
+          "passed": 13,
+          "wrapperSha256": "15914ca84ac7916f35fa7ba09050cfbf16a64c702a367a1727d420309e6278a0"
+        },
+        "BuildGateFinal02": {
+          "status": "passed",
+          "wrapperSha256": "d5ad780e9adf3adb1aae866b18f44918761fcb95b052367e41f6ec8574e322b0"
+        },
+        "transport02": {
+          "passed": 18,
+          "wrapperSha256": "c07d351768f5932101d45932041ee77cdc6d803ae78b3dfcc24346470172d8ab"
+        }
+      },
+      "validationDesign": "Current Native14/source3e2583 contracte283 actual15cases passed/Root29 selected. Final3browser plans admitted with unchanged runtime steps/required/audio4/reload2/rawCard17. Desktop03 actual111checks/Root66 and Mobile02 actual102checks/Root52 passed and finalized, each audio4/reload2; public pending. Oldmetadata and all failure/rejection records remain history.",
       "historicalProofScope": "ClientMotion six315Root/seal/Checkpoint/Closure/closingCI remains history, not newNPR runtime/quality evidence."
     },
     "currentPublication": "Public remains ClientMotion productM bfa37cbeac847bcff33b2114dad4a8e5e3a83015/gh-pagesP47f2e80f369b4c4172d7deee72b09a6f9e760f8e. Gospel visual quality was user-rejected; no newNPR publication or user approval.",
     "next": [
-      "Preserve Mobile01 required afterDash rejection/16of52marks and valid Desktop02 C4history, then Root normal cleanup/idle/C5 checkpoint. Current owner remains Resume until actual normal closure/independent CameraResume refs are provided; no renewal/bypass.",
-      "Review pitch-only scenery fallback camera/Native regression drafts without claiming applied fix or Native11/Web10. After admitted product changes require fresh Native/Web/browser evidence; keep Mobile01 unapproved, Public/M/P pending and known pillar/prop observations open.",
+      "Use actual independent CameraResume control/activation and preserve normal oldResume release/available/C5 checkpoint references. Current source is3e2583; Desktop02 C4aff pass and Mobile01 rejection remain separately valid history.",
+      "Save accurate finalC6 source/Docs after actualDesktop03-111checks/Root66 and Mobile02-102checks/Root52, each audio4/reload2/completewrappers passed. Native14/Root29/Lifecycle05/Web10/current prerequisite checks passed; retain Native11/12/13 failures/rejections and no productStory fix claim.",
       "Finish draftPR7 source review/CI and normal main merge only with required results, then clean stage below985000000B preserving Card, Pages/fullGET/Root reviews before publication. PR7 is currently unmerged and publicP47 unchanged.",
       "Keep prior technical completion/allraw failures/Rootobservationcorrection/closures immutable; preserve actual new failures and owned cleanup under this new fixed lease."
     ],
@@ -838,7 +1258,7 @@
       }
     ],
     "preBrowserFinalChecks": {
-      "scope": "Actual prerequisite checks only; all full current browser suites pending",
+      "scope": "Historical beforeC3 prerequisite snapshot at sourcee445; fullbrowser suites were pending at that time. Preserve these original wrapper references; current finalcontract/source checks are freshFinal03Checks and current Desktop03 completed independently.",
       "corePassed": 311,
       "publicRangePassed": 123,
       "nprContractPassed": 13,
@@ -3444,13 +3864,13 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
-    "id": "GospelNpr-2026-11-11",
-    "status": "NPR-source-and-licensed-asset-preparation-no-current-runtime-approval",
+    "id": "GospelNprCameraResume-2026-11-11",
+    "status": "Native14-Root29-Lifecycle05-Web10-Desktop03-Root66-Mobile02-Root52-completed-finalCI-merge-public-pending",
     "tasks": [
-      "Root finishes licensed-model adaptation/material/package preparation while agents finish owned Actor/WorldCamera/UI source; preserve Core/People/save and Card baseline.",
-      "Root performs first actualUnity3D compile/import/model/rig/material checks and captures real current gameplay before judging NPR visual quality. Asset samples/shader installation/functional passes are not user aesthetic approval.",
-      "Freeze actualsource, then execute new scope-appropriate story/save/NPRNative/Web/browser/public checks and exactsourceCI/stage/Pages workflow before any new deployment claim.",
-      "Keep prior technical completion/allraw failures/Rootobservationcorrection/closures immutable; preserve actual new failures and owned cleanup under this new fixed lease."
+      "Save finalC6 source and accurate Docs after actualNative14/Root29/Lifecycle05/Web10/Desktop03-111checks/Root66/Mobile02-102checks/Root52. Both browsers passed audio4/reload2/ownedcleanup; Root personally reviewed the criticalMobile02 afterDash fullbody/pathclear view and all required current originals.",
+      "Verify exactfinalcandidate PR Core/helper CI, then normal expected-head PR7 merge and exactmain CI. Preserve story/People/save and protectedCard source/runtime; no AAA/deviceFPS/user aesthetic approval claim.",
+      "Stage clean source below985000000B, publish through existing Pages, verify actual deployment completion and fullfreshHTTPSGET plus Root portal originals, then both frozen public plans with all52Gospel/17Card required originals.",
+      "Complete fullrelease seal, portable3cycle Checkpoint and documentationCI, independent FinalIdle, normal ownlease release/available and Closure. Preserve all prior failures/rejections/raw originals; archived acquired snapshots do not grant current ownership."
     ],
     "tasksAtLocalCompletion": [
       "Keep verified Checkpoint02/index.json:1145 selected actual files,12parts,joined378942231bytes; older Checkpoint01 and failure histories remain unchanged.",
@@ -3472,7 +3892,7 @@
       "Continue Fantasy Masters parity beyond2649 after current release; strongest static candidate is original skill598 조롱공격 / 라이벌라빗16092828518 (see static proposal below), not implemented/tested."
     ],
     "rule": "Latest user actual3D NPR steering overrides older sprite/atlas/2.5D requirements for Gospel. Existing Core/story/save/Card preserved; ClientMotion technical/closing proofs remain historical and not user aesthetic acceptance.",
-    "ruleBeforePublication": "ExistingM/P remains the actual public baseline. No newNPR compile/screenshots/tests/build/CI/stage/publication has completed; new profile/design and assets are source work.",
+    "ruleBeforePublication": "ExistingClientMotionM/P remains the actual public baseline. CurrentNPR Native14/Root29, Lifecycle05, Web10, Desktop03/Root66 and Mobile02/Root52 completed. FinalcandidateCI/mainmerge/cleanstage/Pages/fullpublicGET/publicsuite/seal/archive/closure remain pending before a newNPR release claim. Technical passes are not AAA/deviceFPS/user aesthetic approval.",
     "tasksAtLivingRpgClassicCompletion": [
       "After saving Closure01 and these final Docs3, observe the exact final commit push and both required CI results; that future result is not contained in this closure or claimed at writing.",
       "For later work, inspect actual source/runtime/process/remote status and obtain a new unique bounded own lease only after verifying availability. This completed released cycle and historical acquired archive grant no ownership; never renew or steal expired/foreign leases.",
