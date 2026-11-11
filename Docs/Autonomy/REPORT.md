@@ -4,7 +4,7 @@
 
 실제 VRoid 기반 관절 인물5종·표정·Humanoid 동작7개, 전체 MIT lilToon2.4.1, CC0 입체 배경9종과 HDR 하늘, 원근/회전 카메라·HUD/미니맵·실제 모델 초상화·3D 도입 무대를 통합했습니다. Native01의 실제 도입 진행에서 서로 다른10개 무대를 관측했지만 해당 실행의 소스 결합 실패와 구분합니다. 현재 인물 후보 `ActorBake09`는 거절된 각진 수염을 생략하고 원형 얼굴을 보존했으며 옷 안쪽 피부 마스크·옷자락·허리띠를 수정했습니다. 원형 파일·픽셀·라이선스와 실패/반려 후보는 보존합니다. VRoid/VRM 인물을 CC0로 표시하지 않으며 남성 pinned mirror와 새 primary Hub 다운로드의 바이트 동일성은 미확인입니다.
 
-현재 Native08의15/0/0·소스 불변과 Root25원본 검토/선정을 완료했습니다. Lifecycle02는 현재 소스/입력의3경로 복원을 검증했고 Web07도 같은ed5d…소스에서 기술 통과했습니다. RootOrdinaryPreview07은 진행 중으로 전체 Webplay 통과나 입력 지연 개선은 아직 주장하지 않습니다. Native07/Web06·이전 preview는 정확한 이력으로 유지하며 모든 계획draft·새 PR/공개 없음입니다.
+현재 Native09/Root25·Lifecycle03·Web08은 같은e445…소스에서 통과했습니다. Desktop Preview08/Touch09도 정상 종료/runtime 불변/PageErrors0이며 Root7·6원본을 확인했지만 최종중복8·7은 미확인입니다. Root는3개 browser 계획/publicCard 역할을 소스만 동결했고 전체 Desktop/Mobile/Public suite는 대기입니다. 지연 해결·속도 개선은 주장하지 않습니다. [PR7](https://github.com/ka8877/firstgame/pull/7)은 초기 head C2d0eab9…에서 생성됐으며 이 체크포인트 작성 시 draft·미병합·미공개입니다.
 
 현재 실제 프로필은 `gospel-npr`입니다. 초기 `client-motion` bootstrap은 도구 이력으로 구분합니다. Native15 소스는 Root가9개 새 NPR 사례와6개 기존 오디오·책·저장 사례를 선택·동결했고, Gospel 브라우저 동선3개는 아직 draft/fail-closed입니다. 현재 실행 CONTROL은 **`Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11`**로 명시해야 합니다. OUT `Artifacts/Validation/GospelNpr-2026-11-11`, build `/tmp/firstgame-gospel-npr-20261111-builds`, proof **원 CONTROL** `Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof`, stage `Artifacts/GospelNprWebPlaytest`와 기존 profile.py/Card baseline/Root ledgers는 원 NPR 경로를 유지합니다.
 
@@ -37,11 +37,17 @@
 | Mesa WebPreview04 | 실제 피부/머리/옷/512portrait·FORWARD0 복구 관측.10초 bbox 대기는 실패 |
 | WebPreview05 | 정상 완료3882c7…·runtime 불변·PageErrors0·title/field/front/side 관측. software input 지연 미해결 |
 | SwiftPreview06 | 초기 dialogue action3~5초로 Mesa 약1.5초보다 느려 Root Ctrl-C 중단. wrapper e515a4a9…·cleanup empty·새 pass 아님 |
-| NativeNpr08 | 실제15/0/0·소스 불변·16:09:49.992567Z 완료. Root25원본 선정 완료/현재review7233B·c19dd91d… |
-| LifecycleNpr02 | 현재ed5d…소스/input8c81…의 normal/exception/journalRecovery 복원 검증 완료 |
-| WebNpr07 | 현재ed5d…소스 기술 통과/5710c530…·실제 LastBuild888872B/17647f54… 보존 |
-| RootOrdinaryPreview07 | 실제 진행 중. 전체 Webplay·입력 지연 개선·브라우저 계획 동결 결과 없음 |
-| 브라우저·새 PR/CI/stage/Pages·공개 GET | 아직 새 NPR 결과 없음 |
+| NativeNpr08 | 이전ed5d…소스15/0/0·Root25선정7233B/c19dd91d… 보존 |
+| LifecycleNpr02 | 이전ed5d…/input8c81…의3경로 복원 검증 완료 |
+| WebNpr07 | 이전ed5d…기술 통과5710c530…·LastBuild888872B/17647f54… 보존 |
+| RootOrdinaryPreview07 | 정상 종료9179f79c…/runtime 불변/PageErrors0. Root6원본 확인·중복7미확인, 전체 승인 없음 |
+| NativeNpr09 | 실제15/0/0·소스e445…불변·16:43:41Z 완료. Root25선정review7279B/11e0b84c… |
+| LifecycleNpr03 | normal/exception/journal의 전체sourcee445/input9e33 동일·holding/journal 없음 확인 |
+| WebNpr08 | 실제e445…기술 통과·16:55:48.470067Z/4fbfae40…·LastBuild888872B/1d8d3baa… 보존 |
+| Preview08 / Touch09 | 정상 종료50beeea3…/3e1708a9…·runtime 불변·PageErrors0·Root7/6원본·중복8/7미확인. 진단 관측이며 전체 suite 아님 |
+| 3browser 계획 | source-only 동결: Desktop152steps/66required·Mobile116/52·Public116/52. 전체 suite 대기 |
+| Draft PR7 | 정상04887a39…/d0eab9f3… push 뒤16:36:48Z 생성, 미병합·미공개 |
+| 전체 browser suites·CI/stage/Pages·공개 GET | 전체 suite/새 공개 결과 없음. PR7은 draft 소스 이력 |
 
 Native01의 실제 차이는 환경 `.mat`9개에서 URP 검증이 legacy `_MainTex`/`_Color` 상태를 저장한23~70B 변경뿐이었습니다. lilToon JSON과 다른 모든 입력은 같았지만 필수 소스 동일성 조건을 만족하지 못했으므로 이 실패는 그대로 보존합니다. 이후 NativeNpr02는 입력 변경 없이15개 전체를 통과했습니다. 소스 fingerprint는 `17530260370c9fc91fd7a2ae012e10c4fd716f2cf9f1e0f8e67e813284427ec5`, XML SHA는 `c53f5ea5ad9067d592344f5864eef0d56564ea72b1c3de479ad1457386fcc52b`입니다. Root는 해당 원본25장을 직접 확인하고 `Artifacts/Validation/GospelNpr-2026-11-11/Root/gospel-native-review.json`(SHA `5d53d74c507749ed919db608277a5599b0fbeddbe2edd82b06c824f6b4972064`)에 기록했습니다. 선택 Native 소스 SHA `9f8b09c9…`와 계약 SHA `6f220370…`의 결과를 보존하되 이후 source04 변경의 현재 승인으로 재사용하지 않으며, 이전 실패 wrapper·XML·원본도 소급 승인하지 않습니다.
 
@@ -65,7 +71,11 @@ Root가 직접 본 Mesa Preview04의 title/Mary narrator/실제 Mary speech3PNG�
 
 Root는 동료 검토한 FaceIdleUpdateProposal724f3bbf…를2CS에 적용했습니다. 현재 weight/Get+Approximately로 동일 setter를 생략하고 hidden portrait face/3Animator parameter 갱신을 생략/재표시 동기화하며 숨긴 cache base Animator off/HasVisiblePortrait Tick을 사용합니다. 이전2소스는 Native07 manifest와 대조해 OUT/PerformanceSourceBefore01에 보존했고 field culling/AlwaysAnimate/MPB/rig/assets/15검사/기준/Core/People/저장은 유지합니다. Native08은15/0/0·소스 불변으로16:09:49.992567Z에 완료했습니다. fingerprint `ed5d37beae89a8b89ee9f72634bc4bb8e151f220acf882dc3f69aa16ffdb56c9`, input `8c81a9167c0679df648b23b19ad2e61222e517f4cf959f5ec39ee5a9aec6e951`, XML `acaf09e324ebf575cfe855c0eb5da51e72eb478f711e635b6c47877c8a9837d7`, wrapper `e0bcbc8317f364dc7ef64697a5fadddbe39ce062d0b14395e2522b59623e6bf2`입니다. 현재 Root25선정은 완료됐고 review7233B/SHA `c19dd91d4e3457ba8d194770b9b3cca0cfa5dab12c0f281f5926480bccbc5c7b`입니다. 이전07 canonical/review는 native07… ledger1ca0e67d…로 정확히 보존했습니다. 아트 기준은 [GospelNprArt](../GospelNprArt.md)를 따릅니다.
 
-Lifecycle02는 normal/exception/journalRecovery에서 전체소스 전후ed5d…·input8c81… 동일을 검증했습니다(wrapper `0ff125b9116fb2554f4b2b377bbeb4ebf833b34d5ec2cc0b52b1f4f2bf8094c8`). Web07도 현재ed5d…에서 실제 기술 통과(wrapper `5710c53067ce434aa01061789116f710a96a99e2984f36c14c8b2601fbb0f02e`)했고 실제 LastBuild를 OUT/`BuildReports/PathOfDawn-WebNpr07.buildreport`에888872B/SHA `17647f5452f0b3d1a066141343d13db0bc0fd11e1480d20967a188d29ea341da`로 보존했습니다. 현재 RootOrdinaryPreview07이 실행 중이므로 전체 Webplay·입력 지연 개선·브라우저 동선 승인으로 확대하지 않습니다.
+Lifecycle02의3경로 복원0ff125b9…와 Web07의 실제 기술 통과5710c530…는 이전ed5d…소스 이력입니다. LastBuild는 OUT/`BuildReports/PathOfDawn-WebNpr07.buildreport`에888872B/SHA `17647f5452f0b3d1a066141343d13db0bc0fd11e1480d20967a188d29ea341da`로 보존했습니다. Preview07은 정상 종료(wrapper `9179f79ca8ef52c0ce8c92dc759485a2ef1be27d491be5afd2c55130a2d01b97`)/runtime 불변/PageErrors0이며 Root가 title/MarySummary/chapter/field/front/side6원본을 봤고 최종중복7은 보지 않았습니다. fieldclick3.53248초·prehoverwheel19.31566초·frontdrag47.43692초·side15.23408초는 지연 해결이나 제품FPS 근거가 아니며 전체 승인은 없습니다.
+
+View-only portrait34b814…/29579B·5f21b955…는 before View를 PerformanceSourceBefore02에 보존했고 resolution/MSAA/field rig/MPB/authority/15검사는 유지했습니다. Native09은16:43:41Z에15/0/0·e445…불변/Root25선정7279B·11e0b84c…로 완료했고 Lifecycle03은3경로 전체source/input 동일·holding/journal 없음을 검증했습니다. 전체 hash와 이전08/07 보존 ledger는 STATE에 유지합니다. Web08은16:55:48.470067Z 실제 통과(wrapper `4fbfae406dc5dd9a2c50748abd9e87fdeee916ff1818dbe248fdaea00e1f4d0d`)했고 실제 LastBuild는 OUT/BuildReports/PathOfDawn-WebNpr08.buildreport·888872B/SHA `1d8d3baa42bbc4980ce9d0e5d8164d06e0c7f790b40180600761f4e962242b3e`로 보존했습니다.
+
+Preview08은50beeea3…/Touch09는3e1708a9…로 정상 종료/runtime 불변/PageErrors0입니다. Root가 각각7·6원본을 봤고 중복8·7은 보지 않았습니다. Preview08 fieldclick5.0107/prehover21.6509/front40.2612/side19.1545초는 지연 해결/FPS 근거가 아닙니다. Touch actual canvas693.328125x390/viewport844x390이며 진단 helper80dff52f…만 기존final2RAF/touch8step320ms와 맞추고 before를 PreviewHelperHistory/BeforeTouchParity01에 보존했습니다. 제품/최종기준은 그대로입니다. Root의 source-only 동결 ledger는 새 CONTROL Release/browser-plan-source-admission01.json입니다: Desktop152steps/66required/ad186169…·Mobile116/52/06604c2c…·Public116/52/858ff1a9…와 publicCard 역할/Card17·audio4·reload2를 유지합니다. 전체suite는 대기이며 새 최종 Core311·public123·contract13·transport18 검사가 모두 통과했고 BuildGateNprFinal01이 현재 source/Native/Web·보존 Card 결합을 통과했습니다. 전체 browser suite는 아직 대기입니다. PR7은 C2draft·미병합·미공개입니다.
 
 WebNpr01 실패 뒤 Root는 생성 가능한 Bee cache2.327GB를 `Artifacts/GeneratedCache`로 옮기고 symlink로 연결했습니다. 고유 근거·소스를 삭제하지 않았습니다. Preview01은 세션 종료/runtime 불변 뒤 바깥 cleanup wrapper에서 별도 `Eventloopclosed` 실패를 남겼습니다. Root의 소유 cleanup 빈 상태 확인과 이후 Preview02의 정상 종료는 별개 이력으로 남깁니다.
 
@@ -75,7 +85,7 @@ WebNpr01 실패 뒤 Root는 생성 가능한 Bee cache2.327GB를 `Artifacts/Gene
 
 원 owner `15cfbcc8-18e8-45c9-a562-c1543b8e8a2a`/lock `bf9f5a4c…`의 회차는11월11일19:01:53~11월12일01:01:53 KST 범위였습니다. 실제 `FinalIdleBeforeResume01` 성공(wrapper SHA 접두 `49a65a2b…`) 뒤 정상 해제·available을 원 CONTROL의 `Release/*before-resume.json`에 남겼습니다. 현재는 독립 owner `2e3ece85-66a8-48f3-b3ad-19f5b6f6af9c`, lock commit `4c88b0d447807f834c4926f4d62d232411abe26c`로11월11일23:33:35.466532 KST에 취득한 새 고정 회차이며 마감은 **11월12일05:33:35.466532 KST**입니다. 갱신/연장이 아닙니다. 새 CONTROL의 `activate-resume.sh`와 `run-owned-npr-resume.py`(SHA `31fadb27fd70afbd91551f14b93dd3ba0ae53136687d45536bf47198b0cffd9a`)를 명시적으로 사용합니다. archive helper `e70c48e2…`/preserver `4cf0b7b6…`의 두 실제 회차 보존을 검증한 ActualNprTwoCycleArchiveUnit01은32개 통과(wrapper SHA `2ab4cbb43088d5ff3d4aa55c22c0ec297f8c4acc36eb3bb2ce233dfc024ec791`)했으며 게임 화면 검증과 구분합니다. Root만 실행·Git·배포하고 소스 담당은 소유 경로만 작성합니다.
 
-기존23사건·19본문·51세부·28음성·안정ID·저장·People/NPC 권한과 판마/비활성 멀티플레이를 유지합니다. [공개 테스트](https://ka8877.github.io/firstgame/)는 ClientMotion M `bfa37cbe…`/P `47f2e80f…` 그대로이며 NPR 미공개입니다. 다음은 독립 Resume CONTROL 아래 현재 OrdinaryPreview07의 입력/화면 검증입니다. 이후 근거에 따른3계획 동결·Card 회귀·정상 CI/PR/stage/Pages·전체 GET·보존/종료를 진행하며 아직 계획draft·새 PR/공개 없음입니다.
+기존23사건·19본문·51세부·28음성·안정ID·저장·People/NPC와 판마/비활성 멀티플레이를 유지합니다. 공개 M `bfa37cbe…`/P `47f2e80f…`는 그대로입니다. 다음은 소스 동결된3개 전체 Desktop/Mobile/Public suite와 publicCard 회귀·필수원본 검토·draftPR7/CI·정상 병합/stage/Pages·전체 GET·보존/종료입니다. 계획은 source-frozen/전체suite 대기이며 PR7미병합·새 공개 없음입니다.
 
 이전 종료 문서 C0 `a34ce4f1…`는 실제 push와307rawblob 바이트검증을 마쳤고 closing Core42999518289/helper42999518196도 실제 성공했습니다. 원문/정규화 CI 근거는 이전 control의 `Release/closing-core-ci01.json`·`closing-helper-ci01.json`에 **Closure 이후 별도 저장**했으며 frozen Closure01에 소급 삽입하지 않았습니다. 전체 원작 복원·새 NPR 품질·물리폰 성능·사용자 미적 승인·24시간 자동실행을 완료로 주장하지 않습니다. 마지막 자동화0은 이전 조회이며 목표 활성은 미확인입니다.
 

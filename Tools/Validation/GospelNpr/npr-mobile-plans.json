@@ -2,7 +2,7 @@
   "PathOfDawn": {
     "revision": "gospel-npr-2026-11-11",
     "suite": "modern-real-input-v1",
-    "scope": "Fresh ordinary-input NPR Gospel route only. Retain the story/Scripture/save/audio/Root-original obligations while replacing old 2D character assertions with a separately authored frozen Native 3D contract. This draft requires prototype/control review before execution; no previous graphical approval or pass is reused.",
+    "scope": "Root-frozen ordinary-input NPR Gospel route after current Web08 Desktop/Touch preview geometry. All existing story/Scripture/save/audio and66/52/52 direct Root-original obligations remain required. Source admission is not a completed browser suite, performance or user aesthetic approval.",
     "requiredCheckpoints": [
       "title",
       "g1-opening-book-stop",
@@ -180,14 +180,28 @@
         "settleMs": 650
       },
       {
+        "type": "touch_hold",
+        "start": [
+          0.85,
+          0.4
+        ],
+        "end": [
+          0.6676724137931034,
+          0.4
+        ],
+        "label": "NPR ordinary camera: known fresh/default yaw47 to route yaw0",
+        "settleMs": 1000,
+        "ms": 200
+      },
+      {
         "type": "checkpoint",
         "name": "child-free-field",
-        "expected": "Current real child, physical forest floor and compactHUD after11/23goals and11/19passages."
+        "expected": "Current real child, actual spatial courtyard and compactHUD after11/23goals and11/19passages."
       },
       {
         "type": "checkpoint",
         "name": "canon-child-actor-and-field",
-        "expected": "Current full-frame child actor, new authored atlas and camera framing are visible on the actual field. Inspect actual feet/body silhouette and ground contact; do not equate a saved image with user art approval."
+        "expected": "Current full-frame skinned 3D child actor, spatial scenery and camera framing are visible on the actual field. Inspect actual feet/body silhouette and ground contact; do not equate a saved image with user art approval."
       },
       {
         "type": "checkpoint",
@@ -195,9 +209,8 @@
         "expected": "Actual current Web3D field: same physical traveler with visible head/feet, genuine skinned humanoid, clean NPR face/hair/tunic, depth/lighting and spatial scenery. Root must view this exact original; tiny old sprite/painted-only/blank-gradient frames are not sufficient. Numerical rig/skin assertions are separate fresh Native proof."
       },
       {
-        "type": "review_input",
-        "name": "npr-ordinary-camera-front-review",
-        "expected": "Draft route: use only the actual supported mouse/touch camera-look control to orbit to a clear front view of the stationary live traveler. Keep the same physical feet/location, story/save and active people. No game/JavaScript/save/pose/camera-field injection. Root must first establish the actual control geometry; this acknowledgment is not visual approval."
+        "type": "wait",
+        "ms": 250
       },
       {
         "type": "checkpoint",
@@ -205,14 +218,37 @@
         "expected": "Actual front perspective view of the same stationary skinned traveler, readable real face/eyes/hair/tunic and visible grounded feet in the same live spatial field. Original requires direct Root review; no inferred numeric camera/pose claim."
       },
       {
-        "type": "review_input",
-        "name": "npr-ordinary-camera-side-review",
-        "expected": "Draft route: ordinary supported camera-look input only; orbit to a clear side/three-quarter view, keeping the same stationary traveler, quest and nearby people. Confirm actual input geometry before freezing this route. No hidden state or pose/save injection; no automatic visual approval."
+        "type": "touch_hold",
+        "start": [
+          0.56,
+          0.4
+        ],
+        "end": [
+          0.9091379310344828,
+          0.4
+        ],
+        "label": "NPR ordinary stationary camera: known yaw0 front to yaw90 side",
+        "settleMs": 1000,
+        "ms": 200
       },
       {
         "type": "checkpoint",
         "name": "npr-orbit-side",
         "expected": "Actual side/three-quarter perspective of that same physical traveler and spatial scene, with real body depth, hair/cloth silhouette and grounded feet. Compare actual front/live-field originals; a single billboard rotated toward the camera is not acceptable."
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.9091379310344828,
+          0.4
+        ],
+        "end": [
+          0.56,
+          0.4
+        ],
+        "label": "NPR ordinary stationary camera: exact inverse side gesture back to route yaw0",
+        "settleMs": 1000,
+        "ms": 200
       },
       {
         "type": "checkpoint",
@@ -358,6 +394,15 @@
         "expected": "Walk physically to the visible Joseph waypoint until the touch/E interaction is active; then interact using normal input. No pose/game/save injection."
       },
       {
+        "type": "click",
+        "point": [
+          0.832,
+          0.903
+        ],
+        "label": "NPR 실제 첫 요약 다음 요셉 발화로 한 턴 진행",
+        "settleMs": 650
+      },
+      {
         "type": "checkpoint",
         "name": "actual-joseph-story",
         "expected": "The actual nearby Joseph speaks the exact authored dialogue with the speaker and physical people/place visible. Per-line editorial category/reference metadata is not displayed; quotation/summary/dramatization provenance remains internally preserved by Core/Native."
@@ -418,7 +463,7 @@
       {
         "type": "checkpoint",
         "name": "g2-book-return-reading",
-        "expected": "After the ordinary Bible return, compare g2-planted-facing: the same live Joseph Reading speaker, exact authored dialogue and local field return without advancing the turn or showing per-line editorial metadata. Source provenance remains internal to Core/Native. The player remains at the visually same position and facing Joseph. Exact numeric pose/cursor preservation is separately required by Native16."
+        "expected": "After the ordinary Bible return, compare g2-planted-facing: the same live Joseph Reading speaker, exact authored dialogue and local field return without advancing the turn or showing per-line editorial metadata. Source provenance remains internal to Core/Native. The player remains at the visually same position and facing Joseph. Exact numeric pose/cursor preservation requires separate current Native15 evidence."
       },
       {
         "type": "checkpoint",
@@ -450,12 +495,12 @@
       {
         "type": "checkpoint",
         "name": "g2-continued-reading",
-        "expected": "A real full browser reload and actual title Continue restore the same Joseph Reading before either original Joseph advance click. Compare g2-reading-before-reload for the same speaker and exact authored dialogue, local player/Joseph/world geometry and visual position/facing without per-line editorial metadata; source provenance remains internal to Core/Native. No state/save injection. This is restored Reading, not a newly accepted interaction. Exact XYZ/yaw/cursor/original bytes are separately proven by Native16."
+        "expected": "A real full browser reload and actual title Continue restore the same Joseph Reading before the one remaining ordinary Joseph advance click. Compare g2-reading-before-reload for the same speaker and exact authored dialogue, local player/Joseph/world geometry and visual position/facing without per-line editorial metadata; source provenance remains internal to Core/Native. No state/save injection. This is restored Reading, not a newly accepted interaction. Exact XYZ/yaw/cursor/original-byte preservation requires separate current Native15 evidence."
       },
       {
         "type": "checkpoint",
         "name": "continued-g2-reading",
-        "expected": "Retain a fresh actual current-run original immediately after the early full browser reload and actual title Continue. The visible Joseph Reading must still match g2-reading-before-reload: same speaker, exact authored dialogue, live player/Joseph/local field and visual position/facing, before any Joseph advance input, without per-line editorial metadata. Source provenance remains internal to Core/Native. This checkpoint creates its own real browser capture in the current navigation; no screenshot alias, copied original, state injection or numeric pose claim. Exact XYZ/yaw/cursor/original bytes remain separate Native16 assertions."
+        "expected": "Retain a fresh actual current-run original immediately after the early full browser reload and actual title Continue. The visible Joseph Reading must still match g2-reading-before-reload: same speaker, exact authored dialogue, live player/Joseph/local field and visual position/facing, before any further Joseph advance input after Continue, without per-line editorial metadata. Source provenance remains internal to Core/Native. This checkpoint creates its own real browser capture in the current navigation; no screenshot alias, copied original, state injection or numeric pose claim. Exact XYZ/yaw/cursor/original-byte preservation remains a separate current Native15 evidence requirement."
       },
       {
         "type": "click",
@@ -483,21 +528,12 @@
       {
         "type": "checkpoint",
         "name": "g2-continued-reading-return",
-        "expected": "After the second ordinary Bible return, the restored Joseph Reading still matches g2-reading-before-reload and g2-continued-reading: same speaker, exact authored dialogue, live local field, visual player position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. The original two Joseph advance inputs follow this checkpoint unchanged."
+        "expected": "After the second ordinary Bible return, the restored Joseph Reading still matches g2-reading-before-reload and g2-continued-reading: same speaker, exact authored dialogue, live local field, visual player position and Joseph-facing pose without per-line editorial metadata. Source provenance remains internal to Core/Native. One ordinary Joseph advance click remains after this checkpoint to finish the encounter."
       },
       {
         "type": "review_input",
         "name": "g2-reading-restored-review",
-        "expected": "Directly compare current original and the seven G2 required originals, especially g2-reading-before-reload versus g2-continued-reading and g2-continued-reading-return. Inspect the same speaker and exact authored Joseph turn, earned11/19 Scripture and visual field position/facing without per-line editorial metadata. Source provenance remains internal to Core/Native. Only screenshot-guided ordinary input is allowed. Do not advance Joseph yet, move the player, use runtime/JavaScript/save inspection or claim exact numeric XYZ/yaw. Continue only once the actual restored Reading is observed. This input acknowledgment is not Root visual approval; retain separate current-run Root hash review and Native16 numeric/cursor/byte evidence."
-      },
-      {
-        "type": "click",
-        "point": [
-          0.832,
-          0.903
-        ],
-        "label": "요셉과 다음 대화",
-        "settleMs": 750
+        "expected": "Directly compare current original and the seven G2 required originals, especially g2-reading-before-reload versus g2-continued-reading and g2-continued-reading-return. Inspect the same speaker and exact authored Joseph turn, earned11/19 Scripture and visual field position/facing without per-line editorial metadata. Source provenance remains internal to Core/Native. Only screenshot-guided ordinary input is allowed. Do not advance Joseph yet, move the player, use runtime/JavaScript/save inspection or claim exact numeric XYZ/yaw. Continue only once the actual restored Reading is observed. This input acknowledgment is not Root visual approval; retain separate current-run Root hash review and current Native15 numeric/cursor/byte evidence."
       },
       {
         "type": "click",
@@ -507,6 +543,20 @@
         ],
         "label": "요셉과 대화 마치기",
         "settleMs": 750
+      },
+      {
+        "type": "touch_hold",
+        "start": [
+          0.85,
+          0.4
+        ],
+        "end": [
+          0.6676724137931034,
+          0.4
+        ],
+        "label": "NPR ordinary camera: known fresh/default yaw47 to route yaw0",
+        "settleMs": 1000,
+        "ms": 200
       },
       {
         "type": "checkpoint",
@@ -736,6 +786,20 @@
         "settleMs": 1400
       },
       {
+        "type": "touch_hold",
+        "start": [
+          0.85,
+          0.4
+        ],
+        "end": [
+          0.6676724137931034,
+          0.4
+        ],
+        "label": "NPR ordinary camera: known fresh/default yaw47 to route yaw0",
+        "settleMs": 1000,
+        "ms": 200
+      },
+      {
         "type": "checkpoint",
         "name": "continued-xyz-field",
         "expected": "A real full reload and Continue restore the same physical position, progress and lamp."
@@ -797,7 +861,7 @@
       }
     ],
     "sourcePlan": "Tools/Autonomy/g2_mobile_plan_v2.json",
-    "sourceStatus": "draft-awaiting-npr-product-and-control-review",
+    "sourceStatus": "frozen",
     "evidenceRole": "current-gospel-npr",
     "coordinateReview": {
       "basis": "1280x720 actual Unity frame; normalize to the measured DOM canvas via the existing point() method.",
@@ -850,10 +914,10 @@
         1187,
         182.5
       ],
-      "scope": "Draft coordinates only. Existing story/book geometry remains separate. Camera-look and final 3D world route need Root/source review before sourceStatus may become frozen; no old image approval is reused."
+      "scope": "Current title/chapter/story navigation and camera pad bounds observed with ordinary inputs. Remaining source-derived HUD coordinates and moving-NPC routes require actual full-suite play and separate direct Root original review."
     },
     "nprRouteAdmission": {
-      "sourceStatus": "unresolved-camera-relative-route",
+      "sourceStatus": "frozen",
       "requiredNewOriginals": [
         "npr-live-skinned-character-field",
         "npr-orbit-front",
@@ -863,10 +927,10 @@
         "npr-persisted-3d-people"
       ],
       "ordinaryControlsOnly": true,
-      "scope": "These are source-authored draft requirements, not observed control geometry or completed screenshots. Root must establish actual camera input and revise old fixed-axis travel/interaction steps from current Web play before sourceStatus can become frozen. Native15 selection never freezes this route."
+      "scope": "Root selected this exact route after directly viewing current Web08 desktop and touch originals, including stationary front/side geometry. Normalize only from known default yaw and return by exact inverse before fixed-axis travel; after reload wait for active field HUD. Full suites and all six new3D originals remain unexecuted requirements, independent of Native15."
     },
     "sourceDerivedCameraNormalization": {
-      "sourceStatus": "proposal-not-observed-in-working-web-preview",
+      "sourceStatus": "observed-ordinary-preview-source-admission-only",
       "defaultYawDegrees": 47,
       "assumedUnityCanvasAspect": "16:9",
       "onlyValidFromKnownDefaultYaw": true,
@@ -878,33 +942,59 @@
           0.4
         ],
         "end": [
-          0.6611607143,
+          0.6611607142857143,
           0.4
         ],
         "durationMs": 700,
-        "settleMs": 750,
-        "formula": "dxNorm=-47/(140*16/9)"
+        "settleMs": 1000,
+        "formula": "dxNorm=-47/(140*16/9)",
+        "prehover": {
+          "type": "wheel",
+          "point": [
+            0.85,
+            0.4
+          ],
+          "deltaY": 0,
+          "settleMs": 400
+        }
       },
       "mobile": {
-        "type": "drag",
+        "type": "touch_hold",
         "start": [
           0.85,
           0.4
         ],
         "end": [
-          0.6676724138,
+          0.6676724137931034,
           0.4
         ],
-        "durationMs": 700,
-        "settleMs": 750,
-        "formula": "dxNorm=-47/(145*16/9); actual UI look input is multiplied by canvas.scaleFactor"
+        "ms": 200,
+        "settleMs": 1000,
+        "formula": "dxNorm=-47/(145*16/9); measured DOM canvas693.328125x390; ordinary2RAF+8move/320ms path matches unchanged final harness"
       },
       "obligations": [
-        "Actual ordinary-input preview must establish these controls and measured frame geometry before authoring frozen steps.",
+        "Current ordinary-input previews establish these camera gestures and DOM bounds only; full-suite functional and visual approval remains mandatory.",
         "If retaining old D/W fixed-world-axis travel segments, normalize from known default yaw before those segments.",
         "Repeat after every fresh Boot/reload only when interactive field HUD resumes; a modal conversation/book must not be treated as an active camera.",
         "Front/side orbit reviews also change heading: return to a known reviewed basis with ordinary input before any retained world-axis route; never blindly apply the47-degree correction from an unknown orbit.",
-        "Pending actual3D opening changes require source/route review before freeze. First-frame failed prototype is not accepted geometry or a rendered browser pass."
+        "Current actual3D opening reaches the field in both previews; no old prototype/fallback image counts as current full-suite approval."
+      ]
+    },
+    "rootSourceAdmission": {
+      "reviewer": "/root",
+      "sourceFingerprint": "e4453b186b02e5e0115a465e6a9b451e1a229644ea576f05d3d8c6cee68d7e11",
+      "previewOriginalsScope": "Desktop08 originals1-7 and Touch09 viewport originals1-6 directly viewed; final duplicate originals8/7 not used. Preview observations do not approve future required browser originals.",
+      "previews": [
+        {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/OrdinaryWebPreview/WebPreview08/session.json",
+          "bytes": 283986,
+          "sha256": "2993f61606cebec539152b09677b34db3f02849ef408c6636f986250e144e909"
+        },
+        {
+          "file": "Artifacts/Validation/GospelNpr-2026-11-11/OrdinaryWebPreview/WebPreview09Touch/session.json",
+          "bytes": 287035,
+          "sha256": "511cbcf41a91d4db155c0145cfa34d2d53b468d934dc6548fbc31e0ac41536d0"
+        }
       ]
     }
   }

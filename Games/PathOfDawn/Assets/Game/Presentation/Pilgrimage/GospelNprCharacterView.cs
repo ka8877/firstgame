@@ -70,7 +70,8 @@ namespace PathOfDawn.Presentation
         public RenderTexture CachedPortraitTexture => portraitTexture;
         public Texture PortraitTexture => GetPortraitTexture();
         public Camera PortraitCamera => portraitCamera;
-        public bool HasVisiblePortrait => portraitVisible && isActiveAndEnabled && portraitCamera != null && portraitCamera.enabled;
+        public bool HasVisiblePortrait => portraitVisible && isActiveAndEnabled && portraitCamera != null && portraitCamera.enabled
+            && portraitModel != null && portraitModel.activeInHierarchy;
 
         public Bounds WorldBounds
         {
@@ -399,6 +400,7 @@ namespace PathOfDawn.Presentation
                 var cameraObject = new GameObject("NPR head and shoulders camera", typeof(Camera));
                 cameraObject.transform.SetParent(portraitStage, false);
                 portraitCamera = cameraObject.GetComponent<Camera>();
+                portraitCamera.enabled = false; // Render only after the clone and current expression are ready.
                 portraitCamera.cullingMask = 1 << PortraitLayer;
                 portraitCamera.clearFlags = CameraClearFlags.SolidColor;
                 portraitCamera.backgroundColor = new Color(.79f, .86f, .86f, 1);
@@ -449,19 +451,25 @@ namespace PathOfDawn.Presentation
                 : portraitStage.position + Vector3.up * (StandingHeight * .84f);
             portraitCamera.transform.position = target + new Vector3(StandingHeight * .025f, StandingHeight * .035f, StandingHeight * .85f);
             portraitCamera.transform.LookAt(target, Vector3.up);
-            if (portraitAnimator != null) portraitAnimator.enabled = portraitVisible && isActiveAndEnabled;
-            if (HasVisiblePortrait) SynchronizePortraitFace();
+            // Construct and frame the real rig while active, then apply the
+            // requested visibility. A replacement clone must synchronize even
+            // when the preceding clone had already been visible.
+            portraitCamera.enabled = false;
+            SetPortraitVisible(portraitVisible);
         }
 
         public void SetPortraitVisible(bool visible)
         {
             bool wasVisible = HasVisiblePortrait;
             portraitVisible = visible;
-            if (portraitCamera != null) portraitCamera.enabled = visible && isActiveAndEnabled;
-            if (portraitAnimator != null) portraitAnimator.enabled = visible && isActiveAndEnabled;
-            // A hidden portrait skipped expression updates. Catch up before its
-            // first visible render instead of exposing a stale blink or mouth.
-            if (!wasVisible && HasVisiblePortrait) SynchronizePortraitFace();
+            bool show = visible && isActiveAndEnabled;
+            // Hide the camera first. On activation restore only this isolated
+            // clone, then synchronize its face before enabling its camera.
+            if (!show && portraitCamera != null) portraitCamera.enabled = false;
+            if (portraitAnimator != null) portraitAnimator.enabled = show;
+            if (portraitModel != null && portraitModel.activeSelf != show) portraitModel.SetActive(show);
+            if (show && !wasVisible && portraitModel != null && portraitModel.activeInHierarchy) SynchronizePortraitFace();
+            if (portraitCamera != null) portraitCamera.enabled = show;
         }
 
         public void ReleasePortrait()
@@ -473,7 +481,13 @@ namespace PathOfDawn.Presentation
             portraitBlinks.Clear(); portraitMouths.Clear();
         }
 
-        void OnDisable() { if (portraitCamera != null) portraitCamera.enabled = false; if (portraitAnimator != null) portraitAnimator.enabled = false; }
+        void OnDisable()
+        {
+            if (portraitCamera != null) portraitCamera.enabled = false;
+            if (portraitAnimator != null) portraitAnimator.enabled = false;
+            if (portraitModel != null) portraitModel.SetActive(false);
+            // Keep portraitVisible as the request to restore on OnEnable.
+        }
         void OnEnable() => SetPortraitVisible(portraitVisible);
         void OnDestroy() => ReleasePortrait();
 

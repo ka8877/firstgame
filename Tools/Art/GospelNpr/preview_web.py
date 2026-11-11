@@ -137,8 +137,11 @@ def main():
                     x, y = point(a['point'])
                     if touch:
                         cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': x, 'y': y, 'id': 1}]})
-                        try: page.wait_for_timeout(180)
+                        try:
+                            page.wait_for_timeout(180)
+                            page.evaluate('() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
                         finally: cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+                        page.evaluate('() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
                     else: page.mouse.click(x, y, delay=180)
                 elif kind in ('key', 'hold'):
                     keys = a.get('keys', [a.get('key')])
@@ -148,6 +151,20 @@ def main():
                         page.wait_for_timeout(ms or 120)
                     finally:
                         for key in reversed(keys): page.keyboard.up(key)
+                elif kind == 'touch_hold' and touch:
+                    # Match the unchanged final harness's ordinary touch path.
+                    # These waits observe browser frames; they do not set game state.
+                    start, end = point(a['start']), point(a['end'])
+                    cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': start[0], 'y': start[1]}]})
+                    try:
+                        page.evaluate('() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))')
+                        for index in range(1, 9):
+                            x, y = (start[n] + (end[n] - start[n]) * index / 8 for n in (0, 1))
+                            cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': x, 'y': y}]})
+                            page.wait_for_timeout(40)
+                        page.wait_for_timeout(ms)
+                    finally:
+                        cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
                 elif kind in ('drag', 'touch_hold'):
                     start, end = point(a['start']), point(a['end']); duration = a.get('durationMs', 700)
                     need(type(duration) is int and 200 <= duration <= 2500, 'Bounded ordinary drag required')
