@@ -1,6 +1,6 @@
 # 지속 개발 로드맵과 재개 지점
 
-## 현재 GospelNpr — 새 공개·전체 검증·Checkpoint 완료, 문서 CI·정상 종료 대기
+## GospelNpr 기술 공개·검증·보존·정상 종료 완료 — 아트 후속 과제 유지
 
 사용자는 ClientMotion Gospel 전체 시각 품질을 거절했고 실제3D 애니풍 NPR을 요청했습니다. 실제 새 공개는 최종 main `2dfd4a47…`/P `ce9040d6…`이며 현재 프로필은 `gospel-npr`입니다. 정확한 후보·main CI, Pages43112808490, 새 전체15,439파일 GET/Root 포털2장, 두 공개 실행과 전체 봉인·Checkpoint를 완료했습니다. 기술 결과를 사용자 미적 승인으로 확대하지 않습니다.
 
@@ -8,7 +8,8 @@
 2. 이전 Native01 binding 실패·Native02/03 성공·Native04 전체 실패10통과/5실패/skip0·Native05 성공과 Root검토를 정확한 이력으로 보존합니다. Native06은13통과/2실패/skip0 전체 실패이며 yaw2.182/허용1미만·touch displacement.047/기준.2를 면제하지 않았습니다. 이전5소스는 Resume CONTROL의 FailureSources/NativeNpr06-verified에 manifest 대조 복원했습니다. saved/new/chapter 시각 SnapFacing만 고치고 motor/save·동일15개 기준을 유지하며 motion window를 Time.time+독립wall8초/로그/finally release로 바꾼 Native07은15/0/0·소스 불변으로15:05:38Z에 완료했습니다. 해당 이전 Native07 fingerprint는 `a541d204d997207440ceb4ed79c9579005144d6b881a2309a8b088a91d8af8cc`, input SHA `54bd633774bc93b8030d862b76cb57d1bb05d97665c5eda4a124755e1aed5ceb`, XML SHA `c9e95c4b1ed3e6a1bf2cf1bcc2c64ddc61b1beb7136447cae65ab87d40a25421`, wrapper SHA `b450a5ba338ee189b38149fc95322dca076e5b3217ff9cbc8a132426ed8e778e`입니다. Root25원본 검토7223B/SHA `30237dc02e42b488625a291c6cc3a83f5147ae9e7090991a78e7c6e4d62731fc`와 당시 canonical 선택을 보존하며 FaceIdle2CS 이후 현재소스 승인을 대신하지 않습니다. old05 exact history/거절Web04 이동은 새 CONTROL Release/native05-canonical-relocation.json 및 web04-rejected-output-relocation.json에 남겼습니다. Core311·계약13·미디어123·Card 동일성은 각각의 실제 범위입니다.
 3. Native11 실패/Story원인미해결·12&13미재현/제품Storyfix미주장을 보존합니다. Native12 overhead거절과 Native13 lamp좌표 검사 실패는 그대로입니다. 모든 threshold·Actor/model/importer/product를 유지한 metric 수정 뒤 current3e2583 Native14는15/0/0·Root전체29canonical선정을 완료했습니다. Lifecycle05의 실제3복원과 Native14에 명시적으로 결합한 Web10 build/proof도 통과했습니다. 최종 계약 기준 Core311·공개 미디어123·NPR 계약13·전달18 및 BuildGate 통과는 각각의 기술 범위입니다.
 4. 최종3browser 계획의 모든 단계·필수 원본·음성4·실제 재접속2·CardPublic17을 보존했습니다. Desktop03의111검사/Root66, Mobile02의102검사/Root52, GospelPublic01의101검사/Root52와 CardPublic01의64검사/Root17을 통과해 확정했고 각 음성4·재접속2·실행 정리를 완료했습니다. M2/P와 Stage02의15,439파일·971,757,718B, Pages·전체 GET·Root 포털 검토도 실제 통과했습니다.
-5. 전체 seal과 [Checkpoint01](Evidence/GospelNpr20261111/Checkpoint01/index.json)의15,302원본·81조각·결합2,601,792,134B 보존/전체 readback을 완료했습니다. 현재 문서·조각을 정상 main에 저장한 정확한 D1 커밋들의 Core/helper CI를 실제 관측한 뒤 독립 FinalIdle·정상 자기 해제·available·Closure를 완료합니다. D1 자체 미래 CI나 정상 종료를 미리 기록하지 않습니다. 현재 CameraResume 고정 소유권과 마감은 실제 해제 전까지 유지합니다.
+5. 전체 seal과 [Checkpoint01](Evidence/GospelNpr20261111/Checkpoint01/index.json)의15,302원본·81조각·결합2,601,792,134B 보존/전체 readback, D1 정상 push4커밋·Core/helper8개 성공과83 Git blob 검증을 완료했습니다. 독립 FinalIdle의4exit0·소유 후손 정리를 확인한 뒤00:18:33.134686 UTC에 정확한 자기 잠금을 정상 해제했고 saved status는 available이었습니다. [Closure01](Evidence/GospelNpr20261111/Closure01/index.json)은00:20:06.879051 UTC에 늦은 원본252개를 보존했으며 Checkpoint는 불변입니다. 이 D2 문서·Closure를 처음 저장하는 커밋/CI는 작성 후 따로 관측합니다.
+6. 다음 런타임 작업 전에 실제 환경·프로세스·소스·원격 잠금을 독립 확인하고 실제 available에서 새 고유 자기 잠금을 취득합니다. 종료한 CameraResume나 archive의 acquired 사본은 현재 소유권이 아닙니다. 장기 아트 목표·원작 전체 복원·사용자 미적 승인은 미완료이고 상시 자동 실행을 주장하지 않습니다.
 
 SizeProbe01은 실제 archive7,100항목/packed225,396,471B를 읽었고 소스 전후 `efa93550…` 동일·임시 reader 제거·LastBuild 불변을 확인했습니다. 인물19항목 약51.7M·모델5개 약39M·환경 map8개 약22.37M가 관측됐고 gzip data109MiB는 여전히 예산 초과입니다. CompressionDiag01 CLI 사용 실패,02 offline Brotli 실험 약7분 뒤 Root 취소/partial64MiB 보존/소유 cleanup 빈 상태를 구분하며 압축 결론이나 제품 결과로 삼지 않습니다.
 
@@ -16,9 +17,9 @@ SizeProbe01은 실제 archive7,100항목/packed225,396,471B를 읽었고 소스 
 
 LifecycleNpr01은 실제 정상 완료(wrapper `fa0341c3fede17b50bfe3a0d4a8451c82f2826d99dcfcf11a8a24b73003d483d`)·verified-source-restoration-only입니다. OUT/LifecycleRuns/LifecycleNpr01/lifecycle-observation.json에 Unity/shell exit0·normal/exception/journal-recovery3기록·전후 전체소스a541…/input54bd… 동일·journal/holding 없음을 남겼습니다. 제품/시각/Web 승인 대체가 아니며 초기 Native UI fade도 settled Web 검사를 대신하지 않습니다.
 
-현재 Native14/Web10/local/public/CI/Pages/Portal/seal/Checkpoint와 이전 실패 이력은 [STATE](STATE.json)·[REPORT](REPORT.md)에 구분했습니다. 다음은 D1 CI·정상 종료이며, 후속 제품 작업은 두 인물 대화 구도와 근접 가림/페이드·인물/옷 세부 개선입니다. 공개 근접 마리아 대화에서는 상대 월드 몸체가 잠시 숨는 장면이 있어 완전한 상대 구도 해결을 주장하지 않습니다. Face SDF 미구현·일부 UI entrancefade와 아트 공백을 유지하고 실제 기기 FPS·AAA 동등 품질·사용자 미적 승인은 주장하지 않습니다. 아트 기준은 [가이드](../GospelNprArt.md)를 따릅니다.
+현재 Native14/Web10/local/public/CI/Pages/Portal/seal/Checkpoint/D1 CI/정상 종료와 이전 실패 이력은 [STATE](STATE.json)·[REPORT](REPORT.md)에 구분했습니다. 후속 제품 작업은 두 인물 대화 구도와 근접 가림/페이드·인물/옷 세부 개선입니다. 공개 근접 마리아 대화에서는 상대 월드 몸체가 잠시 숨는 장면이 있어 완전한 상대 구도 해결을 주장하지 않습니다. Face SDF 미구현·일부 UI entrancefade와 아트 공백을 유지하고 실제 기기 FPS·AAA 동등 품질·사용자 미적 승인은 주장하지 않습니다. 아트 기준은 [가이드](../GospelNprArt.md)를 따릅니다.
 
-다음은 이전 Resume 취득 당시 이력이며 현재 실행 CONTROL은 상단 실제 CameraResume입니다.
+다음은 이전 Resume 취득 당시 이력입니다. 마지막 실행 CONTROL이었던 CameraResume도 이제 정상 해제됐으며 현재 실행 소유권은 없습니다.
 
 > 현재 독립 CONTROL은 **`Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11`**입니다. OUT `Artifacts/Validation/GospelNpr-2026-11-11`, BUILD `/tmp/firstgame-gospel-npr-20261111-builds`, proof **원 CONTROL** `Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof`, stage `Artifacts/GospelNprWebPlaytest`, profile.py/Card baseline/Root ledgers와 연구 경로는 원 NPR 위치를 유지합니다. 원 owner15cfbcc8…/lockbf9f5a4c…의11월11일19:01:53~11월12일01:01:53 KST 회차는 FinalIdleBeforeResume01 성공49a65a2b… 뒤 정상 release/available을 원 `Release/*before-resume.json`에 남겼습니다. 새 owner `2e3ece85-66a8-48f3-b3ad-19f5b6f6af9c`/lock `4c88b0d447807f834c4926f4d62d232411abe26c`는11월11일23:33:35.466532~11월12일05:33:35.466532 KST의 독립 취득이며 갱신이 아닙니다. 새 CONTROL의 activate-resume.sh/run-owned-npr-resume.py(SHA `31fadb27fd70afbd91551f14b93dd3ba0ae53136687d45536bf47198b0cffd9a`)와 명시적 CONTROL을 사용합니다. Root만 실행/Git/배포하며 과거 acquired/released 사본은 소유권이 아닙니다.
 

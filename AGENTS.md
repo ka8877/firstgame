@@ -1,3 +1,11 @@
+## NPR 실제 정상 종료·Closure 완료 — 2026-11-12 00:20 UTC
+
+NPR 새 공개 M `2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759`/P `ce9040d6882eba08a7dd71b787666d82a9996e2f`의 기술 마일스톤을 완료했다. Checkpoint81조각과 최신 문서를 정상 main의4개 커밋에 저장했고, 최종 D1은 `5d835d8cf3c5c3467fe42aa75079422ccf885871`이다. 네 커밋의 Core/helper 총8개 CI가 실제 성공했으며 최종 D1은 Core43124581847/helper43124582117이다. Git 객체에서81조각·index·raw attributes83개 파일을 다시 읽어 원본 SHA/크기 일치를 확인했다.
+
+독립 `FinalIdleNprCamera01`의 모든4개 명령 exit0·소유 후손 정리를 확인한 뒤, 현재 CameraResume 잠금을 실제 `2026-11-12T00:18:33.134686+00:00`에 정상 자기 해제했고 status:available을 관측했다. 현재 실행 소유권은 없다. plain Python의 종료 보존도 완료했으며 `Docs/Autonomy/Evidence/GospelNpr20261111/Closure01/index.json`은252개 후기 원본·130641B·SHA256 `d691437d45ea354a5e726e5c021f0c6f728a882553e7f67bf7c0efa6236e1e50`이다. 이전 Checkpoint와 모든 원본은 바꾸지 않는다. 이 Closure/최종 문서를 처음 저장하는 미래 D2 커밋·CI는 Closure에 소급 넣지 않고 실제 저장 뒤 별도로 관측한다.
+
+추가 게임 작업은 실제 환경/프로세스/원격 상태를 다시 확인하고 새 독립 소유권을 취득한 뒤 진행한다. 아래 acquired·공개 대기·종료 대기 문구는 당시 기록이다. 기술 공개 완료를 사용자 미적 승인·원신급 품질·완전한 판마 재현·목표/예약의24시간 자동 실행으로 바꾸지 않는다. 얼굴/의상 세부·Face SDF·근접 대화의 상대 몸체 가림은 후속 개선 대상이다.
+
 ## NPR 새 공개와 실제 검증 완료 — 2026-11-11 23:51 UTC
 
 현재 제품 main M은 `2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759`, 공개 gh-pages P는 `ce9040d6882eba08a7dd71b787666d82a9996e2f`다. PR7 제품 변경과 PR8의 helper CI sparse checkout 수정이 정상 병합됐고 최종 후보/제품의 Core·helper CI와 Pages43112808490이 실제 성공했다. Portal03은15439파일 전체 HTTPS GET과 Root의 두 실제 포털 화면 검토를 완료했다. Gospel Desktop03은111검사/Root66, Mobile02는102/Root52, Public01은101/Root52이며, 보존 Card Public01도64검사/Root17로 통과했다. 각 브라우저는 오디오4구간·실제 재접속2회·정상 wrapper와 소유 후손 정리를 완료했다. 재검증된 캐시/미디어 취소는 원본 진단에 남으며 모든 failedRequest가0이라고 표현하지 않는다.
