@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "releaseProfile": "gospel-npr",
+  "leaseChain": {
+    "schema": 1,
+    "origin": {
+      "controlRoot": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/CommandRuns/FinalIdleBeforeResume01/owned-lease.executed.json",
+        "bytes": 818,
+        "sha256": "72ebca7ad1eadf36cf2d13be330b8b84aba0c1ad8454287294e1ff5306ba1204"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/lease.json",
+        "bytes": 871,
+        "sha256": "75919265619a7bdf810afc5ab85804538a89f8fe74c84f1e4274bc2b3688cdff"
+      },
+      "releaseStdout": {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/Release/lease-release-before-resume.json",
+        "bytes": 791,
+        "sha256": "3285365d816384df21396ca7c50dff9c88e21abf58dcca2923921b7fed865e73"
+      },
+      "statusStdout": {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/Release/lease-status-after-before-resume.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "finalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/CommandRuns/FinalIdleBeforeResume01/summary.json",
+        "bytes": 10955,
+        "sha256": "49a65a2b412d4ad7ad7bb94be33a1a1142c313495d01eaa817065c1e55fa23c9"
+      }
+    },
+    "middle": {
+      "controlRoot": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/CommandRuns/FinalIdleBeforeCameraResume01/owned-lease.executed.json",
+        "bytes": 824,
+        "sha256": "448b9e7a73cf803d81b9653f2454d811441184d3cc01b05b0e111a9a4fd374fa"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/lease.json",
+        "bytes": 877,
+        "sha256": "1841c5774bc5336875c8055422413b207af28519731e3d6f2439d4411c10f1d4"
+      },
+      "releaseStdout": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/lease-release-before-camera-resume.json",
+        "bytes": 797,
+        "sha256": "6af3a081f59c860bd91459ae4402dfb15f549b7ec538c1b280e8a15fa99addcb"
+      },
+      "statusStdout": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/Release/lease-status-after-before-camera-resume.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "finalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprResume-2026-11-11/CommandRuns/FinalIdleBeforeCameraResume01/summary.json",
+        "bytes": 11247,
+        "sha256": "9cdbe2a7db505c49f03d8fe2e708062e8061d94a1f11a41d9ce5a9ab517b4e58"
+      }
+    },
+    "active": {
+      "controlRoot": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/CameraResumeIdle01/owned-lease.executed.json",
+        "bytes": 830,
+        "sha256": "ac027afdc3288cca4151d355f17e1c4a5bde19bfa4eeb2e7d16e9c1044a1706d"
+      }
+    }
+  },
+  "checkpoint": {
+    "file": "Docs/Autonomy/Evidence/GospelNpr20261111/Checkpoint01/index.json",
+    "bytes": 6849367,
+    "sha256": "44f4c91f30db296767c8448589225f92b8c954e065ce3285ce01b81fae0a9c65"
+  },
+  "releasedLease": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json",
+    "bytes": 883,
+    "sha256": "e13872f47fb4ec24a4e6d27d4b25a91a6d7126d7edaa8fd4a5c00d9e0d1fe290"
+  },
+  "releaseStdout": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/lease-release-final-v3.json",
+    "bytes": 803,
+    "sha256": "2f45c5c8f6a6e076d8c2e2eac7972cff84689f3da44218ec4320107ab9b8236d"
+  },
+  "statusStdout": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/lease-status-after-final-v3.json",
+    "bytes": 99,
+    "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+  },
+  "archiveWrapper": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/summary.json",
+    "bytes": 11621,
+    "sha256": "631d6740c81683c07d2a664cd186b14b6783396446c9ac9a93aab6aa4feea4c4"
+  },
+  "finalIdleWrapper": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/FinalIdleNprCamera01/summary.json",
+    "bytes": 11198,
+    "sha256": "4b15bf813e4deeecb8795248bdc6f738295c48e645cd57bed010bcb28de6f49c"
+  },
+  "documentationCi": [
+    {
+      "commit": "7059c031b1ac42844f9ac65e6c5cc513df7e2a6e",
+      "workflowKind": "core",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts1-core-ci01.json",
+        "bytes": 1494,
+        "sha256": "388f25b5dd1aabce7c4b4b97aeb256481ccc7e52643cd36e0c4be79601e47aa2"
+      },
+      "runId": 43123521973
+    },
+    {
+      "commit": "7059c031b1ac42844f9ac65e6c5cc513df7e2a6e",
+      "workflowKind": "helper",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts1-helper-ci01.json",
+        "bytes": 1188,
+        "sha256": "11079aa10c123561dd9d5bb634ca322a4842ef9aa34023350921cb4f9ddf816f"
+      },
+      "runId": 43123522004
+    },
+    {
+      "commit": "33c276704188162925bfec4dde9a560dd4c491c6",
+      "workflowKind": "core",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts2-core-ci01.json",
+        "bytes": 1494,
+        "sha256": "d69b42733956167dafc70c6e2776d67ed4a0643ba8e7d2a9032dfbad3beb0f36"
+      },
+      "runId": 43123626838
+    },
+    {
+      "commit": "33c276704188162925bfec4dde9a560dd4c491c6",
+      "workflowKind": "helper",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts2-helper-ci01.json",
+        "bytes": 1188,
+        "sha256": "7269166d5a3652f5a4295c3524ee1be0b008150c25bc64fe0a86f2b1412c5022"
+      },
+      "runId": 43123626769
+    },
+    {
+      "commit": "139764c91b130eb25c56d45e6630d88ef473d953",
+      "workflowKind": "core",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts3-core-ci01.json",
+        "bytes": 1494,
+        "sha256": "3f2e9c32ffff24e270834e6d41e0803500135d67e48b193bf195471957b46afb"
+      },
+      "runId": 43124297670
+    },
+    {
+      "commit": "139764c91b130eb25c56d45e6630d88ef473d953",
+      "workflowKind": "helper",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-parts3-helper-ci01.json",
+        "bytes": 1188,
+        "sha256": "7fdaf6d795820b013e80064aff03699cbec3cb1b4d89b154d363cda94787887e"
+      },
+      "runId": 43124297577
+    },
+    {
+      "commit": "5d835d8cf3c5c3467fe42aa75079422ccf885871",
+      "workflowKind": "core",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-final-core-ci01.json",
+        "bytes": 1494,
+        "sha256": "aaf8ab3ff2ad9e924e4129ef2600caf3848e988481172b797c1e17140fb01ded"
+      },
+      "runId": 43124581847
+    },
+    {
+      "commit": "5d835d8cf3c5c3467fe42aa75079422ccf885871",
+      "workflowKind": "helper",
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/d1-final-helper-ci01.json",
+        "bytes": 1188,
+        "sha256": "7972f60be05c12234563ad6b92cfc2fb8f87c2f00dd4dc578cbf54193f5dc6c7"
+      },
+      "runId": 43124582117
+    }
+  ],
+  "lateOriginals": [
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/README.md",
+      "bytes": 4610,
+      "sha256": "d880b1a2f61367d326bedf52e9f0b8d12b0b57783cbca2798ba9257e903f90b2"
+    },
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/prune-post-checkpoint-card-caches.py",
+      "bytes": 16143,
+      "sha256": "793984163037312945329587cb2d1ca21c1a21e9f3141fe8c315cd3d57ce0477"
+    },
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/source-freeze.json",
+      "bytes": 2206,
+      "sha256": "056abaaf795721e4b756de25d4d3befb7a2fbda14c1efbdc7084f4b37cdc9d58"
+    }
+  ]
+}

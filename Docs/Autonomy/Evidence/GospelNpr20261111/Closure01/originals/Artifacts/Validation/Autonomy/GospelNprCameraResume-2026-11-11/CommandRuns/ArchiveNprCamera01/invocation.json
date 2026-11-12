@@ -1,0 +1,342 @@
+{
+  "scope": "generic-owned-command-only",
+  "label": "ArchiveNprCamera01",
+  "requestedArgv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/preserve-release-proof-npr-three-cycle-v3.py",
+    "checkpoint",
+    "--facts",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/checkpoint-facts-v3-final.json",
+    "--reviewed-source",
+    "/workspace/firstgame/Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/preserve-gospel-npr-three-cycle-v3-proposal.py",
+    "--confirm-completed-proof"
+  ],
+  "executedArgv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/preserve-release-proof-npr-three-cycle-v3.py",
+    "checkpoint",
+    "--facts",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/checkpoint-facts-v3-final.json",
+    "--reviewed-source",
+    "/workspace/firstgame/Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/preserve-gospel-npr-three-cycle-v3-proposal.py",
+    "--confirm-completed-proof"
+  ],
+  "display": false,
+  "liveLeasePath": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json",
+  "ownedLeaseSnapshot": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/owned-lease.executed.json",
+    "bytes": 830,
+    "sha256": "ac027afdc3288cca4151d355f17e1c4a5bde19bfa4eeb2e7d16e9c1044a1706d"
+  },
+  "environmentOverrides": {
+    "FIRSTGAME_CONTROL_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11",
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+    "FIRSTGAME_PROOF_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof",
+    "FIRSTGAME_STAGE_ROOT": "/workspace/firstgame/Artifacts/GospelNprWebPlaytest",
+    "FIRSTGAME_RELEASE_PROFILE": "gospel-npr",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/GeneratedPythonCache"
+  },
+  "maximumSharedSeconds": 3600,
+  "leaseReserveSeconds": 60,
+  "cleanupReserveSeconds": 12,
+  "executionSources": [
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/run-owned-npr-camera-resume-archive-v3.py",
+        "bytes": 12700,
+        "sha256": "c2fad91ede42ed6d59e45c43eaa69e53e144d9c5f2bbcdc0df4d85224af3ae99"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/run-owned-npr-camera-resume-archive-v3.py",
+        "bytes": 12700,
+        "sha256": "c2fad91ede42ed6d59e45c43eaa69e53e144d9c5f2bbcdc0df4d85224af3ae99"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 4875,
+        "sha256": "356bf8a333e107c521225283f7b4500bc5d95186f6bdeeb88dc49b14e4a3ca13"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 4875,
+        "sha256": "356bf8a333e107c521225283f7b4500bc5d95186f6bdeeb88dc49b14e4a3ca13"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/run-canon-native.py",
+        "bytes": 9413,
+        "sha256": "52eea2dd59060a91087f80a3acf2db1e44befffa5c950e0e393f58b4bb007afc"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 9413,
+        "sha256": "52eea2dd59060a91087f80a3acf2db1e44befffa5c950e0e393f58b4bb007afc"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/release_contract.py",
+        "bytes": 8165,
+        "sha256": "e08fb628ba4544b5d8581c156b0c53a51d5d3145ee7bb6f24d9b8e9487c9624d"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 8165,
+        "sha256": "e08fb628ba4544b5d8581c156b0c53a51d5d3145ee7bb6f24d9b8e9487c9624d"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 11700,
+        "sha256": "62cd16ed2316c5ebca65ec4236ced04496c26d827552a8c9df27359b46211ee9"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-gospel-npr.py",
+        "bytes": 8682,
+        "sha256": "533f6ba161654de4f2d2ee30b33acce14c6bdb361f35e395063ffe8c8b25db9d"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Web/stage-gospel-npr.py",
+        "bytes": 8682,
+        "sha256": "533f6ba161654de4f2d2ee30b33acce14c6bdb361f35e395063ffe8c8b25db9d"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/canon_release_evidence.py",
+        "bytes": 42796,
+        "sha256": "e2a338a6ffd263079635f31c941773a31f3f40157862d8960379e9800ab5fe16"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 42796,
+        "sha256": "e2a338a6ffd263079635f31c941773a31f3f40157862d8960379e9800ab5fe16"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/GospelNpr/contract.py",
+        "bytes": 6148,
+        "sha256": "b4b2fd142724ad38945506179c07ae691b79cafc590450ab71b8d77b1a9cfe02"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/GospelNpr/contract.py",
+        "bytes": 6148,
+        "sha256": "b4b2fd142724ad38945506179c07ae691b79cafc590450ab71b8d77b1a9cfe02"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/GospelNpr/card_baseline.py",
+        "bytes": 9795,
+        "sha256": "80827c89da0bc6a389410091cfea9aef4dcd2e288dbd779cc0fa4d0cae6bba1d"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/GospelNpr/card_baseline.py",
+        "bytes": 9795,
+        "sha256": "80827c89da0bc6a389410091cfea9aef4dcd2e288dbd779cc0fa4d0cae6bba1d"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/GospelNpr/native-contract.json",
+        "bytes": 11515,
+        "sha256": "e283a4b25c67b9bd92b3634c8e6d70786315be4d1e2f0e64e8b881f72b73809b"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Tools/Validation/GospelNpr/native-contract.json",
+        "bytes": 11515,
+        "sha256": "e283a4b25c67b9bd92b3634c8e6d70786315be4d1e2f0e64e8b881f72b73809b"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/preserve-gospel-npr-three-cycle-v3-proposal.py",
+        "bytes": 85378,
+        "sha256": "3b19c3f681b2b6755e52a2c307794f5719e4d4c6c8e5d8068b9e679a3fbc04d5"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/preserve-gospel-npr-three-cycle-v3-proposal.py",
+        "bytes": 85378,
+        "sha256": "3b19c3f681b2b6755e52a2c307794f5719e4d4c6c8e5d8068b9e679a3fbc04d5"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/test_preserve_gospel_npr_three_cycle_v3.py",
+        "bytes": 35809,
+        "sha256": "7a6d2c0d8e2db2434719cb840469e6e5f98422891c678188b08501a5e344d877"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/test_preserve_gospel_npr_three_cycle_v3.py",
+        "bytes": 35809,
+        "sha256": "7a6d2c0d8e2db2434719cb840469e6e5f98422891c678188b08501a5e344d877"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111TwoCycleProposalV2/preserve-gospel-npr-two-cycle-v2-proposal.py",
+        "bytes": 84009,
+        "sha256": "12538bbff03590e6b173d52dba0889e75a52c1156338bcf27bcfc4f5597ac20b"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Drafts/GospelNpr20261111TwoCycleProposalV2/preserve-gospel-npr-two-cycle-v2-proposal.py",
+        "bytes": 84009,
+        "sha256": "12538bbff03590e6b173d52dba0889e75a52c1156338bcf27bcfc4f5597ac20b"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111PreservationProposal/preserve-gospel-npr-proposal.py",
+        "bytes": 79867,
+        "sha256": "5d9ae08621eac7e59f6f5167192cb69bceef310feda44f27a763e2edfd982a76"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Drafts/GospelNpr20261111PreservationProposal/preserve-gospel-npr-proposal.py",
+        "bytes": 79867,
+        "sha256": "5d9ae08621eac7e59f6f5167192cb69bceef310feda44f27a763e2edfd982a76"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/preserve-two-lease-proposal.py",
+        "bytes": 69015,
+        "sha256": "f23e60d6bea65971af7a1bf89199f30f45f5851f459cfd1329aada6b9a53394f"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/RecordedHarness/Artifacts/Validation/Drafts/ClientMotionTwoLeaseSourceV3/preserve-two-lease-proposal.py",
+        "bytes": 69015,
+        "sha256": "f23e60d6bea65971af7a1bf89199f30f45f5851f459cfd1329aada6b9a53394f"
+      }
+    }
+  ],
+  "supervisorAcceptance": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+      "bytes": 69227,
+      "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+    },
+    "independentReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+      "bytes": 2324,
+      "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+    },
+    "operatorReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+      "bytes": 3316,
+      "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+    }
+  },
+  "publishReady": false,
+  "baselineReady": false
+}

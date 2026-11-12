@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "status": "source-only-static-peer-reviewed-not-executed",
+  "preparedUtc": "2026-11-11T23:59:11.878593+00:00",
+  "sources": [
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/prune-post-checkpoint-card-caches.py",
+      "bytes": 16143,
+      "sha256": "793984163037312945329587cb2d1ca21c1a21e9f3141fe8c315cd3d57ce0477"
+    },
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/README.md",
+      "bytes": 4610,
+      "sha256": "d880b1a2f61367d326bedf52e9f0b8d12b0b57783cbca2798ba9257e903f90b2"
+    }
+  ],
+  "reviewedReadOnlySupport": [
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNpr20261111CardBeeCompilerSpaceProposalV2/prune-idle-compiler-caches.py",
+      "bytes": 16686,
+      "sha256": "754dfcce0571faeadcb5b7c90b804311c564679ad511df123bfdd36183f4581b"
+    },
+    {
+      "file": "Artifacts/Validation/Drafts/GospelNpr20261111CardBeeCompilerSpaceProposalV2/prune-idle-card-bee-compiler-output.py",
+      "bytes": 15042,
+      "sha256": "15bc5fb607e284349ff32a818bf1283436f548f769c598e4628cef6ab6227378"
+    }
+  ],
+  "selectedCacheObservations": {
+    "regularFilesSelected": 2005,
+    "logicalBytes": 197744059,
+    "previouslyAllocatedFileBytes": 202637312,
+    "retainedPlayerDataMetadataFiles": 5,
+    "allCacheDirectoriesRetained": 674,
+    "wholeThreeCacheFiles": 2010,
+    "noSymlinkMultipleHardlinkSpecialFoundReadOnly": true,
+    "limits": "Allocation observation only, no actualfree-spacegain/cleanupclaimed. Newinventory/result overheadmustbeaccounted."
+  },
+  "staticPeer": {
+    "reviewer": "/root/npr_regenerable_cache_space_proposal/post_checkpoint_card_cache_peer",
+    "scope": "Fullsource/README andfinalselfsource/supportrefs/aftertypesguards checked readonly. Actualcheckpointstdout/index/02snapshotsourcehashes/cachecounts verified. Noconcreteblocker. Noexecution/test/cleanup."
+  },
+  "scope": "Only newpostcheckpointDraft; no oldfrozenDraft/control/report/source modified. Exact2005generatedcachefiles candidate; freshownedwrapper+independentidle+durableinventory+wholeprotectedproofunchangedchecks mandatory. PreserveasClosurelateOriginals, notfrozenCheckpoint."
+}

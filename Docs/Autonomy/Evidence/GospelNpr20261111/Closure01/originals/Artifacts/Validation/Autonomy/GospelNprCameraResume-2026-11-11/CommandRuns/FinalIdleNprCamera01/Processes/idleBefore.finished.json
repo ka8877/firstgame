@@ -1,0 +1,50 @@
+{
+  "label": "idleBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-12T00:17:52.269858+00:00",
+  "timeoutSeconds": 19.997672944999067,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 86110.32529384701,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/FinalIdleNprCamera01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 132404,
+    "ppid": 132371,
+    "pgid": 132404,
+    "sid": 132404,
+    "state": "R",
+    "startTicks": 8256255,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 132405,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/FinalIdleNprCamera01/02-idleBefore/supervisor-result.json",
+    "sha256": "96cf4dbd08e81a6459142b460f1eea687b5fa0bb4d29589c401f89aaafb135ad",
+    "bytes": 8747
+  },
+  "finishedUtc": "2026-11-12T00:17:52.438903+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/FinalIdleNprCamera01/idleBefore.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

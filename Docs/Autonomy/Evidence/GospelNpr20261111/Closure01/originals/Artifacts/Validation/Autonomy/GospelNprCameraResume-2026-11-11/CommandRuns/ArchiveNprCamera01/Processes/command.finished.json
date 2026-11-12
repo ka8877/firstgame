@@ -1,0 +1,56 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/preserve-release-proof-npr-three-cycle-v3.py",
+    "checkpoint",
+    "--facts",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/checkpoint-facts-v3-final.json",
+    "--reviewed-source",
+    "/workspace/firstgame/Artifacts/Validation/Drafts/GospelNpr20261111ThreeCycleProposalV3/preserve-gospel-npr-three-cycle-v3-proposal.py",
+    "--confirm-completed-proof"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-11T23:46:53.116694+00:00",
+  "timeoutSeconds": 3585.4192204360006,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 84300.867595279,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+    "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 130068,
+    "ppid": 130033,
+    "pgid": 130068,
+    "sid": 130068,
+    "state": "R",
+    "startTicks": 8070344,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 130069,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/ArchiveNprCamera01/03-command/supervisor-result.json",
+    "sha256": "b6927aa6ac4f83c264adf8c1a146f01a27454f105427b12facf1cbf79918e977",
+    "bytes": 9528
+  },
+  "finishedUtc": "2026-11-11T23:50:37.130114+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/command.stdout.log",
+    "sha256": "556d71755fc582c255ee08610caee6438cc4e682fc33bf143c09553dd2a29a08",
+    "bytes": 486
+  }
+}

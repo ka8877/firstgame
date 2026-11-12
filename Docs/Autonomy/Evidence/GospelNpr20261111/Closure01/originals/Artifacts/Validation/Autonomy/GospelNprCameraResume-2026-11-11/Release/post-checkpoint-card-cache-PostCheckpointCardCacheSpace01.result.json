@@ -1,0 +1,536 @@
+{
+  "schema": 1,
+  "status": "post-checkpoint-card-regenerable-cache-subset-pruned",
+  "checkedUtc": "2026-11-12T00:01:20.755645+00:00",
+  "inventory": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/post-checkpoint-card-cache-PostCheckpointCardCacheSpace01.inventory.json",
+    "bytes": 1456127,
+    "sha256": "b73fd058b02f308d5e5eeff857ef8a4035a5e1dd8e93122672b11cceb64768b0"
+  },
+  "secondIndependentIdle": {
+    "checkedUtc": "2026-11-12T00:00:34.051989+00:00",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "removedRegularFiles": 2005,
+  "removedLogicalBytes": 197744059,
+  "removedPreviouslyAllocatedFileBytes": 202637312,
+  "retainedCache": {
+    "retainedMetadataFiles": 5,
+    "retainedDirectories": 674,
+    "allMetadataBytesAndMetadataEqual": true
+  },
+  "allProtectedOriginalsEqual": true,
+  "retainedOriginals": {
+    "pins": [
+      {
+        "file": "Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      {
+        "file": "Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      {
+        "file": "/tmp/firstgame-reprise-cache/PathOfDawn/Library/LastBuild.buildreport",
+        "bytes": 888981,
+        "sha256": "4874d4646c898562ae2a89ca02182342773599ec75834cd82ea5c7e9256a8a59"
+      },
+      {
+        "file": "Artifacts/Validation/GospelNpr-2026-11-11/BuildReports/PathOfDawn-WebNpr10.buildreport",
+        "bytes": 888981,
+        "sha256": "4874d4646c898562ae2a89ca02182342773599ec75834cd82ea5c7e9256a8a59"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/build-proof-index.json",
+        "bytes": 6305,
+        "sha256": "e90118de54f3fd65ea62248546120f7679540387e673c60e88054ab8d5a96400"
+      },
+      {
+        "file": "Artifacts/Validation/GospelNpr-2026-11-11/NativeRuns/PathOfDawn/NativeNpr14/summary.json",
+        "bytes": 3290,
+        "sha256": "b4c141490ffae721e08e71897100dd646163b5207bb69a0b893bccbea01543f6"
+      },
+      {
+        "file": "Artifacts/Validation/GospelNpr-2026-11-11/WebRuns/PathOfDawn/WebNpr10/summary.json",
+        "bytes": 16072,
+        "sha256": "f85c72c3ca3b39fbf7c14c3a6826cd9c27d625ec62f941652d03726c39e3bb51"
+      },
+      {
+        "file": "Tools/Validation/GospelNpr/card_baseline.py",
+        "bytes": 9795,
+        "sha256": "80827c89da0bc6a389410091cfea9aef4dcd2e288dbd779cc0fa4d0cae6bba1d"
+      },
+      {
+        "file": "Tools/Validation/GospelNpr/contract.py",
+        "bytes": 6148,
+        "sha256": "b4b2fd142724ad38945506179c07ae691b79cafc590450ab71b8d77b1a9cfe02"
+      },
+      {
+        "file": "Games/FantasyCards/Library/LastBuild.buildreport",
+        "bytes": 2937048,
+        "sha256": "bb2fb924482ffff59c542383faca1e4ce10b2ef528a08bac967bfacd056822cf"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/CardBaseline/baseline.json",
+        "bytes": 1802,
+        "sha256": "d446c6af4f59b8397f3ea46055d2f310fdccfc1d63daa3439c929de6d1881bb9"
+      }
+    ],
+    "sourceSnapshot": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/card-bee-compiler-CardBeeCompilerSpace02.source-before.json",
+      "bytes": 8045351,
+      "sha256": "946bbbceadf02802c2f4b829260deb9c9d4f5959be58e5997dc54190621c5e56"
+    },
+    "cardBaselineSnapshot": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/card-bee-compiler-CardBeeCompilerSpace02.card-baseline-before.json",
+      "bytes": 6733114,
+      "sha256": "68e7ede3709a340a7608a743de0423d8441ce11d4c9139efa39d6abe86dd86c4"
+    },
+    "reviewedSupportSources": [
+      {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111CardBeeCompilerSpaceProposalV2/prune-idle-compiler-caches.py",
+        "bytes": 16686,
+        "sha256": "754dfcce0571faeadcb5b7c90b804311c564679ad511df123bfdd36183f4581b"
+      },
+      {
+        "file": "Artifacts/Validation/Drafts/GospelNpr20261111CardBeeCompilerSpaceProposalV2/prune-idle-card-bee-compiler-output.py",
+        "bytes": 15042,
+        "sha256": "15bc5fb607e284349ff32a818bf1283436f548f769c598e4628cef6ab6227378"
+      }
+    ],
+    "readOnlyGospelLibraryAlias": {
+      "alias": "/workspace/firstgame/Games/PathOfDawn/Library",
+      "target": "/tmp/firstgame-reprise-cache/PathOfDawn/Library",
+      "aliasMetadata": {
+        "dev": 27,
+        "ino": 265785,
+        "bytes": 47,
+        "mode": 511,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 1,
+        "mtimeNs": 1793769253466187251,
+        "ctimeNs": 1793769253466187251
+      },
+      "actualRootMetadata": {
+        "dev": 34,
+        "ino": 7095,
+        "bytes": 860,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "nlink": 17,
+        "mtimeNs": 1794429330046600321,
+        "ctimeNs": 1794429330046600321
+      },
+      "readOnlyFiles": [
+        "/tmp/firstgame-reprise-cache/PathOfDawn/Library/ArtifactDB",
+        "/tmp/firstgame-reprise-cache/PathOfDawn/Library/LastBuild.buildreport",
+        "/tmp/firstgame-reprise-cache/PathOfDawn/Library/SourceAssetDB"
+      ]
+    },
+    "gospelRuntimeProofAndDatabases": [
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/BuildInputs.json",
+        "sha256": "9676de1d8c2c9275f0158bae75e4dcddaf7089f8cfa470c233e1ce4b61ccaf38",
+        "metadata": {
+          "dev": 27,
+          "ino": 797681,
+          "bytes": 538592,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340520003136,
+          "ctimeNs": 1794429340520003136
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/BuildEvidence.txt",
+        "sha256": "91cff0c74d948766b569667bf4947178376d3b0439afe7151bb2b568d1ce37ab",
+        "metadata": {
+          "dev": 27,
+          "ino": 797682,
+          "bytes": 420,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340523360386,
+          "ctimeNs": 1794429340523360386
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/ProjectSettings/ProjectVersion.txt",
+        "sha256": "1ba9ef2a17d110f732474ce61ba26e26395986dfcd828200cb53f29cab2c944c",
+        "metadata": {
+          "dev": 27,
+          "ino": 797684,
+          "bytes": 85,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340523660199,
+          "ctimeNs": 1794429340523660199
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/ProjectSettings/FirstGameSetup.version",
+        "sha256": "d07ac2c4081d23fc6ee3b493c5c03801b37f39426401d47aa38d48539c1434ab",
+        "metadata": {
+          "dev": 27,
+          "ino": 797685,
+          "bytes": 34,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340523898391,
+          "ctimeNs": 1794429340523898391
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/LegacyResourceExclusions.json",
+        "sha256": "758cccad99cea44b58fbfa8b654adc1cc40e08f730eda0ff511e74b40bd2edb9",
+        "metadata": {
+          "dev": 27,
+          "ino": 797686,
+          "bytes": 681325,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340524454733,
+          "ctimeNs": 1794429340524454733
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/CapturedSources/preserve_completed_build_proof.py",
+        "sha256": "c5978445e59c3c1fa19650013434a00830bd09c1efb04c5a2f2dffed472fa106",
+        "metadata": {
+          "dev": 27,
+          "ino": 797688,
+          "bytes": 16139,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340527911129,
+          "ctimeNs": 1794429340527911129
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/CapturedSources/restoration_source_binding.py",
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03",
+        "metadata": {
+          "dev": 27,
+          "ino": 797689,
+          "bytes": 2356,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340528243530,
+          "ctimeNs": 1794429340528243530
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/CapturedSources/nativity_release_evidence.py",
+        "sha256": "2d7abfc874cbc6e476f85873308a9920d1599534b7203e30f43cdef8677f3fd8",
+        "metadata": {
+          "dev": 27,
+          "ino": 797690,
+          "bytes": 23552,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340528459419,
+          "ctimeNs": 1794429340528459419
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/CapturedSources/nativity_storage.py",
+        "sha256": "0256712ed7a464a32db6a1ab32ffc7ef5886d58ee63866a43048beb4a02bf75f",
+        "metadata": {
+          "dev": 27,
+          "ino": 797691,
+          "bytes": 1914,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340528865730,
+          "ctimeNs": 1794429340528865730
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/Runtime/Build/4cd3911a5a7d42f7793e966c9bcfab56.wasm.unityweb",
+        "sha256": "73fdbfb50b9e7a64d98736bac63786225ea70a01184701ced626f9aade77cc51",
+        "metadata": {
+          "dev": 27,
+          "ino": 797696,
+          "bytes": 15906384,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340612728066,
+          "ctimeNs": 1794429340612728066
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/Runtime/Build/8c39cf076afe5bb149c18b23b20927c6.data.unityweb",
+        "sha256": "677e8b40aeec83b984462dfd1432f523276ab98643160c66e518dc8a8ac0cb8a",
+        "metadata": {
+          "dev": 27,
+          "ino": 797697,
+          "bytes": 81875415,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429340900726423,
+          "ctimeNs": 1794429340900726423
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/Runtime/Build/c5b1bff1176e290616d38caf5c89c0c9.loader.js",
+        "sha256": "d33845047b23e81edbab6a62491acd92f8d613298ca11b2f4aa3a90a5dd06739",
+        "metadata": {
+          "dev": 27,
+          "ino": 797698,
+          "bytes": 47867,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429341020687516,
+          "ctimeNs": 1794429341020687516
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/Runtime/Build/c663fe7b276ffe48de6443310185d9cc.framework.js.unityweb",
+        "sha256": "bca419b7128418098ae78a1bd7d585918501c838a05bf6315e9aada1d2cb51bb",
+        "metadata": {
+          "dev": 27,
+          "ino": 797699,
+          "bytes": 92915,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429341021302725,
+          "ctimeNs": 1794429341021302725
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNpr-2026-11-11/BuildProof/PathOfDawn-Web/Runtime/index.html",
+        "sha256": "94a06165154c292204ab4841db83f413cfac0289006adc97c19fdd164954acac",
+        "metadata": {
+          "dev": 27,
+          "ino": 797700,
+          "bytes": 7333,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429341021750767,
+          "ctimeNs": 1794429341021750767
+        }
+      },
+      {
+        "file": "/tmp/firstgame-gospel-npr-20261111-builds/PathOfDawn/Web/Build/4cd3911a5a7d42f7793e966c9bcfab56.wasm.unityweb",
+        "sha256": "73fdbfb50b9e7a64d98736bac63786225ea70a01184701ced626f9aade77cc51",
+        "metadata": {
+          "dev": 34,
+          "ino": 180645,
+          "bytes": 15906384,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429300412965987,
+          "ctimeNs": 1794429302148956120
+        }
+      },
+      {
+        "file": "/tmp/firstgame-gospel-npr-20261111-builds/PathOfDawn/Web/Build/8c39cf076afe5bb149c18b23b20927c6.data.unityweb",
+        "sha256": "677e8b40aeec83b984462dfd1432f523276ab98643160c66e518dc8a8ac0cb8a",
+        "metadata": {
+          "dev": 34,
+          "ino": 180646,
+          "bytes": 81875415,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794428989262911927,
+          "ctimeNs": 1794429302148956120
+        }
+      },
+      {
+        "file": "/tmp/firstgame-gospel-npr-20261111-builds/PathOfDawn/Web/Build/c5b1bff1176e290616d38caf5c89c0c9.loader.js",
+        "sha256": "d33845047b23e81edbab6a62491acd92f8d613298ca11b2f4aa3a90a5dd06739",
+        "metadata": {
+          "dev": 34,
+          "ino": 180647,
+          "bytes": 47867,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794406683739709186,
+          "ctimeNs": 1794429302148956120
+        }
+      },
+      {
+        "file": "/tmp/firstgame-gospel-npr-20261111-builds/PathOfDawn/Web/Build/c663fe7b276ffe48de6443310185d9cc.framework.js.unityweb",
+        "sha256": "bca419b7128418098ae78a1bd7d585918501c838a05bf6315e9aada1d2cb51bb",
+        "metadata": {
+          "dev": 34,
+          "ino": 180644,
+          "bytes": 92915,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429293905001685,
+          "ctimeNs": 1794429302148956120
+        }
+      },
+      {
+        "file": "/tmp/firstgame-gospel-npr-20261111-builds/PathOfDawn/Web/index.html",
+        "sha256": "94a06165154c292204ab4841db83f413cfac0289006adc97c19fdd164954acac",
+        "metadata": {
+          "dev": 34,
+          "ino": 180648,
+          "bytes": 7333,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429301204961423,
+          "ctimeNs": 1794429302148956120
+        }
+      },
+      {
+        "file": "/tmp/firstgame-reprise-cache/PathOfDawn/Library/LastBuild.buildreport",
+        "sha256": "4874d4646c898562ae2a89ca02182342773599ec75834cd82ea5c7e9256a8a59",
+        "metadata": {
+          "dev": 34,
+          "ino": 180655,
+          "bytes": 888981,
+          "mode": 384,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429302852952495,
+          "ctimeNs": 1794429302852952495
+        }
+      },
+      {
+        "file": "/tmp/firstgame-reprise-cache/PathOfDawn/Library/SourceAssetDB",
+        "sha256": "2d736b44c59c0b968d56ac7d0fc5b44efa16a42914178fc4f3543731bc0395ef",
+        "metadata": {
+          "dev": 34,
+          "ino": 7294,
+          "bytes": 11169792,
+          "mode": 448,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429326276810264,
+          "ctimeNs": 1794429326276810264
+        }
+      },
+      {
+        "file": "/tmp/firstgame-reprise-cache/PathOfDawn/Library/ArtifactDB",
+        "sha256": "b706709005c200715afc1310c44bcc5322a18631cdc96fca7d184823c6e3cc3c",
+        "metadata": {
+          "dev": 34,
+          "ino": 7296,
+          "bytes": 41263104,
+          "mode": 448,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794429326280810241,
+          "ctimeNs": 1794429326280810241
+        }
+      }
+    ],
+    "cardDatabases": [
+      {
+        "file": "/workspace/firstgame/Games/FantasyCards/Library/SourceAssetDB",
+        "sha256": "9b231ebc27d5f3c47d6860f67e072283c59479b44aae366c91096b93f59b47eb",
+        "metadata": {
+          "dev": 27,
+          "ino": 394671,
+          "bytes": 23003136,
+          "mode": 448,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794373392001526086,
+          "ctimeNs": 1794373392001526086
+        }
+      },
+      {
+        "file": "/workspace/firstgame/Games/FantasyCards/Library/ArtifactDB",
+        "sha256": "caefea306dc55030d385efd13eab3553bb96e81a3533907a26c1a08a8de49c10",
+        "metadata": {
+          "dev": 27,
+          "ino": 394673,
+          "bytes": 187658240,
+          "mode": 448,
+          "uid": 1000,
+          "gid": 1000,
+          "nlink": 1,
+          "mtimeNs": 1794373392023987218,
+          "ctimeNs": 1794373392023987218
+        }
+      }
+    ],
+    "retainedCardTrees": [
+      {
+        "root": "/workspace/firstgame/Games/FantasyCards/Library/Artifacts",
+        "files": 3597,
+        "bytes": 576384144,
+        "sha256OfCompleteByteAndMetadataRows": "43b8bbd39aa8f91c48e6f66d7bcea15669d7769d3f86fb11b4c6c84ea145e10f"
+      },
+      {
+        "root": "/workspace/firstgame/Games/FantasyCards/Library/PackageCache",
+        "files": 20820,
+        "bytes": 1371886587,
+        "sha256OfCompleteByteAndMetadataRows": "81ba8e8151b2f5ceaa6b24ba396828a50a531d768dfd42547a16170f4643fa29"
+      },
+      {
+        "root": "/workspace/firstgame/Games/FantasyCards/Library/Bee",
+        "files": 2281,
+        "bytes": 954583186,
+        "sha256OfCompleteByteAndMetadataRows": "4db64e4f48176017985a879dc6d280394321112e786734c532389b24096b92fe"
+      }
+    ],
+    "checkpoint": {
+      "index": {
+        "file": "Docs/Autonomy/Evidence/GospelNpr20261111/Checkpoint01/index.json",
+        "bytes": 6849367,
+        "sha256": "44f4c91f30db296767c8448589225f92b8c954e065ce3285ce01b81fae0a9c65"
+      },
+      "archiveWrapper": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/ArchiveNprCamera01/summary.json",
+        "bytes": 11621,
+        "sha256": "631d6740c81683c07d2a664cd186b14b6783396446c9ac9a93aab6aa4feea4c4"
+      }
+    }
+  },
+  "workspaceFreeBeforeInventory": 914841600,
+  "workspaceFreeAfter": 1116020736,
+  "limits": "Actual free-space gain includes inventory/result overhead and filesystem allocation effects. No product/rendering/rebuild/test/public/archive approval; future Unity regenerates these caches."
+}

@@ -1,0 +1,278 @@
+{
+  "status": "command-completed",
+  "scope": "generic-owned-command-only",
+  "label": "PostCheckpointCardCacheSpace01",
+  "invocation": {
+    "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/invocation.json",
+    "bytes": 12495,
+    "sha256": "b1205167cb3ddf849c26cdff4530be7dbd49d3b63fbd29b4d52d46852dd4e830"
+  },
+  "publishReady": false,
+  "baselineReady": false,
+  "automaticRetryOrApproval": false,
+  "guardBefore": {
+    "event": {
+      "label": "guardBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T23:59:56.921232+00:00",
+      "timeoutSeconds": 44.998879755003145,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 85087.086991427,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 131396,
+        "ppid": 131394,
+        "pgid": 131396,
+        "sid": 131396,
+        "state": "R",
+        "startTicks": 8148721,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 131397,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/PostCheckpointCardCacheSpace01/01-guardBefore/supervisor-result.json",
+        "sha256": "21d884048944cef8749bfe4c8c7d6f9dafd2a163faf4b052f3644f05707fa063",
+        "bytes": 10836
+      },
+      "finishedUtc": "2026-11-11T23:59:58.497640+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/guardBefore.stdout.log",
+        "sha256": "13c2777fe23794886a7108420871d50b730870ca005f815e899be66315aca25a",
+        "bytes": 752
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/Processes/guardBefore.finished.json",
+      "bytes": 1960,
+      "sha256": "3042a133e0003bb8f0df735fc89bb0a0cc9e38ff2784b52c3fbe3452faaa9358"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/guardBefore.stdout.log",
+      "bytes": 752,
+      "sha256": "13c2777fe23794886a7108420871d50b730870ca005f815e899be66315aca25a"
+    }
+  },
+  "idleBefore": {
+    "event": {
+      "label": "idleBefore",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Environment/assert-runtime-idle.py"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T23:59:58.759342+00:00",
+      "timeoutSeconds": 19.998685209997348,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 85087.086991427,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 131428,
+        "ppid": 131394,
+        "pgid": 131428,
+        "sid": 131428,
+        "state": "R",
+        "startTicks": 8148909,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 131429,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/PostCheckpointCardCacheSpace01/02-idleBefore/supervisor-result.json",
+        "sha256": "e662270b03eeed5760a7d6372795b5ab29169f790fa174cfe60aff18df147788",
+        "bytes": 8748
+      },
+      "finishedUtc": "2026-11-11T23:59:58.880428+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/idleBefore.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/Processes/idleBefore.finished.json",
+      "bytes": 1834,
+      "sha256": "51218085b06b9f7da361c51116c100ab91b9ec8a3db1e341d917ef44d8e384d2"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/idleBefore.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "command": {
+    "event": {
+      "label": "command",
+      "argv": [
+        "python3",
+        "/workspace/firstgame/Artifacts/Validation/Drafts/GospelNprPostCheckpoint20261111CacheSpace/prune-post-checkpoint-card-caches.py",
+        "--owned-run-label",
+        "PostCheckpointCardCacheSpace01",
+        "--confirm-post-checkpoint-cache-prune"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-11T23:59:59.130555+00:00",
+      "timeoutSeconds": 3585.6084766870044,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 85087.086991427,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 131430,
+        "ppid": 131394,
+        "pgid": 131430,
+        "sid": 131430,
+        "state": "R",
+        "startTicks": 8148947,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 131431,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/PostCheckpointCardCacheSpace01/03-command/supervisor-result.json",
+        "sha256": "c65da75ac1e0551c5ccd4f6e037bd785d591cd712221f6382912c4e0630a931e",
+        "bytes": 10240
+      },
+      "finishedUtc": "2026-11-12T00:01:20.803145+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/command.stdout.log",
+        "sha256": "cafd9ef8235179a80e86b9db299715b81da66a6a174beddb4fe23a03cbc25d46",
+        "bytes": 337
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/Processes/command.finished.json",
+      "bytes": 1957,
+      "sha256": "3ef7f5b0e772cff611a56c953164d3a14f8b7ecfdae63d2280de0798021963ef"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/command.stdout.log",
+      "bytes": 337,
+      "sha256": "cafd9ef8235179a80e86b9db299715b81da66a6a174beddb4fe23a03cbc25d46"
+    }
+  },
+  "guardAfter": {
+    "event": {
+      "label": "guardAfter",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "Tools/Autonomy/cycle_guard.py",
+        "check",
+        "--record",
+        "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json"
+      ],
+      "cwd": "/workspace/firstgame",
+      "startedUtc": "2026-11-12T00:01:21.075762+00:00",
+      "timeoutSeconds": 44.997153838994564,
+      "privateProcessGroup": true,
+      "sharedSafeEndMonotonic": 85087.086991427,
+      "cleanupAndReportReservedSeconds": 12,
+      "processContainment": "owned-descendants-v1",
+      "environmentOverrides": {
+        "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/GospelNpr-2026-11-11",
+        "FIRSTGAME_BUILD_ROOT": "/tmp/firstgame-gospel-npr-20261111-builds",
+        "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/GeneratedPythonCache",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0"
+      },
+      "supervisorIdentity": {
+        "pid": 131541,
+        "ppid": 131394,
+        "pgid": 131541,
+        "sid": 131541,
+        "state": "R",
+        "startTicks": 8157142,
+        "uids": [
+          1000,
+          1000,
+          1000,
+          1000
+        ]
+      },
+      "supervisorStillAlive": false,
+      "exitCode": 0,
+      "pid": 131542,
+      "containmentProvedEmpty": true,
+      "containmentReceipt": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/ContainedCommands/PostCheckpointCardCacheSpace01/04-guardAfter/supervisor-result.json",
+        "sha256": "49986bd541309905d2cc45f48cc5a88155991c927d089498799c04ea2f8d0ce0",
+        "bytes": 10836
+      },
+      "finishedUtc": "2026-11-12T00:01:22.658725+00:00",
+      "log": {
+        "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/guardAfter.stdout.log",
+        "sha256": "13c2777fe23794886a7108420871d50b730870ca005f815e899be66315aca25a",
+        "bytes": 752
+      }
+    },
+    "receipt": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/Processes/guardAfter.finished.json",
+      "bytes": 1957,
+      "sha256": "ec252d2a228ae06d64956a532f9816f182a6d8b41e37fd1c8de57da4eaf0b638"
+    },
+    "stdout": {
+      "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/CommandRuns/PostCheckpointCardCacheSpace01/guardAfter.stdout.log",
+      "bytes": 752,
+      "sha256": "13c2777fe23794886a7108420871d50b730870ca005f815e899be66315aca25a"
+    }
+  },
+  "finishedUtc": "2026-11-12T00:01:22.675973+00:00",
+  "executionLimit": {
+    "maximumSharedSeconds": 3600,
+    "leaseReserveSeconds": 60,
+    "cleanupReserveSeconds": 12,
+    "startedMonotonic": 81487.086991427,
+    "safeEndMonotonic": 85087.086991427
+  }
+}
