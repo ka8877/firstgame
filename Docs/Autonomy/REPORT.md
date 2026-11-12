@@ -1,16 +1,22 @@
-# 예수님의 길 실제 3D NPR 개편 진행 — GospelNpr
+# 예수님의 길 NPR 새 공개·전체 검증·Checkpoint 완료
 
 사용자는 ClientMotion 전체 시각 품질을 거절하고 실제3D 애니풍 NPR을 요청했습니다. 원 작업은 `GospelNpr-2026-11-11`, 현재 실제 소유권은 이전 Resume 정상 해제 뒤 독립 취득한 세 번째 `GospelNprCameraResume-2026-11-11`입니다. 브랜치/기준소스와 이전 ClientMotion·NPR 실행/실패 이력은 유지하며 기술 통과를 사용자 미적 승인으로 바꾸지 않습니다.
 
 실제 VRoid 기반 관절 인물5종·표정·Humanoid 동작7개, 전체 MIT lilToon2.4.1, CC0 입체 배경9종과 HDR 하늘, 원근/회전 카메라·HUD/미니맵·실제 모델 초상화·3D 도입 무대를 통합했습니다. Native01의 실제 도입 진행에서 서로 다른10개 무대를 관측했지만 해당 실행의 소스 결합 실패와 구분합니다. 현재 인물 후보 `ActorBake09`는 거절된 각진 수염을 생략하고 원형 얼굴을 보존했으며 옷 안쪽 피부 마스크·옷자락·허리띠를 수정했습니다. 원형 파일·픽셀·라이선스와 실패/반려 후보는 보존합니다. VRoid/VRM 인물을 CC0로 표시하지 않으며 남성 pinned mirror와 새 primary Hub 다운로드의 바이트 동일성은 미확인입니다.
 
-현재 source `3e2583d03336b9fd678e4cdebb379b0f0cd6aa58e390b72cd5b36a80647e7570`의 Native14는15/0/0·소스 불변으로 통과했고 Root가 전체29원본을 직접 보고 canonical로 선정했습니다. Lifecycle05의 실제3복원과 Native14에 명시적으로 결합한 Web10 build/proof도 통과했습니다. 새 Desktop03은111검사·Root66원본, Mobile02는102검사·Root52원본을 모두 통과해 확정했습니다. 각 실행의 음성4구간·실제 재접속2회와 wrapper/소유 후손 정리도 완료했고 page/http errors·예상 밖 실패는0입니다. 각 재접속 nav1/2의 확인된 UnityCacheRevalidationAborts2건은 그대로 보존합니다. 최종 C6·정확한 후보 CI·병합·공개판 검증·새 배포는 아직 대기입니다. Native11Story 원인미해결/12·13미재현, Native12 overhead거절·Native13 lamp실패는 보존하며 제품Storyfix나 사용자 미적 승인을 주장하지 않습니다.
+새 공개판은 [예수님의 길](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=ce9040d6)에서 실행할 수 있습니다. 최종 제품 main은 `2dfd4a47…`, 공개 커밋은 `ce9040d6…`입니다. 정상 PR8 병합 뒤 정확한 후보·main Core/helper CI와 Pages43112808490의 전체 단계가 성공했습니다. 깨끗한 Stage02는 manifest 포함15,439파일·971,757,718B이며, 새 Portal03 전체 HTTPS GET·크기/SHA와 Root 포털 원본2장 검토를 마쳤습니다. 이전 PR7 병합판 helper checkout 취소·Stage01과 Portal01/02 실패는 별도 이력으로 보존합니다.
 
-Mobile02의 대시 후 우물 구간은 플레이어 전신과 길이 보이는 실제 현재 화면을 Root가 직접 확인했습니다. 마리아의 실제 대화·대화 뒤 이동, 성전 대화·본문 획득·장비·저장 후 같은 NPC도 검토했습니다. 카메라에 가까운 NPC의 일시적인 그리기 가림은 남으며 모든 프레임에서 모든 NPC가 보인다는 뜻은 아닙니다. Mobile01의 거절된 시도는 별도 이력으로 유지합니다.
+현재 source `3e2583d0…`의 Native14는15개와 Root29원본을 통과했고 Lifecycle05의 실제3복원·Web10 build/proof·Core311·공개 미디어123·계약13·전달18도 통과했습니다. Desktop03은111검사/Root66, Mobile02는102검사/Root52, 새 GospelPublic은101검사/Root52, 보존 CardPublic은64검사/Root17을 모두 통과해 확정했습니다. 각 브라우저의 실제 음성4구간·재접속2회와 wrapper/소유 후손 정리를 확인했습니다. page/http/예상 밖 오류는0이며, 실제 확인된 캐시 재검증 중단과 Card 미디어206의 제스처 전·재접속 취소는 보존합니다. 모든 실패 요청이0이라는 뜻은 아닙니다.
 
-최종 카메라 계획3개는 Root가 메타데이터 변경과 나머지 데이터 보존을 확인해 승인했습니다. Desktop152단계/필수66장, Mobile116/52, Public116/52와 음성4·실제 재접속2, CardPublic17 객체는 그대로입니다. 최종 계약 기준 새 Core311·공개 미디어123·NPR 계약13·전달 도구18 및 BuildGate도 통과했습니다. 전용 재생성 Bee 캐시 정리는 Web10 완료 뒤에만 수행했고 전체source·선택 build/proof·LastBuild는 보존했습니다. PR7은 C5 draft·미병합이며 main a34/공개 P47은 그대로입니다.
+전체 최종 gate와 [Checkpoint01](Evidence/GospelNpr20261111/Checkpoint01/index.json)의15,302원본·81조각·결합2,601,792,134B 보존/전체 readback이 실제 통과했습니다. D1 자체 문서 커밋·CI와 독립 FinalIdle·정상 자기 잠금 해제·Closure는 아직 남았습니다. 미래의 자기 저장·CI·종료 결과를 현재 완료로 기록하지 않습니다.
 
-현재 CONTROL/owner147d52c3…/lock5b19cb80…와19:17:59.790247Z~11월12일01:17:59.790247Z의 독립 CameraResume 취득은 유지합니다. oldResume FinalIdle9cdbe2a7…·19:14:55.929519Z 정상release·99Bavailable/be8a…와 actual-third-cycle-transition-references/snapshotac027afd…/Idlepass5d6fadc…를 보존합니다. activation은 originalNPR source 후 CONTROL만 override하며 원 OUT/build/proof/stage/Card/Root를 유지합니다. installed/read source3unchanged와 당시 V3 source50authored미실행은 이력이고, 이제 ACTIVE/NprThreeCycleArchiveUnit01의 actual50unit pass를 기록합니다. 실제 최종3cycle archive/closure나 게임 검증 완료는 주장하지 않습니다.
+Mobile02의 대시 후 우물 구간은 플레이어 전신과 길이 보이는 실제 화면을 Root가 직접 확인했습니다. 마리아의 실제 대화·대화 뒤 이동, 성전 대화·본문 획득·장비·저장 후 같은 NPC도 검토했습니다. 공개 검토의 근접 마리아 대화에서는 초상화·대사와 플레이어는 보였지만 상대 월드 몸체가 카메라 그리기 가림으로 일시 숨었습니다. 일반 회전에서는 같은 마리아·플레이어·우물이 함께 보였고 길잡이 대화에서는 두 몸체가 보였습니다. 모든 NPC가 매 프레임 보이거나 대화 구도가 완전히 해결된 것은 아니며, 후속 두 인물 구도·가림/페이드 개선이 남습니다. Face SDF 미구현·인물/옷 세부 공백도 유지하며 AAA 동등 품질·실제 기기 FPS·사용자 미적 승인을 주장하지 않습니다.
+
+최종 카메라 계획3개는 Root가 메타데이터 변경과 나머지 데이터 보존을 확인해 승인했습니다. Desktop152단계/필수66장, Mobile116/52, Public116/52와 음성4·실제 재접속2, CardPublic17 객체는 그대로 실행했습니다. 최종 CI의4줄 checkout 의존성 수정은 제품 검증 핀을 바꾸지 않았고 Node89검사를 통과했습니다. Web10 뒤의 전용 Bee 캐시와 Card의 재생성 컴파일러 파일944개 정리는 전체source·선택 proof·LastBuild·DAG/진단·보존 파일을 유지한 별도 공간 작업입니다. 삭제 전 실패한 정리01도 보존합니다.
+
+최종 자료 저장 중 재생성 가능한 Card Shader/Burst 파일과 PlayerData 생성물2개만 정리해 실제 여유 공간914,841,600B→1,116,020,736B를 확인했습니다. 메타데이터5개·674디렉터리·소스·현재 게임/공개 파일·imported Artifacts/PackageCache/Bee·DB/LastBuild·봉인/Checkpoint는 그대로 검증했습니다. 다음 Unity 빌드의 캐시 재생성은 필요하며 새 빌드 통과를 주장하지 않습니다.
+
+현재 CONTROL/owner147d52c3…/lock5b19cb80…와19:17:59.790247Z~11월12일01:17:59.790247Z의 독립 CameraResume 취득은 유지합니다. 이전 두 회차의 독립 FinalIdle·정상 해제·available와 세 번째 취득 원문은 Checkpoint에 보존했습니다. 현재 Checkpoint 완료를 현재 잠금 해제나 Closure 완료로 바꾸지 않습니다. D1 CI 뒤 실제 FinalIdle·정상 해제·Closure를 별도로 완료해야 합니다.
 
 | 새 NPR 회차의 실제 검사 | 현재 결과와 범위 |
 |---|---|
@@ -23,6 +29,10 @@ Mobile02의 대시 후 우물 구간은 플레이어 전신과 길이 보이는 
 | WebNpr10 | 실제 current3e2583 build/proof 통과·explicitNative14·raw LastBuild 보존. 브라우저/사용자 승인 대체 아님 |
 | Desktop03 |111검사·90PNG·Root66전체·음성4·실제 재접속2 통과/확정. 두 wrapper exit0·정리·guardAfter0·page/http/unexpected0. 확인된 cache revalidation abort2 보존 |
 | Mobile02 |102검사·78PNG·Root52전체·음성4·실제 재접속2 통과/확정. 실제4exits0·소유 후손 정리·page/http/unexpected0. 확인된 cache revalidation abort2 보존 |
+| GospelPublic01 |101검사·72PNG·Root52전체·음성4·실제 재접속2·실행 정리 통과. 확인된 unitydata cacheabort1 보존 |
+| CardPublic01 |64검사·20PNG·Root17전체·음성4·실제 재접속2·실행 정리 통과. cacheabort1/확인된media206 취소 보존 |
+| Portal03 | 전체15,439 HTTPS GET·크기/SHA와 포털 원본2장 Root 검토 통과. canonical17fcdd9d… 동결 |
+| 전체 봉인·Checkpoint01 | FinalSeal44809B/b671c5a0… 통과·15,302원본/81조각/결합2,601,792,134B 전체 readback 보존 완료 |
 | 최종 가벼운 검사03 | Core311·공개 미디어123·계약13·전달18·BuildGate 통과. 최종 계약e283 기준 |
 | stable-height source | 이전 Camera30187B/fa653bc1…의 Actor.VisualHeight 수정 승인 이력. 최종397cfa의 완만한 시야 선택과 함께 Native14/Web10/Desktop03 통과 |
 | Mobile01 | 필수afterDash Root 시각 거절·의도적Ctrl-C·outer failedb7a287bb…·16/52marks. Mobile 승인 없음 |
@@ -69,9 +79,9 @@ Mobile02의 대시 후 우물 구간은 플레이어 전신과 길이 보이는 
 | LifecycleNpr03 | normal/exception/journal의 전체sourcee445/input9e33 동일·holding/journal 없음 확인 |
 | WebNpr08 | 실제e445…기술 통과·16:55:48.470067Z/4fbfae40…·LastBuild888872B/1d8d3baa… 보존 |
 | Preview08 / Touch09 | 정상 종료50beeea3…/3e1708a9…·runtime 불변·PageErrors0·Root7/6원본·중복8/7미확인. 진단 관측이며 전체 suite 아님 |
-| 3browser 계획 | 최종 메타데이터 Root 승인·모든 실행 단계/필수 원본/음성4/재접속2/CardPublic17 보존. Desktop03 Root66·Mobile02 Root52 확정 완료·public 대기 |
-| Draft PR7 | 정상04887a39…/d0eab9f3… push 뒤16:36:48Z 생성, 미병합·미공개 |
-| CI/stage/Pages·공개 GET | 최종 후보 CI·병합·stage·Pages·공개 GET 대기. PR7 draft·새 NPR 미공개 |
+| 3browser 계획 | 모든 단계/필수 원본/음성4/재접속2/CardPublic17 보존. Desktop03 Root66·Mobile02 Root52·GospelPublic Root52·CardPublic Root17 확정 완료 |
+| 초기 Draft PR7 이력 | 당시04887a39…/d0eab9f3… push 뒤16:36:48Z 생성. 이후 PR7/PR8 정상 병합과 최종 M2는 위의 별도 실제 결과 |
+| CI/stage/Pages·공개 GET | 최종 후보/main Core+helper·정상 PR8 병합·Stage02·Pages43112808490·Portal03 전체 GET 통과 |
 
 Native01의 실제 차이는 환경 `.mat`9개에서 URP 검증이 legacy `_MainTex`/`_Color` 상태를 저장한23~70B 변경뿐이었습니다. lilToon JSON과 다른 모든 입력은 같았지만 필수 소스 동일성 조건을 만족하지 못했으므로 이 실패는 그대로 보존합니다. 이후 NativeNpr02는 입력 변경 없이15개 전체를 통과했습니다. 소스 fingerprint는 `17530260370c9fc91fd7a2ae012e10c4fd716f2cf9f1e0f8e67e813284427ec5`, XML SHA는 `c53f5ea5ad9067d592344f5864eef0d56564ea72b1c3de479ad1457386fcc52b`입니다. Root는 해당 원본25장을 직접 확인하고 `Artifacts/Validation/GospelNpr-2026-11-11/Root/gospel-native-review.json`(SHA `5d53d74c507749ed919db608277a5599b0fbeddbe2edd82b06c824f6b4972064`)에 기록했습니다. 선택 Native 소스 SHA `9f8b09c9…`와 계약 SHA `6f220370…`의 결과를 보존하되 이후 source04 변경의 현재 승인으로 재사용하지 않으며, 이전 실패 wrapper·XML·원본도 소급 승인하지 않습니다.
 
@@ -121,7 +131,7 @@ Root27선정·Native10/Lifecycle04/Web09·fresh311/123/13/18+BuildGate와 구/�
 
 Native14 wrapper11036B/SHA `ccd5d06ddcfb705b3aac95c0ca678ceffdb88a57be73add799c394a620a3f10d`, XML129706B/SHA `d2738fba495145c423b42e1c561ab64c6ee0df5b6e538bf74a6f282a47aead29`, OUT/Root/gospel-native-review.json8621B/SHA `fb912d413011a438798962e57591d28d41eb5edacb3c15fef51f624a2ce7aeec`입니다. OldNative10 canonical은 OUT/NativeHistory/NativeNpr10으로 exact 이동·rawoldreview 불변이며 ledger12935B/0056221c…를 보존합니다. Lifecycle05 actual wrapper11161B/SHA `58b8e999ff87bb5dcaf05372a61a37be3ed0be8920acf372ad2e32a17715a00e`는3복원경로와 source3e2583…전후동일을 확인한 source-restoration-only 결과입니다. Native rendering/preservation의 제한된 승인이고 알려진 아트 공백·일부UI entrancefade는 남아 AAA/deviceFPS/useresthetic 승인은 아닙니다.
 
-Native12 observation11787B/2599786a…는 기술통과29PNG 중 Root2overhead거절/27미검토·5Storyvisibletrue를 보존합니다. Native11Story 원인은 여전히 미해결이며12&13미재현이 제품수정 증거가 아닙니다. OriginalWeb09/proof는 exacthistory로 옮겨 ledger5651B/03e6fa5b…를 남겼습니다. HistoryRuntimeHardlink01 actualpass11374B/79f0aa1…는35pairs/70paths 바이트를 유지했고 sharedinode·metadata변경을55761B/786b525a…ledger에 기록했습니다. Workspace만764407808B 절약했으며 승인 변화는 없습니다. 재생성 Bee 캐시는 Web10 완료 뒤 전체source·선택 build/proof·LastBuild 불변을 확인한 별도 정리입니다. 현재 Desktop03/Root66과 Mobile02/Root52는 독립 통과·확정을 마쳤습니다. PR7draftC5·Maina34·PublicP47은 그대로이고 최종 C6·PR CI·병합·공개 검증은 남았습니다.
+Native12 observation11787B/2599786a…는 기술통과29PNG 중 Root2overhead거절/27미검토·5Storyvisibletrue를 보존합니다. Native11Story 원인은 여전히 미해결이며12&13미재현이 제품수정 증거가 아닙니다. OriginalWeb09/proof·Native10·이전 browser는 정확한 history로 보존했습니다. HistoryRuntimeHardlink01의35pairs/70paths는 모든 바이트를 유지하고 sharedinode·metadata 변경을 기록했으며 승인 변화는 없습니다. 이후 Native14/Web10/local/public/정확한 CI·Pages·Portal/allseal/Checkpoint는 위의 독립 실제 결과입니다. 현재 남은 것은 D1 자체 CI와 FinalIdle·정상 해제·Closure이며 과거 실패를 소급 승인하지 않습니다.
 
 이전 종료 문서 C0 `a34ce4f1…`는 실제 push와307rawblob 바이트검증을 마쳤고 closing Core42999518289/helper42999518196도 실제 성공했습니다. 원문/정규화 CI 근거는 이전 control의 `Release/closing-core-ci01.json`·`closing-helper-ci01.json`에 **Closure 이후 별도 저장**했으며 frozen Closure01에 소급 삽입하지 않았습니다. 전체 원작 복원·새 NPR 품질·물리폰 성능·사용자 미적 승인·24시간 자동실행을 완료로 주장하지 않습니다. 마지막 자동화0은 이전 조회이며 목표 활성은 미확인입니다.
 
