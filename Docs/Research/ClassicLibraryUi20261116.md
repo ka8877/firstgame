@@ -40,4 +40,8 @@
 
 old Native02의 소스 `5087609e…`·당시 Root22 `52024acb…`와 Web01의 Build/raw proof/5개 core runtime15,383행은 [별도 보존](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-web01-history-retention01.json)했고 현재 승인으로 재사용하지 않습니다. 당시 helper40,059B의 복구본은 독립 old Native-input SHA와 확인한 **사후 파생 근거**이며 당시 실행 때 캡처한 파일이라고 소개하지 않습니다. 미공개 old player도 새 회차 보존에 포함하며 과거 P에서 복구할 수 있다고 가정하지 않습니다.
 
-현재 두 게임의 PC/터치4개 일반 입력 미리보기와 전체 Desktop/touch/public 검사·새 공개는 대기입니다. Card 계획은 **60/59/59 필수 원본·매회 오디오4구간·실제 재접속2회**를 요구하지만 세 파일 모두 아직 좌표 검토 전 초안입니다. Native/Web 성공을 모든 필수 브라우저 원본 Root 승인이나 새 공개로 바꾸지 않습니다. 기존 Core 규칙/ID/경제/schema·미지원 원문을 유지하고 멀티플레이는 비활성·추후 업데이트로 둡니다. 후기 도감의 정확한 구획·원작 전체 복원 목표는 여전히 남아 있습니다.
+CardDesktop02/모바일01 일반 입력 미리보기는 runtime/소스가 변하지 않은 채 끝났고 Root가 실제 간격·필터·소유·상세·복귀를 보았습니다. 두 Gospel 미리보기는600초 마감 실패이며, 실제29viewport 근거로05:50Z에3파일/6게임 경로를 **Root SOURCE 동결**한 것과 전체 suite 결과를 구분합니다. Card는 **60/59/59 필수 원본·오디오4·실제 재접속2**를 그대로 요구합니다.
+
+첫 Card Desktop Browser01은 title 오디오 gate에서 실패했습니다. 실제 재생·비영PCM·진행17.882초가 있었지만 새 Classic 개정이 이전 allowlist에 없어30초 fallback이 미디어를 버렸습니다. 새 개정만 `nativity-web-smoke`4곳/`fm-local-media-errors`2곳에 더했고 실제 manifest duration·PCM>=6·격리·진행·24초 한계·공개 byte/역할 조건은 유지합니다. 제품·Native/Web·현재 지문은 바꾸지 않았습니다. [실패17파일](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json)은 byte-exact 이력으로 남깁니다. 필수 직접 argv **PublicRangeUnit04는 실제123통과**했고 discovery03은 별도 이력입니다. 현재 CardDesktop Browser02는115/115검사·82PNG·필수60원본 Root 직접 검토·오디오4/실제 재접속2로 완료했습니다. 나머지5회와 전체 공개 검증은 아직 완료되지 않았습니다.
+
+첫 C1 `bcad026d…`136파일은 [draft PR9](https://github.com/ka8877/firstgame/pull/9)로 push했지만 하네스 수정 뒤 최종 후보가 아니며 C2는 아직 저장 전입니다. 소스 동결·Native/Web 성공을 전체 필수 브라우저 원본 승인이나 새 공개로 바꾸지 않습니다. 기존 Core 규칙/ID/경제/schema·미지원 원문을 유지하고 멀티플레이는 비활성·추후 업데이트로 둡니다. 후기 도감의 정확한 구획·원작 전체 복원 목표는 여전히 남아 있습니다.

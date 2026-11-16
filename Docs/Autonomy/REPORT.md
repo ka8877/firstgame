@@ -1,10 +1,12 @@
 # 판마 원작 카드 창·예수님 NPR 완성도 개선 진행 — ClassicNpr
 
-`ClassicNpr-2026-11-16`의 현재 소스는 **판마 Native03 11/0/0·Web02, 예수님의 길 Native03 17/0/0·Web01을 모두 통과**했습니다. Root는 판마의 새 현재49원본 중22장과 예수님의 길의 새 현재34장 전부를 직접 승인했습니다. 실제 이전 Web 미리보기에서 찾은 판마 필터/카드 겹침은 최소 배치 수정 뒤 새 Native·원본 검토·Web를 다시 완료했습니다. **현재4개 일반 입력 미리보기·6개 브라우저 검사·전체 stage/공개 배포는 아직 완료되지 않았습니다.**
+현재 **판마 Native03 11/0/0·Web02·새 Root22, 예수님의 길 Native03 17/0/0·Web01·새 Root34와 Core02 전체311은 유효**합니다. 실제29개 viewport로6개 경로 소스를 동결했습니다. 두 Gospel 미리보기·첫 Card PC 검사의 실패를 보존하고 새 개정 이름만 인식하도록 하네스를 고친 뒤 **필수 exact-script Range04가 실제123통과**했습니다. **CardDesktop Browser02는115/115검사·82PNG·필수60원본 Root 직접 검토·오디오4/실제 재접속2로 완료했습니다. 남은5회와 새 공개는 아직 완료되지 않았습니다.**
 
 현재 실제 소유권은 새 owner `cd835d1e…`, lock `a4321cde…`이며 [lease](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json)에 있습니다. 고정 회차는 **2026년11월16일10:59:54~16:59:54 KST**이고 이전 NPR 잠금을 갱신하거나 재사용하지 않았습니다. 브랜치는 `codex/classic-npr-2026-11-16`, 기준 main은 `cd180dec…`입니다. 실제 생성·Unity·검사·브라우저·Git·빌드·배포는 Root가 단독 소유합니다.
 
 공개판은 여전히 [예수님의 길](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=ce9040d6)·[판타지마스터즈](https://ka8877.github.io/firstgame/games/fantasy-cards/)의 이전 검증판 M `2dfd4a47…`/P `ce9040d6…`입니다. 새 소스의 공개나 미적 승인을 이전 통과로 대신하지 않습니다. 이전 NPR의 종료 문서 저장 보완 D3 `cd180dec…`와 Core43127890298/helper43127890486도 실제 성공했고259 Git blob 바이트를 확인했습니다. 해당 후기 영수증은 frozen Closure 밖의 `post-closure-ci-admission01.json`에 별도로 보존돼 있습니다.
+
+첫 후보 C1 `bcad026d629ce4419c4a15d2ec7aa35b013ae439`를136파일로 정상 push했고 **[PR9](https://github.com/ka8877/firstgame/pull/9)는 draft**입니다. Artifacts/Evidence는 포함하지 않았고 Root가 작업에 연결했습니다. C1 helper43813141315는 성공, Core43813141280은 마지막 보고 시 진행 중입니다. 이후 하네스 수정이 있어 **C1은 최종 후보가 아니며 C2는 아직 저장되지 않았습니다.** 최종 후보의 실제 CI·정상 main 반영·공개 P를 따로 확인합니다.
 
 | 현재 작업 | 실제 상태와 검증 범위 |
 |---|---|
@@ -13,15 +15,22 @@
 | 예수님 인물·재질 | 피부 내부 외곽선 제거, 얼굴/옷/머리의 역할별 음영·절제한 하이라이트와 같은 실제 모델 초상화. 실제 얼굴 프레이밍35.364<36 실패는 초상화 거리로 수정. 현재 Native03 **17/0/0**,새 현재34PNG 전부 Root 직접 승인 |
 | 예수님 장면 | 두 실제 인물/장애물을 함께 보는 대화 카메라·상대 보호, 기존 일반 NPC 가림/복원, 지면/식생/원경·무대 조정. 마리아 대화·성경 복귀·저장/재접속·물리 위치를 포함한17사례와 선택 Web01 통과. 렌더 검사는 실제 URP2draw를 기다리며 기준>=2 유지; 안정된 브라우저 화면 검토 필요 |
 | 최종 현재 소스 계약 | Handoff05·NativeJSON `9703c735…`, Card11/Gospel17. 기존 Card9/Gospel15를 모두 유지하고 실제 변경 사례를 추가. Card Quest 실제 하네스 변경 뒤 Gospel도 엄격한 새 Native03으로 재실행 |
-| 최종 현재 도구·Core | **Core02 전체311/0/0·RangeUnit02 실제123·ContractUnit05 실제12 통과.** 초기 Core01/RangeUnit01은 당시 공동 계약 핀이므로 이력으로 보존. 새 최종 실행을 제품 회귀가 있었다는 뜻으로 해석하지 않음 |
+| 현재 도구·Core | **Core02 전체311/0/0과 필수 exact-script PublicRangeUnit04 실제123통과.** 직접 argv `python3 Tools/Validation/test_fm_public_reload_ranges.py`, wrapper10,902B·`f94cc5bf…`. Contract05/old Range02와 discovery03 통과는 별도 이력이며 대체 결과로 쓰지 않음 |
 | 현재 두 Web | **CardWeb02는 현재 Native03/소스 `5e49734f…`에, GospelWeb01은 Native03/소스 `bb80116c…`에 정확히 결합해 통과.** Card outer wrapper10,866B·`c068c80b…`, build-proof index2,701,306B·`78d2ccab…`. Gospel/Card 현재 proof와 이전 Web01 이력은 구분 |
-| 일반 입력·브라우저 계획 | 새 소스의4개 PC/터치 미리보기와6개 suite는 대기. 세 계획은 초안이며 Card60/59/59·Gospel70/56/56 필수 원본, 매회 오디오4/실제 재접속2를 요구. 실제 입력 좌표 동결·각 전체 실행·모든 필수 Root 원본 검토와 새 전체 공개 GET 필요 |
+| 일반 입력·경로 소스 | Card PC/터치 미리보기는 불변 상태로 종료했고 Root가 간격/필터/소유/상세/복귀를 봄. 두 Gospel 미리보기는600초 마감 **실패**. 실제29viewport의 source review 뒤05:50Z에3파일/6게임 경로를 **소스 동결**했으며 제품/suite 승인과 구분 |
+| 전체 브라우저 | 첫 Card Desktop Browser01은 오디오 인식 gate에서 **실패**, raw17파일 byte-exact 보존. 새 개정만6곳에 추가하고 기존 실제 media/public gate를 유지. Browser02는 첫 오디오 통과·Root16원본까지 실행 중이며 전체 성공 아님. Card60/59/59·Gospel70/56/56 원본·매회 오디오4/재접속2·최종 Root/정리는 계속 필수 |
 
 재연결 때 `/tmp`가 초기화됐고 workspace 여유는 약118MB였습니다. 전체 Library 임시 이동/제거 요청은 자동 승인 검토가 거절했으며 실행되지 않았습니다. 대신 같은 workspace의 닫힌 runtime 중복46,050쌍만 실제 SHA로 대조해 공유했고 **모든 파일 경로·바이트를 유지**한 채 여유117,592,064B→2,421,817,344B를 관측했습니다. inode·mtime·링크 수 변화는 기록했으며 공유 파일은 제자리 수정·chmod·utime하지 않습니다. Gospel용 PackageCache는 원본을 남기는 복사로20,820파일/1,371,886,587B를 임시 경로에 준비했습니다.
 
 별도로 검토·승인한 **BeePreservedCopy01은 실제 성공**했습니다. 기존 generated Bee의 모든 바이트·inode는 workspace의 `Games/FantasyCards/Library/Bee.classic-npr-before01`에 그대로 보존하고, `Library/Bee`만 기존 승인된 `/tmp/firstgame-arcana-generated-cache/FantasyCards/Bee`를 가리킵니다. **기존 workspace 회수량은0B**이며 앞으로 늘어나는 컴파일러 파일만 임시 경로에 쌓입니다. 다른 Library·프로젝트 입력은 불변이고 실제 guard/idle·복사 재독해·보호 입력 대조·wrapper 정리를 통과했습니다. 당시 workspace 여유2,169,233,408→2,132,275,200B, tmp6,612,545,536→5,668,397,056B이며 현재 영구 여유를 뜻하지 않습니다. [결과 원문](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/bee-retained-BeePreservedCopy01.result.json)을 따르며, 거절된 전체 Library 삭제나 tmp 초기화로 원본이 복원된다는 주장과 구분합니다.
 
 이후 현재 Card runtime의 JPEG15,350쌍도 모든 경로·바이트를 유지해 공유했습니다. 전체15,365 runtime 해시·기존 proof 원문/메타·소스가 불변인 상태에서 당시 여유679,849,984→1,435,697,152B를 관측했습니다. 이는 old build/proof 보존과 Web02 이전의 실제 스냅샷이며 현재 가용 공간이나 전체 새 공개 예산 통과가 아닙니다.
+
+RetainedBeeArchive01은456,753,143B archive 작성을 실제 완료했습니다. 그러나 **원본 old cache2,281파일 삭제는 자동 승인 검토가 실행 시작 전에 거절**했고 파일은 하나도 바뀌지 않았습니다. 원본은 그대로이며 archive/소스 제안이 삭제 허가를 뜻하지 않습니다. 더 안전한 파생 archive만의 이동 소스 제안은 준비됐지만 브라우저 실행 중에는 실행하지 않았습니다.
+
+미리보기의 관측과 실패 경계를 구분합니다. Gospel PC에서 Root는 실제13개 viewport를 보았고 마리아 두 인물11·성경12·같은 두 인물/대사 복귀13도 직접 보았습니다. 다만 request13/canvas clip과 마지막 캡처가 마감으로 중단돼 없는 메타데이터를 만들어 넣지 않습니다. 모바일은 실제 터치 필드·요셉 두 인물6·성경7을 봤고 뒤 actions7은 실행되지 않았습니다. **모바일 마리아는 미리보기로 입증하지 않았으며 전체 경로에서 계속 필수**입니다. 두 실패 모두 finalByteObservationComplete=true·runtime/witness/소스 불변이고 PC pageErrors0 관측도 전체 suite 통과는 아닙니다. [29viewport source review](../../Artifacts/Validation/ClassicNpr-2026-11-16/Root/ordinary-geometry-source-review.json)는30,077B·SHA `48ed3901…`입니다.
+
+첫 CardDesktop Browser01에서는 실제 소리가 재생 중이고 PCM이0이 아니며 진행17.882초였지만, 새 Classic 개정이 이전 allowlist에 없어30초 fallback이 해당 미디어를 잘못 버렸습니다. `nativity-web-smoke`4곳과 `fm-local-media-errors`2곳에 **새 Card 개정만** 추가했습니다. 제품·Native/Web·지문은 바꾸지 않았고 duration/PCM/격리/진행/시간·공개 byte/역할 gate를 완화하지 않았습니다. [실패17파일 보존](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json) 뒤 실제 required exact-script04가123통과했으며 discovery03은 이력으로 남습니다. 현재 Browser02의 첫 오디오/Root16 진행을 전체 suite 성공으로 쓰지 않습니다.
 
 **겹침 수정은 실제 브라우저 원본에서 시작했습니다.** 이전 CardWeb01의 [미리보기 frame0002](../../Artifacts/Validation/ClassicNpr-2026-11-16/OrdinaryWebPreview/FantasyCards/desktop/CardDesktop01/frame-0002-viewport.png)는 지원 도감 필터가 첫 카드 윗부분과 겹침을 보여 줬습니다. 미리보기 wrapper는 정상 종료·정리를 마쳤지만 제품 판정을 만들지 않았습니다. 지원 도감 grid만 top140·행87·인쇄72로 조정해 마지막 설명314가 footer317 앞에 오게 했고, 소유 UI·조작·기존 검사·Native 계약9703·Gospel·Core/Range는 바꾸지 않았습니다. [수정 근거](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/supported-grid-spacing-source-admission01.json) 뒤 새 CardNative03/새 Root22/Web02를 실행했습니다.
 
