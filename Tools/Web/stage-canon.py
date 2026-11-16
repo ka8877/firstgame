@@ -169,7 +169,9 @@ def main():
         folder = stage / 'games' / slug / 'ThirdParty'
         folder.mkdir()
         for name, path in notices(game).items():
-            shutil.copyfile(path, folder / name)
+            target = folder / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target)
         shutil.copyfile(heroes[game], stage / 'art' / (slug + '.png'))
     files = {}
     for path in sorted(stage.rglob('*')):
