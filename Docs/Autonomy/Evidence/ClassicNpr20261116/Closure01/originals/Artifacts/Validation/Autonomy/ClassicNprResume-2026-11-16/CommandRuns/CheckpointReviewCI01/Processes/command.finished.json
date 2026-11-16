@@ -1,0 +1,54 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/observe-review-ci.py",
+    "--commit",
+    "42ebeb91f0a112a62796333944242c37c6e918e3",
+    "--label",
+    "CheckpointReviewCIPoll01"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:47:14.762109+00:00",
+  "timeoutSeconds": 3585.442157790996,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 39249.596038254,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/CheckpointReviewCI01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 60667,
+    "ppid": 60631,
+    "pgid": 60667,
+    "sid": 60667,
+    "state": "R",
+    "startTicks": 3565215,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 60668,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/CheckpointReviewCI01/03-command/supervisor-result.json",
+    "sha256": "e9b6ca077e63518b1060190bb7f235157fcbe09c14a806dfec7097063cb52135",
+    "bytes": 7025
+  },
+  "finishedUtc": "2026-11-16T11:47:18.004146+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/CheckpointReviewCI01/command.stdout.log",
+    "sha256": "4f5d31a6fe4a6d82dbd73993f5df5545575eb0902c34bbedd3ec562c4bd9d619",
+    "bytes": 752
+  }
+}

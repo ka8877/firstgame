@@ -1,0 +1,28 @@
+{
+  "label": "command",
+  "argv": [
+    "gh",
+    "run",
+    "watch",
+    "43860689612",
+    "--repo",
+    "ka8877/firstgame",
+    "--exit-status",
+    "--interval",
+    "30"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:54:43.291033+00:00",
+  "timeoutSeconds": 3585.749416917999,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 39698.620889717,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/WaitCheckpointReviewCore01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

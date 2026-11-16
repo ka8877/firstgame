@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "releaseProfile": "classic-npr",
+  "leaseChain": {
+    "schema": 1,
+    "origin": {
+      "controlRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/FinalIdleOrigin01/owned-lease.executed.json",
+        "bytes": 819,
+        "sha256": "9d447044a1554ac32f06d0c9103d89635ea03141b85e8645d50061814e0c5e30"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json",
+        "bytes": 872,
+        "sha256": "f66521275ca99e582f09e63911479b52c9bccaee5ac3feb8bae0f020293b7a8c"
+      },
+      "releaseStdout": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/release-origin01.stdout.json",
+        "bytes": 792,
+        "sha256": "eb2a25a935a8ed1b6647d0394e8f7012a3ed38b0c4f84a2ae7842f18ad4eb1e5"
+      },
+      "statusStdout": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/status-origin01.stdout.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "finalIdleWrapper": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/FinalIdleOrigin01/summary.json",
+        "bytes": 10887,
+        "sha256": "936d54f3bf2197c558e8b9de7d880c00421c6ed84456e41b4f2f3cd7bb85d7a4"
+      }
+    },
+    "active": {
+      "controlRoot": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/ResumeIdentity01/owned-lease.executed.json",
+        "bytes": 825,
+        "sha256": "d452a9074ab0d2b2a04f1323fc35f5f7f2d9aa418826419437588da989d73416"
+      }
+    }
+  },
+  "checkpoint": {
+    "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+    "bytes": 4604790,
+    "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+  },
+  "releasedLease": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+    "bytes": 878,
+    "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+  },
+  "releaseStdout": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/release-resume01.stdout.json",
+    "bytes": 798,
+    "sha256": "31249ee46a91c4009fac917aec0a1c0e438b01c11065e1d6a2a33536d9083383"
+  },
+  "statusStdout": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/status-resume01.stdout.json",
+    "bytes": 99,
+    "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+  },
+  "archiveWrapper": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/Checkpoint01/summary.json",
+    "bytes": 11366,
+    "sha256": "762bfd959caba5850f7054c5139865870f3cd2e96e7e6e43a2f4df12e9f38c56"
+  },
+  "finalIdleWrapper": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/summary.json",
+    "bytes": 11013,
+    "sha256": "e1c9728114281410d722dad2f4beecf365855a3c24b84d6de4e353c105e6b0a9"
+  },
+  "documentationCi": [
+    {
+      "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+      "workflowKind": "core",
+      "runId": 43860689612,
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+        "bytes": 1469,
+        "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+      }
+    },
+    {
+      "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+      "workflowKind": "helper",
+      "runId": 43860689553,
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+        "bytes": 1163,
+        "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+      }
+    }
+  ],
+  "lateOriginals": []
+}

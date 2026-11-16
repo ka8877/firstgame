@@ -1,0 +1,50 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/scan-checkpoint-known-credentials01.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:42:26.013210+00:00",
+  "timeoutSeconds": 3585.5996232660036,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 38960.980592685,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/ScreenCheckpoint01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 60102,
+    "ppid": 60061,
+    "pgid": 60102,
+    "sid": 60102,
+    "state": "R",
+    "startTicks": 3536338,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 60103,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/ScreenCheckpoint01/03-command/supervisor-result.json",
+    "sha256": "54030c551ed4c2bb83bf2c997c4c259bfb5a1f1a661a3424a38e508b4a987743",
+    "bytes": 5012
+  },
+  "finishedUtc": "2026-11-16T11:43:17.461192+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/ScreenCheckpoint01/command.stdout.log",
+    "sha256": "16253633cb9d52e7c46bec3e3f485e7b18dd03d32c278797397ac93fc4ed3c3c",
+    "bytes": 460
+  }
+}

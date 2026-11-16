@@ -1,0 +1,62 @@
+{
+  "label": "command",
+  "argv": [
+    "gh",
+    "pr",
+    "create",
+    "--repo",
+    "ka8877/firstgame",
+    "--draft",
+    "--base",
+    "main",
+    "--head",
+    "codex/classic-npr-proof-2026-11-16",
+    "--title",
+    "docs: preserve ClassicNpr release evidence and resume status",
+    "--body-file",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/proof-review-pr-body01.md"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:47:53.604410+00:00",
+  "timeoutSeconds": 3585.732231212998,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 39288.719836899,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/CreateProofReviewPR01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 60777,
+    "ppid": 60742,
+    "pgid": 60777,
+    "sid": 60777,
+    "state": "R",
+    "startTicks": 3569098,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 60778,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/CreateProofReviewPR01/03-command/supervisor-result.json",
+    "sha256": "387390b2bf802651c4c3ca44c1a71f999d7ec5fef45b176cac717efa8904b276",
+    "bytes": 6129
+  },
+  "finishedUtc": "2026-11-16T11:48:01.249916+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/CreateProofReviewPR01/command.stdout.log",
+    "sha256": "decc8c453ace019d7dad229bfd3e461fd3e35c62b5c6870ca12c154aa1f91e75",
+    "bytes": 44
+  }
+}
