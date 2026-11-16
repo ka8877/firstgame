@@ -1,5 +1,7 @@
 # 판타지마스터즈 덱·도감 UI 대조 — 2026-11-16
 
+Root가 실제 Checkpoint01의10,384원본·18조각·결합565,882,862B를 독립 재독해 보존했습니다. index4,604,790B/SHA256 `28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961`, 결합 SHA256 `f5adb3e95b8c25a679e423129be7924e68f6cf6cde9adf4bb97734801e3d8178`입니다. 완료 wrapper의4개 event exit0·빈 후손을 확인했습니다. 이 시점은 로컬 원본 보존 완료이며 이번 문서·모든 조각/index/raw 속성의 실제 Git blob 저장·정상 push/paired CI는 후속 확인합니다. 최종 독립 유휴·정상 자기해제·Closure도 아직 미래 결과입니다.
+
 현재 작업은 실제 원작 클라이언트의 정보 구조를 따라 덱·소유 카드·전체 도감 UI를 개선하는 것입니다. 원작에서 직접 확인한 사실과 관련 스킨의 재구성, 아래 현재 Native 검증을 구분합니다. 일부 구현/검사가 끝났다는 사실을 원작 전체 재현 승인으로 확대하지 않습니다.
 
 ## 확인한 원작 덱 화면
@@ -42,6 +44,12 @@ old Native02의 소스 `5087609e…`·당시 Root22 `52024acb…`와 Web01의 Bu
 
 CardDesktop02/모바일01 일반 입력 미리보기는 runtime/소스가 변하지 않은 채 끝났고 Root가 실제 간격·필터·소유·상세·복귀를 보았습니다. 두 Gospel 미리보기는600초 마감 실패이며, 실제29viewport 근거로05:50Z에3파일/6게임 경로를 **Root SOURCE 동결**한 것과 전체 suite 결과를 구분합니다. Card는 **60/59/59 필수 원본·오디오4·실제 재접속2**를 그대로 요구합니다.
 
-첫 Card Desktop Browser01은 title 오디오 gate에서 실패했습니다. 실제 재생·비영PCM·진행17.882초가 있었지만 새 Classic 개정이 이전 allowlist에 없어30초 fallback이 미디어를 버렸습니다. 새 개정만 `nativity-web-smoke`4곳/`fm-local-media-errors`2곳에 더했고 실제 manifest duration·PCM>=6·격리·진행·24초 한계·공개 byte/역할 조건은 유지합니다. 제품·Native/Web·현재 지문은 바꾸지 않았습니다. [실패17파일](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json)은 byte-exact 이력으로 남깁니다. 필수 직접 argv **PublicRangeUnit04는 실제123통과**했고 discovery03은 별도 이력입니다. 현재 CardDesktop Browser02는115/115검사·82PNG·필수60원본 Root 직접 검토·오디오4/실제 재접속2로 완료했습니다. 나머지5회와 전체 공개 검증은 아직 완료되지 않았습니다.
+첫 Card Desktop Browser01의 title 오디오 gate 실패는 [raw17파일](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json)에 그대로 남습니다. 실제17.882초/비영PCM을 잘못 버린 allowlist에는 새 개정만6곳에 추가했고 모든 duration/PCM/격리/진행/시간·공개 byte/역할 gate와 제품/Native/Web 지문은 유지했습니다. 직접-script Range04=123과 **독립 CardDesktop02=115/115·82PNG·필수60Root·오디오4/재접속2·소유 정리**가 실제 완료됐습니다. Canonical12,709,639B/`ae572855…`, 변경 없는 raw8,928,112B/`acf9c293…`, 직접 Root ledger23,509B/`cb4cb592…`입니다. 이전 실패를 소급 승인하지 않습니다.
 
-첫 C1 `bcad026d…`136파일은 [draft PR9](https://github.com/ka8877/firstgame/pull/9)로 push했지만 하네스 수정 뒤 최종 후보가 아니며 C2는 아직 저장 전입니다. 소스 동결·Native/Web 성공을 전체 필수 브라우저 원본 승인이나 새 공개로 바꾸지 않습니다. 기존 Core 규칙/ID/경제/schema·미지원 원문을 유지하고 멀티플레이는 비활성·추후 업데이트로 둡니다. 후기 도감의 정확한 구획·원작 전체 복원 목표는 여전히 남아 있습니다.
+Card 모바일도 **121/121·필수59Root+보충1·오디오4/재접속2**로 최종 확정했습니다. Gospel PC118/필수70Root+보충2와 모바일99/필수56Root까지4개 로컬 필수245원본을 모두 Root가 승인했고 매회 오디오4/재접속2를 확인했습니다. 원 회차 정상 해제 뒤 새 owner `555529fe…`의 고정 독립 회차를 사용하며 원 OUT/PROOF/실제 실행 소유권은 그대로입니다. 선택 local mobileMary와 새 공개 파일 전달/포털 검토도 완료했습니다.
+
+새 P의 CardPublic01 PublicMobile844 Browser01도 **129/129·85PNG·필수59Root+page5보충1(ledger60개)·오디오4/실제 재접속2·nav0/1/2·outer4개 exit0/빈 후손**으로 완료했습니다. Canonical18,676,367B/SHA`036ca241fbc65be1aa2405c5440c539b1dcd8578cf0693cd811161ea27453d2f`, raw14,894,564B/SHA`369a3dcf96b1b2d70a962381c91c4828b1362305f603cd9a99fbf999c6d47a45`, outer`f9c1c6a23798de006d31bcb9d7090ee498ae44c8aee695b1440e3c2477154b50`입니다. 이 실행의 실제 보유55/27·SP200·물리 덱 사본50과 마지막 internal 재추가를 재접속2회 뒤 보존했고 Root는 page5/end→page1 정확한 순서를 직접 보았습니다.49장 저장은 비활성 버튼이 아닌 실제 거절 modal로 확인했습니다. 별도 GospelPublic01도110/110·81PNG·필수56Root+실제 스크롤 보충1·오디오4/재접속2로 완료했습니다.6개 suite의 필수360+보충5=365browser ledger이며 Native선택56/Portal2는 별도입니다.
+
+PR9/C2/M1과 Stage01 실패는 이력으로 보존합니다. 한정 stager 수정 **C3`d60cfe9bdd46b9cb00789b2388bd707a7ec523f8`가 [PR10](https://github.com/ka8877/firstgame/pull/10)으로 M2`1af1205ea447c4bb627d436e6b17b14177f91c51`에 정상 병합**됐고 실제 Core03=311/직접-script05=123·후보 PR/main-push CI·Stage02/byte readback·P`9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70`/Pages가 완료됐습니다. 게임/하네스/계획/proof는 그대로입니다. Portal01의4JPEG503 실패 뒤 같은 검증기의 Portal02가15,439/15,439 HTTP200/SHA와 새 fullpage2장 Root 승인을 통과했습니다. 현재6개 suite+wholebuilds+Portal의 FinalSeal01도실제77,122B/SHA`9f8226029058a6bc81401d35e4fda3fcd3cc18a944de4e5e2ae12ae46c8ee319`·4개 event0/빈 후손으로 통과했습니다. 실제 Checkpoint 원본 보존은 완료했고 문서CI·정상 최종 해제/Closure는 작성 시점에 대기 중입니다. 동결 Draft를 유지하며 실제 후속 사실은 이 tracked 문서에 반영합니다. 기술 통과를 원작 전체 재현이나 사용자 미적 승인으로 바꾸지 않습니다.
+
+[다음 원작 대조 평가](../../Artifacts/Validation/Drafts/ClassicNpr20261116Execution/NextClassicAssessment/README.md)는 **미래 소스 제안**입니다. 실제3개 이름 있는 덱 슬롯과 독립 저장/이름/선택·추가 migration은 아직 구현한 것으로 기록하지 않습니다. 작은 control/column/icon 문법과 EP/시장P의 실제 의미를 먼저 확인하고, 정확한 후기 도감은 실제 client 화면 근거를 더 확보해야 합니다. 현재의 단일 편집/저장과 원본15350·지원2649·미지원 원문·경제/ID/저장·멀티 비활성 조건을 보존하며 원작 전체 동등으로 주장하지 않습니다.
