@@ -1,0 +1,294 @@
+{
+  "scope": "generic-owned-command-only",
+  "label": "PartialStageFourShare01",
+  "requestedArgv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/share-partial-stage01-four-derived-copies.py"
+  ],
+  "executedArgv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/share-partial-stage01-four-derived-copies.py"
+  ],
+  "display": false,
+  "liveLeasePath": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+  "ownedLeaseSnapshot": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/owned-lease.executed.json",
+    "bytes": 825,
+    "sha256": "d452a9074ab0d2b2a04f1323fc35f5f7f2d9aa418826419437588da989d73416"
+  },
+  "environmentOverrides": {
+    "FIRSTGAME_CONTROL_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16",
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "FIRSTGAME_PROOF_ROOT": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof",
+    "FIRSTGAME_STAGE_ROOT": "/workspace/firstgame/Artifacts/ClassicNprWebPlaytest",
+    "FIRSTGAME_RELEASE_PROFILE": "classic-npr",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/GeneratedPythonCache"
+  },
+  "maximumSharedSeconds": 3600,
+  "leaseReserveSeconds": 60,
+  "cleanupReserveSeconds": 12,
+  "executionSources": [
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/run-owned-classic-npr-resume.py",
+        "bytes": 12517,
+        "sha256": "ef7718bc487b31a95091c9852ba972f3fd67245d9e1bfa9f54c87b2dfef842d0"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/run-owned-classic-npr-resume.py",
+        "bytes": 12517,
+        "sha256": "ef7718bc487b31a95091c9852ba972f3fd67245d9e1bfa9f54c87b2dfef842d0"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 6166,
+        "sha256": "ff5bd7da541de6c6fe209daa35293e3417a9660f7dbbb086c84e2efd386d1cf0"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py",
+        "bytes": 6166,
+        "sha256": "ff5bd7da541de6c6fe209daa35293e3417a9660f7dbbb086c84e2efd386d1cf0"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/run-canon-native.py",
+        "bytes": 9557,
+        "sha256": "93425642d3d554b83157c3760713b92e48ed626589207511ff1c5d84715ff6db"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/run-canon-native.py",
+        "bytes": 9557,
+        "sha256": "93425642d3d554b83157c3760713b92e48ed626589207511ff1c5d84715ff6db"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Environment/owned-process-containment.py",
+        "bytes": 44980,
+        "sha256": "9d9082f038566b3dacc74ca8821a5758b85697f246af947f4f7a808bab1e2dad"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Autonomy/Drafts/Recovery06/GospelContainedSource/source-contract.json",
+        "bytes": 23287,
+        "sha256": "a70691953818fee0e44773cc3d6426c2472637587db6cbc5e4bf129692c7d8b1"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Autonomy/Evidence/Recovery05ProcessControl/index.json",
+        "bytes": 114100,
+        "sha256": "1a4c747f74d1a5a77b2207a7b6833a343858df7cb4b2cc92f89bad5fe5bfe2ef"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Autonomy/cycle_guard.py",
+        "bytes": 18006,
+        "sha256": "be00a9a30a01f55cc12c579361f6fd0cb4f4454a3e8a0aaa5a9d9047c7391c02"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Environment/assert-runtime-idle.py",
+        "bytes": 966,
+        "sha256": "99a308702600f3db514d51225a9867af40979fb264c7f1aa1780679cdb8aee16"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/release_contract.py",
+        "bytes": 8634,
+        "sha256": "de8bb434e109bfe0666cb40a371fcf96aa6543412ec711797590a4de1469bccd"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Web/release_contract.py",
+        "bytes": 8634,
+        "sha256": "de8bb434e109bfe0666cb40a371fcf96aa6543412ec711797590a4de1469bccd"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Web/stage-luminous.py",
+        "bytes": 18313,
+        "sha256": "ca788cc1c76b65560bf1d19307226ea656f36bab886d1b82b4291106c9cf3a62"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-canon.py",
+        "bytes": 12974,
+        "sha256": "7b9f4fb3c4b30adf768ffc2eaa14264db79f60ef1c9829e7c96f41bb27d4facd"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Web/stage-canon.py",
+        "bytes": 12974,
+        "sha256": "7b9f4fb3c4b30adf768ffc2eaa14264db79f60ef1c9829e7c96f41bb27d4facd"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Web/stage-classic-npr.py",
+        "bytes": 427,
+        "sha256": "ebab3de6d5ec13744910ea933b2cc180293ba0e8385838e5e00bc9c0f78070f5"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Web/stage-classic-npr.py",
+        "bytes": 427,
+        "sha256": "ebab3de6d5ec13744910ea933b2cc180293ba0e8385838e5e00bc9c0f78070f5"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/canon_release_evidence.py",
+        "bytes": 43832,
+        "sha256": "bbe7065cfbc31a9c638676c1d5d888a26601ea67ae62a71bb2d5308a7cdb64b4"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/canon_release_evidence.py",
+        "bytes": 43832,
+        "sha256": "bbe7065cfbc31a9c638676c1d5d888a26601ea67ae62a71bb2d5308a7cdb64b4"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/restoration_source_binding.py",
+        "bytes": 2356,
+        "sha256": "9fe0043f8b2c3fb7cb8db357f037dda711cf5b962b1df25b1daf4b41d1efdf03"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/chronicle_storage.py",
+        "bytes": 1472,
+        "sha256": "e57e320ae01c82b3bc868877acc53e9b0a29d71e7256d3b1143d4fc12c0bb522"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/ClassicNpr/contract.py",
+        "bytes": 8220,
+        "sha256": "14bde923a9a50beb126fdba9c5f72d433468beb1d698ee9db39d7283849e48f6"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/ClassicNpr/contract.py",
+        "bytes": 8220,
+        "sha256": "14bde923a9a50beb126fdba9c5f72d433468beb1d698ee9db39d7283849e48f6"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/ClassicNpr/native-contract.json",
+        "bytes": 17508,
+        "sha256": "9703c73593007a62e095757c746ce82ec5ff07f1831f0b06f670eba5286e2392"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/ClassicNpr/native-contract.json",
+        "bytes": 17508,
+        "sha256": "9703c73593007a62e095757c746ce82ec5ff07f1831f0b06f670eba5286e2392"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/ClassicNpr/baseline-obligations.json",
+        "bytes": 17636,
+        "sha256": "d7897dde18ed803b1f844f2e08e4ac1dd43489dca8527b8beb53852f21f3200c"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/ClassicNpr/baseline-obligations.json",
+        "bytes": 17636,
+        "sha256": "d7897dde18ed803b1f844f2e08e4ac1dd43489dca8527b8beb53852f21f3200c"
+      }
+    },
+    {
+      "source": {
+        "file": "Tools/Validation/ClassicNpr/activate-current.sh",
+        "bytes": 608,
+        "sha256": "b077d6b9456f5c68e22693d5f79d5381dcc797c5ef2f1140ec3b10a94a2136a1"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Tools/Validation/ClassicNpr/activate-current.sh",
+        "bytes": 608,
+        "sha256": "b077d6b9456f5c68e22693d5f79d5381dcc797c5ef2f1140ec3b10a94a2136a1"
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/activate-resume.sh",
+        "bytes": 521,
+        "sha256": "2a193a38e0eec60cd8e5488035ea631dcfe1ff00b71785217a1813437878b30f"
+      },
+      "recorded": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/RecordedHarness/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/activate-resume.sh",
+        "bytes": 521,
+        "sha256": "2a193a38e0eec60cd8e5488035ea631dcfe1ff00b71785217a1813437878b30f"
+      }
+    }
+  ],
+  "supervisorAcceptance": {
+    "report": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/ContainmentTests/FinalNine01/isolated-test-report.json",
+      "bytes": 69227,
+      "sha256": "4261f8df0ce993358fa6a40af9ff0499202e831d899cef99b45841457eddcab6"
+    },
+    "independentReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/IndependentContainmentAudit/SourceReview/independent-source-review-final9d-runner317b.json",
+      "bytes": 2324,
+      "sha256": "d287d213fa631b9fd7e34d4669aa403f86a340c6063c96d3a95b759447c18bcd"
+    },
+    "operatorReview": {
+      "file": "Artifacts/Validation/Autonomy/C1-2026-11-03/Recovery05/OperatorReview/containment-finalnine01-acceptance.json",
+      "bytes": 3316,
+      "sha256": "dc24a85ce287f15fd1028d707236baa41a2c516ed016e2f81bef7fe3b00c1aab"
+    }
+  },
+  "publishReady": false,
+  "baselineReady": false
+}

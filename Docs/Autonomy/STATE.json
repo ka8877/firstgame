@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-16T06:37:31+00:00",
+  "updatedUtc": "2026-11-16T12:00:31.860845+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -13,19 +13,42 @@
   },
   "activeWork": {
     "id": "ClassicNpr-2026-11-16",
-    "status": "CardDesktop-Browser02-full115-Root60-approved-five-suites-pending-C2-not-yet-saved-old-deployment",
-    "branch": "codex/classic-npr-2026-11-16",
+    "status": "technical-public-release-proof-checkpoint-D1-push-CI-normal-release-Closure-complete-review-PR-main-approval-pending",
+    "currentRunId": "ClassicNprResume-2026-11-16",
+    "branch": "codex/classic-npr-proof-2026-11-16",
+    "branchScope": "Actual isolated documentation/evidence review branch; main merge has not been performed.",
+    "productBranchBeforeStageFix": "codex/classic-npr-2026-11-16",
     "baseMainCommit": "cd180dec745ffb257c9af263c5aebde910e8327c",
     "executionOwner": "/root",
-    "executionState": "fresh-independent-acquired-fixed-cycle-not-renewal",
-    "leaseRecord": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json",
-    "leaseState": "acquired",
-    "leaseOwner": "cd835d1e-b9a9-4b0e-9385-e6d0cba84819",
-    "leaseCommit": "a4321cdebccf49a15eb8b3821200b91bd7499c20",
-    "startedUtc": "2026-11-16T01:59:54.760259+00:00",
-    "deadlineUtc": "2026-11-16T07:59:54.760259+00:00",
-    "startedSeoul": "2026-11-16T10:59:54.760259+09:00",
-    "deadlineSeoul": "2026-11-16T16:59:54.760259+09:00",
+    "executionState": "normally-released-no-current-owned-runtime",
+    "leaseRecord": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+    "leaseState": "released",
+    "leaseOwner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+    "leaseCommit": "9495e3c124a89fd0abdf0c8ffde34ceb96ffd3d7",
+    "startedUtc": "2026-11-16T07:34:25.830373+00:00",
+    "deadlineUtc": "2026-11-16T13:34:25.830373+00:00",
+    "startedSeoul": "2026-11-16T16:34:25.830373+09:00",
+    "deadlineSeoul": "2026-11-16T22:34:25.830373+09:00",
+    "originCycle": {
+      "id": "ClassicNpr-2026-11-16",
+      "owner": "cd835d1e-b9a9-4b0e-9385-e6d0cba84819",
+      "lockCommit": "a4321cdebccf49a15eb8b3821200b91bd7499c20",
+      "startedUtc": "2026-11-16T01:59:54.760259+00:00",
+      "deadlineUtc": "2026-11-16T07:59:54.760259+00:00",
+      "status": "actual-FinalIdleOrigin01-all-four-zero-empty-normal-own-release-and-available-complete",
+      "releasedUtc": "2026-11-16T07:33:53.100589+00:00",
+      "finalIdleWrapper": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/FinalIdleOrigin01/summary.json",
+      "finalIdleWrapperSha256": "936d54f3bf2197c558e8b9de7d880c00421c6ed84456e41b4f2f3cd7bb85d7a4",
+      "releaseStdout": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/release-origin01.stdout.json",
+      "availableStdout": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/status-origin01.stdout.json",
+      "scope": "Completed original-owner proofs and marks stay at their actual paths/owner; released acquisition is history, not current ownership."
+    },
+    "leaseTransition": {
+      "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/lease-transition01.json",
+      "bytes": 2647,
+      "sha256": "c32feb765604e9df537dbabbe819cebb5ec1dca9f3c26cd368514429d4f5dce3",
+      "scope": "Actual normal origin release followed by separately acquired owner/window, never renewal. Original OUT/build/PROOF/Root ledgers/products/plans are unchanged."
+    },
     "releaseProfile": "classic-npr",
     "currentGames": [
       "FantasyCards",
@@ -38,7 +61,9 @@
       "preservation": "Retain 2649 supported cards/15350 original archive records, IDs/owned cards/decks/currency/rules/saves, multiplayer disabled/future; Gospel 23 events/19 Scriptures/51 opening details/28 voices, stable IDs/free movement/physical NPC authority/saves."
     },
     "paths": {
-      "controlRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16",
+      "controlRoot": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16",
+      "originControlRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16",
+      "rootReviewRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Root",
       "evidenceRoot": "Artifacts/Validation/ClassicNpr-2026-11-16",
       "buildRoot": "Artifacts/ClassicNprBuilds",
       "proofRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof",
@@ -48,9 +73,9 @@
     },
     "sourceProgress": {
       "CardUi": "Actual original2015 deck reference drives dual ten-row lists, central add/remove controls, selected original print, actual deck totals, compact owned library/encyclopedia and real save/reload/invalid-save behavior. A genuine Web01 ordinary preview exposed supported filters overlapping the first card row; only supported-grid spacing was corrected. Final Card Native03 passed11, fresh Root22 approved and Web02 passed against that exact selection. Full late album parity remains unverified.",
-      "GospelArt": "Role-specific skin/cloth/hair shading, covered-skin outline removal, actual upstream rim/hair highlight and larger same-model portrait authored and prepared. Actual first-run face-framing defect35.364<36 was corrected through real portrait distance; current Native03 passed17 and Root directly approved all34 fresh originals. FBX/pixels/UV/morphs/six shader GUIDs retained. Settled browser quality remains pending.",
-      "GospelScene": "Pair-aware dialogue camera, active-speaker protection, ordinary bystander masking preservation, textured ground, subdued vegetation/world lighting and distant detail authored. Changed-area test measures two actual URP draws with >=2 unchanged. Native03 passed17/current Root34 approved and exact selected Web01 passed; settled browser review remains pending. Physical NPC roots, exploration orbit/zoom and story/save contracts retained.",
-      "Validation": "Product Native/Web fingerprints and Core02=311 unchanged; exact direct-script Range04 passed123. Six route sources remain frozen. CardDesktop Browser02 actually completed115/115,82PNGs, all60 required Root originals, audio4/reload2 and finalized wrapper/owned cleanup. Remaining five suites/public delivery pending; old preview/Browser01 failures remain unchanged history."
+      "GospelArt": "Current Native03=17/Root34/Web01 and actual full desktop118/Root70+two supplemental temple-route originals passed. FBX/pixels/UV/morphs/six shader GUIDs retained. Art audit still identifies stiff Mary scarf/angular hood, material/clothing/expression detail and simple background; no Genshin/AAA/user-aesthetic equality. Mobile/public review is pending.",
+      "GospelScene": "Pair camera/speaker protection/book return, physical NPC roots and saved authority verified in current desktop118/Root70 plus two temple-route originals. Joseph moves to his future meeting instead of despawning. Native03/Web01/source fingerprints unchanged. Remaining touch/public suites still require every selected checkpoint, including actual mobile Mary.",
+      "Validation": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
     },
     "originalClientReference": {
       "provenance": "Tools/Research/ClassicNpr-2026-11-16/provenance.json",
@@ -77,6 +102,23 @@
       "derivedHistoryScope": "Old40059B helper was reconstructed after the finding and verified against the independent old Native-input SHA. It is explicitly derived recovery evidence, never claimed as a contemporaneous execution capture."
     },
     "storageRecovery": {
+      "closedPublicCoreSharing": {
+        "status": "actual-ClosedPublicCoreShare02-completed-all4exit0-and-empty-owned-cleanup",
+        "verifiedTargets": 40,
+        "retainedOriginalProofSourceInodes": 15,
+        "verifiedParents": 16,
+        "logicalSharedBytes": 865858414,
+        "allocatedDuplicateSharedBytes": 865959936,
+        "workspaceFreeBeforeBytes": 383926272,
+        "workspaceFreeAfterBeforeLedgerBytes": 1222328320,
+        "workspaceFreeAfterLedgerObservedBytes": 1194717184,
+        "wrapperSha256": "912186e6557d6c4ad9d5991c0146c32a50d2edb721726d250b0b833c81d21cb6",
+        "allPathsBytesAndModesVerified": true,
+        "unrelatedAllNineTreeMetadataVerified": true,
+        "protectedNprCardTenAliasesAndClientMotionProofUnchanged": true,
+        "history": "Initial50-scope auxiliary attempt failed before mutation because10 historical NPR protected-Card targets already had3 links. Separate40-scope V2 preserves original checks and excludes all10 by historical role.",
+        "scope": "Completed derived-runtime duplicate sharing with15original proof-source inodes retained. Observed free-space values include ledger overhead and are distinct from logical/allocated duplicate byte counts. No old cache/source/raw test file/unique original byte removal or product change. Original Bee2281files/33dirs remain workspace and rejected cleanup was never executed."
+      },
       "wholeLibraryRelocation": "Automatic approval rejected before process start; never executed. No whole Library/PackageCache/imported-Artifact removal. Separately reviewed generated Bee copy/alias operation retained all originals as recorded below.",
       "rejectionRecord": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/initial-storage-relocation-rejected01.json",
       "safeAlternative": {
@@ -107,7 +149,7 @@
         "originalCacheFiles": 2281,
         "originalFilesChangedByRejectedDeletion": 0,
         "originalsIntact": true,
-        "next": "Separate safer derived-archive-only different-target copy/discard is actually RUNNING; no completed result yet. It does not delete original Bee/cache files; source guards require all2281 old cache+33 protected-original inodes retained. Do not infer those after-checks passed before the operation finishes.",
+        "next": "Safe DiscardNewDerivedArchive01 actually completed; wrapper11317B/SHA76478efe81649209e3c5ba917280648e793d5c430cd16ddb56faf3028a11a230. All2281 original files/33dirs bytes/inodes/metadata stayed unchanged. Only its own new derived workspace archive was discarded after a verified tmp copy. Historical workspace archive path is absent; tmp is NOT persistent. Original cache deletion never executed.",
         "scope": "Archive/source proposals do not authorize deleting originals. Automatic approval review rejected the original2281-file cache deletion before it started. This is separate from the completed source-retaining Bee copy/alias operation and does not grant a new permission."
       },
       "currentCardJpgSharing": {
@@ -144,6 +186,19 @@
       }
     },
     "validation": {
+      "ContinuationUnit01": {
+        "status": "actual-52-passed-new-independent-cycle-source-tooling-only",
+        "wrapper": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/ContinuationUnit01/summary.json",
+        "wrapperBytes": 11176,
+        "wrapperSha256": "0a7089bb33a0ac8f826065f094e93d18210a682acfe3d04beb4e286eceab173e",
+        "scope": "Source/ownership/proof-tool checks, not game or publication approval."
+      },
+      "ResumeIdentity01": {
+        "status": "actual-all-four-events-zero-owned-descendants-empty-original-proof-root-unchanged",
+        "wrapper": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/ResumeIdentity01/summary.json",
+        "wrapperBytes": 10992,
+        "wrapperSha256": "cfb6e9234dca027d1824677c355a0733db6ea3d63a5a66374ae0cab43c6de361"
+      },
       "ContractUnit01": {
         "status": "actual-passed-reported-by-Root",
         "cases": 11,
@@ -188,10 +243,21 @@
         "scope": "Dependency/tool bootstrap only, not a public GET or browser delivery result."
       },
       "Core02": {
-        "status": "actual-final-current-full-311-passed-zero-failed-zero-skipped",
+        "status": "actual-full-311-passed-before-current-stage-utility-source-fix",
         "wrapper": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/Core02/summary.json",
         "wrapperSha256": "799f35ce5b01f7625dd5f3364c7adc4702d605b0f9cae8f967159468558baf28",
         "history": "Core01 actually passed311, but its generic source pins preceded final joint NativeJSON; it remains valid history rather than the final current wrapper. No Core product regression is inferred."
+      },
+      "Core03AfterStageFix": {
+        "status": "actual-311-passed-all-four-outer-events-zero-owned-descendants-empty",
+        "cases": 311,
+        "wrapper": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/Core03/summary.json"
+      },
+      "PublicRangeRefreshAfterStageFix": {
+        "status": "actual-direct-PublicRangeUnit05-123-passed-all-four-outer-events-zero-empty",
+        "cases": 123,
+        "wrapper": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PublicRangeUnit05/summary.json",
+        "scope": "Actual fresh direct-script05 result after stage fix, separate from prior04/discovery03; no old pass substituted."
       },
       "RangeUnit02": {
         "status": "actual-123-passed-before-later-Classic-audio-harness-fix",
@@ -205,13 +271,16 @@
         "scope": "Discovery result is retained; it does not replace strict required exact-script04."
       },
       "PublicRangeUnit04": {
-        "status": "actual-current-required-exact-script-123-passed",
+        "status": "actual-required-exact-script-123-passed-before-stage-utility-refresh",
         "cases": 123,
-        "argv": ["python3", "Tools/Validation/test_fm_public_reload_ranges.py"],
+        "argv": [
+          "python3",
+          "Tools/Validation/test_fm_public_reload_ranges.py"
+        ],
         "wrapper": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/PublicRangeUnit04/summary.json",
         "wrapperBytes": 10902,
         "wrapperSha256": "f94cc5bfd5f01b87432de28dab8ce714d283f78561c4d41bb883e75f5eb1d800",
-        "scope": "Actual direct-script argv/result required by the preserver; discovery03 remains history and is not substituted. This is tool/media-gate validation, not a full gameplay suite pass."
+        "scope": "Actual required direct-script argv/result, with discovery03 separate. New stage-utility source now needs its own123 refresh; no pending result is inferred from this earlier pass."
       },
       "Native": {
         "status": "actual-both-current-full-selections-passed-Card-Root22-and-Gospel-Root34-approved",
@@ -269,7 +338,9 @@
         }
       },
       "Browser": {
-        "status": "one-of-six-current-full-suites-passed-CardDesktop02-115checks-Root60-five-pending",
+        "status": "all-four-local-suites-complete-245-required-Root-finalized-two-public-suites-pending",
+        "completedLocalRequiredOriginals": 245,
+        "completedLocalSupplementalOriginals": 3,
         "sourceAdmission": {
           "frozenUtc": "2026-11-16T05:50:00+00:00",
           "geometryLedger": "Artifacts/Validation/ClassicNpr-2026-11-16/Root/ordinary-geometry-source-review.json",
@@ -312,7 +383,146 @@
           "rootLedger": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Root/FantasyCards-Desktop720-Browser02-directly-viewed.json",
           "rootLedgerBytes": 23509,
           "rootLedgerSha256": "cb4cb5920782401d18ba693a1da3d69bb5bf4226ff3632da55e3c1ccbe33766b",
-          "scope": "All60 required current originals directly viewed/finalized by Root, audio4/reload2 and all four outer events/owned descendants complete-empty. Raw executed report untouched. Only Card PC suite passed; remaining five suites, publication and user aesthetic/device performance claims are separate."
+          "scope": "All60 required current originals directly viewed/finalized by Root, audio4/reload2 and all four outer events/owned descendants complete-empty under original owner. Raw executed report untouched. No mobile/public/user aesthetic/device-performance claim."
+        },
+        "GospelDesktopBrowser01": {
+          "status": "actual-complete-118-of-118-Root-approved",
+          "checksPassed": 118,
+          "checksTotal": 118,
+          "capturedPngs": 97,
+          "requiredRootOriginalsDirectlyViewed": 70,
+          "supplementalTempleRouteOriginalsDirectlyViewed": 2,
+          "audioSampleCounts": [
+            24,
+            24,
+            25,
+            24
+          ],
+          "actualFullReloads": 2,
+          "observedNavigations": [
+            0,
+            1,
+            2
+          ],
+          "canonicalReport": "Artifacts/Validation/ClassicNpr-2026-11-16/Desktop720/PathOfDawn/report.json",
+          "canonicalReportBytes": 924596,
+          "canonicalReportSha256": "1dba28f1544ffc0cf667c078aa1dbefbcd2c14b5c88f0df20fcf68cb358b53b3",
+          "rawExecutedReport": "Artifacts/Validation/ClassicNpr-2026-11-16/BrowserRuns/PathOfDawn/Desktop720/Browser01/report.executed.json",
+          "rawExecutedReportBytes": 893656,
+          "rawExecutedReportSha256": "d142ad8666555d38f562e206abca1c3166181ca34676bca5d3b6db25157842af",
+          "browserWrapper": "Artifacts/Validation/ClassicNpr-2026-11-16/BrowserRuns/PathOfDawn/Desktop720/Browser01/summary.json",
+          "browserWrapperBytes": 12304,
+          "browserWrapperSha256": "0b003712bff0e601d109a301664863cb105aeb1ad3b50684d2b79ea600d47167",
+          "ownedWrapper": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/GospelDesktop01/summary.json",
+          "ownedWrapperSha256Prefix": "e674067d",
+          "rootLedger": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Root/PathOfDawn-Desktop720-Browser01-directly-viewed.json",
+          "rootLedgerBytes": 27643,
+          "rootLedgerSha256": "9390fdf90f7b762066dfe7d5423ebf12fb5afb2f98a2c3cfba3512b7f1c8960e",
+          "scope": "Actual full desktop completed under original owner with all required Root originals plus two supplemental temple-route views, four PCM windows/two reloads and all four outer events/owned cleanup. Does not relabel failed previews or prove pending mobile/public quality."
+        },
+        "CardMobileBrowser01": {
+          "status": "actual-complete-and-Root-finalized-under-new-independent-owner",
+          "game": "FantasyCards",
+          "profile": "Mobile844",
+          "attempt": "Browser01",
+          "owner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+          "checksPassed": 121,
+          "checksTotal": 121,
+          "requiredRootOriginalsDirectlyViewed": 59,
+          "supplementalOriginalsDirectlyViewed": 1,
+          "audioWindows": 4,
+          "actualFullReloads": 2,
+          "scope": "Actual full local touch suite/Root finalization; no physical-device or public-delivery claim. Exact further raw metadata awaits Root facts rather than invented PNG/hash values."
+        },
+        "GospelMobile": {
+          "status": "actual-complete-and-Root-finalized-under-new-independent-owner",
+          "game": "PathOfDawn",
+          "profile": "Mobile844",
+          "owner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+          "checksPassed": 99,
+          "checksTotal": 99,
+          "requiredRootOriginalsDirectlyViewed": 56,
+          "audioWindows": 4,
+          "actualFullReloads": 2,
+          "scope": "Actual selected local mobile suite including required Mary/book-return checkpoints and Root originals completed. Failed earlier preview stays failed. No public/device-performance/user-aesthetic claim."
+        },
+        "CardPublicBrowser01": {
+          "status": "actual-complete-129of129-Root-finalized",
+          "game": "FantasyCards",
+          "profile": "PublicMobile844",
+          "attempt": "Browser01",
+          "owner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+          "checksPassed": 129,
+          "checksTotal": 129,
+          "capturedPngs": 85,
+          "requiredRootOriginalsDirectlyViewed": 59,
+          "supplementalPage5OriginalsDirectlyViewed": 1,
+          "rootLedgerEntries": 60,
+          "audioWindows": 4,
+          "actualFullReloads": 2,
+          "observedNavigations": [
+            0,
+            1,
+            2
+          ],
+          "canonicalReportBytes": 18676367,
+          "canonicalReportSha256": "036ca241fbc65be1aa2405c5440c539b1dcd8578cf0693cd811161ea27453d2f",
+          "rawExecutedReportBytes": 14894564,
+          "rawExecutedReportSha256": "369a3dcf96b1b2d70a962381c91c4828b1362305f603cd9a99fbf999c6d47a45",
+          "ownedWrapperSha256": "f9c1c6a23798de006d31bcb9d7090ee498ae44c8aee695b1440e3c2477154b50",
+          "outerAllFourExitZeroAndOwnedCleanupEmpty": true,
+          "saveAndOrderObservations": "Owned55copies/27types,SP200 and50physical deck copies persisted after remove/readd of lastInternal and two actual reloads. Root clicked page5/end then back to page1 and observed exact order. Saving49copies was refused by an actual modal, not a disabled button.",
+          "scope": "Current published Card full suite and all required Root originals completed independently. Separate GospelPublic also completed; neither substitutes for final sealing/preservation/closing or complete original-game parity/user aesthetic acceptance."
+        },
+        "GospelPublicBrowser01": {
+          "status": "actual-complete-110of110-Root-finalized",
+          "game": "PathOfDawn",
+          "profile": "PublicMobile844",
+          "attempt": "Browser01",
+          "owner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+          "checksPassed": 110,
+          "checksTotal": 110,
+          "capturedPngs": 81,
+          "requiredRootOriginalsDirectlyViewed": 56,
+          "supplementalActualTouchBibleScrollOriginalsDirectlyViewed": 1,
+          "rootLedgerEntries": 57,
+          "audioSampleCounts": [
+            25,
+            24,
+            24,
+            37
+          ],
+          "audioMedianRms": [
+            0.00651673,
+            0.02159486,
+            0.006391,
+            0.02729292
+          ],
+          "actualFullReloads": 2,
+          "observedNavigations": [
+            0,
+            1,
+            2
+          ],
+          "canonicalReportBytes": 892042,
+          "canonicalReportSha256": "650c033ebf33a77f426e2f78a94f762c914e9047f86a5623a94bf7dc7971724b",
+          "rawExecutedReportBytes": 866872,
+          "rawExecutedReportSha256": "ef69683c210ce5ce6d28a7e8b788e96a19dfd9b25c995920e01d9c36503e6fab",
+          "ownedWrapperSha256": "da7195b1653bcaf8a5c07bb0d8769c85c5a499c7502b0f9a2f362d6116bb96ae",
+          "outerAllFourExitZeroAndOwnedCleanupEmpty": true,
+          "ordinaryTouchObservations": "Joe5500ms-left reached0.5m; Mary4500ms-right+1000ms-diagonal-right-down reached1.5m. Temple4000ms-right+1700ms-forward+1100ms-diagonal-right-up overshot2.7m left-down;600ms-left-down reached1.7m active and actual talk. Ordinary touch only; no game/save/JS injection.",
+          "bibleScrollObservation": "Source text was at mask edge. Root actually dragged up from normalized(.28,.67)to(.28,.36)over700ms, revealing 돌아가매 and verse5lastline without source change. Supplement g2-reading-before-reload-review-2 SHA prefixab7667. Hidden scroll affordance remains a future UX gap.",
+          "saveAndBodyObservations": "Same Joe quote restored after Book and reload; same Mary quote/body restored on Book return. Final12/19passages and14/23events, lamp, savedXYZ and people restored at nav2.",
+          "scope": "Current public full touch suite and all56requiredRoot plus1supplement completed independently with actual audio/reload and owned cleanup. Does not claim all-angle perfect foot framing, AAA, user aesthetic approval, final seal or preservation/closing completion."
+        },
+        "remainingSuites": {},
+        "completedSuites": 6,
+        "totalRequiredRootOriginals": 360,
+        "totalSupplementalRootOriginals": 5,
+        "totalBrowserRootLedgerEntries": 365,
+        "rootCountScope": "Browser365entries only; Native56selected originals and Portal2 are separate, not added to browser required360.",
+        "artAudit": {
+          "limitations": "Small profile faces, stiff Mary scarf/angular hood, material/clothing/expression detail, plain environment and hidden Bible scroll affordance remain. Completed six technical suites do not claim all-angle perfect foot framing, Genshin/AAA, pixel-exact parity, physical-device performance or user aesthetic acceptance."
         },
         "previewHistory": {
           "attempt": "CardDesktop01-before-supported-grid-fix",
@@ -336,10 +546,10 @@
         },
         "audioWindowsPerRun": 4,
         "actualReloadsPerRun": 2,
-        "scope": "All retained/new obligations and Root source-frozen geometry remain required, including mobile Mary. Root must actually execute each full current suite and personally view every required original; no preview source admission substitutes."
+        "scope": "All retained/new obligations and Root source-frozen geometry were executed across six independent suites, including public mobile Mary and actual Bible scroll. Root personally finalized all360required+5supplemental originals; no preview source admission substitutes. Native56/Portal2 are separate."
       },
       "Web": {
-        "status": "actual-both-current-selected-Web-executions-passed-no-browser-or-public-approval",
+        "status": "actual-both-current-selected-Web-passed-four-local-suites-separately-completed-public-gameplay-pending",
         "FantasyCards": {
           "attempt": "Web02",
           "sourceFingerprint": "5e49734fdd5b2c583f9845142348a8f5eb58b721530ce979597bcfb1a46944fa",
@@ -373,39 +583,263 @@
           "archiveScope": "The old unpublished player remains outside active BuildProof Runtime exclusions and must be archived as fresh history, not recovered from a published P it never had."
         }
       },
-      "publicStage": "not-built-or-published-for-this-work",
+      "publicStage": {
+        "Stage01": "actual-failed-nested-license-parent-directory-missing-raw-failure-preserved",
+        "Stage02": "actual-success15439files971459514B-including-manifest-below985000000B",
+        "manifestSha256": "f21798e26c877fbbdec6fde26425aa54a8209a61611258eea17fe0fbf845d611",
+        "fullByteReadback02": "actual-passed-all-stage-bytes-and-exact15-nested-licenses",
+        "readbackHistory": "Auxiliary Readback01 incorrectly required>=16 licenses; preserved as failed. Separate v2 verified actual exact15 source licenses and full bytes. No contract or product proof weakened.",
+        "sharingHistory": "ShareStage02Core01 auxiliary manifest-shape assumption failed before mutation; separate reviewed V2/Core02 succeeded10pairs212088305B with paths/bytes/modes retained. No game/local-proof contract change.",
+        "Publish01": "actual-success-isolated-child-temp-new-objects-removed-root-Git-environment-and-objects-untouched",
+        "publishedCommit": "9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70",
+        "Pages": "actual43843673759-workflow_dispatch-on-M2-all-steps-success",
+        "PublicPortal01": "actual-failed4JPEG-HTTP503-full-check-and-two-viewport-verdict-not-passed-preserved",
+        "portalFailureHistory": "Artifacts/Validation/ClassicNpr-2026-11-16/PublicPortal.previous-20261116T100407425287Z",
+        "PublicPortal02": {
+          "status": "actual-unchanged-full-run-passed15439of15439-HTTP200-fullSHA-Root2freshfullpages-approved",
+          "workers": 4,
+          "canonicalReport": "Artifacts/Validation/ClassicNpr-2026-11-16/PublicPortal/report.json",
+          "canonicalReportBytes": 10249431,
+          "canonicalReportSha256": "c54deab606d4ac92431c11ebbd3790516f2fc319e5e74b21d7dfb93ed7616992",
+          "rawPreapprovalCopy": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/portal02-unreviewed-report.json",
+          "rawPreapprovalSha256Prefix": "db7982",
+          "ownedWrapperSha256Prefix": "7025aeae",
+          "scope": "All four outer events0/owned descendants empty; Root directly reviewed both new full-page originals and canonical visualReview approved. No game/source change and failed Portal01 stays failed. Public gameplay2/finalseal/archive/closing remain separate."
+        },
+        "publicGameplay": "CardPublic01-complete129of129-Root59plus1-and-GospelPublic01-complete110of110-Root56plus1-each-audio4-reload2-all4exit0empty",
+        "FinalSeal01": {
+          "status": "actual-success-whole-builds-Portal-all-six-current-browser-profiles",
+          "file": "Artifacts/Validation/ClassicNpr-2026-11-16/FinalSeal01.json",
+          "bytes": 77122,
+          "sha256": "9f8226029058a6bc81401d35e4fda3fcd3cc18a944de4e5e2ae12ae46c8ee319",
+          "capture": "Exact last JSON line plus newline, not a rewritten report.",
+          "ownedWrapper": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalSeal01/summary.json",
+          "ownedWrapperBytes": 10925,
+          "ownedWrapperSha256": "7c4ee4f5cdf751efb9bfcb8c4d056bd5bf6726d4fdfd19fdcb6dd721d1d3af3d",
+          "allFourEventsExitZeroAndOwnedCleanupEmpty": true,
+          "scope": "Actual whole builds/Portal/all six current game-profile suites; neither game is treated as a preserved-game exemption. Does not complete Checkpoint/Docs CI/final idle/normal release/Closure or aesthetic/full-parity goals."
+        },
+        "finalFactsStageIdentity": {
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/stage02-final-facts-identity01.json",
+          "bytes": 1769,
+          "sha256": "224bb5e39a14854b42a58a34a42f5f5e6f844e9d6746df81d81b63364b02cca3",
+          "totalBytesIncludingManifest": 971459514,
+          "scope": "Separate final-facts identity; original stage identity01 remains unchanged."
+        },
+        "finalPreservation": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
+      },
       "durablePreservation": {
-        "status": "actual-source-reviewed-and-installed-byte-identically-no-proof-execution-or-publication-approval",
-        "source": "Artifacts/Validation/Drafts/ClassicNpr20261116Preservation/preserve-classic-npr-proposal.py",
-        "sourceSha256": "b80994066e5438b8c4b74bb024e2cbdc34011ba854001a667b8aa936e5912f12",
+        "status": "Checkpoint-D1-raw-Git-blobs-push-CI-and-actual-Closure-complete-D2-save-pending",
+        "continuationSource": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/preserve-release-proof-classic-npr-two-cycle.py",
+        "continuationSourceSha256": "7eeb1d15f19e591d1175175e3722ca0f360faea422b517d0334c31f460d9ea86",
+        "installedSourceAdmission": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/installed-sources01.json",
+        "executionHelperSha256": "ef7718bc487b31a95091c9852ba972f3fd67245d9e1bfa9f54c87b2dfef842d0",
+        "activationSha256": "2a193a38e0eec60cd8e5488035ea631dcfe1ff00b71785217a1813437878b30f",
+        "rootReviewHelperSha256": "6747e58d0c65fcb8abe0c880f149e26a3e00c836cf8d3b1a2d3bf899fd310bb1",
+        "originSingleCycleSource": "Artifacts/Validation/Drafts/ClassicNpr20261116Preservation/preserve-classic-npr-proposal.py",
+        "originSingleCycleSourceSha256": "b80994066e5438b8c4b74bb024e2cbdc34011ba854001a667b8aa936e5912f12",
         "admission": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/preservation-source-admission01.json",
         "admittedUtc": "2026-11-16T04:23:02.499635+00:00",
-        "scope": "Actual Root source review/28 exact diff hunks/in-memory application/syntax-only parse and byte-identical install; proposals were not executed. Fresh single-cycle proof, exact two Bee additions, old durable archive references, standalone post-release Closure and indexed nested Git-blob readback remain planned. No Checkpoint/release/Closure, publication approval or future CI result."
+        "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
+        "checkpoint": {
+          "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+          "bytes": 4604790,
+          "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+        },
+        "fileCount": 10384,
+        "partCount": 18,
+        "joinedBytes": 565882862,
+        "joinedArchiveSha256": "f5adb3e95b8c25a679e423129be7924e68f6cf6cde9adf4bb97734801e3d8178",
+        "archiveWrapper": {
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/Checkpoint01/summary.json",
+          "bytes": 11366,
+          "sha256": "762bfd959caba5850f7054c5139865870f3cd2e96e7e6e43a2f4df12e9f38c56"
+        },
+        "closure": {
+          "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+          "bytes": 515178,
+          "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+        },
+        "closureFileCount": 1095,
+        "documentationSaveD1": {
+          "schema": 1,
+          "status": "actual-isolated-review-branch-push-completed-raw-Git-blobs-verified-paired-CI-pending",
+          "phase": "checkpoint",
+          "parent": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "verifiedRawFiles": 26,
+          "plan": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/checkpoint-save01-plan.json",
+            "bytes": 5596,
+            "sha256": "45495b843d09984a0bb7300b5740e81be0500461d352059d552c1ccd345690b6"
+          },
+          "blobReadback": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/checkpoint-save01-git-blob-readback.json",
+            "bytes": 4977,
+            "sha256": "0cd7010a78773f53b4db3868f2895127f3abd641b535b33754d24a2a69c47ab0"
+          },
+          "reviewBranch": "codex/classic-npr-proof-2026-11-16",
+          "mainUpdated": false
+        },
+        "documentationCi": [
+          {
+            "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+            "workflowKind": "core",
+            "runId": 43860689612,
+            "receipt": {
+              "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+              "bytes": 1469,
+              "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+            }
+          },
+          {
+            "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+            "workflowKind": "helper",
+            "runId": 43860689553,
+            "receipt": {
+              "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+              "bytes": 1163,
+              "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+            }
+          }
+        ],
+        "finalRelease": {
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+          "bytes": 878,
+          "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+        }
       },
-      "qualityScope": "Both Native/Web/fresh Root22+34 and one actual full Card PC suite115/Root60/audio4/reload2 passed. Both Gospel previews and old Browser01 remain failed history; remaining five full suites/public delivery/mobile Mary are still required. No user aesthetic/physical-device/Face-SDF/AAA claim."
+      "qualityScope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
     },
     "publication": {
-      "status": "draft-PR9-C1-pushed-not-final-C2-pending-browser-stage-new-publication-incomplete",
-      "draftPullRequest": "https://github.com/ka8877/firstgame/pull/9",
+      "status": "public-product-and-delivery-gameplay-seal-technical-closing-complete",
+      "candidateCommit": "d60cfe9bdd46b9cb00789b2388bd707a7ec523f8",
+      "candidateScope": "Actual stager-only C3 after preserved Stage01 failure; no game/harness/plan/local-proof contract changes. PR10 normally merged M2; Pages publication is complete, full public validation/final preservation are separate.",
+      "normalMerge": {
+        "pullRequest": 10,
+        "status": "actual-normal-merge-complete",
+        "candidateCommit": "d60cfe9bdd46b9cb00789b2388bd707a7ec523f8",
+        "integratedMainCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+        "scope": "Actual stager-only C3/PR10 normal M2 integration with successful exact candidatePR and M2push CI; public validation remains separate."
+      },
+      "priorNormalMerge": {
+        "pullRequest": 9,
+        "status": "actual-normal-merge-complete",
+        "candidateCommit": "5f4abd4cf040b4b4de98f1a1bb94486ac28a1727",
+        "integratedMainCommit": "cc044f602579408d2b0e791d8fd57aa804d6ae11",
+        "scope": "Actual repository-main integration, distinct from the still-old published product/P. No later stage-fix main/CI result is inferred."
+      },
+      "stageUtilityFix": {
+        "branch": "codex/classic-npr-stage-notice-2026-11-16",
+        "source": "Tools/Web/stage-canon.py",
+        "change": "Bounded target.parent.mkdir creation before copying nested license notices; games/harness/plans/local proof unchanged.",
+        "status": "actual-Core03-311-Range05-123-C3-PR10-M2-Stage02-publish-Pages-completed",
+        "candidateCommit": "d60cfe9bdd46b9cb00789b2388bd707a7ec523f8",
+        "pullRequest": 10,
+        "newMainCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+        "candidatePrCi": {
+          "coreRun": 43839601574,
+          "helperRun": 43839601509,
+          "status": "actual-success",
+          "event": "pull_request"
+        },
+        "mainPushCi": {
+          "coreRun": 43841190772,
+          "helperRun": 43841190705,
+          "status": "actual-success",
+          "event": "push"
+        },
+        "scope": "Bounded missing-license-parent stager fix normally merged as PR10/M2; product/proof identities unchanged; actual Checkpoint/D1/CI/normal closing now completed."
+      },
+      "candidatePushCi": {
+        "event": "push",
+        "coreRun": 43818667649,
+        "coreStatus": "actual-completed-success",
+        "coreOriginal": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/C2CoreReceipt01/command.stdout.log",
+        "helperRun": 43818667666,
+        "helperStatus": "actual-completed-success",
+        "helperOriginal": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/CommandRuns/C2HelperReceipt01/command.stdout.log",
+        "scope": "Actual exact C2 push workflows, not renamed pull_request or future product-main/Pages results."
+      },
+      "currentPullRequest": "https://github.com/ka8877/firstgame/pull/10",
+      "priorProductPullRequest": "https://github.com/ka8877/firstgame/pull/9",
       "initialCandidateCommit": "bcad026d629ce4419c4a15d2ec7aa35b013ae439",
       "initialCandidateFiles": 136,
-      "initialCandidateScope": "Actual pushed C1/draft PR9, attached by Root; no Artifacts/Evidence included. C1 is not final after the browser-harness correction; C2 has not yet been saved.",
-      "candidateCiAtLastRootReport": {
+      "initialCandidateScope": "Historical pushed C1/draft PR9/no Artifacts-Evidence, superseded by actual C2 after revision-recognition correction.",
+      "initialCandidateCiAtReport": {
         "Core43813141280": "in-progress-last-reported-not-final-claim",
         "Helper43813141315": "actual-success-for-C1-only"
       },
-      "currentlyPublishedProductCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
-      "currentlyPublishedCommit": "ce9040d6882eba08a7dd71b787666d82a9996e2f",
-      "scope": "currentDeployment remains the last actually verified NPR release until Root completes both new games and normal publication."
+      "currentlyPublishedProductCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+      "currentlyPublishedCommit": "9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70",
+      "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
     },
     "next": [
-      "Retain current CardNative03/Web02/fresh Root22 and unchanged GospelNative03/Web01/fresh Root34; preserve the genuine old preview overlap, old Native/Web and derived-source provenance separately.",
-      "Retain actual exact-script PublicRangeUnit04=123 pass/f94cc5bf and keep discovery03/old02 plus both failed Gospel previews as bounded history.",
-      "Retain completed CardDesktop Browser02/all60Root/audio4/reload2/raw bytes, then execute remaining five full suites with every selected original including actual mobile Mary.",
-      "Save actual next candidateC2 after the current Card desktop result and inspect its own Core/helper CI; initial draft PR9/C1 is not final product main or public P.",
-      "Only after completed local proof proceed through normal source/CI/merge/stage/Pages/fresh public delivery and final evidence preservation."
+      "Review PR11 exact documentation/evidence payload before any main integration; automatic direct-main update was rejected.",
+      "Observe later D2 own save/raw Git blobs/paired push CI separately; never retrofit that future result into frozen Closure.",
+      "For next actual runtime work, recheck environment/remote/processes and obtain a new independent bounded ownership. Retain future real deck slots/original references and Gospel cloth/face/expression/environment/Bible-scroll UX candidates."
     ],
-    "automationScope": "Current work is interactive under the actual acquired lease. Historical automation0 observation and unknown goal-card activation do not establish scheduled/background execution."
+    "futureSourceAssessments": {
+      "Classic": "Artifacts/Validation/Drafts/ClassicNpr20261116Execution/NextClassicAssessment/README.md",
+      "GospelArt": "Artifacts/Validation/Drafts/ClassicNpr20261116Execution/NextArtAssessment/gospel-next-art-assessment.md",
+      "scope": "Read-only future proposals only: real named deck slots/additive save migration, verified compact control/EP mapping and actual album evidence; separate garment/weights candidate, existing expression bindings/cues and one composed courtyard/well slice. Not implemented or visually approved by these notes; current frozen release first."
+    },
+    "automationScope": "Current work is interactive under the actual acquired lease. Historical automation0 observation and unknown goal-card activation do not establish scheduled/background execution.",
+    "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+    "releasedSeoul": "2026-11-16T20:59:06.165105+09:00",
+    "finalReleaseEvidence": {
+      "checkpoint": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+        "bytes": 4604790,
+        "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+      },
+      "closure": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+        "bytes": 515178,
+        "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+      },
+      "finalIdle": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/summary.json",
+        "bytes": 11013,
+        "sha256": "e1c9728114281410d722dad2f4beecf365855a3c24b84d6de4e353c105e6b0a9"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+        "bytes": 878,
+        "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+      },
+      "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+      "releasedSeoul": "2026-11-16T20:59:06.165105+09:00",
+      "statusObservation": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/status-resume01.stdout.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "currentOwnership": false,
+      "documentationCi": [
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "core",
+          "runId": 43860689612,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+            "bytes": 1469,
+            "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+          }
+        },
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "helper",
+          "runId": 43860689553,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+            "bytes": 1163,
+            "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+          }
+        }
+      ],
+      "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
+    }
   },
   "historicalClientMotion": {
     "id": "ClientMotion-2026-11-11",
@@ -2830,7 +3264,7 @@
     },
     "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
   },
-  "baselineScope": "Previous technical milestones remain immutable history. currentDeployment is actual published M2dfd4/Pce904; activeWork has current CardNative03/Web02/Root22 and GospelNative03/Web01/Root34, with browser/stage/publication pending. The genuine old Card preview finding and superseded Web01 are separate history. Art/parity goals are not completed by technical checks.",
+  "baselineScope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
     "dirtyPathsBeforeSetup": [],
@@ -2850,7 +3284,7 @@
   "games": {
     "FantasyCards": {
       "revision": "fm-classic-library-2026-11-16",
-      "sourceStatus": "supported-grid-corrected-source-Native03-11-passed-fresh-Root22-and-Web02-passed-not-published",
+      "sourceStatus": "published-M2-P9e7-Native-Web-localPC-touch-complete-public-gameplay-validation-pending",
       "supportedCards": 2649,
       "originalArchiveCards": 15350,
       "unsupportedArchiveCards": 12701,
@@ -2858,21 +3292,21 @@
       "sourceBaseMain": "cd180dec745ffb257c9af263c5aebde910e8327c",
       "sourceFingerprint": "5e49734fdd5b2c583f9845142348a8f5eb58b721530ce979597bcfb1a46944fa",
       "sourceFingerprintScope": "Actual current Native03/Web02 full prepared inputs after the minimal supported-grid fix, distinct from old Native02 source5087609e and published commit identity.",
-      "currentValidation": "Native03 full11/0/0/fresh Root22/Web02 passed. Card PC/touch previews ended unchanged; source geometry is frozen. First desktop full suite FAILED at new-revision audio recognition; bounded harness correction/retry and all complete suites/publication remain pending.",
-      "nextMilestone": "Retain exact-script range04=123; finish running desktop retry and full PC/touch/public verification of source-frozen library/encyclopedia/filter/detail/valid-invalid-save routes."
+      "currentValidation": "Native03=11/Root22/Web02 plus desktop115/60 required Root and mobile121/59 required+one supplement finalized; each audio4/two reloads. No public pass. Bounded stage utility fix leaves game/harness/plans/local proof unchanged.",
+      "nextMilestone": "Complete fresh stage-utility validation/new-main/Stage02 and actual public Card suite after successful Pages/full delivery."
     },
     "PathOfDawn": {
       "revision": "gospel-npr-polish-2026-11-16",
-      "sourceStatus": "final-authored-source-Native03-17-passed-fresh-Root34-and-selected-Web01-passed-not-published",
+      "sourceStatus": "published-M2-P9e7-Native-Web-localPC-touch-complete-public-gameplay-validation-pending",
       "quests": 23,
       "passages": 19,
       "openingStoryScreens": 51,
       "keyVoiceLines": 28,
       "sourceBaseMain": "cd180dec745ffb257c9af263c5aebde910e8327c",
       "sourceFingerprint": "bb80116cdd925f1076abdf7b24d61bc7d23460f774cfcb4d5cee478c7a9dd4aa",
-      "sourceFingerprintScope": "Actual current Native03 prepared full inputs at final joint source contract, distinct from prior Native02/old published fingerprint and future M/P.",
-      "currentValidation": "Native03 full17/0/0/fresh Root34/Web01 remain valid. Both ordinary previews FAILED at600s boundary while actual observed source/runtime bytes stayed unchanged; partial viewed Mary/Book/return on PC and Joseph/Book on touch are not full-suite passes.",
-      "nextMilestone": "Execute every selected source-frozen PC/touch/public checkpoint including actual mobile Mary pair/Bible return; retain failed preview/missing capture metadata honestly."
+      "sourceFingerprintScope": "Actual Native03 prepared full inputs remain unchanged through stager-only C3/M2 publication, distinct from Git main/P identities and historical Native02/old public fingerprint.",
+      "currentValidation": "Native03=17/Root34/Web01 plus desktop118/70 required Root+two temple views and mobile99/56 required Root finalized; each audio4/two reloads. Selected local mobile Mary/book-return completed; old failed previews unchanged. Public pending.",
+      "nextMilestone": "Complete actual new-stage/public Mary/book/reload review; continue stiff scarf/angular hood/materials/simple-background improvements without AAA claims."
     }
   },
   "previousLivingRpgClassicGames": {
@@ -2940,22 +3374,59 @@
     }
   },
   "lastCompletedWork": {
-    "id": "GospelNpr-2026-11-11",
-    "status": "completed-technical-release-normalownrelease-Closure-artgoal-unfinished",
-    "productCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
-    "deployedCommit": "ce9040d6882eba08a7dd71b787666d82a9996e2f",
-    "checkpointSaveCommit": "5d835d8cf3c5c3467fe42aa75079422ccf885871",
-    "checkpointCoreCi": 43124581847,
-    "checkpointHelperCi": 43124582117,
-    "releasedUtc": "2026-11-12T00:18:33.134686+00:00",
-    "ClosureCreatedUtc": "2026-11-12T00:20:06.879051+00:00",
-    "evidence": "activeWork.finalReleaseEvidence.closingState",
-    "nextGoal": "Improve twoactor dialogueframing/closeNPCbodyocclusion/fading, face/cloth/world artdetail and verifiedoriginalCardparity after a fresh independentinspection and newownlease. FaceSDF/AAA/user aesthetic/deviceFPS/fullartgoal completion unclaimed.",
-    "closingDocumentationD2CommitAndCi": "Actually completed afterward: D2/D3 normal save and paired CI passed, D3 corrected ignored-original omission and all259 committed raw blobs were verified. Frozen Closure/Checkpoint unchanged; see post-closure admission.",
-    "closingDocumentationCommit": "cd180dec745ffb257c9af263c5aebde910e8327c",
-    "closingCoreCi": 43127890298,
-    "closingHelperCi": 43127890486,
-    "postClosureAdmission": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/post-closure-ci-admission01.json"
+    "id": "ClassicNpr-2026-11-16",
+    "status": "technical-public-release-proof-checkpoint-D1-push-CI-normal-release-Closure-complete-review-PR-main-approval-pending",
+    "checkpoint": {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+      "bytes": 4604790,
+      "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+    },
+    "closure": {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+      "bytes": 515178,
+      "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+    },
+    "finalIdle": {
+      "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/summary.json",
+      "bytes": 11013,
+      "sha256": "e1c9728114281410d722dad2f4beecf365855a3c24b84d6de4e353c105e6b0a9"
+    },
+    "releasedLease": {
+      "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+      "bytes": 878,
+      "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+    },
+    "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+    "releasedSeoul": "2026-11-16T20:59:06.165105+09:00",
+    "statusObservation": {
+      "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/status-resume01.stdout.json",
+      "bytes": 99,
+      "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+    },
+    "currentOwnership": false,
+    "documentationCi": [
+      {
+        "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+        "workflowKind": "core",
+        "runId": 43860689612,
+        "receipt": {
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+          "bytes": 1469,
+          "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+        }
+      },
+      {
+        "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+        "workflowKind": "helper",
+        "runId": 43860689553,
+        "receipt": {
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+          "bytes": 1163,
+          "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+        }
+      }
+    ],
+    "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
   },
   "lastCompletedWorkBeforeNpr": {
     "id": "ClientMotion-2026-11-11",
@@ -2990,14 +3461,12 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
-    "id": "ClassicNpr-2026-11-16",
-    "status": "active-source-frozen-routes-exact-Range04-passed-CardDesktop02-running-draft-PR9-not-final",
+    "id": "ClassicNprResume-2026-11-16",
+    "status": "future-runtime-requires-fresh-independent-checks-and-ownership",
     "tasks": [
-      "Preserve current CardNative03/Web02/fresh Root22 and GospelNative03/Web01/fresh Root34, plus genuine old preview overlap/old Web01 and derived source provenance separately.",
-      "Retain actual required exact-script PublicRangeUnit04=123 pass and finish running CardDesktop02 after initial audio/Root16 partial progress; preserve failed Browser01/raw17 unchanged.",
-      "Execute every source-frozen route in all six full suites including mobile Mary, four audio windows/two reloads and all required Root originals; preview source admission is not a pass.",
-      "Save actual C2 after desktop retry, inspect C2's exact Core/helper CI and normally integrate/deploy only after local proof. C1/draft PR9 is not final main/P.",
-      "Only after completed local proof proceed through normal source/CI/merge/stage/Pages/fresh public delivery and final evidence preservation."
+      "Review PR11 exact documentation/evidence payload before any main integration; automatic direct-main update was rejected.",
+      "Observe later D2 own save/raw Git blobs/paired push CI separately; never retrofit that future result into frozen Closure.",
+      "For next actual runtime work, recheck environment/remote/processes and obtain a new independent bounded ownership. Retain future real deck slots/original references and Gospel cloth/face/expression/environment/Bible-scroll UX candidates."
     ],
     "rule": "Use the actual fresh lease and current profile. Do not renew/reuse an earlier lease, drop retained cases/checkpoints, manufacture old passes as current, or claim exact late-album parity/AAA/user acceptance from source work."
   },
@@ -3021,7 +3490,7 @@
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
-    "lockStatus": "ClassicNpr-fresh-independent-acquired-fixed-lease",
+    "lockStatus": "normally-released-available-observed-no-current-owned-runtime",
     "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
     "childCommandLimitSeconds": 3600,
     "defaultGuardLimitSeconds": 2700,
@@ -3033,16 +3502,27 @@
     "evidencePolicy": "Unique Artifacts/Validation/Autonomy/<run-id>; retain all historical originals/GUID/save/ZIP/failures. Raw Artifacts are ignored; durable baseline/check summaries and next work are in these committed files.",
     "continuation": "Each bounded work batch ends with checkpoint and owned CAS release. Under the active long-term goal, a later independent batch rechecks actual idle/environment/remote state and acquires a new bounded lease. Never extend an active lease, steal an expired lock, increase a limit, or create/recreate a goal/schedule automatically; no overall agent budget is inferred from the child-command limit.",
     "currentBatchAtReport": {
-      "id": "ClassicNpr-2026-11-16",
-      "leaseRecord": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json",
-      "owner": "cd835d1e-b9a9-4b0e-9385-e6d0cba84819",
-      "commitSha": "a4321cdebccf49a15eb8b3821200b91bd7499c20",
-      "startedUtc": "2026-11-16T01:59:54.760259+00:00",
-      "deadlineUtc": "2026-11-16T07:59:54.760259+00:00",
-      "startedSeoul": "2026-11-16T10:59:54.760259+09:00",
-      "deadlineSeoul": "2026-11-16T16:59:54.760259+09:00",
-      "status": "Actual acquired fresh cycle; Root alone executes. Native/Web/Core and exact Range04=123 passed; six plans source-frozen/29 viewports. Failed Gospel previews/Browser01 retained. CardDesktop02 running with first audio/Root16 partial progress; C2/full suites/deployment pending. No background execution.",
-      "currentOwnership": true
+      "id": "ClassicNprResume-2026-11-16",
+      "leaseRecord": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+      "owner": "555529fe-af82-4e24-85a4-e7627ae70ccb",
+      "commitSha": "9495e3c124a89fd0abdf0c8ffde34ceb96ffd3d7",
+      "startedUtc": "2026-11-16T07:34:25.830373+00:00",
+      "deadlineUtc": "2026-11-16T13:34:25.830373+00:00",
+      "startedSeoul": "2026-11-16T16:34:25.830373+09:00",
+      "deadlineSeoul": "2026-11-16T22:34:25.830373+09:00",
+      "status": "technical-public-release-proof-checkpoint-D1-push-CI-normal-release-Closure-complete-review-PR-main-approval-pending",
+      "currentOwnership": false,
+      "checkpoint": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+        "bytes": 4604790,
+        "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+      },
+      "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+      "closure": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+        "bytes": 515178,
+        "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+      }
     },
     "historicalNprOriginBatchAtReport": {
       "id": "GospelNpr-2026-11-11",
@@ -3062,12 +3542,58 @@
       "status": "Work and portable checkpoint complete; normal owned CAS release is the final boundary after source preservation. Live remote ref is authoritative."
     },
     "lastCompletedBatch": {
-      "id": "GospelNprCameraResume-2026-11-11",
-      "status": "technicalrelease-normalownrelease-Closure-completed-artgoalunfinished",
-      "releasedUtc": "2026-11-12T00:18:33.134686+00:00",
-      "releaseRecord": "activeWork.finalReleaseEvidence.closingState.normalOwnLeaseRelease",
-      "Closure": "Docs/Autonomy/Evidence/GospelNpr20261111/Closure01/index.json",
-      "scope": "Mostrecent actualcompleted executioncycle; no currentownership/backgroundruntime. D2ownsave/CI futureatwriting."
+      "id": "ClassicNprResume-2026-11-16",
+      "checkpoint": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+        "bytes": 4604790,
+        "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+      },
+      "closure": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+        "bytes": 515178,
+        "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+      },
+      "finalIdle": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/summary.json",
+        "bytes": 11013,
+        "sha256": "e1c9728114281410d722dad2f4beecf365855a3c24b84d6de4e353c105e6b0a9"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+        "bytes": 878,
+        "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+      },
+      "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+      "releasedSeoul": "2026-11-16T20:59:06.165105+09:00",
+      "statusObservation": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/status-resume01.stdout.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "currentOwnership": false,
+      "documentationCi": [
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "core",
+          "runId": 43860689612,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+            "bytes": 1469,
+            "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+          }
+        },
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "helper",
+          "runId": 43860689553,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+            "bytes": 1163,
+            "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+          }
+        }
+      ],
+      "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
     },
     "historicalNprMiddleCompletedBatch": {
       "id": "GospelNprResume-2026-11-11",
@@ -3117,10 +3643,11 @@
         "bytes": 2222
       }
     },
-    "liveLeaseRecord": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json",
-    "liveLeaseDeadlineUtc": "2026-11-16T07:59:54.760259+00:00",
-    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json",
-    "statusObservationScope": "Fresh ClassicNpr acquired record binds this run/owner/lock and fixed deadline. Earlier saved available/acquired/released records are history, not this ownership or perpetual availability. No renewal/background-goal claim.",
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-16T13:34:25.830373+00:00",
+    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json",
+    "previousGospelNprReleasedLeaseRecord": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/lease.json",
+    "statusObservationScope": "Actual origin release07:33:53Z/available followed by distinct resume acquisition07:34:25Z, new owner/commit/fixed deadline. Transition receipt c32feb76 binds both; historical old acquired copies grant no current ownership. No renewal/background-goal claim.",
     "historicalCanonArtBatchAtReport": {
       "id": "CanonPublishResume-2026-11-10",
       "leaseRecord": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/lease.json",
@@ -3192,7 +3719,7 @@
       "scope": "Actual late observation before D2 save, not a permanent capacity promise. Storage is low: before future Unity/build/model work assess capacity and preserve all unique proofs/source/runtime/imported Artifacts/packages. Only reviewed regenerable-cache or verified-duplicate maintenance may reclaim space. Closing Docs/CI observation proceeds separately."
     },
     "managedCloudObservedRunning": true,
-    "currentConnectionStatus": "connected-current-both-Native-Web-Root-complete-browser-public-pending",
+    "currentConnectionStatus": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
     "latestBrowserExecutionInterruption": {
       "scope": "External environment starting/ready transition interrupted CardDesktopBrowser03; not a product/network failure",
       "relocation": "Artifacts/Validation/Autonomy/CanonPublishResume-2026-11-10/Release/card-desktop03-interruption-relocation.json",
@@ -3201,14 +3728,14 @@
       "independentIdleCheck": "InterruptedDesktopIdle01 passed ownership/idle/cleanup separately; not a Browser03 completion",
       "replacement": "CardDesktopBrowser04 actual passed and Root-finalized"
     },
-    "currentRecovery": "Temporary cache volume reset on reconnect. Original source/runtime/evidence retained. Same-disk runtime/JPEG-copy sharing kept every path/byte and existing proof/source identities; package seed was copy-only. BeePreservedCopy01 retained all original workspace Bee bytes/inodes/protected inputs, reclaiming0 old bytes. Old unpublished Card Web01 runtime/proof retained separately after genuine overlap finding. Both selected current Native/Web and final Core/Range/Contract passed; browser/public remain separate.",
+    "currentRecovery": "Current product and proof retained; prior storage/cache failures preserved. Execution normally closed. Review PR11 and next runtime require their own observed steps.",
     "networkPolicy": "unrestricted/enforced/current",
     "vpnConfigured": false,
     "installedWebGLModule": true,
     "installedWindowsModule": true,
     "browserPython": "/tmp/firstgame-canon-public-20261110-venv/bin/python",
     "existingRequestsPathForBrowser": "/workspace/tools/voice-venv/lib/python3.12/site-packages",
-    "pythonNote": "The previous PublicPortal02 interpreter observation is historical. Current HTTPRuntimeDependencies01 actually installed pinned requests locally and inventoried125 files; final browser/public execution remains pending. Check actual interpreter/dependencies on each new run.",
+    "pythonNote": "Previous interpreter observation is historical. Current dependencies/all six suites actually completed/audio4/reload2 and FinalSeal01 passed. Check dependencies/interpreter on each environment.",
     "runtimeRetry": {
       "observedUtc": "2026-11-03T04:25:40.724004+00:00",
       "source": "Observed normal official CLI status result from the bounded elevated check-runtime.py retry; credential values never read or emitted.",
@@ -3278,10 +3805,22 @@
     "historicalRecoveryDescription": "Retained workspace originals verified; exact15370 final Web runtime files restored to original /tmp paths. See CanonPublishResume runtime-restoration.json. Historical disconnect below is preserved as a dated event.",
     "historicalNote": "G1 fresh Native14/Editor and Web02/PC74/localTouch59/publicTouch62 passed. Existing licensed runtime reused; no reinstall. Native/browser diagnostics are not physical-device performance. Initial prerequisite auth/license observations remain dated history.",
     "historicalLivingRpgClassicRecoveryDescription": "Current LivingRpgClassic source/Native/Web/runtime, six browser suites and full public delivery passed; earlier CanonArt restoration/interruption descriptions remain historical.",
-    "browserPythonScope": "Old NPR browser/Python/NSS results are historical. Current six ClassicNpr browser runs and actual interpreter/HTTPS execution must be freshly checked by Root; no ignored-TLS or physical-device-performance claim.",
+    "browserPythonScope": "Four locals/245 required Root/audio4/reload2 completed under actual owners. Two public suites pending after Stage02; old NPR/Python/NSS historical, no ignored TLS/device-performance claim.",
     "historicalClientMotionRecoveryDescription": "Currentallruntime/publicgates andindependentArchiveCheckpoint02 actualpreservation completed; V3Rootreview27unitretainedafterfirstarchivepreconditionfailure. Nofinalresumeidle/release/Closureyet."
   },
   "capacity": {
+    "profile": "classic-npr",
+    "sourceCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+    "fileCount": 15439,
+    "totalBytes": 971459514,
+    "stagePublishReady": true,
+    "budgetBytesIncludingManifest": 985000000,
+    "manifestSha256": "f21798e26c877fbbdec6fde26425aa54a8209a61611258eea17fe0fbf845d611",
+    "basis": "Actual Stage02/full-byte Readback02/exact15 source licenses, publish/P/Pages and fresh Portal02 all15439HTTP200/SHA with two Root full-page originals.",
+    "scope": "Historical observed storage facts retained. All original Bee/cache/source/raw proof bytes kept; only strict same-byte derived copies shared. Checkpoint/D1 Git objects now saved; closing bookkeeping continues on review branch.",
+    "previousScopeAtD1": "Complete manifest-inclusive971459514B/below985M, full public GET/Root2, all six suites360requiredRoot+5supplements and FinalSeal01 verified. Checkpoint/DocsCI/closing pending; failed Portal01 and auxiliaries kept separately."
+  },
+  "previousGospelNprCapacity": {
     "profile": "gospel-npr",
     "sourceCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
     "fileCount": 15439,
@@ -3377,6 +3916,16 @@
       "file": "Artifacts/Validation/Autonomy/LivingRpgClassic-2026-11-10/Release/automation-status-current.json",
       "bytes": 416,
       "sha256": "41a88f0cbb7add85838103a687aee787b03aca2e491ef09422f72dba98f51dd8"
+    },
+    "currentReadOnlyObservation": {
+      "receipt": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/automation-peek-observation01.json",
+        "bytes": 612,
+        "sha256": "55c6960234029da0dfb8f459edb3d13c83e6ada2e90f4ec53ebe81a97575ffb2"
+      },
+      "scheduledAutomations": 0,
+      "currentGoalActivation": "unverified-no-read-tool-available",
+      "scope": "Actual automations.peek returned zero. Existing Codex goal-card activation is separate and unverified; no goal or schedule was changed."
     }
   },
   "permissions": {
@@ -3397,17 +3946,17 @@
     ],
     "branchProtectionRead": "403 Resource not accessible by integration; not treated as no protection or bypass permission. Normal source rights/push are checked through ordinary operations."
   },
-  "knownIssuesScope": "Native/Web/Root22+34/Core02 and exact-script Range04=123 passed. Six plans SOURCE-frozen; both Gospel previews/Browser01 failed. Browser02 is running with first audio/Root16 partial progress, no complete suite/stage/public pass. Draft PR9/C1 is not final; published ce904/art/parity scope unchanged.",
+  "knownIssuesScope": "Current remaining product quality gaps and review PR/main integration; local Checkpoint, D1 CI and normal runtime closure completed.",
   "knownIssues": [
-    "Both selected Native/Web/fresh Root22+34 remain valid. Six game plans are Root SOURCE-frozen from29 actual viewports, not full-suite approval. Both Gospel previews hit600s deadline and failed; actual PC Mary/Book/return and touch Joseph/Book views do not prove unexecuted mobile Mary or missing final capture metadata.",
-    "Card desktop Browser01 failed because new Classic revision missed allowlists and30s fallback discarded actual17.882s/nonzeroPCM. Only that revision was added to six lists; all real media/public gates remain. Actual exact-script04 passed123; Browser02 has first audio/Root16 partial progress but no full-suite pass.",
-    "Actual draft PR9/C1 bcad026d is pushed136files without Artifacts/Evidence; C1 helper CI succeeded/Core was last reported running. C1 is not final after harness-only correction; C2, normal integration/Pages/new public verification remain pending.",
+    "Game/harness/plans/Native-Web/local proof contract unchanged. All four local suites/245 required Root finalized, including selected local mobile Mary. Earlier600s Gospel preview failures and missing capture metadata remain history, not retroactive preview approval.",
+    "Old Card Browser01/audio failure remains raw history. Revision-only fix kept real gates; all six suites Card115/121/129 and Gospel118/99/110 completed with360requiredRoot+5supplements/audio4/reload2. Stage-fix source refresh Core03=311/direct-script05=123 also completed. Hidden Bible scroll affordance remains a future UX gap despite actual ordinary-touch scroll success.",
+    "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
     "Original2015 deck UI is verified from a550x412 primary-host image with two ten-row text panes. Exact late full-album layout remains unverified; related skin reconstruction and unavailable EP/market-price data must be distinguished from exact original parity.",
-    "Mary close-dialogue body masking remains in the old published version. Pair-aware camera/speaker protection and book/reload/physical-pose assertions passed Native03 with all34 fresh Root originals; real settled browser geometry/delivery is still pending.",
-    "Current skin/cloth/hair/portrait/world source passed Native03 and fresh Root34 after actual portrait-distance correction. Some opening PNGs are mid-fade and ambient foreground NPC can enter view. Clothing/background/expression detail remains below the goal; no Face SDF, AAA equality, physical-device FPS or user aesthetic acceptance is claimed.",
+    "Historical old public had Mary masking. Current selected Native/PC/localtouch/publictouch pair/book/save/reload all independently completed with Root originals at P9e7. Gospel public required56+actual Bible-scroll supplement finalized. Small profile faces/stiffhood/plain environment remain; no all-angle perfect foot framing or user aesthetic acceptance claim.",
+    "Current PC art audit still finds stiff Mary scarf/angular hood, material/clothing/expression detail and simple background below the goal. Some old Native openings are mid-fade/ambient NPC can enter view. No Face SDF/AAA/pixel-exact/deviceFPS/user aesthetic claim.",
     "Full Card parity remains incomplete despite2649 supported/15350 original records; IDs/economy/saves/rules stay intact and multiplayer is disabled/future update.",
     "Whole Library relocation/deletion was rejected and never executed. Same-disk duplicate sharing and package copy retained originals. Separately reviewed Bee operation kept every original workspace Bee byte/inode and all protected inputs, reclaiming0 old workspace bytes; tmp reset does not restore or replace that retained backup.",
-    "RetainedBeeArchive01 completed456753143B archive. Automatic approval review rejected original2281-cache-file deletion before start; no files changed/originals intact. Safer derived-archive-only source proposal is ready but not executed while browser runs; source/archive proposals do not grant deletion permission.",
+    "Original2281-cache-file deletion was rejected before start/never executed. Safe derived-only discard later completed with all2281 original files/33dirs bytes/inodes/metadata unchanged; only own new workspace archive discarded after verified tmp copy. Historical archive workspace path absent; tmp not persistent. Originals remain workspace.",
     "Last automation0 and goal-card activation unknown are historical observations. The actual current interactive lease does not establish recurring or24-hour background development."
   ],
   "knownIssuesAtClientMotionHandoff": [
@@ -4409,6 +4958,96 @@
     }
   },
   "currentDeployment": {
+    "status": "public-delivery-six-suites-final-seal-and-technical-closure-complete",
+    "candidateCommit": "d60cfe9bdd46b9cb00789b2388bd707a7ec523f8",
+    "sourceCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+    "deployedCommit": "9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70",
+    "manifest": {
+      "file": "Artifacts/ClassicNprWebPlaytest/build-manifest.json",
+      "sha256": "f21798e26c877fbbdec6fde26425aa54a8209a61611258eea17fe0fbf845d611"
+    },
+    "url": "https://ka8877.github.io/firstgame/",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=9e7c049b",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=9e7c049b",
+    "fileCountIncludingManifest": 15439,
+    "siteBytesIncludingManifest": 971459514,
+    "stageRoot": "Artifacts/ClassicNprWebPlaytest",
+    "proofRoot": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof",
+    "pages": {
+      "runId": 43843673759,
+      "event": "workflow_dispatch",
+      "headSha": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+      "status": "completed",
+      "conclusion": "success",
+      "allStepsCompleted": true
+    },
+    "publicPortal": {
+      "attempt": "Portal02",
+      "status": "actual-passed15439of15439-HTTP200-fullSHA-Root2freshfullpages-approved",
+      "report": "Artifacts/Validation/ClassicNpr-2026-11-16/PublicPortal/report.json",
+      "reportBytes": 10249431,
+      "reportSha256": "c54deab606d4ac92431c11ebbd3790516f2fc319e5e74b21d7dfb93ed7616992",
+      "history": "Portal01 actual4JPEG503 failure retained in normal previous archive; no retroactive pass."
+    },
+    "publicGameplay": "CardPublic01-completed129of129-Root59plus1-and-GospelPublic01-completed110of110-Root56plus1-each-audio4-reload2-all4exit0empty",
+    "finalSeal": "actual-FinalSeal01-passed77122B-SHA9f8226029058a6bc81401d35e4fda3fcd3cc18a944de4e5e2ae12ae46c8ee319-all4events0empty",
+    "closureState": "actual-checkpoint-D1-raw-Git-push-CI-final-idle-normal-release-Closure-complete",
+    "qualityScope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
+    "closingEvidence": {
+      "checkpoint": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+        "bytes": 4604790,
+        "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
+      },
+      "closure": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+        "bytes": 515178,
+        "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+      },
+      "finalIdle": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/summary.json",
+        "bytes": 11013,
+        "sha256": "e1c9728114281410d722dad2f4beecf365855a3c24b84d6de4e353c105e6b0a9"
+      },
+      "releasedLease": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json",
+        "bytes": 878,
+        "sha256": "b9480c7ea1aa2bd3428776382f91cb5815680efd25bb49447ed0b2e9d704d98e"
+      },
+      "releasedUtc": "2026-11-16T11:59:06.165105+00:00",
+      "releasedSeoul": "2026-11-16T20:59:06.165105+09:00",
+      "statusObservation": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/status-resume01.stdout.json",
+        "bytes": 99,
+        "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+      },
+      "currentOwnership": false,
+      "documentationCi": [
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "core",
+          "runId": 43860689612,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+            "bytes": 1469,
+            "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+          }
+        },
+        {
+          "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+          "workflowKind": "helper",
+          "runId": 43860689553,
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+            "bytes": 1163,
+            "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+          }
+        }
+      ],
+      "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
+    }
+  },
+  "previousGospelNprDeployment": {
     "status": "GospelNpr-technicalrelease-published-validated-sealed-checkpointed-D1CI-normalrelease-Closure-completed-artgoalunfinished",
     "candidateCommit": "03b3118a0d582a605892a306be95b9b45c409a2d",
     "sourceCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
@@ -6084,61 +6723,124 @@
     "previousPortableCheckpoint01": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "mainDocumentationIntegration": {
-    "scope": "Actual first candidate C1 bcad026d/draft PR9 was pushed136files, with C1 helper success/Core last in progress. Browser revision-recognition correction means C1 is not final; C2/final exact candidate CI/integration/publication are pending. Last completed main documentation save remains previous NPR D3 after frozen Closure.",
-    "baseMainCommit": "cd180dec745ffb257c9af263c5aebde910e8327c",
-    "currentlyPublishedProductCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
-    "currentlyPublishedCommit": "ce9040d6882eba08a7dd71b787666d82a9996e2f",
-    "latestCompleted": {
-      "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
-      "status": "actual-post-closure-normal-save-and-paired-ci-complete",
-      "coreCiRunId": 43127890298,
-      "helperCiRunId": 43127890486,
-      "verifiedCommittedRawBlobs": 259
+    "status": "D1-review-branch-raw-save-and-paired-CI-complete-Closure-observed-D2-save-pending",
+    "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim.",
+    "baseMainCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+    "currentlyPublishedProductCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+    "currentlyPublishedCommit": "9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70",
+    "checkpoint": {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Checkpoint01/index.json",
+      "bytes": 4604790,
+      "sha256": "28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961"
     },
-    "priorPostClosureCi": [
+    "actualCommittedRawBlobs": 26,
+    "documentationCi": [
       {
-        "commit": "4c388e3efcc5927ba8276a32eecac9663439fb71",
+        "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
         "workflowKind": "core",
+        "runId": 43860689612,
         "receipt": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d2-core-ci01.json",
-          "bytes": 1494,
-          "sha256": "e938126db2165d3372bda2d3206239791fa6539429c5a1059d862abe48a63bcf"
-        },
-        "runId": 43127621254
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/core.json",
+          "bytes": 1469,
+          "sha256": "8db4ed5376a492acb57378caef80e4e5ba50a80cbafb9bf1537dff8a1801a3fd"
+        }
       },
       {
-        "commit": "4c388e3efcc5927ba8276a32eecac9663439fb71",
+        "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
         "workflowKind": "helper",
+        "runId": 43860689553,
         "receipt": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d2-helper-ci01.json",
-          "bytes": 1188,
-          "sha256": "0883b78afe7bf68136b90dd8ccd2779ca198ec174bdaf448c79d741212bc4345"
-        },
-        "runId": 43127621305
-      },
-      {
-        "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
-        "workflowKind": "core",
-        "receipt": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d3-core-ci01.json",
-          "bytes": 1494,
-          "sha256": "7df5bd40db861748eb5e7c52bcd134b94cfdcd76e52badc50b04cec80a17d9fe"
-        },
-        "runId": 43127890298
-      },
-      {
-        "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
-        "workflowKind": "helper",
-        "receipt": {
-          "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d3-helper-ci01.json",
-          "bytes": 1188,
-          "sha256": "845c35487602a30e7f599eed659ec98492a309cf48337d683af48844ded2be84"
-        },
-        "runId": 43127890486
+          "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/CheckpointReviewCIPoll04/helper.json",
+          "bytes": 1163,
+          "sha256": "ab560b3ae91e542ae2db5783dfe16dcc3b1036ab0969cea92d57c18cf9ecf284"
+        }
       }
     ],
-    "actualPriorAdmission": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/post-closure-ci-admission01.json",
-    "currentWorkCandidateAndCi": "Pending actual final source preparation, Native/Web/browser proof, normal commit/push and exact-head CI; no future result claimed."
+    "priorIntegrationRecord": {
+      "scope": "Actual C3/PR10/M2/Stage02/P9e7/Pages/full Portal02+Root2/all six suites360requiredRoot+5supplements/FinalSeal01 complete with exact CI/readback. Checkpoint/DocsCI/closing pending. Draft Docs/AGENTS freeze before archive; Root later applies tracked documents and actual preservation/closing facts there only. Future documentation commit/CI not invented. Entire old deployment retained as history.",
+      "baseMainCommit": "cd180dec745ffb257c9af263c5aebde910e8327c",
+      "currentlyPublishedProductCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
+      "currentlyPublishedCommit": "ce9040d6882eba08a7dd71b787666d82a9996e2f",
+      "latestCompleted": {
+        "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
+        "status": "actual-post-closure-normal-save-and-paired-ci-complete",
+        "coreCiRunId": 43127890298,
+        "helperCiRunId": 43127890486,
+        "verifiedCommittedRawBlobs": 259
+      },
+      "priorPostClosureCi": [
+        {
+          "commit": "4c388e3efcc5927ba8276a32eecac9663439fb71",
+          "workflowKind": "core",
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d2-core-ci01.json",
+            "bytes": 1494,
+            "sha256": "e938126db2165d3372bda2d3206239791fa6539429c5a1059d862abe48a63bcf"
+          },
+          "runId": 43127621254
+        },
+        {
+          "commit": "4c388e3efcc5927ba8276a32eecac9663439fb71",
+          "workflowKind": "helper",
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d2-helper-ci01.json",
+            "bytes": 1188,
+            "sha256": "0883b78afe7bf68136b90dd8ccd2779ca198ec174bdaf448c79d741212bc4345"
+          },
+          "runId": 43127621305
+        },
+        {
+          "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
+          "workflowKind": "core",
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d3-core-ci01.json",
+            "bytes": 1494,
+            "sha256": "7df5bd40db861748eb5e7c52bcd134b94cfdcd76e52badc50b04cec80a17d9fe"
+          },
+          "runId": 43127890298
+        },
+        {
+          "commit": "cd180dec745ffb257c9af263c5aebde910e8327c",
+          "workflowKind": "helper",
+          "receipt": {
+            "file": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/closing-d3-helper-ci01.json",
+            "bytes": 1188,
+            "sha256": "845c35487602a30e7f599eed659ec98492a309cf48337d683af48844ded2be84"
+          },
+          "runId": 43127890486
+        }
+      ],
+      "actualPriorAdmission": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/post-closure-ci-admission01.json",
+      "currentWorkCandidateAndCi": "Pending actual final source preparation, Native/Web/browser proof, normal commit/push and exact-head CI; no future result claimed."
+    },
+    "destination": "codex/classic-npr-proof-2026-11-16",
+    "mainUpdate": "Not performed; explicit approval for concrete PR11 required.",
+    "reviewPr": "https://github.com/ka8877/firstgame/pull/11",
+    "latestCompletedD1": {
+      "schema": 1,
+      "status": "actual-isolated-review-branch-push-completed-raw-Git-blobs-verified-paired-CI-pending",
+      "phase": "checkpoint",
+      "parent": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+      "commit": "42ebeb91f0a112a62796333944242c37c6e918e3",
+      "verifiedRawFiles": 26,
+      "plan": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/checkpoint-save01-plan.json",
+        "bytes": 5596,
+        "sha256": "45495b843d09984a0bb7300b5740e81be0500461d352059d552c1ccd345690b6"
+      },
+      "blobReadback": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/checkpoint-save01-git-blob-readback.json",
+        "bytes": 4977,
+        "sha256": "0cd7010a78773f53b4db3868f2895127f3abd641b535b33754d24a2a69c47ab0"
+      },
+      "reviewBranch": "codex/classic-npr-proof-2026-11-16",
+      "mainUpdated": false
+    },
+    "closure": {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/Closure01/index.json",
+      "bytes": 515178,
+      "sha256": "a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97"
+    }
   },
   "previousClientMotionDocumentationIntegration": {
     "base": "5662c6113e9100610adccd5bbff808e7a20b1e4b",
@@ -7912,5 +8614,23 @@
     "Currentasset terms remain perasset: CC0Nature/Ruins/UAL/HDR, VRoidmale/officialVRMfemale modelterms and lilToonMIT are distinct. Preserve notices/provenance/originals/GUIDs.",
     "CurrentNPR Native/browser checks preserved23events/19scriptures/51details/28voice/stableIDs/save/People. Card source and protected15379files unchanged; freshCardPublic passed. Multiplayer remainsdisabled/futureupdate and fulloriginalCardparity incomplete.",
     "Lastautomation0 is historical/currentgoalactivationunknown; no24hourbackgroundexecution or automaticrecurrence claimed. Archived acquired snapshots grant no currentownership."
-  ]
+  ],
+  "lastCompletedWorkBeforeClassicNpr": {
+    "id": "GospelNpr-2026-11-11",
+    "status": "completed-technical-release-normalownrelease-Closure-artgoal-unfinished",
+    "productCommit": "2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759",
+    "deployedCommit": "ce9040d6882eba08a7dd71b787666d82a9996e2f",
+    "checkpointSaveCommit": "5d835d8cf3c5c3467fe42aa75079422ccf885871",
+    "checkpointCoreCi": 43124581847,
+    "checkpointHelperCi": 43124582117,
+    "releasedUtc": "2026-11-12T00:18:33.134686+00:00",
+    "ClosureCreatedUtc": "2026-11-12T00:20:06.879051+00:00",
+    "evidence": "activeWork.finalReleaseEvidence.closingState",
+    "nextGoal": "Improve twoactor dialogueframing/closeNPCbodyocclusion/fading, face/cloth/world artdetail and verifiedoriginalCardparity after a fresh independentinspection and newownlease. FaceSDF/AAA/user aesthetic/deviceFPS/fullartgoal completion unclaimed.",
+    "closingDocumentationD2CommitAndCi": "Actually completed afterward: D2/D3 normal save and paired CI passed, D3 corrected ignored-original omission and all259 committed raw blobs were verified. Frozen Closure/Checkpoint unchanged; see post-closure admission.",
+    "closingDocumentationCommit": "cd180dec745ffb257c9af263c5aebde910e8327c",
+    "closingCoreCi": 43127890298,
+    "closingHelperCi": 43127890486,
+    "postClosureAdmission": "Artifacts/Validation/Autonomy/GospelNprCameraResume-2026-11-11/Release/post-closure-ci-admission01.json"
+  }
 }

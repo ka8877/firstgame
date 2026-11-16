@@ -1,0 +1,50 @@
+{
+  "label": "idleBefore",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:29:32.300962+00:00",
+  "timeoutSeconds": 19.99833101600234,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 38187.671044873,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/Checkpoint01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 59564,
+    "ppid": 59531,
+    "pgid": 59564,
+    "sid": 59564,
+    "state": "R",
+    "startTicks": 3458967,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 59565,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/Checkpoint01/02-idleBefore/supervisor-result.json",
+    "sha256": "4a10887be04bd8cee8d19f53421fe52b69069f8bb7a1351730fcffb5aa05c264",
+    "bytes": 4975
+  },
+  "finishedUtc": "2026-11-16T11:29:32.457157+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/Checkpoint01/idleBefore.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

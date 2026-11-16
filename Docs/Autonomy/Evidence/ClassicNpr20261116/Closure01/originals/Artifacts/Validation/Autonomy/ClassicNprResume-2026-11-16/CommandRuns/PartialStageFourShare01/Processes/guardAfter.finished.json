@@ -1,0 +1,53 @@
+{
+  "label": "guardAfter",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "Tools/Autonomy/cycle_guard.py",
+    "check",
+    "--record",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:37:03.884109+00:00",
+  "timeoutSeconds": 44.992747475000215,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 38627.033009463,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 59781,
+    "ppid": 59736,
+    "pgid": 59781,
+    "sid": 59781,
+    "state": "R",
+    "startTicks": 3504119,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 59782,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/PartialStageFourShare01/04-guardAfter/supervisor-result.json",
+    "sha256": "9906332df27d67dddd2b2231b61ae364008bcfcaa6403f566b0c2b72ab1a01ad",
+    "bytes": 7029
+  },
+  "finishedUtc": "2026-11-16T11:37:05.237536+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/PartialStageFourShare01/guardAfter.stdout.log",
+    "sha256": "091ac4fa88378a7ac864fc4e82fe3cd72e52defb2c7dd7839ab0c28acd0491c4",
+    "bytes": 747
+  }
+}

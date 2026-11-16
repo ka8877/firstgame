@@ -1,24 +1,52 @@
+## ClassicNpr 새 공개·검증·원본 보존·정상 종료 — 2026-11-16
+
+판마 덱·도감과 예수님의 길 인물·대화 개선본을 공개했습니다. 제품 main `1af1205e…`/공개 `9e7c049b…`이며 [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=9e7c049b)·[예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=9e7c049b)에서 테스트할 수 있습니다. PC·모바일·공개6회와 최종 봉인, 전체15,439공개파일 전달을 검증했습니다.
+
+Checkpoint01의10,384원본/18조각/565,882,862B와 문서를 포함한26 raw Git blob을 실제 검증하고 별도 검토 브랜치에 정상 저장했습니다. D1 `42ebeb91f0a112a62796333944242c37c6e918e3`, push Core43860689612/helper43860689553의 모든 실제 작업·단계가 성공했습니다. 독립 최종 유휴와 소유 후손 정리 뒤 `2026-11-16T20:59:06.165105+09:00` KST에 자기 소유권을 정상 해제했고 available을 관측했습니다. Closure01은 실제 후기 원본1095개, index515178B/SHA256 `a9e9a8c15ba04cd2599e0c9194cc6b196cde7355088ba7e5c911eb3ef4884f97`로 완료했습니다. 현재 소유 실행이나24시간 백그라운드 개발을 주장하지 않습니다.
+
+현재 문서·검증자료의 검토 대상은 [PR #11](https://github.com/ka8877/firstgame/pull/11)입니다. 약566MB 원본 보존을 포함한 main 직접 반영은 자동 승인 검토가 거절해 수행하지 않았습니다. 명시적인 이 PR 반영 승인 전에는 main에 합치지 않습니다. 이번 종료 문서·Closure를 처음 저장할 후속 D2 커밋/CI는 작성 뒤 실제 관측하며 이미 동결한 Closure에 소급 넣지 않습니다.
+
+판마의 실제3덱 슬롯·정확한 후기 도감·작은 control과 EP/시장P 근거, 예수님 인물의 옷/얼굴/표정·단순 환경·숨은 성경 스크롤 조작은 다음 개선 대상입니다. 원작 전체 재현·원신급 아트·사용자 미적 승인은 아직 완료하지 않았습니다.
+
+아래는 이 회차의 진행 중 작성 기록입니다. 그 안의 현재/소유자/대기 표기는 각 작성 시점의 이력이며 위 정상 종료와 실제 새 사용자 지시를 우선합니다.
+
+---
+
 # 판마 원작 카드 창·예수님 NPR 완성도 개선 진행 — ClassicNpr
 
-현재 **판마 Native03 11/0/0·Web02·새 Root22, 예수님의 길 Native03 17/0/0·Web01·새 Root34와 Core02 전체311은 유효**합니다. 실제29개 viewport로6개 경로 소스를 동결했습니다. 두 Gospel 미리보기·첫 Card PC 검사의 실패를 보존하고 새 개정 이름만 인식하도록 하네스를 고친 뒤 **필수 exact-script Range04가 실제123통과**했습니다. **CardDesktop Browser02는115/115검사·82PNG·필수60원본 Root 직접 검토·오디오4/실제 재접속2로 완료했습니다. 남은5회와 새 공개는 아직 완료되지 않았습니다.**
+Root가 실제 Checkpoint01의10,384원본·18조각·결합565,882,862B를 독립 재독해 보존했습니다. index4,604,790B/SHA256 `28decc424fda18af253013652ac07ca5632f5e7540a06bc689af95b460a86961`, 결합 SHA256 `f5adb3e95b8c25a679e423129be7924e68f6cf6cde9adf4bb97734801e3d8178`입니다. 완료 wrapper의4개 event exit0·빈 후손을 확인했습니다. 이 시점은 로컬 원본 보존 완료이며 이번 문서·모든 조각/index/raw 속성의 실제 Git blob 저장·정상 push/paired CI는 후속 확인합니다. 최종 독립 유휴·정상 자기해제·Closure도 아직 미래 결과입니다.
 
-현재 실제 소유권은 새 owner `cd835d1e…`, lock `a4321cde…`이며 [lease](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json)에 있습니다. 고정 회차는 **2026년11월16일10:59:54~16:59:54 KST**이고 이전 NPR 잠금을 갱신하거나 재사용하지 않았습니다. 브랜치는 `codex/classic-npr-2026-11-16`, 기준 main은 `cd180dec…`입니다. 실제 생성·Unity·검사·브라우저·Git·빌드·배포는 Root가 단독 소유합니다.
+**새 버전 Pages 배포·전체 공개15,439파일 GET/Root 포털2장·두 게임6개 suite와 FinalSeal01을 완료**했습니다. M2 `1af1205e…`, 공개 P `9e7c049b…`이며 Stage02는971,459,514B로 예산 안입니다. Portal01의4JPEG503 실패를 보존한 뒤 같은 검증기의 Portal02가15,439/15,439 HTTP200·전체SHA와 새 full-page2장 Root 승인을 통과했습니다. 판마115/121/129·예수님의 길118/99/110검사, **필수360+보충5=365 browser ledger 원본**을 Root가 확정했고 매회 오디오4·실제 재접속2를 확인했습니다. Native선택56/Portal2는 별도입니다. **Checkpoint 원본 보존을 완료했고, 이번 문서/Checkpoint의 Git 저장·CI와 최종 유휴/자기해제·Closure는 작성 시점에 대기 중입니다.**
 
-공개판은 여전히 [예수님의 길](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=ce9040d6)·[판타지마스터즈](https://ka8877.github.io/firstgame/games/fantasy-cards/)의 이전 검증판 M `2dfd4a47…`/P `ce9040d6…`입니다. 새 소스의 공개나 미적 승인을 이전 통과로 대신하지 않습니다. 이전 NPR의 종료 문서 저장 보완 D3 `cd180dec…`와 Core43127890298/helper43127890486도 실제 성공했고259 Git blob 바이트를 확인했습니다. 해당 후기 영수증은 frozen Closure 밖의 `post-closure-ci-admission01.json`에 별도로 보존돼 있습니다.
+원 ClassicNpr 회차는 FinalIdleOrigin01의4개 exit0·빈 후손 확인 뒤 **07:33:53.100589 UTC에 정상 자기 해제·available**을 마쳤습니다. 현재는 별도로 취득한 `ClassicNprResume-2026-11-16`, owner `555529fe…`, lock `9495e3c1…`의 [실제 lease](../../Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/lease.json)입니다. 새 고정 기간은 **2026년11월16일16:34:25~22:34:25 KST**이며 갱신이 아닙니다. [전환 원문](../../Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/lease-transition01.json)은2,647B·SHA `c32feb76…`입니다. 이전 Native/Web/두 PC/Root 원본은 실제 원 소유자 아래 보존하고 OUT/build/**원 PROOF** 경로는 바꾸지 않았습니다. Root만 실행/Git/배포합니다.
 
-첫 후보 C1 `bcad026d629ce4419c4a15d2ec7aa35b013ae439`를136파일로 정상 push했고 **[PR9](https://github.com/ka8877/firstgame/pull/9)는 draft**입니다. Artifacts/Evidence는 포함하지 않았고 Root가 작업에 연결했습니다. C1 helper43813141315는 성공, Core43813141280은 마지막 보고 시 진행 중입니다. 이후 하네스 수정이 있어 **C1은 최종 후보가 아니며 C2는 아직 저장되지 않았습니다.** 최종 후보의 실제 CI·정상 main 반영·공개 P를 따로 확인합니다.
+새 공개 파일은 [예수님의 길](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=9e7c049b)·[판타지마스터즈](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=9e7c049b)에 반영됐습니다. actual Pages43843673759는 M2의 `workflow_dispatch`로 모든 단계가 성공했습니다. 이전 공개 M `2dfd4a47…`/P `ce9040d6…`와 그 전체 검증/종료는 보존 이력이며 새 공개 검증으로 재사용하지 않습니다. 새 currentDeployment는 배포·전체 공개 전달·6개 gameplay·최종 봉인 완료와 남은 문서 저장/종료를 구분합니다.
+
+C2/PR9/M1과 Stage01 nested-license mkdir 실패는 보존했습니다. 한정된 stager 수정 **C3 `d60cfe9bdd46b9cb00789b2388bd707a7ec523f8`가 [PR10](https://github.com/ka8877/firstgame/pull/10)으로 M2 `1af1205ea447c4bb627d436e6b17b14177f91c51`에 정상 병합**됐습니다. 실제 후보 PR Core43839601574/helper43839601509와 M2 push Core43841190772/helper43841190705가 모두 성공했습니다. 게임/하네스/계획/로컬 proof 계약은 바꾸지 않았습니다. Root가 실제 공개 proof와 완료된 Checkpoint를 대조한 뒤 이 tracked 문서에 적용했습니다.
 
 | 현재 작업 | 실제 상태와 검증 범위 |
 |---|---|
 | 판마 원작 덱 근거 | 2015-07-24 글의 실제550×412 덱 화면을 확보·Root 직접 검토. 좌우10행 텍스트 목록·가운데 추가/제거·하단 실제 통계가 기준이며 상세는 [대조 기록](../Research/ClassicLibraryUi20261116.md) |
 | 판마 UI·현재 Native | 좌우10행 목록·중앙2개 추가/제거·실제 덱 통계, 원본 그림 보기, 소유 카드/도감·필터·선택·상세와 실제 저장/재접속·잘못된 저장 검사를 연결. 실제 Web 겹침 수정 후 **Native03 11/0/0**,새49PNG·새 Root22승인(`606f5b29…`). 후기 도감 정확한 원작 전체 복원은 미입증 |
 | 예수님 인물·재질 | 피부 내부 외곽선 제거, 얼굴/옷/머리의 역할별 음영·절제한 하이라이트와 같은 실제 모델 초상화. 실제 얼굴 프레이밍35.364<36 실패는 초상화 거리로 수정. 현재 Native03 **17/0/0**,새 현재34PNG 전부 Root 직접 승인 |
-| 예수님 장면 | 두 실제 인물/장애물을 함께 보는 대화 카메라·상대 보호, 기존 일반 NPC 가림/복원, 지면/식생/원경·무대 조정. 마리아 대화·성경 복귀·저장/재접속·물리 위치를 포함한17사례와 선택 Web01 통과. 렌더 검사는 실제 URP2draw를 기다리며 기준>=2 유지; 안정된 브라우저 화면 검토 필요 |
+| 예수님 장면 | Native17/Root34/Web01과 PC118/필수70Root+성전 동선2장·모바일99/필수56Root 완료. 두 인물·성경 복귀·실제 NPC 이동/저장과 원 소유자를 보존. 공개110/필수56Root+실제 성경 스크롤1도 완료했으며 목도리·각진 hood·재질/단순 배경 품질 한계 유지 |
 | 최종 현재 소스 계약 | Handoff05·NativeJSON `9703c735…`, Card11/Gospel17. 기존 Card9/Gospel15를 모두 유지하고 실제 변경 사례를 추가. Card Quest 실제 하네스 변경 뒤 Gospel도 엄격한 새 Native03으로 재실행 |
-| 현재 도구·Core | **Core02 전체311/0/0과 필수 exact-script PublicRangeUnit04 실제123통과.** 직접 argv `python3 Tools/Validation/test_fm_public_reload_ranges.py`, wrapper10,902B·`f94cc5bf…`. Contract05/old Range02와 discovery03 통과는 별도 이력이며 대체 결과로 쓰지 않음 |
+| 새 도구·Core source refresh | **Core03 실제311·직접 PublicRangeUnit05 실제123**, 각각4개 outer event exit0/빈 후손 확인. 이전02/04와 discovery는 이력으로 보존 |
 | 현재 두 Web | **CardWeb02는 현재 Native03/소스 `5e49734f…`에, GospelWeb01은 Native03/소스 `bb80116c…`에 정확히 결합해 통과.** Card outer wrapper10,866B·`c068c80b…`, build-proof index2,701,306B·`78d2ccab…`. Gospel/Card 현재 proof와 이전 Web01 이력은 구분 |
 | 일반 입력·경로 소스 | Card PC/터치 미리보기는 불변 상태로 종료했고 Root가 간격/필터/소유/상세/복귀를 봄. 두 Gospel 미리보기는600초 마감 **실패**. 실제29viewport의 source review 뒤05:50Z에3파일/6게임 경로를 **소스 동결**했으며 제품/suite 승인과 구분 |
-| 전체 브라우저 | 첫 Card Desktop Browser01은 오디오 인식 gate에서 **실패**, raw17파일 byte-exact 보존. 새 개정만6곳에 추가하고 기존 실제 media/public gate를 유지. Browser02는 첫 오디오 통과·Root16원본까지 실행 중이며 전체 성공 아님. Card60/59/59·Gospel70/56/56 원본·매회 오디오4/재접속2·최종 Root/정리는 계속 필수 |
+| 완료한 판마 PC | Browser02 **115/115·82PNG·필수60Root**, 오디오4/재접속2. Canonical12,709,639B/`ae572855…`, raw8,928,112B/`acf9c293…`, ledger23,509B/`cb4cb592…`, outer wrapper`d7ad55dd…` |
+| 완료한 예수님 PC | Browser01 **118/118·97PNG·필수70Root+성전 동선2장**, PCM sample24/24/25/24·nav0/1/2. Canonical924,596B/`1dba28f1…`, raw893,656B/`d142ad86…`, ledger27,643B/`9390fdf9…`, outer`e674067d…` |
+| 완료한 두 모바일 | 새 owner 아래 **CardMobile121/121·필수59Root+보충1, GospelMobile99/99·필수56Root** 모두 최종 승인. 매회 오디오4/실제 재접속2. 전체 로컬 필수245·추가3장이며 공개/실제 기기 성능 승인은 아님 |
+| Stage02·실제 게시 | **15,439파일·971,459,514B**, manifest`f21798e2…`, full Readback02/실제 nested license15개 바이트 일치. Publish01 정상·P`9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70`·Pages43843673759 성공 |
+| 전체 공개 전달·포털 | **Portal02 15,439/15,439 HTTP200/전체SHA·Root 새 full-page2장 승인**. Canonical10,249,431B/`c54deab6…`, 미승인 raw 사본`portal02-unreviewed-report.json`/`db7982…` 불변. Outer`7025aeae…`4개 exit0/빈 후손. Portal01의4JPEG503 실패/viewport 미통과는 정상 previous archive에 그대로 |
+| 완료한 판마 공개 | PublicMobile844 Browser01 **129/129·85PNG·필수59Root+page5보충1**, 오디오4/실제 재접속2·nav0/1/2·outer4개 exit0/빈 후손. Canonical18,676,367B/`036ca241…`, raw14,894,564B/`369a3dcf…`, outer`f9c1c6a2…`. 실제 보유55/27·SP200·50덱 사본/마지막 재추가 순서를 재접속2회 뒤 보존했고 Root가 page5/end→page1 순서를 봄.49장 저장은 실제 modal로 거절 |
+| 완료한 예수님 공개 | PublicMobile844 Browser01 **110/110·81PNG·필수56Root+실제 touch 성경 스크롤 보충1(ledger57개)**. PCM sample25/24/24/37·medianRms .00651673/.02159486/.00639100/.02729292, 실제 재접속2/nav0/1/2·outer4개 exit0/빈 후손. Canonical892,042B/`650c033e…`, raw866,872B/`ef69683c…`, outer`da7195b1…` |
+| 최종 전체 봉인 | **FinalSeal01 실제 성공**, whole builds+Portal+현재6개 game/profile 전체를 확인하며 보존 게임 면제 아님. Exact last JSON line+newline77,122B/SHA`9f8226029058a6bc81401d35e4fda3fcd3cc18a944de4e5e2ae12ae46c8ee319`; outer10,925B/`7c4ee4f5…`4개 exit0/빈 후손 |
+| 남은 보존·종료 | 실제 Checkpoint01의10384원본/18조각 보존 완료. 이번 문서/원본의 검토 브랜치 저장·그 CI와 새 회차 최종 유휴/정상 자기해제·standalone Closure는 작성 시점에 대기. 동결 Draft는 보존하며 이후 실제 결과는 tracked 문서에만 추가 |
+
+보조 도구 실패도 따로 남겼습니다. Readback01의 license>=16 가정은 잘못됐고 별도 v2가 실제 source15개를 정확히 대조했습니다. ShareStage02Core01은 manifest 형태 가정 때문에 **변경 전에 실패**했고 별도 V2/Core02는10쌍/212,088,305B의 경로·바이트·mode를 모두 유지해 성공했습니다. 게임 proof 계약을 완화하거나 첫 실패를 성공으로 바꾸지 않았습니다. Publish01은 격리한 child/tmp 신규 객체를 정리했고 Root의 Git/환경/객체는 그대로였습니다.
+
+별도 historical core 공유의 최초50대상 범위는 NPR 보호 Card10개가 이미3링크라 변경 전에 실패했습니다. 보호 역할에 따라10개 모두를 제외한 V2의 **ClosedPublicCoreShare02는 실제 완료**했습니다.40대상·원 proof-source inode15개 보존·부모16개와 모든 경로/바이트/mode, 관련 없는9개 tree 메타데이터를 확인했습니다. 논리 공유865,858,414B/할당 중복865,959,936B이며 workspace 여유383,926,272→ledger 기록 전1,222,328,320→기록 후 관측1,194,717,184B입니다. Outer4개 exit0/빈 후손, SHA`912186e6557d6c4ad9d5991c0146c32a50d2edb721726d250b0b833c81d21cb6`이고 보호 NPR Card10별칭/ClientMotion proof도 전혀 바뀌지 않았습니다. 원 cache/소스/raw test/고유 원본 바이트 제거와 제품 변경은 없으며 첫 실패는 그대로입니다.
 
 재연결 때 `/tmp`가 초기화됐고 workspace 여유는 약118MB였습니다. 전체 Library 임시 이동/제거 요청은 자동 승인 검토가 거절했으며 실행되지 않았습니다. 대신 같은 workspace의 닫힌 runtime 중복46,050쌍만 실제 SHA로 대조해 공유했고 **모든 파일 경로·바이트를 유지**한 채 여유117,592,064B→2,421,817,344B를 관측했습니다. inode·mtime·링크 수 변화는 기록했으며 공유 파일은 제자리 수정·chmod·utime하지 않습니다. Gospel용 PackageCache는 원본을 남기는 복사로20,820파일/1,371,886,587B를 임시 경로에 준비했습니다.
 
@@ -26,11 +54,11 @@
 
 이후 현재 Card runtime의 JPEG15,350쌍도 모든 경로·바이트를 유지해 공유했습니다. 전체15,365 runtime 해시·기존 proof 원문/메타·소스가 불변인 상태에서 당시 여유679,849,984→1,435,697,152B를 관측했습니다. 이는 old build/proof 보존과 Web02 이전의 실제 스냅샷이며 현재 가용 공간이나 전체 새 공개 예산 통과가 아닙니다.
 
-RetainedBeeArchive01은456,753,143B archive 작성을 실제 완료했습니다. 그러나 **원본 old cache2,281파일 삭제는 자동 승인 검토가 실행 시작 전에 거절**했고 파일은 하나도 바뀌지 않았습니다. 원본은 그대로이며 archive/소스 제안이 삭제 허가를 뜻하지 않습니다. 더 안전한 파생 archive만의 이동 소스 제안은 준비됐지만 브라우저 실행 중에는 실행하지 않았습니다.
+원본 Bee2,281파일 삭제는 자동 승인 검토가 시작 전에 거절해 **실행하지 않았고33디렉터리와 모든 바이트/inode/메타는 workspace에 그대로**입니다. 안전한 DiscardNewDerivedArchive01만 나중에 완료했으며 검증된 임시 복사 뒤 자체 생성한 새 파생 archive의 workspace 사본만 버렸습니다. 역사적 archive의 workspace 경로는 이제 없고 tmp 사본은 영속 보존물이 아닙니다. 원본 cache 삭제 허가나 실행으로 해석하지 않습니다.
 
 미리보기의 관측과 실패 경계를 구분합니다. Gospel PC에서 Root는 실제13개 viewport를 보았고 마리아 두 인물11·성경12·같은 두 인물/대사 복귀13도 직접 보았습니다. 다만 request13/canvas clip과 마지막 캡처가 마감으로 중단돼 없는 메타데이터를 만들어 넣지 않습니다. 모바일은 실제 터치 필드·요셉 두 인물6·성경7을 봤고 뒤 actions7은 실행되지 않았습니다. **모바일 마리아는 미리보기로 입증하지 않았으며 전체 경로에서 계속 필수**입니다. 두 실패 모두 finalByteObservationComplete=true·runtime/witness/소스 불변이고 PC pageErrors0 관측도 전체 suite 통과는 아닙니다. [29viewport source review](../../Artifacts/Validation/ClassicNpr-2026-11-16/Root/ordinary-geometry-source-review.json)는30,077B·SHA `48ed3901…`입니다.
 
-첫 CardDesktop Browser01에서는 실제 소리가 재생 중이고 PCM이0이 아니며 진행17.882초였지만, 새 Classic 개정이 이전 allowlist에 없어30초 fallback이 해당 미디어를 잘못 버렸습니다. `nativity-web-smoke`4곳과 `fm-local-media-errors`2곳에 **새 Card 개정만** 추가했습니다. 제품·Native/Web·지문은 바꾸지 않았고 duration/PCM/격리/진행/시간·공개 byte/역할 gate를 완화하지 않았습니다. [실패17파일 보존](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json) 뒤 실제 required exact-script04가123통과했으며 discovery03은 이력으로 남습니다. 현재 Browser02의 첫 오디오/Root16 진행을 전체 suite 성공으로 쓰지 않습니다.
+첫 CardDesktop Browser01의 실제17.882초/비영PCM은 새 개정 allowlist 누락으로30초 fallback이 버렸습니다. 새 개정만6곳에 추가해 모든 실제 duration/PCM/격리/진행/시간·공개 byte/역할 gate와 제품/Native/Web 지문을 유지했습니다. [실패17파일](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/card-desktop01-failure-retention01.json)은 불변이고 직접-script04=123, 새 CardDesktop02=115는 독립 결과입니다. 두 실패 Gospel 미리보기도 전체 PC01 성공으로 소급 승인하지 않습니다.
 
 **겹침 수정은 실제 브라우저 원본에서 시작했습니다.** 이전 CardWeb01의 [미리보기 frame0002](../../Artifacts/Validation/ClassicNpr-2026-11-16/OrdinaryWebPreview/FantasyCards/desktop/CardDesktop01/frame-0002-viewport.png)는 지원 도감 필터가 첫 카드 윗부분과 겹침을 보여 줬습니다. 미리보기 wrapper는 정상 종료·정리를 마쳤지만 제품 판정을 만들지 않았습니다. 지원 도감 grid만 top140·행87·인쇄72로 조정해 마지막 설명314가 footer317 앞에 오게 했고, 소유 UI·조작·기존 검사·Native 계약9703·Gospel·Core/Range는 바꾸지 않았습니다. [수정 근거](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/supported-grid-spacing-source-admission01.json) 뒤 새 CardNative03/새 Root22/Web02를 실행했습니다.
 
@@ -38,9 +66,11 @@ RetainedBeeArchive01은456,753,143B archive 작성을 실제 완료했습니다.
 
 실패와 이전 선택은 보존합니다. GospelNative01은 전체17중14사례 성공/3실패인 **전체 실패**이며 현재 제품 통과로 세지 않습니다. All23의 실패는 Unity 테스트의 중첩 실패 후 남은 PC11/resume 오염으로 독립 소스 검토했고 제품·기존 저장 테스트를 우회 수정하지 않았습니다. GospelNative02의 당시17/0/0·Root34승인은 공동 계약 변경 뒤 현재 승인으로 재사용하지 않았고, old canonical/Root 원문74개를 `CanonicalHistory/PathOfDawn/Native02`에 바이트 그대로 보존한 뒤 현재 Native03의73개 행을 복사했습니다. 실제 [선택 기록](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/gospel-native03-canonical-copy01.json)을 따릅니다.
 
-현재 Gospel Root 검토는 Native03 완료 뒤 **새34개 파일을 모두 다시 본** 별도 승인입니다. [검토 원문](../../Artifacts/Validation/ClassicNpr-2026-11-16/Root/gospel-native-review.json)은10,827B·SHA `ae1a4a48…`이고 마리아/플레이어·성경 열기/복귀·저장/재접속·5인물 피부/5초상화·10도입 무대·23사건/19본문의 제한적 Native 범위입니다. 일부 도입 PNG는 전환 중 overlay를 담고 주변 NPC가 전경에 들어올 수 있어 안정된 실제 브라우저 화면은 별도로 확인해야 합니다. 의상·배경·표정의 세부는 원신급 목표에 아직 못 미칩니다.
+Gospel 공개의 실제 터치에서 Joe는5500ms 왼쪽으로0.5m, Mary는4500ms 오른쪽+1000ms 오른쪽아래 대각으로1.5m에 접근했습니다. Temple은4000ms 오른쪽+1700ms 전진+1100ms 오른쪽위 대각 뒤2.7m를 지나쳤고600ms 왼쪽아래 보정으로1.7m active에 들어가 실제 대화했습니다. 게임/저장/JS 주입은 없었습니다. 성경 글이 mask edge에 걸린 화면에서 Root가700ms 위 drag(.28,.67→.28,.36)로 `돌아가매`와 verse5 마지막 줄을 실제 보았고 `g2-reading-before-reload-review-2`/`ab7667…` 보충을 남겼습니다. 소스를 고쳐 통과시킨 것이 아니며 **숨은 스크롤 조작 안내는 미래 UX 과제**입니다. Joe의 같은 대사/Book+reload·Mary 같은 대사/몸체의 Book복귀와 최종12/19본문·14/23사건·lamp·savedXYZ·people nav2복원을 확인했습니다.
 
-판마2649지원/15350원본·ID·소유·덱·재화·저장·규칙·비활성 멀티플레이와 Gospel23사건/19본문·51세부/28음성·실제 NPC/자유 이동·안정ID·저장을 보존합니다. 일반 그림자를 Face SDF라고 하거나 Native/Web/제한적 원본 검토로 원신급·실제 기기 FPS·사용자 미적 승인을 주장하지 않습니다. 보존 도구 `b8099406…`는 Root가 코드·실제28개 diff hunk·구문을 검토해 실행 없이 동일 바이트로 설치했으며 [source admission](../../Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/Release/preservation-source-admission01.json)만 완료했습니다. Checkpoint·정상 종료·Closure·미래 CI나 새 공개 결과는 아직 아닙니다.
+Native34·PC70+성전 동선2장·모바일56·공개56+scroll1은 각각 독립 실제 근거입니다. 작은 profile 얼굴·뻣뻣한 마리아 목도리/각진 hood·재질/의상/표정·단순 배경은 계속 남습니다. 모든 각도의 완전한 발 프레이밍·원신/AAA·pixel-exact·실제 기기 FPS·사용자 미적 승인을 주장하지 않습니다. [최종 stage 사실 identity](../../Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/stage02-final-facts-identity01.json)는1,769B/SHA`224bb5e39a14854b42a58a34a42f5f5e6f844e9d6746df81d81b63364b02cca3`로 실제 manifest포함971,459,514B를 더한 별도 원문이고 originalidentity01은 불변입니다.
+
+판마2649지원/15350원본·ID·소유·덱·재화·저장·규칙·비활성 멀티와 Gospel23사건/19본문·51세부/28음성·실제 NPC/자유 이동·안정ID·저장을 유지합니다. 새 continuation 도구52검사와 ResumeIdentity01의 정상4단계/빈 후손을 실제 확인했고 helper`ef7718bc…`/activation`2a193a38…`/Root helper`6747e58d…`/two-cycle 보존 소스`7eeb1d15…`를 새 소유권 취득 뒤 동일 바이트로 설치했습니다. 원 PROOF/Root 승인은 이전 소유자 그대로입니다. 새 공개 파일/Pages/Portal02/6개 suite/FinalSeal01과 정확한 후보/main CI는 완료했고 Checkpoint 원본 보존도 마쳤지만 최종 Resume 해제·Closure·그 미래 저장/CI 결과는 작성 시점에 아직 없습니다.24시간 자동 개발/예약 실행을 이 대화형 회차로 주장하지 않습니다.
 
 ---
 

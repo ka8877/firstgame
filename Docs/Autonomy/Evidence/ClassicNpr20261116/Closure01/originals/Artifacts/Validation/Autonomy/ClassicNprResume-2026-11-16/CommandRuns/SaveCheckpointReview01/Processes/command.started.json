@@ -1,0 +1,25 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/Release/save-indexed-release-review-branch.py",
+    "--phase",
+    "checkpoint",
+    "--expected-head",
+    "1af1205ea447c4bb627d436e6b17b14177f91c51"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:44:36.876835+00:00",
+  "timeoutSeconds": 3585.592035103,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 39092.049310883,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/SaveCheckpointReview01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  }
+}

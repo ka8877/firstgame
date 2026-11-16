@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "status": "four-derived-failed-stage-copies-shared",
+  "pairs": [
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof/FantasyCards-Web/Runtime/Build/11bdb36299a7c576dd77b8712965ef38.data.unityweb",
+        "sha256": "732092c96f68b2ddd982ef28d0b8b5f8014bde6b65af340e5f7bae01b15c340f",
+        "bytes": 99658082,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 275696,
+        "links": 2,
+        "mtimeNs": 1794806256787496751,
+        "blocks": 194648
+      },
+      "target": {
+        "file": "Artifacts/ClassicNprWebPlaytest.previous-20261116T093737612993Z/games/fantasy-cards/Build/11bdb36299a7c576dd77b8712965ef38.data.unityweb",
+        "sha256": "732092c96f68b2ddd982ef28d0b8b5f8014bde6b65af340e5f7bae01b15c340f",
+        "bytes": 99658082,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 275696,
+        "links": 2,
+        "mtimeNs": 1794806256787496751,
+        "blocks": 194648
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof/FantasyCards-Web/Runtime/Build/e689e9007795a790ef309ebb7d32c91e.wasm.unityweb",
+        "sha256": "06a6378bd634b8a509520bfc9c8925cee78fdfa7027372231b022660b574b94b",
+        "bytes": 14208896,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 275680,
+        "links": 2,
+        "mtimeNs": 1794806256951495530,
+        "blocks": 27752
+      },
+      "target": {
+        "file": "Artifacts/ClassicNprWebPlaytest.previous-20261116T093737612993Z/games/fantasy-cards/Build/e689e9007795a790ef309ebb7d32c91e.wasm.unityweb",
+        "sha256": "06a6378bd634b8a509520bfc9c8925cee78fdfa7027372231b022660b574b94b",
+        "bytes": 14208896,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 275680,
+        "links": 2,
+        "mtimeNs": 1794806256951495530,
+        "blocks": 27752
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof/PathOfDawn-Web/Runtime/Build/043d0ef83f182d9142d7deefa8e8dbf2.data.unityweb",
+        "sha256": "f434997f7263b3baee69fd981fa9fdc6b1ec672160152b89637e0da15234a80b",
+        "bytes": 81993222,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 291303,
+        "links": 2,
+        "mtimeNs": 1794804291853443471,
+        "blocks": 160144
+      },
+      "target": {
+        "file": "Artifacts/ClassicNprWebPlaytest.previous-20261116T093737612993Z/games/path-of-dawn/Build/043d0ef83f182d9142d7deefa8e8dbf2.data.unityweb",
+        "sha256": "f434997f7263b3baee69fd981fa9fdc6b1ec672160152b89637e0da15234a80b",
+        "bytes": 81993222,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 291303,
+        "links": 2,
+        "mtimeNs": 1794804291853443471,
+        "blocks": 160144
+      }
+    },
+    {
+      "source": {
+        "file": "Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/BuildProof/PathOfDawn-Web/Runtime/Build/ab378ebb2fb3aefd6469cc451e1d0db7.wasm.unityweb",
+        "sha256": "a3e3f815e09d74643a0988f0173e7703f15221edc4026a857f746fee2a2cdfbb",
+        "bytes": 15912135,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 291306,
+        "links": 2,
+        "mtimeNs": 1794804291993442436,
+        "blocks": 31080
+      },
+      "target": {
+        "file": "Artifacts/ClassicNprWebPlaytest.previous-20261116T093737612993Z/games/path-of-dawn/Build/ab378ebb2fb3aefd6469cc451e1d0db7.wasm.unityweb",
+        "sha256": "a3e3f815e09d74643a0988f0173e7703f15221edc4026a857f746fee2a2cdfbb",
+        "bytes": 15912135,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "device": 27,
+        "inode": 291306,
+        "links": 2,
+        "mtimeNs": 1794804291993442436,
+        "blocks": 31080
+      }
+    }
+  ],
+  "logicalDuplicateBytes": 211772335,
+  "beforeWorkspaceFree": 528445440,
+  "afterWorkspaceFree": 734748672,
+  "checkpointUnchanged": true,
+  "failedStageBytesUnchanged": true,
+  "targetMetadataChanges": "Four derived targets adopt retained source inode/mtime/allocation/nlink; source bytes/mode/uid/gid/inode/mtime/allocation stay exact. Parent directory mtime/ctime and source ctime/nlink may change.",
+  "scope": "Only four failed-stage regenerated copies now share retained proof originals. No original, raw evidence, cache, source or public path was removed."
+}

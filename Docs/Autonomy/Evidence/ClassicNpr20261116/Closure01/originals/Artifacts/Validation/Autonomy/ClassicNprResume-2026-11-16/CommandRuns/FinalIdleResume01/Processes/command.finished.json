@@ -1,0 +1,50 @@
+{
+  "label": "command",
+  "argv": [
+    "python3",
+    "Tools/Environment/assert-runtime-idle.py"
+  ],
+  "cwd": "/workspace/firstgame",
+  "startedUtc": "2026-11-16T11:58:31.450790+00:00",
+  "timeoutSeconds": 3585.6043402139985,
+  "privateProcessGroup": true,
+  "sharedSafeEndMonotonic": 39926.427768984,
+  "cleanupAndReportReservedSeconds": 12,
+  "processContainment": "owned-descendants-v1",
+  "environmentOverrides": {
+    "FIRSTGAME_VALIDATION_ROOT": "/workspace/firstgame/Artifacts/Validation/ClassicNpr-2026-11-16",
+    "FIRSTGAME_BUILD_ROOT": "/workspace/firstgame/Artifacts/ClassicNprBuilds",
+    "PYTHONPYCACHEPREFIX": "/workspace/firstgame/Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/GeneratedPythonCache",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONOPTIMIZE": "0"
+  },
+  "supervisorIdentity": {
+    "pid": 61550,
+    "ppid": 61514,
+    "pgid": 61550,
+    "sid": 61550,
+    "state": "R",
+    "startTicks": 3632882,
+    "uids": [
+      1000,
+      1000,
+      1000,
+      1000
+    ]
+  },
+  "supervisorStillAlive": false,
+  "exitCode": 0,
+  "pid": 61551,
+  "containmentProvedEmpty": true,
+  "containmentReceipt": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/ContainedCommands/FinalIdleResume01/03-command/supervisor-result.json",
+    "sha256": "66e674a2c04f63d3899fdca26b7f9ea0ae7530e77d8272efe918eec68383b2b9",
+    "bytes": 4843
+  },
+  "finishedUtc": "2026-11-16T11:58:31.609234+00:00",
+  "log": {
+    "file": "Artifacts/Validation/Autonomy/ClassicNprResume-2026-11-16/CommandRuns/FinalIdleResume01/command.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}
