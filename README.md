@@ -1,3 +1,11 @@
+## main 자동반영 승인·PR #11 반영 완료 — 2026-11-16
+
+사용자 지시: “메인자동반영해 물어보지말고”. 기존 승인된 firstgame 작업 범위에서 검증을 통과한 변경은 추가 승인 질문 없이 main에 정상 반영한다. 기존 검증·원본 보존 절차를 따른다.
+
+[PR #11](https://github.com/ka8877/firstgame/pull/11)은 main `7cbc0245992dcc8d47913239b6d11d2d7269c896`에 정상 병합했다. D2의1,122개 raw Git 파일과 Core/helper 성공 기록도 별도 MainIntegration01에 보존했다. 공개 게임의 소스 M2 `1af1205e…`와 배포 P `9e7c049b…`는 해당 공개 당시의 실제 식별자로 유지한다. 아래 승인 대기·D2 저장 대기는 각 이전 작성 시점의 이력이며 이번 사용자 승인과 실제 병합을 우선한다.
+
+---
+
 ## ClassicNpr 새 공개·검증·원본 보존·정상 종료 — 2026-11-16
 
 판마 덱·도감과 예수님의 길 인물·대화 개선본을 공개했습니다. 제품 main `1af1205e…`/공개 `9e7c049b…`이며 [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=9e7c049b)·[예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=9e7c049b)에서 테스트할 수 있습니다. PC·모바일·공개6회와 최종 봉인, 전체15,439공개파일 전달을 검증했습니다.

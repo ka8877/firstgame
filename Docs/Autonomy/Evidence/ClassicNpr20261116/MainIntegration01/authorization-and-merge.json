@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "observedUtc": "2026-11-16T14:06:06.177445+00:00",
+  "userInstruction": "메인자동반영해 물어보지말고",
+  "status": "explicit-user-authorization-and-actual-main-merge",
+  "repository": "ka8877/firstgame",
+  "pr": "https://github.com/ka8877/firstgame/pull/11",
+  "approvedHead": "254f3de7ece2d4224757d4984ec84fba89c92b8f",
+  "mergeCommit": "7cbc0245992dcc8d47913239b6d11d2d7269c896",
+  "merged": true,
+  "originalExpectedBase": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+  "productSourceCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
+  "publicCommit": "9e7c049b79d7991bc60e0d4bf06dfe4ec4333b70",
+  "futureMainPolicy": "Within the existing authorized firstgame scope, normally integrate verified changes into main without repeating the same approval question. Retain existing validation and original-preservation rules.",
+  "d2Ci": [
+    {
+      "commit": "254f3de7ece2d4224757d4984ec84fba89c92b8f",
+      "workflowKind": "core",
+      "runId": 43862847757,
+      "receipt": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-core-ci.json",
+        "bytes": 1469,
+        "sha256": "9fcaa917cd2c10c4b73fe97234d535e4fcff88f44a4b3a8921f5caac6bbc62bc"
+      }
+    },
+    {
+      "commit": "254f3de7ece2d4224757d4984ec84fba89c92b8f",
+      "workflowKind": "helper",
+      "runId": 43862847641,
+      "receipt": {
+        "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-helper-ci.json",
+        "bytes": 1163,
+        "sha256": "3b815b4c6e9eb4b1c8ef9e1c272599f26fe1fe0bd14c2dae32f3256c3d462ce0"
+      }
+    }
+  ],
+  "verifiedD2RawGitFiles": 1122,
+  "evidence": [
+    {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/pr11-merge-response.json",
+      "bytes": 203,
+      "sha256": "93662975fbd5d969d381e998c2067de5d457280b4efeb25a06b48f475c7a0eec"
+    },
+    {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-save-plan.json",
+      "bytes": 368746,
+      "sha256": "c4458545a96d5281b54da2808b53e8f3c6b00284477c7bfc801f589e7a701935"
+    },
+    {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-git-blob-readback.json",
+      "bytes": 337442,
+      "sha256": "d5cf005db476a2b727eab846998fc3d9b99a5fe4a091f9a0f7b5c7d7c43a2c97"
+    },
+    {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-core-ci.json",
+      "bytes": 1469,
+      "sha256": "9fcaa917cd2c10c4b73fe97234d535e4fcff88f44a4b3a8921f5caac6bbc62bc"
+    },
+    {
+      "file": "Docs/Autonomy/Evidence/ClassicNpr20261116/MainIntegration01/d2-helper-ci.json",
+      "bytes": 1163,
+      "sha256": "3b815b4c6e9eb4b1c8ef9e1c272599f26fe1fe0bd14c2dae32f3256c3d462ce0"
+    }
+  ],
+  "scope": "Observed PR11 merge and prior completed D2 proof. The current preference-recording commit and its push CI are observed afterward, not invented here. Frozen Checkpoint/Closure stay unchanged."
+}
