@@ -199,56 +199,7 @@ namespace FantasyCards.Presentation
         private void ShowQuestOwnedCards(bool edit)
         {
             if (questEconomy == null || !questEconomy.HasStarter) { ShowQuestEntry(); return; }
-            QuestScreen(edit ? "deck" : "collection", () => ShowQuestOwnedCards(edit), edit ? "보유 덱 편집" : "내 카드 보관함",
-                edit ? questDeck.Count + "/50장 · 보유한 수량과 카드별 덱 한도 안에서 편집합니다." : "기본 덱과 개봉한 카드팩에서 얻은 실제 보유 카드입니다.");
-            var cards = CardCatalog.All.Where(card => questEconomy.OwnedCount(card.id) > 0
-                && (questOwnedElement < 0 || (int)card.element == questOwnedElement)
-                && (questOwnedRarity < 0 || (int)card.rarity == questOwnedRarity)
-                && (!questOwnedDeckOnly || questDeck.Contains(card.id))
-                && (string.IsNullOrWhiteSpace(questOwnedSearch) || card.name.IndexOf(questOwnedSearch, StringComparison.OrdinalIgnoreCase) >= 0
-                    || (card.text ?? "").IndexOf(questOwnedSearch, StringComparison.OrdinalIgnoreCase) >= 0
-                    || (card.sourceId ?? "").IndexOf(questOwnedSearch, StringComparison.OrdinalIgnoreCase) >= 0
-                    || CardCatalog.RarityName(card.rarity).IndexOf(questOwnedSearch, StringComparison.OrdinalIgnoreCase) >= 0))
-                .OrderBy(card => card.element).ThenBy(card => card.level).ThenBy(card => card.name).ToArray();
-            QuestOwnedSearchField(edit);
-            Button(root, "속성 · " + (questOwnedElement < 0 ? "전체" : CardCatalog.ElementName((Element)questOwnedElement)), .045f, .615f, .265f, .675f,
-                () => { questOwnedElement++; if (questOwnedElement >= 7) questOwnedElement = -1; questOwnedPage = 0; ShowQuestOwnedCards(edit); }, slate, 22);
-            Button(root, "등급 · " + (questOwnedRarity < 0 ? "전체" : CardCatalog.RarityCode((CardRarity)questOwnedRarity)), .28f, .615f, .50f, .675f,
-                () => { questOwnedRarity++; if (questOwnedRarity >= Enum.GetValues(typeof(CardRarity)).Length) questOwnedRarity = -1; questOwnedPage = 0; ShowQuestOwnedCards(edit); }, slate, 22);
-            Button(root, questOwnedDeckOnly ? "현재 덱만" : "보유 카드 전체", .515f, .615f, .744f, .675f,
-                () => { questOwnedDeckOnly = !questOwnedDeckOnly; questOwnedPage = 0; ShowQuestOwnedCards(edit); }, questOwnedDeckOnly ? gold : slate, 22);
-            int pages = Mathf.Max(1, (cards.Length + 3) / 4); questOwnedPage = Mathf.Clamp(questOwnedPage, 0, pages - 1);
-            for (int i = 0; i < 4 && questOwnedPage * 4 + i < cards.Length; i++)
-            {
-                var card = cards[questOwnedPage * 4 + i]; float left = .045f + i * .177f, right = left + .168f;
-                int inDeck = questDeck.Count(id => id == card.id), owned = questEconomy.OwnedCount(card.id);
-                DrawCard(root, card, left, .295f, right, .605f, inDeck > 0, () => ShowDetail(card, () => ShowQuestOwnedCards(edit)), true);
-                Text(root, "보유 " + owned + " · 덱 " + inDeck, left, .252f, right, .293f, 20, RarityColor(card.rarity), TextAlignmentOptions.Center);
-                if (edit)
-                {
-                    var minus = Button(root, "−", left, .205f, left + .048f, .252f, () => { questDeck.Remove(card.id); ShowQuestOwnedCards(true); }, slate, 27, inDeck > 0);
-                    minus.GetComponentInChildren<UiCanvasTextSize>().ConfigureCard(27);
-                    Text(root, inDeck + "/" + Math.Min(owned, card.deckLimit), left + .049f, .205f, right - .049f, .252f, 22, ivory, TextAlignmentOptions.Center);
-                    var plus = Button(root, "+", right - .048f, .205f, right, .252f, () => { questDeck.Add(card.id); ShowQuestOwnedCards(true); }, slate, 27,
-                        questDeck.Count < 50 && inDeck < Math.Min(owned, card.deckLimit));
-                    plus.GetComponentInChildren<UiCanvasTextSize>().ConfigureCard(27);
-                }
-            }
-            if (cards.Length == 0) Text(root, "이 조건에 맞는 보유 카드가 없습니다.", .07f, .35f, .72f, .53f, 29, ivory, TextAlignmentOptions.Center);
-            Button(root, "이전", .045f, .135f, .16f, .195f, () => { questOwnedPage--; ShowQuestOwnedCards(edit); }, slate, 22, questOwnedPage > 0);
-            Text(root, (questOwnedPage + 1) + "/" + pages, .17f, .135f, .28f, .195f, 23, gold, TextAlignmentOptions.Center);
-            Button(root, "다음", .29f, .135f, .405f, .195f, () => { questOwnedPage++; ShowQuestOwnedCards(edit); }, slate, 22, questOwnedPage + 1 < pages);
-            if (edit)
-            {
-                Button(root, "받은 기본 덱", .42f, .135f, .575f, .195f,
-                    () => { questDeck.Clear(); questDeck.AddRange(DemoCatalog.GetDeck(questEconomy.StarterDeckId).CopyCards()); ShowQuestOwnedCards(true); }, slate, 21);
-                string reason; bool valid = questEconomy.ValidateOwnedDeck(questDeck, out reason);
-                Button(root, "덱 저장", .59f, .135f, .744f, .195f, () => { if (SaveQuestDeck()) ShowQuestLobby(); else ShowQuestOwnedCards(true); }, gold, 23, valid);
-                BindTooltip(root.GetChild(root.childCount - 1).gameObject, "보유 덱 저장", valid ? "50장 덱을 저장합니다." : reason);
-            }
-            else Button(root, "검색 초기화", .42f, .135f, .744f, .195f,
-                () => { questOwnedElement = questOwnedRarity = -1; questOwnedSearch = questOwnedSearchDraft = ""; questOwnedDeckOnly = false; ShowQuestOwnedCards(false); }, slate, 22);
-            QuestNavigation();
+            DrawClassicDeckWorkspace(true, edit);
         }
 
         private void QuestOwnedSearchField(bool edit)

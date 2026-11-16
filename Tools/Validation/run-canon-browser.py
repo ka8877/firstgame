@@ -88,7 +88,7 @@ def main():
     plan_path = RELEASE.PLAN_DIRECTORY / (RELEASE.PLAN_PREFIX + '-' + plan_name + '-plans.json')
     plan = read(plan_path)[args.game]
     need(plan.get('revision') == evidence.REVISIONS[args.game] and plan.get('suite') == 'modern-real-input-v1', 'Current game/profile plan required')
-    if RELEASE.IS_CLIENT_MOTION or RELEASE.IS_GOSPEL_NPR:
+    if RELEASE.IS_CLIENT_MOTION or RELEASE.USES_NPR_GOSPEL:
         need(plan.get('sourceStatus') == 'frozen', 'Freeze actual ClientMotion product coordinates/checkpoints before browser execution')
     baseline = None
     if RELEASE.IS_GOSPEL_NPR:
@@ -100,6 +100,11 @@ def main():
         need(plan.get('evidenceRole') == role, 'Explicit NPR browser evidence role required')
         if args.game == 'FantasyCards':
             baseline = evidence.preserved_card()
+    elif RELEASE.IS_CLASSIC_NPR:
+        from ClassicNpr.contract import require_browser_plan, browser_role
+        require_browser_plan(plan, args.game, expected_kind=plan_name)
+        need(plan.get('evidenceRole') == browser_role(args.game),
+             'Explicit current Classic/NPR evidence role required')
     if baseline is not None:
         inputs_path = ROOT / baseline['buildInputs']['file']
         evidence_path = ROOT / baseline['buildEvidence']['file']
@@ -171,7 +176,7 @@ def main():
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
-    if RELEASE.IS_GOSPEL_NPR:
+    if RELEASE.USES_NPR_GOSPEL:
         invocation['evidenceRole'] = plan['evidenceRole']
         if baseline is not None:
             invocation['preservedCardBaseline'] = baseline['record']

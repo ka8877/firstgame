@@ -31,6 +31,7 @@ namespace PathOfDawn.Presentation
         // Observations of the last SceneCamera render, not a control surface.
         public int LastOccludingNpcCount { get; private set; }
         public int LastMaskedRendererCount { get; private set; }
+        public int LastProtectedConversationNpcCount { get; private set; }
         public Camera LastViewedCamera { get; private set; }
         public Transform LastObservedTarget { get; private set; }
         public int OwnedRendererCount => previousRendering.Count;
@@ -94,7 +95,7 @@ namespace PathOfDawn.Presentation
             RestoreRendering();
             if (app == null || camera != app.SceneCamera) return;
             LastViewedCamera = camera; LastObservedTarget = rig != null ? rig.Target : null;
-            LastOccludingNpcCount = LastMaskedRendererCount = 0;
+            LastOccludingNpcCount = LastMaskedRendererCount = LastProtectedConversationNpcCount = 0;
             if (!FieldIsActive(camera)) { ClearHysteresis(); return; }
 
             RefreshCandidates();
@@ -106,6 +107,11 @@ namespace PathOfDawn.Presentation
                 foreach (var actor in candidates)
                 {
                     if (!EligibleNpc(actor)) continue;
+                    // The pair-aware camera owns this actor's composition. A
+                    // speaking person must never disappear to reveal the boy.
+                    // Unrelated near-camera passers-by keep the existing narrow
+                    // render-only mask and its exact per-camera restoration.
+                    if (rig.IsConversationActor(actor)) { LastProtectedConversationNpcCount++; continue; }
                     float margin = previousOccluders.Contains(actor) ? ReleaseMargin : EnterMargin;
                     if (!OccludesTraveler(actor, camera, margin)) continue;
                     nextOccluders.Add(actor); LastOccludingNpcCount++;

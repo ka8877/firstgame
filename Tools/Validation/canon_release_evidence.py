@@ -160,6 +160,12 @@ def verify_native_review(game, binding, native):
     for shot in shots:
         original = ROOT / shot.get('file', shot.get('path', ''))
         require(original.resolve().is_relative_to((OUT / 'Screenshots' / game).resolve()) and digest(regular(original)) == shot.get('sha256'), 'Native Root original differs')
+    if RELEASE.IS_CLASSIC_NPR:
+        from ClassicNpr.contract import native_original_suffixes
+        filenames = [Path(shot.get('file', shot.get('path', ''))).stem for shot in shots]
+        require(all(any(name == suffix or name.endswith('-' + suffix) for name in filenames)
+                    for suffix in native_original_suffixes(game)),
+                'Direct current Native Root review must include every explicitly selected changed-area original')
     return ref(path)
 
 
@@ -169,6 +175,9 @@ def preserved_card():
 
 
 def current_native_names(game):
+    if RELEASE.IS_CLASSIC_NPR:
+        from ClassicNpr.contract import native_full_names
+        return native_full_names(game)
     if RELEASE.IS_GOSPEL_NPR:
         require(game in RELEASE.CURRENT_GAMES, 'NPR preserves Card; no current Card Native proof is admitted')
         from GospelNpr.contract import native_full_names
@@ -255,7 +264,7 @@ def verify_web_execution(game, proof_path, source_fingerprint):
         source = checked(native[key])
         require(source.read_bytes() == regular(OUT / 'Native' / game / filename).read_bytes(), 'Canonical Native must be the exact selected passed run')
     require(selected_binding.get('sourceFingerprint') == source_fingerprint, 'Selected Native fingerprint differs')
-    if RELEASE.IS_GOSPEL_NPR:
+    if RELEASE.USES_NPR_GOSPEL:
         npr_invocation = read(checked(native['summary']).parent / 'invocation.json')
         extras = npr_invocation.get('extraReleaseSources', [])
         require(extras and {row['source'] for row in extras} == {str(path.relative_to(ROOT)) for path in RELEASE.EXTRA_SOURCE_FILES},
@@ -428,13 +437,19 @@ def verify_browser(game, profile):
     require(plan_path.is_absolute() and plan_path.is_relative_to(ROOT) and digest(regular(plan_path)) == harness['planSha256'], 'Actual current plan source required')
     plan = read(plan_path)[game]
     require(plan.get('revision') == REVISIONS[game], 'Plan revision differs from current release')
-    if RELEASE.IS_CLIENT_MOTION or RELEASE.IS_GOSPEL_NPR:
+    if RELEASE.IS_CLIENT_MOTION or RELEASE.USES_NPR_GOSPEL:
         require(plan.get('sourceStatus') == 'frozen', 'Current ClientMotion coordinate/checkpoint source must be frozen')
     if RELEASE.IS_GOSPEL_NPR:
         from GospelNpr.contract import require_browser_plan
         require_browser_plan(plan, game)
         role = 'preserved-card-regression' if game == 'FantasyCards' else 'current-gospel-npr'
         require(plan.get('evidenceRole') == report.get('evidenceRole') == role, 'NPR evidence role differs')
+    elif RELEASE.IS_CLASSIC_NPR:
+        from ClassicNpr.contract import require_browser_plan, browser_role
+        expected_kind = {'Desktop720': 'desktop', 'Mobile844': 'mobile', 'PublicMobile844': 'public'}[profile]
+        require_browser_plan(plan, game, expected_kind=expected_kind)
+        require(plan.get('evidenceRole') == report.get('evidenceRole') == browser_role(game),
+                'Current Classic/NPR evidence role differs')
     for source in harness.get('capturedSources', []):
         require(digest(regular(ROOT / source['source'])) == digest(regular(ROOT / source['file'])) == source['sha256'], 'Recorded browser source changed')
     require(harness.get('capturedSources'), 'Actual executed browser/helper/plan source snapshots required')

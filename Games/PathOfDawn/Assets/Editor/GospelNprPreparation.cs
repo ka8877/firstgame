@@ -35,7 +35,7 @@ namespace FirstGame.Editor
         [Serializable] sealed class TextureSource { public string file, resource, sha256; public long bytes; }
         [Serializable] sealed class PreparationReport
         {
-            public string status = "prepared-not-runtime-or-visual-approval", revision, preparedUtc, unity, sourceManifest, sourceManifestSha256, controller, groundMaterial, skyMaterial;
+            public string status = "prepared-not-runtime-or-visual-approval", revision, applicationRevision, preparedUtc, unity, sourceManifest, sourceManifestSha256, controller, groundMaterial, skyMaterial;
             public ActorReport[] actors; public ClipReport[] clips; public EnvironmentReport[] environment; public TextureReport[] textures;
             public ShaderAssetReport[] shaders;
         }
@@ -68,10 +68,13 @@ namespace FirstGame.Editor
             string sky = PrepareSky(textureReports);
             AssetDatabase.SaveAssets();
             Need(Hash(File.ReadAllBytes(manifestPath)) == manifestHash, "Approved source manifest changed during NPR preparation.");
-            var report = new PreparationReport { revision = source.revision, preparedUtc = DateTime.UtcNow.ToString("O"), unity = Application.unityVersion, sourceManifest = ManifestSource, sourceManifestSha256 = manifestHash,
+            var report = new PreparationReport { revision = source.revision, applicationRevision = PilgrimageProjectSetup.Revision, preparedUtc = DateTime.UtcNow.ToString("O"), unity = Application.unityVersion, sourceManifest = ManifestSource, sourceManifestSha256 = manifestHash,
                 controller = AssetDatabase.GetAssetPath(controller), actors = actorReports.ToArray(), clips = clipReports, environment = environment,
                 textures = textureReports.ToArray(), groundMaterial = ground, skyMaterial = sky, shaders = PreparedShaders() };
-            string reportDirectory = Path.Combine(RepositoryRoot, "Artifacts/Validation/GospelNpr-2026-11-11/Preparation");
+            string validationRoot = Environment.GetEnvironmentVariable("FIRSTGAME_VALIDATION_ROOT");
+            if (string.IsNullOrEmpty(validationRoot))
+                validationRoot = Path.Combine(RepositoryRoot, "Artifacts/Validation/GospelNpr-2026-11-11");
+            string reportDirectory = Path.Combine(Path.GetFullPath(validationRoot), "Preparation");
             Directory.CreateDirectory(reportDirectory);
             string reportPath = Path.Combine(reportDirectory, "unity-" + DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffffffZ") + "-" + Guid.NewGuid().ToString("N") + ".json");
             File.WriteAllText(reportPath, JsonUtility.ToJson(report, true) + "\n");
