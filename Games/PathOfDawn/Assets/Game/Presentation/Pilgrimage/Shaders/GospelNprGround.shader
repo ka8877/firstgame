@@ -3,6 +3,10 @@ Shader "FirstGame/GospelNpr/Ground"
     Properties
     {
         _BlendMap("World path, court, grove and shore", 2D) = "black" {}
+        _StoneAlbedo("Retained limestone paving colour", 2D) = "white" {}
+        _StoneNormal("Retained limestone paving normal", 2D) = "bump" {}
+        _StoneDetailStrength("Paving detail contrast", Range(0,1)) = .72
+        _StoneNormalStrength("Paving normal strength", Range(0,1)) = .24
         _WorldRect("Ground origin and reciprocal extent", Vector) = (-64,-48,.007352941,.009803922)
         _MeadowColor("Sunlit meadow", Color) = (.39,.53,.28,1)
         _EarthColor("Warm travelled earth", Color) = (.73,.61,.42,1)
@@ -19,6 +23,8 @@ Shader "FirstGame/GospelNpr/Ground"
         float4 _EarthColor;
         float4 _StoneColor;
         float4 _ShadowColor;
+        float _StoneDetailStrength;
+        float _StoneNormalStrength;
     CBUFFER_END
 
     struct NprDepthAttributes
@@ -65,7 +71,10 @@ Shader "FirstGame/GospelNpr/Ground"
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl"
             TEXTURE2D(_BlendMap); SAMPLER(sampler_BlendMap);
+            TEXTURE2D(_StoneAlbedo); SAMPLER(sampler_StoneAlbedo);
+            TEXTURE2D(_StoneNormal); SAMPLER(sampler_StoneNormal);
             struct Attributes
             {
                 float4 positionOS : POSITION;
@@ -112,11 +121,13 @@ Shader "FirstGame/GospelNpr/Ground"
                 half3 meadow=_MeadowColor.rgb*lerp(.91,1.08,broad);
                 half3 earth=_EarthColor.rgb*lerp(.94,1.04,detail*.32+broad*.68);
                 half3 stone=_StoneColor.rgb*lerp(.96,1.035,detail);
+                half3 paving=SAMPLE_TEXTURE2D(_StoneAlbedo,sampler_StoneAlbedo,p*.36).rgb;
+                stone*=lerp(half3(1,1,1),.55+paving*.75,_StoneDetailStrength);
                 // A quiet worn-court pattern is sized in metres. Its contrast
                 // stays below the characters and real architectural stonework.
                 float2 tile=frac(p/float2(1.5,1.1));
                 half joint=1-smoothstep(.012,.026,min(min(tile.x,1-tile.x),min(tile.y,1-tile.y)));
-                stone*=1-joint*.045;
+                stone*=1-joint*.075;
                 half path=saturate(mask.r*(.95+detail*.05));
                 half court=smoothstep(.15,.9,mask.g);
                 half3 albedo=lerp(lerp(meadow,earth,path),stone,court);
@@ -124,12 +135,14 @@ Shader "FirstGame/GospelNpr/Ground"
                 albedo=lerp(albedo,half3(.56,.65,.52),mask.a*.24);
                 albedo*=.985+fine*.03;
                 half3 normal=normalize(input.normalWS);
+                half3 pavingNormal=UnpackNormalScale(SAMPLE_TEXTURE2D(_StoneNormal,sampler_StoneNormal,p*.36),1);
+                normal=normalize(normal+half3(pavingNormal.x,0,pavingNormal.y)*court*_StoneNormalStrength);
                 Light sun=GetMainLight(TransformWorldToShadowCoord(input.positionWS));
                 half facing=smoothstep(-.25,.75,dot(normal,sun.direction));
                 half shadow=smoothstep(.05,.95,sun.shadowAttenuation);
                 half3 shadowTint=lerp(_ShadowColor.rgb,half3(1,1,1),shadow);
                 half3 ambient=SampleSH(normal);
-                half3 illumination=ambient*.64+sun.color*(.42+.28*facing);
+                half3 illumination=ambient*.48+sun.color*(.30+.34*facing);
                 half3 color=albedo*illumination*shadowTint;
                 return half4(MixFog(max(color,0),input.fog),1);
             }

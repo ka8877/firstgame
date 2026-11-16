@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
-// Source-only proposal. Root must review, import the full pinned lilToon package,
-// compile and inspect actual materials before admitting this into Assets/Editor.
+// Material preparation for the actual pinned lilToon renderer. Root imports,
+// prepares and checks the resulting materials in Native and Web players.
 // Render-state/property evidence: lilxyzw/lilToon@e698a2f791bd28dd1aabf227c74f14bedeca3587.
 // lilToon is Copyright (c) 2020-present lilxyzw, MIT; retain its full package LICENSE/Third Party Notices.
 using System;
@@ -53,7 +53,11 @@ namespace Firstgame.GospelNpr.Editor
             var role = ResolveRole(source);
             var mode = AlphaMode(source.alphaMode);
             bool faceDetail = role == NprSurfaceRole.Face || role == NprSurfaceRole.Eyes || role == NprSurfaceRole.BrowsLashes;
-            bool outline = source.outline && !faceDetail;
+            // The anatomical body remains beneath the clothing. Extruding its
+            // inverted hull can poke dark triangles through the neckline and
+            // shoulders even when both original surfaces are intact. Outline
+            // only the visible outer garments/hair, never covered body skin.
+            bool outline = source.outline && !faceDetail && role != NprSurfaceRole.Skin;
             string shaderName = mode == "MASK"
                 ? (outline ? "FirstGame/GospelNpr/lilToonCutoutOutline" : "FirstGame/GospelNpr/lilToonCutout")
                 : mode == "BLEND"
@@ -71,43 +75,91 @@ namespace Firstgame.GospelNpr.Editor
             SetFloat(material, "_BumpScale", source.normalScale);
 
             ConfigureLilRenderState(material, source, mode, outline);
-            SetFloat(material, "_AsUnlit", role == NprSurfaceRole.Eyes ? 1 : faceDetail ? 0.18f : 0.06f);
-            SetFloat(material, "_LightMinLimit", role == NprSurfaceRole.Eyes ? 1 : 0.35f);
+            bool skin = role == NprSurfaceRole.Face || role == NprSurfaceRole.Skin;
+            bool hair = role == NprSurfaceRole.Hair;
+            bool cloth = role == NprSurfaceRole.Linen || role == NprSurfaceRole.Mantle;
+            SetFloat(material, "_AsUnlit", role == NprSurfaceRole.Eyes ? 1 : faceDetail ? 0.12f : 0.04f);
+            SetFloat(material, "_LightMinLimit", role == NprSurfaceRole.Eyes ? 1 : skin ? 0.22f : 0.18f);
             SetFloat(material, "_LightMaxLimit", 1.05f);
-            SetFloat(material, "_MonochromeLighting", 0.1f);
+            SetFloat(material, "_MonochromeLighting", 0.16f);
             SetFloat(material, "_VertexLightStrength", 0);
             SetFloat(material, "_UseShadow", role == NprSurfaceRole.Eyes || role == NprSurfaceRole.BrowsLashes ? 0 : 1);
-            SetFloat(material, "_ShadowStrength", role == NprSurfaceRole.Face ? 0.38f : role == NprSurfaceRole.Skin ? 0.52f : 0.72f);
-            SetColor(material, "_ShadowColor", role == NprSurfaceRole.Face || role == NprSurfaceRole.Skin
-                ? new Color(0.92f, 0.82f, 0.82f, 1) : new Color(0.80f, 0.80f, 0.91f, 1));
+            SetFloat(material, "_ShadowStrength", role == NprSurfaceRole.Face ? 0.46f : skin ? 0.58f : hair ? 0.78f : 0.80f);
+            SetColor(material, "_ShadowColor", role == NprSurfaceRole.Face
+                ? new Color(0.94f, 0.77f, 0.73f, 1)
+                : skin ? new Color(0.88f, 0.73f, 0.69f, 1)
+                : hair ? new Color(0.61f, 0.58f, 0.68f, 1)
+                : role == NprSurfaceRole.Leather ? new Color(0.70f, 0.64f, 0.66f, 1)
+                : new Color(0.72f, 0.74f, 0.84f, 1));
             // Alpha zero disables the second/third shade mix in upstream lilGetShading.
             SetColor(material, "_Shadow2ndColor", new Color(0.80f, 0.80f, 0.91f, 0));
             SetColor(material, "_Shadow3rdColor", new Color(0, 0, 0, 0));
-            SetFloat(material, "_ShadowBorder", faceDetail ? 0.46f : 0.50f);
-            SetFloat(material, "_ShadowBlur", faceDetail ? 0.25f : 0.16f);
-            SetFloat(material, "_ShadowNormalStrength", faceDetail ? 0 : 1);
-            SetFloat(material, "_ShadowReceive", faceDetail ? 0 : role == NprSurfaceRole.Skin ? 0.15f : 0.50f);
+            SetFloat(material, "_ShadowBorder", faceDetail ? 0.44f : 0.50f);
+            SetFloat(material, "_ShadowBlur", role == NprSurfaceRole.Face ? 0.32f : skin ? 0.24f : hair ? 0.16f : 0.11f);
+            // Soft authored face normals retain the cheek/jaw form. This is
+            // normal-based shading, not an authored head-space Face SDF.
+            SetFloat(material, "_ShadowNormalStrength", role == NprSurfaceRole.Face ? 0.55f : 1);
+            SetFloat(material, "_ShadowReceive", faceDetail ? 0 : skin ? 0.12f : 0.46f);
             SetFloat(material, "_Shadow2ndReceive", 0);
             SetFloat(material, "_Shadow3rdReceive", 0);
-            SetFloat(material, "_ShadowEnvStrength", 0.25f);
+            SetFloat(material, "_ShadowEnvStrength", 0.16f);
             SetFloat(material, "_ShadowMainStrength", 0);
             SetFloat(material, "_ShadowMaskType", 0); // Normal-based shading by default; no false SDF claim.
             SetColor(material, "_ShadowBorderColor", Color.black);
             SetFloat(material, "_ShadowBorderRange", 0);
             foreach (string feature in new[] { "_UseRim", "_UseRimShade", "_UseMatCap", "_UseMatCap2nd", "_UseEmission", "_UseEmission2nd", "_UseAnisotropy" })
                 SetFloat(material, feature, 0);
-            SetFloat(material, "_UseReflection", role == NprSurfaceRole.Metal ? 1 : 0);
+            bool metal = role == NprSurfaceRole.Metal;
+            // Rim follows the real main light and stays confined to the outer
+            // hair/garment silhouette. Disable the independent back rim rather
+            // than allowing its upstream opaque-white default to wash faces.
+            if (hair || cloth)
+            {
+                SetFloat(material, "_UseRim", 1);
+                SetColor(material, "_RimColor", hair ? new Color(.92f, .82f, .69f, .20f) : new Color(.69f, .77f, .88f, .12f));
+                SetFloat(material, "_RimMainStrength", hair ? .30f : .50f);
+                SetFloat(material, "_RimNormalStrength", 1);
+                SetFloat(material, "_RimBorder", .38f);
+                SetFloat(material, "_RimBlur", .24f);
+                SetFloat(material, "_RimFresnelPower", 2.4f);
+                SetFloat(material, "_RimEnableLighting", 1);
+                SetFloat(material, "_RimShadowMask", .70f);
+                SetFloat(material, "_RimBackfaceMask", 1);
+                SetFloat(material, "_RimDirStrength", .65f);
+                SetFloat(material, "_RimDirRange", 0);
+                SetColor(material, "_RimIndirColor", new Color(0, 0, 0, 0));
+                SetFloat(material, "_RimBlendMode", 1);
+            }
+            // Use the pinned renderer's actual anisotropic highlight on hair,
+            // tinted and alpha-limited so it never becomes a plastic white cap.
+            SetFloat(material, "_UseAnisotropy", hair ? 1 : 0);
+            SetFloat(material, "_AnisotropyScale", hair ? .58f : 0);
+            SetFloat(material, "_AnisotropyTangentWidth", 1.20f);
+            SetFloat(material, "_AnisotropyBitangentWidth", .42f);
+            SetFloat(material, "_AnisotropyShift", .10f);
+            SetFloat(material, "_AnisotropyShiftNoiseScale", 0);
+            SetFloat(material, "_AnisotropySpecularStrength", .36f);
+            SetFloat(material, "_Anisotropy2ndSpecularStrength", 0);
+            SetFloat(material, "_Anisotropy2Reflection", hair ? 1 : 0);
+            SetFloat(material, "_Anisotropy2MatCap", 0);
+            SetFloat(material, "_Anisotropy2MatCap2nd", 0);
+            SetFloat(material, "_UseReflection", hair || metal ? 1 : 0);
             SetFloat(material, "_ApplyReflection", 0);
-            SetFloat(material, "_ApplySpecular", role == NprSurfaceRole.Metal ? 1 : 0);
-            SetFloat(material, "_Metallic", role == NprSurfaceRole.Metal ? Mathf.Clamp01(source.metallicFactor) : 0);
-            SetFloat(material, "_Smoothness", role == NprSurfaceRole.Metal ? 0.45f : 0.15f);
+            SetFloat(material, "_ApplySpecular", hair || metal ? 1 : 0);
+            SetFloat(material, "_ApplySpecularFA", metal ? 1 : 0);
+            SetFloat(material, "_SpecularToon", 1);
+            SetFloat(material, "_ReflectionBlendMode", 1);
+            SetColor(material, "_ReflectionColor", hair ? new Color(.86f, .78f, .67f, .15f) : new Color(.82f, .86f, .94f, .50f));
+            SetFloat(material, "_Metallic", metal ? Mathf.Clamp01(source.metallicFactor) : 0);
+            SetFloat(material, "_Smoothness", metal ? 0.45f : hair ? 0.30f : 0.15f);
 
             if (outline)
             {
                 // Outline pass samples _OutlineTex alpha separately. White default breaks cutout hair holes.
                 SetTexture(material, "_OutlineTex", albedo, source);
-                SetColor(material, "_OutlineColor", new Color(0.19f, 0.15f, 0.17f, color.a));
-                SetFloat(material, "_OutlineWidth", Mathf.Max(0, source.outlineWidth));
+                SetColor(material, "_OutlineColor", hair ? new Color(0.16f, 0.13f, 0.17f, color.a)
+                    : new Color(0.27f, 0.22f, 0.24f, color.a));
+                SetFloat(material, "_OutlineWidth", Mathf.Max(0, source.outlineWidth) * (hair ? 0.72f : cloth ? 0.58f : 0.64f));
                 SetFloat(material, "_OutlineFixWidth", 1);
                 SetFloat(material, "_OutlineEnableLighting", 0.25f);
                 SetFloat(material, "_OutlineZBias", 0);

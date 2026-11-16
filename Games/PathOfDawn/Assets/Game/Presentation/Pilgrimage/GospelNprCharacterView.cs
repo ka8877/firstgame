@@ -404,7 +404,7 @@ namespace PathOfDawn.Presentation
                 portraitCamera.cullingMask = 1 << PortraitLayer;
                 portraitCamera.clearFlags = CameraClearFlags.SolidColor;
                 portraitCamera.backgroundColor = new Color(.79f, .86f, .86f, 1);
-                portraitCamera.orthographic = false; portraitCamera.fieldOfView = 32;
+                portraitCamera.orthographic = false; portraitCamera.fieldOfView = 28;
                 portraitCamera.nearClipPlane = .025f; portraitCamera.farClipPlane = 8;
                 portraitCamera.allowHDR = false; portraitCamera.allowMSAA = true; portraitCamera.depth = -20;
                 portraitCamera.targetTexture = portraitTexture;
@@ -447,9 +447,16 @@ namespace PathOfDawn.Presentation
                 portraitAnimator.Update(0);
             }
             var portraitHead = portraitAnimator != null ? portraitAnimator.GetBoneTransform(HumanBodyBones.Head) : null;
-            var target = portraitHead != null ? portraitHead.position - Vector3.up * (StandingHeight * .045f)
-                : portraitStage.position + Vector3.up * (StandingHeight * .84f);
-            portraitCamera.transform.position = target + new Vector3(StandingHeight * .025f, StandingHeight * .035f, StandingHeight * .85f);
+            // Frame the actual face and shoulders rather than a small face
+            // above most of the torso. The shallow three-quarter view keeps
+            // the original eyes/nose/cheek geometry readable at UI scale.
+            // Keep the hair margin above the real skull while moving the
+            // camera in: a portrait should spend pixels on the face rather
+            // than the lower chest. Scale both horizontal/depth offsets to
+            // retain the same gentle view angle for every authored stature.
+            var target = portraitHead != null ? portraitHead.position + Vector3.up * (StandingHeight * .025f)
+                : portraitStage.position + Vector3.up * (StandingHeight * .89f);
+            portraitCamera.transform.position = target + new Vector3(StandingHeight * .08f, StandingHeight * .015f, StandingHeight * .56f);
             portraitCamera.transform.LookAt(target, Vector3.up);
             // Construct and frame the real rig while active, then apply the
             // requested visibility. A replacement clone must synchronize even

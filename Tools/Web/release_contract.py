@@ -153,8 +153,21 @@ GOSPEL_NPR = {
     'currentTargets': ['Web']
 }
 
+CLASSIC_NPR = {
+    'name': 'classic-npr',
+    'revisions': {'FantasyCards': 'fm-classic-library-2026-11-16',
+                  'PathOfDawn': 'gospel-npr-polish-2026-11-16'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/ClassicNpr-2026-11-16'
+                    for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
 
 def contract(name):
+    if name == 'classic-npr':
+        return CLASSIC_NPR
     if name == 'gospel-npr':
         return GOSPEL_NPR
     if name == 'client-motion':

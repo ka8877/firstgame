@@ -93,6 +93,9 @@ def main():
             raise ValueError('NPR preserves Card; a new Card Native run is outside this release scope')
         from GospelNpr.contract import native_full_names
         npr_names = native_full_names()
+    elif RELEASE.IS_CLASSIC_NPR:
+        from ClassicNpr.contract import native_full_names
+        npr_names = native_full_names(args.game)
     restore_controls()
     lease_path = CONTROL / 'lease.json'
     lease = json.loads(lease_path.read_bytes())
@@ -115,7 +118,7 @@ def main():
         PYTHONPYCACHEPREFIX=str(run / 'GeneratedPythonCache'))
     if RELEASE.REQUIRES_EXPLICIT_ENV:
         lane.env['FIRSTGAME_RELEASE_PROFILE'] = RELEASE.NAME
-    if RELEASE.IS_GOSPEL_NPR:
+    if RELEASE.USES_NPR_GOSPEL:
         names = list(npr_names)
         expected = len(names)
     elif RELEASE.REQUIRES_EXPLICIT_ENV:
@@ -150,7 +153,7 @@ def main():
     write(run / 'invocation.json', {'scope': 'current-product-native-only', 'game': args.game,
         'attempt': args.attempt, 'filter': names, 'expectedCount': expected,
         'releaseProfile': RELEASE.NAME,
-        **({'extraReleaseSources': extra_sources} if RELEASE.IS_GOSPEL_NPR else {}),
+        **({'extraReleaseSources': extra_sources} if RELEASE.USES_NPR_GOSPEL else {}),
         'releaseConfiguration': {'source': str(RELEASE.SOURCE.relative_to(ROOT)),
             'recorded': str(profile_copy.relative_to(ROOT)), 'sha256': sha(profile_copy.read_bytes())},
         'lease': lease, 'supervisorSha256': HELPER_SHA, 'publishReady': False})

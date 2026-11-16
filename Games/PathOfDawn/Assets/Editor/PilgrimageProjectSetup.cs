@@ -11,7 +11,7 @@ namespace FirstGame.Editor
     /// <summary>Current skinned NPR 3D field. Earlier renderers remain as history.</summary>
     public static class PilgrimageProjectSetup
     {
-        public const string Revision = "gospel-npr-2026-11-11";
+        public const string Revision = "gospel-npr-polish-2026-11-16";
         public const string AppType = "PathOfDawn.Presentation.GospelPilgrimageApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool preparing;

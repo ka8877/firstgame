@@ -87,6 +87,7 @@ namespace PathOfDawn.Presentation
             JordanRoot = Node("02 · Jordan river valley", transform);
             BuildChapter(JordanRoot, true);
             ConfigureNprPropPalette();
+            ConfigureNprSceneryPalette();
             marker = Node("Current meeting · ground guide", transform);
             MeshObject("Guide ring", marker, Ring(.67f, .72f, 48), Vector3.up * .055f, bronze, false, false);
             SetChapter("temple");
@@ -141,6 +142,8 @@ namespace PathOfDawn.Presentation
             BuildGarden(root, river);
             BuildBorderGroves(root, river);
             BuildHorizonGroves(root, river);
+            BuildDistantHills(root, river);
+            BuildMeadowPockets(root, river);
             var atmosphere = root.gameObject.AddComponent<GospelPilgrimageAtmosphere>();
             atmosphere.BuildNpr(river, (x, z) => TerrainHeight(x, z, river), p => NearRoute(p, 1.25f), npr);
             LivingGrassClumpCount += atmosphere.GrassClumpCount; WildflowerCount += atmosphere.FlowerCount;
@@ -211,7 +214,72 @@ namespace PathOfDawn.Presentation
                 pixels[z * width + x] = new Color(path, court, Mathf.Clamp01(grove), shore);
             }
             blend.SetPixels(pixels); blend.Apply(false, true); textures.Add(blend);
-            material.SetTexture("_BlendMap", blend); materials.Add(material); return material;
+            material.SetTexture("_BlendMap", blend);
+            material.SetTexture("_StoneAlbedo", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/paving-albedo"));
+            material.SetTexture("_StoneNormal", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/paving-normal"));
+            material.SetFloat("_StoneDetailStrength", .72f); material.SetFloat("_StoneNormalStrength", .24f);
+            material.SetColor("_MeadowColor", new Color(.35f, .47f, .31f));
+            material.SetColor("_EarthColor", new Color(.71f, .61f, .44f));
+            material.SetColor("_StoneColor", new Color(.84f, .80f, .69f));
+            material.SetColor("_ShadowColor", new Color(.65f, .73f, .82f));
+            materials.Add(material); return material;
+        }
+
+        void BuildDistantHills(Transform root, bool river)
+        {
+            // A visual-only horizon surrounds the unchanged continuous playable
+            // floor. Every point is beyond the farthest saved in-bounds corner;
+            // these meshes never enter movement or camera collision queries.
+            var colors = new[] { new Color(.40f, .49f, .39f), new Color(.47f, .57f, .54f), new Color(.57f, .67f, .67f) };
+            const int segments = 128, rows = 5;
+            for (int layer = 2; layer >= 0; layer--)
+            {
+                float radius = 64 + layer * 19;
+                var vertices = new Vector3[(segments + 1) * rows];
+                var uv = new Vector2[vertices.Length]; var triangles = new int[segments * (rows - 1) * 6];
+                for (int ring = 0; ring < rows; ring++) for (int segment = 0; segment <= segments; segment++)
+                {
+                    float angle = segment * Mathf.PI * 2 / segments;
+                    float noise = Mathf.PerlinNoise(Mathf.Cos(angle) * 2.4f + layer * 7 + (river ? 11 : 0), Mathf.Sin(angle) * 2.4f + 12);
+                    float crest = (7.5f + layer * 5.0f) * (.58f + noise * .80f);
+                    float envelope = ring == 0 ? 0 : ring == 1 ? .55f : ring == 2 ? 1 : ring == 3 ? .65f : .08f;
+                    float distance = radius - 8 + ring * 6;
+                    int at = ring * (segments + 1) + segment;
+                    vertices[at] = new Vector3(4 + Mathf.Sin(angle) * distance, -.9f + crest * envelope, 3 + Mathf.Cos(angle) * distance);
+                    uv[at] = new Vector2(segment / (float)segments * 12, ring / (float)(rows - 1));
+                }
+                int cursor = 0;
+                for (int ring = 0; ring < rows - 1; ring++) for (int segment = 0; segment < segments; segment++)
+                {
+                    int a = ring * (segments + 1) + segment, b = a + segments + 1;
+                    triangles[cursor++] = a; triangles[cursor++] = b; triangles[cursor++] = a + 1;
+                    triangles[cursor++] = a + 1; triangles[cursor++] = b; triangles[cursor++] = b + 1;
+                }
+                var mesh = Own(new Mesh { name = "Distant sculpted Mediterranean ridge " + layer });
+                mesh.vertices = vertices; mesh.uv = uv; mesh.triangles = triangles;
+                mesh.RecalculateNormals(); mesh.RecalculateBounds();
+                var ridge = MeshObject(mesh.name, root, mesh, Vector3.zero,
+                    Mat("Atmospheric ridge " + layer, colors[layer], 0), false, false);
+                ridge.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
+            }
+        }
+
+        void BuildMeadowPockets(Transform root, bool river)
+        {
+            // Reuse the permitted spatial grass mesh in deliberate foreground
+            // groups. Keep route/courts clear, with no new colliders or terrain.
+            var centers = river ? new[] { new Vector2(-30, 6), new Vector2(-15, -12), new Vector2(9, 7), new Vector2(28, -11) }
+                : new[] { new Vector2(-29, 1.6f), new Vector2(-21, -12.4f), new Vector2(-18.5f, 2), new Vector2(36.5f, 4) };
+            for (int group = 0; group < centers.Length; group++)
+                for (int blade = 0; blade < 28; blade++)
+                {
+                    float angle = blade * 2.399963f, radius = Mathf.Sqrt((blade + .5f) / 28f) * 2.15f;
+                    Vector2 p = centers[group] + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                    if (NearRoute(p, 1.55f) || !river && OnPavedCourt(p)) continue;
+                    npr.Add("Grass_Small", root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y),
+                        .22f + (blade % 4) * .045f, blade * 31 + group * 47, false);
+                    LivingGrassClumpCount++;
+                }
         }
         static float CourtCoverage(Vector2 p, float noise)
         {
@@ -806,15 +874,43 @@ namespace PathOfDawn.Presentation
             }
         }
 
+        void ConfigureNprSceneryPalette()
+        {
+            // Imported maps/material assets remain immutable. Reuse one owned
+            // scene copy per source across both chapters and their static batches.
+            var copies = new Dictionary<Material, Material>();
+            foreach (var renderer in GetComponentsInChildren<MeshRenderer>(true))
+            {
+                var row = renderer.sharedMaterials; bool changed = false;
+                for (int index = 0; index < row.Length; index++)
+                {
+                    var source = row[index];
+                    if (source == null || !source.name.StartsWith("NPR ", StringComparison.Ordinal)
+                        || !(source.name.Contains("Leaves") || source.name == "NPR Grass")) continue;
+                    if (!copies.TryGetValue(source, out var material))
+                    {
+                        material = new Material(source) { name = source.name + " · scene olive palette" };
+                        Color tint = source.name == "NPR Grass" ? new Color(.82f, .88f, .84f) : new Color(.78f, .85f, .84f);
+                        if (material.HasProperty("_BaseColor")) material.SetColor("_BaseColor", tint);
+                        if (material.HasProperty("_Color")) material.SetColor("_Color", tint);
+                        if (material.HasProperty("_Smoothness")) material.SetFloat("_Smoothness", .08f);
+                        materials.Add(material); copies.Add(source, material);
+                    }
+                    row[index] = material; changed = true;
+                }
+                if (changed) renderer.sharedMaterials = row;
+            }
+        }
+
         void ConfigureLight()
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(.66f, .74f, .84f);
-            RenderSettings.ambientEquatorColor = new Color(.55f, .61f, .60f);
-            RenderSettings.ambientGroundColor = new Color(.39f, .40f, .34f);
-            RenderSettings.reflectionIntensity = .42f;
+            RenderSettings.ambientSkyColor = new Color(.61f, .70f, .81f);
+            RenderSettings.ambientEquatorColor = new Color(.44f, .50f, .51f);
+            RenderSettings.ambientGroundColor = new Color(.26f, .29f, .26f);
+            RenderSettings.reflectionIntensity = .32f;
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.ExponentialSquared;
-            RenderSettings.fogColor = new Color(.76f, .84f, .88f); RenderSettings.fogDensity = .0045f;
+            RenderSettings.fogColor = new Color(.73f, .80f, .84f); RenderSettings.fogDensity = .006f;
             var sky = Resources.Load<Material>("Art/GospelNpr/Materials/Sky");
             if (sky != null) RenderSettings.skybox = sky;
             else
@@ -831,13 +927,13 @@ namespace PathOfDawn.Presentation
             }
             var sunObject = Node("Clear soft morning sun", transform); sunObject.rotation = Quaternion.Euler(43, -33, 0);
             var sun = sunObject.gameObject.AddComponent<Light>(); sun.type = LightType.Directional; sun.color = new Color(1, .955f, .85f);
-            sun.intensity = 1.05f; sun.shadows = LightShadows.Soft; sun.shadowStrength = .84f;
+            sun.intensity = 1.08f; sun.shadows = LightShadows.Soft; sun.shadowStrength = .86f;
             sun.shadowBias = .035f; sun.shadowNormalBias = .18f;
             RenderSettings.sun = sun;
             var volume = Node("NPR clear daylight grade", transform).gameObject.AddComponent<Volume>(); volume.isGlobal = true; volume.priority = 20;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); volume.profile = profile;
             profile.Add<Tonemapping>().mode.Override(TonemappingMode.Neutral);
-            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(5); color.saturation.Override(3); color.postExposure.Override(0);
+            var color = profile.Add<ColorAdjustments>(); color.contrast.Override(7); color.saturation.Override(-6); color.postExposure.Override(0);
             var bloom = profile.Add<Bloom>(); bloom.intensity.Override(.07f); bloom.threshold.Override(1.25f); bloom.scatter.Override(.38f);
             var vignette = profile.Add<Vignette>(); vignette.intensity.Override(.045f); vignette.smoothness.Override(.65f);
             profile.Add<DepthOfField>().mode.Override(DepthOfFieldMode.Off);

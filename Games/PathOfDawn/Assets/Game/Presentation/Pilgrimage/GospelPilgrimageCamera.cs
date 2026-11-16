@@ -19,6 +19,8 @@ namespace PathOfDawn.Presentation
         const float MaximumAvoidancePitch = 80f, ClearanceReleaseSeconds = .28f;
         static readonly float[] AvoidanceYawOffsets = { 30, -30, 60, -60, 90, -90 };
         static readonly float[] SideViewPitches = { 35, 50, 65 };
+        static readonly float[] ConversationYawOffsets = { 0, 15, -15, 30, -30, 45, -45 };
+        static readonly float[] ConversationPitches = { 14, 22, 30, 38 };
         const int CameraCollisionMask = ~(1 << 2 | 1 << 5);
 
         public Camera View { get; private set; }
@@ -40,6 +42,9 @@ namespace PathOfDawn.Presentation
         public int ObstructionCount { get; private set; }
         public Transform Target { get; private set; }
         public Transform ConversationTarget { get; private set; }
+        public bool HasReadableConversationView { get; private set; }
+        public float ConversationScreenSeparation { get; private set; }
+        public int ConversationObstructionCount { get; private set; }
         public bool InputEnabled
         {
             get => inputEnabled;
@@ -53,8 +58,14 @@ namespace PathOfDawn.Presentation
         readonly RaycastHit[] collisionHits = new RaycastHit[64];
         readonly Collider[] initialOverlaps = new Collider[64], endpointOverlaps = new Collider[64];
         readonly Vector3[] bodyPoints = new Vector3[5];
+        readonly Vector3[] conversationPoints = new Vector3[5];
         int initialOverlapCount, initialObstacleCount;
         Transform targetHead, targetHips, targetLeftFoot, targetRightFoot;
+        Transform conversationHead, conversationHips, conversationLeftFoot, conversationRightFoot;
+        GospelPilgrimageActor conversationActor;
+        GospelPilgrimageActor[] conversationPeople;
+        bool conversationReady, conversationPoseHeld;
+        float conversationHeight = 1.6f, conversationYaw, conversationPitch = 18f;
         readonly List<RaycastResult> pointerHits = new List<RaycastResult>();
         GospelPilgrimageMotor motor;
         SkinnedMeshRenderer[] targetRenderers;
@@ -161,12 +172,29 @@ namespace PathOfDawn.Presentation
         }
 
         /// <summary>Optional dialogue framing. Clearing the partner restores the exploration composition.</summary>
-        public void SetConversationTarget(Transform partner) => ConversationTarget = partner;
+        public void SetConversationTarget(Transform partner)
+        {
+            if (ConversationTarget == partner) return;
+            ConversationTarget = partner;
+            conversationActor = null;
+            conversationPeople = null;
+            conversationHead = conversationHips = conversationLeftFoot = conversationRightFoot = null;
+            conversationReady = conversationPoseHeld = false;
+            HasReadableConversationView = false;
+            ConversationScreenSeparation = 0; ConversationObstructionCount = 0;
+            // The authored exploration orbit/zoom remain untouched. A dialogue
+            // chooses a reversible composition, not a new physical facing.
+            renderYawVelocity = renderPitchVelocity = 0;
+        }
+
+        public bool IsConversationActor(GospelPilgrimageActor actor) => ConversationTarget != null && actor != null
+            && (actor.transform == ConversationTarget || actor.transform.IsChildOf(ConversationTarget));
 
         public void Snap()
         {
             if (View == null || Target == null) return;
             SampleActorHeight(true);
+            RefreshConversation();
             groundedHeight = Target.position.y;
             lookAhead = Vector3.zero;
             currentYaw = yaw;
@@ -176,6 +204,7 @@ namespace PathOfDawn.Presentation
             var pose = ResolveCameraPose(focus, DesiredDistance(), 0, true);
             cameraDistance = pose.Distance;
             View.transform.SetPositionAndRotation(focus + pose.Direction * cameraDistance, pose.Rotation);
+            ObserveConversationView();
             focusVelocity = Vector3.zero;
             distanceVelocity = yawVelocity = pitchVelocity = 0;
             lastTargetPosition = Target.position;
@@ -286,6 +315,7 @@ namespace PathOfDawn.Presentation
             }
             lastTargetPosition = Target.position;
             SampleActorHeight(false);
+            RefreshConversation();
             if (motor == null || motor.IsGrounded)
                 groundedHeight = Mathf.Lerp(groundedHeight, Target.position.y, 1f - Mathf.Exp(-dt * 14f));
             Vector3 travel = motor != null && InputEnabled ? motor.Velocity : Vector3.zero;
@@ -311,13 +341,20 @@ namespace PathOfDawn.Presentation
             Vector3 endpoint = focus + pose.Direction * cameraDistance;
             if (Mathf.Abs(cameraDistance - pose.Distance) > .001f &&
                 (!PositionClear(endpoint, out _) || !BodySightlinesClear(endpoint, out _)
-                || IsAvoidingObstruction && !Readable(endpoint, pose.Rotation)))
+                || (IsAvoidingObstruction || conversationReady) && !Readable(endpoint, pose.Rotation)))
             { cameraDistance = pose.Distance; distanceVelocity = 0; }
             HasReadableView = pose.Valid && Readable(focus + pose.Direction * cameraDistance, pose.Rotation);
             View.transform.SetPositionAndRotation(focus + pose.Direction * cameraDistance, pose.Rotation);
+            ObserveConversationView();
         }
 
-        float DesiredDistance() => zoom * (actorHeight / 1.5f) + (ConversationTarget != null ? .65f : 0f);
+        float DesiredDistance()
+        {
+            if (!conversationReady) return zoom * (actorHeight / 1.5f);
+            float height = Mathf.Max(actorHeight, conversationHeight);
+            float span = Vector3.Distance(Target.position, ConversationTarget.position);
+            return Mathf.Clamp(zoom * .72f * (height / 1.6f) + span * .16f, 3.8f, 7.2f);
+        }
         Vector3 PhysicalFocus()
         {
             Vector3 value = Target.position;
@@ -328,14 +365,47 @@ namespace PathOfDawn.Presentation
         }
         Vector3 DesiredFocus()
         {
+            if (conversationReady)
+            {
+                Vector3 conversationFocus = (Target.position + ConversationTarget.position) * .5f;
+                // Keep both complete figures above the lower dialogue panel.
+                // Stature is authored, so blinking/idle cloth cannot bob framing.
+                conversationFocus.y = (Target.position.y + ConversationTarget.position.y) * .5f
+                    + Mathf.Max(actorHeight, conversationHeight) * .32f;
+                return conversationFocus;
+            }
             Vector3 value = PhysicalFocus();
             value += lookAhead + Quaternion.Euler(0, currentYaw, 0) * (Vector3.right * .22f);
-            if (ConversationTarget != null)
-            {
-                Vector3 partner = ConversationTarget.position + Vector3.up * actorHeight * .61f;
-                value = Vector3.Lerp(value, partner, .32f);
-            }
             return value;
+        }
+
+        void RefreshConversation()
+        {
+            bool wasReady = conversationReady;
+            conversationReady = ConversationTarget != null && ConversationTarget != Target
+                && ConversationTarget.gameObject.activeInHierarchy;
+            if (!conversationReady) { conversationPoseHeld = false; return; }
+            if (conversationActor == null || !conversationActor.transform.IsChildOf(ConversationTarget))
+            {
+                conversationActor = ConversationTarget.GetComponentInChildren<GospelPilgrimageActor>();
+                var animator = conversationActor != null ? conversationActor.Animator : null;
+                conversationHead = animator != null ? animator.GetBoneTransform(HumanBodyBones.Head) : null;
+                conversationHips = animator != null ? animator.GetBoneTransform(HumanBodyBones.Hips) : null;
+                conversationLeftFoot = animator != null ? animator.GetBoneTransform(HumanBodyBones.LeftFoot) : null;
+                conversationRightFoot = animator != null ? animator.GetBoneTransform(HumanBodyBones.RightFoot) : null;
+                var people = conversationActor != null ? conversationActor.GetComponentInParent<GospelPilgrimagePeople>() : null;
+                conversationPeople = people != null ? people.GetComponentsInChildren<GospelPilgrimageActor>() : null;
+            }
+            conversationReady = conversationActor != null && conversationActor.HasSkinnedModel
+                && conversationActor.isActiveAndEnabled;
+            if (!conversationReady) { conversationPoseHeld = false; return; }
+            conversationHeight = Mathf.Clamp(conversationActor.VisualHeight, 1.2f, 2.2f);
+            if (!wasReady)
+            {
+                // Enter on the pair's real framing point instead of spending
+                // the first dialogue frames aiming below one of its figures.
+                focus = ResolveFocus(DesiredFocus()); focusVelocity = Vector3.zero;
+            }
         }
 
         Vector3 ResolveFocus(Vector3 desired)
@@ -388,6 +458,7 @@ namespace PathOfDawn.Presentation
             AvoidanceProbeCount = 0;
             ComfortableDistance = Mathf.Min(requested, Mathf.Clamp(actorHeight * 1.65f, 2.35f, 2.8f));
             PrepareBodyPoints();
+            if (conversationReady) return ResolveConversationPose(origin, requested, dt, snap);
             initialOverlapCount = Physics.OverlapSphereNonAlloc(origin, CollisionRadius, initialOverlaps,
                 CameraCollisionMask, QueryTriggerInteraction.Collide);
             initialObstacleCount = 0;
@@ -428,6 +499,71 @@ namespace PathOfDawn.Presentation
             HasReadableView = actual.Valid && Readable(origin + actual.Direction * actual.Distance, actual.Rotation);
             return actual;
         }
+
+        CameraPose ResolveConversationPose(Vector3 origin, float requested, float dt, bool snap)
+        {
+            initialOverlapCount = Physics.OverlapSphereNonAlloc(origin, CollisionRadius, initialOverlaps,
+                CameraCollisionMask, QueryTriggerInteraction.Collide);
+            initialObstacleCount = 0;
+            for (int i = 0; i < initialOverlapCount; i++) if (CameraObstacle(initialOverlaps[i])) initialObstacleCount++;
+
+            Vector3 across = ConversationTarget.position - Target.position; across.y = 0;
+            float side = across.sqrMagnitude > .001f ? Mathf.Atan2(across.x, across.z) * Mathf.Rad2Deg : currentYaw;
+            float first = Mathf.Repeat(side + 90, 360), second = Mathf.Repeat(side - 90, 360);
+            if (Mathf.Abs(Mathf.DeltaAngle(first, currentYaw)) > Mathf.Abs(Mathf.DeltaAngle(second, currentYaw)))
+            { float swap = first; first = second; second = swap; }
+
+            var desired = Probe(origin, conversationPoseHeld ? conversationYaw : first,
+                conversationPoseHeld ? conversationPitch : 14, requested);
+            DesiredPathDistance = initialObstacleCount == 0 ? desired.Distance : 0;
+            ObstructionCount = desired.Obstacles + initialObstacleCount;
+            CameraPose selected = desired;
+            bool readable = ConversationComfortable(origin, desired);
+            if (!readable)
+            {
+                // Each side is evaluated against both real humanoids. Never
+                // resolve a speaker/player overlap by suppressing either draw.
+                foreach (float elevation in ConversationPitches)
+                {
+                    foreach (float offset in ConversationYawOffsets)
+                    {
+                        for (int bearing = 0; bearing < 2; bearing++)
+                        {
+                            var candidate = Probe(origin, (bearing == 0 ? first : second) + offset, elevation, requested);
+                            if (ConversationComfortable(origin, candidate))
+                            { selected = candidate; readable = true; break; }
+                            if (candidate.Valid && (!selected.Valid || candidate.Distance > selected.Distance)) selected = candidate;
+                        }
+                        if (readable) break;
+                    }
+                    if (readable) break;
+                }
+            }
+            if (readable)
+            {
+                conversationYaw = selected.Yaw; conversationPitch = selected.Pitch;
+                conversationPoseHeld = true;
+            }
+            float nextYaw = snap ? selected.Yaw : Mathf.SmoothDampAngle(effectiveYaw, selected.Yaw,
+                ref renderYawVelocity, .16f, Mathf.Infinity, dt);
+            float nextPitch = snap ? selected.Pitch : Mathf.SmoothDamp(effectivePitch, selected.Pitch,
+                ref renderPitchVelocity, .16f, Mathf.Infinity, dt);
+            var actual = Probe(origin, nextYaw, nextPitch, selected.Distance);
+            // A transition may not pass through an unseen partner or geometry.
+            if (readable && !ConversationComfortable(origin, actual))
+            { actual = selected; renderYawVelocity = renderPitchVelocity = 0; }
+            effectiveYaw = Mathf.Repeat(actual.Yaw, 360); effectivePitch = actual.Pitch;
+            IsAvoidingObstruction = !desired.Valid || desired.Distance < requested - .01f;
+            FinalPathDistance = actual.Distance; FinalObstructionCount = actual.Obstacles;
+            ConversationObstructionCount = actual.Obstacles;
+            IsObstructed = !actual.Valid || actual.Distance < requested - .01f;
+            HasReadableView = actual.Valid && Readable(origin + actual.Direction * actual.Distance, actual.Rotation);
+            return actual;
+        }
+
+        bool ConversationComfortable(Vector3 origin, CameraPose pose) => pose.Valid
+            && pose.Distance >= ComfortableDistance
+            && Readable(origin + pose.Direction * pose.Distance, pose.Rotation);
 
         CameraPose FindEscape(Vector3 origin, float requested, CameraPose desired, bool retain)
         {
@@ -534,14 +670,38 @@ namespace PathOfDawn.Presentation
         bool BodySightlinesClear(Vector3 endpoint, out int blockers)
         {
             blockers = 0;
-            foreach (var point in bodyPoints)
+            int countPoints = conversationReady ? bodyPoints.Length + conversationPoints.Length : bodyPoints.Length;
+            for (int index = 0; index < countPoints; index++)
             {
+                Vector3 point = index < bodyPoints.Length ? bodyPoints[index] : conversationPoints[index - bodyPoints.Length];
                 Vector3 delta = point - endpoint; float length = delta.magnitude;
                 if (length <= .03f) { blockers++; continue; }
                 int count = Physics.RaycastNonAlloc(endpoint, delta / length, collisionHits, length - .025f,
                     CameraCollisionMask, QueryTriggerInteraction.Collide);
                 for (int i = 0; i < count; i++) if (CameraObstacle(collisionHits[i].collider)) blockers++;
                 if (count >= collisionHits.Length) blockers++;
+            }
+            if (conversationReady && conversationPeople != null)
+            {
+                foreach (var person in conversationPeople)
+                {
+                    if (person == null || person == conversationActor || person.transform.IsChildOf(Target)
+                        || !person.isActiveAndEnabled || !person.HasSkinnedModel) continue;
+                    foreach (var renderer in person.SkinnedRenderers)
+                    {
+                        if (renderer == null || !renderer.enabled || !renderer.gameObject.activeInHierarchy
+                            || renderer.gameObject.layer == GospelNprCharacterView.PortraitLayer) continue;
+                        Bounds bounds = renderer.bounds;
+                        if (bounds.Contains(endpoint)) { blockers++; continue; }
+                        for (int index = 0; index < countPoints; index++)
+                        {
+                            Vector3 point = index < bodyPoints.Length ? bodyPoints[index] : conversationPoints[index - bodyPoints.Length];
+                            Vector3 delta = point - endpoint; float length = delta.magnitude;
+                            if (length > .15f && bounds.IntersectRay(new Ray(endpoint, delta / length), out float distance)
+                                && distance >= 0 && distance < length - .15f) { blockers++; break; }
+                        }
+                    }
+                }
             }
             return blockers == 0;
         }
@@ -554,24 +714,61 @@ namespace PathOfDawn.Presentation
             bodyPoints[2] = (targetLeftFoot != null ? targetLeftFoot.position : foot) + Vector3.up * .07f;
             bodyPoints[3] = (targetRightFoot != null ? targetRightFoot.position : foot) + Vector3.up * .07f;
             bodyPoints[4] = Vector3.Lerp(bodyPoints[0], bodyPoints[1], .5f);
+            if (conversationReady)
+            {
+                bodyPoints[0] += Vector3.up * (actorHeight * .065f);
+                Vector3 partner = ConversationTarget.position;
+                conversationPoints[0] = conversationHead != null ? conversationHead.position + Vector3.up * (conversationHeight * .065f)
+                    : partner + Vector3.up * conversationHeight * .94f;
+                conversationPoints[1] = conversationHips != null ? conversationHips.position : partner + Vector3.up * conversationHeight * .52f;
+                conversationPoints[2] = (conversationLeftFoot != null ? conversationLeftFoot.position : partner) + Vector3.up * .07f;
+                conversationPoints[3] = (conversationRightFoot != null ? conversationRightFoot.position : partner) + Vector3.up * .07f;
+                conversationPoints[4] = Vector3.Lerp(conversationPoints[0], conversationPoints[1], .5f);
+            }
         }
 
         bool Readable(Vector3 position, Quaternion rotation)
         {
+            if (!ReadableBody(bodyPoints, position, rotation, .07f, .93f)) return false;
+            return !conversationReady || ReadableBody(conversationPoints, position, rotation, .35f, .93f)
+                && ReadableBody(bodyPoints, position, rotation, .35f, .93f)
+                && PairScreenSeparation(position, rotation) >= .07f;
+        }
+
+        bool ReadableBody(Vector3[] points, Vector3 position, Quaternion rotation, float lowY, float highY)
+        {
             Quaternion inverse = Quaternion.Inverse(rotation);
             float tangent = Mathf.Tan(View.fieldOfView * .5f * Mathf.Deg2Rad);
             float minimumY = 1, maximumY = 0;
-            foreach (var point in bodyPoints)
+            foreach (var point in points)
             {
                 Vector3 local = inverse * (point - position);
                 if (local.z <= View.nearClipPlane + .03f) return false;
                 float y = .5f + local.y / (2 * local.z * tangent);
                 float x = .5f + local.x / (2 * local.z * tangent * View.aspect);
-                if (x < .07f || x > .93f || y < .07f || y > .93f) return false;
+                if (x < .07f || x > .93f || y < lowY || y > highY) return false;
                 minimumY = Mathf.Min(minimumY, y); maximumY = Mathf.Max(maximumY, y);
             }
             float span = maximumY - minimumY;
             return span >= .10f && span <= .75f;
+        }
+
+        float PairScreenSeparation(Vector3 position, Quaternion rotation)
+        {
+            Quaternion inverse = Quaternion.Inverse(rotation);
+            Vector3 traveler = inverse * (bodyPoints[1] - position);
+            Vector3 partner = inverse * (conversationPoints[1] - position);
+            if (traveler.z <= View.nearClipPlane || partner.z <= View.nearClipPlane) return 0;
+            float scale = 2 * Mathf.Tan(View.fieldOfView * .5f * Mathf.Deg2Rad) * View.aspect;
+            return Mathf.Abs(traveler.x / (traveler.z * scale) - partner.x / (partner.z * scale));
+        }
+
+        void ObserveConversationView()
+        {
+            HasReadableConversationView = conversationReady && FinalObstructionCount == 0
+                && Readable(View.transform.position, View.transform.rotation);
+            ConversationScreenSeparation = conversationReady ? PairScreenSeparation(View.transform.position, View.transform.rotation) : 0;
+            if (!conversationReady) ConversationObstructionCount = 0;
         }
 
         void ResetAvoidance()

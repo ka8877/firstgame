@@ -1,3 +1,13 @@
+## 현재 원작 판마 카드 창·예수님 NPR 완성도 개선 — 2026-11-16
+
+최신 사용자는 판마의 덱·도감 UI를 원작 클라이언트처럼 바꾸고 예수님의 길의 원신 방향 완성도를 더 높이라고 요청했다. 새 작업은 `ClassicNpr-2026-11-16`, 브랜치는 `codex/classic-npr-2026-11-16`이다. 실제 새 소유권은 `Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16/lease.json`의 owner `cd835d1e-b9a9-4b0e-9385-e6d0cba84819`, lock `a4321cdebccf49a15eb8b3821200b91bd7499c20`이며 2026-11-16T01:59:54.760259Z부터07:59:54.760259Z까지의 고정 회차다. 이전 NPR은 정상 종료된 이력이며 잠금/결과를 재사용하지 않는다. 새로운 사용자 요청이 아래 NPR의 판마 변경 금지 조건보다 우선한다. 이번 두 게임의 새 결과는 모두 독립 검증하며 기존 원본/저장/ID/재화/카드 규칙/성경 사건·본문·음성과 비활성 멀티플레이를 보존한다.
+
+실제 런타임·모델/대형 자산 생성·Unity·테스트·브라우저·네트워크 다운로드·저장공간 관리·Git·빌드·기존 Pages 배포 담당은 `/root` 하나다. `/root/classic_references_20261116`은 기존 자료의 읽기 전용 원작 대조, `/root/classic_ui_20261116`은 카드 Presentation의 덱/소유 카드/전체 도감 창, `/root/gospel_art_20261116`은 Gospel 인물/초상화/재질 셰이더 소스, `/root/gospel_scene_20261116`은 Gospel 카메라/NPC 가림/환경·장면 소스를 소유한다. `/root/classic_npr_validation_20261116`은 새 프로필과 검증/stage 소스를 맡는다. 각 담당은 Root가 지정한 파일만 수정하고 실행하지 않는다. Root는 App 통합·에셋/캐시 복구·실제 원본 검토·문서와 검증을 맡는다.
+
+판마는 실제 원작 덱 편집기·수집 창의 카드 격자/선택 미리보기/덱 목록/필터/작은 고딕 문자/프레임을 대조한다. 2005/2006 가이드와2015실제후기·2017/2018 회고를 구분하고 확인되지 않은 화면을 원작과 완전히 같다고 주장하지 않는다. Gospel은 피부 내부 외곽선/얼굴·머리카락 조명/인물 구도와 배경을 실제 플레이 화면에서 개선한다. 대화 상대를 숨겨 해결하거나 물리 NPC/저장 상태를 변경하지 않는다. 게임 시각 품질이나 사용자 미적 승인은 기능 검사만으로 주장하지 않는다.
+
+작업 재연결 시 `/tmp`가 초기화됐고 workspace 여유는 약118MB였다. 전체 Library를 tmp로 옮기고 원본을 지우려던 초기 계획은 자동 승인 검토가 거절해 실행되지 않았다. 실제로는 종료된 Living 공개 카드 JPG 46,050개의 경로·바이트를 모두 유지한 SHA 검증 하드링크 공유로 약2.3GB를 확보했다. 이후 실제 유휴·소유권 아래 Card의 생성 캐시 `Library/Bee`만 검증 복사했고, 모든 기존 원본과 inode는 workspace의 `Library/Bee.classic-npr-before01`에 그대로 남겼다. 원래 Bee 이름은 이미 지원되는 `/tmp/firstgame-arcana-generated-cache/FantasyCards/Bee` 별칭이며, 새 컴파일 증가분만 tmp를 사용한다. 이 별칭 작업의 기존 workspace 회수량은0이고 다른 Library·PackageCache·가져온 자산·두 게임 입력은 변하지 않았다. 실제 목록과 결과는 새 CONTROL의 `Release/bee-retained-BeePreservedCopy01.*.json`을 따른다. tmp 초기화 뒤 자동 repair의 빈 디렉터리는 원본 복구가 아니므로, 별도 Root 유휴 검토 후 보존 백업으로 명시 복원해야 한다. 기존 소스·공개판·고유 증거·메타/GUID를 삭제하거나 오래된 정리 도구를 다시 실행하지 않는다.
+
 ## NPR 실제 정상 종료·Closure 완료 — 2026-11-12 00:20 UTC
 
 NPR 새 공개 M `2dfd4a47b6e1f6cb8f0f0b57a490f5aa6f304759`/P `ce9040d6882eba08a7dd71b787666d82a9996e2f`의 기술 마일스톤을 완료했다. Checkpoint81조각과 최신 문서를 정상 main의4개 커밋에 저장했고, 최종 D1은 `5d835d8cf3c5c3467fe42aa75079422ccf885871`이다. 네 커밋의 Core/helper 총8개 CI가 실제 성공했으며 최종 D1은 Core43124581847/helper43124582117이다. Git 객체에서81조각·index·raw attributes83개 파일을 다시 읽어 원본 SHA/크기 일치를 확인했다.

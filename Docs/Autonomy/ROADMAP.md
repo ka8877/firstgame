@@ -1,5 +1,21 @@
 # 지속 개발 로드맵과 재개 지점
 
+## 현재 ClassicNpr — 원작 덱·도감과 실제 NPR 인물·대화 구도 개선
+
+`ClassicNpr-2026-11-16`은 실제 새 잠금을 취득한 두 게임 동시 작업입니다. 고정 소유 기간은 **2026년11월16일10:59:54~16:59:54 KST**, 브랜치는 `codex/classic-npr-2026-11-16`, 실행 담당은 Root입니다. 이전 NPR의 Card 보존 전용 범위는 당시 기록이고 새 사용자 요청은 Card UI 변경을 승인합니다. 기존 Core·카드/성경 데이터·ID·경제·저장·멀티 비활성 상태를 유지합니다.
+
+1. **판마 실제 원작 구조의 현재 검증을 이어갑니다.** 좌우 각10행 목록·중앙 추가/제거·실제 통계, 원본 보기·소유 카드/도감·필터/상세·저장/재접속을 연결했습니다. 실제 old Web01 미리보기에서 지원 도감 필터/첫 카드 겹침을 발견해 그 grid 간격만 고쳤고 **새 Native03 11/0/0·새49PNG/Root22·선택 Web02를 완료**했습니다. Native02/Web01/당시 Root22와 raw finding은 이력으로 남깁니다. 후기 도감·일부 EP/시장 P 값은 미입증이므로 전체 원작 복원으로 표시하지 않습니다. [원작 대조](../Research/ClassicLibraryUi20261116.md)를 따릅니다.
+2. **예수님의 길 현재 Native/Web를 실제 브라우저 검토로 이어갑니다.** 피부 내부 외곽선·얼굴/머리/의상 조명·같은 모델 초상화와 두 인물 대화 구도·상대 보호·지면/식생/원경·무대 조명을 수정했습니다. Native03 전체17/0/0·새 현재34PNG 전부 Root 승인과 정확히 결합한 **Web01을 완료**했습니다. Card 간격 수정 뒤에도 이 소스/선택은 그대로입니다. NPC 가림/복원·탐험 yaw/zoom/FOV·물리 위치·23사건/19본문·저장은 유지합니다. 도입 전환 overlay·전경 주변 NPC와 의상·배경·표정 세부는 안정된 브라우저 화면에서 계속 확인합니다.
+3. **현재 제품과 실패 이력 및 실제 exact-script 결과를 보존합니다.** Card11/Gospel17·NativeJSON9703과 제품/Native/Web 지문은 그대로이고 Core02 전체311은 유효합니다. 새 개정 인식 수정 뒤 **필수 직접 argv PublicRangeUnit04가 실제123통과**했습니다(wrapper `f94cc5bf…`). Contract05/old Range02·discovery03은 각각 이력입니다. 이전 GospelNative01/Native02, old CardWeb01의15,383행과 독립 old Native-input SHA로 확인한 파생 helper 복구본을 현재 승인으로 재사용하지 않습니다.
+4. **소스 동결과 실제 suite 완료를 구분합니다.** 실제29viewport로05:50Z에3파일/6게임 경로를 Root SOURCE 동결했습니다. Card PC/터치 미리보기는 불변 종료했고 두 Gospel은600초 마감 실패입니다. PC Mary/성경/복귀·모바일 요셉/성경은 보았지만 미실행 mobileMary·없는 캡처 메타데이터를 채우지 않습니다. 첫 Browser01은 개정 allowlist 누락으로 실제17.882초/PCM을30초 fallback이 버려 실패했고 새 개정만6곳에 추가해 모든 실제 media/public gate를 유지했습니다. **CardDesktop Browser02는115/115검사·82PNG·필수60원본 Root 직접 검토·오디오4/실제 재접속2로 완료**입니다. Card60/59/59·Gospel70/56/56 필수 원본·오디오4/재접속2·최종 Root/정리를 끝냅니다.
+5. **정상 후보·공개·원본 보존과 종료를 이어갑니다.** 첫 C1 `bcad026d…`136파일은 [draft PR9](https://github.com/ka8877/firstgame/pull/9)로 push됐고 Artifacts/Evidence는 포함하지 않았습니다. C1 helper 성공/Core 마지막 진행 중이며 하네스 수정 뒤 C1은 최종이 아닙니다. PC 재시도 뒤 C2·정확한 Core/helper CI·정상 main 반영·전체 stage 예산·Pages·fresh 전체 공개 GET·두 공개 게임·봉인을 완료해야 합니다. old runtime46,050쌍/현재 JPEG15,350쌍·PackageCache·Bee 원본은 유지합니다. RetainedBeeArchive01의456,753,143B archive는 완료했지만 원본2,281 cache파일 삭제는 **자동 승인 검토가 시작 전에 거절**해 변화0/원본 intact이며, 파생 archive만의 더 안전한 이동 제안은 대기입니다. 보존 소스 admission이나 archive는 삭제 허가가 아닙니다. 미공개 old Web01 player와 새 증거만 보존하고 old81분할 archive는 참조를 유지한 뒤 정상 저장·짝 CI·최종 유휴·자기 해제·Closure·모든 indexed Git blob을 실제 확인합니다.
+
+현재 공개는 이전 실제 M `2dfd4a47…`/P `ce9040d6…`이며 새 ClassicNpr 배포가 아닙니다. 이전 NPR의 최종 D3 저장·후기 Core/helper CI와259 Git blob 검증은 모두 완료됐습니다. 새 실행의 성공/실패/공개 결과는 [STATE](STATE.json)·[REPORT](REPORT.md)에 실제 근거대로 기록합니다. 원신급 완성도·Face SDF·사용자 미적 승인·물리 기기 FPS·판마 전체 원작 복원·24시간 예약 작업을 완료로 주장하지 않습니다.
+
+---
+
+아래는 이전 NPR 완료 후 작성한 재개 메모입니다. 그 당시 종료/대기 표기는 해당 시점의 이력이며 현재 실행 소유권은 위의 새 ClassicNpr lease만 따릅니다.
+
 ## GospelNpr 기술 공개·검증·보존·정상 종료 완료 — 아트 후속 과제 유지
 
 사용자는 ClientMotion Gospel 전체 시각 품질을 거절했고 실제3D 애니풍 NPR을 요청했습니다. 실제 새 공개는 최종 main `2dfd4a47…`/P `ce9040d6…`이며 현재 프로필은 `gospel-npr`입니다. 정확한 후보·main CI, Pages43112808490, 새 전체15,439파일 GET/Root 포털2장, 두 공개 실행과 전체 봉인·Checkpoint를 완료했습니다. 기술 결과를 사용자 미적 승인으로 확대하지 않습니다.

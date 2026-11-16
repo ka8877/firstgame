@@ -27,6 +27,11 @@ namespace FantasyCards.Presentation
 
         private void ShowRestorationOriginalArchive()
         {
+            DrawClassicOriginalAlbum();
+        }
+
+        private void DrawArchivedOriginalArchive()
+        {
             QuestCurrentScreen = "album";
             battleScreen = false; redraw = ShowRestorationOriginalArchive; Clear();
             FmOriginalMusic.SetScene("deck"); RestorationBackdrop();
@@ -117,6 +122,15 @@ namespace FantasyCards.Presentation
 
         private void ShowRenewalArchiveGrades()
         {
+            var grades = OriginalCardArchive.All.Select(card => (int)card.rarity).Distinct().OrderBy(value => value).Prepend(-1).ToArray();
+            var labels = grades.Select(grade => (grade < 0 ? "전체" : CardCatalog.RarityName((CardRarity)grade)) + " · " +
+                (grade < 0 ? OriginalCardArchive.All.Length : OriginalCardArchive.All.Count(card => (int)card.rarity == grade))).ToArray();
+            LibraryChoice("카드 앨범 · 등급 선택", labels, Array.IndexOf(grades, originalArchiveGrade), choice =>
+            { originalArchiveGrade = grades[choice]; originalArchivePage = 0; ShowRestorationOriginalArchive(); }, ShowRestorationOriginalArchive);
+        }
+
+        private void DrawArchivedArchiveGrades()
+        {
             battleScreen = false; redraw = ShowRenewalArchiveGrades; Clear(); RestorationBackdrop();
             Text(root, "카드 앨범 · 등급 선택", .06f, .86f, .94f, .96f, 39, ivory);
             var grades = OriginalCardArchive.All.Select(card => (int)card.rarity).Distinct().OrderBy(value => value).Prepend(-1).ToArray();
@@ -137,6 +151,11 @@ namespace FantasyCards.Presentation
         }
 
         private void ShowRestorationArchiveDetail(OriginalArchiveCard card)
+        {
+            DrawClassicArchiveDetail(card);
+        }
+
+        private void DrawArchivedArchiveDetail(OriginalArchiveCard card)
         {
             battleScreen = false; redraw = () => ShowRestorationArchiveDetail(card); Clear(); polishBack = ShowRestorationOriginalArchive; RestorationBackdrop();
             RenewalSourcePrint(root, card.artResource, .035f, .075f, .49f, .94f, "Archive enlarged complete print " + card.id);

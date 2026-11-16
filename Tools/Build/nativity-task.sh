@@ -22,7 +22,7 @@ if [[ "$game" == FantasyCards && "$task" != native ]]; then
  python3 Tools/Data/Renewal/verify-media.py
 fi
 editor_graphics=(-nographics)
-if [[ "${FIRSTGAME_RELEASE_PROFILE:-}" == gospel-npr && "$game" == PathOfDawn && "$task" != native ]]; then
+if [[ ( "${FIRSTGAME_RELEASE_PROFILE:-}" == gospel-npr || "${FIRSTGAME_RELEASE_PROFILE:-}" == classic-npr ) && "$game" == PathOfDawn && "$task" != native ]]; then
  # Use the same real Editor graphics API as Native. lilToon deliberately
  # rewrites its retained feature settings when Null/GLCore changes.
  python3 Tools/Environment/recover-quest-display.py

@@ -16,7 +16,7 @@ namespace FantasyCards.Presentation
         private bool collectionDeckOnly;
         private string collectionSearch = "", collectionSearchDraft = "";
         private bool collectionListView, collectionEditorVisited;
-        private int CollectionPageSize => collectionListView ? (canvas.pixelRect.height < 600 ? 4 : 6) : 4;
+        private int CollectionPageSize => collectionListView ? 10 : 4;
 
         private CardDefinition[] FilteredCards()
         {
@@ -42,6 +42,12 @@ namespace FantasyCards.Presentation
         }
 
         private void ShowCollection(bool edit)
+        {
+            if (edit && !collectionEditorVisited) { collectionEditorVisited = true; collectionListView = true; collectionPage = 0; }
+            DrawClassicDeckWorkspace(false, edit);
+        }
+
+        private void DrawArchivedCollection(bool edit)
         {
             if (edit && !collectionEditorVisited) { collectionEditorVisited = true; collectionListView = false; collectionPage = 0; }
             battleScreen = false; redraw = () => ShowCollection(edit); Clear(); FmOriginalMusic.SetScene("deck"); Backdrop(true);

@@ -149,6 +149,9 @@ namespace PathOfDawn.Presentation
             blue = Mat("Opening indigo linen", new Color(.20f, .34f, .44f));
             earth = Mat("Opening warm earth", new Color(.62f, .56f, .40f));
             brass = Mat("Opening aged brass", new Color(.58f, .44f, .22f), .28f);
+            RetainedSurface(plaster, "Art/Gospel3D/TempleMaterials/limestone-albedo", null, .10f);
+            RetainedSurface(stone, "Art/Gospel3D/TempleMaterials/paving-albedo", "Art/Gospel3D/TempleMaterials/paving-normal", .18f);
+            RetainedSurface(timber, "Art/GospelWell/cedar-albedo", null, 0);
             actors = Node("Opening model-only performers", content);
             AddModel("mary", "Mary"); AddModel("joseph", "Joseph"); AddModel("teacher", "Teacher");
             content.gameObject.SetActive(false);
@@ -324,11 +327,11 @@ namespace PathOfDawn.Presentation
             // Camera-only sky and a reversible grade of the same real sun. No
             // sky image, permanent world-light mutation or extra post-FX stack.
             RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(.18f, .22f, .34f);
+            RenderSettings.ambientLight = new Color(.22f, .26f, .34f);
             if (observedSun != null)
             {
-                observedSun.color = new Color(.62f, .72f, 1);
-                observedSun.intensity = .26f;
+                observedSun.color = new Color(.74f, .80f, 1);
+                observedSun.intensity = .38f;
             }
         }
 
@@ -365,7 +368,7 @@ namespace PathOfDawn.Presentation
                 float px = (x - count * .5f) * 1.4f, pz = (z - count * .5f) * 1.4f;
                 float edge = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(2.5f, 10, Mathf.Max(Mathf.Abs(px), Mathf.Abs(pz))));
                 vertices[i] = new Vector3(px, edge * (.18f + Mathf.Sin(px * .53f) * Mathf.Cos(pz * .47f) * .18f), pz);
-                uv[i] = new Vector2(x / (float)count, z / (float)count);
+                uv[i] = new Vector2(px, pz) * .38f;
             }
             int cursor = 0;
             for (int z = 0; z < count; z++) for (int x = 0; x < count; x++)
@@ -470,6 +473,18 @@ namespace PathOfDawn.Presentation
             material.SetColor("_BaseColor", color); material.SetFloat("_Smoothness", smoothness);
             materials.Add(material); return material;
         }
+        static void RetainedSurface(Material material, string albedoPath, string normalPath, float normalStrength)
+        {
+            var albedo = Resources.Load<Texture2D>(albedoPath);
+            if (albedo == null) throw new InvalidOperationException("Missing retained opening surface: " + albedoPath);
+            material.SetTexture("_BaseMap", albedo);
+            if (normalPath == null) return;
+            var normal = Resources.Load<Texture2D>(normalPath);
+            if (normal == null) throw new InvalidOperationException("Missing retained opening surface normal: " + normalPath);
+            material.SetTexture("_BumpMap", normal); material.SetFloat("_BumpScale", normalStrength);
+            material.EnableKeyword("_NORMALMAP");
+        }
+
         void OnGUI()
         {
             if (string.IsNullOrEmpty(LoadError)) return;

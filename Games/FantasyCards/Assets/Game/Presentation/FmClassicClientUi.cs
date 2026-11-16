@@ -364,6 +364,14 @@ namespace FantasyCards.Presentation
             ClassicText(log, status, .035f, .68f, .97f, .83f, 23, new Color(.77f, .80f, .69f));
             ClassicText(log, LocalProfileWins + "승 " + LocalProfileLosses + "패 " + LocalProfileDraws + "무" + (owned ? "  /  SP " + QuestSp.ToString("N0") + "  /  보유 " + QuestOwnedTotal + "장" : "  /  출전 " + CardCatalog.All.Length + "종"), .035f, .50f, .97f, .66f, 23, new Color(.75f, .72f, .59f));
             ClassicText(log, string.IsNullOrEmpty(LocalProfileGreeting) ? "" : "대전 한마디  " + LocalProfileGreeting, .035f, .31f, .97f, .48f, 21, RestorationMetal);
+            string noticeText = owned ? questNotice : message;
+            if (!string.IsNullOrEmpty(noticeText))
+            {
+                var notice = ClassicText(log, noticeText, .035f, .055f, .97f, .29f, 21, ivory);
+                notice.name = owned ? "Classic actual single-player notice" : "Classic actual practice notice";
+                notice.textWrappingMode = TextWrappingModes.Normal;
+                notice.overflowMode = TextOverflowModes.Ellipsis;
+            }
         }
 
         void ClassicRoom(RectTransform rooms, int index, string title, string description, bool available, Action enter)

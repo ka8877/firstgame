@@ -8,12 +8,14 @@ import os
 
 ROOT = Path(__file__).resolve().parents[3]
 NAME = os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art')
-if NAME not in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr'):
+if NAME not in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr', 'classic-npr'):
     raise ValueError('Choose an explicit supported current release profile')
 IS_LIVING = NAME == 'living-classic'
 IS_CLIENT_MOTION = NAME == 'client-motion'
 IS_GOSPEL_NPR = NAME == 'gospel-npr'
-REQUIRES_EXPLICIT_ENV = IS_LIVING or IS_CLIENT_MOTION or IS_GOSPEL_NPR
+IS_CLASSIC_NPR = NAME == 'classic-npr'
+USES_NPR_GOSPEL = IS_GOSPEL_NPR or IS_CLASSIC_NPR
+REQUIRES_EXPLICIT_ENV = IS_LIVING or IS_CLIENT_MOTION or USES_NPR_GOSPEL
 CORE_MINIMUM = 311 if REQUIRES_EXPLICIT_ENV else 309
 REVISIONS = ({'FantasyCards': 'fm-classic-ui-2026-11-10', 'PathOfDawn': 'gospel-living-rpg-2026-11-10'}
              if IS_LIVING else {'FantasyCards': 'fm-canon-2026-11-09', 'PathOfDawn': 'gospel-canon-2026-11-09'})
@@ -80,5 +82,31 @@ if IS_GOSPEL_NPR:
         ROOT / 'Tools/Validation/GospelNpr/contract.py',
         ROOT / 'Tools/Validation/GospelNpr/card_baseline.py',
         ROOT / 'Tools/Validation/GospelNpr/native-contract.json',
+    )
+
+if IS_CLASSIC_NPR:
+    REVISIONS = {'FantasyCards': 'fm-classic-library-2026-11-16',
+                 'PathOfDawn': 'gospel-npr-polish-2026-11-16'}
+    OUT = ROOT / 'Artifacts/Validation/ClassicNpr-2026-11-16'
+    BUILD = ROOT / 'Artifacts/ClassicNprBuilds'
+    CONTROL = ROOT / 'Artifacts/Validation/Autonomy/ClassicNpr-2026-11-16'
+    STAGE = ROOT / 'Artifacts/ClassicNprWebPlaytest'
+    PLAN_DIRECTORY = ROOT / 'Tools/Validation/ClassicNpr'
+    PLAN_PREFIX = 'classic-npr'
+    CURRENT_GAMES = ('FantasyCards', 'PathOfDawn')
+    PRESERVED_GAMES = ()
+    # Gospel uses its explicitly source-bound NPR contract, not the former
+    # drawing-layer cases. Card keeps every prior case and room/save coverage.
+    ADDITIONAL_NATIVE = {
+        'FantasyCards': (
+            'FantasyCards.SmokeTests.NativitySmokeTests.LateClientRoomsAndProfileSurviveReloadWithoutChangingEconomyOrRng',
+        ),
+        'PathOfDawn': (),
+    }
+    NATIVE_REPLACEMENTS = {}
+    EXTRA_SOURCE_FILES = (
+        ROOT / 'Tools/Validation/ClassicNpr/contract.py',
+        ROOT / 'Tools/Validation/ClassicNpr/native-contract.json',
+        ROOT / 'Tools/Validation/ClassicNpr/baseline-obligations.json',
     )
 

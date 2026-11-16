@@ -101,7 +101,7 @@ def main():
     expected = evidence.current_native_names(args.game)
     require(xml.get('result') == 'Passed' and xml.get('failed') == xml.get('skipped') == '0'
             and int(xml.get('passed', '0')) == len(expected) == len(names) == len(set(names))
-            and set(names) == set(expected) and all(case.get('result') == 'Passed' for case in cases), 'Complete current Native8/21 set required')
+            and set(names) == set(expected) and all(case.get('result') == 'Passed' for case in cases), 'Complete current explicitly selected Native set required')
     fingerprint = binding['sourceFingerprint']
     require(re.fullmatch(r'[0-9a-f]{64}', fingerprint), 'Exact current Native fingerprint required')
 

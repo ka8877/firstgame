@@ -88,18 +88,22 @@ namespace FantasyCards.SmokeTests
             yield return Click("보유 카드 보기");Assert.That(App.QuestCurrentScreen,Is.EqualTo("collection"));
             yield return Shot("owned-collection");yield return Click("덱 편집");
             Assert.That(App.QuestDeckCards.Count,Is.EqualTo(50));
-            Assert.That(UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
-                .Where(b=>b.gameObject.activeInHierarchy&&b.GetComponentsInChildren<TMPro.TMP_Text>().Any(t=>t.text=="+")).All(b=>!b.interactable),Is.True,
-                "A full50-card deck must not permit extra additions.");
+            var addToDeck=UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+                .Single(b=>b.gameObject.activeInHierarchy&&b.name=="Classic library add selected card");
+            Assert.That(addToDeck.interactable,Is.False,"A full50-card deck must not permit extra additions.");
             yield return Shot("owned-deck-editor");
             yield return SmokeUi.Capture("FantasyCards","quest-"+attempt+"-owned-deck-editor-mobile",616,346,inspect:()=>
             {
-                var labels=UnityEngine.Object.FindObjectsByType<TMPro.TMP_Text>(FindObjectsSortMode.None)
-                    .Where(t=>t.gameObject.activeInHierarchy&&(t.text=="+"||t.text=="−")&&t.GetComponentInParent<Button>()!=null).ToArray();
-                Assert.That(labels.Length,Is.EqualTo(8),"Four visible owned cards must each show both quantity controls.");
+                var controls=UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+                    .Where(b=>b.gameObject.activeInHierarchy&&(b.name=="Classic library add selected card"||b.name=="Classic library remove selected card")).ToArray();
+                Assert.That(controls.Length,Is.EqualTo(2),"The actual original editor transfers selected cards through its two central arrows.");
+                Assert.That(App.ClassicLibraryVisibleDeckCopies,Is.EqualTo(10),"The original editor lists ten physical deck copies per page.");
+                var labels=controls.Select(b=>b.GetComponentInChildren<TMPro.TMP_Text>()).ToArray();
                 foreach(var label in labels)
                 {
                     label.ForceMeshUpdate();
+                    Assert.That(label.fontSize*UiCanvasTextSize.ClientPixelScale(label.GetComponentInParent<Canvas>().rootCanvas),
+                        Is.GreaterThanOrEqualTo(7.9f),"The touch transfer arrow must retain an actual eight-pixel font size.");
                     Assert.That(label.textInfo.characterInfo.Take(label.textInfo.characterCount).Any(c=>c.isVisible),Is.True,
                         "The actual mobile quantity label has no rendered glyph geometry: "+label.text);
                 }
@@ -109,7 +113,14 @@ namespace FantasyCards.SmokeTests
             yield return SmokeUi.LoadBoot();yield return Click("게임 시작");
             Assert.That(JsonUtility.ToJson(App.QuestProfileSnapshot),Is.EqualTo(saved));
             Assert.That(App.QuestDeckCards.Count,Is.EqualTo(50));
-            Named("Quest scenario roots");yield return null;yield return Click("대전 시작");
+            yield return Click("싱글 게임");
+            var rootsRoom=UnityEngine.Object.FindObjectsByType<Button>(FindObjectsSortMode.None)
+                .Single(b=>b.gameObject.activeInHierarchy&&b.name=="Classic live room 0");
+            Assert.That(rootsRoom.GetComponentsInChildren<TMPro.TMP_Text>().Any(t=>t.text.Contains("1장 · 소울의 기초")),Is.True,
+                "The actual first single-player room must still lead to the roots scenario.");
+            Named("Classic live room 0");yield return null;
+            Assert.That(App.QuestCurrentScreen,Is.EqualTo("briefing"));
+            yield return Click("대전 시작");
             yield return SmokeUi.WaitUntil(()=>SmokeUi.FindButton("이대로 시작")!=null,8,"Opening cards missing.");
             yield return Click("이대로 시작");
             yield return SmokeUi.WaitUntil(()=>!App.IsBattlePlaybackActive&&SmokeUi.FindButton("손패 셔플")!=null&&SmokeUi.FindButton("손패 셔플").interactable,8,"Actual full-hand shuffle must be available before playing a card.");
@@ -131,7 +142,15 @@ namespace FantasyCards.SmokeTests
             Assert.That(App.QuestSp,Is.EqualTo(200));AssertUnityProfile();
             yield return Shot("continued-owned-battle");
             Call("ShowQuestLobby");yield return null;
-            yield return Click("멀티플레이");Assert.That(SmokeUi.HasText("추후 추가"),Is.True);
+            string profileBeforeMultiplayer=JsonUtility.ToJson(App.QuestProfileSnapshot);
+            var multiplayer=SmokeUi.FindButton("멀티 · 추후 업데이트");
+            Assert.That(multiplayer,Is.Not.Null,"The current client must visibly identify multiplayer as a future update.");
+            Assert.That(multiplayer.IsActive(),Is.True);
+            Assert.That(multiplayer.IsInteractable(),Is.False,"Multiplayer must remain disabled rather than open an online session.");
+            Assert.That(SmokeUi.HasText("멀티 · 추후 업데이트"),Is.True);
+            Assert.That(App.QuestCurrentScreen,Is.EqualTo("lobby"));
+            Assert.That(App.QuestCurrentTicketId,Is.EqualTo(ticket));
+            Assert.That(JsonUtility.ToJson(App.QuestProfileSnapshot),Is.EqualTo(profileBeforeMultiplayer));
             Assert.That(backend.Read("preserved-player"),Is.EqualTo("original player bytes"));
         }
 
