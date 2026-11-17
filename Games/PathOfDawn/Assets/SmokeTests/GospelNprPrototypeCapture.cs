@@ -17,7 +17,7 @@ namespace PathOfDawn.SmokeTests
     /// <summary>
     /// Root-only prototype screenshot producer. Successful execution means only
     /// that this capture sequence completed, never visual or release approval.
-    /// Deliberately excluded from the current 15-case Native contract.
+    /// Deliberately excluded from release Native contracts.
     /// </summary>
     [Explicit("Root must opt into a unique prototype capture attempt and review its originals.")]
     [Category("NprPrototypeCaptureOnly")]
@@ -169,6 +169,7 @@ namespace PathOfDawn.SmokeTests
             bool canvasActive = App.Ui.CanvasView.gameObject.activeSelf;
             bool mainActorActive = App.Actor.gameObject.activeSelf;
             bool cameraEnabled = App.CameraRig.enabled;
+            int worldMask = App.SceneCamera.cullingMask;
             var target = App.CameraRig.Target;
             fixture = new GameObject("Prototype only · five real model fixtures, not story NPCs");
             fixture.transform.position = App.Player.Position;
@@ -178,12 +179,17 @@ namespace PathOfDawn.SmokeTests
                 App.Ui.CanvasView.gameObject.SetActive(false); App.Actor.gameObject.SetActive(false);
                 App.CameraRig.enabled = false;
                 var actors = models.Select((model, index) => AddModel(model, index)).ToArray();
+                // Model-only diagnostic camera: retain the actual world light,
+                // sky and shaders, but exclude scenery that obscured the first
+                // review. Actual story/field captures below restore the mask.
+                foreach (var node in fixture.GetComponentsInChildren<Transform>(true)) node.gameObject.layer = 2;
+                App.SceneCamera.cullingMask = 1 << 2;
                 yield return new WaitForSecondsRealtime(.8f);
                 var group = actors[0].VisualBounds;
                 foreach (var actor in actors.Skip(1)) group.Encapsulate(actor.VisualBounds);
                 App.SceneCamera.transform.position = group.center + new Vector3(0, .5f, 8.2f);
                 App.SceneCamera.transform.LookAt(group.center, Vector3.up);
-                yield return Shot("five-model-lineup", "isolated visual fixture in actual world/light; no quest actors", models);
+                yield return Shot("five-model-lineup", "isolated model-only diagnostic camera, current world lighting/sky; scenery excluded, no quest actors", models);
                 for (int i = 0; i < actors.Length; i++)
                 {
                     for (int j = 0; j < actors.Length; j++) actors[j].VisualFootOrigin.parent.gameObject.SetActive(i == j);
@@ -200,11 +206,24 @@ namespace PathOfDawn.SmokeTests
                     App.SceneCamera.transform.position = faceTarget + new Vector3(height * .02f, height * .025f, height * .65f);
                     App.SceneCamera.transform.LookAt(faceTarget, Vector3.up);
                     yield return Shot(models[i] + "-face", "isolated face fixture; same actual model and world lighting, not painted portrait", models[i]);
+                    App.SceneCamera.transform.position = bounds.center + new Vector3(distance, height * .06f, distance * .04f);
+                    App.SceneCamera.transform.LookAt(bounds.center, Vector3.up);
+                    yield return Shot(models[i] + "-side-idle", "isolated actual model side view, original idle rig, current world lighting; scenery excluded", models[i]);
+                    App.SceneCamera.transform.position = bounds.center + new Vector3(distance * .78f, height * .06f, distance * .78f);
+                    App.SceneCamera.transform.LookAt(bounds.center, Vector3.up);
+                    actor.SetMotion(Vector3.forward * 1.6f, true, 0);
+                    yield return new WaitForSecondsRealtime(.5f);
+                    yield return Shot(models[i] + "-walk-three-quarter", "isolated actual model walk-cycle fixture, stationary physical owner; not controller traversal or release approval", models[i]);
+                    actor.SetMotion(Vector3.forward * 4.2f, true, 0);
+                    yield return new WaitForSecondsRealtime(.5f);
+                    yield return Shot(models[i] + "-run-three-quarter", "isolated actual model run-cycle fixture, stationary physical owner; not controller traversal or release approval", models[i]);
+                    actor.SetMotion(Vector3.zero, true, 0);
                 }
             }
             finally
             {
                 if (fixture != null) { fixture.SetActive(false); UnityEngine.Object.Destroy(fixture); fixture = null; }
+                App.SceneCamera.cullingMask = worldMask;
                 App.Actor.gameObject.SetActive(mainActorActive); App.Ui.CanvasView.gameObject.SetActive(canvasActive);
                 App.CameraRig.enabled = cameraEnabled; App.CameraRig.SetTarget(target); App.CameraRig.Snap();
             }
@@ -258,12 +277,12 @@ namespace PathOfDawn.SmokeTests
                 var turn = App.Chronicle.CurrentStoryBeat;
                 if (!mary && turn.Speaker == "마리아")
                 {
-                    yield return Shot("mary-opening-dialogue", "actual opening turn and same-model UI portrait; illustrated opening remains visible", "Mary");
+                    yield return Shot("mary-opening-dialogue", "actual opening turn and illustrated UI portrait; opening world remains visible", "Mary");
                     mary = true;
                 }
                 if (!joseph && turn.Speaker == "요셉")
                 {
-                    yield return Shot("joseph-opening-dialogue", "actual opening turn and same-model UI portrait; illustrated opening remains visible", "Joseph");
+                    yield return Shot("joseph-opening-dialogue", "actual opening turn and illustrated UI portrait; opening world remains visible", "Joseph");
                     joseph = true;
                 }
                 yield return Click("이야기 계속");

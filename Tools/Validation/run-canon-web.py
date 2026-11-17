@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / 'Tools/Validation') not in sys.path:
     sys.path.insert(0, str(ROOT / 'Tools/Validation'))
-from LivingRpgClassic import profile as RELEASE
+import release_profiles as RELEASE
 
 
 def require(value, message):
@@ -146,6 +146,8 @@ def main():
         ROOT / 'Tools/Build/restore-nativity-build-additions.py', ROOT / 'Tools/Environment/activate-shell.sh',
         ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Environment/repair-generated-cache-links.py']
     sources += list(RELEASE.EXTRA_SOURCE_FILES)
+    if RELEASE.REGISTRY_SOURCE != RELEASE.SOURCE:
+        sources.append(RELEASE.REGISTRY_SOURCE)
     pins = []
     for path in sources:
         destination = run / 'RecordedHarness' / path.relative_to(ROOT)

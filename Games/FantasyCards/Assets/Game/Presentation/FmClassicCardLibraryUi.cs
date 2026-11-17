@@ -271,16 +271,22 @@ namespace FantasyCards.Presentation
             int count, bool selected, string name, Action select, Action detail)
         {
             var row = LibraryPanel(name, x, top, width, height, false);
-            row.GetComponent<UiRoundedImage>().color = selected ? new Color(.065f, .092f, .099f) : new Color(.019f, .021f, .022f);
-            Frame(row, selected ? new Color(.39f, .59f, .66f) : new Color(.19f, .20f, .19f), 1);
+            row.GetComponent<UiRoundedImage>().color = selected ? new Color(.084f, .062f, .058f) : new Color(.019f, .021f, .022f);
+            Frame(row, selected ? new Color(.65f, .29f, .24f) : new Color(.25f, .26f, .25f), 1);
+            if (selected)
+                ClassicClientRect(root, "Classic selected card row marker", x + 1, top + 2, 2, height - 4, new Color(.63f, .20f, .16f));
             row.GetComponent<Image>().raycastTarget = true;
             var button = row.gameObject.AddComponent<Button>(); button.targetGraphic = row.GetComponent<Image>();
             button.onClick.AddListener(() => { FmBattleAudio.Play("card-select"); select(); });
-            LibraryText("Lv" + card.level, x + 5, top, 29, height, 8.7f, ClassicSteel);
-            var dot = ClassicClientRect(root, "Card element " + card.element, x + 39, top + 6, 6, 6, ElementColor(card.element));
-            dot.GetComponent<UiRoundedImage>().Radius = 8;
-            LibraryText(card.name, x + 49, top, width - 132, height, 9, ivory);
-            LibraryText(card.level + new[] { "T", "U", "S", "I" }[(int)card.kind], x + width - 78, top, 25, height, 8.5f, ClassicSteel);
+            var metadata = new Color(.65f, .66f, .63f);
+            LibraryText("Lv" + card.level, x + 5, top, 29, height, 9, metadata);
+            // A live vector attribute seal stays distinct at a narrow list
+            // size; a blurred coloured dot did not identify all seven kinds.
+            ElementIcon(root, card.element, (x + 36) / 640, 1 - (top + height * .5f + 6) / 480,
+                (x + 48) / 640, 1 - (top + height * .5f - 6) / 480);
+            root.GetChild(root.childCount - 1).name = "Card element " + card.element;
+            LibraryText(card.name, x + 49, top, width - 132, height, 9.5f, selected ? Color.white : ivory);
+            LibraryText(card.level + new[] { "T", "U", "S", "I" }[(int)card.kind], x + width - 78, top, 25, height, 9, metadata);
             LibraryText(CardCatalog.RarityCode(card.rarity), x + width - 52, top, 29, height, 8.5f, RarityColor(card.rarity));
             if (count >= 0) LibraryText(count.ToString(), x + width - 25, top, 20, height, 9, new Color(.82f, .36f, .35f), TextAlignmentOptions.Right);
             BindCardHelp(row.gameObject, card, detail);
@@ -334,6 +340,7 @@ namespace FantasyCards.Presentation
             LibraryText(CardCatalog.ElementName(card.element) + " · " + CardCatalog.KindName(card.kind) + " · " + CardCatalog.CostText(card), textX, 395, 623 - textX, 16, 9, ivory);
             var body = LibraryText(card.text, textX, 414, 623 - textX, 30, 9, ClassicSteel, TextAlignmentOptions.TopLeft);
             body.textWrappingMode = TextWrappingModes.Normal;
+            body.GetComponent<UiCanvasTextSize>().ConfigureResponsiveCaption(9 * 2.25f, 2);
             LibraryText((owned ? "보유 " + questEconomy.OwnedCount(card.id) + "장 · " : "") + "덱 " + inDeck + "/" + allowed + "장", textX, 450, owned ? 200 : 385 - textX, 17, 9, ivory);
             if (!owned) LibraryButton("등급 / 랭크 안내", 391, 449, 142, 18, () => ShowCardGradeGuide(edit, back));
             LibraryButton("카드 상세", 544, 449, 77, 18, () => ShowDetail(card, back));
@@ -404,7 +411,7 @@ namespace FantasyCards.Presentation
                 originalArchiveSort == 2 ? query.OrderBy(card => card.level).ThenBy(card => card.name) :
                 query.OrderByDescending(card => card.id.Length).ThenByDescending(card => card.id, StringComparer.Ordinal)).ToArray();
             OriginalArchiveFilteredCount = cards.Length;
-            bool small = canvas.pixelRect.height < 600, large = originalArchiveLargePreference ?? small;
+            bool small = UiCanvasTextSize.ClientCssSize(canvas).y < 600, large = originalArchiveLargePreference ?? small;
             void Search() { originalArchiveSearch = originalArchiveDraft.Trim(); originalArchivePage = 0; ShowRestorationOriginalArchive(); }
             LibrarySearch("Original archive search input", originalArchiveDraft, "카드 이름 · 번호 · 기술", 20, 68, 307, value => originalArchiveDraft = value, Search);
             LibraryButton("검색", 333, 68, 64, 23, Search);
@@ -441,9 +448,9 @@ namespace FantasyCards.Presentation
                 button.transition = Selectable.Transition.None;
                 button.onClick.AddListener(() => { classicLibraryCardId = card.id; FmBattleAudio.Play("card-select"); ShowRestorationArchiveDetail(card); });
                 var name = MiniCardText(tile, card.name, .035f, .092f, .965f, .205f, 21, ivory, "Album card name " + card.id);
-                name.overflowMode = TextOverflowModes.Ellipsis; name.GetComponent<UiCanvasTextSize>().ConfigureCard(21);
+                name.font = ClassicReadableFont; name.overflowMode = TextOverflowModes.Ellipsis; name.GetComponent<UiCanvasTextSize>().ConfigureCard(21);
                 var grade = MiniCardText(tile, CardCatalog.RarityCode(card.rarity) + (Playable(card) ? " · 출전" : " · 원본"), .035f, .005f, .965f, .095f, 19, RarityColor(card.rarity), "Album card grade " + card.id);
-                grade.overflowMode = TextOverflowModes.Ellipsis; grade.GetComponent<UiCanvasTextSize>().ConfigureCard(19);
+                grade.font = ClassicReadableFont; grade.overflowMode = TextOverflowModes.Ellipsis; grade.GetComponent<UiCanvasTextSize>().ConfigureCard(19);
                 BindTooltip(tile.gameObject, card.name, CardCatalog.RarityName(card.rarity) + " · " + CardCatalog.ElementName(card.element) + (Playable(card) ? " · 출전 지원" : " · 원본 보관"));
                 var hover = tile.GetComponent<UiCardHover>(); hover.HoverScale = 1; hover.HoverLift = 0;
                 var tooltipEnter = hover.Enter;

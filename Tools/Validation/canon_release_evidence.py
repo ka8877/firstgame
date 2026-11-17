@@ -17,7 +17,7 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 
 from restoration_source_binding import ROOT, digest, verify
-from LivingRpgClassic import profile as RELEASE
+import release_profiles as RELEASE
 
 OUT = Path(os.environ.get('FIRSTGAME_VALIDATION_ROOT', str(RELEASE.OUT)))
 BUILD = Path(os.environ.get('FIRSTGAME_BUILD_ROOT', str(RELEASE.BUILD)))
@@ -160,6 +160,12 @@ def verify_native_review(game, binding, native):
     for shot in shots:
         original = ROOT / shot.get('file', shot.get('path', ''))
         require(original.resolve().is_relative_to((OUT / 'Screenshots' / game).resolve()) and digest(regular(original)) == shot.get('sha256'), 'Native Root original differs')
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        from SharpIllustration.contract import native_original_suffixes
+        filenames = [Path(shot.get('file', shot.get('path', ''))).stem for shot in shots]
+        require(all(any(name == suffix or name.endswith('-' + suffix) for name in filenames)
+                    for suffix in native_original_suffixes(game)),
+                'Direct Root review must include every current Sharp/Illustration Native original')
     if RELEASE.IS_CLASSIC_NPR:
         from ClassicNpr.contract import native_original_suffixes
         filenames = [Path(shot.get('file', shot.get('path', ''))).stem for shot in shots]
@@ -175,6 +181,9 @@ def preserved_card():
 
 
 def current_native_names(game):
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        from SharpIllustration.contract import native_full_names
+        return native_full_names(game)
     if RELEASE.IS_CLASSIC_NPR:
         from ClassicNpr.contract import native_full_names
         return native_full_names(game)
@@ -264,6 +273,14 @@ def verify_web_execution(game, proof_path, source_fingerprint):
         source = checked(native[key])
         require(source.read_bytes() == regular(OUT / 'Native' / game / filename).read_bytes(), 'Canonical Native must be the exact selected passed run')
     require(selected_binding.get('sourceFingerprint') == source_fingerprint, 'Selected Native fingerprint differs')
+    native_invocation = read(checked(native['summary']).parent / 'invocation.json')
+    for field, current in (('releaseConfiguration', RELEASE.SOURCE), ('releaseRegistry', RELEASE.REGISTRY_SOURCE)):
+        pin = native_invocation.get(field, {})
+        recorded = checked(native['summary']).parent / 'RecordedHarness' / current.relative_to(ROOT)
+        require(pin.get('source') == str(current.relative_to(ROOT))
+                and pin.get('recorded') == str(recorded.relative_to(ROOT))
+                and digest(regular(current)) == digest(regular(recorded)) == pin.get('sha256'),
+                'Actual Native selector and registry source snapshots must remain exact')
     if RELEASE.USES_NPR_GOSPEL:
         npr_invocation = read(checked(native['summary']).parent / 'invocation.json')
         extras = npr_invocation.get('extraReleaseSources', [])
@@ -450,6 +467,12 @@ def verify_browser(game, profile):
         require_browser_plan(plan, game, expected_kind=expected_kind)
         require(plan.get('evidenceRole') == report.get('evidenceRole') == browser_role(game),
                 'Current Classic/NPR evidence role differs')
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        from SharpIllustration.contract import require_browser_plan, browser_role, require_browser_clarity
+        expected_kind = {'Desktop720': 'desktop', 'Mobile844': 'mobile', 'PublicMobile844': 'public'}[profile]
+        require_browser_plan(plan, game, expected_kind=expected_kind)
+        require(plan.get('evidenceRole') == report.get('evidenceRole') == browser_role(game), 'Current Sharp/Illustration role differs')
+        require_browser_clarity(report, plan, expected_kind=expected_kind)
     for source in harness.get('capturedSources', []):
         require(digest(regular(ROOT / source['source'])) == digest(regular(ROOT / source['file'])) == source['sha256'], 'Recorded browser source changed')
     require(harness.get('capturedSources'), 'Actual executed browser/helper/plan source snapshots required')

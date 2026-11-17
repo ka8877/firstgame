@@ -63,7 +63,7 @@ namespace PathOfDawn.Presentation
         bool spatialOpeningStageVisible;
         Func<string, bool, Texture> characterPortraitProvider;
         Func<string, Texture> itemPreviewProvider;
-        readonly List<ModelPortraitBinding> modelPortraits = new List<ModelPortraitBinding>();
+        readonly List<IllustratedPortraitBinding> illustratedPortraits = new List<IllustratedPortraitBinding>();
         Rect youngPortraitUv = new Rect(0, 0, .455f, 1);
         Rect adultPortraitUv = new Rect(.5f, 0, .5f, 1);
         Rect livingYoungPortraitUv = new Rect(0, 0, .5f, 1);
@@ -71,12 +71,13 @@ namespace PathOfDawn.Presentation
         static Sprite solidSprite;
         readonly DawnUi canopySkin = new DawnUi { ModernStyle = true };
 
-        sealed class ModelPortraitBinding
+        sealed class IllustratedPortraitBinding
         {
             public RawImage Image;
             public string Identity;
             public bool Adult;
             public bool Available;
+            public Rect SourceRegion;
             public float Width, Height;
             public Action<bool> AvailabilityChanged;
         }
@@ -84,11 +85,11 @@ namespace PathOfDawn.Presentation
         bool PaperMenu => currentView == "status" || currentView == "inventory" || currentView == "map"
             || currentView == "pause" || currentView == "quests" || currentView == "settings";
 
-        /// <summary>Supply the current rigged model's portrait, including its real clothes and age.</summary>
+        /// <summary>Supply the authored illustrated portrait for the speaker and age.</summary>
         public void SetCharacterPortraitProvider(Func<string, bool, Texture> provider)
         {
             characterPortraitProvider = provider;
-            RefreshModelPortraits();
+            RefreshIllustratedPortraits();
         }
 
         public void SetItemPreviewProvider(Func<string, Texture> provider) => itemPreviewProvider = provider;
@@ -155,7 +156,7 @@ namespace PathOfDawn.Presentation
         void Update()
         {
             if (Time.unscaledTime >= nextPortraitUpdate)
-            { nextPortraitUpdate = Time.unscaledTime + .25f; RefreshModelPortraits(); }
+            { nextPortraitUpdate = Time.unscaledTime + .25f; RefreshIllustratedPortraits(); }
             if (notice != null) notice.gameObject.SetActive(!usingBook && Time.unscaledTime < noticeUntil);
             if (scriptureNotice != null)
             {
@@ -610,7 +611,7 @@ namespace PathOfDawn.Presentation
         {
             BeginBook(); book.ShowChronicleDialogue(chronicle, () => Invoke(next));
             portraitAdult = Adult(chronicle);
-            var speaker = ModelSpeakerIdentity(chronicle.CurrentDialogue);
+            var speaker = IllustratedSpeakerIdentity(chronicle.CurrentDialogue);
             var texture = string.IsNullOrWhiteSpace(speaker) ? null : characterPortraitProvider?.Invoke(speaker, portraitAdult);
             foreach (var art in book.Frame.GetComponentsInChildren<RawImage>())
             {
@@ -633,6 +634,17 @@ namespace PathOfDawn.Presentation
                 || turn.Speaker == "천사" || turn.Speaker == "가브리엘" || turn.Speaker == "주의 사자"
                 || turn.Speaker == "천군" || turn.Speaker == "하늘에서 들린 소리") return null;
             return turn.PortraitKey;
+        }
+
+        /// <summary>UI art identity is separate from the retained world performer.</summary>
+        public static string IllustratedSpeakerIdentity(GospelDialogueTurn turn)
+        {
+            string identity = ModelSpeakerIdentity(turn);
+            if (identity == null) return null;
+            // The opening uses its existing teacher rig for the shepherd. Its
+            // illustrated face can depict that speaker without changing the
+            // physical/opening model resolver or inventing another NPC.
+            return turn.Speaker == "목자" ? "shepherd" : identity;
         }
 
         public void Toast(string message)
@@ -670,20 +682,25 @@ namespace PathOfDawn.Presentation
 
         void PaintPortrait(Transform parent, bool adult, float x, float y, float width, float height)
         {
-            ModelPortrait(parent, "Actual model " + (adult ? "adult" : "young") + " Jesus portrait",
-                "jesus", adult, x, y, width, height);
+            IllustratedPortrait(parent, "Illustrated " + (adult ? "adult" : "young") + " Jesus portrait",
+                "jesus", adult, x, y, width, height, width <= 80 && height <= 80);
         }
 
-        ModelPortraitBinding ModelPortrait(Transform parent, string name, string identity, bool adult,
-            float x, float y, float width, float height)
+        IllustratedPortraitBinding IllustratedPortrait(Transform parent, string name, string identity, bool adult,
+            float x, float y, float width, float height, bool faceOnly = false)
         {
             var texture = string.IsNullOrWhiteSpace(identity) ? null : characterPortraitProvider?.Invoke(identity, adult);
             var image = Rect(parent, name, x, y, width, height).gameObject.AddComponent<RawImage>();
             image.texture = texture; image.raycastTarget = false; image.enabled = texture != null;
-            if (texture != null) image.uvRect = PortraitCrop(texture, new Rect(0, 0, 1, 1), width, height);
-            var binding = new ModelPortraitBinding { Image = image, Identity = identity, Adult = adult,
-                Available = texture != null, Width = width, Height = height };
-            modelPortraits.Add(binding);
+            // The compact HUD spends its pixels on the head. Larger status
+            // and dialogue panels retain the illustrated shoulders and drape.
+            // The authored set shares this safe head region; neither crop
+            // stretches an image or changes the actual world character.
+            Rect region = faceOnly ? new Rect(.14f, .34f, .72f, .62f) : new Rect(0, 0, 1, 1);
+            if (texture != null) image.uvRect = PortraitCrop(texture, region, width, height);
+            var binding = new IllustratedPortraitBinding { Image = image, Identity = identity, Adult = adult,
+                Available = texture != null, SourceRegion = region, Width = width, Height = height };
+            illustratedPortraits.Add(binding);
             return binding;
         }
 
@@ -693,12 +710,12 @@ namespace PathOfDawn.Presentation
             return characterPortraitProvider?.Invoke("jesus", adult);
         }
 
-        void RefreshModelPortraits()
+        void RefreshIllustratedPortraits()
         {
-            for (int i = modelPortraits.Count - 1; i >= 0; i--)
+            for (int i = illustratedPortraits.Count - 1; i >= 0; i--)
             {
-                var binding = modelPortraits[i];
-                if (binding.Image == null) { modelPortraits.RemoveAt(i); continue; }
+                var binding = illustratedPortraits[i];
+                if (binding.Image == null) { illustratedPortraits.RemoveAt(i); continue; }
                 if (!binding.Image.gameObject.activeInHierarchy) continue;
                 var texture = string.IsNullOrWhiteSpace(binding.Identity) ? null
                     : characterPortraitProvider?.Invoke(binding.Identity, binding.Adult);
@@ -711,7 +728,7 @@ namespace PathOfDawn.Presentation
                     binding.AvailabilityChanged?.Invoke(available);
                 }
                 if (texture == null) continue;
-                binding.Image.uvRect = PortraitCrop(texture, new Rect(0, 0, 1, 1), binding.Width, binding.Height);
+                binding.Image.uvRect = PortraitCrop(texture, binding.SourceRegion, binding.Width, binding.Height);
             }
         }
 
@@ -725,8 +742,8 @@ namespace PathOfDawn.Presentation
                 return new Rect(source.x + (source.width - newWidth) * .5f, source.y, newWidth, source.height);
             }
             float newHeight = source.height * sourceAspect / targetAspect;
-            // Keep the head in view when the portrait panel is more square than
-            // the unchanged source half. Never stretch the face sideways.
+            // Keep the illustrated hair margin in view when the panel is more
+            // square than the source bust. Never stretch the face sideways.
             return new Rect(source.x, source.yMax - newHeight, source.width, newHeight);
         }
 

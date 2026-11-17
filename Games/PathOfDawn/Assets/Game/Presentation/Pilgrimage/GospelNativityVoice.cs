@@ -158,7 +158,7 @@ namespace PathOfDawn.Presentation
         {
             string oldKey = currentKey;
             bool wasPlaying = IsPlaying, wasPending = IsPending;
-            float oldTime = source != null ? source.time : 0;
+            float oldTime = source != null && source.clip != null ? source.time : 0;
             generation++; pending = null; requested = null; currentKey = "";
             if (source != null) { source.Stop(); source.clip = null; }
             music?.SetNarrationActive(false); LastStopReason = reason;

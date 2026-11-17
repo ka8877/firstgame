@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "status": "source-only-native-stdout-schema-fix-frozen-awaiting-Root-retry",
+  "files": [
+    {
+      "file": "Tools/Validation/SharpIllustration/select-native.py",
+      "bytes": 20929,
+      "sha256": "d05076d7e1cced4cfd577f296b6f27fdc30ef475f42a1c778c6785125602117b"
+    }
+  ],
+  "previousSourceSha256": "f46c943a48a82a20d9e0ceae05c52d7f3d3cf28d2fe518e4ba144ce571d4b254",
+  "rootReportedFailure": "SelectCardNative03 stopped before mutation because RUN/guard.log does not exist. Root retained the failed executed source; no canonical destination or selection folder was created.",
+  "exactCorrection": "Keep CONTROL containment command-spec stdoutPath and actual-command.stdout.log strict; compare its bytes/SHA to RUN/Containment/<same receipt parent ordinal-event>/actual-command.stdout.log, the actual duplicate retained by Controller.flush. No run/<label>.log assumption.",
+  "unchangedChecks": "All actual receipt/spec/supervisor/native producer/source/XML/inputs/fingerprint/fresh-copy/readback/no-approval requirements stay unchanged.",
+  "authorExecutedOrImportedHelper": false,
+  "authorValidatedRuntimeOrComputedProductHash": false,
+  "sharedSourcesContractsOldProofsChanged": false,
+  "rootRetryLabel": "SelectCardNative03B is Root planned new wrapper label; no result claimed."
+}

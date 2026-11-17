@@ -224,9 +224,9 @@ namespace PathOfDawn.Presentation
             var dialogue = Panel(layer, "Story dialogue", 72, 470, 1136, 218, new Color(.017f, .033f, .036f, .92f), true);
             dialogue.gameObject.AddComponent<GospelUiMotion>();
             Rule(dialogue, 0, 23, 2, 150, new Color(.78f, .69f, .43f, .63f));
-            var portrait = ModelPortrait(dialogue, "Actual story speaker model portrait", ModelSpeakerIdentity(turn),
-                portraitAdult, 22, 17, 144, 174);
-            float left = portrait.Available ? 190 : 27;
+            var portrait = IllustratedPortrait(dialogue, "Illustrated story speaker portrait", IllustratedSpeakerIdentity(turn),
+                portraitAdult, 16, 8, 176, 196);
+            float left = portrait.Available ? 214 : 27;
             float width = 1136 - left - 27;
             var speaker = Text(dialogue, turn.Speaker, left, 17, width, 33, 25, Gold, TextAlignmentOptions.TopLeft, true);
             var spoken = Scroll(dialogue, turn.Text, left, 61, width, 101, 28, White);
@@ -237,7 +237,7 @@ namespace PathOfDawn.Presentation
                 if (spoken == null || speaker == null) return;
                 var scroll = spoken.GetComponentInParent<ScrollRect>();
                 if (scroll == null) return;
-                float x = visible ? 190 : 27, availableWidth = 1136 - x - 27;
+                float x = visible ? 214 : 27, availableWidth = 1136 - x - 27;
                 speaker.rectTransform.anchoredPosition = new Vector2(x, -17);
                 speaker.rectTransform.sizeDelta = new Vector2(availableWidth, 33);
                 var holder = (RectTransform)scroll.transform;

@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / 'Tools/Validation') not in sys.path:
     sys.path.insert(0, str(ROOT / 'Tools/Validation'))
-from LivingRpgClassic import profile as RELEASE
+import release_profiles as RELEASE
 
 CONTROL = Path(os.environ.get('FIRSTGAME_CONTROL_ROOT', str(RELEASE.CONTROL))).resolve()
 assert CONTROL.is_relative_to(ROOT / 'Artifacts/Validation/Autonomy')
@@ -96,6 +96,9 @@ def main():
     elif RELEASE.IS_CLASSIC_NPR:
         from ClassicNpr.contract import native_full_names
         npr_names = native_full_names(args.game)
+    elif RELEASE.IS_SHARP_ILLUSTRATION:
+        from SharpIllustration.contract import native_full_names
+        npr_names = native_full_names(args.game)
     restore_controls()
     lease_path = CONTROL / 'lease.json'
     lease = json.loads(lease_path.read_bytes())
@@ -137,10 +140,17 @@ def main():
         names = json.loads(native.read_bytes())['expectedFullNames']; expected = 8
     lane.env['FIRSTGAME_NATIVE_FILTER'] = ';'.join(names)
     shutil.copyfile(__file__, run / 'executed-driver.py')
-    profile_copy = run / 'RecordedHarness/Tools/Validation/LivingRpgClassic/profile.py'
+    profile_copy = run / 'RecordedHarness' / RELEASE.SOURCE.relative_to(ROOT)
     profile_copy.parent.mkdir(parents=True, exist_ok=True)
     with profile_copy.open('xb') as stream:
         stream.write(RELEASE.SOURCE.read_bytes())
+    registry_copy = run / 'RecordedHarness' / RELEASE.REGISTRY_SOURCE.relative_to(ROOT)
+    if registry_copy != profile_copy:
+        registry_copy.parent.mkdir(parents=True, exist_ok=True)
+        with registry_copy.open('xb') as stream:
+            stream.write(RELEASE.REGISTRY_SOURCE.read_bytes())
+    registry_pin = {'source': str(RELEASE.REGISTRY_SOURCE.relative_to(ROOT)),
+                    'recorded': str(registry_copy.relative_to(ROOT)), 'sha256': sha(registry_copy.read_bytes())}
     extra_sources = []
     for source in RELEASE.EXTRA_SOURCE_FILES:
         raw = source.read_bytes()
@@ -153,6 +163,7 @@ def main():
     write(run / 'invocation.json', {'scope': 'current-product-native-only', 'game': args.game,
         'attempt': args.attempt, 'filter': names, 'expectedCount': expected,
         'releaseProfile': RELEASE.NAME,
+        'releaseRegistry': registry_pin,
         **({'extraReleaseSources': extra_sources} if RELEASE.USES_NPR_GOSPEL else {}),
         'releaseConfiguration': {'source': str(RELEASE.SOURCE.relative_to(ROOT)),
             'recorded': str(profile_copy.relative_to(ROOT)), 'sha256': sha(profile_copy.read_bytes())},
@@ -172,6 +183,8 @@ def main():
         args.game, args.attempt], cap=EXECUTION_LIMIT_SECONDS)
     for pin in extra_sources:
         assert sha((ROOT / pin['source']).read_bytes()) == sha((ROOT / pin['recorded']).read_bytes()) == pin['sha256']
+    assert sha(RELEASE.SOURCE.read_bytes()) == sha(profile_copy.read_bytes())
+    assert sha(RELEASE.REGISTRY_SOURCE.read_bytes()) == sha(registry_copy.read_bytes()) == registry_pin['sha256']
     summary = {'status': 'failed', 'game': args.game, 'attempt': args.attempt,
         'scope': 'current-product-native-only', 'publishReady': False,
         'execution': result, 'finishedUtc': datetime.now(timezone.utc).isoformat()}

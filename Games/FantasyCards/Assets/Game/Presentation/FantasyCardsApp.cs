@@ -60,11 +60,11 @@ namespace FantasyCards.Presentation
             if (authored.Length > 0) CardCatalog.ApplyAuthoredDefinitions(authored.Select(asset => asset.ToDefinition()));
             foreach (var asset in authored) if (asset.illustration != null) authoredIllustrations[asset.stableId] = asset.illustration;
             var ruleAsset = Resources.Load<RuleSetAsset>("Data/Rules"); authoredRules = ruleAsset != null ? ruleAsset.CreateRuntimeRules() : new RuleSet();
-            font = Resources.Load<TMP_FontAsset>("Fonts/ClassicPixel") ?? Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? TMP_Settings.defaultFontAsset;
+            font = Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? Resources.Load<TMP_FontAsset>("Fonts/ClassicPixel") ?? TMP_Settings.defaultFontAsset;
             // Bundled instrumental playback is supplied by the cross-platform music bridge.
             music = null; InitializeOriginalMusic();
             var c = new GameObject("Fantasy Masters Client", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-            canvas = c.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 10;
+            canvas = c.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceOverlay; canvas.sortingOrder = 10; canvas.pixelPerfect = true;
             var scaler = c.GetComponent<CanvasScaler>(); scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; scaler.referenceResolution = new Vector2(1920, 1080); scaler.matchWidthOrHeight = .5f;
             // The retained FM1 client is a 640:480 window. Keep that geometry
             // at every browser size instead of widening its panels to 16:9.

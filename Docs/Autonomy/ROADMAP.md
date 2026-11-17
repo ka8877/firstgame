@@ -1,3 +1,16 @@
+## SharpIllustration 진행 중 — 2026-11-17
+
+현재 Native05/Card11·Native03/Gospel18과 Web02/01 및 **최종 e1cbd 로컬4회가 모두 통과해 현재4/6승인**입니다. CardPC03는464검사/91PNG/64+9Root, GospelPC02는498/100/74Root, GospelMobile03는435/87/60+2Root, 새 Release의 CardMobile02는490/97/63+12Root입니다. 매회0거짓·오디오4/재접속2·inner/outer4개 event0/빈 후손과 Root 검토를 확인했습니다. 실제 CardPC55장/25종과 모바일55장/27종은 각각200SP/50덱을 유지하며 서로의 RNG 결과를 덮어쓰지 않습니다. 현재 CONTROL은 `SharpIllustrationRelease-2026-11-17`, owner`665fc59c…`/lock`51161c22…`, 고정03:39:21.890151–09:39:21.890151UTC입니다. 이전 정상 해제/전환과 Native/Web의 원 Sharp·3브라우저의 실제 Resume 소유를 보존합니다. main/stage/P·공개2회는 아직 대기입니다.
+
+1. **현재 Native/Web 성공과 실패 이력을 보존합니다.** source`3cf2818b…`/Native05·source`c108f5eb…`/Native03 및 Web02/01은 완료했으므로 이 문서 때문에 재실행하지 않습니다. Gospel01의16/2·02의17/1과 옛 Native03 canonical/Web01은 별도 보존합니다.
+2. **완료한 로컬4회와 실제 소유/원문을 보존합니다.** CardMobile02는 새 Release 실행으로04:11:44완료/04:12:21Root검토·490검사/97PNG/필수63+보충12Root/오디오4/재접속2를 확정했습니다. 실제55장/27종·200SP/50덱, 스크롤로 전체 긴 규칙/Kingpin·일반/보장 확률/마지막 공정성 문구,49거절/50복원과 재접속 후5개10행 덱 페이지·마지막 재추가 성당내부·page1복귀를 확인했습니다. PC03의 실제25종과 기존3승인의 Resume owner/원문은 그대로입니다. 과거 성공/실패/미완료 및 단순 환경/인물·작은 성경 글자·낮은 원본 카드 해상도/작은 전투 조작부라는 품질 한계도 유지합니다.
+3. **정상 main·게시·PublicPortal을 검증합니다.** 기존 자동 main 반영 승인을 유지하고 정확한 후보/main CI·stage 전체 크기/Pages·공개 전체 GET/Root 포털 검토를 마칩니다. 현재 새 main/PR/배포는 없고 source`1af1205e…`/P`9e7c049b…`가 성공 공개판입니다.
+4. **Portal 뒤 두 공개 suite와 최종 보존/종료를 마칩니다.** Card/Gospel PublicMobile 계획도 최종 검증기의 같은 runtime/DPR·오디오4/재접속2·Root gate로 독립 실행하고 전체 봉인·durable 증거·정상 해제/Closure를 실제 결과로 기록합니다. 지금은 여섯 계획 동결/최종 검증기4통과이며 새 공개 suite는 아직 없습니다. 새 Release의 증거 source fixture8/7/4개는 실제4개 event0/빈 후손이지만 실제 archive/AQ/저장공간 작업은 아니며 미래 공개P 취득·내구 보존 완료를 뜻하지 않습니다.
+
+Tools22/PNG606의 공유 inode는 불변이며 생성기는 새 임시 파일 뒤 원자 pathname 교체만 합니다. Compiler8은 현재/tmp 파생 복사만 compaction했습니다. ModelReloc01의 복사 전 실패와 별도 실제2외부 weight691,407,650B의/tmp 이동·symlink 경로를 구분합니다. 선택2cache inode는 보존한 것이 아니며12다른 파일/7dirinode는 유지했고 가시 PPID0/3baseline service·unknown fd/maps의 제한된 관측을 모든 reader 부재로 확대하지 않습니다. 관측 여유 workspace810,647,552B/tmp696,311,808B, 원본/proof/old Bee 삭제 없음입니다. Gallery emergency audit와 normal outer ENOSPC 실패도 각각 보존합니다. 원작/아트·모바일 성경 품질 한계와 사용자 미적 승인 여부는 그대로 남습니다. 현재 lease는 [STATE.json](STATE.json)을 따르고 아래는 이전 이력입니다.
+
+---
+
 ## main 자동반영 승인·PR #11 반영 완료 — 2026-11-16
 
 사용자 지시: “메인자동반영해 물어보지말고”. 기존 승인된 firstgame 작업 범위에서 검증을 통과한 변경은 추가 승인 질문 없이 main에 정상 반영한다. 기존 검증·원본 보존 절차를 따른다.

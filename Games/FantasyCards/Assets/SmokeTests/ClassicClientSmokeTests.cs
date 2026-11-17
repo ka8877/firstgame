@@ -148,7 +148,17 @@ namespace FantasyCards.SmokeTests
             string names = string.Concat(CardCatalog.All.Select(card => card.name)) + string.Concat(OriginalCardArchive.All.Select(card => card.name));
             Assert.That(pixel.HasCharacters(names, out uint[] missingNames, true), Is.True, "Every actual playable/archive card name must resolve in the pixel font or preserved fallback.");
             Assert.That(pixel.fallbackFontAssetTable, Does.Contain(Resources.Load<TMP_FontAsset>("Fonts/Korean")));
-            Assert.That(GameObject.Find("Live disabled multiplayer status covering original capture").GetComponentInChildren<TMP_Text>().font, Is.EqualTo(pixel));
+            var liveStatus = GameObject.Find("Live disabled multiplayer status covering original capture").GetComponentInChildren<TMP_Text>();
+            var readable = Resources.Load<TMP_FontAsset>("Fonts/Korean");
+            Assert.That(readable, Is.Not.Null);
+            Assert.That(liveStatus.font, Is.EqualTo(readable), "The sharper live client uses the retained Korean SDF font while the complete static bitmap stays preserved.");
+            Assert.That(liveStatus.font.material.shader.name, Does.Contain("Distance Field"));
+            liveStatus.ForceMeshUpdate();
+            Assert.That(liveStatus.textInfo.characterCount, Is.GreaterThan(0));
+            Assert.That(liveStatus.textInfo.characterInfo.Take(liveStatus.textInfo.characterCount)
+                .Where(character => !char.IsWhiteSpace(character.character)).All(character => character.isVisible), Is.True,
+                "The actual disabled-multiplayer status must render every non-space glyph.");
+            Assert.That(ReadRenderedUiMesh(liveStatus).vertexCount, Is.GreaterThan(0));
         }
 
         static void AssertSkinRendererHasGeometry(FmClassicClientSkin skin)

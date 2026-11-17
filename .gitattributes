@@ -113,3 +113,21 @@ Tools/Validation/run-canon-native.py whitespace=-blank-at-eof
 Tools/Validation/run-canon-web.py whitespace=-blank-at-eof
 Tools/Web/release_contract.py whitespace=-blank-at-eof
 Tools/Web/stage-gospel-npr.py whitespace=-blank-at-eof
+
+# Preserve verified Unity-generated Sharp assets and literal patch context bytes.
+Games/PathOfDawn/Assets/Art/GospelIllustration20261117.meta -whitespace
+Games/PathOfDawn/Assets/Art/GospelIllustration20261117/**/*.asset -whitespace
+Games/PathOfDawn/Assets/Art/GospelIllustration20261117/**/*.mat -whitespace
+Games/PathOfDawn/Assets/Art/GospelIllustration20261117/**/*.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelIllustratedPortraitPreparation.cs.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelIllustrationDiagnostics.cs.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelIllustrationFittedCloth.cs.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelIllustrationHairline.cs.meta -whitespace
+Games/PathOfDawn/Assets/Editor/GospelIllustrationTailoring.cs.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelIllustrated.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelIllustrated/Portraits.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelIllustrated/Portraits/*.png.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelIllustration20261117.meta -whitespace
+Games/PathOfDawn/Assets/Resources/Art/GospelIllustration20261117/ExpressionBindings.json.meta -whitespace
+Tools/Validation/SharpIllustration/harness-integration.patch -whitespace
+Tools/Validation/SharpIllustration/relocate-two-downloaded-model-cache-files.py whitespace=-blank-at-eof

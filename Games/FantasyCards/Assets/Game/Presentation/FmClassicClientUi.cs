@@ -17,6 +17,9 @@ namespace FantasyCards.Presentation
         static readonly Color ClassicSteel = new Color(.46f, .47f, .45f);
         static readonly Color ClassicBlue = new Color(.065f, .16f, .20f);
         const string ProfileGreetingKey = "FC.profile.greeting";
+        TMP_FontAsset classicReadableFont;
+        TMP_FontAsset ClassicReadableFont => classicReadableFont != null ? classicReadableFont
+            : classicReadableFont = Resources.Load<TMP_FontAsset>("Fonts/Korean") ?? font;
         public string LocalProfileGreeting => SafeProfileGreeting(PlayerPrefs.GetString(ProfileGreetingKey, ""));
 
         static string SafeProfileGreeting(string value) => new string((value ?? "").Where(c => !char.IsControl(c) && c != '<' && c != '>').Take(15).ToArray()).Trim();
@@ -34,7 +37,7 @@ namespace FantasyCards.Presentation
         TMP_Text ClassicText(Transform parent, string value, float x, float y, float xx, float yy, float size, Color tint, TextAlignmentOptions alignment = TextAlignmentOptions.MidlineLeft)
         {
             var text = Text(parent, value, x, y, xx, yy, size, tint, alignment);
-            text.font = font; text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.font = ClassicReadableFont; text.textWrappingMode = TextWrappingModes.NoWrap;
             text.GetComponent<UiCanvasTextSize>().ConfigureCard(size);
             return text;
         }
@@ -64,6 +67,16 @@ namespace FantasyCards.Presentation
             var skin = new GameObject(button ? "Original 2017 graphite button skin" : "Original 2017 engraved window skin", typeof(RectTransform), typeof(FmClassicClientSkin)).GetComponent<FmClassicClientSkin>();
             skin.transform.SetParent(parent, false); Anchor((RectTransform)skin.transform, 0, 0, 1, 1); skin.transform.SetAsFirstSibling();
             skin.Source = source; skin.texture = source; skin.ButtonSkin = button; skin.raycastTarget = false; skin.color = Color.white; skin.SetAllDirty();
+            // A single device-pixel inset keeps the original dark-metal edge
+            // readable independently of the retained low-resolution ornament.
+            var edge = new GameObject("Crisp classic metal inset", typeof(RectTransform), typeof(UiRoundedImage)).GetComponent<UiRoundedImage>();
+            edge.transform.SetParent(skin.transform, false);
+            float pixel = 1 / Mathf.Max(.001f, UiCanvasTextSize.ClientPixelScale(canvas));
+            Anchor((RectTransform)edge.transform, 0, 0, 1, 1);
+            edge.Fill = false; edge.Radius = 0; edge.BorderWidth = pixel;
+            bool disabled = parent.GetComponent<Button>() != null && !parent.GetComponent<Button>().interactable;
+            edge.BorderColor = disabled ? new Color(.18f, .19f, .19f, .75f) : button ? new Color(.42f, .44f, .43f, .72f) : new Color(.30f, .17f, .16f, .78f);
+            edge.raycastTarget = false;
             var oldFrame = parent.Find("Fine rounded frame"); if (oldFrame != null) oldFrame.gameObject.SetActive(false);
             return skin;
         }
@@ -82,7 +95,10 @@ namespace FantasyCards.Presentation
                 button.colors = colors;
             }
             else Frame((RectTransform)button.transform, new Color(.52f, .57f, .55f), 1);
-            button.GetComponentInChildren<TMP_Text>().GetComponent<UiCanvasTextSize>().ConfigureCard(23);
+            var caption = button.GetComponentInChildren<TMP_Text>(); caption.font = ClassicReadableFont;
+            caption.GetComponent<UiCanvasTextSize>().ConfigureCard(23);
+            var shadow = button.GetComponent<Shadow>(); if (shadow != null) shadow.enabled = false;
+            var hover = button.GetComponent<UiCardHover>(); if (hover != null) { hover.HoverScale = 1; hover.HoverLift = 0; }
             return button;
         }
 
@@ -148,7 +164,8 @@ namespace FantasyCards.Presentation
                 var status = Panel(portrait, 97f / 196, 273f / 307, 189f / 196, 305f / 307, new Color(.010f, .012f, .013f, 1));
                 status.name = "Live disabled multiplayer status covering original capture";
                 Frame(status, new Color(.29f, .31f, .30f), 1);
-                ClassicText(status, "멀티 · 추후 업데이트", .025f, .05f, .975f, .95f, 21, new Color(.62f, .64f, .63f), TextAlignmentOptions.Center);
+                var statusCaption = ClassicText(status, "멀티 · 추후 업데이트", .025f, .05f, .975f, .95f, 21, new Color(.62f, .64f, .63f), TextAlignmentOptions.Center);
+                statusCaption.GetComponent<UiCanvasTextSize>().ConfigureResponsiveCaption(21, 1, 20);
                 return;
             }
             var lateClient = clientPortrait ? Resources.Load<Texture2D>("Art/FmClassic/late-client-reference") : null;
@@ -371,6 +388,7 @@ namespace FantasyCards.Presentation
                 notice.name = owned ? "Classic actual single-player notice" : "Classic actual practice notice";
                 notice.textWrappingMode = TextWrappingModes.Normal;
                 notice.overflowMode = TextOverflowModes.Ellipsis;
+                notice.GetComponent<UiCanvasTextSize>().ConfigureResponsiveCaption(21, 2);
             }
         }
 

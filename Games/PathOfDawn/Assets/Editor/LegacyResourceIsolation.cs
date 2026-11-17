@@ -60,7 +60,8 @@ namespace FirstGame.Editor
         public static Scope Begin(string target)
         {
             RecoverInterrupted();
-            bool npr = PilgrimageProjectSetup.Revision.StartsWith("gospel-npr-", StringComparison.Ordinal);
+            bool npr = PilgrimageProjectSetup.Revision.StartsWith("gospel-npr-", StringComparison.Ordinal)
+                || PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal);
             if (npr)
             {
                 foreach (string identity in new[] { "JesusChild", "JesusAdult", "Mary", "Joseph", "Teacher" })

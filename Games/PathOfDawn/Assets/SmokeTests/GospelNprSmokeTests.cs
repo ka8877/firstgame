@@ -288,13 +288,30 @@ namespace PathOfDawn.SmokeTests
         }
         static float ShapeDifference(Dictionary<string, float> before, Dictionary<string, float> after) =>
             after.Count == 0 ? 0 : after.Max(pair => Mathf.Abs(pair.Value - before[pair.Key]));
-        static bool ChangedMorphHasAuthoredVertexDeltas(GospelPilgrimageActor actor, Dictionary<string, float> before)
+        static bool SpeakingMorph(string name)
+        {
+            string leaf = name.ToLowerInvariant().Split('.').Last();
+            return leaf == "aa" || leaf == "ih" || leaf == "oh" || leaf == "mouthopen" || leaf == "mouth_open" || leaf == "moutha"
+                || leaf.EndsWith("fcl_mth_a", StringComparison.Ordinal) || leaf.EndsWith("fcl_mth_i", StringComparison.Ordinal)
+                || leaf.EndsWith("fcl_mth_o", StringComparison.Ordinal);
+        }
+        static float SpeakingShapeDifference(GospelPilgrimageActor actor, Dictionary<string, float> before)
+        {
+            float changed = 0;
+            foreach (var renderer in actor.SkinnedRenderers)
+                for (int i = 0; i < renderer.sharedMesh.blendShapeCount; i++)
+                    if (SpeakingMorph(renderer.sharedMesh.GetBlendShapeName(i)))
+                        changed = Mathf.Max(changed, Mathf.Abs(renderer.GetBlendShapeWeight(i) - before[renderer.GetInstanceID() + ":" + i]));
+            return changed;
+        }
+        static bool ChangedMorphHasAuthoredVertexDeltas(GospelPilgrimageActor actor, Dictionary<string, float> before, bool mouthOnly = false)
         {
             foreach (var renderer in actor.SkinnedRenderers)
             {
                 var mesh = renderer.sharedMesh;
                 for (int i = 0; i < mesh.blendShapeCount; i++)
                 {
+                    if (mouthOnly && !SpeakingMorph(mesh.GetBlendShapeName(i))) continue;
                     if (Mathf.Abs(renderer.GetBlendShapeWeight(i) - before[renderer.GetInstanceID() + ":" + i]) <= 3) continue;
                     int frames = mesh.GetBlendShapeFrameCount(i); if (frames == 0) continue;
                     var deltas = new Vector3[mesh.vertexCount];
@@ -334,9 +351,17 @@ namespace PathOfDawn.SmokeTests
             var actor = AddActor("JesusChild", 2); yield return null;
             Assert.That(actor.CharacterView.BlinkShapeCount, Is.GreaterThan(0)); Assert.That(actor.CharacterView.MouthShapeCount, Is.GreaterThan(0));
             var neutral = ShapeWeights(actor); Assert.That(neutral.Count, Is.GreaterThan(10));
-            actor.SetSpeaking(true); yield return null; yield return null;
-            Assert.That(ShapeDifference(neutral, ShapeWeights(actor)), Is.GreaterThan(3), "Speaking must change an actual imported facial morph.");
-            Assert.That(ChangedMorphHasAuthoredVertexDeltas(actor, neutral), Is.True, "The speaking channel must deform authored face vertices, not an empty named shape.");
+            actor.SetSpeaking(true);
+            float speakingDelta = 0, speakingUntil = Time.realtimeSinceStartup + 1.18f;
+            bool authoredSpeakingVertices = false;
+            while (Time.realtimeSinceStartup < speakingUntil)
+            {
+                yield return null;
+                speakingDelta = Mathf.Max(speakingDelta, SpeakingShapeDifference(actor, neutral));
+                authoredSpeakingVertices |= ChangedMorphHasAuthoredVertexDeltas(actor, neutral, mouthOnly: true);
+            }
+            Assert.That(speakingDelta, Is.GreaterThan(3), "A full real speech cycle, including natural closed-mouth pauses, must deform an imported facial morph.");
+            Assert.That(authoredSpeakingVertices, Is.True, "The speaking channel must deform authored face vertices, not an empty named shape.");
             actor.SetSpeaking(false); yield return null; yield return null;
             var closedMouth = ShapeWeights(actor); float blink = 0, end = Time.realtimeSinceStartup + 9f;
             while (Time.realtimeSinceStartup < end && blink < 3)
