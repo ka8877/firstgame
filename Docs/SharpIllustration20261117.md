@@ -1,3 +1,13 @@
+<!-- sharp-illustration-current -->
+## Sharp 실제 결과와 남은 반영 — 2026-11-18 KST
+
+제품 main `9a24aecf…`·공개 `94f50757…`을 반영했습니다. [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757) · [예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757). 현재06755/e1cb의 PC·모바일·공개6회에서2,833검사/0실패·561PNG/442Root 직접 원본 검토, 매회 실제4PCM/재접속2회와 전체 FinalSeal01을 완료했습니다. PC2의 실제Archive소유와 나머지4회의Finish소유, 과거 실패는 그대로 유지합니다.
+
+로컬 Checkpoint38,883원본/30조각948,094,355B(index44,345,989B)의 전체 읽기 검증과 현재토큰·개인키/경로 검사를 완료했습니다. 준비한 코드·workflow·문서11개 약1.1MB도 검사했지만, 자동 승인 검토가 해당 자료를 `ka8877/firstgame` 공개 저장소로 보내는 구체적인 승인이 없다는 이유로 업로드를 거절했습니다. 재검토도 거절됐으며 두 payload의 업로드는 시작되지 않았습니다. 로컬 커밋 준비와 원본 보관을 유지하고, 새로운 원격 커밋·CI·main 반영·내구 Closure는 미완료로 기록합니다. GitHub 인증과 기존 제품 배포는 정상이며 만료 device code 입력은 불필요합니다.
+
+독립 FinalIdle의4개 event0/빈 소유 후손을 확인하고 11월18일 02:40 KST에 자기 lease를 정상 해제한 뒤 available을 관측했습니다. 현재 소유 runtime이나24시간 자동 개발은 없습니다. 명시적인 공개 저장 승인 뒤 최신 로컬/원격을 확인하고 새 고정 소유권으로 재개합니다. 승인받은 main 자동반영 방침은 유지합니다. 원작 전체 재현·원신급 품질은 아직 목표이며 판마 원화/작은전투UI, 예수님 의상/머리·NPC겹침/카메라가림이 남습니다. private9 payload는 공개하지 않으며 다음Unity전 정확한 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`가 필요합니다. 아래는 각 작성 당시 이력입니다.
+<!-- /sharp-illustration-current -->
+
 # SharpIllustration — 판마 선명도·일러스트와 V5 인물 의상
 
 2026-11-17 KST 작업 기록입니다. 브랜치는 `codex/sharp-illustration-2026-11-17`, 기준 main은 `e9dbef24e321dcfe896a1510da729f3aff3d9d22`입니다. 개정은 판마 `fm-sharp-client-2026-11-17`, 예수님의 길 `gospel-illustrated-anime-2026-11-17`입니다.

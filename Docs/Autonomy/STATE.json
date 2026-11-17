@@ -1,7 +1,11 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-17T05:17:36+00:00",
+  "updatedUtc": "2026-11-17T17:45:12.973307+00:00",
+  "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_02": "2026-11-17T17:17:53.307294+00:00",
+  "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_01": "2026-11-17T12:50:55+00:00",
+  "historicalUpdatedUtcBeforeSharpIllustrationStateV220261117": "2026-11-17T11:56:05+00:00",
+  "historicalUpdatedUtcBeforeSharpIllustrationArchive20261117": "2026-11-17T05:17:36+00:00",
   "displayTimezone": "Asia/Seoul",
   "repository": "ka8877/firstgame",
   "initialization": {
@@ -12,6 +16,677 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
+    "id": "SharpIllustration-2026-11-17",
+    "status": "normal-local-stop-remote-export-auto-review-blocked",
+    "currentRunId": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "releaseProfile": "sharp-illustration",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/SharpIllustration-2026-11-17",
+      "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+      "buildRoot": "/tmp/firstgame-sharp-illustration-20261117-builds"
+    },
+    "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "executionOwner": "/root",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "leaseState": "released",
+    "leaseOwner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "leaseCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "startedUtc": "2026-11-17T13:25:10.174100Z",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "deadlineSeoul": "2026-11-18T04:25:10.174100+09:00",
+    "continuedFrom": "Archive completed independent four-event final idle, normal own release and separate available before this genuinely new fixed lease. Original Sharp/Resume/Release/Archive ownership and all failures remain historical.",
+    "browserCases": [
+      {
+        "game": "FantasyCards",
+        "profile": "Desktop720",
+        "attempt": "Browser04",
+        "checks": 472,
+        "failed": 0,
+        "png": 93,
+        "directlyViewedRootOriginals": 80,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "Mobile844",
+        "attempt": "Browser03",
+        "checks": 482,
+        "failed": 0,
+        "png": 95,
+        "directlyViewedRootOriginals": 82,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "PublicMobile844",
+        "attempt": "Browser02",
+        "checks": 498,
+        "failed": 0,
+        "png": 97,
+        "directlyViewedRootOriginals": 76,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Desktop720",
+        "attempt": "Browser03",
+        "checks": 506,
+        "failed": 0,
+        "png": 102,
+        "directlyViewedRootOriginals": 78,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Mobile844",
+        "attempt": "Browser04",
+        "checks": 455,
+        "failed": 0,
+        "png": 92,
+        "directlyViewedRootOriginals": 64,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "PublicMobile844",
+        "attempt": "Browser01",
+        "checks": 420,
+        "failed": 0,
+        "png": 82,
+        "directlyViewedRootOriginals": 62,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      }
+    ],
+    "browserTotal": {
+      "cases": 6,
+      "checks": 2833,
+      "failed": 0,
+      "png": 561,
+      "directlyViewedRootOriginals": 442,
+      "lastRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+      "scope": "Chromium/software-rendered PC and emulated landscape touch, four actual PCM segments and two real reloads per case; not physical-phone FPS or user artistic approval."
+    },
+    "fullSealWrapper": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/CommandRuns/FinalSeal01/summary.json",
+      "bytes": 11341,
+      "sha256": "4eb30869b14b18f104e7fe2876c727e28a66fa5ba796bb31d21ac1e0f8e43bad"
+    },
+    "archivalFacts": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/Facts01.facts.json",
+      "bytes": 5507,
+      "sha256": "295830cc6131c6d98361e15d3df9dcbe36c207818db91d29b8ad212d1997e23f"
+    },
+    "futureUnityRule": "Before ANY Unity run restore all exact private9 Burst bytes/SHA/mode/UID/GID/mtimeNs, then ForceSynchronousImport | ForceUpdate for BOTH projects. Private backup payload must not enter Git, public archives or deployment. No inode/ctime restoration is claimed.",
+    "executionState": "normally-released-no-owned-runtime",
+    "releasedUtc": "2026-11-17T17:40:02.934654+00:00",
+    "localStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    }
+  },
+  "historicalActiveWorkBeforeSharpEvidenceFinish20261117_02": {
+    "id": "SharpIllustration-2026-11-17",
+    "status": "product-published-six-browser-cases-full-seal-and-local-checkpoint-passed-remote-evidence-export-review-pending",
+    "currentRunId": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "releaseProfile": "sharp-illustration",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/SharpIllustration-2026-11-17",
+      "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+      "buildRoot": "/tmp/firstgame-sharp-illustration-20261117-builds"
+    },
+    "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "executionOwner": "/root",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "leaseState": "acquired",
+    "leaseOwner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "leaseCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "startedUtc": "2026-11-17T13:25:10.174100Z",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "deadlineSeoul": "2026-11-18T04:25:10.174100+09:00",
+    "continuedFrom": "Archive completed independent four-event final idle, normal own release and separate available before this genuinely new fixed lease. Original Sharp/Resume/Release/Archive ownership and all failures remain historical.",
+    "browserCases": [
+      {
+        "game": "FantasyCards",
+        "profile": "Desktop720",
+        "attempt": "Browser04",
+        "checks": 472,
+        "failed": 0,
+        "png": 93,
+        "directlyViewedRootOriginals": 80,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "Mobile844",
+        "attempt": "Browser03",
+        "checks": 482,
+        "failed": 0,
+        "png": 95,
+        "directlyViewedRootOriginals": 82,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "PublicMobile844",
+        "attempt": "Browser02",
+        "checks": 498,
+        "failed": 0,
+        "png": 97,
+        "directlyViewedRootOriginals": 76,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Desktop720",
+        "attempt": "Browser03",
+        "checks": 506,
+        "failed": 0,
+        "png": 102,
+        "directlyViewedRootOriginals": 78,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Mobile844",
+        "attempt": "Browser04",
+        "checks": 455,
+        "failed": 0,
+        "png": 92,
+        "directlyViewedRootOriginals": 64,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "PublicMobile844",
+        "attempt": "Browser01",
+        "checks": 420,
+        "failed": 0,
+        "png": 82,
+        "directlyViewedRootOriginals": 62,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      }
+    ],
+    "browserTotal": {
+      "cases": 6,
+      "checks": 2833,
+      "failed": 0,
+      "png": 561,
+      "directlyViewedRootOriginals": 442,
+      "lastRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+      "scope": "Chromium/software-rendered PC and emulated landscape touch, four actual PCM segments and two real reloads per case; not physical-phone FPS or user artistic approval."
+    },
+    "fullSealWrapper": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/CommandRuns/FinalSeal01/summary.json",
+      "bytes": 11341,
+      "sha256": "4eb30869b14b18f104e7fe2876c727e28a66fa5ba796bb31d21ac1e0f8e43bad"
+    },
+    "archivalFacts": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/Facts01.facts.json",
+      "bytes": 5507,
+      "sha256": "295830cc6131c6d98361e15d3df9dcbe36c207818db91d29b8ad212d1997e23f"
+    },
+    "futureUnityRule": "Before ANY Unity run restore all exact private9 Burst bytes/SHA/mode/UID/GID/mtimeNs, then ForceSynchronousImport | ForceUpdate for BOTH projects. Private backup payload must not enter Git, public archives or deployment. No inode/ctime restoration is claimed."
+  },
+  "historicalActiveWorkBeforeSharpEvidenceFinish20261117_01": {
+    "id": "SharpIllustration-2026-11-17",
+    "status": "Archive-active-media-installed-private-cache-complete-new-browser-one-of-six-GospelDesktop-active",
+    "currentRunId": "SharpIllustrationArchive-2026-11-17",
+    "branch": "main",
+    "baseMainCommit": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+    "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "executionOwner": "/root",
+    "executionState": "Release-normally-released-independent-fixed-Archive-active-not-renewal",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+    "leaseState": "acquired",
+    "leaseOwner": "c7b06c76-e913-42e6-99a8-43046d74fbbe",
+    "leaseCommit": "74c2b67da8a8f2eaf6850b1b4558ada65c919fb4",
+    "startedUtc": "2026-11-17T09:40:08.314984+00:00",
+    "deadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+    "startedSeoul": "2026-11-17T18:40:08.314984+09:00",
+    "deadlineSeoul": "2026-11-18T00:40:08.314984+09:00",
+    "priorReleaseCycle": {
+      "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17",
+      "owner": "665fc59c-0fbb-4106-b42b-4af8962dbec3",
+      "lock": "51161c224bd7adfd90422d9d1d53f7e32ed661e2",
+      "releasedUtc": "2026-11-17T09:39:14.858190+00:00",
+      "status": "normal-own-release-and-separate-available-observed-before-new-Archive-acquisition",
+      "finalIdle": "BeforeArchiveCycleFinalIdle01 guardAfter124 remains a failed wrapper. Prior three events exited0/empty and separate direct idle/guard completed; no all-four final-idle pass is claimed."
+    },
+    "originalAndResumeCyclesRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117",
+    "releaseProfile": "sharp-illustration",
+    "paths": {
+      "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17",
+      "releaseControlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17",
+      "resumeControlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17",
+      "originControlRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17",
+      "evidenceRoot": "Artifacts/Validation/SharpIllustration-2026-11-17",
+      "currentProofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "preservedEarlierProofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProof",
+      "buildRoot": "/tmp/firstgame-sharp-illustration-20261117-builds",
+      "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+      "sourceProgressDocument": "Docs/SharpIllustration20261117.md"
+    },
+    "currentOperationalFacts": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/media-source-install01.json",
+    "currentSourceProposal": "Artifacts/Validation/Drafts/SharpIllustrationStateV220261117/README.md",
+    "sourceRevisions": {
+      "FantasyCards": "fm-sharp-client-2026-11-17",
+      "PathOfDawn": "gospel-illustrated-anime-2026-11-17"
+    },
+    "scope": "Sharper original-style Card UI/DPR1-2, illustrated Gospel HUD/status/dialogue portraits and improved field characters. Existing cards/IDs/economy/saves/story/NPCs and disabled multiplayer retained.",
+    "currentNativeAndWeb": {
+      "sourceRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117.actualCompletedChecks",
+      "originalOwnerControl": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17",
+      "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "FantasyCards": {
+        "nativeAttempt": "Native05",
+        "nativePassed": 11,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootCurrentOriginalsDirectlyViewed": 22,
+        "webAttempt": "Web02",
+        "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81"
+      },
+      "PathOfDawn": {
+        "nativeAttempt": "Native03",
+        "nativePassed": 18,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootCurrentOriginalsDirectlyViewed": 11,
+        "requiredIncrementalRootOriginalsAccepted": 9,
+        "webAttempt": "Web01",
+        "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872"
+      },
+      "scope": "Original Native/Web owners, execution sources, XML, Root reviews and product fingerprints remain unchanged. Media-helper/workflow changes are not producer inputs. No new Unity run/rebuild is claimed."
+    },
+    "currentSourceContracts": {
+      "nativeContractSha256": "3faadb3712147b8cee27ad4890b9a8a9f1c0d565ab35907c0d354fa89baa1838",
+      "finalBrowserHarnessBytes": 96075,
+      "finalBrowserHarnessSha256": "e1cbd79198fdc557941faa85a200a2e30fdcefb0c5bdef1b3907a5698a182bc0",
+      "sourcePlansAndContracts": "unchanged-source-frozen",
+      "requiredRootOriginalsByProfile": {
+        "FantasyCards": {
+          "Desktop720": 64,
+          "Mobile844": 63,
+          "PublicMobile844": 63
+        },
+        "PathOfDawn": {
+          "Desktop720": 74,
+          "Mobile844": 60,
+          "PublicMobile844": 60
+        }
+      }
+    },
+    "currentBrowser": {
+      "status": "new-six-browser-revalidation-one-approved-one-active-four-pending",
+      "passedSuites": 1,
+      "requiredSuites": 6,
+      "activeSuites": 1,
+      "pendingNotStartedSuites": 4,
+      "currentClassifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "classifierInstalled": true,
+      "classifierInstalledUtc": "2026-11-17T12:11:57.476728+00:00",
+      "retiredHistoricalCanonicalRecord": {
+        "status": "five-exact-old-canonical-directories-retired-as-original-historical-statuses",
+        "completedUtc": "2026-11-17T12:16:03.917916+00:00",
+        "completedRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/RetireOldMediaSourceCanonical01/ExactMediaRetirement/completed.json",
+        "oldCanonicalDirectoryCount": 5,
+        "oldPassedLocalSuiteCount": 4,
+        "oldFailedPublicSuiteCount": 1,
+        "historyRoot": "Artifacts/Validation/SharpIllustration-2026-11-17/BrowserHistory",
+        "historicalPassedLocals": [
+          "FantasyCards/Desktop720/Browser03",
+          "FantasyCards/Mobile844/Browser02",
+          "PathOfDawn/Desktop720/Browser02",
+          "PathOfDawn/Mobile844/Browser03"
+        ],
+        "historicalFailedPublic": "FantasyCards/PublicMobile844/Browser01",
+        "originalStatusAndOwnershipPreserved": true,
+        "originalBytesAndInodesPreserved": true,
+        "rewritesOriginals": false,
+        "createsNewApprovals": false,
+        "scope": "The original four local passes remain historical passes under old9a722; failed CardPublic01 remains failed. Exact pathTranslations preserve original raw/source/Root annotations and actual Resume/Release owners. Original BrowserRuns remain retained."
+      },
+      "currentApprovedSuites": [
+        {
+          "status": "actual-new-source-browser-pass-and-Root-finalized",
+          "game": "FantasyCards",
+          "profile": "Desktop720",
+          "attempt": "Browser04",
+          "actualLabel": "CardDesktop04",
+          "ownerControl": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17",
+          "classifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+          "harnessSha256": "e1cbd79198fdc557941faa85a200a2e30fdcefb0c5bdef1b3907a5698a182bc0",
+          "passedChecks": 472,
+          "failedChecks": 0,
+          "originalPngCount": 93,
+          "requiredRootOriginalsDirectlyViewed": 64,
+          "supplementaryRootLedgerRows": 16,
+          "totalExplicitRootLedgerRows": 80,
+          "actualAudioWindows": 4,
+          "actualFullReloads": 2,
+          "navigations": [
+            0,
+            1,
+            2
+          ],
+          "innerAndOuterEachFourExitZeroEmpty": true,
+          "outerSummary": {
+            "file": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/CardDesktop04/summary.json",
+            "sha256": "572cc597af98d3e1b942ed2a9926b5d071c68744dfad39c798e5e5b6a0fb51cc"
+          },
+          "innerSummary": {
+            "file": "Artifacts/Validation/SharpIllustration-2026-11-17/BrowserRuns/FantasyCards/Desktop720/Browser04/summary.json",
+            "sha256": "7962945b74dd404cb93cf646b59bfa3cd3223a24f881851d0ffc85c41147d206"
+          },
+          "rootLedger": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Root/FantasyCards-Desktop720-Browser04-directly-viewed.json",
+          "scope": "First of six genuinely new browser approvals under installed06755, distinct from historical CardDesktop03. This local PC pass is not a public-gameplay/full-seal/user-aesthetic approval."
+        }
+      ],
+      "activeSuite": {
+        "actualLabel": "GospelDesktop03",
+        "game": "PathOfDawn",
+        "profile": "Desktop720",
+        "attempt": "Browser03",
+        "status": "running-no-completion-or-Root-approval-claimed",
+        "ownerControl": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17",
+        "commandRun": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/GospelDesktop03"
+      },
+      "pendingSuites": [
+        "FantasyCards/Mobile844",
+        "PathOfDawn/Mobile844",
+        "FantasyCards/PublicMobile844",
+        "PathOfDawn/PublicMobile844"
+      ],
+      "allSixCompleted": false,
+      "fullSeal": "pending",
+      "scope": "New one-of-six count excludes every old canonical approval and diagnostic replay. Preserve e1cb harness/plans/contracts, actual DPR/backing/GL, four PCM windows, two full reloads, direct Root originals and complete owned-wrapper checks for each remaining suite."
+    },
+    "mediaAdmissionCorrection": {
+      "trackedSource": "Tools/Validation/fm-local-media-errors.py",
+      "trackedSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "installed": true,
+      "installedUtc": "2026-11-17T12:11:57.476728+00:00",
+      "installationRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/media-source-install01.json",
+      "previousHelperSha256": "9a72264bf28d31c3d605394c54da8939629669239b1be7be294b4564d3c19293",
+      "scope": "Exactly two current Sharp revision literals were installed; URL/media/gesture/range/PCM/timing/lifecycle predicates remain unchanged.",
+      "candidateUnit": {
+        "passed": 64,
+        "summarySha256": "10aaa9bd620c9fb8321b66493bde3a952bbac944b2ea4e047e5d66195d0c4c0f"
+      },
+      "diagnosticReplay": {
+        "qualifiedRows": 11,
+        "summarySha256": "033bc29499c79c3fa7f0b847867fec36a00b013c3ccf4fbe30b53de69b3d1973",
+        "originalReportsChanged": false,
+        "createsBrowserPass": false
+      },
+      "installedTrackedFixture": {
+        "status": "actual-62-passed",
+        "passed": 62,
+        "source": "Tools/Validation/test_fm_sharp_media_admission.py",
+        "sourceSha256": "0d1e2c31ff3f34524f1f88a7fdb6f3ab7e19df57e63a0b1099d94355ef786998",
+        "summary": {
+          "file": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/SharpTrackedMediaUnit01/summary.json",
+          "sha256": "4a64d65952898f9b5768b55fe7080efeab316e880e9b047fc937ab2f3f28864d"
+        }
+      },
+      "workflow": {
+        "file": ".github/workflows/core-tests.yml",
+        "sha256": "10ad3943a0d1c09154339237987d1e533f796b4e8bad6087c3d2bb252db12f95",
+        "oneLineTrackedFixtureCommandInstalled": true,
+        "currentChangeCi": "pending-normal-D1-save-and-actual-CI"
+      },
+      "productRuntimeChange": false,
+      "nativeOrWebRebuildRequired": false,
+      "verifierMainCommit": "pending-normal-D1-main-integration"
+    },
+    "currentPublicationRecord": "currentDeployment",
+    "historicalReleaseAcquisition": {
+      "status": "actual-complete-retains-Release-owner-not-Archive-reexecution",
+      "summary": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/EvidenceGitAcquire01/summary.json",
+      "summarySha256": "44ddb6653573b51604740372a6e6d8cafd6521d8e5d389d6a8523c4b65521398",
+      "result": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/EvidenceGitAcquire01/PublishedGitReadback/result.json",
+      "publicFileCount": 15441,
+      "publicTotalBytes": 984067939,
+      "parentGitIdentityUnchanged": true,
+      "stageOriginalsUnchanged": true,
+      "createsBrowserOrSealApproval": false,
+      "temporaryStoreIsDurableBacking": false
+    },
+    "storageAndProofRecovery": {
+      "historicalRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117.storageAndProofRecovery",
+      "previousArchiveSnapshotRecord": "historicalActiveWorkBeforeSharpIllustrationStateV220261117.storageAndProofRecovery",
+      "actualPrivateCompactionRecord": "capacity.privateNineBinaryCompaction",
+      "futureForceReimportRequired": true,
+      "restoreExactNineBeforeAnyUnity": true,
+      "nextUnityRule": "Before ANY Unity use, restore all exact nine retired non-Linux Burst cache files to their original paths from the verified private backup, checking full bytes/SHA, original mode/UID/GID and integer mtimeNs. Do not claim original inode or ctime restoration. Then explicitly ForceSynchronousImport | ForceUpdate for BOTH games; a normal Refresh alone is insufficient. Existing preserved Web runtime remains the browser rerun input.",
+      "installerRelocation": "Original PinnedInstallerRelocation01 remains failed after alias replacement; separate read-only Closing03 verified current readthrough/protected state without converting the failure or claiming original inode restoration.",
+      "operationalAgentsPreservation": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/operational-agents-before-cache01.md",
+      "operationalAgentsRestoredAtMediaInstallation": true
+    },
+    "pending": [
+      "Continue actual GospelDesktop03 without claiming its completion; finish the other four not-started mobile/public suites. Current new approvals are CardDesktop04 only, one of six.",
+      "Preserve exact five retired canonical directories as four historical local passes and one failed public, with original raw/Root/source/status/owner/pathTranslations. Do not relabel them current06755 approvals.",
+      "Complete all six new browser approvals, then a new whole release seal and measure-first durable archive/checkpoint with full readback. Preserve original Native/Web and Release AQ owners.",
+      "Normally save installed helper/fixture/one-line CI, current docs and actual checkpoint/raw evidence through D1 Git/CI/PR/main integration, retaining product M9a24/P94f separately from the future verifier/docs commit.",
+      "Before any later Unity use, restore exact nine private cache files and original bytes/mode/UID/GID/integer mtimeNs, then force synchronous import/update for both projects. Keep all private binary backup payload out of Git and public delivery.",
+      "After actual durable-save/CI boundaries, independently idle, normally release only the current own lease, observe available and record Closure."
+    ],
+    "mainIntegrationAuthorization": "User explicitly authorized automatic normal main integration without another permission question.",
+    "limitations": "One new PC browser approval is actual; GospelDesktop03 is active and four other suites are pending. The old four local approvals and failed public are historical under their original sources/owners. No all-six pass, full seal, checkpoint, D1 save/CI/main integration, exact30 Git pack installation/loose unlink, final closure, full original parity, Genshin equality, user aesthetic approval, physical-device FPS or recurring background execution is claimed.",
+    "sourceSnapshotUtc": "2026-11-17T12:50:55+00:00",
+    "priorStateProposalRecord": "historicalActiveWorkBeforeSharpIllustrationStateV220261117",
+    "historicalBrowserRetirement": {
+      "status": "five-exact-old-canonical-directories-retired-as-original-historical-statuses",
+      "completedUtc": "2026-11-17T12:16:03.917916+00:00",
+      "completedRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/RetireOldMediaSourceCanonical01/ExactMediaRetirement/completed.json",
+      "oldCanonicalDirectoryCount": 5,
+      "oldPassedLocalSuiteCount": 4,
+      "oldFailedPublicSuiteCount": 1,
+      "historyRoot": "Artifacts/Validation/SharpIllustration-2026-11-17/BrowserHistory",
+      "historicalPassedLocals": [
+        "FantasyCards/Desktop720/Browser03",
+        "FantasyCards/Mobile844/Browser02",
+        "PathOfDawn/Desktop720/Browser02",
+        "PathOfDawn/Mobile844/Browser03"
+      ],
+      "historicalFailedPublic": "FantasyCards/PublicMobile844/Browser01",
+      "originalStatusAndOwnershipPreserved": true,
+      "originalBytesAndInodesPreserved": true,
+      "rewritesOriginals": false,
+      "createsNewApprovals": false,
+      "scope": "The original four local passes remain historical passes under old9a722; failed CardPublic01 remains failed. Exact pathTranslations preserve original raw/source/Root annotations and actual Resume/Release owners. Original BrowserRuns remain retained."
+    }
+  },
+  "historicalActiveWorkBeforeSharpIllustrationStateV220261117": {
+    "id": "SharpIllustration-2026-11-17",
+    "status": "Archive-active-product-main-public-delivery-complete-media-fix-and-storage-actions-before-six-new-browser-runs",
+    "currentRunId": "SharpIllustrationArchive-2026-11-17",
+    "branch": "main",
+    "baseMainCommit": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+    "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "executionOwner": "/root",
+    "executionState": "Release-normally-released-independent-fixed-Archive-active-not-renewal",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+    "leaseState": "acquired",
+    "leaseOwner": "c7b06c76-e913-42e6-99a8-43046d74fbbe",
+    "leaseCommit": "74c2b67da8a8f2eaf6850b1b4558ada65c919fb4",
+    "startedUtc": "2026-11-17T09:40:08.314984+00:00",
+    "deadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+    "startedSeoul": "2026-11-17T18:40:08.314984+09:00",
+    "deadlineSeoul": "2026-11-18T00:40:08.314984+09:00",
+    "priorReleaseCycle": {
+      "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17",
+      "owner": "665fc59c-0fbb-4106-b42b-4af8962dbec3",
+      "lock": "51161c224bd7adfd90422d9d1d53f7e32ed661e2",
+      "releasedUtc": "2026-11-17T09:39:14.858190+00:00",
+      "status": "normal-own-release-and-separate-available-observed-before-new-Archive-acquisition",
+      "finalIdle": "BeforeArchiveCycleFinalIdle01 guardAfter124 remains a failed wrapper. Prior three events exited0/empty and separate direct idle/guard completed; no all-four final-idle pass is claimed."
+    },
+    "originalAndResumeCyclesRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117",
+    "releaseProfile": "sharp-illustration",
+    "paths": {
+      "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17",
+      "releaseControlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17",
+      "resumeControlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17",
+      "originControlRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17",
+      "evidenceRoot": "Artifacts/Validation/SharpIllustration-2026-11-17",
+      "currentProofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "preservedEarlierProofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProof",
+      "buildRoot": "/tmp/firstgame-sharp-illustration-20261117-builds",
+      "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+      "sourceProgressDocument": "Docs/SharpIllustration20261117.md"
+    },
+    "currentOperationalFacts": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Root/working-progress01.json",
+    "currentSourceProposal": "Artifacts/Validation/Drafts/SharpIllustrationFinalDocs20261117/ARCHIVE-CURRENT-PROPOSAL.md",
+    "sourceRevisions": {
+      "FantasyCards": "fm-sharp-client-2026-11-17",
+      "PathOfDawn": "gospel-illustrated-anime-2026-11-17"
+    },
+    "scope": "Sharper original-style Card UI/DPR1-2, illustrated Gospel HUD/status/dialogue portraits and improved field characters. Existing cards/IDs/economy/saves/story/NPCs and disabled multiplayer retained.",
+    "currentNativeAndWeb": {
+      "sourceRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117.actualCompletedChecks",
+      "originalOwnerControl": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17",
+      "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "FantasyCards": {
+        "nativeAttempt": "Native05",
+        "nativePassed": 11,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootCurrentOriginalsDirectlyViewed": 22,
+        "webAttempt": "Web02",
+        "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81"
+      },
+      "PathOfDawn": {
+        "nativeAttempt": "Native03",
+        "nativePassed": 18,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootCurrentOriginalsDirectlyViewed": 11,
+        "requiredIncrementalRootOriginalsAccepted": 9,
+        "webAttempt": "Web01",
+        "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872"
+      },
+      "scope": "Original Native/Web owners, execution sources, XML, Root reviews and product fingerprints remain unchanged. Media-helper/workflow changes are not producer inputs. No new Unity run/rebuild is claimed."
+    },
+    "currentSourceContracts": {
+      "nativeContractSha256": "3faadb3712147b8cee27ad4890b9a8a9f1c0d565ab35907c0d354fa89baa1838",
+      "finalBrowserHarnessBytes": 96075,
+      "finalBrowserHarnessSha256": "e1cbd79198fdc557941faa85a200a2e30fdcefb0c5bdef1b3907a5698a182bc0",
+      "sourcePlansAndContracts": "unchanged-source-frozen",
+      "requiredRootOriginalsByProfile": {
+        "FantasyCards": {
+          "Desktop720": 64,
+          "Mobile844": 63,
+          "PublicMobile844": 63
+        },
+        "PathOfDawn": {
+          "Desktop720": 74,
+          "Mobile844": 60,
+          "PublicMobile844": 60
+        }
+      }
+    },
+    "currentBrowser": {
+      "status": "four-current-local-approvals-before-media-helper-installation-new-six-required-after-installation",
+      "passedSuites": 4,
+      "requiredSuites": 6,
+      "currentClassifierSha256": "9a72264bf28d31c3d605394c54da8939629669239b1be7be294b4564d3c19293",
+      "classifierCandidateInstalled": false,
+      "candidateClassifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "currentLocalApprovalsRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117.actualCompletedChecks",
+      "currentLocalSuites": [
+        "FantasyCards/Desktop720/CardDesktop03",
+        "FantasyCards/Mobile844/CardMobile02",
+        "PathOfDawn/Desktop720/GospelDesktop02",
+        "PathOfDawn/Mobile844/GospelMobile03"
+      ],
+      "ownership": "CardDesktop03/GospelDesktop02/GospelMobile03 retain Resume owners; CardMobile02 retains Release owner. Native/Web retain original Sharp owner.",
+      "failedPublicCard01": {
+        "status": "failed-preserved-no-Root-approval",
+        "checks": 496,
+        "failedChecks": 1,
+        "originalPngCount": 97,
+        "rootActuallyViewed": 86,
+        "requiredActuallyViewed": 63,
+        "actualAudioWindows": 4,
+        "actualFullReloads": 2,
+        "unclassifiedMediaAborts": 11,
+        "reportSha256": "befc4194df51518ff5cced43bc5795028004bdda556f77a4473523f1a4e78a5e",
+        "cause": "Current Sharp revision is absent from both media-classifier admission tuples. Eleven media aborts were rejected before existing lifecycle predicates; this does not establish product audio failure or a browser pass."
+      },
+      "afterCandidateInstallation": {
+        "status": "pending-installation-and-six-new-actual-browser-runs",
+        "requiredNewActualSuites": 6,
+        "completedNewActualSuites": 0,
+        "preserveOldFourAs": "Exact historical approvals under the original helper, actual execution owners and raw/Root evidence; not relabeled current passes.",
+        "publicSuites": [
+          "FantasyCards/PublicMobile844",
+          "PathOfDawn/PublicMobile844"
+        ],
+        "scope": "Keep e1cb harness/plans/contracts, DPR/backing/GL, four actual PCM windows, two full reloads, direct Root originals and complete owned-wrapper checks. Diagnostic replay is not a browser rerun."
+      }
+    },
+    "mediaAdmissionCorrection": {
+      "trackedSource": "Tools/Validation/fm-local-media-errors.py",
+      "trackedSha256": "9a72264bf28d31c3d605394c54da8939629669239b1be7be294b4564d3c19293",
+      "candidateSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "installed": false,
+      "sourceProposal": "Artifacts/Validation/Drafts/SharpIllustrationMediaAdmission20261117/fm-local-media-errors.py",
+      "scope": "Only the exact fm-sharp-client-2026-11-17 literal is added to two existing supported-revision tuples. All URL, media, gesture, range, PCM, timing and lifecycle predicates remain unchanged.",
+      "actualUnit": {
+        "passed": 64,
+        "summarySha256": "10aaa9bd620c9fb8321b66493bde3a952bbac944b2ea4e047e5d66195d0c4c0f"
+      },
+      "actualDiagnosticReplay": {
+        "qualifiedRows": 11,
+        "summarySha256": "033bc29499c79c3fa7f0b847867fec36a00b013c3ccf4fbe30b53de69b3d1973",
+        "originalReportsChanged": false,
+        "createsBrowserPass": false
+      },
+      "trackedTestAndCi": "Reviewed proposal only; installation and its actual tracked-fixture run are pending.",
+      "productRuntimeChange": false,
+      "nativeOrWebRebuildRequired": false
+    },
+    "currentPublicationRecord": "currentDeployment",
+    "historicalReleaseAcquisition": {
+      "status": "actual-complete-retains-Release-owner-not-Archive-reexecution",
+      "summary": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/EvidenceGitAcquire01/summary.json",
+      "summarySha256": "44ddb6653573b51604740372a6e6d8cafd6521d8e5d389d6a8523c4b65521398",
+      "result": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/EvidenceGitAcquire01/PublishedGitReadback/result.json",
+      "publicFileCount": 15441,
+      "publicTotalBytes": 984067939,
+      "parentGitIdentityUnchanged": true,
+      "stageOriginalsUnchanged": true,
+      "createsBrowserOrSealApproval": false,
+      "temporaryStoreIsDurableBacking": false
+    },
+    "storageAndProofRecovery": {
+      "historicalRecord": "historicalActiveWorkBeforeSharpIllustrationArchive20261117.storageAndProofRecovery",
+      "actualCurrentCacheFacts": "Artifacts/Validation/Drafts/SharpIllustrationFinalDocs20261117/ARCHIVE-CURRENT-PROPOSAL.md",
+      "currentMeasureRecord": "capacity",
+      "futureForceReimportRequired": true,
+      "nextUnityRule": "Before the next Unity use of either project, explicitly ForceSynchronousImport | ForceUpdate. A normal Refresh alone is insufficient. Browser reruns use preserved Web runtime; no Unity recovery run is claimed.",
+      "installerRelocation": "PinnedInstallerRelocation01 failed after alias replacement. Separate read-only Closing03 verified current readthrough and protected state; it does not convert the original failure into success or claim original inode restoration/workspace gain.",
+      "operationalAgentsPreservation": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/operational-agents-before-cache01.md"
+    },
+    "pending": [
+      "Finish separately reviewed/admitted exact cache capacity action only if actual current proof and live budgets permit; read-only pack/private-binary measurements are not installation or deletion approval.",
+      "Install the two-literal media helper correction, reviewed tracked fixture and one-line CI entry; restore actual operational AGENTS. Installation/tracked-fixture execution is still pending.",
+      "Preserve old four current locals and failed public as exact historical source/owner/raw/Root evidence after installation, then complete six genuinely new actual browser suites with all original gates.",
+      "Complete a new whole release seal and measure-first durable archive/checkpoint with full readback. Preserve Release AQ and all earlier real successes/failures/incomplete attempts under their actual owners.",
+      "Save helper/docs/checkpoint through normal D1 Git, CI, PR/main integration; observe actual paired CI and committed raw blobs, then independently idle, release own lease, observe available and record Closure."
+    ],
+    "mainIntegrationAuthorization": "User explicitly authorized automatic normal main integration without another permission question.",
+    "limitations": "Current old-helper four local approvals remain valid until helper installation. No new six-browser pass, new seal, checkpoint, D1 save/CI/main integration, private-cache backup/unlink, exact30 pack install/loose unlink, final closure, full original parity, Genshin equality, user aesthetic approval, physical-device FPS or recurring background execution is claimed."
+  },
+  "historicalActiveWorkBeforeSharpIllustrationArchive20261117": {
     "id": "SharpIllustration-2026-11-17",
     "status": "independent-Release-cycle-Native11-18-both-Web-all-four-local-final-browser-approvals-four-of-six-main-stage-public-pending",
     "currentRunId": "SharpIllustrationRelease-2026-11-17",
@@ -523,6 +1198,85 @@
     ],
     "mainIntegrationAuthorization": "User explicitly authorized automatic main integration without another permission question.",
     "limitations": "Current Native/Web and all4final local browser passes,3pre-capture historical browser passes and Mobile02incomplete timeout are actual/separately preserved. Current4of6; actualRelease cycle ownership differs from productpublication. No stage/public/newmain/newPR/newproductrelease or2prospective public passes, actualarchive/AQ/storage action inferred fromsourcefixtures, AAA/Genshin equality, full original parity/all text-size/user aesthetic approval or24hour background automation claimed."
+  },
+  "knownGoodDeployment": {
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pagesRunId": 44046501296,
+    "deliveryVerified": true,
+    "currentGameplayReleaseSealed": false,
+    "currentDeploymentRecord": "currentDeployment",
+    "lastFullySealedHistoricalReleaseRecord": "historicalCurrentDeploymentBeforeSharpIllustrationArchive20261117",
+    "scope": "Known current published delivery; pending fresh gameplay/seal is stated separately from the prior completely sealed technical release."
+  },
+  "mainControl": {
+    "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17",
+    "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "currentOwner": null,
+    "currentLockCommit": null,
+    "productMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "pendingVerifierDocsCheckpointD1": true,
+    "currentOwnership": false,
+    "lastOwner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "lastLockCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5"
+  },
+  "historicalMainControlBeforeSharpEvidenceFinish20261117_02": {
+    "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17",
+    "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "currentOwner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "currentLockCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "productMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "pendingVerifierDocsCheckpointD1": true
+  },
+  "historicalMainControlBeforeSharpEvidenceFinish20261117_01": {
+    "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17",
+    "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+    "currentOwner": "c7b06c76-e913-42e6-99a8-43046d74fbbe",
+    "currentLockCommit": "74c2b67da8a8f2eaf6850b1b4558ada65c919fb4",
+    "productMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "productPullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "pendingVerifierDocsCheckpointD1": true,
+    "verifierDocsCheckpointSaveAndCiNotYetObserved": true
+  },
+  "stateProposal": {
+    "status": "actual-current-overlay-for-root-adoption",
+    "policy": "Original baseline/V1/V2 values remain preserved as exact raw historical JSON tokens; current fields describe actual completed observations only."
+  },
+  "historicalStateProposalBeforeSharpEvidenceFinish20261117_01": {
+    "status": "source-only-V2-proposal-not-adopted-or-runtime-proof",
+    "preparedBy": "/root/sharp_final_source_audit",
+    "preparedUtc": "2026-11-17T12:50:55+00:00",
+    "V1": {
+      "file": "Artifacts/Validation/Drafts/SharpIllustrationState20261117/STATE.proposed.json",
+      "bytes": 628829,
+      "sha256": "061005b8154278df569f06053bea213eb1168e217f99363faaa0ac4179d82b4d"
+    },
+    "baseline": {
+      "file": "Docs/Autonomy/STATE.json",
+      "bytes": 594956,
+      "sha256": "07d17d179e677dbaf6270f2a5a338986b39b247a1c8ecd02b8cad3160e659c36"
+    },
+    "historyPreservation": "Every displaced V1 current object/scalar is retained under a unique historical...BeforeSharpIllustrationStateV220261117 key. All V1 historical/unrelated text and arbitrary-precision integer literals remain unchanged. Only newly authored safe-integer objects use standard JSON serialization.",
+    "adoption": "Root must parse/review exact facts and structural preservation before adopting. New browser progress is a12:50:55UTC source snapshot, not a later live query or all-six approval."
+  },
+  "historicalStateProposalBeforeSharpIllustrationStateV220261117": {
+    "status": "source-only-proposal-not-adopted-or-runtime-proof",
+    "preparedBy": "/root/sharp_final_source_audit",
+    "preparedUtc": "2026-11-17T11:56:05+00:00",
+    "baseline": {
+      "file": "Docs/Autonomy/STATE.json",
+      "bytes": 594956,
+      "sha256": "07d17d179e677dbaf6270f2a5a338986b39b247a1c8ecd02b8cad3160e659c36"
+    },
+    "factsProposal": "Artifacts/Validation/Drafts/SharpIllustrationFinalDocs20261117/ARCHIVE-CURRENT-PROPOSAL.md",
+    "historyPreservation": "Each displaced live object or scalar remains textually unchanged under its explicit historical...BeforeSharpIllustrationArchive20261117 key. Unrelated baseline text/integer literals remain unchanged; the full baseline is never parsed into JavaScript numbers.",
+    "adoption": "Root must parse/review exact facts and fill later actual results after cache actions. This proposal is not execution, approval, main update or CI evidence."
   },
   "historicalClientMotion": {
     "id": "ClientMotion-2026-11-11",
@@ -2947,7 +3701,10 @@
     },
     "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
   },
-  "baselineScope": "Public release, all six suites, FinalSeal, Checkpoint, D1/D2 raw Git saves and paired push CI, normal runtime closure and PR11 main integration completed. Future ordinary verified main integration is user-authorized without repeated approval. Original full parity/Genshin-level art goals remain incomplete; current preference commit CI is observed separately.",
+  "baselineScope": "Sharp product main9a24/public94f, installed06755 browser6/6 and whole-release FinalSeal01 passed. Verifier/evidence D1, CI/main and closure are separate remaining steps at this snapshot.",
+  "historicalBaselineScopeBeforeSharpEvidenceFinish20261117_01": "Current Sharp product PR12/main M9a24/P94f/Pages/Portal03 delivery and Release AQ are complete. Helper06755 is installed, tracked62/candidate64/diagnostic11 are separate actual results; five old canonical directories are historical. New CardDesktop04 is approved1of6, GospelDesktop03 active/four pending. Original Native/Web retain actual source/ownership. Private nine-binary backup/cache retirement is complete; before any Unity restore exact nine files then force synchronous import/update for both projects. Full seal/checkpoint/D1/CI/main proof save/closure remain pending.",
+  "historicalBaselineScopeBeforeSharpIllustrationStateV220261117": "Current Sharp product PR12/main M9a24/P94f/Pages/Portal03 delivery and Release AQ are complete; original Native/Web and four old-helper local approvals remain. Media-helper installation, six new actual browser runs, new full seal/checkpoint/D1/main proof save/closure are pending. Prior fully sealed ClassicNpr release remains explicit history.",
+  "historicalBaselineScopeBeforeSharpIllustrationArchive20261117": "Public release, all six suites, FinalSeal, Checkpoint, D1/D2 raw Git saves and paired push CI, normal runtime closure and PR11 main integration completed. Future ordinary verified main integration is user-authorized without repeated approval. Original full parity/Genshin-level art goals remain incomplete; current preference commit CI is observed separately.",
   "baseline": {
     "observedMainBeforeSetup": "86fe2e1e620f428d9094860c0ba072cf2663e606",
     "dirtyPathsBeforeSetup": [],
@@ -2965,6 +3722,90 @@
     "portability": "Remote normal source/gh-pages commits and manifest are the durable restore anchors. Temporary players and ignored raw Artifacts must be checked for existence; never assume a new environment retains them."
   },
   "games": {
+    "FantasyCards": {
+      "revision": "fm-sharp-client-2026-11-17",
+      "status": "published-three-current-browser-cases-and-full-seal-passed",
+      "implementedChange": "Sharper SDF UI text and borders, high-DPI backing and original4:3 layout; original card/source/save identities preserved.",
+      "nextMilestone": "Improve remaining low-resolution source card art and small battle controls using dated original-client references; keep multiplayer disabled and marked future update.",
+      "qualityBoundary": "Service-end original parity and all original rules/cards are not complete; no unverified screenshot layout is called exact original."
+    },
+    "PathOfDawn": {
+      "revision": "gospel-illustrated-anime-2026-11-17",
+      "status": "published-three-current-browser-cases-and-full-seal-passed",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "implementedChange": "Six illustrated portraits in dialogue/HUD/status; refined actual3D garment/hair and character presentation; persistent world people, movement, minimap, Bible discovery/save/reload retained.",
+      "nextMilestone": "Improve face/garment/hair detail and animation, nearby NPC overlap and foliage camera occlusion in representative field/dialogue scenes while retaining story and save IDs.",
+      "qualityBoundary": "Simple environment and flat garment/hair details remain; Genshin/StarRail quality and user artistic approval are not achieved."
+    }
+  },
+  "historicalGamesBeforeSharpEvidenceFinish20261117_01": {
+    "FantasyCards": {
+      "revision": "fm-sharp-client-2026-11-17",
+      "sourceStatus": "Sharp-published-installed-media-helper-new-PC-pass-mobile-public-pending",
+      "supportedCards": 2649,
+      "originalArchiveCards": 15350,
+      "unsupportedArchiveCards": 12701,
+      "multiplayer": "disabled-future-update",
+      "sourceBaseMain": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+      "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81",
+      "sourceFingerprintScope": "Original Sharp Native05/Web02 product input fingerprint, unchanged by media-helper-only correction.",
+      "currentValidation": "Original Native05 11/0/0, selected Root22 and Web02 remain valid. New06755 CardDesktop04 finalized472checks/0false/93PNGs/64required+16supplementary=80Root, four PCM/two reloads and inner+outer four-zero/empty. Historical Desktop03/Mobile02 and failed Public01 retain original statuses. Current mobile/public suites remain pending.",
+      "nextMilestone": "Complete genuinely new mobile/public suites under installed06755 and full release seal; preserve old sources/owners/history and original-style art limitations."
+    },
+    "PathOfDawn": {
+      "revision": "gospel-illustrated-anime-2026-11-17",
+      "sourceStatus": "Sharp-published-installed-media-helper-new-desktop-active-mobile-public-pending",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "sourceBaseMain": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+      "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872",
+      "sourceFingerprintScope": "Original Sharp Native03/Web01 product input fingerprint, unchanged by media-helper-only correction.",
+      "currentValidation": "Original Native03 18/0/0, limited Root11 including required incremental9, and Web01 remain valid. New06755 GospelDesktop03 is active without a completion/Root-approval claim; mobile/public suites are pending. Old Desktop02/Mobile03 are preserved historical passes.",
+      "nextMilestone": "Complete current desktop and genuinely new mobile/public portrait/body/dialogue/Bible/save/reload checks under installed06755 while retaining physical NPCs, illustrated speaker/age guards and original runtime."
+    }
+  },
+  "historicalGamesBeforeSharpIllustrationStateV220261117": {
+    "FantasyCards": {
+      "revision": "fm-sharp-client-2026-11-17",
+      "sourceStatus": "Sharp-main-and-public-delivery-complete-browser-media-recheck-pending",
+      "supportedCards": 2649,
+      "originalArchiveCards": 15350,
+      "unsupportedArchiveCards": 12701,
+      "multiplayer": "disabled-future-update",
+      "sourceBaseMain": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+      "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81",
+      "sourceFingerprintScope": "Original Sharp Native05/Web02 product input fingerprint, unchanged by media-helper-only correction.",
+      "currentValidation": "Native05 11/0/0, selected Root22 and Web02 passed. Desktop03 and Mobile02 are two of four current old-helper local approvals. CardPublic01 failed one of496 checks at media classification; no public approval. New six-suite rerun follows actual helper installation.",
+      "nextMilestone": "Preserve old proofs, install strict revision admission fix after capacity safeguards, complete genuinely new PC/mobile/public suites and seal; continue original-style graphic/UI quality beyond technical checks."
+    },
+    "PathOfDawn": {
+      "revision": "gospel-illustrated-anime-2026-11-17",
+      "sourceStatus": "Sharp-main-and-public-delivery-complete-browser-media-recheck-pending",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "sourceBaseMain": "e9dbef24e321dcfe896a1510da729f3aff3d9d22",
+      "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872",
+      "sourceFingerprintScope": "Original Sharp Native03/Web01 product input fingerprint, unchanged by media-helper-only correction.",
+      "currentValidation": "Native03 18/0/0, limited current Root11 including required incremental9, and Web01 passed. Desktop02/Mobile03 are two of four current old-helper local approvals. Current public gameplay approval is pending; no Genshin-level or user aesthetic acceptance claim.",
+      "nextMilestone": "Complete genuinely new PC/mobile/public portrait/body/dialogue/Bible/save/reload checks under the corrected shared media helper while retaining physical NPCs and illustrated speaker/age guards."
+    }
+  },
+  "historicalGamesBeforeSharpIllustrationArchive20261117": {
     "FantasyCards": {
       "revision": "fm-classic-library-2026-11-16",
       "sourceStatus": "published-M2-P9e7-Native-Web-localPC-touch-complete-public-gameplay-validation-pending",
@@ -3144,6 +3985,57 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
+    "id": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "status": "explicit-public-export-approval-and-fresh-inspection-required",
+    "tasks": [
+      "Obtain explicit approval for the exact public destination and payload. Then freshly inspect local candidate and remote main, acquire genuinely new fixed ownership and transfer the immutable completed checkpoint without relabeling its original Finish owner.",
+      "Preserve actual six browser/fullseal/old owner histories; do not rerun unchanged product or call released snapshots current ownership.",
+      "After authorized export, observe exact candidate CI, normal PR/main integration, raw blob readback and actual late-originals closure.",
+      "Continue Gospel actor/garment/hair/camera quality and original-reference FantasyCards UI/artwork. Before any Unity restore exact private9 and force synchronous import/update for both projects."
+    ],
+    "automaticMainIntegration": "Already authorized; no repeat permission or expired-code request.",
+    "futureExecution": "A later runtime cycle requires fresh actual inspection and genuinely new fixed ownership after normal release; no renewal or automatic background continuation."
+  },
+  "historicalNextRunBeforeSharpEvidenceFinish20261117_02": {
+    "id": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "status": "finish-current-evidence-before-next-product-milestone",
+    "tasks": [
+      "Finish current measure-first verified checkpoint, referenced D1 normal Git/paired CI/PR/main and fresh archive raw readback.",
+      "Independently verify idle, normally release only this fixed own lease, observe available and preserve actual late closure evidence.",
+      "Next product milestone: Gospel representative field/dialogue actor/garment/hair/overlap/camera quality, and dated original-reference FantasyCards artwork/UI fidelity. Preserve current play/save/story and disabled multiplayer.",
+      "Before any future Unity run restore the exact private9 cache payload and attributes, then force synchronous import/update in both projects."
+    ],
+    "automaticMainIntegration": "Already authorized; no repeat permission or expired-code request.",
+    "futureExecution": "A later runtime cycle requires fresh actual inspection and genuinely new fixed ownership after normal release; no renewal or automatic background continuation."
+  },
+  "historicalNextRunBeforeSharpEvidenceFinish20261117_01": {
+    "id": "SharpIllustrationArchive-2026-11-17",
+    "status": "Archive-active-media-installed-private-cache-complete-new-browser-one-of-six-GospelDesktop-active",
+    "tasks": [
+      "Continue actual GospelDesktop03 without claiming its completion; finish the other four not-started mobile/public suites. Current new approvals are CardDesktop04 only, one of six.",
+      "Preserve exact five retired canonical directories as four historical local passes and one failed public, with original raw/Root/source/status/owner/pathTranslations. Do not relabel them current06755 approvals.",
+      "Complete all six new browser approvals, then a new whole release seal and measure-first durable archive/checkpoint with full readback. Preserve original Native/Web and Release AQ owners.",
+      "Normally save installed helper/fixture/one-line CI, current docs and actual checkpoint/raw evidence through D1 Git/CI/PR/main integration, retaining product M9a24/P94f separately from the future verifier/docs commit.",
+      "Before any later Unity use, restore exact nine private cache files and original bytes/mode/UID/GID/integer mtimeNs, then force synchronous import/update for both projects. Keep all private binary backup payload out of Git and public delivery.",
+      "After actual durable-save/CI boundaries, independently idle, normally release only the current own lease, observe available and record Closure."
+    ],
+    "rule": "Use only current c7b06c76/74c2b67d owner with fixed 2026-11-17T09:40:08.314984Z–15:40:08.314984Z deadline and existing guard/reserves. Prior Release own-release/available is historical; do not renew, steal, relabel approvals or infer future cache/Git/CI/browser results.",
+    "automaticMainIntegration": "Already user-authorized. Product PR12/main M9a24/P94f is complete. Installed verifier/helper/workflow and new proof/docs/checkpoint D1/CI/main integration remain pending."
+  },
+  "historicalNextRunBeforeSharpIllustrationStateV220261117": {
+    "id": "SharpIllustrationArchive-2026-11-17",
+    "status": "current-Archive-owned-storage-source-preparation-before-media-install-and-six-new-browser-runs",
+    "tasks": [
+      "Finish separately reviewed/admitted exact cache capacity action only if actual current proof and live budgets permit; read-only pack/private-binary measurements are not installation or deletion approval.",
+      "Install the two-literal media helper correction, reviewed tracked fixture and one-line CI entry; restore actual operational AGENTS. Installation/tracked-fixture execution is still pending.",
+      "Preserve old four current locals and failed public as exact historical source/owner/raw/Root evidence after installation, then complete six genuinely new actual browser suites with all original gates.",
+      "Complete a new whole release seal and measure-first durable archive/checkpoint with full readback. Preserve Release AQ and all earlier real successes/failures/incomplete attempts under their actual owners.",
+      "Save helper/docs/checkpoint through normal D1 Git, CI, PR/main integration; observe actual paired CI and committed raw blobs, then independently idle, release own lease, observe available and record Closure."
+    ],
+    "rule": "Use only current c7b06c76/74c2b67d owner with fixed 2026-11-17T09:40:08.314984Z–15:40:08.314984Z deadline and existing guard/reserves. Prior Release own-release/available is historical; do not renew, steal, relabel approvals or infer future cache/Git/CI/browser results.",
+    "automaticMainIntegration": "Already user-authorized. Product PR12/main M9a24 is complete; verifier/docs/checkpoint D1/main integration remains future."
+  },
+  "historicalNextRunBeforeSharpIllustrationArchive20261117": {
     "id": "SharpIllustrationRelease-2026-11-17",
     "previousPrePublicBertProposalStatus": "actual-Release-owner-all4final-locals-passed-current4of6-main-stage-P-public2-pending-source-Git-budget-does-not-fit",
     "status": "actual-Release-owner-all4locals-current4of6-prepublicBert02-success-freshProductGitBudget03-main-stage-P-public2-pending",
@@ -3192,6 +4084,112 @@
     ]
   },
   "execution": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage; source agents edit only assigned Draft files.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "lockStatus": "normally-released-available-observed-export-approval-pending",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "owner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "lockCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "childCommandLimitSeconds": 3600,
+    "browserOnlyCommandLimitSeconds": 5400,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "backgroundContinuationClaimed": false,
+    "nextAction": "Obtain explicit approval for the exact public destination and payload. Then freshly inspect local candidate and remote main, acquire genuinely new fixed ownership and transfer the immutable completed checkpoint without relabeling its original Finish owner.",
+    "currentOwnership": false,
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    }
+  },
+  "historicalExecutionBeforeSharpEvidenceFinish20261117_02": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage; source agents edit only assigned Draft files.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "lockStatus": "independent-fixed-Finish-lease-active",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "owner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "lockCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "childCommandLimitSeconds": 3600,
+    "browserOnlyCommandLimitSeconds": 5400,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "backgroundContinuationClaimed": false,
+    "nextAction": "Complete actual measured archive, normal verifier/evidence Git/CI/main, then independent final idle and normal own release/available/Closure."
+  },
+  "historicalExecutionBeforeSharpEvidenceFinish20261117_01": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage. Source agents edit only their explicitly assigned new Draft files. Historical agent names and acquired snapshots do not grant current ownership.",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "lockStatus": "Sharp-origin-Resume-Release-normally-released-independent-Archive-fixed-lease-active-ownerc7b06c76-lock74c2b67d",
+    "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
+    "childCommandLimitSeconds": 3600,
+    "defaultGuardLimitSeconds": 2700,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "sameCauseMaxRetries": 2,
+    "modelUsageEnforced": false,
+    "wholeInteractiveAgentDeadlineEnforced": false,
+    "limitsNote": "Current fixed Archive deadline is15:40:08.314984UTC. Default supervised command3600s; separately admitted exact-browser-only/display adapter5400s remains within unchanged native range. Lease60s/cleanup12s/per-review600s reserves and all guards remain; no account/model quota or whole-agent deadline is inferred.",
+    "evidencePolicy": "Retain exact original source/save/GUID/runtime/raw failures and actual ownership. New ignored evidence is not durable until actual verified archive/raw Git/normal push/CI completes.",
+    "continuation": "A later batch requires independent current inspection, normal previous own-release/available and genuinely new bounded ownership. Never extend a live lease, steal a lock, automatically recreate a goal/schedule or infer background execution.",
+    "currentBatchAtReport": {
+      "id": "SharpIllustrationArchive-2026-11-17",
+      "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+      "owner": "c7b06c76-e913-42e6-99a8-43046d74fbbe",
+      "commitSha": "74c2b67da8a8f2eaf6850b1b4558ada65c919fb4",
+      "startedUtc": "2026-11-17T09:40:08.314984+00:00",
+      "deadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+      "startedSeoul": "2026-11-17T18:40:08.314984+09:00",
+      "deadlineSeoul": "2026-11-18T00:40:08.314984+09:00",
+      "status": "Archive-active-media-installed-private-cache-complete-new-browser-one-of-six-GospelDesktop-active",
+      "currentOwnership": true,
+      "scope": "Installed06755 and tracked62-pass fixture; private nine cache action completed. Current new browser approvals1/6, GospelDesktop03 active/four pending. Original Native/Web and historical local/Release AQ owners remain; no new seal/D1/closure result inferred."
+    },
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/lease.json",
+    "statusObservationScope": "BeforeArchiveCycleFinalIdle01 guardAfter124 remains a failed wrapper. Prior three events exited0/empty and separate direct idle/guard completed; no all-four final-idle pass is claimed. Release normally own-released09:39:14.858190UTC and separate available preceded independent Archive acquisition09:40:08.314984UTC.",
+    "historicalExecutionRecord": "historicalExecutionBeforeSharpIllustrationArchive20261117"
+  },
+  "historicalExecutionBeforeSharpIllustrationStateV220261117": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage. Source agents edit only their explicitly assigned new Draft files. Historical agent names and acquired snapshots do not grant current ownership.",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "lockStatus": "Sharp-origin-Resume-Release-normally-released-independent-Archive-fixed-lease-active-ownerc7b06c76-lock74c2b67d",
+    "onBusyOrUnknown": "Skip current cycle with exit75; do not queue or automatically steal even expired locks.",
+    "childCommandLimitSeconds": 3600,
+    "defaultGuardLimitSeconds": 2700,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "sameCauseMaxRetries": 2,
+    "modelUsageEnforced": false,
+    "wholeInteractiveAgentDeadlineEnforced": false,
+    "limitsNote": "Current fixed Archive deadline is15:40:08.314984UTC. Default supervised command3600s; separately admitted exact-browser-only/display adapter5400s remains within unchanged native range. Lease60s/cleanup12s/per-review600s reserves and all guards remain; no account/model quota or whole-agent deadline is inferred.",
+    "evidencePolicy": "Retain exact original source/save/GUID/runtime/raw failures and actual ownership. New ignored evidence is not durable until actual verified archive/raw Git/normal push/CI completes.",
+    "continuation": "A later batch requires independent current inspection, normal previous own-release/available and genuinely new bounded ownership. Never extend a live lease, steal a lock, automatically recreate a goal/schedule or infer background execution.",
+    "currentBatchAtReport": {
+      "id": "SharpIllustrationArchive-2026-11-17",
+      "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+      "owner": "c7b06c76-e913-42e6-99a8-43046d74fbbe",
+      "commitSha": "74c2b67da8a8f2eaf6850b1b4558ada65c919fb4",
+      "startedUtc": "2026-11-17T09:40:08.314984+00:00",
+      "deadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+      "startedSeoul": "2026-11-17T18:40:08.314984+09:00",
+      "deadlineSeoul": "2026-11-18T00:40:08.314984+09:00",
+      "status": "Archive-active-product-main-public-delivery-complete-media-fix-and-storage-actions-before-six-new-browser-runs",
+      "currentOwnership": true,
+      "scope": "Same product M9a24/P94f, OUT/stage/original Sharp BuildProofCurrent. Original Native/Web and old local/Release AQ owners retained. Current preparation does not create new proof results."
+    },
+    "liveLeaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/lease.json",
+    "liveLeaseDeadlineUtc": "2026-11-17T15:40:08.314984+00:00",
+    "releasedLeaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/lease.json",
+    "statusObservationScope": "BeforeArchiveCycleFinalIdle01 guardAfter124 remains a failed wrapper. Prior three events exited0/empty and separate direct idle/guard completed; no all-four final-idle pass is claimed. Release normally own-released09:39:14.858190UTC and separate available preceded independent Archive acquisition09:40:08.314984UTC.",
+    "historicalExecutionRecord": "historicalExecutionBeforeSharpIllustrationArchive20261117"
+  },
+  "historicalExecutionBeforeSharpIllustrationArchive20261117": {
     "singleOwnerPolicy": "Every new run must identify actual live ownership. This recovery was executed by /root; checkpointed agent names do not establish a currently active process.",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
     "guard": "Tools/Autonomy/cycle_guard.py",
@@ -3469,6 +4467,69 @@
     }
   },
   "environment": {
+    "managedCloudObservedRunning": true,
+    "githubConnection": "Working current ka8877 authentication; expired device code is historical and no new user code/token input is required.",
+    "runtimePolicy": "Existing Native/Web/Stage and original Sharp BuildProofCurrent retained. No new Unity execution for the media-helper-only correction.",
+    "futureForceReimportRequired": true,
+    "nextUnityRule": "Restore exact private9 backup bytes and attributes before both projects' ForceSynchronousImport | ForceUpdate.",
+    "networkPolicy": "Root-owned commands, login:true and explicit additional network permission; no credentials printed.",
+    "currentConnectionStatus": "GitHub authentication works; device code expiry is historical. Fixed Finish cycle normally released. Public-data export approval is the actual current blocker."
+  },
+  "historicalEnvironmentBeforeSharpEvidenceFinish20261117_02": {
+    "managedCloudObservedRunning": true,
+    "githubConnection": "Working current ka8877 authentication; expired device code is historical and no new user code/token input is required.",
+    "runtimePolicy": "Existing Native/Web/Stage and original Sharp BuildProofCurrent retained. No new Unity execution for the media-helper-only correction.",
+    "futureForceReimportRequired": true,
+    "nextUnityRule": "Restore exact private9 backup bytes and attributes before both projects' ForceSynchronousImport | ForceUpdate.",
+    "networkPolicy": "Root-owned commands, login:true and explicit additional network permission; no credentials printed."
+  },
+  "historicalEnvironmentBeforeSharpEvidenceFinish20261117_01": {
+    "managedCloudObservedRunning": true,
+    "currentConnectionStatus": "Independent Archive c7b06c76/74c2b67d is active until15:40:08.314984UTC. Product M9a24/P94f/Pages/Portal03 and Release AQ completed. Helper06755 installed12:11:57.476728UTC, tracked62/candidate64/diagnostic11 are separate actual results. Exact five old canonicals retired historically; newCardDesktop04 finalized1/6, GospelDesktop03 active/four pending. Native11/18+Web02/01 unchanged; new seal/checkpoint/D1/closure pending.",
+    "currentRecovery": "Private exact nine non-Linux Burst files were fully backed up in six verified local lossless parts before selected cache-copy retirement. Actual WS297529344→598081536B is a completion snapshot, not current space. Binary backup payload must never enter Git/public. Before ANY Unity, restore exact original bytes/SHA/mode/UID/GID/integer mtimeNs (no inode/ctime restoration claim), then ForceSynchronousImport | ForceUpdate for BOTH games. Exact30 remains fitsfalse/no Git install or loose unlink. Failed installer/Closing03 history remains unchanged.",
+    "networkPolicy": "restricted-by-default; Root-owned commands use explicit additional network permission with login:true and current Archive activation as required",
+    "vpnConfigured": false,
+    "installedWebGLModule": true,
+    "installedWindowsModule": true,
+    "browserPython": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "pythonNote": "Actual installed tracked media fixture passed62; earlier candidate64 and diagnostic11 are distinct. NewCardDesktop04 is first current browser approval. Retain invocation-specific interpreter/dependency/source pins; e1cb/plans and producer Native/Web are unchanged.",
+    "pendingActualEditorCompile": false,
+    "futureForceReimportRequired": true,
+    "nextUnityRule": "Before ANY Unity use, restore all exact nine retired non-Linux Burst cache files to their original paths from the verified private backup, checking full bytes/SHA, original mode/UID/GID and integer mtimeNs. Do not claim original inode or ctime restoration. Then explicitly ForceSynchronousImport | ForceUpdate for BOTH games; a normal Refresh alone is insufficient. Existing preserved Web runtime remains the browser rerun input.",
+    "note": "Native/software-rendered browser results are source-bound technical checks; physical-device performance and user aesthetic acceptance remain unclaimed.",
+    "latestStorageObservation": {
+      "basis": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/BurstBinaryPrivateCompaction01/BurstBinaryPrivateCompaction/completed.json",
+      "reportedWorkspaceAvailableBytes": 598081536,
+      "previousReportedWorkspaceAvailableBytes": 297529344,
+      "scope": "Observed at actual private compaction completion, not current available space, permanent gained capacity or a future archive/Git budget approval."
+    },
+    "browserPythonScope": "Current06755 sources bind new CardDesktop04 approval only; GospelDesktop03 is active and four others pending. Five old canonical directories remain exact historical statuses. No Unity rebuild is implied by verifier-only changes.",
+    "historicalEnvironmentRecord": "historicalEnvironmentBeforeSharpIllustrationArchive20261117",
+    "restoreExactNineBeforeAnyUnity": true
+  },
+  "historicalEnvironmentBeforeSharpIllustrationStateV220261117": {
+    "managedCloudObservedRunning": true,
+    "currentConnectionStatus": "Independent Archive c7b06c76/74c2b67d is active until15:40:08.314984UTC. Product M9a24/P94f/Pages/Portal03 and Release AQ completed. Native11/18+Web02/01 unchanged. Old-helper four locals remain current until candidate06755 installation; failed CardPublic01 is not approved. Six new browser runs, seal/checkpoint/D1/closure remain pending.",
+    "currentRecovery": "Current sources/runtime/Stage/raw proofs and protected Bee/DBs remain retained. Generated-cache cleanup and limited failed installer alias/read-only closing are recorded separately in FinalDocs. Exact30 Measure03 does not fit and performed no original Git install/unlink. Private nine-binary compression measurement succeeded read-only; actual lossless backup/unlink and gained space remain pending.",
+    "networkPolicy": "restricted-by-default; Root-owned commands use explicit additional network permission with login:true and current Archive activation as required",
+    "vpnConfigured": false,
+    "installedWebGLModule": true,
+    "installedWindowsModule": true,
+    "browserPython": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "pythonNote": "Retain actual interpreter/dependency pins per new invocation. Reviewed media candidate64-unit/replay11 success is separate from installation, new tracked-fixture run or actual browsers. Original harness e1cb and producer Native/Web sources are unchanged.",
+    "pendingActualEditorCompile": false,
+    "futureForceReimportRequired": true,
+    "nextUnityRule": "Before the next Unity use of either project, explicitly ForceSynchronousImport | ForceUpdate. A normal Refresh alone is insufficient. Browser reruns use preserved Web runtime; no Unity recovery run is claimed.",
+    "note": "Native/software-rendered browser results are source-bound technical checks; physical-device performance and user aesthetic acceptance remain unclaimed.",
+    "latestStorageObservation": {
+      "basis": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/burst-non-linux-readonly-compression01.json",
+      "reportedWorkspaceAvailableBytes": 302657536,
+      "scope": "Historical read-only measurement snapshot; not current free space or a future archive/install/Git budget approval."
+    },
+    "browserPythonScope": "Four old-helper local approvals are valid at this snapshot. Installing the shared classifier changes captured validation sources and requires six new actual browser runs; no Unity rebuild is implied.",
+    "historicalEnvironmentRecord": "historicalEnvironmentBeforeSharpIllustrationArchive20261117"
+  },
+  "historicalEnvironmentBeforeSharpIllustrationArchive20261117": {
     "storageAtTechnicalClose": {
       "workspaceFreeBytes": 119529472,
       "tmpFreeBytes": 181227520,
@@ -3616,6 +4677,160 @@
     "historicalClientMotionRecoveryDescription": "Currentallruntime/publicgates andindependentArchiveCheckpoint02 actualpreservation completed; V3Rootreview27unitretainedafterfirstarchivepreconditionfailure. Nofinalresumeidle/release/Closureyet."
   },
   "capacity": {
+    "profile": "sharp-illustration",
+    "publishedFileCountIncludingManifest": 15441,
+    "publishedBytesIncludingManifest": 984067939,
+    "gameplayReleaseSealed": true,
+    "storageObservation": {
+      "basis": "OneSymbolCacheRelocation01 actual completed receipt",
+      "workspaceAvailableBytes": 123228160,
+      "tmpAvailableBytes": 752496640,
+      "scope": "Snapshot at completion, not guaranteed current capacity."
+    },
+    "reversibleGeneratedCacheRelocation": {
+      "bytes": 48850599,
+      "sha256": "88fddc07d8adf88142a10d8b842f28710ab2a2b9ae24020a9830974d4eb2d42a",
+      "source": "Games/FantasyCards/Library/Bee.classic-npr-before01/artifacts/WebGL/il2cppOutput/cpp/Symbols/MethodMap.tsv",
+      "backing": "/tmp/firstgame-sharp-finish-symbol-cache01/MethodMap.tsv",
+      "wholeBytesAndModeUidGidMtimePreserved": true,
+      "originalCacheInodePreserved": false,
+      "durableBackingClaimed": false
+    },
+    "checkpoint": {
+      "status": "actual-temp-checkpoint-complete-not-yet-referenced-in-Git",
+      "fileCount": 38883,
+      "parts": 30,
+      "archiveBytes": 948094355,
+      "archiveSha256": "f290e127bd6e36f72ed193d90a4c53064355a077473e34d88b91c3deea96cee3",
+      "physicalIndex": "/tmp/firstgame-sharp-checkpoint-onhk3q2r/Evidence/Checkpoint01/index.json",
+      "indexBytes": 44345989,
+      "indexSha256": "4a8203eb4dd7533a4c27243565aa75dfde2f93c808aa6b8e42ea565f5be8adea",
+      "wrapper": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/CommandRuns/ScratchCheckpoint01/summary.json",
+      "durableRemoteBackingClaimed": false
+    },
+    "privateNineRule": "Backup payload stays private and exact restoration precedes any Unity run; historical measurements remain under preserved capacity history."
+  },
+  "historicalCapacityBeforeSharpEvidenceFinish20261117_01": {
+    "profile": "sharp-illustration",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "fileCount": 15441,
+    "totalBytes": 984067939,
+    "stagePublishReady": true,
+    "budgetBytesIncludingManifest": 985000000,
+    "manifestSha256": "79ff217039f29cf234e6bc3d3dec1c48644dc4602d3520cd42502fbe8d8dbaeb",
+    "gameplayReleaseSealed": false,
+    "basis": "Actual Stage01, Publish05, Pages44046501296, Portal03 full delivery/Root2/PortalGate01 and Release EvidenceGitAcquire01.",
+    "latestWorkspaceObservation": {
+      "basis": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/BurstBinaryPrivateCompaction01/BurstBinaryPrivateCompaction/completed.json",
+      "reportedWorkspaceAvailableBytes": 598081536,
+      "previousReportedWorkspaceAvailableBytes": 297529344,
+      "scope": "Observed at actual private compaction completion, not current available space, permanent gained capacity or a future archive/Git budget approval."
+    },
+    "exactThirtyPack": {
+      "status": "actual-measurement-only-does-not-fit",
+      "summarySha256": "6abcecb909a1599c3c53827e67fddf64d70f11fc26d805f1b7a057431e9fbac1",
+      "packBytes": 438798633,
+      "indexBytes": 1912,
+      "workspaceAvailableBytesAtMeasurement": 304517120,
+      "requiredReserveBytes": 67108864,
+      "fitsWithReserve": false,
+      "installed": false,
+      "selectedLooseObjectsUnlinked": 0,
+      "workspaceGainClaimed": false
+    },
+    "historicalPrivateNineBinaryMeasureRecord": "historicalCapacityBeforeSharpIllustrationStateV220261117.privateNineBinaryMeasure",
+    "scope": "Private nine-file backup and selected cache-copy retirement are actual and separately verified; observed post-action capacity is a historical snapshot. Exact30 remains measurement-only/fitsfalse with no original Git installation/unlink. Product/runtime/source/proof/Git and retained Bee histories remain preserved.",
+    "publishedStageVerified": true,
+    "privateNineBinaryCompaction": {
+      "status": "actual-nine-private-backup-verified-cache-copies-retired",
+      "summary": {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/BurstBinaryPrivateCompaction01/summary.json",
+        "bytes": 13087,
+        "sha256": "03162be62755defa2b602e83b9f3afbb4cad18ed933545893cb871b640880c0a"
+      },
+      "completed": {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/CommandRuns/BurstBinaryPrivateCompaction01/BurstBinaryPrivateCompaction/completed.json",
+        "bytes": 7444,
+        "sha256": "e9b471fc049cb08e693356d4a36add105da464704bbd81e655093d85bb3b2d5b"
+      },
+      "selectedFiles": 9,
+      "rawBytes": 472842344,
+      "compressedBytes": 172212709,
+      "parts": 6,
+      "joinedArchiveSha256": "41d564ca67feeff74e6aa2c87f690979357b14e4ab1b1641227da2cc913316c4",
+      "privateBackupDestination": "Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01",
+      "privateIndex": {
+        "file": "Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01/index.json",
+        "bytes": 16338,
+        "sha256": "f8e1352baeee7c24c198cd8adb1c9de72a830b44b967f2110f59f0ddc514b054"
+      },
+      "restoreRequiredMarker": {
+        "file": "Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01/RESTORE_REQUIRED_BEFORE_UNITY.json",
+        "bytes": 460,
+        "sha256": "fec585b3abe8876989f2702f9b6077ad46e5f160f360a9f8ddb9c00b91e3b4b4"
+      },
+      "cacheCopiesRetired": 9,
+      "backupAndUnlinkAction": "actual-completed",
+      "privateBackupVerifiedBeforeCacheUnlinks": true,
+      "workspaceObservation": {
+        "beforeBytes": 297529344,
+        "afterBytes": 598081536,
+        "scope": "Observed at actual private compaction completion, not current available space, permanent gained capacity or a future archive/Git budget approval."
+      },
+      "otherLibrarySourceProofGitUnchanged": true,
+      "strictStageCurrentReadinessUnchangedAtAction": true,
+      "restoreRequiredBeforeAnyUnity": true,
+      "nextUnityRule": "Before ANY Unity use, restore all exact nine retired non-Linux Burst cache files to their original paths from the verified private backup, checking full bytes/SHA, original mode/UID/GID and integer mtimeNs. Do not claim original inode or ctime restoration. Then explicitly ForceSynchronousImport | ForceUpdate for BOTH games; a normal Refresh alone is insufficient. Existing preserved Web runtime remains the browser rerun input.",
+      "originalInodeOrCtimeRestorationClaimed": false,
+      "backupMustNotEnterGitOrPublic": true,
+      "publicRedistribution": false,
+      "createsApprovals": false
+    }
+  },
+  "historicalCapacityBeforeSharpIllustrationStateV220261117": {
+    "profile": "sharp-illustration",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "fileCount": 15441,
+    "totalBytes": 984067939,
+    "stagePublishReady": true,
+    "budgetBytesIncludingManifest": 985000000,
+    "manifestSha256": "79ff217039f29cf234e6bc3d3dec1c48644dc4602d3520cd42502fbe8d8dbaeb",
+    "gameplayReleaseSealed": false,
+    "basis": "Actual Stage01, Publish05, Pages44046501296, Portal03 full delivery/Root2/PortalGate01 and Release EvidenceGitAcquire01.",
+    "latestWorkspaceObservation": {
+      "basis": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/burst-non-linux-readonly-compression01.json",
+      "reportedWorkspaceAvailableBytes": 302657536,
+      "scope": "Historical read-only measurement snapshot; not current free space or a future archive/install/Git budget approval."
+    },
+    "exactThirtyPack": {
+      "status": "actual-measurement-only-does-not-fit",
+      "summarySha256": "6abcecb909a1599c3c53827e67fddf64d70f11fc26d805f1b7a057431e9fbac1",
+      "packBytes": 438798633,
+      "indexBytes": 1912,
+      "workspaceAvailableBytesAtMeasurement": 304517120,
+      "requiredReserveBytes": 67108864,
+      "fitsWithReserve": false,
+      "installed": false,
+      "selectedLooseObjectsUnlinked": 0,
+      "workspaceGainClaimed": false
+    },
+    "privateNineBinaryMeasure": {
+      "status": "actual-read-only-compression-measurement-complete-action-pending",
+      "receipt": "Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17/Release/burst-non-linux-readonly-compression01.json",
+      "summarySha256Prefix": "2b03f8bf",
+      "selectedFiles": 9,
+      "rawBytes": 472842344,
+      "compressedBytes": 172212709,
+      "parts": 6,
+      "joinedArchiveSha256": "41d564ca67feeff74e6aa2c87f690979357b14e4ab1b1641227da2cc913316c4",
+      "privateBackupDestination": "Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01",
+      "backupAndUnlinkAction": "pending-not-executed",
+      "publishOrGitBinaryBackup": false,
+      "workspaceGainClaimed": false
+    },
+    "scope": "No install/unlink/reclaimed-capacity result is inferred from pack or private-cache source proposals/measurements. Preserve exact sources, saves, runtime, raw proof, Git and both Bee histories."
+  },
+  "historicalCapacityBeforeSharpIllustrationArchive20261117": {
     "profile": "classic-npr",
     "sourceCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
     "fileCount": 15439,
@@ -3763,8 +4978,36 @@
       }
     }
   },
-  "knownIssuesScope": "Current remaining product quality gaps; PR11 main integration and D2 CI have completed.",
+  "knownIssuesScope": "Current remaining visual/original-parity gaps and final evidence Git/CI/main/Closure boundaries. All six current browser cases and full seal passed.",
+  "historicalKnownIssuesScopeBeforeSharpEvidenceFinish20261117_01": "Current Sharp product quality and verification boundaries; helper installation/private nine-cache action completed, browser progress1of6 with Gospel PC active, full seal/checkpoint/D1/CI/closure pending.",
+  "historicalKnownIssuesScopeBeforeSharpIllustrationStateV220261117": "Current Sharp product quality and verification boundaries; product PR12 is merged but classifier/new browser/seal/checkpoint/D1 work is pending.",
+  "historicalKnownIssuesScopeBeforeSharpIllustrationArchive20261117": "Current remaining product quality gaps; PR11 main integration and D2 CI have completed.",
   "knownIssues": [
+    "FantasyCards original artwork can remain low resolution and battle controls small; full original-client parity remains incomplete.",
+    "PathOfDawn still has simple environmental detail, flat garment/hair shapes, occasional nearby NPC overlap and foliage camera occlusion; Genshin-level quality is not achieved.",
+    "The former public card run's media-classifier failure remains a failure. Installed06755 only registers the supported Sharp revisions, with unchanged strict HTTP/audio/lifecycle conditions and tracked62 fixture passes.",
+    "A TMP checkpoint or unreferenced Git blob alone is not durable referenced evidence. D1/ref/CI/PR/main and normal release/Closure must be observed separately.",
+    "No24-hour unattended development, active goal card or scheduled automation is inferred from this interactive work."
+  ],
+  "historicalKnownIssuesBeforeSharpEvidenceFinish20261117_01": [
+    "Helper06755 is actually installed with tracked62-pass fixture, distinct from candidate64 and diagnostic11. Five old canonical directories retain historical original statuses. New browser progress is one approved PC, one active Gospel PC and four pending.",
+    "Current CardDesktop04 finalized472checks/0false/93PNGs/80Root and real audio/reloads/owned receipts; it does not approve either public suite, all six runs, release seal, checkpoint, D1/CI/main proof save or closure.",
+    "Private nine non-Linux Burst bytes are retained in a verified local lossless backup, with original cache copies retired. Before ANY Unity restore exact bytes/SHA/mode/UID/GID/integer mtimeNs, then force synchronous import/update in BOTH games; no inode/ctime restoration is claimed. Private binary payload must never enter Git/public.",
+    "Exact30 measurement remains fitsfalse with zero original Git pack installations/selected loose unlinks. Actual post-private-action workspace readings are dated snapshots, not current or permanent capacity.",
+    "Original Card images/small controls and incomplete full Fantasy Masters parity remain quality limits;2649 supported/15350 original records, IDs/economy/saves preserved and multiplayer disabled for future update.",
+    "Gospel portraits/field characters improved but full Genshin-level art, all-angle framing, facial SDF, physical-device FPS and user aesthetic acceptance remain unclaimed.",
+    "Preserve original Native/Web and historical local/Release AQ ownership, all raw failures, source/GUID/save/runtime and protected Bee/DBs. Bounded interactive ownership does not establish recurring or24-hour background development."
+  ],
+  "historicalKnownIssuesBeforeSharpIllustrationStateV220261117": [
+    "Sharp product main/public delivery is complete, but current CardPublic01 failed one media classification check. No new public gameplay/seal/checkpoint/D1/closure completion is claimed.",
+    "Shared classifier06755 is source-reviewed with64 actual unit passes and11 diagnostic qualified rows; installation is pending. Old four local approvals remain current until installation and then require six new actual runs.",
+    "Original Card source images and small controls still limit visual quality; full original Fantasy Masters parity remains incomplete with2649 supported and15350 original records. IDs/economy/saves stay intact; multiplayer is disabled for a future update.",
+    "Gospel illustrated portraits and field clothing/characters improved, but full Genshin-level art, all-angle framing, facial SDF, physical-device FPS and user aesthetic acceptance remain unclaimed.",
+    "Exact30 pack measurement does not fit with reserve; no normal Git install or loose-object unlink occurred. Private nine-binary backup/unlink and any future space gain remain pending actual safeguards.",
+    "Preserve source/GUID/save/runtime/raw proof, original Native/Web/local/Release AQ ownership, DBs and both Bee histories. Next Unity use requires explicit ForceSynchronousImport | ForceUpdate after generated-cache maintenance.",
+    "Actual bounded interactive ownership does not establish recurring schedules or24-hour background development; prior automation0 and unknown goal activation remain historical observations."
+  ],
+  "historicalKnownIssuesBeforeSharpIllustrationArchive20261117": [
     "Game/harness/plans/Native-Web/local proof contract unchanged. All four local suites/245 required Root finalized, including selected local mobile Mary. Earlier600s Gospel preview failures and missing capture metadata remain history, not retroactive preview approval.",
     "Old Card Browser01/audio failure remains raw history. Revision-only fix kept real gates; all six suites Card115/121/129 and Gospel118/99/110 completed with360requiredRoot+5supplements/audio4/reload2. Stage-fix source refresh Core03=311/direct-script05=123 also completed. Hidden Bible scroll affordance remains a future UX gap despite actual ordinary-touch scroll success.",
     "Public release, all six suites, FinalSeal, Checkpoint, D1/D2 raw Git saves and paired push CI, normal runtime closure and PR11 main integration completed. Future ordinary verified main integration is user-authorized without repeated approval. Original full parity/Genshin-level art goals remain incomplete; current preference commit CI is observed separately.",
@@ -4775,6 +6018,117 @@
     }
   },
   "currentDeployment": {
+    "status": "published-delivery-six-browser-cases-and-whole-release-seal-complete",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757",
+    "fileCountIncludingManifest": 15441,
+    "siteBytesIncludingManifest": 984067939,
+    "pagesRunId": 44046501296,
+    "publicPortal": "Portal03 full15441 finalGET200/SHA/size and Root2; actual503-to200 retry and prior failures retained.",
+    "browserCases": "Installed06755/capturee1cb current6/6,2833checks/0false,561PNG/442Root originals, actual4PCM and realreload2 per case.",
+    "finalSeal": "Finish FinalSeal01 actually passed all; all four outer events0 and owned descendants empty.",
+    "evidenceIntegration": "Product M/P and6/6/fullseal passed. Additional verifier/docs and checkpoint GitHub export blocked by automatic approval review; no new remote commit/CI/main integration is claimed.",
+    "userArtisticApprovalClaimed": false
+  },
+  "historicalCurrentDeploymentBeforeSharpEvidenceFinish20261117_02": {
+    "status": "published-delivery-six-browser-cases-and-whole-release-seal-complete",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757",
+    "fileCountIncludingManifest": 15441,
+    "siteBytesIncludingManifest": 984067939,
+    "pagesRunId": 44046501296,
+    "publicPortal": "Portal03 full15441 finalGET200/SHA/size and Root2; actual503-to200 retry and prior failures retained.",
+    "browserCases": "Installed06755/capturee1cb current6/6,2833checks/0false,561PNG/442Root originals, actual4PCM and realreload2 per case.",
+    "finalSeal": "Finish FinalSeal01 actually passed all; all four outer events0 and owned descendants empty.",
+    "evidenceIntegration": "Verifier/evidence D1 is separate from product M/P and remains in progress at this snapshot.",
+    "userArtisticApprovalClaimed": false
+  },
+  "historicalCurrentDeploymentBeforeSharpEvidenceFinish20261117_01": {
+    "status": "PR12-main-and-Pages-public-delivery-complete-gameplay-recheck-and-seal-pending",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "manifest": {
+      "file": "Artifacts/SharpIllustrationWebPlaytest/build-manifest.json",
+      "bytes": 2169928,
+      "sha256": "79ff217039f29cf234e6bc3d3dec1c48644dc4602d3520cd42502fbe8d8dbaeb"
+    },
+    "url": "https://ka8877.github.io/firstgame/",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757",
+    "fileCountIncludingManifest": 15441,
+    "siteBytesIncludingManifest": 984067939,
+    "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+    "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+    "pages": {
+      "runId": 44046501296,
+      "status": "completed",
+      "conclusion": "success",
+      "allStepsCompleted": true
+    },
+    "publicPortal": {
+      "attempt": "Portal03",
+      "status": "all-15441-final-GET200-size-SHA-and-Root-two-originals-PortalGate01-passed",
+      "report": "Artifacts/Validation/SharpIllustration-2026-11-17/PublicPortal/report.json",
+      "reportBytes": 24356620,
+      "reportSha256": "f9e001f5c8b567057ee7557a5d5f0466d6a55e77ad533f406fce7448fd8f50da",
+      "rootAnnotation": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/portal-root-annotation-Portal03.json",
+      "history": "One actual 503-to-200 retry remains recorded; Portal01 eight503 and Portal02 five503 failures remain historical failures."
+    },
+    "publicGameplay": "Current public gameplay approvals remain pending. Historical CardPublic01 stays failed; new CardDesktop04 is a local PC approval only. GospelDesktop03 is active and four remaining mobile/public suites are pending.",
+    "finalSeal": "pending-all-six-new-browser-approvals",
+    "checkpoint": "pending",
+    "closureState": "pending-current-Archive-cycle-normal-closing",
+    "qualityScope": "Published delivery and retained Native/Web/local results are technical evidence. Full original parity, Genshin-level graphics, user aesthetic acceptance and physical-device performance remain unclaimed.",
+    "currentBrowserApprovals": 1,
+    "currentBrowserRequiredSuites": 6,
+    "currentBrowserActiveSuite": "GospelDesktop03"
+  },
+  "historicalCurrentDeploymentBeforeSharpIllustrationStateV220261117": {
+    "status": "PR12-main-and-Pages-public-delivery-complete-gameplay-recheck-and-seal-pending",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "manifest": {
+      "file": "Artifacts/SharpIllustrationWebPlaytest/build-manifest.json",
+      "bytes": 2169928,
+      "sha256": "79ff217039f29cf234e6bc3d3dec1c48644dc4602d3520cd42502fbe8d8dbaeb"
+    },
+    "url": "https://ka8877.github.io/firstgame/",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757",
+    "fileCountIncludingManifest": 15441,
+    "siteBytesIncludingManifest": 984067939,
+    "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+    "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+    "pages": {
+      "runId": 44046501296,
+      "status": "completed",
+      "conclusion": "success",
+      "allStepsCompleted": true
+    },
+    "publicPortal": {
+      "attempt": "Portal03",
+      "status": "all-15441-final-GET200-size-SHA-and-Root-two-originals-PortalGate01-passed",
+      "report": "Artifacts/Validation/SharpIllustration-2026-11-17/PublicPortal/report.json",
+      "reportBytes": 24356620,
+      "reportSha256": "f9e001f5c8b567057ee7557a5d5f0466d6a55e77ad533f406fce7448fd8f50da",
+      "rootAnnotation": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/portal-root-annotation-Portal03.json",
+      "history": "One actual 503-to-200 retry remains recorded; Portal01 eight503 and Portal02 five503 failures remain historical failures."
+    },
+    "publicGameplay": "CardPublic01 failed one media-classification check among 496 checks; neither current public suite is approved.",
+    "finalSeal": "pending-new-six-browser-approvals",
+    "checkpoint": "pending",
+    "closureState": "pending-current-Archive-cycle-normal-closing",
+    "qualityScope": "Published delivery and retained Native/Web/local results are technical evidence. Full original parity, Genshin-level graphics, user aesthetic acceptance and physical-device performance remain unclaimed."
+  },
+  "historicalCurrentDeploymentBeforeSharpIllustrationArchive20261117": {
     "status": "public-delivery-six-suites-final-seal-and-technical-closure-complete",
     "candidateCommit": "d60cfe9bdd46b9cb00789b2388bd707a7ec523f8",
     "sourceCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
@@ -6540,6 +7894,104 @@
     "previousPortableCheckpoint01": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "mainDocumentationIntegration": {
+    "status": "exact-public-export-auto-review-rejected-local-candidate-preparation",
+    "productMain": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedP": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "destination": "main",
+    "installedClassifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+    "trackedSharpFixturesPassed": 62,
+    "currentBrowserCasesPassed": 6,
+    "fullSealPassed": true,
+    "referencedEvidenceCommit": null,
+    "actualCi": [],
+    "newVerifierMainSha": null,
+    "closure": null,
+    "completionBoundary": "Null/empty fields are future actual results, never inferred from local/TMP files or blob upload.",
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "explicitExportApprovalRequired": true
+  },
+  "historicalMainDocumentationIntegrationBeforeSharpEvidenceFinish20261117_02": {
+    "status": "local-evidence-archive-complete-D1-CI-main-pending",
+    "productMain": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedP": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "destination": "main",
+    "installedClassifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+    "trackedSharpFixturesPassed": 62,
+    "currentBrowserCasesPassed": 6,
+    "fullSealPassed": true,
+    "referencedEvidenceCommit": null,
+    "actualCi": [],
+    "newVerifierMainSha": null,
+    "closure": null,
+    "completionBoundary": "Null/empty fields are future actual results, never inferred from local/TMP files or blob upload."
+  },
+  "historicalMainDocumentationIntegrationBeforeSharpEvidenceFinish20261117_01": {
+    "status": "PR12-product-main-merged-verifier-docs-checkpoint-D1-and-main-integration-pending",
+    "scope": "Product PR12/main M9a24/P94f and public delivery are actual. Helper06755, tracked fixture and one-line CI are installed and tracked fixture62 passed, but their current verifier/docs/checkpoint D1 commit/actual CI/main integration remain pending. Runtime product/source fingerprints are unchanged.",
+    "baseMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "currentlyPublishedProductCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "currentlyPublishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "destination": "main",
+    "productMainUpdate": {
+      "status": "merged",
+      "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+      "mergeCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "evidence": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/pr12-merge-sdk-result.json"
+    },
+    "plannedSave": "After remaining new browser approvals/full seal/actual checkpoint, normally save the installed validation helper/fixture/workflow plus docs/raw evidence as D1; observe exact-head paired CI and committed raw blobs, then normally integrate into main. Keep product M9a24/P94f separate from that future validation-tools/documentation commit.",
+    "latestCompletedD1": null,
+    "checkpoint": null,
+    "documentationCi": [],
+    "newValidationToolsMainCommit": null,
+    "closure": null,
+    "completionBoundary": "All null/empty current result fields are intentionally pending; old completed ClassicNpr D1/D2/PR11 values are retained under the explicit historical integration key.",
+    "historicalIntegrationRecord": "historicalMainDocumentationIntegrationBeforeSharpIllustrationArchive20261117",
+    "installedClassifier": {
+      "sha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "installed": true,
+      "installedUtc": "2026-11-17T12:11:57.476728+00:00",
+      "candidateUnitPasses": 64,
+      "installedTrackedFixturePasses": 62,
+      "diagnosticReplayQualifiedRows": 11,
+      "diagnosticReplayIsBrowserApproval": false
+    }
+  },
+  "historicalMainDocumentationIntegrationBeforeSharpIllustrationStateV220261117": {
+    "status": "PR12-product-main-merged-verifier-docs-checkpoint-D1-and-main-integration-pending",
+    "scope": "Product release source M9a24/P94f and delivery are actual. The two-literal classifier, new tracked fixture/CI, current operational docs and new proof/checkpoint have not been committed/CI-validated/main-merged as current D1 results.",
+    "baseMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "currentlyPublishedProductCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "currentlyPublishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "destination": "main",
+    "productMainUpdate": {
+      "status": "merged",
+      "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+      "mergeCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "evidence": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/pr12-merge-sdk-result.json"
+    },
+    "classifierCandidate": {
+      "sha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+      "installed": false,
+      "actualUnitPasses": 64,
+      "diagnosticReplayQualifiedRows": 11,
+      "diagnosticReplayIsBrowserApproval": false
+    },
+    "plannedSave": "After exact cache safeguards and actual new six-browser/full-seal/checkpoint results, normally save helper/fixture/one-line CI/docs/raw checkpoint as D1, observe exact-head paired CI and committed raw blobs, then normally integrate into main under existing authorization.",
+    "latestCompletedD1": null,
+    "checkpoint": null,
+    "documentationCi": [],
+    "newValidationToolsMainCommit": null,
+    "closure": null,
+    "completionBoundary": "All null/empty current result fields are intentionally pending; old completed ClassicNpr D1/D2/PR11 values are retained under the explicit historical integration key.",
+    "historicalIntegrationRecord": "historicalMainDocumentationIntegrationBeforeSharpIllustrationArchive20261117"
+  },
+  "historicalMainDocumentationIntegrationBeforeSharpIllustrationArchive20261117": {
     "status": "PR11-main-merged-user-authorized-future-automatic-normal-main-integration",
     "scope": "Public release, all six suites, FinalSeal, Checkpoint, D1/D2 raw Git saves and paired push CI, normal runtime closure and PR11 main integration completed. Future ordinary verified main integration is user-authorized without repeated approval. Original full parity/Genshin-level art goals remain incomplete; current preference commit CI is observed separately.",
     "baseMainCommit": "1af1205ea447c4bb627d436e6b17b14177f91c51",
@@ -9346,5 +10798,31 @@
       ],
       "scope": "Actual publication/all six suites/FinalSeal/Checkpoint/raw D1 Git blobs/paired push CI/separate FinalIdle/normal owner release/available/Closure completed. Review PR11 main integration and the later D2 own save/CI are separate pending boundaries. No aesthetic/AAA/original parity or background automation completion claim."
     }
+  },
+  "currentSharpEvidenceFinish": {
+    "status": "normal-local-stop-remote-export-auto-review-blocked",
+    "latestRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+    "allPriorRawHistoryRetained": true,
+    "productRedeployRequiredForVerifierOnlyChange": false,
+    "goalActivationVerified": false,
+    "remoteUploadAttemptStarted": false,
+    "remoteUploadReviewReason": "Auto-review rejected the large validation/build checkpoint upload because specific potentially sensitive payload export to GitHub was not explicitly established. Root will inspect the actual immutable payload and complete unaffected verifier/docs work; no alternate upload bypass.",
+    "normalClosureComplete": false,
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "currentOwnedRuntime": false
+  },
+  "historicalCurrentSharpEvidenceFinishBeforeSharpEvidenceFinish20261117_01": {
+    "status": "six-browser-cases-full-seal-local-checkpoint-complete-remote-evidence-upload-auto-review-rejected",
+    "latestRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+    "allPriorRawHistoryRetained": true,
+    "productRedeployRequiredForVerifierOnlyChange": false,
+    "goalActivationVerified": false,
+    "remoteUploadAttemptStarted": false,
+    "remoteUploadReviewReason": "Auto-review rejected the large validation/build checkpoint upload because specific potentially sensitive payload export to GitHub was not explicitly established. Root will inspect the actual immutable payload and complete unaffected verifier/docs work; no alternate upload bypass.",
+    "normalClosureComplete": false
   }
 }

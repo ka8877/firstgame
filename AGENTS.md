@@ -1,3 +1,49 @@
+<!-- sharp-illustration-current -->
+## 실제 공개·검증 완료와 정상 종료·업로드 승인 대기 — 2026-11-18 KST
+
+제품 main `9a24aecf…`·공개 `94f50757…`을 반영했습니다. [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757) · [예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757). 현재06755/e1cb의 PC·모바일·공개6회에서2,833검사/0실패·561PNG/442Root 직접 원본 검토, 매회 실제4PCM/재접속2회와 전체 FinalSeal01을 완료했습니다. PC2의 실제Archive소유와 나머지4회의Finish소유, 과거 실패는 그대로 유지합니다.
+
+로컬 Checkpoint38,883원본/30조각948,094,355B(index44,345,989B)의 전체 읽기 검증과 현재토큰·개인키/경로 검사를 완료했습니다. 준비한 코드·workflow·문서11개 약1.1MB도 검사했지만, 자동 승인 검토가 해당 자료를 `ka8877/firstgame` 공개 저장소로 보내는 구체적인 승인이 없다는 이유로 업로드를 거절했습니다. 재검토도 거절됐으며 두 payload의 업로드는 시작되지 않았습니다. 로컬 커밋 준비와 원본 보관을 유지하고, 새로운 원격 커밋·CI·main 반영·내구 Closure는 미완료로 기록합니다. GitHub 인증과 기존 제품 배포는 정상이며 만료 device code 입력은 불필요합니다.
+
+독립 FinalIdle의4개 event0/빈 소유 후손을 확인하고 11월18일 02:40 KST에 자기 lease를 정상 해제한 뒤 available을 관측했습니다. 현재 소유 runtime이나24시간 자동 개발은 없습니다. 명시적인 공개 저장 승인 뒤 최신 로컬/원격을 확인하고 새 고정 소유권으로 재개합니다. 승인받은 main 자동반영 방침은 유지합니다. 원작 전체 재현·원신급 품질은 아직 목표이며 판마 원화/작은전투UI, 예수님 의상/머리·NPC겹침/카메라가림이 남습니다. private9 payload는 공개하지 않으며 다음Unity전 정확한 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`가 필요합니다. 아래는 각 작성 당시 이력입니다.
+<!-- /sharp-illustration-current -->
+
+## SharpIllustration 실제 PC2 완료·별도 정상 Finish 회차 — 2026-11-17
+
+현재 실제 CONTROL은 `Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17`이다. Archive는 독립 `BeforeEvidenceFinishCycleFinalIdle01`의 실제4개 event0/빈 후손(요약 SHA `99cf930e2cf4dd2a987fd64437927c90b9de700e1aabbd494cc6fcb0d3664788`)을 완료하고 정상 자기 해제·별도 available 관측 뒤 종료했다. 새 실제 owner는 `8e3bbafd-3c20-44a5-b440-7078734b97aa`, lock은 `3542ba5d8eda814840e22cf8bf912b50de86bcc5`, 고정 기간은 `2026-11-17T13:25:10.174100Z`~`19:25:10.174100Z`(22:25KST~다음 날04:25KST)다. 연장·탈취가 아닌 별도 정상 취득이며 사용자가 승인한 작업을 계속한다. path-only 활성화/generic/browser90/Roothelper4개 설치와 `EvidenceFinishIdentity01`의 실제4개 event0/빈 후손을 확인했다. 기존 OUT/build/stage/원 Sharp BuildProofCurrent를 유지한다. Root만 실제 실행·Git·네트워크·저장공간을 다룬다.
+
+설치한 음악 분류기06755와 최종 캡처 e1cb의 새6회 중 현재2회가 완료됐다. 실제 Archive 소유의 CardDesktop04는472검사/0실패·93PNG·필수64+보충16=80Root, GospelDesktop03은506검사/0실패·102PNG·필수74+보충4=78Root·실제4PCM/재접속2회·내외부4개 event0/빈 후손으로 완료/Root확정했다. 두 PC의 실제 소유권을 새 Finish로 바꾸지 않는다. 다음은 새 Finish에서 CardMobile03/Browser03, GospelMobile04/Browser04, CardPublic02/Browser02, GospelPublic01/Browser01의4회다. 과거 canonical5개(로컬 승인4·공개 실패1)는 원문/상태/바이트/inode/소유권을 보존한 역사이며 새06755 승인으로 세지 않는다.
+
+제품 main9a24/공개94f/Pages44046501296·Portal03 전체15441/Root2와 원 Release AQ01은 이미 완료했다. 설치된 검증기·62PASS tracked fixture·CI 한 단계의 정상 D1/CI/PR/main 저장, 전체6회/full seal/Checkpoint/내구 보존·최종 종료는 아직 대기다. 원 Native11/18와 Web02/01·제품 소스 지문·Stage/P는 유지하고 Unity를 다시 실행하지 않는다. `ScratchBlobTransportUnit01`의 실제18개 fixture와4개 event0/빈 후손도 완료했지만 실제 업로드나 참조되는 Git commit 완료는 아니다. 기존 인증이 작동하므로 만료 device code나 새 토큰 입력을 사용자에게 요구하지 않는다. main 자동반영에 대한 기존 지시는 유효하다.
+
+private9 Burst 무손실 보관은 실제 완료됐다. **다음 어느 Unity 실행 전에도 private backup에서 정확한9개 바이트/SHA·mode/UID/GID/mtimeNs 복원을 완료한 다음 두 프로젝트에 ForceSynchronousImport | ForceUpdate를 수행해야 한다.** inode/ctime 복원은 주장하지 않는다. `Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01`의 payload는 Git·공개 archive·배포에 넣지 않는다. exact30 TMP pack은 측정 fits:false이고 원 Git 설치/loose제거/공간 회수는 없었다. 이 아래의 과거 현재/대기/소유권 문구는 각 작성 당시의 이력이며 이 최신 실제 기록을 우선한다.
+
+---
+
+## SharpIllustration 실제 공개·새 검증 계속 — 2026-11-17
+
+현재 실제 CONTROL은 SharpIllustrationArchive-2026-11-17, owner c7b06c76-e913-42e6-99a8-43046d74fbbe/lock74c2b67da8a8f2eaf6850b1b4558ada65c919fb4이며 고정09:40:08.314984~15:40:08.314984UTC다. 제품 PR12/main9a24aecf·공개94f50757·Pages44046501296, Portal03 전체15441/Root2와 원 Release AQ01은 완료했다. 기존 인증이 작동하므로 만료 device code 입력은 필요 없다.
+
+공개 CardPublic01의496검사 중 음악 분류1실패/11media abort는 실패 원문으로 유지한다. 두 revision 등록만 추가한 helper06755를 지금 설치했고 새 tracked fixture·CI 한 단계를 추가했다. 기존4개 로컬은 원 helper9a722의 실제 역사적 승인으로 byte/inode 보존하며 새6회와 full seal/Checkpoint/D1 CI/main 자료 반영은 아직 대기다. e1cb 캡처/계획/계약·제품 소스 지문·원 Native11/18와 Web02/01은 그대로이고 Unity 재빌드를 주장하지 않는다.
+
+BurstBinaryPrivateCompaction01은 정확한 비Linux 공식 Burst cache 바이너리9개472842344B를 private lossless172212709B/6조각으로 완전 읽기 검증 후 정리했다. 실제4event0/빈 후손·다른 Library/Bee link·제품/NativeWeb/당시4local/Stage/Git 불변과 available297529344→598081536B를 확인했다. private backup은 Artifacts/CacheBackups/SharpIllustrationBurstNonLinuxBinary01이며 Git/공개 증거에 넣지 않는다. 다음 어느 Unity 실행 전에도 해당 backup에서 정확한9개 bytes/mode/UID/GID/mtimeNs 복원을 완료하고 RESTORED를 검증해야 한다. 원inode/ctime 복원은 주장하지 않는다. 이후 두 프로젝트의 ForceSynchronousImport | ForceUpdate도 필수이며 일반 Refresh만으로 진행하지 않는다. 지금은 보존한 기존 Web runtime으로 브라우저 검증한다.
+
+Exact30Measure03은 실제 pack 전체438798633B를 검증했으나 공간 조건 fits:false여서 설치/loose제거/회수는 없었다. 이전 실패·정상 소유권 종료/별도 새 취득·private 캐시 실제 결과를 구분한다. 이 문단 아래의 과거 현재/대기 표기는 당시 이력이며 실제 최신 결과가 우선한다.
+
+---
+
+## 현재 별도 정상 검증 회차·음악 분류기 수정 준비 — 2026-11-17 09:40 UTC
+
+현재 실행 CONTROL은 `Artifacts/Validation/Autonomy/SharpIllustrationArchive-2026-11-17`이다. 실제 owner는 `c7b06c76-e913-42e6-99a8-43046d74fbbe`, lock은 `74c2b67da8a8f2eaf6850b1b4558ada65c919fb4`, 고정 기간은 `2026-11-17T09:40:08.314984Z`~`15:40:08.314984Z`다. 이전 Release는 BeforeArchiveCycleFinalIdle01의 마지막 guard가 짧은 남은 시간 때문에124로 실패한 원문을 유지한다. 앞선3개 event0/빈 후손과 별도 직접 idle·직접 guard 성공 후 `09:39:14.858190Z`에 자기 잠금을 정상 해제했고 별도 available을 관측했다. 네 event가 모두 통과한 FinalIdle이라고 표시하지 않는다. 새 회차는 연장·탈취가 아닌 별도 정상 취득이며 사용자 승인된 작업을 계속한다. 원 OUT/build/stage/최초 Sharp BuildProofCurrent를 유지하고, path-only 검토한 새 activation·generic·browser90·Root helper를 사용한다. Root만 실제 실행/Git/네트워크/저장공간을 다룬다.
+
+제품 소스 M `9a24aecf8fac304a5599401ee7a3d95258a731d5`와 공개 P `94f507578c51e4d12133a9c24e6e89223f35b0dd`는 실제 main 반영·Pages44046501296 성공을 완료했다. Portal03은15,441개 최종GET200/전체SHA·크기 일치와 Root의 실제 PC/모바일2장 검토·PortalGate01을 통과했다.503한 건의 실제 재시도503→200도 보고서에 유지하며 Portal01/02 실패를 소급 통과시키지 않는다. Release의 EvidenceGitAcquire01은 같은 회차 실제 게시·fresh P 조회 뒤 전체15,441 raw Git blob/984,067,939B 재독과 전후 Git/Stage 불변을 완료했다(요약 SHA `44ddb6653573b51604740372a6e6d8cafd6521d8e5d389d6a8523c4b65521398`). AQ는 읽기 검증이며 브라우저/전체 봉인 승인이 아니다. TMP store `/tmp/firstgame-sharp-evidence-git-temx5lgv/objects`는 읽기용으로 보존하며 내구 보존이라고 부르지 않는다.
+
+CardPublic01/Browser01은 실제496검사 중 마지막 음악 요청 분류 하나가 실패했고 원문·63필수 및 실제 보충 원본의 Root 검토·4PCM·재접속2회를 그대로 보존한다. `fm-local-media-errors.py`의 지원 revision 목록에서 Sharp가 누락돼 실제 요청 증거 검사 전에 거절되는 것을 확인했다. 제품 오디오 고장으로 단정하거나 실패를 통과로 바꾸지 않는다. Root가 최소 revision 등록 수정과 음성/URL/시간/제스처의 기존 엄격한 조건을 소스·fixture로 검토한 뒤 실제 새 브라우저 검증을 수행한다. 공유 classifier를 바꾸면 기존4local의 capturedSources는 현재와 달라지므로 당시 실제 승인 이력으로 보존하고 필요한 새6회를 실제 실행한다. e1cb 캡처 하네스·계획·제품/성경/카드 규칙은 바꾸지 않는다. classifier는 Native/Web 입력과 실행 소스 목록에 없으므로 기존 실제 Native/Web proof와 runtime은 유지하며 Unity를 다시 실행하지 않는다. 전체 봉인·Checkpoint·새 검증자료 Git 보존·종료는 아직 미완료다.
+
+기존 동결의 목적에 따라 제품 M/P/Stage 바이트와 모든 과거 증거는 계속 고정한다. 실제 새 소유권 안내와 발견한 검증기 등록 결함의 최소 수정은 새 변경으로 기록하며 과거 검사에 소급 적용하지 않는다. 사용자의 main 자동반영 지시는 유효하다. GitHub 인증은 현재 작동하며 만료된 옛 device code를 사용자에게 다시 요구하지 않는다. 아래 대기/실행 소유권 표기는 당시 이력이다.
+
+---
+
 ## 현재 실제 캐시 공간 확보 완료·소스 반영 계속 — 2026-11-17 05:14 UTC
 
 PrePublicBert02는05:14:37.568038Z에 정확한 공개 BERT475,782,997B를 새 TMP cache02로 완전 복사/SHA/fsync 검증 후 선택한 원 캐시 경로 하나만 원자 교체했다. 원 선택 inode는 보존되지 않으며, 기존 두 모델 링크·대상/나머지11정규파일·7디렉터리의 바이트·inode·메타데이터는 유지했다. 실제 WS584,212,480B/TMP220,487,680B로 관측했다. 외부12603B 요약 SHA1a08be03e3b4387aa67c8cc4b25f214b9612c78328bdb6b3a8334b60dad507e4의 실제4event0/빈후손과 완료40248B SHA f221f347e73774af7a7174091a51c9727efef1898578f5b3e4638a2b55305ddc를 확인했다. Native/Web/로컬4/source/lease 바인딩은 전후 동일하며 live공간2필드만 달라졌다. 플레이어·검증 원본·Git은 바꾸지 않았다.
