@@ -1,3 +1,45 @@
+## SharpIllustration 진행 중 — 2026-11-17
+
+**최종 검증기의 로컬4회를 모두 완료해 현재4/6승인입니다.** CardPC03는464검사·91PNG·64+9Root, GospelPC02는498·100·74Root, GospelMobile03는435·87·60+2Root, 새 Release의 CardMobile02는490·97·63+12Root입니다. 매회0거짓·오디오4/실제 재접속2·nav0/1/2·inner/outer4개 event0/빈 후손과 Root 검토를 확인했습니다. Native11/18·두 Web은 유지합니다. 실제 CardPC55장/25종과 모바일55장/27종은 각각200SP/50덱을 유지한 독립 RNG 결과이며 서로의 이력을 덮어쓰지 않습니다. 이전 성공/실패/미완료도 보존했고 main/stage/새 공개 및 공개2회는 아직 대기입니다.
+
+원 Sharp의 정상 종료 뒤 Resume도 독립 `BeforeReleaseCycleFinalIdle01`의4개 event0/빈 후손(요약11,691B/`42ed9a2b…`)과 **03:38:42.312383UTC 정상 자기 해제·별도 available**을 완료했습니다. 현재는 `SharpIllustrationRelease-2026-11-17`, owner`665fc59c…`/lock`51161c22…`, **03:39:21.890151–09:39:21.890151UTC(12:39–18:39KST)의 새 고정 독립 회차**입니다. 정상 전환 원문3,009B/SHA`6158ff55…`를 보존했고 연장/탈취가 아닙니다. source-admitted path-only adapter6개를 설치했으며 OUT/build/stage/원 Sharp `BuildProofCurrent`는 유지합니다. Native/Web의 원 Sharp 소유와 현재3개 승인 브라우저의 실제 Resume 소유/원문을 새 실행으로 바꾸지 않습니다. 새 Release의 증거 소스 fixture8/7/4개도4개 event0/빈 후손으로 통과했지만 실제 archive/AQ/저장공간 작업은 수행하지 않았습니다.
+
+| 현재 작업 | 실제 결과와 남은 경계 |
+|---|---|
+| 판마 선명도 | 공통 계약 변경 뒤 새 Native05 **11/0/0**, source`3cf2818b…`·Root 현재22원본 승인. 이전 Native03 canonical은 `PreviousNative/FantasyCards-Native03`, 수정 전 source`7a5fca96…`의 Web01과 Native04도 보존 이력 |
+| Gospel V5 | Prepare12/Prototype05 완료·Root18원본의 제한된 검토. 원래 무릎이 자유로운 어린 튜닉/밑단과 FittedShirt만의 no-outline, 네 성인 open-front 숄 유지. 보인 걷기 관통/목 검은 호 개선을 전체 시각 승인으로 확대하지 않음 |
+| Gospel 현재/실패 이력 | Native03 **18/0/0**, source`c108f5eb…`·Root11현재원본/필수9incremental 승인. 엄격한 정상 voice INFO 기대와 새 실제 재생8초 관측을 통과. Native01의16/2·Native02의17/1과 raw/기존 PNG는 실패로 보존하며 로그 억제/소급 승인 없음 |
+| 현재 Web | CardWeb02/GospelWeb01 모두 선택 Native05/03·현재 source/proof 결합과4개 event0/빈 후손으로 통과. 원 CONTROL `BuildProofCurrent`에 그대로 보존 |
+| 브라우저/공개 | **로컬4회 완료/현재4of6승인**: CardPC464/91PNG/64+9Root, GospelPC498/100/74Root, GospelMobile435/87/60+2Root, CardMobile490/97/63+12Root. 매회0거짓·오디오4/재접속2·inner/outer4개 event0/빈 후손. 공개2회·main/stage/P 대기. 이전 성공/실패/미완료는 각각 보존 |
+
+이전 검증기의 CardDesktop02 canonical12,916,451B/SHA `1f9900108e5cd7c9ad1c7484a9074bed3ea1bbc77ce79b09a45b92784e5d73ed`, untouched raw9,123,600B/`4064839667918a26f9e20218bc30f4e7a64c282d66f270391ca6fdf2b87413be`, outer`6930ad60e9f37fd4ce23825a3e5655f11a1eada4384f6c7148d3d06e0cc8c181`입니다.200검사·100PNG·전체86ledger에는 필수64와 수동 경로/저장 덱5페이지 등 보충22개가 포함됩니다.49장 저장 거절·보유55/27종·200SP·50장 덱/전투 재접속 복원이라는 당시 실제 관측을 보존합니다.
+
+이전 검증기의 GospelDesktop01 canonical1,026,393B/SHA `aad87c53f9fc340a46f0211e5d56c82d7ad6983d915a901e6e8911858f9a643d`, untouched raw994,098B/`406007f05bf5f56b46cc299aa269e51aacb7f22df204df1022252951480429f7`, outer11,536B/`ab82188c1fdcaab3845b895a2232ce4dcf8d9380f689d94fda68cb0ffb511610`입니다.195검사·97PNG·필수/전체74Root원본과 Joseph/Mary 같은 대사·일러스트·성경 복귀, 두 월드 인물·성전 시야·상태/lamp·최종12/19본문/14/23사건 복원은 실제 당시 이력입니다. 제한된 incremental 품질 검토이며 주변 인물 간 가까운 보행·단순 환경/머리/옷·3D/일러스트 수염 차이는 남습니다.
+
+이전 검증기의 CardMobile01도205검사·103PNG·필수63+보충11=74Root원본·오디오4/실제 재접속2·inner/outer4개 event0/빈 후손으로 통과했습니다. canonical12,928,851B/`4170c585…`, untouched raw9,140,990B/`351fb589…`, outer`cd1143d9…`입니다. 실제 touch로 긴 원본 규칙·팩 확률 마지막 줄과 재접속 후 저장 덱5페이지/마지막 재추가 순서·보유55/27종·200SP·50덱을 확인했습니다. 이3개 실제 성공을 최종 검증기의 새 승인으로 바꾸지 않습니다.
+
+GospelMobile01은13개 기록된 검사 중 `g1-opening-book-stop`의 실제 DOM DPR/backing 검사에서 실패했습니다. 실제 Chromium154 재현에서 raw CDP screenshot 직후 DOM DPR2→1이 확인됐고, public Playwright page clip 캡처4회·touch·reload는 DPR2/backing·GL1387×780/PNG1386×780을 유지했습니다. 최종 검증기는96,075B/SHA256 `e1cbd79198fdc557941faa85a200a2e30fdcefb0c5bdef1b3907a5698a182bc0`이며 모든 원본의 캡처 전후 DPR/PNG크기2px 검사도 강화했습니다. 합성 회귀 `d1b31d3d…`·엄격21단위 `5530338e…`와3성공+1실패 canonical byte/inode 보존 `a060eef9…`은 모두4개 event0/빈 후손입니다. `capture-dpr-correction-review01.json` SHA`100bfdaf…`가 실패/원인/재현/교정/보존을 결합합니다. 제품·계획/계약 변경이나 화면 후처리는 없으며 이 합성 결과를 게임6회 통과로 계산하지 않습니다.
+
+GospelMobile02는 실제1시간 마감 중단입니다. canonical/raw `running`·372검사 모두 참·76PNG·48/60Root표시 상태이며 complete pass나 제품 실패로 바꾸지 않습니다. outer`2b7714c8…` command124/빈 후손, inner`61ab20bb…` execution130/빈 후손을 보존했고 정상 `RetireGospelMobile02Timeout01`(`e9bf0685…`,4개 event0/빈 후손)이 BrowserHistory/PathOfDawn/Mobile844/Browser02로 byte/inode 그대로 옮겼습니다. Root가 별도 검토한 browser-only90분 adapter13,516B/SHA`3c2aabde…`는9인자 allowlist/display만 허용하며 기존 native의5400초 범위를 사용합니다. 원 activation3600/wrapper3620·최종 e1cbd·드라이버/계획/계약·고정 lease마감04:20UTC/60초 reserve·cleanup12/per-review600은 그대로이고 소유권 갱신은 아닙니다.
+
+새 GospelMobile03/Browser03의 canonical1,418,566B/SHA`ba1bc8dd2ca891604917b57fe9812a867a13321b7d05cc0d67316afb2675b4e6`, untouched raw1,391,201B/`cb1dc952a86eaac52a78ec92e57ece89ff76381098e6146c8f24179835d9e0ea`, outer11,502B/`ec63a0c9874886f7af7530c5e5409d042d4bb777456bb3ccc418a3485a633773`입니다.435검사 모두 참·87PNG·필수60+보충2Root·오디오4/재접속2·nav0/1/2와 inner/outer4개 event0/빈 후손을 완료했고 Root는02:18:26.918158UTC 검토를 확정했습니다.
+
+새 CardDesktop03/Browser03의 canonical13,344,100B/SHA`119526f17afd0ed01d15ccf3c84d143e87ba51909534b1908db8a6cfdde0accc`, untouched raw9,556,563B/`99b96a72241f96b9569f802cda55bcf633befa5ed6bdfa24db0b579991d481f6`, outer11,493B/`e15c166e0c14daaa9b5b770dba89dc3dce365d28ed5f4ce84f1cefcddf430eb5`입니다.464검사 모두 참·91PNG·필수64+보충9Root·오디오4/재접속2·nav0/1/2와 inner/outer4개 event0/빈 후손을 완료했고 Root는02:54:07.937686UTC 검토를 확정했습니다. 실제 뽑기는 같은 Nimble Piranha3장·Johan·Slaughter Warrior로55장/25종·200SP이며 이전27종과 구분합니다. 두 재접속 후50덱5페이지/마지막 재추가 성당내부를 확인했고 PC에서는 전체 팩 확률/공정성·긴 규칙 설명이 화면에 들어왔습니다.
+
+새 GospelDesktop02/Browser02의 canonical1,533,605B/SHA`acb2da2e184e9b74c7470150ea9d05f97afefbb0ed88408b72c3aca3e712b3e9`, untouched raw1,501,309B/`466fc131386e09c34bb412eea50f8acac9af73c716830a31324e4839f45b9d66`, outer11,535B/`dc83a92b074d42287ea94c522fa9f211358040806d928322bf94dd955e9743c3`입니다.498검사 모두 참·100PNG(필수74/수동26)·필수/전체74Root ledger·오디오4/재접속2·nav0/1/2와 inner/outer4개 event0/빈 후손을 완료했고 Root는03:37:03.081523UTC 검토를 확정했습니다. 새 일러스트/두 월드 인물·Mary 같은 대사/성경 복귀·스크롤 뒤 첫 페이지 전체 본문과12/19본문/14/23사건/lamp 복원이라는 관측은`GospelDesktop02-observations.json`2,033B/`ebf26ca6…`에 결합합니다.
+
+새 Release 소유의 CardMobile02/Browser02는490검사/0거짓·97PNG·필수63+보충12=75Root·오디오4/실제 재접속2·nav0/1/2·inner/outer4개 event0/빈 후손으로 완료했고 Root는04:12:21.652557UTC 검토를 확정했습니다. canonical13,401,598B/SHA`6fed27e5f307c2ac7efaa9fe78684b6077a8fcb8f4bcd0b288fc894854cef577`, untouched raw9,613,256B/`be8eba34e8a5105de104060b0d90ad29d921b6a765ab26ce5a57c7136d3aae82`, outer11,489B/`0931954432bf1fe87a0883d13a1d39f285e2a40e26896e9b5c7732a6aac4add6`입니다. 실제BloodRoar/LegendRing/Teronid/Esmeralda/GreatSageHeaven 뽑기로55장/27종·200SP이며 PC03의25종 이력은 유지합니다. 실제 스크롤로 긴 규칙·Kingpin·전체 일반/보장 확률/마지막 공정성 문구,49장 저장 거절/50장 복원, 두 재접속 뒤5개10행 덱 페이지·마지막 재추가 성당내부와page1복귀를 확인했습니다. 관측 원문2,383B/`6bee4f5b…`을 보존합니다. 현재4/6승인으로 공개2회·새 main/배포는 남아 있으며 원본 카드 해상도와 작은 전투 조작부/모든 글자 크기·원작 전체 충실도/미적 승인은 별도 과제입니다.
+
+UpperTools22와 PNG606의 원본 inode/메타·동일 바이트 공유를 유지합니다. PNG는 cache alias만 바꿨고 논리145,141,701B는 회수량이 아닙니다. AtomicPNG4는 새 임시 파일 뒤 pathname 원자 교체를 검증했으며 공유 inode에 제자리 쓰기를 하지 않습니다. 별도 Compiler8 compaction은 현재/tmp 파생 복사8개·논리963,589,056B만 대상으로 소스/proof/지문을 유지했습니다. **Gallery 긴급 무손실 audit 성공과 과거 normal outer ENOSPC 실패는 별도 결과**로 남깁니다.
+
+ModelReloc01은 잘못된 PID1 조상 가정으로 복사 전 실패했습니다. 이후 별도 TwoModelCaches02가 **다운로드된 외부 weight2개·691,407,650B만** `/tmp/firstgame-sharp-illustration-20261117-voice-models01`로 완전 복사 후 원자 alias 전환했습니다. 원래 cache 경로는 symlink로 같은 바이트를 읽지만 선택2개 inode는 보존한 것이 아니며 다른12파일/7디렉터리 inode는 그대로입니다. 가시 PPID0와 pin된 baseline service3개, 확인할 수 없는 fd/maps라는 관측 한계가 있고 모든 reader가 없다고 주장하지 않습니다. 이는 player/증거가 아닌 pinned manifest에서 재다운로드 가능한 임시 cache이며 처음14파일/dev-shm 제안 그대로 실행한 것은 아닙니다. 완료 뒤 관측 여유는 workspace810,647,552B/tmp696,311,808B이고 오래된 Bee·원본·proof 삭제는 없었습니다.
+
+PrePublicBert02는05:14:37.568038UTC 실제4개 event0/빈 후손으로 성공했습니다(outer12,603B/`1a08be03…`, 완료40,248B/`f221f347…`). 정확히 BERT 캐시1개475,782,997B를 새 TMP target에 전체 복사·SHA`ae43a392…`로 검증한 뒤 원 선택 경로를 원자 symlink로 바꿨고 선택 옛 inode는 보존하지 않았습니다. 기존2link/target·다른11regular파일·7dir 및 Native/Web/로컬4회/source/lease 결합은 유지했으며 player/증거/Git 변경은 없습니다. 첫01의 복사 전 실패와 exe/fd/maps UNKNOWN은 보존했고 D-Bus 예외는 정확한PID111671/start8833915와 두 실제 baseline만 허용했으며 전역 reader 부재/실행파일 확인을 주장하지 않습니다.28fixture와 실제 작업은 별도입니다. 작업 뒤workspace584,212,480B/tmp220,487,680B·후속 Root workspace584,015,872B를 관측했고 새 ProductGitBudget03·main/Stage/P/공개2회는 아직 대기입니다. 현재4/6승인은 그대로이며 새 사용자 인증 동작은 필요하지 않습니다.
+
+Gospel의 hood/머리·단순한 옷/마리아 달리기 틈·3D/일러스트 수염 차이, 작은 모바일 성경 글자 등 품질 과제는 남습니다. 판마 로그인/로비 원본 그림의 해상도 한계, 원작 스타일과 다른 reward/equipment 패널·정확한 후기 도감/세 덱 슬롯도 후속 대상입니다. 원신급·전체 원작·사용자 미적 승인은 주장하지 않습니다. **성공 공개판은 source`1af1205e…`/P`9e7c049b…` 그대로**입니다. 기존 main 자동반영 승인을 유지하되 로컬4회·정상 main/게시/PublicPortal 뒤 두 공개 suite와 최종 봉인/보존을 끝냅니다. 현재 소유권/재개점은 [STATE.json](STATE.json)을 따릅니다. 아래는 이전 회차 이력입니다.
+
+---
+
 ## main 자동반영 승인·PR #11 반영 완료 — 2026-11-16
 
 사용자 지시: “메인자동반영해 물어보지말고”. 기존 승인된 firstgame 작업 범위에서 검증을 통과한 변경은 추가 승인 질문 없이 main에 정상 반영한다. 기존 검증·원본 보존 절차를 따른다.

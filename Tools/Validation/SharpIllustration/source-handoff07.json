@@ -1,0 +1,29 @@
+{
+  "status": "source-only-frozen-awaiting-Root-review-and-future-stage",
+  "scope": "Two expressly authorized future publication-selection constants only; original wrapper and proof paths retained",
+  "files": [
+    {
+      "file": "Tools/Validation/SharpIllustration/publish-with-temporary-objects.py",
+      "bytes": 27955,
+      "sha256": "09a2b7eecef79e4f0ed704e9d36a4c037fa110e0d5d61a60e174a03511138ae9"
+    },
+    {
+      "file": "Tools/Validation/SharpIllustration/publish-with-temporary-objects.md",
+      "bytes": 4841,
+      "sha256": "8017c3bcaf48d90ab72890f1fb038360d00861a8f63a034242b426c5f98e5b93"
+    }
+  ],
+  "previousFrozenPublisherSource": {
+    "file": "Tools/Validation/SharpIllustration/publish-with-temporary-objects.py",
+    "bytes": 27944,
+    "sha256": "fcebddf54c526a45118f269b1562590a17e0135ceb9d540d70d0ffe0d32d658d",
+    "handoff": "Tools/Validation/SharpIllustration/source-handoff05.json"
+  },
+  "exactCodeChanges": [
+    "WRAPPER: run-owned-sharp-illustration-tmp.py -> run-owned-sharp-illustration-current.py",
+    "ENV FIRSTGAME_PROOF_ROOT: CONTROL/BuildProof -> CONTROL/BuildProofCurrent"
+  ],
+  "documentationChange": "CLI example and explicit selection note follow the separate current wrapper and fresh proof root. No result for either is invented.",
+  "preserved": "All source/readiness/stage/ownership/blob-budget/normal-push/immutability/cleanup gates and the unchanged original publisher remain identical to the independently source-reviewed prior helper.",
+  "limits": "Root owns creating/reviewing/executing the separate current wrapper/activation and all future actual Native/Web/browser/stage/publication evidence. No execution, product hash, Git, network, storage operation, future M/P, test pass or approval occurred here."
+}

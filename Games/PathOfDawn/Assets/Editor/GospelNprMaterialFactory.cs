@@ -46,6 +46,39 @@ namespace Firstgame.GospelNpr.Editor
     {
         const string UrpLit = "Universal Render Pipeline/Lit";
 
+        /// <summary>New garment material; the retained reference asset is never edited.</summary>
+        public static Material CreateTailoredGarment(Material reference, string materialName, bool mantle, string outputAssetPath, bool openSourceCloth = false)
+        {
+            if (reference == null || !reference.HasProperty("_Color"))
+                throw new ArgumentException("An actual retained garment material is required", nameof(reference));
+            if (string.IsNullOrEmpty(outputAssetPath) || !outputAssetPath.StartsWith("Assets/Art/GospelIllustration20261117/", StringComparison.Ordinal))
+                throw new ArgumentException("Tailored materials must use the new derived-art directory", nameof(outputAssetPath));
+            if (AssetDatabase.LoadMainAssetAtPath(outputAssetPath) != null)
+                throw new InvalidOperationException("Preserve a prior derived material; reuse it explicitly or choose a new output version: " + outputAssetPath);
+            var color = reference.GetColor("_Color");
+            var texture = reference.HasProperty("_MainTex") ? reference.GetTexture("_MainTex") : null;
+            var descriptor = new NprMaterialSource {
+                name = materialName, role = mantle ? "Mantle" : "Linen",
+                baseColorFactor = new[] { color.r, color.g, color.b, color.a }, factorIsLinear = false,
+                baseColorTexturePath = texture ? AssetDatabase.GetAssetPath(texture) : "",
+                alphaMode = "OPAQUE", doubleSided = false, outline = !openSourceCloth, outlineWidth = .010f
+            };
+            var material = CreateCharacter(descriptor, outputAssetPath);
+            // Closed outer garments retain their fine line. The extracted
+            // source shirt is a single surface with an open neck/sleeves;
+            // its dedicated material omits the inverted hull for Root's A/B.
+            SetFloat(material, "_LightMaxLimit", .98f);
+            SetColor(material, "_ShadowColor", new Color(.58f, .64f, .76f, 1));
+            SetFloat(material, "_ShadowStrength", .86f);
+            SetFloat(material, "_ShadowEnvStrength", .04f);
+            SetFloat(material, "_ShadowBorder", .48f);
+            SetFloat(material, "_ShadowBlur", .13f);
+            SetFloat(material, "_ShadowReceive", .52f);
+            EditorUtility.SetDirty(material);
+            AssetDatabase.SaveAssetIfDirty(material);
+            return material;
+        }
+
         public static Material CreateCharacter(NprMaterialSource source, string outputAssetPath)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));

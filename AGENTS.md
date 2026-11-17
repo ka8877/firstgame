@@ -1,3 +1,46 @@
+## 현재 실제 캐시 공간 확보 완료·소스 반영 계속 — 2026-11-17 05:14 UTC
+
+PrePublicBert02는05:14:37.568038Z에 정확한 공개 BERT475,782,997B를 새 TMP cache02로 완전 복사/SHA/fsync 검증 후 선택한 원 캐시 경로 하나만 원자 교체했다. 원 선택 inode는 보존되지 않으며, 기존 두 모델 링크·대상/나머지11정규파일·7디렉터리의 바이트·inode·메타데이터는 유지했다. 실제 WS584,212,480B/TMP220,487,680B로 관측했다. 외부12603B 요약 SHA1a08be03e3b4387aa67c8cc4b25f214b9612c78328bdb6b3a8334b60dad507e4의 실제4event0/빈후손과 완료40248B SHA f221f347e73774af7a7174091a51c9727efef1898578f5b3e4638a2b55305ddc를 확인했다. Native/Web/로컬4/source/lease 바인딩은 전후 동일하며 live공간2필드만 달라졌다. 플레이어·검증 원본·Git은 바꾸지 않았다.
+
+PrePublicBert01은 새 exactDBus FD/maps 권한 제한 때문에 복사·새 대상·링크 생성 전에 실패했고 원문을 유지했다. 별도02는 원래3개 서비스의 증거와 실제 PID111671/start8833915/UID1000/rawcmdline f604… 및 두 실제 supervisor baseline에만 묶인 제한적 미관측 정책을 사용했다. 실행 파일·FD/maps를 검증했다고 하거나 reader 전체 부재를 주장하지 않는다. 모든 양성 reader와 다른 unknown은 거부하고 프로세스 신호는 보내지 않았다. 새8+6+14 fixture가 실제 통과했다. 기존 Tools 모델 프로토콜/01 소스·실패는 그대로다. 현재4/6(로컬4완료)이고 새 main/P/공개2회는 아직 대기하며 추가 GitHub 인증은 필요 없다. 아래 저장공간 부족/모델 이동 대기 문구는 당시 이력이다.
+
+---
+
+## 현재 Sharp 로컬4회 완료·main/공개 반영 준비 — 2026-11-17 04:12 UTC
+
+최종 e1cb 캡처 하네스의 실제 현재 승인은4/6이다. 두 게임 PC·모바일4회는 완료했고 새 공개2회는 대기한다. CardMobile02는 실제 Release owner665fc59c/lock51161c22에서490검사/97PNG/필수63+보충12=75Root 직접검토, 실제4PCM·재접속2회·내외부4event0/빈후손으로04:11:44.815566Z 완료/04:12:21.652557Z Root승인했다. 실제55장/27종/200SP이며 PC03의25종은 해당 실제 별도 결과로 유지한다. 원본 카드 그림의 낮은 해상도·작은 전투 버튼은 여전히 개선 대상이다. 나머지3회는 당시 Resume owner를, Native/Web는 원 Sharp owner를 유지한다. 현재 실제 소유권은 아래 Release 회차(09:39:21.890151Z 고정 마감)이며 같은 source/OUT/build/stage/원 BuildProofCurrent를 사용한다. 다음은 정상 후보 Git/CI/main·Stage·Pages·전체 Portal GET/Root2·공개2회·봉인·내구 보존/종료다. 새 main/공개가 이미 완료됐다고 주장하지 않는다. main M 확정부터 Stage/게시/공개 검증/봉인/Git acquisition 완료까지 tracked source/docs를 동결하고 진행 정보는 ignored control에만 적는다. 아래3/6·대기 문구는 작성 당시 이력이다.
+
+---
+
+## 현재 Sharp 공개 검증 별도 정상 회차 — 2026-11-17 03:39 UTC
+
+실제 현재 실행 CONTROL은 `Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17`이다. Resume는 독립 BeforeReleaseCycleFinalIdle01의 실제4event0/빈후손(요약 SHA42ed9a2b6507b22b28fc8c096aed0ec51640a591a7ae24acabd6ecffee0d3be8), 2026-11-17T03:38:42.312383Z 정상 자기 해제와 별도 available 관측 뒤 종료했다. 새 owner는 `665fc59c-0fbb-4106-b42b-4af8962dbec3`, lock `51161c224bd7adfd90422d9d1d53f7e32ed661e2`, 실제 고정 기간은2026-11-17T03:39:21.890151Z~09:39:21.890151Z다. 갱신/탈취가 아닌 별도 정상 취득이며 사용자 승인된 같은 작업을 계속한다. 새 control의 path-only 소스 승인된 activation/3600wrapper/브라우저 전용90분wrapper/Roothelper/publisher/portalhelper를 사용하고 login:true와 필요한 명시적network 허용을 유지한다. OUT/build/stage/원 Sharp BuildProofCurrent는 그대로다.
+
+최종 e1cb 캡처 하네스 현재 승인은3/6이다. 기존 CardDesktop03(464검사/91PNG/64필수+9보충)·GospelMobile03(435/87/60+2)에 GospelDesktop02가498검사/100PNG/필수74원본 Root 직접검토로 추가됐다. 모두 실제4PCM·재접속2회·내외부4event0/빈후손을 완료했고 실제 Resume 소유권/원문을 유지한다. GospelDesktop02는03:36:23.221869Z 완료/03:37:03.081523Z Root승인, canonical SHAacb2da2e184e9b74c7470150ea9d05f97afefbb0ed88408b72c3aca3e712b3e9다. 현재 CardMobile02·공개2회, 새 main/배포/전체 봉인·내구 보존은 아직 대기한다. 원 Native/Web와 캡처 수정 전 과거 성공/실패/중단은 그대로 보존하며 새 회차의 재실행으로 표시하지 않는다. Root만 실제 실행/Git/배포/저장공간을 다룬다. 아래 acquired/실행중/2of6 문구는 작성 당시 이력이며 이 최신 상태를 우선한다.
+
+---
+
+## 현재 선명도·일러스트·캐릭터 개선 — SharpIllustration, 2026-11-17
+
+현재 실제 실행 소유권은 `Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17`이다. 이전 Sharp 회차는 독립 FinalIdle·소유 후손 정리·2026-11-16T22:20:23.279249Z 정상 자기 해제·available 확인 뒤 종료했다. 새 회차는 owner `3b7eb6d7-5263-4675-885f-21d9b187fd30`, lock `6a49b841ba0b761e92f90a71632ecebaaedab5e6`, 2026-11-16T22:20:24.961453Z부터 2026-11-17T04:20:24.961453Z까지의 별도 취득이다. 갱신·탈취나 작업 종료가 아니다. OUT/build/stage와 **원 Sharp control의 BuildProofCurrent**는 유지한다. 원 Native11/18·Web02/01은 당시 실제 원문으로 유지하며 새 회차의 재실행으로 표시하지 않는다. 검증기 분류 교정 후 실제 통과한 Card PC02·Gospel PC01·Card Mobile01은 이후 캡처 수정 전의 역사적 성공이며 원문·승인은 BrowserHistory에 바이트/inode 그대로 보존했다. Gospel Mobile01의 실제 DPR 실패는 별도 이력이다. 현재 캡처 검증기 `e1cbd791…`는 primary-session 원본 캡처와 전후 DPR/PNG 크기를 엄격히 검사하며 새6회 승인은 현재2/6이다. Card PC03도464검사/91PNG/필수64+보충9원본 Root 직접 검토와 내외부4event0/빈후손·실제4PCM·재접속2회를 완료했다. Gospel Mobile03은435검사/87PNG/필수60+보충2원본 Root 검토, 실제4PCM·재접속2회·내외부4event0/빈후손을 완료했다. Gospel Mobile02는372개 기록 검사에 false 없이 진행했지만1회 실행 시간제한으로 중단했으며 완료 성공·제품 실패로 재분류하지 않는다. 원문은 별도 BrowserHistory/Browser02에 그대로 보존했고 새 Gospel Mobile03을 별도 완료했으며 Gospel PC02가 실행 중이며 나머지3회는 대기한다. 새 main/공개판은 아직 없다.
+
+일반 실행은 기존 `activate-tmp-current.sh`·`run-owned-sharp-illustration-current.py`·`root-review-helper.py`를 사용한다. 브라우저6회에만 별도 전체 소스·차이 검토한 `run-owned-sharp-illustration-review90.py`(13,516B/SHA256 `3c2aabdecbe0e99458bec1bd3a888e8235fb98ac8053347972e8ef11eb556284`)를 사용할 수 있다. 기존 활성화 뒤 해당 호출에만 `FIRSTGAME_EXECUTION_LIMIT_SECONDS=5400`을 명시한다. 이 실행기는 display와 정확한 현재 브라우저9인자만 허용한다. 기존 native 드라이버의900~21,600초 허용 범위를 사용하며 실제 고정 소유권 마감·60초 소유권 여유·12초 정리 여유·검토600초·accepted supervisor·전후 guard/idle/빈 후손 검사·현재 계약/계획/하네스는 유지한다. 기존3600초 실행기/활성화와 실패 원문은 바꾸지 않는다. 별도 Root 소스 승인은 현재 control의 `Release/browser-review90-root-source-admission01.json`에 있고 기존 실행을 소급 승인하거나 소유권을 갱신하지 않는다.
+
+최신 사용자 요청은 판마의 흐린 화면을 선명하게 하고 원작 클라이언트 느낌을 더 살리며, 예수님의 길의 HUD/상태/대화 얼굴은 일러스트로 바꾸고 실제 필드 캐릭터의 형상·의상·표현을 개선하는 것이다. 새 브랜치는 codex/sharp-illustration-2026-11-17, 기준 main은 e9dbef24e321dcfe896a1510da729f3aff3d9d22다. 최초 Sharp 회차의 독립 소유권은 Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/lease.json, owner f3f0a36e-82c9-4561-8765-755aa132bf1e, lock9722cbe102160e9b5a5255b5a54696a93d1d721c이며 2026-11-17 01:29:28~07:29:28 KST 첫 고정 회차였다. 현재 실행 소유권은 상단 Resume 기록을 따르며 최초 회차의 실제 검증 원문과 현재 소스 지문을 구분해 보존한다.
+
+Root만 실제 생성기·Unity·테스트·브라우저·네트워크/이미지 생성·저장 공간·Git·기존 Pages 배포를 실행한다. classic_cards_ui는 카드 UI3개 소스, gospel_art_20261116은 CharacterView/MaterialFactory와 새 Tools/Art/GospelIllustration20261117 소스, gospel_scene_20261116은 PortraitCache/PilgrimageUi/StorybookUi, classic_npr_validation_20261116은 새 Sharp 프로필·검증/계획·승인된 최소 공유 드라이버/Native 소스를 맡는다. Root는 App/캔버스/템플릿/Editor 준비/생성 자산과 전체 통합을 맡는다. 담당들은 이전 증거·스냅샷을 수정하거나 실행하지 않는다.
+
+현재 개정은 fm-sharp-client-2026-11-17 / gospel-illustrated-anime-2026-11-17이다. 실제 글자·프레임·DPR1/2 출력과 새 일러스트/의상/동작을 새 화면으로 검증한다. 기존 카드·ID·재화·덱·저장·비활성 멀티와 Gospel 본문·23사건/19본문·51세부/28음성·실제 NPC/저장을 유지한다. 원작 전체 재현·원신급·사용자 미적 승인은 아직 주장하지 않는다. 현재 CardNative05 11개와 GospelNative03 18개가 실제 통과했고 Root가 현재 원본22장/11장을 직접 검토했다. 실제 웹 빌드 CardWeb02/GospelWeb01도 통과했으며, 최종 캡처 검증기의 새6회·새 공개는 진행 단계다. 아래 기록은 당시 이력이며 최신 사용자 지시와 실제 새 소유권을 우선한다. 검증된 변경은 기존 승인대로 main에 추가 질문 없이 정상 반영한다.
+
+현재 저장 공간 조치는 기존 원본을 삭제하지 않고22개 Tools 원본과606개 ClassicCards PNG의 LFS 캐시 경로만 같은 원본 inode의 별칭으로 바꿨다. 원본 경로·inode·바이트·권한·소유자·mtime와 PNG 메타/GUID를 실제 검사해 보존했다. 이 원본/캐시 공유 inode에는 내용 덮어쓰기·chmod·utime을 하지 않는다. 이후 PNG 생성은 검증된 `save_png_atomic`처럼 새 임시 inode를 완성한 뒤 출력 경로를 원자적으로 교체한다. 실제 원문은 원 Sharp control의 UpperToolsLfs01·AtomicPngUnit01·UpperClassicPngLfs01에 있으며 제품/배포 승인과는 별도다.
+
+원 Sharp control의 `CompilerCacheCompact01`은 현재 Web 빌드가 만든 정확히8개 TMP 컴파일 복사본만 전체 SHA/CRC/복원 길이 검증 뒤 정리했고 원본 컴파일 archive·현재 runtime/proof·프로젝트 지문을 보존했다. 보호된 과거 workspace Bee는 대상이 아니다. `RelocateTwoModelCaches01`의 무변경 실패는 보존하며, 별도 검토한02에서 외부 다운로드 모델 캐시 두 파일만 `/tmp/firstgame-sharp-illustration-20261117-voice-models01`로 완전 복사·검증한 뒤 원 경로를 파일별 링크로 원자 교체했다. 대상은 `MeloTTS-Korean/checkpoint.pth`와 `faster-whisper-small/model.bin`이며 나머지12파일/7디렉터리 inode는 보존했다. 두 선택 캐시 inode는 보존됐다고 주장하지 않는다. TMP 캐시는 player/검증 근거가 아니며 초기화 시 pinned 공개 다운로드에서 재구성한다. 숨겨진 서비스 FD/maps는 정확히 고정한3개 baseline 서비스/현 조상에 대한 제한된 미관측으로 기록했고 전체 reader 부재를 주장하지 않는다.
+
+
+후속 일반 실행의 첫 guard는 네트워크 미허용으로 null, 별도 다음 guard는HTTP401로 테스트 시작 전 종료했다. 원문은 SixCompilerReaderUnit01/02에 유지한다. 새 로그인 셸에서 기존 인증이 정상으로 관측되고03의 실제 guard·9개 fixture·최종 guard가 통과했다. 인증값을 읽거나 옮기거나 수정하지 않았고 만료 원인은 확정하지 않는다. 사용자에게 준비했던 일회용 로그인은 불필요하다고 정정한 뒤 해당 대기 세션을 종료했다. 후속 exec는 login:true와 기존 명시적 활성화·필요한 network 허용을 사용한다. 실제 회복 원문은 현재 control의 Release/authentication-fresh-login-shell-recovery01.json이다. 고정 소유권 마감·소스·supervisor·검증 조건은 바꾸지 않는다.
+
+---
+
 ## main 자동반영 승인·PR #11 반영 완료 — 2026-11-16
 
 사용자 지시: “메인자동반영해 물어보지말고”. 기존 승인된 firstgame 작업 범위에서 검증을 통과한 변경은 추가 승인 질문 없이 main에 정상 반영한다. 기존 검증·원본 보존 절차를 따른다.

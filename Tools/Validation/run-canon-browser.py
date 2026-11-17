@@ -18,7 +18,7 @@ import types
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / 'Tools/Validation') not in sys.path:
     sys.path.insert(0, str(ROOT / 'Tools/Validation'))
-from LivingRpgClassic import profile as RELEASE
+import release_profiles as RELEASE
 PROFILES = {'Desktop720': ('desktop', 'desktop'), 'Mobile844': ('mobile-landscape', 'mobile'),
             'PublicMobile844': ('mobile-landscape', 'public')}
 PUBLIC_BASE = 'https://ka8877.github.io/firstgame/'
@@ -105,6 +105,10 @@ def main():
         require_browser_plan(plan, args.game, expected_kind=plan_name)
         need(plan.get('evidenceRole') == browser_role(args.game),
              'Explicit current Classic/NPR evidence role required')
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        from SharpIllustration.contract import require_browser_plan, browser_role
+        require_browser_plan(plan, args.game, expected_kind=plan_name)
+        need(plan.get('evidenceRole') == browser_role(args.game), 'Explicit current Sharp/Illustration role required')
     if baseline is not None:
         inputs_path = ROOT / baseline['buildInputs']['file']
         evidence_path = ROOT / baseline['buildEvidence']['file']
@@ -141,6 +145,8 @@ def main():
         '--build-root', str(build_root), '--output', str(output_base), '--plan', str(plan_path),
         '--release-profile', RELEASE.NAME, '--profile', mode, '--timeout', str(args.timeout),
         '--review-timeout', str(args.review_timeout), '--renderer', args.renderer, '--chromium', args.chromium]
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        argv += ['--device-scale-factor', str(plan['renderingClarity']['deviceScaleFactor'])]
     if args.profile == 'PublicMobile844':
         argv += ['--base-url', PUBLIC_BASE]
     if args.renderer == 'x11-mesa':
@@ -155,6 +161,10 @@ def main():
         ROOT / 'Tools/Environment/assert-runtime-idle.py', ROOT / 'Tools/Environment/start-display.sh',
         ROOT / 'Tools/Environment/activate-display.sh', ROOT / 'Tools/Autonomy/cycle_guard.py', helper, plan_path]
     sources += list(RELEASE.EXTRA_SOURCE_FILES)
+    if RELEASE.REGISTRY_SOURCE != RELEASE.SOURCE:
+        sources.append(RELEASE.REGISTRY_SOURCE)
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        sources.append(ROOT / 'Tools/Validation/SharpIllustration/clarity.py')
     if baseline is not None:
         sources.append(ROOT / baseline['record']['file'])
     pins = []
@@ -176,6 +186,8 @@ def main():
             'FIRSTGAME_STAGE_ROOT', 'FIRSTGAME_PROOF_ROOT', 'PYTHONPYCACHEPREFIX', 'PYTHONDONTWRITEBYTECODE', 'PYTHONOPTIMIZE')},
         'maximumSharedSeconds': native_driver.EXECUTION_LIMIT_SECONDS, 'leaseReserveSeconds': 60, 'cleanupReserveSeconds': 12,
         'publishReady': False, 'baselineReady': False}
+    if RELEASE.IS_SHARP_ILLUSTRATION:
+        invocation['renderingClarity'] = plan['renderingClarity']
     if RELEASE.USES_NPR_GOSPEL:
         invocation['evidenceRole'] = plan['evidenceRole']
         if baseline is not None:

@@ -13,8 +13,10 @@ from datetime import datetime, timezone
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import re
+import stat
 import urllib.request
 import uuid
 
@@ -31,6 +33,47 @@ IMAGE_ORIGIN = "https://storage.googleapis.com/fmdb-bcb70.appspot.com/cardlist/"
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def save_png_atomic(image: Image.Image, output: Path) -> None:
+    """Replace only this derived pathname; never write into a shared inode.
+
+    Save/flush/replace failures before commit leave an existing output and its
+    cache aliases untouched. A directory-sync error after replacement reports
+    a durability failure; the complete new PNG has already been committed.
+    """
+    output = Path(output)
+    try:
+        mode = stat.S_IMODE(output.stat().st_mode)
+    except FileNotFoundError:
+        mode = None
+    temporary = output.with_name("." + output.name + "." + uuid.uuid4().hex + ".tmp")
+    descriptor = None
+    created = False
+    try:
+        descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
+        created = True
+        with os.fdopen(descriptor, "wb") as payload:
+            descriptor = None  # fdopen owns this descriptor from here onward.
+            if mode is not None:
+                os.fchmod(payload.fileno(), mode)
+            image.save(payload, format="PNG")
+            payload.flush()
+            os.fsync(payload.fileno())
+        os.replace(temporary, output)
+        directory = os.open(output.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+        if created:
+            try:
+                temporary.unlink()
+            except FileNotFoundError:
+                pass
 
 
 def relative(path: Path) -> str:
@@ -128,7 +171,7 @@ def prepare(card: dict) -> dict:
         source_pixels = source.convert("RGBA").tobytes()
         output = ASSETS / (identifier + ".png")
         # Saving a decoded RGB/RGBA image to a lossless container changes no pixels.
-        source.save(output, format="PNG")
+        save_png_atomic(source, output)
     with Image.open(output) as converted:
         converted.load()
         if converted.size != source_size or converted.convert("RGBA").tobytes() != source_pixels:
@@ -175,7 +218,7 @@ def prepare_back() -> dict:
         source.load()
         pixels = source.convert("RGBA").tobytes()
         size = source.size
-        source.save(output, format="PNG")
+        save_png_atomic(source, output)
     with Image.open(output) as converted:
         assert converted.size == size and converted.convert("RGBA").tobytes() == pixels
     texture_meta(output)

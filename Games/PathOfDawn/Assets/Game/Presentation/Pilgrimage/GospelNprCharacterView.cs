@@ -12,7 +12,9 @@ namespace PathOfDawn.Presentation
     /// </summary>
     public sealed class GospelNprCharacterView : MonoBehaviour
     {
+        public enum ExpressionCue { Neutral, Attentive, Gentle, Concerned, Joy }
         public const string CharacterResourceRoot = "Art/GospelNpr/Characters/";
+        const string ExpressionResource = "Art/GospelIllustration20261117/ExpressionBindings";
         public const int PortraitLayer = 31;
         static readonly int MoveSpeedId = Animator.StringToHash("MoveSpeed");
         static readonly int GroundedId = Animator.StringToHash("Grounded");
@@ -25,7 +27,13 @@ namespace PathOfDawn.Presentation
             public SkinnedMeshRenderer Renderer;
             public int Index;
             public float Baseline;
+            public float Gain = 1;
         }
+
+        [Serializable] sealed class ExpressionCatalog { public int schema; public ActorExpressions[] actors; }
+        [Serializable] sealed class ActorExpressions { public string id; public PresetBinding[] presets; }
+        [Serializable] sealed class PresetBinding { public string preset, renderer, shapeKey; public float weight = 1; }
+        static ExpressionCatalog expressionCatalog;
 
         GameObject prefab, model;
         Transform visualRoot;
@@ -36,9 +44,16 @@ namespace PathOfDawn.Presentation
         readonly List<FaceBinding> mouths = new List<FaceBinding>();
         readonly List<FaceBinding> portraitBlinks = new List<FaceBinding>();
         readonly List<FaceBinding> portraitMouths = new List<FaceBinding>();
+        readonly List<FaceBinding> mouthI = new List<FaceBinding>(), mouthO = new List<FaceBinding>();
+        readonly List<FaceBinding> relaxed = new List<FaceBinding>(), concerned = new List<FaceBinding>(), joyful = new List<FaceBinding>();
+        readonly List<FaceBinding> portraitMouthI = new List<FaceBinding>(), portraitMouthO = new List<FaceBinding>();
+        readonly List<FaceBinding> portraitRelaxed = new List<FaceBinding>(), portraitConcerned = new List<FaceBinding>(), portraitJoyful = new List<FaceBinding>();
         Vector3 velocity;
         bool onGround = true, hasMotionSample, speaking, portraitVisible;
         float desiredYaw = 180, nextBlink, blinkStart = -100;
+        float speechStarted, speechBlend, faceClock, relaxedWeight, concernWeight, joyWeight;
+        string activeStoryExpressionKey;
+        ExpressionCue expressionCue;
         Color garmentTint = Color.white;
         RenderTexture portraitTexture;
         Transform portraitStage;
@@ -66,6 +81,9 @@ namespace PathOfDawn.Presentation
         public int BlinkShapeCount => blinks.Count;
         public int MouthShapeCount => mouths.Count;
         public bool IsSpeaking => speaking;
+        public ExpressionCue CurrentExpression => expressionCue;
+        public int ExpressionBindingCount => mouthI.Count + mouthO.Count + relaxed.Count + concerned.Count + joyful.Count;
+        public bool HasSourceExpressionMap { get; private set; }
         public Vector3? ConversationTarget { get; private set; }
         public RenderTexture CachedPortraitTexture => portraitTexture;
         public Texture PortraitTexture => GetPortraitTexture();
@@ -117,7 +135,10 @@ namespace PathOfDawn.Presentation
             Animator = null; Head = RightHand = null;
             renderers = Array.Empty<SkinnedMeshRenderer>();
             rendererView = Array.Empty<SkinnedMeshRenderer>(); boneView = Array.Empty<Transform>();
-            blinks.Clear(); mouths.Clear();
+            blinks.Clear(); mouths.Clear(); mouthI.Clear(); mouthO.Clear();
+            relaxed.Clear(); concerned.Clear(); joyful.Clear();
+            HasSourceExpressionMap = false; expressionCue = ExpressionCue.Neutral;
+            speechBlend = relaxedWeight = concernWeight = joyWeight = 0; speaking = false; activeStoryExpressionKey = null;
             prefab = Resources.Load<GameObject>(ModelResource);
             if (prefab == null) Fail("Missing required NPR character prefab: " + ModelResource);
             visualRoot = new GameObject("NPR visual feet · " + identity).transform;
@@ -181,11 +202,13 @@ namespace PathOfDawn.Presentation
             SeedOriginalCharacterColorBlocks(renderers);
             ApplyGarmentTint(renderers, tint);
             FindFaceBindings(renderers, blinks, mouths);
+            HasSourceExpressionMap = BindSourceExpressions(renderers, mouthI, mouthO, relaxed, concerned, joyful);
             hasMotionSample = false;
             visualRoot.rotation = Quaternion.Euler(0, desiredYaw, 0);
             uint seed = StableIdentityHash(identity + "|" + transform.parent?.name);
             nextBlink = Time.unscaledTime + 2.2f + seed % 230 * .01f;
             blinkStart = -100;
+            faceClock = Time.unscaledTime;
             IsReady = true;
             if (portraitTexture != null) RebuildPortraitModel();
         }
@@ -237,8 +260,29 @@ namespace PathOfDawn.Presentation
             hasMotionSample = true;
         }
 
-        /// <summary>Optional authored speaking expression; not phoneme or audio lip-sync.</summary>
-        public void SetSpeaking(bool value) => speaking = value;
+        /// <summary>Presentation talking motion; it does not analyze or drive audio/Core state.</summary>
+        public void SetSpeaking(bool value)
+        {
+            if (value && !speaking) { speechStarted = Time.unscaledTime; expressionCue = ExpressionCue.Attentive; }
+            if (!value) { expressionCue = ExpressionCue.Neutral; activeStoryExpressionKey = null; }
+            speaking = value;
+        }
+
+        /// <summary>Use the existing stable quest/beat key; this never changes story text or saves.</summary>
+        public void SetSpeaking(bool value, string storyVoiceKey)
+        {
+            SetSpeaking(value);
+            if (!value) return;
+            if (activeStoryExpressionKey == storyVoiceKey) return;
+            activeStoryExpressionKey = storyVoiceKey;
+            expressionCue = ExpressionCue.Attentive;
+            string quest = (storyVoiceKey ?? "").Split(':')[0];
+            if (quest == "parents-reunite" && ModelIdentity == "Mary") expressionCue = ExpressionCue.Concerned;
+            else if (quest == "nazareth-return" || quest == "pilgrim-spring") expressionCue = ExpressionCue.Gentle;
+            else if (quest == "birth-birth-good-news" || quest == "birth-manger-witnesses") expressionCue = ExpressionCue.Joy;
+        }
+
+        public void SetExpressionCue(ExpressionCue cue) => expressionCue = cue;
 
         public void Tick(float deltaTime)
         {
@@ -262,6 +306,12 @@ namespace PathOfDawn.Presentation
         void TickFace()
         {
             float now = Time.unscaledTime;
+            float dt = Mathf.Clamp(now - faceClock, 0, .1f); faceClock = now;
+            float ease = 1 - Mathf.Exp(-9 * dt);
+            speechBlend = Mathf.Lerp(speechBlend, speaking ? 1 : 0, ease);
+            relaxedWeight = Mathf.Lerp(relaxedWeight, expressionCue == ExpressionCue.Gentle ? 14 : expressionCue == ExpressionCue.Attentive ? 5 : 0, ease);
+            concernWeight = Mathf.Lerp(concernWeight, expressionCue == ExpressionCue.Concerned ? 17 : 0, ease);
+            joyWeight = Mathf.Lerp(joyWeight, expressionCue == ExpressionCue.Joy ? 16 : 0, ease);
             if (now >= nextBlink)
             {
                 blinkStart = now;
@@ -269,6 +319,9 @@ namespace PathOfDawn.Presentation
             }
             CurrentFaceWeights(now, out float blink, out float mouth);
             SetFaceWeights(blinks, blink); SetFaceWeights(mouths, mouth);
+            SampleVisemes(now, out _, out float narrow, out float round);
+            SetFaceWeights(mouthI, narrow); SetFaceWeights(mouthO, round);
+            SetFaceWeights(relaxed, relaxedWeight); SetFaceWeights(concerned, concernWeight); SetFaceWeights(joyful, joyWeight);
             if (HasVisiblePortrait) SynchronizePortraitFace(blink, mouth);
         }
 
@@ -277,7 +330,21 @@ namespace PathOfDawn.Presentation
             float t = now - blinkStart;
             blink = (t < 0 || t > .18f ? 0 : t < .06f ? Mathf.SmoothStep(0, 1, t / .06f)
                 : t < .085f ? 1 : Mathf.SmoothStep(1, 0, (t - .085f) / .095f)) * 100;
-            mouth = speaking ? 10 + (Mathf.Sin(now * 13.1f) * .5f + .5f) * 15 : 0;
+            SampleVisemes(now, out mouth, out _, out _);
+        }
+
+        static float Syllable(float t, float start, float peak, float end) =>
+            t <= start || t >= end ? 0 : t < peak ? Mathf.SmoothStep(0, 1, (t - start) / (peak - start))
+                : Mathf.SmoothStep(1, 0, (t - peak) / (end - peak));
+
+        void SampleVisemes(float now, out float open, out float narrow, out float round)
+        {
+            // A/I/O shapes and closed-mouth pauses make a restrained generic
+            // speaking cycle. This deliberately makes no phoneme-sync claim.
+            float t = Mathf.Repeat(now - speechStarted, 1.18f);
+            open = speechBlend * (25 * Syllable(t, .00f, .08f, .17f) + 20 * Syllable(t, .40f, .48f, .59f));
+            narrow = speechBlend * 18 * Syllable(t, .19f, .26f, .36f);
+            round = speechBlend * 20 * Syllable(t, .66f, .75f, .87f);
         }
 
         void SynchronizePortraitFace()
@@ -289,6 +356,50 @@ namespace PathOfDawn.Presentation
         void SynchronizePortraitFace(float blink, float mouth)
         {
             SetFaceWeights(portraitBlinks, blink); SetFaceWeights(portraitMouths, mouth);
+            SampleVisemes(Time.unscaledTime, out _, out float narrow, out float round);
+            SetFaceWeights(portraitMouthI, narrow); SetFaceWeights(portraitMouthO, round);
+            SetFaceWeights(portraitRelaxed, relaxedWeight); SetFaceWeights(portraitConcerned, concernWeight); SetFaceWeights(portraitJoyful, joyWeight);
+        }
+
+        bool BindSourceExpressions(SkinnedMeshRenderer[] skins, List<FaceBinding> narrow, List<FaceBinding> round,
+            List<FaceBinding> gentle, List<FaceBinding> concern, List<FaceBinding> joy)
+        {
+            narrow.Clear(); round.Clear(); gentle.Clear(); concern.Clear(); joy.Clear();
+            if (expressionCatalog == null)
+            {
+                var json = Resources.Load<TextAsset>(ExpressionResource);
+                if (json == null) return false; // Preserved legacy model/test API; new preparation supplies the map.
+                expressionCatalog = JsonUtility.FromJson<ExpressionCatalog>(json.text);
+                if (expressionCatalog?.actors == null || expressionCatalog.schema != 1)
+                    throw new InvalidOperationException("Malformed source-bound expression catalog");
+            }
+            ActorExpressions actor = null;
+            foreach (var candidate in expressionCatalog.actors)
+                if (candidate.id == ModelIdentity) { if (actor != null) throw new InvalidOperationException("Duplicate expression actor"); actor = candidate; }
+            if (actor?.presets == null) throw new InvalidOperationException("Missing expression actor: " + ModelIdentity);
+            foreach (var preset in actor.presets)
+            {
+                if (!Finite(preset.weight) || preset.weight <= 0 || preset.weight > 1)
+                    throw new InvalidOperationException("Invalid source expression weight: " + ModelIdentity);
+                List<FaceBinding> destination = preset.preset == "ih" ? narrow : preset.preset == "oh" ? round
+                    : preset.preset == "relaxed" ? gentle : preset.preset == "sad" ? concern : preset.preset == "happy" ? joy : null;
+                if (destination == null) continue;
+                int matches = 0;
+                foreach (var renderer in skins)
+                {
+                    if (renderer.name != preset.renderer || renderer.sharedMesh == null) continue;
+                    for (int i = 0; i < renderer.sharedMesh.blendShapeCount; i++)
+                    {
+                        string name = renderer.sharedMesh.GetBlendShapeName(i);
+                        if (name != preset.shapeKey && !name.EndsWith("." + preset.shapeKey, StringComparison.Ordinal)) continue;
+                        AddBinding(destination, renderer, i, preset.weight); matches++;
+                    }
+                }
+                if (matches != 1) throw new InvalidOperationException("Source expression must resolve once: " + ModelIdentity + "/" + preset.shapeKey);
+            }
+            if (narrow.Count == 0 || round.Count == 0 || gentle.Count == 0 || concern.Count == 0 || joy.Count == 0)
+                throw new InvalidOperationException("Incomplete actual expression presets: " + ModelIdentity);
+            return true;
         }
 
         static void SetFaceWeights(List<FaceBinding> bindings, float weight)
@@ -296,7 +407,7 @@ namespace PathOfDawn.Presentation
             foreach (var binding in bindings)
             {
                 if (binding.Renderer == null) continue;
-                float desired = binding.Baseline + (100 - binding.Baseline) * weight * .01f;
+                float desired = binding.Baseline + (100 - binding.Baseline) * weight * .01f * binding.Gain;
                 // Read the actual renderer value so another expression owner
                 // cannot invalidate a private last-written-value cache.
                 if (!Mathf.Approximately(binding.Renderer.GetBlendShapeWeight(binding.Index), desired))
@@ -330,8 +441,8 @@ namespace PathOfDawn.Presentation
             }
         }
 
-        static void AddBinding(List<FaceBinding> list, SkinnedMeshRenderer renderer, int index) =>
-            list.Add(new FaceBinding { Renderer = renderer, Index = index, Baseline = renderer.GetBlendShapeWeight(index) });
+        static void AddBinding(List<FaceBinding> list, SkinnedMeshRenderer renderer, int index, float gain = 1) =>
+            list.Add(new FaceBinding { Renderer = renderer, Index = index, Baseline = renderer.GetBlendShapeWeight(index), Gain = gain });
 
         // A nonempty block on each material draw intentionally keeps these
         // skinned characters on Unity's regular renderer path. Keep scenery's
@@ -438,6 +549,7 @@ namespace PathOfDawn.Presentation
             SeedOriginalCharacterColorBlocks(portraitRenderers);
             ApplyGarmentTint(portraitRenderers, garmentTint);
             FindFaceBindings(portraitRenderers, portraitBlinks, portraitMouths);
+            BindSourceExpressions(portraitRenderers, portraitMouthI, portraitMouthO, portraitRelaxed, portraitConcerned, portraitJoyful);
             portraitAnimator = portraitModel.GetComponentInChildren<Animator>(true);
             if (portraitAnimator != null)
             {
@@ -486,10 +598,14 @@ namespace PathOfDawn.Presentation
             if (portraitTexture != null) { portraitTexture.Release(); Destroy(portraitTexture); }
             portraitCamera = null; portraitAnimator = null; portraitStage = null; portraitModel = null; portraitTexture = null;
             portraitBlinks.Clear(); portraitMouths.Clear();
+            portraitMouthI.Clear(); portraitMouthO.Clear(); portraitRelaxed.Clear(); portraitConcerned.Clear(); portraitJoyful.Clear();
         }
 
         void OnDisable()
         {
+            speaking = false; speechBlend = relaxedWeight = concernWeight = joyWeight = 0;
+            expressionCue = ExpressionCue.Neutral; activeStoryExpressionKey = null;
+            foreach (var bindings in new[] { blinks, mouths, mouthI, mouthO, relaxed, concerned, joyful }) SetFaceWeights(bindings, 0);
             if (portraitCamera != null) portraitCamera.enabled = false;
             if (portraitAnimator != null) portraitAnimator.enabled = false;
             if (portraitModel != null) portraitModel.SetActive(false);

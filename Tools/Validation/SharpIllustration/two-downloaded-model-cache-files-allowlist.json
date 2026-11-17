@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "scope": "Only two pinned public downloaded model-cache files are relocated; other twelve cache files and all directory inodes/modes/owners remain. Only the two containing-directory entry timestamps may change and are recorded.",
+  "source": "/workspace/tools/voice-models",
+  "destination": "/tmp/firstgame-sharp-illustration-20261117-voice-models01",
+  "sourceStatus": "separate-Root-source-admission-actual-idle-and-independent-shared-scratch-proof-required",
+  "count": 14,
+  "bytes": 1175821362,
+  "directories": [
+    {
+      "relative": ".",
+      "observed": {
+        "dev": 27,
+        "ino": 562158,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637707369205,
+        "ctimeNs": 1794208637707369205,
+        "nlink": 6
+      }
+    },
+    {
+      "relative": "MeloTTS-Korean",
+      "observed": {
+        "dev": 27,
+        "ino": 562159,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208580855776739,
+        "ctimeNs": 1794208580855776739,
+        "nlink": 2
+      }
+    },
+    {
+      "relative": "bert-kor-base",
+      "observed": {
+        "dev": 27,
+        "ino": 562162,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208606727590014,
+        "ctimeNs": 1794208606727590014,
+        "nlink": 2
+      }
+    },
+    {
+      "relative": "faster-whisper-small",
+      "observed": {
+        "dev": 27,
+        "ino": 662560,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637707369205,
+        "ctimeNs": 1794208637707369205,
+        "nlink": 2
+      }
+    },
+    {
+      "relative": "nltk-data",
+      "observed": {
+        "dev": 27,
+        "ino": 662565,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637707369205,
+        "ctimeNs": 1794208637707369205,
+        "nlink": 3
+      }
+    },
+    {
+      "relative": "nltk-data/corpora",
+      "observed": {
+        "dev": 27,
+        "ino": 662566,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637708463035,
+        "ctimeNs": 1794208637708463035,
+        "nlink": 3
+      }
+    },
+    {
+      "relative": "nltk-data/corpora/cmudict",
+      "observed": {
+        "dev": 27,
+        "ino": 662568,
+        "bytes": 4096,
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637723369091,
+        "ctimeNs": 1794208637723369091,
+        "nlink": 2
+      }
+    }
+  ],
+  "files": [
+    {
+      "relative": "MeloTTS-Korean/checkpoint.pth",
+      "observed": {
+        "dev": 27,
+        "ino": 562161,
+        "bytes": 207860748,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208580583778700,
+        "ctimeNs": 1794208580855776739,
+        "nlink": 1
+      },
+      "expectedSha256": "48e3ff3fd0b5348e095f0468e60ae727507564100f58142ef3a922ead6e0a4d0",
+      "url": "https://huggingface.co/myshell-ai/MeloTTS-Korean/resolve/0207e5adfc90129a51b6b03d89be6d84360ed323/checkpoint.pth"
+    },
+    {
+      "relative": "MeloTTS-Korean/config.json",
+      "observed": {
+        "dev": 27,
+        "ino": 562160,
+        "bytes": 3405,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208569652514746,
+        "ctimeNs": 1794208569652617348,
+        "nlink": 1
+      },
+      "expectedSha256": "74543376976dfadde45ba34336fa79c7e95509f43a7c2e701b22c0f71fd7695c",
+      "url": "https://huggingface.co/myshell-ai/MeloTTS-Korean/resolve/0207e5adfc90129a51b6b03d89be6d84360ed323/config.json"
+    },
+    {
+      "relative": "bert-kor-base/config.json",
+      "observed": {
+        "dev": 27,
+        "ino": 562163,
+        "bytes": 725,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208581119059099,
+        "ctimeNs": 1794208581119191784,
+        "nlink": 1
+      },
+      "expectedSha256": "c37ae92c39e3600e7c9645148e406286d44c9863cb8a237196ac6ad35bc47749",
+      "url": "https://huggingface.co/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/config.json"
+    },
+    {
+      "relative": "bert-kor-base/pytorch_model.bin",
+      "observed": {
+        "dev": 27,
+        "ino": 562166,
+        "bytes": 475782997,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208606059594812,
+        "ctimeNs": 1794208606727590014,
+        "nlink": 1
+      },
+      "expectedSha256": "ae43a392e533ccb9fd38e5c65130aeee50381b87e81e795f9d90469accd78236",
+      "url": "https://huggingface.co/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/pytorch_model.bin"
+    },
+    {
+      "relative": "bert-kor-base/tokenizer_config.json",
+      "observed": {
+        "dev": 27,
+        "ino": 562164,
+        "bytes": 80,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208581384620526,
+        "ctimeNs": 1794208581384692182,
+        "nlink": 1
+      },
+      "expectedSha256": "cac5808f517ce8a9706e7e18f29a45bc819a316c4f3222294a2a7db49490cf1b",
+      "url": "https://huggingface.co/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/tokenizer_config.json"
+    },
+    {
+      "relative": "bert-kor-base/vocab.txt",
+      "observed": {
+        "dev": 27,
+        "ino": 562165,
+        "bytes": 344259,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208581595771406,
+        "ctimeNs": 1794208581597918353,
+        "nlink": 1
+      },
+      "expectedSha256": "25a329a892130c73f7dffd6aafa0382d713f93633ef320e49ea54a449096a089",
+      "url": "https://huggingface.co/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/vocab.txt"
+    },
+    {
+      "relative": "cmudict.zip",
+      "observed": {
+        "dev": 27,
+        "ino": 562167,
+        "bytes": 896069,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208606963588318,
+        "ctimeNs": 1794208606971588261,
+        "nlink": 1
+      },
+      "expectedSha256": "d07cca47fd72ad32ea9d8ad1219f85301eeaf4568f8b6b73747506a71fb5afd6",
+      "url": "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/cmudict.zip"
+    },
+    {
+      "relative": "faster-whisper-small/config.json",
+      "observed": {
+        "dev": 27,
+        "ino": 662561,
+        "bytes": 2370,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208607143437153,
+        "ctimeNs": 1794208607143512664,
+        "nlink": 1
+      },
+      "expectedSha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+      "url": "https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/config.json"
+    },
+    {
+      "relative": "faster-whisper-small/model.bin",
+      "observed": {
+        "dev": 27,
+        "ino": 662564,
+        "bytes": 483546902,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208636931374755,
+        "ctimeNs": 1794208637707369205,
+        "nlink": 1
+      },
+      "expectedSha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+      "url": "https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/model.bin"
+    },
+    {
+      "relative": "faster-whisper-small/tokenizer.json",
+      "observed": {
+        "dev": 27,
+        "ino": 662562,
+        "bytes": 2203239,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208607295585934,
+        "ctimeNs": 1794208607299585906,
+        "nlink": 1
+      },
+      "expectedSha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+      "url": "https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/tokenizer.json"
+    },
+    {
+      "relative": "faster-whisper-small/vocabulary.txt",
+      "observed": {
+        "dev": 27,
+        "ino": 662563,
+        "bytes": 459861,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208607475584642,
+        "ctimeNs": 1794208607479093673,
+        "nlink": 1
+      },
+      "expectedSha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+      "url": "https://huggingface.co/Systran/faster-whisper-small/resolve/536b0662742c02347bc0e980a01041f333bce120/vocabulary.txt"
+    },
+    {
+      "relative": "nltk-data/corpora/cmudict/README",
+      "observed": {
+        "dev": 27,
+        "ino": 662570,
+        "bytes": 3808,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637727838174,
+        "ctimeNs": 1794208637727838174,
+        "nlink": 1
+      },
+      "expectedSha256": "b0556be7a2b12bea6a667277b75864f802dd4854480657ce298c62e6897e766b",
+      "derivedFrom": "cmudict.zip",
+      "zipMember": "cmudict/README"
+    },
+    {
+      "relative": "nltk-data/corpora/cmudict/cmudict",
+      "observed": {
+        "dev": 27,
+        "ino": 662569,
+        "bytes": 3820830,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637723369091,
+        "ctimeNs": 1794208637723369091,
+        "nlink": 1
+      },
+      "expectedSha256": "cad209c39eb87677d64e93d97f8eed10b7e6f9bdd42de8e7ca8efc8e17d62e8a",
+      "derivedFrom": "cmudict.zip",
+      "zipMember": "cmudict/cmudict"
+    },
+    {
+      "relative": "nltk-data/corpora/cmudict.zip",
+      "observed": {
+        "dev": 27,
+        "ino": 662567,
+        "bytes": 896069,
+        "mode": 384,
+        "uid": 1000,
+        "gid": 1000,
+        "mtimeNs": 1794208637708463035,
+        "ctimeNs": 1794208637708463035,
+        "nlink": 1
+      },
+      "expectedSha256": "d07cca47fd72ad32ea9d8ad1219f85301eeaf4568f8b6b73747506a71fb5afd6",
+      "url": "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/cmudict.zip"
+    }
+  ],
+  "provenance": [
+    {
+      "file": "Tools/Voice/models.json",
+      "bytes": 2068,
+      "sha256": "96520eef661f9dc12ae23727d287ba918777cc0b05a08d33d1c669e32890cc60"
+    },
+    {
+      "file": "Tools/Voice/asr-model.json",
+      "bytes": 1343,
+      "sha256": "6e0506c9dcf8ba3a5cdd457efc74f5383f4588c44a6fc05cf8c524858077fa4a"
+    },
+    {
+      "file": "Tools/Voice/prepare-runtime.py",
+      "bytes": 4097,
+      "sha256": "58df3cacb8a7459a45fef814484a0c045ed88d2a995e431f4efe02ec54122541"
+    }
+  ],
+  "durability": "Only two reproducible downloaded weights move to shared ephemeral /tmp. Their original file pathnames become recorded absolute per-file symlinks; original selected cache inodes change. Other twelve files and all directory inodes remain. Pinned manifests restore any missing cache after environment reset; no model-weight or QA durability claim.",
+  "selectedRelativeNames": [
+    "MeloTTS-Korean/checkpoint.pth",
+    "faster-whisper-small/model.bin"
+  ],
+  "selectedCount": 2,
+  "selectedBytes": 691407650
+}

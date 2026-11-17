@@ -1,0 +1,125 @@
+--- Tools/Validation/nativity-web-smoke.py
++++ Tools/Validation/nativity-web-smoke.py
+@@ -79,7 +79,8 @@
+ CLIENT_MOTION_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-character-motion-2026-11-11"}
+ GOSPEL_NPR_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-npr-2026-11-11"}
+ CLASSIC_NPR_REVISIONS = {"FantasyCards": "fm-classic-library-2026-11-16", "PathOfDawn": "gospel-npr-polish-2026-11-16"}
+-CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values(), *GOSPEL_NPR_REVISIONS.values())
++SHARP_ILLUSTRATION_REVISIONS = {"FantasyCards": "fm-sharp-client-2026-11-17", "PathOfDawn": "gospel-illustrated-anime-2026-11-17"}
++CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values(), *GOSPEL_NPR_REVISIONS.values(), *SHARP_ILLUSTRATION_REVISIONS.values())
+ RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
+ ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
+ REQUIRED_CHECKPOINTS = {
+@@ -212,12 +213,15 @@
+         source_files = [Path(__file__),Path(BASE.__file__),Path(PROVIDER_ERRORS.__file__),Path(LOCAL_ERRORS.__file__),
+                         ROOT/"Tools/Validation/webaudio-observer.js",ROOT/"Tools/Validation/fm-local-media-observer.js",
+                         ROOT/"Tools/Environment/assert-runtime-idle.py",Path(NARRATION.__file__),args.plan]
+-        if args.release_profile in ('gospel-npr', 'classic-npr'):
+-            from LivingRpgClassic import profile as npr_release
++        if args.release_profile in ('gospel-npr', 'classic-npr', 'sharp-illustration'):
++            import release_profiles as npr_release
+             source_files += list(npr_release.EXTRA_SOURCE_FILES) + [npr_release.SOURCE]
+             if args.preserved_card_record is not None:
+                 source_files.append(args.preserved_card_record)
+             self.report['evidenceRole'] = plan.get('evidenceRole')
++        if args.release_profile == 'sharp-illustration':
++            source_files.append(ROOT / 'Tools/Validation/SharpIllustration/clarity.py')
++            self.report['renderingClarity'] = {'requestedDeviceScaleFactor': args.device_scale_factor, 'samples': []}
+         for source in source_files:
+             target=self.output/"RecordedHarness"/source.relative_to(ROOT)
+             target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(source.read_bytes())
+@@ -278,6 +282,22 @@
+         self.report["browserInputCapabilities"] = capabilities
+         if self.args.profile == "mobile-landscape":
+             self.check(capabilities["maxTouchPoints"] > 0 and capabilities["coarse"], "Actual touch browser context", capabilities)
++        self.observe_sharp_clarity('loaded')
++
++    def observe_sharp_clarity(self, reason, checkpoint=None):
++        if self.args.release_profile != 'sharp-illustration':
++            return
++        from SharpIllustration.clarity import observe
++        from SharpIllustration.contract import require_clarity_sample
++        sample = observe(self.page, navigation=self.navigation, reason=reason, checkpoint=checkpoint)
++        sample['checkedUtc'] = now()
++        self.report['renderingClarity']['samples'].append(sample)
++        self.persist()
++        try:
++            require_clarity_sample(sample, self.args.device_scale_factor)
++        except ValueError:
++            self.check(False, 'Actual shipping canvas backing/drawing buffer honors executing DPR', sample)
++        self.check(True, 'Actual shipping canvas backing/drawing buffer honors executing DPR', sample)
+ 
+     def canvas_box(self):
+         """Read ordinary DOM geometry once per unchanged shipping canvas."""
+@@ -822,6 +842,7 @@
+         # never grants review approval; staging requires Root's exact hashes.
+         originals = list(self.pending_compositor_frames)
+         self.pending_compositor_frames = []
++        self.observe_sharp_clarity('checkpoint', checkpoint=step['name'])
+         shot = self.screenshot(step['name'])
+         self.report['checkpoints'].append({'name': step['name'], 'expected': step['expected'],
+             'original': shot, 'transientOriginals': originals,
+@@ -1167,6 +1188,10 @@
+                 elif kind == "reload": self.loaded(reload=True)
+                 elif kind == "wait": self.page.wait_for_timeout(step["ms"])
+                 else: self.input(step)
++            if self.args.release_profile == 'sharp-illustration':
++                from SharpIllustration.contract import require_browser_clarity
++                kind = 'public' if self.args.base_url else 'desktop' if self.args.profile == 'desktop' else 'mobile'
++                require_browser_clarity(self.report, self.plan, expected_kind=kind)
+             if self.args.game == 'PathOfDawn':
+                 self.report['narrationEvidence'] = NARRATION.narration_evidence(self.report['console'])
+                 self.report['harness']['narrationClassifier'] = {'file':str(Path(NARRATION.__file__).relative_to(ROOT)), 'sha256':digest(NARRATION.__file__)}
+@@ -1210,7 +1235,7 @@
+     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
+     parser.add_argument("--output", type=Path, required=True)
+     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
+-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion", "gospel-npr", "classic-npr"), default="renewal")
++    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion", "gospel-npr", "classic-npr", "sharp-illustration"), default="renewal")
+     parser.add_argument("--base-url")
+     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
+     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
+@@ -1219,8 +1244,9 @@
+     parser.add_argument("--review-timeout", type=int, default=1200)
+     parser.add_argument("--provider-timeout", type=int, default=15)
+     parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
++    parser.add_argument("--device-scale-factor", type=int, choices=(1, 2), default=1)
+     args = parser.parse_args()
+-    if args.release_profile in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr', 'classic-npr') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
++    if args.release_profile in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr', 'classic-npr', 'sharp-illustration') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
+         parser.error('The selected current release profile must match its explicit environment and evidence roots')
+     args.output = authorize_output(args.output)
+     args.build_root = args.build_root.resolve()
+@@ -1241,7 +1267,7 @@
+     plan = plans[args.game]
+     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
+     modern = plan.get("suite") == "modern-real-input-v1"
+-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS, "gospel-npr": GOSPEL_NPR_REVISIONS, "classic-npr": CLASSIC_NPR_REVISIONS}[args.release_profile]
++    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS, "gospel-npr": GOSPEL_NPR_REVISIONS, "classic-npr": CLASSIC_NPR_REVISIONS, "sharp-illustration": SHARP_ILLUSTRATION_REVISIONS}[args.release_profile]
+     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
+         parser.error("The fidelity suite preserves Gospel without re-executing it")
+     if args.release_profile == 'gospel-npr':
+@@ -1254,6 +1280,14 @@
+         from ClassicNpr.contract import require_browser_plan
+         expected_kind = 'public' if args.base_url else 'desktop' if args.profile == 'desktop' else 'mobile'
+         require_browser_plan(plan, args.game, expected_kind=expected_kind)
++    if args.release_profile == 'sharp-illustration':
++        from SharpIllustration.contract import require_browser_plan, require_clarity_plan
++        expected_kind = 'public' if args.base_url else 'desktop' if args.profile == 'desktop' else 'mobile'
++        require_browser_plan(plan, args.game, expected_kind=expected_kind)
++        if args.device_scale_factor != require_clarity_plan(plan, expected_kind):
++            parser.error('Actual requested browser DPR differs from the admitted current plan')
++    elif args.device_scale_factor != 1:
++        parser.error('Historical modes retain their exact DPR1 browser behavior')
+     if modern and plan.get("revision") != expected_revisions[args.game]:
+         parser.error("The plan revision differs from the explicit current release profile")
+     required = set(plan.get("requiredCheckpoints", [])) if modern else REQUIRED_CHECKPOINTS[args.game]
+@@ -1282,7 +1316,7 @@
+             try:
+                 mobile = args.profile == "mobile-landscape"
+                 options = {"viewport": {"width": 844 if mobile else 1280, "height": 390 if mobile else 720},
+-                           "device_scale_factor": 1, "has_touch": mobile, "is_mobile": mobile}
++                           "device_scale_factor": args.device_scale_factor, "has_touch": mobile, "is_mobile": mobile}
+                 if mobile:
+                     options["user_agent"] = "Mozilla/5.0 (Linux; Android 14; Mobile Smoke) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+                 context = browser.new_context(**options)

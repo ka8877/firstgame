@@ -40,7 +40,7 @@ namespace FirstGame.Editor
             public ShaderAssetReport[] shaders;
         }
         [Serializable] sealed class ShaderAssetReport { public string name, asset, guid; public long localId; public int serializedSubshaderCount; }
-        [Serializable] sealed class ActorReport { public string id, model, prefab; public bool avatarHuman, avatarValid; public int mappedHumanBones, skeletonTransforms, skinnedMeshes, vertices, triangles, blendShapes, materials; public float declaredHeight, importedHeight, feetY, forwardDotPositiveZ; public string[] materialShaders; }
+        [Serializable] sealed class ActorReport { public string id, model, prefab; public bool avatarHuman, avatarValid; public int mappedHumanBones, skeletonTransforms, skinnedMeshes, vertices, triangles, blendShapes, materials; public float declaredHeight, importedHeight, feetY, forwardDotPositiveZ; public string[] materialShaders; public GospelIllustrationTailoring.Report tailoring; }
         [Serializable] sealed class ClipReport { public string name, sourceTake, asset; public float firstFrame, lastFrame, seconds; public bool humanMotion, loop; public int curveBindings; }
         [Serializable] sealed class EnvironmentReport { public string name, asset; public int meshes, vertices, materials; }
         [Serializable] sealed class TextureReport { public string asset, source, sourceSha256, runtimeFormat, inputAlphaImport; public int width, height, maximumSize; public bool normal, sourceFileBytesPreserved; }
@@ -48,6 +48,8 @@ namespace FirstGame.Editor
         [MenuItem("Tools/FirstGame/Prepare Gospel NPR Assets")]
         public static void Prepare()
         {
+            if (PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal))
+                GospelIllustratedPortraitPreparation.Ensure();
             string manifestPath = RepoFile(ManifestSource);
             Need(File.Exists(manifestPath), "Approved actor-manifest.json is required before NPR preparation.");
             string manifestHash = Hash(File.ReadAllBytes(manifestPath));
@@ -179,6 +181,9 @@ namespace FirstGame.Editor
                 var animator = instance.GetComponent<Animator>() ?? instance.AddComponent<Animator>();
                 animator.avatar = avatar; animator.runtimeAnimatorController = controller; animator.applyRootMotion = false;
                 animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                GospelIllustrationTailoring.Report tailoring = null;
+                if (PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal))
+                    tailoring = GospelIllustrationTailoring.Apply(instance, source.id);
                 var renderers = instance.GetComponentsInChildren<SkinnedMeshRenderer>(true);
                 Need(renderers.Length > 0, "Real skinned NPR model required: " + source.id);
                 foreach (var renderer in renderers)
@@ -199,7 +204,7 @@ namespace FirstGame.Editor
                 Need(saved != null, "NPR character prefab was not saved.");
                 var savedAnimator = saved.GetComponent<Animator>();
                 Need(savedAnimator && savedAnimator.avatar && savedAnimator.avatar.isHuman && savedAnimator.avatar.isValid && savedAnimator.runtimeAnimatorController == controller, "Saved humanoid/controller reference invalid: " + prefabPath);
-                return new ActorReport { id = source.id, model = modelPath, prefab = prefabPath, avatarHuman = avatar.isHuman, avatarValid = avatar.isValid,
+                return new ActorReport { id = source.id, model = modelPath, prefab = prefabPath, avatarHuman = avatar.isHuman, avatarValid = avatar.isValid, tailoring = tailoring,
                     mappedHumanBones = description.human.Length, skeletonTransforms = description.skeleton.Length, declaredHeight = source.height,
                     importedHeight = bounds.size.y, feetY = bounds.min.y, forwardDotPositiveZ = forward, skinnedMeshes = renderers.Length,
                     vertices = renderers.Sum(r => r.sharedMesh.vertexCount), triangles = renderers.Sum(r => r.sharedMesh.triangles.Length / 3),

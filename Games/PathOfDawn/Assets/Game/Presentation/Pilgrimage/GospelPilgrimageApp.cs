@@ -411,10 +411,12 @@ namespace PathOfDawn.Presentation
 
         Texture CharacterPortrait(string identity, bool useAdult)
         {
-            var view = FindCharacterView(identity, useAdult);
-            if (view == null || !view.IsReady) return null;
-            portraitRequests[view] = Time.unscaledTime;
-            return view.GetPortraitTexture();
+            if (string.IsNullOrWhiteSpace(identity) || PortraitCache == null) return null;
+            string key = identity.Trim().ToLowerInvariant();
+            // The opening's infant has no future-age UI portrait.
+            if (Chronicle != null && !Chronicle.IsComplete && Chronicle.CurrentQuest.IsPrologue
+                && (key == "jesus" || key == "jesus-child" || key == "jesus-adult")) return null;
+            return PortraitCache.GetIllustratedPortrait(key, useAdult);
         }
 
         GospelNprCharacterView FindCharacterView(string identity, bool useAdult)
@@ -495,7 +497,7 @@ namespace PathOfDawn.Presentation
                 if (speakingView != null) speakingView.SetSpeaking(false);
                 speakingView = current;
             }
-            if (speakingView != null) speakingView.SetSpeaking(true);
+            if (speakingView != null) speakingView.SetSpeaking(true, Chronicle.StoryVoiceKey);
         }
 
         void StopSpeakingModel()

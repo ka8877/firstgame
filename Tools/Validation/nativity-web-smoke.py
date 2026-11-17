@@ -79,7 +79,8 @@ LIVING_REVISIONS = {"FantasyCards": "fm-classic-ui-2026-11-10", "PathOfDawn": "g
 CLIENT_MOTION_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-character-motion-2026-11-11"}
 GOSPEL_NPR_REVISIONS = {"FantasyCards": "fm-client-match-2026-11-11", "PathOfDawn": "gospel-npr-2026-11-11"}
 CLASSIC_NPR_REVISIONS = {"FantasyCards": "fm-classic-library-2026-11-16", "PathOfDawn": "gospel-npr-polish-2026-11-16"}
-CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values(), *GOSPEL_NPR_REVISIONS.values())
+SHARP_ILLUSTRATION_REVISIONS = {"FantasyCards": "fm-sharp-client-2026-11-17", "PathOfDawn": "gospel-illustrated-anime-2026-11-17"}
+CURRENT_GUARDED_REVISIONS = (*RENEWAL_REVISIONS.values(), *QUEST_REVISIONS.values(), *CANON_REVISIONS.values(), *LIVING_REVISIONS.values(), *CLIENT_MOTION_REVISIONS.values(), *GOSPEL_NPR_REVISIONS.values(), *SHARP_ILLUSTRATION_REVISIONS.values())
 RESTORATION_REVISIONS = {"FantasyCards": "fm-restoration-2026-10-27", "PathOfDawn": "gospel-toon-2026-10-27"}
 ARCANA_REVISIONS = {"FantasyCards": "fm-arcana-2026-10-27", "PathOfDawn": "gospel-authored-2026-10-27"}
 REQUIRED_CHECKPOINTS = {
@@ -212,12 +213,17 @@ class JourneySmoke:
         source_files = [Path(__file__),Path(BASE.__file__),Path(PROVIDER_ERRORS.__file__),Path(LOCAL_ERRORS.__file__),
                         ROOT/"Tools/Validation/webaudio-observer.js",ROOT/"Tools/Validation/fm-local-media-observer.js",
                         ROOT/"Tools/Environment/assert-runtime-idle.py",Path(NARRATION.__file__),args.plan]
-        if args.release_profile in ('gospel-npr', 'classic-npr'):
-            from LivingRpgClassic import profile as npr_release
+        if args.release_profile in ('gospel-npr', 'classic-npr', 'sharp-illustration'):
+            import release_profiles as npr_release
             source_files += list(npr_release.EXTRA_SOURCE_FILES) + [npr_release.SOURCE]
+            if npr_release.REGISTRY_SOURCE != npr_release.SOURCE:
+                source_files.append(npr_release.REGISTRY_SOURCE)
             if args.preserved_card_record is not None:
                 source_files.append(args.preserved_card_record)
             self.report['evidenceRole'] = plan.get('evidenceRole')
+        if args.release_profile == 'sharp-illustration':
+            source_files.append(ROOT / 'Tools/Validation/SharpIllustration/clarity.py')
+            self.report['renderingClarity'] = {'requestedDeviceScaleFactor': args.device_scale_factor, 'samples': []}
         for source in source_files:
             target=self.output/"RecordedHarness"/source.relative_to(ROOT)
             target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(source.read_bytes())
@@ -278,6 +284,22 @@ class JourneySmoke:
         self.report["browserInputCapabilities"] = capabilities
         if self.args.profile == "mobile-landscape":
             self.check(capabilities["maxTouchPoints"] > 0 and capabilities["coarse"], "Actual touch browser context", capabilities)
+        self.observe_sharp_clarity('loaded')
+
+    def observe_sharp_clarity(self, reason, checkpoint=None):
+        if self.args.release_profile != 'sharp-illustration':
+            return
+        from SharpIllustration.clarity import observe
+        from SharpIllustration.contract import require_clarity_sample
+        sample = observe(self.page, navigation=self.navigation, reason=reason, checkpoint=checkpoint)
+        sample['checkedUtc'] = now()
+        self.report['renderingClarity']['samples'].append(sample)
+        self.persist()
+        try:
+            require_clarity_sample(sample, self.args.device_scale_factor)
+        except ValueError:
+            self.check(False, 'Actual shipping canvas backing/drawing buffer honors executing DPR', sample)
+        self.check(True, 'Actual shipping canvas backing/drawing buffer honors executing DPR', sample)
 
     def canvas_box(self):
         """Read ordinary DOM geometry once per unchanged shipping canvas."""
@@ -351,23 +373,24 @@ class JourneySmoke:
 
     def screenshot(self, name):
         path = self.output / (name + ".png")
+        self.observe_sharp_clarity('capture-before', checkpoint=name)
         if name.startswith("jump-air"):
             # Reuse the already captured canvas bounds. Playwright screenshot
             # preparation can span an entire real-time jump on a software GPU.
-            # CDP reads original compositor pixels without font/layout waits.
+            # A clipped page capture avoids element-stability waits while
+            # retaining the primary session's executing device-pixel scale.
             if self.report["revision"] in CURRENT_GUARDED_REVISIONS:
                 box = self.canvas_box()
             else:
                 box = next(shot["canvas"] for shot in reversed(self.report["screenshots"])
                            if shot["name"] == "temple-idle")
-            session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
             try:
-                capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
-                    "captureBeyondViewport": False, "clip": {**box, "scale": 1}})
-                path.write_bytes(base64.b64decode(capture["data"]))
+                # Playwright owns the context's DPR emulation on its primary
+                # session. A capture on a separate raw CDP session can reset
+                # mobile DPR to the display default in Chromium154.
+                self.page.screenshot(path=str(path), clip=box, scale="device",
+                                     caret="initial", animations="allow", timeout=30000)
             finally:
-                if session is not self.raw_capture_session:
-                    session.detach()
                 for key in reversed(self.capture_keys):
                     self.page.keyboard.up(key)
                 if self.capture_keys:
@@ -377,17 +400,14 @@ class JourneySmoke:
         elif self.args.game == "PathOfDawn":
             # A software-rendered 3D frame can miss Playwright's two-frame
             # element-stability wait. Capture the actual compositor PNG at the
-            # same measured full-canvas bounds, without font/layout alteration.
+            # same measured full-canvas bounds, with animations/caret intact.
             box = self.canvas_box()
             if not box or box["width"] <= 0 or box["height"] <= 0:
                 raise AssertionError("No visible Gospel canvas for original compositor capture")
-            session = self.raw_capture_session or self.page.context.new_cdp_session(self.page)
             try:
-                capture = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True,
-                    "captureBeyondViewport": False, "clip": {**box, "scale": 1}})
-                path.write_bytes(base64.b64decode(capture["data"]))
+                self.page.screenshot(path=str(path), clip=box, scale="device",
+                                     caret="initial", animations="allow", timeout=30000)
             finally:
-                if session is not self.raw_capture_session: session.detach()
                 # A requested movement capture must release its ordinary keys
                 # for every Gospel original, not only jump-air names.
                 for key in reversed(self.capture_keys):
@@ -399,14 +419,19 @@ class JourneySmoke:
         else:
             box = self.canvas_box()
             self.page.locator("#unity-canvas").screenshot(path=str(path), timeout=30000)
+        self.observe_sharp_clarity('capture-after', checkpoint=name)
         with Image.open(path) as pixels:
             stat = ImageStat.Stat(pixels.convert("RGB"))
             shot = {"name": name, "path": str(path.relative_to(ROOT)), "sha256": digest(path),
                     "size": list(pixels.size), "channelStddev": stat.stddev,
                     "canvas": box, "navigation": self.navigation,
-                    "captureKind": "original-browser-canvas-cdp" if self.args.game == "PathOfDawn" else "original-browser-canvas", "capturedUtc": now()}
+                    "captureKind": "original-browser-canvas-playwright-clip" if self.args.game == "PathOfDawn" else "original-browser-canvas", "capturedUtc": now()}
         self.report["screenshots"].append(shot)
         self.persist()
+        if self.args.release_profile == 'sharp-illustration':
+            self.check(all(abs(shot['size'][index] - box[axis] * self.args.device_scale_factor) <= 2
+                           for index, axis in enumerate(('width', 'height'))),
+                       'Original PNG dimensions honor actual executing CSS and DPR: ' + name, shot)
         self.check(min(shot["channelStddev"]) > 5, "Original capture contains nonblank scene pixels: " + name, shot)
         return shot
 
@@ -822,6 +847,7 @@ class JourneySmoke:
         # never grants review approval; staging requires Root's exact hashes.
         originals = list(self.pending_compositor_frames)
         self.pending_compositor_frames = []
+        self.observe_sharp_clarity('checkpoint', checkpoint=step['name'])
         shot = self.screenshot(step['name'])
         self.report['checkpoints'].append({'name': step['name'], 'expected': step['expected'],
             'original': shot, 'transientOriginals': originals,
@@ -881,7 +907,7 @@ class JourneySmoke:
         snapshots = self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", window_ms)
         local_media = self.modern and self.args.game == "FantasyCards"
         minimum_duration = 30
-        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards']):
+        if local_media and self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards'], SHARP_ILLUSTRATION_REVISIONS['FantasyCards']):
             # The verified publisher excerpts are18.53/19.55s, not the earlier
             # invented60s loops. Their exact URLs, looping source and advancing
             # isolated PCM still have to pass the normal source checks below.
@@ -892,7 +918,7 @@ class JourneySmoke:
         # Keep every sample and every predicate. A busy software renderer can
         # produce fewer than six observations in eight seconds; extend passive
         # acquisition, bounded to 24 requested seconds, rather than infer sound.
-        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards'])) and label not in ("before-first-gesture", "muted"):
+        if not label.startswith('narration-') and self.modern and (self.args.game == "PathOfDawn" or self.report['revision'] in ('fm-fidelity-2026-10-27', 'fm-detail-2026-10-27', 'fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards'], SHARP_ILLUSTRATION_REVISIONS['FantasyCards'])) and label not in ("before-first-gesture", "muted"):
             while summary["sampleCount"] < 6 and sum(acquisition_windows) < 24000:
                 snapshots.extend(self.page.evaluate("ms => window.__firstGameAudioEvidence.sampleWindow(ms)", 4000))
                 acquisition_windows.append(4000)
@@ -903,7 +929,7 @@ class JourneySmoke:
         evidence = {k: v for k, v in summary.items() if k != "frames"}
         evidence.update(label=label, rawEvidence=path.name, sha256=digest(path), navigation=self.navigation,
                         startedEpochMs=started_epoch_ms, finishedEpochMs=time.time() * 1000)
-        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards']):
+        if local_media and self.report['revision'] in ('fm-arcana-2026-10-27', 'fm-restoration-2026-10-27', 'fm-polish-2026-10-29', 'fm-chronicle-2026-10-29', 'fm-nativity-2026-11-02', CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards'], SHARP_ILLUSTRATION_REVISIONS['FantasyCards']):
             evidence["rolePlayback"] = self.page.evaluate("""() => ({
                 state: window.FirstGameLocalMusic.getState(),
                 players: window.FirstGameLocalMusic.getDiagnostics(),
@@ -930,7 +956,7 @@ class JourneySmoke:
         files = []
         expected_files = list(self.report["buildFingerprint"]["files"])
         image_files = [row for row in expected_files if row['file'].startswith('StreamingAssets/Cards/')]
-        if self.report['revision'] in (CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards']):
+        if self.report['revision'] in (CANON_REVISIONS['FantasyCards'], LIVING_REVISIONS['FantasyCards'], CLIENT_MOTION_REVISIONS['FantasyCards'], CLASSIC_NPR_REVISIONS['FantasyCards'], SHARP_ILLUSTRATION_REVISIONS['FantasyCards']):
             # The current generic full-site GET audit supplies every card image
             # byte. Canon does not inherit the historical Nativity/G2 delta seal.
             from canon_release_evidence import OUT as canon_out, STAGE as canon_stage, verify_portal_review
@@ -1167,6 +1193,10 @@ class JourneySmoke:
                 elif kind == "reload": self.loaded(reload=True)
                 elif kind == "wait": self.page.wait_for_timeout(step["ms"])
                 else: self.input(step)
+            if self.args.release_profile == 'sharp-illustration':
+                from SharpIllustration.contract import require_browser_clarity
+                kind = 'public' if self.args.base_url else 'desktop' if self.args.profile == 'desktop' else 'mobile'
+                require_browser_clarity(self.report, self.plan, expected_kind=kind)
             if self.args.game == 'PathOfDawn':
                 self.report['narrationEvidence'] = NARRATION.narration_evidence(self.report['console'])
                 self.report['harness']['narrationClassifier'] = {'file':str(Path(NARRATION.__file__).relative_to(ROOT)), 'sha256':digest(NARRATION.__file__)}
@@ -1210,7 +1240,7 @@ def main():
     parser.add_argument("--build-root", type=Path, default=ROOT / "Artifacts/Builds")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--plan", type=Path, default=Path(__file__).with_name("revival-smoke-plans.json"))
-    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion", "gospel-npr", "classic-npr"), default="renewal")
+    parser.add_argument("--release-profile", choices=("modern", "fm-fidelity", "detail", "arcana", "restoration", "renewal", "nativity", "canon-art", "living-classic", "client-motion", "gospel-npr", "classic-npr", "sharp-illustration"), default="renewal")
     parser.add_argument("--base-url")
     parser.add_argument("--profile", choices=("desktop", "mobile-landscape"), default="desktop")
     parser.add_argument("--renderer", choices=("x11-mesa", "swiftshader"), default="x11-mesa")
@@ -1219,8 +1249,9 @@ def main():
     parser.add_argument("--review-timeout", type=int, default=1200)
     parser.add_argument("--provider-timeout", type=int, default=15)
     parser.add_argument("--require-provider-audio", action="store_true", help="Fail the suite if external SoundCloud playback cannot be verified")
+    parser.add_argument("--device-scale-factor", type=int, choices=(1, 2), default=1)
     args = parser.parse_args()
-    if args.release_profile in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr', 'classic-npr') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
+    if args.release_profile in ('canon-art', 'living-classic', 'client-motion', 'gospel-npr', 'classic-npr', 'sharp-illustration') and os.environ.get('FIRSTGAME_RELEASE_PROFILE', 'canon-art') != args.release_profile:
         parser.error('The selected current release profile must match its explicit environment and evidence roots')
     args.output = authorize_output(args.output)
     args.build_root = args.build_root.resolve()
@@ -1241,7 +1272,7 @@ def main():
     plan = plans[args.game]
     checkpoints = {s.get("name") for s in plan["steps"] if s["type"] == "checkpoint"}
     modern = plan.get("suite") == "modern-real-input-v1"
-    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS, "gospel-npr": GOSPEL_NPR_REVISIONS, "classic-npr": CLASSIC_NPR_REVISIONS}[args.release_profile]
+    expected_revisions = {"modern": MODERN_REVISIONS, "fm-fidelity": FIDELITY_REVISIONS, "detail": DETAIL_REVISIONS, "arcana": ARCANA_REVISIONS, "restoration": RESTORATION_REVISIONS, "renewal": RENEWAL_REVISIONS, "nativity": QUEST_REVISIONS, "canon-art": CANON_REVISIONS, "living-classic": LIVING_REVISIONS, "client-motion": CLIENT_MOTION_REVISIONS, "gospel-npr": GOSPEL_NPR_REVISIONS, "classic-npr": CLASSIC_NPR_REVISIONS, "sharp-illustration": SHARP_ILLUSTRATION_REVISIONS}[args.release_profile]
     if args.release_profile == "fm-fidelity" and args.game != "FantasyCards":
         parser.error("The fidelity suite preserves Gospel without re-executing it")
     if args.release_profile == 'gospel-npr':
@@ -1254,6 +1285,14 @@ def main():
         from ClassicNpr.contract import require_browser_plan
         expected_kind = 'public' if args.base_url else 'desktop' if args.profile == 'desktop' else 'mobile'
         require_browser_plan(plan, args.game, expected_kind=expected_kind)
+    if args.release_profile == 'sharp-illustration':
+        from SharpIllustration.contract import require_browser_plan, require_clarity_plan
+        expected_kind = 'public' if args.base_url else 'desktop' if args.profile == 'desktop' else 'mobile'
+        require_browser_plan(plan, args.game, expected_kind=expected_kind)
+        if args.device_scale_factor != require_clarity_plan(plan, expected_kind):
+            parser.error('Actual requested browser DPR differs from the admitted current plan')
+    elif args.device_scale_factor != 1:
+        parser.error('Historical modes retain their exact DPR1 browser behavior')
     if modern and plan.get("revision") != expected_revisions[args.game]:
         parser.error("The plan revision differs from the explicit current release profile")
     required = set(plan.get("requiredCheckpoints", [])) if modern else REQUIRED_CHECKPOINTS[args.game]
@@ -1282,7 +1321,7 @@ def main():
             try:
                 mobile = args.profile == "mobile-landscape"
                 options = {"viewport": {"width": 844 if mobile else 1280, "height": 390 if mobile else 720},
-                           "device_scale_factor": 1, "has_touch": mobile, "is_mobile": mobile}
+                           "device_scale_factor": args.device_scale_factor, "has_touch": mobile, "is_mobile": mobile}
                 if mobile:
                     options["user_agent"] = "Mozilla/5.0 (Linux; Android 14; Mobile Smoke) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
                 context = browser.new_context(**options)

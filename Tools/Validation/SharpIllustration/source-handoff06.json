@@ -1,0 +1,35 @@
+{
+  "status": "source-only-frozen-awaiting-Root-execution",
+  "scope": "Exact historical Card Web01 preservation and removal only of its fully duplicated owned temporary build",
+  "files": [
+    {
+      "file": "Tools/Validation/SharpIllustration/preserve-card-web01.py",
+      "bytes": 28305,
+      "sha256": "d7577f38670ee4af8d862fbc531eec57dbbfe73592a8a5b9cddeb08ea6d9a0ea"
+    },
+    {
+      "file": "Tools/Validation/SharpIllustration/preserve-card-web01.md",
+      "bytes": 4144,
+      "sha256": "0f3ad1ac0dceef14eeab2e1e2f37887e71ed30bd034935e5ff227194e22bbddb"
+    }
+  ],
+  "sourceReview": {
+    "reviewer": "/root/classic_npr_validation_20261116/static_profile_peer",
+    "kind": "independent-read-only-source-review",
+    "finding": "No concrete blocker after whole inventory, historical provenance, retained source inode/group protection, file/directory fsync, signal handling, per-unlink live lease controls and exact new destination modes were reviewed.",
+    "finalAuthorizedFormattingOnlyChange": "Root requested compact lossless JSON serialization for newly generated helper ledgers; separators replace indent without changing any fields or existing files."
+  },
+  "historicalIdentity": {
+    "game": "FantasyCards",
+    "webAttempt": "Web01",
+    "nativeAttempt": "Native03",
+    "sourceFingerprint": "7a5fca9611d0d24ec492b705b7b549c0baa52964364a35baf5283cf3f76eafbc",
+    "declaredFiles": 15367,
+    "declaredLogicalBytes": 877559937
+  },
+  "limits": [
+    "Historical metadata was read; no product hash, helper, test, Git, network, runtime, production storage operation or cleanup was executed during authoring.",
+    "Root alone must authenticate all actual current and historical receipts/bytes and review execution before use.",
+    "No source, original proof, Native, raw path or historical pass is overwritten or relabeled; no current repaired-source result or approval is created."
+  ]
+}

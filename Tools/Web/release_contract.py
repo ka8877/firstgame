@@ -165,7 +165,21 @@ CLASSIC_NPR = {
 }
 
 
+SHARP_ILLUSTRATION = {
+    'name': 'sharp-illustration',
+    'revisions': {'FantasyCards': 'fm-sharp-client-2026-11-17',
+                  'PathOfDawn': 'gospel-illustrated-anime-2026-11-17'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {game: 'Artifacts/Validation/SharpIllustration-2026-11-17'
+                    for game in ('FantasyCards', 'PathOfDawn')},
+    'preservedGames': [],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'sharp-illustration':
+        return SHARP_ILLUSTRATION
     if name == 'classic-npr':
         return CLASSIC_NPR
     if name == 'gospel-npr':
