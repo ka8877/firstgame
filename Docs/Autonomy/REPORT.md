@@ -1,3 +1,13 @@
+<!-- sharp-illustration-current -->
+## 승인된 검증 자료 반영 진행 — 2026-11-18 KST
+
+제품 main `9a24aecf…`·공개 `94f50757…`의 개선본을 실행할 수 있습니다. [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757) · [예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757). PC·모바일·공개6회에서2,833검사/0실패·561PNG/442Root 원본 검토와 전체 FinalSeal을 완료했습니다. 실제 실행 소유자와 과거 실패 이력은 유지합니다.
+
+사용자가 공개 자료 저장과 main 자동반영을 명시적으로 승인해 새 고정 소유권으로 재개했습니다. `ffd6854f…` 검증기·문서를 전송했고 [PR #13](https://github.com/ka8877/firstgame/pull/13)의 push와 PR CI 두 workflow가 각각 모두 통과했습니다. Checkpoint38,883원본/30조각948,094,355B와44,345,989B index는 REST API 크기 제한422로 일반 Git 전송을 진행합니다. CI는 테스트 조건을 유지하면서 필요한 소스만 checkout하도록 개선했습니다. 체크포인트 전송·최종 CI·main 병합·내구 Closure는 아직 완료로 표시하지 않습니다.
+
+현재 실제 소유권은 `SharpIllustrationApprovedExport-2026-11-18`, owner`800d28e2…`/lock`56a539c9…`, 11월18일10:21–16:21 KST입니다. 이전 Finish는 정상 해제된 역사이며 새 소유로 바꾸지 않습니다. GitHub 인증은 정상입니다. 원작 전체 재현·원신급 품질은 남은 목표이며 판마 원화/작은전투UI와 예수님 의상/머리·NPC겹침/카메라가림을 계속 개선해야 합니다. private9 payload는 공개하지 않으며 다음 Unity 전 정확한 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`가 필요합니다. 아래는 각 작성 당시 이력입니다.
+<!-- /sharp-illustration-current -->
+
 ## SharpIllustration 진행 중 — 2026-11-17
 
 **최종 검증기의 로컬4회를 모두 완료해 현재4/6승인입니다.** CardPC03는464검사·91PNG·64+9Root, GospelPC02는498·100·74Root, GospelMobile03는435·87·60+2Root, 새 Release의 CardMobile02는490·97·63+12Root입니다. 매회0거짓·오디오4/실제 재접속2·nav0/1/2·inner/outer4개 event0/빈 후손과 Root 검토를 확인했습니다. Native11/18·두 Web은 유지합니다. 실제 CardPC55장/25종과 모바일55장/27종은 각각200SP/50덱을 유지한 독립 RNG 결과이며 서로의 이력을 덮어쓰지 않습니다. 이전 성공/실패/미완료도 보존했고 main/stage/새 공개 및 공개2회는 아직 대기입니다.

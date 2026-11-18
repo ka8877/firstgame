@@ -13,6 +13,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /Tools/Autonomy/cycle_guard.py
+            /Tools/Autonomy/test_cycle_guard.py
+            /Tools/Validation/CoreValidation.csproj
+            /Tools/Validation/Directory.Build.props
+            /Tools/Validation/packages.lock.json
+            /Tools/Validation/run-core-tests.sh
+            /Tools/Validation/Tests/
+            /Tools/Validation/fm-local-media-errors.py
+            /Tools/Validation/test-fm-local-media-errors.py
+            /Tools/Validation/test_fm_public_reload_ranges.py
+            /Tools/Validation/test_fm_sharp_media_admission.py
+            /Tools/Validation/Fixtures/
+            /Games/FantasyCards/Assets/Game/Core/
+            /Games/FantasyCards/Assets/Game/Tests/BattleEngineTests.cs
+            /Games/FantasyCards/Assets/Shared/SafeSaveService.cs
+            /Games/PathOfDawn/Assets/Game/Core/
+            /Games/PathOfDawn/Assets/Game/Tests/EditMode/NarrativeTests.cs
+            /Games/PathOfDawn/Assets/Game/Resources/Story/galilee.ink
+            /Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/InkLibs/InkCompiler/
+            /Games/PathOfDawn/Packages/com.inkle.ink-unity-integration/InkLibs/InkRuntime/
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.426
@@ -20,6 +45,8 @@ jobs:
         run: python3 -m unittest discover -s Tools/Autonomy -p test_cycle_guard.py -v
       - name: Test strict public reload audio evidence
         run: python3 -m unittest discover -s Tools/Validation -p test_fm_public_reload_ranges.py -v
+      - name: Test Sharp revision media evidence
+        run: python3 Tools/Validation/test_fm_sharp_media_admission.py
       - name: Test actual C# game rules, Ink and portable saves
         run: bash Tools/Validation/run-core-tests.sh
       - uses: actions/upload-artifact@v4
