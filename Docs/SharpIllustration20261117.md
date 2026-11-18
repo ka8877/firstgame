@@ -1,11 +1,11 @@
 <!-- sharp-illustration-current -->
-## Sharp 실제 결과와 남은 반영 — 2026-11-18 KST
+## Sharp 실제 결과와 자료 반영 — 2026-11-18 KST
 
-제품 main `9a24aecf…`·공개 `94f50757…`을 반영했습니다. [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757) · [예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757). 현재06755/e1cb의 PC·모바일·공개6회에서2,833검사/0실패·561PNG/442Root 직접 원본 검토, 매회 실제4PCM/재접속2회와 전체 FinalSeal01을 완료했습니다. PC2의 실제Archive소유와 나머지4회의Finish소유, 과거 실패는 그대로 유지합니다.
+제품 main `9a24aecf…`·공개 `94f50757…`의 개선본을 실행할 수 있습니다. [판마 실행](https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757) · [예수님의 길 실행](https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757). PC·모바일·공개6회에서2,833검사/0실패·561PNG/442Root 원본 검토와 전체 FinalSeal을 완료했습니다. 실제 실행 소유자와 과거 실패 이력은 유지합니다.
 
-로컬 Checkpoint38,883원본/30조각948,094,355B(index44,345,989B)의 전체 읽기 검증과 현재토큰·개인키/경로 검사를 완료했습니다. 준비한 코드·workflow·문서11개 약1.1MB도 검사했지만, 자동 승인 검토가 해당 자료를 `ka8877/firstgame` 공개 저장소로 보내는 구체적인 승인이 없다는 이유로 업로드를 거절했습니다. 재검토도 거절됐으며 두 payload의 업로드는 시작되지 않았습니다. 로컬 커밋 준비와 원본 보관을 유지하고, 새로운 원격 커밋·CI·main 반영·내구 Closure는 미완료로 기록합니다. GitHub 인증과 기존 제품 배포는 정상이며 만료 device code 입력은 불필요합니다.
+사용자가 공개 자료 저장과 main 자동반영을 명시적으로 승인해 새 고정 소유권으로 재개했습니다. `ffd6854f…` 검증기·문서를 전송했고 [PR #13](https://github.com/ka8877/firstgame/pull/13)의 push와 PR CI 두 workflow가 각각 모두 통과했습니다. Checkpoint38,883원본/30조각948,094,355B와44,345,989B index는 REST API 크기 제한422로 일반 Git 전송을 진행합니다. CI는 테스트 조건을 유지하면서 필요한 소스만 checkout하도록 개선했습니다. 체크포인트 전송·최종 CI·main 병합·내구 Closure는 아직 완료로 표시하지 않습니다.
 
-독립 FinalIdle의4개 event0/빈 소유 후손을 확인하고 11월18일 02:40 KST에 자기 lease를 정상 해제한 뒤 available을 관측했습니다. 현재 소유 runtime이나24시간 자동 개발은 없습니다. 명시적인 공개 저장 승인 뒤 최신 로컬/원격을 확인하고 새 고정 소유권으로 재개합니다. 승인받은 main 자동반영 방침은 유지합니다. 원작 전체 재현·원신급 품질은 아직 목표이며 판마 원화/작은전투UI, 예수님 의상/머리·NPC겹침/카메라가림이 남습니다. private9 payload는 공개하지 않으며 다음Unity전 정확한 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`가 필요합니다. 아래는 각 작성 당시 이력입니다.
+현재 실제 소유권은 `SharpIllustrationApprovedExport-2026-11-18`, owner`800d28e2…`/lock`56a539c9…`, 11월18일10:21–16:21 KST입니다. 이전 Finish는 정상 해제된 역사이며 새 소유로 바꾸지 않습니다. GitHub 인증은 정상입니다. 원작 전체 재현·원신급 품질은 남은 목표이며 판마 원화/작은전투UI와 예수님 의상/머리·NPC겹침/카메라가림을 계속 개선해야 합니다. private9 payload는 공개하지 않으며 다음 Unity 전 정확한 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`가 필요합니다. 아래는 각 작성 당시 이력입니다.
 <!-- /sharp-illustration-current -->
 
 # SharpIllustration — 판마 선명도·일러스트와 V5 인물 의상
