@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-18T02:18:28.038291+00:00",
+  "updatedUtc": "2026-11-18T02:46:46.883652+00:00",
+  "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_04": "2026-11-18T02:18:28.038291+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_03": "2026-11-17T17:45:12.973307+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_02": "2026-11-17T17:17:53.307294+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_01": "2026-11-17T12:50:55+00:00",
@@ -17,6 +18,136 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
+    "id": "SharpIllustration-2026-11-17",
+    "status": "checkpoint-main-verified-normal-release-and-closure-recorded",
+    "currentRunId": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "releaseProfile": "sharp-illustration",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/SharpIllustration-2026-11-17",
+      "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
+      "stageRoot": "Artifacts/SharpIllustrationWebPlaytest",
+      "buildRoot": "/tmp/firstgame-sharp-illustration-20261117-builds"
+    },
+    "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "executionOwner": "/root",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "leaseState": "released",
+    "leaseOwner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "leaseCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "startedUtc": "2026-11-17T13:25:10.174100Z",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "deadlineSeoul": "2026-11-18T04:25:10.174100+09:00",
+    "continuedFrom": "Archive completed independent four-event final idle, normal own release and separate available before this genuinely new fixed lease. Original Sharp/Resume/Release/Archive ownership and all failures remain historical.",
+    "browserCases": [
+      {
+        "game": "FantasyCards",
+        "profile": "Desktop720",
+        "attempt": "Browser04",
+        "checks": 472,
+        "failed": 0,
+        "png": 93,
+        "directlyViewedRootOriginals": 80,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "Mobile844",
+        "attempt": "Browser03",
+        "checks": 482,
+        "failed": 0,
+        "png": 95,
+        "directlyViewedRootOriginals": 82,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "FantasyCards",
+        "profile": "PublicMobile844",
+        "attempt": "Browser02",
+        "checks": 498,
+        "failed": 0,
+        "png": 97,
+        "directlyViewedRootOriginals": 76,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Desktop720",
+        "attempt": "Browser03",
+        "checks": 506,
+        "failed": 0,
+        "png": 102,
+        "directlyViewedRootOriginals": 78,
+        "ownerCycle": "SharpIllustrationArchive-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "Mobile844",
+        "attempt": "Browser04",
+        "checks": 455,
+        "failed": 0,
+        "png": 92,
+        "directlyViewedRootOriginals": 64,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      },
+      {
+        "game": "PathOfDawn",
+        "profile": "PublicMobile844",
+        "attempt": "Browser01",
+        "checks": 420,
+        "failed": 0,
+        "png": 82,
+        "directlyViewedRootOriginals": 62,
+        "ownerCycle": "SharpIllustrationEvidenceFinish-2026-11-17"
+      }
+    ],
+    "browserTotal": {
+      "cases": 6,
+      "checks": 2833,
+      "failed": 0,
+      "png": 561,
+      "directlyViewedRootOriginals": 442,
+      "lastRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+      "scope": "Chromium/software-rendered PC and emulated landscape touch, four actual PCM segments and two real reloads per case; not physical-phone FPS or user artistic approval."
+    },
+    "fullSealWrapper": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/CommandRuns/FinalSeal01/summary.json",
+      "bytes": 11341,
+      "sha256": "4eb30869b14b18f104e7fe2876c727e28a66fa5ba796bb31d21ac1e0f8e43bad"
+    },
+    "archivalFacts": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/Facts01.facts.json",
+      "bytes": 5507,
+      "sha256": "295830cc6131c6d98361e15d3df9dcbe36c207818db91d29b8ad212d1997e23f"
+    },
+    "futureUnityRule": "Before ANY Unity run restore all exact private9 Burst bytes/SHA/mode/UID/GID/mtimeNs, then ForceSynchronousImport | ForceUpdate for BOTH projects. Private backup payload must not enter Git, public archives or deployment. No inode/ctime restoration is claimed.",
+    "executionState": "normally-released-no-owned-runtime",
+    "releasedUtc": "2026-11-18T02:44:20.033278+00:00",
+    "localStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18",
+    "owner": "800d28e2-9c48-47af-a71a-ded100102759",
+    "lockCommit": "56a539c9355208452d47bfdbe64932628103d34f",
+    "closure": {
+      "index": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/index.json",
+        "bytes": 1505323,
+        "sha256": "5e75e7f08a44c27df06c7346f6140e9682a7f1eb98a5f6b4a4bf9d5d91f7461f"
+      },
+      "archive": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/late-originals.tar.gz",
+        "bytes": 1291981,
+        "sha256": "492b9bc89a9a26f21bb707b4cb11dba466d89b88356b3af7956f95be6e53602c"
+      },
+      "baselineFileCount": 38883,
+      "lateOriginalCount": 2327,
+      "temporaryStoreIsDurableBacking": false
+    }
+  },
+  "historicalActiveWorkBeforeSharpEvidenceFinish20261117_04": {
     "id": "SharpIllustration-2026-11-17",
     "status": "approved-public-evidence-export-in-progress",
     "currentRunId": "SharpIllustrationEvidenceFinish-2026-11-17",
@@ -1326,6 +1457,19 @@
     "scope": "Known current published delivery; pending fresh gameplay/seal is stated separately from the prior completely sealed technical release."
   },
   "mainControl": {
+    "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17",
+    "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "currentOwner": null,
+    "currentLockCommit": null,
+    "productMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "pendingVerifierDocsCheckpointD1": false,
+    "currentOwnership": false,
+    "lastOwner": "800d28e2-9c48-47af-a71a-ded100102759",
+    "lastLockCommit": "56a539c9355208452d47bfdbe64932628103d34f"
+  },
+  "historicalMainControlBeforeSharpEvidenceFinish20261117_04": {
     "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17",
     "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
     "currentOwner": "800d28e2-9c48-47af-a71a-ded100102759",
@@ -4115,6 +4259,18 @@
   },
   "nextRun": {
     "id": "SharpIllustrationEvidenceFinish-2026-11-17",
+    "status": "current-milestone-complete-next-visual-improvement",
+    "tasks": [
+      "Continue original-reference FantasyCards art/sharper small battle/deck/catalogue UI with multiplayer disabled.",
+      "Improve Gospel character silhouette/garments/hair, illustrated portraits, NPC movement/overlap and camera occlusion; Genshin-level quality remains a goal.",
+      "Before Unity restore exact private9 bytes/metadata from private backup and synchronously force-import/update BOTH projects.",
+      "Preserve all old execution owners and failures. Future normal main integration and publication are user-authorized; do not repeat approval questions for the same scope."
+    ],
+    "automaticMainIntegration": "Already authorized; no repeat permission or expired-code request.",
+    "futureExecution": "A later runtime cycle requires fresh actual inspection and genuinely new fixed ownership after normal release; no renewal or automatic background continuation."
+  },
+  "historicalNextRunBeforeSharpEvidenceFinish20261117_04": {
+    "id": "SharpIllustrationEvidenceFinish-2026-11-17",
     "status": "approved-export-completion-in-progress",
     "tasks": [
       "Complete approved checkpoint native transfer with full raw blob GET, then exact CI and normal PR13/main merge.",
@@ -4225,6 +4381,43 @@
     ]
   },
   "execution": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage; source agents edit only assigned Draft files.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "lockStatus": "normally-released-available-observed",
+    "leaseRecord": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
+    "owner": "8e3bbafd-3c20-44a5-b440-7078734b97aa",
+    "lockCommit": "3542ba5d8eda814840e22cf8bf912b50de86bcc5",
+    "deadlineUtc": "2026-11-17T19:25:10.174100Z",
+    "childCommandLimitSeconds": 3600,
+    "browserOnlyCommandLimitSeconds": 5400,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "backgroundContinuationClaimed": false,
+    "nextAction": "Continue the two games visual and RPG/original-client goals in a new genuinely acquired fixed cycle; normal main integration remains authorized.",
+    "currentOwnership": false,
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "approvedExportConsent": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/Release/explicit-user-export-consent01.json",
+      "bytes": 1549,
+      "sha256": "d78fd999ab59a401180138ee2dd81bbbf6b219a284eb0bf6dad3710539e9f410"
+    },
+    "finalIdle": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/CommandRuns/FinalIdle01/summary.json",
+      "bytes": 11290,
+      "sha256": "abeb22d3d12bc0095d7b01ba0aefe57d21caea552d51bf14d4e9ec2088e5f5b7"
+    },
+    "normalRelease": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/Release/normal-release01.json",
+      "bytes": 813,
+      "sha256": "d79555e33959ce0f7ca17772ce36340fed3e3a9c0ed651f6a26176db9f5a0e62"
+    }
+  },
+  "historicalExecutionBeforeSharpEvidenceFinish20261117_04": {
     "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage; source agents edit only assigned Draft files.",
     "guard": "Tools/Autonomy/cycle_guard.py",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
@@ -4635,6 +4828,15 @@
     }
   },
   "environment": {
+    "managedCloudObservedRunning": true,
+    "githubConnection": "Working current ka8877 authentication; expired device code is historical and no new user code/token input is required.",
+    "runtimePolicy": "Existing Native/Web/Stage and original Sharp BuildProofCurrent retained. No new Unity execution for the media-helper-only correction.",
+    "futureForceReimportRequired": true,
+    "nextUnityRule": "Restore exact private9 backup bytes and attributes before both projects' ForceSynchronousImport | ForceUpdate.",
+    "networkPolicy": "Root-owned commands, login:true and explicit additional network permission; no credentials printed.",
+    "currentConnectionStatus": "GitHub authentication works. Expired device code and REST index size422 are preserved history; ordinary native Git transfer and full raw readback succeeded."
+  },
+  "historicalEnvironmentBeforeSharpEvidenceFinish20261117_04": {
     "managedCloudObservedRunning": true,
     "githubConnection": "Working current ka8877 authentication; expired device code is historical and no new user code/token input is required.",
     "runtimePolicy": "Existing Native/Web/Stage and original Sharp BuildProofCurrent retained. No new Unity execution for the media-helper-only correction.",
@@ -6195,6 +6397,22 @@
     }
   },
   "currentDeployment": {
+    "status": "published-delivery-six-browser-cases-and-whole-release-seal-complete",
+    "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "pullRequest": "https://github.com/ka8877/firstgame/pull/12",
+    "cardUrl": "https://ka8877.github.io/firstgame/games/fantasy-cards/?v=94f50757",
+    "gospelUrl": "https://ka8877.github.io/firstgame/games/path-of-dawn/?v=94f50757",
+    "fileCountIncludingManifest": 15441,
+    "siteBytesIncludingManifest": 984067939,
+    "pagesRunId": 44046501296,
+    "publicPortal": "Portal03 full15441 finalGET200/SHA/size and Root2; actual503-to200 retry and prior failures retained.",
+    "browserCases": "Installed06755/capturee1cb current6/6,2833checks/0false,561PNG/442Root originals, actual4PCM and realreload2 per case.",
+    "finalSeal": "Finish FinalSeal01 actually passed all; all four outer events0 and owned descendants empty.",
+    "evidenceIntegration": "PR13 main 0fb2e2fd contains exact approved verifier/docs/checkpoint; D2 push/PR/main both workflows all jobs/steps passed, independent main root and all32 full raw checkpoint blobs verified. Normal own release and two-cycle late-originals closure recorded. Product M9a24/P94f remains the checked public game build.",
+    "userArtisticApprovalClaimed": false
+  },
+  "historicalCurrentDeploymentBeforeSharpEvidenceFinish20261117_04": {
     "status": "published-delivery-six-browser-cases-and-whole-release-seal-complete",
     "sourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
     "deployedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
@@ -8087,6 +8305,60 @@
     "previousPortableCheckpoint01": "Docs/Autonomy/Evidence/CanonDialogue20261109/Checkpoint01/index.json"
   },
   "mainDocumentationIntegration": {
+    "status": "verifier-checkpoint-main-verified-and-normal-closure-recorded",
+    "productMain": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedP": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "userAuthorizedAutomaticMainIntegration": true,
+    "destination": "main",
+    "installedClassifierSha256": "06755f193ff1f4292b50dc77e1c19dd3fc41cc7148c89af2348db989983dde76",
+    "trackedSharpFixturesPassed": 62,
+    "currentBrowserCasesPassed": 6,
+    "fullSealPassed": true,
+    "referencedEvidenceCommit": "9b270bdfc43df34a16297c5b2d79a9dfa8b5e318",
+    "actualCi": [
+      {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/CommandRuns/D2PushCI01/D1Metadata/result.json",
+        "bytes": 8765,
+        "sha256": "9b86a774356cca75a5b81a5d098cd0de0bbfd502a4bc4f8b303373d4777a0590"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/CommandRuns/D2PrCI01/D1Metadata/result.json",
+        "bytes": 8773,
+        "sha256": "1c31995e25c0f6fe7cda399db75aea3ca6402daa12251f92fbbde62ea440a1d1"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/CommandRuns/D2MainCI01/D1Metadata/result.json",
+        "bytes": 8636,
+        "sha256": "b7efc003c9210ed5de4de7a0e5c0c67f0f22d301ffb4e64e225d2fe24d459b47"
+      }
+    ],
+    "newVerifierMainSha": "0fb2e2fd9047d038423ba8bf9aad55e0d5ee4c73",
+    "closure": {
+      "index": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/index.json",
+        "bytes": 1505323,
+        "sha256": "5e75e7f08a44c27df06c7346f6140e9682a7f1eb98a5f6b4a4bf9d5d91f7461f"
+      },
+      "archive": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/late-originals.tar.gz",
+        "bytes": 1291981,
+        "sha256": "492b9bc89a9a26f21bb707b4cb11dba466d89b88356b3af7956f95be6e53602c"
+      },
+      "baselineFileCount": 38883,
+      "lateOriginalCount": 2327,
+      "temporaryStoreIsDurableBacking": false
+    },
+    "completionBoundary": "Null/empty fields are future actual results, never inferred from local/TMP files or blob upload.",
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "explicitExportApprovalRequired": false,
+    "pr": "https://github.com/ka8877/firstgame/pull/13",
+    "finalSaveCiAuthority": "GitHub Actions for the commit containing this closure; no self-referential future SHA or CI result is invented."
+  },
+  "historicalMainDocumentationIntegrationBeforeSharpEvidenceFinish20261117_04": {
     "status": "approved-FFD-pushed-push-and-PR-CI-passed-native-checkpoint-pending",
     "productMain": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
     "publishedP": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
@@ -11027,6 +11299,44 @@
     }
   },
   "currentSharpEvidenceFinish": {
+    "status": "approved-export-main-and-normal-closure-recorded",
+    "latestRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
+    "allPriorRawHistoryRetained": true,
+    "productRedeployRequiredForVerifierOnlyChange": false,
+    "goalActivationVerified": false,
+    "remoteUploadAttemptStarted": true,
+    "remoteUploadReviewReason": "Auto-review rejected the large validation/build checkpoint upload because specific potentially sensitive payload export to GitHub was not explicitly established. Root will inspect the actual immutable payload and complete unaffected verifier/docs work; no alternate upload bypass.",
+    "normalClosureComplete": true,
+    "normalLocalStop": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/Release/blocked-export-local-stop01.json",
+      "bytes": 3198,
+      "sha256": "3586e246f19039908f8ee296bcf7271ebfdef879a4ee22c696b935ad50151c0c"
+    },
+    "currentOwnedRuntime": false,
+    "originalFinishRemainsNormallyReleased": true,
+    "referencedCheckpoint": true,
+    "closure": {
+      "index": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/index.json",
+        "bytes": 1505323,
+        "sha256": "5e75e7f08a44c27df06c7346f6140e9682a7f1eb98a5f6b4a4bf9d5d91f7461f"
+      },
+      "archive": {
+        "file": "Docs/Autonomy/Evidence/SharpIllustration20261117/Closure01/late-originals.tar.gz",
+        "bytes": 1291981,
+        "sha256": "492b9bc89a9a26f21bb707b4cb11dba466d89b88356b3af7956f95be6e53602c"
+      },
+      "baselineFileCount": 38883,
+      "lateOriginalCount": 2327,
+      "temporaryStoreIsDurableBacking": false
+    },
+    "finalAvailableObservation": {
+      "file": "Artifacts/Validation/Autonomy/SharpIllustrationApprovedExport-2026-11-18/Release/status-after-normal-release01.json",
+      "bytes": 99,
+      "sha256": "be8a2ad2e5486227b6c1c7308820275eafd5f6addbdbff0e28f52ef06ed6322f"
+    }
+  },
+  "historicalCurrentSharpEvidenceFinishBeforeSharpEvidenceFinish20261117_03": {
     "status": "approved-separate-cycle-native-transfer-in-progress",
     "latestRootReviewUtc": "2026-11-17T16:46:32.145664+00:00",
     "allPriorRawHistoryRetained": true,
