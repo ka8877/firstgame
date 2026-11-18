@@ -1,0 +1,348 @@
+{
+  "schema": 2,
+  "settings": {
+    "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Release/HeroV110Child01.settings.json",
+    "sha256": "b205d674ac062403bde3ecbdb238f840df9656a0d3131d540a18842153e49f46",
+    "bytes": 36297
+  },
+  "bakeReport": {
+    "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/HeroChildArtistBake07/child-bake-report.json",
+    "sha256": "d537bb8e989b7319d1cd9b0b203ae367abfa07d998dc6f7cd55955b85d7727f8",
+    "bytes": 5517145
+  },
+  "sourceInspection": {
+    "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/Root/HeroChildSourceInspect01/inspection.json",
+    "sha256": "e6fb9e5f1d687ea965beb2b1ca08e6dc15ca81239e0efabda7130c9deb76db2f",
+    "bytes": 398385
+  },
+  "builderSourceSha256": "852d29d2884dfc350ea69c84e43b27075ded66b31b0477494c181ab0b991fb81",
+  "bakerSourceSha256": "0e6ff1b693afa0594f82f6862ca6d9d4f82737e2b3e8e053bc670e982fc6c01c",
+  "normalPixelsReport": {
+    "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/original-normal-pixels01.json",
+    "sha256": "161f680e93a1b6b6adef575465bfff25be973057c88f1a0dcf9ad5c6da1dcf32",
+    "bytes": 4110
+  },
+  "choices": {
+    "hairFlowMode": 0,
+    "hairUvFlow": [
+      1.0,
+      0.0
+    ],
+    "fittedEyeMaterials": [],
+    "browLinearTint": [
+      0.28,
+      0.13,
+      0.055
+    ],
+    "faceSdfEnabled": false,
+    "linen": {
+      "source": {
+        "page": "https://polyhaven.com/a/rough_linen",
+        "license": "CC0",
+        "authors": {
+          "colormass": "Photography",
+          "Rico Cilliers": "Processing"
+        },
+        "manifest": "Tools/Art/GospelAuthored/linen-source-manifest.json",
+        "diffuse": {
+          "sha256": "04897d7611d7390ddf5b2c6f7273f448dfc48341fdbd1f4f207fa30b331d7f57",
+          "bytes": 835801
+        },
+        "normal": {
+          "sha256": "e2402166d1a489f7414814e69e1836ab672aa24e30bec2d41fea356f81687e53",
+          "bytes": 916843
+        }
+      },
+      "inputs": {
+        "diffuse": {
+          "file": "/workspace/firstgame/Tools/Art/GospelVisual20261119/LinenSource01/rough_linen_diff_1k.jpg",
+          "sha256": "04897d7611d7390ddf5b2c6f7273f448dfc48341fdbd1f4f207fa30b331d7f57",
+          "bytes": 835801
+        },
+        "normal": {
+          "file": "/workspace/firstgame/Tools/Art/GospelVisual20261119/LinenSource01/rough_linen_nor_gl_1k.jpg",
+          "sha256": "e2402166d1a489f7414814e69e1836ab672aa24e30bec2d41fea356f81687e53",
+          "bytes": 916843
+        }
+      },
+      "tiling": [
+        4.0,
+        4.0
+      ],
+      "normalStrength": 0.16,
+      "affectedGeneratedRoles": [
+        "linen",
+        "facing"
+      ]
+    }
+  },
+  "materialDecisions": [
+    {
+      "exportName": "JesusChild__PeriodSandalLeather",
+      "sourceName": null,
+      "surface": "Legacy",
+      "generatedRole": "leather",
+      "linenMapsApplied": false,
+      "textureKey": "",
+      "normalTextureKey": "",
+      "originalLinearFactorRetained": true
+    },
+    {
+      "exportName": "JesusChild__PeriodUndyedLinen",
+      "sourceName": null,
+      "surface": "Legacy",
+      "generatedRole": "linen",
+      "linenMapsApplied": true,
+      "textureKey": "generated-linen-diffuse",
+      "normalTextureKey": "generated-linen-normal",
+      "originalLinearFactorRetained": true
+    },
+    {
+      "exportName": "JesusChild__PeriodWovenFacing",
+      "sourceName": null,
+      "surface": "Legacy",
+      "generatedRole": "facing",
+      "linenMapsApplied": true,
+      "textureKey": "generated-linen-diffuse",
+      "normalTextureKey": "generated-linen-normal",
+      "originalLinearFactorRetained": true
+    },
+    {
+      "exportName": "N00_000_00_Body_00_SKIN",
+      "sourceName": "N00_000_00_Body_00_SKIN",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 11,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_EyeHighlight_00_EYE",
+      "sourceName": "N00_000_00_EyeHighlight_00_EYE",
+      "surface": "Legacy",
+      "alphaMode": "BLEND",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_EyeIris_00_EYE",
+      "sourceName": "N00_000_00_EyeIris_00_EYE",
+      "surface": "Legacy",
+      "alphaMode": "BLEND",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_EyeWhite_00_EYE",
+      "sourceName": "N00_000_00_EyeWhite_00_EYE",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_FaceBrow_00_FACE",
+      "sourceName": "N00_000_00_FaceBrow_00_FACE",
+      "surface": "Legacy",
+      "alphaMode": "BLEND",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        0.28,
+        0.13,
+        0.055,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": true
+    },
+    {
+      "exportName": "N00_000_00_FaceEyelash_00_FACE",
+      "sourceName": "N00_000_00_FaceEyelash_00_FACE",
+      "surface": "Legacy",
+      "alphaMode": "BLEND",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_FaceEyeline_00_FACE",
+      "sourceName": "N00_000_00_FaceEyeline_00_FACE",
+      "surface": "Legacy",
+      "alphaMode": "BLEND",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_FaceMouth_00_FACE",
+      "sourceName": "N00_000_00_FaceMouth_00_FACE",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_Face_00_SKIN",
+      "sourceName": "N00_000_00_Face_00_SKIN",
+      "surface": "Face",
+      "alphaMode": "MASK",
+      "normalImageIndex": 5,
+      "normalOmission": {
+        "reason": "uniform-original-normal-has-no-spatial-detail",
+        "sourceImageSha256": "f8f4e1ddb775ff90723cf3da6f2b8e8537482059a894437564dfaf2b8db85e53",
+        "sourceImageIndex": 5,
+        "evidenceReport": {
+          "file": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/original-normal-pixels01.json",
+          "sha256": "161f680e93a1b6b6adef575465bfff25be973057c88f1a0dcf9ad5c6da1dcf32",
+          "bytes": 4110
+        }
+      },
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_00_HairBack_00_HAIR__ChildBrown__FbxOnly",
+      "sourceName": "N00_000_00_HairBack_00_HAIR",
+      "surface": "Hair",
+      "alphaMode": "MASK",
+      "normalImageIndex": 16,
+      "normalOmission": null,
+      "linearFactor": [
+        0.28,
+        0.13,
+        0.055,
+        1
+      ],
+      "brownAppliedExactlyOnce": true,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_000_Hair_00_HAIR__ChildBrown__FbxOnly",
+      "sourceName": "N00_000_Hair_00_HAIR",
+      "surface": "Hair",
+      "alphaMode": "MASK",
+      "normalImageIndex": 18,
+      "normalOmission": null,
+      "linearFactor": [
+        0.28,
+        0.13,
+        0.055,
+        1
+      ],
+      "brownAppliedExactlyOnce": true,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_001_01_Bottoms_01_CLOTH",
+      "sourceName": "N00_001_01_Bottoms_01_CLOTH",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_004_01_Shoes_01_CLOTH",
+      "sourceName": "N00_004_01_Shoes_01_CLOTH",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    },
+    {
+      "exportName": "N00_004_01_Tops_01_CLOTH",
+      "sourceName": "N00_004_01_Tops_01_CLOTH",
+      "surface": "Legacy",
+      "alphaMode": "MASK",
+      "normalImageIndex": 1,
+      "normalOmission": null,
+      "linearFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "brownAppliedExactlyOnce": false,
+      "browTintApplied": false
+    }
+  ],
+  "geometryEdited": false,
+  "imagePixelsEdited": false,
+  "actualUnityPreparationExecuted": false,
+  "actualVisualReviewCompleted": false
+}

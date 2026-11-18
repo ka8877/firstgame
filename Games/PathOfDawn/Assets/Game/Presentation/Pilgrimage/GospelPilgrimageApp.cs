@@ -78,6 +78,7 @@ namespace PathOfDawn.Presentation
             People.Initialize(transform, World, SceneCamera, Player);
             CameraRig = SceneCamera.gameObject.AddComponent<GospelPilgrimageCamera>();
             CameraRig.Initialize(SceneCamera, root.transform);
+            World.NazarethSlice.BindCamera(CameraRig);
             SceneCamera.gameObject.AddComponent<GospelNprNpcCameraOcclusion>().Initialize(this, CameraRig);
             CameraRig.InputEnabled = false;
             Player.InteractRequested += Interact;

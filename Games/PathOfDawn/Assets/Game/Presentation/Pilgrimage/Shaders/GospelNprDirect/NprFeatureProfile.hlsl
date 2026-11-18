@@ -14,6 +14,11 @@
 #define LIL_FEATURE_RECEIVE_SHADOW
 #define LIL_FEATURE_OUTLINE_RECEIVE_SHADOW
 
+// The new authored linen normal texture uses the retained renderer's actual
+// first normal-map path. Face/hair materials keep _UseBumpMap disabled.
+#define LIL_FEATURE_NORMAL_1ST
+#define LIL_FEATURE_BumpMap
+
 // The pinned renderer's restrained light-facing rim and directional hair
 // specular are prepared per material role. Skin/eyes do not receive these
 // highlights; no matcap, emission or environment-cubemap substitute is added.

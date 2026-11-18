@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "sourceSha256": "7526838f4a45086a1d0abb23e9f38ad3f0103889f1efa70d2605ef25e7e6ef99",
+  "expectedBones": 109,
+  "objects": {
+    "face": "Face",
+    "body": "Body",
+    "hair": "Hair001"
+  },
+  "faceGltfMeshIndex": 0,
+  "hairMaterials": [
+    "N00_000_00_HairBack_00_HAIR",
+    "N00_000_Hair_00_HAIR"
+  ],
+  "hairMaterialSlots": {
+    "body": [
+      "N00_000_00_HairBack_00_HAIR"
+    ],
+    "hair": [
+      "N00_000_Hair_00_HAIR"
+    ]
+  },
+  "bodySkinMaterials": [
+    "N00_000_00_Body_00_SKIN"
+  ],
+  "removeBodyClothingMaterials": [
+    "N00_001_01_Bottoms_01_CLOTH",
+    "N00_004_01_Shoes_01_CLOTH",
+    "N00_004_01_Tops_01_CLOTH"
+  ],
+  "collisionBodyMaterials": [
+    "N00_000_00_Body_00_SKIN",
+    "N00_004_01_Tops_01_CLOTH"
+  ],
+  "weightDonorBodyMaterials": [
+    "N00_000_00_Body_00_SKIN",
+    "N00_001_01_Bottoms_01_CLOTH",
+    "N00_004_01_Shoes_01_CLOTH",
+    "N00_004_01_Tops_01_CLOTH"
+  ],
+  "pattern": {
+    "rows": 28,
+    "columns": 32,
+    "sleeveRows": 14,
+    "hemAboveKneeRatio": 0.018,
+    "sideEaseRatio": 0.018,
+    "sleeveArmFraction": 0.6
+  },
+  "simulation": {
+    "frames": 90,
+    "quality": 12,
+    "maximumSeamGap": 0.018
+  },
+  "neckDiagnostic": {
+    "path": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/NeckGeometryInspect01/neck-sections.json",
+    "sha256": "310e3737584891bccaa9692fc2cada2e80172fd2cb20675196b8e62b966c9b33"
+  },
+  "neckFit": {
+    "planeZ": 1.1967117023277283,
+    "group": "BodySkin",
+    "componentIndex": 0,
+    "easeRatio": 0.004
+  },
+  "nativeFitDiagnostic": {
+    "path": "/workspace/firstgame/Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/NativeFitInspect01/native-fit-geometry.json",
+    "sha256": "c5ed6ae1779a0d10072964f87c17395049a6486bed413576689ce11a266606ad"
+  },
+  "patternFit": {
+    "torsoWeightMinimum": 0.65
+  }
+}

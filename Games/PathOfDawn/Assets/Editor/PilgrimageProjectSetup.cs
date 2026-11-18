@@ -11,13 +11,20 @@ namespace FirstGame.Editor
     /// <summary>Current skinned NPR 3D field. Earlier renderers remain as history.</summary>
     public static class PilgrimageProjectSetup
     {
-        public const string Revision = "gospel-illustrated-anime-2026-11-17";
+        public const string LegacyRevision = "gospel-human-anime-2026-11-18";
+        public static string Revision => Environment.GetEnvironmentVariable("FIRSTGAME_RELEASE_PROFILE") == "gospel-visual"
+            ? GospelVisualProjectSetup.Revision : LegacyRevision;
         public const string AppType = "PathOfDawn.Presentation.GospelPilgrimageApp, PathOfDawn.Presentation";
         const string ScenePath = "Assets/Scenes/Boot.unity";
         static bool preparing;
 
         public static void Ensure()
         {
+            if (Environment.GetEnvironmentVariable("FIRSTGAME_RELEASE_PROFILE") == "gospel-visual")
+            {
+                GospelVisualProjectSetup.ValidateAndActivate();
+                return;
+            }
             if (preparing) return;
             preparing = true;
             try

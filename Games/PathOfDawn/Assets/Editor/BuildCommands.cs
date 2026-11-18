@@ -34,7 +34,7 @@ namespace FirstGame.Editor
                 if (pipeline == null) throw new BuildFailedException("Current Quest 3D pipeline is missing.");
                 GraphicsSettings.defaultRenderPipeline = pipeline; QualitySettings.renderPipeline = pipeline;
                 QualitySettings.globalTextureMipmapLimit = 0;
-                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
                 PlayerSettings.WebGL.decompressionFallback = true;
                 PlayerSettings.WebGL.dataCaching = true;
                 // Content-addressed files prevent mixed cached versions after a web update.

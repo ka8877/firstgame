@@ -37,7 +37,7 @@ namespace FirstGame.Editor
         {
             if (!File.Exists(Journal)) return;
             var record = JsonUtility.FromJson<Record>(File.ReadAllText(Journal));
-            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != "gospel-canon-2026-11-09" && record.revision != "gospel-living-2026-11-10" && record.revision != "gospel-character-motion-2026-11-11" && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
+            if (record == null || (record.revision != "gospel-authored-2026-10-27" && record.revision != "gospel-toon-2026-10-27" && record.revision != "gospel-chronicle-2026-10-29" && record.revision != LuminousProjectSetup.Revision && record.revision != "gospel-canon-2026-11-09" && record.revision != "gospel-living-2026-11-10" && record.revision != "gospel-character-motion-2026-11-11" && record.revision != PilgrimageProjectSetup.LegacyRevision && record.revision != GospelVisualProjectSetup.Revision && record.revision != PilgrimageProjectSetup.Revision) || record.moves == null || record.files == null)
                 throw new BuildFailedException("Invalid legacy resource recovery journal; retained for inspection.");
             Restore(record, "recovered-after-interruption");
             Debug.Log("FIRSTGAME_LEGACY_RESOURCES_RECOVERED " + record.moves.Length);
@@ -60,13 +60,23 @@ namespace FirstGame.Editor
         public static Scope Begin(string target)
         {
             RecoverInterrupted();
-            bool npr = PilgrimageProjectSetup.Revision.StartsWith("gospel-npr-", StringComparison.Ordinal)
-                || PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal);
+            bool visual = Environment.GetEnvironmentVariable("FIRSTGAME_RELEASE_PROFILE") == "gospel-visual";
+            bool npr = visual || PilgrimageProjectSetup.Revision.StartsWith("gospel-npr-", StringComparison.Ordinal)
+                || PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal)
+                || PilgrimageProjectSetup.Revision.StartsWith("gospel-human-anime-", StringComparison.Ordinal);
             if (npr)
             {
                 foreach (string identity in new[] { "JesusChild", "JesusAdult", "Mary", "Joseph", "Teacher" })
                 {
-                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Art/GospelNpr/Characters/" + identity + ".prefab");
+                    GameObject prefab = null;
+                    if (visual)
+                    {
+                        bool admitted = PathOfDawn.Presentation.GospelHeroModelProfile.TryResolve(identity, out prefab, out string error);
+                        if (error != null || (identity == "JesusChild" && !admitted))
+                            throw new BuildFailedException(error ?? "Prepared new hero required before legacy exclusion: " + identity);
+                    }
+                    if (!prefab)
+                        prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Resources/Art/GospelNpr/Characters/" + identity + ".prefab");
                     var animator = prefab ? prefab.GetComponent<Animator>() : null;
                     if (!animator || !animator.avatar || !animator.avatar.isHuman || !animator.avatar.isValid || !animator.runtimeAnimatorController || prefab.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length == 0)
                         throw new BuildFailedException("Prepared NPR humanoid required before excluding earlier character artwork: " + identity);
@@ -111,8 +121,12 @@ namespace FirstGame.Editor
                 candidates.Add("Assets/Resources/Art/GospelChronicle/Actors");
                 candidates.Add("Assets/Resources/Art/GospelRenewal/Opening/nativity.png");
                 candidates.Add("Assets/Resources/Art/GospelRenewal/Opening/travel-items.png");
-                foreach (string oldTree in new[] { "ShadeTreeA_LOD0", "ShadeTreeA_LOD1", "ShadeTreeB_LOD0", "ShadeTreeB_LOD1", "Shrub" })
-                    candidates.Add("Assets/Resources/Art/GospelAuthoredProps/" + oldTree + ".fbx");
+                // The current authored environment uses these real tree/shrub
+                // resources through runtime lookup; Boot dependencies alone
+                // cannot discover them. Retain them for the new visual player.
+                if (!visual)
+                    foreach (string oldTree in new[] { "ShadeTreeA_LOD0", "ShadeTreeA_LOD1", "ShadeTreeB_LOD0", "ShadeTreeB_LOD1", "Shrub" })
+                        candidates.Add("Assets/Resources/Art/GospelAuthoredProps/" + oldTree + ".fbx");
             }
             else if (hasNeutralMotion)
                 candidates.Add("Assets/Resources/Art/GospelMotion/Layers");

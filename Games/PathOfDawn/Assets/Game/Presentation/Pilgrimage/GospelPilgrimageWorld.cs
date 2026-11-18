@@ -27,6 +27,7 @@ namespace PathOfDawn.Presentation
         public int SpatialSceneryBatchCount => npr == null ? 0 : npr.RenderedBatchCount;
         public int VillageBuildingCount { get; private set; }
         public Transform TempleRoot { get; private set; }
+        public GospelNazarethEnvironmentSlice NazarethSlice { get; private set; }
         public Transform JordanRoot { get; private set; }
         public IReadOnlyList<Vector2> MapTrail => Chapter == "baptism" ? jordanTrail : templeTrail;
         public IReadOnlyList<Rect> MapCourts => Chapter == "baptism" ? noCourts : templeCourts;
@@ -138,14 +139,24 @@ namespace PathOfDawn.Presentation
             else templeTrail = Array.AsReadOnly(trail.ToArray());
             BuildTerrain(root, river);
             if (river) BuildRiver(root);
-            else { BuildDepartureCourt(root); BuildVillage(root); BuildTemple(root); }
+            else
+            {
+                BuildDepartureCourt(root); BuildVillage(root); BuildTemple(root);
+                var slice = Node("03 · Nazareth authored approach", root);
+                NazarethSlice = slice.gameObject.AddComponent<GospelNazarethEnvironmentSlice>();
+                NazarethSlice.Build(this, npr, props, root,
+                    (x, z) => TerrainHeight(x, z, false),
+                    material => materials.Add(material), mesh => meshes.Add(mesh));
+            }
             BuildGarden(root, river);
             BuildBorderGroves(root, river);
             BuildHorizonGroves(root, river);
             BuildDistantHills(root, river);
             BuildMeadowPockets(root, river);
             var atmosphere = root.gameObject.AddComponent<GospelPilgrimageAtmosphere>();
-            atmosphere.BuildNpr(river, (x, z) => TerrainHeight(x, z, river), p => NearRoute(p, 1.25f), npr);
+            atmosphere.BuildNpr(river, (x, z) => TerrainHeight(x, z, river),
+                p => NearRoute(p, 1.25f) || (!river && NazarethSlice != null
+                    && NazarethSlice.ReservesScenerySpace(p, .45f)), npr);
             LivingGrassClumpCount += atmosphere.GrassClumpCount; WildflowerCount += atmosphere.FlowerCount;
             BuildBoundary(root, river);
             CombineArchitecture(root);
@@ -217,6 +228,19 @@ namespace PathOfDawn.Presentation
             material.SetTexture("_BlendMap", blend);
             material.SetTexture("_StoneAlbedo", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/paving-albedo"));
             material.SetTexture("_StoneNormal", Resources.Load<Texture2D>("Art/Gospel3D/TempleMaterials/paving-normal"));
+            if (!river)
+            {
+                const string surfaceRoot = "Art/GospelVisualRebuild20261119/Environment/Textures/";
+                var color = Resources.Load<Texture2D>(surfaceRoot + "stone_floor_diff_2k");
+                var normal = Resources.Load<Texture2D>(surfaceRoot + "stone_floor_nor_gl_2k");
+                if ((color == null) != (normal == null))
+                    throw new InvalidOperationException("The authored courtyard requires its complete diffuse/normal pair.");
+                if (color != null)
+                {
+                    material.SetTexture("_StoneAlbedo", color);
+                    material.SetTexture("_StoneNormal", normal);
+                }
+            }
             material.SetFloat("_StoneDetailStrength", .72f); material.SetFloat("_StoneNormalStrength", .24f);
             material.SetColor("_MeadowColor", new Color(.35f, .47f, .31f));
             material.SetColor("_EarthColor", new Color(.71f, .61f, .44f));
@@ -682,18 +706,21 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < positions.Length; i++)
             {
                 Vector2 p = positions[i]; float h = 5.0f + (i % 4) * .60f;
+                if (!river && NazarethSlice != null && NazarethSlice.ReservesScenerySpace(p, 2.5f)) continue;
                 NprTree(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), h * 1.13f, i * 53);
                 for (int j = 0; j < 2; j++)
                 {
                     Vector2 q = p + new Vector2((j == 0 ? -1 : 1) * 1.2f, .75f);
-                    if (NearRoute(q, 2.2f)) continue;
+                    if (NearRoute(q, 2.2f) || (!river && NazarethSlice != null
+                        && NazarethSlice.ReservesScenerySpace(q, .8f))) continue;
                     NprShrub(root, new Vector3(q.x, TerrainHeight(q.x, q.y, river), q.y), .70f + j * .16f, i * 11+j);
                 }
             }
             for (int i = 0; i < 64; i++)
             {
                 float x = -36 + (float)random.NextDouble() * 81, z = -16 + (float)random.NextDouble() * (river ? 27 : 38);
-                if (NearRoute(new Vector2(x, z), 2.4f) || (!river && x > -4 && x < 33 && z > -6 && z < 19)) continue;
+                if (NearRoute(new Vector2(x, z), 2.4f) || (!river && x > -4 && x < 33 && z > -6 && z < 19)
+                    || (!river && NazarethSlice != null && NazarethSlice.ReservesScenerySpace(new Vector2(x, z), .6f))) continue;
                 float height = TerrainHeight(x, z, river);
                 if (i % 4 == 0) Rock(root, new Vector3(x, height, z), .32f + (float)random.NextDouble() * .4f, i);
                 else GrassTuft(root, new Vector3(x, height, z), .18f + (float)random.NextDouble() * .18f, i);
@@ -726,12 +753,14 @@ namespace PathOfDawn.Presentation
                 {
                     float angle = i * 2.11f + group * .7f;
                     Vector2 p = center + new Vector2(Mathf.Cos(angle) * (i == 0 ? .3f : 1.25f), Mathf.Sin(angle) * 1.35f);
-                    if (NearRoute(p, 3.2f) || !river && OnPavedCourt(p)) continue;
+                    if (NearRoute(p, 3.2f) || !river && OnPavedCourt(p)
+                        || (!river && NazarethSlice != null && NazarethSlice.ReservesScenerySpace(p, .8f))) continue;
                     float height = i == 0 ? 1.85f : i == 1 ? 1.35f : i == 2 ? 1.65f : 1.10f;
                     NprShrub(root, new Vector3(p.x, TerrainHeight(p.x, p.y, river), p.y), height, group * 37 + i * 73);
                 }
                 Vector2 stone = center + new Vector2(-1.2f, -.55f);
-                if (!NearRoute(stone, 3.2f))
+                if (!NearRoute(stone, 3.2f) && !(!river && NazarethSlice != null
+                    && NazarethSlice.ReservesScenerySpace(stone, 1.1f)))
                     Rock(root, new Vector3(stone.x, TerrainHeight(stone.x, stone.y, river), stone.y), 1.05f + group % 3 * .18f, group + 80, false);
             }
         }
@@ -831,7 +860,8 @@ namespace PathOfDawn.Presentation
             foreach(var center in islands) for(int i=0;i<5;i++)
             {
                 var p=center+new Vector2(Mathf.Sin(i*2.4f)*1.25f,Mathf.Cos(i*2.4f)*.8f);
-                if(NearRoute(p,1.7f) || !river && OnPavedCourt(p)) continue;
+                if(NearRoute(p,1.7f) || !river && OnPavedCourt(p)
+                    || (!river && NazarethSlice != null && NazarethSlice.ReservesScenerySpace(p, .8f))) continue;
                 NprShrub(root,new Vector3(p.x,TerrainHeight(p.x,p.y,river),p.y),.8f+(i%3)*.24f,i*7);
                 if(i%2==0) Rock(root,new Vector3(p.x+.5f,TerrainHeight(p.x+.5f,p.y,river),p.y),.42f,i,false);
             }

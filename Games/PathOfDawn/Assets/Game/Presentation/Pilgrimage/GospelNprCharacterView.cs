@@ -14,7 +14,7 @@ namespace PathOfDawn.Presentation
     {
         public enum ExpressionCue { Neutral, Attentive, Gentle, Concerned, Joy }
         public const string CharacterResourceRoot = "Art/GospelNpr/Characters/";
-        const string ExpressionResource = "Art/GospelIllustration20261117/ExpressionBindings";
+        const string ExpressionResource = "Art/GospelCharacter20261118/ExpressionBindings";
         public const int PortraitLayer = 31;
         static readonly int MoveSpeedId = Animator.StringToHash("MoveSpeed");
         static readonly int GroundedId = Animator.StringToHash("Grounded");
@@ -139,7 +139,13 @@ namespace PathOfDawn.Presentation
             relaxed.Clear(); concerned.Clear(); joyful.Clear();
             HasSourceExpressionMap = false; expressionCue = ExpressionCue.Neutral;
             speechBlend = relaxedWeight = concernWeight = joyWeight = 0; speaking = false; activeStoryExpressionKey = null;
-            prefab = Resources.Load<GameObject>(ModelResource);
+            if (GospelHeroModelProfile.TryResolve(identity, out var heroPrefab, out string heroError))
+            {
+                prefab = heroPrefab;
+                ModelResource = GospelHeroModelProfile.CharacterResourceRoot + identity;
+            }
+            else if (heroError != null) Fail(heroError);
+            else prefab = Resources.Load<GameObject>(ModelResource);
             if (prefab == null) Fail("Missing required NPR character prefab: " + ModelResource);
             visualRoot = new GameObject("NPR visual feet · " + identity).transform;
             visualRoot.SetParent(transform, false);
@@ -365,16 +371,30 @@ namespace PathOfDawn.Presentation
             List<FaceBinding> gentle, List<FaceBinding> concern, List<FaceBinding> joy)
         {
             narrow.Clear(); round.Clear(); gentle.Clear(); concern.Clear(); joy.Clear();
-            if (expressionCatalog == null)
+            ExpressionCatalog selectedCatalog;
+            var heroProfile = model != null ? model.GetComponent<GospelHeroModelProfile>() : null;
+            if (heroProfile != null)
             {
-                var json = Resources.Load<TextAsset>(ExpressionResource);
-                if (json == null) return false; // Preserved legacy model/test API; new preparation supplies the map.
-                expressionCatalog = JsonUtility.FromJson<ExpressionCatalog>(json.text);
-                if (expressionCatalog?.actors == null || expressionCatalog.schema != 1)
-                    throw new InvalidOperationException("Malformed source-bound expression catalog");
+                if (!heroProfile.ExpressionBindings)
+                    throw new InvalidOperationException("Missing admitted hero expression map: " + ModelIdentity);
+                selectedCatalog = JsonUtility.FromJson<ExpressionCatalog>(heroProfile.ExpressionBindings.text);
+                if (selectedCatalog?.actors == null || selectedCatalog.schema != 1)
+                    throw new InvalidOperationException("Malformed admitted hero expression map: " + ModelIdentity);
+            }
+            else
+            {
+                if (expressionCatalog == null)
+                {
+                    var json = Resources.Load<TextAsset>(ExpressionResource);
+                    if (json == null) return false; // Preserved legacy model/test API; new preparation supplies the map.
+                    expressionCatalog = JsonUtility.FromJson<ExpressionCatalog>(json.text);
+                    if (expressionCatalog?.actors == null || expressionCatalog.schema != 1)
+                        throw new InvalidOperationException("Malformed source-bound expression catalog");
+                }
+                selectedCatalog = expressionCatalog;
             }
             ActorExpressions actor = null;
-            foreach (var candidate in expressionCatalog.actors)
+            foreach (var candidate in selectedCatalog.actors)
                 if (candidate.id == ModelIdentity) { if (actor != null) throw new InvalidOperationException("Duplicate expression actor"); actor = candidate; }
             if (actor?.presets == null) throw new InvalidOperationException("Missing expression actor: " + ModelIdentity);
             foreach (var preset in actor.presets)
@@ -538,9 +558,11 @@ namespace PathOfDawn.Presentation
             foreach (var collider in portraitModel.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
             foreach (var camera in portraitModel.GetComponentsInChildren<Camera>(true)) camera.enabled = false;
             foreach (var audio in portraitModel.GetComponentsInChildren<AudioSource>(true)) audio.enabled = false;
-            // An imported behavior may own gameplay or an additional camera. The
-            // portrait is a renderer/Animator clone, never a second game actor.
-            foreach (var behavior in portraitModel.GetComponentsInChildren<MonoBehaviour>(true)) behavior.enabled = false;
+            // Keep imported gameplay/camera behaviors disabled. This sealed
+            // renderer-only binder publishes the clone's animated head axes
+            // to its own material slots; it owns no pose, expression or motion.
+            foreach (var behavior in portraitModel.GetComponentsInChildren<MonoBehaviour>(true))
+                behavior.enabled = behavior is GospelHeroHeadFrame;
             var portraitRenderers = portraitModel.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             foreach (var renderer in portraitRenderers)
             {

@@ -1,7 +1,13 @@
 {
   "schemaVersion": 1,
   "charterVersion": "autonomy-2026-11-03",
-  "updatedUtc": "2026-11-18T02:46:46.883652+00:00",
+  "updatedUtc": "2026-11-18T19:38:47.634283+00:00",
+  "historicalUpdatedUtcBeforeGospelVisualCycle20261119_01": "2026-11-18T16:13:20.483641+00:00",
+  "historicalUpdatedUtcBeforeGospelVisualFocus20261119_01": "2026-11-18T14:32:37.184083+00:00",
+  "historicalUpdatedUtcBeforeCardHumanProgress05_01": "2026-11-18T11:29:52.534680+00:00",
+  "historicalUpdatedUtcBeforeCardHumanProgress04_01": "2026-11-18T08:02:51.624507+00:00",
+  "historicalUpdatedUtcBeforeCardHumanProgress02_01": "2026-11-18T05:29:35.492913+00:00",
+  "historicalUpdatedUtcBeforeCardHuman20261118_01": "2026-11-18T02:46:46.883652+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_04": "2026-11-18T02:18:28.038291+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_03": "2026-11-17T17:45:12.973307+00:00",
   "historicalUpdatedUtcBeforeSharpEvidenceFinish20261117_02": "2026-11-17T17:17:53.307294+00:00",
@@ -18,6 +24,1149 @@
     "controlPlaneCommit": "The Git commit containing this file; game source/deployment identities are recorded separately below."
   },
   "activeWork": {
+    "id": "gospel-visual-rebuild-2026-11-19",
+    "status": "art-and-source-complete-runtime-blocked-by-unity-license",
+    "releaseProfile": "gospel-visual",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19",
+    "leaseRecord": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/lease.json",
+    "leaseOwner": "24f924f3-03db-4903-a043-ea0eea464381",
+    "leaseCommit": "3fe1973fe6c090d76cc3805314d975df76fc0137",
+    "leaseState": "acquired-at-snapshot",
+    "startedUtc": "2026-11-18T16:56:35.531397+00:00",
+    "deadlineUtc": "2026-11-18T22:56:35.531397+00:00",
+    "snapshotUtc": "2026-11-18T19:38:47.634283+00:00",
+    "runtimeStatusIsLive": false,
+    "backgroundContinuationClaimed": false,
+    "cardWork": "paused",
+    "implementationState": "Actual V10 FBX/Blend, textures and three construction renders saved; face/hair/environment/camera sources installed; 90 C# sources passed supplemental offline compile. Actual Unity import/prepared prefab/game preview pending valid license.",
+    "verification": {
+      "unityImport": false,
+      "native": false,
+      "web": false,
+      "browser": false,
+      "mainProduct": false,
+      "pages": false,
+      "userAesthetic": false
+    },
+    "evidence": "Docs/Autonomy/Evidence/GospelVisual20261119/progress.json",
+    "automaticMainIntegration": "Same-scope validated main and existing Pages updates remain authorized without another approval.",
+    "userArtisticApprovalClaimed": false
+  },
+  "historicalActiveWorkBeforeGospelVisualCycle20261119_01": {
+    "id": "gospel-visual-rebuild-2026-11-19",
+    "status": "gospel-only-model-environment-rebuild-in-progress",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/lease.json",
+    "leaseOwner": "88aea9ab-9a61-4530-aad4-392d1c9e9cb7",
+    "leaseCommit": "e260fcb0a7e69647aead1004ee48850f06ba238c",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T14:24:09.921561+00:00",
+    "deadlineUtc": "2026-11-18T20:24:09.921561+00:00",
+    "startedSeoul": "2026-11-18T23:24:09.921561+09:00",
+    "deadlineSeoul": "2026-11-19T05:24:09.921561+09:00",
+    "snapshotUtc": "2026-11-18T16:13:20.483641+00:00",
+    "snapshotPrecision": "Actual Root progress adoption time after completed build readback.",
+    "ownershipBasis": "B normally released after independent FinalIdle, separate available, then C newly acquired. Historical producers retain original owners.",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/CardHuman-2026-11-18",
+      "buildRoot": "Artifacts/CardHumanBuilds",
+      "stageRoot": "Artifacts/CardHumanWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent",
+      "proofScope": "Original C1 proof and OUT/build/stage preserved; current execution C does not rewrite C1/B producers."
+    },
+    "goals": {
+      "FantasyCards": "Deck and battle card details with actual public state, equipment, original prints and separate use/deck actions; preserve IDs, ownership, currency, saves and disabled future multiplayer.",
+      "PathOfDawn": "Improve differentiated human anime faces, hair, beard, garments and expressions while retaining source assets, native rig, locomotion, story and saves. Genshin/Star Rail is a reference goal, not an equivalence or user aesthetic approval claim."
+    },
+    "implementationState": "New licensed sources and actual Blender candidate comparison acquired; source-only new renderers/environment/tailoring in progress. No new source installation, Unity compilation, product build, main or deployment result yet.",
+    "verification": {
+      "completionFlagScope": "Current Native/Web passed; exactly one current local browser suite passed. All remaining browser/publication gates remain pending.",
+      "newUnityGenerationCompleted": true,
+      "newNativeCompleted": true,
+      "newWebBuildCompleted": true,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false,
+      "core": {
+        "attempt": "Core01",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "executionCycle": "C1"
+      },
+      "FantasyCards": {
+        "nativeAttempt": "Native05",
+        "nativePassed": 13,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootDirectNativeOriginals": 14,
+        "executionCycle": "C1",
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+        "nativeXmlSha256": "4754262089f8299d0eaeb0d09d9dc616cb99a2e0df28f5d19dead0c031e033ca",
+        "rootFinalNativeReviewSha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780",
+        "webAttempt": "Web03",
+        "webStatus": "passed",
+        "independentCoreProofIndexSha256": "a7d55ea61179e5b3f604185037b09b5bfe64be41ca3974a5ae8cca0b3e547c4c",
+        "webGenericSummarySha256": "1ab99b592b543359c0c509e02b57e53b93d2f9bc36a1964aaacc985fe8be4024",
+        "historicalWebReadback": "Web01 remains failed; Web02 retains its actual completed history and full readback, separately from passed Web03."
+      },
+      "PathOfDawn": {
+        "installedSources": [
+          "RefinementV4",
+          "BeardV11",
+          "GarmentsV12",
+          "UV-onlyV2",
+          "MaterialsV3"
+        ],
+        "lastPreparationAttempt": "Prepare23",
+        "lastPreparationStatus": "passed-all-five-ready",
+        "executionCycle": "C1",
+        "preparationSummarySha256": "62e32b03199e368b2eaada395f449fc9cd17845b94ab657f165048d6519100aa",
+        "preparationReportSha256": "790f6df87548cca5dbff96c1b664f71b80fd5695d8e45966563f3f1499f44e67",
+        "beardOutputRoot": "Assets/Art/GospelCharacter20261118/v2",
+        "beardSourceSha256": "7037bb6a1f25b3cd8c87a3c1838382d18203a6228d9e415d5e45c6dccb9022a6",
+        "beardDisplacementCoordinateFrame": "Prepared source-face mesh-local units; not actor/world physical distance.",
+        "beardReadbackToleranceMeshLocalUnitsStrictlyLessThan": 2e-06,
+        "beardMinimumAdmittedNonzeroAnchorDeltaMeshLocalUnits": 1.01e-05,
+        "beardPerActor": [
+          {
+            "actorId": "JesusAdult",
+            "clumps": 190,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 2,
+            "precisionRejectedByRegion": [
+              9,
+              2,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Joseph",
+            "clumps": 196,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 8,
+            "precisionRejectedByRegion": [
+              7,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Teacher",
+            "clumps": 194,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 6,
+            "precisionRejectedByRegion": [
+              9,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          }
+        ],
+        "beardFixBoundary": "Unsafe tiny nonzero source-anchor candidates are rejected; source displacements are never zeroed, amplified or fabricated. Exact-zero frames, all source frames, quotas and frozen Native source/tolerance remain unchanged.",
+        "priorNativeAttempt": "Native02",
+        "priorNativePassed": 17,
+        "priorNativeFailed": 2,
+        "priorNativeFailure": "Strict beard source-anchor delta failures remain failures. The actual626400-comparison diagnostic found440 stored exact-zero losses and625960 exact matches; correction never rewrites that run.",
+        "currentNativeAttempt": "Native03",
+        "currentNativeStatus": "passed",
+        "nativePassed": 19,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "nativeContractCaseCount": 19,
+        "nativeSourceAndToleranceChangedForBeardV11": false,
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+        "nativeXmlSha256": "1cea9e72ed99a890f9df2ecb85c08c38cdd2a5ae5d3fd64dfd6e39f78626c722",
+        "rootDirectNativeOriginals": 14,
+        "rootFinalNativeReviewSha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc",
+        "c1NativeSelectionReceiptSha256": "a31766dcc04d2723f5db66543082ca5d6293acce7b5a4da46fde60e6deab5aa7",
+        "currentNativeCompleted": true,
+        "currentWebCompleted": true,
+        "codeAndActorsChangedAfterNative03": false,
+        "web01": {
+          "status": "outer-timeout",
+          "outerExitCode": 124,
+          "rootReportedOuterSummaryDisplay": "f05...",
+          "outerDescendantsObservedEmpty": true,
+          "innerSummaryState": "absent-after-outer-timeout",
+          "fabricatedInnerSummary": false
+        },
+        "web02": {
+          "status": "passed",
+          "executionCycle": "B",
+          "actualSummary": {
+            "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+            "bytes": 15925,
+            "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+          },
+          "independentProofIndex": {
+            "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent/PathOfDawn-Web/build-proof-index.json",
+            "bytes": 6321,
+            "sha256": "b19c27a806863d2c455b81111cdc5c2c82a0d5ecdbb13796b4bdd11efcfe8fca"
+          }
+        },
+        "qualityBoundary": "Root reports remaining stylized beard, hair-tip and collar limitations. Native and direct original review do not establish AAA/Genshin equivalence or user artistic approval.",
+        "webAttempt": "Web02",
+        "webStatus": "passed"
+      }
+    },
+    "previousCycleC1": {
+      "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+      "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+      "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+      "independentFinalIdleStatus": "failed-no-spawn-budget",
+      "failedIndependentFinalIdleSha256": "8161e551be21f7b2963f425774274a408de2e920c97c1ba46041764f9c3eac33",
+      "rootDirectReadOnlyIdleExitCode": 0,
+      "directIdleReplacesFourEventProof": false,
+      "normalOwnReleaseUtc": "2026-11-18T10:42:00Z",
+      "availableObservedAfterRelease": true,
+      "ownershipTransferredRetrospectively": false,
+      "scope": "C1 actual Native/build results, failed final-idle attempt and timeout remain under original ownership; B is a separate normal acquisition."
+    },
+    "interruptedSourceRecovery": {
+      "attempt": "BRecovery01",
+      "executionCycle": "B",
+      "status": "restored-full-original-native-source",
+      "actualRecoveryReceiptSha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086",
+      "interruptedTemporarySourceDisplay": "98a...",
+      "restoredSourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+      "originalNativeInputManifestSha256": "f38dee6ba2070871d589a84dda869e846142b433a965f3c7ab360e5cb569829f",
+      "beforeRecordJournalAndActualPostEditorBytesPreserved": true,
+      "protectedNprModelPrefabAndMetaFiles": 20,
+      "protectedOriginalBytesAndAttributesUnchanged": true,
+      "oldRawWebNonmutableFilesUnchanged": true,
+      "actualCleanupSha256": "66bf01136ab1a691474d69041ae5995384556097bc87deafe494c32e52c346e6",
+      "actualCleanupBytes": 681358,
+      "actualCleanupMoves": 145,
+      "actualCleanupFiles": 539,
+      "newNativePassClaimed": false,
+      "scope": "Actual C# Legacy recovery plus exact three URP/Graphics/Quality restoration and generated-addition cleanup; full source.verify returned original1b21. Original Native03 remains valid on those same restored inputs; no regeneration or fresh Native success is asserted."
+    },
+    "compilerStorageRehome": {
+      "files": 566,
+      "bytes": 484529972,
+      "singletons": true,
+      "destinationKind": "persistent-TMP",
+      "originalBytesAndFullAttributesRetained": true,
+      "copyReceiptSha256": "72e67c6844bf96d43fbc712e8bdce88dac77957a034096588278819b71f8ea44",
+      "separateFullReadbackReceiptSha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b",
+      "ramUsed": false,
+      "privateArchiveApplied": false,
+      "restoreMarkerCreated": false,
+      "scope": "Separate actual B storage operation and independent full readback, not a compiler rebuild, source change or current free-space/reader-absence measurement."
+    },
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Previous checked product; current CardHuman product main/publication remains pending."
+    },
+    "repositorySourceBase": {
+      "head": "ff2edda61499be0ad403d272a3fd7aea45340891",
+      "scope": "Root-provided saved documentation baseline, not a new product/publication."
+    },
+    "unityPrerequisite": "Exact private9 restoration and both projects' ForceSynchronousImport|ForceUpdate completed earlier in C1. Private payload remains outside Git/public evidence; compiler rehome did not apply a private archive or create a restore marker.",
+    "automaticMainIntegration": "Normal main integration and existing publication within the same authorized game scope remain authorized without asking again.",
+    "multiplayer": "disabled-future-update",
+    "renewalOccurred": false,
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "sourceProposalBoundary": "Root verified actual references and adopted this progress. Preserved original source proposal is not itself runtime proof.",
+    "actualCompletedCommands": [
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CanonBuildsReadback01/summary.json",
+        "bytes": 11028,
+        "sha256": "d50e85fb8091fe9a9ad62b9d8c29288439dd000c997f47d67210b35ea99543ac"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/GospelWeb02/summary.json",
+        "bytes": 11128,
+        "sha256": "68c32fa3e0c4b413f4e7b29034916ef5a32f51c92d7aea8e4cb92ae85b1c0c09"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/PreserveGospelWeb01/summary.json",
+        "bytes": 12660,
+        "sha256": "2b02c8e977c4826eabef81db15002d788a83d2ea330d2d93956b3d439f19e281"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/InterruptedSourceRecovery01/summary.json",
+        "bytes": 12053,
+        "sha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CompilerRehomeReadback01/summary.json",
+        "bytes": 12007,
+        "sha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b"
+      }
+    ],
+    "actualValidations": {
+      "FantasyCards": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/FantasyCards/binding.json",
+          "bytes": 923,
+          "sha256": "83ae24dd9d67569194ca16dc0fa53dcd4322245a6ef47079e0f4d19d42d0c4bb"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/cards-native-review.json",
+          "bytes": 6349,
+          "sha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/FantasyCards/Web03/summary.json",
+          "bytes": 19410,
+          "sha256": "289e5f5bc5a1872f5cdd82ec5a2dc9a9713cf99e4838247ffd9fef6bb033c035"
+        },
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e"
+      },
+      "PathOfDawn": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/PathOfDawn/binding.json",
+          "bytes": 1286,
+          "sha256": "cebe8782e05c248ed55ba82d923f999dc0ec94a710adda545fbea52311c105de"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/gospel-native-review.json",
+          "bytes": 5973,
+          "sha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+          "bytes": 15925,
+          "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+        },
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305"
+      }
+    },
+    "partialWebPreservation": {
+      "file": "Artifacts/Validation/CardHuman-2026-11-18/WebSelectionHistory/BeforeGospelWeb02/completed.json",
+      "bytes": 2889,
+      "sha256": "361b3841124f9f54fe8471e068d518d450916b0403051753b3ba58162828b321"
+    },
+    "recoveryScope": "Only derived compiler/import caches privately archived after full lossless readback. Both restore-required markers remain. Restore with separately reviewed current-owner adapter before any future Unity. No private payload in Git/public evidence.",
+    "activeRuntime": "No Unity; downloaded candidate inspection completed. Exact cache restoration is required before Unity.",
+    "scope": "Latest user focus: Gospel graphics only; preserve paused FantasyCards work and existing public baseline.",
+    "currentUserAestheticAcceptance": false,
+    "commercialGameGraphicsParityAchieved": false,
+    "currentGospelVisualWork": {
+      "userReference": "Honkai Star Rail Golden Hour screenshot, latest user feedback",
+      "stage": "source-and-actual-candidate-inspection",
+      "cardWorkPaused": true,
+      "oldTechnicalPassesAreVisualAcceptance": false,
+      "storyGoalsRetained": 23,
+      "scripturePassagesRetained": 19,
+      "runtimeControlRemainsExistingC": true,
+      "witnesses": {
+        "PausedCardIdleForGospel01": {
+          "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/PausedCardIdleForGospel01/summary.json",
+          "bytes": 11076,
+          "sha256": "2763e1de3d4535c8f46f19f8e305018f9b37896cffbe6d390b73ff595b1a16f0"
+        },
+        "GospelVisualAllocation01": {
+          "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/GospelVisualAllocation01/summary.json",
+          "bytes": 11099,
+          "sha256": "2a7f2cca21318f4a4879c168101ba62a4cfa503664580ccba96e476c039c3ba2"
+        },
+        "GospelCacheRoutes01": {
+          "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/GospelCacheRoutes01/summary.json",
+          "bytes": 10989,
+          "sha256": "ed7e5f69fdd7de42b97dd3e13d6c26b50b40682677d44bc811829dc4d84a28bb"
+        },
+        "GospelPrivateInspect01": {
+          "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/GospelPrivateInspect01/summary.json",
+          "bytes": 12581,
+          "sha256": "16ab4f243bdb26a8ef6adca00e397eff999769b951182e61287b9e06c01e7549"
+        },
+        "GospelCandidateBlender04": {
+          "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/GospelCandidateBlender04/summary.json",
+          "bytes": 11603,
+          "sha256": "9f21c71232851446f4df6f14db334b8a567a3c6950b3b2330986d604abc1ac33"
+        }
+      },
+      "restoreCombinedOriginalBytes": 2461983649,
+      "originalWsRouteFits": false,
+      "newPersistentTmpRoute": "proposed, not yet restored or admitted",
+      "unityMayRun": false
+    }
+  },
+  "historicalActiveWorkBeforeGospelVisualFocus20261119_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "one-local-passed-recovered-remaining-validation-pending",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/lease.json",
+    "leaseOwner": "88aea9ab-9a61-4530-aad4-392d1c9e9cb7",
+    "leaseCommit": "e260fcb0a7e69647aead1004ee48850f06ba238c",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T14:24:09.921561+00:00",
+    "deadlineUtc": "2026-11-18T20:24:09.921561+00:00",
+    "startedSeoul": "2026-11-18T23:24:09.921561+09:00",
+    "deadlineSeoul": "2026-11-19T05:24:09.921561+09:00",
+    "snapshotUtc": "2026-11-18T14:32:37.184083+00:00",
+    "snapshotPrecision": "Actual Root progress adoption time after completed build readback.",
+    "ownershipBasis": "B normally released after independent FinalIdle, separate available, then C newly acquired. Historical producers retain original owners.",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/CardHuman-2026-11-18",
+      "buildRoot": "Artifacts/CardHumanBuilds",
+      "stageRoot": "Artifacts/CardHumanWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent",
+      "proofScope": "Original C1 proof and OUT/build/stage preserved; current execution C does not rewrite C1/B producers."
+    },
+    "goals": {
+      "FantasyCards": "Deck and battle card details with actual public state, equipment, original prints and separate use/deck actions; preserve IDs, ownership, currency, saves and disabled future multiplayer.",
+      "PathOfDawn": "Improve differentiated human anime faces, hair, beard, garments and expressions while retaining source assets, native rig, locomotion, story and saves. Genshin/Star Rail is a reference goal, not an equivalence or user aesthetic approval claim."
+    },
+    "implementationState": "Core311, CardNative13/Web03, GospelNative19/Web02 passed. CardDesktop02 533/0,107PNG,69 Root originals,4PCM,2reload passed. GospelDesktop01 ENOSPC failed58/78 retained in history. Three locals, two public, main, publication, seal and durable closure pending.",
+    "verification": {
+      "completionFlagScope": "Current Native/Web passed; exactly one current local browser suite passed. All remaining browser/publication gates remain pending.",
+      "newUnityGenerationCompleted": true,
+      "newNativeCompleted": true,
+      "newWebBuildCompleted": true,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false,
+      "core": {
+        "attempt": "Core01",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "executionCycle": "C1"
+      },
+      "FantasyCards": {
+        "nativeAttempt": "Native05",
+        "nativePassed": 13,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootDirectNativeOriginals": 14,
+        "executionCycle": "C1",
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+        "nativeXmlSha256": "4754262089f8299d0eaeb0d09d9dc616cb99a2e0df28f5d19dead0c031e033ca",
+        "rootFinalNativeReviewSha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780",
+        "webAttempt": "Web03",
+        "webStatus": "passed",
+        "independentCoreProofIndexSha256": "a7d55ea61179e5b3f604185037b09b5bfe64be41ca3974a5ae8cca0b3e547c4c",
+        "webGenericSummarySha256": "1ab99b592b543359c0c509e02b57e53b93d2f9bc36a1964aaacc985fe8be4024",
+        "historicalWebReadback": "Web01 remains failed; Web02 retains its actual completed history and full readback, separately from passed Web03."
+      },
+      "PathOfDawn": {
+        "installedSources": [
+          "RefinementV4",
+          "BeardV11",
+          "GarmentsV12",
+          "UV-onlyV2",
+          "MaterialsV3"
+        ],
+        "lastPreparationAttempt": "Prepare23",
+        "lastPreparationStatus": "passed-all-five-ready",
+        "executionCycle": "C1",
+        "preparationSummarySha256": "62e32b03199e368b2eaada395f449fc9cd17845b94ab657f165048d6519100aa",
+        "preparationReportSha256": "790f6df87548cca5dbff96c1b664f71b80fd5695d8e45966563f3f1499f44e67",
+        "beardOutputRoot": "Assets/Art/GospelCharacter20261118/v2",
+        "beardSourceSha256": "7037bb6a1f25b3cd8c87a3c1838382d18203a6228d9e415d5e45c6dccb9022a6",
+        "beardDisplacementCoordinateFrame": "Prepared source-face mesh-local units; not actor/world physical distance.",
+        "beardReadbackToleranceMeshLocalUnitsStrictlyLessThan": 2e-06,
+        "beardMinimumAdmittedNonzeroAnchorDeltaMeshLocalUnits": 1.01e-05,
+        "beardPerActor": [
+          {
+            "actorId": "JesusAdult",
+            "clumps": 190,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 2,
+            "precisionRejectedByRegion": [
+              9,
+              2,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Joseph",
+            "clumps": 196,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 8,
+            "precisionRejectedByRegion": [
+              7,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Teacher",
+            "clumps": 194,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 6,
+            "precisionRejectedByRegion": [
+              9,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          }
+        ],
+        "beardFixBoundary": "Unsafe tiny nonzero source-anchor candidates are rejected; source displacements are never zeroed, amplified or fabricated. Exact-zero frames, all source frames, quotas and frozen Native source/tolerance remain unchanged.",
+        "priorNativeAttempt": "Native02",
+        "priorNativePassed": 17,
+        "priorNativeFailed": 2,
+        "priorNativeFailure": "Strict beard source-anchor delta failures remain failures. The actual626400-comparison diagnostic found440 stored exact-zero losses and625960 exact matches; correction never rewrites that run.",
+        "currentNativeAttempt": "Native03",
+        "currentNativeStatus": "passed",
+        "nativePassed": 19,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "nativeContractCaseCount": 19,
+        "nativeSourceAndToleranceChangedForBeardV11": false,
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+        "nativeXmlSha256": "1cea9e72ed99a890f9df2ecb85c08c38cdd2a5ae5d3fd64dfd6e39f78626c722",
+        "rootDirectNativeOriginals": 14,
+        "rootFinalNativeReviewSha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc",
+        "c1NativeSelectionReceiptSha256": "a31766dcc04d2723f5db66543082ca5d6293acce7b5a4da46fde60e6deab5aa7",
+        "currentNativeCompleted": true,
+        "currentWebCompleted": true,
+        "codeAndActorsChangedAfterNative03": false,
+        "web01": {
+          "status": "outer-timeout",
+          "outerExitCode": 124,
+          "rootReportedOuterSummaryDisplay": "f05...",
+          "outerDescendantsObservedEmpty": true,
+          "innerSummaryState": "absent-after-outer-timeout",
+          "fabricatedInnerSummary": false
+        },
+        "web02": {
+          "status": "passed",
+          "executionCycle": "B",
+          "actualSummary": {
+            "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+            "bytes": 15925,
+            "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+          },
+          "independentProofIndex": {
+            "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent/PathOfDawn-Web/build-proof-index.json",
+            "bytes": 6321,
+            "sha256": "b19c27a806863d2c455b81111cdc5c2c82a0d5ecdbb13796b4bdd11efcfe8fca"
+          }
+        },
+        "qualityBoundary": "Root reports remaining stylized beard, hair-tip and collar limitations. Native and direct original review do not establish AAA/Genshin equivalence or user artistic approval.",
+        "webAttempt": "Web02",
+        "webStatus": "passed"
+      }
+    },
+    "previousCycleC1": {
+      "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+      "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+      "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+      "independentFinalIdleStatus": "failed-no-spawn-budget",
+      "failedIndependentFinalIdleSha256": "8161e551be21f7b2963f425774274a408de2e920c97c1ba46041764f9c3eac33",
+      "rootDirectReadOnlyIdleExitCode": 0,
+      "directIdleReplacesFourEventProof": false,
+      "normalOwnReleaseUtc": "2026-11-18T10:42:00Z",
+      "availableObservedAfterRelease": true,
+      "ownershipTransferredRetrospectively": false,
+      "scope": "C1 actual Native/build results, failed final-idle attempt and timeout remain under original ownership; B is a separate normal acquisition."
+    },
+    "interruptedSourceRecovery": {
+      "attempt": "BRecovery01",
+      "executionCycle": "B",
+      "status": "restored-full-original-native-source",
+      "actualRecoveryReceiptSha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086",
+      "interruptedTemporarySourceDisplay": "98a...",
+      "restoredSourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+      "originalNativeInputManifestSha256": "f38dee6ba2070871d589a84dda869e846142b433a965f3c7ab360e5cb569829f",
+      "beforeRecordJournalAndActualPostEditorBytesPreserved": true,
+      "protectedNprModelPrefabAndMetaFiles": 20,
+      "protectedOriginalBytesAndAttributesUnchanged": true,
+      "oldRawWebNonmutableFilesUnchanged": true,
+      "actualCleanupSha256": "66bf01136ab1a691474d69041ae5995384556097bc87deafe494c32e52c346e6",
+      "actualCleanupBytes": 681358,
+      "actualCleanupMoves": 145,
+      "actualCleanupFiles": 539,
+      "newNativePassClaimed": false,
+      "scope": "Actual C# Legacy recovery plus exact three URP/Graphics/Quality restoration and generated-addition cleanup; full source.verify returned original1b21. Original Native03 remains valid on those same restored inputs; no regeneration or fresh Native success is asserted."
+    },
+    "compilerStorageRehome": {
+      "files": 566,
+      "bytes": 484529972,
+      "singletons": true,
+      "destinationKind": "persistent-TMP",
+      "originalBytesAndFullAttributesRetained": true,
+      "copyReceiptSha256": "72e67c6844bf96d43fbc712e8bdce88dac77957a034096588278819b71f8ea44",
+      "separateFullReadbackReceiptSha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b",
+      "ramUsed": false,
+      "privateArchiveApplied": false,
+      "restoreMarkerCreated": false,
+      "scope": "Separate actual B storage operation and independent full readback, not a compiler rebuild, source change or current free-space/reader-absence measurement."
+    },
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Previous checked product; current CardHuman product main/publication remains pending."
+    },
+    "repositorySourceBase": {
+      "head": "ff2edda61499be0ad403d272a3fd7aea45340891",
+      "scope": "Root-provided saved documentation baseline, not a new product/publication."
+    },
+    "unityPrerequisite": "Exact private9 restoration and both projects' ForceSynchronousImport|ForceUpdate completed earlier in C1. Private payload remains outside Git/public evidence; compiler rehome did not apply a private archive or create a restore marker.",
+    "automaticMainIntegration": "Normal main integration and existing publication within the same authorized game scope remain authorized without asking again.",
+    "multiplayer": "disabled-future-update",
+    "renewalOccurred": false,
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "sourceProposalBoundary": "Root verified actual references and adopted this progress. Preserved original source proposal is not itself runtime proof.",
+    "actualCompletedCommands": [
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CanonBuildsReadback01/summary.json",
+        "bytes": 11028,
+        "sha256": "d50e85fb8091fe9a9ad62b9d8c29288439dd000c997f47d67210b35ea99543ac"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/GospelWeb02/summary.json",
+        "bytes": 11128,
+        "sha256": "68c32fa3e0c4b413f4e7b29034916ef5a32f51c92d7aea8e4cb92ae85b1c0c09"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/PreserveGospelWeb01/summary.json",
+        "bytes": 12660,
+        "sha256": "2b02c8e977c4826eabef81db15002d788a83d2ea330d2d93956b3d439f19e281"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/InterruptedSourceRecovery01/summary.json",
+        "bytes": 12053,
+        "sha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CompilerRehomeReadback01/summary.json",
+        "bytes": 12007,
+        "sha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b"
+      }
+    ],
+    "actualValidations": {
+      "FantasyCards": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/FantasyCards/binding.json",
+          "bytes": 923,
+          "sha256": "83ae24dd9d67569194ca16dc0fa53dcd4322245a6ef47079e0f4d19d42d0c4bb"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/cards-native-review.json",
+          "bytes": 6349,
+          "sha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/FantasyCards/Web03/summary.json",
+          "bytes": 19410,
+          "sha256": "289e5f5bc5a1872f5cdd82ec5a2dc9a9713cf99e4838247ffd9fef6bb033c035"
+        },
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e"
+      },
+      "PathOfDawn": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/PathOfDawn/binding.json",
+          "bytes": 1286,
+          "sha256": "cebe8782e05c248ed55ba82d923f999dc0ec94a710adda545fbea52311c105de"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/gospel-native-review.json",
+          "bytes": 5973,
+          "sha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+          "bytes": 15925,
+          "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+        },
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305"
+      }
+    },
+    "partialWebPreservation": {
+      "file": "Artifacts/Validation/CardHuman-2026-11-18/WebSelectionHistory/BeforeGospelWeb02/completed.json",
+      "bytes": 2889,
+      "sha256": "361b3841124f9f54fe8471e068d518d450916b0403051753b3ba58162828b321"
+    },
+    "recoveryScope": "Only derived compiler/import caches privately archived after full lossless readback. Both restore-required markers remain. Restore with separately reviewed current-owner adapter before any future Unity. No private payload in Git/public evidence.",
+    "activeRuntime": "none at progress adoption; GospelDesktop02 next"
+  },
+  "historicalActiveWorkBeforeCardHumanProgress05_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "both-native-web-passed-browser-main-public-pending",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/lease.json",
+    "leaseOwner": "70b748cc-dcb5-4eee-ba66-3f017ff7fb2d",
+    "leaseCommit": "31e710637619f3c12316ab197298ffbf72c6fd6c",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T10:42:51.771531Z",
+    "deadlineUtc": "2026-11-18T16:42:51.771531Z",
+    "startedSeoul": "2026-11-18T19:42:51.771531+09:00",
+    "deadlineSeoul": "2026-11-19T01:42:51.771531+09:00",
+    "snapshotUtc": "2026-11-18T11:29:52.534680+00:00",
+    "snapshotPrecision": "Actual Root progress adoption time after completed build readback.",
+    "ownershipBasis": "Actual acquired B lease and completed guarded execution records verified by Root; original C1 producers retain their ownership.",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/CardHuman-2026-11-18",
+      "buildRoot": "Artifacts/CardHumanBuilds",
+      "stageRoot": "Artifacts/CardHumanWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent",
+      "proofScope": "Original C1 proof root, OUT, build and stage remain preserved; current execution ownership is B, not a rewritten C1 producer identity."
+    },
+    "goals": {
+      "FantasyCards": "Deck and battle card details with actual public state, equipment, original prints and separate use/deck actions; preserve IDs, ownership, currency, saves and disabled future multiplayer.",
+      "PathOfDawn": "Improve differentiated human anime faces, hair, beard, garments and expressions while retaining source assets, native rig, locomotion, story and saves. Genshin/Star Rail is a reference goal, not an equivalence or user aesthetic approval claim."
+    },
+    "implementationState": "Core311; CardNative05 13/0 and GospelNative03 19/0 with Root14 originals each; CardWeb03 and GospelWeb02 passed. C1 timeout/absent inner summary and actual causal source restoration remain history. All current browser/main/publication/durable gates remain pending.",
+    "verification": {
+      "completionFlagScope": "Both current Native revisions completed. The interrupted Web is not completed, and source restoration is not a fresh Native pass.",
+      "newUnityGenerationCompleted": true,
+      "newNativeCompleted": true,
+      "newWebBuildCompleted": true,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false,
+      "core": {
+        "attempt": "Core01",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0,
+        "executionCycle": "C1"
+      },
+      "FantasyCards": {
+        "nativeAttempt": "Native05",
+        "nativePassed": 13,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootDirectNativeOriginals": 14,
+        "executionCycle": "C1",
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+        "nativeXmlSha256": "4754262089f8299d0eaeb0d09d9dc616cb99a2e0df28f5d19dead0c031e033ca",
+        "rootFinalNativeReviewSha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780",
+        "webAttempt": "Web03",
+        "webStatus": "passed",
+        "independentCoreProofIndexSha256": "a7d55ea61179e5b3f604185037b09b5bfe64be41ca3974a5ae8cca0b3e547c4c",
+        "webGenericSummarySha256": "1ab99b592b543359c0c509e02b57e53b93d2f9bc36a1964aaacc985fe8be4024",
+        "historicalWebReadback": "Web01 remains failed; Web02 retains its actual completed history and full readback, separately from passed Web03."
+      },
+      "PathOfDawn": {
+        "installedSources": [
+          "RefinementV4",
+          "BeardV11",
+          "GarmentsV12",
+          "UV-onlyV2",
+          "MaterialsV3"
+        ],
+        "lastPreparationAttempt": "Prepare23",
+        "lastPreparationStatus": "passed-all-five-ready",
+        "executionCycle": "C1",
+        "preparationSummarySha256": "62e32b03199e368b2eaada395f449fc9cd17845b94ab657f165048d6519100aa",
+        "preparationReportSha256": "790f6df87548cca5dbff96c1b664f71b80fd5695d8e45966563f3f1499f44e67",
+        "beardOutputRoot": "Assets/Art/GospelCharacter20261118/v2",
+        "beardSourceSha256": "7037bb6a1f25b3cd8c87a3c1838382d18203a6228d9e415d5e45c6dccb9022a6",
+        "beardDisplacementCoordinateFrame": "Prepared source-face mesh-local units; not actor/world physical distance.",
+        "beardReadbackToleranceMeshLocalUnitsStrictlyLessThan": 2e-06,
+        "beardMinimumAdmittedNonzeroAnchorDeltaMeshLocalUnits": 1.01e-05,
+        "beardPerActor": [
+          {
+            "actorId": "JesusAdult",
+            "clumps": 190,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 2,
+            "precisionRejectedByRegion": [
+              9,
+              2,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Joseph",
+            "clumps": 196,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 8,
+            "precisionRejectedByRegion": [
+              7,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          },
+          {
+            "actorId": "Teacher",
+            "clumps": 194,
+            "frames": 54,
+            "jawClumps": 128,
+            "cheekClumps": 60,
+            "moustacheClumps": 6,
+            "precisionRejectedByRegion": [
+              9,
+              3,
+              0
+            ],
+            "immediateMorphMaximumError": 0,
+            "persistedMorphMaximumError": 0
+          }
+        ],
+        "beardFixBoundary": "Unsafe tiny nonzero source-anchor candidates are rejected; source displacements are never zeroed, amplified or fabricated. Exact-zero frames, all source frames, quotas and frozen Native source/tolerance remain unchanged.",
+        "priorNativeAttempt": "Native02",
+        "priorNativePassed": 17,
+        "priorNativeFailed": 2,
+        "priorNativeFailure": "Strict beard source-anchor delta failures remain failures. The actual626400-comparison diagnostic found440 stored exact-zero losses and625960 exact matches; correction never rewrites that run.",
+        "currentNativeAttempt": "Native03",
+        "currentNativeStatus": "passed",
+        "nativePassed": 19,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "nativeContractCaseCount": 19,
+        "nativeSourceAndToleranceChangedForBeardV11": false,
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+        "nativeXmlSha256": "1cea9e72ed99a890f9df2ecb85c08c38cdd2a5ae5d3fd64dfd6e39f78626c722",
+        "rootDirectNativeOriginals": 14,
+        "rootFinalNativeReviewSha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc",
+        "c1NativeSelectionReceiptSha256": "a31766dcc04d2723f5db66543082ca5d6293acce7b5a4da46fde60e6deab5aa7",
+        "currentNativeCompleted": true,
+        "currentWebCompleted": true,
+        "codeAndActorsChangedAfterNative03": false,
+        "web01": {
+          "status": "outer-timeout",
+          "outerExitCode": 124,
+          "rootReportedOuterSummaryDisplay": "f05...",
+          "outerDescendantsObservedEmpty": true,
+          "innerSummaryState": "absent-after-outer-timeout",
+          "fabricatedInnerSummary": false
+        },
+        "web02": {
+          "status": "passed",
+          "executionCycle": "B",
+          "actualSummary": {
+            "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+            "bytes": 15925,
+            "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+          },
+          "independentProofIndex": {
+            "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent/PathOfDawn-Web/build-proof-index.json",
+            "bytes": 6321,
+            "sha256": "b19c27a806863d2c455b81111cdc5c2c82a0d5ecdbb13796b4bdd11efcfe8fca"
+          }
+        },
+        "qualityBoundary": "Root reports remaining stylized beard, hair-tip and collar limitations. Native and direct original review do not establish AAA/Genshin equivalence or user artistic approval.",
+        "webAttempt": "Web02",
+        "webStatus": "passed"
+      }
+    },
+    "previousCycleC1": {
+      "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+      "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+      "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+      "independentFinalIdleStatus": "failed-no-spawn-budget",
+      "failedIndependentFinalIdleSha256": "8161e551be21f7b2963f425774274a408de2e920c97c1ba46041764f9c3eac33",
+      "rootDirectReadOnlyIdleExitCode": 0,
+      "directIdleReplacesFourEventProof": false,
+      "normalOwnReleaseUtc": "2026-11-18T10:42:00Z",
+      "availableObservedAfterRelease": true,
+      "ownershipTransferredRetrospectively": false,
+      "scope": "C1 actual Native/build results, failed final-idle attempt and timeout remain under original ownership; B is a separate normal acquisition."
+    },
+    "interruptedSourceRecovery": {
+      "attempt": "BRecovery01",
+      "executionCycle": "B",
+      "status": "restored-full-original-native-source",
+      "actualRecoveryReceiptSha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086",
+      "interruptedTemporarySourceDisplay": "98a...",
+      "restoredSourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+      "originalNativeInputManifestSha256": "f38dee6ba2070871d589a84dda869e846142b433a965f3c7ab360e5cb569829f",
+      "beforeRecordJournalAndActualPostEditorBytesPreserved": true,
+      "protectedNprModelPrefabAndMetaFiles": 20,
+      "protectedOriginalBytesAndAttributesUnchanged": true,
+      "oldRawWebNonmutableFilesUnchanged": true,
+      "actualCleanupSha256": "66bf01136ab1a691474d69041ae5995384556097bc87deafe494c32e52c346e6",
+      "actualCleanupBytes": 681358,
+      "actualCleanupMoves": 145,
+      "actualCleanupFiles": 539,
+      "newNativePassClaimed": false,
+      "scope": "Actual C# Legacy recovery plus exact three URP/Graphics/Quality restoration and generated-addition cleanup; full source.verify returned original1b21. Original Native03 remains valid on those same restored inputs; no regeneration or fresh Native success is asserted."
+    },
+    "compilerStorageRehome": {
+      "files": 566,
+      "bytes": 484529972,
+      "singletons": true,
+      "destinationKind": "persistent-TMP",
+      "originalBytesAndFullAttributesRetained": true,
+      "copyReceiptSha256": "72e67c6844bf96d43fbc712e8bdce88dac77957a034096588278819b71f8ea44",
+      "separateFullReadbackReceiptSha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b",
+      "ramUsed": false,
+      "privateArchiveApplied": false,
+      "restoreMarkerCreated": false,
+      "scope": "Separate actual B storage operation and independent full readback, not a compiler rebuild, source change or current free-space/reader-absence measurement."
+    },
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Previous checked product; current CardHuman product main/publication remains pending."
+    },
+    "repositorySourceBase": {
+      "head": "ff2edda61499be0ad403d272a3fd7aea45340891",
+      "scope": "Root-provided saved documentation baseline, not a new product/publication."
+    },
+    "unityPrerequisite": "Exact private9 restoration and both projects' ForceSynchronousImport|ForceUpdate completed earlier in C1. Private payload remains outside Git/public evidence; compiler rehome did not apply a private archive or create a restore marker.",
+    "automaticMainIntegration": "Normal main integration and existing publication within the same authorized game scope remain authorized without asking again.",
+    "multiplayer": "disabled-future-update",
+    "renewalOccurred": false,
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "sourceProposalBoundary": "Root verified actual references and adopted this progress. Preserved original source proposal is not itself runtime proof.",
+    "actualCompletedCommands": [
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CanonBuildsReadback01/summary.json",
+        "bytes": 11028,
+        "sha256": "d50e85fb8091fe9a9ad62b9d8c29288439dd000c997f47d67210b35ea99543ac"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/GospelWeb02/summary.json",
+        "bytes": 11128,
+        "sha256": "68c32fa3e0c4b413f4e7b29034916ef5a32f51c92d7aea8e4cb92ae85b1c0c09"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/PreserveGospelWeb01/summary.json",
+        "bytes": 12660,
+        "sha256": "2b02c8e977c4826eabef81db15002d788a83d2ea330d2d93956b3d439f19e281"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/InterruptedSourceRecovery01/summary.json",
+        "bytes": 12053,
+        "sha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CompilerRehomeReadback01/summary.json",
+        "bytes": 12007,
+        "sha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b"
+      }
+    ],
+    "actualValidations": {
+      "FantasyCards": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/FantasyCards/binding.json",
+          "bytes": 923,
+          "sha256": "83ae24dd9d67569194ca16dc0fa53dcd4322245a6ef47079e0f4d19d42d0c4bb"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/cards-native-review.json",
+          "bytes": 6349,
+          "sha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/FantasyCards/Web03/summary.json",
+          "bytes": 19410,
+          "sha256": "289e5f5bc5a1872f5cdd82ec5a2dc9a9713cf99e4838247ffd9fef6bb033c035"
+        },
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e"
+      },
+      "PathOfDawn": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/PathOfDawn/binding.json",
+          "bytes": 1286,
+          "sha256": "cebe8782e05c248ed55ba82d923f999dc0ec94a710adda545fbea52311c105de"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/gospel-native-review.json",
+          "bytes": 5973,
+          "sha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+          "bytes": 15925,
+          "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+        },
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305"
+      }
+    },
+    "partialWebPreservation": {
+      "file": "Artifacts/Validation/CardHuman-2026-11-18/WebSelectionHistory/BeforeGospelWeb02/completed.json",
+      "bytes": 2889,
+      "sha256": "361b3841124f9f54fe8471e068d518d450916b0403051753b3ba58162828b321"
+    }
+  },
+  "historicalActiveWorkBeforeCardHumanProgress04_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "card-native-web-passed-gospel-preparation08-failed-source-v8-next",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/lease.json",
+    "leaseOwner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+    "leaseCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T04:42:06.604270Z",
+    "deadlineUtc": "2026-11-18T10:42:06.604270Z",
+    "startedSeoul": "2026-11-18T13:42:06.604270+09:00",
+    "deadlineSeoul": "2026-11-18T19:42:06.604270+09:00",
+    "ownershipBasis": "Actual acquired fixed lease and current guarded execution receipts, verified by Root during this source document update.",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/CardHuman-2026-11-18",
+      "buildRoot": "Artifacts/CardHumanBuilds",
+      "stageRoot": "Artifacts/CardHumanWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent"
+    },
+    "goals": {
+      "FantasyCards": "Deck and battle card details with live public state, equipment, full original prints and separate use/deck actions, preserving IDs, ownership, currency, saves and disabled future multiplayer.",
+      "PathOfDawn": "Refine differentiated human anime faces, hair, beard, garment surface and neckline while preserving source assets, rig, expressions and locomotion. Genshin/Star Rail remains a quality reference rather than an equivalence claim."
+    },
+    "implementationState": "Card Native04 and Web02 passed. Gospel Prepare08 failed after its higher measured neck section passed; source V8 for the actual outer shirt seam and fresh Prepare09 are next. No whole five-actor, Gospel Native/Web, new browser, main or publication completion is claimed.",
+    "verification": {
+      "completionFlagScope": "These overall completion flags require both current game revisions. Per-game completed Card results are recorded separately below.",
+      "newUnityGenerationCompleted": false,
+      "newNativeCompleted": false,
+      "newWebBuildCompleted": false,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false,
+      "core": {
+        "attempt": "Core01",
+        "passed": 311,
+        "failed": 0,
+        "skipped": 0
+      },
+      "FantasyCards": {
+        "nativeAttempt": "Native04",
+        "nativePassed": 13,
+        "nativeFailed": 0,
+        "nativeSkipped": 0,
+        "rootDirectNativeOriginals": 14,
+        "rootNativeReview": "approved-current-native-only",
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+        "webAttempt": "Web02",
+        "webStatus": "passed",
+        "webEvents": "guard, idle, build, gallery, proof and final: all six actual exit0 with owned descendants empty",
+        "independentCoreProofIndexSha256": "b53fbc8aca9e54b306453a66beb6a25df22b1175bdfea14f7d538d97c28e0e03",
+        "originalFullPrints": 15350,
+        "originalDeliveryBytes": 749704026,
+        "qualityAndBytesPreserved": true,
+        "historicalWeb01ReadbackFiles": 15367,
+        "historicalAliasBoundary": "Preserved payload, paths, inode, mode, owners and mtime; existing aliases inherit only the expressly permitted source-group nlink/ctime changes. Independent proof core is not shared."
+      },
+      "PathOfDawn": {
+        "installedSources": [
+          "RefinementV4",
+          "BeardV3",
+          "GarmentsV7",
+          "UV-onlyV2"
+        ],
+        "lastPreparationAttempt": "Prepare08",
+        "lastPreparationStatus": "failed-at-required-actual-outer-shirt-intersection",
+        "higherMeasuredNeckSectionPassed": true,
+        "uvHelperCompilationPassed": true,
+        "uvDerivationExecuted": false,
+        "firstNewNecklineSaved": false,
+        "completeFiveActorsPrepared": false,
+        "nextGarmentSource": "V8 actual shirt seam source work planned or in progress; not an installed or executed result",
+        "nextPreparationAttempt": "Prepare09 pending",
+        "plannedNativeCaseCount": 19,
+        "currentNativeCompleted": false,
+        "currentWebCompleted": false
+      }
+    },
+    "preservedFailuresAndCorrections": [
+      "Native01 two interaction-route failures remain failures; Native02 and Native03 each retain their original13-case pass and actual owners.",
+      "Web01 Unity file generation succeeded but the entire workflow failed on authored ProjectSettings Gzip-to-Brotli mutation. Exact prior Native setting bytes were compared and retained; both authored settings were made intentional Brotli0 before Native04 and Web02.",
+      "The Root Native03 opponent-detail missing-graphics observation was withdrawn after separate direct-original and pixel inspection. Batched-image review was misread. The original report, correction and raw bytes remain; no retrospective whole-run visual approval is asserted.",
+      "Every Gospel compilation, BakeScale, surface and neck-contour failure remains under its original exact run label. Prepare08 additionally passed the measured higher inner section then failed the required outer shirt intersection before UV derivation or first neckline save."
+    ],
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Historical checked SharpIllustration product; new CardHuman publication remains pending."
+    },
+    "repositorySourceBase": {
+      "head": "ff2edda61499be0ad403d272a3fd7aea45340891",
+      "scope": "Previously saved documentation baseline; not the new product source or publication."
+    },
+    "unityPrerequisite": "Exact private9 bytes and required metadata restoration, then both projects' ForceSynchronousImport | ForceUpdate, were actually completed successfully. Private payload remains excluded from Git and publication.",
+    "privateNineRestoration": {
+      "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/CommandRuns/PrivateNineRestore01/PrivateNineRestore/completed.json",
+      "bytes": 1925,
+      "sha256": "8352abf43fa42879794c3b0860e17d64e5f237ea19fa9b6a7748f15c940c8bfc"
+    },
+    "automaticMainIntegration": "Normal main integration and existing publication in the same user-authorized game scope remain authorized without repeating approval questions.",
+    "multiplayer": "disabled-future-update",
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "sourceProposalBoundary": "Root verified the stated completed Card results and last failed Gospel08; this is current progress, not overall release approval."
+  },
+  "historicalActiveWorkBeforeCardHumanProgress02_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "source-integration-and-runtime-preparation",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/lease.json",
+    "leaseOwner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+    "leaseCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T04:42:06.604270Z",
+    "deadlineUtc": "2026-11-18T10:42:06.604270Z",
+    "startedSeoul": "2026-11-18T13:42:06.604270+09:00",
+    "deadlineSeoul": "2026-11-18T19:42:06.604270+09:00",
+    "ownershipBasis": "Actual acquired fixed lease, current guard and command receipts retained under the new control root.",
+    "goals": {
+      "FantasyCards": "Deck and battle card inspection, readable actual card state and artwork, separate play/deck actions, and missing interaction details while preserving IDs, ownership, currency, deck and saves. Multiplayer remains disabled for a future update.",
+      "PathOfDawn": "Improve character facial and body proportions, differentiated adult appearances, hair, beard and garments, preserving actual rig, expressions and locomotion. Genshin/Star Rail quality is a reference goal, not a completed equivalence claim."
+    },
+    "implementationState": "Source integration and runtime preparation in progress; no new product/runtime/visual completion is asserted by this draft.",
+    "verification": {
+      "newUnityGenerationCompleted": false,
+      "newNativeCompleted": false,
+      "newWebBuildCompleted": false,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false
+    },
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Historical completed SharpIllustration product; its execution, source and ownership evidence is not relabelled as CardHuman verification."
+    },
+    "unityPrerequisite": "Exact private9 restoration completed; both projects still require explicit ForceSynchronousImport | ForceUpdate before their new preparation/validation. Private payload remains excluded from Git and publication.",
+    "automaticMainIntegration": "Normal main integration and existing publication procedures in the user-authorized game scope remain authorized without repeating the same approval question.",
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "privateNineRestoration": {
+      "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/CommandRuns/PrivateNineRestore01/PrivateNineRestore/completed.json",
+      "bytes": 1925,
+      "sha256": "8352abf43fa42879794c3b0860e17d64e5f237ea19fa9b6a7748f15c940c8bfc"
+    }
+  },
+  "historicalActiveWorkBeforeCardHuman20261118_01": {
     "id": "SharpIllustration-2026-11-17",
     "status": "checkpoint-main-verified-normal-release-and-closure-recorded",
     "currentRunId": "SharpIllustrationEvidenceFinish-2026-11-17",
@@ -969,23 +2118,47 @@
       "deadlineUtc": "2026-11-17T04:20:24.961453+00:00",
       "status": "actual-independent-final-idle-normal-own-release-and-separate-available-observed",
       "releasedUtc": "2026-11-17T03:38:42.312383+00:00",
-      "finalIdle": {"label": "BeforeReleaseCycleFinalIdle01", "status": "actual4events0-empty", "summaryBytes": 11691, "summarySha256": "42ed9a2b6507b22b28fc8c096aed0ec51640a591a7ae24acabd6ecffee0d3be8"},
+      "finalIdle": {
+        "label": "BeforeReleaseCycleFinalIdle01",
+        "status": "actual4events0-empty",
+        "summaryBytes": 11691,
+        "summarySha256": "42ed9a2b6507b22b28fc8c096aed0ec51640a591a7ae24acabd6ecffee0d3be8"
+      },
       "scope": "Historical normal Resume cycle. Its3approved current browsers retain actual Resume owners/raw/Root evidence, not newRelease re-executions. Native/Web keep their original Sharp owners."
     },
     "releaseSources": {
       "status": "six-source-admitted-path-only-adapters-installed-for-actual-new-independent-Release",
       "controlRoot": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17",
-      "adapters": ["activate-tmp-current.sh", "run-owned-sharp-illustration-current.py", "run-owned-sharp-illustration-review90.py", "root-review-helper.py", "publish-with-temporary-objects.py", "root-portal-bookkeeping.py"],
+      "adapters": [
+        "activate-tmp-current.sh",
+        "run-owned-sharp-illustration-current.py",
+        "run-owned-sharp-illustration-review90.py",
+        "root-review-helper.py",
+        "publish-with-temporary-objects.py",
+        "root-portal-bookkeeping.py"
+      ],
       "sourceAdmission": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/future-release-adapters-root-source-admission01.json",
       "evidenceSourceAdmission": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/future-release-evidence-root-source-admission01.json",
-      "normalHandover": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/normal-handover01.json", "bytes": 3009, "sha256": "6158ff55373128abf4a57dfa0fc647152c94d4df9401768e6f5be032ae32a511"},
+      "normalHandover": {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/normal-handover01.json",
+        "bytes": 3009,
+        "sha256": "6158ff55373128abf4a57dfa0fc647152c94d4df9401768e6f5be032ae32a511"
+      },
       "scope": "Actual normal old own-release, independent available and genuinely new fixed6h acquisition; no renewal/takeover. Same task/source/OUT/build/stage/old BuildProofCurrent, exact path-only source adapters. Login:true with explicit activation/needed network permission. No future source packet/archive/acquisition/storage/publish result inferred."
     },
     "resumeSources": {
       "historical": true,
       "activationSha256": "38339f8c6942547c43b8a854142f595d6868c5062fc3b9c1fbbfb356009a4256",
       "wrapperSha256": "3620fa2b7ece99b4569ec8c07b72e004358e145dcbfe2d9bbcf553590a93015e",
-      "browserReview90Adapter": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/run-owned-sharp-illustration-review90.py", "bytes": 13516, "sha256": "3c2aabdecbe0e99458bec1bd3a888e8235fb98ac8053347972e8ef11eb556284", "sourceAdmission": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/browser-review90-root-source-admission01.json", "admissionBytes": 2170, "admissionSha256": "d06faee8f88704495042bb9b9c8a3a51b805a8cdcf5f48e90bdea6955a4de5cf", "scope": "Separately Root source-reviewed browser-only90min adapter: exact9argument allowlist/display, explicit5400sec within unchanged native900..21600 range. Original activation3600/wrapper3620, e1cbd harness, drivers/plans/contracts, fixed04:20UTClease deadline+60sec reserve,12sec cleanup and per-review600sec unchanged. No ownership renewal; all nonbrowser work retains original wrapper."},
+      "browserReview90Adapter": {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/run-owned-sharp-illustration-review90.py",
+        "bytes": 13516,
+        "sha256": "3c2aabdecbe0e99458bec1bd3a888e8235fb98ac8053347972e8ef11eb556284",
+        "sourceAdmission": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/browser-review90-root-source-admission01.json",
+        "admissionBytes": 2170,
+        "admissionSha256": "d06faee8f88704495042bb9b9c8a3a51b805a8cdcf5f48e90bdea6955a4de5cf",
+        "scope": "Separately Root source-reviewed browser-only90min adapter: exact9argument allowlist/display, explicit5400sec within unchanged native900..21600 range. Original activation3600/wrapper3620, e1cbd harness, drivers/plans/contracts, fixed04:20UTClease deadline+60sec reserve,12sec cleanup and per-review600sec unchanged. No ownership renewal; all nonbrowser work retains original wrapper."
+      },
       "scope": "Historical Resume source admission and actual fixed6h cycle, now normally released03:38:42UTC. Original activation/wrappers and actual execution/proof/Root review owners retained; current new execution uses releaseSources path-only adapters. Product fingerprints/contracts/Native/Web proofs unchanged."
     },
     "releaseProfile": "sharp-illustration",
@@ -1010,15 +2183,45 @@
       "publicRangeUnit": 123,
       "sharpSyntheticUnit": 14,
       "atomicPngUnit": 4,
-      "browserPolicyUnit01": {"passed": 7, "status": "actual-all4events0-empty", "wrapperSha256": "6ede391900aa4a68f582a9a82c8925dfa0a8e140e61fb1e98e946faf5364237b"},
-      "capturePolicyUnit01": {"passed": 21, "status": "actual-all4events0-empty", "wrapperSha256": "5530338e4efb647ef23c9d78b5f629837482492e961c29a57a185e8efd81c68a", "scope": "Strict combined Sharp contract/policy units; not actual six-game browser suite approval."},
-      "publishedGitAcquireUnit01": {"passed": 7, "status": "actual-all4events0-empty", "wrapperSha256": "41d835fc8c3dc7081190c336a8d85a81a2412562d9a8a55465bdaf211c1777a8", "scope": "Actual helper unit pass only; future published P has not been actually acquired."},
+      "browserPolicyUnit01": {
+        "passed": 7,
+        "status": "actual-all4events0-empty",
+        "wrapperSha256": "6ede391900aa4a68f582a9a82c8925dfa0a8e140e61fb1e98e946faf5364237b"
+      },
+      "capturePolicyUnit01": {
+        "passed": 21,
+        "status": "actual-all4events0-empty",
+        "wrapperSha256": "5530338e4efb647ef23c9d78b5f629837482492e961c29a57a185e8efd81c68a",
+        "scope": "Strict combined Sharp contract/policy units; not actual six-game browser suite approval."
+      },
+      "publishedGitAcquireUnit01": {
+        "passed": 7,
+        "status": "actual-all4events0-empty",
+        "wrapperSha256": "41d835fc8c3dc7081190c336a8d85a81a2412562d9a8a55465bdaf211c1777a8",
+        "scope": "Actual helper unit pass only; future published P has not been actually acquired."
+      },
       "releaseEvidenceSourceFixtures": {
         "status": "actual-adapted-source-fixtures-all4events0-empty",
-        "review": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/evidence-source-fixture-review01.json", "bytes": 1480, "sha256": "bb40631d6f9dd17674a2f104e909f2c168f86595abc81ae2c5a77240d72f3728"},
-        "selectedArchiveUnit": {"passed": 8, "wrapperBytes": 11762, "wrapperSha256": "2dc4b039398eedfa26047e5751040a8ae58cf4aa41f87673b886477a125e8598"},
-        "publishedGitAcquireUnit": {"passed": 7, "wrapperBytes": 11866, "wrapperSha256": "f9094813071f77ccba91e85bb5173d821e141da8fa8806df4f67bfcc3de6ddfa"},
-        "closingSourceAdaptationUnit": {"passed": 4, "wrapperBytes": 12323, "wrapperSha256": "e937228f43abf70b8aac756689fdcc50bff8095b41d96de613db509f66988167"},
+        "review": {
+          "file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/evidence-source-fixture-review01.json",
+          "bytes": 1480,
+          "sha256": "bb40631d6f9dd17674a2f104e909f2c168f86595abc81ae2c5a77240d72f3728"
+        },
+        "selectedArchiveUnit": {
+          "passed": 8,
+          "wrapperBytes": 11762,
+          "wrapperSha256": "2dc4b039398eedfa26047e5751040a8ae58cf4aa41f87673b886477a125e8598"
+        },
+        "publishedGitAcquireUnit": {
+          "passed": 7,
+          "wrapperBytes": 11866,
+          "wrapperSha256": "f9094813071f77ccba91e85bb5173d821e141da8fa8806df4f67bfcc3de6ddfa"
+        },
+        "closingSourceAdaptationUnit": {
+          "passed": 4,
+          "wrapperBytes": 12323,
+          "wrapperSha256": "e937228f43abf70b8aac756689fdcc50bff8095b41d96de613db509f66988167"
+        },
         "scope": "Actual adapted source fixtures in newRelease; every4event exit0/empty receipt SHA/size checked by Root. No real archive/AQ/acquisition/cache/model/storage action performed or admitted from this fixture result."
       },
       "cardNative05": {
@@ -1062,7 +2265,11 @@
         "totalExplicitRootLedgerRows": 62,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 1418566,
         "canonicalReportSha256": "ba1bc8dd2ca891604917b57fe9812a867a13321b7d05cc0d67316afb2675b4e6",
         "untouchedRawReportBytes": 1391201,
@@ -1091,7 +2298,11 @@
         "totalExplicitRootLedgerRows": 73,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 13344100,
         "canonicalReportSha256": "119526f17afd0ed01d15ccf3c84d143e87ba51909534b1908db8a6cfdde0accc",
         "untouchedRawReportBytes": 9556563,
@@ -1125,7 +2336,11 @@
         "otherManualCapturePngCount": 26,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 1533605,
         "canonicalReportSha256": "acb2da2e184e9b74c7470150ea9d05f97afefbb0ed88408b72c3aca3e712b3e9",
         "untouchedRawReportBytes": 1501309,
@@ -1138,7 +2353,11 @@
         "rootLedgerSha256": "54ff8f77969078a778b88b37e349a930d67d86d4bb8f96b253e1fb3e373d3815",
         "harnessFinishedUtc": "2026-11-17T03:36:23.221869+00:00",
         "rootReviewedUtc": "2026-11-17T03:37:03.081523+00:00",
-        "rootObservations": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Root/GospelDesktop02-observations.json", "bytes": 2033, "sha256": "ebf26ca68d4929d286c746ab13731425fdbba2512b3fd7069dab8c9cda38f9aa"},
+        "rootObservations": {
+          "file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Root/GospelDesktop02-observations.json",
+          "bytes": 2033,
+          "sha256": "ebf26ca68d4929d286c746ab13731425fdbba2512b3fd7069dab8c9cda38f9aa"
+        },
         "scope": "Actual final e1cbd Desktop DPR1 complete498true/0false,100PNGs including74required and26manual captures,all74required Root ledger originals with0supplementary ledger rows,4real PCM/two real reloads/nav0-1-2; inner and outer each4events0/empty-contained receipts rehashed. Actual child HUD/large status and Joseph/Mary/teacher illustrated dialogue plus both world bodies, Mary same line/Bible return, all first-page text after ordinary scroll,12of19scriptures/14of23events with equipped lamp persisted after reload. One of4completed local final-harness approvals, not AAA/all-pose/public/main approval."
       },
       "cardMobile02": {
@@ -1157,7 +2376,11 @@
         "totalExplicitRootLedgerRows": 75,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 13401598,
         "canonicalReportSha256": "6fed27e5f307c2ac7efaa9fe78684b6077a8fcb8f4bcd0b288fc894854cef577",
         "untouchedRawReportBytes": 9613256,
@@ -1170,7 +2393,11 @@
         "rootLedgerSha256": "6e462c6047acc4a1633fdf5e71f505801bbf3109eb825955bc8909f75eca8610",
         "harnessFinishedUtc": "2026-11-17T04:11:44.815566+00:00",
         "rootReviewedUtc": "2026-11-17T04:12:21.652557+00:00",
-        "rootObservations": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Root/CardMobile02-observations.json", "bytes": 2383, "sha256": "6bee4f5b9f291e54564f9dd4157468a34f74de07739b1e77f4247eeceae6b25a"},
+        "rootObservations": {
+          "file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Root/CardMobile02-observations.json",
+          "bytes": 2383,
+          "sha256": "6bee4f5b9f291e54564f9dd4157468a34f74de07739b1e77f4247eeceae6b25a"
+        },
         "actualOwnedCardCopies": 55,
         "actualOwnedDistinctTypes": 27,
         "actualSp": 200,
@@ -1193,7 +2420,11 @@
         "supplementaryRootLedgerRows": 22,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 12916451,
         "canonicalReportSha256": "1f9900108e5cd7c9ad1c7484a9074bed3ea1bbc77ce79b09a45b92784e5d73ed",
         "untouchedRawReportBytes": 9123600,
@@ -1215,7 +2446,11 @@
         "totalExplicitRootLedgerRows": 74,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 1026393,
         "canonicalReportSha256": "aad87c53f9fc340a46f0211e5d56c82d7ad6983d915a901e6e8911858f9a643d",
         "untouchedRawReportBytes": 994098,
@@ -1241,7 +2476,11 @@
         "totalExplicitRootLedgerRows": 74,
         "actualAudioWindows": 4,
         "actualFullReloads": 2,
-        "navigations": [0, 1, 2],
+        "navigations": [
+          0,
+          1,
+          2
+        ],
         "canonicalReportBytes": 12928851,
         "canonicalReportSha256": "4170c585d5a488931c252aae3d55590c4b5e807fac4753dcbb2bc7ef4f069559",
         "untouchedRawReportBytes": 9140990,
@@ -1343,15 +2582,35 @@
       "finalBrowserHarnessBytes": 96075,
       "finalBrowserHarnessSha256": "e1cbd79198fdc557941faa85a200a2e30fdcefb0c5bdef1b3907a5698a182bc0",
       "requiredRootOriginalsByProfile": {
-        "FantasyCards": {"Desktop720": 64, "Mobile844": 63, "PublicMobile844": 63},
-        "PathOfDawn": {"Desktop720": 74, "Mobile844": 60, "PublicMobile844": 60}
+        "FantasyCards": {
+          "Desktop720": 64,
+          "Mobile844": 63,
+          "PublicMobile844": 63
+        },
+        "PathOfDawn": {
+          "Desktop720": 74,
+          "Mobile844": 60,
+          "PublicMobile844": 60
+        }
       },
       "scope": "Actual DPR1 desktop/DPR2 mobile-public canvas and WebGL buffer observations, all retained checkpoints, four audio windows, two actual save reloads and direct Root originals remain required. Source freezing is not execution/visual approval."
     },
     "currentWeb": {
       "proofRoot": "Artifacts/Validation/Autonomy/SharpIllustration-2026-11-17/BuildProofCurrent",
-      "FantasyCards": {"status": "actual-CardWeb02-passed-all4events0-empty", "selectedNative": "Native05", "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81", "outerWrapperSha256": "24976f3cd46599e4a75cf30120befc8630b804a9c4f77c5a34a8e2e300879c17", "proofIndexSha256": "4fb2118cdd4a50ad95f012f3d2779000b2729da8f77ac16268f2e1cc36e62b9a"},
-      "PathOfDawn": {"status": "actual-GospelWeb01-passed-all4events0-empty", "selectedNative": "Native03", "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872", "outerWrapperSha256": "1c7ae73097cc958ec119c9782c5780c8f94aa3328d721e3546ed9b77e577637c", "proofIndexSha256": "10384f728d7ff76544aa2ccaa19ff73ce2e2bbc7bc9a710b6fbd817dd0277ee4"},
+      "FantasyCards": {
+        "status": "actual-CardWeb02-passed-all4events0-empty",
+        "selectedNative": "Native05",
+        "sourceFingerprint": "3cf2818b2429d7b32c52d3a331316175a91527bed443e4aa135cd50cda1bbb81",
+        "outerWrapperSha256": "24976f3cd46599e4a75cf30120befc8630b804a9c4f77c5a34a8e2e300879c17",
+        "proofIndexSha256": "4fb2118cdd4a50ad95f012f3d2779000b2729da8f77ac16268f2e1cc36e62b9a"
+      },
+      "PathOfDawn": {
+        "status": "actual-GospelWeb01-passed-all4events0-empty",
+        "selectedNative": "Native03",
+        "sourceFingerprint": "c108f5eb3b3961cbf1747db3d7805225b1f0f1c8dfe11e2e8d6161dbac14b872",
+        "outerWrapperSha256": "1c7ae73097cc958ec119c9782c5780c8f94aa3328d721e3546ed9b77e577637c",
+        "proofIndexSha256": "10384f728d7ff76544aa2ccaa19ff73ce2e2bbc7bc9a710b6fbd817dd0277ee4"
+      },
       "scope": "Both current Web players/proofs passed; capture correction/bounded adapter leave Native/Web/product fingerprints unchanged. Old CardWeb01 and pre-capture browser passes stay historical. All4final local browsers approved/current4of6; no stage/public pass or new main/PR/Pages release."
     },
     "currentBrowser": {
@@ -1359,15 +2618,31 @@
       "historicalPreCaptureFixPassedSuites": 3,
       "CardDesktop01": "Failed after17observed checks at first audio gate: actual title17.882seconds/16valid PCMframes rejected by wrong30second revision filter. Preserve failed raw, no suite or Root pass.",
       "sourceCorrection": "Earlier4revision-tuple additions fixed the actual audio duration policy; that39446ac harness is95826bytes. Final96075byte e1cbd harness additionally uses primary-session public Playwright clipped screenshots and strengthens actual DPR/backing/GL checks before-after each original plus PNG dimensions within2px of executing CSSxDPR. No product/plan/contract edits, metric repair or image postprocessing.",
-      "captureCorrectionReview": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/capture-dpr-correction-review01.json", "sha256": "100bfdafab3e5cfaca80682f337d37e1245ce864298935e8b2d64a85838ea8f4"},
-      "syntheticWebGlCaptureRegression": {"status": "actual-all4events0-empty", "wrapperSha256": "d1b31d3dfe43d72c0bee714673dec9b8adb4d2b67b7a767e50c8ae42d0b094fc", "scope": "Chromium154 public page clip4captures plus touch/reload retained DOMDPR2, backing/GL1387x780 and PNG1386x780. Synthetic fixture regression, not gameplay suite approval."},
-      "canonicalRetirement": {"status": "actual-all4events0-empty-byte-and-inode-identical-preservation", "wrapperSha256": "a060eef933c245e273c7f3ec98a42dff564bc06c3c88d0145e8f66e611794cf6", "completedSha256": "c1073f8548865648e83bbb7f7b336b05cd1dcfa5700a9dba5442397b406e63a7", "recordRoot": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/PreCaptureFixCanonicalRetirement01", "scope": "Three actual old-harness passed canonical trees plus failedGospelMobile01 preserved under exact BrowserHistory game/profile/attempt paths. No old pass/raw/failure/inode relabeling or deletion."},
+      "captureCorrectionReview": {
+        "file": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/capture-dpr-correction-review01.json",
+        "sha256": "100bfdafab3e5cfaca80682f337d37e1245ce864298935e8b2d64a85838ea8f4"
+      },
+      "syntheticWebGlCaptureRegression": {
+        "status": "actual-all4events0-empty",
+        "wrapperSha256": "d1b31d3dfe43d72c0bee714673dec9b8adb4d2b67b7a767e50c8ae42d0b094fc",
+        "scope": "Chromium154 public page clip4captures plus touch/reload retained DOMDPR2, backing/GL1387x780 and PNG1386x780. Synthetic fixture regression, not gameplay suite approval."
+      },
+      "canonicalRetirement": {
+        "status": "actual-all4events0-empty-byte-and-inode-identical-preservation",
+        "wrapperSha256": "a060eef933c245e273c7f3ec98a42dff564bc06c3c88d0145e8f66e611794cf6",
+        "completedSha256": "c1073f8548865648e83bbb7f7b336b05cd1dcfa5700a9dba5442397b406e63a7",
+        "recordRoot": "Artifacts/Validation/Autonomy/SharpIllustrationResume-2026-11-17/Release/PreCaptureFixCanonicalRetirement01",
+        "scope": "Three actual old-harness passed canonical trees plus failedGospelMobile01 preserved under exact BrowserHistory game/profile/attempt paths. No old pass/raw/failure/inode relabeling or deletion."
+      },
       "GospelMobile02": "Actual1h review-timeout incomplete,372true recorded checks/76PNGs/48of60Rootmarked, rawstatusrunning; outercommand124/innerexecution130 with empty owned descendants. Byte/inode-identical canonical preserved under BrowserHistory/PathOfDawn/Mobile844/Browser02. Not a completed pass or product failure; see actualIncompleteAttempts.GospelMobile02.",
       "GospelMobile03": "Actualfinale1cbd PathOfDawn/Mobile844/Browser03 complete435checks/0false/87PNGs/60required+2supplementaryRoot,4PCM/two real reloads/nav0-1-2,inner+outer4events0/empty. Rootfinalized02:18:26.918158UTC; exact bindings in actualCompletedChecks.gospelMobile03. One of4completed local approvals.",
       "CardDesktop03": "Actualfinale1cbd FantasyCards/Desktop720/Browser03 complete464checks/0false/91PNGs/64required+9supplementaryRoot,4audio/two real reloads/nav0-1-2,inner+outer4events0/empty. Rootfinalized02:54:07.937686UTC; exact bindings and actual55owned/25types/200SP/50deck in actualCompletedChecks.cardDesktop03. One of4completed local approvals.",
       "GospelDesktop02": "Actualfinale1cbd PathOfDawn/Desktop720/Browser02 complete498checks/0false/100PNGs/74required-0supplementaryRoot,4PCM/two real reloads/nav0-1-2,inner+outer4events0/empty. Rootfinalized03:37:03.081523UTC; exact bindings and observationsebf26ca6 in actualCompletedChecks.gospelDesktop02. One of4completed local approvals, actual Resume owner.",
       "CardMobile02": "ActualnewReleasee1cbd FantasyCards/Mobile844/Browser02 complete490checks/0false/97PNGs/63required+12supplementaryRoot,4PCM/two real reloads/nav0-1-2,inner+outer4events0/empty. Rootfinalized04:12:21.652557UTC; exact bindings and actual55owned/27types/200SP/50deck in actualCompletedChecks.cardMobile02. One of4completed local approvals.",
-      "otherPendingSuites": ["FantasyCards/PublicMobile844", "PathOfDawn/PublicMobile844"],
+      "otherPendingSuites": [
+        "FantasyCards/PublicMobile844",
+        "PathOfDawn/PublicMobile844"
+      ],
       "next": "All4locals complete/current4of6. Retain3actualResume browser owners plus newReleaseCardMobile02 and all old evidence; normal main/source CI,Stage/P/Pages/fullPortal must precede2public suites, then seal/AQ/durable preservation/normal closure."
     },
     "storageAndProofRecovery": {
@@ -1391,12 +2666,22 @@
         "allSevenDirectoryIdentitiesUnchanged": true,
         "outerWrapperBytes": 12603,
         "outerWrapperSha256": "1a08be03e3b4387aa67c8cc4b25f214b9612c78328bdb6b3a8334b60dad507e4",
-        "completed": {"file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/PrePublicBert02/PrePublicOneBertDownloadedCacheFile/completed.json", "bytes": 40248, "sha256": "f221f347e73774af7a7174091a51c9727efef1898578f5b3e4638a2b55305ddc"},
+        "completed": {
+          "file": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/CommandRuns/PrePublicBert02/PrePublicOneBertDownloadedCacheFile/completed.json",
+          "bytes": 40248,
+          "sha256": "f221f347e73774af7a7174091a51c9727efef1898578f5b3e4638a2b55305ddc"
+        },
         "workspaceFreeAfterBytes": 584212480,
         "tmpFreeAfterBytes": 220487680,
         "laterRootWorkspaceObservationBytes": 584015872,
         "readerScope": "Separately admitted exactD-Bus policy sourceSHA prefix513812f8 allowed only actual PID111671/start8833915/rawSHA prefixf604 plus actual dual supervisor baselines; exe/fd/maps UNKNOWN, not verified executable or global reader absence. Other unknown/positive readers still reject.",
-        "fixtures": {"reviewFile": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/prepublic-bert02-fixtures-review01.json", "guardsPassed": 8, "readinessPassed": 6, "exactDbusPassed": 14, "status": "actual28fixtures-each4events0-empty"},
+        "fixtures": {
+          "reviewFile": "Artifacts/Validation/Autonomy/SharpIllustrationRelease-2026-11-17/Release/prepublic-bert02-fixtures-review01.json",
+          "guardsPassed": 8,
+          "readinessPassed": 6,
+          "exactDbusPassed": 14,
+          "status": "actual28fixtures-each4events0-empty"
+        },
         "scope": "Actual full verified clone of exactly1public-pinned reproducible BERT cache file followed by atomic selected-path symlink. Existing2links/targets,11other regular cache files and7directory identities retained. Strict Native/Web/4local/source/lease bindings identical before-after; only workspace capacity/shortfall fields changed. No player/evidence/Git change or new browser/main/P/public approval. Ephemeral TMP is cache storage, not durable evidence; selected old inode is not retained. FreshProductGitBudget03 remains pending before Gitadd/commit/push."
       },
       "UpperToolsLfs01": {
@@ -1417,7 +2702,13 @@
         "scope": "Only cache aliases replaced after verification;606original PNG inodes/meta kept. All22Tools and606PNG source/cache shared inodes remain immutable. Logical shared bytes are not actual reclaimed bytes."
       },
       "atomicGenerationPolicy": "Actual AtomicPNG4tests passed. Generators write a new temporary file then atomically replace the destination pathname; never write in-place through immutable shared source/cache inodes.",
-      "CacheCompiler8": {"status": "actual-all4events0-empty", "completedSha256": "988980f3511a4f94678b775515c0228e8646a53a6bd25235a4460d0a5a13a8fe", "currentTmpDerivedCopies": 8, "logicalBytes": 963589056, "scope": "Only8currentTMPderived copies compacted; complete source/proofs/fingerprints unchanged. No original/Bee/evidence deletion."},
+      "CacheCompiler8": {
+        "status": "actual-all4events0-empty",
+        "completedSha256": "988980f3511a4f94678b775515c0228e8646a53a6bd25235a4460d0a5a13a8fe",
+        "currentTmpDerivedCopies": 8,
+        "logicalBytes": 963589056,
+        "scope": "Only8currentTMPderived copies compacted; complete source/proofs/fingerprints unchanged. No original/Bee/evidence deletion."
+      },
       "ModelReloc01": "Failed before any copy at the false PID1-ancestor assumption; preserved as failed, no copied/moved files.",
       "RelocateTwoModelCaches02": {
         "status": "actual-all4events0-empty",
@@ -1426,7 +2717,10 @@
         "downloadedWeightFilesMoved": 2,
         "bytesMoved": 691407650,
         "destinationRoot": "/tmp/firstgame-sharp-illustration-20261117-voice-models01",
-        "files": ["MeloTTS-Korean/checkpoint.pth", "faster-whisper-small/model.bin"],
+        "files": [
+          "MeloTTS-Korean/checkpoint.pth",
+          "faster-whisper-small/model.bin"
+        ],
         "remainingOriginalFilesRetained": 12,
         "remainingOriginalDirectoryInodesRetained": 7,
         "workspaceFreeAfterBytes": 810647552,
@@ -1457,6 +2751,19 @@
     "scope": "Known current published delivery; pending fresh gameplay/seal is stated separately from the prior completely sealed technical release."
   },
   "mainControl": {
+    "executionControl": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+    "currentLease": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/lease.json",
+    "currentOwner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+    "currentLockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+    "currentOwnership": true,
+    "productMainCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+    "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+    "newCardHumanProductMainCommit": null,
+    "newCardHumanPublishedCommit": null,
+    "userAuthorizedAutomaticMainIntegration": true,
+    "status": "Current source work has not yet produced a newly verified main product or public version."
+  },
+  "historicalMainControlBeforeCardHuman20261118_01": {
     "executionControl": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17",
     "currentLease": "Artifacts/Validation/Autonomy/SharpIllustrationEvidenceFinish-2026-11-17/lease.json",
     "currentOwner": null,
@@ -1518,6 +2825,15 @@
     "verifierDocsCheckpointSaveAndCiNotYetObserved": true
   },
   "stateProposal": {
+    "status": "Root-adopted-after-actual-verification",
+    "sourceOnlyDraft": false,
+    "originalProposal": {
+      "file": "Artifacts/Validation/Drafts/CardHumanProgress04Docs20261118/root-values.proposed.json",
+      "bytes": 19153,
+      "sha256": "5005eb5a57d47181d9d577863a4f10982f22a81fad8bf0151ae7ba6a85673884"
+    }
+  },
+  "historicalStateProposalBeforeCardHumanProgress04_01": {
     "status": "actual-current-overlay-for-root-adoption",
     "policy": "Original baseline/V1/V2 values remain preserved as exact raw historical JSON tokens; current fields describe actual completed observations only."
   },
@@ -3974,7 +5290,12 @@
     },
     "releasedUtc": "2026-11-10T07:57:47.528375+00:00"
   },
-  "baselineScope": "Sharp product main9a24/public94f, installed06755 browser6/6 and whole-release FinalSeal01 passed. Verifier/evidence D1, CI/main and closure are separate remaining steps at this snapshot.",
+  "baselineScope": "GospelVisual current implementation only; CardHuman technical results and previous public baseline preserved as history, not current visual approval.",
+  "historicalBaselineScopeBeforeGospelVisualCycle20261119_01": "Previous CardHuman Native/Web and desktop passes remain historical technical results; latest user rejects Gospel visual quality. New Gospel-only visual rebuild is in progress, with no new product build/main/deployment. FantasyCards release is paused.",
+  "historicalBaselineScopeBeforeGospelVisualFocus20261119_01": "Core311, CardNative13/Web03, GospelNative19/Web02 passed. CardDesktop02 533/0,107PNG,69 Root originals,4PCM,2reload passed. GospelDesktop01 ENOSPC failed58/78 retained in history. Three locals, two public, main, publication, seal and durable closure pending.",
+  "historicalBaselineScopeBeforeCardHumanProgress05_01": "Both current Native and Web builds passed. Four local and two public browser suites, source main/publication, full seal and durable closure remain pending.",
+  "historicalBaselineScopeBeforeCardHumanProgress04_01": "Current CardHuman progress is distinct from the checked historical product main9a24/public94f: Core01 passed311, CardNative04 passed13 with Root14 originals, and CardWeb02 passed. Gospel Prepare08 failed before full five-actor preparation; all current Gospel Native/Web, browser/main/public/seal/archival closure work remains pending.",
+  "historicalBaselineScopeBeforeCardHumanProgress02_01": "Sharp product main9a24/public94f, installed06755 browser6/6 and whole-release FinalSeal01 passed. Verifier/evidence D1, CI/main and closure are separate remaining steps at this snapshot.",
   "historicalBaselineScopeBeforeSharpEvidenceFinish20261117_01": "Current Sharp product PR12/main M9a24/P94f/Pages/Portal03 delivery and Release AQ are complete. Helper06755 is installed, tracked62/candidate64/diagnostic11 are separate actual results; five old canonical directories are historical. New CardDesktop04 is approved1of6, GospelDesktop03 active/four pending. Original Native/Web retain actual source/ownership. Private nine-binary backup/cache retirement is complete; before any Unity restore exact nine files then force synchronous import/update for both projects. Full seal/checkpoint/D1/CI/main proof save/closure remain pending.",
   "historicalBaselineScopeBeforeSharpIllustrationStateV220261117": "Current Sharp product PR12/main M9a24/P94f/Pages/Portal03 delivery and Release AQ are complete; original Native/Web and four old-helper local approvals remain. Media-helper installation, six new actual browser runs, new full seal/checkpoint/D1/main proof save/closure are pending. Prior fully sealed ClassicNpr release remains explicit history.",
   "historicalBaselineScopeBeforeSharpIllustrationArchive20261117": "Public release, all six suites, FinalSeal, Checkpoint, D1/D2 raw Git saves and paired push CI, normal runtime closure and PR11 main integration completed. Future ordinary verified main integration is user-authorized without repeated approval. Original full parity/Genshin-level art goals remain incomplete; current preference commit CI is observed separately.",
@@ -3995,6 +5316,55 @@
     "portability": "Remote normal source/gh-pages commits and manifest are the durable restore anchors. Temporary players and ignored raw Artifacts must be checked for existence; never assume a new environment retains them."
   },
   "games": {
+    "FantasyCards": {
+      "revision": "fm-card-inspection-2026-11-18",
+      "status": "native05-web03-passed-browser-main-public-pending",
+      "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+      "implementedChange": "Deck/hand/public-field card details, actual values/equipment and separate use/deck actions preserve IDs, collection, currency and saves.",
+      "currentValidation": "C1 Core01 311/0/0, Native05 13/0/0, Root14 final originals and full Web03/gallery/proof passed. Previous failures/history remain.",
+      "multiplayer": "disabled-future-update",
+      "nextMilestone": "Current four local browser suites, then authorized product main/CI/stage/publication/Portal and two public suites.",
+      "qualityBoundary": "Original-client parity, small UI/readability limits and user artistic approval remain distinct from passed tests."
+    },
+    "PathOfDawn": {
+      "revision": "gospel-human-anime-2026-11-18",
+      "status": "native03-web02-passed-browser-main-public-pending",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+      "implementedChange": "Prepare23 all-five differentiated human actors, sewn full-native neckline, UV/materials and source-bound BeardV11/v2 with all54 adult frames and exact-zero immediate/reimported delta errors.",
+      "currentValidation": "Native03 19/0 and Root14 current originals; Web02 passed on matching original1b21 inputs after exact causal restoration. Browser/publication pending.",
+      "nextMilestone": "Preserve interrupted partial outputs and producer history, then run fresh GospelWeb02 before local/public browser and release checks.",
+      "qualityBoundary": "Preserve original source assets, rig, expressions, story and saves. Stylized beard/hair-tip/collar limitations remain; no Genshin/Star Rail equivalence or user aesthetic approval is established."
+    }
+  },
+  "historicalGamesBeforeCardHumanProgress04_01": {
+    "FantasyCards": {
+      "revision": "fm-card-inspection-2026-11-18",
+      "status": "current-native-web-passed-browser-main-public-pending",
+      "implementedChange": "Tap deck, own hand and public field cards to inspect original prints, rules, actual current values and equipment; use and deck transfer remain explicit separate actions.",
+      "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e",
+      "currentValidation": "Core01 311/0/0; Native04 13/0/0 with Root14 current originals; Web02 six successful contained events and independent core proof. New browser or publication is not yet complete.",
+      "multiplayer": "disabled-future-update",
+      "nextMilestone": "Perform current desktop/mobile ordinary card interaction, save/reload and audio reviews, then the authorized normal main/publication and fresh public checks.",
+      "qualityBoundary": "Low-resolution original print text and small retained legacy mobile lists remain limits; full original-client parity and user artistic approval are not claimed."
+    },
+    "PathOfDawn": {
+      "revision": "gospel-human-anime-2026-11-18",
+      "status": "preparation08-failed-outer-shirt-seam-v8-source-next",
+      "quests": 23,
+      "passages": 19,
+      "openingStoryScreens": 51,
+      "keyVoiceLines": 28,
+      "implementedChange": "RefinementV4, BeardV3, GarmentsV7 and UV-onlyV2 sources installed. Prepare08 compiled these and found a valid measured higher neck section, but failed its fixed outer ellipse against the actual shirt before UV derivation or first neckline save.",
+      "currentValidation": "No full current five-actor preparation,19-case Native, Web or browser approval yet. Earlier failures remain unchanged.",
+      "nextMilestone": "Use the actual outer shirt seam in V8, execute fresh Prepare09, then inspect five actors in motion and complete current Native19 and Web.",
+      "qualityBoundary": "Original assets, rig, expressions, locomotion, story and save identities remain protected; current source work does not establish Genshin/Star Rail quality or user artistic approval."
+    }
+  },
+  "historicalGamesBeforeCardHumanProgress02_01": {
     "FantasyCards": {
       "revision": "fm-sharp-client-2026-11-17",
       "status": "published-three-current-browser-cases-and-full-seal-passed",
@@ -4258,6 +5628,38 @@
     "scope": "Previous completed milestone; current LivingRpgClassic source has no inherited execution or visual acceptance."
   },
   "nextRun": {
+    "game": "PathOfDawn",
+    "task": "Official Unity sign-in/valid license, then actual fresh Unity model import/preparation and real game captures before Native/Web/browser/release.",
+    "cardWork": "paused",
+    "expiredLoginLinkMustNotBeReused": true,
+    "noUnattendedContinuationClaimed": true,
+    "readActualLeaseBeforeAnyNextWriter": true
+  },
+  "historicalNextRunBeforeCardHumanProgress04_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "current-owned-work-continues-after-card-web-pass",
+    "tasks": [
+      "Finish V8 actual-shirt-seam source and execute fresh Gospel Prepare09; preserve the actual Prepare08 and earlier failures.",
+      "Complete the actual five-actor build,19-case Gospel Native, direct front/side/expression/motion originals and Gospel Web with matching current source.",
+      "Complete four local desktop/mobile browser suites, authorized normal main integration, existing publication and full portal checks, then two public suites and complete seal.",
+      "Preserve complete actual evidence durably, observe required CI/raw readback, and finish independent final idle, normal own release and late closure."
+    ],
+    "automaticMainIntegration": "Already authorized for this game scope; no repeat permission request.",
+    "futureExecution": "Use actual fixed ownership and normal cleanup/release. This document does not renew a lease or create indefinite background or scheduled development."
+  },
+  "historicalNextRunBeforeCardHumanProgress02_01": {
+    "id": "CardHuman-2026-11-18",
+    "status": "current-work-in-progress",
+    "tasks": [
+      "Complete and inspect actual deck/battle card interaction while preserving live state, hidden information and saves.",
+      "Generate and visually inspect refined Gospel characters, expressions, hair, beard and garments during actual movement.",
+      "Root verifies exact private9 restoration and both projects' ForceSynchronousImport | ForceUpdate before Unity work, then executes the checks required for the new sources.",
+      "Integrate passing changes through normal main and existing publication procedures, retaining failures, original evidence and actual execution owners."
+    ],
+    "automaticMainIntegration": "Already authorized for this game scope; no repeat permission request.",
+    "futureExecution": "Use actual fixed ownership and normal cleanup/release. No renewed lease or automatic indefinite background continuation is created by this draft."
+  },
+  "historicalNextRunBeforeCardHuman20261118_01": {
     "id": "SharpIllustrationEvidenceFinish-2026-11-17",
     "status": "current-milestone-complete-next-visual-improvement",
     "tasks": [
@@ -4381,6 +5783,52 @@
     ]
   },
   "execution": {
+    "owner": "/root",
+    "scope": "GospelVisual only",
+    "record": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/lease.json",
+    "state": "owned-at-progress-snapshot-not-a-live-running-signal",
+    "snapshotUtc": "2026-11-18T19:38:47.634283+00:00",
+    "deadlineUtc": "2026-11-18T22:56:35.531397+00:00",
+    "backgroundContinuationClaimed": false,
+    "releaseMustUseActualOwnedRecord": true
+  },
+  "historicalExecutionBeforeCardHumanProgress04_01": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/generation/network/Git/storage/publication; source agents edit only assigned sources.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/lease.json",
+    "lockStatus": "acquired-current-fixed-cycle",
+    "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+    "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+    "startedUtc": "2026-11-18T04:42:06.604270Z",
+    "deadlineUtc": "2026-11-18T10:42:06.604270Z",
+    "currentOwnership": true,
+    "childCommandLimitSeconds": 3600,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "backgroundContinuationClaimed": false,
+    "nextAction": "Root verifies latest V8/source and preparation state, then continues Gospel generation/Native/Web and the fresh two-game local/main/public release checks."
+  },
+  "historicalExecutionBeforeCardHumanProgress02_01": {
+    "singleOwnerPolicy": "Root alone executes runtime/tests/browser/generation/network/Git/storage/publication; source agents edit only assigned sources.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/lease.json",
+    "lockStatus": "acquired-current-fixed-cycle",
+    "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+    "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+    "startedUtc": "2026-11-18T04:42:06.604270Z",
+    "deadlineUtc": "2026-11-18T10:42:06.604270Z",
+    "currentOwnership": true,
+    "childCommandLimitSeconds": 3600,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "backgroundContinuationClaimed": false,
+    "nextAction": "Continue actual source integration, execution preparation and verification of the requested card inspection and Gospel character changes."
+  },
+  "historicalExecutionBeforeCardHuman20261118_01": {
     "singleOwnerPolicy": "Root alone executes runtime/tests/browser/network/Git/storage; source agents edit only assigned Draft files.",
     "guard": "Tools/Autonomy/cycle_guard.py",
     "remoteLockRef": "refs/heads/codex/autonomy-lock",
@@ -5357,11 +6805,32 @@
       }
     }
   },
-  "knownIssuesScope": "Current remaining visual/original-parity gaps and final evidence Git/CI/main/Closure boundaries. All six current browser cases and full seal passed.",
+  "knownIssuesScope": "Actual Root build progress adopted 2026-11-18T11:29:52.534680+00:00",
+  "historicalKnownIssuesScopeBeforeCardHumanProgress04_01": "Current CardHuman source and verification limits. Card Native04/Web02 passed; Gospel Prepare08 failed at the outer shirt seam. No new current browser, product main/publication, full seal or durable closure result is claimed. Historical six-browser/full-seal statements refer to their older checked product.",
+  "historicalKnownIssuesScopeBeforeCardHumanProgress02_01": "Current remaining visual/original-parity gaps and final evidence Git/CI/main/Closure boundaries. All six current browser cases and full seal passed.",
   "historicalKnownIssuesScopeBeforeSharpEvidenceFinish20261117_01": "Current Sharp product quality and verification boundaries; helper installation/private nine-cache action completed, browser progress1of6 with Gospel PC active, full seal/checkpoint/D1/CI/closure pending.",
   "historicalKnownIssuesScopeBeforeSharpIllustrationStateV220261117": "Current Sharp product quality and verification boundaries; product PR12 is merged but classifier/new browser/seal/checkpoint/D1 work is pending.",
   "historicalKnownIssuesScopeBeforeSharpIllustrationArchive20261117": "Current remaining product quality gaps; PR11 main integration and D2 CI have completed.",
   "knownIssues": [
+    "C1 GospelWeb01 remains outer timeout124/empty/dead with no inner summary. Actual source recovery and two-file partial output were preserved; independent B Web02 passed without rewriting the interruption.",
+    "C1 independent four-event FinalIdle failed from no-spawn-budget. Root's later direct read-only idle0 and normal own release/available do not retroactively make that independent attempt pass.",
+    "BRecovery01 restored all original Native source1b21 and protected20 NPR model/prefab/meta files plus old raw nonmutables. Temporary98a drift is historical; restoration is not source regeneration or a new Native pass.",
+    "Compiler566 singletons484529972B were rehomed to persistent TMP with full bytes/attributes and separate full readback. No RAM/private archive/restore marker was applied in that operation; no live free-space or reader-absence conclusion is asserted.",
+    "Native02's17pass/2fail and all earlier source/prepare/Native/Web failures remain. BeardV11 preserves frozen tests, all54 frames and strict0.000002 mesh-local readback; exact-zero Prepare23 and passed Native03 do not rewrite failed history.",
+    "Stylized beard, hair tips and collar, original card artwork/small UI and incomplete original-client parity remain quality limits. Test/direct-original approval does not establish AAA/Genshin equality or user aesthetic approval.",
+    "Current four local/two public browser suites, main/CI/stage/publication/Portal/full seal/durable closure are pending. Same-scope automatic main/publication authorization remains; multiplayer is disabled for a future update.",
+    "B's fixed deadline is2026-11-18T16:42:51.771531Z, not a lease renewal,24-hour automated development or a newly scheduled background service."
+  ],
+  "historicalKnownIssuesBeforeCardHumanProgress04_01": [
+    "FantasyCards has current passed native/web details, but ordinary desktop/mobile/public browser verification remains pending; original printed text and small retained legacy mobile UI still limit visual quality.",
+    "Gospel Prepare08 passed its measured higher inner neck section but the fixed outer ellipse missed the actual shirt. V8 actual-seam source and fresh Prepare09 are next. UV-onlyV2 compiled but was not executed and no first neckline was saved.",
+    "Whole five-actor, current Gospel Native19 and Web, four local browser suites, normal main/publication, full portal/two public suites, seal and durable evidence closure remain unfinished.",
+    "Native01, Web01 and Gospel prerequisite/preparation failures retain their exact original statuses and raw evidence. Root's Native03 missing-graphics claim is explicitly corrected without overwriting its prior report or granting retrospective whole-run visual approval.",
+    "Exact private9 restoration and both projects' force synchronous import/update were completed. Private cache/backup payload remains outside Git and public evidence.",
+    "Normal same-scope main integration and existing publication are already user-authorized. Multiplayer remains disabled for a future update; full original-client parity, Genshin/Star Rail equivalence, physical-device FPS and user artistic approval are not established.",
+    "Interactive fixed ownership does not establish24-hour unattended development, an active goal card or a recurring scheduled automation."
+  ],
+  "historicalKnownIssuesBeforeCardHumanProgress02_01": [
     "FantasyCards original artwork can remain low resolution and battle controls small; full original-client parity remains incomplete.",
     "PathOfDawn still has simple environmental detail, flat garment/hair shapes, occasional nearby NPC overlap and foliage camera occlusion; Genshin-level quality is not achieved.",
     "The former public card run's media-classifier failure remains a failure. Installed06755 only registers the supported Sharp revisions, with unchanged strict HTTP/audio/lifecycle conditions and tracked62 fixture passes.",
@@ -11378,5 +12847,315 @@
     "remoteUploadAttemptStarted": false,
     "remoteUploadReviewReason": "Auto-review rejected the large validation/build checkpoint upload because specific potentially sensitive payload export to GitHub was not explicitly established. Root will inspect the actual immutable payload and complete unaffected verifier/docs work; no alternate upload bypass.",
     "normalClosureComplete": false
+  },
+  "historicalActiveWorkBeforeGospelVisualProgress20261119_02": {
+    "id": "gospel-visual-rebuild-2026-11-19",
+    "status": "new-gospel-source-installed-actual-cloth-and-unity-pending",
+    "releaseProfile": "card-human",
+    "executionOwner": "/root",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/lease.json",
+    "leaseOwner": "88aea9ab-9a61-4530-aad4-392d1c9e9cb7",
+    "leaseCommit": "e260fcb0a7e69647aead1004ee48850f06ba238c",
+    "leaseState": "acquired",
+    "startedUtc": "2026-11-18T14:24:09.921561+00:00",
+    "deadlineUtc": "2026-11-18T20:24:09.921561+00:00",
+    "startedSeoul": "2026-11-18T23:24:09.921561+09:00",
+    "deadlineSeoul": "2026-11-19T05:24:09.921561+09:00",
+    "snapshotUtc": "2026-11-18T17:03:20.007072+00:00",
+    "snapshotPrecision": "Actual Root progress adoption time after completed build readback.",
+    "ownershipBasis": "B normally released after independent FinalIdle, separate available, then C newly acquired. Historical producers retain original owners.",
+    "paths": {
+      "validationRoot": "Artifacts/Validation/CardHuman-2026-11-18",
+      "buildRoot": "Artifacts/CardHumanBuilds",
+      "stageRoot": "Artifacts/CardHumanWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18/BuildProofCurrent",
+      "proofScope": "Original C1 proof and OUT/build/stage preserved; current execution C does not rewrite C1/B producers."
+    },
+    "goals": {
+      "FantasyCards": "Deck and battle card details with actual public state, equipment, original prints and separate use/deck actions; preserve IDs, ownership, currency, saves and disabled future multiplayer.",
+      "PathOfDawn": "Improve differentiated human anime faces, hair, beard, garments and expressions while retaining source assets, native rig, locomotion, story and saves. Genshin/Star Rail is a reference goal, not an equivalence or user aesthetic approval claim."
+    },
+    "implementationState": "Eleven new renderer/import/environment source files, the View/World/App wiring, and six exact original 2K surface maps are installed. Compilation, authored child prefab and actual game originals remain pending.",
+    "verification": {
+      "newUnityGenerationCompleted": false,
+      "newNativeCompleted": false,
+      "newWebBuildCompleted": false,
+      "newBrowserReviewCompleted": false,
+      "newProductMainIntegrated": false,
+      "newProductPublished": false,
+      "sourceOnlyDraft": false,
+      "completionFlagScope": "Only the latest GospelVisual implementation; historical CardHuman results are retained in the lossless state history and are not new visual acceptance."
+    },
+    "previousCycleC1": {
+      "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18",
+      "owner": "674a85b2-3c39-49d3-b209-70ef21799cf4",
+      "lockCommit": "a21482cac0742152d8d30788312e8b0e0c390b88",
+      "independentFinalIdleStatus": "failed-no-spawn-budget",
+      "failedIndependentFinalIdleSha256": "8161e551be21f7b2963f425774274a408de2e920c97c1ba46041764f9c3eac33",
+      "rootDirectReadOnlyIdleExitCode": 0,
+      "directIdleReplacesFourEventProof": false,
+      "normalOwnReleaseUtc": "2026-11-18T10:42:00Z",
+      "availableObservedAfterRelease": true,
+      "ownershipTransferredRetrospectively": false,
+      "scope": "C1 actual Native/build results, failed final-idle attempt and timeout remain under original ownership; B is a separate normal acquisition."
+    },
+    "interruptedSourceRecovery": {
+      "attempt": "BRecovery01",
+      "executionCycle": "B",
+      "status": "restored-full-original-native-source",
+      "actualRecoveryReceiptSha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086",
+      "interruptedTemporarySourceDisplay": "98a...",
+      "restoredSourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305",
+      "originalNativeInputManifestSha256": "f38dee6ba2070871d589a84dda869e846142b433a965f3c7ab360e5cb569829f",
+      "beforeRecordJournalAndActualPostEditorBytesPreserved": true,
+      "protectedNprModelPrefabAndMetaFiles": 20,
+      "protectedOriginalBytesAndAttributesUnchanged": true,
+      "oldRawWebNonmutableFilesUnchanged": true,
+      "actualCleanupSha256": "66bf01136ab1a691474d69041ae5995384556097bc87deafe494c32e52c346e6",
+      "actualCleanupBytes": 681358,
+      "actualCleanupMoves": 145,
+      "actualCleanupFiles": 539,
+      "newNativePassClaimed": false,
+      "scope": "Actual C# Legacy recovery plus exact three URP/Graphics/Quality restoration and generated-addition cleanup; full source.verify returned original1b21. Original Native03 remains valid on those same restored inputs; no regeneration or fresh Native success is asserted."
+    },
+    "compilerStorageRehome": {
+      "files": 566,
+      "bytes": 484529972,
+      "singletons": true,
+      "destinationKind": "persistent-TMP",
+      "originalBytesAndFullAttributesRetained": true,
+      "copyReceiptSha256": "72e67c6844bf96d43fbc712e8bdce88dac77957a034096588278819b71f8ea44",
+      "separateFullReadbackReceiptSha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b",
+      "ramUsed": false,
+      "privateArchiveApplied": false,
+      "restoreMarkerCreated": false,
+      "scope": "Separate actual B storage operation and independent full readback, not a compiler rebuild, source change or current free-space/reader-absence measurement."
+    },
+    "previousCompletedProduct": {
+      "productSourceCommit": "9a24aecf8fac304a5599401ee7a3d95258a731d5",
+      "publishedCommit": "94f507578c51e4d12133a9c24e6e89223f35b0dd",
+      "scope": "Previous checked product; current CardHuman product main/publication remains pending."
+    },
+    "repositorySourceBase": {
+      "head": "ff2edda61499be0ad403d272a3fd7aea45340891",
+      "scope": "Root-provided saved documentation baseline, not a new product/publication."
+    },
+    "unityPrerequisite": "Exact private9 restoration and both projects' ForceSynchronousImport|ForceUpdate completed earlier in C1. Private payload remains outside Git/public evidence; compiler rehome did not apply a private archive or create a restore marker.",
+    "automaticMainIntegration": "Normal main integration and existing publication within the same authorized game scope remain authorized without asking again.",
+    "multiplayer": "disabled-future-update",
+    "renewalOccurred": false,
+    "backgroundContinuationClaimed": false,
+    "userArtisticApprovalClaimed": false,
+    "sourceProposalBoundary": "Root verified actual references and adopted this progress. Preserved original source proposal is not itself runtime proof.",
+    "actualCompletedCommands": [
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CanonBuildsReadback01/summary.json",
+        "bytes": 11028,
+        "sha256": "d50e85fb8091fe9a9ad62b9d8c29288439dd000c997f47d67210b35ea99543ac"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/GospelWeb02/summary.json",
+        "bytes": 11128,
+        "sha256": "68c32fa3e0c4b413f4e7b29034916ef5a32f51c92d7aea8e4cb92ae85b1c0c09"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/PreserveGospelWeb01/summary.json",
+        "bytes": 12660,
+        "sha256": "2b02c8e977c4826eabef81db15002d788a83d2ea330d2d93956b3d439f19e281"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/InterruptedSourceRecovery01/summary.json",
+        "bytes": 12053,
+        "sha256": "f4587963b3354167837ca1bcae556188d9e52bb0493c7e929e4d282ef2071086"
+      },
+      {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/CommandRuns/CompilerRehomeReadback01/summary.json",
+        "bytes": 12007,
+        "sha256": "0f1e0814d755238f67a5fc923dc92496f7bd34b0f9c8fb1e3a61509e8f35871b"
+      }
+    ],
+    "actualValidations": {
+      "FantasyCards": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/FantasyCards/binding.json",
+          "bytes": 923,
+          "sha256": "83ae24dd9d67569194ca16dc0fa53dcd4322245a6ef47079e0f4d19d42d0c4bb"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/cards-native-review.json",
+          "bytes": 6349,
+          "sha256": "f98f07eacc35ba93a347800a3b142a10d0de6f38e3a9446600292a8572b46780"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/FantasyCards/Web03/summary.json",
+          "bytes": 19410,
+          "sha256": "289e5f5bc5a1872f5cdd82ec5a2dc9a9713cf99e4838247ffd9fef6bb033c035"
+        },
+        "sourceFingerprint": "0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e"
+      },
+      "PathOfDawn": {
+        "native": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Native/PathOfDawn/binding.json",
+          "bytes": 1286,
+          "sha256": "cebe8782e05c248ed55ba82d923f999dc0ec94a710adda545fbea52311c105de"
+        },
+        "review": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/Root/gospel-native-review.json",
+          "bytes": 5973,
+          "sha256": "c9e85e3123c5a1b76fd28c34685229848e950e781276c58c7f9b219c2eb24cbc"
+        },
+        "web": {
+          "file": "Artifacts/Validation/CardHuman-2026-11-18/WebRuns/PathOfDawn/Web02/summary.json",
+          "bytes": 15925,
+          "sha256": "d752bb08a5542ddcc8cd7ebb4c99128e662f9966fdf0a513fbe3d72959d1cf22"
+        },
+        "sourceFingerprint": "1b21b7cdd8f78e125ab780a37560b535022bed39ea72c5796142df4aa9412305"
+      }
+    },
+    "partialWebPreservation": {
+      "file": "Artifacts/Validation/CardHuman-2026-11-18/WebSelectionHistory/BeforeGospelWeb02/completed.json",
+      "bytes": 2889,
+      "sha256": "361b3841124f9f54fe8471e068d518d450916b0403051753b3ba58162828b321"
+    },
+    "recoveryScope": "Only derived compiler/import caches privately archived after full lossless readback. Both restore-required markers remain. Restore with separately reviewed current-owner adapter before any future Unity. No private payload in Git/public evidence.",
+    "activeRuntime": "No Unity has run in the new visual cycle. Blender source/material inspection completed; first cloth bake failed and is preserved.",
+    "scope": "Latest user focus: Gospel graphics only; preserve paused FantasyCards work and existing public baseline.",
+    "currentUserAestheticAcceptance": false,
+    "commercialGameGraphicsParityAchieved": false,
+    "currentGospelVisualWork": {
+      "cardWorkPaused": true,
+      "cardCacheUntouched": true,
+      "automaticReviewRejectedAction": "GospelPausedCardArchive01 was rejected before execution: costly deletion of 3248 paused Card cache files lacked specific user authorization. No retry or deletion occurred.",
+      "safeAlternative": "Fresh full CPP/import hydration and exact temporary Gospel aliases in one RAM scope, followed by restoration before scope ends. Source reviewed; actual adapter and execution pending.",
+      "baselineReadback": {
+        "file": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18C/CommandRuns/GospelBaselineCacheReadback01/BaselineCacheReadback/completed.json",
+        "bytes": 1125,
+        "sha256": "7f96b2281a721c69f6db3cbec9f351bed827c6ff53e48aa8a2f9b18d10fe682b"
+      },
+      "fiveRestoredAsWsRegularFiles": true,
+      "cppAndImportStillRequireScopedRestoration": true,
+      "unityMayRun": false,
+      "storyGoalsRetained": 23,
+      "scripturePassagesRetained": 19
+    },
+    "execution": {
+      "controlRoot": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19",
+      "acquiredLease": {
+        "file": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/lease.json",
+        "bytes": 821,
+        "sha256": "da2e9f1aa83c15a49439df553b8f41ca65b3955e00668ea4685e2c2c5e37ca40"
+      },
+      "owner": "24f924f3-03db-4903-a043-ea0eea464381",
+      "lock": "3fe1973fe6c090d76cc3805314d975df76fc0137",
+      "deadlineUtc": "2026-11-18T22:56:35.531397+00:00",
+      "validationRoot": "Artifacts/Validation/GospelVisual-2026-11-19",
+      "buildRoot": "Artifacts/GospelVisualBuilds",
+      "stageRoot": "Artifacts/GospelVisualWebPlaytest",
+      "proofRoot": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/BuildProofCurrent"
+    }
+  },
+  "historicalNextRunBeforeGospelVisualProgress20261119_02": {
+    "id": "CardHuman-2026-11-18B",
+    "status": "current-b-local-browser-validation-next",
+    "tasks": [
+      "Complete four actual local PC/mobile browser suites and Root review, four PCM windows and two reloads each.",
+      "Integrate normal source main and publish the existing Pages site under prior authorization; verify every public manifest file and both portal originals.",
+      "Complete two actual public suites and full seal; preserve all evidence durably through normal Git/CI/raw readback, then independently idle and normally release."
+    ],
+    "automaticMainIntegration": "Already authorized for this game scope; no repeated permission question.",
+    "futureExecution": "B is separately acquired, not renewed: deadline2026-11-18T16:42:51.771531Z /2026-11-19T01:42:51.771531+09:00. This source proposal neither prolongs ownership nor schedules indefinite background work."
+  },
+  "historicalExecutionBeforeGospelVisualProgress20261119_02": {
+    "singleOwnerPolicy": "Root alone executes runtime/generation/tests/browser/network/Git/storage/publication. Source agents edit assigned source proposals only.",
+    "guard": "Tools/Autonomy/cycle_guard.py",
+    "remoteLockRef": "refs/heads/codex/autonomy-lock",
+    "controlRoot": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B",
+    "leaseRecord": "Artifacts/Validation/Autonomy/CardHuman-2026-11-18B/lease.json",
+    "lockStatus": "root-reported-separately-acquired-fixed-b-cycle",
+    "owner": "70b748cc-dcb5-4eee-ba66-3f017ff7fb2d",
+    "lockCommit": "31e710637619f3c12316ab197298ffbf72c6fd6c",
+    "startedUtc": "2026-11-18T10:42:51.771531Z",
+    "deadlineUtc": "2026-11-18T16:42:51.771531Z",
+    "currentOwnership": true,
+    "childCommandLimitSeconds": 3600,
+    "explicitUserAuthorizedLeaseMaximumSeconds": 21600,
+    "renewalAllowed": false,
+    "renewalOccurred": false,
+    "backgroundContinuationClaimed": false,
+    "previousC1Closure": "Independent four-event FinalIdle failed for no-spawn-budget; direct read-only idle0 was separate. Normal own release10:42:00Z and available preceded B acquisition. No old result/ownership is rewritten.",
+    "nextAction": "Run current four local browser suites, then the already-authorized normal main/publication and remaining release gates."
+  },
+  "historicalUpdatedUtcBeforeGospelVisualProgress20261119_02": "2026-11-18T17:03:20.007072+00:00",
+  "gospelVisualProgress20261119": {
+    "schema": 1,
+    "recordedUtc": "2026-11-18T19:38:47.634283+00:00",
+    "status": "art-and-source-complete-runtime-blocked-by-unity-license",
+    "heroBake": {
+      "attempt": "GospelChildArtistBake07",
+      "version": "V10",
+      "nativeBones": 109,
+      "faceMorphs": 122,
+      "report": {
+        "file": "Artifacts/Validation/Autonomy/GospelVisual-2026-11-19/Root/HeroChildArtistBake07/child-bake-report.json",
+        "bytes": 5517145,
+        "sha256": "d537bb8e989b7319d1cd9b0b203ae367abfa07d998dc6f7cd55955b85d7727f8"
+      },
+      "model": {
+        "file": "Tools/Art/GospelVisual20261119/PreparedChildV10/JesusChild-Hinzka-Sewn-v10.fbx",
+        "bytes": 4535532,
+        "sha256": "ef4367cbe7386eae29af0cb383bccf2cbe4fbd572c4849ff6cb6780e151294d1"
+      },
+      "sourceManifest": {
+        "file": "Tools/Art/GospelVisual20261119/PreparedChildV10/source-manifest.json",
+        "bytes": 31281,
+        "sha256": "c8a5d266c33bf99ba29506842faa13753876206f9150cf3585a5c922a7925631"
+      }
+    },
+    "constructionOriginalsViewedByRoot": 3,
+    "constructionOriginalsAreGameScreens": false,
+    "offlineCompile": {
+      "result": {
+        "file": "Artifacts/Validation/GospelVisual-2026-11-19/OfflineCompile/Compile02/result.json",
+        "bytes": 330746,
+        "sha256": "3b0d7f8d7de5bf74935cbb7ea88c06c11ff21a7d9385272887fc18f02ba2c452"
+      },
+      "assemblyCount": 4,
+      "sourceFiles": 90,
+      "compilerErrors": 0,
+      "unityCompilationOrTestPass": false,
+      "frameworkAssumption": "Unity6000.3.26f1 retained Editor RSP .NET4.8 API reference family"
+    },
+    "actualUnityAttempt": {
+      "label": "HeroPreview07",
+      "launched": true,
+      "exitCode": 198,
+      "importReached": false,
+      "reason": "No valid Unity Editor license found"
+    },
+    "officialAuthentication": {
+      "personalActivation": "NOT_SIGNED_IN",
+      "login01": "AUTH_LOGIN_FAILED: sign-in timed out",
+      "reuseExpiredLink": false,
+      "activeLicenseVerified": false
+    },
+    "graphicsGoal": "Honkai Star Rail reference quality; not achieved or aesthetically approved",
+    "card": {
+      "work": "paused",
+      "sourceCheckpointIncludesCardGameChanges": false
+    },
+    "approvals": {
+      "unityImport": false,
+      "native": false,
+      "web": false,
+      "browser": false,
+      "mainProduct": false,
+      "pages": false,
+      "userAesthetic": false
+    },
+    "authorization": "Same-scope validated main and existing Pages updates remain authorized without another approval.",
+    "nextStep": "Official Unity sign-in/valid license, then actual fresh Unity model import/preparation and real game captures before Native/Web/browser/release.",
+    "sourceCheckpointIsRelease": false,
+    "backgroundContinuationClaimed": false
   }
 }

@@ -40,7 +40,7 @@ namespace FirstGame.Editor
             public ShaderAssetReport[] shaders;
         }
         [Serializable] sealed class ShaderAssetReport { public string name, asset, guid; public long localId; public int serializedSubshaderCount; }
-        [Serializable] sealed class ActorReport { public string id, model, prefab; public bool avatarHuman, avatarValid; public int mappedHumanBones, skeletonTransforms, skinnedMeshes, vertices, triangles, blendShapes, materials; public float declaredHeight, importedHeight, feetY, forwardDotPositiveZ; public string[] materialShaders; public GospelIllustrationTailoring.Report tailoring; }
+        [Serializable] sealed class ActorReport { public string id, model, prefab; public bool avatarHuman, avatarValid; public int mappedHumanBones, skeletonTransforms, skinnedMeshes, vertices, triangles, blendShapes, materials; public float declaredHeight, importedHeight, feetY, forwardDotPositiveZ; public string[] materialShaders; public GospelIllustrationTailoring.Report tailoring; public GospelCharacterRefinement.Report refinement; public GospelCharacterBeard.Report beard; public GospelCharacterGarmentsV2.Report garments; public GospelCharacterMaterials.Report surfacePolish; public GospelCharacterClothUv.Report clothUv; }
         [Serializable] sealed class ClipReport { public string name, sourceTake, asset; public float firstFrame, lastFrame, seconds; public bool humanMotion, loop; public int curveBindings; }
         [Serializable] sealed class EnvironmentReport { public string name, asset; public int meshes, vertices, materials; }
         [Serializable] sealed class TextureReport { public string asset, source, sourceSha256, runtimeFormat, inputAlphaImport; public int width, height, maximumSize; public bool normal, sourceFileBytesPreserved; }
@@ -48,7 +48,7 @@ namespace FirstGame.Editor
         [MenuItem("Tools/FirstGame/Prepare Gospel NPR Assets")]
         public static void Prepare()
         {
-            if (PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal))
+            if (UsesTailoredCharacters())
                 GospelIllustratedPortraitPreparation.Ensure();
             string manifestPath = RepoFile(ManifestSource);
             Need(File.Exists(manifestPath), "Approved actor-manifest.json is required before NPR preparation.");
@@ -182,8 +182,24 @@ namespace FirstGame.Editor
                 animator.avatar = avatar; animator.runtimeAnimatorController = controller; animator.applyRootMotion = false;
                 animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 GospelIllustrationTailoring.Report tailoring = null;
-                if (PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal))
+                if (UsesTailoredCharacters())
                     tailoring = GospelIllustrationTailoring.Apply(instance, source.id);
+                GospelCharacterRefinement.Report refinement = null;
+                GospelCharacterBeard.Report beard = null;
+                GospelCharacterGarmentsV2.Report garments = null;
+                GospelCharacterMaterials.Report surfacePolish = null;
+                GospelCharacterClothUv.Report clothUv = null;
+                if (PilgrimageProjectSetup.Revision.StartsWith("gospel-human-anime-", StringComparison.Ordinal))
+                {
+                    refinement = GospelCharacterRefinement.Apply(instance, source.id,
+                        source.id == "JesusAdult" ? GospelCharacterMaterials.LayeredHair(instance, source.id) : null);
+                    if (source.id == "JesusAdult" || source.id == "Joseph" || source.id == "Teacher")
+                        beard = GospelCharacterBeard.Apply(instance, animator, source.id,
+                            GospelCharacterMaterials.Beard(instance, source.id), GospelCharacterBeard.OutputRoot);
+                    garments = GospelCharacterGarmentsV2.Apply(instance, source.id);
+                    clothUv = GospelCharacterClothUv.Apply(instance, source.id);
+                    surfacePolish = GospelCharacterMaterials.Apply(instance, source.id);
+                }
                 var renderers = instance.GetComponentsInChildren<SkinnedMeshRenderer>(true);
                 Need(renderers.Length > 0, "Real skinned NPR model required: " + source.id);
                 foreach (var renderer in renderers)
@@ -205,6 +221,7 @@ namespace FirstGame.Editor
                 var savedAnimator = saved.GetComponent<Animator>();
                 Need(savedAnimator && savedAnimator.avatar && savedAnimator.avatar.isHuman && savedAnimator.avatar.isValid && savedAnimator.runtimeAnimatorController == controller, "Saved humanoid/controller reference invalid: " + prefabPath);
                 return new ActorReport { id = source.id, model = modelPath, prefab = prefabPath, avatarHuman = avatar.isHuman, avatarValid = avatar.isValid, tailoring = tailoring,
+                    refinement = refinement, beard = beard, garments = garments, surfacePolish = surfacePolish, clothUv = clothUv,
                     mappedHumanBones = description.human.Length, skeletonTransforms = description.skeleton.Length, declaredHeight = source.height,
                     importedHeight = bounds.size.y, feetY = bounds.min.y, forwardDotPositiveZ = forward, skinnedMeshes = renderers.Length,
                     vertices = renderers.Sum(r => r.sharedMesh.vertexCount), triangles = renderers.Sum(r => r.sharedMesh.triangles.Length / 3),
@@ -213,6 +230,9 @@ namespace FirstGame.Editor
             }
             finally { UnityEngine.Object.DestroyImmediate(instance); }
         }
+
+        static bool UsesTailoredCharacters() => PilgrimageProjectSetup.Revision.StartsWith("gospel-illustrated-anime-", StringComparison.Ordinal)
+            || PilgrimageProjectSetup.Revision.StartsWith("gospel-human-anime-", StringComparison.Ordinal);
 
         static string NormalizeRole(string role, string name)
         {

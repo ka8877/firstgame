@@ -1,3 +1,81 @@
+<!-- gospel-visual-progress-20261119-02 -->
+## 새 인물 원본·보조 컴파일 완료, Unity 라이선스 인증 대기 — 2026-11-19 KST
+
+예수님의 길에 집중한다. V10의 실제 GospelChildArtistBake07은 성공했고 원본 얼굴·머리·109개 뼈·122개 모프를 보존한 시대 의상/샌들 FBX와 Blender 원본을 만들었다. 실제 구축 렌더3장을 Root가 직접 검토했다. 이는 게임 화면이나 스타레일 동급 품질/미적 승인이 아니다. 모델·텍스처·실행 설정 원본·별도 미실행 portable 설정·라이선스·해시를 Tools/Art/GospelVisual20261119/PreparedChildV10에 보존했다.
+
+얼굴·헤어 셰이더, 새 초반 환경과 원본2K 배경 표면6개, 가까운3인칭 카메라와 새 검증 소스를 설치했다. 실제 Unity 라이브러리 및 명시적인 Editor용 참조를 사용한 별도 Roslyn 보조 컴파일02에서4개 어셈블리/90개 C# 소스가 오류0으로 완료됐다. Unity import·셰이더 컴파일·Native 테스트·게임 실행 검증을 대신하지 않는다.
+
+HeroPreview07은 정확한 Gospel RAM 캐시 복원·현재 소유·독립 재독·엄격한 메모리 검사를 마친 뒤 실제 Unity를 실행했으나, import 전에 유효한 라이선스가 없어 exit198로 끝났다. 원 경로 복귀와 후손 종료는 완료했다. 공식 Personal 활성화는 NOT_SIGNED_IN, 공식 로그인01은 시간 초과로 실패했다. 만료 링크를 재사용하지 않으며 인증/라이선스 우회는 하지 않는다. GitHub 계정 읽기는 정상으로 돌아왔다.
+
+새 프리팹·게임 화면·Native/Web/브라우저·제품 main·Pages는 미완료다. 판마 작업과 공개 바이트는 보존한다. 같은 범위의 검증된 main·기존 Pages 자동 반영 승인은 유효하다. 인증 복구 후 실제 모델 import/게임 화면을 먼저 검토하고 최종 소스로 새 제품 검증을 진행한다. 이 문서는 현재 작업 시점의 기록이며 상시 실행/자동 재개 신호가 아니다. 실제 종료/소유는 lease.json과 원격 잠금을 확인한다. 아래는 당시 원문 이력이다.
+<!-- /gospel-visual-progress-20261119-02 -->
+
+<!-- gospel-visual-cycle-20261119-01 -->
+## 예수님의 길 전용 새 회차와 실제 설치 — 2026-11-19 KST
+
+C의 GospelFocusFinalIdle01은 네 event0/빈 후손을 완료했고 자기 lease를 정상 해제한 뒤 별도 available을 확인했다. 새 실제 CONTROL은 GospelVisual-2026-11-19, owner 24f924f3-03db-4903-a043-ea0eea464381, lock 3fe1973fe6c090d76cc3805314d975df76fc0137다. 고정 기간은 서울 2026-11-19 01:56:35~07:56:35이며 이전 회차 연장·탈취가 아니다. 새 OUT/Build/Proof/Stage를 사용하고 판마 작업·기존 공개는 보존한다. 같은 범위의 검증된 main·기존 Pages 반영은 다시 묻지 않는다.
+
+11개 새 렌더러·인물 import·배경 소스와 View/World/App 연결, 원본 2K 표면 지도6개를 실제 설치했다. 아직 Unity 컴파일·새 인물 프리팹·새 게임 빌드·main·배포·스타레일 동급 품질·사용자 미적 승인은 없다. 새 Native/Web/browser/stage 계약은 pending이며 과거 통과로 대신하지 않는다. 첫 실제 의상 bake는 unlit 머리카락의 재질 형식에서 실패23으로 보존했고 실제 node 검사를 완료해 보완 중이다.
+
+자동 승인 검토가 판마 캐시3248개 삭제를 포함한 GospelPausedCardArchive01을 구체적인 삭제 승인 부족으로 실행 전에 거절했다. 이를 재시도하거나 우회하지 않으며 판마 캐시는 그대로다. Gospel 다섯 캐시는 WS 일반 파일로 정확히 복원했고 GameAssembly·다섯 TMP 원본·legacy9 전체 바이트/필수 속성 독립 재독도 완료했다. CPP/import 원본 marker와 private payload는 보존하며, 삭제 없이 한 exec 안에서 새 RAM 전체 복원·임시 경로·독립 재독·Unity·원 경로 복귀를 수행하는 별도 검토 경로를 준비한다. 실제 복원/현재 소유/메모리/독립 재독 전 Unity를 실행하지 않는다. 아래는 당시 원문 이력이다.
+<!-- /gospel-visual-cycle-20261119-01 -->
+
+<!-- gospel-visual-focus-20261119 -->
+## 현재 우선 작업: 예수님의 길 시각 품질 재구축 — 2026-11-19 KST
+
+사용자가 스타레일 화면과 현재 결과의 큰 품질 차이를 다시 지적하고 예수님 게임에 집중하도록 지시했다. 판마의 완료한 카드 상세 소스·검증·원본은 보존하고 진행 중이던 CardMobile01을 정상 소유 후손 정리로 중단했다. 해당 중단은 통과가 아니다. 기존 두 게임 CardHuman 배포 경로는 일시 중지한다. 아래 Native/Web·브라우저 통과는 당시 기술 검증이며 새 시각 목표 달성이나 사용자 미적 승인으로 세지 않는다.
+
+새 목표는 현재 열두 살 여정의 인물 한 명과 실제 이동 가능한 초반 구역에서 얼굴·눈·머리·재단된 옷·건축·표면·조명·카메라 품질을 함께 높이는 것이다. 새 3D 후보 원본과 라이선스를 실제 확보하고 Blender에서 형태를 비교했다. Snow는 다른 미술 방향이며, no-morph 융합형 소년 mesh는 표현/리그 제약이 있어 곧바로 최종 인물로 설치하지 않았다. V110 애니 인물은 별도 표정·의상·임포트 경로를 검토한다. 후보 렌더는 Unity 게임 화면이나 신규 공개 결과가 아니다. 기존23사건·19본문·저장·안정ID와 실제 자유 이동을 유지한다.
+
+실행은 이미 취득한 C의 현재 소유에 한정하며 갱신·새 취득·상시 자동 실행을 주장하지 않는다. 실제 private 검사에서 CPP1,143,710,547B와 import1,005,644,656B, 다섯 캐시312,628,446B를 확인했다. 원 WS 여유로는 정확 복원과 Unity 작업 공간이 부족하다. 현재 비활성 판마 Bee의 무손실 private 보관과 명시적인 새 persistent TMP 복원 경로를 별도 검토하며, 정확 복원/독립 재독/legacy nine/GameAssembly 조건 전 Unity를 실행하지 않는다. private payload와 과거 실패·원본·marker는 보존하며 공개하지 않는다. 같은 범위의 검증된 main·기존 Pages 반영은 다시 묻지 않는다. 현재 새 게임 빌드·main·배포와 스타레일 동급 품질은 미완료다.
+<!-- /gospel-visual-focus-20261119 -->
+
+<!-- card-human-progress-05 -->
+## 카드 상세·인물 개선: 공간 복구 완료와 실제 C 회차 — 2026-11-18 KST
+
+Core01 311/0/0, 판마 Native05 13/0/0·Web03, Gospel Native03 19/0/0·Web02는 현재 소스로 통과했다. 두 Native의 필수 원본14장씩을 Root가 직접 검토했다. 판마 PC Browser02는533검사/0실패·107PNG·필수69원본 Root 검토·실제4PCM/재접속2회를 완료했다. Gospel PC Browser01은 ENOSPC로 실패했고58/78 Root 검토에서 중단됐다. canonical의 running 상태·누락 report.executed·실패한 두 실행의 exit1/빈 후손을 그대로 보존하고 BeforeGospelDesktop02 이력으로 옮겼다. 이를 통과로 세지 않는다.
+
+실제 CONTROL은 CardHuman-2026-11-18C, owner88aea9ab-9a61-4530-aad4-392d1c9e9cb7/locke260fcb0a7e69647aead1004ee48850f06ba238c다. 서울 고정 기간은 2026-11-18T23:24:09.921561+09:00~2026-11-19T05:24:09.921561+09:00다. B의 독립 FinalIdle 네 event0/빈 후손 뒤 정상 자기 해제·별도 available을 관측하고 C를 새로 취득했다. C1/B의 기존 실행 소유를 바꾸지 않는다. OUT/build/stage와 최초 C1 BuildProofCurrent를 유지한다.
+
+공간 부족을 복구하며 컴파일·임포트 캐시만 완전한 private gzip/PAX/SHA/속성/CRC 재독 뒤 보관했다. 두 게임 소스·원본·현재 Native/Web·HEAD/index는 보존됐고 RecoveredBuildsAndHeadroom01의 엄격한 builds 검증도 통과했다. CPP와 import Artifacts의 .FIRSTGAME_BEE_RESTORE_REQUIRED.json을 유지한다. **다음 Unity 전 정확한 복원과 현재 소유에 맞는 별도 검토 adapter가 필요하다. 해제된 B 전용 entrypoint를 새 소유에서 실행하지 않는다.** retained GameAssembly·다섯 캐시 TMP 경로도 함께 검토한다. 임시 복구 source/spec/lineage/receipt 원본은 B Release/EmergencyBootstrapOriginals01에 byte-exact 사본·원래 경로표로 보존했다. private payload는 공개 증거/Git에 넣지 않는다.
+
+새 Gospel PC Browser02·두 모바일·공개2회와 main/CI·Stage·기존 Pages·전체 Portal·봉인·내구 보존·정상 종료가 남았다. 같은 범위의 정상 main·기존 공개는 사용자 승인에 따라 다시 묻지 않고 진행한다. 새 제품 main·신규 공개는 아직 완료가 아니다. 멀티플레이는 비활성·추후 업데이트를 유지한다. 원작 전체 재현·원신/스타레일 동급 품질·사용자 미적 승인을 주장하지 않는다. 아래는 당시 원문 이력이다.
+<!-- /card-human-progress-05 -->
+
+<!-- card-human-progress-04 -->
+## 두 게임 Native·Web 완료, 브라우저 검증 진행 — 2026-11-18 KST
+
+Core01 311/0/0, 판마 Native05 13/0/0·Web03, Gospel Native03 19/0/0·Web02를 실제 통과했다. Root는 각 현재 Native 원본14장을 직접 검토했다. 판마 덱·손패·공개 필드 상세와 원본 확대/별도 사용·덱 조작, Gospel 얼굴·머리·수염·전체 native 의상·UV·재질·표정 연결을 보완했다. 원작 전체 재현·원신/스타레일 동급 품질·사용자 미적 승인은 주장하지 않는다.
+
+C1 Web01은 외부124/빈 후손으로 중단됐고 내부 summary는 없었다. 남은 budget 부족의 독립 FinalIdle 실패와 별도 읽기전용 idle0, 정상 자기 해제·available 뒤 새 B 취득을 원래 결과로 보존한다. B의 실제 복구에서 journal/변경 전후 설정을 보존하고 전체 Gospel 소스를 원 Native1b21로 정확히 되돌렸다. 보호20개 원본 모델·프리팹·meta와 이전 비가변 raw 자료를 유지했다. 중단 부분 출력은 별도 history로 옮겼고 B의 새 Web02를 독립 완료했다.
+
+현재 CONTROL은 CardHuman-2026-11-18B, owner70b748cc-dcb5-4eee-ba66-3f017ff7fb2d/lock31e710637619f3c12316ab197298ffbf72c6fd6c다. 고정 기간은 서울2026-11-18 19:42:51~11-19 01:42:51이며 갱신·상시 자동 실행이 아니다. 원 C1 BuildProofCurrent와 OUT/build/stage를 유지한다. compiler566개484,529,972B는 persistent TMP에 원 바이트·속성으로 옮긴 뒤 별도 전체 재독했다. private archive나 복원 marker는 적용하지 않았다.
+
+현재 로컬 PC·모바일4회와 공개2회, 제품 main·CI·Stage·기존 Pages 배포·전체 Portal·봉인·내구 보존·정상 종료가 남아 있다. 같은 범위의 정상 main·기존 공개는 이미 승인돼 다시 묻지 않는다. 이전 공개94f50757과 제품main9a24aecf는 이번 새 공개와 구분한다. 멀티플레이는 비활성·추후 업데이트를 유지한다. 아래는 당시 원문 이력이다.
+<!-- /card-human-progress-04 -->
+
+<!-- card-human-progress-02 -->
+## 판마 새 Native·Web 통과, Gospel 생성 보완 진행 — 2026-11-18 KST
+
+판마는 덱·손패·공개 전열 카드의 상세, 실제 능력치·장비·원본 확대와 구분된 사용·덱 조작을 구현했다. Core01은311/0/0, CardNative04는13/0/0이며 Root가 현재 원본14장을 직접 검토했다. 같은 소스 지문 `0da7cd697f4c062a222b6cb4c12ff07eef2a612ea4e56d1b61f8439c8e97263e`의 CardWeb02도 전체6개 event0/빈 후손으로 통과했다. 독립 core proof index SHA는 `b53fbc8aca9e54b306453a66beb6a25df22b1175bdfea14f7d538d97c28e0e03`이다. 원본15,350장749,704,026B를 품질 변경 없이 유지하고 기존 Web01 이력15,367파일의 바이트·안정 속성도 다시 읽어 확인했다. 기존 gallery 별칭에는 허용한 source inode의 nlink/ctime 변화만 반영되며 독립 proof core는 공유하지 않는다.
+
+Native01의 두 조작 경로 실패와 Native02/03의13개 통과를 보존한다. Web01은 Unity 파일 생성 뒤 압축 설정 변경으로 전체 복원 검사가 실패했고, 의도한 Brotli0를 두 프로젝트 설정에 고정한 뒤 새 Native04/Web02로 통과했다. Native03의 상대 상세창 일부가 빠졌다는 Root 관측은 개별 원본·픽셀을 다시 보니 잘못된 묶음 검토여서 철회했다. 원 보고서와 정정을 모두 남기며 이전 전체 실행에 대한 소급 시각 승인은 하지 않는다.
+
+예수님의 길은 RefinementV4·BeardV3·GarmentsV7·UV-onlyV2 소스를 설치했다. 실제 아동 로브의 UV0 부재를 확인했고 원본 geometry·리그를 유지하는 파생 좌표 경로를 작성했다. 다만 Prepare08은 높은 실제 목 단면을 통과한 뒤 고정 외곽 타원이 실제 셔츠와 만나지 않아 실패했다. UV2는 컴파일만 통과했고 적용은 실행되지 않았으며 첫 새 목선도 저장되지 않았다. 실제 셔츠 seam을 따르는 V8과 Prepare09가 다음 단계다. 다섯 인물 생성 전체·Gospel의 19개 Native 검사·Web·이번 브라우저·새 main·공개는 아직 완료로 기록하지 않는다.
+
+private9 정확 복원과 두 프로젝트의 `ForceSynchronousImport | ForceUpdate`는 실제 완료했다. 현재 owner `674a85b2…`/lock `a21482ca…`의 CONTROL은 `CardHuman-2026-11-18`, 고정 회차는13:42:06~19:42:06 KST다. Root만 실제 실행·저장·검증·배포를 담당하며 같은 범위의 정상 main 반영·기존 공개는 이미 승인돼 있다. 이전 제품 main `9a24aecf…`·공개 `94f50757…`가 공개 기준이고 HEAD `ff2edda…`는 이번 제품 변경을 공개했다는 뜻이 아니다. 멀티플레이는 비활성·추후 업데이트다. 원신급·전체 원작 재현·사용자 미적 승인·24시간 자동 개발을 주장하지 않는다. 아래 내용은 각 작성 당시의 이력으로 원문을 보존한다.
+<!-- /card-human-progress-02 -->
+
+<!-- card-human-current -->
+## 카드 상세 보기·Gospel 인물 개선 진행 — 2026-11-18 KST
+
+판마는 덱 편집·전투에서 카드를 눌러 상세를 확인하고 사용·장비·덱 추가를 구분하는 조작, 실제 능력치·장비·원본 확대 표시를 보완한다. 예수님의 길은 성인별 얼굴과 인체 비율, 긴 머리·수염·목둘레와 옷의 형태, 대화 표정에 맞춘 움직임을 개선한다. 기존 저장과 인물 리그·이동을 보존하며 실제 화면에서 품질을 확인한다.
+
+현재는 소스 통합·실행 준비 단계다. 이번 변경의 Unity 생성·실행 검증·새 빌드·main 반영·신규 공개는 아직 완료로 기록하지 않는다. 원작 클릭 방식의 완전한 확인, 원신·스타레일과 같은 품질, 사용자 미적 승인을 주장하지 않는다. 판마 멀티플레이는 비활성·추후 업데이트를 유지한다.
+
+현재 CONTROL은 `Artifacts/Validation/Autonomy/CardHuman-2026-11-18`이며 Root가 알린 실제 owner `674a85b2…`/lock `a21482ca…`의 2026-11-18 13:42:06~19:42:06 KST 고정 회차다. Root가 실제 실행·검증·통합·배포를 소유한다. 같은 범위의 정상 main 반영·공개는 이미 승인돼 있다. 이전 제품 main `9a24aecf…`·공개 `94f50757…`와 아래 검증·종료 기록은 각 당시의 완료 이력이다.
+<!-- /card-human-current -->
+
 <!-- sharp-illustration-current -->
 ## main 반영·검증과 정상 종료 — 2026-11-18 KST
 

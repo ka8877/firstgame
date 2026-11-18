@@ -1135,29 +1135,62 @@ namespace PathOfDawn.SmokeTests
             Assert.That(Mathf.Abs(Mathf.DeltaAngle(App.Player.FacingYaw, physicalYaw)), Is.LessThan(.01f));
         }
 
+        sealed class ChapterLightingSnapshot
+        {
+            public float intensity;
+            public Color color;
+            public Quaternion rotation;
+            public UnityEngine.Rendering.AmbientMode ambientMode;
+            public Color[] ambient;
+            public static ChapterLightingSnapshot Capture()
+            {
+                Assert.That(RenderSettings.sun, Is.Not.Null);
+                return new ChapterLightingSnapshot { intensity = RenderSettings.sun.intensity, color = RenderSettings.sun.color,
+                    rotation = RenderSettings.sun.transform.rotation, ambientMode = RenderSettings.ambientMode,
+                    ambient = new[] { RenderSettings.ambientLight, RenderSettings.ambientSkyColor,
+                        RenderSettings.ambientEquatorColor, RenderSettings.ambientGroundColor } };
+            }
+            public void AssertCurrent(string chapter)
+            {
+                Assert.That(RenderSettings.sun, Is.Not.Null, chapter);
+                Assert.That(RenderSettings.sun.intensity, Is.EqualTo(intensity).Within(.0001f), chapter);
+                Assert.That(RenderSettings.sun.color, Is.EqualTo(color), chapter);
+                Assert.That(Quaternion.Angle(RenderSettings.sun.transform.rotation, rotation), Is.LessThan(.01f), chapter);
+                Assert.That(RenderSettings.ambientMode, Is.EqualTo(ambientMode), chapter);
+                Assert.That(new[] { RenderSettings.ambientLight, RenderSettings.ambientSkyColor,
+                    RenderSettings.ambientEquatorColor, RenderSettings.ambientGroundColor }, Is.EqualTo(ambient), chapter);
+            }
+        }
+
         [UnityTest]
         public IEnumerator AllTwentyThreeEventsAndNineteenPassagesSurviveActualNprTravelAndReload()
         {
             App.GetComponent<GospelStorybookAudio>().NotifyUserGesture();
-            Assert.That(RenderSettings.sun, Is.Not.Null);
-            float fieldFov = App.SceneCamera.fieldOfView, fieldSunIntensity = RenderSettings.sun.intensity;
-            Color fieldSunColor = RenderSettings.sun.color;
-            Quaternion fieldSunRotation = RenderSettings.sun.transform.rotation;
-            var fieldAmbientMode = RenderSettings.ambientMode;
-            var fieldAmbient = new[] { RenderSettings.ambientLight, RenderSettings.ambientSkyColor,
-                RenderSettings.ambientEquatorColor, RenderSettings.ambientGroundColor };
+            float fieldFov = App.SceneCamera.fieldOfView;
+            // Controlled Native presentation exercise before starting any story.
+            // No journey/save/people or physical-traveler state is injected.
+            App.World.SetChapter("temple"); yield return null;
+            var templeLighting = ChapterLightingSnapshot.Capture();
+            App.World.SetChapter("baptism"); yield return null;
+            var jordanLighting = ChapterLightingSnapshot.Capture();
+            Assert.That(Mathf.Abs(templeLighting.intensity - jordanLighting.intensity) > .0001f
+                || templeLighting.color != jordanLighting.color
+                || Quaternion.Angle(templeLighting.rotation, jordanLighting.rotation) > .01f
+                || templeLighting.ambientMode != jordanLighting.ambientMode
+                || !templeLighting.ambient.SequenceEqual(jordanLighting.ambient), Is.True,
+                "The authored temple profile and restored Jordan profile must be actual distinct observations.");
+            App.World.SetChapter("temple"); yield return null;
+            templeLighting.AssertCurrent("temple after actual temple-Jordan-temple presentation transition");
             Action assertFieldPresentation = () =>
             {
                 Assert.That(App.OpeningStage.IsVisible, Is.False);
                 Assert.That(App.Actor.gameObject.activeInHierarchy && App.CameraRig.enabled, Is.True);
                 Assert.That(App.SceneCamera.fieldOfView, Is.EqualTo(fieldFov).Within(.0001f));
-                Assert.That(RenderSettings.sun, Is.Not.Null);
-                Assert.That(RenderSettings.sun.intensity, Is.EqualTo(fieldSunIntensity).Within(.0001f));
-                Assert.That(RenderSettings.sun.color, Is.EqualTo(fieldSunColor));
-                Assert.That(Quaternion.Angle(RenderSettings.sun.transform.rotation, fieldSunRotation), Is.LessThan(.01f));
-                Assert.That(RenderSettings.ambientMode, Is.EqualTo(fieldAmbientMode));
-                Assert.That(new[] { RenderSettings.ambientLight, RenderSettings.ambientSkyColor,
-                    RenderSettings.ambientEquatorColor, RenderSettings.ambientGroundColor }, Is.EqualTo(fieldAmbient));
+                bool temple = App.World.TempleRoot.gameObject.activeInHierarchy;
+                bool jordan = App.World.JordanRoot.gameObject.activeInHierarchy;
+                Assert.That(temple ^ jordan, Is.True, "Exactly one actual field chapter must be active.");
+                Assert.That(jordan, Is.EqualTo(App.Chronicle.CurrentQuest.ChapterId == "baptism"));
+                (temple ? templeLighting : jordanLighting).AssertCurrent(temple ? "temple" : "Jordan");
             };
             yield return Click("새 여정 시작");
             var visited = new HashSet<string>(); var acquired = new HashSet<string>();
@@ -1185,7 +1218,7 @@ namespace PathOfDawn.SmokeTests
                     }
                     if (quest.Id == "birth-night-shepherds")
                     {
-                        Assert.That(RenderSettings.sun.intensity, Is.LessThan(fieldSunIntensity), "Actually traverse a night scene before checking restored daylight.");
+                        Assert.That(RenderSettings.sun.intensity, Is.LessThan(templeLighting.intensity), "Actually traverse a night scene before checking restored daylight.");
                         observedNight = true;
                     }
                 }
