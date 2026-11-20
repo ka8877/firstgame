@@ -154,11 +154,11 @@ namespace PathOfDawn.Presentation
         {
             string cacheKey = "plain/" + key;
             if (sceneMaterials.TryGetValue(cacheKey, out Material cached)) return cached;
-            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
-            if (shader == null) throw new InvalidOperationException("The authored approach requires URP Lit.");
+            Shader shader = Resources.Load<Shader>("Art/GospelVisualRebuild20261119/Environment/NazarethSurface");
+            if (shader == null) throw new InvalidOperationException("The authored approach requires its stone and cloth shader.");
             var material = new Material(shader) { name = Prefix + key, enableInstancing = true };
             material.SetColor("_BaseColor", color); material.SetFloat("_Smoothness", smoothness);
-            material.SetFloat("_Metallic", 0); material.SetFloat("_Cull", (float)(twoSided ? CullMode.Off : CullMode.Back));
+            material.SetFloat("_Cull", (float)(twoSided ? CullMode.Off : CullMode.Back));
             material.doubleSidedGI = twoSided;
             sceneMaterials.Add(cacheKey, material); ownMaterial(material); return material;
         }
@@ -461,27 +461,38 @@ namespace PathOfDawn.Presentation
             }
         }
 
+        public void ApplyFoliagePalette()
+        {
+            OliveMaterials(chapter.gameObject);
+        }
+
         void OliveMaterials(GameObject model)
         {
             foreach(MeshRenderer renderer in model.GetComponentsInChildren<MeshRenderer>(true))
             {
                 Material[] slots=renderer.sharedMaterials;
+                bool changed=false;
                 for(int i=0;i<slots.Length;i++)
                 {
-                    Material source=slots[i];if(source==null)throw new InvalidOperationException("Missing authored foliage material.");
-                    if(source.name.IndexOf("Leaves",StringComparison.OrdinalIgnoreCase)<0
-                        &&source.name.IndexOf("Twigs",StringComparison.OrdinalIgnoreCase)<0)continue;
+                    Material source=slots[i];
+                    if (source == null || source.name.StartsWith(Prefix, StringComparison.Ordinal)
+                        || (source.name.IndexOf("Leaves", StringComparison.OrdinalIgnoreCase) < 0
+                            && source.name.IndexOf("Twigs", StringComparison.OrdinalIgnoreCase) < 0)) continue;
                     string key="olive/"+source.GetInstanceID();
                     if(!sceneMaterials.TryGetValue(key,out Material copy))
                     {
                         copy=new Material(source){name=Prefix+"olive-coloured authored foliage",enableInstancing=true};
-                        if(copy.HasProperty("_BaseColor"))copy.SetColor("_BaseColor",new Color(.72f,.78f,.61f));
-                        if(copy.HasProperty("_Color"))copy.SetColor("_Color",new Color(.72f,.78f,.61f));
+                        string colorProperty = copy.HasProperty("_BaseColor") ? "_BaseColor" : "_Color";
+                        if (copy.HasProperty(colorProperty))
+                        {
+                            Color tint = copy.GetColor(colorProperty);
+                            copy.SetColor(colorProperty, new Color(tint.r * .69f, tint.g * .64f, tint.b * .73f, tint.a));
+                        }
                         sceneMaterials.Add(key,copy);ownMaterial(copy);
                     }
-                    slots[i]=copy;
+                    slots[i]=copy; changed=true;
                 }
-                renderer.sharedMaterials=slots;
+                if (changed) renderer.sharedMaterials=slots;
             }
         }
 

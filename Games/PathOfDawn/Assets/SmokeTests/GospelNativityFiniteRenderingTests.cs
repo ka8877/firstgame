@@ -90,6 +90,11 @@ namespace PathOfDawn.SmokeTests
                     + " tangentAttribute=" + mesh.HasVertexAttribute(VertexAttribute.Tangent));
             }
             var cameraData = app.SceneCamera.GetUniversalAdditionalCameraData(); Assert.That(cameraData.stopNaN, Is.True);
+            Pose("temple", -31, -7, "nazareth-departure");
+            app.CameraRig.SetZoom(GospelPilgrimageCamera.DefaultZoom);
+            app.CameraRig.Snap();
+            yield return new WaitForSecondsRealtime(.25f);
+            AssertRawHdrFinite("nazareth-paving");
             foreach (string name in new[] { "mary-well", "jordan-water" })
             {
                 if (name == "mary-well") Pose("temple", -15, -8, "pilgrim-spring");

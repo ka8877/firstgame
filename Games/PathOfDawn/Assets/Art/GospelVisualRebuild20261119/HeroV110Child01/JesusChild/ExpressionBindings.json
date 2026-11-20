@@ -1,0 +1,40 @@
+{
+    "schema": 1,
+    "actors": [
+        {
+            "id": "JesusChild",
+            "presets": [
+                {
+                    "preset": "ih",
+                    "renderer": "Face",
+                    "shapeKey": "Fcl_MTH_I",
+                    "weight": 1.0
+                },
+                {
+                    "preset": "oh",
+                    "renderer": "Face",
+                    "shapeKey": "Fcl_MTH_O",
+                    "weight": 1.0
+                },
+                {
+                    "preset": "relaxed",
+                    "renderer": "Face",
+                    "shapeKey": "Fcl_ALL_Fun",
+                    "weight": 1.0
+                },
+                {
+                    "preset": "sad",
+                    "renderer": "Face",
+                    "shapeKey": "Fcl_ALL_Sorrow",
+                    "weight": 1.0
+                },
+                {
+                    "preset": "happy",
+                    "renderer": "Face",
+                    "shapeKey": "Fcl_ALL_Joy",
+                    "weight": 1.0
+                }
+            ]
+        }
+    ]
+}

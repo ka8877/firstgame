@@ -12,6 +12,8 @@ namespace PathOfDawn.Presentation
     public sealed class GospelPilgrimageWorld : MonoBehaviour
     {
         public const float MinimumX = -34f, MaximumX = 40f;
+        // From the entrance towards Joseph and the first bend of the path.
+        public const float NazarethDepartureYaw = 63f;
         public Rect Bounds => Chapter == "baptism" ? new Rect(MinimumX, -15f, 74f, 25.5f) : new Rect(MinimumX, -15f, 74f, 35f);
         public string Chapter { get; private set; } = "temple";
         public int AuthoredPropCount { get; private set; }
@@ -159,6 +161,7 @@ namespace PathOfDawn.Presentation
                     && NazarethSlice.ReservesScenerySpace(p, .45f)), npr);
             LivingGrassClumpCount += atmosphere.GrassClumpCount; WildflowerCount += atmosphere.FlowerCount;
             BuildBoundary(root, river);
+            if (!river) NazarethSlice.ApplyFoliagePalette();
             CombineArchitecture(root);
             npr.FinishChapter(root);
         }

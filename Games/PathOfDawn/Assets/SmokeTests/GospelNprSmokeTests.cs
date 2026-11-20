@@ -1189,7 +1189,7 @@ namespace PathOfDawn.SmokeTests
                 bool temple = App.World.TempleRoot.gameObject.activeInHierarchy;
                 bool jordan = App.World.JordanRoot.gameObject.activeInHierarchy;
                 Assert.That(temple ^ jordan, Is.True, "Exactly one actual field chapter must be active.");
-                Assert.That(jordan, Is.EqualTo(App.Chronicle.CurrentQuest.ChapterId == "baptism"));
+                Assert.That(jordan, Is.EqualTo(App.Chronicle.ChapterId == "baptism"));
                 (temple ? templeLighting : jordanLighting).AssertCurrent(temple ? "temple" : "Jordan");
             };
             yield return Click("새 여정 시작");
