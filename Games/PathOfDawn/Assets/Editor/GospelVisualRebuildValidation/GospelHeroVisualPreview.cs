@@ -190,6 +190,25 @@ namespace Firstgame.GospelVisualRebuild.Editor
             { GospelHeroPreviewSupport.Click("이야기 계속"); yield return null; yield return null; }
             GospelHeroPreviewSupport.Need(App.Chronicle.QuestIndex == quest && App.Chronicle.CurrentStoryBeat.Speaker == "요셉", "Capture a real Joseph turn, not a synthetic dialogue overlay.");
             yield return Shot("04-actual-joseph-dialogue.png", "actual accepted Joseph encounter, world and existing dialogue UI");
+            foreach (string id in new[] { "Mary", "Joseph" })
+            {
+                var actor = Object.FindObjectsByType<GospelPilgrimageActor>(FindObjectsSortMode.None)
+                    .Where(a => a.IsNpc && a.name.StartsWith("Encounter NPR model", StringComparison.Ordinal)
+                        && a.CharacterView.ModelIdentity == id)
+                    .OrderBy(a => Vector3.Distance(a.transform.position, App.Player.Position)).FirstOrDefault();
+                GospelHeroPreviewSupport.Need(actor, "An active encounter actor is required for cast preview: " + id);
+                var view = actor.CharacterView;
+                var portrait = view.GetPortraitTexture(1024) as RenderTexture;
+                yield return new WaitForSecondsRealtime(.2f);
+                GospelHeroPreviewSupport.Need(portrait && portrait.IsCreated() && view.HasVisiblePortrait, "Could not render encounter actor: " + id);
+                try
+                {
+                    var request = new RenderPipeline.StandardRequest { destination = portrait };
+                    RenderPipeline.SubmitRenderRequest(view.PortraitCamera, request);
+                    SaveTexture(portrait, "05-encounter-" + id.ToLowerInvariant() + ".png", "actual active encounter rig and material: " + id, view.ModelResource);
+                }
+                finally { view.SetPortraitVisible(false); }
+            }
             report.sequenceReachedEnd = true;
         }
 
@@ -217,7 +236,7 @@ namespace Firstgame.GospelVisualRebuild.Editor
             }
         }
 
-        static void SaveTexture(RenderTexture target, string name, string scope)
+        static void SaveTexture(RenderTexture target, string name, string scope, string modelResource = null)
         {
             var previous = RenderTexture.active; Texture2D pixels = null;
             try
@@ -227,7 +246,7 @@ namespace Firstgame.GospelVisualRebuild.Editor
                 GospelHeroPreviewSupport.Need(png.Length > 10000, "PNG is unexpectedly small; no successful visual result is inferred.");
                 string path = Path.Combine(config.outputDirectory, name); GospelHeroPreviewSupport.WriteNew(path, png);
                 var frame = new Frame { file = name, sha256 = GospelHeroPreviewSupport.HashFile(path), scope = scope,
-                    width = target.width, height = target.height, resource = App.Actor.CharacterView.ModelResource,
+                    width = target.width, height = target.height, resource = modelResource ?? App.Actor.CharacterView.ModelResource,
                     uiView = App.Ui.CurrentView, quest = App.Chronicle.CurrentQuest?.Id ?? "", stage = App.Chronicle.Stage.ToString(),
                     player = App.Player.Position, playerYaw = App.Player.FacingYaw, camera = App.SceneCamera.transform.position,
                     orbitYaw = App.CameraRig.Yaw, orbitPitch = App.CameraRig.Pitch };

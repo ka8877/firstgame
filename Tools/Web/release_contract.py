@@ -177,7 +177,21 @@ SHARP_ILLUSTRATION = {
 }
 
 
+GOSPEL_VISUAL = {
+    'name': 'gospel-visual',
+    'revisions': {'FantasyCards': 'fm-sharp-client-2026-11-17',
+                  'PathOfDawn': 'gospel-hero-visual-2026-11-20'},
+    'contents': dict(MODERN['contents']),
+    'reportRoots': {'FantasyCards': 'Artifacts/Validation/SharpIllustration-2026-11-17',
+                    'PathOfDawn': 'Artifacts/Validation/GospelPolishRelease-2026-11-20'},
+    'preservedGames': ['FantasyCards'],
+    'currentTargets': ['Web']
+}
+
+
 def contract(name):
+    if name == 'gospel-visual':
+        return GOSPEL_VISUAL
     if name == 'sharp-illustration':
         return SHARP_ILLUSTRATION
     if name == 'classic-npr':

@@ -87,6 +87,16 @@ namespace FirstGame.Editor
                 "Assets/Resources/Art/GospelRemaster", "Assets/Resources/Art/GospelRadiance",
                 "Assets/Resources/Art/GospelLuminous/Rendering"
             };
+            if (visual && target == "Web")
+            {
+                const string characters = "Assets/Resources/Art/GospelNpr/";
+                // Admitted hero lookup has already been checked. Keep exact prefab/material
+                // dependencies by GUID while removing their separate Resources roots.
+                candidates.Add(characters + "Characters/JesusChild.prefab");
+                candidates.Add(characters + "Models");
+                candidates.Add(characters + "Textures");
+                candidates.Add(characters + "Materials/Characters");
+            }
             // The current field retains temple props, reading illustrations and
             // SoftGlow. Earlier source art remains editable and is restored byte
             // for byte after a build.

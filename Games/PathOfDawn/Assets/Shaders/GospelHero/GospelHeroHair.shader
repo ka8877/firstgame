@@ -109,17 +109,18 @@ Shader "FirstGame/GospelHero/Hair"
             #pragma multi_compile_fog
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
             #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-            half4 HairFragment(HairVaryings input) : SV_Target
+            half4 HairFragment(HairVaryings input, FRONT_FACE_TYPE frontFace : FRONT_FACE_SEMANTIC) : SV_Target
             {
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
                 GospelHairClip(input.uv);
                 float4 texel = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, GospelHairUV(input.uv));
                 float3 albedo = GospelHairTone(texel.rgb) * _Color.rgb;
-                float3 n = GospelHairNormal(input.uv, input.normalWS, input.tangentWS);
+                float side = IS_FRONT_VFACE(frontFace, 1.0, -1.0);
+                float3 n = GospelHairNormal(input.uv, input.normalWS, input.tangentWS) * side;
                 float3 t, b;
                 GospelHairResolveFrame(n, input.tangentWS.xyz,
-                    cross(GospelHairSafeUnit(input.normalWS, n), input.tangentWS.xyz) * input.tangentWS.w,
+                    cross(GospelHairSafeUnit(input.normalWS, n) * side, input.tangentWS.xyz) * input.tangentWS.w,
                     _GospelHairFlowMode, _GospelHairFlowVector.xy, _GospelHairFlowRotation, t, b);
                 #if defined(_MAIN_LIGHT_SHADOWS_SCREEN)
                     Light light = GetMainLight(input.screenPosition);
@@ -152,11 +153,12 @@ Shader "FirstGame/GospelHero/Hair"
                 specular = specular * _AnisotropySpecularStrength + secondary * _Anisotropy2ndSpecularStrength;
                 colour += light.color * _ReflectionColor.rgb * _ReflectionColor.a * specular
                     * saturate(_UseReflection * _ApplySpecular) * received * saturate(dot(n, light.direction));
-                float rimBase = pow(1 - saturate(dot(n, view)), max(_RimFresnelPower, 0.1));
+                float rimBase = pow(1 - saturate(abs(dot(n, view))), max(_RimFresnelPower, 0.1));
                 float rim = smoothstep(_RimBorder - max(_RimBlur, 0.001),
                     _RimBorder + max(_RimBlur, 0.001), rimBase);
                 rim *= lerp(1, saturate(dot(n, light.direction)), saturate(_RimMainStrength));
-                colour += _RimColor.rgb * _RimColor.a * rim * saturate(_UseRim) * received;
+                // Keep the edge light in the hair's palette on both sides of a strand.
+                colour += lerp(albedo, _RimColor.rgb, 0.32) * _RimColor.a * rim * saturate(_UseRim) * received;
                 return half4(MixFog(colour, input.fog), texel.a * _Color.a);
             }
             ENDHLSL
@@ -229,12 +231,12 @@ Shader "FirstGame/GospelHero/Hair"
             #pragma fragment HairDepthNormalsFragment
             #pragma multi_compile_instancing
             #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
-            half4 HairDepthNormalsFragment(HairVaryings input) : SV_Target
+            half4 HairDepthNormalsFragment(HairVaryings input, FRONT_FACE_TYPE frontFace : FRONT_FACE_SEMANTIC) : SV_Target
             {
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
                 GospelHairClip(input.uv);
-                float3 n = GospelHairNormal(input.uv, input.normalWS, input.tangentWS);
+                float3 n = GospelHairNormal(input.uv, input.normalWS, input.tangentWS) * IS_FRONT_VFACE(frontFace, 1.0, -1.0);
                 #if defined(_GBUFFER_NORMALS_OCT)
                     float2 oct = PackNormalOctQuadEncode(n);
                     return half4(PackFloat2To888(saturate(oct * 0.5 + 0.5)), 0);
