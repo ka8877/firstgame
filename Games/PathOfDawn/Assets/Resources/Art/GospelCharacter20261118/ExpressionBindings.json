@@ -1,0 +1,278 @@
+{
+  "schema": 1,
+  "revision": "gospel-human-2026-11-18-v1",
+  "sourceManifestSha256": "411b309e2a987554f4ee1d62b905a8ed9352259a90e4ea839af2cb0d27c7110e",
+  "beardCopyRequiredActors": [
+    "JesusAdult",
+    "Joseph",
+    "Teacher"
+  ],
+  "scope": "Metadata from retained source morphs. Each new beard must copy all named frames and resolve uniquely at runtime; this file does not prove preparation, motion, audio synchronization or visual approval.",
+  "actors": [
+    {
+      "id": "JesusChild",
+      "presets": [
+        {
+          "preset": "happy",
+          "renderer": "JesusChild__Face",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "JesusChild__Face",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "JesusChild__Face",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "JesusChild__Face",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "JesusChild__Face",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "id": "JesusAdult",
+      "presets": [
+        {
+          "preset": "happy",
+          "renderer": "JesusAdult__CharacterBeard",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "happy",
+          "renderer": "JesusAdult__Face",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "JesusAdult__CharacterBeard",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "JesusAdult__Face",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "JesusAdult__CharacterBeard",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "JesusAdult__Face",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "JesusAdult__CharacterBeard",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "JesusAdult__Face",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "JesusAdult__CharacterBeard",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "JesusAdult__Face",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "id": "Mary",
+      "presets": [
+        {
+          "preset": "happy",
+          "renderer": "Mary__Face",
+          "shapeKey": "Face_Blendshape.Fcl_ALL_Joy",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "Mary__Face",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "Mary__Face",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "Mary__Face",
+          "shapeKey": "Face_Blendshape.Fcl_ALL_Fun",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "Mary__Face",
+          "shapeKey": "Face_Blendshape.Fcl_ALL_Sorrow",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "id": "Joseph",
+      "presets": [
+        {
+          "preset": "happy",
+          "renderer": "Joseph__CharacterBeard",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "happy",
+          "renderer": "Joseph__Face",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "Joseph__CharacterBeard",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "Joseph__Face",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "Joseph__CharacterBeard",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "Joseph__Face",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "Joseph__CharacterBeard",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "Joseph__Face",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "Joseph__CharacterBeard",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "Joseph__Face",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "id": "Teacher",
+      "presets": [
+        {
+          "preset": "happy",
+          "renderer": "Teacher__CharacterBeard",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "happy",
+          "renderer": "Teacher__Face",
+          "shapeKey": "target_4",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "Teacher__CharacterBeard",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "ih",
+          "renderer": "Teacher__Face",
+          "shapeKey": "mouthI",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "Teacher__CharacterBeard",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "oh",
+          "renderer": "Teacher__Face",
+          "shapeKey": "mouthO",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "Teacher__CharacterBeard",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "relaxed",
+          "renderer": "Teacher__Face",
+          "shapeKey": "target_1",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "Teacher__CharacterBeard",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        },
+        {
+          "preset": "sad",
+          "renderer": "Teacher__Face",
+          "shapeKey": "target_2",
+          "weight": 1.0
+        }
+      ]
+    }
+  ]
+}

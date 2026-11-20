@@ -1,0 +1,191 @@
+--- Tools/Art/GospelCharacter20261118/GospelCharacterBeardV10.cs	2026-11-18 08:51:52.157354598 +0000
++++ Tools/Art/GospelCharacter20261118/GospelCharacterBeardV11.cs	2026-11-18 10:07:19.694381155 +0000
+@@ -18,6 +18,8 @@
+     {
+         const int Sides = 6, VerticesPerClump = 20, MaximumClumps = 224;
+         const string NewAssetRoot = "Assets/Art/GospelCharacter20261118/";
++        public const string OutputRoot = NewAssetRoot + "v2";
++        const float MinimumNonzeroAnchorDelta = .0000101f, MorphReadbackTolerance = .000002f;
+         const string JawFloorBasis = "actual_neck_y_plus_0.055_scale; head_y_observed_only";
+ 
+         [Serializable] public sealed class AnchorReport
+@@ -34,6 +36,8 @@
+             public string actorId, renderer, meshAsset, sourceFaceAsset, sourceFacePayloadSha256, beardPayloadSha256, materialAsset;
+             public int sourceSkinTriangles, candidates, clumps, jawClumps, cheekClumps, moustacheClumps, vertices, triangles, sourceMorphs, sourceMorphFrames;
+             public int mixedPaletteVertexAnchors, barycentricSharedPaletteAnchors, maximumInfluences;
++            public int[] precisionRejectedByRegion;
++            public float minimumNonzeroAnchorDelta, morphReadbackTolerance, immediateMorphReadbackMaximumError, persistedMorphReadbackMaximumError;
+             public float eyeSpan, actorScale, minimumSingleFrameLipDistance;
+             public Vector3 mouth, chin;
+             public Bounds actorBounds;
+@@ -94,7 +98,7 @@
+         }
+         [Serializable] sealed class QuotaRegion
+         {
+-            public int region, candidates, examined, accepted, quota, spacingRejected, basisLipRejected, morphLipRejected;
++            public int region, candidates, examined, accepted, quota, precisionRejected, spacingRejected, basisLipRejected, morphLipRejected;
+             public float spacing, minimumNormalizedAbsX, maximumNormalizedAbsX, minimumNormalizedMouthY, maximumNormalizedMouthY;
+             public bool hasCandidates, quotaReached, globalLimitReached;
+             public Bounds candidateBounds;
+@@ -117,12 +121,12 @@
+         {
+             public string actorId, sourceFaceAsset, sourceFaceHash, jawFloorBasis;
+             public int selected, vertices, maximumClumps, minimumSelected, minimumJaw, minimumCheek, minimumMoustache, maximumVertices, sourceMorphFrames;
+-            public float eyeSpan, scale, jawFloor, basisLipMinimum, morphLipMinimum, mouthHalfWidth, mouthHalfHeight;
++            public float eyeSpan, scale, jawFloor, basisLipMinimum, morphLipMinimum, mouthHalfWidth, mouthHalfHeight, minimumNonzeroAnchorDelta;
+             public Vector3 mouth, chin, eye, head, neck;
+             public QuotaRegion[] regions;
+             public QuotaFrame[] firstRejectingFrames;
+             public QuotaRejection[] examples;
+-            public string scope = "Quota failure diagnostic only; candidates/selection/quotas/morph exclusion and successful output are unchanged. Frame counts identify the first rejecting frame, not every rejecting frame.";
++            public string scope = "Quota failure diagnostic only. Precision rejection excludes actual nonzero per-frame anchor displacements below the native sparse-storage safety floor; source geometry masks, quotas and mouth exclusion are unchanged. Frame counts identify the first lip-rejecting frame, not every rejecting frame.";
+         }
+         [Serializable] sealed class UpperLipVariant
+         {
+@@ -174,6 +178,7 @@
+         sealed class Frame
+         {
+             public string name;
++            public int shape, index;
+             public float weight;
+             public Vector3[] delta;
+             public Mouth mouth;
+@@ -196,8 +201,8 @@
+             Need(actorId == "JesusAdult" || actorId == "Joseph" || actorId == "Teacher", "Only the three adult male identities have this beard design.");
+             Need(beardMaterial && EditorUtility.IsPersistent(beardMaterial) && beardMaterial.shader && beardMaterial.shader.name.Contains("lilToon"),
+                 "Supply a new, persistent beard-appropriate lilToon material; source materials are never edited here.");
+-            Need(!string.IsNullOrEmpty(outputRoot) && outputRoot.StartsWith(NewAssetRoot, StringComparison.Ordinal)
+-                && !outputRoot.Contains("..") && !outputRoot.Contains("\\"), "Use a separately versioned new character-art output root.");
++            Need(!string.IsNullOrEmpty(outputRoot) && outputRoot.TrimEnd('/') == OutputRoot,
++                "This source requires GospelCharacterBeard.OutputRoot (v2); preserve earlier beard meshes and anchor sidecars.");
+             var faces = actor.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(r => r.name == actorId + "__Face").ToArray();
+             Need(faces.Length == 1, "One exact source-bound face renderer is required.");
+             var face = faces[0]; var source = face.sharedMesh;
+@@ -268,12 +273,14 @@
+             var outputAnchors = new List<Anchor>(); var reports = new List<AnchorReport>();
+             var quotas = new[] { 128, 60, 36 }; var counts = new int[3]; float minimumGap = float.PositiveInfinity;
+             var examined = new int[3]; var spacingRejected = new int[3]; var basisRejected = new int[3]; var morphRejected = new int[3];
++            var precisionRejected = new int[3];
+             var rejectedFrames = Enumerable.Range(0, 3).Select(_ => new Dictionary<Frame, int>()).ToArray();
+             var rejectionExamples = new List<QuotaRejection>();
+             foreach (int region in new[] { 0, 1, 2 }) foreach (var anchor in candidates.Where(a => a.region == region).OrderBy(a => a.key))
+             {
+                 if (counts[region] >= quotas[region] || selected.Count >= MaximumClumps) break;
+                 examined[region]++;
++                if (!PrecisionSafe(anchor, frames)) { precisionRejected[region]++; continue; }
+                 float spacing = (region == 2 ? .0018f : .0032f) * scale;
+                 if (selected.Any(a => Vector3.SqrMagnitude(a.point - anchor.point) < spacing * spacing)) { spacingRejected[region]++; continue; }
+                 float random = (anchor.key & 65535) / 65535f;
+@@ -327,7 +334,7 @@
+                     var actual = candidates.Where(a => a.region == region).ToArray(); var bounds = new Bounds(actual.Length > 0 ? actual[0].point : Vector3.zero, Vector3.zero);
+                     foreach (var anchor in actual) bounds.Encapsulate(anchor.point);
+                     return new QuotaRegion { region = region, candidates = actual.Length, examined = examined[region], accepted = counts[region], quota = quotas[region],
+-                        spacingRejected = spacingRejected[region], basisLipRejected = basisRejected[region], morphLipRejected = morphRejected[region],
++                        precisionRejected = precisionRejected[region], spacingRejected = spacingRejected[region], basisLipRejected = basisRejected[region], morphLipRejected = morphRejected[region],
+                         spacing = (region == 2 ? .0018f : .0032f) * scale, candidateBounds = bounds, hasCandidates = actual.Length > 0,
+                         quotaReached = counts[region] >= quotas[region], globalLimitReached = selected.Count >= MaximumClumps,
+                         minimumNormalizedAbsX = actual.Length > 0 ? actual.Min(a => Mathf.Abs(a.point.x - mouth.centre.x) / scale) : 0,
+@@ -344,7 +351,8 @@
+                     actorId = actorId, sourceFaceAsset = AssetDatabase.GetAssetPath(source), sourceFaceHash = originalFingerprint, jawFloorBasis = JawFloorBasis,
+                     selected = selected.Count, vertices = generated.Count, maximumClumps = MaximumClumps, minimumSelected = 12, minimumJaw = 6, minimumCheek = 4,
+                     minimumMoustache = 2, maximumVertices = 5000, sourceMorphFrames = frames.Count, eyeSpan = eyeSpan, scale = scale, jawFloor = jawFloor,
+-                    basisLipMinimum = 1.035f, morphLipMinimum = 1.015f, mouth = mouth.centre, mouthHalfWidth = mouth.halfWidth, mouthHalfHeight = mouth.halfHeight,
++                    basisLipMinimum = 1.035f, morphLipMinimum = 1.015f, minimumNonzeroAnchorDelta = MinimumNonzeroAnchorDelta,
++                    mouth = mouth.centre, mouthHalfWidth = mouth.halfWidth, mouthHalfHeight = mouth.halfHeight,
+                     chin = chin, eye = eye, head = headPoint, neck = neckPoint, regions = regionReports, firstRejectingFrames = frameReports, examples = rejectionExamples.ToArray()
+                 });
+                 if (actorId == "Joseph" || actorId == "Teacher")
+@@ -358,11 +366,14 @@
+             mesh.bindposes = source.bindposes;
+             AssignPalettes(mesh, outputAnchors);
+             VerifyOutputPalettes(mesh, outputAnchors);
++            float immediateMorphReadbackMaximumError = 0;
+             foreach (var frame in frames)
+             {
+                 var delta = new Vector3[generated.Count];
+                 for (int i = 0; i < delta.Length; i++) delta[i] = outputAnchors[i].Delta(frame);
+                 mesh.AddBlendShapeFrame(frame.name, frame.weight, delta, new Vector3[delta.Length], new Vector3[delta.Length]);
++                immediateMorphReadbackMaximumError = Mathf.Max(immediateMorphReadbackMaximumError,
++                    VerifyMorphFrame(mesh, frame, outputAnchors, "Immediately after AddBlendShapeFrame"));
+             }
+             mesh.RecalculateBounds(); Bounds allMorphBounds = mesh.bounds;
+             foreach (var frame in frames) for (int i = 0; i < generated.Count; i++) allMorphBounds.Encapsulate(generated[i] + outputAnchors[i].Delta(frame));
+@@ -379,6 +390,16 @@
+                 AssetDatabase.CreateAsset(mesh, meshPath); AssetDatabase.SaveAssetIfDirty(mesh);
+                 Need(Fingerprint(mesh) == fingerprint, "Persisted beard payload differs from the complete candidate.");
+             }
++            AssetDatabase.ImportAsset(meshPath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
++            var persisted = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
++            Need(persisted && Fingerprint(persisted) == fingerprint, "Reimported beard payload differs from the complete candidate.");
++            mesh = persisted;
++            Need(mesh.blendShapeCount == source.blendShapeCount, "The persisted beard must retain every source morph shape.");
++            for (int shape = 0; shape < source.blendShapeCount; shape++)
++                Need(mesh.GetBlendShapeFrameCount(shape) == source.GetBlendShapeFrameCount(shape), "The persisted beard must retain every source morph frame.");
++            float persistedMorphReadbackMaximumError = 0;
++            foreach (var frame in frames) persistedMorphReadbackMaximumError = Mathf.Max(persistedMorphReadbackMaximumError,
++                VerifyMorphFrame(mesh, frame, outputAnchors, "After persistent asset reimport"));
+             var obj = new GameObject(name); obj.transform.SetParent(face.transform, false); obj.layer = face.gameObject.layer;
+             var beard = obj.AddComponent<SkinnedMeshRenderer>(); beard.sharedMesh = mesh; beard.sharedMaterial = beardMaterial;
+             beard.bones = (Transform[])face.bones.Clone(); beard.rootBone = face.rootBone; beard.quality = face.quality;
+@@ -401,8 +422,10 @@
+                 jawFloorBasis = JawFloorBasis, jawFloor = jawFloor, chinReferenceCandidates = chinCandidates.Length, observedHead = headPoint, observedNeck = neckPoint,
+                 mixedPaletteVertexAnchors = selected.Count(a => !a.shared), barycentricSharedPaletteAnchors = selected.Count(a => a.shared),
+                 maximumInfluences = selected.Max(a => a.influences.Length), sourceFaceUnchanged = true, originalRigUnchanged = true,
++                precisionRejectedByRegion = precisionRejected, minimumNonzeroAnchorDelta = MinimumNonzeroAnchorDelta, morphReadbackTolerance = MorphReadbackTolerance,
++                immediateMorphReadbackMaximumError = immediateMorphReadbackMaximumError, persistedMorphReadbackMaximumError = persistedMorphReadbackMaximumError,
+                 allSourceMorphFramesCopied = true, sourceNeutralDefaultsCopied = true, nativeMotionAndVisualReviewCompleted = false,
+-                scope = "Closed project-authored tapered 3D clumps anchored to actual facial skin. Exact shared-palette barycentric or original-vertex anchors; all source morph frames retained. Basis and each individual authored morph frame pass the modeled-mouth exclusion. Combined expressions and animated clearance require actual Root review.",
++                scope = "Closed project-authored tapered 3D clumps anchored to actual facial skin. Exact shared-palette barycentric or original-vertex anchors; all source morph frames retained with strict immediate and reimported delta read-back. Candidates with native sparse-storage-unsafe tiny nonzero source anchor motion are rejected, never rounded, amplified or replaced with fabricated channel data. Basis and each individual authored morph frame pass the modeled-mouth exclusion. Combined expressions and animated clearance require actual Root review.",
+                 materialUvRequirement = "New clump UV0 uses circumference/length. Supply solid or tileable beard fiber albedo; do not reuse an unrelated hair atlas as if its UVs matched.",
+                 expressionBindingRequirement = "Add source-bound ih/oh/relaxed/sad/happy catalog rows for this unique beard renderer. Never duplicate the face renderer name; the current runtime requires each catalog row to resolve exactly once.",
+                 anchors = reports.ToArray() };
+@@ -460,12 +483,48 @@
+                 Need(delta.All(Finite), "Every actual facial morph displacement must be finite.");
+                 float weight = source.GetBlendShapeFrameWeight(shape, frame);
+                 Need(Finite(weight), "Every actual facial morph frame weight must remain finite.");
+-                result.Add(new Frame { name = source.GetBlendShapeName(shape), weight = weight,
++                result.Add(new Frame { name = source.GetBlendShapeName(shape), shape = shape, index = frame, weight = weight,
+                     delta = delta, mouth = MouthAt(actorPoints, oral, delta, toActor, scale) });
+             }
+             Need(result.Count > 0, "Actual retained facial morph frames are required."); return result;
+         }
+ 
++        static bool PrecisionSafe(Anchor anchor, List<Frame> frames)
++        {
++            foreach (var frame in frames)
++            {
++                Vector3 delta = anchor.Delta(frame);
++                Need(Finite(delta), "Actual source anchor morph displacements must remain finite.");
++                // Vector3 == is approximate: legitimate component-exact zero frames
++                // must be distinguished from nonzero motion native storage can drop.
++                if (delta.x == 0f && delta.y == 0f && delta.z == 0f) continue;
++                if (delta.sqrMagnitude < MinimumNonzeroAnchorDelta * MinimumNonzeroAnchorDelta) return false;
++            }
++            return true;
++        }
++
++        static float VerifyMorphFrame(Mesh mesh, Frame frame, List<Anchor> anchors, string stage)
++        {
++            Need(mesh.vertexCount == anchors.Count && frame.shape < mesh.blendShapeCount
++                && mesh.GetBlendShapeName(frame.shape) == frame.name
++                && frame.index < mesh.GetBlendShapeFrameCount(frame.shape)
++                && mesh.GetBlendShapeFrameWeight(frame.shape, frame.index).Equals(frame.weight),
++                stage + ": exact source morph name, frame index, weight and vertex count must round-trip.");
++            var actual = new Vector3[mesh.vertexCount];
++            mesh.GetBlendShapeFrameVertices(frame.shape, frame.index, actual, null, null);
++            float maximum = 0;
++            for (int i = 0; i < actual.Length; i++)
++            {
++                Vector3 expected = anchors[i].Delta(frame); float error = Vector3.Distance(actual[i], expected);
++                if (!(error < MorphReadbackTolerance))
++                    Need(false, stage + ": beard morph delta differs from its actual source anchor at "
++                        + frame.name + " frame " + frame.index + " vertex " + i + "; error=" + error.ToString("R")
++                        + ", expected=" + expected.ToString("R") + ", actual=" + actual[i].ToString("R") + ".");
++                maximum = Mathf.Max(maximum, error);
++            }
++            return maximum;
++        }
++
+         static string UpperLipDiagnosticFor(string actorId, Mesh source, string sourceHash, List<int> skin, Vector3[] points, Vector3[] normals,
+             BoneWeight1[][] palettes, Mouth mouth, Vector3 eye, float scale, List<Frame> frames, Matrix4x4 toActor)
+         {

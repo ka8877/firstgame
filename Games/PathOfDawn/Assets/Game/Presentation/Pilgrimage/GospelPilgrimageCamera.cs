@@ -13,7 +13,7 @@ namespace PathOfDawn.Presentation
     public sealed class GospelPilgrimageCamera : MonoBehaviour
     {
         public const float MinimumZoom = 2.6f, MaximumZoom = 8.6f;
-        public const float DefaultZoom = 5.6f, DefaultYaw = 47f, DefaultPitch = 18f;
+        public const float DefaultZoom = 3.8f, DefaultYaw = 47f, DefaultPitch = 18f;
         const float MinimumPitch = -4f, MaximumPitch = 62f;
         const float CollisionRadius = .22f, CollisionPadding = .08f;
         const float MaximumAvoidancePitch = 80f, ClearanceReleaseSeconds = .28f;
@@ -359,7 +359,7 @@ namespace PathOfDawn.Presentation
         {
             Vector3 value = Target.position;
             // A small jump remains legible without making the landscape rise and fall with every step.
-            value.y = groundedHeight + actorHeight * .61f
+            value.y = groundedHeight + actorHeight * .74f
                 + Mathf.Clamp(Target.position.y - groundedHeight, 0, 2f) * .20f;
             return value;
         }

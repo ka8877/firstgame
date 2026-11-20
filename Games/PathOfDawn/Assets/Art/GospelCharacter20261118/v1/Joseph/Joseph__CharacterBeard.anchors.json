@@ -1,0 +1,4382 @@
+{
+    "actorId": "Joseph",
+    "renderer": "Joseph__CharacterBeard",
+    "meshAsset": "Assets/Art/GospelCharacter20261118/v1/Joseph/Joseph__CharacterBeard.asset",
+    "sourceFaceAsset": "Assets/Art/GospelCharacter20261118/v1/Joseph/Joseph__HumanFaceV1.asset",
+    "sourceFacePayloadSha256": "62230cd0b66e3b6f27899eeecc7b9e9de7ff12c3f0d3f68d463a30fb6962b6ff",
+    "beardPayloadSha256": "5ca2001b56225bd4c889cee4fa07ec82ed9f6392c3ad27a6b70681fd948ac58b",
+    "materialAsset": "Assets/Art/GospelCharacter20261118/RenderV1/Joseph/Joseph_CharacterBeard_HAIR.mat",
+    "sourceSkinTriangles": 1360,
+    "candidates": 3492,
+    "clumps": 196,
+    "jawClumps": 128,
+    "cheekClumps": 60,
+    "moustacheClumps": 8,
+    "vertices": 3920,
+    "triangles": 7056,
+    "sourceMorphs": 54,
+    "sourceMorphFrames": 54,
+    "mixedPaletteVertexAnchors": 0,
+    "barycentricSharedPaletteAnchors": 196,
+    "maximumInfluences": 1,
+    "eyeSpan": 0.04206537455320358,
+    "actorScale": 0.6895962953567505,
+    "minimumSingleFrameLipDistance": 1.0167083740234376,
+    "mouth": {
+        "x": 0.0005364962853491306,
+        "y": 1.5698707103729249,
+        "z": 0.11083203554153443
+    },
+    "chin": {
+        "x": 0.0005408907891251147,
+        "y": 1.5321582555770875,
+        "z": 0.09648086875677109
+    },
+    "actorBounds": {
+        "m_Center": {
+            "x": 0.0010925531387329102,
+            "y": 1.5564658641815186,
+            "z": 0.09497877955436707
+        },
+        "m_Extent": {
+            "x": 0.06407590210437775,
+            "y": 0.03078746795654297,
+            "z": 0.018917903304100038
+        }
+    },
+    "sourceFaceUnchanged": true,
+    "originalRigUnchanged": true,
+    "allSourceMorphFramesCopied": true,
+    "sourceNeutralDefaultsCopied": true,
+    "nativeMotionAndVisualReviewCompleted": false,
+    "scope": "Closed project-authored tapered 3D clumps anchored to actual facial skin. Exact shared-palette barycentric or original-vertex anchors; all source morph frames retained. Basis and each individual authored morph frame pass the modeled-mouth exclusion. Combined expressions and animated clearance require actual Root review. Joseph moustache uses actual lateral upper-lip skin at mouth-relative Y .021-.025 and absolute X .020-.027 eye-scale units, no farther forward than mouth Z+.004 scale; validated up/out direction with the same complete authored-frame exclusion.",
+    "materialUvRequirement": "New clump UV0 uses circumference/length. Supply solid or tileable beard fiber albedo; do not reuse an unrelated hair atlas as if its UVs matched.",
+    "expressionBindingRequirement": "Add source-bound ih/oh/relaxed/sad/happy catalog rows for this unique beard renderer. Never duplicate the face renderer name; the current runtime requires each catalog row to resolve exactly once.",
+    "jawFloorBasis": "actual_neck_y_plus_0.055_scale; head_y_observed_only",
+    "chinReferenceCandidates": 33,
+    "jawFloor": 1.5132725238800049,
+    "observedHead": {
+        "x": 0.0005361755611374974,
+        "y": 1.5783319473266602,
+        "z": 0.008695840835571289
+    },
+    "observedNeck": {
+        "x": 0.0005362008814699948,
+        "y": 1.4753447771072388,
+        "z": -0.007878899574279786
+    },
+    "anchors": [
+        {
+            "triangle": 314,
+            "a": 1005,
+            "b": 1012,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.6666666865348816,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": -0.011562555097043515,
+                "y": 1.5426219701766968,
+                "z": 0.09574601799249649
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005472857039421797,
+            "radius": 0.0007463892106898129,
+            "minimumSingleFrameLipDistance": 1.4275845289230347
+        },
+        {
+            "triangle": 299,
+            "a": 898,
+            "b": 1004,
+            "c": 897,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.25,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": -0.02103227749466896,
+                "y": 1.5412085056304932,
+                "z": 0.08147138357162476
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006529322359710932,
+            "radius": 0.0008451382163912058,
+            "minimumSingleFrameLipDistance": 1.731454849243164
+        },
+        {
+            "triangle": 279,
+            "a": 989,
+            "b": 995,
+            "c": 986,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.6666666865348816,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.008344199508428574,
+                "y": 1.5367975234985352,
+                "z": 0.09626931697130203
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005205078981816769,
+            "radius": 0.0006836747634224594,
+            "minimumSingleFrameLipDistance": 1.645578384399414
+        },
+        {
+            "triangle": 271,
+            "a": 987,
+            "b": 990,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.375,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.02940182387828827,
+                "y": 1.5519933700561524,
+                "z": 0.09073435515165329
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006053582765161991,
+            "radius": 0.0008625268237665296,
+            "minimumSingleFrameLipDistance": 1.6314115524291993
+        },
+        {
+            "triangle": 1263,
+            "a": 1545,
+            "b": 998,
+            "c": 1536,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.012829852290451527,
+                "y": 1.5513676404953004,
+                "z": 0.09849978238344193
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0043790447525680069,
+            "radius": 0.0006885361508466303,
+            "minimumSingleFrameLipDistance": 1.116848111152649
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.0,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": -0.020331546664237977,
+                "y": 1.5442148447036744,
+                "z": 0.09028434008359909
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006028704345226288,
+            "radius": 0.0008125866297632456,
+            "minimumSingleFrameLipDistance": 1.5219545364379883
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.0,
+                "z": 0.4285714328289032
+            },
+            "actorPosition": {
+                "x": -0.022396646440029146,
+                "y": 1.5452879667282105,
+                "z": 0.08949555456638336
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004087228327989578,
+            "radius": 0.0006218231283128262,
+            "minimumSingleFrameLipDistance": 1.5570520162582398
+        },
+        {
+            "triangle": 311,
+            "a": 895,
+            "b": 1009,
+            "c": 1010,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.75,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": -0.037760861217975619,
+                "y": 1.5642396211624146,
+                "z": 0.09433287382125855
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004634523298591375,
+            "radius": 0.0007929568528197706,
+            "minimumSingleFrameLipDistance": 1.9812060594558716
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.7142857313156128,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": -0.01738910749554634,
+                "y": 1.5403558015823365,
+                "z": 0.0887804627418518
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006384564097970724,
+            "radius": 0.0008252295665442944,
+            "minimumSingleFrameLipDistance": 1.6490819454193116
+        },
+        {
+            "triangle": 281,
+            "a": 990,
+            "b": 996,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.7142857313156128,
+                "y": 0.2857142984867096,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.022621577605605127,
+                "y": 1.550877571105957,
+                "z": 0.0949678122997284
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005057749804109335,
+            "radius": 0.0007545231492258608,
+            "minimumSingleFrameLipDistance": 1.366552710533142
+        },
+        {
+            "triangle": 316,
+            "a": 1013,
+            "b": 1009,
+            "c": 1011,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "actorPosition": {
+                "x": -0.025023749098181726,
+                "y": 1.5532245635986329,
+                "z": 0.09458017349243164
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006088665686547756,
+            "radius": 0.0008735964656807482,
+            "minimumSingleFrameLipDistance": 1.4470683336257935
+        },
+        {
+            "triangle": 321,
+            "a": 1005,
+            "b": 1015,
+            "c": 1012,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.0,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.009844406507909298,
+                "y": 1.5415724515914918,
+                "z": 0.09665067493915558
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0051854695193469528,
+            "radius": 0.0007107861456461251,
+            "minimumSingleFrameLipDistance": 1.4561139345169068
+        },
+        {
+            "triangle": 310,
+            "a": 896,
+            "b": 1009,
+            "c": 895,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4444444477558136,
+                "y": 0.5555555820465088,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.03896147757768631,
+                "y": 1.5602161884307862,
+                "z": 0.08923414349555969
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0032427189871668817,
+            "radius": 0.0006269896402955055,
+            "minimumSingleFrameLipDistance": 2.0552010536193849
+        },
+        {
+            "triangle": 276,
+            "a": 990,
+            "b": 987,
+            "c": 993,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.4285714328289032,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.030420813709497453,
+                "y": 1.558071255683899,
+                "z": 0.0951213389635086
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005870973225682974,
+            "radius": 0.0008810149738565087,
+            "minimumSingleFrameLipDistance": 1.5433979034423829
+        },
+        {
+            "triangle": 336,
+            "a": 1015,
+            "b": 1006,
+            "c": 1022,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.0005400501540862024,
+                "y": 1.5377066135406495,
+                "z": 0.09774182736873627
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0044908360578119759,
+            "radius": 0.000616630248259753,
+            "minimumSingleFrameLipDistance": 1.634223461151123
+        },
+        {
+            "triangle": 281,
+            "a": 990,
+            "b": 996,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.013930480927228928,
+                "y": 1.5450093746185303,
+                "z": 0.09593672305345535
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0043449318036437038,
+            "radius": 0.000646314350888133,
+            "minimumSingleFrameLipDistance": 1.359455943107605
+        },
+        {
+            "triangle": 1272,
+            "a": 1019,
+            "b": 998,
+            "c": 1550,
+            "region": 0,
+            "barycentric": {
+                "x": 0.8333333134651184,
+                "y": 0.1666666716337204,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.0062642572447657589,
+                "y": 1.5496952533721924,
+                "z": 0.09916955977678299
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004249382298439741,
+            "radius": 0.0006651655421592295,
+            "minimumSingleFrameLipDistance": 1.1239285469055176
+        },
+        {
+            "triangle": 287,
+            "a": 995,
+            "b": 999,
+            "c": 994,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.6666666865348816,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.0019968522246927025,
+                "y": 1.5330049991607667,
+                "z": 0.097013458609581
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004865908529609442,
+            "radius": 0.000626089982688427,
+            "minimumSingleFrameLipDistance": 1.9215608835220338
+        },
+        {
+            "triangle": 301,
+            "a": 1001,
+            "b": 1005,
+            "c": 1003,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": -0.004898513201624155,
+                "y": 1.5339906215667725,
+                "z": 0.09679131209850311
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007507377304136753,
+            "radius": 0.0009005395113490522,
+            "minimumSingleFrameLipDistance": 1.8442740440368653
+        },
+        {
+            "triangle": 314,
+            "a": 1005,
+            "b": 1012,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.0,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.010699953883886338,
+                "y": 1.5388965606689454,
+                "z": 0.09446001052856446
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005965764168649912,
+            "radius": 0.0007737742271274328,
+            "minimumSingleFrameLipDistance": 1.5601496696472169
+        },
+        {
+            "triangle": 248,
+            "a": 976,
+            "b": 973,
+            "c": 977,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "actorPosition": {
+                "x": 0.031086066737771035,
+                "y": 1.546916127204895,
+                "z": 0.07908608019351959
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005768220871686935,
+            "radius": 0.0008025796851143241,
+            "minimumSingleFrameLipDistance": 1.86520516872406
+        },
+        {
+            "triangle": 298,
+            "a": 1002,
+            "b": 1003,
+            "c": 1004,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.1666666716337204,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": -0.007507793605327606,
+                "y": 1.5332187414169312,
+                "z": 0.09012607485055924
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00676618330180645,
+            "radius": 0.0008205101476050913,
+            "minimumSingleFrameLipDistance": 1.9780800342559815
+        },
+        {
+            "triangle": 323,
+            "a": 1011,
+            "b": 1016,
+            "c": 1013,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.0,
+                "z": 0.8333333134651184
+            },
+            "actorPosition": {
+                "x": -0.02244039997458458,
+                "y": 1.5560884475708008,
+                "z": 0.0973619893193245
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004923257976770401,
+            "radius": 0.0007726167095825076,
+            "minimumSingleFrameLipDistance": 1.2461633682250977
+        },
+        {
+            "triangle": 122,
+            "a": 896,
+            "b": 895,
+            "c": 889,
+            "region": 0,
+            "barycentric": {
+                "x": 0.7777777910232544,
+                "y": 0.2222222238779068,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.0426255464553833,
+                "y": 1.5613288879394532,
+                "z": 0.0861019641160965
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003047383390367031,
+            "radius": 0.0006139206816442311,
+            "minimumSingleFrameLipDistance": 2.3592138290405275
+        },
+        {
+            "triangle": 272,
+            "a": 990,
+            "b": 989,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.1428571492433548,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.025563083589076997,
+                "y": 1.5501301288604737,
+                "z": 0.09217572957277298
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004937740042805672,
+            "radius": 0.0007377712172456086,
+            "minimumSingleFrameLipDistance": 1.5003336668014527
+        },
+        {
+            "triangle": 313,
+            "a": 1009,
+            "b": 1007,
+            "c": 1011,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.25,
+                "z": 0.625
+            },
+            "actorPosition": {
+                "x": -0.02743506245315075,
+                "y": 1.5531723499298096,
+                "z": 0.09259706735610962
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005692746490240097,
+            "radius": 0.0008330425480380654,
+            "minimumSingleFrameLipDistance": 1.5606334209442139
+        },
+        {
+            "triangle": 277,
+            "a": 988,
+            "b": 993,
+            "c": 987,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.7142857313156128,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.02735576033592224,
+                "y": 1.558255910873413,
+                "z": 0.09668957442045212
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0033025138545781376,
+            "radius": 0.0006211181171238422,
+            "minimumSingleFrameLipDistance": 1.3794910907745362
+        },
+        {
+            "triangle": 330,
+            "a": 1021,
+            "b": 1012,
+            "c": 1015,
+            "region": 0,
+            "barycentric": {
+                "x": 0.20000000298023225,
+                "y": 0.0,
+                "z": 0.800000011920929
+            },
+            "actorPosition": {
+                "x": -0.0036171989049762489,
+                "y": 1.5432353019714356,
+                "z": 0.0977504551410675
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00637074513360858,
+            "radius": 0.0008413764298893511,
+            "minimumSingleFrameLipDistance": 1.3994745016098023
+        },
+        {
+            "triangle": 266,
+            "a": 978,
+            "b": 979,
+            "c": 987,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.0,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.04092741757631302,
+                "y": 1.5592035055160523,
+                "z": 0.08704260736703873
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005341008771210909,
+            "radius": 0.0008340579806827009,
+            "minimumSingleFrameLipDistance": 2.12212872505188
+        },
+        {
+            "triangle": 303,
+            "a": 999,
+            "b": 1006,
+            "c": 1005,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.3333333432674408,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.002371337031945586,
+                "y": 1.5345888137817383,
+                "z": 0.09815683960914612
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005136523395776749,
+            "radius": 0.0006632451550103724,
+            "minimumSingleFrameLipDistance": 1.7598583698272706
+        },
+        {
+            "triangle": 272,
+            "a": 990,
+            "b": 989,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.5714285969734192,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.020389065146446229,
+                "y": 1.545562744140625,
+                "z": 0.09241320192813873
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0043272217735648159,
+            "radius": 0.0006478874711319804,
+            "minimumSingleFrameLipDistance": 1.4466524124145508
+        },
+        {
+            "triangle": 332,
+            "a": 1015,
+            "b": 1020,
+            "c": 1021,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.0,
+                "z": 0.75
+            },
+            "actorPosition": {
+                "x": -0.0037956188898533584,
+                "y": 1.5474467277526856,
+                "z": 0.09881815314292908
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006291382946074009,
+            "radius": 0.0008589806966483593,
+            "minimumSingleFrameLipDistance": 1.2211198806762696
+        },
+        {
+            "triangle": 271,
+            "a": 987,
+            "b": 990,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.25,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": 0.03199406713247299,
+                "y": 1.5548372268676758,
+                "z": 0.09142499417066574
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004328696057200432,
+            "radius": 0.0007045672391541302,
+            "minimumSingleFrameLipDistance": 1.6962248086929322
+        },
+        {
+            "triangle": 331,
+            "a": 1012,
+            "b": 1021,
+            "c": 1016,
+            "region": 0,
+            "barycentric": {
+                "x": 0.20000000298023225,
+                "y": 0.0,
+                "z": 0.800000011920929
+            },
+            "actorPosition": {
+                "x": -0.011975240893661976,
+                "y": 1.5500959157943726,
+                "z": 0.09798706322908402
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00499321985989809,
+            "radius": 0.0007432008278556168,
+            "minimumSingleFrameLipDistance": 1.1639418601989747
+        },
+        {
+            "triangle": 334,
+            "a": 1020,
+            "b": 1015,
+            "c": 1022,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.25,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.0004846775555051863,
+                "y": 1.5451692342758179,
+                "z": 0.09824472665786743
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0048821489326655869,
+            "radius": 0.0007018839824013412,
+            "minimumSingleFrameLipDistance": 1.3433589935302735
+        },
+        {
+            "triangle": 331,
+            "a": 1012,
+            "b": 1021,
+            "c": 1016,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6000000238418579,
+                "y": 0.0,
+                "z": 0.4000000059604645
+            },
+            "actorPosition": {
+                "x": -0.012414085678756237,
+                "y": 1.5475525856018067,
+                "z": 0.09696187078952789
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005935268476605415,
+            "radius": 0.0008234354900196195,
+            "minimumSingleFrameLipDistance": 1.259774923324585
+        },
+        {
+            "triangle": 261,
+            "a": 984,
+            "b": 976,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.4285714328289032,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.0139178317040205,
+                "y": 1.5360909700393677,
+                "z": 0.08471005409955979
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006044574081897736,
+            "radius": 0.0007646827143616974,
+            "minimumSingleFrameLipDistance": 1.8434765338897706
+        },
+        {
+            "triangle": 297,
+            "a": 1002,
+            "b": 1004,
+            "c": 898,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.4285714328289032,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.01009647361934185,
+                "y": 1.5347464084625245,
+                "z": 0.08884654194116593
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006667621433734894,
+            "radius": 0.0008198051364161074,
+            "minimumSingleFrameLipDistance": 1.8920164108276368
+        },
+        {
+            "triangle": 121,
+            "a": 889,
+            "b": 892,
+            "c": 896,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": -0.04834487661719322,
+                "y": 1.5631887912750245,
+                "z": 0.08095700293779373
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0035978800151497127,
+            "radius": 0.0006812018691562116,
+            "minimumSingleFrameLipDistance": 2.530726432800293
+        },
+        {
+            "triangle": 257,
+            "a": 976,
+            "b": 977,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": 0.018526267260313035,
+                "y": 1.5389595031738282,
+                "z": 0.08265186101198197
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0072479285299777988,
+            "radius": 0.0009044592152349651,
+            "minimumSingleFrameLipDistance": 1.7534881830215455
+        },
+        {
+            "triangle": 261,
+            "a": 984,
+            "b": 976,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.1428571492433548,
+                "z": 0.7142857313156128
+            },
+            "actorPosition": {
+                "x": 0.01541620958596468,
+                "y": 1.5374410152435303,
+                "z": 0.08717027306556702
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005712099373340607,
+            "radius": 0.0007391233812086284,
+            "minimumSingleFrameLipDistance": 1.7707144021987916
+        },
+        {
+            "triangle": 268,
+            "a": 988,
+            "b": 987,
+            "c": 979,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.625,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.03607454523444176,
+                "y": 1.5637941360473633,
+                "z": 0.09550247341394425
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003985629882663488,
+            "radius": 0.0007242970750667155,
+            "minimumSingleFrameLipDistance": 1.792268991470337
+        },
+        {
+            "triangle": 126,
+            "a": 898,
+            "b": 897,
+            "c": 893,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5555555820465088,
+                "y": 0.3333333432674408,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": -0.02190486714243889,
+                "y": 1.5413819551467896,
+                "z": 0.07782290875911713
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0070849317125976089,
+            "radius": 0.0009026598418131471,
+            "minimumSingleFrameLipDistance": 1.7562276124954224
+        },
+        {
+            "triangle": 279,
+            "a": 989,
+            "b": 995,
+            "c": 986,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.0,
+                "z": 0.8333333134651184
+            },
+            "actorPosition": {
+                "x": 0.008411979302763939,
+                "y": 1.5345683097839356,
+                "z": 0.09502843022346497
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007184779271483421,
+            "radius": 0.0008712763083167374,
+            "minimumSingleFrameLipDistance": 1.8453248739242554
+        },
+        {
+            "triangle": 1317,
+            "a": 1016,
+            "b": 1572,
+            "c": 1577,
+            "region": 0,
+            "barycentric": {
+                "x": 0.800000011920929,
+                "y": 0.0,
+                "z": 0.20000000298023225
+            },
+            "actorPosition": {
+                "x": -0.012514794245362282,
+                "y": 1.5534125566482545,
+                "z": 0.09936144202947617
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005115847568958998,
+            "radius": 0.0007758787251077592,
+            "minimumSingleFrameLipDistance": 1.0696749687194825
+        },
+        {
+            "triangle": 299,
+            "a": 898,
+            "b": 1004,
+            "c": 897,
+            "region": 0,
+            "barycentric": {
+                "x": 0.625,
+                "y": 0.25,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": -0.017415866255760194,
+                "y": 1.538789987564087,
+                "z": 0.08151978999376297
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005113119259476662,
+            "radius": 0.0006864737952128053,
+            "minimumSingleFrameLipDistance": 1.7661550045013428
+        },
+        {
+            "triangle": 250,
+            "a": 977,
+            "b": 972,
+            "c": 978,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.25,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": 0.037273794412612918,
+                "y": 1.5517959594726563,
+                "z": 0.07851450890302658
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005965349730104208,
+            "radius": 0.0008523567230440676,
+            "minimumSingleFrameLipDistance": 2.0579681396484377
+        },
+        {
+            "triangle": 261,
+            "a": 984,
+            "b": 976,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.1428571492433548,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.011140168644487858,
+                "y": 1.5345526933670045,
+                "z": 0.08755269646644592
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004605862777680159,
+            "radius": 0.0006090960814617574,
+            "minimumSingleFrameLipDistance": 1.9100165367126465
+        },
+        {
+            "triangle": 124,
+            "a": 897,
+            "b": 896,
+            "c": 892,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.25,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.03619833290576935,
+                "y": 1.5517958402633668,
+                "z": 0.07851455360651016
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006092454306781292,
+            "radius": 0.0008652731776237488,
+            "minimumSingleFrameLipDistance": 2.0576729774475099
+        },
+        {
+            "triangle": 333,
+            "a": 1014,
+            "b": 1020,
+            "c": 1022,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "actorPosition": {
+                "x": 0.0005393943865783513,
+                "y": 1.5410436391830445,
+                "z": 0.09717042744159699
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006462072022259235,
+            "radius": 0.0008372989250347018,
+            "minimumSingleFrameLipDistance": 1.495551347732544
+        },
+        {
+            "triangle": 285,
+            "a": 993,
+            "b": 998,
+            "c": 990,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.3333333432674408,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.020124996080994607,
+                "y": 1.5543241500854493,
+                "z": 0.09755587577819824
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005124592687934637,
+            "radius": 0.0007823238265700638,
+            "minimumSingleFrameLipDistance": 1.1799226999282838
+        },
+        {
+            "triangle": 311,
+            "a": 895,
+            "b": 1009,
+            "c": 1010,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": -0.034275539219379428,
+                "y": 1.5643112659454346,
+                "z": 0.09613075852394104
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005602744407951832,
+            "radius": 0.0008917900850065053,
+            "minimumSingleFrameLipDistance": 1.7491587400436402
+        },
+        {
+            "triangle": 276,
+            "a": 990,
+            "b": 987,
+            "c": 993,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.0,
+                "z": 0.8571428656578064
+            },
+            "actorPosition": {
+                "x": 0.023440364748239518,
+                "y": 1.5561704635620118,
+                "z": 0.09744159132242203
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0057365791872143749,
+            "radius": 0.0008557713008485735,
+            "minimumSingleFrameLipDistance": 1.2393946647644044
+        },
+        {
+            "triangle": 1294,
+            "a": 1563,
+            "b": 1021,
+            "c": 1020,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.4000000059604645,
+                "z": 0.6000000238418579
+            },
+            "actorPosition": {
+                "x": -0.001228423323482275,
+                "y": 1.5491232872009278,
+                "z": 0.0992552861571312
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0037641653325408699,
+            "radius": 0.0006123685743659735,
+            "minimumSingleFrameLipDistance": 1.1773542165756226
+        },
+        {
+            "triangle": 313,
+            "a": 1009,
+            "b": 1007,
+            "c": 1011,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.75,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.03073842078447342,
+                "y": 1.55194091796875,
+                "z": 0.08875121176242829
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006480940617620945,
+            "radius": 0.0009056377457454801,
+            "minimumSingleFrameLipDistance": 1.7477225065231324
+        },
+        {
+            "triangle": 310,
+            "a": 896,
+            "b": 1009,
+            "c": 895,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.7777777910232544,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": -0.03878694772720337,
+                "y": 1.5630513429641724,
+                "z": 0.09259901940822602
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003023596480488777,
+            "radius": 0.0006220019422471523,
+            "minimumSingleFrameLipDistance": 2.0447945594787599
+        },
+        {
+            "triangle": 124,
+            "a": 897,
+            "b": 896,
+            "c": 892,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.75,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.03839561343193054,
+                "y": 1.5549921989440919,
+                "z": 0.08258799463510513
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0059109460562467579,
+            "radius": 0.0008663096814416349,
+            "minimumSingleFrameLipDistance": 2.1003072261810304
+        },
+        {
+            "triangle": 248,
+            "a": 976,
+            "b": 973,
+            "c": 977,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.1111111119389534,
+                "z": 0.5555555820465088
+            },
+            "actorPosition": {
+                "x": 0.026196688413619996,
+                "y": 1.5435317754745484,
+                "z": 0.07777982950210571
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004676463082432747,
+            "radius": 0.0006710002780891955,
+            "minimumSingleFrameLipDistance": 1.77492094039917
+        },
+        {
+            "triangle": 252,
+            "a": 978,
+            "b": 969,
+            "c": 979,
+            "region": 0,
+            "barycentric": {
+                "x": 0.7777777910232544,
+                "y": 0.0,
+                "z": 0.2222222238779068
+            },
+            "actorPosition": {
+                "x": 0.04369949549436569,
+                "y": 1.5613288879394532,
+                "z": 0.0861019417643547
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006105445791035891,
+            "radius": 0.0009246992995031178,
+            "minimumSingleFrameLipDistance": 2.362027883529663
+        },
+        {
+            "triangle": 270,
+            "a": 989,
+            "b": 986,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.3333333432674408,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.013325332663953305,
+                "y": 1.5372257232666016,
+                "z": 0.09144476056098938
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007539586164057255,
+            "radius": 0.0009235313045792282,
+            "minimumSingleFrameLipDistance": 1.7280375957489014
+        },
+        {
+            "triangle": 285,
+            "a": 993,
+            "b": 998,
+            "c": 990,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.6666666865348816,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.016735807061195375,
+                "y": 1.5525596141815186,
+                "z": 0.09774965047836304
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00352286035194993,
+            "radius": 0.0006087908986955881,
+            "minimumSingleFrameLipDistance": 1.1482207775115967
+        },
+        {
+            "triangle": 257,
+            "a": 976,
+            "b": 977,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.375,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": 0.022078266367316247,
+                "y": 1.5410391092300416,
+                "z": 0.0803392231464386
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004244162701070309,
+            "radius": 0.0006118740420788527,
+            "minimumSingleFrameLipDistance": 1.7430763244628907
+        },
+        {
+            "triangle": 306,
+            "a": 1008,
+            "b": 1004,
+            "c": 1003,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.0,
+                "z": 0.8333333134651184
+            },
+            "actorPosition": {
+                "x": -0.007330765016376972,
+                "y": 1.5345683097839356,
+                "z": 0.09502844512462616
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0046354192309081558,
+            "radius": 0.0006121949409134686,
+            "minimumSingleFrameLipDistance": 1.847206473350525
+        },
+        {
+            "triangle": 316,
+            "a": 1013,
+            "b": 1009,
+            "c": 1011,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.1428571492433548,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": -0.02587433159351349,
+                "y": 1.5554946660995484,
+                "z": 0.09539638459682465
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004464872181415558,
+            "radius": 0.0007224135915748775,
+            "minimumSingleFrameLipDistance": 1.4275176525115967
+        },
+        {
+            "triangle": 297,
+            "a": 1002,
+            "b": 1004,
+            "c": 898,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.1428571492433548,
+                "z": 0.7142857313156128
+            },
+            "actorPosition": {
+                "x": -0.014191119000315667,
+                "y": 1.5366663932800294,
+                "z": 0.0819949209690094
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005867122206836939,
+            "radius": 0.0007501562940888107,
+            "minimumSingleFrameLipDistance": 1.8325270414352418
+        },
+        {
+            "triangle": 305,
+            "a": 897,
+            "b": 1007,
+            "c": 896,
+            "region": 0,
+            "barycentric": {
+                "x": 1.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.03000948578119278,
+                "y": 1.546916127204895,
+                "z": 0.07908613234758377
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0038275846745818855,
+            "radius": 0.0006053605466149747,
+            "minimumSingleFrameLipDistance": 1.8670154809951783
+        },
+        {
+            "triangle": 123,
+            "a": 893,
+            "b": 897,
+            "c": 892,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.75,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.033402957022190097,
+                "y": 1.549103856086731,
+                "z": 0.0773472711443901
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003797894809395075,
+            "radius": 0.0006156779127195478,
+            "minimumSingleFrameLipDistance": 1.9807816743850709
+        },
+        {
+            "triangle": 312,
+            "a": 1011,
+            "b": 1007,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.4285714328289032,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.026552975177764894,
+                "y": 1.5512028932571412,
+                "z": 0.09138689935207367
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0038596191443502905,
+            "radius": 0.0006347447633743286,
+            "minimumSingleFrameLipDistance": 1.57231605052948
+        },
+        {
+            "triangle": 1298,
+            "a": 1563,
+            "b": 1566,
+            "c": 1021,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.20000000298023225,
+                "z": 0.800000011920929
+            },
+            "actorPosition": {
+                "x": -0.004284185357391834,
+                "y": 1.5513972043991089,
+                "z": 0.10033255815505982
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006529341451823711,
+            "radius": 0.0009072424145415425,
+            "minimumSingleFrameLipDistance": 1.0569783449172974
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.5714285969734192,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.021281752735376359,
+                "y": 1.542844533920288,
+                "z": 0.0878191888332367
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005277999211102724,
+            "radius": 0.0007279431447386742,
+            "minimumSingleFrameLipDistance": 1.636551856994629
+        },
+        {
+            "triangle": 309,
+            "a": 1009,
+            "b": 896,
+            "c": 1007,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.375,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.03653630614280701,
+                "y": 1.5570991039276124,
+                "z": 0.08829699456691742
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0033538793213665487,
+            "radius": 0.0006192871369421482,
+            "minimumSingleFrameLipDistance": 1.9621909856796265
+        },
+        {
+            "triangle": 297,
+            "a": 1002,
+            "b": 1004,
+            "c": 898,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.1428571492433548,
+                "z": 0.4285714328289032
+            },
+            "actorPosition": {
+                "x": -0.011412733234465123,
+                "y": 1.535128116607666,
+                "z": 0.08483754098415375
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00574323907494545,
+            "radius": 0.0007281904108822346,
+            "minimumSingleFrameLipDistance": 1.8905774354934693
+        },
+        {
+            "triangle": 304,
+            "a": 1007,
+            "b": 897,
+            "c": 1004,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.25,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.02574812062084675,
+                "y": 1.5456321239471436,
+                "z": 0.08542030304670334
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00571673596277833,
+            "radius": 0.0007895212038420141,
+            "minimumSingleFrameLipDistance": 1.698230266571045
+        },
+        {
+            "triangle": 249,
+            "a": 969,
+            "b": 978,
+            "c": 972,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.375,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": 0.049418289214372638,
+                "y": 1.5631887912750245,
+                "z": 0.08095694333314896
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0036797819193452598,
+            "radius": 0.0006895252736285329,
+            "minimumSingleFrameLipDistance": 2.5307071208953859
+        },
+        {
+            "triangle": 299,
+            "a": 898,
+            "b": 1004,
+            "c": 897,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.875,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.015767201781272889,
+                "y": 1.5384280681610108,
+                "z": 0.08720456063747406
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00490832794457674,
+            "radius": 0.0006634556339122355,
+            "minimumSingleFrameLipDistance": 1.7354340553283692
+        },
+        {
+            "triangle": 1247,
+            "a": 998,
+            "b": 993,
+            "c": 1536,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.800000011920929,
+                "z": 0.20000000298023225
+            },
+            "actorPosition": {
+                "x": 0.021722665056586267,
+                "y": 1.557647705078125,
+                "z": 0.09889654815196991
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004357121419161558,
+            "radius": 0.0007245864835567772,
+            "minimumSingleFrameLipDistance": 1.1510249376296998
+        },
+        {
+            "triangle": 299,
+            "a": 898,
+            "b": 1004,
+            "c": 897,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.625,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": -0.01751159131526947,
+                "y": 1.539298415184021,
+                "z": 0.0849161222577095
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005936329253017902,
+            "radius": 0.0007732323138043284,
+            "minimumSingleFrameLipDistance": 1.729399561882019
+        },
+        {
+            "triangle": 252,
+            "a": 978,
+            "b": 969,
+            "c": 979,
+            "region": 0,
+            "barycentric": {
+                "x": 0.8888888955116272,
+                "y": 0.0,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": 0.04298240691423416,
+                "y": 1.5595066547393799,
+                "z": 0.08492860198020935
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004056248348206282,
+            "radius": 0.0007053407025523484,
+            "minimumSingleFrameLipDistance": 2.2916927337646486
+        },
+        {
+            "triangle": 124,
+            "a": 897,
+            "b": 896,
+            "c": 892,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.5,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.0389937087893486,
+                "y": 1.5544878244400025,
+                "z": 0.07968184351921082
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0032516405917704107,
+            "radius": 0.0005929807666689158,
+            "minimumSingleFrameLipDistance": 2.1648082733154299
+        },
+        {
+            "triangle": 314,
+            "a": 1005,
+            "b": 1012,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.1666666716337204,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.012204215861856938,
+                "y": 1.5406150817871094,
+                "z": 0.09410301595926285
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004390893969684839,
+            "radius": 0.0006242012022994459,
+            "minimumSingleFrameLipDistance": 1.506456732749939
+        },
+        {
+            "triangle": 304,
+            "a": 1007,
+            "b": 897,
+            "c": 1004,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.25,
+                "z": 0.75
+            },
+            "actorPosition": {
+                "x": -0.01935170404613018,
+                "y": 1.5406770706176758,
+                "z": 0.08602403104305268
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006056221667677164,
+            "radius": 0.0007938196649774909,
+            "minimumSingleFrameLipDistance": 1.6974682807922364
+        },
+        {
+            "triangle": 121,
+            "a": 889,
+            "b": 892,
+            "c": 896,
+            "region": 0,
+            "barycentric": {
+                "x": 0.625,
+                "y": 0.375,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.05065668374300003,
+                "y": 1.5641236305236817,
+                "z": 0.07771454751491547
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0040442487224936489,
+            "radius": 0.0007322626770474017,
+            "minimumSingleFrameLipDistance": 2.5302634239196779
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.7142857313156128,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": -0.015324008651077748,
+                "y": 1.5392825603485108,
+                "z": 0.08956924080848694
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007376151625066996,
+            "radius": 0.0009194591548293829,
+            "minimumSingleFrameLipDistance": 1.6616575717926026
+        },
+        {
+            "triangle": 258,
+            "a": 977,
+            "b": 978,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.8571428656578064,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.04066828265786171,
+                "y": 1.5561460256576539,
+                "z": 0.0830882340669632
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005936846137046814,
+            "radius": 0.0008759745978750289,
+            "minimumSingleFrameLipDistance": 2.151785373687744
+        },
+        {
+            "triangle": 249,
+            "a": 969,
+            "b": 978,
+            "c": 972,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.375,
+                "z": 0.625
+            },
+            "actorPosition": {
+                "x": 0.04376057907938957,
+                "y": 1.5564234256744385,
+                "z": 0.07648985087871552
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0031056255102157594,
+            "radius": 0.0005899397074244916,
+            "minimumSingleFrameLipDistance": 2.3791704177856447
+        },
+        {
+            "triangle": 250,
+            "a": 977,
+            "b": 972,
+            "c": 978,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.25,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.0400686115026474,
+                "y": 1.554487943649292,
+                "z": 0.07968179881572724
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004755271133035421,
+            "radius": 0.0007457894389517605,
+            "minimumSingleFrameLipDistance": 2.162996292114258
+        },
+        {
+            "triangle": 297,
+            "a": 1002,
+            "b": 1004,
+            "c": 898,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.7142857313156128,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.012947792187333107,
+                "y": 1.5366718769073487,
+                "z": 0.08859160542488098
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0047587379813194279,
+            "radius": 0.0006375490920618177,
+            "minimumSingleFrameLipDistance": 1.7944207191467286
+        },
+        {
+            "triangle": 269,
+            "a": 983,
+            "b": 989,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.1428571492433548,
+                "z": 0.7142857313156128
+            },
+            "actorPosition": {
+                "x": 0.01846751943230629,
+                "y": 1.5403558015823365,
+                "z": 0.08878044039011002
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0051751406863331799,
+            "radius": 0.0007023207144811749,
+            "minimumSingleFrameLipDistance": 1.6499543190002442
+        },
+        {
+            "triangle": 315,
+            "a": 1011,
+            "b": 1008,
+            "c": 1012,
+            "region": 0,
+            "barycentric": {
+                "x": 0.7142857313156128,
+                "y": 0.1428571492433548,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": -0.02172970399260521,
+                "y": 1.5503040552139283,
+                "z": 0.09449832141399384
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0036021259147673847,
+            "radius": 0.000603098189458251,
+            "minimumSingleFrameLipDistance": 1.385547161102295
+        },
+        {
+            "triangle": 309,
+            "a": 1009,
+            "b": 896,
+            "c": 1007,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": -0.034459784626960757,
+                "y": 1.5565216541290284,
+                "z": 0.08995147794485092
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004319977015256882,
+            "radius": 0.0007139481604099274,
+            "minimumSingleFrameLipDistance": 1.8518385887145997
+        },
+        {
+            "triangle": 281,
+            "a": 990,
+            "b": 996,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.4285714328289032,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": 0.014664518646895886,
+                "y": 1.5427157878875733,
+                "z": 0.09405897557735443
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007118673529475927,
+            "radius": 0.0009142188937403262,
+            "minimumSingleFrameLipDistance": 1.4448975324630738
+        },
+        {
+            "triangle": 315,
+            "a": 1011,
+            "b": 1008,
+            "c": 1012,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.1428571492433548,
+                "z": 0.8571428656578064
+            },
+            "actorPosition": {
+                "x": -0.01303626224398613,
+                "y": 1.544435977935791,
+                "z": 0.09546726197004318
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005893728230148554,
+            "radius": 0.0008002173854038119,
+            "minimumSingleFrameLipDistance": 1.3799978494644166
+        },
+        {
+            "triangle": 1272,
+            "a": 1019,
+            "b": 998,
+            "c": 1550,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.6666666865348816,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.010203614830970765,
+                "y": 1.5506987571716309,
+                "z": 0.09876769781112671
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004573854152113199,
+            "radius": 0.0007042568759061396,
+            "minimumSingleFrameLipDistance": 1.1022616624832154
+        },
+        {
+            "triangle": 316,
+            "a": 1013,
+            "b": 1009,
+            "c": 1011,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.5714285969734192,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": -0.031526099890470508,
+                "y": 1.558868169784546,
+                "z": 0.09450680762529373
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006087519694119692,
+            "radius": 0.0009078790317289531,
+            "minimumSingleFrameLipDistance": 1.6459647417068482
+        },
+        {
+            "triangle": 126,
+            "a": 898,
+            "b": 897,
+            "c": 893,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.4444444477558136,
+                "z": 0.2222222238779068
+            },
+            "actorPosition": {
+                "x": -0.02505129761993885,
+                "y": 1.5433721542358399,
+                "z": 0.07640907168388367
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004465129692107439,
+            "radius": 0.0006485503981821239,
+            "minimumSingleFrameLipDistance": 1.7800853252410889
+        },
+        {
+            "triangle": 308,
+            "a": 1007,
+            "b": 1004,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.0,
+                "z": 0.7142857313156128
+            },
+            "actorPosition": {
+                "x": -0.018266448751091958,
+                "y": 1.5431418418884278,
+                "z": 0.09107312560081482
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005474758800119162,
+            "radius": 0.000749751168768853,
+            "minimumSingleFrameLipDistance": 1.5038578510284424
+        },
+        {
+            "triangle": 249,
+            "a": 969,
+            "b": 978,
+            "c": 972,
+            "region": 0,
+            "barycentric": {
+                "x": 0.5,
+                "y": 0.0,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.05031544715166092,
+                "y": 1.5624322891235352,
+                "z": 0.07659769803285599
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005582232493907213,
+            "radius": 0.000878252787515521,
+            "minimumSingleFrameLipDistance": 2.6221182346343996
+        },
+        {
+            "triangle": 1319,
+            "a": 1016,
+            "b": 1577,
+            "c": 1013,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6000000238418579,
+                "y": 0.0,
+                "z": 0.4000000059604645
+            },
+            "actorPosition": {
+                "x": -0.015822984278202058,
+                "y": 1.5534849166870118,
+                "z": 0.09826713800430298
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004245327319949865,
+            "radius": 0.0006878521526232362,
+            "minimumSingleFrameLipDistance": 1.114480972290039
+        },
+        {
+            "triangle": 259,
+            "a": 983,
+            "b": 982,
+            "c": 977,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.625,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.021674007177352907,
+                "y": 1.542313814163208,
+                "z": 0.0878838524222374
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006712928414344788,
+            "radius": 0.0008705344516783953,
+            "minimumSingleFrameLipDistance": 1.6390191316604615
+        },
+        {
+            "triangle": 250,
+            "a": 977,
+            "b": 972,
+            "c": 978,
+            "region": 0,
+            "barycentric": {
+                "x": 0.75,
+                "y": 0.0,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": 0.03388088196516037,
+                "y": 1.5496082305908204,
+                "z": 0.08025337755680084
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0035098756197839977,
+            "radius": 0.000589482020586729,
+            "minimumSingleFrameLipDistance": 1.91942298412323
+        },
+        {
+            "triangle": 272,
+            "a": 990,
+            "b": 989,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.4285714328289032,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.021943774074316026,
+                "y": 1.5473097562789918,
+                "z": 0.09268885105848313
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00409627566114068,
+            "radius": 0.0006350657204166055,
+            "minimumSingleFrameLipDistance": 1.4384301900863648
+        },
+        {
+            "triangle": 322,
+            "a": 1016,
+            "b": 1011,
+            "c": 1012,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.1666666716337204,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.01469854824244976,
+                "y": 1.547438383102417,
+                "z": 0.09613776952028275
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005145207047462463,
+            "radius": 0.0007424485520459712,
+            "minimumSingleFrameLipDistance": 1.2950383424758912
+        },
+        {
+            "triangle": 121,
+            "a": 889,
+            "b": 892,
+            "c": 896,
+            "region": 0,
+            "barycentric": {
+                "x": 0.375,
+                "y": 0.375,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.047229260206222537,
+                "y": 1.5612452030181885,
+                "z": 0.07838714867830277
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0028398309368640186,
+            "radius": 0.0005923178396187723,
+            "minimumSingleFrameLipDistance": 2.604252338409424
+        },
+        {
+            "triangle": 281,
+            "a": 990,
+            "b": 996,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.4285714328289032,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.019328648224473,
+                "y": 1.5479568243026734,
+                "z": 0.0948859378695488
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006514311768114567,
+            "radius": 0.0008847452118061483,
+            "minimumSingleFrameLipDistance": 1.3463541269302369
+        },
+        {
+            "triangle": 1319,
+            "a": 1016,
+            "b": 1577,
+            "c": 1013,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.6000000238418579,
+                "z": 0.4000000059604645
+            },
+            "actorPosition": {
+                "x": -0.018099913373589517,
+                "y": 1.5596202611923218,
+                "z": 0.10085249692201615
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002905502449721098,
+            "radius": 0.0005890873726457357,
+            "minimumSingleFrameLipDistance": 1.044415831565857
+        },
+        {
+            "triangle": 327,
+            "a": 996,
+            "b": 1019,
+            "c": 1014,
+            "region": 0,
+            "barycentric": {
+                "x": 0.4000000059604645,
+                "y": 0.4000000059604645,
+                "z": 0.20000000298023225
+            },
+            "actorPosition": {
+                "x": 0.008478835225105286,
+                "y": 1.5460889339447022,
+                "z": 0.09756854176521301
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0045593841932713989,
+            "radius": 0.0006746884901076555,
+            "minimumSingleFrameLipDistance": 1.2716865539550782
+        },
+        {
+            "triangle": 282,
+            "a": 996,
+            "b": 995,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.5,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.009633722715079785,
+                "y": 1.5391850471496583,
+                "z": 0.0964599996805191
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007367349695414305,
+            "radius": 0.0009179702028632164,
+            "minimumSingleFrameLipDistance": 1.5443662405014039
+        },
+        {
+            "triangle": 1292,
+            "a": 1562,
+            "b": 1563,
+            "c": 1020,
+            "region": 0,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.20000000298023225,
+                "z": 0.800000011920929
+            },
+            "actorPosition": {
+                "x": -0.000168928992934525,
+                "y": 1.5510259866714478,
+                "z": 0.10034561902284622
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005722544621676207,
+            "radius": 0.0008229882223531604,
+            "minimumSingleFrameLipDistance": 1.1062827110290528
+        },
+        {
+            "triangle": 249,
+            "a": 969,
+            "b": 978,
+            "c": 972,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.25,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.04688848555088043,
+                "y": 1.559554100036621,
+                "z": 0.07727031409740448
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004268822260200977,
+            "radius": 0.000727232894860208,
+            "minimumSingleFrameLipDistance": 2.585538625717163
+        },
+        {
+            "triangle": 314,
+            "a": 1005,
+            "b": 1012,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.8333333134651184,
+                "y": 0.1666666716337204,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.0053316205739974979,
+                "y": 1.536417007446289,
+                "z": 0.0977216362953186
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0059726787731051449,
+            "radius": 0.000759363523684442,
+            "minimumSingleFrameLipDistance": 1.672860026359558
+        },
+        {
+            "triangle": 270,
+            "a": 989,
+            "b": 986,
+            "c": 982,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.0,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.015769388526678087,
+                "y": 1.540196180343628,
+                "z": 0.09121266007423401
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007148233242332935,
+            "radius": 0.0009018654236570001,
+            "minimumSingleFrameLipDistance": 1.5815905332565308
+        },
+        {
+            "triangle": 258,
+            "a": 977,
+            "b": 978,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.0,
+                "z": 0.8571428656578064
+            },
+            "actorPosition": {
+                "x": 0.02986992336809635,
+                "y": 1.5482803583145142,
+                "z": 0.08598017692565918
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003815653268247843,
+            "radius": 0.0006124632782302797,
+            "minimumSingleFrameLipDistance": 1.75365149974823
+        },
+        {
+            "triangle": 271,
+            "a": 987,
+            "b": 990,
+            "c": 983,
+            "region": 0,
+            "barycentric": {
+                "x": 0.875,
+                "y": 0.125,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.03673240914940834,
+                "y": 1.56111478805542,
+                "z": 0.0937376543879509
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005891426466405392,
+            "radius": 0.0009016444091685116,
+            "minimumSingleFrameLipDistance": 1.8410730361938477
+        },
+        {
+            "triangle": 299,
+            "a": 898,
+            "b": 1004,
+            "c": 897,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.125,
+                "z": 0.75
+            },
+            "actorPosition": {
+                "x": -0.026424983516335489,
+                "y": 1.5446670055389405,
+                "z": 0.08026665449142456
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004047953989356756,
+            "radius": 0.0006140469340607524,
+            "minimumSingleFrameLipDistance": 1.780107855796814
+        },
+        {
+            "triangle": 312,
+            "a": 1011,
+            "b": 1007,
+            "c": 1008,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.0,
+                "z": 0.8571428656578064
+            },
+            "actorPosition": {
+                "x": -0.0156916081905365,
+                "y": 1.5427424907684327,
+                "z": 0.09292633086442948
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006875508930534124,
+            "radius": 0.0008896697545424104,
+            "minimumSingleFrameLipDistance": 1.4641976356506348
+        },
+        {
+            "triangle": 267,
+            "a": 987,
+            "b": 983,
+            "c": 978,
+            "region": 0,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.5,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": 0.03496284782886505,
+                "y": 1.5542354583740235,
+                "z": 0.08790773153305054
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005303811281919479,
+            "radius": 0.0007999964873306453,
+            "minimumSingleFrameLipDistance": 1.8651063442230225
+        },
+        {
+            "triangle": 259,
+            "a": 983,
+            "b": 982,
+            "c": 977,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.5,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": 0.023804714903235437,
+                "y": 1.542955756187439,
+                "z": 0.08471675217151642
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005493063014000654,
+            "radius": 0.0007504772511310875,
+            "minimumSingleFrameLipDistance": 1.695296287536621
+        },
+        {
+            "triangle": 287,
+            "a": 995,
+            "b": 999,
+            "c": 994,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.0,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.004819042980670929,
+                "y": 1.5339858531951905,
+                "z": 0.0974423959851265
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007002378348261118,
+            "radius": 0.0008491894113831222,
+            "minimumSingleFrameLipDistance": 1.8344663381576539
+        },
+        {
+            "triangle": 281,
+            "a": 990,
+            "b": 996,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.5714285969734192,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.016035718843340875,
+                "y": 1.5450363159179688,
+                "z": 0.0948040783405304
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005181695334613323,
+            "radius": 0.0007315155817195773,
+            "minimumSingleFrameLipDistance": 1.3797390460968018
+        },
+        {
+            "triangle": 309,
+            "a": 1009,
+            "b": 896,
+            "c": 1007,
+            "region": 0,
+            "barycentric": {
+                "x": 0.75,
+                "y": 0.0,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.035031385719776157,
+                "y": 1.5588082075119019,
+                "z": 0.0919952243566513
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006281581707298756,
+            "radius": 0.0009272352908737958,
+            "minimumSingleFrameLipDistance": 1.8393861055374146
+        },
+        {
+            "triangle": 266,
+            "a": 978,
+            "b": 979,
+            "c": 987,
+            "region": 0,
+            "barycentric": {
+                "x": 0.2222222238779068,
+                "y": 0.0,
+                "z": 0.7777777910232544
+            },
+            "actorPosition": {
+                "x": 0.03914354741573334,
+                "y": 1.5612291097640992,
+                "z": 0.09142573177814484
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003657484194263816,
+            "radius": 0.0006753145717084408,
+            "minimumSingleFrameLipDistance": 1.9849730730056763
+        },
+        {
+            "triangle": 276,
+            "a": 990,
+            "b": 987,
+            "c": 993,
+            "region": 0,
+            "barycentric": {
+                "x": 0.7142857313156128,
+                "y": 0.2857142984867096,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.02957047149538994,
+                "y": 1.5558011531829835,
+                "z": 0.094305120408535
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005137063562870026,
+            "radius": 0.0007925938116386533,
+            "minimumSingleFrameLipDistance": 1.5521595478057862
+        },
+        {
+            "triangle": 322,
+            "a": 1016,
+            "b": 1011,
+            "c": 1012,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.1666666716337204,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": -0.014149993658065796,
+                "y": 1.5506174564361573,
+                "z": 0.09741924703121185
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005729652009904385,
+            "radius": 0.0008212204556912184,
+            "minimumSingleFrameLipDistance": 1.179606318473816
+        },
+        {
+            "triangle": 320,
+            "a": 1015,
+            "b": 1005,
+            "c": 1006,
+            "region": 0,
+            "barycentric": {
+                "x": 0.75,
+                "y": 0.0,
+                "z": 0.25
+            },
+            "actorPosition": {
+                "x": -0.0025290625635534527,
+                "y": 1.539870262145996,
+                "z": 0.09759995341300965
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.006469752639532089,
+            "radius": 0.0008309275726787746,
+            "minimumSingleFrameLipDistance": 1.5352771282196046
+        },
+        {
+            "triangle": 309,
+            "a": 1009,
+            "b": 896,
+            "c": 1007,
+            "region": 0,
+            "barycentric": {
+                "x": 0.125,
+                "y": 0.875,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.04068934917449951,
+                "y": 1.5582538843154908,
+                "z": 0.08498802781105042
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005744156427681446,
+            "radius": 0.0008692402043379843,
+            "minimumSingleFrameLipDistance": 2.186818838119507
+        },
+        {
+            "triangle": 282,
+            "a": 996,
+            "b": 995,
+            "c": 989,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.3333333432674408,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.011351434513926506,
+                "y": 1.5402345657348633,
+                "z": 0.09555534273386002
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004437893163412809,
+            "radius": 0.0006266582058742642,
+            "minimumSingleFrameLipDistance": 1.5094237327575684
+        },
+        {
+            "triangle": 264,
+            "a": 984,
+            "b": 982,
+            "c": 986,
+            "region": 0,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.1666666716337204,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.008588667958974839,
+                "y": 1.5332187414169312,
+                "z": 0.09012607485055924
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.007145302835851908,
+            "radius": 0.0008590385550633073,
+            "minimumSingleFrameLipDistance": 1.9780597686767579
+        },
+        {
+            "triangle": 1226,
+            "a": 1525,
+            "b": 993,
+            "c": 988,
+            "region": 0,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.1666666716337204,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.027270495891571046,
+                "y": 1.5639734268188477,
+                "z": 0.09959004074335098
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005982556380331516,
+            "radius": 0.0009283296531066299,
+            "minimumSingleFrameLipDistance": 1.3385378122329713
+        },
+        {
+            "triangle": 1216,
+            "a": 988,
+            "b": 992,
+            "c": 1521,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6000000238418579,
+                "y": 0.4000000059604645,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.029422808438539506,
+                "y": 1.5684864521026612,
+                "z": 0.1010059118270874
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004710023757070303,
+            "radius": 0.0008349523996002972,
+            "minimumSingleFrameLipDistance": 1.3314346075057984
+        },
+        {
+            "triangle": 237,
+            "a": 969,
+            "b": 972,
+            "c": 938,
+            "region": 1,
+            "barycentric": {
+                "x": 0.75,
+                "y": 0.125,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": 0.054855626076459888,
+                "y": 1.5671796798706055,
+                "z": 0.0778670534491539
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004755944944918156,
+            "radius": 0.0008396191988140345,
+            "minimumSingleFrameLipDistance": 2.424696445465088
+        },
+        {
+            "triangle": 442,
+            "a": 991,
+            "b": 981,
+            "c": 1078,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.2857142984867096,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.04003463685512543,
+                "y": 1.583481788635254,
+                "z": 0.10190571844577789
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003708513453602791,
+            "radius": 0.0007331728702411056,
+            "minimumSingleFrameLipDistance": 1.6384388208389283
+        },
+        {
+            "triangle": 266,
+            "a": 978,
+            "b": 979,
+            "c": 987,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.8888888955116272,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": 0.04755604639649391,
+                "y": 1.572769284248352,
+                "z": 0.09423776715993881
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0036468023899942638,
+            "radius": 0.0007269014604389668,
+            "minimumSingleFrameLipDistance": 1.8967926502227784
+        },
+        {
+            "triangle": 111,
+            "a": 889,
+            "b": 890,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.3333333432674408,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": -0.057208456099033359,
+                "y": 1.5786166191101075,
+                "z": 0.08473113924264908
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003372933715581894,
+            "radius": 0.0006990692345425487,
+            "minimumSingleFrameLipDistance": 2.2498698234558107
+        },
+        {
+            "triangle": 1337,
+            "a": 1010,
+            "b": 1586,
+            "c": 1018,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6000000238418579,
+                "y": 0.20000000298023225,
+                "z": 0.20000000298023225
+            },
+            "actorPosition": {
+                "x": -0.02760867029428482,
+                "y": 1.5675044059753419,
+                "z": 0.10072561353445053
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003418647451326251,
+            "radius": 0.0007037149625830352,
+            "minimumSingleFrameLipDistance": 1.3840785026550294
+        },
+        {
+            "triangle": 120,
+            "a": 889,
+            "b": 895,
+            "c": 890,
+            "region": 1,
+            "barycentric": {
+                "x": 1.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.05490066483616829,
+                "y": 1.569197654724121,
+                "z": 0.081064872443676
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004385626409202814,
+            "radius": 0.0008019851520657539,
+            "minimumSingleFrameLipDistance": 2.3546547889709474
+        },
+        {
+            "triangle": 338,
+            "a": 1023,
+            "b": 1017,
+            "c": 1024,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.1428571492433548,
+                "z": 0.8571428656578064
+            },
+            "actorPosition": {
+                "x": -0.030889779329299928,
+                "y": 1.579397439956665,
+                "z": 0.10451772809028626
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0028279919642955066,
+            "radius": 0.000643688952550292,
+            "minimumSingleFrameLipDistance": 1.3312945365905762
+        },
+        {
+            "triangle": 326,
+            "a": 900,
+            "b": 895,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "actorPosition": {
+                "x": -0.039151813834905627,
+                "y": 1.5763376951217652,
+                "z": 0.09980099648237229
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004017793107777834,
+            "radius": 0.0007646037847734988,
+            "minimumSingleFrameLipDistance": 1.5765621662139893
+        },
+        {
+            "triangle": 324,
+            "a": 895,
+            "b": 1010,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.25,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": -0.03933083266019821,
+                "y": 1.5732853412628174,
+                "z": 0.0981404036283493
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003784461412578821,
+            "radius": 0.0007408912060782313,
+            "minimumSingleFrameLipDistance": 1.6150034666061402
+        },
+        {
+            "triangle": 111,
+            "a": 889,
+            "b": 890,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.7777777910232544,
+                "y": 0.2222222238779068,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.05474353954195976,
+                "y": 1.5728493928909302,
+                "z": 0.08399656414985657
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004193918779492378,
+            "radius": 0.0007825026987120509,
+            "minimumSingleFrameLipDistance": 2.214179754257202
+        },
+        {
+            "triangle": 268,
+            "a": 988,
+            "b": 987,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.25,
+                "z": 0.5
+            },
+            "actorPosition": {
+                "x": 0.042033977806568149,
+                "y": 1.5691983699798585,
+                "z": 0.09522309899330139
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0032402449287474157,
+            "radius": 0.0006855846149846911,
+            "minimumSingleFrameLipDistance": 1.8180216550827027
+        },
+        {
+            "triangle": 252,
+            "a": 978,
+            "b": 969,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.5555555820465088,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.052032046020030978,
+                "y": 1.5695476531982422,
+                "z": 0.08578057587146759
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005200140178203583,
+            "radius": 0.0008847609278745949,
+            "minimumSingleFrameLipDistance": 2.191659688949585
+        },
+        {
+            "triangle": 326,
+            "a": 900,
+            "b": 895,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.2857142984867096,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": -0.04369866102933884,
+                "y": 1.5807201862335206,
+                "z": 0.09870526194572449
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00420147692784667,
+            "radius": 0.000783270807005465,
+            "minimumSingleFrameLipDistance": 1.787958025932312
+        },
+        {
+            "triangle": 437,
+            "a": 1079,
+            "b": 1074,
+            "c": 1063,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.1666666716337204,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.027500100433826448,
+                "y": 1.5821669101715088,
+                "z": 0.10676654428243637
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0025344504974782469,
+            "radius": 0.00061385752633214,
+            "minimumSingleFrameLipDistance": 1.207745909690857
+        },
+        {
+            "triangle": 120,
+            "a": 889,
+            "b": 895,
+            "c": 890,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.0,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.05442928522825241,
+                "y": 1.5801527500152588,
+                "z": 0.08985994011163712
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0035323365591466429,
+            "radius": 0.0007152687758207321,
+            "minimumSingleFrameLipDistance": 2.132197618484497
+        },
+        {
+            "triangle": 111,
+            "a": 889,
+            "b": 890,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.2222222238779068,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.05983049049973488,
+                "y": 1.5807322263717652,
+                "z": 0.08253403007984162
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005331379361450672,
+            "radius": 0.0008980983402580023,
+            "minimumSingleFrameLipDistance": 2.353315830230713
+        },
+        {
+            "triangle": 111,
+            "a": 889,
+            "b": 890,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.8888888955116272,
+                "y": 0.1111111119389534,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.054822102189064029,
+                "y": 1.5710234642028809,
+                "z": 0.08253071457147598
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0053224749863147739,
+            "radius": 0.0008971933857537806,
+            "minimumSingleFrameLipDistance": 2.2731640338897707
+        },
+        {
+            "triangle": 266,
+            "a": 978,
+            "b": 979,
+            "c": 987,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4444444477558136,
+                "y": 0.5555555820465088,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.04585075378417969,
+                "y": 1.5667959451675416,
+                "z": 0.08962196856737137
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00339892297051847,
+            "radius": 0.0007017104071564972,
+            "minimumSingleFrameLipDistance": 2.1384782791137697
+        },
+        {
+            "triangle": 121,
+            "a": 889,
+            "b": 892,
+            "c": 896,
+            "region": 1,
+            "barycentric": {
+                "x": 0.75,
+                "y": 0.125,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": -0.05177229642868042,
+                "y": 1.566067099571228,
+                "z": 0.08028440177440644
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005186109803617001,
+            "radius": 0.0008833351894281805,
+            "minimumSingleFrameLipDistance": 2.4255435466766359
+        },
+        {
+            "triangle": 233,
+            "a": 965,
+            "b": 966,
+            "c": 970,
+            "region": 1,
+            "barycentric": {
+                "x": 0.7777777910232544,
+                "y": 0.1111111119389534,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": 0.06213380768895149,
+                "y": 1.5833336114883423,
+                "z": 0.08209969848394394
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004870410077273846,
+            "radius": 0.0008512518834322691,
+            "minimumSingleFrameLipDistance": 2.4313836097717287
+        },
+        {
+            "triangle": 337,
+            "a": 1017,
+            "b": 1023,
+            "c": 900,
+            "region": 1,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.0,
+                "z": 0.4285714328289032
+            },
+            "actorPosition": {
+                "x": -0.04127160832285881,
+                "y": 1.5813637971878052,
+                "z": 0.10027259588241577
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0038937500212341549,
+            "radius": 0.0007519976934418082,
+            "minimumSingleFrameLipDistance": 1.7126675844192505
+        },
+        {
+            "triangle": 122,
+            "a": 896,
+            "b": 895,
+            "c": 889,
+            "region": 1,
+            "barycentric": {
+                "x": 0.5555555820465088,
+                "y": 0.4444444477558136,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.044060107320547107,
+                "y": 1.5649735927581788,
+                "z": 0.08844864368438721
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002923457883298397,
+            "radius": 0.000653390830848366,
+            "minimumSingleFrameLipDistance": 2.2518577575683595
+        },
+        {
+            "triangle": 120,
+            "a": 889,
+            "b": 895,
+            "c": 890,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4444444477558136,
+                "y": 0.4444444477558136,
+                "z": 0.1111111119389534
+            },
+            "actorPosition": {
+                "x": -0.05159803107380867,
+                "y": 1.5731956958770753,
+                "z": 0.08841980993747711
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005140913650393486,
+            "radius": 0.0008787420811131597,
+            "minimumSingleFrameLipDistance": 2.0817108154296877
+        },
+        {
+            "triangle": 249,
+            "a": 969,
+            "b": 978,
+            "c": 972,
+            "region": 1,
+            "barycentric": {
+                "x": 0.875,
+                "y": 0.125,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.05425967648625374,
+                "y": 1.5677584409713746,
+                "z": 0.08140109479427338
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0033014898654073478,
+            "radius": 0.0006918086437508464,
+            "minimumSingleFrameLipDistance": 2.3693130016326906
+        },
+        {
+            "triangle": 234,
+            "a": 969,
+            "b": 965,
+            "c": 970,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.3333333432674408,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.058516621589660647,
+                "y": 1.5731391906738282,
+                "z": 0.08033352345228195
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0047991215251386169,
+            "radius": 0.0008440070087090135,
+            "minimumSingleFrameLipDistance": 2.3128128051757814
+        },
+        {
+            "triangle": 445,
+            "a": 1063,
+            "b": 992,
+            "c": 1079,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.6666666865348816,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.02323393151164055,
+                "y": 1.5754717588424683,
+                "z": 0.10622784495353699
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005154477432370186,
+            "radius": 0.0008801204967312515,
+            "minimumSingleFrameLipDistance": 1.0303592681884766
+        },
+        {
+            "triangle": 251,
+            "a": 969,
+            "b": 970,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.3333333432674408,
+                "z": 0.5555555820465088
+            },
+            "actorPosition": {
+                "x": 0.0517074391245842,
+                "y": 1.577390432357788,
+                "z": 0.09282374382019043
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003606213955208659,
+            "radius": 0.0007227765745483339,
+            "minimumSingleFrameLipDistance": 2.0128886699676515
+        },
+        {
+            "triangle": 120,
+            "a": 889,
+            "b": 895,
+            "c": 890,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.0,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": -0.0546649768948555,
+                "y": 1.5746753215789796,
+                "z": 0.08546240627765656
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003776851110160351,
+            "radius": 0.0007401178008876741,
+            "minimumSingleFrameLipDistance": 2.177765369415283
+        },
+        {
+            "triangle": 325,
+            "a": 1018,
+            "b": 1017,
+            "c": 1010,
+            "region": 1,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.5714285969734192,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": -0.03365863859653473,
+                "y": 1.5735745429992676,
+                "z": 0.10099203884601593
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0032037461642175915,
+            "radius": 0.0006818753317929804,
+            "minimumSingleFrameLipDistance": 1.4139313697814942
+        },
+        {
+            "triangle": 275,
+            "a": 992,
+            "b": 988,
+            "c": 991,
+            "region": 1,
+            "barycentric": {
+                "x": 0.8571428656578064,
+                "y": 0.0,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.02707880362868309,
+                "y": 1.5723150968551636,
+                "z": 0.1038699597120285
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.003905968042090535,
+            "radius": 0.0007532393792644143,
+            "minimumSingleFrameLipDistance": 1.179603934288025
+        },
+        {
+            "triangle": 441,
+            "a": 1079,
+            "b": 991,
+            "c": 1078,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.4285714328289032,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.03529195114970207,
+                "y": 1.5797643661499024,
+                "z": 0.10305456072092056
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004396912641823292,
+            "radius": 0.0008031321340240538,
+            "minimumSingleFrameLipDistance": 1.433674931526184
+        },
+        {
+            "triangle": 268,
+            "a": 988,
+            "b": 987,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.625,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": 0.038108669221401218,
+                "y": 1.5647571086883546,
+                "z": 0.09496133774518967
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004948066547513008,
+            "radius": 0.0008591437945142388,
+            "minimumSingleFrameLipDistance": 1.9383437633514405
+        },
+        {
+            "triangle": 352,
+            "a": 1028,
+            "b": 1024,
+            "c": 1031,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.6666666865348816,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": -0.025959666818380357,
+                "y": 1.5809803009033204,
+                "z": 0.10673166811466217
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005186679307371378,
+            "radius": 0.0008833930478431284,
+            "minimumSingleFrameLipDistance": 1.1598840951919556
+        },
+        {
+            "triangle": 1346,
+            "a": 1589,
+            "b": 1592,
+            "c": 1018,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "actorPosition": {
+                "x": -0.023815002292394639,
+                "y": 1.57164466381073,
+                "z": 0.10454796999692917
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004359740763902664,
+            "radius": 0.0007993545732460916,
+            "minimumSingleFrameLipDistance": 1.1137073040008546
+        },
+        {
+            "triangle": 122,
+            "a": 896,
+            "b": 895,
+            "c": 889,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.2222222238779068,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.051765330135822299,
+                "y": 1.5690045356750489,
+                "z": 0.08430835604667664
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005017750896513462,
+            "radius": 0.0008662254549562931,
+            "minimumSingleFrameLipDistance": 2.2488858699798586
+        },
+        {
+            "triangle": 274,
+            "a": 988,
+            "b": 979,
+            "c": 991,
+            "region": 1,
+            "barycentric": {
+                "x": 0.625,
+                "y": 0.0,
+                "z": 0.375
+            },
+            "actorPosition": {
+                "x": 0.035362984985113147,
+                "y": 1.5701148509979249,
+                "z": 0.09907816350460053
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005634136963635683,
+            "radius": 0.000928866327740252,
+            "minimumSingleFrameLipDistance": 1.5086472034454346
+        },
+        {
+            "triangle": 346,
+            "a": 1024,
+            "b": 1028,
+            "c": 1023,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.0,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": -0.030855692923069,
+                "y": 1.5831429958343506,
+                "z": 0.10555829107761383
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0026467933785170318,
+            "radius": 0.0006252744933590293,
+            "minimumSingleFrameLipDistance": 1.3762916326522828
+        },
+        {
+            "triangle": 1226,
+            "a": 1525,
+            "b": 993,
+            "c": 988,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.0,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": 0.028845276683568956,
+                "y": 1.5655933618545533,
+                "z": 0.09971103817224503
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0038492269814014436,
+            "radius": 0.0007474730955436826,
+            "minimumSingleFrameLipDistance": 1.4136300086975098
+        },
+        {
+            "triangle": 255,
+            "a": 981,
+            "b": 979,
+            "c": 970,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.4285714328289032,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": 0.05246024578809738,
+                "y": 1.5806822776794434,
+                "z": 0.09428222477436066
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004543942399322987,
+            "radius": 0.0008180742152035236,
+            "minimumSingleFrameLipDistance": 2.0674314498901369
+        },
+        {
+            "triangle": 273,
+            "a": 979,
+            "b": 981,
+            "c": 991,
+            "region": 1,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.5714285969734192,
+                "z": 0.1428571492433548
+            },
+            "actorPosition": {
+                "x": 0.045477814972400668,
+                "y": 1.5823954343795777,
+                "z": 0.0988624319434166
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004401778802275658,
+            "radius": 0.0008036267245188355,
+            "minimumSingleFrameLipDistance": 1.805704116821289
+        },
+        {
+            "triangle": 311,
+            "a": 895,
+            "b": 1009,
+            "c": 1010,
+            "region": 1,
+            "barycentric": {
+                "x": 0.25,
+                "y": 0.125,
+                "z": 0.625
+            },
+            "actorPosition": {
+                "x": -0.03616711497306824,
+                "y": 1.5677895545959473,
+                "z": 0.09693366289138794
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005300937686115503,
+            "radius": 0.0008950047194957733,
+            "minimumSingleFrameLipDistance": 1.6876567602157593
+        },
+        {
+            "triangle": 438,
+            "a": 1074,
+            "b": 1079,
+            "c": 1078,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.6666666865348816,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": 0.03192829340696335,
+                "y": 1.5831431150436402,
+                "z": 0.10555832833051682
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005168041680008173,
+            "radius": 0.0008814989705570042,
+            "minimumSingleFrameLipDistance": 1.347969889640808
+        },
+        {
+            "triangle": 338,
+            "a": 1023,
+            "b": 1017,
+            "c": 1024,
+            "region": 1,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.2857142984867096,
+                "z": 0.4285714328289032
+            },
+            "actorPosition": {
+                "x": -0.03341785818338394,
+                "y": 1.5816607475280762,
+                "z": 0.10394969582557678
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005545038729906082,
+            "radius": 0.0009198116604238749,
+            "minimumSingleFrameLipDistance": 1.4258989095687867
+        },
+        {
+            "triangle": 1330,
+            "a": 1583,
+            "b": 1010,
+            "c": 1013,
+            "region": 1,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.3333333432674408,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.0241714995354414,
+                "y": 1.564805269241333,
+                "z": 0.10077743977308274
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002280824352055788,
+            "radius": 0.0005880824755877256,
+            "minimumSingleFrameLipDistance": 1.1301910877227784
+        },
+        {
+            "triangle": 339,
+            "a": 1018,
+            "b": 1024,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.4285714328289032,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": -0.035020798444747928,
+                "y": 1.5778676271438599,
+                "z": 0.10215936601161957
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005331431515514851,
+            "radius": 0.0008981035789474845,
+            "minimumSingleFrameLipDistance": 1.4281706809997559
+        },
+        {
+            "triangle": 326,
+            "a": 900,
+            "b": 895,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.2857142984867096,
+                "z": 0.5714285969734192
+            },
+            "actorPosition": {
+                "x": -0.04228546470403671,
+                "y": 1.5773695707321168,
+                "z": 0.0983908623456955
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.00403441209346056,
+            "radius": 0.0007662926218472421,
+            "minimumSingleFrameLipDistance": 1.6938471794128419
+        },
+        {
+            "triangle": 122,
+            "a": 896,
+            "b": 895,
+            "c": 889,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.4444444477558136,
+                "z": 0.4444444477558136
+            },
+            "actorPosition": {
+                "x": -0.05015329271554947,
+                "y": 1.570090651512146,
+                "z": 0.0872529000043869
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0037710010074079038,
+            "radius": 0.0007395232678391039,
+            "minimumSingleFrameLipDistance": 2.136641025543213
+        },
+        {
+            "triangle": 237,
+            "a": 969,
+            "b": 972,
+            "c": 938,
+            "region": 1,
+            "barycentric": {
+                "x": 0.625,
+                "y": 0.25,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": 0.05344120040535927,
+                "y": 1.565488338470459,
+                "z": 0.07675027847290039
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0025896381121128799,
+            "radius": 0.0006194660672917962,
+            "minimumSingleFrameLipDistance": 2.487110137939453
+        },
+        {
+            "triangle": 444,
+            "a": 992,
+            "b": 991,
+            "c": 1079,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.1428571492433548,
+                "z": 0.4285714328289032
+            },
+            "actorPosition": {
+                "x": 0.029520614072680475,
+                "y": 1.5758564472198487,
+                "z": 0.10419387370347977
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0039255376905202869,
+            "radius": 0.0007552281604148448,
+            "minimumSingleFrameLipDistance": 1.234731912612915
+        },
+        {
+            "triangle": 310,
+            "a": 896,
+            "b": 1009,
+            "c": 895,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.0,
+                "z": 0.6666666865348816
+            },
+            "actorPosition": {
+                "x": -0.04549466818571091,
+                "y": 1.5686182975769044,
+                "z": 0.09079532325267792
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0036987806670367719,
+            "radius": 0.000732183747459203,
+            "minimumSingleFrameLipDistance": 2.0441694259643556
+        },
+        {
+            "triangle": 111,
+            "a": 889,
+            "b": 890,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.1111111119389534,
+                "y": 0.5555555820465088,
+                "z": 0.3333333432674408
+            },
+            "actorPosition": {
+                "x": -0.05705133080482483,
+                "y": 1.5822683572769166,
+                "z": 0.08766283094882965
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005640452727675438,
+            "radius": 0.0009295081254094839,
+            "minimumSingleFrameLipDistance": 2.2534852027893068
+        },
+        {
+            "triangle": 251,
+            "a": 969,
+            "b": 970,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.2222222238779068,
+                "z": 0.4444444477558136
+            },
+            "actorPosition": {
+                "x": 0.05259200558066368,
+                "y": 1.5750216245651246,
+                "z": 0.08988560736179352
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005219346843659878,
+            "radius": 0.0008867128635756671,
+            "minimumSingleFrameLipDistance": 2.047947883605957
+        },
+        {
+            "triangle": 251,
+            "a": 969,
+            "b": 970,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4444444477558136,
+                "y": 0.1111111119389534,
+                "z": 0.4444444477558136
+            },
+            "actorPosition": {
+                "x": 0.052670568227767947,
+                "y": 1.5731956958770753,
+                "z": 0.08841976523399353
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002491687424480915,
+            "radius": 0.0006095116841606796,
+            "minimumSingleFrameLipDistance": 2.083829402923584
+        },
+        {
+            "triangle": 251,
+            "a": 969,
+            "b": 970,
+            "c": 979,
+            "region": 1,
+            "barycentric": {
+                "x": 0.4444444477558136,
+                "y": 0.5555555820465088,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.055580347776412967,
+                "y": 1.5783268213272095,
+                "z": 0.08839401602745056
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.005415817257016897,
+            "radius": 0.0009066794300451875,
+            "minimumSingleFrameLipDistance": 2.1422224044799806
+        },
+        {
+            "triangle": 324,
+            "a": 895,
+            "b": 1010,
+            "c": 1017,
+            "region": 1,
+            "barycentric": {
+                "x": 0.875,
+                "y": 0.0,
+                "z": 0.125
+            },
+            "actorPosition": {
+                "x": -0.04658466577529907,
+                "y": 1.574366807937622,
+                "z": 0.09500104188919068
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0036083883605897428,
+            "radius": 0.0007229975308291614,
+            "minimumSingleFrameLipDistance": 1.8634775876998902
+        },
+        {
+            "triangle": 255,
+            "a": 981,
+            "b": 979,
+            "c": 970,
+            "region": 1,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.4285714328289032,
+                "z": 0.2857142984867096
+            },
+            "actorPosition": {
+                "x": 0.049575790762901309,
+                "y": 1.5813779830932618,
+                "z": 0.0961804986000061
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0052064042538404469,
+            "radius": 0.0008853975450620055,
+            "minimumSingleFrameLipDistance": 1.9549893140792847
+        },
+        {
+            "triangle": 234,
+            "a": 969,
+            "b": 965,
+            "c": 970,
+            "region": 1,
+            "barycentric": {
+                "x": 0.3333333432674408,
+                "y": 0.2222222238779068,
+                "z": 0.4444444477558136
+            },
+            "actorPosition": {
+                "x": 0.05735454708337784,
+                "y": 1.5791287422180176,
+                "z": 0.08644066005945206
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004001796245574951,
+            "radius": 0.0007629780448041856,
+            "minimumSingleFrameLipDistance": 2.208998918533325
+        },
+        {
+            "triangle": 109,
+            "a": 853,
+            "b": 889,
+            "c": 885,
+            "region": 1,
+            "barycentric": {
+                "x": 0.0,
+                "y": 0.4444444477558136,
+                "z": 0.5555555820465088
+            },
+            "actorPosition": {
+                "x": -0.05913979560136795,
+                "y": 1.5757668018341065,
+                "z": 0.0798460990190506
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.004289228934794664,
+            "radius": 0.0007921887445263565,
+            "minimumSingleFrameLipDistance": 2.346588611602783
+        },
+        {
+            "triangle": 1216,
+            "a": 988,
+            "b": 992,
+            "c": 1521,
+            "region": 1,
+            "barycentric": {
+                "x": 0.20000000298023225,
+                "y": 0.4000000059604645,
+                "z": 0.4000000059604645
+            },
+            "actorPosition": {
+                "x": 0.024917040020227433,
+                "y": 1.5686280727386475,
+                "z": 0.10280711948871613
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0034154376480728389,
+            "radius": 0.0007033887668512762,
+            "minimumSingleFrameLipDistance": 1.1222989559173585
+        },
+        {
+            "triangle": 429,
+            "a": 1062,
+            "b": 1063,
+            "c": 1074,
+            "region": 2,
+            "barycentric": {
+                "x": 0.1666666716337204,
+                "y": 0.6666666865348816,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": 0.018737485632300378,
+                "y": 1.585776448249817,
+                "z": 0.11063645780086518
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002048380672931671,
+            "radius": 0.0004543943505268544,
+            "minimumSingleFrameLipDistance": 1.0814411640167237
+        },
+        {
+            "triangle": 367,
+            "a": 1036,
+            "b": 1031,
+            "c": 1040,
+            "region": 2,
+            "barycentric": {
+                "x": 0.1428571492433548,
+                "y": 0.8571428656578064,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.017433704808354379,
+                "y": 1.584380865097046,
+                "z": 0.11045673489570618
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0017595330718904734,
+            "radius": 0.00039274999289773405,
+            "minimumSingleFrameLipDistance": 1.0177428722381592
+        },
+        {
+            "triangle": 367,
+            "a": 1036,
+            "b": 1031,
+            "c": 1040,
+            "region": 2,
+            "barycentric": {
+                "x": 0.2857142984867096,
+                "y": 0.7142857313156128,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.016013965010643007,
+                "y": 1.5856359004974366,
+                "z": 0.1113261803984642
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0023190053179860117,
+            "radius": 0.000512149534188211,
+            "minimumSingleFrameLipDistance": 1.035702109336853
+        },
+        {
+            "triangle": 409,
+            "a": 1063,
+            "b": 1062,
+            "c": 1057,
+            "region": 2,
+            "barycentric": {
+                "x": 0.8571428656578064,
+                "y": 0.1428571492433548,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.01850632019340992,
+                "y": 1.584380865097046,
+                "z": 0.11045673489570618
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.002053678734228015,
+            "radius": 0.0004555249761324376,
+            "minimumSingleFrameLipDistance": 1.0167083740234376
+        },
+        {
+            "triangle": 361,
+            "a": 1031,
+            "b": 1036,
+            "c": 1028,
+            "region": 2,
+            "barycentric": {
+                "x": 0.6666666865348816,
+                "y": 0.1666666716337204,
+                "z": 0.1666666716337204
+            },
+            "actorPosition": {
+                "x": -0.017664896324276925,
+                "y": 1.585776448249817,
+                "z": 0.11063647270202637
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0020162309519946577,
+            "radius": 0.00044753309339284897,
+            "minimumSingleFrameLipDistance": 1.081589698791504
+        },
+        {
+            "triangle": 409,
+            "a": 1063,
+            "b": 1062,
+            "c": 1057,
+            "region": 2,
+            "barycentric": {
+                "x": 0.5714285969734192,
+                "y": 0.4285714328289032,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.01566680334508419,
+                "y": 1.586890697479248,
+                "z": 0.11219558119773865
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0019532772712409498,
+            "radius": 0.00043409792124293745,
+            "minimumSingleFrameLipDistance": 1.069571614265442
+        },
+        {
+            "triangle": 367,
+            "a": 1036,
+            "b": 1031,
+            "c": 1040,
+            "region": 2,
+            "barycentric": {
+                "x": 0.4285714328289032,
+                "y": 0.5714285969734192,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": -0.014594224281609059,
+                "y": 1.586890697479248,
+                "z": 0.11219561100006104
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0021837621461600067,
+            "radius": 0.000483286683447659,
+            "minimumSingleFrameLipDistance": 1.068666696548462
+        },
+        {
+            "triangle": 409,
+            "a": 1063,
+            "b": 1062,
+            "c": 1057,
+            "region": 2,
+            "barycentric": {
+                "x": 0.7142857313156128,
+                "y": 0.2857142984867096,
+                "z": 0.0
+            },
+            "actorPosition": {
+                "x": 0.017086561769247056,
+                "y": 1.5856356620788575,
+                "z": 0.11132615804672241
+            },
+            "exactSharedPalette": true,
+            "influences": 1,
+            "length": 0.0021619147155433895,
+            "radius": 0.00047862413339316845,
+            "minimumSingleFrameLipDistance": 1.0362255573272706
+        }
+    ]
+}

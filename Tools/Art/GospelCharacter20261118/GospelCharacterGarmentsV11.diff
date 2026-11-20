@@ -1,0 +1,186 @@
+--- Tools/Art/GospelCharacter20261118/GospelCharacterGarmentsV10.cs	2026-11-18 09:00:48.045640299 +0000
++++ Tools/Art/GospelCharacter20261118/GospelCharacterGarmentsV11.cs	2026-11-18 09:18:01.986969255 +0000
+@@ -61,7 +61,17 @@
+             public string overlapSource;
+             public int overlapProjectionTriangle;
+             public float overlapLength;
++            public float overlapChordLength, overlapMaximumJoinGap;
++            public ArcSegmentReport[] overlapPath;
+         }
++        [Serializable] public sealed class ArcSegmentReport
++        {
++            public SourceAnchor a, b;
++            public Vector3 pointA, pointB;
++            public float fromArc, length;
++        }
++        sealed class ClothArcSegment { public CutAnchor a, b; public int triangle, ia, ib; public float fromArc, length; }
++        sealed class ClothArcPath { public List<ClothArcSegment> segments = new List<ClothArcSegment>(); public float length, chordLength, maximumJoinGap; }
+         [Serializable] public sealed class SourceAnchor
+         {
+             public string meshAsset, source;
+@@ -140,6 +150,10 @@
+             public bool cutsTruncated;
+             public ClothCutDiagnostic[] cuts;
+             public float maximumSeamDistance, maximumSquaredDistance;
++            public string overlapPathFailure;
++            public int overlapAvailableSegments, overlapWalkSegments;
++            public float overlapRequiredWidth, overlapMeasuredArc, overlapMeasuredChord;
++            public ArcSegmentReport[] overlapActualPath;
+         }
+         [Serializable] sealed class ClothCutDiagnostic
+         {
+@@ -334,6 +348,111 @@
+             }
+             public BoneWeight1[] WeightsAt(SurfaceHit hit)
+             { int at = hit.triangle * 3; return MixNative(new[] { pointWeights[triangles[at]], pointWeights[triangles[at + 1]], pointWeights[triangles[at + 2]] }, new[] { hit.barycentric.x, hit.barycentric.y, hit.barycentric.z }); }
++            public ArcSegmentReport[] PathRecords(ClothArcPath path) => path.segments.Select(s => new ArcSegmentReport { a = PathAnchor(s.a, s.triangle), b = PathAnchor(s.b, s.triangle), pointA = s.a.point, pointB = s.b.point, fromArc = s.fromArc, length = s.length }).ToArray();
++            SourceAnchor PathAnchor(CutAnchor p, int tri) => new SourceAnchor { meshAsset = triangleMeshAssets[tri], source = triangleSources[tri], triangle = triangleSourceIndices[tri],
++                vertices = new Vector3Int(triangles[tri * 3] - triangleVertexOffsets[tri], triangles[tri * 3 + 1] - triangleVertexOffsets[tri], triangles[tri * 3 + 2] - triangleVertexOffsets[tri]), barycentric = p.barycentric };
++            public Vector3 SampleClothPath(ClothArcPath path, float fraction, Vector3 center, CutAnchor inner, float angle, out Vector3 normal, out SurfaceHit hit)
++            {
++                float at = Mathf.Clamp01(fraction) * path.length; var s = path.segments.FirstOrDefault(p => at <= p.fromArc + p.length) ?? path.segments[path.segments.Count - 1];
++                float t = Mathf.Clamp01((at - s.fromArc) / s.length); var bary = Vector3.Lerp(s.a.barycentric, s.b.barycentric, t); var point = Vector3.Lerp(s.a.point, s.b.point, t);
++                int ia = triangles[s.triangle * 3], ib = triangles[s.triangle * 3 + 1], ic = triangles[s.triangle * 3 + 2];
++                normal = (normals[ia] * bary.x + normals[ib] * bary.y + normals[ic] * bary.z).normalized;
++                var radial = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)); var plane = new Vector3(Mathf.Cos(angle), 0, -Mathf.Sin(angle));
++                var anchor = PathAnchor(new CutAnchor { barycentric = bary }, s.triangle);
++                hit = new SurfaceHit { meshAsset = anchor.meshAsset, source = anchor.source, sourceTriangle = anchor.triangle, sourceVertexIds = anchor.vertices, triangle = s.triangle,
++                    barycentric = bary, a = points[ia], b = points[ib], c = points[ic], y = point.y, radius = Vector3.Dot(point - center, radial), distance = Vector3.Distance(point, inner.point),
++                    planeResidual = Mathf.Abs(Vector3.Dot(plane, point - center)), method = "actual-connected-cloth-cut-arc", insideMeasuredHeightRange = point.y >= minY && point.y <= maxY };
++                Need(normal.sqrMagnitude > .5f && hit.insideMeasuredHeightRange, "Actual overlap arc samples must retain their source normal and original height band."); return point;
++            }
++            public ClothArcPath TraceClothOverlap(Vector3 center, CutAnchor inner, float angle, float maximumSpan, float scale, Vector3 contact, SurfaceHit contactHit, float width)
++            {
++                float weld = .00005f * scale, tolerance = .0000001f * Mathf.Max(1, scale), spanSquared = maximumSpan * maximumSpan;
++                var radial = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)); var plane = new Vector3(Mathf.Cos(angle), 0, -Mathf.Sin(angle));
++                float minimum = Vector3.Dot(inner.point - center, radial) + Clearance, maximum = Vector3.Dot(inner.point - center, radial) + maximumSpan;
++                var raw = new List<ClothArcSegment>();
++                CutAnchor Blend(CutAnchor a, CutAnchor b, float t) => new CutAnchor { point = Vector3.Lerp(a.point, b.point, t), barycentric = Vector3.Lerp(a.barycentric, b.barycentric, t) };
++                bool Clip(float a, float b, float loValue, float hiValue, ref float lo, ref float hi)
++                { float d = b - a; if (d == 0) return a >= loValue && a <= hiValue; float first = (loValue - a) / d, last = (hiValue - a) / d; if (first > last) { float swap = first; first = last; last = swap; } lo = Mathf.Max(lo, first); hi = Mathf.Min(hi, last); return lo <= hi; }
++                void Add(CutAnchor a, CutAnchor b, int tri)
++                {
++                    float lo = 0, hi = 1; if (!Clip(a.point.y, b.point.y, minY, maxY, ref lo, ref hi) || !Clip(Vector3.Dot(a.point - center, radial), Vector3.Dot(b.point - center, radial), minimum, maximum, ref lo, ref hi)) return;
++                    var d = b.point - a.point; var from = a.point - inner.point; double aa = Vector3.Dot(d, d), bb = 2 * Vector3.Dot(from, d), cc = Vector3.Dot(from, from) - spanSquared;
++                    if (aa == 0) return; double discriminant = bb * bb - 4 * aa * cc; if (discriminant < 0) return;
++                    double root = Math.Sqrt(discriminant); lo = Mathf.Max(lo, (float)((-bb - root) / (2 * aa))); hi = Mathf.Min(hi, (float)((-bb + root) / (2 * aa))); if (lo > hi) return;
++                    var first = Blend(a, b, lo); var last = Blend(a, b, hi); float length = Vector3.Distance(first.point, last.point);
++                    if (length > tolerance) raw.Add(new ClothArcSegment { a = first, b = last, triangle = tri, length = length });
++                }
++                for (int tri = 0; tri < triangles.Length / 3; tri++)
++                {
++                    if (!triangleIsCloth[tri] || triangleSources[tri] != contactHit.source || triangleComponents[tri] != triangleComponents[contactHit.triangle]) continue;
++                    int ia = triangles[tri * 3], ib = triangles[tri * 3 + 1], ic = triangles[tri * 3 + 2];
++                    var v = new[] { new CutAnchor { point = points[ia], barycentric = Vector3.right }, new CutAnchor { point = points[ib], barycentric = Vector3.up }, new CutAnchor { point = points[ic], barycentric = Vector3.forward } };
++                    var distance = v.Select(p => Vector3.Dot(plane, p.point - center)).ToArray();
++                    if (distance.All(d => Mathf.Abs(d) <= tolerance))
++                    {
++                        for (int e = 0; e < 3; e++) Add(v[e], v[(e + 1) % 3], tri);
++                        if (tri == contactHit.triangle)
++                        {
++                            var start = new CutAnchor { point = contact, barycentric = contactHit.barycentric };
++                            var ab = v[1].point - v[0].point; var ac = v[2].point - v[0].point; var direction = Vector3.ProjectOnPlane(Vector3.down, Vector3.Cross(ab, ac)).normalized;
++                            float aa = Vector3.Dot(ab, ab), cc = Vector3.Dot(ac, ac), cross = Vector3.Dot(ab, ac), determinant = aa * cc - cross * cross;
++                            if (determinant > 0 && direction.sqrMagnitude > .5f)
++                            {
++                                float u = (Vector3.Dot(direction, ab) * cc - Vector3.Dot(direction, ac) * cross) / determinant, w = (Vector3.Dot(direction, ac) * aa - Vector3.Dot(direction, ab) * cross) / determinant;
++                                var step = new Vector3(-u - w, u, w); float exit = float.PositiveInfinity;
++                                for (int n = 0; n < 3; n++) if (step[n] < 0) exit = Mathf.Min(exit, -start.barycentric[n] / step[n]);
++                                if (Finite(exit) && exit > 0) { var bary = start.barycentric + step * exit; Add(start, new CutAnchor { point = v[0].point * bary.x + v[1].point * bary.y + v[2].point * bary.z, barycentric = bary }, tri); }
++                            }
++                            foreach (var endpoint in v) Add(start, endpoint, tri);
++                        }
++                    }
++                    else
++                    {
++                        var cuts = new List<CutAnchor>(); void Cut(CutAnchor p) { if (!cuts.Any(q => (q.point - p.point).sqrMagnitude <= tolerance * tolerance)) cuts.Add(p); }
++                        for (int e = 0; e < 3; e++) { int next = (e + 1) % 3; if (distance[e] * distance[next] < 0) Cut(Blend(v[e], v[next], distance[e] / (distance[e] - distance[next]))); }
++                        if (cuts.Count < 2) for (int e = 0; e < 3; e++) if (Mathf.Abs(distance[e]) <= tolerance) Cut(v[e]);
++                        if (cuts.Count == 2) Add(cuts[0], cuts[1], tri);
++                    }
++                }
++                var nodes = new List<Vector3> { contact }; int Node(Vector3 p) { int n = nodes.FindIndex(q => (p - q).sqrMagnitude <= weld * weld); if (n >= 0) return n; nodes.Add(p); return nodes.Count - 1; }
++                var endpoints = raw.SelectMany(s => new[] { s.a.point, s.b.point }).Concat(new[] { contact }).ToArray(); var graph = new List<ClothArcSegment>(); var unique = new HashSet<(int, int)>();
++                foreach (var s in raw)
++                {
++                    var d = s.b.point - s.a.point; var split = new List<float> { 0, 1 };
++                    foreach (var p in endpoints) { float t = Vector3.Dot(p - s.a.point, d) / d.sqrMagnitude; if (t > 0 && t < 1 && (s.a.point + d * t - p).sqrMagnitude <= weld * weld) split.Add(t); }
++                    var ordered = split.Distinct().OrderBy(t => t).ToArray();
++                    for (int i = 0; i + 1 < ordered.Length; i++) { var a = Blend(s.a, s.b, ordered[i]); var b = Blend(s.a, s.b, ordered[i + 1]); int ia = Node(a.point), ib = Node(b.point); if (ia == ib || !unique.Add(ia < ib ? (ia, ib) : (ib, ia))) continue; graph.Add(new ClothArcSegment { a = a, b = b, triangle = s.triangle, ia = ia, ib = ib, length = Vector3.Distance(a.point, b.point) }); }
++                }
++                var path = new ClothArcPath(); var visited = new HashSet<int>(); int current = 0; var lastPoint = contact; var previousDirection = Vector3.zero;
++                for (int step = 0; step < graph.Count; step++)
++                {
++                    var choices = Enumerable.Range(0, graph.Count).Where(i => !visited.Contains(i) && (graph[i].ia == current || graph[i].ib == current)).Select(i => new { index = i, s = graph[i], direction = (graph[i].ia == current ? graph[i].b.point - graph[i].a.point : graph[i].a.point - graph[i].b.point).normalized }).ToArray();
++                    if (choices.Length == 0) break;
++                    var choice = step == 0 ? choices.OrderByDescending(c => -c.direction.y).ThenBy(c => c.s.triangle == contactHit.triangle ? 0 : 1).First() : choices.OrderByDescending(c => Vector3.Dot(previousDirection, c.direction)).ThenByDescending(c => -c.direction.y).First();
++                    if (step == 0 && choice.direction.y > 0) break;
++                    visited.Add(choice.index); var first = choice.s.ia == current ? choice.s.a : choice.s.b; var last = choice.s.ia == current ? choice.s.b : choice.s.a;
++                    path.maximumJoinGap = Mathf.Max(path.maximumJoinGap, Vector3.Distance(lastPoint, first.point)); Need(path.maximumJoinGap <= weld, "Actual overlap cut segments may only join within the unchanged geometric weld distance.");
++                    float targetWidth = width + tolerance;
++                    bool cutAtWidth = (last.point - contact).sqrMagnitude >= targetWidth * targetWidth;
++                    if (cutAtWidth)
++                    {
++                        var d = last.point - first.point; var from = first.point - contact; double aa = Vector3.Dot(d, d), bb = 2 * Vector3.Dot(from, d), cc = Vector3.Dot(from, from) - targetWidth * targetWidth;
++                        double discriminant = bb * bb - 4 * aa * cc; Need(discriminant >= 0 && aa > 0, "Actual overlap width sphere must intersect its connected source segment.");
++                        float t = Mathf.Clamp01((float)((-bb + Math.Sqrt(discriminant)) / (2 * aa))); last = Blend(first, last, t);
++                    }
++                    float length = Vector3.Distance(first.point, last.point); if (length > tolerance) { path.segments.Add(new ClothArcSegment { a = first, b = last, triangle = choice.s.triangle, fromArc = path.length, length = length }); path.length += length; }
++                    path.chordLength = Vector3.Distance(contact, last.point); lastPoint = last.point;
++                    if (path.chordLength >= width && path.length >= width - weld)
++                    { if (last.point.y <= contact.y) return path; break; }
++                    if (cutAtWidth) break;
++                    previousDirection = choice.direction; current = choice.s.ia == current ? choice.s.ib : choice.s.ia;
++                }
++                diagnostic.queryKind = "required connected downward actual-cloth overlap arc";
++                diagnostic.clothSeam = new ClothSeamDiagnostic { angleRadians = angle, innerAnchor = inner.point, maximumSeamDistance = maximumSpan, minY = minY, maxY = maxY,
++                    overlapPathFailure = "selected-connected-downward-cut-walk-did-not-reach-required-physical-width", overlapAvailableSegments = graph.Count, overlapWalkSegments = path.segments.Count,
++                    overlapRequiredWidth = width, overlapMeasuredArc = path.length, overlapMeasuredChord = path.chordLength, overlapActualPath = PathRecords(path).Take(512).ToArray() };
++                string data = JsonUtility.ToJson(diagnostic, true); Debug.Log("FIRSTGAME_CLOTH_OVERLAP_PATH_DIAGNOSTIC " + data); Need(false, "The selected actual-cloth overlap walk did not reach the required width.\n" + data); return path;
++            }
+         }
+         static BoneWeight1[] MixNative(BoneWeight1[][] sets, float[] blend)
+         {
+@@ -697,7 +816,7 @@
+             var vertices = new List<Vector3>(); var neutralActorPoints = new List<Vector3>(); var uv = new List<Vector2>(); var weights = new List<BoneWeight1[]>(); var panels = new List<int[]>();
+             var attachments = new List<VertexAttachment>(); float maximumNeutralError = 0, maximumBindError = 0;
+             var measuredSeams = new List<SeamReport>();
+-            var seamCache = new Dictionary<float, (CutAnchor inner, Vector3 contact, Vector3 contactNormal, SurfaceHit contactHit, Vector3 overlap, Vector3 overlapNormal, SurfaceHit overlapHit)>();
++            var seamCache = new Dictionary<float, (CutAnchor inner, Vector3 contact, Vector3 contactNormal, SurfaceHit contactHit, Vector3 overlap, Vector3 overlapNormal, SurfaceHit overlapHit, ClothArcPath path)>();
+             var fabricCache = new Dictionary<(float, float), FabricSample>();
+             int bridgeSamples = 0, liftSamples = 0; float maxBridge = 0, maxLift = 0;
+             SourceAnchor Anchor(SurfaceHit hit) => new SourceAnchor { meshAsset = hit.meshAsset, source = hit.source, triangle = hit.sourceTriangle, vertices = hit.sourceVertexIds, barycentric = hit.barycentric };
+@@ -711,17 +830,17 @@
+                     var inner = neckContour.Sample(angle);
+                     surface.diagnostic.queryKind = "required actual-Linen radial-plane closest seam";
+                     var contact = surface.ClosestClothSeam(neck, inner, angle, maximumSeamDistance, scale, out var contactNormal, out var contactHit);
+-                    var radial = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)); float overlapRadius = contactHit.radius + Thickness * 2;
+                     surface.diagnostic.queryKind = "required actual connected-Linen overlap strip";
+-                    var overlap = surface.ClosestClothSeam(neck, inner, angle, maximumSeamDistance, scale, out var overlapNormal, out var overlapHit,
+-                        surface.triangleComponents[contactHit.triangle], contactHit.source, overlapRadius, null, contact + radial * Thickness * 2);
+-                    seam = (inner, contact, contactNormal, contactHit, overlap, overlapNormal, overlapHit); seamCache.Add(angle, seam);
++                    var overlapPath = surface.TraceClothOverlap(neck, inner, angle, maximumSeamDistance, scale, contact, contactHit, Thickness * 2);
++                    var overlap = surface.SampleClothPath(overlapPath, 1, neck, inner, angle, out var overlapNormal, out var overlapHit);
++                    seam = (inner, contact, contactNormal, contactHit, overlap, overlapNormal, overlapHit, overlapPath); seamCache.Add(angle, seam);
+                     measuredSeams.Add(new SeamReport { angleRadians = angle, innerRadius = new Vector2(inner.point.x - neck.x, inner.point.z - neck.z).magnitude,
+                         inner = inner.point, innerNormal = inner.normal, innerBarycentric = inner.barycentric, innerSkinTriangle = inner.triangle, innerSource = body.name + "/" + id + "__WarmSkin",
+                         outer = contact, outerNormal = contactNormal, outerProjectionTriangle = contactHit.triangle, outerSource = contactHit.source,
+                         outerBarycentric = contactHit.barycentric, outerSourceVertexIds = contactHit.sourceVertexIds, outerSourceTriangle = contactHit.sourceTriangle,
+                         outerRadius = contactHit.radius, outerDistance = contactHit.distance, outerPlaneResidual = contactHit.planeResidual, outerMethod = contactHit.method, mainRing = surface.diagnostic.panel == 0, outerMaximumSpan = maximumSeamDistance, outerDistanceRatio = contactHit.distance / maximumSeamDistance,
+-                        overlap = overlap, overlapBarycentric = overlapHit.barycentric, overlapSource = overlapHit.source, overlapProjectionTriangle = overlapHit.triangle, overlapLength = Vector3.Distance(contact, overlap) });
++                        overlap = overlap, overlapBarycentric = overlapHit.barycentric, overlapSource = overlapHit.source, overlapProjectionTriangle = overlapHit.triangle,
++                        overlapLength = overlapPath.length, overlapChordLength = overlapPath.chordLength, overlapMaximumJoinGap = overlapPath.maximumJoinGap, overlapPath = surface.PathRecords(overlapPath) });
+                 }
+                 var innerSource = InnerHit(seam.inner); float bridgeEnd = BridgeRows / (float)Rows, bridgeT = Mathf.Clamp01(t / bridgeEnd);
+                 var sample = new FabricSample();
+@@ -734,9 +853,7 @@
+                     else if (q >= 1) { sample.point = seam.overlap; sample.normal = seam.overlapNormal; hit = seam.overlapHit; }
+                     else
+                     {
+-                        float radius = Mathf.Lerp(seam.contactHit.radius, seam.overlapHit.radius, q);
+-                        sample.point = surface.ClosestClothSeam(neck, seam.inner, angle, maximumSeamDistance, scale, out sample.normal, out hit,
+-                            surface.triangleComponents[seam.contactHit.triangle], seam.contactHit.source, radius - .00005f * scale, radius + .00005f * scale, Vector3.Lerp(seam.contact, seam.overlap, q));
++                        sample.point = surface.SampleClothPath(seam.path, q, neck, seam.inner, angle, out sample.normal, out hit);
+                     }
+                     sample.weights = surface.WeightsAt(hit); sample.sources = new[] { Anchor(hit) }; sample.blend = new[] { 1f }; sample.region = "native-cloth-overlap-strip";
+                 }

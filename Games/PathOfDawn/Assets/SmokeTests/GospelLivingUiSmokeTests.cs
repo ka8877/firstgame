@@ -130,7 +130,9 @@ namespace PathOfDawn.SmokeTests
             Assert.That(map.PersonMarkerCount, Is.EqualTo(App.People.Markers.Count));
             Assert.That(map.PersonMarkerCount, Is.GreaterThan(1)); Assert.That(map.AmbientMarkerCount, Is.GreaterThan(0));
             Vector2 beforeMap = map.PlayerMapPosition; Vector3 before = App.Player.Position;
-            Keys(Key.D, Key.W); yield return new WaitForSecondsRealtime(.28f); Keys();
+            // Forward at the field camera's restored heading crosses both map
+            // axes. A diagonal screen input can cancel one world component.
+            Keys(Key.W); yield return new WaitForSecondsRealtime(.28f); Keys();
             yield return new WaitForSecondsRealtime(.18f);
             Vector3 after = App.Player.Position; Vector2 afterMap = map.PlayerMapPosition;
             Assert.That(Vector2.Distance(new Vector2(before.x, before.z), new Vector2(after.x, after.z)), Is.GreaterThan(.20f));

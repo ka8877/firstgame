@@ -1,0 +1,140 @@
+--- Tools/Art/GospelCharacter20261118/GospelCharacterGarmentsV11.cs	2026-11-18 09:18:01.986969255 +0000
++++ Tools/Art/GospelCharacter20261118/GospelCharacterGarmentsV12.cs	2026-11-18 09:37:00.523064242 +0000
+@@ -63,6 +63,7 @@
+             public float overlapLength;
+             public float overlapChordLength, overlapMaximumJoinGap;
+             public ArcSegmentReport[] overlapPath;
++            public int overlapSearchStates;
+         }
+         [Serializable] public sealed class ArcSegmentReport
+         {
+@@ -71,7 +72,15 @@
+             public float fromArc, length;
+         }
+         sealed class ClothArcSegment { public CutAnchor a, b; public int triangle, ia, ib; public float fromArc, length; }
+-        sealed class ClothArcPath { public List<ClothArcSegment> segments = new List<ClothArcSegment>(); public float length, chordLength, maximumJoinGap; }
++        sealed class ClothArcPath { public List<ClothArcSegment> segments = new List<ClothArcSegment>(); public float length, chordLength, maximumJoinGap; public int searchStates; }
++        sealed class ClothWalkState
++        {
++            public int node;
++            public Vector3 lastPoint, direction;
++            public ClothArcPath path;
++            public HashSet<int> edges, nodes;
++        }
++        sealed class ClothWalkBranch { public ClothWalkState state; public int edge; }
+         [Serializable] public sealed class SourceAnchor
+         {
+             public string meshAsset, source;
+@@ -154,6 +163,11 @@
+             public int overlapAvailableSegments, overlapWalkSegments;
+             public float overlapRequiredWidth, overlapMeasuredArc, overlapMeasuredChord;
+             public ArcSegmentReport[] overlapActualPath;
++            public int overlapSearchStates, overlapSearchBudget, overlapMaximumDepth, overlapJoinRejected;
++            public bool overlapSearchBudgetExhausted;
++            public int overlapContactCutNodes, overlapContactCutEdges;
++            public Bounds overlapContactCutBounds;
++            public float overlapContactCutMaximumChord, overlapContactCutMaximumLowerChord;
+         }
+         [Serializable] sealed class ClothCutDiagnostic
+         {
+@@ -423,33 +437,67 @@
+                     var ordered = split.Distinct().OrderBy(t => t).ToArray();
+                     for (int i = 0; i + 1 < ordered.Length; i++) { var a = Blend(s.a, s.b, ordered[i]); var b = Blend(s.a, s.b, ordered[i + 1]); int ia = Node(a.point), ib = Node(b.point); if (ia == ib || !unique.Add(ia < ib ? (ia, ib) : (ib, ia))) continue; graph.Add(new ClothArcSegment { a = a, b = b, triangle = s.triangle, ia = ia, ib = ib, length = Vector3.Distance(a.point, b.point) }); }
+                 }
+-                var path = new ClothArcPath(); var visited = new HashSet<int>(); int current = 0; var lastPoint = contact; var previousDirection = Vector3.zero;
+-                for (int step = 0; step < graph.Count; step++)
+-                {
+-                    var choices = Enumerable.Range(0, graph.Count).Where(i => !visited.Contains(i) && (graph[i].ia == current || graph[i].ib == current)).Select(i => new { index = i, s = graph[i], direction = (graph[i].ia == current ? graph[i].b.point - graph[i].a.point : graph[i].a.point - graph[i].b.point).normalized }).ToArray();
+-                    if (choices.Length == 0) break;
+-                    var choice = step == 0 ? choices.OrderByDescending(c => -c.direction.y).ThenBy(c => c.s.triangle == contactHit.triangle ? 0 : 1).First() : choices.OrderByDescending(c => Vector3.Dot(previousDirection, c.direction)).ThenByDescending(c => -c.direction.y).First();
+-                    if (step == 0 && choice.direction.y > 0) break;
+-                    visited.Add(choice.index); var first = choice.s.ia == current ? choice.s.a : choice.s.b; var last = choice.s.ia == current ? choice.s.b : choice.s.a;
+-                    path.maximumJoinGap = Mathf.Max(path.maximumJoinGap, Vector3.Distance(lastPoint, first.point)); Need(path.maximumJoinGap <= weld, "Actual overlap cut segments may only join within the unchanged geometric weld distance.");
+-                    float targetWidth = width + tolerance;
+-                    bool cutAtWidth = (last.point - contact).sqrMagnitude >= targetWidth * targetWidth;
+-                    if (cutAtWidth)
+-                    {
+-                        var d = last.point - first.point; var from = first.point - contact; double aa = Vector3.Dot(d, d), bb = 2 * Vector3.Dot(from, d), cc = Vector3.Dot(from, from) - targetWidth * targetWidth;
+-                        double discriminant = bb * bb - 4 * aa * cc; Need(discriminant >= 0 && aa > 0, "Actual overlap width sphere must intersect its connected source segment.");
+-                        float t = Mathf.Clamp01((float)((-bb + Math.Sqrt(discriminant)) / (2 * aa))); last = Blend(first, last, t);
+-                    }
+-                    float length = Vector3.Distance(first.point, last.point); if (length > tolerance) { path.segments.Add(new ClothArcSegment { a = first, b = last, triangle = choice.s.triangle, fromArc = path.length, length = length }); path.length += length; }
+-                    path.chordLength = Vector3.Distance(contact, last.point); lastPoint = last.point;
+-                    if (path.chordLength >= width && path.length >= width - weld)
+-                    { if (last.point.y <= contact.y) return path; break; }
+-                    if (cutAtWidth) break;
+-                    previousDirection = choice.direction; current = choice.s.ia == current ? choice.s.ib : choice.s.ia;
++                var reachable = new HashSet<int> { 0 }; var reachableEdges = new HashSet<int>(); var reachQueue = new System.Collections.Generic.Queue<int>(); reachQueue.Enqueue(0);
++                while (reachQueue.Count > 0) { int n = reachQueue.Dequeue(); for (int e = 0; e < graph.Count; e++) if (graph[e].ia == n || graph[e].ib == n) { reachableEdges.Add(e); int next = graph[e].ia == n ? graph[e].ib : graph[e].ia; if (reachable.Add(next)) reachQueue.Enqueue(next); } }
++                var reachablePoints = reachableEdges.SelectMany(e => new[] { graph[e].a.point, graph[e].b.point }).Concat(new[] { contact }).ToArray();
++                var cutBounds = new Bounds(contact, Vector3.zero); float maximumCutChord = 0, maximumLowerCutChord = 0;
++                foreach (var p in reachablePoints) { cutBounds.Encapsulate(p); maximumCutChord = Mathf.Max(maximumCutChord, Vector3.Distance(contact, p)); if (p.y <= contact.y) maximumLowerCutChord = Mathf.Max(maximumLowerCutChord, Vector3.Distance(contact, p)); }
++                foreach (int e in reachableEdges) { var a = graph[e].a.point; var b = graph[e].b.point; if ((a.y > contact.y) != (b.y > contact.y)) maximumLowerCutChord = Mathf.Max(maximumLowerCutChord, Vector3.Distance(contact, Vector3.Lerp(a, b, (contact.y - a.y) / (b.y - a.y)))); }
++                const int searchBudget = 4096; int explored = 0, maximumDepth = 0, joinRejected = 0; bool budgetExhausted = false;
++                var path = new ClothArcPath(); var pending = new Stack<ClothWalkBranch>();
++                ClothArcPath Extend(ClothArcPath prior, CutAnchor first, CutAnchor last, int tri, float joinGap)
++                {
++                    var next = new ClothArcPath { segments = new List<ClothArcSegment>(prior.segments), length = prior.length, maximumJoinGap = Mathf.Max(prior.maximumJoinGap, joinGap), searchStates = explored };
++                    float length = Vector3.Distance(first.point, last.point);
++                    if (length > tolerance) { next.segments.Add(new ClothArcSegment { a = first, b = last, triangle = tri, fromArc = next.length, length = length }); next.length += length; }
++                    next.chordLength = Vector3.Distance(contact, last.point); return next;
++                }
++                Vector3 Direction(int edge, int node) => (graph[edge].ia == node ? graph[edge].b.point - graph[edge].a.point : graph[edge].a.point - graph[edge].b.point).normalized;
++                void Queue(ClothWalkState state)
++                {
++                    if (state.edges.Count >= graph.Count) return;
++                    var adjacent = Enumerable.Range(0, graph.Count).Where(i => !state.edges.Contains(i) && (graph[i].ia == state.node || graph[i].ib == state.node));
++                    var ordered = state.edges.Count == 0 ? adjacent.OrderByDescending(i => -Direction(i, state.node).y).ThenBy(i => graph[i].triangle == contactHit.triangle ? 0 : 1).ToArray()
++                        : adjacent.OrderByDescending(i => Vector3.Dot(state.direction, Direction(i, state.node))).ThenByDescending(i => -Direction(i, state.node).y).ToArray();
++                    int available = Mathf.Max(0, searchBudget - explored - pending.Count); if (ordered.Length > available) budgetExhausted = true;
++                    var bounded = ordered.Take(available).ToArray();
++                    for (int i = bounded.Length - 1; i >= 0; i--) pending.Push(new ClothWalkBranch { state = state, edge = bounded[i] });
++                }
++                float[] GoalParameters(CutAnchor first, CutAnchor last)
++                {
++                    var d = last.point - first.point; var from = first.point - contact; var events = new List<float> { 0, 1 };
++                    double aa = Vector3.Dot(d, d), bb = 2 * Vector3.Dot(from, d), target = width + tolerance, cc = Vector3.Dot(from, from) - target * target;
++                    double discriminant = bb * bb - 4 * aa * cc;
++                    if (aa > 0 && discriminant >= 0) { double root = Math.Sqrt(discriminant); foreach (double t in new[] { (-bb - root) / (2 * aa), (-bb + root) / (2 * aa) }) if (t > 0 && t < 1) events.Add((float)t); }
++                    if (d.y != 0) { float t = (contact.y - first.point.y) / d.y; if (t > 0 && t < 1) events.Add(t); }
++                    var knots = events.Distinct().OrderBy(t => t).ToArray();
++                    return knots.Concat(Enumerable.Range(0, knots.Length - 1).Select(i => knots[i] + (knots[i + 1] - knots[i]) * .5f)).Where(t => t > 0).Distinct().OrderBy(t => t).ToArray();
++                }
++                Queue(new ClothWalkState { node = 0, lastPoint = contact, direction = Vector3.zero, path = new ClothArcPath(), edges = new HashSet<int>(), nodes = new HashSet<int> { 0 } });
++                while (pending.Count > 0 && explored < searchBudget)
++                {
++                    var branch = pending.Pop(); explored++; var state = branch.state; var edge = graph[branch.edge];
++                    var first = edge.ia == state.node ? edge.a : edge.b; var last = edge.ia == state.node ? edge.b : edge.a; int nextNode = edge.ia == state.node ? edge.ib : edge.ia;
++                    float joinGap = Vector3.Distance(state.lastPoint, first.point); if (joinGap > weld) { joinRejected++; continue; }
++                    foreach (float t in GoalParameters(first, last))
++                    {
++                        if (t >= 1 && state.nodes.Contains(nextNode)) continue;
++                        var endpoint = Blend(first, last, t); if (endpoint.point.y > contact.y || (endpoint.point - contact).sqrMagnitude < width * width || state.nodes.Any(n => n != state.node && (nodes[n] - endpoint.point).sqrMagnitude <= weld * weld)) continue;
++                        var goal = Extend(state.path, first, endpoint, edge.triangle, joinGap);
++                        if (goal.length >= width - weld && goal.segments.Count > 0) { goal.searchStates = explored; return goal; }
++                    }
++                    if (state.nodes.Contains(nextNode)) continue;
++                    var full = Extend(state.path, first, last, edge.triangle, joinGap); maximumDepth = Mathf.Max(maximumDepth, full.segments.Count);
++                    if (full.chordLength > path.chordLength || full.chordLength == path.chordLength && full.length > path.length) path = full;
++                    var usedEdges = new HashSet<int>(state.edges) { branch.edge }; var usedNodes = new HashSet<int>(state.nodes) { nextNode };
++                    Queue(new ClothWalkState { node = nextNode, lastPoint = last.point, direction = Direction(branch.edge, state.node), path = full, edges = usedEdges, nodes = usedNodes });
+                 }
++                if (pending.Count > 0) budgetExhausted = true;
+                 diagnostic.queryKind = "required connected downward actual-cloth overlap arc";
+                 diagnostic.clothSeam = new ClothSeamDiagnostic { angleRadians = angle, innerAnchor = inner.point, maximumSeamDistance = maximumSpan, minY = minY, maxY = maxY,
+-                    overlapPathFailure = "selected-connected-downward-cut-walk-did-not-reach-required-physical-width", overlapAvailableSegments = graph.Count, overlapWalkSegments = path.segments.Count,
++                    overlapPathFailure = budgetExhausted ? "actual-cut-branch-search-budget-exhausted" : "no-simple-connected-cut-path-reached-required-width-and-end-height", overlapAvailableSegments = graph.Count, overlapWalkSegments = path.segments.Count,
++                    overlapSearchStates = explored, overlapSearchBudget = searchBudget, overlapSearchBudgetExhausted = budgetExhausted, overlapMaximumDepth = maximumDepth, overlapJoinRejected = joinRejected,
++                    overlapContactCutNodes = reachable.Count, overlapContactCutEdges = reachableEdges.Count, overlapContactCutBounds = cutBounds, overlapContactCutMaximumChord = maximumCutChord, overlapContactCutMaximumLowerChord = maximumLowerCutChord,
+                     overlapRequiredWidth = width, overlapMeasuredArc = path.length, overlapMeasuredChord = path.chordLength, overlapActualPath = PathRecords(path).Take(512).ToArray() };
+                 string data = JsonUtility.ToJson(diagnostic, true); Debug.Log("FIRSTGAME_CLOTH_OVERLAP_PATH_DIAGNOSTIC " + data); Need(false, "The selected actual-cloth overlap walk did not reach the required width.\n" + data); return path;
+             }
+@@ -840,7 +888,7 @@
+                         outerBarycentric = contactHit.barycentric, outerSourceVertexIds = contactHit.sourceVertexIds, outerSourceTriangle = contactHit.sourceTriangle,
+                         outerRadius = contactHit.radius, outerDistance = contactHit.distance, outerPlaneResidual = contactHit.planeResidual, outerMethod = contactHit.method, mainRing = surface.diagnostic.panel == 0, outerMaximumSpan = maximumSeamDistance, outerDistanceRatio = contactHit.distance / maximumSeamDistance,
+                         overlap = overlap, overlapBarycentric = overlapHit.barycentric, overlapSource = overlapHit.source, overlapProjectionTriangle = overlapHit.triangle,
+-                        overlapLength = overlapPath.length, overlapChordLength = overlapPath.chordLength, overlapMaximumJoinGap = overlapPath.maximumJoinGap, overlapPath = surface.PathRecords(overlapPath) });
++                        overlapLength = overlapPath.length, overlapChordLength = overlapPath.chordLength, overlapMaximumJoinGap = overlapPath.maximumJoinGap, overlapPath = surface.PathRecords(overlapPath), overlapSearchStates = overlapPath.searchStates });
+                 }
+                 var innerSource = InnerHit(seam.inner); float bridgeEnd = BridgeRows / (float)Rows, bridgeT = Mathf.Clamp01(t / bridgeEnd);
+                 var sample = new FabricSample();

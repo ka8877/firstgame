@@ -70,7 +70,7 @@ namespace PathOfDawn.Presentation
             Player = root.AddComponent<GospelPilgrimageMotor>();
             Player.Initialize(SceneCamera);
             Player.SetBounds(World.Bounds);
-            Player.SetPose(World.SpawnForChapter("temple"));
+            Player.SetPose(World.SpawnForChapter("temple"), GospelPilgrimageWorld.NazarethDepartureYaw);
             Player.Enabled = false;
             Actor = GospelPilgrimageActor.Build(root.transform, SceneCamera);
             Actor.SetGroundSampler(World.HeightAt);
@@ -78,6 +78,7 @@ namespace PathOfDawn.Presentation
             People.Initialize(transform, World, SceneCamera, Player);
             CameraRig = SceneCamera.gameObject.AddComponent<GospelPilgrimageCamera>();
             CameraRig.Initialize(SceneCamera, root.transform);
+            World.NazarethSlice.BindCamera(CameraRig);
             SceneCamera.gameObject.AddComponent<GospelNprNpcCameraOcclusion>().Initialize(this, CameraRig);
             CameraRig.InputEnabled = false;
             Player.InteractRequested += Interact;
@@ -189,7 +190,7 @@ namespace PathOfDawn.Presentation
             saveClock = 0;
             Ui.FocusBiblePage(0);
             ConfigureChapter("birth", false);
-            Player.SetPose(World.SpawnForChapter("temple"));
+            Player.SetPose(World.SpawnForChapter("temple"), GospelPilgrimageWorld.NazarethDepartureYaw);
             Actor.SnapToPhysicalPose();
             CameraRig.Snap();
             Save(false);
@@ -263,7 +264,8 @@ namespace PathOfDawn.Presentation
             renderedChapter = chapter;
             if (relocate)
             {
-                Player.SetPose(World.SpawnForChapter(chapter));
+                float heading = chapter == "temple" ? GospelPilgrimageWorld.NazarethDepartureYaw : 180f;
+                Player.SetPose(World.SpawnForChapter(chapter), heading);
                 Actor.SnapToPhysicalPose();
                 CameraRig.Snap();
             }

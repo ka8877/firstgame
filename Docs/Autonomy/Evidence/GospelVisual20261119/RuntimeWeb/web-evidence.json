@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "sourceCommit": "c63b3eee1694f48548c4416f62fd213c31a2b209",
+  "unityVersion": "6000.3.26f1",
+  "build": {
+    "revision": "gospel-hero-visual-2026-11-19",
+    "engineSucceeded": true,
+    "errors": 0,
+    "warnings": 1,
+    "sourceFingerprint": "fd4a1be33b54d559ee7dd112c9e3a98a234cdd476453e2cf23ad14165536c1f2",
+    "files": [
+      {
+        "file": "023cd2422dfba0c855461eabea55b622.data.unityweb",
+        "bytes": 126432369,
+        "sha256": "a518fbd6cceb56b935ac209f0846e14c305f4cb29c80e4a898a09a447fa7d6a0"
+      },
+      {
+        "file": "d3007018b0f4b338b2f7be420a01f834.framework.js.unityweb",
+        "bytes": 79874,
+        "sha256": "1862d4dc1fd03b08dcf6ec1b5eac152340174bd4a8f182c85769588e895b0cdb"
+      },
+      {
+        "file": "e727bc677bd4ddec581384c5e9ef18ff.loader.js",
+        "bytes": 117887,
+        "sha256": "93e9ac20a398c83e8b4dea2b0b5ce1c433d6910645cc5b2c78220ac4aab5a26d"
+      },
+      {
+        "file": "f83221744bc68668c27b096ff5f84011.wasm.unityweb",
+        "bytes": 11355121,
+        "sha256": "bedfa340c5be28becdeae7448dab3f9fcc762677a748c54a4cc2611941b45449"
+      }
+    ]
+  },
+  "browser": {
+    "engine": "Chromium; software renderer via Mesa",
+    "desktop": [
+      960,
+      540
+    ],
+    "mobileEmulation": [
+      844,
+      390
+    ],
+    "desktopTitleStoryAndNazarethRendered": true,
+    "desktopMotionVerified": true,
+    "mobileTitleRendered": true,
+    "mobileTouchRouteVerified": false,
+    "desktopWalkthrough": {
+      "status": "desktop-reviewed-joseph-dialogue",
+      "ordinaryKeyboardDistanceFromHudMeters": [
+        4.5,
+        2.5,
+        1.7
+      ]
+    }
+  },
+  "files": {
+    "desktop-nazareth.png": {
+      "bytes": 770802,
+      "sha256": "44d1124856b6f3956f4a56930c4b28038281c91b911b2d6adaef32d811bc7670"
+    },
+    "mobile-title.png": {
+      "bytes": 404218,
+      "sha256": "c6e54ce197b3ea81d408101bdd2112f40013e93846f609651ee414bd5f84c7ff"
+    },
+    "desktop-joseph.png": {
+      "bytes": 657871,
+      "sha256": "0775a63f54ad38e8975e5723781709c86710c6b284ab046195b1e4bbe9ae4e9a"
+    }
+  },
+  "publicationSizing": {
+    "previousPublishedSiteBytes": 984067939,
+    "existingSiteCapBytes": 985000000,
+    "previousGameRuntimeBytes": 110632832,
+    "newGameRuntimeBytes": 137992528,
+    "likeForLikeProjectedSiteBytesBeforeManifestAndProofChanges": 1011427635,
+    "projectedExcessBytes": 26427635,
+    "individualBuildFilesOver100MiB": {
+      "023cd2422dfba0c855461eabea55b622.data.unityweb": 126432369
+    }
+  },
+  "mergedToMain": false,
+  "published": false,
+  "buildControl": {
+    "commandSucceededAndRestored": true,
+    "initialPostGuardHitWorkspaceDiskCapacity": true,
+    "subsequentIndependentBrowserControlCompleted": true
+  }
+}

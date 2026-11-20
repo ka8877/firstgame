@@ -244,8 +244,9 @@ namespace PathOfDawn.Presentation
         {
             Begin("journey", false, false);
             portraitAdult = Adult(journey);
-            BuildMinimap();
-            var goal = Panel(layer, "Current story goal", 30, 246, 318, 91, new Color(.10f, .16f, .23f, .68f), true);
+            bool touchControls = DawnPlatformInput.UseTouchControls;
+            BuildMinimap(touchControls);
+            var goal = Panel(layer, "Current story goal", 30, touchControls ? 246 : 201, 318, 91, new Color(.10f, .16f, .23f, .68f), true);
             Rule(goal, 0, 17, 3, 54, Gold);
             Text(goal, "다음 만남", 17, 10, 277, 21, 16, Gold);
             objective = Text(goal, GoalTitle(journey), 17, 36, 277, 43, 23, White, TextAlignmentOptions.TopLeft, true);
@@ -277,7 +278,7 @@ namespace PathOfDawn.Presentation
             interact = B(layer, "대화", 1101, 617, 148, 79, OnInteract, false, true);
 
             var touch = Rect(layer, "Two axis touch movement", 0, 0, 1280, 720);
-            touch.gameObject.SetActive(DawnPlatformInput.UseTouchControls);
+            touch.gameObject.SetActive(touchControls);
             BuildCameraPad(touch);
             BuildMovementPad(touch);
             var run = B(touch, "달리기", 991, 617, 96, 79, () => {
@@ -290,7 +291,7 @@ namespace PathOfDawn.Presentation
             var dash = B(touch, "대시", 1041, 505, 96, 88, OnDash);
             canopySkin.Round(jump.GetComponent<RectTransform>(), 25);
             canopySkin.Round(dash.GetComponent<RectTransform>(), 25);
-            if (!DawnPlatformInput.UseTouchControls)
+            if (!touchControls)
                 Text(layer, "WASD 이동   Shift 달리기   Space 점프   E 대화   우클릭 시점", 31, 687, 398, 22, 15, White);
             scenicButton = B(frame, "풍경 보기", 1125, 163, 124, 39, ToggleScenicView).GetComponent<RectTransform>();
             notice.SetAsLastSibling();
@@ -310,11 +311,12 @@ namespace PathOfDawn.Presentation
             Glyph(button.transform, glyph, 25, 10, 30, 30, White);
         }
 
-        void BuildMinimap()
+        void BuildMinimap(bool touchControls)
         {
             var app = GetComponent<GospelPilgrimageApp>();
             var panel = Panel(layer, "Field minimap", 30, 25, 260, 202,
                 new Color(.10f, .16f, .23f, .76f), true);
+            if (!touchControls) panel.localScale = Vector3.one * .8f;
             panel.GetComponent<Image>().raycastTarget = true;
             var open = panel.gameObject.AddComponent<Button>(); open.targetGraphic = panel.GetComponent<Image>();
             open.onClick.AddListener(() => Invoke(ShowMap));

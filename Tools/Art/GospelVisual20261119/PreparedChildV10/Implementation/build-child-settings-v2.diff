@@ -1,0 +1,100 @@
+--- Artifacts/Validation/Drafts/GospelVisualRebuild20261119/CharacterImplementation/build-child-settings-v1.py	2026-11-18 17:22:06.547222667 +0000
++++ Artifacts/Validation/Drafts/GospelVisualRebuild20261119/CharacterImplementation/build-child-settings-v2.py	2026-11-18 18:08:40.263939312 +0000
+@@ -3,6 +3,8 @@
+ 
+ No bpy, Unity, image edits or game-state access. Root supplies exact real bake
+ and inspection pins; this program only emits new config/audit JSON files.
++Optional, explicitly pinned CC0 rough_linen color/normal maps affect only
++generated linen/facing materials. V1 defaults remain when these are absent.
+ """
+ import argparse
+ import hashlib
+@@ -26,6 +28,13 @@
+ }
+ FLAT_NORMALS = {'f8f4e1ddb775ff90723cf3da6f2b8e8537482059a894437564dfaf2b8db85e53': [128, 128, 255],
+                 'd76fc537166ea42dad9f97cde34574ae348397e1279710fb69b8f2e743b2cc95': [127, 127, 255]}
++LINEN_SOURCE = {
++    'page': 'https://polyhaven.com/a/rough_linen', 'license': 'CC0',
++    'authors': {'colormass': 'Photography', 'Rico Cilliers': 'Processing'},
++    'manifest': 'Tools/Art/GospelAuthored/linen-source-manifest.json',
++    'diffuse': {'sha256': '04897d7611d7390ddf5b2c6f7273f448dfc48341fdbd1f4f207fa30b331d7f57', 'bytes': 835801},
++    'normal': {'sha256': 'e2402166d1a489f7414814e69e1836ab672aa24e30bec2d41fea356f81687e53', 'bytes': 916843},
++}
+ 
+ 
+ def need(value, message):
+@@ -110,6 +119,12 @@
+     p.add_argument('--hair-flow-mode', type=int, choices=(0, 1, 2), required=True)
+     p.add_argument('--hair-uv-flow', type=float, nargs=2, default=[1, 0])
+     p.add_argument('--brow-linear-tint', type=float, nargs=3)
++    for kind in ('diffuse', 'normal'):
++        p.add_argument('--linen-' + kind)
++        p.add_argument('--linen-' + kind + '-sha256')
++        p.add_argument('--linen-' + kind + '-bytes', type=int)
++    p.add_argument('--linen-tiling', type=float, nargs=2)
++    p.add_argument('--linen-normal-strength', type=float)
+     args = p.parse_args()
+     need(re.fullmatch(r'[A-Za-z0-9_-]+', args.output_version), 'Fresh safe output version required')
+     need(args.controller_asset.startswith('Assets/') and '..' not in args.controller_asset
+@@ -179,6 +194,24 @@
+     brow = finite_vector(args.brow_linear_tint, 3, 'Reviewed brow linear tint') if args.brow_linear_tint else None
+     need(brow is None or all(0 <= v <= 1 for v in brow), 'Brow tint is a linear multiplier in0..1')
+     textures, texture_keys, materials, decisions = [], {}, [], []
++    linen_pins = {}
++    for kind in ('diffuse', 'normal'):
++        values = [getattr(args, 'linen_' + kind + suffix) for suffix in ('', '_sha256', '_bytes')]
++        present = [value is not None for value in values]
++        need(not any(present) or all(present), 'Optional linen ' + kind + ' requires explicit path/SHA/bytes together')
++        if all(present):
++            admitted = LINEN_SOURCE[kind]
++            need(values[1] == admitted['sha256'] and values[2] == admitted['bytes'],
++                 'Only the text-manifest-admitted CC0 rough_linen original is supported: ' + kind)
++            linen_pins[kind], _ = pin(values[0], values[1], values[2])
++            textures.append(dict(key='generated-linen-' + kind, source=linen_pins[kind],
++                normal=kind == 'normal', data=False, alpha=False, maximumSize=1024))
++    need(bool(linen_pins) or args.linen_tiling is None, 'Linen tiling requires an explicitly pinned linen map')
++    need('normal' in linen_pins or args.linen_normal_strength is None, 'Linen normal strength requires its explicitly pinned normal map')
++    linen_tiling = finite_vector(args.linen_tiling if args.linen_tiling is not None else [4, 4], 2, 'Linen tiling')
++    need(all(1 <= value <= 24 for value in linen_tiling), 'Reviewed linen tiling must stay in1..24')
++    linen_strength = args.linen_normal_strength if args.linen_normal_strength is not None else .16
++    need(math.isfinite(linen_strength) and 0 <= linen_strength <= .5, 'Modest linen normal strength must stay in0..0.5')
+ 
+     def texture_key(index, normal=False, alpha=False):
+         # A MASK/BLEND importer may dilate RGB into transparent texels. Keep
+@@ -194,10 +227,17 @@
+     for name in exported_names:
+         if name in generated:
+             row = generated[name]; role = {'linen': 'Linen', 'facing': 'Linen', 'leather': 'Leather'}[row['role']]
+-            materials.append(dict(sourceName=name, role=role, textureKey='', normalTextureKey='', normalScale=1,
++            cloth_maps = bool(linen_pins) and row['role'] in ('linen', 'facing')
++            color_key = 'generated-linen-diffuse' if cloth_maps and 'diffuse' in linen_pins else ''
++            normal_key = 'generated-linen-normal' if cloth_maps and 'normal' in linen_pins else ''
++            materials.append(dict(sourceName=name, role=role, textureKey=color_key, normalTextureKey=normal_key,
++                normalScale=linen_strength if normal_key else 1,
+                 color=row['baseColorFactorLinear'], hsvg=[0, 1, 1, 1], artisticTintSrgb=[1, 1, 1, 1],
+                 alphaMode=row['alphaMode'], cutoff=row['alphaCutoff'], doubleSided=row['doubleSided'], heroSurface='Legacy',
+-                uvScale=[1, 1], uvOffset=[0, 0], uvChannel=0, uvRotation=0))
++                uvScale=linen_tiling if cloth_maps else [1, 1], uvOffset=[0, 0], uvChannel=0, uvRotation=0))
++            decisions.append(dict(exportName=name, sourceName=None, surface='Legacy', generatedRole=row['role'],
++                linenMapsApplied=cloth_maps, textureKey=color_key, normalTextureKey=normal_key,
++                originalLinearFactorRetained=True))
+             continue
+         mapping = mappings.get(name); original_name = mapping['sourceMaterial'] if mapping else name
+         need(original_name in raw_materials and original_name in ROLES, 'Unreviewed exact exported source material: ' + name)
+@@ -243,10 +283,14 @@
+     output = Path(args.output); audit_output = output.with_name(output.name + '.bridge.json')
+     need(not output.exists() and not audit_output.exists(), 'Config and bridge record must both be new')
+     settings_pin = write_new(output, settings)
+-    audit = dict(schema=1, settings=settings_pin, bakeReport=report_pin, sourceInspection=inspection_pin,
++    audit = dict(schema=2, settings=settings_pin, bakeReport=report_pin, sourceInspection=inspection_pin,
+         builderSourceSha256=digest(Path(__file__).read_bytes()), bakerSourceSha256=args.baker_source_sha256,
+         normalPixelsReport=flat_pin, choices=dict(hairFlowMode=args.hair_flow_mode, hairUvFlow=flow,
+-            fittedEyeMaterials=sorted(verified_eyes), browLinearTint=brow, faceSdfEnabled=False),
++            fittedEyeMaterials=sorted(verified_eyes), browLinearTint=brow, faceSdfEnabled=False,
++            linen=dict(source=LINEN_SOURCE if linen_pins else None, inputs=linen_pins,
++                tiling=linen_tiling if linen_pins else None,
++                normalStrength=linen_strength if 'normal' in linen_pins else None,
++                affectedGeneratedRoles=['linen', 'facing'] if linen_pins else [])),
+         materialDecisions=decisions, geometryEdited=False, imagePixelsEdited=False,
+         actualUnityPreparationExecuted=False, actualVisualReviewCompleted=False)
+     audit_pin = write_new(audit_output, audit)

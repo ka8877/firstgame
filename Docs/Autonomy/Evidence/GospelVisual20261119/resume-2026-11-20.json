@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "status": "native-graphics-source-checkpoint",
+  "parent": "efc7f27a5aee91f24fd5b91efac99e46d4af44b7",
+  "preview": {
+    "attempt": "HeroPreview12",
+    "kind": "Unity Boot, captured after physical world movement",
+    "index": {
+      "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreviewRuns/HeroPreview12/preview-index.json",
+      "sha256": "b8abda840b0249f8aa549fc4b46a01ba773993549eaa4e5bfc83baef9cbd2f29",
+      "bytes": 4242
+    },
+    "screens": {
+      "Docs/Autonomy/Evidence/GospelVisual20261119/RuntimeScreens/01-field-default.png": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreviewRuns/HeroPreview12/01-field-default.png",
+        "sha256": "dff9fb9015d053ad05659af3b84b7283d8fcdb37fbfee0d69ea2fa17afdd789d",
+        "bytes": 2939376
+      },
+      "Docs/Autonomy/Evidence/GospelVisual20261119/RuntimeScreens/02-field-near-hero.png": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreviewRuns/HeroPreview12/02-field-near-hero.png",
+        "sha256": "6d1703747607bd8aa09054982f888bce7df8e9c115ecd71bd27411e6e30385db",
+        "bytes": 2669168
+      },
+      "Docs/Autonomy/Evidence/GospelVisual20261119/RuntimeScreens/03-actual-rigged-face.png": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreviewRuns/HeroPreview12/03-actual-rigged-face.png",
+        "sha256": "8838acf10a204880159957d1616c3fffc8296a226b52bff8f119b5aee1521c38",
+        "bytes": 449978
+      },
+      "Docs/Autonomy/Evidence/GospelVisual20261119/RuntimeScreens/04-actual-joseph-dialogue.png": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreviewRuns/HeroPreview12/04-actual-joseph-dialogue.png",
+        "sha256": "5f072237c65f2d7797bb03b1445860f0726a9485664b5232b55edd152ade8ae0",
+        "bytes": 2733643
+      }
+    }
+  },
+  "preparedModel": {
+    "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/PreparationReports/HeroPreview08.json",
+    "sha256": "cf61f6a604bcbb752bb85f4cb308bdc7127b51bfdcb68e279a8adafd83cb542a",
+    "bytes": 3367
+  },
+  "officialUnityPersonalActive": true,
+  "native": {
+    "distinctPassed": 24,
+    "allNames": [
+      "ActualMaryDialogueKeepsBothWorldActorsVisibleAndPhysicalSavesStable",
+      "AdmittedChildRetainsActual109Bones122MorphsCompleteSkinAndSevenHumanMotions",
+      "AllSixAdmittedEnvironmentFilesKeepOriginalBytesAndCorrectLinearOpenGlNormalImport",
+      "AllTwentyThreeEventsAndNineteenPassagesSurviveActualNprTravelAndReload",
+      "BlankLeavesHideAllFutureMetadataAndPageTurnsKeepTheDiscoveredCursor",
+      "CameraRelativeTouchMovementDashAndJumpKeepTheSavedTravelerPhysical",
+      "CedarSourceAndRawHdrRemainFiniteBeforeThePostGuardAtMaryAndJordan",
+      "ChapterVoicesPhysicalCuesAndPreferenceMuteHaveActualSources",
+      "DialogueCompletionKeepsJosephAndPeopleAcrossBookAndReload",
+      "DialogueShowsTheWordsAndSpeakerWithoutPerLineEditorialMetadata",
+      "EveryDiscoveredPassageFlowsAcrossTwoColumnsWithoutOmittingOrDuplicatingPrintedCharacters",
+      "ExactNarrationSourcesRejectChangedTextStaleLoadsAndMutedOrDisabledPlayback",
+      "HeadFrameFollowsOnlyItsCloneHeadPreservesPerSlotOverridesAndInvalidatesOnDisable",
+      "IllustratedMarySpeakerSurvivesBibleAndActualReloadWithoutMovingPhysicalStory",
+      "JosephAndAmbientPeopleRemainRealHumanoidsAcrossDialogueAndReload",
+      "LiveMinimapTracksRealTravelAndOpensTheSameWorldMapWithoutAdvancingStory",
+      "MovingJohnConversationRestoresExactAcceptedNpcPose",
+      "NeutralFeetPeriodClothSourceAlphaAndNormalFallbackAreActualNewPrefabProperties",
+      "NewBirthArrangementAndSilentOpeningCuesDuckOnlyForActualNarration",
+      "NewEnvironmentActuallyLoadsThreePairsRestoresLightsAndDisposesOnlyWorldOwnedResources",
+      "NewViewUsesActualExpressionsLocomotionAndIndependentRiggedPortraitLifecycle",
+      "PerspectiveOrbitAndMarkedSceneryOcclusionKeepPhysicalPose",
+      "RealPreviousLateralSaveForksWithoutTouchingItsOriginalBytes",
+      "SpatialWorldAndBothChaptersUseThreeDimensionalImportedScenery"
+    ],
+    "runs": {
+      "GospelNativeResume01": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/NativeRuns/GospelNativeResume01/native.xml",
+        "sha256": "55a5bf86e1ac68f1ef84c93e4d22fa7f029e82a3105fa4644a0df3d09b60d069",
+        "bytes": 74128,
+        "total": 24,
+        "passed": 19,
+        "failed": 5,
+        "skipped": 0
+      },
+      "GospelNativeResume02": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/NativeRuns/GospelNativeResume02/native.xml",
+        "sha256": "6b5145d1ad383c7b6c6f642ed7d66ebd939f31952816811b87434f37facdeeaf",
+        "bytes": 26441,
+        "total": 5,
+        "passed": 2,
+        "failed": 3,
+        "skipped": 0
+      },
+      "GospelNativeResume03": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/NativeRuns/GospelNativeResume03/native.xml",
+        "sha256": "76d4f316d9b8ed24f6eb6d3a6629352503c097d8d10385f681ee6a0d40aadcfe",
+        "bytes": 8183,
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "skipped": 0
+      },
+      "GospelNativeResume04": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/NativeRuns/GospelNativeResume04/native.xml",
+        "sha256": "1c89cd0c15d8d45d7727917282bdcae30d599c9b43ec94bff2ca6340eec90396",
+        "bytes": 7683,
+        "total": 2,
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0
+      },
+      "GospelNativeResume05": {
+        "file": "Artifacts/Validation/GospelVisualResume-2026-11-20/NativeRuns/GospelNativeResume05/native.xml",
+        "sha256": "467197b8f72ff125067681b57a697c1d9707bf187f8088e4c5f8231a03cbfefe",
+        "bytes": 3951,
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    }
+  }
+}

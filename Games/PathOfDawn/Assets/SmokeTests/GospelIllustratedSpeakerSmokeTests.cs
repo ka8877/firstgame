@@ -253,7 +253,12 @@ namespace PathOfDawn.SmokeTests
                 actor.LoadModel(identity, GospelNprCharacterView.HeightFor(identity), Color.white);
                 actor.SetMotion(Vector3.zero, true, 180); actor.Tick(0);
                 Assert.That(actor.HasSourceExpressionMap, Is.True, identity + " must load its actual source expression map.");
-                Assert.That(actor.ExpressionBindingCount, Is.EqualTo(5), identity);
+                var beards = actor.SkinnedRenderers.Where(renderer => renderer.name == identity + "__CharacterBeard").ToArray();
+                Assert.That(beards.Length, Is.LessThanOrEqualTo(1));
+                Assert.That(actor.ExpressionBindingCount, Is.EqualTo(5 * (1 + beards.Length)),
+                    identity + ": retain the five actual face presets and bind all five presets to any derived beard.");
+                foreach (var beard in beards)
+                    GospelHumanCharacterSmokeTests.AssertBeardSourceAnchors(actor.SkinnedRenderers.Single(renderer => renderer.name == identity + "__Face"), beard);
                 Assert.That(actor.SkinnedRenderers.Count, Is.GreaterThan(0));
                 var channels = new Dictionary<string, List<Tuple<SkinnedMeshRenderer, int>>> {
                     { "A", new List<Tuple<SkinnedMeshRenderer, int>>() },
@@ -272,8 +277,13 @@ namespace PathOfDawn.SmokeTests
                         Assert.That(mesh.GetBlendShapeFrameCount(shape), Is.GreaterThan(0));
                         var deltas = new Vector3[mesh.vertexCount];
                         mesh.GetBlendShapeFrameVertices(shape, mesh.GetBlendShapeFrameCount(shape) - 1, deltas, null, null);
-                        Assert.That(deltas.Any(delta => delta.sqrMagnitude > .0000000001f), Is.True,
-                            identity + ": " + channel + " must have actual authored vertex displacement.");
+                        // An attachment can have a correct zero frame when its
+                        // facial skin anchors are outside that mouth deformation.
+                        // Its complete actual source-anchor frames were checked
+                        // above; retain every original face nonzero requirement.
+                        if (!beards.Contains(renderer))
+                            Assert.That(deltas.Any(delta => delta.sqrMagnitude > .0000000001f), Is.True,
+                                identity + ": " + channel + " must have actual authored vertex displacement.");
                         channels[channel].Add(Tuple.Create(renderer, shape));
                     }
                 foreach (var channel in channels) Assert.That(channel.Value.Count, Is.GreaterThan(0), identity + ": " + channel.Key);
@@ -281,6 +291,10 @@ namespace PathOfDawn.SmokeTests
             }
             yield return null; yield return null;
             var maxima = actors.Select(_ => new Dictionary<string, float> { { "A", 0 }, { "I", 0 }, { "O", 0 } }).ToArray();
+            var beardMaxima = new Dictionary<string, float>();
+            foreach (var channels in bindings) foreach (var channel in channels) foreach (var binding in channel.Value)
+                if (binding.Item1.name.EndsWith("__CharacterBeard", StringComparison.Ordinal))
+                    beardMaxima.Add(binding.Item1.GetInstanceID() + ":" + binding.Item2, 0);
             foreach (var actor in actors) actor.SetSpeaking(true, "actual-source-expression-inspection");
             float until = Time.realtimeSinceStartup + 1.18f;
             while (Time.realtimeSinceStartup < until)
@@ -291,7 +305,11 @@ namespace PathOfDawn.SmokeTests
                     actors[index].Tick(Time.unscaledDeltaTime);
                     foreach (var channel in bindings[index])
                         foreach (var binding in channel.Value)
-                            maxima[index][channel.Key] = Mathf.Max(maxima[index][channel.Key], binding.Item1.GetBlendShapeWeight(binding.Item2));
+                        {
+                            string key = binding.Item1.GetInstanceID() + ":" + binding.Item2;
+                            if (beardMaxima.ContainsKey(key)) beardMaxima[key] = Mathf.Max(beardMaxima[key], binding.Item1.GetBlendShapeWeight(binding.Item2));
+                            else maxima[index][channel.Key] = Mathf.Max(maxima[index][channel.Key], binding.Item1.GetBlendShapeWeight(binding.Item2));
+                        }
                     Assert.That(Vector3.Distance(actors[index].FootRoot.position, feet[index]), Is.LessThan(.00001f),
                         "Actual facial animation must never move the physical source owner.");
                 }
@@ -299,6 +317,8 @@ namespace PathOfDawn.SmokeTests
             for (int index = 0; index < actors.Count; index++)
                 foreach (string channel in new[] { "A", "I", "O" })
                     Assert.That(maxima[index][channel], Is.GreaterThan(3), identities[index] + ": actual source-mapped " + channel + " must deform its renderer during the live cycle.");
+            foreach (var maximum in beardMaxima)
+                Assert.That(maximum.Value, Is.GreaterThan(3), "Every actual derived beard A/I/O binding must receive its source expression weight.");
             App.CameraRig.SetTarget(expressionFixture.transform); App.CameraRig.SetOrbit(0, 12); App.CameraRig.SetZoom(8.2f); App.CameraRig.Snap();
             yield return Shot("five-source-mapped-aio-world-actors");
             foreach (var actor in actors) actor.SetSpeaking(false);
