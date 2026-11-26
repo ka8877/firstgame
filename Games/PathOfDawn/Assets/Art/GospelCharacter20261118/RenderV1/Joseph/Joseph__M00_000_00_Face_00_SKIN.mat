@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BeardMap:
+        m_Texture: {fileID: 2800000, guid: 2e4df219a40c5a1bb8f007f987757050, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ComplexionMap:
         m_Texture: {fileID: 2800000, guid: 3d672173630853418b63a387c564eb42, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -258,6 +262,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BeardStrength: 0.93
     - _ComplexionStrength: 0.95
     - _FaceSdfEnabled: 0
     - _AmbientStrength: 0.62
@@ -619,6 +624,7 @@ Material:
     - _lilShadowCasterBias: 0
     - _lilToonVersion: 45
     m_Colors:
+    - _BeardColor: {r: 0.25, g: 0.185, b: 0.145, a: 1}
     - _AudioLinkDefaultValue: {r: 0, g: 0, b: 2, a: 0.75}
     - _AudioLinkLocalMapParams: {r: 120, g: 1, b: 0, a: 0}
     - _AudioLinkMask_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}

@@ -10,6 +10,7 @@ Shader "FirstGame/Pilgrimage/Galilee Woven Cloth"
         _ThreadColor("Border yarn", Color) = (.68,.57,.43,1)
         [Enum(Plain,0,Mantle,1,Binding,2)] _Border("Woven border", Float) = 0
         _Wool("Wool weight", Range(0,1)) = 0
+        _ClothClearance("Ease above the skin (metres)", Range(0,.015)) = 0
         [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
     }
     HLSLINCLUDE
@@ -21,16 +22,21 @@ Shader "FirstGame/Pilgrimage/Galilee Woven Cloth"
         float4 _MainTex_ST, _BumpMap_ST;
         float _UseBumpMap, _BumpScale;
         half4 _Color, _ThreadColor;
-        float _Border, _Wool, _Cull;
+        float _Border, _Wool, _Cull, _ClothClearance;
     CBUFFER_END
     struct Vertex { float4 pos : POSITION; float3 normal : NORMAL; float2 uv : TEXCOORD0; float4 tangent : TANGENT; };
     struct Surface { float4 pos : SV_POSITION; float3 world : TEXCOORD0; half3 normal : TEXCOORD1; float2 uv : TEXCOORD2; half fog : TEXCOORD3; half4 tangent : TEXCOORD4; };
+    float3 ClothDirection(float3 v, float3 fallback)
+    {
+        float squared = dot(v,v);
+        return squared > 1e-7 && squared < 1e10 ? v * rsqrt(squared) : fallback;
+    }
     Surface Vert(Vertex i)
     {
         Surface o;
-        o.world = TransformObjectToWorld(i.pos.xyz);
+        o.normal = ClothDirection(TransformObjectToWorldNormal(i.normal, false), float3(0,1,0));
+        o.world = TransformObjectToWorld(i.pos.xyz) + o.normal * _ClothClearance;
         o.pos = TransformWorldToHClip(o.world);
-        o.normal = TransformObjectToWorldNormal(i.normal);
         o.tangent = half4(TransformObjectToWorldDir(i.tangent.xyz, false), i.tangent.w * GetOddNegativeScale());
         o.uv = i.uv;
         o.fog = ComputeFogFactor(o.pos.z);
@@ -48,18 +54,21 @@ Shader "FirstGame/Pilgrimage/Galilee Woven Cloth"
     }
     half4 Draw(Surface i, FRONT_FACE_TYPE facing : FRONT_FACE_SEMANTIC) : SV_Target
     {
-        half3 n = normalize(i.normal) * IS_FRONT_VFACE(facing, 1, -1);
+        float3 n = ClothDirection(i.normal, float3(0,1,0)) * IS_FRONT_VFACE(facing, 1, -1);
         float3 receiver = i.world + n * .009 + _MainLightPosition.xyz * .012;
         Light sun = GetMainLight(TransformWorldToShadowCoord(receiver));
         float2 uv = i.uv;
+        // Thin, oblique hem triangles can supply undefined implicit gradients on GLES.
+        // Select a bounded yarn mip before the tangent branch; both maps use the same footprint.
+        float mip = clamp(log2(max(1.0, distance(GetCameraPositionWS(), i.world) * 1.5)), 0, 6);
         float3 tangent = i.tangent.xyz - n * dot(i.tangent.xyz, n);
         if (_UseBumpMap > .5 && dot(tangent,tangent) > .0001)
         {
-            tangent = normalize(tangent);
-            float3 yarnNormal = UnpackNormalScale(SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, TRANSFORM_TEX(uv, _BumpMap)), _BumpScale * .40);
-            n = normalize(n * yarnNormal.z + tangent * yarnNormal.x + cross(n,tangent) * i.tangent.w * yarnNormal.y);
+            tangent = ClothDirection(tangent, float3(1,0,0));
+            float3 yarnNormal = UnpackNormalScale(SAMPLE_TEXTURE2D_LOD(_BumpMap, sampler_BumpMap, TRANSFORM_TEX(uv, _BumpMap), mip), _BumpScale * .40);
+            n = ClothDirection(n * yarnNormal.z + tangent * yarnNormal.x + cross(n,tangent) * i.tangent.w * yarnNormal.y, n);
         }
-        float weaveValue = Luminance(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, TRANSFORM_TEX(uv,_MainTex)).rgb);
+        float weaveValue = Luminance(SAMPLE_TEXTURE2D_LOD(_MainTex, sampler_MainTex, TRANSFORM_TEX(uv,_MainTex), mip).rgb);
         float warp = Thread(uv.x * 96 + .16 * sin(uv.y * 31));
         float weft = Thread(uv.y * 111 + .09 * sin(uv.x * 55));
         float slub = Thread(uv.y * 13 + .08 * sin(uv.x * 19));
@@ -113,8 +122,8 @@ Shader "FirstGame/Pilgrimage/Galilee Woven Cloth"
             float3 _LightDirection;
             float4 Shadow(Vertex i) : SV_POSITION
             {
-                float3 p = TransformObjectToWorld(i.pos.xyz);
-                float3 n = TransformObjectToWorldNormal(i.normal);
+                float3 n = ClothDirection(TransformObjectToWorldNormal(i.normal, false), float3(0,1,0));
+                float3 p = TransformObjectToWorld(i.pos.xyz) + n * _ClothClearance;
                 return ApplyShadowClamping(TransformWorldToHClip(ApplyShadowBias(p,n,_LightDirection)));
             }
             half4 Depth() : SV_Target { return 0; }
