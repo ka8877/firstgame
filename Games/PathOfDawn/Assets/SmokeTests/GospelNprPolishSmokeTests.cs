@@ -80,7 +80,7 @@ namespace PathOfDawn.SmokeTests
             yield return Click("이야기 속으로");
             Assert.That(App.People.CurrentPerson.Id, Is.EqualTo("joseph"));
             yield return ReachCurrentPerson(); yield return AcceptCurrentPerson();
-            yield return SmokeUi.Capture("PathOfDawn", "galilee-" + attempt + "-joseph-at-work", 1280, 720, settleSeconds: .20f);
+            yield return SmokeUi.Capture("PathOfDawn", "galilee-" + attempt + "-joseph-at-work", 1280, 720, settleSeconds: .55f);
             int josephEvent = App.Chronicle.QuestIndex, guard = 0;
             while (App.Chronicle.QuestIndex == josephEvent && guard++ < 40) yield return Click("이야기 계속");
             Assert.That(guard, Is.LessThan(40));

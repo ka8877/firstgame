@@ -148,7 +148,8 @@ Shader "FirstGame/GospelHero/FaceSdf"
         if (_BeardStrength > 0)
         {
             half growth = SAMPLE_TEXTURE2D(_BeardMap, sampler_BeardMap, input.uv).r;
-            albedo.rgb = lerp(albedo.rgb, _BeardColor.rgb, growth * _BeardStrength);
+            half density = smoothstep(.05, .69, growth);
+            albedo.rgb = lerp(albedo.rgb, _BeardColor.rgb, density * _BeardStrength);
         }
         half3 n=HeroSafeNormalize(input.normalWS,half3(0,1,0));
         #if defined(_MAIN_LIGHT_SHADOWS_SCREEN)
