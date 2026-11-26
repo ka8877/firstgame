@@ -305,6 +305,14 @@ namespace PathOfDawn.Presentation
             float distance = wide ? 5.4f : stable ? 4.0f : 3.25f;
             Vector3 eye = look + new Vector3(.28f, .65f, distance);
             cameraView.fieldOfView = 44;
+            if (speaker != null && models.TryGetValue(speaker, out var performer) && performer.gameObject.activeSelf && performer.Head != null)
+            {
+                // Cut to the actual speaking face. Keep establishing views for the narrated beats.
+                look = content.InverseTransformPoint(performer.Head.position) + Vector3.up * .025f;
+                look.y -= .17f;
+                eye = look + new Vector3(speaker == "joseph" ? -.24f : .24f, .09f, 1.37f);
+                cameraView.fieldOfView = 40;
+            }
             cameraView.farClipPlane = 90;
             cameraView.transform.position = content.TransformPoint(eye);
             cameraView.transform.LookAt(content.TransformPoint(look), Vector3.up);

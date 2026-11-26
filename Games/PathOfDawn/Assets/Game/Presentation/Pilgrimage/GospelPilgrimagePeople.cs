@@ -142,8 +142,8 @@ namespace PathOfDawn.Presentation
             for (int i = 0; i < routes.Length; i++)
             {
                 bool woman = i % 3 == 1;
-                Color tint = i % 3 == 0 ? new Color(.94f, .98f, 1f) : i % 3 == 1
-                    ? new Color(1f, .97f, .92f) : new Color(.93f, .96f, .91f);
+                Color tint = i % 3 == 0 ? new Color(.88f, .79f, .69f) : i % 3 == 1
+                    ? new Color(.87f, .94f, .89f) : new Color(.80f, .85f, .76f);
                 var person = CreatePerson(population, "pilgrim-" + i, "순례자", true, 1.65f + i % 3 * .065f);
                 person.Actor = GospelPilgrimageActor.BuildAmbient(person.Marker.RootTransform, camera,
                     "Art/GospelRpg/Actors/pilgrims", woman, 1.65f + i % 3 * .065f, tint);

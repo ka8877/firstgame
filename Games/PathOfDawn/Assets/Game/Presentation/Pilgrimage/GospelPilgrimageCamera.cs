@@ -20,7 +20,7 @@ namespace PathOfDawn.Presentation
         static readonly float[] AvoidanceYawOffsets = { 30, -30, 60, -60, 90, -90 };
         static readonly float[] SideViewPitches = { 35, 50, 65 };
         static readonly float[] ConversationYawOffsets = { 0, 15, -15, 30, -30, 45, -45 };
-        static readonly float[] ConversationPitches = { 14, 22, 30, 38 };
+        static readonly float[] ConversationPitches = { 5, 12, 20, 32 };
         const int CameraCollisionMask = ~(1 << 2 | 1 << 5);
 
         public Camera View { get; private set; }
@@ -43,6 +43,7 @@ namespace PathOfDawn.Presentation
         public Transform Target { get; private set; }
         public Transform ConversationTarget { get; private set; }
         public bool HasReadableConversationView { get; private set; }
+        public bool IsSpeakerCloseup => conversationReady && speakingCloseup;
         public float ConversationScreenSeparation { get; private set; }
         public int ConversationObstructionCount { get; private set; }
         public bool InputEnabled
@@ -64,7 +65,7 @@ namespace PathOfDawn.Presentation
         Transform conversationHead, conversationHips, conversationLeftFoot, conversationRightFoot;
         GospelPilgrimageActor conversationActor;
         GospelPilgrimageActor[] conversationPeople;
-        bool conversationReady, conversationPoseHeld;
+        bool conversationReady, conversationPoseHeld, travelerSpeaking, speakingCloseup;
         float conversationHeight = 1.6f, conversationYaw, conversationPitch = 18f;
         readonly List<RaycastResult> pointerHits = new List<RaycastResult>();
         GospelPilgrimageMotor motor;
@@ -172,9 +173,11 @@ namespace PathOfDawn.Presentation
         }
 
         /// <summary>Optional dialogue framing. Clearing the partner restores the exploration composition.</summary>
-        public void SetConversationTarget(Transform partner)
+        public void SetConversationTarget(Transform partner, bool travelerIsSpeaker = false, bool namedSpeaker = false)
         {
-            if (ConversationTarget == partner) return;
+            if (ConversationTarget == partner && travelerSpeaking == travelerIsSpeaker && speakingCloseup == namedSpeaker) return;
+            speakingCloseup = namedSpeaker;
+            travelerSpeaking = travelerIsSpeaker;
             ConversationTarget = partner;
             conversationActor = null;
             conversationPeople = null;
@@ -351,9 +354,15 @@ namespace PathOfDawn.Presentation
         float DesiredDistance()
         {
             if (!conversationReady) return zoom * (actorHeight / 1.5f);
-            float height = Mathf.Max(actorHeight, conversationHeight);
+            if (speakingCloseup)
+            {
+                float stature = travelerSpeaking ? actorHeight : conversationHeight;
+                return stature * Mathf.Max(.73f, .71f / Mathf.Max(View.aspect,.4f));
+            }
             float span = Vector3.Distance(Target.position, ConversationTarget.position);
-            return Mathf.Clamp(zoom * .72f * (height / 1.6f) + span * .16f, 3.8f, 7.2f);
+            // Compose for the physical gap and the display, independently of field zoom.
+            float halfWidth = Mathf.Tan(View.fieldOfView * Mathf.Deg2Rad * .5f) * View.aspect;
+            return Mathf.Max(1.45f + span * .18f, (.46f + span * .52f) / Mathf.Max(.18f, halfWidth));
         }
         Vector3 PhysicalFocus()
         {
@@ -367,11 +376,19 @@ namespace PathOfDawn.Presentation
         {
             if (conversationReady)
             {
-                Vector3 conversationFocus = (Target.position + ConversationTarget.position) * .5f;
-                // Keep both complete figures above the lower dialogue panel.
-                // Stature is authored, so blinking/idle cloth cannot bob framing.
-                conversationFocus.y = (Target.position.y + ConversationTarget.position.y) * .5f
-                    + Mathf.Max(actorHeight, conversationHeight) * .32f;
+                Vector3 listener = travelerSpeaking ? ConversationTarget.position : Target.position;
+                Vector3 speaker = travelerSpeaking ? Target.position : ConversationTarget.position;
+                float speakerHeight = travelerSpeaking ? actorHeight : conversationHeight;
+                float listenerHeight = travelerSpeaking ? conversationHeight : actorHeight;
+                if (speakingCloseup)
+                {
+                    // Keep a little looking room towards the listener and the eyes above the text panel.
+                    Vector3 towardListener = Vector3.ProjectOnPlane(listener - speaker, Vector3.up).normalized;
+                    return speaker + Vector3.up * (speakerHeight * .79f) + towardListener * .11f;
+                }
+                Vector3 conversationFocus = Vector3.Lerp(listener, speaker, .61f);
+                conversationFocus.y = Mathf.Lerp(listener.y + listenerHeight * .82f,
+                    speaker.y + speakerHeight * .82f, .61f) - .18f;
                 return conversationFocus;
             }
             Vector3 value = PhysicalFocus();
@@ -509,12 +526,15 @@ namespace PathOfDawn.Presentation
 
             Vector3 across = ConversationTarget.position - Target.position; across.y = 0;
             float side = across.sqrMagnitude > .001f ? Mathf.Atan2(across.x, across.z) * Mathf.Rad2Deg : currentYaw;
-            float first = Mathf.Repeat(side + 90, 360), second = Mathf.Repeat(side - 90, 360);
+            // Keep the same side of the line between characters on a reverse shot.
+            float angleToSpeaker = speakingCloseup ? 29 : 68;
+            float offsetFromLine = travelerSpeaking ? 180 - angleToSpeaker : angleToSpeaker;
+            float first = Mathf.Repeat(side + offsetFromLine, 360), second = Mathf.Repeat(side - offsetFromLine, 360);
             if (Mathf.Abs(Mathf.DeltaAngle(first, currentYaw)) > Mathf.Abs(Mathf.DeltaAngle(second, currentYaw)))
             { float swap = first; first = second; second = swap; }
 
             var desired = Probe(origin, conversationPoseHeld ? conversationYaw : first,
-                conversationPoseHeld ? conversationPitch : 14, requested);
+                conversationPoseHeld ? conversationPitch : 5, requested);
             DesiredPathDistance = initialObstacleCount == 0 ? desired.Distance : 0;
             ObstructionCount = desired.Obstacles + initialObstacleCount;
             CameraPose selected = desired;
@@ -670,10 +690,10 @@ namespace PathOfDawn.Presentation
         bool BodySightlinesClear(Vector3 endpoint, out int blockers)
         {
             blockers = 0;
-            int countPoints = conversationReady ? bodyPoints.Length + conversationPoints.Length : bodyPoints.Length;
+            int countPoints = IsSpeakerCloseup ? 2 : conversationReady ? bodyPoints.Length + conversationPoints.Length : bodyPoints.Length;
             for (int index = 0; index < countPoints; index++)
             {
-                Vector3 point = index < bodyPoints.Length ? bodyPoints[index] : conversationPoints[index - bodyPoints.Length];
+                Vector3 point = SightlinePoint(index);
                 Vector3 delta = point - endpoint; float length = delta.magnitude;
                 if (length <= .03f) { blockers++; continue; }
                 int count = Physics.RaycastNonAlloc(endpoint, delta / length, collisionHits, length - .025f,
@@ -695,7 +715,7 @@ namespace PathOfDawn.Presentation
                         if (bounds.Contains(endpoint)) { blockers++; continue; }
                         for (int index = 0; index < countPoints; index++)
                         {
-                            Vector3 point = index < bodyPoints.Length ? bodyPoints[index] : conversationPoints[index - bodyPoints.Length];
+                            Vector3 point = SightlinePoint(index);
                             Vector3 delta = point - endpoint; float length = delta.magnitude;
                             if (length > .15f && bounds.IntersectRay(new Ray(endpoint, delta / length), out float distance)
                                 && distance >= 0 && distance < length - .15f) { blockers++; break; }
@@ -704,6 +724,16 @@ namespace PathOfDawn.Presentation
                 }
             }
             return blockers == 0;
+        }
+
+        Vector3 SightlinePoint(int index)
+        {
+            if (IsSpeakerCloseup)
+            {
+                var active = travelerSpeaking ? bodyPoints : conversationPoints;
+                return active[index == 0 ? 0 : 4]; // Face and upper chest in the close shot.
+            }
+            return index < bodyPoints.Length ? bodyPoints[index] : conversationPoints[index - bodyPoints.Length];
         }
 
         void PrepareBodyPoints()
@@ -729,10 +759,25 @@ namespace PathOfDawn.Presentation
 
         bool Readable(Vector3 position, Quaternion rotation)
         {
-            if (!ReadableBody(bodyPoints, position, rotation, .07f, .93f)) return false;
-            return !conversationReady || ReadableBody(conversationPoints, position, rotation, .35f, .93f)
-                && ReadableBody(bodyPoints, position, rotation, .35f, .93f)
-                && PairScreenSeparation(position, rotation) >= .07f;
+            if (!conversationReady) return ReadableBody(bodyPoints, position, rotation, .07f, .93f);
+            if (speakingCloseup) return FaceInFrame(travelerSpeaking ? bodyPoints : conversationPoints, position, rotation);
+            return FaceInFrame(bodyPoints, position, rotation) && FaceInFrame(conversationPoints, position, rotation)
+                && PairScreenSeparation(position, rotation) >= .11f;
+        }
+
+        bool FaceInFrame(Vector3[] points, Vector3 position, Quaternion rotation)
+        {
+            // The dialogue panel covers the lower third. Keep both faces and their
+            // shoulders visible while allowing a waist or a hem below that panel.
+            Quaternion inverse = Quaternion.Inverse(rotation);
+            float scale = 2 * Mathf.Tan(View.fieldOfView * .5f * Mathf.Deg2Rad);
+            Vector3 head = inverse * (points[0] - position);
+            Vector3 chest = inverse * (points[4] - position);
+            if (Mathf.Min(chest.z, head.z) <= View.nearClipPlane + .03f) return false;
+            float x = .5f + head.x / (head.z * scale * View.aspect);
+            float y = .5f + head.y / (head.z * scale);
+            float chestY = .5f + chest.y / (chest.z * scale);
+            return x >= .09f && x <= .91f && y >= .47f && y <= .925f && chestY >= .32f;
         }
 
         bool ReadableBody(Vector3[] points, Vector3 position, Quaternion rotation, float lowY, float highY)
