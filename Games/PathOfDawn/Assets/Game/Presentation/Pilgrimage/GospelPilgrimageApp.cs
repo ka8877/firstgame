@@ -327,7 +327,9 @@ namespace PathOfDawn.Presentation
         void ShowStory()
         {
             SuspendFieldPresentation(false);
-            CameraRig.SetConversationTarget(npcRoot);
+            string speaker = GospelPilgrimageUi.ModelSpeakerIdentity(Chronicle.CurrentStoryBeat);
+            bool travelerSpeaks = speaker == "jesus" || speaker == "jesus-child" || speaker == "jesus-adult";
+            CameraRig.SetConversationTarget(npcRoot, travelerSpeaks, speaker != null);
             if (npcRoot != null)
             {
                 var partner = npcRoot.GetComponentInChildren<GospelPilgrimageActor>();

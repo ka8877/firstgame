@@ -7,6 +7,11 @@ Shader "FirstGame/GospelHero/FaceSdf"
         [MainColor] _Color("Color", Color) = (1,1,1,1)
         _MainTexHSVG("Hue / saturation / value / gamma", Vector) = (0,1,1,1)
         [NoScaleOffset] _FaceSdfTex("Linear R: angular face shadow threshold", 2D) = "white" {}
+        [NoScaleOffset] _ComplexionMap("Feature planes (occlusion, cheeks, lips, ridge)", 2D) = "black" {}
+        [NoScaleOffset] _BeardMap("Short facial hair density", 2D) = "black" {}
+        _BeardColor("Facial hair", Color) = (.19,.14,.11,1)
+        _BeardStrength("Facial hair density", Range(0,1)) = 0
+        _ComplexionStrength("Painted form strength", Range(0,1)) = 0
         _FaceSdfEnabled("Use authored face SDF", Range(0,1)) = 0
         _FaceSdfStrength("Face SDF mix", Range(0,1)) = 1
         _FaceSdfSoftness("Face shadow edge softness", Range(.001,.25)) = .025
@@ -34,9 +39,13 @@ Shader "FirstGame/GospelHero/FaceSdf"
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
     TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
     TEXTURE2D(_FaceSdfTex); SAMPLER(sampler_FaceSdfTex);
+    TEXTURE2D(_ComplexionMap); SAMPLER(sampler_ComplexionMap);
+    TEXTURE2D(_BeardMap); SAMPLER(sampler_BeardMap);
     CBUFFER_START(UnityPerMaterial)
         float4 _MainTex_ST, _Color, _MainTexHSVG, _ShadowColor;
         float4 _GospelHeadForwardWS, _GospelHeadRightWS, _GospelHeadUpWS;
+        float4 _BeardColor;
+        float _ComplexionStrength, _BeardStrength;
         float _FaceSdfEnabled, _FaceSdfStrength, _FaceSdfSoftness, _FaceSdfFlipSide;
         float _ShadowStrength, _ShadowBlur, _ShadowBorder, _ShadowReceive;
         float _AmbientStrength, _AsUnlit, _LightMinLimit, _LightMaxLimit;
@@ -128,7 +137,21 @@ Shader "FirstGame/GospelHero/FaceSdf"
     {
         UNITY_SETUP_INSTANCE_ID(input); UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         half4 albedo=HeroAlbedo(input.uv);
-        half3 n=normalize(input.normalWS);
+        if (_ComplexionStrength > 0)
+        {
+            half4 planes = SAMPLE_TEXTURE2D(_ComplexionMap, sampler_ComplexionMap, input.uv) * _ComplexionStrength;
+            albedo.rgb *= lerp(1.0.xxx, half3(.60,.47,.43), planes.r);
+            albedo.rgb *= lerp(1.0.xxx, half3(1.035,.85,.81), planes.g);
+            albedo.rgb *= lerp(1.0.xxx, half3(.76,.43,.44), planes.b);
+            albedo.rgb *= 1 + planes.a * .14;
+        }
+        if (_BeardStrength > 0)
+        {
+            half growth = SAMPLE_TEXTURE2D(_BeardMap, sampler_BeardMap, input.uv).r;
+            half density = smoothstep(.05, .69, growth);
+            albedo.rgb = lerp(albedo.rgb, _BeardColor.rgb, density * _BeardStrength);
+        }
+        half3 n=HeroSafeNormalize(input.normalWS,half3(0,1,0));
         #if defined(_MAIN_LIGHT_SHADOWS_SCREEN)
             Light sun=GetMainLight(input.screenShadowCoord);
         #else

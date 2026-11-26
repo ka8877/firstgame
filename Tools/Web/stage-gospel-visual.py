@@ -17,7 +17,6 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'Tools/Validation'))
 from restoration_source_binding import verify
 
-PROFILE = 'gospel-visual'
 PREFIX = 'games/path-of-dawn/'
 MANIFEST = 'build-manifest.json'
 BUDGET = 985_000_000
@@ -86,14 +85,14 @@ def verify_commit(commit, inputs):
     require(tree.get(name) == git_blob(regular(ROOT / name).read_bytes()), 'The tested Boot scene must match source')
 
 
-def verify_build(player, result, commit):
+def verify_build(player, result, commit, profile):
     inputs = read(player/'BuildInputs.json')
     require(inputs['game']=='PathOfDawn', 'Gospel build evidence required')
     fingerprint = verify(inputs)
     verify_commit(commit, inputs)
     report = read(result)
     evidence = regular(player/'BuildEvidence.txt').read_text()
-    revision = contract(PROFILE)['revisions']['PathOfDawn']
+    revision = contract(profile)['revisions']['PathOfDawn']
     required = ('Result: Succeeded', 'Errors: 0', 'LegacyResourcesRestored: true',
                 'Revision: '+revision, 'SourceFingerprint: '+fingerprint)
     require(all(line in evidence.splitlines() for line in required), 'Unity build evidence is incomplete')
@@ -146,14 +145,15 @@ def main():
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--source-commit',required=True)
     parser.add_argument('--baseline-public-commit',required=True)
+    parser.add_argument('--profile', choices=('gospel-visual', 'gospel-galilee'), default='gospel-visual')
     args=parser.parse_args()
     baseline=read(args.baseline/MANIFEST)
-    require(baseline['publishReady'] is True and baseline['gameRevisions']['FantasyCards']==contract(PROFILE)['revisions']['FantasyCards'],
+    require(baseline['publishReady'] is True and baseline['gameRevisions']['FantasyCards']==contract(args.profile)['revisions']['FantasyCards'],
             'An existing compatible public Card baseline is required')
     require(re.fullmatch('[0-9a-f]{40}',args.baseline_public_commit),'Exact preserved public commit required')
     ci=read(args.ci)
     require(ci['commit']==args.source_commit and ci['conclusions']=={'core':'success','pages-helper':'success'}, 'Current main CI must pass')
-    files,fingerprint=verify_build(args.player,args.build_report,args.source_commit)
+    files,fingerprint=verify_build(args.player,args.build_report,args.source_commit,args.profile)
     verify_native(args.native_xml,args.native_report,fingerprint)
     expected = {profile:verify_browser(path,profile,files) for profile,path in (('desktop',args.desktop),('mobile',args.mobile))}
     review=read(args.review)
@@ -180,8 +180,8 @@ def main():
         require(source.stat().st_size<=MAX_BLOB,'Public file exceeds the Git blob cap: '+source.name)
         with source.open('rb') as stream:
             require(not stream.read(48).startswith(b'version https://git-lfs.github.com/spec/v1'), 'Public files need actual non-LFS bytes')
-    release=contract(PROFILE)
-    manifest=dict(releaseProfile=PROFILE,currentTargets=['Web'],createdUtc=datetime.now(timezone.utc).isoformat(),
+    release=contract(args.profile)
+    manifest=dict(releaseProfile=args.profile,currentTargets=['Web'],createdUtc=datetime.now(timezone.utc).isoformat(),
                   publishReady=True,gameRevisions=release['revisions'],contentVersions=release['contents'],
                   sourceCommit=args.source_commit,sourceDirty=False,files=dict(sorted(hashes.items())),
                   browserProfiles=['Desktop','Mobile'],browserProfilesByGame={'PathOfDawn':['Desktop','Mobile'],'FantasyCards':[]},

@@ -80,6 +80,7 @@ namespace PathOfDawn.SmokeTests
             yield return Click("이야기 속으로");
             Assert.That(App.People.CurrentPerson.Id, Is.EqualTo("joseph"));
             yield return ReachCurrentPerson(); yield return AcceptCurrentPerson();
+            yield return SmokeUi.Capture("PathOfDawn", "galilee-" + attempt + "-joseph-at-work", 1280, 720, settleSeconds: .55f);
             int josephEvent = App.Chronicle.QuestIndex, guard = 0;
             while (App.Chronicle.QuestIndex == josephEvent && guard++ < 40) yield return Click("이야기 계속");
             Assert.That(guard, Is.LessThan(40));
@@ -152,7 +153,7 @@ namespace PathOfDawn.SmokeTests
                 playerDraws &= owner.Actor.SkinnedRenderers.Select((renderer, index) => renderer.forceRenderingOff == playerFlags[index]).All(value => value);
                 speakerDraws &= speaker.SkinnedRenderers.Select((renderer, index) => renderer.forceRenderingOff == speakerFlags[index]).All(value => value);
                 observedPair &= mask.LastProtectedConversationNpcCount == 1 && rig.IsConversationActor(speaker)
-                    && rig.HasReadableConversationView && rig.ConversationScreenSeparation >= .07f;
+                    && rig.HasReadableConversationView && (rig.IsSpeakerCloseup || rig.ConversationScreenSeparation >= .07f);
             };
             RenderPipelineManager.beginCameraRendering += begin;
             try
@@ -172,31 +173,37 @@ namespace PathOfDawn.SmokeTests
                 }
                 finally { RenderTexture.ReleaseTemporary(target); }
                 Assert.That(renders, Is.GreaterThanOrEqualTo(2), "Observe real SceneCamera draws, not just renderer defaults between frames.");
+                yield return SmokeUi.Capture("PathOfDawn", "npr-polish-" + attempt + "-" + shot, 1280, 720, settleSeconds: .15f);
                 Assert.That(playerDraws && speakerDraws && observedPair, Is.True,
                     "Both real world actors must retain their draw flags during actual camera renders.");
                 Assert.That(rig.ConversationObstructionCount, Is.EqualTo(0));
                 Assert.That(camera.fieldOfView, Is.EqualTo(47).Within(.001f));
-                AssertActualBodyInDialogue(camera, owner.Actor);
-                AssertActualBodyInDialogue(camera, speaker);
-                yield return SmokeUi.Capture("PathOfDawn", "npr-polish-" + attempt + "-" + shot, 1280, 720, settleSeconds: .15f);
+                Assert.That(rig.IsSpeakerCloseup, Is.True);
+                AssertSpeakerFace(camera, speaker);
+                var gaze = owner.Player.Position - speaker.transform.position;
+                var toCamera = camera.transform.position - speaker.transform.position;
+                Assert.That(Vector3.Angle(Vector3.ProjectOnPlane(gaze, Vector3.up), Vector3.ProjectOnPlane(toCamera, Vector3.up)),
+                    Is.LessThan(63), "Show the speaking face from the front or three quarters.");
             }
             finally { RenderPipelineManager.beginCameraRendering -= begin; }
             Assert.That(speaker.SkinnedRenderers.Select((renderer, index) => renderer.forceRenderingOff == speakerFlags[index]).All(value => value), Is.True);
         }
 
-        static void AssertActualBodyInDialogue(Camera camera, GospelPilgrimageActor actor)
+        static void AssertSpeakerFace(Camera camera, GospelPilgrimageActor actor)
         {
             var animator = actor.Animator;
-            var points = new[] { animator.GetBoneTransform(HumanBodyBones.Head).position,
-                animator.GetBoneTransform(HumanBodyBones.Hips).position,
-                animator.GetBoneTransform(HumanBodyBones.LeftFoot).position + Vector3.up * .07f,
-                animator.GetBoneTransform(HumanBodyBones.RightFoot).position + Vector3.up * .07f };
+            var head = animator.GetBoneTransform(HumanBodyBones.Head).position;
+            var neck = animator.GetBoneTransform(HumanBodyBones.Neck).position;
+            var points = new[] { head, neck };
+            float projectedFace = Mathf.Abs(camera.WorldToViewportPoint(head + Vector3.up * actor.VisualHeight * .08f).y
+                - camera.WorldToViewportPoint(neck).y);
+            Assert.That(projectedFace, Is.GreaterThan(.12f), "Faces must occupy enough of the dialogue view to read expressions.");
             foreach (Vector3 point in points)
             {
                 Vector3 viewport = camera.WorldToViewportPoint(point);
                 Assert.That(viewport.z, Is.GreaterThan(camera.nearClipPlane + .03f));
                 Assert.That(viewport.x, Is.InRange(.07f, .93f));
-                Assert.That(viewport.y, Is.InRange(.35f, .93f), "Keep actual bodies clear of the dialogue panel and frame edges.");
+                Assert.That(viewport.y, Is.InRange(.35f, .93f), "Keep both real heads clear of the dialogue panel and frame edges.");
             }
         }
 

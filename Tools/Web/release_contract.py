@@ -189,7 +189,17 @@ GOSPEL_VISUAL = {
 }
 
 
+GOSPEL_GALILEE = {
+    **GOSPEL_VISUAL,
+    'name': 'gospel-galilee',
+    'revisions': {**GOSPEL_VISUAL['revisions'], 'PathOfDawn': 'gospel-galilee-cast-2026-11-27'},
+    'reportRoots': {**GOSPEL_VISUAL['reportRoots'], 'PathOfDawn': 'Artifacts/Validation/GalileeCast'},
+}
+
+
 def contract(name):
+    if name == 'gospel-galilee':
+        return GOSPEL_GALILEE
     if name == 'gospel-visual':
         return GOSPEL_VISUAL
     if name == 'sharp-illustration':

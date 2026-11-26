@@ -122,6 +122,18 @@ namespace Firstgame.GospelVisualRebuild.Tests
                 Assert.That(actual.size.y, Is.EqualTo(1.42f).Within(.035f));
                 string root = "Assets/Art/GospelVisualRebuild20261119/" + settings.outputVersion + "/JesusChild/SourceMaterials/";
                 var wornMaterials = skins.SelectMany(s => s.sharedMaterials).ToHashSet();
+                var upper = skins.Single(r => r.name == "JesusChild__ArtistLinenUpper");
+                var mantle = skins.Single(r => r.name == "JesusChild__FoldedWoolMantle");
+                Assert.That(mantle.bones.All(upper.bones.Contains), Is.True, "The wool must follow the performer's existing bones.");
+                Assert.That(mantle.sharedMesh.boneWeights.All(w => Mathf.Abs(w.weight0 + w.weight1 + w.weight2 + w.weight3 - 1) < .002f), Is.True);
+                Assert.That(mantle.sharedMaterial.GetFloat("_Wool"), Is.EqualTo(1));
+                var linen = wornMaterials.Single(m => m.name == "JesusChild__PeriodUndyedLinen");
+                Assert.That(linen.shader, Is.EqualTo(mantle.sharedMaterial.shader));
+                Assert.That(linen.GetColor("_Color").grayscale - mantle.sharedMaterial.GetColor("_Color").grayscale,
+                    Is.GreaterThan(.12f), "The tunic and the folded wool must read as separate layers.");
+                var faceSurface = wornMaterials.Single(m => m.name == "Surface001_Face");
+                Assert.That(faceSurface.GetTexture("_ComplexionMap"), Is.Not.Null);
+                Assert.That(faceSurface.GetFloat("_ComplexionStrength"), Is.GreaterThan(.5f));
                 var periodGarments = new[] { "JesusChild__PeriodUndyedLinen", "JesusChild__PeriodWovenFacing", "JesusChild__PeriodSandalLeather" };
                 foreach (string authored in periodGarments)
                 {

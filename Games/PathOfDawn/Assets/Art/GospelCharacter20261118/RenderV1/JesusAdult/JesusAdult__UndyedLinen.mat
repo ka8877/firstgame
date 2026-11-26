@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JesusAdult__UndyedLinen
-  m_Shader: {fileID: 4800000, guid: cbd74a3231ad5db4a5a105b8a4940de5, type: 3}
+  m_Shader: {fileID: 4800000, guid: ea9add144bdf58289244673db44f3f94, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -254,6 +254,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Wool: 0
+    - _Border: 0
     - _AAStrength: 1
     - _AlphaBoostFA: 10
     - _AlphaMaskMode: 0
@@ -612,6 +614,7 @@ Material:
     - _lilShadowCasterBias: 0
     - _lilToonVersion: 45
     m_Colors:
+    - _ThreadColor: {r: 0.57647, g: 0.4549, b: 0.31373, a: 1}
     - _AudioLinkDefaultValue: {r: 0, g: 0, b: 2, a: 0.75}
     - _AudioLinkLocalMapParams: {r: 120, g: 1, b: 0, a: 0}
     - _AudioLinkMask_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
@@ -623,7 +626,7 @@ Material:
     - _BackfaceColor: {r: 0, g: 0, b: 0, a: 0}
     - _BacklightColor: {r: 0.85, g: 0.8, b: 0.7, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.96, g: 0.92999995, b: 0.8399999, a: 1}
+    - _Color: {r: 0.72941, g: 0.65098, b: 0.52549, a: 1}
     - _Color2nd: {r: 1, g: 1, b: 1, a: 1}
     - _Color3rd: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 1, b: 1, a: 1}
