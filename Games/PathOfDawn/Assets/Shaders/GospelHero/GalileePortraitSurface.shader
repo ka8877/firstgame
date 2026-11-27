@@ -42,18 +42,23 @@ Shader "FirstGame/Galilee/Portrait surface"
             TEXTURE2D(_Relief); SAMPLER(sampler_Relief);
             TEXTURE2D(_GroomPigment); SAMPLER(sampler_GroomPigment);
             CBUFFER_START(UnityPerMaterial)
-            float4 _BaseMap_ST, _Color, _BaseColor;
+            float4 _BaseMap_ST, _GroomPigment_TexelSize, _Color, _BaseColor;
             float _GroomHairline, _StrokeOpacity, _SrcBlend, _DstBlend, _ZWrite;
             float _ReliefStrength, _SurfaceKind, _Cutoff, _Cull, _AlphaClip, _HasGroomPigment;
             CBUFFER_END
             struct Vertex {float4 p:POSITION; float3 n:NORMAL; float4 t:TANGENT; float2 uv:TEXCOORD0; float4 painting:TEXCOORD1;};
             struct Varyings {float4 p:SV_POSITION; float3 world:TEXCOORD0; half3 n:TEXCOORD1;
                 half4 t:TEXCOORD2; float2 uv:TEXCOORD3; half fog:TEXCOORD4; float4 painting:TEXCOORD5;};
+            float3 PortraitDirection(float3 direction)
+            {
+                // Interpolated normals and strand tangents can cancel across the seam of a two-sided hair card.
+                return direction * rsqrt(max(dot(direction, direction), 1e-8));
+            }
             Varyings Vert(Vertex v)
             {
                 Varyings o; VertexPositionInputs p=GetVertexPositionInputs(v.p.xyz);
-                o.p=p.positionCS; o.world=p.positionWS; o.n=TransformObjectToWorldNormal(v.n);
-                o.t=half4(TransformObjectToWorldDir(v.t.xyz),v.t.w*GetOddNegativeScale());
+                o.p=p.positionCS; o.world=p.positionWS; o.n=PortraitDirection(TransformObjectToWorldNormal(v.n,false));
+                o.t=half4(PortraitDirection(TransformObjectToWorldDir(v.t.xyz,false)),v.t.w*GetOddNegativeScale());
                 o.painting=v.painting; o.uv=TRANSFORM_TEX(v.uv,_BaseMap); o.fog=ComputeFogFactor(p.positionCS.z);return o;
             }
             half4 Frag(Varyings i, FRONT_FACE_TYPE front : FRONT_FACE_SEMANTIC):SV_Target
@@ -63,7 +68,17 @@ Shader "FirstGame/Galilee/Portrait surface"
                     if (_HasGroomPigment<.5) clip(surface.a-_Cutoff);
                 #endif
                 if (_HasGroomPigment>.5) {
-                    half4 fiberPaint=SAMPLE_TEXTURE2D(_GroomPigment,sampler_GroomPigment,saturate(i.painting.xy));
+                    // Measure the footprint on the continuous head-space projection. Clamping before
+                    // differentiation collapses it along hair cards at the silhouette.
+                    float2 paintedUV=i.painting.xy, size=_GroomPigment_TexelSize.zw;
+                    float2 dx=ddx(paintedUV)*size, dy=ddy(paintedUV)*size;
+                    float mip=clamp(.5*log2(max(1.,max(dot(dx,dx),dot(dy,dy)))),0.,8.);
+                    float2 inset=.5*_GroomPigment_TexelSize.xy;
+                    float2 uv=clamp(paintedUV,inset,1.-inset);
+                    float4 fiberPaint=SAMPLE_TEXTURE2D_LOD(_GroomPigment,sampler_GroomPigment,uv,mip);
+                    // Only covered, representable pigments may replace the strand's own dyed base.
+                    if (!all(fiberPaint >= 0.) || !all(fiberPaint <= 1.001))
+                        fiberPaint=float4(surface.rgb,0.);
                     surface.rgb=lerp(surface.rgb,fiberPaint.rgb,fiberPaint.a*saturate(i.painting.z));
                     // Retain the volume of the back and let the painted fringe transition into real skin.
                     half faceSide=smoothstep(.15,.83,i.painting.w)*smoothstep(.16,.35,i.painting.y)*_GroomHairline;
@@ -71,26 +86,29 @@ Shader "FirstGame/Galilee/Portrait surface"
                     surface.a*=1.-.94*smoothstep(.70,.93,i.painting.z)*faceSide;
                     clip(surface.a-_Cutoff);
                 }
-                half3 n=SafeNormalize(i.n)*IS_FRONT_VFACE(front,1,-1);
-                half3 t=SafeNormalize(i.t.xyz), b=SafeNormalize(cross(n,t))*i.t.w;
+                float3 n=PortraitDirection(i.n)*IS_FRONT_VFACE(front,1,-1);
+                float3 t=PortraitDirection(i.t.xyz), b=PortraitDirection(cross(n,t))*i.t.w;
                 if (_ReliefStrength>0) {
                     half2 detail=SAMPLE_TEXTURE2D(_Relief,sampler_Relief,i.uv).rg*2-1;
-                    n=SafeNormalize(n+_ReliefStrength*(detail.x*t+detail.y*b));
+                    n=PortraitDirection(n+_ReliefStrength*(detail.x*t+detail.y*b));
                 }
                 Light key=GetMainLight(TransformWorldToShadowCoord(i.world));
-                half3 view=SafeNormalize(GetWorldSpaceViewDir(i.world)), midway=SafeNormalize(view+key.direction);
+                float3 view=PortraitDirection(GetWorldSpaceViewDir(i.world)), midway=PortraitDirection(view+key.direction);
                 half nl=dot(n,key.direction), nv=saturate(dot(n,view));
+                float rim=saturate(1.-nv); rim=rim*rim*rim;
                 half wrap=saturate((nl+.35)/1.35), shadow=lerp(.57,1.,key.shadowAttenuation);
                 half3 fill=.37+min(.29,max(0.,SampleSH(n))*.43);
                 half3 light=fill+.66*wrap*shadow*lerp(half3(1,1,1),min(key.color,1.65),.43);
                 half3 rgb=surface.rgb*light;
                 if (_SurfaceKind < .5) {
-                    half grazing=pow(1.-nv,3.);
+                    half grazing=rim;
                     rgb+=surface.rgb*half3(.15,.052,.027)*(1.-wrap)*(.55+.45*grazing);
                     rgb+=half3(.075,.058,.045)*pow(saturate(dot(n,midway)),32.)*shadow;
                 } else if (_SurfaceKind < 1.5) {
-                    half sheen=pow(saturate(1.-abs(dot(b,midway))),11.)*saturate(nl*.65+.35);
-                    rgb+=surface.rgb*(.20*sheen+.11*pow(1.-nv,3.));
+                    float strand=saturate(1.-abs(dot(b,midway)));
+                    float strand2=strand*strand, strand4=strand2*strand2;
+                    half sheen=strand4*strand4*strand2*strand*saturate(nl*.65+.35);
+                    rgb+=surface.rgb*(.20*sheen+.11*rim);
                 } else if (_SurfaceKind < 2.5) {
                     half glint=pow(saturate(dot(n,midway)),96.);
                     half sclera=smoothstep(.23,.63,min(surface.r,min(surface.g,surface.b)));

@@ -13,6 +13,7 @@ namespace PathOfDawn.Presentation
     [DefaultExecutionOrder(110)]
     public sealed class GospelNprOpeningStage : MonoBehaviour
     {
+        const string VillageArt = "Art/GalileeAtelier/";
         const string ArtPrefix = "Art/GospelStorybook/";
         readonly Dictionary<string, Transform> sets = new Dictionary<string, Transform>(StringComparer.Ordinal);
         readonly Dictionary<string, GospelNprCharacterView> models = new Dictionary<string, GospelNprCharacterView>(StringComparer.Ordinal);
@@ -23,7 +24,7 @@ namespace PathOfDawn.Presentation
         Camera cameraView;
         GospelPilgrimageCamera exploration;
         GameObject travelerVisual;
-        Material plaster, stone, timber, linen, blue, earth, brass;
+        Material plaster, stone, timber, linen, blue, earth, brass, masonry, tapestry, vista;
         Vector3 savedCameraPosition;
         Quaternion savedCameraRotation, savedSunRotation;
         float savedFov, savedFar;
@@ -150,8 +151,18 @@ namespace PathOfDawn.Presentation
             earth = Mat("Opening warm earth", new Color(.62f, .56f, .40f));
             brass = Mat("Opening aged brass", new Color(.58f, .44f, .22f), .28f);
             RetainedSurface(plaster, "Art/Gospel3D/TempleMaterials/limestone-albedo", null, .10f);
-            RetainedSurface(stone, "Art/Gospel3D/TempleMaterials/paving-albedo", "Art/Gospel3D/TempleMaterials/paving-normal", .18f);
             RetainedSurface(timber, "Art/GospelWell/cedar-albedo", null, 0);
+            masonry = Mat("Village sandstone walls", new Color(.96f, .91f, .80f));
+            RetainedSurface(masonry, VillageArt + "GateMasonry-albedo", VillageArt + "GateMasonry-normal", .36f);
+            RetainedSurface(stone, VillageArt + "VillageFlagstone-albedo", VillageArt + "VillageFlagstone-normal", .40f);
+            RetainedSurface(earth, VillageArt + "stony_dirt_path-diffuse", VillageArt + "stony_dirt_path-normal", .28f);
+            tapestry = Mat("Linen dyed with madder and indigo", Color.white);
+            RetainedSurface(tapestry, VillageArt + "Household-weave", null, 0);
+            var horizonMaterial = Resources.Load<Material>(VillageArt + "Terraces");
+            if (!horizonMaterial) throw new InvalidOperationException("Missing Galilean terrace panorama");
+            vista = new Material(horizonMaterial);
+            materials.Add(vista);
+            DistantValley();
             actors = Node("Opening model-only performers", content);
             AddModel("mary", "Mary"); AddModel("joseph", "Joseph"); AddModel("teacher", "Teacher");
             content.gameObject.SetActive(false);
@@ -198,22 +209,7 @@ namespace PathOfDawn.Presentation
             bool outdoor = key == "road" || key == "hillside" || key == "silent-village";
             if (outdoor)
             {
-                House(root, new Vector3(-5.4f, 0, -5.5f), 22, key == "silent-village");
-                House(root, new Vector3(5.5f, 0, -7.3f), -18, false);
-                Scenery("PalmTree_1", root, new Vector3(-4.5f, 0, 1.2f), 4.6f, 25);
-                Scenery("PalmTree_2", root, new Vector3(5.6f, 0, -2.1f), 4.1f, -30);
-                if (key == "hillside")
-                {
-                    Scenery("NormalTree_1", root, new Vector3(-6, 0, -4), 5.5f, 50);
-                    Scenery("NormalTree_2", root, new Vector3(6, 0, -5), 5, -20);
-                    Box(root, "Shepherd resting stone", new Vector3(-1.4f, .24f, -.3f), new Vector3(1.2f, .48f, .7f), stone, 12);
-                }
-                for (int i = 0; i < 16; i++)
-                {
-                    float side = i % 2 == 0 ? -1 : 1;
-                    Scenery(i % 3 == 0 ? "Bush" : "Grass_Small", root,
-                        new Vector3(side * (2.1f + i % 4 * .65f), 0, -5 + i * .62f), i % 3 == 0 ? .65f : .25f, i * 39);
-                }
+                VillageApproach(root, key);
             }
             else if (key == "temple")
             {
@@ -227,18 +223,21 @@ namespace PathOfDawn.Presentation
                 for (int x = -2; x <= 2; x++)
                     for (int z = -1; z <= 2; z++)
                         SizedScenery("Floor_Standard", root, new Vector3(x * 1.8f, -.04f, z * 1.8f), new Vector3(1.78f, .10f, 1.78f));
+                Scenery("PottersJar", root, new Vector3(-3.35f, .04f, -.5f), .68f, 26);
+                DrapedLinen(root, new Vector3(3.02f, 3.30f, -2.74f), 1.35f, 2.44f);
                 Box(root, "Temple stone seat", new Vector3(2.2f, .38f, -.7f), new Vector3(1.6f, .76f, .62f), stone);
             }
             else
             {
                 bool stable = key == "stable";
                 RoomRearWall(root);
+                DressRoom(root, key);
                 Box(root, "Open room left return", new Vector3(-4.1f, 1.55f, -.3f), new Vector3(.32f, 3.1f, 5.1f), plaster);
                 Box(root, "Low side wall", new Vector3(4.1f, .55f, -.3f), new Vector3(.32f, 1.1f, 5.1f), plaster);
                 Scenery("Arch_Round", root, new Vector3(2.45f, 0, -2.45f), 2.8f);
                 for (int i = 0; i < 5; i++)
                     Box(root, "Exposed cedar ceiling beam", new Vector3(-3.7f + i * 1.85f, 3.05f, -.15f), new Vector3(.18f, .19f, 5.2f), timber);
-                Box(root, "Linen rug", new Vector3(-.15f, .045f, .25f), new Vector3(3.4f, .025f, 2.25f), stable ? earth : blue);
+                Box(root, "Linen rug", new Vector3(-.15f, .045f, .25f), new Vector3(3.4f, .025f, 2.25f), stable ? linen : tapestry);
                 Box(root, "Cedar bench", new Vector3(-2.4f, .48f, -.65f), new Vector3(1.4f, .12f, .55f), timber);
                 for (int i = 0; i < 4; i++)
                     Box(root, "Bench joinery", new Vector3(-2.9f + i % 2 * 1.0f, .24f, -.86f + i / 2 * .42f), new Vector3(.09f, .48f, .09f), timber);
@@ -260,11 +259,130 @@ namespace PathOfDawn.Presentation
                 }
                 if (key == "magi-house")
                     for (int i = 0; i < 3; i++) Box(root, "Closed gift vessel", new Vector3(1.1f + i * .38f, .16f, .5f), new Vector3(.27f, .30f, .24f), i == 1 ? brass : timber, i * 15);
-                Scenery("PalmTree_2", root, new Vector3(3.8f, 0, -6), 4.4f, 40);
+                Scenery("OliveTree_Galilee", root, new Vector3(3.7f, 0, -6.2f), 4.15f, 55);
+                Scenery("MasticBush", root, new Vector3(1.8f, 0, -5.2f), 1.05f, 148);
             }
             environment.FinishChapter(root);
             root.gameObject.SetActive(false);
             return root;
+        }
+
+        void DistantValley()
+        {
+            // All opening cameras look toward the far side of the same three-dimensional stage.
+            const int strips = 40;
+            var positions = new Vector3[(strips + 1) * 2];
+            var uv = new Vector2[positions.Length];
+            var triangles = new int[strips * 6];
+            for (int i = 0; i <= strips; i++)
+            {
+                float u = i / (float)strips, angle = Mathf.Lerp(-1.35f, 1.35f, u);
+                var basePoint = new Vector3(Mathf.Sin(angle) * 44, -10, -Mathf.Cos(angle) * 44);
+                int k = i * 2;
+                positions[k] = basePoint;
+                positions[k + 1] = basePoint + Vector3.up * 24;
+                uv[k] = new Vector2(u, 0); uv[k + 1] = new Vector2(u, 1);
+                if (i == strips) continue;
+                int t = i * 6;
+                triangles[t] = k; triangles[t + 1] = k + 1; triangles[t + 2] = k + 2;
+                triangles[t + 3] = k + 2; triangles[t + 4] = k + 1; triangles[t + 5] = k + 3;
+            }
+            var mesh = new Mesh { name = "Terraced hills beyond the opening", vertices = positions, uv = uv, triangles = triangles };
+            mesh.RecalculateBounds(); meshes.Add(mesh);
+            var ridge = Node(mesh.name, content);
+            ridge.gameObject.AddComponent<MeshFilter>().sharedMesh = mesh;
+            var renderer = ridge.gameObject.AddComponent<MeshRenderer>();
+            renderer.sharedMaterial = vista;
+            renderer.shadowCastingMode = ShadowCastingMode.Off; renderer.receiveShadows = false;
+        }
+
+        void VillageApproach(Transform root, string key)
+        {
+            bool street = key == "silent-village";
+            if (street)
+            {
+                House(root, new Vector3(-5.2f, 0, -5.8f), 24, true);
+                House(root, new Vector3(5.5f, 0, -8.6f), -16, false);
+                House(root, new Vector3(1.5f, .1f, -16.1f), -18, true);
+                House(root, new Vector3(-2.4f, .2f, -18.3f), 9, false);
+                Scenery("MarketBasket", root, new Vector3(-3.23f, .02f, -3.1f), .42f, 23);
+                Scenery("PottersJar", root, new Vector3(3.7f, .02f, -4.2f), .67f, 73);
+            }
+            else if (key == "road")
+            {
+                House(root, new Vector3(-5.0f, .1f, -12.4f), 33, false);
+                House(root, new Vector3(4.4f, .15f, -17.2f), -14, true);
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                float side = i % 2 == 0 ? -1 : 1;
+                float z = 2.2f - i * 2.85f;
+                Scenery("OliveTree_Galilee", root, new Vector3(side * (4.8f + i % 3 * .93f), .12f, z),
+                    3.3f + (i % 4) * .53f, 63 * i);
+                Scenery("MasticBush", root, new Vector3(side * (3.55f + i % 2), .08f, z - .85f),
+                    .69f + .13f * (i % 3), 81 * i);
+            }
+            for (int i = 0; i < 11; i++)
+            {
+                float z = -1.2f - i * 1.08f;
+                float x = -3.13f - .75f * Mathf.Sin(i * .33f) + z * .079f;
+                Scenery("TerraceStone", root, new Vector3(x, .015f, z), .37f + (i % 3) * .095f, i * 51);
+            }
+            if (!street)
+                Scenery("TerraceStone", root, new Vector3(-1.65f, 0, -1.15f), .55f, 52);
+        }
+
+        void DressRoom(Transform root, string key)
+        {
+            bool stable = key == "stable", workshop = key == "workshop";
+            if (!stable)
+            {
+                float width = workshop ? .85f : 1.52f;
+                DrapedLinen(root, new Vector3(-1.29f, 2.72f, -2.37f), width, workshop ? 1.34f : 1.95f);
+                Box(root, "Linen hanging rail", new Vector3(-1.29f, 2.75f, -2.39f),
+                    new Vector3(width + .17f, .056f, .08f), timber);
+            }
+            Box(root, "Potter's cedar shelf", new Vector3(.59f, 1.15f, -2.33f), new Vector3(1.44f, .10f, .45f), timber);
+            for (int i = 0; i < 2; i++)
+            {
+                Box(root, "Shelf bracket", new Vector3(.13f + i * .89f, 1.01f, -2.39f), new Vector3(.10f, .24f, .29f), timber);
+                Scenery("PottersJar", root, new Vector3(.14f + i * .46f, 1.21f, -2.29f), .35f - i * .11f, i * 27);
+            }
+            Scenery("MarketBasket", root, new Vector3(-1.70f, .07f, -.95f), .48f, -24);
+            Scenery("PottersJar", root, new Vector3(-2.30f, .04f, -1.61f), .71f, 107);
+            if (!stable && !workshop)
+            {
+                Scenery("MarketBasket", root, new Vector3(.62f, .05f, -1.73f), .38f, 38);
+                for (int i = 0; i < 4; i++)
+                    Scenery("MarketPomegranate", root, new Vector3(.52f + (i % 2) * .112f, .355f, -1.68f - (i / 2) * .11f), .118f, i * 67);
+            }
+        }
+
+        void DrapedLinen(Transform root, Vector3 top, float width, float length)
+        {
+            const int across = 23, down = 16;
+            var points = new Vector3[(across + 1) * (down + 1)];
+            var uv = new Vector2[points.Length];
+            var triangles = new int[across * down * 6];
+            for (int y = 0; y <= down; y++)
+                for (int x = 0; x <= across; x++)
+                {
+                    float u = x / (float)across, v = y / (float)down;
+                    float fold = Mathf.Sin(u * 29.5f + .8f * v) * (.039f + .033f * v);
+                    int j = y * (across + 1) + x;
+                    points[j] = new Vector3((u - .5f) * width + .018f * Mathf.Sin(v * 4 + u * 8),
+                        -v * length - .044f * Mathf.Sin(Mathf.PI * u) + .016f * v * Mathf.Cos(u * 27), fold + .02f * v * v);
+                    uv[j] = new Vector2(u, 1 - v);
+                    if (x == across || y == down) continue;
+                    int t = (y * across + x) * 6, nextRow = j + across + 1;
+                    triangles[t] = j; triangles[t + 1] = nextRow; triangles[t + 2] = j + 1;
+                    triangles[t + 3] = j + 1; triangles[t + 4] = nextRow; triangles[t + 5] = nextRow + 1;
+                }
+            var mesh = new Mesh { name = "Linen on a hanging rod", vertices = points, uv = uv, triangles = triangles };
+            mesh.RecalculateNormals(); mesh.RecalculateTangents(); mesh.RecalculateBounds(); meshes.Add(mesh);
+            var cloth = Node(mesh.name, root); cloth.localPosition = top;
+            cloth.gameObject.AddComponent<MeshFilter>().sharedMesh = mesh;
+            cloth.gameObject.AddComponent<MeshRenderer>().sharedMaterial = tapestry;
         }
 
         void PlaceModels(string key, GospelChronicle story)
@@ -329,11 +447,11 @@ namespace PathOfDawn.Presentation
                 || key == "stable" && story.CurrentQuest.Id != "birth-name-jesus"
                 || key == "road" && story.CurrentQuest.Id == "birth-nazareth-growth"
                     && story.DialogueIndex == 0 && story.StoryDetailIndex == 1;
+            vista.SetColor("_Tint", night ? new Color(.22f, .29f, .46f) : Color.white);
             cameraView.clearFlags = night ? CameraClearFlags.SolidColor : savedClear;
             cameraView.backgroundColor = night ? new Color(.045f, .068f, .12f) : savedBackground;
             if (!night) return;
-            // Camera-only sky and a reversible grade of the same real sun. No
-            // sky image, permanent world-light mutation or extra post-FX stack.
+            // Grade the sky, distant hills and the same scene sun together.
             RenderSettings.ambientMode = AmbientMode.Flat;
             RenderSettings.ambientLight = new Color(.22f, .26f, .34f);
             if (observedSun != null)
@@ -376,7 +494,7 @@ namespace PathOfDawn.Presentation
                 float px = (x - count * .5f) * 1.4f, pz = (z - count * .5f) * 1.4f;
                 float edge = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(2.5f, 10, Mathf.Max(Mathf.Abs(px), Mathf.Abs(pz))));
                 vertices[i] = new Vector3(px, edge * (.18f + Mathf.Sin(px * .53f) * Mathf.Cos(pz * .47f) * .18f), pz);
-                uv[i] = new Vector2(px, pz) * .38f;
+                uv[i] = new Vector2(px, pz) * .49f;
             }
             int cursor = 0;
             for (int z = 0; z < count; z++) for (int x = 0; x < count; x++)
@@ -407,10 +525,18 @@ namespace PathOfDawn.Presentation
         void House(Transform root, Vector3 foot, float yaw, bool shuttered)
         {
             var house = Node("Distant stone house", root); house.localPosition = foot; house.localRotation = Quaternion.Euler(0, yaw, 0);
-            Box(house, "Lime plaster volume", new Vector3(0, 1.2f, 0), new Vector3(3.2f, 2.4f, 2.7f), plaster);
+            Box(house, "Lime plaster volume", new Vector3(0, 1.2f, 0), new Vector3(3.2f, 2.4f, 2.7f), masonry);
             Box(house, "Flat timber roof", new Vector3(0, 2.46f, 0), new Vector3(3.5f, .16f, 3), timber);
             Box(house, "Deep doorway", new Vector3(0, .85f, 1.37f), new Vector3(.80f, 1.70f, .045f), shuttered ? timber : earth);
             Scenery("Arch_Round", house, new Vector3(0, 0, 1.41f), 1.95f);
+            Box(house, "Shaded street window", new Vector3(1.01f, 1.44f, 1.36f), new Vector3(.63f, .78f, .09f), timber);
+            for (int i = 0; i < 5; i++)
+                Box(house, "Window slat", new Vector3(.77f + i * .12f, 1.43f, 1.43f), new Vector3(.078f, .71f, .055f), blue);
+            Box(house, "Limestone window sill", new Vector3(1.01f, 1.02f, 1.44f), new Vector3(.79f, .10f, .25f), stone);
+            Box(house, "Earthen roof coping", new Vector3(0, 2.57f, 0), new Vector3(3.41f, .14f, 2.94f), stone);
+            for (int i = 0; i < 5; i++)
+                Box(house, "Exposed roof joist", new Vector3(-1.22f + i * .61f, 2.33f, 1.37f), new Vector3(.13f, .14f, .46f), timber);
+            Scenery("PottersJar", house, new Vector3(-1.12f, .03f, 1.77f), .59f, 18);
             environment.FinishChapter(house);
         }
 
@@ -428,31 +554,7 @@ namespace PathOfDawn.Presentation
 
         void Jar(Transform root, Vector3 foot, float radius, float height)
         {
-            const int rings = 9, sides = 24;
-            var vertices = new Vector3[(rings + 1) * sides]; var triangles = new int[rings * sides * 6];
-            for (int ring = 0; ring <= rings; ring++)
-            {
-                float t = ring / (float)rings;
-                float shape = .44f + Mathf.Sin(t * Mathf.PI) * .54f;
-                if (t > .78f) shape = Mathf.Lerp(.70f, .46f, (t - .78f) / .22f);
-                for (int side = 0; side < sides; side++)
-                {
-                    float angle = side * Mathf.PI * 2 / sides;
-                    vertices[ring * sides + side] = new Vector3(Mathf.Cos(angle) * radius * shape, height * t, Mathf.Sin(angle) * radius * shape);
-                }
-            }
-            int cursor = 0;
-            for (int ring = 0; ring < rings; ring++) for (int side = 0; side < sides; side++)
-            {
-                int next = (side + 1) % sides, a = ring * sides + side, b = ring * sides + next;
-                triangles[cursor++] = a; triangles[cursor++] = a + sides; triangles[cursor++] = b;
-                triangles[cursor++] = b; triangles[cursor++] = a + sides; triangles[cursor++] = b + sides;
-            }
-            var mesh = new Mesh { name = "Opening pottery profile", vertices = vertices, triangles = triangles };
-            mesh.RecalculateNormals(); mesh.RecalculateBounds(); meshes.Add(mesh);
-            var jar = Node("Wheel-formed pottery", root); jar.localPosition = foot;
-            jar.gameObject.AddComponent<MeshFilter>().sharedMesh = mesh;
-            jar.gameObject.AddComponent<MeshRenderer>().sharedMaterial = earth;
+            SizedScenery("PottersJar", root, foot, new Vector3(radius * 2, height, radius * 2));
         }
 
         void Scenery(string key, Transform root, Vector3 localFoot, float height, float yaw = 0) =>
