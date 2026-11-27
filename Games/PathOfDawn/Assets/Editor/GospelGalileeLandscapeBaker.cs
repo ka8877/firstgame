@@ -33,6 +33,21 @@ public static class GospelGalileeLandscapeBaker
                 importer.filterMode = FilterMode.Trilinear;
                 importer.SaveAndReimport();
             }
+        foreach (string masonry in new[] { "VillageFlagstone", "GateMasonry" })
+        {
+            foreach (string map in new[] { "-albedo.jpg", "-normal.jpg" })
+            {
+                var imp = (TextureImporter)AssetImporter.GetAtPath(Resources + masonry + map);
+                bool normal = map == "-normal.jpg";
+                var type = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
+                if (imp.textureType != type || imp.maxTextureSize != 1024 || imp.anisoLevel != 6)
+                {
+                    imp.textureType = type; imp.sRGBTexture = !normal; imp.maxTextureSize = 1024;
+                    imp.wrapMode = TextureWrapMode.Repeat; imp.filterMode = FilterMode.Trilinear;
+                    imp.anisoLevel = 6; imp.SaveAndReimport();
+                }
+            }
+        }
         var slope = Material(Resources + "Orchard slope.mat", "FirstGame/Galilee/Loom");
         slope.SetTexture("_BaseMap",
                          AssetDatabase.LoadAssetAtPath<Texture2D>(Resources + "aerial_grass_rock-diffuse.jpg"));
@@ -128,15 +143,61 @@ public static class GospelGalileeLandscapeBaker
         else
             EditorUtility.SetDirty(bush);
         Model("MasticBush", bush, bark, foliage);
+        foreach (string item in new[] { "MarketBasket", "PottersJar", "TerraceStone", "MarketPomegranate" })
+            ScannedProp(source, item);
         AssetDatabase.SaveAssets();
     }
-    static void Model(string name, Mesh mesh, Material bark, Material leaves)
+
+    static void ScannedProp(string input, string name)
+    {
+        using var file = new BinaryReader(File.OpenRead(Path.Combine(input, name + ".scan")));
+        if (System.Text.Encoding.ASCII.GetString(file.ReadBytes(4)) != "GS01")
+            throw new InvalidDataException(name);
+        int count = file.ReadInt32(), indices = file.ReadInt32();
+        var vertices = new Vector3[count];
+        var normals = new Vector3[count];
+        var uv = new Vector2[count];
+        for (int i = 0; i < count; i++)
+        {
+            vertices[i] = Vec(file); normals[i] = Vec(file);
+            uv[i] = new Vector2(file.ReadSingle(), file.ReadSingle());
+        }
+        var triangles = Indices(file, indices);
+        if (file.BaseStream.Position != file.BaseStream.Length) throw new InvalidDataException(name);
+        string path = Art + name + ".asset";
+        var mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+        bool fresh = !mesh;
+        if (fresh) mesh = new Mesh(); else mesh.Clear(false);
+        mesh.name = name; mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uv;
+        mesh.triangles = triangles; mesh.RecalculateTangents(); mesh.RecalculateBounds();
+        if (fresh) AssetDatabase.CreateAsset(mesh, path); else EditorUtility.SetDirty(mesh);
+        var mat = Material(Art + name + ".mat", "Universal Render Pipeline/Lit");
+        var diffuse = Texture(name + "-color.jpg", 512, false);
+        string normalPath = Art + name + "-normal.jpg";
+        var normalImporter = (TextureImporter)AssetImporter.GetAtPath(normalPath);
+        if (normalImporter.textureType != TextureImporterType.NormalMap || normalImporter.maxTextureSize != 512)
+        {
+            normalImporter.textureType = TextureImporterType.NormalMap;
+            normalImporter.sRGBTexture = false; normalImporter.maxTextureSize = 512;
+            normalImporter.wrapMode = TextureWrapMode.Clamp; normalImporter.SaveAndReimport();
+        }
+        mat.SetTexture("_BaseMap", diffuse);
+        mat.SetColor("_BaseColor", Color.white);
+        mat.SetTexture("_BumpMap", AssetDatabase.LoadAssetAtPath<Texture2D>(normalPath));
+        mat.SetFloat("_BumpScale", name == "MarketBasket" ? .90f : .63f);
+        mat.SetFloat("_Smoothness", name == "MarketPomegranate" ? .30f : name == "PottersJar" ? .19f : .09f);
+        mat.EnableKeyword("_NORMALMAP");
+        mat.enableInstancing = true;
+        EditorUtility.SetDirty(mat);
+        Model(name, mesh, mat);
+    }
+    static void Model(string name, Mesh mesh, params Material[] materials)
     {
         var tree = new GameObject(name);
         try
         {
             tree.AddComponent<MeshFilter>().sharedMesh = mesh;
-            tree.AddComponent<MeshRenderer>().sharedMaterials = new[] { bark, leaves };
+            tree.AddComponent<MeshRenderer>().sharedMaterials = materials;
             PrefabUtility.SaveAsPrefabAsset(tree, "Assets/Resources/Art/GospelNpr/Environment/" + name + ".prefab");
         }
         finally

@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GroomPigment:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Relief:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -36,8 +40,14 @@ Material:
     - _AlphaClip: 0
     - _Cull: 2
     - _Cutoff: 0.25
+    - _DstBlend: 0
+    - _GroomHairline: 0
+    - _HasGroomPigment: 0
     - _ReliefStrength: 0
+    - _SrcBlend: 1
+    - _StrokeOpacity: 1
     - _SurfaceKind: 3
+    - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.77, g: 0.7, b: 0.62, a: 1}

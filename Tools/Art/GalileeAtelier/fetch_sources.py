@@ -1,4 +1,4 @@
-"""Read only pinned members of the CC0 art packs into the external art workspace."""
+"""Read only pinned members of the credited art packs into the external art workspace."""
 
 import hashlib
 import io
@@ -52,7 +52,7 @@ class RemoteZip(io.RawIOBase):
                 "Content-Range", ""
             ).startswith("bytes " + span + "/"):
                 raise OSError(
-                    "The CC0 distribution did not return the requested byte range"
+                    "The asset distribution did not return the requested byte range"
                 )
             data = response.read()
         if len(data) != end - self.offset:

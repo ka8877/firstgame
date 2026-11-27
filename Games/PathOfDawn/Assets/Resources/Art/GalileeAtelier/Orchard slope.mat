@@ -27,10 +27,22 @@ Material:
         m_Texture: {fileID: 2800000, guid: 93bb11b69ec47b1fa873cd4999515ed2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextileGrain:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextileNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _GrainStrength: 0
     - _Lining: 0
+    - _Metal: 0
     - _Sheen: 0.02
+    - _ThreadCount: 1
+    - _YarnStrength: 0
     m_Colors:
     - _Color: {r: 0.98, g: 0.97, b: 0.83, a: 1}
     - _Undyed: {r: 1, g: 1, b: 1, a: 1}

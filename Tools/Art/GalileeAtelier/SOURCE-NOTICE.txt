@@ -1,14 +1,32 @@
-The Way of Jesus · principal cast and Galilean countryside
+The Way of Jesus · principal characters and the Galilean village
 
-Human anatomy, topology and expression targets use MakeHuman HM08 and MPFB2 art assets, distributed under CC0. The original face profiles, fitted animation weights, beard grooming, iris treatment, woven clothing, leather accessories, olive tree and mastic shrub were made for this game.
+Five original, AI-assisted portrait paintings were made for the boy Jesus, Mary, Joseph, the adult Jesus and the teacher. Their painted features are fitted to expressive 3D faces and to the in-game dialogue illustrations. The grooms, irises, garment dyes, embroidered bands, travelling mantles, leather accessories, olive grove, village layout and distant panorama were created or adapted for the game.
 
-The boy's layered hair is based on Hair 05 by culturalibre, originally by swift502. Mary's skin is based on Midtoned Female by CallHarvey3D. The adult Jesus skin is based on Light Skin Male Bronze by Toigo. Other selected skin, hair, eyelashes, brows, eye geometry and facial targets are from the MakeHuman CC0 asset packs. The head textures contain the facial and neck UV islands used by the game.
+Human anatomy, topology, rig weights and expression targets use MakeHuman HM08 and MPFB2 art, CC0. The boy's layered hair uses Hair 05 by culturalibre, originally by swift502. Mary's underlying skin uses Midtoned Female by CallHarvey3D. The adult Jesus skin uses Light Skin Male Bronze by Toigo. The head and exposed-limb maps contain the islands used by the game.
 https://www.makehumancommunity.org/about/license.html
 https://static.makehumancommunity.org/assets/assetpacks.html
 
-Aerial Grass Rock and Stony Dirt Path are photographic surface scans from Poly Haven, CC0. Their original diffuse and OpenGL normal files are preserved. The distant Galilean panorama is an original AI-assisted illustration. The terraced slopes, walkable ground, village and foreground vegetation render as geometry in Unity.
+The short tunic derives from WDG's Mycenaean Tunic. The carpenter's tunic derives from Rehman Polanski's Viking Tunic. The long garments use Donitz's Monk's Robe. The published CC0 clothing packs supply the cuts. The fitted garments use new proportions, sleeves, length, colors and decoration.
+https://static.makehumancommunity.org/assets/assetpacks/dress01.html
+https://static.makehumancommunity.org/assets/assetpacks/suits02.html
+
+Caesar Sandals 1 by Elvaerwyn is used under Creative Commons Attribution (CC BY). The original sandal meshes were shortened to the ankle, simplified, reweighted and given new leather materials for the game.
+https://www.makehumancommunity.org/node/1915
+https://static.makehumancommunity.org/assets/assetpacks/shoes02.html
+
+Poly Haven supplied CC0 photographic scans for the basket, ceramic vessel, pomegranate, boulders, linen, leather, courtyard flagstones, sandstone masonry and surrounding ground. The market meshes are simplified and the surface colors are adapted to the village palette.
+https://polyhaven.com/a/wicker_basket_01
+https://polyhaven.com/a/antique_ceramic_vase_01
+https://polyhaven.com/a/food_pomegranate_01
+https://polyhaven.com/a/namaqualand_boulder_03
+https://polyhaven.com/a/rough_linen
+https://polyhaven.com/a/brown_leather
+https://polyhaven.com/a/monastery_stone_floor
+https://polyhaven.com/a/white_sandstone_blocks_02
 https://polyhaven.com/a/aerial_grass_rock
 https://polyhaven.com/a/stony_dirt_path
 https://polyhaven.com/license
 
-The source manifest pins each consumed upstream asset and its SHA-256. The shipped Unity project contains the ready-to-render meshes and materials. Optional Python art exporters use NumPy, SciPy and Pillow. Set FIRSTGAME_ATELIER_INPUT to an external work directory. Run fetch_sources.py, heads.py, loom.py and olive.py. The Unity Editor methods GospelSculptedCastBaker.Bake, GospelPrincipalCostumes.Bake and GospelGalileeLandscapeBaker.Bake install the results in that order.
+The Unity project contains the ready-to-render meshes, textures, portraits and materials. To rebake the fitted cast and village geometry, extract Tools/Art/GalileeAtelier/fitted-cast.zip to an external directory and set FIRSTGAME_ATELIER_INPUT to that directory. In the Unity Editor invoke GospelSculptedCastBaker.Bake, GospelPrincipalCostumes.Bake and GospelGalileeLandscapeBaker.Bake in that order. All three Editor classes are in FirstGame.Editor. source-manifest.json records SHA-256 hashes and source URLs.
+
+For clothing pattern edits, run fetch_sources.py against the same directory and run couture.py with NumPy, SciPy and Pillow. The exporter uses the saved character bind landmarks and relaxed poses and writes editable fabric maps under working-textures. The prepared archive retains the final geometry inputs and original portrait plates. Rebaking uses the finished textures in the Unity project.

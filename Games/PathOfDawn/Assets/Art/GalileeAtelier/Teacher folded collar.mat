@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teacher folded collar
+  m_Shader: {fileID: 4800000, guid: 5df58b867aaa864fca2faf3f8e3c34af, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 24f97d13cb9cfb528ac9366ce226b75c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextileGrain:
+        m_Texture: {fileID: 2800000, guid: 4d6d5fc7bfb583010afc6e92195dc93d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextileNormal:
+        m_Texture: {fileID: 2800000, guid: 04afd01091e9833d190dcbcca44a9b9f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _GrainStrength: 0.28
+    - _Lining: 0
+    - _Metal: 0
+    - _Sheen: 0.17
+    - _ThreadCount: 2.4
+    - _YarnStrength: 0.55
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Undyed: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -50,6 +50,9 @@ namespace PathOfDawn.Presentation
         readonly List<FaceBinding> portraitRelaxed = new List<FaceBinding>(), portraitConcerned = new List<FaceBinding>(), portraitJoyful = new List<FaceBinding>();
         Vector3 velocity;
         bool onGround = true, hasMotionSample, speaking, portraitVisible;
+        SkinnedMeshRenderer travellingMantle;
+        int leftHem, rightHem;
+        float hemPhase, hemTravel;
         float desiredYaw = 180, nextBlink, blinkStart = -100;
         float speechStarted, speechBlend, faceClock, relaxedWeight, concernWeight, joyWeight;
         string activeStoryExpressionKey;
@@ -176,6 +179,10 @@ namespace PathOfDawn.Presentation
             if (Head == null || RightHand == null)
                 Fail("NPR humanoid is missing its head or right hand: " + ModelResource);
             renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            travellingMantle = Array.Find(renderers, r => r.name.EndsWith("__TravelCostume", StringComparison.Ordinal));
+            leftHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("MantleStepLeft") : -1;
+            rightHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("MantleStepRight") : -1;
+            hemPhase = hemTravel = 0;
             if (renderers.Length == 0) Fail("NPR model has no SkinnedMeshRenderer: " + ModelResource);
             var bones = new List<Transform>(); var seen = new HashSet<Transform>();
             foreach (var renderer in renderers)
@@ -302,6 +309,15 @@ namespace PathOfDawn.Presentation
             Animator.SetFloat(VerticalSpeedId, onGround ? 0 : velocity.y);
             if (visualRoot != null)
                 visualRoot.rotation = Quaternion.RotateTowards(visualRoot.rotation, Quaternion.Euler(0, desiredYaw, 0), 720 * dt);
+            if (leftHem >= 0 && rightHem >= 0)
+            {
+                hemTravel = Mathf.Lerp(hemTravel, Mathf.Clamp01(speed / 4.3f), 1 - Mathf.Exp(-5.2f * dt));
+                hemPhase = Mathf.Repeat(hemPhase + dt * (1.38f + 2.72f * speed), 2 * Mathf.PI);
+                float swing = Mathf.Sin(hemPhase);
+                float rest = 2.6f + 1.8f * Mathf.Sin(Time.time * 1.4f);
+                travellingMantle.SetBlendShapeWeight(leftHem, rest + 92 * hemTravel * Mathf.Max(0, -swing));
+                travellingMantle.SetBlendShapeWeight(rightHem, rest + 92 * hemTravel * Mathf.Max(0, swing));
+            }
             TickFace();
             if (HasVisiblePortrait && portraitAnimator != null)
             {

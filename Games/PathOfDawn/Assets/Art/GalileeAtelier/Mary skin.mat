@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 5aa9ea7fb5ec3627287ea7fa6df749d5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GroomPigment:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Relief:
         m_Texture: {fileID: 2800000, guid: db893e7890a481746b359571ae1c31c6, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -36,8 +40,14 @@ Material:
     - _AlphaClip: 0
     - _Cull: 2
     - _Cutoff: 0.25
-    - _ReliefStrength: 0.38
+    - _DstBlend: 0
+    - _GroomHairline: 0
+    - _HasGroomPigment: 0
+    - _ReliefStrength: 0.36
+    - _SrcBlend: 1
+    - _StrokeOpacity: 1
     - _SurfaceKind: 0
+    - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

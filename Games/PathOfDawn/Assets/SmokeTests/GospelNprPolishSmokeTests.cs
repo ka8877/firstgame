@@ -89,6 +89,12 @@ namespace PathOfDawn.SmokeTests
                     Assert.That(face.sharedMesh.GetBlendShapeIndex(pose), Is.GreaterThanOrEqualTo(0), id + " " + pose);
                 Assert.That(face.sharedMaterials[1].mainTexture, Is.Not.Null, id + " iris");
                 Assert.That(clothes.sharedMaterials[0].mainTexture, Is.Not.Null, id + " woven repeat");
+                Assert.That(face.sharedMaterials.Any(material => material.name == id + " crown" && material.mainTexture), Is.True);
+                Assert.That(clothes.sharedMaterials.Any(material => material.name == id + " exposed skin"), Is.True);
+                Assert.That(clothes.sharedMesh.GetBlendShapeIndex("MantleStepLeft"), Is.GreaterThanOrEqualTo(0));
+                Assert.That(clothes.sharedMesh.GetBlendShapeIndex("MantleStepRight"), Is.GreaterThanOrEqualTo(0));
+                Assert.That(clothes.bones.Any(bone => bone.name == "J_Bip_R_Index3"), Is.True);
+                Assert.That(Resources.Load<Texture2D>("Art/GospelIllustrated/Portraits/" + id), Is.Not.Null);
             }
         }
 

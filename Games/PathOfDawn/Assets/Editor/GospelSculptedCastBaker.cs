@@ -97,9 +97,10 @@ public static class GospelSculptedCastBaker
     }
     static Material MaterialFor(string id, string part)
     {
-        bool fiber = part == "hair" || part == "brows" || part == "lashes" || part == "beard";
+        bool fine = part == "brows" || part == "lashes" || part == "wisps";
+        bool fiber = fine || part == "crown" || part == "hair" || part == "beard";
         bool skin = part == "skin", eyes = part == "eyes";
-        string matName = eyes ? "Amber irises" : part == "teeth" ? "Ivory enamel" : id + " " + part;
+        string matName = part == "teeth" ? "Ivory enamel" : id + " " + part;
         string path = Art + matName + ".mat";
         var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
         var shader = Shader.Find("FirstGame/Galilee/Portrait surface");
@@ -115,17 +116,29 @@ public static class GospelSculptedCastBaker
         mat.SetFloat("_SurfaceKind", skin ? 0 : fiber ? 1 : eyes ? 2 : 3);
         mat.SetFloat("_Cull", fiber ? 0 : 2);
         mat.SetFloat("_Cutoff", part == "brows" ? .15f : part == "lashes" ? .18f : .25f);
-        mat.SetFloat("_ReliefStrength", skin ? .38f : 0f);
+        mat.SetFloat("_ReliefStrength", skin ? .36f : 0f);
+        mat.SetFloat("_HasGroomPigment", part == "hair" || part == "wisps" ? 1 : 0);
+        if (part == "hair" || part == "wisps")
+            mat.SetTexture("_GroomPigment", Texture(id + "-groom-color.png", true, true));
         if (skin)
             mat.SetTexture("_Relief", Texture(id + "-relief.jpg", false, false));
         if (part != "teeth")
-            mat.SetTexture("_BaseMap", Texture(eyes ? "brown-eye.png" : id + "-" + part + (skin ? ".jpg" : ".png"),
+            mat.SetTexture("_BaseMap", Texture(eyes ? id + "-iris.jpg" : part == "crown" ? id + "-groom-color.png" : id + "-" + part + (skin ? ".jpg" : ".png"),
                                                true, fiber));
         mat.SetFloat("_AlphaClip", fiber ? 1 : 0);
+        mat.SetFloat("_SrcBlend", fine ? 5 : 1);
+        mat.SetFloat("_DstBlend", fine ? 10 : 0);
+        mat.SetFloat("_ZWrite", fine ? 0 : 1);
+        mat.SetFloat("_StrokeOpacity", part == "lashes" ? .33f : part == "brows" ? .52f : part == "wisps" ? .74f : 1);
+        mat.SetFloat("_GroomHairline", part == "hair" ? 1 : 0);
+        if (fine) mat.SetFloat("_Cutoff", .019f);
+        if (part == "crown") mat.SetFloat("_Cutoff", .19f);
         if (fiber)
         {
             mat.EnableKeyword("_ALPHATEST_ON");
-            mat.renderQueue = 2450;
+            mat.renderQueue = fine ? 2995 : 2450;
+            mat.SetShaderPassEnabled("ShadowCaster", !fine);
+            mat.SetShaderPassEnabled("DepthOnly", !fine);
             mat.SetOverrideTag("RenderType", "TransparentCutout");
         }
         else
@@ -255,6 +268,10 @@ public static class GospelSculptedCastBaker
             mesh.SetVertices(parts.SelectMany(p => p.vertices).ToList());
             mesh.SetNormals(parts.SelectMany(p => p.normals).ToList());
             mesh.SetUVs(0, parts.SelectMany(p => p.uv).ToList());
+            // Bind the painted front to the groom in head space, including its transition into the authored sides.
+            mesh.SetUVs(1, parts.SelectMany(p => p.vertices).Select(v =>
+                new Vector4(.5f - 2420f * v.x / 768f, .57f + 2420f * v.y / 880f,
+                            Mathf.InverseLerp(-.107f, -.021f, v.z), Mathf.InverseLerp(-.18f, -.07f, v.z))).ToList());
             mesh.subMeshCount = parts.Length;
             var weights = new List<BoneWeight>();
             var materials = new List<Material>();
