@@ -145,7 +145,7 @@ def main():
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--source-commit',required=True)
     parser.add_argument('--baseline-public-commit',required=True)
-    parser.add_argument('--profile', choices=('gospel-visual', 'gospel-galilee'), default='gospel-visual')
+    parser.add_argument('--profile', choices=('gospel-visual', 'gospel-galilee', 'gospel-atelier'), default='gospel-visual')
     args=parser.parse_args()
     baseline=read(args.baseline/MANIFEST)
     require(baseline['publishReady'] is True and baseline['gameRevisions']['FantasyCards']==contract(args.profile)['revisions']['FantasyCards'],
@@ -163,6 +163,10 @@ def main():
     replaces={PREFIX+name: path for name,path in files.items()}
     replaces['art/path-of-dawn.png']=hero
     replaces.update({PREFIX+'ThirdParty/'+name:ROOT/relative for name,relative in NOTICE_SOURCES.items()})
+
+    if args.profile == 'gospel-atelier':
+        for name in ('SOURCE-NOTICE.txt', 'source-manifest.json'):
+            replaces[PREFIX+'ThirdParty/GalileeAtelier/'+name] = ROOT/'Tools/Art/GalileeAtelier'/name
 
     stage=args.output.absolute()
     require(stage.resolve()==stage and not stage.exists(),'A fresh regular staging destination is required')

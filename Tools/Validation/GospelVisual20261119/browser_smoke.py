@@ -84,8 +84,7 @@ def do_touch(session, page, origin, dest=None, ms=180):
         session.send('Input.dispatchTouchEvent', {'type':'touchEnd','touchPoints':[]})
 
 
-def distance(page, path, tessdata, touch=False):
-    image=actual_canvas(page,path)
+def read_distance(image, tessdata, touch=False):
     read=visible_text(image,(306,420,655,445),tessdata)
     match=re.search(r'(\d+[.,]\d+)\s*[mM]',read)
     in_reach='대화' in read and '가능' in read
@@ -101,6 +100,15 @@ def distance(page, path, tessdata, touch=False):
     if not match:
         read=visible_text(image,(23,104,167,146),tessdata,11)
         match=re.search(r'(\d+[.,]\d+)\s*[mM]',read)
+    if not match and not touch:
+        # The small field minimap remains readable when the Korean control hint fades.
+        digits = ImageOps.autocontrast(image.crop((49,110,87,127)).convert('L')).resize((190,85),Image.Resampling.LANCZOS)
+        data = BytesIO()
+        digits.save(data,'PNG')
+        text = subprocess.run(['tesseract','stdin','stdout','--tessdata-dir',str(tessdata),'-l','eng','--psm','7',
+                               '-c','tessedit_char_whitelist=0123456789.,mM'], input=data.getvalue(),
+                              capture_output=True,check=True,timeout=15).stdout.decode().strip()
+        match = re.fullmatch(r'(\d{1,2}[.,]\d)\s*[mM]?',text)
     return (float(match[1].replace(',','.')) if match else None), in_reach
 
 
@@ -123,22 +131,46 @@ def play(page, browser, profile, report, tessdata):
             finally:
                 page.keyboard.up('w')
         page.wait_for_timeout(400)
-    def wait_for_joseph(name):
-        last_text=''
-        pixels=None
-        deadline=monotonic()+100
-        while monotonic()<deadline:
-            pixels=page.screenshot(timeout=52000)
-            frame=actual_canvas(page,BytesIO(pixels))
-            last_text=visible_text(frame,(182,362,867,435),tessdata,11)
-            words=re.sub(r'\s+','',last_text)
-            if '예루살렘' in words or ('요셉' in words and any(word in words for word in ('함께','유월절','채비'))):
-                screenshot(page,report,name,pixels)
-                return last_text
-            page.wait_for_timeout(650)
+    def wait_for_frame(name, read_state):
+        deadline = monotonic() + 90
+        pixels, observed = None, None
+        while monotonic() < deadline:
+            pixels = page.screenshot(timeout=52000)
+            frame = actual_canvas(page, BytesIO(pixels))
+            matches, observed = read_state(frame)
+            if matches:
+                screenshot(page, report, name, pixels)
+                return observed
+            page.wait_for_timeout(450)
         if pixels is not None:
-            screenshot(page,report,name+'-last-visible',pixels)
-        raise AssertionError(f'{name} never showed the resumed Joseph dialogue: {last_text!r}')
+            screenshot(page, report, name + '-last-visible', pixels)
+        raise AssertionError(f'{name} never became visible: {observed!r}')
+
+    def child_chapter(frame):
+        title = visible_text(frame, (41,145,530,221), tessdata, 11)
+        subtitle = visible_text(frame, (45,285,397,327), tessdata, 11)
+        action = visible_text(frame, (68,424,317,472), tessdata)
+        named = any(word in title + subtitle for word in ('소년','유월절'))
+        enter = '이야기속으로' in re.sub(r'\s+', '', action)
+        return named or (enter and any(word in subtitle for word in ('예루살렘','열두 살'))), {
+            'title': title, 'subtitle': subtitle, 'action': action}
+
+    def opening_field(frame):
+        metres, reach = read_distance(frame, tessdata, touch)
+        return metres is not None and 3.5 <= metres <= 5.5, (metres, reach)
+
+    def joseph_dialogue(frame):
+        text = visible_text(frame, (182,362,867,435), tessdata, 11)
+        words = re.sub(r'\s+', '', text)
+        matches = '예루살렘' in words or ('요셉' in words and any(word in words for word in ('함께','유월절','채비')))
+        return matches, text
+
+    def scripture_book(frame):
+        heading = visible_text(frame, (0,0,960,220), tessdata, 11)
+        return_action = visible_text(frame, (756,479,914,518), tessdata)
+        book_title = '성경전서' in re.sub(r'\s+', '', heading)
+        has_pages = ('성경' in heading or '말씀' in heading) and '여정' in return_action
+        return book_title or has_pages, (heading, return_action)
 
     screenshot(page,report,'title')
     press((.18086,.71181))
@@ -147,20 +179,16 @@ def play(page, browser, profile, report, tessdata):
         press((.832,.903))
         if number in (9,43,50):
             print(profile,'opening turns',number+1,flush=True)
-    panel=screenshot(page,report,'child-chapter')
-    chapter=visible_text(actual_canvas(page,panel),(43,135,470,223),tessdata,11)
-    assert '소년' in chapter or '유월절' in chapter, chapter
+    report['childChapterText'] = wait_for_frame('child-chapter', child_chapter)
     press((.198,.8292))
-    first=screenshot(page,report,'field')
-    metres,reach=distance(page,first,tessdata,touch)
-    assert metres is not None and 3.5<=metres<=5.5, metres
+    metres, reach = wait_for_frame('field', opening_field)
     report['metresToJoseph']=[metres]
     for index in range(1,8):
         if reach or (metres is not None and metres<=2.15):
             break
         walk()
         frame=screenshot(page,report,f'walk-{index}')
-        metres,reach=distance(page,frame,tessdata,touch)
+        metres,reach=read_distance(actual_canvas(page,frame),tessdata,touch)
         report['metresToJoseph'].append(metres)
         print(profile,'distance',metres,'interaction available',reach,flush=True)
     assert reach or (metres is not None and metres<=2.15), report['metresToJoseph']
@@ -168,19 +196,17 @@ def play(page, browser, profile, report, tessdata):
     else:
         page.keyboard.press('e',delay=160)
         page.wait_for_timeout(350)
-    report['confirmedJosephDialogueText']=wait_for_joseph('joseph-dialogue')
+    report['confirmedJosephDialogueText']=wait_for_frame('joseph-dialogue', joseph_dialogue)
     # Reading the Scripture book and returning to the real encounter exercises the same persistent journey.
     press((.902,.075))
-    scripture=screenshot(page,report,'scripture-book')
-    book_text=visible_text(actual_canvas(page,scripture),(0,0,960,220),tessdata,11)
-    assert '성경' in book_text or '말씀' in book_text, book_text
+    report['scriptureBookText'] = wait_for_frame('scripture-book', scripture_book)
     press((.86,.928))
-    wait_for_joseph('dialogue-return')
+    wait_for_frame('dialogue-return', joseph_dialogue)
     page.wait_for_timeout(1700)
     page.reload(wait_until='domcontentloaded',timeout=35000)
     wait_title(page)
     press((.18086,.82292))
-    report['confirmedAfterReload']=wait_for_joseph('continued-dialogue')
+    report['confirmedAfterReload']=wait_for_frame('continued-dialogue', joseph_dialogue)
     report['normalInput']='touch events' if touch else 'keyboard and mouse'
     if session:
         session.detach()

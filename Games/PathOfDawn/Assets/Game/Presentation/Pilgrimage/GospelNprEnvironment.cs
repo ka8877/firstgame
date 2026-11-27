@@ -12,7 +12,8 @@ namespace PathOfDawn.Presentation
         public const string ResourceRoot = "Art/GospelNpr/Environment/";
         public static readonly IReadOnlyList<string> RequiredModels = Array.AsReadOnly(new[] {
             "NormalTree_1", "NormalTree_2", "PalmTree_1", "PalmTree_2", "Bush", "Grass_Small",
-            "Arch_Round", "Column_Round", "Floor_Standard"
+            "Arch_Round", "Column_Round", "Floor_Standard", "OliveTree_Galilee", "MasticBush",
+            "MarketBasket", "PottersJar", "TerraceStone", "MarketPomegranate"
         });
         readonly Dictionary<string, GameObject> models = new Dictionary<string, GameObject>();
         readonly List<Placement> pending = new List<Placement>();
@@ -141,7 +142,7 @@ namespace PathOfDawn.Presentation
             ModelInstanceCount++;
             SourceRendererCount += renderers.Length;
             if (key.Contains("Tree")) TreeCount++;
-            else if (key == "Bush") ShrubCount++;
+            else if (key == "Bush" || key == "MasticBush") ShrubCount++;
             else if (key == "Grass_Small") GrassCount++;
         }
 

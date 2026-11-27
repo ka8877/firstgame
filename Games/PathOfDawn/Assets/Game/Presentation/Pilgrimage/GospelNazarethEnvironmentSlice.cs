@@ -39,6 +39,7 @@ namespace PathOfDawn.Presentation
         Action<Material> ownMaterial;
         Action<Mesh> ownMesh;
         Material plaster, stone, chalk, paving, mortar, cedar, linen, blueLinen, madder, fadedBlue, rope, roof;
+        Material flagstone, weatheredMasonry;
         bool lightCaptured, lightApplied;
         Light sun;
         Quaternion originalSunRotation;
@@ -93,6 +94,7 @@ namespace PathOfDawn.Presentation
             BuildPavedApproach();
             BuildMarket(new Vector2(-15.5f, 4.0f), 4.0f, 2.3f, -7, linen, false);
             BuildMarket(new Vector2(-5.5f, 4.8f), 3.6f, 2.1f, 7, madder, true);
+            DressDepartureGarden();
             BuildLaundryCourt();
             PlantCourtyardEdges();
             FlushArchitecture();
@@ -135,6 +137,10 @@ namespace PathOfDawn.Presentation
 
         void PrepareSurfaces()
         {
+            flagstone = Surface("worn Galilean limestone flags", Color.white, "Art/GalileeAtelier/VillageFlagstone", .16f, .52f);
+            weatheredMasonry = Surface("weathered gateway masonry", new Color(.97f,.92f,.81f), "Art/GalileeAtelier/GateMasonry", .10f, .52f);
+            flagstone.SetTextureScale("_BaseMap",new Vector2(.76f,.76f));
+            flagstone.SetTextureScale("_BumpMap",new Vector2(.76f,.76f));
             const string temple = "Art/Gospel3D/TempleMaterials/";
             plaster = Surface("lime plaster", new Color(.89f,.85f,.75f), temple + "limestone", .08f, .09f);
             stone = Surface("cut limestone", new Color(.91f,.87f,.76f), temple + "limestone", .10f, .12f);
@@ -232,6 +238,8 @@ namespace PathOfDawn.Presentation
                     if (original.name.StartsWith("NPR", StringComparison.Ordinal) && original.name.IndexOf("Stone",StringComparison.OrdinalIgnoreCase)>=0)
                         replacement = original.name.IndexOf("Black",StringComparison.OrdinalIgnoreCase)>=0 ? mortar
                             : original.name.IndexOf("Highlight",StringComparison.OrdinalIgnoreCase)>=0 ? chalk : stone;
+                    if (replacement != null && (renderer.name.Contains("gateway") || renderer.name.Contains("lower limestone course")
+                        || renderer.name.Contains("carved north boundary"))) replacement = weatheredMasonry;
                     if (replacement != null) { slots[index] = replacement; changed = true; }
                 }
                 if (changed) renderer.sharedMaterials = slots;
@@ -322,7 +330,21 @@ namespace PathOfDawn.Presentation
         void BuildPavedApproach()
         {
             // Thin visual paving follows the existing sampler; no new physical floor or motor height.
-            PavingPatch(new Vector2(-27.8f,-7.0f),7,4,1.26f,false);
+            // One jointed flagstone surface follows the courtyard slope and an uneven, worn boundary.
+            const int nx=18, nz=12;
+            Vector3 Point(int x,int z)
+            {
+                float u=x/(float)nx, v=z/(float)nz;
+                float px=-34.13f+12.65f*u+.22f*Mathf.Sin(v*11.9f+u*.4f);
+                float pz=-11.52f+9.13f*v+.21f*Mathf.Sin(u*14.1f+.73f*v);
+                return Foot(px,pz,.018f);
+            }
+            for (int z=0;z<nz;z++)
+                for (int x=0;x<nx;x++)
+                {
+                    var a=Point(x,z);var b=Point(x,z+1);var c=Point(x+1,z+1);var d=Point(x+1,z);
+                    Geometry(flagstone,(a+c)*.5f).Quad(a,b,c,d);
+                }
             PavingPatch(new Vector2(-9.2f,-4.2f),5,5,.96f,true);
             PavingPatch(new Vector2(-15.5f,4.0f),4,3,1.10f,false);
             PavingPatch(new Vector2(-5.5f,4.8f),4,3,1.04f,false);
@@ -336,7 +358,7 @@ namespace PathOfDawn.Presentation
                 float z = center.y + (row - (rows - 1) * .5f) * step;
                 if (leaveWell && (new Vector2(x,z)-center).sqrMagnitude < 1.48f*1.48f) continue;
                 GameObject tile = scenery.AddSized("Floor_Standard",transform,
-                    chapter.TransformPoint(Foot(x,z,.002f)),new Vector3(step-.035f,.014f,step-.035f),0);
+                    chapter.TransformPoint(Foot(x,z,.002f)),new Vector3(step+.015f,.014f,step+.015f),0);
                 StoneModelMaterials(tile,true); PavingModels++; AuthoredModels++;
             }
         }
@@ -382,17 +404,126 @@ namespace PathOfDawn.Presentation
                 Box(cedar,m,new Vector3(x,.35f,.23f),new Vector3(.10f,.70f,.52f));
                 Box(cedar,m,new Vector3(x,.57f,.23f),new Vector3(.26f,.09f,.61f));
             }
-            for (int i = 0; i < (narrow ? 3 : 4); i++)
+            var basket = m.MultiplyPoint3x4(new Vector3(-width*.27f,.788f,.23f));
+            ProduceBasket(basket, yaw + 17, .46f);
+            Scanned("MarketBasket", m.MultiplyPoint3x4(new Vector3(-width*.055f,.788f,.23f)), .31f, yaw - 21);
+            Scanned("PottersJar", m.MultiplyPoint3x4(new Vector3(width*.12f,.79f,.23f)), .42f, yaw + 24);
+            Scanned("PottersJar", m.MultiplyPoint3x4(new Vector3(width*.28f,.79f,.21f)), .29f, yaw - 8);
+            Scanned("PottersJar", m.MultiplyPoint3x4(new Vector3(width*.5f+.38f,.01f,-.31f)), .70f, yaw + 33);
+            foreach (float side in new[] { -1f, 1f })
             {
-                Vector3 local = m.MultiplyPoint3x4(new Vector3(-width*.30f+i*.62f,.79f,.23f));
-                GameObject vessel = props.AddCeramicVessel(transform,local,.28f+(i%2)*.11f,yaw+i*31);
-                DisableScenicColliders(vessel); DressPropMaterials(vessel); AuthoredModels++;
+                Line(m.MultiplyPoint3x4(new Vector3(side*width*.48f,2.43f,depth*.48f)),
+                    m.MultiplyPoint3x4(new Vector3(side*(width*.5f+.52f),1.82f,depth*.55f)), .012f, rope);
             }
-            Vector3 sidePot = m.MultiplyPoint3x4(new Vector3(width*.5f+.34f,0,-.31f));
-            GameObject planter = props.AddClayPlanter(transform,sidePot,.53f,18+yaw);
-            DisableScenicColliders(planter); DressPropMaterials(planter); AuthoredModels++;
             CameraRoof(m,new Vector3(0,2.48f,0),new Vector3(width+.28f,.13f,depth+.26f));
             MarketStalls++;
+        }
+
+        void Scanned(string name, Vector3 local, float height, float yaw)
+        {
+            scenery.Add(name, transform, chapter.TransformPoint(local), height, yaw);
+            AuthoredModels++;
+        }
+
+        void ProduceBasket(Vector3 foot, float yaw, float height)
+        {
+            Scanned("MarketBasket", foot, height, yaw);
+            // The woven scan includes a handle above the bowl. Nest the bottom layer under the rim.
+            for (int layer = 0; layer < 2; layer++)
+            {
+                int fruit = layer == 0 ? 8 : 3;
+                for (int i = 0; i < fruit; i++)
+                {
+                    float angle = i * (2*Mathf.PI/fruit) + layer*.42f;
+                    float radius = (layer == 0 ? .224f : .097f) * height;
+                    var at = foot + new Vector3(radius*Mathf.Cos(angle), (.26f + .135f*layer)*height, radius*Mathf.Sin(angle));
+                    Scanned("MarketPomegranate", at, (.195f + .029f*Mathf.Sin(i*2.4f))*height, yaw + i*54);
+                }
+            }
+        }
+
+        void DressDepartureGarden()
+        {
+            // Dry-laid local limestone has individual offsets and silhouette, including the wall facing the first encounter.
+            foreach (var end in new[] { new Vector2(-33.8f,3.0f), new Vector2(-24.5f,3.2f) })
+                for (int tier = 0; tier < 2; tier++)
+                    for (int j = 0; j < 4; j++)
+                    {
+                        float x=end.x+j*end.y/4 + .16f*tier;
+                        float z=-2.70f+.025f*Mathf.Sin(1.8f*j);
+                        var foot = Foot(x,z,.02f + tier*.27f);
+                        scenery.AddSized("TerraceStone", transform, chapter.TransformPoint(foot),
+                            new Vector3(.92f + .12f*Mathf.Cos(j+3*tier), .34f + .07f*Mathf.Sin(j+1), .46f),
+                            5f*Mathf.Sin(j*2.9f+tier));
+                    }
+            DressGatewayVine();
+            ProduceBasket(Foot(-31.55f,-4.78f), -12, .52f);
+            Scanned("PottersJar",Foot(-32.52f,-5.07f),.84f,19);
+            Scanned("PottersJar",Foot(-31.85f,-5.15f),.55f,-26);
+            Scanned("MarketBasket",Foot(-23.53f,-1.35f),.56f,79);
+            Scanned("PottersJar",Foot(-23.93f,-1.08f),.72f,33);
+            foreach (var row in new[] { new Vector2(-29.9f,6.7f), new Vector2(-21f,8.1f), new Vector2(-34.6f,1.6f) })
+                for (int j=0;j<6;j++)
+                {
+                    float x=row.x+j*.86f,z=row.y+.13f*Mathf.Sin(j*1.3f);
+                    scenery.AddSized("TerraceStone", transform, chapter.TransformPoint(Foot(x,z,-.04f)),
+                        new Vector3(1.02f,.47f+.15f*Mathf.Cos(j*2.1f),.57f),j%2==0 ? -12 : 16);
+                }
+        }
+
+        void DressGatewayVine()
+        {
+            var leafTop=Plain("sunlit grape leaves",new Color(.40f,.53f,.23f),.08f,true);
+            var leafShade=Plain("grape leaves under light",new Color(.25f,.40f,.22f),.06f,true);
+            var leafYoung=Plain("young vine shoots",new Color(.50f,.59f,.28f),.09f,true);
+            float ground=heightAt(-27,-2.4f);
+            Vector3 Stem(float t)
+            {
+                if(t<.34f)
+                {
+                    float u=t/.34f;
+                    return new Vector3(-29.14f+.12f*Mathf.Sin(u*7),ground+1.66f*u,-2.89f+.06f*Mathf.Cos(u*5));
+                }
+                float arc=(t-.34f)/.66f*2.51f;
+                return new Vector3(-27-2.05f*Mathf.Cos(arc),ground+1.64f+1.85f*Mathf.Sin(arc),-2.90f+.075f*Mathf.Sin(arc*3));
+            }
+            Vector2[] outline={new Vector2(0,.04f),new Vector2(-.48f,-.32f),new Vector2(-.88f,-.17f),
+                new Vector2(-.72f,.11f),new Vector2(-.98f,.26f),new Vector2(-.48f,.53f),
+                new Vector2(-.47f,.77f),new Vector2(0,1.06f),new Vector2(.45f,.73f),
+                new Vector2(.48f,.51f),new Vector2(.98f,.22f),new Vector2(.73f,.07f),
+                new Vector2(.85f,-.20f),new Vector2(.44f,-.32f)};
+            const int segments=41;
+            for(int j=0;j<segments;j++)
+            {
+                float t=j/(float)segments;
+                var p=Stem(t);var next=Stem((j+1f)/segments);
+                Line(p,next,.039f*(1-.53f*t),cedar);
+                if(j<4 || j%4==1)continue;
+                float sign=j%2==0?1:-1;
+                var tip=p+new Vector3(sign*(.18f+.16f*Mathf.Sin(j*1.36f)),.07f+.21f*Mathf.Sin(j*.92f),-.13f);
+                Line(p,tip,.012f,cedar);
+                for(int k=0;k<5;k++)
+                {
+                    float a=j*2.27f+k*2.40f;
+                    var at=Vector3.Lerp(p,tip,.3f+.15f*k)+new Vector3(.07f*Mathf.Cos(a),.05f*Mathf.Sin(a),-.045f*(k%2));
+                    float scale=.096f+.034f*Mathf.Sin(2.74f*k+j);
+                    var right=new Vector3(Mathf.Cos(a*.47f),.19f*Mathf.Sin(a),Mathf.Sin(a*.47f)).normalized;
+                    var down=new Vector3(.27f*Mathf.Sin(a),-.85f,-.24f).normalized;
+                    var normal=Vector3.Cross(right,down).normalized;
+                    Material color=(j+k)%4==0?leafYoung:(j+k)%3==0?leafShade:leafTop;
+                    var draft=Geometry(color,at);int start=draft.Vertices.Count;
+                    draft.Vertices.Add(at+scale*(down*.29f+normal*.15f));draft.Uv.Add(new Vector2(.5f,.55f));
+                    foreach(var edge in outline)
+                    {
+                        draft.Vertices.Add(at+scale*(right*edge.x+down*edge.y+normal*(.06f-.11f*Mathf.Abs(edge.x))));
+                        draft.Uv.Add(new Vector2(.5f+.47f*edge.x,.3f+.56f*edge.y));
+                    }
+                    for(int n=0;n<outline.Length;n++)
+                    {
+                        draft.Triangles.Add(start);draft.Triangles.Add(start+1+n);draft.Triangles.Add(start+1+(n+1)%outline.Length);
+                    }
+                }
+            }
         }
 
         void BuildLaundryCourt()
@@ -580,15 +711,15 @@ namespace PathOfDawn.Presentation
         {
             if(!lightCaptured||lightApplied)return;
             RenderSettings.ambientMode=AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor=new Color(.65f,.72f,.80f);
-            RenderSettings.ambientEquatorColor=new Color(.48f,.49f,.44f);
-            RenderSettings.ambientGroundColor=new Color(.28f,.27f,.23f);
-            RenderSettings.fogColor=new Color(.77f,.81f,.80f);RenderSettings.fogDensity=.0045f;
+            RenderSettings.ambientSkyColor=new Color(.65f,.76f,.88f);
+            RenderSettings.ambientEquatorColor=new Color(.52f,.51f,.46f);
+            RenderSettings.ambientGroundColor=new Color(.34f,.29f,.25f);
+            RenderSettings.fogColor=new Color(.78f,.81f,.79f);RenderSettings.fogDensity=.0049f;
             RenderSettings.reflectionIntensity=.26f;
             if(sun!=null)
             {
-                sun.transform.rotation=Quaternion.Euler(49,-29,0);sun.color=new Color(1,.956f,.86f);
-                sun.intensity=1.10f;sun.shadowStrength=.82f;sun.shadowBias=.030f;sun.shadowNormalBias=.13f;
+                sun.transform.rotation=Quaternion.Euler(38,-34,0);sun.color=new Color(1,.933f,.80f);
+                sun.intensity=1.16f;sun.shadowStrength=.85f;sun.shadowBias=.030f;sun.shadowNormalBias=.13f;
             }
             lightApplied=true;
         }
