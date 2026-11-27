@@ -417,6 +417,18 @@ namespace PathOfDawn.Presentation
                 }
                 if (matches != 1) throw new InvalidOperationException("Source expression must resolve once: " + ModelIdentity + "/" + preset.shapeKey);
             }
+            foreach (var renderer in skins)
+            {
+                if (renderer.name != ModelIdentity + "__SculptedPortrait") continue;
+                void BindPortrait(string pose, List<FaceBinding> destination)
+                {
+                    int index = renderer.sharedMesh.GetBlendShapeIndex(pose);
+                    if (index < 0) throw new InvalidOperationException("Missing sculpted expression " + pose);
+                    AddBinding(destination, renderer, index);
+                }
+                BindPortrait("ih", narrow); BindPortrait("oh", round);
+                BindPortrait("relaxed", gentle); BindPortrait("concerned", concern); BindPortrait("happy", joy);
+            }
             if (narrow.Count == 0 || round.Count == 0 || gentle.Count == 0 || concern.Count == 0 || joy.Count == 0)
                 throw new InvalidOperationException("Incomplete actual expression presets: " + ModelIdentity);
             return true;

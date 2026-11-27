@@ -1,0 +1,14 @@
+The Way of Jesus · principal cast and Galilean countryside
+
+Human anatomy, topology and expression targets use MakeHuman HM08 and MPFB2 art assets, distributed under CC0. The original face profiles, fitted animation weights, beard grooming, iris treatment, woven clothing, leather accessories, olive tree and mastic shrub were made for this game.
+
+The boy's layered hair is based on Hair 05 by culturalibre, originally by swift502. Mary's skin is based on Midtoned Female by CallHarvey3D. The adult Jesus skin is based on Light Skin Male Bronze by Toigo. Other selected skin, hair, eyelashes, brows, eye geometry and facial targets are from the MakeHuman CC0 asset packs. The head textures contain the facial and neck UV islands used by the game.
+https://www.makehumancommunity.org/about/license.html
+https://static.makehumancommunity.org/assets/assetpacks.html
+
+Aerial Grass Rock and Stony Dirt Path are photographic surface scans from Poly Haven, CC0. Their original diffuse and OpenGL normal files are preserved. The distant Galilean panorama is an original AI-assisted illustration. The terraced slopes, walkable ground, village and foreground vegetation render as geometry in Unity.
+https://polyhaven.com/a/aerial_grass_rock
+https://polyhaven.com/a/stony_dirt_path
+https://polyhaven.com/license
+
+The source manifest pins each consumed upstream asset and its SHA-256. The shipped Unity project contains the ready-to-render meshes and materials. Optional Python art exporters use NumPy, SciPy and Pillow. Set FIRSTGAME_ATELIER_INPUT to an external work directory. Run fetch_sources.py, heads.py, loom.py and olive.py. The Unity Editor methods GospelSculptedCastBaker.Bake, GospelPrincipalCostumes.Bake and GospelGalileeLandscapeBaker.Bake install the results in that order.

@@ -101,6 +101,15 @@ def distance(page, path, tessdata, touch=False):
     if not match:
         read=visible_text(image,(23,104,167,146),tessdata,11)
         match=re.search(r'(\d+[.,]\d+)\s*[mM]',read)
+    if not match and not touch:
+        # The small field minimap remains readable when the Korean control hint fades.
+        digits = ImageOps.autocontrast(image.crop((49,110,87,127)).convert('L')).resize((190,85),Image.Resampling.LANCZOS)
+        data = BytesIO()
+        digits.save(data,'PNG')
+        text = subprocess.run(['tesseract','stdin','stdout','--tessdata-dir',str(tessdata),'-l','eng','--psm','7',
+                               '-c','tessedit_char_whitelist=0123456789.,mM'], input=data.getvalue(),
+                              capture_output=True,check=True,timeout=15).stdout.decode().strip()
+        match = re.fullmatch(r'(\d{1,2}[.,]\d)\s*[mM]?',text)
     return (float(match[1].replace(',','.')) if match else None), in_reach
 
 

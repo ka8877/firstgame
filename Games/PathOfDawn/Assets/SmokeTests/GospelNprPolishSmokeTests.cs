@@ -70,9 +70,32 @@ namespace PathOfDawn.SmokeTests
             if (testInputs != null && testInputs != previousInputs) UnityEngine.Object.DestroyImmediate(testInputs);
         }
 
+        static void VerifyPrincipalCast()
+        {
+            var portraits = new HashSet<Mesh>();
+            var costumes = new HashSet<Mesh>();
+            foreach (string id in new[] { "JesusChild", "Mary", "Joseph", "JesusAdult", "Teacher" })
+            {
+                string folder = id == "JesusChild" ? "GospelHero20261119" : "GospelNpr";
+                var model = Resources.Load<GameObject>("Art/" + folder + "/Characters/" + id);
+                Assert.That(model, Is.Not.Null, id);
+                var rigs = model.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+                var face = rigs.Single(r => r.name == id + "__SculptedPortrait");
+                var clothes = rigs.Single(r => r.name == id + "__TravelCostume");
+                Assert.That(face.enabled && clothes.enabled && portraits.Add(face.sharedMesh) && costumes.Add(clothes.sharedMesh), Is.True, id);
+                Assert.That(face.bones.All(bone => bone != null), Is.True);
+                Assert.That(clothes.sharedMesh.boneWeights.Length, Is.EqualTo(clothes.sharedMesh.vertexCount));
+                foreach (string pose in new[] { "blink", "aa", "ih", "oh", "relaxed", "concerned", "happy" })
+                    Assert.That(face.sharedMesh.GetBlendShapeIndex(pose), Is.GreaterThanOrEqualTo(0), id + " " + pose);
+                Assert.That(face.sharedMaterials[1].mainTexture, Is.Not.Null, id + " iris");
+                Assert.That(clothes.sharedMaterials[0].mainTexture, Is.Not.Null, id + " woven repeat");
+            }
+        }
+
         [UnityTest]
         public IEnumerator ActualMaryDialogueKeepsBothWorldActorsVisibleAndPhysicalSavesStable()
         {
+            VerifyPrincipalCast();
             yield return Click("새 여정 시작"); int turns = 0;
             while (App.Chronicle.CurrentQuest.IsPrologue && turns++ < 60) yield return Click("이야기 계속");
             Assert.That(turns, Is.EqualTo(51), "Enter through the real preserved opening rather than injecting a later quest.");

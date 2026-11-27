@@ -7,6 +7,11 @@ Shader "FirstGame/GospelNpr/Ground"
         _StoneNormal("Retained limestone paving normal", 2D) = "bump" {}
         _StoneDetailStrength("Paving detail contrast", Range(0,1)) = .72
         _StoneNormalStrength("Paving normal strength", Range(0,1)) = .24
+        _MeadowScan("Galilee grass and stones", 2D) = "white" {}
+        _TrailScan("Travelled gravel", 2D) = "white" {}
+        _MeadowRelief("Grass and stones relief", 2D) = "bump" {}
+        _TrailRelief("Gravel relief", 2D) = "bump" {}
+        _LandscapeDetail("Surface photographs", Range(0,1)) = 0
         _WorldRect("Ground origin and reciprocal extent", Vector) = (-64,-48,.007352941,.009803922)
         _MeadowColor("Sunlit meadow", Color) = (.39,.53,.28,1)
         _EarthColor("Warm travelled earth", Color) = (.73,.61,.42,1)
@@ -25,6 +30,7 @@ Shader "FirstGame/GospelNpr/Ground"
         float4 _ShadowColor;
         float _StoneDetailStrength;
         float _StoneNormalStrength;
+        float _LandscapeDetail;
     CBUFFER_END
 
     struct NprDepthAttributes
@@ -75,6 +81,10 @@ Shader "FirstGame/GospelNpr/Ground"
             TEXTURE2D(_BlendMap); SAMPLER(sampler_BlendMap);
             TEXTURE2D(_StoneAlbedo); SAMPLER(sampler_StoneAlbedo);
             TEXTURE2D(_StoneNormal); SAMPLER(sampler_StoneNormal);
+            TEXTURE2D(_MeadowScan); SAMPLER(sampler_MeadowScan);
+            TEXTURE2D(_TrailScan); SAMPLER(sampler_TrailScan);
+            TEXTURE2D(_MeadowRelief); SAMPLER(sampler_MeadowRelief);
+            TEXTURE2D(_TrailRelief); SAMPLER(sampler_TrailRelief);
             struct Attributes
             {
                 float4 positionOS : POSITION;
@@ -120,6 +130,12 @@ Shader "FirstGame/GospelNpr/Ground"
                 half broad=Noise(p*.12), detail=Noise(p*2.3), fine=Noise(p*9.1);
                 half3 meadow=_MeadowColor.rgb*lerp(.91,1.08,broad);
                 half3 earth=_EarthColor.rgb*lerp(.94,1.04,detail*.32+broad*.68);
+                float2 grassUV=p*.182, trailUV=p*.56;
+                half3 grassPhoto=SAMPLE_TEXTURE2D(_MeadowScan,sampler_MeadowScan,grassUV).rgb;
+                half3 gravel=SAMPLE_TEXTURE2D(_TrailScan,sampler_TrailScan,trailUV).rgb;
+                half dry=smoothstep(.27,.82,broad*.72+detail*.28);
+                meadow=lerp(meadow,grassPhoto*lerp(half3(.88,.99,.76),half3(1.13,.99,.78),dry)*1.37+.026,_LandscapeDetail*.90);
+                earth=lerp(earth,gravel*half3(1.26,1.14,.96)+half3(.13,.105,.074),_LandscapeDetail*.82);
                 half3 stone=_StoneColor.rgb*lerp(.96,1.035,detail);
                 half3 paving=SAMPLE_TEXTURE2D(_StoneAlbedo,sampler_StoneAlbedo,p*.36).rgb;
                 stone*=lerp(half3(1,1,1),.55+paving*.75,_StoneDetailStrength);
@@ -137,6 +153,10 @@ Shader "FirstGame/GospelNpr/Ground"
                 half3 normal=normalize(input.normalWS);
                 half3 pavingNormal=UnpackNormalScale(SAMPLE_TEXTURE2D(_StoneNormal,sampler_StoneNormal,p*.36),1);
                 normal=normalize(normal+half3(pavingNormal.x,0,pavingNormal.y)*court*_StoneNormalStrength);
+                half3 grassN=UnpackNormal(SAMPLE_TEXTURE2D(_MeadowRelief,sampler_MeadowRelief,grassUV));
+                half3 trailN=UnpackNormal(SAMPLE_TEXTURE2D(_TrailRelief,sampler_TrailRelief,trailUV));
+                half2 rough=lerp(grassN.xy,trailN.xy,path);
+                normal=SafeNormalize(normal+half3(rough.x,0,rough.y)*(.45*_LandscapeDetail*(1-court)));
                 Light sun=GetMainLight(TransformWorldToShadowCoord(input.positionWS));
                 half facing=smoothstep(-.25,.75,dot(normal,sun.direction));
                 half shadow=smoothstep(.05,.95,sun.shadowAttenuation);

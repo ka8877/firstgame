@@ -775,7 +775,7 @@ namespace PathOfDawn.SmokeTests
         [UnityTest]
         public IEnumerator SpatialWorldAndBothChaptersUseThreeDimensionalImportedScenery()
         {
-            Assert.That(App.World.NprEnvironmentReady, Is.True); Assert.That(GospelNprEnvironment.RequiredModels.Count, Is.EqualTo(9));
+            Assert.That(App.World.NprEnvironmentReady, Is.True); Assert.That(GospelNprEnvironment.RequiredModels.Count, Is.EqualTo(11));
             foreach (string key in GospelNprEnvironment.RequiredModels)
             {
                 var source = Resources.Load<GameObject>(GospelNprEnvironment.ResourceRoot + key); Assert.That(source, Is.Not.Null, key);

@@ -244,6 +244,12 @@ namespace PathOfDawn.Presentation
                     material.SetTexture("_StoneNormal", normal);
                 }
             }
+            const string atlas = "Art/GalileeAtelier/";
+            material.SetTexture("_MeadowScan", Resources.Load<Texture2D>(atlas + "aerial_grass_rock-diffuse"));
+            material.SetTexture("_MeadowRelief", Resources.Load<Texture2D>(atlas + "aerial_grass_rock-normal"));
+            material.SetTexture("_TrailScan", Resources.Load<Texture2D>(atlas + "stony_dirt_path-diffuse"));
+            material.SetTexture("_TrailRelief", Resources.Load<Texture2D>(atlas + "stony_dirt_path-normal"));
+            material.SetFloat("_LandscapeDetail", river ? .60f : 1);
             material.SetFloat("_StoneDetailStrength", .72f); material.SetFloat("_StoneNormalStrength", .24f);
             material.SetColor("_MeadowColor", new Color(.35f, .47f, .31f));
             material.SetColor("_EarthColor", new Color(.71f, .61f, .44f));
@@ -257,6 +263,12 @@ namespace PathOfDawn.Presentation
             // A visual-only horizon surrounds the unchanged continuous playable
             // floor. Every point is beyond the farthest saved in-bounds corner;
             // these meshes never enter movement or camera collision queries.
+            if (!river)
+            {
+                BuildOrchardTerraces(root);
+                BuildTerracedHorizon(root);
+                return;
+            }
             var colors = new[] { new Color(.40f, .49f, .39f), new Color(.47f, .57f, .54f), new Color(.57f, .67f, .67f) };
             const int segments = 128, rows = 5;
             for (int layer = 2; layer >= 0; layer--)
@@ -289,6 +301,63 @@ namespace PathOfDawn.Presentation
                     Mat("Atmospheric ridge " + layer, colors[layer], 0), false, false);
                 ridge.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
             }
+        }
+
+        void BuildOrchardTerraces(Transform root)
+        {
+            const int segments = 108, rows = 13;
+            var vertices = new Vector3[(segments+1)*rows]; var uv = new Vector2[vertices.Length];
+            var indices = new List<int>(segments*(rows-1)*6);
+            for(int row=0;row<rows;row++) for(int i=0;i<=segments;i++)
+            {
+                float a=i*Mathf.PI*2/segments, t=row/(float)(rows-1);
+                float relief=.56f+.21f*Mathf.Sin(a*3+.6f)+.18f*Mathf.Sin(a*5-.7f);
+                float h=-1.65f+relief*(t*8.3f+Mathf.Floor(t*4)*1.10f);
+                float x=4+Mathf.Sin(a)*(53f+t*22f), z=3+Mathf.Cos(a)*(34f+t*25f);
+                int v=row*(segments+1)+i;
+                vertices[v]=new Vector3(x,h,z);uv[v]=new Vector2(x,z)*.25f;
+                if(i==segments || row==rows-1) continue;
+                int next=v+segments+1;
+                indices.AddRange(new[]{v,next,v+1,next,next+1,v+1});
+                if(row>=4 && row%4==0 && i%9==row/4)
+                {
+                    npr.Add("OliveTree_Galilee", root, vertices[v], 2.1f+relief*1.6f, i*91+row*7, false);
+                }
+            }
+            var mesh=Own(new Mesh{name="Olive-covered middle-distance terraces"});
+            mesh.vertices=vertices;mesh.uv=uv;mesh.SetTriangles(indices,0);mesh.RecalculateNormals();mesh.RecalculateBounds();
+            var material=Resources.Load<Material>("Art/GalileeAtelier/Orchard slope");
+            var land=MeshObject(mesh.name,root,mesh,Vector3.zero,material,false,false);
+            land.GetComponent<MeshRenderer>().shadowCastingMode=ShadowCastingMode.Off;
+        }
+
+        void BuildTerracedHorizon(Transform root)
+        {
+            const int segments = 112;
+            var vertices = new Vector3[(segments + 1) * 2];
+            var uv = new Vector2[vertices.Length];
+            var indices = new int[segments * 6];
+            for (int i = 0; i <= segments; i++)
+            {
+                float t = i / (float)segments;
+                float a = t * Mathf.PI * 2;
+                Vector3 basePoint = new Vector3(4 + Mathf.Sin(a) * 91f, -24f, 3 + Mathf.Cos(a) * 91f);
+                vertices[2 * i] = basePoint;
+                vertices[2 * i + 1] = basePoint + Vector3.up * 63f;
+                uv[2 * i] = new Vector2(t * 4 + .29f, 0);
+                uv[2 * i + 1] = new Vector2(t * 4 + .29f, 1);
+                if (i == segments) continue;
+                int k = i * 6, v = i * 2;
+                indices[k] = v; indices[k + 1] = v + 1; indices[k + 2] = v + 2;
+                indices[k + 3] = v + 2; indices[k + 4] = v + 1; indices[k + 5] = v + 3;
+            }
+            var mesh = Own(new Mesh { name = "Galilean terrace panorama" });
+            mesh.vertices = vertices; mesh.uv = uv; mesh.triangles = indices; mesh.RecalculateBounds();
+            var material = Resources.Load<Material>("Art/GalileeAtelier/Terraces");
+            if (!material) throw new InvalidOperationException("Missing Galilean terrace panorama");
+            var ridge = MeshObject(mesh.name, root, mesh, Vector3.zero, material, false, false);
+            var renderer = ridge.GetComponent<MeshRenderer>();
+            renderer.shadowCastingMode = ShadowCastingMode.Off; renderer.receiveShadows = false;
         }
 
         void BuildMeadowPockets(Transform root, bool river)
@@ -592,6 +661,24 @@ namespace PathOfDawn.Presentation
             mesh.vertices = vertices; mesh.uv = uv; mesh.SetTriangles(triangles, 0);
             mesh.RecalculateNormals(); mesh.RecalculateTangents(); mesh.RecalculateBounds();
             MeshObject(mesh.name, root, mesh, position, cloth, false);
+            var edging=Resources.Load<Material>("Art/GalileeAtelier/Canopy border");
+            const int flutes=40;
+            var edgeVertices=new Vector3[(flutes+1)*2];var edgeUV=new Vector2[edgeVertices.Length];
+            var seam=new int[flutes*6];
+            for(int i=0;i<=flutes;i++)
+            {
+                float u=i/(float)flutes;
+                float y=-Mathf.Sin(u*Mathf.PI)*sag+Mathf.Sin(u*Mathf.PI*10)*.025f;
+                int k=i*2;
+                edgeVertices[k]=new Vector3((u-.5f)*width,y,-depth*.5f);
+                edgeVertices[k+1]=edgeVertices[k]+new Vector3(0,-.15f-.052f*Mathf.Pow(Mathf.Sin(u*Mathf.PI*10),2),-.024f-.012f*Mathf.Cos(u*64));
+                edgeUV[k]=new Vector2(0,u*width*.82f);edgeUV[k+1]=new Vector2(1,u*width*.82f);
+                if(i==flutes)continue;
+                int q=i*6;seam[q]=k;seam[q+1]=k+1;seam[q+2]=k+2;seam[q+3]=k+2;seam[q+4]=k+1;seam[q+5]=k+3;
+            }
+            var valance=Own(new Mesh{name="Tablet-woven canopy valance"});
+            valance.vertices=edgeVertices;valance.uv=edgeUV;valance.triangles=seam;valance.RecalculateNormals();valance.RecalculateBounds();
+            MeshObject(valance.name,root,valance,position,edging,false);
             // A separate underside preserves lighting normals on both faces.
             var reverse = new int[triangles.Count];
             for (int i = 0; i < triangles.Count; i += 3)
@@ -819,6 +906,11 @@ namespace PathOfDawn.Presentation
             int variant = Mathf.Abs(seed) % 7;
             string key = variant == 0 ? "PalmTree_1" : variant == 1 ? "PalmTree_2"
                 : seed % 2 == 0 ? "NormalTree_1" : "NormalTree_2";
+            if ((height <= 6f && (variant > 1 || !collision)) || (root == TempleRoot && key.StartsWith("NormalTree", StringComparison.Ordinal)))
+            {
+                key = "OliveTree_Galilee";
+                if (height > 9) height *= .72f;
+            }
             var model = npr.Add(key, root, position, height, seed * 47.3f);
             Bounds bounds = GospelNprEnvironment.SpatialBounds(model);
             bool palm = key.StartsWith("Palm", StringComparison.Ordinal);
@@ -836,7 +928,7 @@ namespace PathOfDawn.Presentation
         }
         void NprShrub(Transform root, Vector3 position, float height, int seed)
         {
-            npr.Add("Bush", root, position, height, seed * 61.7f, false);
+            npr.Add(root == TempleRoot ? "MasticBush" : "Bush", root, position, height, seed * 61.7f, false);
             AuthoredPropCount++;
         }
         void BuildHorizonGroves(Transform root, bool river)
