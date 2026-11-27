@@ -1,0 +1,970 @@
+{
+  "project": "The Way of Jesus — five principal characters and the Galilean village",
+  "license": "MakeHuman/MPFB and Poly Haven CC0. Caesar Sandals 1 by Elvaerwyn is CC BY.",
+  "direct": [
+    {
+      "file": "3dobjs/base.obj",
+      "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "bytes": 1749303,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/3dobjs/base.obj"
+    },
+    {
+      "file": "eye/brown_eye.png",
+      "sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+      "bytes": 610817,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/brown_eye.png"
+    },
+    {
+      "file": "eye/high-poly.mhclo",
+      "sha256": "b183cfe37120ab726f9b3f2ea6cd3a64c44ce7b4bd91a77c841cf70c04f83a0d",
+      "bytes": 72490,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/high-poly.mhclo"
+    },
+    {
+      "file": "eye/high-poly.obj",
+      "sha256": "da2493215b708a344c33dc72f2a9a5b8fa985dcc5a70ad3b208995cf871da8e1",
+      "bytes": 100882,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/high-poly.obj"
+    },
+    {
+      "file": "mesh_metadata/basemesh_vertex_groups.json",
+      "sha256": "8cb1417bc55ae5ec8aa99f90734e81ed5fbb556511ff6a2c00e0534b70911444",
+      "bytes": 81984,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/mesh_metadata/basemesh_vertex_groups.json"
+    },
+    {
+      "file": "targets/cheek/l-cheek-bones-incr.target.gz",
+      "sha256": "ea5aa60abcc2926e61cdabf5d40701c2b23b3f8027f949cea0b80bcbc55df301",
+      "bytes": 305,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/cheek/l-cheek-bones-incr.target.gz"
+    },
+    {
+      "file": "targets/cheek/r-cheek-bones-incr.target.gz",
+      "sha256": "c608528b9e5e1c670179cfb502dab3d9478a77bb942f7c8186cd072a7369e9b9",
+      "bytes": 310,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/cheek/r-cheek-bones-incr.target.gz"
+    },
+    {
+      "file": "targets/chin/chin-prominent-incr.target.gz",
+      "sha256": "e0d5ec5e213b88719def0f43ddaa7107796fc02f7447e2b2f140d9fe513a6ac8",
+      "bytes": 565,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/chin/chin-prominent-incr.target.gz"
+    },
+    {
+      "file": "targets/chin/chin-width-decr.target.gz",
+      "sha256": "6c3aaca074630e89951184130a4a158b6f62c9d0cf57cf8eb828c445ff40c21a",
+      "bytes": 768,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/chin/chin-width-decr.target.gz"
+    },
+    {
+      "file": "targets/chin/chin-width-incr.target.gz",
+      "sha256": "68764b6ec7c923597beaaf643f71c41f00c93639d9bb522c169c279db2ad299e",
+      "bytes": 1110,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/chin/chin-width-incr.target.gz"
+    },
+    {
+      "file": "targets/head/head-oval.target.gz",
+      "sha256": "057eea7c5535c325493b9107228052b03c78fac1bcb24905313fae6351179cb8",
+      "bytes": 9625,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/head/head-oval.target.gz"
+    },
+    {
+      "file": "targets/head/head-rectangular.target.gz",
+      "sha256": "a4ff15dbcda4164e823c7a6f00c234cc62cb136b1c568198c7980bf9f2d358f2",
+      "bytes": 2936,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/head/head-rectangular.target.gz"
+    },
+    {
+      "file": "targets/head/head-round.target.gz",
+      "sha256": "9c5661568155231f4c5f13b0d332c09b0c27452cafc02f5685ff4d7c69010f50",
+      "bytes": 8351,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/head/head-round.target.gz"
+    },
+    {
+      "file": "targets/head/head-square.target.gz",
+      "sha256": "94b484ae145970e5368706d4f42711f50e18fcbf7d9f1ee800572c3fa69f855a",
+      "bytes": 3350,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/head/head-square.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/african-female-young.target.gz",
+      "sha256": "1147ae55ecb0f66bade3f45176b3af187e265878322db172ad1090e9f3108e84",
+      "bytes": 123654,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/african-female-young.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/african-male-child.target.gz",
+      "sha256": "578c3aad252de0868da7445d095f5acd8925b182c80812154065a37687c29b72",
+      "bytes": 135693,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/african-male-child.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/african-male-old.target.gz",
+      "sha256": "fb3477ab3c05d6ea421d82717c3df89ff23f926d1e5148092e30c0efe2ea96de",
+      "bytes": 127252,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/african-male-old.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/african-male-young.target.gz",
+      "sha256": "05ed84d6df36e788cdfa8da0be15376850524b960cf2f17f3e592b9cf7d21c85",
+      "bytes": 132860,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/african-male-young.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/asian-female-young.target.gz",
+      "sha256": "ee17da733288434e5b6fa120497f1fa6e72bf7faad5d694b0431d7275139170d",
+      "bytes": 135687,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/asian-female-young.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/caucasian-female-young.target.gz",
+      "sha256": "e9d6212373ac5f1e2c596fa145e363385f4d169c3c6c88ede3bab93b681af041",
+      "bytes": 127369,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/caucasian-female-young.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/caucasian-male-child.target.gz",
+      "sha256": "18188350f6cfca20725f4057ba207ac5c7c759bfcc5badb212edabfd8563a544",
+      "bytes": 137652,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/caucasian-male-child.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/caucasian-male-old.target.gz",
+      "sha256": "123cb7758c86aa2aa71d80ea0c8f5f4b3e96f394180edc1682e34720c4949df6",
+      "bytes": 112944,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/caucasian-male-old.target.gz"
+    },
+    {
+      "file": "targets/macrodetails/caucasian-male-young.target.gz",
+      "sha256": "ffe69537e53148edff2776204ba48cf3bf1f3cbc72966592c8a562ab80b07333",
+      "bytes": 127922,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/macrodetails/caucasian-male-young.target.gz"
+    },
+    {
+      "file": "targets/nose/nose-curve-convex.target.gz",
+      "sha256": "7c9232bd988ab0ed6373e994ac566623d3affac65c645aee78487a1e47a3253e",
+      "bytes": 304,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/nose/nose-curve-convex.target.gz"
+    },
+    {
+      "file": "targets/nose/nose-hump-incr.target.gz",
+      "sha256": "ca6649d78752cca02fdb37f10804e021713b4fbfe2f85136e12b5787cc654aa6",
+      "bytes": 1368,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/nose/nose-hump-incr.target.gz"
+    },
+    {
+      "file": "targets/nose/nose-width2-decr.target.gz",
+      "sha256": "31a68afb926715ed352b870168c88932c281cf85523dffd2492f6e213738d2cd",
+      "bytes": 269,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/targets/nose/nose-width2-decr.target.gz"
+    },
+    {
+      "file": "rigs/standard/weights.default.json",
+      "sha256": "154b866774a8c2b055a8e86419f22a87b76c60440fdcb70bcb78345f00924e89",
+      "bytes": 5034981,
+      "source": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d9648f3257a0b9712281d466245f30d656250154/src/mpfb/data/rigs/standard/weights.default.json"
+    }
+  ],
+  "archives": {
+    "faceunits01": {
+      "source": "https://files.makehumancommunity.org/functional/faceunits01.zip",
+      "size": 257821,
+      "files": [
+        {
+          "file": "targets/faceunits/browInnerUp.target",
+          "sha256": "84c8be8c1cade46a51486786244c1a80dfbf6e1915bf1f5a72b74ef8eb951f6d",
+          "bytes": 11346
+        },
+        {
+          "file": "targets/faceunits/cheekSquintLeft.target",
+          "sha256": "2ec68e1aca9ecd24019db58af53d7998f10e4964dda2729fd0f319597f734d75",
+          "bytes": 14657
+        },
+        {
+          "file": "targets/faceunits/cheekSquintRight.target",
+          "sha256": "7daf855b7d23d2b95ae4e75ed0994b4951d8d9ec6d82a9a6aec8742df033bdbc",
+          "bytes": 14359
+        },
+        {
+          "file": "targets/faceunits/eyeBlinkLeft.target",
+          "sha256": "53d35e0a8357140d4e37277a674f211bdaf97be011b61cfcdff618f0bfea0ec8",
+          "bytes": 16277
+        },
+        {
+          "file": "targets/faceunits/eyeBlinkRight.target",
+          "sha256": "00d159a70fad650b336eb6f739a1a6a47f916da4331ef9848fb0eef989ca5cc5",
+          "bytes": 16075
+        },
+        {
+          "file": "targets/faceunits/mouthFrownLeft.target",
+          "sha256": "39d0c7cc1305ac62bdf989522f00f1b820ade8e1762a738f7398926bf6f91cd4",
+          "bytes": 16454
+        },
+        {
+          "file": "targets/faceunits/mouthFrownRight.target",
+          "sha256": "a14b45427d3f78ddb8a05604b6c353bddcda49376588097809797c4a51714767",
+          "bytes": 16382
+        },
+        {
+          "file": "targets/faceunits/mouthSmileLeft.target",
+          "sha256": "11cabf2fa6f9664c4d0b9f8f0cadaf4b2a1a9625b72c7593262465ce8d4cb9a2",
+          "bytes": 32657
+        },
+        {
+          "file": "targets/faceunits/mouthSmileRight.target",
+          "sha256": "70578981892db13c02512455583c2f9743683d5c571c1e2624b09638cf37bedd",
+          "bytes": 33258
+        }
+      ]
+    },
+    "hair01": {
+      "source": "https://files.makehumancommunity.org/asset_packs/hair01/hair01_cc0.zip",
+      "size": 227775853,
+      "files": [
+        {
+          "file": "hair/culturalibre_hair_05/culturalibre_hair_05.mhclo",
+          "sha256": "e3888a94ebb84bc37b73cefb3af7045bc674a8c3d92ff8e910e75c283a234078",
+          "bytes": 175979
+        },
+        {
+          "file": "hair/culturalibre_hair_05/hair_05.mhmat",
+          "sha256": "bd786b142ba4e2eeab426f7ea12f61bd96f3c4a5b1d6012983373be72800159a",
+          "bytes": 221
+        },
+        {
+          "file": "hair/culturalibre_hair_05/hair_05.obj",
+          "sha256": "7f710a92a7c47a318bf83c66a381aecaccf7d992f77681fd4c287d0c3b209cf9",
+          "bytes": 257893
+        },
+        {
+          "file": "hair/culturalibre_hair_05/hair_05.png",
+          "sha256": "3e03935cd03bb8f34a72bf53810d9cdd74634c3a0e4d121f6866d118eda3ecfe",
+          "bytes": 5754
+        }
+      ]
+    },
+    "makehuman_system_assets": {
+      "source": "https://files.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "size": 280737770,
+      "files": [
+        {
+          "file": "eyebrows/eyebrow001/eyebrow001.mhclo",
+          "sha256": "54c8892c2ba577f4152d779ce1f20f7cd323beb8cbd9cb701796165c221b4f5b",
+          "bytes": 9141
+        },
+        {
+          "file": "eyebrows/eyebrow001/eyebrow001.mhmat",
+          "sha256": "976e5f4f1d3922d7a11c6e2db233f8b4584b068d00619d5749687e81c92d61fc",
+          "bytes": 1098
+        },
+        {
+          "file": "eyebrows/eyebrow001/eyebrow001.obj",
+          "sha256": "88b13146395133f3901715e11706cdfd293e5d6087ad7c5e01efe1485a26b513",
+          "bytes": 8227
+        },
+        {
+          "file": "eyebrows/eyebrow001/eyebrow001.png",
+          "sha256": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b",
+          "bytes": 89619
+        },
+        {
+          "file": "eyebrows/eyebrow005/eyebrow005.mhclo",
+          "sha256": "84e8aa146f1c7a2985d024bb741f43323c65c2970b4bb86491d8e6a7b0daaeef",
+          "bytes": 9120
+        },
+        {
+          "file": "eyebrows/eyebrow005/eyebrow005.mhmat",
+          "sha256": "28ecdda0aefc150974d30867e7ef3cfc8e720d2daaf52c33493138af5df4322a",
+          "bytes": 1098
+        },
+        {
+          "file": "eyebrows/eyebrow005/eyebrow005.obj",
+          "sha256": "c89d4d0b6f89a6bdf5a33c5e3ed22414046d2465e37ba9ecd2d75613dcb74e63",
+          "bytes": 8227
+        },
+        {
+          "file": "eyebrows/eyebrow005/eyebrow005.png",
+          "sha256": "7258dd3cf12413289ac814f81ab6b6afa00827f7cbd5deda80743308dd8c0389",
+          "bytes": 75733
+        },
+        {
+          "file": "eyelashes/eyelashes01/eyelashes01.mhclo",
+          "sha256": "5a86b29c15649273d723084954b7fa7bf199112571d4f58539b46734d397ee6b",
+          "bytes": 2265
+        },
+        {
+          "file": "eyelashes/eyelashes01/eyelashes01.mhmat",
+          "sha256": "8029c99d94f3d87a1e81825fad6b90eec773ae6955a5b2592222ef237377e190",
+          "bytes": 1074
+        },
+        {
+          "file": "eyelashes/eyelashes01/eyelashes01.obj",
+          "sha256": "f78f5b93fea1946fcae103d32c4f082dd9612a1ec2e7e2f90b03ebe59b0baf20",
+          "bytes": 18832
+        },
+        {
+          "file": "eyelashes/eyelashes01/eyelashes01.png",
+          "sha256": "4b69c0fff2648874460e9caf80c31413c444218a5c50afebc425aeaa65484a35",
+          "bytes": 91600
+        },
+        {
+          "file": "hair/braid01/braid01.mhclo",
+          "sha256": "e350614dab32230c47d67e7747079b89859d36e62a890ca47890f068eca4f7a9",
+          "bytes": 305086
+        },
+        {
+          "file": "hair/braid01/braid01.mhmat",
+          "sha256": "c8fdc8452c94715e9bf8fc194c82dc1e53124475b0665058d31b142bf0f3f762",
+          "bytes": 1299
+        },
+        {
+          "file": "hair/braid01/braid01.obj",
+          "sha256": "ad0b449c80244452bc8d437f5d59c25ec2ac17b2eb35e1ae2d9531fc00b73b0a",
+          "bytes": 302165
+        },
+        {
+          "file": "hair/braid01/braid01_diffuse.png",
+          "sha256": "24c0d2a639f04704734c3e38af97d110777c1b203e5a10c66a5c89563643a018",
+          "bytes": 2615248
+        },
+        {
+          "file": "hair/long01/long01.mhclo",
+          "sha256": "94ecbebfd834da2cbee2ce90b730972590eb22a252ecd9592038ea736e063646",
+          "bytes": 220891
+        },
+        {
+          "file": "hair/long01/long01.mhmat",
+          "sha256": "74ec88267e679d316f8037a074511ffc887b27e198ea381d0ae4a3f180f96760",
+          "bytes": 1297
+        },
+        {
+          "file": "hair/long01/long01.obj",
+          "sha256": "7f1d6dadbdf9e96435251955d6657e77ea5433c9bc7c85a5c5f5e4eae0cb9a8c",
+          "bytes": 215324
+        },
+        {
+          "file": "hair/long01/long01_diffuse.png",
+          "sha256": "e8dc25d90f8f62467e8630420e1240a400d070054fb7c3f1d3f7bf3e457d6c2c",
+          "bytes": 2915253
+        },
+        {
+          "file": "hair/short02/short02.mhclo",
+          "sha256": "625736cdb73e6d094df6e5a2df18f371781f1d2cd37b0ae15795c5d7051c3ec2",
+          "bytes": 119240
+        },
+        {
+          "file": "hair/short02/short02.mhmat",
+          "sha256": "2ed04c8aad9c1a35d858ca72091525d32b1da3b61b5a031634dd528fd8530f6d",
+          "bytes": 1323
+        },
+        {
+          "file": "hair/short02/short02.obj",
+          "sha256": "48f979114adfa712165a69cc55c45a70831af1fb3cba8e2a89120f0c87407b64",
+          "bytes": 139742
+        },
+        {
+          "file": "hair/short02/short02_diffuse.png",
+          "sha256": "47fe33831a3929567c733356dd66243116e05df2ace1f884ddca0080b728229f",
+          "bytes": 3553543
+        },
+        {
+          "file": "hair/short04/short04.mhclo",
+          "sha256": "d60640aa4c4ffce1aa269647ba436b6ee0bb21bb948f927b84e27a48d2107157",
+          "bytes": 59195
+        },
+        {
+          "file": "hair/short04/short04.mhmat",
+          "sha256": "7a3ac74db8478aa0afdb8a596c6fe3997d1a8a09d12211d70e8f1e9f0b7e0e97",
+          "bytes": 1316
+        },
+        {
+          "file": "hair/short04/short04.obj",
+          "sha256": "676964a133ee35ffcea1195382bf75542da7a298931e4001bc7b0d7b707225de",
+          "bytes": 55152
+        },
+        {
+          "file": "hair/short04/short04_diffuse.png",
+          "sha256": "0bef7fc0e403db5a40fabb2111ebfa6f7e8158e204c6e56b8da98e9ef527846e",
+          "bytes": 2308132
+        },
+        {
+          "file": "skins/middleage_caucasian_male/middleage_caucasian_male.mhmat",
+          "sha256": "113326b7670cb273610314b91e2597b228711adf5f0666660b16fef269bfbe72",
+          "bytes": 1469
+        },
+        {
+          "file": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+          "sha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+          "bytes": 3668589
+        },
+        {
+          "file": "skins/old_caucasian_male/old_caucasian_male.mhmat",
+          "sha256": "001eccec34180d4eb7369933360116a7ea1022c72674c1b012b988af65002600",
+          "bytes": 1449
+        },
+        {
+          "file": "skins/old_caucasian_male/old_lightskinned_male_diffuse.png",
+          "sha256": "dfb2310ed3e0ad024ea7a3ad321215e2e9e2994cca64043d9f3d07c6543ec847",
+          "bytes": 4306141
+        },
+        {
+          "file": "skins/young_caucasian_male/young_caucasian_male.mhmat",
+          "sha256": "6eda60b07ff2afbde078a2535ef3913593d84e9de92b2eb76c30f396a181fe2e",
+          "bytes": 1462
+        },
+        {
+          "file": "skins/young_caucasian_male/young_lightskinned_male_diffuse.png",
+          "sha256": "862a26e335e958b70534cb5f0d7c47ef30ab148a56c42b3e9da969cf76f12963",
+          "bytes": 3693828
+        }
+      ]
+    },
+    "skins01": {
+      "source": "https://files.makehumancommunity.org/asset_packs/skins01/skins01_cc0.zip",
+      "size": 104227958,
+      "files": [
+        {
+          "file": "skins/callharvey3d_midtoned_female/callharvey3d_midtoned_female.mhmat",
+          "sha256": "806a323f06c50b687908ff29a82e82eb99442f7563f4b2806bd4c5e8665cc636",
+          "bytes": 1989
+        },
+        {
+          "file": "skins/callharvey3d_midtoned_female/harvey_midtoned_female_diffuse.png",
+          "sha256": "dd0e953bb1ec3eee3d4956853599372c8faf5ba69982f0b4c3cc220b70cb0be0",
+          "bytes": 4629462
+        }
+      ]
+    },
+    "skins02": {
+      "source": "https://files.makehumancommunity.org/asset_packs/skins02/skins02_cc0.zip",
+      "size": 76112708,
+      "files": [
+        {
+          "file": "skins/toigo_light_skin_male_bronze/toigo_light_skin_male_bronze.mhmat",
+          "sha256": "4dbc8cd5a4c37b415556e76b6b7c5802e4d1432fffa3b0669646c5a92fb584b7",
+          "bytes": 580
+        },
+        {
+          "file": "skins/toigo_light_skin_male_bronze/young_lightskinned_male_diffuse_Bronze.png",
+          "sha256": "5a53213f061bfa97ee0afd6b40650ffbc089a479c144e63f3c39acceca5853c0",
+          "bytes": 4339066
+        }
+      ]
+    },
+    "visemes01": {
+      "source": "https://files.makehumancommunity.org/functional/visemes01.zip",
+      "size": 179683,
+      "files": [
+        {
+          "file": "targets/visemes/aa_02.target",
+          "sha256": "5c9bd15687115e959ece750e4fad48201f2392742a3f6804e5953c2070eaf186",
+          "bytes": 48442
+        },
+        {
+          "file": "targets/visemes/ao_03.target",
+          "sha256": "63e3ee6cd368b19cc76c84833d7d3b8087c8a920df953deffa77274e4832ab19",
+          "bytes": 42999
+        },
+        {
+          "file": "targets/visemes/y_iy_ih_ix_06.target",
+          "sha256": "1bde425e1ff8b294a38a120a4b1b011814e2b0b582c9f9262b700960b07c06ea",
+          "bytes": 31315
+        }
+      ]
+    },
+    "dress01": {
+      "source": "https://files.makehumancommunity.org/asset_packs/dress01/dress01_cc0.zip",
+      "size": 46598791,
+      "license": "CC0-1.0",
+      "files": [
+        {
+          "file": "clothes/wdg_mycenaean_tunic/Mycenaean_Tunic_texture.png",
+          "sha256": "9a0cb2b998c1c83a8cfae7dd50727c7d5ff51dfc0b13c5b9dfed2d80fd3aa4c1",
+          "bytes": 866230
+        },
+        {
+          "file": "clothes/wdg_mycenaean_tunic/mycenaean_tunic.mhmat",
+          "sha256": "297497b840c280e7bf765189e2e68c3c5464d925ae5c14f59230b38a003ba825",
+          "bytes": 495
+        },
+        {
+          "file": "clothes/wdg_mycenaean_tunic/mycenaean_tunic.obj",
+          "sha256": "ae29b7229deda4fb2facf82f9ad8278178bb9cc9a0b8a83e43f778339ad18f9f",
+          "bytes": 107535
+        },
+        {
+          "file": "clothes/wdg_mycenaean_tunic/wdg_mycenaean_tunic.mhclo",
+          "sha256": "08cbe26da9933317eea77d34ae1cf781be94896025091d8f14db36a4a4f00c29",
+          "bytes": 66130
+        }
+      ]
+    },
+    "suits02": {
+      "source": "https://files.makehumancommunity.org/asset_packs/suits02/suits02_cc0.zip",
+      "size": 192511027,
+      "license": "CC0-1.0",
+      "files": [
+        {
+          "file": "clothes/donitz_monk_robe/Monks_Robe.obj",
+          "sha256": "12ab7c180f724c1a50d3b2217d0d37ef03758ed387e22abb3933fe93269b90cc",
+          "bytes": 877212
+        },
+        {
+          "file": "clothes/donitz_monk_robe/donitz_monk_robe.mhclo",
+          "sha256": "7f0cf2903c602bd817e8a3a38d4b6201313ab0c156702f9dcc3e440897b0a4c8",
+          "bytes": 623419
+        },
+        {
+          "file": "clothes/donitz_monk_robe/monks_robe_brown.mhmat",
+          "sha256": "605e05e538f3d2160d62724dd07bd736efda01c055bfcb4c4de13bd90214f4ce",
+          "bytes": 900
+        },
+        {
+          "file": "clothes/donitz_monk_robe/robe_brown__diffuse.png",
+          "sha256": "244f344a4ba574aa4e36b63919d36e5c6bb1ac6b7d0b92ef6815a709c5bc9bb9",
+          "bytes": 16959094
+        },
+        {
+          "file": "clothes/rehmanpolanski_viking_tunic/TUNIC_Viking.png",
+          "sha256": "9fcb9e17fad6ec1a36e3a0e0562cac3ca0ea72208da617875eed9bf294d9f870",
+          "bytes": 3634390
+        },
+        {
+          "file": "clothes/rehmanpolanski_viking_tunic/rehmanpolanski_viking_tunic.mhclo",
+          "sha256": "349b5b7b2abc44a7bd0b52ca99bd352e7d3b316cd4be5d539bbd9587462e801c",
+          "bytes": 226811
+        },
+        {
+          "file": "clothes/rehmanpolanski_viking_tunic/tunicviking.mhmat",
+          "sha256": "8b69e430954fe0df4ea832bdb60f3786244118e4ac2e539a782e32a38c51f3dd",
+          "bytes": 471
+        },
+        {
+          "file": "clothes/rehmanpolanski_viking_tunic/tunicviking.obj",
+          "sha256": "78c593d23151c4f9cd63481bd7f5101cae920623404bbf5f3daa01a5f2ea050b",
+          "bytes": 276970
+        }
+      ]
+    },
+    "shoes02": {
+      "source": "https://files.makehumancommunity.org/asset_packs/shoes02/shoes02_ccby.zip",
+      "size": 105745850,
+      "license": "CC BY, Elvaerwyn",
+      "files": [
+        {
+          "file": "clothes/elvs_caesar_sandals1/elvs_caesar_sandals1.mhclo",
+          "sha256": "6b49b80e65903e41f6bc102d9ed0377ce01cdd00649d72866129396206d5a68d",
+          "bytes": 3208792
+        },
+        {
+          "file": "clothes/elvs_caesar_sandals1/elvs_mh_cesaersandalf1.obj",
+          "sha256": "e7fd226917a17da36e3d0fe1afc6ba7cee38c14ecd3c1af769d921dad41768a5",
+          "bytes": 6103041
+        }
+      ]
+    }
+  },
+  "ground": [
+    {
+      "asset": "aerial_grass_rock",
+      "map": "Diffuse",
+      "file": "aerial_grass_rock-diffuse.jpg",
+      "bytes": 666655,
+      "sha256": "57b8041bfe0d0f01430e4dbaad45e7ddddf0a9fc97317f90dbc51f7b0d9e1b5d",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_diff_1k.jpg"
+    },
+    {
+      "asset": "aerial_grass_rock",
+      "map": "nor_gl",
+      "file": "aerial_grass_rock-normal.jpg",
+      "bytes": 904956,
+      "sha256": "1aa3e23bff453f152e089b9f83aa36b4901651e019f7e2ca01d5331a9bbbda78",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_nor_gl_1k.jpg"
+    },
+    {
+      "asset": "stony_dirt_path",
+      "map": "Diffuse",
+      "file": "stony_dirt_path-diffuse.jpg",
+      "bytes": 1234067,
+      "sha256": "a662000ff3f7f64e23c25d2b8cd5947b9c8fd893510c5ed49c0daa2847004758",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/stony_dirt_path/stony_dirt_path_diff_1k.jpg"
+    },
+    {
+      "asset": "stony_dirt_path",
+      "map": "nor_gl",
+      "file": "stony_dirt_path-normal.jpg",
+      "bytes": 1416394,
+      "sha256": "2866303f71066f42bd218410bf6d38d9a21cda34c6e3543a8ac92900b7a09c75",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/stony_dirt_path/stony_dirt_path_nor_gl_1k.jpg"
+    }
+  ],
+  "fabric": [
+    {
+      "asset": "brown_leather",
+      "map": "color",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_leather/brown_leather_albedo_1k.jpg",
+      "sha256": "7e9e1d6566d1fd91d4ceb4966c4820361e85d53a7a828b6bab3b2a093a876cd1",
+      "bytes": 503348
+    },
+    {
+      "asset": "brown_leather",
+      "map": "normal",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brown_leather/brown_leather_nor_gl_1k.jpg",
+      "sha256": "506a0b7650c2dea285e247f26ed2d0d6ec38fc10dd584359f0d203e9c082236d",
+      "bytes": 863280
+    },
+    {
+      "asset": "rough_linen",
+      "map": "color",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_linen/rough_linen_diff_1k.jpg",
+      "sha256": "04897d7611d7390ddf5b2c6f7273f448dfc48341fdbd1f4f207fa30b331d7f57",
+      "bytes": 835801
+    },
+    {
+      "asset": "rough_linen",
+      "map": "normal",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_linen/rough_linen_nor_gl_1k.jpg",
+      "sha256": "e2402166d1a489f7414814e69e1836ab672aa24e30bec2d41fea356f81687e53",
+      "bytes": 916843
+    }
+  ],
+  "masonry": [
+    {
+      "asset": "monastery_stone_floor",
+      "file": "VillageFlagstone-albedo.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/monastery_stone_floor/monastery_stone_floor_diff_1k.jpg",
+      "bytes": 766525,
+      "sha256": "8e52ec982469ce9da312cefe3126c1dff05b7150234971bc6dff6e31c3c584ae"
+    },
+    {
+      "asset": "monastery_stone_floor",
+      "file": "VillageFlagstone-normal.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/monastery_stone_floor/monastery_stone_floor_nor_gl_1k.jpg",
+      "bytes": 1063115,
+      "sha256": "f2f1c3e8d52c1e3a49ef59695743872f2adaa57bc0d3f64b129ce988966162c1"
+    },
+    {
+      "asset": "white_sandstone_blocks_02",
+      "file": "GateMasonry-albedo.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_sandstone_blocks_02/white_sandstone_blocks_02_diff_1k.jpg",
+      "bytes": 910262,
+      "sha256": "0a43c8bc80581408f9c700ad98d2de64280e694148e37626d6648fdddf47a777"
+    },
+    {
+      "asset": "white_sandstone_blocks_02",
+      "file": "GateMasonry-normal.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_sandstone_blocks_02/white_sandstone_blocks_02_nor_gl_1k.jpg",
+      "bytes": 826220,
+      "sha256": "14eb23e29a347b97394c65a6f1fe2c7c107da55b18fb95b912c7280c5a43b72d"
+    }
+  ],
+  "photogrammetry": {
+    "wicker_basket_01": {
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/wicker_basket_01",
+      "files": [
+        {
+          "file": "textures/wicker_basket_01_arm_1k.jpg",
+          "sha256": "5150638cbcd8f1bc07b76af3b60b31a4c5e7d38ce66ac8906b9c3192f3283b9a",
+          "bytes": 874111,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wicker_basket_01/wicker_basket_01_arm_1k.jpg"
+        },
+        {
+          "file": "textures/wicker_basket_01_diff_1k.jpg",
+          "sha256": "15156c7855d5642f6bb594edfad5bcdcfe11f87f3e109956cb9e8fdb15fef921",
+          "bytes": 679110,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wicker_basket_01/wicker_basket_01_diff_1k.jpg"
+        },
+        {
+          "file": "textures/wicker_basket_01_nor_gl_1k.jpg",
+          "sha256": "d06024a37ef330d05bf128b8488f72769af05e72d266ffbc810d7f09ea2b32f9",
+          "bytes": 549218,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wicker_basket_01/wicker_basket_01_nor_gl_1k.jpg"
+        },
+        {
+          "file": "wicker_basket_01.bin",
+          "sha256": "8e96025ffcdc64a7e75d1aa980f2491b1219912a4554272cd1e192a966c399f8",
+          "bytes": 624920,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/wicker_basket_01/wicker_basket_01.bin"
+        },
+        {
+          "file": "wicker_basket_01.gltf",
+          "sha256": "9ad86c33f00f46a18c9bc8bfc28c0036090ee819f7270d0028ec408512c04094",
+          "bytes": 2792,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wicker_basket_01/wicker_basket_01_1k.gltf"
+        }
+      ]
+    },
+    "antique_ceramic_vase_01": {
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/antique_ceramic_vase_01",
+      "files": [
+        {
+          "file": "antique_ceramic_vase_01.bin",
+          "sha256": "ff3224b67b0a20e5033e651c405382fbfcc26ceb034f8dc59065ea0e0b6b708e",
+          "bytes": 217216,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/antique_ceramic_vase_01/antique_ceramic_vase_01.bin"
+        },
+        {
+          "file": "antique_ceramic_vase_01.gltf",
+          "sha256": "c99f063c1ba4e649e87218265b5ca34f89e3c288ff6560c76b7d9d2dd46aa8cd",
+          "bytes": 2789,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/antique_ceramic_vase_01/antique_ceramic_vase_01_1k.gltf"
+        },
+        {
+          "file": "textures/antique_ceramic_vase_01_arm_1k.jpg",
+          "sha256": "d4315346ead607ee6dada9e8e3710c0d804f47942056a2548e083133c0f8b5ce",
+          "bytes": 80537,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/antique_ceramic_vase_01/antique_ceramic_vase_01_arm_1k.jpg"
+        },
+        {
+          "file": "textures/antique_ceramic_vase_01_diff_1k.jpg",
+          "sha256": "8ee51247bf13d76d3d4da3b99ca7d58bc9b14476250800d98385718887dd58de",
+          "bytes": 192337,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/antique_ceramic_vase_01/antique_ceramic_vase_01_diff_1k.jpg"
+        },
+        {
+          "file": "textures/antique_ceramic_vase_01_nor_gl_1k.jpg",
+          "sha256": "98cf0dceb4a95b73f41cb63f26ad6c26cf84ff6ff642bd216f4ce5343cb66cf7",
+          "bytes": 33062,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/antique_ceramic_vase_01/antique_ceramic_vase_01_nor_gl_1k.jpg"
+        }
+      ]
+    },
+    "namaqualand_boulder_03": {
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "files": [
+        {
+          "file": "namaqualand_boulder_03.bin",
+          "sha256": "d24151021ed310fe3207f1b5964bff22b583e77d2617427a88b5dcbc0447a475",
+          "bytes": 1450268,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/namaqualand_boulder_03/namaqualand_boulder_03.bin"
+        },
+        {
+          "file": "namaqualand_boulder_03.gltf",
+          "sha256": "14560936aaad68da0c0fc549b54c67bba4cd573dfe5b07f92835b9ca044a0092",
+          "bytes": 2823,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/namaqualand_boulder_03/namaqualand_boulder_03_1k.gltf"
+        },
+        {
+          "file": "textures/namaqualand_boulder_03_arm_1k.jpg",
+          "sha256": "604806ac2a67d6ae97d7bdeea2a0c859eac2cc42a08af480abdec70fd0385cf5",
+          "bytes": 607318,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_arm_1k.jpg"
+        },
+        {
+          "file": "textures/namaqualand_boulder_03_diff_1k.jpg",
+          "sha256": "cd1a44c22932eb18a5989474f60bdccd622a1fdb0854fd69899a32ab8efe3bd4",
+          "bytes": 867015,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_diff_1k.jpg"
+        },
+        {
+          "file": "textures/namaqualand_boulder_03_nor_gl_1k.jpg",
+          "sha256": "c4c1d34d5fe79fdda70ddf1dc52046f3bb6002576d75c9a4643403c0ecdc55f4",
+          "bytes": 851531,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_nor_gl_1k.jpg"
+        }
+      ]
+    },
+    "food_pomegranate_01": {
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/food_pomegranate_01",
+      "files": [
+        {
+          "file": "food_pomegranate_01.bin",
+          "sha256": "29df7ac780b968c82958f881dba50837811c6d0b428db5099ba3f418969a1951",
+          "bytes": 195828,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/food_pomegranate_01/food_pomegranate_01.bin"
+        },
+        {
+          "file": "food_pomegranate_01.gltf",
+          "sha256": "75e8bac9feda588189245fe8d145313fe382ee11766101d4b97f1c63476d6698",
+          "bytes": 2761,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/food_pomegranate_01/food_pomegranate_01_1k.gltf"
+        },
+        {
+          "file": "textures/food_pomegranate_01_diff_1k.jpg",
+          "sha256": "b5223d9988b083d850404faf995a23c607ecbcc6ddefed341f67d20fc4a495aa",
+          "bytes": 164205,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_diff_1k.jpg"
+        },
+        {
+          "file": "textures/food_pomegranate_01_nor_gl_1k.jpg",
+          "sha256": "1e040ab1af8c27f390eaf70d0dbef973554df31ecac6395375f1aed9d2d64df9",
+          "bytes": 93096,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_nor_gl_1k.jpg"
+        },
+        {
+          "file": "textures/food_pomegranate_01_rough_1k.jpg",
+          "sha256": "9d7de886f101623d0d5beec5067734eed455a760445d27fbc7cdf4c7a9704898",
+          "bytes": 154956,
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/food_pomegranate_01/food_pomegranate_01_rough_1k.jpg"
+        }
+      ]
+    }
+  },
+  "prepared": {
+    "file": "fitted-cast.zip",
+    "sha256": "b6bbaf6ecf6f92a1461a0adf3a41e705f5fdd676930c9861210bf09b829aac9d",
+    "bytes": 8537729,
+    "contents": "Five sculpted heads, five weighted wardrobes, four market/terrace props, olive grove mesh, five original portrait plates and garment fit inputs.",
+    "files": [
+      {
+        "file": "JesusAdult.garment",
+        "sha256": "752cf04c77c79f4d2854718158554bb410062e2d1c73e1735854b4c3e6e8171b",
+        "bytes": 1969232
+      },
+      {
+        "file": "JesusAdult.head",
+        "sha256": "8dbb5baa5f1017286447aab05dac202f76630745d6f888870e83aef7b039ecfc",
+        "bytes": 1045139
+      },
+      {
+        "file": "JesusChild.garment",
+        "sha256": "241584d059f05f6f0ff7d58a000eb850a434f814cb6ad88d8fced2e7cd4d58be",
+        "bytes": 1358068
+      },
+      {
+        "file": "JesusChild.head",
+        "sha256": "4a59adaaef25199180cb204a63e3694bfea8f267dc3ad6db2453da2d13c57618",
+        "bytes": 1015243
+      },
+      {
+        "file": "Joseph.garment",
+        "sha256": "9fa8ab4277761554832978b58151ad03b94ce808fc56f5ac6174f287c9baa3bb",
+        "bytes": 1607317
+      },
+      {
+        "file": "Joseph.head",
+        "sha256": "a8f7a4f8093a9e21695699b057f96060129099f3a5a463219a67e55e731e44c9",
+        "bytes": 925843
+      },
+      {
+        "file": "MarketBasket.scan",
+        "sha256": "8bebb55d57a4dd76333ef04babbbbca7004bd0573890cb840164cf1c74e32e74",
+        "bytes": 199424
+      },
+      {
+        "file": "MarketPomegranate.scan",
+        "sha256": "badd89b2445ea137679538178c7de411edad1ea64a2182d8504e73c7a7287a4c",
+        "bytes": 24284
+      },
+      {
+        "file": "Mary.garment",
+        "sha256": "13792cefeeb22f81ca462b2b5a6e1bbe845d4252b2f92fc532abd51a3cbbcb03",
+        "bytes": 1966508
+      },
+      {
+        "file": "Mary.head",
+        "sha256": "34f0c122eae7bfc0a6a5be9d9c3b6cd9033007657a591d88c1b59b39b9a032af",
+        "bytes": 1053891
+      },
+      {
+        "file": "PottersJar.scan",
+        "sha256": "cb43789f339658d914c28921bc637998533f25a37131cd649b54640c4856052f",
+        "bytes": 75052
+      },
+      {
+        "file": "Teacher.garment",
+        "sha256": "b53bec803c7d052ae5a3fa8f5f1b656d8878ef5933c3cfadf13b8cae93b102cc",
+        "bytes": 1890242
+      },
+      {
+        "file": "Teacher.head",
+        "sha256": "bb111efe783b9018de49379711154fd671215c5b3ff66a44d086f5a9d7bdf80e",
+        "bytes": 852227
+      },
+      {
+        "file": "TerraceStone.scan",
+        "sha256": "28fe23dbeb2cfcff379ba607847aac39e3551ccd3bd9d39cf0cb2329b0b4574a",
+        "bytes": 54192
+      },
+      {
+        "file": "olive.grove",
+        "sha256": "15f33a691b572425d70ab5634f45a6204a2ed3dbfb54ddf4673c537551306a4d",
+        "bytes": 135972
+      },
+      {
+        "file": "patterns/JesusAdult-idle.json",
+        "sha256": "9b4509f9adf66054de245f478e00151e045ffb415f53d811affbdf2a665edd42",
+        "bytes": 18665
+      },
+      {
+        "file": "patterns/JesusAdult-rig.json",
+        "sha256": "b96e34aad7071ba4d28e349b3e7f62ccd332aaf3107140842a289b62c33a1aec",
+        "bytes": 4319
+      },
+      {
+        "file": "patterns/JesusChild-idle.json",
+        "sha256": "a4719de44055c3c677504ca615f43f06df4e4564cb20b2eb5c5165cba9f69cac",
+        "bytes": 15124
+      },
+      {
+        "file": "patterns/JesusChild-rig.json",
+        "sha256": "76be61b8418418350f357008c0f47b7446ef99c4da07f2eec502729f5807a8e5",
+        "bytes": 4338
+      },
+      {
+        "file": "patterns/Joseph-idle.json",
+        "sha256": "886681a2e7f81b1670bd1ce4df36d6ab82900f9022218e82e46cc953c459c5fb",
+        "bytes": 18641
+      },
+      {
+        "file": "patterns/Joseph-rig.json",
+        "sha256": "48b30fc8790132ac90a4605c899a7338a058770b26f6ce77eeb379f1a3c4c61c",
+        "bytes": 4322
+      },
+      {
+        "file": "patterns/Mary-idle.json",
+        "sha256": "763820e19a2708bdd18e51482232789e190e6ac975acd547c683168c4c254c23",
+        "bytes": 15444
+      },
+      {
+        "file": "patterns/Mary-rig.json",
+        "sha256": "cb68414cf277290b80fda4528d798e714ddf2016467ead837c0d614e1c225dc8",
+        "bytes": 4349
+      },
+      {
+        "file": "patterns/Teacher-idle.json",
+        "sha256": "abb2aa43ca5e65935784d7793a0da0fc32072e4dd33cc04c36dd84c4c19a0c3e",
+        "bytes": 18654
+      },
+      {
+        "file": "patterns/Teacher-rig.json",
+        "sha256": "7b36f8635a119978500725b4c53542ad06fea4de7c204ebb9fc0bf5224267767",
+        "bytes": 4319
+      },
+      {
+        "file": "patterns/sandal-lod.npz",
+        "sha256": "279611ca2e3e2a149f30f23433d8ac3adfcba5e103316e9900213061f34dc01a",
+        "bytes": 85414
+      },
+      {
+        "file": "plates/JesusAdult.jpg",
+        "sha256": "52b419194c19a6d2dc6adb435997451b48bc56b1622c675725c377332a4afdcc",
+        "bytes": 384506
+      },
+      {
+        "file": "plates/JesusChild.jpg",
+        "sha256": "5089b33f4ca885884f8e4a54d71b8b81167fe67b8f1f2f78235c137f40b0c837",
+        "bytes": 476406
+      },
+      {
+        "file": "plates/Joseph.jpg",
+        "sha256": "977faa1df296784c2a92ccb01098c1c25dd76efbdcba4bc18aa388a7842d9718",
+        "bytes": 368598
+      },
+      {
+        "file": "plates/Mary.jpg",
+        "sha256": "4e43e5a1eada94e259535e1f2fb5772a18eda5fc130183403ff18591421de1f2",
+        "bytes": 575403
+      },
+      {
+        "file": "plates/Teacher.jpg",
+        "sha256": "81fe989308b4fd03a55383f34aae698fe67a1e86159e3badd383f0507036f80e",
+        "bytes": 419109
+      }
+    ]
+  }
+}
