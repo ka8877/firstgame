@@ -157,8 +157,14 @@ def play(page, browser, profile, report, tessdata):
         if number in (9,43,50):
             print(profile,'opening turns',number+1,flush=True)
     panel=screenshot(page,report,'child-chapter')
-    chapter=visible_text(actual_canvas(page,panel),(43,135,470,223),tessdata,11)
-    assert '소년' in chapter or '유월절' in chapter, chapter
+    chapter_frame=actual_canvas(page,panel)
+    chapter=visible_text(chapter_frame,(41,145,530,221),tessdata,11)
+    subtitle=visible_text(chapter_frame,(45,285,397,327),tessdata,11)
+    action=visible_text(chapter_frame,(68,424,317,472),tessdata,7)
+    named_chapter=any(word in chapter+subtitle for word in ('소년','유월절'))
+    enter_chapter='이야기속으로' in re.sub(r'\s+','',action)
+    assert named_chapter or (enter_chapter and any(word in subtitle for word in ('예루살렘','열두 살'))), (chapter,subtitle,action)
+    report['childChapterText']={'title':chapter,'subtitle':subtitle,'action':action}
     press((.198,.8292))
     first=screenshot(page,report,'field')
     metres,reach=distance(page,first,tessdata,touch)
