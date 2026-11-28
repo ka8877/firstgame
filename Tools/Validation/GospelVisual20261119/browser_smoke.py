@@ -91,7 +91,8 @@ def read_distance(image, tessdata, touch=False):
     if touch:
         # The visible interaction control changes to mint when the target enters reach.
         control = image.crop((23,132,99,151))
-        mint = sum(g > r+7 and g > b+1 and g > 110 and b > 94 for r,g,b in control.getdata())
+        colours = control.getcolors(control.width * control.height)
+        mint = sum(count for count, (r,g,b) in colours if g > r+7 and g > b+1 and g > 110 and b > 94)
         in_reach = in_reach or mint > 75
     if touch and not match:
         mobile_distance=visible_text(image,(33,121,121,156),tessdata)
@@ -105,15 +106,24 @@ def read_distance(image, tessdata, touch=False):
     if not match:
         read=visible_text(image,(23,104,167,146),tessdata,11)
         match=re.search(r'(\d+[.,]\d+)\s*[mM]',read)
-    if not match and not touch:
-        # The small field minimap remains readable when the Korean control hint fades.
-        digits = ImageOps.autocontrast(image.crop((49,110,87,127)).convert('L')).resize((190,85),Image.Resampling.LANCZOS)
+    if not match:
+        # Both minimaps display a numeric readout. Crop only the digits so OCR
+        # does not combine the Korean speaker name with the metre unit.
+        if touch:
+            digits = image.crop((59,127,105,151)).resize((240,108),Image.Resampling.LANCZOS)
+            digits = ImageOps.autocontrast(digits.convert('L'))
+        else:
+            digits = ImageOps.autocontrast(image.crop((49,110,87,127)).convert('L')).resize((190,85),Image.Resampling.LANCZOS)
         data = BytesIO()
         digits.save(data,'PNG')
         text = subprocess.run(['tesseract','stdin','stdout','--tessdata-dir',str(tessdata),'-l','eng','--psm','7',
                                '-c','tessedit_char_whitelist=0123456789.,mM'], input=data.getvalue(),
                               capture_output=True,check=True,timeout=15).stdout.decode().strip()
         match = re.fullmatch(r'(\d{1,2}[.,]\d)\s*[mM]?',text)
+        if touch and not match:
+            compact = re.fullmatch(r'(\d{2,3})\s*[mM]', text)
+            if compact:
+                return int(compact[1])/10, in_reach
     return (float(match[1].replace(',','.')) if match else None), in_reach
 
 
