@@ -1,0 +1,76 @@
+{
+  "asset": "The Way of Jesus. Galilean travelling figures",
+  "version": 1,
+  "sourceArchive": {
+    "file": "costume-reference.zip",
+    "bytes": 18257601,
+    "sha256": "498151ebd4b524c93e92e31f2be867b5614302e01bfb1d80494fae8771452d16"
+  },
+  "originalCostumeArt": [
+    {
+      "file": "turnarounds/JesusAdult.png",
+      "sha256": "07a0ce678e83a37d276fbbf394ef48a10749022ae5a31961d6e9adbd927b312c"
+    },
+    {
+      "file": "turnarounds/JesusChild.png",
+      "sha256": "60b5590a57c55909d13b4a974bc95c1cb3b33dde7b85a7bf233a68b8edb24e90"
+    },
+    {
+      "file": "turnarounds/Joseph.png",
+      "sha256": "46c209610d9070b7745cc3b25973149071a931c0497441826105faf20f42da7f"
+    },
+    {
+      "file": "turnarounds/Mary.png",
+      "sha256": "fc50c18dd1bfe1d401116d7d3b504befb211335be1e8623468d5224e801c2b78"
+    },
+    {
+      "file": "turnarounds/Teacher.png",
+      "sha256": "c4b683970a7b1c7c5c621669a038b6ca0bd20daf31f1cb6da5882ca9a5158f76"
+    },
+    {
+      "file": "turnarounds/side-garments.png",
+      "sha256": "08ebbeba784aee757531efa1d476d6c25c49ad446cd957166ad4a2f04dff8b02"
+    }
+  ],
+  "humanAnatomy": {
+    "source": "MakeHuman HM08 and MPFB2",
+    "license": "CC0",
+    "upstream": "https://static.makehumancommunity.org/mpfb.html",
+    "retargetedSource": "Tools/Art/GalileeAtelier/fitted-cast.zip"
+  },
+  "footwear": {
+    "title": "Caesar Sandals 1",
+    "author": "Elvaerwyn",
+    "license": "CC BY",
+    "upstream": "https://www.makehumancommunity.org/node/1915"
+  },
+  "materialScans": [
+    {
+      "source": "Poly Haven",
+      "license": "CC0",
+      "url": "https://polyhaven.com/a/rough_linen"
+    },
+    {
+      "source": "Poly Haven",
+      "license": "CC0",
+      "url": "https://polyhaven.com/a/brown_leather"
+    }
+  ],
+  "authoringModels": [
+    {
+      "name": "Depth Anything V2 Small",
+      "original": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/tree/5426e4f0f36572d16453bbda7a8389317b1bef99",
+      "distribution": "https://huggingface.co/onnx-community/depth-anything-v2-small/tree/4472b7362082ad9968fee890ca0f1e5aca36b93d",
+      "modelSha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c",
+      "license": "Apache-2.0",
+      "purpose": "Offline relative garment depth"
+    },
+    {
+      "name": "MediaPipe Pose in OpenCV Zoo",
+      "upstream": "https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/pose_estimation_mediapipe",
+      "modelSha256": "9d89c599319a18fb7d2e28451a883476164543182bafca5f09eb2cf767ed2f3f",
+      "license": "Apache-2.0",
+      "purpose": "Offline joint registration"
+    }
+  ]
+}
