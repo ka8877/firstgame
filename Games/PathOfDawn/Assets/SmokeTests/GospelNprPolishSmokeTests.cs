@@ -90,7 +90,16 @@ namespace PathOfDawn.SmokeTests
                 Assert.That(face.sharedMaterials[1].mainTexture, Is.Not.Null, id + " iris");
                 Assert.That(clothes.sharedMaterials[0].mainTexture, Is.Not.Null, id + " woven repeat");
                 Assert.That(face.sharedMaterials.Any(material => material.name == id + " crown" && material.mainTexture), Is.True);
-                Assert.That(clothes.sharedMaterials.Any(material => material.name == id + " exposed skin"), Is.True);
+                var garment = clothes.sharedMaterial;
+                Assert.That(garment.shader.name, Is.EqualTo("FirstGame/Galilee/Fitted figure"), id);
+                Assert.That(garment.GetTexture("_AnatomyMap")?.name, Is.EqualTo(id + "-exposed"), id + " anatomy");
+                var surfaces = clothes.sharedMesh.colors32;
+                Assert.That(surfaces.Count(c => c.r == 255 && c.a == 255), Is.GreaterThan(1000), id + " exposed anatomy");
+                Assert.That(surfaces.Any(c => c.g == 255 && c.a == 255), Is.True, id + " sandal leather");
+                var skin = face.sharedMaterials.Single(material => material.name == id + " skin");
+                Assert.That(skin.GetTexture("_TailoredPigment"), Is.EqualTo(garment.mainTexture), id + " neck registration");
+                Assert.That(clothes.sharedMesh.GetBlendShapeIndex("FrontHemLeft"), Is.GreaterThanOrEqualTo(0), id);
+                Assert.That(clothes.sharedMesh.GetBlendShapeIndex("FrontHemRight"), Is.GreaterThanOrEqualTo(0), id);
                 Assert.That(clothes.sharedMesh.GetBlendShapeIndex("MantleStepLeft"), Is.GreaterThanOrEqualTo(0));
                 Assert.That(clothes.sharedMesh.GetBlendShapeIndex("MantleStepRight"), Is.GreaterThanOrEqualTo(0));
                 Assert.That(clothes.bones.Any(bone => bone.name == "J_Bip_R_Index3"), Is.True);
