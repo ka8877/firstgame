@@ -5,6 +5,7 @@ Shader "FirstGame/Galilee/Portrait surface"
         [MainTexture] _BaseMap("Painted surface", 2D) = "white" {}
         [MainColor] _Color("Pigment", Color) = (1,1,1,1)
         [HideInInspector] _BaseColor("Shadow tint", Color) = (1,1,1,1)
+        _TailoredPigment("Registered neck and groom",2D)="white" {}
         _Relief("Fine relief", 2D) = "gray" {}
         _GroomPigment("Painted hair fibers", 2D) = "black" {}
         _HasGroomPigment("Use groom painting", Float) = 0
@@ -39,6 +40,7 @@ Shader "FirstGame/Galilee/Portrait surface"
             #pragma multi_compile_fog
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             TEXTURE2D(_BaseMap); SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_TailoredPigment); SAMPLER(sampler_TailoredPigment);
             TEXTURE2D(_Relief); SAMPLER(sampler_Relief);
             TEXTURE2D(_GroomPigment); SAMPLER(sampler_GroomPigment);
             CBUFFER_START(UnityPerMaterial)
@@ -46,9 +48,9 @@ Shader "FirstGame/Galilee/Portrait surface"
             float _GroomHairline, _StrokeOpacity, _SrcBlend, _DstBlend, _ZWrite;
             float _ReliefStrength, _SurfaceKind, _Cutoff, _Cull, _AlphaClip, _HasGroomPigment;
             CBUFFER_END
-            struct Vertex {float4 p:POSITION; float3 n:NORMAL; float4 t:TANGENT; float2 uv:TEXCOORD0; float4 painting:TEXCOORD1;};
+            struct Vertex {float4 p:POSITION; float3 n:NORMAL; float4 t:TANGENT; float2 uv:TEXCOORD0; float4 painting:TEXCOORD1; float4 fitUV:TEXCOORD2;float2 fitWeight:TEXCOORD3;};
             struct Varyings {float4 p:SV_POSITION; float3 world:TEXCOORD0; half3 n:TEXCOORD1;
-                half4 t:TEXCOORD2; float2 uv:TEXCOORD3; half fog:TEXCOORD4; float4 painting:TEXCOORD5;};
+                half4 t:TEXCOORD2; float2 uv:TEXCOORD3; half fog:TEXCOORD4; float4 painting:TEXCOORD5;float4 fitUV:TEXCOORD6;float2 fitWeight:TEXCOORD7;};
             float3 PortraitDirection(float3 direction)
             {
                 // Interpolated normals and strand tangents can cancel across the seam of a two-sided hair card.
@@ -59,11 +61,12 @@ Shader "FirstGame/Galilee/Portrait surface"
                 Varyings o; VertexPositionInputs p=GetVertexPositionInputs(v.p.xyz);
                 o.p=p.positionCS; o.world=p.positionWS; o.n=PortraitDirection(TransformObjectToWorldNormal(v.n,false));
                 o.t=half4(PortraitDirection(TransformObjectToWorldDir(v.t.xyz,false)),v.t.w*GetOddNegativeScale());
-                o.painting=v.painting; o.uv=TRANSFORM_TEX(v.uv,_BaseMap); o.fog=ComputeFogFactor(p.positionCS.z);return o;
+                o.fitUV=v.fitUV; o.fitWeight=v.fitWeight; o.painting=v.painting; o.uv=TRANSFORM_TEX(v.uv,_BaseMap); o.fog=ComputeFogFactor(p.positionCS.z);return o;
             }
             half4 Frag(Varyings i, FRONT_FACE_TYPE front : FRONT_FACE_SEMANTIC):SV_Target
             {
                 half4 surface=SAMPLE_TEXTURE2D(_BaseMap,sampler_BaseMap,i.uv)*_Color;
+                half strandAlpha=surface.a;
                 #if defined(_ALPHATEST_ON)
                     if (_HasGroomPigment<.5) clip(surface.a-_Cutoff);
                 #endif
@@ -84,7 +87,13 @@ Shader "FirstGame/Galilee/Portrait surface"
                     half faceSide=smoothstep(.15,.83,i.painting.w)*smoothstep(.16,.35,i.painting.y)*_GroomHairline;
                     surface.a*=lerp(1.,smoothstep(.12,.53,fiberPaint.a),faceSide);
                     surface.a*=1.-.94*smoothstep(.70,.93,i.painting.z)*faceSide;
+                    surface.a=max(surface.a,strandAlpha*i.fitWeight.y*.86h);
                     clip(surface.a-_Cutoff);
+                }
+                if(i.fitWeight.y>.001h) {
+                    half3 a=SAMPLE_TEXTURE2D(_TailoredPigment,sampler_TailoredPigment,i.fitUV.xy).rgb;
+                    half3 b=SAMPLE_TEXTURE2D(_TailoredPigment,sampler_TailoredPigment,i.fitUV.zw).rgb;
+                    surface.rgb=lerp(surface.rgb,lerp(a,b,saturate(i.fitWeight.x)),saturate(i.fitWeight.y));
                 }
                 float3 n=PortraitDirection(i.n)*IS_FRONT_VFACE(front,1,-1);
                 float3 t=PortraitDirection(i.t.xyz), b=PortraitDirection(cross(n,t))*i.t.w;
