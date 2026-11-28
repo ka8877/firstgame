@@ -205,7 +205,17 @@ GOSPEL_ATELIER = {
 }
 
 
+GOSPEL_FIGURE = {
+    **GOSPEL_ATELIER,
+    'name': 'gospel-figure',
+    'revisions': {**GOSPEL_ATELIER['revisions'], 'PathOfDawn': 'gospel-galilee-figure-2026-11-28'},
+    'reportRoots': {**GOSPEL_ATELIER['reportRoots'], 'PathOfDawn': 'Artifacts/Validation/GalileeFigure'},
+}
+
+
 def contract(name):
+    if name == 'gospel-figure':
+        return GOSPEL_FIGURE
     if name == 'gospel-atelier':
         return GOSPEL_ATELIER
     if name == 'gospel-galilee':

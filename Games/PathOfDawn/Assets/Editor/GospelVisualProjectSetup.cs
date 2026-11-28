@@ -16,7 +16,7 @@ namespace FirstGame.Editor
     /// <summary>PROPOSAL: validate prepared resources and existing Boot; never rebuild legacy actors/scene.</summary>
     public static class GospelVisualProjectSetup
     {
-        public const string Revision = "gospel-principal-atelier-2026-11-27";
+        public const string Revision = "gospel-galilee-figure-2026-11-28";
         const string Boot = "Assets/Scenes/Boot.unity";
 
         public static void ValidateAndActivate()

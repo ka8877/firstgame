@@ -88,8 +88,13 @@ def read_distance(image, tessdata, touch=False):
     read=visible_text(image,(306,420,655,445),tessdata)
     match=re.search(r'(\d+[.,]\d+)\s*[mM]',read)
     in_reach='대화' in read and '가능' in read
+    if touch:
+        # The visible interaction control changes to mint when the target enters reach.
+        control = image.crop((23,132,99,151))
+        mint = sum(g > r+7 and g > b+1 and g > 110 and b > 94 for r,g,b in control.getdata())
+        in_reach = in_reach or mint > 75
     if touch and not match:
-        mobile_distance=visible_text(image,(55,130,126,156),tessdata)
+        mobile_distance=visible_text(image,(33,121,121,156),tessdata)
         match=re.search(r'(\d+[.,]\d+)\s*[mM]',mobile_distance)
         if not match:
             # This HUD always draws one decimal digit. The decimal point can
@@ -121,9 +126,13 @@ def play(page, browser, profile, report, tessdata):
         else:
             page.mouse.click(**point(page,xy),delay=180)
         page.wait_for_timeout(190)
-    def walk():
+    def walk(frame):
         if touch:
-            do_touch(session,page,(.09375,.79306),(.09375,.697),ms=1400)
+            hint = visible_text(frame,(303,408,656,442),tessdata) if frame else ''
+            x = int('오른' in hint) - int('왼' in hint)
+            y = -1 if '아래' in hint else int('위' in hint or x == 0)
+            length = max(1,(x*x+y*y)**.5)
+            do_touch(session,page,(.09375,.79306),(.09375+.0235*x/length,.79306-.042*y/length),ms=620)
         else:
             page.keyboard.down('w')
             try:
@@ -183,12 +192,14 @@ def play(page, browser, profile, report, tessdata):
     press((.198,.8292))
     metres, reach = wait_for_frame('field', opening_field)
     report['metresToJoseph']=[metres]
-    for index in range(1,8):
+    field_image = actual_canvas(page, report['screens']['field']['file'])
+    for index in range(1,10):
         if reach or (metres is not None and metres<=2.15):
             break
-        walk()
+        walk(field_image)
         frame=screenshot(page,report,f'walk-{index}')
-        metres,reach=read_distance(actual_canvas(page,frame),tessdata,touch)
+        field_image=actual_canvas(page,frame)
+        metres,reach=read_distance(field_image,tessdata,touch)
         report['metresToJoseph'].append(metres)
         print(profile,'distance',metres,'interaction available',reach,flush=True)
     assert reach or (metres is not None and metres<=2.15), report['metresToJoseph']

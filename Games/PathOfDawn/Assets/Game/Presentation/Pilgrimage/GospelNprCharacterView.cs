@@ -30,6 +30,15 @@ namespace PathOfDawn.Presentation
             public float Gain = 1;
         }
 
+        struct RestingFinger
+        {
+            public Transform bone;
+            public Quaternion rest, animated, applied;
+            public float release;
+            public bool hasSample;
+        }
+        RestingFinger[] fingers = Array.Empty<RestingFinger>();
+
         [Serializable] sealed class ExpressionCatalog { public int schema; public ActorExpressions[] actors; }
         [Serializable] sealed class ActorExpressions { public string id; public PresetBinding[] presets; }
         [Serializable] sealed class PresetBinding { public string preset, renderer, shapeKey; public float weight = 1; }
@@ -51,7 +60,8 @@ namespace PathOfDawn.Presentation
         Vector3 velocity;
         bool onGround = true, hasMotionSample, speaking, portraitVisible;
         SkinnedMeshRenderer travellingMantle;
-        int leftHem, rightHem;
+        int leftHem, rightHem, leftKneeHem, rightKneeHem;
+        Transform leftThigh, rightThigh, leftKnee, rightKnee;
         float hemPhase, hemTravel;
         float desiredYaw = 180, nextBlink, blinkStart = -100;
         float speechStarted, speechBlend, faceClock, relaxedWeight, concernWeight, joyWeight;
@@ -173,6 +183,7 @@ namespace PathOfDawn.Presentation
             Animator.updateMode = AnimatorUpdateMode.Normal;
             Animator.Rebind();
             Animator.SetFloat(MoveSpeedId, 0); Animator.SetBool(GroundedId, true); Animator.SetFloat(VerticalSpeedId, 0);
+            CaptureRelaxedHandPose();
             Animator.Update(0);
             Head = Animator.GetBoneTransform(HumanBodyBones.Head);
             RightHand = Animator.GetBoneTransform(HumanBodyBones.RightHand);
@@ -182,6 +193,12 @@ namespace PathOfDawn.Presentation
             travellingMantle = Array.Find(renderers, r => r.name.EndsWith("__TravelCostume", StringComparison.Ordinal));
             leftHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("MantleStepLeft") : -1;
             rightHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("MantleStepRight") : -1;
+            leftKneeHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("FrontHemLeft") : -1;
+            rightKneeHem = travellingMantle ? travellingMantle.sharedMesh.GetBlendShapeIndex("FrontHemRight") : -1;
+            leftThigh = Animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg);
+            rightThigh = Animator.GetBoneTransform(HumanBodyBones.RightUpperLeg);
+            leftKnee = Animator.GetBoneTransform(HumanBodyBones.LeftLowerLeg);
+            rightKnee = Animator.GetBoneTransform(HumanBodyBones.RightLowerLeg);
             hemPhase = hemTravel = 0;
             if (renderers.Length == 0) Fail("NPR model has no SkinnedMeshRenderer: " + ModelResource);
             var bones = new List<Transform>(); var seen = new HashSet<Transform>();
@@ -224,6 +241,50 @@ namespace PathOfDawn.Presentation
             faceClock = Time.unscaledTime;
             IsReady = true;
             if (portraitTexture != null) RebuildPortraitModel();
+        }
+
+        void CaptureRelaxedHandPose()
+        {
+            var bindings = new List<RestingFinger>(30);
+            for (int i = (int)HumanBodyBones.LeftThumbProximal; i <= (int)HumanBodyBones.RightLittleDistal; i++)
+            {
+                var bone = Animator.GetBoneTransform((HumanBodyBones)i);
+                if (!bone) continue;
+                int joint = (i - (int)HumanBodyBones.LeftThumbProximal) % 15;
+                float release = joint < 3 ? .36f : joint < 6 ? .76f : joint < 9 ? .65f : .51f;
+                bindings.Add(new RestingFinger { bone = bone, rest = bone.localRotation, release = release });
+            }
+            fingers = bindings.ToArray();
+        }
+
+        void LateUpdate() => UpdatePoseDetails();
+
+        // Open the grip in the imported travelling motions while retaining each
+        // finger's animated curl, wrist movement and the bend of the knuckles.
+        public void UpdatePoseDetails()
+        {
+            if (!IsReady || leftKneeHem < 0 || !travellingMantle) return;
+            float activity = Mathf.Lerp(1f, .68f, Mathf.Clamp01(MeasuredPlanarSpeed / 4.3f));
+            for (int i = 0; i < fingers.Length; ++i)
+            {
+                ref var finger = ref fingers[i];
+                var current = finger.bone.localRotation;
+                if (!finger.hasSample || Mathf.Abs(Quaternion.Dot(current, finger.applied)) < .999999f)
+                    finger.animated = current;
+                finger.applied = Quaternion.Slerp(finger.animated, finger.rest, finger.release * activity);
+                finger.bone.localRotation = finger.applied;
+                finger.hasSample = true;
+            }
+            UpdateKneeHem(leftKneeHem, leftThigh, leftKnee);
+            UpdateKneeHem(rightKneeHem, rightThigh, rightKnee);
+        }
+
+        void UpdateKneeHem(int shape, Transform thigh, Transform knee)
+        {
+            if (shape < 0 || !thigh || !knee) return;
+            float forward = Vector3.Dot((knee.position - thigh.position).normalized, visualRoot.forward);
+            float lift = Mathf.SmoothStep(0,100,Mathf.InverseLerp(.09f,.76f,forward));
+            travellingMantle.SetBlendShapeWeight(shape,lift);
         }
 
         void RequireParameter(string name, AnimatorControllerParameterType type)
